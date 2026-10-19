@@ -133,6 +133,15 @@ def has_novelty(candidate, reference):
     return any(not any(_same_word(cw, rw) for rw in ref_words) for cw in cand_words)
 
 
+def _starts_with_name(name, detail):
+    """Деталь начинается с названия (допускается правовая форма перед ним)."""
+    n, d = _flat_for_match(name), _flat_for_match(detail)
+    if not n:
+        return False
+    d = re.sub(r'^(?:ооо|ао|пао|зао|оао|нао)\s+', '', d)
+    return d.startswith(n)
+
+
 def names_party_upfront(name, detail, limit=60):
     """Деталь ДОСЛОВНО называет сторону, и имя стоит в начале фразы, а не в
     её хвосте. Тогда имя перед тире — второй такой же повтор, и его не печатаем.
@@ -644,26 +653,32 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     со своим профилем компании."""
     eco = deal.get('eco') or {}
     sources = []
+    # ЧТО ЭТО ЗА КОМПАНИЯ — ПЕРВЫМ (19 октября 2026, партнёр: «почему до сих
+    # пор так странно предмет пишет»). Первой шла случайная фраза из
+    # `eco.share`/`target_fin` («У Perfectum 115 МГц спектра…», «По итогам
+    # 2021 года ХКФ банк занимал 30-е место…»), и строка не отвечала на
+    # вопрос «что покупают». Описание профиля предмета отвечает.
+    target_id = deal.get('target')
+    if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
+        sources.append((companies[target_id]['desc'], None, 1))
     if has(eco.get('share')):
-        sources.append((eco['share'], _is_party_narrative))
+        sources.append((eco['share'], _is_party_narrative, 1))
     elif has(deal.get('extra')):
-        sources.append((deal['extra'], _is_party_narrative))
+        sources.append((deal['extra'], _is_party_narrative, 1))
     if has(eco.get('target_fin')):
         # Из «Финансов предмета» берём только то, что называет предмет, а не
         # его показатели (см. _is_financial_report выше).
-        sources.append((eco['target_fin'], lambda x: _is_financial_report(x) or _is_party_narrative(x)))
-    target_id = deal.get('target')
-    if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
-        sources.append((companies[target_id]['desc'], None))
+        sources.append((eco['target_fin'], lambda x: _is_financial_report(x) or _is_party_narrative(x), 1))
 
     picked, ref = [], reference
-    for src, drop in sources:
+    for src, drop, per_source in sources:
         if len(picked) >= limit:
             break
         budget = max_chars - sum(len(s) for s in picked)
         if budget <= 0:
             break
-        new = _pick_novel_sentences(src, ref, limit=limit - len(picked), max_chars=budget, drop=drop)
+        new = _pick_novel_sentences(src, ref, limit=min(per_source, limit - len(picked)),
+                                    max_chars=budget, drop=drop)
         new = [x for x in (_strip_registry_ids(n) for n in new) if x]
         if new:
             picked += new
@@ -1151,9 +1166,12 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # а не продолжение предмета через тире.
     detail = '' if jv else _join_subject_sentences(
         _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
-    if asset and detail and not has_novelty(asset, detail):
+    if asset and detail and not has_novelty(asset, detail) and _starts_with_name(asset, detail):
         # Деталь сама называет предмет — имя перед тире не повторяем (пост о
         # госпакете Шереметьево, 2 сентября 2026: одно и то же дважды).
+        # Только если деталь С ИМЕНИ НАЧИНАЕТСЯ: VEON/Perfectum (19 октября
+        # 2026) печатался «Предмет: У Perfectum 115 МГц спектра…» — имя стояло
+        # внутри чужой фразы, и читатель не узнавал, что покупают.
         add('%s %s' % (_lab(subject_label), esc(detail)))
     elif asset:
         add('%s %s%s' % (_lab(subject_label), esc(asset), (' — %s' % esc(detail)) if detail else ''))

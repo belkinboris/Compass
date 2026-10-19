@@ -841,8 +841,9 @@ def test_post_subject_sentences_from_different_sources_get_a_period_between_them
     companies = {"t1": {"name": "Газпромбанк",
                         "desc": "Опорный банк газовой отрасли: корпоративное кредитование."}}
     text = format_post.render(deal, companies)
-    assert "ценных бумаг Опорный" not in text, "два источника склеены без знака препинания"
-    assert "ценных бумаг. Опорный банк газовой отрасли" in text
+    # С 19 октября 2026 первым идёт описание предмета, потом доля.
+    assert "кредитование 7,52%" not in text, "два источника склеены без знака препинания"
+    assert "Опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
 
 
 def test_sentence_split_does_not_break_multi_dot_abbreviations():
@@ -8017,3 +8018,17 @@ def test_joint_post_goes_out_once_for_all_its_cards(monkeypatch, tmp_path):
     monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {"gJ1": ["появилась сумма"]})
     send_telegram.main(write=True, ignore_pace=True)
     assert len(fake.calls) == 1, "общий пост правится из полей одной карточки"
+
+
+def test_post_subject_names_the_company_then_says_what_it_is():
+    """19 октября 2026, VEON/Perfectum (`g28941fd8`): пост печатал «Предмет: У
+    Perfectum 115 МГц спектра…» — имени впереди нет, что за компания —
+    непонятно. Строка «Предмет» — имя, затем описание профиля, затем деталь
+    сделки; имя опускается, только если деталь с него начинается."""
+    deal = {"id": "x", "title": "VEON покупает 100% мобильного оператора Perfectum в Узбекистане",
+            "status": "Подписана", "date": "2026-10-19", "target": "t1",
+            "eco": {"target_fin": "У Perfectum 115 МГц спектра: диапазоны 850 и 3800 МГц."}}
+    companies = {"t1": {"name": "Perfectum",
+                        "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
+    line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
+    assert "<b>Предмет:</b> Perfectum — Узбекский мобильный оператор" in line
