@@ -2,149 +2,13 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d34369972",
-   "title": "Оверчук рассказал о переговорах Ирана и России по теме ж/д Решт—Астара // Оверчук: Иран сообщил России о выкупе участков под железную дорогу Решт—Астара",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9042248"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-19",
-     "title": "Сделка завершена",
-     "note": "Представители Ирана заверили российских партнеров, что завершили выкуп земельных участков под строительство железной дороги Решт—Астара. Об этом сообщил вице-премьер Алексей Оверчук.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9042248"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gfd4d443b (общие редкие слова: астара, железн) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d37491866",
-   "title": "Мосбиржа провела дискретный аукцион по ценным бумагам «Южный Кузбасс»",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/19/1238301-auktsion-po-bumagam"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33283861",
-   "title": "Китай ограничит иностранные поглощения ключевых биофарм-платформ",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/10/19/kitay-ogranichit-inostrannye-pogloshcheniya-klyuchevykh-biofarm-platform/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d60211486",
-   "title": "В России продали более 11 тыс. новых электромобилей с начала года",
+   "draft_id": "d18766385",
+   "title": "На маркетплейсах массово продают мопеды под видом электровелосипедов",
    "date": "2026-10-19",
    "src": [
     [
      "web:iz.ru",
-     "https://iz.ru/2186787/2026-10-19/v-rossii-prodali-bolee-11-tys-novykh-elektromobilei-s-nachala-goda"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-19",
-     "title": "Сделка завершена",
-     "note": "За январь–сентябрь 2026 года в России зарегистрировали почти 11,6 тыс. новых полностью электрических автомобилей. Доля сегмента BEV в продажах новых легковых машин составила 1,2%, сообщает в своем Telegram-канале 19 октября директор аналитического агентства…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2186787/2026-10-19/v-rossii-prodali-bolee-11-tys-novykh-elektromobilei-s-nachala-goda"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "более 11 тыс. новых электромобилей с начала года",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "более 11 тыс. новых электромобилей с начала года",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d12917337",
-   "title": "Минфин вернется к оценке влияния закона о запрете продажи вейпов",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261019/minfin-874397184.html"
+     "https://iz.ru/2186880/video/na-marketpleisakh-massovo-prodaiut-mopedy-pod-vidom-elektrovelosipedov"
     ]
    ],
    "sum": null,
@@ -167,17 +31,17 @@
    ]
   },
   {
-   "draft_id": "d45994097",
-   "title": "Швейцарская Roche приостановила инвестиции в Германию",
+   "draft_id": "d22165103",
+   "title": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
    "date": "2026-10-19",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261019/roche-874397106.html"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118647/"
     ]
    ],
-   "sum": null,
-   "type": "Инвестиция",
+   "sum": "509 млн ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -195,88 +59,30 @@
    ]
   },
   {
-   "draft_id": "d44237984",
-   "title": "ИИ разбивает сердца: бразилец продал все ради несуществующей девушки",
-   "date": "2026-10-19",
+   "draft_id": "d26662198",
+   "title": "Суд завершил конкурсное производство Валуйского ЛВЗ с требованиями кредиторов на 587 млн рублей",
+   "date": "2026-10-16",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261019/ii-874396980.html"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118476/"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-19",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261019/ii-874396980.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "все ради несуществующей девушки",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "все ради несуществующей девушки",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d91596302",
-   "title": "Инвесторы начали распродавать облигации американских дата-центров — из-за сомнений в окупаемости ИИ-инфраструктуры",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/investory-nachali-rasprodavat-obligacii-amerikanskih-data-centrov-iz-za-somnenij-v-okupaemosti-ii-infrastruktury/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d66371269",
-   "title": "В ГД внесли законопроект об ограничении доступа к аукционам на сельхозземли",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266387/"
-    ]
-   ],
-   "sum": null,
+   "sum": "587 млн ₽",
    "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Сделка завершена",
+     "note": "Суд завершил конкурсное производство Валуйского ЛВЗ с требованиями кредиторов на 587 млн рублей",
+     "source": [
+      "web:abireg.ru",
+      "https://abireg.ru/newsitem/118476/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -285,20 +91,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Агро",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d47250159",
-   "title": "Москвичам дали совет при выборе района для покупки квартиры",
+   "draft_id": "d78180262",
+   "title": "Мародеры начали продавать вещи, украденные при погромах во Франции",
    "date": "2026-10-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/moskvicham-dali-sovet-pri-vybore-rayona-dlya-pokupki-kvartiry/"
+     "web:ria.ru",
+     "https://ria.ru/20261019/frantsiya-2125471321.html"
     ]
    ],
    "sum": null,
@@ -318,6 +124,63 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d73125908",
+   "title": "Тюменский ТЦ «Новый магнат» начали распродавать по частям",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137378"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20928020",
+   "title": "Делимся с вами записью вебинара, на котором советник Евгения Кудряшова и юрист Александра Черкевич обсудили вопросы возмещения имущественных потерь при купле-продаже долей участия (акций).   Запись ве",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7480"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
