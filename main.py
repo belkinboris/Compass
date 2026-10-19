@@ -5201,7 +5201,13 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
                     "источником и не примут целиком — молчание её не публикует, сама не выйдет."
                     % len(items))
         else:  # soon
-            items = [c for c in not_held if c.get("reviewed") and c.get("accepted")]
+            # Только показанные в консоли: approve.plan_actions публикует
+            # молчанием лишь карточку с `draft_sent`. 19 октября 2026 две
+            # принятые, но не отправленные карточки («Экспанта», VEON) пришли
+            # владельцу впервые именно отсюда — как «выйдут сами», хотя сами
+            # выйти не могли и на подтверждение не приходили.
+            items = [c for c in not_held if c.get("reviewed") and c.get("accepted")
+                     and c.get("draft_sent")]
             head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
                     "в течение суток." % len(items))
 
@@ -6027,7 +6033,8 @@ def _ops_numbers() -> dict:
         # карточка не публикуется по молчанию никогда (approve.py,
         # `plan_actions`), и раньше это число молча включало её тоже —
         # владелец 18 августа поймал два таких «зависших» примера.
-        "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed") and c.get("accepted")),
+        "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed") and c.get("accepted")
+                         and c.get("draft_sent")),
         "queue_unread": sum(1 for c in pending if not c.get("held")
                             and not (c.get("reviewed") and c.get("accepted"))),
         "queue_held": sum(1 for c in pending if c.get("held")),

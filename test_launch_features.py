@@ -3344,7 +3344,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
         "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
                    "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
                   {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»",
-                   "reviewed": "2026-08-01", "accepted": "2026-08-01"}],
+                   "reviewed": "2026-08-01", "accepted": "2026-08-01", "draft_sent": True}],
     } if "pending" in path else default)
 
     main._send_queue_batch(-100, "held")
@@ -3382,7 +3382,7 @@ def test_unread_card_is_not_counted_as_soon(monkeypatch):
     monkeypatch.setattr(main, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Ещё не прочитана", "buyer_name": "«Компания»"},
                   {"id": "gs1", "title": "Прочитана, ждёт таймаута",
-                   "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01"}],
+                   "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01", "draft_sent": True}],
     } if "pending" in path else default)
 
     assert main._send_queue_batch(-100, "soon") == 1
