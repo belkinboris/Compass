@@ -2,13 +2,13 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d35914031",
-   "title": "Еврокомиссия отказалась возобновить покупки российского газа",
+   "draft_id": "d64951532",
+   "title": "Apple начала продавать чехол для складного iPhone Duo — но его придётся приклеивать к смартфону",
    "date": "2026-10-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/evrokomissiya-otkazalas-vozobnovit-pokupki-rossiyskogo-gaza/"
+     "web:rb.ru",
+     "https://rb.ru/news/apple-nachala-prodavat-chehol-dlya-skladnogo-iphone-duo-no-ego-pridyotsya-prikleivat-k-smartfonu/"
     ]
    ],
    "sum": null,
@@ -26,23 +26,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d19962429",
-   "title": "Посредник удержал комиссию: что нужно знать перед покупкой билетов",
+   "draft_id": "d57120895",
+   "title": "Как получить налоговый вычет за лечение родителей и покупку лекарств",
    "date": "2026-10-19",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/19/posrednik-uderzhal-komissiyu-chto-nuzhno-znat-pered-pokupkoj-biletov"
+     "web:ura.news",
+     "https://ura.news/articles/1053137297"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-19",
+     "title": "Сделка завершена",
+     "note": "Если вы оплатили родителям лечение, купили лекарства или оформили для них полис ДМС, то вы можете получить налоговый вычет.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/articles/1053137297"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -56,93 +68,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d67242995",
-   "title": "За покупку квартиры в России предложили возвращать до 1,04 млн рублей",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/19/za-pokupku-kvartiry-v-rossii-predlozhili-vozvrashhat-do-104-mln-rublej"
-    ]
-   ],
-   "sum": "1,04 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65192645",
-   "title": "Такие помидоры не продадут ни в одном магазине: домашний рецепт идеальной закрутки",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/food/2026/10/19/76707399/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d67817943",
-   "title": "AngelsDeck вновь вложился в американский стартап с российскими корнями Buddy.ai , репетитора на основе искусственного интеллекта для детей. Об этом в своем Telegram-канале написал CEO и сооснователь к",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7798"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3a84650b (общие редкие слова: вновь, старта) — проверьте, не дубль ли"
    ]
   }
  ]
