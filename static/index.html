@@ -994,6 +994,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   .an-card.an-c-status{order:10;grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;align-content:start}
   .an-card.an-c-status>.label,.an-card.an-c-status>p{grid-column:1/-1}
   #multiplesCard{order:11}
+  #sectorMultCard{order:12}
 }
 .an-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;min-width:0}
 .an-card>.label{display:block;margin-bottom:16px}
@@ -1274,6 +1275,35 @@ a.dp-asset-name:hover{color:var(--accent)}
   .mult-table td[data-l]:not(.mult-name):before{content:attr(data-l) ": ";color:var(--muted);font-size:12.5px}
   .mult-table td.mult-x-cell{font-size:15px}
 }
+/* ---------- мультипликаторы по отраслям (19 октября 2026) ----------
+   Таблица «отрасль × год»: на телефоне прокручивается вбок ВНУТРИ своего
+   блока (страница не едет — min-width:0 у карточки и обёртки), первая
+   колонка с отраслью стоит на месте. Нажимаемые ячейки — слова без рамок,
+   как остальной сайт («тонкие подчёркивания», docs/site_screens.md). */
+.smult-hint{font-size:12.5px;color:var(--muted);margin:10px 0 12px;line-height:1.5}
+.smult-wrap{max-width:100%;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 0 14px;border-top:1px solid var(--line)}
+.smult-table{border-collapse:collapse;font-size:14px;min-width:100%}
+.smult-table th,.smult-table td{padding:9px 10px;border-bottom:1px solid var(--line-soft);text-align:right;white-space:nowrap;vertical-align:top}
+.smult-table thead th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.smult-table th:first-child{position:sticky;left:0;z-index:1;background:#fff;text-align:left;white-space:normal;min-width:118px;max-width:170px;font-weight:400;padding-left:0}
+.smult-table tbody th a{color:var(--ink);text-decoration:none;line-height:1.35}
+.smult-table tbody th a:hover{color:var(--accent)}
+.smult-table .smult-total th,.smult-table .smult-total td{border-top:1px solid var(--line);font-weight:600}
+.smult-empty{color:var(--line)}
+.smult-cell{background:none;border:0;border-bottom:1px solid var(--line);padding:0 0 2px;font:inherit;color:var(--ink);cursor:pointer;text-align:right;line-height:1.3}
+.smult-cell:hover,.smult-cell.on{color:var(--accent);border-bottom-color:var(--accent)}
+.smult-cell.smult-dash{color:var(--muted)}
+.smult-n{display:block;font-size:11px;color:var(--muted);font-weight:400}
+.smult-list{margin:4px 0 12px;padding:0;list-style:none}
+.smult-list li{padding:8px 0;border-bottom:1px solid var(--line-soft);line-height:1.4;overflow-wrap:anywhere}
+.smult-list a{color:var(--ink);text-decoration:none}.smult-list a:hover{color:var(--accent)}
+.smult-v{font-weight:600;margin-left:6px;white-space:nowrap}
+.smult-head{font-size:13.5px;margin:0 0 4px}
+.smult-method{font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.55}
+.deal-mult{margin-top:28px}
+.deal-mult .smult-list li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px}
+.deal-mult .smult-list .k{color:var(--muted)}
+
 /* ---------- консультанты в сделках компании ---------- */
 .co-advisors{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;margin-bottom:26px}
 .co-advisors>.label{display:block;margin-bottom:12px}
@@ -1282,6 +1312,18 @@ a.dp-asset-name:hover{color:var(--accent)}
 .co-adv a:hover{color:var(--accent)}
 .co-adv-n{font-weight:400;color:var(--muted);font-size:12.5px;white-space:nowrap}
 .co-advisors-more{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+/* Признаки возможных сделок на странице компании (signals.json, 19 октября
+   2026): 2–4 строки «дата — что заявлено — источник» и кнопка к ассистенту.
+   Нет признаков — блока нет вовсе. */
+.co-signals{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 24px;margin-bottom:26px;min-width:0}
+.co-signals>.label{display:block;margin-bottom:10px}
+.co-signals-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.co-signals-list li{font-size:14px;line-height:1.45;min-width:0;overflow-wrap:anywhere}
+.co-sig-date{color:var(--muted)}
+.co-sig-src{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.co-signals-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px}
+.co-signals-note{font-size:12.5px;color:var(--muted);margin:0;flex:1 1 220px;min-width:0}
+@media (max-width:560px){.co-signals{padding:16px}}
 
 /* ---------- цепочка владения ---------- */
 .adv-card .label{margin-bottom:6px}
@@ -7038,6 +7080,7 @@ function renderDeal(id, qs, previewCard){
         para("Контекст", d.eco.context),
       ])}
       ${extraBlock}
+      <div id="deal-mult"></div>
       <div id="deal-fns"></div>`
       : ecoEmptyHtml(d);
     }
@@ -7114,7 +7157,7 @@ function renderDeal(id, qs, previewCard){
        «Контекстом» и «Похожими сделками» (владелец, 3 октября 2026, карточки
        «Ленты»/«Марии-Ра» и Ситибанка). Показываем их здесь же. */
     f.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
-    if(lens==="eco") mountDealFns(d);
+    if(lens==="eco"){ mountDealMultiples(d); mountDealFns(d); }
   };
   paint();
   bindTimeline();
@@ -8103,13 +8146,9 @@ async function mountDealFns(d){
   const draw=()=>{
     const p=parties.find(x=>x.id===active)||parties[0];
     const c=co(p.id);
-    const mult=dealMultipleLine(d, p.id, p.latest.revenue_rub, p.latest.year);
-    const multOp=dealMultipleLineOp(d, p.id, p.latest.operating_profit_rub, p.latest.year, p.latest.revenue_rub);
-    const pf=priceFact(d), pb=_dealMultiplePrice(d, p.id);
-    const scopeNote=(pf.scope==="ev"?"цена с учётом долга"
-      :pb&&pb.basis==="scaled"?`цена пакета ${fmtPct(stakeFact(d).value||0)} (${fnsMoney(priceRub(d))}) в пересчёте на 100% компании`
-      :"цена за 100% акций")+(PRICE_TERMS_NOTE[pf.terms]?` (${PRICE_TERMS_NOTE[pf.terms]})`:"");
-    const yearNote=my.basis==="дата карточки"?"":`; год сделки — ${my.basis}`;
+    // Мультипликаторы сделки — блок #deal-mult над этим (mountDealMultiples,
+    // 19 октября 2026): тот же расчёт, что в таблице «Аналитики», вместо
+    // прежних двух строк «Цена ÷ выручка» и «Цена ÷ операционная прибыль».
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
@@ -8121,8 +8160,6 @@ async function mountDealFns(d){
           <div class="fns-metric"><span class="label">Активы</span><div class="v">${fnsMoney(p.latest.assets_rub)}</div></div>
           <div class="fns-metric"><span class="label">Капитал</span><div class="v">${fnsMoney(p.latest.equity_rub)}</div></div>
         </div>
-        ${mult?`<p style="margin:14px 0 0"><span class="tag steel">Цена ÷ выручка ≈ ${fmtMult(mult.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к выручке купленной компании за ${mult.revenueYear} год, без учёта долга (данные ФНС${yearNote}; цена и юрлицо сверены с источниками)</span></p>`:""}
-        ${multOp?`<p style="margin:${mult?6:14}px 0 0"><span class="tag steel">Цена ÷ операционная прибыль ≈ ${fmtMult(multOp.multiple)}</span> <span style="color:var(--muted);font-size:13px">${scopeNote} к прибыли от продаж за ${multOp.opProfitYear} год; долг и амортизация в расчёт не входят — отчётность не раскрывает их отдельной строкой (данные ФНС)</span></p>`:""}
         <p class="fns-disclaimer">Отчётность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
     mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
@@ -8271,6 +8308,57 @@ function sanctionsHtml(c){
   return `<div class="sanc-row">${chips}</div>
     <div class="sanc-note">${lead} (ссылки ведут на сами списки).${when} Совпадение проверено вручную, ${tail}.</div>`;
 }
+/* ПРИЗНАКИ ВОЗМОЖНЫХ СДЕЛОК. Партнёр владельца, 19 октября 2026: показывать,
+   у кого вероятна сделка, не процентом, а доводами с датой и ссылкой —
+   компания заявила о продаже, ищет инвестора, обсуждается сделка. Данные —
+   static/data/signals.json (собирает pipeline/ingest/signals.py, сайт тянет
+   файл из main сам); грузится лениво, один раз, только на странице компании.
+   Нет признаков — блока нет. Кнопка ведёт к ассистенту тем же путём, что
+   подготовка к собеседованию (pendingQ + pendingCtx страницы). */
+let SIGNALS = null, signalsPromise = null;
+async function loadSignals(){
+  if(SIGNALS) return SIGNALS;
+  if(!signalsPromise) signalsPromise = fetch("static/data/signals.json")
+    .then(r=>r.ok?r.json():{}).then(j=>Array.isArray(j.signals)?j.signals:[]).catch(()=>[]);
+  SIGNALS = await signalsPromise;
+  return SIGNALS;
+}
+const SIGNALS_SHOWN = 4;
+function companySignalsHtml(id, rows){
+  const mine = rows.filter(r=>r.company_id===id||r.object_id===id)
+    .sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).slice(0, SIGNALS_SHOWN);
+  if(!mine.length) return "";
+  const attr = v => String(v||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  const items = mine.map(r=>{
+    let text = String(r.summary||"");
+    // На странице самой компании её имя в начале строки — повтор заголовка.
+    if(r.company_id===id) text = text.replace(/^.*?\s—\s/, "");
+    text = text ? text[0].toUpperCase()+text.slice(1) : "";
+    const src = Array.isArray(r.source) && /^https?:\/\//.test(r.source[1]||"")
+      ? ` <a class="co-sig-src" href="${attr(r.source[1])}" target="_blank" rel="noopener">${esc(String(r.source[0]||"источник"))} ↗</a>` : "";
+    const deal = r.deal_id && DEALS.some(d=>d.id===r.deal_id) ? ` <a class="co-sig-src" href="#/deal/${attr(r.deal_id)}">сделка →</a>` : "";
+    return `<li><span class="co-sig-date">${esc(fmtDateLong(r.date))}</span> — ${esc(text)}${src}${deal}</li>`;
+  }).join("");
+  return `<div class="co-signals"><span class="label">Признаки возможных сделок</span>
+    <ul class="co-signals-list">${items}</ul>
+    <div class="co-signals-foot"><p class="co-signals-note">Что заявляла компания и какие сделки с ней обсуждаются — с датой и источником. Это не прогноз.</p>
+    <button class="chip" id="askSignals">Разобрать с ассистентом</button></div></div>`;
+}
+async function mountCompanySignals(id){
+  const slot = document.getElementById("co-signals");
+  if(!slot) return;
+  const rows = await loadSignals();
+  if(!slot.isConnected) return;
+  const html = companySignalsHtml(id, rows);
+  slot.innerHTML = html;
+  const btn = document.getElementById("askSignals"), c = co(id);
+  if(btn && c) btn.onclick = () => {
+    sessionStorage.setItem("pendingQ", "Будут ли у этой компании сделки? Разбери признаки.");
+    sessionStorage.setItem("pendingLabel", `Признаки сделок: «${c.name}»`);
+    sessionStorage.setItem("pendingCtx", JSON.stringify({type:"company", id}));
+    location.hash = "#/assistant";
+  };
+}
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -8364,6 +8452,7 @@ function renderCompany(id){
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
+  <div id="co-signals"></div>
   ${companyAdvisorsHtml(id, structured)}
   <!-- СДЕЛКИ ВЫШЕ ОТЧЁТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
        справка о стороне сделки, а не главное на странице. Блок с пятью
@@ -8438,6 +8527,7 @@ function renderCompany(id){
   mountMiniAI(c.name,"company",id);
   mountClaimLine("company", id);
   mountCompanyFns(id);
+  mountCompanySignals(id);
   if(SHOW_COMPANY_LINKS && groupMembers.length) mountGroupMembers(groupMembers, "group-members");
   // Портфель показывает долю в той же строке, что и имя (просьба владельца
   // 23 августа) — доля берётся из ownership-записи ПОРТФЕЛЬНОЙ компании,
@@ -9426,9 +9516,14 @@ function renderAnalytics(){
       <span class="label">Мультипликаторы рынка: цена сделки к прибыли и выручке</span>
       <p id="multiplesBody" style="color:var(--muted);font-size:13.5px;margin:0">Считаем по подтверждённой отчётности сторон…</p>
     </div>
+    <div class="an-card reveal" id="sectorMultCard" style="grid-column:1/-1">
+      <span class="label">Мультипликаторы по отраслям</span>
+      <div id="sectorMultBody" style="color:var(--muted);font-size:13.5px;margin:0">Собираем таблицу…</div>
+    </div>
   </div>`;
   bindAnalyticsFilters();
   mountMarketMultiples();
+  mountSectorMultiples();
 }
 
 // Мультипликаторы рынка — Этап 16, П1. Методика (deal_multiples.py) не
@@ -9621,6 +9716,176 @@ async function mountMarketMultiples(){
   };
   body.outerHTML = `<div id="multiplesBody"></div>`;
   draw();
+}
+
+
+/* ===== МУЛЬТИПЛИКАТОРЫ ПО ОТРАСЛЯМ (19 октября 2026) =====
+   Запрос M&A-практика (Евгений, менеджер проектов M&A): настраиваемая
+   таблица «отрасль × год» с выбором мультипликатора. Считает сервер
+   (deal_multiples.compute_sector_table → /api/analytics/sector-multiples):
+   медианы, выбросы и «не применим» приходят готовыми, клиент только рисует —
+   тот же ответ читают карточка сделки и ассистент. Медиана — при трёх
+   сделках в ячейке и больше; меньше — прочерк с подсказкой, по клику список
+   сделок всё равно открывается. */
+let _sectorMultPromise = null;
+let SMULT_FOCUS = false;   // пришли с карточки сделки по ссылке «как считаем»
+function loadSectorMultiples(){
+  if(!_sectorMultPromise){
+    _sectorMultPromise = fetch("/api/analytics/sector-multiples")
+      .then(r => { if(!r.ok) throw new Error(String(r.status)); return r.json(); })
+      .catch(e => { _sectorMultPromise = null; throw e; });
+  }
+  return _sectorMultPromise;
+}
+const smultX = v => v == null ? "—" : "×" + (v < 0.01 ? "<0,01" : String(v).replace(".", ","));
+const smultYear = y => y === "all" ? "Все годы" : String(y);
+const smultDate = s => String(s || "").split("-").reverse().join(".");
+const SMULT_ALL = "Все отрасли";
+// Оговорки одной сделки — общие для таблицы «Аналитики» и карточки сделки.
+function smultNotes(r, v, metric){
+  const tn = (co(r.target_id)||{}).name || r.target_name || "";
+  return [
+    tn,
+    v.source === "Банк России" ? `капитал на ${smultDate(v.denominator_date)} по данным Банка России`
+      : v.denominator_year ? `отчётность ФНС за ${v.denominator_year} год` : "",
+    metric === "ev_op" && v.op_basis === "computed" ? "операционная прибыль посчитана из строк отчёта" : "",
+    r.price_basis === "scaled" ? `цена пакета ${fmtPct(r.stake||0)} пересчитана на 100%` : "",
+    r.price_scope === "ev" ? "цена названа с учётом долга" : "",
+    r.confidence === "computed" ? "не сверено с источниками" : "",
+    v.status === "outlier" ? "выброс — в медиану не входит" : "",
+    r.price_fx ? fxNote(r.price_fx) : "",
+  ].filter(Boolean).join(" · ");
+}
+async function mountSectorMultiples(){
+  const body = document.getElementById("sectorMultBody"); if(!body) return;
+  let data;
+  try{ data = await loadSectorMultiples(); }
+  catch(e){ if(body.isConnected) body.textContent = "Не удалось загрузить таблицу — попробуйте обновить страницу."; return; }
+  if(!body.isConnected) return;
+  if(!data || !data.rows || !data.with_multiple_total){
+    body.textContent = "Пока ни у одной сделки нет цены, доли и отчётности купленной компании для расчёта.";
+    return;
+  }
+  let metric = "ev_op", onlyVerified = false, picked = null;
+  const byId = Object.fromEntries(data.rows.map(r => [r.id, r]));
+  const info = () => data.metrics.find(m => m.key === metric) || data.metrics[0];
+  const cellMap = () => {
+    const m = {};
+    (((data.cells||{})[onlyVerified ? "verified" : "all"]||{})[metric]||[]).forEach(c => { m[c.industry+"|"+c.year] = c; });
+    return m;
+  };
+  const cols = (data.years||[]).concat(["all"]);
+  const industries = cm => (data.industries||[]).filter(i => cm[i+"|all"]);
+  const hintOf = c => c.count
+    ? `${c.count} ${plural(c.count,"сделка","сделки","сделок")} — для медианы нужно не меньше ${data.min_cell}`
+    : "только значения за правдоподобными границами — медиану не считаем";
+  const cellHtml = (cm, ind, y) => {
+    const c = cm[ind+"|"+y];
+    if(!c) return `<td class="smult-empty">—</td>`;
+    const on = picked && picked.industry === ind && String(picked.year) === String(y) ? " on" : "";
+    const attrs = `data-sind="${encodeURIComponent(ind)}" data-syear="${y}"`;
+    if(c.median == null){
+      const n = c.count + c.outlier_ids.length;
+      return `<td><button type="button" class="smult-cell smult-dash${on}" ${attrs} title="${hintOf(c)}" aria-label="${hintOf(c)}">—<span class="smult-n">${n} ${plural(n,"сделка","сделки","сделок")}</span></button></td>`;
+    }
+    return `<td><button type="button" class="smult-cell${on}" ${attrs} title="Медиана по ${c.count} ${plural(c.count,"сделке","сделкам","сделкам")} — нажмите, чтобы увидеть список">${smultX(c.median)}<span class="smult-n">${c.count} ${plural(c.count,"сделка","сделки","сделок")}</span></button></td>`;
+  };
+  const listHtml = cm => {
+    if(!picked) return `<p class="smult-hint" style="margin-top:0">Нажмите на ячейку — откроется список сделок, из которых она посчитана.</p>`;
+    const c = cm[picked.industry+"|"+picked.year];
+    if(!c) return "";
+    const head = `${esc(picked.industry)} · ${smultYear(picked.year)} · ${esc(info().label)}: ${c.median != null
+      ? `медиана ${smultX(c.median)} по ${c.count} ${plural(c.count,"сделке","сделкам","сделкам")}`
+      : `медиану не считаем — ${hintOf(c)}`}`;
+    const items = c.ids.concat(c.outlier_ids).map(id => {
+      const r = byId[id]; if(!r) return "";
+      const v = r.metrics[metric];
+      return `<li><a href="#/deal/${id}">${esc(r.title)}</a><span class="num smult-v">${smultX(v.value)}</span><span class="mult-sub">${esc(smultNotes(r, v, metric))}</span></li>`;
+    }).join("");
+    return `<p class="smult-head">${head}</p><ul class="smult-list">${items}</ul>`;
+  };
+  const csv = () => {
+    const cm = cellMap();
+    const head = ["Отрасль"].concat(...cols.map(y => [`${smultYear(y)}: медиана`, `${smultYear(y)}: сделок`]));
+    const rows = industries(cm).concat([SMULT_ALL]).map(i => [i].concat(...cols.map(y => {
+      const c = cm[i+"|"+y];
+      return c ? [c.median == null ? "" : String(c.median).replace(".", ","), c.count] : ["", ""];
+    })));
+    const meta = [[`Мультипликатор: ${info().label} — ${info().hint}${onlyVerified ? "; только сделки, сверенные с источниками" : ""}.`],
+      [`Медиана — при ${data.min_cell} сделках в ячейке и больше; выбросы в неё не входят. Это оценка «Компаса», не рыночный ориентир.`],
+      [`Методика: ${data.methodology}`], [`Источник: ${location.origin}${location.pathname}#/analytics`]];
+    return "﻿" + [head, ...rows, [], ...meta].map(r => r.map(csvCell).join(";")).join("\r\n");
+  };
+  const draw = () => {
+    const cm = cellMap();
+    const inds = industries(cm);
+    const verifiedRows = data.rows.filter(r => r.confidence === "verified").length;
+    body.innerHTML = `
+      <div class="mult-toggle">${data.metrics.map(m => `<button type="button" class="chip ${m.key === metric ? "on" : ""}" data-smetric="${m.key}">${esc(m.label)}</button>`).join("")}</div>
+      <p class="smult-hint">${esc(info().hint[0].toUpperCase() + info().hint.slice(1))}. В ячейке — медиана и число сделок; прочерк — сделок меньше ${data.min_cell}.</p>
+      ${verifiedRows < data.rows.length ? `<div class="mult-scale-filter">
+        <button type="button" class="chip ${onlyVerified ? "" : "on"}" data-sconf="all">Все сделки</button>
+        <button type="button" class="chip ${onlyVerified ? "on" : ""}" data-sconf="verified">Только сверенные с источниками</button></div>` : ""}
+      ${inds.length ? `<div class="smult-wrap"><table class="smult-table"><thead><tr><th>Отрасль</th>${cols.map(y => `<th>${smultYear(y)}</th>`).join("")}</tr></thead>
+      <tbody>${inds.map(i => `<tr><th scope="row"><a href="#/industry/${encodeURIComponent(i)}">${esc(i)}</a></th>${cols.map(y => cellHtml(cm, i, y)).join("")}</tr>`).join("")}
+      <tr class="smult-total"><th scope="row">${SMULT_ALL}</th>${cols.map(y => cellHtml(cm, SMULT_ALL, y)).join("")}</tr></tbody></table></div>`
+      : `<p class="smult-hint">Под этот выбор сделок пока нет.</p>`}
+      <div id="smultList">${listHtml(cm)}</div>
+      <div class="mult-scale-filter"><button type="button" class="chip" data-smultcsv="1">Скачать таблицу (CSV)</button></div>
+      <p class="smult-method"><b>Как считаем.</b> Цена за 100% компании ÷ показатель купленного юрлица за последний полный год до сделки по отчётности ФНС (у банков — капитал по данным Банка России). Операционная прибыль — оценка без поправки на амортизацию, это не EBITDA. Убыток — «не применим», выбросы помечены и в медиану не входят.</p>
+      <details class="smult-method" id="smultMethod"><summary style="cursor:pointer">Подробнее о методике</summary><p class="smult-method">${esc(data.methodology)}</p></details>
+      <p class="smult-method">Мультипликатор посчитан у ${data.with_multiple_total} ${plural(data.with_multiple_total,"сделки","сделок","сделок")} из ${data.deals_total} в базе: у остальных цена или доля не раскрыты, покупка не сменила контроль либо нет отчётности купленной компании за нужный год.</p>`;
+    body.querySelectorAll("[data-smetric]").forEach(b => b.onclick = () => { metric = b.dataset.smetric; draw(); });
+    body.querySelectorAll("[data-sconf]").forEach(b => b.onclick = () => { onlyVerified = b.dataset.sconf === "verified"; draw(); });
+    body.querySelectorAll("[data-sind]").forEach(b => b.onclick = () => {
+      const y = b.dataset.syear;
+      picked = {industry: decodeURIComponent(b.dataset.sind), year: y === "all" ? "all" : Number(y)};
+      draw();
+      const list = document.getElementById("smultList");
+      if(list && list.scrollIntoView) list.scrollIntoView({block: "nearest", behavior: "smooth"});
+    });
+    body.querySelectorAll("[data-smultcsv]").forEach(b => b.onclick = () =>
+      downloadText(csv(), `compass-multiplikatory-${metric}.csv`, "text/csv;charset=utf-8"));
+  };
+  body.style.color = ""; body.style.fontSize = "";
+  draw();
+  if(SMULT_FOCUS){
+    SMULT_FOCUS = false;
+    const card = document.getElementById("sectorMultCard");
+    if(card && card.scrollIntoView) card.scrollIntoView({block: "start"});
+  }
+}
+
+/* Блок мультипликаторов на карточке сделки — та же строка таблицы, что на
+   «Аналитике»: числитель, знаменатель, год отчёта и пометка «оценка».
+   Рисуется только у сделки, попавшей в расчёт (вкладка без данных не
+   рисуется — то же правило, что у вкладок карточки). */
+async function mountDealMultiples(d){
+  const mount = document.getElementById("deal-mult"); if(!mount) return;
+  let data;
+  try{ data = await loadSectorMultiples(); }catch(e){ return; }
+  if(!mount.isConnected) return;
+  const r = ((data && data.rows) || []).find(x => x.id === d.id);
+  if(!r) return;
+  const shown = (data.metrics||[]).filter(m => r.metrics[m.key] && r.metrics[m.key].status !== "no_data");
+  if(!shown.length) return;
+  const val = v => v.status === "not_applicable" ? `не применим${v.note ? ` (${esc(v.note)})` : ""}`
+    : `${smultX(v.value)}${v.status === "outlier" ? " · выброс" : ""}`;
+  const price = r.price_basis === "scaled"
+    ? `цена пакета ${fmtPct(r.stake||0)} (${fnsMoney(r.sum_rub)}), пересчитанная на 100%, — ${fnsMoney(r.price_full_rub)}`
+    : `${r.price_scope === "ev" ? "цена с учётом долга" : "цена за 100%"} — ${fnsMoney(r.price_full_rub)}`;
+  const first = r.metrics[shown[0].key];
+  const tn = (co(r.target_id)||{}).name || r.target_name || "";
+  const source = first.source === "Банк России"
+    ? `капитал банка по данным Банка России на ${smultDate(first.denominator_date)}`
+    : `отчётность ФНС купленной компании${tn ? ` (${esc(tn)})` : ""} за ${first.denominator_year} год — последний полный год до сделки`;
+  mount.innerHTML = `<section class="deal-mult">
+    <span class="label">Мультипликаторы сделки — оценка</span>
+    <ul class="smult-list">${shown.map(m => `<li><span class="k">${esc(m.label)}</span><span class="num smult-v">${val(r.metrics[m.key])}</span></li>`).join("")}</ul>
+    <p class="mult-sub">Оценка «Компаса»: ${price}; ${source}.${r.metrics.ev_op && r.metrics.ev_op.status !== "no_data" ? " Операционная прибыль — по отчётности ФНС, без поправки на амортизацию: это не EV/EBITDA." : ""}${r.confidence === "computed" ? " Цена и доля взяты из текста карточки и ещё не сверены с источниками." : ""}${r.price_fx ? " " + esc(fxNote(r.price_fx)) + "." : ""}</p>
+    <p class="mult-sub"><a href="#/analytics" data-smult-focus="1">Как считаем и таблица по отраслям →</a></p>
+  </section>`;
+  mount.querySelectorAll("[data-smult-focus]").forEach(a => a.onclick = () => { SMULT_FOCUS = true; });
 }
 
 

@@ -1,0 +1,1683 @@
+{
+ "updated": "2026-10-19",
+ "signals": [
+  {
+   "id": "sf4f74786f",
+   "company_id": "g41f567f1",
+   "date": "2026-10-15",
+   "kind": "investor",
+   "summary": "МГКЛ (Мосгорломбард) — обсуждается вход инвестора в капитал",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/finance/articles/2026/10/15/1237169-mgkl-nashla-investora"
+   ],
+   "origin": "card",
+   "deal_id": "g0158e326",
+   "strength": "normal"
+  },
+  {
+   "id": "sa686519f2",
+   "company_id": "g65ee96ae",
+   "date": "2026-10-09",
+   "kind": "for_sale",
+   "summary": "Комиавиатранс — выставлена на торги",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20261009/vlasti-874128098.html"
+   ],
+   "origin": "card",
+   "deal_id": "g5117a241",
+   "strength": "strong"
+  },
+  {
+   "id": "s09b073fae",
+   "company_id": "ga1db6755",
+   "date": "2026-10-09",
+   "kind": "for_sale",
+   "summary": "Уралбиофарм — выставлена на торги; продавец — Росимущество",
+   "source": [
+    "РБК Екатеринбург",
+    "https://ekb.rbc.ru/ekb/freenews/6ac8952cff1d1491484b8f7f"
+   ],
+   "origin": "card",
+   "deal_id": "g53389708",
+   "strength": "strong"
+  },
+  {
+   "id": "s61e034afa",
+   "company_id": "g4f522aee",
+   "date": "2026-10-07",
+   "kind": "buy",
+   "summary": "Сергей Шишкарев — обсуждается покупка: 58,67% Сахалинского морского пароходства (SASCO)",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9008164"
+   ],
+   "origin": "card",
+   "deal_id": "g6264541d",
+   "strength": "normal"
+  },
+  {
+   "id": "s677ae1b76",
+   "company_id": "ga71b47eb",
+   "date": "2026-09-29",
+   "kind": "buy",
+   "summary": "«Интегральные системы» — обсуждается покупка: «НМ-Тех» (зеленоградский производитель микроэлектроники)",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
+   ],
+   "origin": "card",
+   "deal_id": "gafde5488",
+   "strength": "normal"
+  },
+  {
+   "id": "s6b7389c7b",
+   "company_id": "gf306fa1b",
+   "date": "2026-09-28",
+   "kind": "for_sale",
+   "summary": "ОТП Банк — обсуждается продажа компании или доли",
+   "source": [
+    "Bloomberg",
+    "https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia"
+   ],
+   "origin": "card",
+   "deal_id": "gd937c845",
+   "strength": "strong"
+  },
+  {
+   "id": "s5883f0e4b",
+   "company_id": "gd9fbff8f",
+   "date": "2026-09-28",
+   "kind": "buy",
+   "summary": "ОМК — присматривает новые покупки",
+   "source": [
+    "kommersant.ru",
+    "https://www.kommersant.ru/doc/8988222"
+   ],
+   "origin": "news",
+   "strength": "normal"
+  },
+  {
+   "id": "sf85dc473b",
+   "company_id": "g4e694234",
+   "date": "2026-09-23",
+   "kind": "investor",
+   "summary": "VK — обсуждается совместное предприятие с Яндекс",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-10-08_mintsifry_yandeks_i_vk_sozdadut"
+   ],
+   "origin": "card",
+   "deal_id": "g5850b57f",
+   "strength": "normal"
+  },
+  {
+   "id": "se0713d934",
+   "company_id": "yandex",
+   "date": "2026-09-23",
+   "kind": "investor",
+   "summary": "Яндекс — обсуждается совместное предприятие с VK",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-10-08_mintsifry_yandeks_i_vk_sozdadut"
+   ],
+   "origin": "card",
+   "deal_id": "g5850b57f",
+   "strength": "normal"
+  },
+  {
+   "id": "sb6125421a",
+   "company_id": "g5c8c6494",
+   "date": "2026-09-23",
+   "kind": "for_sale",
+   "summary": "ЛУКОЙЛ — к активам компании присматриваются покупатели",
+   "source": [
+    "ura.news",
+    "https://ura.news/news/1053129921"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
+   "id": "s9bbf05e8b",
+   "company_id": "gc6091c34",
+   "date": "2026-09-23",
+   "kind": "for_sale",
+   "summary": "Мария-Ра — обсуждается продажа компании или доли; возможный покупатель — Группа Лента",
+   "source": [
+    "Retailer.ru",
+    "https://retailer.ru/smi-soobshhili-o-prodazhe-magazinov-marija-ra-seti-lenta/"
+   ],
+   "origin": "card",
+   "deal_id": "gb7ea4703",
+   "strength": "strong"
+  },
+  {
+   "id": "s28f452d7e",
+   "company_id": "gcca31da7",
+   "date": "2026-09-23",
+   "kind": "buy",
+   "summary": "Группа Лента — обсуждается покупка: Мария-Ра",
+   "source": [
+    "Retailer.ru",
+    "https://retailer.ru/smi-soobshhili-o-prodazhe-magazinov-marija-ra-seti-lenta/"
+   ],
+   "origin": "card",
+   "deal_id": "gb7ea4703",
+   "strength": "normal"
+  },
+  {
+   "id": "sbbb554fec",
+   "company_id": "g65d1691b",
+   "date": "2026-09-22",
+   "kind": "buy",
+   "summary": "Группа Т-Технологии — обсуждается покупка: Банк «Точка»",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20260922/bank-873538558.html"
+   ],
+   "origin": "card",
+   "deal_id": "ga7020b5e",
+   "strength": "normal"
+  },
+  {
+   "id": "s6ab3f9c8c",
+   "company_id": "g09ccbaca",
+   "date": "2026-09-22",
+   "kind": "for_sale",
+   "summary": "Банк «Точка» — обсуждается продажа компании или доли; возможный покупатель — Группа Т-Технологии",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20260922/bank-873538558.html"
+   ],
+   "origin": "card",
+   "deal_id": "ga7020b5e",
+   "strength": "strong"
+  },
+  {
+   "id": "sf4add75f8",
+   "company_id": "gcafc31dc",
+   "date": "2026-09-11",
+   "kind": "sell",
+   "summary": "ВТБ — возможная продажа: Росгосстрах",
+   "source": [
+    "iz.ru",
+    "https://iz.ru/2164862/2026-09-11/vtb-namereny-prodat-rosgosstrakh-v-etom-godu"
+   ],
+   "origin": "news",
+   "strength": "strong",
+   "object_id": "g676ca6df"
+  },
+  {
+   "id": "s6b83ccbad",
+   "company_id": "gfb08c766",
+   "date": "2026-09-07",
+   "kind": "for_sale",
+   "summary": "ПИК-специализированный застройщик — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8938431"
+   ],
+   "origin": "card",
+   "deal_id": "g134cf416",
+   "strength": "strong"
+  },
+  {
+   "id": "s41d18caf7",
+   "company_id": "sheremetyevo",
+   "date": "2026-09-02",
+   "kind": "for_sale",
+   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8923860"
+   ],
+   "origin": "card",
+   "deal_id": "g2f5143f4",
+   "strength": "strong"
+  },
+  {
+   "id": "s068d680ce",
+   "company_id": "g36510f4e",
+   "date": "2026-09-02",
+   "kind": "for_sale",
+   "summary": "ПАО «Новороссийский морской торговый порт» (НМТП) — обсуждается продажа компании или доли",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/investments/news/2026/09/02/1225568-plani-prodat-nmtp"
+   ],
+   "origin": "card",
+   "deal_id": "g672dcca1",
+   "strength": "strong"
+  },
+  {
+   "id": "s070986b7b",
+   "company_id": "g444cac01",
+   "date": "2026-08-13",
+   "kind": "investor",
+   "summary": "М.Видео — обсуждается вход инвестора в капитал",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/investments/news/2026/08/13/1220924-dopemissiyu-mvideo"
+   ],
+   "origin": "card",
+   "deal_id": "gb5d8a18a",
+   "strength": "normal"
+  },
+  {
+   "id": "s79834d9d3",
+   "company_id": "gf9a640d2",
+   "date": "2026-08-12",
+   "kind": "for_sale",
+   "summary": "Башнефть — обсуждается продажа компании или доли; возможный покупатель — Роснефть",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
+   ],
+   "origin": "card",
+   "deal_id": "g8e30b9a8",
+   "strength": "strong"
+  },
+  {
+   "id": "s72d89bf36",
+   "company_id": "g300b9ead",
+   "date": "2026-08-12",
+   "kind": "buy",
+   "summary": "Роснефть — обсуждается покупка: Башнефть",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/news/2026/08/12/1220743-bashkiriya-prodast-chast-paketa"
+   ],
+   "origin": "card",
+   "deal_id": "g8e30b9a8",
+   "strength": "normal"
+  },
+  {
+   "id": "s2d97fd9ab",
+   "company_id": "rosatom",
+   "date": "2026-08-07",
+   "kind": "sell",
+   "summary": "Росатом — обсуждается продажа: до 49% в проекте АЭС «Аккую» (Турция)",
+   "source": [
+    "URA.RU",
+    "https://ura.news/news/1053116249"
+   ],
+   "origin": "card",
+   "deal_id": "g2f22b1dc",
+   "strength": "strong"
+  },
+  {
+   "id": "sc4bae02e1",
+   "company_id": "g83461952",
+   "date": "2026-08-05",
+   "kind": "buy",
+   "summary": "NexTouch — обсуждается покупка: Квант",
+   "source": [
+    "TAdviser",
+    "https://www.tadviser.ru/a/589723"
+   ],
+   "origin": "card",
+   "deal_id": "g0431fc51",
+   "strength": "normal"
+  },
+  {
+   "id": "sc34216baf",
+   "company_id": "g274a2d42",
+   "date": "2026-08-05",
+   "kind": "for_sale",
+   "summary": "Квант — обсуждается продажа компании или доли; возможный покупатель — NexTouch",
+   "source": [
+    "TAdviser",
+    "https://www.tadviser.ru/a/589723"
+   ],
+   "origin": "card",
+   "deal_id": "g0431fc51",
+   "strength": "strong"
+  },
+  {
+   "id": "s8ecd3640b",
+   "company_id": "gf24e2a58",
+   "date": "2026-08-04",
+   "kind": "sell",
+   "summary": "Еврострой — обсуждается продажа: производственная база",
+   "source": [
+    "ura.news",
+    "https://ura.news/news/1053115470"
+   ],
+   "origin": "card",
+   "deal_id": "g8f7479bd",
+   "strength": "strong"
+  },
+  {
+   "id": "se672974e7",
+   "company_id": "arnest",
+   "date": "2026-07-27",
+   "kind": "buy",
+   "summary": "«Арнест» — обсуждается покупка: Рекитт Бенкизер",
+   "source": [
+    "Inc. Russia",
+    "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-arnest-reckitt",
+   "strength": "normal"
+  },
+  {
+   "id": "sd85ab6ef9",
+   "company_id": "g087c141d",
+   "date": "2026-07-27",
+   "kind": "for_sale",
+   "summary": "Рекитт Бенкизер — обсуждается продажа компании или доли; возможный покупатель — «Арнест»",
+   "source": [
+    "Inc. Russia",
+    "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-arnest-reckitt",
+   "strength": "strong"
+  },
+  {
+   "id": "s7f8846048",
+   "company_id": "g5ba54588",
+   "date": "2026-07-27",
+   "kind": "sell",
+   "summary": "Reckitt Benckiser — обсуждается продажа: Рекитт Бенкизер",
+   "source": [
+    "Inc. Russia",
+    "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-arnest-reckitt",
+   "strength": "strong"
+  },
+  {
+   "id": "sdf92970a2",
+   "company_id": "g936f9597",
+   "date": "2026-07-21",
+   "kind": "buy",
+   "summary": "Росхим — обсуждается покупка: Восточный нефтехимический терминал",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8829978"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-roshim-vnt",
+   "strength": "normal"
+  },
+  {
+   "id": "s74978e5c6",
+   "company_id": "g730c2829",
+   "date": "2026-07-21",
+   "kind": "for_sale",
+   "summary": "Восточный нефтехимический терминал — обсуждается продажа компании или доли; возможный покупатель — Росхим",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8829978"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-roshim-vnt",
+   "strength": "strong"
+  },
+  {
+   "id": "sec3b732d6",
+   "company_id": "gb933c2b2",
+   "date": "2026-07-15",
+   "kind": "buy",
+   "summary": "Sucden — обсуждается покупка: Милфудс",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8815172"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-sucden-poetti",
+   "strength": "normal"
+  },
+  {
+   "id": "sa1542f1b0",
+   "company_id": "gb9ead213",
+   "date": "2026-07-15",
+   "kind": "for_sale",
+   "summary": "Милфудс — обсуждается продажа компании или доли; возможный покупатель — Sucden",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8815172"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-sucden-poetti",
+   "strength": "strong"
+  },
+  {
+   "id": "s8ae5b0936",
+   "company_id": "g50c327a7",
+   "date": "2026-07-07",
+   "kind": "buy",
+   "summary": "ВИМ Сбережения — обсуждается покупка: деловой квартал «Поклонка плейс» на Поклонной горе",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/realty/articles/2026/07/06/1211350-bivshaya-struktura-vtb-mozhet-zakrit-odnu-iz-krupneishih-sdelok"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-vim-poklonka",
+   "strength": "normal"
+  },
+  {
+   "id": "s8919a8121",
+   "company_id": "gc6e1e175",
+   "date": "2026-07-03",
+   "kind": "for_sale",
+   "summary": "НСПК — обсуждается продажа компании или доли",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/finance/news/2026/09/24/1231443-vtb-nspk"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-nspk-privatization",
+   "strength": "strong"
+  },
+  {
+   "id": "sf31335cee",
+   "company_id": "g6184fe81",
+   "date": "2026-06-17",
+   "kind": "buy",
+   "summary": "Суточно.ру — обсуждается покупка: OneTwoTrip",
+   "source": [
+    "Известия",
+    "https://iz.ru/2116631/2026-06-17/sutochnoru-dogovarivaetsia-o-pokupke-onetwotrip"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-sutochno-onetwotrip",
+   "strength": "normal"
+  },
+  {
+   "id": "s4d3711a27",
+   "company_id": "g39002479",
+   "date": "2026-06-17",
+   "kind": "for_sale",
+   "summary": "OneTwoTrip — обсуждается продажа компании или доли; возможный покупатель — Суточно.ру",
+   "source": [
+    "Известия",
+    "https://iz.ru/2116631/2026-06-17/sutochnoru-dogovarivaetsia-o-pokupke-onetwotrip"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-sutochno-onetwotrip",
+   "strength": "strong"
+  },
+  {
+   "id": "se8abbe5a5",
+   "company_id": "ge96b97f1",
+   "date": "2026-06-15",
+   "kind": "for_sale",
+   "summary": "«Апрель» — обсуждается продажа компании или доли",
+   "source": [
+    "Известия",
+    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
+   ],
+   "origin": "card",
+   "deal_id": "g34b9af03",
+   "strength": "strong"
+  },
+  {
+   "id": "sd41aa8abf",
+   "company_id": "ge91f2256",
+   "date": "2026-06-15",
+   "kind": "sell",
+   "summary": "EKE — обсуждается сделка «EKE может продать проект San Gally Park в Санкт-Петербурге компании «Кама Капитал»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8765167"
+   ],
+   "origin": "card",
+   "deal_id": "g60c082cf",
+   "strength": "strong"
+  },
+  {
+   "id": "sbb7e119cf",
+   "company_id": "gcafc31dc",
+   "date": "2026-06-15",
+   "kind": "sell",
+   "summary": "ВТБ — обсуждается сделка «Wildberries и Russ (РВБ) может купить Росгосстрах у ВТБ»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8708228"
+   ],
+   "origin": "card",
+   "deal_id": "gd774ce6b",
+   "strength": "strong"
+  },
+  {
+   "id": "sb6b215dac",
+   "company_id": "g77f87dcc",
+   "date": "2026-06-15",
+   "kind": "buy",
+   "summary": "Инвестиционный холдинг «Кама Капитал» — обсуждается сделка «EKE может продать проект San Gally Park в Санкт-Петербурге компании «Кама Капитал»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8765167"
+   ],
+   "origin": "card",
+   "deal_id": "g60c082cf",
+   "strength": "normal"
+  },
+  {
+   "id": "sab0a6f102",
+   "company_id": "gfaa74309",
+   "date": "2026-06-15",
+   "kind": "sell",
+   "summary": "Вадим Анисимов — обсуждается продажа: «Апрель»",
+   "source": [
+    "Известия",
+    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
+   ],
+   "origin": "card",
+   "deal_id": "g34b9af03",
+   "strength": "strong"
+  },
+  {
+   "id": "s7268db2ea",
+   "company_id": "gddadfff8",
+   "date": "2026-06-15",
+   "kind": "buy",
+   "summary": "X5 Group — обсуждается сделка «X5 Group может войти в капитал сети пиццерий Zotman Pizza»",
+   "source": [
+    "Известия",
+    "https://iz.ru/2090778/denis-kuznetcov/x5-mozhet-stat-sovladelcem-zotman-pizza"
+   ],
+   "origin": "card",
+   "deal_id": "g489b4309-1",
+   "strength": "normal"
+  },
+  {
+   "id": "s7167ad25b",
+   "company_id": "ga5682bdc",
+   "date": "2026-06-15",
+   "kind": "ipo",
+   "summary": "Cosmos Hotel Group — обсуждается размещение акций",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1084328"
+   ],
+   "origin": "card",
+   "deal_id": "gcf05509a",
+   "strength": "strong"
+  },
+  {
+   "id": "s5d9a4a215",
+   "company_id": "g549ab474",
+   "date": "2026-06-15",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается сделка «Wildberries и Russ (РВБ) может купить Росгосстрах у ВТБ»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8708228"
+   ],
+   "origin": "card",
+   "deal_id": "gd774ce6b",
+   "strength": "normal"
+  },
+  {
+   "id": "s38175078a",
+   "company_id": "g3daf2d35",
+   "date": "2026-06-05",
+   "kind": "buy",
+   "summary": "Группа УКМ — обсуждается вложение в «АрхиТех ИИ»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8712628"
+   ],
+   "origin": "card",
+   "deal_id": "gecce5162",
+   "strength": "normal"
+  },
+  {
+   "id": "s73f597d61",
+   "company_id": "g6017899e",
+   "date": "2026-06",
+   "kind": "ipo",
+   "summary": "Цифровые привычки — акционеры подтвердили план выйти на биржу до конца 2027 года",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7296205"
+   ],
+   "origin": "card_text",
+   "deal_id": "gaa7602e7",
+   "strength": "strong"
+  },
+  {
+   "id": "se8e84decb",
+   "company_id": "gad00bf5e",
+   "date": "2026-05-25",
+   "kind": "buy",
+   "summary": "АО «Горизонт Индастриз» — обсуждается покупка: элеваторы и зерновой терминал в порту Азов",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8798465"
+   ],
+   "origin": "card",
+   "deal_id": "g304f9065",
+   "strength": "normal"
+  },
+  {
+   "id": "s168aa8a1a",
+   "company_id": "gad59ad7c",
+   "date": "2026-05-25",
+   "kind": "sell",
+   "summary": "Louis Dreyfus Company — обсуждается продажа: элеваторы и зерновой терминал в порту Азов",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8798465"
+   ],
+   "origin": "card",
+   "deal_id": "g304f9065",
+   "strength": "strong"
+  },
+  {
+   "id": "s1528e712d",
+   "company_id": "gf3ed02a1",
+   "date": "2026-05-23",
+   "kind": "for_sale",
+   "summary": "ПАО «Аэрофлот» — обсуждается продажа компании или доли",
+   "source": [
+    "Sostav.ru",
+    "https://www.sostav.ru/publication/minfin-sobiraetsya-minfin-planiruet-prodat-na-birzhe-do-23-76-aktsij-aeroflota-84026.html"
+   ],
+   "origin": "card",
+   "deal_id": "g3dcf441e",
+   "strength": "strong"
+  },
+  {
+   "id": "s802eb5480",
+   "company_id": "gf8c255bb",
+   "date": "2026-05-22",
+   "kind": "buy",
+   "summary": "Структуры Виктора Харитонина — обсуждается покупка: Reckitt (российский бизнес)",
+   "source": [
+    "Известия",
+    "https://iz.ru/2101186/denis-kuznetcov/na-proizvoditelya-durex-i-vanish-v-rossii-nashelsya-pretendent"
+   ],
+   "origin": "card",
+   "deal_id": "ge361bfa8",
+   "strength": "normal"
+  },
+  {
+   "id": "s74f77970c",
+   "company_id": "g6b0bd0a8",
+   "date": "2026-05-22",
+   "kind": "for_sale",
+   "summary": "Reckitt (российский бизнес) — обсуждается продажа компании или доли; возможный покупатель — Структуры Виктора Харитонина",
+   "source": [
+    "Известия",
+    "https://iz.ru/2101186/denis-kuznetcov/na-proizvoditelya-durex-i-vanish-v-rossii-nashelsya-pretendent"
+   ],
+   "origin": "card",
+   "deal_id": "ge361bfa8",
+   "strength": "strong"
+  },
+  {
+   "id": "s2cad7a9a8",
+   "company_id": "g80f34727",
+   "date": "2026-05-20",
+   "kind": "for_sale",
+   "summary": "СПИ-РВВК — обсуждается продажа компании или доли",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/russia/1090749"
+   ],
+   "origin": "card",
+   "deal_id": "ga402c91b",
+   "strength": "strong"
+  },
+  {
+   "id": "s255919c17",
+   "company_id": "gd09d2e9d",
+   "date": "2026-05-19",
+   "kind": "ipo",
+   "summary": "ООО «РОБО» — в перспективе рассматривает выход на биржу",
+   "source": [
+    "Forbes.ru",
+    "https://www.forbes.ru/tekhnologii/561064-kama-flow-investiruet-500-mln-rublej-v-platformu-servisnoj-robototehniki-robo"
+   ],
+   "origin": "card_text",
+   "deal_id": "g676504a3",
+   "strength": "strong"
+  },
+  {
+   "id": "sc875def2d",
+   "company_id": "g93505803",
+   "date": "2026-05-15",
+   "kind": "for_sale",
+   "summary": "Саратов-Птица — обсуждается продажа компании или доли; возможный покупатель — ГК «Таврос»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8655960"
+   ],
+   "origin": "card",
+   "deal_id": "g10053480",
+   "strength": "strong"
+  },
+  {
+   "id": "s8a318d115",
+   "company_id": "gcaccecb1",
+   "date": "2026-05-15",
+   "kind": "buy",
+   "summary": "ГК «Таврос» — обсуждается покупка: Саратов-Птица",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8655960"
+   ],
+   "origin": "card",
+   "deal_id": "g10053480",
+   "strength": "normal"
+  },
+  {
+   "id": "s08cb33f25",
+   "company_id": "g238791a2",
+   "date": "2026-05-13",
+   "kind": "ipo",
+   "summary": "Х-Скаут — обсуждается размещение акций",
+   "source": [
+    "Агентство Бизнес Новостей (ABN)",
+    "https://abn.agency/2026/05/13/proizvoditel-premialnogo-myasa-hskaut-zapuskaet-investraund-dlya-pokupki-kombinata-v-lenoblasti/"
+   ],
+   "origin": "card",
+   "deal_id": "g4feb5ec3",
+   "strength": "strong"
+  },
+  {
+   "id": "saa85172d9",
+   "company_id": "g8f7a9b83",
+   "date": "2026-05-07",
+   "kind": "for_sale",
+   "summary": "ГК «Русский холод» — обсуждается продажа компании или доли; возможный покупатель — А1 (инвестиционная компания)",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/finances/07/05/2026/69fb6de89a79477d5c63a07c"
+   ],
+   "origin": "card",
+   "deal_id": "g36bc7831",
+   "strength": "strong"
+  },
+  {
+   "id": "s97cf9ea7a",
+   "company_id": "gfc474ee0",
+   "date": "2026-05-07",
+   "kind": "buy",
+   "summary": "А1 (инвестиционная компания) — обсуждается покупка: ГК «Русский холод»",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/finances/07/05/2026/69fb6de89a79477d5c63a07c"
+   ],
+   "origin": "card",
+   "deal_id": "g36bc7831",
+   "strength": "normal"
+  },
+  {
+   "id": "s85b4b05ed",
+   "company_id": "g431a713e",
+   "date": "2026-05",
+   "kind": "investor",
+   "summary": "ПАО «Группа Астра» — руководство подтвердило, что готово привлечь крупного стратегического инвестора",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/696b9bad9a794713f85d7afd"
+   ],
+   "origin": "card_text",
+   "deal_id": "g9d9e7ab6",
+   "strength": "normal"
+  },
+  {
+   "id": "s512ff4cd4",
+   "company_id": "g017c7f83",
+   "date": "2026-04-19",
+   "kind": "for_sale",
+   "summary": "ООО «Урбан Кофикс Раша» — обсуждается продажа компании или доли; возможный покупатель — Фонд «Бумеранг капитал»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8604447"
+   ],
+   "origin": "card",
+   "deal_id": "gd1b1a94e",
+   "strength": "strong"
+  },
+  {
+   "id": "s336d308a4",
+   "company_id": "g81045bed",
+   "date": "2026-04-19",
+   "kind": "buy",
+   "summary": "Фонд «Бумеранг капитал» — обсуждается покупка: ООО «Урбан Кофикс Раша»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8604447"
+   ],
+   "origin": "card",
+   "deal_id": "gd1b1a94e",
+   "strength": "normal"
+  },
+  {
+   "id": "sc2946bb12",
+   "company_id": "g3e551f6e",
+   "date": "2026-04-15",
+   "kind": "buy",
+   "summary": "АО «Новый старт» — обсуждается сделка «Газпром продал спутниковый завод Gazprom SPKA компании «Новый старт»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8689589"
+   ],
+   "origin": "card",
+   "deal_id": "g029b7531",
+   "strength": "normal"
+  },
+  {
+   "id": "s007655d91",
+   "company_id": "gddadfff8",
+   "date": "2026-03-20",
+   "kind": "sell",
+   "summary": "X5 Group — обсуждается продажа: казначейский пакет акций X5",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/investments/news/2026/03/20/1184359-x5-vedet-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g489b4309-2",
+   "strength": "strong"
+  },
+  {
+   "id": "s0301b3b0c",
+   "company_id": "ga75a5f6a",
+   "date": "2026-03-18",
+   "kind": "ipo",
+   "summary": "АО «Группа 1С» — обсуждается размещение акций",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/69b8201b9a79474c5883fdfe"
+   ],
+   "origin": "card",
+   "deal_id": "g352523e0",
+   "strength": "strong"
+  },
+  {
+   "id": "sbf44e596e",
+   "company_id": "g17f3d2f6",
+   "date": "2026-03-13",
+   "kind": "for_sale",
+   "summary": "АО «Ямалзолото» — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8499919"
+   ],
+   "origin": "card",
+   "deal_id": "ga5336065",
+   "strength": "strong"
+  },
+  {
+   "id": "s97fea02d7",
+   "company_id": "g6c733a7f",
+   "date": "2026-02-20",
+   "kind": "buy",
+   "summary": "Supplement Group — обсуждается покупка: Лейблпак",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8443530?from=main"
+   ],
+   "origin": "card",
+   "deal_id": "g8dfb3aa0",
+   "strength": "normal"
+  },
+  {
+   "id": "s1eef210b5",
+   "company_id": "g49dc2069",
+   "date": "2026-02-20",
+   "kind": "for_sale",
+   "summary": "Лейблпак — обсуждается продажа компании или доли; возможный покупатель — Supplement Group",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8443530?from=main"
+   ],
+   "origin": "card",
+   "deal_id": "g8dfb3aa0",
+   "strength": "strong"
+  },
+  {
+   "id": "sc95ba5748",
+   "company_id": "g5c8c6494",
+   "date": "2026-01-29",
+   "kind": "sell",
+   "summary": "ЛУКОЙЛ — обсуждается продажа: LUKOIL International GmbH",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1070027"
+   ],
+   "origin": "card",
+   "deal_id": "g20d4cc38",
+   "strength": "strong"
+  },
+  {
+   "id": "sa640ffc8c",
+   "company_id": "g6b0b26d9",
+   "date": "2026-01-29",
+   "kind": "for_sale",
+   "summary": "LUKOIL International GmbH — обсуждается продажа компании или доли; возможный покупатель — Carlyle",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1070027"
+   ],
+   "origin": "card",
+   "deal_id": "g20d4cc38",
+   "strength": "strong"
+  },
+  {
+   "id": "s50662fa18",
+   "company_id": "g41dae07f",
+   "date": "2026-01-29",
+   "kind": "buy",
+   "summary": "Carlyle — обсуждается покупка: LUKOIL International GmbH",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1070027"
+   ],
+   "origin": "card",
+   "deal_id": "g20d4cc38",
+   "strength": "normal"
+  },
+  {
+   "id": "s9d3e8f35a",
+   "company_id": "gbe2e52e2",
+   "date": "2026-01-23",
+   "kind": "ipo",
+   "summary": "Just AI (ООО «Маинд Крафт») — готовит предварительное размещение акций (pre-IPO) в 2026 году",
+   "source": [
+    "Агентство Бизнес Новостей",
+    "https://abn.agency/2026/01/27/venchurnoe-podrazdelenie-lanita-stalo-minoritarnym-akczionerom-just-ai/"
+   ],
+   "origin": "card_text",
+   "deal_id": "g14fd5ba9",
+   "strength": "strong"
+  },
+  {
+   "id": "s2d96cb92e",
+   "company_id": "g23deb0cc",
+   "date": "2026-01-22",
+   "kind": "for_sale",
+   "summary": "Гулливер — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8364093?from=top_main_4"
+   ],
+   "origin": "card",
+   "deal_id": "ga971155a",
+   "strength": "strong"
+  },
+  {
+   "id": "sdcd46901b",
+   "company_id": "gaf243db4",
+   "date": "2026-01-20",
+   "kind": "buy",
+   "summary": "Tutu.ru — обсуждается покупка: Trivio",
+   "source": [
+    "Известия",
+    "https://iz.ru/2027534/2026-01-20/tutu-vedet-peregovory-o-pokupke-servisa-delovykh-poezdok-trivio-za-8-mlrd-rublei"
+   ],
+   "origin": "card",
+   "deal_id": "gd2696c44",
+   "strength": "normal"
+  },
+  {
+   "id": "s9a9a7140f",
+   "company_id": "g5615fb35",
+   "date": "2026-01-20",
+   "kind": "for_sale",
+   "summary": "Trivio — обсуждается продажа компании или доли; возможный покупатель — Tutu.ru",
+   "source": [
+    "Известия",
+    "https://iz.ru/2027534/2026-01-20/tutu-vedet-peregovory-o-pokupke-servisa-delovykh-poezdok-trivio-za-8-mlrd-rublei"
+   ],
+   "origin": "card",
+   "deal_id": "gd2696c44",
+   "strength": "strong"
+  },
+  {
+   "id": "seb9edfbd9",
+   "company_id": "gb9402237",
+   "date": "2026-01-19",
+   "kind": "for_sale",
+   "summary": "NIS — обсуждается продажа компании или доли; возможный покупатель — MOL",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8362366"
+   ],
+   "origin": "card",
+   "deal_id": "gb6b371c3",
+   "strength": "strong"
+  },
+  {
+   "id": "sc826970ea",
+   "company_id": "g5c2009c6",
+   "date": "2026-01-19",
+   "kind": "buy",
+   "summary": "ГК «Филанко» — собирается купить ещё несколько активов связи в Московском регионе (заявление «Ситителекома», куда сводятся купленные операторы)",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2026-01-20_v_sostav_sititelekom_voshli"
+   ],
+   "origin": "card_text",
+   "deal_id": "gf5c8e14e",
+   "strength": "normal"
+  },
+  {
+   "id": "sba3e9e1c2",
+   "company_id": "g278af691",
+   "date": "2026-01-19",
+   "kind": "buy",
+   "summary": "MOL — обсуждается покупка: NIS",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8362366"
+   ],
+   "origin": "card",
+   "deal_id": "gb6b371c3",
+   "strength": "normal"
+  },
+  {
+   "id": "s2f6c90cf7",
+   "company_id": "g431a713e",
+   "date": "2026-01-19",
+   "kind": "investor",
+   "summary": "ПАО «Группа Астра» — обсуждается вход инвестора в капитал",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/696b9bad9a794713f85d7afd"
+   ],
+   "origin": "card",
+   "deal_id": "g9d9e7ab6",
+   "strength": "normal"
+  },
+  {
+   "id": "sa4f9bc456",
+   "company_id": "gc904414e",
+   "date": "2026-01-16",
+   "kind": "for_sale",
+   "summary": "Федеральная грузовая компания (ФГК) — выставлена на торги; продавец — РЖД",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8342449"
+   ],
+   "origin": "card",
+   "deal_id": "ge8f45161",
+   "strength": "strong"
+  },
+  {
+   "id": "s52354b96c",
+   "company_id": "g4a98b303",
+   "date": "2025-12-31",
+   "kind": "for_sale",
+   "summary": "российские активы Rockwool — обсуждается продажа компании или доли; возможный покупатель — АО «Развитие строительных активов»",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
+   ],
+   "origin": "card",
+   "deal_id": "g8a67edea",
+   "strength": "strong"
+  },
+  {
+   "id": "s2553140f3",
+   "company_id": "g2508428e",
+   "date": "2025-12-31",
+   "kind": "buy",
+   "summary": "АО «Развитие строительных активов» — обсуждается покупка: российские активы Rockwool",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
+   ],
+   "origin": "card",
+   "deal_id": "g8a67edea",
+   "strength": "normal"
+  },
+  {
+   "id": "sdb3d2b762",
+   "company_id": "yandex",
+   "date": "2025-12-23",
+   "kind": "buy",
+   "summary": "Яндекс — обсуждается покупка: платформа DIKIDI",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2025-12-23_yandeks_pokupaet_dikidi_"
+   ],
+   "origin": "card",
+   "deal_id": "g596c8144",
+   "strength": "normal"
+  },
+  {
+   "id": "s5d0e2d827",
+   "company_id": "g68dceb64",
+   "date": "2025-12-23",
+   "kind": "for_sale",
+   "summary": "платформа DIKIDI — обсуждается продажа компании или доли; возможный покупатель — Яндекс",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2025-12-23_yandeks_pokupaet_dikidi_"
+   ],
+   "origin": "card",
+   "deal_id": "g596c8144",
+   "strength": "strong"
+  },
+  {
+   "id": "scc55b0fbe",
+   "company_id": "g8ec7e7bf",
+   "date": "2025-12-18",
+   "kind": "sell",
+   "summary": "РЖД — обсуждается продажа: Бизнес-центр Moscow Towers",
+   "source": [
+    "Reuters",
+    "https://www.reuters.com/business/finance/russia-orders-russian-railways-sell-24-billion-moscow-towers-pay-debts-three-2025-12-18/"
+   ],
+   "origin": "card",
+   "deal_id": "gda61c5b8",
+   "strength": "strong"
+  },
+  {
+   "id": "s9df81d45a",
+   "company_id": "g75ffe423",
+   "date": "2025-12-16",
+   "kind": "sell",
+   "summary": "Nordgold — обсуждается продажа: рудники Bissa и Bouly",
+   "source": [
+    "Известия",
+    "https://iz.ru/2008972/2025-12-16/nordgold-mozhet-prodat-zolotodobyvaiushchie-aktivy-v-burkina-faso"
+   ],
+   "origin": "card",
+   "deal_id": "g948e18e1",
+   "strength": "strong"
+  },
+  {
+   "id": "s026113e2b",
+   "company_id": "g2f93d858",
+   "date": "2025-12-02",
+   "kind": "sell",
+   "summary": "Норильский никель — обсуждается продажа: проект добычи золота Быстринско-Ширинское",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/12/02/1159739-nornikel-planiruet-prodat-proekt-po-dobiche-zolota"
+   ],
+   "origin": "card",
+   "deal_id": "g352131ac",
+   "strength": "strong"
+  },
+  {
+   "id": "sf662081c4",
+   "company_id": "gcafc31dc",
+   "date": "2025-12-01",
+   "kind": "sell",
+   "summary": "ВТБ — обсуждается сделка «Банк решил распродать сельхозактивы по отдельности»",
+   "source": [
+    "Reuters",
+    "https://www.reuters.com/sustainability/boards-policy-regulation/russian-bank-vtb-create-agriculture-giant-nationalised-assets-ceo-says-2025-12-01/"
+   ],
+   "origin": "card",
+   "deal_id": "c7403d4db",
+   "strength": "strong"
+  },
+  {
+   "id": "sc4308194c",
+   "company_id": "gf7340794",
+   "date": "2025-12-01",
+   "kind": "investor",
+   "summary": "Balchug Capital — не исключает привлечения партнёра (продавать активы не собирается)",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/10/12/2025/693849079a79472b89f59814"
+   ],
+   "origin": "card_text",
+   "deal_id": "g934ee51b",
+   "strength": "normal"
+  },
+  {
+   "id": "s81ce08c0d",
+   "company_id": "gba03a733",
+   "date": "2025-11-23",
+   "kind": "buy",
+   "summary": "IHC (International Holding Company) — обсуждается покупка: иностранные активы ЛУКОЙЛа",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/23/11/2025/6922415b9a7947690b7d4c30"
+   ],
+   "origin": "card",
+   "deal_id": "g75920ee3",
+   "strength": "normal"
+  },
+  {
+   "id": "s7b8330f77",
+   "company_id": "gc0f11fd7",
+   "date": "2025-11-20",
+   "kind": "sell",
+   "summary": "ПАО «Газпром» — обсуждается сделка «Газпром продает Газпром нефтехим Салават холдингу Росхим»",
+   "source": [
+    "Известия",
+    "https://iz.ru/1993424/2025-11-20/gazprom-prodaet-krupnyi-neftekhimkompleks-roskhimu"
+   ],
+   "origin": "card",
+   "deal_id": "g031152d0",
+   "strength": "strong"
+  },
+  {
+   "id": "s0c8f3734f",
+   "company_id": "g936f9597",
+   "date": "2025-11-20",
+   "kind": "buy",
+   "summary": "Росхим — обсуждается сделка «Газпром продает Газпром нефтехим Салават холдингу Росхим»",
+   "source": [
+    "Известия",
+    "https://iz.ru/1993424/2025-11-20/gazprom-prodaet-krupnyi-neftekhimkompleks-roskhimu"
+   ],
+   "origin": "card",
+   "deal_id": "g031152d0",
+   "strength": "normal"
+  },
+  {
+   "id": "s749b9dda7",
+   "company_id": "gfdac4593",
+   "date": "2025-11-17",
+   "kind": "buy",
+   "summary": "Chevron — обсуждается покупка: часть зарубежных активов Лукойла",
+   "source": [
+    "Reuters",
+    "https://www.reuters.com/business/energy/chevron-joins-race-explore-potential-purchase-lukoil-assets-sources-say-2025-11-17/"
+   ],
+   "origin": "card",
+   "deal_id": "g84fd8194",
+   "strength": "normal"
+  },
+  {
+   "id": "s733de8e2b",
+   "company_id": "ge9c9390f",
+   "date": "2025-11-16",
+   "kind": "for_sale",
+   "summary": "АО «Страховой дом ВСК» — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8209968"
+   ],
+   "origin": "card",
+   "deal_id": "g27543cdc",
+   "strength": "strong"
+  },
+  {
+   "id": "sbc3333687",
+   "company_id": "gd853e266",
+   "date": "2025-10-27",
+   "kind": "for_sale",
+   "summary": "Верный — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8158706"
+   ],
+   "origin": "card",
+   "deal_id": "g2534df99",
+   "strength": "strong"
+  },
+  {
+   "id": "s119c8a905",
+   "company_id": "g00f14033",
+   "date": "2025-09-11",
+   "kind": "strategy",
+   "summary": "Ростелеком — ищет рост через покупки и инвестиции в технологические компании",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1046920"
+   ],
+   "origin": "card_text",
+   "deal_id": "gadcc1f58",
+   "strength": "normal"
+  },
+  {
+   "id": "sc6347cf41",
+   "company_id": "gce0ea012",
+   "date": "2025-09-10",
+   "kind": "for_sale",
+   "summary": "Форштадт — обсуждается продажа компании или доли; возможный покупатель — Финансовая группа БКС",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
+   ],
+   "origin": "card",
+   "deal_id": "g7299791f",
+   "strength": "strong"
+  },
+  {
+   "id": "s881d93a42",
+   "company_id": "g743a138b",
+   "date": "2025-09-10",
+   "kind": "buy",
+   "summary": "Финансовая группа БКС — обсуждается покупка: Форштадт",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
+   ],
+   "origin": "card",
+   "deal_id": "g7299791f",
+   "strength": "normal"
+  },
+  {
+   "id": "s7b96242e5",
+   "company_id": "g729ef6c5",
+   "date": "2025-09-09",
+   "kind": "for_sale",
+   "summary": "ГК «Медскан» — обсуждается продажа компании или доли; возможный покупатель — Структуры Виктора Харитонина",
+   "source": [
+    "Известия",
+    "https://iz.ru/1950983/denis-kuznetcov/klinicheskij-sluchaj-farmstandart-mozhet-vyjti-na-rynok-meduslug"
+   ],
+   "origin": "card",
+   "deal_id": "g7b4be1c4",
+   "strength": "strong"
+  },
+  {
+   "id": "s48746eb62",
+   "company_id": "gf8c255bb",
+   "date": "2025-09-09",
+   "kind": "buy",
+   "summary": "Структуры Виктора Харитонина — обсуждается покупка: ГК «Медскан»",
+   "source": [
+    "Известия",
+    "https://iz.ru/1950983/denis-kuznetcov/klinicheskij-sluchaj-farmstandart-mozhet-vyjti-na-rynok-meduslug"
+   ],
+   "origin": "card",
+   "deal_id": "g7b4be1c4",
+   "strength": "normal"
+  },
+  {
+   "id": "s4570ba945",
+   "company_id": "g66c1d4b8",
+   "date": "2025-09-09",
+   "kind": "sell",
+   "summary": "Евгений Туголуков — обсуждается продажа: ГК «Медскан»",
+   "source": [
+    "Известия",
+    "https://iz.ru/1950983/denis-kuznetcov/klinicheskij-sluchaj-farmstandart-mozhet-vyjti-na-rynok-meduslug"
+   ],
+   "origin": "card",
+   "deal_id": "g7b4be1c4",
+   "strength": "strong"
+  },
+  {
+   "id": "sdaf874f56",
+   "company_id": "g630c3361-target",
+   "date": "2025-09-01",
+   "kind": "for_sale",
+   "summary": "ООО «Нетрика Медицина» — обсуждается продажа компании или доли; возможный покупатель — ГК «Медскан»",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
+   ],
+   "origin": "card",
+   "deal_id": "g630c3361",
+   "strength": "strong"
+  },
+  {
+   "id": "s6f700de9f",
+   "company_id": "g729ef6c5",
+   "date": "2025-09-01",
+   "kind": "buy",
+   "summary": "ГК «Медскан» — обсуждается покупка: ООО «Нетрика Медицина»",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
+   ],
+   "origin": "card",
+   "deal_id": "g630c3361",
+   "strength": "normal"
+  },
+  {
+   "id": "s63a8d4b66",
+   "company_id": "g729ef6c5",
+   "date": "2025-09-01",
+   "kind": "investor",
+   "summary": "ГК «Медскан» — обсуждается вход инвестора в капитал",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
+   ],
+   "origin": "card",
+   "deal_id": "g2197ed53",
+   "strength": "normal"
+  },
+  {
+   "id": "se3aa8a582",
+   "company_id": "g63ba8735",
+   "date": "2025-07-29",
+   "kind": "sell",
+   "summary": "Агрохолдинг «Степь» — обсуждается сделка «Агрохолдинг «Степь» продает портовые активы в Азове и Волгодонске»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7923855"
+   ],
+   "origin": "card",
+   "deal_id": "g5a22a31a",
+   "strength": "strong"
+  },
+  {
+   "id": "sf62b67df8",
+   "company_id": "gd19e26bf",
+   "date": "2025-06-06",
+   "kind": "sell",
+   "summary": "Магнит — обсуждается сделка ««Лента» выкупает крупноформатные магазины «Магнит»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7777609"
+   ],
+   "origin": "card",
+   "deal_id": "g829e5f99",
+   "strength": "strong"
+  },
+  {
+   "id": "safed8386f",
+   "company_id": "gcca31da7",
+   "date": "2025-06-06",
+   "kind": "buy",
+   "summary": "Группа Лента — обсуждается сделка ««Лента» выкупает крупноформатные магазины «Магнит»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7777609"
+   ],
+   "origin": "card",
+   "deal_id": "g829e5f99",
+   "strength": "normal"
+  },
+  {
+   "id": "s12c9f8b96",
+   "company_id": "g3b0ee76b",
+   "date": "2025-06-02",
+   "kind": "investor",
+   "summary": "ИнвойсКафе — обсуждается вход инвестора в капитал",
+   "source": [
+    "Инк. (incrussia.ru)",
+    "https://incrussia.ru/news/finteh-platforma-invojskafe-obyavila-o-privlechenii-investitsij/"
+   ],
+   "origin": "card",
+   "deal_id": "gdab53817",
+   "strength": "normal"
+  },
+  {
+   "id": "s1ad46c4e2",
+   "company_id": "gac203c64",
+   "date": "2025-05-01",
+   "kind": "ipo",
+   "summary": "ГК «Марэкс» — обсуждается размещение акций",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2025/01/29/verojatnij-vladelec-aktivov"
+   ],
+   "origin": "card",
+   "deal_id": "g2a3a597b",
+   "strength": "strong"
+  },
+  {
+   "id": "sfe0bdc609",
+   "company_id": "ge0a3081f",
+   "date": "2025-04-16",
+   "kind": "buy",
+   "summary": "SL Soft — обсуждается покупка: ООО «АПЭРБОТ»",
+   "source": [
+    "Softline.ru",
+    "https://softline.ru/about/news/gk-softline-usilivaet-portfel-ii-resheniy-i-planiruet-priobretenie-platformy-dreamdocs"
+   ],
+   "origin": "card",
+   "deal_id": "gf8dfe9c4",
+   "strength": "normal"
+  },
+  {
+   "id": "s8a071c924",
+   "company_id": "g4b9c3a12",
+   "date": "2025-04-16",
+   "kind": "for_sale",
+   "summary": "ООО «АПЭРБОТ» — обсуждается продажа компании или доли; возможный покупатель — SL Soft",
+   "source": [
+    "Softline.ru",
+    "https://softline.ru/about/news/gk-softline-usilivaet-portfel-ii-resheniy-i-planiruet-priobretenie-platformy-dreamdocs"
+   ],
+   "origin": "card",
+   "deal_id": "gf8dfe9c4",
+   "strength": "strong"
+  },
+  {
+   "id": "sfa07f3331",
+   "company_id": "g3e551f6e",
+   "date": "2025-03-03",
+   "kind": "buy",
+   "summary": "АО «Новый старт» — обсуждается сделка «Газпром может продать долю в производстве космических аппаратов структуре «Новый старт»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7550441"
+   ],
+   "origin": "card",
+   "deal_id": "c07bedf76",
+   "strength": "normal"
+  },
+  {
+   "id": "sf6e037f5f",
+   "company_id": "gc0f11fd7",
+   "date": "2025-03-03",
+   "kind": "sell",
+   "summary": "ПАО «Газпром» — обсуждается сделка «Газпром может продать долю в производстве космических аппаратов структуре «Новый старт»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7550441"
+   ],
+   "origin": "card",
+   "deal_id": "c07bedf76",
+   "strength": "strong"
+  },
+  {
+   "id": "s88e0b732b",
+   "company_id": "ga3bc7294",
+   "date": "2025-03-01",
+   "kind": "for_sale",
+   "summary": "Ozon — обсуждается продажа компании или доли; возможный покупатель — Сбербанк",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "strong"
+  },
+  {
+   "id": "s7e92097f5",
+   "company_id": "gc2792a44",
+   "date": "2025-03-01",
+   "kind": "sell",
+   "summary": "АФК «Система» — обсуждается продажа: Ozon",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "strong"
+  },
+  {
+   "id": "s4d079acc3",
+   "company_id": "g130b6d10",
+   "date": "2025-03-01",
+   "kind": "buy",
+   "summary": "ГК Росспиртпром — обсуждается покупка: АО «Башспирт»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8799919"
+   ],
+   "origin": "card",
+   "deal_id": "g0748e794",
+   "strength": "normal"
+  },
+  {
+   "id": "s3dc24349b",
+   "company_id": "g28ff15bb",
+   "date": "2025-03-01",
+   "kind": "buy",
+   "summary": "Сбербанк — обсуждается покупка: Ozon",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "normal"
+  },
+  {
+   "id": "s2249127a5",
+   "company_id": "g41dbc6de",
+   "date": "2025-03-01",
+   "kind": "for_sale",
+   "summary": "АО «Башспирт» — обсуждается продажа компании или доли; возможный покупатель — ГК Росспиртпром",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8799919"
+   ],
+   "origin": "card",
+   "deal_id": "g0748e794",
+   "strength": "strong"
+  },
+  {
+   "id": "sfba80316e",
+   "company_id": "gcafc31dc",
+   "date": "2025-02-01",
+   "kind": "sell",
+   "summary": "ВТБ — обсуждается продажа: Росгосстрах",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7677651"
+   ],
+   "origin": "card",
+   "deal_id": "g09cee885",
+   "strength": "strong"
+  },
+  {
+   "id": "s8d3b738b5",
+   "company_id": "g676ca6df",
+   "date": "2025-02-01",
+   "kind": "for_sale",
+   "summary": "Росгосстрах — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7677651"
+   ],
+   "origin": "card",
+   "deal_id": "g09cee885",
+   "strength": "strong"
+  },
+  {
+   "id": "s47aaa59df",
+   "company_id": "g4949ccfd",
+   "date": "2024-12-26",
+   "kind": "buy",
+   "summary": "«РБФ ритейл» — обсуждается сделка «Менеджмент выкупает часть бизнеса гипермаркетов «О'Кей» у O'Key Group»",
+   "source": [
+    "Коммерсантъ — «Сделки года»",
+    "https://www.kommersant.ru/doc/8077927"
+   ],
+   "origin": "card",
+   "deal_id": "ccdd90216",
+   "strength": "normal"
+  }
+ ]
+}

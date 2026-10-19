@@ -1923,3 +1923,116 @@ def test_polish_on_all_saved_answers_of_all_checks():
 def _shows_part_without_feed(ret):
     import re as _re
     return main._shows_part(ret) and not _re.search(r"\]\(#/deals[)?]", ret.answer or "")
+
+
+# --- Признаки будущих сделок: маршрут ассистента (19 октября 2026) ----------
+
+_SIGNAL_ROWS = [
+    {"id": "t1", "company_id": "gcafc31dc", "object_id": None, "date": "2026-09-11", "kind": "sell",
+     "summary": "ВТБ — возможная продажа: Росгосстрах", "source": ["Известия", "https://iz.ru/test"],
+     "origin": "news", "strength": "strong"},
+    {"id": "t2", "company_id": "g63ba8735", "date": "2025-07-29", "kind": "sell",
+     "summary": "Агрохолдинг «Степь» — обсуждается сделка «Тест»", "source": ["Коммерсантъ", "https://kommersant.ru/t"],
+     "origin": "card"},
+]
+
+
+@pytest.mark.parametrize("q", [
+    "Будут ли у ВТБ сделки?", "Кто сейчас продаёт агроактивы?", "У кого возможна M&A-активность в ритейле?",
+    "Планирует ли Яндекс новые покупки?", "Кто готовится к IPO?", "Кто ищет инвестора?",
+    "Какие компании могут продать бизнес в этом году?", "Есть ли признаки сделок у Магнита?",
+])
+def test_signal_questions_are_recognised(q):
+    import assistant_signals
+    assert assistant_signals.is_signal_question(q), q
+
+
+@pytest.mark.parametrize("q", [
+    "Кто купил Азбуку вкуса?", "Кто выставил на торги Рижский вокзал?", "Какие сделки обсуждаются в ритейле?",
+    "Какие сделки были у ВТБ в 2025 году?", "Кто продал Ситибанк?", "Будет ли одобрена сделка Ленты и Марии-Ра?",
+    "Готовлюсь к встрече с компанией «ВТБ». Будут ли у неё сделки?",
+])
+def test_ordinary_questions_do_not_take_the_signal_route(q):
+    import assistant_signals
+    assert not assistant_signals.is_signal_question(q), q
+
+
+def test_the_hundred_question_set_keeps_its_routes():
+    """Набор из ста вопросов писался до маршрута признаков — ни один из них
+    не должен в него уйти; группа «signals» — вся уходит."""
+    import sys as _sys
+    _sys.path.insert(0, "pipeline/assistant_eval")
+    import questions
+    import assistant_signals
+    assert not [q["n"] for q in questions.QUESTIONS if assistant_signals.is_signal_question(q["question"])]
+    assert 6 <= len(questions.SIGNALS) <= 8
+    assert all(assistant_signals.is_signal_question(q["question"]) for q in questions.SIGNALS)
+
+
+def test_signal_answer_has_three_blocks_with_dates_and_links():
+    import assistant_retrieval
+    import assistant_signals
+    from datetime import date as _date
+    idx = assistant_retrieval.get_index()
+    ret = assistant_signals.answer("Будут ли у ВТБ сделки?", idx=idx, rows=_SIGNAL_ROWS, today=_date(2026, 10, 19))
+    assert ret.intent == "signals" and ret.company_id == "gcafc31dc"
+    text = ret.answer
+    assert text.index("**Признаки**") < text.index("**Что это может значить**") < text.index("**Кто подходит**")
+    assert "- 11 сентября 2026 — ВТБ — возможная продажа: Росгосстрах ([Известия](https://iz.ru/test))" in text
+    assert "есть основания ожидать продажи актива или доли" in text and "не прогноз" in text
+    meaning = text.split("**Что это может значить**", 1)[1].split("**Кто подходит**", 1)[0]
+    assert "%" not in meaning and "вероятн" not in text.lower()
+    # «Кто подходит» — только из базы, ссылками на компании и сделки
+    tail = text.split("**Кто подходит**", 1)[1]
+    assert "](#/companies/" in tail and "](#/deal/" in tail
+    for m in __import__("re").finditer(r"\(#/deal/([^)]+)\)", text):
+        assert m.group(1) in idx.by_id, m.group(1)
+
+
+def test_signal_answer_says_plainly_when_there_are_none():
+    import assistant_retrieval
+    import assistant_signals
+    idx = assistant_retrieval.get_index()
+    ret = assistant_signals.answer("Будут ли у этой компании сделки?", "company", "gda7d982b", idx=idx, rows=[])
+    assert "Явных признаков будущих сделок у [Softline](#/companies/gda7d982b) в наших данных нет" in ret.answer
+    assert "**Кто подходит**" not in ret.answer
+    ret = assistant_signals.answer("Будут ли у компании «Ромашка-Ультра» сделки?", idx=idx, rows=_SIGNAL_ROWS)
+    assert "не нашёл" in ret.answer and "ВТБ" not in ret.answer, "чужие признаки — не ответ о неизвестной компании"
+
+
+def test_signal_market_answer_filters_by_industry_and_kind():
+    import assistant_retrieval
+    import assistant_signals
+    idx = assistant_retrieval.get_index()
+    ret = assistant_signals.answer("Кто сейчас продаёт агроактивы?", idx=idx, rows=_SIGNAL_ROWS)
+    assert ret.subject == "Агро"
+    assert "Агрохолдинг «Степь»" in ret.answer and "Росгосстрах" not in ret.answer
+    assert "Недавно покупали в отрасли «Агро»" in ret.answer
+
+
+def test_signal_route_goes_first_in_retrieve_and_uses_the_page():
+    import assistant_retrieval
+    ret = assistant_retrieval.retrieve("Будут ли у этой компании сделки? Разбери признаки.", "company", "gcafc31dc")
+    assert ret.intent == "signals" and ret.subject == "ВТБ"
+
+
+def test_signal_prompt_rules_and_forecast_cleanup():
+    """Модель получает SIGNAL_RULES и профиль компании; после модели фраза с
+    вероятностью, «скорее всего» или процентом, которого нет в сводке,
+    снимается, а «это не прогноз» и доля из сводки остаются."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    ret = assistant_retrieval.retrieve("Будут ли у ВТБ сделки?", None, None, idx)
+    prep = main._prepare_ask("Будут ли у ВТБ сделки?", ret, "base", "", None, None, idx)
+    assert main.SIGNAL_RULES in prep.system and "ПРОФИЛЬ КОМПАНИИ" in prep.user_msg
+    assert "никаких процентов, вероятностей" in prep.system.lower()
+    assert "процентов, вероятностей" in main.COMPLETENESS_RULES
+    out = main._polish_answer(
+        "**Что это может значить**\n- Есть основания ожидать продажи. Вероятность сделки — 70%.\n"
+        "- Скорее всего, покупателем станет РВБ.\n- Продаётся 51% актива.\n"
+        "- Это не прогноз: заявление не всегда заканчивается сделкой.",
+        idx, ret=ret, source="СВОДКА: продажа 51% актива")
+    assert "70%" not in out and "Скорее всего" not in out
+    assert "Есть основания ожидать продажи." in out and "51%" in out and "не прогноз" in out
+    # точная сводка сама проходит чистку без правок
+    assert main._polish_answer(ret.answer, idx, ret=ret, source=prep.user_msg).strip() == ret.answer.strip()

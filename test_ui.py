@@ -1067,11 +1067,15 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         # отдаёт текст ПОСЛЕ CSS-преобразований — сравниваем без учёта регистра.
         # «EV» на карточке больше не обещается: считается цена пакета к выручке,
         # без долга — и подпись говорит это прямо (третий разбор рецензента)
-        assert "цена ÷ выручка" in body.lower() and "ev/" not in body.lower()
-        assert "×2" in body
-        assert "2023" in body
-        assert "цена ÷ операционная прибыль" in body.lower()
-        assert "×10" in body  # 1000 млн / 100 млн
+        # С 19 октября 2026 мультипликаторы сделки живут в отдельном блоке
+        # «Мультипликаторы сделки — оценка» (#deal-mult, тот же расчёт, что в
+        # таблице «Аналитики», — test_sector_multiples_table_on_analytics_and_deal_card);
+        # финансовый контекст показывает отчётность и не повторяет их.
+        assert "2023" in body and "выручка" in body.lower()
+        assert "цена ÷ выручка" not in body.lower() and "цена ÷ операционная прибыль" not in body.lower()
+        # клиентская копия расчёта по-прежнему жива и считает то же самое
+        line = pg.evaluate("dealMultipleLine(%s, 'zzz-mult-target', 500000000, 2023)" % json.dumps(deal))
+        assert line and line["multiple"] == 2
         assert not errors
         assert pg.evaluate(
             "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
@@ -4908,3 +4912,130 @@ def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_u
         assert not errors, "ошибки в консоли: %s" % errors[:3]
     finally:
         ctx.close()
+
+
+def _sector_table_payload(deal_id):
+    """Ответ /api/analytics/sector-multiples в форме deal_multiples.sector_table."""
+    import deal_multiples as dm
+    rows = []
+    for i, (ind, year, ps) in enumerate([("Ритейл", 2024, 1.0), ("Ритейл", 2024, 2.0), ("Ритейл", 2024, 3.0),
+                                         ("Порты и инфраструктура", 2023, 40.0),
+                                         ("Химия и удобрения и производство очень длинного названия", 2025, 1.5)]):
+        m = {k: {"status": "no_data", "value": None, "note": ""} for k in dm.SECTOR_METRICS}
+        for k in dm.SECTOR_METRICS:
+            m[k] = {"status": "outlier" if ps > 30 else "ok", "value": ps, "note": "",
+                    "denominator_year": year - 1, "source": "ФНС"}
+        m["pe"] = {"status": "not_applicable", "value": None, "note": "чистый убыток",
+                   "denominator_year": year - 1, "source": "ФНС"}
+        rows.append({"id": deal_id if i == 0 else "x%d" % i, "title": "Сделка номер %d с очень длинным названием" % i,
+                     "year": year, "industry": ind, "target_id": "", "target_name": "ООО Тест", "confidence": "verified",
+                     "sum_rub": 1e9, "price_full_rub": 2e9, "price_basis": "scaled", "stake": 50.0,
+                     "price_scope": "package", "price_fx": None, "metrics": m})
+    return dm.sector_table(rows, 1000)
+
+
+def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
+    """Таблица «Мультипликаторы по отраслям» (19 октября 2026): выбор
+    мультипликатора, медиана при трёх сделках, прочерк с подсказкой, список
+    сделок по клику, выгрузка CSV; на телефоне таблица прокручивается внутри
+    блока, страница не едет. На карточке сделки — блок «оценка» со ссылкой
+    на методику."""
+    base = json.load(open("static/data/deals_promoted.json", encoding="utf-8"))
+    deals = base["deals"] if isinstance(base, dict) and "deals" in base else base
+    deals = list(deals.values()) if isinstance(deals, dict) else deals
+    deal_id = next(d["id"] for d in deals if (d.get("eco") or {}).get("sum") and d.get("target")
+                   and str(d.get("date") or "") >= "2024")
+    for width in (360, 390, 1280):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            payload = json.dumps(_sector_table_payload(deal_id))
+            ctx.route("**/api/analytics/sector-multiples", lambda route: route.fulfill(
+                status=200, content_type="application/json", body=payload))
+            pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+            pg.wait_for_selector("#sectorMultCard .smult-table", timeout=15000)
+            body = pg.inner_text("#sectorMultCard")
+            assert "EV / операционная прибыль" in body and "P/BV" in body
+            assert "×2" in body and "3 сделки" in body          # медиана «Ритейла» за 2024
+            assert pg.locator("#sectorMultCard .smult-dash").count() >= 1   # одна сделка — прочерк
+            assert "для медианы нужно не меньше 3" in pg.locator("#sectorMultCard .smult-dash").first.get_attribute("title") \
+                or "границами" in pg.locator("#sectorMultCard .smult-dash").first.get_attribute("title")
+            pg.click("#sectorMultCard [data-sind='%s'][data-syear='2024']" % "%D0%A0%D0%B8%D1%82%D0%B5%D0%B9%D0%BB")
+            assert pg.locator("#smultList li").count() == 3
+            pg.click("#sectorMultCard [data-smetric='pe']")
+            assert "Под этот выбор сделок пока нет" in pg.inner_text("#sectorMultCard")   # P/E убыточных — «не применим»
+            assert pg.locator("[data-smultcsv]").count() == 1
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
+            pg.goto(base_url + "/#/deal/" + deal_id, wait_until="networkidle")
+            pg.click("[data-l='eco']")
+            pg.wait_for_selector(".deal-mult", timeout=15000)
+            card = pg.inner_text(".deal-mult")
+            assert "оценка" in card.lower() and "не применим" in card and "не EV/EBITDA" in card
+            assert pg.locator(".deal-mult a[href='#/analytics']").count() == 1
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
+            assert not errors, errors
+            pg.close()
+        finally:
+            ctx.close()
+
+
+def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(browser, base_url):
+    """Блок «Признаки возможных сделок» (партнёр владельца, 19 октября 2026):
+    2–4 строки «дата — что заявлено — источник» и кнопка «Разобрать с
+    ассистентом», которая уходит с контекстом страницы. Нет признаков —
+    блока нет. Файл признаков подменяется: тест не зависит от того, что
+    сегодня собрал приток. Ширины — 360/390/1280, без переполнения."""
+    rows = [
+        {"id": "s1", "company_id": "gcafc31dc", "date": "2026-09-11", "kind": "sell",
+         "summary": "ВТБ — возможная продажа: Росгосстрах", "source": ["Известия", "https://iz.ru/x"],
+         "origin": "news"},
+        {"id": "s2", "company_id": "gcafc31dc", "date": "2026-06", "kind": "investor",
+         "summary": "ВТБ — ищет инвестора или партнёра для очень длинного названия направления бизнеса "
+                    "Оченьдлинноеназваниеактиваизсорокабуквбезпробеловвообще",
+         "source": ["Коммерсантъ", "https://www.kommersant.ru/doc/1"], "origin": "card_text", "deal_id": "nope"},
+        {"id": "s3", "company_id": "gcafc31dc", "date": "2025-02-01", "kind": "sell", "summary": "ВТБ — x",
+         "source": ["РБК", "https://www.rbc.ru/1"], "origin": "card"},
+        {"id": "s4", "company_id": "gcafc31dc", "date": "2024-02-01", "kind": "sell", "summary": "ВТБ — y",
+         "source": ["РБК", "https://www.rbc.ru/2"], "origin": "card"},
+        {"id": "s5", "company_id": "gcafc31dc", "date": "2023-02-01", "kind": "sell", "summary": "ВТБ — пятый",
+         "source": ["РБК", "https://www.rbc.ru/3"], "origin": "card"},
+    ]
+    body = json.dumps({"updated": "2026-10-19", "signals": rows}, ensure_ascii=False)
+    for width in WIDTHS:
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        ctx.route("**/static/data/signals.json",
+                  lambda r: r.fulfill(status=200, content_type="application/json", body=body))
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+        try:
+            pg.goto(base_url + "/#/companies/gcafc31dc", wait_until="domcontentloaded")
+            pg.wait_for_selector(".co-signals li", timeout=20000)
+            items = pg.locator(".co-signals li")
+            assert items.count() == 4, "показываем не больше четырёх строк"
+            first = items.first.inner_text()
+            assert first.startswith("11 сентября 2026") and "Возможная продажа: Росгосстрах" in first, first
+            assert "ВТБ —" not in first, "имя компании на её же странице не повторяется"
+            assert pg.locator(".co-signals li a[href='https://iz.ru/x']").count() == 1
+            assert "пятый" not in pg.inner_text(".co-signals")
+            assert "признаки возможных сделок" in pg.inner_text(".co-signals").lower()
+            over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+            if width == 390:
+                with pg.expect_request(lambda r: "/api/assistant/lookup" in r.url and r.method == "POST") as req:
+                    pg.click("#askSignals")
+                sent = json.loads(req.value.post_data or "{}")
+                assert (sent.get("context_type"), sent.get("context_id")) == ("company", "gcafc31dc")
+                assert "сделки" in sent.get("question", "")
+            pg.goto(base_url + "/#/companies/gda7d982b", wait_until="domcontentloaded")
+            pg.wait_for_selector("h1", timeout=20000)
+            pg.wait_for_timeout(800)
+            assert pg.locator(".co-signals").count() == 0, "без признаков блока нет"
+            assert not errors, "ошибки в консоли: %s" % errors[:3]
+        finally:
+            ctx.close()

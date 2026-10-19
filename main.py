@@ -735,7 +735,8 @@ COMPLETENESS_RULES = """Ты видишь не всю базу «Компаса�
 - Названия компаний пиши так, как они даны в сводке и сделках: не переводи на латиницу, не сокращай по-своему.
 - Не приводи выдуманных примеров: пример — только сделка из найденных, ссылкой.
 - Органы согласования не склеивай и не путай: Правительственная комиссия по контролю за иностранными инвестициями (правкомиссия) и ФАС — разные органы. Называй тот, что указан в сделке.
-- Согласование или одобрение комиссии упоминай, только если оно прямо названо в сделке. Передача активов во временное управление по указу президента — не решение правкомиссии: не пиши, что указ согласован с комиссией или «свидетельствует об одобрении», если этого нет в сделке."""
+- Согласование или одобрение комиссии упоминай, только если оно прямо названо в сделке. Передача активов во временное управление по указу президента — не решение правкомиссии: не пиши, что указ согласован с комиссией или «свидетельствует об одобрении», если этого нет в сделке.
+- О будущих сделках не гадай: никаких процентов, вероятностей и «скорее всего». Говори «есть основания ожидать» и называй основание — заявление или обсуждаемую сделку с датой и ссылкой из сводки."""
 
 SYSTEM_BASE = """Ты — ассистент «Компаса», справочника о сделках слияний и поглощений на российском рынке. С тобой разговаривают юристы, банкиры и владельцы бизнеса — отвечай им как знающий коллега в переписке.
 
@@ -822,6 +823,18 @@ MEETING_PREP_RULES = """Это подготовка посетителя к вс
 - Отчётность ФНС в профиле — цифры ОДНОГО юрлица, а не масштаб компании или группы. Не пиши «выручка компании N», «масштаб — N»: либо пропусти эти цифры, либо назови юрлицо и ИНН, как в профиле («у ПАО «Магнит», ИНН …, по отчётности ФНС за 2025 год выручка …»).
 - Согласование правкомиссии, ФАС или другого органа упоминай, только если оно прямо названо в сделке.
 - Пиши простыми словами: «продаёт непрофильные активы», а не «десегрегация активов»."""
+
+
+# ПРИЗНАКИ БУДУЩИХ СДЕЛОК (маршрут assistant_signals, 19 октября 2026):
+# «будут ли у X сделки», «кто сейчас продаёт агроактивы». Партнёр владельца:
+# доводы с датой и ссылкой, а не процент — иначе это гадание. Механическая
+# страховка после модели — _drop_forecasts.
+SIGNAL_RULES = """Это вопрос о возможных будущих сделках. Сводка уже собрана в три блока — сохрани их и порядок:
+- **Признаки** — только то, что есть в сводке и профиле: заявления компании, обсуждаемые сделки, последние сделки, санкции, отчётность из профиля. У каждого признака — дата и ссылка, как в сводке. Своих признаков не добавляй.
+- **Что это может значить** — словами «есть основания ожидать продажи / покупки / привлечения инвестора / размещения акций». Никаких процентов, вероятностей, сроков и цен, которых нет в сводке, никаких «скорее всего», «наверняка», «прогноз». Сделку, которая ещё не заявлена, не называй.
+- **Кто подходит** — только компании и сделки из сводки, ссылками. Не придумывай покупателей и продавцов.
+- Если в сводке сказано, что явных признаков нет, так и напиши, без догадок о причинах.
+- Отчётность из профиля — цифры одного юрлица с годом; не делай из них выводов о том, что компания «вынуждена продавать» или «готова покупать»."""
 
 
 class AskRequest(BaseModel):
@@ -1244,6 +1257,8 @@ def _polish_answer(text: str, idx, ret=None, source: str = "", meeting: bool = F
         text = _drop_unsupported_approvals(text, source)
         text = _drop_own_counts(text, source)
     text = _drop_generalizations(text)
+    if getattr(ret, "intent", None) == "signals":
+        text = _drop_forecasts(text, source)
     if ret is not None:
         more = _summary_more(ret)
         sides = _compare_more(ret, idx)
@@ -1684,6 +1699,31 @@ _GENERALIZATION = re.compile(
 
 def _drop_generalizations(text: str) -> str:
     return _filter_sentences(text, lambda x: bool(_GENERALIZATION.match(x)))
+
+
+# Признаки будущих сделок (SIGNAL_RULES): ответ — доводы с датой, а не
+# гадание. Фраза с вероятностью, шансом, «скорее всего», прогнозом или
+# процентом, которого нет в том, что видела модель (доля «51%» из сводки —
+# можно), снимается целиком; «это не прогноз» остаётся.
+_FORECAST = re.compile(
+    r"вероятност\w*|(?<![а-яё])вероятн(?:о|ее|ая|ый|ые)\b|(?<![а-яё])шанс\w*|скорее\s+всего|наверняка"
+    r"|с\s+высокой\s+(?:долей|степенью)|(?<!не\s)прогноз\w*|прогнозир\w*|непременно|неизбежн\w*", re.I)
+_PERCENT = re.compile(r"(\d+(?:[.,]\d+)?)\s*%")
+
+
+def _drop_forecasts(text: str, source: str = "") -> str:
+    src = (source or "").replace(",", ".")
+
+    def forecast(sentence: str) -> bool:
+        plain = _LINK_SPAN.sub(" ", sentence).replace("**", "")
+        if _FORECAST.search(plain):
+            return True
+        for m in _PERCENT.finditer(plain):
+            num = m.group(1).replace(",", ".")
+            if not re.search(r"(?<![\d.])" + re.escape(num) + r"\s*%", src):
+                return True
+        return False
+    return _filter_sentences(text, forecast, lists_too=True)
 
 
 # ── Пятая проверка на 100 вопросах (18 октября 2026) ────────────────────────
@@ -2934,6 +2974,11 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
             logger.warning("web-режим: поиск упал (%s), деградация в base", e)
     meeting = _is_meeting_prep(question)
     profile = ""
+    if getattr(ret, "intent", None) == "signals":
+        system = system + "\n\n" + SIGNAL_RULES
+        cid = getattr(ret, "company_id", None)
+        if cid and idx is not None:
+            profile = _company_profile_text(cid, idx, db)
     if meeting:
         system = system + "\n\n" + MEETING_PREP_RULES
         if idx is None:
@@ -2944,6 +2989,9 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
         cid = _meeting_company_id(ret, context_type, context_id, idx) if idx is not None else None
         profile = _company_profile_text(cid, idx, db) if cid else ""
     prep = AskPrep(system, _build_user_message(question, ret, search_block, history, profile), results, search_block)
+    if getattr(ret, "intent", None) == "signals":
+        # Три блока со ссылками у каждого признака — длиннее обычного ответа.
+        prep.max_tokens = max(prep.max_tokens, 1400)
     if meeting:
         prep.meeting = True
         # Ответ из трёх разделов со списком сделок длиннее обычного.
@@ -4137,6 +4185,45 @@ def analytics_multiples(db=Depends(get_db)):
     out = deal_multiples.compute_market_multiples(db, deals, registry, get_company_profile, lot_ids)
     out["show_medians"] = SHOW_MULTIPLE_MEDIANS
     return out
+
+
+# Таблица «Мультипликаторы по отраслям» (19 октября 2026, deal_multiples.
+# compute_sector_table): страница «Аналитика», блок на карточке сделки и
+# ассистент читают ОДИН расчёт. Кэш на минуту — ассистент и карточка зовут
+# его чаще, чем меняется база; ключ — отпечаток файла базы.
+_sector_cache: dict = {}
+_SECTOR_TTL_SECONDS = 60
+
+
+def _sector_multiples(db=None) -> dict:
+    deals_path = pathlib.Path(__file__).resolve().parent / "static" / "data" / "deals_promoted.json"
+    try:
+        stamp = deals_path.stat().st_mtime
+    except OSError:
+        stamp = None
+    hit = _sector_cache.get("value")
+    if hit is not None and _sector_cache.get("stamp") == stamp \
+            and time.monotonic() - _sector_cache.get("at", 0) < _SECTOR_TTL_SECONDS:
+        return hit
+    own = db is None
+    session = get_session() if own else db
+    try:
+        value = deal_multiples.compute_sector_table(session, deal_catalog.load_deals(),
+                                                    get_company_profile, _bank_finance())
+    finally:
+        if own:
+            session.close()
+    _sector_cache.update(value=value, stamp=stamp, at=time.monotonic())
+    return value
+
+
+@app.get("/api/analytics/sector-multiples")
+def analytics_sector_multiples(db=Depends(get_db)):
+    return _sector_multiples(db)
+
+
+# Ассистент отвечает на «какой мультипликатор в ритейле» цифрой из той же таблицы.
+assistant_retrieval.SECTOR_MULTIPLES_PROVIDER = _sector_multiples
 
 
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:

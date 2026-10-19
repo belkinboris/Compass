@@ -163,6 +163,16 @@ def validate_pending(data, disk_path: str) -> str | None:
     return None
 
 
+def validate_signals(data, disk_path: str) -> str | None:
+    # Признаки будущих сделок (pipeline/ingest/signals.py): пустой список —
+    # законное состояние, проверяется только форма.
+    if not isinstance(data, dict):
+        return "это не объект JSON"
+    if not isinstance(data.get("signals"), list):
+        return "нет списка signals"
+    return None
+
+
 def validate_nonempty(data, disk_path: str) -> str | None:
     if not isinstance(data, (dict, list)) or not data:
         return "пустой или не объект/список JSON"
@@ -185,6 +195,9 @@ TARGETS: tuple[Target, ...] = (
     # Выгрузки ЦБ — их обновляет ежедневный триггер, тем же коммитом в main.
     Target("static/data/bank_finance.json", validate_nonempty, False),
     Target("static/data/bank_full_balance.json", validate_nonempty, False),
+    # Признаки будущих сделок для страницы компании и ассистента — их пишет
+    # приток (pipeline/ingest/signals.py), сайт читает сам.
+    Target("static/data/signals.json", validate_signals, False),
 )
 
 

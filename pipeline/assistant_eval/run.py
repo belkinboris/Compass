@@ -37,7 +37,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from questions import PREP, QUESTIONS  # noqa: E402
+from questions import PREP, QUESTIONS, SIGNALS  # noqa: E402
 
 DEFAULT_SITE = "https://projectcompass.ru"
 OUT_DIR = ROOT / "data" / "inbox" / "assistant_eval"
@@ -90,7 +90,7 @@ def ask_one(site: str, q: dict, key: str, pause: float) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--site", default=DEFAULT_SITE)
-    ap.add_argument("--only", default="", help="номера через запятую (P1…P4 — подготовка к встрече)")
+    ap.add_argument("--only", default="", help="номера через запятую (P1…P4 — подготовка к встрече, S1…S8 — признаки сделок)")
     ap.add_argument("--prep-only", action="store_true")
     ap.add_argument("--no-prep", action="store_true")
     ap.add_argument("--out", default="")
@@ -102,9 +102,11 @@ def main() -> None:
     items = [] if a.prep_only else list(QUESTIONS)
     if not a.no_prep:
         items += PREP
+    if not a.prep_only:
+        items += SIGNALS
     if a.only:
         want = {s.strip() for s in a.only.split(",") if s.strip()}
-        items = [q for q in QUESTIONS + PREP if str(q["n"]) in want]
+        items = [q for q in QUESTIONS + PREP + SIGNALS if str(q["n"]) in want]
 
     health = {}
     try:

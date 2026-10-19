@@ -107,8 +107,58 @@ def _line(full_lines, code: str) -> float | None:
 # Остальное не выбрасывается: оно считается по тем же данным и открывается
 # кнопкой. Спрятать — не то же самое, что удалить, и разбор глубже одной
 # фразы тоже кому-то нужен.
-PRIMARY_KEYS = ("ebit", "operating_margin", "net_debt",
+PRIMARY_KEYS = ("operating_profit_estimate", "ebit", "operating_margin", "net_debt",
                 "net_debt_to_operating_profit", "working_capital")
+
+
+# ОПЕРАЦИОННАЯ ПРИБЫЛЬ — ОЦЕНКА ПО ОТЧЁТНОСТИ ФНС (19 октября 2026). Отзыв
+# M&A-практика (Евгений, менеджер проектов M&A): мультипликатор по EBITDA из
+# БФО не посчитать — нет амортизации, но операционную прибыль (EBIT-прокси)
+# посчитать можно, и для таблицы мультипликаторов этого достаточно, если
+# честно подписать «без поправки на амортизацию». Порядок:
+#   1) готовая строка 2200 «Прибыль (убыток) от продаж»;
+#   2) если её нет — 2110 − 2120 − 2210 − 2220 (выручка минус себестоимость,
+#      коммерческие и управленческие расходы). В упрощённой форме строки 2200
+#      нет вовсе, а 2120 там — «расходы по обычной деятельности»: формула та же
+#      и даёт «выручку минус расходы по обычной деятельности».
+# Расходные строки берутся по модулю: в данных они положительные (замер
+# 19 сентября 2026, см. докстроку модуля), модуль страхует от источника, где
+# расход записан со знаком «минус». Строки 2210/2220, которых нет в отчёте, —
+# ноль (в ГИР БО незаполненная строка не приходит); без 2110 и 2120 не
+# считаем ничего.
+OP_PROFIT_BASES = {
+    "line_2200": "строка 2200 «Прибыль (убыток) от продаж»",
+    "computed": "выручка минус себестоимость, коммерческие и управленческие расходы "
+                "(строки 2110 − 2120 − 2210 − 2220): готовой строки 2200 в отчёте нет",
+}
+
+
+def operating_profit_estimate(operating_profit_rub, lines: dict | None) -> tuple[float | None, str | None]:
+    """(операционная прибыль в рублях, основание из OP_PROFIT_BASES) или (None, None).
+
+    `lines` — строки отчёта {код: рубли}. Готовая строка 2200 сильнее расчёта."""
+    ready = _f(operating_profit_rub)
+    lines = lines or {}
+    if ready is None:
+        ready = _f(lines.get("2200"))
+    if ready is not None:
+        return ready, "line_2200"
+    revenue, cost = _f(lines.get("2110")), _f(lines.get("2120"))
+    if revenue is None or cost is None:
+        return None, None
+    selling = abs(_f(lines.get("2210")) or 0.0)
+    admin = abs(_f(lines.get("2220")) or 0.0)
+    return revenue - abs(cost) - selling - admin, "computed"
+
+
+def lines_from_full(full_lines) -> dict:
+    """{код: рубли} из payload полной отчётности (`fns_client.full_lines_payload`)."""
+    out = {}
+    for section in full_lines or []:
+        for row in section.get("rows") or []:
+            if row.get("code") and row.get("value_rub") is not None:
+                out[str(row["code"])] = _f(row["value_rub"])
+    return out
 
 
 def _money(key, label, value, how, group):
@@ -166,6 +216,15 @@ def derive(report: dict) -> dict:
 
     # --- прибыльность --------------------------------------------------
     PROFIT = "Прибыльность"
+    op_estimate, op_basis = operating_profit_estimate(op_profit, lines_from_full(full_lines))
+    if op_estimate is not None:
+        metrics.append(_money(
+            "operating_profit_estimate", "Операционная прибыль (оценка по ФНС)", op_estimate,
+            ("Выручка минус себестоимость, коммерческие и управленческие расходы; амортизация "
+             "не добавлена, поэтому это не EBITDA.") if op_basis == "line_2200" else
+            ("Посчитана из строк отчёта: выручка минус расходы — готовой строки «Прибыль от "
+             "продаж» в отчёте нет. Амортизация не добавлена, это не EBITDA."),
+            PROFIT))
     # Прибыль до процентов и налога. Проценты к уплате в отчёте стоят со
     # знаком «минус» внутри прибыли до налогообложения — прибавляем модуль,
     # иначе у компании с большим долгом величина уедет в другую сторону.
