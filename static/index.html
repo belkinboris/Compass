@@ -10520,7 +10520,7 @@ function renderClaimsTab(body){
     if(!mount) return;
     const approved = claims.filter(c => c.status==="approved"), rest = claims.filter(c => c.status!=="approved");
     const intro = claims.length ? "" : `<div class="acct-card"><span class="label">Как это работает</span>
-      <p class="acct-note" style="margin-top:8px">Найдите свою компанию или фирму-консультанта по названию и нажмите «Это моя компания». Мы проверим, что вы в ней работаете, и подключим карточку. Тогда здесь будет видно, сколько раз её открывали, и можно будет присылать нам правки.</p></div>`;
+      <p class="acct-note" style="margin-top:8px">Если вы представляете компанию или консультанта, найдите её по названию и нажмите «Это моя компания». После подтверждения здесь появится статистика просмотров её страницы, а правки в описание и сделки можно будет присылать прямо отсюда.</p></div>`;
     mount.innerHTML = approved.map(approvedHtml).join("")
       + (rest.length ? `<div class="acct-card"><span class="label">Заявки</span>${rest.map(otherHtml).join("")}
           ${rest.some(c => c.status==="pending") ? `<p class="acct-note" style="margin-top:10px">Мы проверим, что вы работаете в компании, и подключим карточку — статус обновится здесь.</p>` : ""}
