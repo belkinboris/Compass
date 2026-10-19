@@ -2,41 +2,13 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d36732513",
-   "title": "«Атолл Капитал» стал новым акционером оператора гибких офисов Aspace",
+   "draft_id": "d35914031",
+   "title": "Еврокомиссия отказалась возобновить покупки российского газа",
    "date": "2026-10-19",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Atoll-Kapital-stal-novym-akcionerom-operatora-gibkih-ofisov-Aspace-87661"
-    ]
-   ],
-   "sum": "515 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75263157",
-   "title": "Миллиардеры Кремниевой долины вложились в технологии, которые могут обратить старение вспять",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/milliardery-kremnievoj-doliny-vlozhilis-v-tehnologii-kotorye-mogut-obratit-starenie-vspyat/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/19/evrokomissiya-otkazalas-vozobnovit-pokupki-rossiyskogo-gaza/"
     ]
    ],
    "sum": null,
@@ -54,18 +26,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g771a54e2 (общие редкие слова: вложил, миллиа) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d75155861",
-   "title": "Имущество вице-губернатора на сотни миллионов потребовали изъять в доход государства",
+   "draft_id": "d19962429",
+   "title": "Посредник удержал комиссию: что нужно знать перед покупкой билетов",
    "date": "2026-10-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/imuschestvo-vitse-gubernatora-na-sotni-millionov-potrebovali-iz-yat-v-dohod-gosudarstva/"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/19/posrednik-uderzhal-komissiyu-chto-nuzhno-znat-pered-pokupkoj-biletov"
     ]
    ],
    "sum": null,
@@ -88,16 +59,16 @@
    ]
   },
   {
-   "draft_id": "d38497966",
-   "title": "Россиянам назвали повод отложить покупку квартиры",
+   "draft_id": "d67242995",
+   "title": "За покупку квартиры в России предложили возвращать до 1,04 млн рублей",
    "date": "2026-10-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/rossiyanam-nazvali-povod-otlozhit-pokupku-kvartiry/"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/19/za-pokupku-kvartiry-v-rossii-predlozhili-vozvrashhat-do-104-mln-rublej"
     ]
    ],
-   "sum": null,
+   "sum": "1,04 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -116,30 +87,19 @@
    ]
   },
   {
-   "draft_id": "d78969245",
-   "title": "⚡️ Управляющий партнер Андрей Крупский «Лемчик, Крупский и Партнеры» — среди преподавателей программы НИУ ВШЭ ▪️ Юридический бизнес умеет считать часы, выставлять счета и планировать продажи. Но ответ",
+   "draft_id": "d65192645",
+   "title": "Такие помидоры не продадут ни в одном магазине: домашний рецепт идеальной закрутки",
    "date": "2026-10-19",
    "src": [
     [
-     "tg:LKPconsult",
-     "https://t.me/LKPconsult/3905"
+     "web:74.ru",
+     "https://74.ru/text/food/2026/10/19/76707399/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-19",
-     "title": "Переговоры",
-     "note": "⚡️ Управляющий партнер Андрей Крупский «Лемчик, Крупский и Партнеры» — среди преподавателей программы НИУ ВШЭ ▪️ Юридический бизнес умеет считать часы, выставлять счета и планировать продажи. Но ответить на более важные вопросы часто сложнее: сколько на самом…",
-     "source": [
-      "tg:LKPconsult",
-      "https://t.me/LKPconsult/3905"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -148,11 +108,41 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d67817943",
+   "title": "AngelsDeck вновь вложился в американский стартап с российскими корнями Buddy.ai , репетитора на основе искусственного интеллекта для детей. Об этом в своем Telegram-канале написал CEO и сооснователь к",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7798"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3a84650b (общие редкие слова: вновь, старта) — проверьте, не дубль ли"
    ]
   }
  ]
