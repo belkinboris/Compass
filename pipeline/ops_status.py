@@ -556,7 +556,8 @@ def queue_counts(path=PENDING):
         return None
     held = [c for c in cards if c.get('held')]
     rest = [c for c in cards if not c.get('held')]
-    soon = [c for c in rest if c.get('reviewed') and c.get('accepted')]
+    # Молчание публикует только показанную в консоли карточку (approve.plan_actions).
+    soon = [c for c in rest if c.get('reviewed') and c.get('accepted') and c.get('draft_sent')]
     unread = [c for c in rest if not (c.get('reviewed') and c.get('accepted')) and not c.get('hold_reason')]
     return len(soon), len(held), len(unread)
 

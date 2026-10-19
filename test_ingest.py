@@ -452,7 +452,7 @@ def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_p
     pend = tmp_path / "pending.json"
     pend.write_text(json.dumps({"cards": [
         {"id": "a", "held": True},
-        {"id": "b", "reviewed": "d", "accepted": "d"},
+        {"id": "b", "reviewed": "d", "accepted": "d", "draft_sent": True},
         {"id": "c"},
         {"id": "d", "hold_reason": "не сделка"},
     ]}), encoding="utf-8")
