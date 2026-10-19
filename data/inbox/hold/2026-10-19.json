@@ -2,41 +2,127 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d87294342",
-   "title": "Российский разработчик BI-платформы Visiology привлек 200 млн рублей",
+   "draft_id": "d36732513",
+   "title": "«Атолл Капитал» стал новым акционером оператора гибких офисов Aspace",
    "date": "2026-10-19",
    "src": [
     [
-     "web:tadviser.ru",
-     "https://www.tadviser.ru/a/305681"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Atoll-Kapital-stal-novym-akcionerom-operatora-gibkih-ofisov-Aspace-87661"
     ]
    ],
-   "sum": "200 млн ₽",
+   "sum": "515 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Российский разработчик BI-платформы Visiology",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Российский разработчик BI-платформы Visiology",
+    "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": "Управление активами",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d70755724",
-   "title": "В заксобрание Петербурга внесли законопроект о запрете продажи вейпов",
+   "draft_id": "d75263157",
+   "title": "Миллиардеры Кремниевой долины вложились в технологии, которые могут обратить старение вспять",
    "date": "2026-10-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28229269"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/milliardery-kremnievoj-doliny-vlozhilis-v-tehnologii-kotorye-mogut-obratit-starenie-vspyat/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g771a54e2 (общие редкие слова: вложил, миллиа) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75155861",
+   "title": "Имущество вице-губернатора на сотни миллионов потребовали изъять в доход государства",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/19/imuschestvo-vitse-gubernatora-na-sotni-millionov-potrebovali-iz-yat-v-dohod-gosudarstva/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d38497966",
+   "title": "Россиянам назвали повод отложить покупку квартиры",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/19/rossiyanam-nazvali-povod-otlozhit-pokupku-kvartiry/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78969245",
+   "title": "⚡️ Управляющий партнер Андрей Крупский «Лемчик, Крупский и Партнеры» — среди преподавателей программы НИУ ВШЭ ▪️ Юридический бизнес умеет считать часы, выставлять счета и планировать продажи. Но ответ",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "tg:LKPconsult",
+     "https://t.me/LKPconsult/3905"
     ]
    ],
    "sum": null,
@@ -47,10 +133,10 @@
      "kind": "negotiations",
      "date": "2026-10-19",
      "title": "Переговоры",
-     "note": "Также планируют ограничить торговлю никотином возле школ, городских пляжей, спортивных объектов и социальных учреждений",
+     "note": "⚡️ Управляющий партнер Андрей Крупский «Лемчик, Крупский и Партнеры» — среди преподавателей программы НИУ ВШЭ ▪️ Юридический бизнес умеет считать часы, выставлять счета и планировать продажи. Но ответить на более важные вопросы часто сложнее: сколько на самом…",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28229269"
+      "tg:LKPconsult",
+      "https://t.me/LKPconsult/3905"
      ]
     }
    ],
@@ -65,90 +151,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d19421032",
-   "title": "В России выставили на продажу редчайший внедорожник",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/v-rossii-vystavili-na-prodazhu-redchayshiy-vnedorozhnik/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40035945",
-   "title": "Махнуть за впечатлениями на Новый год: как купить авиабилет по самому дешевому тарифу",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053137244"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44852994",
-   "title": "Вейпы хотят убрать из продажи в Петербурге",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/spb/2026/10/19/vejpy-hotyat-ubrat-iz-prodazhi-v-peterburge"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
