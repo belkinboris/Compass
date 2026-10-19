@@ -153,7 +153,8 @@ def test_assistant_answers_a_typical_multiple_from_the_table(provider):
     assert ar.retrieve("Какие мультипликаторы были в сделках с ресторанами и кофейнями?", idx=idx).intent != "sector_multiple"
 
 
-def test_assistant_metric_words():
+def test_assistant_metric_words(monkeypatch):
+    monkeypatch.setattr(ar, "SECTOR_MULTIPLES_PROVIDER", None)   # main.py, если импортирован, ставит своё
     assert ar.sector_metric("средний P/E в ИТ") == "pe"
     assert ar.sector_metric("какой P/BV у банков") == "pbv"
     assert ar.sector_metric("мультипликатор к выручке в ритейле") == "ps"

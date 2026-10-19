@@ -1067,11 +1067,15 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         # отдаёт текст ПОСЛЕ CSS-преобразований — сравниваем без учёта регистра.
         # «EV» на карточке больше не обещается: считается цена пакета к выручке,
         # без долга — и подпись говорит это прямо (третий разбор рецензента)
-        assert "цена ÷ выручка" in body.lower() and "ev/" not in body.lower()
-        assert "×2" in body
-        assert "2023" in body
-        assert "цена ÷ операционная прибыль" in body.lower()
-        assert "×10" in body  # 1000 млн / 100 млн
+        # С 19 октября 2026 мультипликаторы сделки живут в отдельном блоке
+        # «Мультипликаторы сделки — оценка» (#deal-mult, тот же расчёт, что в
+        # таблице «Аналитики», — test_sector_multiples_table_on_analytics_and_deal_card);
+        # финансовый контекст показывает отчётность и не повторяет их.
+        assert "2023" in body and "выручка" in body.lower()
+        assert "цена ÷ выручка" not in body.lower() and "цена ÷ операционная прибыль" not in body.lower()
+        # клиентская копия расчёта по-прежнему жива и считает то же самое
+        line = pg.evaluate("dealMultipleLine(%s, 'zzz-mult-target', 500000000, 2023)" % json.dumps(deal))
+        assert line and line["multiple"] == 2
         assert not errors
         assert pg.evaluate(
             "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
