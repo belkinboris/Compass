@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-19",
+ "items": [
+  {
+   "key": "https://www.comnews.ru/content/247928/2026-10-19/2026-w43/1008/promyshlennye-sooruzheniya-kupili-lestu::gd09e0945",
+   "candidate_id": "gd09e0945",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d54321800",
+    "title": "«Промышленные сооружения» купили «Лесту»",
+    "date": "2026-10-19",
+    "src": [
+     [
+      "web:comnews.ru",
+      "https://www.comnews.ru/content/247928/2026-10-19/2026-w43/1008/promyshlennye-sooruzheniya-kupili-lestu"
+     ]
+    ],
+    "sum": "10 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-19",
+      "title": "Сделка завершена",
+      "note": "У \"Лесты\", разработчика \"Мира танков\" и \"Мира кораблей\", новый владелец. Ее приобрело АО \"Промышленные сооружения\" - консорциум частных инвесторов, намеренный инвестировать в развитие видеоигровой индустрии 10 млрд руб. до 2029 г",
+      "source": [
+       "web:comnews.ru",
+       "https://www.comnews.ru/content/247928/2026-10-19/2026-w43/1008/promyshlennye-sooruzheniya-kupili-lestu"
+      ]
+     }
+    ],
+    "buyer_name": "«Промышленные сооружения»",
+    "asset": "«Лесту»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Промышленные сооружения»",
+     "asset": "«Лесту»",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-19"
+  }
+ ]
+}
