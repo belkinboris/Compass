@@ -597,6 +597,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     карточек, где решение принимает читатель, а не именной список)."""
     notes = card.get(STAMP + '_notes') or {}
     waived = waived or notes.get('no_profile') or {}
+    inn_why = waived_inn if isinstance(waived_inn, dict) else (notes.get('no_inn') or {})
     waived_inn = set(waived_inn or notes.get('no_inn') or {})
     waived_sources = set(waived_sources or notes.get('no_source') or {})
     waived_names = waived_names or notes.get('name_ok') or {}
@@ -734,10 +735,30 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # история участников ЕГРЮЛ (datanewton, без ключа) не проверена: 15 октября
     # 2026 Nomi/«Гельтек» ушёл к владельцу с «продавец не раскрыт» после
     # попыток rusprofile/list-org/checko — они отсюда закрыты, datanewton нет.
+    # 19 октября 2026 («Стаксель», VEON/Perfectum) находка молчала дважды:
+    # «ООО «СиЭс Технологии»» стояло в заметке этапа, а не в `asset`/`title`
+    # (предмет записан описанием «разработчик PLM-платформы»), а у
+    # иностранного предмета проверять было нечего — datanewton не про него.
+    # Теперь юрлицо узнаётся и по прозе карточки, и по строке реестра ИНН у
+    # профиля предмета (кроме АО: акционеров ЕГРЮЛ не показывает);
+    # иностранному предмету нужен реестр его страны.
     seller_note = str((waived or {}).get('seller') or '')
+    target_cid = card.get('target') or card.get('asset_id')
     asset_is_company = re.search(r'\b(?:ООО|АО|ПАО|ЗАО|НАО)\b', ' '.join(
-        str(card.get(k) or '') for k in ('asset', 'title')) + ' ' + str(_text(card, 'eco.share') or ''))
-    if seller_note and asset_is_company and not re.search(r'datanewton|истори[яи] участник', seller_note, re.I):
+        str(card.get(k) or '') for k in ('asset', 'title', 'extra')) + ' ' + ' '.join(
+        str(_text(card, f) or '') for f in ('eco.share', 'eco.context', 'law.struct')) + ' ' + ' '.join(
+        str(e.get('note') or '') for e in card.get('events') or [] if isinstance(e, dict))) \
+        or (target_cid and target_cid in known and not re.search(
+            r'\b(?:МК)?(?:П|З|Н)?АО\b', str(comps.get(target_cid, {}).get('name') or '')))
+    foreign_target = re.search(r'иностран', str(inn_why.get('target') or ''), re.I)
+    if seller_note and foreign_target:
+        if not re.search(r'реестр|ЕГРПО|regist|orginfo|opencorporates|companies house', seller_note, re.I):
+            out.append(('seller_registry_unchecked',
+                        'предмет — иностранная компания, а реестр её страны не проверен: кто сейчас '
+                        'владеет предметом, показывает реестр страны (часто — через местную прессу, '
+                        'которая его цитирует) и раскрытие покупателя (6-K/20-F, годовой отчёт); '
+                        'покупка 100% — это покупка у всех нынешних участников'))
+    elif seller_note and asset_is_company and not re.search(r'datanewton|истори[яи] участник', seller_note, re.I):
         out.append(('seller_registry_unchecked',
                     'предмет — юрлицо, а история участников ЕГРЮЛ не проверена: '
                     'https://datanewton.ru/api/v2/history?ogrn=<ОГРН>&startDate=2000-01-01&attributes=OWNERS '
