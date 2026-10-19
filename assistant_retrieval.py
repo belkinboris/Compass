@@ -785,6 +785,7 @@ class Intent:
     role: str | None = None                            # "buyer" | "seller" — «что покупала S8 Capital» (№27);
                                                        # "object" — компанию продают («продажу Яндекса», №43)
     finance: bool = False                              # «какая выручка у ВкусВилла» — отчётность (№77)
+    metric: str | None = None                          # ev_op | pe | ps | pbv — таблица мультипликаторов
 
     def __post_init__(self):
         if self.span is None and self.year:
@@ -1597,6 +1598,8 @@ def route(question: str, idx: Index | None = None) -> Intent:
         company = None
     if buyer_kind and company and matched and all(re.match(r"банк", t) for t in matched):
         company = None
+    if SECTOR_MULTIPLES_PROVIDER and not company and SECTOR_MULT_WORDS.search(question):
+        return Intent("sector_multiple", metric=sector_metric(question), **cond)
     if rank and not company:
         return Intent("rank", rank=rank, wants_advisors=rank in ("law", "invest", "advisors"), **cond)
     if COMPARE_WORDS.search(question):
@@ -2639,6 +2642,97 @@ def _median(vals: list[float]) -> float:
     return vals[k // 2] if k % 2 else (vals[k // 2 - 1] + vals[k // 2]) / 2
 
 
+# --------------------------------------------------------------------------
+# Мультипликатор по отрасли — готовая цифра из таблицы «Аналитики»
+# --------------------------------------------------------------------------
+# «Какой мультипликатор в ритейле?», «средний EV/EBIT в ИТ за 2025» (запрос
+# M&A-практика, 19 октября 2026). Модель не считает медиану сама: ответ — та
+# же ячейка, что в таблице «Мультипликаторы по отраслям»
+# (deal_multiples.compute_sector_table), с подписью «оценка». Таблицу считает
+# сервер по базе ФНС, поэтому функцию подставляет main.py; без неё (тесты,
+# разовые скрипты) маршрута нет и вопрос идёт прежней дорогой — к сделкам с
+# мультипликаторами в тексте карточек.
+SECTOR_MULTIPLES_PROVIDER = None
+# Вопрос о ТИПИЧНОМ значении — «какой / средний / медианный мультипликатор»,
+# а не «какие мультипликаторы были в сделках …» (там нужен список сделок).
+SECTOR_MULT_WORDS = re.compile(
+    r"(?:(?:^|[^а-яё])как(?:ой|ая|ов\w*)|средн\w*|медиан\w*|типичн\w*|обычн\w*|рыночн\w*)\s+"
+    r"(?:[\w/«»-]+\s+){0,2}?"
+    r"(?:мультипликатор\w*|ev\s*/\s*(?:ebit\w*|операц\w*|прибыл\w*)|p\s*/\s*(?:e|s|bv)(?![a-zа-яё]))",
+    re.I)
+
+
+def sector_metric(question: str) -> str:
+    """Какой мультипликатор спрошен: P/E, P/S, P/BV или (по умолчанию)
+    EV / операционная прибыль."""
+    q = question.lower()
+    if re.search(r"p\s*/\s*bv|капитал|балансов", q):
+        return "pbv"
+    if re.search(r"p\s*/\s*e(?![a-zа-яё])|чист\w*\s+прибыл", q):
+        return "pe"
+    if re.search(r"p\s*/\s*s(?![a-zа-яё])|выручк|продаж(?:ам|и)\b", q):
+        return "ps"
+    return "ev_op"
+
+
+def _answer_sector_multiple(intent: Intent, idx: Index) -> Retrieval:
+    import deal_multiples as dm
+    metric = intent.metric or "ev_op"
+    label = dm.SECTOR_METRIC_LABELS[metric]
+    try:
+        table = SECTOR_MULTIPLES_PROVIDER() if SECTOR_MULTIPLES_PROVIDER else None
+    except Exception:  # noqa: BLE001 — без таблицы отвечаем, что посчитать не удалось
+        table = None
+    if not table:
+        return Retrieval("sector_multiple", "Таблицу мультипликаторов сейчас не удалось посчитать — "
+                         "загляните на страницу [«Аналитика»](#/analytics).", [], None)
+    year = span_single(intent.span)
+    where = f"в отрасли «{intent.industry}»" if intent.industry else "по всем отраслям"
+    when = f" за {year} год" if year else " за все годы"
+    cell = dm.find_cell(table, metric, intent.industry, year)
+    rows = {r["id"]: r for r in table.get("rows") or []}
+    estimate = ("по отчётности ФНС, без поправки на амортизацию — это не EV/EBITDA"
+                if metric == "ev_op" else "по сделкам с раскрытой ценой и отчётности купленных компаний")
+
+    def x(value) -> str:
+        return "×" + ("<0,01" if value < 0.01 else str(value).replace(".", ","))
+    lines = []
+    ids = list((cell or {}).get("ids") or [])
+    outliers = list((cell or {}).get("outlier_ids") or [])
+    if cell and cell.get("median") is not None:
+        n = cell["count"]
+        lines.append(f"{label} {where}{when} — медиана {x(cell['median'])} "
+                     f"по {n} {_plural(n, 'сделке', 'сделкам', 'сделкам')} (оценка {estimate}).")
+    else:
+        n = len(ids)
+        lines.append(f"{label} {where}{when}: "
+                     + (f"посчитан у {n} {_plural(n, 'сделки', 'сделок', 'сделок')} — меньше трёх, "
+                        "поэтому медиану не называем, это был бы не ориентир, а одна-две сделки."
+                        if n else "есть только значения далеко за правдоподобными границами — медианы нет."
+                        if outliers else "сделок с раскрытой ценой и подходящей отчётностью нет — медианы нет.")
+                     + f" Это оценка {estimate}.")
+        if year:
+            wide = dm.find_cell(table, metric, intent.industry, None)
+            if wide and wide.get("median") is not None:
+                lines.append(f"За все годы {where}: медиана {x(wide['median'])} "
+                             f"по {wide['count']} {_plural(wide['count'], 'сделке', 'сделкам', 'сделкам')}.")
+                ids, outliers = list(wide["ids"]), list(wide["outlier_ids"])
+    docs = []
+    for did in ids + outliers:
+        r = rows.get(did)
+        if not r:
+            continue
+        v = r["metrics"][metric]
+        mark = " — выброс, в медиану не вошёл" if did in outliers else ""
+        yr = v.get("denominator_year") or (v.get("denominator_date") or "")[:4]
+        lines.append(f"- [{r['title']}](#/deal/{did}) — {x(v['value'])}"
+                     f"{f' (отчётность за {yr} год)' if yr else ''}{mark}")
+        if did in idx.by_id:
+            docs.append(idx.by_id[did])
+    lines.append("Таблица по отраслям и годам и методика — на странице [«Аналитика»](#/analytics).")
+    return Retrieval("sector_multiple", "\n".join(lines), docs[:MAX_DEALS_FOR_MODEL], label, pool=docs)
+
+
 def _answer_avg(intent: Intent, idx: Index) -> Retrieval:
     """Средний и медианный размер сделки — посчитан здесь, а не моделью.
 
@@ -3220,7 +3314,7 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         "term": _answer_term, "search": _answer_search,
         "recent": _answer_recent, "compare": _answer_compare,
         "compare_firms": _answer_compare_firms, "filter": _answer_filter,
-        "rank": _answer_rank, "avg": _answer_avg,
+        "rank": _answer_rank, "avg": _answer_avg, "sector_multiple": _answer_sector_multiple,
     }
     # Со страницы сделки «какие сделки …?» или вопрос с годом — про стороны
     # этой сделки, а не про неё саму (см. _answer_deal_parties).

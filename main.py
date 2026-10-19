@@ -4139,6 +4139,45 @@ def analytics_multiples(db=Depends(get_db)):
     return out
 
 
+# Таблица «Мультипликаторы по отраслям» (19 октября 2026, deal_multiples.
+# compute_sector_table): страница «Аналитика», блок на карточке сделки и
+# ассистент читают ОДИН расчёт. Кэш на минуту — ассистент и карточка зовут
+# его чаще, чем меняется база; ключ — отпечаток файла базы.
+_sector_cache: dict = {}
+_SECTOR_TTL_SECONDS = 60
+
+
+def _sector_multiples(db=None) -> dict:
+    deals_path = pathlib.Path(__file__).resolve().parent / "static" / "data" / "deals_promoted.json"
+    try:
+        stamp = deals_path.stat().st_mtime
+    except OSError:
+        stamp = None
+    hit = _sector_cache.get("value")
+    if hit is not None and _sector_cache.get("stamp") == stamp \
+            and time.monotonic() - _sector_cache.get("at", 0) < _SECTOR_TTL_SECONDS:
+        return hit
+    own = db is None
+    session = get_session() if own else db
+    try:
+        value = deal_multiples.compute_sector_table(session, deal_catalog.load_deals(),
+                                                    get_company_profile, _bank_finance())
+    finally:
+        if own:
+            session.close()
+    _sector_cache.update(value=value, stamp=stamp, at=time.monotonic())
+    return value
+
+
+@app.get("/api/analytics/sector-multiples")
+def analytics_sector_multiples(db=Depends(get_db)):
+    return _sector_multiples(db)
+
+
+# Ассистент отвечает на «какой мультипликатор в ритейле» цифрой из той же таблицы.
+assistant_retrieval.SECTOR_MULTIPLES_PROVIDER = _sector_multiples
+
+
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:
     query = select(LegalEntity).where(
         LegalEntity.company_id == company_id,

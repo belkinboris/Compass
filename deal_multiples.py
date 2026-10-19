@@ -1112,3 +1112,360 @@ def compute_market_multiples(db, deals: dict[str, dict[str, Any]],
             ),
         },
     }
+
+
+# ======================================================================
+# ТАБЛИЦА МУЛЬТИПЛИКАТОРОВ ПО ОТРАСЛЯМ И ГОДАМ (19 октября 2026)
+# ======================================================================
+# Отзыв M&A-практика (Евгений, менеджер проектов M&A): консультанты и in-house
+# готовы платить за настраиваемую таблицу «отрасль × год» с выбором
+# мультипликатора. Мы показывали мультипликатор лишь у ~1% сделок, и одна из
+# причин, которую он назвал, — EBITDA из БФО не собрать (нет амортизации). Его
+# решение: операционная прибыль из БФО как EBIT-прокси с честной подписью
+# «оценка по отчётности ФНС, без поправки на амортизацию», плюс P/E, P/S и для
+# банков P/BV по данным Банка России.
+#
+# ДОПУСК НЕ МЕНЯЕТСЯ. Числитель — та же цена за 100% компании, что у списка
+# мультипликаторов выше (facts.admitted 'multiple_text' и
+# 'multiple_text_computed'): подтверждённая цена, известная доля, одно юрлицо
+# с ИНН. Новое — только знаменатели и то, что выбросы и убытки не прячутся:
+# выброс показывается с пометкой и в медиану не идёт, у убытка пишется
+# «не применим». Единственное расширение допуска — банки: у них отчётности
+# ФНС нет, а капитал по форме 806 есть, и для P/BV это ровно тот знаменатель,
+# который нужен.
+#
+# ПОЧЕМУ СТРОК ВСЁ РАВНО МАЛО. Замер в день введения: из 1691 карточки цену,
+# долю и юрлицо удаётся подтвердить у 36 — узкое место не в отчётности, а в
+# раскрытии цены и доли (см. docs/analytics_acceptance.md). Таблица честно
+# показывает прочерк там, где сделок меньше MIN_CELL_SAMPLE.
+SECTOR_METRICS = ('ev_op', 'pe', 'ps', 'pbv')
+SECTOR_METRIC_LABELS = {
+    'ev_op': 'EV / операционная прибыль',
+    'pe': 'P/E',
+    'ps': 'P/S',
+    'pbv': 'P/BV',
+}
+SECTOR_METRIC_HINTS = {
+    'ev_op': 'стоимость компании с долгом ÷ операционная прибыль (оценка по отчётности ФНС, без поправки на амортизацию)',
+    'pe': 'цена за 100% ÷ чистая прибыль',
+    'ps': 'цена за 100% ÷ выручка',
+    'pbv': 'цена за 100% ÷ собственный капитал (у банков — по данным Банка России)',
+}
+# Границы «правдоподобного» значения — условность comps-таблиц, не замер:
+# за ними почти всегда стоит не та отчётность (юрлицо-прослойка, холдинг без
+# выручки), а не редкая сделка. Значение за границей ПОКАЗЫВАЕТСЯ с пометкой
+# «выброс» и в медиану не идёт.
+SECTOR_BOUNDS = {'ev_op': (1.0, 50.0), 'pe': (1.0, 60.0), 'ps': (0.1, 15.0), 'pbv': (0.2, 10.0)}
+# Медиана — при трёх сделках в ячейке и больше; меньше — прочерк (решение
+# владельца 19 октября 2026 по запросу практика; у прежнего блока отраслевых
+# ориентиров порог восемь — он остаётся там как есть).
+MIN_CELL_SAMPLE = 3
+ALL_INDUSTRIES = 'Все отрасли'
+STATUS_LABELS = {
+    'ok': '',
+    'outlier': 'выброс — в медиану не входит',
+    'not_applicable': 'не применим',
+    'no_data': 'нет данных',
+}
+SECTOR_METHODOLOGY = (
+    'Что считается. Цена — за 100% компании: цена пакета делится на его долю (премия за '
+    'контроль и скидка за миноритарный пакет не учитываются). EV / операционная прибыль — '
+    'цена плюс чистый долг (кредиты и займы минус деньги по балансу того же года), делённая '
+    'на прибыль от продаж (строка 2200 отчёта; если строки нет — выручка минус '
+    'себестоимость, коммерческие и управленческие расходы). Это оценка по отчётности ФНС '
+    'без поправки на амортизацию — не EV/EBITDA, сравнивать с рыночными EV/EBITDA нельзя. '
+    'P/E — цена ÷ чистая прибыль, P/S — цена ÷ выручка, P/BV — цена ÷ собственный капитал '
+    '(у банков — капитал по форме 806 Банка России на начало года сделки). '
+    'Откуда данные. Цена и доля — из источников сделки (только цены, названные сторонами; '
+    'доллары и евро — по курсу ЦБ на дату сделки); показатели — из бухгалтерской '
+    'отчётности купленного юрлица за последний полный год до сделки (или позапрошлый, '
+    'если прошлогодний отчёт ещё не сдан) — год указан у каждой сделки. '
+    'Оговорки. Отчётность — одного юрлица, не группы. Убыток или отрицательный капитал — '
+    '«не применим», а не ноль. Значения за правдоподобными границами показаны с пометкой '
+    '«выброс» и в медиану не входят. Медиана — при трёх сделках в ячейке и больше. Строки '
+    '«не сверено» посчитаны по тексту карточки без повторной проверки источников.'
+)
+
+
+def _num(value) -> float | None:
+    try:
+        return None if value is None or isinstance(value, bool) else float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _value(metric: str, numerator: float | None, denominator: float | None, note_if_negative: str) -> dict:
+    """Одно значение мультипликатора со статусом."""
+    if numerator is None or denominator is None:
+        return {'value': None, 'status': 'no_data', 'note': ''}
+    if denominator <= 0:
+        return {'value': None, 'status': 'not_applicable', 'note': note_if_negative}
+    if numerator <= 0:
+        return {'value': None, 'status': 'not_applicable', 'note': 'стоимость с учётом долга не больше нуля'}
+    value = round(numerator / denominator, 2)
+    lo, hi = SECTOR_BOUNDS[metric]
+    status = 'ok' if lo <= value <= hi else 'outlier'
+    return {'value': value, 'status': status, 'note': STATUS_LABELS[status]}
+
+
+def sector_values(price_full_rub: float, price_scope: str | None, report: dict | None,
+                  deal_year: int, bank: dict | None = None) -> dict[str, dict]:
+    """Четыре мультипликатора одной сделки — чистая функция над словарями.
+
+    `report` — отчёт ФНС купленного юрлица: {'year', 'revenue_rub',
+    'operating_profit_rub', 'net_profit_rub', 'equity_rub', 'borrowings_rub',
+    'cash_rub', 'assets_rub', 'lines': {код: рубли}}. `bank` — для банка:
+    {'equity_rub', 'date'} — капитал на начало года сделки. У каждого
+    значения: value, status (ok / outlier / not_applicable / no_data), note,
+    denominator_rub, denominator_year."""
+    import company_finance as cf
+    out = {m: {'value': None, 'status': 'no_data', 'note': ''} for m in SECTOR_METRICS}
+    if bank is not None:
+        eq = _num(bank.get('equity_rub'))
+        out['pbv'] = dict(_value('pbv', price_full_rub, eq, 'капитал отрицательный'),
+                          denominator_rub=eq, denominator_date=bank.get('date'), source='Банк России')
+        if eq is None:
+            out['pbv']['note'] = 'нет капитала банка на начало года сделки'
+        return out
+    if not report or not report.get('year'):
+        return out
+    year = int(report['year'])
+    if not (MIN_YEAR_GAP <= deal_year - year <= MAX_YEAR_GAP):
+        for m in SECTOR_METRICS:
+            out[m]['note'] = 'нет отчёта за последний полный год до сделки'
+        return out
+    lines = report.get('lines') or {}
+    # Чистый долг — по балансу того же года. Строки займов, которых нет в
+    # заполненном балансе, — ноль (ГИР БО не присылает пустые строки); без
+    # баланса долг неизвестен, и EV не считается.
+    net_debt = None
+    if _num(report.get('assets_rub')) is not None:
+        net_debt = (_num(report.get('borrowings_rub')) or 0.0) - (_num(report.get('cash_rub')) or 0.0)
+    if price_scope == 'ev':
+        ev = price_full_rub
+        equity_value = (price_full_rub - net_debt) if net_debt is not None else None
+    else:
+        equity_value = price_full_rub
+        ev = (price_full_rub + net_debt) if net_debt is not None else None
+    op, op_basis = cf.operating_profit_estimate(report.get('operating_profit_rub'), lines)
+
+    def pick(key, code):
+        v = _num(report.get(key))
+        return v if v is not None else _num(lines.get(code))
+    revenue, net, equity = pick('revenue_rub', '2110'), pick('net_profit_rub', '2400'), pick('equity_rub', '1300')
+    out['ev_op'] = dict(_value('ev_op', ev, op, 'операционный убыток'),
+                        denominator_rub=op, op_basis=op_basis, net_debt_rub=net_debt)
+    out['pe'] = dict(_value('pe', equity_value, net, 'чистый убыток'), denominator_rub=net)
+    out['ps'] = dict(_value('ps', equity_value, revenue, 'выручки нет'), denominator_rub=revenue)
+    out['pbv'] = dict(_value('pbv', equity_value, equity, 'капитал отрицательный'), denominator_rub=equity)
+    for m in SECTOR_METRICS:
+        out[m]['denominator_year'] = year
+        out[m]['source'] = 'ФНС'
+    return out
+
+
+def bank_equity_for_year(entry: dict | None, deal_year: int) -> dict | None:
+    """Капитал банка на начало года сделки (= конец последнего полного года) из
+    `bank_finance.json`: форма 806 даёт его колонкой «на начало отчётного года»
+    при балансе того же года. Другого года в файле нет — и капитала тоже."""
+    if not entry:
+        return None
+    as_of = str(entry.get('as_of_balance') or '')
+    if as_of[:4] != str(deal_year):
+        return None
+    if as_of[5:] == '01-01' and entry.get('equity_rub') is not None:
+        return {'equity_rub': entry['equity_rub'], 'date': as_of}
+    if entry.get('equity_rub_prior_year') is not None:
+        return {'equity_rub': entry['equity_rub_prior_year'], 'date': f'{deal_year}-01-01'}
+    return None
+
+
+def _median(values: list[float]) -> float | None:
+    if not values:
+        return None
+    s = sorted(values)
+    n = len(s)
+    return round(s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2, 2)
+
+
+def sector_cells(rows: list[dict], only_verified: bool = False) -> dict[str, list[dict]]:
+    """Ячейки таблицы: {метрика: [{'industry', 'year' ('all' — все годы),
+    'count', 'median' (None при count < MIN_CELL_SAMPLE), 'ids', 'outlier_ids'}]}.
+    Медиана — только по значениям в границах; выбросы перечислены отдельно."""
+    out: dict[str, list[dict]] = {}
+    pool = [r for r in rows if r.get('confidence') == 'verified'] if only_verified else rows
+    for m in SECTOR_METRICS:
+        groups: dict[tuple, dict] = {}
+        for r in pool:
+            v = (r.get('metrics') or {}).get(m) or {}
+            if v.get('status') not in ('ok', 'outlier'):
+                continue
+            for key in ((r['industry'], r['year']), (r['industry'], 'all'),
+                        (ALL_INDUSTRIES, r['year']), (ALL_INDUSTRIES, 'all')):
+                g = groups.setdefault(key, {'values': [], 'ids': [], 'outlier_ids': []})
+                if v['status'] == 'ok':
+                    g['values'].append(v['value'])
+                    g['ids'].append(r['id'])
+                else:
+                    g['outlier_ids'].append(r['id'])
+        cells = []
+        for (ind, yr), g in groups.items():
+            n = len(g['values'])
+            cells.append({'industry': ind, 'year': yr, 'count': n,
+                          'median': _median(g['values']) if n >= MIN_CELL_SAMPLE else None,
+                          'ids': g['ids'], 'outlier_ids': g['outlier_ids']})
+        out[m] = cells
+    return out
+
+
+def report_dict(row) -> dict:
+    """FinancialReport → словарь для `sector_values` (рубли, строки по кодам)."""
+    import json as _json
+    from fns_client import _rub_from_thousands
+    try:
+        raw = _json.loads(row.raw_lines_json) if row.raw_lines_json else {}
+    except (TypeError, ValueError):
+        raw = {}
+    lines = {}
+    for code, value in (raw if isinstance(raw, dict) else {}).items():
+        rub = _rub_from_thousands(value)
+        if rub is not None:
+            lines[str(code)] = float(rub)
+    out = {'year': row.year, 'lines': lines}
+    for key in ('revenue_rub', 'operating_profit_rub', 'net_profit_rub', 'equity_rub',
+                'borrowings_rub', 'cash_rub', 'assets_rub'):
+        out[key] = _num(getattr(row, key))
+    return out
+
+
+def sector_admission(d: dict) -> tuple[str | None, str | None]:
+    """Уровень сделки ('verified' / 'computed' / None) и причина отказа — те же
+    правила, что у списка мультипликаторов. Банк проходит их с одной поправкой:
+    «предмет — банк» здесь не отказ (для P/BV у банка есть капитал)."""
+    import facts as facts_layer
+    f = d.get('facts') or {}
+    if not f:
+        return None, 'no_facts'
+    probe = d
+    target = f.get('target') or {}
+    if target.get('bank'):
+        probe = dict(d, facts=dict(f, target=dict(target, bank=False, confirmed=True)))
+    ok, reason = facts_layer.admitted(probe, 'multiple_text')
+    if ok:
+        return 'verified', None
+    ok2, _ = facts_layer.admitted(probe, 'multiple_text_computed')
+    if ok2:
+        return 'computed', None
+    return None, reason
+
+
+def sector_row(d: dict, tier: str, report: dict | None, entity_name: str | None,
+               bank_entry: dict | None, industry: str) -> dict:
+    """Строка таблицы по одной допущенной сделке — чистая функция (без БД)."""
+    f = d['facts']
+    price, stake, target = f.get('price') or {}, f.get('stake') or {}, f.get('target') or {}
+    scope = price.get('scope') if price.get('scope') in ('package', 'equity', 'ev') else 'package'
+    price_rub = float(price['value_rub'])
+    price_full, price_basis = implied_full_price(price_rub, stake.get('value'), scope)
+    year, year_basis = multiple_year(d)
+    is_bank = bool(target.get('bank'))
+    if is_bank:
+        values = sector_values(price_full, scope, None, year or 0,
+                               bank=bank_equity_for_year(bank_entry, year or 0) or {})
+        entity_name = entity_name or (bank_entry or {}).get('legal_name')
+    else:
+        values = sector_values(price_full, scope, report, year or 0)
+    return {
+        'id': d['id'], 'title': d.get('title') or d['id'], 'year': year, 'year_basis': year_basis,
+        'industry': industry, 'target_id': target_of(d) or '', 'target_name': entity_name,
+        'confidence': tier, 'bank': is_bank,
+        'sum_rub': price_rub, 'price_full_rub': price_full, 'price_basis': price_basis,
+        'stake': stake.get('value'), 'price_scope': scope, 'price_fx': price_fx(price),
+        'report_year': (report or {}).get('year') if not is_bank else None,
+        'metrics': values,
+    }
+
+
+def sector_table(rows: list[dict], deals_total: int, not_counted: list[dict] | None = None) -> dict[str, Any]:
+    """Сборка ответа из готовых строк — чистая функция (её же зовут тесты)."""
+    rows = sorted(rows, key=lambda r: (-(r['year'] or 0), r['title']))
+    has = lambda r: any(v['status'] in ('ok', 'outlier') for v in r['metrics'].values())  # noqa: E731
+    counted = [r for r in rows if has(r)]
+    by_ind: dict[str, int] = {}
+    for r in counted:
+        by_ind[r['industry']] = by_ind.get(r['industry'], 0) + 1
+    return {
+        'metrics': [{'key': m, 'label': SECTOR_METRIC_LABELS[m], 'hint': SECTOR_METRIC_HINTS[m],
+                     'bounds': SECTOR_BOUNDS[m]} for m in SECTOR_METRICS],
+        'years': sorted({r['year'] for r in counted if r['year']}),
+        'industries': [k for k, _ in sorted(by_ind.items(), key=lambda kv: (-kv[1], kv[0]))],
+        'min_cell': MIN_CELL_SAMPLE,
+        'rows': rows,
+        'cells': {'all': sector_cells(counted), 'verified': sector_cells(counted, only_verified=True)},
+        'deals_total': deals_total,
+        'admitted_total': len(rows),
+        'with_multiple_total': len(counted),
+        'by_metric': {m: sum(1 for r in counted if r['metrics'][m]['status'] in ('ok', 'outlier'))
+                      for m in SECTOR_METRICS},
+        'not_counted': list(not_counted or []) + [
+            {'id': r['id'], 'title': r['title'], 'reason': 'no_metric',
+             'label': 'нет отчёта за нужный год или у компании убыток'} for r in rows if not has(r)],
+        'methodology': SECTOR_METHODOLOGY,
+    }
+
+
+def compute_sector_table(db, deals: dict[str, dict[str, Any]], get_company_profile,
+                         bank_finance: dict | None = None) -> dict[str, Any]:
+    """Таблица «отрасль × год» для /api/analytics/sector-multiples, карточки
+    сделки и ассистента. Единственная функция таблицы, которая трогает БД."""
+    from db.models import FinancialReport, LegalEntity, LegalEntityMatchStatus
+
+    bank_finance = bank_finance or {}
+    rows: list[dict] = []
+    not_counted: list[dict] = []
+    for deal_id, raw in deals.items():
+        d = dict(raw, id=deal_id)
+        tier, _ = sector_admission(d)
+        if not tier:
+            continue
+        target = d['facts'].get('target') or {}
+        target_id = target_of(d) or ''
+        year = multiple_year(d)[0] or 0
+        report, entity_name = None, None
+        if not target.get('bank'):
+            entity = db.scalar(select(LegalEntity).where(
+                LegalEntity.company_id == target_id,
+                LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+            ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
+            row = entity and db.scalar(select(FinancialReport).where(
+                FinancialReport.legal_entity_id == entity.id,
+                FinancialReport.year < year,
+            ).order_by(FinancialReport.year.desc()))
+            if row:
+                report, entity_name = report_dict(row), entity.legal_name
+                # Проверенный уровень держится на ТОМ отчёте, который читали
+                # (см. perimeter_report_still_matches): сменился — строки нет.
+                seen = target.get('perimeter_report') or {}
+                if tier == 'verified' and seen and (report.get('revenue_rub') is None or not
+                        perimeter_report_still_matches(seen, entity.inn, row.year, report['revenue_rub'])):
+                    not_counted.append({'id': deal_id, 'title': d.get('title'), 'reason': 'report_changed',
+                                        'label': NOT_SHOWN_LABELS['report_changed']})
+                    continue
+        ind = d.get('ind') or ''
+        if not ind or ind == 'Не определена':
+            ind = ((get_company_profile(target_id) or {}).get('industry') if target_id else '') or 'Не определена'
+        rows.append(sector_row(d, tier, report, entity_name, bank_finance.get(target_id), ind))
+    return sector_table(rows, len(deals), not_counted)
+
+
+def find_cell(table: dict, metric: str, industry: str | None, year: int | None,
+              only_verified: bool = False) -> dict | None:
+    """Ячейка таблицы для ассистента: отрасль (None — все отрасли) и год
+    (None — все годы)."""
+    cells = ((table or {}).get('cells') or {}).get('verified' if only_verified else 'all', {}).get(metric) or []
+    want_ind = industry or ALL_INDUSTRIES
+    want_year = year if year else 'all'
+    for c in cells:
+        if c['industry'] == want_ind and c['year'] == want_year:
+            return c
+    return None

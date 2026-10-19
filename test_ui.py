@@ -4908,3 +4908,72 @@ def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_u
         assert not errors, "ошибки в консоли: %s" % errors[:3]
     finally:
         ctx.close()
+
+
+def _sector_table_payload(deal_id):
+    """Ответ /api/analytics/sector-multiples в форме deal_multiples.sector_table."""
+    import deal_multiples as dm
+    rows = []
+    for i, (ind, year, ps) in enumerate([("Ритейл", 2024, 1.0), ("Ритейл", 2024, 2.0), ("Ритейл", 2024, 3.0),
+                                         ("Порты и инфраструктура", 2023, 40.0),
+                                         ("Химия и удобрения и производство очень длинного названия", 2025, 1.5)]):
+        m = {k: {"status": "no_data", "value": None, "note": ""} for k in dm.SECTOR_METRICS}
+        for k in dm.SECTOR_METRICS:
+            m[k] = {"status": "outlier" if ps > 30 else "ok", "value": ps, "note": "",
+                    "denominator_year": year - 1, "source": "ФНС"}
+        m["pe"] = {"status": "not_applicable", "value": None, "note": "чистый убыток",
+                   "denominator_year": year - 1, "source": "ФНС"}
+        rows.append({"id": deal_id if i == 0 else "x%d" % i, "title": "Сделка номер %d с очень длинным названием" % i,
+                     "year": year, "industry": ind, "target_id": "", "target_name": "ООО Тест", "confidence": "verified",
+                     "sum_rub": 1e9, "price_full_rub": 2e9, "price_basis": "scaled", "stake": 50.0,
+                     "price_scope": "package", "price_fx": None, "metrics": m})
+    return dm.sector_table(rows, 1000)
+
+
+def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
+    """Таблица «Мультипликаторы по отраслям» (19 октября 2026): выбор
+    мультипликатора, медиана при трёх сделках, прочерк с подсказкой, список
+    сделок по клику, выгрузка CSV; на телефоне таблица прокручивается внутри
+    блока, страница не едет. На карточке сделки — блок «оценка» со ссылкой
+    на методику."""
+    base = json.load(open("static/data/deals_promoted.json", encoding="utf-8"))
+    deals = base["deals"] if isinstance(base, dict) and "deals" in base else base
+    deals = list(deals.values()) if isinstance(deals, dict) else deals
+    deal_id = next(d["id"] for d in deals if (d.get("eco") or {}).get("sum") and d.get("target")
+                   and str(d.get("date") or "") >= "2024")
+    for width in (360, 390, 1280):
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        try:
+            pg = ctx.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            payload = json.dumps(_sector_table_payload(deal_id))
+            ctx.route("**/api/analytics/sector-multiples", lambda route: route.fulfill(
+                status=200, content_type="application/json", body=payload))
+            pg.goto(base_url + "/#/analytics", wait_until="networkidle")
+            pg.wait_for_selector("#sectorMultCard .smult-table", timeout=15000)
+            body = pg.inner_text("#sectorMultCard")
+            assert "EV / операционная прибыль" in body and "P/BV" in body
+            assert "×2" in body and "3 сделки" in body          # медиана «Ритейла» за 2024
+            assert pg.locator("#sectorMultCard .smult-dash").count() >= 1   # одна сделка — прочерк
+            assert "для медианы нужно не меньше 3" in pg.locator("#sectorMultCard .smult-dash").first.get_attribute("title") \
+                or "границами" in pg.locator("#sectorMultCard .smult-dash").first.get_attribute("title")
+            pg.click("#sectorMultCard [data-sind='%s'][data-syear='2024']" % "%D0%A0%D0%B8%D1%82%D0%B5%D0%B9%D0%BB")
+            assert pg.locator("#smultList li").count() == 3
+            pg.click("#sectorMultCard [data-smetric='pe']")
+            assert "Под этот выбор сделок пока нет" in pg.inner_text("#sectorMultCard")   # P/E убыточных — «не применим»
+            assert pg.locator("[data-smultcsv]").count() == 1
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
+            pg.goto(base_url + "/#/deal/" + deal_id, wait_until="networkidle")
+            pg.click("[data-l='eco']")
+            pg.wait_for_selector(".deal-mult", timeout=15000)
+            card = pg.inner_text(".deal-mult")
+            assert "оценка" in card.lower() and "не применим" in card and "не EV/EBITDA" in card
+            assert pg.locator(".deal-mult a[href='#/analytics']").count() == 1
+            assert pg.evaluate(
+                "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
+            assert not errors, errors
+            pg.close()
+        finally:
+            ctx.close()
