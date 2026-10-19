@@ -2,45 +2,16 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d60354526",
-   "title": "Крупный курский бизнес увеличил инвестиции в фиксированную сеть почти в 1,5 раза",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-19_krupnyj_kurskij_biznes_uvelichil"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d72382362",
-   "title": "В Москве вынесли приговор по делу об аферах в продаже квартир",
+   "draft_id": "d89390689",
+   "title": "ВЦИОМ назвал долю россиян, совершивших покупки в интернете за последний год",
    "date": "2026-10-19",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/proisshestviya/28228859"
+     "https://tass.ru/obschestvo/28228917"
     ]
    ],
-   "sum": "54 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -59,45 +30,16 @@
    ]
   },
   {
-   "draft_id": "d54908876",
-   "title": "В bnMAP.pro назвали регион-лидер по доле студий в продажах новостроек",
+   "draft_id": "d58088712",
+   "title": "В Перми за четверть миллиарда продают ТЦ, расположенный на месте бывшего рынка",
    "date": "2026-10-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28228319"
+     "web:ura.news",
+     "https://ura.news/news/1053137245"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d13681383",
-   "title": "Финляндия потратит 100 млн евро на покупку миллиона противопехотных мин",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/19/finljandija-potratit-100-mln"
-    ]
-   ],
-   "sum": "€100 млн",
+   "sum": "250 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -113,74 +55,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d24722830",
-   "title": "Почти половина россиян задумывается о покупке или замене авто — но только 8% смогут сделать это в ближайший год",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/pochti-polovina-rossiyan-zadumyvaetsya-o-pokupke-ili-zamene-avto-no-tolko-8-smogut-sdelat-eto-v-blizhajshij-god/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-19",
-     "title": "Переговоры",
-     "note": "Почти половина россиян, рассматривающих покупку авто, не определилась между новым автомобилем и машиной с пробегом, говорится в исследовании Rambler&amp;Co и Сбера, с которым ознакомился Russian Business. При выборе машины респонденты прежде всего учитывают…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/pochti-polovina-rossiyan-zadumyvaetsya-o-pokupke-ili-zamene-avto-no-tolko-8-smogut-sdelat-eto-v-blizhajshij-god/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30022843",
-   "title": "В России рухнули продажи машин одного китайского бренда",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/19/v-rossii-ruhnuli-prodazhi-mashin-odnogo-kitayskogo-brenda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g22d3599c (общие редкие слова: месте, рынка) — проверьте, не дубль ли"
    ]
   }
  ]
