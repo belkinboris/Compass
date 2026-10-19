@@ -9,6 +9,24 @@
    "reasons": [
     "слабое совпадение: общие слова заголовка: 3"
    ]
+  },
+  {
+   "news": "https://vc.ru/crypto/3202333-rossiyskie-banki-i-tsb-protiv-shemy-pokupki-usdt-v-sng?from=rss",
+   "title": "Российские банки и ЦБ начали бороться со схемой покупки USDT в странах СНГ и продажей в России за наличные — РБК",
+   "verdict": "enrich:gd937c845",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://abnews.ru/center/news/msk/2026/10/19/na-rozhdestvenskoj-ulicze-v-moskve-vystavili-na-torgi-dva-pomeshheniya",
+   "title": "На Рождественской улице в Москве выставили на торги два помещения",
+   "verdict": "enrich:gbcf07c78",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
   }
  ]
 }

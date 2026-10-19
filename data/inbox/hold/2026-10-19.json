@@ -2,13 +2,41 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d28008366",
-   "title": "«Макларен» выставил на продажу пять болидов из своей исторической коллекции",
+   "draft_id": "d82204153",
+   "title": "В приложении «МТС Банка» теперь можно купить железнодорожный билет с кешбэком 5%",
    "date": "2026-10-19",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261019/maklaren-2125329377.html"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-19_v_prilozhenii_mts_banka"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33448722",
+   "title": "📌 Трамп Сделка продажа РФ оптом недорого",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1364017.php"
     ]
    ],
    "sum": null,
