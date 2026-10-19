@@ -1,0 +1,104 @@
+{
+ "made": "2026-10-19",
+ "drafts": [
+  {
+   "draft_id": "d21688245",
+   "title": "Россияне купили более 4,5 млн автомобилей с пробегом за девять месяцев",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/auto/news/2026/10/16/1237784-rossiyane-kupili-avtomobilei"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-19",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/auto/news/2026/10/16/1237784-rossiyane-kupili-avtomobilei"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "более 4,5 млн автомобилей с пробегом за девять месяцев",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "более 4,5 млн автомобилей с пробегом за девять месяцев",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g596d1415 (общие редкие слова: более, купили) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d39888323",
+   "title": "Американцы отдали миллионы долларов, чтобы купить дальнобойные ракеты",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137162"
+    ]
+   ],
+   "sum": "$550 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
+    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, миллио) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d21072632",
+   "title": "Новогодний стол: что купить уже сейчас, чтобы не разориться в декабре",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053136640"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  }
+ ]
+}
