@@ -2,13 +2,80 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d89390689",
-   "title": "ВЦИОМ назвал долю россиян, совершивших покупки в интернете за последний год",
+   "draft_id": "d87294342",
+   "title": "Российский разработчик BI-платформы Visiology привлек 200 млн рублей",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:tadviser.ru",
+     "https://www.tadviser.ru/a/305681"
+    ]
+   ],
+   "sum": "200 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский разработчик BI-платформы Visiology",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский разработчик BI-платформы Visiology",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d70755724",
+   "title": "В заксобрание Петербурга внесли законопроект о запрете продажи вейпов",
    "date": "2026-10-19",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28228917"
+     "https://tass.ru/obschestvo/28229269"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-19",
+     "title": "Переговоры",
+     "note": "Также планируют ограничить торговлю никотином возле школ, городских пляжей, спортивных объектов и социальных учреждений",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28229269"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19421032",
+   "title": "В России выставили на продажу редчайший внедорожник",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/19/v-rossii-vystavili-na-prodazhu-redchayshiy-vnedorozhnik/"
     ]
    ],
    "sum": null,
@@ -30,16 +97,16 @@
    ]
   },
   {
-   "draft_id": "d58088712",
-   "title": "В Перми за четверть миллиарда продают ТЦ, расположенный на месте бывшего рынка",
+   "draft_id": "d40035945",
+   "title": "Махнуть за впечатлениями на Новый год: как купить авиабилет по самому дешевому тарифу",
    "date": "2026-10-19",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053137245"
+     "https://ura.news/articles/1053137244"
     ]
    ],
-   "sum": "250 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -54,8 +121,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g22d3599c (общие редкие слова: месте, рынка) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44852994",
+   "title": "Вейпы хотят убрать из продажи в Петербурге",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/szfo/news/spb/2026/10/19/vejpy-hotyat-ubrat-iz-prodazhi-v-peterburge"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
