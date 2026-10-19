@@ -1312,6 +1312,18 @@ a.dp-asset-name:hover{color:var(--accent)}
 .co-adv a:hover{color:var(--accent)}
 .co-adv-n{font-weight:400;color:var(--muted);font-size:12.5px;white-space:nowrap}
 .co-advisors-more{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+/* Признаки возможных сделок на странице компании (signals.json, 19 октября
+   2026): 2–4 строки «дата — что заявлено — источник» и кнопка к ассистенту.
+   Нет признаков — блока нет вовсе. */
+.co-signals{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 24px;margin-bottom:26px;min-width:0}
+.co-signals>.label{display:block;margin-bottom:10px}
+.co-signals-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.co-signals-list li{font-size:14px;line-height:1.45;min-width:0;overflow-wrap:anywhere}
+.co-sig-date{color:var(--muted)}
+.co-sig-src{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.co-signals-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px}
+.co-signals-note{font-size:12.5px;color:var(--muted);margin:0;flex:1 1 220px;min-width:0}
+@media (max-width:560px){.co-signals{padding:16px}}
 
 /* ---------- цепочка владения ---------- */
 .adv-card .label{margin-bottom:6px}
@@ -8296,6 +8308,57 @@ function sanctionsHtml(c){
   return `<div class="sanc-row">${chips}</div>
     <div class="sanc-note">${lead} (ссылки ведут на сами списки).${when} Совпадение проверено вручную, ${tail}.</div>`;
 }
+/* ПРИЗНАКИ ВОЗМОЖНЫХ СДЕЛОК. Партнёр владельца, 19 октября 2026: показывать,
+   у кого вероятна сделка, не процентом, а доводами с датой и ссылкой —
+   компания заявила о продаже, ищет инвестора, обсуждается сделка. Данные —
+   static/data/signals.json (собирает pipeline/ingest/signals.py, сайт тянет
+   файл из main сам); грузится лениво, один раз, только на странице компании.
+   Нет признаков — блока нет. Кнопка ведёт к ассистенту тем же путём, что
+   подготовка к собеседованию (pendingQ + pendingCtx страницы). */
+let SIGNALS = null, signalsPromise = null;
+async function loadSignals(){
+  if(SIGNALS) return SIGNALS;
+  if(!signalsPromise) signalsPromise = fetch("static/data/signals.json")
+    .then(r=>r.ok?r.json():{}).then(j=>Array.isArray(j.signals)?j.signals:[]).catch(()=>[]);
+  SIGNALS = await signalsPromise;
+  return SIGNALS;
+}
+const SIGNALS_SHOWN = 4;
+function companySignalsHtml(id, rows){
+  const mine = rows.filter(r=>r.company_id===id||r.object_id===id)
+    .sort((a,b)=>String(b.date||"").localeCompare(String(a.date||""))).slice(0, SIGNALS_SHOWN);
+  if(!mine.length) return "";
+  const attr = v => String(v||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+  const items = mine.map(r=>{
+    let text = String(r.summary||"");
+    // На странице самой компании её имя в начале строки — повтор заголовка.
+    if(r.company_id===id) text = text.replace(/^.*?\s—\s/, "");
+    text = text ? text[0].toUpperCase()+text.slice(1) : "";
+    const src = Array.isArray(r.source) && /^https?:\/\//.test(r.source[1]||"")
+      ? ` <a class="co-sig-src" href="${attr(r.source[1])}" target="_blank" rel="noopener">${esc(String(r.source[0]||"источник"))} ↗</a>` : "";
+    const deal = r.deal_id && DEALS.some(d=>d.id===r.deal_id) ? ` <a class="co-sig-src" href="#/deal/${attr(r.deal_id)}">сделка →</a>` : "";
+    return `<li><span class="co-sig-date">${esc(fmtDateLong(r.date))}</span> — ${esc(text)}${src}${deal}</li>`;
+  }).join("");
+  return `<div class="co-signals"><span class="label">Признаки возможных сделок</span>
+    <ul class="co-signals-list">${items}</ul>
+    <div class="co-signals-foot"><p class="co-signals-note">Что заявляла компания и какие сделки с ней обсуждаются — с датой и источником. Это не прогноз.</p>
+    <button class="chip" id="askSignals">Разобрать с ассистентом</button></div></div>`;
+}
+async function mountCompanySignals(id){
+  const slot = document.getElementById("co-signals");
+  if(!slot) return;
+  const rows = await loadSignals();
+  if(!slot.isConnected) return;
+  const html = companySignalsHtml(id, rows);
+  slot.innerHTML = html;
+  const btn = document.getElementById("askSignals"), c = co(id);
+  if(btn && c) btn.onclick = () => {
+    sessionStorage.setItem("pendingQ", "Будут ли у этой компании сделки? Разбери признаки.");
+    sessionStorage.setItem("pendingLabel", `Признаки сделок: «${c.name}»`);
+    sessionStorage.setItem("pendingCtx", JSON.stringify({type:"company", id}));
+    location.hash = "#/assistant";
+  };
+}
 function renderCompany(id){
   const c = co(id);
   if(!c){
@@ -8389,6 +8452,7 @@ function renderCompany(id){
     <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании</span>
     ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
   </div>
+  <div id="co-signals"></div>
   ${companyAdvisorsHtml(id, structured)}
   <!-- СДЕЛКИ ВЫШЕ ОТЧЁТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
        справка о стороне сделки, а не главное на странице. Блок с пятью
@@ -8463,6 +8527,7 @@ function renderCompany(id){
   mountMiniAI(c.name,"company",id);
   mountClaimLine("company", id);
   mountCompanyFns(id);
+  mountCompanySignals(id);
   if(SHOW_COMPANY_LINKS && groupMembers.length) mountGroupMembers(groupMembers, "group-members");
   // Портфель показывает долю в той же строке, что и имя (просьба владельца
   // 23 августа) — доля берётся из ownership-записи ПОРТФЕЛЬНОЙ компании,

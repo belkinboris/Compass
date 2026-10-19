@@ -1942,3 +1942,40 @@ def test_temporary_management_is_not_typed_as_ma(base):
     rx = re.compile(r"(?:во?|под)\s+временн\w+\s+управлени", re.I)
     bad = [d["id"] for d in _all_cards(base) if d.get("type") == "M&A" and rx.search(d.get("title") or "")]
     assert not bad, bad
+
+
+def test_signals_file_points_to_real_companies_and_sources(base):
+    """Признаки будущих сделок (static/data/signals.json, pipeline/ingest/
+    signals.py): каждый — у существующего профиля (или слитого в другой),
+    с датой, видом из списка, источником-ссылкой и пересказом одной короткой
+    фразой; ссылка на сделку — на существующую карточку. Без вероятностей:
+    признак — довод, а не прогноз."""
+    path = ROOT / "static" / "data" / "signals.json"
+    if not path.exists():
+        pytest.skip("signals.json ещё не собран")
+    rows = json.loads(path.read_text(encoding="utf-8"))["signals"]
+    kinds = {"sell", "for_sale", "buy", "investor", "ipo", "exit", "strategy", "state_sale"}
+    known = set(base["companies"]) | set(base.get("merged_companies") or {})
+    deal_ids = {d["id"] for d in base["deals"]}
+    bad = []
+    for r in rows:
+        why = []
+        if r.get("company_id") not in known:
+            why.append("нет профиля")
+        if not re.fullmatch(r"\d{4}-\d{2}(?:-\d{2})?", str(r.get("date") or "")):
+            why.append("дата")
+        if r.get("kind") not in kinds:
+            why.append("вид")
+        src = r.get("source") or []
+        if len(src) != 2 or not str(src[1]).startswith("http"):
+            why.append("источник")
+        summary = str(r.get("summary") or "")
+        # Доля из карточки («58,67% пароходства») — факт; гадание — нет.
+        if not summary or len(summary.split()) > 40 or re.search(r"вероятн|шанс", summary, re.I):
+            why.append("пересказ")
+        if r.get("deal_id") and r["deal_id"] not in deal_ids:
+            why.append("сделка")
+        if why:
+            bad.append((r.get("id"), why))
+    assert not bad, bad[:10]
+    assert len({r["id"] for r in rows}) == len(rows), "повтор id признака"

@@ -14,6 +14,8 @@ main.py                       FastAPI: раздача статики, /health, /
 yandex_search.py              обёртка над Яндекс XML-поиском (для ассистента)
 assistant_retrieval.py        поиск по базе для ассистента: индекс, маршрут вопроса,
                               точные ответы со ссылками, компактные карточки для модели
+assistant_signals.py          признаки будущих сделок для ассистента (static/data/signals.json,
+                              собирает pipeline/ingest/signals.py)
 pipeline/assistant_bench.py   таблица «модель × время × успех» через боевой сервер (ключи там)
 test_kompas.py                48 тестов: yandex_search, /api/ask, call_llm, стенд, оценки, подсказки,
                               ответ «что умеет сервис»

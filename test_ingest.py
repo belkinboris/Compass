@@ -8046,3 +8046,206 @@ def test_post_subject_names_the_company_then_says_what_it_is():
                         "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
     line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
     assert "<b>Предмет:</b> Perfectum — Узбекский мобильный оператор" in line
+
+
+# --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
+
+def _signals_fixture():
+    import signals
+    companies = {
+        "vtb": {"name": "ВТБ", "ind": "Банки", "desc": ""},
+        "rgs": {"name": "Росгосстрах", "ind": "Страхование", "desc": ""},
+        "sber": {"name": "Сбербанк", "ind": "Банки", "desc": ""},
+        "astra": {"name": "ПАО «Группа Астра»", "ind": "ИТ и интернет", "desc": ""},
+        "lukoil": {"name": "ЛУКОЙЛ", "ind": "Нефть и газ", "desc": ""},
+        "pik": {"name": "ГК ПИК", "ind": "Строительство", "desc": ""},
+        "knauf": {"name": "Knauf (российский бизнес)", "ind": "Строительство", "desc": ""},
+        "dom": {"name": "АО «ДОМ.РФ»", "ind": "Профессиональные услуги", "desc": ""},
+    }
+    keys = {"sber": ["сбербанк", "сбер"], "knauf": ["knauf"]}
+    return signals, signals.Profiles(companies, keys), companies
+
+
+@pytest.mark.parametrize("title,kind", [
+    ("ВТБ намерен продать Росгосстрах в этом году", "sell"),
+    ("«Группа Астра» ищет стратегического инвестора", "investor"),
+    ("«Сбер» планирует выкупить на торгах лизинговую компанию «Вектор рейл»", "buy"),
+    ("«Т Плюс» рассматривает строительство или покупку генерации на Дальнем Востоке", "buy"),
+    ("ЛУКОЙЛ готовится к IPO своей дочерней компании", "ipo"),
+    ("Совладелец SPLAT Global назвал 2029 год сроком для возможного IPO", "ipo"),
+    ("Металлург решил выйти из непрофильных активов", "exit"),
+    ("OTP Bank рассматривает возможность полного ухода из России", "exit"),
+    ("Семейный бизнес экс-главы Роспотребнадзора готовят к продаже", "sell"),
+    ("Холдинг не исключает привлечения стратегического партнёра", "investor"),
+])
+def test_signal_detector_finds_stated_intentions(title, kind):
+    signals, _, _ = _signals_fixture()
+    hit = signals.detect(title)
+    assert hit and hit[0] == kind, (title, hit and hit[0])
+
+
+@pytest.mark.parametrize("title", [
+    # отрицание — не признак
+    "«Сбер» не планирует проводить IPO компаний экосистемы",
+    "«Сбер» не видит перспектив для IPO компаний своей экосистемы",
+    "Компания опровергла планы продать завод",
+    # недвижимость, вещи, частные покупки — не сделка с бизнесом
+    "Каждый третий житель регионов рассматривает покупку жилья в Москве",
+    "В Москве выставили на продажу особняк XIX века",
+    "Известные фэшн-блогеры выставят вещи из своего гардероба на большой распродаже",
+    "ГК ПИК продаёт бизнес-парк River City",
+    # чужие классы шума фильтра сделок
+    "Российские авиакомпании планируют продавать билеты за цифровые рубли",
+    "Акции «Магнита» подорожали после новости о планах купить «Дикси»",
+    # уже случившаяся сделка — не намерение
+    "ВТБ продал Росгосстрах",
+    "«Сбер» купил долю в «Вектор Рейл»",
+])
+def test_signal_detector_ignores_non_intentions(title):
+    signals, _, _ = _signals_fixture()
+    assert signals.detect(title) is None, title
+
+
+def test_signal_is_linked_to_the_company_profile_by_party_keys():
+    """Привязка — ключами привязки сторон (link_parties): имя профиля, падеж
+    («активы «Лукойла»»), псевдоним «Сбер» из match_keys; профиль российской
+    части иностранной матери по голому имени матери не находится."""
+    signals, profiles, _ = _signals_fixture()
+    rows = signals.from_item("ВТБ намерен продать Росгосстрах в этом году", "https://iz.ru/1",
+                             "2026-09-11", "Известия", profiles, set())
+    assert [(r["company_id"], r["kind"], r.get("object_id")) for r in rows] == [("vtb", "sell", "rgs")]
+    assert rows[0]["summary"] == "ВТБ — возможная продажа: Росгосстрах"
+    assert rows[0]["source"] == ["Известия", "https://iz.ru/1"] and rows[0]["strength"] == "strong"
+    rows = signals.from_item("«Сбер» планирует выкупить долю в компании", "https://a.ru/2",
+                             "2026-09-11", "a.ru", profiles, set())
+    assert [r["company_id"] for r in rows] == ["sber"]
+    rows = signals.from_item("Американский инвестор планирует выкупить активы «Лукойла»", "https://b.ru/3",
+                             "2026-09-23", "b.ru", profiles, set())
+    assert [(r["company_id"], r["kind"]) for r in rows] == [("lukoil", "for_sale")]
+    assert profiles.find("Knauf") is None
+    # профиля нет — признака нет; госорган — не компания с будущей сделкой
+    assert signals.from_item("Тайвань намерен купить ракеты", "https://c.ru/4", "2026-10-15", "c", profiles, set()) == []
+    assert signals.from_item("«ДОМ.РФ» намерен продать долю в проекте", "https://c.ru/5", "2026-10-15", "c",
+                             profiles, set()) == []
+
+
+def test_signal_keeps_its_wording_away_from_the_source_and_aggregators():
+    """Пересказ — шаблоном, не словами заголовка; агрегатор — способ узнать,
+    а не источник (docs/sources_legal.md); адрес, уже ставший источником
+    карточки, — сделка, а не признак."""
+    signals, profiles, _ = _signals_fixture()
+    title = "ВТБ намерены продать страховую компанию Росгосстрах в этом году ради капитала"
+    rows = signals.from_item(title, "https://iz.ru/9", "2026-09-11", "Известия", profiles, set())
+    assert rows and "намерены" not in rows[0]["summary"] and "ради капитала" not in rows[0]["summary"]
+    assert signals.from_item(title, "https://mergers.ru/news/x", "2026-09-11", "m", profiles, set()) == []
+    assert signals.from_item(title, "https://iz.ru/9", "2026-09-11", "m", profiles, {"https://iz.ru/9"}) == []
+
+
+def test_signal_that_became_a_deal_is_dropped():
+    """«Росатом планирует выкупить «Дело»» в августе, карточка закрытия — в
+    октябре: признак уже стал сделкой, его покажет карточка."""
+    signals, profiles, _ = _signals_fixture()
+    cards = [{"id": "d1", "date": "2026-10-07", "buyer": "sber", "status": "Закрыта"}]
+    rows = signals.from_item("«Сбер» планирует купить долю в банке", "https://a.ru/1", "2026-08-25", "a",
+                             profiles, set(), cards)
+    assert rows == []
+
+
+def test_discussed_cards_become_signals_and_closed_ones_do_not():
+    signals, _, companies = _signals_fixture()
+    data = {"companies": companies, "deals": [
+        {"id": "g1", "date": "2026-09-01", "status": "Обсуждается", "type": "M&A", "title": "ВТБ продаёт Росгосстрах",
+         "seller_id": "vtb", "target": "rgs", "src": [["@dealsma", "https://t.me/dealsma/1"],
+                                                      ["Коммерсантъ", "https://www.kommersant.ru/doc/1"]]},
+        {"id": "g2", "date": "2026-09-01", "status": "Закрыта", "type": "M&A", "title": "Сбербанк купил X",
+         "buyer": "sber", "src": [["РБК", "https://rbc.ru/1"]]},
+        {"id": "g3", "date": "2026-09-02", "status": "Обсуждается", "type": "M&A", "title": "ГК ПИК продаёт участок",
+         "seller_id": "pik", "asset": "участок 5 га", "src": [["РБК", "https://rbc.ru/2"]]},
+        {"id": "g4", "date": "2020-01-01", "status": "Обсуждается", "type": "M&A", "title": "Старое",
+         "buyer": "sber", "src": [["РБК", "https://rbc.ru/3"]]},
+    ]}
+    rows = signals.from_cards(data, today=date(2026, 10, 19))
+    got = {(r["company_id"], r["kind"], r["deal_id"]) for r in rows}
+    assert got == {("vtb", "sell", "g1"), ("rgs", "for_sale", "g1")}, got
+    # источник для читателя — издание, а не агрегатор
+    assert all(r["source"] == ["Коммерсантъ", "https://www.kommersant.ru/doc/1"] for r in rows)
+
+
+def test_signals_file_rebuild_keeps_news_and_recomputes_cards():
+    signals, _, companies = _signals_fixture()
+    data = {"companies": companies, "deals": [], "match_keys": {}}
+    old = [{"id": "sold", "company_id": "vtb", "date": "2026-09-11", "kind": "sell", "summary": "ВТБ — x",
+            "source": ["Известия", "https://iz.ru/1"], "origin": "news"},
+           {"id": "card-gone", "company_id": "vtb", "date": "2026-09-11", "kind": "sell", "summary": "ВТБ — y",
+            "source": ["РБК", "https://rbc.ru/1"], "origin": "card", "deal_id": "gone"}]
+    rows, added = signals.build(data, [], old, today=date(2026, 10, 19))
+    assert [r["id"] for r in rows] == ["sold"] and added == []
+
+
+def test_signals_measure_on_live_labels_has_no_false_signs():
+    """Разметка живого потока (signal_labels.json: hold-файлы притока и
+    анти-примеры): ни один заголовок, размеченный «не признак», признаком
+    не становится. Полнота ниже — заголовки об иностранных компаниях без
+    профиля в базе; точность важнее."""
+    import signals
+    labels = json.loads((ROOT / "pipeline" / "ingest" / "signal_labels.json").read_text(encoding="utf-8"))
+    data = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    profiles = signals.Profiles(data["companies"], data.get("match_keys"))
+    false = [t for t, want in labels.items() if not want
+             and signals.from_item(t, "measure://" + t, "2026-01-01", "m", profiles, set())]
+    assert not false, false
+    found = [t for t, want in labels.items() if want
+             and signals.from_item(t, "measure://" + t, "2026-01-01", "m", profiles, set())]
+    assert len(found) >= 8, found
+
+
+def test_signals_digest_picks_fresh_and_strong_only():
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import signals_digest
+    companies = {"a": {"name": "Альфа"}, "b": {"name": "Бета"}, "c": {"name": "Гамма"}}
+    today = date(2026, 10, 19)
+    rows = [
+        {"company_id": "a", "date": "2026-10-10", "kind": "buy", "summary": "Альфа — присматривает новые покупки",
+         "source": ["РБК", "https://rbc.ru/1"]},
+        {"company_id": "a", "date": "2026-10-01", "kind": "investor", "summary": "Альфа — ищет инвестора или партнёра",
+         "source": ["РБК", "https://rbc.ru/2"]},
+        {"company_id": "b", "date": "2026-10-12", "kind": "buy", "summary": "Бета — присматривает новые покупки",
+         "source": ["РБК", "https://rbc.ru/3"]},
+        {"company_id": "c", "date": "2026-10-15", "kind": "sell", "summary": "Гамма — готовит продажу части бизнеса",
+         "source": ["Коммерсантъ", "https://kommersant.ru/1"]},
+        {"company_id": "c", "date": "2026-08-01", "kind": "buy", "summary": "Гамма — старое",
+         "source": ["Коммерсантъ", "https://kommersant.ru/2"]},
+    ]
+    chosen = [cid for cid, _ in signals_digest.pick(rows, companies, today)]
+    assert chosen == ["a", "c"], "Бета — один обычный признак; Гамма — один сильный"
+    text = signals_digest.render(rows, companies, today)
+    assert text.startswith("🧭 <b>Кто готовится к сделкам: 2 компании и почему</b>")
+    assert "/#/companies/a" in text and "/#/companies/c" in text and "/#/companies/b" not in text
+    assert "• 10 октября — присматривает новые покупки" in text and "старое" not in text
+    assert signals_digest.check(text) == []
+    assert signals_digest.check(text.replace("не прогноз", "прогноз")) != []
+    assert signals_digest.check(text + "\nВероятность сделки 70%") != []
+    assert signals_digest.render([], companies, today) == ""
+    kb = signals_digest.keyboard(signals_digest.week_key(today))
+    datas = [b["callback_data"] for b in kb["inline_keyboard"][0]]
+    # та же форма решения, что у месячной сводки: сайт не примет её за этап сделки
+    assert datas == ["mod:digest~signals-2026-W43:post_ok", "mod:digest~signals-2026-W43:post_no"]
+
+
+def test_signals_digest_draft_goes_to_the_decision_topic_and_not_to_the_channel(monkeypatch, tmp_path):
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import signals_digest
+    import send_drafts
+    import console_topics
+    sent = []
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "t")
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(send_drafts, "PAUSE", 0)
+    monkeypatch.setattr(console_topics, "thread_id", lambda kind: {"decision": 7}.get(kind))
+    monkeypatch.setattr(send_drafts, "send_one",
+                        lambda client, token, chat, text, kb, thread=None, html=False: sent.append((chat, text, kb, thread, html)) or True)
+    monkeypatch.setattr(signals_digest, "STATE", str(tmp_path / "state.json"))
+    assert signals_digest.send_draft("<b>текст</b>", "signals-2026-W43")
+    assert len(sent) == 1 and sent[0][3] == 7 and sent[0][4] is True
+    assert "пробный черновик" in sent[0][1] and "Сама в канал она не уйдёт" in sent[0][1]
+    assert not signals_digest.send_draft("<b>текст</b>", "signals-2026-W43"), "второй раз за неделю — только с --force"

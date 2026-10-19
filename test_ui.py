@@ -4981,3 +4981,61 @@ def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
             pg.close()
         finally:
             ctx.close()
+
+
+def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(browser, base_url):
+    """Блок «Признаки возможных сделок» (партнёр владельца, 19 октября 2026):
+    2–4 строки «дата — что заявлено — источник» и кнопка «Разобрать с
+    ассистентом», которая уходит с контекстом страницы. Нет признаков —
+    блока нет. Файл признаков подменяется: тест не зависит от того, что
+    сегодня собрал приток. Ширины — 360/390/1280, без переполнения."""
+    rows = [
+        {"id": "s1", "company_id": "gcafc31dc", "date": "2026-09-11", "kind": "sell",
+         "summary": "ВТБ — возможная продажа: Росгосстрах", "source": ["Известия", "https://iz.ru/x"],
+         "origin": "news"},
+        {"id": "s2", "company_id": "gcafc31dc", "date": "2026-06", "kind": "investor",
+         "summary": "ВТБ — ищет инвестора или партнёра для очень длинного названия направления бизнеса "
+                    "Оченьдлинноеназваниеактиваизсорокабуквбезпробеловвообще",
+         "source": ["Коммерсантъ", "https://www.kommersant.ru/doc/1"], "origin": "card_text", "deal_id": "nope"},
+        {"id": "s3", "company_id": "gcafc31dc", "date": "2025-02-01", "kind": "sell", "summary": "ВТБ — x",
+         "source": ["РБК", "https://www.rbc.ru/1"], "origin": "card"},
+        {"id": "s4", "company_id": "gcafc31dc", "date": "2024-02-01", "kind": "sell", "summary": "ВТБ — y",
+         "source": ["РБК", "https://www.rbc.ru/2"], "origin": "card"},
+        {"id": "s5", "company_id": "gcafc31dc", "date": "2023-02-01", "kind": "sell", "summary": "ВТБ — пятый",
+         "source": ["РБК", "https://www.rbc.ru/3"], "origin": "card"},
+    ]
+    body = json.dumps({"updated": "2026-10-19", "signals": rows}, ensure_ascii=False)
+    for width in WIDTHS:
+        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        ctx.route("**/static/data/signals.json",
+                  lambda r: r.fulfill(status=200, content_type="application/json", body=body))
+        pg = ctx.new_page()
+        errors = []
+        pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
+        pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+        try:
+            pg.goto(base_url + "/#/companies/gcafc31dc", wait_until="domcontentloaded")
+            pg.wait_for_selector(".co-signals li", timeout=20000)
+            items = pg.locator(".co-signals li")
+            assert items.count() == 4, "показываем не больше четырёх строк"
+            first = items.first.inner_text()
+            assert first.startswith("11 сентября 2026") and "Возможная продажа: Росгосстрах" in first, first
+            assert "ВТБ —" not in first, "имя компании на её же странице не повторяется"
+            assert pg.locator(".co-signals li a[href='https://iz.ru/x']").count() == 1
+            assert "пятый" not in pg.inner_text(".co-signals")
+            assert "признаки возможных сделок" in pg.inner_text(".co-signals").lower()
+            over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+            if width == 390:
+                with pg.expect_request(lambda r: "/api/assistant/lookup" in r.url and r.method == "POST") as req:
+                    pg.click("#askSignals")
+                sent = json.loads(req.value.post_data or "{}")
+                assert (sent.get("context_type"), sent.get("context_id")) == ("company", "gcafc31dc")
+                assert "сделки" in sent.get("question", "")
+            pg.goto(base_url + "/#/companies/gda7d982b", wait_until="domcontentloaded")
+            pg.wait_for_selector("h1", timeout=20000)
+            pg.wait_for_timeout(800)
+            assert pg.locator(".co-signals").count() == 0, "без признаков блока нет"
+            assert not errors, "ошибки в консоли: %s" % errors[:3]
+        finally:
+            ctx.close()

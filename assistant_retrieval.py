@@ -3283,6 +3283,12 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
         own = _answer_entity(context_type, context_id, Intent("empty", wants_advisors=True), idx)
         if own:
             return own
+    # «Будут ли у X сделки», «кто сейчас продаёт агроактивы» — признаки
+    # будущих сделок: свой маршрут и свой файл данных (assistant_signals.py).
+    import assistant_signals                    # noqa: PLC0415 — модуль импортирует этот
+    signal = assistant_signals.answer(question, context_type, context_id, idx)
+    if signal:
+        return signal
     intent = route(question, idx)
     # Уточнение к прошлому ответу («а какие из них самые крупные?», «а за
     # сколько?») ищется сначала внутри его сделок: до 14 октября 2026 слово
