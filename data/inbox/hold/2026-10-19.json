@@ -2,7 +2,7 @@
  "made": "2026-10-19",
  "drafts": [
   {
-   "draft_id": "d26354069",
+   "draft_id": "d90791755",
    "title": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
    "date": "2026-10-19",
    "src": [
@@ -30,7 +30,7 @@
    ]
   },
   {
-   "draft_id": "d69942368",
+   "draft_id": "d20093949",
    "title": "Тюменский ТЦ «Новый магнат» начали распродавать по частям",
    "date": "2026-10-19",
    "src": [
@@ -58,16 +58,44 @@
    ]
   },
   {
-   "draft_id": "d38742333",
-   "title": "BFMTV: во Франции выставляют на продажу украденные во время беспорядков товары",
+   "draft_id": "d41922587",
+   "title": "«Литфонд» выставит на торги книгу 1901 года с иллюстрациями Билибина",
    "date": "2026-10-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28230813"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1123552"
     ]
    ],
    "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38181331",
+   "title": "В России начали продавать компактный кроссовер Volkswagen Tharu XR китайской сборки — по цене от 2,1 млн ₽",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/v-rossii-nachali-prodavat-kompaktnyj-krossover-volkswagen-tharu-xr-kitajskoj-sborki-po-cene-ot-21-mln/"
+    ]
+   ],
+   "sum": "2,1 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -82,24 +110,34 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d59785267",
-   "title": "Федорищев: запрет продажи вейпов в Самарской области может усилить теневой рынок",
+   "draft_id": "d14013812",
+   "title": "Более 90% россиян совершают спонтанные покупки — почти половина не позволяет себе тратить больше 5 тыс. рублей",
    "date": "2026-10-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28230773"
+     "web:rb.ru",
+     "https://rb.ru/news/bolee-90-rossiyan-sovershayut-spontannye-pokupki-pochti-polovina-ne-pozvolyaet-sebe-tratit-bolshe-5-tys-rublej/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-19",
+     "title": "Переговоры",
+     "note": "91,2% россиян совершали спонтанные покупки в летние месяцы 2026 года, следует из данных агентства социологических и маркетинговых исследований Magram MR, с которыми ознакомился Russian Business. 48,2% респондентов готовы потратить на незапланированную покупку…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/bolee-90-rossiyan-sovershayut-spontannye-pokupki-pochti-polovina-ne-pozvolyaet-sebe-tratit-bolshe-5-tys-rublej/"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -109,35 +147,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g420352ff (общие редкие слова: област, самарс) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d24915457",
-   "title": "Швейцарская фармкомпания Roche приостановила инвестиции в Германию",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261019/roche-2125485671.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
