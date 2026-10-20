@@ -285663,7 +285663,8 @@
   "ga5a7f3c1": null,
   "ga09376f6": 211,
   "g28941fd8": 212,
-  "gf285fa14": null
+  "gf285fa14": null,
+  "g32cfa1d4": 213
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -289917,7 +289918,21 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g32cfa1d4": {
+   "sum": "$140 млн ($90 млн акции, $50 млн облигации)",
+   "buyer_name": "Spice Expeditions, WashU и Moore",
+   "asset": "ценные бумаги Salmon Group (Филиппины)",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-10-20T14:56:46+00:00"
+ "telegram_last_post_at": "2026-10-20T15:37:31+00:00"
 }
