@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d30783654",
+   "draft_id": "d58109051",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -99,30 +99,103 @@
    ]
   },
   {
-   "draft_id": "d69270394",
-   "title": "Стив Уиткофф прилетел в Норвегию для нового раунда переговоров по Украине",
+   "draft_id": "d69462070",
+   "title": "Инвестиции в микроэлектронику в «Технополисе Москва» выросли в 11,7 раза",
    "date": "2026-10-20",
    "src": [
     [
      "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ad738e4a9c6ea75f4fda34c"
+     "https://www.rbc.ru/rbcfreenews/6ad76af89a7947f17c9a2dc0"
+    ]
+   ],
+   "sum": "157,5 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43142991",
+   "title": "Минфин 21 октября проведет аукционы по размещению ОФЗ двух выпусков",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28233875"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70774741",
+   "title": "Минфин на аукционах 21 октября предложит ОФЗ серий 26253 и 26235",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261020/minfin-874435373.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14291752",
+   "title": "Медным рудникам нужны инвестиции в 332 миллиарда долларов, пишет Bloomberg",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261020/investitsii-874435202.html"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-20",
-     "title": "Переговоры",
-     "note": "Спецпосланник президента США Стив Уиткофф прибыл в Норвегию, где запланирован новый раунд переговоров по урегулированию конфликта на Украине, сообщили ТАСС в международном аэропорту Гардермуэн в Осло.",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/rbcfreenews/6ad738e4a9c6ea75f4fda34c"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -131,51 +204,53 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, пишет) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d39839479",
+   "title": "Распродажа награбленного. В Европе погромщики торгуют люксовыми вещами из разбитых магазинов. Они продают их онлайн",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/20/long-sumka-hermes-stanovitsya-dobychey-v-evrope-gromyat-dorogie-butiki-i-rasprodayut-ukradennyy-lyuks-k-chemu-eto-privedet/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d92490219",
-   "title": "Филиппинский финтех-стартап Salmon бывших управленцев «Тинькофф» привлёк $140 млн",
+   "draft_id": "d79366490",
+   "title": "В Петербурге избавились от дерева из Call of Duty",
    "date": "2026-10-20",
    "src": [
     [
-     "web:vc.ru",
-     "https://vc.ru/money/3205446-finteh-startap-salmon-na-filippinah-privlek-investitsii-ot-tinkoff?from=rss"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/20/v-peterburge-izbavilis-ot-dereva-iz-call-of-duty/"
     ]
    ],
-   "sum": "$140 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Филиппинский финтех-стартап Salmon бывших управленцев «Тинькофф»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Филиппинский финтех-стартап Salmon бывших управленцев «Тинькофф»",
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d16903825",
-   "title": "В Пермском крае продают за 15 млн рублей ферму, на которой разводят коров",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137637"
-    ]
-   ],
-   "sum": "15 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -191,6 +266,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64526157",
+   "title": "В Европе резко подскочили продажи электромобилей",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/20/v-evrope-rezko-podskochili-prodazhi-elektromobiley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
