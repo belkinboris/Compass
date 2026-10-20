@@ -2954,7 +2954,7 @@
    },
    "sum": "$140 млн ($90 млн акции, $50 млн облигации)",
    "buyer_name": "Spice Expeditions, WashU и Moore",
-   "asset": "Salmon Group — финтех-стартап на Филиппинах",
+   "asset": "ценные бумаги Salmon Group (Филиппины)",
    "party_evidence": {
     "buyer": [
      {
@@ -2966,7 +2966,7 @@
     ],
     "target": [
      {
-      "value": "Salmon Group — финтех-стартап на Филиппинах",
+      "value": "ценные бумаги Salmon Group (Филиппины)",
       "field": "asset",
       "method": "explicit_news_title",
       "url": "https://vc.ru/money/3205446-finteh-startap-salmon-na-filippinah-privlek-investitsii-ot-tinkoff"

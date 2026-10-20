@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d58109051",
+   "draft_id": "d61669178",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -99,19 +99,30 @@
    ]
   },
   {
-   "draft_id": "d69462070",
-   "title": "Инвестиции в микроэлектронику в «Технополисе Москва» выросли в 11,7 раза",
+   "draft_id": "d64099097",
+   "title": "Veon потратил $207 миллионов на покупку постсоветского сотового оператора",
    "date": "2026-10-20",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ad76af89a7947f17c9a2dc0"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-20_veon_potratil_207_millionov"
     ]
    ],
-   "sum": "157,5 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
+   "sum": "$207 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-20",
+     "title": "Сделка завершена",
+     "note": "Группа Veon за $207 млн приобрела узбекистанского сотового оператора Rubicon Wireless, построившего сеть 5G в режиме standalone. Veon работает в Узбекистане через компания Unitel. Сделка позволит «дочке» Veon увеличить частотный ресурс для работы 5G.",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-20_veon_potratil_207_millionov"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -120,110 +131,26 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43142991",
-   "title": "Минфин 21 октября проведет аукционы по размещению ОФЗ двух выпусков",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28233875"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70774741",
-   "title": "Минфин на аукционах 21 октября предложит ОФЗ серий 26253 и 26235",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261020/minfin-874435373.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14291752",
-   "title": "Медным рудникам нужны инвестиции в 332 миллиарда долларов, пишет Bloomberg",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261020/investitsii-874435202.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
+   "ind": "Телеком",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку gbe536659 (общие редкие слова: доллар, пишет) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g28941fd8 (общие редкие слова: veon, операт) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d39839479",
-   "title": "Распродажа награбленного. В Европе погромщики торгуют люксовыми вещами из разбитых магазинов. Они продают их онлайн",
+   "draft_id": "d79164132",
+   "title": "На круглом столе «ДП» обсудят инвестиции в корпоративное здоровье",
    "date": "2026-10-20",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/long-sumka-hermes-stanovitsya-dobychey-v-evrope-gromyat-dorogie-butiki-i-rasprodayut-ukradennyy-lyuks-k-chemu-eto-privedet/"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/20/na-kruglom-stole-dp-obsudjat"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -234,20 +161,59 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d79366490",
-   "title": "В Петербурге избавились от дерева из Call of Duty",
+   "draft_id": "d69440520",
+   "title": "В Белоруссии начнут продавать автомобили Changan российской сборки",
    "date": "2026-10-20",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/v-peterburge-izbavilis-ot-dereva-iz-call-of-duty/"
+     "web:iz.ru",
+     "https://iz.ru/2187429/2026-10-20/v-belorussii-nachnut-prodavat-avtomobili-changan-rossiiskoi-sborki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-20",
+     "title": "Переговоры",
+     "note": "Компания Changan начнет поставлять в Белоруссию автомобили, произведенные на заводе «Автотор» в Калининграде. Как заявили представители белорусского дистрибьютора 20 октября, эти машины станут намного доступнее по сравнению с импортируемыми из Китая. Первыми…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2187429/2026-10-20/v-belorussii-nachnut-prodavat-avtomobili-changan-rossiiskoi-sborki"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77588250",
+   "title": "«Что ему мешает прыснуть кислотой?»: мать двоих детей из Барнаула вынуждена продать квартиру из-за преследований бывшего, а полиция бессильна",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/criminal/2026/10/20/76710879/"
     ]
    ],
    "sum": null,
@@ -266,35 +232,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64526157",
-   "title": "В Европе резко подскочили продажи электромобилей",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/v-evrope-rezko-podskochili-prodazhi-elektromobiley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
