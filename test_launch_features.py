@@ -5034,3 +5034,37 @@ def test_own_traffic_counter_records_views_and_shows_them(client, monkeypatch):
     lines = traffic.console_lines(st)
     assert "Посетителей" in lines[1]
     assert traffic.normalize("/preview/x") is None and traffic.normalize("/deal/../../etc") is None
+
+
+def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, monkeypatch):
+    """20 октября 2026: партнёр ответил своим текстом на «[веха g97679d43~closed]»
+    («Лабинский»), а сайт эту метку не разбирал — правка пропала молча. Полный
+    текст заменяет пост этапа и выпускает его; вопрос — заметка к сделке."""
+    _mod_env(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-100777")
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
+                        or {"ok": True, "result": {"message_id": 9100}})
+    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    deal = "g%s" % uuid.uuid4().hex[:8]
+    combo = deal + "~closed"
+    assert client.post("/api/ops/milestone-draft", json={
+        "token": "тайна", "combo": combo, "event_id": deal + "-closed", "text": "📌 <b>старый текст</b>",
+        "buttons": None, "route": ["main"]}).status_code == 200
+    marker = "📌 [веха %s] — В КАНАЛ, на проверку" % combo
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": "А кто покупатель?", "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 11, "text": marker}}})
+    assert not [p for m, p in sent if p.get("chat_id") == "-100777"]
+    new = ("ВТБ продал агрохолдинг «Лабинский» за 50 млрд рублей\n\nПокупатель: агрохолдинг «Просторы»\n"
+           "Продавец: ВТБ\nПредмет: агрокомплекс «Лабинский», включая земельные участки")
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": new, "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 12, "text": marker}}})
+    assert _wait_for(lambda: [p for m, p in sent if p.get("chat_id") == "-100777"])
+    post = [p for m, p in sent if p.get("chat_id") == "-100777"][0]
+    assert "«Лабинский», включая земельные участки" in post["text"] and "старый" not in post["text"]
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] in (deal, combo)]
+    assert {d["verdict"] for d in rows} == {"note", "post_yes"}, rows
+    client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
