@@ -131397,6 +131397,14 @@
     [
      "AK&M",
      "https://www.akm.ru/news/vyruchka_predpriyatiy_agrokholdinga_prostory_po_itogam_2024_goda_sostavila_65_57_mlrd_rub/"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/10/20/vtb-prodal-agroholding-labinskij"
+    ],
+    [
+     "Retailer.ru",
+     "https://retailer.ru/vtb-prodal-agroholding-labinskij-za-50-mlrd-rublej/"
     ]
    ],
    "extra": "—",
@@ -131516,7 +131524,21 @@
       "ind": "Агро"
      },
      "headline": "ВТБ продал агрохолдинг «Лабинский» структурам «Просторов» за 50 млрд рублей",
-     "milestone_drafted_at": "2026-10-20T07:14:29+00:00"
+     "milestone_drafted_at": "2026-10-20T07:14:29+00:00",
+     "sources": [
+      [
+       "Frank Media",
+       "https://frankmedia.ru/310918"
+      ],
+      [
+       "Деловой Петербург",
+       "https://www.dp.ru/a/2026/10/20/vtb-prodal-agroholding-labinskij"
+      ],
+      [
+       "Retailer.ru",
+       "https://retailer.ru/vtb-prodal-agroholding-labinskij-za-50-mlrd-rublej/"
+      ]
+     ]
     }
    ],
    "party_evidence": {
@@ -252822,6 +252844,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/9042127"
+     ],
+     "sources": [
+      [
+       "Коммерсантъ",
+       "https://www.kommersant.ru/doc/9042127"
+      ],
+      [
+       "Телеграм-канал: Сделки M&A",
+       "https://t.me/dealsma/7482"
+      ]
      ]
     }
    ],
@@ -252936,7 +252968,13 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "discovery_src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7482"
+    ]
+   ]
   },
   {
    "id": "g28941fd8",
@@ -276873,6 +276911,18 @@
    "ind": "Телеком",
    "desc": "Узбекский мобильный оператор, юрлицо — Rubicon Wireless; работает в Узбекистане с 1995 года как оператор полного цикла (мобильная связь, домашний интернет, CDMA).",
    "kpi": []
+  },
+  "g032b976e": {
+   "name": "X4 Падел",
+   "ind": "Развлечения",
+   "desc": "Сеть клубов падела; ООО «Х4 Падел» создано в марте 2026 года.",
+   "kpi": []
+  },
+  "g0a110d96": {
+   "name": "Rocket Padel",
+   "ind": "Развлечения",
+   "desc": "Сеть падел-клубов в нескольких регионах России (в том числе в Москве, Санкт-Петербурге и Краснодаре); три клуба сети — в Кемерово, Волгограде и Уфе — и бренд Rocket Padel в октябре 2026 перешли к «X4 Падел», остальные клубы сети в сделку не входили.",
+   "kpi": []
   }
  },
  "match_keys": {
@@ -283403,6 +283453,13 @@
   ],
   "g6f14b502": [
    "aspace"
+  ],
+  "g032b976e": [
+   "x4 падел",
+   "х4 падел"
+  ],
+  "g0a110d96": [
+   "rocket padel"
   ]
  },
  "merged": {
