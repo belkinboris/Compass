@@ -285339,7 +285339,9 @@
   "g8a599c40": 208,
   "g38bdff94": 209,
   "g7bff6e5c": 210,
-  "ga5a7f3c1": null
+  "ga5a7f3c1": null,
+  "ga09376f6": 211,
+  "g28941fd8": 212
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -289538,7 +289540,47 @@
      "kind": "closed"
     }
    ]
+  },
+  "ga09376f6": {
+   "sum": "Не раскрыта",
+   "buyer": "g8fdefffc",
+   "seller": "Владимир Скороход",
+   "target": "gba3ec0cd",
+   "asset": "разработчик PLM-платформы «Стаксель»",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
+  },
+  "g28941fd8": {
+   "sum": "$207 млн",
+   "buyer": "gc6434a72",
+   "seller": "Фарход Мамаджанов, IMC-Capital и Камрон Акбаров",
+   "target": "gef64e054",
+   "asset": "мобильный оператор Perfectum в Узбекистане",
+   "status": "Подписана",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": null,
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "signed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-10-19T07:08:05+00:00"
+ "telegram_last_post_at": "2026-10-20T08:28:59+00:00"
 }
