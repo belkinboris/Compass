@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d61669178",
+   "draft_id": "d53206388",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -99,58 +99,17 @@
    ]
   },
   {
-   "draft_id": "d64099097",
-   "title": "Veon потратил $207 миллионов на покупку постсоветского сотового оператора",
+   "draft_id": "d65435070",
+   "title": "Владельцы клуба Роналду «Ан-Наср» задумались о его продаже из-за долгов",
    "date": "2026-10-20",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-20_veon_potratil_207_millionov"
-    ]
-   ],
-   "sum": "$207 млн",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-20",
-     "title": "Сделка завершена",
-     "note": "Группа Veon за $207 млн приобрела узбекистанского сотового оператора Rubicon Wireless, построившего сеть 5G в режиме standalone. Veon работает в Узбекистане через компания Unitel. Сделка позволит «дочке» Veon увеличить частотный ресурс для работы 5G.",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-20_veon_potratil_207_millionov"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Телеком",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g28941fd8 (общие редкие слова: veon, операт) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d79164132",
-   "title": "На круглом столе «ДП» обсудят инвестиции в корпоративное здоровье",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/20/na-kruglom-stole-dp-obsudjat"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/20/10/2026/6ad779fb5f34b5b66459cd17"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -168,27 +127,55 @@
    ]
   },
   {
-   "draft_id": "d69440520",
-   "title": "В Белоруссии начнут продавать автомобили Changan российской сборки",
+   "draft_id": "d12074942",
+   "title": "Гендиректора турагентства в Туле обвинили в хищении при продаже путевок",
    "date": "2026-10-20",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2187429/2026-10-20/v-belorussii-nachnut-prodavat-avtomobili-changan-rossiiskoi-sborki"
+     "web:ria.ru",
+     "https://ria.ru/20261020/turagentstvo-2125700065.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46478295",
+   "title": "Южная Корея освоила IPO по-русски: минус 32% за день",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1364753.php"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-10-20",
      "title": "Переговоры",
-     "note": "Компания Changan начнет поставлять в Белоруссию автомобили, произведенные на заводе «Автотор» в Калининграде. Как заявили представители белорусского дистрибьютора 20 октября, эти машины станут намного доступнее по сравнению с импортируемыми из Китая. Первыми…",
+     "note": "Теперь российским участникам неудачных IPO будет с кем обсуждать свои инвестиционные достижения. Сегодня южнокорейская Elice вышла на биржу. Акции размещали по 90,5к вон (5585,5 рублей). Сама компания предоставляет вычислительные мощности для искусственного…",
      "source": [
-      "web:iz.ru",
-      "https://iz.ru/2187429/2026-10-20/v-belorussii-nachnut-prodavat-avtomobili-changan-rossiiskoi-sborki"
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1364753.php"
      ]
     }
    ],
@@ -207,13 +194,13 @@
    ]
   },
   {
-   "draft_id": "d77588250",
-   "title": "«Что ему мешает прыснуть кислотой?»: мать двоих детей из Барнаула вынуждена продать квартиру из-за преследований бывшего, а полиция бессильна",
+   "draft_id": "d77260451",
+   "title": "Клиенты ВТБ получат дополнительную скидку за покупки на Wildberries",
    "date": "2026-10-20",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/criminal/2026/10/20/76710879/"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/311074"
     ]
    ],
    "sum": null,
