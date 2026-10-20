@@ -323,6 +323,12 @@ _PARENS = re.compile(r'\((?!\s*\d{1,3}(?:[.,]\d+)?\s*%[^()]{0,25}\))[^()]*\)')
 # тире открывают новую часть («довела долю до 51%, приобретя 36%» — глагол
 # за запятой относится к 36, а не к 51).
 _SENTENCE_END = re.compile(r'[.;,:]\s|[.;,:]$|\s[—–]\s')
+# «стала 100%-ным владельцем», «стал 50%-ной собственницей» — дефис между
+# процентом и падежным окончанием ставит «владельцем» в `after`, а «стала» в
+# `before`, и составной триггер _ACQ_WORDS не находит фразу целиком ни там, ни
+# там (KNOWN_ISSUES.md, 19 октября 2026). Сочетание однозначно: по-русски так
+# не говорят ни о чём, кроме результата покупки доли.
+_HYPHEN_OWNER_RX = re.compile(r'^-[а-яё]{1,4}\s+(?:владельц|собственни[кц])', re.I)
 
 
 def _window_verdict(before: str, after: str) -> bool:
@@ -333,6 +339,8 @@ def _window_verdict(before: str, after: str) -> bool:
     present = [x.end() for x in _PRESENT_WORDS.finditer(before)]
     if hist and not (present and max(present) > max(hist)):
         return False  # история этой доли: «ранее владел 30%», «в 2021 году купил 20%»
+    if not acq and _HYPHEN_OWNER_RX.match(after):
+        return True
     if acq:
         # результат названнее покупки: «выкупив …, довела долю до 51%»
         return not (res and max(res) > max(acq))
