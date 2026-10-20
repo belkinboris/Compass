@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d85681453",
+   "draft_id": "d75532223",
    "title": "«Газпром» хочет продать за 161 млн рублей гостиницу в Новом Уренгое. Фото",
    "date": "2026-10-20",
    "src": [
@@ -86,7 +86,7 @@
    ]
   },
   {
-   "draft_id": "d80730838",
+   "draft_id": "d63664186",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -127,13 +127,41 @@
    ]
   },
   {
-   "draft_id": "d55761677",
-   "title": "Квартиру фигуранта дела «Элекс Плюс» Евгения Викулина готовят к продаже по требованию «Альфа-Банка»",
+   "draft_id": "d52787124",
+   "title": "В ОЭЗ «Технополис Москва» инвестиции в развитие микроэлектроники выросли в 11,7 раза",
    "date": "2026-10-20",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118672-kvartiru-figuranta-dela-eleks-plyus-evgeniya-vikulina-gotovyat-k-prodazhe-po-trebovaniyu-alfa-banka/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-20_v_oez_tehnopolis_moskva"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78960676",
+   "title": "McLaren выставил на продажу сразу пять болидов «Формулы-1»",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2187162/video/mclaren-vystavil-na-prodazhu-srazu-piat-bolidov-formuly-1"
     ]
    ],
    "sum": null,
@@ -148,93 +176,37 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d10766441",
-   "title": "Продавцы просят ФАС проверить правила акций Ozon — селлерам сложно отказаться от участия в распродажах",
+   "draft_id": "d62545094",
+   "title": "Инвестиции в ЖКХ России на 2026 год запланированы на уровне 433 млрд рублей",
    "date": "2026-10-20",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/prodavcy-prosyat-fas-proverit-pravila-akcij-ozon-selleram-slozhno-otkazatsya-ot-uchastiya-v-rasprodazhah/"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261020/investitsii-2125625342.html"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79602920",
-   "title": "Женщина купила сразу два счастливых лотерейных билета",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/zhenschina-kupila-srazu-dva-schastlivyh-lotereynyh-bileta/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
+   "sum": "433 млрд ₽",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
+     "kind": "negotiations",
      "date": "2026-10-20",
-     "title": "Сделка завершена",
+     "title": "Переговоры",
      "note": "",
      "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/20/zhenschina-kupila-srazu-dva-schastlivyh-lotereynyh-bileta/"
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261020/investitsii-2125625342.html"
      ]
     }
    ],
-   "buyer_name": "Женщина",
-   "asset": "сразу два счастливых лотерейных билета",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Женщина",
-    "asset": "сразу два счастливых лотерейных билета",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d27512191",
-   "title": "Мародеры начали распродавать украденные из разгромленных бутиков в Париже вещи",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/marodery-nachali-rasprodavat-ukradennye-iz-razgromlennyh-butikov-v-parizhe-veschi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -243,24 +215,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ЖКХ и обращение с отходами",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13760544",
-   "title": "Какие ошибки делают почти все при покупке одеяла",
+   "draft_id": "d22832309",
+   "title": "Инвестиции в развитие микроэлектроники в ОЭЗ Москвы выросли в 11,7 раза",
    "date": "2026-10-20",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/articles/1053137567"
+     "web:ria.ru",
+     "https://ria.ru/20261020/investitsii-2125581895.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -271,11 +243,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Машиностроение",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
