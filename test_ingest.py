@@ -661,7 +661,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
         "eco": {"context": "Микрофинансовая компания: онлайн-займы физическим лицам."},
     }
     text_stem = format_post.render(deal_stem, {})
-    assert "<b>Покупатель:</b> Займер — Микрофинансовая компания" in text_stem, \
+    assert "<b>Покупатель:</b> Займер — микрофинансовая компания" in text_stem, \
         "имя покупателя пропало из строки: в детали его нет, похожи только основы слов"
 
     # 3. Имя есть, но в ХВОСТЕ чужой фразы — подлежащее там не покупатель, и
@@ -673,7 +673,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
                             "привлекла 200 млн ₽ от инвестиционного фонда «ТилТех Капитал»."},
     }
     text_tail = format_post.render(deal_tail, {})
-    assert "<b>Покупатель:</b> «ТилТех Капитал» — Московская сеть клиник" in text_tail, \
+    assert "<b>Покупатель:</b> «ТилТех Капитал» — московская сеть клиник" in text_tail, \
         "имя стоит в хвосте детали — строка обязана назвать покупателя впереди"
 
     # И сама граница проверяется напрямую, без рендера целого поста.
@@ -814,7 +814,7 @@ def test_post_subject_line_names_the_subject_not_its_revenue():
     companies = {"t1": {"name": "ООО «Протосервисез»",
                         "desc": "Московская компания, работает с 2014 года."}}
     text = format_post.render(deal, companies)
-    assert "<b>Предмет:</b> ООО «Протосервисез» — Московская компания, работает с 2014 года." in text
+    assert "<b>Предмет:</b> ООО «Протосервисез» — московская компания, работает с 2014 года." in text
     assert "9,5 млн руб." not in text, "показатели предмета выданы за предмет"
 
     # Предложение «Финансов предмета», которое называет юрлицо, а не показатель,
@@ -843,7 +843,7 @@ def test_post_subject_sentences_from_different_sources_get_a_period_between_them
     text = format_post.render(deal, companies)
     # С 19 октября 2026 первым идёт описание предмета, потом доля.
     assert "кредитование 7,52%" not in text, "два источника склеены без знака препинания"
-    assert "Опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
+    assert "опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
 
 
 def test_sentence_split_does_not_break_multi_dot_abbreviations():
@@ -8045,7 +8045,7 @@ def test_post_subject_names_the_company_then_says_what_it_is():
     companies = {"t1": {"name": "Perfectum",
                         "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
     line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
-    assert "<b>Предмет:</b> Perfectum — Узбекский мобильный оператор" in line
+    assert "<b>Предмет:</b> Perfectum — узбекский мобильный оператор" in line
 
 
 # --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
