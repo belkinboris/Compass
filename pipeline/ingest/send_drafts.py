@@ -551,16 +551,32 @@ def drop_old_decisions(card_id):
     """Переслать на проверку — значит, прежние кнопки по этой карточке больше
     не в счёт: 20 октября 2026 владелец нажал «Пост одобрен» на «Стакселе» и
     тут же попросил «не выкладывай, снова направь на проверку». Снимаем на
-    сайте решения карточки и поста (заметки не трогаем — их читает приток)."""
+    сайте решения карточки и поста (заметки не трогаем — их читает приток).
+
+    НО ЖИВОЙ ОТВЕТ ЧЕЛОВЕКА НЕ СНИМАЕТСЯ НИКОГДА. В тот же день, 09:48, партнёр
+    ответил на проект поста СВОИМ текстом, а `--resend`, запущенный в ту же
+    минуту, снял его ответ как «прежний» и прислал следом старый текст. Если по
+    карточке висит «опубликовать», «выкинуть» или «придержать» — пересылка
+    отменяется (возвращаем False), сначала approve.py. Снимаются только
+    кнопки поста («пост одобрен» / «без поста»)."""
     import approve
     decisions, handle = approve.fetch_decisions()
+    live = [d for d in decisions if d.get('deal_id') == card_id
+            and d.get('verdict') in approve.CARD_VERDICTS]
+    if live:
+        for d in live:
+            print('ПЕРЕСЫЛКА ОТМЕНЕНА: по %s есть ответ «%s»%s от %s — сначала approve.py.'
+                  % (card_id, d.get('verdict'), ' со своим текстом' if d.get('edited_text') else '',
+                     str(d.get('created_at'))[:16]))
+        return False
     ids = [d['id'] for d in decisions if d.get('deal_id') == card_id
-           and d.get('verdict') in approve.CARD_VERDICTS | approve.POST_VERDICTS]
+           and d.get('verdict') in approve.POST_VERDICTS]
     if ids:
         approve.consume(handle, ids)
         print('Сняты прежние решения по %s: %s.' % (card_id, ', '.join(
             '%s от %s' % (d.get('verdict'), str(d.get('created_at'))[:16]) for d in decisions
             if d['id'] in ids)))
+    return True
 
 
 def main(write=False, resend=None):
@@ -612,8 +628,8 @@ def main(write=False, resend=None):
             print('Сухой прогон. Отправка — с ключом --write.')
         return 0
 
-    if resend:
-        drop_old_decisions(resend)
+    if resend and not drop_old_decisions(resend):
+        return 1
     import httpx
     sent = 0
     # Все три вида сообщений (пост/карточка/сырьё) ждут решения владельца или

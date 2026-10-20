@@ -8276,3 +8276,23 @@ def test_resend_shows_only_that_card_again_with_fresh_clock(monkeypatch):
     assert marks == [("g-again", "draft_sent"), ("g-again", "post_draft_sent")], marks
     assert "post_preview" not in cards[0]
     assert cards[0]["pending_since"] > "2026-10-20"
+
+
+def test_resend_never_drops_a_live_human_answer(monkeypatch):
+    """20 октября 2026, 09:48: партнёр ответил на проект поста своим текстом, а
+    `--resend` в ту же минуту снял его ответ как «прежний». Живое решение по
+    карточке пересылку отменяет; снимаются только кнопки поста."""
+    import approve
+    import send_drafts
+    eaten = []
+    monkeypatch.setattr(approve, "consume", lambda handle, ids: eaten.extend(ids))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "g1", "verdict": "post_yes", "created_at": "2026-10-20T06:28"},
+        {"id": 2, "deal_id": "g1", "verdict": "approve", "edited_text": "текст партнёра",
+         "created_at": "2026-10-20T06:48"}], ("site", "token")))
+    assert send_drafts.drop_old_decisions("g1") is False
+    assert eaten == []
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "g1", "verdict": "post_yes", "created_at": "2026-10-20T06:28"}], ("site", "token")))
+    assert send_drafts.drop_old_decisions("g1") is True
+    assert eaten == [1]
