@@ -558,7 +558,9 @@ def drop_old_decisions(card_id):
            and d.get('verdict') in approve.CARD_VERDICTS | approve.POST_VERDICTS]
     if ids:
         approve.consume(handle, ids)
-        print('Сняты прежние решения по %s: %d.' % (card_id, len(ids)))
+        print('Сняты прежние решения по %s: %s.' % (card_id, ', '.join(
+            '%s от %s' % (d.get('verdict'), str(d.get('created_at'))[:16]) for d in decisions
+            if d['id'] in ids)))
 
 
 def main(write=False, resend=None):
