@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d52657427",
+   "draft_id": "d85681453",
    "title": "«Газпром» хочет продать за 161 млн рублей гостиницу в Новом Уренгое. Фото",
    "date": "2026-10-20",
    "src": [
@@ -86,7 +86,7 @@
    ]
   },
   {
-   "draft_id": "d22983094",
+   "draft_id": "d80730838",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -127,13 +127,13 @@
    ]
   },
   {
-   "draft_id": "d38542565",
-   "title": "RWB рассказала о мошеннической схеме с продажей якобы списанных со складов книг",
+   "draft_id": "d55761677",
+   "title": "Квартиру фигуранта дела «Элекс Плюс» Евгения Викулина готовят к продаже по требованию «Альфа-Банка»",
    "date": "2026-10-20",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9042618"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118672-kvartiru-figuranta-dela-eleks-plyus-evgeniya-vikulina-gotovyat-k-prodazhe-po-trebovaniyu-alfa-banka/"
     ]
    ],
    "sum": null,
@@ -148,24 +148,51 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d72076963",
-   "title": "Инвесторы взялись за ракетки // Сеть «X4 Падел» выкупила конкурента Rocket Padel",
+   "draft_id": "d10766441",
+   "title": "Продавцы просят ФАС проверить правила акций Ozon — селлерам сложно отказаться от участия в распродажах",
    "date": "2026-10-20",
    "src": [
     [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9042452"
+     "web:rb.ru",
+     "https://rb.ru/news/prodavcy-prosyat-fas-proverit-pravila-akcij-ozon-selleram-slozhno-otkazatsya-ot-uchastiya-v-rasprodazhah/"
     ]
    ],
-   "sum": "220 млн ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79602920",
+   "title": "Женщина купила сразу два счастливых лотерейных билета",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/20/zhenschina-kupila-srazu-dva-schastlivyh-lotereynyh-bileta/"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -173,206 +200,35 @@
      "kind": "closed",
      "date": "2026-10-20",
      "title": "Сделка завершена",
-     "note": "На рынке падела заметная сделка. Сеть «X4 Падел» выкупила корты и права на бренд Rocket Padel, став крупнейшим игроком в сегменте. Сумма сделки могла составить 120–220 млн руб. Падел — одно из наиболее растущих направлений в спортивной индустрии. Простота…",
+     "note": "",
      "source": [
-      "web:kommersant.ru/daily",
-      "https://www.kommersant.ru/doc/9042452"
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/10/20/zhenschina-kupila-srazu-dva-schastlivyh-lotereynyh-bileta/"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "конкурент Rocket Padel",
+   "buyer_name": "Женщина",
+   "asset": "сразу два счастливых лотерейных билета",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": "конкурент Rocket Padel",
+    "buyer": "Женщина",
+    "asset": "сразу два счастливых лотерейных билета",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d88222726",
-   "title": "OpenAI спешит привлечь $30 млрд с оценкой выше $1,4 трлн до IPO Anthropic",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1123639"
-    ]
-   ],
-   "sum": "$30 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d46657068",
-   "title": "Россия пригласила ШОС к созданию совместных производств и инвестициям",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28232205"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68137205",
-   "title": "Мишустин пригласил страны ШОС к созданию совместных производств и инвестициям",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28232177"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20824747",
-   "title": "Петербург вошёл в топ городов по продажам билетов на новогодние ёлки",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/20/peterburg-voshjol-v-top-gorodov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d77523766",
-   "title": "Расулзода оценил объем прямых инвестиций стран ШОС в экономику Таджикистана",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261020/rasulzod-874417079.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d55406493",
-   "title": "Glorax увеличил продажи недвижимости за три квартала на 8%",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261020/prodazhi-2125549335.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d47187825",
-   "title": "Покупка фиктивной справки довела россиянина до суда",
+   "draft_id": "d27512191",
+   "title": "Мародеры начали распродавать украденные из разгромленных бутиков в Париже вещи",
    "date": "2026-10-20",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/20/pokupka-fiktivnoy-spravki-dovela-rossiyanina-do-suda/"
+     "https://lenta.ru/news/2026/10/20/marodery-nachali-rasprodavat-ukradennye-iz-razgromlennyh-butikov-v-parizhe-veschi/"
     ]
    ],
    "sum": null,
@@ -394,13 +250,13 @@
    ]
   },
   {
-   "draft_id": "d55953023",
-   "title": "Какие ошибки совершают почти все при покупке рюкзака",
+   "draft_id": "d13760544",
+   "title": "Какие ошибки делают почти все при покупке одеяла",
    "date": "2026-10-20",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/articles/1053137529"
+     "https://ura.news/articles/1053137567"
     ]
    ],
    "sum": null,
