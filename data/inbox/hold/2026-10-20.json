@@ -58,35 +58,7 @@
    ]
   },
   {
-   "draft_id": "d73087425",
-   "title": "В Пермском крае продают базу отдыха, которую называют санаторием",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137411"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13818638",
+   "draft_id": "d52657427",
    "title": "«Газпром» хочет продать за 161 млн рублей гостиницу в Новом Уренгое. Фото",
    "date": "2026-10-20",
    "src": [
@@ -114,7 +86,7 @@
    ]
   },
   {
-   "draft_id": "d70394001",
+   "draft_id": "d22983094",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -152,6 +124,302 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Тюменский ТЦ «Новый магнат» начали распродавать по частям» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d38542565",
+   "title": "RWB рассказала о мошеннической схеме с продажей якобы списанных со складов книг",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9042618"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d72076963",
+   "title": "Инвесторы взялись за ракетки // Сеть «X4 Падел» выкупила конкурента Rocket Padel",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9042452"
+    ]
+   ],
+   "sum": "220 млн ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-20",
+     "title": "Сделка завершена",
+     "note": "На рынке падела заметная сделка. Сеть «X4 Падел» выкупила корты и права на бренд Rocket Padel, став крупнейшим игроком в сегменте. Сумма сделки могла составить 120–220 млн руб. Падел — одно из наиболее растущих направлений в спортивной индустрии. Простота…",
+     "source": [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9042452"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "конкурент Rocket Padel",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "конкурент Rocket Padel",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d88222726",
+   "title": "OpenAI спешит привлечь $30 млрд с оценкой выше $1,4 трлн до IPO Anthropic",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1123639"
+    ]
+   ],
+   "sum": "$30 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d46657068",
+   "title": "Россия пригласила ШОС к созданию совместных производств и инвестициям",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28232205"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68137205",
+   "title": "Мишустин пригласил страны ШОС к созданию совместных производств и инвестициям",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28232177"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20824747",
+   "title": "Петербург вошёл в топ городов по продажам билетов на новогодние ёлки",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/20/peterburg-voshjol-v-top-gorodov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d77523766",
+   "title": "Расулзода оценил объем прямых инвестиций стран ШОС в экономику Таджикистана",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261020/rasulzod-874417079.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55406493",
+   "title": "Glorax увеличил продажи недвижимости за три квартала на 8%",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261020/prodazhi-2125549335.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d47187825",
+   "title": "Покупка фиктивной справки довела россиянина до суда",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/20/pokupka-fiktivnoy-spravki-dovela-rossiyanina-do-suda/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55953023",
+   "title": "Какие ошибки совершают почти все при покупке рюкзака",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053137529"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
