@@ -285704,6 +285704,11 @@
   "g39e9e9c2-closed": {
    "at": "2026-10-14T07:19:13+00:00",
    "message_id": 200
+  },
+  "g97679d43-closed": {
+   "at": "2026-10-20T17:22:52+00:00",
+   "message_id": 214,
+   "by": "owner_in_chat"
   }
  },
  "telegram_digests": {
@@ -289934,5 +289939,5 @@
    "events": []
   }
  },
- "telegram_last_post_at": "2026-10-20T15:37:31+00:00"
+ "telegram_last_post_at": "2026-10-20T17:22:52+00:00"
 }
