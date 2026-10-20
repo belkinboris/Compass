@@ -8249,3 +8249,30 @@ def test_signals_digest_draft_goes_to_the_decision_topic_and_not_to_the_channel(
     assert len(sent) == 1 and sent[0][3] == 7 and sent[0][4] is True
     assert "пробный черновик" in sent[0][1] and "Сама в канал она не уйдёт" in sent[0][1]
     assert not signals_digest.send_draft("<b>текст</b>", "signals-2026-W43"), "второй раз за неделю — только с --force"
+
+
+def test_resend_shows_only_that_card_again_with_fresh_clock(monkeypatch):
+    """«Направь снова на проверку» (20 октября 2026, «Стаксель»): --resend
+    показывает заново и карточку, и проект поста — только эту карточку, без
+    сырья и чужих карточек — и запускает сутки молчания с нуля."""
+    import send_drafts
+    cards = [
+        {"id": "g-again", "title": "Уже показана, поправлена", "date": "2026-10-19",
+         "reviewed": "2026-10-19", "accepted": "2026-10-19", "second_read": "2026-10-19", "draft_sent": True,
+         "post_draft_sent": True, "post_preview": "старый текст",
+         "pending_since": "2026-10-19T13:25:01+00:00", "src": [["Т", "https://t.example/1"]]},
+        {"id": "g-other", "title": "Чужая, ещё не показана", "reviewed": "2026-10-19",
+         "accepted": "2026-10-19", "src": [["Т", "https://t.example/2"]]},
+    ]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts",
+                        lambda: [{"draft_id": "d1", "title": "Сырьё", "src": [["x", "https://x.example/1"]]}])
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {"g-again": ["note"]})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {})
+    monkeypatch.setattr(send_drafts, "goes_to_channel", lambda card: True)
+    plan, *_rest = send_drafts.build_plan("g-again")
+    marks = [(item["id"], mark) for _t, _k, (kind, item, mark) in plan]
+    assert marks == [("g-again", "draft_sent"), ("g-again", "post_draft_sent")], marks
+    assert "post_preview" not in cards[0]
+    assert cards[0]["pending_since"] > "2026-10-20"

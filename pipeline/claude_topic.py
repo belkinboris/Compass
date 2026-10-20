@@ -19,7 +19,9 @@
 публикации вычёркивается всегда (см. console_topics.channel_ids/is_channel).
 """
 import argparse
+import json
 import os
+from datetime import datetime, timezone
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -35,6 +37,58 @@ KIND = 'claude'
 CHUNK = 4000
 CAPTION_LIMIT = 1024
 DOWNLOADS = os.path.join(ROOT, 'data', 'inbox', 'claude')
+# ПАМЯТЬ ТЕМЫ. Каждый прогон рутины — новая сессия, а Telegram отдаёт только
+# само сообщение и обрывок того, на что ответили. 19 октября 2026 рутина без
+# истории переспросила, что значит «Да», и спорила о продавце, которого
+# партнёр назвал двумя сообщениями выше. Журнал входящих и наших ответов
+# лежит в git, и перед новыми сообщениями печатается его хвост.
+LOG = os.path.join(ROOT, 'data', 'claude_topic_log.jsonl')
+LOG_TAIL = 16
+
+
+def _log_read():
+    if not os.path.exists(LOG):
+        return []
+    out = []
+    for line in open(LOG, encoding='utf-8'):
+        line = line.strip()
+        if line:
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                pass
+    return out
+
+
+def _log_add(entry):
+    os.makedirs(os.path.dirname(LOG), exist_ok=True)
+    with open(LOG, 'a', encoding='utf-8') as fh:
+        fh.write(json.dumps(entry, ensure_ascii=False) + '\n')
+
+
+def _log_incoming(messages):
+    seen = {e.get('id') for e in _log_read() if e.get('dir') == 'in'}
+    for m in messages:
+        if m['id'] in seen:
+            continue
+        _log_add({'dir': 'in', 'id': m['id'], 'message_id': m.get('message_id'),
+                  'from': m.get('from_name'), 'at': str(m.get('created_at') or '')[:16],
+                  'reply_to_text': (m.get('reply_to_text') or '')[:600],
+                  'text': m.get('text') or ('[фото/файл]' if m.get('photo_file_id') or m.get('document_file_id') else '')})
+
+
+def show_history():
+    tail = _log_read()[-LOG_TAIL:]
+    if not tail:
+        return
+    print('=== Переписка в теме до этих сообщений (последние %d записей) ===' % len(tail))
+    for e in tail:
+        if e.get('dir') == 'in':
+            print('[%s] %s (message_id=%s): %s' % (e.get('at'), e.get('from') or '?',
+                                                  e.get('message_id'), (e.get('text') or '')[:800]))
+        else:
+            print('[%s] МЫ, ответ на %s: %s' % (e.get('at'), e.get('reply_to'), (e.get('text') or '')[:800]))
+    print('=== конец истории ===\n')
 
 
 def _bot():
@@ -109,13 +163,16 @@ def _download(bot, file_id, record_id, hint_name=None):
 
 def show(messages):
     bot = _bot()
+    if messages:
+        show_history()
+        _log_incoming(messages)
     print('Непрочитанных сообщений в теме «Клод»: %d' % len(messages))
     for m in messages:
         print('\n--- id=%s  message_id=%s  от %s (%s)  %s' % (
             m['id'], m['message_id'], m.get('from_name') or '?', m.get('from_id'),
             str(m.get('created_at') or '')[:16].replace('T', ' ')))
         if m.get('reply_to_text'):
-            print('В ответ на: %s' % m['reply_to_text'][:500])
+            print('В ответ на: %s' % m['reply_to_text'][:3000])
         if m.get('text'):
             print(m['text'])
         for key, name in (('photo_file_id', None), ('document_file_id', m.get('document_name'))):
@@ -201,6 +258,10 @@ def reply(message_id, text=None, html=False, photo=None, caption=None):
         sent = bool(data.get('ok'))
         ok = ok and sent
         print('часть %d: %s' % (i + 1, 'отправлена' if sent else 'НЕ ДОШЛА — %s' % data.get('description')))
+    if ok:
+        _log_add({'dir': 'out', 'reply_to': message_id,
+                  'at': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M'),
+                  'text': (text or caption or '')[:3000]})
     return ok
 
 
