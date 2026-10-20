@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d53206388",
+   "draft_id": "d55994492",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -99,13 +99,13 @@
    ]
   },
   {
-   "draft_id": "d65435070",
-   "title": "Владельцы клуба Роналду «Ан-Наср» задумались о его продаже из-за долгов",
+   "draft_id": "d84868404",
+   "title": "ФАС назвала регионы-лидеры по наращиванию инвестиционных программ в ЖКХ",
    "date": "2026-10-20",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/20/10/2026/6ad779fb5f34b5b66459cd17"
+     "web:1prime.ru",
+     "https://1prime.ru/20261020/fas-874440761.html"
     ]
    ],
    "sum": null,
@@ -120,62 +120,34 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ЖКХ и обращение с отходами",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d12074942",
-   "title": "Гендиректора турагентства в Туле обвинили в хищении при продаже путевок",
+   "draft_id": "d32456803",
+   "title": "Geely сосредоточится на продаже гибридов в России в 2027 году — но от машин с ДВС компания не откажется",
    "date": "2026-10-20",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261020/turagentstvo-2125700065.html"
+     "web:rb.ru",
+     "https://rb.ru/news/geely-sosredotochitsya-na-prodazhe-gibridov-v-rossii-v-2027-godu-no-ot-mashin-s-dvs-kompaniya-ne-otkazhetsya/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46478295",
-   "title": "Южная Корея освоила IPO по-русски: минус 32% за день",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1364753.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-10-20",
      "title": "Переговоры",
-     "note": "Теперь российским участникам неудачных IPO будет с кем обсуждать свои инвестиционные достижения. Сегодня южнокорейская Elice вышла на биржу. Акции размещали по 90,5к вон (5585,5 рублей). Сама компания предоставляет вычислительные мощности для искусственного…",
+     "note": "Китайский автопроизводитель Geely планирует в 2027 году сделать упор на продажу гибридов в России, сообщает Autonews со ссылкой на источники. При этом модели с традиционными двигателями внутреннего сгорания также останутся в линейке бренда.",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1364753.php"
+      "web:rb.ru",
+      "https://rb.ru/news/geely-sosredotochitsya-na-prodazhe-gibridov-v-rossii-v-2027-godu-no-ot-mashin-s-dvs-kompaniya-ne-otkazhetsya/"
      ]
     }
    ],
@@ -190,35 +162,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77260451",
-   "title": "Клиенты ВТБ получат дополнительную скидку за покупки на Wildberries",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/311074"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd40fc98f (общие редкие слова: гибрид, продаж) — проверьте, не дубль ли"
    ]
   }
  ]
