@@ -4935,6 +4935,29 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                     "editMessageText", chat_id=chat_id, message_id=reply["message_id"],
                     text=stamped, disable_web_page_preview=True)
         return {"ok": True}
+    # НИ ОДИН ОТВЕТ ЧЕЛОВЕКА В КОНСОЛИ НЕ ПРОПАДАЕТ МОЛЧА (20 октября 2026).
+    # Партнёр ответил своим текстом на пост этапа «Лабинского», бот этой
+    # метки не знал — и не сделал НИЧЕГО: ни решения, ни ответа. Владелец:
+    # «у нас всё работает через… хотя должно быть всё понятно». Ответ, который
+    # не разобран ни одним правилом выше, уходит агенту (рутина «тема Клод»)
+    # вместе с тем, на что отвечали, а человек сразу видит, что с ним будет.
+    chat_type = str((message.get("chat") or {}).get("type") or "")
+    if (reply and (reply.get("from") or {}).get("is_bot") and text.strip() and chat_id is not None
+            and _is_reviewer(sender_id) and chat_type in ("group", "supergroup") and not text.strip().startswith("/")):
+        sender = message.get("from") or {}
+        db.add(ClaudeMessage(
+            chat_id=str(chat_id), thread_id=int(message.get("message_thread_id") or 0),
+            message_id=int(message.get("message_id") or 0), from_id=str(sender_id),
+            from_name=" ".join(x for x in (sender.get("first_name"), sender.get("last_name")) if x) or None,
+            text=text.strip(), reply_to_text=str(reply.get("text") or reply.get("caption") or "").strip() or None,
+            consumed=False, created_at=datetime.now(timezone.utc)))
+        db.commit()
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text=("Бот не понял, что сделать с этим ответом, — передал агенту. Он ответит "
+                  "в теме «Клод», обычно в течение часа."),
+            disable_web_page_preview=True, **_thread_kwargs(reply))
+        return {"ok": True}
     # ЛИЧНЫЙ ЧАТ С БОТОМ — ЭТО ЧИТАТЕЛЬ, А НЕ КОНСОЛЬ (4 октября 2026).
     # Владелец нажал в кабинете «Подключить Telegram», потом «Старт» — и
     # получил инструкцию модерации («какие сделки попадут на сайт и в

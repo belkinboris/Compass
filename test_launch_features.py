@@ -5068,3 +5068,22 @@ def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, mo
             if d["deal_id"] in (deal, combo)]
     assert {d["verdict"] for d in rows} == {"note", "post_yes"}, rows
     client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
+
+
+def test_unrecognised_reply_in_the_console_goes_to_the_agent_not_into_silence(client, monkeypatch):
+    """Ответ человека на сообщение бота, которое ни одно правило не разобрало,
+    не пропадает молча: он уходит агенту (тема «Клод»), а человеку сразу
+    сказано, что будет дальше (20 октября 2026, «Лабинский»)."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append(p) or {"ok": True})
+    marker = "Компас · публикация — непонятное сообщение %s" % uuid.uuid4().hex[:6]
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "message_id": 501, "text": "Сделай вот так", "chat": {"id": -1001, "type": "supergroup"},
+        "from": {"id": 222, "first_name": "Артём"},
+        "reply_to_message": {"message_id": 500, "text": marker, "from": {"id": 1, "is_bot": True}}}})
+    assert any("передал агенту" in str(p.get("text")) for p in sent), sent
+    rows = client.get("/api/claude/inbox", params={"token": "тайна"}).json()["messages"]
+    mine = [m for m in rows if m.get("reply_to_text") == marker]
+    assert mine and mine[0]["text"] == "Сделай вот так"
+    client.post("/api/claude/inbox/consume", json={"token": "тайна", "ids": [m["id"] for m in mine]})
