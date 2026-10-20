@@ -4797,6 +4797,63 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                   if rows else "Отменять нечего: правку уже применили. Напишите, что сделать, — поправим."),
             disable_web_page_preview=True, **_thread_kwargs(reply))
         return {"ok": True}
+    # ОТВЕТ ТЕКСТОМ НА ЭТАП СДЕЛКИ (20 октября 2026). Метка «[веха <id>~<вид>]»
+    # не входила в разбор выше, и правка партнёра к посту об этапе «Лабинского»
+    # (ВТБ продал агрохолдинг) молча пропала: ни решения, ни ответа. Теперь
+    # так же, как у проекта поста: полный текст заменяет пост этапа и
+    # выпускает его в канал; вопрос или короткая реплика — заметка к сделке.
+    milestone = re.search(r"\[веха ([\w-]{1,50}~[\w-]{1,30})\]", str(reply.get("text") or ""))
+    if milestone and not marker and text.strip() and _is_reviewer(sender_id):
+        combo = milestone.group(1)
+        deal_id = combo.split("~", 1)[0]
+        if _is_question(text) or _not_a_post_text(text, reply.get("text")):
+            db.add(ModerationDecision(deal_id=deal_id, verdict="note", edited_text=text.strip(),
+                                      decided_by=str(sender_id),
+                                      chat_id=str(chat_id) if chat_id is not None else None,
+                                      reply_message_id=reply.get("message_id")))
+            db.commit()
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Это не похоже на новый текст поста — пост этапа не тронут, замечание "
+                      "записано к сделке. Чтобы заменить пост, пришлите ответом полный текст."),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+            return {"ok": True}
+        body = text.strip()
+        if message.get("entities"):
+            body = _telegram_text_as_html(text, message.get("entities")).strip()
+        row = db.get(AppSetting, MILESTONE_DRAFT_PREFIX + combo)
+        draft = {}
+        if row and row.value:
+            try:
+                draft = json.loads(row.value)
+            except ValueError:
+                draft = {}
+        if not draft:
+            # Проекта этапа на сайте нет — выпустит рутина, и своим текстом:
+            # честно говорим, а текст кладём заметкой, чтобы его не потерять.
+            db.add(ModerationDecision(deal_id=deal_id, verdict="note", edited_text=body,
+                                      decided_by=str(sender_id),
+                                      chat_id=str(chat_id) if chat_id is not None else None,
+                                      reply_message_id=reply.get("message_id")))
+            db.commit()
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Текст записан, но сразу выпустить этап не могу — его выпустит рутина "
+                      "публикации и подставит ваш текст. (этап %s)" % combo),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+            return {"ok": True}
+        draft["text"] = body
+        draft["edited_by"] = str(sender_id)
+        row.value = json.dumps(draft, ensure_ascii=False)
+        decision_row = ModerationDecision(deal_id=combo, verdict="post_yes", decided_by=str(sender_id))
+        db.add(decision_row)
+        db.commit()
+        threading.Thread(target=_instant_milestone_post, args=(combo, decision_row.id), daemon=True).start()
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text="Принято: пост об этапе уйдёт в канал с вашим текстом. (этап %s)" % combo,
+            disable_web_page_preview=True, **_thread_kwargs(reply))
+        return {"ok": True}
     if marker and text.strip() and _is_reviewer(sender_id):
         kind, raw_id = marker.group(1), marker.group(2)
         # Ответ своим текстом на проект поста карточки, которая уже вышла, —

@@ -661,7 +661,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
         "eco": {"context": "Микрофинансовая компания: онлайн-займы физическим лицам."},
     }
     text_stem = format_post.render(deal_stem, {})
-    assert "<b>Покупатель:</b> Займер — Микрофинансовая компания" in text_stem, \
+    assert "<b>Покупатель:</b> Займер — микрофинансовая компания" in text_stem, \
         "имя покупателя пропало из строки: в детали его нет, похожи только основы слов"
 
     # 3. Имя есть, но в ХВОСТЕ чужой фразы — подлежащее там не покупатель, и
@@ -673,7 +673,7 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
                             "привлекла 200 млн ₽ от инвестиционного фонда «ТилТех Капитал»."},
     }
     text_tail = format_post.render(deal_tail, {})
-    assert "<b>Покупатель:</b> «ТилТех Капитал» — Московская сеть клиник" in text_tail, \
+    assert "<b>Покупатель:</b> «ТилТех Капитал» — московская сеть клиник" in text_tail, \
         "имя стоит в хвосте детали — строка обязана назвать покупателя впереди"
 
     # И сама граница проверяется напрямую, без рендера целого поста.
@@ -814,7 +814,7 @@ def test_post_subject_line_names_the_subject_not_its_revenue():
     companies = {"t1": {"name": "ООО «Протосервисез»",
                         "desc": "Московская компания, работает с 2014 года."}}
     text = format_post.render(deal, companies)
-    assert "<b>Предмет:</b> ООО «Протосервисез» — Московская компания, работает с 2014 года." in text
+    assert "<b>Предмет:</b> ООО «Протосервисез» — московская компания, работает с 2014 года." in text
     assert "9,5 млн руб." not in text, "показатели предмета выданы за предмет"
 
     # Предложение «Финансов предмета», которое называет юрлицо, а не показатель,
@@ -843,7 +843,7 @@ def test_post_subject_sentences_from_different_sources_get_a_period_between_them
     text = format_post.render(deal, companies)
     # С 19 октября 2026 первым идёт описание предмета, потом доля.
     assert "кредитование 7,52%" not in text, "два источника склеены без знака препинания"
-    assert "Опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
+    assert "опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
 
 
 def test_sentence_split_does_not_break_multi_dot_abbreviations():
@@ -8045,7 +8045,7 @@ def test_post_subject_names_the_company_then_says_what_it_is():
     companies = {"t1": {"name": "Perfectum",
                         "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
     line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
-    assert "<b>Предмет:</b> Perfectum — Узбекский мобильный оператор" in line
+    assert "<b>Предмет:</b> Perfectum — узбекский мобильный оператор" in line
 
 
 # --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
@@ -8249,3 +8249,50 @@ def test_signals_digest_draft_goes_to_the_decision_topic_and_not_to_the_channel(
     assert len(sent) == 1 and sent[0][3] == 7 and sent[0][4] is True
     assert "пробный черновик" in sent[0][1] and "Сама в канал она не уйдёт" in sent[0][1]
     assert not signals_digest.send_draft("<b>текст</b>", "signals-2026-W43"), "второй раз за неделю — только с --force"
+
+
+def test_resend_shows_only_that_card_again_with_fresh_clock(monkeypatch):
+    """«Направь снова на проверку» (20 октября 2026, «Стаксель»): --resend
+    показывает заново и карточку, и проект поста — только эту карточку, без
+    сырья и чужих карточек — и запускает сутки молчания с нуля."""
+    import send_drafts
+    cards = [
+        {"id": "g-again", "title": "Уже показана, поправлена", "date": "2026-10-19",
+         "reviewed": "2026-10-19", "accepted": "2026-10-19", "second_read": "2026-10-19", "draft_sent": True,
+         "post_draft_sent": True, "post_preview": "старый текст",
+         "pending_since": "2026-10-19T13:25:01+00:00", "src": [["Т", "https://t.example/1"]]},
+        {"id": "g-other", "title": "Чужая, ещё не показана", "reviewed": "2026-10-19",
+         "accepted": "2026-10-19", "src": [["Т", "https://t.example/2"]]},
+    ]
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts",
+                        lambda: [{"draft_id": "d1", "title": "Сырьё", "src": [["x", "https://x.example/1"]]}])
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {"g-again": ["note"]})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {})
+    monkeypatch.setattr(send_drafts, "goes_to_channel", lambda card: True)
+    plan, *_rest = send_drafts.build_plan("g-again")
+    marks = [(item["id"], mark) for _t, _k, (kind, item, mark) in plan]
+    assert marks == [("g-again", "draft_sent"), ("g-again", "post_draft_sent")], marks
+    assert "post_preview" not in cards[0]
+    assert cards[0]["pending_since"] > "2026-10-20"
+
+
+def test_resend_never_drops_a_live_human_answer(monkeypatch):
+    """20 октября 2026, 09:48: партнёр ответил на проект поста своим текстом, а
+    `--resend` в ту же минуту снял его ответ как «прежний». Живое решение по
+    карточке пересылку отменяет; снимаются только кнопки поста."""
+    import approve
+    import send_drafts
+    eaten = []
+    monkeypatch.setattr(approve, "consume", lambda handle, ids: eaten.extend(ids))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "g1", "verdict": "post_yes", "created_at": "2026-10-20T06:28"},
+        {"id": 2, "deal_id": "g1", "verdict": "approve", "edited_text": "текст партнёра",
+         "created_at": "2026-10-20T06:48"}], ("site", "token")))
+    assert send_drafts.drop_old_decisions("g1") is False
+    assert eaten == []
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "g1", "verdict": "post_yes", "created_at": "2026-10-20T06:28"}], ("site", "token")))
+    assert send_drafts.drop_old_decisions("g1") is True
+    assert eaten == [1]

@@ -38,13 +38,14 @@ approve.py публикует как есть (немой шаг, держащи
 Запуск:
     python3 pipeline/ingest/send_drafts.py            # план без отправки
     python3 pipeline/ingest/send_drafts.py --write    # отправить
+    python3 pipeline/ingest/send_drafts.py --resend <id> [--write]  # показать карточку заново
 """
 import json
 import os
 import re
 import sys
 import time
-from datetime import date
+from datetime import date, datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -387,8 +388,16 @@ def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     return False
 
 
-def build_plan():
+def build_plan(resend=None):
     """(текст, клавиатура, как отметить отправленным) для всего неразосланного.
+
+    `resend` — id карточки, которую нужно ЗАНОВО показать в консоли целиком
+    (🗂 карточка и 📣 проект поста) после правок: план тогда состоит только
+    из неё, без сырья и чужих карточек, а часы молчания идут заново. Раньше
+    это делали разовыми скриптами, сбрасывая один `post_draft_sent`, — и
+    20 октября 2026 партнёр получил новый пост «Стакселя» рядом со СТАРОЙ
+    карточкой («Сумма: 300 млн ₽»), а рутина «тема Клод» сброс флага не
+    смогла сделать вовсе (система разрешений остановила правку данных).
 
     Возвращает ещё и число сомнительных черновиков, отложенных до следующего
     прогона: предел, о котором не сказано вслух, читается как «это всё».
@@ -400,7 +409,19 @@ def build_plan():
     live = site_pending_ids()
     answered = answered_cards() if pending['cards'] else {}
     postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
+    if resend:
+        target = [c for c in pending['cards'] if c['id'] == resend]
+        if not target:
+            raise SystemExit('Карточки %s нет в очереди (pending.json) — переслать нечего.' % resend)
+        card = target[0]
+        card['draft_sent'] = False
+        card['post_draft_sent'] = False
+        card.pop('post_preview', None)
+        card['pending_since'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
+        answered = {}
     for card in pending['cards']:
+        if resend and card['id'] != resend:
+            continue
         # Ответ владельца на карточку ещё не применён — не показываем её
         # заново (см. answered_cards). Отметки отправки при этом не трогаем.
         if card['id'] in answered and not (card.get('draft_sent') and card.get('post_draft_sent')):
@@ -503,7 +524,7 @@ def build_plan():
                 if isinstance(ref, (list, tuple)) and len(ref) > 1 and ref[1]:
                     carded.add(str(ref[1]))
     fresh_raw, foreign = [], 0
-    for d in latest_hold_drafts():
+    for d in ([] if resend else latest_hold_drafts()):
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
            or d.get('dup_in_batch'):
             continue
@@ -526,8 +547,40 @@ def build_plan():
     return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted, unread2
 
 
-def main(write=False):
-    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan()
+def drop_old_decisions(card_id):
+    """Переслать на проверку — значит, прежние кнопки по этой карточке больше
+    не в счёт: 20 октября 2026 владелец нажал «Пост одобрен» на «Стакселе» и
+    тут же попросил «не выкладывай, снова направь на проверку». Снимаем на
+    сайте решения карточки и поста (заметки не трогаем — их читает приток).
+
+    НО ЖИВОЙ ОТВЕТ ЧЕЛОВЕКА НЕ СНИМАЕТСЯ НИКОГДА. В тот же день, 09:48, партнёр
+    ответил на проект поста СВОИМ текстом, а `--resend`, запущенный в ту же
+    минуту, снял его ответ как «прежний» и прислал следом старый текст. Если по
+    карточке висит «опубликовать», «выкинуть» или «придержать» — пересылка
+    отменяется (возвращаем False), сначала approve.py. Снимаются только
+    кнопки поста («пост одобрен» / «без поста»)."""
+    import approve
+    decisions, handle = approve.fetch_decisions()
+    live = [d for d in decisions if d.get('deal_id') == card_id
+            and d.get('verdict') in approve.CARD_VERDICTS]
+    if live:
+        for d in live:
+            print('ПЕРЕСЫЛКА ОТМЕНЕНА: по %s есть ответ «%s»%s от %s — сначала approve.py.'
+                  % (card_id, d.get('verdict'), ' со своим текстом' if d.get('edited_text') else '',
+                     str(d.get('created_at'))[:16]))
+        return False
+    ids = [d['id'] for d in decisions if d.get('deal_id') == card_id
+           and d.get('verdict') in approve.POST_VERDICTS]
+    if ids:
+        approve.consume(handle, ids)
+        print('Сняты прежние решения по %s: %s.' % (card_id, ', '.join(
+            '%s от %s' % (d.get('verdict'), str(d.get('created_at'))[:16]) for d in decisions
+            if d['id'] in ids)))
+    return True
+
+
+def main(write=False, resend=None):
+    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend)
     if unread2:
         print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
               'саб-агент по SECOND_READING_BRIEF.md → second_reading.py --apply <ответ> --write.' % unread2)
@@ -575,6 +628,8 @@ def main(write=False):
             print('Сухой прогон. Отправка — с ключом --write.')
         return 0
 
+    if resend and not drop_old_decisions(resend):
+        return 1
     import httpx
     sent = 0
     # Все три вида сообщений (пост/карточка/сырьё) ждут решения владельца или
@@ -617,4 +672,7 @@ def main(write=False):
 
 
 if __name__ == '__main__':
-    sys.exit(main(write='--write' in sys.argv))
+    # --resend <id>: показать карточку в консоли заново (карточка и проект
+    # поста), часы молчания — с нуля. Без --write — только план.
+    _resend = sys.argv[sys.argv.index('--resend') + 1] if '--resend' in sys.argv else None
+    sys.exit(main(write='--write' in sys.argv, resend=_resend))

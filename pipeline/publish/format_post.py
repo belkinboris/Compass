@@ -686,6 +686,36 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     return picked
 
 
+_ADJ_START = re.compile(r'^([А-ЯЁ])([а-яё]+(?:ый|ий|ой|ая|яя|ое|ее|ые|ие))\b')
+_REGISTRY_CLAUSE = re.compile(
+    r'[;,]?\s*(?:и\s+)?(?:включен[аоы]?|входит|внесен[аоы]?)\s+в\s+реестр\s+'
+    r'(?:российского|отечественного)\s+(?:ПО|программного обеспечения)', re.I)
+
+
+def _after_dash(detail):
+    """Хвост «Имя — пояснение» читается одной фразой: пояснение с прилагательного
+    пишется со строчной («ООО «Экспанта» — инвестиционное подразделение…»).
+    Партнёр 20 октября 2026 правил это руками в двух постах подряд (VEON,
+    «Стаксель»). И без «включена в реестр российского ПО» — «просто мусор»
+    для читателя канала, это не про сделку."""
+    if not detail:
+        return detail
+    detail = _REGISTRY_CLAUSE.sub('', detail).strip()
+    if detail and not re.search(r'[.!?…»"\)]$', detail):
+        detail += '.'
+    return _ADJ_START.sub(lambda m: m.group(1).lower() + m.group(2), detail)
+
+
+def _drop_repeated_group(name, detail):
+    """«ООО «Экспанта» (ГК «Ультиматек») — инвестиционное подразделение ГК
+    «Ультиматек»…» — группа дважды (партнёр, 20 октября 2026). Скобка у
+    имени снимается, если её содержимое и так есть в пояснении."""
+    m = re.search(r'\s*\(([^()]+)\)\s*$', name or '')
+    if m and detail and m.group(1).strip() in detail:
+        return name[:m.start()]
+    return name
+
+
 def _join_subject_sentences(parts):
     """Склеивает куски `_subject_detail()` в одну строку. Найдено 30 августа
     на «Транснефть»/Газпромбанк (g60f99ba6): `eco.share` — короткая фраза без
@@ -1151,7 +1181,8 @@ def render(deal, companies, updates=(), today=None, fin=None):
     elif buyer:
         # Деталь без имени не печатается никогда (Pridex/Multispace, 25 августа
         # 2026: «Покупатель: В периметр сделки вошли четыре объекта…»).
-        add('%s %s%s' % (_lab(buyer_label), esc(buyer),
+        buyer_detail = _after_dash(buyer_detail)
+        add('%s %s%s' % (_lab(buyer_label), esc(_drop_repeated_group(buyer, buyer_detail)),
                          (' — %s' % esc(buyer_detail)) if buyer_detail else ''))
     elif 'buyer' in required:
         add('%s не раскрыт' % _lab(buyer_label))
@@ -1174,6 +1205,7 @@ def render(deal, companies, updates=(), today=None, fin=None):
         # внутри чужой фразы, и читатель не узнавал, что покупают.
         add('%s %s' % (_lab(subject_label), esc(detail)))
     elif asset:
+        detail = _after_dash(detail)
         add('%s %s%s' % (_lab(subject_label), esc(asset), (' — %s' % esc(detail)) if detail else ''))
     elif detail:
         add('%s %s' % (_lab(subject_label), esc(detail)))
