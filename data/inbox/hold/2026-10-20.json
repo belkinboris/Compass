@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d55994492",
+   "draft_id": "d67324259",
    "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
    "date": "2026-10-19",
    "src": [
@@ -96,74 +96,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Тюменский ТЦ «Новый магнат» начали распродавать по частям» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d84868404",
-   "title": "ФАС назвала регионы-лидеры по наращиванию инвестиционных программ в ЖКХ",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261020/fas-874440761.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ЖКХ и обращение с отходами",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32456803",
-   "title": "Geely сосредоточится на продаже гибридов в России в 2027 году — но от машин с ДВС компания не откажется",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/geely-sosredotochitsya-na-prodazhe-gibridov-v-rossii-v-2027-godu-no-ot-mashin-s-dvs-kompaniya-ne-otkazhetsya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-20",
-     "title": "Переговоры",
-     "note": "Китайский автопроизводитель Geely планирует в 2027 году сделать упор на продажу гибридов в России, сообщает Autonews со ссылкой на источники. При этом модели с традиционными двигателями внутреннего сгорания также останутся в линейке бренда.",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/geely-sosredotochitsya-na-prodazhe-gibridov-v-rossii-v-2027-godu-no-ot-mashin-s-dvs-kompaniya-ne-otkazhetsya/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gd40fc98f (общие редкие слова: гибрид, продаж) — проверьте, не дубль ли"
    ]
   }
  ]
