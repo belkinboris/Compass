@@ -367,10 +367,21 @@ def proposals(deal, item, names, comps, match_keys=None):
         # внесённой (человеком или прошлым прогоном) записью с точной датой,
         # и без этой проверки одна и та же допокупка доли писалась в базу
         # заново каждый час («Магнит»/«Азбука вкуса», 3 сентября 2026, три
-        # раза подряд). Сверяем ещё и по (kind, адрес источника).
-        known_event_urls = {(str(e.get('kind') or ''), e['source'][1])
+        # раза подряд). Сверяем ещё и по (kind, адрес источника) — по ВСЕМ
+        # источникам этапа (`sources`), а не только по первому (`source`):
+        # агрегатор, подтверждающий уже известное закрытие на следующий день
+        # своей ссылкой, прежде проходил дедуп по (kind, date) и по (kind,
+        # url) мимо `source`, потому что его ссылка лежит во ВТОРОМ
+        # источнике `sources` (добавленном предыдущим прогоном как
+        # `event_source`), а не в первом, — и уходил не вторым источником
+        # уже известного этапа, а отдельным новым этапом с датой публикации
+        # агрегатора («Экспанта»/«Стаксель», `ga09376f6`, 20 октября 2026,
+        # второй раз в тот же день). `format_post.milestone_sources` — тот
+        # же список, что видит сайт и что сверяет `apply_props` для
+        # `event_source`.
+        known_event_urls = {(str(e.get('kind') or ''), url)
                              for e in existing_events
-                             if e.get('source') and len(e['source']) > 1}
+                             for _label, url in format_post.milestone_sources(e)}
         event_url = (event.get('source') or [None, None])[1] if event.get('source') else None
         event_url_key = (event_key[0], event_url) if event_url else None
         # Несколько публикаций об одном этапе в один день не создают дубли.
