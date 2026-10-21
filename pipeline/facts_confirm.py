@@ -523,6 +523,8 @@ def _agree(key, a, b) -> bool:
     if key == 'perimeter':
         if a.get('ok') != b.get('ok'):
             return False
+        if not a.get('ok'):
+            return True  # оба говорят «периметр не подтверждён» — знаменателя для спора нет
         ra, rb = a.get('report') or {}, b.get('report') or {}
         # Два чтения подтверждают периметр ОДНОГО отчёта: разные ИНН или
         # годы — это два разных знаменателя, а не согласие.
