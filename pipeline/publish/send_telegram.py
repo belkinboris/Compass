@@ -304,6 +304,25 @@ def post_to_channels(client, token, addr, route, text, buttons):
     return mids, None
 
 
+def site_channel_edits():
+    """{"<канал>:<номер поста>": …} — посты, поправленные людьми прямо в канале
+    (сайт слышит это от Telegram, `main._remember_manual_channel_edit`). Сайт
+    не ответил — None: тогда автоправки этого прогона не делаются вовсе,
+    затереть ручную правку хуже, чем отложить уточнение поста на час."""
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return {}
+    try:
+        import httpx
+        r = httpx.get('%s/api/ops/channel-edits' % site, params={'token': token}, timeout=20)
+        if r.status_code == 200:
+            return (r.json() or {}).get('edits') or {}
+    except Exception as e:                                    # noqa: BLE001
+        print('Список ручных правок в канале не получен (%s).' % e)
+    return None
+
+
 def site_channels():
     """Адреса каналов, которые сайт услышал от самого Telegram:
     {'chat_id': основной, 'realty_chat_id': недвижимость} — или {}, если
@@ -1352,6 +1371,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         fns_client.close()
 
     deals_by_id = {d['id']: d for d in data['deals']}
+    manual_edits = site_channel_edits() if write and any(b[0] == 'edit' for b in batch) else {}
     client = _client()
     sent, edited, milestoned, failed, deleted = 0, 0, 0, [], []
     prev_kind = None
@@ -1417,6 +1437,16 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         where, text = payload
         done = False
         for ch, mid in where.items():
+            if manual_edits is None:
+                print('  %s: правку поста %s откладываю — сайт не сказал, правили ли его руками' % (did, mid))
+                continue
+            if ('%s:%s' % (addr.get(ch), mid)) in manual_edits:
+                # Пост поправил человек прямо в канале — его текст сильнее
+                # автоправки (21 октября 2026, Swordfish Security: «Я уже
+                # поправил пост!!!»).
+                print('  %s: пост %s поправлен в канале вручную — автоправку не делаю' % (did, mid))
+                post_state[did] = post_snapshot(deal)
+                continue
             if not addr.get(ch):
                 failed.append((did, 'адрес канала «%s» неизвестен — правка поста %s не сделана' % (ch, mid)))
                 continue

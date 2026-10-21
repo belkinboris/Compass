@@ -170,6 +170,9 @@ DUPLICATE_PAIRS = (
 )
 
 
+INVESTED_COLLOQUIAL = re.compile(r'\bвложил(?:ся|ась|ось|ись|а|и)?\b', re.I)
+
+
 def has(v):
     return bool(v) and not PLACEHOLDER.match(str(v))
 
@@ -604,6 +607,12 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     waived_stale = set(waived_stale or notes.get('stale_ok') or {})
     out = []
     comps = base.get('companies') or {}
+    # «ВЛОЖИЛСЯ» — НЕ НАШЕ СЛОВО (владелец, 21 октября 2026: «Не пиши больше
+    # „вложился“, пиши „проинвестировал“»). Заголовок карточки — и заголовок
+    # поста в канале.
+    if INVESTED_COLLOQUIAL.search(str(card.get('title') or '')):
+        out.append(('title_invested', 'в заголовке «вложил(ся/ась)» — пишем «проинвестировал(а)»: '
+                    '«ЗПИФ «ВИМ инвестиций» проинвестировал в 42% Swordfish Security»'))
     asset = card.get('asset')
     if asset:
         fixed, changed = casing.to_nominative_asset(asset)

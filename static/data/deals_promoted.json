@@ -11691,7 +11691,7 @@
   {
    "id": "g5e187743",
    "date": "2021-09-08",
-   "title": "Раунд Series A: группа инвесторов во главе с Baring Vostok вложила $11 млн в бразильскую EdTech-платформу EBAC Online",
+   "title": "Раунд Series A: группа инвесторов во главе с Baring Vostok проинвестировала $11 млн в бразильскую EdTech-платформу EBAC Online",
    "buyer": "ga070e8d2",
    "target": "g24a9539d",
    "ind": "ИТ и интернет",
@@ -11758,7 +11758,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "7c84d9555309"
+     "card_hash": "d82a645cf844"
     },
     "price": {
      "value_rub": 805099900,
@@ -11786,7 +11786,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "466ef69b7928"
+     "card_hash": "1c0198c49fbf"
     },
     "target": {
      "company_id": "g24a9539d",
@@ -31850,7 +31850,7 @@
   {
    "id": "gf01b71ff",
    "date": "2020-03-04",
-   "title": "Sistema VC (АФК «Система») и соинвесторы вложили $41 млн в британский стартап Five AI (беспилотное вождение) — раунд Series B",
+   "title": "Sistema VC (АФК «Система») и соинвесторы проинвестировали $41 млн в британский стартап Five AI (беспилотное вождение) — раунд Series B",
    "buyer": null,
    "target": null,
    "ind": "ИТ и интернет",
@@ -31919,7 +31919,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "09ca01c4ccbf"
+     "card_hash": "3d350c8999d0"
     },
     "price": {
      "value_rub": null,
@@ -31942,7 +31942,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bcdf5d787492"
+     "card_hash": "4f23249942f9"
     },
     "target": {
      "company_id": null,
@@ -113588,7 +113588,7 @@
   {
    "id": "g514c4225",
    "date": "2024-09-27",
-   "title": "Фонд 3 STREAMS вложил 45 млн рублей в производителя мебели VMMGame",
+   "title": "Фонд 3 STREAMS проинвестировал 45 млн рублей в производителя мебели VMMGame",
    "buyer": "gfaa7f73a",
    "target": "g9ea22c56",
    "ind": "Потребительские товары",
@@ -113652,7 +113652,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "396330ced333"
+     "card_hash": "50499ffe771e"
     },
     "price": {
      "value_rub": 45000000.0,
@@ -113675,7 +113675,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e88acb6c68c1"
+     "card_hash": "bd90340f5763"
     },
     "target": {
      "company_id": "g9ea22c56",
@@ -116741,7 +116741,7 @@
   {
    "id": "g6e4d91c3",
    "date": "2024-08-26",
-   "title": "Фонд 3 STREAMS вложил 60 млн рублей в Shinsale через конвертируемый займ",
+   "title": "Фонд 3 STREAMS проинвестировал 60 млн рублей в Shinsale через конвертируемый займ",
    "buyer": "gfaa7f73a",
    "target": "g5af33e4f",
    "ind": "E-commerce",
@@ -116808,7 +116808,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "13aa977a6afd"
+     "card_hash": "72b55582e110"
     },
     "price": {
      "value_rub": 60000000.0,
@@ -116831,7 +116831,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a2189052757d"
+     "card_hash": "c1408b66e61e"
     },
     "target": {
      "company_id": "g5af33e4f",
@@ -184088,7 +184088,7 @@
   {
    "id": "ge29c8b25",
    "date": "2022-12-01",
-   "title": "Фонд НТИ вложил 325 млн рублей в Medical Visual Systems",
+   "title": "Фонд НТИ проинвестировал 325 млн рублей в Medical Visual Systems",
    "buyer": "g908b069c",
    "target": "g1183e341",
    "ind": "Здравоохранение",
@@ -184157,7 +184157,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "556adc04d90e"
+     "card_hash": "64b3a0074190"
     },
     "price": {
      "value_rub": 325000000.0,
@@ -184180,7 +184180,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "74eb68b8e818"
+     "card_hash": "f3f262ebca6d"
     },
     "target": {
      "company_id": "g1183e341",
@@ -254001,7 +254001,7 @@
   {
    "id": "gf6c084b9",
    "date": "2026-10-20",
-   "title": "ЗПИФ «ВИМ инвестиций» вложился в 42% Swordfish Security",
+   "title": "ЗПИФ «ВИМ инвестиций» проинвестировал в 42% Swordfish Security",
    "ind": "ИТ и интернет",
    "type": "Инвестиция",
    "status": "Закрыта",
@@ -254029,6 +254029,10 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/a/475925"
+    ],
+    [
+     "ALUMNI Partners (Telegram)",
+     "https://t.me/alumnipartnerslawfirm/2844"
     ]
    ],
    "from_ingest": true,
@@ -254045,7 +254049,13 @@
    "law": {
     "struct": "—",
     "appr": "—",
-    "adv": [],
+    "adv": [
+     [
+      "Консультант продавца",
+      "ALUMNI Partners",
+      "«Команда ALUMNI Partners консультировала основателей ГК Swordfish Security в знаковой сделке для российского рынка» кибербезопасности; руководитель — партнёр Антон Панченков. Источник: t.me/alumnipartnerslawfirm/2844"
+     ]
+    ],
     "terms": "—"
    },
    "asset": "42,152% Swordfish Security",
@@ -254108,7 +254118,7 @@
     "stake": {
      "value": 42.152,
      "basis": "rule",
-     "card_hash": "9c7ec806626b"
+     "card_hash": "d1b17bba0755"
     },
     "price": {
      "value_rub": null,
@@ -254131,7 +254141,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "83895dbace8f"
+     "card_hash": "c8dfb5d25b6e"
     },
     "target": {
      "company_id": "g15b15d01",

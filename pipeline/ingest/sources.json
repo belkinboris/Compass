@@ -1503,6 +1503,19 @@
    "last_error": null
   },
   {
+   "id": "tg:alumnipartnerslawfirm",
+   "name": "ALUMNI Partners",
+   "kind": "telegram",
+   "url": "https://t.me/alumnipartnerslawfirm",
+   "feed": "https://t.me/s/alumnipartnerslawfirm",
+   "feed_checked": true,
+   "tier": 3,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-10-21",
+   "last_error": null
+  },
+  {
    "id": "tg:BIRCHLEGAL",
    "name": "BIRCH Legal",
    "kind": "telegram",

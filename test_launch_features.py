@@ -5087,3 +5087,18 @@ def test_unrecognised_reply_in_the_console_goes_to_the_agent_not_into_silence(cl
     mine = [m for m in rows if m.get("reply_to_text") == marker]
     assert mine and mine[0]["text"] == "Сделай вот так"
     client.post("/api/claude/inbox/consume", json={"token": "тайна", "ids": [m["id"] for m in mine]})
+
+
+def test_manual_edit_in_the_channel_is_remembered_for_the_routine(client, monkeypatch):
+    """21 октября 2026: владелец поправил пост прямо в канале, а агент следом
+    вернул прежний текст — о ручной правке никто не знал. Сайт запоминает
+    правку, рутина публикации её не перезаписывает."""
+    _mod_env(monkeypatch)
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: {"ok": True})
+    mid = 70000 + int(uuid.uuid4().int % 1000)
+    client.post("/api/telegram/webhook/тайна", json={"edited_channel_post": {
+        "message_id": mid, "edit_date": 1, "text": "правка владельца",
+        "chat": {"id": -100777, "type": "channel", "title": "Проект Компас"}}})
+    edits = client.get("/api/ops/channel-edits", params={"token": "тайна"}).json()["edits"]
+    assert "-100777:%d" % mid in edits
+    assert client.get("/api/ops/channel-edits", params={"token": "нет"}).status_code == 404

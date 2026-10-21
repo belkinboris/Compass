@@ -6274,6 +6274,47 @@ def _greet_console_group(db, chat_id: str, title: str | None) -> None:
         logger.warning("приветствие в группу-консоль не ушло: %s", exc)
 
 
+CHANNEL_EDIT_PREFIX = "channel_manual_edit:"
+
+
+def _remember_manual_channel_edit(post: dict, db) -> None:
+    """Пост в канале поправили руками — запомнить, чтобы рутина его больше не
+    переписывала. 21 октября 2026 владелец поправил пост Swordfish Security в
+    канале сам, а агент следом «вернул» его к прежнему тексту из базы: правка
+    в Telegram в git не видна, и о ней никто не знал («Я уже поправил пост!!!»)."""
+    chat = str((post.get("chat") or {}).get("id") or "")
+    mid = post.get("message_id")
+    if not chat or not mid:
+        return
+    key = "%s%s:%s" % (CHANNEL_EDIT_PREFIX, chat, mid)
+    value = json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                        "edit_date": post.get("edit_date")})
+    try:
+        row = db.get(AppSetting, key)
+        if row:
+            row.value = value
+        else:
+            db.add(AppSetting(key=key, value=value))
+        db.commit()
+    except Exception as exc:  # noqa: BLE001 — не мешаем остальному разбору обновления
+        db.rollback()
+        logger.warning("ручная правка поста %s не запомнена: %s", key, exc)
+
+
+@app.get("/api/ops/channel-edits")
+def ops_channel_edits(token: str = "", db=Depends(get_db)):
+    """Посты каналов, поправленные руками: {"<chat>:<message_id>": {at, edit_date}}."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    out = {}
+    for row in db.scalars(select(AppSetting).where(AppSetting.key.like(CHANNEL_EDIT_PREFIX + "%"))).all():
+        try:
+            out[row.key[len(CHANNEL_EDIT_PREFIX):]] = json.loads(row.value or "{}")
+        except ValueError:
+            continue
+    return {"edits": out}
+
+
 def _announce_channel_id(payload, db=None) -> bool:
     """Сказать в консоль числовой адрес канала, если Telegram его показал.
 
@@ -6283,6 +6324,8 @@ def _announce_channel_id(payload, db=None) -> bool:
     нечего.
     """
     post = payload.channel_post or payload.edited_channel_post or {}
+    if payload.edited_channel_post and db is not None:
+        _remember_manual_channel_edit(payload.edited_channel_post, db)
     member = payload.my_chat_member or {}
     forwarded = ((payload.message or {}).get("forward_from_chat") or {})
     chat = post.get("chat") or member.get("chat") or forwarded or {}
