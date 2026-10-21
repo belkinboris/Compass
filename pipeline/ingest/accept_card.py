@@ -173,6 +173,11 @@ DUPLICATE_PAIRS = (
 INVESTED_COLLOQUIAL = re.compile(r'\bвложил(?:ся|ась|ось|ись|а|и)?\b', re.I)
 
 
+INN_NOT_IN_ARTICLE = re.compile(r'(?:в\s+)?(?:источник\w*|стать\w*|публикаци\w*)[^.;]{0,40}?не\s+(?:назван|указан|приведен|раскрыт)'
+                                r'|не\s+(?:назван|указан)\w*\s+в\s+(?:источник|стать|публикаци)', re.I)
+INN_SEARCHED = re.compile(r'егрюл|rusprofile|list-org|listorg|saby|checko|datanewton|реестр\w*|иностран|физлиц|лот\b', re.I)
+
+
 def has(v):
     return bool(v) and not PLACEHOLDER.match(str(v))
 
@@ -1098,6 +1103,18 @@ def check_answer(ans, card, base):
                 if twin and not named:
                     bad.append('no_profile: %s — профиль «%s» в базе УЖЕ ЕСТЬ (%s), '
                                'привяжите его' % (role, comps[twin[0]].get('name'), twin[0]))
+            elif key == 'no_inn' and INN_NOT_IN_ARTICLE.search(str(reason)) \
+                    and not INN_SEARCHED.search(str(reason)):
+                # «ИНН в источнике не назван» — не причина: статьи ИНН не
+                # называют почти никогда, он ищется по названию в ЕГРЮЛ и
+                # справочниках. 21 октября 2026 так прошёл «Туроператор БГ»
+                # («Библио-Глобус»), и «Финансовый контекст» сделки показал
+                # продавца вместо актива; юрлицо нашлось за две минуты поиска
+                # (ИНН 7731447686). Партнёр: «почему сразу не находишь юрлицо?»
+                bad.append('no_inn: %s — «в источнике не назван» не причина: найдите юрлицо по названию '
+                           '(ЕГРЮЛ, rusprofile, list-org, реестры отрасли, маркировка рекламы с ИНН) и '
+                           'добавьте в реестр; отложить можно иностранца, физлицо, лот — с тем, что '
+                           'искали и где' % role)
     for url, reason in (ans.get('no_source') or {}).items():
         if not str(url).startswith('http'):
             bad.append('no_source: ключ должен быть адресом публикации')

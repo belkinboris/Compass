@@ -8315,3 +8315,18 @@ def test_owner_text_post_is_not_rewritten_when_the_card_grows():
     import send_telegram
     src = inspect.getsource(send_telegram)
     assert "not format_post.is_joint_post(deal) and not deal.get('post_override')" in src
+
+
+def test_acceptance_rejects_inn_excuse_not_in_the_article():
+    """21 октября 2026, «Туроператор БГ» («Библио-Глобус»): приёмка пропустила
+    no_inn с причиной «ИНН в источнике не назван», и «Финансовый контекст»
+    показал продавца вместо актива. ИНН ищется по названию, не в статье."""
+    import accept_card
+    card = {"id": "gx", "title": "Т", "target": "gt"}
+    base = {"companies": {"gt": {"name": "Туроператор БГ"}}, "deals": []}
+    bad = accept_card.check_answer({"no_inn": {"target": "ИНН ООО «Туроператор БГ» в источнике не назван."}},
+                                   card, base)
+    assert any("не причина" in b for b in bad), bad
+    ok = accept_card.check_answer({"no_inn": {"target": "иностранная компания, ИНН нет; проверено в ЕГРЮЛ"}},
+                                  card, base)
+    assert not any("не причина" in b for b in ok), ok
