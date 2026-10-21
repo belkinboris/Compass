@@ -755,6 +755,7 @@ SYSTEM_BASE = """Ты — ассистент «Компаса», справоч�
 - Несколько однотипных событий одного дня (например, активы нескольких компаний переданы во временное управление) сворачивай в одну строку: что произошло и ссылки на каждую сделку через запятую.
 - Разрешено: ссылки [текст](адрес), списки со «- », выделение **жирным**. Нельзя: заголовки с #, таблицы, код в ```.
 - Не оценивай, какая фирма или компания лучше, — только факты.
+- «Купил», «продал», «приобрёл» в прошедшем времени — это завершённые сделки (статус «закрыта»). «Последняя покупка» — последняя закрытая сделка, где компания покупатель; обсуждаемую, подписанную или несостоявшуюся сделку купленной не называй (можно упомянуть отдельно, с её статусом).
 - Данные собраны из открытых источников и могут быть неполными; напомни об этом там, где это меняет вывод (например, консультанты раскрывают не все проекты).
 - Даты пиши по-русски: «2 марта 2026», а не «2 март 2026».
 - Объём: три–восемь предложений плюс список сделок. Не растягивай."""
@@ -2968,7 +2969,7 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
 # шла только в подготовку к встрече. Теперь вопрос о деньгах компании
 # получает её отчётность за последние годы и правила, как о ней говорить.
 _FIN_QUESTION = re.compile(
-    r"выручк|прибыл|\bebit|рентабельн|маржинальн|\bмарж[аиуе]\b|долгов\w*\s+нагрузк|\bдолг\w*\s+(?:у|компании)"
+    r"выруч|прибыл|\bebit|мультипликатор|\bev\s*/|\bp\s*/\s*[esb]|рентабельн|маржинальн|\bмарж[аиуе]\b|долгов\w*\s+нагрузк|\bдолг\w*\s+(?:у|компании)"
     r"|заемн|кредиторск|дебиторск|\bактив\w*\s+(?:у|банка|компании)|собственн\w*\s+капитал"
     r"|зарабатыва|\bоборот|финансов\w*\s+(?:показател|результат|отчетност|метрик|данн)|отчетност", re.I)
 
@@ -2998,6 +2999,8 @@ def _name_fits_question(name: str, question: str) -> bool:
     return True
 
 
+_DEAL_MULTIPLE_Q = re.compile(r"мультипликатор|выручек|прибылей|ebitd?a?\s*(?:сделк|купил)|\bev\s*/|\bp\s*/\s*[esb]"
+                              r"|за\s+сколько\s+(?:годовых\s+)?(?:выруч|прибыл)", re.I)
 _REVENUE_SCREEN = re.compile(
     r"выручк\w*\s+(?:больше|более|от|свыше|выше|не\s+меньше)\s+(\d+(?:[.,]\d+)?)\s*(млрд|миллиард\w*|млн|миллион\w*)",
     re.I)
@@ -3053,6 +3056,39 @@ def _finance_company_ids(question: str, ret, idx) -> list[str]:
     return out[:3]
 
 
+def _company_deal_multiples_text(cid: str, idx, db=None) -> str:
+    """Мультипликаторы сделок, где компания — покупаемая («За сколько выручек
+    купили Азбуку вкуса?» — расчёт EV/прибыль от продаж 4,6 в базе был, а
+    ассистент отвечал «посчитать невозможно»). Тот же расчёт, что у таблицы
+    «Мультипликаторы по отраслям» и блока на карточке сделки."""
+    try:
+        table = _sector_multiples(db)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("assistant deal multiples failed for %s: %s", cid, e)
+        return ""
+    labels = {m["key"]: m["label"] for m in table.get("metrics") or []}
+    lines = []
+    for row in table.get("rows") or []:
+        if row.get("target_id") != cid:
+            continue
+        vals = [f"{labels.get(k, k)} {str(round(v['value'], 2)).replace('.', ',')}"
+                for k, v in (row.get("metrics") or {}).items()
+                if isinstance(v, dict) and v.get("value") is not None]
+        price = _rub_text(row.get("price_full_rub")) if row.get("price_full_rub") else ""
+        line = f"- [{row.get('title')}](#/deal/{row.get('id')}), {row.get('year')}"
+        if price:
+            line += f": цена за 100% ≈ {price}" + (f" (пакет {row['stake']}%)" if row.get("stake") else "")
+        line += ("; " + "; ".join(vals)) if vals else "; мультипликатор не посчитан — нет подходящей отчётности за год сделки"
+        if row.get("report_year"):
+            line += f" (по отчётности за {row['report_year']} год)"
+        lines.append(line)
+    if not lines:
+        return ""
+    return ("Мультипликаторы сделок, где компания — покупаемая (расчёт «Компаса»: цена за 100% к показателю "
+            "отчётности ФНС; «операционная прибыль» — прибыль от продаж, близкая к EBIT, без амортизации):\n"
+            + "\n".join(lines))
+
+
 def _company_finance_text(cid: str, idx, db=None) -> str:
     companies = getattr(idx, "companies", None) or {}
     c = companies.get(cid) or {}
@@ -3083,8 +3119,11 @@ def _company_finance_text(cid: str, idx, db=None) -> str:
     except Exception as e:  # noqa: BLE001 — без финансов лучше, чем сбой ответа
         logger.warning("assistant finance failed for %s: %s", cid, e)
         return head + "\nОтчётность сейчас не загрузилась — скажи, что цифры есть в профиле компании."
+    if not entity:
+        return head + "\nОтчётности ФНС в «Компасе» нет: юрлицо компании не сопоставлено."
     if not reports:
-        return head + "\nОтчётности ФНС в «Компасе» нет (юрлицо не сопоставлено или отчётность не найдена)."
+        return (head + f"\nПрофиль привязан к юрлицу {entity.legal_name}, но его годовой отчётности за последние "
+                "годы в данных ФНС нет. Так и скажи; цифр не называй.")
     inn = f", ИНН {entity.inn}" if entity.inn else ""
     lines = [head, f"Отчётность ФНС юрлица {entity.legal_name}{inn}:"]
     labels = (("revenue_rub", "выручка"), ("gross_profit_rub", "валовая прибыль"),
@@ -3163,6 +3202,8 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
                 idx = None
         ids = _finance_company_ids(question, ret, idx) if idx is not None else []
         blocks = [b for b in (_company_finance_text(c, idx, db) for c in ids) if b]
+        if _DEAL_MULTIPLE_Q.search(question or ""):
+            blocks += [b for b in (_company_deal_multiples_text(c, idx, db) for c in ids) if b]
         screen = _revenue_screen_hint(question)
         if not blocks and screen:
             blocks = [screen]
