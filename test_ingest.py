@@ -8306,3 +8306,12 @@ def test_detail_after_dash_always_starts_lowercase():
     assert format_post._after_dash("Модульная платформа.").startswith("модульная")
     assert format_post._after_dash("ВТБ владеет долей.").startswith("ВТБ")
     assert format_post._after_dash("Ozon владеет долей.").startswith("Ozon")
+
+
+def test_owner_text_post_is_not_rewritten_when_the_card_grows():
+    """21 октября 2026: пост Swordfish Security вышел текстом владельца, а через
+    три часа «⟳ Обновлено» переписало его автотекстом после дополнения карточки."""
+    import inspect
+    import send_telegram
+    src = inspect.getsource(send_telegram)
+    assert "not format_post.is_joint_post(deal) and not deal.get('post_override')" in src
