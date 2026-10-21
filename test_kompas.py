@@ -2036,3 +2036,18 @@ def test_signal_prompt_rules_and_forecast_cleanup():
     assert "Есть основания ожидать продажи." in out and "51%" in out and "не прогноз" in out
     # точная сводка сама проходит чистку без правок
     assert main._polish_answer(ret.answer, idx, ret=ret, source=prep.user_msg).strip() == ret.answer.strip()
+
+
+def test_finance_question_about_the_base_gets_what_is_really_there():
+    """Партнёр, 21 октября 2026: «В базе есть информация о EBIT компаний?» —
+    ассистент ответил «не найдено», «А какие финансовые метрики есть в базе?» —
+    «финансовых показателей нет». Профиль компании показывает отчётность ФНС,
+    «Аналитика» — мультипликаторы. Вопрос о названной компании идёт обычным путём."""
+    import assistant_product as ap
+    for q in ("В базе есть информация о EBIT компаний?", "А какие финансовые метрики есть в базе?",
+              "Какие данные о прибыли есть в Компасе?"):
+        assert ap.kind(q) == ap.FINANCE, q
+    for q in ("Какая выручка у Магнита?", "EBIT Яндекса за 2024", "Какая выручка у вас в базе у Магнита?"):
+        assert ap.kind(q) is None, q
+    text = ap.answer(ap.FINANCE)
+    assert "прибыль от продаж" in text and "EBIT" in text and "#/analytics" in text
