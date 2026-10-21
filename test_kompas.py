@@ -2051,3 +2051,28 @@ def test_finance_question_about_the_base_gets_what_is_really_there():
         assert ap.kind(q) is None, q
     text = ap.answer(ap.FINANCE)
     assert "прибыль от продаж" in text and "EBIT" in text and "#/analytics" in text
+
+
+def test_finance_question_about_a_company_sends_its_fns_report_to_the_model():
+    """21 октября 2026, 20 вопросов о финансах: «Какая выручка у Озона?» —
+    «не указана», «Прибыль от продаж у Positive Technologies» — отказ, хотя
+    отчётность ФНС лежит в профиле. Вопрос о деньгах компании получает её
+    отчётность и правила; «Ренессанс Кредит» не подменяется «Ренессанс Капиталом»."""
+    from types import SimpleNamespace
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    ozon = main._finance_company_ids("Какая выручка у Озона?", None, idx)
+    if not ozon:
+        pytest.skip("Озона нет в базе")
+    assert main._finance_company_ids("Какие активы у банка Ренессанс Кредит?", None, idx) == []
+    assert len(main._finance_company_ids("Сравни выручку X5 и Магнита", None, idx)) == 2
+    entity = SimpleNamespace(id=1, legal_name="ООО «Интернет Решения»", inn="7704217370")
+    report = SimpleNamespace(year=2024, revenue_rub=615e9, gross_profit_rub=None, operating_profit_rub=-12e9,
+                             profit_before_tax_rub=None, net_profit_rub=-40e9, assets_rub=None, equity_rub=None,
+                             borrowings_rub=None, raw_lines_json=None)
+    db = SimpleNamespace(scalar=lambda *_: entity, scalars=lambda *_: SimpleNamespace(all=lambda: [report]))
+    text = main._company_finance_text(ozon[0], idx, db)
+    assert "ООО «Интернет Решения»" in text and "2024 год: выручка 615 млрд ₽" in text
+    assert "прибыль от продаж (ближайший к EBIT показатель) -12 млрд ₽" in text
+    assert "#/companies/%s" % ozon[0] in text
+    assert "EBITDA в «Компасе» нет" in main.FINANCE_RULES
