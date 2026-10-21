@@ -7742,7 +7742,7 @@ def test_post_subject_has_no_registry_ids_or_party_narrative():
     import check_post
     assert "ИНН" not in text and "ОГРН" not in text, text
     assert "получила 100%" not in subject and "100% ООО «Бета»" in subject, subject
-    assert "Магазин работает с 2010 года" in subject, subject
+    assert "магазин работает с 2010 года" in subject, subject
     assert check_post.check(text) == []
     bad = check_post.check("Предмет: «УК» получила 100% в капитале — ИНН 1234567890.\nСтатус: Закрыта")
     assert any("действие стороны" in p for p in bad) and any("ИНН" in p for p in bad), bad
@@ -8296,3 +8296,13 @@ def test_resend_never_drops_a_live_human_answer(monkeypatch):
         {"id": 1, "deal_id": "g1", "verdict": "post_yes", "created_at": "2026-10-20T06:28"}], ("site", "token")))
     assert send_drafts.drop_old_decisions("g1") is True
     assert eaten == [1]
+
+
+def test_detail_after_dash_always_starts_lowercase():
+    """Владелец, 21 октября 2026: «Swordfish Security — Выступает интегратором» —
+    после тире единообразно со строчной; аббревиатуры и латиница — как есть."""
+    import format_post
+    assert format_post._after_dash("Выступает интегратором.").startswith("выступает")
+    assert format_post._after_dash("Модульная платформа.").startswith("модульная")
+    assert format_post._after_dash("ВТБ владеет долей.").startswith("ВТБ")
+    assert format_post._after_dash("Ozon владеет долей.").startswith("Ozon")
