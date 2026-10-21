@@ -99,285 +99,7 @@
    ]
   },
   {
-   "draft_id": "d11830710",
-   "title": "Мерц объявил об инвестициях Amazon и Nvidia в Германию",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9043353"
-    ]
-   ],
-   "sum": "€16 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d65546462",
-   "title": "Фонд «ВИМ инвестиций» вошел в капитал Swordfish Security",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/investments/articles/2026/10/21/1238677-fond-vim-investitsii-voshel-v-kapital-swordfish-security"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-21",
-     "title": "Сделка завершена",
-     "note": "Закрытый паевой инвестфонд (ЗПИФ) Pre-IPO 2 под управлением УК «ВИМ инвестиции» купил миноритарную долю – 42,152% – в Swordfish Security – интеграторе и консультанте в области безопасной разработки ПО (DevSecOps), безопасности приложений (AppSec) и защиты ИИ…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/investments/articles/2026/10/21/1238677-fond-vim-investitsii-voshel-v-kapital-swordfish-security"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51577898",
-   "title": "Инвестиции в открытие падел-клубов в России превысили ₽20 млрд",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/21/10/2026/6ad7c9630bc765ab064d26eb"
-    ]
-   ],
-   "sum": "0,8 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48970386",
-   "title": "Anthropic сообщила об убытке в $80 млрд и перечислила риски перед IPO",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/21/10/2026/6ad81a662f45b323014e4fad"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64614341",
-   "title": "Мерц объявил об инвестициях Amazon и Nvidia в Германию",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/21/10/2026/6ad7faf655993dc88323eb96"
-    ]
-   ],
-   "sum": "€16 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-21",
-     "title": "Переговоры",
-     "note": "Amazon инвестирует более €16 млрд, а Nvidia намерена вложиться в четыре немецких стартапа, в том числе в компанию по разработке ИИ",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/21/10/2026/6ad7faf655993dc88323eb96"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Мерц объявил об инвестициях Amazon и Nvidia в Германию» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d73591545",
-   "title": "В Петербурге и Ленобласти резко выросли продажи креветок",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/20/v-peterburge-i-lenoblasti"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75900441",
-   "title": "В МВД предупредили россиян о рисках предоплаты при покупках в интернете",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2187729/2026-10-21/v-mvd-predupredili-rossiian-o-riskakh-predoplaty-pri-pokupkakh-v-internete"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34439296",
-   "title": "Трамп сообщил об инвестициях Пентагона в производство чипов в Северной Каролине",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2187710/2026-10-21/tramp-soobshchil-ob-investitciiakh-pentagona-v-proizvodstvo-chipov-v-severnoi-karoline"
-    ]
-   ],
-   "sum": "$1,5 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gafde5488 (общие редкие слова: произв, чипов) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d74037668",
-   "title": "В МВД посоветовали не переводить полную предоплату за онлайн-покупки",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2187714/2026-10-21/v-mvd-posovetovali-ne-perevodit-polnuiu-predoplatu-za-onlain-pokupki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64054206",
+   "draft_id": "d91848961",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -405,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d63425122",
+   "draft_id": "d31859165",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -433,13 +155,13 @@
    ]
   },
   {
-   "draft_id": "d32759883",
-   "title": "В Дубае рухнули продажи недвижимости из-за войны США с Ираном",
-   "date": "2026-10-20",
+   "draft_id": "d83347445",
+   "title": "МВД посоветовало не переводить полную предоплату за онлайн-покупки",
+   "date": "2026-10-21",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053137707"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9043395"
     ]
    ],
    "sum": null,
@@ -454,7 +176,235 @@
     "asset": null,
     "seller": null
    },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27482103",
+   "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9043300"
+    ]
+   ],
+   "sum": "130 млн ₽",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97149044",
+   "title": "В МВД предупредили о рисках предоплаты при покупках в интернете",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/society/news/2026/10/21/1238749-mvd-predupredili"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50437499",
+   "title": "SpaceX и Tesla начали изучать возможность слияния",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/21/1238735-spacex-i-tesla"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d78861189",
+   "title": "Маск счел «хорошей идеей» слияние Tesla и SpaceX",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/21/10/2026/6ad854c2a50e0850a9e5cddf"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «SpaceX и Tesla начали изучать возможность слияния» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d52977521",
+   "title": "Сколько можно заработать на инвестициях в Апартаменты от сети YES?",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1364978.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
    "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83692936",
+   "title": "В России нет M&A-права: никто не виноват, но что с этим делать",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/opinion/266397/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70999333",
+   "title": "Ozon обогнал Wildberries по продажам крупных селлеров",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/ozon-obognal-wildberries-po-prodazham-krupnyh-sellerov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d82739085",
+   "title": "Россия стала продавать Евросоюзу меньше рыбы",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/21/rossiya-stala-menshe-prodavat-ryby-evrosoyuzu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
