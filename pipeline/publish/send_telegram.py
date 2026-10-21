@@ -304,6 +304,26 @@ def post_to_channels(client, token, addr, route, text, buttons):
     return mids, None
 
 
+def site_instant_posts():
+    """{id сделки: {message_id, finalized, …}} — посты, которые сайт выпустил сам
+    по одобрению (main._instant_card_post). Сайт не ответил — None: тогда
+    новые посты ждут следующего прогона, иначе пост, уже выпущенный сайтом,
+    ушёл бы второй раз (дубль в канале хуже часа задержки)."""
+    site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return {}
+    try:
+        import httpx
+        r = httpx.get('%s/api/ops/instant-posts' % site, params={'token': token}, timeout=20)
+        if r.status_code == 200:
+            return (r.json() or {}).get('posts') or {}
+        print('Сайт не отдал список постов, выпущенных им самим (код %d).' % r.status_code)
+    except Exception as e:                                    # noqa: BLE001
+        print('Список постов, выпущенных сайтом, не получен (%s).' % e)
+    return None
+
+
 def site_channels():
     """Адреса каналов, которые сайт услышал от самого Telegram:
     {'chat_id': основной, 'realty_chat_id': недвижимость} — или {}, если
@@ -1348,6 +1368,30 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         fns_client.close()
 
     deals_by_id = {d['id']: d for d in data['deals']}
+    # ПОСТ, КОТОРЫЙ САЙТ УЖЕ ВЫПУСТИЛ САМ (21 октября 2026, main._instant_card_post):
+    # по «Опубликовать» / «Пост в канал» сайт шлёт одобренный текст сразу, со
+    # строкой «Карточка сделки готовится», и сам же правит его, когда карточка
+    # вышла. Рутине остаётся записать номер поста — второй первый пост не шлём;
+    # пост, который сайт публикует прямо сейчас, тоже не трогаем.
+    instant = site_instant_posts() if write else {}
+    if instant is None:
+        held = [b for b in batch if b[0] == 'send']
+        batch = [b for b in batch if b[0] != 'send']
+        if held:
+            print('Новые посты (%d) ждут следующего прогона: сайт не сказал, какие посты '
+                  'он уже выпустил сам.' % len(held))
+    elif instant:
+        kept = []
+        for kind, did, payload in batch:
+            rec = instant.get(did)
+            if kind == 'send' and rec:
+                if rec.get('message_id'):
+                    posts[did] = rec['message_id']
+                    post_state[did] = post_snapshot(deals_by_id.get(did) or {'id': did})
+                    print('  %s: пост уже выпустил сайт (message_id %s) — записан' % (did, rec['message_id']))
+                continue
+            kept.append((kind, did, payload))
+        batch = kept
     client = _client()
     sent, edited, milestoned, failed, deleted = 0, 0, 0, [], []
     prev_kind = None
