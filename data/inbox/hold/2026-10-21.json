@@ -99,7 +99,7 @@
    ]
   },
   {
-   "draft_id": "d91848961",
+   "draft_id": "d48127351",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d31859165",
+   "draft_id": "d10469087",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -155,35 +155,7 @@
    ]
   },
   {
-   "draft_id": "d83347445",
-   "title": "МВД посоветовало не переводить полную предоплату за онлайн-покупки",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9043395"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27482103",
+   "draft_id": "d34629910",
    "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
    "date": "2026-10-21",
    "src": [
@@ -211,64 +183,7 @@
    ]
   },
   {
-   "draft_id": "d97149044",
-   "title": "В МВД предупредили о рисках предоплаты при покупках в интернете",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/society/news/2026/10/21/1238749-mvd-predupredili"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50437499",
-   "title": "SpaceX и Tesla начали изучать возможность слияния",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/21/1238735-spacex-i-tesla"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d78861189",
+   "draft_id": "d32916609",
    "title": "Маск счел «хорошей идеей» слияние Tesla и SpaceX",
    "date": "2026-10-21",
    "src": [
@@ -291,24 +206,22 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «SpaceX и Tesla начали изучать возможность слияния» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d52977521",
-   "title": "Сколько можно заработать на инвестициях в Апартаменты от сети YES?",
+   "draft_id": "d12162006",
+   "title": "Glorax разместил безотзывную оферту на покупку своих акций у инвесторов",
    "date": "2026-10-21",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1364978.php"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/21/1238774-glorax-razmestil"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -319,20 +232,162 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d10422153",
+   "title": "Венгерская MOL подписала соглашение о выкупе российской доли в сербской NIS",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1123887"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Подписана",
+   "events": [
+    {
+     "kind": "signed",
+     "date": "2026-10-21",
+     "title": "Документы подписаны",
+     "note": "Венгерская MOL подписала соглашение о выкупе российской доли в сербской NIS, сообщил исполняющий обязанности вице-премьера и министра финансов Сербии Синиша Мали в эфире Bloomberg Adria TV, на которое ссылаются сербские СМИ.\"Договорённость между российской…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1123887"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d83692936",
-   "title": "В России нет M&A-права: никто не виноват, но что с этим делать",
+   "draft_id": "d63581069",
+   "title": "Сербия и Венгрия подписали договор о продаже акций «Газпром нефти»",
    "date": "2026-10-21",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/opinion/266397/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261021/gazprom-874460305.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Подписана",
+   "events": [
+    {
+     "kind": "signed",
+     "date": "2026-10-21",
+     "title": "Документы подписаны",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261021/gazprom-874460305.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf285fa14 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33674265",
+   "title": "Минфин Сербии сообщил о заключении договора о продаже NIS венгерской MOL",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261021/serbiya-2125828605.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Венгерская MOL подписала соглашение о выкупе российской доли» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d47434264",
+   "title": "Инвесторы, участвовавшие в IPO GloraX, получат возможность продать бумаги дороже рынка",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/311172"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g8302ab18 (общие редкие слова: ipo, возмож) — проверьте, не дубль ли",
+    "та же новость, что «Glorax разместил безотзывную оферту на покупку своих акций у» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d71438872",
+   "title": "В Тюмени запретят продавать сигареты и вейпы вблизи школ",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137648"
     ]
    ],
    "sum": null,
@@ -354,19 +409,30 @@
    ]
   },
   {
-   "draft_id": "d70999333",
-   "title": "Ozon обогнал Wildberries по продажам крупных селлеров",
+   "draft_id": "d23050106",
+   "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/ozon-obognal-wildberries-po-prodazham-krupnyh-sellerov/"
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Власти Ярославской области хотят продать усадьбу племянника А. Н. Некрасова, расположенную неподалеку от поселка Дубки.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -375,39 +441,39 @@
     "asset": null,
     "seller": null
    },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d82739085",
-   "title": "Россия стала продавать Евросоюзу меньше рыбы",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/21/rossiya-stala-menshe-prodavat-ryby-evrosoyuzu/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35995678",
+   "title": "Разработчик корпоративной платформы данных «Аргумент» привлек инвестиции от фонда «Созидательный венчур» в обмен на  5,46% компании. В сделке также участвовал бывший топ-менеджер Positive Technologies",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7803"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Разработчик корпоративной платформы данных «Аргумент»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Разработчик корпоративной платформы данных «Аргумент»",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
