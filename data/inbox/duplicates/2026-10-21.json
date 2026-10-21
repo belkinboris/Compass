@@ -1,0 +1,131 @@
+{
+ "made": "2026-10-21",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/9043534::gb6b371c3",
+   "candidate_id": "gb6b371c3",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d23112199",
+    "title": "Венгерский концерн MOL выкупил долю России в сербской NIS",
+    "date": "2026-10-21",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9043534"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-21",
+      "title": "Сделка завершена",
+      "note": "Венгерский концерн MOL заключил соглашение о выкупе российской доли в сербской энергокомпании NIS. Сделка должна получить одобрение антимонопольных комиссий, сообщил и. о. вице-премьера и министра финансов Сербии Синиша Мали.",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/9043534"
+      ]
+     }
+    ],
+    "buyer_name": "Венгерский концерн MOL",
+    "asset": "России в сербской NIS",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Венгерский концерн MOL",
+     "asset": "России в сербской NIS",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-21"
+  },
+  {
+   "key": "https://www.vedomosti.ru/business/news/2026/10/21/1238787-mol-dogovorilas-o-vikupe::gb6b371c3",
+   "candidate_id": "gb6b371c3",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d42081835",
+    "title": "Венгерская MOL договорилась о выкупе российской доли в сербской NIS",
+    "date": "2026-10-21",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/business/news/2026/10/21/1238787-mol-dogovorilas-o-vikupe"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Обсуждается",
+    "events": [
+     {
+      "kind": "negotiations",
+      "date": "2026-10-21",
+      "title": "Переговоры",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/business/news/2026/10/21/1238787-mol-dogovorilas-o-vikupe"
+      ]
+     }
+    ],
+    "buyer_name": "Венгерская MOL",
+    "asset": "российской доли в сербской NIS",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Венгерская MOL",
+     "asset": "российской доли в сербской NIS",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-21"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28236213::gb6b371c3",
+   "candidate_id": "gb6b371c3",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d90277543",
+    "title": "Венгреский концерн MOL выкупил долю России в сербской NIS",
+    "date": "2026-10-21",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28236213"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-21",
+      "title": "Сделка завершена",
+      "note": "Процесс должен получить одобрение со стороны антимонопольных органов, заявил исполняющий обязанности вице-премьера и министра финансов Сербии Синиша Мали",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28236213"
+      ]
+     }
+    ],
+    "buyer_name": "Венгреский концерн MOL",
+    "asset": "России в сербской NIS",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Венгреский концерн MOL",
+     "asset": "России в сербской NIS",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-21"
+  }
+ ]
+}
