@@ -233,6 +233,27 @@ def test_two_readers_agree_verified_disagree_disputed():
     assert fc._basis_for([a2, dict(b2, quote='совсем другая фраза о том же')])[0] == 'read'
 
 
+def test_perimeter_both_refuted_is_not_disputed():
+    """21 октября 2026: оба читателя честно сказали «периметр не подтверждён»
+    (ok=false) про g18413e61 и четыре похожих карточки, но basis вышел
+    `disputed` («два чтения разошлись»), хотя разногласия не было — просто
+    один читатель не указал `report` (денежный знаменатель не нужен, когда
+    ok=false). `_agree()` сравнивал (inn, year) даже при ok=false с обеих
+    сторон. Теперь при ok=false с обеих сторон знаменатель не сравнивается —
+    согласие при разном (или отсутствующем) report не считается спором."""
+    a = {'_key': 'perimeter', 'ok': False, 'entity': 'ООО «Учи.ру»', 'covers_business': False,
+         'quote': 'группа компаний Учи.ру развивает Учи.Дома, Учи.Ответы, ЯКласс',
+         'quote_checked': True, 'source': 'https://example.com/a'}
+    b = dict(a, reader='B', report={'inn': '7704821246', 'year': 2022})
+    assert fc._basis_for([a, b])[0] == 'verified'
+    # ok=true с обеих сторон — знаменатель (отчёт) по-прежнему обязан совпасть
+    a2 = dict(a, ok=True, report={'inn': '111', 'year': 2024})
+    b2 = dict(b, ok=True, report={'inn': '222', 'year': 2024})
+    assert fc._basis_for([a2, b2])[0] == 'disputed'
+    # ok не совпадает — настоящий спор
+    assert fc._basis_for([a, dict(b, ok=True)])[0] == 'disputed'
+
+
 def test_third_review_rules():
     """Третий разбор рецензента (6 сентября 2026): спорная дата блокирует
     денежные показатели; подозрение на дубль — тоже; смена контроля должна быть
