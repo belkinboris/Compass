@@ -2084,3 +2084,19 @@ def test_revenue_screen_question_gets_the_feed_filter_link():
     assert "#/deals?rev=5e10" in main._revenue_screen_hint("сделки с выручкой от 70 млрд")
     assert main._revenue_screen_hint("Какая выручка у Озона?") == ""
     assert "не делай вывода, чья компания больше" in main.FINANCE_RULES
+
+
+def test_deal_multiple_of_a_bought_company_reaches_the_model(monkeypatch):
+    """«За сколько выручек купили Азбуку вкуса?» — мультипликатор сделки в базе
+    посчитан, а ассистент отвечал «посчитать невозможно» (21 октября 2026)."""
+    import assistant_retrieval
+    idx = assistant_retrieval.get_index()
+    monkeypatch.setattr(main, "_sector_multiples", lambda db=None: {
+        "metrics": [{"key": "ev_op", "label": "EV / операционная прибыль"}, {"key": "ps", "label": "P/S"}],
+        "rows": [{"id": "g91ec3558", "title": "«Магнит» купил контрольный пакет «Азбуки вкуса»", "year": 2025,
+                  "target_id": "g52fa4c83", "price_full_rub": 36.36e9, "stake": 81.55, "report_year": 2024,
+                  "metrics": {"ev_op": {"value": 4.64}, "ps": {"value": 0.36}}}]})
+    text = main._company_deal_multiples_text("g52fa4c83", idx)
+    assert "EV / операционная прибыль 4,64" in text and "P/S 0,36" in text and "#/deal/g91ec3558" in text
+    assert main._DEAL_MULTIPLE_Q.search("За сколько выручек купили Азбуку вкуса?")
+    assert "последняя закрытая сделка" in main.SYSTEM_BASE
