@@ -8143,6 +8143,12 @@ async function mountDealFns(d){
   const parties=fetched.filter(Boolean);
   if(!parties.length) return;
   let active=parties[0].id; // предмет сделки идёт первым в candidates — он и выбран по умолчанию
+  // Предмет без отчётности — сказать прямо (партнёр, 21 октября 2026, «Шереметьево»/
+  // «Библио-Глобус»: «странно, что он даёт финансовые показатели продавца, а не
+  // таргета»). Раньше блок молча показывал продавца под заголовком
+  // «Финансовый контекст сделки», и читатель принимал его цифры за цифры актива.
+  const subject=candidates.find(x=>x.role==="Предмет сделки");
+  const subjectMissing=subject && !parties.some(x=>x.id===subject.id);
   const draw=()=>{
     const p=parties.find(x=>x.id===active)||parties[0];
     const c=co(p.id);
@@ -8150,7 +8156,8 @@ async function mountDealFns(d){
     // 19 октября 2026): тот же расчёт, что в таблице «Аналитики», вместо
     // прежних двух строк «Цена ÷ выручка» и «Цена ÷ операционная прибыль».
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
-      <div class="fns-head"><div><span class="label">Финансовый контекст сделки</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
+      <div class="fns-head"><div><span class="label">Финансовый контекст сделки · ${esc(String(p.role).toLowerCase())}</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
+      ${subjectMissing?`<p class="fns-disclaimer" style="margin:0 0 12px">Отчётности покупаемой компании${co(subject.id)?` «${esc(co(subject.id).name.replace(/^[«"]|[»"]$/g,""))}»`:""} в «Компасе» пока нет — ниже финансы стороны сделки, не актива.</p>`:""}
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
       <div class="fns-body">
         <p style="color:var(--muted);margin-bottom:14px">Последний отчётный год до появления этой сделки в базе.</p>
