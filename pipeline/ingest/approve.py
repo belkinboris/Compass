@@ -178,13 +178,6 @@ def plan_actions(cards, decisions, now):
             publish.append((card, decision.get('edited_text'), 'решение: опубликовать'))
         elif not decision and card['id'] in joint_ok:
             publish.append((card, None, 'решение: одобрен общий пост (%s)' % joint_ok[card['id']]))
-        elif not decision and (post_mod.get(card['id']) or {}).get('verdict') == 'post_yes':
-            # «Пост в канал» на проекте поста — и одобрение карточки: с 21
-            # октября 2026 сайт выпускает такой пост сразу, со строкой
-            # «Карточка сделки готовится», и карточка обязана выйти следом,
-            # а не через сутки молчания (владелец: «пусть появляется кнопка,
-            # как только карта вышла»).
-            publish.append((card, None, 'решение: одобрен пост'))
         elif decision and decision['verdict'] == 'discard':
             # «Выкинуть» сильнее «придержать»: карточка не выйдет никуда и
             # исчезает из очереди насовсем. Просьба владельца 6 августа: у

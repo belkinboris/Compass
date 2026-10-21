@@ -20,7 +20,6 @@ import os
 import pathlib
 import random
 import re
-import sys
 import threading
 from collections import Counter
 import time
@@ -78,7 +77,6 @@ app = FastAPI(title="КОМПАС")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
-PIPELINE_PUBLISH_DIR = os.path.join(BASE_DIR, "pipeline", "publish")
 
 # Сжатие ответов. База сделок — 4,6 МБ текста, и до этого она уезжала в браузер
 # как есть: 4695 КБ по сети на каждый первый заход. JSON сжимается в шесть раз,
@@ -4918,10 +4916,6 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                         and not match.group(1).startswith("digest~")):
                     threading.Thread(target=_instant_milestone_post,
                                      args=(match.group(1), decision_row.id), daemon=True).start()
-                # Пост сделки — тоже сразу (владелец, 21 октября 2026).
-                elif verdict in ("approve", "post_yes") and "~" not in match.group(1):
-                    threading.Thread(target=_instant_card_post, args=(match.group(1),),
-                                     daemon=True).start()
             # Правка самого сообщения («— ✅ Одобрено (Борис)») — ещё один
             # вызов Bot API, и он не должен задерживать ответ вебхуку:
             # решение уже в базе, а Telegram ждёт ответа секунды, не десятки
@@ -5097,18 +5091,11 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             reply_message_id=reply.get("message_id") if verdict == "note" else None))
         db.commit()
         if verdict == "approve":
-            thread_kw = _thread_kwargs(reply)
-
-            def _publish_now(raw_id=raw_id, body=body, chat_id=chat_id, thread_kw=thread_kw):
-                mid = _instant_card_post(raw_id, edited_text=body)
-                notification_service.tg_api(
-                    "sendMessage", chat_id=str(chat_id),
-                    text=("Опубликовано в канале с вашим текстом. Кнопка и ссылка на карточку "
-                          "появятся, как только карточка выйдет на сайт." if mid else
-                          "Принято: пост уйдёт с вашим текстом. Передумали — ответьте на это "
-                          "сообщение словом «отмена». (правка поста %s)" % raw_id),
-                    disable_web_page_preview=True, **thread_kw)
-            threading.Thread(target=_publish_now, daemon=True).start()
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Принято: пост уйдёт с вашим текстом. Передумали — ответьте на это "
+                      "сообщение словом «отмена». (правка поста %s)" % raw_id),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
         elif question:
             # Исходное сообщение не правим: editMessageText снял бы с него
             # кнопки и форматирование. Отвечаем отдельными сообщениями.
@@ -7173,177 +7160,6 @@ def _instant_milestone_post(combo: str, decision_id: int, db=None) -> int | None
     finally:
         if own:
             db.close()
-
-
-# ==================== Пост сделки — сразу по одобрению ====================
-# Владелец, 21 октября 2026: «Давай пост сразу после, но тогда без кнопки
-# перейти на карточку сделки и последним сообщением без фразы „Подробнее в
-# карточке сделки“, вместо этого с фразой „Карточка сделки готовится“. Пусть
-# появляется кнопка и меняется фраза, как только карта вышла.» Раньше
-# одобренный пост ждал часовой рутины публикации и полного pytest — «M&A
-# Новости» успевали раньше. Теперь «Опубликовать» (или ответ своим текстом на
-# проект поста) выпускает в основной канал ровно тот текст, что видели в
-# консоли; карточку в базу по-прежнему переносит рутина (approve.py + тесты),
-# а когда сайт её получил (data_refresh), пост правится: строка-ссылка и кнопка.
-# Рутина такой пост второй раз не шлёт — только записывает его номер
-# (`send_telegram.site_instant_posts`). Канал недвижимости, общий пост и
-# «без поста» — по-старому, рутиной.
-INSTANT_POST_PREFIX = "instant_post:"
-CARD_PREPARING_LINE = "Карточка сделки готовится"
-_OWN_CARD_LINE = re.compile(
-    r'^\s*(?:→\s*)?(?:Подробнее в\s+)?<a href="https?://[^"]*/#/deal/[^"]*">[^<]*</a>\s*$'
-    r'|^\s*Кнопки под постом:|^\s*' + re.escape(CARD_PREPARING_LINE) + r'\s*$')
-_OWNER_HTML_TAG = re.compile(r"</?(?:b|i|u|s|a|code|pre|strong|em)\b[^>]*>", re.I)
-
-
-def _post_body_without_card_line(text: str) -> str:
-    lines = [l for l in str(text or "").split("\n") if not _OWN_CARD_LINE.match(l)]
-    return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
-
-
-def _instant_post_texts(text: str, deal_id: str) -> tuple[str, str, dict]:
-    """(текст сейчас, текст после выхода карточки, кнопки после выхода)."""
-    body = _post_body_without_card_line(text)
-    url = "%s/#/deal/%s" % (SITE_URL, deal_id)
-    final = body + '\n\nПодробнее в <a href="%s">карточке сделки</a>' % url
-    buttons = {"inline_keyboard": [[{"text": "Открыть карточку сделки", "url": url}]]}
-    return body + "\n\n" + CARD_PREPARING_LINE, final, buttons
-
-
-def _instant_card_post(deal_id: str, edited_text: str | None = None, db=None) -> int | None:
-    """Выпустить одобренный пост сразу. Номер поста или None (тогда — рутина)."""
-    own = db is None
-    db = db or get_session()
-    try:
-        did = str(deal_id or "")
-        if not did or "~" in did or db.get(AppSetting, INSTANT_POST_PREFIX + did):
-            return None
-        card = next((c for c in (_read_json("static/data/pending.json", {}).get("cards") or [])
-                     if str(c.get("id")) == did), None)
-        if not card or card.get("post_covers") or card.get("held"):
-            return None
-        base = _read_json("static/data/deals_promoted.json", {})
-        if did in (base.get("telegram_posts") or {}) or any(
-                str(d.get("id")) == did for d in base.get("deals") or []):
-            return None
-        last_post = db.scalar(select(ModerationDecision).where(
-            ModerationDecision.deal_id == did,
-            ModerationDecision.verdict.in_(("post_yes", "post_no"))).order_by(ModerationDecision.id.desc()))
-        if last_post is not None and last_post.verdict == "post_no":
-            return None
-        try:
-            if PIPELINE_PUBLISH_DIR not in sys.path:
-                sys.path.insert(0, PIPELINE_PUBLISH_DIR)
-            import channels as _channels
-            if _channels.is_realty(card):
-                return None
-        except Exception:                                   # noqa: BLE001
-            return None
-        if edited_text:
-            source = edited_text if _OWNER_HTML_TAG.search(edited_text) else __import__("html").escape(edited_text)
-        else:
-            source = card.get("post_preview") or ""
-        if not source.strip():
-            return None
-        channel = _main_channel_id(db)
-        if not channel or channel in _review_chat_ids(db):
-            return None
-        now_text, final_text, buttons = _instant_post_texts(source, did)
-        started = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        guard = AppSetting(key=INSTANT_POST_PREFIX + did, value=json.dumps({"posting_since": started}))
-        db.add(guard)
-        try:
-            db.commit()
-        except Exception:                                   # noqa: BLE001 — второе нажатие в ту же секунду
-            db.rollback()
-            return None
-        res = notification_service.tg_api("sendMessage", chat_id=channel, text=now_text,
-                                          parse_mode="HTML", disable_web_page_preview=True) or {}
-        if not res.get("ok"):
-            logger.error("пост %s не опубликован сайтом: %s", did, res.get("description"))
-            db.delete(guard)
-            db.commit()
-            return None
-        mid = (res.get("result") or {}).get("message_id")
-        guard.value = json.dumps({"message_id": mid, "chat_id": channel, "posted_at": started,
-                                  "final_text": final_text, "buttons": buttons, "finalized": False},
-                                 ensure_ascii=False)
-        db.commit()
-        return mid
-    finally:
-        if own:
-            db.close()
-
-
-def _finalize_instant_posts(db=None) -> int:
-    """Карточка вышла на сайт — пост получает строку-ссылку и кнопку."""
-    own = db is None
-    db = db or get_session()
-    done = 0
-    try:
-        rows = [r for r in db.scalars(select(AppSetting).where(
-            AppSetting.key.like(INSTANT_POST_PREFIX + "%"))).all()]
-        waiting = []
-        for row in rows:
-            try:
-                rec = json.loads(row.value or "{}")
-            except ValueError:
-                continue
-            if rec.get("message_id") and not rec.get("finalized"):
-                waiting.append((row, rec))
-        if not waiting:
-            return 0
-        on_site = {str(d.get("id")) for d in (_read_json("static/data/deals_promoted.json", {}).get("deals") or [])}
-        for row, rec in waiting:
-            did = row.key[len(INSTANT_POST_PREFIX):]
-            if did not in on_site:
-                continue
-            res = notification_service.tg_api(
-                "editMessageText", chat_id=rec["chat_id"], message_id=rec["message_id"],
-                text=rec["final_text"], parse_mode="HTML", disable_web_page_preview=True,
-                reply_markup=rec.get("buttons")) or {}
-            if res.get("ok") or "not modified" in str(res.get("description") or ""):
-                rec["finalized"] = True
-                row.value = json.dumps(rec, ensure_ascii=False)
-                db.commit()
-                done += 1
-        return done
-    finally:
-        if own:
-            db.close()
-
-
-def _instant_posts_loop():
-    while True:
-        time.sleep(60)
-        try:
-            _finalize_instant_posts()
-        except Exception as e:                              # noqa: BLE001
-            logger.warning("правка постов, вышедших до карточки, не удалась: %s", e)
-
-
-@app.on_event("startup")
-def _start_instant_posts():
-    if os.environ.get("PYTEST_CURRENT_TEST") or not os.environ.get("TELEGRAM_BOT_TOKEN"):
-        return
-    threading.Thread(target=_instant_posts_loop, daemon=True).start()
-
-
-@app.get("/api/ops/instant-posts")
-def ops_instant_posts(token: str = "", db=Depends(get_db)):
-    """Посты, которые сайт выпустил сам: рутина публикации записывает их номера
-    в telegram_posts и второй раз не шлёт."""
-    if not _moderation_token_ok(token):
-        return JSONResponse({"error": "not found"}, status_code=404)
-    out = {}
-    for row in db.scalars(select(AppSetting).where(AppSetting.key.like(INSTANT_POST_PREFIX + "%"))).all():
-        try:
-            rec = json.loads(row.value or "{}")
-        except ValueError:
-            continue
-        out[row.key[len(INSTANT_POST_PREFIX):]] = {k: rec.get(k) for k in (
-            "message_id", "chat_id", "posted_at", "finalized", "posting_since")}
-    return {"posts": out}
 
 
 # ==================== История диалогов ассистента ====================
