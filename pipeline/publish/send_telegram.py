@@ -1052,7 +1052,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             # Общий пост на несколько карточек (`post_covers`, 16 октября
             # 2026) — текст, одобренный владельцем целиком; правка из полей
             # ОДНОЙ карточки заменила бы его постом про одну компанию.
-            if changes and not format_post.is_joint_post(deal):
+            # Текст владельца (`post_override`) — тоже: 21 октября 2026 пост
+            # Swordfish Security, вышедший текстом владельца, через три часа
+            # переписался автотекстом после дополнения карточки («Выложили не
+            # тот пост, который я в консоль отправил»).
+            if changes and not format_post.is_joint_post(deal) and not deal.get('post_override'):
                 to_edit.append((did, where, format_post.render(deal, comps, updates=changes)))
             continue
         if did in posts:
