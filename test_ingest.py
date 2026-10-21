@@ -8330,3 +8330,39 @@ def test_acceptance_rejects_inn_excuse_not_in_the_article():
     ok = accept_card.check_answer({"no_inn": {"target": "иностранная компания, ИНН нет; проверено в ЕГРЮЛ"}},
                                   card, base)
     assert not any("не причина" in b for b in ok), ok
+
+
+def test_place_name_before_the_verb_is_not_a_party_even_in_latin_script():
+    """«На Sotheby's в Нью-Йорке продали...» — обстоятельство места, а не сторона,
+    даже когда имя площадки после предлога — латиницей, не кириллицей.
+
+    21 октября 2026 ворота пропустили «На Sotheby's в Нью-Йорке продали первые
+    издания Коперника, Галилея и Ньютона» (аукцион редких книг в Нью-Йорке, не
+    M&A и не российский рынок) — seller записался «На Sotheby's в Нью-Йорке».
+    Существующий NOT_A_PARTY уже исключал этот оборот для кириллицы («На
+    Петербургской бирже...»), но требовал кириллицу сразу после предлога.
+    Замер: 0 из 1571 настоящих buyer_name/seller начинаются с предлога, за
+    которым следует латиница.
+    """
+    import draft
+    assert draft._named("На Sotheby's в Нью-Йорке") is None
+    buyer, asset, seller, _ = draft.guess_parties(
+        "На Sotheby's в Нью-Йорке продали первые издания Коперника, Галилея и Ньютона")
+    assert seller is None, seller
+
+
+def test_reporting_verb_preamble_is_not_a_party():
+    """«X сообщил, что продал Y» — голова обрезана на глаголе сообщения, не на
+    подлежащем самой сделки.
+
+    21 октября 2026 ворота пропустили «ЦСКА сообщил, что продал все билеты на
+    матч со "Спартаком"» (продажа билетов на футбольный матч, не M&A) —
+    seller записался «ЦСКА сообщил, что». Замер: 0 из 1571 настоящих
+    buyer_name/seller заканчиваются глаголом речи перед «что».
+    """
+    import draft
+    assert draft._named("ЦСКА сообщил, что") is None
+    assert draft._named("Компания заявила, что") is None
+    buyer, asset, seller, _ = draft.guess_parties(
+        "ЦСКА сообщил, что продал все билеты на матч со «Спартаком»")
+    assert seller is None, seller
