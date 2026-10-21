@@ -2940,6 +2940,12 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
                 fin = []
                 if report.revenue_rub:
                     fin.append(f"выручка {_rub_text(report.revenue_rub)}")
+                operating = getattr(report, "operating_profit_rub", None)
+                if operating is not None:
+                    # Ближайший к EBIT показатель российской отчётности: партнёр
+                    # 21 октября 2026 спросил про EBIT, а ассистент его не видел.
+                    fin.append(f"прибыль от продаж (ближайший к EBIT показатель) "
+                               f"{_rub_text(operating)}")
                 if report.net_profit_rub is not None:
                     fin.append(f"чистая прибыль {_rub_text(report.net_profit_rub)}")
                 # «Магнит» — 412 млн ₽, «Самолёт» — 15 млрд ₽ (четвёртая проверка):
