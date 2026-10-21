@@ -2962,6 +2962,142 @@ def _company_profile_text(cid: str, idx, db=None) -> str:
     return "\n".join(lines)
 
 
+# ФИНАНСЫ КОМПАНИИ В ОТВЕТЕ (21 октября 2026). Проверка на 20 вопросах о
+# финансах: «Какая выручка у Озона / ВкусВилла / Wildberries», «Какой EBIT у
+# Магнита», «Чистая прибыль Самолёта» — ассистент отвечал «выручка не указана»
+# или отказывал («могу помочь только о сделках»), хотя профиль компании
+# показывает отчётность ФНС. Модель её просто не видела: справка о компании
+# шла только в подготовку к встрече. Теперь вопрос о деньгах компании
+# получает её отчётность за последние годы и правила, как о ней говорить.
+_FIN_QUESTION = re.compile(
+    r"выручк|прибыл|\bebit|рентабельн|маржинальн|\bмарж[аиуе]\b|долгов\w*\s+нагрузк|\bдолг\w*\s+(?:у|компании)"
+    r"|заемн|кредиторск|дебиторск|\bактив\w*\s+(?:у|банка|компании)|собственн\w*\s+капитал"
+    r"|зарабатыва|\bоборот|финансов\w*\s+(?:показател|результат|отчетност|метрик|данн)|отчетност", re.I)
+
+FINANCE_RULES = """Вопрос о финансах компании. Блок «ФИНАНСЫ ИЗ ПРОФИЛЯ» — данные «Компаса»: годовая отчётность ФНС одного юрлица (или отчётность банка в Банке России). Как отвечать:
+- Называй цифры из блока: показатель, сумма, год и юрлицо («по отчётности ФНС ООО „…“ за 2024 год выручка — 12,3 млрд ₽»).
+- «Прибыль от продаж» — ближайший к EBIT показатель российской отчётности; на вопрос про EBIT называй её и так и поясняй. EBITDA в «Компасе» нет: амортизации отдельной строкой в годовой отчётности нет — так и скажи, не считай её сам.
+- Если в блоке сказано, что юрлицо — головная компания группы или холдинга, обязательно предупреди: это цифры одного юрлица, не всей группы.
+- Не пиши, что данных нет, если они есть в блоке. Если показателя в блоке нет — скажи, что его нет в отчётности, которую видит «Компас».
+- Сравнение компаний — за один и тот же год.
+- Ссылка на профиль: [Название](#/companies/ID) — там полная отчётность.
+- Не добавляй цифр из общих знаний и не придумывай."""
+
+
+def _name_fits_question(name: str, question: str) -> bool:
+    """«Ренессанс Кредит» узнавался «Ренессанс Капиталом» по первому слову — и
+    ответ дал бы чужую отчётность. Если сразу за узнанным словом в вопросе
+    стоит другое слово с заглавной, которого в имени компании нет, — не она."""
+    low_name = (name or "").lower().replace("ё", "е")
+    for m in re.finditer(r"[A-Za-zА-ЯЁа-яё][\w-]{3,}", question or ""):
+        word = m.group(0).lower().replace("ё", "е")
+        if word[:5] not in low_name:
+            continue
+        nxt = re.match(r"\s+([A-ZА-ЯЁ][\w-]{2,})", (question or "")[m.end():])
+        if nxt and nxt.group(1).lower().replace("ё", "е")[:4] not in low_name:
+            return False
+        return True
+    return True
+
+
+def _finance_company_ids(question: str, ret, idx) -> list[str]:
+    companies = getattr(idx, "companies", None) or {}
+    ids = [c for c in (getattr(ret, "company_ids", None) or []) if c in companies]
+    if not ids:
+        try:
+            intent = assistant_retrieval.route(question, idx)
+            ids = [c for c in (intent.company_ids or []) if c in companies]
+        except Exception:  # noqa: BLE001
+            ids = []
+    if not ids and getattr(ret, "company_id", None) in companies:
+        ids = [ret.company_id]
+    if not ids:
+        ids = [m for m in re.findall(r"\(#/companies/([^)\s]+)\)", getattr(ret, "answer", None) or "")
+               if m in companies][:1]
+    if not ids:
+        try:
+            found = assistant_retrieval._detect_company(
+                question, idx, assistant_retrieval.query_terms(question)
+                + assistant_retrieval.short_name_terms(question),
+                assistant_retrieval._evident_words(question))
+        except Exception:  # noqa: BLE001
+            found = None
+        if found and found[0] in companies:
+            ids = [found[0]]
+    out = []
+    for c in ids:
+        if c not in out and _name_fits_question(companies[c].get("name"), question):
+            out.append(c)
+    return out[:3]
+
+
+def _company_finance_text(cid: str, idx, db=None) -> str:
+    companies = getattr(idx, "companies", None) or {}
+    c = companies.get(cid) or {}
+    if not c:
+        return ""
+    head = f"Компания: {c.get('name')} — профиль [{c.get('name')}](#/companies/{cid})"
+    bank = _bank_finance().get(cid)
+    if isinstance(bank, dict) and bank.get("assets_rub"):
+        bits = [f"активы {_rub_text(bank['assets_rub'])}"]
+        if bank.get("equity_rub"):
+            bits.append(f"собственные средства {_rub_text(bank['equity_rub'])}")
+        line = f"Отчётность банка в Банке России на {_date_text(bank.get('as_of_balance'))}: " + ", ".join(bits)
+        if bank.get("net_profit_rub") is not None:
+            line += (f"; чистая прибыль с начала года на {_date_text(bank.get('as_of_profit'))} — "
+                     f"{_rub_text(bank['net_profit_rub'])}")
+        return head + "\n" + line
+    if db is None:
+        return head + "\nОтчётности в «Компасе» нет."
+    try:
+        entity = db.scalar(select(LegalEntity).where(
+            LegalEntity.company_id == cid,
+            LegalEntity.match_status == LegalEntityMatchStatus.confirmed,
+        ).order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
+        reports = list(db.scalars(select(FinancialReport).where(
+            FinancialReport.legal_entity_id == entity.id,
+            FinancialReport.year >= datetime.now(timezone.utc).year - FNS_REPORT_MAX_AGE_YEARS,
+        ).order_by(FinancialReport.year.desc()).limit(3)).all()) if entity else []
+    except Exception as e:  # noqa: BLE001 — без финансов лучше, чем сбой ответа
+        logger.warning("assistant finance failed for %s: %s", cid, e)
+        return head + "\nОтчётность сейчас не загрузилась — скажи, что цифры есть в профиле компании."
+    if not reports:
+        return head + "\nОтчётности ФНС в «Компасе» нет (юрлицо не сопоставлено или отчётность не найдена)."
+    inn = f", ИНН {entity.inn}" if entity.inn else ""
+    lines = [head, f"Отчётность ФНС юрлица {entity.legal_name}{inn}:"]
+    labels = (("revenue_rub", "выручка"), ("gross_profit_rub", "валовая прибыль"),
+              ("operating_profit_rub", "прибыль от продаж (ближайший к EBIT показатель)"),
+              ("profit_before_tax_rub", "прибыль до налогообложения"), ("net_profit_rub", "чистая прибыль"),
+              ("assets_rub", "активы"), ("equity_rub", "собственный капитал"),
+              ("borrowings_rub", "заёмные средства"))
+    holding = False
+    for r in reports:
+        bits = []
+        for field_, label in labels:
+            v = getattr(r, field_, None)
+            if v is not None:
+                bits.append(f"{label} {_rub_text(v)}")
+        try:
+            derived = company_finance.derive(_report_payload(r)).get("metrics") or []
+        except Exception:  # noqa: BLE001
+            derived = []
+        for m in derived:
+            if m.get("kind") == "percent" and m.get("value") is not None:
+                bits.append(f"{str(m.get('label')).lower()} {str(m['value']).replace('.', ',')}%")
+            elif m.get("kind") == "ratio" and m.get("value") is not None and m.get("unit") == "x":
+                bits.append(f"{str(m.get('label')).lower()} ×{str(m['value']).replace('.', ',')}")
+        lines.append(f"- {r.year} год: " + "; ".join(bits))
+        if r.net_profit_rub is not None and r.revenue_rub is not None \
+                and float(r.net_profit_rub) > float(r.revenue_rub):
+            holding = True
+    holding_ctx = c.get("group") or any(isinstance(x.get("holding"), dict) and x["holding"].get("id") == cid
+                                        for x in companies.values())
+    if holding or holding_ctx:
+        lines.append("ВНИМАНИЕ: это головное юрлицо группы или холдинга — цифры одного юрлица, не всей группы; "
+                     "основная выручка группы в других юрлицах. Обязательно скажи это в ответе.")
+    return "\n".join(lines)
+
+
 def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str | None = None,
                  context_id: str | None = None, idx=None, db=None) -> AskPrep:
     system = SYSTEM_BASE
@@ -2996,7 +3132,26 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
                 idx = None
         cid = _meeting_company_id(ret, context_type, context_id, idx) if idx is not None else None
         profile = _company_profile_text(cid, idx, db) if cid else ""
+    finance = False
+    if not meeting and _FIN_QUESTION.search((question or "").replace("ё", "е")):
+        if idx is None:
+            try:
+                idx = assistant_retrieval.get_index()
+            except Exception:  # noqa: BLE001
+                idx = None
+        ids = _finance_company_ids(question, ret, idx) if idx is not None else []
+        blocks = [b for b in (_company_finance_text(c, idx, db) for c in ids) if b]
+        if not blocks:
+            # Компании нет в базе («Перекрёсток») — не отказ «я только о
+            # сделках», а прямой ответ, что её профиля и отчётности нет.
+            blocks = ["Компания из вопроса в «Компасе» не найдена — её профиля и отчётности в базе нет. "
+                      "Так и ответь, предложи назвать компанию иначе или открыть раздел [Компании](#/companies)."]
+        finance = True
+        system = system + "\n\n" + FINANCE_RULES
+        profile = ((profile + "\n\n") if profile else "") + "ФИНАНСЫ ИЗ ПРОФИЛЯ:\n" + "\n\n".join(blocks)
     prep = AskPrep(system, _build_user_message(question, ret, search_block, history, profile), results, search_block)
+    if finance:
+        prep.max_tokens = max(prep.max_tokens, 1000)
     if getattr(ret, "intent", None) == "signals":
         # Три блока со ссылками у каждого признака — длиннее обычного ответа.
         prep.max_tokens = max(prep.max_tokens, 1400)
