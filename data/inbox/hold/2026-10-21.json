@@ -1,0 +1,464 @@
+{
+ "made": "2026-10-21",
+ "drafts": [
+  {
+   "draft_id": "d90791755",
+   "title": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118647/"
+    ]
+   ],
+   "sum": "509 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20093949",
+   "title": "Тюменский ТЦ «Новый магнат» начали распродавать по частям",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137378"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72571775",
+   "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
+    ]
+   ],
+   "sum": "30 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-19",
+     "title": "Переговоры",
+     "note": "В Тюмени выставили на продажу часть торгового центра «Новый магнат», расположенного в городе с 2004 года. Собственник намерен продать половину цокольного этажа площадью 1242 кв. м за 30,05 млн рублей. Объявление появилось на сайтах бесплатных объявлений.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Тюменский ТЦ «Новый магнат» начали распродавать по частям» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d11830710",
+   "title": "Мерц объявил об инвестициях Amazon и Nvidia в Германию",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9043353"
+    ]
+   ],
+   "sum": "€16 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65546462",
+   "title": "Фонд «ВИМ инвестиций» вошел в капитал Swordfish Security",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/investments/articles/2026/10/21/1238677-fond-vim-investitsii-voshel-v-kapital-swordfish-security"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-21",
+     "title": "Сделка завершена",
+     "note": "Закрытый паевой инвестфонд (ЗПИФ) Pre-IPO 2 под управлением УК «ВИМ инвестиции» купил миноритарную долю – 42,152% – в Swordfish Security – интеграторе и консультанте в области безопасной разработки ПО (DevSecOps), безопасности приложений (AppSec) и защиты ИИ…",
+     "source": [
+      "web:vedomosti.ru/articles",
+      "https://www.vedomosti.ru/investments/articles/2026/10/21/1238677-fond-vim-investitsii-voshel-v-kapital-swordfish-security"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51577898",
+   "title": "Инвестиции в открытие падел-клубов в России превысили ₽20 млрд",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/21/10/2026/6ad7c9630bc765ab064d26eb"
+    ]
+   ],
+   "sum": "0,8 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48970386",
+   "title": "Anthropic сообщила об убытке в $80 млрд и перечислила риски перед IPO",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/21/10/2026/6ad81a662f45b323014e4fad"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d64614341",
+   "title": "Мерц объявил об инвестициях Amazon и Nvidia в Германию",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/21/10/2026/6ad7faf655993dc88323eb96"
+    ]
+   ],
+   "sum": "€16 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Amazon инвестирует более €16 млрд, а Nvidia намерена вложиться в четыре немецких стартапа, в том числе в компанию по разработке ИИ",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/21/10/2026/6ad7faf655993dc88323eb96"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Мерц объявил об инвестициях Amazon и Nvidia в Германию» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d73591545",
+   "title": "В Петербурге и Ленобласти резко выросли продажи креветок",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/20/v-peterburge-i-lenoblasti"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75900441",
+   "title": "В МВД предупредили россиян о рисках предоплаты при покупках в интернете",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2187729/2026-10-21/v-mvd-predupredili-rossiian-o-riskakh-predoplaty-pri-pokupkakh-v-internete"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34439296",
+   "title": "Трамп сообщил об инвестициях Пентагона в производство чипов в Северной Каролине",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2187710/2026-10-21/tramp-soobshchil-ob-investitciiakh-pentagona-v-proizvodstvo-chipov-v-severnoi-karoline"
+    ]
+   ],
+   "sum": "$1,5 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gafde5488 (общие редкие слова: произв, чипов) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d74037668",
+   "title": "В МВД посоветовали не переводить полную предоплату за онлайн-покупки",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2187714/2026-10-21/v-mvd-posovetovali-ne-perevodit-polnuiu-predoplatu-za-onlain-pokupki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64054206",
+   "title": "В Курганской области продают нефтебазу за 190 миллионов",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137641"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63425122",
+   "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137660"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32759883",
+   "title": "В Дубае рухнули продажи недвижимости из-за войны США с Ираном",
+   "date": "2026-10-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137707"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
