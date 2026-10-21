@@ -99,7 +99,7 @@
    ]
   },
   {
-   "draft_id": "d34669213",
+   "draft_id": "d90323889",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d76257626",
+   "draft_id": "d88835799",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -155,7 +155,7 @@
    ]
   },
   {
-   "draft_id": "d40730920",
+   "draft_id": "d34588914",
    "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
    "date": "2026-10-21",
    "src": [
@@ -183,7 +183,7 @@
    ]
   },
   {
-   "draft_id": "d51661664",
+   "draft_id": "d70842438",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
    "src": [
@@ -222,7 +222,7 @@
    ]
   },
   {
-   "draft_id": "d28994104",
+   "draft_id": "d65981758",
    "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
    "date": "2026-10-21",
    "src": [
@@ -251,7 +251,7 @@
    ]
   },
   {
-   "draft_id": "d60301666",
+   "draft_id": "d37609384",
    "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
    "date": "2026-10-21",
    "src": [
@@ -280,228 +280,7 @@
    ]
   },
   {
-   "draft_id": "d73326359",
-   "title": "Венгерская MOL опровергла сообщения о покупке контрольного пакета в сербской NIS",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9043880"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Подписана",
-   "events": [
-    {
-     "kind": "signed",
-     "date": "2026-10-21",
-     "title": "Документы подписаны",
-     "note": "Венгерский концерн MOL опроверг заявления о том, что он заключил соглашение о покупке российской доли в сербской энергокомпании NIS. Сегодня об этом сообщал и. о. вице-премьера и министра финансов Сербии Синиша Мали.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9043880"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d62413134",
-   "title": "Новый раунд переговоров РФ-США-Украина может пройти в Абу-Даби в 10-х числах ноября",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1124037"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62726525",
-   "title": "Цифровая платформа с госучастием для покупки золота будет продвигать себя в заблокированных Telegram и YouTube",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-21_u_vlastej_svoi_plany_na_otechestvennyh"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-21",
-     "title": "Переговоры",
-     "note": "Созданная по распоряжению Правительства России цифровая платформа «Росвексель» заказывает рекламную кампанию с предварительным бюджетом почти в полмиллиарда. Основными получателями средств могут стать блогеры c Telegram и YouTube. Правда, площадки…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-21_u_vlastej_svoi_plany_na_otechestvennyh"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d91071457",
-   "title": "Новый раунд переговоров РФ, США и Украины может пройти в Абу-Даби",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28238819"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90406847",
-   "title": "Новый раунд переговоров по Украине может пройти в Абу-Даби",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2188129/ushakov-dopustil-provedenie-novogo-raunda-peregovorov-po-ukraine-v-abu-dabi-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82160699",
-   "title": "Кожемяко отметил консолидированную позицию Госдумы по развитию ДФО",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/kozhemjakoe-874487151.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24865551",
-   "title": "Американский бизнес может начать сворачивать инвестиции в ЕС",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/biznes-874485905.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d34589044",
+   "draft_id": "d62142220",
    "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
    "date": "2026-10-21",
    "src": [
@@ -529,13 +308,138 @@
    ]
   },
   {
-   "draft_id": "d64910363",
-   "title": "OpenAI купила биотех-стартап Orchestra Bio — компании хотят ускорить выпуск лекарств с помощью ИИ",
+   "draft_id": "d62790159",
+   "title": "Гендиректор МГКЛ Лазутин увеличил долю в компании до 28%",
    "date": "2026-10-21",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/openai-kupila-bioteh-startap-orchestra-bio-kompanii-hotyat-uskorit-vypusk-lekarstv-s-pomoshyu-ii/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/21/1239013-gendirektor-mgkl"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43912843",
+   "title": "В Адыгее с помощью инфраструктурных кредитов привлекли 22,9 млрд рублей инвестиций",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28239157"
+    ]
+   ],
+   "sum": "22,9 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "В Адыгее с помощью инфраструктурных кредитов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "В Адыгее с помощью инфраструктурных кредитов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: 22, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d46454416",
+   "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28238995"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Пресс-секретарь российского лидера отметил, что коммерческая сделка не может обсуждаться публично",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28238995"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58454394",
+   "title": "Московские компании стали чаще арендовать офисы вместо покупки",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/moskovskie-kompanii-stali-chashhe-arendovat-ofisy-vmesto-pokupki/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d15357880",
+   "title": "OpenAI приобрела стартап Orchestra Bio",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261021/openai-874490822.html"
     ]
    ],
    "sum": null,
@@ -546,64 +450,35 @@
      "kind": "closed",
      "date": "2026-10-21",
      "title": "Сделка завершена",
-     "note": "OpenAI приобрела биотехнологический стартап Orchestra Bio, который использует ИИ-агентов для управления процессами разработки лекарств, пишет TechCrunch. Команда и технологии компании перейдут в подразделение Rosalind, создающее модели искусственного…",
+     "note": "",
      "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/openai-kupila-bioteh-startap-orchestra-bio-kompanii-hotyat-uskorit-vypusk-lekarstv-s-pomoshyu-ii/"
+      "web:1prime.ru",
+      "https://1prime.ru/20261021/openai-874490822.html"
      ]
     }
    ],
    "buyer_name": "OpenAI",
-   "asset": "биотех-стартап Orchestra Bio — компании хотят ускорить выпуск лекарств с помощью ИИ",
+   "asset": "стартап Orchestra Bio",
    "seller": null,
    "parsed_parties": {
     "buyer": "OpenAI",
-    "asset": "биотех-стартап Orchestra Bio — компании хотят ускорить выпуск лекарств с помощью ИИ",
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку g3a84650b (общие редкие слова: ии, старта) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d69085964",
-   "title": "Ушаков рассказал, где может пройти новый раунд переговоров по Украине",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261021/ukraina-2126025194.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "asset": "стартап Orchestra Bio",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d87058675",
-   "title": "Покупки на маркетплейсах назвали новым развлечением у россиян",
+   "draft_id": "d74313831",
+   "title": "Опрос: шесть из десяти не имеющих жилья чехов не рассчитывают его купить",
    "date": "2026-10-21",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/21/pokupki-na-marketpleysah-nazvali-novym-razvlecheniem-u-rossiyan/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261021/chekhiya-874490196.html"
     ]
    ],
    "sum": null,
@@ -621,21 +496,22 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d33777291",
-   "title": "«Дело идет к завершению конфликта»: в Кремле анонсировали новый раунд переговоров",
+   "draft_id": "d32863841",
+   "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
    "date": "2026-10-21",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/politics/2026/10/21/76715887/"
+     "web:ria.ru",
+     "https://ria.ru/20261021/siti-2126054701.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -649,35 +525,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51358821",
-   "title": "Екатерина Дедова примет участие в благотворительном аукционе ⏩ Meet For Charity – крупнейший в России благотворительный аукцион встреч с известными людьми. На этой неделе можно сделать ставку на встре",
-   "date": "2026-10-16",
-   "src": [
-    [
-     "tg:alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/2836"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
