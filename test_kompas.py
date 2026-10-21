@@ -2076,3 +2076,11 @@ def test_finance_question_about_a_company_sends_its_fns_report_to_the_model():
     assert "прибыль от продаж (ближайший к EBIT показатель) -12 млрд ₽" in text
     assert "#/companies/%s" % ozon[0] in text
     assert "EBITDA в «Компасе» нет" in main.FINANCE_RULES
+
+
+def test_revenue_screen_question_gets_the_feed_filter_link():
+    hint = main._revenue_screen_hint("Покажи компании с выручкой больше 10 млрд, которые продали в 2025 году")
+    assert "#/deals?rev=1e10&year=2025" in hint
+    assert "#/deals?rev=5e10" in main._revenue_screen_hint("сделки с выручкой от 70 млрд")
+    assert main._revenue_screen_hint("Какая выручка у Озона?") == ""
+    assert "не делай вывода, чья компания больше" in main.FINANCE_RULES
