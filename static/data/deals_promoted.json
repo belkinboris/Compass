@@ -286412,7 +286412,9 @@
   "gf285fa14": null,
   "g32cfa1d4": 213,
   "g685f1e39": 215,
-  "g7d3f5a20": 216
+  "g7d3f5a20": 216,
+  "gx4padel01": 217,
+  "gf6c084b9": 218
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -290724,7 +290726,46 @@
      "kind": "approval"
     }
    ]
+  },
+  "gx4padel01": {
+   "sum": "120–220 млн ₽ (по оценке)",
+   "buyer": "g032b976e",
+   "seller": "Дмитрий Шицле",
+   "target": "g0a110d96",
+   "asset": "корты и права на бренд Rocket Padel",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
+  },
+  "gf6c084b9": {
+   "sum": "Не раскрыта (по оценке аналитиков — 1,8–2,7 млрд ₽)",
+   "buyer": "g17451b4f",
+   "target": "g15b15d01",
+   "asset": "42,152% Swordfish Security",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "Выручка группы Swordfish Security за 2025 год превысила 2,1 млрд ₽ — рост на 52% к 2024 году, когда показатель был 1,4 млрд ₽. Больше всего денег от поставок ПО дали клиенты из финтеха (около 700 млн ₽) и госсектора (около 300 млн ₽).",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-10-21T08:19:35+00:00"
+ "telegram_last_post_at": "2026-10-21T10:24:41+00:00"
 }
