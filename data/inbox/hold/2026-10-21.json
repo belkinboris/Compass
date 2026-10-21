@@ -99,7 +99,7 @@
    ]
   },
   {
-   "draft_id": "d90323889",
+   "draft_id": "d91191567",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d88835799",
+   "draft_id": "d84270760",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -155,7 +155,7 @@
    ]
   },
   {
-   "draft_id": "d34588914",
+   "draft_id": "d45688816",
    "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
    "date": "2026-10-21",
    "src": [
@@ -183,7 +183,7 @@
    ]
   },
   {
-   "draft_id": "d70842438",
+   "draft_id": "d86637959",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
    "src": [
@@ -222,7 +222,7 @@
    ]
   },
   {
-   "draft_id": "d65981758",
+   "draft_id": "d30589247",
    "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
    "date": "2026-10-21",
    "src": [
@@ -251,7 +251,7 @@
    ]
   },
   {
-   "draft_id": "d37609384",
+   "draft_id": "d72781284",
    "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
    "date": "2026-10-21",
    "src": [
@@ -280,7 +280,7 @@
    ]
   },
   {
-   "draft_id": "d62142220",
+   "draft_id": "d89114069",
    "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
    "date": "2026-10-21",
    "src": [
@@ -308,64 +308,7 @@
    ]
   },
   {
-   "draft_id": "d62790159",
-   "title": "Гендиректор МГКЛ Лазутин увеличил долю в компании до 28%",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/21/1239013-gendirektor-mgkl"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43912843",
-   "title": "В Адыгее с помощью инфраструктурных кредитов привлекли 22,9 млрд рублей инвестиций",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28239157"
-    ]
-   ],
-   "sum": "22,9 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "В Адыгее с помощью инфраструктурных кредитов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "В Адыгее с помощью инфраструктурных кредитов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: 22, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d46454416",
+   "draft_id": "d11611584",
    "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
    "date": "2026-10-21",
    "src": [
@@ -404,104 +347,7 @@
    ]
   },
   {
-   "draft_id": "d58454394",
-   "title": "Московские компании стали чаще арендовать офисы вместо покупки",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/moskovskie-kompanii-stali-chashhe-arendovat-ofisy-vmesto-pokupki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d15357880",
-   "title": "OpenAI приобрела стартап Orchestra Bio",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/openai-874490822.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-21",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261021/openai-874490822.html"
-     ]
-    }
-   ],
-   "buyer_name": "OpenAI",
-   "asset": "стартап Orchestra Bio",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "OpenAI",
-    "asset": "стартап Orchestra Bio",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d74313831",
-   "title": "Опрос: шесть из десяти не имеющих жилья чехов не рассчитывают его купить",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/chekhiya-874490196.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d32863841",
+   "draft_id": "d56745333",
    "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
    "date": "2026-10-21",
    "src": [
@@ -512,6 +358,260 @@
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31337888",
+   "title": "Минфин США еще на месяц продлил лицензию на переговоры о продаже активов ЛУКОЙЛа",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9044206"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d90453740",
+   "title": "OpenAI приобрела стартап Orchestra Bio для ускорения разработки лекарств",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ad8e88e8180b58b1b244267"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-21",
+     "title": "Сделка завершена",
+     "note": "OpenAI объявила о покупке стартапа Orchestra Bio, который разрабатывает программное обеспечение на основе искусственного интеллекта для координации создания лекарственных препаратов, передает пресс-служба компании.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6ad8e88e8180b58b1b244267"
+     ]
+    }
+   ],
+   "buyer_name": "OpenAI",
+   "asset": "стартап Orchestra Bio для ускорения разработки лекарств",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "OpenAI",
+    "asset": "стартап Orchestra Bio для ускорения разработки лекарств",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d11832738",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124073"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d25298416",
+   "title": "На матч РПЛ между ЦСКА и «Спартаком» продали все билеты",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28239223"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-21",
+     "title": "Сделка завершена",
+     "note": "Встреча пройдет 25 октября на \"ВЭБ-Арене\"",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/sport/28239223"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "все билеты",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "все билеты",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d84152383",
+   "title": "США продлили лицензию на операции по продаже зарубежных активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261021/usa-2126060577.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d91403254",
+   "title": "Blacksmith hits unicorn valuation after Sequoia leads Series C",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/21/blacksmith-hits-unicorn-valuation-after-sequoia-leads-series-c/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d72167991",
+   "title": "США продлили лицензию на операции по продаже активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138001"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d62392013",
+   "title": "Стало известно место, где может пройти новый раунд переговоров России, США и Украины",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137980"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
