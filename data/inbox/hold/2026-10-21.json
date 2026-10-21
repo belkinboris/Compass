@@ -99,7 +99,7 @@
    ]
   },
   {
-   "draft_id": "d69338509",
+   "draft_id": "d76880372",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d24688014",
+   "draft_id": "d83601497",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -155,7 +155,7 @@
    ]
   },
   {
-   "draft_id": "d35102741",
+   "draft_id": "d46960817",
    "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
    "date": "2026-10-21",
    "src": [
@@ -183,35 +183,7 @@
    ]
   },
   {
-   "draft_id": "d88465737",
-   "title": "Минфин Сербии сообщил о заключении договора о продаже NIS венгерской MOL",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261021/serbiya-2125828605.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28934456",
+   "draft_id": "d25712715",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
    "src": [
@@ -250,65 +222,7 @@
    ]
   },
   {
-   "draft_id": "d88344188",
-   "title": "Маск заявил о возможном слиянии SpaceX и Tesla",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9043545"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d19200393",
-   "title": "GloraX выкупит акции у участников IPO с премией 19,5%",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9043574"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": "GloraX",
-   "asset": null,
-   "seller": "участников IPO с премией 19",
-   "parsed_parties": {
-    "buyer": "GloraX",
-    "asset": null,
-    "seller": "участников IPO с премией 19"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d44964202",
+   "draft_id": "d64249821",
    "title": "Маск считает слияние SpaceX и Tesla хорошей идеей",
    "date": "2026-10-21",
    "src": [
@@ -331,156 +245,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Маск заявил о возможном слиянии SpaceX и Tesla» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d88751812",
-   "title": "Один телевизор — разные причины покупки: исследование ICMR о том, как россияне выбирают телевизоры",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-21_odin_televizor_raznye"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Потребительские товары",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86908791",
-   "title": "ГК Swordfish Security привлекла инвестиции для развития направлений защиты ИИ-систем и безопасной разработки ПО",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-21_gk_swordfish_security_privlekla_investitsii"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "ГК Swordfish Security",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "ГК Swordfish Security",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g53da1f4d (общие редкие слова: ии, разраб) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d13244008",
-   "title": "Кожемяко: механизм выкупа по программе арендного жилья расширят в ДФО",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28237247"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17193470",
-   "title": "В Петербурге запретят собирать и продавать краснокнижные грибы",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/21/v-peterburge-zapretjat-sobirat"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14709520",
-   "title": "Продажи подержанных японских авто в РФ превысили 1,2 млн с начала года",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2187862/2026-10-21/prodazhi-poderzhannykh-iaponskikh-avto-v-rf-prevysili-12-mln-s-nachala-goda"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82282216",
+   "draft_id": "d55537138",
    "title": "СМИ: SpaceX и Tesla создали комитеты для обсуждения слияния",
    "date": "2026-10-21",
    "src": [
@@ -506,79 +277,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Маск заявил о возможном слиянии SpaceX и Tesla» — второе издание, в группу не шлём"
+    "та же новость, что «Маск считает слияние SpaceX и Tesla хорошей идеей» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d64677806",
-   "title": "Липецкий завод строительных конструкций оспаривает оценку имущества и добивается приостановки его продажи",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118700-lipetskiy-zavod-stroitelnykh-konstruktsiy-osparivaet-otsenku-imushchestva-i-dobivaetsya-priostanovki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d19067810",
-   "title": "Россияне купили 1,22 млн подержанных японских автомобилей в 2026 году: самый популярный бренд — Toyota",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/rossiyane-kupili-122-mln-poderzhannyh-yaponskih-avtomobilej-v-2026-godu-samyj-populyarnyj-brend-toyota/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-21",
-     "title": "Сделка завершена",
-     "note": "За январь—сентябрь 2026 года в России продали 1,22 млн подержанных легковых автомобилей японских брендов. Это на 8,3% больше, чем за тот же период 2025-го, сообщил директор агентства «Автостат» Сергей Целиков. Каждый четвёртый автомобиль (27%) на вторичном…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/rossiyane-kupili-122-mln-poderzhannyh-yaponskih-avtomobilej-v-2026-godu-samyj-populyarnyj-brend-toyota/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "1,22 млн подержанных японских автомобилей в 2026 году: самый популярный бренд — Toyota",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "1,22 млн подержанных японских автомобилей в 2026 году: самый популярный бренд — Toyota",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d58861389",
+   "draft_id": "d43438997",
    "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
    "date": "2026-10-21",
    "src": [
@@ -604,6 +307,249 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g9fed3cb1 (общие редкие слова: жк, застро) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d30435297",
+   "title": "«Генератор кэша, который меняет правила игры» // Зачем Илон Маск задумал мегаслияние SpaceX и Tesla: мнения СМИ",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9043650"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Илон Маск заявил, что две основанные им компании — производитель электромобилей Tesla и космическая компания SpaceX — обсуждают возможность слияния. Это вызвало бурную реакцию среди СМИ и аналитиков, которые пытаются понять, насколько крупной будет…",
+     "source": [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9043650"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Маск считает слияние SpaceX и Tesla хорошей идеей» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d45768579",
+   "title": "MOL опровергла слова вице-премьера Сербии о продаже доли «Газпрома» в NIS",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/21/1238886-mol-oprovergla"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf285fa14 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d10411747",
+   "title": "MOL опровергла заявления о подписании договора о покупке NIS",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261021/mol--874473980.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «MOL опровергла слова вице-премьера Сербии о продаже доли «Га» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d79528482",
+   "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd76643b6 (общие редкие слова: 400, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d68090360",
+   "title": "В российском регионе участник ОПГ решил купить полицейского за 300 тысяч рублей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/21/v-rossiyskom-regione-uchastnik-opg-reshil-kupit-politseyskogo-za-300-tysyach-rubley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d74272249",
+   "title": "Захарова проиграла Боузковой во втором раунде турнира в Нинбо",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/21/zaharova-proigrala-bouzkovoy-vo-vtorom-raunde-turnira-v-ninbo/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25148578",
+   "title": "В России провалились продажи немецких машин китайской сборки",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/21/v-rossii-provalilis-prodazhi-nemetskih-mashin-kitayskoy-sborki/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44381443",
+   "title": "Власти Екатеринбурга продолжают борьбу с киосками, игнорируя аукционы и поручение губернатора",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137923"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
