@@ -88,6 +88,9 @@ TELEGRAM_EXTRA = [
     ('dealsma', 'Сделки M&A (@dealsma)', 1),
     ('rusven', 'Русский венчур', 2),
     ('alumnimna', 'ALUMNI Partners M&A', 3),
+    # Основной канал фирмы (владелец прислал 21 октября 2026): о Swordfish
+    # Security и других сделках пишет здесь, а не в @alumnimna.
+    ('alumnipartnerslawfirm', 'ALUMNI Partners', 3),
     ('BIRCHLEGAL', 'BIRCH Legal', 3),
     ('LevelLegalServices', 'LEVEL Legal Services', 3),
     ('LKPconsult', 'ЛКП', 3),
