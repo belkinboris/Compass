@@ -3605,6 +3605,7 @@ function trackView(path){
   }catch(e){}
 }
 function route(){
+  if(/^#\/deal\//.test(location.hash)) kompasGoal("open_deal");
   // Диалог лежит в body, а не в #app, и перерисовка экрана его не убирала:
   // полупрозрачная подложка оставалась поверх новой страницы и перехватывала
   // клики — экран выглядел живым, но не отзывался. Закрываем штатно, кнопкой,
@@ -4097,6 +4098,7 @@ async function aiAnswer(q, mode, meta){
         body:JSON.stringify(payload),signal:ctl.signal});
       data = await r.json();
     } finally { clearTimeout(killer); }
+    if(r && r.ok) kompasGoal("ask_assistant");
     if(data.thread_id) activeThreadId=data.thread_id;
     if(data.answer) return {ok:true, raw:data.answer, html:mdToHtml(data.answer),
       intent:data.intent||null, model:data.model!==false, deals:data.deals||[],
@@ -10560,6 +10562,12 @@ function roleLabel(role){ return (ACCOUNT_ROLES.find(([v])=>v===role)||[])[1] ||
 // Один запрос входа/регистрации на оба экрана — «Аккаунт» и экран гейта.
 // Возвращает JSON ответа или null; ошибку пишет в переданный элемент.
 const GATE_SENT_TEXT = "Заявка отправлена. Как только проверим, вход по этим данным заработает — обычно в течение дня.";
+/* Цели Яндекс Метрики для Директа (22 октября 2026): register — заявка или
+   регистрация отправлена, ask_assistant — вопрос ассистенту, open_deal —
+   открыта карточка сделки. Счётчик тот же, что в коде Метрики внизу файла;
+   нет Метрики (блокировщик) — молча ничего. */
+function kompasGoal(name){ try{ if(typeof window.ym==="function") window.ym(112192428,"reachGoal",name); }catch(e){} }
+
 async function authRequest(endpoint, label, payload, msg){
   msg.className="acct-note reveal in"; msg.textContent=label+"…";
   try{
@@ -10567,6 +10575,7 @@ async function authRequest(endpoint, label, payload, msg){
     const x=await r.json().catch(()=>({}));
     if(!r.ok){msg.textContent=x.error||"Не получилось.";msg.classList.add("err");return null;}
     msg.textContent="";
+    if(endpoint==="/api/auth/register") kompasGoal("register");
     return x;
   }catch(err){msg.textContent="Не получилось отправить запрос.";msg.classList.add("err");return null;}
 }
