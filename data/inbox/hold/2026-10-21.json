@@ -99,7 +99,7 @@
    ]
   },
   {
-   "draft_id": "d14077490",
+   "draft_id": "d90323889",
    "title": "В Курганской области продают нефтебазу за 190 миллионов",
    "date": "2026-10-21",
    "src": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "draft_id": "d56263720",
+   "draft_id": "d88835799",
    "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
    "date": "2026-10-21",
    "src": [
@@ -155,7 +155,7 @@
    ]
   },
   {
-   "draft_id": "d54420410",
+   "draft_id": "d34588914",
    "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
    "date": "2026-10-21",
    "src": [
@@ -183,7 +183,7 @@
    ]
   },
   {
-   "draft_id": "d78396508",
+   "draft_id": "d70842438",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
    "src": [
@@ -222,7 +222,7 @@
    ]
   },
   {
-   "draft_id": "d65122086",
+   "draft_id": "d65981758",
    "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
    "date": "2026-10-21",
    "src": [
@@ -251,46 +251,7 @@
    ]
   },
   {
-   "draft_id": "d40590178",
-   "title": "«Генератор кэша, который меняет правила игры» // Зачем Илон Маск задумал мегаслияние SpaceX и Tesla: мнения СМИ",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9043650"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-21",
-     "title": "Переговоры",
-     "note": "Илон Маск заявил, что две основанные им компании — производитель электромобилей Tesla и космическая компания SpaceX — обсуждают возможность слияния. Это вызвало бурную реакцию среди СМИ и аналитиков, которые пытаются понять, насколько крупной будет…",
-     "source": [
-      "web:kommersant.ru/daily",
-      "https://www.kommersant.ru/doc/9043650"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25417090",
+   "draft_id": "d37609384",
    "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
    "date": "2026-10-21",
    "src": [
@@ -319,13 +280,13 @@
    ]
   },
   {
-   "draft_id": "d77931013",
-   "title": "Шереметьево начало переговоры о продаже 75% туроператора «Библио-Глобус»",
+   "draft_id": "d62142220",
+   "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
    "date": "2026-10-21",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118720-voronezhskiy-aviazavod-vnov-ne-smog-prodat-zakrytye-lager-salyut-i-turbazu-zvezdnyy/"
     ]
    ],
    "sum": null,
@@ -340,24 +301,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Гостиницы и туризм",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d64800217",
-   "title": "Аукцион самых дорогих и выдержанных российских вин пройдет в декабре",
+   "draft_id": "d62790159",
+   "title": "Гендиректор МГКЛ Лазутин увеличил долю в компании до 28%",
    "date": "2026-10-21",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/auktsion-874484435.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/21/1239013-gendirektor-mgkl"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -375,17 +336,85 @@
    ]
   },
   {
-   "draft_id": "d43263408",
-   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 99,79 миллиарда рублей",
+   "draft_id": "d43912843",
+   "title": "В Адыгее с помощью инфраструктурных кредитов привлекли 22,9 млрд рублей инвестиций",
    "date": "2026-10-21",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/minfin-874483851.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28239157"
+    ]
+   ],
+   "sum": "22,9 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "В Адыгее с помощью инфраструктурных кредитов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "В Адыгее с помощью инфраструктурных кредитов",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку ga0dd6563 (общие редкие слова: 22, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d46454416",
+   "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28238995"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Пресс-секретарь российского лидера отметил, что коммерческая сделка не может обсуждаться публично",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28238995"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58454394",
+   "title": "Московские компании стали чаще арендовать офисы вместо покупки",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/moskovskie-kompanii-stali-chashhe-arendovat-ofisy-vmesto-pokupki/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -400,49 +429,60 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc2abcc97 (общие редкие слова: миллиа, рублей) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d53949969",
-   "title": "Инвестиции в недвижимость России сократились за три квартала на 14%",
+   "draft_id": "d15357880",
+   "title": "OpenAI приобрела стартап Orchestra Bio",
    "date": "2026-10-21",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261021/investitsii-874481778.html"
+     "https://1prime.ru/20261021/openai-874490822.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-21",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261021/openai-874490822.html"
+     ]
+    }
+   ],
+   "buyer_name": "OpenAI",
+   "asset": "стартап Orchestra Bio",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "OpenAI",
+    "asset": "стартап Orchestra Bio",
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d74584891",
-   "title": "Инвестиции в недвижимость России сократились за три квартала на 14%",
+   "draft_id": "d74313831",
+   "title": "Опрос: шесть из десяти не имеющих жилья чехов не рассчитывают его купить",
    "date": "2026-10-21",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261021/investitsii-2125972767.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20261021/chekhiya-874490196.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -453,24 +493,25 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d54867486",
-   "title": "Россельхозбанк в декабре проведет аукцион российских вин",
+   "draft_id": "d32863841",
+   "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
    "date": "2026-10-21",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261021/rosselhozbank-2126013894.html"
+     "https://ria.ru/20261021/siti-2126054701.html"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -481,7 +522,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
