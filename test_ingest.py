@@ -8366,3 +8366,21 @@ def test_reporting_verb_preamble_is_not_a_party():
     buyer, asset, seller, _ = draft.guess_parties(
         "ЦСКА сообщил, что продал все билеты на матч со «Спартаком»")
     assert seller is None, seller
+
+
+def test_za_period_phrase_before_the_verb_is_not_a_party():
+    """«За два месяца в Петербурге купили...» — обстоятельство времени-места,
+    а не сторона.
+
+    22 октября 2026 ворота пропустили «За два месяца в Петербурге купили
+    пять автомобилей Lada Aura» (розничная статистика продаж модели, не
+    сделка) — buyer_name записался «За два месяца в Петербурге». Тот же
+    обстоятельственный оборот, что у «На Петербургской бирже...», с
+    предлогом «За». Замер: 0 из 1702 настоящих buyer_name/seller
+    начинаются с «За + слово».
+    """
+    import draft
+    assert draft._named("За два месяца в Петербурге") is None
+    buyer, asset, seller, _ = draft.guess_parties(
+        "За два месяца в Петербурге купили пять автомобилей Lada Aura")
+    assert buyer is None, buyer
