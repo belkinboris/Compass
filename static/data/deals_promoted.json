@@ -239503,6 +239503,10 @@
     [
      "Smart-Lab",
      "https://smart-lab.ru/blog/news/1351807.php"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261022/tgk-1-874527531.html"
     ]
    ],
    "from_ingest": true,
@@ -239532,6 +239536,16 @@
      "source": [
       "ПРАЙМ",
       "https://1prime.ru/20260929/tgk-1-873760365.html"
+     ]
+    },
+    {
+     "kind": "approval",
+     "date": "2026-10-22",
+     "title": "Собрание акционеров утвердило допэмиссию",
+     "note": "Акционеры ТГК-1 утвердили допэмиссию акций по закрытой подписке, которая практически удвоит уставный капитал компании, сообщила компания.",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261022/tgk-1-874527531.html"
      ]
     }
    ],
@@ -239564,7 +239578,7 @@
      "value": "2026-09-29",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "fba0a4808589"
+     "card_hash": "02c99aa9bf41"
     },
     "nature": {
      "control_change": false,

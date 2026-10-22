@@ -2,6 +2,19 @@
  "updated": "2026-10-22",
  "signals": [
   {
+   "id": "sc5f28dfe8",
+   "company_id": "g1279140f",
+   "date": "2026-10-22",
+   "kind": "for_sale",
+   "summary": "Туроператор БГ — компанию или долю в ней готовят к продаже",
+   "source": [
+    "rb.ru",
+    "https://rb.ru/news/sheremetevo-obsuzhdaet-prodazhu-75-biblio-globusa-pokupatelem-mozhet-stat-struktura-blizkaya-k-rwb/"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "s7027d9f0a",
    "company_id": "sheremetyevo",
    "date": "2026-10-21",
