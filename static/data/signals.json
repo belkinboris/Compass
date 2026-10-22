@@ -1,6 +1,34 @@
 {
- "updated": "2026-10-20",
+ "updated": "2026-10-22",
  "signals": [
+  {
+   "id": "s7027d9f0a",
+   "company_id": "sheremetyevo",
+   "date": "2026-10-21",
+   "kind": "sell",
+   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
+  {
+   "id": "s1d1eac154",
+   "company_id": "g1279140f",
+   "date": "2026-10-21",
+   "kind": "for_sale",
+   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
   {
    "id": "sf4f74786f",
    "company_id": "g41f567f1",
@@ -194,6 +222,34 @@
    "origin": "card",
    "deal_id": "ga7020b5e",
    "strength": "strong"
+  },
+  {
+   "id": "s2b35730e0",
+   "company_id": "g0087fb92",
+   "date": "2026-09-22",
+   "kind": "investor",
+   "summary": "1С — обсуждается совместное предприятие с Райтек",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2026-09-22_1s_i_rajtek_sozdayut_sovmestnoe"
+   ],
+   "origin": "card",
+   "deal_id": "g685f1e39",
+   "strength": "normal"
+  },
+  {
+   "id": "s0efc273b4",
+   "company_id": "g4dba043a",
+   "date": "2026-09-22",
+   "kind": "investor",
+   "summary": "Райтек — обсуждается совместное предприятие с 1С",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2026-09-22_1s_i_rajtek_sozdayut_sovmestnoe"
+   ],
+   "origin": "card",
+   "deal_id": "g685f1e39",
+   "strength": "normal"
   },
   {
    "id": "sf4add75f8",
