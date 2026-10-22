@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d98203770",
+   "draft_id": "d21540720",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,36 @@
    ]
   },
   {
-   "draft_id": "d69931409",
+   "draft_id": "d39974717",
+   "title": "Фонд «Созидательный венчур» вложился в разработчика корпоративной платформы данных ANG Platform",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Fond-Sozidatelnyj-venchur-vlozhilsya-v-razrabotchika-korporativnoj-platformy-dannyh-ANG-Platform-87675"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g09baae21 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33924951",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +591,7 @@
    ]
   },
   {
-   "draft_id": "d20544815",
+   "draft_id": "d23052361",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +619,7 @@
    ]
   },
   {
-   "draft_id": "d42166567",
+   "draft_id": "d46054753",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,42 +648,13 @@
    ]
   },
   {
-   "draft_id": "d19196367",
-   "title": "Китайский DeepSeek привлек $15 млрд на последнем этапе финансирования",
+   "draft_id": "d16691133",
+   "title": "В Госдуме призвали оценить риск распродажи ОФЗ из-за налога для ИПИФ",
    "date": "2026-10-22",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/22/1239167-deepseek-privlek"
-    ]
-   ],
-   "sum": "$15 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Китайский DeepSeek",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Китайский DeepSeek",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d21890254",
-   "title": "В ГД рекомендовали принять законопроект о продаже вина через «Почту России»",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/gd-874506575.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/22/10/2026/6ad8d2699a7947f29bfde001"
     ]
    ],
    "sum": null,
@@ -676,13 +676,81 @@
    ]
   },
   {
-   "draft_id": "d24862845",
-   "title": "Продажи и производство «Автоваза» могут снизиться на 20-25% до конца года",
+   "draft_id": "d14642757",
+   "title": "Лубинец: на Украине военнообязанные «покупают» детей, чтобы избежать мобилизации",
    "date": "2026-10-22",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28241565"
+     "https://tass.ru/mezhdunarodnaya-panorama/28241679"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Украинский омбудсмен сообщил, что на этой неделе выявили случай, когда в Закарпатье мать \"продала\" четверых детей человеку, который не имеет никакого отношения к этой семье, после чего он оформил статус многодетного отца и выехал за рубеж",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/mezhdunarodnaya-panorama/28241679"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "\" детей, чтобы избежать мобилизации",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "\" детей, чтобы избежать мобилизации",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d75252519",
+   "title": "Объявления о продаже аккаунтов для аренды авто с чужими данными запретили",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28241715"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d32960308",
+   "title": "В Якутии приняли закон о запрете продажи вейпов",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/22/v-jakutii-prinjali-zakon-o-zaprete"
     ]
    ],
    "sum": null,
@@ -704,13 +772,13 @@
    ]
   },
   {
-   "draft_id": "d20554829",
-   "title": "Россия может продавать дизельное топливо Европе, заявил Дмитриев",
+   "draft_id": "d63929845",
+   "title": "Продажи новых LCV в России в 2026 году составят 1,42-1,4 миллиона единиц",
    "date": "2026-10-22",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261022/dmitriev-2126189455.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20261022/prodazhi-874510429.html"
     ]
    ],
    "sum": null,
@@ -729,6 +797,101 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31687375",
+   "title": "В Якутии приняли закон о запрете продажи вейпов",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261022/veyp-2126199296.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43038780",
+   "title": "Как продать бумаги через год и не платить налог? Разбираю ЛДВ-РИИ",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1365473.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50641232",
+   "title": "Новый российский автобренд Jeland продал более 10 тыс. автомобилей",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2188523/2026-10-22/novyi-rossiiskii-avtobrend-jeland-prodal-bolee-10-tys-avtomobilei"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Российский автомобильный бренд Jeland, созданный в рамках стратегического партнерства холдинга «АГР» и китайской фирмы Defetoo, с момента запуска продаж реализовал в стране 10 тыс. автомобилей. Об этом говорится в сообщении пресс-службы марки, которое…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2188523/2026-10-22/novyi-rossiiskii-avtobrend-jeland-prodal-bolee-10-tys-avtomobilei"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "более 10 тыс. автомобилей",
+   "seller": "Новый российский автобренд Jeland",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "более 10 тыс. автомобилей",
+    "seller": "Новый российский автобренд Jeland"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на карточку gd49877c9, но читающий не смог решить сам: Ложное совпадение ворот по общим словам «более»/«россий» — черновик про продажи автомобилей Jeland, карточка-кандидат про анимацию «Союзмультфильма», ничего общего по предмету. Сам черновик при этом не похож на сделку M&A — это объявление о достижении планки продаж (10 тыс. автомобилей нового бренда), без покупателя, продавца компании или актива. separate отпустило бы его напрямую в новую карточку, а он не сделка — оставляю на решение владельца."
    ]
   }
  ]

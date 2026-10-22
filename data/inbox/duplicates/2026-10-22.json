@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-22",
+ "items": [
+  {
+   "key": "https://iz.ru/2188523/2026-10-22/novyi-rossiiskii-avtobrend-jeland-prodal-bolee-10-tys-avtomobilei::gd49877c9",
+   "candidate_id": "gd49877c9",
+   "reason": "общие редкие слова: более, россий",
+   "draft": {
+    "draft_id": "d50641232",
+    "title": "Новый российский автобренд Jeland продал более 10 тыс. автомобилей",
+    "date": "2026-10-22",
+    "src": [
+     [
+      "web:iz.ru",
+      "https://iz.ru/2188523/2026-10-22/novyi-rossiiskii-avtobrend-jeland-prodal-bolee-10-tys-avtomobilei"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-22",
+      "title": "Сделка завершена",
+      "note": "Российский автомобильный бренд Jeland, созданный в рамках стратегического партнерства холдинга «АГР» и китайской фирмы Defetoo, с момента запуска продаж реализовал в стране 10 тыс. автомобилей. Об этом говорится в сообщении пресс-службы марки, которое…",
+      "source": [
+       "web:iz.ru",
+       "https://iz.ru/2188523/2026-10-22/novyi-rossiiskii-avtobrend-jeland-prodal-bolee-10-tys-avtomobilei"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "более 10 тыс. автомобилей",
+    "seller": "Новый российский автобренд Jeland",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "более 10 тыс. автомобилей",
+     "seller": "Новый российский автобренд Jeland"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-22"
+  }
+ ]
+}
