@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d13856096",
+   "draft_id": "d32396252",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d71838068",
+   "draft_id": "d57684542",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d23626669",
+   "draft_id": "d28663064",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d86463066",
+   "draft_id": "d11615856",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,80 +619,13 @@
    ]
   },
   {
-   "draft_id": "d40972673",
-   "title": "Под строительство ВСМ Москва - Петербург выкупили почти 95% земельных участков",
+   "draft_id": "d44264530",
+   "title": "FT: глава Axel Springer предложил купить европейский бизнес TikTok",
    "date": "2026-10-22",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28241509"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-22",
-     "title": "Сделка завершена",
-     "note": "Магистраль пройдет по территории Москвы, Санкт-Петербурга, Ленинградской, Новгородской, Тверской и Московской областей",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28241509"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "почти 95% земельных участков",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "почти 95% земельных участков",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d46160049",
-   "title": "В AmCham анонсировали инвестиции США в строительство дата-центров в России",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1124252"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60429486",
-   "title": "На «Авито» появилась возможность продавать электронные билеты на мероприятия",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-22_na_avito_poyavilas_vozmozhnost"
+     "web:1prime.ru",
+     "https://1prime.ru/20261022/ft-874518605.html"
     ]
    ],
    "sum": null,
@@ -707,20 +640,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d73389712",
-   "title": "В Чувашии поддержали закон о запрете продажи вейпов с 1 марта 2027 года",
+   "draft_id": "d61609664",
+   "title": "Reuters: американцы отказываются от покупки одежды из-за трат на «Оземпик»",
    "date": "2026-10-22",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28242237"
+     "web:1prime.ru",
+     "https://1prime.ru/20261022/reuters-874517703.html"
     ]
    ],
    "sum": null,
@@ -742,13 +676,41 @@
    ]
   },
   {
-   "draft_id": "d87726187",
-   "title": "На аукционе Sotheby’s в ноябре выставят четыре картины Пикассо",
+   "draft_id": "d36528780",
+   "title": "Европа перешла к отбору газа из ПХГ вместо закачки",
    "date": "2026-10-22",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28241997"
+     "web:ria.ru",
+     "https://ria.ru/20261022/gaz-2126240896.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22898795",
+   "title": "Президиум ВС рассмотрит спор о выкупе участка без торгов",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266458/"
     ]
    ],
    "sum": null,
@@ -770,220 +732,13 @@
    ]
   },
   {
-   "draft_id": "d18527930",
-   "title": "EQT покупает производителя тест-систем Qiagen за $10,8 млрд, завершая многолетние спекуляции о поглощении",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/10/22/eqt-pokupaet-proizvoditelya-test-sistem-qiagen-za-10-8-mlrd-zavershaya-mnogoletnie-spekulyatsii-o-po/"
-    ]
-   ],
-   "sum": "$10,8 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-22",
-     "title": "Переговоры",
-     "note": "Шведская инвестгруппа EQT договорилась о покупке голландского производителя тест-систем Qiagen, специализирующегося на молекулярном тестировании, примерно за 9,6 млрд евро ($10,78 млрд). Предложение предусматривает 46,5 евро за акцию, что на 8,6% выше цены…",
-     "source": [
-      "web:vademec.ru",
-      "https://vademec.ru/news/2026/10/22/eqt-pokupaet-proizvoditelya-test-sistem-qiagen-za-10-8-mlrd-zavershaya-mnogoletnie-spekulyatsii-o-po/"
-     ]
-    }
-   ],
-   "buyer_name": "EQT",
-   "asset": "производитель тест-систем Qiagen",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "EQT",
-    "asset": "производитель тест-систем Qiagen",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d50024909",
-   "title": "Объем инвестиций в автопром России составил 300 млрд рублей с 2022 года",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2188594/2026-10-22/obem-investitcii-v-avtoprom-rossii-sostavil-300-mlrd-rublei-s-2022-goda"
-    ]
-   ],
-   "sum": "300 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88686710",
-   "title": "Биржи АТР закрылись снижением на распродажах в технологическом секторе",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/atr--874514077.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39965361",
-   "title": "Роман Симоньян лидирует по продажам на маркетплейсах среди книг АСТ",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261022/simonjan-2126215719.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32769908",
-   "title": "Озон-банк допустил юрлиц к покупке ЦФА в приложении",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/311566"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77083522",
-   "title": "Россияне поделились полезными лайфхаками по покупкам в интернете",
+   "draft_id": "d51972406",
+   "title": "Бриллиантовый бюстгальтер со скандального показа Victoria's Secret захотели продать",
    "date": "2026-10-22",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/22/rossiyane-podelilis-poleznymi-layfhakami-po-pokupkam-v-internete/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62429575",
-   "title": "Российскому депутату приписали фейковое заявление о трудностях с продажей урожая",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/22/rossiyskomu-deputatu-pripisali-feykovoe-zayavlenie-o-trudnostyah-s-prodazhey-urozhaya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64400985",
-   "title": "Перспективы покупки жилья с прописанным психически нездоровым человеком оценили",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/22/perspektivy-pokupki-zhilya-s-propisannym-psihicheski-nezdorovym-chelovekom-otsenili/"
+     "https://lenta.ru/news/2026/10/22/brilliantovyy-byustgalter-so-skandalnogo-pokaza-victoria-s-secret-zahoteli-prodat/"
     ]
    ],
    "sum": null,
@@ -1002,7 +757,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d70954850",
+   "title": "Продажи новых пикапов в России резко пошли вверх",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/22/prodazhi-novyh-pikapov-v-rossii-rezko-poshli-vverh/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
