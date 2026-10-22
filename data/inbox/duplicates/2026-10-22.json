@@ -42,6 +42,37 @@
     "needs_review": true
    },
    "queued": "2026-10-22"
+  },
+  {
+   "key": "https://1prime.ru/20261022/mask-874533919.html::g0aed0536",
+   "candidate_id": "g0aed0536",
+   "reason": "общие редкие слова: пишут, сми",
+   "draft": {
+    "draft_id": "d25760907",
+    "title": "Маск инвестировал миллиард долларов в Skydance, пишут СМИ",
+    "date": "2026-10-22",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261022/mask-874533919.html"
+     ]
+    ],
+    "sum": null,
+    "type": "Инвестиция",
+    "status": null,
+    "events": [],
+    "buyer_name": "Маск",
+    "asset": "Skydance, пишут СМИ",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Маск",
+     "asset": "Skydance, пишут СМИ",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-22"
   }
  ]
 }
