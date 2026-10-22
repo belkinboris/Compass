@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d62885645",
+   "draft_id": "d89001429",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d85089132",
+   "draft_id": "d10687063",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d86049451",
+   "draft_id": "d56746913",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d64189937",
+   "draft_id": "d87331812",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,52 +619,70 @@
    ]
   },
   {
-   "draft_id": "d79220065",
-   "title": "Под ВСМ Москва — Петербург выкупили почти 95% земельных участков",
+   "draft_id": "d75290793",
+   "title": "Продажи приставки PlayStation 5 в США подскочили на 22% в ожидании выхода GTA VI",
    "date": "2026-10-22",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/22/pod-vsm-moskva--peterburg"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124316"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-22",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/10/22/pod-vsm-moskva--peterburg"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "почти 95% земельных участков",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "почти 95% земельных участков",
+    "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d52413788",
-   "title": "МТС откроет продажи новых iPhone в ноябре",
+   "draft_id": "d46409744",
+   "title": "Дмитриев заявил, что Россия может продавать дизель Европе",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2188750/video/dmitriev-zaiavil-chto-rossiia-mozhet-prodavat-dizel-evrope"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46630833",
+   "title": "Акционеры ТГК-1 утвердили допэмиссию акций по закрытой подписке",
    "date": "2026-10-22",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261022/mts--874525067.html"
+     "https://1prime.ru/20261022/tgk-1-874527531.html"
     ]
    ],
    "sum": null,
@@ -682,35 +700,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51779256",
-   "title": "МТС откроет продажи новых моделей iPhone в ноябре",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261022/mts-2126281955.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3c7dd2e2 (общие редкие слова: допэми, тгк) — проверьте, не дубль ли"
    ]
   }
  ]
