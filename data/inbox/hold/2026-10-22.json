@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d32396252",
+   "draft_id": "d62885645",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d57684542",
+   "draft_id": "d85089132",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d28663064",
+   "draft_id": "d86049451",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d11615856",
+   "draft_id": "d64189937",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,42 +619,52 @@
    ]
   },
   {
-   "draft_id": "d44264530",
-   "title": "FT: глава Axel Springer предложил купить европейский бизнес TikTok",
+   "draft_id": "d79220065",
+   "title": "Под ВСМ Москва — Петербург выкупили почти 95% земельных участков",
    "date": "2026-10-22",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/ft-874518605.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/22/pod-vsm-moskva--peterburg"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/10/22/pod-vsm-moskva--peterburg"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "почти 95% земельных участков",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "почти 95% земельных участков",
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d61609664",
-   "title": "Reuters: американцы отказываются от покупки одежды из-за трат на «Оземпик»",
+   "draft_id": "d52413788",
+   "title": "МТС откроет продажи новых iPhone в ноябре",
    "date": "2026-10-22",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261022/reuters-874517703.html"
+     "https://1prime.ru/20261022/mts--874525067.html"
     ]
    ],
    "sum": null,
@@ -676,98 +686,13 @@
    ]
   },
   {
-   "draft_id": "d36528780",
-   "title": "Европа перешла к отбору газа из ПХГ вместо закачки",
+   "draft_id": "d51779256",
+   "title": "МТС откроет продажи новых моделей iPhone в ноябре",
    "date": "2026-10-22",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261022/gaz-2126240896.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22898795",
-   "title": "Президиум ВС рассмотрит спор о выкупе участка без торгов",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266458/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51972406",
-   "title": "Бриллиантовый бюстгальтер со скандального показа Victoria's Secret захотели продать",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/22/brilliantovyy-byustgalter-so-skandalnogo-pokaza-victoria-s-secret-zahoteli-prodat/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d70954850",
-   "title": "Продажи новых пикапов в России резко пошли вверх",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/22/prodazhi-novyh-pikapov-v-rossii-rezko-poshli-vverh/"
+     "https://ria.ru/20261022/mts-2126281955.html"
     ]
    ],
    "sum": null,
