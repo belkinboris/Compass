@@ -8405,3 +8405,18 @@ def test_full_preposition_list_before_the_verb_is_not_a_party():
     for prep in ("По", "При", "Из", "К", "Через", "Над", "Перед", "Между",
                  "Без", "До", "После", "Про", "О", "Об"):
         assert draft._named("%s Компанией" % prep) is None, prep
+
+
+def test_reporting_verb_with_what_in_the_middle_is_not_a_party():
+    """«ЦСКА сообщил, что» ловился только когда обрывок заканчивается ровно
+    на «что» — 22 октября 2026 нашёлся вариант, где реальное подлежащее
+    идёт ПОСЛЕ «что»: «СМИ сообщили, что Маск инвестировал около $1 млрд
+    в Skydance» разобралось buyer_name «СМИ сообщили, что Маск». Замер:
+    0 из 1702 настоящих buyer_name/seller начинаются с «[Подлежащее]
+    глагол речи, что».
+    """
+    import draft
+    assert draft._named("СМИ сообщили, что Маск") is None
+    buyer, asset, seller, _ = draft.guess_parties(
+        "СМИ сообщили, что Маск инвестировал около $1 млрд в Skydance")
+    assert buyer is None, buyer

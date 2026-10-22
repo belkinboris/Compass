@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d89001429",
+   "draft_id": "d62462168",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d10687063",
+   "draft_id": "d12155778",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d56746913",
+   "draft_id": "d54333463",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d87331812",
+   "draft_id": "d61609141",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,46 +619,45 @@
    ]
   },
   {
-   "draft_id": "d75290793",
-   "title": "Продажи приставки PlayStation 5 в США подскочили на 22% в ожидании выхода GTA VI",
+   "draft_id": "d85494047",
+   "title": "СМИ сообщили, что Маск инвестировал около $1 млрд в Skydance",
    "date": "2026-10-22",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/business/1124316"
+     "https://www.interfax.ru/business/1124360"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "$1 млрд",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Skydance",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Skydance",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d46409744",
-   "title": "Дмитриев заявил, что Россия может продавать дизель Европе",
+   "draft_id": "d31224918",
+   "title": "Объем инвестиций в Приморье за год вырос на 27%",
    "date": "2026-10-22",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2188750/video/dmitriev-zaiavil-chto-rossiia-mozhet-prodavat-dizel-evrope"
+     "web:1prime.ru",
+     "https://1prime.ru/20261022/obem-874533655.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -673,35 +672,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46630833",
-   "title": "Акционеры ТГК-1 утвердили допэмиссию акций по закрытой подписке",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/tgk-1-874527531.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3c7dd2e2 (общие редкие слова: допэми, тгк) — проверьте, не дубль ли"
    ]
   }
  ]
