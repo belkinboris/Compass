@@ -8384,3 +8384,24 @@ def test_za_period_phrase_before_the_verb_is_not_a_party():
     buyer, asset, seller, _ = draft.guess_parties(
         "За два месяца в Петербурге купили пять автомобилей Lada Aura")
     assert buyer is None, buyer
+
+
+def test_full_preposition_list_before_the_verb_is_not_a_party():
+    """Предлоги «На/В/Во/От/Для/У/С/Со/За» ловились по одному за два дня —
+    22 октября 2026 нашёлся пятый случай («Под»), и список расширен сразу
+    до полного набора обычных русских предлогов (замер: 0 из 1702 для
+    каждого из 27, см. комментарий в NOT_A_PARTY).
+
+    «Под строительство ВСМ Москва — Петербург выкупили почти 95%
+    земельных участков» — обстоятельство цели, не сторона; buyer_name
+    записался «Под строительство ВСМ Москва - Петербург».
+    """
+    import draft
+    assert draft._named("Под строительство ВСМ Москва - Петербург") is None
+    buyer, asset, seller, _ = draft.guess_parties(
+        "Под строительство ВСМ Москва - Петербург выкупили почти 95% "
+        "земельных участков")
+    assert buyer is None, buyer
+    for prep in ("По", "При", "Из", "К", "Через", "Над", "Перед", "Между",
+                 "Без", "До", "После", "Про", "О", "Об"):
+        assert draft._named("%s Компанией" % prep) is None, prep
