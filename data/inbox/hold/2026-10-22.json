@@ -495,36 +495,7 @@
    ]
   },
   {
-   "draft_id": "d79606415",
-   "title": "Илон Маск поддержал идею слияния SpaceX и Tesla",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/22/10/2026/6ad955a919078901f8486e42"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d40714236",
+   "draft_id": "d34544580",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -560,6 +531,438 @@
    "needs_review": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d68751683",
+   "title": "WSJ узнала, зачем сверхбогатые в США покупают и сносят дома",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ad99a7f02455043a90be2d6"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "и сносят дома",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "и сносят дома",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d18671798",
+   "title": "Европа впервые за сезон перешла к чистому отбору газа из хранилищ",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1124172"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d57320087",
+   "title": "Европа впервые за сезон перешла к чистому отбору газа из ПХГ",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1124167"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57174111",
+   "title": "FT: глава Axel Springer хочет выкупить европейский сегмент TikTok",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28240641"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Согласование получено",
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-10-22",
+     "title": "Президент разрешил сделку",
+     "note": "Руководитель холдинга Матиас Дёпфнер предложил схему покупки, аналогичную той, что реализовали по указу президента США Дональда Трампа",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28240641"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d91011657",
+   "title": "В Приморье бизнесмена осудили за мошенничество при покупке участка",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28240467"
+    ]
+   ],
+   "sum": "22 млн ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Он приобрел землю стоимостью 22 млн рублей за 12 тыс. рублей",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/proisshestviya/28240467"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34405055",
+   "title": "Мой портфель облигаций на 22 октября 2026. Что изменилось за месяц? Покупки и планы на ноябрь",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1365368.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-22",
+     "title": "Переговоры",
+     "note": "Раз в месяц смотрю и анализирую облигационную часть своего портфеля, какие изменения произошли за месяц, пишу о покупках и продажах, показываю состав портфеля: все выпуски с указанием даты погашения, величины купона, ISIN, наличия оферты, текущей доходности и…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1365368.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35043291",
+   "title": "Китайский разработчик искусственного интеллекта привлек $15 млрд",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261022/razrabotchik-874503033.html"
+    ]
+   ],
+   "sum": "$15 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Китайский разработчик искусственного интеллекта",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Китайский разработчик искусственного интеллекта",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d17724872",
+   "title": "Итоги аукциона Минфина РФ по размещению ОФЗ 21.10.2026",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1365423.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83899664",
+   "title": "DeepSeek привлек $15 млрд в рамках раунда финансирования",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/311498"
+    ]
+   ],
+   "sum": "$15 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "DeepSeek",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "DeepSeek",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d69515056",
+   "title": "Покупки в магазинах дрогери сократились на 4,8%",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/pokupki-v-magazinah-drogeri-sokratilis-na-4-8/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d37195901",
+   "title": "Соседняя с Россией страна запросила у Европы миллиард евро на покупку оружия",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/22/vooruzhaemsya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12723404",
+   "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138087"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "старинная башня на тюменском полуострове",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная башня на тюменском полуострове",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d52278452",
+   "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138122"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54596060",
+   "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/10/22/v-lefortovo-na-aukcziony-vystavili-dva-pomeshheniya-dlya-biznesa"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g4c7906c5 (общие редкие слова: аукцио, помеще) — проверьте, не дубль ли"
    ]
   }
  ]
