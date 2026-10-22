@@ -50,6 +50,12 @@ EDITS = [
      'По данным «Интерфакса» (статья от 4 июля 2023 года)'),
     ('g97e1f483', ('eco', 'sum'), 'Источник «Ъ» на инвестрынке оценивает сделку ниже',
      'По оценке, которую приводит «Коммерсантъ», сделка стоит меньше'),
+    # Тем же заходом — что нашла общая проверка текста (pipeline/text_rules.py):
+    ('g09baae21', ('title',), 'Фонд «Созидательный венчур» вложился в',
+     'Фонд «Созидательный венчур» проинвестировал в'),
+    ('g7ea48d66', ('eco', 'val'), 'Начальная цена лота - 128,42', 'Начальная цена лота — 128,42'),
+    ('g298c1588', ('eco', 'target_fin'), 'чистый убыток - 1,4 млн', 'чистый убыток — 1,4 млн'),
+    ('gb0f1f736', ('events', 1, 'note'), '(юрлицо - «Даблюайби»)', '(юрлицо — «Даблюайби»)'),
 ]
 
 
@@ -75,7 +81,7 @@ def main(write):
         # proofread_absorbed (docs/card_editing.md), иначе review.py сочтёт
         # запись неприменённой.
         field = '.'.join(map(str, path))
-        if not isinstance(path[-1], int) and 'events' not in path:
+        if not isinstance(path[-1], int) and 'events' not in path and path != ('title',):
             deals[did].setdefault('proofread_absorbed', {}).setdefault(field, [])
             fp = review.fix_fingerprint(before)
             if fp not in deals[did]['proofread_absorbed'][field]:
