@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d89001429",
+   "draft_id": "d54499908",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d10687063",
+   "draft_id": "d54292799",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d56746913",
+   "draft_id": "d34750292",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d87331812",
+   "draft_id": "d54157143",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,17 +619,85 @@
    ]
   },
   {
-   "draft_id": "d75290793",
-   "title": "Продажи приставки PlayStation 5 в США подскочили на 22% в ожидании выхода GTA VI",
+   "draft_id": "d51078248",
+   "title": "Акционеры ТГК-1 одобрили допэмиссию",
    "date": "2026-10-22",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1124316"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/22/1239349-aktsioneri-tgk-1"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga7020b5e (общие редкие слова: акцион, одобри) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d90053482",
+   "title": "Первые IPO крупных госкомпаний Узбекистана планируются на 2027 г.",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124329"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-22",
+     "title": "Переговоры",
+     "note": "Национальный инвестфонд Узбекистана (UzNIF) рассчитывает провести первые два IPO портфельных компаний в 2027 году, среди кандидатов - \"Узбектелеком\", заявил генеральный директор по Центральной Азии Templeton Global Investments (подразделение Franklin…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1124329"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57139784",
+   "title": "Investors break down how founders can raise a Series A today",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/22/investors-break-down-how-founders-can-raise-a-series-a-today/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -648,13 +716,13 @@
    ]
   },
   {
-   "draft_id": "d46409744",
-   "title": "Дмитриев заявил, что Россия может продавать дизель Европе",
+   "draft_id": "d10714732",
+   "title": "Объяснено желание Маска ускорить слияние SpaceX и Tesla",
    "date": "2026-10-22",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2188750/video/dmitriev-zaiavil-chto-rossiia-mozhet-prodavat-dizel-evrope"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/22/ob-yasneno-zhelanie-maska-uskorit-sliyanie-spacex-i-tesla/"
     ]
    ],
    "sum": null,
@@ -673,35 +741,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46630833",
-   "title": "Акционеры ТГК-1 утвердили допэмиссию акций по закрытой подписке",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/tgk-1-874527531.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3c7dd2e2 (общие редкие слова: допэми, тгк) — проверьте, не дубль ли"
    ]
   }
  ]
