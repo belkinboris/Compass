@@ -1979,3 +1979,31 @@ def test_signals_file_points_to_real_companies_and_sources(base):
             bad.append((r.get("id"), why))
     assert not bad, bad[:10]
     assert len({r["id"] for r in rows}) == len(rows), "повтор id признака"
+
+
+INSIDER_VOICE = re.compile(
+    r"собеседник|по\s+словам\s+(?:двух\s+|нескольких\s+)?источник|источник\w*\s+(?:РБК|«|издания|газеты|агентства)"
+    r"|(?:уточнил|сообщил|рассказал)\w*\s+(?:один\s+из\s+)?источник", re.I)
+
+
+def test_card_prose_does_not_speak_with_someone_elses_insiders(deals):
+    """Владелец, 22 октября 2026: «собеседник издания говорит» — «это не нам
+    давали интервью. Так может писать РБК, но не мы». Пишем «по данным РБК» или
+    «по неофициальным данным». Держит и разовые скрипты, которые идут мимо
+    prose_gate (так и проскочила карточка «Библио-Глобус»)."""
+    bad = []
+
+    def walk(o, path):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                walk(v, path + "." + k)
+        elif isinstance(o, list):
+            for i, v in enumerate(o):
+                walk(v, "%s[%d]" % (path, i))
+        elif isinstance(o, str):
+            m = INSIDER_VOICE.search(o)
+            if m:
+                bad.append("%s: «%s»" % (path, o[max(0, m.start() - 30):m.end() + 30]))
+    for d in deals:
+        walk({k: d.get(k) for k in ("eco", "law", "extra", "events", "title")}, d["id"])
+    assert not bad, bad[:10]
