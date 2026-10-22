@@ -40,6 +40,7 @@ import argparse
 import json
 import os
 import re
+import unicodedata
 import sys
 from datetime import date
 from pathlib import Path
@@ -87,7 +88,11 @@ MONTHS = ('январ', 'феврал', 'март', 'апрел', 'ма[йяею
 
 
 def flat(s: str) -> str:
-    s = str(s or '').lower().replace('ё', 'е').replace('\xa0', ' ')
+    # NFC: кэш страниц, расщепляющих «й»/«ё» на букву и отдельную breve/умлаут
+    # (НФД), иначе дословно совпадающая цитата не находится символ в символ
+    # (22 октября 2026, mid-ilyinskaya: «многопрофильный» в кэше распался на
+    # «и»+COMBINING BREVE — 5 источников из 312 несут этот же дефект).
+    s = unicodedata.normalize('NFC', str(s or '')).lower().replace('ё', 'е').replace('\xa0', ' ')
     s = re.sub(r'[«»"“”„‘’\'`]', '', s)
     s = re.sub(r'[—–‑]', '-', s)
     return re.sub(r'\s+', ' ', s).strip()

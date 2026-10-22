@@ -1794,10 +1794,12 @@ def test_sum_and_share_fields_stay_short(deals):
     14 октября — нераскрытая структура сделки «Карат»/Павловский молочный
     завод (`g62577a1d`: юрлицо целиком или только производственный
     комплекс — стороны не уточняют), 531 → 532; тем же днём — состав лота
-    торгов по «Конти» (`g2cdd8d6b`: перечень юрлиц в лоте), 532 → 533."""
+    торгов по «Конти» (`g2cdd8d6b`: перечень юрлиц в лоте), 532 → 533;
+    22 октября — месячная дельта по g1f1d470a (стартовая цена лота рядом с
+    итоговой ценой торгов), 26 → 27."""
     long_sum = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("sum"), str) and len(d["eco"]["sum"]) > 80]
     long_share = [d["id"] for d in deals if isinstance((d.get("eco") or {}).get("share"), str) and len(d["eco"]["share"]) > 160]
-    assert len(long_sum) <= 26, "сумма прозой у новых карточек: %s" % [i for i in long_sum][:10]
+    assert len(long_sum) <= 27, "сумма прозой у новых карточек: %s" % [i for i in long_sum][:10]
     assert len(long_share) <= 533, "доля прозой у новых карточек: %d" % len(long_share)
     assert "ga7020b5e" not in long_sum and "ga7020b5e" not in long_share
 

@@ -12851,7 +12851,7 @@
      "quote": "VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%.",
      "source": "https://vk.company/ru/press/releases/11414/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 75.0,
@@ -12906,36 +12906,36 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "20 февраля 2023 Пресс-релизы VK становится 100% владельцем образовательной платформы для школьников Учи.ру Скачать VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%. Сумма сделки составила 8,7 млрд рублей.",
+     "attribution_quote": "реализовала опцион на выкуп 75% образовательной платформы «Учи.ру» и стала ее единственным владельцем, сообщила пресс-служба группы.",
      "scope_basis": "verified",
-     "quote": "Сумма сделки составила 8,7 млрд рублей.",
-     "source": "https://vk.company/ru/press/releases/11414/",
+     "quote": "Сумма сделки составила 8,7 млрд руб.",
+     "source": "https://www.vedomosti.ru/media/articles/2023/02/20/963703-vikup-vk-75-uchiru",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 8700000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "parties",
-       "attribution_quote": "20 февраля 2023 Пресс-релизы VK становится 100% владельцем образовательной платформы для школьников Учи.ру Скачать VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%. Сумма сделки составила 8,7 млрд рублей.",
        "event": "announcement",
+       "scope": "package",
        "terms": "fixed",
-       "quote": "Сумма сделки составила 8,7 млрд рублей.",
-       "source": "https://vk.company/ru/press/releases/11414/",
+       "quote": "Сумма сделки составила 8,7 млрд руб.",
+       "attribution_quote": "реализовала опцион на выкуп 75% образовательной платформы «Учи.ру» и стала ее единственным владельцем, сообщила пресс-служба группы.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/02/20/963703-vikup-vk-75-uchiru",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value_rub": 8700000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "parties",
        "event": "announcement",
+       "scope": "package",
        "terms": "fixed",
-       "quote": "Сумма сделки составила 8,7 млрд рублей.",
+       "quote": "VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%. Сумма сделки составила 8,7 млрд рублей.",
+       "attribution_quote": "20 февраля 2023 Пресс-релизы VK становится 100% владельцем образовательной платформы для школьников Учи.ру",
        "source": "https://vk.company/ru/press/releases/11414/",
-       "attribution_quote": "Пресс-релизы VK становится 100% владельцем образовательной платформы для школьников Учи.ру Скачать VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%. Сумма сделки составила 8,7 млрд рублей.",
        "quote_checked": true,
        "reader": "B"
       }
@@ -12964,7 +12964,7 @@
      "quote": "20 февраля 2023 Пресс-релизы VK становится 100% владельцем образовательной платформы для школьников Учи.ру",
      "source": "https://vk.company/ru/press/releases/11414/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2023-02-20",
@@ -13007,23 +13007,23 @@
      "card_hash": "0846313d5c82",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "VK становится 100% владельцем образовательной платформы для школьников Учи.ру",
-     "source": "https://vk.company/ru/press/releases/11414/",
+     "quote": "реализовала опцион на выкуп 75% образовательной платформы «Учи.ру» и стала ее единственным владельцем, сообщила пресс-служба группы.",
+     "source": "https://www.vedomosti.ru/media/articles/2023/02/20/963703-vikup-vk-75-uchiru",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "VK становится 100% владельцем образовательной платформы для школьников Учи.ру",
-       "source": "https://vk.company/ru/press/releases/11414/",
+       "quote": "реализовала опцион на выкуп 75% образовательной платформы «Учи.ру» и стала ее единственным владельцем, сообщила пресс-служба группы.",
+       "source": "https://www.vedomosti.ru/media/articles/2023/02/20/963703-vikup-vk-75-uchiru",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "VK становится 100% владельцем образовательной платформы для школьников Учи.ру",
+       "quote": "VK консолидировала крупнейшую онлайн-платформу для школьников Учи.ру, выкупив оставшуюся долю в размере 75%.",
        "source": "https://vk.company/ru/press/releases/11414/",
        "quote_checked": true,
        "reader": "B"
@@ -13051,23 +13051,24 @@
      "basis": "registry",
      "perimeter": "refuted",
      "card_hash": "c6890f83a3ba",
-     "perimeter_entity": "ООО «Учи.ру»",
+     "perimeter_entity": "«Учи.ру»",
      "perimeter_other_entities": [],
      "quote": "Помимо образовательной платформы группа компаний Учи.ру также развивает школу онлайн-репетиторов Учи.Дома, образовательный портал Учи.Ответы, сеть офлайн-кружков и центров Учи.ру по программированию, математике и английскому языку, образовательный онлайн-ресурс «ЯКласс».",
      "source": "https://vk.company/ru/press/releases/11414/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
-       "entity": "ООО «Учи.ру»",
        "covers_business": false,
-       "other_entities": [
-        "Учи.Дома",
-        "Учи.Ответы",
-        "ЯКласс",
-        "сеть офлайн-кружков"
-       ],
+       "other_entities": [],
+       "entity": "«Учи.ру»",
+       "report": {
+        "inn": "7704821246",
+        "year": 2022,
+        "revenue_rub": 3022445000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
+       },
        "quote": "Помимо образовательной платформы группа компаний Учи.ру также развивает школу онлайн-репетиторов Учи.Дома, образовательный портал Учи.Ответы, сеть офлайн-кружков и центров Учи.ру по программированию, математике и английскому языку, образовательный онлайн-ресурс «ЯКласс».",
        "source": "https://vk.company/ru/press/releases/11414/",
        "quote_checked": true,
@@ -13075,14 +13076,17 @@
       },
       {
        "ok": false,
-       "entity": "ООО «Учи.ру»",
-       "quote": "Помимо образовательной платформы группа компаний Учи.ру также развивает школу онлайн-репетиторов Учи.Дома, образовательный портал Учи.Ответы, сеть офлайн-кружков и центров Учи.ру по программированию, математике и английскому языку, образовательный онлайн-ресурс «ЯКласс».",
-       "source": "https://vk.company/ru/press/releases/11414/",
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "Учи.ру (ООО «Учи.ру»)",
        "report": {
         "inn": "7704821246",
-        "year": 2022
+        "year": 2022,
+        "revenue_rub": 3022445000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
        },
-       "covers_business": false,
+       "quote": "Помимо образовательной платформы группа компаний Учи.ру также развивает школу онлайн-репетиторов Учи.Дома, образовательный портал Учи.Ответы, сеть офлайн-кружков и центров Учи.ру по программированию, математике и английскому языку, образовательный онлайн-ресурс «ЯКласс».",
+       "source": "https://vk.company/ru/press/releases/11414/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -13116,7 +13120,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "7704821246",
+      "year": 2022,
+      "revenue_rub": 3022445000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"УЧИ.РУ\""
+     }
     },
     "admitted": {
      "count": true,
@@ -18282,17 +18292,17 @@
      "quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
      "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 475000000000,
        "meaning": "disclosed",
-       "scope": "equity",
        "attribution": "parties",
-       "attribution_quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
        "event": "signing",
+       "scope": "equity",
        "terms": "fixed",
        "quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
+       "attribution_quote": "« Yandex N.V. заключила окончательное соглашение с консорциумом покупателей о продаже всего бизнеса группы в России и на некоторых международных рынках за общую сумму 475 млрд руб.», – говорится в сообщении.",
        "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
        "quote_checked": true,
        "reader": "A"
@@ -18300,13 +18310,13 @@
       {
        "value_rub": 475000000000,
        "meaning": "disclosed",
-       "scope": "equity",
        "attribution": "parties",
        "event": "signing",
+       "scope": "equity",
        "terms": "fixed",
        "quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
-       "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
        "attribution_quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
+       "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
        "quote_checked": true,
        "reader": "B"
       }
@@ -18323,7 +18333,7 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "Нидерландская Yandex N.V. заключила окончательное соглашение о продаже российского бизнеса группе частных инвесторов за 475 млрд руб., сообщила пресс-служба компании.",
+     "attribution_quote": "« Yandex N.V. заключила окончательное соглашение с консорциумом покупателей о продаже всего бизнеса группы в России и на некоторых международных рынках за общую сумму 475 млрд руб.», – говорится в сообщении.",
      "reading": {
       "result": "not_in_source",
       "at": "2026-10-17",
@@ -18348,7 +18358,7 @@
      "quote": "Компания Yandex N.V., зарегистрированная в Нидерландах, закрыла второй этап сделки по продаже российского бизнеса \"Яндекса\" и полностью вышла из состава акционеров группы, сообщила МКПАО \"Яндекс\" в понедельник, 15 июля.",
      "source": "https://www.dp.ru/a/2024/07/15/jandeks-stal-okonchatelno",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2024-07-15",
@@ -18389,23 +18399,23 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "2a2cf78ded70",
-     "quote": "закрыла второй этап сделки по продаже российского бизнеса \"Яндекса\" и полностью вышла из состава акционеров группы",
-     "source": "https://www.dp.ru/a/2024/07/15/jandeks-stal-okonchatelno",
+     "quote": "Yandex N.V., головная компания \"Яндекса\", договорилась о продаже российского бизнеса за 475 млрд рублей консорциуму частных инвесторов, говорится в сообщении компании.",
+     "source": "https://www.interfax.ru/business/944509",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "закрыла второй этап сделки по продаже российского бизнеса \"Яндекса\" и полностью вышла из состава акционеров группы",
-       "source": "https://www.dp.ru/a/2024/07/15/jandeks-stal-okonchatelno",
+       "quote": "Yandex N.V., головная компания \"Яндекса\", договорилась о продаже российского бизнеса за 475 млрд рублей консорциуму частных инвесторов, говорится в сообщении компании.",
+       "source": "https://www.interfax.ru/business/944509",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "закрыла второй этап сделки по продаже российского бизнеса \"Яндекса\" и полностью вышла из состава акционеров группы",
+       "quote": "Компания Yandex N.V., зарегистрированная в Нидерландах, закрыла второй этап сделки по продаже российского бизнеса \"Яндекса\" и полностью вышла из состава акционеров группы, сообщила МКПАО \"Яндекс\" в понедельник, 15 июля.",
        "source": "https://www.dp.ru/a/2024/07/15/jandeks-stal-okonchatelno",
        "quote_checked": true,
        "reader": "B"
@@ -18433,39 +18443,49 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "disputed",
+     "perimeter": "refuted",
      "card_hash": "c552b508b7c6",
      "perimeter_entity": "МКПАО «Яндекс»",
-     "quote": "МКПАО « Яндекс » теперь является новой головной компанией «Яндекса» и сохраняет бизнесы, сервисы и активы, входящие в периметр продажи.",
+     "quote": "По условиям сделки новой головной компанией «Яндекса» становится МКАО « Яндекс »: оно должно получить во владение 99,999% ООО «Яндекс», остальные же 0,001% будут принадлежать «Фонду общественных интересов».",
      "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
-       "ok": true,
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Яндекс»"
+       ],
        "entity": "МКПАО «Яндекс»",
-       "covers_business": true,
-       "report": null,
-       "quote": "МКПАО « Яндекс » теперь является новой головной компанией «Яндекса» и сохраняет бизнесы, сервисы и активы, входящие в периметр продажи.",
+       "report": {
+        "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЯНДЕКС\"",
+        "inn": "3900019850",
+        "note": "подходящего отчёта нет"
+       },
+       "quote": "По условиям сделки новой головной компанией «Яндекса» становится МКАО « Яндекс »: оно должно получить во владение 99,999% ООО «Яндекс», остальные же 0,001% будут принадлежать «Фонду общественных интересов».",
        "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "ok": false,
+       "covers_business": false,
+       "other_entities": [],
        "entity": "МКПАО «Яндекс»",
-       "quote": "оно должно получить во владение 99,999% ООО «Яндекс», остальные же 0,001% будут принадлежать «Фонду общественных интересов»",
-       "source": "https://www.vedomosti.ru/business/news/2024/03/28/1028643-yandex-zaklyuchila-okonchatelnoe-soglashenie",
        "report": {
         "inn": "3900019850",
-        "year": null
+        "note": "подходящего отчёта нет"
        },
-       "covers_business": false,
+       "quote": "В итоге все активы и операции \"Яндекса\" в России и на некоторых международных рынках, образующих периметр продажи, перешли международному публичному акционерному обществу \"Яндекс\", зарегистрированному в России.",
+       "source": "https://www.dp.ru/a/2024/07/15/jandeks-stal-okonchatelno",
        "quote_checked": true,
        "reader": "B"
       }
      ],
-     "perimeter_other_entities": [],
+     "perimeter_other_entities": [
+      "ООО «Яндекс»"
+     ],
      "reading": {
       "result": "not_in_source",
       "at": "2026-10-14",
@@ -18502,7 +18522,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "3900019850",
+      "year": null,
+      "revenue_rub": null,
+      "legal_name": "МЕЖДУНАРОДНАЯ КОМПАНИЯ ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ЯНДЕКС\""
+     }
     },
     "admitted": {
      "count": true,
@@ -23732,7 +23758,7 @@
      "value": 100.0,
      "basis": "verified",
      "card_hash": "3ba313c6b133",
-     "object": "классифайд «Авито» / Avito Group (ООО «Кех Екоммерц» и ООО «Авито Холдинг»)",
+     "object": "классифайд «Авито» / группа Avito (ООО «Кех Екоммерц» и ООО «Авито Холдинг»)",
      "event": "signing",
      "event_variants": [
       "signing"
@@ -23740,11 +23766,11 @@
      "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
      "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 100.0,
-       "object": "классифайд «Авито» / Avito Group (ООО «Кех Екоммерц» и ООО «Авито Холдинг»)",
+       "object": "классифайд «Авито» / группа Avito (ООО «Кех Екоммерц» и ООО «Авито Холдинг»)",
        "event": "signing",
        "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
        "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
@@ -23753,7 +23779,7 @@
       },
       {
        "value": 100.0,
-       "object": "классифайд «Авито» / группа Avito (ООО «Кех Екоммерц» и ООО «Авито Холдинг»)",
+       "object": "«Группа Авито» (ООО «КЕХ еКоммерц» и ООО «Авито Холдинг»)",
        "event": "signing",
        "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
        "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
@@ -23787,17 +23813,17 @@
      "quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
      "source": "https://www.interfax.ru/business/867958",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 151000000000,
        "meaning": "disclosed",
-       "scope": "equity",
        "attribution": "parties",
-       "attribution_quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
        "event": "signing",
+       "scope": "equity",
        "terms": "fixed",
        "quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
+       "attribution_quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
        "source": "https://www.interfax.ru/business/867958",
        "quote_checked": true,
        "reader": "A"
@@ -23805,13 +23831,13 @@
       {
        "value_rub": 151000000000,
        "meaning": "disclosed",
-       "scope": "equity",
        "attribution": "parties",
        "event": "signing",
+       "scope": "equity",
        "terms": "fixed",
        "quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
-       "source": "https://www.interfax.ru/business/867958",
        "attribution_quote": "Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
+       "source": "https://www.interfax.ru/business/867958",
        "quote_checked": true,
        "reader": "B"
       }
@@ -23853,7 +23879,7 @@
      "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
      "source": "https://habr.com/ru/news/695478",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2022-10-25",
@@ -23866,7 +23892,7 @@
       {
        "value": "2022-10-25",
        "meaning": "closing",
-       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито»",
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
        "source": "https://habr.com/ru/news/695478",
        "quote_checked": true,
        "reader": "B"
@@ -23912,24 +23938,24 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "9e61c928e699",
-     "quote": "закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей",
-     "source": "https://habr.com/ru/news/695478",
+     "quote": "Москва. 14 октября. INTERFAX.RU - Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito.",
+     "source": "https://www.interfax.ru/business/867958",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей",
-       "source": "https://habr.com/ru/news/695478",
+       "quote": "Москва. 14 октября. INTERFAX.RU - Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito.",
+       "source": "https://www.interfax.ru/business/867958",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Группа Avito, включающая в себя ООО \"Кех Екоммерц\", ООО \"Авито Холдинг\" со всеми их дочерними и зависимыми обществами, полностью перейдет под контроль нового собственника и продолжит свою работу как независимая частная российская ИТ-компания",
-       "source": "https://www.interfax.ru/business/867958",
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
        "quote_checked": true,
        "reader": "B"
       }
@@ -23985,39 +24011,58 @@
        "reader": "B"
       }
      ],
-     "quote": "The Avito Group Disposal will involve the disposal and transfer by the Group of the following entities comprising the Avito Group: (i) KEH eCommerce LLC (a Russian incorporated entity) and its subsidiaries; and (ii) Avito Holding LLC (a Russian incorporated entity) and its subsidiaries.",
-     "source": "https://www.naspers.com/news-insights/regulatory-updates/2022/disposal-of-avito-group",
+     "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+     "source": "https://habr.com/ru/news/695478",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
-       "entity": "ООО «Кех Екоммерц»",
        "covers_business": false,
        "other_entities": [
-        "Avito Holding LLC / ООО «Авито Холдинг»"
+        "ООО «Авито Холдинг»"
        ],
-       "quote": "The Avito Group Disposal will involve the disposal and transfer by the Group of the following entities comprising the Avito Group: (i) KEH eCommerce LLC (a Russian incorporated entity) and its subsidiaries; and (ii) Avito Holding LLC (a Russian incorporated entity) and its subsidiaries.",
-       "source": "https://www.naspers.com/news-insights/regulatory-updates/2022/disposal-of-avito-group",
+       "entity": "ООО «КЕХ еКоммерц»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КЕХ ЕКОММЕРЦ\"",
+        "inn": "7710668349",
+        "year": 2021,
+        "revenue_rub": 42656330000.0
+       },
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "ok": false,
-       "entity": "ООО «Кех Екоммерц»",
-       "quote": "The Avito Group Disposal will involve the disposal and transfer by the Group of the following entities comprising the Avito Group: (i) KEH eCommerce LLC (a Russian incorporated entity) and its subsidiaries; and (ii) Avito Holding LLC (a Russian incorporated entity) and its subsidiaries.",
-       "source": "https://www.naspers.com/news-insights/regulatory-updates/2022/disposal-of-avito-group",
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Авито Холдинг»"
+       ],
+       "entity": "ООО «КЕХ еКоммерц»",
        "report": {
         "inn": "7710668349",
-        "year": 2021
+        "year": 2021,
+        "revenue_rub": 42656330000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КЕХ ЕКОММЕРЦ\""
        },
-       "covers_business": false,
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
        "quote_checked": true,
        "reader": "B"
       }
      ],
-     "perimeter_entity": "ООО «Кех Екоммерц»",
-     "perimeter_other_entities": []
+     "perimeter_entity": "ООО «КЕХ еКоммерц»",
+     "perimeter_other_entities": [
+      "ООО «Авито Холдинг»"
+     ],
+     "perimeter_report": {
+      "inn": "7710668349",
+      "year": 2021,
+      "revenue_rub": 42656330000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КЕХ ЕКОММЕРЦ\""
+     }
     },
     "admitted": {
      "count": true,
@@ -32635,7 +32680,7 @@
      "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
      "source": "https://www.interfax.ru/business/898394",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 75.07,
@@ -32648,7 +32693,7 @@
       },
       {
        "value": 75.07,
-       "object": "ПАО \"Глобалтрак Менеджмент\" (ГТМ, Globaltruck)",
+       "object": "ПАО «Глобалтрак Менеджмент» (ГТМ, Globaltruck)",
        "event": "closing",
        "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
        "source": "https://www.interfax.ru/business/898394",
@@ -32695,17 +32740,17 @@
      "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
      "source": "https://www.interfax.ru/business/898394",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 3620000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "parties",
-       "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
        "event": "closing",
+       "scope": "package",
        "terms": "fixed",
        "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
+       "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
        "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
        "reader": "A"
@@ -32713,13 +32758,13 @@
       {
        "value_rub": 3620000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "parties",
        "event": "closing",
+       "scope": "package",
        "terms": "fixed",
        "quote": "Таким образом, стоимость приобретенного группой пакета составила 3,62 млрд рублей.",
-       "source": "https://www.interfax.ru/business/898394",
        "attribution_quote": "Об этом сообщили \"Интерфаксу\" в пресс-службе группы.",
+       "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
        "reader": "B"
       }
@@ -32748,7 +32793,7 @@
      "quote": "Сделка была завершена 21 апреля.",
      "source": "https://www.interfax.ru/business/898394",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2023-04-21",
@@ -32791,15 +32836,15 @@
      "card_hash": "4c8bfa2f973e",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "До сделки 61% капитала компании владела подконтрольная основателю Globaltruck Александру Елисееву кипрская GT Globaltruck Ltd, РФПИ и соинвесторы - 19,4%, на остальных акционеров приходилось 19,6%.",
+     "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
      "source": "https://www.interfax.ru/business/898394",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "До сделки 61% капитала компании владела подконтрольная основателю Globaltruck Александру Елисееву кипрская GT Globaltruck Ltd, РФПИ и соинвесторы - 19,4%, на остальных акционеров приходилось 19,6%.",
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
        "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
        "reader": "A"
@@ -32807,7 +32852,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "ГК \"Монополия\" выкупила 75,07% акций Globaltruck за 3,62 млрд рублей",
+       "quote": "Транспортная группа компаний \"Монополия\" успешно закрыла сделку по приобретению 75,07% акций автомобильного FTL-перевозчика Globaltruck (ПАО \"Глобалтрак Менеджмент\" , ГТМ).",
        "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
        "reader": "B"
@@ -32823,18 +32868,25 @@
      "basis": "registry",
      "perimeter": "refuted",
      "card_hash": "6d3bbbd3c1a8",
-     "perimeter_entity": "ПАО «Глобалтрак Менеджмент»",
+     "perimeter_entity": "ПАО «Глобалтрак Менеджмент» (ГТМ)",
      "perimeter_other_entities": [],
      "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
      "source": "https://www.interfax.ru/business/898394",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
-       "entity": "ПАО «Глобалтрак Менеджмент»",
        "covers_business": false,
        "other_entities": [],
+       "entity": "ПАО «Глобалтрак Менеджмент» (ГТМ)",
+       "report": {
+        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\"",
+        "inn": "9701082537",
+        "year": 2022,
+        "revenue_rub": 132725000.0,
+        "operating_profit_rub": -107395000.0
+       },
        "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
        "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
@@ -32842,14 +32894,17 @@
       },
       {
        "ok": false,
+       "covers_business": false,
+       "other_entities": [],
        "entity": "ПАО «Глобалтрак Менеджмент»",
-       "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
-       "source": "https://www.interfax.ru/business/898394",
        "report": {
         "inn": "9701082537",
-        "year": 2022
+        "year": 2022,
+        "revenue_rub": 132725000.0,
+        "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\""
        },
-       "covers_business": false,
+       "quote": "В структуру Globaltruck входят семь компаний, осуществляющих операционную деятельность в РФ.",
+       "source": "https://www.interfax.ru/business/898394",
        "quote_checked": true,
        "reader": "B"
       }
@@ -32878,7 +32933,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "9701082537",
+      "year": 2022,
+      "revenue_rub": 132725000.0,
+      "legal_name": "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГЛОБАЛТРАК МЕНЕДЖМЕНТ\""
+     }
     },
     "admitted": {
      "count": true,
@@ -91914,7 +91975,7 @@
     "target_fin": "Финансовые показатели 2024 года: выручка — 1,3 млрд ₽ (+30% год к году); прибыль от продаж — 290 млн ₽ (минус 5,4%); чистая прибыль — 245 млн ₽ (минус 23%); чистый долг — 83 млн ₽.",
     "fin": "—",
     "finadv": "Публично не сообщалось",
-    "rationale": "Компания планирует потратить эти деньги на собственный выпуск эндоскопической стойки под российским брендом TMG, хирургические сервисы и приложения, включая решения с ИИ, и выход с продуктами за рубеж: в Индии, Казахстане и других странах БРИКС. Глава РФПИ Кирилл Дмитриев объясняет вложение развитием MVS: шире линейка, больше масштаб, новые направления, среди них крупные зарубежные рынки. «Инвестиции в медтех - одни из самых важных, с нашей точки зрения. У нас уже есть реализованные проекты в этом направлении, которые показывают очень хорошие результаты для инвесторов», — сказал гендиректор УК «Первая» Андрей Бершадский.",
+    "rationale": "Компания планирует потратить эти деньги на собственный выпуск эндоскопической стойки под российским брендом TMG, хирургические сервисы и приложения, включая решения с ИИ, и выход с продуктами за рубеж: в Индии, Казахстане и других странах БРИКС. Глава РФПИ Кирилл Дмитриев объясняет вложение развитием MVS: шире линейка, больше масштаб, новые направления, среди них крупные зарубежные рынки. «Инвестиции в медтех — одни из самых важных, с нашей точки зрения. У нас уже есть реализованные проекты в этом направлении, которые показывают очень хорошие результаты для инвесторов», — сказал гендиректор УК «Первая» Андрей Бершадский.",
     "context": "Условия сделки и оценку компании не раскрыли. Деньги пойдут на четыре направления: экосистему сервисов и приложений для хирургии с ИИ, производство медоборудования, базу хирургических знаний Medikt и выход на рынки Казахстана и стран БРИКС."
    },
    "law": {
@@ -92335,7 +92396,7 @@
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "Покупатель — ООО «Специализированный Застройщик «Буран» — приобрёл 100% долей в уставном капитале пяти компаний: «СЗ «Катерная», «СЗ «Тухачевского,80», «СЗ «Регион», «СЗ «Дом на Бульваре» и «Управляющая компания Жилкапинвест», а также получил права, позволяющие определять условия осуществления деятельности ООО «СЗ «Фронтон». ФАС отметила, что сделка не приведёт к ограничению конкуренции на рынке недвижимости.",
+    "struct": "Покупатель — ООО Специализированный Застройщик «Буран» — приобрёл 100% долей в уставном капитале пяти компаний: СЗ «Катерная», СЗ «Тухачевского,80», СЗ «Регион», СЗ «Дом на Бульваре» и «Управляющая компания Жилкапинвест», а также получил права, позволяющие определять условия осуществления деятельности ООО СЗ «Фронтон». ФАС отметила, что сделка не приведёт к ограничению конкуренции на рынке недвижимости.",
     "appr": "ФАС одобрила ходатайство GloraX о покупке пяти застройщиков в Приморском крае.",
     "adv": [
      [
@@ -97655,16 +97716,16 @@
      "event_variants": [
       "registry"
      ],
-     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля.",
+     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
      "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 25.0,
        "object": "ООО «Байоник-Медси»",
        "event": "registry",
-       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля.",
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
        "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "A"
@@ -97718,17 +97779,17 @@
      "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
      "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 37000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "filing",
-       "attribution_quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
        "event": "closing",
+       "scope": "package",
        "terms": "fixed",
        "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+       "attribution_quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
        "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "A"
@@ -97736,13 +97797,13 @@
       {
        "value_rub": 37000000,
        "meaning": "disclosed",
-       "scope": "package",
        "attribution": "filing",
        "event": "closing",
+       "scope": "package",
        "terms": "fixed",
        "quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
-       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "attribution_quote": "Из отчетности «Медси» по МСФО следует, что сумма сделки составила 37 млн руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "B"
       }
@@ -97771,7 +97832,7 @@
      "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа. Изменения произошли 10 февраля.",
      "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2025-02-10",
@@ -97817,7 +97878,7 @@
      "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
      "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": false,
@@ -97830,8 +97891,8 @@
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "Группа «Медси» продала 25% акций премиального чек-ап сервиса Bioniq",
-       "source": "https://rb.ru/news/medsi-medtech-bionic/",
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "B"
       }
@@ -97844,35 +97905,45 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "disputed",
+     "perimeter": "verified",
      "card_hash": "b90330e44473",
      "perimeter_entity": "ООО «Байоник-Медси»",
      "perimeter_other_entities": [],
-     "quote": "продала 25% в ООО «Байоник-Медси»",
+     "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
      "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": true,
-       "entity": "ООО «Байоник-Медси»",
        "covers_business": true,
        "other_entities": [],
-       "quote": "продала 25% в ООО «Байоник-Медси»",
+       "entity": "ООО «Байоник-Медси»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\"",
+        "inn": "9710081787",
+        "year": 2024,
+        "revenue_rub": 142457000.0,
+        "operating_profit_rub": -79303000.0
+       },
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
        "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "ok": true,
+       "covers_business": true,
+       "other_entities": [],
        "entity": "ООО «Байоник-Медси»",
-       "quote": "«Байоник-Медси» управляет онлайн-платформой по назначению витаминов и микроэлементов на основе анализов крови Bioniq.",
-       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "report": {
         "inn": "9710081787",
-        "year": 2024
+        "year": 2024,
+        "revenue_rub": 142457000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\""
        },
-       "covers_business": true,
+       "quote": "Группа компаний «Медси», управляющая сетью одноименных клиник, продала 25% в ООО «Байоник-Медси», следует из данных ЕГРЮЛа.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/02/20/1093255-medsi-vishla-iz-proekta-tsifrovoi-platformi-po-monitoringu-sostoyaniya-organizma",
        "quote_checked": true,
        "reader": "B"
       }
@@ -97913,7 +97984,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "9710081787",
+      "year": 2024,
+      "revenue_rub": 142457000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЙОНИК-МЕДСИ\""
+     }
     },
     "admitted": {
      "count": true,
@@ -103291,17 +103368,17 @@
      "event_variants": [
       "signing"
      ],
-     "quote": "Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
-     "source": "https://www.interfax.ru/business/1044560",
+     "quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость», владеющего портфелем земельных участков и коммерческой недвижимости в Москве и Санкт-Петербурге.",
+     "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 100.0,
        "object": "АО «Бизнес-Недвижимость»",
        "event": "signing",
-       "quote": "Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
-       "source": "https://www.interfax.ru/business/1044560",
+       "quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость», владеющего портфелем земельных участков и коммерческой недвижимости в Москве и Санкт-Петербурге.",
+       "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
        "quote_checked": true,
        "reader": "A"
       },
@@ -103338,10 +103415,10 @@
       "disclosed"
      ],
      "scope_basis": "verified",
-     "quote": "В параметры сделки вошли 42 земельных участка в Москве и Петербурге, за которые \"Эталон\" должен будет заплатить 14,1 млрд рублей.",
-     "source": "https://www.interfax.ru/business/1044560",
+     "quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость», владеющего портфелем земельных участков и коммерческой недвижимости в Москве и Санкт-Петербурге. Размер сделки составляет 14,1 млрд рублей.",
+     "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 14100000000,
@@ -103350,9 +103427,9 @@
        "event": "signing",
        "scope": "equity",
        "terms": "fixed",
-       "quote": "В параметры сделки вошли 42 земельных участка в Москве и Петербурге, за которые \"Эталон\" должен будет заплатить 14,1 млрд рублей.",
-       "attribution_quote": "Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
-       "source": "https://www.interfax.ru/business/1044560",
+       "quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость», владеющего портфелем земельных участков и коммерческой недвижимости в Москве и Санкт-Петербурге. Размер сделки составляет 14,1 млрд рублей.",
+       "attribution_quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость»",
+       "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
        "quote_checked": true,
        "reader": "A"
       },
@@ -103382,7 +103459,7 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
+     "attribution_quote": "Группа «Эталон» сообщает о заключении сделки по приобретению у АФК «Система» 100% акций АО «Бизнес-Недвижимость»",
      "reading": {
       "result": "not_in_source",
       "at": "2026-10-17",
@@ -103404,15 +103481,15 @@
      "meaning_variants": [
       "signing"
      ],
-     "quote": "28 августа. INTERFAX.RU - Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
+     "quote": "Москва. 28 августа. INTERFAX.RU - Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
      "source": "https://www.interfax.ru/business/1044560",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2025-08-28",
        "meaning": "signing",
-       "quote": "28 августа. INTERFAX.RU - Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
+       "quote": "Москва. 28 августа. INTERFAX.RU - Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
        "source": "https://www.interfax.ru/business/1044560",
        "quote_checked": true,
        "reader": "A"
@@ -103440,7 +103517,7 @@
      }
     },
     "nature": {
-     "control_change": false,
+     "control_change": true,
      "cash_in": false,
      "financing": false,
      "auction": false,
@@ -103451,7 +103528,7 @@
      "quote": "Девелоперская группа \"Эталон\" (юрлицо - МКПАО \"Эталон Груп\") заключила сделку по приобретению у АФК \"Система\" 100% акций АО \"Бизнес-Недвижимость\", сообщает пресс-служба \"Эталона\".",
      "source": "https://www.interfax.ru/business/1044560",
      "verified_by": "model×2",
-     "verified_at": "2026-10-11",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
@@ -103471,8 +103548,8 @@
       }
      ],
      "intragroup": true,
-     "override_note": "Оба сегодняшних независимых чтения (11 октября 2026) дали intragroup=false механически, по прямой цитате о покупке 100% — но предыдущий, более глубокий разбор (см. pipeline/gold/analytics_gold.json, запись g321bdead) уже установил: продавец АФК «Система» — крупнейший акционер покупателя «Эталон» (48,8%) и выкупила основную часть SPO именно под эту покупку, то есть конечный контроль над активом не сменился. Оставлено по прежнему, более тщательному разбору; факт не переписан.",
-     "control_change_basis": "read",
+     "override_note": "Независимые чтения 11 и 22 октября 2026 (четыре читателя подряд) дали intragroup=false механически, по прямой цитате о покупке 100% — но предыдущий, более глубокий разбор (см. pipeline/gold/analytics_gold.json, запись g321bdead) уже установил: продавец АФК «Система» — крупнейший акционер покупателя «Эталон» (48,8%) и выкупила основную часть SPO именно под эту покупку, то есть конечный контроль над активом не сменился. Оставлено по прежнему, более тщательному разбору; факт не переписан (22.10.2026: --apply вновь затёр override, восстановлено).",
+     "control_change_basis": "verified",
      "reading": {
       "result": "not_in_source",
       "at": "2026-10-18",
@@ -103499,7 +103576,7 @@
      "quote": "Портфель АО «Бизнес-Недвижимость» включает 42 объекта в привлекательных локациях Москвы и Санкт-Петербурга.",
      "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": true,
@@ -103507,10 +103584,11 @@
        "other_entities": [],
        "entity": "АО «Бизнес-Недвижимость»",
        "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"БИЗНЕС-НЕДВИЖИМОСТЬ\"",
         "inn": "7708797121",
         "year": 2024,
         "revenue_rub": 3410611000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"БИЗНЕС-НЕДВИЖИМОСТЬ\""
+        "operating_profit_rub": 867364000.0
        },
        "quote": "Портфель АО «Бизнес-Недвижимость» включает 42 объекта в привлекательных локациях Москвы и Санкт-Петербурга.",
        "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
@@ -103528,8 +103606,8 @@
         "revenue_rub": 3410611000.0,
         "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"БИЗНЕС-НЕДВИЖИМОСТЬ\""
        },
-       "quote": "\"Бизнес-Недвижимость\" - один из крупнейших собственников коммерческой недвижимости в Москве, также владеет целым рядом земельных участков в столице и Петербурге.",
-       "source": "https://www.interfax.ru/business/1044560",
+       "quote": "Портфель АО «Бизнес-Недвижимость» включает 42 объекта в привлекательных локациях Москвы и Санкт-Петербурга.",
+       "source": "https://etalongroup.ru/msk/news/gruppa-etalon-rasshiryaet-prisutstvie-v-premialnom-segmente-blagodarya-pokupke-ao-biznes-nedvizhimos",
        "quote_checked": true,
        "reader": "B"
       }
@@ -103554,7 +103632,7 @@
      "industry": "ok",
      "purchase_sums": "intragroup",
      "top_purchases": "intragroup",
-     "multiple_text": "not_control_change"
+     "multiple_text": "intragroup"
     }
    },
    "date_basis": "signing",
@@ -110327,7 +110405,7 @@
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
-    "share": "100% долей в ООО «Ренессанс Капитал - ФК», ООО «Ренессанс Брокер» и ООО «УК Ренкап» у ООО «Группа Онэксим».",
+    "share": "100% долей в ООО «Ренессанс Капитал — ФК», ООО «Ренессанс Брокер» и ООО «УК Ренкап» у ООО «Группа Онэксим».",
     "val": "—",
     "target_fin": "За три последних года активы клиентов группы на счетах в России дошли примерно до 230 млрд ₽.",
     "fin": "—",
@@ -110395,7 +110473,7 @@
     "stake": {
      "value": 100.0,
      "basis": "rule",
-     "card_hash": "925d13f30540"
+     "card_hash": "a1fb8f533538"
     },
     "price": {
      "value_rub": null,
@@ -116383,7 +116461,7 @@
      "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×1",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 99.99,
@@ -116392,7 +116470,7 @@
        "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
      "reading": {
@@ -116433,7 +116511,7 @@
      "value_rub": 3040000000,
      "meaning": "disclosed",
      "scope": "package",
-     "basis": "verified",
+     "basis": "disputed",
      "card_hash": "b871e87ae9df",
      "meaning_variants": [
       "disclosed"
@@ -116456,17 +116534,17 @@
      "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 3040000000,
-       "meaning": "disclosed",
-       "attribution": "unknown",
+       "meaning": "reported",
+       "attribution": "media_sources",
        "event": "signing",
        "scope": "package",
        "terms": "fixed",
        "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
-       "attribution_quote": null,
+       "attribution_quote": "Это следует из сообщения головной компании «Тетры» Don Agro International Limited (торгуется на Сингапурской бирже), которое обнаружили «Ведомости».",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "A"
@@ -116496,7 +116574,35 @@
        "Kommersant прямо говорит о ДВУХ ООО в периметре сделки; по карточке это ООО «812 капитал» (головная компания группы, 99,99%) и ЦИМТ (11,5%, управляет клиниками в Москве и Нижнем Новгороде) — отчёт задания охватывает только ЦИМТ, не «812 капитал».",
        "Группа «Евроонко» структурирована через холдинг ООО «812 капитал» (99,99% покупается) и операционные ООО «ЦИМТ»/ООО «Медиком» (доли в ЦИМТ покупаются лишь частично напрямую, остальное — через 812 капитал и Медиком) — отчёт только по ЦИМТ не покрывает весь периметр группы."
       ]
-     }
+     },
+     "disputed": [
+      {
+       "value_rub": 3040000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "signing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
+       "attribution_quote": "Это следует из сообщения головной компании «Тетры» Don Agro International Limited (торгуется на Сингапурской бирже), которое обнаружили «Ведомости».",
+       "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 3040000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "signing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Общая сумма сделки составит 3,04 млрд руб., указано там же.",
+       "attribution_quote": "Чистая прибыль всех активов ГК «Евроонко» в 2023 г. составила 497,6 млн руб., говорится в сообщении Don Agro (на основе неаудированной отчетности по РСБУ).",
+       "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-09-06",
@@ -116509,7 +116615,7 @@
      "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде) у основного собственника «Евроонко» Хвичи Акубардия и генерального директора управляющей компании сети Александра Свиридова.",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2024-09-06",
@@ -116555,7 +116661,7 @@
      "quote": "Акционер частного медицинского холдинга «Медскан» Евгений Туголуков (владеет 50%) покупает группу компаний «Евроонко» через принадлежащее ему АО «Тетра».",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
@@ -116595,10 +116701,10 @@
       "ООО «812 капитал»",
       "ООО «Медиком»"
      ],
-     "quote": "Сеть «Евроонко», созданная в 2011 г., имеет клиники в Москве, Краснодаре, Санкт-Петербурге и Нижнем Новгороде, информационно-сервисный центр в Самаре.",
+     "quote": "11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде)",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
@@ -116609,12 +116715,13 @@
        ],
        "entity": "ООО «Центр инновационных медицинских технологий» (ЦИМТ)",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\"",
         "inn": "7701362604",
         "year": 2023,
         "revenue_rub": 1788016000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\""
+        "operating_profit_rub": 650611000.0
        },
-       "quote": "Сеть «Евроонко», созданная в 2011 г., имеет клиники в Москве, Краснодаре, Санкт-Петербурге и Нижнем Новгороде, информационно-сервисный центр в Самаре.",
+       "quote": "11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде)",
        "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "A"
@@ -116625,15 +116732,15 @@
        "other_entities": [
         "ООО «812 капитал»"
        ],
-       "entity": "ООО «Центр инновационных медицинских технологий» (ЦИМТ)",
+       "entity": "ООО «Центр инновационных медицинских технологий»",
        "report": {
         "inn": "7701362604",
         "year": 2023,
         "revenue_rub": 1788016000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЦЕНТР ИННОВАЦИОННЫХ МЕДИЦИНСКИХ ТЕХНОЛОГИЙ\""
        },
-       "quote": "В периметр сделки входило два ООО, продавцами по сделке выступали два физических лица, осуществляющих отчуждение 90% владения.",
-       "source": "https://www.kommersant.ru/doc/7327316",
+       "quote": "6 сентября «Тетра» заключила соглашения о планируемом приобретении 99,99% головной компании группы – ООО «812 капитал» и 11,5% ООО «Центр инновационных медицинских технологий» (ЦИМТ, управляет клиниками в Москве и Нижнем Новгороде)",
+       "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
        "quote_checked": true,
        "reader": "B"
       }
@@ -116649,9 +116756,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_author_unknown",
-     "top_purchases": "price_author_unknown",
-     "multiple_text": "price_author_unknown"
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
+     "multiple_text": "price_not_verified"
     }
    },
    "stake_acquired": 99.99,
@@ -121085,20 +121192,21 @@
      "basis": "verified",
      "card_hash": "4f7e1063b1ed",
      "object": "АО «Росспиртпром»",
-     "event": "registry",
+     "event": "closing",
      "event_variants": [
+      "closing",
       "registry"
      ],
-     "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+     "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
      "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 100.0,
        "object": "АО «Росспиртпром»",
-       "event": "registry",
-       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+       "event": "closing",
+       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "A"
@@ -121107,7 +121215,7 @@
        "value": 100.0,
        "object": "АО «Росспиртпром»",
        "event": "registry",
-       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
+       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
@@ -121140,17 +121248,17 @@
      "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
      "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 8289000000,
        "meaning": "disclosed",
        "attribution": "registry",
-       "event": "registry",
+       "event": "closing",
        "scope": "equity",
        "terms": "fixed",
        "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-       "attribution_quote": null,
+       "attribution_quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "A"
@@ -121162,8 +121270,7 @@
        "event": "registry",
        "scope": "equity",
        "terms": "fixed",
-       "quote": "Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-       "attribution_quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
+       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
@@ -121173,8 +121280,9 @@
      "attribution_variants": [
       "registry"
      ],
-     "event": "registry",
+     "event": "closing",
      "event_variants": [
+      "closing",
       "registry"
      ],
      "terms": "fixed",
@@ -121197,21 +121305,21 @@
     },
     "date": {
      "value": "2024-04-19",
-     "meaning": "announcement",
+     "meaning": "closing",
      "basis": "verified",
-     "card_hash": "c10213ecb2e9",
+     "card_hash": "82b470c9107e",
      "meaning_variants": [
-      "announcement",
+      "closing",
       "registry"
      ],
      "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
      "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2024-04-19",
-       "meaning": "registry",
+       "meaning": "closing",
        "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
@@ -121219,7 +121327,7 @@
       },
       {
        "value": "2024-04-19",
-       "meaning": "announcement",
+       "meaning": "registry",
        "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром».",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
@@ -121249,16 +121357,16 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "e8e2c0b67c98",
-     "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-     "source": "https://www.kommersant.ru/doc/6662266",
+     "quote": "До 2024 г. «Росспиртпром» принадлежал Росимуществу, а в апреле того же года 100% акций предприятия было продано на торгах за 8,3 млрд руб.",
+     "source": "https://www.vedomosti.ru/business/articles/2025/12/30/1167582-rosspirtprom-zakril-sdelku",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "ГИС «Торги» 19 апреля подвела итоги аукциона по продаже принадлежащих Росимуществу 100% акций АО «Росспиртпром». Победителем торгов стало ООО «Бизнес Альянс», предложившее за актив 8,289 млрд руб.",
-       "source": "https://www.kommersant.ru/doc/6662266",
+       "quote": "До 2024 г. «Росспиртпром» принадлежал Росимуществу, а в апреле того же года 100% акций предприятия было продано на торгах за 8,3 млрд руб.",
+       "source": "https://www.vedomosti.ru/business/articles/2025/12/30/1167582-rosspirtprom-zakril-sdelku",
        "quote_checked": true,
        "reader": "A"
       },
@@ -121281,35 +121389,34 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "disputed",
+     "perimeter": "refuted",
      "card_hash": "58ce769533b7",
      "perimeter_entity": "АО «Росспиртпром»",
-     "quote": "Дмитрий Гительман, исполнительный директор ООО «Тульский винокуренный завод 1911» (входит в «Росспиртпром»), факт закрытия сделки подтвердил.",
-     "source": "https://www.vedomosti.ru/business/articles/2025/12/30/1167582-rosspirtprom-zakril-sdelku",
+     "quote": "Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год. Выручка АО от реализации спирта в 2024 году прогнозируется в размере 10,743 млрд руб.",
+     "source": "https://www.kommersant.ru/doc/6662266",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
        "covers_business": false,
-       "other_entities": [
-        "ООО «Тульский винокуренный завод 1911»"
-       ],
+       "other_entities": [],
        "entity": "АО «Росспиртпром»",
        "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\"",
         "inn": "7730605160",
         "year": 2023,
         "revenue_rub": 1805169000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
+        "operating_profit_rub": 377301000.0
        },
-       "quote": "Дмитрий Гительман, исполнительный директор ООО «Тульский винокуренный завод 1911» (входит в «Росспиртпром»), факт закрытия сделки подтвердил.",
-       "source": "https://www.vedomosti.ru/business/articles/2025/12/30/1167582-rosspirtprom-zakril-sdelku",
+       "quote": "Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год. Выручка АО от реализации спирта в 2024 году прогнозируется в размере 10,743 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "A"
       },
       {
-       "ok": true,
-       "covers_business": true,
+       "ok": false,
+       "covers_business": false,
        "other_entities": [],
        "entity": "АО «Росспиртпром»",
        "report": {
@@ -121318,7 +121425,7 @@
         "revenue_rub": 1805169000.0,
         "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
        },
-       "quote": "АО «Росспиртпром» создано 16 января 2009 года. Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год.",
+       "quote": "Компании принадлежит комплекс полного цикла производства спирта — а это восемь заводов мощностью 22,5 млн дал в год. Выручка АО от реализации спирта в 2024 году прогнозируется в размере 10,743 млрд руб.",
        "source": "https://www.kommersant.ru/doc/6662266",
        "quote_checked": true,
        "reader": "B"
@@ -121360,7 +121467,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "7730605160",
+      "year": 2023,
+      "revenue_rub": 1805169000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"РОССПИРТПРОМ\""
+     }
     },
     "admitted": {
      "count": true,
@@ -121384,7 +121497,7 @@
      "https://t.me/dealsma/5141"
     ]
    ],
-   "date_basis": "announcement"
+   "date_basis": "closing"
   },
   {
    "id": "g10adb6ac",
@@ -167387,29 +167500,29 @@
      "basis": "verified",
      "card_hash": "abf6b6ad19dc",
      "object": "группа Buzzoola (ООО «Баззула интернет технологии» и ООО «Баззула рекламные технологии»)",
-     "event": "announcement",
+     "event": "closing",
      "event_variants": [
       "announcement",
       "closing"
      ],
-     "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+     "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
      "source": "https://www.interfax.ru/business/887334",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 67.0,
        "object": "группа Buzzoola (ООО «Баззула интернет технологии» и ООО «Баззула рекламные технологии»)",
-       "event": "announcement",
-       "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "event": "closing",
+       "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
        "source": "https://www.interfax.ru/business/887334",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": 67.0,
-       "object": "Buzzoola (ООО «Баззула интернет технологии» и ООО «Баззула рекламные технологии»)",
-       "event": "closing",
+       "object": "группа Buzzoola (ООО «Баззула интернет технологии» и ООО «Баззула рекламные технологии»)",
+       "event": "announcement",
        "quote": "ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
        "source": "https://www.interfax.ru/business/887334",
        "quote_checked": true,
@@ -167453,10 +167566,10 @@
      ],
      "attribution_quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola.",
      "scope_basis": "verified",
-     "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+     "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн. Таким образом, вся компания была оценена в 553 млн руб.",
      "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 371000000,
@@ -167465,7 +167578,7 @@
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн.",
+       "quote": "Сумма сделки по покупке 67% доли в компании составила 371 млн. Таким образом, вся компания была оценена в 553 млн руб.",
        "attribution_quote": "Компания «Мобильные телесистемы» ( МТС ) раскрыла подробности приобретения платформы интернет-рекламы Buzzoola.",
        "source": "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
        "quote_checked": true,
@@ -167509,7 +167622,7 @@
      "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
      "source": "https://www.interfax.ru/business/887334",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2023-02-22",
@@ -167568,17 +167681,17 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "disputed",
-     "quote": "Важный момент состоит в том, что, приобретая в 2022 г. 67%-ную долю в Buzzola, МТС не получала контроль над компанией. Инвестиции МТС в Buzzola учитывались как инвестиции в совместное предприятие. Контроль над Buzzola у МТС появился только в 2024 г.",
-     "source": "https://runet.news/articles/61865",
+     "control_change_basis": "verified",
+     "quote": "ООО \"Стрим\" выкупило долю в ООО \"Базулла интернет технологии\" у Наталии Солодуховой, у нее остается 13,7% компании.",
+     "source": "https://www.interfax.ru/business/887334",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
-       "control_change": false,
+       "control_change": true,
        "intragroup": false,
-       "quote": "Важный момент состоит в том, что, приобретая в 2022 г. 67%-ную долю в Buzzola, МТС не получала контроль над компанией. Инвестиции МТС в Buzzola учитывались как инвестиции в совместное предприятие. Контроль над Buzzola у МТС появился только в 2024 г.",
-       "source": "https://runet.news/articles/61865",
+       "quote": "ООО \"Стрим\" выкупило долю в ООО \"Базулла интернет технологии\" у Наталии Солодуховой, у нее остается 13,7% компании.",
+       "source": "https://www.interfax.ru/business/887334",
        "quote_checked": true,
        "reader": "A"
       },
@@ -167612,10 +167725,10 @@
      "perimeter_other_entities": [
       "ООО «Баззула рекламные технологии»"
      ],
-     "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+     "quote": "Этой компании принадлежит 100% \"Баззула рекламные технологии\" (зарегистрирована в июне 2022 года).",
      "source": "https://www.interfax.ru/business/887334",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
@@ -167625,12 +167738,13 @@
        ],
        "entity": "ООО «Баззула интернет технологии»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЗЗУЛА ИНТЕРНЕТ ТЕХНОЛОГИИ\"",
         "inn": "7706749080",
         "year": 2022,
         "revenue_rub": 695351000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАЗЗУЛА ИНТЕРНЕТ ТЕХНОЛОГИИ\""
+        "operating_profit_rub": 20194000.0
        },
-       "quote": "Москва. 22 февраля. INTERFAX.RU - ПАО \"МТС\" стало владельцем 67% группы Buzzoola (ООО \"Баззула интернет технологии\" и ООО \"Баззула рекламные технологии\"), развивающей платформу для размещения нативной рекламы.",
+       "quote": "Этой компании принадлежит 100% \"Баззула рекламные технологии\" (зарегистрирована в июне 2022 года).",
        "source": "https://www.interfax.ru/business/887334",
        "quote_checked": true,
        "reader": "A"
@@ -167667,7 +167781,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "control_change_not_verified"
+     "multiple_text": "perimeter_not_verified"
     }
    },
    "buyer_name": "ООО «Стрим»",
@@ -182674,16 +182788,16 @@
      "event_variants": [
       "signing"
      ],
-     "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+     "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
      "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 51.0,
        "object": "ООО «Полиматика Рус»",
        "event": "signing",
-       "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+       "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "A"
@@ -182692,7 +182806,7 @@
        "value": 51.0,
        "object": "ООО «Полиматика Рус»",
        "event": "signing",
-       "quote": "© ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+       "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "B"
@@ -182736,13 +182850,13 @@
      "quote": "Softline в конце 2022 г. приобрел 51% долю в «Полиматике». Сумма сделки составила 239 млн руб.",
      "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 239000000,
        "meaning": "disclosed",
        "attribution": "unknown",
-       "event": "signing",
+       "event": "closing",
        "scope": "package",
        "terms": "fixed",
        "quote": "Softline в конце 2022 г. приобрел 51% долю в «Полиматике». Сумма сделки составила 239 млн руб.",
@@ -182754,12 +182868,11 @@
       {
        "value_rub": 239000000,
        "meaning": "reported",
-       "attribution": "media_sources",
+       "attribution": "unknown",
        "event": "closing",
        "scope": "package",
        "terms": "unknown",
        "quote": "Softline в конце 2022 г. приобрел 51% долю в «Полиматике». Сумма сделки составила 239 млн руб.",
-       "attribution_quote": null,
        "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
        "quote_checked": true,
        "reader": "B"
@@ -182782,7 +182895,7 @@
        "value_rub": 239000000,
        "meaning": "disclosed",
        "attribution": "unknown",
-       "event": "signing",
+       "event": "closing",
        "scope": "package",
        "terms": "fixed",
        "quote": "Softline в конце 2022 г. приобрел 51% долю в «Полиматике». Сумма сделки составила 239 млн руб.",
@@ -182794,12 +182907,11 @@
       {
        "value_rub": 239000000,
        "meaning": "reported",
-       "attribution": "media_sources",
+       "attribution": "unknown",
        "event": "closing",
        "scope": "package",
        "terms": "unknown",
        "quote": "Softline в конце 2022 г. приобрел 51% долю в «Полиматике». Сумма сделки составила 239 млн руб.",
-       "attribution_quote": null,
        "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
        "quote_checked": true,
        "reader": "B"
@@ -182808,29 +182920,28 @@
     },
     "date": {
      "value": "2022-12-22",
-     "meaning": "announcement",
+     "meaning": "signing",
      "basis": "verified",
-     "card_hash": "ad43c96c83d3",
+     "card_hash": "fc7cc1aec7dc",
      "meaning_variants": [
-      "announcement",
       "signing"
      ],
-     "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+     "quote": "© ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
      "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2022-12-22",
        "meaning": "signing",
-       "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+       "quote": "© ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": "2022-12-22",
-       "meaning": "announcement",
+       "meaning": "signing",
        "quote": "© ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
@@ -182861,15 +182972,15 @@
      "card_hash": "6914f9608b7b",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+     "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\", разрабатывающей широкий спектр low-code аналитических инструментов",
      "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+       "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\", разрабатывающей широкий спектр low-code аналитических инструментов",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "A"
@@ -182877,7 +182988,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "© ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
+       "quote": "ГК Softline приобрела мажоритарную долю компании Polymatica © ComNews 22.12.2022 ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\"",
        "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "B"
@@ -182901,10 +183012,10 @@
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ПОЛИМАТИКА РУС\""
      },
      "perimeter_other_entities": [],
-     "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\", разрабатывающей широкий спектр low-code аналитических инструментов",
-     "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
+     "quote": "структура «Софтлайна» «СЛ Софт» ( SL Soft ) консолидировала 100% долю в ООО «Полиматика.рус», юридическом лице «Полиматики».",
+     "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": true,
@@ -182912,13 +183023,14 @@
        "other_entities": [],
        "entity": "ООО «Полиматика Рус»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ПОЛИМАТИКА РУС\"",
         "inn": "7721721509",
         "year": 2021,
         "revenue_rub": 166928000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ПОЛИМАТИКА РУС\""
+        "operating_profit_rub": 5048000.0
        },
-       "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\", разрабатывающей широкий спектр low-code аналитических инструментов",
-       "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
+       "quote": "структура «Софтлайна» «СЛ Софт» ( SL Soft ) консолидировала 100% долю в ООО «Полиматика.рус», юридическом лице «Полиматики».",
+       "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
        "quote_checked": true,
        "reader": "A"
       },
@@ -182933,8 +183045,8 @@
         "revenue_rub": 166928000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ПОЛИМАТИКА РУС\""
        },
-       "quote": "структура «Софтлайна» «СЛ Софт» ( SL Soft ) консолидировала 100% долю в ООО «Полиматика.рус», юридическом лице «Полиматики».",
-       "source": "https://www.cnews.ru/news/top/2024-10-30_softline_sobral_100_rossijskogo",
+       "quote": "ГК Softline объявила о подписании соглашения о приобретении 51% российской компании ООО \"Полиматика Рус\", разрабатывающей широкий спектр low-code аналитических инструментов",
+       "source": "https://www.comnews.ru/content/223657/2022-12-22/2022-w51/gk-softline-priobrela-mazhoritarnuyu-dolyu-kompanii-polymatica",
        "quote_checked": true,
        "reader": "B"
       }
@@ -182955,7 +183067,7 @@
      "multiple_text": "price_not_verified"
     }
    },
-   "date_basis": "announcement"
+   "date_basis": "signing"
   },
   {
    "id": "g46445373",
@@ -192098,7 +192210,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "После сделки комбинат вошёл в агрохолдинг «Агрополис «Сабурово»: холдинг закупил 200 вагонов для нужд предприятия, продукция поставляется в страны Западной Африки, Ближнего Востока и Юго-Восточной Азии, а в феврале 2023 года завод участвовал в международной выставке Gulfood в Дубае. Продавец, «Аладушкин групп», вскоре после этой продажи сам купил другой актив — 100% группы компаний «Дарница» (сделка закрыта в конце января 2023 года).",
+    "context": "После сделки комбинат вошёл в агрохолдинг «Агрополис „Сабурово“»: холдинг закупил 200 вагонов для нужд предприятия, продукция поставляется в страны Западной Африки, Ближнего Востока и Юго-Восточной Азии, а в феврале 2023 года завод участвовал в международной выставке Gulfood в Дубае. Продавец, «Аладушкин групп», вскоре после этой продажи сам купил другой актив — 100% группы компаний «Дарница» (сделка закрыта в конце января 2023 года).",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -198271,7 +198383,7 @@
    },
    "followup_researched": "2026-09-07",
    "seller": "Composite System Ltd (Британские Виргинские острова)",
-   "extra": "Головная компания нефтехимического холдинга ГК «ЭКТОС»: топливные компоненты и сжиженные газы (МТБЭ, СУГ, ШФЛУ, ФАУ), совокупный объём свыше 1,5 млн т/год. Владеет акциями и долями компаний, входящих в группу: АО «Уралоргсинтез» (Чайковский, Пермский край), ОАО «ЭКТОС-Волга» (Волжский), АО «Волжский азотно-кислородный завод», торговая компания ООО «ЭКТОХИМ», управляющая компания ООО «УК «ЭКТОС Менеджмент»."
+   "extra": "Головная компания нефтехимического холдинга ГК «ЭКТОС»: топливные компоненты и сжиженные газы (МТБЭ, СУГ, ШФЛУ, ФАУ), совокупный объём свыше 1,5 млн т/год. Владеет акциями и долями компаний, входящих в группу: АО «Уралоргсинтез» (Чайковский, Пермский край), ОАО «ЭКТОС-Волга» (Волжский), АО «Волжский азотно-кислородный завод», торговая компания ООО «ЭКТОХИМ», управляющая компания ООО УК «ЭКТОС Менеджмент»."
   },
   {
    "id": "tokk-metarus",
@@ -199066,28 +199178,27 @@
      "basis": "verified",
      "card_hash": "67e8080f0e24",
      "object": "ООО «Башенная инфраструктурная компания» (БИК)",
-     "event": "signing",
+     "event": "announcement",
      "event_variants": [
-      "announcement",
-      "signing"
+      "announcement"
      ],
-     "quote": "МТС продает 49,9% ООО «Башенная инфраструктурная компания» (БИК) из-за долга этой компании в 80 млрд руб.",
-     "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+     "quote": "Оператор МТС сообщил CNews о заключении сделки по продаже 49,9% своей дочерней компании ООО «Башенная инфраструктурная компания» (БИК).",
+     "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 49.9,
        "object": "ООО «Башенная инфраструктурная компания» (БИК)",
-       "event": "signing",
-       "quote": "МТС продает 49,9% ООО «Башенная инфраструктурная компания» (БИК) из-за долга этой компании в 80 млрд руб.",
-       "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+       "event": "announcement",
+       "quote": "Оператор МТС сообщил CNews о заключении сделки по продаже 49,9% своей дочерней компании ООО «Башенная инфраструктурная компания» (БИК).",
+       "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": 49.9,
-       "object": "Башенная инфраструктурная компания (БИК)",
+       "object": "ООО «Башенная инфраструктурная компания» (БИК)",
        "event": "announcement",
        "quote": "МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
        "source": "https://www.kommersant.ru/doc/8765262",
@@ -199135,13 +199246,13 @@
      "quote": "«Продажа позволит МТС не только значительно укрепить финансовую позицию за счет деконсолидации более чем 80 млрд руб. долга, но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
      "source": "https://www.kommersant.ru/doc/8765262",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value_rub": 21700000000,
        "meaning": "disclosed",
        "attribution": "parties",
-       "event": "signing",
+       "event": "announcement",
        "scope": "package",
        "terms": "fixed",
        "quote": "«Продажа позволит МТС не только значительно укрепить финансовую позицию за счет деконсолидации более чем 80 млрд руб. долга, но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
@@ -199154,7 +199265,7 @@
        "value_rub": 21700000000,
        "meaning": "disclosed",
        "attribution": "parties",
-       "event": "announcement",
+       "event": "signing",
        "scope": "package",
        "terms": "fixed",
        "quote": "«Продажа позволит МТС не только значительно укрепить финансовую позицию за счет деконсолидации более чем 80 млрд руб. долга, но и привлечь денежные средства в размере 21,7 млрд руб.»,— заявили в компании.",
@@ -199188,7 +199299,7 @@
      "quote": "Обновлено 25.06.2026, 23:07 МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
      "source": "https://www.kommersant.ru/doc/8765262",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2026-06-25",
@@ -199231,16 +199342,16 @@
      "card_hash": "01774de1a46c",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "МТС сохранит за собой прямое владение оставшейся долей в 50,1% в БИК и договорилась с ЗПИФ о совместном контроле.",
-     "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+     "quote": "Условиями сделки предусмотрен совместный контроль МТС и ЗПИФ в отношении основной деятельности БИК, уточнили в МТС",
+     "source": "https://www.kommersant.ru/doc/8765262",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "МТС сохранит за собой прямое владение оставшейся долей в 50,1% в БИК и договорилась с ЗПИФ о совместном контроле.",
-       "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+       "quote": "Условиями сделки предусмотрен совместный контроль МТС и ЗПИФ в отношении основной деятельности БИК, уточнили в МТС",
+       "source": "https://www.kommersant.ru/doc/8765262",
        "quote_checked": true,
        "reader": "A"
       },
@@ -199283,10 +199394,10 @@
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
      },
      "perimeter_other_entities": [],
-     "quote": "МТС продает 49,9% ООО «Башенная инфраструктурная компания» (БИК) из-за долга этой компании в 80 млрд руб.",
-     "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+     "quote": "БИК в настоящее время является одним из крупнейших операторов башенной инфраструктуры в России. По подсчетам оператора, к концу июня 2026 г. в активе компании находилось свыше 24,7 тыс. антенно-мачтовых сооружений (АМС), расположенных на территории России",
+     "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": true,
@@ -199294,13 +199405,14 @@
        "other_entities": [],
        "entity": "ООО «Башенная инфраструктурная компания»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\"",
         "inn": "5027312461",
         "year": 2025,
         "revenue_rub": 15913106000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
+        "operating_profit_rub": 12391311000.0
        },
-       "quote": "МТС продает 49,9% ООО «Башенная инфраструктурная компания» (БИК) из-за долга этой компании в 80 млрд руб.",
-       "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+       "quote": "БИК в настоящее время является одним из крупнейших операторов башенной инфраструктуры в России. По подсчетам оператора, к концу июня 2026 г. в активе компании находилось свыше 24,7 тыс. антенно-мачтовых сооружений (АМС), расположенных на территории России",
+       "source": "https://www.cnews.ru/news/top/2026-06-26_mts_lishilsya_pochti_poloviny",
        "quote_checked": true,
        "reader": "A"
       },
@@ -199315,8 +199427,8 @@
         "revenue_rub": 15913106000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БАШЕННАЯ ИНФРАСТРУКТУРНАЯ КОМПАНИЯ\""
        },
-       "quote": "МТС продает 49,9% ООО «Башенная инфраструктурная компания» (БИК) из-за долга этой компании в 80 млрд руб.",
-       "source": "https://www.vedomosti.ru/investments/news/2026/06/25/1208943-mts-bashennogo-biznesa",
+       "quote": "МТС (MOEX: MTSS ) объявила о продаже 49,9% в Башенной инфраструктурной компании (БИК) закрытому паевому инвестиционному фонду «Инвестиции 18» (ЗПИФ) под управлением УК «Доверительная».",
+       "source": "https://www.kommersant.ru/doc/8765262",
        "quote_checked": true,
        "reader": "B"
       }
@@ -199549,22 +199661,22 @@
      "value": 100.0,
      "basis": "verified",
      "card_hash": "71ca80b701cb",
-     "object": "АО «Ильинская больница» и ООО «Клиник менеджмент групп»",
+     "object": "АО «Ильинская больница» и ООО «Клиник менеджмент груп»",
      "event": "signing",
      "event_variants": [
       "signing"
      ],
-     "quote": "Под контроль МКПАО «МД Медикал груп» (юридическое лицо ГК «Мать и дитя») перешли 100% в АО «Ильинская больница» и ООО «Клиник менеджмент групп», следует из раскрытия компании.",
-     "source": "https://www.kommersant.ru/doc/8764183",
+     "quote": "МКПАО «МД Медикал Груп» через ООО «Хавен» покупает 100% в АО «Ильинская больница» и ООО «Клиник менеджмент груп», следует из данных группы, опубликованных на сайте Центра раскрытия корпоративной информации.",
+     "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": 100.0,
-       "object": "АО «Ильинская больница» и ООО «Клиник менеджмент групп»",
+       "object": "АО «Ильинская больница» и ООО «Клиник менеджмент груп»",
        "event": "signing",
-       "quote": "Под контроль МКПАО «МД Медикал груп» (юридическое лицо ГК «Мать и дитя») перешли 100% в АО «Ильинская больница» и ООО «Клиник менеджмент групп», следует из раскрытия компании.",
-       "source": "https://www.kommersant.ru/doc/8764183",
+       "quote": "МКПАО «МД Медикал Груп» через ООО «Хавен» покупает 100% в АО «Ильинская больница» и ООО «Клиник менеджмент груп», следует из данных группы, опубликованных на сайте Центра раскрытия корпоративной информации.",
+       "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
        "quote_checked": true,
        "reader": "A"
       },
@@ -199613,11 +199725,24 @@
       "fixed"
      ],
      "scope_basis": "verified",
-     "quote": "Сумма сделки составила 8,5 млрд руб., включая 1,1 млрд руб. долга на балансе компании.",
-     "source": "https://www.kommersant.ru/doc/8764183",
+     "quote": "Ее стоимость составит 8,5 млрд руб., включая 1,1 млрд руб. долга на балансе приобретаемого актива.",
+     "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
+      {
+       "value_rub": 8500000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "ev",
+       "terms": "fixed",
+       "quote": "Ее стоимость составит 8,5 млрд руб., включая 1,1 млрд руб. долга на балансе приобретаемого актива.",
+       "attribution_quote": "Это следует из данных группы, опубликованных на сайте Центра раскрытия корпоративной информации.",
+       "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
+       "quote_checked": true,
+       "reader": "A"
+      },
       {
        "value_rub": 8500000000,
        "meaning": "disclosed",
@@ -199629,23 +199754,10 @@
        "attribution_quote": "ГК «Мать и дитя» заключила сделку по приобретению клиники «Ильинская больница», говорится в сообщении компании.",
        "source": "https://www.kommersant.ru/doc/8764183",
        "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value_rub": 8500000000,
-       "meaning": "disclosed",
-       "attribution": "parties",
-       "event": "signing",
-       "scope": "ev",
-       "terms": "fixed",
-       "quote": "ГК «Мать и дитя» заключила сделку по приобретению клиники «Ильинская больница», говорится в сообщении компании. Сумма сделки составила 8,5 млрд руб., включая 1,1 млрд руб. долга на балансе компании.",
-       "attribution_quote": "ГК «Мать и дитя» заключила сделку по приобретению клиники «Ильинская больница», говорится в сообщении компании.",
-       "source": "https://www.kommersant.ru/doc/8764183",
-       "quote_checked": true,
        "reader": "B"
       }
      ],
-     "attribution_quote": "ГК «Мать и дитя» заключила сделку по приобретению клиники «Ильинская больница», говорится в сообщении компании.",
+     "attribution_quote": "Это следует из данных группы, опубликованных на сайте Центра раскрытия корпоративной информации.",
      "reading": {
       "result": "not_in_source",
       "at": "2026-10-17",
@@ -199667,16 +199779,16 @@
      "meaning_variants": [
       "announcement"
      ],
-     "quote": "Александра Альховская Мединдустрия Инвестиции 24 июня 2026, 18:21",
-     "source": "https://www.vademec.ru/news/2026/06/24/gk-mat-i-ditya-za-8-5-mlrd-rubley-pokupaet-ilinskuyu-bolnitsu/",
+     "quote": "Главная / Бизнес / 24 июня, 21:28 «Мать и дитя» покупает Ильинскую больницу вместе с долгом за 8,5 млрд рублей",
+     "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "value": "2026-06-24",
        "meaning": "announcement",
-       "quote": "Александра Альховская Мединдустрия Инвестиции 24 июня 2026, 18:21",
-       "source": "https://www.vademec.ru/news/2026/06/24/gk-mat-i-ditya-za-8-5-mlrd-rubley-pokupaet-ilinskuyu-bolnitsu/",
+       "quote": "Главная / Бизнес / 24 июня, 21:28 «Мать и дитя» покупает Ильинскую больницу вместе с долгом за 8,5 млрд рублей",
+       "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
        "quote_checked": true,
        "reader": "A"
       },
@@ -199713,16 +199825,16 @@
      "card_hash": "28c2c221799a",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Под контроль МКПАО «МД Медикал груп» (юридическое лицо ГК «Мать и дитя») перешли 100% в АО «Ильинская больница» и ООО «Клиник менеджмент групп», следует из раскрытия компании.",
-     "source": "https://www.kommersant.ru/doc/8764183",
+     "quote": "ГК «МД Медикал», управляющая сетью клиник « Мать и дитя », покупает у казахстанской компании Emdeu Medline Ильинскую больницу, многопрофильный госпиталь в Московской области.",
+     "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Под контроль МКПАО «МД Медикал груп» (юридическое лицо ГК «Мать и дитя») перешли 100% в АО «Ильинская больница» и ООО «Клиник менеджмент групп», следует из раскрытия компании.",
-       "source": "https://www.kommersant.ru/doc/8764183",
+       "quote": "ГК «МД Медикал», управляющая сетью клиник « Мать и дитя », покупает у казахстанской компании Emdeu Medline Ильинскую больницу, многопрофильный госпиталь в Московской области.",
+       "source": "https://www.vedomosti.ru/society/news/2026/06/24/1208598-mat-ditya-ilinskuyu-bolnitsu",
        "quote_checked": true,
        "reader": "A"
       },
@@ -199765,25 +199877,26 @@
       "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ИЛЬИНСКАЯ БОЛЬНИЦА\""
      },
      "perimeter_other_entities": [
-      "ООО «Клиник менеджмент групп»"
+      "ООО «Клиник менеджмент груп»"
      ],
      "quote": "Согласно СПАРК, совокупная выручка АО «Ильинская больница» и ООО «Клиник менеджмент групп» в 2025 году составила 4,04 млрд руб., увеличившись год к году на 6%.",
      "source": "https://www.kommersant.ru/doc/8764183",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-22",
      "readings": [
       {
        "ok": false,
        "covers_business": false,
        "other_entities": [
-        "ООО «Клиник менеджмент групп»"
+        "ООО «Клиник менеджмент груп»"
        ],
        "entity": "АО «Ильинская больница»",
        "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ИЛЬИНСКАЯ БОЛЬНИЦА\"",
         "inn": "7707354060",
         "year": 2025,
         "revenue_rub": 3888283000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ИЛЬИНСКАЯ БОЛЬНИЦА\""
+        "operating_profit_rub": 478217000.0
        },
        "quote": "Согласно СПАРК, совокупная выручка АО «Ильинская больница» и ООО «Клиник менеджмент групп» в 2025 году составила 4,04 млрд руб., увеличившись год к году на 6%.",
        "source": "https://www.kommersant.ru/doc/8764183",
@@ -207853,7 +207966,7 @@
      "kind": "negotiations",
      "date": "2026-09-24",
      "title": "Допэмиссию под сделку снова перенесли — на октябрь",
-     "note": "\"Да, она ( допэмиссия - ИФ ) перенеслась, но она будет\", - сказал Костин, отвечая на вопрос, перенеслось ли SPO на октябрь.",
+     "note": "\"Да, она ( допэмиссия — ИФ ) перенеслась, но она будет\", — сказал Костин, отвечая на вопрос, перенеслось ли SPO на октябрь.",
      "source": [
       "Интерфакс",
       "https://www.interfax.ru/business/1118185"
@@ -234110,7 +234223,7 @@
      "kind": "closed",
      "date": "2026-09-16",
      "title": "Сделка завершена",
-     "note": "«Корпорация робототехники» (входит в АФК «Система») купила 51% в компании «Фотомеханика» — производителе решений для автоматизации складов, рассказали “Ъ” в «Корпорации робототехники». Сумму сделки в компании отказались раскрыть.",
+     "note": "«Корпорация робототехники» (входит в АФК «Система») купила 51% в компании «Фотомеханика» — производителе решений для автоматизации складов, рассказали „Ъ“ в «Корпорации робототехники». Сумму сделки в компании отказались раскрыть.",
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/8956273"
@@ -236063,7 +236176,8 @@
      "f86be4cbf456"
     ]
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "followup_researched": "2026-10-22"
   },
   {
    "id": "g1f1d470a",
@@ -236076,17 +236190,21 @@
     [
      "РИА Недвижимость",
      "https://realty.ria.ru/20260922/kraskovo-2119566209.html"
+    ],
+    [
+     "РИАМО",
+     "https://riamo.ru/news/nedvizhimost/domrf-vystavil-na-torgi-kompleks-v-ljuberetskom-okruge/"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Победитель торгов предложил 610,74 миллиона рублей",
+    "sum": "Победитель торгов предложил 610,74 миллиона рублей. Начальная цена лота составляет 278,85 млн рублей",
     "share": "В лот вошли земля 0,93 га и здания на 12,2 тыс. кв. м.",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Ранее проданные на торгах здания в Краскове по адресу: Школьная улица, 2, занимали учебный корпус и общежитие Московского областного филиала «Роскапстроя» — преемника Госакадемии повышения квалификации и переподготовки кадров для строительства и жилищно-коммунального комплекса.",
+    "context": "Ранее проданные на торгах здания в Краскове по адресу: Школьная улица, 2, занимали учебный корпус и общежитие Московского областного филиала «Роскапстроя» — преемника Госакадемии повышения квалификации и переподготовки кадров для строительства и жилищно-коммунального комплекса. По данным министерства жилищной политики области, участок пригоден для офисного или образовательного проекта.",
     "finadv": "—"
    },
    "law": {
@@ -236267,7 +236385,8 @@
     ]
    },
    "proofread": "2026-10-10",
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "followup_researched": "2026-10-22"
   },
   {
    "id": "g685f1e39",
@@ -246014,7 +246133,7 @@
      "kind": "negotiations",
      "date": "2026-10-07",
      "title": "Переговоры",
-     "note": "Основатель ГК «Дело» Сергей Шишкарев, завершивший 7 октября сделку по продаже контрольного пакета группы «Росатому», планирует выкупить у госкорпорации 58,67% Сахалинского морского пароходства (SASCO). Об этом он сообщил в интервью “Ъ”.",
+     "note": "Основатель ГК «Дело» Сергей Шишкарев, завершивший 7 октября сделку по продаже контрольного пакета группы «Росатому», планирует выкупить у госкорпорации 58,67% Сахалинского морского пароходства (SASCO). Об этом он сообщил в интервью „Ъ“.",
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/9008164"
@@ -250784,6 +250903,10 @@
     [
      "Frank Media",
      "https://frankmedia.ru/310222"
+    ],
+    [
+     "MarketPower",
+     "https://marketpower.pro/post/pervyi-i-edinstvennyi-zolotoi-bank-rossii-sozdadut-na-baze-mgkl"
     ]
    ],
    "from_ingest": true,
@@ -250794,7 +250917,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "Инвестор вкладывается, чтобы войти в капитал МГКЛ и профинансировать покупку банка и другие проекты группы.",
-    "context": "—",
+    "context": "МГКЛ рассчитывает не встраивать банк с нуля, а органично вписать его в свою экосистему. По словам гендиректора компании Алексея Лазутина, драгоценные металлы составят основную часть активов банка — не меньше 70%, а новый банк заработает под брендом «ГолдБанк».",
     "finadv": "—"
    },
    "law": {
@@ -250921,7 +251044,8 @@
      ]
     }
    ],
-   "deep_researched": "2026-10-16"
+   "deep_researched": "2026-10-16",
+   "weekly_researched": "2026-10-22"
   },
   {
    "id": "g162de6fb",
@@ -251058,7 +251182,8 @@
     }
    },
    "proofread": "2026-10-15",
-   "deep_researched": "2026-10-16"
+   "deep_researched": "2026-10-16",
+   "weekly_researched": "2026-10-22"
   },
   {
    "id": "g253252c4",
@@ -251196,7 +251321,8 @@
     }
    },
    "proofread": "2026-10-15",
-   "deep_researched": "2026-10-16"
+   "deep_researched": "2026-10-16",
+   "weekly_researched": "2026-10-22"
   },
   {
    "id": "gbe13372d",
@@ -251209,6 +251335,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/9026346"
+    ],
+    [
+     "MarketPower",
+     "https://marketpower.pro/publications/rosimushchestvo-vystavilo-na-torgi-67-aktsii-dalpolimetalla-za-5357-mln"
     ]
    ],
    "from_ingest": true,
@@ -251223,7 +251353,7 @@
     "finadv": "—"
    },
    "law": {
-    "struct": "Торги прошли без конкуренции: РПК была единственным претендентом, и цена не поднялась выше стартовых 553,74 млн ₽. Государству принадлежит 67% акций «Дальполиметалла», а перерегистрация оставшихся 33% пока не завершена.",
+    "struct": "Торги прошли без конкуренции: РПК была единственным претендентом и предложила 553,74 млн ₽ — выше стартовой цены лота, 535,743 млн ₽. Государству принадлежит 67% акций «Дальполиметалла», а перерегистрация оставшихся 33% пока не завершена.",
     "appr": "—",
     "adv": [],
     "terms": "—"
@@ -251268,7 +251398,9 @@
    "proofread_absorbed": {
     "eco.context": [],
     "law.struct": [
-     "f5555523edba"
+     "f5555523edba",
+     "e2702a54e45a",
+     "c303fd28e7b1"
     ],
     "eco.target_fin": [
      "316d068f16af"
@@ -251450,7 +251582,8 @@
    },
    "proofread": "2026-10-15",
    "deep_researched": "2026-10-16",
-   "sum_basis": "auction_start"
+   "sum_basis": "auction_start",
+   "weekly_researched": "2026-10-22"
   },
   {
    "id": "gd09e0945",
@@ -251829,7 +251962,7 @@
   {
    "id": "g8a599c40",
    "date": "2026-10-16",
-   "title": "Активы Tarkett в России переданы во временное управление «Центр Капиталу»",
+   "title": "Указ забрал у Tarkett российские активы — временно управлять ими назначили «Центр Капитал»",
    "ind": "Строительство",
    "type": "Временное управление",
    "status": "Закрыта",
@@ -251952,7 +252085,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "08e29ac4bf0d"
+     "card_hash": "120f361c0a2b"
     },
     "price": {
      "value_rub": null,
@@ -251975,7 +252108,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bf063fcae145"
+     "card_hash": "dd69c207ad55"
     },
     "target": {
      "company_id": null,
@@ -252014,7 +252147,7 @@
   {
    "id": "g19410fc2",
    "date": "2026-10-16",
-   "title": "Активы «Каппа Рус» переданы во временное управление «Центр Капиталу»",
+   "title": "«Каппа Рус» лишилась своих активов — временным управляющим назначен «Центр Капитал»",
    "ind": "Производство тары",
    "type": "Временное управление",
    "status": "Закрыта",
@@ -252127,7 +252260,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "cb80cae45e22"
+     "card_hash": "fe207be3bf2a"
     },
     "price": {
      "value_rub": null,
@@ -252150,7 +252283,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "edb1ee44fee9"
+     "card_hash": "985b1a17737c"
     },
     "target": {
      "company_id": null,
@@ -252362,7 +252495,7 @@
   {
    "id": "gfc3e1ae2",
    "date": "2026-10-16",
-   "title": "Активы «Онтэкс РУ» (бренд Helen Harper) переданы во временное управление «Центр Капиталу»",
+   "title": "Активы бренда Helen Harper («Онтэкс РУ») на время перешли под контроль «Центр Капитала»",
    "ind": "Потребительские товары",
    "type": "Временное управление",
    "status": "Закрыта",
@@ -252481,7 +252614,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "3be933276429"
+     "card_hash": "0bc6b0802d5d"
     },
     "price": {
      "value_rub": null,
@@ -252504,7 +252637,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a589c9fb90ec"
+     "card_hash": "7ad77a795c26"
     },
     "target": {
      "company_id": null,
@@ -254290,7 +254423,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-21"
+   "proofread": "2026-10-21",
+   "deep_researched": "2026-10-22"
   },
   {
    "id": "g09baae21",
@@ -254422,7 +254556,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Fond-Sozidatelnyj-venchur-vlozhilsya-v-razrabotchika-korporativnoj-platformy-dannyh-ANG-Platform-87675"
     ]
-   ]
+   ],
+   "deep_researched": "2026-10-22"
   },
   {
    "id": "g4afd35d0",
@@ -254458,7 +254593,7 @@
     "sum": "Не раскрыта",
     "share": "—",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "По оценке источников, выручка «Библио-Глобуса» в прошлом году достигла 207 млрд ₽, а чистая прибыль — 25 млрд ₽; услугами компании в 2025 году воспользовались более 3 млн человек.",
     "fin": "—",
     "rationale": "Деньги с этой продажи нужны для другой покупки — Шереметьево собирается выкупить у государства его пакет в самом аэропорту.",
     "context": "В августе аэропорт Шереметьево исключили из перечня стратегических предприятий. По данным РБК, среди возможных покупателей — структуры, связанные с Wildberries & Russ (RWB), и претендент не один. Официально покупатель не назван, аэропорт от комментариев отказался. Деньги от продажи, по данным РБК, могут пойти на выкуп блокирующего пакета акций самого аэропорта в рамках его приватизации.",
@@ -254466,7 +254601,7 @@
    },
    "law": {
     "struct": "—",
-    "appr": "—",
+    "appr": "Готовящуюся директиву правительства о продаже доли туроператора подтвердил ещё один источник, знакомый с ситуацией.",
     "adv": [],
     "terms": "—"
    },
@@ -254496,7 +254631,9 @@
     "eco.rationale": [],
     "eco.context": [
      "a117c55661e9"
-    ]
+    ],
+    "eco.target_fin": [],
+    "law.appr": []
    },
    "reviewed": "2026-10-21",
    "sum": "Не раскрыта",
@@ -254569,7 +254706,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "proofread": "2026-10-21"
+   "proofread": "2026-10-21",
+   "deep_researched": "2026-10-22"
   },
   {
    "id": "gc44a1e70",
