@@ -495,7 +495,7 @@
    ]
   },
   {
-   "draft_id": "d49499784",
+   "draft_id": "d98203770",
    "title": "Denum Tech продала платформу POS-кредитования",
    "date": "2026-10-22",
    "src": [
@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d32560776",
+   "draft_id": "d69931409",
    "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
    "date": "2026-10-22",
    "src": [
@@ -562,7 +562,7 @@
    ]
   },
   {
-   "draft_id": "d28474210",
+   "draft_id": "d20544815",
    "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
    "date": "2026-10-22",
    "src": [
@@ -590,7 +590,7 @@
    ]
   },
   {
-   "draft_id": "d69294050",
+   "draft_id": "d42166567",
    "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
    "date": "2026-10-22",
    "src": [
@@ -619,36 +619,7 @@
    ]
   },
   {
-   "draft_id": "d59677254",
-   "title": "Bloomberg: DeepSeek привлек от инвесторов $15 млрд",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9044589"
-    ]
-   ],
-   "sum": "$15 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Bloomberg: DeepSeek",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Bloomberg: DeepSeek",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d34451345",
+   "draft_id": "d19196367",
    "title": "Китайский DeepSeek привлек $15 млрд на последнем этапе финансирования",
    "date": "2026-10-22",
    "src": [
@@ -671,155 +642,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg: DeepSeek привлек от инвесторов $15 млрд» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d27672204",
-   "title": "Баланова объяснила логику M&A-сделок «Национальной медиа группы»",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/media/articles/2026/10/22/1239157-balanova-obyasnila-logiku"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26181018",
-   "title": "Reuters: американцы отказываются от покупки одежды из-за расходов на «Оземпик»",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28241231"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34359114",
-   "title": "Комитет ГД поддержал законопроект о продаже вина РФ онлайн через «Почту России»",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28241011"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90277161",
-   "title": "На Украине стали продавать военнообязанным мужчинам детей для эмиграции",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2188488/na-ukraine-stali-prodavat-voennoobiazannym-muzhchinam-detei-dlia-emigratcii-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87089915",
-   "title": "Российско-Таиландский инвестиционный форум пройдет в Бангкоке",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2188473/2026-10-22/rossiisko-tailandskii-investitcionnyi-forum-proidet-v-bangkoke"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51821028",
+   "draft_id": "d21890254",
    "title": "В ГД рекомендовали принять законопроект о продаже вина через «Почту России»",
    "date": "2026-10-22",
    "src": [
@@ -842,20 +671,18 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Комитет ГД поддержал законопроект о продаже вина РФ онлайн ч» — второе издание, в группу не шлём"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d17126975",
-   "title": "Какие ошибки делают почти все при покупке отпаривателя для дома",
+   "draft_id": "d24862845",
+   "title": "Продажи и производство «Автоваза» могут снизиться на 20-25% до конца года",
    "date": "2026-10-22",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/articles/1053138136"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28241565"
     ]
    ],
    "sum": null,
@@ -873,8 +700,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20554829",
+   "title": "Россия может продавать дизельное топливо Европе, заявил Дмитриев",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261022/dmitriev-2126189455.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

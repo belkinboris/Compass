@@ -1981,29 +1981,23 @@ def test_signals_file_points_to_real_companies_and_sources(base):
     assert len({r["id"] for r in rows}) == len(rows), "повтор id признака"
 
 
-INSIDER_VOICE = re.compile(
-    r"собеседник|по\s+словам\s+(?:двух\s+|нескольких\s+)?источник|источник\w*\s+(?:РБК|«|издания|газеты|агентства)"
-    r"|(?:уточнил|сообщил|рассказал)\w*\s+(?:один\s+из\s+)?источник", re.I)
 
+def test_card_text_follows_the_house_rules(deals):
+    """Правила владельца о тексте — по ЛЮБОМУ пути записи (22 октября 2026).
 
-def test_card_prose_does_not_speak_with_someone_elses_insiders(deals):
-    """Владелец, 22 октября 2026: «собеседник издания говорит» — «это не нам
-    давали интервью. Так может писать РБК, но не мы». Пишем «по данным РБК» или
-    «по неофициальным данным». Держит и разовые скрипты, которые идут мимо
-    prose_gate (так и проскочила карточка «Библио-Глобус»)."""
-    bad = []
-
-    def walk(o, path):
-        if isinstance(o, dict):
-            for k, v in o.items():
-                walk(v, path + "." + k)
-        elif isinstance(o, list):
-            for i, v in enumerate(o):
-                walk(v, "%s[%d]" % (path, i))
-        elif isinstance(o, str):
-            m = INSIDER_VOICE.search(o)
-            if m:
-                bad.append("%s: «%s»" % (path, o[max(0, m.start() - 30):m.end() + 30]))
-    for d in deals:
-        walk({k: d.get(k) for k in ("eco", "law", "extra", "events", "title")}, d["id"])
-    assert not bad, bad[:10]
+    «Собеседник издания говорит» вышло на сайт через разовый скрипт: правило
+    жило только в prose_gate, который проходит review.py. Владелец: «нужно
+    сделать так, чтобы ошибок не возникало — вычитывать любой новый текст на
+    те правила, которые мы установили». Все правила, которым не нужна статья,
+    собраны в pipeline/text_rules.py и проверяются здесь по всей базе.
+    Нарушения, лежавшие в базе до общей проверки, — в text_rules_baseline.json;
+    новое туда не добавлять, а исправлять."""
+    import json as _json
+    from pipeline import text_rules
+    known = set(_json.load(open(text_rules.BASELINE, encoding="utf-8"))["known"])
+    found = text_rules.all_findings({"deals": deals})
+    new = ["%s %s: %s" % (did, f, why) for fp, did, f, code, why in found if fp not in known]
+    assert not new, "текст карточек нарушает правила (pipeline/text_rules.py):\n" + "\n".join(new[:15])
+    gone = known - {fp for fp, *_ in found}
+    assert not gone, ("исправлено %d старых нарушений — уберите их из pipeline/text_rules_baseline.json: "
+                      "python3 pipeline/text_rules.py --rebaseline" % len(gone))
