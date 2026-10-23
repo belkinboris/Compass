@@ -4475,7 +4475,12 @@ def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
       feedQuery = ""; filterInd = "Все"; feedYear = "Все"; filterTheme = "Все"; filterFirm = "Все";
       filterAdvisorGroup = "Все"; onlyFull = false; filterStatus = "Все"; filterType = "Все";
       filterPriced = "Все"; feedFrom = ""; feedTo = "";
-      const d = DEALS.find(x => isListing(x) && x.seller_id && sumState(x.sum)==="known");
+      // Сумма с собственной оговоркой в скобках («… (по оценке)») подписи
+      // «начальная цена» не получает (dealSumHtml) — такой лот не пример.
+      // 23 октября 2026 кампания профилей привязала продавца у оспоренной
+      // продажи Podium Market, и она стала первой в выборке.
+      const d = DEALS.find(x => isListing(x) && x.seller_id && sumState(x.sum)==="known"
+                                && !/\([^()]*\)\s*$/.test(String(x.sum||"")));
       if(!d) return null;
       const row = rowHtml.full(d);
       return {id: d.id, listing: isListing(d), inFeed: unifiedFeedItems().some(it => it.rec.id === d.id),
