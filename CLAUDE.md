@@ -12,6 +12,8 @@
 main.py                       FastAPI: раздача статики, /health, /api/ask,
                               /api/assistant/bench (стенд сравнения моделей, по токену)
 yandex_search.py              обёртка над Яндекс XML-поиском (для ассистента)
+seo_pages.py                  открытые страницы для поисковиков: /deal/<id>, /company/<id>,
+                              /sitemap.xml, /llms.txt (docs/scraping_protection.md)
 assistant_retrieval.py        поиск по базе для ассистента: индекс, маршрут вопроса,
                               точные ответы со ссылками, компактные карточки для модели
 assistant_signals.py          признаки будущих сделок для ассистента (static/data/signals.json,
