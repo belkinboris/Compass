@@ -8472,3 +8472,17 @@ def test_ownership_phrasings_without_buy_or_sell_count_as_deals():
         assert classify.looks_like_deal(t), t
     for t in classify.NOT_DEALS:
         assert not classify.looks_like_deal(t), t
+
+
+def test_a_company_brand_cannot_be_left_without_a_profile():
+    """Владелец 23 октября 2026: «каждый раз когда ты карту делаешь, надо
+    идентифицировать компании». Приёмка отвергала отсрочку профиля только для
+    имени с ООО/АО, и «Газпром добыча Уренгой», Группа «Норебо» прошли с
+    причиной «отдельный профиль не заводится». Бренд — тоже компания."""
+    from pipeline.ingest import accept_card
+    for t in ("«Газпром добыча Уренгой»", "Группа «Норебо»", "ГК «Самолёт»", "Shell", "Prosus N.V."):
+        assert accept_card.single_brand(t), t
+    for t in ("Игорь Гукасян и Андрей Заславский", "Правительство Москвы", "частные инвесторы",
+              "гостиница «Урал» площадью 3 тыс. кв. м", "российские активы «Онтэкс РУ»",
+              "АО «Московский Центр Упаковки» (49%), Ольга Истомина (41%)"):
+        assert not accept_card.single_brand(t), t
