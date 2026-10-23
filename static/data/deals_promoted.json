@@ -5654,14 +5654,44 @@
    "facts": {
     "stake": {
      "value": 50.0,
-     "basis": "rule",
-     "card_hash": "b9701f957bd8"
+     "basis": "verified",
+     "card_hash": "b9701f957bd8",
+     "object": "ООО «БЭСТ»",
+     "event": "signing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "quote": "ПАО \"МКК Займер\" приобрело 50% долей в ООО \"БЭСТ\" - операторе Платежной системы \"БЭСТ\". Соответствующее соглашение подписано между ПАО МКК \"Займер\" и Fusion Factor Fintech Limited (FFF).",
+     "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "value": 50.0,
+       "object": "ООО «БЭСТ»",
+       "event": "signing",
+       "quote": "ПАО \"МКК Займер\" приобрело 50% долей в ООО \"БЭСТ\" - операторе Платежной системы \"БЭСТ\". Соответствующее соглашение подписано между ПАО МКК \"Займер\" и Fusion Factor Fintech Limited (FFF).",
+       "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 50.0,
+       "object": "ООО «БЭСТ»",
+       "event": "closing",
+       "quote": "ПАО \"МКК Займер\" приобрело 50% долей в ООО \"БЭСТ\" - операторе Платежной системы \"БЭСТ\".",
+       "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 587000000.0,
+     "value_rub": 587000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "disputed",
+     "scope": "package",
+     "basis": "verified",
      "card_hash": "897b51a4750b",
      "disputed": [
       {
@@ -5690,19 +5720,20 @@
        "reader": "B"
       }
      ],
-     "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса. Сумма сделки составила 587 млн рублей.",
+     "quote": "Сумма сделки составила 587 млн рублей.",
      "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-16",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 587000000,
-       "meaning": "reported",
-       "attribution": "media_sources",
+       "meaning": "disclosed",
+       "attribution": "parties",
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса. Сумма сделки составила 587 млн рублей.",
+       "quote": "Сумма сделки составила 587 млн рублей.",
+       "attribution_quote": "Как говорится в сообщении",
        "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
        "quote_checked": true,
        "reader": "A"
@@ -5714,13 +5745,30 @@
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "Сумма сделки составила 587 млн рублей. Эта информация приводится в совместном заявлении сторон.",
-       "attribution_quote": "Как говорится в сообщении, на основе «Бэст», банка «Евроальянс» и кошелька Qplus (его компания также развивает вместе с «Киви») планируется постепенно собирать линейку продуктов для этой категории клиентов.",
+       "quote": "Сумма сделки составила 587 млн рублей.",
+       "attribution_quote": "Как говорится в сообщении",
        "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Как говорится в сообщении",
+     "scope_basis": "verified"
     },
     "date": {
      "value": "2026-06-11",
@@ -5728,19 +5776,18 @@
      "basis": "verified",
      "card_hash": "5426060c3639",
      "meaning_variants": [
-      "closing",
       "publication"
      ],
-     "quote": "11 июня 2026 Финансы Mail «Займер» купил половину платежной системы у акционера «Киви»",
-     "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "quote": "Группа \"Займер\" приобрела 50% платежной системы \"БЭСТ\" © ComNews 11.06.2026 ПАО \"МКК Займер\" приобрело 50% долей в ООО \"БЭСТ\" - операторе Платежной системы \"БЭСТ\".",
+     "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
      "verified_by": "model×2",
-     "verified_at": "2026-10-16",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2026-06-11",
-       "meaning": "closing",
-       "quote": "11 июня 2026 Финансы Mail «Займер» купил половину платежной системы у акционера «Киви»",
-       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "meaning": "publication",
+       "quote": "Группа \"Займер\" приобрела 50% платежной системы \"БЭСТ\" © ComNews 11.06.2026 ПАО \"МКК Займер\" приобрело 50% долей в ООО \"БЭСТ\" - операторе Платежной системы \"БЭСТ\".",
+       "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
        "quote_checked": true,
        "reader": "A"
       },
@@ -5755,7 +5802,7 @@
      ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
@@ -5781,29 +5828,30 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "disputed",
-     "quote": "В пресс-релизе уточняется, что «Займер» и FFF продолжат совместно развивать платежную систему на равных условиях.",
-     "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "control_change_basis": "verified",
+     "quote": "совладелец ООО «Бэст» Fusion Factor Fintech Limited, которому до этого момента принадлежало 100% уставного капитала компании, намерены развивать проект на паритетной основе",
+     "source": "https://abn.agency/2026/06/11/zajmer-priobrel-u-vladelczev-kivi-50-platezhnogo-servisa-best/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-16",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "В пресс-релизе уточняется, что «Займер» и FFF продолжат совместно развивать платежную систему на равных условиях.",
-       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote": "совладелец ООО «Бэст» Fusion Factor Fintech Limited, которому до этого момента принадлежало 100% уставного капитала компании, намерены развивать проект на паритетной основе",
+       "source": "https://abn.agency/2026/06/11/zajmer-priobrel-u-vladelczev-kivi-50-platezhnogo-servisa-best/",
        "quote_checked": true,
        "reader": "A"
       },
       {
-       "control_change": true,
+       "control_change": false,
        "intragroup": false,
-       "quote": "Группа «Займер», в которую входит одноименная публичная микрокредитная компания, выкупила половину платежной системы «Бэст». Продавцом выступила компания Fusion Factor Fintech Limited (FFF) — холдинговая структура АО «Киви», которая собрала у себя российские активы группы Qiwi после разделения бизнеса.",
-       "source": "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+       "quote": "Стороны намерены развивать проект на паритетной основе, объединяя инвестиционные, банковские и технологические компетенции ключевых активов.",
+       "source": "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best",
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "intragroup": false
     },
     "target": {
      "company_id": "g6641b140",
@@ -5818,16 +5866,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_disputed",
-     "top_purchases": "price_disputed",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "not_control_change"
     }
    },
    "date_basis": "publication"
@@ -6051,8 +6099,37 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "d8adcdd4674d"
+     "basis": "verified",
+     "card_hash": "d8adcdd4674d",
+     "object": "«Авто.ру»",
+     "event": "signing",
+     "event_variants": [
+      "signing"
+     ],
+     "quote": "Входящее в «Т-технологии» ООО «Т-авто» выкупит 100% «Авто.ру».",
+     "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "«Авто.ру»",
+       "event": "signing",
+       "quote": "Входящее в «Т-технологии» ООО «Т-авто» выкупит 100% «Авто.ру».",
+       "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "Авто.ру",
+       "event": "signing",
+       "quote": "покупают «Авто.ру» у «Яндекса», которому принадлежит 100% сервиса. Входящее в «Т-технологии» ООО «Т-авто» выкупит 100% «Авто.ру».",
+       "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 35000000000,
@@ -6069,7 +6146,6 @@
      ],
      "event": "signing",
      "event_variants": [
-      "announcement",
       "signing"
      ],
      "terms": "fixed",
@@ -6080,13 +6156,13 @@
      "quote": "Сумма сделки составит 35 млрд руб. В «Т-технологиях» сообщили «Ведомостям», что для ее финансирования используются заемные средства.",
      "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
      "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 35000000000,
        "meaning": "disclosed",
        "attribution": "parties",
-       "event": "announcement",
+       "event": "signing",
        "scope": "equity",
        "terms": "fixed",
        "quote": "Сумма сделки составит 35 млрд руб. В «Т-технологиях» сообщили «Ведомостям», что для ее финансирования используются заемные средства.",
@@ -6102,11 +6178,13 @@
        "scope": "equity",
        "terms": "fixed",
        "quote": "Сумма сделки составит 35 млрд руб. В «Т-технологиях» сообщили «Ведомостям», что для ее финансирования используются заемные средства.",
+       "attribution_quote": "В «Т-технологиях» сообщили «Ведомостям», что для ее финансирования используются заемные средства.",
        "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "attribution_quote": "В «Т-технологиях» сообщили «Ведомостям», что для ее финансирования используются заемные средства."
     },
     "date": {
      "value": "2026-06-02",
@@ -6116,15 +6194,15 @@
      "meaning_variants": [
       "closing"
      ],
-     "quote": "2 июня 2026, 20:05 5 805 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+     "quote": "2 июня 2026, 20:05 5 814 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
      "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2026-06-02",
        "meaning": "closing",
-       "quote": "2 июня 2026, 20:05 5 805 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+       "quote": "2 июня 2026, 20:05 5 814 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
        "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
        "quote_checked": true,
        "reader": "A"
@@ -6132,8 +6210,8 @@
       {
        "value": "2026-06-02",
        "meaning": "closing",
-       "quote": "Все необходимые согласования уже сделаны, одобрение Федеральной антимонопольной службы получено, указывают в компании \"Т-Технологии\" 2 июня 2026 года, во вторник.",
-       "source": "https://profile.ru/news/economy/t-tehnologii-zakryli-sdelku-po-pokupke-avto-ru-za-35-mlrd-rublej-1866906/",
+       "quote": "2 июня 2026, 20:05 5 814 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+       "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -6150,24 +6228,24 @@
      "card_hash": "3a42bdb3ddd9",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "ICPJSC T-Technologies has closed a deal to purchase 100% of the Auto.ru group, the T-Technologies group said in a statement.",
-     "source": "https://interfax.com/newsroom/top-stories/117888/",
+     "quote": "«Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+     "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "ICPJSC T-Technologies has closed a deal to purchase 100% of the Auto.ru group, the T-Technologies group said in a statement.",
-       "source": "https://interfax.com/newsroom/top-stories/117888/",
+       "quote": "«Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+       "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "По условиям сделки, входящее в группу ООО «Т-Авто» приобретает у «Яндекса» 100% группы компаний «Авто.ру» и включает в себя: сервис объявлений «Авто.ру», а также журнал «Авто.ру», UGC-платформу для общения автовладельцев «Бортжурнал», и раздел «Гараж»; B2B-платформу «Авто.ру Бизнес»; F&I-платформу (finance & insurance) для автодилеров «еКредит».",
-       "source": "https://www.kommersant.ru/doc/8514776",
+       "quote": "2 июня 2026, 20:05 5 814 Поделиться «Яндекс» продал «Авто.ру» за 35 млрд рублей компании из группы «Т-Технологии» «Яндекс» закрыл сделку по продаже бизнеса «Авто.ру». Новым владельцем стал «Т-Авто» , который входит в группу «Т-Технологии» .",
+       "source": "https://www.retail.ru/news/yandeks-prodal-avto-ru-za-35-mlrd-rubley-kompanii-iz-gruppy-t-tekhnologii-2-iyunya-2026-278436/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -6180,8 +6258,84 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "a28e0a9ebf00"
+     "perimeter": "disputed",
+     "card_hash": "a28e0a9ebf00",
+     "disputed": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Сервисы размещения объявлений»"
+       ],
+       "entity": "ООО «Сервисы размещения объявлений» (бренд «Авто.ру»)",
+       "report": {
+        "inn": "7704366364",
+        "year": 2025,
+        "revenue_rub": 4271796000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"АВТО.РУ\""
+       },
+       "quote": "По данным «СПАРК-Интерфакс», нынешнее юрлицо проекта, ООО «Сервисы размещения объявлений» («Авто.ру»), было зарегистрировано в ноябре 2023 года.",
+       "source": "https://www.kommersant.ru/doc/8514776",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "Авто.ру",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"АВТО.РУ\"",
+        "inn": "7704366364",
+        "year": 2025,
+        "revenue_rub": 4271796000.0
+       },
+       "quote": "В «Авто.ру» входит одноименный сервис объявлений, B2B-платформа «Авто.ру бизнес», F&I-платформа (finance & insurance) для автодилеров «еКредит».",
+       "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "По данным «СПАРК-Интерфакс», нынешнее юрлицо проекта, ООО «Сервисы размещения объявлений» («Авто.ру»), было зарегистрировано в ноябре 2023 года.",
+     "source": "https://www.kommersant.ru/doc/8514776",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Сервисы размещения объявлений»"
+       ],
+       "entity": "ООО «Сервисы размещения объявлений» (бренд «Авто.ру»)",
+       "report": {
+        "inn": "7704366364",
+        "year": 2025,
+        "revenue_rub": 4271796000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"АВТО.РУ\""
+       },
+       "quote": "По данным «СПАРК-Интерфакс», нынешнее юрлицо проекта, ООО «Сервисы размещения объявлений» («Авто.ру»), было зарегистрировано в ноябре 2023 года.",
+       "source": "https://www.kommersant.ru/doc/8514776",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "Авто.ру",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"АВТО.РУ\"",
+        "inn": "7704366364",
+        "year": 2025,
+        "revenue_rub": 4271796000.0
+       },
+       "quote": "В «Авто.ру» входит одноименный сервис объявлений, B2B-платформа «Авто.ру бизнес», F&I-платформа (finance & insurance) для автодилеров «еКредит».",
+       "source": "https://www.vedomosti.ru/auto/articles/2026/03/18/1183755-t-tehnologii-avtoru",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -6195,7 +6349,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "multiple_text": "perimeter_not_verified"
     }
    },
    "discovery_src": [
@@ -36141,14 +36295,44 @@
    "facts": {
     "stake": {
      "value": 49.0,
-     "basis": "rule",
-     "card_hash": "530595e060f4"
+     "basis": "verified",
+     "card_hash": "530595e060f4",
+     "object": "ООО «Лаявожнефтегаз»",
+     "event": "closing",
+     "event_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Дочерняя компания «ЛУКОЙЛа», ООО «ЛУКОЙЛ-Коми», купила у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз», доведя свою долю до 50%.",
+     "source": "https://smart-lab.ru/blog/news/816003.php",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "value": 49.0,
+       "object": "ООО «Лаявожнефтегаз»",
+       "event": "closing",
+       "quote": "Дочерняя компания «ЛУКОЙЛа», ООО «ЛУКОЙЛ-Коми», купила у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз», доведя свою долю до 50%.",
+       "source": "https://smart-lab.ru/blog/news/816003.php",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 49.0,
+       "object": "ООО «Лаявожнефтегаз»",
+       "event": "announcement",
+       "quote": "Дочерняя компания «ЛУКОЙЛа», ООО «ЛУКОЙЛ-Коми», купила у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз», доведя свою долю до 50%.",
+       "source": "https://smart-lab.ru/blog/news/816003.php",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 11436000000,
      "meaning": "disclosed",
      "scope": "package",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "bc93b1711d2b",
      "meaning_variants": [
       "disclosed"
@@ -36157,10 +36341,9 @@
      "attribution_variants": [
       "parties"
      ],
-     "event": "closing",
+     "event": "announcement",
      "event_variants": [
-      "announcement",
-      "closing"
+      "announcement"
      ],
      "terms": "fixed",
      "terms_variants": [
@@ -36169,19 +36352,19 @@
      "scope_basis": "verified",
      "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
      "source": "https://rossaprimavera.ru/news/83e3efa8",
-     "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 11436000000,
        "meaning": "disclosed",
        "attribution": "parties",
-       "event": "closing",
+       "event": "announcement",
        "scope": "package",
        "terms": "fixed",
        "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
        "source": "https://rossaprimavera.ru/news/83e3efa8",
-       "quote_checked": true,
+       "quote_checked": null,
        "reader": "A"
       },
       {
@@ -36192,31 +36375,33 @@
        "scope": "package",
        "terms": "fixed",
        "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
+       "attribution_quote": "30 июня сообщила пресс-служба «Газпрома».",
        "source": "https://rossaprimavera.ru/news/83e3efa8",
-       "quote_checked": true,
+       "quote_checked": null,
        "reader": "B"
       }
-     ]
+     ],
+     "attribution_quote": "30 июня сообщила пресс-служба «Газпрома»."
     },
     "date": {
      "value": "2022-06-30",
      "meaning": "announcement",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "7214065da7bd",
      "meaning_variants": [
       "announcement"
      ],
      "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
      "source": "https://rossaprimavera.ru/news/83e3efa8",
-     "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2022-06-30",
        "meaning": "announcement",
        "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
        "source": "https://rossaprimavera.ru/news/83e3efa8",
-       "quote_checked": true,
+       "quote_checked": null,
        "reader": "A"
       },
       {
@@ -36224,7 +36409,7 @@
        "meaning": "announcement",
        "quote": "За 11,436 млрд рублей приобрела у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз» дочерняя компания «Лукойла», ООО «Лукойл-Коми», 30 июня сообщила пресс-служба «Газпрома».",
        "source": "https://rossaprimavera.ru/news/83e3efa8",
-       "quote_checked": true,
+       "quote_checked": null,
        "reader": "B"
       }
      ]
@@ -36240,24 +36425,24 @@
      "card_hash": "124e0f520d87",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "ЛУКОЙЛ получил во владение дополнительно 49% ООО \"Лаявожнефтегаз\". Согласно данным ЕГРЮЛ владельцем доли является дочка нефтяного гиганта - ООО \"ЛУКОЙЛ-Коми\". Таким образом доля ЛУКОЙЛа увеличилась до 50% и сравнялась с другим совладельцем – ООО \"Газпром добыча Краснодар\".",
-     "source": "https://www.akm.ru/news/lukoyl_stal_ravnopravnym_sovladeltsem_layavozhneftegaza/",
+     "quote": "С 1 до 50% увеличилось долевое участие компании «Лукойл-Коми» в СП «Лаявожнефтегаз» в результате выплаты партнёру-совладельцу «Газпрому» 11,436 млрд рублей.",
+     "source": "https://dprom.online/mtindustry/dolevoe-uchastie-v-deyatelnosti-sp-layavozhneftegaz-stalo-ravnoznachnym/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "ЛУКОЙЛ получил во владение дополнительно 49% ООО \"Лаявожнефтегаз\". Согласно данным ЕГРЮЛ владельцем доли является дочка нефтяного гиганта - ООО \"ЛУКОЙЛ-Коми\". Таким образом доля ЛУКОЙЛа увеличилась до 50% и сравнялась с другим совладельцем – ООО \"Газпром добыча Краснодар\".",
-       "source": "https://www.akm.ru/news/lukoyl_stal_ravnopravnym_sovladeltsem_layavozhneftegaza/",
+       "quote": "С 1 до 50% увеличилось долевое участие компании «Лукойл-Коми» в СП «Лаявожнефтегаз» в результате выплаты партнёру-совладельцу «Газпрому» 11,436 млрд рублей.",
+       "source": "https://dprom.online/mtindustry/dolevoe-uchastie-v-deyatelnosti-sp-layavozhneftegaz-stalo-ravnoznachnym/",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "Таким образом доля «Лукойла» в совместном предприятии составила 50%, сообщили в «Газпроме».",
-       "source": "https://rossaprimavera.ru/news/83e3efa8",
+       "quote": "С 1 до 50% увеличилось долевое участие компании «Лукойл-Коми» в СП «Лаявожнефтегаз» в результате выплаты партнёру-совладельцу «Газпрому» 11,436 млрд рублей.",
+       "source": "https://dprom.online/mtindustry/dolevoe-uchastie-v-deyatelnosti-sp-layavozhneftegaz-stalo-ravnoznachnym/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -36270,8 +36455,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "e4d2fa75feec"
+     "perimeter": "verified",
+     "card_hash": "e4d2fa75feec",
+     "perimeter_entity": "ООО «Лаявожнефтегаз»",
+     "perimeter_report": {
+      "inn": "2983013832",
+      "year": 2021,
+      "revenue_rub": 0.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЛАЯВОЖНЕФТЕГАЗ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Дочерняя компания «ЛУКОЙЛа», ООО «ЛУКОЙЛ-Коми», купила у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз», доведя свою долю до 50%.",
+     "source": "https://smart-lab.ru/blog/news/816003.php",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Лаявожнефтегаз»",
+       "report": {
+        "inn": "2983013832",
+        "year": 2021,
+        "revenue_rub": 0.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЛАЯВОЖНЕФТЕГАЗ\""
+       },
+       "quote": "Дочерняя компания «ЛУКОЙЛа», ООО «ЛУКОЙЛ-Коми», купила у ООО «Газпром добыча Краснодар» 49% в совместном предприятии ООО «Лаявожнефтегаз», доведя свою долю до 50%.",
+       "source": "https://smart-lab.ru/blog/news/816003.php",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Лаявожнефтегаз»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЛАЯВОЖНЕФТЕГАЗ\"",
+        "inn": "2983013832",
+        "year": 2021,
+        "revenue_rub": 0.0
+       },
+       "quote": "С 1 до 50% увеличилось долевое участие компании «Лукойл-Коми» в СП «Лаявожнефтегаз» в результате выплаты партнёру-совладельцу «Газпрому» 11,436 млрд рублей.",
+       "source": "https://dprom.online/mtindustry/dolevoe-uchastie-v-deyatelnosti-sp-layavozhneftegaz-stalo-ravnoznachnym/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -43633,7 +43864,7 @@
    "sum": "$800 тыс.",
    "eco": {
     "sum": "$800 тыс.",
-    "share": "основатели сохраняли 80% компании, инвесторам принадлежало 20% (Ведомости, ноябрь 2021).",
+    "share": "По состоянию на ноябрь 2021 года основатели сохраняли 80% компании, инвесторам принадлежало 20%.",
     "val": "$800 тыс. (ФРИИ — $500 тыс. в роли лид-инвестора, Sistema SmartTech — $300 тыс.)",
     "target_fin": "ежемесячной выручки при росте 50% в месяц.",
     "fin": "—",
@@ -43688,7 +43919,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "b3f1547e6f67"
+     "card_hash": "9056055840d3"
     },
     "price": {
      "value_rub": 59485280,
@@ -43742,7 +43973,11 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "proofread_absorbed": {
+    "eco.share": []
+   },
+   "reviewed": "2026-10-23"
   },
   {
    "id": "g17babf0c",
@@ -64220,7 +64455,7 @@
      "quote": "Сумма сделки, в результате которой долю получила «дочка» «Росатома», не разглашается.",
      "source": "https://www.atomic-energy.ru/news/2022/04/19/123959",
      "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": null,
@@ -64251,15 +64486,15 @@
     "date": {
      "value": "2022-02",
      "meaning": "closing",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "d79178bcc635",
      "meaning_variants": [
       "closing"
      ],
      "quote": "Сделка состоялась в феврале 2022 года, ее стоимость составила 20,2 млрд рублей.",
      "source": "https://habr.com/ru/news/659953/",
-     "verified_by": "model×1",
-     "verified_at": "2026-10-13",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2022-02",
@@ -64268,6 +64503,14 @@
        "source": "https://habr.com/ru/news/659953/",
        "quote_checked": true,
        "reader": "A"
+      },
+      {
+       "value": "2022-02",
+       "meaning": "closing",
+       "quote": "Сделка состоялась в феврале 2022 года, ее стоимость составила 20,2 млрд рублей.",
+       "source": "https://habr.com/ru/news/659953/",
+       "quote_checked": true,
+       "reader": "B"
       }
      ]
     },
@@ -64282,23 +64525,23 @@
      "card_hash": "916cf601adce",
      "intragroup": false,
      "control_change_basis": "read",
-     "quote": "Контроль в группе госкорпорация получила через АО «Группа ЭйТи» – холдинговую компанию AT Consulting.",
-     "source": "https://www.atomic-energy.ru/news/2022/04/19/123959",
+     "quote": "По информации издания «Интерфакс», компания «Атомэнергопром» (входит в госкорпорацию «Росатом») купила IT-интегратора AT Consulting.",
+     "source": "https://habr.com/ru/news/659953/",
      "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Контроль в группе госкорпорация получила через АО «Группа ЭйТи» – холдинговую компанию AT Consulting.",
-       "source": "https://www.atomic-energy.ru/news/2022/04/19/123959",
-       "quote_checked": null,
+       "quote": "По информации издания «Интерфакс», компания «Атомэнергопром» (входит в госкорпорацию «Росатом») купила IT-интегратора AT Consulting.",
+       "source": "https://habr.com/ru/news/659953/",
+       "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Доля в группе компаний приобретена у её основателя Сергея Шилова и Евгения Жуланова.",
+       "quote": "Русатом – Цифровые решения (ООО, входит в «Росатом») приобрело контрольный пакет акций группы компаний AT Consulting.",
        "source": "https://www.atomic-energy.ru/news/2022/04/19/123959",
        "quote_checked": null,
        "reader": "B"
@@ -64312,8 +64555,70 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "ec6c9ebe8efe"
+     "perimeter": "refuted",
+     "card_hash": "ec6c9ebe8efe",
+     "perimeter_entity": "АО «Группа ЭйТи»",
+     "perimeter_report": {
+      "inn": "7715834960",
+      "year": 2021,
+      "revenue_rub": 6893000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГРУППА ЭЙТИ\""
+     },
+     "perimeter_other_entities": [
+      "ООО «ЭйТи Консалтинг»",
+      "ООО «Р.Т Решения»",
+      "ООО «Философия.ИТ»",
+      "ООО «Тектус.ИТ»",
+      "ООО «ЭйТи Сибирь»",
+      "ООО «ЭйТи Сервис»"
+     ],
+     "quote": "ООО «ЭйТи Консалтинг» входит в АО «Группа ЭйТи», 50% которого у гендиректора компании Сергея Шилова и 50% — у Дмитрия Потапова. АО владеет также ООО «Р.Т Решения», ООО «Философия.ИТ», ООО «Тектус.ИТ», ООО «ЭйТи Сибирь» и ООО «ЭйТи Сервис».",
+     "source": "https://www.kommersant.ru/doc/5140121",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «ЭйТи Консалтинг»",
+        "ООО «Р.Т Решения»",
+        "ООО «Философия.ИТ»",
+        "ООО «Тектус.ИТ»",
+        "ООО «ЭйТи Сибирь»",
+        "ООО «ЭйТи Сервис»"
+       ],
+       "entity": "АО «Группа ЭйТи»",
+       "report": {
+        "inn": "7715834960",
+        "year": 2021,
+        "revenue_rub": 6893000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГРУППА ЭЙТИ\""
+       },
+       "quote": "ООО «ЭйТи Консалтинг» входит в АО «Группа ЭйТи», 50% которого у гендиректора компании Сергея Шилова и 50% — у Дмитрия Потапова. АО владеет также ООО «Р.Т Решения», ООО «Философия.ИТ», ООО «Тектус.ИТ», ООО «ЭйТи Сибирь» и ООО «ЭйТи Сервис».",
+       "source": "https://www.kommersant.ru/doc/5140121",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "AT Consulting (группа из 15 компаний, 6 юрлиц прямо под контролем «Группы ЭйТи», по именам не названы)"
+       ],
+       "entity": "АО «Группа ЭйТи»",
+       "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГРУППА ЭЙТИ\"",
+        "inn": "7715834960",
+        "year": 2021,
+        "revenue_rub": 6893000.0
+       },
+       "quote": "В группу AT Consulting входят 15 компаний. Прямо под контролем «Группы ЭйТи» находятся шесть юрлиц.",
+       "source": "https://www.atomic-energy.ru/news/2022/04/19/123959",
+       "quote_checked": null,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -85634,8 +85939,37 @@
    "facts": {
     "stake": {
      "value": 39.0,
-     "basis": "rule",
-     "card_hash": "4bcc0f173d8c"
+     "basis": "verified",
+     "card_hash": "4bcc0f173d8c",
+     "object": "ООО «Медскан Лаб»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "value": 39.0,
+       "object": "ООО «Медскан Лаб»",
+       "event": "closing",
+       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 39.0,
+       "object": "ООО «Медскан Лаб»",
+       "event": "closing",
+       "quote": "Из состава учредителей ООО «Медскан Лаб», управляющей сетью лабораторий KDL, вышло ООО «Сбербанк Инвестиции». Организация передала 39% долей головной компании – АО «Медскан».",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 4767000000,
@@ -85658,12 +85992,12 @@
      "terms_variants": [
       "unknown"
      ],
-     "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+     "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации",
      "scope_basis": "verified",
      "quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
      "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 4767000000,
@@ -85685,7 +86019,7 @@
        "scope": "package",
        "terms": "unknown",
        "quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
-       "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации, соглашения о продаже доли и расторжении опциона между сторонами были подписаны 17 октября 2025 года, а сумма сделки составляет 4,767 млрд рублей.",
+       "attribution_quote": "Согласно данным Центра раскрытия корпоративной информации",
        "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
        "quote_checked": true,
        "reader": "B"
@@ -85703,7 +86037,7 @@
      "quote": "По итогам сделки, закрытой 24 октября 2025 года, «Медскан» получил «полный контроль над активом в виде сети лабораторий KDL».",
      "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2025-10-24",
@@ -85737,7 +86071,7 @@
      "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
      "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
      "verified_by": "model×2",
-     "verified_at": "2026-09-06",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": false,
@@ -85750,8 +86084,8 @@
       {
        "control_change": false,
        "intragroup": false,
-       "quote": "ООО «Сбербанк Инвестиции» передало принадлежащие ему 39% ООО «Медскан Лаб» основному владельцу — АО «Медскан».",
-       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote": "ООО «Сбербанк Инвестиции» вошло в состав учредителей «Медскан Лаб» в 2023 году, приобретя 49% за 2,75 млрд рублей. Спустя два месяца «Сбер» вернул головной компании 10% долей, сохранив за собой 39%.",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -85764,8 +86098,66 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "2bb157d3c4e7"
+     "perimeter": "refuted",
+     "card_hash": "2bb157d3c4e7",
+     "perimeter_entity": "ООО «Медскан Лаб»",
+     "perimeter_report": {
+      "inn": "9717118570",
+      "year": 2024,
+      "revenue_rub": 127050000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"МЕДСКАН ЛАБ\""
+     },
+     "perimeter_other_entities": [
+      "ООО «Диагностика»",
+      "ООО «КДЛ Домодедово-тест»",
+      "ООО «КДЛ Тест»"
+     ],
+     "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
+     "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Диагностика»",
+        "ООО «КДЛ Домодедово-тест»",
+        "ООО «КДЛ Тест»"
+       ],
+       "entity": "ООО «Медскан Лаб»",
+       "report": {
+        "inn": "9717118570",
+        "year": 2024,
+        "revenue_rub": 127050000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"МЕДСКАН ЛАБ\""
+       },
+       "quote": "Само ООО «Медскан Лаб» деятельности не ведёт, в её штате числится один сотрудник. Основным активом компании является доля размером 99.99% в ООО «Диагностика», которое, в свою очередь, владеет двумя компаниями, оказывающими услуги медицинских лабораторий — ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест».",
+       "source": "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Диагностика»",
+        "ООО «КДЛ Домодедово-тест»",
+        "ООО «КДЛ Тест»"
+       ],
+       "entity": "ООО «Медскан Лаб»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"МЕДСКАН ЛАБ\"",
+        "inn": "9717118570",
+        "year": 2024,
+        "revenue_rub": 127050000.0
+       },
+       "quote": "ООО «Медскан Лаб», зарегистрированное в 2022 году в Москве, является головной компанией ООО «Диагностика» (доля 99,99%), владеющей ООО «КДЛ Домодедово-тест» и ООО «КДЛ Тест». По данным СПАРК-Интерфакс, за 2024 год выручка компании «Медскан Лаб» достигла 127 млн рублей при чистом убытке 5,7 млн рублей.",
+       "source": "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -94473,15 +94865,14 @@
      "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
      "source": "https://www.kommersant.ru/doc/7752617",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 450000000,
        "meaning": "disclosed",
-       "scope": "unknown",
        "attribution": "unknown",
-       "attribution_quote": null,
        "event": "closing",
+       "scope": "unknown",
        "terms": "unknown",
        "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
        "source": "https://www.kommersant.ru/doc/7752617",
@@ -94491,13 +94882,12 @@
       {
        "value_rub": 450000000,
        "meaning": "disclosed",
-       "scope": "unknown",
        "attribution": "unknown",
        "event": "closing",
+       "scope": "unknown",
        "terms": "unknown",
        "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
        "source": "https://www.kommersant.ru/doc/7752617",
-       "attribution_quote": null,
        "quote_checked": true,
        "reader": "B"
       }
@@ -94527,7 +94917,7 @@
      "quote": "Дмитрий Камаев Мединдустрия Инвестиции 22 мая 2025, 17:19",
      "source": "https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2025-05-22",
@@ -94571,15 +94961,15 @@
      "card_hash": "f64547a9d6fd",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
+     "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб. Теперь уже бывший владелец «Русмеда» Дмитрий Маргасов сообщил ИА «Стационар-пресс»",
      "source": "https://www.kommersant.ru/doc/7752617",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
+       "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб. Теперь уже бывший владелец «Русмеда» Дмитрий Маргасов сообщил ИА «Стационар-пресс»",
        "source": "https://www.kommersant.ru/doc/7752617",
        "quote_checked": true,
        "reader": "A"
@@ -94587,8 +94977,8 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Федеральная сеть частных клиник АО «ГК \"Медси\"» приобрела клинико-диагностический центр «Русмед» на Окском съезде в Нижнем Новгороде за 450 млн руб.",
-       "source": "https://www.kommersant.ru/doc/7752617",
+       "quote": "Группа компаний «Медси» сообщила о возвращении на рынок частных клиник Нижегородской области. Компания приобрела многопрофильный медцентр со стационаром «РУСMED», вложив в его открытие 450 млн рублей.",
+       "source": "https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/",
        "quote_checked": true,
        "reader": "B"
       }
@@ -94608,13 +94998,19 @@
      "quote": "По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.",
      "source": "https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "ok": false,
-       "entity": "ООО «Русмед»",
        "covers_business": false,
        "other_entities": [],
+       "entity": "ООО «Русмед»",
+       "report": {
+        "inn": "5260446420",
+        "year": 2024,
+        "revenue_rub": 333004000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"РУСМЕД\""
+       },
        "quote": "По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.",
        "source": "https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/",
        "quote_checked": true,
@@ -94622,14 +95018,19 @@
       },
       {
        "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "не названы по именам — источник использует множественное число «юрлиц «РУСMED»», не раскрывая вторую компанию"
+       ],
        "entity": "ООО «Русмед»",
+       "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"РУСМЕД\"",
+        "inn": "5260446420",
+        "year": 2024,
+        "revenue_rub": 333004000.0
+       },
        "quote": "По итогам 2024 года выручка юрлиц «РУСMED» составила 389 млн рублей.",
        "source": "https://vademec.ru/news/2025/05/22/gk-medsi-priobrela-kliniku-v-nizhnem-novgorode-za-450-mln-rubley/",
-       "report": {
-        "inn": "5260446420",
-        "year": 2024
-       },
-       "covers_business": false,
        "quote_checked": true,
        "reader": "B"
       }
@@ -94658,7 +95059,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "perimeter_report": {
+      "inn": "5260446420",
+      "year": 2024,
+      "revenue_rub": 333004000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"РУСМЕД\""
+     }
     },
     "admitted": {
      "count": true,
@@ -137269,9 +137676,38 @@
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
-     "value": 100.0,
-     "basis": "rule",
-     "card_hash": "fec99f9d9b2e"
+     "value": 77.5,
+     "basis": "verified",
+     "card_hash": "004f6e9a1f3e",
+     "object": "ГК «Агро-Белогорье»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "«Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье».",
+     "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
+     "readings": [
+      {
+       "value": 77.5,
+       "object": "ГК «Агро-Белогорье»",
+       "event": "closing",
+       "quote": "«Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье».",
+       "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 77.5,
+       "object": "ГК «Агро-Белогорье»",
+       "event": "closing",
+       "quote": "«Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье».",
+       "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 31000000000,
@@ -137296,10 +137732,10 @@
       "paid"
      ],
      "scope_basis": "verified",
-     "quote": "Один из крупнейших российских производителей сахара, свинины и масложировой продукции – «Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье».",
+     "quote": "Один из крупнейших российских производителей сахара, свинины и масложировой продукции – «Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье». Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
      "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 31000000000,
@@ -137308,8 +137744,7 @@
        "event": "closing",
        "scope": "package",
        "terms": "paid",
-       "quote": "Один из крупнейших российских производителей сахара, свинины и масложировой продукции – «Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье».",
-       "attribution_quote": "Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
+       "quote": "Один из крупнейших российских производителей сахара, свинины и масложировой продукции – «Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье». Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
        "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
        "quote_checked": true,
        "reader": "A"
@@ -137321,8 +137756,8 @@
        "event": "closing",
        "scope": "package",
        "terms": "includes_contingent",
-       "quote": "«Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье». Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
-       "attribution_quote": "«Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье». Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
+       "quote": "Один из крупнейших российских производителей сахара, свинины и масложировой продукции – «Русагро» заплатила 31 млрд руб. в качестве вознаграждения за 77,5% в агропромышленной группе «Агро-Белогорье». Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
+       "attribution_quote": "Об этом говорится в аудированной отчетности за первое полугодие 2025 г.",
        "source": "https://www.vedomosti.ru/business/articles/2025/09/26/1142111-rusagro-raskrila-summu-voznagrazhdeniya-za-dolyu-v-agro-belogore",
        "quote_checked": true,
        "reader": "B"
@@ -137344,28 +137779,29 @@
     },
     "date": {
      "value": "2024-11-13",
-     "meaning": "publication",
-     "basis": "disputed",
-     "card_hash": "3cd8a2d308e9",
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "124e67199f7a",
      "meaning_variants": [
-      "publication"
+      "announcement",
+      "closing"
      ],
-     "quote": "Москва. 12 ноября. INTERFAX.RU - ГК \"Русагро\" , один из ведущих агрохолдингов РФ, закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\", сообщает компания.",
-     "source": "https://www.interfax.ru/business/991408",
+     "quote": "13 ноября ГК \"Русагро\" сообщила, что закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\".",
+     "source": "https://www.interfax.ru/business/995716",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
-       "value": "2024-11-12",
+       "value": "2024-11-13",
        "meaning": "announcement",
-       "quote": "Москва. 12 ноября. INTERFAX.RU - ГК \"Русагро\" , один из ведущих агрохолдингов РФ, закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\", сообщает компания.",
-       "source": "https://www.interfax.ru/business/991408",
+       "quote": "13 ноября ГК \"Русагро\" сообщила, что закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\".",
+       "source": "https://www.interfax.ru/business/995716",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": "2024-11-13",
-       "meaning": "publication",
+       "meaning": "closing",
        "quote": "13 ноября ГК \"Русагро\" сообщила, что закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\".",
        "source": "https://www.interfax.ru/business/995716",
        "quote_checked": true,
@@ -137417,7 +137853,7 @@
      "quote": "ГК \"Русагро\" , один из ведущих агрохолдингов РФ, закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\", сообщает компания.",
      "source": "https://www.interfax.ru/business/991408",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
@@ -137430,8 +137866,8 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "13 ноября ГК \"Русагро\" сообщила, что закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\".",
-       "source": "https://www.interfax.ru/business/995716",
+       "quote": "ГК \"Русагро\" , один из ведущих агрохолдингов РФ, закрыла сделку по консолидации 100% долей ООО \"ГК Агро-Белогорье\", сообщает компания.",
+       "source": "https://www.interfax.ru/business/991408",
        "quote_checked": true,
        "reader": "B"
       }
@@ -137457,7 +137893,7 @@
      "quote": "В состав ООО \"ГК Агро-Белогорье\" входит 20 свиноводческих комплексов, три комбикормовых завода, мясоперерабатывающее производство и земельный банк.",
      "source": "https://www.interfax.ru/business/991408",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "ok": false,
@@ -137478,16 +137914,18 @@
       {
        "ok": false,
        "covers_business": false,
-       "other_entities": [],
+       "other_entities": [
+        "операционные предприятия группы «Агро-Белогорье» (20 свинокомплексов, 3 комбикормовых завода, мясокомбинат) — отдельные юрлица, по именам источники не называют"
+       ],
        "entity": "ООО «ГК Агро-Белогорье»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГК АГРО-БЕЛОГОРЬЕ\"",
         "inn": "3123160948",
         "year": 2023,
-        "revenue_rub": 463254000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГК АГРО-БЕЛОГОРЬЕ\""
+        "revenue_rub": 463254000.0
        },
-       "quote": "В структуру группы компаний «Агро-Белогорье» входят земельный банк, 20 свинокомплексов, три комбикормовых завода и крупный мясокомбинат.",
-       "source": "https://meat-expert.ru/news/19033-rusagro-zaplatila-rub31-mlrd-za-775-v-gruppe-kompanii-agro-belogore",
+       "quote": "В состав ООО \"ГК Агро-Белогорье\" входит 20 свиноводческих комплексов, три комбикормовых завода, мясоперерабатывающее производство и земельный банк.",
+       "source": "https://www.interfax.ru/business/991408",
        "quote_checked": true,
        "reader": "B"
       }
@@ -137496,19 +137934,20 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "date_disputed",
-     "top_purchases": "date_disputed",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
    },
-   "date_basis": "publication"
+   "date_basis": "announcement",
+   "stake_acquired": 77.5
   },
   {
    "id": "g3b91745f",
@@ -158572,28 +159011,28 @@
      "value": 50.1,
      "basis": "verified",
      "card_hash": "ac880fbe51d9",
-     "object": "ГК «Борлас»",
+     "object": "ООО «Борлас АФС»",
      "event": "closing",
      "event_variants": [
       "closing"
      ],
-     "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+     "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
      "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": 50.1,
-       "object": "ГК «Борлас»",
+       "object": "ООО «Борлас АФС»",
        "event": "closing",
-       "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+       "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
        "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": 50.1,
-       "object": "ГК «Борлас»",
+       "object": "«Борлас АФС»",
        "event": "closing",
        "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
        "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
@@ -158623,35 +159062,33 @@
      "meaning_variants": [
       "disclosed"
      ],
-     "attribution": "disputed",
+     "attribution": "parties",
      "attribution_variants": [
-      "filing",
       "parties"
      ],
      "event": "closing",
      "event_variants": [
       "closing"
      ],
-     "terms": "disputed",
+     "terms": "fixed",
      "terms_variants": [
-      "fixed",
-      "unknown"
+      "fixed"
      ],
      "attribution_quote": "Группа компаний « Софтлайн » раскрыла подробности сделки по приобретению контрольной доли в группе « Борлас », занимающейся ИТ-консалтингом .",
      "scope_basis": "verified",
-     "quote": "Покупка контрольной доли группы «Борлас» обошлась «Софтлайну» в 1,62 млрд рублей",
+     "quote": "Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
      "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 1620000000,
        "meaning": "disclosed",
-       "attribution": "filing",
+       "attribution": "parties",
        "event": "closing",
        "scope": "package",
-       "terms": "unknown",
-       "quote": "Покупка контрольной доли группы «Борлас» обошлась «Софтлайну» в 1,62 млрд рублей",
+       "terms": "fixed",
+       "quote": "Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
        "attribution_quote": "Группа компаний « Софтлайн » раскрыла подробности сделки по приобретению контрольной доли в группе « Борлас », занимающейся ИТ-консалтингом .",
        "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
@@ -158664,7 +159101,7 @@
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "Сделка была совершена летом 2023 г. Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
+       "quote": "Тогда «Софтлайн» получила 50,1% в « Борлас АФС » за 1,62 млрд руб. Вся компания была оценена в 3 млрд руб.",
        "attribution_quote": "Группа компаний « Софтлайн » раскрыла подробности сделки по приобретению контрольной доли в группе « Борлас », занимающейся ИТ-консалтингом .",
        "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
@@ -158687,24 +159124,16 @@
     "date": {
      "value": "2023-07-13",
      "meaning": "closing",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "d4829ee49f16",
      "meaning_variants": [
       "closing"
      ],
-     "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
+     "quote": "© ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
      "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
-     "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-23",
      "readings": [
-      {
-       "value": "2023-07-13",
-       "meaning": "closing",
-       "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-       "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
-       "quote_checked": true,
-       "reader": "A"
-      },
       {
        "value": "2023-07-13",
        "meaning": "closing",
@@ -158738,24 +159167,24 @@
      "card_hash": "2d3edf58d7e5",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-     "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
+     "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
+     "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Softline приобрела контрольный пакет ГК Борлас © ComNews 13.07.2023 ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-       "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
+       "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
+       "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "ГК Softline закрыла сделку по приобретению 50,1% доли в ГК \"Борлас\".",
-       "source": "https://www.comnews.ru/content/227406/2023-07-13/2023-w28/softline-priobrela-kontrolnyy-paket-gk-borlas",
+       "quote": "Компания «Софтлайн» потратила 1,62 млрд руб на покупку контрольной доли группы «Борлас», занимающейся внедрением решений на базе «1С». У «Софтлайн» также есть опцион на выкуп доли, остающейся у основателя «Борласа» Алексея Ананьина.",
+       "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
        "quote_checked": true,
        "reader": "B"
       }
@@ -158770,7 +159199,7 @@
      "basis": "registry",
      "perimeter": "refuted",
      "card_hash": "bf0b5644a7cd",
-     "perimeter_entity": "ООО «Группа Борлас»",
+     "perimeter_entity": "ООО «Борлас АФС»",
      "perimeter_report": {
       "inn": "7713619935",
       "year": 2022,
@@ -158778,34 +159207,38 @@
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\""
      },
      "perimeter_other_entities": [
-      "ООО «Борлас АФС»",
       "ООО «Борлас»",
       "ООО «Борлас Секьюрити Системз»",
-      "ООО «Борлас Инженерно технический центр»"
+      "ООО «Борлас АФС»",
+      "ООО «Борлас ИТЦ»",
+      "ООО «ЦЦТ»",
+      "ООО «Эдит Про»"
      ],
-     "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
-     "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
+     "quote": "«Борлас АФС» является управляющей компанией, которой принадлежат все дочерние общества группы « Борлас », утверждает представитель «Эдит про».",
+     "source": "https://www.cnews.ru/news/top/2023-08-28_gendirektor_sozdatelya_sistem",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "ok": false,
        "covers_business": false,
        "other_entities": [
-        "ООО «Борлас АФС»",
         "ООО «Борлас»",
         "ООО «Борлас Секьюрити Системз»",
-        "ООО «Борлас Инженерно технический центр»"
+        "ООО «Борлас АФС»",
+        "ООО «Борлас ИТЦ»",
+        "ООО «ЦЦТ»",
+        "ООО «Эдит Про»"
        ],
-       "entity": "ООО «Группа Борлас»",
+       "entity": "ООО «Борлас АФС»",
        "report": {
         "inn": "7713619935",
         "year": 2022,
         "revenue_rub": 1326985000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\""
        },
-       "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
-       "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
+       "quote": "«Борлас АФС» является управляющей компанией, которой принадлежат все дочерние общества группы « Борлас », утверждает представитель «Эдит про».",
+       "source": "https://www.cnews.ru/news/top/2023-08-28_gendirektor_sozdatelya_sistem",
        "quote_checked": true,
        "reader": "A"
       },
@@ -158819,10 +159252,10 @@
        ],
        "entity": "ООО «Группа Борлас»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\"",
         "inn": "7713619935",
         "year": 2022,
-        "revenue_rub": 1326985000.0,
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГРУППА БОРЛАС\""
+        "revenue_rub": 1326985000.0
        },
        "quote": "В результате сделки «Софтлайн» через «Борлас АС» получила контроль над ООО «Борлас», ООО «Борлас Секьюрити Системз» , ООО «Группа Борлас» и ООО «Борлас Инженерно технический центр».",
        "source": "https://www.cnews.ru/news/top/2024-04-03_softlajn_potratil_16_milliarda",
@@ -158834,16 +159267,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_author_unknown",
-     "top_purchases": "price_author_unknown",
-     "multiple_text": "price_author_unknown"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
    },
    "date_basis": "closing"
@@ -159951,16 +160384,16 @@
      "event_variants": [
       "closing"
      ],
-     "quote": "Представители \"Русагро\" в неофициальном порядке сообщили \"Ъ\", что группа подписала соглашение о приобретении 50% ГК \"НМЖК\" у российских акционеров и получении контроля над бизнесом.",
+     "quote": "ГК \"Русагро\" закрыла сделку по покупке 50% акций ГК \"НМЖК\" Москва.",
      "source": "https://www.interfax.ru/business/909101",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": 50.0,
        "object": "ГК «НМЖК»",
        "event": "closing",
-       "quote": "Представители \"Русагро\" в неофициальном порядке сообщили \"Ъ\", что группа подписала соглашение о приобретении 50% ГК \"НМЖК\" у российских акционеров и получении контроля над бизнесом.",
+       "quote": "ГК \"Русагро\" закрыла сделку по покупке 50% акций ГК \"НМЖК\" Москва.",
        "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "A"
@@ -159969,8 +160402,8 @@
        "value": 50.0,
        "object": "ГК «НМЖК»",
        "event": "closing",
-       "quote": "ГК \"Русагро\" закрыла сделку по покупке 50% акций ГК \"НМЖК\"",
-       "source": "https://www.interfax.ru/business/948846",
+       "quote": "ГК \"Русагро\" закрыла сделку по покупке 50% акций ГК \"НМЖК\" Москва.",
+       "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "B"
       }
@@ -159989,13 +160422,13 @@
      }
     },
     "price": {
-     "value_rub": null,
-     "meaning": "estimate",
+     "value_rub": 20964500000,
+     "meaning": "disclosed",
      "scope": "package",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "24c47da1ebcf",
      "meaning_variants": [
-      "estimate"
+      "disclosed"
      ],
      "attribution": "filing",
      "attribution_variants": [
@@ -160009,22 +160442,34 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "INTERFAX.RU - Стоимость сделки по покупке группой \"Русагро\" в 2023 году 50% НМЖК составила 20 млрд 964,5 млн рублей, сообщается в консолидированной отчетности группы.",
-     "scope_basis": "read",
-     "quote": "ГК \"Русагро\" заплатила за 50% НМЖК почти за 21 млрд рублей",
+     "attribution_quote": "сообщается в консолидированной отчетности группы",
+     "scope_basis": "verified",
+     "quote": "Стоимость сделки по покупке группой \"Русагро\" в 2023 году 50% НМЖК составила 20 млрд 964,5 млн рублей, сообщается в консолидированной отчетности группы.",
      "source": "https://www.interfax.ru/business/948846",
-     "verified_by": "model×1",
-     "verified_at": "2026-10-14",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-23",
      "readings": [
       {
-       "value_rub": 21000000000,
-       "meaning": "estimate",
+       "value_rub": 20964500000,
+       "meaning": "disclosed",
        "attribution": "filing",
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "quote": "ГК \"Русагро\" заплатила за 50% НМЖК почти за 21 млрд рублей",
-       "attribution_quote": null,
+       "quote": "Стоимость сделки по покупке группой \"Русагро\" в 2023 году 50% НМЖК составила 20 млрд 964,5 млн рублей, сообщается в консолидированной отчетности группы.",
+       "source": "https://www.interfax.ru/business/948846",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 20964500000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Стоимость сделки по покупке группой \"Русагро\" в 2023 году 50% НМЖК составила 20 млрд 964,5 млн рублей, сообщается в консолидированной отчетности группы. Сделка была закрыта 28 июня 2023 года.",
+       "attribution_quote": "сообщается в консолидированной отчетности группы",
        "source": "https://www.interfax.ru/business/948846",
        "quote_checked": true,
        "reader": "B"
@@ -160054,7 +160499,7 @@
      "quote": "Сделка была закрыта 28 июня 2023 года.",
      "source": "https://www.interfax.ru/business/948846",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2023-06-28",
@@ -160067,7 +160512,7 @@
       {
        "value": "2023-06-28",
        "meaning": "closing",
-       "quote": "Сделка была закрыта 28 июня 2023 года.",
+       "quote": "Стоимость сделки по покупке группой \"Русагро\" в 2023 году 50% НМЖК составила 20 млрд 964,5 млн рублей, сообщается в консолидированной отчетности группы. Сделка была закрыта 28 июня 2023 года.",
        "source": "https://www.interfax.ru/business/948846",
        "quote_checked": true,
        "reader": "B"
@@ -160097,15 +160542,15 @@
      "card_hash": "adedd3c0b49a",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Представители \"Русагро\" в неофициальном порядке сообщили \"Ъ\", что группа подписала соглашение о приобретении 50% ГК \"НМЖК\" у российских акционеров и получении контроля над бизнесом.",
+     "quote": "ГК \"Русагро\" , крупный производитель масложировой продукции в РФ, договорилась о получении контроля в ГК \"НМЖК\", в которую входят два масложировых комбината в Нижнем Новгороде и Самаре, маслоэкстракционные заводы в Урюпинске и Сорочинске, а также элеваторы.",
      "source": "https://www.interfax.ru/business/909101",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Представители \"Русагро\" в неофициальном порядке сообщили \"Ъ\", что группа подписала соглашение о приобретении 50% ГК \"НМЖК\" у российских акционеров и получении контроля над бизнесом.",
+       "quote": "ГК \"Русагро\" , крупный производитель масложировой продукции в РФ, договорилась о получении контроля в ГК \"НМЖК\", в которую входят два масложировых комбината в Нижнем Новгороде и Самаре, маслоэкстракционные заводы в Урюпинске и Сорочинске, а также элеваторы.",
        "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "A"
@@ -160113,8 +160558,8 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "\"Контроль над НМЖК позволит группе занять ключевые позиции в основных сегментах рынка масел и жиров b2c и стать производителем майонеза и майонезных соусов №1 в России, - говорится в отчетности.",
-       "source": "https://www.interfax.ru/business/948846",
+       "quote": "ГК \"Русагро\" , крупный производитель масложировой продукции в РФ, договорилась о получении контроля в ГК \"НМЖК\", в которую входят два масложировых комбината в Нижнем Новгороде и Самаре, маслоэкстракционные заводы в Урюпинске и Сорочинске, а также элеваторы.",
+       "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "B"
       }
@@ -160137,22 +160582,18 @@
       "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"НИЖЕГОРОДСКИЙ МАСЛО-ЖИРОВОЙ КОМБИНАТ\""
      },
      "perimeter_other_entities": [
-      "ПКФ «Профит»",
-      "АО «Жировой комбинат»",
-      "АО ТД «НМЖК»"
+      "ПКФ «Профит»"
      ],
-     "quote": "В НМЖК входят предприятия в Нижнем Новгороде, Самаре, Урюпинске и Сорочинске.",
-     "source": "https://www.kommersant.ru/doc/6069244",
+     "quote": "Об этом могут свидетельствовать и данные ЕГРЮЛ, согласно которым с 23 июня этого года гендиректором ПКФ \"Профит\", владеющей предприятиями НМЖК, стал Ян Кубинский",
+     "source": "https://www.interfax.ru/business/909101",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "ok": false,
        "covers_business": false,
        "other_entities": [
-        "ПКФ «Профит»",
-        "АО «Жировой комбинат»",
-        "АО ТД «НМЖК»"
+        "ПКФ «Профит»"
        ],
        "entity": "АО «Нижегородский масло-жировой комбинат»",
        "report": {
@@ -160161,24 +160602,30 @@
         "revenue_rub": 47727684000.0,
         "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"НИЖЕГОРОДСКИЙ МАСЛО-ЖИРОВОЙ КОМБИНАТ\""
        },
-       "quote": "В НМЖК входят предприятия в Нижнем Новгороде, Самаре, Урюпинске и Сорочинске.",
-       "source": "https://www.kommersant.ru/doc/6069244",
+       "quote": "Об этом могут свидетельствовать и данные ЕГРЮЛ, согласно которым с 23 июня этого года гендиректором ПКФ \"Профит\", владеющей предприятиями НМЖК, стал Ян Кубинский",
+       "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "ok": false,
        "covers_business": false,
-       "other_entities": [],
+       "other_entities": [
+        "масложировой комбинат в Самаре",
+        "маслоэкстракционный завод в Урюпинске",
+        "маслоэкстракционный завод в Сорочинске",
+        "элеваторы",
+        "ПКФ «Профит» (владеющая предприятиями НМЖК)"
+       ],
        "entity": "АО «Нижегородский масло-жировой комбинат»",
        "report": {
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"НИЖЕГОРОДСКИЙ МАСЛО-ЖИРОВОЙ КОМБИНАТ\"",
         "inn": "5257003806",
         "year": 2021,
-        "revenue_rub": 47727684000.0,
-        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"НИЖЕГОРОДСКИЙ МАСЛО-ЖИРОВОЙ КОМБИНАТ\""
+        "revenue_rub": 47727684000.0
        },
-       "quote": "Группа компаний «НМЖК» — вертикально интегрированный холдинг, в состав которого входят два перерабатывающих масложировых комбината в Нижнем Новгороде и Самаре,три маслоэкстракционные заводы в Оренбурге, Урюпинске и Сорочинске, элеваторы в Волгоградской, Самарской, Оренбургской и Саратовской областях и в республике Башкортостан.",
-       "source": "https://www.tadviser.ru/index.php/Компания:Нижегородский_масло-жировой_комбинат_(ГК_НМЖК)",
+       "quote": "ГК \"Русагро\" , крупный производитель масложировой продукции в РФ, договорилась о получении контроля в ГК \"НМЖК\", в которую входят два масложировых комбината в Нижнем Новгороде и Самаре, маслоэкстракционные заводы в Урюпинске и Сорочинске, а также элеваторы.",
+       "source": "https://www.interfax.ru/business/909101",
        "quote_checked": true,
        "reader": "B"
       }
@@ -160199,16 +160646,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "perimeter_not_verified"
     }
    },
    "date_basis": "closing"
@@ -167027,23 +167474,23 @@
      "event_variants": [
       "announcement"
      ],
-     "quote": "Как сообщалось, в январе 2023 года \"Горные вершины\" подали в ФАС ходатайство о приобретении 100%-й доли в капитале УК \"Архыз\".",
+     "quote": "\"Кавказ.РФ\" в январе 2023 года открыл сбор заявок для участия в конкурсе на покупку 100% акций АО \"Управляющая компания \"Архыз\".",
      "source": "https://www.interfax.ru/business/889290",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": 100.0,
        "object": "АО «Управляющая компания «Архыз»»",
        "event": "announcement",
-       "quote": "Как сообщалось, в январе 2023 года \"Горные вершины\" подали в ФАС ходатайство о приобретении 100%-й доли в капитале УК \"Архыз\".",
+       "quote": "\"Кавказ.РФ\" в январе 2023 года открыл сбор заявок для участия в конкурсе на покупку 100% акций АО \"Управляющая компания \"Архыз\".",
        "source": "https://www.interfax.ru/business/889290",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "value": 100.0,
-       "object": "АО «Управляющая компания «Архыз»",
+       "object": "АО «Управляющая компания «Архыз»»",
        "event": "announcement",
        "quote": "\"Кавказ.РФ\" в январе 2023 года открыл сбор заявок для участия в конкурсе на покупку 100% акций АО \"Управляющая компания \"Архыз\".",
        "source": "https://www.interfax.ru/business/889290",
@@ -167077,7 +167524,7 @@
      "quote": "Краснодарское ООО \"Горные вершины\" стало победителем конкурса на покупку курорта \"Архыз\" в Карачаево-Черкесии, предложив 24,2 млрд рублей.",
      "source": "https://www.interfax.ru/business/889290",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value_rub": 24200000000,
@@ -167098,7 +167545,7 @@
        "attribution": "registry",
        "event": "announcement",
        "scope": "equity",
-       "terms": "fixed",
+       "terms": "includes_contingent",
        "quote": "Краснодарское ООО \"Горные вершины\" стало победителем конкурса на покупку курорта \"Архыз\" в Карачаево-Черкесии, предложив 24,2 млрд рублей.",
        "attribution_quote": "Как сообщается в конкурсной документации, вторым участником торгов являлось недавно созданное АО \"Партнерс Групп\" (Москва).",
        "source": "https://www.interfax.ru/business/889290",
@@ -167114,9 +167561,8 @@
      "event_variants": [
       "announcement"
      ],
-     "terms": "disputed",
+     "terms": "includes_contingent",
      "terms_variants": [
-      "fixed",
       "includes_contingent"
      ],
      "attribution_quote": "Как сообщается в конкурсной документации, вторым участником торгов являлось недавно созданное АО \"Партнерс Групп\" (Москва).",
@@ -167144,7 +167590,7 @@
      "quote": "Подведение итогов торгов состоялось 1 марта.",
      "source": "https://www.interfax.ru/business/889290",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "value": "2023-03-01",
@@ -167188,7 +167634,7 @@
      "quote": "Краснодарское ООО \"Горные вершины\" стало победителем конкурса на покупку курорта \"Архыз\" в Карачаево-Черкесии, предложив 24,2 млрд рублей.",
      "source": "https://www.interfax.ru/business/889290",
      "verified_by": "model×2",
-     "verified_at": "2026-10-18",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "control_change": true,
@@ -167217,13 +167663,13 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "disputed",
+     "perimeter": "refuted",
      "card_hash": "a8d4b5a33eb0",
      "perimeter_entity": "АО «Управляющая компания «Архыз»»",
      "quote": "\"Кавказ.РФ\" в январе 2023 года открыл сбор заявок для участия в конкурсе на покупку 100% акций АО \"Управляющая компания \"Архыз\".",
      "source": "https://www.interfax.ru/business/889290",
      "verified_by": "model×2",
-     "verified_at": "2026-10-17",
+     "verified_at": "2026-10-23",
      "readings": [
       {
        "ok": false,
@@ -167240,14 +167686,14 @@
        "reader": "A"
       },
       {
-       "ok": true,
-       "covers_business": true,
+       "ok": false,
+       "covers_business": false,
        "other_entities": [],
        "entity": "АО «Управляющая компания «Архыз»»",
        "report": {
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КУРОРТ\"",
         "inn": "0900013563",
-        "note": "подходящего отчёта нет",
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КУРОРТ\""
+        "note": "подходящего отчёта нет"
        },
        "quote": "\"Кавказ.РФ\" в январе 2023 года открыл сбор заявок для участия в конкурсе на покупку 100% акций АО \"Управляющая компания \"Архыз\".",
        "source": "https://www.interfax.ru/business/889290",
@@ -167298,6 +167744,12 @@
        "У отчёта задания нет выручки («подходящего отчёта нет»), сверка порядка величины невозможна. Оплата пакета разделена на два этапа (25% сразу, 75% при выполнении инвестобязательств в 2030–2037 гг.) — terms: includes_contingent. Все перечисленные активы (канатные дороги, трассы, здания) принадлежат/арендуются именно АО «УК «Архыз»» — других юрлиц в периметре источник не называет.",
        "Perimeter null: источники называют продаваемое юрлицо «АО Управляющая компания «Архыз»», а отчёт задания на тот же ИНН указывает другое юрлицо и другую организационно-правовую форму («ООО «Курорт»», без выручки) — тождество юрлиц источниками не устанавливается, а подходящего отчёта с выручкой в задании нет."
       ]
+     },
+     "perimeter_report": {
+      "inn": "0900013563",
+      "year": null,
+      "revenue_rub": null,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КУРОРТ\""
      }
     },
     "admitted": {
@@ -236937,7 +237389,8 @@
    "proofread": "2026-10-21",
    "deep_researched": "2026-10-21",
    "weekly_researched": "2026-10-21",
-   "second_read": "2026-10-23"
+   "second_read": "2026-10-23",
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "g076af76a",
@@ -236960,7 +237413,7 @@
     "target_fin": "По итогам 2025 года компания получила 80 млн ₽ убытка, выручка снизилась до 56 млн ₽.",
     "fin": "—",
     "rationale": "Деньги пойдут на развитие новой B2C-модели и выкуп долей у ранних миноритариев.",
-    "context": "KAMA FLOW продала часть своей доли с фиксацией дохода, но осталась в капитале «Здоровье.ру». Вместе с «АЮР Капитал» группа KAMA FLOW продолжит участвовать в развитии бизнеса.",
+    "context": "KAMA FLOW продала часть своей доли с фиксацией дохода, но осталась в капитале «Здоровье.ру». Вместе с «АЮР Капитал» группа KAMA FLOW продолжит участвовать в развитии бизнеса. В феврале 2022 года «Медси» собиралась инвестировать в «Здоровье города» 135 млн руб. при оценке 1,135 млрд руб. и доле 12%, но сделка не состоялась.",
     "finadv": "—"
    },
    "law": {
@@ -237086,7 +237539,9 @@
      "e18ab04144e7"
     ],
     "eco.context": [
-     "4e80d7a5f8b0"
+     "4e80d7a5f8b0",
+     "da884ebc2051",
+     "7f338e6b50c2"
     ],
     "eco.rationale": [
      "4240b1e326a5"
@@ -237105,7 +237560,8 @@
      "Mergers.ru",
      "https://mergers.ru/news/Platforma-Zdoroveru-zakryla-sdelku-po-vykupu-rannih-investorov-i-privlekla-investicii-na-masshtabirovanie-novoj-biznes-modeli-87557"
     ]
-   ]
+   ],
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "g4b00b18e",
@@ -237370,7 +237826,8 @@
    },
    "proofread": "2026-10-10",
    "sum_basis": "reported",
-   "buyer": "g021348d9"
+   "buyer": "g021348d9",
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "gb7ea4703",
@@ -237656,7 +238113,8 @@
    },
    "proofread": "2026-10-10",
    "sum_basis": "range",
-   "date_basis": "publication"
+   "date_basis": "publication",
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "g69c83a3f",
@@ -237924,7 +238382,8 @@
    "proofread": "2026-10-10",
    "sum_basis": "reported",
    "date_basis": "publication",
-   "buyer": "g49451913"
+   "buyer": "g49451913",
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "gd8faa2c4",
@@ -237949,6 +238408,10 @@
     [
      "ПРАЙМ",
      "https://1prime.ru/20260915/eks-gendirektor-873314968.html"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261020/vs-874421554.html"
     ]
    ],
    "from_ingest": true,
@@ -237964,7 +238427,7 @@
    },
    "law": {
     "struct": "В этом иске, поданном в феврале прошлого года, Оксана и Павел Хейфицы потребовали признать недействительным договор от 27 января 2025 года, по которому Хугаева продала Николаеву 99,9% компании, и попросили применить последствия недействительности сделки в виде возвращения этой доли Хугаевой. Как пояснил источник, требование о применении последствий суд удовлетворил частично, а именно вернул Хугаевой 49,9%, а 50% передал Хейфиц.",
-    "appr": "Кассационная жалоба Николаева на решения нижестоящих судов (признавших законным декабрьский договор с Хейфиц) поступила в Верховный суд 11 сентября 2026 года, решений по ней пока не принято. Отдельно кассационную жалобу с просьбой отменить обеспечительные меры (запрет Николаеву распоряжаться долей 99,9% и правами на сами препараты) 4 сентября 2026 года подал сам «Инфамед» — тоже пока не рассмотрена.",
+    "appr": "Кассационную жалобу Николаева на решения нижестоящих судов (признавших законным декабрьский договор с Хейфиц) Верховный суд отклонил — судья Елена Борисова не нашла оснований для пересмотра дела Судебной коллегией по экономическим спорам. Отдельно кассационную жалобу с просьбой отменить обеспечительные меры (запрет Николаеву распоряжаться долей 99,9% и правами на сами препараты) 4 сентября подал сам «Инфамед» — пока не рассмотрена. Решение о возврате доли Хейфиц в силу пока не вступило.",
     "adv": [],
     "terms": "В обоснование заявления о принятии обеспечительных мер Хейфиц сослалась на то, что ответчиками совершаются действия, «явно противоречащие закону» и уже заключённому в нотариальном порядке договору с истцом. В частности, она обращает внимание на двойную продажу доли в ООО «Инфамед»."
    },
@@ -238100,7 +238563,11 @@
     }
    },
    "weekly_researched": "2026-09-30",
-   "proofread": "2026-09-30"
+   "proofread": "2026-09-30",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "g4d017d5c",
@@ -238253,7 +238720,8 @@
    },
    "proofread": "2026-10-10",
    "seller_id": "g9de072a3",
-   "buyer": "g9461a524"
+   "buyer": "g9461a524",
+   "followup_researched": "2026-10-23"
   },
   {
    "id": "ga7020b5e",
@@ -239493,6 +239961,10 @@
     [
      "ТАСС",
      "https://tass.ru/ekonomika/28159199"
+    ],
+    [
+     "АБН 24",
+     "https://abireg.ru/newsitem/118807-metro-perechislila-milliard-rubley-na-podderzhku-svo-posle-peredachi-rossiyskikh-aktivov-vo/"
     ]
    ],
    "from_ingest": true,
@@ -239522,6 +239994,16 @@
      "source": [
       "РИА Новости",
       "https://ria.ru/20260928/metro--2120739862.html"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-10-23",
+     "title": "METRO перечислила 1 млрд ₽ в фонд «Народный фронт»",
+     "note": "Деньги пойдут на транспорт, связь и оборудование против беспилотников для участников СВО, часть — на гуманитарные цели; перевод стал известен менее чем через месяц после передачи активов METRO во временное управление, но источник прямой связи между событиями не называет.",
+     "source": [
+      "АБН 24",
+      "https://abireg.ru/newsitem/118807-metro-perechislila-milliard-rubley-na-podderzhku-svo-posle-peredachi-rossiyskikh-aktivov-vo/"
      ]
     }
    ],
@@ -239560,7 +240042,7 @@
      "value": "2026-09-28",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "8859c0db58be"
+     "card_hash": "1cb5a76858fe"
     },
     "nature": {
      "control_change": false,
@@ -249557,7 +250039,7 @@
   {
    "id": "gbd59b112",
    "date": "2026-10-12",
-   "title": "«Дом.РФ» выставил на торги биржевой корпус XIX века в Томске",
+   "title": "В Томске на продажу выставлен биржевой корпус XIX века от «Дом.РФ»",
    "ind": "Недвижимость",
    "type": "Продажа с торгов",
    "status": "Обсуждается",
@@ -249644,7 +250126,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "92d25bcc6f63"
+     "card_hash": "a51be9c3ee7f"
     },
     "price": {
      "value_rub": 41230000.0,
@@ -249667,7 +250149,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "97dda6124a5d"
+     "card_hash": "ff89415bb073"
     },
     "target": {
      "company_id": null,
@@ -250415,7 +250897,7 @@
   {
    "id": "g83ad1f72",
    "date": "2026-10-13",
-   "title": "Вячеслав Шикулов выкупил остаток «Чемодан Про» — бывшего российского бизнеса Samsonite",
+   "title": "Бывший российский бизнес Samsonite, «Чемодан Про», полностью перешёл Вячеславу Шикулову",
    "ind": "Ритейл",
    "type": "M&A",
    "status": "Закрыта",
@@ -250514,7 +250996,7 @@
     "stake": {
      "value": 30.0,
      "basis": "rule",
-     "card_hash": "63b33a7e8e00"
+     "card_hash": "e89d4e5e34e1"
     },
     "price": {
      "value_rub": null,
@@ -250537,7 +251019,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "be2356c80b5a"
+     "card_hash": "72c549f6e6b3"
     },
     "target": {
      "company_id": "g0b5326aa",
@@ -251455,7 +251937,7 @@
   {
    "id": "g0158e326",
    "date": "2026-10-15",
-   "title": "Крупный инвестор обсуждает вход в капитал МГКЛ для покупки банка",
+   "title": "В капитал МГКЛ может войти крупный инвестор — ради покупки банка",
    "ind": "Финансовые услуги",
    "type": "Инвестиция",
    "status": "Обсуждается",
@@ -251535,7 +252017,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "0138fa4d6850"
+     "card_hash": "5e80d51d7a30"
     },
     "price": {
      "value_rub": null,
@@ -251558,7 +252040,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1eb55f5f0623"
+     "card_hash": "dad37ee33cbd"
     },
     "target": {
      "company_id": "g41f567f1",
@@ -251891,7 +252373,7 @@
   {
    "id": "gbe13372d",
    "date": "2026-10-15",
-   "title": "«Русская промышленная компания» выкупила у государства 67% акций ГМК «Дальполиметалл»",
+   "title": "Государство продало РПК контрольный пакет акций ГМК «Дальполиметалл» (67%)",
    "ind": "ГМК и добыча",
    "type": "Продажа с торгов",
    "status": "Закрыта",
@@ -251995,7 +252477,7 @@
     "stake": {
      "value": 67.0,
      "basis": "rule",
-     "card_hash": "76dc5f9b18b4"
+     "card_hash": "e8196bb16f5a"
     },
     "price": {
      "value_rub": null,
@@ -252093,9 +252575,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7c953f5a3606",
+     "card_hash": "9d092d23a98a",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "АО «Русская промышленная компания» (РПК) признано победителем торгов по продаже 67% акций ГМК «Дальполиметалл», производителя цинкового и свинцового концентратов с содержанием серебра в Приморском крае.",
      "source": "https://www.kommersant.ru/doc/9026346",
      "verified_by": "model×2",
@@ -252391,7 +252873,8 @@
     ]
    },
    "extra": "По собственным данным «Леста Игр», в 2025 году у трёх игр студии — «Мир танков», «Мир кораблей» и Tanks Blitz — было 6,5 млн игроков в месяц.",
-   "deep_researched": "2026-10-17"
+   "deep_researched": "2026-10-17",
+   "weekly_researched": "2026-10-23"
   },
   {
    "id": "gba764f10",
@@ -252421,7 +252904,7 @@
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "Торги проведут по голландской схеме — с понижением цены от стартовых 161,8 млн ₽ до нижней планки 64,7 млн ₽; заявки принимаются до 6 ноября, аукцион назначен на 12 ноября."
    },
    "sum": "161,8 млн ₽",
    "seller": "Фонд развития территорий",
@@ -252521,7 +253004,11 @@
     }
    },
    "proofread": "2026-10-16",
-   "deep_researched": "2026-10-17"
+   "deep_researched": "2026-10-17",
+   "proofread_absorbed": {
+    "law.terms": []
+   },
+   "weekly_researched": "2026-10-23"
   },
   {
    "id": "g8a599c40",
@@ -255305,6 +255792,10 @@
     [
      "Smart-Lab",
      "https://smart-lab.ru/company/mgkl/blog/1365264.php"
+    ],
+    [
+     "MarketPower",
+     "https://marketpower.pro/post/eto-baibek-da-eto-baibek"
     ]
    ],
    "from_ingest": true,
@@ -255314,7 +255805,7 @@
     "val": "—",
     "target_fin": "Чистая прибыль МГКЛ по МСФО за первое полугодие 2026 года выросла на 34% год к году, до 553 млн ₽. Выручка выросла в 2,7 раза, до 27 млрд ₽, EBITDA — на 63%, до 1,81 млрд ₽.",
     "fin": "—",
-    "rationale": "Увеличение доли — его личное инвестиционное решение, к программе байбэка группы оно отношения не имеет: тот выкуп ведёт отдельная дочерняя компания.",
+    "rationale": "Увеличение доли — его личное инвестиционное решение, к программе байбэка группы оно отношения не имеет: тот выкуп ведёт стопроцентная «дочка» МГКЛ — ООО «Команда МГКЛ».",
     "context": "Акции он приобрёл не на бирже, а через внебиржевые сделки.",
     "finadv": "—"
    },
@@ -255346,7 +255837,10 @@
    },
    "proofread_absorbed": {
     "eco.share": [],
-    "eco.rationale": [],
+    "eco.rationale": [
+     "2a9b68229c68",
+     "a46349751195"
+    ],
     "eco.target_fin": [],
     "eco.context": []
    },
@@ -255418,12 +255912,13 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "deep_researched": "2026-10-23"
   },
   {
    "id": "g29d48d22",
    "date": "2026-10-22",
-   "title": "«Дом.РФ» выставил на торги право заключения договоров КРТ в Иркутской области",
+   "title": "В Иркутской области на торги выставлено право на комплексное развитие территории от «Дом.РФ»",
    "ind": "Недвижимость",
    "type": "Продажа с торгов",
    "status": "Обсуждается",
@@ -255497,7 +255992,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "2a7a4aeeb5e8"
+     "card_hash": "ce6625681e75"
     },
     "price": {
      "value_rub": null,
@@ -255520,7 +256015,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "421c63f1ebe4"
+     "card_hash": "c89969d85cdc"
     },
     "target": {
      "company_id": null,
@@ -255547,12 +256042,13 @@
      "multiple_text": "not_control_change"
     }
    },
-   "proofread": "2026-10-22"
+   "proofread": "2026-10-22",
+   "deep_researched": "2026-10-23"
   },
   {
    "id": "ge881187c",
    "date": "2026-06-30",
-   "title": "«Северная верфь» продала «Норебо» три недостроенных траулера по инвестквотам",
+   "title": "«Норебо» выкупил у «Северной верфи» три незавершённых траулера, строившихся по инвестквотам",
    "ind": "Машиностроение",
    "type": "M&A",
    "status": "Закрыта",
@@ -255660,7 +256156,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "25ee3accc191"
+     "card_hash": "68e0401ecf6f"
     },
     "price": {
      "value_rub": null,
@@ -255683,7 +256179,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "b7057f62b849"
+     "card_hash": "e13d4b8262ba"
     },
     "target": {
      "company_id": null,
