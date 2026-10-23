@@ -73,6 +73,37 @@
     "needs_review": true
    },
    "queued": "2026-10-23"
+  },
+  {
+   "key": "https://abireg.ru/newsitem/118785-metalloinvest-vlozhil-okolo-8-mlrd-rubley-v-modernizatsiyu-ustanovki-metallizatsii-na-oemk/::g3629ebb7",
+   "candidate_id": "g3629ebb7",
+   "reason": "общие редкие слова: вложил, рублей",
+   "draft": {
+    "draft_id": "d19918622",
+    "title": "«Металлоинвест» вложил около 8 млрд рублей в модернизацию установки металлизации на ОЭМК в Белгородской области",
+    "date": "2026-10-23",
+    "src": [
+     [
+      "web:abireg.ru",
+      "https://abireg.ru/newsitem/118785-metalloinvest-vlozhil-okolo-8-mlrd-rubley-v-modernizatsiyu-ustanovki-metallizatsii-na-oemk/"
+     ]
+    ],
+    "sum": "8 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "«Металлоинвест»",
+    "asset": "модернизация установки металлизации на ОЭМК в Белгородской области",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Металлоинвест»",
+     "asset": "модернизация установки металлизации на ОЭМК в Белгородской области",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-23"
   }
  ]
 }

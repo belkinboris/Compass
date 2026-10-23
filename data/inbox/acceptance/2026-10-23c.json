@@ -1,0 +1,16 @@
+[
+ {"id": "g6a917c05",
+  "verdict": "accept",
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "profiles": [
+   {"role": "target", "id": "g54191496"},
+   {"role": "buyer", "id": "gd04d6868"}
+  ],
+  "no_inn": {
+   "target": "ООО «ФЛГ» — искали по ЕГРЮЛ (attempt_public_egrul_match, бесплатный поиск egrul.nalog.ru): точного единственного совпадения нет, в строку реестра не заносим.",
+   "buyer": "brainbox_I — искали по ЕГРЮЛ (attempt_public_egrul_match): точного единственного совпадения нет; фонд оформлен как посевной венчурный фонд экосистемы Brainbox без явного юрлица в источнике, в строку реестра не заносим."
+  },
+  "notes": "Источник — один телеграм-пост (t.me/rusven/7805), прочитан целиком, фактов хватает. ИНН ООО «ФЛГ» и юрлица фонда brainbox_I искали по ЕГРЮЛ (attempt_public_egrul_match) — однозначного совпадения нет, профили заведены без ИНН, как и у похожих карточек того же канала (Swordfish Security, «Аргумент-Байт», «Созидательный венчур»)."
+ }
+]
