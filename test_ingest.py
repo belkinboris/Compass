@@ -8420,3 +8420,15 @@ def test_reporting_verb_with_what_in_the_middle_is_not_a_party():
     buyer, asset, seller, _ = draft.guess_parties(
         "СМИ сообщили, что Маск инвестировал около $1 млрд в Skydance")
     assert buyer is None, buyer
+
+
+def test_stake_entry_into_a_project_counts_as_a_deal():
+    """23 октября 2026: «Структуры «Ареал» вошли в золотодобывающий проект в
+    Карелии» (Коммерсантъ, 75% ООО «Аврора-Ресурс») прошло мимо фильтра:
+    «вошли» во множественном числе и «проект» вместо «капитала»."""
+    import classify
+    assert classify.looks_like_deal("Структуры «Ареал» вошли в золотодобывающий проект в Карелии")
+    assert classify.looks_like_deal("Фонд получил 25% в разработчике ПО")
+    for t in ("Россия вошла в топ-10 стран по добыче", "Игрок вошёл в историю клуба",
+              "Глава банка вошёл в состав совета директоров"):
+        assert not classify.looks_like_deal(t), t
