@@ -14270,6 +14270,20 @@ REGISTRY += [
      "date": '2026-10-23'},
 ]
 
+# Приёмка карточки gf31c1d53 — 2026-10-23 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g680e39d6', "decision": "confirmed", "inn": '2451000818',
+     "reason": 'Приёмка карточки gf31c1d53 (2026-10-23): юрлицо ОАО «Красцветмет» (полное имя — ОАО «Красноярский завод цветных металлов имени В. Н. Гулидова») названо читателем; ИНН и ОГРН 1022402056324 — по карточке ЕГРЮЛ на datanewton.ru (egrul.nalog.ru из песочницы недоступен).',
+     "date": '2026-10-23'},
+]
+
+# Приёмка карточки gf31c1d53 — 2026-10-23 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g7fc08823', "decision": "confirmed", "inn": '4415007628',
+     "reason": 'Приёмка карточки gf31c1d53 (2026-10-23): юрлицо ООО Ювелирный завод «ПАРС» названо читателем; ИНН и ОГРН 1144437001851 — по карточке ЕГРЮЛ на datanewton.ru (egrul.nalog.ru из песочницы недоступен), адрес — пгт Красное-на-Волге, участник 100% — Явуз Атак.',
+     "date": '2026-10-23'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 

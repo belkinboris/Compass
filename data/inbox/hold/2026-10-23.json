@@ -535,30 +535,47 @@
    ]
   },
   {
-   "draft_id": "d63758081",
-   "title": "Vonovia может потерять более 8 млрд евро в случае национализации квартир в Берлине",
+   "draft_id": "d30605695",
+   "title": "Ракеточный подъем // Инвестиции в развитие падела в России превысили 20 млрд рублей",
    "date": "2026-10-23",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1124605"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9059325"
     ]
    ],
-   "sum": "€8 млрд",
+   "sum": "20 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27603840",
+   "title": "Настоящий петербургский. Какое жилье строят в Московском районе и кто его покупает",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/10/23/76720782/"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-23",
-     "title": "Переговоры",
-     "note": "Vonovia SE, крупнейший в Европе владелец арендного жилья, может потерять более 8 млрд евро из-за планов национализации недвижимости в Берлине, пишет Financial Times.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1124605"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -574,30 +591,19 @@
    ]
   },
   {
-   "draft_id": "d83750053",
-   "title": "Наследники скончавшегося президента «Соликамскбумпрома» хотят выйти из бизнеса",
+   "draft_id": "d42938978",
+   "title": "В центре Костромской области старинный особняк продадут за 1 рубль",
    "date": "2026-10-23",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/kostroma/2026/10/23/v-czentre-kostromskoj-oblasti-starinnyj-osobnyak-prodadut-za-1-rubl"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-23",
-     "title": "Переговоры",
-     "note": "Cтали известны подробности возможной сделки по продаже 83,3% находящегося в предбанкротном состоянии АО «Соликамскбумпром» китайской «Юнь Чоу». В качестве продавцов выступают само предприятие и аффилированные с ним компании, а также два физичес­ких лица…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
-     ]
-    }
-   ],
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -606,78 +612,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d70401514",
-   "title": "Роснедра выставили на аукцион Белухинское месторождение в Забайкалье",
-   "date": "2026-10-23",
+   "draft_id": "d39214835",
+   "title": "Красноярску вернут полгектара земли возле «Кристалл Арены». Ее купили благодаря сараю без воды и отопления",
+   "date": "2026-10-22",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/rosnedra-874574953.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d82721581",
-   "title": "Роснедра выставили на аукцион Зергунское месторождение",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/rosnedra-874574292.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83646708",
-   "title": "Владелец «Валенсии» продал 42 процента акций клуба",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261023/valensiya-2126617487.html"
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/realty/2026/10/22/76717459/"
     ]
    ],
    "sum": null,
@@ -686,21 +634,21 @@
    "events": [
     {
      "kind": "closed",
-     "date": "2026-10-23",
+     "date": "2026-10-22",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "Владельца фирмы будут судить за мошенничество",
      "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261023/valensiya-2126617487.html"
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/realty/2026/10/22/76717459/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "42 процента акций клуба",
+   "asset": "благодаря сараю без воды и отопления",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "42 процента акций клуба",
+    "asset": "благодаря сараю без воды и отопления",
     "seller": null
    },
    "ind": null,
@@ -710,13 +658,13 @@
    ]
   },
   {
-   "draft_id": "d71839960",
-   "title": "«Пушкинскую карту» чаще всего используют для покупки билетов в кино",
-   "date": "2026-10-23",
+   "draft_id": "d74022197",
+   "title": "Можно ли купить победу в Народной премии 63.RU: ответ на провокационный вопрос самарцев",
+   "date": "2026-10-22",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261023/kino-2126610272.html"
+     "web:63.ru",
+     "https://63.ru/text/business/2026/10/22/76718107/"
     ]
    ],
    "sum": null,
@@ -738,44 +686,16 @@
    ]
   },
   {
-   "draft_id": "d58668108",
-   "title": "Рост инвестиций и пересмотр ДИС: как развиваются отношения между бизнесом в Азии",
+   "draft_id": "d45213610",
+   "title": "Замок на Затоне забрали у города и вернули прежнему владельцу. Теперь компания должна мэрии 130 млн рублей",
    "date": "2026-10-23",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/story/266468/"
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/10/23/76718933/"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88394855",
-   "title": "Россиянам дали неочевидные советы сохранить деньги на распродажах",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/23/rossiyanam-dali-neochevidnye-sovety-sohranit-dengi-na-rasprodazhah/"
-    ]
-   ],
-   "sum": null,
+   "sum": "130 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -794,13 +714,41 @@
    ]
   },
   {
-   "draft_id": "d22144865",
-   "title": "Пекин был крайне недоволен: Россия пошла на хитрость, продав Китаю подлодки",
+   "draft_id": "d33555706",
+   "title": "Квартиры дорожают, но кто-то покупает: скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
    "date": "2026-10-23",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/23/pekin-byl-krajne-nedovolen-rossiya-poshla-na-hitrost-prodav-kitayu-podlodki"
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/realty/2026/10/23/76720414/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d59490261",
+   "title": "За «покупку с принуждением» предприниматель заплатит штраф в размере 55 тысяч рублей",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/biznes/59434"
     ]
    ],
    "sum": null,
@@ -818,7 +766,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
    ]
   }
  ]
