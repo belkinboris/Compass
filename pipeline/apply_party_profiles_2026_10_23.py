@@ -61,6 +61,12 @@ NAME_OVERRIDE = {
 # предметом сделки о продаже российского бизнеса. Чинится отдельно — сначала
 # профиль предмета, потом продавец.
 SKIP = {'Nokian Tyres'}
+# Роли, где имя покупателя записано таблицей FIXES дословно юрлицом
+# («ООО «Кинокомпания «Парадиз продакшнз»»»), а профиль базы называется
+# брендом («Парадиз»): снять текст — значит потерять правку таблицы
+# (review.already_applied сверяет имя профиля по ключу). Привязать — после
+# переименования профиля или правки записи таблицы, отдельным шагом.
+SKIP_LINKS = set()  # «Парадиз» привязан после правки review.already_applied — отпечаток снятого имени
 
 
 def inn_ok(inn):
@@ -202,30 +208,69 @@ def _reason(a):
 
 
 def apply_links(data, links):
+    import copy
+    import review
     by_id = {d['id']: d for d in data['deals']}
+    fixes_of = defaultdict(list)
+    for fix in review.FIXES:
+        fixes_of[fix['id']].append(fix)
     done, skipped = [], []
     for deal_id, role, cid, text in links:
         d = by_id.get(deal_id)
         field = ROLE_FIELD[role]
         if d is None:
             skipped.append((deal_id, role, 'нет карточки')); continue
+        if (deal_id, role) in SKIP_LINKS:
+            skipped.append((deal_id, role, 'отложено вручную')); continue
         if d.get(field) or (role == 'target' and d.get('asset_id')):
             skipped.append((deal_id, role, 'роль уже привязана')); continue
         others = {d.get(f) for r, f in ROLE_FIELD.items() if r != role} | {d.get('asset_id')}
         if cid in others:
             skipped.append((deal_id, role, 'тот же профиль уже стоит другой ролью')); continue
+        before = copy.deepcopy(d)
         d[field] = cid
+        if field == 'buyer':
+            # Как в link_parties: у покупателя либо профиль, либо текст
+            # (test_buyer_is_named_once); у продавца и предмета текст остаётся.
+            # Имя могло прийти из таблицы FIXES — его отпечаток уходит в
+            # proofread_absorbed, иначе review.already_applied сочтёт правку
+            # потерянной (docs/card_editing.md).
+            gone = d.pop('buyer_name', None)
+            if gone:
+                import review
+                fps = d.setdefault('proofread_absorbed', {}).setdefault('buyer_name', [])
+                fp = review.fix_fingerprint(gone)
+                if fp not in fps:
+                    fps.append(fp)
+        # Привязка не должна «потерять» правку таблицы FIXES (её проверяет
+        # test_review_table_is_applied_and_not_pending): имя покупателя из
+        # таблицы засчитывается, только если профиль называется так же.
+        if not all(review.already_applied(f, d, data['companies']) for f in fixes_of.get(deal_id, ())):
+            d.clear(); d.update(before)
+            skipped.append((deal_id, role, 'имя записано таблицей FIXES иначе, чем профиль')); continue
         done.append((deal_id, role, cid))
     return done, skipped
 
 
 def write_registry(rows):
+    """Новые строки — в конец. У профиля одна текущая запись
+    (test_fns_registry_company_id_is_not_duplicated): если у существующего
+    профиля уже была строка (обычно `no_match` — «искали, не нашли»), она
+    снимается из REGISTRY этим же блоком, а текст старой остаётся в файле
+    как история поиска."""
+    known = {r['company_id'] for r in fns_registry.REGISTRY}
+    replaced = sorted({r['company_id'] for r in rows} & known)
     src = open(REG, encoding='utf-8').read()
     marker = "\n\ndef by_company_id() -> dict[str, dict]:"
     assert marker in src
     lines = ['', '', '# Кампания профилей для сторон сделок без профиля — %s' % DAY,
              '# (pipeline/apply_party_profiles_2026_10_23.py, ответы читателей в',
-             '# data/inbox/profiles_2026_10_23/).', 'REGISTRY += [']
+             '# data/inbox/profiles_2026_10_23/).']
+    if replaced:
+        lines += ['# Эти профили искали раньше и не нашли юрлица; кампания нашла ИНН —',
+                  '# прежние записи заменены новыми ниже.',
+                  'REGISTRY = [row for row in REGISTRY if row["company_id"] not in %r]' % (set(replaced),)]
+    lines.append('REGISTRY += [')
     for r in rows:
         inn = ', "inn": %r' % r['inn'] if r.get('inn') else ''
         lines.append('    {"company_id": %r, "decision": %r%s,' % (r['company_id'], r['decision'], inn))

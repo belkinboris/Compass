@@ -105,3 +105,11 @@ def test_yandex_webmaster_verification_file(client):
     assert r.status_code == 200
     assert "<body>Verification: c76538994d1a82ce</body>" in r.text
     assert '<meta name="yandex-verification" content="c76538994d1a82ce">' in client.get("/").text
+
+
+def test_www_redirects_to_the_main_address(client):
+    """www.projectcompass.ru — тот же сайт: постоянный редирект, а не копия."""
+    r = client.get("/deal/g0b187624?x=1", headers={"host": "www.projectcompass.ru"}, follow_redirects=False)
+    assert r.status_code == 301
+    assert r.headers["location"] == "https://projectcompass.ru/deal/g0b187624?x=1"
+    assert client.get("/health").status_code == 200
