@@ -1,0 +1,3044 @@
+[
+ {
+  "text": "ООО «Нейростартер»",
+  "mentions": [
+   {
+    "deal": "caedef395",
+    "role": "seller",
+    "title": "«ЭР-Телеком» покупает 51% разработчика систем виртуализации «Шаркс датацентр»",
+    "date": "2022-08-08",
+    "buyer": "ЭР-Телеком Холдинг",
+    "seller": "ООО «Нейростартер»",
+    "target": "Шаркс Датацентр",
+    "src": [
+     "https://www.cnews.ru/news/top/2022-08-09_er-telekom_priobrel_rossijskogo"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Некстеп», Теймур Штернлиб и Дмитрий Васильев",
+  "mentions": [
+   {
+    "deal": "g076af76a",
+    "role": "seller",
+    "title": "В ИТ-компании «Здоровье города», которая развивает платформу и приложение «Здоровье.ру», сменился основной владелец.",
+    "date": "2026-09-22",
+    "buyer": "Константин Клюка",
+    "seller": "ООО «Некстеп», Теймур Штернлиб и Дмитрий Васильев",
+    "target": "Здоровье.ру",
+    "src": [
+     "https://www.cnews.ru/news/top/2026-09-22_byvshij_svinovod_i_postavshchik"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Нетлайн»",
+  "mentions": [
+   {
+    "deal": "g6663f201",
+    "role": "seller",
+    "title": "ГК «Урбантех» приобрела 30% ООО «Нетвижн»",
+    "date": "2026-05-21",
+    "buyer": "ГК «Урбантех»",
+    "seller": "ООО «Нетлайн»",
+    "target": "ООО «Нетвижн»",
+    "src": [
+     "https://www.comnews.ru/content/245503/2026-05-27/2026-w22/1007/sdelka-paru-soten-urbantekh-m-poluchil-30-netvizhn",
+     "https://www.cnews.ru/news/line/2026-05-26_gk_urbanteh_investirovala",
+     "https://www.kommersant.ru/doc/8689714",
+     "https://finance.rambler.ru/business/56503457-gk-urbanteh-investirovala-v-produktovuyu-kompaniyu-netvizhn/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Нефтесервисные технологии»",
+  "mentions": [
+   {
+    "deal": "cb33a285d",
+    "role": "buyer",
+    "title": "Baker Hughes продаёт буровой сегмент российского бизнеса местному менеджменту",
+    "date": "2022-08-09",
+    "buyer": "ООО «Нефтесервисные технологии»",
+    "seller": "Baker Hughes",
+    "target": "буровой сегмент российского бизнеса Baker Hughes",
+    "src": [
+     "https://www.kommersant.ru/doc/5491442"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Новые утиные фермы» (ГК «Дамате»)",
+  "mentions": [
+   {
+    "deal": "g53ebfe72",
+    "role": "buyer",
+    "title": "Продажа имущественного комплекса ООО «Донстар» (производитель мяса утки, Ростовская область) в рамках процедуры банкротства",
+    "date": "2022-07-15",
+    "buyer": "ООО «Новые утиные фермы» (ГК «Дамате»)",
+    "seller": "ООО «Донстар»",
+    "target": "Донстар",
+    "src": [
+     "https://probankrotstvo.ru/news/nikto-ne-kupil-imushhestvennyi-kompleks-donstara-za-21-mlrd-rublei-680",
+     "https://probankrotstvo.ru/news/imushhestvennyi-kompleks-proizvoditelia-utki-donstar-vystavlen-na-publicku-za-18-mlrd-6180",
+     "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+     "https://www.agroinvestor.ru/companies/news/42873-damate-vyigrala-torgi-po-pokupke-moshchnostey-kompleksa-donstar/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Оптика Мира»",
+  "mentions": [
+   {
+    "deal": "ge957fc7b",
+    "role": "buyer",
+    "title": "«Ростех» продал штаб-квартиру «Швабе» в Москве экс-полпреду Клебанову",
+    "date": "2026-08-26",
+    "buyer": "ООО «Оптика Мира»",
+    "seller": "Ростех",
+    "target": "штаб-квартира «Швабе» рядом с гостиницей «Космос» в Москве",
+    "src": [
+     "https://realty.ria.ru/20260826/shvabe-2113215916.html",
+     "https://www.vedomosti.ru/realty/articles/2026/08/26/1223688-na-meste-shtab-kvartiri-shvabe-mozhet-poyavitsya-novii-kompleks",
+     "https://realty.ria.ru/20260925/rostehi-2120243766.html",
+     "https://tass.ru/nedvizhimost/28151879"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Открытая мобильная платформа»",
+  "mentions": [
+   {
+    "deal": "g6fe7016f",
+    "role": "target",
+    "title": "Ростелеком консолидировал 100% ООО «Открытая мобильная платформа» (разработчик ОС «Аврора»)",
+    "date": "2024",
+    "buyer": "Ростелеком",
+    "seller": null,
+    "target": "ООО «Открытая мобильная платформа»",
+    "src": [
+     "https://www.kommersant.ru/doc/6223650",
+     "https://habr.com/ru/news/765514/",
+     "https://www.kommersant.ru/doc/8671023"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «ПСК - Новые решения»",
+  "mentions": [
+   {
+    "deal": "g41075b4e",
+    "role": "buyer",
+    "title": "Передача активов Caterpillar в России компании бывших топ-менеджеров Сбера",
+    "date": "2023-11-27",
+    "buyer": "ООО «ПСК - Новые решения»",
+    "seller": "Caterpillar",
+    "target": "ООО «Катерпиллар Тосно» и ООО «Катерпиллар Файненшл»",
+    "src": [
+     "https://www.interfax.ru/russia/933466",
+     "https://www.interfax.ru/business/969833"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Пермнефтересурс» и ООО «ТД «Нефтетехснаб»",
+  "mentions": [
+   {
+    "deal": "gda5d56f5",
+    "role": "seller",
+    "title": "Строительная группа «Развитие» приобрела кирпичный завод «Меакир» в Пермском крае",
+    "date": "2025-05-01",
+    "buyer": "СГ «Развитие»",
+    "seller": "ООО «Пермнефтересурс» и ООО «ТД «Нефтетехснаб»",
+    "target": "Меакир",
+    "src": [
+     "https://www.kommersant.ru/doc/7735639"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Полёт»",
+  "mentions": [
+   {
+    "deal": "g01993028",
+    "role": "buyer",
+    "title": "Компания владельца сети пекарен Филиппа Вольчека купила бизнес-центр на Васильевском острове",
+    "date": "2026-08-15",
+    "buyer": "ООО «Полёт»",
+    "seller": "«Балтинвест УК»",
+    "target": "бизнес-центр на Васильевском острове (26-я линия, 7, стр. 1)",
+    "src": [
+     "https://www.dp.ru/a/2026/10/04/kompanija-vladelca-seti-pekaren"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «РЕ Трэйдинг», LPP SA",
+  "mentions": [
+   {
+    "deal": "gfa14411d",
+    "role": "seller",
+    "title": "Польская LPP Group продала российскую сеть Reserved компании Far East Services FZCO",
+    "date": "2022-05-23",
+    "buyer": "Far East Services FZCO",
+    "seller": "ООО «РЕ Трэйдинг», LPP SA",
+    "target": "LPP Group Rus (Reserved, Cropp, House, Mohito, Sinsay)",
+    "src": [
+     "https://leave-russia.org/lpp-group",
+     "https://www.interfax.ru",
+     "https://www.kommersant.ru/doc/5446520",
+     "https://www.kommersant.ru/doc/5652618"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «РН-Коммерция»",
+  "mentions": [
+   {
+    "deal": "gcc232775",
+    "role": "buyer",
+    "title": "Роснефть выкупила Саянскхимпласт на торгах за 30,3 млрд рублей",
+    "date": "2026-04-13",
+    "buyer": "ООО «РН-Коммерция»",
+    "seller": "Промсвязьбанк",
+    "target": "Саянскхимпласт",
+    "src": [
+     "https://www.kommersant.ru/doc/8588983",
+     "https://www.vedomosti.ru/business/articles/2026/04/14/1190060-rosneft-priobrela-krupnogo-proizvoditelya-pvh-sayanskhimplast",
+     "https://www.akm.ru/news/sayanskkhimplast_i_ego_aktivy_prodany_za_30_33_mlrd_rub/",
+     "https://abireg.ru/newsitem/113601/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Самолет Плюс», входящее в группу «Самолет»",
+  "mentions": [
+   {
+    "deal": "g6f678b73",
+    "role": "buyer",
+    "title": "ГК «Самолет» приобрела сеть риэлторских агентств «Золтор»",
+    "date": "2023-05-23",
+    "buyer": "ООО «Самолет Плюс», входящее в группу «Самолет»",
+    "seller": "Алсу Галлямова и Семен Сарапулов",
+    "target": "Золтор",
+    "src": [
+     "https://realty.ria.ru/20230525/zoltor-1873896021.html",
+     "https://realty.ria.ru/20231220/volkov-1916772075.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Серенити инвест» (бывшее ООО «Соллерс Груп»), связанное с Вадимом Швецовым",
+  "mentions": [
+   {
+    "deal": "g446bbeee",
+    "role": "seller",
+    "title": "РусГидро консолидировало проект Green Crab (выкуп доли Вадима Швецова)",
+    "date": "2023",
+    "buyer": "РусГидро",
+    "seller": "ООО «Серенити инвест» (бывшее ООО «Соллерс Груп»), связанное с Вадимом Швецовым",
+    "target": "ООО «РусГидро каршеринг» (проект Green Crab)",
+    "src": [
+     "https://www.kommersant.ru/doc/6082767",
+     "https://www.akm.ru/news/green_crab_nachal_rabotu_v_yuzhno_sakhalinske/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Сибирская генерирующая компания» и АО «Кузбассэнерго»",
+  "mentions": [
+   {
+    "deal": "gb0759159",
+    "role": "seller",
+    "title": "СГК и «Кузбассэнерго» продали 100% акций «Кузнецкой ТЭЦ»",
+    "date": "2025",
+    "buyer": "ООО «Стройтехпроект»",
+    "seller": "ООО «Сибирская генерирующая компания» и АО «Кузбассэнерго»",
+    "target": "Кузнецкая ТЭЦ",
+    "src": [
+     "https://www.interfax.ru/business/1027067",
+     "https://142.ru/gorod/novokuzneck-oplata-tepla-i-gvs-perekhodit-k-novomu-postavshiku-id6802302/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Сиэнэйч индастриал файненшиал сервисез Руссия» и ООО «Сиэнэйч индастриал капитал Руссия»",
+  "mentions": [
+   {
+    "deal": "g020432e9",
+    "role": "target",
+    "title": "Игорь Ким приобретает лизинговую и факторинговую дочки CNH Industrial",
+    "date": "2023",
+    "buyer": "Структуры Игоря Кима",
+    "seller": "CNH Industrial",
+    "target": "ООО «Сиэнэйч индастриал файненшиал сервисез Руссия» и ООО «Сиэнэйч индастриал капитал Руссия»",
+    "src": [
+     "https://www.interfax.ru/business/885719",
+     "https://www.interfax.ru/business/898224",
+     "https://www.audit-it.ru/contragent/1037709021283_ooo-ifs-lizing",
+     "https://www.vedomosti.ru/business/news/2024/02/02/1018209-kompaniya-igorya-kima-priobrela"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Солар-ПТ»",
+  "mentions": [
+   {
+    "deal": "g2b6c37c1",
+    "role": "buyer",
+    "title": "Ростелеком (ГК Солар) инвестировал в Secure-T, приобретая 28,57% акций",
+    "date": "2024-03-28",
+    "buyer": "ООО «Солар-ПТ»",
+    "seller": null,
+    "target": "ООО «Секьюр-Ти»",
+    "src": [
+     "https://www.interfax.ru/business/953431"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Союз-М» (банкрот, бывшая структура корпорации «Союз»)",
+  "mentions": [
+   {
+    "deal": "gb0d1c79e",
+    "role": "seller",
+    "title": "«Союз-ТТМ» выкупил на торгах производственный комплекс «Союз-М» в Калининграде",
+    "date": "2026",
+    "buyer": "ООО «Союз-ТТМ»",
+    "seller": "ООО «Союз-М» (банкрот, бывшая структура корпорации «Союз»)",
+    "target": null,
+    "src": [
+     "https://rugrad.online/news/1457950/",
+     "https://rugrad.online/news/1469127/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Спейс 1»",
+  "mentions": [
+   {
+    "deal": "g1a6f4fec",
+    "role": "buyer",
+    "title": "O1 Properties приобрела российский бизнес WeWork",
+    "date": "2024-04-10",
+    "buyer": "ООО «Спейс 1»",
+    "seller": "WeWork",
+    "target": "ООО «Виворк Рус»",
+    "src": [
+     "https://rb.ru/news/wework-prodazha-biznesa/",
+     "https://www.interfax.ru/business/956524",
+     "https://www.sostav.ru/publication/wework-67379.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Стрим»",
+  "mentions": [
+   {
+    "deal": "g47189119",
+    "role": "buyer",
+    "title": "МТС приобрела 67% платформы Buzzoola для размещения нативной рекламы",
+    "date": "2023-02-21",
+    "buyer": "ООО «Стрим»",
+    "seller": "Наталия Солодухова",
+    "target": "ООО «Баззула интернет технологии»",
+    "src": [
+     "https://www.interfax.ru/business/887334",
+     "https://www.cnews.ru/news/top/2023-06-27_mts_potratila_337_millionov",
+     "https://runet.news/articles/61865"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Стройтехпроект»",
+  "mentions": [
+   {
+    "deal": "gb0759159",
+    "role": "buyer",
+    "title": "СГК и «Кузбассэнерго» продали 100% акций «Кузнецкой ТЭЦ»",
+    "date": "2025",
+    "buyer": "ООО «Стройтехпроект»",
+    "seller": "ООО «Сибирская генерирующая компания» и АО «Кузбассэнерго»",
+    "target": "Кузнецкая ТЭЦ",
+    "src": [
+     "https://www.interfax.ru/business/1027067",
+     "https://142.ru/gorod/novokuzneck-oplata-tepla-i-gvs-perekhodit-k-novomu-postavshiku-id6802302/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Технологий туризма» и Rus Travel Group Ltd",
+  "mentions": [
+   {
+    "deal": "gc7e0b5c9",
+    "role": "seller",
+    "title": "Tutu.ru купил Travel.ru — товарный знак и доменное имя",
+    "date": "2025-11-18",
+    "buyer": "Tutu.ru",
+    "seller": "ООО «Технологий туризма» и Rus Travel Group Ltd",
+    "target": "Travel.ru",
+    "src": [
+     "https://www.sostav.ru/publication/tutu-ru-kupil-domen-travel-ru-79706.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Тонкости продаж»",
+  "mentions": [
+   {
+    "deal": "g28f173ca",
+    "role": "seller",
+    "title": "МТС Travel купил права на сайт «Тонкости туризма»",
+    "date": "2023-05-11",
+    "buyer": "МТС Travel",
+    "seller": "ООО «Тонкости продаж»",
+    "target": "права на интеллектуальную собственность «Тонкости туризма»",
+    "src": [
+     "https://www.vedomosti.ru/media/articles/2023/05/11/974485-servis-mts-travel-kupil-prava-na-vipusk-onlain-zhurnala-tonkosti-turizma",
+     "https://www.interfax.ru/business/900908",
+     "https://tonkosti.ru/О_проекте"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Управление агроактивами» (49%) и Денис Майоров (2%)",
+  "mentions": [
+   {
+    "deal": "ga5b0724c",
+    "role": "buyer",
+    "title": "Таврос приобрел 51% ГК «Лебеди» — производителя и переработчика риса",
+    "date": "2023-10-27",
+    "buyer": "ООО «Управление агроактивами» (49%) и Денис Майоров (2%)",
+    "seller": "Александр Шиянов",
+    "target": "ГК «Лебеди»",
+    "src": [
+     "https://www.kommersant.ru/doc/6311043",
+     "https://www.agroinvestor.ru/transaction/news/41304-struktura-tavrosa-vykupila-dolyu-v-kompanii-proizvoditele-risa/",
+     "https://www.kommersant.ru/doc/7267002",
+     "https://datanewton.ru/contragents/1122309006621/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Управление известково-цементными активами» брянского бизнесмена Алексея Филина",
+  "mentions": [
+   {
+    "deal": "ca754c77a",
+    "role": "buyer",
+    "title": "Продажа завода «Эльдако» через аукцион",
+    "date": "2023-08-15",
+    "buyer": "ООО «Управление известково-цементными активами» брянского бизнесмена Алексея Филина",
+    "seller": "Траст",
+    "target": null,
+    "src": [
+     "https://abireg.ru/newsitem/98356",
+     "https://abireg.ru/newsitem/98827/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Управление»",
+  "mentions": [
+   {
+    "deal": "gf080e8f0",
+    "role": "seller",
+    "title": "СберИнвест приобрёл 30% в «ЦОД СПб»",
+    "date": "2026-09-07",
+    "buyer": "СберИнвест",
+    "seller": "ООО «Управление»",
+    "target": "«ЦОД СПб»",
+    "src": [
+     "https://www.tadviser.ru/a/965928",
+     "https://datanewton.ru/contragents/1257800029398/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Финансовые решения»",
+  "mentions": [
+   {
+    "deal": "gde4f9941",
+    "role": "seller",
+    "title": "ТЦ «Июнь» в Красногорске продан компании «Литекс»",
+    "date": "2023-02-14",
+    "buyer": "ООО «Литекс»",
+    "seller": "ООО «Финансовые решения»",
+    "target": "Июнь",
+    "src": [
+     "https://realty.ria.ru/20230214/iyun-1851987297.html",
+     "https://www.interfax-russia.ru/realty/news/odin-iz-krupneyshih-trc-podmoskovya-vystavlen-na-torgi-za-3-5-mlrd-rubley",
+     "https://shopandmall.ru/news/krasnogorskij-trc-iun-prodaetsa-za-35-mlrd-rublej",
+     "https://office-news.ru/trast-nashel-pokupatelya-na-tc-ijun-v-krasnogorske/torgi/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Флекс Капитал»",
+  "mentions": [
+   {
+    "deal": "gcd8fe39c",
+    "role": "seller",
+    "title": "Aspace хочет купить сеть коворкингов Multispace в Москве",
+    "date": "2026-10-12",
+    "buyer": "Aspace",
+    "seller": "ООО «Флекс Капитал»",
+    "target": "сеть гибких офисов Multispace (4 коворкинга в Москве)",
+    "src": [
+     "https://www.kommersant.ru/doc/9024274",
+     "https://www.kommersant.ru/doc/9023921"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Форум» Алексея Говорунова",
+  "mentions": [
+   {
+    "deal": "gb7363fed",
+    "role": "seller",
+    "title": "Продажа отеля SO в Санкт-Петербурге Виктору Григорьеву",
+    "date": "2023-10-31",
+    "buyer": "Виктор Григорьев",
+    "seller": "ООО «Форум» Алексея Говорунова",
+    "target": "отель SO в Санкт-Петербурге",
+    "src": [
+     "https://www.kommersant.ru/doc/6310951"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «Элит строй»",
+  "mentions": [
+   {
+    "deal": "g9995eb50",
+    "role": "buyer",
+    "title": "«Страна девелопмент» купила участок на 13,6 га в Марьино за 8,8 млрд руб.",
+    "date": "2024-12-16",
+    "buyer": "ООО «Элит строй»",
+    "seller": "Компания «Центр фанерной торговли»",
+    "target": "Участок в Марьино (13,6 га)",
+    "src": [
+     "https://www.cre.ru/news/88833",
+     "https://www.vedomosti.ru/realty/articles/2022/10/25/947160-investkompaniya-a1-i-partneri-nashli-novogo-pretendenta",
+     "https://vsenovostroyki.ru/customer/22511"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО «ЮэСэМ Телеком»",
+  "mentions": [
+   {
+    "deal": "g54dc2165",
+    "role": "seller",
+    "title": "Мегафон приобрел компанию oneFactor",
+    "date": "2022",
+    "buyer": "МегаФон",
+    "seller": "ООО «ЮэСэМ Телеком»",
+    "target": "oneFactor",
+    "src": [
+     "https://rb.ru/news/megafon-onefactor/",
+     "https://adindex.ru/news/digital/2022/12/28/309709.phtml"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ООО ДМ",
+  "mentions": [
+   {
+    "deal": "cfeca52ce",
+    "role": "target",
+    "title": "Детский мир завершил реорганизацию с выделением дочерней компании ООО ДМ и запуском программы выкупа акций",
+    "date": "2023-05-30",
+    "buyer": "ПАО «Детский мир»",
+    "seller": null,
+    "target": "ООО ДМ",
+    "src": [
+     "https://www.interfax.ru/amp/903832",
+     "https://www.vedomosti.ru/investments/news/2023/10/17/1001010-detskii-mir",
+     "https://realnoevremya.ru/news/302982-pao-detskiy-mir-likvidiruyut"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ОСК",
+  "mentions": [
+   {
+    "deal": "gd6b3c796",
+    "role": "seller",
+    "title": "ОСК вышла из капитала КМЗ, вернув актив семье основателя Даниленко",
+    "date": "2026-01-14",
+    "buyer": "семья основателя Михаила Даниленко",
+    "seller": "ОСК",
+    "target": "КМЗ (Ковровский механический завод)",
+    "src": [
+     "https://www.fontanka.ru/2026/01/14/76215445/",
+     "https://www.dp.ru/a/2026/01/14/davaj-ostanemsja-partnjorami"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Оксана Орлова, Виталий Манцев и Эльвира Крылова",
+  "mentions": [
+   {
+    "deal": "gbc69f146",
+    "role": "buyer",
+    "title": "CapMan продал 40% в сети детских парков «Кидбург» основателям и ГД Крыловой",
+    "date": "2023-02-09",
+    "buyer": "Оксана Орлова, Виталий Манцев и Эльвира Крылова",
+    "seller": "CapMan",
+    "target": "Кидбург",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2023/02/14/962821-finskii-investfond-prodal-dolyu-v-seti-kidburg",
+     "https://ko.ru/news/finskiy-investfond-perestal-byt-sovladeltsem-seti-kidburg/",
+     "https://cre.ru/news/89954"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Оксана Хейфиц",
+  "mentions": [
+   {
+    "deal": "gd8faa2c4",
+    "role": "buyer",
+    "title": "Суд отменил продажу 99,9% «Инфамеда» (владельца «Мирамистина») и передал 50% Оксане Хейфиц",
+    "date": "2026-09-23",
+    "buyer": "Оксана Хейфиц",
+    "seller": "Ирина Хугаева",
+    "target": "Инфамед",
+    "src": [
+     "https://1prime.ru/20260923/sud-873593047.html",
+     "https://vademec.ru/news/2025/07/22/sud-zapretil-benefitsiaru-infameda-izmenyat-status-regudostovereniy-na-miramistin-i-okomistin/",
+     "https://1prime.ru/20260910/infamed-873202946.html",
+     "https://1prime.ru/20260915/eks-gendirektor-873314968.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Дерипаска",
+  "mentions": [
+   {
+    "deal": "gf0b712ef",
+    "role": "seller",
+    "title": "Олег Дерипаска продал 10% акций «Ингосстраха»",
+    "date": "2022-08-01",
+    "buyer": null,
+    "seller": "Олег Дерипаска",
+    "target": "Ингосстрах",
+    "src": [
+     "https://www.kommersant.ru/doc/5953554",
+     "https://www.ingos.ru/company/disclosure-info/structure-shareholders",
+     "https://ria.ru/20250110/ssha-1993174049.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Кайбелов",
+  "mentions": [
+   {
+    "deal": "g3b91745f",
+    "role": "seller",
+    "title": "Владимир Воронин (ФСК) приобрел 10% акций АВС-Медицина",
+    "date": "2024",
+    "buyer": "Владимир Воронин",
+    "seller": "Олег Кайбелов",
+    "target": "ООО «АВС-Медицина»",
+    "src": [
+     "https://www.kommersant.ru/doc/7282828",
+     "https://www.kommersant.ru/doc/8569255"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Малис (через собственные структуры)",
+  "mentions": [
+   {
+    "deal": "gcdd1b337",
+    "role": "buyer",
+    "title": "МегаФон продал 25% доли в сети магазинов Связной",
+    "date": "2022-12-05",
+    "buyer": "Олег Малис (через собственные структуры)",
+    "seller": "МегаФон",
+    "target": "Связной",
+    "src": [
+     "https://www.rbc.ru/technology_and_media/05/12/2022/638b11529a79473003a808d1?fbclid=IwAR2H82xR5lbhGspPNlz4ny5E0MDgd35Vy9UygQL_lH8PVrBPMLePYdwq8EM",
+     "https://www.vedomosti.ru/technology/articles/2022/12/06/953870-pokupatelem-doli-megafona-v-svyaznom-mog-vistupit-malis",
+     "https://www.kommersant.ru/doc/6395924",
+     "https://www.cnews.ru/news/top/2026-05-08_dolyu_v_razorivshejsya_seti"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Михасенко (владелец ФГ БКС)",
+  "mentions": [
+   {
+    "deal": "g5190658a",
+    "role": "seller",
+    "title": "GBM Holding купила 75% BCS Prime Brokerage, британское подразделение БКС",
+    "date": "2024-06-30",
+    "buyer": "GBM Holding",
+    "seller": "Олег Михасенко (владелец ФГ БКС)",
+    "target": "BCS Prime Brokerage Ltd.",
+    "src": [
+     "https://www.bloomberg.com/news/articles/2024-07-09/former-potanin-executive-buys-uk-unit-of-top-russian-brokerage",
+     "https://www.akm.ru/eng/news/gbm-holdings-acquired-the-british-business-of-bcs-prime-brokerage/",
+     "https://www.gbmsecurities.com/about-us"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Петрович Зеваков",
+  "mentions": [
+   {
+    "deal": "g707633b2",
+    "role": "seller",
+    "title": "ГК Russ приобрела оператора наружной рекламы «Медиа Простор»",
+    "date": "2024-09-11",
+    "buyer": "ООО «РВБ» (Wildberries & Russ)",
+    "seller": "Олег Петрович Зеваков",
+    "target": "Медиа Простор",
+    "src": [
+     "https://www.sostav.ru/publication/gk-russ-priobrela-media-prostor-70142.html",
+     "https://www.tadviser.ru/index.php/Компания:Russ_(Русс_Аутдор_ранее_Russ_Outdoor)"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Пономарёв и Леонид Дубов (основатели)",
+  "mentions": [
+   {
+    "deal": "gmru-mtsbank-kdpay",
+    "role": "seller",
+    "title": "МТС Банк купил платёжный сервис KD Pay",
+    "date": "2026-07-20",
+    "buyer": "МТС Банк",
+    "seller": "Олег Пономарёв и Леонид Дубов (основатели)",
+    "target": "Ритейл-Процессинг",
+    "src": [
+     "https://www.comnews.ru/content/246503/2026-07-22/2026-w30/1008/mts-bank-kupil-platezhnyy-servis-kd-pay"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег Романович Рыбалов и Сбербанк",
+  "mentions": [
+   {
+    "deal": "g9ec93147",
+    "role": "seller",
+    "title": "ГК «Медскан» может купить сеть клиник «Сова»",
+    "date": "2023-06-27",
+    "buyer": "ГК «Медскан»",
+    "seller": "Олег Романович Рыбалов и Сбербанк",
+    "target": "Сова (сеть клиник)",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2023/06/27/982428-medskan-mozhet-kupit-regionalnuyu-set-klinik-sova",
+     "https://www.kommersant.ru/doc/6069284"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Олег и Рита Литаврины",
+  "mentions": [
+   {
+    "deal": "g97e1f483",
+    "role": "seller",
+    "title": "Группа «Ригла-Здравсити» закрыла сделку по покупке сети «Здоровый город» в Воронежской области",
+    "date": "2026-07-30",
+    "buyer": "Ригла",
+    "seller": "Олег и Рита Литаврины",
+    "target": "сети «Здоровый город» в Воронежской области",
+    "src": [
+     "https://www.kommersant.ru/doc/8861650"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Ольга Давыдова",
+  "mentions": [
+   {
+    "deal": "ge482f106",
+    "role": "seller",
+    "title": "«Аптечная сеть 36,6» купила московского фармритейлера «Диалог»",
+    "date": "2026-08-06",
+    "buyer": "Аптечная группа «36,6»",
+    "seller": "Ольга Давыдова",
+    "target": "московский фармритейлер «Диалог»",
+    "src": [
+     "https://www.kommersant.ru/doc/8864001",
+     "https://pravo.ru/news/265173/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Ольга Маслова",
+  "mentions": [
+   {
+    "deal": "g1f1d470a",
+    "role": "buyer",
+    "title": "«Дом.РФ» продал бывший подмосковный филиал «Роскапстроя»",
+    "date": "2026-09-22",
+    "buyer": "Ольга Маслова",
+    "seller": "АО «ДОМ.РФ»",
+    "target": "бывший подмосковный филиал «Роскапстроя»",
+    "src": [
+     "https://realty.ria.ru/20260922/kraskovo-2119566209.html",
+     "https://riamo.ru/news/nedvizhimost/domrf-vystavil-na-torgi-kompleks-v-ljuberetskom-okruge/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Ольга Попова и Сергей Мельницын",
+  "mentions": [
+   {
+    "deal": "g088a43f9",
+    "role": "seller",
+    "title": "ГК «Монополия» приобрела 72% долей в пермской ООО «Умная логистика»",
+    "date": "2024-02-22",
+    "buyer": "Монополия",
+    "seller": "Ольга Попова и Сергей Мельницын",
+    "target": "ООО «Умная логистика»",
+    "src": [
+     "https://www.kommersant.ru/doc/6762169",
+     "https://www.kommersant.ru/doc/7621140",
+     "https://companies.rbc.ru/id/1145958022572-umnaya-logistika/",
+     "https://datanewton.ru/contragents/1145958022572/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Ольга Хромова",
+  "mentions": [
+   {
+    "deal": "g8e78bbb2",
+    "role": "seller",
+    "title": "Технониколь выкупила 90% долей Scandic Construction в Ленинградской области",
+    "date": "2024-07-09",
+    "buyer": "Технониколь",
+    "seller": "Ольга Хромова",
+    "target": "Scandic Construction",
+    "src": [
+     "https://www.kommersant.ru/doc/6820661",
+     "https://ermolaevv.ru/tpost/rszmi0r651-prodan-zavod-scandic-construction-v-leni",
+     "https://runews24.ru/business/06/10/2025/texnonikol-zakroet-zavod-v-leningradskoj-oblasti",
+     "https://www.interfax.ru/business/969906"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Основатели SolidSoft",
+  "mentions": [
+   {
+    "deal": "cb30dbbc8",
+    "role": "seller",
+    "title": "«Яндекс» и SolidSoft создают СП в сфере кибербезопасности (Web Application Firewall)",
+    "date": "2025-07-18",
+    "buyer": "Яндекс",
+    "seller": "Основатели SolidSoft",
+    "target": "Совместное предприятие Yandex B2B Tech и SolidSoft",
+    "src": [
+     "https://www.kommersant.ru/doc/8077927"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Отгай Асланов",
+  "mentions": [
+   {
+    "deal": "g3d815d6f",
+    "role": "seller",
+    "title": "ГК «Бурсервис» приобретает «Нафта Дриллинг Компани»",
+    "date": "2025-02-21",
+    "buyer": "АО «Бурсервис»",
+    "seller": "Отгай Асланов",
+    "target": "Нафта Дриллинг Компани",
+    "src": [
+     "https://www.kommersant.ru/doc/7380799",
+     "https://itek.ru/news/burservis-priobrel-nefteservisnuju-nafta-drilling-kompani/",
+     "https://naftadrilling.ru",
+     "https://www.kommersant.ru/doc/8442557"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Отель «Имеретинский»",
+  "mentions": [
+   {
+    "deal": "cbfe737bd",
+    "role": "target",
+    "title": "Возврат отеля «Имеретинский» владельцу ООО «РогСибАл» после изъятия государством",
+    "date": "2026-04-17",
+    "buyer": null,
+    "seller": null,
+    "target": "Отель «Имеретинский»",
+    "src": [
+     "https://www.kommersant.ru/doc/8590858?tg"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Официально не назван. По данным официального швейцарского торгового реестра (Handelsregister) — структура, переименованная в «A Group Switzerland Holdings GmbH» и «Teiwaz A Group AG» (бывшие юрлица «Мечела»); конечный бенефициар не раскрыт. LRT.lt называет другую компанию, «Fehu Services GmbH», но в официальном реестре её нет.",
+  "mentions": [
+   {
+    "deal": "ga4082daa",
+    "role": "buyer",
+    "title": "«Мечел» продал зарубежные активы: швейцарские структуры, завод в Литве и торговые компании",
+    "date": "2024-08-22",
+    "buyer": "Официально не назван. По данным официального швейцарского торгового реестра (Handelsregister) — структура, переименованная в «A Group Switzerland Holdings GmbH» и «Teiwaz A Group AG» (бывшие юрлица «Мечела»); конечный бенефициар не раскрыт. LRT.lt называет другую компанию, «Fehu Services GmbH», но в официальном реестре её нет.",
+    "seller": "«Мечел»",
+    "target": "Швейцарские структуры, завод «Мечел Нямунас» в Литве и торговые компании «Мечела»",
+    "src": [
+     "https://www.kommersant.ru/doc/6907033",
+     "https://www.interfax.ru/business/977660",
+     "https://www.lrt.lt/naujienos/verslas/4/2635029/rusijos-oligarchui-nepavykus-pasislepti-nuo-sankciju-mechel-nemunas-bankrutuoja",
+     "https://www.finversia.ru/news/markets/mechel-poluchil-chistyi-ubytok-po-msfo-v-37-1-mlrd-rublei-po-itogam-2024-goda-150213"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Охотская ГГК",
+  "mentions": [
+   {
+    "deal": "g23cad370",
+    "role": "buyer",
+    "title": "Полиметалл продал 100% акций Новой охотской рудной компании",
+    "date": "2025-05-16",
+    "buyer": "Охотская ГГК",
+    "seller": "Полиметалл",
+    "target": "Новая Охотская Рудная Компания",
+    "src": [
+     "https://www.kommersant.ru/doc/8025397"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ПАО «Якутская топливно-энергетическая компания» (ЯТЭК)",
+  "mentions": [
+   {
+    "deal": "g59fbdbf8",
+    "role": "seller",
+    "title": "Nordgold купила лицензии на полиметаллы в Якутии (ЯГПК)",
+    "date": "2024-07-09",
+    "buyer": "Nordgold",
+    "seller": "ПАО «Якутская топливно-энергетическая компания» (ЯТЭК)",
+    "target": "ООО «Якутский газоперерабатывающий комплекс»",
+    "src": [
+     "https://www.interfax.ru/business/970338",
+     "https://zolteh.ru/news/svyazannaya_s_nordgold_struktura_kupila_kompaniyu_s_litsenziyami_na_polimetally_/",
+     "https://www.eastrussia.ru/material/byulleten-eastrussia-obzor-gornodobychi-dfo-leto-2024/",
+     "https://www.vedomosti.ru/business/articles/2024/09/13/1061945-nordgold-vlozhit-bolee-30-mlrd-v-dobichu-tsinka"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ПСБ (от имени государства)",
+  "mentions": [
+   {
+    "deal": "g5b4e85aa",
+    "role": "seller",
+    "title": "«Бизнес-Эксперт» выиграла повторные торги по агробизнесу, изъятому у Боброва и Бикова",
+    "date": "2026-09-29",
+    "buyer": "ООО «Бизнес-Эксперт»",
+    "seller": "ПСБ (от имени государства)",
+    "target": "100% акций в четырёх компаниях — «Ударник», «Агро-Клевер», «Петелино», «Земля Сажинская»",
+    "src": [
+     "https://pravo.ru/news/266020/",
+     "https://66.ru/news/6515440-nacionalizirovannyy-agrobiznes-bobrova-i-bikova-ostalsya-bez-pokupateley/",
+     "https://ura.news/news/1053131871",
+     "https://ura.news/news/1053134588"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Александрович Артемов",
+  "mentions": [
+   {
+    "deal": "ga95b1d54",
+    "role": "seller",
+    "title": "ГАП «Ресурс» приобрела агрофирму «Рубеж»",
+    "date": "2025-02-01",
+    "buyer": "ГАП «Ресурс»",
+    "seller": "Павел Александрович Артемов",
+    "target": "Агрофирма «Рубеж»",
+    "src": [
+     "https://www.kommersant.ru/doc/7497422"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Бударков и Николай Лошатынский",
+  "mentions": [
+   {
+    "deal": "g55ac5f34",
+    "role": "seller",
+    "title": "RBE Group приобрела по 51% в ООО «ЕСК Системс» и ООО «Евростройконсалт»",
+    "date": "2026-02-15",
+    "buyer": "RBE Group",
+    "seller": "Павел Бударков и Николай Лошатынский",
+    "target": "ГК «Евростройконсалт»",
+    "src": [
+     "https://www.kommersant.ru/doc/8480191",
+     "https://www.kommersant.ru/doc/8655867",
+     "https://datanewton.ru/contragents/1067746548660/history/timeline",
+     "https://datanewton.ru/contragents/1197746622370/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Грачёв и Михаил Стискин",
+  "mentions": [
+   {
+    "deal": "g22000f22",
+    "role": "seller",
+    "title": "Приобретение консорциумом Алексея Зуева («Кораблик») 29,9% акций «Детского мира» у бывших топ-менеджеров «Полюса»",
+    "date": "2023-05-02",
+    "buyer": "Консорциум инвесторов под руководством Алексея Зуева",
+    "seller": "Павел Грачёв и Михаил Стискин",
+    "target": "ПАО «Детский мир»",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2023/05/02/973456-korablika-detskogo-mira",
+     "https://www.forbes.ru/biznes/488703-osnovatel-korablika-vykupil-doli-byvsih-top-menedzerov-polusa-v-detskom-mire",
+     "https://www.rbc.ru/business/02/05/2023/64510a8b9a79471504cd82d3",
+     "https://new-retail.ru/novosti/retail/osnovatel_seti_korablik_aleksey_zuev_stal_krupneyshim_derzhatelem_aktsiy_detskogo_mira/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Гришков, Иван Ермилов, Артур Восканян, Антон Макаров и Александр Богуславский",
+  "mentions": [
+   {
+    "deal": "gf9df9712",
+    "role": "seller",
+    "title": "Invellect приобрела 100% сети кофеен Coffee Like",
+    "date": "2024-10-17",
+    "buyer": "Invellect",
+    "seller": "Павел Гришков, Иван Ермилов, Артур Восканян, Антон Макаров и Александр Богуславский",
+    "target": "Coffee Like",
+    "src": [
+     "https://www.forbes.ru/svoi-biznes/523331-u-osnovannoj-aazom-sabutdinovym-seti-kofeen-coffee-like-smenilsa-vladelec",
+     "https://www.cafe-future.ru/news/gruppa-kompaniy-invellect-vykupila-biznes-seti-kofeen-coffee-like/",
+     "https://adindex.ru/news/marketing/2024/10/18/326558.phtml",
+     "https://www.kommersant.ru/doc/7907166"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Соколов, Глеб Драгунов и Егор Даниленко",
+  "mentions": [
+   {
+    "deal": "gdf44a92b",
+    "role": "seller",
+    "title": "SkyNet приобрел интернет-провайдера «Фартел»",
+    "date": "2025-07-28",
+    "buyer": "SkyNet",
+    "seller": "Павел Соколов, Глеб Драгунов и Егор Даниленко",
+    "target": "ООО «ФАРТЕЛ»",
+    "src": [
+     "https://www.kommersant.ru/doc/7940459",
+     "https://telesputnik.ru/materials/companies/news/peterburgskii-skainet-polucil-kontrol-nad-provaiderom-iz-leningradskoi-oblasti",
+     "https://abireg.ru/newsitem/108550/",
+     "https://www.dp.ru/a/2025/08/04/peterburgskij-provajder-skynet"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Павел Тё (через ООО «Велна»)",
+  "mentions": [
+   {
+    "deal": "g0931ce83",
+    "role": "seller",
+    "title": "Максим Буре и Ольга Шатрова стали новыми владельцами доли в Рязанской чаеразвесочной фабрике",
+    "date": "2025-07-29",
+    "buyer": "Максим Буре (90%) и Ольга Шатрова (10%), через ООО «СМ»",
+    "seller": "Павел Тё (через ООО «Велна»)",
+    "target": "Рязанская чаеразвесочная фабрика",
+    "src": [
+     "https://www.kommersant.ru/doc/7923870"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Патвакан Мкртчян",
+  "mentions": [
+   {
+    "deal": "g5647e100",
+    "role": "seller",
+    "title": "«Нейропоток» выкупил производство хлебобулочной продукции под брендом Frozella",
+    "date": "2026-07-31",
+    "buyer": "Нейропоток",
+    "seller": "Патвакан Мкртчян",
+    "target": "Фрозен Бек",
+    "src": [
+     "https://www.kommersant.ru/doc/8862728",
+     "https://www.tadviser.ru/a/961024",
+     "https://www.kommersant.ru/doc/8862608"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Петербургский застройщик Element",
+  "mentions": [
+   {
+    "deal": "gfd9c0206",
+    "role": "buyer",
+    "title": "Петербургский застройщик Element выкупит площадку группы ПИК в Москве",
+    "date": "2026-09-24",
+    "buyer": "Петербургский застройщик Element",
+    "seller": "ГК ПИК",
+    "target": "бизнес-парк River City на Ленинградском шоссе",
+    "src": [
+     "https://www.kommersant.ru/doc/8974516",
+     "https://mperspektiva.ru/topics/peterburgskiy-element-mozhet-kupit-u-pik-ploshchadku-pod-75-tys-kv-m-zhilya-v-moskve/",
+     "https://realty.ria.ru/20260925/developer-2120185120.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Платёжная система БЭСТ",
+  "mentions": [
+   {
+    "deal": "g089e507d",
+    "role": "target",
+    "title": "Займер приобрел 50% платежной системы БЭСТ у Fusion Factor Fintech Limited",
+    "date": "2026-06-11",
+    "buyer": "Займер",
+    "seller": "Fusion Factor Fintech Limited",
+    "target": "Платёжная система БЭСТ",
+    "src": [
+     "https://www.forbes.ru/finansy/562732-gruppa-zajmer-kupila-50-plateznoj-sistemy-best-u-vladel-ca-ao-kivi",
+     "https://finance.mail.ru/article/zajmer-kupil-polovinu-platezhnoj-sistemy-u-akcionera-kivi-69212777/",
+     "https://frankmedia.ru/285879",
+     "https://www.comnews.ru/content/245792/2026-06-11/2026-w24/1010/gruppa-zaymer-priobrela-50-platezhnoy-sistemy-best"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Правительство Германии (через Федеральное сетевое агентство)",
+  "mentions": [
+   {
+    "deal": "g2918b022",
+    "role": "seller",
+    "title": "Германия начала приватизацию SEFE — бывшей «дочки» «Газпрома»",
+    "date": "2026-10-02",
+    "buyer": null,
+    "seller": "Правительство Германии (через Федеральное сетевое агентство)",
+    "target": "SEFE (бывшая Gazprom Germania)",
+    "src": [
+     "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya",
+     "https://www.boersen-zeitung.de/unternehmen-branchen/bund-startet-privatisierung-der-frueheren-gazprom-tochter-sefe",
+     "https://www.rbc.ru/business/02/10/2026/6abfb9808d2dba0016d49ab8",
+     "https://www.interfax.ru/business/1119994"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Правительство Москвы",
+  "mentions": [
+   {
+    "deal": "g87583786",
+    "role": "seller",
+    "title": "Москва выставила на продажу право на застройку в Западном Бирюлеве",
+    "date": "2026-10-12",
+    "buyer": null,
+    "seller": "Правительство Москвы",
+    "target": "право заключения договора о комплексном развитии территории (КРТ) площадью почти 23 га в Западном Бирюлеве (Харьковский проезд, владения 1-9)",
+    "src": [
+     "https://realty.ria.ru/20261012/vlasti-2123882446.html"
+    ]
+   },
+   {
+    "deal": "g22d3599c",
+    "role": "seller",
+    "title": "Право на застройку участка с Рижским рынком выставлено на торги правительством Москвы",
+    "date": "2026-10-12",
+    "buyer": null,
+    "seller": "Правительство Москвы",
+    "target": "право заключения договора о комплексном развитии территории (КРТ) площадью 3,2 га на проспекте Мира (владения 82-92) — там, где сейчас Рижский рынок",
+    "src": [
+     "https://realty.ria.ru/20261012/vlasti-2123897203.html",
+     "https://fomag.ru/news-streem/uchastok-zemli-s-rizhskim-rynkom-v-moskve-vystavyat-na-torgi-minimum-za-155-mln-rub/",
+     "https://finance.mail.ru/article/direktor-rizhskogo-ryinka-oproverg-informatsiyu-o-snose-69222344/",
+     "https://www.kommersant.ru/doc/2434178"
+    ]
+   },
+   {
+    "deal": "g253252c4",
+    "role": "seller",
+    "title": "Москва выставила на торги право на КРТ в Южном Тушине",
+    "date": "2026-10-15",
+    "buyer": null,
+    "seller": "Правительство Москвы",
+    "target": "право заключения договора о комплексном развитии территории (КРТ) площадью 4,4 га в Южном Тушине, между улицей Фабрициуса, Походным и Цветочным проездами",
+    "src": [
+     "https://realty.ria.ru/20261015/vlasti-2124628420.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Правительство Республики Башкортостан",
+  "mentions": [
+   {
+    "deal": "g0748e794",
+    "role": "seller",
+    "title": "«Росспиртпром» может приобрести «Башспирт»",
+    "date": "2025-03-01",
+    "buyer": "ГК Росспиртпром",
+    "seller": "Правительство Республики Башкортостан",
+    "target": "АО «Башспирт»",
+    "src": [
+     "https://www.kommersant.ru/doc/8799919"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Правительство Республики Коми",
+  "mentions": [
+   {
+    "deal": "g5117a241",
+    "role": "seller",
+    "title": "Власти Коми продают 100% авиакомпании «Комиавиатранс» с условием сохранить рейсы",
+    "date": "2026-10-09",
+    "buyer": null,
+    "seller": "Правительство Республики Коми",
+    "target": "Комиавиатранс",
+    "src": [
+     "https://1prime.ru/20261009/vlasti-874128098.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Производственно-логистический комплекс «Логопарк-Тверь» площадью 27 тыс. м2 (арендная площадь – 25 тыс. м2). На площадке «Аквариус» намерен выпускать серверы, СХД, персональные компьютеры, ноутбуки, планшеты, моноблоки, КПК, принтеры и МФУ.",
+  "mentions": [
+   {
+    "deal": "c23732cd9",
+    "role": "target",
+    "title": "ГК «Аквариус» покупает производственно-логистический комплекс в Твери",
+    "date": "2022-03-25",
+    "buyer": "ГК «Аквариус»",
+    "seller": "«РВМ Капитал»",
+    "target": "Производственно-логистический комплекс «Логопарк-Тверь» площадью 27 тыс. м2 (арендная площадь – 25 тыс. м2). На площадке «Аквариус» намерен выпускать серверы, СХД, персональные компьютеры, ноутбуки, планшеты, моноблоки, КПК, принтеры и МФУ.",
+    "src": [
+     "https://www.kommersant.ru/doc/5283339"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "РОАД",
+  "mentions": [
+   {
+    "deal": "ga58cd8e7",
+    "role": "seller",
+    "title": "Авито (КЕХ Екоммерц) выкупил оставшиеся 10% Автотеки у РОАД",
+    "date": "2023",
+    "buyer": "Авито",
+    "seller": "РОАД",
+    "target": "ООО «АБД»",
+    "src": [
+     "https://www.akm.ru/news/avito_stal_vladeltsem_avtoteki/",
+     "https://cio-navigator.ru/abd-9710013723/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "РСТИ",
+  "mentions": [
+   {
+    "deal": "g69c83a3f",
+    "role": "buyer",
+    "title": "РСТИ покупает у ПИК участок на Неве в Петербурге",
+    "date": "2026-09-23",
+    "buyer": "РСТИ",
+    "seller": "ГК ПИК",
+    "target": "участок 5,3 га на Шкиперском протоке",
+    "src": [
+     "https://realty.ria.ru/20260923/ploschadka-2119747059.html",
+     "https://www.dp.ru/a/2026/09/23/rsti-planiruet-kupit-uchastok"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "РСХБ Управление Активами",
+  "mentions": [
+   {
+    "deal": "g685e38f9",
+    "role": "seller",
+    "title": "ГК «Рост» приобрела 50% в тепличном комплексе «Агрокультура Групп»",
+    "date": "2023-09-15",
+    "buyer": "ГК «Рост»",
+    "seller": "РСХБ Управление Активами",
+    "target": "ООО «Пересвет-Агро»",
+    "src": [
+     "https://www.kommersant.ru/doc/6237544",
+     "https://www.kommersant.ru/doc/8463701"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "РТ-Развитие бизнеса, Arsanol Holdings ltd и Илья Рыбалкин",
+  "mentions": [
+   {
+    "deal": "g4cb8fc20",
+    "role": "seller",
+    "title": "Росатом рассматривал покупку золотодобывающего проекта ООО «Техсервис» в Иркутской области, но сделка не состоялась",
+    "date": "2022",
+    "buyer": "Эльконский ГМК",
+    "seller": "РТ-Развитие бизнеса, Arsanol Holdings ltd и Илья Рыбалкин",
+    "target": "ООО «Техсервис»",
+    "src": [
+     "https://www.kommersant.ru/doc/5707294"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "РФ в лице Росимущества",
+  "mentions": [
+   {
+    "deal": "g5e7d168d",
+    "role": "seller",
+    "title": "Еще один актив, изъятый у Михаила Юревича, продали вдвое дешевле начальной цены",
+    "date": "2026-09-28",
+    "buyer": "ООО «Уральская нефтяная компания»",
+    "seller": "РФ в лице Росимущества",
+    "target": "57,6% от уставного капитала ОАО «Челябинскоблгаз»",
+    "src": [
+     "https://74.ru/text/business/2026/09/28/76666502/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Радмир Соколов",
+  "mentions": [
+   {
+    "deal": "g3cac5f0f",
+    "role": "seller",
+    "title": "Гусейн Иманов приобрел 30% доли в Schaub Lorenz",
+    "date": "2024-01-31",
+    "buyer": "Гусейн Иманов",
+    "seller": "Радмир Соколов",
+    "target": "Schaub Lorenz",
+    "src": [
+     "https://www.kommersant.ru/doc/6633876",
+     "https://www.tbank.ru/business/contractor/legal/1167746066509/",
+     "https://saby.ru/contragents/9701028836/772201001",
+     "https://datanewton.ru/contragents/1167746066509/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Ренат и Рустем Бадретдиновы",
+  "mentions": [
+   {
+    "deal": "gd3f012e4",
+    "role": "seller",
+    "title": "АО «Прайм рост» приобретает 100% ООО «ГК БРИНЭКС» («Колеса даром»)",
+    "date": "2024",
+    "buyer": "АО «Прайм рост»",
+    "seller": "Ренат и Рустем Бадретдиновы",
+    "target": "БРИНЭКС (Колеса даром)",
+    "src": [
+     "https://chelny-biz.ru/business/631419",
+     "https://www.audit-it.ru/contragent/1221600021356_ooo-gk-brineks"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Реновы",
+  "mentions": [
+   {
+    "deal": "g68500c4a",
+    "role": "seller",
+    "title": "Мосэлектрощит приобрела Уральский турбинный завод у Реновы",
+    "date": "2023-04-01",
+    "buyer": "ООО «Мосэлектрощит»",
+    "seller": "Реновы",
+    "target": "Уральский турбинный завод",
+    "src": [
+     "https://amp.rbc.ru/rbcnews/business/14/04/2023/6438e34e9a7947e7138465dd",
+     "https://www.interfax.ru/business/912088",
+     "https://www.interfax.ru/business/952888"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Рисованый Виктор Викторович и Рисованый Григорий Викторович",
+  "mentions": [
+   {
+    "deal": "g81a22b7c",
+    "role": "seller",
+    "title": "Рыбопромышленный холдинг «Восход» приобрел 75% ООО «Викта»",
+    "date": "2024-11-14",
+    "buyer": "Рыбопромышленный холдинг «Восход»",
+    "seller": "Рисованый Виктор Викторович и Рисованый Григорий Викторович",
+    "target": "ООО «Викта»",
+    "src": [
+     "https://www.interfax.ru/business/992842",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%92%D0%B8%D0%BA%D1%82%D0%B0",
+     "https://www.kommersant.ru/doc/8710295"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Абрамович и партнеры",
+  "mentions": [
+   {
+    "deal": "g048c2ca3",
+    "role": "seller",
+    "title": "Роман Абрамович и партнеры продали Truphone компании TP Global Operations за 1 фунт стерлингов",
+    "date": "2023-01-24",
+    "buyer": "TP Global Operations",
+    "seller": "Роман Абрамович и партнеры",
+    "target": "Truphone",
+    "src": [
+     "https://www.rbc.ru/business/24/01/2023/63d0339b9a79470936efaeb7",
+     "https://find-and-update.company-information.service.gov.uk/company/04187081/insolvency",
+     "https://www.nzherald.co.nz/business/companies/banking-finance/roman-abramovich-backed-telecoms-company-truphone-sold-for-1/PRRAVTBQHRFE5N4QAEPEUTDNEM/",
+     "https://mobilenewscwp.co.uk/News/article/truphone-reportedly-sold-1/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Авдеев",
+  "mentions": [
+   {
+    "deal": "g703c4f62",
+    "role": "seller",
+    "title": "Роман Авдеев продал 62% доли в концерне «Россиум» Сергею Сударикову",
+    "date": "2024-10-31",
+    "buyer": "Структуры Сергея Сударикова",
+    "seller": "Роман Авдеев",
+    "target": "Россиум",
+    "src": [
+     "https://www.kommersant.ru/doc/7267872",
+     "https://www.interfax.ru/russia/989583",
+     "https://www.kommersant.ru/doc/7639611",
+     "https://www.akm.ru/news/kontsern_rossium_i_kholdingovaya_kompaniya_dominanta_pereshli_pod_kontrol_ik_region_i_ego_benefitsia/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Рис и Артем Жилонов",
+  "mentions": [
+   {
+    "deal": "g88236336",
+    "role": "seller",
+    "title": "Алексей Ученов приобрел 25% в производителе банкоматов BFS",
+    "date": "2024-06-05",
+    "buyer": "Алексей Ученов",
+    "seller": "Роман Рис и Артем Жилонов",
+    "target": "BFS (Банковские и финансовые системы)",
+    "src": [
+     "https://www.rbc.ru/finances/14/06/2024/666844429a7947290a9d77dd",
+     "https://www.cnews.ru/news/top/2024-06-14_byvshij_zamministra_minpromtorga",
+     "https://www.sostav.ru/publication/bankomat-s-ii-69511.html",
+     "https://www.cnews.ru/news/top/2025-06-25_v_rossii_sozdadut_samyj_slozhnyj"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Суренович Фероян и Шеке Синотович Фероян",
+  "mentions": [
+   {
+    "deal": "ga75a4d0a",
+    "role": "seller",
+    "title": "ГК «Евроонко» покупает московскую клинику «Юниклиник»",
+    "date": "2025-06-20",
+    "buyer": "Евроонко",
+    "seller": "Роман Суренович Фероян и Шеке Синотович Фероян",
+    "target": "московская клиника «Юниклиник»",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2025/01/22/1087591-set-evroonko-natselilas-na-pokupku-yuniklinik",
+     "https://www.tbank.ru/business/contractor/legal/1207700193282/",
+     "https://www.kommersant.ru/doc/8463640",
+     "https://medvestnik.ru/content/news/ukrupnyaisya-sam-ili-dai-drugomu-sliyaniya-i-poglosheniya-na-rynke-meduslug-rossii-za-2025-god.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Троценко",
+  "mentions": [
+   {
+    "deal": "g87d0201c",
+    "role": "seller",
+    "title": "Роман Троценко продал 69% Инфраструктурной корпорации АЕОН топ-менеджерам",
+    "date": "2023-12-29",
+    "buyer": "Дмитрий Мироненко, Александр Орехов",
+    "seller": "Роман Троценко",
+    "target": "Инфраструктурная корпорация АЕОН",
+    "src": [
+     "https://www.rbc.ru/business/29/12/2023/658d82ce9a79470b8c8b754d",
+     "https://www.kommersant.ru/doc/6440691",
+     "https://www.dp.ru/a/2023/12/29/predprinimatel-trocenko-prodal",
+     "https://thebell.io/milliarder-roman-trotsenko-prodal-kontrol-vugolnykh-aktivakh"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роман Шаров",
+  "mentions": [
+   {
+    "deal": "gmortehprom2026",
+    "role": "buyer",
+    "title": "Роман Шаров выкупил 40% «МорТехПрома» у Сергея Бескровного и довёл долю до 70%",
+    "date": "2026-08-04",
+    "buyer": "Роман Шаров",
+    "seller": "Сергей Бескровный",
+    "target": "ООО «МорТехПром»",
+    "src": [
+     "https://www.dp.ru/a/2026/09/04/vladelci-promklastera-v-kolpino",
+     "https://www.kommersant.ru/doc/8314792",
+     "https://www.dp.ru/a/2025/12/22/postavshhik-armaturi-dlja-ajes"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Роснедра",
+  "mentions": [
+   {
+    "deal": "g35c2f65e",
+    "role": "seller",
+    "title": "Роснедра выставили на торги участок марганцевых руд в Челябинской области",
+    "date": "2026-09-30",
+    "buyer": null,
+    "seller": "Роснедра",
+    "target": "лицензия на участок Кипчакский — месторождение марганцевых руд в Кизильском районе Челябинской области (25 лет, площадь 4,23 км²)",
+    "src": [
+     "https://1prime.ru/20260930/rosnedra-873803090.html"
+    ]
+   },
+   {
+    "deal": "g51fa80ce",
+    "role": "seller",
+    "title": "«Голдрупп» выиграла аукцион на участок россыпного золота в Красноярском крае",
+    "date": "2026-10-08",
+    "buyer": "«Голдрупп»",
+    "seller": "Роснедра",
+    "target": "право геологического изучения и добычи на участке россыпного золота река Чапа — ручей Цой",
+    "src": [
+     "https://1prime.ru/20261008/goldruppy-874065058.html"
+    ]
+   },
+   {
+    "deal": "g73a51452",
+    "role": "seller",
+    "title": "Роснедра переторговывают Тенкергин: стартовая цена подскочила в 7 раз",
+    "date": "2026-10-09",
+    "buyer": null,
+    "seller": "Роснедра",
+    "target": "право геологического изучения и добычи на оловянно-вольфрамовом месторождении Тенкергин",
+    "src": [
+     "https://1prime.ru/20261009/rosnedra-874114704.html"
+    ]
+   },
+   {
+    "deal": "g69dbe10b",
+    "role": "seller",
+    "title": "Роснедра снова выставляют на торги оловорудное «Лунное» в Чукотке — цена выросла на треть",
+    "date": "2026-10-09",
+    "buyer": null,
+    "seller": "Роснедра",
+    "target": "право геологического изучения и добычи на оловорудном месторождении Лунное",
+    "src": [
+     "https://1prime.ru/20261009/rosnedra-874121041.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Российская Федерация",
+  "mentions": [
+   {
+    "deal": "gb8717464",
+    "role": "seller",
+    "title": "Сбербанк выкупил 100% акций АО «Киностудия «Союзмультфильм»» у государства",
+    "date": "2025",
+    "buyer": "Сбербанк",
+    "seller": "Российская Федерация",
+    "target": "АО «Киностудия «Союзмультфильм»»",
+    "src": [
+     "https://www.rbc.ru/business/30/09/2025/68dab0ab9a7947241bfb0fdc?from=from_main_4",
+     "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+     "https://rtvi.com/news/stalo-izvestno-kto-kupil-soyuzmultfilm-u-gosudarstva/"
+    ]
+   },
+   {
+    "deal": "gmru-veb-gtlk",
+    "role": "seller",
+    "title": "ВЭБ.РФ объявила о приобретении ГТЛК",
+    "date": "2026-06-02",
+    "buyer": "ВЭБ.РФ",
+    "seller": "Российская Федерация",
+    "target": "ГТЛК",
+    "src": [
+     "https://www.kommersant.ru/doc/8710968"
+    ]
+   },
+   {
+    "deal": "c382b7c7d",
+    "role": "buyer",
+    "title": "Арбитражный суд Калининградской области взыскал 100% долей группы «Борец» в казну России",
+    "date": "2025-03-27",
+    "buyer": "Российская Федерация",
+    "seller": "Марк Шабада, Григорий Штульберг и Леонид Невзлин",
+    "target": null,
+    "src": [
+     "https://www.kommersant.ru/doc/7606644"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Российский девелопер",
+  "mentions": [
+   {
+    "deal": "agrostroy-zemlya",
+    "role": "buyer",
+    "title": "ООО «Агрострой» продало земельный массив в Новой Москве",
+    "date": "2026-07-08",
+    "buyer": "Российский девелопер",
+    "seller": "ООО «Агрострой»",
+    "target": "Земельный массив в Новой Москве",
+    "src": [
+     "https://epam.ru/ru/news/view/komanda-ab-epam-okazala-kompleksnuyu-pravovuyu-podderzhku-ooo-agrostroj-v-hode-prodazhi-zemelnogo-massiva-v-novoj-moskve"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Росэлектроника",
+  "mentions": [
+   {
+    "deal": "caac79625",
+    "role": "seller",
+    "title": "Продажа Росэлектроникой 100% акций АО «Спецмагнит» с недвижимостью на Дмитровском шоссе",
+    "date": "2024-09-01",
+    "buyer": "Артем Ченцов",
+    "seller": "Росэлектроника",
+    "target": null,
+    "src": [
+     "https://t.me/dealsma/5205"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Руслан Вдовин",
+  "mentions": [
+   {
+    "deal": "g3fb43064",
+    "role": "seller",
+    "title": "Денис Избрехт купил Лискинский маслоэкстракционный завод «Исток»",
+    "date": "2025-11-05",
+    "buyer": "Денис Избрехт",
+    "seller": "Руслан Вдовин",
+    "target": "ООО «Исток»",
+    "src": [
+     "https://abireg.ru/newsitem/110293/",
+     "https://www.akm.ru/news/masloekstraktsionnyy_zavod_istok_v_voronezhskikh_liskakh_prodan_d_izbrekhtu/",
+     "https://abireg.ru/newsitem/107687/",
+     "https://abireg.ru/newsitem/109130/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Руслан Саркисов (80%), Константин Гибало и Артур Мартиросов (по 10%)",
+  "mentions": [
+   {
+    "deal": "g0591604d",
+    "role": "buyer",
+    "title": "«Интеррос капитал» продал УК венчурного фонда «Восход» топ-менеджменту фонда (MBO)",
+    "date": "2023-06-06",
+    "buyer": "Руслан Саркисов (80%), Константин Гибало и Артур Мартиросов (по 10%)",
+    "seller": "«Интеррос»",
+    "target": "Венчурный фонд «Восход»",
+    "src": [
+     "https://www.forbes.ru/milliardery/490429-interros-potanina-prodal-uk-investfonda-voshod-ego-top-menedzeram",
+     "https://www.kommersant.ru/doc/6028191",
+     "https://tass.ru/ekonomika/17938329",
+     "https://www.dk.ru/news/237184941"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Руслан Сеюков",
+  "mentions": [
+   {
+    "deal": "gdd85a5b9",
+    "role": "seller",
+    "title": "Артём Чайка приобрёл ещё 50% 3S Group у Руслана Сеюкова",
+    "date": "2024-06-04",
+    "buyer": "Артём Чайка",
+    "seller": "Руслан Сеюков",
+    "target": "3S Group",
+    "src": [
+     "https://www.kommersant.ru/doc/6712251",
+     "https://developmentmedia.ru/2026/04/28/syn-byvshego-genprokurora-chajki-postroit-mnogofunktsionalnyj-kompleks-v-moskve/",
+     "https://companies.rbc.ru/id/5177746233066-ooo-obschestvo-s-ogranichennoj-otvetstvennostyu-tri-es-grup/",
+     "https://www.vedomosti.ru/politics/news/2025/02/14/1092190-velikobritaniya-vvela-sanktsii"
+    ]
+   },
+   {
+    "deal": "geda130b6",
+    "role": "seller",
+    "title": "Артём Чайка приобрёл 49% основного юрлица 3S Group",
+    "date": "2023-12-28",
+    "buyer": "Артём Чайка",
+    "seller": "Руслан Сеюков",
+    "target": "3S Group",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2024/01/10/1014345-artem-chaika-vnov-stal-developerom",
+     "https://www.kommersant.ru/doc/6712251"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "СУ-155",
+  "mentions": [
+   {
+    "deal": "g1dc82018",
+    "role": "seller",
+    "title": "Приобретение ООО «СК С.Т.С.» (ГК «Садовое кольцо») Серпуховского лифтостроительного завода на торгах банкротного имущества СУ-155",
+    "date": "2022-05-16",
+    "buyer": "«Садовое кольцо»",
+    "seller": "СУ-155",
+    "target": "Серпуховский лифтостроительный завод СУ-155",
+    "src": [
+     "https://www.kommersant.ru/doc/5368488",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%A1%D0%B5%D1%80%D0%BF%D1%83%D1%85%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B8%D1%84%D1%82%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4",
+     "https://realty.interfax.ru/ru/news/articles/139554/",
+     "https://realty.ria.ru/20220926/zavod-1819421328.html"
+    ]
+   },
+   {
+    "deal": "g3e3f5e9c",
+    "role": "seller",
+    "title": "«Крост» выкупил завод железобетонных панелей КПСК у СУ-155",
+    "date": "2023",
+    "buyer": "ООО «Энки»",
+    "seller": "СУ-155",
+    "target": "АО «Клинский проектно-строительный комбинат»",
+    "src": [
+     "https://www.kommersant.ru/doc/5985465",
+     "https://vmo24.ru/news/zavod_zhbi_klin_voshedshiy_v_koncern_krost_ozhidaet_masshtabnaya_modernizaciya"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Саиф Алькетби (через SBK ART LLC, ОАЭ)",
+  "mentions": [
+   {
+    "deal": "g4402f70f",
+    "role": "buyer",
+    "title": "Продажа доли Сбербанка в Fortenova Group",
+    "date": "2022-10-31",
+    "buyer": "Саиф Алькетби (через SBK ART LLC, ОАЭ)",
+    "seller": "Сбербанк",
+    "target": "Fortenova Group",
+    "src": [
+     "https://orion-law.com/news/yuristy-orion-partners-osushestvili-pravovoe-soprovozhdenie-prodazhi-doli-sberbanka-v-kapitale-fortenova-group",
+     "https://www.kommersant.ru/doc/5651345",
+     "https://frankmedia.ru/106662",
+     "https://en.wikipedia.org/wiki/Fortenova_Group"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сбер",
+  "mentions": [
+   {
+    "deal": "gc9f8d104",
+    "role": "seller",
+    "title": "АФК «Система» выкупила долю Сбера в ГК «Ниармедик» и консолидировала 100%",
+    "date": "2024-11-01",
+    "buyer": "АФК «Система»",
+    "seller": "Сбер",
+    "target": "АО «Новый инвестиционный холдинг» (ГК «Ниармедик»)",
+    "src": [
+     "https://sistema.ru/investors-and-shareholders/financial",
+     "https://www.interfax.ru/business/1021937",
+     "https://www.interfax.ru/business/1064046",
+     "https://medvestnik.ru/content/news/avs-medicina-vykupila-kliniki-niarmedik.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сбербанк Инвестиции",
+  "mentions": [
+   {
+    "deal": "gc9461b5c",
+    "role": "seller",
+    "title": "Сбербанк Инвестиции вышли из капитала Медскан Лаб",
+    "date": "2025-10-24",
+    "buyer": "ГК «Медскан»",
+    "seller": "Сбербанк Инвестиции",
+    "target": "ООО «Медскан Лаб»",
+    "src": [
+     "https://abn.agency/2025/10/27/sberbank-investiczii-vyshli-iz-kapitala-medskan-lab/",
+     "https://www.akm.ru/news/sberbank_investitsii_vyshli_iz_sostava_uchrediteley_medskan_lab/?sphrase_id=311736",
+     "https://vademec.ru/news/2025/10/28/v-medskane-nazvali-prichinu-sdelki-po-vykhodu-struktury-sberbanka-iz-kholdingovoy-kompanii-gruppy-kd/",
+     "https://t.me/s/bitkogan?after=27765"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Свердловская область",
+  "mentions": [
+   {
+    "deal": "gb43c8bcb",
+    "role": "seller",
+    "title": "Сибагро приобрела 51% Богдановичского комбикормового завода",
+    "date": "2024-03-01",
+    "buyer": "Сибагро",
+    "seller": "Свердловская область",
+    "target": "Богдановичский комбикормовый завод",
+    "src": [
+     "https://www.kommersant.ru/doc/6579487",
+     "https://sibagrogroup.ru/holding/companies/bogdanovichskiy-kombikormovyy-zavod-/",
+     "https://www.audit-it.ru/contragent/1026600705790_ao-bogdanovichskiy-kombikormovyy-zavod"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Светлана Сулейманова",
+  "mentions": [
+   {
+    "deal": "ga218f75c",
+    "role": "seller",
+    "title": "Акульчев купил 95% долей кондитерской фабрики «Колос» в Челябинске",
+    "date": "2025-11-01",
+    "buyer": "Акульчев",
+    "seller": "Светлана Сулейманова",
+    "target": "Колос (кондитерская фабрика)",
+    "src": [
+     "https://www.kommersant.ru/doc/8293536",
+     "https://www.retail.ru/news/chelyabinskiy-kolos-kupil-proizvoditel-vafel-akulchev-17-dekabrya-2025-272636/",
+     "https://companies.rbc.ru/id/1097453006760-ooo-obschestvo-s-ogranichennoj-otvetstvennostyu-proizvodstvenno-torgovaya-kompaniya-kolos/",
+     "https://sfera.fm/news/konditerskaya/akulchev-usilivaet-proizvodstvennuyu-bazu-za-schet-chelyabinskoi-fabriki-kolos"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Святослав Вильде (основатель ATI.SU)",
+  "mentions": [
+   {
+    "deal": "gd4728207",
+    "role": "buyer",
+    "title": "Основатель ATI.SU Святослав Вильде купил 10% цифровой платформы CargoTech",
+    "date": "2026-09-29",
+    "buyer": "Святослав Вильде (основатель ATI.SU)",
+    "seller": null,
+    "target": "10% в капитале CargoTech",
+    "src": [
+     "https://www.tadviser.ru/a/969541",
+     "https://www.cnews.ru/news/line/2026-09-29_osnovatel_atisu_svyatoslav"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Святослав Вильде и Олег Круглов",
+  "mentions": [
+   {
+    "deal": "gc5951fac",
+    "role": "buyer",
+    "title": "Владельцы логистической платформы ATI.SU купили 25% разработчика сервиса CARGO.RUN",
+    "date": "2026-08-04",
+    "buyer": "Святослав Вильде и Олег Круглов",
+    "seller": null,
+    "target": "CARGO.RUN",
+    "src": [
+     "https://www.tadviser.ru/a/716777",
+     "https://www.cnews.ru/news/line/2026-08-04_atisu_i_cargorun_svyazhut_poisk_gruzov"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Семья Даниленко",
+  "mentions": [
+   {
+    "deal": "g5dc6cb47",
+    "role": "seller",
+    "title": "ОСК приобрела Кингисеппский машиностроительный завод у семьи Даниленко",
+    "date": "2025-07-21",
+    "buyer": "ОСК (Объединённая судостроительная корпорация)",
+    "seller": "Семья Даниленко",
+    "target": "Кингисеппский машиностроительный завод",
+    "src": [
+     "https://www.fontanka.ru/2025/07/21/75750032/",
+     "https://1prime.ru/20250721/kholding-859737085.html",
+     "https://newprospect.ru/news/kingiseppskij-mashinostroitelnyij-zavod-voshel-v-sostav-osk",
+     "https://www.fontanka.ru/2026/01/14/76215445/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Семья Михаила Николаева",
+  "mentions": [
+   {
+    "deal": "ga28b511a",
+    "role": "seller",
+    "title": "Алексей Сидюков (Мысхако) покупает завод «Вина Лефкадии» в Саук-Дере",
+    "date": "2023-09-29",
+    "buyer": "Алексей Сидюков",
+    "seller": "Семья Михаила Николаева",
+    "target": "завод «Вина Лефкадии» в Саук-Дере",
+    "src": [
+     "https://www.kommersant.ru/doc/6184311",
+     "https://www.kommersant.ru/doc/6184599",
+     "https://www.kommersant.ru/doc/6934176",
+     "https://www.kommersant.ru/doc/8727295"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Бачин",
+  "mentions": [
+   {
+    "deal": "ge4cded31",
+    "role": "seller",
+    "title": "Тымлатский рыбокомбинат (Salmonica) приобрел ООО «Алаид» с квотами на добычу гребешка и рыбы",
+    "date": "2025-10-09",
+    "buyer": "Тымлатский рыбокомбинат (Salmonica)",
+    "seller": "Сергей Бачин",
+    "target": "ООО «Алаид»",
+    "src": [
+     "https://konkurent.ru/article/81350",
+     "https://vl.aif.ru/society/odno-iz-vedushchih-predpriyatiy-sahalina-stalo-sobstvennostyu-kozhemyako",
+     "https://www.interfax.ru/business/1052288",
+     "https://south.vedomosti.ru/south/news/2025/10/13/1146337-biznes"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Бескровный",
+  "mentions": [
+   {
+    "deal": "gmortehprom2026",
+    "role": "seller",
+    "title": "Роман Шаров выкупил 40% «МорТехПрома» у Сергея Бескровного и довёл долю до 70%",
+    "date": "2026-08-04",
+    "buyer": "Роман Шаров",
+    "seller": "Сергей Бескровный",
+    "target": "ООО «МорТехПром»",
+    "src": [
+     "https://www.dp.ru/a/2026/09/04/vladelci-promklastera-v-kolpino",
+     "https://www.kommersant.ru/doc/8314792",
+     "https://www.dp.ru/a/2025/12/22/postavshhik-armaturi-dlja-ajes"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Габестро, Алексей Захаров и Владимир Орлов",
+  "mentions": [
+   {
+    "deal": "gfde94a49",
+    "role": "seller",
+    "title": "ВкусВилл купил 95% ООО «Обед.ру» – сервис доставки еды в офисы",
+    "date": "2024-04-04",
+    "buyer": "ВкусВилл",
+    "seller": "Сергей Габестро, Алексей Захаров и Владимир Орлов",
+    "target": "ООО «Обед.ру»",
+    "src": [
+     "https://www.akm.ru/news/vkusvill_kupil_servis_po_dostavke_edy_v_ofisy_obed_ru/",
+     "https://www.vedomosti.ru/business/articles/2024/04/05/1030173-vkusvill-kupil-stareishii",
+     "https://www.interfax.ru/business/1053739"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Докучаев и Валерий Гарипов",
+  "mentions": [
+   {
+    "deal": "gmru-vysochaishy-komi-oil",
+    "role": "seller",
+    "title": "Сооснователь «Высочайшего» продаёт нефтяной проект в Коми",
+    "date": "2026-07-17",
+    "buyer": null,
+    "seller": "Сергей Докучаев и Валерий Гарипов",
+    "target": "нефтяной проект в Коми",
+    "src": [
+     "https://www.kommersant.ru/doc/8816591"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Дьяченко (17%), Федор Железняков (17%) и Петр Железняков (16%)",
+  "mentions": [
+   {
+    "deal": "gc991514e",
+    "role": "seller",
+    "title": "ООО «Лето Финанс» купила 50% в ООО «МедТехСервис» (производитель тест-полосок)",
+    "date": "2024-02-09",
+    "buyer": "Лето Финанс",
+    "seller": "Сергей Дьяченко (17%), Федор Железняков (17%) и Петр Железняков (16%)",
+    "target": "МедТехСервис",
+    "src": [
+     "https://www.interfax.ru/business/945677",
+     "https://vademec.ru/news/2025/08/28/upravlentsev-irkutskogo-medtekhservisa-zapodozrili-v-khishchenii-65-mln-rubley/",
+     "https://ircity.ru/text/politics/2026/07/23/76548821/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Елизаров",
+  "mentions": [
+   {
+    "deal": "g7a96dda2",
+    "role": "seller",
+    "title": "«Трамплин Холдинг» приобрел 51% разработчика процессоров Malt System",
+    "date": "2026-09-03",
+    "buyer": "АО «Трамплин Холдинг»",
+    "seller": "Сергей Елизаров",
+    "target": "ООО «Мальт Систем»",
+    "src": [
+     "https://www.computerra.ru/361624/ao-tramplin-holding-obedinilos-s-ooo-malt-sistem-dlya-uskoreniya-razvitiya-rossijskoj-mikroelektroniki/",
+     "https://abn.agency/2026/09/14/razrabotchik-proczessora-irtysh-vykupil-kontrolnyj-paket-dizajn-czentra-malt-system/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Жучков",
+  "mentions": [
+   {
+    "deal": "g298c1588",
+    "role": "seller",
+    "title": "Сергей Жучков продал ProgKids компании Rocket Tech School",
+    "date": "2026-07-27",
+    "buyer": "Rocket Tech School",
+    "seller": "Сергей Жучков",
+    "target": "ProgKids",
+    "src": [
+     "https://vc.ru/id4994551/3049740-prodazha-progkids-i-ekzit-dlya-impact-capital",
+     "https://t.me/rusven/7634",
+     "https://spark-interfax.ru/moskva-arbat/ooo-progkids-inn-7704434913-ogrn-1177746689955-591525e914295bb9e0531c9aa8c084ba",
+     "https://www.progkids.com/en/blog/intervyu-s-osnovatelem-onlayn-shkoly-programmirovaniya-progkids-sergeem-zhuchkovym"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Зотов, Анатолий Митрошин, Вячеслав Комлев, Кирилл Веселкин, Алексей Коптев и Рустам Рустамов",
+  "mentions": [
+   {
+    "deal": "g71bd68cf",
+    "role": "seller",
+    "title": "АО «Цифровой вектор» получил 30% в «Ред софт»",
+    "date": "2024-12-24",
+    "buyer": "Цифровой вектор",
+    "seller": "Сергей Зотов, Анатолий Митрошин, Вячеслав Комлев, Кирилл Веселкин, Алексей Коптев и Рустам Рустамов",
+    "target": "Ред софт",
+    "src": [
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%A0%D0%B5%D0%B4_%D0%A1%D0%BE%D1%84%D1%82_(Red_Soft)",
+     "https://servernews.ru/1116089",
+     "https://www.interfax.ru/business/1030508",
+     "https://www.akm.ru/news/chistaya_pribyl_kompanii_red_soft_za_2025_god_po_rsbu_snizilas_na_8/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Зубков и Алексей Лабутин",
+  "mentions": [
+   {
+    "deal": "g0e7acc4d",
+    "role": "seller",
+    "title": "Технониколь купила заводы по производству фиброцементных плит ООО ТД ЛТМ",
+    "date": "2025-09-17",
+    "buyer": "Технониколь",
+    "seller": "Сергей Зубков и Алексей Лабутин",
+    "target": "ООО «ТД ЛТМ»",
+    "src": [
+     "https://www.kommersant.ru/doc/8078553",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9B%D0%A2%D0%9C",
+     "https://logistics.ru/promyshlennost-upravlenie-logistikoy-i-kompaniey/tekhnonikol-vykhodit-na-rynok-fasadnykh-paneley",
+     "https://realty.ria.ru/20250930/tekhnonikol-2045302144.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Кислов",
+  "mentions": [
+   {
+    "deal": "gba72051d",
+    "role": "seller",
+    "title": "Агрокомплекс им. Ткачева приобрел ГК «Юг Руси»",
+    "date": "2023-11-10",
+    "buyer": "Агрокомплекс им. Ткачева",
+    "seller": "Сергей Кислов",
+    "target": "ГК «Юг Руси»",
+    "src": [
+     "https://www.interfax.ru/business/930220",
+     "https://kuban.rbc.ru/krasnodar/freenews/64f5844a9a79479ede0d6007",
+     "https://thebell.io/yug-rusi-u-semi-tkacheva-chego-zhdat-ot-vstrechi-putina-s-erdoganom-i-novyy-ministr-oborony-ukrainy",
+     "https://www.interfax.ru/business/1082333"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Крестьянинов, Галина Шелест и Евгений Полканов",
+  "mentions": [
+   {
+    "deal": "gfc7d8f5f",
+    "role": "seller",
+    "title": "ПАО «Ростелеком» приобрел 100% долей ООО «Светец» — разработчика ПО для телекоммуникационных сетей",
+    "date": "2023-03-14",
+    "buyer": "Ростелеком",
+    "seller": "Сергей Крестьянинов, Галина Шелест и Евгений Полканов",
+    "target": "ООО «Светец»",
+    "src": [
+     "https://www.cash-trading.ru/rostelekom-vikupaet-svetez",
+     "https://www.vedomosti.ru/business/news/2023/03/15/966663-rostelekom-kupil-razrabotchika",
+     "https://www.kommersant.ru/doc/5875450",
+     "https://www.cnews.ru/news/line/2022-05-11_svetets_obespechil_funktsiyu"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Лебедев",
+  "mentions": [
+   {
+    "deal": "g7f396659",
+    "role": "seller",
+    "title": "Структура Р-фарма купила 49,9% сети клиник Центр ЭКО",
+    "date": "2024-12-26",
+    "buyer": "ГК «Р-Фарм»",
+    "seller": "Сергей Лебедев",
+    "target": "ГК «Центр ЭКО»",
+    "src": [
+     "https://ru.wikipedia.org/wiki/%D0%A0-%D0%A4%D0%B0%D1%80%D0%BC",
+     "https://www.vademec.ru/news/2024/12/26/struktura-gk-r-farm-priobrela-49-9-v-seti-klinik-tsentr-eko/",
+     "https://www.vademec.ru/news/2026/06/03/r-farm-polnostyu-vykupil-set-klinik-tsentr-eko/",
+     "https://www.vedomosti.ru/business/articles/2026/06/03/1202336-struktura-gk-r-farm-polnostyu-vikupila-set-klinik"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Молчанов, Константин Карпухов, Дарья Ткаченко, Антон Злотников, Алексей Рыжов и Станислав Ветловский",
+  "mentions": [
+   {
+    "deal": "gee450f17",
+    "role": "seller",
+    "title": "1С приобрела контрольную долю в ООО «Селлематикс»",
+    "date": "2025-06-06",
+    "buyer": "1С",
+    "seller": "Сергей Молчанов, Константин Карпухов, Дарья Ткаченко, Антон Злотников, Алексей Рыжов и Станислав Ветловский",
+    "target": "Селлематикс",
+    "src": [
+     "https://www.rbc.ru/technology_and_media/09/06/2025/6846e5fc9a79470af38977f3",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%A1%D0%B5%D0%BB%D0%BB%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D1%81_(Sellematics)",
+     "https://www.retail.ru/news/1s-priobrela-kontrolnyy-paket-sellematics-dlya-razvitiya-instrumentov-e-commerce-10-iyunya-2025-265633/",
+     "https://1c.ru/news/pressrelise.jsp?id=2248"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Подузов, Артем Максимов, ООО «Империус Групп» и ещё три совладельца",
+  "mentions": [
+   {
+    "deal": "g2c9ecddc",
+    "role": "seller",
+    "title": "Яндекс купил IT-платформу Pruffme",
+    "date": "2024-12-01",
+    "buyer": "Яндекс",
+    "seller": "Сергей Подузов, Артем Максимов, ООО «Империус Групп» и ещё три совладельца",
+    "target": "Pruffme",
+    "src": [
+     "https://yandex.ru/company/news/01-03-12-2024",
+     "https://www.kommersant.ru/doc/7345355",
+     "https://datanewton.ru/contragents/1157847085285/history/timeline"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Руднов",
+  "mentions": [
+   {
+    "deal": "g70c0a9ff",
+    "role": "seller",
+    "title": "НМГ купила контрольный пакет ИД «Комсомольская правда»",
+    "date": "2026-09-03",
+    "buyer": "МИЦ «Известия»",
+    "seller": "Сергей Руднов",
+    "target": "Издательский дом «Комсомольская правда»",
+    "src": [
+     "https://iz.ru/2160263/2026-09-03/nmg-priobretaet-kontrolnuiu-doliu-izdatelskogo-doma-komsomolskaia-pravda",
+     "https://www.interfax.ru/business/1112938",
+     "https://tass.ru/ekonomika/28075009",
+     "https://www.kommersant.ru/doc/8924897"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Седов",
+  "mentions": [
+   {
+    "deal": "g00a0318e",
+    "role": "seller",
+    "title": "IPO МФК «Займер» на Московской бирже",
+    "date": "2024-04-12",
+    "buyer": null,
+    "seller": "Сергей Седов",
+    "target": "Займер",
+    "src": [
+     "https://quote.ru/news/article/6617ffd39a7947b910a2e0d0",
+     "https://cbonds.ru/news/3846135/",
+     "https://www.kommersant.ru/doc/8740046"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Смыслов и Сергей Сапожников",
+  "mentions": [
+   {
+    "deal": "ge33ed8f0",
+    "role": "seller",
+    "title": "Урал-Логистика приобрела 100% РэйлСпецТранс",
+    "date": "2024-03-14",
+    "buyer": "Урал-Логистика",
+    "seller": "Сергей Смыслов и Сергей Сапожников",
+    "target": "РэйлСпецТранс",
+    "src": [
+     "https://www.interfax.ru/business/950699",
+     "https://railst.ru/about/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Цикалюк (51%) и инвестхолдинг SFI (49%) — по неофициальным данным",
+  "mentions": [
+   {
+    "deal": "g27543cdc",
+    "role": "seller",
+    "title": "Продажа страховой компании ВСК",
+    "date": "2025-11-16",
+    "buyer": null,
+    "seller": "Сергей Цикалюк (51%) и инвестхолдинг SFI (49%) — по неофициальным данным",
+    "target": "АО «Страховой дом ВСК»",
+    "src": [
+     "https://www.kommersant.ru/doc/8209968",
+     "https://www.vedomosti.ru/finance/news/2025/11/17/1155435-v-vsk-nazvali",
+     "https://www.kommersant.ru/doc/8377281"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Черников",
+  "mentions": [
+   {
+    "deal": "gbf6f6432",
+    "role": "seller",
+    "title": "Экс-акционер Башкирской содовой компании продал производство упаковки",
+    "date": "2026-08-02",
+    "buyer": "Строма",
+    "seller": "Сергей Черников",
+    "target": "Полекс",
+    "src": [
+     "https://www.kommersant.ru/doc/8860899",
+     "https://www.kommersant.ru/doc/8860619",
+     "https://finance.mail.ru/article/investitsiyam-podobrali-taru-69220624/",
+     "https://lkpconsult.ru/services/soprovozhdenie-sdelok-m-a/soprovozhdenie-kupli-prodazhi-biznesa/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Шилов и Евгений Жуланов",
+  "mentions": [
+   {
+    "deal": "gca198c27",
+    "role": "seller",
+    "title": "Атомэнергопром / Русатом – Цифровые решения приобрели 92% АО «Группа ЭйТи» (AT Consulting)",
+    "date": "2022-02-16",
+    "buyer": "Атомэнергопром",
+    "seller": "Сергей Шилов и Евгений Жуланов",
+    "target": "Группа ЭйТи",
+    "src": [
+     "https://neftegaz.ru/news/tsifrovizatsiya/733209-atomenergoprom-kupil-92-ustavnogo-kapitala-gruppy-eyti/",
+     "https://rosatom.ru/journalist/news/kompaniya-rosatoma-rtsr-i-gruppa-kompaniy-at-consulting-obedinili-usiliya-dlya-realizatsii-strategich/",
+     "https://www.atomic-energy.ru/news/2022/04/19/123959",
+     "https://www.kommersant.ru/doc/5140121"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Сергей Шишкарев",
+  "mentions": [
+   {
+    "deal": "g24e6d8ee",
+    "role": "seller",
+    "title": "Росатом, ТМХ и Сергей Шишкарев создают совместную логистическую компанию на базе Дело",
+    "date": "2024-12-25",
+    "buyer": "Трансмашхолдинг",
+    "seller": "Сергей Шишкарев",
+    "target": "Группа компаний «Дело»",
+    "src": [
+     "https://www.rbc.ru/business/25/12/2024/676aff8d9a7947bb1f5e22e9",
+     "https://www.interfax.ru/business/1000623",
+     "https://www.interfax.ru/business/1003408",
+     "https://logirus.ru/news/transport/troynoy_shakh_krupneyshaya_logisticheskaya_sdelka_goda_razvalilas_na_finishe.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Серпуховский лифтостроительный завод СУ-155",
+  "mentions": [
+   {
+    "deal": "g1dc82018",
+    "role": "target",
+    "title": "Приобретение ООО «СК С.Т.С.» (ГК «Садовое кольцо») Серпуховского лифтостроительного завода на торгах банкротного имущества СУ-155",
+    "date": "2022-05-16",
+    "buyer": "«Садовое кольцо»",
+    "seller": "СУ-155",
+    "target": "Серпуховский лифтостроительный завод СУ-155",
+    "src": [
+     "https://www.kommersant.ru/doc/5368488",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%A1%D0%B5%D1%80%D0%BF%D1%83%D1%85%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B8%D1%84%D1%82%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4",
+     "https://realty.interfax.ru/ru/news/articles/139554/",
+     "https://realty.ria.ru/20220926/zavod-1819421328.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Совладельцы Realweb — Эмин и Олеся Аветисян, Василий Лазука, Максим Виноградов, Иван Хмелевской, а также фонд iTech Capital",
+  "mentions": [
+   {
+    "deal": "g0a6f7569",
+    "role": "seller",
+    "title": "Qiwi купила рекламное агентство Realweb",
+    "date": "2022-12-07",
+    "buyer": "КИВИ",
+    "seller": "Совладельцы Realweb — Эмин и Олеся Аветисян, Василий Лазука, Максим Виноградов, Иван Хмелевской, а также фонд iTech Capital",
+    "target": "Realweb",
+    "src": [
+     "https://www.forbes.ru/biznes/482340-qiwi-kupila-krupnogo-igroka-na-rynke-onlajn-reklamy"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Совместное предприятие Yandex B2B Tech и SolidSoft",
+  "mentions": [
+   {
+    "deal": "cb30dbbc8",
+    "role": "target",
+    "title": "«Яндекс» и SolidSoft создают СП в сфере кибербезопасности (Web Application Firewall)",
+    "date": "2025-07-18",
+    "buyer": "Яндекс",
+    "seller": "Основатели SolidSoft",
+    "target": "Совместное предприятие Yandex B2B Tech и SolidSoft",
+    "src": [
+     "https://www.kommersant.ru/doc/8077927"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Совместное предприятие «Норникеля» и БЕЛАЗа для разработки и производства подземной горной техники (на первом этапе — ремонт и восстановление машин)",
+  "mentions": [
+   {
+    "deal": "g2b1ff5cb",
+    "role": "target",
+    "title": "«Норникель» и БЕЛАЗ договорились о создании совместного предприятия для разработки и производства подземной горной техники",
+    "date": "2026-09-07",
+    "buyer": null,
+    "seller": null,
+    "target": "Совместное предприятие «Норникеля» и БЕЛАЗа для разработки и производства подземной горной техники (на первом этапе — ремонт и восстановление машин)",
+    "src": [
+     "https://www.ttelegraf.ru/news/nornikel-i-belaz-ot-postavok-k-sovmestnomu-inzhiniringu/",
+     "https://1prime.ru/20260907/nornikel-873086877.html",
+     "https://abireg.ru/newsitem/117169/",
+     "https://www.sb.by/articles/svyazuyushchee-zveno-tekhnologicheskogo-suvereniteta.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Создатели «Ситилинка»",
+  "mentions": [
+   {
+    "deal": "g692dcc6b",
+    "role": "buyer",
+    "title": "Создатели «Ситилинка» купили долю в производителе картошки для чипсов Lay’s",
+    "date": "2026-08-06",
+    "buyer": "Создатели «Ситилинка»",
+    "seller": "ЕТС",
+    "target": "Экоагрофарминг",
+    "src": [
+     "https://www.sostav.ru/publication/sozdateli-sitilinka-kupili-dolyu-v-proizvoditele-kartoshki-dlya-chipsov-lays-85859.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Станислав Бартош",
+  "mentions": [
+   {
+    "deal": "gabdbe320",
+    "role": "buyer",
+    "title": "Петербургский логистический холдинг «ЮСТА» приобрел кондитерскую фабрику в Кронштадте",
+    "date": "2026-08-28",
+    "buyer": "Станислав Бартош",
+    "seller": "Владислав Теплоухов",
+    "target": "КФ «Кронштадтская»",
+    "src": [
+     "https://career.habr.com/companies/usta-group",
+     "https://saby.ru/profile/7843003738-781001001"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Структура «Ростелекома» и «Сбербанка»",
+  "mentions": [
+   {
+    "deal": "g3e3f233c",
+    "role": "seller",
+    "title": "Структура «Ростелекома» и «Сбербанка» продала бизнес-центр на Арбате компании ООО «Первый»",
+    "date": "2023-09-20",
+    "buyer": "Первый",
+    "seller": "Структура «Ростелекома» и «Сбербанка»",
+    "target": "бизнес-центр на Арбате в Москве (6,3 тыс. м²)",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2023/09/26/997089-struktura-rostelekoma-i-sberbanka-prodala-ofisnii-kompleks",
+     "https://realty.ria.ru/20230926/arbat-1898637678.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Структура ГК ПИК",
+  "mentions": [
+   {
+    "deal": "gc96f0c6b",
+    "role": "seller",
+    "title": "ТПС Недвижимость приобретает торгово-развлекательный комплекс Columbus у структуры ГК ПИК",
+    "date": "2023",
+    "buyer": "ТПС недвижимость",
+    "seller": "Структура ГК ПИК",
+    "target": "ТЦ Columbus",
+    "src": [
+     "https://www.vedomosti.ru/realty/news/2023/06/01/978111-tps-nedvizhimost-pokupaet-krupnii-torgovii-tsentr-columbus",
+     "https://www.sostav.ru/publication/torgovo-razvlekatelnyj-tsentr-columbus-73057.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Структура Евгения Зубицкого (ПМХ)",
+  "mentions": [
+   {
+    "deal": "g88d5e740",
+    "role": "buyer",
+    "title": "НЛМК продает сортовой дивизион (заводы на Урале и в Калужской области)",
+    "date": "2023-09-06",
+    "buyer": "Структура Евгения Зубицкого (ПМХ)",
+    "seller": "НЛМК",
+    "target": null,
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2023/02/17/963336-nlmk-dogovarivaetsya-o-prodazhe-svoih-zavodov",
+     "https://www.kommersant.ru/doc/6199678",
+     "https://www.kaluga-poisk.ru/news/ekonomika/fas-razreshila-prodazhu-zavoda-nlmk-kaluga-i-vtorchermet-nlmk",
+     "https://www.revda-info.ru/2023/11/10/nlmk-ural-pereimenovan-v-promsort-ural-lisin-prodal-sortovoj-divizion-na-urale-i-v-kaluge/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Структуры Виктора Семенова и компания Hines",
+  "mentions": [
+   {
+    "deal": "g7596ae81",
+    "role": "seller",
+    "title": "ИК «Кама капитал» выкупила Outlet Village Пулково и Outlet Village Белая Дача",
+    "date": "2025-04-01",
+    "buyer": "Инвестиционный холдинг «Кама Капитал»",
+    "seller": "Структуры Виктора Семенова и компания Hines",
+    "target": "Outlet Village Белая Дача и Outlet Village Пулково",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2025/04/23/1106050-amerikanskaya-hines-prodala-dva-aktiva",
+     "https://www.kommersant.ru/doc/8077927",
+     "https://kamacapital.ru/news/28/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Структуры, связанные с ГК «Синдика»",
+  "mentions": [
+   {
+    "deal": "g02eed099",
+    "role": "seller",
+    "title": "Группа Лента приобрела активы сети OBI Россия",
+    "date": "2026-01-13",
+    "buyer": "Группа Лента",
+    "seller": "Структуры, связанные с ГК «Синдика»",
+    "target": "OBI Россия",
+    "src": [
+     "https://www.kommersant.ru/doc/8340567",
+     "https://www.kommersant.ru/doc/8341214",
+     "https://realty.ria.ru/20260113/ekspert-2067579340.html",
+     "https://1prime.ru/20260113/obi-866439434.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Суховерхов Андрей Владимирович",
+  "mentions": [
+   {
+    "deal": "gdf93c62d",
+    "role": "seller",
+    "title": "ЭТМ приобрел дистрибьютора АВС Электро",
+    "date": "2025-05-26",
+    "buyer": "ЭТМ",
+    "seller": "Суховерхов Андрей Владимирович",
+    "target": "АВС-электро",
+    "src": [
+     "https://www.ruscable.ru/news/2025/05/26/ETM_prisoedinyaet_biznes_AVS-Elektro_a_Russkij_Sve/",
+     "https://abireg.ru/newsitem/107328/",
+     "https://www.kommersant.ru/doc/8553683"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ТОО «Беркут»",
+  "mentions": [
+   {
+    "deal": "g184477ed",
+    "role": "seller",
+    "title": "УК «Аэропорты регионов» и казахстанские партнеры приобрели аэропорт «Орал» в Уральске",
+    "date": "2023-02-01",
+    "buyer": "ТОО «Орал Аэропорт Холдинг»",
+    "seller": "ТОО «Беркут»",
+    "target": "терминал аэропорта «Орал» в Уральске",
+    "src": [
+     "https://www.nur.kz/politics/universe/2008988-aeroport-uralska-kupila-rossiyskaya-kompaniya/",
+     "https://mgorod.kz/news/sovladelec-aeroporta-uralska-rasskazal-o-planax-na-budushhee"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ТОО «Орал Аэропорт Холдинг»",
+  "mentions": [
+   {
+    "deal": "g184477ed",
+    "role": "buyer",
+    "title": "УК «Аэропорты регионов» и казахстанские партнеры приобрели аэропорт «Орал» в Уральске",
+    "date": "2023-02-01",
+    "buyer": "ТОО «Орал Аэропорт Холдинг»",
+    "seller": "ТОО «Беркут»",
+    "target": "терминал аэропорта «Орал» в Уральске",
+    "src": [
+     "https://www.nur.kz/politics/universe/2008988-aeroport-uralska-kupila-rossiyskaya-kompaniya/",
+     "https://mgorod.kz/news/sovladelec-aeroporta-uralska-rasskazal-o-planax-na-budushhee"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ТЦ «Сказка» (40 988 кв. м) в Рассказовке, новая Москва",
+  "mentions": [
+   {
+    "deal": "gcd8d2664",
+    "role": "target",
+    "title": "ЗПИФ «Инвестпроф» купил ТЦ «Сказка» в новой Москве у «Центр-инвеста»",
+    "date": "2026-10-06",
+    "buyer": "ЗПИФ «Инвестпроф»",
+    "seller": "«Центр-инвест»",
+    "target": "ТЦ «Сказка» (40 988 кв. м) в Рассказовке, новая Москва",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2026/10/09/1235608-u-torgovogo-tsentra-skazka-vnov-smenilsya-sobstvennik",
+     "https://retailer.ru/tc-skazka-v-novoj-moskve-smenil-vladelca/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ТЭН",
+  "mentions": [
+   {
+    "deal": "g54843952",
+    "role": "seller",
+    "title": "ТЭН передала 50% доли в ТРЦ «Город Косино» компании «Газпромбанк-инвест» при реструктуризации кредита",
+    "date": "2023-05-06",
+    "buyer": "Газпромбанк-инвест",
+    "seller": "ТЭН",
+    "target": "ТРЦ «Город Косино»",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2023/05/26/976988-gruppa-ten-vishla-iz-sostava-sobstvennikov-torgovo-razvlekatelnogo-tsentra?from=newsline",
+     "https://www.kommersant.ru/doc/6365688"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Григорьевна Коваленко",
+  "mentions": [
+   {
+    "deal": "g60fedbfd",
+    "role": "seller",
+    "title": "«36,6» + Горздрав приобрели аптечную сеть «Фармакон»",
+    "date": "2023-08-31",
+    "buyer": "Аптечная группа «36,6»",
+    "seller": "Татьяна Григорьевна Коваленко",
+    "target": "АО «Фармакон»",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2023/08/31/992880-366-kupila-ramenskuyu-aptechnuyu-set",
+     "https://pharmvestnik.ru/content/news/Aptechnaya-set-36-6-kupila-apteki-v-Podmoskove.html"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Иванова",
+  "mentions": [
+   {
+    "deal": "gcfa149c5",
+    "role": "seller",
+    "title": "Kokoc Group приобрела 51% в агентстве инфлюенс-маркетинга Hello Blogger",
+    "date": "2025-07-31",
+    "buyer": "Kokoc Group",
+    "seller": "Татьяна Иванова",
+    "target": "Hello Blogger",
+    "src": [
+     "https://www.vedomosti.ru/media/articles/2025/07/31/1128186-kokoc-group-poluchila-kontrol-v-agentstve-inflyuens-marketinga",
+     "https://www.comnews.ru/content/240477/2025-08-01/2025-w31/1008/kokos-group-priobrela-kontrolnyy-paket-hello-blogger",
+     "https://adindex.ru/news/marketing/2025/07/31/335923.phtml"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Куценко и участники ООО «Фаст Фешн»",
+  "mentions": [
+   {
+    "deal": "gbcc32684",
+    "role": "seller",
+    "title": "Lamoda приобрела 90% бренда Selfmade (ООО «Фаст Фешн»)",
+    "date": "2026-04-27",
+    "buyer": "Lamoda",
+    "seller": "Татьяна Куценко и участники ООО «Фаст Фешн»",
+    "target": "Selfmade",
+    "src": [
+     "https://www.kommersant.ru/doc/8624358",
+     "https://shopandmall.ru/news/lamoda-investiruet-v-premialnyj-brend-selfmade-poluciv-kontrolnyj-paket"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Овсянкина",
+  "mentions": [
+   {
+    "deal": "gb30e66af",
+    "role": "seller",
+    "title": "Бумеранг агроинвест приобрел 85% долей производителя салатов Прованс",
+    "date": "2025-09-02",
+    "buyer": "Бумеранг агроинвест",
+    "seller": "Татьяна Овсянкина",
+    "target": "«Прованс»",
+    "src": [
+     "https://www.kommersant.ru/doc/8025410",
+     "https://www.interfax.ru/business/1046665",
+     "https://t.rbc.ru/tyumen/11/09/2025/68c267739a794752e81e8d22",
+     "https://www.kommersant.ru/doc/8026357"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Плахотникова (80%) и Леонид Рудой (20%)",
+  "mentions": [
+   {
+    "deal": "g43b0394d",
+    "role": "seller",
+    "title": "Wildberries и Russ приобрели регионального оператора наружной рекламы «Инфо-Ю»",
+    "date": "2025-10-03",
+    "buyer": "ООО «РВБ» (Wildberries & Russ)",
+    "seller": "Татьяна Плахотникова (80%) и Леонид Рудой (20%)",
+    "target": "ООО «Инфо-Ю»",
+    "src": [
+     "https://www.sostav.ru/publication/russ-priobrel-tambovskogo-operatora-naruzhnoj-reklamy-info-yu-78638.html",
+     "https://www.kommersant.ru/doc/8096717"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Татьяна Хорошева и группа АК Group",
+  "mentions": [
+   {
+    "deal": "g42f3065c",
+    "role": "seller",
+    "title": "ГК «РОСТ» планирует выкупить два тепличных комплекса в Орловской области",
+    "date": "2023-01-26",
+    "buyer": "ГК «Рост»",
+    "seller": "Татьяна Хорошева и группа АК Group",
+    "target": "ООО «ЭкоПродукт» и ООО «Агропромышленная компания «Кумир»»",
+    "src": [
+     "https://www.kommersant.ru/doc/5785646",
+     "https://rostgroup.ru/press/rost-rasshiryaet-geografiyu-i-pokupaet-teplichnyy-kompleks-ekoprodukt-v-orlovskoy-oblasti-/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Тельман Дмитрий Тельманович",
+  "mentions": [
+   {
+    "deal": "g162c155f",
+    "role": "seller",
+    "title": "«Мастерфуд» купил кондитерскую фабрику Biennale Group",
+    "date": "2024-12-18",
+    "buyer": "Мастерфуд",
+    "seller": "Тельман Дмитрий Тельманович",
+    "target": "Biennale Group",
+    "src": [
+     "https://www.kommersant.ru/doc/7446674",
+     "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9C%D0%B0%D1%81%D1%82%D0%B5%D1%80%D1%84%D1%83%D0%B4",
+     "https://www.malls.ru/rus/news/masterfud-priobrel-konditerskuyu-kompaniyu-biennale-group-.shtml",
+     "https://www.retail.ru/rbc/pressreleases/masterfud-rasshiryaet-kanaly-prodazh-kofe-biennale-poyavilsya-na-virtualnoy-polke-m-video/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Тимур Бекмамбетов",
+  "mentions": [
+   {
+    "deal": "ge8f111a2",
+    "role": "seller",
+    "title": "Тимур Бекмамбетов продал российское ООО «Базелевс» Лале Рустамовой и Тимуру Асадову",
+    "date": "2022-12-22",
+    "buyer": "Лала Рустамова и Тимур Асадов",
+    "seller": "Тимур Бекмамбетов",
+    "target": "Базелевс",
+    "src": [
+     "https://www.rbc.ru/technology_and_media/22/12/2022/63a3455b9a794727166d9d1c?from=from_main_3",
+     "http://www.ko.ru/articles/timur-bekmambetov-vyshel-iz-rossiyskogo-biznesa/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Торговый дом «Южный регион»",
+  "mentions": [
+   {
+    "deal": "g8e46beea",
+    "role": "seller",
+    "title": "Агрокомплекс Ткачева приобрёл контроль над «Селькомом» в ДНР",
+    "date": "2024-11-01",
+    "buyer": "Агрокомплекс им. Ткачева",
+    "seller": "Торговый дом «Южный регион»",
+    "target": "Сельком (ДНР)",
+    "src": [
+     "https://www.vedomosti.ru/business/articles/2025/01/16/1086465-agrokompleks-semi-tkacheva-ofitsialno-vishel-v-dnr",
+     "https://milknews.ru/index/tkachyev-dnr-pokupka.html",
+     "https://shoppers.media/news/19976_agrokompleks-semi-eks-ministra-tkaceva-oficialno-nacal-rabotu-v-dnr"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Торговый дом ВКТ",
+  "mentions": [
+   {
+    "deal": "g489b4309",
+    "role": "target",
+    "title": "X5 Group купила ООО «Торговый дом ВКТ» — дистрибьютора продуктов питания в Приволжском ФО",
+    "date": "2026-05-15",
+    "buyer": "X5 Group",
+    "seller": "Анна Фомичева",
+    "target": "Торговый дом ВКТ",
+    "src": [
+     "https://www.x5.ru/ru/news/h5-pokupaet-distribyutora-vkt/",
+     "https://www.forbes.ru/franchises/560216-gruppa-x5-pokupaet-krupnogo-distrib-utora-produktov-pitania-v-nizegorodskoj-oblasti",
+     "https://www.kommersant.ru/doc/8634923",
+     "https://www.vedomosti.ru/business/news/2026/05/04/1194871-h5-kupil"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "УК «Финрешения»",
+  "mentions": [
+   {
+    "deal": "gafe121ae",
+    "role": "seller",
+    "title": "Закрытый ПИФ «РД 2» («Вим сбережения») приобрел бизнес-центр «Кубик» у УК «Финрешения»",
+    "date": "2026-04-21",
+    "buyer": "Закрытый ПИФ «РД 2»",
+    "seller": "УК «Финрешения»",
+    "target": "Бизнес-центр «Кубик»",
+    "src": [
+     "https://www.vedomosti.ru/realty/articles/2026/04/21/1191771-u-biznes-tsentra-kubik-smenilsya-vladelets?from=copy_text",
+     "https://nikoliers.ru/media/news/vim-sberezheniya-priobrela-biznes-tsentr-kubik-v-myakinino/",
+     "https://vc.ru/invest/3080151-zpif-rentnyy-dokhod-2-uvelichil-dokhody-ot-arendy"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Управление агроактивами",
+  "mentions": [
+   {
+    "deal": "g766a4daf",
+    "role": "buyer",
+    "title": "Ipackchem продал производство тары для агрохимии ООО «Ипакэм» в России",
+    "date": "2024-03-21",
+    "buyer": "Управление агроактивами",
+    "seller": "Ipackchem",
+    "target": "ООО «Ипакэм»",
+    "src": [
+     "https://www.kommersant.ru/doc/6688861",
+     "https://glavpahar.ru/news/proizvoditel-tary-dlya-szr-ipackchem-prodal-rossiyskiy-zavod-v-kirovo-chepecke",
+     "https://www.audit-it.ru/contragent/1167746868629_ooo-upravlenie-agroaktivami",
+     "https://star-pro.ru/proverka-kontragenta/organization/1174350006863--ooo-agroxim-resheniya"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Управление агробизнесом (менеджмент Viterra)",
+  "mentions": [
+   {
+    "deal": "g4612b667",
+    "role": "buyer",
+    "title": "Российский менеджмент Viterra выкупил операционный бизнес и зерновой терминал в Ростове-на-Дону",
+    "date": "2023-10-20",
+    "buyer": "Управление агробизнесом (менеджмент Viterra)",
+    "seller": "Viterra",
+    "target": "операционный бизнес и зерновой терминал в Ростове-на-Дону",
+    "src": [
+     "https://www.interfax.ru/business/927099",
+     "https://www.kommersant.ru/doc/6612078",
+     "https://www.sec.gov/Archives/edgar/data/1996862/000110465924097990/tm2419986d1_ex99-1.htm",
+     "https://www.interfax.ru/business/945701"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Управляющая компания «Контрдата Капитал»",
+  "mentions": [
+   {
+    "deal": "g3a25a36c",
+    "role": "seller",
+    "title": "ГК «Максима» приобрела 60% IT-интегратора GMCS",
+    "date": "2023-07-01",
+    "buyer": "ГК «Максима»",
+    "seller": "Управляющая компания «Контрдата Капитал»",
+    "target": "ООО «Джи-Эм-Си-Эс-Верэкс»",
+    "src": [
+     "https://www.cnews.ru/news/top/2023-10-06_sozdatel_wi-fi-seti_dlya_moskovskogo",
+     "https://www.comnews.ru/content/229281/2023-10-06/2023-w40/1007/gk-maksima-kupila-byvshiy-oskolok-maykor",
+     "https://www.vedomosti.ru/technology/news/2025/08/22/1133615-maksima-ne-voidet"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "ФГУП «Атомфлот»",
+  "mentions": [
+   {
+    "deal": "gf145d639",
+    "role": "seller",
+    "title": "«Атомфлот» выставил на аукцион корпус атомного ледокола «Арктика»",
+    "date": "2026-09-30",
+    "buyer": null,
+    "seller": "ФГУП «Атомфлот»",
+    "target": "корпус атомного ледокола «Арктика» проекта 10520 (построен в 1974–1975 годах)",
+    "src": [
+     "https://www1.ru/news/2026/09/30/439301-atomflot-vystavil-na-aukcion-korpus-atomnogo-ledokola-arktika-proekta-10520-za-1116-mln-rublei.html",
+     "https://newsroom24.ru/murmansk/news/details/2026/news_354904"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Фарход Мамаджанов, IMC-Capital и Камрон Акбаров",
+  "mentions": [
+   {
+    "deal": "g28941fd8",
+    "role": "seller",
+    "title": "Узбекский мобильный оператор Perfectum полностью (100%) перешёл VEON за $207 млн",
+    "date": "2026-10-19",
+    "buyer": "VEON",
+    "seller": "Фарход Мамаджанов, IMC-Capital и Камрон Акбаров",
+    "target": "Perfectum",
+    "src": [
+     "https://www.interfax.ru/world/1123478",
+     "https://www.veon.com/newsroom/press-releases/veon-accelerates-telecom-market-consolidation-in-uzbekistan-a-market-of-nearly-40-million-people",
+     "https://www.spot.uz/ru/2026/10/19/perfectum",
+     "https://www.gazeta.uz/ru/2026/10/19/veon-perfectum/"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Физические лица — бенефициары ООО «Август», ООО «Март», ООО «Апрель», ООО «Весна» и ООО «Лето»",
+  "mentions": [
+   {
+    "deal": "c689eefe9",
+    "role": "seller",
+    "title": "«Т-Девелопмент» (Т-Банк) покупает комплекс гостиницы «Турист» в Москве",
+    "date": "2025",
+    "buyer": "«Т-Девелопмент»",
+    "seller": "Физические лица — бенефициары ООО «Август», ООО «Март», ООО «Апрель», ООО «Весна» и ООО «Лето»",
+    "target": "ООО «Август», ООО «Март», ООО «Апрель», ООО «Весна» и ООО «Лето» (комплекс гостиницы «Турист»)",
+    "src": [
+     "https://www.kommersant.ru/doc/8077927",
+     "https://www.kommersant.ru/doc/7940155"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Филипп Генс и Петр Ефимов",
+  "mentions": [
+   {
+    "deal": "g4c62c047",
+    "role": "seller",
+    "title": "F+ tech (Марвел) приобрел 49% в производителе АРМ Getmobit",
+    "date": "2023-02-07",
+    "buyer": "F+ tech",
+    "seller": "Филипп Генс и Петр Ефимов",
+    "target": "ООО «Гетмобит»",
+    "src": [
+     "https://www.cnews.ru/news/top/2023-02-07_marvel_vykupil_49_proizvoditelya"
+    ]
+   }
+  ]
+ },
+ {
+  "text": "Филипп Киркоров",
+  "mentions": [
+   {
+    "deal": "g6c5c2e6a",
+    "role": "buyer",
+    "title": "Киркоров получил 25% в компании «Королевство сладостей»",
+    "date": "2026-09-02",
+    "buyer": "Филипп Киркоров",
+    "seller": null,
+    "target": "Королевство сладостей",
+    "src": [
+     "https://www.rbc.ru/rbcfreenews/6a9ae608cea2e2ea63103de8",
+     "https://www.kommersant.ru/doc/8936765",
+     "https://lenta.ru/news/2026/09/04/kirkorov-vlozhilsya-v-konfetnyy-biznes/",
+     "https://retailer.ru/filipp-kirkorov-poluchil-25-v-proekte-korolevstvo-sladostej/"
+    ]
+   }
+  ]
+ }
+]

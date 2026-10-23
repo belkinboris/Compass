@@ -9,10 +9,11 @@
 компаний, карту сайта и описание для ИИ.
 
 ЧТО ОТКРЫТО. Решение владельца: карточка в объёме поста канала — заголовок,
-стороны, дата, статус, отрасль, сумма, описание сторон и первоисточники. Пост
-и так публичный, а разбор экономиста и юриста, финансы, аналитика и
-консультанты остаются в приложении: кнопка «Полная карточка» ведёт в
-`/#/deal/<id>`. Защита базы от копирования (`docs/scraping_protection.md`) не
+стороны, дата, статус, отрасль, сумма, описание сторон и первоисточники —
+вписана в HTML для поисковика. Человек этого текста не видит: адрес отдаёт
+обычную страницу сайта, ранний скрипт в <head> переводит его в `/#/deal/<id>`,
+и приложение рисует настоящую карточку (владелец 23 октября 2026 увидел
+первую, голую версию страниц и сказал, что людям такое показывать нельзя). Защита базы от копирования (`docs/scraping_protection.md`) не
 ослабла: собрать с этих страниц можно ровно то, что уже лежит в канале.
 
 Адреса: `/deal/<id>`, `/company/<id>`, `/sitemap.xml`, `/llms.txt`.
@@ -156,54 +157,27 @@ def _sources(deal: dict) -> list[tuple[str, str]]:
     return out
 
 
+INDEX_PATH = str(base_data.ROOT / "static" / "index.html")
+_APP_MAIN = '<main class="wrap" id="app"></main>'
+
+
 def _page(base: str, path: str, title: str, description: str, body: str, json_ld: str = "") -> str:
-    return f"""<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{esc(title)}</title>
-<meta name="description" content="{esc(description)}">
-<link rel="canonical" href="{esc(base + path)}">
-<meta property="og:title" content="{esc(title)}">
-<meta property="og:description" content="{esc(description)}">
-<meta property="og:type" content="article">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:url" content="{esc(base + path)}">
-<meta property="og:site_name" content="Компас">
-<link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32.png">
-<link rel="shortcut icon" href="/favicon.ico">
-{json_ld}
-<style>
-:root{{--bg:#F5F5F1;--fg:#0A1210;--muted:#5b6662;--line:#dcdcd4;--accent:#1f6f54;--card:#fff}}
-@media (prefers-color-scheme: dark){{:root{{--bg:#0A1210;--fg:#ECECE6;--muted:#9aa6a1;--line:#23302b;--accent:#6fcfa5;--card:#111b18}}}}
-*{{box-sizing:border-box}}
-body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;overflow-wrap:break-word}}
-.wrap{{max-width:760px;margin:0 auto;padding:20px 16px 48px}}
-header a{{color:var(--fg);text-decoration:none;font-weight:700;letter-spacing:.08em}}
-h1{{font-size:26px;line-height:1.25;margin:28px 0 12px}}
-.meta{{color:var(--muted);font-size:14px;margin-bottom:20px}}
-dl{{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 16px}}
-dl div{{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}}
-dl div:first-child{{border-top:0}}
-dt{{color:var(--muted)}} dd{{margin:0;min-width:0}}
-dd small{{display:block;color:var(--muted)}}
-a{{color:var(--accent)}}
-.cta{{display:inline-block;margin:24px 0 8px;padding:12px 18px;border-radius:8px;background:var(--accent);color:var(--bg);text-decoration:none;font-weight:600}}
-h2{{font-size:18px;margin:28px 0 8px}}
-ul{{padding-left:20px}} li{{margin:6px 0}}
-footer{{margin-top:40px;color:var(--muted);font-size:14px}}
-@media (max-width:560px){{dl div{{grid-template-columns:minmax(0,1fr);gap:2px}}h1{{font-size:22px}}}}
-</style>
-</head>
-<body><div class="wrap">
-<header><a href="/">КОМПАС</a></header>
-{body}
-<footer>«Компас» — база сделок M&amp;A российского рынка со ссылками на первоисточники.
-<a href="/">Открыть сайт</a></footer>
-</div></body>
-</html>
-"""
+    """Та же страница сайта, что видит человек, — с заголовком, описанием и
+    текстом сделки, вписанными в HTML. Человек видит обычную карточку: ранний
+    скрипт в <head> переводит /deal/<id> в /#/deal/<id>, и приложение рисует
+    её поверх вписанного текста. Поисковик без скрипта читает вписанный текст.
+    Владелец 23 октября 2026: голые страницы людям показывать нельзя."""
+    page = index_html(INDEX_PATH)
+    sub = lambda pattern, repl: re.sub(pattern, lambda m: repl, page, count=1, flags=re.S)
+    page = sub(r"<title>.*?</title>", f"<title>{esc(title)}</title>")
+    page = sub(r'<meta name="description" content="[^"]*"', f'<meta name="description" content="{esc(description)}"')
+    page = sub(r'<meta property="og:title" content="[^"]*"', f'<meta property="og:title" content="{esc(title)}"')
+    page = sub(r'<meta property="og:description" content="[^"]*"',
+               f'<meta property="og:description" content="{esc(description)}"')
+    head = (f'<link rel="canonical" href="{esc(base + path)}">\n'
+            f'<meta property="og:url" content="{esc(base + path)}">\n{json_ld}\n</head>')
+    page = page.replace("</head>", head, 1)
+    return page.replace(_APP_MAIN, f'<main class="wrap" id="app"><article class="seo-snapshot">{body}</article></main>', 1)
 
 
 def _ld(obj: dict) -> str:
@@ -250,11 +224,9 @@ def deal_html(deal: dict, base: str) -> str:
                                  ("сумма: " + total) if total else "") if x)
     desc_bits = [title, who[:1].upper() + who[1:] if who else "", ", ".join(parts)]
     description = ". ".join(x for x in desc_bits if x)[:300]
-    body = (f'<h1>{esc(title)}</h1><div class="meta">{esc(" · ".join(parts))}</div>'
+    body = (f'<h1>{esc(title)}</h1><p>{esc(" · ".join(parts))}</p>'
             f"<dl>{rows}</dl>"
-            f'<a class="cta" href="/#/deal/{esc(did)}">Полная карточка в «Компасе»</a>'
-            f'<div class="meta">В полной карточке — разбор экономиста и юриста, контекст, '
-            f"финансы сторон и консультанты сделки.</div>{src_html}")
+            f"{src_html}")
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": title[:110],
           "inLanguage": "ru", "url": f"{base}/deal/{did}", "description": description,
           "publisher": {"@type": "Organization", "name": "Компас", "url": base + "/"}}
@@ -279,10 +251,9 @@ def company_html(company_id: str, company: dict, base: str) -> str:
     description = (f"{name}: {n} {word} M&A в базе «Компаса»" + (f". {desc}" if desc else ""))[:300]
     ind = str(company.get("ind") or "")
     body = (f"<h1>{esc(name)}</h1>"
-            f'<div class="meta">{esc(" · ".join(p for p in (ind, f"{n} {word} в базе") if p))}</div>'
+            f'<p>{esc(" · ".join(p for p in (ind, f"{n} {word} в базе") if p))}</p>'
             + (f"<p>{esc(desc)}</p>" if desc else "")
-            + f"<h2>Сделки</h2><ul>{items}</ul>"
-            f'<a class="cta" href="/#/companies/{esc(company_id)}">Профиль компании в «Компасе»</a>')
+            + f"<h2>Сделки</h2><ul>{items}</ul>")
     ld = {"@context": "https://schema.org", "@type": "Organization", "name": name,
           "url": f"{base}/company/{company_id}", "description": desc or description}
     return _page(base, f"/company/{company_id}", f"{name} — сделки M&A — Компас", description, body, _ld(ld))
@@ -337,7 +308,7 @@ def llms_txt(base: str) -> str:
 def missing_html(base: str) -> str:
     return _page(base, "/", "Страница не найдена — Компас", "Такой страницы в «Компасе» нет.",
                  '<h1>Такой страницы нет</h1><p>Возможно, карточку объединили с другой или адрес '
-                 'набран с ошибкой.</p><a class="cta" href="/">На главную «Компаса»</a>')
+                 'набран с ошибкой.</p><a href="/">На главную «Компаса»</a>')
 
 
 _COUNT_IN_META = re.compile(r'(<meta (?:name="description"|property="og:description") content="[^"]*?)\d[\d ]*\+ сделок')
