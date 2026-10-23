@@ -42,6 +42,37 @@
     "needs_review": true
    },
    "queued": "2026-10-23"
+  },
+  {
+   "key": "https://abireg.ru/newsitem/118782-komos-grupp-vlozhil-3-mlrd-rubley-v-novuyu-ploshchadku-ptitsefabriki-varaksino/::g3629ebb7",
+   "candidate_id": "g3629ebb7",
+   "reason": "общие редкие слова: вложил, рублей",
+   "draft": {
+    "draft_id": "d34419974",
+    "title": "КОМОС ГРУПП вложил 3 млрд рублей в новую площадку птицефабрики «Вараксино»",
+    "date": "2026-10-23",
+    "src": [
+     [
+      "web:abireg.ru",
+      "https://abireg.ru/newsitem/118782-komos-grupp-vlozhil-3-mlrd-rubley-v-novuyu-ploshchadku-ptitsefabriki-varaksino/"
+     ]
+    ],
+    "sum": "3 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "КОМОС ГРУПП",
+    "asset": "новая площадка птицефабрики «Вараксино»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "КОМОС ГРУПП",
+     "asset": "новая площадка птицефабрики «Вараксино»",
+     "seller": null
+    },
+    "ind": "Агро",
+    "needs_review": true
+   },
+   "queued": "2026-10-23"
   }
  ]
 }

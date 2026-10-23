@@ -534,7 +534,7 @@
    ]
   },
   {
-   "draft_id": "d15896873",
+   "draft_id": "d43124184",
    "title": "Платформа для создания ИИ-контента Givon AI привлекла 3 млн рублей от венчурного фонда brainbox_I в обмен на 4% компании. Оценка стартапа post-money составила 75 млн рублей. Givon AI в 2026 году основ",
    "date": "2026-10-23",
    "src": [
@@ -564,120 +564,7 @@
    ]
   },
   {
-   "draft_id": "d17400828",
-   "title": "Мустафаев: Россия вложила более $10 млрд в экономику Азербайджана",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/economics/news/2026/10/23/1239552-vlozhila-v-ekonomiku"
-    ]
-   ],
-   "sum": "$10 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "экономика Азербайджана",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "экономика Азербайджана",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d14077398",
-   "title": "МИД РФ допустил новый раунд консультаций с США по раздражителям до конца года",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28246033"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20021862",
-   "title": "Прохора Шаляпина и Ларису Долину вовлекли в мошенническую схему с продажей iPhone",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2189216/2026-10-23/prokhora-shaliapin-i-larisu-dolinu-vovlekli-v-moshennicheskuiu-skhemu-s-prodazhei-iphone"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77570296",
-   "title": "BI: пожилые японцы продают бизнес молодым за бесценок",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/yaponiya-874554251.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d62260237",
+   "draft_id": "d22601556",
    "title": "Продажа базы у «Масловского» и дело экс-главы Яменского поселения – главное в Воронеже",
    "date": "2026-10-23",
    "src": [
@@ -705,7 +592,7 @@
    ]
   },
   {
-   "draft_id": "d57795563",
+   "draft_id": "d35088353",
    "title": "Росимущество вновь выставило на продажу воронежский ЦИТОС за 170 млн рублей",
    "date": "2026-10-23",
    "src": [
@@ -733,13 +620,13 @@
    ]
   },
   {
-   "draft_id": "d59658608",
-   "title": "Dreame: рынок роботов-пылесосов консолидируется за счет инноваций и сервиса",
+   "draft_id": "d12857906",
+   "title": "АЛРУД сообщает: фирма обеспечила юридическое сопровождение Продавца в сделке по продаже ООО «Дмитровский металлоцентр» ПАО «Северсталь» . ООО «Дмитровский металлоцентр» – один из крупнейших производст",
    "date": "2026-10-23",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261023/dreame-2126343855.html"
+     "tg:LawFirms",
+     "https://t.me/LawFirms/11566"
     ]
    ],
    "sum": null,
@@ -754,39 +641,12 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ГМК и добыча",
    "needs_review": true,
    "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d17653940",
-   "title": "Траты россиян на покупку автомобилей заметно выросли",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/23/traty-rossiyan-na-pokupki-avtomobiley-zametno-vyrosli/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g05db16a9 (общие редкие слова: продав, произв) — проверьте, не дубль ли"
    ]
   }
  ]
