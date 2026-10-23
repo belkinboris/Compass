@@ -267,6 +267,14 @@ def _rub_amounts_in(quote) -> list[float]:
     out = []
     if not quote:
         return out
+    # Составная запись («20 млрд 964,5 млн рублей» = 20 964 500 000) — две
+    # величины одного числа, не два факта; должна разобраться ДО одиночного
+    # прохода ниже, иначе он возвращает 20 млрд и 964,5 млн как разные суммы
+    # и `price_supported()` не находит ни одной, совпадающей с суммой (НМЖК,
+    # 23 октября 2026, читатели независимо не смогли подтвердить цену).
+    for m in re.finditer(r'(\d[\d\s\xa0]*)\s*млрд\s+(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*млн', quote, re.I):
+        out.append(float(m.group(1).replace(' ', '').replace('\xa0', '')) * dm.UNIT_MULT['млрд']
+                   + float(m.group(2).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT['млн'])
     for m in re.finditer(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тыс|млн|млрд|трлн)', quote, re.I):
         out.append(float(m.group(1).replace(' ', '').replace('\xa0', '').replace(',', '.')) * dm.UNIT_MULT[m.group(2).lower()])
     for m in re.finditer(r'(\d[\d\s\xa0]{6,}(?:[.,]\d+)?)\s*(?:руб|₽)', quote, re.I):
