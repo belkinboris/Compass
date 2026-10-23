@@ -535,48 +535,30 @@
    ]
   },
   {
-   "draft_id": "d90081084",
-   "title": "В «ВИМ инвестициях» прокомментировали мнение о распродаже ОФЗ из-за налогообложения ИПИФов",
+   "draft_id": "d63758081",
+   "title": "Vonovia может потерять более 8 млрд евро в случае национализации квартир в Берлине",
    "date": "2026-10-23",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/23/1239703-v-vime-prokommentirovali"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124605"
     ]
    ],
-   "sum": null,
+   "sum": "€8 млрд",
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf6c084b9 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d21319564",
-   "title": "Борис Титов ожидает рассмотрения в Госдуме законопроекта об онлайн-продаже вина",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/10/23/1239663-ob-onlain-prodazhe-vina"
-    ]
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-23",
+     "title": "Переговоры",
+     "note": "Vonovia SE, крупнейший в Европе владелец арендного жилья, может потерять более 8 млрд евро из-за планов национализации недвижимости в Берлине, пишет Financial Times.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1124605"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -592,181 +574,13 @@
    ]
   },
   {
-   "draft_id": "d14524501",
-   "title": "Инвестиции в России к середине 2026 года достигли 43 триллионов рублей",
+   "draft_id": "d83750053",
+   "title": "Наследники скончавшегося президента «Соликамскбумпрома» хотят выйти из бизнеса",
    "date": "2026-10-23",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/investitsii-874569307.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32811368",
-   "title": "Продажи новых мотоциклов в РФ установили рекорд — за девять месяцев 2026-го реализовано больше, чем за весь 2025-й",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-novyh-motociklov-v-rf-ustanovili-rekord-za-devyat-mesyacev-2026-go-realizovano-bolshe-chem-za-ves-2025-j/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16348169",
-   "title": "Замещение активов через ООО: как сохранить бизнес банкрота и продать его дороже",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/opinion/266302/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d85059873",
-   "title": "В Пермском крае на сутки запретят продавать алкоголь",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138543"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77925647",
-   "title": "В Тюмени на сутки запретят продавать алкоголь",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138549"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88011206",
-   "title": "В Перми за 175 млн рублей продают автопарк из 200 такси",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138542"
-    ]
-   ],
-   "sum": "175 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35593205",
-   "title": "Выявлены сговоры на аукционах по размещению торговых точек в Твери",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/tver/2026/10/23/vyyavleny-sgovory-na-aukczionah-po-razmeshheniyu-torgovyh-tochek-v-tveri"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
     ]
    ],
    "sum": null,
@@ -777,13 +591,222 @@
      "kind": "negotiations",
      "date": "2026-10-23",
      "title": "Переговоры",
-     "note": "Тверское УФАС выявило сговоры на 2 аукционах по размещению торговых точек. Как стало известно ведомству, коммерсанты договорились поддерживать низкие цены на торгах.",
+     "note": "Cтали известны подробности возможной сделки по продаже 83,3% находящегося в предбанкротном состоянии АО «Соликамскбумпром» китайской «Юнь Чоу». В качестве продавцов выступают само предприятие и аффилированные с ним компании, а также два физичес­ких лица…",
      "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/center/news/tver/2026/10/23/vyyavleny-sgovory-na-aukczionah-po-razmeshheniyu-torgovyh-tochek-v-tveri"
+      "web:mergers.ru",
+      "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
      ]
     }
    ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70401514",
+   "title": "Роснедра выставили на аукцион Белухинское месторождение в Забайкалье",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261023/rosnedra-874574953.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d82721581",
+   "title": "Роснедра выставили на аукцион Зергунское месторождение",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261023/rosnedra-874574292.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d83646708",
+   "title": "Владелец «Валенсии» продал 42 процента акций клуба",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261023/valensiya-2126617487.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-23",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20261023/valensiya-2126617487.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "42 процента акций клуба",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "42 процента акций клуба",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d71839960",
+   "title": "«Пушкинскую карту» чаще всего используют для покупки билетов в кино",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261023/kino-2126610272.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58668108",
+   "title": "Рост инвестиций и пересмотр ДИС: как развиваются отношения между бизнесом в Азии",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/story/266468/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88394855",
+   "title": "Россиянам дали неочевидные советы сохранить деньги на распродажах",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/23/rossiyanam-dali-neochevidnye-sovety-sohranit-dengi-na-rasprodazhah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22144865",
+   "title": "Пекин был крайне недоволен: Россия пошла на хитрость, продав Китаю подлодки",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/23/pekin-byl-krajne-nedovolen-rossiya-poshla-na-hitrost-prodav-kitayu-podlodki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
