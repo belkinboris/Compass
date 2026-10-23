@@ -29,7 +29,7 @@ from html import escape as html_escape
 
 import httpx
 from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
@@ -45,6 +45,7 @@ import deal_catalog
 import deal_multiples
 import notification_service
 import scrape_guard
+import seo_pages
 import telegram_endpoint
 import subscription_feed
 from company_catalog import get_company_profile, load_company_catalog
@@ -103,7 +104,9 @@ def robots_txt():
             "Disallow: /static/data/\n"
             "Disallow: /api/\n"
             "Disallow: /api/data/\n"
-            "Allow: /\n")
+            "Allow: /\n"
+            "\n"
+            f"Sitemap: {SITE_URL}/sitemap.xml\n")
     return Response(body, media_type="text/plain; charset=utf-8")
 
 
@@ -7893,12 +7896,51 @@ def root_icon(icon_name: str, request: Request):
                         headers={"Cache-Control": "public, max-age=86400"})
 
 
+# Открытые страницы для поисковиков и ИИ-ассистентов (seo_pages.py, 23 октября
+# 2026): сделка и компания в объёме поста канала, карта сайта, описание для ИИ.
+# Стоят ДО catch-all ниже, иначе их адреса получили бы index.html.
+@app.api_route("/deal/{deal_id}", methods=["GET", "HEAD"], include_in_schema=False)
+def seo_deal(deal_id: str):
+    state, value = seo_pages.resolve_deal(deal_id)
+    if state == "moved":
+        return RedirectResponse(f"/deal/{value}", status_code=301)
+    if state == "missing":
+        return HTMLResponse(seo_pages.missing_html(SITE_URL), status_code=404)
+    return HTMLResponse(seo_pages.deal_html(value, SITE_URL), headers={"Cache-Control": "public, max-age=600"})
+
+
+@app.api_route("/company/{company_id}", methods=["GET", "HEAD"], include_in_schema=False)
+def seo_company(company_id: str):
+    state, value = seo_pages.resolve_company(company_id)
+    if state == "moved":
+        return RedirectResponse(f"/company/{value}", status_code=301)
+    if state == "missing":
+        return HTMLResponse(seo_pages.missing_html(SITE_URL), status_code=404)
+    return HTMLResponse(seo_pages.company_html(company_id, value, SITE_URL),
+                        headers={"Cache-Control": "public, max-age=600"})
+
+
+@app.api_route("/sitemap.xml", methods=["GET", "HEAD"], include_in_schema=False)
+def seo_sitemap():
+    return Response(seo_pages.sitemap_xml(SITE_URL), media_type="application/xml; charset=utf-8",
+                    headers={"Cache-Control": "public, max-age=3600"})
+
+
+@app.api_route("/llms.txt", methods=["GET", "HEAD"], include_in_schema=False)
+def seo_llms():
+    return Response(seo_pages.llms_txt(SITE_URL), media_type="text/plain; charset=utf-8",
+                    headers={"Cache-Control": "public, max-age=3600"})
+
+
 # Тот же HEAD: этот маршрут ловит «/» и любой адрес одностраничного
 # приложения — именно сюда приходит проверка живости хостинга.
 # FileResponse на HEAD сам не отправляет тело, только заголовки.
 @app.api_route("/{full_path:path}", methods=["GET", "HEAD"])
 def index(full_path: str, request: Request):
-    resp = FileResponse(os.path.join(STATIC_DIR, "index.html"))
+    # Число сделок в описании страницы (meta description, og:description) —
+    # живое: «1300+» в файле устарело на четыре сотни, а поисковик и превью
+    # ссылки в мессенджере показывают именно его.
+    resp = HTMLResponse(seo_pages.index_html(os.path.join(STATIC_DIR, "index.html")))
     # Токен для базы (scrape_guard): страница получает его вместе с собой.
     # no-cache — браузер переспрашивает страницу (304 дёшев) и заодно
     # получает свежий токен, а не берёт из кэша страницу с истёкшим.
