@@ -36,6 +36,24 @@
    "reasons": [
     "слабое совпадение: общие слова заголовка: 4"
    ]
+  },
+  {
+   "news": "https://www.vedomosti.ru/media/articles/2026/10/23/1239782-russ-viigral-torgi",
+   "title": "Russ выиграл торги за право управлять сетью рекламных конструкций мэрии Москвы",
+   "verdict": "enrich:g22d3599c",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://abireg.ru/newsitem/118807-metro-perechislila-milliard-rubley-na-podderzhku-svo-posle-peredachi-rossiyskikh-aktivov-vo/",
+   "title": "METRO перечислила миллиард рублей на поддержку СВО после передачи российских активов во временное управление",
+   "verdict": "enrich:ga142d8e0",
+   "why": "общие слова заголовка: 4",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 4"
+   ]
   }
  ]
 }

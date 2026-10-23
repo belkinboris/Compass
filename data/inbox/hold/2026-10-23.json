@@ -535,41 +535,13 @@
    ]
   },
   {
-   "draft_id": "d30605695",
-   "title": "Ракеточный подъем // Инвестиции в развитие падела в России превысили 20 млрд рублей",
+   "draft_id": "d33612499",
+   "title": "Минсельхоз поддержал проведение эксперимента по онлайн-продаже российского вина",
    "date": "2026-10-23",
    "src": [
     [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9059325"
-    ]
-   ],
-   "sum": "20 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27603840",
-   "title": "Настоящий петербургский. Какое жилье строят в Московском районе и кто его покупает",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/23/76720782/"
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/10/23/1239788-minselhoz-podderzhal-vina"
     ]
    ],
    "sum": null,
@@ -591,13 +563,69 @@
    ]
   },
   {
-   "draft_id": "d42938978",
-   "title": "В центре Костромской области старинный особняк продадут за 1 рубль",
+   "draft_id": "d40305709",
+   "title": "Generali сократит 800 рабочих мест в ФРГ из-за инвестиций в ИИ и цифровизацию",
    "date": "2026-10-23",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/kostroma/2026/10/23/v-czentre-kostromskoj-oblasti-starinnyj-osobnyak-prodadut-za-1-rubl"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28248355"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89587720",
+   "title": "Путин поручил выделить гражданам допсубсидии по покупке газового оборудования",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28248237"
+    ]
+   ],
+   "sum": "1,2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49005172",
+   "title": "От финансирования и защиты инвестиций до судебных споров: правовые риски девелоперов в цитатах",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/story/266443/"
     ]
    ],
    "sum": null,
@@ -615,159 +643,8 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39214835",
-   "title": "Красноярску вернут полгектара земли возле «Кристалл Арены». Ее купили благодаря сараю без воды и отопления",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/realty/2026/10/22/76717459/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-22",
-     "title": "Сделка завершена",
-     "note": "Владельца фирмы будут судить за мошенничество",
-     "source": [
-      "web:ngs24.ru",
-      "https://ngs24.ru/text/realty/2026/10/22/76717459/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "благодаря сараю без воды и отопления",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "благодаря сараю без воды и отопления",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d74022197",
-   "title": "Можно ли купить победу в Народной премии 63.RU: ответ на провокационный вопрос самарцев",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/business/2026/10/22/76718107/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45213610",
-   "title": "Замок на Затоне забрали у города и вернули прежнему владельцу. Теперь компания должна мэрии 130 млн рублей",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/10/23/76718933/"
-    ]
-   ],
-   "sum": "130 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33555706",
-   "title": "Квартиры дорожают, но кто-то покупает: скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/realty/2026/10/23/76720414/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "скажется ли на ценах в Уфе торможение ключевой ставки на 14%",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d59490261",
-   "title": "За «покупку с принуждением» предприниматель заплатит штраф в размере 55 тысяч рублей",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:krasrab.ru",
-     "https://krasrab.ru/news/biznes/59434"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga9c131b5 (общие редкие слова: рублей, тысяч) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]

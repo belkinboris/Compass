@@ -239493,6 +239493,10 @@
     [
      "ТАСС",
      "https://tass.ru/ekonomika/28159199"
+    ],
+    [
+     "АБН 24",
+     "https://abireg.ru/newsitem/118807-metro-perechislila-milliard-rubley-na-podderzhku-svo-posle-peredachi-rossiyskikh-aktivov-vo/"
     ]
    ],
    "from_ingest": true,
@@ -239522,6 +239526,16 @@
      "source": [
       "РИА Новости",
       "https://ria.ru/20260928/metro--2120739862.html"
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-10-23",
+     "title": "METRO перечислила 1 млрд ₽ в фонд «Народный фронт»",
+     "note": "Деньги пойдут на транспорт, связь и оборудование против беспилотников для участников СВО, часть — на гуманитарные цели; перевод стал известен менее чем через месяц после передачи активов METRO во временное управление, но источник прямой связи между событиями не называет.",
+     "source": [
+      "АБН 24",
+      "https://abireg.ru/newsitem/118807-metro-perechislila-milliard-rubley-na-podderzhku-svo-posle-peredachi-rossiyskikh-aktivov-vo/"
      ]
     }
    ],
@@ -239560,7 +239574,7 @@
      "value": "2026-09-28",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "8859c0db58be"
+     "card_hash": "1cb5a76858fe"
     },
     "nature": {
      "control_change": false,
