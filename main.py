@@ -114,6 +114,20 @@ def robots_txt():
 # Защита базы от лёгкого скачивания (16 октября 2026, scrape_guard.py,
 # docs/scraping_protection.md). Выключатель — SCRAPE_GUARD=0.
 # --------------------------------------------------------------------------
+# www.projectcompass.ru отдавал ту же копию сайта со статусом 200 — для
+# поисковика это два одинаковых сайта, и вес в выдаче делится (23 октября 2026,
+# подключение Яндекс Вебмастера). Постоянный редирект на основной адрес.
+@app.middleware("http")
+async def www_to_apex_middleware(request: Request, call_next):
+    host = (request.headers.get("host") or "").split(":")[0].lower()
+    if host.startswith("www."):
+        target = f"https://{host[4:]}{request.url.path}"
+        if request.url.query:
+            target += "?" + request.url.query
+        return RedirectResponse(target, status_code=301)
+    return await call_next(request)
+
+
 @app.middleware("http")
 async def scrape_guard_middleware(request: Request, call_next):
     if not scrape_guard.enabled():
