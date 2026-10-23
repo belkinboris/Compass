@@ -253,7 +253,13 @@ def proposals(deal, item, names, comps, match_keys=None):
             or item.get('source_id') or 'источник'
         out.append(('src', [label, url], 'добавить', 'ещё один источник'))
 
-    sum_guess = draft.guess_sum(text)
+    # `guess_sum` берёт первое число во ВСЁМ тексте без разбора по
+    # предложениям — «Сумма сделки официально не раскрывается. 300–500 млн
+    # руб. — оценка эксперта» отдавала 500 млн ₽ как будто это цена сделки
+    # (23 октября 2026, g5e1a7c24 через tg:dealsma). `sum_from_text` ищет по
+    # предложениям и отбраковывает то, где рядом с числом — NOT_A_PRICE
+    # («не раскрывается», выручка, убыток и т.п.), как и сборка черновика.
+    sum_guess = draft.sum_from_text(text)
     if sum_guess:
         current = current_value(deal, 'sum', comps)
         if not current:
