@@ -535,167 +535,13 @@
    ]
   },
   {
-   "draft_id": "d16893036",
-   "title": "Платформа для создания ИИ-контента Givon AI привлекла 3 млн рублей от венчурного фонда brainbox_I в обмен на 4% компании. Оценка стартапа post-money составила 75 млн рублей. Givon AI в 2026 году основ",
+   "draft_id": "d90081084",
+   "title": "В «ВИМ инвестициях» прокомментировали мнение о распродаже ОФЗ из-за налогообложения ИПИФов",
    "date": "2026-10-23",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7805"
-    ]
-   ],
-   "sum": "3 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Платформа для создания ИИ-контента Givon AI",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Платформа для создания ИИ-контента Givon AI",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d84461815",
-   "title": "Британский пенсионер продал карточки Pokemon с чердака за 1,56 млн фунтов",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6adb3cf2c1083dfd88d87ff0"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-23",
-     "title": "Сделка завершена",
-     "note": "Британский пенсионер из Уокинга, бывший маляр-декоратор, стал миллионером, продав на аукционе коллекцию карточек Pokemon, которая 15 лет пролежала на чердаке, сообщает Би-би-си.",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/rbcfreenews/6adb3cf2c1083dfd88d87ff0"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "карточки Pokemon с чердака",
-   "seller": "Британский пенсионер",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "карточки Pokemon с чердака",
-    "seller": "Британский пенсионер"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку g74ab6608 (общие редкие слова: карточ, продал) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d91167327",
-   "title": "Набиуллина заявила о продолжении восстановления инвестиций в экономике РФ",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28246807"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56409591",
-   "title": "Набиуллина отметила восстановление инвестиций в российской экономике",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261023/nabiullina--2126567863.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79429908",
-   "title": "ВС оценит льготный выкуп участка, превышающего по площади арендованный",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266481/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27730508",
-   "title": "Рядом с центром: челябинцы выбрали новый район для покупки недорогого вторичного жилья",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138411"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/23/1239703-v-vime-prokommentirovali"
     ]
    ],
    "sum": null,
@@ -714,7 +560,242 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку gf6c084b9 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d21319564",
+   "title": "Борис Титов ожидает рассмотрения в Госдуме законопроекта об онлайн-продаже вина",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/10/23/1239663-ob-onlain-prodazhe-vina"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14524501",
+   "title": "Инвестиции в России к середине 2026 года достигли 43 триллионов рублей",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261023/investitsii-874569307.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32811368",
+   "title": "Продажи новых мотоциклов в РФ установили рекорд — за девять месяцев 2026-го реализовано больше, чем за весь 2025-й",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/prodazhi-novyh-motociklov-v-rf-ustanovili-rekord-za-devyat-mesyacev-2026-go-realizovano-bolshe-chem-za-ves-2025-j/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16348169",
+   "title": "Замещение активов через ООО: как сохранить бизнес банкрота и продать его дороже",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/opinion/266302/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85059873",
+   "title": "В Пермском крае на сутки запретят продавать алкоголь",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138543"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77925647",
+   "title": "В Тюмени на сутки запретят продавать алкоголь",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138549"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88011206",
+   "title": "В Перми за 175 млн рублей продают автопарк из 200 такси",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138542"
+    ]
+   ],
+   "sum": "175 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35593205",
+   "title": "Выявлены сговоры на аукционах по размещению торговых точек в Твери",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/tver/2026/10/23/vyyavleny-sgovory-na-aukczionah-po-razmeshheniyu-torgovyh-tochek-v-tveri"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-23",
+     "title": "Переговоры",
+     "note": "Тверское УФАС выявило сговоры на 2 аукционах по размещению торговых точек. Как стало известно ведомству, коммерсанты договорились поддерживать низкие цены на торгах.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/tver/2026/10/23/vyyavleny-sgovory-na-aukczionah-po-razmeshheniyu-torgovyh-tochek-v-tveri"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
