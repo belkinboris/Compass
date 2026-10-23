@@ -1,0 +1,918 @@
+{
+ "made": "2026-10-23",
+ "drafts": [
+  {
+   "draft_id": "d90791755",
+   "title": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118647/"
+    ]
+   ],
+   "sum": "509 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20093949",
+   "title": "Тюменский ТЦ «Новый магнат» начали распродавать по частям",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137378"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72571775",
+   "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
+    ]
+   ],
+   "sum": "30 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-19",
+     "title": "Переговоры",
+     "note": "В Тюмени выставили на продажу часть торгового центра «Новый магнат», расположенного в городе с 2004 года. Собственник намерен продать половину цокольного этажа площадью 1242 кв. м за 30,05 млн рублей. Объявление появилось на сайтах бесплатных объявлений.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Тюменский ТЦ «Новый магнат» начали распродавать по частям» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d83214417",
+   "title": "В Курганской области продают нефтебазу за 190 миллионов",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137641"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27900748",
+   "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137660"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35894249",
+   "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9043300"
+    ]
+   ],
+   "sum": "130 млн ₽",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12352437",
+   "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Власти Ярославской области хотят продать усадьбу племянника А. Н. Некрасова, расположенную неподалеку от поселка Дубки.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88183245",
+   "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137854"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9fed3cb1 (общие редкие слова: жк, застро) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d46559371",
+   "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gd76643b6 (общие редкие слова: 400, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d18133401",
+   "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118720-voronezhskiy-aviazavod-vnov-ne-smog-prodat-zakrytye-lager-salyut-i-turbazu-zvezdnyy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81541561",
+   "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28238995"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Пресс-секретарь российского лидера отметил, что коммерческая сделка не может обсуждаться публично",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28238995"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43106805",
+   "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261021/siti-2126054701.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47286146",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124073"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d42276510",
+   "title": "США продлили лицензию на операции по продаже активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138001"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d74027021",
+   "title": "США продлили лицензию для продажи зарубежных активов «Лукойла» до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/21/1239042-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d73514423",
+   "title": "Минфин США продлил лицензию по продаже зарубежных активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2188239/2026-10-21/minfin-ssha-prodlil-litcenziiu-po-prodazhe-zarubezhnykh-aktivov-lukoila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d49126095",
+   "title": "Denum Tech продала платформу POS-кредитования",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-22_denum_tech_prodala_platformu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Российская ИТ-компания и резидент инновационного центра «Сколково» Denum Tech, входящая в финтех-группу Denum, продала...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-10-22_denum_tech_prodala_platformu"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "платформа POS-кредитования",
+   "seller": "Denum Tech",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "платформа POS-кредитования",
+    "seller": "Denum Tech"
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d72786952",
+   "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138087"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "старинная башня на тюменском полуострове",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная башня на тюменском полуострове",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d38017243",
+   "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138122"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23012371",
+   "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/10/22/v-lefortovo-na-aukcziony-vystavili-dva-pomeshheniya-dlya-biznesa"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g4c7906c5 (общие редкие слова: аукцио, помеще) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d67553644",
+   "title": "Объем чистых инвестиций в лизинг и активов в операционной аренде снизился на 14%",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9045241"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финансовые услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d72197218",
+   "title": "В винотеках SimpleWine начали продавать закуски",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9045169"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d20269417",
+   "title": "В Госдуме возникли разногласия из-за онлайн-продажи российского вина",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/society/articles/2026/10/23/1239457-raznoglasiya-iz-za-onlain-prodazhi-rossiiskogo-vina"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69177690",
+   "title": "Как власти хотят изменить инвестиционный режим на Дальнем Востоке и в Арктике",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/economics/articles/2026/10/23/1239421-kak-vlasti-hotyat-izmenit-investitsionnii-rezhim"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67867297",
+   "title": "«Газпром» сменил владельца «Петербургтеплоэнерго»",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/23/gazprom-smenil-vladelca"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf285fa14 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d13850790",
+   "title": "Визовый режим с Черногорией может до нуля снизить продажи туров из России",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/23/vizovij-rezhim-s-chernogoriej"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34031783",
+   "title": "«Народное» IPO Роснефти. Что получил частный инвестор за 20 лет?",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1365726.php"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Летом 2006 года акции Роснефти можно было купить через отделение Сбербанка. Минимальная заявка: ₽15 тыс. Крупная государственная нефтяная компания выходила на биржу, а стать её совладельцем предлагали обычным гражданам. Сейчас этой истории двадцать лет.…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1365726.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "частный инвестор",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "частный инвестор",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d35905318",
+   "title": "OpenAI working on new $30B raise at $1.25T valuation ahead of IPO",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d31278985",
+   "title": "В Кургане продают редкие советские матрешки из разных регионов России. Фото",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138210"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70149668",
+   "title": "«Ареал» (Ex-Highland Gold) получили 75% в золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разведку и добычу рудного золота на Пертинъярвинском участке в",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7497"
+    ]
+   ],
+   "sum": "500 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "«Ареал» (Ex-Highland Gold)",
+   "asset": "золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разв",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«Ареал» (Ex-Highland Gold)",
+    "asset": "золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разв",
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
+   ]
+  }
+ ]
+}
