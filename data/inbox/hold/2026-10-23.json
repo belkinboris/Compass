@@ -535,30 +535,19 @@
    ]
   },
   {
-   "draft_id": "d63758081",
-   "title": "Vonovia может потерять более 8 млрд евро в случае национализации квартир в Берлине",
+   "draft_id": "d78723645",
+   "title": "Как маркетплейсы во Франции борются с продажей краденого после протестов",
    "date": "2026-10-23",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1124605"
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/23/10/2026/6adb2ae99a79474bd166f9c3"
     ]
    ],
-   "sum": "€8 млрд",
+   "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-23",
-     "title": "Переговоры",
-     "note": "Vonovia SE, крупнейший в Европе владелец арендного жилья, может потерять более 8 млрд евро из-за планов национализации недвижимости в Берлине, пишет Financial Times.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1124605"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -570,34 +559,24 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d83750053",
-   "title": "Наследники скончавшегося президента «Соликамскбумпрома» хотят выйти из бизнеса",
+   "draft_id": "d41882013",
+   "title": "What some of Anthropic’s backers are reportedly worth before its IPO",
    "date": "2026-10-23",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/23/what-some-of-anthropics-backers-are-reportedly-worth-before-its-ipo/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-23",
-     "title": "Переговоры",
-     "note": "Cтали известны подробности возможной сделки по продаже 83,3% находящегося в предбанкротном состоянии АО «Соликамскбумпром» китайской «Юнь Чоу». В качестве продавцов выступают само предприятие и аффилированные с ним компании, а также два физичес­ких лица…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Nasledniki-skonchavshegosya-prezidenta-Solikamskbumproma-hotyat-vyjti-iz-biznesa-87687"
-     ]
-    }
-   ],
+   "type": "IPO",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -609,216 +588,36 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70401514",
-   "title": "Роснедра выставили на аукцион Белухинское месторождение в Забайкалье",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/rosnedra-874574953.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d82721581",
-   "title": "Роснедра выставили на аукцион Зергунское месторождение",
+   "draft_id": "d44786324",
+   "title": "В Перми выросли продажи зимних шин: какие покупают чаще",
    "date": "2026-10-23",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/rosnedra-874574292.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g35c2f65e (общие редкие слова: выстав, роснед) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83646708",
-   "title": "Владелец «Валенсии» продал 42 процента акций клуба",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261023/valensiya-2126617487.html"
+     "web:ura.news",
+     "https://ura.news/news/1053138566"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-23",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261023/valensiya-2126617487.html"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "42 процента акций клуба",
+   "asset": "чаще",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "42 процента акций клуба",
+    "asset": "чаще",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d71839960",
-   "title": "«Пушкинскую карту» чаще всего используют для покупки билетов в кино",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261023/kino-2126610272.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58668108",
-   "title": "Рост инвестиций и пересмотр ДИС: как развиваются отношения между бизнесом в Азии",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/story/266468/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88394855",
-   "title": "Россиянам дали неочевидные советы сохранить деньги на распродажах",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/23/rossiyanam-dali-neochevidnye-sovety-sohranit-dengi-na-rasprodazhah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22144865",
-   "title": "Пекин был крайне недоволен: Россия пошла на хитрость, продав Китаю подлодки",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/23/pekin-byl-krajne-nedovolen-rossiya-poshla-na-hitrost-prodav-kitayu-podlodki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

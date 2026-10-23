@@ -57,6 +57,48 @@
    "strength": "normal"
   },
   {
+   "id": "sa02db42d8",
+   "company_id": "g4378642a",
+   "date": "2026-10-14",
+   "kind": "for_sale",
+   "summary": "Соликамскбумпром — обсуждается продажа компании или доли",
+   "source": [
+    "URA.RU",
+    "https://ura.news/news/1053135987"
+   ],
+   "origin": "card",
+   "deal_id": "g002710cf",
+   "strength": "strong"
+  },
+  {
+   "id": "sf024792cf",
+   "company_id": "g694c8981",
+   "date": "2026-10-12",
+   "kind": "ipo",
+   "summary": "SPLAT Global — обсуждается размещение акций",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9024385"
+   ],
+   "origin": "card",
+   "deal_id": "g8302ab18",
+   "strength": "strong"
+  },
+  {
+   "id": "s13bb53702",
+   "company_id": "g8e4b8037",
+   "date": "2026-10-12",
+   "kind": "ipo",
+   "summary": "КИТ1217 — обсуждается размещение акций",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/technology_and_media/12/10/2026/6acc668e5053246da65516fe"
+   ],
+   "origin": "card",
+   "deal_id": "g9354e001",
+   "strength": "strong"
+  },
+  {
    "id": "sa686519f2",
    "company_id": "g65ee96ae",
    "date": "2026-10-09",
@@ -85,11 +127,25 @@
    "strength": "strong"
   },
   {
+   "id": "scdcf1c2e1",
+   "company_id": "delo",
+   "date": "2026-10-07",
+   "kind": "sell",
+   "summary": "Группа компаний «Дело» — обсуждается продажа: Сахалинское морское пароходство (SASCO)",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9008164"
+   ],
+   "origin": "card",
+   "deal_id": "g6264541d",
+   "strength": "strong"
+  },
+  {
    "id": "s61e034afa",
    "company_id": "g4f522aee",
    "date": "2026-10-07",
    "kind": "buy",
-   "summary": "Сергей Шишкарев — обсуждается покупка: 58,67% Сахалинского морского пароходства (SASCO)",
+   "summary": "Сергей Шишкарев — обсуждается покупка: Сахалинское морское пароходство (SASCO)",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/9008164"
@@ -99,11 +155,53 @@
    "strength": "normal"
   },
   {
+   "id": "s4c1c0809f",
+   "company_id": "g88ed8fd7",
+   "date": "2026-10-07",
+   "kind": "for_sale",
+   "summary": "Сахалинское морское пароходство (SASCO) — обсуждается продажа компании или доли; возможный покупатель — Сергей Шишкарев",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9008164"
+   ],
+   "origin": "card",
+   "deal_id": "g6264541d",
+   "strength": "strong"
+  },
+  {
+   "id": "s69d8eacb1",
+   "company_id": "g736d0c65",
+   "date": "2026-10-02",
+   "kind": "for_sale",
+   "summary": "SEFE — обсуждается продажа компании или доли",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/news/2026/10/02/1233912-privatizatsiyu-podrazdeleniya"
+   ],
+   "origin": "card",
+   "deal_id": "g2918b022",
+   "strength": "strong"
+  },
+  {
+   "id": "se41a91062",
+   "company_id": "gff89c3d4",
+   "date": "2026-09-29",
+   "kind": "for_sale",
+   "summary": "НМ-Тех — обсуждается продажа компании или доли; возможный покупатель — «Интегральные системы»",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
+   ],
+   "origin": "card",
+   "deal_id": "gafde5488",
+   "strength": "strong"
+  },
+  {
    "id": "s677ae1b76",
    "company_id": "ga71b47eb",
    "date": "2026-09-29",
    "kind": "buy",
-   "summary": "«Интегральные системы» — обсуждается покупка: «НМ-Тех» (зеленоградский производитель микроэлектроники)",
+   "summary": "«Интегральные системы» — обсуждается покупка: НМ-Тех",
    "source": [
     "CNews",
     "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
@@ -138,6 +236,20 @@
    ],
    "origin": "news",
    "strength": "normal"
+  },
+  {
+   "id": "s4678bca50",
+   "company_id": "gd98f5ba9",
+   "date": "2026-09-28",
+   "kind": "sell",
+   "summary": "OTP Group — обсуждается продажа: ОТП Банк",
+   "source": [
+    "Bloomberg",
+    "https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia"
+   ],
+   "origin": "card",
+   "deal_id": "gd937c845",
+   "strength": "strong"
   },
   {
    "id": "sf85dc473b",
@@ -283,7 +395,7 @@
    "company_id": "gfb08c766",
    "date": "2026-09-07",
    "kind": "for_sale",
-   "summary": "ПИК-специализированный застройщик — обсуждается продажа компании или доли",
+   "summary": "ПИК-специализированный застройщик — обсуждается продажа компании или доли; возможный покупатель — Недвижимые активы",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8938431"
@@ -291,6 +403,20 @@
    "origin": "card",
    "deal_id": "g134cf416",
    "strength": "strong"
+  },
+  {
+   "id": "s0cfa6ab55",
+   "company_id": "g0556420e",
+   "date": "2026-09-07",
+   "kind": "buy",
+   "summary": "Недвижимые активы — обсуждается покупка: ПИК-специализированный застройщик",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8938431"
+   ],
+   "origin": "card",
+   "deal_id": "g134cf416",
+   "strength": "normal"
   },
   {
    "id": "s41d18caf7",
@@ -360,6 +486,20 @@
    ],
    "origin": "card",
    "deal_id": "g8e30b9a8",
+   "strength": "normal"
+  },
+  {
+   "id": "s936bbf351",
+   "company_id": "ge8854af4",
+   "date": "2026-08-07",
+   "kind": "investor",
+   "summary": "Vizor — обсуждается вход инвестора в капитал",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/line/2026-08-07_ivideon_i_skynet_privlekayut_investitsii"
+   ],
+   "origin": "card",
+   "deal_id": "g57b2c1aa",
    "strength": "normal"
   },
   {
@@ -685,11 +825,25 @@
    "strength": "normal"
   },
   {
+   "id": "s79a4420a4",
+   "company_id": "gd211fde4",
+   "date": "2026-06-05",
+   "kind": "investor",
+   "summary": "АрхиТех ИИ — обсуждается вход инвестора в капитал; возможный покупатель — Группа УКМ",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8712628"
+   ],
+   "origin": "card",
+   "deal_id": "gecce5162",
+   "strength": "normal"
+  },
+  {
    "id": "s38175078a",
    "company_id": "g3daf2d35",
    "date": "2026-06-05",
    "kind": "buy",
-   "summary": "Группа УКМ — обсуждается вложение в «АрхиТех ИИ»",
+   "summary": "Группа УКМ — обсуждается вложение в АрхиТех ИИ",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8712628"
@@ -937,6 +1091,20 @@
    "strength": "normal"
   },
   {
+   "id": "sa7003a01b",
+   "company_id": "g1ec82cf4",
+   "date": "2026-04-15",
+   "kind": "sell",
+   "summary": "Газпром космические системы — обсуждается сделка «Газпром продал спутниковый завод Gazprom SPKA компании «Новый старт»»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8689589"
+   ],
+   "origin": "card",
+   "deal_id": "g029b7531",
+   "strength": "strong"
+  },
+  {
    "id": "s007655d91",
    "company_id": "gddadfff8",
    "date": "2026-03-20",
@@ -1110,6 +1278,20 @@
    "date": "2026-01-19",
    "kind": "for_sale",
    "summary": "NIS — обсуждается продажа компании или доли; возможный покупатель — MOL",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8362366"
+   ],
+   "origin": "card",
+   "deal_id": "gb6b371c3",
+   "strength": "strong"
+  },
+  {
+   "id": "sd37e8bba7",
+   "company_id": "ga8b5d62a",
+   "date": "2026-01-19",
+   "kind": "sell",
+   "summary": "Газпром нефть — обсуждается продажа: NIS",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8362366"
@@ -1483,6 +1665,20 @@
    "strength": "strong"
   },
   {
+   "id": "s9c45f2308",
+   "company_id": "gf1f56e08",
+   "date": "2025-09-01",
+   "kind": "buy",
+   "summary": "Газпромбанк — обсуждается вложение в ГК «Медскан»",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
+   ],
+   "origin": "card",
+   "deal_id": "g2197ed53",
+   "strength": "normal"
+  },
+  {
    "id": "s6f700de9f",
    "company_id": "g729ef6c5",
    "date": "2025-09-01",
@@ -1501,7 +1697,7 @@
    "company_id": "g729ef6c5",
    "date": "2025-09-01",
    "kind": "investor",
-   "summary": "ГК «Медскан» — обсуждается вход инвестора в капитал",
+   "summary": "ГК «Медскан» — обсуждается вход инвестора в капитал; возможный покупатель — Газпромбанк",
    "source": [
     "Ведомости",
     "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
@@ -1732,6 +1928,20 @@
    ],
    "origin": "card",
    "deal_id": "g09cee885",
+   "strength": "strong"
+  },
+  {
+   "id": "s71548c2ff",
+   "company_id": "g7ab0b23d",
+   "date": "2024-12-26",
+   "kind": "sell",
+   "summary": "O'Key Group — обсуждается сделка «Менеджмент выкупает часть бизнеса гипермаркетов «О'Кей» у O'Key Group»",
+   "source": [
+    "Коммерсантъ — «Сделки года»",
+    "https://www.kommersant.ru/doc/8077927"
+   ],
+   "origin": "card",
+   "deal_id": "ccdd90216",
    "strength": "strong"
   },
   {
