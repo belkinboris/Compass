@@ -26,7 +26,7 @@ def _shown(deals):
     return [d for d in deals if seo_pages._shown(d)]
 
 
-def test_deal_page_is_plain_html_with_parties_and_no_analysis(client, data):
+def test_deal_page_is_the_site_page_with_the_deal_written_in(client, data):
     """Поисковик видит сделку без скрипта, но только в объёме поста канала:
     разбор экономиста и юриста остаётся в приложении (решение владельца)."""
     deal = next(d for d in data["deals"] if d["id"] == "g0b187624")
@@ -36,8 +36,11 @@ def test_deal_page_is_plain_html_with_parties_and_no_analysis(client, data):
     assert "<h1>«Северсталь» приобрела «Дмитровский металлоцентр»</h1>" in page
     assert '<link rel="canonical" href="https://projectcompass.ru/deal/g0b187624">' in page
     assert "Северсталь" in page and "ООО «Металлстандарт»" in page
-    assert 'href="/#/deal/g0b187624"' in page
-    assert "<script src" not in page
+    assert "<title>«Северсталь» приобрела «Дмитровский металлоцентр» — Компас</title>" in page
+    # Человек видит обычную карточку сайта: это та же страница приложения,
+    # а ранний скрипт переводит адрес в #/deal/<id> (владелец 23 октября 2026).
+    assert '<main class="wrap" id="app"><article class="seo-snapshot">' in page
+    assert "history.replaceState" in page.split("</head>")[0]
     for field in ("context", "target_fin", "rationale"):
         text = str((deal.get("eco") or {}).get(field) or "")
         if len(text) > 40:
@@ -65,7 +68,7 @@ def test_company_page_lists_its_deals(client):
     r = client.get("/company/g4e2d0a88")
     assert r.status_code == 200
     assert 'href="/deal/g0b187624"' in r.text
-    assert 'href="/#/companies/g4e2d0a88"' in r.text
+    assert '<link rel="canonical" href="https://projectcompass.ru/company/g4e2d0a88">' in r.text
 
 
 def test_sitemap_lists_every_shown_deal_and_robots_points_to_it(client, data):

@@ -7899,25 +7899,34 @@ def root_icon(icon_name: str, request: Request):
 # Открытые страницы для поисковиков и ИИ-ассистентов (seo_pages.py, 23 октября
 # 2026): сделка и компания в объёме поста канала, карта сайта, описание для ИИ.
 # Стоят ДО catch-all ниже, иначе их адреса получили бы index.html.
+# Это та же страница сайта (index.html), только с заголовком и текстом сделки,
+# вписанными для поисковика, — поэтому и токен базы, как у index() ниже.
+def _app_page(content: str, request: Request, status_code: int = 200) -> HTMLResponse:
+    resp = HTMLResponse(content, status_code=status_code)
+    if scrape_guard.enabled():
+        resp.headers["Cache-Control"] = "no-cache"
+        scrape_guard.issue_cookie(resp, request)
+    return resp
+
+
 @app.api_route("/deal/{deal_id}", methods=["GET", "HEAD"], include_in_schema=False)
-def seo_deal(deal_id: str):
+def seo_deal(deal_id: str, request: Request):
     state, value = seo_pages.resolve_deal(deal_id)
     if state == "moved":
         return RedirectResponse(f"/deal/{value}", status_code=301)
     if state == "missing":
-        return HTMLResponse(seo_pages.missing_html(SITE_URL), status_code=404)
-    return HTMLResponse(seo_pages.deal_html(value, SITE_URL), headers={"Cache-Control": "public, max-age=600"})
+        return _app_page(seo_pages.missing_html(SITE_URL), request, 404)
+    return _app_page(seo_pages.deal_html(value, SITE_URL), request)
 
 
 @app.api_route("/company/{company_id}", methods=["GET", "HEAD"], include_in_schema=False)
-def seo_company(company_id: str):
+def seo_company(company_id: str, request: Request):
     state, value = seo_pages.resolve_company(company_id)
     if state == "moved":
         return RedirectResponse(f"/company/{value}", status_code=301)
     if state == "missing":
-        return HTMLResponse(seo_pages.missing_html(SITE_URL), status_code=404)
-    return HTMLResponse(seo_pages.company_html(company_id, value, SITE_URL),
-                        headers={"Cache-Control": "public, max-age=600"})
+        return _app_page(seo_pages.missing_html(SITE_URL), request, 404)
+    return _app_page(seo_pages.company_html(company_id, value, SITE_URL), request)
 
 
 @app.api_route("/sitemap.xml", methods=["GET", "HEAD"], include_in_schema=False)
