@@ -619,13 +619,13 @@
    ]
   },
   {
-   "draft_id": "d67553644",
-   "title": "Объем чистых инвестиций в лизинг и активов в операционной аренде снизился на 14%",
+   "draft_id": "d29222616",
+   "title": "Частные инвестиции в городские ГЧП и концессии превысили 1 трлн рублей",
    "date": "2026-10-23",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9045241"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/economics/news/2026/10/23/1239526-investitsii-v-gorodskie-gchp"
     ]
    ],
    "sum": null,
@@ -640,64 +640,6 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финансовые услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d72197218",
-   "title": "В винотеках SimpleWine начали продавать закуски",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9045169"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d20269417",
-   "title": "В Госдуме возникли разногласия из-за онлайн-продажи российского вина",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/society/articles/2026/10/23/1239457-raznoglasiya-iz-za-onlain-prodazhi-rossiiskogo-vina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
@@ -705,144 +647,31 @@
    ]
   },
   {
-   "draft_id": "d69177690",
-   "title": "Как власти хотят изменить инвестиционный режим на Дальнем Востоке и в Арктике",
+   "draft_id": "d91910814",
+   "title": "МИД КНР: ограничения США на инвестиции в биотехнологии нарушают сотрудничество",
    "date": "2026-10-23",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/economics/articles/2026/10/23/1239421-kak-vlasti-hotyat-izmenit-investitsionnii-rezhim"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28245337"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67867297",
-   "title": "«Газпром» сменил владельца «Петербургтеплоэнерго»",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/23/gazprom-smenil-vladelca"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf285fa14 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d13850790",
-   "title": "Визовый режим с Черногорией может до нуля снизить продажи туров из России",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/23/vizovij-rezhim-s-chernogoriej"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34031783",
-   "title": "«Народное» IPO Роснефти. Что получил частный инвестор за 20 лет?",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1365726.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Закрыта",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
    "events": [
     {
-     "kind": "closed",
-     "date": "2026-10-22",
-     "title": "Сделка завершена",
-     "note": "Летом 2006 года акции Роснефти можно было купить через отделение Сбербанка. Минимальная заявка: ₽15 тыс. Крупная государственная нефтяная компания выходила на биржу, а стать её совладельцем предлагали обычным гражданам. Сейчас этой истории двадцать лет.…",
+     "kind": "negotiations",
+     "date": "2026-10-23",
+     "title": "Переговоры",
+     "note": "Пекин намерен внимательно следить за действиями Вашингтона и при необходимости принять меры для защиты прав и интересов китайских компаний",
      "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1365726.php"
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28245337"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "частный инвестор",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "частный инвестор",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d35905318",
-   "title": "OpenAI working on new $30B raise at $1.25T valuation ahead of IPO",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
    "asset": null,
    "seller": null,
    "parsed_parties": {
@@ -850,21 +679,59 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Фармацевтика",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d31278985",
-   "title": "В Кургане продают редкие советские матрешки из разных регионов России. Фото",
+   "draft_id": "d35905797",
+   "title": "Rivian купила ИИ-стартап, который превращает видео в трехмерные миры",
    "date": "2026-10-23",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053138210"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/rivian-kupila-ii-startap-kotoryj-prevrashhaet-video-v-trehmernye-miry/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-23",
+     "title": "Сделка завершена",
+     "note": "Rivian купила британский стартап Third Dimension, чтобы создавать реалистичные 3D-сценарии для обучения и тестирования беспилотных автомобилей.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/rivian-kupila-ii-startap-kotoryj-prevrashhaet-video-v-trehmernye-miry/"
+     ]
+    }
+   ],
+   "buyer_name": "Rivian",
+   "asset": "ИИ-стартап, который превращает видео в трехмерные миры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Rivian",
+    "asset": "ИИ-стартап, который превращает видео в трехмерные миры",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d85027631",
+   "title": "Продажи новых мотоциклов в России побили рекорд",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261023/rossija-874547956.html"
     ]
    ],
    "sum": null,
@@ -886,32 +753,91 @@
    ]
   },
   {
-   "draft_id": "d70149668",
-   "title": "«Ареал» (Ex-Highland Gold) получили 75% в золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разведку и добычу рудного золота на Пертинъярвинском участке в",
+   "draft_id": "d28166416",
+   "title": "Российские туристы в Индии смогут оплачивать покупки через сервис Mony",
    "date": "2026-10-23",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7497"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/311818"
     ]
    ],
-   "sum": "500 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "«Ареал» (Ex-Highland Gold)",
-   "asset": "золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разв",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "«Ареал» (Ex-Highland Gold)",
-    "asset": "золотодобывающем проекте в Карелии Об объекте сделки 75% ООО «Аврора-Ресурс», имеет лицензию на разв",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": "ГМК и добыча",
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga60ab2fc (общие редкие слова: россий, турист) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d16320024",
+   "title": "Крупнейшие DIY-сети сократили продажи на 2%",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/krupnejshie-diy-seti-sokratili-prodazhi-na-2/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d50353405",
+   "title": "Платформа для создания ИИ-контента Givon AI привлекла 3 млн рублей от венчурного фонда brainbox_I в обмен на 4% компании. Оценка стартапа post-money составила 75 млн рублей. Givon AI в 2026 году основ",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7805"
+    ]
+   ],
+   "sum": "3 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Платформа для создания ИИ-контента Givon AI",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Платформа для создания ИИ-контента Givon AI",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, рублей) — проверьте, не дубль ли"
    ]
   }
  ]
