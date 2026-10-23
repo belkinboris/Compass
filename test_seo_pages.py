@@ -96,3 +96,12 @@ def test_home_page_description_counts_the_deals_live(client, data):
     for tag in re.findall(r'<meta (?:name="description"|property="og:description") content="[^"]*"', page):
         assert "%d+ сделок" % n in tag, tag
         assert "линза" not in tag
+
+
+def test_yandex_webmaster_verification_file(client):
+    """Владелец подтверждает права в Яндекс Вебмастере HTML-файлом: текст
+    сверяется дословно, а catch-all отдал бы index.html."""
+    r = client.get("/yandex_c76538994d1a82ce.html")
+    assert r.status_code == 200
+    assert "<body>Verification: c76538994d1a82ce</body>" in r.text
+    assert '<meta name="yandex-verification" content="c76538994d1a82ce">' in client.get("/").text

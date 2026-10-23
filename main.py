@@ -7929,6 +7929,19 @@ def seo_company(company_id: str, request: Request):
     return _app_page(seo_pages.company_html(company_id, value, SITE_URL), request)
 
 
+# Подтверждение прав на сайт в Яндекс Вебмастере (владелец, 23 октября 2026):
+# Яндекс скачивает этот файл и сверяет текст дословно. Без маршрута адрес
+# ловил catch-all и отдавал index.html — «В HTML-файле неправильное содержимое».
+YANDEX_VERIFICATION = "c76538994d1a82ce"
+
+
+@app.api_route(f"/yandex_{YANDEX_VERIFICATION}.html", methods=["GET", "HEAD"], include_in_schema=False)
+def yandex_verification():
+    body = ('<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n'
+            f'    </head>\n    <body>Verification: {YANDEX_VERIFICATION}</body>\n</html>\n')
+    return HTMLResponse(body)
+
+
 @app.api_route("/sitemap.xml", methods=["GET", "HEAD"], include_in_schema=False)
 def seo_sitemap():
     return Response(seo_pages.sitemap_xml(SITE_URL), media_type="application/xml; charset=utf-8",
