@@ -534,284 +534,7 @@
    ]
   },
   {
-   "draft_id": "d72786952",
-   "title": "«Требует больших вложений»: редевелопер продает старинную башню на тюменском полуострове",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138087"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "старинная башня на тюменском полуострове",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "старинная башня на тюменском полуострове",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d38017243",
-   "title": "В Перми продают ресторан-театр, принадлежавший легендарному иллюзионисту",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053138122"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23012371",
-   "title": "В Лефортово на аукционы выставили два помещения для бизнеса",
-   "date": "2026-10-22",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/10/22/v-lefortovo-na-aukcziony-vystavili-dva-pomeshheniya-dlya-biznesa"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g4c7906c5 (общие редкие слова: аукцио, помеще) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d29222616",
-   "title": "Частные инвестиции в городские ГЧП и концессии превысили 1 трлн рублей",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/economics/news/2026/10/23/1239526-investitsii-v-gorodskie-gchp"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91910814",
-   "title": "МИД КНР: ограничения США на инвестиции в биотехнологии нарушают сотрудничество",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28245337"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-23",
-     "title": "Переговоры",
-     "note": "Пекин намерен внимательно следить за действиями Вашингтона и при необходимости принять меры для защиты прав и интересов китайских компаний",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28245337"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35905797",
-   "title": "Rivian купила ИИ-стартап, который превращает видео в трехмерные миры",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/rivian-kupila-ii-startap-kotoryj-prevrashhaet-video-v-trehmernye-miry/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-23",
-     "title": "Сделка завершена",
-     "note": "Rivian купила британский стартап Third Dimension, чтобы создавать реалистичные 3D-сценарии для обучения и тестирования беспилотных автомобилей.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/rivian-kupila-ii-startap-kotoryj-prevrashhaet-video-v-trehmernye-miry/"
-     ]
-    }
-   ],
-   "buyer_name": "Rivian",
-   "asset": "ИИ-стартап, который превращает видео в трехмерные миры",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Rivian",
-    "asset": "ИИ-стартап, который превращает видео в трехмерные миры",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d85027631",
-   "title": "Продажи новых мотоциклов в России побили рекорд",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261023/rossija-874547956.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28166416",
-   "title": "Российские туристы в Индии смогут оплачивать покупки через сервис Mony",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/311818"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga60ab2fc (общие редкие слова: россий, турист) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d16320024",
-   "title": "Крупнейшие DIY-сети сократили продажи на 2%",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/krupnejshie-diy-seti-sokratili-prodazhi-na-2/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d50353405",
+   "draft_id": "d15896873",
    "title": "Платформа для создания ИИ-контента Givon AI привлекла 3 млн рублей от венчурного фонда brainbox_I в обмен на 4% компании. Оценка стартапа post-money составила 75 млн рублей. Givon AI в 2026 году основ",
    "date": "2026-10-23",
    "src": [
@@ -838,6 +561,232 @@
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g9a867776 (общие редкие слова: ии, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d17400828",
+   "title": "Мустафаев: Россия вложила более $10 млрд в экономику Азербайджана",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/economics/news/2026/10/23/1239552-vlozhila-v-ekonomiku"
+    ]
+   ],
+   "sum": "$10 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "экономика Азербайджана",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "экономика Азербайджана",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d14077398",
+   "title": "МИД РФ допустил новый раунд консультаций с США по раздражителям до конца года",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28246033"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20021862",
+   "title": "Прохора Шаляпина и Ларису Долину вовлекли в мошенническую схему с продажей iPhone",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2189216/2026-10-23/prokhora-shaliapin-i-larisu-dolinu-vovlekli-v-moshennicheskuiu-skhemu-s-prodazhei-iphone"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77570296",
+   "title": "BI: пожилые японцы продают бизнес молодым за бесценок",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261023/yaponiya-874554251.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d62260237",
+   "title": "Продажа базы у «Масловского» и дело экс-главы Яменского поселения – главное в Воронеже",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118772-prodazha-bazy-u-maslovskogo-i-delo-eks-glavy-yamenskogo-poseleniya-glavnoe-v-voronezhe/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57795563",
+   "title": "Росимущество вновь выставило на продажу воронежский ЦИТОС за 170 млн рублей",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118770-rosimushchestvo-vnov-vystavilo-na-prodazhu-voronezhskiy-tsitos-za-170-mln-rubley/"
+    ]
+   ],
+   "sum": "170 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d59658608",
+   "title": "Dreame: рынок роботов-пылесосов консолидируется за счет инноваций и сервиса",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261023/dreame-2126343855.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d17653940",
+   "title": "Траты россиян на покупку автомобилей заметно выросли",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/23/traty-rossiyan-na-pokupki-avtomobiley-zametno-vyrosli/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
