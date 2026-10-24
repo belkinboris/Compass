@@ -535,13 +535,13 @@
    ]
   },
   {
-   "draft_id": "d49386093",
-   "title": "В Перми продают ресторан «Данилин» — поговорили с вдовой иллюзиониста о том, что будет с театром, музеем и брендом",
+   "draft_id": "d19528114",
+   "title": "ОМПК консолидирует сбытовые активы в Черноземье на базе «Останкино-Воронеж»",
    "date": "2026-10-24",
    "src": [
     [
-     "web:59.ru",
-     "https://59.ru/text/gorod/2026/10/24/76719768/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118799-ompk-konsolidiruet-sbytovye-aktivy-v-chernozeme-na-baze-ostankino-voronezh/"
     ]
    ],
    "sum": null,
@@ -557,6 +557,62 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17277090",
+   "title": "Вакансия: Корпоративный/M&A юрист в Евразийский банк развития https://hh.ru/vacancy/138637911",
+   "date": "2026-10-24",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7504"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34428292",
+   "title": "В Волгограде распродают имущество обанкротившегося директора управляющих компаний",
+   "date": "2026-10-24",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/10/24/76722159/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
