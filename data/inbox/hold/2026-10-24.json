@@ -353,13 +353,13 @@
    ]
   },
   {
-   "draft_id": "d43454753",
-   "title": "Сергей Целиков рассказал, как изменились продажи «новых русских»",
+   "draft_id": "d29912639",
+   "title": "Bloomberg: Frasers Group получила контроль над Hugo Boss",
    "date": "2026-10-24",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/24/czelikov-rasskazal-kak-izmenilis-prodazhi-novyh-russkih"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28249925"
     ]
    ],
    "sum": null,
@@ -367,74 +367,18 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "над Hugo Boss",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "над Hugo Boss",
     "seller": null
    },
-   "ind": null,
+   "ind": "Потребительские товары",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12828993",
-   "title": "В Нерехте продают исторические торговые ряды за 15 млн рублей",
-   "date": "2026-10-24",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/kostroma/2026/10/24/v-nerehte-prodayut-istoricheskie-torgovye-ryady-za-15-mln-rublej"
-    ]
-   ],
-   "sum": "15 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5257a627 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d52365593",
-   "title": "В Уфе продают торговый центр в связи с банкротством",
-   "date": "2026-10-24",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/gorod/2026/10/24/76722589/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
