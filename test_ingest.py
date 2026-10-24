@@ -8506,3 +8506,23 @@ def test_other_routines_wait_with_push_only_for_fresh_human_decisions():
             {'deal_id': 'c', 'verdict': 'approve', 'created_at': stale}]
     assert [r['deal_id'] for r in pb.waiting(rows, now)] == ['a']
     assert pb.waiting([], now) == []
+
+
+def test_drop_pending_removes_card_and_remembers_its_sources():
+    """Явная не-сделка выкидывается рутиной без вопроса владельцу (24 октября
+    2026) — как кнопка «выкинуть»: из очереди насовсем, а адрес источника
+    запоминается, чтобы та же новость не вернулась под новым id."""
+    from datetime import datetime, timezone
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('drop_pending', 'pipeline/ingest/drop_pending.py')
+    dp = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(dp)
+    pending = {'cards': [{'id': 'g1', 'title': 'Майку Джордана продали', 'src': [['ТАСС', 'https://x.ru/a']]},
+                         {'id': 'g2', 'title': 'Сделка', 'src': []}]}
+    state = {}
+    dp.drop(pending, state, ['g1'], 'не сделка', datetime(2026, 10, 24, tzinfo=timezone.utc))
+    assert [c['id'] for c in pending['cards']] == ['g2']
+    assert state['discarded_urls']['https://x.ru/a']['by'] == 'routine'
+    import pytest
+    with pytest.raises(AssertionError):
+        dp.drop(pending, state, ['g404'], 'не сделка', datetime(2026, 10, 24, tzinfo=timezone.utc))
