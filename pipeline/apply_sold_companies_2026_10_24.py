@@ -65,6 +65,7 @@ NEW = {
     'cd47c5acc': ('Монэкс трейдинг', 'Российская сеть детских товаров Mothercare: 118 магазинов в 30 регионах (ООО «Монэкс трейдинг»).'),
     'cf2375bf5': ('Квартал Герцена', 'Застройщик девелоперского проекта «Квартал Герцена» (ООО «Квартал Герцена»).'),
     'g4fc7af86': ('Инсайт Комкон', 'Российское подразделение исследовательской компании Ipsos (ООО «Ипсос Комкон», ныне ООО «Инсайт Комкон»).'),
+    'cfdc0e962': ('Жемчужная плаза', 'Владелец торгово-развлекательного комплекса «Жемчужная плаза» в Санкт-Петербурге (ООО «Жемчужная плаза»).'),
     'gde84040f': ('Исткульт Можайск', 'Завод газобетона в Можайске, 500 тыс. куб. м блоков в год; до 2022 года выпускал продукцию Ytong группы Xella.'),
 }
 # Профиль с тем же именем в базе уже есть — прочитано глазами 24 октября: та
@@ -77,6 +78,11 @@ SAME_AS = {'c011c4ee1': 'ge730f6b6', 'c1062263e': 'geef721b8',
 # Привязка предмета столкнула бы их в test_no_two_cards_claim_one_deal_…;
 # сначала слить этапы, потом привязывать.
 HOLD = {'ccdd90216'}
+# Предмет — группа, у которой в базе уже есть профиль с ИНН операционной
+# компании (вторая проверка, doubtful.result.json): только привязка.
+# «Волга-Днепр»: продано головное ООО «Волга-Днепр-Москва», а профиль
+# g83feabb2 держит ИНН авиакомпании, по отчётности которой и оценивают.
+LINK_ONLY = {'c49c9d8b0': 'g83feabb2', 'c6fd3a848': 'g83feabb2'}
 EMPTY_DESC = 'Описание компании пока не добавлено.'
 # Несколько юрлиц в одном ответе: «ООО «А» и ООО «Б»», «(+ ООО …)», «крупнейшая из».
 MANY = re.compile(r'»\s*(?:и|,)\s*(?:ООО|АО|ПАО|«)|\(\+|крупнейш')
@@ -88,6 +94,12 @@ def load():
         src = {r['deal']: r for r in json.load(open(os.path.join(DIR, 'batch%s.json' % b), encoding='utf-8'))}
         for r in json.load(open(os.path.join(DIR, 'batch%s.result.json' % b), encoding='utf-8')):
             out.append(dict(r, src=src[r['deal']]))
+    # Вторая, более глубокая проверка средних и низких совпадений (24 октября):
+    # её ответ заменяет первый.
+    second = os.path.join(DIR, 'doubtful.result.json')
+    if os.path.exists(second):
+        again = {r['deal']: r for r in json.load(open(second, encoding='utf-8'))}
+        out = [dict(again[r['deal']], src=r['src']) if r['deal'] in again else r for r in out]
     return out
 
 
@@ -112,6 +124,8 @@ def plan(data, rows):
         s, inn = r['src'], str(r.get('inn') or '')
         if r.get('confidence') != 'high':
             notes['ждёт проверки'].append(r['deal']); continue
+        if r['deal'] in LINK_ONLY and r.get('confidence') == 'high':
+            links.append((r['deal'], 'target', LINK_ONLY[r['deal']], r['legal_name'])); continue
         if r['deal'] in HOLD:
             notes['отложено: дубль карточки'].append(r['deal']); continue
         if r.get('what_sold') == 'asset':

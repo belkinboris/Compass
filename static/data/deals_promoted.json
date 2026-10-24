@@ -187241,11 +187241,11 @@
     },
     "target": {
      "company_id": "gc9b45ded",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7714617793",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "fb1913e562b6"
     },
@@ -187261,7 +187261,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -206084,14 +206084,14 @@
      "card_hash": "c850ffb0aa0d"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g83feabb2",
+     "inn": "7328510118",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2ed831b5cb1a"
     },
     "admitted": {
      "count": true,
@@ -206109,7 +206109,8 @@
     }
    },
    "followup_researched": "2026-09-08",
-   "no_parties": "Намерение передать группу государству без названного получателя; не состоялось (группу позже купил ЕАС Групп — отдельная сделка)"
+   "no_parties": "Намерение передать группу государству без названного получателя; не состоялось (группу позже купил ЕАС Групп — отдельная сделка)",
+   "target": "g83feabb2"
   },
   {
    "id": "c31a23b22",
@@ -206795,14 +206796,14 @@
      "card_hash": "30e9964e9292"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gf62ffbc1",
+     "inn": "7807350398",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "72c8330aab1b"
     },
     "admitted": {
      "count": true,
@@ -206821,7 +206822,8 @@
    },
    "followup_researched": "2026-09-08",
    "status": "Не состоялась",
-   "no_parties": "Судебный спор о сорванной продаже, а не сделка (сама продажа SRV → Central Properties — в карточке c31a23b22)"
+   "no_parties": "Судебный спор о сорванной продаже, а не сделка (сама продажа SRV → Central Properties — в карточке c31a23b22)",
+   "target": "gf62ffbc1"
   },
   {
    "id": "cc63cf578",
@@ -209856,14 +209858,14 @@
      "card_hash": "ef98b4ffd825"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g83feabb2",
+     "inn": "7328510118",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "2ed831b5cb1a"
     },
     "admitted": {
      "count": true,
@@ -209882,7 +209884,8 @@
    },
    "status": "Не состоялась",
    "followup_researched": "2026-09-08",
-   "no_parties": "Заявление об отказе от акций в пользу государства, не реализовано; реальная продажа — отдельная сделка"
+   "no_parties": "Заявление об отказе от акций в пользу государства, не реализовано; реальная продажа — отдельная сделка",
+   "target": "g83feabb2"
   },
   {
    "id": "c2d0c1dcd",
@@ -231015,11 +231018,11 @@
     },
     "target": {
      "company_id": "glaim",
-     "inn": null,
-     "confirmed": false,
+     "inn": "6678085450",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "52a479be6bde"
     },
@@ -231035,7 +231038,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread_absorbed": {
@@ -283281,6 +283284,12 @@
    "name": "Исткульт Можайск",
    "ind": "Строительство",
    "desc": "Завод газобетона в Можайске, 500 тыс. куб. м блоков в год; до 2022 года выпускал продукцию Ytong группы Xella.",
+   "kpi": []
+  },
+  "gf62ffbc1": {
+   "name": "Жемчужная плаза",
+   "ind": "Недвижимость",
+   "desc": "Владелец торгово-развлекательного комплекса «Жемчужная плаза» в Санкт-Петербурге (ООО «Жемчужная плаза»).",
    "kpi": []
   }
  },
