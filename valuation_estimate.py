@@ -49,6 +49,57 @@ ASSET_HEAVY = {'Недвижимость', 'ГМК и добыча', 'Нефть
                'Порты и инфраструктура', 'Гостиницы и туризм', 'Агро', 'Лесопром'}
 
 
+# ВНЕШНИЕ ОРИЕНТИРЫ (24 октября 2026). Своих сделок с ценой, долей и
+# отчётностью у нас около тридцати — медиана по отрасли почти нигде не
+# складывается. Поэтому главный способ — средний EV/EBITDA сделок отрасли из
+# обзора рынка M&A Б1 и Mergers.ru (данные Advance Capital), ИТ — из обзора
+# Tech M&A 2025. Полный список с цитатами и адресами —
+# data/inbox/valuation/benchmarks.json, разбор — benchmarks.md.
+SURVEY_2024 = ('Б1 и Mergers.ru, «Исследование рынка M&A: итоги 2024 года» (данные Advance Capital)',
+               'https://mergers.ru')
+TECH_2025 = ('«2025 Tech M&A» (Б1 и Advance Capital, апрель 2026)', 'https://b1.ru')
+BENCHMARK_EV_EBITDA = {
+    # отрасль сайта: (EV/EBITDA, год, источник)
+    'ИТ и интернет': (6.1, 2025, TECH_2025), 'Искусственный интеллект': (6.1, 2025, TECH_2025),
+    'Телеком': (6.1, 2024, SURVEY_2024), 'Медиа': (7.1, 2025, TECH_2025), 'E-commerce': (6.1, 2024, SURVEY_2024),
+    'Здравоохранение': (5.5, 2024, SURVEY_2024), 'Гостиницы и туризм': (5.5, 2024, SURVEY_2024),
+    'Образование': (5.5, 2024, SURVEY_2024), 'Развлечения': (5.5, 2024, SURVEY_2024),
+    'Транспорт и логистика': (5.4, 2024, SURVEY_2024), 'Порты и инфраструктура': (5.4, 2024, SURVEY_2024),
+    'Агро': (5.2, 2024, SURVEY_2024), 'Ритейл': (5.0, 2024, SURVEY_2024),
+    'Пищепром и напитки': (4.3, 2024, SURVEY_2024), 'Потребительские товары': (4.3, 2024, SURVEY_2024),
+    'Фармацевтика': (4.3, 2024, SURVEY_2024), 'Производство тары': (4.3, 2024, SURVEY_2024),
+    'ГМК и добыча': (3.8, 2024, SURVEY_2024), 'Машиностроение': (3.8, 2024, SURVEY_2024),
+    'Химия и удобрения': (3.8, 2024, SURVEY_2024), 'Уголь': (3.8, 2024, SURVEY_2024),
+    'Лесопром': (3.8, 2024, SURVEY_2024), 'Автопром': (3.8, 2024, SURVEY_2024),
+    'Нефть и газ': (3.8, 2024, SURVEY_2024), 'Строительство': (3.8, 2024, SURVEY_2024),
+    'Энергетика': (3.6, 2024, SURVEY_2024),
+}
+MARKET_EV_EBITDA = (4.8, 2024, ('РБК по данным Advance Capital: медиана EV/EBITDA сделок 2024 года', 'https://www.rbc.ru'))
+BENCH_BAND = (0.75, 1.25)    # вилка вокруг средней — средняя по нескольким десяткам сделок, не точка
+MINORITY_FACTOR = (0.6, 1.0)  # доля меньше 50%: без контроля стоит дешевле (НЦПО — нижняя граница)
+FOREIGN_EXIT_FACTOR = (0.35, 0.45)  # выход иностранца: дисконт не меньше 60% к рыночной оценке с октября 2024
+
+
+def benchmark_method(deal: dict, report: dict, net_debt: float) -> dict | None:
+    """Главный способ: прибыль от продаж × средний EV/EBITDA сделок отрасли.
+
+    Прибыль от продаж (строка 2200) — это EBITDA за вычетом амортизации,
+    поэтому оценка выходит ниже настоящей, сильнее всего в капиталоёмких
+    отраслях. Так и пишем: это нижняя часть вилки, а не середина рынка."""
+    op = _n(report.get('operating_profit_rub'))
+    if op is None or op <= 0:
+        return None
+    mult, year, src = BENCHMARK_EV_EBITDA.get(deal.get('ind')) or MARKET_EV_EBITDA
+    scope = 'отрасль' if deal.get('ind') in BENCHMARK_EV_EBITDA else 'весь рынок'
+    vals = [op * mult * k - net_debt for k in (BENCH_BAND[0], 1.0, BENCH_BAND[1])]
+    if vals[2] <= 0:
+        return None
+    return {'metric': 'bench_ev_ebitda', 'label': 'средний EV/EBITDA сделок отрасли (обзор рынка)',
+            'base_rub': op, 'scope': scope, 'multiple': (round(mult * BENCH_BAND[0], 1), mult, round(mult * BENCH_BAND[1], 1)),
+            'full_rub': (max(vals[0], 0), vals[1], vals[2]), 'source': src, 'source_year': year,
+            'note': 'по прибыли от продаж: амортизация в отчётности ФНС не видна, оценка занижена'}
+
+
 def _n(v) -> float | None:
     try:
         return float(v) if v is not None else None
@@ -104,7 +155,8 @@ def eligibility(deal: dict, target_entity: dict | None, report: dict | None) -> 
     return None
 
 
-def estimate(deal: dict, report: dict, comps: dict[str, dict], stake_pct: float | None) -> dict:
+def estimate(deal: dict, report: dict, comps: dict[str, dict], stake_pct: float | None,
+             foreign_exit: bool = False) -> dict:
     """Вилка цены за 100% и за купленную долю по каждому применимому методу."""
     net_debt = (_n(report.get('borrowings_rub')) or 0) - (_n(report.get('cash_rub')) or 0)
     methods = []
@@ -129,6 +181,9 @@ def estimate(deal: dict, report: dict, comps: dict[str, dict], stake_pct: float 
         methods.append({'metric': m, 'label': label, 'base_rub': base, 'scope': c['scope'], 'n': c['n'],
                         'multiple': (round(c['p25'], 2), round(c['median'], 2), round(c['p75'], 2)),
                         'full_rub': (max(lo, 0), mid, hi), 'deals': c['deals'][:8]})
+    bench = benchmark_method(deal, report, net_debt)
+    if bench:
+        methods.insert(0, bench)
     used = [x for x in methods if 'full_rub' in x]
     if not used:
         return {'ok': False, 'reason': 'ни один способ не применим', 'methods': methods}
@@ -139,12 +194,27 @@ def estimate(deal: dict, report: dict, comps: dict[str, dict], stake_pct: float 
     # Насколько верить: способов два и больше, их середины сходятся в пределах
     # двух раз, и хоть один считан по своей отрасли — «средняя»; иначе «низкая».
     # «Высокой» у оценки по чужим сделкам не бывает.
-    agree = len(used) >= 2 and mids[-1] <= 2 * mids[0]
-    own = any(x['scope'] == 'отрасль' for x in used)
+    # Середина — по главному способу, если он есть: свои сделки служат
+    # проверкой, а не голосом наравне (их слишком мало).
+    if bench:
+        full = bench['full_rub']
+    agree = len(used) >= 2 and mids[-1] <= 2.5 * mids[0]
+    own = bool(bench and bench['scope'] == 'отрасль') or any(x['scope'] == 'отрасль' for x in used)
     confidence = 'средняя' if agree and own else 'низкая'
-    share = (stake_pct or 100) / 100.0
-    return {'ok': True, 'report_year': report['year'], 'net_debt_rub': net_debt,
-            'full_rub': full, 'stake_pct': stake_pct, 'deal_rub': tuple(v * share for v in full),
+    factors = []
+    share_pct = stake_pct or 100
+    if stake_pct and stake_pct < 50:
+        factors.append(('доля без контроля (меньше 50%)', MINORITY_FACTOR))
+    if foreign_exit:
+        factors.append(('выход иностранного владельца: по правилам правкомиссии дисконт не меньше 60%', FOREIGN_EXIT_FACTOR))
+    share = share_pct / 100.0
+    lo_k = hi_k = 1.0
+    for _, (a, b) in factors:
+        lo_k *= a
+        hi_k *= b
+    deal_rub = (full[0] * share * lo_k, full[1] * share * (lo_k + hi_k) / 2, full[2] * share * hi_k)
+    return {'ok': True, 'report_year': report['year'], 'net_debt_rub': net_debt, 'factors': [f[0] for f in factors],
+            'full_rub': full, 'stake_pct': stake_pct, 'deal_rub': deal_rub,
             'methods': methods, 'confidence': confidence,
             'spread': round(full[2] / full[0], 1) if full[0] > 0 else None}
 
