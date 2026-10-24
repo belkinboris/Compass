@@ -2,188 +2,6 @@
  "made": "2026-10-24",
  "drafts": [
   {
-   "draft_id": "d90791755",
-   "title": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118647/"
-    ]
-   ],
-   "sum": "509 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g57c0c1a1 (общие редкие слова: вороне, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d20093949",
-   "title": "Тюменский ТЦ «Новый магнат» начали распродавать по частям",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137378"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72571775",
-   "title": "В Тюмени половину цокольного этажа ТЦ «Новый магнат» продают за 30 млн рублей",
-   "date": "2026-10-19",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
-    ]
-   ],
-   "sum": "30 млн ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-19",
-     "title": "Переговоры",
-     "note": "В Тюмени выставили на продажу часть торгового центра «Новый магнат», расположенного в городе с 2004 года. Собственник намерен продать половину цокольного этажа площадью 1242 кв. м за 30,05 млн рублей. Объявление появилось на сайтах бесплатных объявлений.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/ural/news/tyumen/2026/10/19/v-tyumeni-polovinu-czokolnogo-etazha-tcz-novyj-magnat-prodayut-za-30-mln-rublej"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Тюменский ТЦ «Новый магнат» начали распродавать по частям» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d83214417",
-   "title": "В Курганской области продают нефтебазу за 190 миллионов",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137641"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27900748",
-   "title": "В Тюмени продают старейшее турагентство с 17-летней историей",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137660"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35894249",
-   "title": "Инвестплатформа не собрала инвесторов // «Лэндэр-Инвест» продолжит pre-IPO в ноябре",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9043300"
-    ]
-   ],
-   "sum": "130 млн ₽",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d12352437",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
@@ -535,13 +353,13 @@
    ]
   },
   {
-   "draft_id": "d19528114",
-   "title": "ОМПК консолидирует сбытовые активы в Черноземье на базе «Останкино-Воронеж»",
+   "draft_id": "d25607834",
+   "title": "В посёлке Тура продолжается продажа продуктов питания по сниженным ценам",
    "date": "2026-10-24",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118799-ompk-konsolidiruet-sbytovye-aktivy-v-chernozeme-na-baze-ostankino-voronezh/"
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/society/59500"
     ]
    ],
    "sum": null,
@@ -557,62 +375,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17277090",
-   "title": "Вакансия: Корпоративный/M&A юрист в Евразийский банк развития https://hh.ru/vacancy/138637911",
-   "date": "2026-10-24",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7504"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34428292",
-   "title": "В Волгограде распродают имущество обанкротившегося директора управляющих компаний",
-   "date": "2026-10-24",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/10/24/76722159/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
