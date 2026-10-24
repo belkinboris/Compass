@@ -291123,7 +291123,9 @@
   "gc44a1e70": 221,
   "g29d48d22": null,
   "ge881187c": 222,
-  "g5e1a7c24": 223
+  "g5e1a7c24": 223,
+  "gf31c1d53": null,
+  "g84cc7a39": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -293932,6 +293934,9 @@
     "finadv": "—"
    },
    "events": [
+    {
+     "kind": "closed"
+    },
     {
      "kind": "closed"
     }
