@@ -77,6 +77,7 @@ message_id в `telegram_posts` (не `null`) И которая попала в
     python3 pipeline/publish/send_telegram.py              # сухой прогон
     python3 pipeline/publish/send_telegram.py --write      # отправить свою долю
     python3 pipeline/publish/send_telegram.py --write --now  # отправить всё сразу
+    python3 pipeline/publish/send_telegram.py --write --finish  # всю очередь в этом прогоне, с паузой 20 мин
     python3 pipeline/publish/send_telegram.py --write --skip gX1 gX2
         # П3-10: отправить всё, КРОМЕ перечисленных сделок — решение читающего
         # ПОСЛЕ того, как он прочёл полные тексты в сухом прогоне (см. ниже),
@@ -1376,6 +1377,12 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     sent, edited, milestoned, failed, deleted = 0, 0, 0, [], []
     prev_kind = None
     paced = write and not (ignore_pace or '--now' in sys.argv)
+    # --finish (владелец, 24 октября 2026: «приоритетно всегда заканчивать с
+    # выпуском постов, а потом уже … остальные плановые задачи»): прогон
+    # публикации ждёт паузы между постами сколько нужно и выпускает всю
+    # очередь, а не отдаёт остаток следующему прогону через 45 минут. Пауза
+    # 20 минут и дневное окно остаются.
+    finish = '--finish' in sys.argv
     if paced:
         # Правки — первыми: они не ждут паузы между новыми постами.
         batch = [b for b in batch if b[0] == 'edit'] + [b for b in batch if b[0] != 'edit']
@@ -1391,7 +1398,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         new_post = kind in ('send', 'milestone')
         if new_post and paced:
             wait = gap_wait_s(data.get('telegram_last_post_at'))
-            if wait and (waited + wait > RUN_WAIT_S or not in_window_after(wait)):
+            if wait and ((waited + wait > RUN_WAIT_S and not finish) or not in_window_after(wait)):
                 gap_held += 1
                 continue
             if wait:

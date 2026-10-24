@@ -351,35 +351,6 @@
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
-  },
-  {
-   "draft_id": "d29912639",
-   "title": "Bloomberg: Frasers Group получила контроль над Hugo Boss",
-   "date": "2026-10-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28249925"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "над Hugo Boss",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "над Hugo Boss",
-    "seller": null
-   },
-   "ind": "Потребительские товары",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
   }
  ]
 }

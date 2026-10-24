@@ -8486,3 +8486,23 @@ def test_a_company_brand_cannot_be_left_without_a_profile():
               "гостиница «Урал» площадью 3 тыс. кв. м", "российские активы «Онтэкс РУ»",
               "АО «Московский Центр Упаковки» (49%), Ольга Истомина (41%)"):
         assert not accept_card.single_brand(t), t
+
+
+def test_other_routines_wait_with_push_only_for_fresh_human_decisions():
+    """Владелец 24 октября 2026: «приоритетно всегда заканчивать с выпуском
+    постов». Пока на сайте лежат неприменённые решения из консоли, другие
+    рутины ждут с push; заметка — не решение, а решение старше трёх часов
+    значит, что публикация сломалась, и ждать её нельзя."""
+    from datetime import datetime, timedelta, timezone
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('publication_busy', 'pipeline/publication_busy.py')
+    pb = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pb)
+    now = datetime(2026, 10, 24, 12, 0, tzinfo=timezone.utc)
+    fresh = (now - timedelta(minutes=30)).isoformat()
+    stale = (now - timedelta(hours=4)).isoformat()
+    rows = [{'deal_id': 'a', 'verdict': 'approve', 'created_at': fresh},
+            {'deal_id': 'b', 'verdict': 'note', 'created_at': fresh},
+            {'deal_id': 'c', 'verdict': 'approve', 'created_at': stale}]
+    assert [r['deal_id'] for r in pb.waiting(rows, now)] == ['a']
+    assert pb.waiting([], now) == []
