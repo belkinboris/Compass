@@ -101,11 +101,11 @@
     },
     "target": {
      "company_id": "gfe098d01",
-     "inn": null,
-     "confirmed": false,
+     "inn": "1101008311",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "f11b2fb7a0c7"
     },
@@ -121,7 +121,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller": "ООО «Лузалес»",
@@ -1774,11 +1774,11 @@
     },
     "target": {
      "company_id": "g6212c4a5",
-     "inn": null,
-     "confirmed": false,
+     "inn": "9705121836",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "edde7716d5b6"
     },
@@ -1794,7 +1794,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -2045,11 +2045,11 @@
     },
     "target": {
      "company_id": "g2f6dd70b",
-     "inn": null,
-     "confirmed": false,
+     "inn": "1215188442",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "4cd4abdf472b"
     },
@@ -2065,7 +2065,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller_id": "ga4383970"
@@ -2295,11 +2295,11 @@
     },
     "target": {
      "company_id": "g343b0d64",
-     "inn": null,
-     "confirmed": false,
+     "inn": "5262299235",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "e64b7c9cd2fd"
     },
@@ -2315,7 +2315,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -24921,11 +24921,11 @@
     },
     "target": {
      "company_id": "g8f1f069d",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7725806256",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "9869a273210f"
     },
@@ -66201,11 +66201,11 @@
     },
     "target": {
      "company_id": "g842a7fd2",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7810022460",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "b8f373826813"
     },
@@ -66221,7 +66221,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -70145,11 +70145,11 @@
     },
     "target": {
      "company_id": "g5e679df1",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7841312240",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "08a0971077b3"
     },
@@ -70165,7 +70165,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller_id": "g8367b4c7"
@@ -71647,11 +71647,11 @@
     },
     "target": {
      "company_id": "gd2baa661",
-     "inn": null,
-     "confirmed": false,
+     "inn": "9705124509",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "4cdedf845206"
     },
@@ -71667,7 +71667,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -73645,7 +73645,7 @@
    "date": "2023-10-01",
    "title": "Xella Group продала завод газобетона АО «Исткульт Можайск» холдингу «АлфиГрупп»",
    "buyer": "g08f2a986",
-   "target": null,
+   "target": "gcb0c8028",
    "ind": "Строительство",
    "type": "M&A",
    "kind": "acquisition",
@@ -73734,14 +73734,14 @@
      "card_hash": "a3f446b4d6ef"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gcb0c8028",
+     "inn": "5028021698",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fd1cd7e6f476"
     },
     "admitted": {
      "count": true,
@@ -73755,7 +73755,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -82220,11 +82220,11 @@
     },
     "target": {
      "company_id": "g4a98b303",
-     "inn": null,
-     "confirmed": false,
+     "inn": "5012093506",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "3b66d3c2a8da"
     },
@@ -82240,7 +82240,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -90215,11 +90215,11 @@
     },
     "target": {
      "company_id": "g623a59a1",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7714431982",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "6a19e3ae393d"
     },
@@ -90235,7 +90235,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -90903,7 +90903,7 @@
    "date": "2026-02-27",
    "title": "Ipsos SA продала 80% доли в российском бизнесе и создала СП",
    "buyer": "g1b7b075c",
-   "target": null,
+   "target": "g4ca1c593",
    "ind": "Профессиональные услуги",
    "type": "M&A",
    "kind": "acquisition",
@@ -91000,14 +91000,14 @@
      "card_hash": "7f830c227c01"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g4ca1c593",
+     "inn": "7725714277",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "282a8fc7c20c"
     },
     "admitted": {
      "count": true,
@@ -91021,7 +91021,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -96047,11 +96047,11 @@
     },
     "target": {
      "company_id": "gb4ad03f8",
-     "inn": null,
-     "confirmed": false,
+     "inn": "3300009698",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "534014341ee1"
     },
@@ -96067,7 +96067,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -102440,11 +102440,11 @@
     },
     "target": {
      "company_id": "g51fbca0d",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7707452981",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "2f9cd2d0a23d"
     },
@@ -102460,7 +102460,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -110911,11 +110911,11 @@
     },
     "target": {
      "company_id": "g1ae3f373",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7424007789",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "74155a88c4a4"
     },
@@ -110931,7 +110931,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -115291,11 +115291,11 @@
     },
     "target": {
      "company_id": "gd68e5cf2",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7801271622",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "7880baa09351"
     },
@@ -115311,7 +115311,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -122799,11 +122799,11 @@
     },
     "target": {
      "company_id": "gd7e48246",
-     "inn": null,
-     "confirmed": false,
+     "inn": "1661055530",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "b4b065abaa5c"
     },
@@ -122819,7 +122819,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -124513,11 +124513,11 @@
     },
     "target": {
      "company_id": "g8f7014f4",
-     "inn": null,
-     "confirmed": false,
+     "inn": "5800001901",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "d5249c85fba0"
     },
@@ -124533,7 +124533,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller_id": "g71229bfd"
@@ -126736,11 +126736,11 @@
     },
     "target": {
      "company_id": "ge992d314",
-     "inn": null,
-     "confirmed": false,
+     "inn": "2901171750",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "98c93191d843"
     },
@@ -126756,7 +126756,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -134408,11 +134408,11 @@
     },
     "target": {
      "company_id": "g8f4f56cc",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7707629251",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "ed332d8fcdbc"
     },
@@ -134428,7 +134428,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -145399,11 +145399,11 @@
     },
     "target": {
      "company_id": "ge62941ed",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7726570405",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "60fbd3439582"
     },
@@ -145419,7 +145419,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -150508,11 +150508,11 @@
     },
     "target": {
      "company_id": "gd85afc1e",
-     "inn": null,
-     "confirmed": false,
+     "inn": "6234058367",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "e179edcd1fd8"
     },
@@ -150528,7 +150528,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -154558,11 +154558,11 @@
     },
     "target": {
      "company_id": "gaa19d867",
-     "inn": null,
-     "confirmed": false,
+     "inn": "2310218748",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "12dd7dd5c5e3"
     },
@@ -154578,7 +154578,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -155755,11 +155755,11 @@
     },
     "target": {
      "company_id": "g1ada0332",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7705060700",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "5b85fc0adf3b"
     },
@@ -155775,7 +155775,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread_absorbed": {
@@ -176136,11 +176136,11 @@
     },
     "target": {
      "company_id": "g3035949e",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7813409970",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "dd85a3320dbf"
     },
@@ -176156,7 +176156,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -183948,11 +183948,11 @@
     },
     "target": {
      "company_id": "gc0c516e1",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7714916850",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "487f7af261e6"
     },
@@ -183968,7 +183968,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    }
   },
@@ -194671,11 +194671,11 @@
     },
     "target": {
      "company_id": "g932583db",
-     "inn": null,
-     "confirmed": false,
+     "inn": "8904075357",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "8c1aef7ad090"
     },
@@ -194691,7 +194691,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -195531,11 +195531,11 @@
     },
     "target": {
      "company_id": "g020cfaff",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7718999529",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "b561bce631bc"
     },
@@ -195551,7 +195551,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -196352,11 +196352,11 @@
     },
     "target": {
      "company_id": "g55e415f5",
-     "inn": null,
-     "confirmed": false,
+     "inn": "8706000342",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "549f5dd6c79a"
     },
@@ -196372,7 +196372,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -197301,11 +197301,11 @@
     },
     "target": {
      "company_id": "g2322c829",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7720261827",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "1cfcfde62bc8"
     },
@@ -197321,7 +197321,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -197472,11 +197472,11 @@
     },
     "target": {
      "company_id": "gc6e1e175",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7706812159",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "613d75656fe3"
     },
@@ -197492,7 +197492,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -200942,14 +200942,14 @@
      "card_hash": "4ff2fff6194b"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gb84f7e58",
+     "inn": "1648054022",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "29594ab8ac7a"
     },
     "admitted": {
      "count": true,
@@ -200963,11 +200963,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-07"
+   "followup_researched": "2026-09-07",
+   "target": "gb84f7e58"
   },
   {
    "id": "c23732cd9",
@@ -201522,14 +201523,14 @@
      "card_hash": "c6bd49e4c2b4"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g44d232e4",
+     "inn": "7714944046",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b96f7e679e89"
     },
     "admitted": {
      "count": true,
@@ -201543,7 +201544,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-08",
@@ -201557,7 +201558,8 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/9301"
     ]
-   ]
+   ],
+   "target": "g44d232e4"
   },
   {
    "id": "c0ea790b6",
@@ -201881,14 +201883,14 @@
      "card_hash": "6a0756f71568"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g06834721",
+     "inn": "9704016853",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "88e3309d0d04"
     },
     "admitted": {
      "count": true,
@@ -201902,12 +201904,13 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-08",
    "seller_id": "g12111389",
-   "buyer": "gd128a544"
+   "buyer": "gd128a544",
+   "target": "g06834721"
   },
   {
    "id": "cb7eb501d",
@@ -202242,14 +202245,14 @@
      "card_hash": "cf6fb39b39e0"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gd7809baf",
+     "inn": "9710119279",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "dc1a80369a6a"
     },
     "admitted": {
      "count": true,
@@ -202263,7 +202266,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-08",
@@ -202272,7 +202275,8 @@
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/8293"
     ]
-   ]
+   ],
+   "target": "gd7809baf"
   },
   {
    "id": "c21076c79",
@@ -202798,14 +202802,14 @@
      "card_hash": "d3528f73df8b"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g110ab17e",
+     "inn": "7724269506",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d192a34c4752"
     },
     "admitted": {
      "count": true,
@@ -202819,7 +202823,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
@@ -202827,7 +202831,8 @@
    "buyer": "g9d7ead5b",
    "seller": "СОГАЗ",
    "seller_src": "text",
-   "seller_id": "gfae5c15a"
+   "seller_id": "gfae5c15a",
+   "target": "g110ab17e"
   },
   {
    "id": "c43f195a5",
@@ -203355,14 +203360,14 @@
      "card_hash": "abcd3a11814b"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g21f05aad",
+     "inn": "7710323601",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "abd020f72a5c"
     },
     "admitted": {
      "count": true,
@@ -203376,14 +203381,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-07",
    "seller": "Alshaya Group",
    "seller_id": "gbe4a66ce",
-   "buyer": "g9b99e405"
+   "buyer": "g9b99e405",
+   "target": "g21f05aad"
   },
   {
    "id": "c1659a21f",
@@ -203461,14 +203467,14 @@
      "card_hash": "04bfac1a2435"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g485180ec",
+     "inn": "7706017070",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "30d3e802b629"
     },
     "admitted": {
      "count": true,
@@ -203482,14 +203488,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-07",
    "seller": "Tetra Pak",
    "seller_id": "g1517ced5",
-   "buyer": "g167b59d9"
+   "buyer": "g167b59d9",
+   "target": "g485180ec"
   },
   {
    "id": "c1d0f3d54",
@@ -203565,14 +203572,14 @@
      "card_hash": "401429ad0911"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "ge2a1dca0",
+     "inn": "6671156423",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "42ba5491f3b1"
     },
     "admitted": {
      "count": true,
@@ -203586,11 +203593,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-07",
-   "no_parties": "Новость о заморозке двух разных сделок указом №520, одной пары покупатель/продавец нет (каждая сделка — отдельная карточка)."
+   "no_parties": "Новость о заморозке двух разных сделок указом №520, одной пары покупатель/продавец нет (каждая сделка — отдельная карточка).",
+   "target": "ge2a1dca0"
   },
   {
    "id": "cc846f75c",
@@ -203672,11 +203680,11 @@
     },
     "target": {
      "company_id": "geed37a89",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7813199667",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "e47a98e33e1c"
     },
@@ -203692,7 +203700,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "buyer_name": "Ибрагим Загидулин и Елизавета Чайка",
@@ -205744,14 +205752,14 @@
      "card_hash": "e0ed7f698976"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g09636d48",
+     "inn": "5260900010",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d2377339b91f"
     },
     "admitted": {
      "count": true,
@@ -205765,11 +205773,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
-   "followup_researched": "2026-09-08"
+   "followup_researched": "2026-09-08",
+   "target": "g09636d48"
   },
   {
    "id": "c29710ac5",
@@ -205974,14 +205983,14 @@
      "card_hash": "af34b1084ebd"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gf8aff713",
+     "inn": "4100042308",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "1f804efde77b"
     },
     "admitted": {
      "count": true,
@@ -205995,13 +206004,14 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-08",
    "seller": "Евгений Свистуля (через ООО «Восточный актив»)",
-   "seller_id": "g302361d5"
+   "seller_id": "g302361d5",
+   "target": "gf8aff713"
   },
   {
    "id": "c6fd3a848",
@@ -208345,14 +208355,14 @@
      "card_hash": "0b83cf065367"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g7bddf214",
+     "inn": "7447010227",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "e40a77d2d429"
     },
     "admitted": {
      "count": true,
@@ -208366,7 +208376,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Обсуждается",
@@ -208378,7 +208388,8 @@
     "law.appr": [
      "6521af70702f"
     ]
-   }
+   },
+   "target": "g7bddf214"
   },
   {
    "id": "cbb730efc",
@@ -210160,14 +210171,14 @@
      "card_hash": "374bf40abb25"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g842a7fd2",
+     "inn": "7810022460",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "98a0402d2fa9"
     },
     "admitted": {
      "count": true,
@@ -210186,7 +210197,8 @@
    },
    "status": "Не состоялась",
    "followup_researched": "2026-09-08",
-   "buyer": "g7ffb3b7a"
+   "buyer": "g7ffb3b7a",
+   "target": "g842a7fd2"
   },
   {
    "id": "c382b7c7d",
@@ -210370,14 +210382,14 @@
      "card_hash": "0b50d73694fa"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g3049a270",
+     "inn": "5050120140",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b0060660dabc"
     },
     "admitted": {
      "count": true,
@@ -210391,7 +210403,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Обсуждается",
@@ -210399,7 +210411,8 @@
    "buyer": "g3e551f6e",
    "seller": "Газпром",
    "seller_src": "text",
-   "seller_id": "gc0f11fd7"
+   "seller_id": "gc0f11fd7",
+   "target": "g3049a270"
   },
   {
    "id": "c76599765",
@@ -210596,14 +210609,14 @@
      "card_hash": "6760e67a34c5"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g4ff12e16",
+     "inn": "7701023055",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b7a0e2cea495"
     },
     "admitted": {
      "count": true,
@@ -210623,7 +210636,8 @@
    "followup_researched": "2026-09-08",
    "seller": "Юлия Туголукова и Борис Есенькин",
    "seller_src": "text",
-   "seller_id": "g1ba273b6"
+   "seller_id": "g1ba273b6",
+   "target": "g4ff12e16"
   },
   {
    "id": "c33a55069",
@@ -211197,14 +211211,14 @@
      "card_hash": "0ae3c8c6eab2"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gfa15ec7b",
+     "inn": "2512305714",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d2f6f61012e4"
     },
     "admitted": {
      "count": true,
@@ -211218,14 +211232,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-07",
    "status": "Обсуждается",
    "seller": "Альберт Авдолян",
    "seller_src": "text",
-   "seller_id": "gadfa9642"
+   "seller_id": "gadfa9642",
+   "target": "gfa15ec7b"
   },
   {
    "id": "c6b59f911",
@@ -211312,14 +211327,14 @@
      "card_hash": "b3eec049a526"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g2d0dac7a",
+     "inn": "2540047110",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "e225fcb7624a"
     },
     "admitted": {
      "count": true,
@@ -211333,14 +211348,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-11",
    "buyer": "rosatom",
    "seller": "Росимущество",
    "seller_src": "text",
-   "seller_id": "g9fd82fee"
+   "seller_id": "g9fd82fee",
+   "target": "g2d0dac7a"
   },
   {
    "id": "cf6de2938",
@@ -212183,14 +212199,14 @@
      "card_hash": "efc0c06f0d30"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gbc369cd0",
+     "inn": "7810992444",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b8b338ac2815"
     },
     "admitted": {
      "count": true,
@@ -212204,11 +212220,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-11",
-   "no_parties": "Передача права голоса иностранных участников по указу, собственность не перешла; продажа доли Fraport компании Orbit Aviation в 2024 году — отдельная сделка"
+   "no_parties": "Передача права голоса иностранных участников по указу, собственность не перешла; продажа доли Fraport компании Orbit Aviation в 2024 году — отдельная сделка",
+   "target": "gbc369cd0"
   },
   {
    "id": "c672707b3",
@@ -213417,14 +213434,14 @@
      "card_hash": "f530c8696386"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "geef721b8",
+     "inn": "5913001268",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "63a466ebdc03"
     },
     "admitted": {
      "count": true,
@@ -213438,7 +213455,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
@@ -213446,7 +213463,8 @@
    "buyer": "g9fd82fee",
    "seller": "«Метахолдинг»",
    "seller_src": "text",
-   "seller_id": "g492b1e4a"
+   "seller_id": "g492b1e4a",
+   "target": "geef721b8"
   },
   {
    "id": "c011c4ee1",
@@ -213523,14 +213541,14 @@
      "card_hash": "afb9fdda5991"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "ge730f6b6",
+     "inn": "7713215523",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "a7b0d0e61a93"
     },
     "admitted": {
      "count": true,
@@ -213544,13 +213562,14 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-07",
    "seller": "GeoPost",
    "seller_src": "text",
-   "seller_id": "g45c0ab3b"
+   "seller_id": "g45c0ab3b",
+   "target": "ge730f6b6"
   },
   {
    "id": "c3e0b0e8f",
@@ -213970,14 +213989,14 @@
      "card_hash": "223279893fbe"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g89cae179",
+     "inn": "5902218861",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "3c3f751bc421"
     },
     "admitted": {
      "count": true,
@@ -213991,14 +214010,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Закрыта",
    "followup_researched": "2026-09-07",
    "buyer": "g9fd82fee",
    "seller": "Игорь Пестриков, Сергей Кирпичев",
-   "seller_src": "text"
+   "seller_src": "text",
+   "target": "g89cae179"
   },
   {
    "id": "c6eb3063c",
@@ -214625,14 +214645,14 @@
      "card_hash": "8c0bb64f60c9"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g2ea24925",
+     "inn": "4100045203",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "575b5d257e9e"
     },
     "admitted": {
      "count": true,
@@ -214646,11 +214666,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-11",
-   "no_parties": "Передача управления конфискованными активами, собственник (РФ) не менялся"
+   "no_parties": "Передача управления конфискованными активами, собственник (РФ) не менялся",
+   "target": "g2ea24925"
   },
   {
    "id": "ce6b8c447",
@@ -214825,14 +214846,14 @@
      "card_hash": "833901310bd5"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g3a8fb04f",
+     "inn": "6606013640",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0c10daf762ca"
     },
     "admitted": {
      "count": true,
@@ -214846,14 +214867,15 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "law": {
     "struct": "14 марта 2022 года Искандар Махмудов и Андрей Бокарев перестали быть контролирующими бенефициарами УГМК (а также «Кузбассразрезугля», «Восточного порта» и «Ростерминалугля»). По данным годового отчёта УГМК за 2022 год, владельцем 85% акций компании вместо кипрской Selmareco Limited стал российский «Бизнесглобус» — по данным Коммерсанта, эта структура действует в интересах бывшего члена совета директоров УГМК Андрея Бокарева, при этом бенефициарным владельцем в самом отчёте указан Данияр Камилов, сын бывшего министра иностранных дел Узбекистана."
    },
    "followup_researched": "2026-09-11",
-   "status": "Закрыта"
+   "status": "Закрыта",
+   "target": "g3a8fb04f"
   },
   {
    "id": "c5e3a4754",
@@ -215259,11 +215281,11 @@
     },
     "target": {
      "company_id": "g2c28aae3",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7731292513",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "d7030a73ea4a"
     },
@@ -215279,7 +215301,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-06",
@@ -216588,11 +216610,11 @@
     },
     "target": {
      "company_id": "g2c44c71d",
-     "inn": null,
-     "confirmed": false,
+     "inn": "6664013880",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "8a956ce997bb"
     },
@@ -216608,7 +216630,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-09",
@@ -216712,11 +216734,11 @@
     },
     "target": {
      "company_id": "g2ed59e67",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7728852959",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "7a6dd7839267"
     },
@@ -216732,7 +216754,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-09",
@@ -217429,11 +217451,11 @@
     },
     "target": {
      "company_id": "ge10ede50",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7712092928",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "cc89588a712c"
     },
@@ -217449,7 +217471,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-09",
@@ -218797,11 +218819,11 @@
     },
     "target": {
      "company_id": "g9343c2c8",
-     "inn": null,
-     "confirmed": false,
+     "inn": "1650379003",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "0d4f9676974b"
     },
@@ -218817,7 +218839,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-09",
@@ -220492,11 +220514,11 @@
     },
     "target": {
      "company_id": "g4fc96b1a",
-     "inn": null,
-     "confirmed": false,
+     "inn": "9701307068",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "4ae0bfdb2a2f"
     },
@@ -220512,7 +220534,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller": "Александр Авакянц",
@@ -222204,11 +222226,11 @@
     },
     "target": {
      "company_id": "g754d1dc1",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7707279342",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "5694929ae911"
     },
@@ -222224,7 +222246,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-11",
@@ -223560,11 +223582,11 @@
     },
     "target": {
      "company_id": "g8f1f069d",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7725806256",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "9869a273210f"
     },
@@ -223580,7 +223602,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "followup_researched": "2026-09-11",
@@ -224862,11 +224884,11 @@
     },
     "target": {
      "company_id": "gcdb65170",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7723721430",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "cdd7adb9fa03"
     },
@@ -224882,7 +224904,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "target": "gcdb65170",
@@ -225969,11 +225991,11 @@
     },
     "target": {
      "company_id": "g7b1c3941",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7536181841",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "fffcb2bd0cd2"
     },
@@ -225989,7 +226011,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "target": "g7b1c3941",
@@ -227818,11 +227840,11 @@
     },
     "target": {
      "company_id": "g36510f4e",
-     "inn": null,
-     "confirmed": false,
+     "inn": "2315004404",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "89c791e8e38f"
     },
@@ -227838,7 +227860,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-09",
@@ -227968,11 +227990,11 @@
     },
     "target": {
      "company_id": "g71a251f8",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7743328323",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "6763f36a7212"
     },
@@ -227988,7 +228010,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-09",
@@ -228118,11 +228140,11 @@
     },
     "target": {
      "company_id": "gdccb7223",
-     "inn": null,
-     "confirmed": false,
+     "inn": "2543164340",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "27918ad97d9a"
     },
@@ -228138,7 +228160,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-09",
@@ -228420,11 +228442,11 @@
     },
     "target": {
      "company_id": "gb04d9cfd",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7714037217",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "4961bc894170"
     },
@@ -228440,7 +228462,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller": "Сергей Руднов",
@@ -228719,11 +228741,11 @@
     },
     "target": {
      "company_id": "g0682cdb7",
-     "inn": null,
-     "confirmed": false,
+     "inn": "9705083115",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "de678765054f"
     },
@@ -228739,7 +228761,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-11",
@@ -229146,11 +229168,11 @@
     },
     "target": {
      "company_id": "ge53d0ff8",
-     "inn": null,
-     "confirmed": false,
+     "inn": "5507085811",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "6bd312d77e4e"
     },
@@ -229166,7 +229188,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "reviewed": "2026-09-13",
@@ -230151,11 +230173,11 @@
     },
     "target": {
      "company_id": "g41456481",
-     "inn": null,
-     "confirmed": false,
+     "inn": "7713704066",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "751bb37d737f"
     },
@@ -230171,7 +230193,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-11",
@@ -230257,11 +230279,11 @@
     },
     "target": {
      "company_id": "gd3556cc0-target",
-     "inn": null,
-     "confirmed": false,
+     "inn": "4220041190",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "deb2f0dc84e5"
     },
@@ -230277,7 +230299,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-11",
@@ -230397,11 +230419,11 @@
     },
     "target": {
      "company_id": "g264ec466",
-     "inn": null,
-     "confirmed": false,
+     "inn": "9703245949",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "rule",
+     "basis": "registry",
      "perimeter": "unknown",
      "card_hash": "f1bc48062659"
     },
@@ -230417,7 +230439,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "target_unconfirmed"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "weekly_researched": "2026-09-11",
@@ -233244,14 +233266,14 @@
      "card_hash": "102886247e50"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "geaeb1582",
+     "inn": "7726549587",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "ad0d21180e53"
     },
     "admitted": {
      "count": true,
@@ -233265,11 +233287,12 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread": "2026-09-11",
-   "added": "2026-09-11"
+   "added": "2026-09-11",
+   "target": "geaeb1582"
   },
   {
    "id": "gce803e3f",
@@ -236200,14 +236223,14 @@
      "card_hash": "c364d556dcd2"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gb52f53eb",
+     "inn": "7601001509",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "5b0410c13f7d"
     },
     "admitted": {
      "count": true,
@@ -236221,10 +236244,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "proofread": "2026-10-10"
+   "proofread": "2026-10-10",
+   "target": "gb52f53eb"
   },
   {
    "id": "g5745c187",
@@ -257381,7 +257405,7 @@
   "geef721b8": {
    "name": "Метафракс Кемикалс",
    "ind": "Химия и удобрения",
-   "desc": "Описание компании пока не добавлено.",
+   "desc": "Химическое предприятие в Губахе (Пермский край): метанол и продукты его переработки.",
    "kpi": [
     "Профиль",
     "Автоматический"
@@ -271005,7 +271029,7 @@
   "ge730f6b6": {
    "name": "ДПД Рус",
    "ind": "Транспорт и логистика",
-   "desc": "Описание компании пока не добавлено.",
+   "desc": "Российская служба доставки посылок DPD (АО «ДПД Рус»), принадлежала GeoPost (DPD Group).",
    "kpi": [
     "Профиль",
     "Автоматический"
@@ -283161,6 +283185,102 @@
    "name": "Ювелирный завод «ПАРС»",
    "ind": "Потребительские товары",
    "desc": "Ювелирное производство в посёлке Красное-на-Волге Костромской области, основано в 2014 году; специализируется на цепях и браслетах, в том числе серебряных. Юрлицо — ООО Ювелирный завод «ПАРС».",
+   "kpi": []
+  },
+  "g3049a270": {
+   "name": "Газпром СПКА",
+   "ind": "Машиностроение",
+   "desc": "Сборочное производство космических аппаратов группы «Газпром» (ООО «Газпром СПКА»).",
+   "kpi": []
+  },
+  "gf8aff713": {
+   "name": "Витязь Авто",
+   "ind": "Агро",
+   "desc": "Рыбопромышленное предприятие на юго-западе Камчатки: вылов и переработка лососёвых, завод в Озерновском.",
+   "kpi": []
+  },
+  "g110ab17e": {
+   "name": "ММЦ «СОГАЗ»",
+   "ind": "Здравоохранение",
+   "desc": "Сеть медицинских клиник, принадлежавшая группе СОГАЗ (ООО «ММЦ», бывшее ООО «Международный медицинский центр «СОГАЗ»»).",
+   "kpi": []
+  },
+  "g89cae179": {
+   "name": "Фин-проект",
+   "ind": "ГМК и добыча",
+   "desc": "Единственный участник ООО «Ловозерский ГОК» (Мурманская область); собственной операционной выручки нет.",
+   "kpi": []
+  },
+  "g485180ec": {
+   "name": "Упаковочные системы",
+   "ind": "Производство тары",
+   "desc": "Бывшее российское подразделение Tetra Pak (АО «Тетра Пак», ныне АО «Упаковочные системы») с заводом в Лобне.",
+   "kpi": []
+  },
+  "g2ea24925": {
+   "name": "Петропавловск-Камчатский морской торговый порт",
+   "ind": "Порты и инфраструктура",
+   "desc": "Морской торговый порт в Петропавловске-Камчатском (ООО «ПКМТП»).",
+   "kpi": []
+  },
+  "g7bddf214": {
+   "name": "ЧЭМК",
+   "ind": "ГМК и добыча",
+   "desc": "Челябинский электрометаллургический комбинат, производитель ферросплавов; принадлежал Юрию Антипову.",
+   "kpi": []
+  },
+  "g4ff12e16": {
+   "name": "ТД «Библио-Глобус»",
+   "ind": "Ритейл",
+   "desc": "Книжный магазин «Библио-Глобус» в Москве (ООО «Торговый дом «Библио-Глобус»»).",
+   "kpi": []
+  },
+  "gfa15ec7b": {
+   "name": "Порт Вера",
+   "ind": "Уголь",
+   "desc": "Угольный порт в Приморском крае (ООО «Порт «Вера»»).",
+   "kpi": []
+  },
+  "gbc369cd0": {
+   "name": "Холдинг ВВСС",
+   "ind": "Порты и инфраструктура",
+   "desc": "Холдинг, владеющий 100% оператора аэропорта Пулково ООО «Воздушные ворота Северной столицы».",
+   "kpi": []
+  },
+  "g44d232e4": {
+   "name": "SolidSoft",
+   "ind": "ИТ и интернет",
+   "desc": "Российский разработчик средств кибербезопасности (ООО «Солидсофт»).",
+   "kpi": []
+  },
+  "gd7809baf": {
+   "name": "Пушкинский",
+   "ind": "Недвижимость",
+   "desc": "Владелец кинотеатра «Россия» на Пушкинской площади в Москве (АО «Пушкинский»).",
+   "kpi": []
+  },
+  "g21f05aad": {
+   "name": "Монэкс трейдинг",
+   "ind": "Ритейл",
+   "desc": "Российская сеть детских товаров Mothercare: 118 магазинов в 30 регионах (ООО «Монэкс трейдинг»).",
+   "kpi": []
+  },
+  "g06834721": {
+   "name": "Квартал Герцена",
+   "ind": "Недвижимость",
+   "desc": "Застройщик девелоперского проекта «Квартал Герцена» (ООО «Квартал Герцена»).",
+   "kpi": []
+  },
+  "g4ca1c593": {
+   "name": "Инсайт Комкон",
+   "ind": "Профессиональные услуги",
+   "desc": "Российское подразделение исследовательской компании Ipsos (ООО «Ипсос Комкон», ныне ООО «Инсайт Комкон»).",
+   "kpi": []
+  },
+  "gcb0c8028": {
+   "name": "Исткульт Можайск",
+   "ind": "Строительство",
+   "desc": "Завод газобетона в Можайске, 500 тыс. куб. м блоков в год; до 2022 года выпускал продукцию Ytong группы Xella.",
    "kpi": []
   }
  },
