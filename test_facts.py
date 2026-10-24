@@ -459,3 +459,18 @@ def test_price_supported_handles_compound_billion_million():
     # одиночные величины не ломаются составной веткой
     assert fc.price_supported(8700000000, 'Сделку оценили в 8,7 млрд руб.')
     assert not fc.price_supported(1000000000, 'Сделку оценили в 8,7 млрд руб.')
+
+
+def test_attribution_cue_matches_message_noun_form():
+    """24 октября 2026, «Евроонко» (g3b9c077a): attribution_quote «Это следует
+    из сообщения головной компании ... которое обнаружили "Ведомости"» —
+    «сообщения» (существительное) не совпадало ни с одной формой в
+    ATTRIBUTION_CUE (там были только глагольные «сообщил»/«сообщает»/
+    «сообщи[лт]»), и подтверждённая двумя чтениями цена с attribution=filing
+    отказывала в --check без видимой причины."""
+    assert fc.ATTRIBUTION_CUE.search(
+        'Это следует из сообщения головной компании «Тетры» Don Agro International Limited '
+        '(торгуется на Сингапурской бирже), которое обнаружили «Ведомости».')
+    # глагольные формы не ломаются добавленной веткой
+    assert fc.ATTRIBUTION_CUE.search('Компания сообщила о закрытии сделки.')
+    assert not fc.ATTRIBUTION_CUE.search('Акции компании выросли на 5% за день.')

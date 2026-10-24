@@ -351,6 +351,34 @@
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
+  },
+  {
+   "draft_id": "d39741739",
+   "title": "Россиянина нокаутировали в первом раунде на UFC 333",
+   "date": "2026-10-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261024/ufc--2126785515.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
