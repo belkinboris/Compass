@@ -351,34 +351,6 @@
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
-  },
-  {
-   "draft_id": "d99345160",
-   "title": "«Ирисы» Клода Моне проданы за рекордные для французских аукционов 50 млн евро",
-   "date": "2026-10-23",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/culture/1124632"
-    ]
-   ],
-   "sum": "€50 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
