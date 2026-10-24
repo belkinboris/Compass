@@ -235,10 +235,12 @@ def _iss(path: str, fetch) -> dict:
 def listed_share(inn: str, fetch) -> dict | None:
     """Обыкновенная акция эмитента на основном режиме торгов (TQBR) по ИНН."""
     j = _iss('/securities.json?q=%s&iss.meta=off&securities.columns=secid,shortname,emitent_inn,is_traded,primary_boardid' % inn, fetch)
-    for secid, name, e_inn, traded, board in j['securities']['data']:
-        if str(e_inn) == str(inn) and board == 'TQBR' and traded:
-            return {'secid': secid, 'name': name}
-    return None
+    found = [{'secid': secid, 'name': name} for secid, name, e_inn, traded, board in j['securities']['data']
+             if str(e_inn) == str(inn) and board == 'TQBR' and traded]
+    # Обыкновенная акция, а не привилегированная («BANEP» у «Башнефти»):
+    # привилегированных обычно меньше, и капитализация по ним — часть компании.
+    found.sort(key=lambda r: (r['secid'].endswith('P') and len(r['secid']) == 5, r['secid']))
+    return found[0] if found else None
 
 
 def market_value(secid: str, on_date: str, fetch) -> dict | None:
