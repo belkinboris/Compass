@@ -80,6 +80,15 @@ MINORITY_FACTOR = (0.6, 1.0)  # доля меньше 50%: без контрол
 FOREIGN_EXIT_FACTOR = (0.35, 0.45)  # выход иностранца: дисконт не меньше 60% к рыночной оценке с октября 2024
 
 
+def is_foreign_exit(deal: dict, seller_decision: str | None) -> bool:
+    """Продаёт иностранный владелец, уходящий из России: продавец в реестре —
+    иностранное юрлицо, или в заголовке «российский бизнес» компании. Такие
+    сделки с октября 2024 года идут через правкомиссию с дисконтом не меньше
+    60% к рыночной оценке — средний мультипликатор рынка к ним не подходит."""
+    title = str(deal.get('title') or '').lower()
+    return seller_decision == 'foreign' or 'российского бизнеса' in title or 'российский бизнес' in title
+
+
 def benchmark_method(deal: dict, report: dict, net_debt: float) -> dict | None:
     """Главный способ: прибыль от продаж × средний EV/EBITDA сделок отрасли.
 
@@ -158,6 +167,13 @@ def eligibility(deal: dict, target_entity: dict | None, report: dict | None) -> 
 def estimate(deal: dict, report: dict, comps: dict[str, dict], stake_pct: float | None,
              foreign_exit: bool = False) -> dict:
     """Вилка цены за 100% и за купленную долю по каждому применимому методу."""
+    # У малых компаний (упрощённая форма) строки 2200 нет — прибыль от продаж
+    # считается из строк выручки и расходов, как в карточке компании.
+    if _n(report.get('operating_profit_rub')) is None:
+        import company_finance
+        op, _basis = company_finance.operating_profit_estimate(
+            None, company_finance.lines_from_full(report.get('full_lines')))
+        report = dict(report, operating_profit_rub=op)
     net_debt = (_n(report.get('borrowings_rub')) or 0) - (_n(report.get('cash_rub')) or 0)
     methods = []
     for m, (field, label, via_ev) in METRICS.items():
