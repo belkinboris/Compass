@@ -353,31 +353,31 @@
    ]
   },
   {
-   "draft_id": "d25607834",
-   "title": "В посёлке Тура продолжается продажа продуктов питания по сниженным ценам",
+   "draft_id": "d87714277",
+   "title": "Аукционы Минфина — инвесторов привлекает доходность гораздо выше ключевой ставки, но без флоатеров квартальный план не выполнить.",
    "date": "2026-10-24",
    "src": [
     [
-     "web:krasrab.ru",
-     "https://krasrab.ru/news/society/59500"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1366245.php"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Аукционы Минфина — инвесторов",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Аукционы Минфина — инвесторов",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
