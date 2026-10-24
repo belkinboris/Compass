@@ -291685,7 +291685,9 @@
   "ge881187c": 222,
   "g5e1a7c24": 223,
   "gf31c1d53": null,
-  "g84cc7a39": null
+  "g84cc7a39": null,
+  "g6a917c05": 224,
+  "gba4f7340": 225
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -296166,7 +296168,44 @@
      "kind": "closed"
     }
    ]
+  },
+  "g6a917c05": {
+   "sum": "3 млн ₽",
+   "buyer": "gd04d6868",
+   "target": "g54191496",
+   "asset": "Givon AI",
+   "status": "Закрыта",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
+  },
+  "gba4f7340": {
+   "sum": "282,436 млн ₽",
+   "seller": "Роснедра",
+   "asset": "лицензия на участок Белухинского месторождения — вольфрамовые руды в Забайкальском крае (25 лет, площадь 4,99 км²)",
+   "status": "Обсуждается",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-10-23T09:15:42+00:00"
+ "telegram_last_post_at": "2026-10-24T14:27:59+00:00"
 }
