@@ -48,3 +48,6 @@ data/inbox/claude/
 # Ответы ассистента при проверке на 100 вопросах (pipeline/assistant_eval/run.py)
 # — рабочий материал одного прогона; набор вопросов и скрипт лежат в git.
 data/inbox/assistant_eval/
+
+# Выгрузка отчётности с сайта для прототипа оценки нераскрытой цены — кэш, пересобирается.
+data/inbox/valuation/fns_reports.json
