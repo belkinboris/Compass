@@ -1,0 +1,39 @@
+# DealMap
+> Карта VC/PE рынка России: каталог фондов, консультантов, юристов, акселераторов и инфраструктуры сделок. Проект Softline Venture Partners.
+Сайт: https://dealmap.ru
+Контакт: Info@softlinevp.com
+Язык: русский
+Канонический домен: dealmap.ru (www редиректит сюда)
+## Что это
+DealMap — навигатор по участникам венчурного и private equity рынка России: кто инвестирует, на каких стадиях, какими чеками, и кто сопровождает сделку (FA, юристы M&A, аудиторы DD, оценщики, tech DD, VDR, PR).
+Это справочник, а не рейтинг и не маркетплейс заявок. Карточки собраны из открытых данных и правок редакции.
+## Основные разделы
+- Каталог: https://dealmap.ru/participants
+- Сделки: https://dealmap.ru/deals
+- Этапы сделки: https://dealmap.ru/deal_stages
+- Инвестиционные стадии: https://dealmap.ru/investment_stages
+- Статистика рынка: https://dealmap.ru/statistics
+- Мероприятия: https://dealmap.ru/events
+- Ресурсы: https://dealmap.ru/resources
+- Sitemap: https://dealmap.ru/sitemap.xml
+## Посадочные страницы по типу участника
+- Венчурные фонды: https://dealmap.ru/catalog/venchurnye-fondy
+- PE фонды: https://dealmap.ru/catalog/pe-fondy
+- Корпоративные фонды (CVC): https://dealmap.ru/catalog/korporativnye-fondy
+- Государственные фонды и институты развития: https://dealmap.ru/catalog/gosudarstvennye-fondy
+- Бизнес-ангелы и синдикаты: https://dealmap.ru/catalog/angely-i-sindikaty
+- Краудинвестинг: https://dealmap.ru/catalog/kraudinvesting
+- Венчурные студии: https://dealmap.ru/catalog/venchurnye-studii
+- FA консультанты: https://dealmap.ru/catalog/fa-konsultanty
+- Юристы M&A: https://dealmap.ru/catalog/yuristy-ma
+- GR и регуляторный консалтинг: https://dealmap.ru/catalog/gr-i-regulyatornyy-konsalting
+- Аудиторы DD: https://dealmap.ru/catalog/auditory-dd
+- Оценщики: https://dealmap.ru/catalog/otsenshchiki
+- Tech DD: https://dealmap.ru/catalog/tech-dd
+- Акселераторы: https://dealmap.ru/catalog/akseleratory
+- Аналитика рынка: https://dealmap.ru/catalog/analitika
+- PR-агентства: https://dealmap.ru/catalog/pr-agentstva
+- Virtual data room: https://dealmap.ru/catalog/virtual-data-room
+Фильтры каталога (`/participants?types=…`) — это интерфейс, не отдельные документы. Канонический URL типа — `/catalog/{slug}`.
+## Как цитировать
+Указывайте DealMap (dealmap.ru) и дату просмотра. Состав базы меняется: участники добавляются и снимаются с публикации. Не выдавайте фильтрованный список за полный рынок и не приписывайте DealMap рейтинги или рекомендации инвестировать.
