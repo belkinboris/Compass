@@ -35,7 +35,7 @@
    - Просьба большая (больше получаса работы) — сначала ответить
      «Взял, сделаю к …» (`--reply <message_id> --text "..."`), потом делать.
    - Делать как обычная рабочая сессия по CLAUDE.md: код → тесты → коммит в
-     `main` → `git pull --rebase origin main` → push; тронули код —
+     `main` → `python3 pipeline/publication_busy.py --wait 40` (публикация выпускает решения владельца — ждём с push до 40 минут, потом push как обычно; CLAUDE.md, «Порядок работы в main»), `git pull --rebase origin main` → push; тронули код —
      `python3 pipeline/release.py --write`. Данные базы — только скриптом:
      сухой прогон, потом `--write`, семантический diff к `origin/main`.
    - Ответить в тему простым языком (правило «Язык для людей» в CLAUDE.md):
