@@ -2,62 +2,6 @@
  "made": "2026-10-25",
  "drafts": [
   {
-   "draft_id": "d59235503",
-   "title": "Объем покупки юаней ЦБ с расчетами 19 октября составил 12,1 млрд рублей",
-   "date": "2026-10-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261020/obem-874416095.html"
-    ]
-   ],
-   "sum": "12,1 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58032364",
-   "title": "Объем покупки юаней ЦБ с расчетами 20 октября составил 12 млрд рублей",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261021/obem-874457872.html"
-    ]
-   ],
-   "sum": "12 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d12352437",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
@@ -409,16 +353,16 @@
    ]
   },
   {
-   "draft_id": "d71855150",
-   "title": "Объем покупки юаней ЦБ с расчетами 21 октября составил 12,1 млрд рублей",
-   "date": "2026-10-22",
+   "draft_id": "d85607778",
+   "title": "В музейном состоянии: в Волгограде продают военную бронемашину времен СССР",
+   "date": "2026-10-25",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261022/obem-874503547.html"
+     "web:v1.ru",
+     "https://v1.ru/text/transport/2026/10/25/76723550/"
     ]
    ],
-   "sum": "12,1 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
