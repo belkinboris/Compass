@@ -9448,7 +9448,7 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${raw.length} ${plural(raw.length,"сделка","сделки","сделок")} с 2022 года по открытым источникам${listingsOut?`; ещё ${listingsOut} ${plural(listingsOut,"лот выставлен","лота выставлены","лотов выставлено")} на торги, но не ${plural(listingsOut,"куплен","куплены","куплено")} — в показатели они не входят`:""}.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p>${raw.length+listingsOut} ${plural(raw.length+listingsOut,"сделка","сделки","сделок")} с 2022 года по открытым источникам${listingsOut?`. Из них ${listingsOut} — ${listingsOut===1?"лот на торгах, который":"лоты на торгах, которые"} ещё никто не купил: в показатели ниже ${listingsOut===1?"он не входит":"они не входят"}, считаем по ${raw.length} ${plural(raw.length,"сделке","сделкам","сделкам")}`:""}.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">
