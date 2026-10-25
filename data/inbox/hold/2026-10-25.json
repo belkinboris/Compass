@@ -2,34 +2,6 @@
  "made": "2026-10-25",
  "drafts": [
   {
-   "draft_id": "d68942841",
-   "title": "Объем покупки юаней ЦБ РФ с расчетами 13 октября составил 12 млрд рублей",
-   "date": "2026-10-14",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261014/obem-874218631.html"
-    ]
-   ],
-   "sum": "12 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d12352437",
    "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
    "date": "2026-10-21",
@@ -381,13 +353,98 @@
    ]
   },
   {
-   "draft_id": "d52031478",
-   "title": "Подорожают на сотни тысяч. Стоит ли дончанам поторопиться с покупкой автомобиля до роста утильсбора?",
+   "draft_id": "d13661270",
+   "title": "Объем инвестиций в фонды развивающихся стран достиг рекорда за два года",
    "date": "2026-10-25",
    "src": [
     [
-     "web:161.ru",
-     "https://161.ru/text/auto/2026/10/25/76720660/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9060068"
+    ]
+   ],
+   "sum": "$33,5 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d33702464",
+   "title": "Путин: некоторые западные компании едва не плакали, уходя из России",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28251307"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63983810",
+   "title": "«Они чуть не плакали»: Путин раскрыл, как западные фирмы уходили из России",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261025/putin-2126864766.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79873474",
+   "title": "Путин заявил, что западные компании чуть не плакали при уходе из России",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138845"
     ]
    ],
    "sum": null,
