@@ -367,6 +367,17 @@ def _split_windows(cleaned: str, pos: int) -> tuple[str, str]:
     return before, after
 
 
+# Табличные записи «Сделки года» (Коммерсантъ) и похожие рэнкинги, куда
+# юрфирмы/консультанты сделки сдают данные строкой-подписью, а не прозой —
+# «Размер пакета акций/долей (%): 100%» не стоит рядом с глаголом о покупке,
+# и обычное окно его не находит (gd73fd825 — Яндекс/консорциум инвесторов,
+# 24-25 октября 2026: два читателя независимо нашли этот же формат).
+# Подпись поля сама по себе и есть доказательство, что это купленная доля —
+# глагол не нужен, как и у _SUBJECT_HEAD выше.
+_STAKE_FIELD_LABEL = re.compile(
+    r'Размер\s+пакета\s+акций/?долей\s*\(%\)\s*:\s*(\d{1,3}(?:[.,]\d+)?)\s*%', re.I)
+
+
 def _percents(text: str | None):
     if not text:
         return
@@ -383,6 +394,10 @@ def acquired_percents(text: str | None) -> list[float]:
     for value, m, cleaned in _percents(text):
         before, after = _split_windows(cleaned, m.start())
         if _window_verdict(before, after[m.end() - m.start():]):
+            out.append(value)
+    for m in _STAKE_FIELD_LABEL.finditer(str(text or '')):
+        value = float(m.group(1).replace(',', '.'))
+        if 1 <= value <= 100 and not any(abs(value - x) < 0.05 for x in out):
             out.append(value)
     return out
 
