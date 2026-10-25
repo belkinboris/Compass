@@ -1,0 +1,1003 @@
+{
+ "made": "2026-10-25",
+ "drafts": [
+  {
+   "draft_id": "d64128556",
+   "title": "DST Global Юрия Мильнера вложился в американский ИИ-стартап Clay . Раунд D на $115 млн возглавила Wellington Management при участии Sequoia Capital, A16Z Perennial и CapitalG. Оценка стартапа достигла",
+   "date": "2026-09-29",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7758"
+    ]
+   ],
+   "sum": "$115 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10702564",
+   "title": "AltaIR Capital Игоря Рябенького инвестировал в канадский ИИ-стартап Expertise AI . Раунд на CA$3,2 млн возглавил фонд UpHonest Capital при участии AMINO Capital, Welight Capital и UpScaleX. Expertise ",
+   "date": "2026-10-06",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7776"
+    ]
+   ],
+   "sum": "$3,2 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": "AltaIR Capital Игоря Рябенького",
+   "asset": "канадский ИИ-стартап Expertise AI . Раунд на CA$3,2 млн возглавил фонд UpHonest Capital при участии",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "AltaIR Capital Игоря Рябенького",
+    "asset": "канадский ИИ-стартап Expertise AI . Раунд на CA$3,2 млн возглавил фонд UpHonest Capital при участии",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "похоже на уже описанную сделку g6a917c05 (общие редкие слова: ai, ии) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d38504454",
+   "title": "В России выросли продажи электромобилей и гибридов",
+   "date": "2026-10-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261009/elektromobil-2123538647.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97736057",
+   "title": "Трамп: Россия продала США нефть по очень низкой цене",
+   "date": "2026-10-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053135156"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-11",
+     "title": "Сделка завершена",
+     "note": "Россия поставляет нефть на мировой рынок по очень низкой цене.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053135156"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "США нефть по очень низкой цене",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "США нефть по очень низкой цене",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d28715475",
+   "title": "Фонд Somersault Ventures под управлением Александра Невинского и Алекса Турбанова инвестировал в финский стартап Comparables.ai . Раунд на $6 млн  возглавили Pragmatech Venture Capital и Araya Venture",
+   "date": "2026-10-13",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7786"
+    ]
+   ],
+   "sum": "$6 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "финский стартап Comparables.ai . Раунд на $6 млн возглавили Pragmatech Venture Capital и Araya Ventu",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "финский стартап Comparables.ai . Раунд на $6 млн возглавили Pragmatech Venture Capital и Araya Ventu",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d77213254",
+   "title": "Фонд Somersault Ventures под управлением Александра Невинского и Алекса Турбанова инвестировал в американский стартап с российскими корнями AlgoX2 . Раунд на $10 млн возглавили Bessemer Venture Partne",
+   "date": "2026-10-15",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7788"
+    ]
+   ],
+   "sum": "$10 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "американский стартап с российскими корнями AlgoX2 . Раунд на $10 млн возглавили Bessemer Venture Par",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "американский стартап с российскими корнями AlgoX2 . Раунд на $10 млн возглавили Bessemer Venture Par",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Фонд Somersault Ventures под управлением Александра Невинско» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d17111706",
+   "title": "На аукционах в Москве продали более 6 тысяч машино-мест",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/10/16/na-aukczionah-v-moskve-prodali-bolee-6-tysyach-mashino-mest"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Сделка завершена",
+     "note": "С января по сентябрь 2026 года на торгах реализовали 6 182 машино-места в разных округах Москвы. Об этом сообщил руководитель департамента по конкурентной политике Кирилл Пуртов, передает портал мэра и правительства столицы.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/10/16/na-aukczionah-v-moskve-prodali-bolee-6-tysyach-mashino-mest"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "более 6 тысяч машино-мест",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "более 6 тысяч машино-мест",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d43744899",
+   "title": "На аукционах в Москве продали более 6 тысяч машино-мест",
+   "date": "2026-10-16",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/10/16/na-aukczionah-v-moskve-prodali-bolee-6-tysyach-mashino-mest"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-16",
+     "title": "Сделка завершена",
+     "note": "С января по сентябрь 2026 года на торгах реализовали 6 182 машино-места в разных округах Москвы. Об этом сообщил руководитель департамента по конкурентной политике Кирилл Пуртов, передает портал мэра и правительства столицы.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/msk/2026/10/16/na-aukczionah-v-moskve-prodali-bolee-6-tysyach-mashino-mest"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "более 6 тысяч машино-мест",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "более 6 тысяч машино-мест",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d25557910",
+   "title": "Runa Capital вновь инвестировал в немецкий hardware стартап Ubitium .  Раунд на $14 млн возглавил Ibex Investors при участии OpenOcean, KBC Focus Fund, Inflection и сооснователя Quantum Systems Флориа",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7797"
+    ]
+   ],
+   "sum": "$14 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": "Runa Capital вновь",
+   "asset": "немецкий hardware стартап Ubitium . Раунд на $14 млн возглавил Ibex Investors при участии OpenOcean",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Runa Capital вновь",
+    "asset": "немецкий hardware стартап Ubitium . Раунд на $14 млн возглавил Ibex Investors при участии OpenOcean",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок"
+   ]
+  },
+  {
+   "draft_id": "d37785971",
+   "title": "Иран сообщил о выкупе земель для железной дороги Решт – Астара",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/10/19/1238317-iran-o-vikupe-zemel"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20767944",
+   "title": "Оверчук: Иран заверил РФ, что землю под строительство ж/д Решт - Астара выкупили",
+   "date": "2026-10-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28230303"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-19",
+     "title": "Сделка завершена",
+     "note": "Вице-премьер России добавил, что стороны обсуждали статус реализации проекта \"Север - Юг\"",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28230303"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12352437",
+   "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Власти Ярославской области хотят продать усадьбу племянника А. Н. Некрасова, расположенную неподалеку от поселка Дубки.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88183245",
+   "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053137854"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g9fed3cb1 (общие редкие слова: жк, застро) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d46559371",
+   "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5257a627 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d18133401",
+   "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118720-voronezhskiy-aviazavod-vnov-ne-smog-prodat-zakrytye-lager-salyut-i-turbazu-zvezdnyy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81541561",
+   "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28238995"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Пресс-секретарь российского лидера отметил, что коммерческая сделка не может обсуждаться публично",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28238995"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43106805",
+   "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261021/siti-2126054701.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47286146",
+   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1124073"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d42276510",
+   "title": "США продлили лицензию на операции по продаже активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053138001"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d74027021",
+   "title": "США продлили лицензию для продажи зарубежных активов «Лукойла» до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/21/1239042-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d73514423",
+   "title": "Минфин США продлил лицензию по продаже зарубежных активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2188239/2026-10-21/minfin-ssha-prodlil-litcenziiu-po-prodazhe-zarubezhnykh-aktivov-lukoila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d49126095",
+   "title": "Denum Tech продала платформу POS-кредитования",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-22_denum_tech_prodala_platformu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Российская ИТ-компания и резидент инновационного центра «Сколково» Denum Tech, входящая в финтех-группу Denum, продала...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-10-22_denum_tech_prodala_platformu"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "платформа POS-кредитования",
+   "seller": "Denum Tech",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "платформа POS-кредитования",
+    "seller": "Denum Tech"
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d86670408",
+   "title": "В Британии коллекционные карточки с покемонами продали на аукционе за $2 млн",
+   "date": "2026-10-22",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28243813"
+    ]
+   ],
+   "sum": "$2 млн",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-22",
+     "title": "Сделка завершена",
+     "note": "Аукционный дом Ewbank's заявил, что это был самый дорогостоящий аукцион коллекционных карточек в истории Великобритании",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28243813"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "на аукционе",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "на аукционе",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d30674235",
+   "title": "Маск вложил свыше 445 миллионов долларов в выборы в США",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261023/mask-2126417529.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Маск",
+   "asset": "выборы в США",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Маск",
+    "asset": "выборы в США",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d19329493",
+   "title": "Британец продал коллекцию карточек Pokemon на аукционе за £1,56 млн",
+   "date": "2026-10-23",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2189209/video/britanetc-prodal-kollektciiu-kartochek-pokemon-na-auktcione-za-156-mln-funtov"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-23",
+     "title": "Сделка завершена",
+     "note": "Британский пенсионер стал миллионером, продав на аукционе личную коллекцию карточек Pokemon за £1,56 млн. Всего бывший маляр-декоратор выставил на торги 42 полных набора, которые сохранились практически в идеальном состоянии, передает телеканал «Известия» .…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2189209/video/britanetc-prodal-kollektciiu-kartochek-pokemon-na-auktcione-za-156-mln-funtov"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "коллекция карточек Pokemon на аукционе за £1,56 млн",
+   "seller": "Британец",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "коллекция карточек Pokemon на аукционе за £1,56 млн",
+    "seller": "Британец"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d50118275",
+   "title": "FT назвала сделку по слиянию Tesla и SpaceX ставкой «ва-банк» на ИИ",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/25/10/2026/6add408c3137bb8105aac61e"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34409054",
+   "title": "СТАВКА - опять 14%! Че купил на этой неделе? 😎 Мой инвест-марафон",
+   "date": "2026-10-24",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1366257.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-24",
+     "title": "Сделка завершена",
+     "note": "Пока что все хорошие новости для нашего фондового рынка приходят от Трампа. Судя по всему, старина Дональд вложился с плечом в российскую нефтянку и хочет поднять на Мосбирже ещё немного деньжат перед ноябрьскими выборами в Конгресс😎 🧊Ну а Центробанк вчера…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1366257.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "на этой неделе? 😎 Мой инвест-марафон",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "на этой неделе? 😎 Мой инвест-марафон",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d56246350",
+   "title": "В Красноярске продают особняк за 60 миллионов — в нем есть хаммам и кинозал",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/realty/2026/10/25/76715361/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43493753",
+   "title": "«Полный сток, никакого колхоза»: пожилой Nissan Safari продают в Новосибирске по цене нового авто — ему 32 года",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/10/25/76719204/"
+    ]
+   ],
+   "sum": "3,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45577395",
+   "title": "В Башкирии стало выгоднее продавать частные дома",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/gorod/2026/10/25/76722913/"
+    ]
+   ],
+   "sum": "6,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60576742",
+   "title": "Как правильно выбирать картофель и на что обращать внимание при покупке?",
+   "date": "2026-10-25",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/kuhnya/59513"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  }
+ ]
+}
