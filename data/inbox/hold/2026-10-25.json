@@ -351,34 +351,6 @@
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
-  },
-  {
-   "draft_id": "d85607778",
-   "title": "В музейном состоянии: в Волгограде продают военную бронемашину времен СССР",
-   "date": "2026-10-25",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/transport/2026/10/25/76723550/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
