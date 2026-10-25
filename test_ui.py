@@ -159,6 +159,17 @@ def test_screen_renders_without_errors(page, base_url, name, hash_):
     assert len(body) > 120, f"{name}: экран почти пуст ({len(body)} знаков)"
 
 
+def test_analytics_headline_counts_deals_like_the_home_page(page, base_url):
+    """Владелец 25 октября 2026 (скриншот партнёра): «Тут нужно чтобы была
+    цифра актуальная. Она не соответствует тому что у нас на главной» —
+    главная считала 1515 вместе с лотами на торгах, «Аналитика» — 1463 без
+    них. Первое число шапки — то же, что на главной; лоты названы отдельно."""
+    visit(page, base_url, "#/analytics")
+    total = page.evaluate("() => TOTAL_DEALS()")
+    head = page.inner_text("#app .ph-in p")
+    assert head.startswith("%d " % total), head
+
+
 def test_every_firm_page_opens(page, base_url):
     """Три фирмы из 64 не открывались: FIRM_MATCH заполнен не для всех, и
     рендер падал на rx.test. Проверяем не «нет ошибок», а что страница есть."""
