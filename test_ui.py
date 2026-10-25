@@ -720,7 +720,13 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
     на трёх ширинах: карточка на всю ширину сетки, строки графиков не
     вылезают за экран (min-width:0 у колонок), ошибок нет."""
     for width in (1280, 390, 360):
-        ctx = browser.new_context(viewport={"width": width, "height": 900})
+        # Карточка проявляется через `.reveal`/`.in` со сдвигом `i*55мс` по
+        # индексу на странице (static/index.html, route()), и у этой карточки
+        # сдвиг сам по себе больше 600мс; ожидание конкретной прозрачности
+        # тоже оказалось хрупким под нагрузкой (анимация иногда зависала) —
+        # просим браузер о пониженной анимации, сайт это умеет выключать
+        # (`@media(prefers-reduced-motion:reduce)`, KNOWN_ISSUES.md).
+        ctx = browser.new_context(viewport={"width": width, "height": 900}, reduced_motion="reduce")
         try:
             pg = ctx.new_page()
             errors = []
@@ -729,7 +735,6 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
             pg.wait_for_function(
                 "typeof DEALS !== 'undefined' && DEALS.length > 100 && !!document.getElementById('nationalizedCard')",
                 timeout=20000)
-            pg.wait_for_timeout(700)
             # .label рисуется капителью (text-transform) — inner_text отдаёт ВЕРХНИЙ регистр.
             body = pg.inner_text("#nationalizedCard").lower()
             assert "изъятые и национализированные активы" in body
@@ -4593,7 +4598,15 @@ def test_feed_period_filter_fits_a_phone_without_dead_icons(browser, base_url):
     строку и ломала ряд; поля дат и «Сбросить» вылезали за карточку
     фильтров; значки ⓘ у «Цены» и «Выручки» на телефоне не нажимались."""
     for width in (360, 390):
-        ctx = browser.new_context(viewport={"width": width, "height": 900}, is_mobile=True, has_touch=True)
+        # `#advpanel` несёт класс `.reveal.in`, но стоит `display:none`, пока
+        # фильтры закрыты, — открытие фильтров заново запускает CSS-анимацию
+        # `fadeUp` (браузер не «помнит» прогресс через display:none), и клик
+        # по кнопке внутри попадал в момент, когда панель ещё непрозрачна.
+        # Сайт сам умеет это выключать (`@media(prefers-reduced-motion:reduce)`,
+        # static/index.html) — просим браузер о пониженной анимации, а не
+        # гадаем с таймаутом, сколько ждать (KNOWN_ISSUES.md).
+        ctx = browser.new_context(viewport={"width": width, "height": 900}, is_mobile=True, has_touch=True,
+                                   reduced_motion="reduce")
         try:
             pg = ctx.new_page()
             pg.goto(base_url + "/#/deals", wait_until="domcontentloaded")
