@@ -729,7 +729,14 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
             pg.wait_for_function(
                 "typeof DEALS !== 'undefined' && DEALS.length > 100 && !!document.getElementById('nationalizedCard')",
                 timeout=20000)
-            pg.wait_for_timeout(700)
+            # Карточка проявляется через `.reveal`/`.in` со сдвигом `i*55мс` по
+            # индексу на странице (static/index.html, route()) — у этой
+            # карточки сдвиг сам по себе больше фиксированных 700мс, поэтому
+            # ждём именно прозрачность=1, а не фиксированную паузу
+            # (KNOWN_ISSUES.md, «разовый Playwright-таймаут», второй случай).
+            pg.wait_for_function(
+                "getComputedStyle(document.getElementById('nationalizedCard')).opacity === '1'",
+                timeout=5000)
             # .label рисуется капителью (text-transform) — inner_text отдаёт ВЕРХНИЙ регистр.
             body = pg.inner_text("#nationalizedCard").lower()
             assert "изъятые и национализированные активы" in body
