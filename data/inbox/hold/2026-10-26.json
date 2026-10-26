@@ -285,36 +285,7 @@
    ]
   },
   {
-   "draft_id": "d21240537",
-   "title": "Anthropic подал заявку на IPO в Nasdaq",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/26/1240220-anthropic-zayavku-na-ipo"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d10389915",
+   "draft_id": "d11028511",
    "title": "Anthropic направила в SEC заявку на IPO",
    "date": "2026-10-26",
    "src": [
@@ -348,15 +319,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d85495697",
+   "draft_id": "d83372325",
    "title": "ИИ выше, чем звезды // IPO Anthropic может превзойти SpaceX и стать крупнейшим в истории",
    "date": "2026-10-26",
    "src": [
@@ -383,39 +352,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
+    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d68837771",
-   "title": "Исследование «Ситилинк»: как россияне оснащают автомобиль и что они покупают в первую очередь",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-10-26_issledovanie_sitilink"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "в первую очередь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "в первую очередь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d11814515",
+   "draft_id": "d49292873",
    "title": "Американская компания Anthropic подала документы для проведения IPO",
    "date": "2026-10-26",
    "src": [
@@ -453,39 +394,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
+    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d60762003",
-   "title": "ВС проверит законность продажи эстонской «дочки» «Фармсинтеза»",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266505/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d31124271",
+   "draft_id": "d88009002",
    "title": "В Перми продают ресторан, предлагающий романтические ужины на колесе обозрения",
    "date": "2026-10-26",
    "src": [
@@ -510,6 +423,134 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23416026",
+   "title": "Разработчик Claude подал заявку на IPO в Nasdaq",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/26/razrabotchik-claude-podal-zajavku"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d74230758",
+   "title": "Совет директоров готов разрешить Цукербергу продать акции Meta* на $20 млрд — лишь бы предприниматель не переезжал",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/sovet-direktorov-gotov-razreshit-cukerbergu-prodat-akcii-meta-na-20-mlrd-lish-predprinimatel-ne-pereezzhal/"
+    ]
+   ],
+   "sum": "$20 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "Совет директоров Meta* предложил Марку Цукербергу продать акции на сумму $20 млрд без потери контроля над компанией, передает Business Insider. Так руководство хочет заставить миллиардера жить рядом с офисом и не переезжать. Марк Цукерберг рассматривает…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/sovet-direktorov-gotov-razreshit-cukerbergu-prodat-akcii-meta-na-20-mlrd-lish-predprinimatel-ne-pereezzhal/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64597271",
+   "title": "Самый настоящий андеграунд",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1366906.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d19774782",
+   "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/26/anthropics-ipo-filing-reveals-its-strategy-for-keeping-enterprise-customers-hooked/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
    ]
   }
  ]
