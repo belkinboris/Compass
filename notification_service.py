@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import secrets
 import smtplib
 from datetime import datetime
@@ -104,13 +105,24 @@ def _send_telegram(chat_id: str, text: str, *, html: bool = False,
         return False
 
 
+_MD_LINK = re.compile(r"\[([^\]\n]+)\]\((https?://[^)\s]+)\)")
+
+
+def plain_links(text: str) -> str:
+    """[название](адрес) → «название (адрес)» для письма."""
+    return _MD_LINK.sub(lambda m: "%s (%s)" % (m.group(1), m.group(2)), text or "")
+
+
 def telegram_text(title: str, body: str | None = None) -> str:
     """Уведомление в Telegram: заголовок жирным, под ним пояснение. Адрес
     уходит кнопкой «Открыть на сайте», а не строкой в конце (4 октября 2026)."""
     from html import escape
     parts = ["<b>%s</b>" % escape(str(title or "").strip())]
     if body and str(body).strip():
-        parts.append(escape(str(body).strip()))
+        from html import escape as esc
+        parts.append(_MD_LINK.sub(
+            lambda m: '<a href="%s">%s</a>' % (esc(m.group(2), quote=True), m.group(1)),
+            escape(str(body).strip(), quote=False)))
     return "\n\n".join(parts)
 
 
@@ -121,7 +133,7 @@ def create_notification(db, user: User, *, title: str, body: str | None = None,
     row = Notification(user_id=user.id, kind=kind, title=title, body=body, link=link, deal_id=deal_id)
     db.add(row)
     db.commit()
-    if prefs.email_enabled and _send_email(user.email, title, f"{body or ''}\n\n{link or ''}".strip()):
+    if prefs.email_enabled and _send_email(user.email, title, f"{plain_links(body or '')}\n\n{link or ''}".strip()):
         row.email_sent_at = datetime.utcnow()
     if prefs.telegram_enabled and prefs.telegram_chat_id:
         if _send_telegram(prefs.telegram_chat_id, telegram_text(title, body), html=True,

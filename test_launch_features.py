@@ -4900,6 +4900,11 @@ def test_weekly_digest_text_counts_deals_and_lots_apart():
     assert "• А купила Б — закрыта" in text and "Старое" not in text
     assert "1 лот выставлен на торги." in text
     assert wd.digest_body(deals[3:], today) is None
+    linked = wd.digest_body(deals, today, "https://x.ru/")
+    assert "• [А купила Б](https://x.ru/#/deal/a) — закрыта" in linked
+    import notification_service as ns
+    assert '<a href="https://x.ru/#/deal/a">А купила Б</a>' in ns.telegram_text("T", linked)
+    assert "А купила Б (https://x.ru/#/deal/a)" in ns.plain_links(linked)
 
 
 def test_weekly_digest_goes_once_a_week_on_monday_morning(client, monkeypatch):
