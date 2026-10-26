@@ -5071,3 +5071,44 @@ def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(brow
             assert not errors, "ошибки в консоли: %s" % errors[:3]
         finally:
             ctx.close()
+
+
+def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
+    """Владелец 26 октября 2026: у сделки с нераскрытой ценой — зелёная кнопка
+    «Анализ Компаса», по нажатию — расчёт с объяснением. У сделки с ценой
+    кнопки нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    no_price = next(d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
+                    and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
+                    and d.get("type") == "M&A")
+    page.goto(base_url + "/#/deal/" + no_price["id"], wait_until="domcontentloaded")
+    page.wait_for_selector("#pe-btn", timeout=15000)
+    bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")
+    assert bg == "rgb(29, 90, 68)", bg
+    page.click("#pe-btn")
+    # значок — в самом блоке «Сумма», панель выдвигается там же, текст печатается
+    assert page.locator(".stat-hero.pe-host #pe-btn").count() == 1
+    page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=60000)
+    assert "анализ компаса" in page.inner_text(".pe-panel").lower()
+    page.click("#pe-btn")
+    page.wait_for_timeout(700)
+    assert page.locator(".pe-panel.open").count() == 0
+    priced = next(d for d in base["deals"] if ((d.get("facts") or {}).get("price") or {}).get("meaning") == "disclosed"
+                  and d.get("type") == "M&A")
+    page.goto(base_url + "/#/deal/" + priced["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".stat-hero", timeout=15000)
+    assert page.locator("#pe-btn").count() == 0
+
+
+def test_context_block_has_the_assistant_analysis_button(page, base_url):
+    """Идея Артёма (26 октября 2026): у «Контекста» — «Анализ ассистента»;
+    без модели — честное «недоступен», а не пустое место."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    d = next(x for x in base["deals"] if str((x.get("eco") or {}).get("context") or "").strip() not in ("", "—"))
+    page.goto(base_url + "/#/deal/" + d["id"] + "?lens=eco", wait_until="domcontentloaded")
+    page.wait_for_selector("#ctxRow #aiAsk", timeout=15000)
+    page.click("#aiAsk")
+    page.wait_for_selector("#ctxRow .ai-note", timeout=30000)
+    assert "недоступен" in page.inner_text("#ctxRow .ai-note")

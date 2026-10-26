@@ -44,6 +44,8 @@ import data_refresh
 import deal_catalog
 import deal_multiples
 import notification_service
+import price_estimate
+import context_analysis
 import scrape_guard
 import seo_pages
 import telegram_endpoint
@@ -4509,6 +4511,134 @@ def analytics_sector_multiples(db=Depends(get_db)):
 
 # Ассистент отвечает на «какой мультипликатор в ритейле» цифрой из той же таблицы.
 assistant_retrieval.SECTOR_MULTIPLES_PROVIDER = _sector_multiples
+
+
+# «Анализ Компаса» на карточке, где цену не раскрыли (26 октября 2026,
+# price_estimate.py). Числа считает модуль, модель только объясняет их; ответ
+# кэшируется по сводке — пока данные те же, второй посетитель не тратит квоту.
+_estimate_cache: dict = {}
+_estimate_hits: dict = {}
+ESTIMATE_PER_IP_HOUR = 20
+
+
+def _estimate_allowed(ip: str) -> bool:
+    now = time.monotonic()
+    hits = [t for t in _estimate_hits.get(ip, []) if now - t < 3600]
+    if len(hits) >= ESTIMATE_PER_IP_HOUR:
+        _estimate_hits[ip] = hits
+        return False
+    _estimate_hits[ip] = hits + [now]
+    return True
+
+
+def _estimate_report(db, deal: dict):
+    target_id = deal_multiples.target_of(deal) or ""
+    year = deal_multiples.multiple_year(deal)[0] or datetime.now(timezone.utc).year
+    entity = target_id and _confirmed_entity(db, target_id)
+    row = entity and db.scalar(select(FinancialReport).where(
+        FinancialReport.legal_entity_id == entity.id,
+        FinancialReport.year < year,
+    ).order_by(FinancialReport.year.desc()))
+    if not row:
+        return None, (entity.legal_name if entity else None)
+    return deal_multiples.report_dict(row), entity.legal_name
+
+
+@app.get("/api/deals/{deal_id}/price-estimate")
+def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
+    deal = get_deal(deal_id)
+    if not deal:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    deal = dict(deal, id=deal_id)
+    if not price_estimate.needs_estimate(deal):
+        return {"available": False, "reason": "price_known"}
+    report, company = _estimate_report(db, deal)
+    industry = deal.get("ind") or ""
+    target_id = deal_multiples.target_of(deal)
+    if (not industry or industry == "Не определена") and target_id:
+        industry = (get_company_profile(target_id) or {}).get("industry") or ""
+    summary = price_estimate.build(deal, report, _sector_multiples(db), deal_catalog.load_deals(),
+                                   industry, company)
+    facts_text = price_estimate.facts_text(summary)
+    key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
+    hit = _estimate_cache.get(deal_id)
+    if hit and hit["key"] == key:
+        return hit["value"]
+    paragraphs, by = None, "template"
+    ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+    if os.environ.get("YANDEX_API_KEY") and _estimate_allowed(ip or ""):
+        try:
+            text = call_llm(price_estimate.SYSTEM, facts_text, max_tokens=700,
+                            deadline=time.monotonic() + 40)
+            text = re.sub(r"[*#_`]+", "", text or "").strip()
+            if text and price_estimate.numbers_ok(text, facts_text):
+                paragraphs, by = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()], "model"
+            else:
+                logger.info("анализ цены %s: в ответе модели число не из сводки — шаблон", deal_id)
+        except Exception as e:  # noqa: BLE001 — шаблон вместо модели
+            logger.warning("анализ цены %s: модель недоступна: %s", deal_id, e)
+    value = {
+        "available": True,
+        "range_text": summary["range_text"],
+        "paragraphs": paragraphs or price_estimate.template_text(summary),
+        "by": by,
+        "methods": [{"label": m["label"], "base": f'{m["base_name"]} за {m["report_year"]} год — '
+                     f'{price_estimate.money(m["base_rub"])}',
+                     "multiple": str(m["median"]).replace(".", ",") + "×",
+                     "where": (f'отрасль «{m["industry"]}»' if m["industry"] else "все отрасли")
+                     + ', ' + price_estimate.deals_word(m["count"]),
+                     "result": price_estimate.money(m["stake_rub"] or m["full_rub"])}
+                    for m in summary["methods"]],
+        "comparables": [{"id": c["id"], "title": c["title"], "year": c["year"],
+                         "price": price_estimate.money(c["price_rub"])
+                         + (f' за {price_estimate._pct(c["stake"])}' if c["stake"] and c["stake"] < 99.5 else "")}
+                        for c in summary["comparables"]],
+        "experts": summary["experts"],
+        "stake": summary["stake"],
+    }
+    if by == "model" or not os.environ.get("YANDEX_API_KEY"):
+        _estimate_cache[deal_id] = {"key": key, "value": value}
+    return value
+
+
+# «Анализ ассистента» у блока «Контекст» (идея Артёма, макет 25 октября,
+# решение владельца 26 октября 2026; context_analysis.py). Только модель:
+# без неё разбор был бы пересказом карточки, поэтому без модели — честный
+# отказ, а не шаблон.
+_context_cache: dict = {}
+
+
+@app.get("/api/deals/{deal_id}/context-analysis")
+def deal_context_analysis(deal_id: str, request: Request):
+    deal = get_deal(deal_id)
+    if not deal:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    deal = dict(deal, id=deal_id)
+    if not context_analysis.has_context(deal):
+        return {"available": False, "reason": "no_context"}
+    facts_text = context_analysis.facts_text(
+        deal, deal_catalog.load_deals(), lambda cid: (get_company_profile(cid) or {}).get("name"))
+    key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
+    hit = _context_cache.get(deal_id)
+    if hit and hit["key"] == key:
+        return hit["value"]
+    ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+    if not os.environ.get("YANDEX_API_KEY"):
+        return {"available": False, "reason": "model_unavailable"}
+    if not _estimate_allowed(ip or ""):
+        return {"available": False, "reason": "rate_limited"}
+    try:
+        text = call_llm(context_analysis.SYSTEM, facts_text, max_tokens=600, deadline=time.monotonic() + 40)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("анализ контекста %s: модель недоступна: %s", deal_id, e)
+        return {"available": False, "reason": "model_unavailable"}
+    text = re.sub(r"[*#_`]+", "", text or "").strip()
+    if not text or not price_estimate.numbers_ok(text, facts_text):
+        logger.info("анализ контекста %s: пусто или число не из сводки", deal_id)
+        return {"available": False, "reason": "model_unavailable"}
+    value = {"available": True, "paragraphs": context_analysis.split_answer(text)}
+    _context_cache[deal_id] = {"key": key, "value": value}
+    return value
 
 
 def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> LegalEntity | None:
