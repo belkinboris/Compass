@@ -5086,9 +5086,9 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     page.wait_for_selector("#pe-btn", timeout=15000)
     bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")
     assert bg == "rgb(21, 25, 29)", bg  # черный (владелец, 26 октября 2026)
+    # кнопка «Посчитать» — в самом блоке «Сумма», панель выдвигается там же
+    assert page.locator(".stat-hero.pe-host #pe-btn").inner_text().strip() == "Посчитать"
     page.click("#pe-btn")
-    # значок — в самом блоке «Сумма», панель выдвигается там же, текст печатается
-    assert page.locator(".stat-hero.pe-host #pe-btn").count() == 1
     page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=60000)
     assert "анализ компаса" in page.inner_text(".pe-panel").lower()
     page.click("#pe-btn")
@@ -5112,3 +5112,41 @@ def test_context_block_has_the_assistant_analysis_button(page, base_url):
     page.click("#aiAsk")
     page.wait_for_selector("#ctxRow .ai-note", timeout=30000)
     assert "недоступен" in page.inner_text("#ctxRow .ai-note")
+
+
+def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
+    """Владелец 26 октября 2026: справа внизу всегда кнопка-компас; снизу
+    выезжает ассистент, потянуть вверх — чат на весь экран. На экране
+    ассистента кнопки нет."""
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
+    page.wait_for_selector("#aiFab", timeout=15000)
+    page.evaluate("document.getElementById('cookieNote') && document.getElementById('cookieOk').click()")
+    bg = page.evaluate("getComputedStyle(document.getElementById('aiFab')).backgroundColor")
+    assert bg == "rgb(15, 43, 33)", bg
+    page.click("#aiFab")
+    page.wait_for_selector(".ai-sheet.half #chatbox", timeout=15000)
+    # как в WHOOP: «Задайте вопрос» и подсказки одной строкой, не больше четырех
+    assert page.get_attribute(".ai-sheet #q", "placeholder") == "Задайте вопрос"
+    assert page.evaluate("[...document.querySelectorAll('.ai-sheet #suggests .chip')].filter(c=>getComputedStyle(c).display!=='none').length") <= 4
+    # подписи короткие — каждая видна целиком (владелец: «Сделки в сфере IT»)
+    assert page.evaluate("[...document.querySelectorAll('.ai-sheet #suggests .chip')].every(c=>c.textContent.length<=20)")
+    page.click("#aiGrip")  # нажатие на ручку — как потянуть вверх: чат на весь экран
+    page.wait_for_selector(".ai-sheet.full", timeout=5000)
+    page.click("#aiSheetClose")
+    page.wait_for_timeout(500)
+    assert page.locator(".ai-sheet.half, .ai-sheet.full").count() == 0
+    page.goto(base_url + "/#/assistant", wait_until="domcontentloaded")
+    page.wait_for_selector("#chatbox", timeout=15000)
+    assert page.evaluate("document.getElementById('aiFab').hidden")
+    assert page.locator("#q").count() == 1
+
+
+def test_section_descriptions_hide_on_a_phone(page, base_url):
+    """Владелец 26 октября 2026: на телефоне в Компаниях, Консультантах,
+    Материалах и Аналитике описания под названием раздела нет; на компьютере есть."""
+    for size, shown in (({"width": 390, "height": 844}, False), ({"width": 1280, "height": 900}, True)):
+        page.set_viewport_size(size)
+        page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
+        page.wait_for_selector(".page-hero h1", timeout=15000)
+        assert page.locator(".page-hero p.ph-desc").is_visible() == shown, size
