@@ -283,6 +283,146 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d73622952",
+   "title": "Anthropic подала документы для IPO",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28254653"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "Компания планирует выйти на биржу Nasdaq под тикером ANT",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28254653"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d28002284",
+   "title": "Anthropic подал заявку на IPO",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261026/anthropic--874612610.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic подала документы для IPO» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d80200384",
+   "title": "Meta* планирует SPO на 95 миллиардов долларов",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261026/ii-874612269.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261026/ii-874612269.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d81184580",
+   "title": "Новые торговые центры Краснодара — куда идти за покупками и развлечениями?",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/entertainment/2026/10/26/76712798/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g37e971b1 (общие редкие слова: развле, торгов) — проверьте, не дубль ли"
+   ]
   }
  ]
 }
