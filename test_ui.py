@@ -5085,7 +5085,7 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     page.goto(base_url + "/#/deal/" + no_price["id"], wait_until="domcontentloaded")
     page.wait_for_selector("#pe-btn", timeout=15000)
     bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")
-    assert bg == "rgb(29, 90, 68)", bg
+    assert bg == "rgb(21, 25, 29)", bg  # черный (владелец, 26 октября 2026)
     page.click("#pe-btn")
     # значок — в самом блоке «Сумма», панель выдвигается там же, текст печатается
     assert page.locator(".stat-hero.pe-host #pe-btn").count() == 1

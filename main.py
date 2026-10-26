@@ -4571,10 +4571,13 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
             text = call_llm(price_estimate.SYSTEM, facts_text, max_tokens=700,
                             deadline=time.monotonic() + 40)
             text = re.sub(r"[*#_`]+", "", text or "").strip()
-            if text and price_estimate.numbers_ok(text, facts_text):
-                paragraphs, by = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()], "model"
+            # Предложение с числом не из сводки или с числом словами — вон; осталось
+            # мало — шаблон. Без «ё» (владелец, 26 октября 2026).
+            cleaned = price_estimate.clean_answer(text.replace("ё", "е").replace("Ё", "Е"), facts_text)
+            if cleaned:
+                paragraphs, by = cleaned, "model"
             else:
-                logger.info("анализ цены %s: в ответе модели число не из сводки — шаблон", deal_id)
+                logger.info("анализ цены %s: в ответе модели числа не из сводки — шаблон", deal_id)
         except Exception as e:  # noqa: BLE001 — шаблон вместо модели
             logger.warning("анализ цены %s: модель недоступна: %s", deal_id, e)
     value = {
@@ -4628,15 +4631,19 @@ def deal_context_analysis(deal_id: str, request: Request):
     if not _estimate_allowed(ip or ""):
         return {"available": False, "reason": "rate_limited"}
     try:
-        text = call_llm(context_analysis.SYSTEM, facts_text, max_tokens=600, deadline=time.monotonic() + 40)
+        text = call_llm(context_analysis.SYSTEM, facts_text, max_tokens=900, deadline=time.monotonic() + 45)
     except Exception as e:  # noqa: BLE001
         logger.warning("анализ контекста %s: модель недоступна: %s", deal_id, e)
         return {"available": False, "reason": "model_unavailable"}
-    text = re.sub(r"[*#_`]+", "", text or "").strip()
-    if not text or not price_estimate.numbers_ok(text, facts_text):
-        logger.info("анализ контекста %s: пусто или число не из сводки", deal_id)
-        return {"available": False, "reason": "model_unavailable"}
-    value = {"available": True, "paragraphs": context_analysis.split_answer(text)}
+    text = re.sub(r"[*#_`]+", "", text or "").strip().replace("ё", "е").replace("Ё", "Е")
+    # 26 октября 2026 на боевом сайте разбор целиком отбрасывался из-за одного
+    # досчитанного моделью числа; теперь выпадает только такое предложение.
+    cleaned = price_estimate.clean_answer(text, facts_text)
+    paragraphs = [p for p in context_analysis.split_answer("\n\n".join(cleaned or [])) if p["text"]]
+    if len(paragraphs) < 2:
+        logger.info("анализ контекста %s: после проверки чисел почти ничего не осталось", deal_id)
+        return {"available": False, "reason": "filtered"}
+    value = {"available": True, "paragraphs": paragraphs}
     _context_cache[deal_id] = {"key": key, "value": value}
     return value
 
