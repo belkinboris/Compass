@@ -6866,7 +6866,7 @@ function renderDeal(id, qs, previewCard){
     // значению.
     const para = (label,val) => hasFact(val)
       ? `<div class="spec-row"><span class="label">${label}</span><span class="spec-v spec-v-text">${val}</span></div>` : "";
-    // «Контекст» с кнопкой «Анализ ассистента» (идея Артёма, 26 октября 2026)
+    // «Контекст» с кнопкой «Анализ ассистента» (решение владельца, 26 октября 2026)
     const paraCtx = (label,val) => hasFact(val)
       ? `<div class="spec-row ai-ctx" id="ctxRow"><div class="ai-row-head"><span class="label">${label}</span>${
           AI_CONTEXT_ENABLED ? `<button class="ai-ask" id="aiAsk" type="button" aria-expanded="false">${COMPASS_SVG}<span>Анализ ассистента</span></button>` : ""}</div><div class="spec-v-wrap"><span class="spec-v spec-v-text">${val}</span></div></div>` : "";
