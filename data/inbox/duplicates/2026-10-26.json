@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-26",
+ "items": [
+  {
+   "key": "https://realty.ria.ru/20261026/ofisy-2126622870.html::pending-2",
+   "candidate_id": "pending-2",
+   "reason": "общие редкие слова: почти, продал",
+   "draft": {
+    "draft_id": "d71168967",
+    "title": "Capital Group продала почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
+    "date": "2026-10-26",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261026/ofisy-2126622870.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-26",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:realty.ria.ru",
+       "https://realty.ria.ru/20261026/ofisy-2126622870.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
+    "seller": "Capital Group",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
+     "seller": "Capital Group"
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-10-26"
+  }
+ ]
+}

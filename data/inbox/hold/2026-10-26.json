@@ -98,35 +98,6 @@
    ]
   },
   {
-   "draft_id": "d18133401",
-   "title": "Воронежский авиазавод вновь не смог продать закрытые лагерь «Салют» и турбазу «Звездный»",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118720-voronezhskiy-aviazavod-vnov-ne-smog-prodat-zakrytye-lager-salyut-i-turbazu-zvezdnyy/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5257a627 (общие редкие слова: вороне, турбаз) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d81541561",
    "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
    "date": "2026-10-21",
@@ -314,42 +285,13 @@
    ]
   },
   {
-   "draft_id": "d75621771",
-   "title": "SpaceX привлекла 40 миллиардов долларов на покупку графических процессоров",
+   "draft_id": "d14455720",
+   "title": "Атаки БПЛА поставили под угрозу ноябрьские распродажи",
    "date": "2026-10-26",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261026/spacex-874591479.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "SpaceX",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "SpaceX",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d94926321",
-   "title": "Продажи российского энергетического угля обвалились",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/26/obval/"
+     "web:retailer.ru",
+     "https://retailer.ru/ataki-bpla-postavili-pod-ugrozu-nojabrskie-rasprodazhi/"
     ]
    ],
    "sum": null,
@@ -364,23 +306,52 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Энергетика",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d86372463",
-   "title": "МЧС предупредило астраханцев о мошенниках, предлагающих купить огнетушители",
+   "draft_id": "d44728212",
+   "title": "Почему опасно занижать цену в договоре при покупке дома или квартиры",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053139007"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d37932914",
+   "title": "Подмосковье выделит до 20 млн рублей на покупку промышленных роботов",
    "date": "2026-10-26",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/10/26/mchs-predupredilo-astrahanczev-o-moshennikah-predlagayushhih-kupit-ognetushi"
+     "https://abnews.ru/center/news/mosreg/2026/10/26/podmoskove-vydelit-do-20-mln-rublej-na-pokupku-promyshlennyh-robotov"
     ]
    ],
-   "sum": null,
+   "sum": "20 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -399,31 +370,42 @@
    ]
   },
   {
-   "draft_id": "d87226378",
-   "title": "В День народного единства в магазинах Перми и края запретят продавать алкоголь",
+   "draft_id": "d71168967",
+   "title": "Capital Group продала почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
    "date": "2026-10-26",
    "src": [
     [
-     "web:59.ru",
-     "https://59.ru/text/gorod/2026/10/26/76723883/"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261026/ofisy-2126622870.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-26",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261026/ofisy-2126622870.html"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
+   "seller": "Capital Group",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "почти 10 тысяч кв м офисов в ЖК на 35-метровых ножках",
+    "seller": "Capital Group"
    },
-   "ind": "Ритейл",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на карточку pending-2, но читающий не смог решить сам: Ворота сослались на кандидата «pending-2» — такого id нет ни в базе, ни в очереди (устаревшая ссылка на позицию в другом черновике того же прогона, сопоставление, видимо, смотрело на порядковый номер черновика, а не на id сделки). Сравнить черновик с реальным кандидатом невозможно. Сам черновик (Capital Group продала почти 10 тыс. кв. м офисов в ЖК) выглядит как самостоятельная новая сделка, не повтор чего-то уже описанного — совпадение по словам «почти»/«продал» общие и неинформативные."
    ]
   }
  ]
