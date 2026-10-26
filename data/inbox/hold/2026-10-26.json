@@ -283,6 +283,73 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d25207690",
+   "title": "ВС РФ рассмотрит жалобу «Роснано» о продаже эстонской дочки «Фармсинтеза»",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/10/26/verkhovnyy-sud-rassmotrit-zhalobu-rosnano-po-delu-u-prodazhe-docherney-kompanii-farmsinteza/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-26",
+     "title": "Сделка завершена",
+     "note": "Верховный суд (ВС) РФ принял к рассмотрению кассационную жалобу «Роснано» с требованием пересмотреть решение Арбитражного суда (АС) Санкт-Петербурга и Ленинградской области от ноября 2025 года. Госкорпорация требовала отменить сделку от сентября 2024-го, в…",
+     "source": [
+      "web:vademec.ru",
+      "https://vademec.ru/news/2026/10/26/verkhovnyy-sud-rassmotrit-zhalobu-rosnano-po-delu-u-prodazhe-docherney-kompanii-farmsinteza/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финансовые услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19539766",
+   "title": "«М.Видео» начала продавать одежду и мебель в розничных магазинах",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/m-video-nachala-prodavat-odezhdu-i-mebel-v-roznichnyh-magazinah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
