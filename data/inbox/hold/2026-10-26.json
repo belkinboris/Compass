@@ -283,6 +283,159 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлём"
    ]
+  },
+  {
+   "draft_id": "d47603883",
+   "title": "Глава ФСЭГ оценил инвестиции в газовую отрасль в мире",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261026/investitsii-874601101.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72770056",
+   "title": "В России рассказали об учете ошибок времен СССР при инвестициях в Африку",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/26/v-rossii-zayavili-ob-uchete-oshibok-vremen-sssr-pri-investitsiyah-v-afriku/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54387740",
+   "title": "Бренд Umo открыл продажи гибридного кроссовера Umo 8, сборку которого наладили на заводе «Москвич»",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/transport/3216560-brend-umo-otkryl-prodazhi-gibridnogo-krossovera-umo-8-sborku-kotorogo-naladili-na-zavode-moskvich?from=rss"
+    ]
+   ],
+   "sum": "5,7 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67673509",
+   "title": "Исследователи спрогнозировали передачу ИИ 30% задач новичков",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2190704/2026-10-26/issledovateli-sprognozirovali-peredachu-ii-30-zadach-novichkov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d62301814",
+   "title": "🔔 ККМП , АЛРУД , Orion , Stonebridge Legal и Никольская Консалтинг сообщают: Плановый комитет Форума «Слияния и поглощения в России» опубликовал новую аналитическую статью , в которой рассмотрел, что ",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/4106"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "🔔 ККМП , АЛРУД , Orion , Stonebridge Legal и Никольская Консалтинг сообщают: Плановый комитет Форума «Слияния и поглощения в России» опубликовал новую аналитическую статью , в которой рассмотрел, что ждет рынок M&A в России в 2027 году. Эти и другие вопросы…",
+     "source": [
+      "tg:kkmpconnect",
+      "https://t.me/kkmpconnect/4106"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
