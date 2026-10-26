@@ -285,98 +285,13 @@
    ]
   },
   {
-   "draft_id": "d32947089",
-   "title": "Глава Газпромбанка: у банков есть резервы для инвестиций в экономику",
+   "draft_id": "d90737263",
+   "title": "Ozon объяснил, как будут проходить ноябрьские распродажи",
    "date": "2026-10-26",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/finance/news/2026/10/26/1240164-bankov-est-rezervi"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42663144",
-   "title": "Инвестиции в жилую недвижимость Петербурга выросли в январе-сентябре на 25%",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28254255"
-    ]
-   ],
-   "sum": "101 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42592609",
-   "title": "Прозорова не смогла выйти во второй раунд теннисного турнира в Китае",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261026/prozorova-2127062551.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d41468231",
-   "title": "Китайские автоконцерны резко нарастили продажи машин в Европе",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/26/kitayskie-avtokontserny-rezko-narastili-prodazhi-mashin-v-evrope/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6adf3ce8a85354bab5b9b995"
     ]
    ],
    "sum": null,
@@ -391,11 +306,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "E-commerce",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
