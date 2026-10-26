@@ -45,6 +45,7 @@ import deal_catalog
 import deal_multiples
 import notification_service
 import price_estimate
+import context_analysis
 import scrape_guard
 import seo_pages
 import telegram_endpoint
@@ -4597,6 +4598,46 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
     }
     if by == "model" or not os.environ.get("YANDEX_API_KEY"):
         _estimate_cache[deal_id] = {"key": key, "value": value}
+    return value
+
+
+# «Анализ ассистента» у блока «Контекст» (идея Артёма, макет 25 октября,
+# решение владельца 26 октября 2026; context_analysis.py). Только модель:
+# без неё разбор был бы пересказом карточки, поэтому без модели — честный
+# отказ, а не шаблон.
+_context_cache: dict = {}
+
+
+@app.get("/api/deals/{deal_id}/context-analysis")
+def deal_context_analysis(deal_id: str, request: Request):
+    deal = get_deal(deal_id)
+    if not deal:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    deal = dict(deal, id=deal_id)
+    if not context_analysis.has_context(deal):
+        return {"available": False, "reason": "no_context"}
+    facts_text = context_analysis.facts_text(
+        deal, deal_catalog.load_deals(), lambda cid: (get_company_profile(cid) or {}).get("name"))
+    key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
+    hit = _context_cache.get(deal_id)
+    if hit and hit["key"] == key:
+        return hit["value"]
+    ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+    if not os.environ.get("YANDEX_API_KEY"):
+        return {"available": False, "reason": "model_unavailable"}
+    if not _estimate_allowed(ip or ""):
+        return {"available": False, "reason": "rate_limited"}
+    try:
+        text = call_llm(context_analysis.SYSTEM, facts_text, max_tokens=600, deadline=time.monotonic() + 40)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("анализ контекста %s: модель недоступна: %s", deal_id, e)
+        return {"available": False, "reason": "model_unavailable"}
+    text = re.sub(r"[*#_`]+", "", text or "").strip()
+    if not text or not price_estimate.numbers_ok(text, facts_text):
+        logger.info("анализ контекста %s: пусто или число не из сводки", deal_id)
+        return {"available": False, "reason": "model_unavailable"}
+    value = {"available": True, "paragraphs": context_analysis.split_answer(text)}
+    _context_cache[deal_id] = {"key": key, "value": value}
     return value
 
 

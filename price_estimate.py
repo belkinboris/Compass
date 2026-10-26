@@ -156,6 +156,9 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         # Покупки, а не раунды, IPO, торги и финансирование: цена у них про другое.
         if d.get('type') != 'M&A' or any(nature.get(k) for k in ('cash_in', 'financing', 'auction', 'reorganization', 'own_shares')):
             continue
+        # Оферта миноритариям и выкуп своих акций — не покупка бизнеса.
+        if re.search(r'тендерн|оферт|миноритари|обратн\w* выкуп|байбэк', str(d.get('title') or ''), re.I):
+            continue
         y = dm.year_of(d)
         if not y or (year and abs(y - year) > 3):
             continue

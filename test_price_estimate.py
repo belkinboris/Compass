@@ -83,3 +83,24 @@ def test_endpoint_answers_without_the_model(monkeypatch):
         assert client.get(f"/api/deals/{disclosed['id']}/price-estimate").json() == {
             'available': False, 'reason': 'price_known'}
         assert client.get('/api/deals/нет-такой/price-estimate').status_code == 404
+
+
+def test_context_summary_lists_the_buyers_other_deals():
+    """«Анализ ассистента» у «Контекста» видит другие сделки сторон из базы."""
+    import context_analysis as ca
+    deal = {'id': 'd1', 'title': 'Покупатель купил завод', 'buyer': 'b', 'eco': {'context': 'Завод в Дмитрове.'}}
+    deals = {'d1': deal, 'd2': {'title': 'Покупатель купил склад', 'buyer': 'b', 'date': '2024-04-01'},
+             'd3': {'title': 'Чужая сделка', 'buyer': 'x'}}
+    text = ca.facts_text(deal, deals, lambda cid: 'Покупатель' if cid == 'b' else None)
+    assert 'Покупатель купил склад' in text and 'Чужая сделка' not in text
+    assert ca.split_answer('Что это значит. Раз.\n\nМасштаб. Два.')[1] == {'lead': 'Масштаб.', 'text': 'Два.'}
+
+
+def test_context_analysis_without_the_model_says_so(monkeypatch):
+    import main
+    monkeypatch.delenv('YANDEX_API_KEY', raising=False)
+    base = json.loads((ROOT / 'static' / 'data' / 'deals_promoted.json').read_text(encoding='utf-8'))
+    d = next(d for d in base['deals'] if str((d.get('eco') or {}).get('context') or '').strip() not in ('', '—'))
+    with TestClient(main.app) as client:
+        assert client.get(f"/api/deals/{d['id']}/context-analysis").json() == {
+            'available': False, 'reason': 'model_unavailable'}
