@@ -285,47 +285,7 @@
    ]
   },
   {
-   "draft_id": "d11028511",
-   "title": "Anthropic направила в SEC заявку на IPO",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/312170"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-26",
-     "title": "Переговоры",
-     "note": "Компания намерена разместить бумаги на бирже Nasdaq под тикером ANT Сообщение Anthropic направила в SEC заявку на IPO появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/312170"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d83372325",
+   "draft_id": "d88003489",
    "title": "ИИ выше, чем звезды // IPO Anthropic может превзойти SpaceX и стать крупнейшим в истории",
    "date": "2026-10-26",
    "src": [
@@ -348,15 +308,13 @@
    },
    "ind": "Искусственный интеллект",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d49292873",
+   "draft_id": "d75291808",
    "title": "Американская компания Anthropic подала документы для проведения IPO",
    "date": "2026-10-26",
    "src": [
@@ -394,11 +352,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
+    "та же новость, что «ИИ выше, чем звезды // IPO Anthropic может превзойти SpaceX » — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d88009002",
+   "draft_id": "d71002086",
    "title": "В Перми продают ресторан, предлагающий романтические ужины на колесе обозрения",
    "date": "2026-10-26",
    "src": [
@@ -426,104 +384,7 @@
    ]
   },
   {
-   "draft_id": "d23416026",
-   "title": "Разработчик Claude подал заявку на IPO в Nasdaq",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/26/razrabotchik-claude-podal-zajavku"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d74230758",
-   "title": "Совет директоров готов разрешить Цукербергу продать акции Meta* на $20 млрд — лишь бы предприниматель не переезжал",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/sovet-direktorov-gotov-razreshit-cukerbergu-prodat-akcii-meta-na-20-mlrd-lish-predprinimatel-ne-pereezzhal/"
-    ]
-   ],
-   "sum": "$20 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-26",
-     "title": "Переговоры",
-     "note": "Совет директоров Meta* предложил Марку Цукербергу продать акции на сумму $20 млрд без потери контроля над компанией, передает Business Insider. Так руководство хочет заставить миллиардера жить рядом с офисом и не переезжать. Марк Цукерберг рассматривает…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/sovet-direktorov-gotov-razreshit-cukerbergu-prodat-akcii-meta-na-20-mlrd-lish-predprinimatel-ne-pereezzhal/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64597271",
-   "title": "Самый настоящий андеграунд",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1366906.php"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d19774782",
+   "draft_id": "d50807881",
    "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
    "date": "2026-10-26",
    "src": [
@@ -550,7 +411,114 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic направила в SEC заявку на IPO» — второе издание, в группу не шлём"
+    "та же новость, что «ИИ выше, чем звезды // IPO Anthropic может превзойти SpaceX » — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d47677096",
+   "title": "Киркоров заявил, что у него нет проблем с покупкой вещей в Balenciaga",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261026/kirkorov-874623175.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d28878062",
+   "title": "Omoda впервые вошла в топ-10 марок авторынка России в 2026 году — за неделю компания продала 715 машин",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/omoda-vpervye-voshla-v-top-10-marok-avtorynka-rossii-v-2026-godu-za-nedelyu-kompaniya-prodala-715-mashin/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-26",
+     "title": "Сделка завершена",
+     "note": "Китайский бренд Omoda впервые в 2026 году вошёл в десятку самых популярных марок на авторынке РФ. По данным агентства «Автостат», за неделю с 19 по 25 октября компания реализовала 715 новых автомобилей. Этого хватило, чтобы вытеснить японскую Mazda и занять…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/omoda-vpervye-voshla-v-top-10-marok-avtorynka-rossii-v-2026-godu-za-nedelyu-kompaniya-prodala-715-mashin/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "715 машин",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "715 машин",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d11365574",
+   "title": "🔥 Еженедельные инвестиции. Что купил под пассивный доход?. Выпуск №267",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1366918.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-26",
+     "title": "Сделка завершена",
+     "note": "Каждую неделю отправляюсь на фондовый рынок и покупаю активы для создания пассивного дохода. Я не знаю, куда пойдет рынок, но в одном уверен точно, рынок идет вправо, а на моей стороне регулярные пополнения, дисциплина и время. Рынок на прошлой неделе рос как…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1366918.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "под пассивный доход?. Выпуск №267",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "под пассивный доход?. Выпуск №267",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]

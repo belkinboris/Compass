@@ -104,3 +104,13 @@ def test_context_analysis_without_the_model_says_so(monkeypatch):
     with TestClient(main.app) as client:
         assert client.get(f"/api/deals/{d['id']}/context-analysis").json() == {
             'available': False, 'reason': 'model_unavailable'}
+
+
+def test_answer_drops_sentences_with_spelled_or_unknown_numbers():
+    """Боевой сайт, 26 октября 2026: «от примерно трехсот миллионов до полтора с
+    половиной миллиарда» вместо 1,6 млрд — числа словами проверку обходили."""
+    facts = 'Итоговый диапазон: ≈ 300 млн ₽ – 1,6 млрд ₽ за 80%; выручка 562 млн ₽'
+    text = ('Оценка — от примерно трехсот миллионов до полтора с половиной миллиарда рублей. '
+            'Это 300 млн ₽ – 1,6 млрд ₽ за 80%.\n\nВыручка 562 млн ₽. Доля составит 14% рынка.')
+    assert pe.clean_answer(text, facts) == ['Это 300 млн ₽ – 1,6 млрд ₽ за 80%.', 'Выручка 562 млн ₽.']
+    assert pe.clean_answer('Компания стоит 9 млрд ₽.\n\nИ еще 7 млрд ₽.', facts) is None

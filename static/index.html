@@ -1135,28 +1135,29 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 #facts .stat-hero{margin-bottom:10px}
 #facts .stat-hero + .fact-note{margin:2px 0 16px}
 .pe-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pe-compass{width:42px;height:42px;flex:none;border-radius:50%;border:0;padding:8px;cursor:pointer;background:var(--accent);color:#fff;
-  box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent);animation:pePing 2.4s var(--ease) 1.2s 2;
+.pe-compass{--pe-hub:var(--ink);width:42px;height:42px;flex:none;border-radius:50%;border:1.5px solid var(--ink);padding:7px;cursor:pointer;background:var(--ink);color:#fff;
+  box-shadow:0 0 0 0 color-mix(in srgb,var(--ink) 30%,transparent);animation:pePing 2.4s var(--ease) 1.2s 2;
   transition:background .2s var(--ease),transform .2s var(--ease)}
 .pe-compass svg{width:100%;height:100%;display:block}
 .pe-compass .pe-needle{transform-origin:24px 24px;transition:transform .5s var(--ease)}
-.pe-compass:hover{background:var(--accent-mid)}
+.pe-compass:hover{background:#2C3238}
 .pe-compass:hover .pe-needle{transform:rotate(38deg)}
-.pe-compass[aria-expanded="true"]{background:var(--accent-deep)}
-.pe-compass[aria-expanded="true"] .pe-needle{transform:rotate(38deg)}
+/* нажат — белый; стрелка в конце встает горизонтально (владелец, 26 октября 2026) */
+.pe-compass[aria-expanded="true"]{--pe-hub:#fff;background:#fff;color:var(--ink)}
+.pe-compass[aria-expanded="true"] .pe-needle{transform:rotate(128deg)}
 .pe-compass.busy .pe-needle{animation:peSeek 1.1s ease-in-out infinite}
 @keyframes peSeek{0%{transform:rotate(-30deg)}50%{transform:rotate(70deg)}100%{transform:rotate(-30deg)}}
-@keyframes pePing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 45%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@keyframes pePing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ink) 30%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
 .pe-panel{overflow:hidden;max-height:0;opacity:0;margin-top:0;border-top:1px solid transparent;padding-top:0;
   transition:max-height .6s var(--ease),opacity .3s var(--ease),margin .35s var(--ease),padding .35s var(--ease)}
 .pe-panel.open{max-height:4000px;opacity:1;margin-top:16px;padding-top:14px;border-top-color:var(--line)}
-.pe-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.pe-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);font-weight:600}
 .pe-tag{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:400;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
-.pe-range{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.15;color:var(--accent-deep);margin:12px 0 10px;display:inline-block}
+.pe-range{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.15;color:var(--ink);margin:12px 0 10px;display:inline-block}
 .pe-text{margin-top:4px}
 .pe-text p{margin:0 0 9px;font-size:14.5px;line-height:1.6;color:var(--ink)}
 .pe-wait{font-size:14.5px;color:var(--muted);margin-top:10px}
-.pe-caret{display:inline-block;width:2px;height:1.05em;background:var(--accent);margin-left:3px;vertical-align:-2px;animation:peBlink .9s steps(1) infinite}
+.pe-caret{display:inline-block;width:2px;height:1.05em;background:var(--ink);margin-left:3px;vertical-align:-2px;animation:peBlink .9s steps(1) infinite}
 @keyframes peBlink{50%{opacity:0}}
 .pe-tailwrap{opacity:0;transform:translateY(6px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .pe-tailwrap.in{opacity:1;transform:none}
@@ -1164,38 +1165,42 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .pe-m{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:4px 14px;padding:7px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
 .pe-m-l{font-weight:600}
 .pe-m-w{color:var(--muted)}
-.pe-m-r{font-weight:600;color:var(--accent-deep);white-space:nowrap}
+.pe-m-r{font-weight:600;color:var(--ink);white-space:nowrap}
 .pe-cs{list-style:none;margin:0;padding:0}
 .pe-cs li{padding:6px 0;border-top:1px solid var(--line-soft);font-size:13.5px;line-height:1.45}
 .pe-cs a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
 .pe-c-y{color:var(--muted)}
 .pe-ex{font-size:13.5px;line-height:1.55;color:var(--ink);border-top:1px solid var(--line-soft);padding-top:7px}
+.pe-more{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .pe-foot{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
 @media(max-width:600px){.pe-m{grid-template-columns:minmax(0,1fr) auto}.pe-m-v{grid-column:1/-1;grid-row:2}.pe-tag{margin-left:0}}
 .ai-row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 #facts .spec-row .ai-row-head .label{margin-bottom:0}
-.ai-ask{display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 inherit;font-family:inherit;color:var(--accent);
-  background:transparent;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;white-space:nowrap;
+.ai-ask{--pe-hub:var(--card);display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 inherit;font-family:inherit;color:var(--ink);
+  background:transparent;border:1px solid var(--ink);border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;white-space:nowrap;
   transition:background .2s var(--ease),color .2s var(--ease)}
-.ai-ask:hover{background:var(--accent);color:#fff}
+.ai-ask:hover{--pe-hub:var(--ink);background:var(--ink);color:#fff}
+.ai-ask[aria-expanded="true"]{--pe-hub:var(--ink);background:var(--ink);color:#fff}
 .ai-ask svg{width:17px;height:17px;flex:none}
 .ai-ask svg .pe-needle{transform-origin:24px 24px;transition:transform .5s var(--ease)}
-.ai-ask:hover svg .pe-needle,.ai-ask[aria-expanded="true"] svg .pe-needle{transform:rotate(38deg)}
+.ai-ask:hover svg .pe-needle{transform:rotate(38deg)}
+.ai-ask[aria-expanded="true"] svg .pe-needle{transform:rotate(128deg)}
 .ai-ask[disabled]{cursor:default}
 .ai-ask[disabled] svg .pe-needle{animation:peSeek 1.1s ease-in-out infinite}
 @keyframes aiSweep{0%{background-position:120% 0}100%{background-position:-20% 0}}
 .ai-thinking .spec-v{color:transparent!important;
-  background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 40%,var(--accent) 50%,var(--ink) 60%,var(--ink) 100%);
+  background:linear-gradient(100deg,var(--ink) 0%,var(--ink) 40%,#B9BEC3 50%,var(--ink) 60%,var(--ink) 100%);
   background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:aiSweep 1.6s linear infinite}
-.ai-note{margin-top:16px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));background:var(--accent-soft);
+.ai-note{--pe-hub:var(--card);margin-top:16px;padding:14px 16px;border:1px solid var(--ink);background:var(--card);
   border-radius:var(--radius);font-size:14px;line-height:1.6;color:var(--ink);animation:fadeUp .45s var(--ease)}
-.ai-note .ai-h{display:flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px}
+.ai-note .ai-h{display:flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-bottom:8px}
 .ai-note .ai-h svg{width:15px;height:15px;flex:none}
+.ai-note .ai-h svg .pe-needle{transform-origin:24px 24px;transform:rotate(128deg)}
 .ai-note,.ai-note *{font-style:normal}
 .ai-note p{margin:0 0 8px;text-align:left;color:var(--ink)}
 .ai-note b{font-weight:600}
 .ai-note .ai-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;margin-top:10px;font-size:12.5px;color:var(--muted)}
-.ai-note .ai-foot a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.ai-note .ai-foot a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 @media(min-width:1100px){
   .ai-side .spec-v-wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px;align-items:start}
   .ai-side .ai-note{margin-top:0}
@@ -9965,7 +9970,7 @@ const priceEstNeeded = d => !!d && !isListing(d) && d.type!=="Продажа с 
   && !PRICE_KNOWN.includes((((d.facts||{}).price)||{}).meaning);
 const _priceEst = {};
 const SPARK_SVG = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0l1.6 5.2L15 7l-5.4 1.8L8 14l-1.6-5.2L1 7l5.4-1.8z"/></svg>';
-const COMPASS_SVG = '<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2.6"/><g class="pe-needle"><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g></g><circle cx="24" cy="24" r="3" fill="var(--accent)" stroke="currentColor" stroke-width="1.4"/></svg>';
+const COMPASS_SVG = '<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="21" stroke="currentColor" stroke-width="2.6"/><g class="pe-needle"><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="currentColor"/></g></g><circle cx="24" cy="24" r="3" fill="var(--pe-hub,#fff)" stroke="currentColor" stroke-width="1.4"/></svg>';
 const priceEstButton = () => `<button class="pe-compass" id="pe-btn" type="button" aria-expanded="false"
   title="Анализ Компаса: сколько могла стоить сделка" aria-label="Анализ Компаса: сколько могла стоить сделка">${COMPASS_SVG}</button>`;
 function priceEstTail(r){
@@ -9974,7 +9979,8 @@ function priceEstTail(r){
   return `${methods?`<div class="pe-sub">Как считали</div><div class="pe-ms">${methods}</div>`:""}
     ${comps?`<div class="pe-sub">С чем сравнивали — покупки в той же отрасли с известной ценой</div><ul class="pe-cs">${comps}</ul>`:""}
     ${r.experts?`<div class="pe-sub">Оценки специалистов из открытых источников</div><div class="pe-ex">${esc(r.experts)}</div>`:""}
-    <div class="pe-foot">Отчётность — ФНС, мультипликаторы — медианы по сделкам из базы Компаса. Долг, премия за контроль и особые условия договора в расчёт не входят.</div>`;
+    <div class="pe-foot">Отчетность — ФНС, мультипликаторы — медианы по сделкам из базы Компаса. Долг, премия за контроль и особые условия договора в расчет не входят.</div>
+    <a class="pe-more" href="#/assistant" data-pe-more>Продолжить в ассистенте →</a>`;
 }
 /* Текст «печатается»: ответ приходит целиком, а показывается по словам —
    читатель видит, что Компас пишет именно для этой сделки. Повторное
@@ -9991,7 +9997,7 @@ async function typeInto(el, text, fast, caret){
   }
 }
 async function fillPriceEst(panel, r, fast){
-  panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span><span class="pe-tag">расчёт, а не цена сделки</span></div>
+  panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span><span class="pe-tag">расчет, а не цена сделки</span></div>
     ${r.range_text?`<div class="pe-range num"></div>`:""}<div class="pe-text"></div><div class="pe-tailwrap"></div>`;
   const caret = document.createElement("span"); caret.className = "pe-caret";
   if(r.range_text) await typeInto(panel.querySelector(".pe-range"), r.range_text, fast, caret);
@@ -10002,6 +10008,9 @@ async function fillPriceEst(panel, r, fast){
   }
   caret.remove();
   const tail = panel.querySelector(".pe-tailwrap"); tail.innerHTML = priceEstTail(r); tail.classList.add("in");
+  const more = tail.querySelector("[data-pe-more]");
+  if(more && panel.dataset.title) more.onclick = ()=>{ try{ sessionStorage.setItem("pendingQ",
+    "Сколько могла стоить сделка «" + panel.dataset.title + "»? Объясни расчет подробнее."); }catch(e){} };
 }
 function bindPriceEstimate(d){
   const btn = document.getElementById("pe-btn"), panel = document.getElementById("pe-panel");
@@ -10011,7 +10020,7 @@ function bindPriceEstimate(d){
     const open = btn.getAttribute("aria-expanded")==="true";
     if(open){ btn.setAttribute("aria-expanded","false"); panel.classList.remove("open");
       setTimeout(()=>{ if(!panel.classList.contains("open")) panel.hidden = true; }, 350); return; }
-    btn.setAttribute("aria-expanded","true"); panel.hidden = false;
+    btn.setAttribute("aria-expanded","true"); panel.hidden = false; panel.dataset.title = d.title || "";
     requestAnimationFrame(()=>panel.classList.add("open"));
     if(_priceEst[d.id]){ fillPriceEst(panel, _priceEst[d.id], true); return; }
     btn.classList.add("busy");
@@ -10022,7 +10031,7 @@ function bindPriceEstimate(d){
     btn.classList.remove("busy");
     if(!panel.isConnected) return;
     if(r && r.available){ _priceEst[d.id] = r; fillPriceEst(panel, r, false); }
-    else panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div><div class="pe-wait">Не получилось посчитать. Нажмите на значок ещё раз чуть позже.</div>`;
+    else panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div><div class="pe-wait">Не получилось посчитать. Нажмите на значок еще раз чуть позже.</div>`;
   };
 }
 /* «Анализ ассистента» у «Контекста»: кнопка → текст карточки мерцает, пока
