@@ -46,6 +46,7 @@ import deal_multiples
 import notification_service
 import price_estimate
 import context_analysis
+import deal_analysis
 import scrape_guard
 import seo_pages
 import telegram_endpoint
@@ -4601,6 +4602,44 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
     }
     if by == "model" or not os.environ.get("YANDEX_API_KEY"):
         _estimate_cache[deal_id] = {"key": key, "value": value}
+    return value
+
+
+# «Разбор сделки» под схемой (владелец, 26 октября 2026; deal_analysis.py):
+# по всей карточке, но только то, чего на ней нет. Без модели — честный отказ.
+_analysis_cache: dict = {}
+
+
+@app.get("/api/deals/{deal_id}/analysis")
+def deal_full_analysis(deal_id: str, request: Request):
+    deal = get_deal(deal_id)
+    if not deal:
+        return JSONResponse({"error": "not_found"}, status_code=404)
+    deal = dict(deal, id=deal_id)
+    facts_text = deal_analysis.facts_text(
+        deal, deal_catalog.load_deals(), lambda cid: (get_company_profile(cid) or {}).get("name"))
+    key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
+    hit = _analysis_cache.get(deal_id)
+    if hit and hit["key"] == key:
+        return hit["value"]
+    if not os.environ.get("YANDEX_API_KEY"):
+        return {"available": False, "reason": "model_unavailable"}
+    ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
+    if not _estimate_allowed(ip or ""):
+        return {"available": False, "reason": "rate_limited"}
+    try:
+        text = call_llm(deal_analysis.SYSTEM, facts_text, max_tokens=900, deadline=time.monotonic() + 45)
+    except Exception as e:  # noqa: BLE001
+        logger.warning("разбор сделки %s: модель недоступна: %s", deal_id, e)
+        return {"available": False, "reason": "model_unavailable"}
+    text = re.sub(r"[*#_`]+", "", text or "").strip().replace("ё", "е").replace("Ё", "Е")
+    cleaned = price_estimate.clean_answer(text, facts_text, min_paragraphs=1)
+    paragraphs = deal_analysis.split_answer("\n\n".join(cleaned or []))
+    if not paragraphs:
+        logger.info("разбор сделки %s: после проверки чисел ничего не осталось", deal_id)
+        return {"available": False, "reason": "filtered"}
+    value = {"available": True, "paragraphs": paragraphs}
+    _analysis_cache[deal_id] = {"key": key, "value": value}
     return value
 
 
