@@ -1134,6 +1134,34 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 #facts .spec-row .spec-v-text{line-height:1.65}
 #facts .stat-hero{margin-bottom:10px}
 #facts .stat-hero + .fact-note{margin:2px 0 16px}
+.pe-wrap{margin:0 0 18px}
+.pe-btn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;border:0;border-radius:999px;
+  padding:11px 18px 11px 15px;font:500 14.5px/1.2 var(--f-body,inherit);cursor:pointer;box-shadow:0 1px 0 var(--accent-deep);
+  transition:background .2s var(--ease),transform .2s var(--ease);text-align:left}
+.pe-btn:hover{background:var(--accent-mid)}
+.pe-btn:active{transform:translateY(1px)}
+.pe-btn svg{width:15px;height:15px;flex:none;color:var(--bronze-light)}
+.pe-btn.busy{cursor:default;background:var(--accent-mid)}
+.pe-btn.busy svg{animation:peSpin 1.4s linear infinite}
+@keyframes peSpin{to{transform:rotate(360deg)}}
+.pe-card{border:1px solid var(--accent);border-radius:var(--radius);background:var(--card);padding:18px 20px 16px;animation:fadeUp .45s var(--ease)}
+.pe-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.pe-h svg{width:13px;height:13px;color:var(--bronze)}
+.pe-tag{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:400;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+.pe-range{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.15;color:var(--accent-deep);margin:12px 0 10px}
+.pe-text p{margin:0 0 9px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.pe-sub{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.pe-m{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:4px 14px;padding:7px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
+.pe-m-l{font-weight:600}
+.pe-m-w{color:var(--muted)}
+.pe-m-r{font-weight:600;color:var(--accent-deep);white-space:nowrap}
+.pe-cs{list-style:none;margin:0;padding:0}
+.pe-cs li{padding:6px 0;border-top:1px solid var(--line-soft);font-size:13.5px;line-height:1.45}
+.pe-cs a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.pe-c-y{color:var(--muted)}
+.pe-ex{font-size:13.5px;line-height:1.55;color:var(--ink);border-top:1px solid var(--line-soft);padding-top:7px}
+.pe-foot{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
+@media(max-width:600px){.pe-m{grid-template-columns:minmax(0,1fr) auto}.pe-m-v{grid-column:1/-1;grid-row:2}.pe-tag{margin-left:0}}
 #facts .adv-card{margin-bottom:10px}
 #facts .adv-card>:last-child{margin-bottom:0}
 #facts .adv-card.muted{border-color:var(--line)}
@@ -7074,6 +7102,7 @@ function renderDeal(id, qs, previewCard){
       const extraBlock = extraHtml(d);
       f.innerHTML = (ecoHasContent(d) || extraBlock) ? `
       ${hero(isListing(d)?"Начальная цена лота":"Сумма сделки", d.eco.sum)}
+      ${priceEstHtml(d)}
       ${specBlock([
         specRow("Предмет / доля", d.eco.share),
         specRow("Оценка и дисконт", d.eco.val),
@@ -7128,6 +7157,7 @@ function renderDeal(id, qs, previewCard){
         : sumState(d.sum)==="unknown"
           ? `<p class="fact-note">В публичных источниках отсутствует информация о цене сделки.</p>`
           : ""}
+      ${priceEstHtml(d)}
       ${dealPlate()}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
@@ -7167,6 +7197,7 @@ function renderDeal(id, qs, previewCard){
        «Ленты»/«Марии-Ра» и Ситибанка). Показываем их здесь же. */
     f.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
     if(lens==="eco"){ mountDealMultiples(d); mountDealFns(d); }
+    bindPriceEstimate(d);
   };
   paint();
   bindTimeline();
@@ -9876,6 +9907,51 @@ async function mountSectorMultiples(){
    «Аналитике»: числитель, знаменатель, год отчёта и пометка «оценка».
    Рисуется только у сделки, попавшей в расчёт (вкладка без данных не
    рисуется — то же правило, что у вкладок карточки). */
+/* «Анализ Компаса» (владелец, 26 октября 2026): у сделки без раскрытой цены —
+   зелёная кнопка; по нажатию сервер считает, сколько могла стоить доля, по
+   отчётности ФНС покупаемой компании и медианным мультипликаторам отрасли
+   (price_estimate.py), а модель объясняет расчёт словами. Оценки специалистов
+   из источников остаются в сумме в скобках — это отдельный расчёт рядом.
+   Ответ живёт в памяти страницы: смена вкладки не запрашивает его заново. */
+const PRICE_KNOWN = ["disclosed","foreign_currency","auction_start"];
+const priceEstNeeded = d => !!d && !isListing(d) && d.type!=="Продажа с торгов"
+  && !PRICE_KNOWN.includes((((d.facts||{}).price)||{}).meaning);
+const _priceEst = {};
+const SPARK_SVG = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0l1.6 5.2L15 7l-5.4 1.8L8 14l-1.6-5.2L1 7l5.4-1.8z"/></svg>';
+const priceEstHtml = d => priceEstNeeded(d) ? `<div class="pe-wrap" id="pe-wrap">${
+  _priceEst[d.id] && _priceEst[d.id].available ? priceEstCard(_priceEst[d.id])
+  : `<button class="pe-btn" id="pe-btn" type="button">${SPARK_SVG}<span>Анализ Компаса: сколько могла стоить сделка</span></button>`}</div>` : "";
+function priceEstCard(r){
+  const methods = (r.methods||[]).map(m=>`<div class="pe-m"><span class="pe-m-l">${esc(m.label)}</span><span class="pe-m-v">${esc(m.base)} × ${esc(m.multiple)} <span class="pe-m-w">(${esc(m.where)})</span></span><span class="pe-m-r num">${esc(m.result)}</span></div>`).join("");
+  const comps = (r.comparables||[]).map(c=>`<li><a href="#/deal/${encodeURIComponent(c.id)}">${esc(c.title)}</a> <span class="pe-c-y">${c.year}</span> <span class="num">${esc(c.price)}</span></li>`).join("");
+  return `<div class="pe-card">
+    <div class="pe-h">${SPARK_SVG}<span>Анализ Компаса</span><span class="pe-tag">расчёт, а не цена сделки</span></div>
+    ${r.range_text?`<div class="pe-range num">${esc(r.range_text)}</div>`:""}
+    <div class="pe-text">${(r.paragraphs||[]).map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+    ${methods?`<div class="pe-sub">Как считали</div><div class="pe-ms">${methods}</div>`:""}
+    ${comps?`<div class="pe-sub">С чем сравнивали — покупки в той же отрасли с известной ценой</div><ul class="pe-cs">${comps}</ul>`:""}
+    ${r.experts?`<div class="pe-sub">Оценки специалистов из открытых источников</div><div class="pe-ex">${esc(r.experts)}</div>`:""}
+    <div class="pe-foot">Отчётность — ФНС, мультипликаторы — медианы по сделкам из базы Компаса. Долг, премия за контроль и особые условия договора в расчёт не входят.</div>
+  </div>`;
+}
+function bindPriceEstimate(d){
+  const btn = document.getElementById("pe-btn");
+  if(!btn) return;
+  btn.onclick = async ()=>{
+    btn.disabled = true; btn.classList.add("busy");
+    btn.querySelector("span").textContent = "Компас считает…";
+    let r = null;
+    try{
+      const res = await fetch(`/api/deals/${encodeURIComponent(d.id)}/price-estimate`);
+      r = res.ok ? await res.json() : null;
+    }catch(e){ r = null; }
+    const wrap = document.getElementById("pe-wrap");
+    if(!wrap) return;
+    if(r && r.available){ _priceEst[d.id] = r; wrap.innerHTML = priceEstCard(r); }
+    else { btn.disabled = false; btn.classList.remove("busy");
+      btn.querySelector("span").textContent = "Не получилось посчитать — попробовать ещё раз"; }
+  };
+}
 async function mountDealMultiples(d){
   const mount = document.getElementById("deal-mult"); if(!mount) return;
   let data;

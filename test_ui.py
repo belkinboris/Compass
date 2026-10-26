@@ -5071,3 +5071,26 @@ def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(brow
             assert not errors, "ошибки в консоли: %s" % errors[:3]
         finally:
             ctx.close()
+
+
+def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
+    """Владелец 26 октября 2026: у сделки с нераскрытой ценой — зелёная кнопка
+    «Анализ Компаса», по нажатию — расчёт с объяснением. У сделки с ценой
+    кнопки нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    no_price = next(d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
+                    and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
+                    and d.get("type") == "M&A")
+    page.goto(base_url + "/#/deal/" + no_price["id"], wait_until="domcontentloaded")
+    page.wait_for_selector("#pe-btn", timeout=15000)
+    bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")
+    assert bg == "rgb(29, 90, 68)", bg
+    page.click("#pe-btn")
+    page.wait_for_selector(".pe-card", timeout=30000)
+    assert "анализ компаса" in page.inner_text(".pe-card").lower()
+    priced = next(d for d in base["deals"] if ((d.get("facts") or {}).get("price") or {}).get("meaning") == "disclosed"
+                  and d.get("type") == "M&A")
+    page.goto(base_url + "/#/deal/" + priced["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".stat-hero", timeout=15000)
+    assert page.locator("#pe-btn").count() == 0
