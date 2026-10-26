@@ -114,3 +114,23 @@ def test_answer_drops_sentences_with_spelled_or_unknown_numbers():
             'Это 300 млн ₽ – 1,6 млрд ₽ за 80%.\n\nВыручка 562 млн ₽. Доля составит 14% рынка.')
     assert pe.clean_answer(text, facts) == ['Это 300 млн ₽ – 1,6 млрд ₽ за 80%.', 'Выручка 562 млн ₽.']
     assert pe.clean_answer('Компания стоит 9 млрд ₽.\n\nИ еще 7 млрд ₽.', facts) is None
+
+
+def test_full_analysis_summary_separates_card_and_base():
+    """«Разбор сделки»: модель видит карточку (не пересказывать) и базу (на ней разбор)."""
+    import deal_analysis as da
+    deal = {'id': 'd1', 'title': 'Покупатель купил завод', 'buyer': 'b', 'ind': 'Агро', 'date': '2026-05-01',
+            'law': {'adv': [['Юрист покупателя', 'АЛРУД', '']]}}
+    deals = {'d1': deal, 'd2': {'title': 'Покупатель купил склад', 'buyer': 'b', 'date': '2025-04-01', 'ind': 'Агро'}}
+    text = da.facts_text(deal, deals, lambda cid: 'Покупатель' if cid == 'b' else None)
+    card, base = text.split('ИЗ БАЗЫ КОМПАСА')
+    assert 'АЛРУД' in card and 'АЛРУД' not in base
+    assert 'Покупатель купил склад' in base and 'отрасли «Агро»' in base
+    assert da.split_answer('Для покупателя. Раз.\n\nЧто может быть дальше. Два.')[1]['lead'] == 'Что может быть дальше.'
+
+
+def test_full_analysis_without_the_model_says_so(monkeypatch):
+    import main
+    monkeypatch.delenv('YANDEX_API_KEY', raising=False)
+    with TestClient(main.app) as client:
+        assert client.get('/api/deals/g0b187624/analysis').json() == {'available': False, 'reason': 'model_unavailable'}

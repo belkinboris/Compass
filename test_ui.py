@@ -5101,19 +5101,6 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     assert page.locator("#pe-btn").count() == 0
 
 
-def test_context_block_has_the_assistant_analysis_button(page, base_url):
-    """Идея Артёма (26 октября 2026): у «Контекста» — «Анализ ассистента»;
-    без модели — честное «недоступен», а не пустое место."""
-    import json as _json
-    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
-    d = next(x for x in base["deals"] if str((x.get("eco") or {}).get("context") or "").strip() not in ("", "—"))
-    page.goto(base_url + "/#/deal/" + d["id"] + "?lens=eco", wait_until="domcontentloaded")
-    page.wait_for_selector("#ctxRow #aiAsk", timeout=15000)
-    page.click("#aiAsk")
-    page.wait_for_selector("#ctxRow .ai-note", timeout=30000)
-    assert "недоступен" in page.inner_text("#ctxRow .ai-note")
-
-
 def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
     """Владелец 26 октября 2026: справа внизу всегда кнопка-компас; снизу
     выезжает ассистент, потянуть вверх — чат на весь экран. На экране
@@ -5150,3 +5137,15 @@ def test_section_descriptions_hide_on_a_phone(page, base_url):
         page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
         page.wait_for_selector(".page-hero h1", timeout=15000)
         assert page.locator(".page-hero p.ph-desc").is_visible() == shown, size
+
+
+def test_deal_card_has_a_full_analysis_button_under_the_scheme(page, base_url):
+    """Владелец 26 октября 2026: «Разбор сделки» — кнопка под схемой сделки,
+    разбор по всей карточке; без модели — честное «недоступен»."""
+    page.goto(base_url + "/#/deal/g0b187624", wait_until="domcontentloaded")
+    page.wait_for_selector("#facts .deal-plate + .fa #faGo", timeout=15000)
+    page.click("#faGo")
+    page.wait_for_selector("#faBody .pe-wait", timeout=30000)
+    page.wait_for_function("!document.getElementById('faGo').disabled", timeout=30000)
+    assert "недоступен" in page.inner_text("#faBody")
+    assert page.locator("#aiAsk").count() == 0  # кнопка у «Контекста» уступила место разбору

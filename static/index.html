@@ -1143,6 +1143,26 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .pe-calc:hover{background:#2C3238}
 .pe-calc[aria-expanded="true"]{background:#fff;color:var(--ink)}
 .pe-calc.busy{cursor:default;opacity:.75}
+/* «Разбор сделки» под схемой */
+#facts .fa{display:block;border:1px solid var(--line);background:var(--card);border-radius:var(--radius);margin:0 0 10px}
+.fa-bar{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.fa-ic{width:40px;height:40px;border-radius:12px;background:#0F2B21;display:grid;place-items:center;flex:none}
+.fa-ic svg{width:26px;height:26px}
+.fa-t{flex:1;min-width:0}
+.fa-t b{display:block;font:600 15px var(--f-body);color:var(--ink)}
+.fa-t span{font:500 13px var(--f-body);color:var(--muted)}
+.fa-go{flex:none;border:1.5px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font:600 13.5px var(--f-body);cursor:pointer}
+.fa-go[aria-expanded="true"]{background:#fff;color:var(--ink)}
+.fa-go[disabled]{opacity:.75;cursor:default}
+.fa-body{border-top:1px solid var(--line);padding:4px 16px 14px}
+.fa-body[hidden]{display:none}
+.fa-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:4px 18px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+#facts .fa-row .label{margin:2px 0 0}
+.fa-row p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink);text-align:left}
+.fa-row.guess p{color:#4A535B}
+.fa-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;padding-top:12px;font-size:12.5px;color:var(--muted)}
+.fa-foot a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.fa-row{grid-template-columns:minmax(0,1fr)}.fa-bar{flex-wrap:wrap}}
 /* Ассистент с любой страницы: кнопка справа внизу и выезжающая шторка (aiDock) */
 .ai-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;
   width:60px;height:60px;border-radius:20px;border:0;cursor:pointer;background:#0F2B21;display:grid;place-items:center;
@@ -7241,6 +7261,7 @@ function renderDeal(id, qs, previewCard){
        отсутствующую величину за скрытую. */
     else if(isCustody(d) && !has(d.sum)) f.innerHTML = `
       ${dealPlate()}
+      ${dealAnalysisHtml(d)}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
       ${specBlock([
@@ -7256,6 +7277,7 @@ function renderDeal(id, qs, previewCard){
           ? `<p class="fact-note">В публичных источниках отсутствует информация о цене сделки.</p>`
           : ""}
       ${dealPlate()}
+      ${dealAnalysisHtml(d)}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
       ${specBlock([
@@ -7296,6 +7318,7 @@ function renderDeal(id, qs, previewCard){
     if(lens==="eco"){ mountDealMultiples(d); mountDealFns(d); }
     bindPriceEstimate(d);
     bindContextAnalysis(d);
+    bindDealAnalysis(d);
   };
   paint();
   bindTimeline();
@@ -10085,7 +10108,9 @@ function bindPriceEstimate(d){
    ассистент читает → разбор рядом (компьютер) или снизу (телефон), текст
    печатается. Что видит модель — context_analysis.py; ответ без чисел не из
    карточки и базы, иначе разбора нет. */
-const AI_CONTEXT_ENABLED = true;
+// Кнопка у «Контекста» уступила место «Разбору сделки» под схемой (владелец,
+// 26 октября 2026: анализ — по всей карточке). Код оставлен: вернуть — true.
+const AI_CONTEXT_ENABLED = false;
 const _ctxAnalysis = {};
 const CTX_FAIL = {
   model_unavailable: "Ассистент сейчас недоступен. Попробуйте чуть позже.",
@@ -10136,6 +10161,50 @@ function bindContextAnalysis(d){
       const n = show(); n.innerHTML = `<div class="ai-h">${COMPASS_SVG}<span>Анализ ассистента</span></div><p>${
         CTX_FAIL[(r||{}).reason] || CTX_FAIL.model_unavailable}</p>`;
       btn.setAttribute("aria-expanded","true"); label.textContent = "Скрыть"; }
+  };
+}
+/* «Разбор сделки» под схемой (владелец, 26 октября 2026): по всей карточке,
+   но без пересказа того, что уже на ней (консультанты, сумма, контекст), —
+   только то, что дает база: другие сделки сторон и что происходит в отрасли
+   (deal_analysis.py, /api/deals/{id}/analysis). Текст печатается. */
+const _dealAnalysis = {};
+const DA_LABEL = {"Для покупателя.":"Для покупателя","Для продавца.":"Для продавца","Рынок вокруг.":"Рынок вокруг","Что может быть дальше.":"Что может быть дальше"};
+const dealAnalysisHtml = d => `<div class="fa" id="faBox">
+  <div class="fa-bar"><div class="fa-ic">${AI_FAB_SVG}</div>
+    <div class="fa-t"><b>Разбор сделки</b><span>Что значит сделка — по базе Компаса</span></div>
+    <button class="fa-go" id="faGo" type="button" aria-expanded="false">Разобрать</button></div>
+  <div class="fa-body" id="faBody" hidden></div></div>`;
+async function fillDealAnalysis(body, r, fast, d){
+  body.innerHTML = "";
+  const caret = document.createElement("span"); caret.className = "pe-caret";
+  for(const p of r.paragraphs||[]){
+    const row = document.createElement("div"); row.className = "fa-row" + (p.lead==="Что может быть дальше." ? " guess" : "");
+    row.innerHTML = `<span class="label">${esc(DA_LABEL[p.lead]||"Разбор")}</span><p></p>`;
+    body.appendChild(row);
+    await typeInto(row.querySelector("p"), p.text, fast, caret);
+  }
+  caret.remove();
+  const foot = document.createElement("div"); foot.className = "fa-foot";
+  foot.innerHTML = `<span>Разбор Компаса по карточке и базе сделок, а не факт из источников</span><a href="#/assistant" data-fa-more>Продолжить в ассистенте →</a>`;
+  body.appendChild(foot);
+  foot.querySelector("[data-fa-more]").onclick = e=>{ e.preventDefault(); aiDockAsk("Расскажи подробнее о сделке: " + d.title); };
+}
+function bindDealAnalysis(d){
+  const btn = document.getElementById("faGo"), body = document.getElementById("faBody");
+  if(!btn || !body) return;
+  btn.onclick = async ()=>{
+    if(btn.disabled) return;
+    if(btn.getAttribute("aria-expanded")==="true"){ btn.setAttribute("aria-expanded","false"); btn.textContent="Разобрать"; body.hidden=true; return; }
+    btn.setAttribute("aria-expanded","true"); btn.textContent="Свернуть"; body.hidden=false;
+    if(_dealAnalysis[d.id]){ fillDealAnalysis(body, _dealAnalysis[d.id], true, d); return; }
+    btn.disabled = true; btn.textContent = "Читаем…";
+    body.innerHTML = `<div class="pe-wait">Компас читает карточку и базу<span class="pe-caret"></span></div>`;
+    let r = null;
+    try{ const res = await fetch(`/api/deals/${encodeURIComponent(d.id)}/analysis`); r = res.ok ? await res.json() : null; }catch(e){ r = null; }
+    btn.disabled = false; btn.textContent = "Свернуть";
+    if(!body.isConnected) return;
+    if(r && r.available){ _dealAnalysis[d.id] = r; fillDealAnalysis(body, r, false, d); }
+    else body.innerHTML = `<div class="pe-wait">${(r && r.reason==="rate_limited") ? "Слишком много запросов подряд. Попробуйте через несколько минут." : "Ассистент сейчас недоступен. Попробуйте чуть позже."}</div>`;
   };
 }
 async function mountDealMultiples(d){
