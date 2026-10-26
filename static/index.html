@@ -2115,6 +2115,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .notif-item{display:block;background:var(--card);border:1px solid var(--line);padding:17px 19px}
 .notif-item.unread{border-left:3px solid var(--accent)}
 .notif-item h3{font-size:14px;margin-bottom:4px}.notif-item p{font-size:13px;color:var(--muted)}
+.notif-link{color:var(--accent);cursor:pointer;text-decoration:underline}
 .notif-item time{font-size:11px;color:var(--muted);display:block;margin-top:8px}
 .pref-grid{display:grid;gap:10px;margin-top:14px}
 .pref-row{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line-soft)}
@@ -10985,8 +10986,9 @@ async function renderAccount(qs){
     };
     const loadNotifications=async()=>{const r=await fetch("/api/notifications"),rows=r.ok?await r.json():[];const mount=document.getElementById("notifList");if(!mount)return;
       const pr=await fetch("/api/notification-preferences"),pp=pr.ok?await pr.json():{};
-      mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join("")
+      mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g,(m,t,u)=>`<span class="notif-link" data-href="${u}">${t}</span>`).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join("")
         :`<div class="fns-empty">${pp.in_app_enabled===false?"Уведомления на сайте выключены.":"Уведомлений пока нет. Подпишитесь на компанию, отрасль или сделку — сообщим о новом."}</div>`;
+      mount.querySelectorAll(".notif-link").forEach(el=>el.onclick=e=>{e.preventDefault();e.stopPropagation();const u=el.dataset.href;location.href=u.startsWith(location.origin)?u.slice(location.origin.length)||"/":u;});
       const ra=document.getElementById("readAll"); if(ra) ra.hidden=!rows.some(n=>!n.is_read);};
     document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
     loadPrefs();loadNotifications();

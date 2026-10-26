@@ -40,7 +40,7 @@ def is_listing(deal) -> bool:
     return deal.get("type") == "Продажа с торгов" and deal.get("status") != "Закрыта"
 
 
-def digest_body(deals, today: date) -> str | None:
+def digest_body(deals, today: date, base_url: str = "") -> str | None:
     """Текст сводки или None, если за неделю в базе не появилось ничего.
     Неделя — по дате появления карточки в «Компасе» (`added`), а не по дате
     сделки: читателю важно, что нового у нас, а не когда стороны подписали."""
@@ -58,8 +58,11 @@ def digest_body(deals, today: date) -> str | None:
             n, _plural(n, "новая сделка", "новые сделки", "новых сделок")))
         for deal in real[:SHOWN]:
             status = str(deal.get("status") or "").strip()
-            lines.append("• %s%s" % (str(deal.get("title") or "").strip(),
-                                     " — %s" % status.lower() if status else ""))
+            title = str(deal.get("title") or "").strip()
+            if base_url and deal.get("id"):
+                # [название](адрес): сайт, Telegram и почта превращают в ссылку
+                title = "[%s](%s/#/deal/%s)" % (title, base_url.rstrip("/"), deal["id"])
+            lines.append("• %s%s" % (title, " — %s" % status.lower() if status else ""))
         if n > SHOWN:
             lines.append("И ещё %d — на сайте." % (n - SHOWN))
     if lots:
@@ -75,7 +78,7 @@ def send_digest(db, deals, today: date, base_url: str) -> int:
     from db.models import User
     from notification_service import create_notification, get_preferences
 
-    body = digest_body(deals, today)
+    body = digest_body(deals, today, base_url)
     if not body:
         return 0
     sent = 0
@@ -93,7 +96,7 @@ def main(argv) -> int:
     deals = list(load_deals().values())
     today = date.today()
     if "--write" not in argv:
-        print(digest_body(deals, today) or "За неделю новых карточек нет.")
+        print(digest_body(deals, today, "https://projectcompass.ru") or "За неделю новых карточек нет.")
         return 0
     from db.session import SessionLocal
     base = os.environ.get("APP_BASE_URL", "https://projectcompass.ru")
