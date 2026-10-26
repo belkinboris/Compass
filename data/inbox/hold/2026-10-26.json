@@ -285,36 +285,7 @@
    ]
   },
   {
-   "draft_id": "d73515388",
-   "title": "Anthropic подала заявку на IPO",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9060956"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d44126262",
+   "draft_id": "d21240537",
    "title": "Anthropic подал заявку на IPO в Nasdaq",
    "date": "2026-10-26",
    "src": [
@@ -337,85 +308,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подала заявку на IPO» — второе издание, в группу не шлём"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d80488664",
-   "title": "Anthropic подала заявку на IPO",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/26/10/2026/6adf53619a7947714cbf2624"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подала заявку на IPO» — второе издание, в группу не шлём"
-   ]
-  },
-  {
-   "draft_id": "d56769766",
-   "title": "«Галатасарай» рассматривает вариант с покупкой футболиста ЦСКА Глебова",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/sport/28255137"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-26",
-     "title": "Переговоры",
-     "note": "По информации журналиста Бурак Эрена, полузащитник ЦСКА рассматривается как один из вариантов замены немцу Лерою Сане, который может покинуть команду",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/sport/28255137"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42794353",
+   "draft_id": "d10389915",
    "title": "Anthropic направила в SEC заявку на IPO",
    "date": "2026-10-26",
    "src": [
@@ -453,17 +352,118 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic подала заявку на IPO» — второе издание, в группу не шлём"
+    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
    ]
   },
   {
-   "draft_id": "d35311037",
-   "title": "В ЦУМе начали продавать сумки в виде рулона туалетной бумаги",
+   "draft_id": "d85495697",
+   "title": "ИИ выше, чем звезды // IPO Anthropic может превзойти SpaceX и стать крупнейшим в истории",
    "date": "2026-10-26",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/26/v-tsume-nachali-prodavat-sumki-v-vide-rulona-tualetnoy-bumagi/"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9061053"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d68837771",
+   "title": "Исследование «Ситилинк»: как россияне оснащают автомобиль и что они покупают в первую очередь",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-10-26_issledovanie_sitilink"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "в первую очередь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "в первую очередь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d11814515",
+   "title": "Американская компания Anthropic подала документы для проведения IPO",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "Американская компания Anthropic, разработчик искусственного интеллекта Claude, подала заявку для проведения первичного публичного размещения акций (IPO) в США . Об этом 26 октября сообщило агентство Bloomberg. Компания планирует разместить акции на бирже…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic подал заявку на IPO в Nasdaq» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d60762003",
+   "title": "ВС проверит законность продажи эстонской «дочки» «Фармсинтеза»",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266505/"
     ]
    ],
    "sum": null,
@@ -481,8 +481,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31124271",
+   "title": "В Перми продают ресторан, предлагающий романтические ужины на колесе обозрения",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139188"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
