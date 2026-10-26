@@ -338,8 +338,11 @@ def clean_answer(text: str, facts: str, min_paragraphs: int = 2) -> list[str] | 
     Вычищено так много, что абзацев меньше `min_paragraphs`, — None."""
     out = []
     for para in [p.strip() for p in re.split(r'\n\s*\n', text or '') if p.strip()]:
-        kept = [x for x in _SENT.split(para)
-                if numbers_ok(x, facts) and not _SPELLED_BIG.search(x)]
+        parts = _SENT.split(para)
+        kept = [x for x in parts if numbers_ok(x, facts) and not _SPELLED_BIG.search(x)]
+        # Выпало все, кроме заголовка абзаца («Для продавца.»), — абзаца нет.
+        if len(kept) < len(parts) and all(len(x.split()) <= 4 and not re.search(r'\d', x) for x in kept):
+            continue
         joined = ' '.join(kept).strip()
         if joined and len(re.sub(r'[^а-яa-z]', '', joined.lower())) > 6:
             out.append(joined)

@@ -134,3 +134,11 @@ def test_full_analysis_without_the_model_says_so(monkeypatch):
     monkeypatch.delenv('YANDEX_API_KEY', raising=False)
     with TestClient(main.app) as client:
         assert client.get('/api/deals/g0b187624/analysis').json() == {'available': False, 'reason': 'model_unavailable'}
+
+
+def test_full_analysis_drops_numbers_taken_from_the_card():
+    """Цифра из карточки (доля продавца) в разборе — пересказ: предложение выпадает."""
+    import deal_analysis as da, price_estimate as pe
+    facts = 'КАРТОЧКА (читатель это уже видит):\nДоля продавца 12,3%\n\nИЗ БАЗЫ КОМПАСА (на карточке этого нет):\nВ отрасли 41 сделка'
+    out = pe.clean_answer('Для продавца. Сохраняет 12,3%.\n\nРынок вокруг. В отрасли 41 сделка.', da.base_part(facts), 1)
+    assert out == ['Рынок вокруг. В отрасли 41 сделка.']

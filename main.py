@@ -4633,7 +4633,7 @@ def deal_full_analysis(deal_id: str, request: Request):
         logger.warning("разбор сделки %s: модель недоступна: %s", deal_id, e)
         return {"available": False, "reason": "model_unavailable"}
     text = re.sub(r"[*#_`]+", "", text or "").strip().replace("ё", "е").replace("Ё", "Е")
-    cleaned = price_estimate.clean_answer(text, facts_text, min_paragraphs=1)
+    cleaned = price_estimate.clean_answer(text, deal_analysis.base_part(facts_text), min_paragraphs=1)
     paragraphs = deal_analysis.split_answer("\n\n".join(cleaned or []))
     if not paragraphs:
         logger.info("разбор сделки %s: после проверки чисел ничего не осталось", deal_id)
