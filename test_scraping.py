@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Защита базы от лёгкого скачивания (scrape_guard.py, docs/scraping_protection.md)."""
+"""Защита базы от легкого скачивания (scrape_guard.py, docs/scraping_protection.md)."""
 import time
 
 import pytest

@@ -13,7 +13,7 @@ DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 URL = 'https://t.me/alumnipartnerslawfirm/2844'
 ADV = ['Консультант продавца', 'ALUMNI Partners',
        '«Команда ALUMNI Partners консультировала основателей ГК Swordfish Security в знаковой сделке для '
-       'российского рынка» кибербезопасности; руководитель — партнёр Антон Панченков. Источник: '
+       'российского рынка» кибербезопасности; руководитель — партнер Антон Панченков. Источник: '
        't.me/alumnipartnerslawfirm/2844']
 
 

@@ -50,7 +50,7 @@ def main(write=False):
         json.dump(base, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
         print('Записано.')
     else:
-        print('Всё уже актуально.')
+        print('Все уже актуально.')
     _ = before
     return 0
 

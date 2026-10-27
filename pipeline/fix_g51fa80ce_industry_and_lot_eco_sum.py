@@ -7,7 +7,7 @@
    test_data.py::test_industries_are_from_the_known_list). Текст поста
    (`post_override`/`post_preview`) — решение владельца, его не трогаю;
    `ind` — структурное поле для фильтра на сайте, поправил на канон.
-2. `eco.sum` стоял заглушкой «—», хотя `sum` несёт итоговый платёж аукциона
+2. `eco.sum` стоял заглушкой «—», хотя `sum` несет итоговый платеж аукциона
    («213,5 млн ₽») — тот же класс, что у g37e971b1, ge1b2eba1 и g955d2c6b:
    `eco.sum` зеркалит `sum` буквально.
    test_audit_queue.py::test_the_sum_on_the_overview_is_the_sum_in_the_economist

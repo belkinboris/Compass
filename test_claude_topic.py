@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Тема «Клод» в группе-консоли: приём сообщений агенту, мост для рутины и
+"""Тема «Клод» в группе-консоли: прием сообщений агенту, мост для рутины и
 кнопка «Назначить эту тему» в меню /start (17 октября 2026)."""
 import os
 import sys
@@ -23,7 +23,7 @@ def env(monkeypatch):
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: calls.append((method, kw)) or {"ok": True})
     # Вебхук учит номер группы-консоли и темы в ОБЩЕЙ тестовой базе — а
-    # test_kompas позже ждёт адрес группы из окружения. Возвращаем как было.
+    # test_kompas позже ждет адрес группы из окружения. Возвращаем как было.
     from db.session import get_session
     keys = (main.REVIEW_GROUP_SETTING, "telegram_topic:клод")
     with TestClient(main.app) as c:
@@ -34,7 +34,7 @@ def env(monkeypatch):
         c.post(HOOK, json={"callback_query": {
             "id": "bind", "data": "topic:claude", "from": {"id": 111},
             "message": {"message_id": 1, "message_thread_id": THREAD, "chat": CHAT}}})
-        # Прочитать всё, что осталось от прошлых тестов: база у модуля общая.
+        # Прочитать все, что осталось от прошлых тестов: база у модуля общая.
         old = c.get("/api/claude/inbox", params={"token": "тайна"}).json()["messages"]
         c.post("/api/claude/inbox/consume", json={"token": "тайна", "ids": [m["id"] for m in old]})
         main_quiet = main.CLAUDE_ACK_QUIET_SECONDS
@@ -92,7 +92,7 @@ def test_reviewer_message_in_claude_topic_is_saved_and_acknowledged(env):
 
     # Второе сообщение подряд — сохраняется, но подтверждения не получает.
     calls.clear()
-    c.post(HOOK, json=_msg("и ещё одно", mid=11))
+    c.post(HOOK, json=_msg("и еще одно", mid=11))
     assert len(_inbox(c)) == 2
     assert [m for m, _kw in calls if m == "sendMessage"] == []
 
@@ -109,11 +109,11 @@ def test_photo_document_and_reply_context_are_kept(env):
                            photo=[{"file_id": "small", "file_size": 10, "width": 90, "height": 90},
                                   {"file_id": "big", "file_size": 900, "width": 1280, "height": 720}],
                            reply_to_message={"message_id": 5, "text": "Сделано: кнопка на месте"}))
-    c.post(HOOK, json=_msg(None, mid=21, document={"file_id": "doc1", "file_name": "отчёт.pdf"}))
+    c.post(HOOK, json=_msg(None, mid=21, document={"file_id": "doc1", "file_name": "отчет.pdf"}))
     rows = _inbox(c)
     assert rows[0]["text"] == "вот скрин" and rows[0]["photo_file_id"] == "big"
     assert rows[0]["reply_to_text"] == "Сделано: кнопка на месте"
-    assert rows[1]["document_file_id"] == "doc1" and rows[1]["document_name"] == "отчёт.pdf"
+    assert rows[1]["document_file_id"] == "doc1" and rows[1]["document_name"] == "отчет.pdf"
 
 
 def test_reply_to_a_marked_bot_message_in_claude_topic_goes_to_claude(env):

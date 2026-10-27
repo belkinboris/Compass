@@ -1,17 +1,17 @@
 """Карточка СП «Яндекс»/VK (g5850b57f) после замечаний владельца 8 октября
-2026 («две точки», «форма расчётов не про форму расчётов») и мелкая чистка
+2026 («две точки», «форма расчетов не про форму расчетов») и мелкая чистка
 по той же проверке базы.
 
-g5850b57f (всё — дословно по CNews и Хабру, источники карточки):
+g5850b57f (все — дословно по CNews и Хабру, источники карточки):
 - law.struct: «2027 г.. то есть» — опечатка CNews, двойная точка снята;
-- eco.rationale: обрывок «такой симбиоз…» заменён предложением целиком;
+- eco.rationale: обрывок «такой симбиоз…» заменен предложением целиком;
 - law.appr: вместо «кто сообщил» — что Минцифры контролирует объединение (Хабр);
-- eco.fin («Форма расчётов») нёс описание VK Tech: выручка — в eco.target_fin
+- eco.fin («Форма расчетов») нес описание VK Tech: выручка — в eco.target_fin
   («Показатели СП»), чем занимается и продукты — в eco.context, поле — «—».
 g179841a1: «15 млрд руб.. Завод», g12a761e4: «112–118 ₽)..» — та же опечатка.
 Скрипт можно запускать повторно: уже исправленное пропускается.
 Четыре СП с типом «M&A» и три с типом «СП» — тип «Создание СП» (правило
-docs/card_status_dates.md; kind остаётся jv).
+docs/card_status_dates.md; kind остается jv).
 
 Без ключа — сухой прогон; запись — --write (файл перечитывается перед записью).
 """
@@ -58,7 +58,7 @@ def main(write):
     else:
         assert STRUCT_NEW in c['law']['struct'] and c['eco']['fin'] == '—'
     if c['eco']['rationale'] == RATIONALE_PRESS:
-        # Первый вариант с «Как сообщал CNews» приёмка отвела как пресс-язык:
+        # Первый вариант с «Как сообщал CNews» приемка отвела как пресс-язык:
         # фраза целиком, с заглавной, источник — в src.
         c['eco']['rationale'] = RATIONALE_NEW
         print('g5850b57f: rationale без пресс-атрибуции')
@@ -67,7 +67,7 @@ def main(write):
     # (pipeline/ingest/fixes/fix_yandex_vk_b2b_tech_jv.py); правка мимо таблицы
     # обязана сохранить их отпечатки в `proofread_absorbed` (docs/card_editing.md,
     # «Правка поля мимо таблицы…»), иначе `already_applied()` считает записи
-    # неприменёнными и `review.py --write` отказывает целиком.
+    # непримененными и `review.py --write` отказывает целиком.
     sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ingest'))
     import importlib
     import review
@@ -79,7 +79,7 @@ def main(write):
         fp = review.fix_fingerprint(fix['new'])
         if fp not in absorbed.setdefault(fix['field'], []):
             absorbed[fix['field']].append(fp)
-            print('g5850b57f: отпечаток записи %s сохранён' % fix['field'])
+            print('g5850b57f: отпечаток записи %s сохранен' % fix['field'])
 
     for did, field, old, new in (('g179841a1', 'extra', '15 млрд руб.. Завод', '15 млрд руб. Завод'),
                                  ('g12a761e4', 'law.struct', '112–118 ₽)..', '112–118 ₽).')):

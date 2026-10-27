@@ -39,9 +39,9 @@ def main(write):
     assert len(data['cards']) == len(cards) - 1
     if write:
         json.dump(data, open(PENDING, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-        print('Записано: %s убрана из очереди, источник перенесён на %s.' % (DROP_ID, KEEP_ID))
+        print('Записано: %s убрана из очереди, источник перенесен на %s.' % (DROP_ID, KEEP_ID))
     else:
-        print('Сухой прогон: %s ушла бы, источник перенёсся бы на %s (--write, чтобы записать).'
+        print('Сухой прогон: %s ушла бы, источник перенесся бы на %s (--write, чтобы записать).'
               % (DROP_ID, KEEP_ID))
 
 

@@ -11,8 +11,8 @@ import json
 import re
 import sys
 
-BUY_VERBS = r"приобрел[аи]?|приобрёл|купил[аи]?|выкупил[аи]?|консолидировал[аи]?|получил[аи]?|нарастил[аи]?"
-SELL_VERBS = r"продал[аи]?|продаёт|реализовал[аи]?"
+BUY_VERBS = r"приобрел[аи]?|приобрел|купил[аи]?|выкупил[аи]?|консолидировал[аи]?|получил[аи]?|нарастил[аи]?"
+SELL_VERBS = r"продал[аи]?|продает|реализовал[аи]?"
 
 QUOTED = re.compile(r"«([^»]{2,60})»")
 CAP_PHRASE = re.compile(r"\b([А-ЯЁA-Z][а-яёa-zA-Z0-9\-]*(?:\s+[А-ЯЁA-Z][а-яёa-zA-Z0-9\-]*){0,3})\b")
@@ -40,7 +40,7 @@ SELLER_LABELED = re.compile(r"продавец\s*[—-]\s*([^,.;\n]{2,60})", re.
 
 def extract_parties(title, extra_details=""):
     """Возвращает (buyer, target) или (None, None), если не уверены."""
-    # Приоритет 1: явная метка «покупатель — X» в тексте (реже, но надёжнее регулярки по заголовку)
+    # Приоритет 1: явная метка «покупатель — X» в тексте (реже, но надежнее регулярки по заголовку)
     lm = LABELED.search(extra_details or "")
     if lm:
         buyer = lm.group(1).strip().rstrip(".")
@@ -50,7 +50,7 @@ def extract_parties(title, extra_details=""):
     # Убираем уточнение в скобках вида "(через «дочку»)" — иначе регулярка находит
     # дочернюю структуру вместо реального покупателя
     clean_title = re.sub(r"\(через\s+[^)]+\)", "", title).strip()
-    # Паттерн 1: "X приобрёл ... у Y" -> buyer=X, seller/target=Y
+    # Паттерн 1: "X приобрел ... у Y" -> buyer=X, seller/target=Y
     m = re.search(rf"^(.*?)\s+(?:{BUY_VERBS})\s+(.*?)(?:\s+у\s+(.+))?$", clean_title, re.I)
     if m:
         buyer_raw = m.group(1).strip()
@@ -71,7 +71,7 @@ def extract_parties(title, extra_details=""):
     if m:
         target = first_candidate(m.group(2))
         return None, target
-    # Ничего не нашли структурно — берём первую заметную компанию как «участника»
+    # Ничего не нашли структурно — берем первую заметную компанию как «участника»
     # сделки без уточнения роли (лучше показать хоть что-то честно нейтральное,
     # чем ничего, если заголовок явно про конкретную компанию)
     return None, first_candidate(clean_title)

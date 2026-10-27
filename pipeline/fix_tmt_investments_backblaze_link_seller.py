@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""TMT Investments/Backblaze (`g0311444f`, ещё в очереди предпросмотра):
+"""TMT Investments/Backblaze (`g0311444f`, еще в очереди предпросмотра):
 подсказка review.py — `seller` записан текстом «TMT Investments», хотя
 профиль (`g5f515899`) уже есть в базе. Связывает `seller_id` с профилем
 и снимает текстовое `seller` — тот же принцип, что и для `buyer`/
-`buyer_name` (`test_buyer_is_named_once`), применённый к продавцу ради
+`buyer_name` (`test_buyer_is_named_once`), примененный к продавцу ради
 единообразия, хоть отдельного теста на эту пару полей и нет.
 
-Карточка ещё лежит в static/data/pending.json.
+Карточка еще лежит в static/data/pending.json.
 
 Запуск: python3 pipeline/fix_tmt_investments_backblaze_link_seller.py           # проверка
         python3 pipeline/fix_tmt_investments_backblaze_link_seller.py --write   # запись

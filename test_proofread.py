@@ -43,7 +43,7 @@ def card_fixture():
     }
 
 
-GOOD_FIN = ("По данным аудированной отчётности за первое полугодие 2025 года, за 77,5% "
+GOOD_FIN = ("По данным аудированной отчетности за первое полугодие 2025 года, за 77,5% "
             "«Агро-Белогорья» «Русагро» заплатила 31 млрд ₽.")
 
 
@@ -59,7 +59,7 @@ def test_good_edit_is_accepted_and_press_attribution_is_refused():
     assert not bad, bad
     bad, _ = proofread.check(dict(edit, new=GOOD_FIN + " Об этом пишет РБК."), card)
     assert any("пресс-атрибуция" in b for b in bad), bad
-    bad, _ = proofread.check(dict(edit, new=GOOD_FIN.replace("По данным аудированной отчётности",
+    bad, _ = proofread.check(dict(edit, new=GOOD_FIN.replace("По данным аудированной отчетности",
                                                              "Как сообщалось")), card)
     assert any("безличный пересказ" in b for b in bad), bad
 
@@ -80,10 +80,10 @@ def test_foreign_number_and_new_name_are_refused():
     assert any("числа, которых не было" in b for b in bad), bad
     bad, _ = proofread.check(dict(edit, new=GOOD_FIN.replace("«Русагро»", "«Мираторг»")), card)
     assert any("имена, которых не было" in b for b in bad), bad
-    # «Русагро» при этом остаётся в заголовке карточки — потеря из поля
+    # «Русагро» при этом остается в заголовке карточки — потеря из поля
     # допустима с замечанием; имя, которого больше нигде нет, — отказ.
     val = dict(id="x1", field="eco.val", old=card["eco"]["val"],
-               new="Руководитель департамента M&A BGP Capital Пётр Сидоров оценивает капитализацию "
+               new="Руководитель департамента M&A BGP Capital Петр Сидоров оценивает капитализацию "
                    "холдинга в 38–43 млрд ₽.")
     bad, _ = proofread.check(val, card)
     assert any("имена, которых не было" in b for b in bad), bad
@@ -126,7 +126,7 @@ def test_press_parenthetical_numbers_do_not_count_as_lost():
 def test_long_quote_and_straight_quotes_are_refused():
     card = card_fixture()
     edit = dict(id="x1", field="eco.fin", old=card["eco"]["fin"], new=GOOD_FIN)
-    long_q = GOOD_FIN + " «Сделка закрыта и оплачена полностью в срок по договору», — говорится в отчётности."
+    long_q = GOOD_FIN + " «Сделка закрыта и оплачена полностью в срок по договору», — говорится в отчетности."
     bad, _ = proofread.check(dict(edit, new=long_q), card)
     assert any("длинная цитата" in b for b in bad), bad
     bad, _ = proofread.check(dict(edit, new=GOOD_FIN.replace("«Русагро»", '"Русагро"')), card)
@@ -189,8 +189,8 @@ def test_run_writes_whole_cards_only_and_second_run_changes_nothing(monkeypatch)
 
 
 def test_fixes_table_survives_proofreading():
-    """Запись FIXES, применённая ДО вычитки, считается применённой и после неё;
-    запись, добавленная ПОСЛЕ, — нет (иначе review.py пропустил бы её навсегда)."""
+    """Запись FIXES, примененная ДО вычитки, считается примененной и после нее;
+    запись, добавленная ПОСЛЕ, — нет (иначе review.py пропустил бы ее навсегда)."""
     import review
     card = {"id": "z", "eco": {"context": "Старый текст с фактом о 5 млрд руб."}}
     fix = {"id": "z", "field": "eco.context", "old": None,
@@ -203,10 +203,10 @@ def test_fixes_table_survives_proofreading():
         assert proofread.unapplied_fixes(card) == []
         proofread.absorb_fixes(card, {"eco.context"})
         card["eco"]["context"] = "Старый текст с фактом о 5 млрд ₽ — вычитанный."
-        assert review.already_applied(fix, card), "запись, применённая до вычитки, потеряна"
+        assert review.already_applied(fix, card), "запись, примененная до вычитки, потеряна"
         later = dict(fix, new="Совсем другой факт о 7 млрд руб.")
-        assert not review.already_applied(later, card), "запись после вычитки объявлена применённой"
-        # Пока есть неприменённая запись — вычитка отказывает в записи карточки.
+        assert not review.already_applied(later, card), "запись после вычитки объявлена примененной"
+        # Пока есть непримененная запись — вычитка отказывает в записи карточки.
         review.FIXES = [later]
         assert proofread.unapplied_fixes(card) == [later]
     finally:
@@ -217,7 +217,7 @@ def test_fixes_table_survives_proofreading():
 def test_samples_pass_the_check():
     """Образцы для владельца (pipeline/proofread_samples/) обязаны проходить
     проверку целиком: это и есть демонстрация правил на живых карточках.
-    Проверяется, только пока карточки ещё не вычитаны в базе."""
+    Проверяется, только пока карточки еще не вычитаны в базе."""
     base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
     for path in sorted((ROOT / "pipeline" / "proofread_samples").glob("*.json")):
         edits = json.loads(path.read_text(encoding="utf-8"))
@@ -244,7 +244,7 @@ def test_outlets_found_by_the_running_routine_are_recognised():
                    'УФА1.ру', 'МР7.ру', 'Ъ-СПб', 'НГ.ru', 'Прайм', 'АКМ',
                    'ФВ', 'ДП', 'ЧП', 'СМИ'):
         assert proofread.outlet_like(outlet), outlet
-    for name in ('Сбербанк', 'Яндекс', 'Русагро', 'Транснефть', 'Ковалёва',
+    for name in ('Сбербанк', 'Яндекс', 'Русагро', 'Транснефть', 'Ковалева',
                  'Хабаровск', 'Новый', 'Прайс'):
         assert not proofread.outlet_like(name), name
 

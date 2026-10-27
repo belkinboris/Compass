@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Сводка за неделю: новые сделки в базе — на сайт (раздел «Уведомления»),
-в Telegram, если он подключён, и на почту, когда она настроена.
+в Telegram, если он подключен, и на почту, когда она настроена.
 
 С 4 октября 2026 рассылку делает сам сайт, по понедельникам в 10:00 МСК
 (`main._start_weekly_digest`); до этого скрипт не запускал никто, а
@@ -64,7 +64,7 @@ def digest_body(deals, today: date, base_url: str = "") -> str | None:
                 title = "[%s](%s/#/deal/%s)" % (title, base_url.rstrip("/"), deal["id"])
             lines.append("• %s%s" % (title, " — %s" % status.lower() if status else ""))
         if n > SHOWN:
-            lines.append("И ещё %d — на сайте." % (n - SHOWN))
+            lines.append("И еще %d — на сайте." % (n - SHOWN))
     if lots:
         k = len(lots)
         lines.append("%s%d %s на торги." % ("" if not real else "\n", k, _plural(

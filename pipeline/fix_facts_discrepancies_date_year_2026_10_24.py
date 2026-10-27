@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """Качество 24 октября 2026: две записи `pipeline/facts_discrepancies.json`
-несли дату карточки с другим ГОДОМ, чем дважды независимо подтверждённая
+несли дату карточки с другим ГОДОМ, чем дважды независимо подтвержденная
 дата закрытия (`facts.date`, basis=verified, model×2) — `review.py` такую
 правку не принимает («год не совпадает: уточнять день можно, переносить
 год — нет», `date_is_supported()`), и это намеренно: смена года — отдельное
 утверждение, не перенос. Поэтому, как и `fix_placeholder_dates.py`, правка
 прямым скриптом с `assert` на старое значение и явной цитатой уже
-подтверждённого факта.
+подтвержденного факта.
 
     python3 pipeline/fix_facts_discrepancies_date_year_2026_10_24.py          # сухой прогон
     python3 pipeline/fix_facts_discrepancies_date_year_2026_10_24.py --write
@@ -41,7 +41,7 @@ def main(write):
         fd = d.get('facts', {}).get('date', {})
         assert fd.get('value') == new and fd.get('basis') == 'verified', (did, fd)
         d['date'] = new
-        print('%s: %s -> %s (facts.date подтверждён двумя чтениями: %s | %s)' % (did, old, new, quote, source))
+        print('%s: %s -> %s (facts.date подтвержден двумя чтениями: %s | %s)' % (did, old, new, quote, source))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return

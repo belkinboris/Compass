@@ -40,7 +40,7 @@ PLAN = [
     ('gd3769bb9',
      'Финансовый консультант продавца (Е-ПРОМ)',
      'Advance Capital',
-     'Advance Capital на своём сайте называет себя эксклюзивным финансовым '
+     'Advance Capital на своем сайте называет себя эксклюзивным финансовым '
      'консультантом Е-ПРОМ в сделке по продаже 49,99% долей фонду «ВИМ '
      'Инвестиции». Источник: https://advancecapital.ru/news/news/press-releases/433/',
      'https://advancecapital.ru/news/news/press-releases/433/',
@@ -75,7 +75,7 @@ PLAN = [
      'Aspring Capital',
      'The Moscow Times со ссылкой на источники «Коммерсанта» называет '
      'Aspring Capital финансовым консультантом продавца в продаже холдинга '
-     'Sokolov; управляющий партнёр Aspring Capital Сергей Айрапетов '
+     'Sokolov; управляющий партнер Aspring Capital Сергей Айрапетов '
      'подтвердил факт закрытия сделки. '
      'Источник: https://ru.themoscowtimes.com/2025/08/14/benefitsiar-'
      'yuvelirnogo-kholdinga-sokolov-prodal-ego-chastnomu-investoru-paku-gazeta-a171592',
@@ -87,7 +87,7 @@ PLAN = [
      'Консультант по продаже',
      'Astoria Capital',
      'BG.ru называет Astoria Capital (создана экс-сотрудниками Сбербанка) '
-     'структурой, привлечённой владельцами ТЦ «Авиапарк» для реализации '
+     'структурой, привлеченной владельцами ТЦ «Авиапарк» для реализации '
      'продажи. Источник: https://bg.ru/bg/business/comm-news/28500-aviapark',
      'https://bg.ru/bg/business/comm-news/28500-aviapark',
      'Стороны сделки',
@@ -96,7 +96,7 @@ PLAN = [
     ('technored',
      'Финансовый консультант (организация сделки)',
      'BSF Partners',
-     'TECHNORED на своём сайте называет инвестбанк BSF Partners участником '
+     'TECHNORED на своем сайте называет инвестбанк BSF Partners участником '
      'организации сделки с ГК «Вартон». '
      'Источник: https://technored.ru/news/Varton_TECHNORED_soglashenie/',
      'https://technored.ru/news/Varton_TECHNORED_soglashenie/',
@@ -106,7 +106,7 @@ PLAN = [
     ('gf424fa11',
      'Юридический консультант',
      'Stonebridge Legal',
-     'Stonebridge Legal на своём сайте относит сделку Wildberries/Russ '
+     'Stonebridge Legal на своем сайте относит сделку Wildberries/Russ '
      '(вошла в топ-5 M&A-сделок 2024 года по версии Право.ру) к своим '
      'проектам; конкретная сторона не уточняется. '
      'Источник: https://stonebridgelegal.ru/ru/news/sdelka-stonebridge-legal-voshla-v-top-5-sdelok-m-a/',
@@ -117,7 +117,7 @@ PLAN = [
     ('g68ebf773',
      'Юридический консультант эмитента',
      'Stonebridge Legal',
-     'Stonebridge Legal на своём сайте называет себя консультантом IPO '
+     'Stonebridge Legal на своем сайте называет себя консультантом IPO '
      '«ВсеИнструменты.ру» на Мосбирже. '
      'Источник: https://stonebridgelegal.ru/ru/news/komanda-stonebridge-legal-soprovozhdala-ipo-krupne/',
      'https://stonebridgelegal.ru/ru/news/komanda-stonebridge-legal-soprovozhdala-ipo-krupne/',
@@ -168,9 +168,9 @@ PLAN = [
     ('g8ed07ff5',
      'Юридический консультант покупателя (частного инвестора)',
      'LEVEL Legal Services',
-     'LEVEL Legal Services на своём сайте называет себя консультантом '
+     'LEVEL Legal Services на своем сайте называет себя консультантом '
      'частного инвестора при приобретении группы компаний «Западная» — '
-     'той же сделки, где продавцов вёл BIRCH. '
+     'той же сделки, где продавцов вел BIRCH. '
      'Источник: https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya',
      'https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya',
      None,
@@ -179,9 +179,9 @@ PLAN = [
     ('cc2929a95',
      'Юридический консультант покупателя (частного инвестора)',
      'LEVEL Legal Services',
-     'LEVEL Legal Services на своём сайте называет себя консультантом '
+     'LEVEL Legal Services на своем сайте называет себя консультантом '
      'частного инвестора при приобретении группы компаний «Западная» — '
-     'той же сделки, где продавцов вёл BIRCH (эта карточка — тот же сюжет, '
+     'той же сделки, где продавцов вел BIRCH (эта карточка — тот же сюжет, '
      'что и g8ed07ff5, под другим id). '
      'Источник: https://www.level-legal.com/news',
      'https://www.level-legal.com/news',

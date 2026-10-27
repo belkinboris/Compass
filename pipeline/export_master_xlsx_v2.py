@@ -81,7 +81,7 @@ def norm_date(d):
 
 
 def load_already_done():
-    """Собирает заголовки уже обогащённых/готовых сделок для исключения из кандидатов."""
+    """Собирает заголовки уже обогащенных/готовых сделок для исключения из кандидатов."""
     done_titles = []
     try:
         enr = json.load(open("/mnt/user-data/uploads/enriched_2026_final.json", encoding="utf-8"))
@@ -210,7 +210,7 @@ def main():
     print(f"\n=== СВОДКА ===")
     print(f"Всего строк в Excel: {len(rows)}")
     print(f"С официальной суммой: {sum(1 for r in rows if r['amount_rub_mln'])}")
-    print(f"С суммой И не дубль И ещё не обогащено (реальные кандидаты): {len(fresh_candidates)}")
+    print(f"С суммой И не дубль И еще не обогащено (реальные кандидаты): {len(fresh_candidates)}")
 
 
 if __name__ == "__main__":

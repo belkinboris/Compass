@@ -4,7 +4,7 @@
 Запуск:
   python3 to_minideals.py collected_deals.json > mini_deals_snippet.js
 
-Берёт только записи с confidence high/medium (low отсекается — сначала проверь их руками
+Берет только записи с confidence high/medium (low отсекается — сначала проверь их руками
 и подними confidence, если данные подтверждаются).
 """
 import json

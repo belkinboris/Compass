@@ -23,7 +23,7 @@ def _table(ps_values, industry='ИТ и интернет'):
     return {'rows': rows, 'cells': {'all': {'ps': [cell, allc], 'pe': [], 'ev_op': []}}}
 
 
-DEAL = {'id': 'gx', 'title': 'Покупатель приобрёл 80% компании', 'date': '2025-05-01', 'type': 'M&A',
+DEAL = {'id': 'gx', 'title': 'Покупатель приобрел 80% компании', 'date': '2025-05-01', 'type': 'M&A',
         'ind': 'ИТ и интернет', 'sum': 'Не раскрыта', 'eco': {'val': '—'},
         'facts': {'price': {'meaning': 'undisclosed'}}}
 

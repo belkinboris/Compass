@@ -82,7 +82,7 @@ def main(write=False):
 
     print('\nОписаний записано: %d' % wrote)
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
         for cid, name, old in skipped[:5]:
             print('   %s %s — %r' % (cid, name, old))
 

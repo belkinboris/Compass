@@ -3,7 +3,7 @@
 Владелец: «Мы уже говорили не писать так, потому что это не нам давали
 интервью. Так может писать РБК, но не мы.» Ссылаемся на издание («по данным
 РБК») или пишем «по неофициальным данным». Девять мест в восьми карточках —
-всё, что нашёл поиск по базе. Без ключа — сухой прогон.
+все, что нашел поиск по базе. Без ключа — сухой прогон.
 """
 import json, os, re, sys
 
@@ -78,8 +78,8 @@ def main(write):
         before = holder[key]
         holder[key] = holder[key].replace(old, new)
         # Поле, поставленное таблицей FIXES, — отпечаток прежнего текста в
-        # proofread_absorbed (docs/card_editing.md), иначе review.py сочтёт
-        # запись неприменённой.
+        # proofread_absorbed (docs/card_editing.md), иначе review.py сочтет
+        # запись непримененной.
         field = '.'.join(map(str, path))
         if not isinstance(path[-1], int) and 'events' not in path and path != ('title',):
             deals[did].setdefault('proofread_absorbed', {}).setdefault(field, [])

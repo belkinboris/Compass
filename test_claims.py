@@ -2,7 +2,7 @@
 """Кабинет компании: «Это моя компания» (14 октября 2026).
 
 Заявка вошедшего на карточку компании или фирмы-консультанта, решение
-кнопкой в Telegram-консоли или по токену, правки от подтверждённого
+кнопкой в Telegram-консоли или по токену, правки от подтвержденного
 представителя — обычной заметкой для рутины, просмотры карточки за 30 дней.
 Устройство — docs/company_cabinet.md.
 
@@ -19,7 +19,7 @@ import main
 from db.models import CompanyClaim, CorrectionRequest, Notification, PageView, User
 from db.session import get_session
 
-PASSWORD = "надёжный-тестовый-пароль"
+PASSWORD = "надежный-тестовый-пароль"
 GROUP = "-1001234567890"
 
 
@@ -31,7 +31,7 @@ def client():
 
 @pytest.fixture
 def console(monkeypatch):
-    """Консоль с двумя участниками (111 и 222); всё, что ушло в Telegram, — в список."""
+    """Консоль с двумя участниками (111 и 222); все, что ушло в Telegram, — в список."""
     monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
     monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", GROUP)
@@ -139,7 +139,7 @@ def test_change_request_only_after_approval_and_only_by_the_owner_of_the_claim(c
     try:
         row = s.get(CorrectionRequest, r.json()["id"])
         assert row.status == "new" and row.deal_id is None and row.contact == email
-        assert row.body.startswith("Представитель «%s» (подтверждён), %s: Сайт и контакты" % (name, email))
+        assert row.body.startswith("Представитель «%s» (подтвержден), %s: Сайт и контакты" % (name, email))
         assert "Сайт теперь example.ru" in row.body and "/#/companies/%s" % cid in row.body
     finally:
         s.close()

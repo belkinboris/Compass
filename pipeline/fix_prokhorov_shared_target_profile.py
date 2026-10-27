@@ -45,7 +45,7 @@ RENAME_NEW_NAME = 'Brooklyn Nets и Barclays Center'
 RENAME_OLD_IND = 'Медиа'
 RENAME_NEW_IND = 'Развлечения'
 RENAME_DESC = ('Профессиональный баскетбольный клуб НБА и принадлежащая ему '
-               'арена в Бруклине; в 2019 году контроль перешёл от Михаила '
+               'арена в Бруклине; в 2019 году контроль перешел от Михаила '
                'Прохорова к Джозефу Цаю.')
 
 NEW_ID = 'ga75f0f33'
@@ -55,7 +55,7 @@ NEW_DESC = ('Кипрская холдинговая компания, публ�
             'группы «Тинькофф» (ныне Т-Банк); акции и депозитарные '
             'расписки торговались на Лондонской и Московской биржах.')
 
-DEAL_STAYS_ID = 'ge42fa8fc'      # target остаётся RENAME_ID
+DEAL_STAYS_ID = 'ge42fa8fc'      # target остается RENAME_ID
 DEAL_MOVES_ID = 'gb944ce5d'      # target переезжает на NEW_ID
 
 
@@ -81,7 +81,7 @@ def main(write=False):
 
     print('ПЕРЕИМЕНОВЫВАЕМ  %s: %r -> %r (ind: %s -> %s)'
           % (RENAME_ID, RENAME_OLD_NAME, RENAME_NEW_NAME, RENAME_OLD_IND, RENAME_NEW_IND))
-    print('СОЗДАЁМ  %s (%s), отрасль %s' % (NEW_ID, NEW_NAME, NEW_IND))
+    print('СОЗДАЕМ  %s (%s), отрасль %s' % (NEW_ID, NEW_NAME, NEW_IND))
     print('ПЕРЕНАПРАВЛЯЕМ  target сделки %s -> %s' % (DEAL_MOVES_ID, NEW_ID))
 
     if not write:

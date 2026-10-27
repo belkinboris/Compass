@@ -17,7 +17,7 @@
 после правки buyer у профиля не останется ни одной сделки. Удаляется, а
 не оставляется как призрак с неверным описанием.
 
-Не через review.py: комбинация фактов из ЧЕТЫРЁХ новых источников
+Не через review.py: комбинация фактов из ЧЕТЫРЕХ новых источников
 (kommersant.ru, mcclinics.ru, rb.ru, center.business-magazine.online) в
 структурных полях (title, buyer, seller, sum, date) — за пределами того,
 что review.py вообще проверяет.
@@ -78,7 +78,7 @@ NEW_LAW_STRUCT = (
     'Эксперт», оставшийся 1% — у ООО «Клиника Мать и Дитя» (также входит '
     'в МД Медикал Груп). Сумма оплачена собственными денежными '
     'средствами МД Медикал Груп, которая начала консолидировать периметр '
-    'сделки в своей отчётности с мая 2025 года.'
+    'сделки в своей отчетности с мая 2025 года.'
 )
 
 OLD_LAW_APPR = (
@@ -138,7 +138,7 @@ def main(write=False):
     other_refs = [d['id'] for d in data['deals']
                   if d['id'] != DEAL_ID
                   and WRONG_BUYER_PROFILE_ID in (d.get('buyer'), d.get('seller_id'), d.get('target'))]
-    assert not other_refs, f'профиль {WRONG_BUYER_PROFILE_ID} используется ещё где-то: {other_refs}'
+    assert not other_refs, f'профиль {WRONG_BUYER_PROFILE_ID} используется еще где-то: {other_refs}'
 
     print('=== title ===', NEW_TITLE)
     print('=== date ===', NEW_DATE)

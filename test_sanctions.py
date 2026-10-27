@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Санкционная отметка у людей: что можно писать, а что нельзя.
 
-Главное, что здесь проверяется, — не механика сведения имён, а запрет:
+Главное, что здесь проверяется, — не механика сведения имен, а запрет:
 на сайт попадает только то, что человек прочитал и сверил. Ошибка в этом
 месте — не опечатка в цифре, а обвинение живого человека.
 """
@@ -22,7 +22,7 @@ REJECTED = sm.load_rejected()
 
 def test_confirmed_and_rejected_do_not_overlap():
     both = set(CONFIRMED) & set(REJECTED)
-    assert not both, "профиль одновременно сверен и отклонён: %s" % both
+    assert not both, "профиль одновременно сверен и отклонен: %s" % both
 
 
 def test_every_confirmed_mark_names_a_list_and_a_document():
@@ -87,12 +87,12 @@ def test_rejected_entries_say_why():
 
 
 def test_name_key_survives_different_spellings():
-    """Одно имя в трёх странах пишут по-разному — ключ обязан совпасть."""
+    """Одно имя в трех странах пишут по-разному — ключ обязан совпасть."""
     ru = sm.key_of("Алексей Мордашов")
     assert ru == sm.key_of("Alexey Alexandrovich MORDASHOV")
     assert ru == sm.key_of("Alexej Mordašov")
     assert ru == sm.key_of("Aleksej Aleksandrovitj MORDASJOV")
-    assert sm.key_of("Артём Чайка") == sm.key_of("Артём Юрьевич ЧАЙКА")
+    assert sm.key_of("Артем Чайка") == sm.key_of("Артем Юрьевич ЧАЙКА")
 
 
 def test_different_people_get_different_keys():

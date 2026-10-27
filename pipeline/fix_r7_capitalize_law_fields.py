@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Две карточки раунда 7, у которых извлечённая цитата в law.struct
+"""Две карточки раунда 7, у которых извлеченная цитата в law.struct
 начинается со строчной буквы — оборвано подлежащее в начале дословного
 фрагмента (см. CLAUDE.md, `test_law_values_start_with_a_capital`).
 Правится только РЕГИСТР первой буквы, сам текст не меняется.
 
 После записи нужно вручную привести в соответствие `new`/`quote` в
 pipeline/ingest/fixes/batch_agents100_r7.py — иначе
-test_review_table_is_applied_and_not_pending упадёт: already_applied()
+test_review_table_is_applied_and_not_pending упадет: already_applied()
 сверяет значение в базе с `new` дословно.
 
 ЗАПУСК:

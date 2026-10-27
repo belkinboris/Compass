@@ -77,7 +77,7 @@ DESCRIPTIONS = {
                  'стройматериалов ушедших иностранных производителей — '
                  'газобетонный завод Xella, кирпичные заводы '
                  'Wienerberger.',
-    'g4734fbe4': 'Небоскрёб в комплексе «Москва-Сити» (411 тыс. кв. м); '
+    'g4734fbe4': 'Небоскреб в комплексе «Москва-Сити» (411 тыс. кв. м); '
                  'в 2023 году 85% площади выкупило РЖД по обязательству '
                  'правительства.',
 }
@@ -127,7 +127,7 @@ def main(write=False):
     if not write:
         real = sum(1 for v in comps.values()
                    if (v.get('desc') or '').strip() and not PLACEHOLDER.match(str(v.get('desc'))))
-        real += 2  # два новых профиля, ещё не добавленных в comps в сухом прогоне
+        real += 2  # два новых профиля, еще не добавленных в comps в сухом прогоне
         total = len(comps) + 2
     else:
         comps[NEW_BUYER_ID] = NEW_BUYER
@@ -139,7 +139,7 @@ def main(write=False):
     print('\nОписаний записано: %d (+2 новых профиля)' % wrote)
     print('Сделок с исправленными ролями: %d' % len(ROLE_FIXES))
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
         for cid, name, old in skipped[:5]:
             print('   %s %s — %r' % (cid, name, old))
 

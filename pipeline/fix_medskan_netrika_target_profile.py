@@ -15,15 +15,15 @@
 
 ПОЧЕМУ ИМЕННО ТАК И НЕ ИНАЧЕ. В отличие от Пулково/Селегеня, «Клиника
 «Медицина»» — НЕ бессмысленное или пустое имя: это настоящий, отдельно
-существующий профиль (подтверждён в реестре ФНС, ИНН 7729058330, см.
+существующий профиль (подтвержден в реестре ФНС, ИНН 7729058330, см.
 `pipeline/fns_registry.py`), просто ошибочно привязанный к ЭТОЙ сделке.
-Профиль не удаляется и не переименовывается — он остаётся в базе как есть
+Профиль не удаляется и не переименовывается — он остается в базе как есть
 (после правки — без единой сделки, как и ~127 других профилей компаний,
 см. журнал CLAUDE.md), а для «Нетрика Медицина» заводится ОТДЕЛЬНЫЙ, новый
 профиль с именем и описанием, взятыми дословно из текста самой карточки.
 
 ПРОВЕРЕНО. `g12c86c6a` использован ровно в одной сделке (`g630c3361`) — до
-правки; профиля «Нетрика Медицина» в базе ещё нет ни под одним ключом.
+правки; профиля «Нетрика Медицина» в базе еще нет ни под одним ключом.
 
 Запуск:
     python3 pipeline/fix_medskan_netrika_target_profile.py            # сухой прогон
@@ -70,7 +70,7 @@ def main(write):
 
     print('Сделка: %s | было target=%s (%r)' % (DEAL_ID, WRONG_PROFILE_ID, WRONG_PROFILE_NAME))
     print('Станет: target=%s (%r)' % (NEW_PROFILE_ID, NEW_PROFILE_NAME))
-    print('Профиль %s (%r) остаётся в базе как есть, без сделок.' % (WRONG_PROFILE_ID, WRONG_PROFILE_NAME))
+    print('Профиль %s (%r) остается в базе как есть, без сделок.' % (WRONG_PROFILE_ID, WRONG_PROFILE_NAME))
 
     if not write:
         print('\nСухой прогон. Запись — с ключом --write.')
@@ -86,7 +86,7 @@ def main(write):
 
     assert by_id[DEAL_ID]['target'] == NEW_PROFILE_ID
     assert NEW_PROFILE_ID in companies and companies[NEW_PROFILE_ID]['name'] == NEW_PROFILE_NAME
-    assert WRONG_PROFILE_ID in companies, 'старый профиль случайно удалён — не должен был'
+    assert WRONG_PROFILE_ID in companies, 'старый профиль случайно удален — не должен был'
 
     with open(PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)

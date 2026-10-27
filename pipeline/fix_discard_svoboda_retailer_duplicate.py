@@ -2,12 +2,12 @@
 """Приток 8 сентября 2026 (10:20 МСК) — карточка g0edf3b89 («Рок-музыкант
 инвестировал в косметическую фабрику «Свобода»», Retailer.ru) — тот же
 сюжет, что уже был построен вчера (7 сентября) как карточка g66c1e0ec
-(Максим Севрюков / «Свобода», три источника Коммерсанта) и затем ОТКЛОНЁН
+(Максим Севрюков / «Свобода», три источника Коммерсанта) и затем ОТКЛОНЕН
 решением из консоли: все три адреса Коммерсанта уже стоят в
 `discarded_urls` под id g66c1e0ec (отметка «at»: 2026-09-07T17:27:08Z).
 Раз история этой сделки уже отклонена по существу, пересказ того же
 сюжета другим изданием не должен всплывать снова под новым id — карточка
-снимается, а адрес Retailer.ru добавляется в тот же список отклонённых.
+снимается, а адрес Retailer.ru добавляется в тот же список отклоненных.
 
 Заодно ворота пропустили и здесь родовое описание вместо имени
 («Рок-музыкант» вместо «Максим Севрюков», «косметическая фабрика
@@ -42,7 +42,7 @@ def main(write=False):
     assert any(len(s) > 1 and s[1] == URL for s in (card.get('src') or []))
     assert URL not in state.get('discarded_urls', {})
     prior = [v for v in state.get('discarded_urls', {}).values() if v.get('id') == PRIOR_DISCARD_ID]
-    assert prior, f'ожидалась уже отклонённая карточка {PRIOR_DISCARD_ID} в discarded_urls'
+    assert prior, f'ожидалась уже отклоненная карточка {PRIOR_DISCARD_ID} в discarded_urls'
 
     pending['cards'] = [c for c in pending['cards'] if c['id'] != CARD_ID]
     state.setdefault('discarded_urls', {})[URL] = {
@@ -50,7 +50,7 @@ def main(write=False):
         'at': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
     }
 
-    print(f'Снята карточка {CARD_ID} (тот же сюжет, что уже отклонён под {PRIOR_DISCARD_ID}).')
+    print(f'Снята карточка {CARD_ID} (тот же сюжет, что уже отклонен под {PRIOR_DISCARD_ID}).')
 
     if write:
         with open(PENDING_PATH, 'w', encoding='utf-8') as f:

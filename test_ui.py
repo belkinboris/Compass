@@ -44,7 +44,7 @@ def _free_port():
 
 def _start_server(extra_env):
     """uvicorn в отдельном процессе. Переменные окружения — явно: вход по
-    заявке (ACCESS_GATE, main.py) по умолчанию ВКЛЮЧЁН, и без ACCESS_GATE=0
+    заявке (ACCESS_GATE, main.py) по умолчанию ВКЛЮЧЕН, и без ACCESS_GATE=0
     каждый экран этого файла оказался бы за дверью."""
     port = _free_port()
     proc = subprocess.Popen(
@@ -73,7 +73,7 @@ def base_url():
 
 @pytest.fixture(scope="session")
 def gated_url():
-    """Второй сервер с включённым гейтом — для единственного теста двери.
+    """Второй сервер с включенным гейтом — для единственного теста двери.
     Без TELEGRAM_BOT_TOKEN уведомление владельцам молча не уходит (сети нет),
     а вебхук с секретом и списком решающих — живой."""
     env = {"ACCESS_GATE": "1", "TELEGRAM_WEBHOOK_SECRET": "ui-secret",
@@ -84,7 +84,7 @@ def gated_url():
     proc.wait(timeout=10)
 
 
-# Плашка о cookie (16 октября 2026) висит внизу экрана, пока её не закрыли, —
+# Плашка о cookie (16 октября 2026) висит внизу экрана, пока ее не закрыли, —
 # и перехватывала бы клики по кнопкам внизу в чужих тестах. Поэтому каждый
 # контекст браузера в этом наборе начинает с «плашку уже закрыли»; тесты самой
 # плашки берут чистый контекст через browser.fresh_context.
@@ -124,7 +124,7 @@ def page(base_url, browser):
     pg.on("console", lambda m: pg.crashes.append(f"console: {m.text}")
           if m.type == "error" else None)
     pg.goto(base_url + "/#/", wait_until="networkidle")
-    pg.wait_for_timeout(2500)          # ждём вторую загрузку базы
+    pg.wait_for_timeout(2500)          # ждем вторую загрузку базы
     assert pg.evaluate("() => bulkLoaded"), "база так и не догрузилась"
     yield pg
     pg.close()
@@ -160,7 +160,7 @@ def test_screen_renders_without_errors(page, base_url, name, hash_):
 
 
 def test_analytics_headline_counts_deals_like_the_home_page(page, base_url):
-    """Владелец 25 октября 2026 (скриншот партнёра): «Тут нужно чтобы была
+    """Владелец 25 октября 2026 (скриншот партнера): «Тут нужно чтобы была
     цифра актуальная. Она не соответствует тому что у нас на главной» —
     главная считала 1515 вместе с лотами на торгах, «Аналитика» — 1463 без
     них. Первое число шапки — то же, что на главной; лоты названы отдельно."""
@@ -207,7 +207,7 @@ def test_every_industry_page_opens(page, base_url):
 @pytest.mark.parametrize("width", WIDTHS)
 def test_no_horizontal_overflow(page, base_url, width):
     """Переполнение ищем и в открытом состоянии панели фильтров: закрытая
-    ничего не показывает, а открывают её ссылки #/theme/ и #/ind/."""
+    ничего не показывает, а открывают ее ссылки #/theme/ и #/ind/."""
     # gcf05509a: статус «Согласование получено» — самая длинная из новых
     # цветных плашек (раздел B, 22 августа); citibank один короче не ловит
     # переполнение на самом длинном значении, как уже требует урок CLAUDE.md.
@@ -228,7 +228,7 @@ def test_no_horizontal_overflow(page, base_url, width):
 
 
 def test_no_external_requests(page, base_url):
-    """Всё должно работать из России: ни одного запроса за пределы своего домена."""
+    """Все должно работать из России: ни одного запроса за пределы своего домена."""
     external = []
     handler = lambda r: external.append(r.url) if (
         "127.0.0.1" not in r.url and not r.url.startswith("data:")) else None
@@ -281,7 +281,7 @@ def test_sparse_notice_has_no_unrelated_deal_link(page, base_url):
 
 
 def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
-    # У карточки есть отметки, когда её сверяли с источником (кампания
+    # У карточки есть отметки, когда ее сверяли с источником (кампания
     # дочитывания) — читатель раньше не видел ни одной из них. Показываем
     # самую позднюю, человеческими словами, без жаргона полей.
     visit(page, base_url, "#/deal/g1d36d186")
@@ -310,8 +310,8 @@ def test_deal_source_block_shows_last_verified_date_when_known(page, base_url):
 def test_advanced_filter_panel_with_new_select_has_no_overflow(browser, base_url, width):
     """Этап 16, П2 добавил пятый `<select>` в панель расширенного поиска —
     родня уже известного класса дефекта: скрытые состояния (открытая панель)
-    проверяются отдельно от свёрнутых, и именно в открытом виде панель уже
-    переполняла экран однажды (CLAUDE.md). Проверяем на всех трёх ширинах."""
+    проверяются отдельно от свернутых, и именно в открытом виде панель уже
+    переполняла экран однажды (CLAUDE.md). Проверяем на всех трех ширинах."""
     ctx = browser.new_context(viewport={"width": width, "height": 900})
     try:
         pg = ctx.new_page()
@@ -332,11 +332,11 @@ def test_feed_finance_filter_narrows_by_target_revenue(browser, base_url):
     """Этап 16, П2: фильтр «Финансы цели» в ленте. Вставляем синтетическую
     сделку прямо в `DEALS` (та же техника, что и у теста мультипликатора на
     карточке) и подменяем `financeScreening` напрямую, не дожидаясь сети, —
-    живая база не даёт управлять тем, у какой ИМЕННО компании есть выручка.
+    живая база не дает управлять тем, у какой ИМЕННО компании есть выручка.
     Свежий контекст, а не общий `page`: тест мутирует глобальное состояние
     ленты (DEALS, financeScreening, filterMinRevenue), и even с откатом в
     конце безопаснее не делить его с остальными тестами сессии вовсе — тот
-    же приём, что и у route-подмены сети в других тестах этого файла."""
+    же прием, что и у route-подмены сети в других тестах этого файла."""
     ctx = browser.new_context()
     try:
         pg = ctx.new_page()
@@ -367,8 +367,8 @@ def test_feed_finance_filter_narrows_by_target_revenue(browser, base_url):
         pg.wait_for_timeout(300)
         assert pg.locator(link).count() == 1
 
-        # Пока financeScreening ещё не пришёл (null) — фильтр не должен молча
-        # прятать всю ленту, а показывать всё до момента, когда данные придут.
+        # Пока financeScreening еще не пришел (null) — фильтр не должен молча
+        # прятать всю ленту, а показывать все до момента, когда данные придут.
         pg.evaluate("() => { financeScreening = null; filterMinRevenue = '1e10'; feedPage = 1; renderFeedList(); }")
         pg.wait_for_timeout(300)
         assert pg.locator(link).count() == 1, \
@@ -384,7 +384,7 @@ def test_feed_finance_filter_narrows_by_target_revenue(browser, base_url):
 
 def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
     """С 6 сентября 2026 клиент ничего не выводит из прозы: `dealMultipleLine`
-    берёт числитель из d.facts и показывает мультипликатор только для
+    берет числитель из d.facts и показывает мультипликатор только для
     сделки, у которой доля, цена и периметр ПОДТВЕРЖДЕНЫ двумя чтениями
     (facts.admitted.multiple_text). facts для синтетических сделок считает
     Python (facts.derive) — единственный исполнитель правил; здесь
@@ -409,7 +409,7 @@ def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
             f = facts.derive(dict(d, facts=f), ctx)
         return dict(d, facts=f)
 
-    # по тексту всё сходится (100%, цена в рублях, ИНН подтверждён) — но не прочитано: нет
+    # по тексту все сходится (100%, цена в рублях, ИНН подтвержден) — но не прочитано: нет
     rule_only = with_facts(base)
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(rule_only)) is None
     assert page.evaluate("factReason(%s, 'multiple_text')" % json.dumps(rule_only)) == "price_not_verified"
@@ -422,12 +422,12 @@ def test_deal_multiple_line_reads_only_verified_facts(page, base_url):
     assert page.evaluate("countsAsPrice(%s)" % json.dumps(base)) is False
     # не на вкладке цели — нет
     assert page.evaluate("dealMultipleLine(%s, 'b1', 500000000, 2023)" % json.dumps(ok)) is None
-    # знаменатель — только тот отчёт, по которому читатели подтвердили периметр
+    # знаменатель — только тот отчет, по которому читатели подтвердили периметр
     # (год и выручка): другой год или другая выручка — мультипликатора нет
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2024)" % json.dumps(ok)) is None
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2022)" % json.dumps(ok)) is None
     assert page.evaluate("dealMultipleLine(%s, 't1', 600000000, 2023)" % json.dumps(ok)) is None
-    # год сделки — из подтверждённой даты закрытия, а не из даты карточки
+    # год сделки — из подтвержденной даты закрытия, а не из даты карточки
     closed_later = dict(ok, facts=dict(ok["facts"], date=dict(ok["facts"]["date"], basis="verified", meaning="closing", value="2025-02-01")))
     assert page.evaluate("multipleYear(%s)" % json.dumps(closed_later))["year"] == 2025
     assert page.evaluate("dealMultipleLine(%s, 't1', 500000000, 2023)" % json.dumps(closed_later)) is not None  # разрыв 2 — допустим
@@ -460,7 +460,7 @@ def test_assistant_retrieval_finds_deal_regardless_of_word_case(page, base_url):
     visit(page, base_url, "#/")
     for q in ("Кто купил Ситибанк?", "Что известно про сделку с Ситибанком?"):
         ids = page.evaluate("(q) => relevantDeals(q, 40).map(d => d.id)", q)
-        assert "citibank" in ids, f"{q!r} не нашёл карточку citibank среди {len(ids)} кандидатов"
+        assert "citibank" in ids, f"{q!r} не нашел карточку citibank среди {len(ids)} кандидатов"
     # Тот же класс задачи в обратную сторону: короткое слово-предлог («про»)
     # не должно фаззи-совпадать с чужим более длинным словом («проект») и
     # вытеснять настоящий ответ из топа.
@@ -507,7 +507,7 @@ def test_multiples_table_shows_all_rows_on_request_and_names_the_fx_rate(browser
 
 
 def test_multiples_price_flags_stay_inside_the_card_on_a_phone(browser, base_url):
-    """Владелец 5 октября 2026, скриншот с телефона: метки «пересчёт» и «по
+    """Владелец 5 октября 2026, скриншот с телефона: метки «пересчет» и «по
     тексту карточки» у цены уезжали за край карточки — ячейка цены не
     разрешала перенос строки. Страница при этом не прокручивалась вбок,
     поэтому проверка горизонтального переполнения этого не ловила."""
@@ -539,9 +539,9 @@ def test_multiples_price_flags_stay_inside_the_card_on_a_phone(browser, base_url
 def test_analytics_page_shows_market_multiples_block(browser, base_url):
     """Этап 16, П1: блок «Мультипликаторы рынка» на Аналитике — проверяем оба
     честных состояния (пусто и заполнено) подменой сетевого ответа, а не
-    ожиданием, что в базе БФО когда-нибудь наберётся нужный набор сделок.
+    ожиданием, что в базе БФО когда-нибудь наберется нужный набор сделок.
     Свежий контекст (не общий `page`), чтобы route-подмена не осталась
-    висеть на остальных тестах сессии — тот же приём, что и у чипов группы."""
+    висеть на остальных тестах сессии — тот же прием, что и у чипов группы."""
     ctx = browser.new_context()
     try:
         def populated(route):
@@ -576,9 +576,9 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         def hidden(route):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({
                 "candidates_total": 42, "clean_total": 3, "median": 1.5, "show_medians": False,
-                # Групп с отраслевым ориентиром сервер здесь не отдаёт: порог —
+                # Групп с отраслевым ориентиром сервер здесь не отдает: порог —
                 # восемь сопоставимых сделок в одной отрасли (7 сентября 2026),
-                # и на трёх строках ни одна группа его не набирает.
+                # и на трех строках ни одна группа его не набирает.
                 "industries": [],
                 "deals": [{"id": "citibank", "title": "Тестовая сделка", "year": 2024,
                            "target_id": "citibank", "target_name": "ООО Тест",
@@ -623,7 +623,7 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         pg2.wait_for_timeout(800)
         body2 = pg2.inner_text("#multiplesCard")
         assert "ИТ и интернет" in body2 and "8 сделок" in body2, body2
-        assert "пересчёт" in body2.lower(), body2
+        assert "пересчет" in body2.lower(), body2
         pg2.close()
         # Методика с 6 сентября 2026 — под раскрывашкой «Как считаем и почему
         # так»: три абзаца пояснений над пятью строками данных читались как
@@ -645,7 +645,7 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
         pg2.goto(base_url + "/#/analytics", wait_until="networkidle")
         pg2.wait_for_timeout(800)
         body2 = pg2.inner_text("#multiplesCard")
-        assert "нет полного набора для расчёта" in body2.lower()
+        assert "нет полного набора для расчета" in body2.lower()
         pg2.close()
     finally:
         ctx.close()
@@ -653,12 +653,12 @@ def test_analytics_page_shows_market_multiples_block(browser, base_url):
 
 def test_multiples_table_flags_outliers_only_when_medians_are_shown(browser, base_url):
     """G5 (18 сентября 2026): подсветка строки, заметно отклонившейся от
-    медианы группы, — приём из comps-таблиц профессиональных M&A баз
+    медианы группы, — прием из comps-таблиц профессиональных M&A баз
     (Capital IQ и общая практика). Число не новое (медиана уже считалась и
     уже печаталась текстом) — только заметнее в самой строке. Ровно поэтому
     метка рисуется ТОЛЬКО когда сервер разрешил показывать саму медиану
     (`show_medians`): до утверждения методики оценщиком отдельная подсветка
-    в обход этого флага была бы тем же рыночным ориентиром через чёрный ход."""
+    в обход этого флага была бы тем же рыночным ориентиром через черный ход."""
     ctx = browser.new_context()
     try:
         deals = [
@@ -670,8 +670,8 @@ def test_multiples_table_flags_outliers_only_when_medians_are_shown(browser, bas
              "target_id": "sberbank", "target_name": "ООО Дорого",
              "sum_rub": 4000000000, "revenue_rub": 500000000,
              "revenue_year": 2023, "multiple": 8.0},
-            {"id": "vtb", "title": "Дешёвая сделка", "year": 2024,
-             "target_id": "vtb", "target_name": "ООО Дёшево",
+            {"id": "vtb", "title": "Дешевая сделка", "year": 2024,
+             "target_id": "vtb", "target_name": "ООО Дешево",
              "sum_rub": 500000000, "revenue_rub": 500000000,
              "revenue_year": 2023, "multiple": 1.0},
         ]
@@ -720,7 +720,7 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
     национализированных активах. Строится по теме «Национализация / иск
     Генпрокуратуры» (структурный признак, не поиск слов на лету): годы,
     отрасли, список последних сделок и ссылка на все сделки темы. Проверяем
-    на трёх ширинах: карточка на всю ширину сетки, строки графиков не
+    на трех ширинах: карточка на всю ширину сетки, строки графиков не
     вылезают за экран (min-width:0 у колонок), ошибок нет."""
     for width in (1280, 390, 360):
         # Карточка проявляется через `.reveal`/`.in` со сдвигом `i*55мс` по
@@ -738,7 +738,7 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
             pg.wait_for_function(
                 "typeof DEALS !== 'undefined' && DEALS.length > 100 && !!document.getElementById('nationalizedCard')",
                 timeout=20000)
-            # .label рисуется капителью (text-transform) — inner_text отдаёт ВЕРХНИЙ регистр.
+            # .label рисуется капителью (text-transform) — inner_text отдает ВЕРХНИЙ регистр.
             body = pg.inner_text("#nationalizedCard").lower()
             assert "изъятые и национализированные активы" in body
             assert "изъятие в доход государства" in body and "все сделки темы" in body
@@ -756,7 +756,7 @@ def test_analytics_page_shows_nationalized_assets_section(browser, base_url):
             assert stats["clipped"] == 0 and stats["overflow"] == 0, (width, stats)
             assert stats["opacity"] == "1", "карточка осталась прозрачной после анимации проявления"
             assert not errors, errors
-            # Ссылка на все сделки темы ведёт на список с карточками.
+            # Ссылка на все сделки темы ведет на список с карточками.
             pg.click("#nationalizedCard a[href^='#/theme/']")
             pg.wait_for_timeout(600)
             assert pg.evaluate("document.querySelectorAll('#app a[href^=\"#/deal/\"]').length") >= 5
@@ -770,16 +770,16 @@ def test_leaving_analytics_before_multiples_reply_does_not_crash_advisors(browse
     («Cannot set properties of null (setting 'innerHTML')»), хотя ломалась
     не эта страница — виновата `mountMarketMultiples()` со страницы
     «Аналитика»: она захватывает DOM-узел ДО await, а если пользователь
-    уходит на другой экран, пока ответ ещё в пути, `route()` уже заменил
-    `#app`, и запись в отсоединённый узел роняет исключение с ЧУЖОЙ, новой
+    уходит на другой экран, пока ответ еще в пути, `route()` уже заменил
+    `#app`, и запись в отсоединенный узел роняет исключение с ЧУЖОЙ, новой
     страницы. Подмена ответа через `page.route`/`route.fulfill` с задержкой
     ЗДЕСЬ НЕ ГОДИТСЯ (проверено — такой тест проходит одинаково что с
-    починкой, что без неё, ничего не ловит) — гонку даёт только подмена
+    починкой, что без нее, ничего не ловит) — гонку дает только подмена
     `window.fetch` ДО загрузки страницы (`add_init_script`), чтобы
     задержался ЕДИНСТВЕННЫЙ, естественно запущенный самим рендером вызов,
-    без второго, наведённого вручную (второй вызов сам путает картину —
+    без второго, наведенного вручную (второй вызов сам путает картину —
     его собственный поздний ответ обгоняет первый, и узел оказывается
-    отсоединён ещё до перехода на другой экран)."""
+    отсоединен еще до перехода на другой экран)."""
     ctx = browser.new_context()
     try:
         ctx.add_init_script("""
@@ -869,7 +869,7 @@ def test_follow_buttons_exist_on_company_and_industry_pages(browser, base_url):
 
     До этого дня подписка на компанию была сердечком в каталоге, которое
     писало только в localStorage и обещало «список — в кабинете», хотя
-    кабинет о нём не знал; на самом профиле компании кнопки не было вовсе, а
+    кабинет о нем не знал; на самом профиле компании кнопки не было вовсе, а
     подписка на отрасль пряталась в ленте сделок под названием «Сохранить
     подборку». Проверяем гостя (без входа): кнопки есть, нажимаются, честно
     зовут войти и ничего не ломают."""
@@ -901,7 +901,7 @@ def test_follow_buttons_exist_on_company_and_industry_pages(browser, base_url):
 
 def test_firm_and_company_deal_lists_filter_by_year_and_industry(browser, base_url):
     """Фильтр года и отрасли над списком сделок консультанта и компании
-    (предложено в «Десяти маршрутах», сделано 24 сентября 2026). Берём самые
+    (предложено в «Десяти маршрутах», сделано 24 сентября 2026). Берем самые
     длинные списки из живой базы, выбираем первый год, затем первую отрасль:
     видимых строк становится меньше, подпись называет, сколько из скольких, и
     экран не уезжает вбок на телефоне."""
@@ -950,10 +950,10 @@ def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url)
 
     Первая версия показывала все пятнадцать показателей сразу, и владелец
     сказал прямо: «слишком много показателей и выглядит как мусор»
-    (19 сентября 2026). Поэтому тест проверяет ОБА состояния: свёрнутое
+    (19 сентября 2026). Поэтому тест проверяет ОБА состояния: свернутое
     (видно только то, чем компанию описывают в одной фразе) и раскрытое
     (ничего не потеряно). Ответ ФНС подменяется route-перехватом: локальная
-    база пуста, отчётность живёт на проде."""
+    база пуста, отчетность живет на проде."""
     import company_finance
     report = {
         "year": 2024, "revenue_rub": 10_000_000_000, "gross_profit_rub": 3_000_000_000,
@@ -964,7 +964,7 @@ def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url)
         "borrowings_rub": 6_000_000_000, "cash_rub": 1_000_000_000,
         "inventory_rub": 2_000_000_000, "receivables_rub": 3_000_000_000,
         "payables_rub": 1_500_000_000,
-        "full_lines": [{"title": "Отчёт о финансовых результатах", "rows": [
+        "full_lines": [{"title": "Отчет о финансовых результатах", "rows": [
             {"code": "2330", "name": "Проценты к уплате", "value_rub": 500_000_000},
             {"code": "2120", "name": "Себестоимость продаж", "value_rub": 7_000_000_000},
             {"code": "4100", "name": "Сальдо от текущих операций", "value_rub": 900_000_000}]}],
@@ -995,12 +995,12 @@ def test_company_finance_shows_derived_metrics_at_every_width(browser, base_url)
             pg.click('[data-fnstab="finance"]')
             pg.wait_for_timeout(300)
             # `.k` и заголовки групп рисуются капсом через text-transform, а
-            # innerText отдаёт текст ПОСЛЕ преобразований CSS — сравниваем без
-            # учёта регистра (тот же приём, что в тесте про .tag выше).
+            # innerText отдает текст ПОСЛЕ преобразований CSS — сравниваем без
+            # учета регистра (тот же прием, что в тесте про .tag выше).
             shown = lambda: pg.eval_on_selector_all(
                 ".fns-derived:not([hidden]) .d .k, .fns-derived-rest:not([hidden]) .d .k",
                 "els => els.filter(e => e.offsetParent !== null).map(e => e.textContent.toLowerCase())")
-            # Свёрнуто: наверху главное, второй ряд не показан.
+            # Свернуто: наверху главное, второй ряд не показан.
             visible = shown()
             assert "чистый долг" in visible, visible
             assert "оборотный капитал" in visible, visible
@@ -1036,10 +1036,10 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
     route-перехватом. Так тест не зависит ни от содержимого живой базы, ни
     от того, синхронизировалась ли уже конкретная компания с ФНС на проде.
 
-    Отчёт заодно несёт operating_profit_rub — проверяем, что рядом со
+    Отчет заодно несет operating_profit_rub — проверяем, что рядом со
     строкой по выручке появляется и вторая, по операционной прибыли
     (ближе к привычному EV/EBITDA, deal_multiples.py), а не только одна
-    из двух — это два независимых расчёта на одной и той же карточке."""
+    из двух — это два независимых расчета на одной и той же карточке."""
     ctx = browser.new_context()
     try:
         def fake_fns(route):
@@ -1066,7 +1066,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         deal = {"type": "M&A", "status": "Закрыта", "date": "2024-06-01", "sum": "1 000 млн ₽",
                 "target": "zzz-mult-target", "buyer": "b1", "seller": "Иван Иванов",
                 "eco": {"share": "Куплено 100% долей"}}
-        # Мультипликатор на карточке — только по фактам, подтверждённым двумя
+        # Мультипликатор на карточке — только по фактам, подтвержденным двумя
         # чтениями (facts.admitted.multiple_text); синтетической сделке они
         # выставляются так, как их записал бы facts_confirm.py.
         ctx_f = {"registry": {"zzz-mult-target": {"company_id": "zzz-mult-target", "decision": "confirmed", "inn": "7700000321"}}, "lot_ids": set()}
@@ -1083,16 +1083,16 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         pg.wait_for_timeout(600)
         body = pg.inner_text("#deal-fns")
         # .tag рендерится заглавными (text-transform:uppercase), а innerText
-        # отдаёт текст ПОСЛЕ CSS-преобразований — сравниваем без учёта регистра.
+        # отдает текст ПОСЛЕ CSS-преобразований — сравниваем без учета регистра.
         # «EV» на карточке больше не обещается: считается цена пакета к выручке,
         # без долга — и подпись говорит это прямо (третий разбор рецензента)
         # С 19 октября 2026 мультипликаторы сделки живут в отдельном блоке
-        # «Мультипликаторы сделки — оценка» (#deal-mult, тот же расчёт, что в
+        # «Мультипликаторы сделки — оценка» (#deal-mult, тот же расчет, что в
         # таблице «Аналитики», — test_sector_multiples_table_on_analytics_and_deal_card);
-        # финансовый контекст показывает отчётность и не повторяет их.
+        # финансовый контекст показывает отчетность и не повторяет их.
         assert "2023" in body and "выручка" in body.lower()
         assert "цена ÷ выручка" not in body.lower() and "цена ÷ операционная прибыль" not in body.lower()
-        # клиентская копия расчёта по-прежнему жива и считает то же самое
+        # клиентская копия расчета по-прежнему жива и считает то же самое
         line = pg.evaluate("dealMultipleLine(%s, 'zzz-mult-target', 500000000, 2023)" % json.dumps(deal))
         assert line and line["multiple"] == 2
         assert not errors
@@ -1104,7 +1104,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
 
 
 def test_pdf_button_note_does_not_get_stuck_on_login_prompt(page, base_url):
-    # Кнопка ставила "Готовим PDF…" ДО запроса, а на 401 (гость не вошёл)
+    # Кнопка ставила "Готовим PDF…" ДО запроса, а на 401 (гость не вошел)
     # уводила во всплывающий тост и никогда не убирала эту строку — рядом с
     # кнопками навсегда оставалось "Готовим PDF…", хотя ничего не готовилось.
     # С 5 сентября 2026 гость получает PDF без входа (DEAL_EXPORT_GUESTS), и
@@ -1137,11 +1137,11 @@ def test_pre_2022_deals_hidden_from_site(page, base_url):
 
 def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
     # На телефоне «.deal-meta» — flex с gap:14px (сумма и отраслевая метка в
-    # ряд). Пустой блок суммы у сделки без суммы всё равно создавал зазор, и
+    # ряд). Пустой блок суммы у сделки без суммы все равно создавал зазор, и
     # метка отрасли съезжала на 14px правее заголовка и статуса — владелец
     # заметил это на карточке «ЗПИФ Прайм Первый» (химия и удобрения, суммы
     # нет). Блок суммы теперь не рисуется вовсе, если суммы нет. Ищем сделку
-    # без суммы в живых данных, а не жёстко зашитый id — обогащение может
+    # без суммы в живых данных, а не жестко зашитый id — обогащение может
     # когда-нибудь заполнить сумму именно у примера из бага.
     # Смена хеша — переход внутри уже загруженной страницы (SPA), а не
     # перезагрузка: `visit()` не сбрасывает JS-переменные фильтров ленты
@@ -1157,8 +1157,8 @@ def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
     assert did, "в базе не нашлось сделки без суммы — пример для теста нужно обновить"
     page.set_viewport_size({"width": 390, "height": 900})
     # Карточка без суммы может оказаться за первой страницей ленты — вместо
-    # догадок о сортировке и кликов «показать ещё» просто просим ленту
-    # отрисовать всё сразу, сбросив попутно все фильтры.
+    # догадок о сортировке и кликов «показать еще» просто просим ленту
+    # отрисовать все сразу, сбросив попутно все фильтры.
     page.evaluate("""() => {
         feedQuery = ""; filterInd = "Все"; feedYear = "Все"; filterTheme = "Все";
         filterFirm = "Все"; filterAdvisorGroup = "Все"; onlyFull = false; feedPage = 999;
@@ -1171,7 +1171,7 @@ def test_feed_card_without_sum_keeps_industry_tag_aligned(page, base_url):
     # данных», чтобы подпись не исчезала у части строк (Ксюша: «где-то
     # подпись есть, где-то нет»). 3 октября 2026 владелец решил иначе: «„Нет
     # данных“ писать не надо, пусть просто не будет цены» — слово читалось как
-    # упрёк. Блока нет; на телефоне метка отрасли встаёт в начало строки, без
+    # упрек. Блока нет; на телефоне метка отрасли встает в начало строки, без
     # переполнения; на компьютере колонка меток у всех строк одна.
     assert row.locator(".deal-sum").count() == 0
     assert "Нет данных" not in row.inner_text()
@@ -1198,24 +1198,24 @@ def test_deal_plate_hides_asset_text_that_admits_there_is_no_name(page, base_url
 
     Замена инварианта, а не отмена (9 сентября 2026). До этого дня ячейку
     гасило правило новизны (Этап 9, П6-9): предмет, повторяющий заголовок, не
-    показывался. Владелец нашёл дважды подряд, что это неверно — «это уже не
+    показывался. Владелец нашел дважды подряд, что это неверно — «это уже не
     первый раз, когда предмет не показан в структуре, это почему вообще?»: в
-    схеме из трёх клеток повтор заголовка не шум, а подпись к стрелке, и
+    схеме из трех клеток повтор заголовка не шум, а подпись к стрелке, и
     пустая середина читается как «мы не знаем, что купили». Замер по 1362
     покупкам и торгам: правило новизны называло предмет у 1123, правило
     «предмет назван» — у 1200.
 
-    Эта карточка — единственная из 1362, где ячейка остаётся пустой ЧЕСТНО:
+    Эта карточка — единственная из 1362, где ячейка остается пустой ЧЕСТНО:
     в `asset` дословно стоит «неназванная брокерская компания», то есть сам
     источник говорит, что имени нет. Проверка сохранена именно ради этого
-    случая: сплошное «показывать всё, что есть» напечатало бы признание в
+    случая: сплошное «показывать все, что есть» напечатало бы признание в
     ячейку как имя.
     """
     visit(page, base_url, "#/deal/g6bf41023")
     plate = page.locator(".deal-plate")
     assert plate.is_visible(), "плашка должна остаться — покупатель известен"
     assert plate.locator(".dp-asset").count() == 0, \
-        "текст сам признаётся, что имени нет, — в ячейку он не идёт"
+        "текст сам признается, что имени нет, — в ячейку он не идет"
     # Кампания #122 (13 сентября) связала покупателя с профилем компании —
     # раньше текст ««Алор брокер»» стоял НЕ кликабельным (родня уже
     # записанного урока про PT/CyberOK, «почему не кликабелен покупатель»),
@@ -1250,7 +1250,7 @@ def test_deal_plate_names_the_asset_even_when_it_repeats_the_headline(page, base
 def test_deal_plate_shows_the_stake_next_to_the_target(page, base_url):
     """13 октября 2026, «Медси» (g4d7b2e19): схема показывала «Медси» без
     4,85%, хотя доля названа в предмете — короткой записи доли не было, а
-    факт доли схема не читала. Партнёр владельца просил процент в предмете."""
+    факт доли схема не читала. Партнер владельца просил процент в предмете."""
     visit(page, base_url, "#/deal/g4d7b2e19")
     asset = page.locator(".deal-plate .dp-asset").inner_text()
     assert "Медси" in asset and "4,85%" in asset, asset
@@ -1258,7 +1258,7 @@ def test_deal_plate_shows_the_stake_next_to_the_target(page, base_url):
 
 def test_execburo_in_executive_search_tab_and_its_profile(page, base_url):
     """13 октября 2026: Execburo подписали соглашение — фирменная карточка во
-    вкладке Executive Search ведёт на профиль с услугами, этапами и свежими
+    вкладке Executive Search ведет на профиль с услугами, этапами и свежими
     сделками в отраслях фирмы."""
     visit(page, base_url, "#/advisors")
     page.click('[data-t="exec"]')
@@ -1289,8 +1289,8 @@ def test_account_form_survives_late_base_load(browser, base_url):
     стирало то, что человек уже успел ввести. Внутри SPA переход на «Подписки»
     — смена хеша, а не перезагрузка страницы: `loadBulkDeals()`, запущенный
     ПЕРВЫМ заходом на сайт, продолжает висеть в фоне, и его отложенный
-    `route()` перерисовывал форму, пока человек её заполнял. Страница подписок
-    не читает DEALS/COMPANIES вообще — перерисовывать её после прихода базы
+    `route()` перерисовывал форму, пока человек ее заполнял. Страница подписок
+    не читает DEALS/COMPANIES вообще — перерисовывать ее после прихода базы
     не было смысла, только риск. Держим domain-файл искусственно долго и
     переходим на «Подписки» сменой хеша (`location.hash=`, как в реальном
     интерфейсе), а не повторным `goto` — иначе тест перезапускает
@@ -1324,7 +1324,7 @@ def test_account_form_survives_late_base_load(browser, base_url):
             return r.ok ? await r.json() : null;
         }""")
         assert rows and any(x.get("keyword") == "гонка" for x in rows), \
-            f"подписка не сохранилась — форму стёрло перерисовкой после прихода базы: {rows}"
+            f"подписка не сохранилась — форму стерло перерисовкой после прихода базы: {rows}"
     finally:
         ctx.close()
 
@@ -1334,7 +1334,7 @@ def test_search_ignores_dots_and_hyphens_inside_names(base_url, browser):
     Замер до правки: у 367 карточек название в заголовке содержит точку или
     дефис внутри, а индекс сравнивался дословно — «авто ру», «авто-ру» и
     «ттехнологии» давали ПУСТО, а «т технологии» находило чужую сделку.
-    Проверяем и обратное: поиск не должен начать находить всё подряд.
+    Проверяем и обратное: поиск не должен начать находить все подряд.
     Чистый контекст: фильтры ленты живут в глобальных переменных и переживают
     смену хеша, поэтому в общем прогоне состояние пришло бы от прошлого теста."""
     ctx = browser.new_context()
@@ -1352,17 +1352,17 @@ def test_search_ignores_dots_and_hyphens_inside_names(base_url, browser):
         for q in ("авто.ру", "авто ру", "авто-ру", "т-технологии", "ттехнологии", "т технологии"):
             text = search(q)
             assert "Авто.ру" in text and "Т-Технологии" in text, \
-                f"запрос «{q}» не нашёл сделку Т-Технологии/Авто.ру"
+                f"запрос «{q}» не нашел сделку Т-Технологии/Авто.ру"
 
         # Продавец и предмет записаны текстом, а не ссылкой на профиль: без них
         # в индексе по продавцу не находились 254 карточки из 653.
         assert "Flowwow" in search("Владельцы Flowwow"), "по продавцу текстом сделка не находится"
 
         # Обратная проверка: нормализация не должна стирать различия между
-        # разными компаниями — иначе «находит всё» неотличимо от «ищет хорошо».
+        # разными компаниями — иначе «находит все» неотличимо от «ищет хорошо».
         other = search("сбербанк")
         assert "Авто.ру" not in other, "поиск стал находить нерелевантные сделки"
-        assert len(other.strip()) > 0, "запрос «сбербанк» не нашёл вообще ничего — сломан сам поиск"
+        assert len(other.strip()) > 0, "запрос «сбербанк» не нашел вообще ничего — сломан сам поиск"
     finally:
         ctx.close()
 
@@ -1393,7 +1393,7 @@ def test_failed_base_load_shows_retry_instead_of_fake_small_numbers(browser, bas
     настоящих ~1300, без единого признака, что это не полная база. Теперь
     неудача повторяется несколько раз, а если так и не удалось — честно
     показывает «Не удалось загрузить» вместо вымышленных маленьких чисел.
-    Отдельный чистый контекст: тест рвёт сеть и не должен задеть общий `page`,
+    Отдельный чистый контекст: тест рвет сеть и не должен задеть общий `page`,
     которым пользуются остальные тесты файла."""
     ctx = browser.new_context()
     try:
@@ -1454,7 +1454,7 @@ def test_no_undefined_on_screen_for_cards_without_status(page, base_url):
     и в строке ленты, и в шапке карточки, и в тексте кнопки «поделиться», и
     отдельным столбцом «undefined» в аналитике. Дефект видно только глазами
     или такой проверкой: экран не пуст, ошибок в консоли нет, разметка
-    валидна — всё молчит.
+    валидна — все молчит.
     """
     visit(page, base_url, "#/")
     ids = page.evaluate("() => DEALS.filter(d => !d.status).slice(0, 6).map(d => d.id)")
@@ -1469,7 +1469,7 @@ def test_regulatory_analyzer_is_hidden(page, base_url):
     """Анализатор регуляторики спрятан с сайта (просьба владельца 10 августа:
 
     «он пока бесполезный») — ни кнопки на «Обзоре», ни панели в «Юристе» быть
-    не должно. Код панели (`regPanelHtml`) не удалён, только отключены оба
+    не должно. Код панели (`regPanelHtml`) не удален, только отключены оба
     места вызова — так что тест проверяет именно ОТСУТСТВИЕ на экране, а не
     отсутствие функции в файле.
     """
@@ -1477,13 +1477,13 @@ def test_regulatory_analyzer_is_hidden(page, base_url):
     any_id = page.evaluate("() => DEALS[0] && DEALS[0].id")
     assert any_id, "в базе нет карточек для проверки"
     visit(page, base_url, "#/deal/" + any_id)
-    assert page.locator("[data-reg-open]").count() == 0, "кнопка анализатора всё ещё на экране"
+    assert page.locator("[data-reg-open]").count() == 0, "кнопка анализатора все еще на экране"
     # С 8 сентября 2026 кнопка «Юрист» есть не у каждой карточки (линза
     # открывается только согласованиями, условиями и консультантами) — нет
     # кнопки, нет и панели; есть кнопка — заходим и проверяем.
     page.evaluate("(() => { const b = document.querySelector('[data-l=\"law\"]'); if (b) b.click(); })()")
     page.wait_for_timeout(400)
-    assert page.locator("#reg-panel").count() == 0, "панель анализатора всё ещё на экране"
+    assert page.locator("#reg-panel").count() == 0, "панель анализатора все еще на экране"
     assert not page.crashes, f"падения на карточке: {page.crashes[:3]}"
 
 
@@ -1525,7 +1525,7 @@ def test_analytics_shows_sum_dynamics_and_advisor_league(page, base_url):
     """Этап 16, П3: «сколько сделок» и «на сколько» — разные графики.
 
     Карточка сумм по периодам разворачивается в кварталы при выборе года
-    (та же логика, что у графика счётчика сделок), а «Консультанты»
+    (та же логика, что у графика счетчика сделок), а «Консультанты»
     называют знаменатель «где консультант известен», а не общее число сделок.
     """
     visit(page, base_url, "#/analytics")
@@ -1559,7 +1559,7 @@ def test_analytics_names_the_set_it_counts(page, base_url):
 
     В файле 1538 карточек, а на сайте показаны только сделки с 2022 года —
     191 запись скрыта. Подпись «вся база» над отфильтрованным числом была бы
-    арифметически верной и всё равно врала.
+    арифметически верной и все равно врала.
     """
     visit(page, base_url, "#/analytics")
     # Лоты на торгах без покупателя в показатели не входят (3 октября 2026).
@@ -1567,8 +1567,8 @@ def test_analytics_names_the_set_it_counts(page, base_url):
     # про лоты (владелец: «это никому не интересно»); посчитанное множество
     # называет строка «Всего: N» у фильтров.
     shown = page.evaluate("() => DEALS.filter(d => !isListing(d)).length")
-    # Шапка «Аналитики» с 6 августа — тёмная hero-полоса (.page-hero),
-    # а не .sec-head: чередование тёмных и светлых страниц.
+    # Шапка «Аналитики» с 6 августа — темная hero-полоса (.page-hero),
+    # а не .sec-head: чередование темных и светлых страниц.
     head = page.inner_text(".page-hero")
     body = page.inner_text("#app")
     assert "Всего: %d " % shown in body, "у фильтров не названо посчитанное число"
@@ -1586,7 +1586,7 @@ def test_company_sector_opens_the_industry_page(page, base_url):
     visit(page, base_url, "#/companies")
     page.locator("[data-co-ind]").first.click()
     page.wait_for_timeout(900)
-    assert "#/industry/" in page.url, f"клик по отрасли никуда не увёл: {page.url}"
+    assert "#/industry/" in page.url, f"клик по отрасли никуда не увел: {page.url}"
     assert not page.crashes, page.crashes[:3]
     assert len(page.inner_text("#app").strip()) > 120, "страница отрасли пуста"
 
@@ -1639,8 +1639,8 @@ def test_group_members_show_finance_chip_and_honest_disclaimer(browser, base_url
     `gf9a640d2` — уже настоящая связь `holding.id` в базе), а показывать
     рядом чип с последней выручкой, если данные ФНС подтверждены и не
     устарели, и честную строку про то, что это НЕ консолидированная
-    отчётность. Живые данные Башнефти сейчас устарели (штамп 2020 года,
-    /api/companies/.../fns их сам не отдаёт — см. `stale_latest_year`),
+    отчетность. Живые данные Башнефти сейчас устарели (штамп 2020 года,
+    /api/companies/.../fns их сам не отдает — см. `stale_latest_year`),
     поэтому сеть подменяется на свежий ответ: тест должен проверять код
     рендера чипа, а не то, успела ли ФНС обновить конкретное юрлицо."""
     ctx = browser.new_context()
@@ -1666,7 +1666,7 @@ def test_group_members_show_finance_chip_and_honest_disclaimer(browser, base_url
         if not _company_links_shown(pg):
             pytest.skip(LINKS_OFF)
         body = pg.inner_text("#app")
-        assert "консолидированная отчётность группы обычно не раскрывается" in body.lower()
+        assert "консолидированная отчетность группы обычно не раскрывается" in body.lower()
         assert "700" in body and ("млрд" in body.lower())
         assert not errors, "pageerror при рендере чипов группы: %s" % errors
         assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
@@ -1685,17 +1685,17 @@ def test_group_badge_appears_in_catalog_for_operating_groups(page, base_url):
         page.fill("#coq", "МТС")
         page.wait_for_timeout(600)
         cards = page.locator(".co-card")
-        assert cards.count() >= 1, "поиск «МТС» не нашёл карточку в каталоге"
+        assert cards.count() >= 1, "поиск «МТС» не нашел карточку в каталоге"
         # В КАТАЛОГЕ бейдж короче — «Группа». Полное «Группа компаний» занимало
         # 145px из ~200px полосы и не оставляло места тегу отрасли: «ИТ и
         # интернет» обрезалось на последней букве (замер 19 сентября 2026).
-        # На самом профиле компании текст остаётся полным — см. тесты ниже.
+        # На самом профиле компании текст остается полным — см. тесты ниже.
         assert "группа" in cards.first.inner_text().lower(), \
             "бейдж группы не показан в каталоге у профиля с group:true"
     finally:
         # `coQuery` — глобальная JS-переменная, не сбрасывается переходом по
         # хешу (см. CLAUDE.md, «переход по хешу — не перезагрузка страницы
-        # для теста»): не очистив её, следующий тест каталога в том же `page`
+        # для теста»): не очистив ее, следующий тест каталога в том же `page`
         # унаследует фильтр «МТС» и увидит не всю базу компаний.
         page.fill("#coq", "")
         page.wait_for_timeout(600)
@@ -1729,7 +1729,7 @@ def test_owned_company_shows_investor_in_ownership_block(page, base_url):
 
 def test_group_badge_shown_even_without_current_dependent_profiles(page, base_url):
     """Яндекс — общеизвестная операционная группа, но сегодня в базе нет ни
-    одного профиля, чей `holding.id` указывал бы на неё, — обратное правило
+    одного профиля, чей `holding.id` указывал бы на нее, — обратное правило
     целостности не требуется (см. docstring pipeline/mark_operating_groups.py
     и test_data.py::test_holding_target_is_always_flagged_as_group). Бейдж
     обязан быть виден, а пустой блок «В группу входит: 0» — нет: родня уже
@@ -1742,14 +1742,14 @@ def test_group_badge_shown_even_without_current_dependent_profiles(page, base_ur
 
 
 def test_group_schema_button_is_gone_everywhere(page, base_url):
-    """Этап 8: оба партнёра вживую увидели схему («Схема бесполезная
+    """Этап 8: оба партнера вживую увидели схему («Схема бесполезная
     конечно… собирать группу по нашей базе сделок здесь точно не
     работает — либо брать со всего интернета, включая ЕГРЮЛ, либо не
-    добавлять вообще на этом этапе») и попросили её убрать. Кнопка снята
-    с экрана на всех профилях, включая те, что раньше её показывали
-    (Ростелеком — ≥2 holding-детей, Альфа-Банк — портфель из трёх). Текст
+    добавлять вообще на этом этапе») и попросили ее убрать. Кнопка снята
+    с экрана на всех профилях, включая те, что раньше ее показывали
+    (Ростелеком — ≥2 holding-детей, Альфа-Банк — портфель из трех). Текст
     блока «Структура и связи» (в т. ч. строки «В группу входит»/
-    «Портфель») остаётся — просьба была именно про схему, не про сам
+    «Портфель») остается — просьба была именно про схему, не про сам
     блок. `groupSchemaSvg()` в коде не удалена — вернуть кнопку, когда
     состав групп будет собираться из настоящих источников (ЕГРЮЛ и т. п.),
     не из id-ссылок внутри своей базы."""
@@ -1890,7 +1890,7 @@ def test_participants_without_any_known_share_get_one_note_not_n_chips(browser, 
 
 
 def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
-    """Этап 6, П4-6: банк не сдаёт коммерческую БФО в общем порядке — вместо
+    """Этап 6, П4-6: банк не сдает коммерческую БФО в общем порядке — вместо
     пустой сетки ФНС на его странице показывается то, что банк САМ публикует
     перед ЦБ (форма 806/102). Живой Сбербанк (g28ff15bb) уже проверен вручную
     (скриншот 390px) — здесь сеть подменена, чтобы тест не зависел от того,
@@ -1902,7 +1902,7 @@ def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({
                 "available": False, "hidden": False, "company_id": "g28ff15bb",
                 "company_name": "Сбербанк", "configured": True, "category": "bank",
-                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                "reason": "Кредитная организация — бухгалтерскую отчетность в общем порядке "
                           "банки не сдают, только по отдельной форме перед Банком России.",
             }))
 
@@ -1921,7 +1921,7 @@ def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
         # Этап 8, П2-8: mountCompanyFns грузит оба файла параллельно —
         # без явного мока полная таблица тянула бы реальный
         # bank_full_balance.json с диска и делала бы этот тест зависимым
-        # от того, что в нём лежит сегодня; здесь проверяется только сводка.
+        # от того, что в нем лежит сегодня; здесь проверяется только сводка.
         ctx.route("**/static/data/bank_full_balance.json*",
                    lambda route: route.fulfill(status=200, content_type="application/json", body="{}"))
         pg = ctx.new_page()
@@ -1946,8 +1946,8 @@ def test_bank_profile_shows_cbr_block_instead_of_fns_grid(browser, base_url):
 
 def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
     """Этап 6, П4-6: банк известен (`category:"bank"`), но данных ЦБ пока
-    нет (`bank_finance.json` не несёт этого company_id — например, свежая
-    запись в реестре, синхронизация ещё не прогонялась) — честная короткая
+    нет (`bank_finance.json` не несет этого company_id — например, свежая
+    запись в реестре, синхронизация еще не прогонялась) — честная короткая
     строка вместо пустой сетки метрик с прочерками."""
     ctx = browser.new_context()
     try:
@@ -1955,7 +1955,7 @@ def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
             route.fulfill(status=200, content_type="application/json", body=json.dumps({
                 "available": False, "hidden": False, "company_id": "g28ff15bb",
                 "company_name": "Сбербанк", "configured": True, "category": "bank",
-                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                "reason": "Кредитная организация — бухгалтерскую отчетность в общем порядке "
                           "банки не сдают, только по отдельной форме перед Банком России.",
             }))
 
@@ -1979,8 +1979,8 @@ def test_bank_profile_without_cbr_data_shows_honest_reason(browser, base_url):
 
 
 def test_bank_profile_shows_full_balance_sheet_below_summary_tiles(browser, base_url):
-    """Этап 8, П2-8: партнёр вживую попросил не только сводные плитки, а
-    полный баланс («Активы и пассивы, 1-2 странички… ОСВ, отчёт о финансовых
+    """Этап 8, П2-8: партнер вживую попросил не только сводные плитки, а
+    полный баланс («Активы и пассивы, 1-2 странички… ОСВ, отчет о финансовых
     результатах не надо»). Проверяем все три раздела на экране, отрицательное
     значение со знаком минус (учит регэксп с `-`), пустую строку без данных
     (не показана вовсе — «Инвестиции в дочерние…» у Сбербанка) и отсутствие
@@ -1991,7 +1991,7 @@ def test_bank_profile_shows_full_balance_sheet_below_summary_tiles(browser, base
             route.fulfill(status=200, content_type="application/json", body=json.dumps({
                 "available": False, "hidden": False, "company_id": "g28ff15bb",
                 "company_name": "Сбербанк", "configured": True, "category": "bank",
-                "reason": "Кредитная организация — бухгалтерскую отчётность в общем порядке "
+                "reason": "Кредитная организация — бухгалтерскую отчетность в общем порядке "
                           "банки не сдают, только по отдельной форме перед Банком России.",
             }))
 
@@ -2058,7 +2058,7 @@ def test_bank_profile_shows_full_balance_sheet_below_summary_tiles(browser, base
 def test_company_profile_full_bfo_toggle_shows_and_hides_full_statement(browser, base_url):
     """Этап 8, П3-8: та же просьба, что у банков, только для обычных
     компаний — «не только эти показатели, а все из БФО». Кнопка «Показать
-    полную БФО» скрыта по умолчанию (родня уже применённому правилу
+    полную БФО» скрыта по умолчанию (родня уже примененному правилу
     «скрытые состояния проверяются отдельно»), по клику рисует секции;
     длинное название статьи и отрицательное значение (реальные из формы
     ОДДС/финрезультатов) не должны переполнять экран на 360px."""
@@ -2077,7 +2077,7 @@ def test_company_profile_full_bfo_toggle_shows_and_hides_full_statement(browser,
                                 {"code": "1110", "name": "Нематериальные активы", "value_rub": 7_666_406_000},
                                 {"code": "1100", "name": "Итого по разделу I", "value_rub": 197_597_977_000},
                             ]},
-                            {"title": "Отчёт о финансовых результатах", "rows": [
+                            {"title": "Отчет о финансовых результатах", "rows": [
                                 {"code": "2110", "name": "Выручка", "value_rub": 544_580_000_000},
                                 {"code": "2400", "name": "Чистая прибыль (убыток)", "value_rub": -11_680_000_000},
                             ]},
@@ -2129,7 +2129,7 @@ def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
     """«С-hi», «К-hi», «mid» — наша внутренняя разметка, а не факт о фирме.
 
     Она нигде не подтверждена источником и делит каталог по признаку, которого
-    читатель не выбирал. Раз её сняли с экрана, её не должно остаться ни в
+    читатель не выбирал. Раз ее сняли с экрана, ее не должно остаться ни в
     карточках, ни в фильтрах, ни на странице фирмы.
     """
     visit(page, base_url, "#/advisors")
@@ -2145,7 +2145,7 @@ def test_advisor_catalogue_shows_no_practice_categories(page, base_url):
 def test_advisors_page_has_a_search(page, base_url):
     """Владелец 6 октября 2026: «строки поиска в консультантах почему-то нет,
     есть только в компаниях и в сделках». Поиск по названию фирмы в обоих
-    списках: кириллица находит латинское и наоборот, подсказка ведёт на
+    списках: кириллица находит латинское и наоборот, подсказка ведет на
     профиль, а если фирма в другой вкладке — кнопка переводит туда."""
     visit(page, base_url, "#/advisors")
     assert page.locator("#advq").count() == 1, "на странице консультантов нет поиска"
@@ -2170,10 +2170,10 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     """Владелец 6 октября 2026: Strategy Partners не было в списке, хотя
     фирма сопровождала сделку по нашей базе («Форштадт»). Карточка — обычная,
     как у всех: фирменная (логотип, цвета, шрифт, место наверху) выключена тем
-    же днём — «мы ещё с ними не договорились». Готовое оформление лежит в
+    же днем — «мы еще с ними не договорились». Готовое оформление лежит в
     brandDraft и проверяется правилом BRAND_TOKENS, чтобы его можно было
     включить одной правкой."""
-    # страница одна на сессию, и переход по хешу её не перезагружает:
+    # страница одна на сессию, и переход по хешу ее не перезагружает:
     # вкладку и запрос прошлого теста сбрасываем сами
     visit(page, base_url, "#/advisors")
     page.evaluate("advType='legal';advQuery='';advInd='Все';firmSort='alpha';renderAdvisors()")
@@ -2210,7 +2210,7 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
 def test_wordmark_returns_to_the_top(page, base_url):
     """На главной адрес от клика по логотипу не меняется — `hashchange` не
     срабатывает, `route()` не вызывается, и без отдельного обработчика кнопка
-    выглядела мёртвой: человек уехал вниз по ленте и остался на месте."""
+    выглядела мертвой: человек уехал вниз по ленте и остался на месте."""
     visit(page, base_url, "#/")
     page.evaluate("window.scrollTo(0, 3000)")
     page.wait_for_timeout(300)
@@ -2249,13 +2249,13 @@ def test_analytics_deal_type_filter(page, base_url):
 
 
 def test_year_only_date_is_never_shown_as_the_first_of_january(page, base_url):
-    """У 238 карточек день неизвестен, и врать о нём нельзя.
+    """У 238 карточек день неизвестен, и врать о нем нельзя.
 
     Раньше там стояла заглушка «1 января»: сайт показывал день, которого не
     знал, лента ставила сделку первым числом, а помесячный график рисовал
     январский всплеск. Теперь в базе лежит «2023», и это надо ПОКАЗАТЬ как
-    «2023 год» — `new Date("2023")` молча даёт первое января, поэтому дефект
-    вернётся беззвучно, если формат перестанут ловить до разбора.
+    «2023 год» — `new Date("2023")` молча дает первое января, поэтому дефект
+    вернется беззвучно, если формат перестанут ловить до разбора.
     """
     visit(page, base_url, "#/")
     ids = page.evaluate("() => DEALS.filter(d => /^\\d{4}$/.test(d.date)).map(d => d.id)")
@@ -2339,7 +2339,7 @@ def test_status_plaque_is_colour_coded_by_stage(page, base_url):
         assert deal_id, f"нет карточки со статусом класса {want_class!r} — проверять не на чем"
         visit(page, base_url, f"#/deal/{deal_id}")
         cls = page.evaluate("() => document.querySelector('.d-head .status')?.className")
-        assert cls and want_class in cls.split(), f"{deal_id}: плашка не несёт класс {want_class!r} ({cls!r})"
+        assert cls and want_class in cls.split(), f"{deal_id}: плашка не несет класс {want_class!r} ({cls!r})"
         colour = page.evaluate(
             "() => getComputedStyle(document.querySelector('.d-head .status')).borderColor")
         assert colour == colour_hex, f"{deal_id}: плашка {want_class!r} цвета {colour}, а не {colour_hex}"
@@ -2357,7 +2357,7 @@ def test_milestone_enriches_the_card_and_does_not_add_a_feed_row(page, base_url)
     сообщением в канале — потерять способ узнать о закрытии мы не хотели,
     хотели убрать удвоение в ленте.
 
-    Счётчик сделок этап не трогал и раньше, и это по-прежнему важно: иначе
+    Счетчик сделок этап не трогал и раньше, и это по-прежнему важно: иначе
     одна сделка с двумя этапами задвоила бы себя на главной.
     """
     visit(page, base_url, "#/")
@@ -2372,7 +2372,7 @@ def test_milestone_enriches_the_card_and_does_not_add_a_feed_row(page, base_url)
         return d.id;
     }""", marker)
     after = page.evaluate("() => TOTAL_DEALS()")
-    assert after == before, f"этап изменил счётчик сделок: {before} -> {after}"
+    assert after == before, f"этап изменил счетчик сделок: {before} -> {after}"
 
     page.crashes.clear()
     page.evaluate("(marker) => { feedQuery = marker; feedPage = 1; renderFeedList(); }", marker)
@@ -2391,8 +2391,8 @@ def test_milestone_enriches_the_card_and_does_not_add_a_feed_row(page, base_url)
 
     # Проверяем отсутствие СТРОКИ, а не текста: пустое состояние ленты само
     # повторяет запрос («по запросу „…" ничего не нашлось»), и поиск маркера
-    # в тексте нашёл бы это эхо, а не строку.
-    assert rows == 0, f"этап всё ещё рисуется строкой ленты: {rows} шт."
+    # в тексте нашел бы это эхо, а не строку.
+    assert rows == 0, f"этап все еще рисуется строкой ленты: {rows} шт."
     assert "ничего" in body.lower() or "снимите часть условий" in body.lower(), body[:200]
     assert "ВЕХА" not in body.upper(), "слово нашей кухни вернулось на экран"
     assert not crashes, crashes[:3]
@@ -2405,7 +2405,7 @@ def test_milestone_enriches_the_card_and_does_not_add_a_feed_row(page, base_url)
         if(!d) return;
         d.events = Array.isArray(d.events) ? d.events : [];
         if(!d.events.some(e => e.id && e.id.endsWith("-card-test")))
-            // На карточке этап берётся по `title` (см. dealEvents), в ленте
+            // На карточке этап берется по `title` (см. dealEvents), в ленте
             // брался по `headline` — разные поля, и в этом была часть путаницы.
             d.events.push({kind: "approval", date: "2026-01-15", id: d.id + "-card-test",
                            newsworthy: true, title: "УНИКАЛЬНЫЙ-ТЕКСТ-ЭТАПА-НА-КАРТОЧКЕ",
@@ -2414,9 +2414,9 @@ def test_milestone_enriches_the_card_and_does_not_add_a_feed_row(page, base_url)
         route();
     }""")
     page.wait_for_timeout(500)
-    # Прошедшие этапы на карточке свёрнуты под кнопкой «Показать предыдущие
+    # Прошедшие этапы на карточке свернуты под кнопкой «Показать предыдущие
     # этапы» — раскрываем, как это делает читатель, иначе inner_text их не
-    # вернёт и тест соврёт про потерю данных.
+    # вернет и тест соврет про потерю данных.
     toggle = page.locator("#historyToggle")
     assert toggle.count() == 1, "блок «Ход сделки» не появился на карточке"
     toggle.click()
@@ -2456,14 +2456,14 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
         assert "Альфа-Превью" in text, "черновик не отрисовался"
         assert "Черновик" in text, "нет плашки о том, что это черновик"
         # НАЛИЧИЕ В DOM — НЕ ВИДИМОСТЬ, И ЭТО ВИДНО ТОЛЬКО НА ХОЛОДНОЙ
-        # ЗАГРУЗКЕ. `renderPreview` — единственный асинхронный рендер: он ждёт
+        # ЗАГРУЗКЕ. `renderPreview` — единственный асинхронный рендер: он ждет
         # fetch(pending.json), а проявление (`.reveal` -> `.reveal.in`)
         # запускается в конце `route()`, то есть по разметке состояния
-        # загрузки. На тёплой странице (общий `page` уже открыт) pending.json
+        # загрузки. На теплой странице (общий `page` уже открыт) pending.json
         # успевает вернуться раньше кадра, и дефекта не видно; при переходе по
         # ссылке из телеграма страница грузится с нуля, параллельно тянется
-        # база на 774 КБ — pending.json приходит позже, и карточка остаётся с
-        # `opacity:0` НАВСЕГДА: `inner_text` её видит, человек нет.
+        # база на 774 КБ — pending.json приходит позже, и карточка остается с
+        # `opacity:0` НАВСЕГДА: `inner_text` ее видит, человек нет.
         # Проверено на себе: без `rerun()` в конце `renderPreview` здесь 12.
         cold = browser.new_context()
         try:
@@ -2552,7 +2552,7 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
             "ind": "Ритейл", "type": "M&A", "status": "Закрыта", "kind": "custody",
             "src": [["источник", "https://example.invalid/custody"]],
             "buyer": "g9ba426b0", "target": "gd835e8a5",
-            "eco": {"sum": "—", "share": "Указ передаёт 100% ООО «Тест-Превью» во временное управление.",
+            "eco": {"sum": "—", "share": "Указ передает 100% ООО «Тест-Превью» во временное управление.",
                      "val": "—", "target_fin": "—", "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
             "law": {"struct": "Указ вступает в силу со дня опубликования.", "appr": "—", "adv": [], "terms": "—"},
             "pending_since": "2026-09-17T00:00:00+00:00"}
@@ -2564,7 +2564,7 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
         page.wait_for_timeout(900)
         # Смотрим именно на плашку «Структура сделки» (.dp-party), а не на
         # весь текст страницы: честная общая оговорка «цена и условия не
-        # раскрыты» (sparseNoticeHtml) законно живёт рядом и содержит
+        # раскрыты» (sparseNoticeHtml) законно живет рядом и содержит
         # «раскрыты» — это не тот дефект, который здесь проверяется.
         # .dp-role — с CSS text-transform:uppercase, поэтому сверяем в
         # верхнем регистре.
@@ -2573,7 +2573,7 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
         assert any("ВРЕМЕННЫЙ УПРАВЛЯЮЩИЙ" in r for r in roles), \
             "плашка не называет управляющего своей ролью: %r" % roles
         assert not any("ПРОДАВЕЦ" in r for r in roles), \
-            "нет продавца у национализации — а его всё равно нарисовали: %r" % roles
+            "нет продавца у национализации — а его все равно нарисовали: %r" % roles
         assert not any("НЕ РАСКРЫТ" in r for r in roles), \
             "выдуманная пустая роль вместо честного отсутствия покупателя/продавца: %r" % roles
         assert not errors, "pageerror при рендере плашки custody: %s" % errors
@@ -2591,7 +2591,7 @@ def test_slow_load_hint_mentions_vpn(page, base_url):
     напоминает, что сервер в России, и РЕКОМЕНДУЕТ выключить VPN. Просьба
     владельца 19 сентября 2026: показывать сразу, а не после нескольких
     секунд ожидания — на медленной сети именно первые секунды и решают,
-    останется ли человек или уйдёт, не поняв, почему сайт не открывается.
+    останется ли человек или уйдет, не поняв, почему сайт не открывается.
     """
     visit(page, base_url, "#/")
     html = page.evaluate("() => loadingHtml('карточка')")
@@ -2603,7 +2603,7 @@ def test_feed_is_ordered_by_deal_date_and_shows_no_added_label(page, base_url):
     """В ленте — дата первой новости о сделке, по ней же и порядок (владелец,
     3 октября 2026: «не дату добавления карты, а дату первой новости; не надо
     писать „добавлено“»). Это отменило решение 7 августа (дата публикации):
-    с ним карточки архива, приехавшие одним днём, читались как новости этого
+    с ним карточки архива, приехавшие одним днем, читались как новости этого
     дня. Что появилось недавно, видно по бейджу «Новое».
     """
     visit(page, base_url, "#/")
@@ -2626,7 +2626,7 @@ def test_feed_is_ordered_by_deal_date_and_shows_no_added_label(page, base_url):
 def test_company_cards_align_their_divider(page, base_url):
     """Линия над цифрами — на одной высоте у всех карточек каталога.
 
-    Раньше её место определяли длина имени и длина описания, и ряд выглядел
+    Раньше ее место определяли длина имени и длина описания, и ряд выглядел
     рваным: у «Сбербанка» описание в пять строк, у «Яндекса» — в три.
     """
     visit(page, base_url, "#/companies")
@@ -2662,9 +2662,9 @@ def test_header_does_not_jump_while_scrolling(page, base_url):
     """Строка разделов зафиксирована, а не прячется при прокрутке.
 
     Раньше на главной шапка уезжала вверх, пока не проскроллено 55% экрана.
-    С телефона это читается как дёрганье: разделы то есть, то нет, и попасть
+    С телефона это читается как дерганье: разделы то есть, то нет, и попасть
     по ним пальцем во время прокрутки нельзя. Владелец: «блоки сверху не
-    должны дёргаться вниз и вверх, они должны быть зафиксированы».
+    должны дергаться вниз и вверх, они должны быть зафиксированы».
     """
     visit(page, base_url, "#/")
     tops = []
@@ -2734,7 +2734,7 @@ def test_hero_dots_do_not_sit_on_the_text_on_short_screens(browser, base_url):
 
 def test_hero_assistant_hint_is_one_question_that_fits_the_phone(browser, base_url):
     """Подсказка в поле ассистента на первом экране — один вопрос, и он
-    виден целиком; пустое поле с кнопкой «Спросить ИИ» задаёт именно его.
+    виден целиком; пустое поле с кнопкой «Спросить ИИ» задает именно его.
 
     Скриншот владельца 7 октября 2026: на телефоне в поле стояло «Спросите:
     кто сопровождал сделки? ка» — вторая половина подсказки обрезалась на
@@ -2796,7 +2796,7 @@ def test_agreement_privacy_and_consent_are_published(page, base_url):
 
 def test_registration_asks_for_a_separate_consent(page, base_url):
     """Согласие на обработку данных — отдельной галочкой (152-ФЗ с 1 сентября
-    2025: согласие не смешивается с другими документами); без неё форма не
+    2025: согласие не смешивается с другими документами); без нее форма не
     отправляется. Соглашение — строкой со ссылкой под кнопкой."""
     visit(page, base_url, "#/account")
     page.click("#toRegister")
@@ -2814,7 +2814,7 @@ def test_cookie_note_shows_once_and_does_not_break_a_phone(browser, base_url):
     """Плашка о cookie (16 октября 2026): при первом визите — внизу экрана, со
     ссылкой на политику и кнопкой «Понятно»; после нажатия не появляется
     снова (localStorage). На 360/390 не шире экрана, не наезжает на шапку и
-    занимает не больше четверти высоты; в печать не идёт; на экране
+    занимает не больше четверти высоты; в печать не идет; на экране
     ассистента (внизу поле ввода) скрыта."""
     for width in (360, 390, 1280):
         ctx = browser.fresh_context(viewport={"width": width, "height": 740 if width < 700 else 900},
@@ -2875,7 +2875,7 @@ def test_cookie_note_survives_blocked_storage(browser, base_url):
 def test_first_comment_asks_a_separate_consent_to_show_the_name(browser, base_url):
     """Имя автора комментария видно всем — согласие на это отдельное (ст. 10.1
     152-ФЗ, 16 октября 2026). Под первым комментарием галочка со ссылкой на
-    текст согласия; без неё комментарий не уходит; после первого согласия
+    текст согласия; без нее комментарий не уходит; после первого согласия
     галочки больше нет. Обсуждение под сделкой сейчас выключено
     (COMMENTS_ENABLED), поэтому блок монтируется вручную."""
     ctx = browser.new_context(viewport={"width": 390, "height": 900}, is_mobile=True, has_touch=True)
@@ -2947,7 +2947,7 @@ def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
 
     Модальное окно на компьютере превращалось в узкую коробку посреди
     широкого экрана («на компьютере выглядит ужасно» — владелец). Заодно
-    уходит риск из CLAUDE.md: диалог живёт вне `#app`, переживает смену
+    уходит риск из CLAUDE.md: диалог живет вне `#app`, переживает смену
     экрана и молча перехватывает клики.
     """
     visit(page, base_url, "#/companies/yandex")
@@ -2960,7 +2960,7 @@ def test_company_all_deals_expands_in_place_without_a_modal(page, base_url):
       modal: !!document.querySelector('.dialog-backdrop'),
       label: document.getElementById('openCompanyDeals').textContent.trim(),
     })""")
-    assert not state["modal"], "список всё ещё открывается модальным окном"
+    assert not state["modal"], "список все еще открывается модальным окном"
     assert state["rows"] >= 3, f"в раскрытом списке всего {state['rows']} строк"
     assert "Свернуть" in state["label"]
     page.click("#openCompanyDeals")
@@ -2997,7 +2997,7 @@ def test_web_search_failure_does_not_blame_missing_variables(page, base_url):
 
     Стояло «поиск включится, когда будут заданы YANDEX_API_KEY и
     YANDEX_FOLDER_ID» — и владелец увидел это при ЗАДАННЫХ переменных
-    (живой /api/ask в тот же день отвечал за 26,7 с). Человек пошёл чинить
+    (живой /api/ask в тот же день отвечал за 26,7 с). Человек пошел чинить
     то, что не сломано. Теперь фронтенд спрашивает /health и говорит правду.
     """
     html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
@@ -3023,8 +3023,8 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
     assert "юридический" in seller_text.lower() and "финансовый" in seller_text.lower()
     # плашка темы объясняет, что это за кнопка
     chips = page.locator(".theme-chips").text_content()
-    assert "Ещё сделки этого же типа" in chips and "→" not in chips
-    # вкладка «Юрист»: расчёты по облигациям ушли к экономисту, условия — наш текст без «как предполагал „Ъ“»
+    assert "Еще сделки этого же типа" in chips and "→" not in chips
+    # вкладка «Юрист»: расчеты по облигациям ушли к экономисту, условия — наш текст без «как предполагал „Ъ“»
     page.click(".lens [data-l='law']")
     page.wait_for_timeout(400)
     law = page.inner_text("#app")
@@ -3035,7 +3035,7 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
 
 def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     """Владелец 5 сентября 2026 на странице Nextons: «Продавец 4, Покупатель 4,
-    ещё у 10 сделок сторона не названа — это странно, неужели из контекста
+    еще у 10 сделок сторона не названа — это странно, неужели из контекста
     не понятно, с какой стороны они были?» Понятно: в пояснении стояло «за
     продавца», «консультировала Ingka», «консультант эмитента» — но страница
     фирмы читала только текст роли, своим узким правилом. Теперь сторона
@@ -3043,7 +3043,7 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     имена сторон сделки (с псевдонимами профиля) и пояснение — а у IPO,
     выкупа и привлечения средств есть третий ответ, «сама компания».
     Замер по всем 229 парам фирма-сделка: известная сторона 134 → 205,
-    у Nextons неизвестных 10 → 3 (у тех трёх источник действительно молчит)."""
+    у Nextons неизвестных 10 → 3 (у тех трех источник действительно молчит)."""
     visit(page, base_url, "#/advisors/nextons")
     page.wait_for_selector(".an-card")
     card = next(c for c in page.locator(".an-card").all() if "Чей консультант" in c.text_content())
@@ -3055,7 +3055,7 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     assert rows.get("Покупатель", 0) >= 4 and rows.get("Продавец", 0) >= 5, rows
     assert rows.get("Иные стороны сделки", 0) >= 1, rows
     assert any(k.startswith("Таргет") for k in rows), rows
-    m = re.search(r"Ещё у (\d+) сдел", text)
+    m = re.search(r"Еще у (\d+) сдел", text)
     assert m and int(m.group(1)) <= 3, text
     assert "сторона не названа" not in text and "известно только" not in text, text
     # Та же сторона на карточке: «консультировала Ingka» — продавца, Иванян — покупателя
@@ -3078,7 +3078,7 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     # Orion консультировал ВТБ, а ВТБ здесь ОРГАНИЗАТОР размещения, не
     # инвестор («ВТБ выступил организатором размещения, а не кредитором» —
     # слова самой карточки). До 21 сентября 2026 строка ждала «Со стороны
-    # инвестора» и была зелёной по ошибке в данных: ВТБ стоял в `buyer`.
+    # инвестора» и была зеленой по ошибке в данных: ВТБ стоял в `buyer`.
     # Ссылку сняло чтение аудита, и проверка сразу перестала сходиться —
     # так и задумано. Заодно нашлось, что имена организаторов и кредиторов
     # advSide не знал вовсе (поля стороны у них нет, они названы только в
@@ -3145,7 +3145,7 @@ def test_company_cards_on_a_phone_keep_the_group_badge_inside_the_card(browser, 
     колонке. Проверяем на узком экране: бейдж внутри карточки целиком, имя
     из одной строки не тянет 60px, переполнения нет.
 
-    Карточка берётся по признаку «есть бейдж «Группа»», а не по имени
+    Карточка берется по признаку «есть бейдж «Группа»», а не по имени
     компании: сортировка «по активности» зависит от числа сделок, а оно
     меняется по мере правок базы (21 сентября 2026 — очередная точная
     привязка стороны сдвинула первое место с «Сбербанка» на «Росимущество»,
@@ -3254,7 +3254,7 @@ def _assistant_page(browser, base_url, width, height=844, signed_in=False, threa
 
 
 def test_assistant_is_a_two_column_workspace_on_the_desktop(browser, base_url):
-    """Партнёр 3 сентября 2026: «сейчас это довольно поганое окошко на одной
+    """Партнер 3 сентября 2026: «сейчас это довольно поганое окошко на одной
     странице… сделать как в клоде/чат гпт, с диалогами слева». На компьютере
     раздел занимает весь экран: слева панель диалогов, справа лента и поле
     ввода; футера на этой странице нет (он мешал бы ленте), но на соседних
@@ -3273,7 +3273,7 @@ def test_assistant_is_a_two_column_workspace_on_the_desktop(browser, base_url):
         assert pg.evaluate(
             "document.documentElement.scrollHeight - window.innerHeight") <= 2, "страница выше окна"
         # Плашка сравнения компаний висит внизу экрана (position:fixed) и на
-        # обычной странице просто лежит поверх её конца — здесь конец страницы
+        # обычной странице просто лежит поверх ее конца — здесь конец страницы
         # это поле ввода, и она накрыла бы его целиком.
         pg.evaluate("localStorage.setItem('kompas_compare_companies_v1',"
                     " JSON.stringify(Object.keys(COMPANIES).slice(0,2)))")
@@ -3335,7 +3335,7 @@ def test_assistant_guest_is_invited_to_sign_in_instead_of_the_thread_list(browse
 
 def test_saved_dialogs_are_listed_in_the_side_panel_for_a_signed_in_user(browser, base_url):
     """У вошедшего в панели — его диалоги, сгруппированные по времени. Время
-    сервер отдаёт по UTC без буквы Z; без её подстановки вечерний диалог
+    сервер отдает по UTC без буквы Z; без ее подстановки вечерний диалог
     оказался бы в «завтрашней» группе."""
     ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000,
                                       signed_in=True, threads=THREADS_STUB)
@@ -3346,7 +3346,7 @@ def test_saved_dialogs_are_listed_in_the_side_panel_for_a_signed_in_user(browser
         assert "Сделки Сбербанка за 2025 год" in titles[0]
         groups = [g.strip().lower() for g in pg.locator(".chat-group").all_inner_texts()]
         assert groups and groups[0] == "сегодня", groups
-        # Диалог из списка открывается в ленте: реплики на месте, счётчик тоже.
+        # Диалог из списка открывается в ленте: реплики на месте, счетчик тоже.
         pg.locator(".chat-thread").first.click()
         pg.wait_for_timeout(600)
         stream = pg.inner_text("#chatbox")
@@ -3362,13 +3362,13 @@ def test_saved_dialogs_are_listed_in_the_side_panel_for_a_signed_in_user(browser
 
 def test_new_dialog_button_lives_above_the_thread_list_and_resets_the_conversation(browser, base_url):
     """Пятый заход на «Новый диалог» (30, 31 августа, дважды 3 сентября).
-    Кнопка стоит НАД СПИСКОМ ДИАЛОГОВ — там, где виден её эффект, и там, где
-    её ждут в любом привычном чате; на телефоне список открывает кнопка
+    Кнопка стоит НАД СПИСКОМ ДИАЛОГОВ — там, где виден ее эффект, и там, где
+    ее ждут в любом привычном чате; на телефоне список открывает кнопка
     «Диалоги» в шапке раздела. Под лентой не осталось ничего, кроме поля
     вопроса: ни строки состояния, ни второй кнопки «Начать заново» (просьба
     владельца 3 сентября 2026). Нажатие не прокручивает страницу и не ставит
     курсор в поле — иначе на телефоне откроется клавиатура (уроки 30-31
-    августа). Модели в тестах нет, /api/ask сам отдаёт точный ответ по базе."""
+    августа). Модели в тестах нет, /api/ask сам отдает точный ответ по базе."""
     for width, height in ((390, 844), (1280, 1000)):
         ctx, pg, errors = _assistant_page(browser, base_url, width, height)
         try:
@@ -3403,7 +3403,7 @@ def test_new_dialog_button_lives_above_the_thread_list_and_resets_the_conversati
 
 @pytest.mark.parametrize("width", WIDTHS)
 def test_nav_items_are_centred_on_the_logo_for_a_signed_in_user(browser, base_url, width):
-    """«Сверху криво» (партнёр, 3 сентября 2026, профиль Сбербанка с
+    """«Сверху криво» (партнер, 3 сентября 2026, профиль Сбербанка с
     телефона); владелец: «разделы по центру логотипу, а не выше, на всех
     устройствах». Проявлялось ТОЛЬКО у вошедшего: кружок-аватар 26px в
     последнем пункте тянул все ссылки до своей высоты (align-items:stretch),
@@ -3462,10 +3462,10 @@ def test_company_links_are_hidden_while_the_data_is_incomplete(page, base_url):
 
 def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, browser):
     """Вход по заявке (ACCESS_GATE, 2 сентября 2026). Гость видит экран
-    «Войти / Запросить доступ» вместо любого раздела; заявка создаёт
+    «Войти / Запросить доступ» вместо любого раздела; заявка создает
     неодобренный аккаунт; вход до одобрения — отказ; одобрение приходит
-    вебхуком (кнопка acc:<id>:ok от разрешённого from.id); после входа
-    открывается ТОТ адрес, на который человек шёл. Проверяется на трёх
+    вебхуком (кнопка acc:<id>:ok от разрешенного from.id); после входа
+    открывается ТОТ адрес, на который человек шел. Проверяется на трех
     ширинах: нет pageerror, нет горизонтального переполнения, экран
     действительно отрисован (свой элемент #gateScreen, а не «нет ошибок»)."""
     from db.models import User
@@ -3486,7 +3486,7 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
             pg.reload(wait_until="networkidle")
             pg.wait_for_selector("#gateScreen", timeout=10000)
             assert pg.locator("#gateLoginForm").is_visible()
-            assert "Компании" not in pg.inner_text("#app") or "приглашённых" in pg.inner_text("#app")
+            assert "Компании" not in pg.inner_text("#app") or "приглашенных" in pg.inner_text("#app")
             over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
             assert over <= 0, f"гейт (вход) переполняет экран на {w}px: {over}px"
             pg.click("#gateToRegister")
@@ -3494,7 +3494,7 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
             over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
             assert over <= 0, f"гейт (заявка) переполняет экран на {w}px: {over}px"
         assert not crashes, crashes[:3]
-        # Шапка над гейтом — светлая: тёмный режим героя главной здесь не к месту.
+        # Шапка над гейтом — светлая: темный режим героя главной здесь не к месту.
         pg.goto(gated_url + "/#/", wait_until="networkidle")
         pg.reload(wait_until="networkidle")
         pg.wait_for_selector("#gateScreen")
@@ -3502,13 +3502,13 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
 
         email = f"gate{int(time.time()*1000)}@example.com"
         # Смена хеша за закрытой дверью форму не трогает (нельзя стирать
-        # введённое, когда приезжает база) — только запоминает адрес.
+        # введенное, когда приезжает база) — только запоминает адрес.
         pg.goto(gated_url + "/#/companies", wait_until="networkidle")
         pg.wait_for_selector("#gateLoginForm")
         pg.click("#gateToRegister")
         pg.fill("#gateFullName", "Тест Гейтов")
         pg.fill("#gateCompany", "ООО Ромашка")
-        pg.fill("#gatePosition", "Партнёр")
+        pg.fill("#gatePosition", "Партнер")
         pg.fill("#gateRegEmail", email)
         pg.fill("#gateRegPassword", "password-123")
         pg.fill("#gateRegPasswordConfirm", "password-123")
@@ -3533,7 +3533,7 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
         assert "доступ откроем после проверки" in pg.inner_text("#gateMsg")
         assert pg.locator("#gateScreen").count() == 1
 
-        # Чужой from.id одобрить не может, разрешённый — может.
+        # Чужой from.id одобрить не может, разрешенный — может.
         for from_id in (999, 111):
             r = pg.request.post(gated_url + "/api/telegram/webhook/ui-secret",
                                 data={"callback_query": {"id": "1", "data": f"acc:{uid}:ok", "from": {"id": from_id}}})
@@ -3543,7 +3543,7 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
             if from_id == 999:
                 assert pg.locator("#gateScreen").count() == 1, "посторонний открыл доступ"
         assert pg.locator("#gateScreen").count() == 0, "после одобрения дверь не открылась"
-        assert pg.evaluate("location.hash") == "#/companies", "после входа потерян адрес, на который шёл человек"
+        assert pg.evaluate("location.hash") == "#/companies", "после входа потерян адрес, на который шел человек"
         assert "Компании" in pg.inner_text("#app")
         assert pg.locator("#navAccount .avatar-dot").count() == 1
         # Два входа до одобрения намеренно получили 403 — браузер пишет об этом
@@ -3560,8 +3560,8 @@ def test_search_finds_latin_named_company_typed_in_cyrillic(page, base_url):
     """«VK» находится буквами «вк» — и в подсказках, и в каталоге компаний.
 
     Просьба владельца 3 сентября 2026 («Vk пусть находится буквами вк, и другие
-    компании тоже»): имя компании в базе записано так, как её пишут источники,
-    а ищут её с русской раскладки. Держит побуквенную транслитерацию
+    компании тоже»): имя компании в базе записано так, как ее пишут источники,
+    а ищут ее с русской раскладки. Держит побуквенную транслитерацию
     (translitKey в static/index.html) — не «похожее написание», а таблицу
     буква-в-букву, поэтому у теста три примера, а не один.
     """
@@ -3577,7 +3577,7 @@ def test_search_finds_latin_named_company_typed_in_cyrillic(page, base_url):
         names = page.eval_on_selector_all(
             ".co-grid > *", "els => els.slice(0, 8).map(e => e.innerText)")
         assert any(expected.lower() in (n or "").lower() for n in names), \
-            f"запрос «{query}» не нашёл {expected}: {[n.split(chr(10))[1] if n else n for n in names[:5]]}"
+            f"запрос «{query}» не нашел {expected}: {[n.split(chr(10))[1] if n else n for n in names[:5]]}"
     # И подсказки под строкой поиска знают ту же таблицу.
     page.fill("#coq", "вк")
     page.wait_for_timeout(800)
@@ -3628,7 +3628,7 @@ def test_deal_paragraphs_are_not_justified_on_a_phone(browser, base_url):
     телефоне в строку влезает вдвое меньше, и она же выталкивает последнее
     слово за край карточки.
 
-    Меряем не бокс, а САМИ СТРОКИ ТЕКСТА (Range) — тот же приём, что уже
+    Меряем не бокс, а САМИ СТРОКИ ТЕКСТА (Range) — тот же прием, что уже
     понадобился для центровки шапки: бокс может стоять в границах, пока текст
     из него вылезает, и проверка по `getBoundingClientRect` элемента этого не
     видит."""
@@ -3662,7 +3662,7 @@ def test_deal_paragraphs_are_not_justified_on_a_phone(browser, base_url):
 def test_deal_paragraphs_stay_justified_on_the_desktop(browser, base_url):
     """Обратная половина того же правила: выключка по ширине — сознательное
     решение владельца от 18 августа, и на компьютере, где мера в 72 знака
-    реальна, она обязана остаться. Иначе «починка телефона» тихо отменит её
+    реальна, она обязана остаться. Иначе «починка телефона» тихо отменит ее
     везде."""
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     try:
@@ -3719,7 +3719,7 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
     # список крупнейших — только сделки с прочитанной в источнике ценой; пока
     # таких нет, блок честно говорит об этом, а не показывает непрочитанные
     if not page.evaluate("DEALS.some(countsAsTopPurchase)"):
-        assert not rows and "ждёт проверки" in page.inner_text(".an-c-topsum")
+        assert not rows and "ждет проверки" in page.inner_text(".an-c-topsum")
     else:
         assert rows
     sums = [x.inner_text() for x in page.locator(".an-c-topsum .an-deal .an-deal-s").all()]
@@ -3732,7 +3732,7 @@ def test_analytics_top_sums_exclude_soft_prices_currency_and_ipo(page, base_url)
             assert not re.search(bad, low), row
         # диапазон «30–40 млрд ₽» — оценка, а не цена, названная сторонами
         assert not re.search(r"\d\s*[–—-]\s*\d", total), row
-        assert "₽" in total, row  # валютная сумма считается только через рублёвый эквивалент в скобках
+        assert "₽" in total, row  # валютная сумма считается только через рублевый эквивалент в скобках
     # допуск к суммам и к списку крупнейших — из facts, а не из текста
     checks = page.evaluate("""() => {
       const inTop = DEALS.filter(countsAsTopPurchase);
@@ -3769,8 +3769,8 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
         if g.get("missing"):
             continue  # карточки раньше 2022 года на клиент не грузятся
         # Строка, помеченная `pending`, говорит правду, которой карточка пока
-        # не соответствует (или два чтения разошлись и вопрос ждёт человека).
-        # Требовать её здесь нечего: за неё отвечает строгий xfail в
+        # не соответствует (или два чтения разошлись и вопрос ждет человека).
+        # Требовать ее здесь нечего: за нее отвечает строгий xfail в
         # test_gold_analytics.py — он покраснеет, когда вопрос решат.
         if row.get("pending"):
             continue
@@ -3786,7 +3786,7 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
             problems.append((row["id"], "top", g["reason"], row["in_top_purchases"]))
         if not row["in_top_purchases"] and g["top"]:
             problems.append((row["id"], "top", g["top"], row["in_top_purchases"]))
-        # клиент показывает мультипликатор только для сделки с подтверждёнными
+        # клиент показывает мультипликатор только для сделки с подтвержденными
         # чтением фактами — это ПОДМНОЖЕСТВО текстового допуска выборки
         if g["multiple"] and not row["in_multiples"]:
             problems.append((row["id"], "multiple", g["multiple"], row["in_multiples"]))
@@ -3799,7 +3799,7 @@ def test_gold_rows_agree_with_client_rules(page, base_url):
 
 
 def test_compare_shows_bank_of_russia_data_for_a_bank(page, base_url):
-    """Аудит перед бетой: сравнение писало Сбербанку «Подтверждённая БФО пока
+    """Аудит перед бетой: сравнение писало Сбербанку «Подтвержденная БФО пока
     не загружена», хотя на его профиле стоит блок «По данным Банка России»
     (bank_finance.json). Сравнение обязано читать тот же источник, а у АО
     называть учредителей при регистрации, не «текущих участников»."""
@@ -3818,7 +3818,7 @@ def test_compare_shows_bank_of_russia_data_for_a_bank(page, base_url):
 
 
 def test_account_lets_you_change_password_and_email(browser, base_url):
-    """Артём: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
+    """Артем: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
     До 19 сентября 2026 на вкладке «Аккаунт» не было ни того, ни другого —
     сменить пароль было нельзя никак."""
     ctx = browser.new_context(viewport={"width": 1280, "height": 1000})
@@ -3844,7 +3844,7 @@ def test_account_lets_you_change_password_and_email(browser, base_url):
         pg.fill("#pwCurrent", "testpass123")
         pg.fill("#pwNew", "sovsem-drugoy-parol")
         pg.click("#changePwForm button[type=submit]")
-        pg.wait_for_function("document.getElementById('pwMsg').textContent.includes('изменён')",
+        pg.wait_for_function("document.getElementById('pwMsg').textContent.includes('изменен')",
                              timeout=10000)
         # Все входы гасятся, включая этот, — сервер обязан выдать новый,
         # иначе человек вылетает из браузера ровно в момент смены пароля.
@@ -3893,7 +3893,7 @@ def _feed_total(pg):
 
 
 def test_filters_accept_several_industries_at_once(page, base_url):
-    """Артём: «в фильтрах надо сделать возможность выбора нескольких опций
+    """Артем: «в фильтрах надо сделать возможность выбора нескольких опций
     (несколько годов, отраслей etc)». Между выбранными значениями — ИЛИ."""
     page.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
     page.wait_for_selector("#selind", timeout=15000)
@@ -3933,7 +3933,7 @@ def test_choosing_a_second_year_widens_the_feed_and_the_link(page, base_url):
     two = _feed_total(page)
 
     assert two > one, f"второй год не расширил выдачу: было {one}, стало {two}"
-    assert page.inner_text("#selyear .ms-txt").strip() == "2025 и ещё 1"
+    assert page.inner_text("#selyear .ms-txt").strip() == "2025 и еще 1"
     # Адрес обязан нести оба значения — иначе «Скопировать ссылку» отдаст не то,
     # что человек видит на экране.
     h = unquote(page.evaluate("location.hash"))
@@ -3968,7 +3968,7 @@ def test_open_filter_list_does_not_overflow(browser, base_url, width):
 
 
 # ================= ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА =================
-# Артём, 19 сентября 2026: «он все еще не поправил форматтинг страниц и
+# Артем, 19 сентября 2026: «он все еще не поправил форматтинг страниц и
 # приходится листать вправо влево. Иногда норм. Иногда слетает.»
 #
 # Почему прежние замеры этого не видели. В стилях стоят страховки
@@ -4082,7 +4082,7 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     assert page.locator("#prepInterview").count() == 1
 
     # С 5 октября 2026 ассистент сначала спрашивает, кто вы, что за встреча и
-    # чего вы хотите (партнёр: «надо, чтобы он задал вопрос, кто ты, и от
+    # чего вы хотите (партнер: «надо, чтобы он задал вопрос, кто ты, и от
     # этого отталкивался»), и только ответ уходит модели.
     asks = []
     page.on("request", lambda r: asks.append(r) if "/api/ask" in r.url and r.method == "POST" else None)
@@ -4099,7 +4099,7 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     sent = json.loads(req.value.post_data or "{}")
     meeting = sent["question"]
     assert "Готовлюсь к встрече" in meeting
-    # Вопрос назвал компанию — иначе ассистент не поймёт, о ком речь.
+    # Вопрос назвал компанию — иначе ассистент не поймет, о ком речь.
     assert "Норильский никель" in meeting and about in meeting
     # Поиск держится за компанию страницы, а не за слова рассказа («юрист»).
     assert (sent["context_type"], sent["context_id"]) == ("company", "g2f93d858")
@@ -4110,7 +4110,7 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     page.goto(base_url + "/#/companies/g2f93d858", wait_until="domcontentloaded")
     page.wait_for_selector("#prepInterview", timeout=15000)
     # С 3 октября 2026 кнопка раскрывает панель с полем для резюме (по
-    # желанию) — к ассистенту ведёт «Подготовить».
+    # желанию) — к ассистенту ведет «Подготовить».
     assert page.locator("#interviewPrep").is_hidden()
     page.click("#prepInterview")
     assert page.locator("#interviewPrep").is_visible()
@@ -4123,7 +4123,7 @@ def test_company_page_has_preparation_buttons_that_ask_the_assistant(page, base_
     assert "Готовлюсь к собеседованию" in interview
     # Два разных вопроса, а не один и тот же с другой подписью на кнопке.
     assert "работодателю" in interview and "работодателю" not in meeting
-    assert "Моё резюме" not in interview, "пустое резюме не должно попадать в вопрос"
+    assert "Мое резюме" not in interview, "пустое резюме не должно попадать в вопрос"
     assert "Подготовка к собеседованию: «Норильский никель»" in page.inner_text("body")
 
 
@@ -4142,7 +4142,7 @@ def test_firm_page_prepares_for_an_interview_with_a_resume(page, base_url):
     page.wait_for_function("() => location.hash === '#/assistant'", timeout=10000)
     page.wait_for_timeout(600)
     assert "Готовлюсь к собеседованию" in sent and "Nextons" in sent, sent[:600]
-    assert "Моё резюме" in sent and "корпоративной практике" in sent
+    assert "Мое резюме" in sent and "корпоративной практике" in sent
     # В чате — подпись, а не стена служебного текста и не само резюме.
     body = page.inner_text("body")
     assert "Подготовка к собеседованию: «Nextons» (с резюме)" in body
@@ -4180,7 +4180,7 @@ def test_firm_deals_list_shows_three_and_unfolds_the_rest(page, base_url):
 def test_form_fields_are_16px_on_touch_devices(browser, base_url):
     """Safari на iPhone увеличивает страницу, когда палец попадает в поле со
     шрифтом меньше 16px, и обратно НЕ уменьшает: после одного касания поиска
-    сайт остаётся приближённым, правый край текста уходит за экран (владелец,
+    сайт остается приближенным, правый край текста уходит за экран (владелец,
     19 сентября 2026). Запретом масштабирования это не лечится — iOS его
     игнорирует, — поэтому держим саму причину."""
     routes = ["#/", "#/deals", "#/companies", "#/analytics", "#/assistant",
@@ -4220,7 +4220,7 @@ def test_the_deal_feed_can_be_narrowed_to_calendar_days(page, base_url):
     У конкурента (Aspring) такой выбор есть, и он читается как норма жанра.
 
     Два поля `input[type=date]` дают родной календарь браузера, без единой
-    внешней библиотеки. Тест держит три вещи: отбор идёт по ДАТЕ СДЕЛКИ,
+    внешней библиотеки. Тест держит три вещи: отбор идет по ДАТЕ СДЕЛКИ,
     ссылка period переживает перезагрузку, и карточки, у которых известен
     только год, честно посчитаны отдельно, а не подмешаны в выборку по дням.
     """
@@ -4257,8 +4257,8 @@ def test_an_object_of_a_deal_is_not_listed_among_companies(page, base_url):
 
     Владелец 22 сентября 2026 о профиле «проект добычи золота
     Быстринско-Ширинское»: «Это не компания. Это убрать надо.» Удалить
-    нельзя — профиль стоит предметом реальной сделки, и плашка сторон ведёт
-    сюда. Поэтому он уходит из каталога, а страница остаётся и честно
+    нельзя — профиль стоит предметом реальной сделки, и плашка сторон ведет
+    сюда. Поэтому он уходит из каталога, а страница остается и честно
     называет себя объектом.
     """
     page.goto(f"{base_url}/#/companies")
@@ -4290,22 +4290,22 @@ def test_every_investment_adviser_in_the_catalog_has_at_least_one_deal(page, bas
     Инвестиционных консультантов мы заводим ПО ИХ СДЕЛКАМ: фирма попадает в
     каталог потому, что названа организатором или финансовым консультантом в
     карточке. Значит, ноль сделок у такой фирмы — не «данных пока нет», а
-    сломанный счётчик.
+    сломанный счетчик.
 
     Так и вышло 22 сентября 2026: у БКС стоял ноль при двух сделках.
     Регулярка была написана как `/\bБКС\b/`, а в JavaScript граница слова
     считается по латинице — кириллические буквы для `\w` не буквы, и
     выражение не совпадает никогда. На Python та же строка работает, поэтому
-    проверка счётом вне браузера бага не видела. Отсюда и тест: считает в
+    проверка счетом вне браузера бага не видела. Отсюда и тест: считает в
     БРАУЗЕРЕ, тем же кодом, что и экран.
 
     Юридические фирмы (FIRMS) сюда НЕ входят намеренно: это справочник
-    рынка, в нём есть фирмы, которых в наших сделках пока нет, и ноль у них
+    рынка, в нем есть фирмы, которых в наших сделках пока нет, и ноль у них
     — честное состояние, а не поломка.
     """
     page.goto(f"{base_url}/#/advisors")
     page.wait_for_timeout(2500)
-    # С 3 октября 2026 лот на торгах без покупателя в счёт не входит
+    # С 3 октября 2026 лот на торгах без покупателя в счет не входит
     # (isListing) — но фирма, названная организатором такого лота, в каталоге
     # законно: считаем вместе с лотами.
     empty = page.evaluate("INV_FIRMS.map(f=>{const x=firmDeals(f.id,true);return [f.n, x.full.length+x.mini.length+x.bulk.length];}).filter(x=>x[1]===0)")
@@ -4416,7 +4416,7 @@ def test_prep_buttons_show_a_short_label_in_the_chat(page, base_url):
     page.wait_for_selector("#prepMeeting")
     page.click("#prepMeeting")
     # С 5 октября 2026 встреча начинается с вопросов к человеку; кто не хочет
-    # рассказывать, жмёт «Без подробностей» — и видит в чате эту же подпись.
+    # рассказывать, жмет «Без подробностей» — и видит в чате эту же подпись.
     page.wait_for_selector("[data-prep-skip]")
     page.click("[data-prep-skip]")
     page.wait_for_selector(".msg.user")
@@ -4424,9 +4424,9 @@ def test_prep_buttons_show_a_short_label_in_the_chat(page, base_url):
 
 
 def test_feed_marks_a_card_with_a_fresh_stage_as_updated(page, base_url):
-    """Владелец 26 сентября 2026 не нашёл в ленте карточку штаб-квартиры
-    «Швабе»: сделка августа закрылась 25 сентября, а в ленте стояла на своём
-    месте без отметки. Этап моложе недели даёт строке отметку «Обновлено»;
+    """Владелец 26 сентября 2026 не нашел в ленте карточку штаб-квартиры
+    «Швабе»: сделка августа закрылась 25 сентября, а в ленте стояла на своем
+    месте без отметки. Этап моложе недели дает строке отметку «Обновлено»;
     второй строки у этапа по-прежнему нет."""
     visit(page, base_url, "#/")
     page.wait_for_selector(".deal-row")
@@ -4457,7 +4457,7 @@ def test_hero_tells_to_switch_off_vpn_while_the_base_loads(page, base_url):
     }""")
     assert "VPN" in got["loading"] and "догружаем" not in got["loading"], got["loading"]
     # "сделка/сделки" делят основу "сделк", а "сделОк" вставляет беглую
-    # гласную перед "к" — общая часть всех трёх форм короче: "дел".
+    # гласную перед "к" — общая часть всех трех форм короче: "дел".
     assert "VPN" not in got["loaded"] and "дел" in got["loaded"], got["loaded"]
 
 
@@ -4492,7 +4492,7 @@ def test_advisors_rank_by_industry_when_an_industry_is_chosen(page, base_url):
 
 def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
     """Лот на торгах без покупателя — не сделка: в ленте и на карточке есть,
-    из аналитики, активности компаний и счёта консультантов уходит; цена
+    из аналитики, активности компаний и счета консультантов уходит; цена
     подписана как начальная (владелец, 3 октября 2026)."""
     visit(page, base_url, "#/")
     page.wait_for_selector(".deal-row")
@@ -4523,7 +4523,7 @@ def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
 def test_account_notifications_tab_has_no_dead_rows_and_fits_a_phone(browser, base_url):
     """Владелец 4 октября 2026 («надо налаживать личный кабинет»): на вкладке
     «Уведомления» висели две строки «Скоро» с запертыми переключателями,
-    «Отметить всё прочитанным» стояло над настройками, а не над списком, и
+    «Отметить все прочитанным» стояло над настройками, а не над списком, и
     вкладка «Профиль» обрезалась справа на телефоне."""
     for width in (360, 390):
         ctx = browser.new_context(viewport={"width": width, "height": 900})
@@ -4563,8 +4563,8 @@ def test_account_notifications_tab_has_no_dead_rows_and_fits_a_phone(browser, ba
 def test_subscription_form_answers_in_every_outcome(browser, base_url):
     """4 октября 2026: человек выбрал «Уголь», вписал 1000, нажал — «вообще
     ничего не произошло». Форма молчала: ни подтверждения, ни ошибки, поле
-    суммы на телефоне обрезалось до «От суммы, м». Теперь у неё есть ответ
-    на каждый исход: пустая форма, успех, повтор, истёкший вход."""
+    суммы на телефоне обрезалось до «От суммы, м». Теперь у нее есть ответ
+    на каждый исход: пустая форма, успех, повтор, истекший вход."""
     ctx = browser.new_context(viewport={"width": 390, "height": 900})
     errors = []
     try:
@@ -4594,7 +4594,7 @@ def test_subscription_form_answers_in_every_outcome(browser, base_url):
         ctx.clear_cookies()
         pg.select_option("#subInd", "Агро")
         pg.click("#subAdd")
-        pg.wait_for_function("document.getElementById('subMsg').innerText.includes('Вход истёк')", timeout=10000)
+        pg.wait_for_function("document.getElementById('subMsg').innerText.includes('Вход истек')", timeout=10000)
         assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
         assert not errors, errors[:3]
     finally:
@@ -4607,10 +4607,10 @@ def test_feed_period_filter_fits_a_phone_without_dead_icons(browser, base_url):
     строку и ломала ряд; поля дат и «Сбросить» вылезали за карточку
     фильтров; значки ⓘ у «Цены» и «Выручки» на телефоне не нажимались."""
     for width in (360, 390):
-        # `#advpanel` несёт класс `.reveal.in`, но стоит `display:none`, пока
+        # `#advpanel` несет класс `.reveal.in`, но стоит `display:none`, пока
         # фильтры закрыты, — открытие фильтров заново запускает CSS-анимацию
         # `fadeUp` (браузер не «помнит» прогресс через display:none), и клик
-        # по кнопке внутри попадал в момент, когда панель ещё непрозрачна.
+        # по кнопке внутри попадал в момент, когда панель еще непрозрачна.
         # Сайт сам умеет это выключать (`@media(prefers-reduced-motion:reduce)`,
         # static/index.html) — просим браузер о пониженной анимации, а не
         # гадаем с таймаутом, сколько ждать (KNOWN_ISSUES.md).
@@ -4642,9 +4642,9 @@ def test_feed_period_filter_fits_a_phone_without_dead_icons(browser, base_url):
 
 
 def test_feed_filters_deals_that_needed_a_presidential_permit(page, base_url):
-    """Идея партнёра 5 октября 2026: отобрать сделки, которым понадобилось
+    """Идея партнера 5 октября 2026: отобрать сделки, которым понадобилось
     разрешение президента по указу № 520. Признак читается из «Согласований»
-    карточки и её событий-согласований; оговорки («может потребоваться») и
+    карточки и ее событий-согласований; оговорки («может потребоваться») и
     указы о временном управлении разрешением не считаются."""
     from urllib.parse import quote
     page.goto(base_url + "/#/deals?appr=" + quote("Разрешение президента"), wait_until="domcontentloaded")
@@ -4754,18 +4754,18 @@ def test_materials_page_has_no_empty_webinar_card(page, base_url):
 def test_page_source_does_not_name_the_team():
     """Владелец 5 октября 2026: «чтобы нигде не было индикаторов, кто создал
     „Компас“». Исходник страницы видит любой посетитель, а в комментариях
-    стояли имена партнёров и ссылки на внутренний файл правил."""
+    стояли имена партнеров и ссылки на внутренний файл правил."""
     import re as _re
     html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
     found = sorted(set(m.group(0) for m in _re.finditer(
-        r"Ксюш\w*|Арт[её]м\w*|Асоян|Белкин|belkin|CLAUDE\.md|Claude|Anthropic|gmail", html, _re.I)))
+        r"Ксюш\w*|Арт[ее]м\w*|Асоян|Белкин|belkin|CLAUDE\.md|Claude|Anthropic|gmail", html, _re.I)))
     assert not found, found
 
 
 def test_footer_sources_do_not_name_rbc_or_forbes(page, base_url):
     """Владелец 5 октября 2026: «РБК и Forbes нужно из источников данных
     удалить, внизу страницы». В подвале остаются Интерфакс, Коммерсантъ и
-    Ведомости; у каждой сделки источник по-прежнему в её карточке."""
+    Ведомости; у каждой сделки источник по-прежнему в ее карточке."""
     page.goto(base_url + "/#/", wait_until="domcontentloaded")
     page.wait_for_selector("footer .foot-h", state="attached", timeout=15000)
     col = page.evaluate("""[...document.querySelectorAll('footer .foot-col')]
@@ -4785,7 +4785,7 @@ def test_reader_pages_have_no_internal_jargon(page, base_url):
     verified = [d["id"] for d in base["deals"]
                 if any(((d.get("facts") or {}).get(k) or {}).get("basis") == "verified" for k in ("price", "stake", "date"))][:4]
     jargon = re.compile(r"(?<![а-яё])(?:чтени[а-яё]*|прочитан[а-яё]*|знаменател[а-яё]*|числител[а-яё]*|честн[а-яё]* пуст[а-яё]*)"
-                        r"|в деньги не идёт|по тексту карточки|двумя чтениями|линз[аыу]|в карточке не сказано", re.I)
+                        r"|в деньги не идет|по тексту карточки|двумя чтениями|линз[аыу]|в карточке не сказано", re.I)
     pages = ["#/", "#/analytics", "#/advisors", "#/advisors/nextons", "#/companies/gf79d11d3",
              "#/industry/" + "Ритейл"] + ["#/deal/" + i for i in verified]
     found = {}
@@ -4800,7 +4800,7 @@ def test_reader_pages_have_no_internal_jargon(page, base_url):
 
 
 def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
-    """Тот же случай на странице: и уже сохранённые ответы с «] (#/deal/…)»
+    """Тот же случай на странице: и уже сохраненные ответы с «] (#/deal/…)»
     показываются ссылкой, а адрес в скобках без названия не виден."""
     page.goto(base_url + "/#/", wait_until="domcontentloaded")
     page.wait_for_function("typeof mdToHtml === 'function'", timeout=15000)
@@ -4808,7 +4808,7 @@ def test_assistant_answer_never_shows_raw_link_brackets(page, base_url):
         + '• продажа сети «Апрель» (#/deal/g34b9af03)')""")
     assert '<a href="#/deal/g5ddac2b5">покупка ТРЦ «Триумф Молл»</a>' in html
     assert "(#/deal/" not in html and "[" not in html and "]" not in html
-    # «- - пункт» — один пункт без лишней чёрточки (5 октября 2026).
+    # «- - пункт» — один пункт без лишней черточки (5 октября 2026).
     li = page.evaluate("mdToHtml('- - **Сделка** — покупатель\\n- **Важно**: одна черта')")
     assert li == "<ul><li><b>Сделка</b> — покупатель</li><li><b>Важно</b>: одна черта</li></ul>", li
 
@@ -4854,9 +4854,9 @@ def test_hero_button_stays_in_one_place_across_slides(browser, base_url):
 def test_hero_dots_visible_in_short_in_app_browser(browser, base_url):
     """Точки слайдера видны в невысоком окне встроенного браузера телеграма.
 
-    12 октября 2026: у партнёра владельца в телеграме не было видно кружков
+    12 октября 2026: у партнера владельца в телеграме не было видно кружков
     перелистывания — герой на телефоне был выше видимой части окна (снизу у
-    телеграма своя панель), и точки уходили под неё. Теперь высота героя не
+    телеграма своя панель), и точки уходили под нее. Теперь высота героя не
     больше высоты окна. В тот же день — у друга владельца в Safari на айфоне:
     панель адреса там плавает поверх нижних ~90px страницы. Поэтому на
     телефоне точки стоят под абзацем, далеко от нижнего края окна.
@@ -4974,7 +4974,7 @@ def _sector_table_payload(deal_id):
 
 def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
     """Таблица «Мультипликаторы по отраслям» (19 октября 2026): выбор
-    мультипликатора, медиана при трёх сделках, прочерк с подсказкой, список
+    мультипликатора, медиана при трех сделках, прочерк с подсказкой, список
     сделок по клику, выгрузка CSV; на телефоне таблица прокручивается внутри
     блока, страница не едет. На карточке сделки — блок «оценка» со ссылкой
     на методику."""
@@ -5022,7 +5022,7 @@ def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
 
 
 def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(browser, base_url):
-    """Блок «Признаки возможных сделок» (партнёр владельца, 19 октября 2026):
+    """Блок «Признаки возможных сделок» (партнер владельца, 19 октября 2026):
     2–4 строки «дата — что заявлено — источник» и кнопка «Разобрать с
     ассистентом», которая уходит с контекстом страницы. Нет признаков —
     блока нет. Файл признаков подменяется: тест не зависит от того, что
@@ -5032,7 +5032,7 @@ def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(brow
          "summary": "ВТБ — возможная продажа: Росгосстрах", "source": ["Известия", "https://iz.ru/x"],
          "origin": "news"},
         {"id": "s2", "company_id": "gcafc31dc", "date": "2026-06", "kind": "investor",
-         "summary": "ВТБ — ищет инвестора или партнёра для очень длинного названия направления бизнеса "
+         "summary": "ВТБ — ищет инвестора или партнера для очень длинного названия направления бизнеса "
                     "Оченьдлинноеназваниеактиваизсорокабуквбезпробеловвообще",
          "source": ["Коммерсантъ", "https://www.kommersant.ru/doc/1"], "origin": "card_text", "deal_id": "nope"},
         {"id": "s3", "company_id": "gcafc31dc", "date": "2025-02-01", "kind": "sell", "summary": "ВТБ — x",
@@ -5055,10 +5055,10 @@ def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(brow
             pg.goto(base_url + "/#/companies/gcafc31dc", wait_until="domcontentloaded")
             pg.wait_for_selector(".co-signals li", timeout=20000)
             items = pg.locator(".co-signals li")
-            assert items.count() == 4, "показываем не больше четырёх строк"
+            assert items.count() == 4, "показываем не больше четырех строк"
             first = items.first.inner_text()
             assert first.startswith("11 сентября 2026") and "Возможная продажа: Росгосстрах" in first, first
-            assert "ВТБ —" not in first, "имя компании на её же странице не повторяется"
+            assert "ВТБ —" not in first, "имя компании на ее же странице не повторяется"
             assert pg.locator(".co-signals li a[href='https://iz.ru/x']").count() == 1
             assert "пятый" not in pg.inner_text(".co-signals")
             assert "признаки возможных сделок" in pg.inner_text(".co-signals").lower()
@@ -5080,8 +5080,8 @@ def test_company_page_shows_signs_of_possible_deals_only_when_there_are_any(brow
 
 
 def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
-    """Владелец 26 октября 2026: у сделки с нераскрытой ценой — зелёная кнопка
-    «Анализ Компаса», по нажатию — расчёт с объяснением. У сделки с ценой
+    """Владелец 26 октября 2026: у сделки с нераскрытой ценой — зеленая кнопка
+    «Анализ Компаса», по нажатию — расчет с объяснением. У сделки с ценой
     кнопки нет."""
     import json as _json
     base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))

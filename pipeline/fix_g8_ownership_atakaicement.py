@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Качество, 19 сентября 2026 — все три уровня очереди дочитывания пусты,
-взят пункт G8 из бэклога («Собственники компании на её странице»).
+взят пункт G8 из бэклога («Собственники компании на ее странице»).
 
 `gebf162ee` («Атакайцемент») — карточка `gef7d4e54» («Атакайцемент»
 продан на торгах компании «Бизнес-Инвест») уже называла бенефициара в
@@ -44,7 +44,7 @@ def main(write=False):
 
     for cid, ownership in OWNERSHIP.items():
         assert cid in companies, f"нет профиля {cid}"
-        assert not companies[cid].get('ownership'), f"{cid} уже несёт ownership: {companies[cid].get('ownership')!r}"
+        assert not companies[cid].get('ownership'), f"{cid} уже несет ownership: {companies[cid].get('ownership')!r}"
         print(f"{cid} ({companies[cid]['name']}): += ownership")
         for o in ownership:
             print(f"    {o['name']} — {o.get('share', '(доля не названа)')} (на {o['as_of']})")

@@ -30,7 +30,7 @@ def test_finding_keys_are_unique_enough():
 
 
 def test_ipo_cards_do_not_buy_themselves():
-    """Та же проверка, что и в приёмке, но по всей живой базе."""
+    """Та же проверка, что и в приемке, но по всей живой базе."""
     bad = [d["id"] for d in DATA["deals"]
            if (d.get("type") or "") == "IPO" and d.get("buyer") and not d.get("target")
            and "фонд" not in (d.get("title") or "").lower()]

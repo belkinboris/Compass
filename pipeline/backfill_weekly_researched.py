@@ -13,7 +13,7 @@
 never_appears_without_weekly_researched` упал бы на всей истории — не
 потому, что данные неверны, а потому, что поле появилось позже факта.
 
-Правило: `followup_researched` уже стоит и `weekly_researched` ещё нет →
+Правило: `followup_researched` уже стоит и `weekly_researched` еще нет →
 `weekly_researched = followup_researched` (та же дата, а не сегодняшняя —
 честно, что фактически было пройдено ДАВНО, а не пришло только что).
 
@@ -40,7 +40,7 @@ def main(argv):
     for d in to_stamp[:10]:
         print('  %s: followup_researched=%s' % (d['id'], d['followup_researched']))
     if len(to_stamp) > 10:
-        print('  ... и ещё %d' % (len(to_stamp) - 10))
+        print('  ... и еще %d' % (len(to_stamp) - 10))
 
     if '--write' not in argv:
         print('\nСухой прогон — ничего не записано. Добавьте --write.')

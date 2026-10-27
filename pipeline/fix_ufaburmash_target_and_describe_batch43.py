@@ -12,7 +12,7 @@
 `target`, а не `seller`.
 
 ЧТО ДЕЛАЕТ.
-1. Создаёт профиль «ООО «Уфабурмаш»» (уфимский производитель бурового
+1. Создает профиль «ООО «Уфабурмаш»» (уфимский производитель бурового
    инструмента), переносит на него `target` сделки g67b98f28.
 2. Ставит `seller` той же сделки на g9fbbbd54 «Михаил Данилов» — он
    действительно продавец/совладелец по тексту сделки, профиль человека
@@ -81,7 +81,7 @@ def main(write=False):
 
     # --- 1. исправление испорченной ссылки target ---
     danilov = comps[DANILOV_ID]
-    assert danilov['name'] == 'Михаил Данилов', 'профиль Данилова уже изменён'
+    assert danilov['name'] == 'Михаил Данилов', 'профиль Данилова уже изменен'
     deal = by_id[DEAL_ID]
     assert deal['target'] == DANILOV_ID, 'target сделки уже не Данилов'
     assert deal.get('seller') is None, 'seller сделки уже заполнен'
@@ -121,7 +121,7 @@ def main(write=False):
 
     print('\nОписаний записано: %d' % wrote)
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
         for cid, name, old in skipped[:5]:
             print('   %s %s — %r' % (cid, name, old))
 

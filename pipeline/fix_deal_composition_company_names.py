@@ -33,7 +33,7 @@
   2. `g5006b71b` «Приобретение Qiwi» — профиль-сирота, ни одной сделки
      в базе. Первая попытка просто переименовать его в «Qiwi» тут же
      уронила `test_no_company_twins`: в базе уже есть полноценный
-     профиль «КИВИ» (`gd5d02d09`, 6 сделок, своё описание) — та же
+     профиль «КИВИ» (`gd5d02d09`, 6 сделок, свое описание) — та же
      компания кириллицей. Простое переименование само стало бы
      близнецом. Правка — не переименование, а слияние: `g5006b71b`
      сливается в `gd5d02d09`.
@@ -131,7 +131,7 @@ def main(write=False):
         assert companies[survivor_id]['name'] == survivor_old_name, 'выживший %s уже не тот' % survivor_id
         full_text_refs = sorted(d['id'] for d in deals if dup_id in json.dumps(d, ensure_ascii=False))
         assert full_text_refs == sorted(deal_ids), (
-            'дубль %s встречается не только в учтённых сделках: %r' % (dup_id, full_text_refs))
+            'дубль %s встречается не только в учтенных сделках: %r' % (dup_id, full_text_refs))
 
         final_name = survivor_new_name or survivor_old_name
         print('СЛИВАЕМ  %s -> %s (%s)' % (dup_id, survivor_id, final_name))
@@ -189,7 +189,7 @@ def main(write=False):
     print('\nПереименовано: %d, слито близнецов: %d, описаний: %d, отраслей: %d'
           % (len(RENAMES), len(MERGES), wrote, ind_fixed))
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
 
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')

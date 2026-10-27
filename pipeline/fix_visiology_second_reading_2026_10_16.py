@@ -21,7 +21,7 @@ CARD_ID = 'g7bff6e5c'
 
 COMNEWS_URL = 'https://www.comnews.ru/content/240377/2025-07-25/2025-w30/1010/visiology-uskorit-razrabotku-platformy-opirayas-sredstva-vneshnikh-investorov'
 
-OLD_TITLE = 'Visiology завершил инвестиционный раунд объёмом 200 млн рублей'
+OLD_TITLE = 'Visiology завершил инвестиционный раунд объемом 200 млн рублей'
 NEW_TITLE = 'Visiology привлекла 200 млн рублей через краудинвестинговую платформу «Поток»'
 
 OLD_DATE = '2026-10-16'

@@ -27,8 +27,8 @@ def _shown(deals):
 
 
 def test_deal_page_is_the_site_page_with_the_deal_written_in(client, data):
-    """Поисковик видит сделку без скрипта, но только в объёме поста канала:
-    разбор экономиста и юриста остаётся в приложении (решение владельца)."""
+    """Поисковик видит сделку без скрипта, но только в объеме поста канала:
+    разбор экономиста и юриста остается в приложении (решение владельца)."""
     deal = next(d for d in data["deals"] if d["id"] == "g0b187624")
     r = client.get("/deal/g0b187624")
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
@@ -92,8 +92,8 @@ def test_llms_txt_describes_the_site(client):
 def test_home_page_description_counts_the_deals_live(client, data):
     page = client.get("/").text
     n = seo_pages.rounded_count()
-    # без торгов — как на первом экране сайта (владелец, 27 октября 2026)
-    counted = [d for d in _shown(data["deals"]) if d.get("type") != "Продажа с торгов"]
+    # как на первом экране сайта (владелец, 27 октября 2026): торги без результата не в счет
+    counted = [d for d in _shown(data["deals"]) if not (d.get("type") == "Продажа с торгов" and d.get("status") != "Закрыта")]
     assert n <= len(counted) < n + 100
     for tag in re.findall(r'<meta (?:name="description"|property="og:description") content="[^"]*"', page):
         assert "%d+ сделок" % n in tag, tag

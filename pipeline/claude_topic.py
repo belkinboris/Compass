@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Тема «Клод» в группе-консоли: забрать сообщения агенту и ответить на них.
 
-Владелец и партнёр пишут в тему «Клод» задачи, правки и вопросы. Сайт ловит
+Владелец и партнер пишут в тему «Клод» задачи, правки и вопросы. Сайт ловит
 их вебхуком и складывает в свою базу (`_claude_topic_message` в main.py);
 рутина «тема Клод» (routines/claude_topic.md) забирает их этим скриптом,
 делает работу и отвечает в ту же тему реплаем на каждое сообщение.
@@ -15,8 +15,8 @@
 
 `--reply` — номер СООБЩЕНИЯ в Telegram (поле message_id в выводе), а не id
 записи; `--consume` — id записей. Без TELEGRAM_BOT_TOKEN скрипт печатает, что
-отправил бы, и ничего не шлёт. Адрес — только группа-консоль: канал
-публикации вычёркивается всегда (см. console_topics.channel_ids/is_channel).
+отправил бы, и ничего не шлет. Адрес — только группа-консоль: канал
+публикации вычеркивается всегда (см. console_topics.channel_ids/is_channel).
 """
 import argparse
 import json
@@ -37,10 +37,10 @@ KIND = 'claude'
 CHUNK = 4000
 CAPTION_LIMIT = 1024
 DOWNLOADS = os.path.join(ROOT, 'data', 'inbox', 'claude')
-# ПАМЯТЬ ТЕМЫ. Каждый прогон рутины — новая сессия, а Telegram отдаёт только
+# ПАМЯТЬ ТЕМЫ. Каждый прогон рутины — новая сессия, а Telegram отдает только
 # само сообщение и обрывок того, на что ответили. 19 октября 2026 рутина без
 # истории переспросила, что значит «Да», и спорила о продавце, которого
-# партнёр назвал двумя сообщениями выше. Журнал входящих и наших ответов
+# партнер назвал двумя сообщениями выше. Журнал входящих и наших ответов
 # лежит в git, и перед новыми сообщениями печатается его хвост.
 LOG = os.path.join(ROOT, 'data', 'claude_topic_log.jsonl')
 LOG_TAIL = 16
@@ -125,7 +125,7 @@ def split_text(text, size=CHUNK):
 
 
 def _target():
-    """(чат, тема) консоли. Канал публикации сюда не попадёт никогда."""
+    """(чат, тема) консоли. Канал публикации сюда не попадет никогда."""
     chats = console_topics.console_chats()
     forbidden = console_topics.channel_ids()
     group = None
@@ -205,7 +205,7 @@ def _post(method, payload, files=None):
     except ValueError:
         data = {'ok': False, 'description': 'ответ не разобран (код %d)' % r.status_code}
     if not data.get('ok') and payload.get('parse_mode') and "can't parse entities" in str(data.get('description')):
-        print('  разметку не приняли — повторяю без неё')
+        print('  разметку не приняли — повторяю без нее')
         payload = dict(payload)
         del payload['parse_mode']
         return _post(method, payload, files)
@@ -237,7 +237,7 @@ def reply(message_id, text=None, html=False, photo=None, caption=None):
             print(note)
         return False
     if thread is None:
-        print('Тема «Клод» ещё не закреплена: сообщение уйдёт в общую ленту группы. '
+        print('Тема «Клод» еще не закреплена: сообщение уйдет в общую ленту группы. '
               'Закрепить — /start в теме и кнопка «Назначить эту тему».')
     ok = True
     if photo:

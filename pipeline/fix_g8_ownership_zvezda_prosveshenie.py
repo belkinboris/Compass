@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Качество, 19 сентября 2026 — все три уровня очереди дочитывания снова
 измерены и снова пусты, продолжение пункта G8 из бэклога («Собственники
-компании на её странице»).
+компании на ее странице»).
 
 Оба факта уже лежали в прозе карточек сделок; личный WebFetch подтвердил
 каждый дословно по независимому источнику, отдельно от уже прочитанного
@@ -20,7 +20,7 @@
    `gf9932079» уже называла итоговую долю в прозе. WebFetch по
    Коммерсанту (https://www.kommersant.ru/doc/8009248) подтвердил
    дословно: «У ВЭБа — 75%, у РФПИ — 25%» — ВЭБ.РФ консолидировал
-   контрольный пакет после покупки ещё 25% у «Инвест ПРО».
+   контрольный пакет после покупки еще 25% у «Инвест ПРО».
 
 Запуск:
     python3 pipeline/fix_g8_ownership_zvezda_prosveshenie.py            # сухой прогон
@@ -53,7 +53,7 @@ def main(write=False):
 
     for cid, ownership in OWNERSHIP.items():
         assert cid in companies, f"нет профиля {cid}"
-        assert not companies[cid].get('ownership'), f"{cid} уже несёт ownership: {companies[cid].get('ownership')!r}"
+        assert not companies[cid].get('ownership'), f"{cid} уже несет ownership: {companies[cid].get('ownership')!r}"
         print(f"{cid} ({companies[cid]['name']}): += ownership")
         for o in ownership:
             print(f"    {o['name']} — {o.get('share', '(доля не названа)')} (на {o['as_of']})")

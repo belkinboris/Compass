@@ -30,7 +30,7 @@ CommEX объявила о закрытии «после тщательного 
 Bitget, KuCoin, Gate.io — по данным саб-агента, не дозаверено).
 Конечный бенефициар самой CommEX также не установлен ни в одном
 источнике (только версия аналитика о казахстанских предпринимателях,
-не подтверждённая документально) — не переношу как факт.
+не подтвержденная документально) — не переношу как факт.
 
 Запуск: python3 pipeline/fix_binance_commex_shutdown_no_buyer_found.py
         python3 pipeline/fix_binance_commex_shutdown_no_buyer_found.py --write

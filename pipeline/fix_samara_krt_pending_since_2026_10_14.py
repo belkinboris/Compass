@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Карточка g420352ff собрана разовым скриптом мимо promote.py (тот же
 класс пропуска, что уже чинился для Мадрида/Nestlé/«Ашана», CLAUDE.md) —
-у неё не было `pending_since`, от которого `approve.py` считает сутки
+у нее не было `pending_since`, от которого `approve.py` считает сутки
 молчания владельца (test_data.py::test_every_pending_card_has_pending_since).
 
 Запуск:

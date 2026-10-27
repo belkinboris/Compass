@@ -12,7 +12,7 @@ def _rows(industry, n, ps=1.0, ev_op=5.0, pe=8.0):
 
 def test_revenue_multiple_needs_own_industry():
     """Выручка туроператора × медиана всех отраслей дала 375 млрд ₽ — цена к
-    выручке берётся только по сделкам своей отрасли."""
+    выручке берется только по сделкам своей отрасли."""
     comps = ve.comparables(_rows('Ритейл', 6), 'Туризм')
     report = {'year': 2025, 'revenue_rub': 1e10, 'operating_profit_rub': 5e8, 'net_profit_rub': 3e8,
               'borrowings_rub': 0, 'cash_rub': 0}

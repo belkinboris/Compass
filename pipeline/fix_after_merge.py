@@ -9,7 +9,7 @@
 
 ЧТО ЧИНИТСЯ.
 
-1. ОТРАСЛЬ ВНЕ СПИСКА. У трёх карточек стояла «Фарма и медицина» — такой
+1. ОТРАСЛЬ ВНЕ СПИСКА. У трех карточек стояла «Фарма и медицина» — такой
    отрасли в `INDUSTRIES` нет. Все три про клиники и больницу, поэтому
    «Здравоохранение», а не «Фармацевтика»: лечат людей, а не производят
    лекарства.
@@ -81,7 +81,7 @@ def main(write=False):
     deal = by_id[ASSET_IS_PARTY]
     assert deal.get('target') == 'yandex' and deal.get('seller'), \
         'карточка %s изменилась — перепроверьте' % ASSET_IS_PARTY
-    log.append(('предмет=сторона', ASSET_IS_PARTY, 'target «yandex» снят, продавец «%s» остаётся'
+    log.append(('предмет=сторона', ASSET_IS_PARTY, 'target «yandex» снят, продавец «%s» остается'
                 % deal.get('seller')))
     if write:
         deal['target'] = None

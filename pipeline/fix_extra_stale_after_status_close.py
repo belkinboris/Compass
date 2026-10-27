@@ -3,7 +3,7 @@
 и pipeline/fix_boosty_harkaneka_closed.py) поле `extra` осталось нетронутым
 у обеих карточек и продолжало говорить «в процессе закрытия»/«планируется
 закрытие» — тот самый класс дефекта из REVISION_BRIEF.md («после правки —
-перечитайте карточку целиком, не только своё поле»).
+перечитайте карточку целиком, не только свое поле»).
 
 Запуск: python3 pipeline/fix_extra_stale_after_status_close.py
         python3 pipeline/fix_extra_stale_after_status_close.py --write

@@ -2,11 +2,11 @@
 """Проверка качества карточек сделок и профилей компаний.
 
 Скрипт читает и автоматическую, и кураторскую часть каталога. Он ничего не
-склеивает сам: результатом являются отчёт и очередь редакционной проверки.
+склеивает сам: результатом являются отчет и очередь редакционной проверки.
 
 Проверяются:
 - отсутствующие или конфликтующие роли сторон;
-- ссылки на несуществующие профили с учётом алиасов объединённых компаний;
+- ссылки на несуществующие профили с учетом алиасов объединенных компаний;
 - статус, заголовок, источники и хронология этапов;
 - вероятные дубли жизненного цикла и отдельные связанные транзакции;
 - возможное смешение разных активов в одном профиле компании.
@@ -35,7 +35,7 @@ OPEN = {"Обсуждается", "Подписана", "Согласовани�
 TERMINAL = {"Закрыта", "Не состоялась"}
 M_AND_A = {"M&A", "Продажа недвижимости", "Выкуп доли"}
 PRESENT = re.compile(r"\b(?:покупает|приобретает|прода[её]т|выкупает|получает|созда[её]т)\b", re.I)
-CANCEL_WORDS = re.compile(r"не\s+состоял|сорвал|прекращен|прекращён|отказал.*сделк", re.I)
+CANCEL_WORDS = re.compile(r"не\s+состоял|сорвал|прекращен|прекращен|отказал.*сделк", re.I)
 CLOSED_WORDS = re.compile(r"приобр[её]л|купил|продал|завершил|закрыл", re.I)
 HOME_PATHS = {"", "/", "/ru", "/ru/", "/index.html"}
 GENERIC_NAMES = re.compile(r"^(?:компания|группа|структура|владельцы|акционеры|инвесторы|не раскрыт)$", re.I)
@@ -172,7 +172,7 @@ def validate_deal(payload: dict, deal: dict) -> list[Issue]:
     if deal.get("status") == "Не состоялась" and not CANCEL_WORDS.search(title + " " + str(deal.get("extra") or "")):
         issues.append(Issue("info", "cancelled_without_marker", did, title, "Статус сообщает о срыве, но это неясно из заголовка"))
     if deal.get("status") in OPEN and CLOSED_WORDS.search(title):
-        issues.append(Issue("warning", "open_status_closed_title", did, title, "Заголовок звучит как закрытие, а статус остаётся открытым"))
+        issues.append(Issue("warning", "open_status_closed_title", did, title, "Заголовок звучит как закрытие, а статус остается открытым"))
 
     urls = source_urls(deal)
     if not urls:
@@ -344,13 +344,13 @@ def write_report(payload: dict, issues: list[Issue], duplicates: list[dict], rel
     for issue in priority[:120]:
         lines.append(f"- **{issue.deal_id}** — {issue.detail}. {issue.title}")
     if len(priority) > 120:
-        lines.append(f"- …ещё {len(priority)-120}; полный список находится в `data/audit/deal_audit.json`.")
+        lines.append(f"- …еще {len(priority)-120}; полный список находится в `data/audit/deal_audit.json`.")
 
     lines += ["", "## Кандидаты на объединение или редакционную связь", ""]
     for row in duplicates[:80]:
         lines.append(f"- **{row['deal_a']} ↔ {row['deal_b']}** — {row['reason']}. «{row['title_a']}» / «{row['title_b']}»")
     if len(duplicates) > 80:
-        lines.append(f"- …ещё {len(duplicates)-80} в JSON-отчёте.")
+        lines.append(f"- …еще {len(duplicates)-80} в JSON-отчете.")
 
     lines += ["", "## Похожие, но потенциально самостоятельные транзакции", ""]
     for row in related[:50]:
@@ -363,7 +363,7 @@ def write_report(payload: dict, issues: list[Issue], duplicates: list[dict], rel
               "4. Заполненное редакционное поле не перезаписывается эвристикой. Расхождение попадает в очередь проверки.",
               "5. Домашняя страница сайта не считается достаточным источником сделки.",
               "6. Новая M&A-карточка без покупателя или предмета сделки не публикуется автоматически.",
-              "7. Старые адреса объединённых карточек должны вести на соответствующий исторический этап.", ""]
+              "7. Старые адреса объединенных карточек должны вести на соответствующий исторический этап.", ""]
     OUT_MD.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -380,7 +380,7 @@ def main() -> None:
     print(f"Подозрений на смешение профилей: {len(collisions)}")
     for code, count in Counter(x.code for x in issues).most_common():
         print(f"  {code}: {count}")
-    print("Отчёты:", OUT_MD.relative_to(ROOT), "и", OUT_JSON.relative_to(ROOT))
+    print("Отчеты:", OUT_MD.relative_to(ROOT), "и", OUT_JSON.relative_to(ROOT))
 
 
 if __name__ == "__main__":

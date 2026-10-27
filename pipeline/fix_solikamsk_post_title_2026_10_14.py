@@ -25,9 +25,9 @@ if '--edit' in sys.argv:
     with httpx.Client(timeout=30) as client:
         print(send_telegram.edit_message(client, token, chat, MSG, new, buttons))
     print('сообщение', MSG, 'исправлено')
-    # Снимок черновика — тот же текст: иначе следующая правка вернёт старый заголовок.
+    # Снимок черновика — тот же текст: иначе следующая правка вернет старый заголовок.
     raw = open(DATA, encoding='utf-8').read()
     fresh = json.loads(raw)
     next(d for d in fresh['deals'] if d['id'] == ID)['post_preview'] = new
     open(DATA, 'w', encoding='utf-8').write(json.dumps(fresh, ensure_ascii=False, indent=1) + ('\n' if raw.endswith('\n') else ''))
-    print('post_preview обновлён')
+    print('post_preview обновлен')

@@ -8,7 +8,7 @@
 
 ОТКЛОНЕНО, С ПРИЧИНОЙ (не вносится этой или следующей партией):
   ga218f75c (Акульчев/«Колос») — единственный % в тексте относится к доле
-    Сулеймановой в ИСКЛЮЧЁННОМ из сделки бренде «Руслада», не к «Колосу».
+    Сулеймановой в ИСКЛЮЧЕННОМ из сделки бренде «Руслада», не к «Колосу».
   gdf51a7ca (Аренадата/«Убик») — 49% — доля ОДНОГО из нескольких
     продавцов (Саттаров), проданное покупателю целиком могло быть больше.
   g3ece5143 (Росспиртпром/ТВЗ) — 51% относится к «Бренд менеджмент»,
@@ -91,7 +91,7 @@ def main(write=False):
         assert target_id in companies, f"нет профиля {target_id}"
         assert buyer_id in companies, f"нет профиля {buyer_id}"
         assert 'ownership' not in companies[target_id], \
-            f"{target_id} уже несёт ownership"
+            f"{target_id} уже несет ownership"
         entry = dict(name=companies[buyer_id]['name'], id=buyer_id,
                      share=share, as_of=as_of, source=source)
         print(f"{target_id} ({companies[target_id]['name']}): "

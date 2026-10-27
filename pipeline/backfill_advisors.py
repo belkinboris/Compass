@@ -55,7 +55,7 @@ FIRM_DISPLAY = {
     "orion": "Orion", "level": "LEVEL Legal Services", "verba": "VERBA LEGAL",
     "lkp": "Лемчик, Крупский и Партнеры", "nikolaev": "МКА «Николаев и партнеры»",
     "amond": "Amond & Smith", "epam": "Адвокатское бюро ЕПАМ",
-    "mvp": "Меллинг, Войтишкин и Партнёры", "o2": "O2 Consulting",
+    "mvp": "Меллинг, Войтишкин и Партнеры", "o2": "O2 Consulting",
     "asari": "ASARI", "b1": "Б1", "alumni": "ALUMNI Partners",
     "ivanyan": "Ivanyan & Partners", "nikolskaya": "Никольская Консалтинг",
     "pgp": "Пепеляев Групп",
@@ -63,7 +63,7 @@ FIRM_DISPLAY = {
 # телеграм-каналы приходят с полем source вида "@BIRCHLEGAL (Telegram)" — сводим
 # известные @handle к тем же человекочитаемым именам, что и firm_id с сайтов
 TG_HANDLE_TO_FIRM = {
-    "nextons_ru": "Nextons", "mvplegal": "Меллинг, Войтишкин и Партнёры",
+    "nextons_ru": "Nextons", "mvplegal": "Меллинг, Войтишкин и Партнеры",
     "levellegalservices": "LEVEL Legal Services", "birchlegal": "Birch Legal",
     "kkmpconnect": "ККМП (Кучер Кулешов Максименко и партнеры)", "verbalegal": "VERBA LEGAL",
     "alumnimna": "ALUMNI Partners", "betterchance_ru": "Better Chance",
@@ -121,7 +121,7 @@ def main():
         if already:
             skipped_already_have += 1
             continue
-        # заменяем плейсхолдер "не раскрывались" или добавляем ещё одного консультанта
+        # заменяем плейсхолдер "не раскрывались" или добавляем еще одного консультанта
         note = f"по данным {'сайта' if 'tg_post_id' not in r else 'телеграм-канала'} фирмы — {r.get('title','')[:120]}"
         new_entry = ["Юридический консультант", firm_name, note]
         if matched["law"]["adv"] and matched["law"]["adv"][0][1] == "Не раскрывались":
@@ -131,8 +131,8 @@ def main():
         filled += 1
 
     print(f"\nДозаполнено консультантов: {filled}")
-    print(f"  без извлечённого имени клиента: {skipped_no_client}")
-    print(f"  клиент не нашёлся среди наших карточек: {skipped_no_match}")
+    print(f"  без извлеченного имени клиента: {skipped_no_client}")
+    print(f"  клиент не нашелся среди наших карточек: {skipped_no_match}")
     print(f"  уже был этот консультант: {skipped_already_have}")
 
     json.dump(deals_data, open(out_path, "w", encoding="utf-8"), ensure_ascii=False)

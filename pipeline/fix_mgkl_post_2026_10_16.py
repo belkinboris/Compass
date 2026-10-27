@@ -28,4 +28,4 @@ if '--edit' in sys.argv:
     fresh = json.loads(raw)
     next(d for d in fresh['deals'] if d['id'] == ID)['post_preview'] = new
     open(DATA, 'w', encoding='utf-8').write(json.dumps(fresh, ensure_ascii=False, indent=1) + ('\n' if raw.endswith('\n') else ''))
-    print('post_preview обновлён')
+    print('post_preview обновлен')

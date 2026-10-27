@@ -48,7 +48,7 @@ def main(write):
                 continue
             fixed, n = PATTERN.subn(lambda m: '«%s«%s»»' % (m.group(1), m.group(2)), t)
             assert n > 0, 'запись %d [%s]: разбалансировано, но пара «X «Y» не найдена: %r' % (i, field, t[:120])
-            assert fixed.count('«') == fixed.count('»'), 'запись %d [%s]: всё ещё разбалансировано' % (i, field)
+            assert fixed.count('«') == fixed.count('»'), 'запись %d [%s]: все еще разбалансировано' % (i, field)
             plan.append((i, field, t, fixed))
 
     print('Полей с потерянной второй «этажкой»: %d' % len(plan))

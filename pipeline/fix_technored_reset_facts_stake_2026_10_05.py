@@ -34,7 +34,7 @@ def main(write):
 
     if write:
         json.dump(data, open(DATA_PATH, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-        print('facts.stake карточки technored возвращён к basis=rule/49.0. ЗАПИСАНО.')
+        print('facts.stake карточки technored возвращен к basis=rule/49.0. ЗАПИСАНО.')
     else:
         print('Сухой прогон: вернул бы facts.stake к basis=rule/49.0. Повторите с --write.')
 

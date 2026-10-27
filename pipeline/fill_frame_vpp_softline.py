@@ -13,7 +13,7 @@
 типовая заглушка, дословная цитата ей не нужна (см. правило CLAUDE.md
 «плейсхолдеры не считаются данными»). Содержательные поля линз (`eco.share`,
 `eco.rationale`, `eco.context`, `eco.target_fin`) заполняются ОТДЕЛЬНО, через
-`pipeline/ingest/review.py` — там нужна дословная цитата, и механизм её уже
+`pipeline/ingest/review.py` — там нужна дословная цитата, и механизм ее уже
 проверяет.
 
 Запуск: python3 pipeline/fill_frame_vpp_softline.py

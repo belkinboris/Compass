@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """G8 (PRODUCT_ROADMAP.md) — вторая партия «Собственников», 21 августа
 2026. Пилот (партия 1, `fix_g8_ownership_pilot.py`) проверил схему и
-рендер на двух профилях; эта партия — первое расширение по ДЕШЁВОМУ
+рендер на двух профилях; эта партия — первое расширение по ДЕШЕВОМУ
 источнику: закрытые M&A-сделки, у которых уже есть `buyer`/`target` с
 профилями и текст самой карточки называет долю. Новых WebFetch/WebSearch
 не потребовалось — все факты уже дословно лежат в `eco.share`/`extra`/
-`law.struct` этих же карточек, обогащённых в прошлых прогонах.
+`law.struct` этих же карточек, обогащенных в прошлых прогонах.
 
 ЗАМЕР И ЕГО ГРАНИЦА. Механический поиск «единственный % в тексте
 закрытой M&A-карточки с обоими профилями» дал 221 кандидата — но
@@ -79,7 +79,7 @@ def main(write=False):
         assert target_id in companies, f"нет профиля {target_id}"
         assert buyer_id in companies, f"нет профиля {buyer_id}"
         assert 'ownership' not in companies[target_id], \
-            f"{target_id} уже несёт ownership"
+            f"{target_id} уже несет ownership"
         entry = dict(name=companies[buyer_id]['name'], id=buyer_id,
                      share=share, as_of=as_of, source=source)
         print(f"{target_id} ({companies[target_id]['name']}): "

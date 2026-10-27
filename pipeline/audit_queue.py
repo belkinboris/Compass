@@ -11,10 +11,10 @@
    классов, где дефект виден из самих данных, состояние считается заново —
    поэтому очередь не заставляет открывать то, что уже в порядке.
 2. ПАМЯТЬ. Разобранная находка записывается в audit_queue_done.json вместе с
-   тем, чем она закрыта. Прочитанное и отклонённое («это не дефект») тоже
-   закрывается — иначе оно вернётся в очередь следующим прогоном.
+   тем, чем она закрыта. Прочитанное и отклоненное («это не дефект») тоже
+   закрывается — иначе оно вернется в очередь следующим прогоном.
 3. ПОРЯДОК. Сначала то, что искажает факт сделки (роль не туда, поля спорят),
-   потом косметика. Приоритет взят из самого отчёта аудита.
+   потом косметика. Приоритет взят из самого отчета аудита.
 
     python3 pipeline/audit_queue.py --stats
     python3 pipeline/audit_queue.py --queue --class CONTRADICTION --limit 20
@@ -35,7 +35,7 @@ FINDINGS = os.path.join(ROOT, "pipeline", "audit_field_placement", "findings.jso
 DONE = os.path.join(ROOT, "pipeline", "audit_queue_done.json")
 DATA = os.path.join(ROOT, "static", "data", "deals_promoted.json")
 
-# Порядок разбора: сверху то, что врёт о сделке, снизу — то, что её не искажает.
+# Порядок разбора: сверху то, что врет о сделке, снизу — то, что ее не искажает.
 PRIORITY = [
     "SELF_SALE", "ROLE_WRONG", "CONTRADICTION", "STATUS_MISMATCH",
     "DATE_MISMATCH", "SUM_NOT_PRICE", "TYPE_MISMATCH", "FIELD_MISPLACED",
@@ -101,12 +101,12 @@ def load_findings() -> list:
     `findings.json` — исторический снимок ОДНОГО прогона, не трогается.
     Периодическая проверка ЖИВОЙ базы (по методике самого аудита —
     `2026-09-13-report.md`, «повторный аудит того же вида запускается через
-    несколько месяцев дочитывания легаси-базы») кладёт свою партию рядом,
+    несколько месяцев дочитывания легаси-базы») кладет свою партию рядом,
     файлом `supplement_<дата>.json` — тот же формат, что и `findings.json`
     (объект с ключом `findings`, список записей с теми же полями). Ничего
     сливать вручную не нужно: `key_of()` хэширует (id, класс, цитата), и
     находка, переоткрытая повторной проверкой, естественно совпадает с уже
-    закрытой записью в `audit_queue_done.json`, если её уже разобрали.
+    закрытой записью в `audit_queue_done.json`, если ее уже разобрали.
     """
     findings = list(json.load(io.open(FINDINGS, encoding="utf-8"))["findings"])
     if os.path.isdir(SUPPLEMENTS_DIR):
@@ -159,11 +159,11 @@ def still_broken(card: dict, cls: str, field=None) -> bool:
             card.get("target"), card.get("asset_id"))
     if cls in ("ROLE_MISSING", "UNLINKED_PARTY"):
         # ПО СВОЕМУ ПОЛЮ, А НЕ ПО ЛЮБОМУ. Раньше здесь стоял `any(...)` по
-        # всем трём ролям сразу, и находка про продавца оставалась в очереди
+        # всем трем ролям сразу, и находка про продавца оставалась в очереди
         # после того, как продавца привязали, — просто потому, что у той же
         # карточки не привязан покупатель. Читатели 21 сентября нашли это
         # независимо друг от друга, открыв по нескольку уже закрытых находок:
-        # «13% партии — протухшие записи». Теперь находка живёт ровно до тех
+        # «13% партии — протухшие записи». Теперь находка живет ровно до тех
         # пор, пока сломано ТО поле, о котором она.
         pair = _role_pair_of(field)
         pairs = [pair] if pair else list(ROLE_FIELDS.items())
@@ -192,7 +192,7 @@ def state_of(f: dict, cards: dict, merged: dict, done: dict) -> str:
         return "ушла" if cid in merged or True else "ушла"
     if not still_broken(cards[cid], f["class"], f.get("field")):
         return "неактуальна"
-    return "ждёт"
+    return "ждет"
 
 
 def rows(cards=None, merged=None, done=None) -> list:
@@ -235,7 +235,7 @@ def main(argv=None) -> int:
 
     rs = rows()
     if a.queue:
-        want = [r for r in rs if r["state"] == "ждёт"]
+        want = [r for r in rs if r["state"] == "ждет"]
         if a.cls:
             want = [r for r in want if r["class"] == a.cls.upper()]
         if a.no_source:
@@ -247,7 +247,7 @@ def main(argv=None) -> int:
         for r in want[:a.limit]:
             print("%s  %s  %s  поле %s" % (r["key"], r["card_id"], r["class"], r.get("field")))
             print("    видно: %s" % (r.get("quote") or "")[:200])
-            print("    в чём дело: %s" % (r.get("problem") or "")[:260])
+            print("    в чем дело: %s" % (r.get("problem") or "")[:260])
             print("    что сделать: %s" % (r.get("action") or "")[:200])
             print()
         return 0
@@ -257,7 +257,7 @@ def main(argv=None) -> int:
     for r in rs:
         per.setdefault(r["class"], Counter())[r["state"]] += 1
     tot = Counter(r["state"] for r in rs)
-    print("%-22s %6s %6s %6s %6s" % ("класс", "всего", "ждёт", "закрыто", "неакт."))
+    print("%-22s %6s %6s %6s %6s" % ("класс", "всего", "ждет", "закрыто", "неакт."))
     for cls in sorted(per, key=lambda c: PRIORITY.index(c) if c in PRIORITY else 99):
         c = per[cls]
         print("%-22s %6d %6d %6d %6d"

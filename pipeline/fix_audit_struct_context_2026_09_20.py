@@ -30,10 +30,10 @@ sys.path.insert(0, str(ROOT))
 from pipeline import audit_queue as aq  # noqa: E402
 from pipeline.fix_audit_move_utils import apply_move  # noqa: E402
 
-# Поле целиком не о механике ЭТОЙ сделки — уезжает всё.
+# Поле целиком не о механике ЭТОЙ сделки — уезжает все.
 WHOLE = ["g08d1c155", "gddb34475", "gd1f94881"]
 
-# Одно предложение — рядом законная механика, трогать её нельзя.
+# Одно предложение — рядом законная механика, трогать ее нельзя.
 SENTENCE_IDS = [
     "gd9ccfdd2", "gadd238c3", "g34b9af03", "g10053480", "cacdb5edc",
     "g1664083c", "ge292671d", "g4b447867", "c4341479b", "gdc4ff4ab",

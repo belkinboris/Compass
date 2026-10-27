@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """У карточки `gd96404f2` («Vershina Capital инвестировала в холдинг
-Ultimate Education») `eco.rationale` заканчивался протёкшей служебной
+Ultimate Education») `eco.rationale` заканчивался протекшей служебной
 пометкой роли «(Vershina Capital (инвестор))» — тот же класс дефекта, что
 уже чинили `strip_leaked_role_tags_2022.py`.
 
@@ -20,7 +20,7 @@ OLD_RATIONALE = (
     'Vershina Capital была инвестором в сделку по созданию/развитию '
     'холдинга Ultimate Education, включающего 6 онлайн-школ (MAED, '
     'Fashion Factory School, XYZ school, Bang Bang Education, Psycodemia, '
-    'Moscow Digital School). В 2022 году холдинг привлёк новое '
+    'Moscow Digital School). В 2022 году холдинг привлек новое '
     'финансирование по оценке почти в 2 раза выше предыдущей оценки, по '
     'которой Vershina Capital входила в проект. Сумма: ~1,2 млрд руб. '
     '(выручка холдинга за 2022 год).' + TAG
@@ -35,7 +35,7 @@ def main(write=False):
         print('УЖЕ ПРИМЕНЕНО %s' % CARD_ID)
         return
     assert card['eco']['rationale'] == OLD_RATIONALE, '%s: значение уже другое' % CARD_ID
-    print('ПРАВИМ  %s eco.rationale: снята протёкшая пометка роли' % CARD_ID)
+    print('ПРАВИМ  %s eco.rationale: снята протекшая пометка роли' % CARD_ID)
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return

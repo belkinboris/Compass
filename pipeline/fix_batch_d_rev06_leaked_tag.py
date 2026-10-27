@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Ревизия 2024 (batch_d_rev06) нашла ещё одну протёкшую служебную пометку
+"""Ревизия 2024 (batch_d_rev06) нашла еще одну протекшую служебную пометку
 роли — тот же класс, что уже чинили `fix_batch_d_n06_wrong_years_and_tags.py`
 (g5792754e, geb946158, g4577126f, cef2d9366, g2d075f03) и rev03 (gb6a90572):
 `eco.rationale`/`extra` синтезированы компактным импортом и несут на конце
@@ -44,7 +44,7 @@ def main(write=False):
         return
 
     assert card[FIELD] == OLD_FULL, '%s: значение уже другое' % FIELD
-    print('ПРАВИМ  %s %s: снята протёкшая пометка роли' % (CARD_ID, FIELD))
+    print('ПРАВИМ  %s %s: снята протекшая пометка роли' % (CARD_ID, FIELD))
 
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')

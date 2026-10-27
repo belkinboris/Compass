@@ -12,7 +12,7 @@ import main
 from db.models import AssistantFeedback, AssistantThread, Base, CorrectionRequest, User
 from db.session import engine, get_session
 
-TEST_PASSWORD = "надёжный-тестовый-пароль"
+TEST_PASSWORD = "надежный-тестовый-пароль"
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -121,10 +121,10 @@ def test_profile_update_round_trip(client):
     оставался individual. PATCH /api/me — способ уже зарегистрированного
     аккаунта сменить тип, не создавая новый."""
     login(client, "профиль@firm.ru")
-    r = client.patch("/api/me", json={"company": "ООО Ромашка", "position": "Партнёр", "role": "firm"})
+    r = client.patch("/api/me", json={"company": "ООО Ромашка", "position": "Партнер", "role": "firm"})
     assert r.status_code == 200
     me = client.get("/api/me").json()
-    assert me["company"] == "ООО Ромашка" and me["position"] == "Партнёр" and me["role"] == "firm"
+    assert me["company"] == "ООО Ромашка" and me["position"] == "Партнер" and me["role"] == "firm"
 
 
 def test_profile_update_rejects_unknown_role(client):
@@ -151,7 +151,7 @@ def test_delete_account_requires_correct_password(client):
 
 
 def test_delete_account_round_trip(client):
-    """Удаление стирает аккаунт и всё, что на него ссылалось (подписка,
+    """Удаление стирает аккаунт и все, что на него ссылалось (подписка,
     отслеживаемая сделка) — и снова можно зарегистрироваться той же почтой."""
     email = "удаление@firm.ru"
     login(client, email)
@@ -171,7 +171,7 @@ def test_delete_account_removes_assistant_ratings(client):
     """Оценки ответов ассистента («полезно / не помогло» с вопросом, ответом
     и комментарием) уходят вместе с аккаунтом (16 октября 2026). Вместе с
     ними — и оценка по диалогу этого человека, оставленная без входа: на
-    удалённый диалог ей ссылаться не на что. Чужие оценки не трогаются."""
+    удаленный диалог ей ссылаться не на что. Чужие оценки не трогаются."""
     email = "удаление-оценки@firm.ru"
     login(client, email)
     s = get_session()
@@ -258,7 +258,7 @@ def test_comment_round_trip(client):
 
 def test_comment_author_falls_back_to_email_prefix_without_full_name(client):
     # Аккаунты до 2 августа 2026 (`full_name` добавлено этой датой) могут не
-    # нести имени — для них подпись остаётся прежней, единственной, что есть.
+    # нести имени — для них подпись остается прежней, единственной, что есть.
     user = User(email="легаси@firm.ru", password_hash="x", full_name=None)
     assert main._comment_author(user) == "легаси"
     user_blank = User(email="пусто@firm.ru", password_hash="x", full_name="   ")
@@ -357,7 +357,7 @@ def test_general_editorial_message_is_stored_without_a_deal(client):
 def test_consultant_message_goes_to_the_console_at_once(client, monkeypatch):
     """Кнопка «Вы консультант?» (8 октября 2026): письмо фирмы уходит в
     Telegram-консоль сразу и помечается «sent», чтобы рутина заметок его не
-    повторила; обычное сообщение редакции по-прежнему ждёт рутину."""
+    повторила; обычное сообщение редакции по-прежнему ждет рутину."""
     import main
     sent = []
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "-100500")
@@ -385,7 +385,7 @@ def test_consultant_message_goes_to_the_console_at_once(client, monkeypatch):
 
 def test_corrections_pending_is_a_bridge_gated_by_the_moderation_token(client, monkeypatch):
     """19 сентября 2026: до этого канал был write-only, эти два эндпоинта —
-    мост для рутины, что до базы не достаёт (тот же токен, что у
+    мост для рутины, что до базы не достает (тот же токен, что у
     /api/moderation/decisions)."""
     monkeypatch.setenv("MODERATION_TOKEN", "секрет")
     r = client.post("/api/deals/gtest0003/corrections", json={
@@ -423,7 +423,7 @@ def test_corrections_consume_deletes_shown_rows(client, monkeypatch):
 # ==================== Вход по заявке (ACCESS_GATE, 2 сентября 2026) ====================
 # Гейт для тестов выключен в conftest.py (ACCESS_GATE=0); здесь он включается
 # явно через main.ACCESS_GATE — эндпоинты читают модульную константу при
-# каждом вызове, monkeypatch её видит.
+# каждом вызове, monkeypatch ее видит.
 
 def _gate_on(monkeypatch):
     monkeypatch.setattr(main, "ACCESS_GATE", True)
@@ -438,7 +438,7 @@ def _gate_on(monkeypatch):
 
 def _request_access(client, email, **extra):
     payload = {"email": email, "password": TEST_PASSWORD, "full_name": "Заявка Заявкина",
-               "company": "ООО Ромашка", "position": "Партнёр"}
+               "company": "ООО Ромашка", "position": "Партнер"}
     payload.update(extra)
     r = client.post("/api/auth/register", json=payload)
     assert r.status_code == 200 and r.json() == {"ok": True, "pending": True}
@@ -470,7 +470,7 @@ def test_registration_under_gate_is_a_pending_request_with_a_telegram_notice(cli
     assert [m for m, _ in sent] == ["sendMessage"]
     body = sent[0][1]
     assert body["chat_id"] == "-1001234567890"
-    for word in ("Заявка на доступ", "Заявка Заявкина", "ООО Ромашка", "Партнёр", "заявка@firm.ru"):
+    for word in ("Заявка на доступ", "Заявка Заявкина", "ООО Ромашка", "Партнер", "заявка@firm.ru"):
         assert word in body["text"], word
     buttons = [b["callback_data"] for row in body["reply_markup"]["inline_keyboard"] for b in row]
     assert buttons == [f"acc:{uid}:ok", f"acc:{uid}:no"]
@@ -478,8 +478,8 @@ def test_registration_under_gate_is_a_pending_request_with_a_telegram_notice(cli
 
 def test_login_under_gate_is_403_until_the_owner_approves(client, monkeypatch):
     _gate_on(monkeypatch)
-    uid = _request_access(client, "ждёт@firm.ru")
-    r = client.post("/api/auth/login", json={"email": "ждёт@firm.ru", "password": TEST_PASSWORD})
+    uid = _request_access(client, "ждет@firm.ru")
+    r = client.post("/api/auth/login", json={"email": "ждет@firm.ru", "password": TEST_PASSWORD})
     assert r.status_code == 403 and r.json()["pending"] is True
     assert "доступ откроем после проверки" in r.json()["error"]
     assert "kompas_session" not in r.cookies
@@ -488,7 +488,7 @@ def test_login_under_gate_is_403_until_the_owner_approves(client, monkeypatch):
         "callback_query": {"id": "1", "data": f"acc:{uid}:ok", "from": {"id": 111, "first_name": "Борис"},
                             "message": {"chat": {"id": -1001234567890}, "message_id": 7, "text": "Заявка"}}})
     assert ok.status_code == 200
-    r = client.post("/api/auth/login", json={"email": "ждёт@firm.ru", "password": TEST_PASSWORD})
+    r = client.post("/api/auth/login", json={"email": "ждет@firm.ru", "password": TEST_PASSWORD})
     assert r.status_code == 200 and "kompas_session" in r.cookies
     me = client.get("/api/me").json()
     assert me["logged_in"] is True and me["gate"] is True and me["approved"] is True
@@ -522,12 +522,12 @@ def test_approval_is_stamped_into_the_telegram_message(client, monkeypatch):
     uid = _request_access(client, "штамп@firm.ru")
     sent.clear()
     client.post("/api/telegram/webhook/тайна", json={
-        "callback_query": {"id": "9", "data": f"acc:{uid}:ok", "from": {"id": 222, "first_name": "Партнёр"},
+        "callback_query": {"id": "9", "data": f"acc:{uid}:ok", "from": {"id": 222, "first_name": "Партнер"},
                             "message": {"chat": {"id": -1001234567890}, "message_id": 7, "text": "Заявка на доступ"}}})
     methods = {m: kw for m, kw in sent}
     assert methods["answerCallbackQuery"]["callback_query_id"] == "9"
     assert methods["editMessageText"]["message_id"] == 7
-    assert "Доступ открыт" in methods["editMessageText"]["text"] and "(Партнёр)" in methods["editMessageText"]["text"]
+    assert "Доступ открыт" in methods["editMessageText"]["text"] and "(Партнер)" in methods["editMessageText"]["text"]
 
 
 def test_stranger_cannot_approve_an_access_request(client, monkeypatch):
@@ -548,7 +548,7 @@ def test_stranger_cannot_approve_an_access_request(client, monkeypatch):
 
 
 def test_rejected_request_stays_closed_and_does_not_duplicate(client, monkeypatch):
-    """Отклонённый не удаляется: вход отвечает тем же «доступ не открыт», а
+    """Отклоненный не удаляется: вход отвечает тем же «доступ не открыт», а
     повторная заявка тем же адресом — отказ «уже зарегистрирована», не дубль."""
     _gate_on(monkeypatch)
     uid = _request_access(client, "отказ@firm.ru")
@@ -568,7 +568,7 @@ def test_rejected_request_stays_closed_and_does_not_duplicate(client, monkeypatc
 
 
 def test_telegram_failure_does_not_break_the_registration(client, monkeypatch):
-    """Сеть до Telegram упала — заявка всё равно сохранена и отвечает pending."""
+    """Сеть до Telegram упала — заявка все равно сохранена и отвечает pending."""
     _gate_on(monkeypatch)
 
     def boom(method, **kw):
@@ -601,7 +601,7 @@ def test_gate_off_registers_approved_users_and_logs_them_in(client, monkeypatch)
 def test_users_table_created_before_the_gate_gets_approved_column_set_to_true(tmp_path):
     """Миграция для уже существующей таблицы users (create_all колонку не
     добавит): approved появляется диалект-независимым ADD COLUMN, и всем
-    существующим аккаунтам ставится True — владелец и партнёр не оказываются
+    существующим аккаунтам ставится True — владелец и партнер не оказываются
     за дверью. Повторный запуск ничего не ломает."""
     from sqlalchemy import create_engine, inspect, text
     engine = create_engine(f"sqlite:///{tmp_path}/old.db")

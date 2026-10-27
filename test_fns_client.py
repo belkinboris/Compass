@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """`fns_client.FULL_LINE_SECTIONS`/`full_lines_payload()` — этап 8, П3-8:
-владелец и партнёр попросили показывать «не только эти показатели, а все
+владелец и партнер попросили показывать «не только эти показатели, а все
 из БФО», а не выжимку из 15 полей `BO_LINES`. Коды и названия строк сверены
 с независимой справочной таблицей (Cbonds) и живым ответом `bo()` для
 Яндекса/ТехноНИКОЛЬ/Роснефти 23-24 августа 2026 — все встреченные вживую
@@ -10,7 +10,7 @@ from fns_client import FULL_LINE_SECTIONS, full_lines_payload
 
 def test_full_line_sections_codes_are_unique_across_the_whole_table():
     """Один код не может значить две разные строки в разных секциях —
-    иначе значение из raw_lines попадёт не туда (родня уже применённого
+    иначе значение из raw_lines попадет не туда (родня уже примененного
     правила «в упорядоченном словаре одно слово не может принадлежать двум
     отраслям» из CLAUDE.md, только здесь про коды строк БФО)."""
     seen = {}
@@ -18,7 +18,7 @@ def test_full_line_sections_codes_are_unique_across_the_whole_table():
         for code, name in lines:
             assert code not in seen, f"код {code} уже занят секцией {seen.get(code)!r}, встречен снова в {title!r}"
             seen[code] = title
-    assert len(seen) > 80, "ожидался полный набор строк трёх форм, а не выжимка"
+    assert len(seen) > 80, "ожидался полный набор строк трех форм, а не выжимка"
 
 
 def test_full_line_sections_cover_codes_actually_seen_live():
@@ -56,12 +56,12 @@ def test_full_lines_payload_omits_sections_with_no_filled_rows():
     payload = full_lines_payload({"1110": "5000"})
     titles = {s["title"] for s in payload}
     assert "I. Внеоборотные активы" in titles
-    assert "Отчёт о финансовых результатах" not in titles
+    assert "Отчет о финансовых результатах" not in titles
     assert "Денежные потоки от текущих операций" not in titles
 
 
 def test_full_lines_payload_converts_thousands_to_rubles():
-    """API отдаёт тыс. руб (как и везде в `fns_client.py`) — на экране
+    """API отдает тыс. руб (как и везде в `fns_client.py`) — на экране
     должны быть рубли, тот же формат, что у остальных `*_rub` полей."""
     payload = full_lines_payload({"1110": "5000"})
     assets = next(s for s in payload if s["title"] == "I. Внеоборотные активы")
@@ -92,7 +92,7 @@ def test_per_share_codes_are_not_multiplied_by_a_thousand():
     тыс. руб) при этом обязана умножаться как раньше — иначе фикс
     «починил» бы одно поле, сломав остальные."""
     payload = full_lines_payload({"2900": "37", "2910": "36", "2400": "396526209"})
-    pnl = next(s for s in payload if s["title"] == "Отчёт о финансовых результатах")
+    pnl = next(s for s in payload if s["title"] == "Отчет о финансовых результатах")
     rows = {r["code"]: r["value_rub"] for r in pnl["rows"]}
     assert rows["2900"] == 37
     assert rows["2910"] == 36

@@ -35,7 +35,7 @@ def main(write=False):
     assert company and company.get('name') == 'Норникель', \
         'профиль buyer больше не называется «Норникель» — проверьте вручную'
 
-    print('%s: buyer_name=%r будет снят, buyer=%s (%s) остаётся'
+    print('%s: buyer_name=%r будет снят, buyer=%s (%s) остается'
           % (DEAL_ID, deal['buyer_name'], deal['buyer'], company['name']))
 
     if not write:

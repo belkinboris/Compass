@@ -16,8 +16,8 @@
 
 Страховки, а не доверие к ответу:
   * новый профиль, чей ключ близнецов (`link_parties.company_key`) уже
-    ведёт в ОДИН профиль базы, не заводится — роль идёт в тот профиль;
-  * ИНН, уже записанный в реестре за другим профилем, — роль идёт в тот профиль;
+    ведет в ОДИН профиль базы, не заводится — роль идет в тот профиль;
+  * ИНН, уже записанный в реестре за другим профилем, — роль идет в тот профиль;
   * одна компания в нескольких строках пачек (ключ имени или ИНН) — один профиль;
   * роль заполняется, только если пуста, и не тем профилем, что уже стоит
     другой ролью этой карточки (продавец = предмет — та ошибка, что у
@@ -117,7 +117,7 @@ def plan(data, answers):
             if row['company_id'] in comps:
                 inn_owner.setdefault(str(row['inn']), row['company_id'])
             else:
-                # Строка реестра пережила свой профиль (профиль удалён). Новый
+                # Строка реестра пережила свой профиль (профиль удален). Новый
                 # профиль той же компании получает тот же id — и строка снова
                 # работает, а не становится вторым владельцем ИНН.
                 dead_owner.setdefault(str(row['inn']), row['company_id'])
@@ -185,7 +185,7 @@ def plan(data, answers):
                 else:
                     registry_rows.append({'company_id': target_id, 'decision': 'no_match',
                                           'reason': 'Кампания профилей сторон (%s): юрлицо не установлено. %s'
-                                          % (DAY, a.get('inn_note') or 'читатель не нашёл однозначного юрлица'),
+                                          % (DAY, a.get('inn_note') or 'читатель не нашел однозначного юрлица'),
                                           'date': DAY})
         else:
             continue
@@ -231,9 +231,9 @@ def apply_links(data, links):
         d[field] = cid
         if field == 'buyer':
             # Как в link_parties: у покупателя либо профиль, либо текст
-            # (test_buyer_is_named_once); у продавца и предмета текст остаётся.
+            # (test_buyer_is_named_once); у продавца и предмета текст остается.
             # Имя могло прийти из таблицы FIXES — его отпечаток уходит в
-            # proofread_absorbed, иначе review.already_applied сочтёт правку
+            # proofread_absorbed, иначе review.already_applied сочтет правку
             # потерянной (docs/card_editing.md).
             gone = d.pop('buyer_name', None)
             if gone:
@@ -242,7 +242,7 @@ def apply_links(data, links):
                 fp = review.fix_fingerprint(gone)
                 if fp not in fps:
                     fps.append(fp)
-        # Привязка не должна «потерять» правку таблицы FIXES (её проверяет
+        # Привязка не должна «потерять» правку таблицы FIXES (ее проверяет
         # test_review_table_is_applied_and_not_pending): имя покупателя из
         # таблицы засчитывается, только если профиль называется так же.
         if not all(review.already_applied(f, d, data['companies']) for f in fixes_of.get(deal_id, ())):
@@ -256,7 +256,7 @@ def write_registry(rows):
     """Новые строки — в конец. У профиля одна текущая запись
     (test_fns_registry_company_id_is_not_duplicated): если у существующего
     профиля уже была строка (обычно `no_match` — «искали, не нашли»), она
-    снимается из REGISTRY этим же блоком, а текст старой остаётся в файле
+    снимается из REGISTRY этим же блоком, а текст старой остается в файле
     как история поиска."""
     known = {r['company_id'] for r in fns_registry.REGISTRY}
     replaced = sorted({r['company_id'] for r in rows} & known)

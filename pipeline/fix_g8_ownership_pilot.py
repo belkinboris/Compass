@@ -12,7 +12,7 @@ source}`. `id` — ссылка на профиль владельца в COMPAN
 есть свой профиль (иначе null — просто имя текстом, как у физлица).
 `as_of` — дата источника с точностью до месяца («YYYY-MM»), а не вечная
 истина: владение меняется, и это явно написано на экране рядом с блоком
-(тот же принцип, что уже применён к `holding`/«Контроль у»).
+(тот же принцип, что уже применен к `holding`/«Контроль у»).
 
 Оба кандидата — компании, чью структуру собственности этот же прогон уже
 прочитал и процитировал дословно на карточках СДЕЛОК (см. журнал G5),
@@ -56,7 +56,7 @@ def main(write=False):
 
     for cid, ownership in OWNERSHIP.items():
         assert cid in companies, f"нет профиля {cid}"
-        assert 'ownership' not in companies[cid], f"{cid} уже несёт ownership"
+        assert 'ownership' not in companies[cid], f"{cid} уже несет ownership"
         print(f"{cid} ({companies[cid]['name']}): += ownership")
         for o in ownership:
             print(f"    {o['name']} — {o['share']} (на {o['as_of']})")

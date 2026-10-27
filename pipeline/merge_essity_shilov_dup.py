@@ -6,14 +6,14 @@
 «Новые технологии» Игоря Шилова», та же дата 2023-07-17) — тот же
 продавец (`seller_id='ga48b2459'`, Essity), тот же покупатель (Игорь
 Шилов через ООО «Новые технологии»), та же сумма (~10 млрд ₽/$117
-млн), те же три завода (Советск, Венёв, Светогорск), те же бренды
+млн), те же три завода (Советск, Венев, Светогорск), те же бренды
 (Zewa, Libresse, Libero/Tena/Tork).
 
 `g5bb3e777` — заметно более полная карточка: 7 источников (включая
 собственные пресс-релизы Essity и PR Newswire) против одного
 (Коммерсантъ) у `g82c59e72`, заполнены law.appr/struct/terms,
 eco.rationale/context/target_fin/share, тема «Уход иностранного
-владельца». `g82c59e72` — заметно беднее, но несёт то, чего у
+владельца». `g82c59e72` — заметно беднее, но несет то, чего у
 `g5bb3e777` нет: правильно связанный `target` (`g2cceb6b7`, «ЭвоКом»
 — тот же профиль, под которым предмет сделки фигурирует в более
 позднем, отдельном и уже существующем в базе `g4ba9150f`, продаже
@@ -31,13 +31,13 @@ eco.rationale/context/target_fin/share, тема «Уход иностранно
    сделке.
 3. `g82c59e72` сливается в `g5bb3e777`: `merged[g82c59e72] = g5bb3e777`,
    карточка убирается из `deals`, адрес `#/deal/g82c59e72` продолжит
-   открывать браузер и приведёт на верную карточку.
+   открывать браузер и приведет на верную карточку.
 
 Запись `FIXES` для `g82c59e72` (4 записи в двух файлах —
 `pipeline/ingest/fixes/batch_agents059_r9.py` и
 `pipeline/ingest/fixes/batch_c_2023.py`) удалены ЭТИМ ЖЕ прогоном
 ДО слияния — обязательный шаг по уроку CLAUDE.md, иначе
-`test_review_table_is_applied_and_not_pending` упадёт на записи,
+`test_review_table_is_applied_and_not_pending` упадет на записи,
 ссылающейся на несуществующую карточку.
 
 Профиль покупателя `g688b99cb` («Игорь Шилов») после слияния
@@ -78,12 +78,12 @@ def main(write):
     assert drop.get('target') == TARGET_CO, f'{DROP}.target изменился: {drop.get("target")!r}'
 
     keep_urls = {norm(s[1]) for s in (keep.get('src') or []) if len(s) > 1}
-    assert norm(EXTRA_SRC[1]) not in keep_urls, 'источник уже перенесён'
+    assert norm(EXTRA_SRC[1]) not in keep_urls, 'источник уже перенесен'
     drop_urls = {norm(s[1]) for s in (drop.get('src') or []) if len(s) > 1}
     assert norm(EXTRA_SRC[1]) in drop_urls, 'источник не лежит в карточке-дубле'
 
     assert keep.get('seller_id') == drop.get('seller_id') == 'ga48b2459', \
-        'продавец у пары разошёлся — это не та пара дублей'
+        'продавец у пары разошелся — это не та пара дублей'
 
     print('ЧИНИМ САМОСТОЯТЕЛЬНЫЙ ДЕФЕКТ У', KEEP)
     print(f'  target: None -> {TARGET_CO} ({data["companies"][TARGET_CO]["name"]!r})')

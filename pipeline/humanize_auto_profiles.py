@@ -52,7 +52,7 @@ def main() -> int:
     assert all(c.get("kpi") == ["Профиль", "Автоматический"] for c in targets.values()), \
         "ожидались только автоматические профили; найден выверенный вручную"
     assert NEW_DESC not in {c.get("desc") for c in companies.values()}, \
-        "скрипт уже применён"
+        "скрипт уже применен"
 
     variants = {}
     for c in targets.values():

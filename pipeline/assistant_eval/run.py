@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Задаёт вопросы набора (questions.py) ассистенту сайта так же, как сайт.
+"""Задает вопросы набора (questions.py) ассистенту сайта так же, как сайт.
 
 На каждый вопрос — два запроса, как в runAsk() static/index.html: быстрый
 поиск по базе `POST /api/assistant/lookup` (кроме уточнения в диалоге — там
@@ -8,15 +8,15 @@ context_type/context_id, history. Ответы пишутся построчно
 data/inbox/assistant_eval/ (папка не в git).
 
 ДИАЛОГИ НЕ СОХРАНЯЮТСЯ. Сервер пишет диалог в базу пользователей, только если
-запрос пришёл с куки вошедшего и `save_thread` истинно (main.py, ask). Скрипт
-не входит и не шлёт куки, а `save_thread` ставит false — в аккаунты ничего не
+запрос пришел с куки вошедшего и `save_thread` истинно (main.py, ask). Скрипт
+не входит и не шлет куки, а `save_thread` ставит false — в аккаунты ничего не
 попадает.
 
 ЛИМИТ ЧАСТОТЫ. У /api/ask и /api/assistant/lookup общий лимит на адрес —
 40 запросов за 10 минут (scrape_guard.py). Если в окружении есть служебный
 ключ (MODERATION_TOKEN или TELEGRAM_WEBHOOK_SECRET — тот же, что у стенда
 assistant_bench.py), он уходит заголовком X-Data-Key и лимит не действует;
-без ключа скрипт сам ждёт 15 с между запросами (100 вопросов — около часа).
+без ключа скрипт сам ждет 15 с между запросами (100 вопросов — около часа).
 
     python3 pipeline/assistant_eval/run.py                      # все 100 + подготовка к встрече
     python3 pipeline/assistant_eval/run.py --only 13,57,92      # выборка
@@ -41,7 +41,7 @@ from questions import PREP, QUESTIONS, SIGNALS  # noqa: E402
 
 DEFAULT_SITE = "https://projectcompass.ru"
 OUT_DIR = ROOT / "data" / "inbox" / "assistant_eval"
-# Браузер ждёт 45 с «по базе» и 75 с «по интернету» (aiAnswer) — так же.
+# Браузер ждет 45 с «по базе» и 75 с «по интернету» (aiAnswer) — так же.
 TIMEOUT = {"base": 45, "web": 75}
 
 

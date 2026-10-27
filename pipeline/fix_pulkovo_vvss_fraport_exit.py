@@ -13,9 +13,9 @@ https://www.akm.ru/news/fraport_prodal_25_v_kholdinge_vvss/):
 11 декабря 2024 года, Orbit Aviation — компания из Омана.
 
 НЕ внесено: судьба долей остальных иностранных совладельцев (QIA,
-Mubadala, Baring Vostok, РФПИ) — саб-агент не нашёл подтверждений ни
+Mubadala, Baring Vostok, РФПИ) — саб-агент не нашел подтверждений ни
 выхода, ни увеличения долей, честный отрицательный результат; точная
-сумма сделки Fraport — источник её не называет.
+сумма сделки Fraport — источник ее не называет.
 
 Запуск:
     python3 pipeline/fix_pulkovo_vvss_fraport_exit.py            # сухой прогон

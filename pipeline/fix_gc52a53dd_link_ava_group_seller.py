@@ -5,7 +5,7 @@
 в Приморском районе Петербурга), а профиль этой компании уже есть в базе
 (ge6453621). `seller_id` не проходит через дословную проверку review.py
 (это ссылка, а не цитата), поэтому связывается отдельным одноразовым
-скриптом — тот же приём, что `link_named_parties_to_existing_profiles.py`.
+скриптом — тот же прием, что `link_named_parties_to_existing_profiles.py`.
 
 Запуск: python3 pipeline/fix_gc52a53dd_link_ava_group_seller.py [--write]
 """

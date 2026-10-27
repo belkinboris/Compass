@@ -4,7 +4,7 @@
 main.py по-прежнему читает JSON напрямую, эту БД пока никто не подключает.
 
 Источники:
-  deals_promoted.json — обогащённые карты (эко+юр разбор), уже с компаниями
+  deals_promoted.json — обогащенные карты (эко+юр разбор), уже с компаниями
                          и match_keys (алиасами) — самый ценный источник.
   deals_2026.json      — строгое подмножество deals_promoted.json (проверено
                          отдельно), поэтому не грузим его вторым заходом.
@@ -192,8 +192,8 @@ def load_bulk(session, records):
         amount_text = f"{title} {rec.get('role','')}".strip()
         amount_value, amount_conf = parse_amount(amount_text)
         if amount_value is not None and amount_conf == AmountConfidence.disclosed:
-            # одна запись, один неверифицированный источник — не даём то же
-            # доверие, что суммам из обогащённых карт
+            # одна запись, один неверифицированный источник — не даем то же
+            # доверие, что суммам из обогащенных карт
             amount_conf = AmountConfidence.estimated
         deal = Deal(
             id=stub_id, date_raw=rec.get("date"), date_value=parse_date(rec.get("date")),
@@ -236,7 +236,7 @@ def main():
 
         print(f"Компаний: {len(seen_company_ids)}")
         print(f"Консультантов (уникальных сущностей после консервативного дедупа): {len(advisor_names)}")
-        print(f"Сделок добавлено: {n_deals_full + n_deals_stub} (полных карт: {n_deals_full}, необогащённых: {n_deals_stub})")
+        print(f"Сделок добавлено: {n_deals_full + n_deals_stub} (полных карт: {n_deals_full}, необогащенных: {n_deals_stub})")
         print(f"Возможных дублей консультантов на ручной пересмотр: {len(review_pairs)}")
 
         if review_pairs:
@@ -244,7 +244,7 @@ def main():
                 f.write("новое_имя,похоже_на_advisor_id,похоже_на_имя\n")
                 for new_name, existing_id in review_pairs:
                     f.write(f"\"{new_name}\",{existing_id},\"{advisor_names.get(existing_id, '')}\"\n")
-            print(f"Отчёт: {REPORT_PATH}")
+            print(f"Отчет: {REPORT_PATH}")
     finally:
         session.close()
 

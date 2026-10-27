@@ -14,7 +14,7 @@
 покупаемое отдельно от банка). Найдено 21 августа при заполнении G8
 (PRODUCT_ROADMAP.md) — шестой случай этого класса дефекта за сессию
 (после Flocktory/КИВИ, Таксиагрегатор/КИВИ, Спецзастройщик/Банк
-«Санкт-Петербург») — приём тот же, что уже применялся для ЛСР/Domina
+«Санкт-Петербург») — прием тот же, что уже применялся для ЛСР/Domina
 Пулково.
 
 ПОЧЕМУ ПРОФИЛЬ РНКБ БАНК НЕ ТРОГАЕТСЯ. Верно используется в другой
@@ -71,7 +71,7 @@ def main(write):
         'name': NEW_PROFILE_NAME,
         'ind': 'Страхование',
         'desc': 'Небольшая страховая компания с лицензиями на добровольное '
-                'личное и имущественное страхование; в 2025 году её купил '
+                'личное и имущественное страхование; в 2025 году ее купил '
                 'МТС Банк ради лицензий и ИТ-инфраструктуры.',
         'kpi': ['Профиль', 'Автоматический'],
     }
@@ -79,7 +79,7 @@ def main(write):
 
     assert by_id[DEAL_ID]['target'] == NEW_PROFILE_ID
     assert NEW_PROFILE_ID in companies and companies[NEW_PROFILE_ID]['name'] == NEW_PROFILE_NAME
-    assert BAD_PROFILE_ID in companies  # РНКБ Банк остаётся
+    assert BAD_PROFILE_ID in companies  # РНКБ Банк остается
 
     with open(PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)

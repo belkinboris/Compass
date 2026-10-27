@@ -16,7 +16,7 @@
 
 ЧТО ДЕЛАЕМ. Заводим профиль «БСПБ Капитал» (описание — по тексту самой
 карточки, ничего не досочиняя), ставим его в `target`, а продавца связываем
-с его профилем через `seller_id`. Текстовое поле `seller` остаётся: у
+с его профилем через `seller_id`. Текстовое поле `seller` остается: у
 карточки может быть и ссылка, и имя.
 
 Запуск:
@@ -72,7 +72,7 @@ def main(write=False):
     card['target'] = NEW_PROFILE
     card['seller_id'] = SELLER_PROFILE
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('\nЗАПИСАНО: предмет сделки исправлен, профиль %s заведён.' % NEW_PROFILE)
+    print('\nЗАПИСАНО: предмет сделки исправлен, профиль %s заведен.' % NEW_PROFILE)
     return 0
 
 
