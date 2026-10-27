@@ -362,6 +362,8 @@ def main(write=False):
         post = post_mod.get(card['id'])
         if post and post['verdict'] == 'post_no':
             clean['no_post'] = True
+        import strip_yo  # pipeline/strip_yo.py: база без «е» (27 октября 2026)
+        clean = strip_yo.strip_values(clean)
         data['deals'].append(clean)
         fresh.append(clean)
     for card, _why in hold:

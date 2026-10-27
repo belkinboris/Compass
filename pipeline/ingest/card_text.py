@@ -45,11 +45,15 @@ def render_screens(card, companies):
             + _row('Форма расчетов', eco.get('fin'))
             + _row('Финансовые консультанты', '; '.join(str(a[1]) for a in advs) if advs else eco.get('finadv'))
             + _row('Цель сделки', eco.get('rationale')) + _row('Контекст', eco.get('context')) + _row('Дополнительно', card.get('extra')))
-    out += ['', 'ЮРИСТ'] + _row('Структура сделки', law.get('struct')) + _row('Согласования', law.get('appr'))
+    # «Юрист» на сайте — согласования, условия, юридические консультанты;
+    # структура (law.struct) живет на «Обзоре» как «Как устроена сделка» и
+    # здесь не повторяется. Вкладка есть, только если есть что показать.
     legal = [a for a in (law.get('adv') or []) if isinstance(a, list) and len(a) > 1 and a not in advs]
-    if legal:
-        out.append('Консультанты: ' + '; '.join('%s — %s' % (a[1], a[0]) for a in legal))
-    out += _row('Условия', law.get('terms'))
+    if has(law.get('appr')) or has(law.get('terms')) or legal:
+        out += ['', 'ЮРИСТ'] + _row('Согласования', law.get('appr'))
+        if legal:
+            out.append('Консультанты: ' + '; '.join('%s — %s' % (a[1], a[0]) for a in legal))
+        out += _row('Условия сделки', law.get('terms'))
     out += ['', 'ПОСТ В КАНАЛ']
     try:
         post = format_post.render(card, companies)

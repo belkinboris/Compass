@@ -456,10 +456,10 @@ def set_field(card, field, value):
     if value is None:
         obj.pop(parts[-1], None)
     else:
-        obj[parts[-1]] = value
+        obj[parts[-1]] = _yo(value) if isinstance(value, str) else value
 
 
-def _yo(s):   # база без «е» с 27.10.2026, таблица — как записана
+def _yo(s):  # без «ё» (27.10.2026)
     return str(s or '').replace('ё', 'е').replace('Ё', 'Е')
 
 
@@ -534,20 +534,17 @@ def already_applied(fix, card, companies=None):
     if fix['new'] is None and fix['field'] in ('target', 'asset_id', 'buyer', 'seller_id', 'seller') \
             and current != fix['old']:
         return True
+    # ВЫЧИТКА (2 сентября 2026). Поле переписано редактором (или снято
+    # чтением, 28 октября 2026), и совпадать с `new` оно больше не будет —
+    # но запись была применена: ее отпечаток лежит в `proofread_absorbed`
+    # карточки (туда попадают ТОЛЬКО записи, примененные до вычитки;
+    # proofread.py отказывает в записи, пока есть непримененные). Запись,
+    # добавленная после вычитки, отпечатка не имеет и проверяется как обычно.
+    if fix['new'] is not None and fix_fingerprint(fix['new']) in ((card.get('proofread_absorbed') or {}).get(fix['field']) or []):
+        return True
     if current is None or fix['new'] is None:
         return False
-    if _yo(typo_flat(current)).lower() == _yo(typo_flat(fix['new'])).lower():
-        return True
-    # ВЫЧИТКА (2 сентября 2026). Поле переписано редактором, и совпадать с
-    # `new` оно больше не будет никогда — но факт, который правка внесла,
-    # стоит в нем по-прежнему (proofread.py проверяет числа и имена). Запись
-    # считается примененной, если ее отпечаток лежит в `proofread_absorbed`
-    # карточки: туда попадают ТОЛЬКО записи, которые были применены до
-    # вычитки (proofread.py отказывает в записи, пока есть непримененные).
-    # Запись, добавленная после вычитки, отпечатка не имеет и проверяется
-    # как обычно — иначе `--write` молча пропускал бы ее навсегда.
-    absorbed = (card.get('proofread_absorbed') or {}).get(fix['field']) or []
-    return fix_fingerprint(fix['new']) in absorbed
+    return _yo(typo_flat(current)).lower() == _yo(typo_flat(fix['new'])).lower()
 
 
 # Текст карточки пишется, а не переносится (14 октября 2026): проверка —
