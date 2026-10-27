@@ -1213,12 +1213,16 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
   .tabbar a svg{width:26px;height:26px;stroke:#3C5A4C;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
   .tabbar a.on{color:#0F2B21}
   .tabbar a.on svg{stroke:#A3814E}
-  /* Над темным героем главной — светлые значки и чуть темнее стекло. */
-  .top.on-hero + .tabbar{background:rgba(10,18,16,.28);border-color:rgba(255,255,255,.22)}
-  .top.on-hero + .tabbar a{color:#C9D9D0}
-  .top.on-hero + .tabbar a svg{stroke:#C9D9D0}
-  .top.on-hero + .tabbar a.on{color:#fff}
-  .top.on-hero + .tabbar a.on svg{stroke:#C9AE7C}
+  /* Стекло смотрит, что под ним (tabbarAdapt): над темным — герой главной,
+     темный фон ленты главной, подвал, темные плашки — стекло темнеет, значки
+     светлые; кромка в обоих случаях одной силы. Владелец, 27 октября 2026:
+     «в одинаковом фоне разные цвета у нижней линии и в некоторых местах
+     все-таки плохо видно». */
+  .tabbar.on-dark{background:rgba(10,18,16,.58);border-color:rgba(255,255,255,.20)}
+  .tabbar.on-dark a{color:#C9D9D0}
+  .tabbar.on-dark a svg{stroke:#C9D9D0}
+  .tabbar.on-dark a.on{color:#fff}
+  .tabbar.on-dark a.on svg{stroke:#C9AE7C}
   /* В шапке на телефоне один пункт — вход/аватар: прижат вправо, счетчик
      уведомлений не режется прокруткой (владелец: «обрезается»). */
   #nav a:not(#navAccount){display:none}
@@ -4038,6 +4042,45 @@ function updTop(){
   top.classList.toggle("on-hero", window.scrollY < window.innerHeight*0.9);
 }
 window.addEventListener("scroll", updTop, {passive:true});
+/* Нижняя панель на телефоне — стекло без своего цвета, поэтому читаемость
+   значков зависит от фона под ней. Три точки под панелью: что там лежит
+   (мимо самой панели, кнопки и шторки), какого цвета фон у первого
+   непрозрачного предка; градиенты в проекте темные (герой, подвал, плашки).
+   Темно под двумя из трех точек — класс on-dark. Зовется со скролла, после
+   перерисовки экрана и при изменении размера. */
+let _tabbarRaf = 0;
+function tabbarAdapt(){
+  const bar = document.getElementById("tabbar");
+  if(!bar || !bar.offsetParent && getComputedStyle(bar).display === "none") return;
+  const r = bar.getBoundingClientRect(); if(!r.height) return;
+  const y = r.top + r.height / 2;
+  const skip = el => el.closest && el.closest(".tabbar, .ai-fab, .ai-sheet, .ai-sheet-scrim, .cookie-note, .toast, .compare-tray");
+  const lum = c => { const m = String(c).match(/[\d.]+/g); if(!m || m.length < 3) return null;
+    const a = m.length > 3 ? parseFloat(m[3]) : 1; if(a === 0) return null;
+    return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
+  let dark = 0;
+  for(const x of [r.left + 24, (r.left + r.right) / 2, r.right - 24]){
+    let el = (document.elementsFromPoint(x, y) || []).find(e => !skip(e)) || document.body;
+    let l = null;
+    for(; el && el !== document.documentElement; el = el.parentElement){
+      const cs = getComputedStyle(el);
+      l = lum(cs.backgroundColor);
+      if(l !== null) break;
+      if(cs.backgroundImage && cs.backgroundImage.indexOf("gradient") >= 0){ l = 0.1; break; }
+    }
+    if(l === null) l = lum(getComputedStyle(document.body).backgroundColor);
+    if(l !== null && l < 0.4) dark++;
+  }
+  bar.classList.toggle("on-dark", dark >= 2);
+}
+const tabbarAdaptSoon = () => { if(_tabbarRaf) return; _tabbarRaf = requestAnimationFrame(() => { _tabbarRaf = 0; tabbarAdapt(); }); };
+window.addEventListener("scroll", tabbarAdaptSoon, {passive:true});
+window.addEventListener("resize", tabbarAdaptSoon);
+window.addEventListener("hashchange", () => setTimeout(tabbarAdapt, 350));
+setTimeout(tabbarAdapt, 400);
+/* Экран перерисовывается и без смены адреса (приход базы, «показать еще»):
+   следим за содержимым #app, а не только за хешем. */
+new MutationObserver(tabbarAdaptSoon).observe(document.getElementById("app"), {childList:true, subtree:true});
 /* Клик по логотипу возвращает наверх. Со страницы это делает сам `route()`
    (`scrollTo(0,0)`), но на главной адрес не меняется — `hashchange` не
    срабатывает, ничего не перерисовывается, и клик выглядел мертвым: человек
