@@ -1,0 +1,23 @@
+{
+ "made": "2026-10-27",
+ "items": [
+  {
+   "news": "https://ria.ru/20261027/auktsion-2127202530.html",
+   "title": "Четыре объекта для бизнеса в Левобережном районе Москвы выставили на торги",
+   "verdict": "enrich:g6d711306",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  },
+  {
+   "news": "https://abnews.ru/center/news/msk/2026/10/27/v-moskve-na-festivalnoj-ulicze-vystavili-na-torgi-chetyre-pomeshheniya-dlya-biznesa",
+   "title": "В Москве на Фестивальной улице выставили на торги четыре помещения для бизнеса",
+   "verdict": "enrich:gbcf07c78",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "слабое совпадение: общие слова заголовка: 3"
+   ]
+  }
+ ]
+}
