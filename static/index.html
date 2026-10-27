@@ -4066,11 +4066,18 @@ function tabbarAdapt(){
   const m = String(getComputedStyle(document.body).backgroundColor).match(/[\d.]+/g);
   const lum = m && m.length >= 3 && (m.length < 4 || parseFloat(m[3]) > 0)
     ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
-  const dark = lum < 0.4;
+  // Подвал темный на каждой странице и один на всю высоту — единственное
+  // место, где режим меняется при прокрутке: один раз, без мигания.
+  const foot = document.querySelector("footer");
+  const r = bar.getBoundingClientRect();
+  const overFooter = !!(foot && r.height && foot.getBoundingClientRect().top < r.top + r.height / 2);
+  const dark = lum < 0.4 || overFooter;
   bar.classList.toggle("on-dark", dark);
   if(fab) fab.classList.toggle("on-dark", dark);
 }
 window.addEventListener("hashchange", () => setTimeout(tabbarAdapt, 50));
+let _tabbarRaf = 0;
+window.addEventListener("scroll", () => { if(_tabbarRaf) return; _tabbarRaf = requestAnimationFrame(() => { _tabbarRaf = 0; tabbarAdapt(); }); }, {passive:true});
 setTimeout(tabbarAdapt, 50);
 /* Фон документа ставит route() (главная — темный): после каждой перерисовки
    #app сверяемся заново. */
