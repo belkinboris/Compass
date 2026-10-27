@@ -459,7 +459,7 @@ def set_field(card, field, value):
         obj[parts[-1]] = value
 
 
-def _yo(s):   # база без «ё» с 27.10.2026, таблица — как записана
+def _yo(s):   # база без «е» с 27.10.2026, таблица — как записана
     return str(s or '').replace('ё', 'е').replace('Ё', 'Е')
 
 

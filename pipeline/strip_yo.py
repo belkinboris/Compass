@@ -25,9 +25,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Весь код: верхний уровень, pipeline целиком (включая FIXES — они сверяют старые
 # значения с базой, где «ё» больше нет), статика сайта и тесты. Сам этот скрипт —
 # нет: его таблица замены и регулярные выражения должны остаться с «ё».
-CODE_FILES = sorted(set(glob.glob('*.py') + glob.glob('pipeline/**/*.py', recursive=True)
-                        + glob.glob('static/**/*.html', recursive=True) + glob.glob('static/**/*.js', recursive=True))
-                    - {'pipeline/strip_yo.py'})
+# Таблица правок (pipeline/ingest/fixes/) не переписывается: ее значения — как
+# записаны, их отпечатки в proofread_absorbed считались с «ё» (review.already_applied
+# складывает «ё» при сравнении).
+CODE_FILES = sorted(f for f in set(glob.glob('*.py') + glob.glob('pipeline/**/*.py', recursive=True)
+                                   + glob.glob('static/**/*.html', recursive=True) + glob.glob('static/**/*.js', recursive=True))
+                    if f != 'pipeline/strip_yo.py' and not f.startswith('pipeline/ingest/fixes/'))
 DATA_PROSE = ['static/data/deals_promoted.json', 'static/data/pending.json', 'static/data/signals.json']
 YO = str.maketrans({'ё': 'е', 'Ё': 'Е'})
 # Строки, где «ё» — часть механики, а не текста: нормализация, классы символов, транслит.
