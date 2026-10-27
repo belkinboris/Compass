@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Удалить вручную подтверждённые дубли карточек и исправить роли сторон.
+"""Удалить вручную подтвержденные дубли карточек и исправить роли сторон.
 
 В отличие от ``data_audit.py`` этот скрипт содержит только просмотренные
 редактором случаи. Старые адреса сохраняются в ``merged``.
@@ -83,7 +83,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
             "keep": "g40477661", "drop": "g68297df0",
             "fields": {
                 "date": "2023-06-01",
-                "title": "«ЛабКвест» приобрёл 90% «ФораЛаб» и её лабораторный комплекс в Санкт-Петербурге",
+                "title": "«ЛабКвест» приобрел 90% «ФораЛаб» и ее лабораторный комплекс в Санкт-Петербурге",
                 "buyer": "g67ef3e91", "target": FORALAB_ID,
                 "seller": "Александр и Рашида Марковы",
                 "status": "Закрыта", "type": "M&A", "kind": "acquisition",
@@ -91,7 +91,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
                 "events": [{
                     "id": "closed-2023-05", "kind": "closed", "date": "2023-05-01",
                     "title": "Сделка завершена",
-                    "historicalTitle": "«ЛабКвест» приобрёл 90% «ФораЛаб»",
+                    "historicalTitle": "«ЛабКвест» приобрел 90% «ФораЛаб»",
                     "note": "К маю 2023 года 90% ООО «ФораЛаб» перешли основателю «ЛабКвест» Дарье Пикалюк. Сделка включала готовый лабораторный комплекс.",
                     "facts": [["Покупатель", "ГК «ЛабКвест»"], ["Предмет", "90% ООО «ФораЛаб»"], ["Сумма", "50 млн ₽"]],
                     "sources": [["Vademecum", "https://vademec.ru/news/2023/06/01/labkvest-investirovala-50-mln-rubley-v-tsentralizovannuyu-laboratoriyu-v-sankt-peterburge/"]],
@@ -107,7 +107,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
             "keep": "g324faec6", "drop": "g8fe01e40",
             "fields": {
                 "date": "2023-12-21",
-                "title": "«Северсталь» приобрела «Венталл Стальные Решения» и производственные площадки в Обнинске и Щёкине",
+                "title": "«Северсталь» приобрела «Венталл Стальные Решения» и производственные площадки в Обнинске и Щекине",
                 "buyer": "g4e2d0a88", "target": "gad05203e",
                 "seller": "Холдинг «Венталл»",
                 "status": "Закрыта", "type": "M&A", "kind": "acquisition",
@@ -116,7 +116,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
                     "id": "closed-2023-12-21", "kind": "closed", "date": "2023-12-21",
                     "title": "Сделка завершена",
                     "historicalTitle": "«Северсталь» приобрела активы холдинга «Венталл»",
-                    "note": "«Северсталь» стала владельцем «Венталл Стальные Решения» и площадок в Обнинске и Щёкине. О сделке публично сообщили в январе 2024 года.",
+                    "note": "«Северсталь» стала владельцем «Венталл Стальные Решения» и площадок в Обнинске и Щекине. О сделке публично сообщили в январе 2024 года.",
                     "facts": [["Покупатель", "«Северсталь»"], ["Предмет", "«Венталл Стальные Решения»"], ["Сумма", "4,7 млрд ₽"]],
                     "sources": [["Интерфакс", "https://www.interfax.ru/business/944209"], ["Ведомости", "https://www.vedomosti.ru/business/articles/2024/01/10/1014461-severstal-kupila-aktivi-ventall-po-vipusku-metallokonstruktsii"]],
                 }],
@@ -144,7 +144,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
             changes.append(f"исправлена карточка {keep}")
         if legacy:
             removed.add(drop)
-            changes.append(f"удалён дубль {drop}")
+            changes.append(f"удален дубль {drop}")
         promoted.setdefault("merged", {})[drop] = keep
 
     # Уточняем профиль, который теперь используется как предмет сделки.
@@ -152,9 +152,9 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
     if ventall and ventall.get("name") != "Венталл Стальные Решения":
         ventall["name"] = "Венталл Стальные Решения"
         ventall["legal_name"] = "ООО «Венталл Стальные Решения»"
-        ventall["desc"] = "Производитель металлоконструкций с площадками в Обнинске и Щёкине."
+        ventall["desc"] = "Производитель металлоконструкций с площадками в Обнинске и Щекине."
         promoted.setdefault("match_keys", {})["gad05203e"] = ["венталл", "венталл стальные решения"]
-        changes.append("уточнён профиль Венталл Стальные Решения")
+        changes.append("уточнен профиль Венталл Стальные Решения")
 
     # Дубли кураторских карточек: оставляем более полную кураторскую запись.
     curated_duplicates = {
@@ -170,7 +170,7 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
         canonical["src"] = merge_sources(canonical.get("src"), legacy.get("src"))
         removed.add(drop)
         promoted.setdefault("merged", {})[drop] = keep
-        changes.append(f"удалён дубль кураторской карточки {drop} → {keep}")
+        changes.append(f"удален дубль кураторской карточки {drop} → {keep}")
 
     # Выкуп собственных акций: эмитент не должен одновременно быть target.
     buyback = by_id.get("g75837e8b")
@@ -189,14 +189,14 @@ def apply(promoted: dict, curated: list[dict]) -> list[str]:
         before_first, before_second = copy.deepcopy(first), copy.deepcopy(second)
         first.update({
             "date": "2023-12-28",
-            "title": "Артём Чайка приобрёл 49% основного юрлица 3S Group",
+            "title": "Артем Чайка приобрел 49% основного юрлица 3S Group",
             "seller": "Руслан Сеюков",
             "related_deal_ids": ["gdd85a5b9"],
             "separate_transaction_reviewed": True,
         })
         second.update({
             "date": "2024-06-04",
-            "title": "Артём Чайка приобрёл ещё 50% 3S Group у Руслана Сеюкова",
+            "title": "Артем Чайка приобрел еще 50% 3S Group у Руслана Сеюкова",
             "seller": "Руслан Сеюков",
             "related_deal_ids": ["geda130b6"],
             "separate_transaction_reviewed": True,

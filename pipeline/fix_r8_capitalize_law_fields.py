@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Четыре карточки раунда 8, у которых извлечённая цитата в law.struct/
+"""Четыре карточки раунда 8, у которых извлеченная цитата в law.struct/
 law.terms начинается со строчной буквы — оборвано начало дословного
 фрагмента (см. CLAUDE.md, `test_law_values_start_with_a_capital`). Плюс
 buyer_name карточки g88d5e740, попавший в косвенный падеж («Структуры» —
@@ -8,8 +8,8 @@ pymorphy разобрал как родительный, тест `test_party_na
 
 Правится только формулировка, не факт. После записи нужно вручную
 привести в соответствие `new` в pipeline/ingest/fixes/batch_agents100_r8.py
-для четырёх law.*-записей — иначе test_review_table_is_applied_and_not_pending
-упадёт (already_applied() сверяет базу с `new` дословно).
+для четырех law.*-записей — иначе test_review_table_is_applied_and_not_pending
+упадет (already_applied() сверяет базу с `new` дословно).
 
 ЗАПУСК:
     python3 pipeline/fix_r8_capitalize_law_fields.py            # сухой прогон

@@ -72,7 +72,7 @@ DESCRIPTIONS = {
                  'на венчурных и growth-инвестициях в технологические '
                  'компании.',
 
-    # --- Промышленность и сырьё ---
+    # --- Промышленность и сырье ---
     'g5cd56361': 'Крупный российский производитель поливинилхлорида '
                  '(ПВХ) в Иркутской области.',
     'g337092b8': 'Угледобывающее предприятие.',
@@ -131,7 +131,7 @@ def main(write=False):
         old = str(c.get('desc') or '')
         if old.strip() == text:
             continue
-        # Своё описание не перетираем: прошлые партии и ручные правки старше этой.
+        # Свое описание не перетираем: прошлые партии и ручные правки старше этой.
         if old and not PLACEHOLDER.match(old):
             skipped.append((cid, c.get('name'), old[:60]))
             continue
@@ -153,7 +153,7 @@ def main(write=False):
     print('\nОписаний записано: %d' % wrote)
     print('Отраслей исправлено: %d' % ind_fixed)
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
         for cid, name, old in skipped[:5]:
             print('   %s %s — %r' % (cid, name, old))
     print('Оставлено без описания намеренно: %d профилей (см. UNCLEAR)' % len(UNCLEAR))

@@ -147,7 +147,7 @@ SPECS = [
         "legacy": {"g327686f7": "negotiations-2023-03-01"},
         "fields": {
             "date": "2023-05-22",
-            "title": "S8 Capital приобрёл российские активы Continental",
+            "title": "S8 Capital приобрел российские активы Continental",
             "buyer": "gffdff138",
             "target": "gd8392d81",
             "seller": "Continental AG",
@@ -169,7 +169,7 @@ SPECS = [
                     "kind": "closed",
                     "date": "2023-05-22",
                     "title": "Сделка завершена",
-                    "historicalTitle": "S8 Capital приобрёл российские активы Continental",
+                    "historicalTitle": "S8 Capital приобрел российские активы Continental",
                     "note": "S8 Capital получил шинный завод в Калуге и ООО «Континентал Тайрс Рус». Цена сделки официально не раскрывалась.",
                     "facts": [["Статус", "Закрыта"], ["Покупатель", "S8 Capital"], ["Продавец", "Continental AG"], ["Предмет", "Российский шинный бизнес Continental"]],
                     "sources": [src("Forbes", "https://www.forbes.ru/biznes/489684-nemeckij-proizvoditel-sin-continental-prodal-rossijskie-aktivy")],
@@ -184,7 +184,7 @@ SPECS = [
         "legacy": {"g733847f4": "closed-2024-08-31"},
         "fields": {
             "date": "2024-08-31",
-            "title": "Структура Умара Кремлёва приобрела «Рольф» у Росимущества",
+            "title": "Структура Умара Кремлева приобрела «Рольф» у Росимущества",
             "buyer": "g6f5d7e99",
             "target": "gf0622a24",
             "seller": "Росимущество",
@@ -196,8 +196,8 @@ SPECS = [
                     "kind": "closed",
                     "date": "2024-08-31",
                     "title": "Сделка завершена",
-                    "historicalTitle": "Структура Умара Кремлёва приобрела «Рольф» у Росимущества",
-                    "note": "Активы дилерского холдинга перешли структуре Умара Кремлёва. Согласно отчётности «Рольфа», цена составила 34,798 млрд рублей.",
+                    "historicalTitle": "Структура Умара Кремлева приобрела «Рольф» у Росимущества",
+                    "note": "Активы дилерского холдинга перешли структуре Умара Кремлева. Согласно отчетности «Рольфа», цена составила 34,798 млрд рублей.",
                     "facts": [["Статус", "Закрыта"], ["Покупатель", "Структура Умара Кремлёва"], ["Продавец", "Росимущество"], ["Сумма", "34,798 млрд ₽"]],
                     "sources": [src("Интерфакс", "https://www.interfax.ru/business/1000901"), src("РБК", "https://www.rbc.ru/business/02/09/2024/66d5c7c39a7947774ba95af5")],
                 }
@@ -286,7 +286,7 @@ SPECS = [
                     "kind": "negotiations",
                     "date": "2023-01-10",
                     "title": "Начался конкурс",
-                    "historicalTitle": "Структура семьи Ткачёва подала заявку на приобретение курорта «Архыз»",
+                    "historicalTitle": "Структура семьи Ткачева подала заявку на приобретение курорта «Архыз»",
                     "note": "На конкурс выставили 100% акций управляющей компании курорта. Первоначальное предложение «Горных вершин» составляло 17 млрд рублей.",
                     "facts": [["Статус", "Конкурс"], ["Претендент", "ООО «Горные вершины»"], ["Продавец", "АО «Кавказ.РФ»"]],
                     "sources": [src("РБК Кавказ", "https://kavkaz.rbc.ru/kavkaz/01/03/2023/63fef0cb9a7947430bc61f73")],
@@ -295,7 +295,7 @@ SPECS = [
                     "id": "winner-2023-03-01",
                     "kind": "signed",
                     "date": "2023-03-01",
-                    "title": "Победитель конкурса определён",
+                    "title": "Победитель конкурса определен",
                     "historicalTitle": "«Горные вершины» выиграли конкурс на приобретение курорта «Архыз»",
                     "note": "Компания предложила 24,2 млрд рублей. Сначала покупателю передаются 25% акций, оставшиеся 75% — по мере выполнения инвестиционных обязательств.",
                     "facts": [["Статус", "Победитель определён"], ["Покупатель", "ООО «Горные вершины»"], ["Продавец", "АО «Кавказ.РФ»"], ["Цена предложения", "24,2 млрд ₽"]],
@@ -359,7 +359,7 @@ def apply_specs(payload: dict) -> list[str]:
         for legacy_id, stage_id in spec["legacy"].items():
             if legacy_id in by_id:
                 removed.add(legacy_id)
-                changes.append(f"удалён дубль этапа {legacy_id}")
+                changes.append(f"удален дубль этапа {legacy_id}")
             payload.setdefault("merged", {})[legacy_id] = canonical_id
             payload.setdefault("merged_deal_stages", {})[legacy_id] = stage_id
 
@@ -376,7 +376,7 @@ def sync_2026(canonical_payload: dict, payload_2026: dict) -> list[str]:
     rows = []
     for deal in payload_2026.get("deals", []):
         if deal.get("id") in legacy:
-            changes.append(f"из deals_2026 удалён дубль {deal['id']}")
+            changes.append(f"из deals_2026 удален дубль {deal['id']}")
             continue
         if deal.get("id") in ids and deal.get("id") in canonical:
             synced = copy.deepcopy(canonical[deal["id"]])

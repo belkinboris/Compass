@@ -20,7 +20,7 @@ from db.models import (
 from db.session import get_session
 from notification_service import create_notification
 
-_TEST_PASSWORD = "надёжный-тестовый-пароль"
+_TEST_PASSWORD = "надежный-тестовый-пароль"
 
 
 @pytest.fixture
@@ -116,7 +116,7 @@ def _seed_fns_company(company_id: str = "launch-fns-company") -> int:
 
 def test_fns_company_dossier_free_and_paid_access(client, monkeypatch):
     """Проверяет РЕАЛЬНУЮ границу платности — с выключенным FNS_ALL_FREE,
-    как она устроена в коде на случай, когда владелец включит её обратно
+    как она устроена в коде на случай, когда владелец включит ее обратно
     (pipeline/COMPANY_FINANCE_BRIEF.md, раздел П6). Сейчас флаг стоит True
     (см. test_fns_all_free_shows_full_history_to_anonymous_visitors ниже) —
     это не отменяет саму границу, она просто временно не применяется."""
@@ -153,9 +153,9 @@ def test_fns_company_dossier_free_and_paid_access(client, monkeypatch):
 
 def test_fns_all_free_shows_full_history_to_anonymous_visitors(client):
     """Текущее временное состояние (FNS_ALL_FREE=True, по просьбе владельца
-    22 августа 2026: «давай сначала всё сделаем бесплатно, чтобы я видел как
+    22 августа 2026: «давай сначала все сделаем бесплатно, чтобы я видел как
     работает»). Анонимный посетитель видит ровно то же, что платный —
-    полную историю отчётов и событий, без урезания."""
+    полную историю отчетов и событий, без урезания."""
     assert main.FNS_ALL_FREE is True
     _seed_fns_company()
     anonymous = client.get("/api/companies/launch-fns-company/fns").json()
@@ -193,10 +193,10 @@ def _seed_multiples_entity(company_id, inn, year, revenue_rub, operating_profit_
 
 def _with_verified_facts(deal, registry):
     """facts для синтетической сделки: как в конвейере (facts.derive), но с
-    основанием verified у доли и цены и подтверждённым периметром — так, как
+    основанием verified у доли и цены и подтвержденным периметром — так, как
     их записал бы facts_confirm.py после двух согласных чтений. Без этого
     эндпоинт честно не показывает мультипликатор (правило 6 сентября 2026:
-    в расчёт идут только подтверждённые факты)."""
+    в расчет идут только подтвержденные факты)."""
     import facts
     ctx = {'registry': registry, 'lot_ids': set()}
     f = facts.derive(deal, ctx)
@@ -228,13 +228,13 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
             eco={"share": "Куплено 100% долей"}, asset=None,
         ),
         "mult-not-ma-deal": dict(
-            id="mult-not-ma-deal", title="Инвестиция, не в счёт", type="Инвестиция",
+            id="mult-not-ma-deal", title="Инвестиция, не в счет", type="Инвестиция",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-clean-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
             eco={"share": "Куплено 100% долей"}, asset=None,
         ),
         "mult-bank-deal": dict(
-            id="mult-bank-deal", title="Сделка с банком, не в счёт", type="M&A",
+            id="mult-bank-deal", title="Сделка с банком, не в счет", type="M&A",
             date="2024-03-01", sum="1 000 млн ₽", target="mult-bank-target",
             buyer="mult-buyer", seller="Тестовый Продавец",
             eco={"share": "Куплено 100% долей"}, asset=None,
@@ -273,10 +273,10 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
 
 def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client, monkeypatch):
     """Сделка, проходящая все правила ПО ТЕКСТУ (100%, цена в рублях, ИНН
-    подтверждён), но без двух согласных чтений источника, с 8 сентября 2026
+    подтвержден), но без двух согласных чтений источника, с 8 сентября 2026
     показывается ВТОРЫМ сигналом — «рассчитано по тексту карточки»: помечена
     `confidence: computed`, в проверенные (`clean_total`) и в отраслевые
-    ориентиры не входит, а эндпоинт по-прежнему говорит, что она ждёт чтения
+    ориентиры не входит, а эндпоинт по-прежнему говорит, что она ждет чтения
     и почему не подтверждена. До этого дня такие сделки не показывались
     вовсе — владелец: «мультипликаторов стало слишком мало», рецензент:
     три сигнала вместо одного."""
@@ -307,7 +307,7 @@ def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client,
 
 
 def test_analytics_multiples_endpoint_names_every_verified_deal_it_hides(client, monkeypatch):
-    """Четвёртый разбор рецензента, пункт 6: «Убик» (прибыль 2 млн ₽ при цене
+    """Четвертый разбор рецензента, пункт 6: «Убик» (прибыль 2 млн ₽ при цене
     1,8 млрд ₽ — ×902) и «Бизнес-Недвижимость» (×16) исчезали из выдачи по
     прибыли без единого слова, и читатель мог решить, что остальные убыточны
     или без данных. Проверенная, но не показанная сделка обязана быть названа
@@ -338,9 +338,9 @@ def test_analytics_multiples_endpoint_names_every_verified_deal_it_hides(client,
 
 
 def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(client, monkeypatch):
-    """Та же цепочка, но с operating_profit_rub в отчётности — второй
+    """Та же цепочка, но с operating_profit_rub в отчетности — второй
     мультипликатор обязан посчитаться НЕЗАВИСИМО от первого, по той же
-    строке отчёта (без второго похода к БД, см. deal_multiples.py)."""
+    строке отчета (без второго похода к БД, см. deal_multiples.py)."""
     _seed_multiples_entity("mult-op-target", "7710000501", 2023, 500_000_000,
                             operating_profit_rub=100_000_000)
 
@@ -373,9 +373,9 @@ def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(cli
 
 def test_finance_screening_endpoint_returns_latest_non_stale_revenue_per_company(client):
     """Этап 16, П2: /api/finance/screening — массовый company_id -> выручка
-    для финансового фильтра ленты. Проверяет три вещи разом: берётся ПОСЛЕДНИЙ
+    для финансового фильтра ленты. Проверяет три вещи разом: берется ПОСЛЕДНИЙ
     год (не первый попавшийся), устаревшая (за порогом FNS_REPORT_MAX_AGE_YEARS)
-    отчётность не участвует, а банк (revenue_rub всегда NULL в его отчёте)
+    отчетность не участвует, а банк (revenue_rub всегда NULL в его отчете)
     структурно не может попасть в ответ — не нужен отдельный список исключений."""
     _seed_multiples_entity("screen-target-fresh", "7710000401", 2024, 900_000_000)
     _seed_multiples_entity("screen-target-fresh", "7710000401", 2022, 100_000_000)  # старее — не должен победить
@@ -421,7 +421,7 @@ def test_dedupe_owners_prefers_the_entry_with_inn():
 def _seed_ao_company(company_id: str = "launch-fns-ao"):
     """АО с ОДНИМ снапшотом «current» — учредители при регистрации, ровно
     та форма данных, что реально приходит из ЕГРЮЛ для акционерных обществ
-    (реестр акционеров ведёт не ФНС — см. _is_ao_entity). Дубль в списке
+    (реестр акционеров ведет не ФНС — см. _is_ao_entity). Дубль в списке
     (одно лицо, две записи) — воспроизводит находку владельца 23 августа."""
     db = get_session()
     try:
@@ -494,8 +494,8 @@ def test_ooo_ownership_keeps_current_composition_heading(client):
 def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(client, monkeypatch):
     """П5 (COMPANY_FINANCE_BRIEF.md): «нашли/не нашли» — не одно состояние.
     Профиль без сопоставленного юрлица, но с решением bank/foreign/state_org
-    в реестре, получает СВОЮ причину, а не «ещё не сопоставлено» — та фраза
-    подразумевает, что сопоставление ещё случится, а для банка/иностранца
+    в реестре, получает СВОЮ причину, а не «еще не сопоставлено» — та фраза
+    подразумевает, что сопоставление еще случится, а для банка/иностранца
     оно не случится никогда."""
     import main as main_module
 
@@ -516,7 +516,7 @@ def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(clie
 def test_fns_person_and_lot_categories_are_hidden_not_empty(client, monkeypatch):
     """person/lot не бывают финансового блока вовсе — hidden=True, а не
     честное пустое состояние с текстом (родня правилу «вкладка без данных
-    не рендерится», не «рендерится приглушённой»)."""
+    не рендерится», не «рендерится приглушенной»)."""
     import main as main_module
 
     for decision in ("person", "lot"):
@@ -531,21 +531,21 @@ def test_fns_person_and_lot_categories_are_hidden_not_empty(client, monkeypatch)
 def test_fns_profile_without_registry_entry_keeps_the_old_generic_reason(client):
     """Профиль, которого вообще нет в pipeline/fns_registry.py (подавляющее
     большинство базы), не должен внезапно получить category/hidden-эффект —
-    старое честное «ещё не сопоставлено» остаётся как было."""
+    старое честное «еще не сопоставлено» остается как было."""
     body = client.get("/api/companies/launch-fns-no-registry-entry-at-all/fns").json()
     assert body["available"] is False
     assert body["hidden"] is False
     assert body["category"] is None
-    assert body["reason"] == "Юридическое лицо ещё не сопоставлено с ЕГРЮЛ"
+    assert body["reason"] == "Юридическое лицо еще не сопоставлено с ЕГРЮЛ"
 
 
 def test_fns_category_is_carried_even_when_a_legal_entity_is_already_matched(client, monkeypatch):
-    """Этап 6: несколько банков были сопоставлены с ИНН ЕЩЁ ДО того, как для
+    """Этап 6: несколько банков были сопоставлены с ИНН ЕЩЕ ДО того, как для
     них завели решение "bank" в реестре — у них есть LegalEntity(confirmed),
-    и ответ идёт через ветку `available: True`, которая раньше `category`
-    не несла вовсе (только ветка «юрлицо не сопоставлено» её отдавала).
-    Фронтенд не мог отличить банк с пустой отчётностью от обычной компании
-    с пустой отчётностью и не мог решить, показывать ли вместо сетки ФНС
+    и ответ идет через ветку `available: True`, которая раньше `category`
+    не несла вовсе (только ветка «юрлицо не сопоставлено» ее отдавала).
+    Фронтенд не мог отличить банк с пустой отчетностью от обычной компании
+    с пустой отчетностью и не мог решить, показывать ли вместо сетки ФНС
     блок Банка России."""
     import main as main_module
 
@@ -617,14 +617,14 @@ def test_fns_report_exposes_full_lines_from_raw_lines_json(client):
     full_lines = report["full_lines"]
     titles = [s["title"] for s in full_lines]
     assert "I. Внеоборотные активы" in titles
-    assert "Отчёт о финансовых результатах" in titles
+    assert "Отчет о финансовых результатах" in titles
 
     assets = next(s for s in full_lines if s["title"] == "I. Внеоборотные активы")
     rows = {r["code"]: r["value_rub"] for r in assets["rows"]}
     assert rows["1110"] == 5_000_000
     assert rows["1150"] == 70_000_000
 
-    pnl = next(s for s in full_lines if s["title"] == "Отчёт о финансовых результатах")
+    pnl = next(s for s in full_lines if s["title"] == "Отчет о финансовых результатах")
     pnl_rows = {r["code"]: r["value_rub"] for r in pnl["rows"]}
     assert pnl_rows["2110"] == 544_580_000_000
     assert pnl_rows["2400"] == -11_680_000_000, "отрицательная чистая прибыль (убыток) не должна теряться"
@@ -644,7 +644,7 @@ def test_fns_report_full_lines_is_empty_list_without_raw_lines_json(client):
 
 
 def test_fns_hides_reports_older_than_two_years_on_company_page(client):
-    """«Компания сегодня» не должна выглядеть моложе своей отчётности на много
+    """«Компания сегодня» не должна выглядеть моложе своей отчетности на много
     лет — правило владельца от 18 августа 2026 после жалобы на устаревшие
     2020-2021 годы у банков/АФК «Система». as_of_year (карточка сделки) от
     этого правила не зависит: там нужен именно старый год того периода."""
@@ -653,10 +653,10 @@ def test_fns_hides_reports_older_than_two_years_on_company_page(client):
     stale_year = this_year - 3  # заведомо старше порога в 2 года
     db = get_session()
     try:
-        company = Company(id=company_id, name="Старая отчётность", legal_name='ООО "Старая отчётность"')
+        company = Company(id=company_id, name="Старая отчетность", legal_name='ООО "Старая отчетность"')
         db.add(company); db.flush()
         entity = LegalEntity(
-            company_id=company_id, legal_name='ООО "Старая отчётность"', short_name='ООО "Старая отчётность"',
+            company_id=company_id, legal_name='ООО "Старая отчетность"', short_name='ООО "Старая отчетность"',
             inn="7700000098", ogrn="1027700000098", status="Действующая",
             match_status=LegalEntityMatchStatus.confirmed, manually_verified=True, is_primary=True,
             fetched_at=datetime.utcnow(), source_updated_at=datetime.utcnow(),
@@ -681,7 +681,7 @@ def test_fns_hides_reports_older_than_two_years_on_company_page(client):
     assert historical["entities"][0]["report_years"] == [stale_year]
     assert historical["entities"][0]["stale_latest_year"] is None
 
-    # Смешанный случай: старый год скрыт, свежий остаётся и не помечен stale.
+    # Смешанный случай: старый год скрыт, свежий остается и не помечен stale.
     db = get_session()
     try:
         db.add(FinancialReport(legal_entity_id=entity_id, year=this_year - 1,
@@ -725,7 +725,7 @@ def test_notification_preference_hides_in_app_feed(client):
 def test_email_notifications_unavailable_without_smtp(client, monkeypatch):
     """Без SMTP_HOST на сервере переключатели «почта»/«недельная сводка» не
     должны выглядеть включаемыми — иначе пользователь ставит галочку, а
-    письмо никогда не уйдёт, и никто об этом не узнает (см. CLAUDE.md про
+    письмо никогда не уйдет, и никто об этом не узнает (см. CLAUDE.md про
     честную деградацию вместо тихой имитации успеха)."""
     monkeypatch.delenv("SMTP_HOST", raising=False)
     _login(client, "no-smtp-launch-%s@firm.ru" % uuid.uuid4().hex[:8])
@@ -758,7 +758,7 @@ def test_saved_assistant_thread(client, monkeypatch):
 
 def test_pdf_export_is_open_to_every_signed_in_user_until_the_subscription_exists(client, monkeypatch):
     """Владелец, 3 сентября 2026: «разрешить авторизованным пользователям
-    скачивать PDF без платной подписки, пока её нет»; 5 сентября — «разрешим
+    скачивать PDF без платной подписки, пока ее нет»; 5 сентября — «разрешим
     пдф скачивать всем, даже тем, кто не платил»: гостю вход больше не нужен.
     Обе границы из кода не удалены, а выключены флагами: DEAL_EXPORT_GUESTS
     False возвращает гостю 401, DEAL_EXPORT_ALL_FREE False — бесплатному
@@ -830,7 +830,7 @@ def test_launch_ui_contains_requested_changes():
     assert 'page==="materials"||page==="webinars"' in html  # старая ссылка #/webinars не должна биться
     # Фильтр по категории консультанта СНЯТ 4 августа вместе с самими
     # категориями: «С-hi», «К-hi», «mid» — внутренняя разметка, ничем не
-    # подтверждённая, и фильтровать по признаку, которого нигде не видно,
+    # подтвержденная, и фильтровать по признаку, которого нигде не видно,
     # нельзя. Проверяем обратное тому, что проверялось раньше, — иначе тест
     # держал бы вернувшийся селект.
     assert 'id="selagroup"' not in html, "селект категорий вернулся в разметку"
@@ -890,7 +890,7 @@ def test_fns_normalizers_convert_source_units_and_fields():
 
 def test_fns_stat_summary_shows_only_purchased_methods_with_remaining_and_period():
     """23 августа 2026: /api/stat открыл, что лимиты тарифа ПО-МЕТОДНЫЕ, не
-    общие «3000 на всё» — и что для bo/egr/changes/vyp тип лимита «по
+    общие «3000 на все» — и что для bo/egr/changes/vyp тип лимита «по
     организациям» (повторный запрос той же организации в течение года
     бесплатен). Сводка должна называть каждый реально используемый метод
     (не весь список из ответа — там есть неиспользуемые check/fl_status и
@@ -916,11 +916,11 @@ def test_fns_stat_summary_shows_only_purchased_methods_with_remaining_and_period
 
 
 def test_company_finance_tab_never_links_to_the_unpurchased_bo_file_download():
-    """23 августа 2026: кнопка «Скачать полную отчётность» вела на метод
+    """23 августа 2026: кнопка «Скачать полную отчетность» вела на метод
     bo_file, которого нет в тарифе (Лимит=0 по /api/stat) — живой клик на
-    любом из 150 подтверждённых профилей получал 403 и сырой JSON вместо
+    любом из 150 подтвержденных профилей получал 403 и сырой JSON вместо
     файла. Кнопку сняли; выписка ЕГРЮЛ (метод vyp, он куплен и проверен
-    живым запросом) остаётся."""
+    живым запросом) остается."""
     src = Path("static/index.html").read_text(encoding="utf-8")
     assert "fns/bo/${" not in src, "ссылка на bo_file-скачивание не должна вернуться на карточку"
     assert "fns/extract?" in src, "рабочая выписка ЕГРЮЛ должна остаться"
@@ -975,7 +975,7 @@ def test_fns_match_priority_skips_lots_and_orders_by_deal_count(monkeypatch):
     finally:
         db.close()
     assert seen_order == ["Громкая компания", "Тихая компания"], (
-        "громкая (deal_count выше) идёт первой, тихий лот вообще не запрашивается")
+        "громкая (deal_count выше) идет первой, тихий лот вообще не запрашивается")
 
 
 def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
@@ -1012,7 +1012,7 @@ def test_fns_confirm_by_inn_never_calls_search(monkeypatch):
 
 def test_fns_registry_inn_change_makes_the_new_entity_primary(monkeypatch):
     """Смена ИНН в реестре (Яндекс: ООО → МКПАО, 8 октября 2026): новое юрлицо
-    становится основным, старое остаётся вторым подтверждённым, а следующий
+    становится основным, старое остается вторым подтвержденным, а следующий
     прогон не подтверждает его заново (ищет юрлицо по ИНН реестра)."""
     from pipeline import sync_fns
 
@@ -1064,7 +1064,7 @@ def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch)
         {"company_id": "registry-sync-test", "decision": "confirmed", "inn": "7700000055",
          "reason": "тест", "date": "2026-08-22"},
         {"company_id": "registry-sync-bank-test", "decision": "bank", "inn": None,
-         "reason": "тест — банк, из ФНС не берём", "date": "2026-08-22"},
+         "reason": "тест — банк, из ФНС не берем", "date": "2026-08-22"},
     ]
     monkeypatch.setattr(sync_fns, "FNS_REGISTRY", fake_registry)
 
@@ -1092,7 +1092,7 @@ def test_fns_sync_from_registry_confirms_syncs_and_skips_when_fresh(monkeypatch)
             db.add(Company(id="registry-sync-test", name="Реестр-Тест"))
             db.flush(); db.commit()
         # Идемпотентная подготовка: тесты этого файла делят одну dev-базу
-        # между прогонами (тот же приём, что у соседнего теста про limit) —
+        # между прогонами (тот же прием, что у соседнего теста про limit) —
         # если сделка уже подтверждена и свежа с прошлого прогона, первый
         # вызов ниже увидел бы skipped_fresh вместо confirmed_now/synced.
         leftover = db.query(LegalEntity).filter_by(company_id="registry-sync-test").one_or_none()
@@ -1133,7 +1133,7 @@ def test_fns_sync_from_registry_revokes_entities_whose_decision_changed(monkeypa
     sync_from_registry читает только ТЕКУЩИЙ confirmed-список и молча не
     замечает, что company_id из него исчез. `revoke_stale_confirmations()`
     обязана снять именно такую строку — и ТОЛЬКО такую: запись, о которой
-    текущий реестр молчит вовсе (её нет в фиктивном реестре ниже совсем),
+    текущий реестр молчит вовсе (ее нет в фиктивном реестре ниже совсем),
     трогать нельзя — иначе прогон на общей dev-базе стирал бы confirmed-
     строки ДРУГИХ тестов, для которых этот фиктивный реестр их не упоминает."""
     from pipeline import sync_fns
@@ -1170,7 +1170,7 @@ def test_fns_sync_from_registry_revokes_entities_whose_decision_changed(monkeypa
         db.commit()
 
         removed = sync_fns.revoke_stale_confirmations(db)
-        assert removed == 1, "снять обязана ровно ту строку, чьё решение явно сменилось"
+        assert removed == 1, "снять обязана ровно ту строку, чье решение явно сменилось"
 
         assert db.get(LegalEntity, entity_id["revoke-still-confirmed"]) is not None
         assert db.get(LegalEntity, entity_id["revoke-now-no-match"]) is None
@@ -1178,7 +1178,7 @@ def test_fns_sync_from_registry_revokes_entities_whose_decision_changed(monkeypa
             "запись, которой в ТЕКУЩЕМ реестре просто нет, — не то же самое, что "
             "«решение сменилось», и удаляться не должна")
 
-        # Каскад: отчёт удалённой строки не осиротел, а исчез вместе с ней.
+        # Каскад: отчет удаленной строки не осиротел, а исчез вместе с ней.
         assert db.query(FinancialReport).filter_by(
             legal_entity_id=entity_id["revoke-now-no-match"]).count() == 0
     finally:
@@ -1228,7 +1228,7 @@ def test_fns_sync_from_registry_limit_counts_real_work_not_list_position(monkeyp
     db = get_session()
     try:
         # Идемпотентная подготовка (тесты этого файла делят одну dev-базу
-        # между прогонами — тот же приём, что уже используется соседним
+        # между прогонами — тот же прием, что уже используется соседним
         # тестом sync_from_registry чуть выше).
         for row in fake_registry[:3]:
             cid, inn = row["company_id"], row["inn"]
@@ -1250,7 +1250,7 @@ def test_fns_sync_from_registry_limit_counts_real_work_not_list_position(monkeyp
                 db.add(Company(id=row["company_id"], name=row["company_id"]))
         db.commit()
         # Записи «нужна работа» должны реально нуждаться в ней — снять
-        # подтверждение, если тест уже когда-то прошёл на этой же базе.
+        # подтверждение, если тест уже когда-то прошел на этой же базе.
         for row in fake_registry[3:]:
             leftover = db.query(LegalEntity).filter_by(company_id=row["company_id"]).one_or_none()
             if leftover is not None:
@@ -1271,7 +1271,7 @@ def test_fns_requests_today_sums_only_todays_runs():
     """Этап 3, П5''': `_fns_requests_today()` — сумма `requests` из
     FnsSyncRun за текущие сутки UTC. Вчерашний прогон не должен считаться —
     иначе потолок никогда бы не сбрасывался. Тестовая dev-база общая между
-    прогонами этого файла (тот же приём, что у соседних тестов), поэтому
+    прогонами этого файла (тот же прием, что у соседних тестов), поэтому
     сравниваем ДО/ПОСЛЕ вставки, а не абсолютное число."""
     import json as _json
     from datetime import timedelta as _timedelta
@@ -1330,7 +1330,7 @@ def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch)
     прогонами (см. соседние тесты), и за день десятков прогонов этого же
     файла реальная сумма «сегодня» непредсказуема — абсолютная вставка
     могла бы случайно перевалить и через повышенный потолок тоже,
-    сделав тест то зелёным, то красным в зависимости от того, сколько
+    сделав тест то зеленым, то красным в зависимости от того, сколько
     раз файл уже прогоняли сегодня."""
     from pipeline import sync_fns
     monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
@@ -1376,7 +1376,7 @@ def test_fns_sync_once_records_a_run_that_counts_toward_the_cap(monkeypatch):
 
 def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
     """bank/foreign/state_org/person/lot/no_match/brand_needs_inn не несут
-    подтверждённого ИНН для ФНС — --from-registry обязан их пропускать, а не
+    подтвержденного ИНН для ФНС — --from-registry обязан их пропускать, а не
     падать на отсутствующем inn."""
     from pipeline import sync_fns
 
@@ -1401,10 +1401,10 @@ def test_fns_sync_from_registry_ignores_non_confirmed_decisions(monkeypatch):
 
 
 def test_fns_queue_clean_query_name_strips_only_our_own_trailing_disambiguator():
-    """23 августа 2026: профиль «Кама» (Атом) заведён под этим именем именно
+    """23 августа 2026: профиль «Кама» (Атом) заведен под этим именем именно
     чтобы не совпасть по транслитерационному ключу с профилем ЦБК «Кама»
     (см. CLAUDE.md) — но «(Атом)» это НАША пометка, не часть юрлица, и с ней
-    поиск ФНС не найдёт ничего. Скобки внутри самого названия (редкость, но
+    поиск ФНС не найдет ничего. Скобки внутри самого названия (редкость, но
     бывает) не должны обрезаться — паттерн якорен строго на конец строки."""
     from pipeline.fns_unresolved_queue import clean_query_name
 
@@ -1446,12 +1446,12 @@ def test_fns_queue_attempt_single_exact_match_requires_uniqueness_and_active_sta
     """Механика этого шага НАРОЧНО у́же, чем match_companies(auto_confirm=True)
     (0.965 похожести имени без ОКВЭД/региона — на «Арнест» вернул 10
     кандидатов без сигнала, какой из них главный, см. докстринг скрипта):
-    подтверждает только когда после поиска остаётся РОВНО один действующий
-    результат с точным (не похожим) именем. Два действующих тёзки или один
+    подтверждает только когда после поиска остается РОВНО один действующий
+    результат с точным (не похожим) именем. Два действующих тезки или один
     ликвидированный результат — не подтверждение.
 
     Бесплатный ЕГРЮЛ (первый шаг, см. `attempt_public_egrul_match`) здесь
-    отключён монкипатчем — этот тест проверяет ВТОРОЙ, платный шаг, а не
+    отключен монкипатчем — этот тест проверяет ВТОРОЙ, платный шаг, а не
     делает живой запрос к egrul.nalog.ru."""
     import pipeline.fns_unresolved_queue as uq_mod
     from pipeline.fns_unresolved_queue import attempt_single_exact_match
@@ -1492,10 +1492,10 @@ def test_fns_queue_attempt_single_exact_match_propagates_api_errors(monkeypatch)
     больше НЕ проглатывается внутри функции и не превращается в None —
     иначе она неотличима от честного «совпадений не найдено», и весь
     прогон при отказавшем API выглядел бы как «спросили, ничего не
-    нашли», а не как «вопрос вообще не дошёл до ФНС». Ошибку теперь
+    нашли», а не как «вопрос вообще не дошел до ФНС». Ошибку теперь
     считает и решает, что с ней делать, вызывающий (`main()`).
 
-    Бесплатный ЕГРЮЛ отключён монкипатчем — тест проверяет платный шаг."""
+    Бесплатный ЕГРЮЛ отключен монкипатчем — тест проверяет платный шаг."""
     import pipeline.fns_unresolved_queue as uq_mod
     from fns_client import ApiFnsError
     from pipeline.fns_unresolved_queue import attempt_single_exact_match
@@ -1524,7 +1524,7 @@ class _FakeEgrulResponse:
 
 
 class _FakeEgrulClient:
-    """Подменяет httpx.Client целиком: `post` кладёт заявку, `get` отдаёт
+    """Подменяет httpx.Client целиком: `post` кладет заявку, `get` отдает
     результат сразу (без реального асинхронного ожидания egrul.nalog.ru)."""
 
     def __init__(self, rows):
@@ -1540,8 +1540,8 @@ class _FakeEgrulClient:
 def test_attempt_public_egrul_match_confirms_a_single_exact_hit():
     """Найдено 8 сентября 2026 на карточке «Базис»/«Протосервисез»: годовая
     платная квота `search` (api-fns.ru) обнулилась (3000 из 3000, по
-    `/api/stat`), а владелец сам нашёл ИНН за минуту через бесплатный
-    официальный ЕГРЮЛ — в нём на это имя ровно одно действующее юрлицо.
+    `/api/stat`), а владелец сам нашел ИНН за минуту через бесплатный
+    официальный ЕГРЮЛ — в нем на это имя ровно одно действующее юрлицо.
     Проверено вживую перед тем, как писать этот тест: реальный запрос к
     egrul.nalog.ru на «Протосервисез» дал ИНН 7725829920 — то же число,
     что владелец получил кликом по ссылке в статье Ведомостей."""
@@ -1557,10 +1557,10 @@ def test_attempt_public_egrul_match_confirms_a_single_exact_hit():
 
 
 def test_attempt_public_egrul_match_refuses_homonyms_and_fuzzy_hits():
-    """Родня платного пути: два ТОЧНЫХ тёзки — не подтверждение. И строка,
+    """Родня платного пути: два ТОЧНЫХ тезки — не подтверждение. И строка,
     похожая по подстроке, но не совпадающая по нормализованному имени
     («Протосервис» вместо «Протосервисез» — реальная находка того же живого
-    прогона, нечёткий движок поиска ЕГРЮЛ подтягивает такие соседями),
+    прогона, нечеткий движок поиска ЕГРЮЛ подтягивает такие соседями),
     не должна засчитываться за совпадение."""
     from pipeline.fns_unresolved_queue import attempt_public_egrul_match
 
@@ -1656,7 +1656,7 @@ def test_fns_queue_main_stops_early_after_repeated_api_errors_and_reports_honest
     assert "Автоподтверждено" not in out, "при отказавшем API и бесплатном «не нашли» подтверждать было нечего"
     # 19 сентября 2026: обрыватель должен останавливать только ПЛАТНЫЕ
     # попытки — бесплатный ЕГРЮЛ-поиск обязан быть вызван для ВСЕХ 5
-    # кандидатов, а не только для тех трёх, что были до срабатывания
+    # кандидатов, а не только для тех трех, что были до срабатывания
     # обрывателя (см. докстринг attempt_paid_exact_match).
     assert len(free_calls) == 5, "бесплатный поиск не должен обрываться вместе с платным"
 
@@ -1726,7 +1726,7 @@ def test_fns_queue_send_to_console_without_targets_sends_nothing(monkeypatch):
 
 
 def test_fns_queue_stamp_asked_writes_date_on_the_profile(tmp_path, monkeypatch):
-    """Штамп `fns_asked` — тот же приём, что `reviewed` на карточке сделки:
+    """Штамп `fns_asked` — тот же прием, что `reviewed` на карточке сделки:
     переживает контейнер, потому что пишется прямо в git-файл базы."""
     from pipeline.fns_unresolved_queue import stamp_asked
     import json as _json
@@ -1762,8 +1762,8 @@ def test_fns_queue_unresolved_companies_skips_already_asked_profiles():
 
 def test_fns_homonym_queue_eligible_requires_no_match_and_skips_asked():
     """Этап 9, П8-9: кандидат из курированного списка учитывается, только
-    пока запись в реестре реально no_match (кто-то мог решить её другим
-    путём) и её ещё не спрашивали (`fns_asked`) — тот же приём, что у
+    пока запись в реестре реально no_match (кто-то мог решить ее другим
+    путем) и ее еще не спрашивали (`fns_asked`) — тот же прием, что у
     основной очереди «нужен ИНН», только своя проверка, потому что
     condition на реестр здесь ПРОТИВОПОЛОЖНАЯ (запись обязана уже быть)."""
     from pipeline.fns_homonym_queue import eligible, CANDIDATES
@@ -1771,7 +1771,7 @@ def test_fns_homonym_queue_eligible_requires_no_match_and_skips_asked():
     cid_a, cid_b, cid_c = CANDIDATES[0][0], CANDIDATES[1][0], CANDIDATES[2][0]
     registry_idx = {
         cid_a: {"decision": "no_match"},
-        cid_b: {"decision": "confirmed"},   # решили другим путём — больше не спрашиваем
+        cid_b: {"decision": "confirmed"},   # решили другим путем — больше не спрашиваем
     }
     companies = {
         cid_a: {"name": "А"},
@@ -1796,7 +1796,7 @@ def test_fns_homonym_queue_console_message_uses_its_own_marker():
 
 
 def test_fns_queue_send_one_omits_reply_markup_when_no_keyboard():
-    """Сообщение очереди «нужен ИНН» не несёт кнопок (решение — ответ
+    """Сообщение очереди «нужен ИНН» не несет кнопок (решение — ответ
     текстом, не нажатие) — `reply_markup` не должен уйти в теле запроса
     вовсе (null), как и у обычных уведомлений notification_service."""
     import sys as _sys
@@ -1849,7 +1849,7 @@ def test_fns_notes_collect_confirms_valid_inn_and_rejects_the_rest():
         {"id": 1, "deal_id": "инн~yandex", "edited_text": "7736207543"},
         {"id": 2, "deal_id": "инн~ghost", "edited_text": "7736207543"},
         {"id": 3, "deal_id": "инн~gknown", "edited_text": "7736207543"},
-        {"id": 4, "deal_id": "инн~yandex", "edited_text": "не нашёл, не отвечает телефон"},
+        {"id": 4, "deal_id": "инн~yandex", "edited_text": "не нашел, не отвечает телефон"},
         {"id": 5, "deal_id": "инн~yandex", "edited_text": "7736207544"},   # искажена цифра
         {"id": 6, "deal_id": "gnote-unrelated", "edited_text": "правка карточки, не ИНН"},
     ]
@@ -1886,10 +1886,10 @@ def test_fns_notes_append_registry_writes_valid_python(tmp_path):
 
 def test_fns_notes_main_write_applies_replies_and_consumes(tmp_path, monkeypatch):
     """Сквозной прогон --write: main() пишет реестр, отвечает реплаем на
-    исходное сообщение и помечает заметку применённой — та же цепочка,
+    исходное сообщение и помечает заметку примененной — та же цепочка,
     которую read_notes.py уже требует от обычных заметок. `append_registry`
     подменена шпионом, чтобы не трогать боевой pipeline/fns_registry.py —
-    её собственная запись уже проверена отдельным тестом на файловом
+    ее собственная запись уже проверена отдельным тестом на файловом
     фикстуре (test_fns_notes_append_registry_writes_valid_python)."""
     import json as _json
     import sys as _sys
@@ -1948,7 +1948,7 @@ def test_fns_notes_main_dry_run_writes_nothing(tmp_path, monkeypatch):
 def test_fns_notes_collect_homonym_requires_an_existing_no_match_row():
     """Этап 9, П8-9: сценарий «инн-омоним» — зеркало collect(), но с
     противоположным условием на реестр: запись ОБЯЗАНА уже быть no_match,
-    иначе это не наш сценарий (решена другим путём — не трогаем)."""
+    иначе это не наш сценарий (решена другим путем — не трогаем)."""
     from pipeline.fns_notes_to_registry import collect_homonym
 
     companies = {"askona": {"name": "Аскона"}, "already_confirmed": {"name": "Уже подтверждено"}}
@@ -2005,7 +2005,7 @@ def test_fns_notes_edit_registry_entry_rewrites_only_the_named_row(tmp_path):
     assert idx["keep_me"]["decision"] == "no_match", "соседняя запись не должна быть тронута"
     assert idx["askona"]["decision"] == "confirmed"
     assert idx["askona"]["inn"] == "7736207543"
-    assert "27 омонимов" in idx["askona"]["reason"], "старая причина остаётся историей внутри новой"
+    assert "27 омонимов" in idx["askona"]["reason"], "старая причина остается историей внутри новой"
 
     missing = edit_registry_entry("no-such-id", {
         "company_id": "no-such-id", "decision": "confirmed", "inn": "1",
@@ -2050,19 +2050,19 @@ def test_fns_notes_main_write_applies_the_homonym_edit_too(tmp_path, monkeypatch
     assert len(edited) == 1
     cid, fields = edited[0]
     assert cid == "askona" and fields["decision"] == "confirmed" and fields["inn"] == "7740000076"
-    assert "27 омонимов" in fields["reason"], "старый reason no_match остаётся историей внутри нового"
+    assert "27 омонимов" in fields["reason"], "старый reason no_match остается историей внутри нового"
     assert {nid for nid, _text in replied} == {9, 10}
     assert set(consumed) == {9, 10}
 
 
 def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
     """18 августа 2026 первый боевой прогон fns_seed_top_companies.py упал
-    на PostgreSQL: `ForeignKeyViolation` — company_id ещё не было строки в
+    на PostgreSQL: `ForeignKeyViolation` — company_id еще не было строки в
     companies, когда скрипт уже пробовал вставить legal_entities. На
     локальном SQLite это не ловится: там внешние ключи по умолчанию не
     проверяются вовсе, тот же класс дефекта, что уже описан в CLAUDE.md про
     `ALTER TABLE ... IF NOT EXISTS`. Здесь — отдельная SQLite-база с явно
-    включёнными внешними ключами (`PRAGMA foreign_keys=ON`), чтобы тест
+    включенными внешними ключами (`PRAGMA foreign_keys=ON`), чтобы тест
     воспроизводил именно то ограничение, которое реально сломало прогон."""
     from sqlalchemy import create_engine, event
     from sqlalchemy.orm import sessionmaker
@@ -2113,7 +2113,7 @@ def test_fns_seed_script_writes_company_row_before_legal_entity(tmp_path):
 
 def test_fns_seed_script_never_claims_success_when_every_request_fails(monkeypatch, capsys):
     """18 августа 2026 сам провайдер (api-fns.ru) вернул 403 на все 7 запросов
-    первого посевного прогона, а скрипт всё равно напечатал «Записано» —
+    первого посевного прогона, а скрипт все равно напечатал «Записано» —
     выглядело так, будто что-то записалось, хотя не записалось ничего.
     Итоговая строка обязана отличать «0 из N успешно» от настоящей записи,
     и возвращать код завершения, по которому видно, что прогон не удался."""
@@ -2218,7 +2218,7 @@ def test_taxonomy_is_consistent_in_generation_pipeline():
         Path("pipeline/promote_2026.py"),
         Path("pipeline/promote_all.py"),
         Path("pipeline/to_minideals.py"),
-        # curated_companies.json удалён 3 августа 2026: профили переехали в
+        # curated_companies.json удален 3 августа 2026: профили переехали в
         # deals_promoted.json — единый источник данных. Проверяем теперь его.
         Path("static/data/deals_promoted.json"),
     ]
@@ -2269,7 +2269,7 @@ def test_fns_ownership_normalizer_accepts_direct_api_fns_shape():
 
 
 def test_company_page_uses_one_compact_deal_section():
-    """Карточка компании не возвращается к трём дублирующим огромным блокам."""
+    """Карточка компании не возвращается к трем дублирующим огромным блокам."""
     html = Path("static/index.html").read_text(encoding="utf-8")
     assert "companyDealsCompactHtml" in html
     assert "openCompanyDealsDialog" in html
@@ -2313,11 +2313,11 @@ def test_subscription_actually_reaches_the_subscriber(client):
         assert [r.deal_id for r in rows] == ["test-subscription-deal"], \
             "уведомление пришло не о той сделке"
         assert "отрасль" in (rows[0].body or ""), "в уведомлении не сказано, почему оно пришло"
-        # Второй прогон по тем же карточкам не должен слать то же самое ещё раз:
+        # Второй прогон по тем же карточкам не должен слать то же самое еще раз:
         # «уже сообщали» — это существующая строка Notification, а не отдельный
         # файл состояния, который на боевом хосте потерялся бы при деплое.
         again = notify_subscribers.notify_new_deals(db, [fresh, quiet, other], {})
-        assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечён: {again}"
+        assert again["created"] == 0 and again["repeat"] == 1, f"повтор не отсечен: {again}"
     finally:
         db.close()
 
@@ -2325,10 +2325,10 @@ def test_subscription_actually_reaches_the_subscriber(client):
 def test_company_subscription_matches_by_profile_not_by_name(client):
     """Подписка на компанию (просьба Дани, 19 сентября 2026).
 
-    Сопоставление идёт по id ПРОФИЛЯ, а не по названию, и это не
+    Сопоставление идет по id ПРОФИЛЯ, а не по названию, и это не
     придирчивость: подписка по слову у нас уже есть (`keyword`), и на
     «Магните» она ловит «Магнитогорский металлургический комбинат» —
-    человек получает письма про чужую сделку и перестаёт верить остальным.
+    человек получает письма про чужую сделку и перестает верить остальным.
     Роль в карточке проставлена ссылкой на профиль, промахнуться нечем.
     """
     import sys
@@ -2338,7 +2338,7 @@ def test_company_subscription_matches_by_profile_not_by_name(client):
     user = _login(client, f"company-subscriber-{uuid.uuid4().hex[:8]}@example.com")
     companies = {"co-magnit": {"name": "Магнит"},
                  "co-mmk": {"name": "Магнитогорский металлургический комбинат"}}
-    # Профиля нет в базе — подписку не создаём: она молча никогда не
+    # Профиля нет в базе — подписку не создаем: она молча никогда не
     # сработает, а человек будет ждать писем, которых не бывает.
     assert client.post("/api/subscriptions", json={"company_id": "co-no-such"}).status_code == 400
     import base_data
@@ -2349,7 +2349,7 @@ def test_company_subscription_matches_by_profile_not_by_name(client):
     assert again.status_code == 200 and again.json().get("existing") is True
     rows = client.get("/api/subscriptions").json()
     assert len([r for r in rows if r["company_id"] == real_id]) == 1
-    # Имя компании отдаётся рядом с id: на экране подписка называется именем.
+    # Имя компании отдается рядом с id: на экране подписка называется именем.
     assert rows[0]["company_name"], rows[0]
 
     import subscription_feed
@@ -2407,13 +2407,13 @@ def test_saved_filters_table_made_before_company_subscriptions_gets_the_column()
 def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
     """Сверка подписок на старте сайта: первый прогон молчит, второй сообщает.
 
-    Приток работает в другом облаке и до базы пользователей не достаёт (она во
+    Приток работает в другом облаке и до базы пользователей не достает (она во
     внутренней сети хостинга), поэтому сверять подписки может только сам сайт.
     Единственный момент, когда на сайте появляются новые карточки, — деплой
     нового deals_promoted.json, то есть старт процесса.
 
     Первый прогон обязан МОЛЧАТЬ: пока таблица `deals_seen` пуста, «новыми»
-    формально являются все полторы тысячи карточек, и честный ответ «всё»
+    формально являются все полторы тысячи карточек, и честный ответ «все»
     означал бы залп уведомлений по всей истории рынка.
     """
     import subscription_feed
@@ -2421,7 +2421,7 @@ def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
     user = _login(client, "deploy-subscriber@example.com")
     # Ключевое слово нарочно уникальное: база тестов общая на весь файл, и
     # подписка «отрасль ИТ» ловила бы заодно подписчика из соседнего теста —
-    # счётчик стал бы зависеть от порядка запуска.
+    # счетчик стал бы зависеть от порядка запуска.
     assert client.post("/api/subscriptions",
                        json={"keyword": "Компасдеплойтест"}).status_code == 200
 
@@ -2447,8 +2447,8 @@ def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
         assert [r.deal_id for r in rows] == ["test-deploy-new"], \
             "уведомление пришло не о той карточке"
 
-        # Перезапуск процесса без новых карточек не шлёт ничего повторно:
-        # состояние живёт в базе, а не в файле рядом с кодом, который на
+        # Перезапуск процесса без новых карточек не шлет ничего повторно:
+        # состояние живет в базе, а не в файле рядом с кодом, который на
         # хостинге переписывается при каждом деплое.
         third = subscription_feed.scan_new_deals(db, [old, new], {})
         assert third["fresh"] == 0 and third["created"] == 0, \
@@ -2478,7 +2478,7 @@ def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
     r = client.get("/api/moderation/decisions", params={"token": "тайна"})
     rows = [d for d in r.json()["decisions"] if d["deal_id"] == "gtest123"]
     assert rows and rows[0]["verdict"] == "approve" and rows[0]["decided_by"] == "111"
-    # Применённое решение выдаваться больше не должно.
+    # Примененное решение выдаваться больше не должно.
     r = client.post("/api/moderation/decisions/consume",
                     json={"token": "тайна", "ids": [rows[0]["id"]]})
     assert r.json()["consumed"] == 1
@@ -2488,9 +2488,9 @@ def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
 
 def test_milestone_button_decision_carries_the_tilde_separated_id(client, monkeypatch):
     """Раздел A (22 августа): кнопка «пост в канал»/«без поста» под вехой
-    несёт `deal_id~kind` в callback_data — регэксп в main.py обязан принять
+    несет `deal_id~kind` в callback_data — регэксп в main.py обязан принять
     `~` (расширен вместе с `[\\w-]`), а решение в таблице обязано сохранить
-    ИМЕННО эту составную строку — send_telegram.py режет её сам, main.py её
+    ИМЕННО эту составную строку — send_telegram.py режет ее сам, main.py ее
     не разбирает."""
     _mod_env(monkeypatch)
     r = client.post("/api/telegram/webhook/тайна", json={
@@ -2517,7 +2517,7 @@ def _wait_for(cond, seconds=5.0):
 def test_milestone_goes_to_the_channel_on_the_button_without_waiting_for_the_routine(client, monkeypatch):
     """UniCredit, 5 октября 2026: конкурент написал о разрешении президента в
     19:30, мы — в 20:07. Кнопка «пост в канал» только записывала решение, а
-    публиковала рутина раз в час. Теперь приток кладёт готовый пост на сайт,
+    публиковала рутина раз в час. Теперь приток кладет готовый пост на сайт,
     и по кнопке сайт публикует его в основной канал сразу — один раз, даже
     если нажмут двое, — и пишет номер поста в решение для рутины."""
     _mod_env(monkeypatch)
@@ -2552,14 +2552,14 @@ def test_milestone_goes_to_the_channel_on_the_button_without_waiting_for_the_rou
     assert _wait_for(lambda: any("9001" in (d["edited_text"] or "") for d in marks()))
     import time as _time
     _time.sleep(0.3)
-    assert len(channel_posts()) == 1, "второе нажатие не должно выпустить пост ещё раз"
+    assert len(channel_posts()) == 1, "второе нажатие не должно выпустить пост еще раз"
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [d["id"] for d in marks()]})
 
 
 def test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine(monkeypatch):
-    """Сайт публикует сам только в основной канал и только то, чего там ещё
-    нет. Пост в канал недвижимости (с перекрёстной ссылкой), этап, уже
+    """Сайт публикует сам только в основной канал и только то, чего там еще
+    нет. Пост в канал недвижимости (с перекрестной ссылкой), этап, уже
     вышедший по суткам молчания, и сбой Telegram остаются рутине."""
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-100777")
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111")
@@ -2599,8 +2599,8 @@ def test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine(
 def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkeypatch):
     """Одно нажатие — одно решение, даже если Telegram доставит его несколько раз.
 
-    Telegram шлёт апдейт заново, если вебхук не ответил вовремя, а человек,
-    видя неотзывчивую кнопку, жмёт ещё. 7 сентября 2026 партнёр так нажал
+    Telegram шлет апдейт заново, если вебхук не ответил вовремя, а человек,
+    видя неотзывчивую кнопку, жмет еще. 7 сентября 2026 партнер так нажал
     «не сделка» шесть раз за две секунды, и в очередь легли шесть одинаковых
     решений. Для `drop` это просто шум, а для `take` — шесть карточек, для
     `post_yes` — шесть постов в канал: рутина применяет решения по одному.
@@ -2609,7 +2609,7 @@ def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkey
     press = {"callback_query": {"id": "cb-1", "from": {"id": 222},
                                  "data": "mod:gtwice:take",
                                  "message": {"message_id": 7, "chat": {"id": 222},
-                                              "text": "[сырьё gtwice]"}}}
+                                              "text": "[сырье gtwice]"}}}
     for _ in range(3):
         client.post("/api/telegram/webhook/тайна", json=press)
     rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
@@ -2643,7 +2643,7 @@ def test_old_draft_of_a_published_card_does_not_record_a_decision(client, monkey
 
 
 def test_button_press_is_answered_before_the_message_is_edited(client, monkeypatch):
-    """Ответ на нажатие идёт ПЕРВЫМ, до правки сообщения.
+    """Ответ на нажатие идет ПЕРВЫМ, до правки сообщения.
 
     Пока бот не ответил, у человека на кнопке крутится индикатор — и это
     ровно то, что он описывает словами «кнопка не нажимается». Если правка
@@ -2656,7 +2656,7 @@ def test_button_press_is_answered_before_the_message_is_edited(client, monkeypat
     def fake(method, **payload):
         calls.append(method)
         if method == "editMessageText":
-            return None  # так ведёт себя настоящий tg_api при сбое: тихий None
+            return None  # так ведет себя настоящий tg_api при сбое: тихий None
         return {"ok": True}
 
     monkeypatch.setattr(main.notification_service, "tg_api", fake)
@@ -2675,7 +2675,7 @@ def test_button_press_is_answered_before_the_message_is_edited(client, monkeypat
 def test_button_press_keeps_bold_and_links_in_the_stamped_message(client, monkeypatch):
     """Строка «— решение (кто)» дописывается к сообщению без потери разметки.
 
-    Telegram отдаёт жирный и ссылки отдельно от текста (`entities`); правка
+    Telegram отдает жирный и ссылки отдельно от текста (`entities`); правка
     одним текстом их стирала, и проект поста после нажатия становился
     серым (8 октября 2026, «Дом.РФ»/ЦНТИ)."""
     _mod_env(monkeypatch)
@@ -2727,18 +2727,18 @@ def test_moderation_reply_with_text_overrides_the_post(client, monkeypatch):
 
 
 def test_moderation_reply_in_a_shared_group_checks_the_sender_not_the_group(client, monkeypatch):
-    """Владелец и партнёр обсуждают черновики в общей группе — а не в личке.
+    """Владелец и партнер обсуждают черновики в общей группе — а не в личке.
 
     В группе `chat.id` один на всех участников (сама группа), а `from.id` —
     личный id того, кто написал. Проверка по chat.id в группе либо пустила бы
-    ЛЮБОГО участника группы (chat.id совпал бы с «разрешённым» случайно), либо
+    ЛЮБОГО участника группы (chat.id совпал бы с «разрешенным» случайно), либо
     не пустила бы НИКОГО (chat.id группы никогда не совпадает с личными id из
     TELEGRAM_REVIEW_CHAT_IDS) — оба исхода одинаково сломаны. Правильная
-    проверка идёт по from.id и не зависит от того, где физически идёт разговор.
+    проверка идет по from.id и не зависит от того, где физически идет разговор.
     """
     _mod_env(monkeypatch)
     GROUP_CHAT_ID = -1001234567890  # id группы — Telegram делает их отрицательными
-    # Партнёр (id 222, входит в TELEGRAM_REVIEW_CHAT_IDS) пишет в общей группе.
+    # Партнер (id 222, входит в TELEGRAM_REVIEW_CHAT_IDS) пишет в общей группе.
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": GROUP_CHAT_ID}, "from": {"id": 222},
                      "text": "Публикуем с моей правкой",
@@ -2762,7 +2762,7 @@ def test_moderation_reply_in_a_shared_group_checks_the_sender_not_the_group(clie
 
 
 def test_moderation_rejects_strangers_and_bad_tokens(client, monkeypatch):
-    """Право решать — только у владельца и партнёра; API — только с токеном.
+    """Право решать — только у владельца и партнера; API — только с токеном.
 
     Бота может найти кто угодно: нажатая чужим человеком кнопка не должна
     публиковать карточки.
@@ -2783,7 +2783,7 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
     """Три исхода модерации: решение, молчание сутки, «придержать».
 
     Молчание — согласие: немой шаг, который держит весь поток, у нас уже был
-    (тормоз E9), второй раз те же грабли не берём.
+    (тормоз E9), второй раз те же грабли не берем.
     """
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
@@ -2802,7 +2802,7 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
          "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a3", "title": "молчание сутки",      "draft_sent": True, "pending_since": stale,
          "reviewed": "2026-08-09", "accepted": "2026-08-09"},
-        {"id": "a4", "title": "ещё ждём",            "draft_sent": True, "pending_since": fresh,
+        {"id": "a4", "title": "еще ждем",            "draft_sent": True, "pending_since": fresh,
          "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         {"id": "a5", "title": "придержана раньше",   "draft_sent": True, "pending_since": stale,
          "held": True, "reviewed": "2026-08-09", "accepted": "2026-08-09"},
@@ -2811,7 +2811,7 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
         {"id": "a6", "title": "не рассылался",       "pending_since": stale,
          "reviewed": "2026-08-09", "accepted": "2026-08-09"},
         # А этот разослан и отмолчался сутки, но НЕ ПРОЧИТАН против источника —
-        # и потому тоже ждёт. Владелец 9 августа: «косячные карточки не должны
+        # и потому тоже ждет. Владелец 9 августа: «косячные карточки не должны
         # появляться, пока не изучена статья».
         {"id": "a7", "title": "не прочитана",        "draft_sent": True, "pending_since": stale},
     ]
@@ -2830,9 +2830,9 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
 
 def test_webhook_subscribes_to_button_clicks_not_only_messages():
     """Забыть callback_query в ALLOWED_UPDATES — значит зарегистрировать вебхук,
-    на который кнопки молча не доходят: Telegram их просто не шлёт, если тип
+    на который кнопки молча не доходят: Telegram их просто не шлет, если тип
     не в списке, а «зарегистрировано» при этом печатается как успех. Ровно
-    так и было до 5 августа: модерация написана целиком, а её кнопки были бы
+    так и было до 5 августа: модерация написана целиком, а ее кнопки были бы
     невидимы боту, потому что регистрация вебхука просила только 'message'.
     """
     import sys
@@ -2847,7 +2847,7 @@ def test_send_targets_prefers_the_shared_group_over_personal_dms(monkeypatch):
 
     Это разные переменные с разным смыслом, и перепутать их легко: если бы
     отправка шла по группе, а авторизация проверялась бы тоже по группе,
-    ответ любого её участника засчитывался бы за решение — ровно тот баг,
+    ответ любого ее участника засчитывался бы за решение — ровно тот баг,
     который поймал предыдущий тест на уровне вебхука. Здесь проверяется
     только выбор адреса отправки.
 
@@ -2880,7 +2880,7 @@ def test_bot_answers_bare_start_and_help(client, monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    # Консоль живёт в группе: там «/start» участника — справка модерации.
+    # Консоль живет в группе: там «/start» участника — справка модерации.
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": -1001234567890, "type": "supergroup"}, "from": {"id": 111},
                     "text": "/start"}})
@@ -2899,7 +2899,7 @@ def test_bot_answers_bare_start_and_help(client, monkeypatch):
 
 
 def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
-    """В группе Telegram шлёт «/queue@compass_bot», а не «/queue».
+    """В группе Telegram шлет «/queue@compass_bot», а не «/queue».
 
     Правило, написанное под личный чат, в группе молча не срабатывает: команда
     отправлена, бот молчит, причина невидима. Суффикс обязателен к отрезанию.
@@ -2919,17 +2919,17 @@ def test_bot_queue_command_survives_the_group_suffix(client, monkeypatch):
     sent.clear()
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": -1001234567890}, "from": {"id": 999}, "text": "/queue"}})
-    assert sent and "только владельцу и партнёру" in sent[0][1]["text"]
+    assert sent and "только владельцу и партнеру" in sent[0][1]["text"]
 
 
 def test_queue_report_shows_three_console_blocks():
-    """/queue говорит на языке трёх типов сообщений консоли.
+    """/queue говорит на языке трех типов сообщений консоли.
 
-    До 5 августа сырьё показывалось строкой «кнопкой не решаются» и жило только
+    До 5 августа сырье показывалось строкой «кнопкой не решаются» и жило только
     файлом в git. По решению владельца оно теперь решается кнопками под своим
     сообщением (⚠️), поэтому сводка обязана считать его ЖДУЩИМ решения, а не
     справочным, — и отдельно от карточек предпросмотра (🗂📣): у них разные
-    правила молчания (карточки по молчанию выходят, сырьё — никогда).
+    правила молчания (карточки по молчанию выходят, сырье — никогда).
     """
     report = main._queue_report()
     assert "🗂📣" in report or "Очередь пуста" in report
@@ -2964,9 +2964,9 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
 def test_approved_joint_post_publishes_all_its_cards():
     """«📣 Пост одобрен» под общим постом одобряет и все его карточки.
 
-    16 октября 2026 (указ № 738): партнёр одобрил общий пост утром, а
+    16 октября 2026 (указ № 738): партнер одобрил общий пост утром, а
     карточки ждали суток молчания, пост ждал карточек — к ночи не вышло
-    ничего. Своё «придержать» у отдельной карточки сильнее.
+    ничего. Свое «придержать» у отдельной карточки сильнее.
     """
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
@@ -2988,7 +2988,7 @@ def test_approved_joint_post_publishes_all_its_cards():
 
 
 def test_raw_drafts_need_a_button_and_never_publish_on_silence():
-    """Сырьё решается только кнопкой: молчание не делает его сделкой.
+    """Сырье решается только кнопкой: молчание не делает его сделкой.
 
     Ворота эти черновики уже не пропустили; таймаут «молчание — согласие»
     существует только для карточек, ПРОШЕДШИХ ворота.
@@ -3007,12 +3007,12 @@ def test_raw_drafts_need_a_button_and_never_publish_on_silence():
 
 
 def test_plan_raw_skips_a_draft_already_recorded_as_decided():
-    """Решение, уже применённое и записанное в `decided_raw`, не применяется
-    повторно — даже если сайт всё ещё считает его «живым».
+    """Решение, уже примененное и записанное в `decided_raw`, не применяется
+    повторно — даже если сайт все еще считает его «живым».
 
     Это и есть предохранитель от Wegosty 21 августа: `--consume` теперь
     отдельный шаг ПОСЛЕ git push, а значит между `--write` и подтверждением
-    сайту есть окно, где решение локально уже применено, а сайт ещё не
+    сайту есть окно, где решение локально уже применено, а сайт еще не
     знает об этом. Без проверки `decided_raw` следующий прогон увидел бы то
     же «живое» решение и создал бы ВТОРУЮ карточку того же черновика —
     `to_card()` каждый раз генерирует новый случайный id, второй раз не
@@ -3031,14 +3031,14 @@ def test_plan_raw_skips_a_draft_already_recorded_as_decided():
 
 
 def test_approve_main_deduplicates_the_same_raw_draft_across_hold_files(tmp_path, monkeypatch):
-    """Один и тот же черновик, перенесённый в НЕСКОЛЬКО дневных hold-файлов
+    """Один и тот же черновик, перенесенный в НЕСКОЛЬКО дневных hold-файлов
     (он там лежит, пока по нему нет решения), не должен породить несколько
     карточек на одно решение «в работу».
 
     Ровно так родились три карточки-близнеца 21 августа
     (g855e50b1/gf544dd13/g5cba276f) из одного и того же draft_id d59961733,
-    лежавшего в трёх дневных файлах сразу — `plan_raw` видел его три раза
-    в объединённом списке `raw_all`."""
+    лежавшего в трех дневных файлах сразу — `plan_raw` видел его три раза
+    в объединенном списке `raw_all`."""
     import json
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
@@ -3048,7 +3048,7 @@ def test_approve_main_deduplicates_the_same_raw_draft_across_hold_files(tmp_path
     # Взятый черновик рассылается в консоль сразу — не тот путь, который
     # проверяет этот тест; подменяем на заглушку, чтобы не задеть реальные
     # static/data/*.json (send_drafts.py считает свои ROOT/DATA/PENDING
-    # независимо от approve.py, монкипатч ROOT/DATA/PENDING его не коснётся).
+    # независимо от approve.py, монкипатч ROOT/DATA/PENDING его не коснется).
     monkeypatch.setattr(send_drafts, "main", lambda write=False: 0)
 
     hold_dir = tmp_path / "data" / "inbox" / "hold"
@@ -3075,12 +3075,12 @@ def test_approve_main_deduplicates_the_same_raw_draft_across_hold_files(tmp_path
 
     pending = json.loads((tmp_path / "pending.json").read_text(encoding="utf-8"))
     assert len(pending["cards"]) == 1, (
-        "один draft_id в трёх hold-файлах породил %d карточек вместо одной"
+        "один draft_id в трех hold-файлах породил %d карточек вместо одной"
         % len(pending["cards"]))
 
 
 def test_webhook_routes_raw_and_post_buttons(client, monkeypatch):
-    """Кнопки трёх типов сообщений дают три разных класса вердиктов."""
+    """Кнопки трех типов сообщений дают три разных класса вердиктов."""
     _mod_env(monkeypatch)
     for data, verdict in (("mod:d9тест:take", "take"), ("mod:d9тест2:drop", "drop"),
                           ("mod:g9тест:post_no", "post_no")):
@@ -3118,7 +3118,7 @@ def test_reply_to_card_message_becomes_a_note_not_a_publication(client, monkeypa
 def test_note_reply_is_acked_instantly_and_carries_a_reply_target(client, monkeypatch):
     """Раздел C MILESTONES_BRIEF.md (22 августа): заметка получает мгновенное
     подтверждение прямо в исходном сообщении («— 💬 Заметка принята»), а
-    решение несёт chat_id/reply_message_id — иначе рутине нечем ответить
+    решение несет chat_id/reply_message_id — иначе рутине нечем ответить
     реплаем позже (read_notes.py --reply). До этого заметка тонула молча:
     второй человек в группе не видел, принята ли она вообще.
     """
@@ -3148,7 +3148,7 @@ def test_note_reply_is_acked_instantly_and_carries_a_reply_target(client, monkey
 
 
 def test_reply_to_inn_queue_message_becomes_a_namespaced_note(client, monkeypatch):
-    """Этап 3, П3''': ответ на [инн <id компании>] — заметка, а deal_id несёт
+    """Этап 3, П3''': ответ на [инн <id компании>] — заметка, а deal_id несет
     префикс «инн~», а не голый id компании. Семь id в базе уже совпадают
     между сделками и компаниями (citibank и другие кураторские слаги) — без
     префикса заметка о номере ИНН могла бы быть прочитана как заметка о
@@ -3171,7 +3171,7 @@ def test_reply_to_homonym_queue_message_uses_a_different_namespace(client, monke
     «инн-омоним~», отдельным от «инн~». Компания уже есть в реестре как
     no_match, и запись нужно ПРАВИТЬ на месте — смешение с обычной
     очередью «нужен ИНН» (которая ДОПИСЫВАЕТ новую запись) дало бы дубль
-    company_id, запрещённый тестом реестра."""
+    company_id, запрещенный тестом реестра."""
     _mod_env(monkeypatch)
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"chat": {"id": 111}, "from": {"id": 111},
@@ -3183,7 +3183,7 @@ def test_reply_to_homonym_queue_message_uses_a_different_namespace(client, monke
     assert rows and rows[0]["verdict"] == "note"
     assert rows[0]["edited_text"] == "7736207543"
     # Не тот же namespace, что у обычной очереди — старый тест того же id
-    # не должен был бы её увидеть.
+    # не должен был бы ее увидеть.
     assert not [d for d in r.json()["decisions"] if d["deal_id"] == "инн~g354705fa"]
     client.post("/api/moderation/decisions/consume",
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
@@ -3214,7 +3214,7 @@ def test_discard_kills_the_card_and_beats_the_silence_timeout():
 
     Просьба владельца 6 августа: нероссийский контур и не-M&A не «придержать
     навечно», а убрать совсем. Критично, чтобы discard побеждал таймаут: без
-    этого выкинутая карточка с истёкшими сутками всё равно ушла бы на сайт.
+    этого выкинутая карточка с истекшими сутками все равно ушла бы на сайт.
     """
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
@@ -3277,7 +3277,7 @@ def test_ops_summary_counts_the_same_numbers_as_the_page(client, monkeypatch):
 
 def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
     """«Добавлено за неделю» обязано считать приток, а не разовый импорт: в
-    день переноса архива приезжают сотни карточек, и счётчик показывал бы
+    день переноса архива приезжают сотни карточек, и счетчик показывал бы
     бурный рост рынка вместо нашей же заливки (урок CLAUDE.md про метку
     «новое»). День с более чем 30 карточками — импорт, а не новости."""
     from datetime import datetime, timedelta, timezone
@@ -3292,7 +3292,7 @@ def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
         return {"cards": []}
 
     monkeypatch.setattr(main, "_read_json", fake_read)
-    # База читается через общий кэш `base_data` (заведён 8 сентября 2026
+    # База читается через общий кэш `base_data` (заведен 8 сентября 2026
     # против OOM), а не своим json.load на каждый вызов, — подменяем его.
     monkeypatch.setattr(main.base_data, "promoted", lambda: fake)
     n = main._ops_numbers()
@@ -3315,7 +3315,7 @@ def test_bot_start_offers_buttons_instead_of_a_wall_of_text():
 
 
 def test_bot_help_speaks_to_a_partner_not_to_a_developer():
-    """Справку читает партнёр: никаких наших терминов и кодов бэклога."""
+    """Справку читает партнер: никаких наших терминов и кодов бэклога."""
     text = main.BOT_HELP.lower()
     for jargon in ("g7", "pending", "from_ingest", "промоут", "драфт", "eco", "bulk"):
         assert jargon not in text, jargon
@@ -3351,10 +3351,10 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     buttons = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")]
     assert buttons, "придержанные пришли без единой кнопки"
     data = [b["callback_data"] for row in buttons[0]["inline_keyboard"] for b in row]
-    # Полный набор из четырёх — тот же, что в исходном сообщении при первом
+    # Полный набор из четырех — тот же, что в исходном сообщении при первом
     # черновике (send_drafts.card_keyboard). Раньше /queue урезал до двух
     # (ok/discard для held, hold/discard для soon) — владелец 10 августа не
-    # нашёл кнопку «Опубликовать» у карточки, которая скоро выйдет сама.
+    # нашел кнопку «Опубликовать» у карточки, которая скоро выйдет сама.
     assert data == ["mod:gh1:ok", "mod:gh1:hold", "mod:gh1:edit", "mod:gh1:discard"], data
     # Заголовок и факты видны прямо в сообщении — решать можно не открывая сайт.
     card_text = [kw["text"] for _m, kw in sent if "gh1" in kw.get("text", "")][0]
@@ -3368,20 +3368,20 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
 
 
 def test_unread_card_is_not_counted_as_soon(monkeypatch):
-    """«Скоро выйдет» и «ждёт прочтения» — разные утверждения о карточке.
+    """«Скоро выйдет» и «ждет прочтения» — разные утверждения о карточке.
 
     До 18 августа «soon» значило просто «не придержана» — и непрочитанная
-    карточка час за часом отчитывалась как «выйдет сама», хотя молчание её
+    карточка час за часом отчитывалась как «выйдет сама», хотя молчание ее
     никогда не публикует (approve.py, `plan_actions`): «Крупный комплекс в
     Ленобласти» и допэмиссия «М.видео» простояли так больше суток без
-    единого изменения в отчёте, и владелец не понимал, что вообще происходит.
+    единого изменения в отчете, и владелец не понимал, что вообще происходит.
     """
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
     monkeypatch.setattr(main, "_read_json", lambda path, default: {
-        "cards": [{"id": "gu1", "title": "Ещё не прочитана", "buyer_name": "«Компания»"},
-                  {"id": "gs1", "title": "Прочитана, ждёт таймаута",
+        "cards": [{"id": "gu1", "title": "Еще не прочитана", "buyer_name": "«Компания»"},
+                  {"id": "gs1", "title": "Прочитана, ждет таймаута",
                    "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01", "draft_sent": True}],
     } if "pending" in path else default)
 
@@ -3404,10 +3404,10 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     робототехники»: заголовок — обрезанное предложение из новости, покупатель
     со скобкой «[входит в АФК «Система»]», отрасль «Недвижимость» у складских
     роботов. Ворота сработали (карточка пришла кнопкой «это сделка — в
-    работу», молчание её не публикует), но сообщение об этом не говорило ни
+    работу», молчание ее не публикует), но сообщение об этом не говорило ни
     слова — и выглядело как «мусор пропустили». Теперь непринятая карточка
-    начинается со строки о том, что её никто не читал, а если приёмка
-    прочитала источник и не пропустила — первой идёт её причина. Кнопки
+    начинается со строки о том, что ее никто не читал, а если приемка
+    прочитала источник и не пропустила — первой идет ее причина. Кнопки
     остаются все четыре: их урезание — отдельная жалоба владельца 10 августа.
     """
     sent = []
@@ -3425,14 +3425,14 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     raw = next(t for t in texts if "gu1" in t)
     assert "не сверили с источником" in raw, raw
     assert not [t for t in texts if "gu2" in t], \
-        "прочитанная и отвергнутая приёмкой карточка ждёт решения, а не прочтения"
+        "прочитанная и отвергнутая приемкой карточка ждет решения, а не прочтения"
     keyboards = [kw["reply_markup"] for _m, kw in sent if "reply_markup" in kw]
     for kb in keyboards:
         buttons = [b["text"] for row in kb["inline_keyboard"] for b in row]
         assert "✅ Опубликовать" in buttons, "кнопки не отнимаем — урок 10 августа"
 
     # …а показывается она там, где человек решает судьбу сомнительного —
-    # рядом с сырьём, которое не прошло ворота (вопрос владельца 21 сентября).
+    # рядом с сырьем, которое не прошло ворота (вопрос владельца 21 сентября).
     sent.clear()
     monkeypatch.setattr(main.os.path, "isdir", lambda p: False)
     main._send_queue_batch(-100, "raw")
@@ -3440,11 +3440,11 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     assert any("Сомнительные" in t for t in texts), texts
     held = next(t for t in texts if "gu2" in t)
     assert held.index("обе стороны иностранные") < held.index("Orlen"), \
-        "вывод приёмки должен стоять выше машинных полей"
+        "вывод приемки должен стоять выше машинных полей"
 
 
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
-    """Умолчавший предел читается как «это всё» — урок CLAUDE.md про консоль."""
+    """Умолчавший предел читается как «это все» — урок CLAUDE.md про консоль."""
     import inspect
     src = inspect.getsource(main._send_queue_batch)
     assert "Показаны первые" in src
@@ -3455,7 +3455,7 @@ def test_card_line_shows_every_source_not_just_the_first():
     """Урезанная строка «Источник: X» пряталa остальные источники карточки —
 
     владелец 19 августа принял карточку «HeadHunter»/Happy Job с четырьмя
-    источниками и 1800+ знаками обогащённого текста за почти пустую именно
+    источниками и 1800+ знаками обогащенного текста за почти пустую именно
     по этой строке в консоли (там был виден только первый источник).
     """
     one_source = {"title": "Т", "src": [["Mergers.ru", "https://mergers.ru/x"]]}
@@ -3498,11 +3498,11 @@ def test_bot_menu_offers_the_doubtful_queue_too():
 
 
 def test_registry_sync_seeds_a_missing_company_and_survives_a_broken_row():
-    """Профиль, заведённый в JSON-справочнике позже последнего `--seed`, не
+    """Профиль, заведенный в JSON-справочнике позже последнего `--seed`, не
     должен ронять стартовую загрузку ФНС.
 
     3 сентября 2026 в логах Timeweb: `Key (company_id)=(g113002a7-target) is
-    not present in table "companies"` — запись юрлица упёрлась во внешний
+    not present in table "companies"` — запись юрлица уперлась во внешний
     ключ, IntegrityError не был ApiFnsError и потому не ловился, и весь
     стартовый скан прекращался на первой такой записи."""
     from pipeline.sync_fns import ensure_company_row
@@ -3549,7 +3549,7 @@ def test_channel_post_tells_the_console_the_private_channel_id(client, monkeypat
     assert texts, "сайт промолчал про канал"
     assert "Проект Компас" in texts[0], texts[0]
     # Самого номера в сообщении нет намеренно: человеку с ним делать нечего,
-    # адрес уже сохранён (см. соседний тест) — а число в консоли выглядело бы
+    # адрес уже сохранен (см. соседний тест) — а число в консоли выглядело бы
     # как задание, которое надо куда-то вписать.
     assert "-1001234567890" not in texts[0], texts[0]
     # Второй пост в том же канале — уже без напоминания: консоль не должна
@@ -3558,12 +3558,12 @@ def test_channel_post_tells_the_console_the_private_channel_id(client, monkeypat
     client.post("/api/telegram/webhook/тайна", json={
         "channel_post": {"message_id": 6,
                          "chat": {"id": -1001234567890, "type": "channel",
-                                  "title": "Проект Компас"}, "text": "ещё"}})
+                                  "title": "Проект Компас"}, "text": "еще"}})
     assert not [kw for method, kw in sent if method == "sendMessage"], sent
 
 
 def test_channel_id_is_not_repeated_when_it_is_already_configured(client, monkeypatch):
-    """Когда адрес канала уже настроен, напоминать о нём незачем: сообщение
+    """Когда адрес канала уже настроен, напоминать о нем незачем: сообщение
     в консоли, которое приходит на каждый пост канала, читать перестанут."""
     _mod_env(monkeypatch)
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1009999999999")
@@ -3630,9 +3630,9 @@ def test_publishing_asks_the_site_for_the_channel_when_the_name_is_dead(monkeypa
 
 def test_forum_topic_created_is_learned_and_served_by_slug(client, monkeypatch):
     """4 сентября 2026 владелец превратил группу-консоль в форум и попросил
-    разложить сообщения бота по темам вместо одной кучи. Bot API не даёт
-    список тем — номер темы (message_thread_id) узнаётся из служебного
-    сообщения о её создании, тем же приёмом, что и адрес приватного канала."""
+    разложить сообщения бота по темам вместо одной кучи. Bot API не дает
+    список тем — номер темы (message_thread_id) узнается из служебного
+    сообщения о ее создании, тем же приемом, что и адрес приватного канала."""
     _mod_env(monkeypatch)
     import main as main_module
     monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
@@ -3649,10 +3649,10 @@ def test_forum_topic_created_is_learned_and_served_by_slug(client, monkeypatch):
 
 
 def test_forum_topic_bootstrap_by_typing_its_own_name(client, monkeypatch):
-    """Для тем, заведённых ДО того, как бот начал слушать служебные
+    """Для тем, заведенных ДО того, как бот начал слушать служебные
     сообщения, — служебное сообщение о создании уже пропало (Telegram не
     хранит недоставленные апдейты вечно). Бутстрап: человек один раз печатает
-    точное название темы внутри неё самой."""
+    точное название темы внутри нее самой."""
     _mod_env(monkeypatch)
     import main as main_module
     monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
@@ -3681,9 +3681,9 @@ def test_forum_topic_bootstrap_tolerates_case_and_stray_whitespace(client, monke
     """5 сентября 2026: три темы висели пустыми (`{"topics":{}}`) после того,
     как владелец их уже переименовал, — точное посимвольное сравнение
     (`text == name`) молча не засчитывало сообщение, если клиент Telegram
-    добавил лишний пробел или прислал другой регистр. Сверка теперь идёт по
+    добавил лишний пробел или прислал другой регистр. Сверка теперь идет по
     тому же слагу, что и у служебных сообщений о переименовании (`_topic_slug`)
-    — лишний пробел, перенос строки и регистр не мешают узнать своё название."""
+    — лишний пробел, перенос строки и регистр не мешают узнать свое название."""
     _mod_env(monkeypatch)
     import main as main_module
     monkeypatch.setattr(main_module.notification_service, "tg_api", lambda *a, **kw: None)
@@ -3753,11 +3753,11 @@ def test_forum_topic_bootstrap_answers_in_the_same_topic_and_only_to_reviewers(c
 
 def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     """Настоящая причина тишины 5 сентября 2026: у бота режим приватности, и в
-    группе он обычный участник — Telegram отдаёт ему только команды, ответы
+    группе он обычный участник — Telegram отдает ему только команды, ответы
     на его сообщения и нажатия кнопок. Напечатанное «Обновления» до бота не
     доходило вовсе. /topic внутри темы отвечает кнопками с тремя названиями,
     нажатие закрепляет номер ТОЙ темы, где стоит сообщение бота, и правит
-    его на «Запомнил». Право — у владельца и партнёра; в общей ленте номера
+    его на «Запомнил». Право — у владельца и партнера; в общей ленте номера
     темы нет, и бот говорит это словами."""
     _mod_env(monkeypatch)
     import main as main_module
@@ -3793,7 +3793,7 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     # 20 сентября 2026 владелец нажал «Заметки от пользователей» — и ничего не
     # произошло: разбор нажатия знал три старых вида, а кнопок рисовалось
     # четыре. Прошлая версия этого теста проверяла, что кнопки ЕСТЬ, и
-    # нажимала только две из них, поэтому дефект прошёл мимо.
+    # нажимала только две из них, поэтому дефект прошел мимо.
     for i, kind in enumerate(main_module.CONSOLE_TOPIC_NAMES):
         calls.clear()
         thread = 300 + i
@@ -3806,7 +3806,7 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
         assert any(m == "editMessageText" and "Запомнил" in kw["text"]
                    for m, kw in calls), (kind, calls)
 
-    # Посторонний жмёт кнопку в теме 77 -> ничего не записано.
+    # Посторонний жмет кнопку в теме 77 -> ничего не записано.
     calls.clear()
     client.post("/api/telegram/webhook/тайна", json={"callback_query": {
         "id": "cb2", "data": "topic:decision", "from": {"id": 999},
@@ -3815,8 +3815,8 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
     assert "77" not in topics.values()
     assert [m for m, _kw in calls] == ["answerCallbackQuery"]
 
-    # /topic в главной теме форума (номера у неё нет) -> объяснение, без
-    # кнопок: закреплять её не нужно, сообщения без темы приходят туда сами.
+    # /topic в главной теме форума (номера у нее нет) -> объяснение, без
+    # кнопок: закреплять ее не нужно, сообщения без темы приходят туда сами.
     calls.clear()
     client.post("/api/telegram/webhook/тайна", json={"message": {
         "message_id": 21, "text": "/topic", "chat": dict(chat, is_forum=True), "from": {"id": 111}}})
@@ -3825,9 +3825,9 @@ def test_topic_command_binds_the_thread_through_buttons(client, monkeypatch):
 
 
 def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeypatch):
-    """Ответ на команду/кнопку обязан остаться в той же теме, где её
+    """Ответ на команду/кнопку обязан остаться в той же теме, где ее
     нажали/напечатали — Telegram НЕ выводит тему сама по reply_to_message_id,
-    её нужно передать явно (message_thread_id)."""
+    ее нужно передать явно (message_thread_id)."""
     _mod_env(monkeypatch)
     import main as main_module
     sent = []
@@ -3843,9 +3843,9 @@ def test_reactive_replies_stay_in_the_topic_they_were_asked_from(client, monkeyp
 
 def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch):
     """4 сентября 2026: включение тем в группе-консоли незаметно превратило
-    её в супергруппу, а Bot API при этом ВСЕГДА меняет chat_id — старый
+    ее в супергруппу, а Bot API при этом ВСЕГДА меняет chat_id — старый
     номер умер («group chat was upgraded to a supergroup chat»). Сайт учится
-    актуальному id из любого сообщения владельца/партнёра в группе."""
+    актуальному id из любого сообщения владельца/партнера в группе."""
     _mod_env(monkeypatch)
     r = client.post("/api/telegram/webhook/тайна", json={
         "message": {"message_id": 1, "text": "привет",
@@ -3854,7 +3854,7 @@ def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch)
     assert r.status_code == 200
     r = client.get("/api/moderation/group", params={"token": "тайна"})
     assert r.status_code == 200 and r.json()["chat_id"] == "-1005550001111", r.json()
-    # Сообщение от постороннего (не владельца/партнёра) id группы не меняет —
+    # Сообщение от постороннего (не владельца/партнера) id группы не меняет —
     # иначе кто угодно, добавленный в группу, мог бы подменить адрес консоли.
     client.post("/api/telegram/webhook/тайна", json={
         "message": {"message_id": 2, "text": "привет",
@@ -3867,10 +3867,10 @@ def test_review_group_id_is_learned_from_a_reviewer_message(client, monkeypatch)
 
 def test_topic_command_in_the_general_topic_says_nothing_needs_binding(client, monkeypatch):
     """Скриншот владельца 6 сентября 2026: он стоит В теме «Общая информация»
-    (главная тема форума, значок #), даёт /topic — и слышит «это общая лента
+    (главная тема форума, значок #), дает /topic — и слышит «это общая лента
     группы», то есть «вы не в теме». Так и есть по данным Telegram: у главной
-    темы номера нет, сообщение без темы приходит именно в неё. Значит, менять
-    надо не механику, а ответ: закреплять её не нужно, всё уже правильно."""
+    темы номера нет, сообщение без темы приходит именно в нее. Значит, менять
+    надо не механику, а ответ: закреплять ее не нужно, все уже правильно."""
     _mod_env(monkeypatch)
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda m, **kw: sent.append((m, kw)))
@@ -3892,8 +3892,8 @@ def test_topic_command_in_the_general_topic_says_nothing_needs_binding(client, m
 
 def test_review_group_id_is_learned_when_the_bot_is_added_to_the_group(client, monkeypatch):
     """6 сентября 2026: консоль молчала сутки, а рутина час за часом писала,
-    что ждёт сообщения владельца в новой группе. Ждать было бесполезно с
-    двух сторон: у бота включён режим приватности (обычный текст в группе до
+    что ждет сообщения владельца в новой группе. Ждать было бесполезно с
+    двух сторон: у бота включен режим приватности (обычный текст в группе до
     него не доходит), а в новом чате он вообще не состоял. Добавление бота
     и смена его прав приходят ВСЕГДА — по ним сайт и запоминает адрес, а в
     группу говорит, что подключился."""
@@ -3915,7 +3915,7 @@ def test_review_group_id_is_learned_when_the_bot_is_added_to_the_group(client, m
 
     # Выход бота из чужого чата адрес консоли не подменяет: учимся только на входе.
     added(-1009990002222, status="left")
-    # И посторонний, добавивший бота куда-то ещё, — тоже.
+    # И посторонний, добавивший бота куда-то еще, — тоже.
     added(-1008880001111, by=999)
     assert client.get("/api/moderation/group", params={"token": "тайна"}).json()["chat_id"] \
         == "-1004440003333"
@@ -3927,7 +3927,7 @@ def test_review_group_id_is_learned_when_the_bot_is_added_to_the_group(client, m
 
 def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkeypatch):
     """Даже если TELEGRAM_REVIEW_GROUP_ID в окружении устарел, сайт обязан
-    слать по свежему, только что узнанному номеру, а не по мёртвому."""
+    слать по свежему, только что узнанному номеру, а не по мертвому."""
     _mod_env(monkeypatch)
     monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-100000000000")
     import main as main_module
@@ -3949,9 +3949,9 @@ def test_review_chat_ids_prefers_the_learned_group_over_stale_env(client, monkey
 
 def test_home_screen_icon_and_manifest_are_served(client):
     """Просьба владельца 5 сентября 2026: при «Добавить на экран Домой» на
-    айфоне должен появляться логотип «Компаса». iOS не берёт SVG-фавикон из
+    айфоне должен появляться логотип «Компаса». iOS не берет SVG-фавикон из
     data:-ссылки — ему нужна PNG-иконка 180×180 по `apple-touch-icon`;
-    Android берёт иконки из манифеста. Всё лежит в static/, без внешних
+    Android берет иконки из манифеста. Все лежит в static/, без внешних
     сервисов (сайт обязан работать из России)."""
     html = client.get("/").text
     assert 'rel="apple-touch-icon"' in html and "/static/icons/apple-touch-icon.png" in html
@@ -3985,9 +3985,9 @@ def test_home_screen_icon_and_manifest_are_served(client):
 
 
 def test_fns_status_reports_the_last_background_runs_and_the_daily_budget(client):
-    """5 сентября 2026: подтверждённый ИНН «МорТехПрома» два деплоя подряд
+    """5 сентября 2026: подтвержденный ИНН «МорТехПрома» два деплоя подряд
     оставался несопоставленным на проде, а снаружи было видно только
-    «ещё не сопоставлено» — причина (потолок? ошибка запроса? строка не
+    «еще не сопоставлено» — причина (потолок? ошибка запроса? строка не
     дошла до работы?) жила в логе приложения. /api/fns/status обязан
     показывать, что сделал последний стартовый скан и сколько запросов
     осталось до дневного потолка."""
@@ -4014,8 +4014,8 @@ def test_fns_status_reports_the_last_background_runs_and_the_daily_budget(client
 def test_fns_sync_from_registry_takes_newest_registry_rows_first(monkeypatch):
     """5 сентября 2026: строка «МорТехПрома» (свежий пост канала) стояла
     последней в реестре за 278 строками кампании по сделкам 2024 года, а
-    стартовый скан идёт по 60 работ и упирается в дневной потолок — читатель
-    из поста ждал бы отчётность несколько дней. Новые строки (по дате)
+    стартовый скан идет по 60 работ и упирается в дневной потолок — читатель
+    из поста ждал бы отчетность несколько дней. Новые строки (по дате)
     обязаны получать работу первыми; внутри даты — порядок файла."""
     from pipeline import sync_fns
 
@@ -4064,10 +4064,10 @@ def test_fns_sync_from_registry_takes_newest_registry_rows_first(monkeypatch):
 
 def test_fns_daily_resync_window_opens_five_minutes_after_utc_midnight():
     """Докачка по реестру шла только при старте процесса, а старт с
-    3 сентября 2026 даёт лишь пуш кода: бэклог реестра (278 строк 5 сентября)
+    3 сентября 2026 дает лишь пуш кода: бэклог реестра (278 строк 5 сентября)
     таял бы только по деплоям, а «МорТехПром» из свежего поста ждал бы
     следующего пуша кода. Окно суточной докачки — через пять минут после
-    полуночи UTC, когда счётчик дневного потолка обнуляется; ждать меньше
+    полуночи UTC, когда счетчик дневного потолка обнуляется; ждать меньше
     минуты нельзя (петля при сбое часов)."""
     from datetime import datetime, timezone
 
@@ -4087,7 +4087,7 @@ def test_deal_pdf_embeds_a_cyrillic_font_shipped_with_the_site():
     """Аудит перед бетой (5 сентября 2026): выгруженный с боевого сайта PDF
     карточки Яндекса перечислял невстроенные Helvetica/ZapfDingbats — на
     хосте нет системных DejaVu/Liberation, и кириллица превращалась в
-    квадраты. Шрифт теперь едет в поставке (static/fonts) и берётся оттуда
+    квадраты. Шрифт теперь едет в поставке (static/fonts) и берется оттуда
     первым; PDF обязан нести встроенный TrueType с кириллицей."""
     import deal_export
 
@@ -4106,18 +4106,18 @@ def test_deal_pdf_embeds_a_cyrillic_font_shipped_with_the_site():
 
 def test_deal_pdf_carries_the_compass_mark_next_to_the_name():
     """Просьба владельца 19 сентября 2026: «в пдф не забыть рядом с названием
-    компас добавить логотип, это важно». Отчёт уходит из рук в руки, и без
+    компас добавить логотип, это важно». Отчет уходит из рук в руки, и без
     знака он выглядит распечаткой из чужой таблицы.
 
     Проверяем саму геометрию, а не байты файла: потоки PDF сжаты, и поиск
     по ним ничего не доказывает. Знак обязан совпадать с тем, что в шапке
     сайта (`.wordmark`, viewBox 48×48): круг радиуса 21, стрелка из двух
-    треугольников — бронзовый вверх, тёмный вниз — и точка в центре."""
+    треугольников — бронзовый вверх, темный вниз — и точка в центре."""
     import deal_export
     from reportlab.lib import colors
 
     class Recorder:
-        """Холст-протокол: запоминает, что на нём рисовали."""
+        """Холст-протокол: запоминает, что на нем рисовали."""
         def __init__(self):
             self.calls, self.fills, self.paths = [], [], []
         def __getattr__(self, name):
@@ -4147,7 +4147,7 @@ def test_deal_pdf_carries_the_compass_mark_next_to_the_name():
     apexes = [p.calls[0][1][1] for p in mark.canv.paths]
     assert apexes == [43, 5], apexes
     assert accent in mark.canv.fills and ink in mark.canv.fills
-    # И целиком: файл собирается со знаком внутри и остаётся настоящим PDF.
+    # И целиком: файл собирается со знаком внутри и остается настоящим PDF.
     deal = {"id": "pdf-mark", "title": "Тестовая сделка", "date": "2026-09-19",
             "status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽",
             "buyer_name": "Покупатель", "seller": "Продавец", "eco": {}, "law": {}, "src": []}
@@ -4162,9 +4162,9 @@ def test_deal_pdf_lines_everything_up_on_one_edge_and_writes_the_name_like_the_l
 
     Причина была в том, что Table по умолчанию стоит ПО ЦЕНТРУ рамки: шапка
     шириной в знак и слово и таблица сторон шириной 160 мм в поле 174 мм
-    уезжали вправо от заголовка. Теперь всё, что видно, начинается с одного
+    уезжали вправо от заголовка. Теперь все, что видно, начинается с одного
     края, а таблицы идут во всю ширину. Слово — шрифтом логотипа (PT Serif
-    Bold, едет в static/fonts), «М» и «А» бронзовые, и всё слово — ОДИН
+    Bold, едет в static/fonts), «М» и «А» бронзовые, и все слово — ОДИН
     абзац: если раскладывать буквы по отдельным ячейкам или добавлять
     межбуквенный отступ, между ними появляются щели."""
     import re
@@ -4210,7 +4210,7 @@ def test_deal_pdf_lines_everything_up_on_one_edge_and_writes_the_name_like_the_l
         pdf = deal_export.render_deal_pdf(deal)
         deal_lines = list(drawn)
         drawn.clear()
-        compare = deal_export.render_companies_pdf([{"name": "Ромашка"}, {"name": "Василёк"}])
+        compare = deal_export.render_companies_pdf([{"name": "Ромашка"}, {"name": "Василек"}])
     finally:
         Frame.add = original
 
@@ -4226,8 +4226,8 @@ def test_deal_pdf_lines_everything_up_on_one_edge_and_writes_the_name_like_the_l
 
 
 def test_deal_pdf_says_the_report_date_on_the_page():
-    """Раньше внизу стояло «Дата формирования отчёта указывается в свойствах
-    файла» — отговорка: отчёт пересылают и открывают через месяцы, и «на
+    """Раньше внизу стояло «Дата формирования отчета указывается в свойствах
+    файла» — отговорка: отчет пересылают и открывают через месяцы, и «на
     какое число эти данные» должно читаться глазами, а не через свойства
     документа."""
     import re
@@ -4240,7 +4240,7 @@ def test_deal_pdf_says_the_report_date_on_the_page():
 
 
 def test_owner_payload_names_the_bank_of_russia_by_inn():
-    """У РКЦ Банка России тот же ИНН, что у самого ЦБ, и API-ФНС отдаёт для
+    """У РКЦ Банка России тот же ИНН, что у самого ЦБ, и API-ФНС отдает для
     учредителя Сбербанка имя ликвидированного РКЦ г. Курильска (аудит перед
     бетой, 5 сентября 2026). Имя по ИНН — «Банк России»."""
     row = OwnershipStake(owner_key="k", owner_name="РКЦ  Г. КУРИЛЬСКА", owner_type="legal",
@@ -4257,7 +4257,7 @@ def test_deal_pdf_strips_the_enrichment_method_label_from_advisor_notes():
     """Аудит, раунд 2 (6 сентября 2026): в PDF Яндекса у Morgan Lewis
     осталось «Источник: обогащение/веб-поиск» — на карточке сайта метку
     снимают, а в выгрузку она доезжала. Настоящий адрес из «Источник: …»
-    остаётся ссылкой."""
+    остается ссылкой."""
     import deal_export
 
     assert deal_export._clean_note("Представляла продавца. Источник: обогащение/веб-поиск") == ("Представляла продавца.", None)
@@ -4302,13 +4302,13 @@ def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue
     этом НАШ запрос в тот же адрес вебхука отвечал за 0,9 с кодом 200, а
     Telegram в ту же секунду писал «Connection timed out». Сайт был жив и
     быстр — до него не доходил Telegram. Лечится не обработчиком, а
-    направлением: обновления забираем сами (`getUpdates`), и весь обмен идёт
-    исходящим путём, где релей уже работает.
+    направлением: обновления забираем сами (`getUpdates`), и весь обмен идет
+    исходящим путем, где релей уже работает.
 
-    Проверяем две вещи, каждая — про то, из-за чего очередь встаёт:
+    Проверяем две вещи, каждая — про то, из-за чего очередь встает:
     обновления реально доходят до общего разбора, и обновление, на котором
-    разбор упал, СМЕЩЕНИЕ ВСЁ РАВНО ДВИГАЕТ — иначе Telegram присылал бы его
-    снова и снова, а всё, что за ним, не пришло бы никогда."""
+    разбор упал, СМЕЩЕНИЕ ВСЕ РАВНО ДВИГАЕТ — иначе Telegram присылал бы его
+    снова и снова, а все, что за ним, не пришло бы никогда."""
     import main
 
     seen = []
@@ -4340,7 +4340,7 @@ def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue
 
 
 def test_console_never_sends_to_the_publication_channel(monkeypatch):
-    """7 сентября 2026 отчёт рутины «🔧 Компас · качество» ушёл в ПУБЛИЧНЫЙ
+    """7 сентября 2026 отчет рутины «🔧 Компас · качество» ушел в ПУБЛИЧНЫЙ
     канал, к подписчикам: внутренняя кухня на витрине проекта. В контейнере
     рутин `TELEGRAM_REVIEW_GROUP_ID` содержал номер КАНАЛА, сайт в ту минуту
     перезапускался после сборки, и запасной путь честно отработал по
@@ -4348,8 +4348,8 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
 
     Цена ошибки несимметрична: сообщение консоли, не дошедшее до владельца, —
     неудобство; ушедшее подписчикам — публичный ущерб. Поэтому адрес канала
-    вычёркивается из кандидатов в консоль ВСЕГДА, откуда бы он ни пришёл, а
-    последним рубежом остаются личные адреса владельца и партнёра."""
+    вычеркивается из кандидатов в консоль ВСЕГДА, откуда бы он ни пришел, а
+    последним рубежом остаются личные адреса владельца и партнера."""
     import importlib
     import main
 
@@ -4365,7 +4365,7 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
 
     chats = console_topics.console_chats()
     assert "-1004448538393" not in chats, "канал публикации не может быть адресом консоли"
-    assert chats == ["160794536", "57671646"], "остаются личные адреса владельца и партнёра"
+    assert chats == ["160794536", "57671646"], "остаются личные адреса владельца и партнера"
     assert console_topics.channel_leak_note(), "о подмене адреса надо сказать вслух"
 
     # Сайт тоже может ошибиться — и его ответ проверяется так же.
@@ -4388,7 +4388,7 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
         "канал узнан по типу чата, а не по номеру"
 
     # --- сторона сайта ------------------------------------------------------
-    # Тип чата сайт узнаёт тем же способом и тоже помнит; здесь подставляем
+    # Тип чата сайт узнает тем же способом и тоже помнит; здесь подставляем
     # ответ Telegram, чтобы тест не ходил в сеть.
     monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
     assert "-1004448538393" not in main._review_chat_ids()
@@ -4428,7 +4428,7 @@ def test_webhook_is_dropped_only_after_telegram_answered(monkeypatch):
 
 def test_attempt_public_egrul_match_skips_liquidated_entities_and_strips_pao():
     """11 сентября 2026: за «ПАО «Группа Позитив»» бесплатный поиск отдавал
-    красноярское ООО «Группа Позитив», исключённое из ЕГРЮЛ в 2014 году, —
+    красноярское ООО «Группа Позитив», исключенное из ЕГРЮЛ в 2014 году, —
     потому что у настоящего ПАО форма «публичное акционерное общество» не
     снималась при сравнении, а у ликвидированного ООО — снималась. Обе
     половины: ликвидированное (поле `e`) не считается, ПАО/НАО/МКАО
@@ -4452,7 +4452,7 @@ def test_site_bridge_tells_a_missing_endpoint_from_an_empty_answer():
 
     19 сентября 2026 рутина «заметки от пользователей» на первом же реальном
     прогоне упала трассировкой JSONDecodeError: боевой сайт ответил кодом 200
-    и HTML-страницей, потому что эндпоинт ещё не был выложен, а неизвестные
+    и HTML-страницей, потому что эндпоинт еще не был выложен, а неизвестные
     адреса ловит catch-all. `raise_for_status` такой ответ пропускает —
     проверять надо СОДЕРЖИМОЕ, а не только код. Тот же catch-all однажды уже
     съел /favicon.ico (KNOWN_ISSUES.md), то есть класс дефекта был известен.
@@ -4485,15 +4485,15 @@ def test_site_bridge_tells_a_missing_endpoint_from_an_empty_answer():
 def test_deal_pdf_carries_the_financial_context_section():
     """Финансовый контекст в выгрузке (просьба Ксюши, 19 сентября 2026): на
     карточке блок есть, а в PDF его не было. «За сколько купили» без «сколько
-    компания зарабатывает» — половина разговора, а отчёт уходит из рук в руки.
+    компания зарабатывает» — половина разговора, а отчет уходит из рук в руки.
 
     Показатели берутся за последний год ДО сделки, юрлицо и год названы прямо:
-    отчётность сдаётся по юрлицу, а сделка заключается по группе, и подменять
+    отчетность сдается по юрлицу, а сделка заключается по группе, и подменять
     одно другим нельзя (урок про периметр из CLAUDE.md).
     """
     import deal_export
 
-    # Прочерк, а не ноль: пустая строка отчётности и ноль в отчёте — разное.
+    # Прочерк, а не ноль: пустая строка отчетности и ноль в отчете — разное.
     assert deal_export._money(None) == "—" and deal_export._money("") == "—"
     assert deal_export._money(19_400_000_000) == "19,4 млрд ₽"
     assert deal_export._money(-511_000_000) == "−511 млн ₽"
@@ -4507,13 +4507,13 @@ def test_deal_pdf_carries_the_financial_context_section():
                          "assets_rub": 12_000_000_000, "equity_rub": None}]}
     pdf = deal_export.render_deal_pdf(deal)
     assert pdf.startswith(b"%PDF")
-    # Без финансовых данных раздела нет вовсе — пустая таблица хуже её отсутствия.
+    # Без финансовых данных раздела нет вовсе — пустая таблица хуже ее отсутствия.
     plain = deal_export.render_deal_pdf({k: v for k, v in deal.items() if k != "finance"})
     assert len(plain) < len(pdf)
 
 
 def test_export_finance_takes_the_year_before_the_deal():
-    """Показывать в отчёте о сделке 2023 года отчётность за 2025-й — значит
+    """Показывать в отчете о сделке 2023 года отчетность за 2025-й — значит
     отвечать не на тот вопрос. Отбор года проверяем на самом запросе."""
     import inspect
 
@@ -4521,7 +4521,7 @@ def test_export_finance_takes_the_year_before_the_deal():
 
     src = inspect.getsource(m._export_finance)
     assert "FinancialReport.year <= year_cap" in src, "отбор по году до сделки пропал"
-    assert "order_by(FinancialReport.year.desc())" in src, "берётся не самый свежий из допустимых"
+    assert "order_by(FinancialReport.year.desc())" in src, "берется не самый свежий из допустимых"
     # Имя компании — из профиля базы, а не из ЕГРЮЛ: «ПУБЛИЧНОЕ АКЦИОНЕРНОЕ
     # ОБЩЕСТВО "ВЫМПЕЛ-КОММУНИКАЦИИ"» капсом уже нарушало правило «язык для
     # людей» на экране мультипликаторов, и в PDF повторять это незачем.
@@ -4535,7 +4535,7 @@ def test_egrul_change_text_is_a_sentence_not_a_machine_dump():
     поле `event_type` пусто, а в тексте лежала строка вида
     `{"СПВЗ": "Изменение сведений о юридическом лице…"}` — и она уходила
     прямо на страницу компании. Причина: `normalize_changes` искала ключи
-    «Текст»/«Описание»/«Статус», а API отдаёт «СПВЗ», и срабатывал запасной
+    «Текст»/«Описание»/«Статус», а API отдает «СПВЗ», и срабатывал запасной
     путь `json.dumps(item)`. Урок: запасной путь, показывающий человеку
     внутреннее представление данных, хуже пустой строки.
     """
@@ -4545,10 +4545,10 @@ def test_egrul_change_text_is_a_sentence_not_a_machine_dump():
     live = '{"СПВЗ": "Представление лицензирующим органом сведений о предоставлении лицензии"}'
     assert fns_client.change_text(live) == \
         "Представление лицензирующим органом сведений о предоставлении лицензии"
-    # И словарём (новые записи), и строкой (уже лежащие в базе) — одинаково.
+    # И словарем (новые записи), и строкой (уже лежащие в базе) — одинаково.
     assert fns_client.change_text({"СПВЗ": "Текст записи"}) == "Текст записи"
     assert "{" not in fns_client.change_text(live)
-    # Ключа не знаем — берём самую длинную человеческую строку, а не слепок.
+    # Ключа не знаем — берем самую длинную человеческую строку, а не слепок.
     assert fns_client.change_text({"Код": "12", "Что": "Длинное описание записи"}) == "Длинное описание записи"
     assert fns_client.change_text({}) == ""
 
@@ -4568,12 +4568,12 @@ def test_health_carries_a_build_fingerprint(client):
     расследованием.
 
     19 сентября 2026 выкладка встала: за день в git уехало восемь коммитов, а
-    сайт отдавал сборку 18-го — в том числе без гейта, который перестаёт
+    сайт отдавал сборку 18-го — в том числе без гейта, который перестает
     отвечать на «найди компромат на X». Чтобы это увидеть, пришлось сравнивать
-    размер index.html, искать в нём признаки отдельных коммитов и в конце
+    размер index.html, искать в нем признаки отдельных коммитов и в конце
     спрашивать сам ассистент.
 
-    Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развёрнутом
+    Отпечаток считается ПО СОДЕРЖИМОМУ ФАЙЛОВ, а не по git: в развернутом
     контейнере каталога .git может не быть, а файлы есть всегда.
     """
     import hashlib
@@ -4591,7 +4591,7 @@ def test_health_carries_a_build_fingerprint(client):
         assert got == want, f"отпечаток {name} не совпадает с файлом"
         assert len(got) == 8
 
-    # Сравнение «сайт и чекаут совпадают» живёт одной функцией, а не
+    # Сравнение «сайт и чекаут совпадают» живет одной функцией, а не
     # переписывается заново в каждой рутине.
     import sys as _sys
     _sys.path.insert(0, str(root / "pipeline"))
@@ -4600,7 +4600,7 @@ def test_health_carries_a_build_fingerprint(client):
 
 
 def test_assistant_thread_delete_removes_its_messages_too(client):
-    """Артём 19 сентября 2026: «плюс возможность удалять диалоги». Сервер это
+    """Артем 19 сентября 2026: «плюс возможность удалять диалоги». Сервер это
     умел с самого начала, кнопки в интерфейсе не было ни одной. Здесь держим
     то, что легко потерять при правке модели: сообщения обязаны уходить
     вместе с диалогом, иначе они останутся в базе сиротами."""
@@ -4629,7 +4629,7 @@ def test_assistant_thread_delete_removes_its_messages_too(client):
 
 
 def test_assistant_thread_of_another_person_cannot_be_deleted(client):
-    """Чужой диалог не удаляется и не выдаёт своим существованием: 404, а не 403."""
+    """Чужой диалог не удаляется и не выдает своим существованием: 404, а не 403."""
     from db.models import AssistantThread
     _login(client, "chuzhoy-dialog@example.com")
     with get_session() as db:
@@ -4647,7 +4647,7 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     """Пустой прогон тоже обязан заметить, что тема консоли не заведена.
 
     20 сентября 2026: тема «Заметки от пользователей» так и не была заведена
-    (бот узнаёт номер только командой /topic внутри неё), а проверка стояла
+    (бот узнает номер только командой /topic внутри нее), а проверка стояла
     рядом с отправкой — то есть при пустой очереди не выполнялась вовсе, и
     рутина три дня отчитывалась «заметок нет», молча роняя будущие сообщения
     в общую ленту группы. Проверка переехала в начало прогона; чтобы
@@ -4672,7 +4672,7 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     assert second and "по-прежнему" in second and "2026-09-20" in second
     assert "/topic" not in second
 
-    # Тему завели — молчим и снимаем отметку: если тема пропадёт снова,
+    # Тему завели — молчим и снимаем отметку: если тема пропадет снова,
     # предупреждение должно прозвучать нормально, а не вполголоса со старой
     # датой.
     monkeypatch.setattr(mod.console_topics, "thread_id", lambda kind: 42)
@@ -4702,7 +4702,7 @@ def test_realty_channel_gets_its_own_slot_and_never_replaces_the_main_one(client
     Недвижимость», и сайт записал его адрес в ячейку ОСНОВНОГО канала: пока
     канал был один, любой новый считался основным. Публикацию спасла только
     переменная окружения рутин. Канал с «недвижимостью» в названии — своя
-    ячейка; основной остаётся основным; консоль не пишет ни в один из них."""
+    ячейка; основной остается основным; консоль не пишет ни в один из них."""
     _mod_env(monkeypatch)
     import main as main_module
     _clear_channel_settings(main_module)
@@ -4761,7 +4761,7 @@ def test_realty_channel_stuck_in_the_main_slot_is_moved_to_its_own(client, monke
 
 
 def test_robots_txt_keeps_robots_out_of_data_and_api(client):
-    """База отдаётся сайтом одним файлом; robots.txt — первое, что видит
+    """База отдается сайтом одним файлом; robots.txt — первое, что видит
     добросовестный сборщик (см. docs/sources_legal.md, «Права на базу
     данных»)."""
     r = client.get("/robots.txt")
@@ -4779,7 +4779,7 @@ def test_access_gate_is_off_by_default_since_launch():
 
 # ---------------------------------------------------------------------------
 # Бот для читателя (4 октября 2026). Владелец нажал в кабинете «Подключить
-# Telegram», потом «Старт» — и получил инструкцию модерации. Её получал бы
+# Telegram», потом «Старт» — и получил инструкцию модерации. Ее получал бы
 # любой читатель: /start отвечал всем справкой консоли, привязка шла молча.
 
 CONSOLE_WORDS = ("опубликовать", "придержать", "выкинуть", "черновик", "проект поста")
@@ -4829,14 +4829,14 @@ def test_telegram_link_confirms_binding_and_explains_a_stale_link(client, monkey
     assert first["url"].endswith("?start=" + first["code"])
     sent = _bot_sent(monkeypatch)
     _say(client, 555002, "/start " + first["code"])
-    assert sent and "Telegram подключён" in sent[0][1]["text"]
+    assert sent and "Telegram подключен" in sent[0][1]["text"]
     assert not any(w in sent[0][1]["text"].lower() for w in CONSOLE_WORDS)
     prefs = client.get("/api/notification-preferences").json()
     assert prefs["telegram_connected"] is True and prefs["telegram_enabled"] is True
-    # Та же ссылка второй раз — «уже подключён», а не «ошибка».
+    # Та же ссылка второй раз — «уже подключен», а не «ошибка».
     sent.clear()
     _say(client, 555002, "/start " + first["code"])
-    assert "подключён" in sent[0][1]["text"]
+    assert "подключен" in sent[0][1]["text"]
     # Чужой или устаревший ключ — понятный ответ, что делать.
     sent.clear()
     _say(client, 555003, "/start kompas_" + "x" * 32)
@@ -4847,8 +4847,8 @@ def test_telegram_link_confirms_binding_and_explains_a_stale_link(client, monkey
     code = client.post("/api/notification-preferences/telegram-link").json()["code"]
     sent.clear()
     _say(client, 555004, code)
-    assert "Telegram подключён" in sent[0][1]["text"]
-    # /stop выключает уведомления, привязка остаётся.
+    assert "Telegram подключен" in sent[0][1]["text"]
+    # /stop выключает уведомления, привязка остается.
     sent.clear()
     _say(client, 555004, "/stop")
     assert "выключены" in sent[0][1]["text"]
@@ -4933,7 +4933,7 @@ def test_weekly_digest_goes_once_a_week_on_monday_morning(client, monkeypatch):
 
 
 def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, monkeypatch):
-    """4 октября 2026: партнёр ответил на проект поста OTP Bank «Что такое
+    """4 октября 2026: партнер ответил на проект поста OTP Bank «Что такое
     luminor?», бот принял вопрос за новый текст поста и одобрил его —
     ближайшая публикация ушла бы в канал тремя словами, а отменить было
     нечем. Вопрос — заметка, пост не тронут; настоящая замена текста
@@ -4979,12 +4979,12 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     reply("Убери строку про дивиденды", draft)
     assert decisions()[-1][0] == "note" and decisions()[-2][0] == "note"
     assert "пост не тронут" in sent[-1][1]["text"]
-    # Полный новый текст — замена, и её можно отменить.
+    # Полный новый текст — замена, и ее можно отменить.
     sent.clear()
     reply("Новый текст поста целиком. " * 12, draft)
     assert decisions()[-1][:2] == ("approve", ("Новый текст поста целиком. " * 12).strip())
     confirm = sent[-1][1]["text"]
-    assert "Принято: пост уйдёт с вашим текстом" in confirm and "(правка поста %s)" % deal in confirm
+    assert "Принято: пост уйдет с вашим текстом" in confirm and "(правка поста %s)" % deal in confirm
     sent.clear()
     reply("отмена", {"message_id": 502, "text": confirm})
     assert decisions()[-1] == ("approve", ("Новый текст поста целиком. " * 12).strip(), True)
@@ -4999,7 +4999,7 @@ def test_ops_activity_counts_people_without_metrika(client, monkeypatch):
     _mod_env(monkeypatch)
     assert client.get("/api/ops/activity").status_code == 404
     before = client.get("/api/ops/activity", params={"token": "тайна"}).json()
-    r = client.post("/api/auth/register", json={"email": "activity-probe@example.com", "password": "Пароль-надёжный-1", "full_name": "Проба Активности"})
+    r = client.post("/api/auth/register", json={"email": "activity-probe@example.com", "password": "Пароль-надежный-1", "full_name": "Проба Активности"})
     assert r.status_code in (200, 201), r.text
     after = client.get("/api/ops/activity", params={"token": "тайна"}).json()
     assert after["users"] == before["users"] + 1
@@ -5010,7 +5010,7 @@ def test_ops_activity_counts_people_without_metrika(client, monkeypatch):
 
 
 def test_own_traffic_counter_records_views_and_shows_them(client, monkeypatch):
-    """14 октября 2026: свой счётчик посещений вместо молчащей Метрики.
+    """14 октября 2026: свой счетчик посещений вместо молчащей Метрики.
     Отметка экрана пишется без личных данных, роботы и наши проверки
     (безголовый браузер) не считаются, черновики карточек — тоже; страница
     /ops/traffic закрыта токеном и показывает, что смотрели и откуда пришли."""
@@ -5042,7 +5042,7 @@ def test_own_traffic_counter_records_views_and_shows_them(client, monkeypatch):
 
 
 def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, monkeypatch):
-    """20 октября 2026: партнёр ответил своим текстом на «[веха g97679d43~closed]»
+    """20 октября 2026: партнер ответил своим текстом на «[веха g97679d43~closed]»
     («Лабинский»), а сайт эту метку не разбирал — правка пропала молча. Полный
     текст заменяет пост этапа и выпускает его; вопрос — заметка к сделке."""
     _mod_env(monkeypatch)
@@ -5085,7 +5085,7 @@ def test_unrecognised_reply_in_the_console_goes_to_the_agent_not_into_silence(cl
     marker = "Компас · публикация — непонятное сообщение %s" % uuid.uuid4().hex[:6]
     client.post("/api/telegram/webhook/тайна", json={"message": {
         "message_id": 501, "text": "Сделай вот так", "chat": {"id": -1001, "type": "supergroup"},
-        "from": {"id": 222, "first_name": "Артём"},
+        "from": {"id": 222, "first_name": "Артем"},
         "reply_to_message": {"message_id": 500, "text": marker, "from": {"id": 1, "is_bot": True}}}})
     assert any("передал агенту" in str(p.get("text")) for p in sent), sent
     rows = client.get("/api/claude/inbox", params={"token": "тайна"}).json()["messages"]
@@ -5097,7 +5097,7 @@ def test_unrecognised_reply_in_the_console_goes_to_the_agent_not_into_silence(cl
 def test_manual_edit_in_the_channel_is_remembered_for_the_routine(client, monkeypatch):
     """21 октября 2026: владелец поправил пост прямо в канале, а агент следом
     вернул прежний текст — о ручной правке никто не знал. Сайт запоминает
-    правку, рутина публикации её не перезаписывает."""
+    правку, рутина публикации ее не перезаписывает."""
     _mod_env(monkeypatch)
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: {"ok": True})
     mid = 70000 + int(uuid.uuid4().int % 1000)

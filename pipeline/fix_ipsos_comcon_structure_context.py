@@ -40,7 +40,7 @@ def main(write=False):
     assert deal['law']['struct'] == OLD_STRUCT, \
         f"law.struct: неожиданное значение {deal['law']['struct']!r}"
 
-    print(f"{CARD_ID} law.struct: структура СП (сохранённая доля "
+    print(f"{CARD_ID} law.struct: структура СП (сохраненная доля "
           f"продавца), поле было пустым")
     deal['law']['struct'] = NEW_STRUCT
 

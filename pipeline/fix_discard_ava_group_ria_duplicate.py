@@ -3,7 +3,7 @@
 продала земельный участок на Белоостровской улице в Петербурге», РИА
 Недвижимость) — та же сделка, что уже собрана как gc52a53dd (РАД/AVA
 Group, Деловой Петербург, 09:24 МСК того же дня). Новый факт этого
-источника (стартовая цена торгов 634,7 млн руб.) уже перенесён в
+источника (стартовая цена торгов 634,7 млн руб.) уже перенесен в
 gc52a53dd вместе со ссылкой на этот источник как на второй (см.
 pipeline/ingest/fixes/batch_2026_09_08_rad_ava_beloostrovskaya.py) —
 карточка-дубль снимается.
@@ -38,7 +38,7 @@ def main(write=False):
     prior = [c for c in pending['cards'] if c['id'] == PRIOR_ID]
     assert prior, f'ожидалась карточка {PRIOR_ID} в очереди предпросмотра'
     assert any(len(s) > 1 and s[1] == URL for s in (prior[0].get('src') or [])), \
-        f'факт {URL} должен уже быть перенесён в src карточки {PRIOR_ID}'
+        f'факт {URL} должен уже быть перенесен в src карточки {PRIOR_ID}'
 
     pending['cards'] = [c for c in pending['cards'] if c['id'] != CARD_ID]
     state.setdefault('discarded_urls', {})[URL] = {
@@ -46,7 +46,7 @@ def main(write=False):
         'at': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
     }
 
-    print(f'Снята карточка {CARD_ID} (тот же сюжет, что {PRIOR_ID}; новый факт уже перенесён).')
+    print(f'Снята карточка {CARD_ID} (тот же сюжет, что {PRIOR_ID}; новый факт уже перенесен).')
 
     if write:
         with open(PENDING_PATH, 'w', encoding='utf-8') as f:

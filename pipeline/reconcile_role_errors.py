@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Исправить вручную подтверждённые ошибки ролей сторон.
+"""Исправить вручную подтвержденные ошибки ролей сторон.
 
 Автоматические правила могут предлагать кандидатов, но не должны менять уже
 заполненные роли. Здесь перечислены только карточки, в которых заголовок и
@@ -63,7 +63,7 @@ def apply(payload: dict) -> list[str]:
         name="Вториум",
         industry="Финтех",
         aliases=["вториум", "vtorium"],
-        desc="Финтех-сервис расчётов на рынке вторичного сырья.",
+        desc="Финтех-сервис расчетов на рынке вторичного сырья.",
     )
     chzmk = ensure_profile(
         payload,
@@ -168,7 +168,7 @@ def apply(payload: dict) -> list[str]:
 
     profile_fixes = {
         "gcafc31dc": {"ind": "Банки", "desc": "Российская банковская группа."},
-        "g549ab474": {"ind": "E-commerce", "desc": "Объединённая компания Wildberries и Russ."},
+        "g549ab474": {"ind": "E-commerce", "desc": "Объединенная компания Wildberries и Russ."},
     }
     for cid, fields in profile_fixes.items():
         row = payload.get("companies", {}).get(cid)
@@ -176,7 +176,7 @@ def apply(payload: dict) -> list[str]:
             before = copy.deepcopy(row)
             row.update(fields)
             if row != before:
-                changes.append(f"{cid}: уточнён профиль компании")
+                changes.append(f"{cid}: уточнен профиль компании")
 
     return changes
 

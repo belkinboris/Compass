@@ -115,7 +115,7 @@ def main() -> None:
         for deal in deals:
             files[path.name] += walk_deal(deal, stats)
         path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print("Изменённые поля:")
+    print("Измененные поля:")
     for name, count in files.items(): print(f"  {name}: {count}")
     print("Замены:")
     for name, count in stats.most_common(): print(f"  {name}: {count}")

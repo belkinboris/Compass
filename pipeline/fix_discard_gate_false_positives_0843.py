@@ -36,7 +36,7 @@ TARGETS = {
     'ge419f326': ('https://t.me/rusven/7722',
                   'Mento VC/Pin — иностранный стартап без российского элемента'),
     'geafce7e1': ('https://t.me/rusven/7724',
-                  'Bending Spoons/Miro — дубль уже отклонённого решения (g20ec3d5e)'),
+                  'Bending Spoons/Miro — дубль уже отклоненного решения (g20ec3d5e)'),
     'g969c0676': ('https://1prime.ru/20260911/briks-873221617.html',
                   'аналитическая статья о нефтяном рынке, не сделка'),
     'gb7f99c8b': ('https://1prime.ru/20260911/tsentrobank-873218366.html',

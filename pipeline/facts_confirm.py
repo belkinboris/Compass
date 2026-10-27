@@ -11,8 +11,8 @@
      («500 млрд ₽» стояли в источнике и относились к допэмиссии). Поэтому
      читатель отвечает на вопросы об ОБЪЕКТЕ, СОБЫТИИ и ПЕРИМЕТРЕ, а факт
      становится verified только когда два НЕЗАВИСИМЫХ чтения сошлись в
-     значении и смысле. Разошлись — disputed, факт ждёт человека и в
-     расчёты не идёт. Чтение моделью и подтверждение человеком различаются
+     значении и смысле. Разошлись — disputed, факт ждет человека и в
+     расчеты не идет. Чтение моделью и подтверждение человеком различаются
      полем verified_by ('model×2' / 'human:<имя>').
   3. АРИФМЕТИКА — facts.number_checks: порядок величины, единицы, валюта,
      доля против периметра цены. Считается при derive и в тестах.
@@ -26,7 +26,7 @@
    "perimeter": {"ok": bool, "entity", "quote", "source"} | null,
    "notes"}
 null у факта значит «источник этого не устанавливает» — это тоже результат,
-он записывается (reading.result = 'not_in_source'), основание не растёт.
+он записывается (reading.result = 'not_in_source'), основание не растет.
 
 Запуск:
     python3 pipeline/facts_confirm.py --queue --metric multiple --out data/inbox/facts/queue-multiple.json
@@ -55,19 +55,19 @@ from pipeline import fns_registry, source_names  # noqa: E402
 DATA = ROOT / 'static' / 'data' / 'deals_promoted.json'
 RAW = ROOT / 'data' / 'inbox' / 'raw'
 EVENTS = ('closing', 'signing', 'announcement', 'publication', 'registry')
-# Кто назвал число: стороны/официальное сообщение, документ (отчётность,
+# Кто назвал число: стороны/официальное сообщение, документ (отчетность,
 # проспект, раскрытие), реестр, анонимные источники СМИ, аналитик. Только
 # первые три дают meaning 'disclosed'; «по данным источников» — 'reported'.
 ATTRIBUTIONS = ('parties', 'filing', 'registry', 'adviser', 'media_sources', 'analyst', 'unknown')
 PARTY_ATTRIBUTIONS = ('parties', 'filing', 'registry')
 # Ярлыки стадии одной и той же сделки — по силе: закрытие сильнее подписания,
 # подписание сильнее объявления. Два чтения с разными ярлыками — не спор о
-# цене (четвёртый разбор рецензента: «объявление итогов торгов и протокол
-# торгов описывают одно событие»), а разные названия одного события; берётся
+# цене (четвертый разбор рецензента: «объявление итогов торгов и протокол
+# торгов описывают одно событие»), а разные названия одного события; берется
 # сильнейший, остальные остаются в event_variants. Разные СДЕЛКИ с одной суммой
 # ловит спорная дата.
 EVENT_STRENGTH = {'publication': 0, 'announcement': 1, 'signing': 2, 'registry': 3, 'closing': 4}
-# Состав цены: фиксированная, с условной/отложенной частью (оценённой на дату
+# Состав цены: фиксированная, с условной/отложенной частью (оцененной на дату
 # покупки — SmartDeal: 640 млн ₽ отложенного + 114 млн ₽ условного возмещения),
 # фактически выплаченная, неизвестно.
 PRICE_TERMS = ('fixed', 'includes_contingent', 'paid', 'unknown')
@@ -88,7 +88,7 @@ MONTHS = ('январ', 'феврал', 'март', 'апрел', 'ма[йяею
 
 
 def flat(s: str) -> str:
-    # NFC: кэш страниц, расщепляющих «й»/«ё» на букву и отдельную breve/умлаут
+    # NFC: кэш страниц, расщепляющих «й»/«е» на букву и отдельную breve/умлаут
     # (НФД), иначе дословно совпадающая цитата не находится символ в символ
     # (22 октября 2026, mid-ilyinskaya: «многопрофильный» в кэше распался на
     # «и»+COMBINING BREVE — 5 источников из 312 несут этот же дефект).
@@ -157,15 +157,15 @@ def build_queue(metric: str, limit: int, base, ctx, ids: list[str] | None = None
         rows.sort(key=lambda d: -(d['facts']['price'].get('value_rub') or 0))
     elif metric == 'price_recheck':
         # Повторное чтение цены с вопросом «кто назвал число» (attribution) —
-        # для уже подтверждённых цен без этого признака.
+        # для уже подтвержденных цен без этого признака.
         for d in deals.values():
             pf = d['facts']['price']
             if pf.get('basis') in ('read', 'verified') and not pf.get('attribution'):
                 rows.append(d)
         rows.sort(key=lambda d: -(d['facts']['price'].get('value_rub') or 0))
     elif metric == 'perimeter':
-        # Периметр по КОНКРЕТНОМУ отчёту: подтверждённые доля и цена, но
-        # периметр без привязки к отчёту (или не прочитан).
+        # Периметр по КОНКРЕТНОМУ отчету: подтвержденные доля и цена, но
+        # периметр без привязки к отчету (или не прочитан).
         for d in deals.values():
             f = d['facts']
             if f['stake'].get('basis') == 'verified' and f['price'].get('basis') == 'verified' \
@@ -175,7 +175,7 @@ def build_queue(metric: str, limit: int, base, ctx, ids: list[str] | None = None
     elif metric == 'coverage':
         pass  # список задан снаружи
     elif metric == 'grounds':
-        # Четвёртый разбор: у подтверждённой цены должны быть автор с цитатой,
+        # Четвертый разбор: у подтвержденной цены должны быть автор с цитатой,
         # точность цитаты и состав (фиксированная/с условной частью), у смены
         # контроля — адрес и сверенная цитата и ответ, не внутригрупповая ли
         # это передача. Перечитываются все сделки с прочитанной ценой.
@@ -211,13 +211,13 @@ def build_queue(metric: str, limit: int, base, ctx, ids: list[str] | None = None
 
 
 def report_for(company_id: str, deal: dict) -> dict | None:
-    """Отчёт, который пойдёт в знаменатель: юрлицо, ИНН, год и выручка с
+    """Отчет, который пойдет в знаменатель: юрлицо, ИНН, год и выручка с
     боевого сайта (/api/companies/<id>/fns) — тот же выбор года, что в
     compute_market_multiples (последний полный год до сделки, разрыв 1–2).
-    Читатель подтверждает периметр относительно ЭТОГО отчёта."""
+    Читатель подтверждает периметр относительно ЭТОГО отчета."""
     import urllib.request
-    # тот же год, что возьмёт compute_market_multiples: подтверждённая дата
-    # закрытия сильнее даты карточки (multiple_year), отчёты — строго до него
+    # тот же год, что возьмет compute_market_multiples: подтвержденная дата
+    # закрытия сильнее даты карточки (multiple_year), отчеты — строго до него
     year, _ = dm.multiple_year(deal)
     year = year or 0
     try:
@@ -230,7 +230,7 @@ def report_for(company_id: str, deal: dict) -> dict | None:
     reps = [x for x in (ent.get('reports') or []) if x.get('revenue_rub') is not None and x.get('year') and year - dm.MAX_YEAR_GAP <= x['year'] < year]
     reps.sort(key=lambda x: -x['year'])
     if not reps:
-        return {'legal_name': e.get('legal_name'), 'inn': e.get('inn'), 'note': 'подходящего отчёта нет'}
+        return {'legal_name': e.get('legal_name'), 'inn': e.get('inn'), 'note': 'подходящего отчета нет'}
     r0 = reps[0]
     return {'legal_name': e.get('legal_name'), 'inn': e.get('inn'), 'year': r0['year'],
             'revenue_rub': r0['revenue_rub'], 'operating_profit_rub': r0.get('operating_profit_rub')}
@@ -264,7 +264,7 @@ def _rub_amounts_in(quote) -> list[float]:
     """Все суммы в рублях, найденные в цитате, по порядку появления — не
     только первая. Цитата сделки часто называет две суммы в одном
     предложении («деконсолидация 80 млрд руб. долга... привлечь 21,7 млрд
-    руб.») — одно `re.search` вслепую берёт первую, даже если это сумма
+    руб.») — одно `re.search` вслепую берет первую, даже если это сумма
     совсем другого факта (МТС/БИК, 10 октября 2026: 80 млрд долга против
     искомых 21,7 млрд цены)."""
     out = []
@@ -284,7 +284,7 @@ def _rub_amounts_in(quote) -> list[float]:
     # полным словом, а не сокращением — «16 миллиардов рублей», «213,5
     # миллиона рублей» — ни одно из них не ловилось рядом с «₽» (значка нет)
     # и не совпадало с тыс|млн|млрд|трлн (это не сокращение). 25 октября
-    # 2026: четыре сделки очереди «top» в один день упёрлись в этот же
+    # 2026: четыре сделки очереди «top» в один день уперлись в этот же
     # пробел — цитаты были дословно верны, но price_supported() их не видел.
     for m in re.finditer(r'(\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(тысяч[а-я]*|миллион[а-я]*|миллиард[а-я]*|триллион[а-я]*)',
                          quote, re.I):
@@ -330,7 +330,7 @@ def quote_number_rub(quote, value_rub=None) -> float | None:
 def price_precise_enough(value_rub, quote) -> bool:
     """Значение не точнее своей цитаты. «50,785 млрд» с цитатой «50,8 млрд»
     — согласие двух чтений подтвердило точность, которой в цитате нет
-    (четвёртый разбор рецензента); точная цифра требует цитаты с точной
+    (четвертый разбор рецензента); точная цифра требует цитаты с точной
     цифрой. Допуск — половина последнего разряда цитаты, не 1%."""
     q = quote_number_rub(quote, value_rub)
     if q is None or value_rub is None:
@@ -441,7 +441,7 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
                 aq = fact.get('attribution_quote') or ''
                 cue_in = ATTRIBUTION_CUE.search(q) or (aq and ATTRIBUTION_CUE.search(aq))
                 if not cue_in:
-                    problems.append('price: attribution %s не подтверждена цитатой — нужна attribution_quote со словами «сообщил/заявил/говорится/пресс-служба/отчётность/протокол»' % attr)
+                    problems.append('price: attribution %s не подтверждена цитатой — нужна attribution_quote со словами «сообщил/заявил/говорится/пресс-служба/отчетность/протокол»' % attr)
                 elif aq and quote_ok(aq, url) is False:
                     problems.append(f'price: attribution_quote не найдена дословно в {url}')
             if fact.get('meaning') == 'disclosed':
@@ -474,12 +474,12 @@ def check_reading(rec: dict, card: dict, texts: dict[str, str]) -> tuple[dict, l
                 problems.append('perimeter: entity не встречается в цитате')
             rep = fact.get('report')
             if rep is not None and (not isinstance(rep, dict) or not rep.get('inn') or not rep.get('year')):
-                # У задания без подходящего отчёта (ТПГК: выручки за нужный
-                # год нет) читатель подтверждает только юрлицо — отчёта, к
+                # У задания без подходящего отчета (ТПГК: выручки за нужный
+                # год нет) читатель подтверждает только юрлицо — отчета, к
                 # которому привязать периметр, нет, и это не ошибка чтения.
                 fact['report'] = rep = None
             if rep is not None:
-                # версия 2: периметр относительно конкретного отчёта
+                # версия 2: периметр относительно конкретного отчета
                 if fact.get('ok') and fact.get('covers_business') is not True:
                     problems.append('perimeter: ok=true, но covers_business не true')
                 if fact.get('ok') and fact.get('other_entities'):
@@ -516,11 +516,11 @@ def check_files(paths, base=None, texts=None):
 # ---------- запись ----------
 
 # Согласие двух чтений — по той части факта, от которой зависит ДОПУСК:
-# для цены это «названа ли цена сторонами» и её величина, для даты — день,
+# для цены это «названа ли цена сторонами» и ее величина, для даты — день,
 # для доли — процент, для природы — смена контроля, для периметра — ok.
 # Оттенки (estimate против not_a_price, announcement против publication,
 # scope пакета) не делают факт спорным: они хранятся вариантами, а для
-# показа берётся более осторожный. Периметр цены (scope) нужен только
+# показа берется более осторожный. Периметр цены (scope) нужен только
 # мультипликатору и подтверждается отдельно (scope_basis).
 DATE_STRENGTH = {'publication': 0, 'announcement': 1, 'signing': 2, 'closing': 3, 'registry': 4}
 
@@ -538,7 +538,7 @@ def _agree(key, a, b) -> bool:
         # (Shell/«Сахалин-2»: равные суммы у разрешения 2023 года и у покупки 2024-го)
         # Ярлык события (объявление / подписание / закрытие / реестр) у
         # одной и той же цены читатели ставят по-разному — это не спор о
-        # цене: девять из 25 цен первого прогона «разошлись» только в нём.
+        # цене: девять из 25 цен первого прогона «разошлись» только в нем.
         # Две РАЗНЫЕ сделки с одной суммой (Shell/«Сахалин-2»: разрешение
         # НОВАТЭКу и покупка «Газпромом») ловит спорная ДАТА — она снимает
         # сделку с показателей по годам; ярлыки сохраняются в event_variants.
@@ -552,9 +552,9 @@ def _agree(key, a, b) -> bool:
         if a.get('ok') != b.get('ok'):
             return False
         if not a.get('ok'):
-            return True  # оба говорят «периметр не подтверждён» — знаменателя для спора нет
+            return True  # оба говорят «периметр не подтвержден» — знаменателя для спора нет
         ra, rb = a.get('report') or {}, b.get('report') or {}
-        # Два чтения подтверждают периметр ОДНОГО отчёта: разные ИНН или
+        # Два чтения подтверждают периметр ОДНОГО отчета: разные ИНН или
         # годы — это два разных знаменателя, а не согласие.
         return (ra.get('inn'), ra.get('year')) == (rb.get('inn'), rb.get('year'))
     return False
@@ -575,7 +575,7 @@ def merged_fields(key, readings: list[dict]) -> dict:
             out['attribution_variants'] = sorted(set(attrs))
         events = [r.get('event') for r in readings if r.get('event')]
         if events:
-            # ярлык стадии одной сделки — берётся сильнейший, разночтения видны
+            # ярлык стадии одной сделки — берется сильнейший, разночтения видны
             out['event'] = max(events, key=lambda e: EVENT_STRENGTH.get(e, -1))
             out['event_variants'] = sorted(set(events))
         terms = [r.get('terms') for r in readings if r.get('terms')]
@@ -616,8 +616,8 @@ def _basis_for(readings: list[dict]) -> tuple[str, str]:
     if len(readings) >= 2:
         if all(_agree_key(readings[0], r) for r in readings[1:]):
             # verified — только когда у КАЖДОГО чтения есть адрес и цитата сверена
-            # с текстом: иначе статус сильнее сохранённого основания, и проверку
-            # нельзя воспроизвести (четвёртый разбор: семь «подтверждённых» смен
+            # с текстом: иначе статус сильнее сохраненного основания, и проверку
+            # нельзя воспроизвести (четвертый разбор: семь «подтвержденных» смен
             # контроля без единого адреса и сверки).
             complete = all(str(r.get('source') or '').startswith('http') and r.get('quote_checked') is True
                            for r in readings)
@@ -682,7 +682,7 @@ def write_readings(paths, write=False, asked=('stake', 'price', 'date', 'nature'
                 fact['control_change_basis'] = basis  # флаги природы остаются правилом (basis 'rule')
             else:
                 fact['basis'] = basis
-            # Подтверждённый двумя чтениями смысл — в явные поля карточки
+            # Подтвержденный двумя чтениями смысл — в явные поля карточки
             # (они сильнее разбора текста и видны PDF, ассистенту и правилам):
             # sum_basis, date_basis, stake_acquired. Поля ставятся ДО отпечатка,
             # иначе факт сам себя сделал бы stale.
@@ -721,8 +721,8 @@ def write_readings(paths, write=False, asked=('stake', 'price', 'date', 'nature'
         for row in discrepancies:
             print('  ', ' | '.join(str(x) for x in row))
         if write:
-            # Очередь расхождений живёт в git (контейнер рутины одноразовый):
-            # рутина качества берёт отсюда, что править через review.py с уже
+            # Очередь расхождений живет в git (контейнер рутины одноразовый):
+            # рутина качества берет отсюда, что править через review.py с уже
             # готовыми цитатами, а человек — что решать (год сделки).
             qpath = ROOT / 'pipeline' / 'facts_discrepancies.json'
             queue = json.load(open(qpath, encoding='utf-8')) if qpath.exists() else []

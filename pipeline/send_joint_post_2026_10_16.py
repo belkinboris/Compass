@@ -9,17 +9,17 @@
 `pipeline/fix_temporary_management_type_2026_10_16.py`). `send_drafts.py`
 второй раз проект поста этой карточки не покажет: под прежним одиночным
 проектом уже есть нажатие («Пост в канал», 07:10 UTC), и
-`send_drafts.answered_cards()` правильно не шлёт новую версию поверх
-неприменённого ответа. Здесь ответ относится к старому тексту, а новый текст
+`send_drafts.answered_cards()` правильно не шлет новую версию поверх
+непримененного ответа. Здесь ответ относится к старому тексту, а новый текст
 — новое решение владельца, поэтому сообщение уходит этим скриптом, теми же
 функциями (`post_message_text`, `post_keyboard`, `send_one`, тема
 «Подтверждение постов»).
 
 Порядок: pending.json с общим постом закоммичен и доехал до сайта — скрипт
-сам сверяет это с сайтом и без этого ничего не шлёт.
+сам сверяет это с сайтом и без этого ничего не шлет.
 
 Запуск:
-    python3 pipeline/send_joint_post_2026_10_16.py            # показать, что уйдёт
+    python3 pipeline/send_joint_post_2026_10_16.py            # показать, что уйдет
     python3 pipeline/send_joint_post_2026_10_16.py --write    # отправить в консоль
 """
 import json
@@ -38,7 +38,7 @@ PENDING = send_drafts.PENDING
 
 
 def site_has_joint_post(card):
-    """Сайт отдаёт pending.json, где у карточки тот же общий пост."""
+    """Сайт отдает pending.json, где у карточки тот же общий пост."""
     try:
         import httpx
         r = httpx.get('%s/static/data/pending.json' % send_drafts.SITE,
@@ -65,7 +65,7 @@ def main(write):
         print('\nЭтот текст уже показан в консоли — повторно не шлю.')
         return 0
     if not site_has_joint_post(card):
-        print('\nСайт ещё не отдаёт pending.json с общим постом — сначала push и деплой данных.')
+        print('\nСайт еще не отдает pending.json с общим постом — сначала push и деплой данных.')
         return 1
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     chats = send_drafts.send_targets()

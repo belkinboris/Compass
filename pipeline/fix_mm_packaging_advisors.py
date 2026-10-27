@@ -27,7 +27,7 @@ OLD_ADV = [
 NEW_ADV = [
     ['Продавец (Mayr-Melnhof Group)', 'CMS',
      'Вела сделку в целом («in der gesamten Transaktion in allen '
-     'rechtlichen Belangen beraten»); руководитель — партнёр Райнер '
+     'rechtlichen Belangen beraten»); руководитель — партнер Райнер '
      'Вахтер. Источник: cms.law/de/aut'],
     ['Продавец, по российскому праву', 'Seamless Legal',
      'Консультировала MM Packaging по вопросам российского права '

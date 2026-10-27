@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Mayr-Melnhof/MM Packaging/Granelle (`g57b3b93c`): «Шаг 0» дочитывания
-(вычитка карточки КАК ЕСТЬ до нового поиска) нашёл `law.struct` на
+(вычитка карточки КАК ЕСТЬ до нового поиска) нашел `law.struct` на
 НЕМЕЦКОМ языке — предложение перенесено из пресс-релиза австрийского
 офиса CMS дословно, без перевода: «CMS hat MM Packaging in der gesamten
 Transaktion in allen rechtlichen Belangen beraten.» На русскоязычном

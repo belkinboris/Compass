@@ -34,7 +34,7 @@ def env(tmp_path, monkeypatch):
     """Своя папка вместо репозитория и чистое состояние модуля.
 
     `_STATE` глобален (его читает /api/data/status), поэтому между тестами
-    его надо обнулять — иначе счётчики и запомненный ETag протекают из теста
+    его надо обнулять — иначе счетчики и запомненный ETag протекают из теста
     в тест, и «повторная закачка ничего не пишет» проходила бы по ложной
     причине.
     """
@@ -79,7 +79,7 @@ def test_broken_json_never_replaces_the_base(env, monkeypatch):
     """Обрыв закачки посреди файла не должен стереть базу.
 
     Половина JSON разбирается как «не JSON», и это единственный момент, когда
-    мы вообще узнаём об обрыве: длина ответа могла быть какой угодно.
+    мы вообще узнаем об обрыве: длина ответа могла быть какой угодно.
     """
     before = env["base_path"].read_bytes()
     monkeypatch.setattr(data_refresh, "_download",
@@ -107,7 +107,7 @@ def test_half_sized_base_is_rejected(env, monkeypatch):
 
 
 def test_base_without_companies_is_rejected(env, monkeypatch):
-    """Валидный JSON — ещё не наша база: у сайта на `companies` стоит каталог."""
+    """Валидный JSON — еще не наша база: у сайта на `companies` стоит каталог."""
     before = env["base_path"].read_bytes()
     monkeypatch.setattr(data_refresh, "_download",
                         _serve({"deals_promoted.json": (200, b'{"deals": [{"id": "g1"}]}')}))
@@ -116,7 +116,7 @@ def test_base_without_companies_is_rejected(env, monkeypatch):
 
 
 def test_good_base_is_written_atomically(env, monkeypatch):
-    """Замена идёт через временный файл: посетитель, качающий базу в этот
+    """Замена идет через временный файл: посетитель, качающий базу в этот
     момент, не должен получить половину."""
     fresh = _bytes(_base(140))
     monkeypatch.setattr(data_refresh, "_download",
@@ -124,7 +124,7 @@ def test_good_base_is_written_atomically(env, monkeypatch):
     real_replace, seen = os.replace, []
 
     def spy(src, dst):
-        # В момент подмены в НАЗНАЧЕНИИ обязана лежать ещё старая версия:
+        # В момент подмены в НАЗНАЧЕНИИ обязана лежать еще старая версия:
         # значит, писали не «поверх», а рядом.
         seen.append((src, dst, Path(dst).read_bytes()))
         return real_replace(src, dst)
@@ -142,7 +142,7 @@ def test_good_base_is_written_atomically(env, monkeypatch):
 
 
 def test_successful_change_drops_caches_and_rescans_subscriptions(env, monkeypatch):
-    """Файл заменён, а процесс отвечает по старому — главный подводный камень:
+    """Файл заменен, а процесс отвечает по старому — главный подводный камень:
     снаружи это выглядит как «данные не доехали», хотя они на диске."""
     monkeypatch.setattr(data_refresh, "_download",
                         _serve({"deals_promoted.json": (200, _bytes(_base(101)))}))
@@ -151,7 +151,7 @@ def test_successful_change_drops_caches_and_rescans_subscriptions(env, monkeypat
 
 
 def test_only_the_base_triggers_the_heavy_follow_up(env, monkeypatch):
-    """Очередь предпросмотра меняется чаще всех, а индекс ассистента от неё не
+    """Очередь предпросмотра меняется чаще всех, а индекс ассистента от нее не
     зависит: пересобирать его на каждую карточку модерации — секунда впустую."""
     monkeypatch.setattr(data_refresh, "_download", _serve({
         "deals_promoted.json": (304, b""),
@@ -179,7 +179,7 @@ def test_assistant_index_is_really_rebuilt(tmp_path, monkeypatch):
 
 
 def test_network_failure_keeps_the_file_and_lands_in_status(env, monkeypatch):
-    """Недоступный GitHub — не авария: сайт живёт на файле, приехавшем
+    """Недоступный GitHub — не авария: сайт живет на файле, приехавшем
     деплоем. Но молчать об этом нельзя, иначе «работает» и «молча не
     работает» неразличимы."""
     import httpx
@@ -193,7 +193,7 @@ def test_network_failure_keeps_the_file_and_lands_in_status(env, monkeypatch):
     assert status["last_error"] and "сеть закрыта" in status["last_error"]
     assert status["last_error_at"] and status["last_ok"] is None
     assert status["fails_in_row"] == 1
-    assert status["deals_on_disk"] == 100, "статус называет данные, на которых сайт живёт сейчас"
+    assert status["deals_on_disk"] == 100, "статус называет данные, на которых сайт живет сейчас"
 
 
 def test_not_modified_and_same_bytes_write_nothing(env, monkeypatch):
@@ -219,7 +219,7 @@ def test_not_modified_and_same_bytes_write_nothing(env, monkeypatch):
 
 def test_missing_optional_file_is_not_an_error(env, monkeypatch):
     """Выгрузки ЦБ и очередь предпросмотра в ветке могут отсутствовать вовсе —
-    это норма, а не сбой: иначе счётчик неудач всегда был бы ненулевым и
+    это норма, а не сбой: иначе счетчик неудач всегда был бы ненулевым и
     перестал бы что-либо значить."""
     monkeypatch.setattr(data_refresh, "_download",
                         _serve({"deals_promoted.json": (304, b"")}))  # остальные — 404
@@ -285,7 +285,7 @@ def test_code_version_is_read_honestly_or_left_empty(tmp_path, monkeypatch):
     monkeypatch.setattr(data_refresh, "BASE_DIR", str(tmp_path))
     assert data_refresh.code_version()["commit"] is None, "нет .git — значит null"
 
-    # Обычный деплой выглядит как отсоединённая голова: в HEAD сразу хеш.
+    # Обычный деплой выглядит как отсоединенная голова: в HEAD сразу хеш.
     (tmp_path / ".git").mkdir()
     (tmp_path / ".git" / "HEAD").write_text("0123456789abcdef0123456789abcdef01234567\n")
     assert data_refresh.code_version()["commit"] == "0123456789ab"
@@ -305,7 +305,7 @@ def test_status_separates_the_version_of_code_from_the_version_of_data(env, monk
     monkeypatch.setattr(data_refresh, "_download",
                         _serve({"deals_promoted.json": (200, _bytes(_base(120)))}))
     assert data_refresh.status()["data"]["pulled_at"] is None, \
-        "своих обновлений ещё не было — файл приехал деплоем"
+        "своих обновлений еще не было — файл приехал деплоем"
     data_refresh.refresh_once()
     body = data_refresh.status()
     assert body["data"]["deals"] == 120
@@ -326,10 +326,10 @@ def test_status_endpoint_is_closed_by_the_moderation_token(monkeypatch):
 
 
 # --------------------------------------------------------------------------
-# Кэш разобранной базы в памяти (base_data). Заведён 8 сентября 2026, когда
+# Кэш разобранной базы в памяти (base_data). Заведен 8 сентября 2026, когда
 # системные инженеры Timeweb показали строку OOM-killer: процесс сайта
 # доедал память сервера (`anon-rss:489624kB`, `global_oom`) и ядро его
-# убивало — сайт лежал, деплой падал. Ели её повторные разборы одного файла:
+# убивало — сайт лежал, деплой падал. Ели ее повторные разборы одного файла:
 # база (10 МБ) разбиралась заново на каждый запрос, ≈72 МБ за раз.
 # --------------------------------------------------------------------------
 

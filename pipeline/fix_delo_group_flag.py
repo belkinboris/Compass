@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Побочный, но обязательный шаг месячной очереди 29 августа 2026:
-`pipeline/fix_korsakov_port_login_delo_and_progress.py` завёл новый профиль
+`pipeline/fix_korsakov_port_login_delo_and_progress.py` завел новый профиль
 «ООО «Логин Дело»» с `holding.id = 'delo'` — а профиль «Группа компаний
-«Дело»» (`delo`) не нёс `group: true`. Тест
+«Дело»» (`delo`) не нес `group: true`. Тест
 `test_holding_target_is_always_flagged_as_group` (test_data.py) требует,
 чтобы ЛЮБОЙ профиль, на который ссылается чей-то `holding.id`, был помечен
 `group: true` — иначе на его карточке рисуется список «В группу входит: N»

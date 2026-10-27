@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Таблица «Мультипликаторы по отраслям» (19 октября 2026): расчёт по одной
+"""Таблица «Мультипликаторы по отраслям» (19 октября 2026): расчет по одной
 сделке, ячейки «отрасль × год», строка профиля «Операционная прибыль (оценка
 по ФНС)» и маршрут ассистента «какой мультипликатор в …».
 
@@ -13,7 +13,7 @@ import deal_multiples as dm
 
 
 def _report(**kw):
-    """Отчёт ФНС купленной компании за 2024 год, рубли."""
+    """Отчет ФНС купленной компании за 2024 год, рубли."""
     base = {'year': 2024, 'revenue_rub': 10e9, 'operating_profit_rub': 2e9, 'net_profit_rub': 1e9,
             'equity_rub': 5e9, 'borrowings_rub': 3e9, 'cash_rub': 1e9, 'assets_rub': 20e9, 'lines': {}}
     base.update(kw)
@@ -26,7 +26,7 @@ def test_sector_values_units_and_net_debt():
     assert v['ev_op']['value'] == 6.0 and v['ev_op']['status'] == 'ok'     # (10 + 2) / 2
     assert v['pe']['value'] == 10.0 and v['ps']['value'] == 1.0 and v['pbv']['value'] == 2.0
     assert all(x['denominator_year'] == 2024 and x['source'] == 'ФНС' for x in v.values())
-    # цена «с учётом долга» уже EV: долг к ней не прибавляется, а для P/E вычитается
+    # цена «с учетом долга» уже EV: долг к ней не прибавляется, а для P/E вычитается
     ev = dm.sector_values(12e9, 'ev', _report(), 2025)
     assert ev['ev_op']['value'] == 6.0 and ev['pe']['value'] == 10.0
 
@@ -48,7 +48,7 @@ def test_sector_values_need_the_last_full_year_before_the_deal():
 
 
 def test_operating_profit_is_computed_from_lines_when_2200_is_missing():
-    """Упрощённая форма: строки 2200 нет — выручка минус расходы."""
+    """Упрощенная форма: строки 2200 нет — выручка минус расходы."""
     lines = {'2110': 1e9, '2120': 7e8, '2220': 1e8}
     v = dm.sector_values(1e9, 'package', _report(operating_profit_rub=None, borrowings_rub=None,
                                                   cash_rub=None, lines=lines), 2025)
@@ -122,14 +122,14 @@ def test_sector_cells_need_three_deals_and_leave_outliers_out_of_the_median():
 
 
 def test_operating_profit_estimate_row_names_its_basis():
-    """Строка профиля: готовая 2200, без неё — выручка минус расходы."""
+    """Строка профиля: готовая 2200, без нее — выручка минус расходы."""
     base = {"revenue_rub": 1e10, "operating_profit_rub": 2e9, "full_lines": []}
     m = {x["key"]: x for x in cf.derive(base)["metrics"]}["operating_profit_estimate"]
     assert m["value_rub"] == 2e9 and m["primary"] and "не EBITDA" in m["how"]
     simplified = {"revenue_rub": 1e9, "full_lines": [{"title": "ОФР", "rows": [
         {"code": "2110", "value_rub": 1_000_000_000}, {"code": "2120", "value_rub": 800_000_000}]}]}
     m2 = {x["key"]: x for x in cf.derive(simplified)["metrics"]}["operating_profit_estimate"]
-    assert m2["value_rub"] == 2e8 and "из строк отчёта" in m2["how"]
+    assert m2["value_rub"] == 2e8 and "из строк отчета" in m2["how"]
     assert cf.operating_profit_estimate(None, {"2110": 1e9}) == (None, None)   # без расходов не считаем
 
 
@@ -154,7 +154,7 @@ def test_assistant_answers_a_typical_multiple_from_the_table(provider):
 
 
 def test_assistant_metric_words(monkeypatch):
-    monkeypatch.setattr(ar, "SECTOR_MULTIPLES_PROVIDER", None)   # main.py, если импортирован, ставит своё
+    monkeypatch.setattr(ar, "SECTOR_MULTIPLES_PROVIDER", None)   # main.py, если импортирован, ставит свое
     assert ar.sector_metric("средний P/E в ИТ") == "pe"
     assert ar.sector_metric("какой P/BV у банков") == "pbv"
     assert ar.sector_metric("мультипликатор к выручке в ритейле") == "ps"

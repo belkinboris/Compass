@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """У карточки `g010ece87` («Игорь Ким продал сербский Expobank A.D.
-Belgrade компании Adriatic Bank») `eco.rationale` заканчивался протёкшей
+Belgrade компании Adriatic Bank») `eco.rationale` заканчивался протекшей
 служебной пометкой роли «(Игорь Ким (продавец, бенефициарный владелец
 Экспобанка))» — тот же класс дефекта, что уже чинили
 `strip_leaked_role_tags_2022.py` (не попала под общий шаблон — доп.
@@ -34,7 +34,7 @@ def main(write=False):
         print('УЖЕ ПРИМЕНЕНО %s' % CARD_ID)
         return
     assert card['eco']['rationale'] == OLD_RATIONALE, '%s: значение уже другое' % CARD_ID
-    print('ПРАВИМ  %s eco.rationale: снята протёкшая пометка роли' % CARD_ID)
+    print('ПРАВИМ  %s eco.rationale: снята протекшая пометка роли' % CARD_ID)
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return

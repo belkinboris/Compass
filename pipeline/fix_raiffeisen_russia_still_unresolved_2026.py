@@ -22,7 +22,7 @@ https://www.themoscowtimes.com/2025/10/01/austrias-raiffeisen-bank-fails-again-t
 3) «the bank has accumulated around 7 billion euros in profits in
    Russia — funds that remain effectively trapped in the country».
 
-И (Investing.com, 31 июля 2026, отчёт RBI за I полугодие,
+И (Investing.com, 31 июля 2026, отчет RBI за I полугодие,
 https://www.investing.com/news/company-news/raiffeisen-h1-2026-slides-profit-up-25-russia-exit-accelerates-93CH-4828633):
 
 4) «maintaining the run-down as the base case with continued
@@ -62,10 +62,10 @@ NEW_ECO_CONTEXT = OLD_ECO_CONTEXT + (
     'западные санкции против RBI, а также желая сохранить банк как '
     'канал платежей за поставки топлива по «Турецкому потоку». У RBI '
     'в России заблокировано около 7 млрд € прибыли, накопленной с '
-    '2022 года. В отчёте за первое полугодие 2026 года RBI назвал три '
+    '2022 года. В отчете за первое полугодие 2026 года RBI назвал три '
     'направления: продолжение сворачивания бизнеса, извлечение '
     'стоимости через судебные иски (в том числе иск по Rasperia, '
-    'поданный 30 июля 2026 года) и возобновлённые усилия по продаже — '
+    'поданный 30 июля 2026 года) и возобновленные усилия по продаже — '
     'без названного покупателя и срока. Клиентские депозиты банка в '
     'России сократились с 29,5 млрд € до 10,9 млрд €, кредиты — с '
     '13,7 млрд € до 2,5 млрд € (с 2022 года).'
@@ -91,7 +91,7 @@ def main(write=False):
         assert src[1] not in urls, 'источник уже добавлен: %s' % src[1]
 
     print('c61052e8d: eco.context дополнен (сделка не состоялась, блок '
-          'октября 2025, заблокированная прибыль 7 млрд €, отчёт RBI '
+          'октября 2025, заблокированная прибыль 7 млрд €, отчет RBI '
           'за I полугодие 2026); добавлены источники The Moscow Times, '
           'Investing.com')
 

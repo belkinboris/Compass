@@ -1,5 +1,5 @@
 {
- "_readme": "Сверено человеком: имя из профиля и запись перечня — один и тот же человек. Совпадения одних имён недостаточно: в поле why записано, чем подтверждено. Добавлять только после чтения записи перечня; снимать, если человека из перечня исключили (pipeline/sanctions_match.py --check).",
+ "_readme": "Сверено человеком: имя из профиля и запись перечня — один и тот же человек. Совпадения одних имен недостаточно: в поле why записано, чем подтверждено. Добавлять только после чтения записи перечня; снимать, если человека из перечня исключили (pipeline/sanctions_match.py --check).",
  "g2ece001b": [
   {
    "list": "eu",
@@ -70,7 +70,7 @@
   {
    "list": "eu",
    "kind": "person",
-   "name": "Артём Юрьевич ЧАЙКА",
+   "name": "Артем Юрьевич ЧАЙКА",
    "since": "2023-06-23",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32023R1216",
    "why": "Запись ЕС по-русски слово в слово, в ней назван отец — Юрий Чайка, бывший генпрокурор. Ровно это сказано и в профиле."
@@ -78,7 +78,7 @@
   {
    "list": "uk",
    "kind": "person",
-   "name": "Артём Юрьевич ЧАЙКА",
+   "name": "Артем Юрьевич ЧАЙКА",
    "since": "2025-02-14",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
    "why": "Британский перечень, запись RUS2387, то же полное имя по-русски."
@@ -1423,7 +1423,7 @@
    "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=17018",
    "matched_by": "name",
-   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+   "why": "Сбербанк назван во всех трех списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
   },
   {
    "list": "eu",
@@ -1432,7 +1432,7 @@
    "since": "2022-07-21",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L:2022:193:FULL&from=EN",
    "matched_by": "name",
-   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+   "why": "Сбербанк назван во всех трех списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
   },
   {
    "list": "uk",
@@ -1441,7 +1441,7 @@
    "since": "2022-04-06",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
    "matched_by": "name",
-   "why": "Сбербанк назван во всех трёх списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
+   "why": "Сбербанк назван во всех трех списках; запись США приводит сайт sberbank.ru и код SABRRUMM."
   }
  ],
  "g2bda5372": [
@@ -1587,7 +1587,7 @@
    "since": "",
    "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=37505",
    "matched_by": "name",
-   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+   "why": "Nordgold назван во всех трех списках, в ЕС и Британии — по-русски «Нордголд»."
   },
   {
    "list": "eu",
@@ -1596,7 +1596,7 @@
    "since": "2026-07-23",
    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845",
    "matched_by": "name",
-   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+   "why": "Nordgold назван во всех трех списках, в ЕС и Британии — по-русски «Нордголд»."
   },
   {
    "list": "uk",
@@ -1605,7 +1605,7 @@
    "since": "2023-11-08",
    "url": "https://www.gov.uk/government/publications/financial-sanctions-consolidated-list-of-targets",
    "matched_by": "name",
-   "why": "Nordgold назван во всех трёх списках, в ЕС и Британии — по-русски «Нордголд»."
+   "why": "Nordgold назван во всех трех списках, в ЕС и Британии — по-русски «Нордголд»."
   }
  ],
  "g7ac0b3cc": [

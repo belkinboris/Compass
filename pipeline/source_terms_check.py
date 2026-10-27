@@ -10,7 +10,7 @@
 Что проверяется у каждого источника из `pipeline/ingest/sources.json`
 (кроме телеграм-каналов):
   1. robots.txt — запрет всем роботам («Disallow: /» для `*`), запрет
-     поимённо ИИ-ботам, или открыт. Это технический сигнал, но прочитанный
+     поименно ИИ-ботам, или открыт. Это технический сигнал, но прочитанный
      как текст: он тоже говорит о воле владельца сайта.
   2. Пользовательское соглашение, правила, страница о копирайте — страницы,
      на которые ведут ссылки с главной со словами «соглашение», «правила»,
@@ -23,12 +23,12 @@
      TAdviser, Lenta.ru, InvestFuture — при полностью открытом robots.txt.
 
 Итог сравнивается с прошлым (`pipeline/source_terms.json`): новые запреты и
-снятые запреты — в отчёт; `--write` обновляет память; `--console` шлёт отчёт
+снятые запреты — в отчет; `--write` обновляет память; `--console` шлет отчет
 в консоль (тема «Общая информация»). Молчание — когда ничего не изменилось.
 
 Найденные предложения — повод для человека прочитать страницу, а не
 приговор: скрипт не отличает «запрещаем парсинг» от «мы не собираем ваши
-данные автоматически» идеально, поэтому в отчёте всегда есть цитата и адрес.
+данные автоматически» идеально, поэтому в отчете всегда есть цитата и адрес.
 
     python3 pipeline/source_terms_check.py              # проверить и показать разницу
     python3 pipeline/source_terms_check.py --write      # и запомнить
@@ -46,8 +46,8 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCES = os.path.join(ROOT, 'pipeline', 'ingest', 'sources.json')
 STATE = os.path.join(ROOT, 'pipeline', 'source_terms.json')
-# Как часто проверять: рутина качества зовёт скрипт каждый день, а сам он
-# решает, прошёл ли месяц. `--force` проверяет сразу.
+# Как часто проверять: рутина качества зовет скрипт каждый день, а сам он
+# решает, прошел ли месяц. `--force` проверяет сразу.
 EVERY_DAYS = 28
 # Только латиница: заголовок HTTP с кириллицей httpx не отправляет вовсе.
 UA = 'KompasBot/0.1 (+https://projectcompass.ru; terms-of-use check)'
@@ -191,9 +191,9 @@ def robots_verdict(host):
         return 'блокирует запрос', ''
     groups = parse_groups(text)
     if not can_fetch(groups, '*'):
-        return 'запрещает всё', ''
+        return 'запрещает все', ''
     named = [b for b in AI_BOTS if not can_fetch(groups, b)]
-    return ('запрещает ИИ-ботам поимённо', ', '.join(named)) if named else ('разрешено', '')
+    return ('запрещает ИИ-ботам поименно', ', '.join(named)) if named else ('разрешено', '')
 
 
 # ---------- пользовательское соглашение ----------
@@ -264,11 +264,11 @@ def run(hosts, workers=12):
 
 
 def has_ban(res):
-    return res.get('robots') == 'запрещает всё' or bool(res.get('tos'))
+    return res.get('robots') == 'запрещает все' or bool(res.get('tos'))
 
 
 def diff_report(old, new, meta):
-    """Отчёт для человека: что появилось, что исчезло, что есть сейчас."""
+    """Отчет для человека: что появилось, что исчезло, что есть сейчас."""
     appeared, gone = [], []
     for host, res in new.items():
         was = old.get(host) or {}
@@ -288,7 +288,7 @@ def diff_report(old, new, meta):
         lines.append('НОВЫЕ запреты (с прошлой проверки): %s' % ', '.join(appeared))
         for h in appeared:
             r = new[h]
-            if r.get('robots') == 'запрещает всё':
+            if r.get('robots') == 'запрещает все':
                 lines.append('  • %s — robots.txt закрыт для всех роботов' % h)
             for f in r.get('tos', [])[:2]:
                 lines.append('  • %s — «%s» (%s)' % (h, f['text'][:220], f['url']))
@@ -299,7 +299,7 @@ def diff_report(old, new, meta):
         lines.append('Новых запретов нет, снятых нет.')
     if enabled_banned:
         lines.append('')
-        lines.append('Включённые источники с запретом (нужно решение): %s'
+        lines.append('Включенные источники с запретом (нужно решение): %s'
                      % ', '.join('%s (%d сделок)' % (h, meta[h]['deals_seen']) for h in enabled_banned))
     return '\n'.join(lines), appeared, gone
 
@@ -313,7 +313,7 @@ def send_to_console(text):
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
     chats = send_drafts.send_targets()
     if not token or not chats:
-        print('Консоль не настроена — отчёт только на экране.')
+        print('Консоль не настроена — отчет только на экране.')
         return False
     import httpx
     thread = console_topics.thread_id('info')

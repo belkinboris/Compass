@@ -2,8 +2,8 @@
 """`classify_row()` — чистая функция, разбирает строку `Data101FNewXML` на
 актив/пассив/исключено. Тесты ловят ровно тот класс регрессии, что уже был
 найден вживую 23 августа 2026: пропуск фильтра по `pln` (внебалансовые и
-производные счета молча попадают в сумму активов) и подсчёт `ITGAP`
-(контрольного итога) как настоящего счёта."""
+производные счета молча попадают в сумму активов) и подсчет `ITGAP`
+(контрольного итога) как настоящего счета."""
 from pipeline.cbr_account_types import (
     ASSET,
     CAPITAL_LIABILITY,
@@ -24,7 +24,7 @@ def test_passive_balance_account_is_capital_liability():
 
 
 def test_dotted_aggregate_code_uses_ap_same_as_plain_account():
-    """«45.0»/«32.2» и т. п. — укрупнённые агрегаты, а не отдельные счета
+    """«45.0»/«32.2» и т. п. — укрупненные агрегаты, а не отдельные счета
     первого порядка, но `ap` у них читается тем же способом."""
     kind, _ = classify_row("А", "45.0", "1")
     assert kind == ASSET
@@ -70,7 +70,7 @@ def test_transit_accounts_are_excluded_regardless_of_ap():
     for account in ["303", "706", "612", "616"]:
         for ap in ["1", "2"]:
             kind, _ = classify_row("А", account, ap)
-            assert kind == EXCLUDED, f"{account}/{ap} должен быть исключён"
+            assert kind == EXCLUDED, f"{account}/{ap} должен быть исключен"
 
 
 def test_unexpected_ap_value_is_unknown_not_silently_dropped():

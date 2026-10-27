@@ -37,7 +37,7 @@
 Brooklyn Nets/Barclays Center Джозефу Цаю и отдельная продажа ГДР TCS
 Group трастом Rigi Trust, не имеющим отношения к Прохорову) — простое
 переименование тут не работает, нужен НОВЫЙ профиль хотя бы для одной
-из двух сделок, а такого приёма в пайплайне ещё не было — решение
+из двух сделок, а такого приема в пайплайне еще не было — решение
 переносится в отдельный прогон.
 
 Запуск:
@@ -88,7 +88,7 @@ def main(write=False):
         assert c['name'] == old_name, 'имя %s уже другое: %r' % (cid, c['name'])
         full_text_refs = sorted(d['id'] for d in deals if cid in json.dumps(d, ensure_ascii=False))
         assert full_text_refs == sorted(deal_ids), (
-            'профиль %s встречается не только в учтённых сделках: %r' % (cid, full_text_refs))
+            'профиль %s встречается не только в учтенных сделках: %r' % (cid, full_text_refs))
         print('ПЕРЕИМЕНОВЫВАЕМ  %s: %r -> %r' % (cid, old_name, new_name))
         if write:
             c['name'] = new_name
@@ -112,7 +112,7 @@ def main(write=False):
 
     print('\nПереименовано: %d, описаний: %d' % (len(RENAMES), wrote))
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
 
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')

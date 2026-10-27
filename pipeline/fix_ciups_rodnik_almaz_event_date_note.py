@@ -48,7 +48,7 @@ def main(write=False):
     ev['date'] = NEW_DATE
     ev['note'] = NEW_NOTE
 
-    print(f'Дата этапа {OLD_DATE} -> {NEW_DATE}, текст этапа заменён на связное предложение.')
+    print(f'Дата этапа {OLD_DATE} -> {NEW_DATE}, текст этапа заменен на связное предложение.')
 
     if write:
         with open(PENDING_PATH, 'w', encoding='utf-8') as f:

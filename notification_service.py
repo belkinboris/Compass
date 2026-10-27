@@ -62,7 +62,7 @@ def tg_api(method: str, **payload) -> dict | None:
 
     Нужен модерации: ответить на нажатие кнопки (answerCallbackQuery) и
     дописать решение в само сообщение (editMessageText), чтобы владелец и
-    партнёр видели в группе, что уже решено и кем. Сбой не критичен ни для
+    партнер видели в группе, что уже решено и кем. Сбой не критичен ни для
     одного вызова — решение уже в таблице; поэтому None, а не исключение.
     """
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
@@ -203,7 +203,7 @@ def linked_preferences(db, chat_id) -> NotificationPreference | None:
 
 def stop_telegram(db, chat_id) -> bool:
     """Команда /stop в боте: уведомления в Telegram выключаются, привязка
-    остаётся — включить снова можно одним переключателем в кабинете."""
+    остается — включить снова можно одним переключателем в кабинете."""
     prefs = linked_preferences(db, chat_id)
     if not prefs:
         return False

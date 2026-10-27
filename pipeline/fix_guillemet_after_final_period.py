@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Откат второй собственной ошибки того же прогона типографики.
 
-`fix_typography_across_base.py` дописывал недостающую закрывающую ёлочку в
+`fix_typography_across_base.py` дописывал недостающую закрывающую елочку в
 КОНЕЦ поля. Для 22 полей это верно — там имя в кавычках и правда стояло
 последним. Но у 18 полей перекос возник где-то в середине абзаца, и
 дописанная в конец кавычка вставала ПОСЛЕ финальной точки:
@@ -61,12 +61,12 @@ def main(argv):
             before = was.get((group, key))
             if before is None or current == before:
                 continue
-            # отличие ровно в дописанных в конец ёлочках, и они после точки
+            # отличие ровно в дописанных в конец елочках, и они после точки
             if current.rstrip('»') == before.rstrip('»') and \
                     len(current) > len(before) and TRAILING.search(current):
                 todo.append((cid, group, key, current, before))
 
-    print('Полей, где закрывающая ёлочка встала после финальной точки: %d' % len(todo))
+    print('Полей, где закрывающая елочка встала после финальной точки: %d' % len(todo))
     for cid, group, key, cur, back in todo[:6]:
         name = group if key is None else '%s.%s' % (group, key)
         print('  %s %-16s %r -> %r' % (cid, name, cur[-38:], back[-38:]))

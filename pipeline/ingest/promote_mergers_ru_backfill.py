@@ -7,7 +7,7 @@
 поэтому НИ ОДНА новая карточка не проходит автоматически — только «на решение».
 Из 92 кандидатов текущего забора реальными сделками для базы (после разбора
 глазами и сверки с базой на дубли) оказалось около трети — остальное шум,
-опровержения или уже отражённые сюжеты. Это тот самый обзор человеком, который
+опровержения или уже отраженные сюжеты. Это тот самый обзор человеком, который
 запрашивает тормоз, — задокументирован здесь, а не сделан молча.
 
 ЧТО ПРОВЕРЕНО ПЕРЕД КАЖДОЙ ЗАПИСЬЮ.
@@ -23,7 +23,7 @@
   * Суммы сверены с текстом источника, а не взяты вслепую: у «ВТБ продал
     Holiday Inn» автоматический разбор взял 100 млрд ₽ — это цена всего фонда
     «Галс-Девелопмент», а не одной гостиницы (сама гостиница оценивается в
-    8–10 млрд ₽ по тексту источника); карточка на неё не создаётся отдельно —
+    8–10 млрд ₽ по тексту источника); карточка на нее не создается отдельно —
     это деталь периметра уже известной сделки ВТБ/Галс.
   * Родственные публикации по одному сюжету (например, ФАС по сделке
     «Коломенское»/«Пеко» 14 июля и закрытие 27 июля) сведены в ОДНУ карточку
@@ -65,7 +65,7 @@ NEW_CARDS = [
          src=[['mergers.ru', 'https://mergers.ru/news/Gruppa-Prodo-vykupila-biznes-Bashkirskogo-brojlera-u-gruppy-Star-Nafta-87275']]),
 
     dict(slug='prime-pervy-poliplastik', date='2026-07-27', status='Закрыта', type='M&A',
-         title='ЗПИФ «Прайм Первый» приобрёл 14% в группе «Полипластик»',
+         title='ЗПИФ «Прайм Первый» приобрел 14% в группе «Полипластик»',
          buyer_name='ЗПИФ «Прайм Первый» (УК «Диалог Инвестиции»)', asset='14% в группе «Полипластик»',
          ind='Химия и удобрения',
          src=[['mergers.ru', 'https://mergers.ru/news/Paevoj-investfond-priobrel-14-v-gruppe-Poliplastik-87271']]),
@@ -120,9 +120,9 @@ NEW_CARDS = [
               ['mergers.ru', 'https://mergers.ru/news/Putin-razreshil-NordLajn-kupit-u-TotalEnergies-10-v-Arktik-SPG-2-87029']]),
 
     dict(slug='mtsbank-kdpay', date='2026-07-22', status='Закрыта', type='M&A',
-         title='МТС Банк купил платёжный сервис KD Pay',
-         buyer_name='МТС Банк', seller='Олег Пономарёв и Леонид Дубов (основатели)',
-         asset='51% ООО «Ритейл-Процессинг» (владелец платёжного сервиса KD Pay)',
+         title='МТС Банк купил платежный сервис KD Pay',
+         buyer_name='МТС Банк', seller='Олег Пономарев и Леонид Дубов (основатели)',
+         asset='51% ООО «Ритейл-Процессинг» (владелец платежного сервиса KD Pay)',
          ind='Финтех',
          src=[['mergers.ru', 'https://mergers.ru/news/MTS-Bank-kupil-platezhnyj-servis-KD-Pay-87251']]),
 
@@ -146,14 +146,14 @@ NEW_CARDS = [
          src=[['mergers.ru', 'https://mergers.ru/news/Rosteh-konsolidiruet-aviatransportnye-aktivy-v-novom-holdinge-87239']]),
 
     dict(slug='vysochaishy-komi-oil', date='2026-07-17', status='Обсуждается', type='M&A',
-         title='Сооснователь «Высочайшего» продаёт нефтяной проект в Коми',
+         title='Сооснователь «Высочайшего» продает нефтяной проект в Коми',
          seller='сооснователь «Высочайшего»', asset='нефтяной проект в Коми', sum='$30 млн',
          ind='Нефть и газ',
          src=[['mergers.ru', 'https://mergers.ru/news/Soosnovatel-Vysochajshego-prodaet-neftyanoj-proekt-v-Komi-87229']]),
 
     dict(slug='sucden-poetti', date='2026-07-15', status='Обсуждается', type='M&A',
          title='Французская Sucden может получить контроль над бизнесом производителя кофе Poetti',
-         buyer_name='Sucden (через ООО «СДС»)', asset='партнёрство с «Милфудс» (бренд Poetti)',
+         buyer_name='Sucden (через ООО «СДС»)', asset='партнерство с «Милфудс» (бренд Poetti)',
          ind='Пищепром и напитки',
          src=[['mergers.ru', 'https://mergers.ru/news/Francuzskaya-Sucden-mogla-poluchit-kontrol-nad-biznesom-proizvoditelya-kofe-Poetti-87215']]),
 
@@ -164,13 +164,13 @@ NEW_CARDS = [
          src=[['mergers.ru', 'https://mergers.ru/news/Nordgold-mozhet-vlozhitsya-v-dobychu-zolota-na-Chukotke-87213']]),
 
     dict(slug='voshod-voronezh-rocket', date='2026-07-15', status='Закрыта', type='Инвестиция',
-         title='Фонд «Восход» инвестировал ещё 100 млн руб. в проект ракеты-носителя «Воронеж»',
-         buyer_name='Фонд «Восход»', asset='проект сверхлёгкой ракеты-носителя «Воронеж»', sum='100 млн ₽',
+         title='Фонд «Восход» инвестировал еще 100 млн руб. в проект ракеты-носителя «Воронеж»',
+         buyer_name='Фонд «Восход»', asset='проект сверхлегкой ракеты-носителя «Воронеж»', sum='100 млн ₽',
          ind='Машиностроение',
          src=[['mergers.ru', 'https://mergers.ru/news/Fond-Voshod-investiroval-eschjo-100-mln-rub-v-proekt-sverhlegkoj-rakety-nositelya-Voronezh-87211']]),
 
     dict(slug='mirgorodsky-nattys', date='2026-07-14', status='Закрыта', type='M&A',
-         title='Геннадий Миргородский приобрёл контроль в производителе Nattys',
+         title='Геннадий Миргородский приобрел контроль в производителе Nattys',
          buyer_name='Геннадий Миргородский', seller='Юлиана Николаева (сохранила 30%)',
          asset='70% ООО «Нуттис» (бренд Nattys — арахисовая паста и протеиновые батончики)',
          ind='Пищепром и напитки',
@@ -230,7 +230,7 @@ NEW_CARDS = [
 
     dict(slug='vtb-otkrytie-office-rwb', date='2026-06-30', status='Обсуждается', type='M&A',
          title='RWB покупает бывший офис банка «Открытие» у ВТБ',
-         buyer_name='объединённая компания Wildberries и Russ (RWB)', seller='ВТБ',
+         buyer_name='объединенная компания Wildberries и Russ (RWB)', seller='ВТБ',
          asset='бывший офис банка «Открытие»',
          ind='Недвижимость',
          src=[['mergers.ru', 'https://mergers.ru/news/VTB-k-koncu-iyunya-prodast-byvshij-ofis-banka-Otkrytie-87123']]),
@@ -303,7 +303,7 @@ ENRICH_HINTS = {
                  'с 2024 года) у Сергея Лебедева — сделка закрыта 29 мая 2026.',
     'g5eb6ff22': 'Росатом/Дело («русская рулетка»): три публикации mergers.ru (06.07 решение выкупить, '
                  '26.06 Шишкарев отказался от встречного выкупа, 31.07 Лихачев о досрочном закрытии до '
-                 'конца ноября) — этап сделки продвинулся, но новую карточку не создаём.',
+                 'конца ноября) — этап сделки продвинулся, но новую карточку не создаем.',
 }
 
 INDUSTRIES = {"Нефть и газ", "Уголь", "ГМК и добыча", "Энергетика", "Химия и удобрения", "Агро",

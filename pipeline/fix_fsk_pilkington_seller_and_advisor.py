@@ -54,7 +54,7 @@ NEW_ADV = [
     [
         'Финансовый консультант продавца (NSG Group)',
         'Advance Capital',
-        'Advance Capital на своём сайте называет себя эксклюзивным финансовым '
+        'Advance Capital на своем сайте называет себя эксклюзивным финансовым '
         'консультантом продавца в этой сделке. Источник: '
         'https://advancecapital.ru/news/news/press-releases/415/',
     ]

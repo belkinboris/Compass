@@ -3,7 +3,7 @@
 
 Первая миграция объединяет раннюю карточку о переговорах по покупке российского
 Ситибанка с закрытой сделкой ``citibank``. История этапов хранится в
-кураторской карточке, а старый id остаётся рабочим через ``merged``.
+кураторской карточке, а старый id остается рабочим через ``merged``.
 
 Запуск:
     python3 pipeline/merge_deal_histories.py          # сухой прогон
@@ -49,7 +49,7 @@ def migrate(payload: dict) -> tuple[dict, list[str]]:
     companies = payload.setdefault("companies", {})
     if LEGACY_COMPANY_ID in companies:
         del companies[LEGACY_COMPANY_ID]
-        changes.append(f"удалён технический профиль компании {LEGACY_COMPANY_ID}")
+        changes.append(f"удален технический профиль компании {LEGACY_COMPANY_ID}")
 
     match_keys = payload.setdefault("match_keys", {})
     if LEGACY_COMPANY_ID in match_keys:

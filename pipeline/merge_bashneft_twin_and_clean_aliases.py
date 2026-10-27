@@ -8,7 +8,7 @@
 единственную ссылающуюся сделку (gf6232eec, `target`) на профиль-выживший.
 
 Заодно чистит второй хвост того же прогона: `match_keys['g83d157e5']` («ООО
-„Центр фармацевтической упаковки"») нёс те же протёкшие фрагменты роли
+„Центр фармацевтической упаковки"») нес те же протекшие фрагменты роли
 («объект приобретения»), что чинили в имени профиля, — их тоже роняет
 `test_match_key_alias_is_a_name`.
 
@@ -43,7 +43,7 @@ def main(write=False):
     assert redirected == ['gf6232eec'], 'на дубль ссылается не одна сделка: %r' % redirected
 
     old_aliases = set(data['match_keys'].get(PACKAGING_ID, []))
-    assert old_aliases & BAD_ALIASES, 'протёкших псевдонимов уже нет'
+    assert old_aliases & BAD_ALIASES, 'протекших псевдонимов уже нет'
 
     print('СЛИВАЕМ  %s -> %s (Башнефть); перенаправляем target у gf6232eec' % (DUP_ID, SURVIVOR_ID))
     print('ЧИСТИМ   match_keys[%s]: убираем %r' % (PACKAGING_ID, sorted(old_aliases & BAD_ALIASES)))

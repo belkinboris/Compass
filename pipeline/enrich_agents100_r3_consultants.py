@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Консультанты из партии 5 агентов, раунд 3 (14 августа 2026).
 
-g6e1bb001/VERBA LEGAL из находок агента НЕ включён — уже записан в базе
-(тот же t.me/LawFirms/7966), агент нашёл его заново, не зная об этом.
+g6e1bb001/VERBA LEGAL из находок агента НЕ включен — уже записан в базе
+(тот же t.me/LawFirms/7966), агент нашел его заново, не зная об этом.
 
 Запуск: python3 pipeline/enrich_agents100_r3_consultants.py            # сухой
         python3 pipeline/enrich_agents100_r3_consultants.py --write    # запись

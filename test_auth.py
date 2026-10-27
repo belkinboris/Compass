@@ -40,14 +40,14 @@ def test_verify_password_rejects_malformed_hash():
 
 
 def test_register_creates_user_with_lowercase_email(session):
-    user, err = auth.register_user(session, "Юрист@Фирма.ру", "надёжный-пароль", "Юрист Юристов")
+    user, err = auth.register_user(session, "Юрист@Фирма.ру", "надежный-пароль", "Юрист Юристов")
     assert err is None and user is not None
     assert user.email == "юрист@фирма.ру"
     assert session.query(User).count() == 1
 
 
 def test_register_rejects_bad_email(session):
-    user, err = auth.register_user(session, "not-an-email", "надёжный-пароль", "Тест Тестов")
+    user, err = auth.register_user(session, "not-an-email", "надежный-пароль", "Тест Тестов")
     assert user is None and "почта" in err
 
 
@@ -65,27 +65,27 @@ def test_register_rejects_duplicate_email(session):
 def test_register_rejects_missing_full_name(session):
     """До 2 августа роль записывалась всем подряд как individual без выбора —
     теперь ФИО и тип аккаунта обязательны, а не тихая заглушка."""
-    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "")
+    user, err = auth.register_user(session, "a@b.ru", "надежный-пароль", "")
     assert user is None and "имя" in err
 
 
 def test_register_rejects_unknown_role(session):
-    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Тест Тестов", role="начальник")
+    user, err = auth.register_user(session, "a@b.ru", "надежный-пароль", "Тест Тестов", role="начальник")
     assert user is None and "тип аккаунта" in err
 
 
 def test_register_stores_full_name_company_position_and_role(session):
-    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Иван Иванов",
-                                    company="ООО Ромашка", position="Партнёр", role="firm")
+    user, err = auth.register_user(session, "a@b.ru", "надежный-пароль", "Иван Иванов",
+                                    company="ООО Ромашка", position="Партнер", role="firm")
     assert err is None
     assert user.full_name == "Иван Иванов"
     assert user.company == "ООО Ромашка"
-    assert user.position == "Партнёр"
+    assert user.position == "Партнер"
     assert user.role.value == "firm"
 
 
 def test_register_defaults_role_to_individual_and_allows_empty_company(session):
-    user, err = auth.register_user(session, "a@b.ru", "надёжный-пароль", "Иван Иванов")
+    user, err = auth.register_user(session, "a@b.ru", "надежный-пароль", "Иван Иванов")
     assert err is None
     assert user.role.value == "individual"
     assert user.company is None and user.position is None
@@ -165,12 +165,12 @@ def test_valid_password_passes():
 # ==================== Вход по заявке (ACCESS_GATE) ====================
 
 def test_register_user_can_be_created_as_a_pending_request(session):
-    """При включённом гейте регистрация — заявка: аккаунт есть, approved=False.
+    """При включенном гейте регистрация — заявка: аккаунт есть, approved=False.
     По умолчанию (и при выключенном гейте) аккаунт одобрен сразу — так же
-    ведут себя все аккаунты, заведённые до появления гейта."""
-    pending, err = auth.register_user(session, "заявка@firm.ru", "надёжный-пароль", "Иван Иванов", approved=False)
+    ведут себя все аккаунты, заведенные до появления гейта."""
+    pending, err = auth.register_user(session, "заявка@firm.ru", "надежный-пароль", "Иван Иванов", approved=False)
     assert err is None and pending.approved is False
-    plain, err = auth.register_user(session, "обычный@firm.ru", "надёжный-пароль", "Пётр Петров")
+    plain, err = auth.register_user(session, "обычный@firm.ru", "надежный-пароль", "Петр Петров")
     assert err is None and plain.approved is True
 
 
@@ -178,16 +178,16 @@ def test_pending_request_is_not_a_duplicate_and_password_still_checks(session):
     """Повторная заявка тем же адресом — тот же отказ «уже зарегистрирована»
     (дубля нет), а authenticate() по-прежнему отвечает за пароль, не за
     одобрение: решение «пускать или нет» принимает эндпоинт входа."""
-    auth.register_user(session, "заявка@firm.ru", "надёжный-пароль", "Иван Иванов", approved=False)
+    auth.register_user(session, "заявка@firm.ru", "надежный-пароль", "Иван Иванов", approved=False)
     again, err = auth.register_user(session, "заявка@firm.ru", "другой-пароль-1", "Иван Иванов", approved=False)
     assert again is None and "уже зарегистрирована" in err
     assert session.query(User).filter_by(email="заявка@firm.ru").count() == 1
-    user, err = auth.authenticate(session, "заявка@firm.ru", "надёжный-пароль")
+    user, err = auth.authenticate(session, "заявка@firm.ru", "надежный-пароль")
     assert err is None and user.approved is False
 
 
 # ============ СМЕНА ПАРОЛЯ И ПОЧТЫ (19 сентября 2026) ============
-# Артём: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
+# Артем: «Нужна возможность менять пароль». Ксюша: «И в идеале почту».
 # До этого дня на вкладке «Аккаунт» не было ни того, ни другого.
 
 def _user(session, email="kseniya@example.com", password="исходный-пароль-1"):
@@ -205,7 +205,7 @@ def test_password_changes_and_the_old_one_stops_working(session):
 
 
 def test_password_change_requires_the_current_one(session):
-    """Сессия живёт 30 дней. Без этой проверки чужой человек за
+    """Сессия живет 30 дней. Без этой проверки чужой человек за
     незаблокированным компьютером забрал бы аккаунт, не зная старого пароля."""
     user = _user(session)
     ok, err = auth.change_password(session, user, "не-тот-пароль", "новый-пароль-2")
@@ -266,7 +266,7 @@ def test_email_change_rejects_nonsense_and_the_same_address(session):
 
 
 def test_email_change_keeps_you_logged_in(session):
-    """Почта меняется, сессия остаётся: вход опознаётся по токену, а не по
+    """Почта меняется, сессия остается: вход опознается по токену, а не по
     адресу, и выкидывать человека из браузера не за что."""
     user = _user(session)
     token = auth.create_session(session, user)

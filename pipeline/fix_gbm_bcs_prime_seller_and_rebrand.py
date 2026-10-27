@@ -24,7 +24,7 @@ group» (доля в намерении конца 2023 года — 90,1%, к �
 3) `eco.context` (новое поле) — судьба актива: дивиденд перед сделкой и
 ребрендинг. AKM, дословно: «A few days before the takeover, BCS Prime
 Brokerage paid a special dividend of $27.5 million» (это дивиденд, не
-цена сделки — не идёт в `sum`); «BCS Prime Brokerage will operate under
+цена сделки — не идет в `sum`); «BCS Prime Brokerage will operate under
 the new GBM Securities brand, focused on emerging and frontier markets».
 Офисы (gbmsecurities.com): Лондон — «Headquarters and operational
 center», Токио — «Home to GBM Asset Management».

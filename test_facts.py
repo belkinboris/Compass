@@ -2,7 +2,7 @@
 """Слой фактов (facts.py) и подтверждение чтением (pipeline/facts_confirm.py).
 
 Что здесь проверяется — не «код делает заложенное», а границы механизма:
-правило только предлагает (basis rule), в расчёт идёт только verified,
+правило только предлагает (basis rule), в расчет идет только verified,
 изменение карточки делает прочитанный факт stale, два несогласных чтения
 дают disputed, а не «победил первый»; арифметика — отдельный уровень.
 """
@@ -75,13 +75,13 @@ def test_verified_fact_survives_derive_but_goes_stale_when_card_changes():
     d['facts'] = _verified(d)
     again = facts.derive(d, CTX)
     assert again['price']['basis'] == 'verified' and again['admitted']['multiple_text']
-    # сумма карточки изменилась (энрич принёс другую цену) — факт цены stale, допуск снят
+    # сумма карточки изменилась (энрич принес другую цену) — факт цены stale, допуск снят
     changed = dict(d, sum='2 000 млн ₽')
     f = facts.derive(changed, CTX)
     assert f['price']['basis'] == 'stale' and f['price']['stale_from'] == 'verified'
     assert not f['admitted']['multiple_text'] and f['reasons']['multiple_text'] == 'stale'
     assert not f['admitted']['top_purchases']
-    # доля не менялась — её факт остался verified
+    # доля не менялась — ее факт остался verified
     assert f['stake']['basis'] == 'verified'
 
 
@@ -90,7 +90,7 @@ def test_stale_fact_survives_a_second_derive_without_losing_its_data():
     слоя фактов может тихо превратиться обратно в rule»): первый derive()
     после правки поля помечает факт stale (данные целы), но ВТОРОЙ derive()
     без промежуточного повторного чтения раньше терял disputed/readings/
-    quote безвозвратно — карточка выглядела так, будто её никогда не читали.
+    quote безвозвратно — карточка выглядела так, будто ее никогда не читали.
     stale обязан остаться stale (и сохранить содержимое) сколько угодно
     подряд вызовов derive(), пока facts_confirm.py не перечитает явно."""
     d = _deal()
@@ -136,17 +136,17 @@ def test_number_checks_catch_units_currency_and_package_price():
     assert 'unit_mismatch' in facts.number_checks(d)
     d = _deal(sum='$150 млн')
     d['facts'] = facts.derive(d, CTX)
-    assert facts.number_checks(d) == [], "пересчёт по курсу ЦБ — не ошибка"
+    assert facts.number_checks(d) == [], "пересчет по курсу ЦБ — не ошибка"
     for k in ('currency', 'amount', 'fx_rate', 'fx_date', 'fx_method'):
         d['facts']['price'].pop(k, None)
     d['facts']['price']['value_rub'] = 1.5e10
-    assert 'foreign_currency' in facts.number_checks(d), "рубли вписаны без пересчёта"
+    assert 'foreign_currency' in facts.number_checks(d), "рубли вписаны без пересчета"
 
 
 # ---------- цена в валюте (26 сентября 2026) ----------
 
 def test_foreign_price_is_converted_at_the_cbr_rate_of_the_deal_date(monkeypatch):
-    """Твёрдая цена одной суммой в долларах или евро пересчитывается в рубли
+    """Твердая цена одной суммой в долларах или евро пересчитывается в рубли
     по курсу ЦБ на дату сделки; исходная сумма и курс остаются в факте."""
     import fx
     monkeypatch.setattr(fx, '_table', {'USD': {'2024-02-29': 90.0, '2024-03-01': 91.0},
@@ -165,7 +165,7 @@ def test_foreign_price_is_converted_at_the_cbr_rate_of_the_deal_date(monkeypatch
 
 def test_foreign_price_is_not_converted_when_it_is_not_one_firm_price(monkeypatch):
     """Оценка, диапазон, «до», две суммы в строке, другая валюта, год без
-    месяца, курс старше недели — рублей не появляется, смысл остаётся «сумма
+    месяца, курс старше недели — рублей не появляется, смысл остается «сумма
     в валюте»."""
     import fx
     monkeypatch.setattr(fx, '_table', {'USD': {'2024-03-01': 91.0}, 'EUR': {'2024-03-01': 99.0}})
@@ -234,7 +234,7 @@ def test_two_readers_agree_verified_disagree_disputed():
 
 
 def test_perimeter_both_refuted_is_not_disputed():
-    """21 октября 2026: оба читателя честно сказали «периметр не подтверждён»
+    """21 октября 2026: оба читателя честно сказали «периметр не подтвержден»
     (ok=false) про g18413e61 и четыре похожих карточки, но basis вышел
     `disputed` («два чтения разошлись»), хотя разногласия не было — просто
     один читатель не указал `report` (денежный знаменатель не нужен, когда
@@ -246,7 +246,7 @@ def test_perimeter_both_refuted_is_not_disputed():
          'quote_checked': True, 'source': 'https://example.com/a'}
     b = dict(a, reader='B', report={'inn': '7704821246', 'year': 2022})
     assert fc._basis_for([a, b])[0] == 'verified'
-    # ok=true с обеих сторон — знаменатель (отчёт) по-прежнему обязан совпасть
+    # ok=true с обеих сторон — знаменатель (отчет) по-прежнему обязан совпасть
     a2 = dict(a, ok=True, report={'inn': '111', 'year': 2024})
     b2 = dict(b, ok=True, report={'inn': '222', 'year': 2024})
     assert fc._basis_for([a2, b2])[0] == 'disputed'
@@ -260,7 +260,7 @@ def test_flat_normalizes_decomposed_unicode():
     (U+0306), а не одной буквой «й» (U+0439). Дословно совпадающая цитата
     читателя (обычная, НФЦ-буква) не находилась в тексте ни единым символом —
     `flat()` сравнивал посимвольно, не канонизируя форму. 5 источников из 312
-    в кэше несут этот же дефект (чаще «й», иногда «ё»)."""
+    в кэше несут этот же дефект (чаще «й», иногда «е»)."""
     decomposed = 'многопрофильный'.replace('й', 'й')
     assert decomposed != 'многопрофильный'  # разные байты, видимо одна буква
     assert fc.flat('многопрофильный госпиталь') == fc.flat(decomposed + ' госпиталь')
@@ -270,8 +270,8 @@ def test_flat_normalizes_decomposed_unicode():
 def test_third_review_rules():
     """Третий разбор рецензента (6 сентября 2026): спорная дата блокирует
     денежные показатели; подозрение на дубль — тоже; смена контроля должна быть
-    подтверждена сама по себе; периметр — привязан к конкретному отчёту; год
-    мультипликатора берётся из подтверждённой даты закрытия."""
+    подтверждена сама по себе; периметр — привязан к конкретному отчету; год
+    мультипликатора берется из подтвержденной даты закрытия."""
     import deal_multiples as dm
     d = _deal()
     v = _verified(d)
@@ -285,13 +285,13 @@ def test_third_review_rules():
     f = facts.derive(dict(d, facts=f), CTX)
     assert f['reasons']['multiple_text'] == 'control_change_not_verified'
     assert f['nature']['basis'] == 'rule'  # флаги природы остаются правилом
-    # периметр без отчёта
+    # периметр без отчета
     f = dict(v); f['target'] = dict(v['target']); f['target'].pop('perimeter_report')
     f = facts.derive(dict(d, facts=f), CTX)
     assert f['reasons']['multiple_text'] == 'perimeter_report_missing'
-    # год из подтверждённой даты закрытия
+    # год из подтвержденной даты закрытия
     f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='closing', value='2025-10-09')
-    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтверждённая дата закрытия')
+    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтвержденная дата закрытия')
     year, basis = dm.multiple_year(d)
     assert year == 2024 and basis.startswith('дата карточки') and 'предварительн' in basis
     # подписано в декабре, закрытие не прочитано — год предварительный по подписанию;
@@ -300,18 +300,18 @@ def test_third_review_rules():
     year, basis = dm.multiple_year(dict(d, facts=f))
     assert year == 2024 and 'подписания' in basis and 'предварительн' in basis
     f = dict(v); f['date'] = dict(v['date'], basis='verified', meaning='closing', value='2025-01-15')
-    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтверждённая дата закрытия')
-    # неполное основание чтения: без адреса «подтверждённым» не становится
+    assert dm.multiple_year(dict(d, facts=f)) == (2025, 'подтвержденная дата закрытия')
+    # неполное основание чтения: без адреса «подтвержденным» не становится
     import pipeline.facts_confirm as fc
     r1 = {'_key': 'nature', 'control_change': True, 'quote': 'купил', 'quote_checked': True, 'source': 'https://x/1'}
     assert fc._basis_for([r1, dict(r1, reader='B')])[0] == 'verified'
     assert fc._basis_for([r1, dict(r1, reader='B', source=None)])[0] == 'read'
     assert fc._basis_for([r1, dict(r1, reader='B', quote_checked=None)])[0] == 'read'
-    # ярлык стадии одной сделки — не спор: берётся сильнейший, разночтения видны
+    # ярлык стадии одной сделки — не спор: берется сильнейший, разночтения видны
     m = fc.merged_fields('price', [{'value_rub': 1e9, 'meaning': 'disclosed', 'event': 'announcement', 'scope': 'equity', 'terms': 'fixed'},
                                    {'value_rub': 1e9, 'meaning': 'disclosed', 'event': 'closing', 'scope': 'equity', 'terms': 'fixed'}])
     assert m['event'] == 'closing' and m['event_variants'] == ['announcement', 'closing'] and m['terms'] == 'fixed'
-    # но неразрешённый спор о событии — не допуск к деньгам
+    # но неразрешенный спор о событии — не допуск к деньгам
     f = dict(v); f['price'] = dict(v['price'], event='disputed')
     f = facts.derive(dict(d, facts=f), CTX)
     assert f['reasons']['purchase_sums'] == 'price_event_disputed'
@@ -319,7 +319,7 @@ def test_third_review_rules():
     f = dict(v); f['nature'] = dict(v['nature'], intragroup=True, control_change=False)
     f = facts.derive(dict(d, facts=f), CTX)
     assert f['reasons']['purchase_sums'] == 'intragroup'
-    # автор числа неизвестен или слаб — цена не идёт в деньги, даже подтверждённая
+    # автор числа неизвестен или слаб — цена не идет в деньги, даже подтвержденная
     for who in (None, 'unknown', 'adviser', 'media_sources', 'analyst'):
         f = dict(v); f['price'] = dict(v['price'], attribution=who)
         f = facts.derive(dict(d, facts=f), CTX)
@@ -340,7 +340,7 @@ def test_third_review_rules():
 def test_own_shares_are_not_a_purchase():
     """Buyback и выкуп у нерезидентов — сделка компании с собственными
     акциями: цена названа и прочитана («Магнит», 48,5 млрд ₽), а в покупки
-    и мультипликаторы не идёт. «С правом обратного выкупа» — условие залога,
+    и мультипликаторы не идет. «С правом обратного выкупа» — условие залога,
     а не выкуп."""
     for title in ('«Магнит» выкупил свои акции у иностранных инвесторов с дисконтом',
                   'Buyback ПАО «Полюс»: приобретение до 29,99% собственных обыкновенных акций',
@@ -381,9 +381,9 @@ def test_possible_duplicates_block_money_metrics():
 def test_two_readers_on_different_stages_keep_the_strongest_and_show_the_disagreement():
     """EVENT_STRENGTH: два чтения о цене назвали РАЗНЫЕ события одной сделки.
 
-    Ярлык стадии не «побеждает первый» и не становится disputed — берётся
+    Ярлык стадии не «побеждает первый» и не становится disputed — берется
     сильнейшее событие (закрытие сильнее объявления), а само разночтение
-    остаётся видимым в event_variants. Правило жило только в коде
+    остается видимым в event_variants. Правило жило только в коде
     (проверка 22 сентября 2026: код есть, теста нет).
     """
     out = fc.merged_fields('price', [
@@ -409,7 +409,7 @@ def test_two_readers_on_different_stages_keep_the_strongest_and_show_the_disagre
 def test_who_named_the_price_has_to_be_visible_in_a_quote_not_in_the_readers_confidence():
     """attribution_quote: «цену назвали стороны» — утверждение, а не впечатление.
 
-    Если в цитате с цифрой нет слов о том, кто её назвал, читатель обязан
+    Если в цитате с цифрой нет слов о том, кто ее назвал, читатель обязан
     приложить вторую цитату из того же текста. Правило жило только в коде
     (проверка 22 сентября 2026: код есть, теста нет).
     """
@@ -439,7 +439,7 @@ def test_who_named_the_price_has_to_be_visible_in_a_quote_not_in_the_readers_con
 
 def test_reason_labels_speak_plain_russian():
     """Подписи причин видит читатель витрины аналитики. 5 октября 2026 там
-    стояли «цена не подтверждена двумя чтениями» и «в деньги не идёт» —
+    стояли «цена не подтверждена двумя чтениями» и «в деньги не идет» —
     слова нашей кухни (правило «язык для людей» в CLAUDE.md)."""
     import facts
     jargon = re.compile(r"чтени|чтением|знаменател|числител|в деньги|сканер|честн", re.I)
@@ -450,7 +450,7 @@ def test_reason_labels_speak_plain_russian():
 def test_price_supported_handles_compound_billion_million():
     """23 октября 2026, НМЖК (g91606f1b): «20 млрд 964,5 млн рублей» — одна
     сумма, записанная через две величины, не две разные суммы. Одиночный
-    проход `_rub_amounts_in()` даёт 20 000 000 000 и 964 500 000 — ни одна
+    проход `_rub_amounts_in()` дает 20 000 000 000 и 964 500 000 — ни одна
     не совпадает с 20 964 500 000, и `price_supported()` честно читателя
     отказывает, хотя цитата дословно верна."""
     q = ('Стоимость сделки по покупке группой "Русагро" в 2023 году 50% НМЖК составила 20 млрд '
@@ -466,7 +466,7 @@ def test_attribution_cue_matches_message_noun_form():
     из сообщения головной компании ... которое обнаружили "Ведомости"» —
     «сообщения» (существительное) не совпадало ни с одной формой в
     ATTRIBUTION_CUE (там были только глагольные «сообщил»/«сообщает»/
-    «сообщи[лт]»), и подтверждённая двумя чтениями цена с attribution=filing
+    «сообщи[лт]»), и подтвержденная двумя чтениями цена с attribution=filing
     отказывала в --check без видимой причины."""
     assert fc.ATTRIBUTION_CUE.search(
         'Это следует из сообщения головной компании «Тетры» Don Agro International Limited '
@@ -493,6 +493,6 @@ def test_price_supported_reads_spelled_out_units():
 
 def test_attribution_cue_matches_gis_torgi():
     """25 октября 2026, «Челябинскоблгаз» (g5e7d168d): «указано в системе
-    "ГИС Торги"» — государственная система учёта торгов по смыслу
+    "ГИС Торги"» — государственная система учета торгов по смыслу
     равнозначна ЕГРЮЛ/реестру, но буквально не содержала слова «реестр»."""
     assert fc.ATTRIBUTION_CUE.search('продали за 167,5 миллиона рублей, указано в системе «ГИС Торги».')

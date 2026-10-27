@@ -8,7 +8,7 @@
 которого раньше не было: дубль — не всегда новый этап. Это может быть буквально
 то же самое, что уже в карточке, без единого нового факта, — тогда черновик
 просто не должен становиться карточкой, и владелец не должен об этом даже
-узнавать, кроме как из отчёта «обновили карточку X».
+узнавать, кроме как из отчета «обновили карточку X».
 
 ЧТО ЭТО. `promote.py`, найдя кандидата на дубль (`near_duplicate()`), больше
 не спрашивает владельца напрямую — он складывает пару (черновик + карточка-
@@ -20,8 +20,8 @@
 правок — `review.check()` переиспользуется, а не копируется), `--apply
 --write` применяет: обновляет существующую карточку (событие или поле),
 отпускает черновик как отдельную сделку, выбрасывает его как повтор без
-нового факта — или, только если читающий сам не смог решить, кладёт пару в
-обычный `hold`, откуда её увидит владелец, но уже с прочитанным
+нового факта — или, только если читающий сам не смог решить, кладет пару в
+обычный `hold`, откуда ее увидит владелец, но уже с прочитанным
 обоснованием, а не рутинным «это дубль?».
 
 ГРАНИЦА. Скрипт не судит о смысле — это делает читающий. Скрипт проверяет,
@@ -79,7 +79,7 @@ def save_resolved(resolved):
 
 
 def queue_items():
-    """Все элементы `data/inbox/duplicates/*.json`, ещё не разрешённые."""
+    """Все элементы `data/inbox/duplicates/*.json`, еще не разрешенные."""
     resolved = load_resolved()
     items = []
     if not os.path.isdir(DUP_DIR):
@@ -187,7 +187,7 @@ def validate(answers, items_by_key, texts, inds, companies, urls):
         key = ans.get('key')
         problems = []
         if not key or key not in items_by_key:
-            problems.append('key %r не найден в живой очереди (устарел или уже разрешён)' % key)
+            problems.append('key %r не найден в живой очереди (устарел или уже разрешен)' % key)
             out.append((None, ans, problems))
             continue
         if key in seen:
@@ -287,7 +287,7 @@ def cmd_apply(path, write):
     results = validate(answers, items, texts, inds, data['companies'], urls)
     bad = [r for r in results if r[2]]
     if bad:
-        print('Есть отклонённые ответы — не применяем НИЧЕГО: ответ надо починить целиком.')
+        print('Есть отклоненные ответы — не применяем НИЧЕГО: ответ надо починить целиком.')
         for item, ans, problems in bad:
             print('  ОТКАЗ  %s (%s): %s' % (ans.get('key'), ans.get('verdict'), '; '.join(problems)))
         return 1
@@ -299,7 +299,7 @@ def cmd_apply(path, write):
 
     resolved = load_resolved()
     enrich_fixes = []   # копятся для одного файла партии, потом один вызов review.py
-    updates = []         # человекочитаемые строки для отчёта прогона (FYI, не вопрос)
+    updates = []         # человекочитаемые строки для отчета прогона (FYI, не вопрос)
     for item, ans, _ in results:
         key, verdict, candidate_id = ans['key'], ans['verdict'], item['candidate_id']
         draft, title = item['draft'], item['draft'].get('title')
@@ -371,7 +371,7 @@ def cmd_apply(path, write):
 
     save_resolved(resolved)
     print('\nПрименено: %d.' % len(results))
-    print('\nОБНОВЛЕНИЯ (для отчёта прогона — FYI, не вопрос владельцу):')
+    print('\nОБНОВЛЕНИЯ (для отчета прогона — FYI, не вопрос владельцу):')
     for line in updates:
         print('  - %s' % line)
     return 0

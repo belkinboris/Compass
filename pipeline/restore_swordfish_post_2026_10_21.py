@@ -33,7 +33,7 @@ def main(write):
     data.setdefault('telegram_post_state', {})['gf6c084b9'] = send_telegram.post_snapshot(
         next(d for d in data['deals'] if d['id'] == 'gf6c084b9'))
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('пост 218 возвращён к тексту владельца')
+    print('пост 218 возвращен к тексту владельца')
 
 
 if __name__ == '__main__':

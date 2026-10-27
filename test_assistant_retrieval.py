@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Поиск по базе для ассистента (assistant_retrieval.py) — на настоящей базе.
 
-Зачем тесты на живых данных, а не на фикстуре: жалоба партнёра 31 августа
+Зачем тесты на живых данных, а не на фикстуре: жалоба партнера 31 августа
 2026 была именно о расхождении ответа с базой («у Orion сделок нет» при 15
-карточках). Числа здесь не зашиты — сравниваются с тем, что даёт сам индекс,
+карточках). Числа здесь не зашиты — сравниваются с тем, что дает сам индекс,
 поэтому рост базы тесты не ломает, а вот сломанный маршрут вопроса — ломает.
 
 Запуск: python3 -m pytest test_assistant_retrieval.py -q
@@ -42,7 +42,7 @@ def test_same_word_is_the_review_py_rule():
 
 
 def test_name_match_is_stricter_than_same_word():
-    # «Иванов» ложился на «Иван Пешков» и «Иванян и партнёры» — для имён
+    # «Иванов» ложился на «Иван Пешков» и «Иванян и партнеры» — для имен
     # нужна не падежная близость, а общее начало от пяти знаков.
     assert ar.same_word("иванов", "иван")
     assert not ar.name_match("иванов", "иван")
@@ -126,7 +126,7 @@ def test_largest_puts_named_prices_first_and_marks_estimates(idx):
 
 
 def test_unknown_advisor_is_reported_honestly(idx):
-    r = _ask("Какие сделки сопровождала фирма Иванов и партнёры?", idx)
+    r = _ask("Какие сделки сопровождала фирма Иванов и партнеры?", idx)
     assert r.intent == "advisor" and not r.docs
     assert "не назван" in r.answer
 
@@ -202,8 +202,8 @@ def test_suggestions_are_answerable(idx):
 
 
 def test_suggestions_do_not_name_a_consultant(idx):
-    """Партнёр, 3 сентября 2026: «удалить VERBA LEGAL из предложки в вопросах
-    ассистенту» — имя одной фирмы в подсказке для всех читается как её
+    """Партнер, 3 сентября 2026: «удалить VERBA LEGAL из предложки в вопросах
+    ассистенту» — имя одной фирмы в подсказке для всех читается как ее
     реклама. Подсказки строятся из данных, поэтому запрет — на любое имя из
     каталога, а не на одну фирму."""
     names = [f.name.lower() for f in idx.firms if len(f.name) >= 3]
@@ -213,8 +213,8 @@ def test_suggestions_do_not_name_a_consultant(idx):
 
 
 def test_firm_is_recognised_in_any_case_and_without_deals_the_answer_is_honest(idx):
-    """Владелец 31 августа 2026: «Не нашёл Никольскую (Никольская консалтинг).
-    Будто бы права на ошибку не даёт» — регулярка каталога знает только
+    """Владелец 31 августа 2026: «Не нашел Никольскую (Никольская консалтинг).
+    Будто бы права на ошибку не дает» — регулярка каталога знает только
     именительный падеж, и вопрос уезжал к компании «Никольское»."""
     it = ar.route("Никольскую", idx)
     assert it.kind == "advisor" and it.firm and it.firm.name == "Никольская Консалтинг"
@@ -231,7 +231,7 @@ def test_firm_is_recognised_in_any_case_and_without_deals_the_answer_is_honest(i
 
 def test_firm_name_words_are_not_read_as_an_industry(idx):
     """«Какие сделки сопровождала Никольская консалтинг?» — фирма узнавалась,
-    но «консалтинг» читался ещё и как отрасль, и её две сделки отсеивались
+    но «консалтинг» читался еще и как отрасль, и ее две сделки отсеивались
     до нуля. Ответ обязан совпадать с каталогом консультантов на сайте."""
     n = len(idx.firm_deals.get("nikolskaya") or [])
     for q in ("Какие сделки сопровождала Никольская консалтинг?", "Никольскую", "сделки Никольской Консалтинг"):
@@ -244,7 +244,7 @@ def test_firm_name_words_are_not_read_as_an_industry(idx):
 
 
 # ---------- быстрый ответ со страницы сущности (2 сентября 2026) ----------
-# Партнёр на странице «Яндекса»: «Почему яндекс так много покупает?» — ждал
+# Партнер на странице «Яндекса»: «Почему яндекс так много покупает?» — ждал
 # 40 секунд. Быстрый ответ обязан быть у сервера сразу, и обязан быть про
 # ту компанию, чью страницу открыли, — а не про «Почта Банк», на который
 # ложилось слово «почему».
@@ -283,7 +283,7 @@ def test_entity_page_answers_about_itself_when_the_question_names_nothing(idx):
     assert r.intent == "deal" and "#/deal/citibank" in r.answer and len(r.docs) == 1
     r = _ask("что известно?", idx, context_type="industry", context_id="Банки")
     assert r.intent == "industry" and "Банки" in r.answer
-    # Конкретный вопрос со страницы — по-прежнему про то, о чём спросили.
+    # Конкретный вопрос со страницы — по-прежнему про то, о чем спросили.
     r = _ask("Кто купил Ситибанк?", idx, context_type="company", context_id="yandex")
     assert r.docs[0].id == "citibank"
 
@@ -308,7 +308,7 @@ def test_company_written_in_latin_is_found_typed_in_cyrillic(idx):
 def test_deal_line_carries_the_primary_source_link():
     """Аудит перед бетой (5 сентября 2026): ответ «по базе» про Boxberry
     ссылался только на карточку «Компаса», хотя экран обещает первоисточник.
-    Строка сделки в точном ответе несёт и карточку, и внешний источник."""
+    Строка сделки в точном ответе несет и карточку, и внешний источник."""
     idx = ar.get_index()
     doc = idx.by_id.get("g46c6e23f")
     assert doc is not None
@@ -318,11 +318,11 @@ def test_deal_line_carries_the_primary_source_link():
 
 
 def test_specific_search_answers_with_the_deal_stages_and_source():
-    """Аудит, раунд 2: «Когда Яндекс приобрёл Boxberry?» — на карточке два
+    """Аудит, раунд 2: «Когда Яндекс приобрел Boxberry?» — на карточке два
     этапа (объявлено 16 апреля 2025, закрыта 24 апреля 2025), а ассистент
     отвечал «дата анонса не указана». Точный ответ обязан назвать этапы и
     первоисточник."""
-    ret = ar.retrieve("Когда Яндекс приобрёл Boxberry?")
+    ret = ar.retrieve("Когда Яндекс приобрел Boxberry?")
     assert ret.docs and ret.docs[0].id == "g46c6e23f", [d.id for d in ret.docs[:3]]
     assert "16 апреля 2025" in ret.answer and "24 апреля 2025" in ret.answer, ret.answer
     assert "interfax.ru" in ret.answer
@@ -330,13 +330,13 @@ def test_specific_search_answers_with_the_deal_stages_and_source():
 
 def test_follow_up_without_an_entity_reuses_the_previous_question():
     """Аудит, раунд 2: на «перепроверь» ассистент отвечал «в Компасе нет
-    сделки Яндекс — Boxberry» — поиск шёл только по текущей фразе."""
+    сделки Яндекс — Boxberry» — поиск шел только по текущей фразе."""
     alone = ar.retrieve("Перепроверь, пожалуйста")
     assert not alone.docs
-    ret = ar.retrieve("Перепроверь, пожалуйста", previous="Когда Яндекс приобрёл Boxberry?")
+    ret = ar.retrieve("Перепроверь, пожалуйста", previous="Когда Яндекс приобрел Boxberry?")
     assert ret.docs and ret.docs[0].id == "g46c6e23f", [d.id for d in ret.docs[:3]]
     assert "16 апреля 2025" in ret.answer
-    ret2 = ar.retrieve("А дата объявления?", previous="Когда Яндекс приобрёл Boxberry?")
+    ret2 = ar.retrieve("А дата объявления?", previous="Когда Яндекс приобрел Boxberry?")
     assert ret2.docs and ret2.docs[0].id == "g46c6e23f"
 
 
@@ -379,7 +379,7 @@ def test_compare_does_not_grade_the_companies(idx):
     """Сравнение показывает числа; «кто лучше» мы не оцениваем — то же
     правило, что на экране сравнения и в границах разговора."""
     answer = (ar.retrieve("Сравни Сбербанк и ВТБ по сделкам", idx=idx).answer or "").lower()
-    for word in ("лучше", "хуже", "надёжнее", "выгоднее", "рекомендуем"):
+    for word in ("лучше", "хуже", "надежнее", "выгоднее", "рекомендуем"):
         assert word not in answer, word
 
 
@@ -397,9 +397,9 @@ def test_a_bank_that_also_advises_is_still_asked_about_as_a_company(idx):
     Газпромбанк, Альфа-Банк действительно организуют размещения и
     консультируют сделки. После этого маршрутизатор стал читать любое
     упоминание банка как вопрос про консультанта — и на «Сбербанк купил в
-    2025 году» отвечал списком сопровождённых сделок вместо покупок.
+    2025 году» отвечал списком сопровожденных сделок вместо покупок.
 
-    Решает счёт, а не список исключений: у Сбербанка 5 сделок как у
+    Решает счет, а не список исключений: у Сбербанка 5 сделок как у
     консультанта и заметно больше как у стороны. Если имя чаще называет
     сторону — это вопрос про компанию. Когда про сопровождение спросили
     прямо, маршрут снова консультантский.
@@ -410,7 +410,7 @@ def test_a_bank_that_also_advises_is_still_asked_about_as_a_company(idx):
     assert _ask("какие сделки сопровождал Сбербанк", idx).intent == "advisor"
 
     # Фирма, которая только консультирует и стороной сделок не бывает,
-    # узнаётся консультантом без всяких оговорок.
+    # узнается консультантом без всяких оговорок.
     assert _ask("сделки VERBA LEGAL", idx).intent == "advisor"
 
 
@@ -418,10 +418,10 @@ def test_meeting_prep_from_a_company_page_is_about_that_company(idx):
     """5 октября 2026: подготовка к встрече со Сбербанком ушла в маршрут
     «консультант» — в заготовке было слово «консультантами», и модель
     получила сделки, где банк советовал, а не покупал и продавал. Вопрос
-    со страницы компании о встрече или собеседовании — всегда про неё,
+    со страницы компании о встрече или собеседовании — всегда про нее,
     какими бы словами человек ни рассказал о себе («я юрист»)."""
     old = ("Готовлюсь к встрече с компанией «Сбербанк». Коротко, по пунктам: чем занимается "
-           "и кому принадлежит; её сделки — списком; с какими консультантами работала.")
+           "и кому принадлежит; ее сделки — списком; с какими консультантами работала.")
     assert _ask(old, idx).intent == "advisor"  # так было без страницы — и так ломалось
     for q in (old, "Готовлюсь к встрече с компанией «Сбербанк». Обо мне и о встрече: «Я юрист, "
                    "консультирую сделки, хочу получить заказ на сопровождение»."):
@@ -435,18 +435,18 @@ def test_meeting_prep_from_a_company_page_is_about_that_company(idx):
 
 
 def test_a_tight_advisor_pattern_keeps_the_deal_count_honest(idx):
-    """Регулярка каталога служит счёту сделок, а не разбору вопроса.
+    """Регулярка каталога служит счету сделок, а не разбору вопроса.
 
     У ВТБ в базе есть строка «Riccardo Orcel (…бывший зам. CEO ВТБ)» — это
     биография человека, а не роль банка в сделке. Широкое «ВТБ» засчитало бы
-    её консультантом, поэтому в каталоге стоит узкое выражение, которое
+    ее консультантом, поэтому в каталоге стоит узкое выражение, которое
     ловит только реальные формы роли («ВТБ Капитал», «ВТБ — организатор»).
 
     Цена решения названа вслух: вопрос «кого консультировал ВТБ» уходит в
-    маршрут компании, а не консультанта. Это осознанный размен — верный счёт
-    на витрине важнее одного маршрута вопроса, и ответ про сделки ВТБ всё
+    маршрут компании, а не консультанта. Это осознанный размен — верный счет
+    на витрине важнее одного маршрута вопроса, и ответ про сделки ВТБ все
     равно по делу. Тест держит именно размен, чтобы следующий заход не
-    «починил» регулярку, сломав счёт.
+    «починил» регулярку, сломав счет.
     """
     import assistant_retrieval as ar
     vtb = next((f for f in idx.firms if f.id == "vtbcap"), None)
@@ -467,10 +467,10 @@ def test_a_year_question_from_a_deal_page_lists_the_parties_deals(idx):
     assert r.intent == "deal" and r.answer
     assert "за 2026 год" in r.answer and "#/companies/rencap" in r.answer
     assert "Русское молоко" not in r.answer
-    # без года — те же стороны за всё время
+    # без года — те же стороны за все время
     r2 = _ask("Какие сделки вели?", idx, context_type="deal", context_id="citibank")
     assert r2.answer and "Сделки сторон этой сделки" in r2.answer
-    # конкретный вопрос со страницы остаётся ответом на него
+    # конкретный вопрос со страницы остается ответом на него
     r3 = _ask("Кто купил Ситибанк?", idx, context_type="deal", context_id="citibank")
     assert "Ситибанк" in r3.answer and "Сделки сторон" not in r3.answer
 
@@ -481,8 +481,8 @@ def test_question_verbs_do_not_match_names():
 
 
 # ============ ПРОВЕРКА НА 100 ВОПРОСАХ (14 октября 2026) ============
-# Отчёт о прогоне: ассистент чаще ошибался не из-за модели, а из-за поиска
-# перед ней. Тесты ниже держат каждую доработку поиска из того отчёта;
+# Отчет о прогоне: ассистент чаще ошибался не из-за модели, а из-за поиска
+# перед ней. Тесты ниже держат каждую доработку поиска из того отчета;
 # номера — вопросы прогона.
 
 def _company_of(q, idx):
@@ -526,7 +526,7 @@ def test_ordinary_words_are_not_company_names(idx):
 
 
 def test_a_plain_word_name_needs_a_mark_of_a_name(idx):
-    """Имя из одного обычного слова узнаётся по кавычкам или заглавной."""
+    """Имя из одного обычного слова узнается по кавычкам или заглавной."""
     assert _company_of("Какие сделки совершил венчурный фонд «Восход»?", idx) == "Венчурный фонд «Восход»"
     r = ar.retrieve("Какие сделки совершил венчурный фонд «Восход»?", idx=idx)
     assert len(r.docs) == len(idx.company_deals["g427bcb12"]), "слово «венчурный» из имени фонда не тема"
@@ -579,7 +579,7 @@ def test_price_questions_are_not_deal_counts(idx):
     r = ar.retrieve("Во сколько Б1 оценила бизнес Russ?", idx=idx)
     assert r.intent != "count" and r.docs[0].id == "cc0e7565f", [d.title for d in r.docs[:2]]
     assert ar.route("Сколько может стоить пищевое производство с выручкой 500 млн рублей?", idx).kind == "avg"
-    # «сколько сделок» по-прежнему счёт, в том числе с вопросом о суммах (№15)
+    # «сколько сделок» по-прежнему счет, в том числе с вопросом о суммах (№15)
     assert ar.route("Сколько сделок было в 2024 году?", idx).kind == "count"
     it = ar.route("Сколько сделок было в фармацевтике с 2022 года и на какие суммы?", idx)
     assert it.kind == "count" and it.wants_price
@@ -616,7 +616,7 @@ def _site_listing(d):
 
 
 def test_rankings_are_counted_on_the_server_like_the_site(idx):
-    """Рейтинги по всей базе (№16, 17, 58, 74, 75, 81): счёт сервера, а не
+    """Рейтинги по всей базе (№16, 17, 58, 74, 75, 81): счет сервера, а не
     модели, — тем же правилом, что «Консультанты» и «Аналитика»: лоты торгов
     не сделки, юрфирмы — вкладка юрфирм каталога."""
     from collections import Counter
@@ -698,7 +698,7 @@ def test_every_condition_of_the_question_is_applied(idx):
     r = ar.retrieve("Какие сделки по уходу иностранных компаний прошли через правкомиссию в 2023 году?", idx=idx)
     assert r.pool and all(d.year == 2023 and "Уход иностранного владельца" in d.themes
                           and "Правкомиссия / указ президента" in d.themes for d in r.pool)
-    r = ar.retrieve("Какие сделки в нефтегазе обсуждаются, но ещё не закрыты?", idx=idx)
+    r = ar.retrieve("Какие сделки в нефтегазе обсуждаются, но еще не закрыты?", idx=idx)
     want = [d for d in idx.docs if "Нефть и газ" in d.industries and d.status and d.status not in ("Закрыта", "Не состоялась")]
     assert len(r.pool) == len(want) and f" {len(want)} " in r.answer
     r = ar.retrieve("Какие сделки не состоялись в 2025 году и почему?", idx=idx)
@@ -843,7 +843,7 @@ def test_colloquial_company_names(idx):
     r = ar.retrieve("Какие сделки были у Сбера?", idx=idx)
     assert r.intent == "company" and r.subject == "Сбербанк"
     n = len(idx.company_deals["g28ff15bb"])
-    assert f" {n} " in r.answer and f"…и ещё {n - ar.MAX_LISTED}" in r.answer
+    assert f" {n} " in r.answer and f"…и еще {n - ar.MAX_LISTED}" in r.answer
     for q in ("Сделки Вайлдберриз", "Что купил WB?", "Сделки RWB в 2025 году", "Какие сделки у РВБ?",
               "Сравни Ozon и Wildberries"):
         it = ar.route(q, idx)
@@ -867,7 +867,7 @@ def test_reverse_buyback_option_finds_the_foreign_exits(idx):
 
 
 def test_advisors_for_a_kind_of_sale_are_counted_not_one_random_deal(idx):
-    """№65: «консультанты по продаже среднего бизнеса» — счёт консультантов
+    """№65: «консультанты по продаже среднего бизнеса» — счет консультантов
     продавца, а не одна сделка BGP Capital по слову «среднего»."""
     r = ar.retrieve("Какие консультанты сопровождают продажу среднего бизнеса?", idx=idx)
     assert r.intent == "rank" and "BGP" not in r.answer
@@ -876,10 +876,10 @@ def test_advisors_for_a_kind_of_sale_are_counted_not_one_random_deal(idx):
 
 
 def test_ipo_sums_are_offering_sizes_not_prices_of_other_deals(idx):
-    """№18: суммы IPO — объём размещения у самих размещений; покупка ЦОДа
-    Ростелекомом (g11d6e0bc) темы IPO больше не несёт."""
+    """№18: суммы IPO — объем размещения у самих размещений; покупка ЦОДа
+    Ростелекомом (g11d6e0bc) темы IPO больше не несет."""
     r = ar.retrieve("Какие IPO прошли в 2024–2025 годах и на какие суммы?", idx=idx)
-    assert r.intent == "theme" and "объём размещения" in r.answer
+    assert r.intent == "theme" and "объем размещения" in r.answer
     assert "g11d6e0bc" not in r.answer and "g11d6e0bc" not in {d.id for d in r.pool}
     assert ar._is_offering(r.docs[0])
     for did in ("g11d6e0bc", "gdf93c62d", "g676504a3", "gdde6bef5"):
@@ -909,8 +909,8 @@ def test_median_is_not_the_media_industry(idx):
 
 
 def test_general_page_is_the_same_as_no_page(idx):
-    """№91: сайт всегда шлёт context_type="general"; одно слово «сделки» —
-    свежие сделки за месяц, а не «ничего не нашёл»."""
+    """№91: сайт всегда шлет context_type="general"; одно слово «сделки» —
+    свежие сделки за месяц, а не «ничего не нашел»."""
     for ct in (None, "", "general"):
         r = ar.retrieve("сделки", ct, None, idx)
         assert r.intent == "recent" and r.docs, ct
@@ -927,7 +927,7 @@ def test_recent_news_go_to_whats_new_in_both_modes(idx):
         r = ar.retrieve(q, "general", None, idx)
         assert r.intent == "recent", q
         assert len(r.pool) == len(week), q
-    # Названная компания сужает свежие сделки до её сделок.
+    # Названная компания сужает свежие сделки до ее сделок.
     it = ar.route("Что нового у «Яндекса» за последний месяц?", idx)
     assert it.kind == "recent" and it.company_id == "yandex"
     # «Новости» с именем компании остаются вопросом о компании.
@@ -938,13 +938,13 @@ def test_page_company_answers_a_question_that_points_at_it(idx):
     """№95: со страницы «Яндекса» «какие сделки компании закрыты, а какие
     обсуждаются, где известна сумма» — сделки Яндекса с разбивкой по этапам и
     суммами, а не Qiwi, «Открытие» и KFC."""
-    q = "Какие сделки компании закрыты, а какие ещё обсуждаются? Где известна сумма?"
+    q = "Какие сделки компании закрыты, а какие еще обсуждаются? Где известна сумма?"
     r = ar.retrieve(q, "company", "yandex", idx)
     own = {d.id for d in idx.company_deals["yandex"]}
     assert r.intent == "company" and r.docs and all(d.id in own for d in r.docs)
     assert "По этапам:" in r.answer and "Суммы:" in r.answer
     assert ar._detect_status(q) is None                      # оба этапа — без фильтра
-    assert ar._detect_status("Какие сделки ещё не закрыты?") == "open"
+    assert ar._detect_status("Какие сделки еще не закрыты?") == "open"
     assert ar._detect_status("Какие сделки закрылись в 2024 году?") == "closed"
     # Конкретное имя со страницы другой компании — по-прежнему ответ на вопрос.
     r2 = ar.retrieve("Кто купил Ситибанк?", "company", "yandex", idx)
@@ -1010,7 +1010,7 @@ def test_compare_gives_the_ratio_and_all_of_few_deals(idx):
 
 
 def test_revenue_question_points_to_the_company_page(idx):
-    """№77: «какая выручка у ВкусВилла» — ассистент отчётность не видит и
+    """№77: «какая выручка у ВкусВилла» — ассистент отчетность не видит и
     говорит, где она, а не только «нет сделок за 2025 год»."""
     r = ar.retrieve("Какая выручка у «ВкусВилла» за 2025 год?", "general", None, idx)
     assert r.intent == "company" and "Выручку и прибыль" in r.answer

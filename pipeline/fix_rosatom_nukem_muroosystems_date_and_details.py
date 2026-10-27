@@ -6,7 +6,7 @@ Muroosystems) — дата-заглушка «1 июля» вместо реал
 
 ДАТА. Карточка несла «2024-07-01» — источник (Коммерсантъ, 17.07.2024)
 на момент публикации сам говорит, что «закрытие сделки ожидается к
-середине августа», то есть ещё НЕ закрыта. Реальная дата закрытия —
+середине августа», то есть еще НЕ закрыта. Реальная дата закрытия —
 World Nuclear News, дословно: «The effective date of the economic
 transfer of the company to the new owner is 25 September 2024» —
 подтверждено JAIF: «Following the necessary approval procedures, it

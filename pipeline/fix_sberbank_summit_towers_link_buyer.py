@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Сбербанк/Summit Towers (`g0ff8c5c4`, ещё в очереди предпросмотра):
+"""Сбербанк/Summit Towers (`g0ff8c5c4`, еще в очереди предпросмотра):
 подсказка review.py — `buyer_name` записан текстом «Сбербанк», хотя
 профиль (`g28ff15bb`) уже есть в базе. Связывает `buyer` с профилем и
 СНИМАЕТ `buyer_name` — иначе получится ровно тот дефект, что уже поймал
 `test_buyer_is_named_once` на карточке Аэрофлот/Аэромар в этот же день
 (имя покупателя показывалось бы дважды: текстом и через профиль).
 
-Карточка ещё лежит в static/data/pending.json.
+Карточка еще лежит в static/data/pending.json.
 
 Запуск: python3 pipeline/fix_sberbank_summit_towers_link_buyer.py           # проверка
         python3 pipeline/fix_sberbank_summit_towers_link_buyer.py --write   # запись

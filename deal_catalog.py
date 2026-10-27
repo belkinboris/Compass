@@ -21,7 +21,7 @@ def _read(path: Path) -> Any:
 
 def load_deals() -> dict[str, dict[str, Any]]:
     rows: dict[str, dict[str, Any]] = {}
-    # База — через общий кэш `base_data`: раньше её разбирал заново каждый
+    # База — через общий кэш `base_data`: раньше ее разбирал заново каждый
     # вызов, и `get_deal()` на каждой странице сделки стоил ≈72 МБ.
     promoted = base_data.promoted()
     for item in promoted.get("deals") or []:

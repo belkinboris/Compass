@@ -2,20 +2,20 @@
 """Своя статистика посещений сайта — без Яндекса и без личных данных.
 
 ЗАЧЕМ. 14 октября 2026 Яндекс Метрика перестала отвечать, и владелец попросил
-«полезный сервис, чтобы мы смогли мониторить статистику посещений, может ещё
-видеть, куда люди заходят и смотрят». Страница сайта сама шлёт сюда «открыли
+«полезный сервис, чтобы мы смогли мониторить статистику посещений, может еще
+видеть, куда люди заходят и смотрят». Страница сайта сама шлет сюда «открыли
 такой-то экран» (`POST /api/t`, см. `trackView` в static/index.html); здесь —
-приём, подсчёт и человеческий вид: `/ops/traffic` и строки для консоли.
+прием, подсчет и человеческий вид: `/ops/traffic` и строки для консоли.
 
 ЧТО ХРАНИМ (db.models.PageView). Время, случайный номер браузера (его
 придумывает сам браузер), номер визита, адрес экрана внутри сайта, имя сайта,
 с которого пришли (только на первом экране визита), тип устройства по ширине
-экрана и «вошёл ли человек». Ни IP, ни браузера, ни почты.
+экрана и «вошел ли человек». Ни IP, ни браузера, ни почты.
 
 ЧТО НЕ СЧИТАЕМ. Роботов поисковиков и наши собственные проверки — безголовый
 браузер (`HeadlessChrome`) снимает скриншоты для макетов и тестов, и без
 фильтра каждая наша проверка выглядела бы живым посетителем. Черновики карточек
-(`/preview/…`) — их открывают только владелец и партнёр из консоли.
+(`/preview/…`) — их открывают только владелец и партнер из консоли.
 """
 from __future__ import annotations
 
@@ -53,7 +53,7 @@ def is_bot(user_agent: str) -> bool:
 
 def too_fast(key: str, limit: int = 120, window: float = 60.0) -> bool:
     """Не больше `limit` отметок в минуту с одного адреса — защита таблицы от
-    накрутки. Адрес живёт только в памяти процесса и никуда не пишется."""
+    накрутки. Адрес живет только в памяти процесса и никуда не пишется."""
     now = time.monotonic()
     hits = [t for t in _hits[key] if now - t < window]
     hits.append(now)
@@ -124,10 +124,10 @@ def source_name(host: str | None) -> str:
     return host
 
 
-# ------------------------------------------------------------------ подсчёт --
+# ------------------------------------------------------------------ подсчет --
 
 def stats(db, PageView, days: int = 7, base: dict | None = None, now: datetime | None = None) -> dict:
-    """Всё для страницы и консоли за последние `days` суток (скользящее окно)."""
+    """Все для страницы и консоли за последние `days` суток (скользящее окно)."""
     from sqlalchemy import select
     now = now or _now()
     span = max(days, 30)
@@ -262,7 +262,7 @@ def console_lines(st: dict) -> list[str]:
     if not st["views"]:
         return ["📊 <b>Наш счётчик</b>: за сутки заходов не записано (счётчик работает с 14 октября)."]
     phone = st["devices"].get("phone", 0)
-    lines = ["📊 <b>Сайт за сутки</b> (наш счётчик, без Яндекса)",
+    lines = ["📊 <b>Сайт за сутки</b> (наш счетчик, без Яндекса)",
              "Посетителей — %d (новых — %d), визитов — %d, просмотров — %d. С телефона — %d%%."
              % (st["visitors"], st["new_visitors"], st["sessions"], st["views"], _pct(phone, st["visitors"]))]
     lab = st["labels"]
@@ -306,7 +306,7 @@ def page_html(st: dict, token: str, metrika_lines: list[str] | None = None) -> s
     for s in st["recent"]:
         start = datetime.fromisoformat(s["start"]) + MSK
         mins = round((datetime.fromisoformat(s["end"]) - datetime.fromisoformat(s["start"])).total_seconds() / 60)
-        path = " → ".join(link(p) for p in s["paths"]) + (" … ещё %d" % s["more"] if s["more"] else "")
+        path = " → ".join(link(p) for p in s["paths"]) + (" … еще %d" % s["more"] if s["more"] else "")
         who = {"phone": "телефон", "tablet": "планшет", "desktop": "компьютер"}.get(s["device"], s["device"])
         who += " · " + escape(s["source"]) + (" · вернулся" if s["returning"] else " · впервые") + (" · с аккаунтом" if s["logged_in"] else "")
         recent_rows.append((start.strftime("%d.%m %H:%M"), "%s<br><small>%s%s</small>" % (path, who, (" · %d мин" % mins) if mins else "")))
@@ -337,7 +337,7 @@ td small{color:var(--dim)}a{color:var(--ink)}.empty{color:var(--dim)}
 @media(max-width:720px){.two{grid-template-columns:1fr}.n{font-size:22px}}
 </style></head><body><div class="w">
 <h1>Посещаемость сайта<span class="live">● сейчас на сайте: @@ONLINE@@</span></h1>
-<p class="sub">Наш счётчик, без Яндекса и без личных данных: браузер сам придумывает себе случайный номер, мы видим только, какие экраны открывали и откуда пришли. Наши проверки и поисковые роботы не считаются. Работает с 14 октября 2026.</p>
+<p class="sub">Наш счетчик, без Яндекса и без личных данных: браузер сам придумывает себе случайный номер, мы видим только, какие экраны открывали и откуда пришли. Наши проверки и поисковые роботы не считаются. Работает с 14 октября 2026.</p>
 <div class="per">@@PERIOD@@ <a href="/ops/activity?token=@@TOKEN@@">Аккаунты и ассистент →</a></div>
 <div class="grid">@@GRID@@</div>
 <h2>По дням (посетители, последние 30 дней)</h2><div class="chart">@@BARS@@</div>
@@ -360,7 +360,7 @@ td small{color:var(--dim)}a{color:var(--ink)}.empty{color:var(--dim)}
               "Поиском пока не пользовались."),
         table("С чего начинают визит", [(link(p), k) for p, k in st["entry_pages"]], ["Страница входа", "Визитов"]),
         table("Последние визиты: куда заходили", recent_rows, ["Начало (МСК)", "Путь по сайту"]),
-        metrika or '<p class="empty">Метрика сейчас не отвечает — цифры выше считаются без неё.</p>')
+        metrika or '<p class="empty">Метрика сейчас не отвечает — цифры выше считаются без нее.</p>')
     for name, val in zip(['ONLINE', 'PERIOD', 'TOKEN', 'GRID', 'BARS', 'ADV', 'SECT', 'SRC', 'DEALS', 'COMPS', 'SEARCH', 'ENTRY', 'RECENT', 'METRIKA'], vals):
         html = html.replace("@@" + name + "@@", str(val))
     return html

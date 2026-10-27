@@ -40,8 +40,8 @@ def main(write=False):
     assert card is not None, '%r не найдена в deals_promoted.json — уже почищена?' % CARD_ID
     assert card['title'] == EXPECTED_TITLE, 'заголовок изменился, не трогаю: %r' % card['title']
     assert not data.get('telegram_posts', {}).get(CARD_ID), (
-        '%r несёт telegram_posts — пост в канал уже ушёл, автоматическое '
-        'удаление карточки оставило бы мёртвую ссылку в канале; решать '
+        '%r несет telegram_posts — пост в канал уже ушел, автоматическое '
+        'удаление карточки оставило бы мертвую ссылку в канале; решать '
         'вручную' % CARD_ID)
 
     print('УДАЛЯЮ %s из базы: облигационная оферта, не сделка (не M&A и не смена контроля)'

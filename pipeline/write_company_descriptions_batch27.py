@@ -17,7 +17,7 @@
 уже существовал), готового профиля для «Глобус Гурмэ» в базе нет —
 создан новый `gf51e23a8` (id — sha1 от названия юрлица, проверен на
 отсутствие коллизии по id и по имени). `target` сделки `g92f41a2d`
-перенаправлен на него; `gc0e607dc` остаётся при новосибирской сделке.
+перенаправлен на него; `gc0e607dc` остается при новосибирской сделке.
 
 ЧТО ДЕЛАЕТ. 8 описаний (включая новый профиль), 1 перенаправление роли.
 
@@ -107,7 +107,7 @@ def main(write=False):
     if not write:
         real = sum(1 for v in comps.values()
                    if (v.get('desc') or '').strip() and not PLACEHOLDER.match(str(v.get('desc'))))
-        real += 1  # новый профиль, ещё не добавленный в comps в сухом прогоне
+        real += 1  # новый профиль, еще не добавленный в comps в сухом прогоне
     else:
         comps[NEW_COMPANY_ID] = NEW_COMPANY
         real = sum(1 for v in comps.values()
@@ -116,7 +116,7 @@ def main(write=False):
     print('\nОписаний записано: %d (+1 новый профиль)' % wrote)
     print('Ролей перенаправлено: %d' % len(TARGET_FIXES))
     if skipped:
-        print('Пропущено (уже есть своё описание): %d' % len(skipped))
+        print('Пропущено (уже есть свое описание): %d' % len(skipped))
         for cid, name, old in skipped[:5]:
             print('   %s %s — %r' % (cid, name, old))
 

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Приёмка на живом сайте: «готово» — это показанный результат, а не зелёный тест.
+"""Приемка на живом сайте: «готово» — это показанный результат, а не зеленый тест.
 
 ЗАЧЕМ. Два аудита подряд (5 и 6 сентября 2026) находили дефекты, которые
 наши проверки объявили закрытыми: правило «доля 95% и выше» пропустило 30%
 Guess, цена здания делилась на прибыль продавца, ассистент отрицал карточку,
-на которую сам сослался. Приёмка тогда состояла из юнит-тестов на
-придуманных примерах и счётчиков («кандидатов 57 → 29») — она проверяла,
+на которую сам сослался. Приемка тогда состояла из юнит-тестов на
+придуманных примерах и счетчиков («кандидатов 57 → 29») — она проверяла,
 что код делает заложенное, и не смотрела, что ВИДИТ посетитель. Этот скрипт
-— вторая половина приёмки: он открывает сайт (боевой или локальный) и
+— вторая половина приемки: он открывает сайт (боевой или локальный) и
 проходит пользовательские сценарии, затронутые изменениями данных,
 аналитики, ассистента или экспорта. Запускать после каждого существенного
 изменения этих частей; результат — короткий протокол по каждому сценарию:
@@ -20,7 +20,7 @@ Guess, цена здания делилась на прибыль продавц
     python3 pipeline/acceptance_check.py                                  # https://projectcompass.ru
     python3 pipeline/acceptance_check.py --base http://127.0.0.1:8777     # локальный сервер
     python3 pipeline/acceptance_check.py --no-browser                     # только HTTP-сценарии
-Код выхода 1, если хотя бы один сценарий не прошёл.
+Код выхода 1, если хотя бы один сценарий не прошел.
 """
 from __future__ import annotations
 
@@ -50,9 +50,9 @@ class Protocol:
         self.rows: list[tuple[str, bool | None, str, str]] = []
 
     def add(self, scenario: str, ok: bool | None, where: str, seen: str) -> None:
-        """ok=None — сценарий не удалось проверить ИЗ ЭТОЙ СРЕДЫ (не «прошёл»
-        и не «упал»): печатается отдельным знаком и в число провалов не идёт,
-        но в протоколе остаётся — читатель видит, что именно не проверено."""
+        """ok=None — сценарий не удалось проверить ИЗ ЭТОЙ СРЕДЫ (не «прошел»
+        и не «упал»): печатается отдельным знаком и в число провалов не идет,
+        но в протоколе остается — читатель видит, что именно не проверено."""
         self.rows.append((scenario, ok, where, seen))
         mark = '✓' if ok else ('–' if ok is None else '✗')
         print(f"{mark} {scenario}\n    где: {where}\n    результат: {seen}")
@@ -74,7 +74,7 @@ def get_json(base: str, path: str, data: dict | None = None, timeout: int = 90):
 
 
 def _served_base(base: str) -> tuple[dict, str]:
-    """База, которую отдаёт сайт. С 16 октября 2026 — через api/data/... со
+    """База, которую отдает сайт. С 16 октября 2026 — через api/data/... со
     служебным ключом (scrape_guard.py); старый публичный адрес — запасной,
     пока на сервере код до этой правки."""
     key = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
@@ -112,14 +112,14 @@ def check_data_is_current(base: str, p: Protocol) -> None:
 
 def check_multiples(base: str, p: Protocol) -> None:
     """Мультипликаторы: ни одной сделки из «нельзя» контрольной выборки, ни
-    диапазона, ни доли ниже порога пересчёта — по ТОМУ, что отдаёт сайт, а не
-    по коду. Плюс арифметика самого пересчёта: числитель строки обязан
-    получаться из цены и доли, а не быть взят откуда-то ещё."""
+    диапазона, ни доли ниже порога пересчета — по ТОМУ, что отдает сайт, а не
+    по коду. Плюс арифметика самого пересчета: числитель строки обязан
+    получаться из цены и доли, а не быть взят откуда-то еще."""
     m = get_json(base, '/api/analytics/multiples')
     ids = {row['id'] for row in m['deals']}
     forbidden = [r['id'] for r in GOLD['deals'] if not r['in_multiples'] and r['id'] in ids]
-    # Порог доли и смысл суммы спрашиваются с ПОДТВЕРЖДЁННЫХ строк: у
-    # рассчитанных по тексту доля берётся из прозы карточки и может быть не
+    # Порог доли и смысл суммы спрашиваются с ПОДТВЕРЖДЕННЫХ строк: у
+    # рассчитанных по тексту доля берется из прозы карточки и может быть не
     # установлена вовсе — на то они и второй уровень, помеченный на экране.
     _verified = [r for r in m['deals'] if r.get('confidence') == 'verified']
     bad_share = [row['id'] for row in _verified if (dm.stake_established(DEALS.get(row['id'], {})) or 0) < dm.MIN_SCALABLE_STAKE]
@@ -133,20 +133,20 @@ def check_multiples(base: str, p: Protocol) -> None:
         elif abs(round(expect / row['revenue_rub'], 2) - row['multiple']) > 0.011:
             bad_scale.append(row['id'])
     bad_basis = [row['id'] for row in _verified if dm.sum_basis(DEALS.get(row['id'], {})) != 'disclosed']
-    # Слой фактов: сделка, показанная КАК ПОДТВЕРЖДЁННАЯ, обязана нести
+    # Слой фактов: сделка, показанная КАК ПОДТВЕРЖДЕННАЯ, обязана нести
     # подтверждение двумя чтениями и чистую арифметику (facts.number_checks).
     #
-    # ДВА УРОВНЯ, А НЕ ОДИН (исправлено 22 сентября 2026). Ответ сайта несёт
+    # ДВА УРОВНЯ, А НЕ ОДИН (исправлено 22 сентября 2026). Ответ сайта несет
     # обе группы сразу: `confidence == 'verified'` — цена, доля и юрлицо
     # подтверждены двумя независимыми чтениями; `confidence == 'computed'` —
     # взято из текста карточки, и на экране такие строки прямо помечены
     # («у N — взяли из текста карточки (помечены)»). Прежняя проверка
     # требовала подтверждения от ВСЕХ строк подряд и потому горела красным
     # на работающей и честно подписанной функции — ровно то, от чего
-    # предостерегает комментарий, стоявший здесь раньше: приёмка обязана
+    # предостерегает комментарий, стоявший здесь раньше: приемка обязана
     # спрашивать с того, что реально работает.
     #
-    # Спрашиваем теперь две разные вещи: подтверждённые — действительно
+    # Спрашиваем теперь две разные вещи: подтвержденные — действительно
     # подтверждены, а у рассчитанных по тексту стоит пометка. Пропажа
     # пометки опаснее самой строки: тогда непроверенное число читается как
     # проверенное.
@@ -155,23 +155,23 @@ def check_multiples(base: str, p: Protocol) -> None:
                   if not str(row.get('verified_by', '')).startswith(('model×2', 'human'))]
     unlabelled = [r['id'] for r in m['deals'] if r.get('confidence') not in ('verified', 'computed')]
     if len(verified_rows) != m.get('verified_total'):
-        unlabelled.append('счёт подтверждённых не сходится с verified_total')
+        unlabelled.append('счет подтвержденных не сходится с verified_total')
     dirty = [(row['id'], row.get('checks')) for row in m['deals'] if row.get('checks')]
     no_year_basis = [row['id'] for row in m['deals'] if not row.get('year_basis')]
     ok = (not forbidden and not bad_share and not bad_basis and not unverified
           and not dirty and not no_year_basis and not bad_scale and not unlabelled)
     excluded = ', '.join('%s — %s' % (x['label'], x['count']) for x in m.get('excluded', [])[:4])
-    p.add('Мультипликаторы: только сделки с фактами, подтверждёнными двумя чтениями, без малых долей и не-цен', ok,
+    p.add('Мультипликаторы: только сделки с фактами, подтвержденными двумя чтениями, без малых долей и не-цен', ok,
           base + '/api/analytics/multiples',
           f"показано {m['clean_total']} "
-          f"(подтверждённых {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
+          f"(подтвержденных {m.get('verified_total')}, ждут чтения {m.get('awaiting_reading')}, "
           f"по тексту проходят {m['candidates_total']}); медианы {'скрыты' if not m.get('show_medians') else 'показаны'}; "
-          f"запрещённые: {forbidden or 'нет'}; доля ниже порога: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
-          f"пересчёт цены пакета: {bad_scale or 'сходится'}; "
+          f"запрещенные: {forbidden or 'нет'}; доля ниже порога: {bad_share or 'нет'}; не цена: {bad_basis or 'нет'}; "
+          f"пересчет цены пакета: {bad_scale or 'сходится'}; "
           f"без подтверждения: {unverified or 'нет'}; без пометки уровня: {unlabelled or 'нет'}; арифметика: {dirty or 'чисто'}; без основания года: {no_year_basis or 'нет'}; исключены: {excluded}")
     # Проверенная сделка, которой нет в списке, обязана быть названа с причиной
-    # (выброс, убыток, нет отчёта): скрытая молча, она читается как «данных нет»
-    # или «убыточна» (четвёртый разбор рецензента, пункт 6).
+    # (выброс, убыток, нет отчета): скрытая молча, она читается как «данных нет»
+    # или «убыточна» (четвертый разбор рецензента, пункт 6).
     hidden = list(m.get('not_shown') or []) + list((m.get('operating_profit') or {}).get('not_shown') or [])
     unexplained = [h for h in hidden if not h.get('label')]
     p.add('Мультипликаторы: у каждой проверенной, но не показанной сделки названа причина', not unexplained,
@@ -181,7 +181,7 @@ def check_multiples(base: str, p: Protocol) -> None:
 
 
 def check_assistant_chain(base: str, p: Protocol) -> None:
-    """Цепочка вопросов: уточняющий вопрос без имени сущности остаётся на
+    """Цепочка вопросов: уточняющий вопрос без имени сущности остается на
     той же сделке (аудит, раунд 2: «перепроверь» → «в Компасе нет сделки»)."""
     for chain in GOLD['assistant']:
         history: list[dict] = []
@@ -238,7 +238,7 @@ def check_pdf(base: str, p: Protocol) -> None:
     p.add('PDF карточки — настоящий PDF с кириллическим шрифтом', ok, base + f'/api/deals/{deal_id}/export',
           f'{ctype}, {len(body)} байт, шрифт DejaVu: {"есть" if b"DejaVuSans" in body else "НЕТ"}')
     # Проверяется САМ скачанный файл, а не его заголовки (разбор рецензента,
-    # 6 сентября 2026): текст извлекается из PDF — в нём обязан читаться
+    # 6 сентября 2026): текст извлекается из PDF — в нем обязан читаться
     # заголовок сделки по-русски и не должно быть служебных пометок притока
     # («Источник: обогащение», «веб-поиск»), которые аудит видел в файле.
     text = _pdf_text(body)
@@ -279,7 +279,7 @@ def check_browser(base: str, p: Protocol) -> None:
         if external:
             # Headless-браузер из среды разработки до внешних адресов не доходит
             # (прокси среды режет соединение), а urllib доходит. Поэтому каждый
-            # запрос страницы к сайту выполняется urllib и отдаётся браузеру как
+            # запрос страницы к сайту выполняется urllib и отдается браузеру как
             # ответ: браузер рисует НАСТОЯЩИЕ страницу, скрипт и данные боевого
             # сайта, только доставленные рабочим каналом среды. Это проверка
             # содержимого сайта, а не его сети — и в протоколе так и написано.
@@ -291,8 +291,8 @@ def check_browser(base: str, p: Protocol) -> None:
                     return route.abort()
                 if url.rstrip('/').endswith('/api/me'):
                     # Вход по заявке (ACCESS_GATE) — визуальная дверь: API сделок открыт,
-                    # закрыт только экран. Приёмке нужны экраны, а аккаунта у неё нет —
-                    # дверь обходится ТОЛЬКО здесь, в браузере приёмки: страницы,
+                    # закрыт только экран. Приемке нужны экраны, а аккаунта у нее нет —
+                    # дверь обходится ТОЛЬКО здесь, в браузере приемки: страницы,
                     # скрипт и данные при этом настоящие, с боевого сайта.
                     return route.fulfill(status=200, headers={'content-type': 'application/json'},
                                          body=b'{"logged_in": false, "gate": false}')
@@ -314,21 +314,21 @@ def check_browser(base: str, p: Protocol) -> None:
         if not external:
             # Локальный сервер, поднятый без ACCESS_GATE=0, показывает дверь
             # («Войти / Запросить доступ») вместо сайта. Без этой проверки
-            # приёмка падала невнятно — «Timeout 60000ms exceeded, waiting for
+            # приемка падала невнятно — «Timeout 60000ms exceeded, waiting for
             # .an-c-topsum .an-deal», — и это читается как «блок исчез с
-            # витрины», хотя браузер просто не дошёл до витрины. Сообщение
+            # витрины», хотя браузер просто не дошел до витрины. Сообщение
             # должно называть причину, а не симптом (21 сентября 2026).
             try:
                 with urllib.request.urlopen(base + '/api/me', timeout=15) as r:
                     if json.loads(r.read()).get('gate'):
                         p.add('Экраны в браузере', False, base,
-                              'на сервере включён вход по заявке (ACCESS_GATE): браузер видит дверь, '
+                              'на сервере включен вход по заявке (ACCESS_GATE): браузер видит дверь, '
                               'а не сайт. Поднимите сервер как ACCESS_GATE=0 DATA_REFRESH_ENABLED=0 '
                               'TELEGRAM_BOT_TOKEN= API_FNS_KEY= uvicorn main:app')
                         browser.close()
                         return
             except Exception:  # noqa: BLE001
-                pass  # не достучались до /api/me — пусть падает обычным путём
+                pass  # не достучались до /api/me — пусть падает обычным путем
         page.goto(base + '/#/analytics')
         page.wait_for_function('typeof DEALS!=="undefined" && DEALS.length>1000', timeout=90000)
         page.wait_for_selector('.an-c-topsum .an-deal', timeout=60000)
@@ -345,11 +345,11 @@ def check_browser(base: str, p: Protocol) -> None:
               where, f'{len(shown)} строк; без прочитанной цены: {unread or "нет"}')
         # …и названа стороной, документом или реестром — не консультантом в
         # таблице издания и не «источниками» (третий разбор рецензента):
-        # «Аврора Инвест», 255 млрд ₽ от Verba Legal, в список не идёт.
+        # «Аврора Инвест», 255 млрд ₽ от Verba Legal, в список не идет.
         weak = [i for i in shown if (((DEALS.get(i) or {}).get('facts') or {}).get('price') or {}).get('attribution') not in ('parties', 'filing', 'registry')]
         p.add('Крупнейшие покупки: число названо стороной, документом или реестром', not weak and bool(shown),
               where, f'иначе: {weak or "нет"}')
-        # …событие цены разрешено, а состав цены назван читателем (четвёртый
+        # …событие цены разрешено, а состав цены назван читателем (четвертый
         # разбор): «событие спорное» и «подтверждено» одновременно — противоречие;
         # «неизвестно» у состава — честный ответ, не пропуск.
         pf = lambda i: (((DEALS.get(i) or {}).get('facts') or {}).get('price') or {})
@@ -362,7 +362,7 @@ def check_browser(base: str, p: Protocol) -> None:
         # Проверяем НАМЕРЕНИЕ, а не формулировку: медиана не показана и сказано,
         # почему; строки помечены как проверенные по источникам. Прежняя версия
         # искала фразу дословно («Медиану по ним не показываем») и покраснела на
-        # переписанном тексте, хотя на экране всё было верно, — приёмка обязана
+        # переписанном тексте, хотя на экране все было верно, — приемка обязана
         # ловить дефект, а не редактуру.
         low = mult.lower()
         api = get_json(base, '/api/analytics/multiples')
@@ -393,7 +393,7 @@ def check_browser(base: str, p: Protocol) -> None:
             page.wait_for_selector('.fact-verified', timeout=15000)
             text = page.inner_text('.fact-verified')
             quote = ((DEALS[verified_deal]['facts']['price'] or {}).get('quote') or '')[:30]
-            # .label рисуется заглавными (text-transform), innerText отдаёт текст после CSS
+            # .label рисуется заглавными (text-transform), innerText отдает текст после CSS
             ok = 'подтверждено цитатой' in text.lower() and (not quote or quote[:20].lower() in text.lower())
             p.add(f'Карточка {verified_deal}: блок «Подтверждено цитатой из источника» на «Обзоре»', ok,
                   base + '/#/deal/' + verified_deal, text[:140].replace(chr(10), ' | '))
@@ -415,7 +415,7 @@ def main() -> int:
     args = ap.parse_args()
     base = args.base.rstrip('/')
     p = Protocol()
-    print(f'Приёмка на {base}\n')
+    print(f'Приемка на {base}\n')
     check_data_is_current(base, p)
     check_multiples(base, p)
     check_assistant_chain(base, p)

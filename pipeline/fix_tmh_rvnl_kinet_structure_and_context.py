@@ -12,7 +12,7 @@ Vande Bharat в Индию», закрыта, 2023) — дочитывание �
   Limited»; «Сумма контракта составит порядка $1,8 млрд за поставку
   поездов и $2,5 млрд за их сервисное обслуживание в течение 35 лет».
 - russiaspivottoasia.com/russia-india-joint-venture-wins-us6-5-billion-
-  contract-to-build-electric-trains/: консорциум ТМХ/RVNL обошёл в
+  contract-to-build-electric-trains/: консорциум ТМХ/RVNL обошел в
   тендере Siemens, Alstom Transport и Stadler Rail.
 - urbantransportnews.com/news/tmh-rvnl-consortium-propels-the-35000-
   crore-vande-bharat-sleeper-train-project: «TMH submitted a performance
@@ -60,9 +60,9 @@ NEW_LAW_STRUCT = (
 OLD_ECO_CONTEXT = '—'
 NEW_ECO_CONTEXT = (
     'Сумма контракта складывается из двух частей: около $1,8 млрд за '
-    'поставку поездов и ещё $2,5 млрд за их сервисное обслуживание в '
-    'течение 35 лет. В тендере консорциум ТМХ/RVNL обошёл Siemens, '
-    'Alstom Transport и Stadler Rail. 28 августа 2023 года ТМХ внёс '
+    'поставку поездов и еще $2,5 млрд за их сервисное обслуживание в '
+    'течение 35 лет. В тендере консорциум ТМХ/RVNL обошел Siemens, '
+    'Alstom Transport и Stadler Rail. 28 августа 2023 года ТМХ внес '
     'банковскую гарантию, необходимую для вступления в силу соглашения '
     'о производстве и обслуживании поездов с индийскими железными '
     'дорогами. По итогам 2023 года выручка самого ТМХ превысила 400 '

@@ -3,7 +3,7 @@
 """Редакционная очередь сопоставления профиля «Компаса» с юрлицом из ЕГРЮЛ.
 
 ЧТО ЭТО. `sync_fns.py --match` подтверждает автоматически только строгие
-уникальные совпадения. Всё сомнительное складывается в `legal_entity_candidates`
+уникальные совпадения. Все сомнительное складывается в `legal_entity_candidates`
 и пользователю не показывается. Этот скрипт выгружает очередь в CSV для Excel и
 принимает решения человека обратно.
 
@@ -14,7 +14,7 @@
 
 ГРАНИЦА ПРАВКИ. Скрипт не выдумывает совпадений: подтверждается ровно тот ИНН,
 который уже лежит в очереди, и только если в колонке `approved` стоит «да».
-Пустая колонка не значит «нет» — строка остаётся в очереди до следующего раза,
+Пустая колонка не значит «нет» — строка остается в очереди до следующего раза,
 иначе одна невнимательная выгрузка молча закрыла бы всю очередь.
 
 Запуск:
@@ -85,7 +85,7 @@ def export_queue(path) -> int:
 
 
 def import_approvals(path) -> int:
-    """Принимает решения из CSV. Возвращает число подтверждённых юрлиц."""
+    """Принимает решения из CSV. Возвращает число подтвержденных юрлиц."""
     Base.metadata.create_all(engine)
     approved = 0
     with Path(path).open("r", encoding="utf-8-sig", newline="") as fh:
@@ -94,7 +94,7 @@ def import_approvals(path) -> int:
         for row in rows:
             mark = (row.get("approved") or "").strip().lower()
             if mark not in YES and mark not in NO:
-                continue  # пусто — решения не было, строка остаётся в очереди
+                continue  # пусто — решения не было, строка остается в очереди
             company_id, inn = (row.get("company_id") or "").strip(), (row.get("inn") or "").strip()
             candidate = db.scalar(select(LegalEntityCandidate).where(
                 LegalEntityCandidate.company_id == company_id,

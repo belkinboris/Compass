@@ -5,11 +5,11 @@
 08:20 МСК слилась в `gd09e0945` (`merge_lesta_negotiations_stage_
 2026_10_17.py`): `gd9ccfdd2` больше не существует, `resolve_duplicates.py
 --queue` сам сообщил «НЕ НАЙДЕНА — id мог устареть». Единственный новый
-факт черновика (размер аудитории — 6,5 млн игроков в месяц) уже перенесён
+факт черновика (размер аудитории — 6,5 млн игроков в месяц) уже перенесен
 в `gd09e0945.extra` отдельной правкой (`fixes/written_gd09e0945_audience_
-2026_10_17.py`); остальное (консорциум, 100% трёх юрлиц, план на 10 млрд
+2026_10_17.py`); остальное (консорциум, 100% трех юрлиц, план на 10 млрд
 ₽) — повтор уже записанного. Убираю запись из очереди дублей и отмечаю
-источник как дополнение к `gd09e0945`, тем же приёмом, что вчера для
+источник как дополнение к `gd09e0945`, тем же приемом, что вчера для
 Pravo.ru.
 
 Запуск:
@@ -62,7 +62,7 @@ def main(write=False):
     fresh_state = json.load(open(STATE, encoding='utf-8'))
     assert URL not in fresh_state.get('discarded_urls', {}), 'URL отметили параллельно — перечитайте'
     fresh_state.setdefault('discarded_urls', {})[URL] = {
-        'reason': 'кандидат на дубль (gd9ccfdd2) слит в %s в этом же прогоне — новый факт перенесён отдельной правкой' % TARGET_CARD,
+        'reason': 'кандидат на дубль (gd9ccfdd2) слит в %s в этом же прогоне — новый факт перенесен отдельной правкой' % TARGET_CARD,
         'date': datetime.now(timezone.utc).date().isoformat(),
     }
     fresh_state.setdefault('raw_titles', {})[RAW_TITLE_KEY] = 'enrich:%s' % TARGET_CARD

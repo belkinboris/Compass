@@ -3,11 +3,11 @@
 вместо агрегатора (`split_discovery_sources.py --queue`), карточка
 `gmru-svoj-kredit-evropa-strah` («Группа «Свой» купила страховщика
 «Кредит Европа лайф» у «Кредит Европа банка»») держала единственным
-источником mergers.ru. Саб-агент нашёл первоисточник — Frank Media,
+источником mergers.ru. Саб-агент нашел первоисточник — Frank Media,
 который сам подробно и самостоятельно освещает именно эту сделку (не
 просто пересказывает лицензии). Текст не лежит в локальном кэше притока,
 а прямой забор (`fetch_article_texts.py`) вернул 0 знаков — frankmedia.ru
-не отдаёт контент этой машине (тот же класс сбоя, что раньше у
+не отдает контент этой машине (тот же класс сбоя, что раньше у
 kommersant.ru/rbc.ru) — поэтому правка не через `review.py`, а точечным
 скриптом с `assert`.
 
@@ -38,7 +38,7 @@ def main(write):
 
     if write:
         json.dump(data, open(DATA_PATH, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-        print('src карточки gmru-svoj-kredit-evropa-strah заменён на Frank Media, '
+        print('src карточки gmru-svoj-kredit-evropa-strah заменен на Frank Media, '
               'mergers.ru переехал в discovery_src. ЗАПИСАНО.')
     else:
         print('Сухой прогон: заменил бы src на Frank Media (mergers.ru -> discovery_src). Повторите с --write.')
