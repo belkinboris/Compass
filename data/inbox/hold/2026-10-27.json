@@ -2,199 +2,6 @@
  "made": "2026-10-27",
  "drafts": [
   {
-   "draft_id": "d12352437",
-   "title": "Ярославские власти планируют продать усадьбу В. Ф. Некрасова",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-21",
-     "title": "Переговоры",
-     "note": "Власти Ярославской области хотят продать усадьбу племянника А. Н. Некрасова, расположенную неподалеку от поселка Дубки.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88183245",
-   "title": "Власти выкупят школу у застройщика в крупном ЖК Сургута",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053137854"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9fed3cb1 (общие редкие слова: жк, застро) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d46559371",
-   "title": "Производственную базу у индустриального парка «Масловский» продают почти за 400 млн рублей",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/"
-    ]
-   ],
-   "sum": "400 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81541561",
-   "title": "Песков: контакты России и США по продаже зарубежных активов «Лукойла» идут",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28238995"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-21",
-     "title": "Переговоры",
-     "note": "Пресс-секретарь российского лидера отметил, что коммерческая сделка не может обсуждаться публично",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28238995"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43106805",
-   "title": "Владельцев «Манчестер Сити» могут заставить продать клуб",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261021/siti-2126054701.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47286146",
-   "title": "Лицензия для продажи зарубежных активов «ЛУКОЙЛа» продлена до 21 ноября",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1124073"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d42276510",
    "title": "США продлили лицензию на операции по продаже активов «Лукойла»",
    "date": "2026-10-21",
@@ -218,10 +25,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -251,7 +56,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлем"
+    "та же новость, что «США продлили лицензию на операции по продаже активов «Лукойл» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -281,7 +86,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Песков: контакты России и США по продаже зарубежных активов » — второе издание, в группу не шлем"
+    "та же новость, что «США продлили лицензию на операции по продаже активов «Лукойл» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -356,7 +161,7 @@
    ]
   },
   {
-   "draft_id": "d24515936",
+   "draft_id": "d28669765",
    "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
    "date": "2026-10-27",
    "src": [
@@ -387,7 +192,7 @@
    ]
   },
   {
-   "draft_id": "d35553997",
+   "draft_id": "d66595439",
    "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
    "date": "2026-10-27",
    "src": [
@@ -427,7 +232,7 @@
    ]
   },
   {
-   "draft_id": "d47175948",
+   "draft_id": "d13290813",
    "title": "Anthropic приостановила обучение новой ИИ-модели из-за угроз безопасности в преддверии IPO",
    "date": "2026-10-27",
    "src": [
@@ -458,35 +263,7 @@
    ]
   },
   {
-   "draft_id": "d39357018",
-   "title": "На «Авито» появилось объявление о продаже отеля «Савой» в Москве",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28258089"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35963811",
+   "draft_id": "d11429361",
    "title": "Площади нового ресторана с коми-пермяцким названием продают за десятки миллионов рублей",
    "date": "2026-10-27",
    "src": [
@@ -514,91 +291,7 @@
    ]
   },
   {
-   "draft_id": "d71030415",
-   "title": "Минфин анонсировал два аукциона по размещению ОФЗ-ПД",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/27/1240536-dva-auktsiona"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d39728918",
-   "title": "В ЯНАО опровергли информацию о выплатах от продажи нефти и газа",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28258837"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90657601",
-   "title": "Иран готов приобрести 500 мотоциклов «Минск» смоленской сборки",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28258603"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60869132",
+   "draft_id": "d72179187",
    "title": "В группе «Гута» опровергли информацию о продаже отеля «Савой» в Москве",
    "date": "2026-10-27",
    "src": [
@@ -621,14 +314,12 @@
    },
    "ind": "Гостиницы и туризм",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «На «Авито» появилось объявление о продаже отеля «Савой» в Мо» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d60912563",
+   "draft_id": "d13687759",
    "title": "«Уралхим» готов к созданию совместных предприятий в Африке",
    "date": "2026-10-27",
    "src": [
@@ -656,7 +347,7 @@
    ]
   },
   {
-   "draft_id": "d29510067",
+   "draft_id": "d89401012",
    "title": "В группе «Гута» опровергли информацию о продаже отеля «Савой» в Москве",
    "date": "2026-10-27",
    "src": [
@@ -682,96 +373,11 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «На «Авито» появилось объявление о продаже отеля «Савой» в Мо» — второе издание, в группу не шлем"
+    "та же новость, что «В группе «Гута» опровергли информацию о продаже отеля «Савой» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d26126048",
-   "title": "Воронежский «Маслозавод Третьяковский» присоединил агрокомпанию «Симбиоз»",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118864-voronezhskiy-maslozavod-tretyakovskiy-prisoedinil-agrokompaniyu-simbioz/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25841918",
-   "title": "Самая дорогая квартира в Москве продаётся за 7 млрд ₽ — жильё предлагают без отделки",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/samaya-dorogaya-kvartira-v-moskve-prodayotsya-za-7-mlrd-zhilyo-predlagayut-bez-otdelki/"
-    ]
-   ],
-   "sum": "7 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52312226",
-   "title": "General Compute raises $100 million Series A, countering the neocloud disaster narrative",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/27/general-compute-raises-100-million-series-a-countering-the-neocloud-disaster-narrative/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d78818252",
+   "draft_id": "d31273465",
    "title": "В Тюмени распродают песчаные карьеры",
    "date": "2026-10-27",
    "src": [
@@ -799,13 +405,13 @@
    ]
   },
   {
-   "draft_id": "d28046180",
-   "title": "Earn-out без конфликтов Earn-out (отложенная часть цены, привязанная к будущим результатам компании) позволяет сторонам сделки M&A договориться, когда договориться о цене не получается. Проблема в том",
+   "draft_id": "d50019701",
+   "title": "ЦБ предложил обеспечивать обязательства по офертам на выкуп акций залогом",
    "date": "2026-10-27",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7516"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/27/1240595-obyazatelstva-po-ofertam"
     ]
    ],
    "sum": null,
@@ -823,35 +429,136 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d55588303",
-   "title": "Теперь точно не построят: в Тюмени избавились от планов возведения кампуса в Городищенском логу",
+   "draft_id": "d70890058",
+   "title": "Треть опрошенных отказалась от покупки из-за ответа бренда на отзыв",
    "date": "2026-10-27",
    "src": [
     [
-     "web:72.ru",
-     "https://72.ru/text/education/2026/10/27/76727152/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/tret-oproshennyh-otkazalas-ot-pokupki-iz-za-otveta-brenda-na-otzyv/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-27",
-     "title": "Переговоры",
-     "note": "Решение зрело девять лет",
-     "source": [
-      "web:72.ru",
-      "https://72.ru/text/education/2026/10/27/76727152/"
-     ]
-    }
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d73087234",
+   "title": "Путин заявил о миллиардных инвестициях России в энергетику Венесуэлы",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2191539/2026-10-27/putin-zaiavil-o-milliardnykh-investitciiakh-rossii-v-energetiku-venesuely"
+    ]
    ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21469188",
+   "title": "Путин о миллиардных инвестициях России в энергетику Венесуэлы",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2191540/video/putin-o-milliardnykh-investitciiakh-rossii-v-energetiku-venesuely"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56295947",
+   "title": "В пермской Полазне мебельную фабрику продают по цене квартиры",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139498"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58005313",
+   "title": "В очередной раз не получилось: в Тюмени не смогли продать землю у объездной",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/realty/2026/10/27/76727778/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
