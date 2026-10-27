@@ -231314,6 +231314,14 @@
       "method": "explicit_news_title",
       "url": "https://realty.ria.ru/20261026/ofisy-2126622870.html"
      }
+    ],
+    "buyer": [
+     {
+      "value": "«Бадаевский центр»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20261026/ofisy-2126622870.html"
+     }
     ]
    },
    "proofread_absorbed": {
@@ -231384,7 +231392,14 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "discovery_src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7514"
+    ]
+   ],
+   "buyer_name": "«Бадаевский центр»"
   },
   {
    "id": "gcc75fe11",
