@@ -3412,6 +3412,12 @@ function firmDeals(id, withListings){
 }
 const firmCount = id => {const x=firmDeals(id);return x.full.length+x.mini.length+x.bulk.length;};
 const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.length + BULK_DEALS.length;
+/* Число сделок, которое пишется людям, — без торгов (владелец, 27 октября
+   2026: «везде, где мы количество сделок пишем, будем без торгов указывать»).
+   Один счет на первом экране, в «Аналитике», в описании страницы
+   (seo_pages.deal_count) и в рассказе ассистента о сервисе. */
+const isAuctionDeal = d => !!d && d.type==="Продажа с торгов";
+const COUNTED_DEALS = () => [...DEALS, ...MINI_DEALS, ...CHANNEL_DEALS, ...BULK_DEALS].filter(d=>!isAuctionDeal(d)).length;
 /* «Раскрытая команда» — это сделки, где назван хотя бы один консультант.
    Считаем отдельной функцией: в шаблоне такое выражение не читается, а цифру
    на первом экране пользователь должен уметь проверить. */
@@ -5575,7 +5581,7 @@ function renderDeals(){
         <span class="hs-gap"></span>
         <div class="hero-note num" style="margin-top:34px">${bulkLoadFailed
           ? `Не удалось загрузить базу сделок. <button class="chip" id="reloadBase" type="button" style="margin-left:6px">Повторить</button>`
-          : `<b class="cnt" data-n="${TOTAL_DEALS()}">0</b> ${plural(TOTAL_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":` · загружаем базу… <span class="hero-slow">Долго загружается? Отключите VPN: сервер в России.</span>`}`
+          : `<b class="cnt" data-n="${COUNTED_DEALS()}">0</b> ${plural(COUNTED_DEALS(),"сделка","сделки","сделок")} · <b class="cnt" data-n="${CATALOG_COMPANY_IDS().length}">0</b> ${plural(CATALOG_COMPANY_IDS().length,"компания","компании","компаний")} · <b class="cnt" data-n="${FIRMS.length+INV_FIRMS.length}">0</b> ${plural(FIRMS.length+INV_FIRMS.length,"консультант","консультанта","консультантов")}${bulkLoaded?"":` · загружаем базу… <span class="hero-slow">Долго загружается? Отключите VPN: сервер в России.</span>`}`
         }</div>
       </div>
     </div>
@@ -9618,7 +9624,7 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p class="ph-desc">${raw.length+listingsOut} ${plural(raw.length+listingsOut,"сделка","сделки","сделок")} с 2022 года по открытым источникам.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p class="ph-desc">${COUNTED_DEALS()} ${plural(COUNTED_DEALS(),"сделка","сделки","сделок")} с 2022 года по открытым источникам.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">

@@ -92,7 +92,9 @@ def test_llms_txt_describes_the_site(client):
 def test_home_page_description_counts_the_deals_live(client, data):
     page = client.get("/").text
     n = seo_pages.rounded_count()
-    assert n <= len(_shown(data["deals"])) < n + 100
+    # без торгов — как на первом экране сайта (владелец, 27 октября 2026)
+    counted = [d for d in _shown(data["deals"]) if d.get("type") != "Продажа с торгов"]
+    assert n <= len(counted) < n + 100
     for tag in re.findall(r'<meta (?:name="description"|property="og:description") content="[^"]*"', page):
         assert "%d+ сделок" % n in tag, tag
         assert "линза" not in tag

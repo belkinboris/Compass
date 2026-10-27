@@ -161,8 +161,8 @@ def _investment_example(idx):
 
 
 def _deal_count(idx) -> int:
-    # Как в рассказе о сервисе: лоты торгов, которые никто не купил, сделками не считаются.
-    return sum(1 for d in idx.docs if not (d.type == "Продажа с торгов" and d.status != "Закрыта"))
+    # Без торгов — как на первом экране и в описании страницы (владелец, 27 октября 2026).
+    return sum(1 for d in idx.docs if d.type != "Продажа с торгов")
 
 
 def _serial_buyers(idx, limit: int = 5) -> list[tuple[str, str, int, object]]:

@@ -190,7 +190,7 @@ def send_intake_run(looked=0, found=0, cards=0, screened=0, client=None):
             client.close()
 
 
-def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0):
+def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0, unsent=0):
     """Публикация: что вышло в канал и что ещё ждёт.
 
     `soon` и `unread` — РАЗНЫЕ причины ждать, и путать их нельзя: `soon` —
@@ -215,8 +215,17 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
         if applied:
             done.append('применили %d %s' % (applied, _plural(applied, 'ваше решение', 'ваших решения', 'ваших решений')))
         lines.append('Готово: %s.' % ', '.join(done))
-    if soon or held or unread or doubted:
+    if soon or held or unread or doubted or unsent:
         lines.append('')
+        if unsent:
+            # 27 октября 2026: 13 принятых карточек (в том числе 5Yes!) трое
+            # суток не показывались в консоли — и ни одна строка отчёта их не
+            # считала: «скоро выйдут» требует показа, «ждут прочтения» —
+            # непрочитанности. Состояние без имени — состояние, которого никто
+            # не видит. Теперь оно названо и стоит первым.
+            lines.append('📬 %d %s %s, но вам еще не показаны — сами не выйдут, пока рутина не отправит их в консоль'
+                         % (unsent, _plural(unsent, 'карточка', 'карточки', 'карточек'),
+                            _plural(unsent, 'готова', 'готовы', 'готовы')))
         if soon:
             # Согласуется и существительное, и ГЛАГОЛ: «1 карточка выйдет»,
             # «6 карточек выйдут». Первая версия писала «1 карточка выйдут» —
@@ -491,9 +500,11 @@ def render_broken(routine, why):
             % (routine, why))
 
 
-def queue_keyboard(soon=0, held=0, unread=0, doubted=0):
+def queue_keyboard(soon=0, held=0, unread=0, doubted=0, unsent=0):
     """Кнопки «показать, что там» — чтобы не идти искать руками."""
     row = []
+    if unsent:
+        row.append({'text': '📬 Готовы, но не показаны', 'callback_data': 'show:unsent'})
     if soon:
         row.append({'text': '👀 Что скоро выйдет', 'callback_data': 'show:soon'})
     if unread:
@@ -562,6 +573,21 @@ def queue_counts(path=PENDING):
     return len(soon), len(held), len(unread)
 
 
+def is_unsent(card):
+    """Принята, прочитана, но в консоли еще не показана — ни в «скоро выйдут»,
+    ни в «ждут прочтения» такая карточка не попадала (27 октября 2026)."""
+    return bool(card.get('reviewed') and card.get('accepted') and not card.get('draft_sent')
+                and not card.get('held') and not card.get('hold_reason'))
+
+
+def unsent_count(path=PENDING):
+    try:
+        cards = json.load(open(path, encoding='utf-8')).get('cards') or []
+    except (OSError, ValueError):
+        return 0
+    return sum(1 for c in cards if is_unsent(c))
+
+
 def doubted_count(path=PENDING, inbox=None):
     """Сомнительные — так же, как кнопка «Сомнительные» (`main._queue_reply`,
     kind=raw): карточки с вердиктом приёмки «не пропущена» (`hold_reason`, не
@@ -598,9 +624,10 @@ def build(args):
         if counts is not None:
             args.soon, args.held, args.unread = counts
         doubted = doubted_count(path, getattr(args, 'inbox', None))
+        unsent = unsent_count(path)
         text = render_publish(args.posted, args.edited, args.applied,
-                              args.soon, args.held, args.unread, args.nothing, doubted)
-        return text, queue_keyboard(args.soon, args.held, args.unread, doubted)
+                              args.soon, args.held, args.unread, args.nothing, doubted, unsent)
+        return text, queue_keyboard(args.soon, args.held, args.unread, doubted, unsent)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
     if args.routine == 'вычитка':
         return render_proofread(args.proofread, args.refused, args.left, ids), None

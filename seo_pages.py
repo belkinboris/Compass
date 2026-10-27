@@ -79,7 +79,9 @@ def _index() -> dict[str, Any]:
 
 
 def deal_count() -> int:
-    return len(_index()["order"])
+    """Число сделок для людей — без торгов (владелец, 27 октября 2026); тот же
+    счет, что на первом экране сайта (COUNTED_DEALS)."""
+    return sum(1 for d in _index()["order"] if d.get("type") != "Продажа с торгов")
 
 
 def rounded_count() -> int:

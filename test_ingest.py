@@ -8526,3 +8526,37 @@ def test_drop_pending_removes_card_and_remembers_its_sources():
     import pytest
     with pytest.raises(AssertionError):
         dp.drop(pending, state, ['g404'], 'не сделка', datetime(2026, 10, 24, tzinfo=timezone.utc))
+
+
+def test_accepted_cards_not_yet_shown_in_the_console_are_counted_and_named(tmp_path):
+    """27 октября 2026: 13 принятых карточек (в том числе 5Yes!) трое суток
+    не показывались в консоли, и отчет публикации их не считал ни в одной
+    группе. Теперь у состояния есть имя и строка в отчете."""
+    import ops_status
+    pend = tmp_path / "pending.json"
+    pend.write_text(json.dumps({"cards": [
+        {"id": "a", "reviewed": "d", "accepted": "d"},                      # готова, не показана
+        {"id": "b", "reviewed": "d", "accepted": "d", "draft_sent": True},  # показана — скоро выйдет
+        {"id": "c", "reviewed": "d"},                                       # не принята
+        {"id": "d", "reviewed": "d", "accepted": "d", "held": True},
+    ]}), encoding="utf-8")
+    assert ops_status.unsent_count(str(pend)) == 1
+    args = argparse.Namespace(routine="публикация", broken="", posted=0, edited=0, applied=0,
+                              soon=0, held=0, unread=0, nothing=True, pending=str(pend))
+    args.inbox = str(tmp_path / "no-inbox")
+    text, kb = ops_status.build(args)
+    assert "📬 1 карточка готова, но вам еще не показаны" in text, text
+    assert any(b["callback_data"] == "show:unsent" for row in kb["inline_keyboard"] for b in row)
+
+
+def test_silence_clock_starts_when_the_card_is_first_shown():
+    """Сутки молчания — от показа в консоли, не от приемки: иначе карточка,
+    застрявшая до консоли на трое суток, вышла бы молчанием через час."""
+    import send_drafts
+    from datetime import datetime, timezone
+    now = datetime(2026, 10, 27, 9, 0, tzinfo=timezone.utc)
+    card = {"id": "x", "pending_since": "2026-10-24T07:00:00+00:00"}
+    send_drafts.mark_sent(card, "draft_sent", now)
+    assert card["draft_sent"] is True and card["pending_since"] == "2026-10-27T09:00:00+00:00"
+    send_drafts.mark_sent(card, "post_draft_sent", now.replace(hour=10))
+    assert card["pending_since"] == "2026-10-27T09:00:00+00:00"  # второе сообщение часы не сдвигает
