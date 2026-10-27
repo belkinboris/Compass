@@ -6162,7 +6162,7 @@ def test_report_deal_name_is_not_the_first_capitalized_word():
     by_id = {d["id"]: d for d in base["deals"]}
     companies = base["companies"]
     cases = {
-        "g6f83d85e": "Продажа",           # Продажа Veeam Software фонду Insight Partners...
+        # g6f83d85e (Продажа Veeam Software…) — карточка 2020 года удалена 27 октября 2026
         "gdde6bef5": "Слияние",           # Слияние Whoosh и МТС Юрент...
         "g9c4b80a7": "Российские",        # Российские активы CanPack...
         "g3074f98b": "Государственный",   # Государственный пенсионный фонд Норвегии...
@@ -8545,8 +8545,10 @@ def test_accepted_cards_not_yet_shown_in_the_console_are_counted_and_named(tmp_p
                               soon=0, held=0, unread=0, nothing=True, pending=str(pend))
     args.inbox = str(tmp_path / "no-inbox")
     text, kb = ops_status.build(args)
-    assert "📬 1 карточка готова, но вам еще не показаны" in text, text
-    assert any(b["callback_data"] == "show:unsent" for row in kb["inline_keyboard"] for b in row)
+    # Не очередь, а сбой (владелец 27 октября: «не должно быть готовых карточек,
+    # которые нам не показывают»): строка-тревога, без кнопки.
+    assert "⛔ Сбой: 1 карточка готова, но не показана вам" in text, text
+    assert not any(b["callback_data"] == "show:unsent" for row in kb["inline_keyboard"] for b in row)
 
 
 def test_silence_clock_starts_when_the_card_is_first_shown():

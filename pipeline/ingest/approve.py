@@ -260,6 +260,16 @@ def main(write=False):
     decisions, handle = fetch_decisions()
     now = datetime.now(timezone.utc)
     publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now)
+    # ГОТОВАЯ КАРТОЧКА, КОТОРУЮ ВЛАДЕЛЕЦ НЕ ВИДЕЛ, — ТУПИК, А НЕ ОЧЕРЕДЬ
+    # (27 октября 2026: 13 принятых карточек трое суток не показывались;
+    # владелец — «если карточка готова, в чем проблема ее показать?»).
+    # Сухой прогон approve.py — первый шаг каждого прогона публикации, и он
+    # называет такие карточки по имени: следующий шаг — send_drafts.py --write.
+    for card in pending['cards']:
+        if card.get('reviewed') and card.get('accepted') and not card.get('draft_sent') \
+                and not card.get('held') and not card.get('hold_reason'):
+            print('  ТУПИК: %s «%s» — готова, но в консоли не показана: '
+                  'python3 pipeline/ingest/send_drafts.py --write' % (card['id'], str(card.get('title') or '')[:70]))
 
     # СЫРЬЁ РАЗБИРАЕТСЯ ДО СУХОГО ПРОГОНА. Раньше решения по сырью («это
     # сделка — в работу» / «не сделка») применялись только под `--write`, а
