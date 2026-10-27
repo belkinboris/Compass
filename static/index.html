@@ -3908,6 +3908,7 @@ function route(){
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
   window.scrollTo(0,0);
+  if(jumpToFeed){ jumpToFeed=false; scrollToFeed(); }
   if(typeof updTop==="function") updTop();
   renderCompareTray();
   requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach((el,i)=>setTimeout(()=>el.classList.add("in"),i*55)));
@@ -3953,6 +3954,22 @@ window.addEventListener("scroll", updTop, {passive:true});
 const wordmarkLink = document.querySelector(".top .wordmark");
 if(wordmarkLink) wordmarkLink.addEventListener("click", ()=>{
   setTimeout(()=>window.scrollTo({top:0,behavior:"smooth"}),0);
+});
+/* Вкладка «Сделки» ведет сразу к ленте — поиск и список, — минуя первый
+   экран с листающимися слайдами (владелец, 27 октября 2026). Первый экран
+   остается за логотипом «КОМПАС». С другой страницы прыжок делает route()
+   после своей прокрутки наверх; на главной адрес не меняется, прыгаем сами. */
+let jumpToFeed = false;
+function scrollToFeed(){
+  const f = document.getElementById("feed"); if(!f) return;
+  const topH = (document.querySelector(".top")||{}).offsetHeight || 0;
+  window.scrollTo({top: Math.max(0, f.getBoundingClientRect().top + window.scrollY - topH), behavior:"instant"});
+  if(typeof updTop==="function") updTop();
+}
+const dealsTab = document.querySelector('#nav a[data-r="deals"]');
+if(dealsTab) dealsTab.addEventListener("click", ()=>{
+  if(/^#?\/?$/.test(location.hash)) setTimeout(scrollToFeed, 0);
+  else jumpToFeed = true;
 });
 const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")));
 
@@ -10604,7 +10621,8 @@ const SHEET_SUGGESTS = [
   {label:"Крупнейшие за год", q:"Самые крупные сделки этого года"},
   {label:"Уход иностранцев", q:"Кто из иностранных владельцев уходил из России в этом году?"},
 ];
-const AI_FAB_SVG = '<svg viewBox="0 0 48 48" width="34" height="34" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="21" stroke="#fff" stroke-width="2.6"/><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="#fff"/><circle cx="24" cy="24" r="3" fill="#0F2B21" stroke="#fff" stroke-width="1.4"/></svg>';
+// Стрелка по диагонали, как в основном логотипе (владелец, 27 октября 2026).
+const AI_FAB_SVG = '<svg viewBox="0 0 48 48" width="34" height="34" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="21" stroke="#fff" stroke-width="2.6"/><g transform="rotate(-38 24 24)"><polygon points="24,5 28.5,24 19.5,24" fill="#C9AE7C"/><polygon points="24,43 28.5,24 19.5,24" fill="#fff"/></g><circle cx="24" cy="24" r="3" fill="#0F2B21" stroke="#fff" stroke-width="1.4"/></svg>';
 function aiDockEls(){
   let fab = document.getElementById("aiFab");
   if(fab) return {fab, sheet:document.getElementById("aiSheet"), scrim:document.getElementById("aiSheetScrim"),
