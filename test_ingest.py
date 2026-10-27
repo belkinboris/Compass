@@ -4321,6 +4321,18 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert not accept_card.findings(clean, base, registry=known), accept_card.findings(clean, base, registry=known)
     no_note = dict(clean); no_note.pop("accepted_notes")
     assert "seller_search" in {c for c, _t in accept_card.findings(no_note, base, registry=known)}
+    # Юрлицо, названное в источнике карточки, обязано быть на карточке (5Yes!, 27.10.2026:
+    # «стала владельцем ООО «Полигрин»» в статье — а на карточке предмет «бренд»).
+    recs = [{"url": "https://www.vedomosti.ru/x", "title": "Positive Technologies купила CyberOK",
+             "summary": "Компания стала владельцем ООО «Киберок», которому принадлежит бренд CyberOK."},
+            {"url": "https://other.example/y", "title": "x", "summary": "ООО «Чужое» тут ни при чем."}]
+    codes = {c for c, _t in accept_card.findings(clean, base, registry=known, source_records=recs)}
+    assert "entity_in_source" in codes, codes
+    named = dict(clean, asset="100% ООО «Киберок» (бренд CyberOK)")
+    assert "entity_in_source" not in {c for c, _t in accept_card.findings(named, base, registry=known, source_records=recs)}
+    explained = dict(clean, accepted_notes=dict(clean["accepted_notes"],
+                     notes="ООО «Киберок» — юрлицо предмета, профиль CyberOK и есть оно"))
+    assert "entity_in_source" not in {c for c, _t in accept_card.findings(explained, base, registry=known, source_records=recs)}
     # «Реестры закрыты» без проверки истории участников ЕГРЮЛ — не довод (Nomi, 15.10.2026).
     lazy = dict(clean, asset="100% ООО «КиберОК»",
                 accepted_notes={"no_profile": {"seller": "rusprofile и checko закрыты (403)"}})
