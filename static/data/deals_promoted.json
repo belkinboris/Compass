@@ -231600,6 +231600,167 @@
      "multiple_text": "target_unconfirmed"
     }
    }
+  },
+  {
+   "id": "g1f8414a3",
+   "date": "2026-10-27",
+   "title": "«ЭсЭфАй» выиграла повторные торги за банк «Агропромкредит», национализированный у Артема Бикова и Алексея Боброва",
+   "ind": "Банки",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "E1.RU",
+     "https://www.e1.ru/text/business/2026/10/27/76726339/"
+    ],
+    [
+     "URBC.RU",
+     "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html"
+    ],
+    [
+     "EAnews.ru",
+     "https://eanews.ru/ekaterinburg/20261027103633/natsionalizirovannyy-bank-agrpromkredit-prodan-strukturam-mihaila-gutserieva"
+    ],
+    [
+     "JustMedia.ru",
+     "https://www.justmedia.ru/news/economy/semya-eksdeputata-gosdumy-gutseriyeva-kupila-natsionalizirovannyy-bank-bikova-i-bobrova"
+    ],
+    [
+     "SFI (инвестиционный блог)",
+     "https://smart-lab.ru/company/sfi/blog/1367181.php"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1,427 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Это не первый актив той же истории, который меняет владельца: раньше уже разошлись энергоактивы Артема Бикова и Алексея Боброва в трех регионах — их забрали «Россети». По уголовному делу о мошенничестве сейчас проходит только Бобров; Биков фигурантом не является и, по информации СМИ, не находится под стражей.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Сама «ЭсЭфАй» в своем сообщении подчеркивает, что это пока победа на торгах, а не закрытая сделка: переход прав собственности на 100% долей банка наступит только после всех нужных одобрений — корпоративных и регуляторных, которых на момент объявления победы еще не было. Первые торги (стартовая цена 2,854 млрд ₽) не состоялись — желающих не нашлось; на повторных цену снизили вдвое.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ПСБ",
+   "asset": "50% банка «Агропромкредит», 100% ООО «Дэнсиборг» и 100% ООО «Блаусент»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "ПСБ продал на повторных торгах за 1,427 млрд рублей банк «Агропромкредит» и две компании, владеющие его оставшейся долей; победителем стала «ЭсЭфАй».",
+     "source": [
+      "E1.RU",
+      "https://www.e1.ru/text/business/2026/10/27/76726339/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Национализация / иск Генпрокуратуры"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "акции компаний бизнесмена Бикова по минимальной цене",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/312333"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ПСБ",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.e1.ru/text/business/2026/10/27/76726339/"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "law.struct": [
+     "eff65f4199ec"
+    ],
+    "eco.context": []
+   },
+   "reviewed": "2026-10-27",
+   "target": "g193370bd",
+   "buyer": "g36015992",
+   "seller_id": "g8bafde28",
+   "accepted": "2026-10-27",
+   "accepted_notes": {
+    "no_inn": {
+     "target": "искали ИНН «Агропромкредит» в ЕГРЮЛ (egrul.nalog.ru — сброс соединения) и в rusprofile/list-org (403/защита от ботов) — непроверенным номером не заполняем",
+     "buyer": "искали ИНН ПАО «ЭсЭфАй» в ЕГРЮЛ (egrul.nalog.ru — сброс соединения) и в rusprofile/list-org (403/защита от ботов); нашёлся только один слабый неподтверждённый источник с номером 6164077483 — без второго подтверждения непроверенным номером не заполняем"
+    },
+    "notes": "пять источников (E1.RU, URBC.RU, EAnews.ru, JustMedia.ru, собственный инвестблог «ЭсЭфАй» на smart-lab.ru) — все от 27 октября, независимо подтверждают состав лота и итоговую цену 1,427 млрд рублей; шестой источник (Frank Media, исходный черновик) оказался недоступен для скачивания, заменён на пять найденных отдельным поиском; покупатель сам прямо говорит, что переход прав собственности и закрытие сделки ещё впереди — это отражено в law.struct; статус оставлен «Закрыта» по формальным триггерам заголовков (продал/купили), хотя сделка формально не закрыта — честная оговорка есть в тексте карточки"
+   },
+   "second_read": "2026-10-27",
+   "post_preview": "<b>«ЭсЭфАй» выиграла повторные торги за банк «Агропромкредит», национализированный у Артема Бикова и Алексея Боброва</b>\n\n<b>Покупатель:</b> ПАО «ЭсЭфАй»\n<b>Продавец:</b> Промсвязьбанк\n<b>Предмет:</b> Агропромкредит — банк, основанный в 1994 году, вел дела на Урале и в Западной Сибири; обслуживал энергетические, торговые, инвестиционные, производственные и медийные активы Артема Бикова и Алексея Боброва, которые государство национализировало осенью 2025 года.\n<b>Статус:</b> Закрыта · октябрь 2026\n\n<b>Источник:</b> <a href=\"https://www.e1.ru/text/business/2026/10/27/76726339/\">E1.RU</a>\nЕщё 4 источника — в карточке сделки\n\n#торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g1f8414a3\">карточке сделки</a>",
+   "proofread": "2026-10-27",
+   "added": "2026-10-27",
+   "post_override": "<b>«ЭсЭфАй» выиграла торги на покупку банка «Агропромкредит»</b>\n\n<b>Покупатель:</b> ПАО «ЭсЭфАй»\n<b>Продавец:</b> Промсвязьбанк\n<b>Предмет:</b> Агропромкредит\n<b>Статус:</b> Закрыта · октябрь 2026\n\n<b>Источник:</b> <a href=\"https://www.e1.ru/text/business/2026/10/27/76726339/\">E1.RU</a>\nЕщё 4 источника — в карточке сделки\n\n#торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g1f8414a3\">карточке сделки</a>",
+   "facts": {
+    "stake": {
+     "value": 50.0,
+     "basis": "rule",
+     "card_hash": "da06fa458971"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "b9dbfcc742bf"
+    },
+    "date": {
+     "value": "2026-10-27",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "39d50015e144"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "16c3ae546bc3"
+    },
+    "target": {
+     "company_id": "g193370bd",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "49667b579c8c"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
