@@ -4071,10 +4071,14 @@ function tabbarAdapt(){
   const foot = document.querySelector("footer");
   const r = bar.getBoundingClientRect();
   const overFooter = !!(foot && r.height && foot.getBoundingClientRect().top < r.top + r.height / 2);
-  // Владелец 27 октября 2026: на «Сделках» панель светлая, как на других
-  // вкладках, — темный фон ленты просвечивает сквозь стекло и слегка
-  // затемняет ее сам; темнеет панель только над подвалом.
-  const dark = overFooter;
+  // Темный режим — только над сплошными темными блоками, по их геометрии
+  // (без замера цвета под панелью, чтобы не мигало между карточками):
+  // герой главной (`.heroslider`), темная полоса раздела (`.page-hero`) и подвал.
+  // Владелец 27 октября 2026: над зеленым героем светлое стекло мутное,
+  // над подвалом и на белом — хорошо; лента «Сделок» — светлое стекло.
+  const over = el => { if(!el || !r.height) return false; const b = el.getBoundingClientRect();
+    return b.top < r.top + r.height / 2 && b.bottom > r.top; };
+  const dark = overFooter || over(document.querySelector(".heroslider")) || over(document.querySelector(".page-hero:not(.light)"));
   bar.classList.toggle("on-dark", dark);
   if(fab) fab.classList.toggle("on-dark", dark);
 }
