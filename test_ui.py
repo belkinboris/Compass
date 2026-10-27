@@ -5149,3 +5149,16 @@ def test_deal_card_has_a_full_analysis_button_under_the_scheme(page, base_url):
     page.wait_for_function("!document.getElementById('faGo').disabled", timeout=30000)
     assert "недоступен" in page.inner_text("#faBody")
     assert page.locator("#aiAsk").count() == 0  # кнопка у «Контекста» уступила место разбору
+
+
+def test_deals_tab_opens_the_feed_not_the_hero(page, base_url):
+    """Владелец 27 октября 2026: из другого раздела вкладка «Сделки» ведет сразу
+    к ленте (поиск и список), а не на первый экран со слайдами."""
+    page.goto(base_url + "/#/advisors", wait_until="domcontentloaded")
+    page.wait_for_selector("#aiFab", timeout=15000)
+    page.wait_for_timeout(1500)
+    page.evaluate("document.querySelector('#nav a[data-r=\"deals\"]').click()")
+    page.wait_for_timeout(1500)
+    top = page.evaluate("document.getElementById('feed').getBoundingClientRect().top")
+    header = page.evaluate("document.querySelector('.top').offsetHeight")
+    assert abs(top - header) <= 4, (top, header)
