@@ -42,6 +42,48 @@
     "needs_review": true
    },
    "queued": "2026-10-27"
+  },
+  {
+   "key": "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699::g55008cf1",
+   "candidate_id": "g55008cf1",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d62414553",
+    "title": "«Ломбард 888» приобрел сеть «Ломбардный дом»",
+    "date": "2026-10-27",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-27",
+      "title": "Сделка завершена",
+      "note": "В состав покупки вошло 36 отделений в нескольких регионах России. Как отмечается в сообщении компании, это крупнейшая сделка M&A на ломбардном рынке за последнее время. Сделка была профинансирована как собственными средствами, так и деньгами, привлеченными в…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699"
+      ]
+     }
+    ],
+    "buyer_name": "«Ломбард 888»",
+    "asset": "сеть «Ломбардный дом»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Ломбард 888»",
+     "asset": "сеть «Ломбардный дом»",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-27"
   }
  ]
 }
