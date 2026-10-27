@@ -1316,11 +1316,11 @@
      "card_hash": "be54e104f906"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 8000000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "baa61b6a3878"
     },
     "date": {
      "value": "2026-04-24",
@@ -1358,11 +1358,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "sum": "8 млрд ₽"
   },
   {
    "id": "g1edb1b9d",
@@ -8240,7 +8241,7 @@
    "type": "Продажа с торгов",
    "kind": "acquisition",
    "status": "Обсуждается",
-   "sum": "Не раскрыта",
+   "sum": "280,8 млрд ₽ (начальная цена)",
    "eco": {
     "sum": "280,8 млрд ₽ (стартовая цена аукциона); аукцион признан несостоявшимся 18 мая 2026 — заявок не поступило",
     "share": "242 528,5 кв. м в небоскребе Moscow Towers (две 63-этажные башни на Пресненской наб., 2А): около 206 тыс. кв. м офисов, 15,8 тыс. кв. м апартаментов (210 лотов), 115 кладовых и 1219 машиномест — выставлены на открытый электронный аукцион.",
@@ -8324,10 +8325,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "d79a59d6774a"
+     "basis": "rule",
+     "card_hash": "5ba674c3e506"
     },
     "date": {
      "value": "2026-04-15",
@@ -10159,7 +10160,7 @@
    "type": "Временное управление",
    "kind": "custody",
    "status": "Закрыта",
-   "sum": null,
+   "sum": "≈30 млрд ₽ (по оценке)",
    "eco": {
     "sum": "≈30 млрд ₽ (по оценке)",
     "share": "100% долей польской CanPack S.A. и французской Tapon France в ООО «Кэн-пак» и ООО «Кэн-пак завод упаковки» переданы во временное управление ООО «Стальэлемент»; право собственности сохраняется за CanPack.",
@@ -10234,10 +10235,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "0dbec85cac55"
+     "basis": "rule",
+     "card_hash": "32a470576da1"
     },
     "date": {
      "value": "2026-01-13",
@@ -29029,7 +29030,7 @@
    "type": "Инвестиция",
    "kind": "financing",
    "status": "Закрыта",
-   "sum": null,
+   "sum": "10 млрд ₽",
    "eco": {
     "sum": "10 млрд ₽",
     "share": "Сделка структурирована по механизму MBO (management buyout): с марта 2023 года 80% УК «Восход» перешло к гендиректору Руслану Саркисову, по 10% — венчурным партнерам Константину Гибало и Артуру Мартиросову; сумма сделки сторонами не раскрывалась.",
@@ -29096,11 +29097,11 @@
      "card_hash": "01888347571b"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 10000000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "3a68f7b82a0b"
+     "basis": "rule",
+     "card_hash": "606c9c2f8dc0"
     },
     "date": {
      "value": "2023-06-06",
@@ -53115,7 +53116,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "Не менее 19–30 млрд ₽",
    "eco": {
     "sum": "Не менее 19–30 млрд ₽",
     "share": "Холдинг с восемью лабораторными комплексами и 2 тыс. медицинских офисов; сеть основана в 1995 году.",
@@ -53180,10 +53181,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "4f57368173d5"
     },
     "date": {
      "value": "2023",
@@ -86142,7 +86143,7 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": null,
+   "sum": "25,6 млрд ₽ (по оценке)",
    "eco": {
     "sum": "25,6 млрд ₽ (по оценке)",
     "share": "—",
@@ -86207,10 +86208,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "22659ed34f50"
     },
     "date": {
      "value": "2024-10-01",
@@ -170516,7 +170517,7 @@
    "ind": "ИТ и интернет",
    "type": "M&A",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "4,2 млрд ₽",
    "eco": {
     "sum": "4,2 млрд ₽",
     "share": "100% АО «Заряд!»",
@@ -173749,10 +173750,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "lower_bound",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "b6922b5faf19"
     },
     "date": {
      "value": "2024-12-23",
@@ -173796,7 +173797,8 @@
     }
    },
    "followup_researched": "2026-09-08",
-   "target": "g2c0e743d"
+   "target": "g2c0e743d",
+   "sum": "Более 24 млрд ₽"
   },
   {
    "id": "cb30dbbc8",
@@ -177358,7 +177360,7 @@
    ],
    "from_compact": "bulk",
    "extra": "Банк «Точка» и акселератор ФРИИ создают совместный инвестиционный конвейер: акселератор отбирает проекты и готовит сделки, а банк вкладывает деньги в отобранные стартапы. В каждый подходящий проект «Точка» готова вложить до 500 млн ₽.",
-   "sum": null,
+   "sum": "До 500 млн ₽",
    "eco": {
     "sum": "До 500 млн ₽",
     "share": "Программа рассчитана на стартапы с выручкой от 20 млн руб. из финтеха, e-commerce, маркетинга и логистики.",
@@ -177393,10 +177395,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "9ab5e5d274b5"
+     "basis": "rule",
+     "card_hash": "10e879daade4"
     },
     "date": {
      "value": "2025-03-24",
@@ -181782,7 +181784,7 @@
    ],
    "from_compact": "bulk",
    "extra": "Предложение исходит от самой компании: письмо подписала гендиректор Анна Акиньшина. Государству предлагают войти в управление через блокирующий или более крупный пакет с правом обратного выкупа по новой цене, а компания берется обеспечить еще до 10 млрд ₽ внешних денег.",
-   "sum": null,
+   "sum": "50 млрд ₽",
    "eco": {
     "sum": "50 млрд ₽",
     "share": "—",
@@ -181825,7 +181827,7 @@
      "meaning": "not_a_price",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "81185e221a06"
+     "card_hash": "cb6e9696936c"
     },
     "date": {
      "value": "2026-02-04",
@@ -204928,11 +204930,11 @@
      "card_hash": "f3e8bf6787a4"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 17700000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "6b83484b917c"
     },
     "date": {
      "value": "2024-05-17",
@@ -204970,9 +204972,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    },
    "proofread": "2026-09-11",
@@ -204992,7 +204994,8 @@
     ]
    },
    "weekly_researched": "2026-10-08",
-   "followup_researched": "2026-10-11"
+   "followup_researched": "2026-10-11",
+   "sum": "17,7 млрд ₽ ($191,5 млн)"
   },
   {
    "id": "gb20ec0ef",
@@ -218252,10 +218255,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "873de8740e3a"
     },
     "date": {
      "value": "2026-08-15",
@@ -218307,7 +218310,8 @@
     "buyer_name": [
      "2c9d0ab5fe92"
     ]
-   }
+   },
+   "sum": "550–750 млн ₽ (по оценке)"
   },
   {
    "id": "g6d711306",
@@ -231186,7 +231190,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "458 млн рублей",
+    "sum": "458 млн ₽",
     "share": "—",
     "val": "—",
     "target_fin": "—",
@@ -231271,11 +231275,11 @@
      "card_hash": "90662dc1879f"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 458000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "31851c846666"
     },
     "date": {
      "value": "2026-10-26",
@@ -231321,7 +231325,8 @@
    "themes": [
     "Банкротство / долги"
    ],
-   "deep_researched": "2026-10-27"
+   "deep_researched": "2026-10-27",
+   "sum": "458 млн ₽"
   },
   {
    "id": "g88b148ea",
@@ -231766,7 +231771,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Это не первый актив той же истории, который меняет владельца: раньше уже разошлись энергоактивы Артема Бикова и Алексея Боброва в трех регионах — их забрали «Россети». По уголовному делу о мошенничестве сейчас проходит только Бобров; Биков фигурантом не является и, по информации СМИ, не находится под стражей.",
+    "context": "Банк «Агропромкредит» был изъят у Артема Бикова и Алексея Боброва по иску Генпрокуратуры и достался ПСБ. На повторных торгах лот — 50% банка напрямую и две компании, владеющие оставшейся долей, — купила «ЭсЭфАй» за 1,427 млрд ₽. Ранее тем же путем ушли энергоактивы Бикова и Боброва в трех регионах — их получили «Россети».",
     "finadv": "—"
    },
    "law": {
@@ -231842,11 +231847,11 @@
      "card_hash": "da06fa458971"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 1427000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "b9dbfcc742bf"
+     "basis": "rule",
+     "card_hash": "c2ba65890d9d"
     },
     "date": {
      "value": "2026-10-27",
@@ -231884,11 +231889,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "sum": "1,427 млрд ₽"
   }
  ],
  "companies": {

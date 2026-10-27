@@ -987,6 +987,10 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             and normalize_sum.normalize_full(str(top_sum)) != normalize_sum.normalize_full(str(eco_sum)):
         out.append(('sum_fields_differ', 'sum %r ≠ eco.sum %r — одна и та же цена должна совпадать в обоих полях'
                     % (top_sum, eco_sum)))
+    # Число в одной вкладке и пусто в другой — та же болезнь («Агропромкредит»,
+    # 27 октября 2026: «Обзор» — «Не раскрыта», «Экономист» — 1,427 млрд ₽).
+    elif has(eco_sum) and not has(top_sum) and re.match(r'\s*(?:≈|~|более|около|не менее|свыше|до)?\s*\d', str(eco_sum), re.I):
+        out.append(('sum_fields_differ', 'eco.sum %r назван, а sum пуст — «Обзор» покажет «Не раскрыта»' % eco_sum))
     if card.get('status') in ('Закрыта', 'Не состоялась'):
         for field in STALE_STATEMENT_FIELDS:
             if field in waived_stale:
