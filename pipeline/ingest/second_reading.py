@@ -90,7 +90,12 @@ def queue(base, pending):
 def questionnaire(card, base):
     comps = base.get('companies') or {}
     seller, asset, buyer = format_post.party_names(card, comps)
-    lines = ['=== %s ===' % card['id'],
+    import card_text
+    # Сначала — карточка целиком, как ее увидит подписчик (три экрана и пост);
+    # вопросы к полям — после. «Агропромкредит» (27 октября 2026) по полям
+    # читался нормально, а на экране «Обзор» спорил с «Экономистом».
+    lines = ['=== %s ===' % card['id'], 'КАРТОЧКА, КАК ЕЕ ВИДИТ ЧИТАТЕЛЬ', card_text.render_screens(card, comps), '',
+             'ВОПРОСЫ К ПОЛЯМ',
              'Тип: %s · статус: %s · дата: %s' % (card.get('type'), card.get('status'), card.get('date')),
              'Стороны: покупатель/участник — %s; продавец — %s; предмет — %s' % (buyer, seller, asset), '']
     for f in filled_fields(card):
@@ -101,13 +106,6 @@ def questionnaire(card, base):
         lines.append('[%s] %s' % (k, q))
     lines.append('')
     lines.append('Источники: ' + '; '.join('%s — %s' % (s[0], s[1]) for s in card.get('src') or [] if len(s) > 1))
-    lines.append('')
-    try:
-        post = format_post.render(card, comps)
-        post = re.sub(r'<a href="([^"]*)">([^<]*)</a>', r'\2 (\1)', post)
-        lines.append('Пост, как уйдет в канал:\n' + re.sub(r'<[^>]+>', '', post))
-    except Exception as e:                                     # noqa: BLE001
-        lines.append('Пост не собирается: %s' % e)
     return '\n'.join(lines)
 
 
