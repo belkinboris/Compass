@@ -265632,7 +265632,10 @@
   "g6a917c05": 224,
   "gba4f7340": 225,
   "g178fcbb1": 226,
-  "g896a22ba": null
+  "g896a22ba": null,
+  "g5257a627": null,
+  "g1a2f9d60": null,
+  "g4a53d81b": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -266144,7 +266147,10 @@
   "ga5a7f3c1": 27,
   "gf285fa14": 28,
   "g29d48d22": 29,
-  "g896a22ba": 30
+  "g896a22ba": 30,
+  "g5257a627": 31,
+  "g1a2f9d60": 32,
+  "g4a53d81b": 33
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -270189,5 +270195,5 @@
    ]
   }
  },
- "telegram_last_post_at": "2026-10-24T15:21:28+00:00"
+ "telegram_last_post_at": "2026-10-27T12:05:38+00:00"
 }

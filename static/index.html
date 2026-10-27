@@ -1169,14 +1169,17 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 /* Ассистент с любой страницы: кнопка справа внизу и выезжающая шторка (aiDock) */
 .ai-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;
   width:60px;height:60px;border-radius:20px;border:0;cursor:pointer;background:#0F2B21;display:grid;place-items:center;
-  box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset;transition:transform .2s var(--ease),background .2s var(--ease)}
+  box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset,0 0 0 7px rgba(15,43,33,.07);
+  transition:transform .25s var(--ease),background .2s var(--ease),opacity .25s var(--ease),visibility 0s linear 0s}
 .ai-fab:hover{background:#163B2C}
 .ai-fab:active{transform:scale(.96)}
 .ai-fab[hidden]{display:none}
 body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px + var(--cookie-h,140px) + 12px)}
 .ai-fab svg polygon{transition:transform .5s var(--ease);transform-origin:24px 24px}
 .ai-fab.on svg polygon{transform:rotate(45deg)}
-@media(max-width:899px){.ai-fab.on{display:none}}  /* на телефоне у открытой шторки свои «×» и ручка; кнопка закрыла бы поле ввода */
+/* На телефоне у открытой шторки свои «×» и ручка; кнопка закрыла бы поле ввода —
+   уходит плавно, а не пропадает рывком (владелец, 27 октября 2026: «слишком резко»). */
+@media(max-width:899px){.ai-fab.on{opacity:0;visibility:hidden;transform:scale(.7);transition:transform .25s var(--ease),opacity .25s var(--ease),visibility 0s linear .25s}}
 /* Нижняя панель разделов — только на телефоне (≤720px), темно-зеленая, как
    кнопка ассистента, и той же высоты; справа от нее остается место под кнопку.
    Верхнее меню на телефоне сворачивается до входа/аватара. */
@@ -1220,20 +1223,32 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
 .chat-shell.in-sheet .chat-side,.chat-shell.in-sheet .chat-scrim,.chat-shell.in-sheet .chat-burger{display:none}
 .chat-shell.in-sheet .chat-top{padding:2px 18px 10px}
 .chat-shell.in-sheet .chat-top h1{font-size:22px}
-.chat-shell.in-sheet .chat-composer .suggests.tasks{display:none}
+/* «Компактная» строка ввода — в шторке и на телефоне на самом экране ассистента
+   (владелец, 27 октября 2026: «в основном ассистенте до сих пор отвратительная
+   менюшка кривая, хотя мы уже это меняли в ассистенте через кнопку»). */
+.chat-shell.compact .chat-composer .suggests.tasks{display:none}
 /* Подсказки в шторке — 3-4 в одну строку, листаются вбок (владелец, 26 октября 2026). */
-.chat-shell.in-sheet .chat-composer .suggests{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:10px -18px 0;padding:0 18px}
-.chat-shell.in-sheet .chat-composer .suggests::-webkit-scrollbar{display:none}
+.chat-shell.compact .chat-composer .suggests{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:10px -18px 0;padding:0 18px}
+.chat-shell.compact .chat-composer .suggests::-webkit-scrollbar{display:none}
 /* Здесь — «таблетки», как в WHOOP, хотя на сайте нажимаемые слова подчеркнуты
    (12 октября 2026): владелец попросил так именно для шторки ассистента. */
-.chat-shell.in-sheet #suggests .chip{flex:0 0 auto!important;white-space:nowrap!important;border:1px solid var(--line)!important;
+.chat-shell.compact #suggests .chip{flex:0 0 auto!important;white-space:nowrap!important;border:1px solid var(--line)!important;
   border-radius:999px!important;background:var(--card)!important;padding:8px 14px!important;font-size:13.5px!important;color:var(--ink)!important}
-.chat-shell.in-sheet .chat-composer{display:flex;flex-direction:column;align-items:stretch}
-.chat-shell.in-sheet .chat-composer>*{max-width:none;margin-left:0;margin-right:0;min-width:0}
-.chat-shell.in-sheet .chat-composer #suggests{order:-1;margin:0 -18px 10px;padding:0 18px;gap:8px!important}
-.chat-shell.in-sheet #suggests .chip{margin:0!important}
-.chat-shell.in-sheet #suggests .chip:nth-child(n+5){display:none}
+.chat-shell.compact .chat-composer{display:flex;flex-direction:column;align-items:stretch}
+.chat-shell.compact .chat-composer>*{max-width:none;margin-left:0;margin-right:0;min-width:0}
+.chat-shell.compact .chat-composer #suggests{order:-1;margin:0 -18px 10px;padding:0 18px;gap:8px!important}
+.chat-shell.compact #suggests .chip{margin:0!important}
+.chat-shell.compact #suggests .chip:nth-child(n+5){display:none}
 html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
+/* Шторка, поднятая на весь экран, — полноценный ассистент: появляется кнопка
+   «Диалоги» и выдвижной список диалогов (владелец, 27 октября 2026). Опустить
+   шторку вниз и закрыть ее можно по-прежнему — ручкой и крестиком. */
+@media(max-width:999px){
+  .ai-sheet.full .chat-shell.in-sheet .chat-burger{display:inline-flex}
+  .ai-sheet.full .chat-shell.in-sheet .chat-side{display:flex;top:0;z-index:72}
+  .ai-sheet.full .chat-shell.in-sheet .chat-scrim{display:block;inset:0;z-index:71}
+  .ai-sheet.full .chat-shell.in-sheet .chat-scrim[hidden]{display:none}
+}
 @media(min-width:900px){
   .ai-sheet{left:auto;right:16px;width:460px;border-radius:18px;bottom:90px;height:min(680px,calc(100svh - 120px));transform:translateY(calc(100% + 120px))}
   .ai-sheet.full{height:calc(100svh - 110px)}
@@ -10702,6 +10717,8 @@ function aiDockPaint(){
   scrim.classList.toggle("on", aiDockState!=="closed");
   fab.classList.toggle("on", aiDockState!=="closed");
   document.documentElement.classList.toggle("ai-sheet-open", aiDockState!=="closed");
+  // Список диалогов есть только у шторки во весь экран: опустили — закрываем его.
+  if(aiDockState!=="full"){ const sh = sheet.querySelector(".chat-shell"); if(sh){ sh.classList.remove("side-open"); const sc = sh.querySelector(".chat-scrim"); if(sc) sc.hidden = true; } }
   sheet.style.transform = "";
   aiDockFit();
 }
@@ -10749,6 +10766,9 @@ function aiDockAsk(q){
   aiDockOpen("half");
 }
 async function renderAssistant(root, inSheet){
+  // Компактный вид — в шторке и на телефоне: короткие подсказки-«таблетки» в
+  // одну строку над полем, без заготовок-заданий, подпись «Задайте вопрос».
+  const compact = !!inSheet || window.matchMedia("(max-width:899px)").matches;
   /* root — куда рисовать: экран #/assistant или шторка ассистента (aiDock),
      которая открывается с любой страницы кнопкой справа внизу. */
   root = root || app;
@@ -10773,7 +10793,7 @@ async function renderAssistant(root, inSheet){
      на сенсорном экране focus() открывает клавиатуру и сам прокручивает
      страницу (урок 31 августа). */
   root.innerHTML = `
-  <div class="chat-shell${inSheet?" in-sheet":""}" id="chatShell">
+  <div class="chat-shell${inSheet?" in-sheet":""}${compact?" compact":""}" id="chatShell">
     <div class="chat-scrim" id="chatScrim" hidden></div>
     <aside class="chat-side" id="threadPanel" aria-label="Диалоги с ассистентом">
       <div class="chat-side-top">
@@ -10798,7 +10818,7 @@ async function renderAssistant(root, inSheet){
       </header>
       <div class="chat-stream" id="chatbox">${CHAT_WELCOME}</div>
       <div class="chat-composer">
-        <div class="ask"><input id="q" placeholder="${inSheet?"Задайте вопрос":"Например: какие сделки были в фармацевтике в 2025 году?"}" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
+        <div class="ask"><input id="q" placeholder="${compact?"Задайте вопрос":"Например: какие сделки были в фармацевтике в 2025 году?"}" aria-label="Вопрос ассистенту"><button id="send">Спросить</button></div>
         <div class="suggests tasks" id="tasks"></div>
         <div class="suggests" id="suggests"></div>
       </div>
@@ -10906,7 +10926,7 @@ async function renderAssistant(root, inSheet){
     const el=document.getElementById("suggests"); if(!el) return;
     // В шторке — короткие подписи, чтобы вопрос был виден целиком (владелец,
     // 26 октября 2026: «Сделки в сфере IT»); уходит полный вопрос.
-    const list = inSheet ? SHEET_SUGGESTS : SUGGESTS.map(q=>({label:q, q}));
+    const list = compact ? SHEET_SUGGESTS : SUGGESTS.map(q=>({label:q, q}));
     el.innerHTML=list.map((x,i)=>`<button class="chip" data-q="${i}">${esc(x.label)}</button>`).join("");
     el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(list[b.dataset.q].q));
   };
