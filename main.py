@@ -5817,6 +5817,13 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             items = [c for c in pending if c.get("held")]
             head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
                     % len(items))
+        elif kind == "unsent":
+            # Принята и прочитана, но в консоли еще не показана (27 октября
+            # 2026: 13 таких карточек трое суток не имели имени в отчетах).
+            items = [c for c in not_held if c.get("reviewed") and c.get("accepted")
+                     and not c.get("draft_sent") and not c.get("hold_reason")]
+            head = ("📬 <b>Готовы, но вам еще не показаны: %d</b>\nРутина покажет их в консоли "
+                    "ближайшим прогоном; сутки молчания пойдут с показа." % len(items))
         elif kind == "unread":
             # Приёмка (11 сентября 2026): прочитанная, но не принятая карточка
             # по молчанию тоже не выходит (approve.plan_actions) — и обещать

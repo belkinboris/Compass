@@ -579,6 +579,18 @@ def drop_old_decisions(card_id):
     return True
 
 
+def mark_sent(card, mark, now=None):
+    """Отметка «показано в консоли». Сутки молчания считаются от ПОКАЗА, а не от
+    приёмки: 27 октября 2026 тринадцать карточек трое суток не доходили до
+    консоли, и первая же отправка выпустила бы их молчанием через час —
+    `hours_pending` считает от `pending_since`. Поэтому при первом показе
+    карточки `pending_since` переставляется на сейчас."""
+    first = not (card.get('draft_sent') or card.get('post_draft_sent'))
+    card[mark] = True
+    if first:
+        card['pending_since'] = (now or datetime.now(timezone.utc)).isoformat(timespec='seconds')
+
+
 def main(write=False, resend=None):
     plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend)
     if unread2:
@@ -659,7 +671,7 @@ def main(write=False, resend=None):
             if ok_all:
                 sent += 1
                 if kind == 'card':
-                    item[mark] = True
+                    mark_sent(item, mark)
                     if mark == 'post_draft_sent' and pending_preview is not None:
                         item['post_preview'] = pending_preview
                 else:

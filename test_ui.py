@@ -164,8 +164,11 @@ def test_analytics_headline_counts_deals_like_the_home_page(page, base_url):
     цифра актуальная. Она не соответствует тому что у нас на главной» —
     главная считала 1515 вместе с лотами на торгах, «Аналитика» — 1463 без
     них. Первое число шапки — то же, что на главной; лоты названы отдельно."""
+    # С 27 октября 2026 оба числа — без торгов («везде, где количество сделок
+    # пишем, — без торгов»): COUNTED_DEALS на обоих экранах.
     visit(page, base_url, "#/analytics")
-    total = page.evaluate("() => TOTAL_DEALS()")
+    total = page.evaluate("() => COUNTED_DEALS()")
+    assert total < page.evaluate("() => TOTAL_DEALS()")
     head = page.inner_text("#app .ph-in p")
     assert head.startswith("%d " % total), head
 
