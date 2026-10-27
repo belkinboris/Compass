@@ -1195,13 +1195,23 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
    backdrop-filter в мобильном Safari может дергаться при сворачивании
    адресной строки — владелец проверяет на телефоне. */
 @media(max-width:720px){
-  .tabbar{
+  .tabbar,.ai-fab{
     background:rgba(255,255,255,.22);
     -webkit-backdrop-filter:blur(36px) saturate(1.8);backdrop-filter:blur(36px) saturate(1.8);
     border:1px solid rgba(255,255,255,.55);
     box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06),inset 0 0 0 .5px rgba(255,255,255,.35)}
+  /* Кнопка ассистента — то же стекло и та же тень, что у панели (владелец,
+     27 октября 2026, вечер); компас на светлом стекле темно-зеленый. */
   .ai-fab{width:74px;height:74px;border-radius:26px}
+  .ai-fab:hover{background:rgba(255,255,255,.30)}
   .ai-fab svg{width:42px;height:42px}
+  .ai-fab svg circle:first-child{stroke:#3C5A4C}
+  .ai-fab svg polygon:last-of-type{fill:#3C5A4C}
+  .ai-fab svg circle:last-child{fill:#F3F1E9;stroke:#3C5A4C}
+  .ai-fab.on-dark{background:rgba(10,18,16,.58);border-color:rgba(255,255,255,.20)}
+  .ai-fab.on-dark svg circle:first-child{stroke:#fff}
+  .ai-fab.on-dark svg polygon:last-of-type{fill:#fff}
+  .ai-fab.on-dark svg circle:last-child{fill:#0F2B21;stroke:#fff}
   .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 74px + 10px);
     bottom:calc(16px + env(safe-area-inset-bottom,0px));height:74px;border-radius:26px;
     display:flex;justify-content:space-around;align-items:center;gap:0;padding:0 2px}
@@ -4042,45 +4052,29 @@ function updTop(){
   top.classList.toggle("on-hero", window.scrollY < window.innerHeight*0.9);
 }
 window.addEventListener("scroll", updTop, {passive:true});
-/* Нижняя панель на телефоне — стекло без своего цвета, поэтому читаемость
-   значков зависит от фона под ней. Три точки под панелью: что там лежит
-   (мимо самой панели, кнопки и шторки), какого цвета фон у первого
-   непрозрачного предка; градиенты в проекте темные (герой, подвал, плашки).
-   Темно под двумя из трех точек — класс on-dark. Зовется со скролла, после
-   перерисовки экрана и при изменении размера. */
-let _tabbarRaf = 0;
+/* Нижняя панель и кнопка ассистента на телефоне — стекло без своего цвета,
+   поэтому читаемость зависит от фона страницы. Решение принимается ПО
+   СТРАНИЦЕ, а не по прокрутке: темный фон документа (главная) — класс
+   on-dark у панели и кнопки, светлый — прозрачное стекло с темно-зелеными
+   значками. Первая версия (27 октября 2026) смотрела, что под панелью, в
+   каждый момент прокрутки, и на главной мигала в промежутках между белыми
+   карточками — владелец: «странно выглядит, когда между блоками проходит,
+   на секунду затемняется». */
 function tabbarAdapt(){
-  const bar = document.getElementById("tabbar");
-  if(!bar || !bar.offsetParent && getComputedStyle(bar).display === "none") return;
-  const r = bar.getBoundingClientRect(); if(!r.height) return;
-  const y = r.top + r.height / 2;
-  const skip = el => el.closest && el.closest(".tabbar, .ai-fab, .ai-sheet, .ai-sheet-scrim, .cookie-note, .toast, .compare-tray");
-  const lum = c => { const m = String(c).match(/[\d.]+/g); if(!m || m.length < 3) return null;
-    const a = m.length > 3 ? parseFloat(m[3]) : 1; if(a === 0) return null;
-    return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
-  let dark = 0;
-  for(const x of [r.left + 24, (r.left + r.right) / 2, r.right - 24]){
-    let el = (document.elementsFromPoint(x, y) || []).find(e => !skip(e)) || document.body;
-    let l = null;
-    for(; el && el !== document.documentElement; el = el.parentElement){
-      const cs = getComputedStyle(el);
-      l = lum(cs.backgroundColor);
-      if(l !== null) break;
-      if(cs.backgroundImage && cs.backgroundImage.indexOf("gradient") >= 0){ l = 0.1; break; }
-    }
-    if(l === null) l = lum(getComputedStyle(document.body).backgroundColor);
-    if(l !== null && l < 0.4) dark++;
-  }
-  bar.classList.toggle("on-dark", dark >= 2);
+  const bar = document.getElementById("tabbar"), fab = document.getElementById("aiFab");
+  if(!bar) return;
+  const m = String(getComputedStyle(document.body).backgroundColor).match(/[\d.]+/g);
+  const lum = m && m.length >= 3 && (m.length < 4 || parseFloat(m[3]) > 0)
+    ? (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255 : 1;
+  const dark = lum < 0.4;
+  bar.classList.toggle("on-dark", dark);
+  if(fab) fab.classList.toggle("on-dark", dark);
 }
-const tabbarAdaptSoon = () => { if(_tabbarRaf) return; _tabbarRaf = requestAnimationFrame(() => { _tabbarRaf = 0; tabbarAdapt(); }); };
-window.addEventListener("scroll", tabbarAdaptSoon, {passive:true});
-window.addEventListener("resize", tabbarAdaptSoon);
-window.addEventListener("hashchange", () => setTimeout(tabbarAdapt, 350));
-setTimeout(tabbarAdapt, 400);
-/* Экран перерисовывается и без смены адреса (приход базы, «показать еще»):
-   следим за содержимым #app, а не только за хешем. */
-new MutationObserver(tabbarAdaptSoon).observe(document.getElementById("app"), {childList:true, subtree:true});
+window.addEventListener("hashchange", () => setTimeout(tabbarAdapt, 50));
+setTimeout(tabbarAdapt, 50);
+/* Фон документа ставит route() (главная — темный): после каждой перерисовки
+   #app сверяемся заново. */
+new MutationObserver(() => tabbarAdapt()).observe(document.getElementById("app"), {childList:true});
 /* Клик по логотипу возвращает наверх. Со страницы это делает сам `route()`
    (`scrollTo(0,0)`), но на главной адрес не меняется — `hashchange` не
    срабатывает, ничего не перерисовывается, и клик выглядел мертвым: человек
