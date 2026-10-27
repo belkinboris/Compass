@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-27",
+ "items": [
+  {
+   "key": "https://pravo.ru/news/266525/::g5e7d168d",
+   "candidate_id": "g5e7d168d",
+   "reason": "общие редкие слова: изъяты, продал",
+   "draft": {
+    "draft_id": "d46734920",
+    "title": "Изъятые у Бикова доли в трех компаниях продали за полцены",
+    "date": "2026-10-27",
+    "src": [
+     [
+      "web:pravo.ru",
+      "https://pravo.ru/news/266525/"
+     ]
+    ],
+    "sum": "1,43 млрд ₽",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-27",
+      "title": "Сделка завершена",
+      "note": "Торги выиграл холдинг «Эсэфай», предложивший за лот 1,43 млрд руб.",
+      "source": [
+       "web:pravo.ru",
+       "https://pravo.ru/news/266525/"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "за полцены",
+    "seller": "Изъятые у Бикова доли в трех компаниях",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "за полцены",
+     "seller": "Изъятые у Бикова доли в трех компаниях"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-27"
+  }
+ ]
+}

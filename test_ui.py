@@ -5115,10 +5115,14 @@ def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
     page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
     page.wait_for_selector("#aiFab", timeout=15000)
     page.evaluate("document.getElementById('cookieNote') && document.getElementById('cookieOk').click()")
-    # Кнопка — плотная темно-зеленая везде (27 октября 2026, вечер: панель —
-    # прозрачное стекло, а кнопка «нравилась больше» плотной).
+    # На телефоне кнопка — то же прозрачное стекло, что и нижняя панель
+    # (27 октября 2026, вечер: «такого же цвета и с такой же тенью, как и
+    # соседний блок»); на компьютере — плотный #0F2B21.
     bg = page.evaluate("getComputedStyle(document.getElementById('aiFab')).backgroundColor")
-    assert bg == "rgb(15, 43, 33)", bg
+    if page.evaluate("innerWidth <= 720"):
+        assert bg.startswith("rgba(") and float(bg.split(",")[-1].strip(" )")) < 1, bg
+    else:
+        assert bg == "rgb(15, 43, 33)", bg
     page.click("#aiFab")
     page.wait_for_selector(".ai-sheet.half #chatbox", timeout=15000)
     # как в WHOOP: «Задайте вопрос» и подсказки одной строкой, не больше четырех
