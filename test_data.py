@@ -2003,3 +2003,11 @@ def test_card_text_follows_the_house_rules(deals):
     gone = known - {fp for fp, *_ in found}
     assert not gone, ("исправлено %d старых нарушений — уберите их из pipeline/text_rules_baseline.json: "
                       "python3 pipeline/text_rules.py --rebaseline" % len(gone))
+
+
+def test_base_starts_in_2022(deals):
+    """Решение владельца 27 октября 2026: карточки старше 2022 года удалены
+    (pipeline/drop_pre_2022_deals.py) — сайт их не показывал, а в счете по
+    файлу они всплывали снова и снова."""
+    old = [d["id"] for d in deals if str(d.get("date") or "")[:4].isdigit() and int(str(d["date"])[:4]) < 2022]
+    assert not old, old[:10]
