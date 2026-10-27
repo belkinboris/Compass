@@ -142,3 +142,23 @@ def test_full_analysis_drops_numbers_taken_from_the_card():
     facts = 'КАРТОЧКА (читатель это уже видит):\nДоля продавца 12,3%\n\nИЗ БАЗЫ КОМПАСА (на карточке этого нет):\nВ отрасли 41 сделка'
     out = pe.clean_answer('Для продавца. Сохраняет 12,3%.\n\nРынок вокруг. В отрасли 41 сделка.', da.base_part(facts), 1)
     assert out == ['Рынок вокруг. В отрасли 41 сделка.']
+
+
+def test_card_revenue_feeds_ps_and_comparables_keep_the_scale():
+    """5Yes! (27.10.2026): отчетности нет, но карточка называет выручку 521 млн ₽ —
+    P/S считается по ней; Росспиртпром за 8,3 млрд ₽ в «похожие» не попадает
+    («они вообще несопоставимы»), а без размера сравнивать не с чем."""
+    deals = {
+        'small': {'title': 'Кофейни', 'type': 'M&A', 'ind': 'Пищепром и напитки', 'date': '2025-01-01',
+                  'facts': {'price': {'meaning': 'disclosed', 'value_rub': 200e6}, 'nature': {}}},
+        'huge': {'title': 'Росспиртпром', 'type': 'M&A', 'ind': 'Пищепром и напитки', 'date': '2024-01-01',
+                 'facts': {'price': {'meaning': 'disclosed', 'value_rub': 8.3e9}, 'nature': {}}},
+    }
+    deal = dict(DEAL, ind='Пищепром и напитки', eco={'target_fin': 'По данным Mergers.ru, выручка за 2025 год — 521 млн ₽.'})
+    s = pe.build(deal, None, _table([1.0, 2.0, 3.0]), deals, 'Пищепром и напитки')
+    assert s['card_revenue_rub'] == 521e6 and s['methods'][0]['base_rub'] == 521e6 and s['range_text']
+    assert [c['id'] for c in s['comparables']] == ['small']
+    assert 'по данным источника' in pe.facts_text(s)
+    blind = pe.build(dict(DEAL, ind='Пищепром и напитки'), None, _table([1.0, 2.0, 3.0]), deals, 'Пищепром и напитки')
+    assert blind['size_unknown'] and len(blind['comparables']) == 2 and not blind['range_text']
+    assert any('несопоставимы' in t for t in pe.template_text(blind)) and 'не строить' in pe.facts_text(blind)
