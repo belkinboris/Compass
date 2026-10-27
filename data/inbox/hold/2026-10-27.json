@@ -356,159 +356,7 @@
    ]
   },
   {
-   "draft_id": "d62483527",
-   "title": "В Иркутске начали разбирать киоски при остановках из-за запрета продавать там табак",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1125155"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79816367",
-   "title": "Каждый второй россиянин проверяет состав колбасных изделий перед покупкой",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261027/rossijane-874631309.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43143151",
-   "title": "Суд в Кузбассе признал запрещенными сведения о продаже испанского хамона",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261027/sud-2127196221.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70811934",
-   "title": "За три квартала 2026 года коллекторы купили рекордный объем долгов МФО",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/312246"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-27",
-     "title": "Сделка завершена",
-     "note": "Они приобрели портфели почти на 100 млрд рублей Сообщение За три квартала 2026 года коллекторы купили рекордный объем долгов МФО появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/312246"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "рекордный объем долгов МФО",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "рекордный объем долгов МФО",
-    "seller": null
-   },
-   "ind": "Финансовые услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d56174601",
-   "title": "Курганские депутаты одобрили запрет продажи вейпов в первом чтении",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139321"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d64587041",
+   "draft_id": "d77433827",
    "title": "В Екатеринбурге выставят на аукцион землю под КРТ, где 11 лет стоит заброшенная стройка",
    "date": "2026-10-27",
    "src": [
@@ -534,6 +382,122 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d47306510",
+   "title": "В Конгрессе США пригрозили тюремным сроком за покупку российского дизеля",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9061372"
+    ]
+   ],
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85402764",
+   "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/27/10/2026/6ae0413319b3f291b6cc36cb"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d72578934",
+   "title": "Необходимость покупки нового iPhone каждый год оценили",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/27/iphone-every-year/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d81517675",
+   "title": "Екатеринбург вошел в число лидеров РФ по продажам новостроек",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/ekaterinburg/2026/10/27/ekaterinburg-voshyol-v-chislo-liderov-rossii-po-prodazham-novostroek"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
