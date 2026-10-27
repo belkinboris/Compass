@@ -610,8 +610,70 @@ def near_copy_sentences(card, texts=None):
 STIFF_RE = re.compile(r'на\s+момент\s+(?:записи|написания|подготовки)|\bэто\s+и\s+привело\b', re.I)
 
 
+def source_records():
+    """Записи сырья с диска: {'url', 'title', 'summary'} — чтобы найти текст
+    ИМЕННО этой карточки по адресу ее источника (accept_card: юрлицо, названное
+    в источнике, обязано стоять на карточке)."""
+    out = []
+    for folder, load in ((review.RAW, 'jsonl'), (review.TRIAGE, 'json')):
+        if not os.path.isdir(folder):
+            continue
+        for name in sorted(os.listdir(folder)):
+            path = os.path.join(folder, name)
+            try:
+                if load == 'jsonl' and name.endswith('.jsonl'):
+                    recs = [json.loads(line) for line in open(path, encoding='utf-8')]
+                elif load == 'json' and name.endswith('.json'):
+                    recs = json.load(open(path, encoding='utf-8')).get('items', [])
+                else:
+                    continue
+            except (ValueError, OSError):
+                continue
+            out += [{'url': str(r.get('url') or ''), 'title': str(r.get('title') or ''),
+                     'summary': str(r.get('summary') or '')} for r in recs if isinstance(r, dict) and r.get('url')]
+    return out
+
+
+LEGAL_ENTITY = re.compile(r'\b(?:ООО|АО|ПАО|ЗАО|НАО|МКАО|МКПАО)\s*[«"]([^»"]{2,80})[»"]')
+
+
+def _card_blob(card, comps):
+    parts = [str(card.get(k) or '') for k in ('title', 'asset', 'extra', 'seller', 'buyer_name')]
+    parts += [str(v or '') for sec in ('eco', 'law') for v in (card.get(sec) or {}).values() if isinstance(v, str)]
+    parts += [str(e.get('note') or '') + ' ' + str(e.get('title') or '') for e in card.get('events') or [] if isinstance(e, dict)]
+    parts += [str(comps.get(card.get(k), {}).get('name') or '') for k in ('buyer', 'seller_id', 'target', 'asset_id') if card.get(k)]
+    parts.append(json.dumps(card.get(STAMP + '_notes') or {}, ensure_ascii=False))
+    return ' '.join(parts).lower().replace('ё', 'е')
+
+
+def entities_missing_from_card(card, comps, records=None):
+    """Юрлица (ООО/АО «…»), названные в тексте источников ЭТОЙ карточки, которых
+    на карточке нет нигде — ни в предмете, ни в сторонах, ни в прозе, ни в
+    заметках приемки. 27 октября 2026, 5Yes!: Коммерсантъ писал «стала
+    владельцем ООО «Полигрин»», а карточка вышла с предметом «бренд», без
+    продавца и с покупателем без ИНН; владелец — «до формирования черновика
+    карты нужно делать проверку и поиск всех обществ, участвующих в сделке»."""
+    urls = {str(u) for _n, u in (card.get('src') or []) if u}
+    if not urls:
+        return []
+    records = source_records() if records is None else records
+    blob = _card_blob(card, comps)
+    seen, out = set(), []
+    for rec in records:
+        if rec.get('url') not in urls:
+            continue
+        for m in LEGAL_ENTITY.finditer(rec.get('title', '') + ' ' + rec.get('summary', '')):
+            name = m.group(1).strip()
+            key = name.lower().replace('ё', 'е')
+            if key in seen or key in blob:
+                continue
+            seen.add(key)
+            out.append(name)
+    return out
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
-             waived_names=None, waived_stale=None):
+             waived_names=None, waived_stale=None, source_records=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
     читатель. `waived` — роли, для которых читатель назвал причину без профиля;
     `waived_inn` — роли, у которых юрлица с ИНН быть не может (иностранец,
@@ -635,6 +697,10 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # «ВЛОЖИЛСЯ» — НЕ НАШЕ СЛОВО (владелец, 21 октября 2026: «Не пиши больше
     # „вложился“, пиши „проинвестировал“»). Заголовок карточки — и заголовок
     # поста в канале.
+    for name in entities_missing_from_card(card, comps, source_records):
+        out.append(('entity_in_source', 'в источнике названо юрлицо «%s», а на карточке его нет: это предмет или '
+                    'сторона сделки — заведите профиль с ИНН (история участников ЕГРЮЛ покажет и продавцов), '
+                    'или запишите в заметке приемки, почему это не сторона сделки' % name))
     if INVESTED_COLLOQUIAL.search(str(card.get('title') or '')):
         out.append(('title_invested', 'в заголовке «вложил(ся/ась)» — пишем «проинвестировал(а)»: '
                     '«ЗПИФ «ВИМ инвестиций» проинвестировал в 42% Swordfish Security»'))

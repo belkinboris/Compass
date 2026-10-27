@@ -33,6 +33,22 @@ METHODS = (
     ('ev_op', 'operating_profit_rub', '2200', 'EV / операционная прибыль', 'операционная прибыль'),
 )
 COMPARABLES_MAX = 5
+# Похожая сделка в 6 раз крупнее или мельче — уже не похожая: 5Yes! (выручка
+# 521 млн ₽) сравнивали с Росспиртпромом за 8,3 млрд ₽ (владелец, 27 октября
+# 2026: «они вообще несопоставимы»).
+SIZE_RATIO_MAX = 6.0
+_CARD_REVENUE = re.compile(r'выручк\w*[^.;]{0,80}?(\d+(?:[.,]\d+)?)\s*(млрд|млн)\s*(?:₽|руб)', re.I)
+
+
+def revenue_from_card(deal: dict) -> float | None:
+    """Выручка покупаемой компании из текста карточки (eco.target_fin, eco.fin),
+    когда отчетности ФНС в базе нет: «выручка за 2025 год — 521 млн ₽»."""
+    eco = deal.get('eco') or {}
+    for text in (eco.get('target_fin'), eco.get('fin')):
+        m = _CARD_REVENUE.search(str(text or ''))
+        if m:
+            return float(m.group(1).replace(',', '.')) * (1e9 if m.group(2).lower() == 'млрд' else 1e6)
+    return None
 
 
 def needs_estimate(deal: dict) -> bool:
@@ -143,6 +159,24 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
                 'full_rub': full, 'stake_rub': full * stake / 100 if stake else None,
             })
 
+    # Отчетности нет, но карточка называет выручку: метод P/S считается по ней,
+    # с оговоркой — это цифра из источника, а не из реестра.
+    card_revenue = None
+    if not methods and not (report and report.get('year')):
+        card_revenue = revenue_from_card(deal)
+        cell, scope = (dm.find_cell(table, 'ps', ind, None) if ind else None), 'отрасль'
+        if not cell or cell.get('median') is None:
+            cell, scope = dm.find_cell(table, 'ps', None, None), 'все отрасли'
+        if card_revenue and cell and cell.get('median') is not None:
+            vals = _cell_values(table, cell, 'ps')
+            med = float(cell['median'])
+            methods.append({
+                'metric': 'ps', 'label': 'P/S', 'base_name': 'выручка по данным источника', 'base_rub': card_revenue,
+                'report_year': None, 'median': med, 'q1': _q(vals, 0.25), 'q3': _q(vals, 0.75),
+                'count': cell.get('count'), 'scope': scope, 'industry': ind if scope == 'отрасль' else None,
+                'full_rub': card_revenue * med, 'stake_rub': card_revenue * med * stake / 100 if stake else None,
+            })
+
     # Похожие сделки: та же отрасль, цена названа сторонами, ближе по году.
     comps = []
     rows_by_id = {r['id']: r for r in table.get('rows') or []}
@@ -171,13 +205,18 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
     # Ближе по размеру важнее, чем ближе по году: клинику за 77 млн ₽ не с чем
     # сравнивать в сети за 18 млрд ₽. Размер — выручка компании, если она есть.
     import math
-    size = _pick(report, 'revenue_rub', '2110') if report else None
+    size = (_pick(report, 'revenue_rub', '2110') if report else None) or card_revenue
     for c in comps:
         full = c['price_rub'] * 100 / c['stake'] if c['stake'] else c['price_rub']
         ps = c['multiples'].get('ps')
         their_size = full / ps if ps else full / 1.81
         c['_dist'] = abs(math.log(max(their_size, 1) / size)) if size and size > 0 else 0
     comps.sort(key=lambda c: (round(c['_dist']), -len(c['multiples']), abs((c['year'] or 0) - (year or 0))))
+    # Размер известен — сделки другого масштаба в сравнение не идут; размер
+    # неизвестен — сравнивать не с чем, список пуст, и текст говорит об этом.
+    size_unknown = not (size and size > 0)
+    if not size_unknown:
+        comps = [c for c in comps if c['_dist'] <= math.log(SIZE_RATIO_MAX)]
     comps = [{k: v for k, v in c.items() if k != '_dist'} for c in comps[:COMPARABLES_MAX]]
 
     experts = None
@@ -208,6 +247,7 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         'revenue_rub': _pick(report, 'revenue_rub', '2110') if report else None,
         'net_profit_rub': _pick(report, 'net_profit_rub', '2400') if report else None,
         'methods': methods, 'comparables': comps, 'experts': experts,
+        'card_revenue_rub': card_revenue, 'size_unknown': size_unknown,
         'range': rng, 'range_text': range_text(rng, stake),
     }
 
@@ -256,8 +296,13 @@ def facts_text(s: dict) -> str:
         lines.append(f'Отчетность ФНС за {s["report_year"]} год: выручка {money(s["revenue_rub"])}, {profit}')
         if s['report_note']:
             lines.append(f'Оговорка: {s["report_note"]}')
+    elif s.get('card_revenue_rub'):
+        lines.append(f'Отчетности покупаемой компании в базе нет; по данным источника ее выручка — {money(s["card_revenue_rub"])}')
     else:
         lines.append('Отчетности покупаемой компании в базе нет')
+    if s.get('size_unknown') and s['comparables']:
+        lines.append('Размер покупаемой компании неизвестен — сделки отрасли ниже могут быть несопоставимы '
+                     'с ней по масштабу: диапазон по их ценам не строить, так и сказать')
     for m in s['methods']:
         where = f'отрасль «{m["industry"]}»' if m['industry'] else 'все отрасли (в отрасли мало сделок)'
         lines.append(
@@ -289,9 +334,16 @@ def template_text(s: dict) -> list[str]:
                    + ' Ниже — с чем можно сравнить.')
     if s['methods']:
         names = ', '.join(m['label'] for m in s['methods'])
-        out.append(f'Взяли отчетность компании за {s["methods"][0]["report_year"]} год и медианные мультипликаторы '
-                   f'({names}) по сделкам с известной ценой. Разные методы дают разный результат — '
-                   'отсюда ширина диапазона; ниже видно, что дает каждый.')
+        if s['methods'][0]['report_year']:
+            out.append(f'Взяли отчетность компании за {s["methods"][0]["report_year"]} год и медианные мультипликаторы '
+                       f'({names}) по сделкам с известной ценой. Разные методы дают разный результат — '
+                       'отсюда ширина диапазона; ниже видно, что дает каждый.')
+        else:
+            out.append(f'Отчетности компании в базе нет, взяли выручку по данным источника и медианный '
+                       f'мультипликатор {names} по сделкам отрасли с известной ценой.')
+    if s.get('size_unknown') and s['comparables'] and not s['range_text']:
+        out.append('Размер покупаемой компании неизвестен, поэтому сделки отрасли могут быть несопоставимы '
+                   'с ней по масштабу — диапазон по их ценам не строится.')
     if not out:
         out.append('Для оценки не хватает данных: нет отчетности покупаемой компании и сделок '
                    'с известной ценой в этой отрасли.')

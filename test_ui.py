@@ -5115,8 +5115,16 @@ def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
     page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
     page.wait_for_selector("#aiFab", timeout=15000)
     page.evaluate("document.getElementById('cookieNote') && document.getElementById('cookieOk').click()")
+    # На телефоне кнопка — «стекло» (27 октября 2026): полупрозрачный темно-зеленый
+    # с размытием; на компьютере — прежний плотный #0F2B21.
     bg = page.evaluate("getComputedStyle(document.getElementById('aiFab')).backgroundColor")
-    assert bg == "rgb(15, 43, 33)", bg
+    phone = page.evaluate("innerWidth <= 720")
+    if phone:
+        import re as _re
+        r, g, b_, a = [float(x) for x in _re.findall(r"[\d.]+", bg)[:4]]
+        assert a < 1 and 10 <= r <= 25 and 38 <= g <= 55 and 28 <= b_ <= 42, (bg, phone)  # темно-зеленое стекло
+    else:
+        assert bg == "rgb(15, 43, 33)", (bg, phone)
     page.click("#aiFab")
     page.wait_for_selector(".ai-sheet.half #chatbox", timeout=15000)
     # как в WHOOP: «Задайте вопрос» и подсказки одной строкой, не больше четырех
