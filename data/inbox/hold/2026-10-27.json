@@ -356,7 +356,7 @@
    ]
   },
   {
-   "draft_id": "d77433827",
+   "draft_id": "d59551396",
    "title": "В Екатеринбурге выставят на аукцион землю под КРТ, где 11 лет стоит заброшенная стройка",
    "date": "2026-10-27",
    "src": [
@@ -385,35 +385,7 @@
    ]
   },
   {
-   "draft_id": "d47306510",
-   "title": "В Конгрессе США пригрозили тюремным сроком за покупку российского дизеля",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9061372"
-    ]
-   ],
-   "sum": "$1 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d85402764",
+   "draft_id": "d56914111",
    "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
    "date": "2026-10-27",
    "src": [
@@ -444,13 +416,97 @@
    ]
   },
   {
-   "draft_id": "d72578934",
-   "title": "Необходимость покупки нового iPhone каждый год оценили",
+   "draft_id": "d79220801",
+   "title": "Суд в Кузбассе счел запрещенными сведения о продаже испанского хамона",
    "date": "2026-10-27",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/27/iphone-every-year/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9061377"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64917884",
+   "title": "В ЯНАО экс-госинспектора осудили за схему покупки прав за рубежом",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28256987"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24950362",
+   "title": "Инвестиции в основной капитал в Таджикистане выросли на 44,9%",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261027/investitsii-874636916.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60883108",
+   "title": "Москвичей предупредили о мошеннических схемах при покупке автомобиля",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261027/avtomobil-874635519.html"
     ]
    ],
    "sum": null,
@@ -473,13 +529,13 @@
    ]
   },
   {
-   "draft_id": "d81517675",
-   "title": "Екатеринбург вошел в число лидеров РФ по продажам новостроек",
+   "draft_id": "d79727731",
+   "title": "Компания главы EMC Яновского стала владельцем орловского завода «Фриголайн Евразия»",
    "date": "2026-10-27",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ural/news/ekaterinburg/2026/10/27/ekaterinburg-voshyol-v-chislo-liderov-rossii-po-prodazham-novostroek"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/118849-kompaniya-glavy-emc-yanovskogo-stala-vladeltsem-orlovskogo-zavoda-frigolayn-evraziya/"
     ]
    ],
    "sum": null,
@@ -494,10 +550,106 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20624303",
+   "title": "Жителям Москвы рассказали, как избежать мошеннических схем при покупке авто",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261027/moskva-2127221885.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58318098",
+   "title": "В России стали продавать запрещенную колу из Грузии",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139372"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62387759",
+   "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+    ]
+   ],
+   "sum": "5,8 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "В Люберцах Московской области на торгах реализовали земельный участок.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "участок",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "участок",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
    ]
   }
  ]
