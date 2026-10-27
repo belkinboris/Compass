@@ -24,38 +24,56 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 FIXES_DIR = os.path.join(ROOT, 'ingest', 'fixes')
 
 
+def _balance(text, start, open_ch, close_ch):
+    """Индекс символа сразу ПОСЛЕ закрывающей `close_ch`, парной открывающей
+    в позиции `start` (там стоит `open_ch`), с учётом строк в кавычках."""
+    i = start + 1
+    depth = 1
+    n = len(text)
+    quote = None
+    while i < n and depth > 0:
+        c = text[i]
+        if quote:
+            if c == '\\':
+                i += 2
+                continue
+            if c == quote:
+                quote = None
+        elif c in ('"', "'"):
+            quote = c
+        elif c == open_ch:
+            depth += 1
+        elif c == close_ch:
+            depth -= 1
+        i += 1
+    return i
+
+
 def find_dict_spans(text, target_id):
-    """Индексы (start, end) каждого `dict(id='<target_id>', ...)` в тексте,
-    end указывает на символ СРАЗУ ПОСЛЕ закрывающей скобки."""
+    """Индексы (start, end) каждой записи правки для `target_id` в тексте,
+    end указывает на символ СРАЗУ ПОСЛЕ закрывающей скобки. Запись написана
+    либо вызовом `dict(id='<id>', ...)`, либо литералом `{'id': '<id>', ...}`
+    — в этой базе оба стиля встречаются (литерал — чаще), `id` всегда первый
+    ключ записи."""
     spans = []
-    pattern = re.compile(r"id\s*=\s*['\"]%s['\"]" % re.escape(target_id))
-    for m in pattern.finditer(text):
-        # Найти "dict(" слева от найденного id=...
+    seen_starts = set()
+    call_pat = re.compile(r"id\s*=\s*['\"]%s['\"]" % re.escape(target_id))
+    literal_pat = re.compile(r"['\"]id['\"]\s*:\s*['\"]%s['\"]" % re.escape(target_id))
+    for m in call_pat.finditer(text):
         dict_start = text.rfind('dict(', 0, m.start())
-        if dict_start == -1:
+        if dict_start == -1 or dict_start in seen_starts:
             continue
-        # Балансировка скобок от dict( до соответствующей закрывающей ),
-        # с учётом строк в кавычках (одинарных/двойных, включая экранирование).
-        i = dict_start + len('dict(')
-        depth = 1
-        n = len(text)
-        quote = None
-        while i < n and depth > 0:
-            c = text[i]
-            if quote:
-                if c == '\\':
-                    i += 2
-                    continue
-                if c == quote:
-                    quote = None
-            elif c in ('"', "'"):
-                quote = c
-            elif c == '(':
-                depth += 1
-            elif c == ')':
-                depth -= 1
-            i += 1
-        spans.append((dict_start, i))
+        seen_starts.add(dict_start)
+        end = _balance(text, dict_start + len('dict') , '(', ')')
+        spans.append((dict_start, end))
+    for m in literal_pat.finditer(text):
+        brace_start = text.rfind('{', 0, m.start())
+        if brace_start == -1 or brace_start in seen_starts:
+            continue
+        seen_starts.add(brace_start)
+        end = _balance(text, brace_start, '{', '}')
+        spans.append((brace_start, end))
+    spans.sort()
     return spans
 
 

@@ -1138,10 +1138,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 #facts .stat-hero{margin-bottom:10px}
 #facts .stat-hero + .fact-note{margin:2px 0 16px}
 .pe-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pe-calc{flex:none;border:1.5px solid var(--ink);border-radius:999px;background:var(--ink);color:#fff;cursor:pointer;
+/* Темно-зеленая, как «Разобрать» и «Спросить» (владелец, 27 октября 2026: черная кнопка — «странно»). */
+.pe-calc{flex:none;border:1.5px solid var(--accent-deep);border-radius:999px;background:var(--accent-deep);color:#fff;cursor:pointer;
   font:600 14px/1 var(--f-body);padding:10px 18px;transition:background .2s var(--ease),color .2s var(--ease)}
-.pe-calc:hover{background:#2C3238}
-.pe-calc[aria-expanded="true"]{background:#fff;color:var(--ink)}
+.pe-calc:hover{background:#163B2C}
+.pe-calc[aria-expanded="true"]{background:#fff;color:var(--accent-deep)}
 .pe-calc.busy{cursor:default;opacity:.75}
 /* «Разбор сделки» под схемой */
 #facts .fa{display:block;border:1px solid var(--line);background:var(--card);border-radius:var(--radius);margin:0 0 10px}
@@ -1151,8 +1152,10 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .fa-t{flex:1;min-width:0}
 .fa-t b{display:block;font:600 15px var(--f-body);color:var(--ink)}
 .fa-t span{font:500 13px var(--f-body);color:var(--muted)}
-.fa-go{flex:none;border:1.5px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font:600 13.5px var(--f-body);cursor:pointer}
-.fa-go[aria-expanded="true"]{background:#fff;color:var(--ink)}
+/* Кнопка — темно-зеленая, как «Спросить» (владелец, 27 октября 2026: «черный цвет
+   в кнопке — это странно»); подпись под заголовком убрана по его же слову. */
+.fa-go{flex:none;border:1.5px solid var(--accent-deep);background:var(--accent-deep);color:#fff;border-radius:999px;padding:9px 16px;font:600 13.5px var(--f-body);cursor:pointer}
+.fa-go[aria-expanded="true"]{background:#fff;color:var(--accent-deep)}
 .fa-go[disabled]{opacity:.75;cursor:default}
 .fa-body{border-top:1px solid var(--line);padding:4px 16px 14px}
 .fa-body[hidden]{display:none}
@@ -1174,6 +1177,32 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
 .ai-fab svg polygon{transition:transform .5s var(--ease);transform-origin:24px 24px}
 .ai-fab.on svg polygon{transform:rotate(45deg)}
 @media(max-width:899px){.ai-fab.on{display:none}}  /* на телефоне у открытой шторки свои «×» и ручка; кнопка закрыла бы поле ввода */
+/* Нижняя панель разделов — только на телефоне (≤720px), темно-зеленая, как
+   кнопка ассистента, и той же высоты; справа от нее остается место под кнопку.
+   Верхнее меню на телефоне сворачивается до входа/аватара. */
+.tabbar{display:none}
+@media(max-width:720px){
+  .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 60px + 10px);
+    bottom:calc(16px + env(safe-area-inset-bottom,0px));height:60px;border-radius:20px;background:#0F2B21;
+    display:flex;justify-content:space-around;align-items:center;gap:0;padding:0 4px;overflow:visible;
+    box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset}
+  .tabbar a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:4px;margin:0;padding:6px 2px;
+    font:600 8.4px var(--f-body);letter-spacing:-.01em;text-transform:none;color:#A9C2B6;text-align:center;white-space:nowrap;text-decoration:none}
+  .tabbar a::after{content:none}
+  @media(max-width:380px){.tabbar{padding:0 2px}.tabbar a{font-size:7.7px;letter-spacing:-.02em;padding:6px 1px}.tabbar a svg{width:20px;height:20px}}
+  .tabbar a svg{width:21px;height:21px;stroke:#A9C2B6;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar a.on{color:#fff}
+  .tabbar a.on svg{stroke:var(--bronze-light)}
+  #nav a:not(#navAccount){display:none}
+  .top nav{padding-right:0;-webkit-mask-image:none;mask-image:none}
+  .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  footer{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  body.chat-page .tabbar{display:none}            /* поле ввода стоит у нижнего края */
+  .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + 72px)}
+  /* Плашка о cookie встает над панелью, а панель и кнопка остаются на месте. */
+  .cookie-note{bottom:calc(env(safe-area-inset-bottom,0px) + 88px)}
+  body.has-cookie-note .ai-fab{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+}
 .ai-sheet-scrim{position:fixed;inset:0;z-index:68;background:rgba(10,18,16,.38);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 .ai-sheet-scrim.on{opacity:1;pointer-events:auto}
 .ai-sheet{position:fixed;left:0;right:0;bottom:0;z-index:69;height:min(62svh,620px);background:var(--card);
@@ -2142,7 +2171,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 @media(max-width:560px){
   .tool-group{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .tool-group .chip{text-align:center;justify-content:center}
-  .tool-group .chip.primary{grid-column:1/-1}
+  /* На телефоне все четыре действия — одно под другим во всю ширину
+     (владелец, 27 октября 2026: «кривые надписи… непонятно, почему не единообразно»). */
+  .tool-group .chip{grid-column:1/-1}
   .tool-group-share{padding:10px 0 0;border-left:none;border-top:1px solid var(--line-soft)}
 }
 .tool-note{width:100%;font-size:12.5px;color:var(--muted);min-height:1.2em}
@@ -2398,6 +2429,19 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
     </nav>
   </div>
 </header>
+
+<!-- НИЖНЯЯ ПАНЕЛЬ РАЗДЕЛОВ НА ТЕЛЕФОНЕ (владелец, 27 октября 2026, по рендеру
+     в духе WHOOP: «сделай все-таки блок нижний, только цветом компаса темно
+     зеленым»). Пять разделов с иконками, панель слева от кнопки ассистента;
+     в шапке на телефоне остается логотип и вход. Подсветку ставит route()
+     по тем же data-r, что и у верхнего меню. На экранах шире 720px панели нет. -->
+<nav class="tabbar" id="tabbar" aria-label="Разделы">
+  <a href="#/" data-r="deals"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></svg>Сделки</a>
+  <a href="#/companies" data-r="companies"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="7" height="11" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/><path d="M7 12v.01M7 15v.01M16 8v.01M16 11v.01M16 14v.01"/></svg>Компании</a>
+  <a href="#/advisors" data-r="advisors"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3.5 19c.6-3.2 2.9-5 5.5-5s4.9 1.8 5.5 5M14.5 14.2c2.6-.5 5 .8 6 4"/></svg>Консультанты</a>
+  <a href="#/materials" data-r="materials"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg>Материалы</a>
+  <a href="#/analytics" data-r="analytics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Аналитика</a>
+</nav>
 
 <main class="wrap" id="app"></main>
 
@@ -3780,7 +3824,7 @@ function route(){
   if(gated()){
     document.body.style.background = ""; document.documentElement.style.background = "";
     const tc0 = document.querySelector('meta[name="theme-color"]'); if(tc0) tc0.setAttribute("content", "#F5F5F1");
-    document.querySelectorAll("#nav a").forEach(a=>a.classList.remove("on"));
+    document.querySelectorAll("#nav a, .tabbar a").forEach(a=>a.classList.remove("on"));
     // Плашка сравнения живёт в body, а не в #app, и пережила бы выход из
     // аккаунта — за дверью ей делать нечего.
     const tray = document.getElementById("compareTray"); if(tray) tray.remove();
@@ -3796,9 +3840,10 @@ function route(){
   document.documentElement.style.background = onHome ? "#0A1210" : "";
   const tc = document.querySelector('meta[name="theme-color"]');
   if(tc) tc.setAttribute("content", onHome ? "#0A1210" : "#F5F5F1");
-  document.querySelectorAll("#nav a").forEach(a=>a.classList.remove("on"));
+  document.querySelectorAll("#nav a, .tabbar a").forEach(a=>a.classList.remove("on"));
   const mark = r => {
-    const el=document.querySelector(`[data-r="${r}"]`);
+    document.querySelectorAll(`.tabbar a[data-r="${r}"]`).forEach(a=>a.classList.add("on"));
+    const el=document.querySelector(`#nav a[data-r="${r}"]`);
     if(el){
       el.classList.add("on");
       // Прокручиваем только строку меню. scrollIntoView на iPhone иногда
@@ -3972,11 +4017,10 @@ function scrollToFeed(){
   window.scrollTo({top: Math.max(0, f.getBoundingClientRect().top + window.scrollY - topH), behavior:"instant"});
   if(typeof updTop==="function") updTop();
 }
-const dealsTab = document.querySelector('#nav a[data-r="deals"]');
-if(dealsTab) dealsTab.addEventListener("click", ()=>{
+document.querySelectorAll('#nav a[data-r="deals"], .tabbar a[data-r="deals"]').forEach(dealsTab=>dealsTab.addEventListener("click", ()=>{
   if(/^#?\/?$/.test(location.hash)) setTimeout(scrollToFeed, 0);
   else jumpToFeed = true;
-});
+}));
 const rerun = ()=>requestAnimationFrame(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")));
 
 /* ПОПОЛНЕНИЕ БАЗЫ НЕ ВИДНО, ПОКА ЛЕНТА ОТСОРТИРОВАНА ПО ДАТЕ СДЕЛКИ. И это
@@ -10191,10 +10235,10 @@ function bindContextAnalysis(d){
    только то, что дает база: другие сделки сторон и что происходит в отрасли
    (deal_analysis.py, /api/deals/{id}/analysis). Текст печатается. */
 const _dealAnalysis = {};
-const DA_LABEL = {"Для покупателя.":"Для покупателя","Для продавца.":"Для продавца","Рынок вокруг.":"Рынок вокруг","Что может быть дальше.":"Что может быть дальше"};
+const DA_LABEL = {"Для покупателя.":"Для покупателя","Для продавца.":"Для продавца","Что может быть дальше.":"Что может быть дальше"};
 const dealAnalysisHtml = d => `<div class="fa" id="faBox">
   <div class="fa-bar"><div class="fa-ic">${AI_FAB_SVG}</div>
-    <div class="fa-t"><b>Разбор сделки</b><span>Что значит сделка — по базе Компаса</span></div>
+    <div class="fa-t"><b>Разбор сделки</b></div>
     <button class="fa-go" id="faGo" type="button" aria-expanded="false">Разобрать</button></div>
   <div class="fa-body" id="faBody" hidden></div></div>`;
 async function fillDealAnalysis(body, r, fast, d){
