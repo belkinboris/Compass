@@ -356,7 +356,7 @@
    ]
   },
   {
-   "draft_id": "d59551396",
+   "draft_id": "d52502808",
    "title": "В Екатеринбурге выставят на аукцион землю под КРТ, где 11 лет стоит заброшенная стройка",
    "date": "2026-10-27",
    "src": [
@@ -385,7 +385,7 @@
    ]
   },
   {
-   "draft_id": "d56914111",
+   "draft_id": "d23116493",
    "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
    "date": "2026-10-27",
    "src": [
@@ -416,204 +416,7 @@
    ]
   },
   {
-   "draft_id": "d79220801",
-   "title": "Суд в Кузбассе счел запрещенными сведения о продаже испанского хамона",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9061377"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64917884",
-   "title": "В ЯНАО экс-госинспектора осудили за схему покупки прав за рубежом",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/proisshestviya/28256987"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24950362",
-   "title": "Инвестиции в основной капитал в Таджикистане выросли на 44,9%",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261027/investitsii-874636916.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60883108",
-   "title": "Москвичей предупредили о мошеннических схемах при покупке автомобиля",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261027/avtomobil-874635519.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d79727731",
-   "title": "Компания главы EMC Яновского стала владельцем орловского завода «Фриголайн Евразия»",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118849-kompaniya-glavy-emc-yanovskogo-stala-vladeltsem-orlovskogo-zavoda-frigolayn-evraziya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20624303",
-   "title": "Жителям Москвы рассказали, как избежать мошеннических схем при покупке авто",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261027/moskva-2127221885.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58318098",
-   "title": "В России стали продавать запрещенную колу из Грузии",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139372"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62387759",
+   "draft_id": "d87360495",
    "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
    "date": "2026-10-27",
    "src": [
@@ -650,6 +453,373 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d57560834",
+   "title": "«СПБ биржа» назвала обязательные элементы успешного IPO",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/27/1240400-elementi-ipo"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Рынок ценных бумаг",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8302ab18 (общие редкие слова: ipo, назвал) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d26166951",
+   "title": "Стартап Micro1 выкупит переписки Slack и данные Google-сервисов для перепродажи разработчикам ИИ",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/startap-micro1-vykupit-perepiski-slack-i-dannye-google-servisov-dlya-pereprodazhi-razrabotchikam-ii/"
+    ]
+   ],
+   "sum": "$1 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Стартап Micro1",
+   "asset": "переписки Slack и данные Google-сервисов для перепродажи разработчикам ИИ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Стартап Micro1",
+    "asset": "переписки Slack и данные Google-сервисов для перепродажи разработчикам ИИ",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g53da1f4d (общие редкие слова: ии, разраб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d13918564",
+   "title": "Отель «Савой» в центре Москвы продают на «Авито»",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261027/otel-2127250949.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67531547",
+   "title": "ЦБ показал, кто купил 1,4 трлн ОФЗ в сентябре: банки на деньги Казначейства и репо, а не вкладчики",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1367147.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "Триллион долга за сентябрь купили банки на деньги Казначейства и ЦБ, а не вкладчиков. Три строки обзора Банка России стоят на разных страницах: размещение 1,4 трлн, плюс триллион госсредств в банках, плюс полтора триллиона репо — при убыли денег клиентов.…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1367147.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "1,4 трлн ОФЗ в сентябре: банки на деньги Казначейства и репо, а не вкладчики",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "1,4 трлн ОФЗ в сентябре: банки на деньги Казначейства и репо, а не вкладчики",
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g2d075f03 (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d74115452",
+   "title": "Anthropic приостановила обучение новой ИИ-модели из-за угроз безопасности в преддверии IPO",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/312334"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлём"
+   ]
+  },
+  {
+   "draft_id": "d89641040",
+   "title": "В Европе выставили на продажу редкий ВАЗ-1922",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/27/v-evrope-vystavili-na-prodazhu-redkiy-vaz-1922/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10678707",
+   "title": "Какие пять ошибок делают почти все при покупке утюга",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053139416"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d26410296",
+   "title": "Раскрыт идеальный момент для покупки недвижимости",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139395"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d66019658",
+   "title": "Какие ошибки делают почти все при покупке сушилки для белья",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053139386"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d51921708",
+   "title": "Власти Кургана определили зоны, где нельзя продавать сигареты и вейпы",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139376"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67081739",
+   "title": "В Омске в очередной раз пытаются продать подвал в гостинице «Россия»",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/27/v-omske-v-ocherednoj-raz-pytayutsya-prodat-podval-v-gostinicze-rossiya"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70348759",
+   "title": "Банк уральского олигарха пустили с молотка. Его купили по минимальной цене",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/business/2026/10/27/76726339/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о новом владельце",
+     "source": [
+      "web:e1.ru",
+      "https://www.e1.ru/text/business/2026/10/27/76726339/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "по минимальной цене",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "по минимальной цене",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
