@@ -860,7 +860,7 @@ def test_launch_ui_contains_requested_changes():
     assert "Право-300" not in html
     assert "saveThread:true" in html
     assert "КОМПАС.</span>" not in html
-    assert html.count('data-r="advisors"') == 1
+    assert html.count('data-r="advisors"') == 2  # шапка и нижняя панель на телефоне (27 октября 2026)
 
 
 def test_fns_normalizers_convert_source_units_and_fields():

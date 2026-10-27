@@ -3427,7 +3427,8 @@ def test_nav_items_are_centred_on_the_logo_for_a_signed_in_user(browser, base_ur
           const mid = b => (b.top + b.bottom) / 2;
           const glyph = e => { const r = document.createRange(); r.selectNodeContents(e); return mid(r.getBoundingClientRect()); };
           const logo = mid(document.querySelector('.top .wordmark').getBoundingClientRect());
-          return {links: [...document.querySelectorAll('#nav a:not(#navAccount)')].map(a => glyph(a) - logo),
+          // На телефоне разделы живут в нижней панели, в шапке остается только вход — меряем видимое.
+          return {links: [...document.querySelectorAll('#nav a:not(#navAccount)')].filter(a => a.getClientRects().length).map(a => glyph(a) - logo),
                   dot: mid(document.querySelector('#navAccount .avatar-dot').getBoundingClientRect()) - logo};
         }""")
         assert all(abs(d) <= 1.5 for d in m["links"]), m
@@ -4377,7 +4378,9 @@ def test_deal_tools_are_two_groups_without_copy_link(page, base_url):
     assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
     primary = page.locator("#watchdeal").bounding_box()
     fix = page.locator("#fixdeal").bounding_box()
-    assert primary["width"] > fix["width"] * 1.6, (primary, fix)
+    # 27 октября 2026: все четыре действия на телефоне — одно под другим во всю ширину
+    # («непонятно, почему не единообразно»), поэтому ширины равны.
+    assert abs(primary["width"] - fix["width"]) <= 1 and primary["y"] < fix["y"], (primary, fix)
     page.set_viewport_size({"width": 1280, "height": 1000})
 
 
@@ -5088,7 +5091,7 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     page.goto(base_url + "/#/deal/" + no_price["id"], wait_until="domcontentloaded")
     page.wait_for_selector("#pe-btn", timeout=15000)
     bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")
-    assert bg == "rgb(21, 25, 29)", bg  # черный (владелец, 26 октября 2026)
+    assert bg == "rgb(15, 43, 33)", bg  # темно-зеленая, как «Разобрать» и «Спросить» (владелец, 27 октября 2026)
     # кнопка «Посчитать» — в самом блоке «Сумма», панель выдвигается там же
     assert page.locator(".stat-hero.pe-host #pe-btn").inner_text().strip() == "Посчитать"
     page.click("#pe-btn")
