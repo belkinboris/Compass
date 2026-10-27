@@ -7379,8 +7379,13 @@ function renderDeal(id, qs, previewCard){
       // формируется той же extraHtml(d), которую надо позвать один раз),
       // поэтому считаем один раз и решаем по результату.
       const extraBlock = extraHtml(d);
+      /* Та же цифра, что «Сумма» на «Обзоре», в «Экономисте» не повторяется:
+         «в обзоре „сумма“, в экономисте „сумма сделки“ — это же бред»
+         (владелец, 27 октября 2026). Показывается, только если «Экономист»
+         говорит о цене что-то свое (другое число, диапазон, начальная цена лота). */
+      const sameSum = (a,b) => String(a||"").replace(/\s+/g,"").toLowerCase() === String(b||"").replace(/\s+/g,"").toLowerCase();
       f.innerHTML = (ecoHasContent(d) || extraBlock) ? `
-      ${hero(isListing(d)?"Начальная цена лота":"Сумма сделки", d.eco.sum)}
+      ${(isListing(d) || !sameSum(d.eco.sum, d.sum)) ? hero(isListing(d)?"Начальная цена лота":"Сумма сделки", d.eco.sum) : ""}
       ${specBlock([
         specRow("Предмет / доля", d.eco.share),
         specRow("Оценка и дисконт", d.eco.val),

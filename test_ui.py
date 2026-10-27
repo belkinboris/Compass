@@ -4717,6 +4717,46 @@ def test_assistant_follow_up_skips_the_quick_answer_and_shows_it_is_thinking(bro
         ctx.close()
 
 
+def test_economist_does_not_repeat_the_overview_sum(page, base_url):
+    """Владелец 27 октября 2026: «в обзоре „сумма“, а в экономисте „сумма
+    сделки“ с той же цифрой — это же бред». Та же цена в «Экономисте» не
+    повторяется; у лота на торгах «Начальная цена лота» остается — это
+    другое число по смыслу."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    norm = lambda v: "".join(str(v or "").split()).lower()  # noqa: E731
+    deal = next(d for d in base["deals"] if d.get("status") == "Закрыта" and norm(d.get("sum")) and isinstance(d.get("eco"), dict)
+                and norm(d["eco"].get("sum")) == norm(d.get("sum")) and norm(d["eco"].get("context")))
+    page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+    page.wait_for_selector("#facts", timeout=15000)
+    page.get_by_text("Экономист", exact=True).first.click()
+    page.wait_for_timeout(500)
+    text = page.inner_text("#facts")
+    assert "Сумма сделки" not in text and deal["sum"] not in text.split("Контекст")[0]
+
+
+def test_deal_card_never_shows_raw_fact_quotes(page, base_url):
+    """Владелец 27 октября 2026 (карточка «Т-Технологий»): «мы никогда не
+    оставляем дословные цитаты в карточке — пересказ своими словами, цитаты
+    остаются на фоне». Слой фактов с сентября выводил под источниками блок
+    «Подтверждено цитатой из источника» с сырыми выдержками читателя (вместе
+    с шапкой страницы: время, «Поделиться», счетчики). Блок снят; цитаты из
+    `facts` на экран не попадают."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if any(isinstance(v, dict) and v.get("basis") == "verified" and v.get("quote")
+                                                for v in (d.get("facts") or {}).values()))
+    quotes = [str(v["quote"]) for v in deal["facts"].values() if isinstance(v, dict) and v.get("basis") == "verified" and v.get("quote")]
+    page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".deal-head, h1", timeout=15000)
+    page.wait_for_timeout(800)
+    assert page.locator(".fact-verified").count() == 0
+    text = page.inner_text("#app")
+    assert "Подтверждено цитатой" not in text
+    for q in quotes:
+        assert q.strip()[:60] not in text, "цитата читателя попала на экран: %r" % q[:80]
+
+
 def test_deal_without_a_sum_says_not_disclosed_not_no_data(page, base_url):
     """Владелец 1 октября 2026: «„Нет данных“ надо меньше делать». На «Обзоре»
     карточки без поля суммы крупно стояло «Нет данных» (200 карточек) — из
