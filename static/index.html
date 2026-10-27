@@ -1020,7 +1020,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .an-deal:hover .an-deal-t{color:var(--accent)}
 .an-deal-head{display:flex;gap:8px;align-items:baseline}
 .an-deal-t{flex:1;line-height:1.4;min-width:0}
-.an-deal-s{display:block;color:var(--muted);font-size:13px;padding-left:22px}
+.an-deal-s{display:block;color:var(--muted);font-size:13px}  /* без отступа: сумма под заголовком в одну линию (владелец, 27 октября 2026) */
 .firm-inds{margin-top:6px;display:flex;gap:5px;flex-wrap:wrap}
 .related{margin:28px 0;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
 .related>.label{display:block;margin-bottom:8px}
@@ -1167,7 +1167,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .fa-foot a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){.fa-row{grid-template-columns:minmax(0,1fr)}.fa-bar{flex-wrap:wrap}}
 /* Ассистент с любой страницы: кнопка справа внизу и выезжающая шторка (aiDock) */
-.ai-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;
+.ai-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:70;
   width:60px;height:60px;border-radius:20px;border:0;cursor:pointer;background:#0F2B21;display:grid;place-items:center;
   box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset,0 0 0 7px rgba(15,43,33,.07);
   transition:transform .25s var(--ease),background .2s var(--ease),opacity .25s var(--ease),visibility 0s linear 0s}
@@ -1196,7 +1196,7 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
    адресной строки — владелец проверяет на телефоне. */
 @media(max-width:720px){
   .tabbar,.ai-fab{
-    background:rgba(255,255,255,.22);
+    background:rgba(255,255,255,.34);
     -webkit-backdrop-filter:blur(36px) saturate(1.8);backdrop-filter:blur(36px) saturate(1.8);
     border:1px solid rgba(255,255,255,.55);
     box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06),inset 0 0 0 .5px rgba(255,255,255,.35)}
@@ -1213,7 +1213,7 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
   .ai-fab.on-dark svg polygon:last-of-type{fill:#fff}
   .ai-fab.on-dark svg circle:last-child{fill:#0F2B21;stroke:#fff}
   .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 74px + 10px);
-    bottom:calc(16px + env(safe-area-inset-bottom,0px));height:74px;border-radius:26px;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px));height:74px;border-radius:26px;
     display:flex;justify-content:space-around;align-items:center;gap:0;padding:0 2px}
   .tabbar a{position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;margin:0;padding:8px 1px;
     font:600 9.2px var(--f-body);letter-spacing:-.02em;text-transform:none;color:#3C5A4C;
@@ -1243,7 +1243,7 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
   .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + 86px)}
   /* Плашка о cookie встает над панелью, а панель и кнопка остаются на месте. */
   .cookie-note{bottom:calc(env(safe-area-inset-bottom,0px) + 102px)}
-  body.has-cookie-note .ai-fab{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  body.has-cookie-note .ai-fab{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 }
 .ai-sheet-scrim{position:fixed;inset:0;z-index:68;background:rgba(10,18,16,.38);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 .ai-sheet-scrim.on{opacity:1;pointer-events:auto}
@@ -4071,7 +4071,10 @@ function tabbarAdapt(){
   const foot = document.querySelector("footer");
   const r = bar.getBoundingClientRect();
   const overFooter = !!(foot && r.height && foot.getBoundingClientRect().top < r.top + r.height / 2);
-  const dark = lum < 0.4 || overFooter;
+  // Владелец 27 октября 2026: на «Сделках» панель светлая, как на других
+  // вкладках, — темный фон ленты просвечивает сквозь стекло и слегка
+  // затемняет ее сам; темнеет панель только над подвалом.
+  const dark = overFooter;
   bar.classList.toggle("on-dark", dark);
   if(fab) fab.classList.toggle("on-dark", dark);
 }
@@ -8307,6 +8310,10 @@ function factsVerifiedHtml(d){
   if(factVerified(st) && st.value != null) rows.push(`доля ${fmtPct(st.value)}${st.object?` в ${esc(st.object)}`:""}`+src(st));
   if(factVerified(dt) && dt.value) rows.push(`${DATE_BASIS_LABELS_JS[dt.meaning]||"дата"}: ${fmtDate(dt.value)}`+src(dt));
   if(!rows.length) return "";
+  // Владелец 27 октября 2026 («что за бред написан в карточке»): список сырых
+  // цитат под карточкой читателю не нужен — сверка живет в данных, на экране
+  // остается только строка «Проверено по источникам».
+  return "";
   return `<div class="fact-verified"><span class="label">Подтверждено цитатой из источника</span><ul>${rows.map(r=>`<li>${r}</li>`).join("")}</ul></div>`
     + `<p class="fact-note">Эти числа дословно сверены с источником. Если у сделки такой пометки нет, ее еще не сверяли — ошибки это не означает.</p>`;
 }

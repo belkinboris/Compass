@@ -47,6 +47,17 @@ def test_the_sum_on_the_overview_is_the_sum_in_the_economist():
     assert not silent, "сумма есть на «Обзоре», но не в «Экономисте»: %s" % silent[:5]
 
 
+def test_the_sum_in_the_economist_is_the_sum_on_the_overview():
+    """Обратная сторона: число в «Экономисте» при пустом «Обзоре» — «Не раскрыта»
+    рядом с 1,427 млрд ₽ («Агропромкредит», владелец, 27 октября 2026)."""
+    import re
+    silent = [d["id"] for d in DATA["deals"]
+              if (d.get("sum") or "").strip() in ("", "Не раскрыта", "—", "-")
+              and isinstance(d.get("eco"), dict)
+              and re.match(r"\s*(?:≈|~|более|около|не менее|свыше|до)?\s*\d", d["eco"].get("sum") or "", re.I)]
+    assert not silent, "сумма есть в «Экономисте», но не на «Обзоре»: %s" % silent[:5]
+
+
 def test_no_tilde_instead_of_the_approximation_sign_in_sums():
     bad = [d["id"] for d in DATA["deals"]
            if "~" in (d.get("sum") or "")
