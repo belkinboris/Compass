@@ -1185,38 +1185,40 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
    Верхнее меню на телефоне сворачивается до входа/аватара. */
 .tabbar{display:none}
 /* «Стекло» (владелец, 27 октября 2026: «блок нижний должен брать Liquid Glass…
-   со словами, но увеличь весь нижний блок»): полупрозрачный темно-зеленый с
-   размытием фона, светлая кромка сверху и блик; панель 74px, кнопка ассистента
-   того же размера и из того же стекла. Риск известен (комментарий у `.top`):
-   закрепленный блок с backdrop-filter в мобильном Safari может дергаться при
-   сворачивании адресной строки — владелец проверяет на телефоне; если прыгает,
-   размытие снимается, полупрозрачность остается. */
+   со словами, но увеличь весь нижний блок»; вечером — «белая тень дешевит…
+   сделай прозрачный liquid glass»). Панель — прозрачное стекло, как папки в
+   iOS 26: почти без собственного цвета, сильное размытие фона, тонкая светлая
+   кромка; значки темно-зеленые, активный — бронзовый. Над темным героем
+   главной (`.top.on-hero`) значки светлые. Кнопка ассистента — плотная
+   темно-зеленая, как была: она нравилась больше, и на прозрачной панели
+   дает опору. Риск (комментарий у `.top`): закрепленный блок с
+   backdrop-filter в мобильном Safari может дергаться при сворачивании
+   адресной строки — владелец проверяет на телефоне. */
 @media(max-width:720px){
-  .tabbar,.ai-fab{
-    background:linear-gradient(160deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.04) 100%),rgba(17,48,36,.42);
-    -webkit-backdrop-filter:blur(30px) saturate(1.9) brightness(1.04);backdrop-filter:blur(30px) saturate(1.9) brightness(1.04);
-    border:1px solid rgba(255,255,255,.42);
-    box-shadow:0 18px 44px rgba(15,43,33,.22),0 2px 6px rgba(15,43,33,.10),
-      inset 0 1.5px 1px rgba(255,255,255,.65),inset 0 -1px 1px rgba(255,255,255,.18),inset 1px 0 1px rgba(255,255,255,.22);
-    overflow:hidden}
-  .tabbar::before,.ai-fab::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:radial-gradient(120% 90% at 18% -20%,rgba(255,255,255,.42),rgba(255,255,255,0) 55%),
-               radial-gradient(60% 60% at 92% 120%,rgba(255,255,255,.16),rgba(255,255,255,0) 60%)}
+  .tabbar{
+    background:rgba(255,255,255,.22);
+    -webkit-backdrop-filter:blur(36px) saturate(1.8);backdrop-filter:blur(36px) saturate(1.8);
+    border:1px solid rgba(255,255,255,.55);
+    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06),inset 0 0 0 .5px rgba(255,255,255,.35)}
   .ai-fab{width:74px;height:74px;border-radius:26px}
-  .ai-fab:hover{background:linear-gradient(160deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.04) 100%),rgba(17,48,36,.5)}
-  .ai-fab svg{width:42px;height:42px;position:relative}
+  .ai-fab svg{width:42px;height:42px}
   .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 74px + 10px);
     bottom:calc(16px + env(safe-area-inset-bottom,0px));height:74px;border-radius:26px;
     display:flex;justify-content:space-around;align-items:center;gap:0;padding:0 2px}
   .tabbar a{position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;margin:0;padding:8px 1px;
-    font:600 9.2px var(--f-body);letter-spacing:-.02em;text-transform:none;color:#F3F7F4;text-shadow:0 1px 2px rgba(10,30,22,.45);
+    font:600 9.2px var(--f-body);letter-spacing:-.02em;text-transform:none;color:#3C5A4C;
     text-align:center;white-space:nowrap;text-decoration:none}
   .tabbar a::after{content:none}
   @media(max-width:380px){.tabbar a{font-size:8.4px}}
-  .tabbar a svg{width:26px;height:26px;stroke:#F3F7F4;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
-    filter:drop-shadow(0 1px 1.5px rgba(10,30,22,.45))}
-  .tabbar a.on{color:#fff}
-  .tabbar a.on svg{stroke:#D9BE86}
+  .tabbar a svg{width:26px;height:26px;stroke:#3C5A4C;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar a.on{color:#0F2B21}
+  .tabbar a.on svg{stroke:#A3814E}
+  /* Над темным героем главной — светлые значки и чуть темнее стекло. */
+  .top.on-hero + .tabbar{background:rgba(10,18,16,.28);border-color:rgba(255,255,255,.22)}
+  .top.on-hero + .tabbar a{color:#C9D9D0}
+  .top.on-hero + .tabbar a svg{stroke:#C9D9D0}
+  .top.on-hero + .tabbar a.on{color:#fff}
+  .top.on-hero + .tabbar a.on svg{stroke:#C9AE7C}
   /* В шапке на телефоне один пункт — вход/аватар: прижат вправо, счетчик
      уведомлений не режется прокруткой (владелец: «обрезается»). */
   #nav a:not(#navAccount){display:none}
