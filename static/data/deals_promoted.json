@@ -232384,6 +232384,108 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g221460e5",
+   "date": "2026-10-21",
+   "title": "Производственную базу у индустриального парка «Масловский» выставили на продажу",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "395 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "На территории — два отапливаемых корпуса: один годится под склад, второй приспособлен под ремонт техники — внутри смотровая яма на два поста и подъемный кран на 5 тонн, а наверху — кабинеты, душ и санузел. Мойку оборудовали аппаратами высокого давления. Вода идет из собственной скважины, есть горячее водоснабжение и канализация, а электричество подает пара трансформаторных подстанций суммарной мощностью 300 кВт. Участок в собственности, под промышленное использование, огорожен, с охраной на въезде и камерами. К базе можно прицепом взять молочный бизнес — оптовую торговлю сырым молоком с парком в 22 грузовика КАМАЗ (цистерны на 10–22 тонны); с этим довеском цена вырастет до 415 млн ₽.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "395 млн ₽ (по оценке)",
+   "proofread_absorbed": {
+    "eco.context": [
+     "27d1e8764353"
+    ]
+   },
+   "reviewed": "2026-10-27",
+   "no_parties": "Объявление о продаже на классифайде — сделка не состоялась, источник не называет ни покупателя, ни продавца.",
+   "asset": "производственная база с автосервисом для грузовой техники (у индустриального парка «Масловский», Воронежская область)",
+   "accepted": "2026-10-27",
+   "accepted_notes": {
+    "notes": "второе чтение нашло: заголовок дословно копировал заголовок Абирега — переформулирован"
+   },
+   "proofread": "2026-10-27",
+   "second_read": "2026-10-27",
+   "post_preview": "<b>Производственную базу у индустриального парка «Масловский» выставили на продажу</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> производственная база с автосервисом для грузовой техники (у индустриального парка «Масловский», Воронежская область)\n<b>Сумма:</b> 395 млн ₽ (по оценке)\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/118711-proizvodstvennuyu-bazu-u-industrialnogo-parka-maslovskiy-prodayut-pochti-za-400-mln-rubley/\">Абирег</a>\n\n#MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g221460e5\">карточке сделки</a>",
+   "added": "2026-10-28",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "cf95d8c30dae"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "dfc6508bc41c"
+    },
+    "date": {
+     "value": "2026-10-21",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "426be9f76687"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "396113bfb8a2"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
