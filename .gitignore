@@ -54,3 +54,4 @@ data/inbox/assistant_redteam/
 # Выгрузка отчётности с сайта для прототипа оценки нераскрытой цены — кэш, пересобирается.
 data/inbox/valuation/fns_reports.json
 data/inbox/ship_decisions.log
+data/inbox/ship_decisions.lock
