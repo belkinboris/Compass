@@ -46,14 +46,15 @@ def render_screens(card, companies):
     out += _row('Как устроена сделка', law.get('struct')) + _row('Статус', card.get('status'))
     if legal or advs:
         out.append('Команда сделки: ' + '; '.join('%s — %s' % (a[1], a[0]) for a in legal + advs))
-    out += (_row('Согласования', law.get('appr')) + _row('Условия сделки', law.get('terms'))
-            + _row('Цель сделки', eco.get('rationale')) + _row('Контекст', eco.get('context')) + _row('Дополнительно', card.get('extra')))
+    out += (_row('Предмет / доля', eco.get('share')) + _row('Согласования', law.get('appr')) + _row('Условия сделки', law.get('terms'))
+            + _row('Цель сделки', eco.get('rationale')) + _row('Контекст', eco.get('context')) + _row('Дополнительно', card.get('extra'))
+            + ([] if advs else _row('Финансовый консультант', eco.get('finadv'))))
+    # «Финансы» — только деньги (владелец, 28 октября 2026).
     out += ['', 'ФИНАНСЫ']
     if has(eco.get('sum')) and (listing or _norm(eco.get('sum')) != _norm(card.get('sum'))):
         out += _row('Начальная цена лота' if listing else 'Сумма сделки', eco.get('sum'))
-    out += (_row('Предмет / доля', eco.get('share')) + _row('Оценка и дисконт', eco.get('val')) + _row('Показатели компании', eco.get('target_fin'))
-            + _row('Форма расчетов', eco.get('fin'))
-            + _row('Финансовые консультанты', '; '.join(str(a[1]) for a in advs) if advs else eco.get('finadv')))
+    out += (_row('Оценка и дисконт', eco.get('val')) + _row('Показатели компании', eco.get('target_fin'))
+            + _row('Форма расчетов', eco.get('fin')))
     out += ['', 'ПОСТ В КАНАЛ']
     try:
         post = format_post.render(card, companies)
