@@ -637,6 +637,36 @@ def source_records():
 LEGAL_ENTITY = re.compile(r'\b(?:ООО|АО|ПАО|ЗАО|НАО|МКАО|МКПАО)\s*[«"]([^»"]{2,80})[»"]')
 
 
+def _title_wordset(t):
+    return {w for w in re.findall(r'[\wа-яё]+', str(t or '').lower()) if len(w) >= 3}
+
+
+def title_copied_from(card, records=None):
+    """Заголовок источника, который карточка повторяет (дословно или почти —
+    те же слова в другом порядке), или None. Источники: заголовок сырья
+    (`from_raw.title`) и записи сырья по адресам из `src`."""
+    mine = _title_wordset(card.get('title'))
+    if len(mine) < 3:
+        return None
+    candidates = []
+    raw = card.get('from_raw') or {}
+    if raw.get('title'):
+        candidates.append(raw['title'])
+    urls = {str(u) for _l, u in (card.get('src') or []) if u}
+    if urls:
+        records = source_records() if records is None else records
+        candidates += [r['title'] for r in records if r.get('url') in urls and r.get('title')]
+    for t in candidates:
+        theirs = _title_wordset(t)
+        if not theirs:
+            continue
+        if review.flat(str(card.get('title'))) == review.flat(str(t)):
+            return t
+        if len(mine & theirs) / len(mine | theirs) >= 0.75:
+            return t
+    return None
+
+
 def _card_blob(card, comps):
     parts = [str(card.get(k) or '') for k in ('title', 'asset', 'extra', 'seller', 'buyer_name')]
     parts += [str(v or '') for sec in ('eco', 'law') for v in (card.get(sec) or {}).values() if isinstance(v, str)]
@@ -748,6 +778,16 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))
         if has(text) and not linked and role not in waived:
             out.append(('party_unlinked:' + role, '%s «%s» — текстом, без профиля' % (role, text)))
+    # ЗАГОЛОВОК НЕ СПИСЫВАЕТСЯ С ИЗДАНИЯ (владелец, 28 октября 2026, Baggins
+    # Coffee: «как так вышло, что название дословно списано с коммерсанта? Мы же
+    # пересказываем и переделываем, чтобы не обвинили в краже»). Карточка
+    # рождается с заголовком новости, переписать его обязан собирающий — а
+    # механической проверки не было. Сверяем с заголовком сырья и заголовками
+    # источников карточки по адресу: совпадение или почти совпадение слов — отказ.
+    copied = title_copied_from(card, source_records)
+    if copied:
+        out.append(('title_copied', 'заголовок повторяет заголовок источника «%s» — перепишите своими словами: '
+                    'другая конструкция фразы, не перестановка слов (docs/card_parties.md)' % copied[:90]))
     for m in BARE_SURNAME_RE.finditer(str(card.get('title') or '')):
         before = str(card.get('title'))[:m.start(1)].split()
         prev = before[-1] if before else ''
