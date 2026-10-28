@@ -8707,3 +8707,20 @@ def test_draft_reads_became_co_owner_as_a_purchase():
     assert asset and 'Baggins Coffee' in asset
     # отрицание — не сделка
     assert draft.guess_parties('Фонд не стал совладельцем Baggins Coffee')[1] is None
+
+
+def test_acceptance_refuses_a_title_copied_from_the_source():
+    """Владелец, 28 октября 2026 (Baggins Coffee): «как так вышло, что название
+    дословно списано с коммерсанта?» Заголовок карточки сверяется с заголовком
+    сырья и заголовками источников: дословно или те же слова в другом порядке —
+    отказ; своя конструкция фразы — проходит."""
+    import accept_card
+    src = [["Коммерсантъ", "https://www.kommersant.ru/doc/1"]]
+    recs = [{"url": "https://www.kommersant.ru/doc/1", "title": "Фонд «Бумеранг Капитал» стал совладельцем Baggins Coffee", "summary": ""}]
+    codes = lambda t, raw=None: [c for c, _ in accept_card.findings(
+        {"id": "gs1", "title": t, "src": src, **({"from_raw": {"draft_id": "d1", "title": raw}} if raw else {})},
+        {"companies": {}}, source_records=recs)]
+    assert "title_copied" in codes("Фонд «Бумеранг Капитал» стал совладельцем Baggins Coffee")
+    assert "title_copied" in codes("Совладельцем Baggins Coffee стал фонд «Бумеранг Капитал»")
+    assert "title_copied" in codes("РЖД выставили на торги 25% плюс 1 акцию «ПНК»", raw="РЖД выставили на торги 25% плюс 1 акцию ПНК")
+    assert "title_copied" not in codes("Фонд «Бумеранг Капитал» и сооснователь «Цех 85» Антон Петров выкупили сеть кофеен Baggins Coffee")
