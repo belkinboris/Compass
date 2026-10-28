@@ -232022,6 +232022,146 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g55008cf1",
+   "date": "2026-10-26",
+   "title": "«Ломбард 888» приобрел сеть «Ломбардный дом»",
+   "ind": "Финансовые услуги",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Lombard888.ru (пресс-релиз покупателя)",
+     "https://lombard888.ru/news/lombard-888-sovershil-krupneyshuyu-sdelku-na-lombardnom-rynke-rossii-v-2026-godu-i-priobrel-set-iz-3/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Покупатель — сеть ломбардов со стажем больше 10 лет на рынке займов под залог, до сделки у нее было свыше 120 собственных отделений в разных округах страны; среди ломбардов она первой в России начала использовать нейросеть для предварительной оценки залога. Покупку профинансировали и своими деньгами, и средствами от первого выпуска облигаций компании в 2026 году.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "сеть «Ломбардный дом» (36 отделений)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-26",
+     "title": "Сделка завершена",
+     "note": "Покупка добавила «Ломбарду 888» 36 отделений в нескольких регионах страны — сам покупатель называет это крупнейшей сделкой на российском ломбардном рынке за последнее время.",
+     "source": [
+      "Lombard888.ru (пресс-релиз покупателя)",
+      "https://lombard888.ru/news/lombard-888-sovershil-krupneyshuyu-sdelku-na-lombardnom-rynke-rossii-v-2026-godu-i-priobrel-set-iz-3/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Ломбард 888»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699"
+     }
+    ],
+    "target": [
+     {
+      "value": "сеть «Ломбардный дом»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699"
+     }
+    ]
+   },
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Lombard-888-priobrel-set-Lombardnyj-dom-87699"
+    ]
+   ],
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-10-27",
+   "buyer": "g4c491215",
+   "accepted": "2026-10-27",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет сделки — сеть под брендом «Ломбардный дом» (36 отделений); юрлицо сети ни в одном источнике не названо и не нашлось ни в одном реестре под этим именем",
+     "seller": "продавец ни в одном источнике не назван; юрлицо сети «Ломбардный дом» не нашлось ни в одном открытом реестре под этим именем, поэтому историю участников ЕГРЮЛ через datanewton (OGRN) проверить не на чем — ОГРН самого предмета неизвестен"
+    },
+    "notes": "два юрлица, которые механическая проверка нашла в кэше страницы lombard888.ru («АНАЛЕММА», «ГЛЕДЕН»), — не стороны этой сделки: это другие лицензированные партнеры покупателя из стандартного юридического футера сайта (скупка ювелирных изделий и скупка техники) — к покупке сети «Ломбардный дом» не имеют отношения. ИНН покупателя (9718010636) и ОГРН (1167746522272) — из собственного юридического футера lombard888.ru, владелец Сергей Бутенко подтвержден открытым API истории ЕГРЮЛ (datanewton.ru) по этому ОГРН. ВНИМАНИЕ на будущее: есть другое юрлицо с тем же названием «Ломбард 888» (ОГРН 1192468020909, ИНН 2461044317, Красноярск), которое ЦБ исключил из реестра ломбардов 05.06.2026 за нарушения, — это не покупатель, профиль привязан по верному ИНН 9718010636. Сумма сделки не раскрыта ни в одном источнике."
+   },
+   "second_read": "2026-10-27",
+   "post_preview": "<b>«Ломбард 888» приобрел сеть «Ломбардный дом»</b>\n\n<b>Покупатель:</b> ООО «Ломбард 888» — федеральная сеть ломбардов с более чем 120 отделениями в нескольких округах России на момент этой покупки; на рынке займов под залог работает больше 10 лет.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> сеть «Ломбардный дом» (36 отделений)\n<b>Статус:</b> Закрыта · октябрь 2026\n\n<b>Источник:</b> <a href=\"https://lombard888.ru/news/lombard-888-sovershil-krupneyshuyu-sdelku-na-lombardnom-rynke-rossii-v-2026-godu-i-priobrel-set-iz-3/\">Lombard888.ru (пресс-релиз покупателя)</a>\n\n#MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g55008cf1\">карточке сделки</a>",
+   "added": "2026-10-28",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c06ceb1ae362"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-10-26",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "415cc53083dc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "36b36faa6980"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   },
+   "proofread": "2026-10-28"
   }
  ],
  "companies": {
