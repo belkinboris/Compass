@@ -232163,6 +232163,113 @@
     }
    },
    "proofread": "2026-10-28"
+  },
+  {
+   "id": "g172b1374",
+   "date": "2026-10-28",
+   "title": "РЖД продает блокирующий пакет акций «Первой нерудной компании» на торгах",
+   "ind": "ГМК и добыча",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261028/rzhd-874693669.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1,9 млрд ₽",
+    "share": "25% плюс 1 акция",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "seller": "РЖД",
+   "sum": "1,9 млрд ₽",
+   "sum_basis": "auction_start",
+   "reviewed": "2026-10-28",
+   "seller_id": "g8ec7e7bf",
+   "target": "gbcf3f414",
+   "asset": "25% плюс 1 акция АО «Первая нерудная компания»",
+   "accepted": "2026-10-28",
+   "accepted_notes": {
+    "no_inn": {
+     "target": "искали ИНН «Первая нерудная компания» в ЕГРЮЛ (egrul.nalog.ru — сброс соединения) и в rusprofile/list-org (403/защита от ботов) — непроверенным номером не заполняем"
+    },
+    "notes": "заголовок перестроен по находке второго чтения (была лишь перестановка слов заголовка ПРАЙМ); причина отсутствия ИНН у цели восстановлена этим ответом"
+   },
+   "proofread": "2026-10-28",
+   "second_read": "2026-10-28",
+   "post_preview": "<b>РЖД продает блокирующий пакет акций «Первой нерудной компании» на торгах</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> РЖД\n<b>Предмет:</b> Первая нерудная компания — акционерное общество, 25% плюс 1 акция которого принадлежали ОАО «РЖД» и теперь продаются на открытом аукционе; род деятельности источник не называет.\n<b>Начальная цена лота:</b> 1,9 млрд ₽\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261028/rzhd-874693669.html\">ПРАЙМ</a>\n\n#торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g172b1374\">карточке сделки</a>",
+   "added": "2026-10-28",
+   "post_override": "<b>РЖД продает блокирующий пакет акций «Первой нерудной компании» на торгах</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> РЖД\n<b>Предмет:</b> 25% плюс 1 акция Первой нерудной компании\n<b>Начальная цена лота:</b> 1,9 млрд ₽\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261028/rzhd-874693669.html\">ПРАЙМ</a>\n\n#торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g172b1374\">карточке сделки</a>",
+   "facts": {
+    "stake": {
+     "value": 25.0,
+     "basis": "rule",
+     "card_hash": "de38c75ef54b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "c52852508d97"
+    },
+    "date": {
+     "value": "2026-10-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f6bc4c29aeba"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f6263997c8f2"
+    },
+    "target": {
+     "company_id": "gbcf3f414",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "aa7489cf6861"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
@@ -258292,6 +258399,18 @@
    "ind": "ИТ и интернет",
    "desc": "Израильский разработчик программной платформы для квантовых компьютеров: переводит описание алгоритма в готовые к запуску схемы, не привязана к одному типу квантового оборудования. Основана в 2020 году в Тель-Авиве.",
    "kpi": []
+  },
+  "g5a19c033": {
+   "name": "АЛРОСА",
+   "ind": "ГМК и добыча",
+   "desc": "Крупнейшая в России алмазодобывающая компания.",
+   "kpi": []
+  },
+  "gbdba5da3": {
+   "name": "ГМК «Тимир»",
+   "ind": "ГМК и добыча",
+   "desc": "Совместное предприятие «Евраза» и АЛРОСА.",
+   "kpi": []
   }
  },
  "match_keys": {
@@ -266650,7 +266769,8 @@
   "g6c2af36f": null,
   "gcc75fe11": null,
   "g601b6589": null,
-  "g55008cf1": null
+  "g55008cf1": null,
+  "g172b1374": 229
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -271327,7 +271447,22 @@
      "kind": "negotiations"
     }
    ]
+  },
+  "g172b1374": {
+   "sum": "1,9 млрд ₽",
+   "seller": "РЖД",
+   "target": "gbcf3f414",
+   "asset": "25% плюс 1 акция АО «Первая нерудная компания»",
+   "status": "Обсуждается",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-10-28T07:46:11+00:00"
+ "telegram_last_post_at": "2026-10-28T13:30:59+00:00"
 }

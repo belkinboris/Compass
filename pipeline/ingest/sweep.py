@@ -68,6 +68,31 @@ def commit_and_push(message):
     return 1
 
 
+STALE_DECISION_MIN = 30
+
+
+def stale_decisions_warning(now=None):
+    """Решения людей из консоли ждут публикацию дольше STALE_DECISION_MIN минут —
+    сказать вслух: их доведет до поста `ship_decisions.py --write` (28 октября
+    2026, «пост больше двух часов назад одобрил»)."""
+    try:
+        from datetime import datetime, timedelta, timezone
+        sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+        import publication_busy
+        now = now or datetime.now(timezone.utc)
+        old = [d for d in publication_busy.busy()
+               if now - datetime.fromisoformat(str(d.get('created_at'))).replace(
+                   tzinfo=datetime.fromisoformat(str(d.get('created_at'))).tzinfo or timezone.utc)
+               > timedelta(minutes=STALE_DECISION_MIN)]
+    except Exception as e:  # noqa: BLE001 — страховка не должна ронять забор
+        print('Проверка решений не удалась: %s' % e)
+        return []
+    if old:
+        print('\nРЕШЕНИЯ ЖДУТ ДОЛЬШЕ %d МИНУТ (%s) — публикация их не применила: '
+              'python3 pipeline/publish/ship_decisions.py --write' % (STALE_DECISION_MIN, ', '.join(str(d.get('deal_id')) for d in old[:5])))
+    return old
+
+
 def main(argv):
     write, send = '--write' in argv, '--send' in argv
     g = git('pull', '--rebase', '--autostash', 'origin', 'main')
@@ -76,7 +101,9 @@ def main(argv):
     if send:
         # Фаза 2: мусор уже отсеян (raw_screen.py --drop) — показать и записать.
         run('send_drafts.py', '--write', must=False)
-        return commit_and_push('Забор новостей: сырье показано, очередь (sweep.py --send)')
+        rc = commit_and_push('Забор новостей: сырье показано, очередь (sweep.py --send)')
+        stale_decisions_warning()
+        return rc
     run('fetch.py')
     run('triage.py')
     run('draft.py')
