@@ -204935,17 +204935,88 @@
      "card_hash": "f3e8bf6787a4"
     },
     "price": {
-     "value_rub": 17700000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "6b83484b917c"
+     "value_rub": null,
+     "meaning": "reported",
+     "scope": "ev",
+     "basis": "verified",
+     "card_hash": "fce8331ccbba",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "signing",
+     "event_variants": [
+      "signing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "директор компании, принадлежащей \"Вамину\", Айрат Мухамадеев сообщил, что она согласилась заплатить 17,7 млрд рублей ($191,5 млн) за получение контроля над российским бизнесом Danone, отмечала FT.",
+     "source": "https://www.interfax.ru/business/961100",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "value_rub": 17700000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "signing",
+       "scope": "ev",
+       "terms": "fixed",
+       "quote": "директор компании, принадлежащей \"Вамину\", Айрат Мухамадеев сообщил, что она согласилась заплатить 17,7 млрд рублей ($191,5 млн) за получение контроля над российским бизнесом Danone, отмечала FT.",
+       "source": "https://www.interfax.ru/business/961100",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 17700000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "signing",
+       "scope": "ev",
+       "terms": "fixed",
+       "quote": "директор компании, принадлежащей \"Вамину\", Айрат Мухамадеев сообщил, что она согласилась заплатить 17,7 млрд рублей ($191,5 млн) за получение контроля над российским бизнесом Danone, отмечала FT. Причем 7,7 млрд рублей из них пойдут на обслуживание долга в российском бизнесе, остальное - на оплату доли Danone в компании.",
+       "source": "https://www.interfax.ru/business/961100",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-05-17",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "a559639fd32d"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "bdd15b65a244",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Французская Danone, получившая в марте 2023 года разрешение российских регулирующих органов на продажу своего бизнеса в России, закрыла 17 мая сделку с компаний \"Вамин Р\", сказано в ее пресс-релизе.",
+     "source": "https://www.interfax.ru/business/961100",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "value": "2024-05-17",
+       "meaning": "closing",
+       "quote": "Французская Danone, получившая в марте 2023 года разрешение российских регулирующих органов на продажу своего бизнеса в России, закрыла 17 мая сделку с компаний \"Вамин Р\", сказано в ее пресс-релизе.",
+       "source": "https://www.interfax.ru/business/961100",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2024-05-17",
+       "meaning": "closing",
+       "quote": "Москва. 17 мая. INTERFAX.RU - Французская Danone, получившая в марте 2023 года разрешение российских регулирующих органов на продажу своего бизнеса в России, закрыла 17 мая сделку с компаний \"Вамин Р\", сказано в ее пресс-релизе.",
+       "source": "https://www.interfax.ru/business/961100",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -204955,7 +205026,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "2eb6c05c423c"
+     "card_hash": "2eb6c05c423c",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Danone закрыла сделку по продаже российских активов компании \"Вамин Р\"",
+     "source": "https://www.interfax.ru/business/961100",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Danone закрыла сделку по продаже российских активов компании \"Вамин Р\"",
+       "source": "https://www.interfax.ru/business/961100",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В мае 2024 года Danone закрыл сделку по продаже своего бизнеса в России компании \"Вамин Р\" (Татарстан).",
+       "source": "https://www.interfax.ru/business/996657",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g8cf40802",
@@ -204977,9 +205072,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    },
    "proofread": "2026-09-11",
@@ -205000,7 +205095,9 @@
    },
    "weekly_researched": "2026-10-08",
    "followup_researched": "2026-10-11",
-   "sum": "17,7 млрд ₽ ($191,5 млн)"
+   "sum": "17,7 млрд ₽ ($191,5 млн)",
+   "sum_basis": "reported",
+   "date_basis": "closing"
   },
   {
    "id": "gb20ec0ef",
@@ -227170,7 +227267,8 @@
      "https://t.me/dealsma/7482"
     ]
    ],
-   "deep_researched": "2026-10-21"
+   "deep_researched": "2026-10-21",
+   "weekly_researched": "2026-10-28"
   },
   {
    "id": "g28941fd8",
@@ -227504,7 +227602,8 @@
    },
    "proofread": "2026-10-21",
    "deep_researched": "2026-10-21",
-   "seller_id": "gc2cfc381"
+   "seller_id": "gc2cfc381",
+   "weekly_researched": "2026-10-28"
   },
   {
    "id": "g32cfa1d4",
@@ -227633,7 +227732,8 @@
    },
    "proofread": "2026-10-21",
    "deep_researched": "2026-10-21",
-   "target": "g0abf7319"
+   "target": "g0abf7319",
+   "weekly_researched": "2026-10-28"
   },
   {
    "id": "g7d3f5a20",
@@ -231628,6 +231728,10 @@
     [
      "Milbank LLP",
      "https://www.milbank.com/en/news/milbank-advises-frigoglass-in-connection-with-sale-of-its-russian-refrigeration-business.html"
+    ],
+    [
+     "refindustry.com",
+     "https://refindustry.com/news/market-news/frigoglass-group-agrees-to-sell-russian-subsidiary-pending-approvals/"
     ]
    ],
    "from_ingest": true,
@@ -231645,7 +231749,7 @@
     "struct": "Формальный покупатель — не сама EMC, а принадлежащее Андрею Яновскому ООО «Фригохолд»: общество создано 24 сентября 2026 года с капиталом 10 тыс. ₽. На предприятии ничего не поменялось: директором остается Расулов, возглавивший завод в марте 2025 года; переименование из «Фригогласс Евразия» в «Фриголайн Евразия» в компании назвали формальным, без последствий для работы, команды и клиентов.",
     "appr": "Международная сторона сделки шла медленно: соглашение подписали 2 сентября 2025 года, а закрыли только 26 мая 2026-го — почти девять месяцев ушло на одобрения регуляторов четырех стран, включая США.",
     "adv": [],
-    "terms": "—"
+    "terms": "Цену сделки скорректировали по российским правилам для таких сделок: обязательная 60-процентная скидка от оценочной стоимости актива, плюс заметный налог на выход, который платит покупатель."
    },
    "seller": "Frigoglass",
    "asset": "«Фриголайн Евразия»",
@@ -231676,7 +231780,8 @@
     "eco.context": [
      "1d517e24e348"
     ],
-    "law.appr": []
+    "law.appr": [],
+    "law.terms": []
    },
    "reviewed": "2026-10-27",
    "target": "gf159fc12",
@@ -231749,7 +231854,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "deep_researched": "2026-10-28"
   },
   {
    "id": "g1f8414a3",
@@ -231778,6 +231884,10 @@
     [
      "SFI (инвестиционный блог)",
      "https://smart-lab.ru/company/sfi/blog/1367181.php"
+    ],
+    [
+     "The Insider",
+     "https://theins.ru/news/297903"
     ]
    ],
    "from_ingest": true,
@@ -231788,7 +231898,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Банк «Агропромкредит» был изъят у Артема Бикова и Алексея Боброва по иску Генпрокуратуры и достался ПСБ. На повторных торгах лот — 50% банка напрямую и две компании, владеющие оставшейся долей, — купила «ЭсЭфАй» за 1,427 млрд ₽. Ранее тем же путем ушли энергоактивы Бикова и Боброва в трех регионах — их получили «Россети».",
+    "context": "Банк «Агропромкредит» был изъят у Артема Бикова и Алексея Боброва по иску Генпрокуратуры и достался ПСБ. На повторных торгах лот — 50% банка напрямую и две компании, владеющие оставшейся долей, — купила «ЭсЭфАй» за 1,427 млрд ₽. Ранее тем же путем ушли энергоактивы Бикова и Боброва в трех регионах — их получили «Россети». За покупателем, ПАО «ЭсЭфАй», стоит семья бизнесмена Михаила Гуцериева. Генпрокуратура объясняла сам факт национализации так: прежние владельцы банка пользовались знакомствами с чиновниками, чтобы получить контроль над компаниями-поставщиками коммунальных ресурсов, а деньги от продажи этих ресурсов уводили через «Агропромкредит» на зарубежные счета — в Австрию и Швейцарию.",
     "finadv": "—"
    },
    "law": {
@@ -231864,17 +231974,91 @@
      "card_hash": "da06fa458971"
     },
     "price": {
-     "value_rub": 1427000000.0,
+     "value_rub": 1427000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "c2ba65890d9d"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "c2ba65890d9d",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Об этом говорится в протоколе торгов.",
+     "scope_basis": "verified",
+     "quote": "приобрел национализированный банк «Агропромкредит» и две компании, владеющие оставшейся частью кредитной организации, за 1,427 млрд руб. Об этом говорится в протоколе торгов.",
+     "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "value_rub": 1427000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "приобрел национализированный банк «Агропромкредит» и две компании, владеющие оставшейся частью кредитной организации, за 1,427 млрд руб. Об этом говорится в протоколе торгов.",
+       "attribution_quote": "Об этом говорится в протоколе торгов.",
+       "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1427000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "приобрел национализированный банк «Агропромкредит» и две компании, владеющие оставшейся частью кредитной организации, за 1,427 млрд руб. Об этом говорится в протоколе торгов.",
+       "attribution_quote": "Об этом говорится в протоколе торгов.",
+       "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-27",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "39d50015e144"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "20724cee98b0",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Банк уральского олигарха пустили с молотка - 27 октября 2026",
+     "source": "https://www.e1.ru/text/business/2026/10/27/76726339/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "value": "2026-10-27",
+       "meaning": "publication",
+       "quote": "Банк уральского олигарха пустили с молотка - 27 октября 2026",
+       "source": "https://www.e1.ru/text/business/2026/10/27/76726339/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-27",
+       "meaning": "publication",
+       "quote": "Национализированный банк «Агропромкредит» продан структурам Михаила Гуцериева | РИА «Европейско-Азиатские Новости» от 27.10.2026",
+       "source": "https://eanews.ru/ekaterinburg/20261027103633/natsionalizirovannyy-bank-agrpromkredit-prodan-strukturam-mihaila-gutserieva",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -231884,7 +232068,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "16c3ae546bc3"
+     "card_hash": "16c3ae546bc3",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Московский инвестиционный холдинг ПАО «ЭсЭфАй» (SFI), связанный с семьей предпринимателя Михаила Гуцериева, приобрел национализированный банк «Агропромкредит»",
+     "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-28",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Московский инвестиционный холдинг ПАО «ЭсЭфАй» (SFI), связанный с семьей предпринимателя Михаила Гуцериева, приобрел национализированный банк «Агропромкредит»",
+       "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Покупатель получил 50% акций банка, а также 100% долей ООО «Дэнсиборг» и ООО «Блаусент», которым принадлежат остальные 50% кредитной организации.",
+       "source": "https://urbc.ru/1068148088-moskovskij-holding-priobrel-bank-agropromkredit-v-sverdlovskoj-oblasti.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g193370bd",
@@ -231899,19 +232107,21 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
    },
-   "sum": "1,427 млрд ₽"
+   "sum": "1,427 млрд ₽",
+   "deep_researched": "2026-10-28",
+   "date_basis": "publication"
   },
   {
    "id": "g601b6589",
@@ -231924,13 +232134,17 @@
     [
      "Abnews.ru",
      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+    ],
+    [
+     "76.ru",
+     "https://76.ru/text/gorod/2026/10/26/76724309/"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "—",
     "share": "—",
-    "val": "—",
+    "val": "Кадастровая стоимость усадьбы — 38,1 млн рублей; эксперты ожидают, что рыночная цена окажется близкой к ней.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "Чиновники объясняют шаг просто: памятники и другие активы должны наконец достаться инвесторам и снова работать, а казна получит деньги — прошлогодние такие продажи принесли региону около двух миллиардов рублей.",
@@ -231938,7 +232152,7 @@
     "finadv": "—"
    },
    "law": {
-    "struct": "—",
+    "struct": "Продажа пройдет без земельного участка под усадьбой — он относится к особо охраняемой природной территории, пояснила министр имущественных отношений региона Елена Ермолова.",
     "appr": "—",
     "adv": [],
     "terms": "—"
@@ -231958,7 +232172,9 @@
    "seller": "Власти Ярославской области",
    "proofread_absorbed": {
     "eco.context": [],
-    "eco.rationale": []
+    "eco.rationale": [],
+    "eco.val": [],
+    "law.struct": []
    },
    "themes": [
     "Продажа с торгов"
@@ -232026,7 +232242,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-28"
   },
   {
    "id": "g55008cf1",
@@ -232166,7 +232383,8 @@
      "multiple_text": "no_target"
     }
    },
-   "proofread": "2026-10-28"
+   "proofread": "2026-10-28",
+   "deep_researched": "2026-10-28"
   },
   {
    "id": "g172b1374",
@@ -232485,7 +232703,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "deep_researched": "2026-10-28"
   },
   {
    "id": "g25a6766d",
