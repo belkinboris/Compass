@@ -63,7 +63,7 @@ def test_claude_md_stays_within_its_budget():
 
 
 def test_a_searched_document_keeps_its_answer_the_size_of_one_entry():
-    """У KNOWN_ISSUES.md и архива потолка НЕТ намеренно — вместо него этот тест.
+    """У known_issues/ (бывший KNOWN_ISSUES.md) и архива потолка НЕТ намеренно — вместо него этот тест.
 
     21 сентября 2026 потолок на KNOWN_ISSUES.md простоял полдня и был снят по
     возражению владельца, и возражение точное: «просто не будет хватать места
@@ -97,7 +97,7 @@ def test_a_searched_document_keeps_its_answer_the_size_of_one_entry():
         assert covered >= tail * 0.8, (
             "%s: под заголовками лежит %d знаков из %d — остальное поиск не "
             "найдет, потому что оно не принадлежит ни одной записи" % (name, covered, tail))
-        if name != "KNOWN_ISSUES.md":
+        if not name.startswith("known_issues/"):
             # Размер записи архива решается НЕ здесь: архив только принимает
             # записи журнала, которые до этого лежали в PRODUCT_ROADMAP.md под
             # жестким потолком в 200 тыс. знаков. Запись на 55 тыс. съела бы
@@ -199,6 +199,13 @@ def test_a_journal_entry_says_where_its_knowledge_went():
                 bad.append("нет файла %s" % path)
                 continue
             text = io.open(full, encoding="utf-8").read()
+            if path == "KNOWN_ISSUES.md":
+                # 28 октября 2026: записи разъехались по known_issues/<тема>.md,
+                # KNOWN_ISSUES.md — оглавление; старые адреса журнала остаются
+                # верными, раздел ищется по всей папке.
+                ki = os.path.join(ROOT, "known_issues")
+                text = "\n".join(io.open(os.path.join(ki, n), encoding="utf-8").read()
+                                 for n in sorted(os.listdir(ki)) if n.endswith(".md"))
             if section:
                 heads = [_norm(h) for h in re.findall(r"(?m)^#{1,6}\s+(.+)$", text)]
                 if not any(_norm(section) in h for h in heads):

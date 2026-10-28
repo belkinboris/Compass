@@ -78,7 +78,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # единственный источник правды там.
 READ_WHOLE = {
     'CLAUDE.md': (30_000, 'перенести правило туда, где его читают: одной рутины — в '
-                          'routines/, подсистемы — в docs/, баг — в KNOWN_ISSUES.md, '
+                          'routines/, подсистемы — в docs/, баг — в known_issues/<тема>.md, '
                           'очередь — в консоль (send_open_questions.py)'),
     'PRODUCT_ROADMAP.md': (200_000, 'python3 pipeline/roadmap_archive.py --journal --write'),
 }
@@ -107,10 +107,17 @@ def step_docs():
 # Ищется по запросу -> файл -> (уровень заголовка записи, зачем он нужен).
 # Потолка нет намеренно: см. «ДЕЛЕНИЕ» в шапке.
 SEARCHED = {
-    'KNOWN_ISSUES.md': ('##', 'баг, который уже ловили: симптом, причина, чем починено'),
     'PRODUCT_ROADMAP_ARCHIVE.md': ('###', 'закрытая работа и замеры: что мерили, что вышло, '
                                           'что отвергли и почему'),
 }
+# known_issues/<тема>.md (28 октября 2026): баги по подсистемам, по файлу на
+# тему; KNOWN_ISSUES.md — оглавление. Файлы темы открывают, когда чинят ее,
+# и ищут по всей папке.
+_KI = os.path.join(ROOT, 'known_issues')
+if os.path.isdir(_KI):
+    for _name in sorted(os.listdir(_KI)):
+        if _name.endswith('.md'):
+            SEARCHED['known_issues/' + _name] = ('##', 'баг, который уже ловили: симптом, причина, чем починено')
 ARCHIVES = tuple(SEARCHED)
 
 ANCHORS = {
