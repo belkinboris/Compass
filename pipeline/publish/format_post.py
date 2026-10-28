@@ -1325,11 +1325,9 @@ def lens_links(deal):
     if (has(deal.get('sum')) or has(deal.get('status')) or has(deal.get('ind'))
             or has(eco.get('share')) or has(eco.get('rationale')) or has(eco.get('val'))
             or has(eco.get('target_fin')) or has(eco.get('finadv'))):
-        out.append(('Экономист', 'eco'))
-    # «Юрист» — только согласования, условия и юридические консультанты
-    # (Артем, 7 сентября 2026); структура сделки теперь на «Обзоре».
-    if advisers(deal) or has(law.get('appr')) or has(law.get('terms')):
-        out.append(('Юрист', 'law'))
+        out.append(('Финансы', 'fin'))
+    # «Юрист» слит с «Обзором» 28 октября 2026: согласования, условия и
+    # консультанты открываются вместе с карточкой, отдельной ссылки нет.
     return out
 
 

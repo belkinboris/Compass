@@ -2293,6 +2293,9 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .fns-disclaimer{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.55}
 /* Пояснение «отчетности покупаемой компании нет» лежит между шапкой и телом блока, у которых свои поля; без своих полей оно упиралось в край карточки (владелец, 28 октября 2026). */
 .fns-gap{margin:0;padding:14px 26px 0}
+/* «Финансы»: отчетность сторон стопкой, по блоку на сторону (28 октября 2026). */
+.fns-stack{margin-top:28px}.fns-stack>.label{display:block;margin-bottom:10px}.fns-stack .fns-shell{margin:0 0 14px}
+.fns-stack .fns-none .fns-head{border-bottom:0;padding-bottom:4px}.fns-head h2 a{color:inherit;text-decoration:none}
 .fns-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .fns-premium{padding:13px 16px;background:var(--bronze-soft);border-left:3px solid var(--bronze);font-size:13px;margin-top:18px}
 .fns-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:4px 0 22px}
@@ -6653,6 +6656,12 @@ const ecoHasContent = d => {
   return hasFact(e.sum) || hasFact(e.share) || hasFact(e.val) || hasFact(e.target_fin) ||
          hasFact(e.fin) || hasFact(e.finadv) || hasFact(e.rationale) || hasFact(e.context);
 };
+// Денежные поля вкладки «Финансы» (без «Цели сделки» и «Контекста» — они на «Обзоре»).
+const finHasContent = d => {
+  const e = d.eco || {};
+  return hasFact(e.sum) || hasFact(e.share) || hasFact(e.val) || hasFact(e.target_fin) ||
+         hasFact(e.fin) || hasFact(e.finadv) || financialAdvisors(d).length > 0;
+};
 /* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
    пуста, юристу все равно нужны стороны, предмет и статус, а не пустой экран. */
 /* Компаратор новизны (`sameWord`/`significantWords`/`hasNovelty`, JS-порт
@@ -6985,8 +6994,11 @@ function renderDeal(id, qs, previewCard){
   // ?lens=eco / ?lens=law — прямая ссылка сразу на линзу, а не на «Обзор».
   // Нужно для постов в телеграме: «Показатели» и «Согласования» ведут читателя
   // сразу в нужный раздел карточки, а не заставляют искать вкладку самому.
+  // Вкладок две: «Обзор» и «Финансы» (владелец, 28 октября 2026: «убирай
+  // вкладку „Экономист“… „Юрист“ тоже переносим в обзор»). Старые ссылки из
+  // постов: ?lens=eco → «Финансы», ?lens=law → «Обзор».
   const wantLens = new URLSearchParams(qs||"").get("lens");
-  lens = (wantLens==="eco"||wantLens==="law") ? wantLens : "overview";
+  lens = (wantLens==="fin"||wantLens==="eco") ? "fin" : "overview";
   // тип из текстового поля type главнее сохраненного kind: текст писали люди,
   // kind проставлял генератор и мог ошибиться (дефолт acquisition)
   const kindFromType = dealKindOf(d.type);
@@ -6999,7 +7011,11 @@ function renderDeal(id, qs, previewCard){
   // кнопка не появляется вовсе, и уже написанный код показа `extra` при пустых
   // eco.* (см. комментарий там) становится недостижимым. Ровно это нашлось на
   // 15 карточках 2 сентября: extraHtml(d) добавляли туда, а кнопку — нет.
-  const showEcoTab = ecoHasContent(d) || !!extraHtml(d);
+  // «Финансы» есть, когда есть что показать: денежные поля карточки или хотя
+  // бы одна сторона с профилем (по ней — отчетность или честная причина,
+  // почему ее нет). Абзацы «Цель сделки»/«Контекст» живут на «Обзоре».
+  const finParties = [d.target, d.asset_id, d.buyer, d.seller_id].filter((x,i,a)=>x && co(x) && a.indexOf(x)===i);
+  const showFinTab = finHasContent(d) || finParties.length > 0;
   app.innerHTML = `
   <a class="back reveal" href="#/">← Все сделки</a>
   <div class="d-head reveal">
@@ -7024,8 +7040,7 @@ function renderDeal(id, qs, previewCard){
   ${sparseNoticeHtml(d)}
   <div class="lens reveal" role="tablist" aria-label="Разделы карточки">
     <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
-    ${showEcoTab?`<button data-l="eco" class="${lens==="eco"?"on":""}">Экономист</button>`:""}
-    ${lawHasContent(d)?`<button data-l="law" class="${lens==="law"?"on":""}">Юрист</button>`:""}
+    ${showFinTab?`<button data-l="fin" class="${lens==="fin"?"on":""}">Финансы</button>`:""}
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
@@ -7049,11 +7064,8 @@ function renderDeal(id, qs, previewCard){
      телефоне его не существует. Строка под линзами говорит, что показывает
      текущая, и что значит приглушенная кнопка. */
   const LENS_HINT = {
-    overview: "Обзор: основная информация о сделке.",
-    // без «мультипликаторов»: они есть у 14 карточек из 1352 (1%), обещать их
-    // в подписи к линзе — обещать то, чего почти нигде нет
-    eco: "Экономист: сумма, контекст, показатели актива, цель сделки.",
-    law: "Юрист: согласования, условия сделки, юридические консультанты.",
+    overview: "Обзор: стороны, условия и согласования, консультанты, контекст сделки.",
+    fin: "Финансы: сумма и оценка, показатели сторон, отчетность покупаемой компании, покупателя и продавца.",
   };
   // Раньше пустая вкладка оставалась видна, приглушенной, и подпись объясняла
   // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
@@ -7322,7 +7334,7 @@ function renderDeal(id, qs, previewCard){
             <div class="dp-mid">${asset}</div>
             ${buyerBox}
           </div>
-          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Подробности о предмете сделки — во вкладке «Экономист», поле «Предмет / доля».</div>`:""}
+          ${(d.target_was_seller && !assetName)?`<div class="dp-foot">Подробности о предмете сделки — во вкладке «Финансы», поле «Предмет / доля».</div>`:""}
         </div>`;
       }
 
@@ -7395,58 +7407,46 @@ function renderDeal(id, qs, previewCard){
        c3667e9. Чтобы вернуть, нужен источник по бенефициарам (ЕГРЮЛ или
        аналог) и шаг в pipeline/, который заполняет ownership.chain;
        достраивать цепочки владения догадками нельзя (принцип 1). */
-    if(lens==="eco"){
-      // «Экономика не раскрывалась» проверялась только по структурным полям
-      // eco.* — а дочитывание месячной очереди пишет новые факты (рост
-      // выручки, смену владельца) в `extra`, когда сумма/доля/оценка
-      // по-прежнему не раскрыты. У карточек с пустыми eco.* и непустым
-      // `extra` блок «Дополнительный контекст» не показывался НИГДЕ на
-      // карточке — извлекать его строкой из готового HTML нельзя (он
-      // формируется той же extraHtml(d), которую надо позвать один раз),
-      // поэтому считаем один раз и решаем по результату.
-      const extraBlock = extraHtml(d);
-      /* Та же цифра, что «Сумма» на «Обзоре», в «Экономисте» не повторяется:
-         «в обзоре „сумма“, в экономисте „сумма сделки“ — это же бред»
-         (владелец, 27 октября 2026). Показывается, только если «Экономист»
-         говорит о цене что-то свое (другое число, диапазон, начальная цена лота). */
-      const sameSum = (a,b) => String(a||"").replace(/\s+/g,"").toLowerCase() === String(b||"").replace(/\s+/g,"").toLowerCase();
-      f.innerHTML = (ecoHasContent(d) || extraBlock) ? `
-      ${(isListing(d) || !sameSum(d.eco.sum, d.sum)) ? hero(isListing(d)?"Начальная цена лота":"Сумма сделки", d.eco.sum) : ""}
-      ${specBlock([
-        specRow("Предмет / доля", d.eco.share),
-        specRow("Оценка и дисконт", d.eco.val),
-        specRow(targetMetricLabel(kindKey), d.eco.target_fin),
-        specRow("Форма расчетов", d.eco.fin),
-        specRow(financialAdvisors(d).length>1?"Финансовые консультанты":"Финансовый консультант",
-                financialAdvisors(d).length ? financialAdvisors(d).map(it=>esc(it.name)+(it.note?" — "+esc(it.note):"")).join("; ") : d.eco.finadv),
-        /* Абзацы — в том же списке, что и показатели: отдельно стоящая строка
-           после списка получала и его нижний отступ (26px), и свой верхний —
-           зазор перед «Целью сделки» выходил вдвое больше, чем между другими
-           строками (владелец, 3 октября 2026). */
-        para("Цель сделки", d.eco.rationale),
-        paraCtx("Контекст", d.eco.context),
-      ])}
-      ${extraBlock}
+    /* Общие куски обеих вкладок. «Дополнительный контекст» (extraHtml) считаем
+       один раз: он формируется той же функцией, что и решение, есть ли он. */
+    const eco = d.eco || {}, law = d.law || {};
+    const extraBlock = extraHtml(d);
+    const sameSum = (a,b) => String(a||"").replace(/\s+/g,"").toLowerCase() === String(b||"").replace(/\s+/g,"").toLowerCase();
+    const finAdvRow = specRow(financialAdvisors(d).length>1?"Финансовые консультанты":"Финансовый консультант",
+        financialAdvisors(d).length ? financialAdvisors(d).map(it=>esc(it.name)+(it.note?" — "+esc(it.note):"")).join("; ") : eco.finadv);
+    /* Заметки о работе юридических консультантов (что именно вели) — под
+       «Командой сделки»: раньше это были карточки вкладки «Юрист». Фирма без
+       заметки в команде уже названа, карточка ей не нужна. */
+    const legalNotes = legalAdvisors(d).map(it=>({it, note: advNoteHtml(it.raw?it.raw[2]:it.note)})).filter(x=>x.note)
+      .map(({it,note})=>`<div class="adv-card"><span class="label">${esc(humanRole(it.role))}</span><div class="adv-name">${advFirmLink(it.name)}</div>${note}</div>`).join("");
+    /* Строки обзора, которые раньше жили в «Экономисте» и «Юристе»: ничего не
+       теряется — согласования и условия, цель и контекст идут сразу за фактами
+       структуры. */
+    const narrativeRows = [
+      specRow("Согласования", law.appr),
+      para("Условия сделки", law.terms),
+      para("Цель сделки", eco.rationale),
+      paraCtx("Контекст", eco.context),
+    ];
+    if(lens==="fin"){
+      /* «Финансы»: своя цифра о цене (диапазон, начальная цена лота — та же,
+         что «Сумма» на «Обзоре», не повторяется: владелец, 27 октября 2026),
+         доля, оценка, показатели из статьи, форма расчетов, финансовые
+         консультанты; ниже — мультипликаторы и отчетность каждой стороны. */
+      const finHero = hasFact(eco.sum) && (isListing(d) || !sameSum(eco.sum, d.sum)) ? hero(isListing(d)?"Начальная цена лота":"Сумма сделки", eco.sum) : "";
+      const finSpec = specBlock([
+        specRow("Предмет / доля", eco.share),
+        specRow("Оценка и дисконт", eco.val),
+        specRow(targetMetricLabel(kindKey), eco.target_fin),
+        specRow("Форма расчетов", eco.fin),
+        finAdvRow,
+      ]);
+      f.innerHTML = `
+      ${finHero}
+      ${finSpec || (finHero ? "" : `<p class="fact-note">Сумма, доля, оценка и финансовый консультант публично не раскрывались. Ниже — отчетность сторон сделки.</p>`)}
       <div id="deal-mult"></div>
-      <div id="deal-fns"></div>`
-      : ecoEmptyHtml(d);
+      <div id="deal-fns"></div>`;
     }
-    /* B4: порядок полей в линзе «Юрист» — по тому, что юристу нужно первым.
-       Было: структура → согласования → консультанты → УСЛОВИЯ. Самое ценное и
-       самое редкое поле (условия раскрыты у 45 карточек из 1352) оказывалось
-       последним, а у 20 из них — еще и под списком фирм, до пяти блоков от
-       начала. Стало: как оформили (структура и цепочка владения) → что записали
-       (условия) → что пришлось получить (согласования) → кто вел. */
-    else if(lens==="law") f.innerHTML = lawHasContent(d) ? `
-      ${lawPartialNote(d)}
-      ${specBlock([specRow("Согласования", d.law.appr), para("Условия сделки", d.law.terms)])}
-      ${legalAdvisors(d).map(it=>`
-        <div class="adv-card">
-          <span class="label">${esc(humanRole(it.role))}</span>
-          <div class="adv-name">${advFirmLink(it.name)}</div>
-          ${advNoteHtml(it.raw?it.raw[2]:it.note)}
-        </div>`).join("")}`
-      : lawEmptyHtml(d);
     /* У временного управления по указу цены нет по природе — это не продажа
        (решение владельца 16 октября 2026); «Сумма: не раскрыта» выдала бы
        отсутствующую величину за скрытую. */
@@ -7455,11 +7455,14 @@ function renderDeal(id, qs, previewCard){
       ${dealAnalysisHtml(d)}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
+      ${legalNotes}
       ${specBlock([
-        para("Как устроена сделка", d.law && d.law.struct),
-        specRow("Предмет", assetNamed ? "" : (d.eco && d.eco.share)),
+        para("Как устроена сделка", law.struct),
+        specRow("Предмет", assetNamed ? "" : eco.share),
         specRow("Статус", d.status),
-      ])}`;
+        ...narrativeRows,
+      ])}
+      ${extraBlock}`;
     else f.innerHTML = `
       ${hero(isListing(d)?"Начальная цена лота":"Сумма", d.sum || SUM_UNKNOWN_LABEL, true)}
       ${sumState(d.sum)==="undisclosed"
@@ -7471,8 +7474,9 @@ function renderDeal(id, qs, previewCard){
       ${dealAnalysisHtml(d)}
       ${factsVerifiedHtml(d)}
       ${dealTeam()}
+      ${legalNotes}
       ${specBlock([
-        para("Как устроена сделка", d.law && d.law.struct),
+        para("Как устроена сделка", law.struct),
         /* «Предмет» на «Обзоре» — только если плашка выше его НЕ называет.
            Иначе одно и то же читается дважды: сначала плашка «Продавец →
            Предмет сделки → Покупатель», через строку — тот же предмет абзацем.
@@ -7492,21 +7496,20 @@ function renderDeal(id, qs, previewCard){
            6 карточек из 597 с известным продавцом. */
         specRow("Продавец", (kindKey==="acquisition" && hasSeller) ? ""
           : (d.seller_id && co(d.seller_id) ? co(d.seller_id).name : (d.seller || ""))),
-        specRow("Предмет", assetNamed ? "" : (d.eco && d.eco.share)),
+        specRow("Предмет", assetNamed ? "" : eco.share),
         specRow("Статус", d.status),
-      ])}`;
-      /* «Согласования» отсюда убраны: то же значение стояло и на «Обзоре», и в
-         линзе «Юрист» — у 77 карточек читатель видел одну строку дважды. Поле
-         живет там, где его ищут, и подсказка под линзами прямо говорит, что
-         согласования — в «Юристе». Кнопка «Юрист» у таких карточек не
-         приглушена, так что путь виден. */
+        /* Согласования, условия, цель и контекст — здесь, а не на отдельных
+           вкладках (владелец, 28 октября 2026: «важно, чтобы ничего не потерялось»). */
+        ...narrativeRows,
+      ])}
+      ${extraBlock}`;
     /* Блоки линзы вставляются после отрисовки страницы, и общий проход по
        `.reveal` (route) их уже не видит: «Дополнительный контекст» оставался с
        opacity:0 — на экране это читалось как огромный пустой провал между
        «Контекстом» и «Похожими сделками» (владелец, 3 октября 2026, карточки
        «Ленты»/«Марии-Ра» и Ситибанка). Показываем их здесь же. */
     f.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
-    if(lens==="eco"){ mountDealMultiples(d); mountDealFns(d); }
+    if(lens==="fin"){ mountDealMultiples(d); mountDealFns(d); }
     bindPriceEstimate(d);
     bindContextAnalysis(d);
     bindDealAnalysis(d);
@@ -8473,11 +8476,14 @@ function dealMultipleLineOp(d, targetId, opProfitRub, opProfitYear, revenueRub){
 
 async function mountDealFns(d){
   const mount=document.getElementById("deal-fns"); if(!mount) return;
-  // Порядок кандидатов — предмет сделки первым: читатель «Экономиста» смотрит
-  // сначала на цель сделки, а не на того, кто ее купил. Раньше здесь пробовали
-  // только target/asset_id/buyer и останавливались на первом же найденном —
-  // продавец не показывался вовсе, а показать было можно только ОДНУ сторону
-  // за раз, хотя у сделки их обычно три.
+  /* «Финансы» (владелец, 28 октября 2026): отчетность КАЖДОЙ стороны — покупаемая
+     компания, покупатель, продавец — своим блоком, по порядку. Раньше блок
+     показывал одну сторону с переключателем и молча пропускал тех, у кого
+     отчетности ФНС нет: на карточке Ситибанка читатель видел только цифры
+     «Ренессанс Капитала», потому что банк отчитывается перед Банком России, а
+     не перед ФНС. Теперь банк показывается по данным ЦБ (bank_finance.json),
+     а сторона без отчетности — строкой с причиной из реестра (банк,
+     иностранное лицо, госорган, ИНН не сопоставлен), не молчанием. */
   const candidates=[d.target,d.asset_id,d.buyer,d.seller_id]
     .filter((x,i,a)=>x&&a.indexOf(x)===i)
     .map(id=>({id, role: companyRole(d,id)}))
@@ -8485,36 +8491,23 @@ async function mountDealFns(d){
   if(!candidates.length) return;
   const my=multipleYear(d), dealYear=my.year;
   const suffix=Number.isFinite(dealYear)?`?as_of_year=${dealYear}`:"";
-  // У банков в источнике есть строка отчета (год, юрлицо), но все
-  // коммерческие показатели в ней пустые — сторона сделки такого рода
-  // молча пропускается, а не показывается блоком из одних прочерков.
   const hasFinancialData = r => r && ["revenue_rub","net_profit_rub","assets_rub","equity_rub"].some(k => r[k]!=null);
+  const bankFin = await loadBankFinance();
   const fetched=await Promise.all(candidates.map(async x=>{
     try{
       const r=await fetch(`/api/companies/${encodeURIComponent(x.id)}/fns${suffix}`), data=await r.json();
       const entry=data.available?data.entities[0]:null, latest=entry?(entry.reports||[])[0]:null;
-      return hasFinancialData(latest)?{...x, data, entry, latest}:null;
-    }catch(e){return null;}
+      return {...x, data, entry, latest: hasFinancialData(latest)?latest:null};
+    }catch(e){return {...x, data:null, entry:null, latest:null};}
   }));
-  const parties=fetched.filter(Boolean);
-  if(!parties.length) return;
-  let active=parties[0].id; // предмет сделки идет первым в candidates — он и выбран по умолчанию
-  // Предмет без отчетности — сказать прямо (партнер, 21 октября 2026, «Шереметьево»/
-  // «Библио-Глобус»: «странно, что он дает финансовые показатели продавца, а не
-  // таргета»). Раньше блок молча показывал продавца под заголовком
-  // «Финансовый контекст сделки», и читатель принимал его цифры за цифры актива.
-  const subject=candidates.find(x=>x.role==="Предмет сделки");
-  const subjectMissing=subject && !parties.some(x=>x.id===subject.id);
-  const draw=()=>{
-    const p=parties.find(x=>x.id===active)||parties[0];
+  if(!mount.isConnected) return;
+  const head = (p, badge) => `<div class="fns-head"><div><span class="label">${esc(String(p.role))}</span><h2><a href="#/companies/${p.id}">${esc(co(p.id)?co(p.id).name:(p.data&&p.data.company_name)||p.id)}</a></h2></div>${badge||""}</div>`;
+  const blocks = fetched.map(p=>{
     const c=co(p.id);
-    // Мультипликаторы сделки — блок #deal-mult над этим (mountDealMultiples,
-    // 19 октября 2026): тот же расчет, что в таблице «Аналитики», вместо
-    // прежних двух строк «Цена ÷ выручка» и «Цена ÷ операционная прибыль».
-    mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
-      <div class="fns-head"><div><span class="label">Финансовый контекст сделки · ${esc(String(p.role).toLowerCase())}</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
-      ${subjectMissing?`<p class="fns-disclaimer fns-gap">Отчетности покупаемой компании${co(subject.id)?` «${esc(co(subject.id).name.replace(/^[«"]|[»"]$/g,""))}»`:""} в «Компасе» пока нет — ниже финансы стороны сделки, не актива.</p>`:""}
-      ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
+    if(p.data && p.data.hidden) return "";  // физлицо или лот — блока не бывает
+    if(p.latest){
+      return `<section class="fns-shell">
+      ${head(p, `<span class="fns-badge">ФНС · ${p.latest.year}</span>`)}
       <div class="fns-body">
         <p style="color:var(--muted);margin-bottom:14px">Последний отчетный год до появления этой сделки в базе.</p>
         <div class="fns-metrics">
@@ -8525,9 +8518,26 @@ async function mountDealFns(d){
         </div>
         <p class="fns-disclaimer">Отчетность относится к юридическому лицу ${esc(p.entry.entity.legal_name)} и может не отражать показатели всей группы. <a href="#/companies/${p.id}">Полное досье компании →</a></p>
       </div></section>`;
-    mount.querySelectorAll("[data-fnsparty]").forEach(b=>b.onclick=()=>{active=b.dataset.fnsparty;draw();});
-  };
-  draw();
+    }
+    const bank = bankFin && bankFin[p.id];
+    if(bank && bank.assets_rub!=null){
+      const rows=[["Активы",bank.assets_rub],["Собственные средства",bank.equity_rub],["Чистая прибыль",bank.net_profit_rub]].filter(r=>r[1]!=null);
+      return `<section class="fns-shell">
+      ${head(p, sourceBadge("Банк России", cbrFormUrl(bank.regnum, bank.as_of_balance), "Форма 0409806 этого банка на сайте Банка России"))}
+      <div class="fns-body">
+        <div class="fns-metrics">${rows.map(([k,v])=>`<div class="fns-metric"><span class="label">${k}</span><div class="v">${fnsMoney(v)}</div></div>`).join("")}</div>
+        <p class="fns-disclaimer">${esc(bank.legal_name||(c?c.name:""))}: баланс на ${fmtDate(bank.as_of_balance)}${bank.as_of_profit?`, прибыль на ${fmtDate(bank.as_of_profit)}`:""} (формы 806 и 102 Банка России, отчетность юрлица, не группы). <a href="#/companies/${p.id}">Полное досье компании →</a></p>
+      </div></section>`;
+    }
+    const why = (p.data && !p.data.available && p.data.reason) ? p.data.reason
+      : (p.data && p.data.available ? "В отчетности за последний год до сделки нет ни выручки, ни прибыли, ни активов." : "Отчетность пока не загружена.");
+    return `<section class="fns-shell fns-none">
+      ${head(p)}
+      <p class="fns-disclaimer fns-gap" style="padding-bottom:16px">Отчетности в «Компасе» нет. ${esc(why)} <a href="#/companies/${p.id}">Профиль компании →</a></p>
+    </section>`;
+  }).filter(Boolean);
+  if(!blocks.length) return;
+  mount.innerHTML = `<div class="fns-stack"><span class="label">Отчетность сторон сделки</span>${blocks.join("")}</div>`;
 }
 
 // Этап 5, П4''''': схема группы — центрированное дерево, а не боковой список.

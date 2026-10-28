@@ -2,7 +2,324 @@
  "made": "2026-10-28",
  "drafts": [
   {
-   "draft_id": "d57877442",
+   "draft_id": "d74027021",
+   "title": "США продлили лицензию для продажи зарубежных активов «Лукойла» до 21 ноября",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/10/21/1239042-prodlili-litsenziyu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73514423",
+   "title": "Минфин США продлил лицензию по продаже зарубежных активов «Лукойла»",
+   "date": "2026-10-21",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2188239/2026-10-21/minfin-ssha-prodlil-litcenziiu-po-prodazhe-zarubezhnykh-aktivov-lukoila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США продлили лицензию для продажи зарубежных активов «Лукойл» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d75291808",
+   "title": "Американская компания Anthropic подала документы для проведения IPO",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "Американская компания Anthropic, разработчик искусственного интеллекта Claude, подала заявку для проведения первичного публичного размещения акций (IPO) в США . Об этом 26 октября сообщило агентство Bloomberg. Компания планирует разместить акции на бирже…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d50807881",
+   "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/26/anthropics-ipo-filing-reveals-its-strategy-for-keeping-enterprise-customers-hooked/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d74292177",
+   "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/27/10/2026/6ae0413319b3f291b6cc36cb"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19448211",
+   "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+    ]
+   ],
+   "sum": "5,8 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "В Люберцах Московской области на торгах реализовали земельный участок.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "участок",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "участок",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d83317718",
+   "title": "Площади нового ресторана с коми-пермяцким названием продают за десятки миллионов рублей",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139432"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13443805",
+   "title": "Anthropic: компания, которую нельзя купить",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1367410.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d45320198",
+   "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ae17caffe8cbef4c5193423"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d14565117",
+   "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/10/28/76728594/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40279431",
    "title": "Власти Тайваня в угоду США распродают главные отрасли, заявили в Китае",
    "date": "2026-10-28",
    "src": [
@@ -30,7 +347,7 @@
    ]
   },
   {
-   "draft_id": "d83443189",
+   "draft_id": "d79767990",
    "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
    "date": "2026-10-28",
    "src": [
@@ -58,8 +375,8 @@
    ]
   },
   {
-   "draft_id": "d87422329",
-   "title": "Миллиардер Гомон стал владельцем кластера «Артмуза» в Петербурге",
+   "draft_id": "d77815240",
+   "title": "Миллиардер Гомон стал владельцем кластера «Артмуза» в Санкт-Петербурге",
    "date": "2026-10-28",
    "src": [
     [
@@ -86,7 +403,91 @@
    ]
   },
   {
-   "draft_id": "d27782659",
+   "draft_id": "d54475865",
+   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261028/rossija-2127462955.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24264752",
+   "title": "В Бурунди отметили интерес к инвестициям компаний РФ в экономику страны",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28262533"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69032150",
+   "title": "Россияне смогут оплачивать покупки в Египте по R-коду",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/r-kod-874709490.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73959000",
    "title": "Volga обогнала «Москвич» по продажам в октябре — с отрывом почти в 100 автомобилей",
    "date": "2026-10-28",
    "src": [
@@ -125,41 +526,13 @@
    ]
   },
   {
-   "draft_id": "d71077075",
-   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
+   "draft_id": "d87088980",
+   "title": "Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую»",
    "date": "2026-10-28",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261028/rossija-2127462955.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38304801",
-   "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/10/28/76728594/"
+     "https://ria.ru/20261028/putin-2127559449.html"
     ]
    ],
    "sum": null,
@@ -181,13 +554,13 @@
    ]
   },
   {
-   "draft_id": "d87485664",
-   "title": "Volga опередила «Москвич» по продажам в октябре",
+   "draft_id": "d38229954",
+   "title": "Госдума отложила на день рассмотрение законопроекта по онлайн-продаже вина",
    "date": "2026-10-28",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2191988/2026-10-28/volga-operedila-moskvich-po-prodazham-v-oktiabre"
+     "web:ria.ru",
+     "https://ria.ru/20261028/gd-2127539248.html"
     ]
    ],
    "sum": null,
@@ -204,14 +577,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Volga обогнала «Москвич» по продажам в октябре — с отрывом п» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d41028161",
+   "draft_id": "d69457362",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
    "src": [
@@ -239,440 +611,8 @@
    ]
   },
   {
-   "draft_id": "d55750792",
-   "title": "Bloomberg: союзники США на 60% сократили покупку американских облигаций",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062894"
-    ]
-   ],
-   "sum": "$174,3 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d33075583",
-   "title": "Путин заявил о готовности турецких компаний выкупить долю в АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/politics/28/10/2026/6ae1ef0f72c59aa076772d42"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18993389",
-   "title": "Законопроект о продаже вина в интернете сняли с повестки заседания Думы",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/28/10/2026/6ae1e10f2c13e017553ee4d9"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30073955",
-   "title": "Путин заявил, что инвесторы из Турции готовы выкупить часть доли в проекте АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1125517"
-    ]
-   ],
-   "sum": "$25 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Путин заявил о готовности турецких компаний выкупить долю в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d31977525",
-   "title": "Путин: РФ приветствует желание компаний Турции выкупить доли в АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28262663"
-    ]
-   ],
-   "sum": "$25 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Путин заявил о готовности турецких компаний выкупить долю в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d83224880",
-   "title": "Вопрос онлайн-продажи вина сняли с повестки заседания Госдумы",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/28/vopros-onlajn-prodazhi-vina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71754339",
-   "title": "Путин заявил о готовности турецких инвесторов выкупить часть доли АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2192158/2026-10-28/putin-zaiavil-o-gotovnosti-turetckikh-investorov-vykupit-chast-doli-aes-akkuiu"
-    ]
-   ],
-   "sum": "$25 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Путин заявил о готовности турецких компаний выкупить долю в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d93084443",
-   "title": "Украинский бизнес из-за кризиса распродает кафе, рестораны и магазины",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261028/biznes-874717424.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d65529471",
-   "title": "Украинский бизнес распродает кафе, рестораны и магазины в Киеве",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/kiev-2127582251.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12507467",
-   "title": "Турецкие компании готовы выкупить часть пакета АЭС «Аккую», заявил Путин",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/putin-2127559449.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Путин заявил о готовности турецких компаний выкупить долю в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d63513369",
-   "title": "Турция захотела выкупить доли в российской атомной станции «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139809"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Путин заявил о готовности турецких компаний выкупить долю в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d50676097",
-   "title": "Целиков: октябрь может стать лучшим месяцев по продажам легковушек в РФ",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/10/28/czelikov-oktyabr-mozhet-stat-luchshim-mesyaczev-v-rf-po-prodazham-legkovushek"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63063991",
-   "title": "В Ленинградской области запретят продавать пиво на разлив ночью",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/lenobl/2026/10/28/v-leningradskoj-oblasti-zapretyat-prodavat-pivo-na-razliv-nochyu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84246231",
-   "title": "Сауна прямо в квартире: в центре Новосибирска продают двухуровневое жилье за 52 миллиона",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/realty/2026/10/28/76729743/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41590462",
-   "title": "В Башкирии будут судить мать 12-летнего школьника за покупку электросамоката — он погиб на нем в ДТП",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/transport/2026/10/28/76729933/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73786531",
-   "title": "В Башкирии продают месторождение нефти и газа — запасов там на миллиарды рублей",
+   "draft_id": "d47121581",
+   "title": "В Башкирии продают участок с запасами нефти и газа на миллиарды рублей",
    "date": "2026-10-28",
    "src": [
     [
@@ -692,7 +632,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ГМК и добыча",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

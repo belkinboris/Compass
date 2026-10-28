@@ -115,6 +115,14 @@ def main(argv):
     write = '--write' in argv
     log('— ship_decisions %s —' % ('--write' if write else 'сухой прогон'))
     git('pull', '--rebase', '--autostash', 'origin', 'main')
+    # autostash может вернуть правки с конфликтом и кодом 0 — тогда в файлах
+    # маркеры <<<<<<<, и полный pytest падает десятком json-ошибок (28 октября
+    # 2026). Конфликт — стоп сразу, разбирать по id (docs/publication_pitfalls.md).
+    conflicted = [l[3:] for l in git('status', '--porcelain').splitlines() if l[:2] in ('UU', 'AA', 'DU', 'UD')]
+    if conflicted:
+        log('СТОП: конфликт при подтягивании main в %s — разберите по id (docs/publication_pitfalls.md, шаг 10) и повторите команду.'
+            % ', '.join(conflicted))
+        return 1
     # Прошлый запуск применил решения, но остановился до push (красный pytest,
     # конфликт): правки уже в рабочей копии — продолжаем с полного pytest, а
     # не применяем решения второй раз.
