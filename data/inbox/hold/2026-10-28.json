@@ -2,188 +2,7 @@
  "made": "2026-10-28",
  "drafts": [
   {
-   "draft_id": "d66275434",
-   "title": "Власти Тайваня в угоду США распродают главные отрасли, заявили в Китае",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261028/kitay-874686766.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d54431506",
-   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261028/nedvizhimost-874685408.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56104306",
-   "title": "Volga обогнала «Москвич» по продажам в октябре — с отрывом почти в 100 автомобилей",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/volga-obognala-moskvich-po-prodazham-v-oktyabre-s-otryvom-pochti-v-100-avtomobilej/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-28",
-     "title": "Сделка завершена",
-     "note": "С 5 по 25 октября 2026 года в России продали 793 автомобиля Volga против 694 машин «Москвич», сообщил директор агентства «Автостат» Сергей Целиков. По его словам, до сентября «Москвич» стабильно опережал конкурента, но после приостановки программы…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/volga-obognala-moskvich-po-prodazham-v-oktyabre-s-otryvom-pochti-v-100-avtomobilej/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86460954",
-   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/rossija-2127462955.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10415514",
-   "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/10/28/76728594/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23502800",
-   "title": "Volga опередила «Москвич» по продажам в октябре",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2191988/2026-10-28/volga-operedila-moskvich-po-prodazham-v-oktiabre"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Volga обогнала «Москвич» по продажам в октябре — с отрывом п» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d37382214",
+   "draft_id": "d55306904",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
    "src": [
@@ -211,155 +30,7 @@
    ]
   },
   {
-   "draft_id": "d33162256",
-   "title": "Турецкие компании готовы выкупить часть пакета АЭС «Аккую», заявил Путин",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/putin-2127559449.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21392910",
-   "title": "Турция захотела выкупить доли в российской атомной станции «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139809"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Турецкие компании готовы выкупить часть пакета АЭС «Аккую», » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d15456910",
-   "title": "Путин: турецкие компании готовы выкупить часть пакета АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062971"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Турецкие компании готовы выкупить часть пакета АЭС «Аккую», » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d82922021",
-   "title": "Путин заявил, что инвесторы из Турции готовы выкупить часть доли в проекте АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Putin-zayavil-chto-investory-iz-Turcii-gotovy-vykupit-chast-doli-v-proekte-AJeS-Akkuyu-87703"
-    ]
-   ],
-   "sum": "$25 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Турецкие компании готовы выкупить часть пакета АЭС «Аккую», » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d76618335",
-   "title": "Эксперт Уваров: бизнесу Турции может быть выгодна покупка доли в АЭС «Аккую»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28263381"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Турецкие компании готовы выкупить часть пакета АЭС «Аккую», » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d75358596",
+   "draft_id": "d92468808",
    "title": "Кения обсуждает с Wildberries инвестиции в электронную торговлю",
    "date": "2026-10-28",
    "src": [
@@ -399,19 +70,59 @@
    ]
   },
   {
-   "draft_id": "d56999680",
-   "title": "AI-AINA: вантовый мост открыли, «Артмуза» сменила владельца, курица дорожает",
+   "draft_id": "d03403075",
+   "title": "На маркетплейсе выставлен на продажу за $60 млн суперкомпьютер для ИИ на 300 стоек с бесплатной доставкой",
    "date": "2026-10-28",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/28/76730107/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-28_na_marketplejse_prodaetsya"
+    ]
+   ],
+   "sum": "$60 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d14601937",
+   "title": "Адвокаты Левиафана: 3 трюка, с помощью которых «элитные» экономисты продают нам инфляцию и госдиктат",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1368041.php"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-28",
+     "title": "Переговоры",
+     "note": "Казалось бы, если кто-то и должен понимать, что печатный станок и государственное планирование — это худшая альтернатива здоровой рыночной экономике, так это профессиональные экономисты. Но реальность устроена иначе. Каждое поколение рождает целую плеяду…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1368041.php"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -421,35 +132,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf6a2225a (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d37569709",
-   "title": "Риелтор призвала продавать жилье класса люкс по цене «бетона» в одном случае",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/28/rieltor-prizvala-prodavat-zhilie-klassa-lyuks-po-tsene-betona-v-odnom-slucha/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Строительство",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
