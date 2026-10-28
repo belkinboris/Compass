@@ -598,6 +598,29 @@ def test_post_subject_gets_substance_not_a_bare_repeated_name():
     assert "«СЧАСТЛИВАЯ РАБОТА»" not in text, "обрывок «Финансов предмета» приклеился к имени"
 
 
+def test_send_plan_trusts_the_site_memory_of_what_was_shown(monkeypatch):
+    """Сервер показал карточку сам (28 октября 2026) — рутина не шлет ее второй
+    раз, догоняет отметки и снимок поста; сырье с ключом из памяти сайта тоже
+    не показывается повторно."""
+    import send_drafts
+    import promote
+    card = {"id": "gS", "title": "Сделка S", "status": "Закрыта", "date": "2026-10-27", "type": "M&A", "ind": "Банки",
+            "buyer_name": "ООО «С»", "asset": "сеть «Т»", "src": [["Ъ", "https://www.kommersant.ru/doc/3"]],
+            "reviewed": "2026-10-27", "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {}}
+    pending = {"cards": [card]}
+    monkeypatch.setattr(promote, "load_pending", lambda: pending)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: {"gS"})
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [
+        {"draft_id": "r9", "title": "Завод продан", "url": "https://example.com/z", "date": "2026-10-27"}])
+    monkeypatch.setattr(promote, "load_state", lambda: {}, raising=False)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {"cards": {"gS": {"shown_at": "x", "post_preview": "<b>Пост</b>"}},
+                                                           "raw": [promote.raw_key("Завод продан")]})
+    plan, *_rest = send_drafts.build_plan()
+    assert plan == [], plan
+    assert card["draft_sent"] and card["post_draft_sent"] and card["post_preview"] == "<b>Пост</b>"
+
+
 def test_send_plan_only_one_card_skips_raw_and_other_cards(monkeypatch, tmp_path):
     """`ship_card.py` показывает одну готовую карточку сразу (28 октября 2026):
     план с `only=<id>` — только её 🗂/📣, без сырья и чужих карточек."""

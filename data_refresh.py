@@ -354,11 +354,22 @@ def _rescan_subscriptions() -> None:
         logger.error("подписки не сверены после обновления данных: %s", exc)
 
 
+# Хуки сайта на обновление данных: main.py добавляет сюда функции, которые
+# получают список изменившихся файлов (28 октября 2026 — показ готовых
+# карточек из pending.json в консоль). Каждая под своим try: сбой одной не
+# мешает ни остальным, ни самому обновлению.
+ON_CHANGE: list = []
+
+
 def _after_change(changed: list[str]) -> None:
-    if MAIN_FILE not in changed:
-        return
-    drop_in_process_caches()
-    _rescan_subscriptions()
+    if MAIN_FILE in changed:
+        drop_in_process_caches()
+        _rescan_subscriptions()
+    for hook in list(ON_CHANGE):
+        try:
+            hook(changed)
+        except Exception as exc:  # noqa: BLE001
+            logger.error("хук после обновления данных упал: %s", exc)
 
 
 # --------------------------------------------------------------------------
