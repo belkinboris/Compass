@@ -42,6 +42,68 @@
     "needs_review": true
    },
    "queued": "2026-10-28"
+  },
+  {
+   "key": "https://1prime.ru/20261028/sovet-874721147.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие редкие слова: акции, лср",
+   "draft": {
+    "draft_id": "d90129236",
+    "title": "Совет директоров ЛСР выкупит акции компании почти на 3,5 млрд руб",
+    "date": "2026-10-28",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261028/sovet-874721147.html"
+     ]
+    ],
+    "sum": "3,5 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Совет директоров ЛСР",
+    "asset": "почти на 3,5 млрд руб",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Совет директоров ЛСР",
+     "asset": "почти на 3,5 млрд руб",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-28"
+  },
+  {
+   "key": "https://realty.ria.ru/20261028/sovet-2127618388.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие редкие слова: лср, рублей",
+   "draft": {
+    "draft_id": "d54224818",
+    "title": "Совет директоров ЛСР объявил о выкупе акций почти на 3,5 млрд рублей",
+    "date": "2026-10-28",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261028/sovet-2127618388.html"
+     ]
+    ],
+    "sum": "3,5 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Совет директоров ЛСР",
+    "asset": "акции почти на 3,5 млрд рублей",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Совет директоров ЛСР",
+     "asset": "акции почти на 3,5 млрд рублей",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-28"
   }
  ]
 }
