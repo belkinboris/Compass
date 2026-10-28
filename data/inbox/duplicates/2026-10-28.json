@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-28",
+ "items": [
+  {
+   "key": "https://incrussia.ru/news/intel-kupit-razrabotchika-po-dlya-kvantovyh-kompyuterov-classiq-za-2-3-mlrd/::g0431fc51",
+   "candidate_id": "g0431fc51",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d27633890",
+    "title": "Intel купит разработчика ПО для квантовых компьютеров Classiq за $2,3 млрд",
+    "date": "2026-10-28",
+    "src": [
+     [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/intel-kupit-razrabotchika-po-dlya-kvantovyh-kompyuterov-classiq-za-2-3-mlrd/"
+     ]
+    ],
+    "sum": "$2,3 млрд",
+    "type": "M&A",
+    "status": "Обсуждается",
+    "events": [
+     {
+      "kind": "negotiations",
+      "date": "2026-10-28",
+      "title": "Переговоры",
+      "note": "Intel договорилась о покупке израильского разработчика квантового ПО Classiq примерно за $2,3 млрд. Что известно о сроках сделки, истории стартапа и квантовой стратегии компании.",
+      "source": [
+       "web:incrussia.ru",
+       "https://incrussia.ru/news/intel-kupit-razrabotchika-po-dlya-kvantovyh-kompyuterov-classiq-za-2-3-mlrd/"
+      ]
+     }
+    ],
+    "buyer_name": "Intel",
+    "asset": "разработчик ПО для квантовых компьютеров Classiq",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Intel",
+     "asset": "разработчик ПО для квантовых компьютеров Classiq",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-10-28"
+  }
+ ]
+}
