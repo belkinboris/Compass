@@ -2,7 +2,7 @@
  "made": "2026-10-28",
  "drafts": [
   {
-   "draft_id": "d10403662",
+   "draft_id": "d48888986",
    "title": "Власти Тайваня в угоду США распродают главные отрасли, заявили в Китае",
    "date": "2026-10-28",
    "src": [
@@ -30,7 +30,7 @@
    ]
   },
   {
-   "draft_id": "d79811100",
+   "draft_id": "d10719670",
    "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
    "date": "2026-10-28",
    "src": [
@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d42980329",
+   "draft_id": "d18285315",
    "title": "Миллиардер Гомон стал владельцем кластера «Артмуза» в Петербурге",
    "date": "2026-10-28",
    "src": [
@@ -86,7 +86,7 @@
    ]
   },
   {
-   "draft_id": "d45527072",
+   "draft_id": "d19897584",
    "title": "Volga обогнала «Москвич» по продажам в октябре — с отрывом почти в 100 автомобилей",
    "date": "2026-10-28",
    "src": [
@@ -125,7 +125,7 @@
    ]
   },
   {
-   "draft_id": "d32312501",
+   "draft_id": "d36360028",
    "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
    "date": "2026-10-28",
    "src": [
@@ -153,36 +153,7 @@
    ]
   },
   {
-   "draft_id": "d88611224",
-   "title": "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/27/vcs-will-make-billions-on-anthropics-ipo-but-amazon-is-set-to-make-much-much-more/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d10851056",
+   "draft_id": "d54849872",
    "title": "Who’s really in charge at Anthropic after the IPO?",
    "date": "2026-10-27",
    "src": [
@@ -205,15 +176,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «VCs will make billions on Anthropic’s IPO, but Amazon is set» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d78402450",
+   "draft_id": "d63654219",
    "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
    "date": "2026-10-28",
    "src": [
@@ -241,63 +210,7 @@
    ]
   },
   {
-   "draft_id": "d35193200",
-   "title": "Airbus и Air France-KLM объявили о создании СП",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062691"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84677834",
-   "title": "Мосбиржа провела дискретный аукцион по акциям ЛСР из-за роста более чем на 20%",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062684"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30816350",
+   "draft_id": "d19466765",
    "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
    "date": "2026-10-28",
    "src": [
@@ -325,35 +238,7 @@
    ]
   },
   {
-   "draft_id": "d52985502",
-   "title": "Мосбиржа проводит дискретный аукцион по акциям группы ЛСР",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28261411"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10526008",
+   "draft_id": "d63320264",
    "title": "Volga опередила «Москвич» по продажам в октябре",
    "date": "2026-10-28",
    "src": [
@@ -383,7 +268,7 @@
    ]
   },
   {
-   "draft_id": "d52884086",
+   "draft_id": "d67063231",
    "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
    "date": "2026-10-28",
    "src": [
@@ -413,64 +298,7 @@
    ]
   },
   {
-   "draft_id": "d62284833",
-   "title": "Мосбиржа проводит дискретный аукцион по сильно дорожающим акциям ЛСР",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261028/birzha-2127512019.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36823198",
-   "title": "Двенадцатилетняя девочка подожгла заправку и машину полиции после попытки купить вейп",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139741"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d73776264",
+   "draft_id": "d79399036",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
    "src": [
@@ -498,42 +326,259 @@
    ]
   },
   {
-   "draft_id": "d23503772",
-   "title": "Прикамец купил в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+   "draft_id": "d94530045",
+   "title": "Доля Сбера на аукционах ОФЗ не превышает 30% и сохранится на этом уровне",
    "date": "2026-10-28",
    "src": [
     [
-     "web:59.ru",
-     "https://59.ru/text/criminal/2026/10/28/76728878/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1125492"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82206174",
+   "title": "Меморандум ВЭБа и Банка инвестиций стран Сахеля позволит настроить финмеханизмы для проектов в Африке",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1125473"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-28",
-     "title": "Сделка завершена",
-     "note": "Парня задержала полиция",
-     "source": [
-      "web:59.ru",
-      "https://59.ru/text/criminal/2026/10/28/76728878/"
-     ]
-    }
-   ],
-   "buyer_name": "Прикамец",
-   "asset": "в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Прикамец",
-    "asset": "в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": "Фармацевтика",
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81015848",
+   "title": "Акции VK перешли к росту более чем на 5%",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28262173"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d39376789",
+   "title": "Смольный сможет определять зоны запрета продажи вейпов",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/28/smolnij-smozhet-opredeljat"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d36735421",
+   "title": "Владелец TikTok перешел от разработки ИИ к созданию человекоподобных роботов",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/vladelets-tiktok-pereshel-ot-razrabotki-ii-k-sozdaniyu-chelovekopodobnyh-robotov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g53da1f4d (общие редкие слова: ии, разраб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d78136582",
+   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 83,132 миллиарда рублей",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/minfin-874703714.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12840547",
+   "title": "Юношеская сборная России проиграла в первом раунде плей-офф на ЧМ",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261028/rossiya-2127524963.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60488756",
+   "title": "12-летняя россиянка захотела купить вейп и устроила два поджога",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/28/12-letnyaya-rossiyanka-zahotela-kupit-veyp-i-ustroila-dva-podzhoga/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88522551",
+   "title": "Свой пляж и пирс для катера: в Челябинске продают круглый дом на берегу. Фото",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139477"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
