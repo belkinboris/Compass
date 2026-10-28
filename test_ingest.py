@@ -6174,8 +6174,15 @@ def test_no_duplicate_fix_for_one_field():
     # Пересказ по фактам (write_card.py, 14.10.2026) — законная вторая запись:
     # прежние записи поля учтены отпечатком в `proofread_absorbed`, и
     # `already_applied` признает их до сверки состояния поля.
+    # Карточка, ждущая решения владельца (`pending.json`, еще не в базе), несет
+    # свой `proofread_absorbed` там же — смотреть только в базу дает ложный
+    # дубль на карточке, которую придержали (28 октября 2026, g25a6766d).
     base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
     cards = {d["id"]: d for d in base["deals"]}
+    pending_file = ROOT / "static" / "data" / "pending.json"
+    if pending_file.exists():
+        cards.update({c["id"]: c for c in
+                      json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
 
     def absorbed_chain(key):
         recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
