@@ -1198,29 +1198,32 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
   .tabbar,.ai-fab{
     background:rgba(255,255,255,.34);
     -webkit-backdrop-filter:blur(36px) saturate(1.8);backdrop-filter:blur(36px) saturate(1.8);
-    border:1px solid rgba(255,255,255,.55);
-    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06),inset 0 0 0 .5px rgba(255,255,255,.35)}
+    /* Без кромок и ниже: 60px вместо 74 (владелец, 28 октября 2026: «контуры
+       попробуй убрать… блок поменьше по высоте, кнопка квадратная и одного
+       размера с панелью»). */
+    border:0;
+    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06)}
   /* Кнопка ассистента — то же стекло и та же тень, что у панели (владелец,
      27 октября 2026, вечер); компас на светлом стекле темно-зеленый. */
-  .ai-fab{width:74px;height:74px;border-radius:26px}
+  .ai-fab{width:60px;height:60px;border-radius:20px}
   .ai-fab:hover{background:rgba(255,255,255,.30)}
-  .ai-fab svg{width:42px;height:42px}
+  .ai-fab svg{width:34px;height:34px}
   .ai-fab svg circle:first-child{stroke:#3C5A4C}
   .ai-fab svg polygon:last-of-type{fill:#3C5A4C}
   .ai-fab svg circle:last-child{fill:#F3F1E9;stroke:#3C5A4C}
-  .ai-fab.on-dark{background:rgba(10,18,16,.58);border-color:rgba(255,255,255,.20)}
+  .ai-fab.on-dark{background:rgba(10,18,16,.58)}
   .ai-fab.on-dark svg circle:first-child{stroke:#fff}
   .ai-fab.on-dark svg polygon:last-of-type{fill:#fff}
   .ai-fab.on-dark svg circle:last-child{fill:#0F2B21;stroke:#fff}
-  .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 74px + 10px);
-    bottom:calc(10px + env(safe-area-inset-bottom,0px));height:74px;border-radius:26px;
+  .tabbar{position:fixed;z-index:67;left:max(16px,env(safe-area-inset-left,0px));right:calc(max(16px,env(safe-area-inset-right,0px)) + 60px + 10px);
+    bottom:calc(10px + env(safe-area-inset-bottom,0px));height:60px;border-radius:20px;
     display:flex;justify-content:space-around;align-items:center;gap:0;padding:0 2px}
-  .tabbar a{position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;margin:0;padding:8px 1px;
+  .tabbar a{position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:3px;margin:0;padding:5px 1px;
     font:600 9.2px var(--f-body);letter-spacing:-.02em;text-transform:none;color:#3C5A4C;
     text-align:center;white-space:nowrap;text-decoration:none}
   .tabbar a::after{content:none}
   @media(max-width:380px){.tabbar a{font-size:8.4px}}
-  .tabbar a svg{width:26px;height:26px;stroke:#3C5A4C;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar a svg{width:22px;height:22px;stroke:#3C5A4C;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
   .tabbar a.on{color:#0F2B21}
   .tabbar a.on svg{stroke:#A3814E}
   /* Стекло смотрит, что под ним (tabbarAdapt): над темным — герой главной,
@@ -1228,7 +1231,7 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
      светлые; кромка в обоих случаях одной силы. Владелец, 27 октября 2026:
      «в одинаковом фоне разные цвета у нижней линии и в некоторых местах
      все-таки плохо видно». */
-  .tabbar.on-dark{background:rgba(10,18,16,.58);border-color:rgba(255,255,255,.20)}
+  .tabbar.on-dark{background:rgba(10,18,16,.58)}
   .tabbar.on-dark a{color:#C9D9D0}
   .tabbar.on-dark a svg{stroke:#C9D9D0}
   .tabbar.on-dark a.on{color:#fff}
@@ -1237,12 +1240,12 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
      уведомлений не режется прокруткой (владелец: «обрезается»). */
   #nav a:not(#navAccount){display:none}
   .top nav{padding-right:10px;overflow:visible;justify-content:flex-end;-webkit-mask-image:none;mask-image:none}
-  .wrap{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
-  footer{padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+  .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  footer{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
   body.chat-page .tabbar{display:none}            /* поле ввода стоит у нижнего края */
-  .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + 86px)}
+  .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 18px + 72px)}
   /* Плашка о cookie встает над панелью, а панель и кнопка остаются на месте. */
-  .cookie-note{bottom:calc(env(safe-area-inset-bottom,0px) + 102px)}
+  .cookie-note{bottom:calc(env(safe-area-inset-bottom,0px) + 88px)}
   body.has-cookie-note .ai-fab{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 }
 .ai-sheet-scrim{position:fixed;inset:0;z-index:68;background:rgba(10,18,16,.38);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
