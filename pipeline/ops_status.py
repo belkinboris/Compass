@@ -30,6 +30,7 @@
     python3 pipeline/ops_status.py приток --broken "Источники не отвечают"
 """
 import argparse
+import html
 import json
 import os
 import re
@@ -195,7 +196,8 @@ def send_intake_run(looked=0, found=0, cards=0, screened=0, client=None):
             client.close()
 
 
-def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0, unsent=0):
+def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0, unsent=0,
+                   unsent_names=None):
     """Публикация: что вышло в канал и что еще ждет.
 
     `soon` и `unread` — РАЗНЫЕ причины ждать, и путать их нельзя: `soon` —
@@ -236,15 +238,21 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
                          % (unsent, _plural(unsent, 'карточка', 'карточки', 'карточек'),
                             _plural(unsent, 'готова', 'готовы', 'готовы'),
                             _plural(unsent, 'показана', 'показаны', 'показаны')))
+            # Имя и ссылка: иначе строку не на что нажать и нечего открыть
+            # (владелец 28 октября 2026: «как посмотреть ту, которая сбой?»).
+            for cid, title in (unsent_names or [])[:5]:
+                lines.append('   • <a href="https://projectcompass.ru/#/preview/%s">%s</a> — %s'
+                             % (html.escape(cid), html.escape(cid), html.escape(_trim(title, 60)) or 'без заголовка'))
         if soon:
             # Согласуется и существительное, и ГЛАГОЛ: «1 карточка выйдет»,
             # «6 карточек выйдут». Первая версия писала «1 карточка выйдут» —
             # поймано своим же тестом, а не глазами.
-            lines.append('⏳ %d %s %s сами в ближайшие сутки, если не трогать'
+            lines.append('⏳ %d %s %s %s в ближайшие сутки, если не трогать'
                          % (soon, _plural(soon, 'карточка', 'карточки', 'карточек'),
-                            _plural(soon, 'выйдет', 'выйдут', 'выйдут')))
+                            _plural(soon, 'выйдет', 'выйдут', 'выйдут'),
+                            _plural(soon, 'сама', 'сами', 'сами')))
         if unread:
-            lines.append('📖 %d %s ждут прочтения или приемки — сами не выйдут, пока их не сверят со статьей и не примут целиком'
+            lines.append('📖 %d %s ждут прочтения, второго чтения или приемки — сами не выйдут, пока их не сверят со статьей и не примут целиком'
                          % (unread, _plural(unread, 'карточка', 'карточки', 'карточек')))
         if held:
             lines.append('✋ %d %s вы придержали — %s вашего слова'
@@ -577,23 +585,55 @@ def queue_counts(path=PENDING):
     rest = [c for c in cards if not c.get('held')]
     # Молчание публикует только показанную в консоли карточку (approve.plan_actions).
     soon = [c for c in rest if c.get('reviewed') and c.get('accepted') and c.get('draft_sent')]
-    unread = [c for c in rest if not (c.get('reviewed') and c.get('accepted')) and not c.get('hold_reason')]
+    unread = [c for c in rest if not is_read_through(c) and not c.get('hold_reason')]
     return len(soon), len(held), len(unread)
+
+
+def needs_second_reading(card):
+    """Принята с 9 октября 2026 и еще не прочитана второй раз — консоль ее не
+    показывает (send_drafts), и ждет она не владельца, а приток
+    (second_reading.py). Правило — в pipeline/ingest/second_reading.py."""
+    acc = card.get('accepted')
+    if not (isinstance(acc, str) and acc[:4].isdigit()):   # старые фикстуры: accepted: True / 'd'
+        return False
+    try:
+        sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+        import second_reading
+        return bool(second_reading.needs_second_reading(card))
+    except Exception:                                      # noqa: BLE001 — нет модуля в тестовой песочнице
+        return acc >= '2026-10-09' and not card.get('second_read')
+
+
+def is_read_through(card):
+    """Прочитана, принята и, если нужно, прочитана второй раз — то есть
+    консоль вправе ее показать. 28 октября 2026: карточка ЛСР (g0f479af0)
+    была принята, но второго чтения не прошла — и попала в строку «⛔ Сбой»,
+    хотя ждала обычного шага притока. Состояние «ждет второго чтения» —
+    очередь, а не сбой, и считается вместе с «ждут прочтения»."""
+    return bool(card.get('reviewed') and card.get('accepted')
+                and (card.get('draft_sent') or not needs_second_reading(card)))
 
 
 def is_unsent(card):
     """Принята, прочитана, но в консоли еще не показана — ни в «скоро выйдут»,
     ни в «ждут прочтения» такая карточка не попадала (27 октября 2026)."""
-    return bool(card.get('reviewed') and card.get('accepted') and not card.get('draft_sent')
+    return bool(is_read_through(card) and not card.get('draft_sent')
                 and not card.get('held') and not card.get('hold_reason'))
 
 
-def unsent_count(path=PENDING):
+def unsent_cards(path=PENDING):
+    """[(id, заголовок)] карточек-«сбоев» — отчет называет их по имени, чтобы
+    было что открыть (владелец 28 октября 2026: «как посмотреть ту, которая
+    сбой?» — у строки с числом не было ни имени, ни кнопки)."""
     try:
         cards = json.load(open(path, encoding='utf-8')).get('cards') or []
     except (OSError, ValueError):
-        return 0
-    return sum(1 for c in cards if is_unsent(c))
+        return []
+    return [(str(c.get('id') or ''), str(c.get('title') or '')) for c in cards if is_unsent(c)]
+
+
+def unsent_count(path=PENDING):
+    return len(unsent_cards(path))
 
 
 def doubted_count(path=PENDING, inbox=None):
@@ -632,9 +672,11 @@ def build(args):
         if counts is not None:
             args.soon, args.held, args.unread = counts
         doubted = doubted_count(path, getattr(args, 'inbox', None))
-        unsent = unsent_count(path)
+        names = unsent_cards(path)
+        unsent = len(names)
         text = render_publish(args.posted, args.edited, args.applied,
-                              args.soon, args.held, args.unread, args.nothing, doubted, unsent)
+                              args.soon, args.held, args.unread, args.nothing, doubted, unsent,
+                              unsent_names=names)
         return text, queue_keyboard(args.soon, args.held, args.unread, doubted, unsent)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
     if args.routine == 'вычитка':

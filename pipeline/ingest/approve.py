@@ -33,7 +33,7 @@
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -41,6 +41,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 
 import format_post                                        # noqa: E402
+import promote                                            # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -142,6 +143,24 @@ def hours_pending(card, now):
 CARD_VERDICTS = {'approve', 'hold', 'discard'}
 POST_VERDICTS = {'post_yes', 'post_no'}
 RAW_VERDICTS = {'take', 'drop'}
+ORPHAN_MAX_DAYS = 7                     # решение по сырью без черновика дольше этого — устарело
+
+
+def _old_ids_for(draft, sent_titles):
+    """Прежние номера той же новости (по ключу заголовка) среди показанных."""
+    key = promote.raw_key(draft.get('title'))
+    return [did for did, title in (sent_titles or {}).items()
+            if did != str(draft.get('draft_id')) and promote.raw_key(title) == key]
+
+
+def _older_than(decision, now, days):
+    try:
+        made = datetime.fromisoformat(str(decision.get('created_at')))
+        if made.tzinfo is None:
+            made = made.replace(tzinfo=timezone.utc)
+    except (ValueError, TypeError):
+        return False
+    return (now - made) > timedelta(days=days)
 
 
 def last_by_deal(decisions, verdicts):
@@ -222,7 +241,7 @@ def plan_actions(cards, decisions, now):
     return publish, hold, wait, discard
 
 
-def plan_raw(drafts, decisions, decided_raw=None):
+def plan_raw(drafts, decisions, decided_raw=None, sent_titles=None):
     """(в работу, отброшено) для сырья. По молчанию сырье НЕ публикуется:
     ворота его не пропустили, и молчание не делает его сделкой.
 
@@ -239,12 +258,27 @@ def plan_raw(drafts, decisions, decided_raw=None):
     какой бы ответ ни пришел с сайта."""
     by_draft = last_by_deal(decisions, RAW_VERDICTS)
     decided_raw = decided_raw or {}
+    # РЕШЕНИЕ ПО СТАРОМУ НОМЕРУ НАХОДИТ НОВОСТЬ ПО ЗАГОЛОВКУ (28 октября
+    # 2026). Номер сырья менялся от прогона к прогону (draft.draft_id_for),
+    # и нажатие по номеру из вчерашнего сообщения не находило ничего.
+    # send_drafts запоминает «номер -> заголовок» показанного сырья
+    # (`raw_sent_titles`); решение по номеру, которого в hold нет, переходит
+    # на черновик с тем же ключом заголовка. Прямое попадание по номеру
+    # всегда сильнее.
+    present = {str(d.get('draft_id')) for d in drafts}
+    by_key = {}
+    for did, decision in by_draft.items():
+        if did in present or did in decided_raw:
+            continue
+        title = (sent_titles or {}).get(did)
+        if title:
+            by_key.setdefault(promote.raw_key(title), decision)
     take, drop = [], []
     for draft in drafts:
         did = str(draft.get('draft_id'))
         if did in decided_raw:
             continue
-        decision = by_draft.get(did)
+        decision = by_draft.get(did) or by_key.get(promote.raw_key(draft.get('title')))
         if decision and decision['verdict'] == 'take':
             take.append(draft)
         elif decision:
@@ -299,7 +333,7 @@ def main(write=False):
                     if did not in seen_draft_ids:
                         seen_draft_ids.add(did)
                         raw_all.append(draft)
-    taken, dropped = plan_raw(raw_all, decisions, decided_raw)
+    taken, dropped = plan_raw(raw_all, decisions, decided_raw, state.get('raw_sent_titles') or {})
     # РЕШЕНИЕ, КОТОРОЕ НЕКУДА ПРИМЕНИТЬ, НЕЛЬЗЯ ОБЪЯВЛЯТЬ ПРИМЕНЕННЫМ.
     # Сырье лежит в `data/inbox/hold/` — а эта папка не хранится в git и
     # живет на диске той рутины, которая ее создала. Прогон в другом
@@ -308,10 +342,18 @@ def main(write=False):
     # подряд, включая непримененные: нажатие владельца исчезало без следа и
     # без единой строки в отчете. Такие решения оставляем сайту живыми (их
     # применит рутина, у которой черновик есть) и называем вслух.
+    applied_keys = {promote.raw_key(d.get('title')) for d in taken + dropped}
+    sent_titles = state.get('raw_sent_titles') or {}
+
+    def _retargeted(d):
+        title = sent_titles.get(str(d['deal_id']))
+        return bool(title) and promote.raw_key(title) in applied_keys
+
     orphan = [d for d in decisions
               if d['verdict'] in RAW_VERDICTS
               and str(d['deal_id']) not in seen_draft_ids
-              and str(d['deal_id']) not in decided_raw]
+              and str(d['deal_id']) not in decided_raw
+              and not _retargeted(d)]
 
     for card, override, why in publish:
         print('  ПУБЛИКУЕМ   %-11s %s%s' % (card['id'], str(card.get('title'))[:56],
@@ -328,9 +370,20 @@ def main(write=False):
         print('  В РАБОТУ    %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
     for draft in dropped:
         print('  ОТБРОШЕНА   %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+    # Решение, чей черновик не появился ни на одном диске за неделю, не
+    # применит уже никто: сырье держится в hold несколько дней, потом
+    # уезжает, а решение так и висело бы у сайта «живым» — и консоль каждый
+    # раз считала бы его нерешенным (28 октября 2026: 40 нажатий с 22
+    # сентября без черновика). Такое решение запоминается в decided_raw по
+    # id (повторно оно не применится) и подтверждается сайту.
+    stale_orphan = [d for d in orphan if _older_than(d, now, ORPHAN_MAX_DAYS)]
+    orphan = [d for d in orphan if d not in stale_orphan]
     for d in orphan:
         print('  НЕ ПРИМЕНЕНО %-10s решение «%s» есть, а черновика нет на этом диске — '
               'оставляю сайту для рутины притока' % (d['deal_id'], d['verdict']))
+    for d in stale_orphan:
+        print('  УСТАРЕЛО    %-11s решение «%s» старше %d дней, черновика нет — '
+              'запоминаю и подтверждаю сайту' % (d['deal_id'], d['verdict'], ORPHAN_MAX_DAYS))
 
     if not write:
         print('Сухой прогон. Применение — с ключом --write.')
@@ -409,9 +462,13 @@ def main(write=False):
         pending['cards'].append(card)
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'take'
+        for old_id in _old_ids_for(draft, sent_titles):
+            state['decided_raw'][old_id] = 'take'
         print('              %s -> предпросмотр %s' % (draft['draft_id'], card['id']))
     for draft in dropped:
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'drop'
+        for old_id in _old_ids_for(draft, sent_titles):
+            state['decided_raw'][old_id] = 'drop'
         # Память и по заголовку: та же новость назавтра приходит с НОВЫМ
         # draft_id, и партнер жал «не сделка» по Рижскому вокзалу трижды.
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'drop'
@@ -435,6 +492,10 @@ def main(write=False):
     # необратимо, а то, что мы только что записали, еще не пережило git push
     # (см. docstring `consume_pending`). Рутина вызывает
     # `approve.py --consume` последним шагом, после успешного push.
+    for d in stale_orphan:
+        state.setdefault('decided_raw', {})[str(d['deal_id'])] = d['verdict']
+    if stale_orphan:
+        promote.save_state(state)
     orphan_ids = {d['id'] for d in orphan}
     ids_to_consume = [d['id'] for d in decisions
                       if d['verdict'] != 'note' and d['id'] not in orphan_ids]

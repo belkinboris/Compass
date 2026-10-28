@@ -3464,7 +3464,12 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     keyboards = [kw["reply_markup"] for _m, kw in sent if "reply_markup" in kw]
     for kb in keyboards:
         buttons = [b["text"] for row in kb["inline_keyboard"] for b in row]
-        assert "✅ Опубликовать" in buttons, "кнопки не отнимаем — урок 10 августа"
+        # 28 октября 2026: у НЕПРОЧИТАННОЙ карточки кнопки «Опубликовать» нет —
+        # явное решение сильнее защиты от каркасных дефектов, и владелец
+        # увидел «Артмузу» с покупателем «Миллиардер Гомон» и кнопкой под ней.
+        # Урок 10 августа (не урезать кнопки) — про прочитанные карточки.
+        assert "✅ Опубликовать" not in buttons and "✋ Придержать" not in buttons, buttons
+        assert buttons == ["✏️ Изменить", "🗑 Выкинуть"], buttons
 
     # …а показывается она там, где человек решает судьбу сомнительного —
     # рядом с сырьем, которое не прошло ворота (вопрос владельца 21 сентября).
@@ -5142,3 +5147,48 @@ def test_manual_edit_in_the_channel_is_remembered_for_the_routine(client, monkey
     edits = client.get("/api/ops/channel-edits", params={"token": "тайна"}).json()["edits"]
     assert "-100777:%d" % mid in edits
     assert client.get("/api/ops/channel-edits", params={"token": "нет"}).status_code == 404
+
+
+def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(monkeypatch):
+    """28 октября 2026. Владелец ответил на 6 сомнительных, нажал /start — и
+    увидел те же 13: решение живет в базе сайта до ближайшей публикации, а
+    очередь читалась из файлов. Отвеченное сырье не показывается, его число
+    названо. Карточка, принятая без второго чтения (ЛСР), раньше не попадала
+    ни в один блок — теперь она в «ждут прочтения» без кнопки «Опубликовать»."""
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **kw: sent.append((method, kw)) or {"ok": True})
+    monkeypatch.setattr(main, "_answered_decisions", lambda: {"d1": "drop", "gs2": "approve"})
+    hold = {"drafts": [{"draft_id": "d1", "title": "Отвеченная новость", "hold_reasons": ["x"]},
+                       {"draft_id": "d2", "title": "Новая новость", "hold_reasons": ["y"]}]}
+    pending = {"cards": [
+        {"id": "g2nd", "title": "ЛСР выкупит акции", "buyer_name": "«ЛСР»",
+         "reviewed": "2026-10-28", "accepted": "2026-10-28"},
+        {"id": "gs2", "title": "Уже одобренная", "buyer_name": "«Б»",
+         "reviewed": "2026-10-28", "accepted": "2026-10-28", "second_read": "2026-10-28",
+         "draft_sent": True},
+    ]}
+    monkeypatch.setattr(main, "_read_json", lambda path, default:
+                        pending if "pending" in path else (hold if "hold" in path else {}))
+    monkeypatch.setattr(main.os.path, "isdir", lambda p: True)
+    monkeypatch.setattr(main.os, "listdir", lambda p: ["2026-10-28.json"])
+
+    main._send_queue_batch(-100, "raw")
+    texts = [kw.get("text", "") for _m, kw in sent]
+    assert any("Сомнительные: 1" in t and "Еще 1 вы уже решили" in t for t in texts), texts
+    assert not [t for t in texts if "d1" in t], "отвеченное сырье показано снова"
+    assert [t for t in texts if "d2" in t]
+
+    sent.clear()
+    main._send_queue_batch(-100, "unread")
+    texts = [kw.get("text", "") for _m, kw in sent]
+    card = next(t for t in texts if "g2nd" in t)
+    assert "ждет второго чтения" in card, card
+    kb = next(kw["reply_markup"] for _m, kw in sent if "g2nd" in kw.get("text", ""))
+    assert [b["text"] for row in kb["inline_keyboard"] for b in row] == ["✏️ Изменить", "🗑 Выкинуть"]
+
+    # Карточка, по которой решение уже нажато, приходит без кнопок и с пометкой.
+    sent.clear()
+    main._send_queue_batch(-100, "soon")
+    msg = next(kw for _m, kw in sent if "gs2" in kw.get("text", ""))
+    assert "решение записано" in msg["text"] and "reply_markup" not in msg

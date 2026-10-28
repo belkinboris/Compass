@@ -5789,6 +5789,35 @@ def _answer_and_do(callback, work, text=None):
     threading.Thread(target=work, daemon=True).start()
 
 
+def _answered_decisions() -> dict:
+    """{id: вердикт} решений, которые уже нажаты, но рутиной еще не применены
+    (`consumed=False`). Консоль читает очередь из файлов, которые приезжают из
+    git, а решение живет в этой базе до ближайшей публикации — в этом окне
+    (до часа, а ночью до утра) сырье и карточки выглядели нерешенными:
+    владелец 28 октября 2026 ответил на 6 сомнительных, нажал /start — и
+    увидел те же 13 снова. Открывается своя сессия: вызов идет из фонового
+    потока, где сессии запроса уже нет."""
+    session = get_session()
+    try:
+        rows = session.scalars(select(ModerationDecision)
+                               .where(ModerationDecision.consumed.is_(False))
+                               .order_by(ModerationDecision.created_at)).all()
+        return {str(r.deal_id): r.verdict for r in rows}
+    except Exception:                                      # noqa: BLE001 — база недоступна: показываем как есть
+        return {}
+    finally:
+        session.close()
+
+
+def _needs_second_reading(card: dict) -> bool:
+    """Принята с 9 октября 2026 и не прочитана второй раз: консоль ее не
+    показывает (send_drafts), ждет она приток, не владельца. Правило —
+    pipeline/ingest/second_reading.py (SINCE, STAMP)."""
+    acc = card.get("accepted")
+    return (isinstance(acc, str) and acc[:4].isdigit() and acc >= "2026-10-09"
+            and not card.get("second_read") and not card.get("draft_sent"))
+
+
 def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
     """Прислать карточки очереди — каждую своим сообщением с кнопками.
 
@@ -5814,7 +5843,12 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
                        if n.endswith(".json")) if os.path.isdir(hold_dir) else []
         drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
                   .get("drafts") if names else None) or []
-        items = [d for d in drafts if str(d.get("draft_id")) not in decided]
+        answered = _answered_decisions()
+        all_items = [d for d in drafts if str(d.get("draft_id")) not in decided]
+        # Нажатое, но еще не примененное решение — не повод показывать то же
+        # сырье снова (28 октября 2026: «я вроде на все ответил, почему 13?»).
+        items = [d for d in all_items if str(d.get("draft_id")) not in answered]
+        already = len(all_items) - len(items)
         # ПРОЧИТАННАЯ И ОТВЕРГНУТАЯ КАРТОЧКА — ТОЖЕ СОМНИТЕЛЬНАЯ (21 сентября
         # 2026, вопрос владельца: «а разве она не должна оказаться в
         # сомнительных тогда?»). Приемка (accept_card.py) читает источник и у
@@ -5824,12 +5858,17 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         # судьбу сомнительного, — рядом с сырьем, которое не прошло ворота.
         doubted = [c for c in (_read_json("static/data/pending.json", {}).get("cards") or [])
                    if c.get("hold_reason") and not c.get("held")]
-        items = items + doubted
+        already += sum(1 for c in doubted if str(c.get("id")) in answered)
+        items = items + [c for c in doubted if str(c.get("id")) not in answered]
         head = ("⚠️ <b>Сомнительные: %d</b>\n"
                 "Новости, которые не прошли ворота, и карточки, которые прочитали "
                 "и не приняли. Без вашего слова не публикуются никогда."
                 % len(items))
+        if already:
+            head += ("\n\nЕще %d вы уже решили — решения записаны и применятся при "
+                     "ближайшей публикации (в течение часа днем, утром — если ночью)." % already)
     else:
+        answered = _answered_decisions()
         pending = _read_json("static/data/pending.json", {}).get("cards") or []
         not_held = [c for c in pending if not c.get("held")]
         if kind == "held":
@@ -5842,9 +5881,12 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # «выйдет сама» ей нельзя.
             # Карточки с вердиктом приемки «не пропущена» ушли в блок
             # «Сомнительные» — им нужно решение, а не чтение (см. выше).
-            items = [c for c in not_held if not (c.get("reviewed") and c.get("accepted"))
+            # Принятая, но без второго чтения, тоже сюда: до 28 октября 2026
+            # такая карточка (ЛСР, g0f479af0) не попадала ни в один блок.
+            items = [c for c in not_held
+                     if (not (c.get("reviewed") and c.get("accepted")) or _needs_second_reading(c))
                      and not c.get("hold_reason")]
-            head = ("📖 <b>Ждут прочтения или приемки: %d</b>\nПока карточку не сверят с "
+            head = ("📖 <b>Ждут прочтения, второго чтения или приемки: %d</b>\nПока карточку не сверят с "
                     "источником и не примут целиком — молчание ее не публикует, сама не выйдет."
                     % len(items))
         else:  # soon
@@ -5908,24 +5950,51 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # поля кто-то проверял. Если приемка прочитала источник и не
             # пропустила карточку, ее вывод идет первой строкой — это он
             # отвечает на вопрос «выкидываем?», а не машинные поля.
+            unread_card = False
             if not (item.get("reviewed") and item.get("accepted")):
                 why = str(item.get("hold_reason") or "").strip()
                 if why:
                     note = ("📖 <b>Прочитали источник — карточку не приняли.</b>\n%s"
                             % html_escape(why[:700]))
                 else:
+                    unread_card = True
                     note = ("📖 <b>Карточку еще не сверили с источником.</b> Поля ниже "
-                            "собрал разбор новости, их никто не проверял глазами.")
+                            "собрал разбор новости, их никто не проверял глазами. "
+                            "Приток прочитает статью и перепишет карточку в ближайший час; "
+                            "кнопка «Опубликовать» появится после этого.")
+                text = "🗂 [карточка %s]\n\n%s\n\n%s" % (ident, note, _card_line(item))
+            elif _needs_second_reading(item):
+                unread_card = True
+                note = ("📖 <b>Карточка прочитана и принята, ждет второго чтения.</b> "
+                        "Приток перечитает ее в ближайший час и пришлет на подтверждение.")
                 text = "🗂 [карточка %s]\n\n%s\n\n%s" % (ident, note, _card_line(item))
             else:
                 text = "🗂 [карточка %s]\n\n%s" % (ident, _card_line(item))
-            keys = [[{"text": "✅ Опубликовать", "callback_data": "mod:%s:ok" % ident},
-                     {"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident}],
-                    [{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
-                     {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+            if unread_card and not item.get("held"):
+                # НЕПРОЧИТАННУЮ КАРТОЧКУ НЕЛЬЗЯ ВЫПУСТИТЬ КНОПКОЙ (28 октября
+                # 2026): явное «опубликовать» сильнее защиты от каркасных
+                # дефектов (approve.plan_actions), и владелец увидел в очереди
+                # «Артмузу» с покупателем «Миллиардер Гомон» и кнопкой
+                # «Опубликовать» под ней. Нажатие выпустило бы ее как есть.
+                # Остаются «Изменить» и «Выкинуть»; «Опубликовать» и
+                # «Придержать» приходят с прочитанной карточкой. Придержанную
+                # владелец уже держит сам — у нее полный набор (урок 10 августа).
+                keys = [[{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
+                         {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+            else:
+                keys = [[{"text": "✅ Опубликовать", "callback_data": "mod:%s:ok" % ident},
+                         {"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident}],
+                        [{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
+                         {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+            if ident in answered:
+                # Решение уже нажато и ждет рутину — кнопки второй раз не нужны.
+                text += "\n\n%s — ваше решение записано, применится при ближайшей публикации." \
+                        % html_escape(_VERDICT_LABEL.get(answered[ident], answered[ident]))
+                keys = None
         notification_service.tg_api(
             "sendMessage", chat_id=chat_id, text=text, parse_mode="HTML",
-            disable_web_page_preview=True, reply_markup={"inline_keyboard": keys}, **thread_kw)
+            disable_web_page_preview=True,
+            **({"reply_markup": {"inline_keyboard": keys}} if keys else {}), **thread_kw)
 
     if len(items) > len(shown):
         # Умолчавший предел читается как «это все» — называем его вслух.
@@ -6004,7 +6073,12 @@ def _queue_report() -> str:
         if os.path.isdir(hold_dir) else []
     drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts")
               if names else None) or []
+    answered = _answered_decisions()
     drafts = [d for d in drafts if str(d.get("draft_id")) not in decided]
+    already = sum(1 for d in drafts if str(d.get("draft_id")) in answered)
+    drafts = [d for d in drafts if str(d.get("draft_id")) not in answered]
+    if already:
+        lines.append("\n✅ Вы уже решили: %d — применится при ближайшей публикации." % already)
     if drafts:
         reasons = {}
         for draft in drafts:
