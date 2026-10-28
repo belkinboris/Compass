@@ -254,6 +254,72 @@
     ]
    },
    "pending_since": "2026-10-28T17:54:32+00:00"
+  },
+  {
+   "id": "g6638f2fa",
+   "date": "2026-10-28",
+   "title": "Фонд госимущества Украины продал квартиру дизайнера Артемия Лебедева",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6ae23d65851df3abcceffe4d"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "14,2 млн ₽",
+   "seller": "госимущества Украины",
+   "asset": "квартира дизайнера Артемия Лебедева",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-28",
+     "title": "Сделка завершена",
+     "note": "На Украине продали квартиру российского дизайнера Артемия Лебедева в историческом центре Киева за 8 млн гривен (около 14,2 млн руб.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/rbcfreenews/6ae23d65851df3abcceffe4d"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "квартира дизайнера Артемия Лебедева",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6ae23d65851df3abcceffe4d"
+     }
+    ],
+    "seller": [
+     {
+      "value": "госимущества Украины",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6ae23d65851df3abcceffe4d"
+     }
+    ]
+   },
+   "pending_since": "2026-10-28T18:53:19+00:00"
   }
  ]
 }
