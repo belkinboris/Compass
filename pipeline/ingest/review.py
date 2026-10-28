@@ -636,7 +636,8 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
             bad.append('неизвестный тип сделки %r — из %s' % (new, sorted(TYPE_WORDS)))
         elif not any(w in quote.lower() for w in TYPE_WORDS[new]):
             bad.append('в цитате нет слова, подтверждающего тип «%s»' % new)
-    elif field == 'sum' and new is not None:
+    elif field in ('sum', 'eco.sum') and new is not None:
+        # eco.sum — тоже сумма: по числам и единице, не дословно (gf2b5f78c).
         problem = sum_is_supported(new, quote)
         if problem:
             bad.append(problem)
