@@ -231907,6 +231907,121 @@
     }
    },
    "sum": "1,427 млрд ₽"
+  },
+  {
+   "id": "g601b6589",
+   "date": "2026-10-21",
+   "title": "Власти Ярославской области готовят к продаже усадьбу В. Ф. Некрасова",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Чиновники объясняют шаг просто: памятники и другие активы должны наконец достаться инвесторам и снова работать, а казна получит деньги — прошлогодние такие продажи принесли региону около двух миллиардов рублей.",
+    "context": "Здание построил в начале XX века врач В. Ф. Некрасов — племянник поэта Н. А. Некрасова. Со временем в нем размещались разные учреждения: сначала коммуна «Белый дом», потом санаторий для партийных и хозяйственных руководителей, а на рубеже 90-х — детский санаторий пульмонологического профиля. Сейчас усадьба входит в список из 18 объектов, которые региональное правительство готовит к продаже: план приватизации недавно скорректировал губернатор Михаил Евраев, и кроме усадьбы в перечне — бывшее здание лесничества в Рыбинском округе и несколько старых администраций в Любимском округе.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-21",
+     "title": "Переговоры",
+     "note": "Власти Ярославской области хотят продать усадьбу племянника А. Н. Некрасова, расположенную неподалеку от поселка Дубки.",
+     "source": [
+      "Abnews.ru",
+      "https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova"
+     ]
+    }
+   ],
+   "seller": "Власти Ярославской области",
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.rationale": []
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-10-27",
+   "asset": "усадьба В. Ф. Некрасова",
+   "accepted": "2026-10-27",
+   "accepted_notes": {
+    "notes": "второе чтение нашло: заголовок дословно копировал заголовок Abnews.ru — переформулирован"
+   },
+   "proofread": "2026-10-27",
+   "second_read": "2026-10-27",
+   "post_preview": "<b>Власти Ярославской области готовят к продаже усадьбу В. Ф. Некрасова</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Власти Ярославской области\n<b>Предмет:</b> усадьба В. Ф. Некрасова\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abnews.ru/center/news/yaroslavl/2026/10/21/yaroslavskie-vlasti-planiruyut-prodat-usadbu-v-f-nekrasova\">Abnews.ru</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g601b6589\">карточке сделки</a>",
+   "added": "2026-10-28",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "219249d8787c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "e7dae0f3dc17"
+    },
+    "date": {
+     "value": "2026-10-21",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a230e1c4a97e"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "630c5363e441"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
