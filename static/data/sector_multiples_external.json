@@ -1,0 +1,721 @@
+{
+ "_about": "Внешние отраслевые мультипликаторы для оценки цены сделки (price_estimate.py). Утверждены владельцем 28 октября 2026 по docs/price_estimate_sources.md. Заполняется руками из названных источников; у каждого числа — источник, сектор источника и год. Виды: deals — цены реальных сделок в России (основа), exchange — биржа России (проверка и отрасли без сделочных данных), global — мировой ориентир (только верхняя граница, в диапазон не входит).",
+ "updated": "2026-10-28",
+ "market": {
+  "metric": "ev_ebitda",
+  "value": 4.8,
+  "year": 2024,
+  "source": "b1_2025",
+  "label": "весь рынок, медиана",
+  "note": "среднее по рынку 5,4×; сделки выхода иностранцев (2,3×) не учитываются"
+ },
+ "sources": {
+  "b1_2025": {
+   "short": "Б1 и Advance Capital",
+   "name": "Б1, VERBA LEGAL, ККМП и Advance Capital, «Исследование рынка M&A: итоги 2022–2024» (июль 2025), стр. 20",
+   "url": "https://b1.ru/analytics/m-a-market-survey-2025/",
+   "kind": "deals",
+   "note": "средний EV/LTM EBITDA по закрытым сделкам с российскими активами дороже $1 млн; средние, не медианы"
+  },
+  "b1_tech_2026": {
+   "short": "Б1 и Advance Capital (Tech M&A 2025)",
+   "name": "Б1, Advance Capital, АЛРУД и VERBA LEGAL, «Tech M&A 2025. Часть 1», стр. 31–32",
+   "url": "https://b1.ru/analytics/m-a-market-trends-survey-2026-part-1/",
+   "kind": "deals",
+   "note": "EV/EBITDA LTM и EV/Sales по сделкам в ТМТ с раскрытыми финансами; 2025 год смещен к дорогим активам"
+  },
+  "aton_2026": {
+   "short": "АТОН, «Стратегия 2026»",
+   "name": "АТОН, «Стратегия 2026» (декабрь 2025), стр. 58–60; медианы по секторам посчитаны Компасом по таблицам брокера, цены на 14 ноября 2025",
+   "url": "https://www.aton.ru/upload/research/Strategy_2026.pdf",
+   "kind": "exchange",
+   "note": "прогнозные мультипликаторы 2025П публичных компаний Московской биржи"
+  },
+  "kept_consumer_q4_2024": {
+   "short": "Kept, потребсектор",
+   "name": "Kept, «Мультипликаторы компаний потребительского сектора», IV квартал 2024",
+   "url": "https://assets.kept.ru/upload/pdf/2025/04/ru-consumer-markets-multiples-q4-2024.pdf",
+   "kind": "exchange",
+   "note": "медианы по публичным производителям продуктов питания России; выборка — 3 компании"
+  },
+  "damodaran_em_2026": {
+   "short": "Дамодаран (NYU Stern), развивающиеся рынки",
+   "name": "Асват Дамодаран, NYU Stern, отраслевые мультипликаторы развивающихся рынков, январь 2026",
+   "url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datacurrent.html",
+   "kind": "global",
+   "note": "биржи Азии (в основном Китай и Индия), агрегированные по прибыльным компаниям; уровни в 2–3 раза выше российских — только верхняя граница, в диапазон не входит"
+  }
+ },
+ "industries": {
+  "Нефть и газ": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.1,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Нефть и газ"
+   },
+   {
+    "metric": "pe",
+    "value": 5.3,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Нефть и газ"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 6.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Oil/Gas (Integrated)"
+   }
+  ],
+  "Уголь": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.8,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Тяжелая промышленность",
+    "note": "ближайший сектор исследования"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Coal & Related Energy"
+   }
+  ],
+  "ГМК и добыча": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.8,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Тяжелая промышленность",
+    "note": "ближайший сектор исследования"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 4.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Металлы и добыча"
+   },
+   {
+    "metric": "pe",
+    "value": 7.7,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Металлы и добыча"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 12.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Metals & Mining"
+   }
+  ],
+  "Энергетика": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.6,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Коммунальные услуги"
+   },
+   {
+    "metric": "pe",
+    "value": 2.3,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Электроэнергетика"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 9.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Power"
+   }
+  ],
+  "Химия и удобрения": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.8,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Тяжелая промышленность",
+    "note": "ближайший сектор исследования"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 16.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Chemical (Basic)"
+   }
+  ],
+  "Агро": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.2,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Сельское хозяйство"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 5.3,
+    "year": 2024,
+    "source": "kept_consumer_q4_2024",
+    "label": "производители продуктов питания, Россия"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.2,
+    "year": 2024,
+    "source": "kept_consumer_q4_2024",
+    "label": "производители продуктов питания, Россия"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 10.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Farming/Agriculture"
+   }
+  ],
+  "Пищепром и напитки": [
+   {
+    "metric": "ev_ebitda",
+    "value": 4.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Потребительские товары"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 5.3,
+    "year": 2024,
+    "source": "kept_consumer_q4_2024",
+    "label": "производители продуктов питания, Россия"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.2,
+    "year": 2024,
+    "source": "kept_consumer_q4_2024",
+    "label": "производители продуктов питания, Россия"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 11.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Food Processing"
+   }
+  ],
+  "Ритейл": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.0,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Ритейл"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 3.4,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Ритейл"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 12.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (Grocery and Food)"
+   }
+  ],
+  "E-commerce": [
+   {
+    "metric": "ev_ebitda",
+    "value": 8.0,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Интернет и цифровые медиа"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.1,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Интернет и цифровые медиа"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "ИТ"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 14.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (General)"
+   }
+  ],
+  "Потребительские товары": [
+   {
+    "metric": "ev_ebitda",
+    "value": 4.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Потребительские товары"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 3.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Потребительский сектор"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 22.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Household Products"
+   }
+  ],
+  "ИТ и интернет": [
+   {
+    "metric": "ev_ebitda",
+    "value": 6.8,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Программное обеспечение"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.2,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Программное обеспечение"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "ИТ"
+   },
+   {
+    "metric": "pe",
+    "value": 11.9,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "ИТ"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 40.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
+   }
+  ],
+  "Искусственный интеллект": [
+   {
+    "metric": "ev_ebitda",
+    "value": 6.8,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Программное обеспечение",
+    "note": "отдельной строки по ИИ в исследовании нет"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.2,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Программное обеспечение"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "ИТ"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 40.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
+   }
+  ],
+  "Телеком": [
+   {
+    "metric": "ev_ebitda",
+    "value": 6.1,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Инфраструктура"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.7,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Инфраструктура"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 3.2,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Телеком"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Telecom. Services"
+   }
+  ],
+  "Банки": [
+   {
+    "metric": "pb",
+    "value": 0.9,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pe",
+    "value": 7.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pb",
+    "value": 0.8,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Банки"
+   },
+   {
+    "metric": "pe",
+    "value": 4.4,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Банки"
+   },
+   {
+    "metric": "pe",
+    "value": 9.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Bank (Money Center)"
+   }
+  ],
+  "Страхование": [
+   {
+    "metric": "pb",
+    "value": 0.9,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pe",
+    "value": 7.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pe",
+    "value": 10.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Insurance (General)"
+   }
+  ],
+  "Финтех": [
+   {
+    "metric": "ev_ebitda",
+    "value": 6.1,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "ТМТ"
+   },
+   {
+    "metric": "pe",
+    "value": 7.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 16.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   }
+  ],
+  "Финансовые услуги": [
+   {
+    "metric": "pb",
+    "value": 0.9,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pe",
+    "value": 7.3,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Финансовый сектор"
+   },
+   {
+    "metric": "pe",
+    "value": 14.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   }
+  ],
+  "Транспорт и логистика": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.4,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Логистика и транспортная инфраструктура"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 5.2,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Транспорт"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 9.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Transportation"
+   }
+  ],
+  "Порты и инфраструктура": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.4,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Логистика и транспортная инфраструктура"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 7.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Shipbuilding & Marine"
+   }
+  ],
+  "Автопром": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.8,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Тяжелая промышленность",
+    "note": "ближайший сектор исследования"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 10.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Auto & Truck"
+   }
+  ],
+  "Недвижимость": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Недвижимость"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 14.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Real Estate (Operations & Services)"
+   }
+  ],
+  "Строительство": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.6,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Девелоперы"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 10.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Engineering/Construction"
+   }
+  ],
+  "Гостиницы и туризм": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.5,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Сфера услуг"
+   }
+  ],
+  "Здравоохранение": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.5,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Сфера услуг"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 19.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Hospitals/Healthcare Facilities"
+   }
+  ],
+  "Фармацевтика": [
+   {
+    "metric": "ev_ebitda",
+    "value": 6.0,
+    "year": 2025,
+    "source": "aton_2026",
+    "label": "Фармацевтика"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 18.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Drugs (Pharmaceutical)"
+   }
+  ],
+  "Образование": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.5,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Сфера услуг"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 8.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Education"
+   }
+  ],
+  "Развлечения": [
+   {
+    "metric": "ev_ebitda",
+    "value": 7.1,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Медиа и развлечения"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 14.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Entertainment"
+   }
+  ],
+  "Профессиональные услуги": [
+   {
+    "metric": "ev_ebitda",
+    "value": 5.5,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Сфера услуг"
+   }
+  ],
+  "Медиа": [
+   {
+    "metric": "ev_ebitda",
+    "value": 7.1,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Медиа и развлечения"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 2.4,
+    "year": 2025,
+    "source": "b1_tech_2026",
+    "label": "Медиа и развлечения"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 11.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Broadcasting"
+   }
+  ],
+  "Машиностроение": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.8,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Тяжелая промышленность",
+    "note": "ближайший сектор исследования"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 25.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Machinery"
+   }
+  ],
+  "ЖКХ и обращение с отходами": [
+   {
+    "metric": "ev_ebitda",
+    "value": 3.6,
+    "year": 2024,
+    "source": "b1_2025",
+    "label": "Коммунальные услуги"
+   }
+  ]
+ }
+}

@@ -4590,10 +4590,18 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
         "methods": [{"label": m["label"], "base": f'{m["base_name"]} за {m["report_year"]} год — '
                      f'{price_estimate.money(m["base_rub"])}',
                      "multiple": str(m["median"]).replace(".", ",") + "×",
-                     "where": (f'отрасль «{m["industry"]}»' if m["industry"] else "все отрасли")
-                     + ', ' + price_estimate.deals_word(m["count"]),
+                     "where": (f'{m["external"]["source"]}: {"сделки" if m["external"]["kind"] == "deals" else "биржа"}, '
+                               f'«{m["external"]["label"]}», {m["external"]["year"]}')
+                     if m.get("external") else
+                     ((f'база Компаса, отрасль «{m["industry"]}»' if m["industry"] else "база Компаса, все отрасли")
+                      + ', ' + price_estimate.deals_word(m["count"])),
+                     "url": (m.get("external") or {}).get("url"),
                      "result": price_estimate.money(m["stake_rub"] or m["full_rub"])}
                     for m in summary["methods"]],
+        "benchmarks": [{"label": price_estimate.EXT_LABEL.get(b["metric"], b["metric"]),
+                        "value": str(b["value"]).replace(".", ",") + "×", "sector": b["label"],
+                        "source": b["source"], "year": b["year"], "url": b["url"]}
+                       for b in summary.get("benchmarks") or []],
         "comparables": [{"id": c["id"], "title": c["title"], "year": c["year"],
                          "price": price_estimate.money(c["price_rub"])
                          + (f' за {price_estimate._pct(c["stake"])}' if c["stake"] and c["stake"] < 99.5 else "")}
