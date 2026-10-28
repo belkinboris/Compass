@@ -7785,10 +7785,12 @@ def test_big_realty_deal_goes_to_both_channels_and_each_post_links_the_other(mon
     methods = [(u.rsplit("/", 1)[-1], j["chat_id"]) for u, j in fake.calls]
     assert methods == [("sendMessage", MAIN_CH), ("sendMessage", REALTY_CH),
                        ("editMessageText", MAIN_CH)], methods
-    assert "t.me/c/" not in fake.calls[0][1]["text"]
-    assert "https://t.me/c/1111111111/601" in fake.calls[1][1]["text"]
+    # Ссылка на пару — кнопкой под постом, не в тексте (28 октября 2026).
+    assert "t.me/c/" not in str(fake.calls[0][1].get("reply_markup"))
+    assert "https://t.me/c/1111111111/601" in str(fake.calls[1][1]["reply_markup"])
     assert fake.calls[2][1]["message_id"] == 601
-    assert "https://t.me/c/2222222222/701" in fake.calls[2][1]["text"]
+    assert "https://t.me/c/2222222222/701" in str(fake.calls[2][1]["reply_markup"])
+    assert "t.me/c/" not in fake.calls[2][1]["text"]
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_posts"]["gR2"] == 601
     assert written["telegram_posts_realty"]["gR2"] == 701
@@ -7819,8 +7821,8 @@ def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path
     send_telegram.main(write=True, ignore_pace=True)
     edits = {j["chat_id"]: j for u, j in fake.calls if u.endswith("editMessageText")}
     assert set(edits) == {MAIN_CH, REALTY_CH}, fake.calls
-    assert edits[MAIN_CH]["message_id"] == 601 and "t.me/c/2222222222/701" in edits[MAIN_CH]["text"]
-    assert edits[REALTY_CH]["message_id"] == 701 and "t.me/c/1111111111/601" in edits[REALTY_CH]["text"]
+    assert edits[MAIN_CH]["message_id"] == 601 and "t.me/c/2222222222/701" in str(edits[MAIN_CH]["reply_markup"])
+    assert edits[REALTY_CH]["message_id"] == 701 and "t.me/c/1111111111/601" in str(edits[REALTY_CH]["reply_markup"])
 
 
 def test_channel_rule_counts_a_deal_sum_but_not_an_auction_start_or_a_rumour():
@@ -8866,3 +8868,50 @@ def test_draft_id_is_stable_across_processes_and_a_decision_by_an_old_id_finds_t
     take, drop = approve.plan_raw([new], decisions, sent_titles={"d00000001": item["title"]})
     assert take == [new] and drop == []
     assert approve._old_ids_for(new, {"d00000001": item["title"], "d9": "другая новость"}) == ["d00000001"]
+
+
+def test_post_in_both_channels_gets_a_button_to_its_pair(monkeypatch):
+    """28 октября 2026, владелец: «когда в обоих каналах выкладывается пост,
+    нужна умная кроссылка на второй пост». Ссылка — кнопкой под постом:
+    второй пост сразу ведет на первый, первому кнопка дописывается правкой;
+    при автоправке поста кнопка не теряется; в предпросмотре об этом сказано."""
+    import channels, send_telegram, send_drafts
+    base = {'inline_keyboard': [[{'text': 'Открыть карточку сделки', 'url': 'https://x/#/deal/g1'}]]}
+    addr = {channels.MAIN: '-1001111', channels.REALTY: '-1002222'}
+    kb = channels.with_crosslink(base, channels.REALTY, {channels.MAIN: 77}, addr)
+    assert kb['inline_keyboard'][-1][0] == {'text': 'Этот же пост в основном канале «Компаса»',
+                                           'url': 'https://t.me/c/1111/77'}
+    # пары еще нет — обычные кнопки; повторный вызов не дублирует кнопку
+    assert channels.with_crosslink(base, channels.MAIN, {}, addr) == base
+    again = channels.with_crosslink(kb, channels.REALTY, {channels.MAIN: 78}, addr)
+    assert len(again['inline_keyboard']) == 2 and again['inline_keyboard'][-1][0]['url'].endswith('/78')
+
+    calls = []
+
+    class Client:
+        def post(self, url, json=None):
+            calls.append((url.rsplit('/', 1)[-1], json))
+
+            class R:
+                text = ''
+
+                def json(self_inner):
+                    return {'ok': True, 'result': {'message_id': 100 + len(calls)}}
+            return R()
+
+    mids, err = send_telegram.post_to_channels(Client(), 't', addr, (channels.MAIN, channels.REALTY),
+                                               'текст', base)
+    assert err is None and mids == {channels.MAIN: 101, channels.REALTY: 102}
+    methods = [m for m, _ in calls]
+    assert methods == ['sendMessage', 'sendMessage', 'editMessageText']
+    first, second, edit = [j for _, j in calls]
+    assert 'Этот же пост' not in str(first['reply_markup'])            # пары еще нет
+    assert second['reply_markup']['inline_keyboard'][-1][0]['url'] == 'https://t.me/c/1111/101'
+    assert edit['message_id'] == 101 and edit['chat_id'] == '-1001111'
+    assert edit['reply_markup']['inline_keyboard'][-1][0]['url'] == 'https://t.me/c/2222/102'
+    assert edit['text'] == 'текст', 'ссылка — кнопкой, текст поста не меняется'
+
+    big = {'id': 'g1', 'title': 'Сделка', 'ind': 'Недвижимость', 'sum': '2 млрд ₽', 'status': 'Закрыта'}
+    assert channels.channels_for(big) == (channels.MAIN, channels.REALTY)
+    preview = send_drafts.post_message_text(big, {}, rendered='текст')
+    assert 'В ОБА КАНАЛА' in preview and 'кнопка «Этот же пост в …»' in preview, preview
