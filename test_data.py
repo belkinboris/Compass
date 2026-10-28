@@ -1474,13 +1474,22 @@ def test_auction_deal_names_its_seller(deals):
     import re
     placeholder = re.compile(
         r"^\s*(—|-|не раскрыт[а-яё]*|публично не сообщалось|нет данных)?\s*\.?\s*$", re.I)
+    # Искали старательно и не нашли — публикуем без поля (владелец,
+    # 28 октября 2026: «если инфу не смогли найти, это может значить, что ее
+    # нет; не опубликовать карту будет ошибкой; главное — чтобы поиск был
+    # сделан»). Запись о поиске — `accepted_notes.no_profile.seller`: где
+    # искали и почему продавца нет (приемка, docs/card_parties.md).
+    def searched(d):
+        return bool(((d.get("accepted_notes") or {}).get("no_profile") or {}).get("seller"))
     bad = [d["id"] for d in deals
            if d.get("type") == "Продажа с торгов"
            and not d.get("seller_id")
            and (not d.get("seller") or placeholder.match(str(d["seller"])))
-           and d["id"] not in AUCTIONS_WITHOUT_SELLER_YET]
+           and d["id"] not in AUCTIONS_WITHOUT_SELLER_YET
+           and not searched(d)]
     assert not bad, (
-        "у сделки с торгов не назван продавец (на торгах он всегда назван): %s" % bad[:5])
+        "у сделки с торгов не назван продавец (на торгах он всегда назван): %s — найдите его "
+        "или запишите в accepted_notes.no_profile.seller, где искали и почему его нет" % bad[:5])
 
 
 def test_source_label_matches_the_link(deals):
