@@ -8805,3 +8805,64 @@ def test_acceptance_refuses_a_title_copied_from_the_source():
     assert "title_copied" in codes("Совладельцем Baggins Coffee стал фонд «Бумеранг Капитал»")
     assert "title_copied" in codes("РЖД выставили на торги 25% плюс 1 акцию «ПНК»", raw="РЖД выставили на торги 25% плюс 1 акцию ПНК")
     assert "title_copied" not in codes("Фонд «Бумеранг Капитал» и сооснователь «Цех 85» Антон Петров выкупили сеть кофеен Baggins Coffee")
+
+
+def test_card_waiting_for_second_reading_is_a_queue_not_a_failure(tmp_path):
+    """28 октября 2026: ЛСР (g0f479af0) принята, второго чтения не прошла —
+    отчет назвал ее «⛔ Сбой», а владелец спросил, как ее посмотреть. Такая
+    карточка ждет приток, считается в «ждут прочтения»; настоящий сбой
+    называется по имени и со ссылкой."""
+    import ops_status
+    pend = tmp_path / "pending.json"
+    pend.write_text(json.dumps({"cards": [
+        {"id": "g2nd", "title": "ЛСР выкупит акции", "reviewed": "2026-10-28", "accepted": "2026-10-28"},
+        {"id": "gbad", "title": "Готова, не показана", "reviewed": "2026-10-28",
+         "accepted": "2026-10-28", "second_read": "2026-10-28"},
+    ]}), encoding="utf-8")
+    assert ops_status.queue_counts(str(pend)) == (0, 0, 1)
+    assert ops_status.unsent_cards(str(pend)) == [("gbad", "Готова, не показана")]
+    args = argparse.Namespace(routine="публикация", broken="", posted=0, edited=0, applied=0,
+                              soon=0, held=0, unread=0, nothing=True, pending=str(pend))
+    args.inbox = str(tmp_path / "no-inbox")
+    text, _kb = ops_status.build(args)
+    assert "⛔ Сбой: 1 карточка" in text and "#/preview/gbad" in text and "Готова, не показана" in text, text
+    assert "1 карточка ждут прочтения, второго чтения или приемки" in text, text
+    assert "1 карточка выйдет сама" in ops_status.render_publish(nothing=True, soon=1)
+
+
+def test_stale_raw_decision_without_a_draft_is_remembered_and_consumed(tmp_path, monkeypatch, capsys):
+    """28 октября 2026: 40 нажатий по сырью с 22 сентября висели у сайта
+    непримененными — их черновики давно уехали из hold, и консоль считала их
+    нерешенными при каждом /start. Старше недели — запоминается по id и
+    подтверждается сайту; свежее — по-прежнему ждет рутину с черновиком."""
+    import approve
+    from datetime import datetime, timezone
+    now = datetime(2026, 10, 28, 12, 0, tzinfo=timezone.utc)
+    old = {"id": 1, "deal_id": "d_old", "verdict": "drop", "created_at": "2026-09-22T10:00:00+00:00"}
+    new = {"id": 2, "deal_id": "d_new", "verdict": "take", "created_at": "2026-10-28T10:00:00+00:00"}
+    assert approve._older_than(old, now, approve.ORPHAN_MAX_DAYS)
+    assert not approve._older_than(new, now, approve.ORPHAN_MAX_DAYS)
+    assert not approve._older_than({"created_at": None}, now, 7)
+
+
+def test_draft_id_is_stable_across_processes_and_a_decision_by_an_old_id_finds_the_news(tmp_path):
+    """28 октября 2026: номер сырья считался через hash() и менялся в каждом
+    процессе — 10 решений за день (в том числе два «это сделка») сослались на
+    номера, которых час спустя не было ни в одном hold. Теперь номер — sha1
+    адреса, а решение по старому номеру переходит на новость с тем же
+    заголовком (send_drafts помнит «номер -> заголовок»)."""
+    import os, subprocess, sys as _sys
+    import draft, approve
+    item = {"url": "https://ria.ru/20261028/putin-2127559449.html", "title": "Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую»"}
+    code = ("import sys; sys.path.insert(0, %r); import draft; print(draft.draft_id_for(%r))"
+            % (str(ROOT / "pipeline" / "ingest"), item))
+    other = subprocess.run([_sys.executable, "-c", code], capture_output=True, text=True, check=True).stdout.strip()
+    assert draft.draft_id_for(item) == other and re.fullmatch(r"d\d{8}", other), other
+    assert draft.draft_id_for({"title": "без адреса"}) == draft.draft_id_for({"title": "без адреса"})
+
+    new = {"draft_id": "d00000002", "title": item["title"]}
+    decisions = [{"id": 1, "deal_id": "d00000001", "verdict": "take", "created_at": "2026-10-28T16:05:00+00:00"}]
+    assert approve.plan_raw([new], decisions) == ([], [])
+    take, drop = approve.plan_raw([new], decisions, sent_titles={"d00000001": item["title"]})
+    assert take == [new] and drop == []
+    assert approve._old_ids_for(new, {"d00000001": item["title"], "d9": "другая новость"}) == ["d00000001"]

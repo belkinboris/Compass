@@ -742,6 +742,9 @@ def main(write=False, resend=None, only=None):
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
                     state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'
+                    # Номер -> заголовок: по нему approve.py найдет новость,
+                    # даже если ее номер к моменту решения сменился.
+                    state.setdefault('raw_sent_titles', {})[str(item['draft_id'])] = str(item.get('title') or '')
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
     record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}

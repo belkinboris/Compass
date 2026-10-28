@@ -1210,13 +1210,27 @@ def industry_for(title, companies):
     return industry_by_words(subject)
 
 
+def draft_id_for(item):
+    """Устойчивый номер сырья: по адресу источника (без него — по заголовку).
+
+    До 28 октября 2026 номер считался через `hash()`, а хеш строк в Python
+    случаен в каждом новом процессе: каждый часовой забор давал той же новости
+    НОВЫЙ номер. Нажатие в консоли несет номер из сообщения — и если забор
+    успевал пройти между показом и применением, решение ссылалось в пустоту
+    (за 28 октября так потерялись 10 решений, в том числе два «это сделка»).
+    sha1 одинаков в любом процессе и на любой машине."""
+    import hashlib
+    key = str(item.get('url') or item.get('title') or '')
+    return 'd' + str(int(hashlib.sha1(key.encode('utf-8')).hexdigest()[:12], 16) % 10 ** 8).zfill(8)
+
+
 def build(item, companies):
     """Черновик карточки из записи разбора."""
     text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
     buyer, asset, seller, buyer_hint = guess_parties(item.get('title'))
     event = guess_event(item)
     card = {
-        'draft_id': 'd' + str(abs(hash(item.get('url'))))[:8],
+        'draft_id': draft_id_for(item),
         # normalize_quotes — заголовки статей почти всегда набраны прямыми
         # кавычками; title показывается на экране как есть, поэтому
         # приводим к «елочкам» здесь, а не оставляем правку постфактум
