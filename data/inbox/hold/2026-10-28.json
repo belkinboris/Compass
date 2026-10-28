@@ -2,7 +2,7 @@
  "made": "2026-10-28",
  "drafts": [
   {
-   "draft_id": "d33133865",
+   "draft_id": "d10403662",
    "title": "Власти Тайваня в угоду США распродают главные отрасли, заявили в Китае",
    "date": "2026-10-28",
    "src": [
@@ -30,7 +30,7 @@
    ]
   },
   {
-   "draft_id": "d64899408",
+   "draft_id": "d79811100",
    "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
    "date": "2026-10-28",
    "src": [
@@ -58,7 +58,7 @@
    ]
   },
   {
-   "draft_id": "d45389767",
+   "draft_id": "d42980329",
    "title": "Миллиардер Гомон стал владельцем кластера «Артмуза» в Петербурге",
    "date": "2026-10-28",
    "src": [
@@ -86,7 +86,7 @@
    ]
   },
   {
-   "draft_id": "d24575594",
+   "draft_id": "d45527072",
    "title": "Volga обогнала «Москвич» по продажам в октябре — с отрывом почти в 100 автомобилей",
    "date": "2026-10-28",
    "src": [
@@ -125,7 +125,7 @@
    ]
   },
   {
-   "draft_id": "d68764373",
+   "draft_id": "d32312501",
    "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
    "date": "2026-10-28",
    "src": [
@@ -153,36 +153,7 @@
    ]
   },
   {
-   "draft_id": "d42038462",
-   "title": "Anthropic приостановила обучение новой ИИ-модели из-за угроз безопасности в преддверии IPO",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/312334"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d45803197",
+   "draft_id": "d88611224",
    "title": "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more",
    "date": "2026-10-28",
    "src": [
@@ -205,15 +176,13 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic приостановила обучение новой ИИ-модели из-за угроз» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d71643317",
+   "draft_id": "d10851056",
    "title": "Who’s really in charge at Anthropic after the IPO?",
    "date": "2026-10-27",
    "src": [
@@ -240,11 +209,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic приостановила обучение новой ИИ-модели из-за угроз» — второе издание, в группу не шлем"
+    "та же новость, что «VCs will make billions on Anthropic’s IPO, but Amazon is set» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d56978593",
+   "draft_id": "d78402450",
    "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
    "date": "2026-10-28",
    "src": [
@@ -272,13 +241,13 @@
    ]
   },
   {
-   "draft_id": "d26060617",
-   "title": "«Пятерочка» начала продавать аптечные товары на отдельных стойках",
+   "draft_id": "d35193200",
+   "title": "Airbus и Air France-KLM объявили о создании СП",
    "date": "2026-10-28",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/pjaterochka-nachala-prodavat-aptechnye-tovary-na-otdelnyh-stojkah/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9062691"
     ]
    ],
    "sum": null,
@@ -293,48 +262,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Фармацевтика",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d69230498",
-   "title": "Онлайн-продажи аптечных товаров вырастут на 70% к 2028 году",
+   "draft_id": "d84677834",
+   "title": "Мосбиржа провела дискретный аукцион по акциям ЛСР из-за роста более чем на 20%",
    "date": "2026-10-28",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/onlajn-prodazhi-aptechnyh-tovarov-vyrastut-na-70-k-2028-godu/"
-    ]
-   ],
-   "sum": "668 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78389880",
-   "title": "РЖД объявили открытый аукцион по продаже акций ПНК",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28261557"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9062684"
     ]
    ],
    "sum": null,
@@ -356,17 +297,17 @@
    ]
   },
   {
-   "draft_id": "d45705418",
-   "title": "Шохин поддержал идею продажи США «Северных потоков»",
+   "draft_id": "d30816350",
+   "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
    "date": "2026-10-28",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28261505"
+     "https://tass.ru/ekonomika/28261803"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "16,1 млрд ₽",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -384,13 +325,41 @@
    ]
   },
   {
-   "draft_id": "d58556118",
-   "title": "СП России и Зимбабве обнаружило золоторудные проявления",
+   "draft_id": "d52985502",
+   "title": "Мосбиржа проводит дискретный аукцион по акциям группы ЛСР",
    "date": "2026-10-28",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28261185"
+     "https://tass.ru/ekonomika/28261411"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10526008",
+   "title": "Volga опередила «Москвич» по продажам в октябре",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2191988/2026-10-28/volga-operedila-moskvich-po-prodazham-v-oktiabre"
     ]
    ],
    "sum": null,
@@ -405,20 +374,52 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ГМК и добыча",
+   "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Volga обогнала «Москвич» по продажам в октябре — с отрывом п» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d53536835",
-   "title": "Мосбиржа проводит дискретный аукцион по акциям ЛСР",
+   "draft_id": "d52884086",
+   "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
    "date": "2026-10-28",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261028/birzha-874694079.html"
+     "https://1prime.ru/20261028/alros-874698684.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Алроса» выставила на аукцион 49% акций ГМК «Тимир»» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d62284833",
+   "title": "Мосбиржа проводит дискретный аукцион по сильно дорожающим акциям ЛСР",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261028/birzha-2127512019.html"
     ]
    ],
    "sum": null,
@@ -440,128 +441,16 @@
    ]
   },
   {
-   "draft_id": "d91885273",
-   "title": "РЖД выставили на аукцион 25% плюс одну акцию «Первой нерудной компании»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261028/rzhd-874693669.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45220960",
-   "title": "В Госдуме порассуждали об участии Европы в новом раунде переговоров по Украине",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/28/v-gosdume-porassuzhdali-ob-uchastii-evropy-v-novom-raunde-peregovorov-po-ukraine/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15227489",
-   "title": "Продажи новых машин в России пошли вверх",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/28/prodazhi-novyh-mashin-v-rossii-poshli-vverh/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43527624",
-   "title": "В российском регионе выставили на продажу редкий корейский седан",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/28/v-rossiyskom-regione-vystavili-na-prodazhu-redkiy-koreyskiy-sedan/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25812282",
-   "title": "В Тюмени продают огромные промбазы за сотни миллионов рублей",
+   "draft_id": "d36823198",
+   "title": "Двенадцатилетняя девочка подожгла заправку и машину полиции после попытки купить вейп",
    "date": "2026-10-28",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053139726"
+     "https://ura.news/news/1053139741"
     ]
    ],
-   "sum": "250 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -576,17 +465,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d78864657",
-   "title": "Под Волгоградом администрация райцентра пытается продать битый внедорожник с пробегом под миллион километров",
+   "draft_id": "d73776264",
+   "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
    "src": [
     [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/10/28/76729258/"
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
     ]
    ],
    "sum": null,
@@ -605,6 +495,45 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23503772",
+   "title": "Прикамец купил в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/criminal/2026/10/28/76728878/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-28",
+     "title": "Сделка завершена",
+     "note": "Парня задержала полиция",
+     "source": [
+      "web:59.ru",
+      "https://59.ru/text/criminal/2026/10/28/76728878/"
+     ]
+    }
+   ],
+   "buyer_name": "Прикамец",
+   "asset": "в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Прикамец",
+    "asset": "в интернете рецепт на лекарство и пришел с ним в аптеку — ему грозит реальный срок",
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
