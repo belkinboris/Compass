@@ -4619,7 +4619,10 @@ def deal_full_analysis(deal_id: str, request: Request):
     deal = dict(deal, id=deal_id)
     facts_text = deal_analysis.facts_text(
         deal, deal_catalog.load_deals(), lambda cid: (get_company_profile(cid) or {}).get("name"))
-    key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
+    # Разбор — по базе И по интернету (партнер, 28 октября 2026): выдача
+    # поиска по сделке подкладывается в сводку после части «ИЗ БАЗЫ», так что
+    # числа из нее проходят ту же проверку. Кэш — на день: выдача меняется.
+    key = hashlib.sha1((facts_text + datetime.utcnow().date().isoformat()).encode("utf-8")).hexdigest()
     hit = _analysis_cache.get(deal_id)
     if hit and hit["key"] == key:
         return hit["value"]
@@ -4628,8 +4631,15 @@ def deal_full_analysis(deal_id: str, request: Request):
     ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
     if not _estimate_allowed(ip or ""):
         return {"available": False, "reason": "rate_limited"}
+    web_results: list = []
+    if _yandex_ready():
+        try:
+            web_results = yandex_search(str(deal.get("title") or "")[:120], config=SearchConfig.from_env(), client=_http)[:6]
+        except Exception as exc:  # noqa: BLE001 — разбор по базе лучше, чем ничего
+            logger.info("разбор сделки %s: поиск не удался (%s)", deal_id, exc)
+    facts_text = facts_text + deal_analysis.web_block(web_results)
     try:
-        text = call_llm(deal_analysis.SYSTEM, facts_text, max_tokens=900, deadline=time.monotonic() + 45)
+        text = call_llm(deal_analysis.SYSTEM, facts_text, max_tokens=1100, deadline=time.monotonic() + 50)
     except Exception as e:  # noqa: BLE001
         logger.warning("разбор сделки %s: модель недоступна: %s", deal_id, e)
         return {"available": False, "reason": "model_unavailable"}
@@ -4639,7 +4649,7 @@ def deal_full_analysis(deal_id: str, request: Request):
     if not paragraphs:
         logger.info("разбор сделки %s: после проверки чисел ничего не осталось", deal_id)
         return {"available": False, "reason": "filtered"}
-    value = {"available": True, "paragraphs": paragraphs}
+    value = {"available": True, "paragraphs": paragraphs, "sources": deal_analysis.sources(web_results)}
     _analysis_cache[deal_id] = {"key": key, "value": value}
     return value
 

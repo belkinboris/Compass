@@ -144,6 +144,27 @@ def test_full_analysis_drops_numbers_taken_from_the_card():
     assert out == ['Рынок вокруг. В отрасли 41 сделка.']
 
 
+def test_full_analysis_reads_the_internet_too():
+    """Партнер, 28 октября 2026: «обязательно делать анализ во всем интернете».
+    Выдача поиска идет в сводку отдельной частью после базы: числа из нее
+    проходят проверку, издание называется по ссылке, абзац «В интернете.»
+    — отдельный, источники — списком без повторов по сайту."""
+    import deal_analysis as da, price_estimate as pe
+    from yandex_search import SearchResult
+    from datetime import datetime
+    hits = [SearchResult('Завод продан', 'https://www.kommersant.ru/doc/1', 'Сумма 2 млрд ₽', datetime(2026, 10, 27)),
+            SearchResult('Еще', 'https://kommersant.ru/doc/2', 'повтор', None)]
+    block = da.web_block(hits)
+    assert block.startswith('\n\nИЗ ИНТЕРНЕТА') and '(2026-10-27)' in block and 'Источник: https://www.kommersant.ru/doc/1' in block
+    assert da.web_block([]) == ''
+    assert da.sources(hits) == [{'title': 'Завод продан', 'url': 'https://www.kommersant.ru/doc/1', 'host': 'kommersant.ru'}]
+    facts = 'КАРТОЧКА (читатель это уже видит):\nДоля 12,3%\n\nИЗ БАЗЫ КОМПАСА (на карточке этого нет):\nВ отрасли 41 сделка' + block
+    assert 'Сумма 2 млрд ₽' in da.base_part(facts)
+    out = pe.clean_answer('В интернете. Сумма 2 млрд ₽ (Коммерсантъ).\n\nЧто может быть дальше. Доля 12,3% уйдет.', da.base_part(facts), 1)
+    assert out == ['В интернете. Сумма 2 млрд ₽ (Коммерсантъ).']
+    assert [p['lead'] for p in da.split_answer('Для покупателя. Раз.\n\nВ интернете. Два.')] == ['Для покупателя.', 'В интернете.']
+
+
 def test_card_revenue_feeds_ps_and_comparables_keep_the_scale():
     """5Yes! (27.10.2026): отчетности нет, но карточка называет выручку 521 млн ₽ —
     P/S считается по ней; Росспиртпром за 8,3 млрд ₽ в «похожие» не попадает

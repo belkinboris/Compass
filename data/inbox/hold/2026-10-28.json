@@ -2,13 +2,13 @@
  "made": "2026-10-28",
  "drafts": [
   {
-   "draft_id": "d42276510",
-   "title": "США продлили лицензию на операции по продаже активов «Лукойла»",
-   "date": "2026-10-21",
+   "draft_id": "d33133865",
+   "title": "Власти Тайваня в угоду США распродают главные отрасли, заявили в Китае",
+   "date": "2026-10-28",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053138001"
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/kitay-874686766.html"
     ]
    ],
    "sum": null,
@@ -30,13 +30,41 @@
    ]
   },
   {
-   "draft_id": "d74027021",
-   "title": "США продлили лицензию для продажи зарубежных активов «Лукойла» до 21 ноября",
-   "date": "2026-10-21",
+   "draft_id": "d64899408",
+   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
+   "date": "2026-10-28",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/21/1239042-prodlili-litsenziyu"
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/nedvizhimost-874685408.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45389767",
+   "title": "Миллиардер Гомон стал владельцем кластера «Артмуза» в Петербурге",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261028/artmuza-2127458071.html"
     ]
    ],
    "sum": null,
@@ -53,186 +81,79 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «США продлили лицензию на операции по продаже активов «Лукойл» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d73514423",
-   "title": "Минфин США продлил лицензию по продаже зарубежных активов «Лукойла»",
-   "date": "2026-10-21",
+   "draft_id": "d24575594",
+   "title": "Volga обогнала «Москвич» по продажам в октябре — с отрывом почти в 100 автомобилей",
+   "date": "2026-10-28",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2188239/2026-10-21/minfin-ssha-prodlil-litcenziiu-po-prodazhe-zarubezhnykh-aktivov-lukoila"
+     "web:rb.ru",
+     "https://rb.ru/news/volga-obognala-moskvich-po-prodazham-v-oktyabre-s-otryvom-pochti-v-100-avtomobilej/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «США продлили лицензию на операции по продаже активов «Лукойл» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d75291808",
-   "title": "Американская компания Anthropic подала документы для проведения IPO",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-26",
-     "title": "Переговоры",
-     "note": "Американская компания Anthropic, разработчик искусственного интеллекта Claude, подала заявку для проведения первичного публичного размещения акций (IPO) в США . Об этом 26 октября сообщило агентство Bloomberg. Компания планирует разместить акции на бирже…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d50807881",
-   "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/26/anthropics-ipo-filing-reveals-its-strategy-for-keeping-enterprise-customers-hooked/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d74292177",
-   "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/27/10/2026/6ae0413319b3f291b6cc36cb"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d19448211",
-   "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
-    ]
-   ],
-   "sum": "5,8 млн ₽",
-   "type": "Продажа с торгов",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
-     "date": "2026-10-27",
+     "date": "2026-10-28",
      "title": "Сделка завершена",
-     "note": "В Люберцах Московской области на торгах реализовали земельный участок.",
+     "note": "С 5 по 25 октября 2026 года в России продали 793 автомобиля Volga против 694 машин «Москвич», сообщил директор агентства «Автостат» Сергей Целиков. По его словам, до сентября «Москвич» стабильно опережал конкурента, но после приостановки программы…",
      "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+      "web:rb.ru",
+      "https://rb.ru/news/volga-obognala-moskvich-po-prodazham-v-oktyabre-s-otryvom-pochti-v-100-avtomobilej/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "участок",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "участок",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d41974895",
+   "draft_id": "d68764373",
+   "title": "Более 120 объектов недвижимости иеговистов* перешли в собственность России",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261028/rossija-2127462955.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42038462",
    "title": "Anthropic приостановила обучение новой ИИ-модели из-за угроз безопасности в преддверии IPO",
    "date": "2026-10-27",
    "src": [
@@ -255,188 +176,13 @@
    },
    "ind": "Искусственный интеллект",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d83317718",
-   "title": "Площади нового ресторана с коми-пермяцким названием продают за десятки миллионов рублей",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139432"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92131466",
-   "title": "«Уралхим» готов к созданию совместных предприятий в Африке",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28258581"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47873910",
-   "title": "В Тюмени распродают песчаные карьеры",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139458"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17815721",
-   "title": "В очередной раз не получилось: в Тюмени не смогли продать землю у объездной",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/realty/2026/10/27/76727778/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13443805",
-   "title": "Anthropic: компания, которую нельзя купить",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1367410.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d82302572",
-   "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ae17caffe8cbef4c5193423"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d61079013",
+   "draft_id": "d45803197",
    "title": "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more",
    "date": "2026-10-28",
    "src": [
@@ -463,11 +209,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic приостановила обучение новой ИИ-модели из-за угроз» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d60856057",
+   "draft_id": "d71643317",
    "title": "Who’s really in charge at Anthropic after the IPO?",
    "date": "2026-10-27",
    "src": [
@@ -494,191 +240,11 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic приостановила обучение новой ИИ-модели из-за угроз» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d91882624",
-   "title": "В Пермском крае за десятки миллионов рублей продают бывший завод ЖБК",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139574"
-    ]
-   ],
-   "sum": "50 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60268878",
-   "title": "Возле надписи «Енисейская Сибирь» выставили на продажу федеральный участок",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/realty/2026/10/28/76728193/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46906101",
-   "title": "В «Читай-городе» раскрыли траты на уничтожение запрещенных к продаже книг",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/media/news/2026/10/28/1240684-raskrili-trati"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91956524",
-   "title": "Wildberries добавил вишлисты — можно составить подборку товаров и собрать деньги на их покупку",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/marketplace/3220608-wildberries-vishlisty-sbor-sredstv-na-pokupki?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d63845990",
-   "title": "Риелтор Жарова-Райт считает, что «зависший» люкс надо продавать по цене «бетона»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28260365"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Строительство",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11814572",
-   "title": "Продажа iPhone в Москве обернулась вымогательством сотен тысяч рублей",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2191847/2026-10-28/prodazha-iphone-v-moskve-obernulas-vymogatelstvom-soten-tysiach-rublei"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-28",
-     "title": "Переговоры",
-     "note": "В Москве продажа смартфона на популярном сервисе объявлений закончилась для местного жителя вымогательством крупных сумм и криптовалюты. Об этом 28 октября сообщил источник «Известий». 20-летний москвич выставил на продажу iPhone 15 Pro. После доставки…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2191847/2026-10-28/prodazha-iphone-v-moskve-obernulas-vymogatelstvom-soten-tysiach-rublei"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48553697",
+   "draft_id": "d56978593",
    "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
    "date": "2026-10-28",
    "src": [
@@ -706,13 +272,321 @@
    ]
   },
   {
-   "draft_id": "d39133556",
-   "title": "Минеральный источник продают на берегу Инзера за 3,6 миллиона рублей — в живописной деревне",
+   "draft_id": "d26060617",
+   "title": "«Пятерочка» начала продавать аптечные товары на отдельных стойках",
    "date": "2026-10-28",
    "src": [
     [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/economics/2026/10/28/76728490/"
+     "web:retailer.ru",
+     "https://retailer.ru/pjaterochka-nachala-prodavat-aptechnye-tovary-na-otdelnyh-stojkah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69230498",
+   "title": "Онлайн-продажи аптечных товаров вырастут на 70% к 2028 году",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/onlajn-prodazhi-aptechnyh-tovarov-vyrastut-na-70-k-2028-godu/"
+    ]
+   ],
+   "sum": "668 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78389880",
+   "title": "РЖД объявили открытый аукцион по продаже акций ПНК",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28261557"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45705418",
+   "title": "Шохин поддержал идею продажи США «Северных потоков»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28261505"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58556118",
+   "title": "СП России и Зимбабве обнаружило золоторудные проявления",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28261185"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53536835",
+   "title": "Мосбиржа проводит дискретный аукцион по акциям ЛСР",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/birzha-874694079.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91885273",
+   "title": "РЖД выставили на аукцион 25% плюс одну акцию «Первой нерудной компании»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261028/rzhd-874693669.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45220960",
+   "title": "В Госдуме порассуждали об участии Европы в новом раунде переговоров по Украине",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/28/v-gosdume-porassuzhdali-ob-uchastii-evropy-v-novom-raunde-peregovorov-po-ukraine/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15227489",
+   "title": "Продажи новых машин в России пошли вверх",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/28/prodazhi-novyh-mashin-v-rossii-poshli-vverh/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43527624",
+   "title": "В российском регионе выставили на продажу редкий корейский седан",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/28/v-rossiyskom-regione-vystavili-na-prodazhu-redkiy-koreyskiy-sedan/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25812282",
+   "title": "В Тюмени продают огромные промбазы за сотни миллионов рублей",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139726"
+    ]
+   ],
+   "sum": "250 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78864657",
+   "title": "Под Волгоградом администрация райцентра пытается продать битый внедорожник с пробегом под миллион километров",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/10/28/76729258/"
     ]
    ],
    "sum": null,
