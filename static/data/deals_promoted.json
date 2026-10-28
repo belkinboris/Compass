@@ -266769,7 +266769,8 @@
   "g6c2af36f": null,
   "gcc75fe11": null,
   "g601b6589": null,
-  "g55008cf1": null
+  "g55008cf1": null,
+  "g172b1374": 229
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -271446,7 +271447,22 @@
      "kind": "negotiations"
     }
    ]
+  },
+  "g172b1374": {
+   "sum": "1,9 млрд ₽",
+   "seller": "РЖД",
+   "target": "gbcf3f414",
+   "asset": "25% плюс 1 акция АО «Первая нерудная компания»",
+   "status": "Обсуждается",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-10-28T07:46:11+00:00"
+ "telegram_last_post_at": "2026-10-28T13:30:59+00:00"
 }
