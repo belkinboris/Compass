@@ -1060,7 +1060,7 @@ def test_deal_card_shows_ev_revenue_line_for_qualifying_target(browser, base_url
         pg.on("pageerror", lambda e: errors.append(str(e)))
         pg.goto(base_url + "/#/deal/citibank", wait_until="networkidle")
         pg.wait_for_timeout(600)
-        pg.click('[data-l="eco"]')  # рендерит #deal-fns — до этого его нет в DOM (вкладка "Обзор" по умолчанию)
+        pg.click('[data-l="fin"]')  # рендерит #deal-fns — до этого его нет в DOM (вкладка "Обзор" по умолчанию)
         pg.wait_for_timeout(400)
         import facts
         deal = {"type": "M&A", "status": "Закрыта", "date": "2024-06-01", "sum": "1 000 млн ₽",
@@ -1478,10 +1478,9 @@ def test_regulatory_analyzer_is_hidden(page, base_url):
     assert any_id, "в базе нет карточек для проверки"
     visit(page, base_url, "#/deal/" + any_id)
     assert page.locator("[data-reg-open]").count() == 0, "кнопка анализатора все еще на экране"
-    # С 8 сентября 2026 кнопка «Юрист» есть не у каждой карточки (линза
-    # открывается только согласованиями, условиями и консультантами) — нет
-    # кнопки, нет и панели; есть кнопка — заходим и проверяем.
-    page.evaluate("(() => { const b = document.querySelector('[data-l=\"law\"]'); if (b) b.click(); })()")
+    # С 28 октября 2026 юридические поля живут на «Обзоре» (вкладки «Юрист» нет);
+    # вкладка «Финансы» — там панели тоже быть не должно.
+    page.evaluate("(() => { const b = document.querySelector('[data-l=\"fin\"]'); if (b) b.click(); })()")
     page.wait_for_timeout(400)
     assert page.locator("#reg-panel").count() == 0, "панель анализатора все еще на экране"
     assert not page.crashes, f"падения на карточке: {page.crashes[:3]}"
@@ -2928,7 +2927,7 @@ def test_deal_tab_sections_sit_in_their_own_boxes(page, base_url):
     deal_id = "g3cc2009d" if "g3cc2009d" in ids else base["deals"][0]["id"]
     visit(page, base_url, "#/deal/" + deal_id)
     page.wait_for_selector("#facts", timeout=15000)
-    for lens in ("eco", "law"):
+    for lens in ("fin",):
         if not page.locator(f'[data-l="{lens}"]').count():
             continue
         page.click(f'[data-l="{lens}"]')
@@ -3024,9 +3023,7 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
     # плашка темы объясняет, что это за кнопка
     chips = page.locator(".theme-chips").text_content()
     assert "Еще сделки этого же типа" in chips and "→" not in chips
-    # вкладка «Юрист»: расчеты по облигациям ушли к экономисту, условия — наш текст без «как предполагал „Ъ“»
-    page.click(".lens [data-l='law']")
-    page.wait_for_timeout(400)
+    # условия сделки — на «Обзоре» (с 28 октября 2026): наш текст без «как предполагал „Ъ“»
     law = page.inner_text("#app")
     assert "как и предполагал" not in law.lower()
     assert "Сделка не предусматривает соглашений об обратном выкупе" in law
@@ -3185,16 +3182,16 @@ def test_deal_lenses_split_advisors_by_kind(page, base_url):
     соответствовало» (владелец, 31 августа 2026). Один список на карточку,
     по вкладкам — по виду консультанта, а не по полю, где он лежал."""
     visit(page, base_url, "#/deal/g64a94e27")
-    page.click(".lens [data-l='law']")
-    page.wait_for_timeout(400)
+    # «Обзор» (с 28 октября 2026 вкладки «Юрист» нет): команда сделки по сторонам — и юристы, и финансисты
     law = page.locator("#app").text_content()
     assert "LEVEL Legal Services" in law and "АЛРУД" in law
-    assert "Aspring" not in law and "Алор" not in law, "финансовые консультанты попали к юристу"
-    page.click(".lens [data-l='eco']")
+    assert "Aspring Capital" in law and "Алор брокер" in law
+    page.click(".lens [data-l='fin']")
     page.wait_for_timeout(400)
-    eco = page.locator("#app").text_content()
+    eco = page.locator("#facts").text_content()
     assert "Aspring Capital" in eco and "Алор брокер" in eco
     assert "Финансовые консультанты" in eco
+    assert "LEVEL Legal" not in eco, "юридические консультанты попали в «Финансы»"
     # юридическая фирма у экономиста может встретиться только в списке источников, не в показателях
     assert "Юридический консультант" not in eco
 
@@ -3603,7 +3600,7 @@ def test_bank_profile_names_the_legal_entity_it_shows(page, base_url):
 
 
 def _open_economist_lens(pg, base_url):
-    """Открыть карточку с длинными абзацами и перейти на вкладку «Экономист».
+    """Открыть карточку с длинными абзацами: с 28 октября 2026 «Цель сделки» — на «Обзоре».
     Карточка выбирается по данным, а не по вбитому id: сделки сливаются и
     исчезают, а тест должен пережить это."""
     pg.goto(base_url + "/#/deals", wait_until="networkidle")
@@ -3613,10 +3610,6 @@ def _open_economist_lens(pg, base_url):
     assert deal_id, "в базе не нашлось сделки с длинным абзацем «Цель сделки»"
     pg.goto(base_url + "/#/deal/" + deal_id, wait_until="networkidle")
     pg.wait_for_timeout(900)
-    for btn in pg.locator(".lens button").all():
-        if "эконом" in (btn.text_content() or "").strip().lower():
-            btn.click()
-            break
     pg.wait_for_timeout(500)
     return deal_id
 
@@ -4335,14 +4328,13 @@ def test_deal_team_has_other_column_without_data_source_notes(page, base_url):
     assert orion.startswith("юридический") and "Правовая проверка" not in orion, orion
 
 
-def test_economist_lens_shows_extra_context_without_a_blank_gap(page, base_url):
+def test_overview_shows_extra_context_without_a_blank_gap(page, base_url):
     """Блок «Дополнительный контекст» вставляется после отрисовки страницы с
     классом reveal и оставался с opacity:0 — на карточке «Ленты»/«Марии-Ра»
     это читалось как огромный пустой провал (владелец, 3 октября 2026)."""
     visit(page, base_url, "#/deal/gb7ea4703")
     page.wait_for_selector("#facts")
-    page.click(".lens [data-l='eco']")
-    page.wait_for_timeout(700)
+    page.wait_for_timeout(700)  # с 28 октября 2026 «Дополнительный контекст» и «Цель сделки» — на «Обзоре»
     assert page.locator(".extra-info").count() == 1
     assert page.evaluate("() => getComputedStyle(document.querySelector('.extra-info')).opacity") == "1"
     gaps = page.evaluate("""() => { const k=[...document.getElementById('facts').children]; const out=[];
@@ -4729,10 +4721,10 @@ def test_economist_does_not_repeat_the_overview_sum(page, base_url):
                 and norm(d["eco"].get("sum")) == norm(d.get("sum")) and norm(d["eco"].get("context")))
     page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
     page.wait_for_selector("#facts", timeout=15000)
-    page.get_by_text("Экономист", exact=True).first.click()
+    page.get_by_text("Финансы", exact=True).first.click()
     page.wait_for_timeout(500)
     text = page.inner_text("#facts")
-    assert "Сумма сделки" not in text and deal["sum"] not in text.split("Контекст")[0]
+    assert "Сумма сделки" not in text and deal["sum"] not in text
 
 
 def test_deal_card_never_shows_raw_fact_quotes(page, base_url):
@@ -5048,7 +5040,7 @@ def test_sector_multiples_table_on_analytics_and_deal_card(browser, base_url):
             assert pg.evaluate(
                 "document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0, width
             pg.goto(base_url + "/#/deal/" + deal_id, wait_until="networkidle")
-            pg.click("[data-l='eco']")
+            pg.click("[data-l='fin']")
             pg.wait_for_selector(".deal-mult", timeout=15000)
             card = pg.inner_text(".deal-mult")
             assert "оценка" in card.lower() and "не применим" in card and "не EV/EBITDA" in card
