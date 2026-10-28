@@ -8690,3 +8690,20 @@ def test_dropping_a_card_born_from_the_owners_click_tells_him_why():
     t2 = drop_pending.closure_text(card, 'не сделка: статистика продаж')
     assert 'пришлось снять' in t2 and 'статистика продаж' in t2
     assert drop_pending.closure_text({'id': 'g2', 'title': 'Т'}, 'дубль g2f22b1dc') is None
+
+
+def test_draft_reads_became_co_owner_as_a_purchase():
+    """«Коммерсантъ» о Baggins Coffee (28 октября 2026): «Фонд «Бумеранг Капитал»
+    стал совладельцем Baggins Coffee» — разбор не видел ни сторон, ни предмета,
+    и сделка ждала нажатия владельца в «сомнительных», пока конкурент выпустил
+    пост. Подлежащее — покупатель, хвост — предмет; «у Y сменился владелец» —
+    предмет без сторон."""
+    import draft
+    buyer, asset, seller, _ = draft.guess_parties('Фонд «Бумеранг Капитал» стал совладельцем Baggins Coffee')
+    assert asset == 'Baggins Coffee' and buyer and 'Бумеранг' in buyer and seller is None
+    buyer, asset, _s, _ = draft.guess_parties('«Бумеранг Капитал» и сооснователь «Цех 85» стали совладельцами Baggins Coffee')
+    assert asset == 'Baggins Coffee' and buyer
+    _b, asset, _s, _ = draft.guess_parties('У сети кофеен Baggins Coffee сменился владелец')
+    assert asset and 'Baggins Coffee' in asset
+    # отрицание — не сделка
+    assert draft.guess_parties('Фонд не стал совладельцем Baggins Coffee')[1] is None

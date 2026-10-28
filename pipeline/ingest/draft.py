@@ -314,6 +314,14 @@ FROM_INVESTOR = re.compile(r'\bот\s+((?:[а-яё]+\s+){0,2}[«"А-ЯЁA-Z][^.;
 LOOKS_LIKE_NAME = re.compile(r'[«"А-ЯЁA-Z0-9]')
 
 SELL_VERB = re.compile(r'\b(?:прода(?:л[аио]?|ет|ет|ст)|реализовал[аи]?)\b', re.I)
+# «Фонд X стал совладельцем Y», «X и Z стали совладельцами Y», «X вошел в
+# капитал Y» — покупка, где глагола покупки нет: подлежащее — покупатель,
+# хвост — предмет. 28 октября 2026: так написал «Коммерсантъ» о Baggins
+# Coffee, разбор не нашел ни сторон, ни предмета, новость ушла в
+# «сомнительные» и ждала нажатия владельца, пока конкурент уже выпустил пост.
+OWNER_VERB = re.compile(r'\b(?:стал[аио]?|становится|станет|стали)\s+(?:со)?владельц(?:ем|ами)\s+|\bвош(?:ел|ла|ли)\s+в\s+капитал\s+', re.I)
+# «У сети кофеен Y сменился владелец» — предмет назван, стороны — нет.
+OWNER_CHANGED = re.compile(r'^\s*у\s+(.+?)\s+сменил(?:ся|ись)\s+(?:владел\w+|собственник\w*|акционер\w*)', re.I)
 # «X рассматривает уход из России» — X продает свой российский бизнес, даже
 # если слова «продажа» в заголовке нет (OTP Bank, 28 сентября 2026: три
 # издания, ни один заголовок не разобрался, сделку мы узнали от конкурента
@@ -808,7 +816,9 @@ def guess_parties(title):
     title = re.sub(r'\s+', ' ', str(title or '')).strip()
     buyer = asset = seller = buyer_hint = None
 
-    m = _first_affirmative(BUY_VERB, title) or _first_affirmative(BUY_NOUN, title)
+    m = _first_affirmative(BUY_VERB, title) or _first_affirmative(BUY_NOUN, title) \
+        or _first_affirmative(OWNER_VERB, title)
+    changed = OWNER_CHANGED.search(title)
     if m:
         head = title[:m.start()].strip()
         if head and len(head) < 70:
@@ -819,6 +829,8 @@ def guess_parties(title):
             seller = _named(clean_name(u.group(1)))
             tail = tail[:u.start()]
         asset = clean_name(LEADING_SHARE.sub('', tail.strip()))
+    elif changed:
+        asset = clean_name(changed.group(1))
     elif _first_affirmative(INVEST_VERB, title):
         m = _first_affirmative(INVEST_VERB, title)
         head = title[:m.start()].strip()
