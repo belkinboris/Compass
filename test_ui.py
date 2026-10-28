@@ -3189,9 +3189,8 @@ def test_deal_lenses_split_advisors_by_kind(page, base_url):
     page.click(".lens [data-l='fin']")
     page.wait_for_timeout(400)
     eco = page.locator("#facts").text_content()
-    assert "Aspring Capital" in eco and "Алор брокер" in eco
-    assert "Финансовые консультанты" in eco
-    assert "LEVEL Legal" not in eco, "юридические консультанты попали в «Финансы»"
+    # «Финансы» — только деньги (владелец, 28 октября 2026): консультанты любого вида — в «Команде сделки» на «Обзоре»
+    assert "Aspring Capital" not in eco and "LEVEL Legal" not in eco, "консультанты попали в «Финансы»"
     # юридическая фирма у экономиста может встретиться только в списке источников, не в показателях
     assert "Юридический консультант" not in eco
 

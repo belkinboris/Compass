@@ -6659,8 +6659,7 @@ const ecoHasContent = d => {
 // Денежные поля вкладки «Финансы» (без «Цели сделки» и «Контекста» — они на «Обзоре»).
 const finHasContent = d => {
   const e = d.eco || {};
-  return hasFact(e.sum) || hasFact(e.share) || hasFact(e.val) || hasFact(e.target_fin) ||
-         hasFact(e.fin) || hasFact(e.finadv) || financialAdvisors(d).length > 0;
+  return hasFact(e.sum) || hasFact(e.val) || hasFact(e.target_fin) || hasFact(e.fin);
 };
 /* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
    пуста, юристу все равно нужны стороны, предмет и статус, а не пустой экран. */
@@ -7065,7 +7064,7 @@ function renderDeal(id, qs, previewCard){
      текущая, и что значит приглушенная кнопка. */
   const LENS_HINT = {
     overview: "Обзор: стороны, условия и согласования, консультанты, контекст сделки.",
-    fin: "Финансы: сумма и оценка, показатели сторон, отчетность покупаемой компании, покупателя и продавца.",
+    fin: "Финансы: оценка, показатели из источников, форма расчетов, мультипликаторы, отчетность покупаемой компании, покупателя и продавца.",
   };
   // Раньше пустая вкладка оставалась видна, приглушенной, и подпись объясняла
   // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
@@ -7412,8 +7411,6 @@ function renderDeal(id, qs, previewCard){
     const eco = d.eco || {}, law = d.law || {};
     const extraBlock = extraHtml(d);
     const sameSum = (a,b) => String(a||"").replace(/\s+/g,"").toLowerCase() === String(b||"").replace(/\s+/g,"").toLowerCase();
-    const finAdvRow = specRow(financialAdvisors(d).length>1?"Финансовые консультанты":"Финансовый консультант",
-        financialAdvisors(d).length ? financialAdvisors(d).map(it=>esc(it.name)+(it.note?" — "+esc(it.note):"")).join("; ") : eco.finadv);
     /* Заметки о работе юридических консультантов (что именно вели) — под
        «Командой сделки»: раньше это были карточки вкладки «Юрист». Фирма без
        заметки в команде уже названа, карточка ей не нужна. */
@@ -7422,11 +7419,18 @@ function renderDeal(id, qs, previewCard){
     /* Строки обзора, которые раньше жили в «Экономисте» и «Юристе»: ничего не
        теряется — согласования и условия, цель и контекст идут сразу за фактами
        структуры. */
+    /* «Предмет / доля» — на «Обзоре»: это про стороны и структуру, а не про деньги.
+       Схема уже показывает короткую долю (до 40 знаков) — тогда строка не нужна;
+       длинный текст («50% выкупил фонд…, остальные 50% получил…») — строкой. */
+    const shareRow = (hasFact(eco.share) && String(eco.share).length >= 40 && assetNamed) ? specRow("Предмет / доля", eco.share) : "";
     const narrativeRows = [
+      shareRow,
       specRow("Согласования", law.appr),
       para("Условия сделки", law.terms),
       para("Цель сделки", eco.rationale),
       paraCtx("Контекст", eco.context),
+      // Финансовый консультант текстом из карточки — только если «Команда сделки» его не знает.
+      financialAdvisors(d).length ? "" : specRow("Финансовый консультант", eco.finadv),
     ];
     if(lens==="fin"){
       /* «Финансы»: своя цифра о цене (диапазон, начальная цена лота — та же,
@@ -7434,16 +7438,16 @@ function renderDeal(id, qs, previewCard){
          доля, оценка, показатели из статьи, форма расчетов, финансовые
          консультанты; ниже — мультипликаторы и отчетность каждой стороны. */
       const finHero = hasFact(eco.sum) && (isListing(d) || !sameSum(eco.sum, d.sum)) ? hero(isListing(d)?"Начальная цена лота":"Сумма сделки", eco.sum) : "";
+      /* Только деньги (владелец, 28 октября 2026: «в блоке финансы нужно было
+         оставить только сугубо финансовый блок»): доля и консультанты — на «Обзоре». */
       const finSpec = specBlock([
-        specRow("Предмет / доля", eco.share),
         specRow("Оценка и дисконт", eco.val),
         specRow(targetMetricLabel(kindKey), eco.target_fin),
         specRow("Форма расчетов", eco.fin),
-        finAdvRow,
       ]);
       f.innerHTML = `
       ${finHero}
-      ${finSpec || (finHero ? "" : `<p class="fact-note">Сумма, доля, оценка и финансовый консультант публично не раскрывались. Ниже — отчетность сторон сделки.</p>`)}
+      ${finSpec || (finHero ? "" : `<p class="fact-note">Сумма, оценка и форма расчетов публично не раскрывались. Ниже — отчетность сторон сделки.</p>`)}
       <div id="deal-mult"></div>
       <div id="deal-fns"></div>`;
     }
