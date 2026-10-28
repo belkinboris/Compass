@@ -20,7 +20,9 @@ JOURNAL = ROADMAP[ROADMAP.index("## 5. Журнал работ"):]
 # Замер 20 сентября 2026 — 168 798 знаков после переноса закрытого в архив.
 # Запас взят небольшой намеренно: как только он выбран, это сигнал сдвинуть
 # журнал (`roadmap_archive.py --journal --write`), а не поднять потолок.
-ROADMAP_LIMIT = 200_000
+# 28 октября 2026: журнал держится за 1 день (roadmap_archive --journal), пишется
+# через journal_add.py без чтения файла; потолок опущен с 200 до 120 тыс.
+ROADMAP_LIMIT = 120_000
 # 24 сентября 2026 CLAUDE.md разнесен по месту чтения: 97 → 17 тыс. знаков.
 # Правило одной рутины живет в routines/, устройство подсистемы — в docs/.
 # Потолок взят с запасом под правила, нужные КАЖДОМУ прогону, — и только им.
@@ -161,7 +163,7 @@ def test_every_backlog_block_keeps_its_heading():
 def test_the_journal_in_the_main_file_is_short():
     days = sorted({m.group(1) for m in
                    re.finditer(r"^### (\d{4}-\d{2}-\d{2})", JOURNAL, re.M)})
-    assert len(days) <= 3, (
+    assert len(days) <= 2, (
         "в основном файле журнал за %d дней (%s…%s) — сдвиньте старые записи: "
         "python3 pipeline/roadmap_archive.py --journal --write; запись без строки "
         "«Знание: …» не уедет — сначала разнесите ее правило по документам"

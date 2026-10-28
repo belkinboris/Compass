@@ -18,8 +18,8 @@
   `pipeline/FACTS_READING_BRIEF.md`.
 - **Шаг 5, очередь аудита** — `docs/audit_queue.md` и
   `pipeline/audit_field_placement/READER_BRIEF_2026_09_21.md`.
-- **Шаг 6, бэклог** — PRODUCT_ROADMAP.md, раздел «4. Бэклог», блок G
-  целиком, не только первые пункты.
+- **Шаг 6, бэклог** — `python3 pipeline/roadmap_block.py G` (блок G
+  целиком, не только первые пункты; PRODUCT_ROADMAP.md целиком не читать).
 - **Правите аналитику, мультипликаторы, крупнейшие покупки** —
   `docs/analytics_acceptance.md`, и приёмка на живом сайте обязательна.
 - **Перед любой починкой** — `python3 pipeline/docs_budget.py --find
@@ -114,7 +114,7 @@
     рецепт в `READING_BRIEF.md`), коммит по-русски, `git push`. Тронули код
     — `python3 pipeline/release.py --write` (CLAUDE.md, «Работаем прямо в
     main»).
-11. Запись в журнал PRODUCT_ROADMAP.md (раздел 5, сверху) — что сделали и по
+11. Запись в журнал через `python3 pipeline/journal_add.py --file <запись> --write` (раздел 5, сверху) — что сделали и по
     какому уровню очереди; последняя строка — «Знание: …» (CLAUDE.md).
 
 ## Отчёт в консоль — последним шагом, всегда
