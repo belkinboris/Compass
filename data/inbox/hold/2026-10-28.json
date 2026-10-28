@@ -406,92 +406,7 @@
    ]
   },
   {
-   "draft_id": "d53513662",
-   "title": "Скелет динозавра «Джоди» продан на аукционе в Нью-Йорке за $47,3 млн",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062353"
-    ]
-   ],
-   "sum": "$47,3 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70916916",
-   "title": "Эмин Агаларов стал владельцем кинокомпании «АГ Филмс»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9062309"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61524015",
-   "title": "Цифра вместо недр: эксперты назвали IT наиболее перспективной отраслью для инвестиций в Африке",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/global-ideas/articles/2026/10/28/1240637-tsifra-vmesto-nedr"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d80564278",
+   "draft_id": "d82302572",
    "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
    "date": "2026-10-28",
    "src": [
@@ -521,92 +436,7 @@
    ]
   },
   {
-   "draft_id": "d41789821",
-   "title": "Около 100 млн рублей. Глава «Читай-города» рассказал о расходах на снятие с продажи определенных книг",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/28/76728144/"
-    ]
-   ],
-   "sum": "100 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23877335",
-   "title": "Исследование показало, сколько бургеров россиянин купит на среднюю зарплату",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/burgery-2127426730.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "на среднюю зарплату",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на среднюю зарплату",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d89530565",
-   "title": "Jio shares surge 21% in market debut after blockbuster India IPO",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/27/jio-shares-surge-21-in-market-debut-after-blockbuster-india-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d51486380",
+   "draft_id": "d61079013",
    "title": "VCs will make billions on Anthropic’s IPO, but Amazon is set to make much (much) more",
    "date": "2026-10-28",
    "src": [
@@ -637,7 +467,7 @@
    ]
   },
   {
-   "draft_id": "d71604528",
+   "draft_id": "d60856057",
    "title": "Who’s really in charge at Anthropic after the IPO?",
    "date": "2026-10-27",
    "src": [
@@ -668,37 +498,7 @@
    ]
   },
   {
-   "draft_id": "d85511034",
-   "title": "Мужчина попался на продаже угнанной из автосалона машины",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/28/muzhchina-popalsya-na-prodazhe-ugnannoy-iz-avtosalona-mashiny/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Автопром",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
-    "похоже на уже описанную сделку gb99354e2 (общие редкие слова: автоса, продаж) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d61538802",
+   "draft_id": "d91882624",
    "title": "В Пермском крае за десятки миллионов рублей продают бывший завод ЖБК",
    "date": "2026-10-28",
    "src": [
@@ -726,133 +526,7 @@
    ]
   },
   {
-   "draft_id": "d55093862",
-   "title": "Путин рассказал об инвестициях Катара в российские компании",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139567"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73740550",
-   "title": "Стало известно, когда в России начнется крупнейшая распродажа года",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139557"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18433746",
-   "title": "«Ломбард 888» приобрел сеть «Ломбардный дом» Статус сделки: 🟢 закрыта в октябре 2026 года. Об объекте сделки Сеть ломбардов «Ломбардный дом», включающая 36 отделений в нескольких регионах России. Горо",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7517"
-    ]
-   ],
-   "sum": null,
-   "type": "Финансирование · структурная сделка",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-27",
-     "title": "Сделка завершена",
-     "note": "«Ломбард 888» приобрел сеть «Ломбардный дом» Статус сделки: 🟢 закрыта в октябре 2026 года. Об объекте сделки Сеть ломбардов «Ломбардный дом», включающая 36 отделений в нескольких регионах России. Города присутствия приобретенной сети, юридическое лицо…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7517"
-     ]
-    }
-   ],
-   "buyer_name": "«Ломбард 888»",
-   "asset": "сеть «Ломбардный дом» Статус сделки: 🟢 закрыта в октябре 2026 года. Об объекте сделки Сеть ломбардов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Ломбард 888»",
-    "asset": "сеть «Ломбардный дом» Статус сделки: 🟢 закрыта в октябре 2026 года. Об объекте сделки Сеть ломбардов",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
-    "похоже на уже описанную сделку g55008cf1 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d40992779",
-   "title": "🎉 22 октября в нашем офисе состоялся семинар , посвящённый практике применения Федерального закона от 29 апреля 2008 г. № 57-ФЗ «О порядке осуществления иностранных инвестиций в хозяйственные общества",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/4109"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53444843",
+   "draft_id": "d60268878",
    "title": "Возле надписи «Енисейская Сибирь» выставили на продажу федеральный участок",
    "date": "2026-10-28",
    "src": [
@@ -880,13 +554,13 @@
    ]
   },
   {
-   "draft_id": "d13417986",
-   "title": "Роскошные шубы по соседству с масс-маркетом. Что еще продают в тюменском ТРЦ, который хотят перестроить — обзор",
+   "draft_id": "d46906101",
+   "title": "В «Читай-городе» раскрыли траты на уничтожение запрещенных к продаже книг",
    "date": "2026-10-28",
    "src": [
     [
-     "web:72.ru",
-     "https://72.ru/text/style/2026/10/28/76705403/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/media/news/2026/10/28/1240684-raskrili-trati"
     ]
    ],
    "sum": null,
@@ -901,7 +575,159 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91956524",
+   "title": "Wildberries добавил вишлисты — можно составить подборку товаров и собрать деньги на их покупку",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/marketplace/3220608-wildberries-vishlisty-sbor-sredstv-na-pokupki?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d63845990",
+   "title": "Риелтор Жарова-Райт считает, что «зависший» люкс надо продавать по цене «бетона»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28260365"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11814572",
+   "title": "Продажа iPhone в Москве обернулась вымогательством сотен тысяч рублей",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2191847/2026-10-28/prodazha-iphone-v-moskve-obernulas-vymogatelstvom-soten-tysiach-rublei"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-28",
+     "title": "Переговоры",
+     "note": "В Москве продажа смартфона на популярном сервисе объявлений закончилась для местного жителя вымогательством крупных сумм и криптовалюты. Об этом 28 октября сообщил источник «Известий». 20-летний москвич выставил на продажу iPhone 15 Pro. После доставки…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2191847/2026-10-28/prodazha-iphone-v-moskve-obernulas-vymogatelstvom-soten-tysiach-rublei"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48553697",
+   "title": "«Возможны недочеты по залу и технике»: в Волгограде выставлен на продажу бывший ресторан с видом на технопарк «Сталинград»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/10/28/76728594/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39133556",
+   "title": "Минеральный источник продают на берегу Инзера за 3,6 миллиона рублей — в живописной деревне",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/economics/2026/10/28/76728490/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
