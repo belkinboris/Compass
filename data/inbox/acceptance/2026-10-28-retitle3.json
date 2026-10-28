@@ -1,0 +1,8 @@
+[
+ {"id": "g172b1374",
+  "verdict": "accept",
+  "no_inn": {"target": "искали ИНН «Первая нерудная компания» в ЕГРЮЛ (egrul.nalog.ru — сброс соединения) и в rusprofile/list-org (403/защита от ботов) — непроверенным номером не заполняем"},
+  "checklist": {"sources": true, "parties": true, "asset": true, "title": true,
+                "why": true, "fields": true, "wording": true, "post": true, "status": true},
+  "notes": "заголовок перестроен по находке второго чтения (была лишь перестановка слов заголовка ПРАЙМ); причина отсутствия ИНН у цели восстановлена этим ответом"}
+]
