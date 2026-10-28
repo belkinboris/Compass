@@ -232270,6 +232270,116 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g98ad52f7",
+   "date": "2026-10-28",
+   "title": "АЛРОСА продает почти половину акций ГМК «Тимир» на торгах",
+   "ind": "ГМК и добыча",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28261803"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261028/alros-874698684.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "16,1 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Пакет — 4 653 847 обыкновенных акций, почти 49% капитала; задаток для участия в торгах — 161 млн рублей. Заявки принимают до 21 декабря, итоги подведут 14 января. «Тимир» — совместное предприятие «Евраза» и АЛРОСА; в ноябре президент Владимир Путин разрешил «Евразу» выкупить у материнской Evraz plc 93,2% «Распадской» и 51% самого «Тимира» — это отдельная, более ранняя сделка по той же компании.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "16,1 млрд ₽",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "seller": "АЛРОСА",
+   "sum_basis": "auction_start",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-10-28",
+   "seller_id": "g5a19c033",
+   "target": "gbdba5da3",
+   "asset": "49% акций ЗАО «ГМК «Тимир»»",
+   "accepted": "2026-10-28",
+   "accepted_notes": {
+    "notes": "заголовок перестроен — исходный был практически точной копией заголовка ПРАЙМ/ТАСС"
+   },
+   "proofread": "2026-10-28",
+   "second_read": "2026-10-28",
+   "post_preview": "<b>АЛРОСА продает почти половину акций ГМК «Тимир» на торгах</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> АЛРОСА\n<b>Предмет:</b> ГМК «Тимир» — совместное предприятие «Евраза» и АЛРОСА.\n<b>Начальная цена лота:</b> 16,1 млрд ₽\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://tass.ru/ekonomika/28261803\">ТАСС</a>\nЕще 1 источник — в карточке сделки\n\n#торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g98ad52f7\">карточке сделки</a>",
+   "added": "2026-10-28",
+   "facts": {
+    "stake": {
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "7b5f7046778e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "1ca0afb56068"
+    },
+    "date": {
+     "value": "2026-10-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f6bc4c29aeba"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a77897779205"
+    },
+    "target": {
+     "company_id": "gbdba5da3",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "6d1f26437edd"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
