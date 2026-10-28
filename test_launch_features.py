@@ -2464,6 +2464,41 @@ def _mod_env(monkeypatch):
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
 
 
+def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch, tmp_path):
+    """28 октября 2026 («Ломбард 888» ждал показа сутки): сайт показывает
+    принятую карточку сам, как только увидел ее в pending.json, помнит показ
+    и отдает память рутинам по /api/moderation/shown."""
+    _mod_env(monkeypatch)
+    card = {"id": "gshow1", "title": "«Ромашка» купила «Одуванчик»", "status": "Закрыта", "date": "2026-10-27",
+            "type": "M&A", "ind": "Ритейл", "buyer_name": "ООО «Ромашка»", "asset": "сеть «Одуванчик»",
+            "src": [["Ъ", "https://www.kommersant.ru/doc/1"]], "reviewed": "2026-10-27",
+            "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {},
+            "pending_since": "2026-10-27T17:00:00+00:00"}
+    unread = dict(card, id="gshow2", second_read=None)
+    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": [card, unread]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: (sent.append((method, payload)) or {"ok": True, "result": {"message_id": len(sent)}}))
+    out = main.console_show_ready_cards()
+    assert out == {"shown": 1}, out
+    texts = [p["text"] for _m, p in sent]
+    assert any("gshow1" in t for t in texts) and not any("gshow2" in t for t in texts), texts
+    assert any("Покупатель" in t for t in texts), "карточка без строк сторон"
+    assert any(p.get("parse_mode") == "HTML" for _m, p in sent), "проект поста без разметки"
+    # Второй раз та же карточка не уходит — сервер помнит показ.
+    assert main.console_show_ready_cards() == {"shown": 0}
+    r = client.get("/api/moderation/shown", params={"token": "тайна"})
+    assert r.status_code == 200 and "gshow1" in r.json()["cards"]
+    assert r.json()["cards"]["gshow1"].get("post_preview"), "снимок поста не сохранен"
+    # Рутина тоже может записать показ: карточки и ключи сырья.
+    r = client.post("/api/moderation/shown", json={"token": "тайна", "cards": [{"id": "gother"}], "raw": ["новостьпрозавод"]})
+    assert r.json()["recorded"] == 2
+    r = client.get("/api/moderation/shown", params={"token": "тайна"}).json()
+    assert "gother" in r["cards"] and "новостьпрозавод" in r["raw"]
+    assert client.get("/api/moderation/shown", params={"token": "чужой"}).status_code == 404
+
+
 def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
     """Кнопка под черновиком -> таблица -> API для рутины публикации.
 

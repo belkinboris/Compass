@@ -404,6 +404,7 @@ def _start_weekly_digest():
 # на девять минут). Почему так и что качается — docstring data_refresh.py.
 @app.on_event("startup")
 def _start_data_refresh():
+    data_refresh.ON_CHANGE.append(_console_after_refresh)
     data_refresh.start()
 
 
@@ -7130,6 +7131,151 @@ def access_decide(req: AccessDecideIn, db=Depends(get_db)):
 class ModerationConsumeIn(BaseModel):
     token: str = ""
     ids: list[int] = []
+
+
+# ---------------------------------------------------------------------------
+# Показ готовых карточек с сервера (28 октября 2026)
+#
+# Владелец: «почему нельзя по нахождении новости… сделать черновик карты,
+# пост и сразу отправить создателям?» Показ карточки в консоль был шагом
+# прогона притока, который агент четыре раза подряд не сделал («Ломбард 888»
+# ждал сутки, KNOWN_ISSUES 28 октября 2026). Сайт подтягивает pending.json
+# каждые несколько минут и видит каждую принятую карточку раньше любого
+# прогона — поэтому показывает ее сам: те же ворота (reviewed, accepted,
+# second_read), те же тексты и кнопки (send_drafts.card_message/
+# post_message_text), та же тема консоли. Что показано — помнит в AppSetting
+# (`console_shown:<id>`, снимок поста — `console_post_preview:<id>`), и
+# отдает рутинам по /api/moderation/shown, чтобы send_drafts не показал
+# карточку второй раз, а send_telegram отправил в канал ровно тот текст,
+# который видел владелец. Сырье (⚠️) сервер не показывает — его помнит тот же
+# мост (`console_raw_shown:<ключ заголовка>`), чтобы два контейнера притока
+# не показали одно и то же дважды.
+# ---------------------------------------------------------------------------
+CONSOLE_SHOWN_PREFIX = "console_shown:"
+CONSOLE_PREVIEW_PREFIX = "console_post_preview:"
+CONSOLE_RAW_PREFIX = "console_raw_shown:"
+
+
+def _send_drafts_module():
+    import sys
+    for sub in (("pipeline", "ingest"), ("pipeline", "publish"), ("pipeline",)):
+        path = os.path.join(BASE_DIR, *sub)
+        if path not in sys.path:
+            sys.path.insert(0, path)
+    import send_drafts  # noqa: WPS433 — тяжелый модуль, грузится только здесь
+    return send_drafts
+
+
+def _console_ready_cards(db, cards: list) -> list:
+    """Принятые карточки, которых владелец еще не видел: три отметки чтения,
+    нет отметки показа в очереди и на сервере, нет неприменного решения."""
+    out = []
+    for card in cards:
+        cid = str(card.get("id") or "")
+        if not cid or not (card.get("reviewed") and card.get("accepted") and card.get("second_read")):
+            continue
+        if card.get("draft_sent") or db.get(AppSetting, CONSOLE_SHOWN_PREFIX + cid):
+            continue
+        waiting = db.scalars(select(ModerationDecision)
+                             .where(ModerationDecision.deal_id == cid, ModerationDecision.consumed.is_(False))).first()
+        if waiting:
+            continue
+        out.append(card)
+    return out
+
+
+def console_show_ready_cards() -> dict:
+    """Показать в консоли готовые карточки из pending.json. Возвращает счет."""
+    pending = (_read_json("static/data/pending.json", {}) or {}).get("cards") or []
+    db = get_session()
+    try:
+        ready = _console_ready_cards(db, pending)
+        if not ready:
+            return {"shown": 0}
+        chats = _review_chat_ids(db)
+        if not chats:
+            logger.error("готовых карточек %d, а консоли нет — показывать некому", len(ready))
+            return {"shown": 0, "error": "консоли нет"}
+        sd = _send_drafts_module()
+        comps = (base_data.promoted() or {}).get("companies") or {}
+        thread = _console_thread_id(db, "decision")
+        shown = 0
+        for card in ready:
+            common = {"chat_id": chats[0], "disable_web_page_preview": True}
+            if thread:
+                common["message_thread_id"] = thread
+            r = notification_service.tg_api("sendMessage", text=sd.card_message(card, comps),
+                                            reply_markup=sd.card_keyboard(card), **common)
+            if not (r and r.get("ok")):
+                logger.error("карточка %s в консоль не ушла: %s", card["id"], r)
+                continue
+            preview = None
+            if sd.goes_to_channel(card):
+                preview = sd.post_message_text(card, comps)
+                rp = notification_service.tg_api("sendMessage", text=preview, parse_mode="HTML",
+                                                 reply_markup=sd.post_keyboard(card), **common)
+                if not (rp and rp.get("ok")):
+                    rp = notification_service.tg_api("sendMessage", text=re.sub(r"<[^>]+>", "", preview),
+                                                     reply_markup=sd.post_keyboard(card), **common)
+                if not (rp and rp.get("ok")):
+                    preview = None
+            _remember_setting(db, CONSOLE_SHOWN_PREFIX + card["id"], datetime.utcnow().isoformat(timespec="seconds"))
+            if preview:
+                _remember_setting(db, CONSOLE_PREVIEW_PREFIX + card["id"], preview)
+            shown += 1
+        logger.info("показано готовых карточек в консоли: %d", shown)
+        return {"shown": shown}
+    finally:
+        db.close()
+
+
+def _console_after_refresh(changed: list) -> None:
+    if "static/data/pending.json" in changed and not os.environ.get("PYTEST_CURRENT_TEST"):
+        console_show_ready_cards()
+
+
+class ModerationShownIn(BaseModel):
+    token: str = ""
+    cards: list[dict] = []     # [{"id": ..., "post_preview": ...}]
+    raw: list[str] = []        # ключи заголовков сырья (promote.raw_key)
+
+
+@app.get("/api/moderation/shown")
+def moderation_shown(token: str = "", db=Depends(get_db)):
+    """Что консоль уже видела: карточки (с текстом показанного поста) и сырье."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    cards, raw = {}, []
+    for row in db.scalars(select(AppSetting).where(AppSetting.key.like("console_%"))).all():
+        if row.key.startswith(CONSOLE_SHOWN_PREFIX):
+            cards.setdefault(row.key[len(CONSOLE_SHOWN_PREFIX):], {})["shown_at"] = row.value
+        elif row.key.startswith(CONSOLE_PREVIEW_PREFIX):
+            cards.setdefault(row.key[len(CONSOLE_PREVIEW_PREFIX):], {})["post_preview"] = row.value
+        elif row.key.startswith(CONSOLE_RAW_PREFIX):
+            raw.append(row.key[len(CONSOLE_RAW_PREFIX):])
+    return {"cards": cards, "raw": raw}
+
+
+@app.post("/api/moderation/shown")
+def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
+    """Рутина показала карточку или сырье сама — пусть сервер это помнит."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    now = datetime.utcnow().isoformat(timespec="seconds")
+    n = 0
+    for item in req.cards:
+        cid = str(item.get("id") or "").strip()
+        if not cid:
+            continue
+        _remember_setting(db, CONSOLE_SHOWN_PREFIX + cid, now)
+        if item.get("post_preview"):
+            _remember_setting(db, CONSOLE_PREVIEW_PREFIX + cid, str(item["post_preview"]))
+        n += 1
+    for key in req.raw:
+        if key:
+            _remember_setting(db, CONSOLE_RAW_PREFIX + str(key)[:200], now)
+            n += 1
+    return {"recorded": n}
 
 
 @app.post("/api/moderation/decisions/consume")

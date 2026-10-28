@@ -250,6 +250,40 @@ def raw_keyboard(draft):
     ]]}
 
 
+def site_shown():
+    """Что консоль уже видела по памяти САЙТА (/api/moderation/shown, 28 октября
+    2026): карточки, показанные сервером сам или другим контейнером, и сырье
+    по ключу заголовка. None — сайт не ответил (тогда полагаемся на отметки в
+    pending.json и moderation_state, как раньше)."""
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return None
+    try:
+        import httpx
+        r = httpx.get('%s/api/moderation/shown' % SITE, params={'token': token}, timeout=15)
+        if r.status_code != 200:
+            return None
+        return r.json()
+    except Exception as e:                                   # noqa: BLE001
+        print('память консоли на сайте недоступна: %s' % e)
+        return None
+
+
+def record_shown(cards=(), raw=()):
+    """Сказать сайту, что показано этим прогоном: карточки (со снимком поста)
+    и ключи сырья. Сбой — не беда: отметки в pending.json и state остаются."""
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token or not (cards or raw):
+        return False
+    try:
+        import httpx
+        r = httpx.post('%s/api/moderation/shown' % SITE, json={'token': token, 'cards': list(cards), 'raw': list(raw)}, timeout=15)
+        return r.status_code == 200
+    except Exception as e:                                   # noqa: BLE001
+        print('не смог записать показ на сайт: %s' % e)
+        return False
+
+
 def site_pending_ids():
     """Какие черновики уже ВИДНЫ на сайте. None — проверить не удалось.
 
@@ -392,7 +426,7 @@ def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     return False
 
 
-def build_plan(resend=None):
+def build_plan(resend=None, only=None):
     """(текст, клавиатура, как отметить отправленным) для всего неразосланного.
 
     `resend` — id карточки, которую нужно ЗАНОВО показать в консоли целиком
@@ -412,6 +446,17 @@ def build_plan(resend=None):
     comps = base['companies']
     live = site_pending_ids()
     answered = answered_cards() if pending['cards'] else {}
+    shown = site_shown() or {}
+    shown_cards, shown_raw = shown.get('cards') or {}, set(shown.get('raw') or [])
+    # Карточку уже показал сервер (или другой контейнер) — догоняем отметки
+    # в очереди и снимок поста, второй раз не шлем.
+    for card in pending['cards']:
+        rec = shown_cards.get(card['id'])
+        if rec and not (card.get('draft_sent') and card.get('post_draft_sent', card.get('draft_sent'))):
+            card['draft_sent'] = True
+            card['post_draft_sent'] = True
+            if rec.get('post_preview') and not card.get('post_preview'):
+                card['post_preview'] = rec['post_preview']
     postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
     if resend:
         target = [c for c in pending['cards'] if c['id'] == resend]
@@ -425,6 +470,10 @@ def build_plan(resend=None):
         answered = {}
     for card in pending['cards']:
         if resend and card['id'] != resend:
+            continue
+        # `only` — показать одну готовую карточку сразу (ship_card.py, 28 октября
+        # 2026), не дожидаясь остальных и не трогая сырье.
+        if only and card['id'] != only:
             continue
         # Ответ владельца на карточку еще не применен — не показываем ее
         # заново (см. answered_cards). Отметки отправки при этом не трогаем.
@@ -530,6 +579,7 @@ def build_plan(resend=None):
     fresh_raw, foreign = [], 0
     for d in ([] if resend else latest_hold_drafts()):
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
+                or promote.raw_key(d.get('title')) in shown_raw \
            or d.get('dup_in_batch'):
             continue
         if any(len(ref) > 1 and str(ref[1]) in carded for ref in d.get('src') or []):
@@ -546,7 +596,7 @@ def build_plan(resend=None):
             foreign += 1
             continue
         fresh_raw.append(d)
-    for draft in fresh_raw[:RAW_PER_RUN]:
+    for draft in ([] if only else fresh_raw[:RAW_PER_RUN]):
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
     return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted, unread2
 
@@ -595,8 +645,8 @@ def mark_sent(card, mark, now=None):
         card['pending_since'] = (now or datetime.now(timezone.utc)).isoformat(timespec='seconds')
 
 
-def main(write=False, resend=None):
-    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend)
+def main(write=False, resend=None, only=None):
+    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend, only=only)
     if unread2:
         print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
               'саб-агент по SECOND_READING_BRIEF.md → second_reading.py --apply <ответ> --write.' % unread2)
@@ -683,6 +733,10 @@ def main(write=False, resend=None):
                     state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
+    record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}
+                        for _t, _k, (kind, item, mark) in plan if kind == 'card' and item.get(mark)],
+                 raw=[promote.raw_key(item.get('title')) for _t, _k, (kind, item, _m) in plan
+                      if kind == 'raw' and str(item['draft_id']) in state.get('sent_raw', [])])
     print('Отправлено сообщений: %d' % sent)
     return 0
 
@@ -691,4 +745,5 @@ if __name__ == '__main__':
     # --resend <id>: показать карточку в консоли заново (карточка и проект
     # поста), часы молчания — с нуля. Без --write — только план.
     _resend = sys.argv[sys.argv.index('--resend') + 1] if '--resend' in sys.argv else None
-    sys.exit(main(write='--write' in sys.argv, resend=_resend))
+    _only = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else None
+    sys.exit(main(write='--write' in sys.argv, resend=_resend, only=_only))
