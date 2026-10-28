@@ -1000,6 +1000,77 @@ PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 STATE = os.path.join(ROOT, 'data', 'inbox', 'moderation_state.json')
 
 
+_RAW_STOP = {'компании', 'компания', 'российский', 'российская', 'россии', 'россия', 'заявил', 'заявила',
+             'готовы', 'готов', 'готовности', 'будет', 'может', 'могут', 'стал', 'стала', 'году', 'года',
+             'после', 'через', 'около', 'более', 'менее', 'части', 'часть', 'проекте', 'проект', 'сделка',
+             'сделку', 'сделки', 'рублей', 'млрд', 'млн', 'тысяч', 'путин', 'президент', 'рассказал', 'сообщил'}
+
+
+def raw_words(title):
+    """Значимые слова заголовка в грубой основе (первые 5 букв: «турецких» и
+    «турецкие» — одно слово), от 4 знаков, без общих слов."""
+    words = re.findall(r'[\wа-яё]+', str(title or '').lower(), flags=re.I)
+    return {(w[:4] if len(w) <= 6 else w[:5]) for w in words if len(w) >= 3 and w not in _RAW_STOP}
+
+
+def raw_quoted(title):
+    """Имена в кавычках («Аккую», «Тимир») — самый надежный признак той же новости."""
+    return {re.sub(r'[^\wа-яё]+', '', q.lower())[:6] for q in re.findall(r'[«"]([^»"]{3,40})[»"]', str(title or ''))}
+
+
+def raw_same_news(title, known_titles, min_shared=3, min_jaccard=0.5):
+    """Та же новость другими словами: заголовок сырья против уже известных.
+
+    28 октября 2026: «Путин заявил о готовности турецких компаний выкупить долю в
+    АЭС „Аккую“» (решение владельца — в работу) назавтра пришла снова как
+    «Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС
+    „Аккую“» (другой источник) и была показана как новая сомнительная. Память по
+    точному заголовку (`raw_key`) этого не ловит. Совпадение — не меньше
+    `min_shared` общих значимых слов или доля общих слов не меньше `min_jaccard`.
+    Возвращает известный заголовок, с которым совпало, или None."""
+    mine, myq = raw_words(title), raw_quoted(title)
+    if len(mine) < 3:
+        return None
+    best = None
+    for other in known_titles:
+        theirs = raw_words(other)
+        if not theirs:
+            continue
+        shared = mine & theirs
+        jac = len(shared) / len(mine | theirs)
+        quoted = bool(myq & raw_quoted(other))
+        if (len(shared) >= min_shared and jac >= 0.4) or jac >= min_jaccard or (quoted and len(shared) >= 2):
+            if best is None or jac > best[0]:
+                best = (jac, other)
+    return best[1] if best else None
+
+
+def known_raw_titles(state, pending_cards=(), base_deals=(), days=120):
+    """Заголовки, с которыми сравнивается новое сырье: решенное и показанное
+    сырье (по hold-файлам этого контейнера) и карточки последних `days` дней."""
+    titles = []
+    decided = set(state.get('decided_raw') or {}) | set(state.get('sent_raw') or [])
+    seen_keys = set(state.get('raw_titles') or {})
+    hold_dir = os.path.join(ROOT, 'data', 'inbox', 'hold')
+    if os.path.isdir(hold_dir):
+        for name in sorted(os.listdir(hold_dir)):
+            if not name.endswith('.json'):
+                continue
+            try:
+                drafts = json.load(open(os.path.join(hold_dir, name), encoding='utf-8')).get('drafts', [])
+            except (OSError, ValueError):
+                continue
+            for d in drafts:
+                if str(d.get('draft_id')) in decided or raw_key(d.get('title')) in seen_keys:
+                    titles.append(d.get('title') or '')
+    from datetime import datetime, timedelta
+    since = (datetime.utcnow() - timedelta(days=days)).strftime('%Y-%m-%d')
+    for c in list(pending_cards) + list(base_deals):
+        if str(c.get('date') or '') >= since or str(c.get('pending_since') or '')[:10] >= since:
+            titles.append(c.get('title') or '')
+    return [t for t in titles if t]
+
+
 def raw_key(title):
     """Ключ памяти о сырье — нормализованный ЗАГОЛОВОК, а не draft_id.
 
