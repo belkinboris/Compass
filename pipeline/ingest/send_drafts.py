@@ -392,7 +392,7 @@ def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     return False
 
 
-def build_plan(resend=None):
+def build_plan(resend=None, only=None):
     """(текст, клавиатура, как отметить отправленным) для всего неразосланного.
 
     `resend` — id карточки, которую нужно ЗАНОВО показать в консоли целиком
@@ -425,6 +425,10 @@ def build_plan(resend=None):
         answered = {}
     for card in pending['cards']:
         if resend and card['id'] != resend:
+            continue
+        # `only` — показать одну готовую карточку сразу (ship_card.py, 28 октября
+        # 2026), не дожидаясь остальных и не трогая сырье.
+        if only and card['id'] != only:
             continue
         # Ответ владельца на карточку еще не применен — не показываем ее
         # заново (см. answered_cards). Отметки отправки при этом не трогаем.
@@ -546,7 +550,7 @@ def build_plan(resend=None):
             foreign += 1
             continue
         fresh_raw.append(d)
-    for draft in fresh_raw[:RAW_PER_RUN]:
+    for draft in ([] if only else fresh_raw[:RAW_PER_RUN]):
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
     return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted, unread2
 
@@ -595,8 +599,8 @@ def mark_sent(card, mark, now=None):
         card['pending_since'] = (now or datetime.now(timezone.utc)).isoformat(timespec='seconds')
 
 
-def main(write=False, resend=None):
-    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend)
+def main(write=False, resend=None, only=None):
+    plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend, only=only)
     if unread2:
         print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
               'саб-агент по SECOND_READING_BRIEF.md → second_reading.py --apply <ответ> --write.' % unread2)
@@ -691,4 +695,5 @@ if __name__ == '__main__':
     # --resend <id>: показать карточку в консоли заново (карточка и проект
     # поста), часы молчания — с нуля. Без --write — только план.
     _resend = sys.argv[sys.argv.index('--resend') + 1] if '--resend' in sys.argv else None
-    sys.exit(main(write='--write' in sys.argv, resend=_resend))
+    _only = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else None
+    sys.exit(main(write='--write' in sys.argv, resend=_resend, only=_only))
