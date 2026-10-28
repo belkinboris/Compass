@@ -1162,7 +1162,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .fa-row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:4px 18px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
 #facts .fa-row .label{margin:2px 0 0}
 .fa-row p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink);text-align:left}
-.fa-row.guess p{color:#4A535B}
+/* «Что может быть дальше» — тем же цветом, что остальной текст (партнер, 28 октября 2026). */
 .fa-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 16px;padding-top:12px;font-size:12.5px;color:var(--muted)}
 .fa-foot a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){.fa-row{grid-template-columns:minmax(0,1fr)}.fa-bar{flex-wrap:wrap}}
@@ -10337,7 +10337,7 @@ function bindContextAnalysis(d){
    только то, что дает база: другие сделки сторон и что происходит в отрасли
    (deal_analysis.py, /api/deals/{id}/analysis). Текст печатается. */
 const _dealAnalysis = {};
-const DA_LABEL = {"Для покупателя.":"Для покупателя","Для продавца.":"Для продавца","Что может быть дальше.":"Что может быть дальше"};
+const DA_LABEL = {"Для покупателя.":"Для покупателя","Для продавца.":"Для продавца","В интернете.":"В интернете","Что может быть дальше.":"Что может быть дальше"};
 const dealAnalysisHtml = d => `<div class="fa" id="faBox">
   <div class="fa-bar"><div class="fa-ic">${AI_FAB_SVG}</div>
     <div class="fa-t"><b>Разбор сделки</b></div>
@@ -10354,7 +10354,10 @@ async function fillDealAnalysis(body, r, fast, d){
   }
   caret.remove();
   const foot = document.createElement("div"); foot.className = "fa-foot";
-  foot.innerHTML = `<span>Разбор Компаса по карточке и базе сделок, а не факт из источников</span><a href="#/assistant" data-fa-more>Продолжить в ассистенте →</a>`;
+  // Подпись «Разбор Компаса по карточке и базе сделок…» снята (партнер, 28 октября 2026: «Удалить»);
+  // вместо нее — издания, по которым разбор смотрел интернет.
+  const srcs = (r.sources||[]).slice(0,5).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.host)}</a>`).join(", ");
+  foot.innerHTML = `<span>${srcs ? "Источники: " + srcs : ""}</span><a href="#/assistant" data-fa-more>Продолжить в ассистенте →</a>`;
   body.appendChild(foot);
   foot.querySelector("[data-fa-more]").onclick = e=>{ e.preventDefault(); aiDockAsk("Расскажи подробнее о сделке: " + d.title); };
 }
