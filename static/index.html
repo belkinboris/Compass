@@ -2287,6 +2287,8 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .fns-event{padding:12px 0;border-bottom:1px solid var(--line-soft);display:grid;grid-template-columns:120px 1fr;gap:18px}
 .fns-empty{padding:24px;color:var(--muted);background:var(--ivory)}
 .fns-disclaimer{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.55}
+/* Пояснение «отчетности покупаемой компании нет» лежит между шапкой и телом блока, у которых свои поля; без своих полей оно упиралось в край карточки (владелец, 28 октября 2026). */
+.fns-gap{margin:0;padding:14px 26px 0}
 .fns-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .fns-premium{padding:13px 16px;background:var(--bronze-soft);border-left:3px solid var(--bronze);font-size:13px;margin-top:18px}
 .fns-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:4px 0 22px}
@@ -2399,7 +2401,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-filters>select{flex:1 1 100%;width:100%;min-width:0}
   .advisor-filters>span[style]{display:none}
   .advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
-  .fns-head{padding:20px}.fns-body{padding:20px}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .fns-head{padding:20px}.fns-body{padding:20px}.fns-gap{padding:12px 20px 0}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .fns-registry{grid-template-columns:1fr}.fns-event{grid-template-columns:1fr;gap:2px}.owner-current{grid-template-columns:1fr}
   .webinar-grid{grid-template-columns:1fr}.fns-charts{grid-template-columns:1fr}
 }
@@ -7269,11 +7271,31 @@ function renderDeal(id, qs, previewCard){
            названа в предмете и разобрана фактом; так было у 323 покупок. */
         const stakeV = (stakeFact(d).basis!=="disputed") ? stakeFact(d).value : null;
         const stakeTxt = targetName && stakeV!=null && stakeV>0 && stakeV<=100 ? fmtPct(stakeV) : "";
-        const assetMeta = [targetName&&share?share:(d.asset_share||stakeTxt), sum].filter(Boolean).join(" · ");
+        /* Доля и правовая форма из текста предмета (владелец, 28 октября 2026,
+           «Первая нерудная компания»: в схеме стояло имя профиля и цена, а
+           «25% плюс 1 акция АО …» из поля предмета пропадало). Если ни в
+           eco.share, ни в фактах доли нет, берем ее из текста предмета; если
+           там же перед именем стоит АО/ООО/ПАО — показываем имя с ней. */
+        const assetText = String(d.asset||"");
+        const stakeFromAsset = (targetName && assetText && !share && !d.asset_share && !stakeTxt)
+          ? ((assetText.match(/\d+(?:[.,]\d+)?\s*%(?:\s*(?:плюс|\+)\s*(?:1|одна|одну)\s*акци\w*)?/i)||[""])[0]) : "";
+        const legalForm = targetName && assetText
+          ? (assetText.match(new RegExp("(?:^|\\s)(ПАО|ОАО|ЗАО|НАО|АО|ООО)\\s+[«\"]?" + targetName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/^[«\"]|[»\"]$/g, ""), "u"))||[])[1] : "";
+        /* Владелец, 28 октября 2026: «я бы писал 3% акций или 3% долей в ООО
+           «Собака»» — доля и общество в одной строке, под ней только цена. */
+        const stakeLine = targetName&&share?share:(d.asset_share||stakeTxt||stakeFromAsset);
+        const stakeWord = legalForm ? (legalForm==="ООО" ? "долей" : "акций") : "";
+        const bareName = assetName.replace(/^[«"]|[»"]$/g,"");
+        const stakeWithName = legalForm && stakeLine
+          ? (stakeLine.includes(bareName) ? stakeLine
+             : `${stakeLine}${/акци|дол[еия]/i.test(stakeLine) ? "" : " " + stakeWord} ${legalForm} «${bareName}»`)
+          : "";
+        // Цены в ячейке нет: она и так в шапке карточки (владелец, 28 октября 2026).
+        const assetMeta = stakeWithName ? "" : stakeLine;
         const asset = assetName ? `
           <div class="dp-asset">
             <span class="dp-asset-role">Предмет сделки</span>
-            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${assetName}</a>`
+            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${stakeWithName || (legalForm?`${legalForm} «${assetName.replace(/^[«"]|[»"]$/g,"")}»`:assetName)}</a>`
                        :`<span class="dp-asset-name">${assetName}</span>`}
             ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
           </div>` : "";
@@ -8487,7 +8509,7 @@ async function mountDealFns(d){
     // прежних двух строк «Цена ÷ выручка» и «Цена ÷ операционная прибыль».
     mount.innerHTML=`<section class="fns-shell" style="margin-top:28px">
       <div class="fns-head"><div><span class="label">Финансовый контекст сделки · ${esc(String(p.role).toLowerCase())}</span><h2>${esc(c?c.name:p.data.company_name||p.entry.entity.legal_name)}</h2></div><span class="fns-badge">ФНС · ${p.latest.year}</span></div>
-      ${subjectMissing?`<p class="fns-disclaimer" style="margin:0 0 12px">Отчетности покупаемой компании${co(subject.id)?` «${esc(co(subject.id).name.replace(/^[«"]|[»"]$/g,""))}»`:""} в «Компасе» пока нет — ниже финансы стороны сделки, не актива.</p>`:""}
+      ${subjectMissing?`<p class="fns-disclaimer fns-gap">Отчетности покупаемой компании${co(subject.id)?` «${esc(co(subject.id).name.replace(/^[«"]|[»"]$/g,""))}»`:""} в «Компасе» пока нет — ниже финансы стороны сделки, не актива.</p>`:""}
       ${parties.length>1?`<div class="fns-entity-switch">${parties.map(x=>`<button class="chip ${x.id===active?"on":""}" data-fnsparty="${x.id}">${esc(x.role)} · ${esc(co(x.id)?co(x.id).name:x.entry.entity.legal_name)}</button>`).join("")}</div>`:""}
       <div class="fns-body">
         <p style="color:var(--muted);margin-bottom:14px">Последний отчетный год до появления этой сделки в базе.</p>
