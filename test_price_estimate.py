@@ -165,6 +165,48 @@ def test_full_analysis_reads_the_internet_too():
     assert [p['lead'] for p in da.split_answer('Для покупателя. Раз.\n\nВ интернете. Два.')] == ['Для покупателя.', 'В интернете.']
 
 
+def test_external_multiples_file_names_a_source_and_a_year_for_every_number():
+    """Владелец, 28 октября 2026 («давай делать»): внешние мультипликаторы —
+    только с источником, сектором источника и годом; отрасли — из справочника
+    сайта; мировой ориентир не входит в диапазон."""
+    import re
+    data = json.loads(pathlib.Path('static/data/sector_multiples_external.json').read_text(encoding='utf-8'))
+    html = pathlib.Path('static/index.html').read_text(encoding='utf-8')
+    industries = set(json.loads(re.search(r'const INDUSTRIES = (\[.*?\]);', html).group(1)))
+    for key, src in data['sources'].items():
+        assert src['kind'] in ('deals', 'exchange', 'global') and src['url'].startswith('https://') and src['short'], key
+    assert 'deals' in {s['kind'] for s in data['sources'].values()}
+    for ind, recs in data['industries'].items():
+        assert ind in industries, ind
+        for r in recs:
+            assert r['source'] in data['sources'] and r['metric'] in pe.EXT_BASE, (ind, r)
+            assert float(r['value']) > 0 and 2022 <= int(r['year']) <= 2030 and r['label'], (ind, r)
+    assert 'ё' not in json.dumps(data, ensure_ascii=False)
+
+
+def test_external_multiples_join_the_range_and_global_stays_a_benchmark():
+    ext = {'sources': {'b1': {'short': 'Б1', 'name': 'Б1', 'url': 'https://b1.ru/x', 'kind': 'deals'},
+                       'dam': {'short': 'Дамодаран', 'name': 'NYU', 'url': 'https://x.edu', 'kind': 'global'}},
+           'industries': {'Агро': [{'metric': 'ev_sales', 'value': 2.0, 'year': 2024, 'source': 'b1', 'label': 'Сельское хозяйство'},
+                                   {'metric': 'ev_ebitda', 'value': 10.6, 'year': 2026, 'source': 'dam', 'label': 'Farming'}]}}
+    rep = {'year': 2024, 'revenue_rub': 500e6, 'assets_rub': 1e9, 'borrowings_rub': 100e6, 'cash_rub': 0, 'lines': {}}
+    s = pe.build(DEAL, rep, _table([1.0, 1.0, 1.0], 'Агро'), {}, 'Агро', external=ext)
+    labels = [(m['label'], m.get('external', {}).get('source')) for m in s['methods']]
+    assert ('P/S', None) in labels and ('EV/Sales', 'Б1') in labels
+    ev = next(m for m in s['methods'] if m.get('external'))
+    assert ev['full_rub'] == 500e6 * 2.0 - 100e6  # EV минус чистый долг
+    assert s['range'] == (pe._round2(500e6 * 0.8), pe._round2(ev['stake_rub']))  # биржевой и сделочный — в диапазоне
+    assert s['benchmarks'][0]['value'] == 10.6 and all(not m.get('external') or m['external']['kind'] != 'global' for m in s['methods'])
+    text = pe.facts_text(s)
+    assert 'по данным Б1 (цены сделок, сектор «Сельское хозяйство», 2024 год)' in text
+    assert 'Мировой ориентир, Дамодаран' in text and 'в диапазон не входит' in text
+    assert 'отраслевые ориентиры из открытых исследований (Б1)' in ' '.join(pe.template_text(s))
+    # без отчетности и без записей по отрасли — ничего
+    assert pe.external_methods('Агро', None, None, 80, ext) == ([], [{'metric': 'ev_ebitda', 'label': 'Farming', 'value': 10.6,
+        'source': 'Дамодаран', 'name': 'NYU', 'url': 'https://x.edu', 'kind': 'global', 'year': 2026, 'note': None}])
+    assert pe.external_methods('Уголь', rep, None, 80, ext) == ([], [])
+
+
 def test_card_revenue_feeds_ps_and_comparables_keep_the_scale():
     """5Yes! (27.10.2026): отчетности нет, но карточка называет выручку 521 млн ₽ —
     P/S считается по ней; Росспиртпром за 8,3 млрд ₽ в «похожие» не попадает

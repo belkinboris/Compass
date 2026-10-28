@@ -18,10 +18,83 @@
 """
 from __future__ import annotations
 
+import json
+import pathlib
 import re
 from typing import Any
 
 import deal_multiples as dm
+
+# Внешние отраслевые мультипликаторы (партнер, 28 октября 2026: «не только по
+# базе смотрим мультипликаторы, но и просто по интернету»; владелец утвердил
+# источники по docs/price_estimate_sources.md: «давай делать»). Файл
+# заполняется руками, у каждого числа — источник и год; «deals» и «exchange»
+# входят в расчет, «global» — только ориентир в сводке.
+EXTERNAL_PATH = pathlib.Path(__file__).resolve().parent / 'static' / 'data' / 'sector_multiples_external.json'
+_external_cache: dict | None = None
+EXT_KINDS_IN_RANGE = ('deals', 'exchange')
+# метрика → (поле отчета, код строки, база словами, это EV (вычитать чистый долг))
+EXT_BASE = {
+    'ev_ebitda': ('operating_profit_rub', '2200', 'операционная прибыль', True),
+    'ev_sales': ('revenue_rub', '2110', 'выручка', True),
+    'pe': ('net_profit_rub', '2400', 'чистая прибыль', False),
+    'pb': ('equity_rub', '1300', 'капитал', False),
+}
+EXT_LABEL = {'ev_ebitda': 'EV/EBITDA', 'ev_sales': 'EV/Sales', 'pe': 'P/E', 'pb': 'P/B'}
+
+
+def external_multiples(path: pathlib.Path | None = None) -> dict:
+    global _external_cache
+    if path is not None:
+        return json.loads(pathlib.Path(path).read_text(encoding='utf-8'))
+    if _external_cache is None:
+        _external_cache = json.loads(EXTERNAL_PATH.read_text(encoding='utf-8')) if EXTERNAL_PATH.exists() else {}
+    return _external_cache
+
+
+def external_methods(ind: str | None, report: dict | None, net_debt: float | None, stake: float | None,
+                     data: dict | None = None) -> tuple[list[dict], list[dict]]:
+    """Методы по внешним мультипликаторам отрасли и мировые ориентиры.
+    Сделочные (deals) и биржевые (exchange) — в методы и в диапазон; мировые
+    (global) — отдельным списком, в диапазон не входят. Без отчетности или без
+    записей по отрасли — пусто (пустое честнее подбора соседнего сектора)."""
+    data = external_multiples() if data is None else data
+    recs = (data.get('industries') or {}).get(ind or '') or []
+    sources = data.get('sources') or {}
+    methods, benchmarks = [], []
+    for rec in recs:
+        src = sources.get(rec.get('source')) or {}
+        kind = src.get('kind')
+        ext = {'source': src.get('short') or rec.get('source'), 'name': src.get('name'), 'url': src.get('url'),
+               'kind': kind, 'label': rec.get('label'), 'year': rec.get('year'), 'note': rec.get('note')}
+        if kind == 'global':
+            benchmarks.append({'metric': rec['metric'], 'label': EXT_LABEL.get(rec['metric'], rec['metric']),
+                               'value': float(rec['value']), **ext})
+            continue
+        if kind not in EXT_KINDS_IN_RANGE or not report:
+            continue
+        key, code, base_name, is_ev = EXT_BASE.get(rec['metric'], (None, None, None, False))
+        if not key:
+            continue
+        base = _pick(report, key, code)
+        if rec['metric'] == 'ev_ebitda':
+            import company_finance as cf
+            base, _ = cf.operating_profit_estimate(report.get('operating_profit_rub'), report.get('lines') or {})
+        if base is None or base <= 0:
+            continue
+        full = base * float(rec['value'])
+        if is_ev and net_debt is not None:
+            full -= net_debt
+        if full <= 0:
+            continue
+        methods.append({
+            'metric': rec['metric'], 'label': EXT_LABEL.get(rec['metric'], rec['metric']),
+            'base_name': base_name, 'base_rub': base, 'report_year': report['year'],
+            'median': float(rec['value']), 'q1': None, 'q3': None, 'count': None,
+            'scope': 'внешний', 'industry': ind, 'external': ext,
+            'full_rub': full, 'stake_rub': full * stake / 100 if stake else None,
+        })
+    return methods, benchmarks
 
 # Сумма «известна» — анализ не нужен: цену назвали стороны или ее пересчитали из валюты.
 KNOWN_MEANINGS = ('disclosed', 'foreign_currency')
@@ -115,7 +188,7 @@ def _round2(x: float) -> float:
 
 
 def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
-          industry: str | None, company_name: str | None = None) -> dict[str, Any]:
+          industry: str | None, company_name: str | None = None, external: dict | None = None) -> dict[str, Any]:
     """Сводка для карточки: методы с числами, похожие сделки, оценки из
     источников, итоговый диапазон. Ничего не придумывает: нет данных — пусто."""
     year = dm.multiple_year(deal)[0]
@@ -124,13 +197,13 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
 
     methods = []
     report_note = None
+    net_debt = None
+    if report and report.get('assets_rub') is not None:
+        net_debt = (_pick(report, 'borrowings_rub', '1410') or 0.0) - (_pick(report, 'cash_rub', '1250') or 0.0)
     if report and report.get('year') and year:
         gap = year - int(report['year'])
         if gap < dm.MIN_YEAR_GAP or gap > dm.MAX_YEAR_GAP + 1:
             report_note = f'последний отчет — за {report["year"]} год, далеко от года сделки'
-        net_debt = None
-        if report.get('assets_rub') is not None:
-            net_debt = (_pick(report, 'borrowings_rub', '1410') or 0.0) - (_pick(report, 'cash_rub', '1250') or 0.0)
         for metric, key, code, label, base_name in METHODS:
             base = _pick(report, key, code)
             if metric == 'ev_op':
@@ -158,6 +231,11 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
                 'count': cell.get('count'), 'scope': scope, 'industry': ind if scope == 'отрасль' else None,
                 'full_rub': full, 'stake_rub': full * stake / 100 if stake else None,
             })
+
+    # Внешние мультипликаторы отрасли — после методов по базе, в тот же диапазон.
+    ext_methods, benchmarks = external_methods(ind, report if report and report.get('year') else None,
+                                               net_debt, stake, external)
+    methods.extend(ext_methods)
 
     # Отчетности нет, но карточка называет выручку: метод P/S считается по ней,
     # с оговоркой — это цифра из источника, а не из реестра.
@@ -246,7 +324,7 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         'report_year': (report or {}).get('year'), 'report_note': report_note,
         'revenue_rub': _pick(report, 'revenue_rub', '2110') if report else None,
         'net_profit_rub': _pick(report, 'net_profit_rub', '2400') if report else None,
-        'methods': methods, 'comparables': comps, 'experts': experts,
+        'methods': methods, 'benchmarks': benchmarks, 'comparables': comps, 'experts': experts,
         'card_revenue_rub': card_revenue, 'size_unknown': size_unknown,
         'range': rng, 'range_text': range_text(rng, stake),
     }
@@ -304,11 +382,25 @@ def facts_text(s: dict) -> str:
         lines.append('Размер покупаемой компании неизвестен — сделки отрасли ниже могут быть несопоставимы '
                      'с ней по масштабу: диапазон по их ценам не строить, так и сказать')
     for m in s['methods']:
+        if m.get('external'):
+            e = m['external']
+            what = 'цены сделок' if e['kind'] == 'deals' else 'биржа'
+            lines.append(
+                f'Метод {m["label"]} по данным {e["source"]} ({what}, сектор «{e["label"]}», {e["year"]} год): '
+                f'{m["base_name"]} {money(m["base_rub"])} × {str(m["median"]).replace(".", ",")}× = {money(m["full_rub"])} за 100%'
+                + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else ''))
+            continue
         where = f'отрасль «{m["industry"]}»' if m['industry'] else 'все отрасли (в отрасли мало сделок)'
         lines.append(
-            f'Метод {m["label"]}: {m["base_name"]} {money(m["base_rub"])} × медиана {str(m["median"]).replace(".", ",")}× '
+            f'Метод {m["label"]} по базе Компаса: {m["base_name"]} {money(m["base_rub"])} × медиана {str(m["median"]).replace(".", ",")}× '
             f'({where}, {deals_word(m["count"])}) = {money(m["full_rub"])} за 100%'
             + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else ''))
+    if any(m.get('external') and m['metric'] == 'ev_ebitda' for m in s['methods']):
+        lines.append('Оговорка: EBITDA в отчетности ФНС нет, мультипликатор EV/EBITDA применен к операционной прибыли '
+                     '(без амортизации), поэтому такая оценка скорее занижена')
+    for b in s.get('benchmarks') or []:
+        lines.append(f'Мировой ориентир, {b["source"]}, сектор «{b["label"]}», {b["year"]} год: {EXT_LABEL.get(b["metric"], b["metric"])} '
+                     f'{str(b["value"]).replace(".", ",")}× — уровни там в 2–3 раза выше российских, это верхняя граница, в диапазон не входит')
     if s['range_text']:
         lines.append(f'Итоговый диапазон Компаса: {s["range_text"]}')
     for c in s['comparables']:
@@ -333,10 +425,14 @@ def template_text(s: dict) -> list[str]:
                       else 'у компании убыток или в отрасли мало сделок с известной ценой.')
                    + ' Ниже — с чем можно сравнить.')
     if s['methods']:
-        names = ', '.join(m['label'] for m in s['methods'])
+        names = ', '.join(dict.fromkeys(m['label'] for m in s['methods']))
         if s['methods'][0]['report_year']:
-            out.append(f'Взяли отчетность компании за {s["methods"][0]["report_year"]} год и медианные мультипликаторы '
-                       f'({names}) по сделкам с известной ценой. Разные методы дают разный результат — '
+            ext_names = sorted({m['external']['source'] for m in s['methods'] if m.get('external')})
+            own = any(not m.get('external') for m in s['methods'])
+            parts = (['медианы по сделкам с известной ценой из базы Компаса'] if own else []) \
+                + ([f'отраслевые ориентиры из открытых исследований ({", ".join(ext_names)})'] if ext_names else [])
+            out.append(f'Взяли отчетность компании за {s["methods"][0]["report_year"]} год и мультипликаторы '
+                       f'({names}): {" и ".join(parts)}. Разные методы дают разный результат — '
                        'отсюда ширина диапазона; ниже видно, что дает каждый.')
         else:
             out.append(f'Отчетности компании в базе нет, взяли выручку по данным источника и медианный '
@@ -408,7 +504,8 @@ SYSTEM = (
     'итоговый диапазон бери ровно из сводки. Пиши по-русски, просто и по-деловому, как аналитик '
     'объяснял бы партнеру вслух: без заголовков, списков, markdown и вводных слов. Все числа — цифрами и ровно в том виде, как в сводке (1,6 млрд ₽, а не «полтора миллиарда»); не досчитывай доли и проценты сам. '
     'Три-четыре коротких абзаца, разделенных пустой строкой: 1) итоговая оценка и что она за долю; '
-    '2) из чего она получилась — отчетность и мультипликатор отрасли; 3) с чем сравнить — назови одну-две похожие сделки с ценой без выводов «выше» или «ниже» диапазона, '
+    '2) из чего она получилась — отчетность и мультипликаторы: по базе Компаса и по открытым исследованиям, '
+    'источник называй так, как он назван в сводке; мировой ориентир, если он есть, упомяни одной фразой как верхнюю границу; 3) с чем сравнить — назови одну-две похожие сделки с ценой без выводов «выше» или «ниже» диапазона, '
     'и оценки специалистов, если они есть, и сходятся ли они с расчетом; 4) одна фраза — чего расчет не '
     'учитывает (долг, премия за контроль, особые условия сделки). Если диапазона нет — объясни, '
     'каких данных не хватает, и что можно сказать по похожим сделкам. Не давай инвестиционных советов.'
