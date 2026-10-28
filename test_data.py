@@ -2011,3 +2011,17 @@ def test_base_starts_in_2022(deals):
     файлу они всплывали снова и снова."""
     old = [d["id"] for d in deals if str(d.get("date") or "")[:4].isdigit() and int(str(d["date"])[:4]) < 2022]
     assert not old, old[:10]
+
+
+def test_cards_have_no_yo_letter(deals):
+    """Владелец 26-27 октября 2026: «забудь, что в русском алфавите есть буква
+    е». База переписана `pipeline/strip_yo.py`; на следующий день рутина
+    качества записала «бухотчетности» в пять карточек. Держит: тексты
+    карточек (все, кроме ссылок и слоя фактов) — без «е»."""
+    import re as _re
+    bad = []
+    for d in deals:
+        text = json.dumps({k: v for k, v in d.items() if k not in ("src", "facts")}, ensure_ascii=False)
+        if _re.search("[ёЁ]", text):
+            bad.append(d["id"])
+    assert not bad, "«е» в карточках: %s — python3 pipeline/strip_yo.py --write" % bad[:10]

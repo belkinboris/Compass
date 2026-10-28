@@ -74,7 +74,7 @@
 
 ### Быстрый путь новой сделки
 
-1. `git pull origin main`. Если папки `pipeline/ingest` нет — сначала
+1. `git pull --rebase origin main`. Если папки `pipeline/ingest` нет — сначала
    `git clone https://github.com/belkinboris/Compass.git .`. Если `git push`
    откажет авторизацией — `add_repo(owner="belkinboris", repo="Compass",
    access="push")` и повтор; не помогло — это сбой, PushNotification.
@@ -189,7 +189,7 @@
 11. `python3 pipeline/facts_derive.py --write` (если `review.py` уже
     сделал это сам — повтор ничего не меняет), полный
     `python3 -m pytest -q` зелёным, семантический diff
-    `deals_promoted.json` к HEAD, `python3 pipeline/publication_busy.py --wait 40` (публикация выпускает решения владельца — ждём с push до 40 минут, потом push как обычно; CLAUDE.md, «Порядок работы в main»), `git pull origin main`, коммит по-русски,
+    `deals_promoted.json` к HEAD, `python3 pipeline/publication_busy.py --wait 40` (CLAUDE.md, «Порядок работы в main»), `git pull --rebase origin main`, коммит по-русски,
     `git push -u origin main`. Отклонён — `git pull --rebase origin main`
     (конфликт в PRODUCT_ROADMAP.md — оставить обе записи журнала; в
     таблице FIXES — обе партии, но на одно поле одной карточки не должно

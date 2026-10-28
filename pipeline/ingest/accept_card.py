@@ -779,7 +779,19 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if has(va) and has(vb) and review.flat(str(va)) == review.flat(str(vb)):
             code = 'why_dup' if (fa, fb) == ('eco.rationale', 'extra') else 'duplicate_text:%s=%s' % (fa, fb)
             out.append((code, '«%s» дословно повторяет «%s»' % (fa, fb)))
+    # Почти дословный повтор двух полей (28 октября 2026, gf31c1d53: «Дополнительно»
+    # пересказывало «Цель сделки» теми же словами) — DUPLICATE_PAIRS ловит только
+    # буквальное совпадение.
+    for fa, fb in DUPLICATE_PAIRS:
+        va, vb = _text(card, fa), _text(card, fb)
+        if has(va) and has(vb) and review.flat(str(va)) != review.flat(str(vb)):
+            wa, wb = set(re.findall(r'[а-яa-z0-9]{4,}', str(va).lower())), set(re.findall(r'[а-яa-z0-9]{4,}', str(vb).lower()))
+            if len(wa) >= 8 and len(wb) >= 8 and len(wa & wb) / min(len(wa), len(wb)) >= 0.7:
+                out.append(('near_dup:%s=%s' % (fa, fb), '«%s» почти повторяет «%s» (%d%% общих слов) — одно из полей лишнее'
+                            % (fa, fb, 100 * len(wa & wb) // min(len(wa), len(wb)))))
     for f, v in _scannable_texts(card):
+        if re.search('[ёЁ]', v):
+            out.append(('yo_letter:' + f, 'буква «е» в %s — база без «е» (владелец, 27 октября 2026)' % f))
         if TADVISER_MARKUP_RE.search(v):
             out.append(('tadviser_markup:' + f,
                         'служебная вики-разметка источника (TAdviser) просочилась в %s: %r' % (f, v[:80])))

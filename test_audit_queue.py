@@ -41,7 +41,7 @@ def test_the_sum_on_the_overview_is_the_sum_in_the_economist():
     """Пустая сумма в «Экономисте» при заполненной на «Обзоре» — молчание
     там, где цена известна (аудит 13 сентября 2026, сквозной паттерн 2)."""
     silent = [d["id"] for d in DATA["deals"]
-              if (d.get("sum") or "").strip() not in ("", "Не раскрыта")
+              if (d.get("sum") or "").strip() not in ("", "Не раскрыта", "—", "-", "–")
               and isinstance(d.get("eco"), dict)
               and ((d["eco"].get("sum") or "").strip() in ("", "—", "-", "–"))]
     assert not silent, "сумма есть на «Обзоре», но не в «Экономисте»: %s" % silent[:5]

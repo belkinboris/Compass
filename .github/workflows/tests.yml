@@ -33,8 +33,11 @@ jobs:
           pip install pymorphy3 pymorphy3-dicts-ru
       - name: Инварианты базы
         run: python -m pytest test_data.py -q
-      - name: yandex_search и /api/ask
-        run: python -m pytest test_kompas.py -q
+      # До 28 октября 2026 джоб гонял только test_data и test_kompas — 3 файла из
+      # 29 (аудит кода): приток, модерация, документы, аналитика, аккаунты и
+      # остальное на GitHub не проверялись вовсе.
+      - name: Все остальные тесты без браузера
+        run: python -m pytest -q --ignore=test_ui.py --ignore=test_data.py
 
   ui:
     name: Интерфейс (Playwright)

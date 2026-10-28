@@ -661,14 +661,19 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     target_id = deal.get('target')
     if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
         sources.append((companies[target_id]['desc'], None, 1))
-    if has(eco.get('share')):
-        sources.append((eco['share'], _is_party_narrative, 1))
-    elif has(deal.get('extra')):
-        sources.append((deal['extra'], _is_party_narrative, 1))
-    if has(eco.get('target_fin')):
-        # Из «Финансов предмета» берем только то, что называет предмет, а не
-        # его показатели (см. _is_financial_report выше).
-        sources.append((eco['target_fin'], lambda x: _is_financial_report(x) or _is_party_narrative(x), 1))
+    # `extra` и `eco.target_fin` как источники пояснения к предмету сняты
+    # 28 октября 2026 (чтение 20 карточек владельцем): «Предмет: … — В штате
+    # компании 153 человека; из имущества…» (ga8c26ffd), «— от сдачи этих
+    # площадей в аренду собственник получает чистую прибыль — 1 миллион 400
+    # тысяч» (g16dc5834), «Полигрин — С 23 октября 2026 года — в составе
+    # группы… 100% ООО «Полигрин»: по записи…» (g90ccbac0). Отсев «не
+    # финансовый отчет / не рассказ о стороне» эти обрывки пропускал.
+    # Из `eco.share` берется только короткая запись доли, начинающаяся с
+    # числа («51% ООО «Счастливая работа»», «7,52% голосующих ценных бумаг»),
+    # а не рассказ о структуре.
+    share = str(eco.get('share') or '').strip()
+    if has(share) and len(share) <= 100 and re.match(r'\d', share):
+        sources.append((share, None, 1))
 
     picked, ref = [], reference
     for src, drop, per_source in sources:
@@ -827,9 +832,16 @@ def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, 
                                        limit=limit, max_chars=max_chars)
         if picked:
             return ' '.join(picked)
+    # Фолбэк на `eco.context` с 28 октября 2026 — только предложение, которое
+    # НАЧИНАЕТСЯ с имени стороны («Ромашка» — крупный девелопер…», «Иван
+    # Тырышкин ранее возглавлял…»). Чтение 20 карточек владельцем: «Покупатель:
+    # ПАО «ЭсЭфАй» — на повторных торгах лот — 50% банка напрямую…»
+    # (g1f8414a3), «Покупатель: «Бадаевский центр» — покупатель собирается
+    # использовать эти площади…» (g88b148ea) — предложение упоминало сторону,
+    # но было не о ней. Нет профиля и нет такой фразы — имя одно.
     if eco_field and has(eco.get(eco_field)):
         party_name = _party_name_for(deal, companies, ref_field_id)
-        drop = lambda s: _is_reporting_meta(s) or not _mentions_party(s, party_name)
+        drop = lambda s: _is_reporting_meta(s) or not party_name or not _starts_with_name(party_name, s)
         picked = _pick_novel_sentences(eco[eco_field], reference,
                                        limit=limit, max_chars=max_chars, drop=drop)
         if picked:
@@ -1188,6 +1200,10 @@ def render(deal, companies, updates=(), today=None, fin=None):
         buyer_detail = _after_dash(buyer_detail)
         add('%s %s%s' % (_lab(buyer_label), esc(_drop_repeated_group(buyer, buyer_detail)),
                          (' — %s' % esc(buyer_detail)) if buyer_detail else ''))
+    elif 'buyer' in required and is_listing(deal):
+        # Торги еще не прошли — покупателя нет не потому, что его скрыли
+        # (28 октября 2026: «Покупатель: не раскрыт» стояло у шести лотов).
+        add('%s определится на торгах' % _lab(buyer_label))
     elif 'buyer' in required:
         add('%s не раскрыт' % _lab(buyer_label))
 
