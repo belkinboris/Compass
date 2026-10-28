@@ -10827,7 +10827,10 @@ function aiDockEls(){
   scrim.onclick = ()=>aiDockClose();
   sheet.querySelector("#aiSheetClose").onclick = ()=>aiDockClose();
   aiDockDrag(sheet, sheet.querySelector("#aiGrip"));
-  if(window.visualViewport) window.visualViewport.addEventListener("resize", aiDockFit);
+  if(window.visualViewport){ window.visualViewport.addEventListener("resize", aiDockFit); window.visualViewport.addEventListener("scroll", aiDockFit); }
+  // Клавиатура убралась — поле потеряло фокус: вернуть шторке обычные размеры (resize может не прийти).
+  sheet.addEventListener("focusout", ()=>setTimeout(aiDockFit, 50));
+  sheet.addEventListener("focusin", ()=>setTimeout(aiDockFit, 300));
   return {fab, sheet, scrim, body:sheet.querySelector("#aiSheetBody")};
 }
 function aiDockPaint(){
@@ -10851,12 +10854,24 @@ async function aiDockOpen(state){
   else if(sessionStorage.getItem("pendingQ")) await renderAssistant(body, true);
 }
 function aiDockClose(){ if(aiDockState==="closed") return; aiDockState = "closed"; aiDockPaint(); }
-/* Клавиатура на телефоне закрывает низ шторки: высоту берем по видимой части окна. */
+/* Клавиатура на телефоне закрывает низ шторки: высоту берем по видимой части окна.
+   iPhone (владелец, 28 октября 2026: «строка уезжает, как на фото»): Safari с
+   открытой клавиатурой еще и прокручивает страницу (visualViewport.offsetTop),
+   а fixed-элемент считается от непрокрученного окна — шторка, поднятая только
+   на высоту клавиатуры, уезжала выше экрана. Поэтому: bottom = закрыто
+   клавиатурой минус прокрутка, высота = видимая часть окна (шторка ровно
+   закрывает то, что видно), и слушаем не только resize, но и scroll. */
 function aiDockFit(){
   const sheet = document.getElementById("aiSheet"); if(!sheet) return;
   const vv = window.visualViewport;
   const covered = vv ? Math.max(0, window.innerHeight - vv.height) : 0;
-  sheet.style.bottom = covered > 120 ? Math.round(covered) + "px" : "";
+  const typing = document.activeElement && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName) && sheet.contains(document.activeElement);
+  if(covered > 120 && typing && window.matchMedia("(max-width:899px)").matches){
+    sheet.style.bottom = Math.round(covered - vv.offsetTop) + "px";
+    sheet.style.height = Math.round(vv.height) + "px";
+  }else{
+    sheet.style.bottom = ""; sheet.style.height = "";
+  }
 }
 function aiDockDrag(sheet, grip){
   let y0 = null, dy = 0, moved = false;
