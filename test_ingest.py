@@ -979,6 +979,41 @@ def test_sentence_split_keeps_address_abbreviations_and_dots_inside_quotes():
     assert '», г.\n' not in text, text
 
 
+def test_party_detail_skips_bare_legal_entity_note():
+    """28 октября 2026, карточки `g0f479af0` (ЛСР) и `ge881187c` («Норебо»):
+    профиль покупателя кончается реестровой пометкой «Юрлицо — ПАО «Группа
+    ЛСР».» / «Юрлицо головной компании — АО «Норебо Холдинг».», приоритет
+    кавычек в `_pick_novel_sentences` ставил ее первой, и пост выходил
+    «Покупатель: Юрлицо — ПАО «Группа ЛСР».» — без имени и без рассказа о
+    стороне (188 профилей несут такую фразу; замер — 37 постов). Пометка
+    остается в карточке, в строку стороны идет описание. Для «Предмета»
+    отсеивается только ГОЛАЯ пометка («Юрлицо — ООО «Красная руда».»);
+    пометка с городом и родом занятий («…, г. Челябинск, основной вид
+    деятельности…») остается — там есть что сказать."""
+    deal = {"id": "g0f479af0", "title": "ЛСР выкупит у акционеров собственные акции",
+            "status": "Подписана", "date": "2026-10-28", "buyer": "b1",
+            "asset": "акции ЛСР"}
+    companies = {"b1": {"name": "Группа ЛСР",
+                        "desc": "Петербургский девелопер жилья, один из крупнейших в России. "
+                                "Юрлицо — ПАО «Группа ЛСР»."}}
+    text = format_post.render(deal, companies)
+    assert 'Покупатель:</b> Группа ЛСР — петербургский девелопер жилья' in text, text
+    assert 'Юрлицо — ПАО' not in text, text
+    # Предмет: голая пометка отсеивается, описание идет в строку.
+    deal2 = {"id": "gee625a0f", "title": "РМК купила геологоразведочную компанию",
+             "status": "Закрыта", "date": "2026-09-01", "target": "t1", "buyer": "b2"}
+    companies2 = {"t1": {"name": "Красная руда",
+                         "desc": "Юрлицо — ООО «Красная руда». Геологоразведочная компания "
+                                 "с лицензиями на поиск золота на Алтае."},
+                  "b2": {"name": "РМК", "desc": "Медный холдинг."}}
+    text2 = format_post.render(deal2, companies2)
+    assert 'Красная руда — геологоразведочная компания' in text2, text2
+    # Пометка с продолжением для предмета остается.
+    assert format_post._BARE_LEGAL_ENTITY_NOTE.match('Юрлицо — ООО «Красная руда».')
+    assert not format_post._BARE_LEGAL_ENTITY_NOTE.match(
+        'Юрлицо — ОАО «Челябинскоблгаз», г. Челябинск, основной вид деятельности — аренда.')
+
+
 def test_buyer_label_is_not_pokupatel_for_custody_deals():
     """Тот же случай, что и выше, но про подпись строки, а не про обрыв
     текста: «Покупатель» неверно для временного управления по указу
@@ -6174,8 +6209,15 @@ def test_no_duplicate_fix_for_one_field():
     # Пересказ по фактам (write_card.py, 14.10.2026) — законная вторая запись:
     # прежние записи поля учтены отпечатком в `proofread_absorbed`, и
     # `already_applied` признает их до сверки состояния поля.
+    # Карточка, ждущая решения владельца (`pending.json`, еще не в базе), несет
+    # свой `proofread_absorbed` там же — смотреть только в базу дает ложный
+    # дубль на карточке, которую придержали (28 октября 2026, g25a6766d).
     base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
     cards = {d["id"]: d for d in base["deals"]}
+    pending_file = ROOT / "static" / "data" / "pending.json"
+    if pending_file.exists():
+        cards.update({c["id"]: c for c in
+                      json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
 
     def absorbed_chain(key):
         recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
