@@ -28,7 +28,9 @@
 
 Запуск долгий (полный pytest плюс паузы между постами): из сессии агента —
 в фоне с большим таймаутом; агент дожидается строки «ГОТОВО» или «СТОП».
-Журнал каждого запуска — data/inbox/ship_decisions.log.
+Работает в отдельной рабочей копии (`<репозиторий>-ship`, git worktree),
+основная копия все это время свободна для забора новостей. Журнал каждого
+запуска — data/inbox/ship_decisions.log.
 """
 import json
 import os
@@ -39,9 +41,19 @@ from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
-INGEST = os.path.join(ROOT, 'pipeline', 'ingest')
-BASE = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 LOG = os.path.join(ROOT, 'data', 'inbox', 'ship_decisions.log')
+# ОТДЕЛЬНАЯ РАБОЧАЯ КОПИЯ. Полный pytest идет 20 минут, и все это время
+# основная копия была занята незакоммиченной базой — часовой забор новостей
+# три раза за день пропускался (28 октября 2026, из-за этого статью
+# «Коммерсанта» о Baggins Coffee взяли на час позже конкурента). Команда
+# работает в git worktree рядом с репозиторием и пушит оттуда `HEAD:main`;
+# основная копия свободна. Кэш текстов источников (raw) живет только в
+# основной копии — в worktree он подключается ссылкой; очередь сырья (hold)
+# в git и приезжает с origin/main.
+WORK = os.environ.get('SHIP_WORKTREE') or (ROOT + '-ship')
+LINKED_INBOX = ('raw', 'triage', 'drafts')   # hold — в git, приезжает с origin/main
+INGEST = os.path.join(WORK, 'pipeline', 'ingest')
+BASE = os.path.join(WORK, 'static', 'data', 'deals_promoted.json')
 COMMIT_PATHS = ['static/data/deals_promoted.json', 'static/data/pending.json',
                 'data/inbox/moderation_state.json', 'pipeline/ingest/fixes']
 
@@ -57,8 +69,8 @@ def log(msg):
         pass
 
 
-def run(args, must=True, timeout=None):
-    r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+def run(args, must=True, timeout=None, cwd=None):
+    r = subprocess.run(args, cwd=cwd or WORK, capture_output=True, text=True, timeout=timeout)
     if must and r.returncode:
         raise SystemExit('СТОП: %s не прошел (код %d):\n%s' % (' '.join(args[:3]), r.returncode, (r.stdout + r.stderr)[-1500:]))
     return r
@@ -74,10 +86,29 @@ def push_with_retry(tries=4):
         if r.returncode:
             run(['git', 'rebase', '--abort'], must=False)
             return 'конфликт при rebase: %s' % (r.stdout + r.stderr)[-600:]
-        if run(['git', 'push', '-u', 'origin', 'main'], must=False).returncode == 0:
+        if run(['git', 'push', 'origin', 'HEAD:main'], must=False).returncode == 0:
             return None
         time.sleep(2 ** (i + 1))
     return 'push не прошел после %d попыток' % tries
+
+
+def prepare_worktree():
+    """Рабочая копия для этой команды: свежий origin/main на ветке ship-wt,
+    сырье основной копии — ссылками. Незакоммиченные правки базы в ней
+    (прошлый запуск остановился) не трогаем — их подхватит продолжение."""
+    run(['git', 'fetch', 'origin', 'main'], cwd=ROOT)
+    if not os.path.isdir(os.path.join(WORK, '.git')) and not os.path.isfile(os.path.join(WORK, '.git')):
+        run(['git', 'worktree', 'prune'], cwd=ROOT, must=False)
+        run(['git', 'worktree', 'add', '-B', 'ship-wt', WORK, 'origin/main'], cwd=ROOT)
+        log('Рабочая копия для доводки: %s' % WORK)
+    dirty = run(['git', 'status', '--porcelain', '--', *COMMIT_PATHS], must=False).stdout.strip()
+    if not dirty:
+        run(['git', 'checkout', '-q', '-B', 'ship-wt', 'origin/main'])
+    for name in LINKED_INBOX:
+        src, dst = os.path.join(ROOT, 'data', 'inbox', name), os.path.join(WORK, 'data', 'inbox', name)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        if os.path.isdir(src) and not os.path.lexists(dst):
+            os.symlink(src, dst)
 
 
 def load_json(text):
@@ -114,6 +145,7 @@ def decisions_planned():
 def main(argv):
     write = '--write' in argv
     log('— ship_decisions %s —' % ('--write' if write else 'сухой прогон'))
+    prepare_worktree()
     git('pull', '--rebase', '--autostash', 'origin', 'main')
     # autostash может вернуть правки с конфликтом и кодом 0 — тогда в файлах
     # маркеры <<<<<<<, и полный pytest падает десятком json-ошибок (28 октября
@@ -197,6 +229,7 @@ def main(argv):
         if err:
             log('СТОП: отметки об отправке не запушены (%s) — повторите push руками, посты уже ушли.' % err)
             return 1
+    run(['git', 'pull', '-q', '--rebase', '--autostash', 'origin', 'main'], cwd=ROOT, must=False)
     log('ГОТОВО: решения применены, база в main, посты отправлены.')
     return 0
 
