@@ -697,7 +697,8 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     # вопрос «что покупают». Описание профиля предмета отвечает.
     target_id = deal.get('target')
     if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
-        sources.append((companies[target_id]['desc'], None, 1))
+        sources.append((companies[target_id]['desc'],
+                        lambda s: bool(_BARE_LEGAL_ENTITY_NOTE.match(s)), 1))
     # `extra` и `eco.target_fin` как источники пояснения к предмету сняты
     # 28 октября 2026 (чтение 20 карточек владельцем): «Предмет: … — В штате
     # компании 153 человека; из имущества…» (ga8c26ffd), «— от сдачи этих
@@ -832,6 +833,15 @@ def _mentions_party(sentence, party_name):
     return any(any(matches(nw, sw) for sw in sent_words) for nw in name_words)
 
 
+_LEGAL_ENTITY_NOTE = re.compile(r'^Юрлиц[оа]\b')
+# «Юрлицо — ООО «Красная руда».» без ничего после имени — для «Предмета» тоже
+# пустая пометка (замер 28 октября 2026: после отсева у стороны референс
+# растет, и у gee625a0f предмет вместо «геологоразведочная компания…» получал
+# ровно эту пометку). Пометка С продолжением («…, г. Челябинск, основной вид
+# деятельности…») для предмета остается — там есть город и род занятий.
+_BARE_LEGAL_ENTITY_NOTE = re.compile(r'^Юрлиц[оа]\b[^,;:(]*$')
+
+
 def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, max_chars=200):
     """Одно дословное предложение о СТОРОНЕ (обычно — покупателе): профиль
     компании (`desc`), иначе поле `eco`, названное в `eco_field` (для
@@ -865,8 +875,16 @@ def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, 
     eco = deal.get('eco') or {}
     company_id = deal.get(ref_field_id)
     if company_id and companies.get(company_id) and has(companies[company_id].get('desc')):
+        # Предложение «Юрлицо — ПАО «Группа ЛСР».» / «Юрлицо головной
+        # компании — АО «Норебо Холдинг».» — реестровая пометка профиля, а не
+        # рассказ о стороне; приоритет кавычек в `_pick_novel_sentences`
+        # ставил его ПЕРВЫМ, и пост выходил «Покупатель: Юрлицо — ПАО «Группа
+        # ЛСР».» без имени (28 октября 2026, карточки g0f479af0 и ge881187c;
+        # такую фразу несут 188 профилей). Отсев — как `_strip_registry_ids`
+        # снимает ИНН: пометка остается в карточке, в строку стороны не идет.
         picked = _pick_novel_sentences(companies[company_id]['desc'], reference,
-                                       limit=limit, max_chars=max_chars)
+                                       limit=limit, max_chars=max_chars,
+                                       drop=lambda s: bool(_LEGAL_ENTITY_NOTE.match(s)))
         if picked:
             return ' '.join(picked)
     # Фолбэк на `eco.context` с 28 октября 2026 — только предложение, которое
