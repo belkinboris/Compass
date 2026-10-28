@@ -183,7 +183,7 @@ def _main(argv, write):
     resume = bool(git('status', '--porcelain', '--', *COMMIT_PATHS))
     rows, out = decisions_planned()
     if resume:
-        log('В рабочей копии уже есть незакоммиченные правки базы и очереди — продолжаю с полного pytest, решения заново не применяю.')
+        log('В рабочей копии уже есть незакоммиченные правки базы и очереди — продолжаю: применяю только новые решения, потом полный pytest.')
     if not rows and not resume:
         log('Решений нет.')
         return 0
@@ -196,9 +196,13 @@ def _main(argv, write):
         return 0
 
     old = load_json(git('show', 'origin/main:static/data/deals_promoted.json'))
-    if not resume:
-        run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write'])
-        log('Решения применены локально.')
+    # approve.py --write идет и в продолжении: он идемпотентен (карточка,
+    # уже ушедшая в базу, в очереди не найдется; отброшенное сырье помнит
+    # decided_raw), а решения, нажатые ПОСЛЕ остановки, иначе остались бы
+    # в плане без применения — 28 октября 2026 продолжение так уперлось в
+    # проверку «ПУБЛИКУЕМ есть, а карточки в базе нет» по gf2b5f78c.
+    run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write'])
+    log('Решения применены локально%s.' % (' (продолжение: заново применены только новые)' if resume else ''))
     for _ in range(4):
         r = run([sys.executable, os.path.join(ROOT, 'pipeline', 'facts_derive.py'), '--write'])
         if 'актуально' in r.stdout:
