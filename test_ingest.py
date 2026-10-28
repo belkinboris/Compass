@@ -8643,3 +8643,17 @@ def test_silence_clock_starts_when_the_card_is_first_shown():
     assert card["draft_sent"] is True and card["pending_since"] == "2026-10-27T09:00:00+00:00"
     send_drafts.mark_sent(card, "post_draft_sent", now.replace(hour=10))
     assert card["pending_since"] == "2026-10-27T09:00:00+00:00"  # второе сообщение часы не сдвигает
+
+
+def test_ship_decisions_notices_a_lost_deal_or_post_before_push():
+    """Владелец, 28 октября 2026: «пост больше двух часов назад одобрил» — цепочка
+    «решение → база → push → пост» теперь одна команда (ship_decisions.py); перед
+    push она сверяет базу с origin/main и не пушит, если что-то пропало."""
+    import importlib.util, pathlib
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    sd = importlib.util.module_from_spec(spec); spec.loader.exec_module(sd)
+    old = {'deals': [{'id': 'g1'}, {'id': 'g2'}], 'companies': {'c1': {}}, 'match_keys': {'k': 'g1'}, 'telegram_posts': {'g1': {}}}
+    assert sd.base_lost(old, dict(old, deals=[{'id': 'g1'}, {'id': 'g2'}, {'id': 'g3'}])) == []
+    assert sd.base_lost(old, dict(old, deals=[{'id': 'g1'}])) == ['сделок: g2']
+    assert sd.base_lost(old, dict(old, telegram_posts={})) == ['telegram_posts: 1']
+    assert sd.base_lost(old, dict(old, companies={})) == ['профилей компаний: c1']
