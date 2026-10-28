@@ -33,7 +33,14 @@ sys.path.insert(0, HERE)
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 WAIT_MIN = 12
 POLL_S = 30
-QUICK_TESTS = ['test_ingest.py', '-q', '-p', 'no:cacheprovider', '-k', 'pending or review_table']
+# Быстрые проверки очереди — те же, что в полном прогоне смотрят на pending.json:
+# все инварианты базы (test_data: в том числе pending_since, типы, роли) и
+# проверки очереди из test_ingest (таблица правок применена, ворота видят
+# очередь, заглушки в посте). Полный pytest остается для записи в базу (шаг 11).
+QUICK_TESTS = [
+    ['test_data.py', '-q', '-p', 'no:cacheprovider'],
+    ['test_ingest.py', '-q', '-p', 'no:cacheprovider', '-k', 'pending or review_table or placeholder or gate_sees or send_plan'],
+]
 
 
 def git(*args, check=True):
@@ -98,10 +105,12 @@ def main(argv):
     if not write:
         print('Сухой прогон: закоммитил бы очередь, запушил, дождался сайта и отправил 🗂/📣 в консоль. Запись — с ключом --write.')
         return 0
-    r = subprocess.run([sys.executable, '-m', 'pytest', *QUICK_TESTS], cwd=ROOT, capture_output=True, text=True)
-    if r.returncode:
-        print('Быстрые проверки очереди не прошли — не отправляю:\n' + r.stdout[-1500:])
-        return 1
+    for args in QUICK_TESTS:
+        r = subprocess.run([sys.executable, '-m', 'pytest', *args], cwd=ROOT, capture_output=True, text=True)
+        if r.returncode:
+            print('Быстрые проверки очереди не прошли — не отправляю:\n' + r.stdout[-1500:])
+            return 1
+    print('Быстрые проверки очереди прошли.')
     if commit_queue('Очередь: карточка %s готова к показу в консоли' % card_id):
         if not push_with_retry():
             print('push не прошел после четырех попыток — консоль не получит ссылку на предпросмотр, стоп.')
