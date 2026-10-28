@@ -80,7 +80,14 @@ def promoted() -> dict[str, Any]:
             return _DATA
         try:
             data = json.loads(PROMOTED_PATH.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+        except (OSError, ValueError) as e:
+            # Битый файл (аудит 28 октября 2026): раньше сайт молча показывал
+            # пустую базу при «ok» в /health. Прежняя разобранная база лучше
+            # пустой — остается она, ошибка уходит в лог.
+            import logging
+            logging.getLogger("compass.base_data").error("deals_promoted.json не разбирается: %s", e)
+            if _DATA:
+                return _DATA
             _KEY, _DATA = None, {}
             return _DATA
         _DATA = data if isinstance(data, dict) else {}

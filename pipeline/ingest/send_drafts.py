@@ -268,7 +268,8 @@ def site_pending_ids():
         if r.status_code != 200:
             return None
         return {c.get('id') for c in r.json().get('cards', [])}
-    except Exception:
+    except Exception as e:                                   # noqa: BLE001
+        print('очередь на сайте недоступна: %s' % e)
         return None
 
 
@@ -306,7 +307,10 @@ def answered_cards():
     try:
         import approve
         decisions, _handle = approve.fetch_decisions()
-    except Exception:                                        # noqa: BLE001
+    except Exception as e:                                   # noqa: BLE001
+        # Молчание здесь — повторный показ карточки поверх непримененного
+        # ответа партнера («Медси», 13 октября 2026). Причина — в отчет.
+        print('ответы консоли недоступны: %s — карточки с ответами не отличить' % e)
         return {}
     answered = {}
     for d in decisions or []:

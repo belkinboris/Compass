@@ -682,7 +682,9 @@ def to_card(draft, deal_id):
         'law': {'struct': '—', 'appr': '—', 'adv': [], 'terms': '—'},
     }
     for field in ('sum', 'seller', 'buyer_name', 'asset'):
-        if draft.get(field):
+        # «—» в `sum` — не пустота для экрана и тестов (у `sum` своя заглушка
+        # «Не раскрыта», KNOWN_ISSUES 27 октября 2026): поле без суммы не пишется.
+        if draft.get(field) and str(draft[field]).strip() not in ('—', '-', '–'):
             card[field] = draft[field]
     if draft.get('buyer_hint'):
         # П1-10: остаток хвоста стороны в косвенном падеже («структурам

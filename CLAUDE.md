@@ -3,7 +3,7 @@
 ## Что это 
 
 Одностраничное приложение о сделках M&A российского рынка. FastAPI отдаёт
-статику, весь интерфейс — один файл `static/index.html` (~1900 строк, без
+статику, весь интерфейс — один файл `static/index.html` (~12 000 строк, без
 сборки и без внешних зависимостей). Данные лежат в JSON и подгружаются на клиент.
 
 ## Структура
@@ -19,17 +19,14 @@ assistant_retrieval.py        поиск по базе для ассистент
 assistant_signals.py          признаки будущих сделок для ассистента (static/data/signals.json,
                               собирает pipeline/ingest/signals.py)
 pipeline/assistant_bench.py   таблица «модель × время × успех» через боевой сервер (ключи там)
-test_kompas.py                48 тестов: yandex_search, /api/ask, call_llm, стенд, оценки, подсказки,
-                              ответ «что умеет сервис»
-test_data.py                  44 теста: инварианты базы (без браузера)
-test_ui.py                    98 тестов: дымовые проверки экранов (Playwright)
-test_ingest.py                94 теста: приток (фильтр, сопоставление, пост, черновик, ворота,
-                              обогащение известной сделки, страховка на живом потоке,
-                              темп публикации и правила личных подписок)
-test_launch_features.py       33 теста: ФНС, подписки, уведомления, экспорт, модерация
-test_accounts.py              30 тестов: аккаунты, комментарии, правки
-test_auth.py                  29 тестов: регистрация, вход, сессии, пароль
-test_assistant_retrieval.py   31 тест: маршруты вопросов ассистента на живой базе
+test_*.py                     29 файлов, ~1750 тестов (28 октября 2026; счет —
+                              `pytest --collect-only -q | cut -d: -f1 | uniq -c`):
+                              test_ingest (приток, пост, ворота), test_gold_analytics,
+                              test_ui (экраны, Playwright), test_launch_features (ФНС,
+                              подписки, модерация), test_kompas (/api/ask, стенд),
+                              test_data и test_audit_queue (инварианты базы),
+                              test_assistant_retrieval, test_docs (потолки документов
+                              и ссылки), test_data_refresh, test_seo_pages и другие
 .github/workflows/tests.yml   CI: данные и API отдельно, интерфейс отдельно
 .claude/hooks/session-start.sh    ставит зависимости: контейнер рутины пуст (нет httpx и pytest)
 static/index.html             ВЕСЬ интерфейс: стили и рендер (данных в нём НЕТ)

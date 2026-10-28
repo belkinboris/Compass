@@ -19,7 +19,30 @@ def _read(path: Path) -> Any:
         return None
 
 
+_CACHE: tuple[Any, dict[str, dict[str, Any]]] | None = None
+
+
+def _curated_stamp() -> Any:
+    try:
+        st = CURATED.stat()
+        return (st.st_mtime_ns, st.st_size)
+    except OSError:
+        return None
+
+
 def load_deals() -> dict[str, dict[str, Any]]:
+    # Словарь на ~1560 сделок собирался заново на каждой странице /deal/<id>
+    # (аудит 28 октября 2026); теперь — по отпечатку базы и curated_deals.json.
+    global _CACHE
+    key = (base_data._stamp(), _curated_stamp())
+    if _CACHE is not None and _CACHE[0] == key and key[0] is not None:
+        return _CACHE[1]
+    rows = _build()
+    _CACHE = (key, rows)
+    return rows
+
+
+def _build() -> dict[str, dict[str, Any]]:
     rows: dict[str, dict[str, Any]] = {}
     # База — через общий кэш `base_data`: раньше ее разбирал заново каждый
     # вызов, и `get_deal()` на каждой странице сделки стоил ≈72 МБ.
