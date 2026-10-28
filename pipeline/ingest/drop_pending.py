@@ -52,6 +52,41 @@ def drop(pending, state, ids, reason, now):
     return [cards[i] for i in ids]
 
 
+def closure_text(card, reason):
+    """Что сказать владельцу, если выкинутая карточка родилась из его «в работу».
+    Причина с id другой карточки (g…) — это слияние: сделка уже есть в базе."""
+    import re
+    raw = card.get('from_raw') or {}
+    if not raw:
+        return None
+    merged = re.search(r'\bg[0-9a-f]{8}\b', reason or '')
+    head = 'Ваше решение «это сделка» по новости «%s» применено.' % (raw.get('title') or card.get('title') or '')[:120]
+    if merged:
+        return ('%s Это та же сделка, что уже есть в базе: https://projectcompass.ru/#/deal/%s — новое из новости '
+                'добавлено в ту карточку, отдельной карточки и поста не будет.' % (head, merged.group(0)))
+    return '%s Но карточку пришлось снять: %s.' % (head, (reason or '').strip().rstrip('.'))
+
+
+def notify_console(texts):
+    """Короткие ответы владельцу в консоль (тема решений). Нет токена — только на экран."""
+    if not texts:
+        return
+    import send_drafts
+    sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+    import console_topics
+    token = os.environ.get('TELEGRAM_BOT_TOKEN', '').strip()
+    chats = send_drafts.send_targets()
+    if not token or not chats:
+        print('Консоль не настроена — ответ владельцу только на экране:\n  ' + '\n  '.join(texts))
+        return
+    import httpx
+    thread = console_topics.thread_id('decision')
+    with httpx.Client(timeout=20) as client:
+        for chat in chats:
+            for t in texts:
+                send_drafts.send_one(client, token, chat, '↩️ ' + t, None, thread)
+
+
 def main(argv):
     write = '--write' in argv
     reason = argv[argv.index('--reason') + 1] if '--reason' in argv else ''
@@ -68,9 +103,12 @@ def main(argv):
         return 0
     pending_fresh = json.load(open(PENDING, encoding='utf-8'))   # перечитать прямо перед записью
     state = promote.load_state()
-    drop(pending_fresh, state, ids, reason, datetime.now(timezone.utc))
+    gone = drop(pending_fresh, state, ids, reason, datetime.now(timezone.utc))
     json.dump(pending_fresh, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
+    # Карточка из решения владельца («в работу») выкинута или слита — он должен
+    # узнать об этом из консоли, а не из тишины (28 октября 2026, «Аккую»).
+    notify_console([t for t in (closure_text(c, reason) for c in gone) if t])
     return 0
 
 

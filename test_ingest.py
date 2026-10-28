@@ -7071,6 +7071,9 @@ def test_gate_shows_a_complete_latin_named_draft_instead_of_hiding_it(monkeypatc
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [complete, incomplete])
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {"decided_raw": {}, "sent_raw": []})
+    # сделка о CyberOK уже есть в базе — проверка «та же новость другими словами»
+    # спрятала бы черновик по делу; здесь проверяем другое, память отключаем
+    monkeypatch.setattr(send_drafts.promote, "known_raw_titles", lambda *a, **k: [])
     plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted, _unread2 = send_drafts.build_plan()
     raw_ids = [item[1]["draft_id"] for _t, _kb, item in plan if item[0] == "raw"]
     assert raw_ids == ["d-lat-1"], raw_ids
@@ -8657,3 +8660,33 @@ def test_ship_decisions_notices_a_lost_deal_or_post_before_push():
     assert sd.base_lost(old, dict(old, deals=[{'id': 'g1'}])) == ['сделок: g2']
     assert sd.base_lost(old, dict(old, telegram_posts={})) == ['telegram_posts: 1']
     assert sd.base_lost(old, dict(old, companies={})) == ['профилей компаний: c1']
+
+
+def test_same_news_in_other_words_is_not_shown_twice():
+    """Владелец, 28 октября 2026: по «Аккую» он уже нажал «это сделка», а назавтра
+    та же новость с другим источником и заголовком пришла снова как сомнительная.
+    Сырье сравнивается по смыслу: основы слов и имена в кавычках."""
+    import promote
+    a = 'Путин заявил о готовности турецких компаний выкупить долю в АЭС «Аккую»'
+    assert promote.raw_same_news('Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую»', [a]) == a
+    assert promote.raw_same_news('Путин: РФ приветствует желание компаний Турции выкупить доли в АЭС «Аккую»', [a]) == a
+    assert promote.raw_same_news('АЛРОСА продает почти половину акций ГМК «Тимир» на торгах',
+                                 ['«Алроса» выставила на аукцион 49% акций ГМК «Тимир»'])
+    # разные новости одного продавца — не дубль
+    assert promote.raw_same_news('ВТБ продал московский отель Holiday Inn в Сокольниках',
+                                 ['ВТБ продал отель Hyatt Regency Moscow Petrovsky Park']) is None
+    assert promote.raw_same_news('Мосбиржа проводит дискретный аукцион по акциям группы ЛСР',
+                                 ['Группа ЛСР выкупит свои акции по 675 рублей']) is None
+
+
+def test_dropping_a_card_born_from_the_owners_click_tells_him_why():
+    """«Аккую» (28 октября 2026): карточку из решения «в работу» слили с существующей,
+    владелец узнал об этом только спросив. Теперь выкидывание такой карточки —
+    ответ в консоль: слияние, если в причине назван id карточки, иначе причина."""
+    import drop_pending
+    card = {'id': 'g1', 'title': 'Т', 'from_raw': {'draft_id': 'd1', 'title': 'Путин о турецких компаниях и «Аккую»'}}
+    t = drop_pending.closure_text(card, 'дубль сюжета, слит в g2f22b1dc')
+    assert 'применено' in t and '#/deal/g2f22b1dc' in t and 'отдельной карточки и поста не будет' in t
+    t2 = drop_pending.closure_text(card, 'не сделка: статистика продаж')
+    assert 'пришлось снять' in t2 and 'статистика продаж' in t2
+    assert drop_pending.closure_text({'id': 'g2', 'title': 'Т'}, 'дубль g2f22b1dc') is None

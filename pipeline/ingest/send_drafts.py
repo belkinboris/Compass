@@ -577,10 +577,21 @@ def build_plan(resend=None, only=None):
                 if isinstance(ref, (list, tuple)) and len(ref) > 1 and ref[1]:
                     carded.add(str(ref[1]))
     fresh_raw, foreign = [], 0
+    # Та же новость другими словами (другой источник, другой заголовок) — не
+    # новое сырье: сверяем значимые слова с решенным и показанным сырьем и с
+    # карточками последних месяцев (promote.raw_same_news, 28 октября 2026,
+    # «Аккую» второй раз). Совпало — помним как дубль и не показываем.
+    known_titles = promote.known_raw_titles(state, pending.get('cards') or [], base.get('deals') or [])
     for d in ([] if resend else latest_hold_drafts()):
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
                 or promote.raw_key(d.get('title')) in shown_raw \
            or d.get('dup_in_batch'):
+            continue
+        same = promote.raw_same_news(d.get('title'), known_titles)
+        if same:
+            print('  дубль по смыслу, не показываю: «%s» = «%s»' % (str(d.get('title'))[:60], same[:60]))
+            state.setdefault('raw_titles', {})[promote.raw_key(d.get('title'))] = 'auto-drop'   # сохранится под --write
+            state.setdefault('decided_raw', {})[str(d['draft_id'])] = 'auto-drop'
             continue
         if any(len(ref) > 1 and str(ref[1]) in carded for ref in d.get('src') or []):
             continue

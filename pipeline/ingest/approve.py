@@ -401,6 +401,11 @@ def main(write=False):
             print('              %s | связано -> %s' % (card['id'], line))
         pending_ids.add(card['id'])
         card['pending_since'] = now.isoformat(timespec='seconds')
+        # Откуда карточка: решение владельца по сырью. Нужно, чтобы при слиянии
+        # с существующей карточкой или выкидывании ответить в консоль, что с
+        # его решением стало (28 октября 2026, «Аккую»: карточку слили в
+        # g2f22b1dc, владелец об этом не узнал).
+        card['from_raw'] = {'draft_id': str(draft['draft_id']), 'title': str(draft.get('title') or '')[:200]}
         pending['cards'].append(card)
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'take'
