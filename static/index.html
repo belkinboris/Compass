@@ -1312,20 +1312,29 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
 @keyframes peBlink{50%{opacity:0}}
 .pe-tailwrap{opacity:0;transform:translateY(6px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .pe-tailwrap.in{opacity:1;transform:none}
-.pe-sub{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
-.pe-m{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) auto;gap:4px 14px;padding:7px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
-.pe-m-l{font-weight:600}
-.pe-m-w{color:var(--muted)}
-.pe-m-w a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-.pe-m-r{font-weight:600;color:var(--ink);white-space:nowrap}
-.pe-cs{list-style:none;margin:0;padding:0}
-.pe-cs li{padding:6px 0;border-top:1px solid var(--line-soft);font-size:13.5px;line-height:1.45}
-.pe-cs a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
-.pe-c-y{color:var(--muted)}
-.pe-ex{font-size:13.5px;line-height:1.55;color:var(--ink);border-top:1px solid var(--line-soft);padding-top:7px}
-.pe-more{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.pe-foot{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
-@media(max-width:600px){.pe-m{grid-template-columns:minmax(0,1fr) auto}.pe-m-v{grid-column:1/-1;grid-row:2}.pe-tag{margin-left:0}}
+.pe-rows{margin-top:6px}
+.pe-r{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:4px 14px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
+.pe-k{color:var(--muted)}
+.pe-v{min-width:0;line-height:1.45}
+.pe-v small{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:2px}
+.pe-v small a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.pe-cmp{list-style:none;margin:0;padding:0}
+.pe-cmp li{display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:4px 0}
+.pe-cmp li:first-child{padding-top:0}
+.pe-ct{grid-column:1/-1;line-height:1.4;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.pe-cy{color:var(--muted);font-size:12px}
+.pe-cp{font-weight:600;white-space:nowrap}
+.pe-det{margin-top:10px;border-top:1px solid var(--line-soft);padding-top:8px}
+.pe-det summary{font-size:13px;color:var(--muted);cursor:pointer;list-style:none}
+.pe-det summary::-webkit-details-marker{display:none}
+.pe-det summary::after{content:" ↓"}
+.pe-det[open] summary::after{content:" ↑"}
+.pe-foot{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}
+.pe-cta{display:flex;justify-content:flex-end;margin-top:14px}
+.pe-cta a{display:inline-block;background:var(--accent-deep);color:#fff;text-decoration:none;border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600}
+.pe-cta a:hover{background:#163B2C}
+@media (max-width:480px){.pe-r{grid-template-columns:1fr;gap:2px}.pe-k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}}
+@media(max-width:600px){.pe-tag{margin-left:0}}
 .ai-row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 #facts .spec-row .ai-row-head .label{margin-bottom:0}
 .ai-ask{--pe-hub:var(--card);display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 inherit;font-family:inherit;color:var(--ink);
@@ -10253,17 +10262,23 @@ const COMPASS_SVG = '<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><ci
 const priceEstButton = () => `<button class="pe-calc" id="pe-btn" type="button" aria-expanded="false"
   title="Анализ Компаса: сколько могла стоить сделка">Посчитать</button>`;
 function priceEstTail(r){
-  // Откуда мультипликатор: база Компаса или открытое исследование со ссылкой
-  // (источники утверждены владельцем 28 октября 2026, docs/price_estimate_sources.md).
-  const methods = (r.methods||[]).map(m=>`<div class="pe-m"><span class="pe-m-l">${esc(m.label)}</span><span class="pe-m-v">${esc(m.base)} × ${esc(m.multiple)} <span class="pe-m-w">(${m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.where)}</a>`:esc(m.where)})</span></span><span class="pe-m-r num">${esc(m.result)}</span></div>`).join("");
-  const bench = (r.benchmarks||[]).map(b=>`<div class="pe-m"><span class="pe-m-l">${esc(b.label)}</span><span class="pe-m-v">${esc(b.value)} <span class="pe-m-w">(${b.url?`<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.source)}</a>`:esc(b.source)}, «${esc(b.sector)}», ${b.year})</span></span><span class="pe-m-r num">верхняя граница</span></div>`).join("");
-  const comps = (r.comparables||[]).map(c=>`<li><a href="#/deal/${encodeURIComponent(c.id)}">${esc(c.title)}</a> <span class="pe-c-y">${c.year}</span> <span class="num">${esc(c.price)}</span></li>`).join("");
-  return `${methods?`<div class="pe-sub">Как считали</div><div class="pe-ms">${methods}</div>`:""}
-    ${bench?`<div class="pe-sub">Мировой ориентир — в расчет не входит</div><div class="pe-ms">${bench}</div>`:""}
-    ${comps?`<div class="pe-sub">С чем сравнивали — покупки в той же отрасли с известной ценой</div><ul class="pe-cs">${comps}</ul>`:""}
-    ${r.experts?`<div class="pe-sub">Оценки специалистов из открытых источников</div><div class="pe-ex">${esc(r.experts)}</div>`:""}
-    <div class="pe-foot">Отчетность — ФНС; мультипликаторы — медианы по сделкам из базы Компаса и отраслевые ориентиры из открытых исследований (Б1 и Advance Capital, АТОН, Kept). Премия за контроль и особые условия договора в расчет не входят.</div>
-    <a class="pe-more" href="#/assistant" data-pe-more>Продолжить в ассистенте →</a>`;
+  // Вид «вывод и строки» (владелец, 29 октября 2026): под текстом — строки
+  // «что есть» (методы, мировой ориентир как верхняя граница, баланс как
+  // нижняя, похожие сделки), источники и оговорки — под «Как считали».
+  // Откуда мультипликаторы — docs/price_estimate_sources.md.
+  const src = m => m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.where)}</a>`:esc(m.where);
+  const row = (k, v, small) => `<div class="pe-r"><span class="pe-k">${k}</span><span class="pe-v">${v}${small?`<small>${small}</small>`:""}</span></div>`;
+  const methods = (r.methods||[]).map(m=>row(esc(m.label), `<span class="num">${esc(m.result)}</span>`, `${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}`)).join("");
+  const global = (r.global_methods||[]).map(m=>row("Мировой ориентир", `до <span class="num">${esc(m.result)}</span> — верхняя граница`, `${esc(m.label)} ${esc(m.multiple)}, ${src(m)}; за рубежом компании оцениваются в 2–3 раза дороже российских`)).join("");
+  const floor = r.floor?row("Не ниже", `<span class="num">${esc(r.floor.result)}</span> — нижняя граница`, `${esc(r.floor.base)}, ФНС; дешевле собственного капитала продают редко`):"";
+  const comps = (r.comparables||[]).map(c=>`<li><a class="pe-ct" href="#/deal/${encodeURIComponent(c.id)}">${esc(c.title)}</a><span class="pe-cy">${c.year}</span><span class="pe-cp num">${esc(c.price)}</span></li>`).join("");
+  const compRow = comps?row("Похожие сделки", `<ul class="pe-cmp">${comps}</ul>`):"";
+  const expRow = r.experts?row("Оценки источников", esc(r.experts)):"";
+  return `<div class="pe-rows">${methods}${global}${floor}${compRow}${expRow}</div>
+    <details class="pe-det"><summary>Как считали и что не учтено</summary>
+      <div class="pe-foot">Отчетность — ФНС; мультипликаторы — медианы по сделкам из базы Компаса и отраслевые ориентиры из открытых исследований (Б1 и Advance Capital, АТОН, Kept). Мировые ориентиры (Дамодаран, NYU Stern) показываем только тогда, когда российских нет, и только как верхнюю границу. Долг, премия за контроль и особые условия договора в расчет не входят.</div>
+    </details>
+    <div class="pe-cta"><a href="#/assistant" data-pe-more>Спросить ассистента →</a></div>`;
 }
 /* Текст «печатается»: ответ приходит целиком, а показывается по словам —
    читатель видит, что Компас пишет именно для этой сделки. Повторное
@@ -10283,7 +10298,7 @@ async function fillPriceEst(panel, r, fast){
   panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span><span class="pe-tag">расчет, а не цена сделки</span></div>
     ${r.range_text?`<div class="pe-range num"></div>`:""}<div class="pe-text"></div><div class="pe-tailwrap"></div>`;
   const caret = document.createElement("span"); caret.className = "pe-caret";
-  if(r.range_text) await typeInto(panel.querySelector(".pe-range"), r.range_text, fast, caret);
+  if(r.range_text) await typeInto(panel.querySelector(".pe-range"), r.range_text.charAt(0).toUpperCase() + r.range_text.slice(1), fast, caret);
   const box = panel.querySelector(".pe-text");
   for(const p of (r.paragraphs||[])){
     const el = document.createElement("p"); box.appendChild(el);

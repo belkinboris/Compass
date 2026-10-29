@@ -4599,6 +4599,7 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
     value = {
         "available": True,
         "range_text": summary["range_text"],
+        "range_kind": summary.get("range_kind") or "estimate",
         "paragraphs": paragraphs or price_estimate.template_text(summary),
         "by": by,
         "methods": [{"label": m["label"], "base": f'{m["base_name"]} за {m["report_year"]} год — '
@@ -4612,10 +4613,20 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
                      "url": (m.get("external") or {}).get("url"),
                      "result": price_estimate.money(m["stake_rub"] or m["full_rub"])}
                     for m in summary["methods"]],
-        "benchmarks": [{"label": price_estimate.EXT_LABEL.get(b["metric"], b["metric"]),
-                        "value": str(b["value"]).replace(".", ",") + "×", "sector": b["label"],
-                        "source": b["source"], "year": b["year"], "url": b["url"]}
-                       for b in summary.get("benchmarks") or []],
+        # Мировой ориентир (Дамодаран) — только когда российских методов нет:
+        # приложенный к отчетности, как верхняя граница; список голых
+        # мультипликаторов рядом с диапазоном владелец убрал (29 октября 2026).
+        "global_methods": [{"label": m["label"], "base": f'{m["base_name"]} за {m["report_year"]} год — '
+                            f'{price_estimate.money(m["base_rub"])}',
+                            "multiple": str(m["median"]).replace(".", ",") + "×",
+                            "where": f'{m["external"]["source"]}, «{m["external"]["label"]}», {m["external"]["year"]}',
+                            "url": m["external"].get("url"),
+                            "result": price_estimate.money(m["stake_rub"] or m["full_rub"])}
+                           for m in summary.get("global_methods") or []],
+        "floor": ({"base": f'балансовый капитал за {summary["floor"]["report_year"]} год — '
+                           f'{price_estimate.money(summary["floor"]["equity_rub"])}',
+                   "result": price_estimate.money(summary["floor"]["stake_rub"] or summary["floor"]["equity_rub"])}
+                  if summary.get("floor") else None),
         "comparables": [{"id": c["id"], "title": c["title"], "year": c["year"],
                          "price": price_estimate.money(c["price_rub"])
                          + (f' за {price_estimate._pct(c["stake"])}' if c["stake"] and c["stake"] < 99.5 else "")}

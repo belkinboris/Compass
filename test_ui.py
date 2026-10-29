@@ -5131,7 +5131,9 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     assert page.locator(".stat-hero.pe-host #pe-btn").inner_text().strip() == "Посчитать"
     page.click("#pe-btn")
     page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=60000)
-    assert "анализ компаса" in page.inner_text(".pe-panel").lower()
+    txt = page.inner_text(".pe-panel").lower()
+    assert "анализ компаса" in txt and "как считали" in txt and "спросить ассистента" in txt
+    assert page.locator(".pe-panel .pe-r").count() >= 1  # хотя бы одна строка «что есть»
     page.click("#pe-btn")
     page.wait_for_timeout(700)
     assert page.locator(".pe-panel.open").count() == 0

@@ -36,11 +36,16 @@ EXT_KINDS_IN_RANGE = ('deals', 'exchange')
 # метрика → (поле отчета, код строки, база словами, это EV (вычитать чистый долг))
 EXT_BASE = {
     'ev_ebitda': ('operating_profit_rub', '2200', 'операционная прибыль', True),
+    'ev_ebit': ('operating_profit_rub', '2200', 'операционная прибыль', True),
     'ev_sales': ('revenue_rub', '2110', 'выручка', True),
     'pe': ('net_profit_rub', '2400', 'чистая прибыль', False),
     'pb': ('equity_rub', '1300', 'капитал', False),
 }
-EXT_LABEL = {'ev_ebitda': 'EV/EBITDA', 'ev_sales': 'EV/Sales', 'pe': 'P/E', 'pb': 'P/B'}
+EXT_LABEL = {'ev_ebitda': 'EV/EBITDA', 'ev_ebit': 'EV/EBIT', 'ev_sales': 'EV/Sales', 'pe': 'P/E', 'pb': 'P/B'}
+# У мирового ориентира (global) EV/EBITDA к нашей базе не прикладывается: EBITDA
+# в отчетности ФНС нет (владелец, 29 октября 2026). К операционной прибыли —
+# его EV/EBIT, к выручке — EV/Sales, к капиталу — P/B, к прибыли — P/E.
+GLOBAL_METRICS = ('ev_ebit', 'ev_sales', 'pb', 'pe')
 
 
 def external_multiples(path: pathlib.Path | None = None) -> dict:
@@ -56,12 +61,18 @@ def external_methods(ind: str | None, report: dict | None, net_debt: float | Non
                      data: dict | None = None) -> tuple[list[dict], list[dict]]:
     """Методы по внешним мультипликаторам отрасли и мировые ориентиры.
     Сделочные (deals) и биржевые (exchange) — в методы и в диапазон; мировые
-    (global) — отдельным списком, в диапазон не входят. Без отчетности или без
-    записей по отрасли — пусто (пустое честнее подбора соседнего сектора)."""
+    (global) — в `benchmarks` (список ориентиров) и, если их можно приложить к
+    отчетности по совпадающей базе (`GLOBAL_METRICS`), — в третий список
+    `global_methods`: `build` берет их, только когда российских методов нет
+    (владелец, 29 октября 2026). Без отчетности или без записей по отрасли —
+    пусто (пустое честнее подбора соседнего сектора).
+
+    Возвращает (methods, benchmarks, global_methods); старые вызовы с двумя
+    значениями — через `external_methods(...)[:2]`."""
     data = external_multiples() if data is None else data
     recs = (data.get('industries') or {}).get(ind or '') or []
     sources = data.get('sources') or {}
-    methods, benchmarks = [], []
+    methods, benchmarks, global_methods = [], [], []
     for rec in recs:
         src = sources.get(rec.get('source')) or {}
         kind = src.get('kind')
@@ -70,8 +81,9 @@ def external_methods(ind: str | None, report: dict | None, net_debt: float | Non
         if kind == 'global':
             benchmarks.append({'metric': rec['metric'], 'label': EXT_LABEL.get(rec['metric'], rec['metric']),
                                'value': float(rec['value']), **ext})
-            continue
-        if kind not in EXT_KINDS_IN_RANGE or not report:
+            if rec['metric'] not in GLOBAL_METRICS or not report:
+                continue
+        elif kind not in EXT_KINDS_IN_RANGE or not report:
             continue
         key, code, base_name, is_ev = EXT_BASE.get(rec['metric'], (None, None, None, False))
         if not key:
@@ -87,14 +99,14 @@ def external_methods(ind: str | None, report: dict | None, net_debt: float | Non
             full -= net_debt
         if full <= 0:
             continue
-        methods.append({
+        (global_methods if kind == 'global' else methods).append({
             'metric': rec['metric'], 'label': EXT_LABEL.get(rec['metric'], rec['metric']),
             'base_name': base_name, 'base_rub': base, 'report_year': report['year'],
             'median': float(rec['value']), 'q1': None, 'q3': None, 'count': None,
             'scope': 'внешний', 'industry': ind, 'external': ext,
             'full_rub': full, 'stake_rub': full * stake / 100 if stake else None,
         })
-    return methods, benchmarks
+    return methods, benchmarks, global_methods
 
 # Сумма «известна» — анализ не нужен: цену назвали стороны или ее пересчитали из валюты.
 KNOWN_MEANINGS = ('disclosed', 'foreign_currency')
@@ -233,8 +245,8 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
             })
 
     # Внешние мультипликаторы отрасли — после методов по базе, в тот же диапазон.
-    ext_methods, benchmarks = external_methods(ind, report if report and report.get('year') else None,
-                                               net_debt, stake, external)
+    ext_methods, benchmarks, global_methods = external_methods(
+        ind, report if report and report.get('year') else None, net_debt, stake, external)
     methods.extend(ext_methods)
 
     # Отчетности нет, но карточка называет выручку: метод P/S считается по ней,
@@ -312,18 +324,36 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
     if 'оценк' in sum_text.lower():
         experts = (sum_text + ('. ' + experts if experts else ''))[:900]
 
-    rng = None
-    centrals = [m['stake_rub'] if stake else m['full_rub'] for m in methods]
+    # МИРОВОЙ ОРИЕНТИР — ТОЛЬКО КОГДА РОССИЙСКИХ МЕТОДОВ НЕТ (владелец, 29 октября
+    # 2026): тогда он дает верхнюю границу, а не диапазон. Есть хоть один метод
+    # по сделкам, бирже или базе — Дамодаран не показывается вовсе.
+    global_methods = [] if methods else global_methods
+    # ПО БАЛАНСУ: капитал компании (строка 1300) — нижняя граница. Сделку редко
+    # закрывают дешевле балансового капитала; для производств, недвижимости и
+    # банков это осмысленный ориентир, для ИТ — слабый (так и пишем).
+    floor = None
+    equity = _pick(report, 'equity_rub', '1300') if report and report.get('year') else None
+    if equity and equity > 0:
+        floor = {'equity_rub': equity, 'report_year': report['year'],
+                 'stake_rub': equity * stake / 100 if stake else None}
+
+    rng, range_kind = None, 'estimate'
+    basis = methods or global_methods
+    centrals = [m['stake_rub'] if stake else m['full_rub'] for m in basis]
     if len(centrals) >= 2:
         rng = (min(centrals), max(centrals))
     elif len(centrals) == 1:
-        m = methods[0]
+        m = basis[0]
         k = (stake / 100) if stake else 1.0
         lo = m['base_rub'] * (m['q1'] or m['median']) * k
         hi = m['base_rub'] * (m['q3'] or m['median']) * k
         rng = (min(lo, hi), max(lo, hi)) if hi > 0 else None
     if rng:
         rng = (_round2(rng[0]), _round2(rng[1]))
+    if rng and not methods:
+        range_kind = 'upper'          # только мировой ориентир: верхняя граница
+    elif not rng and floor:
+        range_kind = 'floor'          # только баланс: нижняя граница
 
     return {
         'deal_id': deal.get('id'), 'title': deal.get('title'), 'year': year,
@@ -331,9 +361,11 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         'report_year': (report or {}).get('year'), 'report_note': report_note,
         'revenue_rub': _pick(report, 'revenue_rub', '2110') if report else None,
         'net_profit_rub': _pick(report, 'net_profit_rub', '2400') if report else None,
-        'methods': methods, 'benchmarks': benchmarks, 'comparables': comps, 'experts': experts,
+        'methods': methods, 'benchmarks': benchmarks, 'global_methods': global_methods, 'floor': floor,
+        'comparables': comps, 'experts': experts,
         'card_revenue_rub': card_revenue, 'size_unknown': size_unknown, 'hidden_for_size': hidden_for_size,
-        'range': rng, 'range_text': range_text(rng, stake),
+        'range': rng, 'range_kind': range_kind,
+        'range_text': range_text(rng, stake, range_kind, floor),
     }
 
 
@@ -342,15 +374,20 @@ def can_estimate(s: dict) -> bool:
     оценка из источников. Иначе кнопки «Посчитать» на карточке нет вовсе
     (владелец, 29 октября 2026: «где мы знаем, что оценку дать нельзя —
     вообще не будем даже кнопку добавлять»)."""
-    return bool(s.get('methods') or s.get('comparables') or s.get('experts'))
+    return bool(s.get('methods') or s.get('global_methods') or s.get('floor')
+                or s.get('comparables') or s.get('experts'))
 
 
-def range_text(rng, stake) -> str | None:
+def range_text(rng, stake, range_kind='estimate', floor=None) -> str | None:
+    what = f'за {_pct(stake)}' if stake and stake < 99.5 else 'за 100%'
     if not rng:
+        if range_kind == 'floor' and floor:
+            return f'не ниже {money(floor["stake_rub"] or floor["equity_rub"])} {what}'
         return None
     lo, hi = money(rng[0]), money(rng[1])
     core = lo if lo == hi else _join_range(rng)
-    what = f'за {_pct(stake)}' if stake and stake < 99.5 else 'за 100%'
+    if range_kind == 'upper':
+        return f'до {money(rng[1])} {what}, верхняя граница'
     return f'≈ {core} {what}'
 
 
@@ -413,11 +450,22 @@ def facts_text(s: dict) -> str:
     if any(m.get('external') and m['metric'] == 'ev_ebitda' for m in s['methods']):
         lines.append('Оговорка: EBITDA в отчетности ФНС нет, мультипликатор EV/EBITDA применен к операционной прибыли '
                      '(без амортизации), поэтому такая оценка скорее занижена')
-    for b in s.get('benchmarks') or []:
-        lines.append(f'Мировой ориентир, {b["source"]}, сектор «{b["label"]}», {b["year"]} год: {EXT_LABEL.get(b["metric"], b["metric"])} '
-                     f'{str(b["value"]).replace(".", ",")}× — уровни там в 2–3 раза выше российских, это верхняя граница, в диапазон не входит')
+    for m in s.get('global_methods') or []:
+        e = m['external']
+        lines.append(
+            f'Мировой ориентир, {e["source"]}, сектор «{e["label"]}», {e["year"]} год: {m["label"]} '
+            f'{m["base_name"]} {money(m["base_rub"])} × {str(m["median"]).replace(".", ",")}× = {money(m["full_rub"])} за 100%'
+            + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else '')
+            + '; уровни там в 2–3 раза выше российских, поэтому это верхняя граница, а не оценка')
+    if s.get('floor'):
+        f = s['floor']
+        lines.append(f'Балансовый капитал по отчетности ФНС за {f["report_year"]} год: {money(f["equity_rub"])}'
+                     + (f', на долю {_pct(s["stake"])} — {money(f["stake_rub"])}' if f['stake_rub'] else '')
+                     + ' — нижняя граница: дешевле собственного капитала компании продают редко')
     if s['range_text']:
-        lines.append(f'Итоговый диапазон Компаса: {s["range_text"]}')
+        kind = {'upper': 'Верхняя граница по мировому ориентиру', 'floor': 'Нижняя граница по балансу'}.get(
+            s.get('range_kind'), 'Итоговый диапазон Компаса')
+        lines.append(f'{kind}: {s["range_text"]}')
     for c in s['comparables']:
         mult = ', '.join(f'{k.upper().replace("PS", "P/S").replace("PE", "P/E")} {str(round(v, 1)).replace(".", ",")}×'
                          for k, v in c['multiples'].items())
@@ -429,17 +477,16 @@ def facts_text(s: dict) -> str:
 
 
 def template_text(s: dict) -> list[str]:
-    """Объяснение без модели: модель недоступна или назвала лишнее число."""
+    """Объяснение без модели: модель недоступна или назвала лишнее число.
+    Четыре случая (владелец, 29 октября 2026): есть российские методы —
+    диапазон; только мировой ориентир — верхняя граница; только баланс —
+    нижняя граница; ничего — одна фраза, кнопки на карточке в этом случае
+    нет вовсе."""
     out = []
-    if s['range_text']:
+    kind = s.get('range_kind') or 'estimate'
+    if s['range_text'] and kind == 'estimate':
         out.append(f'По расчету Компаса сделка могла стоить {s["range_text"].replace("≈ ", "около ")}. '
                    'Это прикидка по отчетности и мультипликаторам похожих сделок, а не цена договора.')
-    elif s['comparables'] or s['experts']:
-        out.append('Посчитать цену по отчетности не получилось: '
-                   + ('нет отчетности покупаемой компании за год до сделки.' if not s['report_year']
-                      else 'у компании убыток или в отрасли мало сделок с известной ценой.')
-                   + ' Ниже — с чем можно сравнить.')
-    if s['methods']:
         names = ', '.join(dict.fromkeys(m['label'] for m in s['methods']))
         if s['methods'][0]['report_year']:
             ext_names = sorted({m['external']['source'] for m in s['methods'] if m.get('external')})
@@ -452,6 +499,23 @@ def template_text(s: dict) -> list[str]:
         else:
             out.append(f'Отчетности компании в базе нет, взяли выручку по данным источника и медианный '
                        f'мультипликатор {names} по сделкам отрасли с известной ценой.')
+    elif s['range_text'] and kind == 'upper':
+        g = s['global_methods'][0]['external']
+        out.append(f'Российских ориентиров по этой отрасли нет: ни сделок с известной ценой, ни биржевых '
+                   f'мультипликаторов. Есть мировые ({g["source"]}, {g["year"]} год), но там компании '
+                   'оцениваются в 2–3 раза дороже российских, поэтому по ним можно назвать только '
+                   f'верхнюю границу: {s["range_text"]}.')
+    elif s['range_text'] and kind == 'floor':
+        f = s['floor']
+        out.append(f'Посчитать цену по мультипликаторам не получилось: нет российских ориентиров по отрасли'
+                   + (' и прибыли у компании' if (s.get('net_profit_rub') or 0) <= 0 else '')
+                   + f'. Есть только балансовый капитал за {f["report_year"]} год — дешевле него продают '
+                   f'редко, поэтому это нижняя граница: {s["range_text"]}.')
+    elif s['comparables'] or s['experts']:
+        out.append('Посчитать цену по отчетности не получилось: '
+                   + ('нет отчетности покупаемой компании за год до сделки.' if not s['report_year']
+                      else 'у компании убыток или в отрасли мало сделок с известной ценой.')
+                   + ' Ниже — с чем можно сравнить.')
     if s.get('hidden_for_size') and not s['range_text']:
         out.append('Размер покупаемой компании неизвестен: ни выручки, ни активов в открытых данных нет. '
                    'Сделки отрасли с известной ценой есть, но без масштаба их не приводим — сравнение было бы не по делу.')
@@ -512,15 +576,13 @@ def clean_answer(text: str, facts: str, min_paragraphs: int = 2) -> list[str] | 
 
 
 SYSTEM = (
-    'Ты — аналитик сервиса «Компас» о сделках M&A в России. Цену этой сделки стороны не раскрыли. '
-    'Объясни читателю, сколько она могла стоить и почему, — только по сводке ниже. '
-    'Правила: никаких чисел, которых нет в сводке; не пересчитывай и не придумывай мультипликаторы; '
-    'итоговый диапазон бери ровно из сводки. Пиши по-русски, просто и по-деловому, как аналитик '
-    'объяснял бы партнеру вслух: без заголовков, списков, markdown и вводных слов. Все числа — цифрами и ровно в том виде, как в сводке (1,6 млрд ₽, а не «полтора миллиарда»); не досчитывай доли и проценты сам. '
-    'Три-четыре коротких абзаца, разделенных пустой строкой: 1) итоговая оценка и что она за долю; '
-    '2) из чего она получилась — отчетность и мультипликаторы: по базе Компаса и по открытым исследованиям, '
-    'источник называй так, как он назван в сводке; мировой ориентир, если он есть, упомяни одной фразой как верхнюю границу; 3) с чем сравнить — назови одну-две похожие сделки с ценой без выводов «выше» или «ниже» диапазона, '
-    'и оценки специалистов, если они есть, и сходятся ли они с расчетом; 4) одна фраза — чего расчет не '
-    'учитывает (долг, премия за контроль, особые условия сделки). Если диапазона нет — объясни, '
-    'каких данных не хватает, и что можно сказать по похожим сделкам. Не давай инвестиционных советов.'
+    'Ты — аналитик сервиса «Компас» о сделках M&A в России. Цену сделки стороны не раскрыли; объясни читателю, '
+    'сколько она могла стоить, — только по сводке ниже. Никаких чисел, которых нет в сводке, ничего не пересчитывай, '
+    'итог бери ровно из сводки: это диапазон, или верхняя граница по мировому ориентиру, или нижняя граница по балансу. '
+    'Все числа цифрами и в том виде, как в сводке (1,6 млрд ₽, а не «полтора миллиарда»). '
+    'Пиши по-русски, просто и по-деловому, без заголовков, списков и markdown; два-три коротких абзаца через пустую '
+    'строку: 1) итог и что он за долю; 2) из чего получился — какие методы и источники, названные как в сводке, и '
+    'почему это только граница, если это граница; 3) одной-двумя фразами похожие сделки и оценки источников, если есть, '
+    'и чего расчет не учитывает (долг, премия за контроль, условия сделки). Если итога нет — одной фразой, каких '
+    'данных не хватает. Без инвестиционных советов.'
 )
