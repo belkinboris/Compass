@@ -1170,8 +1170,7 @@ def test_bank_fin_summary_gives_central_bank_figures_with_a_dated_label():
         .count("Прибыль за 6 месяцев 2026 года 12,0 млн ₽") == 1
     deal = {"id": "x1", "title": "А купил Б", "asset": "Б", "target": "b"}
     html = format_post.render(deal, {"b": {"name": "Б", "desc": ""}}, fin={"target": (period, text)})
-    assert "<b>Финансы покупаемой компании на 1 апреля 2026 года:</b> Активы 1,5 млрд ₽" in html
-    assert "2026 года год" not in html
+    assert "Финансы" not in html, "финансов в посте нет (владелец, 29 октября 2026)"
 
 
 def test_build_fin_takes_bank_figures_without_fns_client():
@@ -1183,17 +1182,16 @@ def test_build_fin_takes_bank_figures_without_fns_client():
     assert send_telegram.build_fin(deal, {}, None, bank_finance={}) == {}
 
 
-def test_post_prints_the_financial_line_only_when_fin_is_passed_in():
-    """render() остается чистой функцией — финстрока появляется, только
-    если ее явно передали (`fin=…`), а не потому что render() сходил в
-    сеть сама (П7-9: живой запрос делает send_telegram.main(), не render())."""
+def test_post_never_prints_the_financial_line():
+    """Владелец, 29 октября 2026 (Velle): «надо перестать финансы в посты
+    добавлять, из-за них посты некрасивые». Строка «Финансы покупаемой
+    компании» не печатается, даже если финансы переданы; финансы остаются
+    на сайте."""
     deal = {"id": "x1", "title": "А купил Б", "asset": "Б", "target": "b"}
     companies = {"b": {"name": "Б", "desc": ""}}
     fin = {"target": (2025, "Выручка 1,0 млрд ₽")}
-    with_fin = format_post.render(deal, companies, fin=fin)
-    without_fin = format_post.render(deal, companies)
-    assert "<b>Финансы покупаемой компании, 2025 год:</b> Выручка 1,0 млрд ₽" in with_fin
-    assert "Финансы покупаемой компании" not in without_fin
+    assert "Финансы" not in format_post.render(deal, companies, fin=fin)
+    assert "Финансы" not in format_post.render(deal, companies)
 
 
 def test_post_links_to_the_card_by_a_button_and_to_the_source_in_the_text(base):
@@ -2531,7 +2529,7 @@ def test_card_changes_since_post_seeds_first_and_then_names_what_was_added():
     assert state["gX1"]["status"] == "Обсуждается" and state["gX1"]["eco"]["target_fin"] == "—"
     deal["sum"], deal["eco"]["target_fin"] = "1 млрд ₽", "Активы 1,5 млрд ₽ на 1 апреля 2026 года."
     found = send_telegram.card_changes_since_post([deal], posts, {}, state)
-    assert found == {"gX1": ["добавлен(а) сумма", "добавлены финансы покупаемой компании"]}
+    assert found == {"gX1": ["добавлен(а) сумма"]}, "финансы в пост не идут (29 октября 2026)"
     # без поста (null — бэклог, или вовсе нет записи) карточка не трогается
     assert send_telegram.card_changes_since_post([deal], {"gX1": None}, {}, {}) == {}
 
@@ -2585,11 +2583,11 @@ class _FakeFnsClient:
         pass
 
 
-def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tmp_path):
-    """Этап 9, П7-9: живой запрос к ФНС дорисовывает финстроку покупателя в
-    ПОСТ, который реально уходит, — а не в весь список кандидатов на
-    отправку (иначе прогон делал бы сотни/тысячи сетевых вызовов ради
-    ≤MAX_SENDS_PER_RUN писем, которые реально уйдут)."""
+def test_main_sends_the_post_without_a_financial_line_and_without_asking_fns(monkeypatch, tmp_path):
+    """До 29 октября 2026 живой запрос к ФНС дорисовывал финстроку покупателя в
+    уходящий пост (этап 9, П7-9). Владелец (Velle): «надо перестать финансы в
+    посты добавлять, из-за них посты некрасивые» — пост уходит без финстроки,
+    и ФНС перед отправкой не спрашивают вовсе."""
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
             "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ",
             "date": FRESH_DATE,
@@ -2625,10 +2623,10 @@ def test_main_dresses_the_final_batch_with_a_live_financial_line(monkeypatch, tm
 
     send_telegram.main(write=True, ignore_pace=True)
 
-    assert fake_fns.calls == ["1234567890"], "финансы искали ровно по подтвержденному ИНН покупателя"
+    assert fake_fns.calls == [], "перед отправкой поста ФНС больше не спрашивают"
     assert len(fake_tg.calls) == 1
     text = fake_tg.calls[0][1]["text"]
-    assert "<b>Финансы покупателя, 2025 год:</b> Выручка 1,0 млрд ₽" in text
+    assert "Финансы" not in text and "<b>Сумма:</b> 1 млрд ₽" in text
 
 
 def test_main_never_queries_fns_for_the_backlog_that_will_not_be_sent(monkeypatch, tmp_path):
@@ -7982,6 +7980,36 @@ def test_an_approved_proposal_edits_an_owner_text_post_and_becomes_its_text(monk
     assert written["gE1"]["post_override"] == NEW and "post_edit_proposal" not in written["gE1"]
     assert "post_edit_proposal" not in written["gE2"] and written["gE2"]["post_override"] == "<b>старый текст владельца</b>"
     assert sorted(consumed) == [31, 32]
+
+
+def test_owner_text_sent_after_the_decision_was_taken_still_becomes_the_first_post(monkeypatch, tmp_path):
+    """29 октября 2026, Velle (g3555ea6e): «опубликовать» нажато, approve.py
+    применил, прогон ушел в pytest; за это время владелец ответил на проект
+    поста своим текстом — пост вышел автотекстом («выложил пост без моих
+    правок, это возмутимо»). Первый пост берет текст владельца из решения
+    прямо перед отправкой и гасит это решение."""
+    import approve
+    deal = {"id": "gV1", "title": "«Логика молока» купила владельца бренда Velle", "date": "2026-10-29",
+            "status": "Закрыта", "type": "M&A", "buyer_name": "Логика молока", "seller": "Владислав Романовский",
+            "asset": "ООО «Велле Холдинг»", "ind": "Пищепром и напитки", "src": [["ТАСС", "https://tass.ru/1"]],
+            "reviewed": "2026-10-29", "accepted": "2026-10-29"}
+    _channels_world(monkeypatch, tmp_path, [deal], realty="")
+    owner = "«Логика молока» купила бренд растительных продуктов Velle\n\nПокупатель: Логика молока\nПродавцы: Владислав Романовский, Петр Жуков\nСтатус: Закрыта"
+    decisions = [{"id": 1092, "deal_id": "gV1", "verdict": "approve", "edited_text": owner,
+                  "created_at": "2026-10-29T11:12:28+00:00"}]
+    consumed = []
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: (decisions, ("site", "t")))
+    monkeypatch.setattr(approve, "consume", lambda handle, ids: consumed.extend(ids))
+    fake = _FakeClient([_ok(901)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    sent = [j for u, j in fake.calls if u.endswith("sendMessage")]
+    assert len(sent) == 1 and sent[0]["text"].startswith("«Логика молока» купила бренд растительных продуктов Velle")
+    assert "Продавцы: Владислав Романовский" in sent[0]["text"] and "карточке сделки" in sent[0]["text"]
+    assert 1092 in consumed
+    written = json.loads((tmp_path / "deals_promoted.json").read_text(encoding="utf-8"))
+    assert written["deals"][0]["post_override"].startswith("«Логика молока» купила бренд")
+    assert written["telegram_posts"]["gV1"] == 901
 
 
 def test_channel_rule_counts_a_deal_sum_but_not_an_auction_start_or_a_rumour():

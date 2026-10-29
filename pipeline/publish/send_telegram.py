@@ -411,12 +411,8 @@ def card_changes_since_post(deals, posts, realty_posts, post_state):
             post_state[did] = post_snapshot(deal)
             continue
         found = format_post.changes(before, deal)
-        was_fin = (before.get('eco') or {}).get('target_fin')
-        now_fin = (deal.get('eco') or {}).get('target_fin')
-        if format_post.has(now_fin) and not format_post.has(was_fin):
-            found.append('добавлены финансы покупаемой компании')
-        elif format_post.has(now_fin) and now_fin != was_fin and not _same_numbers(was_fin, now_fin):
-            found.append('уточнены финансы покупаемой компании')
+        # Финансы в пост больше не идут (29 октября 2026) — их изменение
+        # пост не правит; снимок обновится молча веткой ниже.
         if found:
             out[did] = found
         elif before.get('title') is not None and before.get('title') != deal.get('title') \
@@ -722,6 +718,20 @@ def digest_due(data, today):
     if not monthly_digest.enough(monthly_digest.stats(data, year, month)):
         return None
     return year, month
+
+
+def late_owner_texts(decisions):
+    """{id сделки: (HTML текста поста, id решения)} — «опубликовать» со своим
+    текстом по карточке, которая уже вышла из очереди (approve.py забрал
+    решения раньше, чем владелец ответил). Последнее по времени."""
+    out = {}
+    for d in sorted(decisions, key=lambda x: str(x.get('created_at') or '')):
+        did = str(d.get('deal_id') or '')
+        text = (d.get('edited_text') or '').strip()
+        if '~' in did or d.get('verdict') != 'approve' or not text or text.startswith('{'):
+            continue
+        out[did] = (format_post.owner_text_as_html(text), d['id'])
+    return out
 
 
 def post_edit_decisions(decisions):
@@ -1409,36 +1419,25 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         print('Лимит за прогон: %d. В очереди еще %d — доберем в следующих прогонах.'
               % (MAX_SENDS_PER_RUN, len(rest)))
 
-    # Финстрока сторон из ФНС (Этап 9, П7-9) — ЗДЕСЬ, а не при сборке
-    # to_send/to_edit: тот список — весь непубликованный бэклог (в реальной
-    # базе — тысячи карточек), и живой запрос `bo()` на каждую сторону
-    # каждой из них означал бы тысячи сетевых вызовов за прогон ради
-    # ≤MAX_SENDS_PER_RUN штук, которые реально уйдут. Дорисовываем только
-    # УЖЕ ОТОБРАННЫЙ батч. `fns_client_or_none()` тихо отдает `None` без
-    # сети/без ключа — тогда `build_fin()` для каждой сделки честно
-    # возвращает {}, посты уходят без финстроки, а не падают.
-    # Без ключа ФНС финстрока все равно собирается для банков и НКО — их
-    # отчетность статична (bank_finance.json), сеть ей не нужна.
-    fns_client = fns_client_or_none()
-    from pipeline import fns_registry
-    confirmed_inns = fns_registry.confirmed_inns()
-    bank_finance = load_bank_finance()
+    # ТЕКСТ ВЛАДЕЛЬЦА, ПРИСЛАННЫЙ ПОСЛЕ ТОГО, КАК approve.py ЗАБРАЛ РЕШЕНИЯ.
+    # 29 октября 2026, Velle (g3555ea6e): кнопка «опубликовать» нажата, прогон
+    # публикации применил ее и ушел в pytest на двадцать минут; за это время
+    # владелец ответил на проект поста своим текстом — а пост вышел
+    # автотекстом («мне показали проект поста, я его поменял, а потом он
+    # выложил пост без моих правок»). Решение с текстом лежало на сайте, но
+    # его читал только approve.py — для карточки, которой в очереди уже нет.
+    # Первый пост берет такой текст здесь, прямо перед отправкой.
+    late = late_owner_texts(m_decisions)
     by_id = {d['id']: d for d in data['deals']}
     augmented = []
     for kind, did, payload in batch:
         deal = by_id.get(did)
-        if kind in ('send', 'edit') and deal and not deal.get('post_override'):
-            fin = build_fin(deal, confirmed_inns, fns_client, bank_finance)
-            if fin:
-                if kind == 'send':
-                    payload = format_post.render(deal, comps, fin=fin)
-                else:
-                    mid, _old_text = payload
-                    payload = (mid, format_post.render(deal, comps, updates=updates_by_id.get(did), fin=fin))
+        if kind == 'send' and deal and did in late:
+            deal['post_override'] = late[did][0]
+            payload = initial_post_text(deal, comps)
+            print('  %s: пост уйдет текстом владельца, присланным после решения' % did)
         augmented.append((kind, did, payload))
     batch = augmented
-    if fns_client is not None:
-        fns_client.close()
 
     deals_by_id = {d['id']: d for d in data['deals']}
     manual_edits = site_channel_edits() if write and any(b[0] == 'edit' for b in batch) else {}
@@ -1497,6 +1496,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 if channels.REALTY in mids:
                     realty_posts[did] = mids[channels.REALTY]
                 post_state[did] = post_snapshot(deal)
+                if did in late:
+                    m_sent_decision_ids.append(late[did][1])
                 sent += 1
             else:
                 record = {'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}

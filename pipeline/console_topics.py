@@ -46,6 +46,16 @@ TOPIC_NAMES = {
 FALLBACK = {"admin": "decision"}
 
 _cache = None
+# Сайт не ответил списком тем (сеть, 5xx) — это не «тема не заведена».
+# 29 октября 2026 обрыв связи превращался в отметку «тема не заведена» и
+# коммит, а через три часа сайт отвечал — и отметка снималась другим коммитом.
+_unreachable = False
+
+
+def site_answered() -> bool:
+    """Последний запрос списка тем дошел до сайта и вернул ответ."""
+    _fetch_topics()
+    return not _unreachable
 
 
 def _slug(name: str) -> str:
@@ -60,6 +70,7 @@ def _fetch_topics() -> dict:
         return _cache
     site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
     token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    global _unreachable
     _cache = {}
     if not token:
         return _cache
@@ -68,8 +79,10 @@ def _fetch_topics() -> dict:
         r = httpx.get('%s/api/moderation/topics' % site, params={'token': token}, timeout=20)
         if r.status_code == 200:
             _cache = r.json().get('topics') or {}
+        else:
+            _unreachable = True
     except Exception:                                       # noqa: BLE001
-        pass
+        _unreachable = True
     return _cache
 
 

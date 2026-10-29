@@ -5149,11 +5149,18 @@ def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
     # На телефоне кнопка — то же прозрачное стекло, что и нижняя панель
     # (27 октября 2026, вечер: «такого же цвета и с такой же тенью, как и
     # соседний блок»); на компьютере — плотный #0F2B21.
-    bg = page.evaluate("getComputedStyle(document.getElementById('aiFab')).backgroundColor")
+    # Страница в тестах одна на сессию, предыдущий тест оставляет ее на ширине
+    # компьютера, а переход по хеш-адресу ее не перезагружает: кнопка
+    # перекрашивается с плавным переходом (.2s), и на медленном сервере CI
+    # мгновенное чтение цвета заставало старый #0F2B21 (29 октября 2026, восемь
+    # красных прогонов подряд). Ждем конца перехода, а не читаем сразу.
+    fab_bg = "getComputedStyle(document.getElementById('aiFab')).backgroundColor"
     if page.evaluate("innerWidth <= 720"):
+        page.wait_for_function("() => (%s).startsWith('rgba(')" % fab_bg, timeout=5000)
+        bg = page.evaluate(fab_bg)
         assert bg.startswith("rgba(") and float(bg.split(",")[-1].strip(" )")) < 1, bg
     else:
-        assert bg == "rgb(15, 43, 33)", bg
+        page.wait_for_function("() => (%s) === 'rgb(15, 43, 33)'" % fab_bg, timeout=5000)
     page.click("#aiFab")
     page.wait_for_selector(".ai-sheet.half #chatbox", timeout=15000)
     # как в WHOOP: «Задайте вопрос» и подсказки одной строкой, не больше четырех

@@ -6732,7 +6732,13 @@ def _already_on_site(deal_id: str) -> bool:
     pending = {str(c.get("id")) for c in (_read_json("static/data/pending.json", {}).get("cards") or [])}
     if did in pending:
         return False
-    return any(str(d.get("id")) == did for d in (base_data.promoted() or {}).get("deals") or [])
+    base = base_data.promoted() or {}
+    # Карточка в базе, а пост еще не вышел (29 октября 2026, Velle: решение
+    # применено, публикация ждет pytest) — текст владельца еще успеет стать
+    # текстом поста (send_telegram.late_owner_texts), ответ записывается.
+    if not (base.get("telegram_posts") or {}).get(did):
+        return False
+    return any(str(d.get("id")) == did for d in base.get("deals") or [])
 
 
 ALREADY_ON_SITE_TEXT = ("Эта карточка уже на сайте, пост — в канале. Кнопки и ответы на этот "

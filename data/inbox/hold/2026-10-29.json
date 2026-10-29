@@ -2,6 +2,237 @@
  "made": "2026-10-29",
  "drafts": [
   {
+   "draft_id": "d75291808",
+   "title": "Американская компания Anthropic подала документы для проведения IPO",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-26",
+     "title": "Переговоры",
+     "note": "Американская компания Anthropic, разработчик искусственного интеллекта Claude, подала заявку для проведения первичного публичного размещения акций (IPO) в США . Об этом 26 октября сообщило агентство Bloomberg. Компания планирует разместить акции на бирже…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d50807881",
+   "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/10/26/anthropics-ipo-filing-reveals-its-strategy-for-keeping-enterprise-customers-hooked/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d74292177",
+   "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/27/10/2026/6ae0413319b3f291b6cc36cb"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19448211",
+   "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+    ]
+   ],
+   "sum": "5,8 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-27",
+     "title": "Сделка завершена",
+     "note": "В Люберцах Московской области на торгах реализовали земельный участок.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "участок",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "участок",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d83317718",
+   "title": "Площади нового ресторана с коми-пермяцким названием продают за десятки миллионов рублей",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139432"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13443805",
+   "title": "Anthropic: компания, которую нельзя купить",
+   "date": "2026-10-27",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1367410.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d54996945",
+   "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6ae17caffe8cbef4c5193423"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
+   ]
+  },
+  {
    "draft_id": "d55306904",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
@@ -30,52 +261,69 @@
    ]
   },
   {
-   "draft_id": "d99048238",
-   "title": "На Украине продали конфискованную квартиру Артемия Лебедева",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/28/76730586/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-28",
-     "title": "Сделка завершена",
-     "note": "Недвижимость площадью 193,2 «квадрата» расположена в историческом центре Киева",
-     "source": [
-      "web:fontanka.ru",
-      "https://www.fontanka.ru/2026/10/28/76730586/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "конфискованная квартира Артемия Лебедева",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "конфискованная квартира Артемия Лебедева",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d37223632",
-   "title": "«Русал» и Гана подписали меморандум о создании СП по добыче бокситов",
+   "draft_id": "d52553580",
+   "title": "«Финам» предоставит «квалам» доступ к IPO Anthropic",
    "date": "2026-10-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261029/rusal-874742326.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/29/1241165-finam-predostavit-kvalam"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финансовые услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d71095779",
+   "title": "Аналитики Yota отметили рост интереса молодежи к инвестициям в 2,5 раза",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/investitsii-2127812416.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13898350",
+   "title": "На Ставрополье сняли ограничения на покупку бензина",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/skfo/news/stavropol/2026/10/29/na-stavropole-snyali-ogranicheniya-na-pokupku-benzina"
     ]
    ],
    "sum": null,
@@ -94,160 +342,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62229622",
-   "title": "The Times узнала о доходах ФИФА в $5 млрд от продажи билетов на ЧМ-2026",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/sport/29/10/2026/6ae2fad64f91972b351993e1"
-    ]
-   ],
-   "sum": "$5 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99286398",
-   "title": "Reuters: Bloomberg и трейдеры купили сверхбыстрый доступ к постам Трампа",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28265737"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "Сервис Truth API предоставляет подписчикам доступ к постам президента США в Truth Social на 50 миллисекунд быстрее, чем остальным пользователям",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28265737"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "сверхбыстрый доступ к постам Трампа",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "сверхбыстрый доступ к постам Трампа",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d93560685",
-   "title": "Вахта привлекла 2,7 млн соискателей и стала круглогодичной",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/29/vahta-privlekla-2-7-mln-soiskatelej"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Вахта",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Вахта",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d37641069",
-   "title": "Какие ошибки делают почти все при покупке электророзеток",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053140018"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d27567121",
-   "title": "С бизнесмена суд взыскал неосновательное обогащение и вернула 10 гектаров земли в казну",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:krasrab.ru",
-     "https://krasrab.ru/news/incidents/59696"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
