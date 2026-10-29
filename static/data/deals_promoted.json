@@ -232767,11 +232767,15 @@
     [
      "Фонтанка",
      "https://www.fontanka.ru/2026/10/28/76730198/"
+    ],
+    [
+     "Retailer.ru",
+     "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "350 млн ₽",
     "share": "Фонд «Бумеранг Капитал» выкупил 50% Baggins Coffee и стал управляющим партнером. Остальные 50% получил предприниматель Антон Петров, сооснователь «Цех 85».",
     "val": "Сумма сделки сторонами не раскрыта. Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает стоимость сети не выше 350 млн ₽.",
     "target_fin": "Baggins Coffee основана в 2017 году в Петербурге: 202 кофейни в десяти городах России, часть работает по франшизе. По данным СПАРК, выручка ООО «Бэггинс кофе» за 2025 год — 138,9 млн ₽ (−3,5% к 2024), чистая прибыль упала с 16,8 млн ₽ в 2024 году до 581 тыс. ₽ в 2025.",
@@ -232853,11 +232857,11 @@
      "card_hash": "d74d398c6585"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 350000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "ec3467febb8e"
     },
     "date": {
      "value": "2026-10-28",
@@ -232895,11 +232899,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
-   }
+   },
+   "sum": "350 млн ₽"
   },
   {
    "id": "g8e6dcf0b",
@@ -233648,6 +233653,18 @@
     [
      "ЕГРЮЛ: история участников ООО «Велле Холдинг»",
      "https://datanewton.ru/contragents/1237700042623/history/timeline"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9063564"
+    ],
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/118914-logika-moloka-priobrela-vladeltsa-brenda-rastitelnykh-produktov-velle/"
+    ],
+    [
+     "Фонтанка.ру",
+     "https://www.fontanka.ru/2026/10/29/76731967/"
     ]
    ],
    "from_ingest": true,
@@ -233677,6 +233694,24 @@
      "source": [
       "ТАСС",
       "https://tass.ru/ekonomika/28265797"
+     ],
+     "sources": [
+      [
+       "ТАСС",
+       "https://tass.ru/ekonomika/28265797"
+      ],
+      [
+       "Коммерсантъ",
+       "https://www.kommersant.ru/doc/9063564"
+      ],
+      [
+       "Абирег",
+       "https://abireg.ru/newsitem/118914-logika-moloka-priobrela-vladeltsa-brenda-rastitelnykh-produktov-velle/"
+      ],
+      [
+       "Фонтанка.ру",
+       "https://www.fontanka.ru/2026/10/29/76731967/"
+      ]
      ]
     }
    ],
