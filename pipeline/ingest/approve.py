@@ -392,12 +392,23 @@ def main(write=False):
     data = json.load(open(DATA, encoding='utf-8'))
     existing = {d['id'] for d in data['deals']}
     post_mod = last_by_deal(decisions, POST_VERDICTS)
+    # РЕШЕНИЕ О ПОСТЕ ПОМНИТСЯ У КАРТОЧКИ, А НЕ ТОЛЬКО В РЕШЕНИЯХ САЙТА.
+    # Решения забираются и подтверждаются сайту за один прогон; если карточка
+    # в этот прогон не вышла (придержана, тупик приемки, показана заново), ее
+    # «без поста» пропадало вместе с подтвержденными решениями. 28 октября
+    # 2026 партнер нажал «без поста» у лицензии на участок в Башкирии
+    # (`gf2b5f78c`), карточку придержали из-за тестов, показали заново — и
+    # утром пост вышел в канал («мы вроде вчера обсудили, что только на сайт»).
+    for card in pending['cards']:
+        post = post_mod.get(card['id'])
+        if post:
+            card['post_verdict'] = post['verdict']
     fresh = []
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
         clean = {k: v for k, v in card.items()
                  if k not in ('pending_since', 'draft_sent', 'held', 'post_draft_sent',
-                               '_pending_post_preview')}
+                               '_pending_post_preview', 'post_verdict')}
         # КОГДА КАРТОЧКА ПОЯВИЛАСЬ НА САЙТЕ — это не то же самое, что дата
         # сделки. Лента сортируется по дате СДЕЛКИ, и одобренная сегодня
         # карточка о сделке 28 июля встает в середину списка: владелец 7 августа
@@ -412,7 +423,8 @@ def main(write=False):
             clean['post_override'] = format_post.owner_text_as_html(override)
         # «Без поста»: карточка выходит на сайт, а канал молчит. send_telegram
         # увидит признак и засеет telegram_posts как бэклог, не отправляя.
-        post = post_mod.get(card['id'])
+        post = post_mod.get(card['id']) or (
+            {'verdict': card['post_verdict']} if card.get('post_verdict') else None)
         if post and post['verdict'] == 'post_no':
             clean['no_post'] = True
         import strip_yo  # pipeline/strip_yo.py: база без «е» (27 октября 2026)

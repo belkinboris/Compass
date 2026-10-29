@@ -118,7 +118,8 @@ def store_on_site(deal, event, client=None):
 def build_plan():
     data = json.load(open(DATA, encoding='utf-8'))
     milestones = data.get('telegram_milestones') or {}
-    undrafted = [(deal, event) for deal, event in send_telegram.milestone_candidates(data['deals'], milestones)
+    undrafted = [(deal, event) for deal, event in send_telegram.milestone_candidates(
+                    data['deals'], milestones, data.get('telegram_post_state') or {})
                 if not event.get('milestone_drafted_at')]
     plan = [(milestone_message(deal, event), milestone_keyboard(deal['id'], event['kind']), deal, event)
            for deal, event in undrafted]

@@ -2670,7 +2670,8 @@ def test_render_milestone_has_the_same_party_block_as_a_post():
     import check_post
     text = format_post.render_milestone(deal, event)
     lines = text.split("\n")
-    assert lines[0] == "📌 <b>«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова</b>"
+    # без булавки «📌» в начале — владелец снял ее 29 октября 2026
+    assert lines[0] == "<b>«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова</b>"
     assert "Сделка:" not in text
     parties = [l for l in lines if l.startswith(("<b>Покупатель:", "<b>Продавец:", "<b>Предмет:"))]
     assert parties == ["<b>Покупатель:</b> ООО «Оптика Мира»", "<b>Продавец:</b> Ростех",
@@ -2750,6 +2751,25 @@ def test_milestone_candidates_requires_headline_and_postworthy_kind():
     ]}]
     out = send_telegram.milestone_candidates(deals, {})
     assert [e["id"] for _d, e in out] == ["d2-closed"]
+
+
+def test_milestone_candidates_skips_a_stage_the_first_post_already_told():
+    """29 октября 2026, «Агропромкредит»: первый пост вышел 27 октября уже со
+    статусом «Закрыта» и этапом закрытия в «Ходе сделки»; через два дня консоль
+    предложила веху «закрытие», партнер нажал — в канале два одинаковых поста
+    («Мы это уже постили»). Этап, который снимок первого поста уже нес, —
+    не кандидат; сделка, вышедшая «Обсуждается» и закрывшаяся потом, — кандидат."""
+    deals = [{"id": "g1", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыта", "id": "g1-closed"}]},
+        {"id": "g2", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыта", "id": "g2-closed"}]}]
+    post_state = {"g1": {"status": "Закрыта", "events": [{"kind": "closed"}]},
+                  "g2": {"status": "Обсуждается", "events": []}}
+    out = send_telegram.milestone_candidates(deals, {}, post_state)
+    assert [e["id"] for _d, e in out] == ["g2-closed"]
+    assert send_telegram.first_post_already_told({"kind": "closed"}, {"status": "Закрыта"})
+    assert not send_telegram.first_post_already_told({"kind": "closed"}, None)
+    assert [e["id"] for _d, e in send_telegram.milestone_candidates(deals, {})] == ["g1-closed", "g2-closed"]
 
 
 def test_milestone_candidates_dedups_by_stage_posts():
@@ -5224,6 +5244,30 @@ def test_enrich_allows_a_second_event_of_the_same_kind_on_a_different_date():
     props = enrich.proposals(deal, item, {}, {})
     assert any(p[0] == "event" for p in props), \
         "второе одобрение в другую дату обязано остаться отдельным событием"
+
+
+def test_enrich_never_adds_a_second_closing_to_a_closed_deal():
+    """29 октября 2026, «Агропромкредит» (g1f8414a3): закрытие 27 октября уже
+    стояло в `events[]`, Mergers.ru пересказал его 29-го — приток добавил
+    второе «Сделка завершена» с датой пересказа, сайт показал два одинаковых
+    этапа, а веха о закрытии повторила первый пост. Закрытие и срыв у сделки
+    одно: вторая новость — еще один источник этапа, не новый этап. Два
+    согласования в разные даты по-прежнему допустимы."""
+    import enrich
+    deal = {"id": "g1f8414a3", "title": "«ЭсЭфАй» выиграла торги за банк «Агропромкредит»",
+            "type": "Продажа с торгов", "status": "Закрыта",
+            "events": [{"kind": "closed", "date": "2026-10-27",
+                        "source": ["E1.RU", "https://www.e1.ru/text/business/2026/10/27/76726339/"]}]}
+    item = {"title": "Банк «Агропромкредит» продали на аукционе за 1,4 млрд рублей",
+            "summary": "Акции банка продали на аукционе за 1,4 млрд руб. Приобретателем стало ПАО «ЭсЭфАй».",
+            "url": "https://mergers.ru/news/Bank-Agropromkredit-87709", "date": "2026-10-29", "source_id": "mergers"}
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), "второе закрытие у закрытой сделки"
+    src = [p for p in props if p[0] == "event_source"]
+    assert src and src[0][1]["date"] == "2026-10-27" and src[0][1]["source"][1] == item["url"]
+    enrich.apply_props(deal, props)
+    assert len(deal["events"]) == 1
+    assert item["url"] in {u for _l, u in __import__("format_post").milestone_sources(deal["events"][0])}
 
 
 def test_enrich_does_not_duplicate_an_event_from_the_same_source_url_on_a_different_date():
@@ -7951,6 +7995,47 @@ def test_silence_clock_runs_without_pending_since():
     cards = [{"id": "n1", "draft_sent": True, "reviewed": old_day, "accepted": old_day}]
     publish, _hold, _wait, _discard = approve.plan_actions(cards, [], now)
     assert [c["id"] for c, _o, _w in publish] == ["n1"]
+
+
+def test_a_no_post_decision_survives_a_hold_and_a_resend(tmp_path, monkeypatch):
+    """28 октября 2026, лицензия на участок в Башкирии (gf2b5f78c): партнер
+    нажал «без поста», карточку придержали из-за тестов, решения подтвердились
+    сайту, карточку показали заново, владелец нажал «публикуем» — и утром пост
+    вышел в канал («мы вроде вчера обсудили, что только на сайт»). Вердикт о
+    посте запоминается у карточки в очереди и применяется при публикации."""
+    import approve
+    from datetime import datetime, timedelta, timezone
+    stale = (datetime.now(timezone.utc) - timedelta(days=3)).isoformat(timespec="seconds")
+    card = {"id": "gf2b5f78c", "title": "Лицензия", "date": "2026-10-28", "draft_sent": True,
+            "pending_since": stale, "reviewed": "2026-10-28", "accepted": "2026-10-28", "held": True}
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps({"deals": [], "companies": {}}, ensure_ascii=False), encoding="utf-8")
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}}), encoding="utf-8")
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(tmp_path / "consume.json"))
+    import promote
+    monkeypatch.setattr(promote, "STATE", str(state))
+    monkeypatch.setattr(promote, "notify", lambda *a, **k: None)
+    # прогон 1: «без поста» и «придержать» — карточка остается в очереди
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "gf2b5f78c", "verdict": "post_no", "created_at": "2026-10-28T16:00:00+00:00"},
+        {"id": 2, "deal_id": "gf2b5f78c", "verdict": "hold", "created_at": "2026-10-28T16:01:00+00:00"}], None))
+    approve.main(write=True)
+    left = json.loads(pending.read_text(encoding="utf-8"))["cards"]
+    assert left and left[0]["post_verdict"] == "post_no"
+    # прогон 2: решения подтверждены сайту и забыты им, карточку показали заново, «публикуем»
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 3, "deal_id": "gf2b5f78c", "verdict": "approve", "created_at": "2026-10-28T18:00:00+00:00"}], None))
+    approve.main(write=True)
+    deals = json.loads(data.read_text(encoding="utf-8"))["deals"]
+    assert [d["id"] for d in deals] == ["gf2b5f78c"]
+    assert deals[0].get("no_post") is True and "post_verdict" not in deals[0]
 
 
 def test_approve_keeps_a_preset_added_date(tmp_path, monkeypatch):
