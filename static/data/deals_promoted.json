@@ -231919,6 +231919,30 @@
      "source": [
       "E1.RU",
       "https://www.e1.ru/text/business/2026/10/27/76726339/"
+     ],
+     "id": "g1f8414a3-closed",
+     "newsworthy": true,
+     "snapshot": {
+      "title": "«ЭсЭфАй» выиграла повторные торги за банк «Агропромкредит», национализированный у Артема Бикова и Алексея Боброва",
+      "type": "Продажа с торгов",
+      "status": "Закрыта",
+      "sum": "1,427 млрд ₽",
+      "buyer": "ПАО «ЭсЭфАй»",
+      "seller": "Промсвязьбанк",
+      "asset": "Агропромкредит",
+      "ind": "Банки"
+     },
+     "headline": "Банк «Агропромкредит» продали на аукционе за 1,4 млрд рублей",
+     "milestone_drafted_at": "2026-10-29T07:47:37+00:00"
+    },
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "Акции коммерческого банка «Агропромкредит» продали на аукционе за 1,4 млрд руб., следует из информации на сайте Российского аукционного дома. Приобретателем стало ПАО «ЭсЭфАй». В лот вошли 50% акций банка, а также 100% долей в компаниях «Дэнсиборг» и…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Bank-Agropromkredit-prodali-na-aukcione-za-14-mlrd-rublej-holdingu-SFI-87709"
      ]
     }
    ],
@@ -232033,7 +232057,7 @@
     "date": {
      "value": "2026-10-27",
      "meaning": "publication",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "20724cee98b0",
      "meaning_variants": [
       "publication"
@@ -232059,7 +232083,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "nature": {
      "control_change": true,
@@ -232122,7 +232147,13 @@
    },
    "sum": "1,427 млрд ₽",
    "deep_researched": "2026-10-28",
-   "date_basis": "publication"
+   "date_basis": "publication",
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Bank-Agropromkredit-prodali-na-aukcione-za-14-mlrd-rublej-holdingu-SFI-87709"
+    ]
+   ]
   },
   {
    "id": "g601b6589",

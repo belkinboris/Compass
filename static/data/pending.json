@@ -91,58 +91,6 @@
    "post_preview": "<b>ЛСР выкупит у акционеров собственные акции на 3,5 млрд ₽</b>\n\n<b>Покупатель:</b> Группа ЛСР — девелопер жилой недвижимости и производитель стройматериалов — кирпича, бетона, гранитного щебня.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> акции ЛСР — 5 151 510 штук по 675 ₽ за акцию.\n<b>Сумма:</b> 3,5 млрд ₽\n<b>Статус:</b> Подписана\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261028/sovet-874721147.html\">ПРАЙМ</a>\nЕще 2 источника — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g0f479af0\">карточке сделки</a>"
   },
   {
-   "id": "g50ed2f8b",
-   "date": "2026-10-29",
-   "title": "Китайская Golden Brick Capital получила 49% в проекте НСЗК",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/9063195"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "Китайская Golden Brick Capital",
-   "asset": "проект НСЗК",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Китайская Golden Brick Capital",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9063195"
-     }
-    ],
-    "target": [
-     {
-      "value": "проект НСЗК",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9063195"
-     }
-    ]
-   },
-   "pending_since": "2026-10-29T05:55:28+00:00"
-  },
-  {
    "id": "gb986603e",
    "date": "2026-10-29",
    "title": "НСЗК привлекла китайского инвестора в дальневосточный агропроект с долей 49%",
