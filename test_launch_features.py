@@ -5115,6 +5115,41 @@ def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, mo
     client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
 
 
+def test_text_reply_to_a_post_edit_proposal_becomes_the_new_post_text(client, monkeypatch):
+    """29 октября 2026, «Агропромкредит». Владелец о постах со своим текстом:
+    «напиши в консоли, что хочешь обновить в посте и как будет выглядеть новый
+    пост… мы нажмем согласие или отказ или направим новую редакцию». Полный
+    текст в ответ на «[правка поста <id>]» — решение `<id>~edit`/post_yes с
+    этим текстом; вопрос — заметка; «отмена» снимает неприменённое решение."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
+                        or {"ok": True, "result": {"message_id": 9200}})
+    deal = "g%s" % uuid.uuid4().hex[:8]
+    marker = "✏️ [правка поста %s] — пост о сделке уже вышел в канале; предлагаю заменить его текст" % deal
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": "А сумма точно 1,4?", "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 21, "text": marker}}})
+    new = ("«ЭсЭфАй» купила банк «Агропромкредит» за 1,427 млрд рублей\n\nПокупатель: ПАО «ЭсЭфАй»\n"
+           "Продавец: Промсвязьбанк\nПредмет: 50% банка и две компании с оставшейся долей\nСумма: 1,427 млрд ₽")
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": new, "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 22, "text": marker}}})
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] in (deal, deal + "~edit")]
+    assert {(d["deal_id"], d["verdict"]) for d in rows} == {(deal, "note"), (deal + "~edit", "post_yes")}, rows
+    assert next(d for d in rows if d["verdict"] == "post_yes")["edited_text"] == new
+    accepted = [p["text"] for m, p in sent if "(правка поста %s~edit)" % deal in str(p.get("text"))]
+    assert accepted and "изменится на ваш текст" in accepted[0]
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": "отмена", "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 23, "text": accepted[0]}}})
+    left = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == deal + "~edit"]
+    assert left == [], left
+    client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
+
+
 def test_unrecognised_reply_in_the_console_goes_to_the_agent_not_into_silence(client, monkeypatch):
     """Ответ человека на сообщение бота, которое ни одно правило не разобрало,
     не пропадает молча: он уходит агенту (тема «Клод»), а человеку сразу
