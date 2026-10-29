@@ -30,97 +30,13 @@
    ]
   },
   {
-   "draft_id": "d29147832",
-   "title": "«Алроса» выставила на торги железорудный актив в Якутии",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/10/29/1240960-alrosa-vistavila-na-torgi-aktiv"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90467144",
-   "title": "Объем инвестиций в коммерческую недвижимость РФ вырос до 378 млрд рублей за год",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28265405"
-    ]
-   ],
-   "sum": "378 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63459970",
-   "title": "The Times: ФИФА заработала $5 млрд на продаже билетов на чемпионат мира",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/sport/28265407"
-    ]
-   ],
-   "sum": "$5 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d02921292",
-   "title": "«Остались рожки да ножки». Что происходит в аварийных памятниках, которые город продал в частные руки",
-   "date": "2026-10-29",
+   "draft_id": "d99048238",
+   "title": "На Украине продали конфискованную квартиру Артемия Лебедева",
+   "date": "2026-10-28",
    "src": [
     [
      "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/29/76729370/"
+     "https://www.fontanka.ru/2026/10/28/76730586/"
     ]
    ],
    "sum": null,
@@ -129,21 +45,21 @@
    "events": [
     {
      "kind": "closed",
-     "date": "2026-10-29",
+     "date": "2026-10-28",
      "title": "Сделка завершена",
-     "note": "Отель, апарты, ресторан и неизвестность",
+     "note": "Недвижимость площадью 193,2 «квадрата» расположена в историческом центре Киева",
      "source": [
       "web:fontanka.ru",
-      "https://www.fontanka.ru/2026/10/29/76729370/"
+      "https://www.fontanka.ru/2026/10/28/76730586/"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "в частные руки",
+   "asset": "конфискованная квартира Артемия Лебедева",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "в частные руки",
+    "asset": "конфискованная квартира Артемия Лебедева",
     "seller": null
    },
    "ind": null,
@@ -181,16 +97,16 @@
    ]
   },
   {
-   "draft_id": "d26383448",
-   "title": "В Госдуме предложили проводить продуктовые распродажи для семей",
+   "draft_id": "d62229622",
+   "title": "The Times узнала о доходах ФИФА в $5 млрд от продажи билетов на ЧМ-2026",
    "date": "2026-10-29",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261029/rasprodazhi-874742400.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/29/10/2026/6ae2fad64f91972b351993e1"
     ]
    ],
-   "sum": null,
+   "sum": "$5 млрд",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -209,13 +125,81 @@
    ]
   },
   {
-   "draft_id": "d38591773",
-   "title": "СМИ: ФИФА заработала пять миллиардов долларов на продаже билетов на ЧМ-2026",
+   "draft_id": "d99286398",
+   "title": "Reuters: Bloomberg и трейдеры купили сверхбыстрый доступ к постам Трампа",
    "date": "2026-10-29",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261029/fifa-2127743301.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28265737"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "Сервис Truth API предоставляет подписчикам доступ к постам президента США в Truth Social на 50 миллисекунд быстрее, чем остальным пользователям",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28265737"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "сверхбыстрый доступ к постам Трампа",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "сверхбыстрый доступ к постам Трампа",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d93560685",
+   "title": "Вахта привлекла 2,7 млн соискателей и стала круглогодичной",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/29/vahta-privlekla-2-7-mln-soiskatelej"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Вахта",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Вахта",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d37641069",
+   "title": "Какие ошибки делают почти все при покупке электророзеток",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053140018"
     ]
    ],
    "sum": null,
@@ -231,48 +215,20 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23445631",
-   "title": "«Бумеранг Капитал» приобрёл 50% сети Baggins Coffee",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/"
-    ]
-   ],
-   "sum": "350 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g25a6766d (общие редкие слова: baggin, coffee) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d23205605",
-   "title": "Стала известна прибыль ФИФА от продажи билетов на ЧМ-2026",
+   "draft_id": "d27567121",
+   "title": "С бизнесмена суд взыскал неосновательное обогащение и вернула 10 гектаров земли в казну",
    "date": "2026-10-29",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/29/stala-izvestna-pribyl-fifa-na-prodazhe-biletov-na-chm-2026/"
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/incidents/59696"
     ]
    ],
    "sum": null,
@@ -287,10 +243,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
