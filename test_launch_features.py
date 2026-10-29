@@ -4723,6 +4723,16 @@ def test_a_missing_console_topic_is_reported_once(tmp_path, monkeypatch):
     again = mod.topic_note("user_notes", today="2026-10-01")
     assert again and "/topic" in again, again
 
+    # Сайт не ответил списком тем (29 октября 2026: обрыв связи ставил отметку
+    # «не заведена», а следующий прогон ее снимал — два коммита шума каждые три
+    # часа): отметка не трогается, ответ говорит про связь, а не про тему.
+    marker.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(mod.console_topics, "site_answered", lambda: False)
+    down = mod.topic_note("user_notes", today="2026-10-29")
+    assert down and "не ответил" in down and "/topic" not in down, down
+    assert json.loads(marker.read_text(encoding="utf-8")) == {}
+    monkeypatch.setattr(mod.console_topics, "site_answered", lambda: True)
+
 
 def _clear_channel_settings(main_module):
     from db.session import get_session
