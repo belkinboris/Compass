@@ -2,17 +2,17 @@
  "made": "2026-10-29",
  "drafts": [
   {
-   "draft_id": "d54996945",
-   "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
+   "draft_id": "d55306904",
+   "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ae17caffe8cbef4c5193423"
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -30,19 +30,98 @@
    ]
   },
   {
-   "draft_id": "d55306904",
-   "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
-   "date": "2026-10-28",
+   "draft_id": "d80083004",
+   "title": "Россия и Африка намерены расширять торговлю и инвестиции в энергетику",
+   "date": "2026-10-29",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/afrika-874785952.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-29",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261029/afrika-874785952.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58431918",
+   "title": "Путин рассказал, как африканские производители могут продавать свои товары",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/putin-2127934392.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d28133958",
+   "title": "Россия и Африка намерены расширять торговлю и инвестиции в энергетику",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/afrika-2127929757.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-29",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20261029/afrika-2127929757.html"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
