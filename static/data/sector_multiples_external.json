@@ -68,6 +68,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Oil/Gas (Integrated)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 8.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Oil/Gas (Integrated)"
+   },
+   {
+    "metric": "pb",
+    "value": 2.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Oil/Gas (Integrated)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Oil/Gas (Integrated)"
    }
   ],
   "Уголь": [
@@ -82,6 +103,27 @@
    {
     "metric": "ev_ebitda",
     "value": 7.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Coal & Related Energy"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 11.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Coal & Related Energy"
+   },
+   {
+    "metric": "pb",
+    "value": 1.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Coal & Related Energy"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.9,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Coal & Related Energy"
@@ -116,6 +158,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Metals & Mining"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 16.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Metals & Mining"
+   },
+   {
+    "metric": "pb",
+    "value": 2.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Metals & Mining"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Metals & Mining"
    }
   ],
   "Энергетика": [
@@ -139,6 +202,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Power"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Power"
+   },
+   {
+    "metric": "pb",
+    "value": 1.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Power"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 2.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Power"
    }
   ],
   "Химия и удобрения": [
@@ -153,6 +237,27 @@
    {
     "metric": "ev_ebitda",
     "value": 16.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Chemical (Basic)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 44.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Chemical (Basic)"
+   },
+   {
+    "metric": "pb",
+    "value": 1.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Chemical (Basic)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.6,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Chemical (Basic)"
@@ -186,6 +291,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Farming/Agriculture"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Farming/Agriculture"
+   },
+   {
+    "metric": "pb",
+    "value": 1.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Farming/Agriculture"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Farming/Agriculture"
    }
   ],
   "Пищепром и напитки": [
@@ -216,6 +342,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Food Processing"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Food Processing"
+   },
+   {
+    "metric": "pb",
+    "value": 2.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Food Processing"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Food Processing"
    }
   ],
   "Ритейл": [
@@ -236,6 +383,27 @@
    {
     "metric": "ev_ebitda",
     "value": 12.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (Grocery and Food)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 20.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (Grocery and Food)"
+   },
+   {
+    "metric": "pb",
+    "value": 2.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (Grocery and Food)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 0.8,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Retail (Grocery and Food)"
@@ -269,6 +437,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Retail (General)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 21.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (General)"
+   },
+   {
+    "metric": "pb",
+    "value": 1.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (General)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Retail (General)"
    }
   ],
   "Потребительские товары": [
@@ -289,6 +478,27 @@
    {
     "metric": "ev_ebitda",
     "value": 22.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Household Products"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 28.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Household Products"
+   },
+   {
+    "metric": "pb",
+    "value": 3.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Household Products"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.3,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Household Products"
@@ -329,6 +539,20 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Software (System & Application)"
+   },
+   {
+    "metric": "pb",
+    "value": 4.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 5.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
    }
   ],
   "Искусственный интеллект": [
@@ -360,6 +584,20 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Software (System & Application)"
+   },
+   {
+    "metric": "pb",
+    "value": 4.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 5.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Software (System & Application)"
    }
   ],
   "Телеком": [
@@ -387,6 +625,27 @@
    {
     "metric": "ev_ebitda",
     "value": 7.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Telecom. Services"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Telecom. Services"
+   },
+   {
+    "metric": "pb",
+    "value": 1.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Telecom. Services"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 2.0,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Telecom. Services"
@@ -427,6 +686,34 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Bank (Money Center)"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 69.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Bank (Money Center)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 75.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Bank (Money Center)"
+   },
+   {
+    "metric": "pb",
+    "value": 0.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Bank (Money Center)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 8.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Bank (Money Center)"
    }
   ],
   "Страхование": [
@@ -447,6 +734,34 @@
    {
     "metric": "pe",
     "value": 10.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Insurance (General)"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 8.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Insurance (General)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 8.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Insurance (General)"
+   },
+   {
+    "metric": "pb",
+    "value": 1.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Insurance (General)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.3,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Insurance (General)"
@@ -473,6 +788,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 17.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "pb",
+    "value": 2.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 8.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
    }
   ],
   "Финансовые услуги": [
@@ -493,6 +829,34 @@
    {
     "metric": "pe",
     "value": 14.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "ev_ebitda",
+    "value": 16.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 17.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "pb",
+    "value": 2.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Financial Svcs. (Non-bank & Insurance)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 8.4,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Financial Svcs. (Non-bank & Insurance)"
@@ -519,6 +883,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Transportation"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Transportation"
+   },
+   {
+    "metric": "pb",
+    "value": 1.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Transportation"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Transportation"
    }
   ],
   "Порты и инфраструктура": [
@@ -532,6 +917,27 @@
    {
     "metric": "ev_ebitda",
     "value": 7.3,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Shipbuilding & Marine"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 10.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Shipbuilding & Marine"
+   },
+   {
+    "metric": "pb",
+    "value": 1.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Shipbuilding & Marine"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 2.1,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Shipbuilding & Marine"
@@ -552,6 +958,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Auto & Truck"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 21.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Auto & Truck"
+   },
+   {
+    "metric": "pb",
+    "value": 1.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Auto & Truck"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Auto & Truck"
    }
   ],
   "Недвижимость": [
@@ -568,6 +995,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Real Estate (Operations & Services)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 17.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Real Estate (Operations & Services)"
+   },
+   {
+    "metric": "pb",
+    "value": 0.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Real Estate (Operations & Services)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 4.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Real Estate (Operations & Services)"
    }
   ],
   "Строительство": [
@@ -581,6 +1029,27 @@
    {
     "metric": "ev_ebitda",
     "value": 10.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Engineering/Construction"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 15.1,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Engineering/Construction"
+   },
+   {
+    "metric": "pb",
+    "value": 0.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Engineering/Construction"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 0.7,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Engineering/Construction"
@@ -609,6 +1078,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Hospitals/Healthcare Facilities"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 25.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Hospitals/Healthcare Facilities"
+   },
+   {
+    "metric": "pb",
+    "value": 3.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Hospitals/Healthcare Facilities"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Hospitals/Healthcare Facilities"
    }
   ],
   "Фармацевтика": [
@@ -622,6 +1112,27 @@
    {
     "metric": "ev_ebitda",
     "value": 18.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Drugs (Pharmaceutical)"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 25.6,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Drugs (Pharmaceutical)"
+   },
+   {
+    "metric": "pb",
+    "value": 2.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Drugs (Pharmaceutical)"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.4,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Drugs (Pharmaceutical)"
@@ -641,6 +1152,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Education"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 11.2,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Education"
+   },
+   {
+    "metric": "pb",
+    "value": 1.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Education"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 2.5,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Education"
    }
   ],
   "Развлечения": [
@@ -654,6 +1186,27 @@
    {
     "metric": "ev_ebitda",
     "value": 14.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Entertainment"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 22.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Entertainment"
+   },
+   {
+    "metric": "pb",
+    "value": 2.8,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Entertainment"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.9,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Entertainment"
@@ -689,6 +1242,27 @@
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Broadcasting"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 23.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Broadcasting"
+   },
+   {
+    "metric": "pb",
+    "value": 0.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Broadcasting"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 1.9,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Broadcasting"
    }
   ],
   "Машиностроение": [
@@ -703,6 +1277,27 @@
    {
     "metric": "ev_ebitda",
     "value": 25.0,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Machinery"
+   },
+   {
+    "metric": "ev_ebit",
+    "value": 41.7,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Machinery"
+   },
+   {
+    "metric": "pb",
+    "value": 3.4,
+    "year": 2026,
+    "source": "damodaran_em_2026",
+    "label": "Machinery"
+   },
+   {
+    "metric": "ev_sales",
+    "value": 3.2,
     "year": 2026,
     "source": "damodaran_em_2026",
     "label": "Machinery"

@@ -23,6 +23,8 @@ def _table(ps_values, industry='ИТ и интернет'):
     return {'rows': rows, 'cells': {'all': {'ps': [cell, allc], 'pe': [], 'ev_op': []}}}
 
 
+EMPTY = {'rows': [], 'cells': {'all': {'ps': [], 'pe': [], 'ev_op': []}}}
+
 DEAL = {'id': 'gx', 'title': 'Покупатель приобрел 80% компании', 'date': '2025-05-01', 'type': 'M&A',
         'ind': 'ИТ и интернет', 'sum': 'Не раскрыта', 'eco': {'val': '—'},
         'facts': {'price': {'meaning': 'undisclosed'}}}
@@ -221,12 +223,45 @@ def test_external_multiples_join_the_range_and_global_stays_a_benchmark():
     assert s['benchmarks'][0]['value'] == 10.6 and all(not m.get('external') or m['external']['kind'] != 'global' for m in s['methods'])
     text = pe.facts_text(s)
     assert 'по данным Б1 (цены сделок, сектор «Сельское хозяйство», 2024 год)' in text
-    assert 'Мировой ориентир, Дамодаран' in text and 'в диапазон не входит' in text
+    # есть российские методы — мирового ориентира в сводке нет вовсе (владелец, 29 октября 2026)
+    assert 'Дамодаран' not in text and s['global_methods'] == [] and s['range_kind'] == 'estimate'
     assert 'отраслевые ориентиры из открытых исследований (Б1)' in ' '.join(pe.template_text(s))
     # без отчетности и без записей по отрасли — ничего
     assert pe.external_methods('Агро', None, None, 80, ext) == ([], [{'metric': 'ev_ebitda', 'label': 'Farming', 'value': 10.6,
-        'source': 'Дамодаран', 'name': 'NYU', 'url': 'https://x.edu', 'kind': 'global', 'year': 2026, 'note': None}])
-    assert pe.external_methods('Уголь', rep, None, 80, ext) == ([], [])
+        'source': 'Дамодаран', 'name': 'NYU', 'url': 'https://x.edu', 'kind': 'global', 'year': 2026, 'note': None}], [])
+    assert pe.external_methods('Уголь', rep, None, 80, ext) == ([], [], [])
+
+
+def test_global_only_gives_upper_bound_and_equity_gives_floor():
+    """Четыре случая (владелец, 29 октября 2026). Российских методов нет:
+    Дамодаран по EV/EBIT — верхняя граница «до X»; без него и без прибыли —
+    балансовый капитал как нижняя граница «не ниже X»; без всего — can_estimate
+    False, кнопки на карточке нет."""
+    ext = {'sources': {'dam': {'short': 'Дамодаран', 'name': 'NYU', 'url': 'https://x.edu', 'kind': 'global'}},
+           'industries': {'Агро': [{'metric': 'ev_ebit', 'value': 12.0, 'year': 2026, 'source': 'dam', 'label': 'Farming'},
+                                   {'metric': 'ev_ebitda', 'value': 10.6, 'year': 2026, 'source': 'dam', 'label': 'Farming'}]}}
+    rep = {'year': 2024, 'revenue_rub': 500e6, 'assets_rub': 1e9, 'borrowings_rub': 0, 'cash_rub': 0,
+           'operating_profit_rub': 50e6, 'equity_rub': 300e6, 'lines': {}}
+    s = pe.build(DEAL, rep, EMPTY, {}, 'Агро', external=ext)
+    assert s['methods'] == [] and [m['metric'] for m in s['global_methods']] == ['ev_ebit']
+    assert s['range_kind'] == 'upper' and s['range_text'].startswith('до ') and 'верхняя граница' in s['range_text']
+    assert s['floor']['equity_rub'] == 300e6 and s['floor']['stake_rub'] == 300e6 * 0.8
+    facts = pe.facts_text(s)
+    assert 'Мировой ориентир, Дамодаран' in facts and 'EV/EBIT' in facts and 'Балансовый капитал' in facts
+    assert 'Верхняя граница по мировому ориентиру' in facts
+    tpl = ' '.join(pe.template_text(s))
+    assert 'Российских ориентиров по этой отрасли нет' in tpl and 'верхнюю границу' in tpl
+    assert pe.can_estimate(s) and 'ё' not in facts + tpl
+    # прибыли нет — остается только баланс
+    rep2 = dict(rep, operating_profit_rub=-5e6, net_profit_rub=-5e6)
+    s2 = pe.build(DEAL, rep2, EMPTY, {}, 'Агро', external=ext)
+    assert s2['global_methods'] == [] and s2['range_kind'] == 'floor'
+    assert s2['range_text'] == f'не ниже {pe.money(300e6 * 0.8)} за 80%'
+    assert 'нижняя граница' in ' '.join(pe.template_text(s2)) and pe.can_estimate(s2)
+    # ни отчетности, ни сделок — считать нечем
+    s3 = pe.build(DEAL, None, EMPTY, {}, 'Агро', external=ext)
+    assert not pe.can_estimate(s3) and s3['range_text'] is None
+    assert pe.template_text(s3) == ['Исходя из публичных данных, достоверно определить сумму сделки невозможно.']
 
 
 def test_card_revenue_feeds_ps_and_comparables_keep_the_scale():
