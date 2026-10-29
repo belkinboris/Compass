@@ -14561,6 +14561,13 @@ REGISTRY += [
      "date": '2026-10-29'},
 ]
 
+# Приемка карточки gf03916a4 — 2026-10-29 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g4e5fdb4a', "decision": "confirmed", "inn": '3662104575',
+     "reason": 'Приемка карточки gf03916a4 (2026-10-29): юрлицо АО «Воронежское центральное конструкторское бюро «Полюс»» названо читателем; ЕГРЮЛ из контейнера недоступен, ИНН 3662104575 и ОГРН 1053600512998 сверены по записи OpenSanctions/war-sanctions.gur.gov.ua (предшественник — ФГУП того же названия, ИНН 3662008342, преобразован в АО 30.11.2005).',
+     "date": '2026-10-29'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 

@@ -115,6 +115,90 @@
     "needs_review": true
    },
    "queued": "2026-10-29"
+  },
+  {
+   "key": "https://mergers.ru/news/Kitajskaya-Golden-Brick-Capital-poluchila-49-v-proekte-NSZK-87711::gb986603e",
+   "candidate_id": "gb986603e",
+   "reason": "общие редкие слова: китайс, нсзк",
+   "draft": {
+    "draft_id": "d91555560",
+    "title": "Китайская Golden Brick Capital получила 49% в проекте НСЗК",
+    "date": "2026-10-29",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Kitajskaya-Golden-Brick-Capital-poluchila-49-v-proekte-NSZK-87711"
+     ]
+    ],
+    "sum": "7 млрд ₽",
+    "type": "Инвестиция",
+    "status": "Обсуждается",
+    "events": [
+     {
+      "kind": "negotiations",
+      "date": "2026-10-29",
+      "title": "Переговоры",
+      "note": "Зарегистрированная в Гонконге Vision Investment Limited получила 49% в ООО \"Дальневосточная агропромышленная корпорация\". 51% долей остались у ООО «Новый сухопутный зерновой коридор», ранее контролировавшего 100% в компании. В НСЗК пояснили, что говорить о…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Kitajskaya-Golden-Brick-Capital-poluchila-49-v-proekte-NSZK-87711"
+      ]
+     }
+    ],
+    "buyer_name": "Китайская Golden Brick Capital",
+    "asset": "проект НСЗК",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Китайская Golden Brick Capital",
+     "asset": "проект НСЗК",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-29"
+  },
+  {
+   "key": "https://retailer.ru/logika-moloka-priobrela-proizvoditelja-velle/::g90ccbac0",
+   "candidate_id": "g90ccbac0",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d83486294",
+    "title": "«Логика молока» приобрела производителя Velle",
+    "date": "2026-10-29",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/logika-moloka-priobrela-proizvoditelja-velle/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-29",
+      "title": "Сделка завершена",
+      "note": "Под брендом Velle выпускается более 30 видов растительных продуктов, включая йогурты, каши, сливки, сметану и кофейные напитки. Сообщение «Логика молока» приобрела производителя Velle появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/logika-moloka-priobrela-proizvoditelja-velle/"
+      ]
+     }
+    ],
+    "buyer_name": "«Логика молока»",
+    "asset": "производитель Velle",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Логика молока»",
+     "asset": "производитель Velle",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-29"
   }
  ]
 }

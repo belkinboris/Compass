@@ -61,7 +61,8 @@ def test_comparables_are_purchases_not_rounds():
         'b': {'title': 'Раунд', 'type': 'Инвестиция', 'ind': 'ИТ и интернет', 'date': '2024-01-01',
               'facts': {'price': {'meaning': 'disclosed', 'value_rub': 1e9}, 'nature': {'cash_in': True}}},
     }
-    s = pe.build(DEAL, None, _table([1.0, 2.0, 3.0]), deals, 'ИТ и интернет')
+    sized = dict(DEAL, eco={'target_fin': 'Выручка за 2024 год — 500 млн ₽.'})  # без размера похожих нет (29.10.2026)
+    s = pe.build(sized, None, _table([1.0, 2.0, 3.0]), deals, 'ИТ и интернет')
     assert [c['id'] for c in s['comparables']] == ['a']
 
 
@@ -223,5 +224,7 @@ def test_card_revenue_feeds_ps_and_comparables_keep_the_scale():
     assert [c['id'] for c in s['comparables']] == ['small']
     assert 'по данным источника' in pe.facts_text(s)
     blind = pe.build(dict(DEAL, ind='Пищепром и напитки'), None, _table([1.0, 2.0, 3.0]), deals, 'Пищепром и напитки')
-    assert blind['size_unknown'] and len(blind['comparables']) == 2 and not blind['range_text']
-    assert any('несопоставимы' in t for t in pe.template_text(blind)) and 'не строить' in pe.facts_text(blind)
+    # 29 октября 2026 (Velle): без размера похожих сделок нет вовсе — «нефтебаза с
+    # двумя заправками рядом с Роснефтью… смешно и глупо для разбирающихся людей».
+    assert blind['size_unknown'] and blind['comparables'] == [] and not blind['range_text']
+    assert any('не приводим' in t for t in pe.template_text(blind)) and 'не приводить' in pe.facts_text(blind)
