@@ -2485,6 +2485,40 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
 
 
 
+def test_review_accepts_a_self_written_title_whose_names_are_backed_but_not_an_invented_name():
+    """Заголовок — своя конструкция, не цитата (владелец, 28–29 октября 2026,
+    Baggins Coffee: «так не говорят» о заголовке Фонтанки, взятом целиком).
+    Требование «заголовок дословно в цитате» заставляло брать заголовок
+    издания — ровно то, что запрещено. Проверяются имена: каждое название
+    в кавычках, латинское слово и слово с заглавной обязано лечь на цитату
+    или на уже записанные стороны и предмет карточки."""
+    import review
+    card = {"id": "g25a6766d", "title": "Сеть петербургских кофеен Baggins Coffee продали",
+            "seller": "Андрей Павлов", "asset": "Baggins Coffee"}
+    quote = ("50% в компании выкупил фонд «Бумеранг Капитал», став управляющим партнером. "
+             "Оставшиеся 50% перешли предпринимателю Антону Петрову.")
+    good = "Сооснователь Baggins Coffee Андрей Павлов продал кофейную сеть фонду «Бумеранг Капитал» и Антону Петрову"
+    assert review.title_problems(good, quote, card) == []
+    bad = review.title_problems("Сооснователь Baggins Coffee Андрей Павлов продал сеть фонду «Бумеранг Капитал» и Сергею Иванову", quote, card)
+    assert bad and any("Иванову" in b for b in bad) and not any("Павлов" in b for b in bad)
+    fix = {"id": "g25a6766d", "field": "title", "old": card["title"], "new": good, "quote": quote}
+    assert review.check(fix, card, [quote], {}, {"Пищепром и напитки"}) == []
+
+
+def test_a_rewritten_title_edits_the_post_silently():
+    """29 октября 2026, Baggins Coffee: заголовок переписан по слову владельца,
+    а пост в канале остался со старым — снимок поста заголовка не помнил.
+    Переписанный заголовок правит пост молча (без «Что стало известно»), пост с
+    текстом владельца не трогается."""
+    deals = [{"id": "gT1", "title": "Новый заголовок", "status": "Закрыта", "sum": "1 млрд ₽"},
+             {"id": "gT2", "title": "Новый заголовок", "status": "Закрыта", "post_override": "<b>свой</b>"}]
+    state = {"gT1": dict(send_telegram.post_snapshot(deals[0]), title="Старый заголовок"),
+             "gT2": dict(send_telegram.post_snapshot(deals[1]), title="Старый заголовок")}
+    out = send_telegram.card_changes_since_post(deals, {"gT1": 1, "gT2": 2}, {}, state)
+    assert out == {"gT1": []}, out
+    assert state["gT2"]["title"] == "Новый заголовок", "состояние поста с текстом владельца обновляется молча"
+
+
 def test_card_changes_since_post_seeds_first_and_then_names_what_was_added():
     """Пост о «дочке» Western Union вышел 29 сентября 2026 без финансов; 3
     октября карточка получила баланс НКО таблицей правок (не enrich.py) — и
