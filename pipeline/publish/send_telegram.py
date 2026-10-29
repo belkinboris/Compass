@@ -379,6 +379,9 @@ def post_snapshot(deal):
     eco, law = (deal.get('eco') or {}), (deal.get('law') or {})
     snap = {k: deal.get(k) for k in format_post.SIGNIFICANT
             if k not in ('advisers', 'events') and deal.get(k) is not None}
+    # Заголовок — тоже часть поста: переписали его (29 октября 2026, Baggins
+    # Coffee: «так не говорят») — пост правится молча, без «Что стало известно».
+    snap['title'] = deal.get('title')
     snap['law'] = {'adv': law.get('adv') or []}
     snap['eco'] = {'target_fin': eco.get('target_fin'), 'finadv': eco.get('finadv')}
     snap['events'] = [{'kind': e.get('kind')} for e in (deal.get('events') or []) if isinstance(e, dict)]
@@ -416,6 +419,9 @@ def card_changes_since_post(deals, posts, realty_posts, post_state):
             found.append('уточнены финансы покупаемой компании')
         if found:
             out[did] = found
+        elif before.get('title') is not None and before.get('title') != deal.get('title') \
+                and not deal.get('post_override') and not format_post.is_joint_post(deal):
+            out[did] = []   # молчаливая правка: заголовок переписан, фактов новых нет
         elif before != post_snapshot(deal):
             # Текст переписан теми же фактами (пересказ карточки, 16 октября
             # 2026): новостью это не считается — пост не трогаем, иначе у
@@ -1139,7 +1145,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             # Swordfish Security, вышедший текстом владельца, через три часа
             # переписался автотекстом после дополнения карточки («Выложили не
             # тот пост, который я в консоль отправил»).
-            if changes and not format_post.is_joint_post(deal) and not deal.get('post_override'):
+            if changes is not None and not format_post.is_joint_post(deal) and not deal.get('post_override'):
                 to_edit.append((did, where, format_post.render(deal, comps, updates=changes)))
             continue
         if did in posts:

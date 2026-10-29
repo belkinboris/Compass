@@ -195,3 +195,31 @@ def self_check(quote_is_real):
     assert prose_problems('«Мы надеемся удвоить выпуск сыров в течение двух лет», '
                           '— сказал гендиректор Иванов.', q_sp)
     assert prose_problems('Компания: «мы рассчитываем удвоить выпуск сыров в течение двух лет».', q_sp)
+
+
+def title_problems(new, quote, card, same_word):
+    """Заголовок — СВОЯ конструкция, не цитата (владелец, 28 октября 2026:
+    «мы же пересказываем и переделываем, чтобы не обвинили в краже»; 29
+    октября о заголовке Фонтанки, взятом целиком: «так не говорят»). До
+    29 октября 2026 `check` требовал заголовок дословно в цитате — и
+    единственным способом пройти проверку было взять заголовок издания, то
+    есть ровно то, что запрещено. Проверяется не фраза, а имена в ней:
+    каждое название в кавычках, латинское слово и слово с заглавной буквы
+    (кроме первого) обязано лечь — с точностью до окончания — на слово
+    цитаты или уже записанных сторон и предмета карточки (они прошли свою
+    дословную проверку). Так «Андрей Павлов» проходит по `seller`, «Антону
+    Петрову» — по цитате, а выдуманный «Иванов» — нет."""
+    if not new.strip():
+        return ['пустой заголовок']
+    backing = ' '.join([str(quote or '')] + [str(card.get(k) or '') for k in ('seller', 'buyer_name', 'asset', 'target')])
+    backing_words = [w for w in re.split(r'[^\wа-яё]+', backing, flags=re.I) if w]
+    words = [w for w in re.split(r'[^\wа-яё]+', new, flags=re.I) if w]
+    quoted = ' '.join(re.findall(r'«([^«»]+)»', new))
+    quoted_words = set(re.split(r'[^\wа-яё]+', quoted, flags=re.I)) - {''}
+    out = []
+    for i, w in enumerate(words):
+        proper = (w in quoted_words or re.fullmatch(r'[A-Za-z][A-Za-z\-]{2,}', w)
+                  or (i > 0 and w[0].isupper() and len(w) > 2))
+        if proper and not any(same_word(w, q) for q in backing_words):
+            out.append('в заголовке «%s», которого нет ни в цитате, ни в сторонах и предмете карточки' % w)
+    return out

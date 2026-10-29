@@ -346,6 +346,9 @@ def name_is_supported(new, quote):
     return name_is_nominative(new)
 
 
+title_problems = lambda n, q, c: prose_gate.title_problems(n, q, c, _same_word)
+
+
 def name_is_nominative(new):
     """Имя стороны обязано стоять В ИМЕНИТЕЛЬНОМ падеже.
 
@@ -547,8 +550,7 @@ def already_applied(fix, card, companies=None):
     return _yo(typo_flat(current)).lower() == _yo(typo_flat(fix['new'])).lower()
 
 
-# Текст карточки пишется, а не переносится (14 октября 2026): проверка —
-# в `prose_gate.py`, порядок — в `WRITING_BRIEF.md`.
+# Проза пишется, не переносится (14 октября 2026): prose_gate.py, WRITING_BRIEF.md.
 import prose_gate  # noqa: E402
 from prose_gate import (PROSE_WRITTEN, PROSE_MAX_RUN, QUOTE_SEP,  # noqa: E402,F401
                         plain_words, prose_problems)
@@ -637,12 +639,13 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         elif not any(w in quote.lower() for w in TYPE_WORDS[new]):
             bad.append('в цитате нет слова, подтверждающего тип «%s»' % new)
     elif field in ('sum', 'eco.sum') and new is not None:
-        # eco.sum — тоже сумма: по числам и единице, не дословно (gf2b5f78c).
         problem = sum_is_supported(new, quote)
         if problem:
             bad.append(problem)
     elif field in PROSE_WRITTEN and isinstance(new, str) and new.strip() not in ('', '—'):
         bad.extend(prose_problems(new, quote))
+    elif field == 'title':
+        bad.extend(title_problems(str(new or ''), quote, card))
     elif new is not None:
         # Имя, предмет, сумма — только перенос, дословно.
         if flat(new) not in flat(quote):
