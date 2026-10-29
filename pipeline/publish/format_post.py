@@ -1506,7 +1506,9 @@ def render_milestone(deal, event):
     момент этого этапа» на странице этапа.
     """
     snap = event.get('snapshot') or {}
-    lines = ['📌 <b>%s</b>' % esc(event.get('headline') or snap.get('title') or deal.get('title') or '')]
+    # Без значка в начале: булавку «📌» владелец снял 29 октября 2026 —
+    # «никто не понимает, что значит эта скрепка» (docs/channel_special_posts.md).
+    lines = ['<b>%s</b>' % esc(event.get('headline') or snap.get('title') or deal.get('title') or '')]
 
     # ТОТ ЖЕ БЛОК, ЧТО У ОБЫЧНОГО ПОСТА (владелец, 25 сентября 2026: «веха
     # неправильно отформатирована»). До этого у вехи был свой порядок —

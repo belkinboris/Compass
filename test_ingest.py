@@ -2670,7 +2670,8 @@ def test_render_milestone_has_the_same_party_block_as_a_post():
     import check_post
     text = format_post.render_milestone(deal, event)
     lines = text.split("\n")
-    assert lines[0] == "📌 <b>«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова</b>"
+    # без булавки «📌» в начале — владелец снял ее 29 октября 2026
+    assert lines[0] == "<b>«Ростех» продал штаб-квартиру «Швабе» компании Ильи Клебанова</b>"
     assert "Сделка:" not in text
     parties = [l for l in lines if l.startswith(("<b>Покупатель:", "<b>Продавец:", "<b>Предмет:"))]
     assert parties == ["<b>Покупатель:</b> ООО «Оптика Мира»", "<b>Продавец:</b> Ростех",
