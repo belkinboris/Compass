@@ -30,53 +30,41 @@
    ]
   },
   {
-   "draft_id": "d33530315",
-   "title": "Зачем «Логика молока» купила бренды 5Yes! и Velle",
+   "draft_id": "d20066512",
+   "title": "Сапфир дома Романовых выставят на аукционе Sotheby’s",
    "date": "2026-10-29",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/10/29/1241168-zachem-kupila-brendi"
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/29/10/2026/6ae33ae0dc2871f6a40c97ba"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "Производитель молочных продуктов и детского питания «Логика молока» (бывшая «Данон Россия») выкупил владельцев брендов растительных напитков 5Yes! (ООО «Полигрин») и Velle (ООО «Велле Холдинг»). Суммы сделок компания не раскрывает.",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/business/articles/2026/10/29/1241168-zachem-kupila-brendi"
-     ]
-    }
-   ],
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "бренды 5Yes! и Velle",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "бренды 5Yes! и Velle",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g90ccbac0 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d67221074",
-   "title": "Дочь первого президента Мозамбика: Африке нельзя «продаваться» из-за ресурсов",
+   "draft_id": "d49659963",
+   "title": "В заксобрание Красноярского края внесли законопроект о запрете продажи вейпов",
    "date": "2026-10-29",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28267323"
+     "https://tass.ru/obschestvo/28267641"
     ]
    ],
    "sum": null,
@@ -98,112 +86,17 @@
    ]
   },
   {
-   "draft_id": "d47699345",
-   "title": "Sotheby's: сапфир императорского дома Романовых выставят на аукцион в Женеве",
+   "draft_id": "d91996444",
+   "title": "«Русал» получит долю в двух совместных предприятиях по проектам в Гане",
    "date": "2026-10-29",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/obschestvo/28267269"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91509146",
-   "title": "DoorDash купила платформу для покупки продуктов Instacart за $17 миллиардов",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261029/doordash-874766250.html"
+     "https://tass.ru/ekonomika/28267685"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261029/doordash-874766250.html"
-     ]
-    }
-   ],
-   "buyer_name": "DoorDash",
-   "asset": "платформа для покупки продуктов Instacart",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "DoorDash",
-    "asset": "платформа для покупки продуктов Instacart",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d96054937",
-   "title": "Гигантский сапфир Романовых выставляют на аукцион в Европе",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053140142"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82058292",
-   "title": "Пятикомнатную квартиру рядом с парком «Краснодар» продают с торгов за 6,6 млн рублей. Но есть нюанс",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/realty/2026/10/29/76732397/"
-    ]
-   ],
-   "sum": "6,6 млн ₽",
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -218,7 +111,103 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g16dc5834 (общие редкие слова: продаю, торгов) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g0fadcead (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d86177461",
+   "title": "Москва возглавила рейтинг регионов по продажам авто с пробегом",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2192913/2026-10-29/moskva-vozglavila-reiting-regionov-po-prodazham-avto-s-probegom"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "За девять месяцев 2026 года в России продали 4,51 млн легковых автомобилей с пробегом — на 2% больше, чем за аналогичный период прошлого года. Крупнейшим региональным рынком остается Москва , где зарегистрировано 288,2 тыс. сделок, что на 10% больше год к…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2192913/2026-10-29/moskva-vozglavila-reiting-regionov-po-prodazham-avto-s-probegom"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d45442753",
+   "title": "Сапфир Романовых выставят на аукцион за 160 млн рублей",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2192887/2026-10-29/sapfir-romanovykh-vystaviat-na-auktcion-za-160-mln-rublei"
+    ]
+   ],
+   "sum": "160 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23048586",
+   "title": "В США оценили покупку Эфиопией российских Су-35С",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/29/v-ssha-otsenili-pokupku-efiopiey-rossiyskih-su-35s/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
