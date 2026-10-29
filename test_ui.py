@@ -5116,9 +5116,13 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     кнопки нет."""
     import json as _json
     base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
-    no_price = next(d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
-                    and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
-                    and d.get("type") == "M&A")
+    candidates = [d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
+                  and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
+                  and d.get("type") == "M&A"]
+    # Кнопка есть только там, где есть чем считать (29 октября 2026): берем
+    # первую сделку, по которой сайт отвечает «есть чем».
+    no_price = next(d for d in candidates[:40]
+                    if page.request.get(base_url + "/api/deals/" + d["id"] + "/price-estimate?probe=1").json().get("available"))
     page.goto(base_url + "/#/deal/" + no_price["id"], wait_until="domcontentloaded")
     page.wait_for_selector("#pe-btn", timeout=15000)
     bg = page.evaluate("getComputedStyle(document.getElementById('pe-btn')).backgroundColor")

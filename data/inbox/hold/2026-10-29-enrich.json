@@ -20,15 +20,6 @@
    ]
   },
   {
-   "news": "https://ura.news/news/1053139921",
-   "title": "Винные активы экс-партнера основателя ЮГК Струкова выставили на торги",
-   "verdict": "enrich:g2cdd8d6b",
-   "why": "общие слова заголовка: 3",
-   "reasons": [
-    "слабое совпадение: общие слова заголовка: 3"
-   ]
-  },
-  {
    "news": "https://mergers.ru/news/Bank-Agropromkredit-prodali-na-aukcione-za-14-mlrd-rublej-holdingu-SFI-87709",
    "title": "Банк «Агропромкредит» продали на аукционе за 1,4 млрд рублей холдингу SFI",
    "verdict": "enrich:g1f8414a3",
@@ -61,17 +52,17 @@
   {
    "news": "https://abireg.ru/newsitem/118909-struktura-sozvezdiya-vnov-vystavila-na-prodazhu-115-ga-pod-voronezhem-s-vozmozhnym-snizheniem-tseny/",
    "title": "Структура «Созвездия» вновь выставила на продажу 115 га под Воронежем с возможным снижением цены до 76,6 млн рублей",
-   "verdict": "enrich:g5257a627",
-   "why": "общие слова заголовка: 4",
+   "verdict": "enrich:gf03916a4",
+   "why": "тот же адрес источника",
    "reasons": [
-    "слабое совпадение: общие слова заголовка: 4"
+    "в карточке «102,2 млн ₽»"
    ]
   },
   {
    "news": "https://www.kommersant.ru/doc/9063564",
    "title": "«Логика молока» купила производителя растительных продуктов Velle",
    "verdict": "enrich:g3555ea6e",
-   "why": "общее название в кавычках и общие слова: 3",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «Velle (Велле Холдинг)»"
    ]
@@ -80,9 +71,27 @@
    "news": "https://abireg.ru/newsitem/118914-logika-moloka-priobrela-vladeltsa-brenda-rastitelnykh-produktov-velle/",
    "title": "«Логика молока» приобрела владельца бренда растительных продуктов Velle",
    "verdict": "enrich:g3555ea6e",
-   "why": "общее название в кавычках и общие слова: 5",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке «Velle (Велле Холдинг)»"
+   ]
+  },
+  {
+   "news": "https://www.fontanka.ru/2026/10/29/76731967/",
+   "title": "«Логика молока» купила петербургского производителя растительных продуктов",
+   "verdict": "enrich:g3555ea6e",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Velle (Велле Холдинг)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713",
+   "title": "Фонд «Бумеранг Капитал» и сооснователь «Цех 85» выкупили сеть кофеен Baggins Coffee",
+   "verdict": "enrich:g25a6766d",
+   "why": "общее название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке «Фонд «Бумеранг капитал»»"
    ]
   }
  ]

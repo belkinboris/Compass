@@ -4561,6 +4561,13 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
         industry = (get_company_profile(target_id) or {}).get("industry") or ""
     summary = price_estimate.build(deal, report, _sector_multiples(db), deal_catalog.load_deals(),
                                    industry, company)
+    # Считать нечем — кнопки на карточке нет (владелец, 29 октября 2026, Velle:
+    # четыре абзаца о том, почему оценку дать нельзя). `?probe=1` — страница
+    # спрашивает об этом при открытии карточки, без модели и без кэша.
+    if not price_estimate.can_estimate(summary):
+        return {"available": False, "reason": "no_data"}
+    if request.query_params.get("probe"):
+        return {"available": True}
     facts_text = price_estimate.facts_text(summary)
     key = hashlib.sha1(facts_text.encode("utf-8")).hexdigest()
     hit = _estimate_cache.get(deal_id)

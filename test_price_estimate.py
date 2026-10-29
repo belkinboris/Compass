@@ -39,7 +39,8 @@ def test_estimate_multiplies_revenue_by_the_sector_median_and_the_stake():
 def test_no_report_means_no_range_and_says_why():
     s = pe.build(DEAL, None, _table([1.0, 2.0, 3.0]), {}, 'ИТ и интернет')
     assert s['range'] is None and s['methods'] == []
-    assert 'Для оценки не хватает данных' in ' '.join(pe.template_text(s))
+    assert 'достоверно определить сумму сделки невозможно' in ' '.join(pe.template_text(s))
+    assert not pe.can_estimate(s)
 
 
 def test_disclosed_price_and_auctions_get_no_button():
@@ -80,10 +81,30 @@ def test_endpoint_answers_without_the_model(monkeypatch):
     disclosed = next(d for d in base['deals'] if not pe.needs_estimate(d) and d.get('type') == 'M&A')
     with TestClient(main.app) as client:
         r = client.get(f"/api/deals/{undisclosed['id']}/price-estimate").json()
-        assert r['available'] and r['paragraphs'] and r['by'] == 'template'
+        # Считать нечем — честный отказ без кнопки (29 октября 2026); есть чем — шаблон.
+        assert (r == {'available': False, 'reason': 'no_data'}) or (r['available'] and r['paragraphs'] and r['by'] == 'template')
+        probe = client.get(f"/api/deals/{undisclosed['id']}/price-estimate", params={'probe': '1'}).json()
+        assert probe == {'available': r['available']} or probe == {'available': False, 'reason': 'no_data'}
         assert client.get(f"/api/deals/{disclosed['id']}/price-estimate").json() == {
             'available': False, 'reason': 'price_known'}
         assert client.get('/api/deals/нет-такой/price-estimate').status_code == 404
+
+
+def test_endpoint_says_no_data_when_nothing_can_be_computed(monkeypatch):
+    """Velle, 29 октября 2026: четыре абзаца о том, почему оценку дать нельзя.
+    Владелец: «где мы знаем, что оценку дать нельзя — вообще не будем даже
+    кнопку добавлять». Пустая сводка — {available: False, reason: no_data},
+    и то же на ?probe=1, которым страница решает, ставить ли кнопку."""
+    import main
+    base = json.loads((ROOT / 'static' / 'data' / 'deals_promoted.json').read_text(encoding='utf-8'))
+    undisclosed = next(d for d in base['deals'] if pe.needs_estimate(d))
+    empty = {'methods': [], 'comparables': [], 'experts': None, 'range_text': None, 'benchmarks': [],
+             'stake': None, 'size_unknown': True, 'hidden_for_size': 0, 'title': 'x', 'year': 2026,
+             'report_year': None, 'card_revenue_rub': None}
+    monkeypatch.setattr(main.price_estimate, 'build', lambda *a, **k: empty)
+    with TestClient(main.app) as client:
+        assert client.get(f"/api/deals/{undisclosed['id']}/price-estimate").json() == {'available': False, 'reason': 'no_data'}
+        assert client.get(f"/api/deals/{undisclosed['id']}/price-estimate", params={'probe': '1'}).json() == {'available': False, 'reason': 'no_data'}
 
 
 def test_context_summary_lists_the_buyers_other_deals():
