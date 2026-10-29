@@ -307,6 +307,22 @@ def site_pending_ids():
         return None
 
 
+_DUP_HINT = re.compile(r'%s (g[0-9a-f]{8}) \((общее название в кавычках|названия из заголовка|общие редкие слова)'
+                       % re.escape(promote.DUP_CANDIDATE_MARK))
+
+
+def covered_by_base_card(draft, base_ids):
+    """id карточки БАЗЫ, на которую ворота указали как на ту же сделку
+    (`promote.near_duplicate`: кавычки, названия, редкие слова), или None.
+    Подсказка «тот же предмет у карточки „Обсуждается“» сюда не входит: там
+    вопрос человеку уместен."""
+    for reason in draft.get('hold_reasons') or []:
+        m = _DUP_HINT.search(str(reason))
+        if m and m.group(1) in base_ids:
+            return m.group(1)
+    return None
+
+
 def latest_hold_drafts():
     names = sorted(n for n in os.listdir(HOLD_DIR) if n.endswith('.json')) \
         if os.path.isdir(HOLD_DIR) else []
@@ -576,6 +592,7 @@ def build_plan(resend=None, only=None):
             for ref in c.get(key) or []:
                 if isinstance(ref, (list, tuple)) and len(ref) > 1 and ref[1]:
                     carded.add(str(ref[1]))
+    base_ids = {str(c.get('id')) for c in base.get('deals') or []}
     fresh_raw, foreign = [], 0
     # Та же новость другими словами (другой источник, другой заголовок) — не
     # новое сырье: сверяем значимые слова с решенным и показанным сырьем и с
@@ -594,6 +611,18 @@ def build_plan(resend=None, only=None):
             state.setdefault('decided_raw', {})[str(d['draft_id'])] = 'auto-drop'
             continue
         if any(len(ref) > 1 and str(ref[1]) in carded for ref in d.get('src') or []):
+            continue
+        twin = covered_by_base_card(d, base_ids)
+        if twin:
+            # Новость о сделке, которая уже есть в базе (ворота нашли карточку
+            # по общим редким словам или названию в кавычках), — не вопрос
+            # владельцу: «Это сделка» сделает дубль, «Не сделка» — неправда.
+            # 29 октября 2026 «„Бумеранг Капитал“ приобрел 50% Baggins Coffee»
+            # пришел в консоль через утро после поста о той же сделке
+            # (g25a6766d): «Что тут нажать? Очевидно у нас уже эта сделка
+            # выходила». Остается в сырье для притока: raw_screen.py --enrich.
+            print('  дополнение к карточке %s, консоли не показываю — приток: raw_screen.py --enrich %s=%s | «%s»'
+                  % (twin, d.get('draft_id'), twin, str(d.get('title'))[:60]))
             continue
         # Иностранный контур без российского элемента не публикуем (решение
         # владельца 5–6 августа) — и в консоль не носим: сырье по молчанию не
