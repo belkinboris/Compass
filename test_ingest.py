@@ -9146,3 +9146,23 @@ def test_post_in_both_channels_carries_no_link_to_its_pair():
     assert channels.channels_for(big) == (channels.MAIN, channels.REALTY)
     preview = send_drafts.post_message_text(big, {}, rendered='текст')
     assert 'В ОБА КАНАЛА' in preview and 'Этот же пост' not in preview, preview
+
+
+def test_send_lock_lets_only_one_publication_send(tmp_path):
+    """29 октября 2026: два прогона публикации шли одновременно, посты в канал
+    недвижимости вышли по два раза. Второй процесс замок не получает."""
+    import subprocess, sys as _s
+    sys.path.insert(0, str(ROOT / 'pipeline' / 'publish'))
+    import send_telegram as st
+    lock = str(tmp_path / 'send.lock')
+    code = ("import sys,time; sys.path.insert(0,%r); import send_telegram as st; "
+            "print(st.take_send_lock(%r), flush=True); time.sleep(3)") % (str(ROOT / 'pipeline' / 'publish'), lock)
+    p = subprocess.Popen([_s.executable, '-c', code], stdout=subprocess.PIPE, text=True, cwd=str(ROOT))
+    assert p.stdout.readline().strip() == 'True'
+    assert st.take_send_lock(lock) is False
+    p.wait()
+    assert st.take_send_lock(lock) is True
+    data = tmp_path / 'd.json'
+    data.write_text('{"telegram_posts": {"a": 5, "b": null}, "telegram_posts_realty": {"c": 7}}', encoding='utf-8')
+    assert st.already_posted_on_disk('a', str(data)) and st.already_posted_on_disk('c', str(data))
+    assert not st.already_posted_on_disk('b', str(data))

@@ -261,6 +261,46 @@
    ]
   },
   {
+   "draft_id": "d64889317",
+   "title": "«Русал» и Гана подписали меморандум о совместном предприятии по добыче бокситов",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9063602"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-29",
+     "title": "Переговоры",
+     "note": "«Русал» и Гана договорились создать совместное предприятие для добычи и переработки бокситов. Меморандум об этом стороны подписали на экономическом и гуманитарном форуме «Россия -- Африка», передает корреспондент «РИА Новости» с церемонии.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9063602"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g835eac98 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d41914883",
    "title": "Регулятор оценил риск импульсных покупок при продаже алкоголя через почту",
    "date": "2026-10-29",
@@ -328,6 +368,147 @@
     ]
    ],
    "sum": "$25 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d04269984",
+   "title": "Сапфир Романовых выставлен на аукцион Sotheby’s",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9063998"
+    ]
+   ],
+   "sum": "€1,8 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41361549",
+   "title": "Доля инвестиций нерезидентов в ОФЗ в сентябре снизилась еще на 20 млрд рублей",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/29/1241292-nerezidentov-v-ofz"
+    ]
+   ],
+   "sum": "20 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01005438",
+   "title": "AI-AINA: Судебный квартал достроят к 2027 году, Velle сменил владельца, октябрь бьёт рекорды",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/10/29/76733361/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g3555ea6e (общие редкие слова: velle, владел) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d73126385",
+   "title": "Эксперты объяснили уход иностранных криптобирж из России",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/kriptobirzhi-2127899984.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42473743",
+   "title": "В России возобновились продажи кроссоверов Skoda",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/29/v-rossii-vozobnovilis-prodazhi-krossoverov-skoda/"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
