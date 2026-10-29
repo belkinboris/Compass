@@ -180,6 +180,41 @@ def window_bounds():
     return start, end
 
 
+# ОДИН ОТПРАВЛЯЮЩИЙ ЗА РАЗ (29 октября 2026). Два прогона публикации шли
+# одновременно (второй — из другой папки ship_decisions), каждый со своей
+# очередью и своей паузой 20 минут: посты «Полюса», «Сибпромстроя» и
+# «Уралсиба» вышли в канал недвижимости по два раза с разницей 13 минут.
+# Замок общий для машины (не для папки), снимается сам при выходе процесса.
+SEND_LOCK = os.environ.get('COMPASS_SEND_LOCK', '/tmp/compass-send-telegram.lock')
+_send_lock_fd = None
+
+
+def take_send_lock(path=None):
+    global _send_lock_fd
+    import fcntl
+    if _send_lock_fd is not None and path is None:
+        return True  # замок уже у этого процесса (тесты зовут main несколько раз)
+    fd = open(path or SEND_LOCK, 'a')
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        fd.close()
+        return False
+    _send_lock_fd = fd
+    return True
+
+
+def already_posted_on_disk(did, path=None):
+    """Пост по сделке уже записан в файле на диске — другим процессом,
+    пока этот спал в паузе между постами."""
+    try:
+        disk = json.load(open(path or DATA, encoding='utf-8'))
+    except (OSError, ValueError):
+        return False
+    return (disk.get('telegram_posts') or {}).get(did) is not None \
+        or did in (disk.get('telegram_posts_realty') or {})
+
+
 def gap_wait_s(last_post_at, now=None):
     """Сколько секунд ждать до следующего нового поста (0 — можно сейчас)."""
     if not last_post_at:
@@ -1037,6 +1072,10 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     одобренные карточки (ключ `--wait-for-site N`; см. комментарий у
     `deals_missing_on_site` в теле)."""
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    if write and token and not take_send_lock():
+        print('Другой прогон публикации уже отправляет посты — этот ничего не шлет '
+              '(иначе каждый пост вышел бы дважды).')
+        return
     # Без токена слать все равно некуда — не спрашиваем сайт за адресом
     # канала: без этой проверки функция без токена все равно делала
     # живой сетевой запрос (см. `channel_address()`), а в средах, где
@@ -1479,6 +1518,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             # равно разводим на SPREAD_S, остальное — технической паузой.
             time.sleep(SPREAD_S if (new_post and prev_kind in ('send', 'milestone')) else SEND_DELAY_S)
         prev_kind = kind
+        if kind == 'send' and paced and already_posted_on_disk(did):
+            print('  %s: пост уже вышел (записан другим прогоном) — второй раз не шлю' % did)
+            continue
         deal = deals_by_id.get(did) or {'id': did}
         buttons = format_post.render_buttons(deal)
         if kind in ('send', 'milestone'):
