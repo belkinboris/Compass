@@ -176,12 +176,6 @@ def post_message_text(card, companies, rendered=None):
     чтобы его не пересчитывать дважды (вызывающий сохраняет тот же текст в
     `post_preview`, см. `build_plan()`)."""
     buttons = format_post.buttons_preview(card)
-    if buttons and channels.REALTY in channels.channels_for(card):
-        # Пост в оба канала: под каждым будет кнопка на его пару во втором
-        # канале; адрес появится только после публикации, поэтому в
-        # предпросмотре — словами (владелец 28 октября 2026).
-        buttons += (' · после публикации под постом в каждом канале появится кнопка '
-                    '«Этот же пост в …» со ссылкой на пару во втором канале')
     text = rendered if rendered is not None else draft_post_text(card, companies)
     joint = ''
     if format_post.is_joint_post(card):

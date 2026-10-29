@@ -276,24 +276,15 @@ def post_to_channels(client, token, addr, route, text, buttons):
     поста}, ошибка или None) — не бросает: пост, уже вышедший в первом
     канале, обязан быть записан, даже если второй канал отказал.
 
-    Перекрестные ссылки — кнопкой под постом (`channels.with_crosslink`):
-    второй пост сразу получает кнопку на первый (его номер уже известен), а
-    первому клавиатура правится, чтобы вести на второй."""
+    Клавиатура в обоих каналах одна и та же: кнопки-ссылки на пару во
+    втором канале сняты владельцем 29 октября 2026 («выглядит плохо»)."""
     mids = {}
     for ch in route:
         try:
-            mids[ch] = post_message(client, token, addr[ch], text,
-                                    channels.with_crosslink(buttons, ch, mids, addr))
+            mids[ch] = post_message(client, token, addr[ch], text, buttons)
         except TelegramError as e:
             return mids, '%s: %s' % ('канал недвижимости' if ch == channels.REALTY
                                      else 'основной канал', e)
-    if len(mids) > 1:
-        first = route[0]
-        try:
-            edit_message(client, token, addr[first], mids[first], text,
-                         channels.with_crosslink(buttons, first, mids, addr))
-        except TelegramError as e:
-            return mids, 'кнопка на пару в посте %s не добавлена: %s' % (mids[first], e)
     return mids, None
 
 
@@ -1450,8 +1441,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 failed.append((did, 'адрес канала «%s» неизвестен — правка поста %s не сделана' % (ch, mid)))
                 continue
             try:
-                edit_message(client, token, addr[ch], mid, text,
-                             channels.with_crosslink(buttons, ch, where, addr))
+                edit_message(client, token, addr[ch], mid, text, buttons)
                 done = True
             except TelegramError as e:
                 # П4-10: удаленный из канала пост (человек убрал его руками —
