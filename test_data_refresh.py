@@ -436,3 +436,15 @@ def test_download_sends_the_github_token_only_when_it_is_set(monkeypatch):
     assert "Authorization" not in seen[0]
     assert seen[1]["Authorization"] == "token ghp_test"
 
+
+
+def test_raw_doubtful_queue_refreshes_with_the_base():
+    """29 октября 2026: сводка публикации писала «2 сомнительные», кнопка в
+    консоли показывала 11 — сайт читал сырье из сборки release. Сегодняшний
+    файл сырья и список решенного обновляются вместе с базой."""
+    from datetime import datetime, timezone
+    import data_refresh as dr
+    paths = [t.path for t in dr.all_targets(datetime(2026, 10, 29, 23, 0, tzinfo=timezone.utc))]
+    assert "data/inbox/hold/2026-10-29.json" in paths and "data/inbox/moderation_state.json" in paths
+    assert dr.validate_hold({"drafts": []}, "") is None and dr.validate_hold({}, "")
+    assert dr.validate_object([], "")
