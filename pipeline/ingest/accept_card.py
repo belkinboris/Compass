@@ -692,7 +692,15 @@ def entities_missing_from_card(card, comps, records=None):
     for rec in records:
         if rec.get('url') not in urls:
             continue
-        for m in LEGAL_ENTITY.finditer(rec.get('title', '') + ' ' + rec.get('summary', '')):
+        text = rec.get('title', '') + ' ' + rec.get('summary', '')
+        for m in LEGAL_ENTITY.finditer(text):
+            # Подвал сайта несет СОБСТВЕННОЕ юрлицо издания («© ООО «Сеть
+            # городских порталов» © ООО «Интернет Технологии»», Ufa1.ru,
+            # g861c5553, 29 октября 2026) — не сторона ни одной сделки,
+            # которую это издание пишет. Знак «©» прямо перед именем —
+            # надежный и узкий признак копирайта, а не предмета/стороны.
+            if '©' in text[max(0, m.start() - 3):m.start()]:
+                continue
             name = m.group(1).strip()
             key = name.lower().replace('ё', 'е')
             if key in seen or key in blob:

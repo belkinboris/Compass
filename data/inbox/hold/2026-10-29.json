@@ -30,41 +30,53 @@
    ]
   },
   {
-   "draft_id": "d52553580",
-   "title": "«Финам» предоставит «квалам» доступ к IPO Anthropic",
+   "draft_id": "d33530315",
+   "title": "Зачем «Логика молока» купила бренды 5Yes! и Velle",
    "date": "2026-10-29",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/29/1241165-finam-predostavit-kvalam"
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/10/29/1241168-zachem-kupila-brendi"
     ]
    ],
    "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "Производитель молочных продуктов и детского питания «Логика молока» (бывшая «Данон Россия») выкупил владельцев брендов растительных напитков 5Yes! (ООО «Полигрин») и Velle (ООО «Велле Холдинг»). Суммы сделок компания не раскрывает.",
+     "source": [
+      "web:vedomosti.ru/articles",
+      "https://www.vedomosti.ru/business/articles/2026/10/29/1241168-zachem-kupila-brendi"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "бренды 5Yes! и Velle",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "бренды 5Yes! и Velle",
     "seller": null
    },
-   "ind": "Финансовые услуги",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g90ccbac0 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d66232174",
-   "title": "Петербург занял четвертое место в России по продажам автомобилей с пробегом",
+   "draft_id": "d67221074",
+   "title": "Дочь первого президента Мозамбика: Африке нельзя «продаваться» из-за ресурсов",
    "date": "2026-10-29",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/29/76731569/"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28267323"
     ]
    ],
    "sum": null,
@@ -86,45 +98,17 @@
    ]
   },
   {
-   "draft_id": "d71095779",
-   "title": "Аналитики Yota отметили рост интереса молодежи к инвестициям в 2,5 раза",
+   "draft_id": "d47699345",
+   "title": "Sotheby's: сапфир императорского дома Романовых выставят на аукцион в Женеве",
    "date": "2026-10-29",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261029/investitsii-2127812416.html"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28267269"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28156804",
-   "title": "В России начали продавать китайский седан Volkswagen",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/29/v-rossii-nachali-prodavat-kitayskiy-sedan-volkswagen/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -142,13 +126,13 @@
    ]
   },
   {
-   "draft_id": "d24996924",
-   "title": "«Васко да Гама» выкупил защитника Ренана у «Зенита»",
+   "draft_id": "d91509146",
+   "title": "DoorDash купила платформу для покупки продуктов Instacart за $17 миллиардов",
    "date": "2026-10-29",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/29/vasko-da-gama-vykupil-zaschitnika-renana-u-zenita/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/doordash-874766250.html"
     ]
    ],
    "sum": null,
@@ -161,37 +145,37 @@
      "title": "Сделка завершена",
      "note": "",
      "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/29/vasko-da-gama-vykupil-zaschitnika-renana-u-zenita/"
+      "web:1prime.ru",
+      "https://1prime.ru/20261029/doordash-874766250.html"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "DoorDash",
+   "asset": "платформа для покупки продуктов Instacart",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "DoorDash",
+    "asset": "платформа для покупки продуктов Instacart",
     "seller": null
    },
-   "ind": null,
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d79494849",
-   "title": "Аналогов нет: в Челябинске продается «парящий» лего-дом. Фото",
+   "draft_id": "d96054937",
+   "title": "Гигантский сапфир Романовых выставляют на аукцион в Европе",
    "date": "2026-10-29",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053140054"
+     "https://ura.news/news/1053140142"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -209,17 +193,17 @@
    ]
   },
   {
-   "draft_id": "d87439585",
-   "title": "В Подмосковье молодым семьям помогают приобрести собственное жилье",
+   "draft_id": "d82058292",
+   "title": "Пятикомнатную квартиру рядом с парком «Краснодар» продают с торгов за 6,6 млн рублей. Но есть нюанс",
    "date": "2026-10-29",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/10/29/v-podmoskove-molodym-semyam-pomogayut-priobresti-sobstvennoe-zhile"
+     "web:93.ru",
+     "https://93.ru/text/realty/2026/10/29/76732397/"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "6,6 млн ₽",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -233,35 +217,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13898350",
-   "title": "На Ставрополье сняли ограничения на покупку бензина",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/skfo/news/stavropol/2026/10/29/na-stavropole-snyali-ogranicheniya-na-pokupku-benzina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g16dc5834 (общие редкие слова: продаю, торгов) — проверьте, не дубль ли"
    ]
   }
  ]
