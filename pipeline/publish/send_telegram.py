@@ -719,15 +719,16 @@ def digest_due(data, today):
 
 
 def post_edit_decisions(decisions):
-    """{id сделки: (вердикт, id решения)} — ответ на предложение правки
-    вышедшего поста (`propose_post_edit.py`): `deal_id` решения — `<id>~edit`,
-    вердикты те же, что у поста карточки."""
+    """{id сделки: (вердикт, id решения, текст владельца или None)} — ответ на
+    предложение правки вышедшего поста (`propose_post_edit.py`): `deal_id`
+    решения — `<id>~edit`, вердикты те же, что у поста карточки; текст —
+    когда владелец ответил своей редакцией, а не кнопкой."""
     out = {}
-    for d in decisions:
+    for d in sorted(decisions, key=lambda x: str(x.get('created_at') or '')):
         did = str(d.get('deal_id') or '')
         if not did.endswith('~edit') or d.get('verdict') not in ('post_yes', 'post_no'):
             continue
-        out[did[:-len('~edit')]] = (d['verdict'], d['id'])
+        out[did[:-len('~edit')]] = (d['verdict'], d['id'], (d.get('edited_text') or '').strip() or None)
     return out
 
 
@@ -741,9 +742,15 @@ def plan_post_edits(deals, decisions, posts, realty_posts):
         answer = answers.get(did)
         if not answer:
             continue
-        verdict, decision_id = answer
+        verdict, decision_id, owner_text = answer
         decision_ids.append(decision_id)
         proposal = deal.get('post_edit_proposal')
+        if owner_text and verdict == 'post_yes':
+            # Своя редакция владельца сильнее предложенного текста — как у
+            # первого поста (approve.py: owner_text_as_html + ссылка на карточку).
+            proposal = format_post.with_card_link(
+                format_post.strip_platform_links(format_post.owner_text_as_html(owner_text)), deal)
+            deal['post_edit_proposal'] = proposal
         if not proposal:
             continue
         where = {ch: mid for ch, mid in ((channels.MAIN, posts.get(did)),

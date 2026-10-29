@@ -7932,7 +7932,12 @@ def test_an_approved_proposal_edits_an_owner_text_post_and_becomes_its_text(monk
     monkeypatch.setattr(approve, "consume", lambda handle, ids: consumed.extend(ids))
     monkeypatch.setattr(send_telegram, "site_channel_edits", lambda: {"%s:%s" % (MAIN_CH, 601): True})
     assert send_telegram.milestone_decisions(decisions) == {}
-    assert send_telegram.post_edit_decisions(decisions) == {"gE1": ("post_yes", 31), "gE2": ("post_no", 32)}
+    assert send_telegram.post_edit_decisions(decisions) == {"gE1": ("post_yes", 31, None), "gE2": ("post_no", 32, None)}
+    # своя редакция владельца сильнее предложения: текст уходит с ссылкой на карточку
+    own = [{"id": 33, "deal_id": "gE1~edit", "verdict": "post_yes", "edited_text": "Своя редакция\n\nПокупатель: ПАО «ЭсЭфАй»",
+            "created_at": "2026-10-29T11:00:00+00:00"}]
+    own_edits, _d, _ids = send_telegram.plan_post_edits([dict(deal)], own, {"gE1": 601}, {})
+    assert own_edits and own_edits[0][2].startswith("Своя редакция") and "карточке сделки" in own_edits[0][2]
     fake = _FakeClient([_ok()])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
     send_telegram.main(write=True, ignore_pace=True)

@@ -5263,10 +5263,13 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     # еще не примененное решение. 4 октября 2026 партнер ответил на проект
     # поста вопросом, бот принял вопрос за новый текст поста, а отменить
     # было нечем — владелец спросил «можно его отменить как-то?».
-    undo = re.search(r"\(правка поста ([\w-]{1,40})\)", str(reply.get("text") or ""))
+    undo = re.search(r"\(правка поста ([\w~-]{1,46})\)", str(reply.get("text") or ""))
     if undo and _is_reviewer(sender_id) and UNDO_WORDS.match(text.strip()):
+        # «<id>~edit» — ответ своей редакцией на предложение правки вышедшего
+        # поста (propose_post_edit.py); снимается так же, пока не применен.
+        undo_verdict = "post_yes" if undo.group(1).endswith("~edit") else "approve"
         rows = list(db.scalars(select(ModerationDecision).where(
-            ModerationDecision.deal_id == undo.group(1), ModerationDecision.verdict == "approve",
+            ModerationDecision.deal_id == undo.group(1), ModerationDecision.verdict == undo_verdict,
             ModerationDecision.edited_text.is_not(None), ModerationDecision.consumed.is_(False))).all())
         for row in rows:
             row.consumed = True
@@ -5282,6 +5285,43 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     # (ВТБ продал агрохолдинг) молча пропала: ни решения, ни ответа. Теперь
     # так же, как у проекта поста: полный текст заменяет пост этапа и
     # выпускает его в канал; вопрос или короткая реплика — заметка к сделке.
+    # ОТВЕТ СВОЕЙ РЕДАКЦИЕЙ НА ПРЕДЛОЖЕНИЕ ПРАВКИ ВЫШЕДШЕГО ПОСТА (29 октября
+    # 2026, «Агропромкредит»). Владелец: «напиши в консоли, что хочешь
+    # обновить в посте и как будет выглядеть новый пост… мы нажмем согласие
+    # или отказ или направим новую редакцию». Полный текст в ответ на
+    # «[правка поста <id>]» — решение `<id>~edit` / post_yes с этим текстом:
+    # рутина публикации правит вышедший пост им, а не предложенным
+    # (send_telegram.plan_post_edits). Вопрос или реплика — заметка к сделке.
+    proposal = re.search(r"\[правка поста ([\w-]{1,40})\]", str(reply.get("text") or ""))
+    if proposal and not marker and text.strip() and _is_reviewer(sender_id):
+        deal_id = proposal.group(1)
+        if _is_question(text) or _not_a_post_text(text, reply.get("text")):
+            db.add(ModerationDecision(deal_id=deal_id, verdict="note", edited_text=text.strip(),
+                                      decided_by=str(sender_id),
+                                      chat_id=str(chat_id) if chat_id is not None else None,
+                                      reply_message_id=reply.get("message_id")))
+            db.commit()
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Это не похоже на новый текст поста — пост не тронут, замечание записано к "
+                      "сделке. Чтобы заменить пост своей редакцией, пришлите ответом полный текст; "
+                      "предложенный текст — кнопкой «Пост в канал»."),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+            return {"ok": True}
+        body = text.strip()
+        if message.get("entities"):
+            body = _telegram_text_as_html(text, message.get("entities")).strip()
+        db.add(ModerationDecision(deal_id=deal_id + "~edit", verdict="post_yes", edited_text=body,
+                                  decided_by=str(sender_id),
+                                  chat_id=str(chat_id) if chat_id is not None else None,
+                                  reply_message_id=reply.get("message_id")))
+        db.commit()
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text=("Принято: пост в канале изменится на ваш текст ближайшим прогоном публикации. "
+                  "Передумали — ответьте на это сообщение словом «отмена». (правка поста %s~edit)" % deal_id),
+            disable_web_page_preview=True, **_thread_kwargs(reply))
+        return {"ok": True}
     milestone = re.search(r"\[веха ([\w-]{1,50}~[\w-]{1,30})\]", str(reply.get("text") or ""))
     if milestone and not marker and text.strip() and _is_reviewer(sender_id):
         combo = milestone.group(1)
