@@ -2,237 +2,6 @@
  "made": "2026-10-29",
  "drafts": [
   {
-   "draft_id": "d75291808",
-   "title": "Американская компания Anthropic подала документы для проведения IPO",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-26",
-     "title": "Переговоры",
-     "note": "Американская компания Anthropic, разработчик искусственного интеллекта Claude, подала заявку для проведения первичного публичного размещения акций (IPO) в США . Об этом 26 октября сообщило агентство Bloomberg. Компания планирует разместить акции на бирже…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2190914/2026-10-26/amerikanskaia-kompaniia-anthropic-podala-dokumenty-dlia-provedeniia-ipo-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d50807881",
-   "title": "Anthropic’s IPO filing reveals its strategy for keeping enterprise customers hooked",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/10/26/anthropics-ipo-filing-reveals-its-strategy-for-keeping-enterprise-customers-hooked/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d74292177",
-   "title": "Anthropic включила угрозу существованию человечества в риски перед IPO",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/27/10/2026/6ae0413319b3f291b6cc36cb"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d19448211",
-   "title": "В Люберцах на торгах продали участок за 5,8 млн рублей",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
-    ]
-   ],
-   "sum": "5,8 млн ₽",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-27",
-     "title": "Сделка завершена",
-     "note": "В Люберцах Московской области на торгах реализовали земельный участок.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/center/news/mosreg/2026/10/27/v-lyuberczah-na-torgah-prodali-uchastok-za-58-mln-rublej"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "участок",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "участок",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gea799efc (тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83317718",
-   "title": "Площади нового ресторана с коми-пермяцким названием продают за десятки миллионов рублей",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053139432"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13443805",
-   "title": "Anthropic: компания, которую нельзя купить",
-   "date": "2026-10-27",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1367410.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d54996945",
-   "title": "В документах Anthropic для IPO нашли «худший кошмар Nvidia»",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6ae17caffe8cbef4c5193423"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Американская компания Anthropic подала документы для проведе» — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d55306904",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
@@ -301,91 +70,6 @@
    ]
   },
   {
-   "draft_id": "d41914883",
-   "title": "Регулятор оценил риск импульсных покупок при продаже алкоголя через почту",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/29/10/2026/6ae34b846a59b56c1f42da1c"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d25871413",
-   "title": "Объем инвестиций нерезидентов в ОФЗ в сентябре снизился на 20 млрд рублей",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1125868"
-    ]
-   ],
-   "sum": "20 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33891761",
-   "title": "В Лондоне картина Леонида Пастернака ушла с молотка за $25 тыс.",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28267945"
-    ]
-   ],
-   "sum": "$25 тыс",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d04269984",
    "title": "Сапфир Романовых выставлен на аукцион Sotheby’s",
    "date": "2026-10-29",
@@ -414,17 +98,123 @@
    ]
   },
   {
-   "draft_id": "d41361549",
-   "title": "Доля инвестиций нерезидентов в ОФЗ в сентябре снизилась еще на 20 млрд рублей",
+   "draft_id": "d16997063",
+   "title": "Бизнес наращивает инвестиции в исторические здания Нижегородской области // На их восстановление действуют льготные кредиты и субсидии",
    "date": "2026-10-29",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/10/29/1241292-nerezidentov-v-ofz"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9063994"
     ]
    ],
-   "sum": "20 млрд ₽",
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "В Нижегородской области активизировался интерес инвесторов к покупке исторической недвижимости. За девять месяцев 2026 года продали 17 ОКН — столько же, сколько за весь прошлый год, сообщили в областном правительстве. Кроме того, с начала года продано 11…",
+     "source": [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9063994"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41914883",
+   "title": "Регулятор отверг рост интереса к алкоголю из-за его продажи через «Почту»",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/29/10/2026/6ae34b846a59b56c1f42da1c"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21786231",
+   "title": "Премьер Марокко: взаимодействие РФ с Африкой перешло к практическим действиям",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28268203"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-29",
+     "title": "Переговоры",
+     "note": "Фатима аль-Мансури подчеркнула важность адаптации планов по сотрудничеству к фундаментальным потребностям африканских государств",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28268203"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88739500",
+   "title": "Объем инвестиций в Мурманской области превысил 143 миллиарда рублей",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/obem-874778950.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -442,70 +232,13 @@
    ]
   },
   {
-   "draft_id": "d01005438",
-   "title": "AI-AINA: Судебный квартал достроят к 2027 году, Velle сменил владельца, октябрь бьёт рекорды",
+   "draft_id": "d30887006",
+   "title": "Эксперты назвали причины ухода криптобирж из России",
    "date": "2026-10-29",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/10/29/76733361/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g3555ea6e (общие редкие слова: velle, владел) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d73126385",
-   "title": "Эксперты объяснили уход иностранных криптобирж из России",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261029/kriptobirzhi-2127899984.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42473743",
-   "title": "В России возобновились продажи кроссоверов Skoda",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/29/v-rossii-vozobnovilis-prodazhi-krossoverov-skoda/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/eksperty-874778544.html"
     ]
    ],
    "sum": null,
