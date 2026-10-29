@@ -4550,6 +4550,13 @@ def _estimate_report(db, deal: dict):
 def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
     deal = get_deal(deal_id)
     if not deal:
+        # `?probe=1` — вопрос «есть ли чем считать», его задает каждая
+        # открытая карточка, в том числе предпросмотр из очереди
+        # (#/preview/<id>), которой в базе нет. Ответ «нечем» честнее 404:
+        # 404 в консоли браузера ронял test_preview_route_renders_a_pending_card
+        # (29 октября 2026, после появления probe в bindPriceEstimate).
+        if request.query_params.get("probe"):
+            return {"available": False, "reason": "not_found"}
         return JSONResponse({"error": "not_found"}, status_code=404)
     deal = dict(deal, id=deal_id)
     if not price_estimate.needs_estimate(deal):

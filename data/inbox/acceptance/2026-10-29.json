@@ -1,0 +1,61 @@
+[
+ {
+  "id": "g835eac98",
+  "verdict": "accept",
+  "profiles": [
+   {
+    "role": "buyer",
+    "id": "g391967cd"
+   },
+   {
+    "role": "target",
+    "name": "GIADEC",
+    "ind": "ГМК и добыча",
+    "desc": "Государственная корпорация Ганы по развитию интегрированной алюминиевой отрасли (Ghana Integrated Aluminium Development Corporation). Держит государственные доли в проектах по добыче бокситов и производству глинозема и подбирает для них иностранных партнеров.",
+    "match_keys": [
+     "giadec",
+     "ghana integrated aluminium development corporation"
+    ]
+   }
+  ],
+  "no_profile": {},
+  "no_inn": {
+   "target": "иностранная государственная корпорация Ганы (Ghana Integrated Aluminium Development Corporation), российского юрлица нет — ИНН быть не может"
+  },
+  "no_source": {},
+  "name_ok": {},
+  "stale_ok": {},
+  "title": "«Русал» и ганская госкорпорация GIADEC создадут два совместных предприятия для добычи бокситов и выпуска глинозема в Гане",
+  "asset": "Два совместных предприятия в Гане — Nyinahini Bauxite (добыча бокситов) и Ghana Alumina Company (глиноземный завод)",
+  "src_add": [
+   [
+    "Русал",
+    "https://rusal.ru/press-center/press-releases/rusal-i-giadec-dogovorilis-o-sovmestnoy-realizatsii-boksito-glinozyemnykh-proektov-v-gane/"
+   ],
+   [
+    "ПРАЙМ",
+    "https://1prime.ru/20261029/rusal-874742326.html"
+   ],
+   [
+    "ПРАЙМ",
+    "https://1prime.ru/20261029/rusal-874749215.html"
+   ],
+   [
+    "The Moscow Times (Reuters)",
+    "https://ru.themoscowtimes.com/2026/10/29/rusal-poluchit-kontrol-v-sp-po-dobyche-boksitov-i-glinozemnom-zavode-v-gane-a210028"
+   ]
+  ],
+  "checklist": {
+   "sources": true,
+   "parties": true,
+   "asset": true,
+   "title": true,
+   "why": true,
+   "fields": true,
+   "wording": true,
+   "post": true,
+   "status": true
+  },
+  "notes": "Одна сделка с карточкой притока g0fadcead (ПРАЙМ о меморандуме), та выкинута как дубль, ее источник добавлен сюда. ТАСС отдает антибот-страницу роботам (текст не на диске), факты взяты из пресс-релиза «Русала», Reuters (Moscow Times, CNBC Africa) и ПРАЙМ. Точный процент «Русала» в СП, сумма инвестиций и сроки запуска ни в одном источнике не названы: у «Русала» мажоритарная доля, у Ганы миноритарная с неразмываемыми 10%. Продавца у создания СП нет. В базе есть второй профиль «Русала» — United Co. Rusal International (g34fb06d5), на нем ни одной сделки нет; участник привязан к основному g391967cd с ИНН в реестре."
+ }
+]
