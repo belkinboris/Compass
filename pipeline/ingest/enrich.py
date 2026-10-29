@@ -391,8 +391,23 @@ def proposals(deal, item, names, comps, match_keys=None):
         event_url = (event.get('source') or [None, None])[1] if event.get('source') else None
         event_url_key = (event_key[0], event_url) if event_url else None
         # Несколько публикаций об одном этапе в один день не создают дубли.
-        # Этапы одного вида в разные даты допустимы, например два согласования.
-        if event_key not in known_events and event_url_key not in known_event_urls:
+        # Этапы одного вида в разные даты допустимы, например два согласования,
+        # но ЗАКРЫТИЕ И СРЫВ У СДЕЛКИ ОДНО: агрегатор, пересказавший закрытие
+        # через два дня, дает событие с датой своей публикации — 29 октября
+        # 2026 «Агропромкредит» (`g1f8414a3`) получил второе «Сделка
+        # завершена» от Mergers.ru поверх закрытия 27 октября, сайт показал
+        # два одинаковых этапа, а веха о закрытии повторила первый пост.
+        # Такая новость — еще один источник уже известного этапа.
+        terminal_twin = None
+        if event_key[0] in ('closed', 'cancelled'):
+            terminal_twin = next((e for e in existing_events
+                                  if str(e.get('kind') or '') == event_key[0]), None)
+        if terminal_twin is not None:
+            if event_url and event_url not in {u for _l, u in format_post.milestone_sources(terminal_twin)}:
+                out.append(('event_source', {'kind': event_key[0], 'date': str(terminal_twin.get('date') or ''),
+                                             'source': list(event['source'][:2])},
+                            'добавить', 'еще один источник этапа (закрытие у сделки одно)'))
+        elif event_key not in known_events and event_url_key not in known_event_urls:
             if EVENT_STATUS.get(event.get('kind')) and is_retracted(
                     deal, 'status', EVENT_STATUS[event['kind']]):
                 out.append(('event', event, 'расхождение',

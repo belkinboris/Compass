@@ -559,9 +559,31 @@ MILESTONE_SILENCE_HOURS = 24
 MILESTONE_MAX_SILENCE_DAYS = 7
 
 
-def milestone_candidates(deals, stage_posts):
+# Этап, который первый пост сделки уже рассказал: пост вышел со статусом
+# этапа (или с этим этапом в «Ходе сделки») — отдельная веха о нем повторит
+# пост слово в слово. 29 октября 2026 «Агропромкредит» (`g1f8414a3`) вышел
+# 27 октября уже «Закрыта», а через два дня консоль предложила веху
+# «закрытие», партнер нажал — в канале два одинаковых поста
+# («Мы это уже постили»).
+_STAGE_STATUS = {'closed': 'Закрыта', 'cancelled': 'Не состоялась',
+                 'approval': 'Согласование получено'}
+
+
+def first_post_already_told(event, post_snapshot):
+    """Снимок поста (`telegram_post_state[id]`) уже нес этот этап."""
+    if not post_snapshot:
+        return False
+    kind = str(event.get('kind') or '')
+    if any(str(e.get('kind') or '') == kind for e in (post_snapshot.get('events') or [])
+           if isinstance(e, dict)):
+        return True
+    return bool(_STAGE_STATUS.get(kind)) and str(post_snapshot.get('status') or '') == _STAGE_STATUS[kind]
+
+
+def milestone_candidates(deals, stage_posts, post_state=None):
     """Вехи (`newsworthy` + `headline` + вид из закрытого списка), которым еще
-    не отправлен отдельный пост.
+    не отправлен отдельный пост и которые первый пост сделки не рассказал
+    (`post_state` — `data['telegram_post_state']`, см. `first_post_already_told`).
 
     Дедуп — по `event['id']` в `stage_posts` (`data['telegram_milestones']`,
     отдельный от `telegram_posts` словарь верхнего уровня: `telegram_posts[id]`
@@ -577,6 +599,8 @@ def milestone_candidates(deals, stage_posts):
                     and event.get('id') and event.get('kind') in review.POSTWORTHY_MILESTONE_KINDS):
                 continue
             if event['id'] in stage_posts:
+                continue
+            if first_post_already_told(event, (post_state or {}).get(deal.get('id'))):
                 continue
             out.append((deal, event))
     return out
@@ -836,7 +860,7 @@ def rejected_milestones(deals, decisions, discard_ids, stage_posts=()):
             and not answered_an_earlier_draft(created.get(did), events[eid])]
 
 
-def plan_milestones(deals, stage_posts, decisions, now):
+def plan_milestones(deals, stage_posts, decisions, now, post_state=None):
     """(отправить, придержать, отклоненные id решений-заглушек) — чистая
     функция аналогично `approve.plan_actions`, чтобы логика проверялась без
     сети. `discard_ids` — decision id вехам с `post_no` и решениям о прежнем
@@ -845,7 +869,7 @@ def plan_milestones(deals, stage_posts, decisions, now):
     by_event = milestone_decisions(decisions)
     created = {d.get('id'): d.get('created_at') for d in decisions}
     send, hold, discard_ids, sent_decision_ids = [], [], [], []
-    for deal, event in milestone_candidates(deals, stage_posts):
+    for deal, event in milestone_candidates(deals, stage_posts, post_state):
         decision = by_event.get(event['id'])
         if decision and answered_an_earlier_draft(created.get(decision[1]), event):
             discard_ids.append(decision[1])
