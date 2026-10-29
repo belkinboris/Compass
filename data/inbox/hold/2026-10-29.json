@@ -58,13 +58,108 @@
    ]
   },
   {
-   "draft_id": "d65804798",
-   "title": "Соцсоревнование. «Волга» впервые опередила «Москвич» по продажам",
+   "draft_id": "d90467144",
+   "title": "Объем инвестиций в коммерческую недвижимость РФ вырос до 378 млрд рублей за год",
    "date": "2026-10-29",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/auto/2026/10/29/76729187/"
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28265405"
+    ]
+   ],
+   "sum": "378 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63459970",
+   "title": "The Times: ФИФА заработала $5 млрд на продаже билетов на чемпионат мира",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28265407"
+    ]
+   ],
+   "sum": "$5 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02921292",
+   "title": "«Остались рожки да ножки». Что происходит в аварийных памятниках, которые город продал в частные руки",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/10/29/76729370/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "Отель, апарты, ресторан и неизвестность",
+     "source": [
+      "web:fontanka.ru",
+      "https://www.fontanka.ru/2026/10/29/76729370/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "в частные руки",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "в частные руки",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d37223632",
+   "title": "«Русал» и Гана подписали меморандум о создании СП по добыче бокситов",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/rusal-874742326.html"
     ]
    ],
    "sum": null,
@@ -86,13 +181,13 @@
    ]
   },
   {
-   "draft_id": "d12952515",
-   "title": "中国广告*. Рекламодатели из Китая вложились в рекламу в «Яндексе»",
+   "draft_id": "d26383448",
+   "title": "В Госдуме предложили проводить продуктовые распродажи для семей",
    "date": "2026-10-29",
    "src": [
     [
-     "web:comnews.ru",
-     "https://www.comnews.ru/content/248134/2026-10-29/2026-w44/1008/zhongguoguanggao-reklamodateli-kitaya-vlozhilis-reklamu-yandekse"
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/rasprodazhi-874742400.html"
     ]
    ],
    "sum": null,
@@ -114,13 +209,13 @@
    ]
   },
   {
-   "draft_id": "d20661777",
-   "title": "Медведчук назвал курс Испании и Португалии на слияние с ВПК Украины опасным",
+   "draft_id": "d38591773",
+   "title": "СМИ: ФИФА заработала пять миллиардов долларов на продаже билетов на ЧМ-2026",
    "date": "2026-10-29",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261029/ukraina-2127724449.html"
+     "https://ria.ru/20261029/fifa-2127743301.html"
     ]
    ],
    "sum": null,
@@ -135,24 +230,24 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Образование",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d23375333",
-   "title": "«Бухгалтерия» Anthropic перед IPO",
+   "draft_id": "d23445631",
+   "title": "«Бумеранг Капитал» приобрёл 50% сети Baggins Coffee",
    "date": "2026-10-29",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1368115.php"
+     "web:retailer.ru",
+     "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/"
     ]
    ],
-   "sum": "$108 млрд",
-   "type": "IPO",
+   "sum": "350 млн ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -163,49 +258,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32122407",
-   "title": "Покупка актива банкрота: какие риски проверять на торгах",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/opinion/266333/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
+   "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g25a6766d (общие редкие слова: baggin, coffee) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d77797064",
-   "title": "В Курганской области блогер потеряла деньги, пытаясь продать свой канал",
+   "draft_id": "d23205605",
+   "title": "Стала известна прибыль ФИФА от продажи билетов на ЧМ-2026",
    "date": "2026-10-29",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053139969"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/29/stala-izvestna-pribyl-fifa-na-prodazhe-biletov-na-chm-2026/"
     ]
    ],
    "sum": null,
@@ -220,7 +287,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финтех",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
