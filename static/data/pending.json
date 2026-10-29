@@ -185,16 +185,16 @@
    "pending_since": "2026-10-29T14:29:37+00:00"
   },
   {
-   "id": "g175018d7",
+   "id": "g835eac98",
    "date": "2026-10-29",
-   "title": "Truth Social продала Bloomberg быстрый доступ к постам Трампа",
+   "title": "«Русал» получит долю в двух совместных предприятиях по проектам в Гане",
    "ind": "Не определена",
    "type": "M&A",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "src": [
     [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/9063996"
+     "ТАСС",
+     "https://tass.ru/ekonomika/28267685"
     ]
    ],
    "from_ingest": true,
@@ -214,40 +214,11 @@
     "adv": [],
     "terms": "—"
    },
-   "seller": "Truth Social",
-   "asset": "Bloomberg быстрый доступ к постам Трампа",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "Агентство Bloomberg и две трейдинговые компании — Susquehanna International Group и Jump Trading — подписались на ускоренный доступ к постам Дональда Трампа в Truth Social. Об этом сообщает Reuters со ссылкой на источники, напрямую знакомые с ситуацией.",
-     "source": [
-      "Коммерсантъ",
-      "https://www.kommersant.ru/doc/9063996"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "Bloomberg быстрый доступ к постам Трампа",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9063996"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Truth Social",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9063996"
-     }
-    ]
-   },
-   "pending_since": "2026-10-29T14:57:31+00:00"
+   "pending_since": "2026-10-29T15:11:08+00:00",
+   "from_raw": {
+    "draft_id": "d91996444",
+    "title": "«Русал» получит долю в двух совместных предприятиях по проектам в Гане"
+   }
   }
  ]
 }
