@@ -7905,6 +7905,46 @@ def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path
         assert "Открыть карточку сделки" in str(j["reply_markup"]) and "t.me/c/" not in str(j["reply_markup"])
 
 
+def test_an_approved_proposal_edits_an_owner_text_post_and_becomes_its_text(monkeypatch, tmp_path):
+    """29 октября 2026, «Агропромкредит»: пост вышел текстом владельца без суммы,
+    карточка узнала цену, автоправка текст владельца не трогает, второй пост
+    владелец запретил («его просто нужно изменить с указанием новых вводных»).
+    `propose_post_edit.py` шлет новый текст в консоль; «Пост в канал»
+    (решение `<id>~edit`) — пост правится там, где вышел, новый текст
+    становится текстом владельца; «Без поста» — предложение снимается.
+    Решения по правке не путаются с вехами."""
+    import approve
+    NEW = ('<b>«ЭсЭфАй» выиграла торги</b>\n\n<b>Покупатель:</b> ПАО «ЭсЭфАй»\n<b>Продавец:</b> ПСБ\n'
+           '<b>Предмет:</b> Агропромкредит\n<b>Сумма:</b> 1,427 млрд ₽\n<b>Статус:</b> Закрыта · октябрь 2026\n\n'
+           '<b>Источник:</b> <a href="https://e1.ru/1">E1.RU</a>')
+    deal = {"id": "gE1", "title": "«ЭсЭфАй» выиграла торги", "date": "2026-10-27", "status": "Закрыта",
+            "type": "Продажа с торгов", "buyer": "ПАО «ЭсЭфАй»", "seller": "ПСБ", "asset": "Агропромкредит",
+            "sum": "1,427 млрд ₽", "ind": "Банки", "src": [["E1.RU", "https://e1.ru/1"]],
+            "reviewed": "2026-10-27", "accepted": "2026-10-27",
+            "post_override": "<b>старый текст владельца</b>", "post_edit_proposal": NEW}
+    other = dict(deal, id="gE2", post_edit_proposal="<b>другое предложение</b>")
+    _channels_world(monkeypatch, tmp_path, [deal, other], posts={"gE1": 601, "gE2": 602},
+                    updates={"gE1": ["появилась сумма"]})
+    decisions = [{"id": 31, "deal_id": "gE1~edit", "verdict": "post_yes", "created_at": "2026-10-29T10:00:00+00:00"},
+                 {"id": 32, "deal_id": "gE2~edit", "verdict": "post_no", "created_at": "2026-10-29T10:00:00+00:00"}]
+    consumed = []
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: (decisions, ("site", "t")))
+    monkeypatch.setattr(approve, "consume", lambda handle, ids: consumed.extend(ids))
+    monkeypatch.setattr(send_telegram, "site_channel_edits", lambda: {"%s:%s" % (MAIN_CH, 601): True})
+    assert send_telegram.milestone_decisions(decisions) == {}
+    assert send_telegram.post_edit_decisions(decisions) == {"gE1": ("post_yes", 31), "gE2": ("post_no", 32)}
+    fake = _FakeClient([_ok()])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    edits = [(u.rsplit("/", 1)[-1], j) for u, j in fake.calls]
+    assert [m for m, _j in edits] == ["editMessageText"], edits
+    assert edits[0][1]["message_id"] == 601 and edits[0][1]["text"] == NEW
+    written = {d["id"]: d for d in json.loads((tmp_path / "deals_promoted.json").read_text(encoding="utf-8"))["deals"]}
+    assert written["gE1"]["post_override"] == NEW and "post_edit_proposal" not in written["gE1"]
+    assert "post_edit_proposal" not in written["gE2"] and written["gE2"]["post_override"] == "<b>старый текст владельца</b>"
+    assert sorted(consumed) == [31, 32]
+
+
 def test_channel_rule_counts_a_deal_sum_but_not_an_auction_start_or_a_rumour():
     """«Прям сделка и сумма больше миллиарда»: состоялась или подписана, и
     число в карточке — цена сделки. Стартовая цена торгов — не цена;

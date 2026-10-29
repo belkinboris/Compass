@@ -623,7 +623,7 @@ def milestone_decisions(decisions):
         did = str(d.get('deal_id') or '')
         # `digest~2026-08` — решение по месячной сводке, а не по вехе: тот же
         # разделитель, другая сущность (см. `digest_decisions`).
-        if did.startswith('digest~'):
+        if did.startswith('digest~') or did.endswith('~edit'):
             continue
         if '~' not in did or d.get('verdict') not in ('post_yes', 'post_no'):
             continue
@@ -716,6 +716,43 @@ def digest_due(data, today):
     if not monthly_digest.enough(monthly_digest.stats(data, year, month)):
         return None
     return year, month
+
+
+def post_edit_decisions(decisions):
+    """{id сделки: (вердикт, id решения)} — ответ на предложение правки
+    вышедшего поста (`propose_post_edit.py`): `deal_id` решения — `<id>~edit`,
+    вердикты те же, что у поста карточки."""
+    out = {}
+    for d in decisions:
+        did = str(d.get('deal_id') or '')
+        if not did.endswith('~edit') or d.get('verdict') not in ('post_yes', 'post_no'):
+            continue
+        out[did[:-len('~edit')]] = (d['verdict'], d['id'])
+    return out
+
+
+def plan_post_edits(deals, decisions, posts, realty_posts):
+    """(правки [(id, {канал: номер поста}, текст)], снятые предложения [id],
+    id решений к гашению) по ответам на предложения правки поста."""
+    answers = post_edit_decisions(decisions)
+    edits, dropped, decision_ids = [], [], []
+    for deal in deals:
+        did = deal['id']
+        answer = answers.get(did)
+        if not answer:
+            continue
+        verdict, decision_id = answer
+        decision_ids.append(decision_id)
+        proposal = deal.get('post_edit_proposal')
+        if not proposal:
+            continue
+        where = {ch: mid for ch, mid in ((channels.MAIN, posts.get(did)),
+                                         (channels.REALTY, realty_posts.get(did))) if mid}
+        if verdict == 'post_yes' and where:
+            edits.append((did, where, proposal))
+        else:
+            dropped.append(did)
+    return edits, dropped, decision_ids
 
 
 def digest_decisions(decisions):
@@ -901,7 +938,8 @@ def plan_milestones(deals, stage_posts, decisions, now, post_state=None):
     chosen = {did for _v, did in by_event.values()}
     for d in decisions:
         did = str(d.get('deal_id') or '')
-        if did.startswith('digest~') or '~' not in did or d.get('verdict') not in ('post_yes', 'post_no'):
+        if did.startswith('digest~') or did.endswith('~edit') or '~' not in did \
+                or d.get('verdict') not in ('post_yes', 'post_no'):
             continue
         deal_id, _, kind = did.partition('~')
         stale = d['id'] not in chosen or '%s-%s' % (deal_id, kind) in stage_posts
@@ -1068,8 +1106,19 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             to_send_m = [(d, e, t) for d, e, t in to_send_m if e['id'] != event['id']]
 
     to_send, to_edit, to_seed, needs_review, needs_acceptance = [], [], [], [], []
+    # Предложенная правка вышедшего поста, одобренная в консоли
+    # (`propose_post_edit.py`, 29 октября 2026): правится и пост с текстом
+    # владельца — владелец сам одобрил новый текст, он и становится его текстом.
+    approved_edits, dropped_edits, edit_decision_ids = plan_post_edits(
+        data['deals'], m_decisions, posts, realty_posts)
+    approved_edit_ids = {did for did, _w, _t in approved_edits}
+    for did in dropped_edits:
+        next(d for d in data['deals'] if d['id'] == did).pop('post_edit_proposal', None)
+    to_edit.extend(approved_edits)
     for deal in data['deals']:
         did = deal['id']
+        if did in approved_edit_ids:
+            continue
         # Уже вышедший пост (в любом из каналов) только правится — там, где
         # он вышел. `where` — {канал: номер поста}.
         where = {ch: mid for ch, mid in ((channels.MAIN, posts.get(did)),
@@ -1326,7 +1375,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     if not to_send and not to_edit and not to_send_m and not m_discard_ids:
         # Засев «без поста» — тоже изменение состояния: не записать его —
         # значит показывать эти карточки в плане каждый прогон заново.
-        if to_seed or digest_saved:
+        if to_seed or digest_saved or dropped_edits:
             for did in to_seed:
                 posts[did] = None
             with open(DATA, 'w', encoding='utf-8') as f:
@@ -1336,7 +1385,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             print('Отправлять сейчас нечего.')
         if digest_failed:
             print('Сводка %s не ушла: %s' % (digest_key_, digest_failed))
-        approve.consume(m_handle, digest_decision_ids)
+        approve.consume(m_handle, digest_decision_ids + edit_decision_ids)
         return
 
     queue = [('send', did, text) for did, text in to_send] + \
@@ -1454,7 +1503,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             if manual_edits is None:
                 print('  %s: правку поста %s откладываю — сайт не сказал, правили ли его руками' % (did, mid))
                 continue
-            if ('%s:%s' % (addr.get(ch), mid)) in manual_edits:
+            if ('%s:%s' % (addr.get(ch), mid)) in manual_edits and did not in approved_edit_ids:
                 # Пост поправил человек прямо в канале — его текст сильнее
                 # автоправки (21 октября 2026, Swordfish Security: «Я уже
                 # поправил пост!!!»).
@@ -1481,6 +1530,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         edited += done
         if done:
             post_state[did] = post_snapshot(deal)
+            if did in approved_edit_ids:
+                deal['post_override'] = deal.pop('post_edit_proposal', text)
 
     if digest_failed:
         failed.append(('сводка %s' % digest_key_, digest_failed))
@@ -1499,7 +1550,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # повторной выборке того же решения держит `milestones[event_id]`, а не
     # факт консумации (см. комментарий в начале main()), поэтому здесь можно
     # без второго прохода `--consume` после git push, в отличие от approve.py.
-    approve.consume(m_handle, m_discard_ids + m_sent_decision_ids + digest_decision_ids)
+    approve.consume(m_handle, m_discard_ids + m_sent_decision_ids + digest_decision_ids + edit_decision_ids)
     print('Отправлено новых: %d, отредактировано: %d, засеяно без поста: %d, вех отправлено: %d, ошибок: %d'
           % (sent, edited, len(to_seed), milestoned, len(failed)))
     if gap_held:
