@@ -91,75 +91,6 @@
    "post_preview": "<b>ЛСР выкупит у акционеров собственные акции на 3,5 млрд ₽</b>\n\n<b>Покупатель:</b> Группа ЛСР — девелопер жилой недвижимости и производитель стройматериалов — кирпича, бетона, гранитного щебня.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> акции ЛСР — 5 151 510 штук по 675 ₽ за акцию.\n<b>Сумма:</b> 3,5 млрд ₽\n<b>Статус:</b> Подписана\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261028/sovet-874721147.html\">ПРАЙМ</a>\nЕще 2 источника — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g0f479af0\">карточке сделки</a>"
   },
   {
-   "id": "g4d0403ea",
-   "date": "2026-10-28",
-   "title": "Вторую киевскую квартиру Лебедева продали с аукциона почти за $176 тыс.",
-   "ind": "Не определена",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "src": [
-    [
-     "ТАСС",
-     "https://tass.ru/obschestvo/28264181"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$176 тыс",
-   "seller": "Вторую киевскую квартиру Лебедева",
-   "asset": "с аукциона почти",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-28",
-     "title": "Сделка завершена",
-     "note": "Объект расположен на двух уровнях шестого этажа шестиэтажного дома в историческом центре города",
-     "source": [
-      "ТАСС",
-      "https://tass.ru/obschestvo/28264181"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "Продажа с торгов"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "с аукциона почти",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28264181"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Вторую киевскую квартиру Лебедева",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28264181"
-     }
-    ]
-   },
-   "pending_since": "2026-10-28T20:28:27+00:00"
-  },
-  {
    "id": "g50ed2f8b",
    "date": "2026-10-29",
    "title": "Китайская Golden Brick Capital получила 49% в проекте НСЗК",
@@ -206,58 +137,6 @@
       "field": "asset",
       "method": "explicit_news_title",
       "url": "https://www.kommersant.ru/doc/9063195"
-     }
-    ]
-   },
-   "pending_since": "2026-10-29T05:55:28+00:00"
-  },
-  {
-   "id": "gbcca51b7",
-   "date": "2026-10-29",
-   "title": "Более половины россиян покупают продукты по советам блогеров",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "Известия",
-     "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "Более половины россиян",
-   "asset": "продукты по советам блогеров",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Более половины россиян",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
-     }
-    ],
-    "target": [
-     {
-      "value": "продукты по советам блогеров",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
      }
     ]
    },
