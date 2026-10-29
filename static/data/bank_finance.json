@@ -1,4 +1,40 @@
 {
+  "citibank": {
+    "as_of_balance": "2026-07-01",
+    "as_of_profit": "2026-10-01",
+    "assets_rub": 1229801660000,
+    "assets_rub_prior_year": 1126646729000,
+    "derived": {
+      "metrics": [
+        {
+          "group": "Капитал",
+          "how": "собственные средства к активам",
+          "key": "equity_to_assets",
+          "kind": "percent",
+          "label": "Собственные средства к активам",
+          "primary": true,
+          "value": 11.4
+        },
+        {
+          "group": "Капитал",
+          "how": "прибыль с начала года ÷ собственные средства",
+          "key": "return_on_equity",
+          "kind": "percent",
+          "label": "Рентабельность капитала за 9 мес. 2026",
+          "primary": true,
+          "value": 4.8
+        }
+      ],
+      "notes": [
+        "Прибыль за 9 мес. 2026 года, без пересчета на год."
+      ]
+    },
+    "equity_rub": 140333877000,
+    "equity_rub_prior_year": 136433084000,
+    "legal_name": "Акционерное общество «РенКап Банк»",
+    "net_profit_rub": 6703736000,
+    "regnum": 2557
+  },
   "g09ccbaca": {
     "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-10-01",
