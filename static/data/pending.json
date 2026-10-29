@@ -109,6 +109,70 @@
     "draft_id": "d37223632",
     "title": "«Русал» и Гана подписали меморандум о создании СП по добыче бокситов"
    }
+  },
+  {
+   "id": "g1243d7d5",
+   "date": "2026-10-29",
+   "title": "«Яндекс» выкупил более 638 000 акций в рамках байбэка",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "более 638 000 акций в рамках байбэка",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Яндекс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
+     }
+    ],
+    "target": [
+     {
+      "value": "более 638 000 акций в рамках байбэка",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
+     }
+    ]
+   },
+   "buyer": "yandex",
+   "pending_since": "2026-10-29T10:39:00+00:00"
   }
  ]
 }

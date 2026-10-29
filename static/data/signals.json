@@ -2,6 +2,34 @@
  "updated": "2026-10-29",
  "signals": [
   {
+   "id": "s9a851860a",
+   "company_id": "g68f57675",
+   "date": "2026-10-29",
+   "kind": "buy",
+   "summary": "Golden Brick Capital — обсуждается вложение в «Дальневосточная агропромышленная корпорация»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9063195"
+   ],
+   "origin": "card",
+   "deal_id": "gb986603e",
+   "strength": "normal"
+  },
+  {
+   "id": "s200860b78",
+   "company_id": "g1e3e41bf",
+   "date": "2026-10-29",
+   "kind": "investor",
+   "summary": "«Дальневосточная агропромышленная корпорация» — обсуждается вход инвестора в капитал; возможный покупатель — Golden Brick Capital",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9063195"
+   ],
+   "origin": "card",
+   "deal_id": "gb986603e",
+   "strength": "normal"
+  },
+  {
    "id": "sd6c996174",
    "company_id": "gbdba5da3",
    "date": "2026-10-28",
