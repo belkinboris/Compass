@@ -8959,6 +8959,21 @@ def test_silence_clock_starts_when_the_card_is_first_shown():
     assert card["pending_since"] == "2026-10-27T09:00:00+00:00"  # второе сообщение часы не сдвигает
 
 
+def test_ship_decisions_reads_failed_test_ids_from_the_pytest_tail():
+    """29 октября 2026: два теста падали только в полном прогоне (сеть, порядок) и
+    каждый раз останавливали выпуск решений владельца на час. ship_decisions
+    повторяет только упавшие; настоящая поломка красная и во второй раз."""
+    import importlib.util, pathlib
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    tail = ("FAILED test_kompas.py::test_feedback_is_stored_and_a_down_vote_reaches_the_console - AssertionError: x\n"
+            "FAILED test_ui.py::test_assistant_button_opens_a_sheet_from_any_page\n"
+            "2 failed, 1711 passed, 36 skipped in 1022.49s")
+    assert mod.failed_nodeids(tail) == ["test_kompas.py::test_feedback_is_stored_and_a_down_vote_reaches_the_console",
+                                        "test_ui.py::test_assistant_button_opens_a_sheet_from_any_page"]
+    assert mod.failed_nodeids("1711 passed") == []
+
+
 def test_ship_decisions_notices_a_lost_deal_or_post_before_push():
     """Владелец, 28 октября 2026: «пост больше двух часов назад одобрил» — цепочка
     «решение → база → push → пост» теперь одна команда (ship_decisions.py); перед
