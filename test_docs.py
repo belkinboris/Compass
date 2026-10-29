@@ -20,7 +20,9 @@ JOURNAL = ROADMAP[ROADMAP.index("## 5. Журнал работ"):]
 # Замер 20 сентября 2026 — 168 798 знаков после переноса закрытого в архив.
 # Запас взят небольшой намеренно: как только он выбран, это сигнал сдвинуть
 # журнал (`roadmap_archive.py --journal --write`), а не поднять потолок.
-ROADMAP_LIMIT = 200_000
+# 28 октября 2026: журнал держится за 1 день (roadmap_archive --journal), пишется
+# через journal_add.py без чтения файла; потолок опущен с 200 до 120 тыс.
+ROADMAP_LIMIT = 120_000
 # 24 сентября 2026 CLAUDE.md разнесен по месту чтения: 97 → 17 тыс. знаков.
 # Правило одной рутины живет в routines/, устройство подсистемы — в docs/.
 # Потолок взят с запасом под правила, нужные КАЖДОМУ прогону, — и только им.
@@ -63,7 +65,7 @@ def test_claude_md_stays_within_its_budget():
 
 
 def test_a_searched_document_keeps_its_answer_the_size_of_one_entry():
-    """У KNOWN_ISSUES.md и архива потолка НЕТ намеренно — вместо него этот тест.
+    """У known_issues/ (бывший KNOWN_ISSUES.md) и архива потолка НЕТ намеренно — вместо него этот тест.
 
     21 сентября 2026 потолок на KNOWN_ISSUES.md простоял полдня и был снят по
     возражению владельца, и возражение точное: «просто не будет хватать места
@@ -97,7 +99,7 @@ def test_a_searched_document_keeps_its_answer_the_size_of_one_entry():
         assert covered >= tail * 0.8, (
             "%s: под заголовками лежит %d знаков из %d — остальное поиск не "
             "найдет, потому что оно не принадлежит ни одной записи" % (name, covered, tail))
-        if name != "KNOWN_ISSUES.md":
+        if not name.startswith("known_issues/"):
             # Размер записи архива решается НЕ здесь: архив только принимает
             # записи журнала, которые до этого лежали в PRODUCT_ROADMAP.md под
             # жестким потолком в 200 тыс. знаков. Запись на 55 тыс. съела бы
@@ -161,7 +163,7 @@ def test_every_backlog_block_keeps_its_heading():
 def test_the_journal_in_the_main_file_is_short():
     days = sorted({m.group(1) for m in
                    re.finditer(r"^### (\d{4}-\d{2}-\d{2})", JOURNAL, re.M)})
-    assert len(days) <= 3, (
+    assert len(days) <= 2, (
         "в основном файле журнал за %d дней (%s…%s) — сдвиньте старые записи: "
         "python3 pipeline/roadmap_archive.py --journal --write; запись без строки "
         "«Знание: …» не уедет — сначала разнесите ее правило по документам"
@@ -199,6 +201,13 @@ def test_a_journal_entry_says_where_its_knowledge_went():
                 bad.append("нет файла %s" % path)
                 continue
             text = io.open(full, encoding="utf-8").read()
+            if path == "KNOWN_ISSUES.md":
+                # 28 октября 2026: записи разъехались по known_issues/<тема>.md,
+                # KNOWN_ISSUES.md — оглавление; старые адреса журнала остаются
+                # верными, раздел ищется по всей папке.
+                ki = os.path.join(ROOT, "known_issues")
+                text = "\n".join(io.open(os.path.join(ki, n), encoding="utf-8").read()
+                                 for n in sorted(os.listdir(ki)) if n.endswith(".md"))
             if section:
                 heads = [_norm(h) for h in re.findall(r"(?m)^#{1,6}\s+(.+)$", text)]
                 if not any(_norm(section) in h for h in heads):
@@ -337,3 +346,21 @@ def test_every_reference_in_the_read_documents_leads_somewhere():
                     continue
                 missing.append("%s → раздел «%s»" % (name, ref))
     assert not missing, "ссылки ведут в никуда:\n  " + "\n  ".join(missing)
+
+
+def test_a_promise_from_the_chat_lands_in_the_backlog_by_script(tmp_path):
+    """«Сделаю потом» из ответа в чате следующая сессия не видит (29 октября
+    2026: ужатие known_issues/ висело в чате сутки, пока владелец не спросил
+    сам). `roadmap_block.py --add` пишет пункт в конец блока с очередным
+    номером, не трогая остальной файл."""
+    import pipeline.roadmap_block as rb
+    src = io.open(os.path.join(ROOT, "PRODUCT_ROADMAP.md"), encoding="utf-8").read()
+    path = tmp_path / "roadmap.md"
+    path.write_text(src, encoding="utf-8")
+    assert rb.add_item("D", "проверить, что пункт дописался.", str(path)) == 0
+    out = path.read_text(encoding="utf-8")
+    block = out[out.index("### D. "):out.index("### F. ")]
+    last = [l for l in block.splitlines() if l.strip()][-1]
+    assert re.match(r"- \*\*D\d+\. проверить, что пункт дописался\*\*$", last), last
+    assert out.replace(last + "\n", "") == src, "скрипт тронул что-то кроме нового пункта"
+    assert rb.add_item("Z", "нет такого блока", str(path)) == 1

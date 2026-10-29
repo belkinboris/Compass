@@ -152,7 +152,7 @@ def main(argv=None) -> int:
                     help="буквы блоков целиком, через запятую (например F)")
     ap.add_argument("--journal", action="store_true",
                     help="сдвинуть журнал: свежие дни остаются, остальные в архив")
-    ap.add_argument("--keep-days", type=int, default=2,
+    ap.add_argument("--keep-days", type=int, default=1,
                     help="сколько последних дней журнала оставить в основном файле")
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args(argv)

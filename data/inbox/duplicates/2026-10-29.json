@@ -1,0 +1,47 @@
+{
+ "made": "2026-10-29",
+ "items": [
+  {
+   "key": "https://1prime.ru/20261029/sila-874733252.html::g51fa80ce",
+   "candidate_id": "g51fa80ce",
+   "reason": "общие редкие слова: золота, участо",
+   "draft": {
+    "draft_id": "d88156998",
+    "title": "«Сила Востока» приобрела участок рудного золота в Магаданской области",
+    "date": "2026-10-29",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261029/sila-874733252.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-29",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261029/sila-874733252.html"
+      ]
+     }
+    ],
+    "buyer_name": "«Сила Востока»",
+    "asset": "участок рудного золота в Магаданской области",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Сила Востока»",
+     "asset": "участок рудного золота в Магаданской области",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-29"
+  }
+ ]
+}

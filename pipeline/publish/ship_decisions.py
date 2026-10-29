@@ -142,9 +142,31 @@ def decisions_planned():
     return rows, out
 
 
+LOCK = os.path.join(ROOT, 'data', 'inbox', 'ship_decisions.lock')
+
+
 def main(argv):
     write = '--write' in argv
     log('— ship_decisions %s —' % ('--write' if write else 'сухой прогон'))
+    # Замок на время прогона: пока он есть, в рабочей копии %s-ship нельзя
+    # делать ничего руками — ни git rebase, ни checkout, ни pytest (28 октября
+    # 2026: ручной rebase в копии во время прогона стер примененное решение).
+    if write and os.path.exists(LOCK):
+        age = (time.time() - os.path.getmtime(LOCK)) / 60
+        if age < 40:
+            log('СТОП: уже идет другой прогон (замок %s, %.0f мин). Дождитесь его или удалите замок, если прогон точно мертв.'
+                % (LOCK, age))
+            return 1
+    if write:
+        open(LOCK, 'w').write(str(os.getpid()))
+    try:
+        return _main(argv, write)
+    finally:
+        if write and os.path.exists(LOCK):
+            os.remove(LOCK)
+
+
+def _main(argv, write):
     prepare_worktree()
     git('pull', '--rebase', '--autostash', 'origin', 'main')
     # autostash может вернуть правки с конфликтом и кодом 0 — тогда в файлах
@@ -161,7 +183,7 @@ def main(argv):
     resume = bool(git('status', '--porcelain', '--', *COMMIT_PATHS))
     rows, out = decisions_planned()
     if resume:
-        log('В рабочей копии уже есть незакоммиченные правки базы и очереди — продолжаю с полного pytest, решения заново не применяю.')
+        log('В рабочей копии уже есть незакоммиченные правки базы и очереди — продолжаю: применяю только новые решения, потом полный pytest.')
     if not rows and not resume:
         log('Решений нет.')
         return 0
@@ -174,9 +196,13 @@ def main(argv):
         return 0
 
     old = load_json(git('show', 'origin/main:static/data/deals_promoted.json'))
-    if not resume:
-        run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write'])
-        log('Решения применены локально.')
+    # approve.py --write идет и в продолжении: он идемпотентен (карточка,
+    # уже ушедшая в базу, в очереди не найдется; отброшенное сырье помнит
+    # decided_raw), а решения, нажатые ПОСЛЕ остановки, иначе остались бы
+    # в плане без применения — 28 октября 2026 продолжение так уперлось в
+    # проверку «ПУБЛИКУЕМ есть, а карточки в базе нет» по gf2b5f78c.
+    run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write'])
+    log('Решения применены локально%s.' % (' (продолжение: заново применены только новые)' if resume else ''))
     for _ in range(4):
         r = run([sys.executable, os.path.join(ROOT, 'pipeline', 'facts_derive.py'), '--write'])
         if 'актуально' in r.stdout:
@@ -196,6 +222,17 @@ def main(argv):
     lost = base_lost(old, new)
     if lost:
         log('СТОП: после применения из базы пропало — ' + '; '.join(lost) + '. Разбирать руками, ничего не пушу.')
+        return 1
+    # Применила — значит, карточка обязана оказаться в базе. 28 октября 2026
+    # правки approve.py в этой копии стерла параллельная ручная работа с git,
+    # pytest прошел на чистой базе, сверка «ничего не пропало» промолчала, и
+    # сайту подтвердили решение, которого в базе нет («Артмуза», g8e6dcf0b).
+    expected = [r.split()[1] for r in rows if r.startswith('ПУБЛИКУЕМ')]
+    missing = [i for i in expected if not any(d.get('id') == i for d in new.get('deals') or [])]
+    if missing:
+        log('СТОП: решение «опубликовать» применялось, а в базе карточки нет — %s. Правки в этой копии '
+            'потеряны (кто-то работал с git в %s параллельно?). Ничего не пушу и сайту не подтверждаю; повторите команду.'
+            % (', '.join(missing), WORK))
         return 1
     log('Семантическая сверка базы: ничего не пропало (сделок %d → %d).' % (len(old.get('deals') or []), len(new.get('deals') or [])))
 

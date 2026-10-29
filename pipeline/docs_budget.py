@@ -78,9 +78,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # единственный источник правды там.
 READ_WHOLE = {
     'CLAUDE.md': (30_000, 'перенести правило туда, где его читают: одной рутины — в '
-                          'routines/, подсистемы — в docs/, баг — в KNOWN_ISSUES.md, '
+                          'routines/, подсистемы — в docs/, баг — в known_issues/<тема>.md, '
                           'очередь — в консоль (send_open_questions.py)'),
-    'PRODUCT_ROADMAP.md': (200_000, 'python3 pipeline/roadmap_archive.py --journal --write'),
+    'PRODUCT_ROADMAP.md': (120_000, 'python3 pipeline/roadmap_archive.py --journal --write; '
+                                 'целиком его не читают — roadmap_block.py G | --journal N'),
 }
 DOCS = READ_WHOLE  # прежнее имя: им пользуются --anchors и старые вызовы
 
@@ -89,6 +90,8 @@ DOCS = READ_WHOLE  # прежнее имя: им пользуются --anchors 
 READ_ON_STEP = {
     'routines': (20_000, 'вынести устройство в docs/, в файле рутины оставить шаги'),
     'docs': (30_000, 'разделить документ по темам на два — не вычищать'),
+    # брифы саб-агентов: читаются целиком на каждую карточку (29 октября 2026)
+    'pipeline/ingest': (30_000, 'разделить бриф по этапам на два — не вычищать'),
 }
 
 
@@ -107,10 +110,17 @@ def step_docs():
 # Ищется по запросу -> файл -> (уровень заголовка записи, зачем он нужен).
 # Потолка нет намеренно: см. «ДЕЛЕНИЕ» в шапке.
 SEARCHED = {
-    'KNOWN_ISSUES.md': ('##', 'баг, который уже ловили: симптом, причина, чем починено'),
     'PRODUCT_ROADMAP_ARCHIVE.md': ('###', 'закрытая работа и замеры: что мерили, что вышло, '
                                           'что отвергли и почему'),
 }
+# known_issues/<тема>.md (28 октября 2026): баги по подсистемам, по файлу на
+# тему; KNOWN_ISSUES.md — оглавление. Файлы темы открывают, когда чинят ее,
+# и ищут по всей папке.
+_KI = os.path.join(ROOT, 'known_issues')
+if os.path.isdir(_KI):
+    for _name in sorted(os.listdir(_KI)):
+        if _name.endswith('.md'):
+            SEARCHED['known_issues/' + _name] = ('##', 'баг, который уже ловили: симптом, причина, чем починено')
 ARCHIVES = tuple(SEARCHED)
 
 ANCHORS = {
@@ -160,7 +170,7 @@ def stats() -> int:
         print('\nЗапас есть у всех — чистить нечего.')
         return 0
     print('\nЗапас кончается — чистить до того, как потолок уронит прогон:')
-    for name, share in tight:
+    for name, share in dict(tight).items():
         how = READ_WHOLE[name][1] if name in READ_WHOLE else next(
             h for n, _l, h in step_docs() if n == name)
         print('  • %s (%.0f%%) — %s' % (name, share * 100, how))
