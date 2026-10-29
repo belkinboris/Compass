@@ -78,32 +78,9 @@ def post_link(chat_id, message_id):
     return 'https://t.me/c/%s/%s' % (internal, message_id)
 
 
-CROSSLINK_BUTTON = {
-    MAIN: 'Этот же пост в основном канале «Компаса»',
-    REALTY: 'Этот же пост в канале «Компас - Недвижимость»',
-}
-
-
-def crosslink_button(other, chat_id, message_id):
-    """Кнопка под постом — на его пару в другом канале (`other`)."""
-    return {'text': CROSSLINK_BUTTON[other], 'url': post_link(chat_id, message_id)}
-
-
-def with_crosslink(buttons, channel, where, addr):
-    """Клавиатура поста для канала `channel`: обычные кнопки плюс кнопка на
-    пару в другом канале, если пара уже вышла (`where` — {канал: номер
-    поста}, `addr` — {канал: chat_id}). Владелец 28 октября 2026: «когда в
-    обоих каналах выкладывается пост, нужно умную кроссылку, которая ведет
-    на второй пост». Кнопка, а не строка в тексте: текст поста остается
-    одинаковым в обоих каналах и при автоправках не разъезжается, а
-    клавиатура при правке передается заново (`edit_message`), так что
-    ссылка переживает правки. Старую кнопку-ссылку заменяем, не дублируем."""
-    other = REALTY if channel == MAIN else MAIN
-    rows = [row for row in list((buttons or {}).get('inline_keyboard') or [])
-            if not any(b.get('text') in CROSSLINK_BUTTON.values() for b in row)]
-    if where.get(other) and addr.get(other):
-        rows.append([crosslink_button(other, addr[other], where[other])])
-    return {'inline_keyboard': rows} if rows else None
+# Кнопки «Этот же пост в …» между каналами были один день (28–29 октября
+# 2026) и сняты владельцем: «выглядит плохо». Пост в оба канала идет с
+# одинаковой клавиатурой, без ссылки на пару (docs/channel_posts.md).
 
 
 def destination(deal):
