@@ -154,6 +154,110 @@
     ]
    },
    "pending_since": "2026-10-28T20:28:27+00:00"
+  },
+  {
+   "id": "g50ed2f8b",
+   "date": "2026-10-29",
+   "title": "Китайская Golden Brick Capital получила 49% в проекте НСЗК",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9063195"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Китайская Golden Brick Capital",
+   "asset": "проект НСЗК",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Китайская Golden Brick Capital",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9063195"
+     }
+    ],
+    "target": [
+     {
+      "value": "проект НСЗК",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9063195"
+     }
+    ]
+   },
+   "pending_since": "2026-10-29T05:55:28+00:00"
+  },
+  {
+   "id": "gbcca51b7",
+   "date": "2026-10-29",
+   "title": "Более половины россиян покупают продукты по советам блогеров",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Известия",
+     "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Более половины россиян",
+   "asset": "продукты по советам блогеров",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Более половины россиян",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
+     }
+    ],
+    "target": [
+     {
+      "value": "продукты по советам блогеров",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://iz.ru/2191938/2026-10-29/bolee-poloviny-rossiian-pokupaiut-produkty-po-sovetam-blogerov"
+     }
+    ]
+   },
+   "pending_since": "2026-10-29T05:55:28+00:00"
   }
  ]
 }

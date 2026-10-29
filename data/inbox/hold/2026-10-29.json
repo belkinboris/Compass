@@ -1,0 +1,453 @@
+{
+ "made": "2026-10-29",
+ "drafts": [
+  {
+   "draft_id": "d55306904",
+   "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92468808",
+   "title": "Кения обсуждает с Wildberries инвестиции в электронную торговлю",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28263773"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-28",
+     "title": "Переговоры",
+     "note": "Кенийский лидер Уильям Руто встретился с гендиректором компании Робертом Мирзояном на полях Российско-африканского экономического и гуманитарного форума в Москве",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28263773"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d03403075",
+   "title": "На маркетплейсе выставлен на продажу за $60 млн суперкомпьютер для ИИ на 300 стоек с бесплатной доставкой",
+   "date": "2026-10-28",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-28_na_marketplejse_prodaetsya"
+    ]
+   ],
+   "sum": "$60 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d97609474",
+   "title": "Интерес молодежи к инвестициям вырос в 2,5 раза в сравнении с прошлым годом",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/10/29/1240872-investitsiyam-viros"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d29147832",
+   "title": "«Алроса» выставила на торги железорудный актив в Якутии",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/10/29/1240960-alrosa-vistavila-na-torgi-aktiv"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63490375",
+   "title": "Депутаты Приамурья поддержали прекращение продажи вейпов",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28265083"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20371723",
+   "title": "Высокие продажи новой «Волги» объяснили флагманским кроссовером",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/29/volga-oboshla-moskvich"
+    ]
+   ],
+   "sum": "4 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11998947",
+   "title": "СМИ предположили, сколько продлится новый раунд ударов США по Ирану",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/iran-2127708616.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11063021",
+   "title": "Миронов предложил проводить продуктовые распродажи для семей",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/mironov-2127701991.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d00029915",
+   "title": "Шестикратный обладатель «Грэмми» выставил на продажу большую коллекцию мотоциклов",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/29/shestikratnyy-obladatel-gremmi-vystavil-na-prodazhu-bolshuyu-kollektsiyu-mototsiklov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92707144",
+   "title": "Итальянский бренд одежды отказался полностью уходить из РФ",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053139876"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-29",
+     "title": "Переговоры",
+     "note": "Итальянский fashion-ритейлер Benetton не планирует полностью уходить с российского рынка, но рассматривает возможность сокращения количества торговых точек.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053139876"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65804798",
+   "title": "Соцсоревнование. «Волга» впервые опередила «Москвич» по продажам",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/auto/2026/10/29/76729187/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Высокие продажи новой «Волги» объяснили флагманским кроссове» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d59172059",
+   "title": "«Это уникальный автомобиль»: Mitsubishi Eclipse продают в Бердске — чем интересна машина",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/10/29/76728559/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16032580",
+   "title": "В Тюмени продают последние премиальные кросс-купе 2025 года за 3 990 000 рублей",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/auto/2026/10/29/76728784/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26178160",
+   "title": "Купцы здесь больше не живут: как выглядит историческая усадьба в Уфе, которая продается за 1 рубль",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/gorod/2026/10/29/76726974/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
