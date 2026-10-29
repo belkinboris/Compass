@@ -290,10 +290,17 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         their_size = full / ps if ps else full / 1.81
         c['_dist'] = abs(math.log(max(their_size, 1) / size)) if size and size > 0 else 0
     comps.sort(key=lambda c: (round(c['_dist']), -len(c['multiples']), abs((c['year'] or 0) - (year or 0))))
-    # Размер известен — сделки другого масштаба в сравнение не идут; размер
-    # неизвестен — сравнивать не с чем, список пуст, и текст говорит об этом.
+    # Размер известен — сделки другого масштаба в сравнение не идут. Размер
+    # неизвестен — похожих сделок НЕТ ВОВСЕ (владелец, 29 октября 2026, Velle
+    # рядом с Росспиртпромом за 8,3 млрд ₽: «это как если будет продаваться
+    # нефтебаза с двумя заправками и сравнят со сделкой с Роснефтью — смешно
+    # и глупо для разбирающихся людей»). До этого они показывались с
+    # оговоркой «могут быть несопоставимы» — оговорка не спасала.
     size_unknown = not (size and size > 0)
-    if not size_unknown:
+    hidden_for_size = 0
+    if size_unknown:
+        hidden_for_size, comps = len(comps), []
+    else:
         comps = [c for c in comps if c['_dist'] <= math.log(SIZE_RATIO_MAX)]
     comps = [{k: v for k, v in c.items() if k != '_dist'} for c in comps[:COMPARABLES_MAX]]
 
@@ -325,7 +332,7 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         'revenue_rub': _pick(report, 'revenue_rub', '2110') if report else None,
         'net_profit_rub': _pick(report, 'net_profit_rub', '2400') if report else None,
         'methods': methods, 'benchmarks': benchmarks, 'comparables': comps, 'experts': experts,
-        'card_revenue_rub': card_revenue, 'size_unknown': size_unknown,
+        'card_revenue_rub': card_revenue, 'size_unknown': size_unknown, 'hidden_for_size': hidden_for_size,
         'range': rng, 'range_text': range_text(rng, stake),
     }
 
@@ -378,9 +385,9 @@ def facts_text(s: dict) -> str:
         lines.append(f'Отчетности покупаемой компании в базе нет; по данным источника ее выручка — {money(s["card_revenue_rub"])}')
     else:
         lines.append('Отчетности покупаемой компании в базе нет')
-    if s.get('size_unknown') and s['comparables']:
-        lines.append('Размер покупаемой компании неизвестен — сделки отрасли ниже могут быть несопоставимы '
-                     'с ней по масштабу: диапазон по их ценам не строить, так и сказать')
+    if s.get('hidden_for_size'):
+        lines.append('Размер покупаемой компании неизвестен (ни выручки, ни активов) — сделки отрасли с известной '
+                     'ценой есть, но их не приводить вовсе: сравнение без масштаба вводит в заблуждение; так и сказать')
     for m in s['methods']:
         if m.get('external'):
             e = m['external']
@@ -437,9 +444,9 @@ def template_text(s: dict) -> list[str]:
         else:
             out.append(f'Отчетности компании в базе нет, взяли выручку по данным источника и медианный '
                        f'мультипликатор {names} по сделкам отрасли с известной ценой.')
-    if s.get('size_unknown') and s['comparables'] and not s['range_text']:
-        out.append('Размер покупаемой компании неизвестен, поэтому сделки отрасли могут быть несопоставимы '
-                   'с ней по масштабу — диапазон по их ценам не строится.')
+    if s.get('hidden_for_size') and not s['range_text']:
+        out.append('Размер покупаемой компании неизвестен: ни выручки, ни активов в открытых данных нет. '
+                   'Сделки отрасли с известной ценой есть, но без масштаба их не приводим — сравнение было бы не по делу.')
     if not out:
         out.append('Для оценки не хватает данных: нет отчетности покупаемой компании и сделок '
                    'с известной ценой в этой отрасли.')
