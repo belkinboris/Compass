@@ -346,3 +346,21 @@ def test_every_reference_in_the_read_documents_leads_somewhere():
                     continue
                 missing.append("%s → раздел «%s»" % (name, ref))
     assert not missing, "ссылки ведут в никуда:\n  " + "\n  ".join(missing)
+
+
+def test_a_promise_from_the_chat_lands_in_the_backlog_by_script(tmp_path):
+    """«Сделаю потом» из ответа в чате следующая сессия не видит (29 октября
+    2026: ужатие known_issues/ висело в чате сутки, пока владелец не спросил
+    сам). `roadmap_block.py --add` пишет пункт в конец блока с очередным
+    номером, не трогая остальной файл."""
+    import pipeline.roadmap_block as rb
+    src = io.open(os.path.join(ROOT, "PRODUCT_ROADMAP.md"), encoding="utf-8").read()
+    path = tmp_path / "roadmap.md"
+    path.write_text(src, encoding="utf-8")
+    assert rb.add_item("D", "проверить, что пункт дописался.", str(path)) == 0
+    out = path.read_text(encoding="utf-8")
+    block = out[out.index("### D. "):out.index("### F. ")]
+    last = [l for l in block.splitlines() if l.strip()][-1]
+    assert re.match(r"- \*\*D\d+\. проверить, что пункт дописался\*\*$", last), last
+    assert out.replace(last + "\n", "") == src, "скрипт тронул что-то кроме нового пункта"
+    assert rb.add_item("Z", "нет такого блока", str(path)) == 1
