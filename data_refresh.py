@@ -201,6 +201,32 @@ TARGETS: tuple[Target, ...] = (
 )
 
 
+
+
+def validate_hold(data, disk_path: str) -> str | None:
+    if not isinstance(data, dict) or not isinstance(data.get("drafts"), list):
+        return "нет списка drafts"
+    return None
+
+
+def validate_object(data, disk_path: str) -> str | None:
+    return None if isinstance(data, dict) else "это не объект JSON"
+
+
+def all_targets(now=None) -> tuple[Target, ...]:
+    """Постоянные файлы плюс сырье «Сомнительных» (29 октября 2026). Сводка
+    публикации писала «2 сомнительные», а кнопка в консоли показывала 11:
+    сайт читал файл сырья и список решенного из сборки ветки release, то
+    есть снимок на момент последней выкладки кода. Сегодняшний файл сырья
+    (имя — дата по UTC, его пишет promote.py) и moderation_state.json теперь
+    подтягиваются вместе с базой."""
+    day = (now or datetime.now(timezone.utc)).strftime("%Y-%m-%d")
+    return TARGETS + (
+        Target("data/inbox/hold/%s.json" % day, validate_hold, False),
+        Target("data/inbox/moderation_state.json", validate_object, False),
+    )
+
+
 # --------------------------------------------------------------------------
 # Состояние: чем отчитываемся в /api/data/status
 # --------------------------------------------------------------------------
@@ -300,6 +326,7 @@ def _atomic_write(path: str, body: bytes) -> None:
     os.replace атомарна на уровне файловой системы, а уже открытый
     дескриптор дочитывает старую версию до конца."""
     tmp = "%s.tmp-%d" % (path, os.getpid())
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     try:
         with open(tmp, "wb") as f:
             f.write(body)
@@ -425,7 +452,7 @@ def refresh_once() -> dict:
     GitHub и порченый файл — обычные события, а не авария."""
     changed: list[str] = []
     errors: list[str] = []
-    for target in TARGETS:
+    for target in all_targets():
         try:
             if _refresh_target(target):
                 changed.append(target.path)

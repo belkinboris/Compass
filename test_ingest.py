@@ -463,7 +463,7 @@ def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_p
     text, kb = ops_status.build(args)
     assert "1 карточку вы придержали" in text and "5 карточек" not in text, text
     # Сомнительные (проверку не прошли) — строкой с числом и кнопкой (9 октября 2026).
-    assert "⚠️ 1 сомнительная карточка ждет вашего решения" in text, text
+    assert "⚠️ Сомнительных: 1 — новости и карточки" in text, text
     assert kb["inline_keyboard"][-1][0]["callback_data"] == "show:raw"
 
 
