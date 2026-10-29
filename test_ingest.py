@@ -4429,6 +4429,44 @@ def test_raw_console_skips_news_a_card_was_already_built_from(monkeypatch):
     assert raw_ids == ["d-other"]
 
 
+def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tmp_path):
+    """29 октября 2026: «„Бумеранг Капитал“ приобрел 50% сети Baggins Coffee»
+    (retailer.ru) пришел владельцу «сомнительной» новостью наутро после поста
+    о той же сделке (g25a6766d, собрана по «Коммерсанту»), с подсказкой ворот
+    «похоже на уже описанную сделку g25a6766d (общие редкие слова)». Владелец:
+    «Что тут нажать? Очевидно у нас уже эта сделка выходила». Новость о
+    карточке базы — не вопрос в консоль, а дополнение для притока; подсказка
+    на карточку, которой в базе нет (только в очереди), и подсказка «тот же
+    предмет у „Обсуждается“» по-прежнему показываются."""
+    import send_drafts
+    mark = send_drafts.promote.DUP_CANDIDATE_MARK
+    drafts = [
+        {"draft_id": "d23445631", "title": "«Бумеранг Капитал» приобрел 50% сети Baggins Coffee",
+         "src": [["web:retailer.ru", "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/"]],
+         "hold_reasons": ["не установлен предмет сделки",
+                          "%s g25a6766d (общие редкие слова: baggin, coffee) — проверьте, не дубль ли" % mark]},
+        {"draft_id": "d-queue", "title": "Новость о карточке из очереди",
+         "hold_reasons": ["%s gqueue001 (общие редкие слова: x, y) — проверьте, не дубль ли" % mark]},
+        {"draft_id": "d-stale", "title": "Новость о давних переговорах",
+         "hold_reasons": ["%s g25a6766d (тот же предмет, что у карточки со статусом «Обсуждается» без движения"
+                          " — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе)" % mark]},
+    ]
+    base = {"companies": {}, "deals": [{"id": "g25a6766d", "title": "Сеть петербургских кофеен Baggins Coffee продали",
+                       "date": "2026-10-28", "src": [["Коммерсантъ", "https://www.kommersant.ru/doc/9062986"]]}]}
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: {"decided_raw": {}, "sent_raw": []})
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(send_drafts, "DATA", str(data))
+    plan, *_rest = send_drafts.build_plan()
+    raw_ids = [item.get("draft_id") for _t, _kb, (kind, item, _m) in plan if kind == "raw"]
+    assert raw_ids == ["d-queue", "d-stale"], raw_ids
+    assert send_drafts.covered_by_base_card(drafts[0], {"g25a6766d"}) == "g25a6766d"
+    assert send_drafts.covered_by_base_card(drafts[2], {"g25a6766d"}) is None
+
+
 def test_raw_console_hides_foreign_only_deals(monkeypatch):
     """Иностранный контур без российского элемента в консоль не носим.
 
