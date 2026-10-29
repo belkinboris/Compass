@@ -565,13 +565,8 @@ def build_plan(resend=None, only=None):
             # Финансы банка или НКО по данным Банка России — уже в проекте
             # поста: одобряется снимок, и без строки здесь ее не было бы и в
             # канале (4 октября 2026, OTP Bank). Без сети и без ключа ФНС.
-            fin = {}
-            try:
-                import send_telegram
-                fin = send_telegram.build_fin(card, {}, None)
-            except Exception:                                    # noqa: BLE001
-                fin = {}
-            rendered = draft_post_text(card, comps, fin=fin or None)
+            # Финансов в посте нет (владелец, 29 октября 2026).
+            rendered = draft_post_text(card, comps)
             card['_pending_post_preview'] = rendered
             plan.append((post_message_text(card, comps, rendered=rendered), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))

@@ -2654,6 +2654,18 @@ def test_repeated_delivery_of_one_button_press_makes_one_decision(client, monkey
                 json={"token": "тайна", "ids": [rows[0]["id"]]})
 
 
+def test_a_card_in_the_base_whose_post_is_not_out_yet_still_takes_the_owner_text(monkeypatch):
+    """29 октября 2026, Velle: карточка уже применена в базу, пост ждет pytest —
+    ответ владельца своим текстом должен записаться, а не отбиться как
+    «уже на сайте»; «уже на сайте» — только когда и пост вышел."""
+    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": []})
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {
+        "deals": [{"id": "gV1"}, {"id": "gV2"}], "telegram_posts": {"gV2": 238}})
+    assert not main._already_on_site("gV1")
+    assert main._already_on_site("gV2")
+    assert not main._already_on_site("gV3")
+
+
 def test_old_draft_of_a_published_card_does_not_record_a_decision(client, monkeypatch):
     """13 октября 2026, «Медси»: карточка уже на сайте и в канале, а над ней в
     консоли висят старые черновики с кнопками. Нажатие и ответ текстом на

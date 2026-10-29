@@ -1296,17 +1296,10 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # лет), и только сразу после сторон, чтобы блок читался одинаково.
     # «Финансы цели» звучало как внутренний термин («финансы чего?» — партнер
     # 31 августа 2026); по-русски — чья это отчетность.
-    target_fin, buyer_fin = fin.get('target'), fin.get('buyer')
-    target_word, buyer_word = 'Финансы покупаемой компании', 'Финансы покупателя'
-    if jv:
-        jv_names, _ = jv_participants(deal, companies)
-        buyer_word = 'Финансы %s' % jv_names[0] if jv_names else 'Финансы участника'
-        target_word = 'Финансы %s' % jv_names[-1] if len(jv_names) > 1 else 'Финансы участника'
-    if target_fin:
-        add('%s %s' % (_lab(_fin_label(target_word, target_fin[0])),
-                       esc(target_fin[1])))
-    if buyer_fin:
-        add('%s %s' % (_lab(_fin_label(buyer_word, buyer_fin[0])), esc(buyer_fin[1])))
+    # ФИНАНСОВ В ПОСТЕ НЕТ (владелец, 29 октября 2026, Velle: «надо перестать
+    # финансы в посты добавлять, из-за них посты некрасивые»). Строки «Финансы
+    # покупаемой компании / покупателя» жили здесь с августа; `fin` принимается
+    # ради старых вызовов и не печатается. Финансы остаются на сайте.
 
     if has(deal.get('sum')):
         card.append('%s %s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'), esc(deal['sum'])))
