@@ -10298,6 +10298,11 @@ async function fillPriceEst(panel, r, fast){
 function bindPriceEstimate(d){
   const btn = document.getElementById("pe-btn"), panel = document.getElementById("pe-panel");
   if(!btn || !panel) return;
+  // Считать нечем (нет отчетности, похожих по размеру сделок и оценок из
+  // источников) — кнопки нет вовсе (владелец, 29 октября 2026). Спрашиваем
+  // сайт при открытии карточки; пока он отвечает, кнопка стоит.
+  if(!_priceEst[d.id]) fetch(`/api/deals/${encodeURIComponent(d.id)}/price-estimate?probe=1`)
+    .then(r=>r.ok?r.json():null).then(r=>{ if(r && r.available===false && btn.isConnected && btn.getAttribute("aria-expanded")!=="true"){ btn.remove(); panel.remove(); } }).catch(()=>{});
   btn.onclick = async ()=>{
     if(btn.classList.contains("busy")) return;
     const open = btn.getAttribute("aria-expanded")==="true";
@@ -10314,6 +10319,7 @@ function bindPriceEstimate(d){
     btn.classList.remove("busy"); btn.textContent = "Свернуть";
     if(!panel.isConnected) return;
     if(r && r.available){ _priceEst[d.id] = r; fillPriceEst(panel, r, false); }
+    else if(r && r.reason==="no_data") panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div><div class="pe-wait">Исходя из публичных данных, достоверно определить сумму сделки невозможно.</div>`;
     else panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div><div class="pe-wait">Не получилось посчитать. Попробуйте еще раз чуть позже.</div>`;
   };
 }
