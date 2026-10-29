@@ -84,6 +84,37 @@
     "needs_review": true
    },
    "queued": "2026-10-29"
+  },
+  {
+   "key": "https://www.vedomosti.ru/investments/news/2026/10/29/1241142-31-mediafasadu::g1243d7d5",
+   "candidate_id": "g1243d7d5",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d86249161",
+    "title": "«Яндекс» получил доступ к 31 медиафасаду для продажи рекламы",
+    "date": "2026-10-29",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/10/29/1241142-31-mediafasadu"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "«Яндекс»",
+    "asset": "доступ к 31 медиафасаду для продажи рекламы",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Яндекс»",
+     "asset": "доступ к 31 медиафасаду для продажи рекламы",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-29"
   }
  ]
 }
