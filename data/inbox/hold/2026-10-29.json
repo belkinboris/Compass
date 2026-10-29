@@ -2,34 +2,6 @@
  "made": "2026-10-29",
  "drafts": [
   {
-   "draft_id": "d73514423",
-   "title": "Минфин США продлил лицензию по продаже зарубежных активов «Лукойла»",
-   "date": "2026-10-21",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2188239/2026-10-21/minfin-ssha-prodlil-litcenziiu-po-prodazhe-zarubezhnykh-aktivov-lukoila"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d75291808",
    "title": "Американская компания Anthropic подала документы для проведения IPO",
    "date": "2026-10-26",
@@ -261,35 +233,6 @@
    ]
   },
   {
-   "draft_id": "d70220031",
-   "title": "Госдума отложила на день рассмотрение законопроекта по онлайн-продаже вина",
-   "date": "2026-10-28",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261028/gd-2127539248.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d55306904",
    "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
    "date": "2026-10-28",
@@ -318,84 +261,17 @@
    ]
   },
   {
-   "draft_id": "d94233906",
-   "title": "В Москве инвестиции ЗПИФ в офисную недвижимость выросли в 3,6 раза",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28264717"
-    ]
-   ],
-   "sum": "40 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d49595547",
-   "title": "«Русал» и Гана договорились создать совместное предприятие по добыче бокситов",
+   "draft_id": "d52553580",
+   "title": "«Финам» предоставит «квалам» доступ к IPO Anthropic",
    "date": "2026-10-29",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/10/29/1241109-rusal-i-gana"
+     "https://www.vedomosti.ru/investments/news/2026/10/29/1241165-finam-predostavit-kvalam"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-29",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/10/29/1241109-rusal-i-gana"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d57757322",
-   "title": "«Авито» анонсировал запуск продаж товаров через аукционы со ставками",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/services/3223099-auktsiony-na-avito-prodazha-tovarov-so-stavkami?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -406,37 +282,26 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": "Финансовые услуги",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d28394231",
-   "title": "ЦБ рассматривает продажу полисов ОСАГО через «Госуслуги» и сайт ВСС",
+   "draft_id": "d71095779",
+   "title": "Аналитики Yota отметили рост интереса молодежи к инвестициям в 2,5 раза",
    "date": "2026-10-29",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28266367"
+     "web:ria.ru",
+     "https://ria.ru/20261029/investitsii-2127812416.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-29",
-     "title": "Переговоры",
-     "note": "Директор департамента страхового рынка регулятора Илья Смирнов подчеркнул, что для Банка России критически важно, чтобы человек мог купить ОСАГО в той страховой компании, в которой захочет и без задержек",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28266367"
-     ]
-    }
-   ],
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -445,20 +310,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Агро",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d82518252",
-   "title": "В российском городе выставили на продажу кей-кар с полным приводом от Nissan",
+   "draft_id": "d13898350",
+   "title": "На Ставрополье сняли ограничения на покупку бензина",
    "date": "2026-10-29",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/29/v-rossiyskom-gorode-vystavili-na-prodazhu-key-kar-s-polnym-privodom-ot-nissan/"
+     "web:abnews.ru",
+     "https://abnews.ru/skfo/news/stavropol/2026/10/29/na-stavropole-snyali-ogranicheniya-na-pokupku-benzina"
     ]
    ],
    "sum": null,
@@ -474,34 +339,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60836413",
-   "title": "В центре Перми стоматологическую клинику продают по цене квартиры",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053140064"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

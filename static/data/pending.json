@@ -40,70 +40,6 @@
    }
   },
   {
-   "id": "g1243d7d5",
-   "date": "2026-10-29",
-   "title": "«Яндекс» выкупил более 638 000 акций в рамках байбэка",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Ведомости",
-     "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "asset": "более 638 000 акций в рамках байбэка",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "Ведомости",
-      "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Яндекс»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
-     }
-    ],
-    "target": [
-     {
-      "value": "более 638 000 акций в рамках байбэка",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil"
-     }
-    ]
-   },
-   "buyer": "yandex",
-   "pending_since": "2026-10-29T10:39:00+00:00"
-  },
-  {
    "id": "gfe5d2f94",
    "date": "2026-10-29",
    "title": "«Яндекс» выкупил 638 312 собственных акций на 2,28 млрд ₽",
@@ -211,6 +147,199 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>«Яндекс» выкупил 638 312 собственных акций на 2,28 млрд ₽</b>\n\n<b>Покупатель:</b> Яндекс — интернет-компания: поиск, реклама, такси и доставка, облачные сервисы, беспилотные технологии.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> акции «Яндекса» — 638 312 обыкновенных акций — 0,16% уставного капитала.\n<b>Сумма:</b> 2,28 млрд ₽\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil\">Ведомости</a>\nЕще 2 источника — в карточке сделки\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gfe5d2f94\">карточке сделки</a>"
+  },
+  {
+   "id": "gde122875",
+   "date": "2026-10-29",
+   "title": "Винные активы экс-партнера основателя ЮГК Струкова выставили на торги",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053139921"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "pending_since": "2026-10-29T11:36:25+00:00"
+  },
+  {
+   "id": "ga4fba7e5",
+   "date": "2026-10-29",
+   "title": "Москва выставила на торги здание в комплексе доходных домов Архангельского",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261029/moskva-874744520.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "pending_since": "2026-10-29T11:36:25+00:00"
+  },
+  {
+   "id": "gf03916a4",
+   "date": "2026-10-29",
+   "title": "Структура «Созвездия» вновь выставила на продажу 115 га под Воронежем с возможным снижением цены до 76,6 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/118909-struktura-sozvezdiya-vnov-vystavila-na-prodazhu-115-ga-pod-voronezhem-s-vozmozhnym-snizheniem-tseny/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "76,6 млн ₽",
+   "pending_since": "2026-10-29T11:36:25+00:00"
+  },
+  {
+   "id": "g8cf4df95",
+   "date": "2026-10-28",
+   "title": "Крупный девелопер из ХМАО продает офисный центр за 600 млн рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053139525"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "600 млн ₽",
+   "seller": "Крупный девелопер из ХМАО",
+   "asset": "офисный центр",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "офисный центр",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053139525"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Крупный девелопер из ХМАО",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053139525"
+     }
+    ]
+   },
+   "pending_since": "2026-10-29T11:37:56+00:00"
+  },
+  {
+   "id": "ge7650112",
+   "date": "2026-10-28",
+   "title": "РЖД выставили на торги актив в Кургане почти за 30 млн рублей. Фото",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053139664"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "30 млн ₽",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "pending_since": "2026-10-29T11:37:56+00:00"
   }
  ]
 }
