@@ -181,6 +181,134 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>АО «Стрела» продало на торгах особняк на Фурштатской, 60А, компании «Резотстрой» Юлии Карповой за 545 млн ₽</b>\n\n<b>Покупатель:</b> Резотстрой — компания Юлии Карповой, которой принадлежат и гостиничные «Курэйтэд» и «Аспен Отель Групп»; зарегистрирована в Петербурге в январе 2026 года.\n<b>Продавец:</b> Стрела\n<b>Предмет:</b> особняк на Фурштатской улице, 60А\n<b>Сумма:</b> 545 млн ₽\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.dp.ru/a/2026/10/30/osobnjak-na-furshtatskoj--kotorij\">Деловой Петербург</a>\nЕще 4 источника — в карточке сделки\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g831d0fc8\">карточке сделки</a>"
+  },
+  {
+   "id": "gab530d2d",
+   "date": "2026-10-30",
+   "title": "Эстонский Agrone купил два крупнейших молокозавода Латвии и бренд с вороной",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/10/30/kultovaja-vorona-latvii-stala"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Эстонский Agrone",
+   "asset": "два крупнейших молокозавода Латвии и бренд с вороной",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-30",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/10/30/kultovaja-vorona-latvii-stala"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Эстонский Agrone",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/10/30/kultovaja-vorona-latvii-stala"
+     }
+    ],
+    "target": [
+     {
+      "value": "два крупнейших молокозавода Латвии и бренд с вороной",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/10/30/kultovaja-vorona-latvii-stala"
+     }
+    ]
+   },
+   "pending_since": "2026-10-30T16:06:56+00:00"
+  },
+  {
+   "id": "gafc7e9b9",
+   "date": "2026-10-30",
+   "title": "«Росатом» купил в Мали компанию для проекта на месторождении лития Бугула",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261030/rosatom-874832259.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "в Мали компанию для проекта на месторождении лития Бугула",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-30",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261030/rosatom-874832259.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Росатом»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261030/rosatom-874832259.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "в Мали компанию для проекта на месторождении лития Бугула",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261030/rosatom-874832259.html"
+     }
+    ]
+   },
+   "buyer": "rosatom",
+   "pending_since": "2026-10-30T16:06:56+00:00"
   }
  ]
 }

@@ -1,4 +1,146 @@
 {
  "made": "2026-10-30",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d18005774",
+   "title": "Пьянов оценил сроки достижения акциями ВТБ цены допэмиссии",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/finances/30/10/2026/6ae4b3729a794779f247dae8"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29656543",
+   "title": "Сделка ВТБ с RWB и SPO акций банка под нее могут выйти за пределы 2026 года",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1126160"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93574594",
+   "title": "Россияне назвали причины оформить кредит перед распродажами",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/30/rossiyane-nazvali-prichiny-oformit-kredit-pered-rasprodazhami/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17233782",
+   "title": "«Действующий бизнес за 18 млн рублей»: в Пермском крае продолжили распродавать автосервисы",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053140466"
+    ]
+   ],
+   "sum": "18 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14370843",
+   "title": "🎃 Завтра - самая страшная ночь в году. Ночь, когда граница между миром живых и мёртвых становится тоньше, ведьмы отправляются на шабаш, привидения покидают свои убежища, а тыквы приобретают весьма зло",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/4121"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "весьма зло",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "весьма зло",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  }
+ ]
 }
