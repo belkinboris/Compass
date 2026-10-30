@@ -30,27 +30,27 @@
    ]
   },
   {
-   "draft_id": "d64889317",
-   "title": "«Русал» и Гана подписали меморандум о совместном предприятии по добыче бокситов",
+   "draft_id": "d80083004",
+   "title": "Россия и Африка намерены расширять торговлю и инвестиции в энергетику",
    "date": "2026-10-29",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9063602"
+     "web:1prime.ru",
+     "https://1prime.ru/20261029/afrika-874785952.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-10-29",
      "title": "Переговоры",
-     "note": "«Русал» и Гана договорились создать совместное предприятие для добычи и переработки бокситов. Меморандум об этом стороны подписали на экономическом и гуманитарном форуме «Россия -- Африка», передает корреспондент «РИА Новости» с церемонии.",
+     "note": "",
      "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9063602"
+      "web:1prime.ru",
+      "https://1prime.ru/20261029/afrika-874785952.html"
      ]
     }
    ],
@@ -62,189 +62,66 @@
     "asset": null,
     "seller": null
    },
-   "ind": "ГМК и добыча",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58431918",
+   "title": "Путин рассказал, как африканские производители могут продавать свои товары",
+   "date": "2026-10-29",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261029/putin-2127934392.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g835eac98 (общее название в кавычках) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d04269984",
-   "title": "Сапфир Романовых выставлен на аукцион Sotheby’s",
+   "draft_id": "d28133958",
+   "title": "Россия и Африка намерены расширять торговлю и инвестиции в энергетику",
    "date": "2026-10-29",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9063998"
-    ]
-   ],
-   "sum": "€1,8 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16997063",
-   "title": "Бизнес наращивает инвестиции в исторические здания Нижегородской области // На их восстановление действуют льготные кредиты и субсидии",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9063994"
+     "web:ria.ru",
+     "https://ria.ru/20261029/afrika-2127929757.html"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-29",
-     "title": "Сделка завершена",
-     "note": "В Нижегородской области активизировался интерес инвесторов к покупке исторической недвижимости. За девять месяцев 2026 года продали 17 ОКН — столько же, сколько за весь прошлый год, сообщили в областном правительстве. Кроме того, с начала года продано 11…",
-     "source": [
-      "web:kommersant.ru/daily",
-      "https://www.kommersant.ru/doc/9063994"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41914883",
-   "title": "Регулятор отверг рост интереса к алкоголю из-за его продажи через «Почту»",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/29/10/2026/6ae34b846a59b56c1f42da1c"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d21786231",
-   "title": "Премьер Марокко: взаимодействие РФ с Африкой перешло к практическим действиям",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28268203"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
    "status": "Обсуждается",
    "events": [
     {
      "kind": "negotiations",
      "date": "2026-10-29",
      "title": "Переговоры",
-     "note": "Фатима аль-Мансури подчеркнула важность адаптации планов по сотрудничеству к фундаментальным потребностям африканских государств",
+     "note": "",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28268203"
+      "web:ria.ru",
+      "https://ria.ru/20261029/afrika-2127929757.html"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88739500",
-   "title": "Объем инвестиций в Мурманской области превысил 143 миллиарда рублей",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261029/obem-874778950.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30887006",
-   "title": "Эксперты назвали причины ухода криптобирж из России",
-   "date": "2026-10-29",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261029/eksperty-874778544.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,

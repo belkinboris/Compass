@@ -1,0 +1,78 @@
+{
+ "made": "2026-10-30",
+ "items": [
+  {
+   "key": "https://realty.ria.ru/20261030/proekt-2128012523.html::g8ad8ce9d",
+   "candidate_id": "g8ad8ce9d",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d78374492",
+    "title": "«Дом.РФ» продает девелоперский проект в Петербурге",
+    "date": "2026-10-30",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261030/proekt-2128012523.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "девелоперский проект в Петербурге",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "девелоперский проект в Петербурге",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-10-30"
+  },
+  {
+   "key": "https://www.rbc.ru/finances/30/10/2026/6ae3653d1bbabc2d90db9f49::g09cee885",
+   "candidate_id": "g09cee885",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d15605117",
+    "title": "ВТБ продал долю в «Росгосстрах Жизни» неназванному партнеру",
+    "date": "2026-10-30",
+    "src": [
+     [
+      "web:rbc.ru",
+      "https://www.rbc.ru/finances/30/10/2026/6ae3653d1bbabc2d90db9f49"
+     ]
+    ],
+    "sum": "24,3 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-30",
+      "title": "Сделка завершена",
+      "note": "Госбанк вместе с новым партнером планирует развивать своего страховщика жизни и расширять линейку продуктов компании. Сделка принесла группе ВТБ 24,3 млрд руб. чистой прибыли в сентябре",
+      "source": [
+       "web:rbc.ru",
+       "https://www.rbc.ru/finances/30/10/2026/6ae3653d1bbabc2d90db9f49"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "доля в «Росгосстрах Жизни»",
+    "seller": "ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "доля в «Росгосстрах Жизни»",
+     "seller": "ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-10-30"
+  }
+ ]
+}
