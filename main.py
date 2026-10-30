@@ -5587,7 +5587,10 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
 # опросе снимается: Telegram не отдает обновления обоими способами сразу и
 # на `getUpdates` при живом вебхуке отвечает отказом 409.
 TELEGRAM_POLLING = os.environ.get("TELEGRAM_POLLING", "1") != "0"
-TELEGRAM_POLL_TIMEOUT = int(os.environ.get("TELEGRAM_POLL_TIMEOUT", "25"))
+# 8 секунд, а не 25 (30 октября 2026): после выкладки обрыв SSL шел ровно
+# раз в 25 секунд — сеть хостинга рвет соединение, которое висит без данных,
+# и долгий запрос не доживал до ответа. Короткий успевает вернуться.
+TELEGRAM_POLL_TIMEOUT = int(os.environ.get("TELEGRAM_POLL_TIMEOUT", "8"))
 POLL_PAUSE_MAX = float(os.environ.get("TELEGRAM_POLL_PAUSE_MAX", "4"))
 _poll_state = {"offset": None, "last_ok": None, "updates": 0, "errors": 0,
                "last_error": None, "running": False}
