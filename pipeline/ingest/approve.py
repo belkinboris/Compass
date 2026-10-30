@@ -84,6 +84,11 @@ def consume(handle, ids):
 PENDING_CONSUME = os.path.join(ROOT, 'data', 'inbox', 'consume_pending.json')
 
 
+def foreign_decision(d):
+    """Решение не о карточке очереди: этап, сводка, правка поста, ИНН."""
+    return '~' in str(d.get('deal_id') or '')
+
+
 def consume_pending():
     """Второй, ОТДЕЛЬНЫЙ шаг: сказать сайту «решения применены» — только
     ПОСЛЕ того, как результат `--write` пережил git push.
@@ -509,8 +514,16 @@ def main(write=False):
     if stale_orphan:
         promote.save_state(state)
     orphan_ids = {d['id'] for d in orphan}
+    # ЧУЖИЕ РЕШЕНИЯ НЕ ГАСИМ (30 октября 2026). Решение с «~» в deal_id — не
+    # о карточке: этап (`<id>~closed`), сводка (`digest~2026-10`), правка
+    # поста (`<id>~edit`), ИНН (`инн~<id>`). Их читает и гасит send_telegram
+    # (или скрипты ФНС), а он идет ПОСЛЕ `approve.py --consume`: погашенное
+    # здесь решение «в канал» по этапу он уже не видел, пост, выпущенный
+    # сайтом, не записывался вышедшим — и через сутки молчания этап выходил
+    # снова («Агропромкредит», третий пост).
     ids_to_consume = [d['id'] for d in decisions
-                      if d['verdict'] != 'note' and d['id'] not in orphan_ids]
+                      if d['verdict'] != 'note' and d['id'] not in orphan_ids
+                      and not foreign_decision(d)]
     if handle and ids_to_consume:
         site, token = handle
         json.dump({'site': site, 'token': token, 'ids': ids_to_consume},

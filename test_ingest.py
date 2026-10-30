@@ -7027,6 +7027,41 @@ def test_a_raw_decision_without_its_draft_on_disk_is_not_reported_as_applied(
         "нажатие владельца будет потеряно: %s" % saved)
 
 
+def test_approve_never_consumes_milestone_digest_edit_or_inn_decisions(tmp_path, monkeypatch, capsys):
+    """30 октября 2026, третий пост «Агропромкредита»: approve.py --consume
+    гасил ВСЕ решения, кроме заметок, в том числе «в канал» по этапу
+    (`<id>~closed`), правку поста (`<id>~edit`) и сводку (`digest~…`), а
+    send_telegram идет после него и чужого гашения не видит: пост, выпущенный
+    сайтом, не записывался вышедшим, и этап выходил снова по молчанию."""
+    import approve, promote
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps({"deals": [], "companies": {}}, ensure_ascii=False), encoding="utf-8")
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}}), encoding="utf-8")
+    consume_file = tmp_path / "consume_pending.json"
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)
+    decisions = [
+        {"id": 901, "deal_id": "g1f8414a3~closed", "verdict": "post_yes",
+         "edited_text": json.dumps({"posted_message_id": 240})},
+        {"id": 902, "deal_id": "g1f8414a3~edit", "verdict": "post_yes", "edited_text": None},
+        {"id": 903, "deal_id": "digest~2026-10", "verdict": "post_no", "edited_text": None},
+        {"id": 904, "deal_id": "инн~g1", "verdict": "note", "edited_text": "7701"},
+        {"id": 905, "deal_id": "gf0f0f0f0", "verdict": "approve", "edited_text": None},
+    ]
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(consume_file))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: (decisions, ("https://example.test", "t")))
+    monkeypatch.setattr(promote, "STATE", str(state))
+    approve.main(write=True)
+    saved = json.loads(consume_file.read_text(encoding="utf-8"))["ids"] if consume_file.exists() else []
+    assert saved == [905], saved
+    assert all(approve.foreign_decision(d) for d in decisions[:4]) and not approve.foreign_decision(decisions[4])
+
+
 def test_promote_holds_the_same_deal_told_from_the_other_side(base):
     """Продавец и покупатель об одной сделке — не две карточки.
 
