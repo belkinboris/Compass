@@ -1,33 +1,4 @@
 {
  "made": "2026-10-30",
- "drafts": [
-  {
-   "draft_id": "d73231291",
-   "title": "В ДНР запретят продавать вейпы",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28272803"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  }
- ]
+ "drafts": []
 }
