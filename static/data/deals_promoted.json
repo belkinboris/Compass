@@ -235297,6 +235297,136 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "gb5456bba",
+   "date": "2026-10-28",
+   "title": "«Иртыш Ривьера» повторно продает базу отдыха «Иртышская Ривьера» под Омском",
+   "ind": "Гостиницы и туризм",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Продается весь комплекс: турбаза площадью 20 000 кв. м с гостевыми домиками, номерами-люкс, бунгало, рестораном и банями. Электричество, газ и вода подключены.",
+    "val": "Сейчас за комплекс хотят 199 млн ₽. Прошлой весной его тоже продавали, и покупатель даже был — но до сделки так и не дошло, тогда просили 150 млн ₽.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Базой владеет ООО «Иртыш Ривьера». В 2025 году у компании чистый убыток 11 млн ₽ при выручке 46 млн ₽. У ее владельца есть также доля в ИТ-компании «Нейронити» (информационная безопасность, разработка на 1С, ИТ-аутсорсинг) и доля в аптечной сети «Фармакопейка».",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "ООО «Иртыш Ривьера»",
+   "asset": "база отдыха «Иртышская Ривьера»",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "база отдыха «Иртышская Ривьера»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ООО «Иртыш Ривьера»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.val": [],
+    "eco.context": [],
+    "extra": []
+   },
+   "extra": "Это уже вторая попытка продать базу: в прошлый раз покупатель был найден, но сделка так и не состоялась.",
+   "reviewed": "2026-10-30",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "недвижимость (база отдыха) — профиль компании не заводится, предмет остается текстом, docs/company_profiles.md",
+     "buyer": "покупателя пока нет: актив выставлен на продажу повторно, прежний покупатель (весна 2025 года) до сделки не дошел — искать покупателя объявленного, но не состоявшегося торга нет смысла, его еще нет"
+    },
+    "no_inn": {
+     "seller": "ИНН не найден: бесплатный ЕГРЮЛ (egrul.nalog.ru) недоступен (connection reset при нескольких попытках), платный search api-fns.ru отдал 403, rusprofile и list-org блокируют бот-доступ (403/капча), checko.ru — 403, веб-поиском точного совпадения тоже нет (несколько других юрлиц с похожим именем, ни одно не совпадает)"
+    },
+    "notes": "«Региональные медиа» — учредитель сайта-источника (подвал страницы abnews.ru), не сторона сделки. Актив выставлен на продажу повторно: весной 2025 года покупатель уже находился, но сделка не состоялась — сейчас цена выше (199 млн ₽ против 150 млн ₽ тогда). Финансы и другие активы владельца (Нейронити, Фармакопейка) из той же статьи — вынесены в eco.context."
+   },
+   "seller_id": "g40069487",
+   "accepted": "2026-10-30",
+   "second_read": "2026-10-30",
+   "post_preview": "<b>«Иртыш Ривьера» повторно продает базу отдыха «Иртышская Ривьера» под Омском</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Иртыш Ривьера\n<b>Предмет:</b> база отдыха «Иртышская Ривьера»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Гостиницы и туризм\n\n<b>Источник:</b> <a href=\"https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu\">Abnews.ru</a>\n\n#недвижимость #гостиницы #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gb5456bba\">карточке сделки</a>",
+   "added": "2026-10-30",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "a5d29952e51c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-10-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f6bc4c29aeba"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "40ff4a9b3f11"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
