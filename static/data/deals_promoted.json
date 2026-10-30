@@ -228315,7 +228315,8 @@
     }
    },
    "proofread": "2026-10-21",
-   "deep_researched": "2026-10-22"
+   "deep_researched": "2026-10-22",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "g09baae21",
@@ -228448,7 +228449,8 @@
      "https://mergers.ru/news/Fond-Sozidatelnyj-venchur-vlozhilsya-v-razrabotchika-korporativnoj-platformy-dannyh-ANG-Platform-87675"
     ]
    ],
-   "deep_researched": "2026-10-22"
+   "deep_researched": "2026-10-22",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "g4afd35d0",
@@ -228477,6 +228479,10 @@
     [
      "AEX.RU",
      "https://www.aex.ru/news/2026/10/21/300699/"
+    ],
+    [
+     "НСН (rambler.ru)",
+     "https://finance.rambler.ru/business/57291337-zachem-eto-nado-turoperatory-ne-poverili-v-prodazhu-biblio-globusa/"
     ]
    ],
    "from_ingest": true,
@@ -228487,7 +228493,7 @@
     "target_fin": "По оценке источников, выручка «Библио-Глобуса» в прошлом году достигла 207 млрд ₽, а чистая прибыль — 25 млрд ₽; услугами компании в 2025 году воспользовались более 3 млн человек.",
     "fin": "—",
     "rationale": "Деньги с этой продажи нужны для другой покупки — Шереметьево собирается выкупить у государства его пакет в самом аэропорту.",
-    "context": "В августе аэропорт Шереметьево исключили из перечня стратегических предприятий. По данным РБК, среди возможных покупателей — структуры, связанные с Wildberries & Russ (RWB), и претендент не один. Официально покупатель не назван, аэропорт от комментариев отказался. Деньги от продажи, по данным РБК, могут пойти на выкуп блокирующего пакета акций самого аэропорта в рамках его приватизации.",
+    "context": "В августе аэропорт Шереметьево исключили из перечня стратегических предприятий. По словам РБК, среди возможных покупателей — структуры, связанные с Wildberries & Russ (RWB), и претендент не один. Официально покупатель не назван, аэропорт от комментариев отказался. Деньги от продажи, по словам РБК, могут пойти на выкуп блокирующего пакета акций самого аэропорта в рамках его приватизации. Вице-президент Альянса туристических агентств России Алексан Мкртчян публично усомнился в самой сделке: об этом пишет только одно издание, а в туротрасли эту новость не повторяет никто.",
     "finadv": "—"
    },
    "law": {
@@ -228598,7 +228604,8 @@
     }
    },
    "proofread": "2026-10-21",
-   "deep_researched": "2026-10-22"
+   "deep_researched": "2026-10-22",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gc44a1e70",
@@ -228619,6 +228626,10 @@
     [
      "MarketPower",
      "https://marketpower.pro/post/eto-baibek-da-eto-baibek"
+    ],
+    [
+     "Fomag.ru",
+     "https://fomag.ru/news/rost-aktsiy-mgkl-povod-zadumatsya/"
     ]
    ],
    "from_ingest": true,
@@ -228629,7 +228640,7 @@
     "target_fin": "Чистая прибыль МГКЛ по МСФО за первое полугодие 2026 года выросла на 34% год к году, до 553 млн ₽. Выручка выросла в 2,7 раза, до 27 млрд ₽, EBITDA — на 63%, до 1,81 млрд ₽.",
     "fin": "—",
     "rationale": "Увеличение доли — его личное инвестиционное решение, к программе байбэка группы оно отношения не имеет: тот выкуп ведет стопроцентная «дочка» МГКЛ — ООО «Команда МГКЛ».",
-    "context": "Акции он приобрел не на бирже, а через внебиржевые сделки.",
+    "context": "Акции он приобрел не на бирже, а через внебиржевые сделки. Компания объявила о таком намерении заранее: в своем сообщении МГКЛ называл целевую долю 29%, а не итоговые 28% — после выхода этого сообщения акции компании на Мосбирже подскочили на 9,4%.",
     "finadv": "—"
    },
    "law": {
@@ -228665,7 +228676,9 @@
      "a46349751195"
     ],
     "eco.target_fin": [],
-    "eco.context": []
+    "eco.context": [
+     "9f68888283e7"
+    ]
    },
    "reviewed": "2026-10-21",
    "sum": "Не раскрыта",
@@ -228736,7 +228749,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "deep_researched": "2026-10-23"
+   "deep_researched": "2026-10-23",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "g29d48d22",
@@ -228866,7 +228880,8 @@
     }
    },
    "proofread": "2026-10-22",
-   "deep_researched": "2026-10-23"
+   "deep_researched": "2026-10-23",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "ge881187c",
@@ -228887,6 +228902,10 @@
     [
      "EastRussia",
      "https://www.eastrussia.ru/news/norebo-khochet-dostraivat-svoi-traulery-na-sobstvennoy-verfi/"
+    ],
+    [
+     "www1.ru",
+     "https://www1.ru/news/2026/08/11/427494-postroennyi-v-turcii-buksir-ievoli-orandz-zadeistvovali-pri-peregone-traulera-kapitan-breixman-s-severnoi-verfi-na-zavod-otradnoe.html"
     ]
    ],
    "from_ingest": true,
@@ -228897,7 +228916,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "О продаже стало известно из отчетности верфи за первое полугодие 2026 года, а не из объявления сторон — точный день сделки ни один источник не называет, поэтому в карточке стоит конец полугодия как крайний срок, когда она уже отражена в отчетности. Названия судов — «Капитан Брейхман», «Капитан Тузов» и «Капитан Абакумов», на воду их спустили в 2022–2024 годах; ловить рыбу им предстоит у Баренцева моря и в Северной Атлантике. После сделки в портфеле заказов «Северной верфи» остается еще три траулера из первоначальных десяти. В апреле 2026 структуры «Норебо» уже судились с верфью на 24,2 млрд ₽ из-за просрочек по той же серии судов, а причина задержек — трудности с импортозамещением оборудования после ухода зарубежных поставщиков. Ранее достраивать четыре других траулера той же серии компания планировала не на «Северной верфи», а на своей верфи «Пелла-стапель» — свежих подтверждений этим планам нет.",
+    "context": "О продаже стало известно из отчетности верфи за первое полугодие 2026 года, а не из объявления сторон — точный день сделки ни один источник не называет, поэтому в карточке стоит конец полугодия как крайний срок, когда она уже отражена в отчетности. Названия судов — «Капитан Брейхман», «Капитан Тузов» и «Капитан Абакумов», на воду их спустили в 2022–2024 годах; ловить рыбу им предстоит у Баренцева моря и в Северной Атлантике. Все три купленных судна достраивают на «Отрадном» — собственном заводе «Норебо» в Ленинградской области, куда их перегнали с «Северной верфи» в августе 2026 года. После сделки в портфеле заказов «Северной верфи» остается еще три траулера из первоначальных десяти. В апреле 2026 структуры «Норебо» уже судились с верфью на 24,2 млрд ₽ из-за просрочек по той же серии судов, а причина задержек — трудности с импортозамещением оборудования после ухода зарубежных поставщиков. Ранее достраивать четыре других траулера той же серии компания планировала не на «Северной верфи», а на своей верфи «Пелла-стапель» — свежих подтверждений этим планам нет.",
     "finadv": "—"
    },
    "law": {
@@ -228951,7 +228970,8 @@
    "proofread_absorbed": {
     "eco.context": [
      "e24310382def",
-     "90c46ca6387c"
+     "90c46ca6387c",
+     "ea3de03ec39f"
     ],
     "law.struct": [],
     "buyer_name": [
@@ -229029,7 +229049,8 @@
      "multiple_text": "no_target"
     }
    },
-   "buyer": "g89a78a0a"
+   "buyer": "g89a78a0a",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "g5e1a7c24",
@@ -229200,7 +229221,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gf31c1d53",
@@ -233460,6 +233482,10 @@
     [
      "РИА Недвижимость",
      "https://realty.ria.ru/20261028/sovet-2127618388.html"
+    ],
+    [
+     "Fomag.ru",
+     "https://fomag.ru/news/lsr-razovoe-spisanie-privelo-k-rezkomu-ubytku-i-usililo-voprosy-po-dividendnym-vyplatam-daydzhest-fo/"
     ]
    ],
    "from_ingest": true,
@@ -233469,7 +233495,7 @@
     "val": "—",
     "target_fin": "За первое полугодие по МСФО ЛСР получила чистый убыток 57,56 млрд ₽ — в 22,9 раза больше прошлогоднего. Выручка почти не изменилась: 97,12 млрд ₽ (+0,7%). На операционном уровне убыток 32,94 млрд ₽ сменил прошлогоднюю прибыль 18,32 млрд ₽.",
     "fin": "—",
-    "rationale": "—",
+    "rationale": "Аналитики связывают убыток с разовым списанием: ЛСР продала дочернее предприятие связанной стороне всего за 3 млрд рублей, хотя на его балансе было около 20 млрд рублей денежных средств и больше 20 млрд рублей запасов — из-за этой сделки денежные средства группы упали с 28 до 5 млрд рублей. Аналитики БКС считают это отдельным фактором риска для акционеров и ставят под вопрос прежний уровень дивидендов.",
     "context": "В день решения бумаги ЛСР на Мосбирже в моменте дорожали на 33% к прошлому закрытию, до 879,8 ₽, ближе к вечеру рост составлял 10,75% (733,4 ₽). Всего у компании около 103 млн акций, в свободном обращении — 23,46%.",
     "finadv": "—"
    },
@@ -233509,7 +233535,8 @@
     "eco.target_fin": [],
     "buyer_name": [
      "813007199bfe"
-    ]
+    ],
+    "eco.rationale": []
    },
    "buyer": "gb396abf4",
    "accepted": "2026-10-28",
@@ -233684,7 +233711,9 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "announcement"
+   "date_basis": "announcement",
+   "deep_researched": "2026-10-30",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gb986603e",
@@ -234141,7 +234170,7 @@
     "sum": "—",
     "share": "ООО «Велле Холдинг» — владелец бренда Velle; в портфеле более трех десятков наименований: растительные йогурты, каши, сливки, сметана и кофейные напитки. Размер купленной доли стороны не назвали.",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "Само производство в Петербурге ведет ООО «Велле» — отдельное юрлицо от холдинга. По данным СПАРК, его выручка за 2025 год составила 865 млн рублей, а год компания закрыла с убытком 202 млн рублей.",
     "fin": "—",
     "rationale": "По словам гендиректора «Логики молока» Якуба Закриева, Velle за годы заработал место среди лучших брендов своей категории, и группа рассчитывает дать ему новый импульс. Покупка — шаг к Стратегии-2030, по которой группа хочет нарастить долю на рынке растительных продуктов: Velle встанет рядом с ее брендами Planto и 5Yes!.",
     "context": "Velle выпускает растительные аналоги молочных продуктов с 2004 года; компанию основал Сергей Выходцев, создатель брендов Invite и «Быстров», производство — под Санкт-Петербургом. В марте 2020 года бренд отошел кипрской Onyx Stone Holdings, в июле 2023 года — к ООО «Велле Холдинг» Владислава Романовского, а в декабре 2023 года 34,96% холдинга получил основатель Indigo Capital Partners Петр Жуков. Выручка Velle за 2022 год — 484,48 млн руб.; в январе—ноябре 2023 года бренд был седьмым в стране по продажам растительных аналогов молока в деньгах. Для «Логики молока» это вторая покупка растительного бренда за неделю: перед Velle группа купила 5Yes!, а свой бренд в категории у нее — Planto. Российский рынок растительных напитков в 2025 году вырос на 18,4% в штуках и на 23% в деньгах; компания ждет роста в среднем на 15% в год до 2030 года.",
@@ -234225,7 +234254,8 @@
     "law.struct": [],
     "asset": [
      "2563df52493c"
-    ]
+    ],
+    "eco.target_fin": []
    },
    "reviewed": "2026-10-29",
    "target": "g8eb3f1af",
@@ -234294,7 +234324,9 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "deep_researched": "2026-10-30",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gde122875",
@@ -234410,7 +234442,9 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-30",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gf03916a4",
@@ -234532,7 +234566,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-30"
   },
   {
    "id": "g8cf4df95",
@@ -234668,7 +234703,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "deep_researched": "2026-10-30"
   },
   {
    "id": "g861c5553",
@@ -234797,7 +234833,8 @@
      "top_purchases": "price_not_read",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "deep_researched": "2026-10-30"
   },
   {
    "id": "g8ad8ce9d",
@@ -235052,7 +235089,9 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-30",
+   "weekly_researched": "2026-10-30"
   },
   {
    "id": "gbc517ec2",
@@ -235656,14 +235695,38 @@
      "card_hash": "12547e3a07ad"
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "066dc1920a65"
+     "card_hash": "066dc1920a65",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Приобретение акций осуществляет ООО «ЯНТЕХ» (ОГРН 1247700407019), являющееся подконтрольной МКПАО «Яндекс» организацией и администратором программы долгосрочной мотивации, основанной на обыкновенных акциях компании.",
+     "source": "https://www.akm.ru/news/sovet_direktorov_yandeksa_odobril_programmu_obratnogo_vykupa_aktsiy/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-30",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Приобретение акций осуществляет ООО «ЯНТЕХ» (ОГРН 1247700407019), являющееся подконтрольной МКПАО «Яндекс» организацией и администратором программы долгосрочной мотивации, основанной на обыкновенных акциях компании.",
+       "source": "https://www.akm.ru/news/sovet_direktorov_yandeksa_odobril_programmu_obratnogo_vykupa_aktsiy/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "С момента старта программы обратного выкупа 4 мая 2026 г. и по 27 июля \"Яндекс\" выкупил 3,3 млн акций на сумму почти 12,5 млрд руб.",
+       "source": "https://www.comnews.ru/content/246639/2026-07-30/2026-w31/1007/motivaciya-prevyshe-vsego-yandeks-vykupil-akcii-125-mlrd-rub-za-odin-kvartal",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -235687,7 +235750,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "not_control_change"
     }
    }
   },
@@ -235903,17 +235966,91 @@
      "card_hash": "01e94c9eb56b"
     },
     "price": {
-     "value_rub": 545000000.0,
+     "value_rub": 545000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "e1429c7e7b05"
+     "scope": "equity",
+     "basis": "verified",
+     "card_hash": "e1429c7e7b05",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "registry",
+     "attribution_variants": [
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Победителем торгов стало АО «Резотстрой», сообщили 30 октября в Российском аукционном доме (РАД).",
+     "scope_basis": "verified",
+     "quote": "Исторический особняк на Фурштатской улице, 60, литера А, продали за 545 миллионов рублей .",
+     "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-30",
+     "readings": [
+      {
+       "value_rub": 545000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Исторический особняк на Фурштатской улице, 60, литера А, продали за 545 миллионов рублей .",
+       "attribution_quote": "Победителем торгов стало АО «Резотстрой», сообщили 30 октября в Российском аукционном доме (РАД).",
+       "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 545000000,
+       "meaning": "disclosed",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Исторический особняк на Фурштатской улице, 60, литера А, продали за 545 миллионов рублей .",
+       "attribution_quote": "Победителем торгов стало АО «Резотстрой», сообщили 30 октября в Российском аукционном доме (РАД).",
+       "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-30",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "76a2ecf50f34"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "187bc1805a42",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Победителем торгов стало АО «Резотстрой», сообщили 30 октября в Российском аукционном доме (РАД).",
+     "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-30",
+     "readings": [
+      {
+       "value": "2026-10-30",
+       "meaning": "closing",
+       "quote": "Победителем торгов стало АО «Резотстрой», сообщили 30 октября в Российском аукционном доме (РАД).",
+       "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-30",
+       "meaning": "closing",
+       "quote": "Голландский аукцион на понижение цены прошёл сегодня, 30 октября, на электронной площадке Российского аукционного дома.",
+       "source": "https://www.dp.ru/a/2026/10/30/osobnjak-na-furshtatskoj--kotorij",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -235923,7 +236060,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bfbbb9261aa0"
+     "card_hash": "bfbbb9261aa0",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Исторический особняк на Фурштатской улице, 60, литера А, продали за 545 миллионов рублей . Победителем торгов стало АО «Резотстрой»",
+     "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-30",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Исторический особняк на Фурштатской улице, 60, литера А, продали за 545 миллионов рублей . Победителем торгов стало АО «Резотстрой»",
+       "source": "https://mr-7.ru/articles/2026/10/30/osobniak-na-furshtatskoi-ulitse-prodali-za-545-millionov-rublei-posle-snizheniia-tseny-news",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "входящий в ансамбль \"Дом Спиридонова Н.В. с флигелем\", продан на торгах Российского аукционного дома (РАД). Победителем торгов стало АО \"Резотстрой\"",
+       "source": "https://www.dp.ru/a/2026/10/30/osobnjak-na-furshtatskoj--kotorij",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -235938,18 +236099,19 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "closing"
   }
  ],
  "companies": {
