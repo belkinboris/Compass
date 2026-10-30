@@ -270207,7 +270207,8 @@
   "g8f548826": 241,
   "gadee3ca7": null,
   "gfe5d2f94": 242,
-  "gb5456bba": null
+  "gb5456bba": null,
+  "g831d0fc8": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -270737,7 +270738,8 @@
   "g861c5553": 43,
   "g8ad8ce9d": 45,
   "gbc517ec2": 46,
-  "gadee3ca7": 47
+  "gadee3ca7": 47,
+  "g831d0fc8": 48
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -275440,7 +275442,23 @@
      "kind": "closed"
     }
    ]
+  },
+  "g831d0fc8": {
+   "sum": "545 млн ₽",
+   "buyer": "g000e6f6c",
+   "seller": "АО «Стрела»",
+   "asset": "особняк на Фурштатской улице, 60А",
+   "status": "Закрыта",
+   "title": "АО «Стрела» продало на торгах особняк на Фурштатской, 60А, компании «Резотстрой» Юлии Карповой за 545 млн ₽",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-10-30T12:35:23+00:00"
+ "telegram_last_post_at": "2026-10-30T16:32:15+00:00"
 }
