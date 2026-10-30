@@ -167,6 +167,58 @@
    },
    "buyer": "rosatom",
    "pending_since": "2026-10-30T16:06:56+00:00"
+  },
+  {
+   "id": "g85112161",
+   "date": "2026-10-30",
+   "title": "Россия вложила в экономику Таиланда шесть миллиардов долларов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261030/rossija-874837715.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Россия",
+   "asset": "экономика Таиланда шесть миллиардов долларов",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Россия",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261030/rossija-874837715.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "экономика Таиланда шесть миллиардов долларов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261030/rossija-874837715.html"
+     }
+    ]
+   },
+   "pending_since": "2026-10-30T18:54:47+00:00"
   }
  ]
 }
