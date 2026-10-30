@@ -1,0 +1,36 @@
+{
+ "made": "2026-10-30",
+ "items": [
+  {
+   "key": "https://realty.ria.ru/20261030/proekt-2128012523.html::g8ad8ce9d",
+   "candidate_id": "g8ad8ce9d",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d78374492",
+    "title": "«Дом.РФ» продает девелоперский проект в Петербурге",
+    "date": "2026-10-30",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261030/proekt-2128012523.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "девелоперский проект в Петербурге",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "девелоперский проект в Петербурге",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-10-30"
+  }
+ ]
+}

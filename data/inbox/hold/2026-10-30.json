@@ -28,6 +28,62 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d51837021",
+   "title": "Проект отеля в центре Петербурга продают за 1,3 млрд рублей",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/30/proekt-otelja-v-centre-peterburga"
+    ]
+   ],
+   "sum": "1,3 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19581742",
+   "title": "Жительницу села Каратузского привлекут к уголовной ответственности за покупку питбайка сыну",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/incidents/59718"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Жительницу села Каратузского",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Жительницу села Каратузского",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
   }
  ]
 }
