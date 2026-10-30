@@ -134,8 +134,16 @@ def render_list(limit=None):
         return
     print('Несрешенного сырья: %d%s\n' % (len(undecided(state)),
           ' (показаны первые %d)' % limit if limit and len(undecided(state)) > limit else ''))
+    data = json.load(open(DATA, encoding='utf-8'))
+    cards = promote.known_card_titles(promote.load_pending().get('cards') or [], data.get('deals') or [])
+    waiting = state.get('enrich_wait') or {}
     for d in items:
         found, why = best_match(d, idx)
+        if not found:
+            # Та же сверка заголовков, что у send_drafts: такая новость ждет
+            # притока ENRICH_WAIT_H часов, потом идет в консоль (30 октября 2026).
+            found, title = promote.card_same_news(d.get('title'), cards)
+            why = 'похожий заголовок: «%s»' % str(title or '')[:70] if found else why
         print('draft_id=%s' % d.get('draft_id'))
         print('  заголовок: %s' % str(d.get('title'))[:200])
         print('  дата: %s | источник: %s' % (
@@ -144,7 +152,10 @@ def render_list(limit=None):
         if reasons:
             print('  причина не пропущена автоматически: %s' % '; '.join(reasons))
         if found:
-            print('  ПОХОЖЕ НА ДОПОЛНЕНИЕ к %s (%s) — кандидат на --enrich' % (found, why))
+            print('  ПОХОЖЕ НА ЭТАП ИЛИ ДОПОЛНЕНИЕ к %s (%s) — прочитать статью: новое есть — '
+                  '--enrich; ничего нового — --drop «повтор»; другая сделка — не трогать, уйдет в консоль%s'
+                  % (found, why, ' (ждет с %s)' % waiting[str(d.get('draft_id'))]['since'][:16]
+                     if str(d.get('draft_id')) in waiting else ''))
         print()
 
 

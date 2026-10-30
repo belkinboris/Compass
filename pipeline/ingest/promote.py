@@ -1014,8 +1014,37 @@ def raw_words(title):
 
 
 def raw_quoted(title):
-    """Имена в кавычках («Аккую», «Тимир») — самый надежный признак той же новости."""
-    return {re.sub(r'[^\wа-яё]+', '', q.lower())[:6] for q in re.findall(r'[«"]([^»"]{3,40})[»"]', str(title or ''))}
+    """Имена в кавычках («Аккую», «Тимир») — самый надежный признак той же новости.
+    Имя целиком, без обрезки: 30 октября 2026 обрезка до шести букв сделала
+    «Газпрома» и «Газпромбанк-инвест» одним именем, и особняк на Фурштатской
+    ушел в дубли торгового центра «Город Косино»."""
+    return {re.sub(r'[^\wа-яё]+', '', q.lower()) for q in re.findall(r'[«"]([^»"]{3,40})[»"]', str(title or ''))}
+
+
+def _same_name(a, b):
+    """Одно имя в разных падежах («Газпром» / «Газпрома»), а не два разных
+    («Газпром» / «Газпромбанк»): отличаются не больше чем окончанием."""
+    if a == b:
+        return True
+    short, long_ = sorted((a, b), key=len)
+    return len(short) >= 4 and long_.startswith(short[:-1]) and len(long_) - len(short) <= 2
+
+
+def _quoted_match(mine, theirs):
+    return any(_same_name(a, b) for a in mine for b in theirs)
+
+
+# Слова, которые есть почти в любой новости о сделке: совпадение по ним не
+# говорит, что это та же новость («Газпром» продал особняк / выставил на торги
+# гостиницу — общие «газпр» и «торг», а сделки разные; 30 октября 2026).
+_DEAL_WORDS = {'прод', 'прода', 'торг', 'торги', 'торга', 'купи', 'купил', 'выку', 'выкуп', 'покуп',
+               'приоб', 'выст', 'выста', 'акци', 'долю', 'доля', 'доли', 'сдел', 'сделк', 'аукц',
+               'аукци', 'млрд', 'рубл', 'рубле', 'компа', 'групп'}
+
+
+def _content_shared(shared, names):
+    """Общие слова за вычетом самого имени из кавычек и общих слов о сделках."""
+    return {w for w in shared if w not in _DEAL_WORDS and not any(n.startswith(w) for n in names)}
 
 
 def raw_same_news(title, known_titles, min_shared=3, min_jaccard=0.5):
@@ -1038,11 +1067,36 @@ def raw_same_news(title, known_titles, min_shared=3, min_jaccard=0.5):
             continue
         shared = mine & theirs
         jac = len(shared) / len(mine | theirs)
-        quoted = bool(myq & raw_quoted(other))
-        if (len(shared) >= min_shared and jac >= 0.4) or jac >= min_jaccard or (quoted and len(shared) >= 2):
+        quoted = _quoted_match(myq, raw_quoted(other))
+        content = _content_shared(shared, myq | raw_quoted(other))
+        # Сомнение — в пользу показа (владелец, 30 октября 2026: «лучше
+        # направлять в консоль, чем сделку пропустить важную»).
+        if (len(content) >= min_shared and jac >= 0.4) or jac >= min_jaccard or (quoted and len(content) >= 1):
             if best is None or jac > best[0]:
                 best = (jac, other)
     return best[1] if best else None
+
+
+def known_card_titles(pending_cards=(), base_deals=(), days=120):
+    """[(id, заголовок)] карточек очереди и базы за последние `days` дней —
+    с ними сверяется новое сырье: совпадение значит «возможно, этап или
+    дополнение этой карточки», а не «выбросить» (30 октября 2026)."""
+    from datetime import datetime, timedelta
+    since = (datetime.utcnow() - timedelta(days=days)).strftime('%Y-%m-%d')
+    out = []
+    for c in list(pending_cards) + list(base_deals):
+        if (str(c.get('date') or '') >= since or str(c.get('pending_since') or '')[:10] >= since) and c.get('title'):
+            out.append((str(c.get('id')), c['title']))
+    return out
+
+
+def card_same_news(title, cards):
+    """id и заголовок карточки, на которую похожа новость, или (None, None)."""
+    by_title = {}
+    for cid, t in cards:
+        by_title.setdefault(t, cid)
+    same = raw_same_news(title, list(by_title))
+    return (by_title[same], same) if same else (None, None)
 
 
 def known_raw_titles(state, pending_cards=(), base_deals=(), days=120):

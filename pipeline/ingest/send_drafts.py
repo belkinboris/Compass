@@ -307,8 +307,28 @@ def site_pending_ids():
         return None
 
 
-_DUP_HINT = re.compile(r'%s (g[0-9a-f]{8}) \((общее название в кавычках|названия из заголовка|общие редкие слова)'
+# ОДНО ОБЩЕЕ НАЗВАНИЕ В КАВЫЧКАХ — НЕ ПОВОД ПРЯТАТЬ (30 октября 2026):
+# «Газпром» стоит в десятках разных сделок, и особняк на Фурштатской был
+# скрыт как «дополнение» к продаже газпромовской котельной в Пермском крае.
+# С такой подсказкой сырье идет в консоль — владелец: «если сомневаешься, то
+# лучше направлять в консоль, чем сделку пропустить важную».
+_DUP_HINT = re.compile(r'%s (g[0-9a-f]{8}) \((названия из заголовка|общие редкие слова)'
                        % re.escape(promote.DUP_CANDIDATE_MARK))
+
+
+# Сколько часов новость, похожая на карточку, ждет притока (тот проверяет,
+# этап ли это или дополнение), прежде чем уйти в консоль. Приток ходит раз в час.
+ENRICH_WAIT_H = 3
+
+
+def _hours_since(iso):
+    try:
+        then = datetime.fromisoformat(str(iso))
+    except ValueError:
+        return 0.0
+    if then.tzinfo is None:
+        then = then.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - then).total_seconds() / 3600.0
 
 
 def covered_by_base_card(draft, base_ids):
@@ -593,7 +613,17 @@ def build_plan(resend=None, only=None):
     # новое сырье: сверяем значимые слова с решенным и показанным сырьем и с
     # карточками последних месяцев (promote.raw_same_news, 28 октября 2026,
     # «Аккую» второй раз). Совпало — помним как дубль и не показываем.
-    known_titles = promote.known_raw_titles(state, pending.get('cards') or [], base.get('deals') or [])
+    # Сырье сверяется ОТДЕЛЬНО с уже решенным сырьем и с карточками (30 октября
+    # 2026, владелец: «если совпадает — убедиться, не этап ли это другой сделки
+    # и не нужно ли обогатить сделку; если нет — в консоль»). Повтор решенной
+    # новости — выбрасывается сразу. Похожесть на карточку — кандидат в этап
+    # или дополнение: консоль не видит его ENRICH_WAIT_H часов, пока приток
+    # (raw_screen.py --enrich) читает статью; не разобрал — новость идет в
+    # консоль с пометкой, на какую карточку похожа.
+    known_titles = promote.known_raw_titles(state, [], [])
+    known_cards = promote.known_card_titles(pending.get('cards') or [], base.get('deals') or [])
+    waiting = state.setdefault('enrich_wait', {})
+    now_iso = datetime.now(timezone.utc).isoformat(timespec='seconds')
     for d in ([] if resend else latest_hold_drafts()):
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
                 or promote.raw_key(d.get('title')) in shown_raw \
@@ -608,7 +638,22 @@ def build_plan(resend=None, only=None):
         if any(len(ref) > 1 and str(ref[1]) in carded for ref in d.get('src') or []):
             continue
         twin = covered_by_base_card(d, base_ids)
+        why_twin = 'ворота нашли общие названия или редкие слова'
+        if not twin:
+            twin, twin_title = promote.card_same_news(d.get('title'), known_cards)
+            why_twin = 'похожий заголовок: «%s»' % str(twin_title or '')[:80]
         if twin:
+            did = str(d.get('draft_id'))
+            first = waiting.setdefault(did, {'card': twin, 'since': now_iso})['since']
+            if _hours_since(first) >= ENRICH_WAIT_H:
+                # Приток не дописал карточку и не выкинул новость — значит, не
+                # уверен. Решает человек, с подсказкой.
+                d = dict(d, hold_reasons=list(d.get('hold_reasons') or []) + [
+                    'похоже на карточку %s (%s), но приток не нашел, что в нее дописать, — '
+                    'возможно, это другая сделка или новый этап' % (twin, why_twin)])
+                waiting.pop(did, None)
+                fresh_raw.append(d)
+                continue
             # Новость о сделке, которая уже есть в базе (ворота нашли карточку
             # по общим редким словам или названию в кавычках), — не вопрос
             # владельцу: «Это сделка» сделает дубль, «Не сделка» — неправда.
@@ -616,8 +661,9 @@ def build_plan(resend=None, only=None):
             # пришел в консоль через утро после поста о той же сделке
             # (g25a6766d): «Что тут нажать? Очевидно у нас уже эта сделка
             # выходила». Остается в сырье для притока: raw_screen.py --enrich.
-            print('  дополнение к карточке %s, консоли не показываю — приток: raw_screen.py --enrich %s=%s | «%s»'
-                  % (twin, d.get('draft_id'), twin, str(d.get('title'))[:60]))
+            print('  возможно, этап или дополнение карточки %s (%s) — ждет притока до %d ч, потом в консоль: '
+                  'raw_screen.py --enrich %s=%s | «%s»'
+                  % (twin, why_twin, ENRICH_WAIT_H, d.get('draft_id'), twin, str(d.get('title'))[:60]))
             continue
         # Иностранный контур без российского элемента не публикуем (решение
         # владельца 5–6 августа) — и в консоль не носим: сырье по молчанию не
@@ -718,6 +764,12 @@ def main(write=False, resend=None, only=None):
     for text, _kb, _mark in plan[:4]:
         print('\n%s\n%s' % ('-' * 40, text[:400]))
     if not plan:
+        # Отправлять нечего, но отметки сырья (когда новость начала ждать
+        # притока, повтор решенной новости) сохраняются — иначе отсчет
+        # ENRICH_WAIT_H начинался бы заново каждый прогон и новость, похожая
+        # на карточку, не дошла бы до консоли никогда.
+        if write:
+            promote.save_state(state)
         return 0
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     if not (write and token and chats):

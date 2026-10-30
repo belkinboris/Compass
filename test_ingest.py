@@ -4482,6 +4482,51 @@ def test_raw_console_skips_news_a_card_was_already_built_from(monkeypatch):
     assert raw_ids == ["d-other"]
 
 
+def test_raw_like_a_card_waits_for_intake_then_goes_to_the_console(monkeypatch, tmp_path):
+    """30 октября 2026, владелец: «если совпадает — убедиться, не этап ли это
+    другой сделки и не нужно ли обогатить сделку; если нет — в консоль».
+    Раньше новость, похожая на заголовок карточки, помечалась дублем и
+    исчезала, и приток ее уже не видел. Теперь: повтор решенной новости —
+    выбрасывается; похожесть на карточку — ждет притока ENRICH_WAIT_H часов и
+    потом идет в консоль с подсказкой."""
+    import send_drafts
+    from datetime import datetime, timedelta, timezone
+    drafts = [
+        {"draft_id": "d-card", "title": "Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую»",
+         "hold_reasons": ["не установлен предмет сделки"]},
+        {"draft_id": "d-again", "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
+         "hold_reasons": ["не установлен предмет сделки"]},
+    ]
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    base = {"companies": {}, "deals": [{"id": "g1111aaaa", "date": today,
+             "title": "Путин заявил о готовности турецких компаний выкупить долю в АЭС «Аккую»"}]}
+    state = {"decided_raw": {"d-old": "drop"}, "sent_raw": [],
+             "raw_titles": {}}
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
+    monkeypatch.setattr(send_drafts.promote, "known_raw_titles",
+                        lambda *a, **k: ["АЛРОСА продает почти половину акций ГМК «Тимир» на торгах"])
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(send_drafts, "DATA", str(data))
+
+    plan, _p, st, *_ = send_drafts.build_plan()
+    assert [i.get("draft_id") for _t, _k, (kind, i, _m) in plan if kind == "raw"] == []
+    assert st["decided_raw"].get("d-again") == "auto-drop"          # повтор решенной новости
+    assert "d-card" not in st["decided_raw"]                         # не выброшена: ждет притока
+    assert st["enrich_wait"]["d-card"]["card"] == "g1111aaaa"
+
+    # три часа спустя приток так ничего и не решил — новость в консоль
+    st["enrich_wait"]["d-card"]["since"] = (datetime.now(timezone.utc) - timedelta(hours=4)).isoformat()
+    plan, *_ = send_drafts.build_plan()
+    shown = [i for _t, _k, (kind, i, _m) in plan if kind == "raw"]
+    assert [i["draft_id"] for i in shown] == ["d-card"]
+    assert any("похоже на карточку g1111aaaa" in r for r in shown[0]["hold_reasons"])
+    assert "g1111aaaa" in send_drafts.raw_message(shown[0])
+
+
 def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tmp_path):
     """29 октября 2026: «„Бумеранг Капитал“ приобрел 50% сети Baggins Coffee»
     (retailer.ru) пришел владельцу «сомнительной» новостью наутро после поста
@@ -4518,6 +4563,11 @@ def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tm
     assert raw_ids == ["d-queue", "d-stale"], raw_ids
     assert send_drafts.covered_by_base_card(drafts[0], {"g25a6766d"}) == "g25a6766d"
     assert send_drafts.covered_by_base_card(drafts[2], {"g25a6766d"}) is None
+    # одно общее название в кавычках («Газпром») — показывать, а не прятать
+    # (30 октября 2026, особняк на Фурштатской против котельной «Газпрома»)
+    weak = {"draft_id": "d73384257", "hold_reasons": [
+        "%s g76850877 (общее название в кавычках) — проверьте, не дубль ли" % mark]}
+    assert send_drafts.covered_by_base_card(weak, {"g76850877"}) is None
 
 
 def test_raw_console_hides_foreign_only_deals(monkeypatch):
@@ -7325,6 +7375,7 @@ def test_gate_shows_a_complete_latin_named_draft_instead_of_hiding_it(monkeypatc
     # сделка о CyberOK уже есть в базе — проверка «та же новость другими словами»
     # спрятала бы черновик по делу; здесь проверяем другое, память отключаем
     monkeypatch.setattr(send_drafts.promote, "known_raw_titles", lambda *a, **k: [])
+    monkeypatch.setattr(send_drafts.promote, "known_card_titles", lambda *a, **k: [])
     plan, _p, _s, _deferred, _postponed, foreign, _unread, _unaccepted, _unread2 = send_drafts.build_plan()
     raw_ids = [item[1]["draft_id"] for _t, _kb, item in plan if item[0] == "raw"]
     assert raw_ids == ["d-lat-1"], raw_ids
@@ -9059,6 +9110,14 @@ def test_same_news_in_other_words_is_not_shown_twice():
                                  ['ВТБ продал отель Hyatt Regency Moscow Petrovsky Park']) is None
     assert promote.raw_same_news('Мосбиржа проводит дискретный аукцион по акциям группы ЛСР',
                                  ['Группа ЛСР выкупит свои акции по 675 рублей']) is None
+    # 30 октября 2026: «Газпрома» и «Газпромбанк-инвест» — разные имена; особняк
+    # на Фурштатской не дубль торгового центра «Город Косино» (обрезка до 6 букв)
+    assert promote.raw_same_news('Особняк на Фурштатской, который связывали с главой «Газпрома», продан на торгах',
+                                 ['«Газпромбанк-инвест» продал торговый центр «Город Косино»']) is None
+    assert promote._same_name('газпром', 'газпрома') and not promote._same_name('газпрома', 'газпромбанкинвест')
+    # то же имя «Газпром», но общие слова — только имя и «торги»: разные сделки
+    assert promote.raw_same_news('Особняк на Фурштатской, который связывали с главой «Газпрома», продан на торгах',
+                                 ['«Газпром» выставил на торги гостиницу «Урал» в Новом Уренгое']) is None
 
 
 def test_dropping_a_card_born_from_the_owners_click_tells_him_why():
