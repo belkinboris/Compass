@@ -362,6 +362,58 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Ava Group выставила на торги «Ривьера парк» — здание у метро «Таганская» под офис</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> AVA Group\n<b>Предмет:</b> Ривьера парк — собственник четырехэтажного здания (1,2 тыс. кв. м) в Большом Ватином переулке у метро «Таганская» в Москве и права аренды участка под ним до 2058 года; на площадке согласован проект офиса класса А на 2,8 тыс. кв. м.\n<b>Начальная цена лота:</b> 750 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261030/moskva-2128058390.html\">РИА Недвижимость</a>\nЕще 7 источников — в карточке сделки\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gadee3ca7\">карточке сделки</a>"
+  },
+  {
+   "id": "g39fc7468",
+   "date": "2026-10-30",
+   "title": "Московский продавец компьютеров получил 70% «Липецкого мяса» на фоне убытков и долгов предприятия",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/118951-moskovskiy-prodavets-kompyuterov-poluchil-70-lipetskogo-myasa-na-fone-ubytkov-i-dolgov-predpriyatiya/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Московский продавец компьютеров",
+   "asset": "«Липецкое мясо» на фоне убытков и долгов предприятия",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Московский продавец компьютеров",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/118951-moskovskiy-prodavets-kompyuterov-poluchil-70-lipetskogo-myasa-na-fone-ubytkov-i-dolgov-predpriyatiya/"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Липецкое мясо» на фоне убытков и долгов предприятия",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/118951-moskovskiy-prodavets-kompyuterov-poluchil-70-lipetskogo-myasa-na-fone-ubytkov-i-dolgov-predpriyatiya/"
+     }
+    ]
+   },
+   "pending_since": "2026-10-30T10:58:58+00:00"
   }
  ]
 }
