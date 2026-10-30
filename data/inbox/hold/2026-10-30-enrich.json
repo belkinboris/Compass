@@ -1,0 +1,42 @@
+{
+ "made": "2026-10-30",
+ "items": [
+  {
+   "news": "https://www.rbc.ru/finances/30/10/2026/6ae3653d1bbabc2d90db9f49",
+   "title": "ВТБ продал долю в «Росгосстрах Жизни» неназванному партнеру",
+   "verdict": "enrich:g8f548826",
+   "why": null,
+   "reasons": [
+    "карточка g8f548826 не найдена"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261030/proekt-2128012523.html",
+   "title": "\"Дом.РФ\" продает девелоперский проект в Петербурге",
+   "verdict": "enrich:gbc517ec2",
+   "why": null,
+   "reasons": [
+    "карточка gbc517ec2 не найдена"
+   ]
+  },
+  {
+   "news": "https://frankmedia.ru/313124",
+   "title": "ВТБ опроверг информацию о продаже агрохолдинга «Лабинский»",
+   "verdict": "enrich:g97679d43",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "этот статус уже снимали как преждевременный — переводить только после чтения источника",
+    "этап «closed» уже снимали как преждевременный"
+   ]
+  },
+  {
+   "news": "https://abireg.ru/newsitem/118944-dom-rf-vystavit-na-torgi-kompaniyu-s-proektom-gostinitsy-v-peterburge-za-1-3-mlrd-rubley/",
+   "title": "ДОМ.РФ выставит на торги компанию с проектом гостиницы в Петербурге за 1,3 млрд рублей",
+   "verdict": "enrich:gbc517ec2",
+   "why": "общие слова заголовка: 3",
+   "reasons": [
+    "карточка gbc517ec2 не найдена"
+   ]
+  }
+ ]
+}
