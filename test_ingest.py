@@ -2804,6 +2804,27 @@ def test_milestone_candidates_skips_a_stage_the_first_post_already_told():
     assert [e["id"] for _d, e in send_telegram.milestone_candidates(deals, {})] == ["g1-closed", "g2-closed"]
 
 
+def test_plan_milestones_in_main_sees_the_first_post_snapshot(monkeypatch, tmp_path):
+    """30 октября 2026: «Агропромкредит» вышел третьим постом — веха «закрыта»
+    по суткам молчания, хотя первый пост уже рассказал о закрытии. В main()
+    plan_milestones вызывался без telegram_post_state. Сухой прогон без
+    токена: веха из снимка не планируется к отправке."""
+    import datetime as _dt
+    data = {"deals": [{"id": "g1", "title": "Сделка", "status": "Закрыта", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "Закрыта", "id": "g1-closed",
+         "milestone_drafted_at": (_dt.datetime.now(_dt.timezone.utc) - _dt.timedelta(days=2)).isoformat()}]}],
+        "telegram_posts": {"g1": 5},
+        "telegram_post_state": {"g1": {"status": "Закрыта", "events": [{"kind": "closed"}]}}}
+    now = _dt.datetime.now(_dt.timezone.utc)
+    send, hold, _d, _s = send_telegram.plan_milestones(data["deals"], {}, [], now, data["telegram_post_state"])
+    assert send == [] and hold == []
+    # без снимка та же веха ушла бы по молчанию — ровно это и случилось
+    send, _h, _d, _s = send_telegram.plan_milestones(data["deals"], {}, [], now)
+    assert [e["id"] for _deal, e in send] == ["g1-closed"]
+    src = (ROOT / "pipeline" / "publish" / "send_telegram.py").read_text(encoding="utf-8")
+    assert "plan_milestones(\n        data['deals'], milestones, m_decisions, now_utc, post_state)" in src
+
+
 def test_milestone_candidates_dedups_by_stage_posts():
     """Веха, у которой `event['id']` уже есть в `stage_posts`, — больше не
     кандидат никогда, независимо от решений в консоли: тот же прием, что

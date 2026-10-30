@@ -1129,8 +1129,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         print('Сайт публикует прямо сейчас: %s — в этом прогоне не трогаем.'
               % ', '.join(sorted(site_posting)))
         m_decisions = [d for d in m_decisions if _milestone_event_id(d) not in site_posting]
+    # Снимок первого поста — обязательно (30 октября 2026): без него веха
+    # «закрыта» по «Агропромкредиту» вышла третьим постом, хотя первый пост
+    # уже рассказал о закрытии и `first_post_already_told` это видит.
     m_send, m_hold, m_discard_ids, m_sent_decision_ids = plan_milestones(
-        data['deals'], milestones, m_decisions, now_utc)
+        data['deals'], milestones, m_decisions, now_utc, post_state)
     if site_posting:
         m_hold += [(deal, event, 'сайт публикует его прямо сейчас')
                    for deal, event in m_send if event['id'] in site_posting]
