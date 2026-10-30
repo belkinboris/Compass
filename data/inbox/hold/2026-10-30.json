@@ -2,17 +2,17 @@
  "made": "2026-10-30",
  "drafts": [
   {
-   "draft_id": "d55306904",
-   "title": "Базу отдыха «Иртышская ривьера» в элитном селе Омска вновь продают и подняли цену",
-   "date": "2026-10-28",
+   "draft_id": "d88018138",
+   "title": "Инвестиции в большую энергетику Алтайского края вырастут более чем на 20% в 2026 году",
+   "date": "2026-10-30",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/omsk/2026/10/28/bazu-otdyha-v-elitnom-sele-omska-vnov-prodayut-i-podnyali-czenu"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28270903"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -30,72 +30,16 @@
    ]
   },
   {
-   "draft_id": "d51837021",
-   "title": "Проект отеля в центре Петербурга продают за 1,3 млрд рублей",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/30/proekt-otelja-v-centre-peterburga"
-    ]
-   ],
-   "sum": "1,3 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45427839",
-   "title": "ВТБ вновь перенесет допэмиссию и сделку с Wildberries",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/finances/30/10/2026/6ae35383e8a83604a8226ab1"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29727851",
-   "title": "Объем покупки юаней ЦБ с расчетами 29 октября составил 12,1 млрд руб",
+   "draft_id": "d49689686",
+   "title": "Рубль перешел к укреплению: аналитик дал прогноз по курсу российской валюты",
    "date": "2026-10-30",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261030/obem-874802328.html"
+     "https://1prime.ru/20261030/rubl-874809326.html"
     ]
    ],
-   "sum": "12,1 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -110,85 +54,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29374366",
-   "title": "В ВТБ заявили о намерении продать агрокомплекс «Лабинский» до конца года",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261030/vtb-874800296.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-30",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261030/vtb-874800296.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53329624",
-   "title": "В ВТБ заявили о намерении продать «Росгосстрах» до 1 апреля",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261030/vtb-874800084.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-30",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261030/vtb-874800084.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g83ad1f72 (общие редкие слова: переше, россий) — проверьте, не дубль ли"
    ]
   }
  ]
