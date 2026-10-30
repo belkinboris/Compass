@@ -30,16 +30,16 @@
    ]
   },
   {
-   "draft_id": "d51837021",
-   "title": "Проект отеля в центре Петербурга продают за 1,3 млрд рублей",
+   "draft_id": "d99747921",
+   "title": "Госдума может рассмотреть законопроект об онлайн-продаже вина в ноябре",
    "date": "2026-10-30",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/30/proekt-otelja-v-centre-peterburga"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28270619"
     ]
    ],
-   "sum": "1,3 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -51,20 +51,21 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Гостиницы и туризм",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d45427839",
-   "title": "ВТБ вновь перенесет допэмиссию и сделку с Wildberries",
+   "draft_id": "d69669009",
+   "title": "В российском городе выставили на продажу машину Lada с японским «автоматом»",
    "date": "2026-10-30",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/finances/30/10/2026/6ae35383e8a83604a8226ab1"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/10/30/v-rossiyskom-gorode-vystavili-na-prodazhu-mashinu-lada-s-yaponskim-avtomatom/"
     ]
    ],
    "sum": null,
@@ -86,16 +87,16 @@
    ]
   },
   {
-   "draft_id": "d29727851",
-   "title": "Объем покупки юаней ЦБ с расчетами 29 октября составил 12,1 млрд руб",
+   "draft_id": "d02090773",
+   "title": "В Тюмени продают базу отдыха с пляжем на берегу озера почти за 90 миллионов",
    "date": "2026-10-30",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261030/obem-874802328.html"
+     "web:ura.news",
+     "https://ura.news/news/1053140316"
     ]
    ],
-   "sum": "12,1 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -114,69 +115,19 @@
    ]
   },
   {
-   "draft_id": "d29374366",
-   "title": "В ВТБ заявили о намерении продать агрокомплекс «Лабинский» до конца года",
+   "draft_id": "d17985834",
+   "title": "В Ростове продают бывшую штаб-квартиру лидеров ОПГ. Сколько миллиардов просят за «Лигу наций»?",
    "date": "2026-10-30",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261030/vtb-874800296.html"
+     "web:161.ru",
+     "https://161.ru/text/business/2026/10/30/76734306/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-30",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261030/vtb-874800296.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53329624",
-   "title": "В ВТБ заявили о намерении продать «Росгосстрах» до 1 апреля",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261030/vtb-874800084.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-10-30",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261030/vtb-874800084.html"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
