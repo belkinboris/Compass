@@ -5588,6 +5588,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
 # на `getUpdates` при живом вебхуке отвечает отказом 409.
 TELEGRAM_POLLING = os.environ.get("TELEGRAM_POLLING", "1") != "0"
 TELEGRAM_POLL_TIMEOUT = int(os.environ.get("TELEGRAM_POLL_TIMEOUT", "25"))
+POLL_PAUSE_MAX = float(os.environ.get("TELEGRAM_POLL_PAUSE_MAX", "4"))
 _poll_state = {"offset": None, "last_ok": None, "updates": 0, "errors": 0,
                "last_error": None, "running": False}
 
@@ -5684,10 +5685,15 @@ def _start_telegram_polling():
                 _poll_state["last_error"] = str(exc)[:200]
                 logger.warning("опрос Telegram не удался: %s", exc)
                 # Нарастающая пауза — чтобы при недоступной сети не молотить
-                # запросами; потолок минута, иначе кнопки «оживают» слишком
-                # долго после того, как связь восстановилась.
+                # запросами. ПОТОЛОК — НЕСКОЛЬКО СЕКУНД (30 октября 2026):
+                # связь хостинга с Telegram рвется часто и коротко (186
+                # обрывов SSL на 22 успешных ответа за два часа), и при
+                # потолке в минуту кнопка в консоли висела до минуты после
+                # каждого обрыва («раньше сразу отмечалось, а сейчас хрен
+                # знает сколько»). Короткий обрыв лечится сразу следующей
+                # попыткой; долгий простой сети стоит лишь лишних запросов.
                 time.sleep(pause)
-                pause = min(pause * 2, 60.0)
+                pause = min(pause * 2, POLL_PAUSE_MAX)
 
     threading.Thread(target=_run, daemon=True).start()
 

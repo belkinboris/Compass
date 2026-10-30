@@ -5249,3 +5249,13 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
     main._send_queue_batch(-100, "soon")
     msg = next(kw for _m, kw in sent if "gs2" in kw.get("text", ""))
     assert "решение записано" in msg["text"] and "reply_markup" not in msg
+
+
+def test_telegram_poll_retries_within_seconds_not_a_minute():
+    """30 октября 2026: связь хостинга с Telegram рвется часто (186 обрывов
+    SSL на 22 ответа за два часа), а пауза после обрыва росла до минуты —
+    кнопка в консоли висела. Потолок паузы — несколько секунд."""
+    import main
+    assert main.POLL_PAUSE_MAX <= 5
+    src = (Path(main.__file__)).read_text(encoding="utf-8")
+    assert "pause = min(pause * 2, POLL_PAUSE_MAX)" in src and "pause * 2, 60.0" not in src
