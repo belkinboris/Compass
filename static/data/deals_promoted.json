@@ -232591,7 +232591,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-29"
   },
   {
    "id": "g98ad52f7",
@@ -232623,10 +232624,10 @@
     "sum": "16,1 млрд ₽",
     "share": "—",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "«Тимир» закрыл 2025 год с убытком 7,1 млрд рублей (годом раньше убыток был в разы меньше — 281 млн): компания списала 5,786 млрд рублей стоимости лицензий. Добычи на участке по-прежнему нет — с 2022 года там идут только изыскания и научные расчеты, до реальной работы руки не дошли.",
     "fin": "—",
     "rationale": "—",
-    "context": "Пакет — 4 653 847 обыкновенных акций, почти 49% капитала; задаток для участия в торгах — 161 млн рублей. Заявки принимают до 21 декабря, итоги подведут 14 января. «Тимир» — совместное предприятие «Евраза» и АЛРОСА; в ноябре президент Владимир Путин разрешил «Евразу» выкупить у материнской Evraz plc 93,2% «Распадской» и 51% самого «Тимира» — это отдельная, более ранняя сделка по той же компании.",
+    "context": "Пакет — 4 653 847 обыкновенных акций, почти 49% капитала; задаток для участия в торгах — 161 млн рублей. Заявки принимают до 21 декабря, итоги подведут 14 января. «Тимир» — совместное предприятие «Евраза» и АЛРОСА; в ноябре президент Владимир Путин разрешил «Евразу» выкупить у материнской Evraz plc 93,2% «Распадской» и 51% самого «Тимира» — это отдельная, более ранняя сделка по той же компании. У самого «Тимира» есть и третий держатель доли: одна акция принадлежит госкорпорации ВЭБ.РФ, остальное делят АЛРОСА (49% минус одна акция) и «Евраз» (51%).",
     "finadv": "—"
    },
    "law": {
@@ -232642,7 +232643,10 @@
    "seller": "АЛРОСА",
    "sum_basis": "auction_start",
    "proofread_absorbed": {
-    "eco.context": []
+    "eco.context": [
+     "4a36595de8c0"
+    ],
+    "eco.target_fin": []
    },
    "reviewed": "2026-10-28",
    "seller_id": "g5a19c033",
@@ -232709,7 +232713,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-29"
   },
   {
    "id": "g221460e5",
@@ -232923,21 +232928,128 @@
    "facts": {
     "stake": {
      "value": 50.0,
-     "basis": "rule",
-     "card_hash": "d74d398c6585"
+     "basis": "verified",
+     "card_hash": "d74d398c6585",
+     "object": "Baggins Coffee",
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "quote": "50% в компании выкупил фонд «Бумеранг Капитал», став управляющим партнером. Оставшиеся 50% перешли предпринимателю Антону Петрову.",
+     "source": "https://www.kommersant.ru/doc/9062986",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value": 50.0,
+       "object": "Baggins Coffee",
+       "event": "announcement",
+       "quote": "50% в компании выкупил фонд «Бумеранг Капитал», став управляющим партнером. Оставшиеся 50% перешли предпринимателю Антону Петрову.",
+       "source": "https://www.kommersant.ru/doc/9062986",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 50.0,
+       "object": "Baggins Coffee",
+       "event": "announcement",
+       "quote": "Фонд получил 50% компании и стал управляющим партнёром. Остальная доля перешла Антону Петрову.",
+       "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 350000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "ec3467febb8e"
+     "basis": "verified",
+     "card_hash": "21b084ed5dca",
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "analyst",
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "пишет «Коммерсантъ» со ссылкой на участников рынка",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Стоимость бизнеса могла составить до 350 млн рублей, пишет «Коммерсантъ» со ссылкой на участников рынка.",
+     "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value_rub": 350000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Стоимость бизнеса могла составить до 350 млн рублей, пишет «Коммерсантъ» со ссылкой на участников рынка.",
+       "attribution_quote": "пишет «Коммерсантъ» со ссылкой на участников рынка",
+       "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 350000000,
+       "meaning": "estimate",
+       "attribution": "analyst",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, она не превышает 350 млн рублей.",
+       "attribution_quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, она не превышает 350 млн рублей.",
+       "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-28",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "9e5388c48d01"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "f604e044f3bf",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "«Бумеранг Капитал» стал совладельцем Baggins Coffee 28.10.2026, 17:04",
+     "source": "https://www.kommersant.ru/doc/9062977",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value": "2026-10-28",
+       "meaning": "publication",
+       "quote": "«Бумеранг Капитал» стал совладельцем Baggins Coffee 28.10.2026, 17:04",
+       "source": "https://www.kommersant.ru/doc/9062977",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-28",
+       "meaning": "publication",
+       "quote": "Фонд «Бумеранг Капитал» стал совладельцем Baggins Coffee 28.10.2026, 17:04",
+       "source": "https://www.kommersant.ru/doc/9062986",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -232947,7 +233059,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "36e5e1cee723"
+     "card_hash": "36e5e1cee723",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Ранее Baggins Coffee контролировал ее сооснователь Андрей Павлов, который теперь займется развитием других проектов, включая пекарни «Текстура» и бренд полезных сладостей «Шоколадбери».",
+     "source": "https://www.kommersant.ru/doc/9062986",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Ранее Baggins Coffee контролировал ее сооснователь Андрей Павлов, который теперь займется развитием других проектов, включая пекарни «Текстура» и бренд полезных сладостей «Шоколадбери».",
+       "source": "https://www.kommersant.ru/doc/9062986",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "У сети кофеен Baggins Coffee сменился владелец. 50% в компании выкупил фонд «Бумеранг Капитал», став управляющим партнером. Оставшиеся 50% перешли предпринимателю Антону Петрову.",
+       "source": "https://www.kommersant.ru/doc/9062986",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g4366d866",
@@ -232956,8 +233092,54 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "dfa1ba44f25e"
+     "perimeter": "verified",
+     "card_hash": "dfa1ba44f25e",
+     "perimeter_entity": "ООО «Бэггинс кофе»",
+     "perimeter_report": {
+      "inn": "7804597608",
+      "year": 2025,
+      "revenue_rub": 138906000,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БЭГГИНС КОФЕ\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "По данным СПАРК, выручка ООО «Бэггинс кофе» в 2025 году сократилась на 3,5%, до 138,9 млн рублей.",
+     "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Бэггинс кофе»",
+       "report": {
+        "inn": "7804597608",
+        "year": 2025,
+        "revenue_rub": 138906000,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БЭГГИНС КОФЕ\""
+       },
+       "quote": "По данным СПАРК, выручка ООО «Бэггинс кофе» в 2025 году сократилась на 3,5%, до 138,9 млн рублей.",
+       "source": "https://retailer.ru/bumerang-kapital-priobrjol-50-seti-baggins-coffee/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Бэггинс кофе»",
+       "report": {
+        "inn": "7804597608",
+        "year": 2025,
+        "revenue_rub": 138906000,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"БЭГГИНС КОФЕ\""
+       },
+       "quote": "Согласно СПАРК, в 2025 году выручка ООО «Бэггинс кофе» составила 138,9 млн руб., сократившись год к году на 3,5%.",
+       "source": "https://www.kommersant.ru/doc/9062977",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -232969,9 +233151,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    },
    "sum": "350 млн ₽",
@@ -232980,7 +233162,9 @@
      "Mergers.ru",
      "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713"
     ]
-   ]
+   ],
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g8e6dcf0b",
@@ -233014,7 +233198,7 @@
     "val": "Партнер фирмы Rusland SP Дмитрий Лехмус называет другую цифру: когда участок пройдет градостроительную подготовку, он подорожает до 2,6 млрд рублей, то есть примерно 130 тыс. рублей за квадратный метр будущих продаваемых площадей. Эта оценка — о цене ПОСЛЕ будущих согласований, а не о том, за сколько продали «Музу» сейчас.",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "Прежний акционер объясняет продажу экономикой проекта: выкуп земли растянулся, условия изменились, и головная компания решила не реализовывать проект сама, а продать «Музу» целиком.",
+    "rationale": "Гендиректор «Артхауса» Александр Игнатов объясняет продажу экономикой проекта: выкуп земли растянулся, условия изменились, и головная компания решила не реализовывать проект сама, а продать «Музу» целиком.",
     "context": "У зданий бывшего завода «Муздеталь» нет статуса памятника, и КГИОП их не защищает — при жилой застройке участка их разрешено снести. Рыночные эксперты предполагают, что здесь поместится около 19 тыс. кв. м квартир и 2,5 тыс. кв. м коммерческих площадей, но это их прикидка, а не объявленный план нового владельца.",
     "finadv": "—"
    },
@@ -233061,7 +233245,8 @@
     "eco.context": [],
     "eco.rationale": [
      "0741c6187227",
-     "0649f9619d4d"
+     "0649f9619d4d",
+     "4218fc476912"
     ],
     "eco.val": [],
     "extra": []
@@ -233137,7 +233322,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "deep_researched": "2026-10-29"
   },
   {
    "id": "gf2b5f78c",
@@ -233164,7 +233350,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Участок — у села Новомуслюмово в Мечетлинском и Белокатайском районах Башкирии, площадь почти 39 кв. км. Разведанные запасы газа — около 1,58 млрд куб. м; нефть пока не подтверждена — это прогнозная оценка экспертов (в одном пласте около 2 млн тонн, из них извлекаемых примерно 725 тыс. тонн; в другом — прогноз почти 40 млн тонн, извлекаемых около 1,2 млн тонн). Прием заявок стартовал 28 октября и продлится месяц, до 30 ноября; торги пройдут 18 декабря. Победителю достанется право разведки и добычи на 20 лет. Продавца в источнике нет — указано лишь, что участок выставлен на аукцион.",
+    "context": "Участок — у села Новомуслюмово в Мечетлинском и Белокатайском районах Башкирии, площадь почти 39 кв. км. Разведанные запасы газа — около 1,58 млрд куб. м, есть и небольшой прогнозный объем газа — еще около 0,13 млрд куб. м; нефть пока не подтверждена — это прогнозная оценка экспертов (в одном пласте около 2 млн тонн, из них извлекаемых примерно 725 тыс. тонн; в другом — прогноз почти 40 млн тонн, извлекаемых около 1,2 млн тонн). Прием заявок стартовал 28 октября и продлится месяц, до 30 ноября; торги пройдут 18 декабря, шаг аукциона — 20,3 млн рублей. Победителю достанется право разведки и добычи на 20 лет. Продавца в источнике нет — указано лишь, что участок выставлен на аукцион.",
     "finadv": "—"
    },
    "law": {
@@ -233176,7 +233362,9 @@
    "sum": "200,3 млн ₽",
    "sum_basis": "auction_start",
    "proofread_absorbed": {
-    "eco.context": []
+    "eco.context": [
+     "116020ec58b7"
+    ]
    },
    "themes": [
     "Продажа с торгов"
@@ -233250,7 +233438,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-29"
   },
   {
    "id": "g0f479af0",
@@ -233347,27 +233536,128 @@
      "card_hash": "fd80f2f5ee19"
     },
     "price": {
-     "value_rub": 3500000000.0,
+     "value_rub": 3500000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "9867a97de27b"
+     "basis": "verified",
+     "card_hash": "9867a97de27b",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "\"Количество приобретаемых обществом акций: 5 151 510 штук. Цена приобретения одной акции: 675 рублей 00 копеек. Цена определена исходя из рыночной стоимости акций\", - говорится в сообщении компании.",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Совет директоров девелоперской группы ЛСР в среду принял решение о выкупе акций компании почти на 3,5 миллиарда рублей.",
+     "source": "https://1prime.ru/20261028/sovet-874721147.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value_rub": 3500000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Совет директоров девелоперской группы ЛСР в среду принял решение о выкупе акций компании почти на 3,5 миллиарда рублей.",
+       "attribution_quote": "\"Количество приобретаемых обществом акций: 5 151 510 штук. Цена приобретения одной акции: 675 рублей 00 копеек. Цена определена исходя из рыночной стоимости акций\", - говорится в сообщении компании.",
+       "source": "https://1prime.ru/20261028/sovet-874721147.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 3500000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Совет директоров девелоперской группы ЛСР в среду принял решение о выкупе акций компании почти на 3,5 миллиарда рублей.",
+       "attribution_quote": "«Количество приобретаемых обществом акций: 5 151 510 <…> штук. Цена приобретения одной акции: 675 <...> рублей 00 копеек. Цена определена исходя из рыночной стоимости акций», - говорится в сообщении компании.",
+       "source": "https://realty.ria.ru/20261028/sovet-2127618388.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-28",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "f6bc4c29aeba"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "34ca18139c6c",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Совет директоров ЛСР выкупит акции компании почти на 3,5 млрд руб - 28.10.2026, ПРАЙМ",
+     "source": "https://1prime.ru/20261028/sovet-874721147.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value": "2026-10-28",
+       "meaning": "announcement",
+       "quote": "Совет директоров ЛСР выкупит акции компании почти на 3,5 млрд руб - 28.10.2026, ПРАЙМ",
+       "source": "https://1prime.ru/20261028/sovet-874721147.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-28",
+       "meaning": "announcement",
+       "quote": "17:49 28.10.2026 (обновлено: 17:50 28.10.2026) Совет директоров ЛСР объявил о выкупе акций почти на 3,5 млрд рублей",
+       "source": "https://realty.ria.ru/20261028/sovet-2127618388.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a8f7ee57145f"
+     "card_hash": "a8f7ee57145f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Как уточняется в нем, акционеры могут заявить о продаже своих акций эмитенту с 18 ноября по 17 декабря включительно.",
+     "source": "https://1prime.ru/20261028/sovet-874721147.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Как уточняется в нем, акционеры могут заявить о продаже своих акций эмитенту с 18 ноября по 17 декабря включительно.",
+       "source": "https://1prime.ru/20261028/sovet-874721147.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Как уточняется в нем, акционеры могут заявить о продаже своих акций эмитенту с 18 ноября по 17 декабря включительно.",
+       "source": "https://realty.ria.ru/20261028/sovet-2127618388.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -233382,18 +233672,19 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "announcement"
   },
   {
    "id": "gb986603e",
@@ -233658,17 +233949,94 @@
      "card_hash": "aced3b59b904"
     },
     "price": {
-     "value_rub": 1125000000.0,
+     "value_rub": 1125000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "0cbd236d6941"
+     "basis": "verified",
+     "card_hash": "0cbd236d6941",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "говорится в сообщении",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "На 15 шаге победила компания \"Сила Востока\", предложив 1,125 миллиарда рублей при стартовом платеже в 450 миллионов",
+     "source": "https://1prime.ru/20261029/sila-874733252.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value_rub": 1125000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "На 15 шаге победила компания \"Сила Востока\", предложив 1,125 миллиарда рублей при стартовом платеже в 450 миллионов",
+       "attribution_quote": "говорится в сообщении",
+       "source": "https://1prime.ru/20261029/sila-874733252.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1125000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "За право пользования недрами она предложила 1,125 млрд рублей при стартовом платеже в 450 млн рублей.",
+       "attribution_quote": "Об этом сообщили в Министерстве природных ресурсов и экологии России.",
+       "source": "https://runews24.ru/magadan/28/10/2026/sila-vostoka-poluchila-pravo-na-izuchenie-i-dobyichu-zolota-na-uchastke-netchen-xaya-v-magadanskoj-oblasti",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-26",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "415cc53083dc"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "dd03a55fc537",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Роснедра в сентябре выставили этот участок на торги с начальной ценой в 450 миллионов рублей. Аукцион был перенесен с 19 октября на 26 октября.",
+     "source": "https://1prime.ru/20261021/zajavka-874484535.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "value": "2026-10-26",
+       "meaning": "closing",
+       "quote": "Роснедра в сентябре выставили этот участок на торги с начальной ценой в 450 миллионов рублей. Аукцион был перенесен с 19 октября на 26 октября.",
+       "source": "https://1prime.ru/20261021/zajavka-874484535.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-26",
+       "meaning": "closing",
+       "quote": "Аукцион был перенесен с 19 октября на 26 октября.",
+       "source": "https://1prime.ru/20261021/zajavka-874484535.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -233678,7 +234046,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5041b7307850"
+     "card_hash": "5041b7307850",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Компания \"Сила Востока\" приобрела на аукционе участок рудного золота в Магаданской области за 1,1 миллиард рублей, сообщает министерство природных ресурсов региона.",
+     "source": "https://1prime.ru/20261029/sila-874733252.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-10-29",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Компания \"Сила Востока\" приобрела на аукционе участок рудного золота в Магаданской области за 1,1 миллиард рублей, сообщает министерство природных ресурсов региона.",
+       "source": "https://1prime.ru/20261029/sila-874733252.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Компания «Сила Востока» стала победителем аукциона на участок рудного золота Нетчен-Хая в Магаданской области.",
+       "source": "https://runews24.ru/magadan/28/10/2026/sila-vostoka-poluchila-pravo-na-izuchenie-i-dobyichu-zolota-na-uchastke-netchen-xaya-v-magadanskoj-oblasti",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -233693,18 +234085,19 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "date_basis": "closing"
   },
   {
    "id": "g3555ea6e",
