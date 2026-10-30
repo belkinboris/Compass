@@ -58,13 +58,13 @@
    ]
   },
   {
-   "draft_id": "d19581742",
-   "title": "Жительницу села Каратузского привлекут к уголовной ответственности за покупку питбайка сыну",
+   "draft_id": "d45427839",
+   "title": "ВТБ вновь перенесет допэмиссию и сделку с Wildberries",
    "date": "2026-10-30",
    "src": [
     [
-     "web:krasrab.ru",
-     "https://krasrab.ru/news/incidents/59718"
+     "web:rbc.ru",
+     "https://www.rbc.ru/finances/30/10/2026/6ae35383e8a83604a8226ab1"
     ]
    ],
    "sum": null,
@@ -72,17 +72,123 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Жительницу села Каратузского",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Жительницу села Каратузского",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29727851",
+   "title": "Объем покупки юаней ЦБ с расчетами 29 октября составил 12,1 млрд руб",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261030/obem-874802328.html"
+    ]
+   ],
+   "sum": "12,1 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29374366",
+   "title": "В ВТБ заявили о намерении продать агрокомплекс «Лабинский» до конца года",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261030/vtb-874800296.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-30",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261030/vtb-874800296.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53329624",
+   "title": "В ВТБ заявили о намерении продать «Росгосстрах» до 1 апреля",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261030/vtb-874800084.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-30",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261030/vtb-874800084.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

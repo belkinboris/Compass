@@ -108,6 +108,126 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>«Яндекс» выкупил 638 312 собственных акций на 2,28 млрд ₽</b>\n\n<b>Покупатель:</b> Яндекс — интернет-компания: поиск, реклама, такси и доставка, облачные сервисы, беспилотные технологии.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> акции «Яндекса» — 638 312 обыкновенных акций — 0,16% уставного капитала.\n<b>Сумма:</b> 2,28 млрд ₽\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil\">Ведомости</a>\nЕще 2 источника — в карточке сделки\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gfe5d2f94\">карточке сделки</a>"
+  },
+  {
+   "id": "g743d5db0",
+   "date": "2026-10-30",
+   "title": "Гитару Джорджа Майкла из клипа Faith продали на аукционе за £180 тыс.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6ae42a180cd0f4f5e566b522"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Гитару Джорджа Майкла из клипа Faith",
+   "asset": "на аукционе за £180 тыс.",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-30",
+     "title": "Сделка завершена",
+     "note": "Акустическая гитара британского певца Джорджа Майкла (1963&ndash;2016), на которой он играл в клипе Faith, ушла с молотка за &pound;180 тыс.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/rbcfreenews/6ae42a180cd0f4f5e566b522"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на аукционе за £180 тыс.",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6ae42a180cd0f4f5e566b522"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Гитару Джорджа Майкла из клипа Faith",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6ae42a180cd0f4f5e566b522"
+     }
+    ]
+   },
+   "pending_since": "2026-10-30T07:54:15+00:00"
+  },
+  {
+   "id": "ge9f587f4",
+   "date": "2026-10-30",
+   "title": "Экс-губернатор Куйвашев стал владельцем биатлонной компании",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053140307"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Экс-губернатор Куйвашев",
+   "asset": "биатлонной компании",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Экс-губернатор Куйвашев",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053140307"
+     }
+    ],
+    "target": [
+     {
+      "value": "биатлонной компании",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053140307"
+     }
+    ]
+   },
+   "pending_since": "2026-10-30T07:54:15+00:00"
   }
  ]
 }

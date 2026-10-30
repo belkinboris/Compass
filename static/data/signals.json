@@ -2,6 +2,33 @@
  "updated": "2026-10-30",
  "signals": [
   {
+   "id": "sabac8fd48",
+   "company_id": "gcafc31dc",
+   "date": "2026-10-30",
+   "kind": "sell",
+   "summary": "ВТБ — возможная продажа: Росгосстрах",
+   "source": [
+    "1prime.ru",
+    "https://1prime.ru/20261030/vtb-874800084.html"
+   ],
+   "origin": "news",
+   "strength": "strong",
+   "object_id": "g676ca6df"
+  },
+  {
+   "id": "s7717d1493",
+   "company_id": "gcafc31dc",
+   "date": "2026-10-30",
+   "kind": "sell",
+   "summary": "ВТБ — готовит продажу части бизнеса",
+   "source": [
+    "1prime.ru",
+    "https://1prime.ru/20261030/vtb-874800296.html"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "s9a851860a",
    "company_id": "g68f57675",
    "date": "2026-10-29",
