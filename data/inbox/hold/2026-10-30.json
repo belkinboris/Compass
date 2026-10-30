@@ -2,17 +2,17 @@
  "made": "2026-10-30",
  "drafts": [
   {
-   "draft_id": "d73384257",
-   "title": "Особняк на Фурштатской, который связывали с главой «Газпрома», продан на торгах",
+   "draft_id": "d89388110",
+   "title": "Третьяк сообщил об открытии продажи билетов на Кубок Первого канала по хоккею",
    "date": "2026-10-30",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/10/30/osobnjak-na-furshtatskoj--kotorij"
+     "web:tass.ru",
+     "https://tass.ru/sport/28272435"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -23,11 +23,94 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g76850877 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56744861",
+   "title": "Продавцы получили возможность выставлять вещи на торги",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/30/prodavci-poluchili-vozmozhnost"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": "Продавцы",
+   "asset": "возможность выставлять вещи на торги",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Продавцы",
+    "asset": "возможность выставлять вещи на торги",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d36257808",
+   "title": "Миллионы, квартиры и машины. Что из имущества экс-начальника «Центравтомагистрали» суд обратил в доход государства",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/10/30/76736068/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16110266",
+   "title": "Московская биржа вводит запрет на короткие продажи акций МГКЛ",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261030/birzha-874827693.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Рынок ценных бумаг",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -67,6 +150,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d40641079",
+   "title": "Какой iPhone купить в 2026 году: как выбрать оптимальную модель",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/articles/2026/10/30/best-iphones-2026/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
