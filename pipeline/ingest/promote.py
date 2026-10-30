@@ -1077,6 +1077,28 @@ def raw_same_news(title, known_titles, min_shared=3, min_jaccard=0.5):
     return best[1] if best else None
 
 
+def known_card_titles(pending_cards=(), base_deals=(), days=120):
+    """[(id, заголовок)] карточек очереди и базы за последние `days` дней —
+    с ними сверяется новое сырье: совпадение значит «возможно, этап или
+    дополнение этой карточки», а не «выбросить» (30 октября 2026)."""
+    from datetime import datetime, timedelta
+    since = (datetime.utcnow() - timedelta(days=days)).strftime('%Y-%m-%d')
+    out = []
+    for c in list(pending_cards) + list(base_deals):
+        if (str(c.get('date') or '') >= since or str(c.get('pending_since') or '')[:10] >= since) and c.get('title'):
+            out.append((str(c.get('id')), c['title']))
+    return out
+
+
+def card_same_news(title, cards):
+    """id и заголовок карточки, на которую похожа новость, или (None, None)."""
+    by_title = {}
+    for cid, t in cards:
+        by_title.setdefault(t, cid)
+    same = raw_same_news(title, list(by_title))
+    return (by_title[same], same) if same else (None, None)
+
+
 def known_raw_titles(state, pending_cards=(), base_deals=(), days=120):
     """Заголовки, с которыми сравнивается новое сырье: решенное и показанное
     сырье (по hold-файлам этого контейнера) и карточки последних `days` дней."""
