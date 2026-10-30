@@ -4518,6 +4518,11 @@ def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tm
     assert raw_ids == ["d-queue", "d-stale"], raw_ids
     assert send_drafts.covered_by_base_card(drafts[0], {"g25a6766d"}) == "g25a6766d"
     assert send_drafts.covered_by_base_card(drafts[2], {"g25a6766d"}) is None
+    # одно общее название в кавычках («Газпром») — показывать, а не прятать
+    # (30 октября 2026, особняк на Фурштатской против котельной «Газпрома»)
+    weak = {"draft_id": "d73384257", "hold_reasons": [
+        "%s g76850877 (общее название в кавычках) — проверьте, не дубль ли" % mark]}
+    assert send_drafts.covered_by_base_card(weak, {"g76850877"}) is None
 
 
 def test_raw_console_hides_foreign_only_deals(monkeypatch):
@@ -9059,6 +9064,14 @@ def test_same_news_in_other_words_is_not_shown_twice():
                                  ['ВТБ продал отель Hyatt Regency Moscow Petrovsky Park']) is None
     assert promote.raw_same_news('Мосбиржа проводит дискретный аукцион по акциям группы ЛСР',
                                  ['Группа ЛСР выкупит свои акции по 675 рублей']) is None
+    # 30 октября 2026: «Газпрома» и «Газпромбанк-инвест» — разные имена; особняк
+    # на Фурштатской не дубль торгового центра «Город Косино» (обрезка до 6 букв)
+    assert promote.raw_same_news('Особняк на Фурштатской, который связывали с главой «Газпрома», продан на торгах',
+                                 ['«Газпромбанк-инвест» продал торговый центр «Город Косино»']) is None
+    assert promote._same_name('газпром', 'газпрома') and not promote._same_name('газпрома', 'газпромбанкинвест')
+    # то же имя «Газпром», но общие слова — только имя и «торги»: разные сделки
+    assert promote.raw_same_news('Особняк на Фурштатской, который связывали с главой «Газпрома», продан на торгах',
+                                 ['«Газпром» выставил на торги гостиницу «Урал» в Новом Уренгое']) is None
 
 
 def test_dropping_a_card_born_from_the_owners_click_tells_him_why():
