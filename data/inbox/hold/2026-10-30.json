@@ -1,4 +1,62 @@
 {
  "made": "2026-10-30",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d01896934",
+   "title": "Инвестиции в гостиничную недвижимость РФ снизились на 55%",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28271495"
+    ]
+   ],
+   "sum": "20,5 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56858628",
+   "title": "ВТБ не завершит сделку по приобретению доли в финтех-активах Wildberries в октябре , сообщил первый зампред банка Дмитрий Пьянов. По его словам, для этого необходимо объявить дополнительную эмиссию ак",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7527"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
 }
