@@ -5256,6 +5256,6 @@ def test_telegram_poll_retries_within_seconds_not_a_minute():
     SSL на 22 ответа за два часа), а пауза после обрыва росла до минуты —
     кнопка в консоли висела. Потолок паузы — несколько секунд."""
     import main
-    assert main.POLL_PAUSE_MAX <= 5
+    assert main.POLL_PAUSE_MAX <= 5 and main.TELEGRAM_POLL_TIMEOUT <= 10
     src = (Path(main.__file__)).read_text(encoding="utf-8")
     assert "pause = min(pause * 2, POLL_PAUSE_MAX)" in src and "pause * 2, 60.0" not in src
