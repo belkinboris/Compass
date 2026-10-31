@@ -6062,7 +6062,7 @@ def test_ops_status_offers_buttons_only_when_there_is_something_to_show():
 def test_site_answers_the_queue_buttons():
     """Кнопка, на которую никто не отвечает, выглядит рабочей и молчит — тот
     же класс, что забытый callback_query в подписке вебхука (CLAUDE.md)."""
-    src = (ROOT / "main.py").read_text(encoding="utf-8")
+    src = (ROOT / "app" / "console.py").read_text(encoding="utf-8")
     assert "show:(soon|held|raw|unread)" in src, "сайт не разбирает callback_data кнопок отчета"
     assert "Очередь видят только владелец и партнер" in src, "нет проверки права"
 

@@ -12,7 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import assistant, core, fns
+from app import assistant, console, core, fns
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -2637,7 +2637,7 @@ def test_milestone_goes_to_the_channel_on_the_button_without_waiting_for_the_rou
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
                         or {"ok": True, "result": {"message_id": 9001}})
-    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
     combo = "g%s~approval" % uuid.uuid4().hex[:8]
     draft = {"token": "тайна", "combo": combo, "event_id": combo.replace("~", "-"),
              "text": "📌 <b>Президент разрешил сделку</b>",
@@ -2692,10 +2692,10 @@ def test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine(
         assert main._instant_milestone_post(realty, store(realty, ["main", "realty"]), db) is None
         assert replies == []
         out = "o%s~closed" % tag
-        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: True)
+        monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: True)
         assert main._instant_milestone_post(out, store(out, ["main"]), db) is None
         assert replies == []
-        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+        monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
         failed = "f%s~closed" % tag
         failed_id = store(failed, ["main"])
         assert main._instant_milestone_post(failed, failed_id, db) is None
@@ -2751,7 +2751,7 @@ def test_old_draft_of_a_published_card_does_not_record_a_decision(client, monkey
     calls = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **payload: calls.append((method, payload)) or {"ok": True})
-    monkeypatch.setattr(main, "_already_on_site", lambda did: did == "gpublished")
+    monkeypatch.setattr(console, "_already_on_site", lambda did: did == "gpublished")
     client.post("/api/telegram/webhook/тайна", json={
         "callback_query": {"id": "cb-pub", "from": {"id": 222}, "data": "mod:gpublished:ok",
                             "message": {"message_id": 9, "chat": {"id": 222}, "text": "[карточка gpublished]"}}})
@@ -4459,7 +4459,7 @@ def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue
                 {"update_id": 12, "message": {"text": "три"}},
             ]}
 
-    monkeypatch.setattr(main, "_handle_telegram_update", fake_handle)
+    monkeypatch.setattr(console, "_handle_telegram_update", fake_handle)
     monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: FakeResponse())
     monkeypatch.setitem(main._poll_state, "offset", None)
 
@@ -5100,7 +5100,7 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     # карту в канал, а отвечай на вопрос». Вопрос придерживает карточку и
     # получает ответ следом.
     monkeypatch.setattr(core, "_in_background", lambda fn: fn())
-    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
+    monkeypatch.setattr(console, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
     reply("Что такое luminor?", draft)
     assert decisions() == [("hold", None, False), ("note", "Что такое luminor?", False)]
     texts = [kw["text"] for m, kw in sent if m == "sendMessage"]
@@ -5108,7 +5108,7 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     assert texts[-1] == "Ответ: Luminor — банк в странах Балтии."
     assert not any(m == "editMessageText" for m, _ in sent), "проект поста с кнопками правиться не должен"
     # Модель не ответила — честно говорим, кто ответит.
-    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: None)
+    monkeypatch.setattr(console, "_console_answer", lambda deal_id, q: None)
     sent.clear()
     reply("А кто покупатель?", {"message_id": 503, "text": "[карточка %s] OTP" % deal})
     assert decisions()[-2:] == [("hold", None, False), ("note", "А кто покупатель?", False)]
@@ -5189,7 +5189,7 @@ def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, mo
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
                         or {"ok": True, "result": {"message_id": 9100}})
-    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
     deal = "g%s" % uuid.uuid4().hex[:8]
     combo = deal + "~closed"
     assert client.post("/api/ops/milestone-draft", json={
@@ -5309,7 +5309,7 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_answered_decisions", lambda: {"d1": "drop", "gs2": "approve"})
+    monkeypatch.setattr(console, "_answered_decisions", lambda: {"d1": "drop", "gs2": "approve"})
     hold = {"drafts": [{"draft_id": "d1", "title": "Отвеченная новость", "hold_reasons": ["x"]},
                        {"draft_id": "d2", "title": "Новая новость", "hold_reasons": ["y"]}]}
     pending = {"cards": [
@@ -5349,7 +5349,6 @@ def test_telegram_poll_retries_within_seconds_not_a_minute():
     """30 октября 2026: связь хостинга с Telegram рвется часто (186 обрывов
     SSL на 22 ответа за два часа), а пауза после обрыва росла до минуты —
     кнопка в консоли висела. Потолок паузы — несколько секунд."""
-    import main
-    assert main.POLL_PAUSE_MAX <= 5 and main.TELEGRAM_POLL_TIMEOUT <= 10
-    src = (Path(main.__file__)).read_text(encoding="utf-8")
+    assert console.POLL_PAUSE_MAX <= 5 and console.TELEGRAM_POLL_TIMEOUT <= 10
+    src = (Path(console.__file__)).read_text(encoding="utf-8")
     assert "pause = min(pause * 2, POLL_PAUSE_MAX)" in src and "pause * 2, 60.0" not in src

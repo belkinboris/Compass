@@ -9,7 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import assistant, core, fns
+from app import assistant, console, core, fns
 import yandex_search as ys
 
 # ---------- yandex_search ----------
