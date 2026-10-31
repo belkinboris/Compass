@@ -177,6 +177,34 @@ def last_by_deal(decisions, verdicts):
     return result
 
 
+def late_decisions(deals, cards, decisions):
+    """Карточные решения по карточкам, которых в очереди уже нет, а в базе —
+    есть: владелец нажал «выкинуть» (или «придержать») ПОСЛЕ того, как
+    карточка вышла на сайт. Раньше такие решения не применялись и молча
+    гасились на сайте (`g4f594e81`, 27 октября 2026; бэклог H1).
+    Возвращает [(карточка из базы, решение)]."""
+    in_queue = {c['id'] for c in cards}
+    by_deal = last_by_deal(decisions, CARD_VERDICTS)
+    out = []
+    for deal in deals:
+        d = by_deal.get(deal.get('id'))
+        if d and deal['id'] not in in_queue:
+            out.append((deal, d))
+    return out
+
+
+def apply_late_discard(data, state, deal, now):
+    """Снять уже опубликованную карточку по позднему «выкинуть»: как сделал
+    бы approve.py, увидев решение вовремя. Пост в канале (если был) остается —
+    его удаление решает человек; отметка `telegram_posts` не трогается."""
+    data['deals'] = [x for x in data['deals'] if x['id'] != deal['id']]
+    for s in deal.get('src') or []:
+        if len(s) > 1 and str(s[1]).startswith('http'):
+            state.setdefault('discarded_urls', {})[str(s[1])] = {
+                'id': deal['id'], 'title': deal.get('title'),
+                'at': now.isoformat(timespec='seconds'), 'by': 'late_discard'}
+
+
 def plan_actions(cards, decisions, now):
     """(публикуем, придерживаем, ждем) — чистая функция, ее держат тесты.
 
@@ -299,6 +327,15 @@ def main(write=False):
     decisions, handle = fetch_decisions()
     now = datetime.now(timezone.utc)
     publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now)
+    base_now = json.load(open(DATA, encoding='utf-8'))
+    late = late_decisions(base_now['deals'], pending['cards'], decisions)
+    for deal, d in late:
+        posted = deal['id'] in (base_now.get('telegram_posts') or {})
+        print('  ПОЗДНЕЕ РЕШЕНИЕ по опубликованной %-11s %s — %s%s'
+              % (deal['id'], str(deal.get('title') or '')[:56],
+                 {'discard': 'снимаем с сайта', 'hold': 'уже вышла, придержать нечего',
+                  'approve': 'уже вышла'}.get(d['verdict'], d['verdict']),
+                 '; пост в канале был — удалите руками, если нужно' if posted and d['verdict'] == 'discard' else ''))
     # ГОТОВАЯ КАРТОЧКА, КОТОРУЮ ВЛАДЕЛЕЦ НЕ ВИДЕЛ, — ТУПИК, А НЕ ОЧЕРЕДЬ
     # (27 октября 2026: 13 принятых карточек трое суток не показывались;
     # владелец — «если карточка готова, в чем проблема ее показать?»).
@@ -438,6 +475,15 @@ def main(write=False):
         fresh.append(clean)
     for card, _why in hold:
         card['held'] = True
+    base_changed = False
+    for deal, d in late_decisions(data['deals'], pending['cards'], decisions):
+        if d['verdict'] == 'discard':
+            apply_late_discard(data, state, deal, now)
+            base_changed = True
+            print('  СНЯТА С САЙТА %-11s %s (позднее «выкинуть»)' % (deal['id'], str(deal.get('title'))[:56]))
+            import fix_files
+            for path in fix_files.drop_fixes_for(deal['id']):
+                print('  СНЯТ ФАЙЛ ПРАВОК %s' % os.path.relpath(path, ROOT))
     gone_ids = {c['id'] for c, _o, _w in publish} | {c['id'] for c, _w in discard}
     pending['cards'] = [c for c in pending['cards'] if c['id'] not in gone_ids]
     # Файлы правок выкинутой карточки больше никому не нужны (бэклог A25).
@@ -497,7 +543,7 @@ def main(write=False):
         # Не печатаем повторно: план по сырью уже назван выше, до сухого
         # возврата, и второй такой же строкой отчет только шумит.
 
-    if fresh:
+    if fresh or base_changed:
         # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
         # читает только facts, не покажет их ни в одном показателе.
         if ROOT not in sys.path:

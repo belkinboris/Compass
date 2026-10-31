@@ -54,6 +54,12 @@ WORK = os.environ.get('SHIP_WORKTREE') or (ROOT + '-ship')
 LINKED_INBOX = ('raw', 'triage', 'drafts')   # hold — в git, приезжает с origin/main
 INGEST = os.path.join(WORK, 'pipeline', 'ingest')
 BASE = os.path.join(WORK, 'static', 'data', 'deals_promoted.json')
+# ОТПРАВКА ПОСТОВ — ТОЖЕ ИЗ РАБОЧЕЙ КОПИИ. send_telegram читает базу по
+# своему `__file__`; запуск скрипта из основной копии (`HERE`) видел базу
+# БЕЗ только что одобренной карточки, честно отвечал «очередь пуста /
+# Отправлено новых: 0» — и четыре раза за 29 октября 2026 посты по решениям
+# владельца уходили руками (бэклог D4, known_issues/publication.md).
+SEND_TELEGRAM = os.path.join(WORK, 'pipeline', 'publish', 'send_telegram.py')
 COMMIT_PATHS = ['static/data/deals_promoted.json', 'static/data/pending.json',
                 'data/inbox/moderation_state.json', 'pipeline/ingest/fixes']
 
@@ -152,6 +158,14 @@ def decisions_planned():
 
 
 LOCK = os.path.join(ROOT, 'data', 'inbox', 'ship_decisions.lock')
+
+
+def posts_not_sent(base, expected):
+    """Опубликованные карточки, у которых нет ни поста, ни «без поста»."""
+    posted = set(base.get('telegram_posts') or {}) | set(base.get('telegram_posts_realty') or {})
+    deals = {d.get('id'): d for d in base.get('deals') or []}
+    return [i for i in expected
+            if i in deals and i not in posted and not deals[i].get('no_post')]
 
 
 def main(argv):
@@ -276,13 +290,17 @@ def _main(argv, write):
     log('Сайту подтверждено: решения применены.')
 
     log('Посты по решениям — send_telegram --write --finish --wait-for-site 15 (ждет сайт и паузы между постами)…')
-    r = run([sys.executable, os.path.join(HERE, 'send_telegram.py'), '--write', '--finish', '--wait-for-site', '15'], must=False)
+    r = run([sys.executable, SEND_TELEGRAM, '--write', '--finish', '--wait-for-site', '15'], must=False)
     tail = [l for l in r.stdout.splitlines() if l.strip()][-6:]
     for l in tail:
         log('  ' + l)
     if r.returncode:
         log('СТОП: отправка постов не прошла (код %d) — см. строки выше; база уже в main.' % r.returncode)
         return 1
+    silent = posts_not_sent(json.load(open(BASE, encoding='utf-8')), expected)
+    if silent:
+        log('ВНИМАНИЕ: карточки вышли на сайт, а поста по ним нет: %s — '
+            'отправьте руками: python3 %s --write --finish' % (', '.join(silent), SEND_TELEGRAM))
     if git('status', '--porcelain', '--', 'static/data/deals_promoted.json'):
         run([sys.executable, '-m', 'pytest', 'test_data.py', '-q', '-p', 'no:cacheprovider'])
         git('add', '--', 'static/data/deals_promoted.json')
