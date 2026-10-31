@@ -176,14 +176,10 @@ def load_fixes():
     return out
 
 
-# ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ. Причин две, и вторая
-# важнее первой: (1) одна общая таблица росла на ~3 тыс. знаков с каждой
-# прочитанной карточки и на дистанции дочитывания всей базы перестала бы
-# помещаться в контекст; (2) пока таблица одна, два потока, читающие РАЗНЫЕ
-# партии, конфликтуют в git на каждом коммите. Своя партия — свой файл, и
-# дочитывание можно вести в несколько сессий одновременно.
-#
-# `quote` — дословный кусок источника, `why` — что именно правило не увидело.
+# ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ: одна общая таблица росла
+# на ~3 тыс. знаков с карточки и не влезала бы в контекст, а два потока, читающие
+# разные партии, конфликтовали бы на каждом коммите. `quote` — дословный кусок
+# источника, `why` — что именно правило не увидело.
 FIXES = load_fixes()
 
 
@@ -939,8 +935,9 @@ def advisories(card, companies):
 
 
 def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=(),
-         milestone=None):
-    _self_check()
+         milestone=None, self_check=False):
+    if self_check:  # --self-check; всегда — в test_draft_self_checks_pass
+        _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
     # базы: читающий правит их ДО того, как владелец увидит проект поста, —
@@ -1183,7 +1180,7 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
 if __name__ == '__main__':
     _args = sys.argv[1:]
     _flags = ('--write', '--mark-read', '--mark-deep', '--mark-weekly', '--mark-followup',
-              '--milestone')
+              '--milestone', '--self-check')
     _ids = [a for a in _args if a not in _flags]
     _milestone = None
     if '--milestone' in _args:
@@ -1199,4 +1196,4 @@ if __name__ == '__main__':
                   mark_deep=_ids if '--mark-deep' in _args else (),
                   mark_weekly=_ids if '--mark-weekly' in _args else (),
                   mark_followup=_ids if '--mark-followup' in _args else (),
-                  milestone=_milestone))
+                  milestone=_milestone, self_check='--self-check' in _args))

@@ -6417,6 +6417,23 @@ def test_no_duplicate_fix_for_one_field():
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
 
 
+def test_draft_self_checks_pass():
+    """Самопроверки правил черновика и таблицы правок — здесь, а не при импорте.
+
+    До 31 октября 2026 `draft.py` гонял `_industry_self_check()` и
+    `_parties_self_check()` на каждом `import draft` (то есть в каждом посте,
+    консоли и приемке), а `review.main()` — `_self_check()` на каждом прогоне.
+    Теперь они проверяются тестом (и `review.py --self-check` по желанию)."""
+    import draft as drafter
+    import review
+    drafter._industry_self_check()
+    drafter._parties_self_check()
+    review._self_check()
+    src = (ROOT / "pipeline" / "ingest" / "draft.py").read_text(encoding="utf-8")
+    assert not re.search(r"(?m)^_(industry|parties)_self_check\(\)", src), \
+        "самопроверка draft.py снова выполняется при импорте"
+
+
 def test_fix_batches_live_in_separate_files():
     """Партии правок разложены по файлам — иначе параллельное чтение невозможно.
 
