@@ -1302,6 +1302,8 @@ def test_list_links_on_all_answers_of_the_third_check():
     rows = [_json.loads(x) for x in path.read_text(encoding="utf-8").splitlines()][1:]
     wrong, outside, checked = [], [], 0
     false_lines = [line[2:40] for line, _, _ in FALSE_LINK_LINES]
+    base_path = main.pathlib.Path(main.__file__).parent / "static" / "data" / "deals_promoted.json"
+    merged = _json.loads(base_path.read_text(encoding="utf-8")).get("merged") or {}
     for r in rows:
         answer = r.get("answer") or ""
         if not answer or r.get("model") is False:
@@ -1324,7 +1326,11 @@ def test_list_links_on_all_answers_of_the_third_check():
             if not ids:
                 continue
             checked += 1
-            if orig[i] and ids[0] not in orig[i]:
+            # Слитый дубль (merged[старый] = выживший) — та же сделка:
+            # после G15 (1 ноября 2026) ответ 18 октября ссылался на id,
+            # которого в базе больше нет, а ссылка ведет на выжившую карточку.
+            same = {merged.get(o, o) for o in orig[i]} | set(orig[i])
+            if orig[i] and ids[0] not in same:
                 wrong.append((r["n"], line[:120]))
             if not section_ok:
                 outside.append((r["n"], line[:120]))
