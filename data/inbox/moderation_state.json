@@ -3426,7 +3426,8 @@
   "d00097583": "auto-drop",
   "d24195503": "auto-drop",
   "d84583682": "auto-drop",
-  "d86102900": "auto-drop"
+  "d86102900": "auto-drop",
+  "d88391916": "auto-drop"
  },
  "sent_raw": [
   "d89202979",
@@ -6837,7 +6838,8 @@
   "d00097583": "иностранные сделки/новости без российской стороны (OpenAI, Кандинский на Christie's, Salesforce, Anthropic) и потребительская статистика (кофе)",
   "d24195503": "иностранные сделки/новости без российской стороны (OpenAI, Кандинский на Christie's, Salesforce, Anthropic) и потребительская статистика (кофе)",
   "d84583682": "иностранные сделки/новости без российской стороны (OpenAI, Кандинский на Christie's, Salesforce, Anthropic) и потребительская статистика (кофе)",
-  "d86102900": "иностранные сделки/новости без российской стороны (OpenAI, Кандинский на Christie's, Salesforce, Anthropic) и потребительская статистика (кофе)"
+  "d86102900": "иностранные сделки/новости без российской стороны (OpenAI, Кандинский на Christie's, Salesforce, Anthropic) и потребительская статистика (кофе)",
+  "d88391916": "личная потребительская история о покупке квартиры частным лицом, не сделка"
  },
  "raw_titles": {
   "всшавыставилинапродажудомдетстванилаармстронга": "drop",
@@ -10454,7 +10456,8 @@
   "подчеркнутыеуглыкандинскоговыставятнааукционеchristies": "auto-drop",
   "аналитикиподсчиталисколькокофеможнокупитьнасреднююзарплату": "auto-drop",
   "salesforcesmaspreecontinueswithareported375mdealfordefensetechstartuprune": "auto-drop",
-  "anthropicexpectedtoreceivehighjunkratingfromcreditagenciesfollowingipoftreportsays": "auto-drop"
+  "anthropicexpectedtoreceivehighjunkratingfromcreditagenciesfollowingipoftreportsays": "auto-drop",
+  "запаххотьсвятыхвыносиростовчанкакупилаквартируитеперьвсемсоветуетнеповторятьееошибки": "auto-drop"
  },
  "discarded_urls": {
   "https://t.me/rusven/7641": {
