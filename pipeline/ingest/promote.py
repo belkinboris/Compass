@@ -470,7 +470,159 @@ def near_duplicate(draft, idx, df, rare=5):
                 and any(matcher.entity_agree(t_asset, key) for key in (row.get('target_keys') or set()))):
             return row['id'], ('тот же предмет, что у карточки со статусом «Обсуждается» без движения'
                                ' — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе')
+    return whole_base_twin(draft, idx, df)
+
+
+# ПО ВСЕЙ БАЗЕ, БЕЗ ОКНА ПО ДАТЕ (31 октября 2026). «Росатом купил в Мали
+# компанию для проекта Бугула» (30.10.2026) прошел ворота новой карточкой, хотя
+# в базе с 2024 года лежит «Росатом развивает литиевый проект в Мали (Бугула)»:
+# все правила выше ограничены 7/30/45/90 днями или двумя годами, а связь
+# «покупатель + предмет» в match.py — только у незакрытых карточек. Владелец:
+# «естественно, нужно смотреть по всей базе — если мы опубликуем новую
+# карточку о сделке, которая уже была, что это вообще такое?»
+# Два признака, которые не зависят от даты и почти не дают шума (замер по всей
+# базе — `pipeline/base_duplicates_scan.py`): (1) та же сторона в той же роли
+# и тот же предмет — покупатель или продавец плюс предмет; (2) та же сторона
+# в любой роли и общее РЕДКОЕ слово заголовка (встречается в базе не больше
+# двух раз), которое не является частью имени самой стороны. Срабатывание —
+# не отказ, а вопрос: черновик уходит в очередь дублей, приток читает обе
+# карточки и решает — этап, дополнение или другая сделка.
+WHOLE_BASE_RARE = 2
+# Слово имени стороны считается именем, если оно встречается у сторон базы не
+# чаще стольких раз: «realweb», «киви», «бугула» — имена; «птицефабрика»,
+# «банк», «завод» — виды объектов, по ним сделки не склеиваются.
+PROPER_MAX = 6
+_LAT = dict(zip('abcdefghijklmnopqrstuvwxyz', 'абкдефгхийклмнопкрстуввксиз'))
+
+
+# Вид объекта, а не его имя: по таким словам сделки не склеиваются, даже если
+# в базе их мало («Траст» продал птицефабрику ≠ «Траст» продал другую птицефабрику).
+_OBJECT_WORDS = {
+    'завод', 'заводы', 'завода', 'фабрика', 'фабрику', 'птицефабрика', 'птицефабрику', 'комбинат',
+    'гостиница', 'гостиницу', 'отель', 'отеля', 'бизнес', 'центр', 'центра', 'торговый', 'склад',
+    'склады', 'база', 'базу', 'офис', 'офиса', 'здание', 'здания', 'участок', 'участка', 'земельный',
+    'месторождение', 'клиника', 'клиники', 'клиник', 'магазин', 'магазины', 'сеть', 'сети', 'банк',
+    'банка', 'компания', 'компании', 'группа', 'холдинг', 'проект', 'проекта', 'актив', 'активы',
+    'доля', 'долю', 'доли', 'акции', 'акций', 'пакет', 'имущество', 'недвижимость', 'объект',
+    'комплекс', 'санаторий', 'пансионат', 'элеватор', 'терминал', 'порт', 'аэропорт', 'шахта',
+    'рудник', 'агрохолдинг', 'агрокомплекс', 'производство', 'производителя', 'производитель',
+    'разработчика', 'разработчик', 'сервис', 'сервиса', 'платформа', 'платформу', 'российский',
+    'российские', 'российского', 'области', 'область', 'края', 'края', 'республики', 'москве', 'москвы',
+    # недвижимость и наследие — «Дом.РФ» продает десятки особняков и усадеб
+    'особняк', 'особняка', 'усадьба', 'усадьбу', 'усадьбы', 'право', 'права', 'застройку', 'застройки',
+    'крт', 'корпус', 'корпуса', 'казармы', 'палаты', 'дом', 'дома', 'историческое', 'исторический',
+    'исторического', 'купеческий', 'купеческого', 'памятник', 'лот', 'лоты', 'квартира', 'квартиры',
+    'помещение', 'помещения', 'офисное', 'офисный', 'офисного', 'территория', 'территории', 'парк',
+    'рынок', 'рынка', 'филиал', 'филиала', 'дочку', 'дочка', 'дочки', 'дочерняя', 'подразделение',
+    'дивизион', 'сортовое', 'сортовой', 'госпакет', 'госдолю', 'госдоля', 'аэропорта', 'порта',
+    'месторождения', 'месторождений', 'участки', 'земли', 'земельные', 'начала', 'века', 'xvii', 'xviii',
+    'xix', 'центре', 'части', 'часть', 'бывший', 'бывшего', 'бывшую', 'новый', 'новая', 'старинную',
+}
+
+
+_SHORT_STOP = {'для', 'под', 'над', 'при', 'без', 'или', 'его', 'еще', 'все', 'год', 'лет', 'тыс',
+               'млн', 'руб', 'долл', 'and', 'the', 'для', 'них', 'она', 'они', 'это', 'как'}
+
+
+def _name_tokens(key):
+    out = set()
+    for w in str(key or '').split():
+        # Короткие имена — тоже имена: OBI, ВТБ, ВЭБ, EKE, МТС.
+        if len(w) >= 3 and w not in _OBJECT_WORDS and w not in _SHORT_STOP:
+            out.add(w)
+            if re.fullmatch(r'[a-z0-9]+', w):
+                out.add(''.join(_LAT.get(ch, ch) for ch in w))
+    return out
+
+
+_PARTY_DF = {}
+
+
+def _party_df(idx):
+    key = id(idx)
+    if key not in _PARTY_DF:
+        df = {}
+        for row in idx:
+            seen = set()
+            for k in (row.get('buyer_keys') or set()) | (row.get('target_keys') or set()) | (row.get('seller_keys') or set()):
+                seen |= _name_tokens(k)
+            for t in seen:
+                df[t] = df.get(t, 0) + 1
+        _PARTY_DF.clear()
+        _PARTY_DF[key] = df
+    return _PARTY_DF[key]
+
+
+def _draft_parties(draft):
+    roles = {'buyer': draft.get('buyer_name'), 'seller': draft.get('seller'), 'asset': draft.get('asset')}
+    keyed = {r: matcher.entity_key(v) for r, v in roles.items() if matcher.entity_key(v)}
+    names = set(keyed.values()) | {matcher.entity_key(q) for q in raw_quoted_names(draft.get('title'))
+                                   if matcher.entity_key(q)}
+    return keyed, names
+
+
+def raw_quoted_names(title):
+    return re.findall(r'[«"]([^»"]{2,60})[»"]', str(title or ''))
+
+
+def whole_base_twin(draft, idx, df):
+    keyed, names = _draft_parties(draft)
+    if not names:
+        return None
+    pdf = _party_df(idx)
+    proper = lambda toks: {t for t in toks if pdf.get(t, 0) <= PROPER_MAX}
+
+    def agree(value, keys):
+        mine = _name_tokens(value)
+        return {t for k in (keys or set()) for t in _name_tokens(k) if t in mine}
+
+    t_stems = matcher.stems(str(draft.get('title') or ''))
+    for row in idx:
+        if row.get('separate_transaction_reviewed'):
+            continue
+        hit = {r: agree(keyed[r], keys) for r, keys in (('buyer', row.get('buyer_keys')),
+                                                         ('seller', row.get('seller_keys')),
+                                                         ('asset', row.get('target_keys'))) if keyed.get(r)}
+        roles = {r for r, toks in hit.items() if toks}
+        # Две стороны в своих ролях, и хотя бы одно совпадение — редкое имя:
+        # «Qiwi» стоит во многих сделках, «RealWeb» — в одной.
+        if len(roles) >= 2 and any(proper(toks) for toks in hit.values()):
+            return row['id'], 'по всей базе: совпали две стороны (%s)' % ', '.join(sorted(roles))
+        keys = (row.get('buyer_keys') or set()) | (row.get('target_keys') or set()) | (row.get('seller_keys') or set())
+        shared = set()
+        for n in names:
+            shared |= agree(n, keys)
+        if not shared:
+            continue
+        rare = sorted(s for s in t_stems & row['stems']
+                      if df.get(s, 0) <= WHOLE_BASE_RARE and not s.isdigit()
+                      and not any(t.startswith(s[:4]) for t in shared))
+        if rare:
+            return row['id'], 'по всей базе: та же сторона и редкое слово: %s' % ', '.join(rare)
     return None
+    t_stems = matcher.stems(str(draft.get('title') or ''))
+    agree = lambda a, keys: bool(a) and any(matcher.entity_agree(a, k) for k in (keys or set()))
+    for row in idx:
+        if row.get('separate_transaction_reviewed'):
+            continue
+        same_target = agree(keyed.get('asset'), row.get('target_keys'))
+        if same_target and (agree(keyed.get('buyer'), row.get('buyer_keys'))
+                            or agree(keyed.get('seller'), row.get('seller_keys'))):
+            return row['id'], 'по всей базе: та же сторона и тот же предмет'
+        keys = (row.get('buyer_keys') or set()) | (row.get('target_keys') or set()) | (row.get('seller_keys') or set())
+        shared = [(n, k) for n in names for k in keys if matcher.entity_agree(n, k)]
+        if not shared:
+            continue
+        own = ' '.join('%s %s' % pair for pair in shared)
+        rare = sorted(s for s in t_stems & row['stems']
+                      if df.get(s, 0) <= WHOLE_BASE_RARE and not s.isdigit() and s[:4] not in own)
+        if rare:
+            return row['id'], 'по всей базе: та же сторона и редкое слово: %s' % ', '.join(rare)
+    return None
+
+
+def _weak_match(why):
+    return not matcher.is_strong(why)
 
 
 def check(draft, base, idx, inds, df=None, dup_out=None):
@@ -592,7 +744,17 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
          'url': src[0][1] if src else None, 'buyer': draft.get('buyer_name'),
          'asset': draft.get('asset'), 'seller': draft.get('seller'),
          'status': draft.get('status')}, idx)
-    if found:
+    if found and _weak_match(why):
+        # СЛАБОЕ СОВПАДЕНИЕ — НЕ ОТКАЗ, А ВОПРОС (31 октября 2026). Общие слова
+        # заголовка склеивали разные сделки одного игрока («Газпром выставил
+        # на торги базу отдыха» = «…гостиницу „Урал“»; любое новое IPO «на
+        # Московской бирже» = чужое IPO), и новая сделка молча терялась.
+        # Отказ — только по сильным признакам (тот же адрес, имя и сумма,
+        # покупатель и предмет открытой сделки, тот же набор имен).
+        if dup_out is not None:
+            dup_out.append((found, why))
+        hold.append('%s %s (%s) — проверьте, не дубль ли' % (DUP_CANDIDATE_MARK, found, why))
+    elif found:
         bad.append('такая сделка уже есть в базе: %s (%s)' % (found, why))
     else:
         # ПОЧТИ-ДУБЛЬ ОТДАЕМ ЧЕЛОВЕКУ, А НЕ ПУСКАЕМ. `match.py` объявляет дубль
