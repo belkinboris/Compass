@@ -273,3 +273,30 @@ Padel, `gx4padel01`).** Первый раунд нашёл: заголовок �
 Повод для карточки Муслюмовского участка: продавца не было в статье, но он
 нашелся в приказе о торгах, который прислал владелец, — запись о поиске не
 понадобилась.
+
+## Заглушки — placeholders.py (31 октября 2026)
+
+**Одно определение «поле пусто» на весь код и экран:** `pipeline/placeholders.py`
+(`DASHES`, `PLACEHOLDER`, `is_empty(value, field=None)`, `has(value, field=None)`,
+примеры `EXAMPLES`/`NOT_EXAMPLES`). До этого дня «пусто» было записано восемью
+регэкспами, и они расходились: accept_card считал фактами «–», «н/д» и
+«не раскрыта.» с точкой, promote — «нет данных» и «не привлекался», check_post —
+«н/д»; одна и та же строка в одном гейте была пустотой, в другом — фактом
+(пункт H5 аудита кода 28 октября 2026).
+
+Правило: заглушка — только строка, в которой кроме формулировки отсутствия
+ничего нет (анкер с обеих сторон): «не раскрыта (EV оценена в 21 млрд ₽)» —
+факт. У `status` заглушки не бывает — там слова и есть значения.
+
+**Кто зовет канон:** accept_card (`has`, `PLACEHOLDER` — ссылки на канон),
+promote, check_post (намеренные строки поста «… не раскрыт» у сторон и
+«Сумма: не раскрывается» — исключения по имени), proofread (его регэксп берет и
+text_rules), subscription_feed (и notify_subscribers), assistant_retrieval,
+deal_export, test_data (`PLACEHOLDER`, `LAW_PLACEHOLDER`, `is_placeholder`).
+Экран (`PLACEHOLDER`/`hasFact` в `static/index.html`) держит тот же регэксп
+слово в слово — `test_data.test_placeholder_canon_matches_the_screen`; все
+варианты, которые встречались в базе, — `test_placeholders_canon_catches_every_variant_seen_in_the_base`.
+
+**Намеренно свое:** `card_text.has` — ему нужно показывать «не раскрыта»
+читателю, а не прятать. `write_card.EMPTY` и `format_post.PLACEHOLDER`
+переводятся на канон следующим заходом (их правит другой агент).

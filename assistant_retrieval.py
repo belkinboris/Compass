@@ -45,6 +45,7 @@ from typing import Any
 
 from deal_multiples import is_estimate, parse_rub_sum
 from facts import PURCHASE_TYPES
+from pipeline import placeholders
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "static" / "data" / "deals_promoted.json"
@@ -269,13 +270,12 @@ def period_text(span: Span | None) -> str:
     return f" по {hi} год включительно"
 
 
-PLACEHOLDER = re.compile(
-    r"^\s*(не\s+раскры[а-яё]*|публично\s+не\s+сообщал[а-яё]*|не\s+привлекал[а-яё]*|не\s+сообщал[а-яё]*|"
-    r"нет\s+данных|—|-|n/?a|неизвестн[а-яё]*)?\s*\.?\s*$", re.I)
+# Заглушки — один канон на весь код: pipeline/placeholders.py.
+PLACEHOLDER = placeholders.PLACEHOLDER
 
 
 def has_fact(value: Any) -> bool:
-    return bool(value) and not PLACEHOLDER.match(str(value))
+    return placeholders.has(value)
 
 
 # --------------------------------------------------------------------------

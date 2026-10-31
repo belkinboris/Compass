@@ -15,6 +15,8 @@ from pathlib import Path
 
 import pytest
 
+from pipeline import placeholders
+
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "static" / "data" / "deals_promoted.json"
 INDEX = ROOT / "static" / "index.html"
@@ -89,8 +91,8 @@ def test_buyer_is_not_seller(deals):
     assert not conflict, f"компания одновременно покупатель и продавец: {conflict[:5]}"
 
 
-PLACEHOLDER = re.compile(
-    r"^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$", re.I)
+# Заглушки — один канон на весь код (pipeline/placeholders.py, H5, 31 октября 2026).
+PLACEHOLDER = placeholders.PLACEHOLDER
 
 
 ROLE_PAIRS = (("buyer", "target"), ("buyer", "seller_id"), ("target", "seller_id"),
@@ -142,7 +144,7 @@ def test_ma_deal_names_a_party(deals):
 def test_seller_is_not_a_placeholder(deals):
     """«Продавец: не раскрыт» — это пустое поле, а не имя стороны."""
     bad = [(d["id"], d["seller"]) for d in deals
-           if d.get("seller") and PLACEHOLDER.match(str(d["seller"]).strip())]
+           if d.get("seller") and placeholders.is_empty(d["seller"])]
     assert not bad, f"заглушка записана как продавец: {bad[:5]}"
 
 
@@ -404,15 +406,11 @@ def test_company_descriptions_have_no_internal_jargon(base):
 # сообщалось», где между «публично» и «не» стоит дополнение. Шаблон без этого
 # молча не считал такую строку заглушкой — тот же класс беззвучного отказа,
 # что `\b` после приставки (см. CLAUDE.md).
-LAW_PLACEHOLDER = re.compile(
-    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+(?:об?\s+\S+\s+)?не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
-    r"|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*"
-    r"(?:\s+(?:официально|публично))?)[.\s]*$", re.I)
+LAW_PLACEHOLDER = placeholders.PLACEHOLDER
 
 
 def is_placeholder(value):
-    text = str(value or "").strip()
-    return not text or bool(LAW_PLACEHOLDER.match(text))
+    return placeholders.is_empty(value)
 
 
 APPROVAL_BODY = re.compile(
@@ -2047,3 +2045,57 @@ def test_cards_have_no_yo_letter(deals):
         if _re.search("[ёЁ]", text):
             bad.append(d["id"])
     assert not bad, "«е» в карточках: %s — python3 pipeline/strip_yo.py --write" % bad[:10]
+
+
+# ---------------------------------------------------------------------------
+# Заглушки: один канон на весь код и экран (pipeline/placeholders.py, H5
+# аудита кода, 31 октября 2026). До этого «пусто» было записано восемью
+# регэкспами, и они расходились: accept_card считал «н/д» и «не раскрыта.»
+# фактами, promote — «нет данных», check_post — «н/д».
+
+def test_placeholders_canon_catches_every_variant_seen_in_the_base():
+    """Замер по базе 31 октября 2026: все варианты заглушек, которые в ней
+    реально встречаются, плюс те, что ловили только отдельные регэкспы."""
+    seen_in_base = ["—", None, "публично не сообщалось", "не раскрыта", "", "не раскрывался",
+                    "не раскрывалось", "не раскрывалась", "не раскрыта."]
+    only_in_regexps = ["–", "н/д", "n/a", "N/A", "нет данных", "не определена", "неизвестно",
+                       "Не раскрывался", "не привлекался", "Публично о согласованиях не сообщалось",
+                       "не раскрыта. ", " — ", "None"]
+    for v in seen_in_base + only_in_regexps + list(placeholders.EXAMPLES):
+        assert placeholders.is_empty(v), repr(v)
+        assert not placeholders.has(v), repr(v)
+    for v in placeholders.NOT_EXAMPLES + ("не раскрыта (EV оценена в 21 млрд ₽)", "1 ₽", ["x"], 1):
+        assert placeholders.has(v), repr(v)
+    # У статуса слова — значения, а не рассказ об отсутствии.
+    assert placeholders.has("не определена", field="status")
+    assert placeholders.is_empty("—", field="status")
+    # Старые регэкспы ушли: каждый модуль показывает один и тот же канон.
+    import sys as _sys
+    from pathlib import Path as _Path
+    for sub in ("pipeline", "pipeline/ingest", "pipeline/publish"):
+        p = str(_Path(__file__).resolve().parent / sub)
+        if p not in _sys.path:
+            _sys.path.insert(0, p)
+    import accept_card, promote, check_post, proofread, subscription_feed, assistant_retrieval, deal_export  # noqa: E401,E402
+    for mod in (accept_card, promote, check_post, proofread, subscription_feed, assistant_retrieval):
+        assert mod.PLACEHOLDER is placeholders.PLACEHOLDER, mod.__name__
+    assert deal_export._PLACEHOLDER is placeholders.PLACEHOLDER
+    assert accept_card.has("не раскрыта.") is False and accept_card.has("н/д") is False
+
+
+def test_placeholder_canon_matches_the_screen():
+    """Экран (`PLACEHOLDER`/`hasFact` в static/index.html) держит тот же
+    регэксп слово в слово: иначе «здесь пусто» в гейте и на сайте значит
+    разное (у g5e0f6a47 оценка в 21 млрд ₽ пропадала вместе с заглушкой)."""
+    html = INDEX.read_text(encoding="utf-8")
+    m = re.search(r"^const PLACEHOLDER = /(.*)/i;$", html, re.M)
+    assert m, "в index.html нет const PLACEHOLDER"
+    js_pattern = m.group(1).replace("\\/", "/")
+    assert js_pattern == placeholders.PLACEHOLDER.pattern
+    screen = re.compile(js_pattern, re.I)
+    for v in placeholders.EXAMPLES:
+        if v in ("", "None", "null"):      # на экране null и "" отсекает hasFact до регэкспа
+            continue
+        assert screen.match(v.strip()), repr(v)
+    for v in placeholders.NOT_EXAMPLES:
+        assert not screen.match(v), repr(v)

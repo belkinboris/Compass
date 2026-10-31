@@ -17,6 +17,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Flowable, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 from xml.sax.saxutils import escape
 
+from pipeline import placeholders
+
 
 # Шрифт с кириллицей едет В ПОСТАВКЕ (static/fonts/DejaVuSans*.ttf, лицензия
 # DejaVu/Bitstream Vera — свободная), а системные каталоги — только запасной
@@ -180,11 +182,12 @@ def _text(value: Any) -> str:
     return str(value)
 
 
-_PLACEHOLDER = re.compile(r"^\s*(—|-|не раскрыт\w*|публично не сообщалось|не привлекал\w*|нет данных)\s*\.?\s*$", re.I)
+# Заглушки — один канон на весь код: pipeline/placeholders.py.
+_PLACEHOLDER = placeholders.PLACEHOLDER
 
 
 def _has_fact(value: Any) -> bool:
-    return bool(value) and isinstance(value, str) and not _PLACEHOLDER.match(value)
+    return isinstance(value, str) and placeholders.has(value)
 
 
 def _clean_note(note: Any) -> tuple[str, str | None]:
