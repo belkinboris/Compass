@@ -61,6 +61,7 @@ import format_post                 # noqa: E402
 import check_post                  # noqa: E402
 import proofread                   # noqa: E402
 import readiness                   # noqa: E402
+import title_style                 # noqa: E402
 import source_names                # noqa: E402
 import normalize_sum               # noqa: E402
 
@@ -753,6 +754,14 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     if INVESTED_COLLOQUIAL.search(str(card.get('title') or '')):
         out.append(('title_invested', 'в заголовке «вложил(ся/ась)» — пишем «проинвестировал(а)»: '
                     '«ЗПИФ «ВИМ инвестиций» проинвестировал в 42% Swordfish Security»'))
+    # Единый стиль заголовка (владелец, 31 октября 2026: «перепиши, надо чтобы
+    # все единообразно было»; база переписана партией G3) — новая карточка
+    # проверяется тем же правилом: длина, юрлицо вместо бренда, канцелярит,
+    # вторая мысль, глагол по статусу (title_style.py, docs/card_title.md).
+    for problem in title_style.title_style_findings(card.get('title'), comps, card.get('status')):
+        if 'вложил' in problem:
+            continue  # уже названо выше, своей находкой
+        out.append(('title_style', 'заголовок не по стилю базы: %s — перепишите по docs/card_title.md' % problem))
     asset = card.get('asset')
     if asset:
         fixed, changed = casing.to_nominative_asset(asset)
