@@ -46,7 +46,7 @@ if ROOT not in sys.path:
 _INGEST = os.path.join(ROOT, 'pipeline', 'ingest')
 if _INGEST not in sys.path:
     sys.path.insert(0, _INGEST)
-from review import _same_word  # noqa: E402
+from textmatch import _same_word  # noqa: E402  (31.10.2026: без review и fixes/)
 # Адрес витрины, который уходит в ссылки телеграм-поста. Домен был вписан
 # в код числом — и не тот: сайт живет на projectcompass.ru, а посты вели бы
 # читателя на kompas.deals. Берем из переменной окружения `APP_BASE_URL` (той
@@ -70,13 +70,7 @@ def has(value):
     return bool(v) and not PLACEHOLDER.match(v)
 
 
-def _plural(n, one, few, many):
-    n = abs(int(n))
-    if n % 10 == 1 and n % 100 != 11:
-        return one
-    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
-        return few
-    return many
+from pipeline.textutil import plural as _plural  # noqa: E402
 
 
 def esc(text):

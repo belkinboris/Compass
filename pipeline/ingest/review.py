@@ -58,6 +58,8 @@ from source_names import has_source, settle_sources  # noqa: E402
 from link_parties import company_key as _linker_key        # noqa: E402
 from deal_multiples import SUM_BASES, DATE_BASES         # noqa: E402
 import tag_themes                                         # noqa: E402
+from textmatch import _same_word, _yo, typo_flat  # noqa: E402,F401  (31.10.2026: без review)
+from milestones import POSTWORTHY_MILESTONE_KINDS  # noqa: E402,F401
 import link_named_parties_to_existing_profiles as linker  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -69,15 +71,6 @@ PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 MONTHS = {'января': 1, 'февраля': 2, 'марта': 3, 'апреля': 4, 'мая': 5, 'июня': 6,
           'июля': 7, 'августа': 8, 'сентября': 9, 'октября': 10, 'ноября': 11,
           'декабря': 12}
-
-# Раздел A (MILESTONES_BRIEF.md, 22 августа): не каждая веха достойна
-# отдельной строки в ленте и отдельного поста в канал — только эти три вида.
-# `signed` сознательно не в списке v1 (обсудить с владельцем отдельно),
-# `negotiations` никогда не был кандидатом: это состояние сделки, а не
-# новость о ней. Список закрытый и используется и в ленте (static/index.html
-# читает то же самое множество через ту же логику kind), и при сборке поста
-# в канал — единое место, а не два рассинхронизирующихся списка.
-POSTWORTHY_MILESTONE_KINDS = frozenset({'approval', 'closed', 'cancelled'})
 
 # Слово, которым подтверждается статус. Список закрытый: статус — единственное
 # поле, которое не цитируется дословно, поэтому обоснование должно быть
@@ -160,7 +153,8 @@ TYPE_WORDS = {
 # сам, прочитаны против текста источника. `quote` — дословный кусок источника,
 # `why` — что именно правило не увидело и почему.
 def load_fixes():
-    """Собрать правки из всех файлов `fixes/*.py`, в порядке имен.
+    """Собрать правки: архив `fixes_archive/*.json` (примененные партии, свернутые
+    `fixes_compact.py`, 31.10.2026) + живые `fixes/*.py`, партии — в порядке имен.
 
     Порядок важен: `main()` читает состояние карточки ОДИН раз в начале
     прогона и сверяет каждую запись с ним, поэтому две записи на одно поле
@@ -169,21 +163,25 @@ def load_fixes():
     """
     import importlib
     import pkgutil
-    folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixes')
-    out = []
+    here = os.path.dirname(os.path.abspath(__file__))
+    batches = []
+    archive = os.path.join(here, 'fixes_archive')
+    if os.path.isdir(archive):
+        for fn in sorted(os.listdir(archive)):
+            if fn.endswith('.json'):
+                store = json.load(open(os.path.join(archive, fn), encoding='utf-8'))
+                batches.extend((name, b['fixes']) for name, b in store['files'].items())
+    folder = os.path.join(here, 'fixes')
     for mod in sorted(m.name for m in pkgutil.iter_modules([folder])):
-        out.extend(importlib.import_module('fixes.%s' % mod).FIXES)
-    return out
+        batches.append((mod, importlib.import_module('fixes.%s' % mod).FIXES))
+    batches.sort(key=lambda b: b[0])
+    return [f for _name, batch in batches for f in batch]
 
 
-# ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ. Причин две, и вторая
-# важнее первой: (1) одна общая таблица росла на ~3 тыс. знаков с каждой
-# прочитанной карточки и на дистанции дочитывания всей базы перестала бы
-# помещаться в контекст; (2) пока таблица одна, два потока, читающие РАЗНЫЕ
-# партии, конфликтуют в git на каждом коммите. Своя партия — свой файл, и
-# дочитывание можно вести в несколько сессий одновременно.
-#
-# `quote` — дословный кусок источника, `why` — что именно правило не увидело.
+# ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ: одна общая таблица росла
+# на ~3 тыс. знаков с карточки и не влезала бы в контекст, а два потока, читающие
+# разные партии, конфликтовали бы на каждом коммите. `quote` — дословный кусок
+# источника, `why` — что именно правило не увидело.
 FIXES = load_fixes()
 
 
@@ -310,20 +308,6 @@ def sum_is_supported(new, quote):
     if not m.group(6) and estimate:
         return 'цитата говорит об оценке — нужна пометка «(по оценке)»'
     return None
-
-
-def _same_word(a, b):
-    """Одно слово с точностью до окончания: общее начало ≥3 знаков и ≥60%
-    длины короткого. Порог не выдуман — это тот же критерий, которым
-    `extract_seller` подтверждает имя в косвенном падеже. «Вера» и «Вета» им
-    НЕ склеиваются: общее начало «Ве» — два знака."""
-    a, b = a.lower(), b.lower()
-    if a == b:
-        return True
-    n = 0
-    while n < min(len(a), len(b)) and a[n] == b[n]:
-        n += 1
-    return n >= 3 and n >= 0.6 * min(len(a), len(b))
 
 
 def name_is_supported(new, quote):
@@ -460,31 +444,6 @@ def set_field(card, field, value):
         obj.pop(parts[-1], None)
     else:
         obj[parts[-1]] = _yo(value) if isinstance(value, str) else value
-
-
-def _yo(s):  # без «ё» (27.10.2026)
-    return str(s or '').replace('ё', 'е').replace('Ё', 'Е')
-
-
-def typo_flat(s):
-    """Значение с точностью до ТИПОГРАФИКИ: кавычки, тире, десятичный знак.
-
-    Нужна ровно одна вещь: отличить «правка не применена» от «правка
-    применена, а потом текст причесал сплошной типографский прогон».
-    15 августа 2026 такой прогон (`fix_typography_across_base.py`) поменял
-    прямые кавычки на елочки, дефис в диапазоне на тире и точку в числе на
-    запятую — и 503 записи таблицы `FIXES` перестали совпадать с базой
-    посимвольно, хотя ФАКТ в базе стоит ровно тот, который правка внесла.
-    Сравнение по буквам уронило бы `test_review_table_is_applied_and_not_pending`.
-
-    Складываются ТОЛЬКО знаки, а не слова: `«`/`»`/`"` в один символ, все
-    виды тире в один, десятичная запятая и точка в одну. Ни одна буква,
-    цифра или пробел между словами не теряется — подмена значения этой
-    проверкой по-прежнему не проходит."""
-    s = re.sub(r'[«»""„“”]', '"', str(s or ''))
-    s = re.sub(r'[–—]', '-', s)
-    s = re.sub(r'(?<=\d)[.,](?=\d)', '.', s)
-    return re.sub(r'\s+', ' ', s).strip()
 
 
 def fix_fingerprint(value):
@@ -939,8 +898,9 @@ def advisories(card, companies):
 
 
 def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=(),
-         milestone=None):
-    _self_check()
+         milestone=None, self_check=False):
+    if self_check:  # --self-check; всегда — в test_draft_self_checks_pass
+        _self_check()
     data = json.load(open(DATA, encoding='utf-8'))
     # Черновики предпросмотра проверяются тем же механизмом, что и карточки
     # базы: читающий правит их ДО того, как владелец увидит проект поста, —
@@ -1183,7 +1143,7 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
 if __name__ == '__main__':
     _args = sys.argv[1:]
     _flags = ('--write', '--mark-read', '--mark-deep', '--mark-weekly', '--mark-followup',
-              '--milestone')
+              '--milestone', '--self-check')
     _ids = [a for a in _args if a not in _flags]
     _milestone = None
     if '--milestone' in _args:
@@ -1199,4 +1159,4 @@ if __name__ == '__main__':
                   mark_deep=_ids if '--mark-deep' in _args else (),
                   mark_weekly=_ids if '--mark-weekly' in _args else (),
                   mark_followup=_ids if '--mark-followup' in _args else (),
-                  milestone=_milestone))
+                  milestone=_milestone, self_check='--self-check' in _args))

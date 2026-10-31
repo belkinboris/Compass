@@ -1287,6 +1287,7 @@ def test_list_items_do_not_get_a_link_to_an_unrelated_deal():
         assert out.count("](#/deal/") == 1 and out.splitlines()[-1].startswith(f"- [{d.title}](#/deal/")
 
 
+@pytest.mark.slow
 def test_list_links_on_all_answers_of_the_third_check():
     """Все ответы проверки 18 октября 2026: из пунктов списка убираем ссылки и
     ставим заново. Ссылка не должна вести на другую сделку, чем у модели, и в
@@ -1301,6 +1302,8 @@ def test_list_links_on_all_answers_of_the_third_check():
     rows = [_json.loads(x) for x in path.read_text(encoding="utf-8").splitlines()][1:]
     wrong, outside, checked = [], [], 0
     false_lines = [line[2:40] for line, _, _ in FALSE_LINK_LINES]
+    base_path = main.pathlib.Path(main.__file__).parent / "static" / "data" / "deals_promoted.json"
+    merged = _json.loads(base_path.read_text(encoding="utf-8")).get("merged") or {}
     for r in rows:
         answer = r.get("answer") or ""
         if not answer or r.get("model") is False:
@@ -1323,7 +1326,11 @@ def test_list_links_on_all_answers_of_the_third_check():
             if not ids:
                 continue
             checked += 1
-            if orig[i] and ids[0] not in orig[i]:
+            # Слитый дубль (merged[старый] = выживший) — та же сделка:
+            # после G15 (1 ноября 2026) ответ 18 октября ссылался на id,
+            # которого в базе больше нет, а ссылка ведет на выжившую карточку.
+            same = {merged.get(o, o) for o in orig[i]} | set(orig[i])
+            if orig[i] and ids[0] not in same:
                 wrong.append((r["n"], line[:120]))
             if not section_ok:
                 outside.append((r["n"], line[:120]))
@@ -1629,6 +1636,7 @@ def test_web_mode_puts_kompas_first_and_does_not_deny_what_the_search_found():
     assert "Не пиши «в открытых источниках подтверждения нет»" in web
 
 
+@pytest.mark.slow
 def test_polish_on_all_answers_of_the_fourth_check():
     """Все ответы проверки 18 октября 2026, 08:21: чистка не оставляет
     голых ссылок, пустых «[…]()», обрывков с лишней «)», второй строки
@@ -1884,6 +1892,7 @@ def test_sentence_is_not_cut_after_the_year_abbreviation():
         "7 апреля 2026 г. ФАС согласовала сделку.", "Сумма не раскрыта."]
 
 
+@pytest.mark.slow
 def test_polish_on_all_saved_answers_of_all_checks():
     """Все сохраненные ответы проверок (data/inbox/assistant_eval/*.jsonl):
     чистка идемпотентна, не оставляет голых ссылок и второй строки «Еще N»

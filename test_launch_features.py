@@ -2014,6 +2014,82 @@ def test_fns_notes_edit_registry_entry_rewrites_only_the_named_row(tmp_path):
     assert missing is False
 
 
+def _fake_registry(tmp_path, tail=""):
+    """Реестр в новом виде (31 октября 2026): записи в JSON, в .py — загрузчик
+    и хвост из блоков `REGISTRY += [...]`, которые дописывают скрипты."""
+    import json
+    (tmp_path / "fake_registry.json").write_text(json.dumps([
+        {"company_id": "keep_me", "decision": "no_match", "inn": None,
+         "reason": "27 омонимов", "date": "2026-08-01"},
+    ], ensure_ascii=False), encoding="utf-8")
+    py = tmp_path / "fake_registry.py"
+    py.write_text(
+        'import json, os\n'
+        'REGISTRY = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '
+        '"fake_registry.json"), encoding="utf-8"))\n'
+        + tail +
+        '\n\ndef by_company_id() -> dict[str, dict]:\n'
+        '    return {row["company_id"]: row for row in REGISTRY}\n',
+        encoding="utf-8",
+    )
+    return py
+
+
+def _registry_rows(py):
+    namespace = {"__file__": str(py)}
+    exec(compile(py.read_text(encoding="utf-8"), str(py), "exec"), namespace)
+    return namespace["REGISTRY"]
+
+
+def test_fns_registry_compact_moves_the_tail_into_json_keeping_order(tmp_path):
+    """Скрипты дописывают `REGISTRY += [...]` в .py, как и до переезда в JSON;
+    `fns_registry_compact.py --write` переносит хвост в JSON в том же порядке
+    и оставляет .py без блоков, а `REGISTRY` — тем же списком."""
+    from pipeline.fns_registry_compact import compact
+    from pipeline.fns_unresolved_queue import _append_registry
+
+    py = _fake_registry(tmp_path)
+    _append_registry([("newco", 'ООО «Новая»', "7700000099", 'ООО "Новая"')], path=str(py))
+    py.write_text(py.read_text(encoding="utf-8").replace(
+        "\n\ndef by_company_id()",
+        '\n\n# разовый скрипт\nREGISTRY += [\n    {"company_id": "third", "decision": "person", '
+        '"inn": None, "reason": "физлицо", "date": "2026-10-31"},\n]\n\ndef by_company_id()', 1),
+        encoding="utf-8")
+    before = _registry_rows(py)
+    assert [r["company_id"] for r in before] == ["keep_me", "newco", "third"]
+
+    assert compact(py_path=str(py), json_path=str(tmp_path / "fake_registry.json"), write=False) == 2
+    assert "REGISTRY += [" in py.read_text(encoding="utf-8"), "сухой прогон не меняет .py"
+    assert compact(py_path=str(py), json_path=str(tmp_path / "fake_registry.json"), write=True) == 2
+    src = py.read_text(encoding="utf-8")
+    assert "REGISTRY += [" not in src and "# разовый скрипт" not in src
+    assert _registry_rows(py) == before, "после сворачивания реестр тот же и в том же порядке"
+    assert compact(py_path=str(py), json_path=str(tmp_path / "fake_registry.json"), write=True) == 0
+
+
+def test_fns_notes_edit_registry_entry_rewrites_a_row_that_lives_in_json(tmp_path):
+    """Запись, уже свернутая в JSON, правится там; запись из хвоста .py — в .py."""
+    from pipeline.fns_notes_to_registry import edit_registry_entry
+
+    py = _fake_registry(tmp_path, tail=(
+        'REGISTRY += [\n    {"company_id": "tail_one", "decision": "no_match", "inn": None,\n'
+        '     "reason": "пока не нашли", "date": "2026-10-30"},\n]\n'))
+    assert edit_registry_entry("keep_me", {
+        "company_id": "keep_me", "decision": "confirmed", "inn": "7736207543",
+        "reason": "ИНН от владельца. Было (no_match): 27 омонимов", "date": "2026-10-31",
+    }, path=str(py))
+    assert edit_registry_entry("tail_one", {
+        "company_id": "tail_one", "decision": "confirmed", "inn": "7700000099",
+        "reason": "ИНН от владельца. Было (no_match): пока не нашли", "date": "2026-10-31",
+    }, path=str(py))
+    rows = {r["company_id"]: r for r in _registry_rows(py)}
+    assert rows["keep_me"]["inn"] == "7736207543" and "27 омонимов" in rows["keep_me"]["reason"]
+    assert rows["tail_one"]["inn"] == "7700000099" and len(rows) == 2
+    assert not edit_registry_entry("nobody", {
+        "company_id": "nobody", "decision": "confirmed", "inn": "1", "reason": "x", "date": "2026-10-31",
+    }, path=str(py))
+
+
 def test_fns_notes_main_write_applies_the_homonym_edit_too(tmp_path, monkeypatch):
     """Сквозной прогон --write с обеими очередями сразу: обычная запись
     ДОПИСЫВАЕТСЯ (append_registry), запись-омоним ПРАВИТСЯ на месте

@@ -78,6 +78,7 @@ import match as matcher                                  # noqa: E402
 import source_names                                      # noqa: E402
 import tag_themes                                        # noqa: E402  (pipeline/ уже в sys.path)
 import link_parties                                      # noqa: E402
+import placeholders                                      # noqa: E402  (pipeline/ в sys.path)
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -88,7 +89,7 @@ DRAFTS = os.path.join(ROOT, 'data', 'inbox', 'drafts')
 NEW_CARDS_NEED_REVIEW = False
 
 WORD_CURRENCY = re.compile(r'\b(?:руб(?:лей|ля|\.)?|долл(?:аров|\.)?|евро|USD|EUR|RUB)\b', re.I)
-PLACEHOLDER = re.compile(r'^(?:[—-]|н/д|не\s+раскры[а-яё]*|публично\s+не\s+[а-яё]+)[.\s]*$', re.I)
+PLACEHOLDER = placeholders.PLACEHOLDER      # один канон заглушек — pipeline/placeholders.py
 DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 PRESENT_CLOSED = re.compile(r'\b(?:покупает|приобретает|прода[её]т|созда[её]т|получает|входит|проводит|привлекает|выкупает)\b', re.I)
 # ОБРУБОК НОВОСТИ ВМЕСТО ЗАГОЛОВКА. Заголовок, который не написан, а отрезан
@@ -656,7 +657,7 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
         bad.append('отрасль не из списка INDUSTRIES (%r)' % draft.get('ind'))
     if draft.get('sum') and WORD_CURRENCY.search(str(draft['sum'])):
         bad.append('валюта словом, а не значком')
-    if draft.get('seller') and PLACEHOLDER.match(str(draft['seller']).strip()):
+    if draft.get('seller') and placeholders.is_empty(draft['seller']):
         bad.append('в продавце заглушка, а не имя')
     if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
         hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию')

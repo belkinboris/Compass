@@ -270,7 +270,7 @@ def _governed():
     for folder in ("routines", "docs"):
         base = os.path.join(ROOT, folder)
         for name in sorted(os.listdir(base)):
-            if name.endswith(".md") and not name.startswith("launch_texts_"):
+            if name.endswith(".md"):
                 out["%s/%s" % (folder, name)] = io.open(
                     os.path.join(base, name), encoding="utf-8").read()
     return out
@@ -284,7 +284,7 @@ def test_every_routine_has_its_file_and_every_file_its_routine():
     readme = io.open(os.path.join(ROOT, "routines", "README.md"), encoding="utf-8").read()
     listed = set(re.findall(r"`(routines/[a-z_]+\.md)`", readme))
     on_disk = {"routines/%s" % n for n in os.listdir(os.path.join(ROOT, "routines"))
-               if n.endswith(".md") and n != "README.md" and not n.startswith("launch_texts_")}
+               if n.endswith(".md") and n != "README.md"}
     assert listed == on_disk, "таблица рутин и файлы разошлись: %s" % (listed ^ on_disk)
     assert "routines/" in CLAUDE, "CLAUDE.md не говорит рутине, где ее порядок работы"
 
@@ -309,7 +309,10 @@ _REF_SECTION = re.compile(r"(?:раздел[а-я]*|см\.)\s+((?:«(?:[^«»]|�
 def _headings(include_archive=False):
     heads = []
     for dirpath, _dirs, files in os.walk(ROOT):
-        if "/." in dirpath or "node_modules" in dirpath or "/data/" in dirpath + "/":
+        # Путь считается от корня репозитория: рабочая копия в `.claude/worktrees/`
+        # иначе пропускала все папки разом (31 октября 2026).
+        rel = "/" + os.path.relpath(dirpath, ROOT).replace(os.sep, "/").lstrip(".") + "/"
+        if "/." in rel or "node_modules" in rel or "/data/" in rel:
             continue
         for f in files:
             if not f.endswith(".md") or (not include_archive and "ARCHIVE" in f):

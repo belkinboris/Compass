@@ -1192,8 +1192,8 @@ def industry_by_words(text):
     return None
 
 
-_industry_self_check()
-_parties_self_check()
+# Самопроверки правил (_industry_self_check, _parties_self_check) с 31 октября
+# 2026 не выполняются при импорте — их гоняет test_ingest.test_draft_self_checks_pass.
 
 
 def industry_for(title, companies):

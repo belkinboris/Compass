@@ -120,6 +120,11 @@ def main(argv):
             print('%s: снято записей для %s' % (name, ', '.join(ids)))
             if write:
                 open(path, 'w', encoding='utf-8').write(text)
+    sys.path.insert(0, os.path.join(ROOT, 'ingest'))
+    import fix_files
+    for path, n in fix_files.drop_archived_fixes_for(ids, write=write).items():
+        print('%s: снято записей из архива: %d' % (os.path.basename(path), n))
+        total += n
     print('Всего снято: %d.' % total)
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')

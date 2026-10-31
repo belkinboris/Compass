@@ -30,6 +30,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+from pipeline import placeholders   # noqa: E402
 
 # Косвенный падеж там, где должен стоять именительный. Смотрим ТОЛЬКО на
 # строку «Предмет:» — у сторон падеж бывает законным («Семья бизнесмена
@@ -47,8 +50,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 OBLIQUE_TAIL = re.compile(
     r'^[а-яё]+(?:ого|его|ому|ему|ыми|ими|ую|юю|ых|их|ов|ев|ам|ям)\b', re.I)
 
-PLACEHOLDER = re.compile(r'^(?:—|-|не\s+раскрыт[аоы]?|не\s+определена|'
-                         r'публично\s+не\s+сообщалось|не\s+привлекался)$', re.I)
+PLACEHOLDER = placeholders.PLACEHOLDER      # один канон заглушек — pipeline/placeholders.py
 
 # Найдено владельцем 25 августа (Pridex/Multispace, ge283bafc): «Покупатель:
 # В периметр сделки вошли четыре объекта…» — целое предложение-описание
@@ -93,10 +95,13 @@ def check(text):
         # «не раскрыт» у стороны — не заглушка, а решение владельца от
         # 24 сентября 2026: покупатель, продавец и предмет стоят в каждом посте,
         # неизвестная сторона называется так же, как на плашке карточки сайта.
-        # Прочерк и прочие заглушки по-прежнему означают, что в пост утекло
-        # пустое поле карточки.
-        if PLACEHOLDER.match(value) and not (
-                field in ('Предмет', 'Продавец', 'Покупатель') and value == 'не раскрыт'):
+        # «Сумма: не раскрывается» — тоже намеренная строка: печатается, когда
+        # карточка САМА это утверждает (format_post, Этап 9), а не когда сумму
+        # не нашли. Прочерк и прочие заглушки по-прежнему означают, что в пост
+        # утекло пустое поле карточки (канон — pipeline/placeholders.py).
+        if value and placeholders.is_empty(value) and not (
+                field in ('Предмет', 'Продавец', 'Покупатель') and value == 'не раскрыт') \
+                and not (field == 'Сумма' and value == 'не раскрывается'):
             problems.append('«%s» показан заглушкой «%s» — такую строку не выводят вовсе'
                             % (field, value))
         if field == 'Предмет' and OBLIQUE_TAIL.match(value):

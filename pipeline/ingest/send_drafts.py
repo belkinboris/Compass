@@ -58,7 +58,7 @@ import channels                                          # noqa: E402
 import console_topics                                     # noqa: E402
 import format_post                                       # noqa: E402
 import promote                                           # noqa: E402
-from second_reading import needs_second_reading           # noqa: E402
+import readiness                                         # noqa: E402
 import telegram_endpoint                                 # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -526,34 +526,29 @@ def build_plan(resend=None, only=None):
                 and not (card.get('draft_sent') and card.get('post_draft_sent')):
             postponed += 1
             continue
-        # НЕПРОЧИТАННАЯ КАРТОЧКА НЕ ПОКАЗЫВАЕТСЯ В КОНСОЛИ ВООБЩЕ — не только
-        # не публикуется молчанием (та защита — в approve.py, `plan_actions`).
-        # 10 августа `g15386e04` дошла до Telegram меньше чем через час после
-        # promote.py, БЕЗ отметки `reviewed`: заголовок нес «340 миллионов»,
-        # поле «Сумма» — механически вырезанные, частичные «113 млн ₽», и
-        # владелец увидел противоречие раньше любого чтения. Документированный
-        # порядок притока («promote → сборка чтением → консоль») зависит от
-        # того, что рутина реально прочитает карточку ПЕРЕД этим шагом, — а
-        # это прошло незамеченным. Гейт делает шаг обязательным механически:
-        # ни 🗂, ни 📣 не уходят, пока `review.py` не поставил `reviewed`
-        # (правкой или `--mark-read`, если источник и правда беден).
-        if not card.get('reviewed') and not (card.get('draft_sent') or card.get('post_draft_sent')):
-            unread += 1
-            continue
-        # ПРИЕМКА (11 сентября 2026): владелец видел в консоли карточки с
-        # предметом-описанием в косвенном падеже, некликабельными сторонами и
-        # газетной фразой под «Юристом» — и был первым, кто их прочитал. Без
-        # штампа `accepted` (pipeline/ingest/accept_card.py) ни 🗂, ни 📣 не
-        # уходят: консоль показывает карточку, которую уже кто-то принял, а не
-        # просит человека быть корректором.
-        if not card.get('accepted') and not (card.get('draft_sent') or card.get('post_draft_sent')):
-            unaccepted += 1
-            continue
-        # ВТОРОЕ ЧТЕНИЕ (8 октября 2026, Яндекс/VK): карточку, принятую с
-        # 9 октября, перед консолью читает другая сессия с вопросом к
-        # каждому полю (second_reading.py). Без штампа — не уходит.
-        if needs_second_reading(card) and not (card.get('draft_sent') or card.get('post_draft_sent')):
-            unread2 += 1
+        # ЧЕГО ЖДЕТ КАРТОЧКА — ОДНО МЕСТО: readiness.state (31 октября 2026).
+        # Непоказанная карточка уходит в консоль только из состояния
+        # `ready_unsent`; показанную (отметка отправки есть) не трогаем —
+        # догоняем лишь второе сообщение. Три гейта, которые здесь жили:
+        # — НЕПРОЧИТАННАЯ НЕ ПОКАЗЫВАЕТСЯ ВООБЩЕ (10 августа `g15386e04` дошла
+        #   до Telegram без отметки `reviewed`: заголовок нес «340 миллионов»,
+        #   «Сумма» — частичные «113 млн ₽»); отметку ставит только review.py;
+        # — ПРИЕМКА (11 сентября 2026): без штампа `accepted` владелец первым
+        #   читал предмет-описание и некликабельные стороны;
+        # — ВТОРОЕ ЧТЕНИЕ (8 октября 2026, Яндекс/VK): принятую с 9 октября
+        #   перед консолью читает другая сессия (second_reading.py).
+        # Придержанная и не пропущенная приемкой (`held`/`hold_reason`) тоже
+        # не показывается заново — она ждет человека, а не отправки.
+        st = readiness.state(card, comps)
+        if st != 'ready_unsent' and not readiness.is_shown(card):
+            if st in ('unreviewed', 'accepted_unread'):
+                unread += 1
+            elif st in ('unaccepted', 'stale'):
+                unaccepted += 1
+            elif st == 'unread2':
+                unread2 += 1
+            else:
+                postponed += 1
             continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
@@ -749,8 +744,7 @@ def main(write=False, resend=None, only=None):
         # пролежала так весь день под общей строкой со счетчиком). Называем
         # каждую по имени — счетчик рутина пропускала.
         for card in pending['cards']:
-            if card.get('accepted') and not card.get('reviewed') \
-                    and not (card.get('draft_sent') or card.get('post_draft_sent')):
+            if readiness.state(card) == 'accepted_unread' and not readiness.is_shown(card):
                 print('  ТУПИК: %s «%s» — принята, но не прочитана; в консоль и в канал '
                       'не уйдет, пока не будет review.py %s (правкой или --mark-read) --write'
                       % (card['id'], str(card.get('title') or '')[:70], card['id']))

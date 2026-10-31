@@ -35,6 +35,7 @@ DATA_PATHS = (
     "static/data/",
     "data/inbox/",
     "pipeline/fns_registry.py",
+    "pipeline/fns_registry.json",
     "pipeline/access_requests_sent.json",
     # Папка с финансовой моделью и записками к ней: на сайте не исполняется
     # ничего из нее, а пересборка из-за правки таблицы — это те самые 502.

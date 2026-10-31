@@ -40,15 +40,15 @@ import logging
 import os
 import re
 
+from pipeline import placeholders
+
 logger = logging.getLogger("kompas.subscriptions")
 
 KIND = "subscription_match"
 
-# Заглушки суммы. Анкерим с обеих сторон: «не раскрыта (EV оценена в 21 млрд ₽)»
-# — это данные, а не пустота.
-PLACEHOLDER = re.compile(
-    r"^\s*(?:не\s+раскрыт[а-яё]*|публично\s+не\s+сообщал[а-яё]*|"
-    r"не\s+привлекал[а-яё]*|нет\s+данных|[—–-])\s*$", re.I)
+# Заглушки суммы — один канон на весь код (pipeline/placeholders.py): анкер с обеих
+# сторон, «не раскрыта (EV оценена в 21 млрд ₽)» — это данные, а не пустота.
+PLACEHOLDER = placeholders.PLACEHOLDER
 
 UNITS = {"тыс": 0.001, "млн": 1.0, "млрд": 1000.0, "трлн": 1000000.0}
 
@@ -68,7 +68,7 @@ UNIT_NONE = 1e-6
 
 def amount_mln_rub(text):
     """Сумма карточки в млн ₽ или None, если разобрать нельзя."""
-    if not text or PLACEHOLDER.match(text):
+    if placeholders.is_empty(text):
         return None
     found = AMOUNT.search(text)
     if not found:

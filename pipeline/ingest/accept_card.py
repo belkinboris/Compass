@@ -60,6 +60,7 @@ import review                      # noqa: E402
 import format_post                 # noqa: E402
 import check_post                  # noqa: E402
 import proofread                   # noqa: E402
+import readiness                   # noqa: E402
 import source_names                # noqa: E402
 import normalize_sum               # noqa: E402
 
@@ -76,12 +77,14 @@ COVERAGE_DAYS = 14
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 from pipeline import fns_registry          # noqa: E402
+from pipeline import placeholders           # noqa: E402
 
 STAMP = 'accepted'
 CHECKLIST = ('sources', 'parties', 'asset', 'title', 'why', 'fields', 'wording', 'post', 'status')
 ROLES = {'target': ('asset', 'target'), 'buyer': ('buyer_name', 'buyer'), 'seller': ('seller', 'seller_id')}
 PROSE_FIELDS = proofread.PROOFREAD_FIELDS
-PLACEHOLDER = re.compile(r'^\s*(—|-|не раскрыт[а-яё]*|публично не сообщал[а-яё]*|не привлекал[а-яё]*|нет данных|n/?a)?\s*$', re.I)
+# Заглушки — один канон на весь код: pipeline/placeholders.py (H5, 31 октября 2026).
+PLACEHOLDER = placeholders.PLACEHOLDER
 
 # Аудит 12 сентября 2026 (audit_prompt_fable): опровержение или неснятая
 # гипотеза о МЕХАНИКЕ сделки, дожившая до закрытия/срыва. Шире узкого
@@ -178,8 +181,8 @@ INN_NOT_IN_ARTICLE = re.compile(r'(?:в\s+)?(?:источник\w*|стать\w*
 INN_SEARCHED = re.compile(r'егрюл|rusprofile|list-org|listorg|saby|checko|datanewton|реестр\w*|иностран|физлиц|лот\b', re.I)
 
 
-def has(v):
-    return bool(v) and not PLACEHOLDER.match(str(v))
+def has(v, field=None):
+    return placeholders.has(v, field)
 
 
 def _party_name_inside(needle, haystack):
@@ -225,13 +228,17 @@ def find_card(cid, base, pending):
 def queue(base, pending):
     """Что ждет приемки: вся очередь предпросмотра без штампа и карточки базы,
     которым еще предстоит ПЕРВЫЙ пост (свежие, без записи в telegram_posts) —
-    ровно те, кого гейты ниже по течению не пропустят."""
-    out = [c for c in pending.get('cards', []) if not c.get(STAMP)]
+    ровно те, кого гейты ниже по течению не пропустят. Состояние — одно
+    место, readiness.state: придержанную и не пропущенную приемкой
+    (`hold_reason`) очередь не берет — они ждут человека."""
+    comps = base.get('companies') or {}
+    out = [c for c in pending.get('cards', [])
+           if readiness.state(c, comps) in ('unaccepted', 'unreviewed', 'stale')]
     posts = base.get('telegram_posts') or {}
     for c in base['deals']:
-        if c.get(STAMP) or c['id'] in posts or c.get('no_post') or c.get('post_override'):
+        if c['id'] in posts or c.get('no_post') or c.get('post_override'):
             continue
-        if format_post.is_fresh(c):
+        if readiness.state(c, comps) in ('unaccepted', 'unreviewed', 'stale') and format_post.is_fresh(c):
             out.append(c)
     return out
 
@@ -953,7 +960,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # ответа на вопрос «чем и как платили». Замер по базе: поле заполнено у
     # 122 карточек, отчетность без единого слова об оплате стояла у 16.
     fin_text = ((card.get('eco') or {}).get('fin') or '').strip()
-    if fin_text and not PLACEHOLDER.match(fin_text) and not FIN_IS_PAYMENT.search(fin_text) \
+    if placeholders.has(fin_text) and not FIN_IS_PAYMENT.search(fin_text) \
             and FIN_IS_BUSINESS.search(fin_text) and not FIN_IS_REPORTING.match(fin_text):
         out.append(('fin_is_business',
                     '«Форма расчетов» рассказывает о бизнесе, а не о том, чем платили: %r. '
@@ -1406,6 +1413,9 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         return lines, False
     if ans.get('verdict') == 'accept' and not left:
         card[STAMP] = day or date.today().isoformat()
+        # Штамп привязан к содержимому, пока карточку не показали (H4,
+        # 31 октября 2026): разошелся отпечаток — readiness.state = stale.
+        card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
         notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
                                    ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
                                    ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes'))) if v}

@@ -185,7 +185,10 @@ def _entry_span(src, company_id):
     lines = src.splitlines(keepends=True)
 
     def offset(lineno, col):
-        return sum(len(line) for line in lines[:lineno - 1]) + col
+        # col_offset у ast — в БАЙТАХ utf-8, не в знаках: строка с кириллицей
+        # до конца словаря сдвигала границу (31 октября 2026).
+        head = lines[lineno - 1].encode("utf-8")[:col].decode("utf-8")
+        return sum(len(line) for line in lines[:lineno - 1]) + len(head)
 
     return offset(node.lineno, node.col_offset), offset(node.end_lineno, node.end_col_offset)
 
@@ -197,14 +200,25 @@ def edit_registry_entry(company_id, new_fields, path=None):
     включая историю старой причины внутри новой). Возвращает True/False —
     нашли ли запись."""
     path = path or os.path.join(ROOT, "pipeline", "fns_registry.py")
+    keys = ("company_id", "decision", "inn", "reason", "date")
+    for k in new_fields:
+        assert k in keys, "неизвестное поле %r — edit_registry_entry не переносит лишнее молча" % k
+    # С 31 октября 2026 принятые записи лежат в fns_registry.json рядом с .py,
+    # в .py — только свежий хвост (см. докстринг fns_registry.py). Сначала JSON.
+    json_path = path[:-3] + ".json" if path.endswith(".py") else None
+    if json_path and os.path.exists(json_path):
+        rows = json.load(open(json_path, encoding="utf-8"))
+        hits = [i for i, r in enumerate(rows) if r.get("company_id") == company_id]
+        if len(hits) == 1:
+            rows[hits[0]] = {k: new_fields[k] for k in keys}
+            with open(json_path, "w", encoding="utf-8") as fh:
+                json.dump(rows, fh, ensure_ascii=False, indent=1)
+            return True
     src = open(path, encoding="utf-8").read()
     span = _entry_span(src, company_id)
     if not span:
         return False
     start, end = span
-    keys = ("company_id", "decision", "inn", "reason", "date")
-    for k in new_fields:
-        assert k in keys, "неизвестное поле %r — edit_registry_entry не переносит лишнее молча" % k
     new_text = ('{"company_id": %r, "decision": %r, "inn": %r,\n'
                 '     "reason": %r,\n'
                 '     "date": %r}' % (new_fields["company_id"], new_fields["decision"],

@@ -5056,14 +5056,13 @@ def test_console_does_not_resend_a_card_with_an_unapplied_answer(monkeypatch):
     Пока ответ по карточке не применен, повторно в консоль она не идет."""
     import send_drafts
     base = {"date": FRESH_DATE, "status": "Закрыта", "reviewed": "2026-10-13",
-            "accepted": "2026-10-13", "second_reading": {"verdict": "ok"},
+            "accepted": "2026-10-13", "second_read": "2026-10-13",
             "src": [["Т", "https://t.example/m"]]}
     cards = [dict(base, id="g-answered", title="«Ромашка» купила «Лютик»"),
              dict(base, id="g-quiet", title="«Мак» купил «Василек»")]
     monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": cards})
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
-    monkeypatch.setattr(send_drafts, "needs_second_reading", lambda c: False)
     monkeypatch.setattr(send_drafts.promote, "load_state",
                         lambda: {"decided_raw": {}, "sent_raw": []})
     monkeypatch.setattr(send_drafts, "answered_cards",
@@ -6415,6 +6414,107 @@ def test_no_duplicate_fix_for_one_field():
 
     dups = [k for k, n in seen.items() if n > 1 and not absorbed_chain(k)]
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
+
+
+def test_draft_self_checks_pass():
+    """Самопроверки правил черновика и таблицы правок — здесь, а не при импорте.
+
+    До 31 октября 2026 `draft.py` гонял `_industry_self_check()` и
+    `_parties_self_check()` на каждом `import draft` (то есть в каждом посте,
+    консоли и приемке), а `review.main()` — `_self_check()` на каждом прогоне.
+    Теперь они проверяются тестом (и `review.py --self-check` по желанию)."""
+    import draft as drafter
+    import review
+    drafter._industry_self_check()
+    drafter._parties_self_check()
+    review._self_check()
+    src = (ROOT / "pipeline" / "ingest" / "draft.py").read_text(encoding="utf-8")
+    assert not re.search(r"(?m)^_(industry|parties)_self_check\(\)", src), \
+        "самопроверка draft.py снова выполняется при импорте"
+
+
+def test_write_card_save_batch_appends_to_a_daily_file(tmp_path, monkeypatch):
+    """Бэклог H6: write_card писал файл на каждую карточку (1183 файла за
+    полмесяца). Теперь — дневной файл с суффиксом сессии, повторный вызов
+    дописывает в него, файл остается верным Python, записи — в порядке записи."""
+    import os
+    import datetime as _dt
+    import write_card
+    monkeypatch.setenv("FIXES_SESSION", "Test-Session")
+    day = _dt.date(2026, 10, 31)
+    p1 = write_card.save_batch("g0000aaaa", [{"id": "g0000aaaa", "field": "sum", "old": None, "new": "1 млрд ₽"}],
+                               folder=str(tmp_path), day=day)
+    p2 = write_card.save_batch("g0000bbbb", [{"id": "g0000bbbb", "field": "status", "old": None, "new": "Закрыта"}],
+                               folder=str(tmp_path), day=day)
+    assert p1 == p2 and os.path.basename(p1) == "written_2026_10_31_testsession.py"
+    assert [f.name for f in tmp_path.glob("*.py")] == ["written_2026_10_31_testsession.py"]
+    ns = {}
+    exec(compile(open(p1, encoding="utf-8").read(), p1, "exec"), ns)
+    assert [f["id"] for f in ns["FIXES"]] == ["g0000aaaa", "g0000bbbb"] and ns["CARDS"] == ["g0000aaaa", "g0000bbbb"]
+    assert "g0000aaaa, g0000bbbb" in ns["__doc__"]
+
+
+def test_discard_drops_fixes_from_daily_files_and_the_archive(tmp_path):
+    """«Выкинуть» снимает записи карточки и из дневного файла write_card (он
+    переписывается без нее, чужие записи остаются), и из JSON-архива партий."""
+    import os
+    import fix_files
+    import write_card
+    fixes = tmp_path / "fixes"
+    fixes.mkdir()
+    (fixes / "__init__.py").write_text("")
+    write_card.save_batch("g0000aaaa", [{"id": "g0000aaaa", "field": "sum", "old": None, "new": "1 млрд ₽"}],
+                          folder=str(fixes))
+    daily = write_card.save_batch("g0000bbbb", [{"id": "g0000bbbb", "field": "status", "old": None, "new": "Закрыта"}],
+                                  folder=str(fixes))
+    archive = tmp_path / "fixes_archive"
+    archive.mkdir()
+    (archive / "2026-09.json").write_text(json.dumps({"files": {"batch_2026_09_01": {
+        "date": "2026-09-01", "applied_on": "2026-10-31", "doc": "партия",
+        "fixes": [{"id": "g0000aaaa", "field": "asset", "old": None, "new": "завод"},
+                  {"id": "g0000cccc", "field": "asset", "old": None, "new": "сеть"}]}}}, ensure_ascii=False),
+        encoding="utf-8")
+    touched = fix_files.drop_fixes_for("g0000aaaa", folder=str(fixes))
+    assert {os.path.basename(p) for p in touched} == {os.path.basename(daily), "2026-09.json"}
+    ns = {}
+    exec(compile(open(daily, encoding="utf-8").read(), daily, "exec"), ns)
+    assert [f["id"] for f in ns["FIXES"]] == ["g0000bbbb"] and ns["CARDS"] == ["g0000bbbb"]
+    store = json.loads((archive / "2026-09.json").read_text(encoding="utf-8"))
+    assert [f["id"] for f in store["files"]["batch_2026_09_01"]["fixes"]] == ["g0000cccc"]
+
+
+def test_fixes_compact_archives_only_applied_batches_older_than_n_days(tmp_path):
+    """Бэклог H6: примененные партии старше N дней уезжают в
+    fixes_archive/<ГГГГ-ММ>.json, свежие и непримененные остаются в .py;
+    архив несет те же словари, дату партии и первую строку докстринга."""
+    import datetime as _dt
+    import fixes_compact
+    fixes = tmp_path / "fixes"
+    fixes.mkdir()
+    (fixes / "__init__.py").write_text("")
+    (fixes / "batch_2026_09_01.py").write_text(
+        '"""Партия сентября.\n\nПодробности."""\n'
+        "FIXES = [{'id': 'g1', 'field': 'sum', 'old': None, 'new': '1 млрд ₽', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    (fixes / "batch_2026_09_02.py").write_text(
+        "FIXES = [{'id': 'g1', 'field': 'status', 'old': None, 'new': 'Закрыта', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    (fixes / "batch_2026_10_30.py").write_text(
+        "FIXES = [{'id': 'g1', 'field': 'asset', 'old': None, 'new': 'завод', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    cards = {"g1": {"id": "g1", "sum": "1 млрд ₽", "status": "Обсуждается", "asset": "завод"}}
+    archive = tmp_path / "fixes_archive"
+    today = _dt.date(2026, 10, 31)
+    n = fixes_compact.compact(14, write=False, folder=str(fixes), archive=str(archive), today=today, cards=cards)
+    assert n == 1 and not archive.exists(), "сухой прогон ничего не пишет"
+    n = fixes_compact.compact(14, write=True, folder=str(fixes), archive=str(archive), today=today, cards=cards)
+    assert n == 1
+    assert sorted(f.name for f in fixes.glob("*.py")) == ["__init__.py", "batch_2026_09_02.py", "batch_2026_10_30.py"], \
+        "непримененная (status) и свежая партии остаются в .py"
+    store = json.loads((archive / "2026-09.json").read_text(encoding="utf-8"))
+    batch = store["files"]["batch_2026_09_01"]
+    assert batch["date"] == "2026-09-01" and batch["applied_on"] == "2026-10-31" and batch["doc"] == "Партия сентября."
+    assert batch["fixes"] == [{"id": "g1", "field": "sum", "old": None, "new": "1 млрд ₽", "quote": "q", "why": "w"}]
 
 
 def test_fix_batches_live_in_separate_files():
@@ -9419,3 +9519,133 @@ def test_late_discard_on_a_published_card_is_seen_and_applied():
     assert [d['id'] for d in data['deals']] == ['g2']
     assert state['discarded_urls']['https://k.ru/1']['id'] == 'g1'
     assert 'g1' in data['telegram_posts'], 'отметка о посте не трогается — пост в канале решает человек'
+
+
+def test_readiness_state_is_one_table_for_all_gates():
+    """H3 аудита кода (31 октября 2026): «карточка готова» было записано в
+    восьми местах и расходилось. Теперь одно слово readiness.state, и каждый
+    гейт читает его: таблица карточка → состояние."""
+    from datetime import datetime, timezone
+    import readiness
+    table = [
+        ({}, "unreviewed"),
+        ({"draft_sent": True}, "unreviewed"),
+        ({"accepted": "2026-10-04"}, "accepted_unread"),
+        ({"reviewed": "2026-10-01"}, "unaccepted"),
+        ({"reviewed": "d", "accepted": "d"}, "ready_unsent"),
+        ({"reviewed": "d", "accepted": True}, "ready_unsent"),
+        ({"reviewed": "d", "accepted": "2026-10-08"}, "ready_unsent"),
+        ({"reviewed": "d", "accepted": "2026-10-09"}, "unread2"),
+        ({"reviewed": "d", "accepted": "2026-10-09", "second_read": "2026-10-10"}, "ready_unsent"),
+        ({"reviewed": "d", "accepted": "2026-10-09", "draft_sent": True}, "shown"),
+        ({"reviewed": "d", "accepted": "d", "post_draft_sent": True}, "shown"),
+        ({"reviewed": "d", "accepted": "d", "hold_reason": "не сделка"}, "doubted"),
+        ({"hold_reason": "не сделка"}, "doubted"),
+        ({"held": True, "hold_reason": "x", "reviewed": "d", "accepted": "d"}, "held"),
+    ]
+    for card, expected in table:
+        assert readiness.state(card) == expected, (card, readiness.state(card))
+    assert readiness.needs_second_reading({"accepted": "2026-10-09"})
+    assert not readiness.needs_second_reading({"accepted": True})
+    assert not readiness.needs_second_reading({"accepted": "d"})
+    # Все, кто раньше держал свою копию, читают одно место.
+    import approve
+    import ops_status
+    import second_reading
+    assert second_reading.SINCE == readiness.SECOND_READING_SINCE
+    assert ops_status.is_unsent({"reviewed": "d", "accepted": "d"})
+    assert not ops_status.is_unsent({"reviewed": "d", "accepted": "2026-10-09"})
+    assert ops_status.state_counts([{}, {"held": True}, {"reviewed": "d", "accepted": "d", "draft_sent": True}]) \
+        == {"unreviewed": 1, "held": 1, "shown": 1}
+    assert approve.hours_pending({"pending_since": "2026-10-30T00:00:00+00:00"},
+                                 datetime(2026, 10, 31, tzinfo=timezone.utc)) == 24.0
+
+
+def test_approve_treats_a_card_waiting_for_second_reading_as_a_queue_not_a_dead_end():
+    """До 31 октября 2026 approve не знал о втором чтении: принятая с
+    9 октября без `second_read` печаталась «ТУПИК» и «ждем решения (0 ч из
+    24)», хотя ждала приток. Теперь — «ждет второго чтения», и в тупиках ее
+    нет; не пропущенная приемкой (`hold_reason`) по молчанию не выходит."""
+    from datetime import datetime, timedelta, timezone
+    import approve
+    now = datetime.now(timezone.utc)
+    stale = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    cards = [
+        {"id": "r2", "title": "ждет второго чтения", "reviewed": "2026-10-20", "accepted": "2026-10-20",
+         "pending_since": stale},
+        {"id": "ok", "title": "готова, не показана", "reviewed": "2026-10-20", "accepted": "2026-10-20",
+         "second_read": "2026-10-20", "pending_since": stale},
+        {"id": "db", "title": "приемка не пропустила", "reviewed": "2026-10-20", "accepted": "2026-10-20",
+         "hold_reason": "не сделка", "draft_sent": True, "pending_since": stale},
+        {"id": "sh", "title": "показана, молчание", "reviewed": "2026-10-20", "accepted": "2026-10-20",
+         "second_read": "2026-10-20", "draft_sent": True, "pending_since": stale},
+    ]
+    assert [c["id"] for c in approve.dead_ends(cards)] == ["ok"]
+    publish, _hold, wait, _discard = approve.plan_actions(cards, [], now)
+    assert {c["id"] for c, _o, _w in publish} == {"sh"}
+    why = {c["id"]: w for c, w in wait}
+    assert "второго чтения" in why["r2"] and "ТУПИК" not in why["r2"]
+    assert "не показана" in why["ok"]
+    assert "решения" in why["db"] and "молчани" in why["db"]
+
+
+def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
+    """H4 аудита кода (31 октября 2026): после `review/proofread/enrich --write`
+    поля менялись, штампы оставались. Теперь приемка и второе чтение пишут
+    отпечаток содержимого; разошелся у непоказанной карточки — `stale`, ее
+    берут заново приемка и не показывает консоль. У показанной отпечаток
+    только информационный: правка качества штамп не снимает (решение
+    владельца, docs/card_acceptance.md). Старый штамп без отпечатка свежим
+    не считается несвежим."""
+    from datetime import datetime, timedelta, timezone
+    import accept_card
+    import approve
+    import readiness
+    import second_reading
+    comps = {"b1": {"name": "ООО «Ромашка»"}}
+    card = {"id": "gh1", "title": "«Ромашка» купила «Лютик»", "reviewed": "2026-10-20",
+            "accepted": "2026-10-20", "buyer": "b1", "eco": {"context": "Актив продан из-за долгов."},
+            "law": {"appr": "ФАС."}, "src": [["Т", "https://t.example/1"]]}
+    # Старый штамп без отпечатка — не stale, а обычная очередь второго чтения.
+    assert readiness.state(card, comps) == "unread2"
+    ok = {"id": "gh1", "fields": {f: "ok" for f in second_reading.filled_fields(card)},
+          "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS}, "verdict": "ok"}
+    assert second_reading.apply(ok, card, day="2026-10-21", comps=comps)[0] == "stamped"
+    assert card["second_read_hash"] == readiness.fingerprint(card, comps)
+    card["accepted_hash"] = readiness.fingerprint(card, comps)
+    assert readiness.state(card, comps) == "ready_unsent"
+    # Правка после приемки на непоказанной карточке — переприемка.
+    edited = dict(card, eco={"context": "Актив продан из-за санкций."})
+    assert readiness.state(edited, comps) == "stale"
+    assert readiness.state(edited) == "stale", "без справочника компаний часть полей все равно сверяется"
+    base = {"companies": comps, "deals": [], "telegram_posts": {}}
+    assert [c["id"] for c in accept_card.queue(base, {"cards": [edited]})] == ["gh1"]
+    assert [c["id"] for c in accept_card.queue(base, {"cards": [card]})] == []
+    now = datetime.now(timezone.utc)
+    stale_since = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    publish, _h, wait, _d = approve.plan_actions([dict(edited, pending_since=stale_since)], [], now, comps)
+    assert not publish and "переприемка" in wait[0][1]
+    assert approve.dead_ends([edited], comps) == []
+    # Та же правка на показанной карточке состояние не меняет.
+    shown = dict(edited, draft_sent=True)
+    assert readiness.state(shown, comps) == "shown"
+    publish, _h, _w, _d = approve.plan_actions([dict(shown, pending_since=stale_since)], [], now, comps)
+    assert [c["id"] for c, _o, _w in publish] == ["gh1"]
+    # Типографика штамп не снимает; переименование профиля стороны — снимает.
+    typo = dict(card, eco={"context": "Актив продан - из за долгов"})
+    assert readiness.state(typo, comps) == "ready_unsent"
+    assert readiness.state(card, {"b1": {"name": "ООО «Лютик»"}}) == "stale"
+    # После переприемки правленой карточки — снова второе чтение, не вечный stale.
+    reaccepted = dict(edited, accepted_hash=readiness.fingerprint(edited, comps))
+    assert readiness.state(reaccepted, comps) == "unread2"
+    assert [c["id"] for c in second_reading.queue(base, {"cards": [reaccepted]})] == ["gh1"]
+    # Бэкфилл ставит отпечатки только туда, где штамп есть, а отпечатка нет.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "backfill_stamp_hashes", str(Path(__file__).parent / "pipeline" / "backfill_stamp_hashes_2026_10_31.py"))
+    bf = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bf)
+    old = {"id": "old", "accepted": "2026-09-01", "second_read": "2026-10-10", "reviewed": "d"}
+    plan = bf.stamp_hashes({"companies": comps, "deals": [old, {"id": "none"}]}, {"cards": [card]})
+    assert [(w, i, s) for w, i, s, _f in plan] == [("base", "old", "accepted"), ("base", "old", "second_read")]
+    assert plan[0][3] == readiness.fingerprint(old, comps)

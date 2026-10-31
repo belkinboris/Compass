@@ -105,7 +105,7 @@ import console_topics  # noqa: E402
 import check_post  # noqa: E402
 import format_post
 import monthly_digest  # noqa: E402
-import review  # noqa: E402  (POSTWORTHY_MILESTONE_KINDS — один список на пайплайн и сайт)
+import milestones  # noqa: E402  (POSTWORTHY_MILESTONE_KINDS — один список на пайплайн и сайт)
 import telegram_endpoint  # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
@@ -633,7 +633,7 @@ def milestone_candidates(deals, stage_posts, post_state=None):
     for deal in deals:
         for event in deal.get('events') or []:
             if not (isinstance(event, dict) and event.get('newsworthy') and event.get('headline')
-                    and event.get('id') and event.get('kind') in review.POSTWORTHY_MILESTONE_KINDS):
+                    and event.get('id') and event.get('kind') in milestones.POSTWORTHY_MILESTONE_KINDS):
                 continue
             if event['id'] in stage_posts:
                 continue

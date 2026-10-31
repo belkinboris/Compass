@@ -13,7 +13,7 @@ SECOND_READING_BRIEF.md): на каждое заполненное поле — 
     python3 pipeline/ingest/second_reading.py --apply ответ.json [--write]
 
 Штамп `second_read` обязателен для карточек, принятых с SINCE и позже
-(`send_drafts.needs_second_reading`); принятые раньше идут по-старому.
+(`readiness.needs_second_reading`); принятые раньше идут по-старому.
 """
 import json
 import os
@@ -28,9 +28,10 @@ sys.path.insert(0, os.path.join(HERE, '..', '..'))
 
 import accept_card                     # noqa: E402
 import format_post                     # noqa: E402
+import readiness                       # noqa: E402
 
 STAMP = 'second_read'
-SINCE = '2026-10-09'                   # принятые с этого дня без второго чтения в консоль не идут
+SINCE = readiness.SECOND_READING_SINCE   # принятые с этого дня без второго чтения в консоль не идут
 
 FIELD_QUESTIONS = {
     'title': 'Можно сказать вслух партнеру — кто, что сделал, с чем? Без обрывка формулировки издания и прямых кавычек? '
@@ -76,15 +77,17 @@ def filled_fields(card):
 
 
 def needs_second_reading(card):
-    """Принята с SINCE и позже и еще не прочитана второй раз. У старых
-    фикстур `accepted: True` — не дата, они идут по-старому."""
-    acc = card.get(accept_card.STAMP)
-    return isinstance(acc, str) and acc >= SINCE and not card.get(STAMP)
+    """Принята с SINCE и позже и еще не прочитана второй раз — одно
+    определение на всех: readiness.needs_second_reading."""
+    return readiness.needs_second_reading(card)
 
 
 def queue(base, pending):
+    """Что ждет второго чтения — состояние `unread2` (readiness.state):
+    показанную в консоли карточку второй раз не читают."""
+    comps, posts = base.get('companies') or {}, base.get('telegram_posts') or {}
     return [c for c in list(pending.get('cards') or []) + list(base.get('deals') or [])
-            if needs_second_reading(c)]
+            if c['id'] not in posts and readiness.state(c, comps) == 'unread2']
 
 
 def questionnaire(card, base):
@@ -132,13 +135,16 @@ def check(ans, card):
     return bad, problems
 
 
-def apply(ans, card, day=None):
+def apply(ans, card, day=None, comps=None):
     bad, problems = check(ans, card)
     if bad:
         return 'refused', bad
     if problems:
         return 'fix', ['%s: %s' % (k, v) for k, v in problems]
     card[STAMP] = day or date.today().isoformat()
+    # Штамп привязан к содержимому, пока карточку не показали (H4): правка
+    # после второго чтения возвращает карточку в очередь второго чтения.
+    card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
     return 'stamped', []
 
 
@@ -166,7 +172,7 @@ def main(argv):
         if not card:
             print('  ОТКАЗ  %s: карточки нет' % ans.get('id'))
             continue
-        state, notes = apply(ans, card)
+        state, notes = apply(ans, card, comps=base.get('companies') or {})
         if state == 'refused':
             print('  ОТКАЗ  %s: %s' % (card['id'], '; '.join(notes)))
         elif state == 'fix':

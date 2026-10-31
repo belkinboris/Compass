@@ -6,7 +6,7 @@
 
 Этот файл — единственный источник порядка работы. Если он расходится с тем,
 что вы помните из прошлых прогонов этой сессии, прав файл. Прежний текст
-запуска — `routines/launch_texts_2026_09_24.md`.
+запуска — `docs/archive/launch_texts_2026_09_24.md`.
 
 ## Что читать и когда
 
@@ -64,6 +64,10 @@
    пока шаги 3–5 пусты; список только сокращается (`docs/card_editing.md`).
 6a. **Бэклог блока G** — только когда шаги 3–5 честно пусты (замерено в этом
    прогоне).
+6б. **Архив правок, раз в неделю** — `python3 pipeline/ingest/fixes_compact.py
+   --days 14 --write`: применённые партии `fixes/*.py` старше двух недель
+   уезжают в `fixes_archive/<месяц>.json` (`docs/card_editing.md`, раздел
+   «Архив партий правок и fixes_compact»); `git add -A pipeline/ingest`.
 7. **Документы.** `python3 pipeline/docs_budget.py --stats`: у файла стоит ⚠️
    — сдвинуть журнал (`python3 pipeline/roadmap_archive.py --journal
    --write`) или разделить документ по темам. Не удалять знание, чтобы
@@ -111,10 +115,8 @@
    `python3 pipeline/facts_derive.py --write`, полный `python3 -m pytest -q`
    зелёным, семантический diff к HEAD. Правки данных — только скриптом или
    через `review.py`.
-10. `python3 pipeline/publication_busy.py --wait 40` (публикация выпускает решения владельца — ждём с push до 40 минут, потом push как обычно; CLAUDE.md, «Порядок работы в main»), `git pull --rebase origin main` (конфликт в `deals_promoted.json` —
-    рецепт в `READING_BRIEF.md`), коммит по-русски, `git push`. Тронули код
-    — `python3 pipeline/release.py --write` (CLAUDE.md, «Работаем прямо в
-    main»).
+10. Коммит и push по `routines/README.md`, раздел «Коммит и push из любой рутины»
+    (конфликт в `deals_promoted.json` — рецепт в `READING_BRIEF.md`).
 11. Запись в журнал через `python3 pipeline/journal_add.py --file <запись> --write` (раздел 5, сверху) — что сделали и по
     какому уровню очереди; последняя строка — «Знание: …» (CLAUDE.md).
 

@@ -51,6 +51,7 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -357,6 +358,11 @@ def fixes_entries(path: Path, ids: set[str]) -> list[tuple[int, int]]:
 
 def strip_fixes(ids: set[str], write: bool) -> int:
     removed = 0
+    sys.path.insert(0, str(ROOT / 'pipeline' / 'ingest'))
+    import fix_files  # архив партий fixes_archive/*.json (31 октября 2026)
+    for path, n in fix_files.drop_archived_fixes_for(ids, write=write).items():
+        print(f'FIXES архив {os.path.basename(path)}: снять {n} записей')
+        removed += n
     for path in sorted(FIXES_DIR.glob('*.py')):
         spans = fixes_entries(path, ids)
         if not spans:

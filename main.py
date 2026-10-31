@@ -5904,13 +5904,12 @@ def _answered_decisions() -> dict:
         session.close()
 
 
-def _needs_second_reading(card: dict) -> bool:
-    """Принята с 9 октября 2026 и не прочитана второй раз: консоль ее не
-    показывает (send_drafts), ждет она приток, не владельца. Правило —
-    pipeline/ingest/second_reading.py (SINCE, STAMP)."""
-    acc = card.get("accepted")
-    return (isinstance(acc, str) and acc[:4].isdigit() and acc >= "2026-10-09"
-            and not card.get("second_read") and not card.get("draft_sent"))
+def _card_state(card: dict) -> str:
+    """Чего ждет карточка — одно место на весь код: pipeline/ingest/readiness.py
+    (held, doubted, unreviewed, accepted_unread, unaccepted, unread2,
+    ready_unsent, shown)."""
+    from pipeline.ingest import readiness
+    return readiness.state(card)
 
 
 def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
@@ -5952,7 +5951,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         # нечего: ее уже прочитали. Показываем ее там, где человек решает
         # судьбу сомнительного, — рядом с сырьем, которое не прошло ворота.
         doubted = [c for c in (_read_json("static/data/pending.json", {}).get("cards") or [])
-                   if c.get("hold_reason") and not c.get("held")]
+                   if _card_state(c) == "doubted"]
         already += sum(1 for c in doubted if str(c.get("id")) in answered)
         items = items + [c for c in doubted if str(c.get("id")) not in answered]
         head = ("⚠️ <b>Сомнительные: %d</b>\n"
@@ -5978,9 +5977,10 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # «Сомнительные» — им нужно решение, а не чтение (см. выше).
             # Принятая, но без второго чтения, тоже сюда: до 28 октября 2026
             # такая карточка (ЛСР, g0f479af0) не попадала ни в один блок.
+            # Состояние — readiness.state: все, что ждет приток (чтение,
+            # приемку, второе чтение); не пропущенные приемкой — в «Сомнительных».
             items = [c for c in not_held
-                     if (not (c.get("reviewed") and c.get("accepted")) or _needs_second_reading(c))
-                     and not c.get("hold_reason")]
+                     if _card_state(c) in ("unreviewed", "accepted_unread", "unaccepted", "stale", "unread2")]
             head = ("📖 <b>Ждут прочтения, второго чтения или приемки: %d</b>\nПока карточку не сверят с "
                     "источником и не примут целиком — молчание ее не публикует, сама не выйдет."
                     % len(items))
@@ -5990,8 +5990,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # принятые, но не отправленные карточки («Экспанта», VEON) пришли
             # владельцу впервые именно отсюда — как «выйдут сами», хотя сами
             # выйти не могли и на подтверждение не приходили.
-            items = [c for c in not_held if c.get("reviewed") and c.get("accepted")
-                     and c.get("draft_sent")]
+            items = [c for c in not_held if _card_state(c) == "shown"]
             head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
                     "в течение суток." % len(items))
 
@@ -6058,7 +6057,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
                             "Приток прочитает статью и перепишет карточку в ближайший час; "
                             "кнопка «Опубликовать» появится после этого.")
                 text = "🗂 [карточка %s]\n\n%s\n\n%s" % (ident, note, _card_line(item))
-            elif _needs_second_reading(item):
+            elif _card_state(item) == "unread2":
                 unread_card = True
                 note = ("📖 <b>Карточка прочитана и принята, ждет второго чтения.</b> "
                         "Приток перечитает ее в ближайший час и пришлет на подтверждение.")

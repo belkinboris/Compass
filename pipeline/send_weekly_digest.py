@@ -25,13 +25,7 @@ TITLE = "Сводка «Компаса» за неделю"
 SHOWN = 10
 
 
-def _plural(n, one, few, many):
-    n = abs(int(n))
-    if n % 10 == 1 and n % 100 != 11:
-        return one
-    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
-        return few
-    return many
+from pipeline.textutil import plural as _plural  # noqa: E402
 
 
 def is_listing(deal) -> bool:

@@ -106,6 +106,9 @@ from datetime import datetime, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(HERE, 'ingest'))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+import placeholders                       # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -146,12 +149,9 @@ STRUCTURAL = {'title': 'заголовок', 'sum': 'сумма', 'eco.sum': 'с
 
 MIN_RATIO, MAX_RATIO = 0.5, 1.35
 
-# Тот же предикат заглушки, что на экране (`PLACEHOLDER` в static/index.html)
-# и в test_data.py (`LAW_PLACEHOLDER`).
-PLACEHOLDER = re.compile(
-    r"^(?:[—-]|н/д|нет\s+данных|(?:публично|официально)\s+(?:об?\s+\S+\s+)?не\s+(?:раскры|сообщал|разглаш)[а-яё]*"
-    r"|не\s+(?:раскры|сообщал|привлекал|указан|назван|разглаш)[а-яё]*"
-    r"(?:\s+(?:официально|публично))?)[.\s]*$", re.I)
+# Заглушки — один канон на весь код и экран: pipeline/placeholders.py
+# (text_rules.py берет регэксп отсюда).
+PLACEHOLDER = placeholders.PLACEHOLDER
 
 # ---------------------------------------------------------------------------
 # Числа и валюты
@@ -527,10 +527,10 @@ def check(edit, card, after=None, companies=None):
     if current != old:
         bad.append('поле уже другое: в базе %r, ожидали %r' % (str(current)[:60], old[:60]))
         return bad, notes
-    if PLACEHOLDER.match(old.strip()) or not old.strip():
+    if placeholders.is_empty(old):
         bad.append('поле пустое или заглушка — вычитывать нечего')
         return bad, notes
-    if PLACEHOLDER.match(new.strip()) or not new.strip():
+    if placeholders.is_empty(new):
         bad.append('new пуст или заглушка — вычитка не удаляет поля')
         return bad, notes
     if new == old:
