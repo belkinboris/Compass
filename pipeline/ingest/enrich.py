@@ -100,7 +100,11 @@ EVENT_STATUS = {'closed': 'Закрыта', 'approval': 'Согласовани�
 
 
 def is_strong(why):
-    return any(mark in str(why or '') for mark in STRONG)
+    # Одно определение с match.py и воротами (31 октября 2026): прежняя проверка
+    # «есть ли в причине слова „название в кавычках“» считала сильным и слабое
+    # правило «общее название в кавычках и общие слова».
+    import match as _matcher
+    return _matcher.is_strong(why)
 
 
 def norm(text):

@@ -1700,7 +1700,10 @@ def test_enrich_writes_only_on_a_strong_match():
     import enrich
     assert enrich.is_strong("тот же адрес источника")
     assert enrich.is_strong("совпали название в кавычках и сумма")
-    assert enrich.is_strong("общее название в кавычках и два общих слова")
+    # 31 октября 2026: имя в кавычках сильно, только если оно редкое в базе;
+    # частое («Газпром», ГАП «Ресурс») склеивало разные сделки одного игрока
+    assert enrich.is_strong("общее редкое название в кавычках и общие слова: 2")
+    assert not enrich.is_strong("общее название в кавычках и общие слова: 2")
     assert enrich.is_strong("совпал набор названий в кавычках на разных этапах")
     assert not enrich.is_strong("общие слова заголовка: 4")
 
@@ -9281,3 +9284,67 @@ def test_send_lock_lets_only_one_publication_send(tmp_path):
     data.write_text('{"telegram_posts": {"a": 5, "b": null}, "telegram_posts_realty": {"c": 7}}', encoding='utf-8')
     assert st.already_posted_on_disk('a', str(data)) and st.already_posted_on_disk('c', str(data))
     assert not st.already_posted_on_disk('b', str(data))
+
+
+def _gate_on_real_base(draft):
+    """Ворота против настоящей базы: (id, причина, отказ ли)."""
+    import promote, match as m
+    d = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    idx = m.index_base(d["deals"], d.get("companies"), d.get("match_keys"))
+    found, why = m.match({"title": draft["title"], "date": draft["date"], "buyer": draft.get("buyer_name"),
+                          "asset": draft.get("asset"), "seller": draft.get("seller")}, idx)
+    if found:
+        return found, why, m.is_strong(why)
+    near = promote.near_duplicate(draft, idx, promote.stem_frequency(idx))
+    return (near[0], near[1], False) if near else (None, None, False)
+
+
+def test_known_deal_is_found_across_the_whole_base_at_any_age():
+    """31 октября 2026: «Росатом купил в Мали компанию для проекта Бугула»
+    прошел ворота новой карточкой, хотя с 2024 года в базе есть «Росатом
+    развивает литиевый проект в Мали (Бугула)». Все правила были ограничены
+    7–90 днями или двумя годами. Владелец: «естественно, нужно смотреть по всей
+    базе». Этап известной сделки любой давности находится — на проверку."""
+    cases = [
+        ({"title": "«Росатом» купил в Мали компанию для проекта на месторождении лития Бугула",
+          "date": "2026-10-30", "asset": "в Мали компанию для проекта на месторождении лития Бугула"}, "rosatom-mali"),
+        ({"title": "Qiwi закрыла покупку рекламного агентства RealWeb", "date": "2027-03-01",
+          "buyer_name": "Qiwi", "asset": "RealWeb"}, {"gecc48c49", "g0a6f7569"}),
+        ({"title": "Danone окончательно вышла из российского бизнеса, продав его «Вамин Р»", "date": "2027-01-10",
+          "buyer_name": "Вамин Р", "seller": "Danone"}, {"g96da922c", "ga4d82b1c"}),
+    ]
+    for draft, expect in cases:
+        found, why, _strong = _gate_on_real_base(draft)
+        ok = found in expect if isinstance(expect, set) else found == expect
+        assert ok, (draft["title"], found, why)
+
+
+def test_new_deal_of_a_frequent_player_is_not_rejected_as_existing():
+    """Обратная сторона: новая сделка частого игрока не отклоняется как уже
+    существующая. «Газпром выставил на торги базу отдыха» склеивался с
+    «…гостиницу „Урал“» по словам «выставил» и «торги» — и терялся. Теперь
+    такие совпадения либо не находятся, либо идут на чтение, но не в отказ."""
+    drafts = [
+        {"title": "«Газпром» выставил на торги базу отдыха в Тверской области", "date": "2026-11-01",
+         "seller": "Газпром", "asset": "база отдыха"},
+        {"title": "Банк «Траст» продал птицефабрику в Курской области", "date": "2026-11-01",
+         "seller": "Траст", "asset": "птицефабрика"},
+        {"title": "ВТБ продал гостиницу в Сочи", "date": "2026-11-01", "seller": "ВТБ", "asset": "гостиница в Сочи"},
+        {"title": "ГК «Медси» приобрела сеть клиник «Здоровье» в Казани", "date": "2026-11-01",
+         "buyer_name": "Медси", "asset": "Здоровье"},
+        {"title": "IPO ПАО «Новый ритейлер» на Московской бирже", "date": "2026-11-01", "asset": "Новый ритейлер"},
+    ]
+    for draft in drafts:
+        found, why, strong = _gate_on_real_base(draft)
+        assert not strong, (draft["title"], found, why)
+
+
+def test_triage_sends_a_weak_match_through_the_gate_not_into_enrich():
+    """Слабое совпадение в фильтре уводило новость в «дополнить», где enrich
+    отбрасывал ее как слабую, — новая сделка не доходила никуда."""
+    import match as m
+    assert m.is_strong("тот же адрес источника") and m.is_strong("совпали покупатель и предмет открытой сделки; новая стадия")
+    assert not m.is_strong("общие слова заголовка: 3")
+    assert not m.is_strong("общее название в кавычках и общие слова: 1")
+    src = (ROOT / "pipeline" / "ingest" / "triage.py").read_text(encoding="utf-8")
+    assert "if deal_id and not matcher.is_strong(why):" in src

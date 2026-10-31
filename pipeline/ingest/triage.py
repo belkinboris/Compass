@@ -109,6 +109,11 @@ def main(argv):
             result.append(dict(item, source_id=row.get('source_id'), verdict='not_a_deal'))
             continue
         deal_id, why = matcher.match(item, idx)
+        # Слабое совпадение — не «дополнить», а новая новость с подсказкой: она
+        # пройдет ворота и встанет в очередь дублей (31 октября 2026).
+        if deal_id and not matcher.is_strong(why):
+            item['maybe_of'] = deal_id
+            deal_id = None
         verdict = ('enrich:' + deal_id) if deal_id else 'new'
         counts['enrich' if deal_id else 'new'] += 1
         result.append(dict(item, source_id=row.get('source_id'), verdict=verdict, why=why))
