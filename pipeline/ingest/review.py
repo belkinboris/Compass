@@ -697,7 +697,7 @@ def stamp_reviewed(card, day=None):
 
 def _parse_date(s):
     """ГГГГ-ММ-ДД (или ГГГГ) -> date, или None — тем же способом, что
-    `pipeline/backfill_followup_researched.py`, чтобы не разойтись в
+    `pipeline/archive/2026-07/backfill_followup_researched.py`, чтобы не разойтись в
     трактовке частичных дат."""
     try:
         parts = [int(x) for x in str(s).split('-')]
@@ -732,7 +732,7 @@ def stamp_deep_researched(card, day=None):
     `added` — и очереди второго/третьего уровня тут же требовали бы прохода
     С НУЛЕВЫМ ОТСТУПОМ от только что законченного первого, что бессмысленно
     (тот же расчет, что у разового бэкфилла
-    `pipeline/backfill_followup_researched.py` 16 августа, — но 20 карточек
+    `pipeline/archive/2026-07/backfill_followup_researched.py` 16 августа, — но 20 карточек
     партии 2 и 20 карточек партии 3 были помечены deep_researched УЖЕ ПОСЛЕ
     того прогона и проскочили мимо него; правило нужно как ПОСТОЯННОЕ
     поведение самой отметки, а не только как разовая уборка старого

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Карточка g29d48d22 («Дом.РФ»/КРТ Иркутская область): текст по фактам
 (write_card.py, WRITING_BRIEF.md). Поле `sum` = "Не раскрыта" установлено
-отдельным скриптом (`pipeline/fix_g29d48d22_sum_2026_10_22.py`) — review.py
+отдельным скриптом (`pipeline/archive/2026-10/fix_g29d48d22_sum_2026_10_22.py`) — review.py
 принимает в `sum` только разобранные числовые форматы.
 
 Запуск: python3 pipeline/ingest/review.py --write
