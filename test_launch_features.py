@@ -5203,7 +5203,24 @@ def test_manual_edit_in_the_channel_is_remembered_for_the_routine(client, monkey
         "chat": {"id": -100777, "type": "channel", "title": "Проект Компас"}}})
     edits = client.get("/api/ops/channel-edits", params={"token": "тайна"}).json()["edits"]
     assert "-100777:%d" % mid in edits
+    assert edits["-100777:%d" % mid]["text"] == "правка владельца", "текст правки хранится — по нему видно, что владелец меняет"
     assert client.get("/api/ops/channel-edits", params={"token": "нет"}).status_code == 404
+
+
+def test_ask_refuses_politely_when_all_slots_are_busy(client, monkeypatch):
+    """Аудит кода 28 октября 2026 (H7): вопрос ассистенту держит поток до 60 с,
+    потоков 40 — сорок вопросов разом вешали бы сайт. Лишний вопрос получает
+    вежливый ответ, а не очередь на минуту."""
+    import threading
+    monkeypatch.setattr(main, "_ask_slots", threading.BoundedSemaphore(1))
+    monkeypatch.setattr(main, "ASK_QUEUE_WAIT", 0.05)
+    assert main._ask_slots.acquire(timeout=1)
+    try:
+        r = client.post("/api/ask", json={"question": "Крупнейшие сделки 2026 года"})
+        assert r.status_code == 200 and r.json()["intent"] == "busy"
+        assert "много вопросов" in r.json()["answer"]
+    finally:
+        main._ask_slots.release()
 
 
 def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(monkeypatch):
