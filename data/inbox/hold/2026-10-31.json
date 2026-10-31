@@ -1,4 +1,61 @@
 {
  "made": "2026-10-31",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d80887487",
+   "title": "Кофейни проигрывают магазинам: сколько кофе могут купить россияне на зарплату",
+   "date": "2026-10-31",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/10/31/kofejni-proigryvayut-magazinam-skolko-kofe-mogut-kupit-rossiyane-na-zarplatu"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44203017",
+   "title": "В Омске провалились торги по продаже имущества газового магната Кришкевича",
+   "date": "2026-10-31",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/10/31/v-omske-provalilis-torgi-po-prodazhe-imushhestva-gazovogo-magnata-krishkevicha"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
 }
