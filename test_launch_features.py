@@ -12,7 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import core
+from app import core, fns
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -121,7 +121,7 @@ def test_fns_company_dossier_free_and_paid_access(client, monkeypatch):
     (pipeline/COMPANY_FINANCE_BRIEF.md, раздел П6). Сейчас флаг стоит True
     (см. test_fns_all_free_shows_full_history_to_anonymous_visitors ниже) —
     это не отменяет саму границу, она просто временно не применяется."""
-    monkeypatch.setattr(main, "FNS_ALL_FREE", False)
+    monkeypatch.setattr(fns, "FNS_ALL_FREE", False)
     _seed_fns_company()
     anonymous = client.get("/api/companies/launch-fns-company/fns")
     assert anonymous.status_code == 200
@@ -247,8 +247,8 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     }
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile",
                          lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-clean-target" else None)
 
     body = client.get("/api/analytics/multiples").json()
@@ -292,8 +292,8 @@ def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client,
     registry = {"mult-unread-target": {"company_id": "mult-unread-target", "decision": "confirmed", "inn": "7710000601"}}
     deal["facts"] = facts.derive(deal, {"registry": registry, "lot_ids": set()})
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: {"mult-unread-deal": deal})
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile", lambda cid: None)
 
     body = client.get("/api/analytics/multiples").json()
     assert body["candidates_total"] == 1 and body["awaiting_reading"] == 1
@@ -323,8 +323,8 @@ def test_analytics_multiples_endpoint_names_every_verified_deal_it_hides(client,
     registry = {"mult-out-target": {"company_id": "mult-out-target", "decision": "confirmed", "inn": "7710000701"}}
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile", lambda cid: None)
 
     body = client.get("/api/analytics/multiples").json()
     assert [d["id"] for d in body["deals"]] == ["mult-out-deal"] and body["not_shown"] == []
@@ -358,8 +358,8 @@ def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(cli
     }
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile",
                          lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-op-target" else None)
 
     body = client.get("/api/analytics/multiples").json()
@@ -505,7 +505,7 @@ def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(clie
         ("foreign", "Иностранное юридическое лицо"),
         ("state_org", "Государственный орган"),
     ):
-        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+        monkeypatch.setattr(fns, "fns_registry_by_company_id",
                             lambda d=decision: {"launch-fns-category-test": {"decision": d}})
         body = client.get("/api/companies/launch-fns-category-test/fns").json()
         assert body["available"] is False
@@ -521,7 +521,7 @@ def test_fns_person_and_lot_categories_are_hidden_not_empty(client, monkeypatch)
     import main as main_module
 
     for decision in ("person", "lot"):
-        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+        monkeypatch.setattr(fns, "fns_registry_by_company_id",
                             lambda d=decision: {"launch-fns-hidden-test": {"decision": d}})
         body = client.get("/api/companies/launch-fns-hidden-test/fns").json()
         assert body["available"] is False
@@ -551,7 +551,7 @@ def test_fns_category_is_carried_even_when_a_legal_entity_is_already_matched(cli
     import main as main_module
 
     company_id = _seed_fns_company("launch-fns-bank-with-matched-entity")
-    monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id",
                         lambda: {"launch-fns-bank-with-matched-entity": {"decision": "bank", "cbr_regnum": 1481}})
     body = client.get("/api/companies/launch-fns-bank-with-matched-entity/fns").json()
     assert body["available"] is True
@@ -1301,7 +1301,7 @@ def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
     П1) — тот проверяется отдельным тестом ниже."""
     import json as _json
     from pipeline import sync_fns
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 50)
     monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 0)
     db = get_session()
     try:
@@ -1334,10 +1334,10 @@ def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch)
     сделав тест то зеленым, то красным в зависимости от того, сколько
     раз файл уже прогоняли сегодня."""
     from pipeline import sync_fns
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP_HIGH", 300)
-    monkeypatch.setattr(main, "FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP", 120)
-    monkeypatch.setattr(main, "_fns_requests_today", lambda db: 100)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP_HIGH", 300)
+    monkeypatch.setattr(fns, "FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP", 120)
+    monkeypatch.setattr(fns, "_fns_requests_today", lambda db: 100)
     monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 500)
     fake_stats = {"confirmed_now": 1, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 1}
     monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)
@@ -1357,7 +1357,7 @@ def test_fns_sync_once_records_a_run_that_counts_toward_the_cap(monkeypatch):
     """Успешная попытка обязана оставить след в FnsSyncRun — иначе следующий
     рестарт того же дня не увидит уже потраченные запросы и потолок не
     сработает вовсе."""
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 200)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 200)
     fake_stats = {"confirmed_now": 1, "synced": 2, "skipped_fresh": 3, "errors": 0, "requests": 7}
     from pipeline import sync_fns
     monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)

@@ -9,7 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import core
+from app import core, fns
 import yandex_search as ys
 
 # ---------- yandex_search ----------
@@ -2114,7 +2114,7 @@ def test_deal_multiple_of_a_bought_company_reaches_the_model(monkeypatch):
     посчитан, а ассистент отвечал «посчитать невозможно» (21 октября 2026)."""
     import assistant_retrieval
     idx = assistant_retrieval.get_index()
-    monkeypatch.setattr(main, "_sector_multiples", lambda db=None: {
+    monkeypatch.setattr(fns, "_sector_multiples", lambda db=None: {
         "metrics": [{"key": "ev_op", "label": "EV / операционная прибыль"}, {"key": "ps", "label": "P/S"}],
         "rows": [{"id": "g91ec3558", "title": "«Магнит» купил контрольный пакет «Азбуки вкуса»", "year": 2025,
                   "target_id": "g52fa4c83", "price_full_rub": 36.36e9, "stake": 81.55, "report_year": 2024,
