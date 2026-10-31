@@ -5232,3 +5232,19 @@ def test_phone_app_page_and_channel_link(page, base_url):
     assert page.locator('footer a[href="#/app"]').count() == 1
     # на обычном браузере подсказки про «Домой» нет — она только для Safari на айфоне
     assert page.locator("#phoneHint").count() == 0
+
+
+def test_analytics_shows_industry_dynamics_by_year(page, base_url):
+    """Владелец, 31 октября 2026: в аналитику нужна динамика сделок по отраслям.
+    Таблица «отрасль × год» стоит под десяткой отраслей, строки ведут на
+    страницу отрасли, годы — все, что есть в базе, без фильтра по году."""
+    visit(page, base_url, "#/analytics")
+    page.wait_for_selector(".an-c-inddyn", timeout=20000)
+    years = page.locator(".an-c-inddyn thead th.num").all_inner_texts()
+    assert "2022" in years and "2026" in years and years == sorted(years)
+    rows = page.locator(".an-c-inddyn tbody tr")
+    assert 5 <= rows.count() <= 8
+    assert page.locator(".an-c-inddyn tbody th a[href^='#/industry/']").count() == rows.count()
+    first = page.locator(".an-c-inddyn tbody tr").first.inner_text()
+    assert "Недвижимость" in first or "ИТ" in first
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
