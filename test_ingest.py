@@ -9348,3 +9348,74 @@ def test_triage_sends_a_weak_match_through_the_gate_not_into_enrich():
     assert not m.is_strong("общее название в кавычках и общие слова: 1")
     src = (ROOT / "pipeline" / "ingest" / "triage.py").read_text(encoding="utf-8")
     assert "if deal_id and not matcher.is_strong(why):" in src
+
+
+def test_discard_drops_fix_files_only_about_that_card(tmp_path):
+    """Бэклог A25: «выкинуть» снимает файлы правок выкинутой карточки, но не
+    трогает файл партии, где есть записи про другие карточки."""
+    import os
+    import fix_files
+    (tmp_path / '__init__.py').write_text('')
+    (tmp_path / 'written_g0000aaaa_2026_10_31.py').write_text(
+        "FIXES = [{'id': 'g0000aaaa', 'field': 'sum', 'old': None, 'new': '1 млрд ₽'},\n"
+        " {'id': 'g0000aaaa', 'field': 'status', 'old': None, 'new': 'Закрыта'}]\n",
+        encoding='utf-8')
+    (tmp_path / 'batch_2026_10_31.py').write_text(
+        "FIXES = [{'id': 'g0000aaaa', 'field': 'sum', 'old': None, 'new': '1 млрд ₽'},\n"
+        " {'id': 'g0000bbbb', 'field': 'sum', 'old': None, 'new': '2 млрд ₽'}]\n",
+        encoding='utf-8')
+    dry = fix_files.drop_fixes_for('g0000aaaa', folder=str(tmp_path), write=False)
+    assert [os.path.basename(p) for p in dry] == ['written_g0000aaaa_2026_10_31.py']
+    assert (tmp_path / 'written_g0000aaaa_2026_10_31.py').exists(), 'сухой прогон не удаляет'
+    fix_files.drop_fixes_for('g0000aaaa', folder=str(tmp_path))
+    assert not (tmp_path / 'written_g0000aaaa_2026_10_31.py').exists()
+    assert (tmp_path / 'batch_2026_10_31.py').exists(), 'смешанный файл партии остается'
+    assert fix_files.drop_fixes_for('g0000zzzz', folder=str(tmp_path)) == []
+
+
+def test_auction_starting_price_is_not_a_deal_sum():
+    """Бэклог A25: стартовая цена торгов — не цена сделки."""
+    import draft as drafter
+    for text in ('Начальная цена объекта снизилась до 143,6 млн рублей.',
+                 'Стартовая стоимость лота составляет 16,1 млрд рублей.',
+                 'Минимальная цена продажи — 290 млн руб.'):
+        assert drafter.guess_sum(text), 'предпосылка: число тут есть'
+        assert drafter.sum_from_text(text) is None, text
+    assert drafter.sum_from_text('Начальная цена была 1 млрд руб. Актив продан за 1,4 млрд руб.') == '1,4 млрд ₽'
+
+
+def test_ship_decisions_sends_posts_from_the_worktree_and_notices_silence():
+    """Бэклог D4 (29 октября 2026): send_telegram запускался из основной копии и
+    читал базу без только что одобренной карточки — «очередь пуста», посты
+    уходили руками. Скрипт отправки берется из рабочей копии, а карточка без
+    поста и без «без поста» после отправки — громкое предупреждение."""
+    import importlib.util, os, pathlib
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    sd = importlib.util.module_from_spec(spec); spec.loader.exec_module(sd)
+    assert sd.SEND_TELEGRAM.startswith(sd.WORK + os.sep)
+    assert os.path.dirname(sd.BASE).startswith(sd.WORK + os.sep)
+    base = {'deals': [{'id': 'g1'}, {'id': 'g2', 'no_post': True}, {'id': 'g3'}],
+            'telegram_posts': {'g1': {}}, 'telegram_posts_realty': {}}
+    assert sd.posts_not_sent(base, ['g1', 'g2', 'g3', 'g9']) == ['g3']
+
+
+def test_late_discard_on_a_published_card_is_seen_and_applied():
+    """Бэклог H1 (g4f594e81, 27 октября 2026): владелец нажал «выкинуть» после
+    того, как карточка вышла на сайт, — решение не применялось и молча гасилось.
+    Теперь такое решение видно и снимает карточку с сайта; пост остается."""
+    import approve
+    from datetime import datetime, timezone
+    deals = [{'id': 'g1', 'title': 'Один', 'src': [['Ъ', 'https://k.ru/1']]}, {'id': 'g2', 'title': 'Два'}]
+    cards = [{'id': 'g3'}]
+    decisions = [{'id': 1, 'deal_id': 'g1', 'verdict': 'approve', 'created_at': '1'},
+                 {'id': 2, 'deal_id': 'g1', 'verdict': 'discard', 'created_at': '2'},
+                 {'id': 3, 'deal_id': 'g3', 'verdict': 'discard', 'created_at': '3'},
+                 {'id': 4, 'deal_id': 'g2~closed', 'verdict': 'post_yes', 'created_at': '4'}]
+    late = approve.late_decisions(deals, cards, decisions)
+    assert [(d['id'], x['verdict']) for d, x in late] == [('g1', 'discard')], 'g3 в очереди — не позднее; этап — не карточное'
+    data = {'deals': list(deals), 'telegram_posts': {'g1': {'message_id': 5}}}
+    state = {}
+    approve.apply_late_discard(data, state, deals[0], datetime.now(timezone.utc))
+    assert [d['id'] for d in data['deals']] == ['g2']
+    assert state['discarded_urls']['https://k.ru/1']['id'] == 'g1'
+    assert 'g1' in data['telegram_posts'], 'отметка о посте не трогается — пост в канале решает человек'

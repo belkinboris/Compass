@@ -52,6 +52,14 @@ def drop(pending, state, ids, reason, now):
     return [cards[i] for i in ids]
 
 
+def drop_fix_files(ids):
+    """Файлы правок выкинутых карточек больше никому не нужны (бэклог A25)."""
+    import fix_files
+    for i in ids:
+        for path in fix_files.drop_fixes_for(i):
+            print('  снят файл правок %s' % os.path.relpath(path, ROOT))
+
+
 def closure_text(card, reason):
     """Что сказать владельцу, если выкинутая карточка родилась из его «в работу».
     Причина с id другой карточки (g…) — это слияние: сделка уже есть в базе."""
@@ -104,6 +112,7 @@ def main(argv):
     pending_fresh = json.load(open(PENDING, encoding='utf-8'))   # перечитать прямо перед записью
     state = promote.load_state()
     gone = drop(pending_fresh, state, ids, reason, datetime.now(timezone.utc))
+    drop_fix_files(ids)
     json.dump(pending_fresh, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
     # Карточка из решения владельца («в работу») выкинута или слита — он должен
