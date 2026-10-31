@@ -1,34 +1,4 @@
 {
  "made": "2026-10-31",
- "drafts": [
-  {
-   "draft_id": "d26292966",
-   "title": "Протестующие в Германии перешли к столкновениям с полицией",
-   "date": "2026-10-31",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261031/berlin-2128363161.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  }
- ]
+ "drafts": []
 }
