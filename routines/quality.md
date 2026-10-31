@@ -115,10 +115,8 @@
    `python3 pipeline/facts_derive.py --write`, полный `python3 -m pytest -q`
    зелёным, семантический diff к HEAD. Правки данных — только скриптом или
    через `review.py`.
-10. `python3 pipeline/publication_busy.py --wait 40` (публикация выпускает решения владельца — ждём с push до 40 минут, потом push как обычно; CLAUDE.md, «Порядок работы в main»), `git pull --rebase origin main` (конфликт в `deals_promoted.json` —
-    рецепт в `READING_BRIEF.md`), коммит по-русски, `git push`. Тронули код
-    — `python3 pipeline/release.py --write` (CLAUDE.md, «Работаем прямо в
-    main»).
+10. Коммит и push по `routines/README.md`, раздел «Коммит и push из любой рутины»
+    (конфликт в `deals_promoted.json` — рецепт в `READING_BRIEF.md`).
 11. Запись в журнал через `python3 pipeline/journal_add.py --file <запись> --write` (раздел 5, сверху) — что сделали и по
     какому уровню очереди; последняя строка — «Знание: …» (CLAUDE.md).
 

@@ -185,8 +185,7 @@
 11. `python3 pipeline/facts_derive.py --write` (если `review.py` уже
     сделал это сам — повтор ничего не меняет), полный
     `python3 -m pytest -q` зелёным, семантический diff
-    `deals_promoted.json` к HEAD, `python3 pipeline/publication_busy.py --wait 40` (CLAUDE.md, «Порядок работы в main»), `git pull --rebase origin main`, коммит по-русски,
-    `git push -u origin main`. Отклонён — `git pull --rebase origin main`
+    `deals_promoted.json` к HEAD, коммит и push по `routines/README.md`, раздел «Коммит и push из любой рутины»
     (конфликт в PRODUCT_ROADMAP.md — оставить обе записи журнала; в
     таблице FIXES — обе партии, но на одно поле одной карточки не должно
     остаться двух записей).
