@@ -368,19 +368,21 @@ def test_post_always_has_buyer_seller_and_subject_in_that_order():
 
 
 def test_acceptance_catches_verbatim_source_text_and_dangling_motive():
-    """Приемка: цепочка от 12 слов подряд с текстом источника — находка
-    (правило 1 docs/sources_legal.md); «Цель сделки», начинающаяся с «такой…»,
-    — обрывок (Яндекс/VK, 8 октября 2026)."""
+    """Приемка: цепочка обычных слов как в источнике — находка (правило 1
+    docs/sources_legal.md; с 31 октября 2026 мера — единая политика
+    `pipeline/verbatim_check.py`: от 8 обычных слов, одна замена прощается, а
+    не 12 любых слов подряд, как было у приемки до того); «Цель сделки»,
+    начинающаяся с «такой…», — обрывок (Яндекс/VK, 8 октября 2026)."""
     import accept_card
     source = ('Условия сделки не раскрываются. Известно лишь, что все они могут быть '
               'выполнены в первом квартале 2027 года, то есть в период с 1 января по 31 марта.')
-    from pipeline import verbatim_check
     card = {"id": "gv1", "title": "Т", "type": "M&A", "buyer": "y", "target": "v",
             "law": {"struct": source}, "eco": {"rationale": "Такой симбиоз даст лидера рынка."}}
-    runs = accept_card.verbatim_runs(card, texts=[verbatim_check.words(source)])
-    assert runs and runs[0][0] == "law.struct" and runs[0][1] >= 12, runs
+    runs = accept_card.verbatim_runs(card, texts=[source])
+    assert runs and runs[0][0] == "law.struct" and runs[0][1] >= 8, runs
+    # Цитата с изданием после кавычки — не находка (чужие слова со ссылкой).
     quoted = dict(card, law={"struct": "«%s» — сообщает CNews." % source})
-    assert not accept_card.verbatim_runs(quoted, texts=[verbatim_check.words(source)])
+    assert not accept_card.verbatim_findings(quoted, texts=[source])
     codes = [c for c, _ in accept_card.findings(card, {"companies": {"y": {"name": "Я"}, "v": {"name": "В"}}})]
     assert "why_fragment" in codes, codes
 
@@ -391,7 +393,6 @@ def test_acceptance_catches_a_source_sentence_with_swapped_words():
     молчала. Скелет чужого предложения ловится отдельно; честный пересказ
     тех же фактов — нет. Казенное «на момент записи» — тоже находка."""
     import accept_card
-    from pipeline import verbatim_check
     source = ("В состав лота включено само здание. Покупателю придется учесть обременение: с 2021 года "
               "объект арендует управляющая компания «Azimut Hotels», договор рассчитан на 25 лет. "
               "Четырехзвездочный отель возвели к 1000-летию города.")
@@ -399,12 +400,50 @@ def test_acceptance_catches_a_source_sentence_with_swapped_words():
               "гостиницу арендует управляющая компания «Azimut Hotels», договор заключен на 25 лет."}}
     own = {"id": "gn2", "title": "Т", "law": {"terms": "Гостиница продана вместе с арендой: с 2021 года ею управляет "
            "Azimut Hotels по договору на 25 лет, а покупатель — компания той же группы."}}
-    texts = [verbatim_check.words(source)]
-    assert accept_card.verbatim_runs(copied, texts=texts) == []          # старая проверка молчит
-    near = accept_card.near_copy_sentences(copied, texts=texts)
+    near = accept_card.near_copy_sentences(copied, texts=[source])
     assert near and near[0][0] == "law.terms" and near[0][1] >= 0.7, near
-    assert accept_card.near_copy_sentences(own, texts=texts) == []
+    assert accept_card.verbatim_findings(own, texts=[source]) == []
     assert accept_card.STIFF_RE.search("чем он закончился, на момент записи неизвестно")
+
+
+def test_verbatim_policy_table():
+    """Одна политика дословности (владелец, 31 октября 2026: «Мы делаем полный
+    пересказ, то есть там не чтобы 1 слово отличалось и потом 11 подряд из
+    источника. Но если цитата чья-то, то пересказывать, конечно, не надо, но
+    нужно тогда на источник ссылаться»). Таблица примеров — для всех четырех
+    мест, которые ее вызывают: review/prose_gate, accept_card, proofread и
+    очередь рутины качества."""
+    from pipeline import verbatim_check as vc
+    src = ("Продажа состоялась по минимальной цене, поскольку других претендентов на актив "
+           "не нашлось, сообщили в министерстве. Покупателю придется учесть обременение: с 2021 "
+           "года объект арендует управляющая компания «Azimut Hotels», договор рассчитан на 25 лет.")
+    kinds = lambda text, **kw: sorted(f.kind for f in vc.check_text("extra", text, [src], **kw))  # noqa: E731
+    # Пересказ — ок.
+    assert kinds("Других покупателей не было, поэтому объект ушел по нижнему порогу цены; "
+                 "гостиницу до 2046 года арендует Azimut Hotels.") == []
+    # Копия и копия с одним замененным словом посреди цепочки — нарушение.
+    assert "verbatim_run" in kinds("Продажа состоялась по минимальной цене, поскольку других претендентов на актив не нашлось.")
+    assert "verbatim_run" in kinds("Продажа состоялась по минимальной цене, потому что других претендентов на актив не нашлось.")
+    # Три замененных слова — скелет предложения.
+    assert "near_copy" in kinds("Покупателю придется считаться с обременением: с 2021 года гостиницу арендует "
+                                "управляющая компания «Azimut Hotels», договор заключен на 25 лет.")
+    # Прямая речь с говорящим — ок; с изданием — ок (после кавычки или из src карточки); без — нарушение.
+    sp = "«Продажа состоялась по минимальной цене, поскольку других претендентов на актив не нашлось»"
+    assert kinds(sp + ", — сказал министр Иван Петров.") == []
+    assert kinds(sp + ", — сообщает «Коммерсантъ».") == []
+    assert kinds("Как пояснили «Коммерсанту»: " + sp + ".", src_names=["Коммерсантъ"]) == []
+    assert kinds("Министерство: " + sp + ".") == ["quote_without_source"]
+    # При записи по цитате слова в кавычках обязаны быть дословными.
+    assert kinds("«Продажа прошла по минимальной цене, поскольку других претендентов на актив не нашлось», "
+                 "— сказал министр.", quotes_in_texts=True) == ["quote_altered"]
+    # Заголовок, предмет и стороны — вне политики: они дословны по определению.
+    card = {"title": src[:70], "asset": "объект", "seller": "Минимущество", "extra": "Свой текст.",
+            "src": [["Коммерсантъ", "http://x"]]}
+    assert vc.check_card(card, [src]) == []
+    assert {f.field for f in vc.check_card(dict(card, extra=src), [src])} == {"extra"}
+    # Без источников проверяется только прямая речь (так работает вычитка).
+    assert [f.kind for f in vc.check_text("extra", "Министерство: " + sp + ".", [])] == ["quote_without_source"]
+    vc.self_check()
 
 
 def test_second_reading_gates_cards_accepted_since_october_9():

@@ -124,11 +124,18 @@ def test_press_parenthetical_numbers_do_not_count_as_lost():
 
 
 def test_long_quote_and_straight_quotes_are_refused():
+    """До 31 октября 2026 вычитка отказывала любой цитате длиннее 6 слов, даже
+    с автором, — и спорила с prose_gate, который цитату с автором принимал.
+    Решение владельца 31 октября (одна политика дословности,
+    pipeline/verbatim_check.py): чужие слова в кавычках не пересказывают, но у
+    них обязан быть говорящий или издание; без них — отказ."""
     card = card_fixture()
     edit = dict(id="x1", field="eco.fin", old=card["eco"]["fin"], new=GOOD_FIN)
-    long_q = GOOD_FIN + " «Сделка закрыта и оплачена полностью в срок по договору», — говорится в отчетности."
-    bad, _ = proofread.check(dict(edit, new=long_q), card)
-    assert any("длинная цитата" in b for b in bad), bad
+    quote = "«Сделка закрыта и оплачена полностью в срок по договору»"
+    bad, _ = proofread.check(dict(edit, new=GOOD_FIN + " " + quote + ", — говорится в отчетности."), card)
+    assert not any("кавычках" in b for b in bad), bad
+    bad, _ = proofread.check(dict(edit, new=GOOD_FIN + " " + quote + "."), card)
+    assert any("чужие слова в кавычках" in b for b in bad), bad
     bad, _ = proofread.check(dict(edit, new=GOOD_FIN.replace("«Русагро»", '"Русагро"')), card)
     assert any("кавычки" in b for b in bad), bad
 

@@ -149,11 +149,10 @@ FIRST_NAME_ENDINGS = re.compile(r'(?:ея|ия|ья|ра|ла|ана|ина|ая
 # «Такой симбиоз в итоге приведет…» (Яндекс/VK, 8 октября 2026): фраза
 # опирается на предыдущий абзац источника, которого у читателя нет.
 WHY_DANGLING_RE = re.compile(r'^(так(ой|ая|ое|ие)|эт(о|от|а|и)|он[аи]?|подобн[а-яё]+)\b', re.I)
-# ДОСЛОВНОСТЬ (правило 1 docs/sources_legal.md, с 3 октября 2026): цепочка
-# от 12 слов подряд с текстом источника на диске — пересказать. До 8 октября
-# 2026 проверка жила только в очереди рутины качества (verbatim_check.py), и
-# карточка Яндекс/VK прошла приемку с 79 словами CNews подряд.
-VERBATIM_MIN_WORDS = 12
+# ДОСЛОВНОСТЬ (правило 1 docs/sources_legal.md, с 3 октября 2026): до 8
+# октября 2026 проверка жила только в очереди рутины качества, и карточка
+# Яндекс/VK прошла приемку с 79 словами CNews подряд. С 31 октября 2026 мера
+# одна на всех — `pipeline/verbatim_check.py` (`verbatim_findings` ниже).
 # «Форма расчетов» с рассказом о бизнесе (чем занимается, продукты, клиенты,
 # выручка) и без единого слова об оплате — поле перепутано: у Яндекс/VK там
 # лежало описание VK Tech. Родня `FIN_IS_REPORTING`, но ловит не только
@@ -548,69 +547,42 @@ FIN_IS_REPORTING = re.compile(
     r'Совокупная выручка|В \d{4} году выручка|Оборот)', re.I)
 
 
-_SOURCE_WORDS = None
+_SOURCES = None
 
 
-def _source_words():
+def _sources():
     """Тексты источников с диска (`review.source_texts`: забранные статьи и
-    сырье притока) словами — один раз на процесс."""
-    global _SOURCE_WORDS
-    if _SOURCE_WORDS is None:
+    сырье притока), подготовленные политикой дословности, — один раз на процесс."""
+    global _SOURCES
+    if _SOURCES is None:
         from pipeline import verbatim_check
-        _SOURCE_WORDS = [w for w in (verbatim_check.words(t) for t in review.source_texts())
-                         if len(w) >= VERBATIM_MIN_WORDS]
-    return _SOURCE_WORDS
+        _SOURCES = verbatim_check.prepare(review.source_texts())
+    return _SOURCES
+
+
+def verbatim_findings(card, texts=None):
+    """Находки политики дословности (`pipeline/verbatim_check.py`, решение
+    владельца 31 октября 2026) по прозе карточки против текстов источников:
+    `texts` — строки или `verbatim_check.prepare(...)`; по умолчанию — все
+    сырье на диске. До 31 октября здесь жили свои меры: 12 любых слов подряд
+    (`verbatim_runs`), скелет предложения (`near_copy_sentences`) и
+    `proofread.long_quotes` — любая цитата длиннее 6 слов, даже с автором."""
+    from pipeline import verbatim_check
+    sources = _sources() if texts is None else verbatim_check.prepare(texts)
+    return verbatim_check.check_card(card, sources)
 
 
 def verbatim_runs(card, texts=None):
-    """[(поле, длина, кусок)] — прозаические поля, дословно совпадающие с
-    текстом источника на диске цепочкой от VERBATIM_MIN_WORDS слов. Цитата в
-    «елочках» с указанием источника — не находка (правило 1)."""
-    from pipeline import verbatim_check
-    sources = texts if texts is not None else _source_words()
-    out = []
-    for f, v in _scannable_texts(card):
-        if '«' in v and re.search(r'»\s*,?\s*[—–-]\s*(сообщ|пишет|передает|передает)', v):
-            continue
-        w = verbatim_check.words(v)
-        best = (0, '')
-        for sw in sources:
-            run, snippet = verbatim_check.longest_common_run(w, sw, VERBATIM_MIN_WORDS)
-            if run > best[0]:
-                best = (run, snippet)
-        if best[0] >= VERBATIM_MIN_WORDS:
-            out.append((f, best[0], best[1]))
-    return out
-
-
-def review_plain(text):
-    import review
-    return review.plain_words(text)
+    """[(поле, слов, кусок)] — цепочки обычных слов как в источнике (политика:
+    от `verbatim_check.MIN_WORDS`, одна замена прощается)."""
+    return [(f.field, f.words, f.span) for f in verbatim_findings(card, texts) if f.kind == 'verbatim_run']
 
 
 def near_copy_sentences(card, texts=None):
     """[(поле, доля, предложение)] — предложения прозы, повторяющие скелет
     предложения источника с заменой отдельных слов (14 октября 2026, отель
-    «Азимут»: «придется учесть» → «придется считаться», «объект» → «гостиницу»,
-    цепочка 12 слов такого не видит). Порог и способ — `verbatim_check.near_copies`."""
-    from pipeline import verbatim_check
-    sources = texts if texts is not None else _source_words()
-    stems = [[w[:5] for w in sw if len(w) >= 3 and w not in verbatim_check._STOP] for sw in sources]
-    out = []
-    for f, v in _scannable_texts(card):
-        if f == 'title':
-            continue
-        best = None
-        # Имена и числа — факты, совпадение по ним не списывание
-        # (`review.plain_words`, та же мера, что у записи текста).
-        v = review_plain(v)
-        for st in stems:
-            for share, sent in verbatim_check.near_copies(v, st):
-                if not best or share > best[1]:
-                    best = (f, share, sent)
-        if best:
-            out.append(best)
-    return out
+    «Азимут»)."""
+    return [(f.field, f.share, f.span) for f in verbatim_findings(card, texts) if f.kind == 'near_copy']
 
 
 # Обороты, которыми пересказ выдает, что его писала программа, а не человек
@@ -832,8 +804,6 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         p = proofread.press_attribution(v)
         if p:
             out.append(('press:' + f, 'пресс-язык в %s: %s' % (f, p)))
-        if proofread.long_quotes(v):
-            out.append(('quote:' + f, 'длинная цитата в кавычках в %s' % f))
     rationale = _text(card, 'eco.rationale')
     if has(rationale):
         first = (format_post._sentences(rationale) or [''])[0]
@@ -868,14 +838,15 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if DOUBLE_PERIOD_RE.search(v):
             out.append(('double_period:' + f, 'две точки подряд в %s: %r — опечатка источника, '
                         'переносится без нее' % (f, DOUBLE_PERIOD_RE.search(v).group())))
-    for f, run, snippet in verbatim_runs(card):
-        out.append(('verbatim:' + f, '%d слов подряд как в источнике в %s: «%s…» — пересказать '
-                    'своими словами или взять в «елочки» с указанием, кто сообщает'
-                    % (run, f, snippet[:80])))
-    for f, share, sent in near_copy_sentences(card):
-        out.append(('near_copy:' + f, 'в %s предложение повторяет предложение источника с заменой '
-                    'отдельных слов (%d%% основ в том же порядке): «%s» — пересказать по-своему: '
-                    'другой порядок, своя мысль, без чужого скелета' % (f, round(100 * share), sent[:90])))
+    # Дословность и прямая речь — одна политика (`pipeline/verbatim_check.py`,
+    # 31 октября 2026): цепочка обычных слов с одной заменой — `verbatim:<поле>`,
+    # скелет предложения — `near_copy:<поле>`, чужие слова в кавычках без
+    # говорящего и без издания — `quote:<поле>` (цитата с автором — не находка).
+    from pipeline import verbatim_check
+    for fnd in verbatim_findings(card):
+        code = {'verbatim_run': 'verbatim', 'near_copy': 'near_copy', 'quote_without_source': 'quote',
+                'quote_altered': 'quote_altered'}[fnd.kind]
+        out.append((code + ':' + fnd.field, verbatim_check.describe(fnd)))
     for f, v in _scannable_texts(card):
         m = STIFF_RE.search(v)
         if m:
