@@ -1,58 +1,6 @@
 {
  "cards": [
   {
-   "id": "ge9f587f4",
-   "date": "2026-10-30",
-   "title": "Экс-губернатор Куйвашев стал владельцем биатлонной компании",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "URA.RU",
-     "https://ura.news/news/1053140307"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "Экс-губернатор Куйвашев",
-   "asset": "биатлонной компании",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Экс-губернатор Куйвашев",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://ura.news/news/1053140307"
-     }
-    ],
-    "target": [
-     {
-      "value": "биатлонной компании",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://ura.news/news/1053140307"
-     }
-    ]
-   },
-   "pending_since": "2026-10-30T07:54:15+00:00"
-  },
-  {
    "id": "g39fc7468",
    "date": "2026-10-30",
    "title": "Московский продавец компьютеров получил 70% «Липецкого мяса» на фоне убытков и долгов предприятия",
