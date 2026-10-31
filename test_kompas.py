@@ -1287,6 +1287,7 @@ def test_list_items_do_not_get_a_link_to_an_unrelated_deal():
         assert out.count("](#/deal/") == 1 and out.splitlines()[-1].startswith(f"- [{d.title}](#/deal/")
 
 
+@pytest.mark.slow
 def test_list_links_on_all_answers_of_the_third_check():
     """Все ответы проверки 18 октября 2026: из пунктов списка убираем ссылки и
     ставим заново. Ссылка не должна вести на другую сделку, чем у модели, и в
@@ -1629,6 +1630,7 @@ def test_web_mode_puts_kompas_first_and_does_not_deny_what_the_search_found():
     assert "Не пиши «в открытых источниках подтверждения нет»" in web
 
 
+@pytest.mark.slow
 def test_polish_on_all_answers_of_the_fourth_check():
     """Все ответы проверки 18 октября 2026, 08:21: чистка не оставляет
     голых ссылок, пустых «[…]()», обрывков с лишней «)», второй строки
@@ -1884,6 +1886,7 @@ def test_sentence_is_not_cut_after_the_year_abbreviation():
         "7 апреля 2026 г. ФАС согласовала сделку.", "Сумма не раскрыта."]
 
 
+@pytest.mark.slow
 def test_polish_on_all_saved_answers_of_all_checks():
     """Все сохраненные ответы проверок (data/inbox/assistant_eval/*.jsonl):
     чистка идемпотентна, не оставляет голых ссылок и второй строки «Еще N»
