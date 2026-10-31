@@ -153,7 +153,8 @@ TYPE_WORDS = {
 # сам, прочитаны против текста источника. `quote` — дословный кусок источника,
 # `why` — что именно правило не увидело и почему.
 def load_fixes():
-    """Собрать правки из всех файлов `fixes/*.py`, в порядке имен.
+    """Собрать правки: архив `fixes_archive/*.json` (примененные партии, свернутые
+    `fixes_compact.py`, 31.10.2026) + живые `fixes/*.py`, партии — в порядке имен.
 
     Порядок важен: `main()` читает состояние карточки ОДИН раз в начале
     прогона и сверяет каждую запись с ним, поэтому две записи на одно поле
@@ -162,11 +163,19 @@ def load_fixes():
     """
     import importlib
     import pkgutil
-    folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixes')
-    out = []
+    here = os.path.dirname(os.path.abspath(__file__))
+    batches = []
+    archive = os.path.join(here, 'fixes_archive')
+    if os.path.isdir(archive):
+        for fn in sorted(os.listdir(archive)):
+            if fn.endswith('.json'):
+                store = json.load(open(os.path.join(archive, fn), encoding='utf-8'))
+                batches.extend((name, b['fixes']) for name, b in store['files'].items())
+    folder = os.path.join(here, 'fixes')
     for mod in sorted(m.name for m in pkgutil.iter_modules([folder])):
-        out.extend(importlib.import_module('fixes.%s' % mod).FIXES)
-    return out
+        batches.append((mod, importlib.import_module('fixes.%s' % mod).FIXES))
+    batches.sort(key=lambda b: b[0])
+    return [f for _name, batch in batches for f in batch]
 
 
 # ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ: одна общая таблица росла
