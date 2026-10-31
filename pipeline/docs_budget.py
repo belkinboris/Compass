@@ -103,7 +103,7 @@ def step_docs():
         if not os.path.isdir(base):
             continue
         for name in sorted(os.listdir(base)):
-            if name.endswith('.md') and not name.startswith('launch_texts_'):
+            if name.endswith('.md'):
                 out.append(('%s/%s' % (folder, name), limit, how))
     return out
 
