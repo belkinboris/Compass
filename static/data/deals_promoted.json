@@ -7086,7 +7086,7 @@
   {
    "id": "g029b7531",
    "date": "2026-04-15",
-   "title": "Газпром продал спутниковый завод Gazprom SPKA компании «Новый старт»",
+   "title": "Газпром продает спутниковый завод «Газпром СПКА» компании «Новый старт»",
    "buyer": "g3e551f6e",
    "target": null,
    "ind": "Машиностроение",
@@ -7157,7 +7157,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "bd60a80af477"
+     "card_hash": "9c4d3428e8c7"
     },
     "price": {
      "value_rub": null,
@@ -7180,7 +7180,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f50c07a52702"
+     "card_hash": "ae196bbd5dd8"
     },
     "target": {
      "company_id": null,
@@ -24656,7 +24656,7 @@
   {
    "id": "g17d26389",
    "date": "2022-07-07",
-   "title": "Тендерное предложение Dalliance Services Company (офшор Сергея Солонина) на выкуп акций класса B и ADR Qiwi у миноритариев на сумму до $25 млн",
+   "title": "Офшор Сергея Солонина выкупил у миноритариев акции класса B и ADR Qiwi по оферте на сумму до $25 млн",
    "buyer": "ge222164c",
    "target": "gdf829638",
    "ind": "ИТ и интернет",
@@ -24761,7 +24761,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "84bbdd1a71e0"
+     "card_hash": "4d751b56ff2d"
     },
     "price": {
      "value_rub": 1572775000,
@@ -24789,7 +24789,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "90dde7ab2f1b"
+     "card_hash": "c3eaf564962a"
     },
     "target": {
      "company_id": "gdf829638",
@@ -43558,7 +43558,7 @@
   {
    "id": "g8dfb3aa0",
    "date": "2026-02-20",
-   "title": "Supplement Group приобрел производство этикеток ООО «Лейблпак» в Курске",
+   "title": "Supplement Group покупает курского производителя этикеток «Лейблпак»",
    "buyer": "g6c733a7f",
    "target": "g49dc2069",
    "ind": "Пищепром и напитки",
@@ -43622,7 +43622,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ee219158c496"
+     "card_hash": "4884dbc01c3e"
     },
     "price": {
      "value_rub": null,
@@ -43645,7 +43645,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "36f057eb3224"
+     "card_hash": "57a507c47f31"
     },
     "target": {
      "company_id": "g49dc2069",
@@ -57692,7 +57692,7 @@
   {
    "id": "g8af20254",
    "date": "2026-02-13",
-   "title": "МФК «Займер» приобретает по 50% в «Таксиагрегаторе» и IntellectMoney у ГК Qiwi",
+   "title": "МФК «Займер» купила по 50% в «Таксиагрегаторе» и IntellectMoney у Qiwi",
    "buyer": "gd51874a0",
    "target": "g8af20254-target",
    "ind": "ИТ и интернет",
@@ -57762,7 +57762,7 @@
     "stake": {
      "value": 50.0,
      "basis": "rule",
-     "card_hash": "d2159b70e2cc"
+     "card_hash": "55676dab042f"
     },
     "price": {
      "value_rub": null,
@@ -57785,7 +57785,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4ffcda658fb9"
+     "card_hash": "deb0ade7abfa"
     },
     "target": {
      "company_id": "g8af20254-target",
@@ -61894,7 +61894,7 @@
   {
    "id": "g2197ed53",
    "date": "2025-09-01",
-   "title": "По данным РБК, акционером «Медскана» стал Газпромбанк (через «Строй-профит»)",
+   "title": "Газпромбанк может стать акционером сети клиник «Медскан»",
    "buyer": "gf1f56e08",
    "target": "g729ef6c5",
    "ind": "Здравоохранение",
@@ -61988,7 +61988,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "0b12647eb144"
+     "card_hash": "5e98c63577dc"
     },
     "price": {
      "value_rub": null,
@@ -62011,7 +62011,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "86b9f933bfac"
+     "card_hash": "ce7ce4d6efcf"
     },
     "target": {
      "company_id": "g729ef6c5",
@@ -70949,7 +70949,7 @@
   {
    "id": "g1eb1565c",
    "date": "2025-02-01",
-   "title": "Группа «Самолет» продает проект «Донские Легенды» в Ростове-на-Дону ООО «Поколение»",
+   "title": "Группа «Самолет» продала проект «Донские Легенды» компании «Поколение»",
    "buyer": "g099e03c6",
    "target": "g1ed0e12f",
    "ind": "Недвижимость",
@@ -71015,7 +71015,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "e6f56b20bffd"
+     "card_hash": "fefcb913ed55"
     },
     "price": {
      "value_rub": null,
@@ -71113,7 +71113,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c0b3d2b8610f",
+     "card_hash": "6f21d0970d9e",
      "quote": "Группа «Самолет» закрыла сделку по проекту жилого квартала «Донские Легенды». Проект передали компании «Поколение».",
      "source": "https://161.ru/text/gorod/2026/03/12/76307308/",
      "verified_by": "model×2",
@@ -71136,7 +71136,7 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "intragroup": false
     },
     "target": {
@@ -72708,7 +72708,7 @@
   {
    "id": "ge0f7b957",
    "date": "2026-05-25",
-   "title": "Газпромбанк вышел из капитала ГК «Эксперт», продав миноритарную долю мажоритарным акционерам",
+   "title": "Газпромбанк продал свою миноритарную долю в ГК «Эксперт» мажоритарным акционерам группы",
    "buyer": null,
    "target": "gc4b2178f",
    "ind": "Здравоохранение",
@@ -72779,7 +72779,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a80297813d4d"
+     "card_hash": "55147876e1ec"
     },
     "price": {
      "value_rub": null,
@@ -72802,7 +72802,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a649332589b4"
+     "card_hash": "b6499dbbfbdd"
     },
     "target": {
      "company_id": "gc4b2178f",
@@ -72950,7 +72950,7 @@
   {
    "id": "g76983314",
    "date": "2026-04-02",
-   "title": "Wildberries покупает Ситимобил, Таксовичкоф и Грузовичкоф",
+   "title": "Wildberries купила «Ситимобил», «Таксовичкоф» и «Грузовичкоф»",
    "buyer": "g549ab474",
    "target": "gcd7550bf",
    "ind": "Транспорт и логистика",
@@ -73014,7 +73014,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "72b23bad7a78"
+     "card_hash": "4f947f2d5fc8"
     },
     "price": {
      "value_rub": null,
@@ -73037,7 +73037,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6d818cf37a49"
+     "card_hash": "7415ab83ac53"
     },
     "target": {
      "company_id": "gcd7550bf",
@@ -77858,7 +77858,7 @@
   {
    "id": "ga75a4d0a",
    "date": "2025-06-20",
-   "title": "ГК «Евроонко» покупает московскую клинику «Юниклиник»",
+   "title": "ГК «Евроонко» купила московскую клинику «Юниклиник»",
    "buyer": "g5d077374",
    "target": "gddbab037",
    "ind": "Здравоохранение",
@@ -77919,7 +77919,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "5466a396ed5c"
+     "card_hash": "684fa5e20818"
     },
     "price": {
      "value_rub": null,
@@ -77942,7 +77942,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f98b5ca34836"
+     "card_hash": "9326de7dcdb1"
     },
     "target": {
      "company_id": "gddbab037",
@@ -81017,7 +81017,7 @@
   {
    "id": "g248d3c20",
    "date": "2024-12-02",
-   "title": "Альфастрахование приобретает сеть клиник «МК Семейный доктор» в Москве",
+   "title": "«АльфаСтрахование» купило сеть клиник «МК Семейный доктор»",
    "buyer": "g52425c47",
    "target": "g7e5ae30b",
    "ind": "Здравоохранение",
@@ -81074,7 +81074,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "d6c5cd024669"
+     "card_hash": "5f31c07f7067"
     },
     "price": {
      "value_rub": null,
@@ -81097,7 +81097,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0ecb2802f50f"
+     "card_hash": "5c92099c87b9"
     },
     "target": {
      "company_id": "g7e5ae30b",
@@ -84117,7 +84117,7 @@
   {
    "id": "gffed92e4",
    "date": "2024",
-   "title": "WB-Russ приобретает оператора наружной рекламы «Дизайнмастер»",
+   "title": "WB-Russ купила оператора наружной рекламы «Дизайнмастер»",
    "buyer": "g549ab474",
    "target": "g6262b68a",
    "ind": "Медиа",
@@ -84188,7 +84188,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "8c3ab7725053"
+     "card_hash": "4035fad7a149"
     },
     "price": {
      "value_rub": null,
@@ -84211,7 +84211,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "80bdfbf61ce9"
+     "card_hash": "1c05d66b707f"
     },
     "target": {
      "company_id": "g6262b68a",
@@ -86429,7 +86429,7 @@
   {
    "id": "gfa47c307",
    "date": "2024-10-01",
-   "title": "«Ригла» покупает аптечную сеть «Аптеки миницен» + «Новая аптека»",
+   "title": "«Ригла» купила аптечные сети «Аптеки миницен» и «Новая аптека»",
    "buyer": "g7313d9af",
    "target": "gd3564a89",
    "ind": "Фармацевтика",
@@ -86497,7 +86497,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "e2d30afc295f"
+     "card_hash": "73979ab6c450"
     },
     "price": {
      "value_rub": null,
@@ -86520,7 +86520,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "93522ac01f50"
+     "card_hash": "227726ba5ca0"
     },
     "target": {
      "company_id": "gd3564a89",
@@ -89248,7 +89248,7 @@
   {
    "id": "g3b9c077a",
    "date": "2024-09-06",
-   "title": "Евгений Туголуков покупает группу «Евроонко»",
+   "title": "Евгений Туголуков купил группу «Евроонко»",
    "target": "g5d077374",
    "ind": "Здравоохранение",
    "type": "M&A",
@@ -89321,7 +89321,7 @@
    "facts": {
     "stake": {
      "value": 99.99,
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "050bf66c1fed",
      "object": "ООО «812 капитал» (головная компания группы «Евроонко»)",
      "event": "signing",
@@ -89533,9 +89533,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7e5ad303c0fe",
+     "card_hash": "b2647ddeac44",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Акционер частного медицинского холдинга «Медскан» Евгений Туголуков (владеет 50%) покупает группу компаний «Евроонко» через принадлежащее ему АО «Тетра».",
      "source": "https://www.vedomosti.ru/business/articles/2024/09/13/1062146-sovladelets-medskan-pokupaet-evroonko",
      "verified_by": "model×2",
@@ -89660,7 +89660,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "perimeter_not_verified"
+     "multiple_text": "stale"
     }
    },
    "stake_acquired": 99.99,
@@ -90879,7 +90879,7 @@
   {
    "id": "gb70b4830",
    "date": "2024-10-04",
-   "title": "ГАП «Ресурс» приобретает «Владимирский стандарт»",
+   "title": "ГАП «Ресурс» купила «Владимирский стандарт»",
    "buyer": "g308a4b2a",
    "target": "g5d742e72",
    "ind": "Пищепром и напитки",
@@ -90952,7 +90952,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "16902938deec"
+     "card_hash": "0e77be627805"
     },
     "price": {
      "value_rub": null,
@@ -90975,7 +90975,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f6161e10e180"
+     "card_hash": "3b52ddb65c43"
     },
     "target": {
      "company_id": "g5d742e72",
@@ -96678,7 +96678,7 @@
   {
    "id": "g073bf58b",
    "date": "2024-05-07",
-   "title": "BASF продает завод ЛКМ в Павловском Посаде компании «Лакра Синтез»",
+   "title": "BASF продал подмосковный завод лакокрасочных материалов компании «Лакра Синтез»",
    "buyer": "g34aa2579",
    "target": "g8dac9a8d",
    "ind": "Химия и удобрения",
@@ -96744,7 +96744,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "e02ee308a803"
+     "card_hash": "62a8ecbca605"
     },
     "price": {
      "value_rub": null,
@@ -96767,7 +96767,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d897fcec921c"
+     "card_hash": "7506389aa56d"
     },
     "target": {
      "company_id": "g8dac9a8d",
@@ -99949,7 +99949,7 @@
   {
    "id": "g3d9af03c",
    "date": "2025-01-01",
-   "title": "Тинькофф приобретает Росбанк",
+   "title": "«Тинькофф» купил Росбанк",
    "buyer": "g6b8f7488",
    "target": "g434cdc43",
    "ind": "Банки",
@@ -100025,7 +100025,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "340ca9c6dbf1"
+     "card_hash": "12fbc70941e5"
     },
     "price": {
      "value_rub": null,
@@ -100048,7 +100048,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7f5813147d5f"
+     "card_hash": "4c118a638bd6"
     },
     "target": {
      "company_id": "g434cdc43",
@@ -100430,7 +100430,7 @@
   {
    "id": "g1964bb40",
    "date": "2024-04-24",
-   "title": "«Мираторг» покупает производителя семенного картофеля «Балтийские семена»",
+   "title": "«Мираторг» купил производителя семенного картофеля «Балтийские семена»",
    "buyer": "gb8b82d2b",
    "target": "gac714e00",
    "ind": "Агро",
@@ -100500,7 +100500,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "2e9c2b3580ba"
+     "card_hash": "71cc9e7fe288"
     },
     "price": {
      "value_rub": null,
@@ -100523,7 +100523,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "42dbb29ddcd2"
+     "card_hash": "5413f259df09"
     },
     "target": {
      "company_id": "gac714e00",
@@ -106806,7 +106806,7 @@
   {
    "id": "g499c5c6c",
    "date": "2024",
-   "title": "«Вкусвилл» приобретает 100% долей в IT-компаниях ГК «Автомакон»",
+   "title": "«Вкусвилл» купил 100% IT-компаний ГК «Автомакон»",
    "buyer": "gb9570ff1",
    "target": "ga094c0f0",
    "ind": "E-commerce",
@@ -106880,7 +106880,7 @@
     "stake": {
      "value": 100.0,
      "basis": "rule",
-     "card_hash": "2f5c8b44db1d"
+     "card_hash": "454f19676826"
     },
     "price": {
      "value_rub": null,
@@ -106903,7 +106903,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "b83e2537d6a8"
+     "card_hash": "f4d8f8cf13e8"
     },
     "target": {
      "company_id": "ga094c0f0",
@@ -108266,7 +108266,7 @@
   {
    "id": "gf3c5069f",
    "date": "2025-03-05",
-   "title": "Александр Клячин выкупает активы KR Properties у Росимущества",
+   "title": "Александр Клячин выкупил активы KR Properties у Росимущества",
    "buyer": "gb9c8945c",
    "target": "g2c4a5a61",
    "ind": "Недвижимость",
@@ -108339,7 +108339,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "359de2f020b8"
+     "card_hash": "cdaeafa51def"
     },
     "price": {
      "value_rub": null,
@@ -108362,7 +108362,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "877754e632fb"
+     "card_hash": "cd2c16ee85ca"
     },
     "target": {
      "company_id": "g2c4a5a61",
@@ -109333,7 +109333,7 @@
   {
    "id": "g3d815d6f",
    "date": "2025-02-21",
-   "title": "ГК «Бурсервис» приобретает «Нафта Дриллинг Компани»",
+   "title": "ГК «Бурсервис» купила «Нафта Дриллинг Компани»",
    "buyer": "g69e44ed5",
    "target": "gc06dddd1",
    "ind": "Нефть и газ",
@@ -109410,7 +109410,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "62b2a2553cfa"
+     "card_hash": "6c6d9daa59ee"
     },
     "price": {
      "value_rub": null,
@@ -109433,7 +109433,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1a21ceda7966"
+     "card_hash": "a5bfb1aae65a"
     },
     "target": {
      "company_id": "gc06dddd1",
@@ -113151,7 +113151,7 @@
   {
    "id": "g087764ec",
    "date": "2024-04-27",
-   "title": "Smartway (1С) выкупает Bnovo — поставщика решений для бронирования отелей",
+   "title": "Smartway (1С) выкупил Bnovo — поставщика решений для бронирования отелей",
    "buyer": "g0c7636b1",
    "target": "g7619ce08",
    "ind": "ИТ и интернет",
@@ -113224,7 +113224,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a313aa95f298"
+     "card_hash": "699b36e98e9d"
     },
     "price": {
      "value_rub": null,
@@ -113247,7 +113247,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "49d53dcbc500"
+     "card_hash": "b4285b78725c"
     },
     "target": {
      "company_id": "g7619ce08",
@@ -113921,7 +113921,7 @@
   {
    "id": "g85dfa88c",
    "date": "2024-04-12",
-   "title": "Солид-банк покупает Камчатпрофитбанк",
+   "title": "Солид-банк купил Камчатпрофитбанк",
    "buyer": "ge65ef82b",
    "target": "g7f0ef588",
    "ind": "Банки",
@@ -113992,7 +113992,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "d0e61c06d2e1"
+     "card_hash": "4f2ff28faeab"
     },
     "price": {
      "value_rub": null,
@@ -114015,7 +114015,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "47575db40371"
+     "card_hash": "4c0e65f28f0f"
     },
     "target": {
      "company_id": "g7f0ef588",
@@ -114046,7 +114046,7 @@
   {
    "id": "geac3f614",
    "date": "2024-04-09",
-   "title": "Абрамов и Фролов продают доли в «Азбуке вкуса» компании «Бавэро групп»",
+   "title": "Абрамов и Фролов продали доли в «Азбуке вкуса» компании «Бавэро групп»",
    "buyer": "g6f60b9b0",
    "target": "g52fa4c83",
    "ind": "Ритейл",
@@ -114123,7 +114123,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "f242d35d157a"
+     "card_hash": "4a4c1347641d"
     },
     "price": {
      "value_rub": null,
@@ -114146,7 +114146,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ee58ab60c9c7"
+     "card_hash": "aab9443ddaad"
     },
     "target": {
      "company_id": "g52fa4c83",
@@ -114797,7 +114797,7 @@
   {
    "id": "gdd67ffde",
    "date": "2024-02-14",
-   "title": "ГАП «Ресурс» приобретает ГК «Шувалово»",
+   "title": "ГАП «Ресурс» купила ГК «Шувалово»",
    "buyer": "g308a4b2a",
    "target": "g122103bd",
    "ind": "Агро",
@@ -114866,7 +114866,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ab3ee63709df"
+     "card_hash": "ade1a517321d"
     },
     "price": {
      "value_rub": null,
@@ -114889,7 +114889,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "991c4ed72ea0"
+     "card_hash": "293d6d2e2bbb"
     },
     "target": {
      "company_id": "g122103bd",
@@ -115311,7 +115311,7 @@
   {
    "id": "g401b169a",
    "date": "2024-01-23",
-   "title": "СДС-Холдинг продает 75% АО НПК «Алтаймаш» (владельца «Алтайвагона») группе «Талтэк»",
+   "title": "СДС-Холдинг продал группе «Талтэк» 75% НПК «Алтаймаш» — владельца «Алтайвагона»",
    "buyer": "g5a9b2039",
    "target": "ga5a28084",
    "ind": "Машиностроение",
@@ -115381,7 +115381,7 @@
     "stake": {
      "value": 75.0,
      "basis": "rule",
-     "card_hash": "e51f552bad21"
+     "card_hash": "0d7e515dd7a3"
     },
     "price": {
      "value_rub": null,
@@ -115404,7 +115404,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "fb010047d62e"
+     "card_hash": "e812b1bf056d"
     },
     "target": {
      "company_id": "ga5a28084",
@@ -116419,7 +116419,7 @@
   {
    "id": "ga28b511a",
    "date": "2023-09-29",
-   "title": "Алексей Сидюков (Мысхако) покупает завод «Вина Лефкадии» в Саук-Дере",
+   "title": "Алексей Сидюков (Мысхако) купил завод «Вина Лефкадии» в Саук-Дере",
    "buyer": "g64e807a5",
    "target": "g601bef58",
    "ind": "Пищепром и напитки",
@@ -116504,7 +116504,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "13d402668c0a"
+     "card_hash": "34cfb2c0956c"
     },
     "price": {
      "value_rub": null,
@@ -116527,7 +116527,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f0bd3723941f"
+     "card_hash": "a53d5e3d2d2f"
     },
     "target": {
      "company_id": "g601bef58",
@@ -117478,7 +117478,7 @@
   {
    "id": "gc96f0c6b",
    "date": "2023",
-   "title": "ТПС Недвижимость приобретает торгово-развлекательный комплекс Columbus у структуры ГК ПИК",
+   "title": "«ТПС Недвижимость» купила торгово-развлекательный комплекс Columbus у структуры ГК ПИК",
    "buyer": "g694c0790",
    "target": "ge62941ed",
    "ind": "Недвижимость",
@@ -117540,7 +117540,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "d736d58b706a"
+     "card_hash": "b396c457414f"
     },
     "price": {
      "value_rub": null,
@@ -117563,7 +117563,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d4fbffce8f6f"
+     "card_hash": "91db8f42e062"
     },
     "target": {
      "company_id": "ge62941ed",
@@ -117849,7 +117849,7 @@
   {
    "id": "g23827051",
    "date": "2023-02-20",
-   "title": "PPF Real Estate продает 75% долей в логопарке «Трилоджи парк Томилино» структуре Остапишиных",
+   "title": "PPF Real Estate продала 75% логопарка «Трилоджи парк Томилино» братьям Остапишиным",
    "buyer": "g55752f80",
    "target": "g39d6172a",
    "ind": "Недвижимость",
@@ -117921,7 +117921,7 @@
     "stake": {
      "value": 75.0,
      "basis": "rule",
-     "card_hash": "b8672a4afe42"
+     "card_hash": "5eb54485dd08"
     },
     "price": {
      "value_rub": null,
@@ -117944,7 +117944,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bbb84ea0e97c"
+     "card_hash": "5294314d6a53"
     },
     "target": {
      "company_id": "g39d6172a",
@@ -120802,7 +120802,7 @@
   {
    "id": "gc92ba4cb",
    "date": "2022-12-26",
-   "title": "«Логистика и точка» приобретает российский бизнес Havi",
+   "title": "«Логистика и точка» купила российский бизнес Havi",
    "target": "g29519f4f",
    "ind": "Транспорт и логистика",
    "type": "M&A",
@@ -120887,7 +120887,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "fa9dd2bfcbf9"
+     "card_hash": "5b0c7e62c888"
     },
     "price": {
      "value_rub": null,
@@ -120910,7 +120910,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "886d58d653c6"
+     "card_hash": "084753c5a3d0"
     },
     "target": {
      "company_id": "g29519f4f",
@@ -125348,7 +125348,7 @@
   {
    "id": "gb1b7478f",
    "date": "2023-10-01",
-   "title": "HeadHunter выкупает акции и ADS кипрской материнской компании HeadHunter Group PLC",
+   "title": "HeadHunter выкупил акции и ADS кипрской материнской компании HeadHunter Group PLC",
    "buyer": "g0029735f",
    "target": "gf5648889",
    "ind": "ИТ и интернет",
@@ -125412,7 +125412,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "cc558677132c"
+     "card_hash": "2fb73d656425"
     },
     "price": {
      "value_rub": null,
@@ -125435,7 +125435,7 @@
      "reorganization": true,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "16b2c3721dbc"
+     "card_hash": "49b3b5e8b54c"
     },
     "target": {
      "company_id": "gf5648889",
@@ -127905,7 +127905,7 @@
   {
    "id": "g95777200",
    "date": "2023-09-01",
-   "title": "British American Tobacco продает российский и беларусский бизнес консорциуму местного менеджмента",
+   "title": "British American Tobacco продала российский и белорусский бизнес консорциуму местного менеджмента",
    "buyer": "gc551a7f5",
    "target": "g1ada0332",
    "ind": "Пищепром и напитки",
@@ -127971,7 +127971,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "d6636bac4366"
+     "card_hash": "ddf805bd22bd"
     },
     "price": {
      "value_rub": null,
@@ -127994,7 +127994,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "dcc78193f43a"
+     "card_hash": "8fff1a4224c4"
     },
     "target": {
      "company_id": "g1ada0332",
@@ -134192,7 +134192,7 @@
   {
    "id": "gfca749be",
    "date": "2024-03-19",
-   "title": "Kraft Heinz продает производство детского питания ГК «Черноголовка»",
+   "title": "Kraft Heinz продала производство детского питания ГК «Черноголовка»",
    "buyer": "g5ff0a3de",
    "target": "g2b1067b8",
    "ind": "Пищепром и напитки",
@@ -134261,7 +134261,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "06eab2ee188c"
+     "card_hash": "25daea18fb81"
     },
     "price": {
      "value_rub": null,
@@ -134284,7 +134284,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "41bf062ba4e7"
+     "card_hash": "0e28700d315a"
     },
     "target": {
      "company_id": "g2b1067b8",
@@ -135502,7 +135502,7 @@
   {
    "id": "g221e4969",
    "date": "2023-05-19",
-   "title": "Bonum Capital вышла из капитала ООО «Паскаль медикал», продав 49% долей",
+   "title": "Bonum Capital продала 49% «Паскаль медикал» гендиректору компании Максиму Сарманову",
    "buyer": "g46a02673",
    "target": "g99120dbb",
    "ind": "Здравоохранение",
@@ -135566,9 +135566,9 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "cf78427f2c67"
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "338da2b31f72"
     },
     "price": {
      "value_rub": null,
@@ -135591,7 +135591,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "d0d89a0a2985"
+     "card_hash": "198bc8725ecc"
     },
     "target": {
      "company_id": "g99120dbb",
@@ -141606,7 +141606,7 @@
   {
    "id": "g3b976e82",
    "date": "2023-01-30",
-   "title": "Goldman Sachs реструктурировал российский бизнес, продав доли менеджменту",
+   "title": "Goldman Sachs продал портфель российских активов своим топ-менеджерам",
    "buyer": "g2be9f78d",
    "target": "geb0ac573",
    "ind": "Рынок ценных бумаг",
@@ -141664,7 +141664,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ab117d0cdf58"
+     "card_hash": "95cbf2040259"
     },
     "price": {
      "value_rub": null,
@@ -141687,7 +141687,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "728cc94f7f3e"
+     "card_hash": "e30960e9ba77"
     },
     "target": {
      "company_id": "geb0ac573",
@@ -145324,7 +145324,7 @@
   {
    "id": "g7d996243",
    "date": "2023-10-19",
-   "title": "Группа Russ покупает ГК «Постер»",
+   "title": "Группа Russ купила ГК «Постер»",
    "buyer": "gbaa98e6b",
    "target": "g9498b9d3",
    "ind": "Медиа",
@@ -145397,7 +145397,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "b1b7ab6e531c"
+     "card_hash": "68252f1182d9"
     },
     "price": {
      "value_rub": null,
@@ -145420,7 +145420,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "da9be675f69e"
+     "card_hash": "9fbd477e5c93"
     },
     "target": {
      "company_id": "g9498b9d3",
@@ -147243,7 +147243,7 @@
   {
    "id": "g6fc4d4ac",
    "date": "2023",
-   "title": "FM Logistic продает логопарк Central Properties в Дмитрове (sale-leaseback)",
+   "title": "FM Logistic продала логопарк в Дмитрове компании Central Properties с обратной арендой",
    "buyer": "gce068d4f",
    "target": "g24e77943",
    "ind": "Недвижимость",
@@ -147316,7 +147316,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "adfb88774fad"
+     "card_hash": "e37f7f93ca98"
     },
     "price": {
      "value_rub": 3120000000,
@@ -147415,9 +147415,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "5437851fdba9",
+     "card_hash": "d466b1b23f4a",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "“Ъ” ознакомился с документом, где подкомиссия правкомиссии по контролю за иностранными инвестициями одобрила структуре Central Properties Сергея Егорова и Дениса Степанова — закрытому паевому инвестфонду «Парус-проектный 7» — покупку имущества ООО «Бати Лосино». Эта компания принадлежит французскому логистическому оператору FM Logistic, и на ее балансе находится логопарк площадью 120 тыс. кв. м в подмосковном Дмитрове.",
      "source": "https://www.kommersant.ru/doc/6137534",
      "verified_by": "model×2",
@@ -147673,7 +147673,7 @@
   {
    "id": "g12370211",
    "date": "2023-08-07",
-   "title": "Альфа-банк покупает блокирующий пакет в «Кассир.ру»",
+   "title": "Альфа-банк купил блокирующий пакет в «Кассир.ру»",
    "buyer": "g67e6a0e1",
    "target": "g030deb34",
    "ind": "Развлечения",
@@ -147757,7 +147757,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "92b2ee0640eb"
+     "card_hash": "5099a203247f"
     },
     "price": {
      "value_rub": null,
@@ -147780,7 +147780,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "23016597b1f5"
+     "card_hash": "d3d9f1c034dc"
     },
     "target": {
      "company_id": "g030deb34",
@@ -148453,7 +148453,7 @@
   {
    "id": "g8ac1b593",
    "date": "2023-06-26",
-   "title": "Amber Beverage Group продает 92,6% акций АО «Амбер Пермалко» компании ООО «АлкоВорлд»",
+   "title": "Amber Beverage Group продала 92,6% акций «Амбер Пермалко» компании «АлкоВорлд»",
    "buyer": "g831f105a",
    "target": "ge39c770c",
    "ind": "Пищепром и напитки",
@@ -148527,7 +148527,7 @@
     "stake": {
      "value": 92.6,
      "basis": "rule",
-     "card_hash": "e24dfedaa9cc"
+     "card_hash": "5d7edc9be90e"
     },
     "price": {
      "value_rub": null,
@@ -148550,7 +148550,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0bb37ca8731d"
+     "card_hash": "bc4565c69048"
     },
     "target": {
      "company_id": "ge39c770c",
@@ -150427,7 +150427,7 @@
   {
    "id": "gff93974e",
    "date": "2023-09-19",
-   "title": "ЦИАН через «Айриэлтор» приобретает 100% SmartDeal",
+   "title": "«Циан» через «Айриэлтор» купил 100% SmartDeal",
    "buyer": "g7f169e77",
    "target": "g474b6e6c",
    "ind": "Недвижимость",
@@ -150521,7 +150521,7 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "5be8d4275c60",
      "object": "SmartDeal (ООО «Практика Успеха»)",
      "event": "closing",
@@ -150551,7 +150551,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "price": {
      "value_rub": 754000000,
@@ -150648,7 +150649,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ecd1a2b84de0",
+     "card_hash": "3d2f0b6c3970",
      "quote": "Cian Plc. (холдинговая компания сервиса объявлений о недвижимости \"Циан\") получил разрешение правкомиссии по контролю за иностранными инвестициями РФ на покупку 100% сервиса регистрации сделок SmartDeal и закрыл основную часть сделки, сообщила компания во вторник.",
      "source": "https://www.interfax.ru/amp/921561",
      "verified_by": "model×2",
@@ -150671,7 +150672,7 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "intragroup": false
     },
     "target": {
@@ -150737,14 +150738,14 @@
      "industry": true,
      "purchase_sums": true,
      "top_purchases": true,
-     "multiple_text": true
+     "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "ok"
+     "multiple_text": "stale"
     }
    },
    "date_basis": "closing"
@@ -151268,7 +151269,7 @@
   {
    "id": "g1a58d740",
    "date": "2023-04-22",
-   "title": "Группа «Талтэк» продает АО «Угольная компания «Северный Кузбасс»» предпринимателю Станиславу Лупию",
+   "title": "Группа «Талтэк» продала угольную компанию «Северный Кузбасс» предпринимателю Станиславу Лупию",
    "buyer": "g064aec42",
    "target": "gac6217b4",
    "ind": "Уголь",
@@ -151336,7 +151337,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a9704d3de16f"
+     "card_hash": "f257079b5731"
     },
     "price": {
      "value_rub": null,
@@ -151359,7 +151360,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0093acf3595e"
+     "card_hash": "6b3ebbc43665"
     },
     "target": {
      "company_id": "gac6217b4",
@@ -151651,7 +151652,7 @@
   {
    "id": "gf708b89d",
    "date": "2023-04-18",
-   "title": "ЛУКОЙЛ и Газпромбанк – Фрезия получили контроль над СК Гардия",
+   "title": "ЛУКОЙЛ и ЗПИФ «Газпромбанк-Фрезия» получили контроль над страховой компанией «Гардия»",
    "buyer": "gf1f56e08",
    "target": "geebb5d31",
    "ind": "Страхование",
@@ -151731,7 +151732,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "5e509d66c26b"
+     "card_hash": "429c410cc9b4"
     },
     "price": {
      "value_rub": null,
@@ -151754,7 +151755,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "635adcbb16d9"
+     "card_hash": "d83eca76634c"
     },
     "target": {
      "company_id": "geebb5d31",
@@ -151934,7 +151935,7 @@
   {
    "id": "gc4c76129",
    "date": "2023-09-04",
-   "title": "МТС приобретает TicketsCloud",
+   "title": "МТС купила TicketsCloud",
    "buyer": "g9cb5f756",
    "target": "g4b69137f",
    "ind": "Телеком",
@@ -152045,7 +152046,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "79fa1c62f451"
+     "card_hash": "8bcd526faf44"
     },
     "price": {
      "value_rub": null,
@@ -152068,7 +152069,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "396d13cd73bc"
+     "card_hash": "e76c4ba61eea"
     },
     "target": {
      "company_id": "g4b69137f",
@@ -156146,7 +156147,7 @@
   {
    "id": "g547ff4b8",
    "date": "2023-05-04",
-   "title": "ЛУКОЙЛ продает нефтеперерабатывающий завод ISAB в Италии группе G.O.I. ENERGY",
+   "title": "ЛУКОЙЛ продал нефтеперерабатывающий завод ISAB в Италии группе G.O.I. Energy",
    "buyer": "gaf3029ec",
    "target": "g85fa7898",
    "ind": "Нефть и газ",
@@ -156237,7 +156238,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "4adf22ad52fe"
+     "card_hash": "d42d67f4fd12"
     },
     "price": {
      "value_rub": 131362500000,
@@ -156265,7 +156266,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "893a719adbdb"
+     "card_hash": "0d66ccb8f26f"
     },
     "target": {
      "company_id": "g85fa7898",
@@ -158185,7 +158186,7 @@
   {
    "id": "gf652a925",
    "date": "2024-02-05",
-   "title": "Grundfos продает российское подразделение местному менеджменту",
+   "title": "Grundfos продала российское подразделение местному менеджменту",
    "buyer": "g7958203c",
    "target": "g41a01714",
    "ind": "Машиностроение",
@@ -158255,7 +158256,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "223536c26ef5"
+     "card_hash": "5752685adab5"
     },
     "price": {
      "value_rub": null,
@@ -158278,7 +158279,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "8da10e652f6b"
+     "card_hash": "3a970c4825cd"
     },
     "target": {
      "company_id": "g41a01714",
@@ -158310,7 +158311,7 @@
   {
    "id": "g1caed4b7",
    "date": "2025-12-30",
-   "title": "Евгений Солодилин выкупает грузовую группу «Волга-Днепр»",
+   "title": "Евгений Солодилин выкупил грузовую группу «Волга-Днепр»",
    "buyer": "g93e5f2fc",
    "target": "g83feabb2",
    "ind": "Транспорт и логистика",
@@ -158384,7 +158385,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "add40ead252e"
+     "card_hash": "d017cfc39207"
     },
     "price": {
      "value_rub": null,
@@ -158407,7 +158408,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1cd298394a29"
+     "card_hash": "863407810d74"
     },
     "target": {
      "company_id": "g83feabb2",
@@ -158941,7 +158942,7 @@
   {
    "id": "g020432e9",
    "date": "2023",
-   "title": "Игорь Ким приобретает лизинговую и факторинговую дочки CNH Industrial",
+   "title": "Игорь Ким купил лизинговую и факторинговую «дочки» CNH Industrial",
    "buyer": "ge370cfae",
    "target": null,
    "ind": "Финансовые услуги",
@@ -159006,7 +159007,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "b137d3f22c19"
+     "card_hash": "04022fb3c9ae"
     },
     "price": {
      "value_rub": null,
@@ -159029,7 +159030,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c7142f4224bf"
+     "card_hash": "58b8782c4d7b"
     },
     "target": {
      "company_id": null,
@@ -162326,7 +162327,7 @@
   {
    "id": "g8ea21d1b",
    "date": "2023-03-24",
-   "title": "СИБУР выкупает 50% долю Solvay в совместном предприятии РусВинил",
+   "title": "СИБУР выкупил 50% Solvay в совместном предприятии «РусВинил»",
    "buyer": "g7f9a1e5e",
    "target": "gd898cef8",
    "ind": "Химия и удобрения",
@@ -162385,7 +162386,7 @@
     "stake": {
      "value": 50.0,
      "basis": "rule",
-     "card_hash": "cd6c715f7101"
+     "card_hash": "822dc5313b96"
     },
     "price": {
      "value_rub": 35752436000,
@@ -162413,7 +162414,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bf8827851e49"
+     "card_hash": "a665532fb9b5"
     },
     "target": {
      "company_id": "gd898cef8",
@@ -162704,7 +162705,7 @@
   {
    "id": "g42f3065c",
    "date": "2023-01-26",
-   "title": "ГК «РОСТ» планирует выкупить два тепличных комплекса в Орловской области",
+   "title": "ГК «РОСТ» купила тепличные комбинаты «ЭкоПродукт» и «Кумир» в Орловской области",
    "buyer": "g283b8f4b",
    "target": "g6db4ded9",
    "ind": "Агро",
@@ -162772,7 +162773,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "183331963b33"
+     "card_hash": "dd151ddd442a"
     },
     "price": {
      "value_rub": null,
@@ -162795,7 +162796,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "291b81f6fab2"
+     "card_hash": "4cda79331974"
     },
     "target": {
      "company_id": "g6db4ded9",
@@ -162826,7 +162827,7 @@
   {
    "id": "g688aa290",
    "date": "2023-05-26",
-   "title": "Michelin продает завод по производству шин в России компании Пауэр Интернешнл",
+   "title": "Michelin продала шинный завод в России компании «Пауэр Интернешнл»",
    "buyer": "g78958c39",
    "target": "g0527c155",
    "ind": "Автопром",
@@ -162886,7 +162887,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "0d9093c03c60"
+     "card_hash": "9650a1081d6b"
     },
     "price": {
      "value_rub": null,
@@ -162909,7 +162910,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a18b654170dc"
+     "card_hash": "7faec18fad8b"
     },
     "target": {
      "company_id": "g0527c155",
@@ -164238,7 +164239,7 @@
   {
    "id": "g2a27e6b5",
    "date": "2023-06-21",
-   "title": "«Автоваз» покупает «РН Банк» у альянса Renault-Nissan и UniCredit",
+   "title": "«Автоваз» купил «РН Банк» у альянса Renault-Nissan и UniCredit",
    "buyer": "g3e014672",
    "target": "g83b10f66",
    "ind": "Банки",
@@ -164303,7 +164304,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "3a4622bfda70"
+     "card_hash": "fcda180f13b0"
     },
     "price": {
      "value_rub": 7000000000,
@@ -164397,9 +164398,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "facb18b9e0da",
+     "card_hash": "5712a1bc9c04",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "В июне этого года \"АвтоВАЗ\" приобрел 100% акций РН банка у холдинговой компании BARN B.V. Итальянской группе UniCredit через дочерний Юникредит банк принадлежало 40% в BARN B.V., еще по 30% было у Renault и японской Nissan Motor.",
      "source": "https://www.interfax.ru/business/919177",
      "verified_by": "model×2",
@@ -172233,7 +172234,7 @@
   {
    "id": "c23732cd9",
    "date": "2022-03-25",
-   "title": "ГК «Аквариус» покупает производственно-логистический комплекс в Твери",
+   "title": "ГК «Аквариус» купила производственно-логистический комплекс в Твери",
    "ind": "Машиностроение",
    "type": "Инвестиция",
    "src": [
@@ -172274,7 +172275,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a5893684161f"
+     "card_hash": "f70a8fbe6ac2"
     },
     "price": {
      "value_rub": null,
@@ -172297,7 +172298,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "43a6283efa0c"
+     "card_hash": "9fec0a21a951"
     },
     "target": {
      "company_id": null,
@@ -172338,7 +172339,7 @@
   {
    "id": "cd9abfbfd",
    "date": "2024-12-16",
-   "title": "Группа ВТБ продает акции АО «Аврора Инвест» — акционера Первой грузовой компании",
+   "title": "Группа ВТБ продала акции «Аврора Инвест» — акционера Первой грузовой компании",
    "ind": "Транспорт и логистика",
    "type": "M&A",
    "src": [
@@ -172408,7 +172409,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ab93c90ac092"
+     "card_hash": "7ed3cdc1e54e"
     },
     "price": {
      "value_rub": null,
@@ -172507,7 +172508,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c1225fcfb139",
+     "card_hash": "2587a33f8400",
      "quote": "Ранее компания находилась под контролем ВТБ, который в результате этой сделки полностью вышел из капитала «Аврора Инвест».",
      "source": "https://www.kommersant.ru/doc/8077927",
      "verified_by": "model×2",
@@ -172530,7 +172531,7 @@
        "reader": "B"
       }
      ],
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "intragroup": false
     },
     "target": {
@@ -172826,7 +172827,7 @@
   {
    "id": "cf2375bf5",
    "date": "2024-12-28",
-   "title": "ГК «Брусника» покупает девелоперский проект «Квартал Герцена» у ГК «Самолет»",
+   "title": "ГК «Брусника» купила девелоперский проект «Квартал Герцена» у ГК «Самолет»",
    "ind": "Недвижимость",
    "type": "M&A",
    "src": [
@@ -172873,7 +172874,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "de3f5a87ecd1"
+     "card_hash": "0eaae42703f0"
     },
     "price": {
      "value_rub": null,
@@ -172896,7 +172897,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6a0756f71568"
+     "card_hash": "56405831fe8b"
     },
     "target": {
      "company_id": "g06834721",
@@ -172932,7 +172933,7 @@
   {
    "id": "cb7eb501d",
    "date": "2025-01-13",
-   "title": "Группа «Свеза» покупает упаковочные предприятия у девелоперской компании «Гранель»",
+   "title": "Группа «Свеза» купила упаковочные предприятия у девелоперской компании «Гранель»",
    "ind": "Производство тары",
    "type": "M&A",
    "src": [
@@ -172995,7 +172996,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "4a1474000cd8"
+     "card_hash": "b18b9cbd5a10"
     },
     "price": {
      "value_rub": null,
@@ -173018,7 +173019,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a34c4fb56961"
+     "card_hash": "4ca0676dca62"
     },
     "target": {
      "company_id": null,
@@ -173056,7 +173057,7 @@
   {
    "id": "c689eefe9",
    "date": "2025",
-   "title": "«Т-Девелопмент» (Т-Банк) покупает комплекс гостиницы «Турист» в Москве",
+   "title": "«Т-Девелопмент» (Т-Банк) купил комплекс гостиницы «Турист»",
    "ind": "Недвижимость",
    "type": "M&A",
    "src": [
@@ -173114,7 +173115,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "256d59d84641"
+     "card_hash": "593b3d3bdbe8"
     },
     "price": {
      "value_rub": null,
@@ -173137,7 +173138,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "22e41995cb6f"
+     "card_hash": "8a24c3358fd8"
     },
     "target": {
      "company_id": null,
@@ -173749,7 +173750,7 @@
   {
    "id": "c0e44fb7b",
    "date": "2022-08-05",
-   "title": "Группа СОГАЗ продает сеть медклиник владельцам компании-партнера «Номеко»",
+   "title": "Группа СОГАЗ продала сеть медклиник владельцам компании-партнера «Номеко»",
    "ind": "Здравоохранение",
    "type": "M&A",
    "src": [
@@ -173793,7 +173794,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "964cb3059e83"
+     "card_hash": "018395484dac"
     },
     "price": {
      "value_rub": null,
@@ -173816,7 +173817,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9905f6f09269"
+     "card_hash": "891034945ed5"
     },
     "target": {
      "company_id": "g110ab17e",
@@ -173854,7 +173855,7 @@
   {
    "id": "c43f195a5",
    "date": "2022-08-08",
-   "title": "Softline покупает контроль в разработчике ПО «Ваш платежный проводник»",
+   "title": "Softline купила контроль в разработчике ПО «Ваш платежный проводник»",
    "ind": "ИТ и интернет",
    "type": "M&A",
    "src": [
@@ -173907,7 +173908,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "881cefa4fdd5"
+     "card_hash": "e24713833215"
     },
     "price": {
      "value_rub": null,
@@ -173930,7 +173931,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6154d4552f51"
+     "card_hash": "006b4b494b1c"
     },
     "target": {
      "company_id": "gf96da211",
@@ -173964,7 +173965,7 @@
   {
    "id": "caedef395",
    "date": "2022-08-08",
-   "title": "«ЭР-Телеком» покупает 51% разработчика систем виртуализации «Шаркс датацентр»",
+   "title": "«ЭР-Телеком» купил 51% разработчика систем виртуализации «Шаркс датацентр»",
    "ind": "ИТ и интернет",
    "type": "M&A",
    "src": [
@@ -174015,7 +174016,7 @@
     "stake": {
      "value": 51.0,
      "basis": "rule",
-     "card_hash": "c913a3a2fb96"
+     "card_hash": "e3e9a40c8bb5"
     },
     "price": {
      "value_rub": null,
@@ -174038,7 +174039,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "670828df84ad"
+     "card_hash": "82b9e4b315a5"
     },
     "target": {
      "company_id": "g72026d3e",
@@ -174072,7 +174073,7 @@
   {
    "id": "cb33a285d",
    "date": "2022-08-09",
-   "title": "Baker Hughes продает буровой сегмент российского бизнеса местному менеджменту",
+   "title": "Baker Hughes продала буровой сегмент российского бизнеса местному менеджменту",
    "ind": "Нефть и газ",
    "type": "M&A",
    "src": [
@@ -174128,7 +174129,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "8223fc8516fc"
+     "card_hash": "f595fad712e2"
     },
     "price": {
      "value_rub": null,
@@ -174151,7 +174152,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "53f694eaf158"
+     "card_hash": "17d012907efe"
     },
     "target": {
      "company_id": null,
@@ -178959,7 +178960,7 @@
   {
    "id": "cbb730efc",
    "date": "2024-02-19",
-   "title": "Росимущество получило во временное управление Ульяновский станкостроительный завод DMG MORI",
+   "title": "Указ президента передал Росимуществу во временное управление завод DMG MORI в Ульяновске",
    "ind": "Машиностроение",
    "type": "Временное управление",
    "src": [
@@ -179000,7 +179001,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "179288538f27"
+     "card_hash": "6346017c4396"
     },
     "price": {
      "value_rub": null,
@@ -179023,7 +179024,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "dd788d04107d"
+     "card_hash": "4ba11fa8276c"
     },
     "target": {
      "company_id": null,
@@ -179652,7 +179653,7 @@
   {
    "id": "ce56cdefd",
    "date": "2026-03-02",
-   "title": "Росимущество стало владельцем сети гостиничных компаний и апарт-отелей",
+   "title": "Росимущество получило по решению суда гостиницу Novotel и апарт-отели Valo в Петербурге",
    "ind": "Гостиницы и туризм",
    "type": "M&A",
    "src": [
@@ -179698,7 +179699,7 @@
     "stake": {
      "value": 100.0,
      "basis": "rule",
-     "card_hash": "0ab920e1b8a4"
+     "card_hash": "81dfdc9436c0"
     },
     "price": {
      "value_rub": null,
@@ -179721,7 +179722,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "7fd7aa238143"
+     "card_hash": "bc7f08c08cd7"
     },
     "target": {
      "company_id": null,
@@ -204522,7 +204523,7 @@
   {
    "id": "gcbf6e44b",
    "date": "2026-09-09",
-   "title": "«Совко Капитал Партнерс» увеличил долю в Совкомбанке, выкупив часть пакета одного из акционеров",
+   "title": "«Совко Капитал Партнерс» увеличил долю в Совкомбанке на внебиржевой продаже акций",
    "ind": "Банки",
    "type": "M&A",
    "status": "Закрыта",
@@ -204596,7 +204597,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a016a510105d"
+     "card_hash": "aa8cd5b9b19a"
     },
     "price": {
      "value_rub": null,
@@ -204619,7 +204620,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "471f62d3994d"
+     "card_hash": "f67fb2830ed1"
     },
     "target": {
      "company_id": "gb7e1e33a",
@@ -210244,7 +210245,7 @@
   {
    "id": "g5b4e85aa",
    "date": "2026-09-29",
-   "title": "«Бизнес-Эксперт» выиграла повторные торги по агробизнесу, изъятому у Боброва и Бикова",
+   "title": "«Бизнес-Эксперт» выиграла повторные торги по агробизнесу Боброва и Бикова",
    "ind": "Агро",
    "type": "Продажа с торгов",
    "status": "Закрыта",
@@ -210380,7 +210381,7 @@
     "stake": {
      "value": 100.0,
      "basis": "rule",
-     "card_hash": "481b325921b9"
+     "card_hash": "9b698ac78c6b"
     },
     "price": {
      "value_rub": 285600000,
@@ -210469,9 +210470,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4cde490895fa",
+     "card_hash": "a3d288d5be56",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Покупателем четырех национализированных уральских агропредприятий, ранее связанных с бизнесменами Алексеем Бобровым и Артемом Биковым, станет компания «Бизнес-Эксперт» из Верхней Пышмы. Она выиграла торги с предложением 285,6 млн рублей — ровно вдвое ниже стартовой цены.",
      "source": "https://ura.news/news/1053134719",
      "verified_by": "model×2",
@@ -210708,7 +210709,7 @@
   {
    "id": "g3c7dd2e2",
    "date": "2026-09-29",
-   "title": "ТГК-1 готовит допэмиссию, которая удвоит капитал — в оплату акции МОЭК и доля в «Петербургэнерго»",
+   "title": "ТГК-1 почти удваивает уставный капитал допэмиссией в оплату акциями МОЭК и долей в «Петербургэнерго»",
    "ind": "Энергетика",
    "type": "Финансирование · структурная сделка",
    "status": "Обсуждается",
@@ -210786,7 +210787,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "19590d0ac8ba"
+     "card_hash": "0c6649d95b7a"
     },
     "price": {
      "value_rub": null,
@@ -210809,7 +210810,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4274d6d41bb3"
+     "card_hash": "1c9a36c5534f"
     },
     "target": {
      "company_id": null,
@@ -211288,7 +211289,7 @@
   {
    "id": "ge816c5b4",
    "date": "2026-09-28",
-   "title": "«Софтэкс» получил разрешение на покупку российской «дочки» Western Union",
+   "title": "Президент разрешил «Софтэксу» купить российскую «дочку» Western Union",
    "ind": "Финтех",
    "type": "M&A",
    "status": "Согласование получено",
@@ -211383,7 +211384,7 @@
     "stake": {
      "value": 100.0,
      "basis": "rule",
-     "card_hash": "01fd14471237"
+     "card_hash": "b028538ff1af"
     },
     "price": {
      "value_rub": null,
@@ -211406,7 +211407,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "76a565689467"
+     "card_hash": "416e70ce9ef6"
     },
     "target": {
      "company_id": "ga8981f42",
@@ -211449,7 +211450,7 @@
   {
    "id": "g5e7d168d",
    "date": "2026-09-28",
-   "title": "Еще один актив, изъятый у Михаила Юревича, продали вдвое дешевле начальной цены",
+   "title": "«Уральская нефтяная компания» купила на торгах 57,6% «Челябинскоблгаза» за 167,5 млн ₽",
    "ind": "Не определена",
    "type": "Продажа с торгов",
    "status": "Закрыта",
@@ -211541,7 +211542,7 @@
     "stake": {
      "value": 57.6,
      "basis": "rule",
-     "card_hash": "27dd9538a902"
+     "card_hash": "630e7e2e21d7"
     },
     "price": {
      "value_rub": 167500000,
@@ -211650,9 +211651,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e95d63b5a5b6",
+     "card_hash": "edfc49f203f0",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Организацию признали победителем, она купит контрольный пакет акций ОАО «Челябинскоблгаз» по цене отсечения — 167,5 миллиона рублей.",
      "source": "https://74.ru/text/business/2026/09/28/76666502/",
      "verified_by": "model×2",
@@ -219622,7 +219623,7 @@
   {
    "id": "g63ec5a2b",
    "date": "2026-10-07",
-   "title": "Фонд НТИ получил 3% в космической «Спутникс» — доля структур Владимира Евтушенкова размыта",
+   "title": "Фонд НТИ получил 3% в космической компании «Спутникс»",
    "ind": "Машиностроение",
    "type": "Инвестиция",
    "status": "Закрыта",
@@ -219693,7 +219694,7 @@
     "stake": {
      "value": 3.0,
      "basis": "rule",
-     "card_hash": "d21b37132e03"
+     "card_hash": "15465fc6f274"
     },
     "price": {
      "value_rub": null,
@@ -219716,7 +219717,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "30f41b03ff5c"
+     "card_hash": "fbd1d5a9e4df"
     },
     "target": {
      "company_id": "g39d80edf",
@@ -232893,7 +232894,7 @@
   {
    "id": "g8f548826",
    "date": "2026-09-30",
-   "title": "ВТБ продал часть доли в «Росгосстрах Жизни», не назвав покупателя",
+   "title": "ВТБ продал часть доли в «Росгосстрах Жизни» новому партнеру",
    "ind": "Страхование",
    "type": "M&A",
    "status": "Закрыта",
@@ -233000,7 +233001,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "30c1b7f7d6d5"
+     "card_hash": "e9e8688a934e"
     },
     "price": {
      "value_rub": null,
@@ -233023,7 +233024,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "39aef9020faf"
+     "card_hash": "4160df9186b2"
     },
     "target": {
      "company_id": "g385a04a0",
@@ -271195,7 +271196,7 @@
     "finadv": "—"
    },
    "events": [],
-   "title": "«Совко Капитал Партнерс» увеличил долю в Совкомбанке, выкупив часть пакета одного из акционеров"
+   "title": "«Совко Капитал Партнерс» увеличил долю в Совкомбанке на внебиржевой продаже акций"
   },
   "g2b62ae77": {
    "sum": "1,16 млрд ₽",
@@ -271645,7 +271646,7 @@
      "kind": "closed"
     }
    ],
-   "title": "«Бизнес-Эксперт» выиграла повторные торги по агробизнесу, изъятому у Боброва и Бикова"
+   "title": "«Бизнес-Эксперт» выиграла повторные торги по агробизнесу Боброва и Бикова"
   },
   "g3c7dd2e2": {
    "sum": "≈35,5 млрд ₽ (номинал допэмиссии)",
@@ -271665,7 +271666,7 @@
      "kind": "approval"
     }
    ],
-   "title": "ТГК-1 готовит допэмиссию, которая удвоит капитал — в оплату акции МОЭК и доля в «Петербургэнерго»"
+   "title": "ТГК-1 почти удваивает уставный капитал допэмиссией в оплату акциями МОЭК и долей в «Петербургэнерго»"
   },
   "gcf07a1ef": {
    "sum": "235,53 млн ₽",
@@ -271724,7 +271725,7 @@
      "kind": "approval"
     }
    ],
-   "title": "«Софтэкс» получил разрешение на покупку российской «дочки» Western Union"
+   "title": "Президент разрешил «Софтэксу» купить российскую «дочку» Western Union"
   },
   "g5e7d168d": {
    "sum": "167,5 млн ₽",
@@ -271744,7 +271745,7 @@
      "kind": "closed"
     }
    ],
-   "title": "Еще один актив, изъятый у Михаила Юревича, продали вдвое дешевле начальной цены"
+   "title": "«Уральская нефтяная компания» купила на торгах 57,6% «Челябинскоблгаза» за 167,5 млн ₽"
   },
   "g9f2d671d": {
    "buyer": "g85bc0458",
@@ -272637,7 +272638,7 @@
     "finadv": "—"
    },
    "events": [],
-   "title": "Фонд НТИ получил 3% в космической «Спутникс» — доля структур Владимира Евтушенкова размыта"
+   "title": "Фонд НТИ получил 3% в космической компании «Спутникс»"
   },
   "gcd8fe39c": {
    "buyer": "g6f14b502",
@@ -273848,7 +273849,7 @@
    "target": "g385a04a0",
    "asset": "доля в «Росгосстрах Жизни»",
    "status": "Закрыта",
-   "title": "ВТБ продал часть доли в «Росгосстрах Жизни», не назвав покупателя",
+   "title": "ВТБ продал часть доли в «Росгосстрах Жизни» новому партнеру",
    "law": {
     "adv": []
    },

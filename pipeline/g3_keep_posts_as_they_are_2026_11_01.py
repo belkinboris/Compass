@@ -14,7 +14,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
-BATCH = os.path.join(ROOT, 'pipeline', 'ingest', 'fixes', 'written_titles_g3_2026_11_01.py')
+BATCH = os.path.join(ROOT, 'pipeline', 'ingest', 'fixes', sys.argv[1] if len(sys.argv) > 1 and sys.argv[1].endswith('.py') else 'written_titles_g3_2026_11_01.py')
 
 
 def main(write):
