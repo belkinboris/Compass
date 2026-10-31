@@ -64,6 +64,10 @@
    пока шаги 3–5 пусты; список только сокращается (`docs/card_editing.md`).
 6a. **Бэклог блока G** — только когда шаги 3–5 честно пусты (замерено в этом
    прогоне).
+6б. **Архив правок, раз в неделю** — `python3 pipeline/ingest/fixes_compact.py
+   --days 14 --write`: применённые партии `fixes/*.py` старше двух недель
+   уезжают в `fixes_archive/<месяц>.json` (`docs/card_editing.md`, раздел
+   «Архив партий правок и fixes_compact»); `git add -A pipeline/ingest`.
 7. **Документы.** `python3 pipeline/docs_budget.py --stats`: у файла стоит ⚠️
    — сдвинуть журнал (`python3 pipeline/roadmap_archive.py --journal
    --write`) или разделить документ по темам. Не удалять знание, чтобы
