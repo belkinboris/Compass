@@ -1,44 +1,4 @@
 {
  "made": "2026-10-31",
- "drafts": [
-  {
-   "draft_id": "d30566397",
-   "title": "Россиянин продал два новых iPhone Duo и остался без денег",
-   "date": "2026-10-31",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/10/31/rossiyanin-prodal-dva-novyh-iphone-duo-i-ostalsya-bez-deneg/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-31",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/10/31/rossiyanin-prodal-dva-novyh-iphone-duo-i-ostalsya-bez-deneg/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "два новых iPhone Duo и остался без денег",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "два новых iPhone Duo и остался без денег",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  }
- ]
+ "drafts": []
 }
