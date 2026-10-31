@@ -1,4 +1,73 @@
 {
  "made": "2026-10-31",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d48750867",
+   "title": "Bloomberg узнал о плане богатейшего оборонщика купить владельца Ray-Ban",
+   "date": "2026-10-31",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/31/10/2026/6ae63f836b8ef7b63d5e15f2"
+    ]
+   ],
+   "sum": "€30 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-10-31",
+     "title": "Переговоры",
+     "note": "Чешский миллиардер Михал Стрнад предложил €30 млрд за покупку производителя Ray-Ban, узнал Bloomberg. В начале года он стал самым богатым бизнесменом из сферы вооружений, значительно разбогатев за счет поставок Киеву",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/31/10/2026/6ae63f836b8ef7b63d5e15f2"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d13924807",
+   "title": "В Эвенкии продают на члена семьи по бутылке подсолнечного масла и кочану капусты",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/society/59769"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
 }
