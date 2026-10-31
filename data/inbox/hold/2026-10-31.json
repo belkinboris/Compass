@@ -1,4 +1,33 @@
 {
  "made": "2026-10-31",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d16825630",
+   "title": "Мошенники забрали у пенсионерки в Петербурге 2,7 млн рублей и 11 тыс. евро",
+   "date": "2026-10-31",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/10/31/moshenniki-zabrali-u-pensionerki"
+    ]
+   ],
+   "sum": "2,7 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
 }
