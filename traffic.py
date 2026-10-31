@@ -249,12 +249,7 @@ def _pct(a, b):
     return round(100 * a / b) if b else 0
 
 
-def _plural(n, one, few, many):
-    n = abs(int(n)) % 100
-    if 11 <= n <= 19:
-        return many
-    n %= 10
-    return one if n == 1 else few if 2 <= n <= 4 else many
+from pipeline.textutil import plural as _plural  # noqa: E402
 
 
 def console_lines(st: dict) -> list[str]:
