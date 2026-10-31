@@ -212589,7 +212589,7 @@
     "struct": "Президент России передал во временное управление АО «УК Торг РУС» российские активы немецкой торговой сети Metro Cash & Carry. Номер и дата указа и список юрлиц, которых он касается, в источниках не названы — известен только сам факт передачи.",
     "appr": "—",
     "adv": [],
-    "terms": "Характеристику указа как национализации назвали ложью и провокацией: активы ни у кого не забирают и не крадут, а недопустимой считают блокировку золотовалютных резервов и резервов Центрального банка и использование доходов от них на войну."
+    "terms": "Характеристику указа как национализации назвали ложью и провокацией: активы ни у кого не забирают и не крадут, а недопустимой считают блокировку золотовалютных резервов и резервов Центрального банка и использование доходов от них на войну. Сама Metro описывает ситуацию иначе: формально немецкая компания по-прежнему владеет российской «дочкой», но, по ее словам, больше не имеет над ней операционного контроля — и сокращает связи с российским бизнесом еще с 2022 года."
    },
    "asset": "российские активы сети Metro Cash & Carry",
    "events": [
@@ -212720,7 +212720,8 @@
      "Metro AG"
     ]
    },
-   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет."
+   "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
+   "followup_researched": "2026-10-31"
   },
   {
    "id": "g5b4e85aa",
@@ -229394,7 +229395,8 @@
      "multiple_text": "no_target"
     }
    },
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "g84cc7a39",
@@ -229552,7 +229554,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "g6a917c05",
@@ -229697,7 +229700,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "gba4f7340",
@@ -229837,7 +229841,8 @@
     }
    },
    "sum_basis": "auction_start",
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "g178fcbb1",
@@ -229978,7 +229983,8 @@
     }
    },
    "sum_basis": "auction_start",
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "g896a22ba",
@@ -230126,7 +230132,8 @@
     }
    },
    "proofread": "2026-10-25",
-   "deep_researched": "2026-10-25"
+   "deep_researched": "2026-10-25",
+   "weekly_researched": "2026-10-31"
   },
   {
    "id": "g5257a627",
@@ -235126,7 +235133,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "Для проекта уже готовы инженерные изыскания, проектная документация и положительное заключение экспертизы, эскиз согласован с охраной памятников, заключены договоры на подключение инженерных сетей. По условиям аукциона часть здания — помещения для допобразования на 360 кв. м — победитель обязан бесплатно передать Петербургу. Дом.РФ в этой сделке выступает не продавцом, а агентом собственника: организует торги и сопровождает сделку, таким образом она работает с 2025 года.",
     "finadv": "—"
    },
    "law": {
@@ -235165,7 +235172,8 @@
      "55a0b5b9322c"
     ],
     "eco.val": [],
-    "law.struct": []
+    "law.struct": [],
+    "eco.context": []
    },
    "themes": [
     "Продажа с торгов"
@@ -235234,7 +235242,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-31"
   },
   {
    "id": "g8f548826",
@@ -235395,7 +235404,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "deep_researched": "2026-10-31"
   },
   {
    "id": "gadee3ca7",
@@ -235571,7 +235581,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-31"
   },
   {
    "id": "gfe5d2f94",
@@ -235592,6 +235603,10 @@
     [
      "АК&M",
      "https://www.akm.ru/news/sovet_direktorov_yandeksa_odobril_programmu_obratnogo_vykupa_aktsiy/"
+    ],
+    [
+     "АБН",
+     "https://abn.agency/2026/10/29/yanteh-priobrel-638-tys-akczij-yandeksa-dlya-programmy-motivaczii/"
     ]
    ],
    "from_ingest": true,
@@ -235686,17 +235701,64 @@
      "card_hash": "96d0692ae1cc"
     },
     "price": {
-     "value_rub": 2280000000.0,
+     "value_rub": 2280000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "2f1c6287acab"
+     "basis": "read",
+     "card_hash": "2f1c6287acab",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Сумма сделки составила 2,28 млрд руб.",
+     "source": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil",
+     "verified_by": "model×1",
+     "verified_at": "2026-10-31",
+     "readings": [
+      {
+       "value_rub": 2280000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "Сумма сделки составила 2,28 млрд руб.",
+       "source": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-29",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "12547e3a07ad"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "12547e3a07ad",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "29 октября, 12:15",
+     "source": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil",
+     "verified_by": "model×2, основание неполное (нет адреса или цитата не сверена)",
+     "verified_at": "2026-10-31",
+     "readings": [
+      {
+       "value": "2026-10-29",
+       "meaning": "publication",
+       "quote": "29 октября, 12:15",
+       "source": "https://www.vedomosti.ru/investments/news/2026/10/29/1241083-yandeks-vikupil",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-29",
+       "meaning": "publication",
+       "quote": "10:42, 29.10.2026",
+       "source": "https://abn.agency/2026/10/29/yanteh-priobrel-638-tys-akczij-yandeksa-dlya-programmy-motivaczii/",
+       "quote_checked": null,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": false,
@@ -235752,11 +235814,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_author_unknown",
+     "top_purchases": "price_author_unknown",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "deep_researched": "2026-10-31"
   },
   {
    "id": "gb5456bba",
@@ -235779,7 +235842,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Базой владеет ООО «Иртыш Ривьера». В 2025 году у компании чистый убыток 11 млн ₽ при выручке 46 млн ₽. У ее владельца есть также доля в ИТ-компании «Нейронити» (информационная безопасность, разработка на 1С, ИТ-аутсорсинг) и доля в аптечной сети «Фармакопейка».",
+    "context": "Базой владеет ООО «Иртыш Ривьера», а им — Сергей Милютин. В 2025 году у компании чистый убыток 11 млн ₽ при выручке 46 млн ₽. Помимо турбазы, Милютин совладелец ИТ-компании «Нейронити» (информационная безопасность, 1С-разработка, ИТ-аутсорсинг) и аптечной сети «Фармакопейка».",
     "finadv": "—"
    },
    "law": {
@@ -235812,7 +235875,9 @@
    "proofread_absorbed": {
     "eco.share": [],
     "eco.val": [],
-    "eco.context": [],
+    "eco.context": [
+     "ccc5df94dfde"
+    ],
     "extra": []
    },
    "extra": "Это уже вторая попытка продать базу: в прошлый раз покупатель был найден, но сделка так и не состоялась.",
@@ -235886,7 +235951,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "deep_researched": "2026-10-31"
   },
   {
    "id": "g831d0fc8",
@@ -236115,7 +236181,8 @@
      "multiple_text": "not_control_change"
     }
    },
-   "date_basis": "closing"
+   "date_basis": "closing",
+   "deep_researched": "2026-10-31"
   }
  ],
  "companies": {
