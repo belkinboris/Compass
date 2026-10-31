@@ -48,6 +48,13 @@ os.environ.setdefault("DATA_REFRESH_ENABLED", "0")
 # определению, и без выключателя страховка отсекала бы каждый тестовый пост.
 # Тест самой страховки включает ее обратно через monkeypatch.setenv.
 os.environ["PUBLISH_WAIT_FOR_SITE"] = "0"
+# Замок отправки постов (send_telegram.take_send_lock) один на машину — так и
+# задумано для боевых прогонов из разных копий репозитория. Но два pytest в
+# соседних рабочих копиях (1 ноября 2026: агенты в .claude/worktrees)
+# держали друг друга: тест «отправки» падал с «Другой прогон публикации уже
+# отправляет посты». Тестам — свой замок на процесс.
+os.environ["COMPASS_SEND_LOCK"] = os.path.join(
+    __import__("tempfile").gettempdir(), "compass-send-telegram-test-%d.lock" % os.getpid())
 os.environ["TELEGRAM_BOT_TOKEN"] = ""
 os.environ["TELEGRAM_CHANNEL_ID"] = ""
 os.environ["TELEGRAM_WEBHOOK_SECRET"] = ""

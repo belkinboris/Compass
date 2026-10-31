@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Проверка текста карточки, написанного по цитате: не копия, не скелет.
 
-Вызывается из `review.check` для полей `PROSE_WRITTEN`; та же мера — у
-приемки (`accept_card.near_copy_sentences`) и у очереди рутины качества
-(`verbatim_check.py --from-fixes`). Вынесено из review.py, чтобы тот не
-разбухал (`test_fix_batches_live_in_separate_files`).
+Вызывается из `review.check` для полей `PROSE_WRITTEN`. Мера дословности —
+одна на всех (`verbatim_check.py`, политика 31 октября 2026): ее же берут
+приемка (`accept_card.verbatim_runs`), вычитка (`proofread.check`) и очередь
+рутины качества (`pipeline/verbatim_check.py`). Вынесено из review.py, чтобы
+тот не разбухал (`test_fix_batches_live_in_separate_files`).
 """
 import os
 import re
@@ -23,13 +24,14 @@ for _p in (HERE, os.path.dirname(os.path.dirname(HERE))):
 # считаться»). Владелец и партнер об «Азимуте» в Ярославле: «он не
 # переписывает, тупо забирает куски». Теперь для текстовых полей наоборот:
 # цитата — доказательство (одна или несколько, через « … »), текст — свой.
-# Проверяется: каждая цитата настоящая; в тексте нет цепочки от
-# PROSE_MAX_RUN слов из цитаты и нет скелета ее предложения с заменой слов;
-# каждое число текста стоит в цитатах; нет пресс-пометок и казенных оборотов.
+# Что считать списанным и как относиться к прямой речи — ОДНА политика
+# `verbatim_check.py` (решение владельца 31 октября 2026, H10); здесь к ней
+# добавлены проверки, которым нужна именно цитата записи: каждое число
+# текста стоит в цитатах, нет пресс-пометок и казенных оборотов.
 # Как писать текст — `WRITING_BRIEF.md` (пишущий видит факты, а не статьи).
-PROSE_WRITTEN = frozenset(('extra', 'eco.share', 'eco.val', 'eco.target_fin', 'eco.fin',
-                           'eco.rationale', 'eco.context', 'law.struct', 'law.terms', 'law.appr'))
-PROSE_MAX_RUN = 8
+from pipeline import verbatim_check  # noqa: E402
+from pipeline.verbatim_check import (PROSE_FIELDS as PROSE_WRITTEN, MIN_WORDS as PROSE_MAX_RUN,  # noqa: E402,F401
+                                     SPEAKER_RE, plain_words, speech_fragments)
 QUOTE_SEP = re.compile(r'\s+…\s+|\s*\|\|\s*')
 _NUM_RX = re.compile(r'\d[\d\s\u00a0]*(?:[.,]\d+)?')
 
@@ -45,98 +47,30 @@ def _numbers(text):
     return out
 
 
-# Имена, названия в кавычках, латиница и числа с единицами — это факты, их
-# пересказать нельзя: «владелец с декабря 2024 года — ЗПИФ „Формула доверия“
-# через ООО „Карат Инвестиции“» неизбежно совпадет с цитатой. Списанное
-# предложение узнается по ОБЫЧНЫМ словам — их и сравниваем (проба на
-# «Карате», 14 октября 2026: без этого отказ получали честные пересказы).
-_QUOTED = re.compile(r'«[^«»]*(?:«[^«»]*»[^«»]*)*»|„[^“]*“|"[^"]*"')
-_UNIT = re.compile(r'(?i)\b(?:млн|млрд|трлн|тыс|руб|т|кг|га|кв|м|км|г|гг|год[ау]?|лет)\b\.?|[%₽$€]')
-_TOKEN = re.compile(r'[^\s]+')
-
-
-def plain_words(text):
-    """Текст без имен, названий и чисел; границы предложений сохраняются."""
-    text = _QUOTED.sub(' ', str(text or ''))
-    text = re.sub(r'\d[\d\s\u00a0.,–-]*', ' ', text)
-    text = _UNIT.sub(' ', text)
-    out, start = [], True
-    for tok in _TOKEN.findall(text):
-        core = tok.strip('()«»„“"—–-:,;')
-        if core and re.match(r'[A-Za-z]', core):
-            pass                                   # латиница — имя
-        elif core and core[0].isupper() and not start:
-            pass                                   # заглавная внутри предложения — имя
-        else:
-            out.append(tok)
-        if tok:
-            start = tok.endswith(('.', '!', '?', ';')) or (start and not core)
-    return ' '.join(out)
-
-
-SPEECH_MIN_WORDS = 5
-SPEAKER_RE = re.compile(r'(?i)\b(?:сказал|сказала|заявил|заявила|отметил|отметила|пояснил|пояснила|'
-                        r'считает|говорит|по\s+(?:его\s+|ее\s+|ее\s+|их\s+)?словам|рассказал|рассказала|добавил|добавила|'
-                        r'подчеркнул|подчеркнула|написал|написала|уточнил|уточнила|объявил|объявила|сообщил|сообщила|'
-                        # «заявили в правительстве», «сообщили в компании» — 16 октября 2026
-                        r'сказали|заявили|отметили|пояснили|рассказали|добавили|подчеркнули|написали|уточнили|объявили|сообщили|'
-                        # «как заявило «Авито»» — компания среднего рода, 16 октября 2026
-                        r'сказало|заявило|отметило|пояснило|рассказало|добавило|подчеркнуло|написало|уточнило|объявило|сообщило)\b')
-
-
-def _flat(s):
-    return re.sub(r'[^0-9a-zа-я]+', ' ', str(s or '').lower().replace('ё', 'е')).strip()
-
-
-def speech_fragments(text):
-    """Куски в «елочках» от SPEECH_MIN_WORDS слов — чужие слова, не названия."""
-    out = []
-    for m in re.finditer(r'«((?:[^«»]|«[^«»]*»)*)»', str(text or '')):
-        frag = m.group(1)
-        if len(_flat(frag).split()) >= SPEECH_MIN_WORDS:
-            out.append(frag)
-    return out
-
-
-def prose_problems(new, quote):
+def prose_problems(new, quote, field='extra'):
     """Причины не принимать текст поля, написанный по цитате (см. выше)."""
-    from pipeline import verbatim_check as vc
     import proofread
     bad = []
-    orig_new, orig_quote = new, quote
-    new, quote = plain_words(new), plain_words(quote)
-    q_words = vc.words(quote)
-    run, snippet = vc.longest_common_run(vc.words(new), q_words, PROSE_MAX_RUN)
-    if run >= PROSE_MAX_RUN:
-        bad.append('текст повторяет цитату %d словами подряд («%s…») — напишите своими словами '
-                   'по фактам, см. WRITING_BRIEF.md' % (run, snippet[:60]))
-    q_stems = [w[:5] for w in q_words if len(w) >= 3 and w not in vc._STOP]
-    for share, sent in vc.near_copies(new, q_stems):
-        bad.append('предложение повторяет построение цитаты с заменой отдельных слов (%d%%): «%s» — '
-                   'перескажите по-своему' % (round(100 * share), sent[:70]))
-    q_nums = _numbers(orig_quote)
-    extra = sorted(n for n in _numbers(orig_new) if n not in q_nums)
+    # Дословность и прямая речь — политика: цепочка обычных слов от
+    # MIN_WORDS с одной заменой, скелет предложения, цитата без автора;
+    # слова в кавычках обязаны лежать в цитате буква в букву
+    # (владелец, 14 октября 2026: чужую речь не правят).
+    for f in verbatim_check.check_text(field, new, [quote], quotes_in_texts=True):
+        bad.append(verbatim_check.describe(f) + (' — см. WRITING_BRIEF.md' if f.kind == 'verbatim_run' else ''))
+    q_nums = _numbers(quote)
+    extra = sorted(n for n in _numbers(new) if n not in q_nums)
     if extra:
         bad.append('в тексте числа, которых нет в цитатах: %s' % ', '.join(extra))
-    for rule, frag in proofread.source_note(orig_new):
+    for rule, frag in proofread.source_note(new):
         bad.append('пометка об источнике в тексте («%s») — %s' % (frag, rule))
-    # ПРЯМУЮ РЕЧЬ НЕ ПЕРЕСКАЗЫВАЮТ И НЕ ПРАВЯТ (владелец, 14 октября 2026):
-    # чужие слова в кавычках — только дословно и с тем, кто их сказал.
-    # Названия в кавычках короткие, поэтому проверяются кавычки от 5 слов.
-    for frag in speech_fragments(orig_new):
-        if _flat(frag) not in _flat(orig_quote):
-            bad.append('в кавычках не дословные слова источника («%s…») — цитату нельзя менять: '
-                       'дословно или пересказом без кавычек' % frag[:60])
-        elif not SPEAKER_RE.search(orig_new):
-            bad.append('у цитаты («%s…») не назван тот, кто это сказал' % frag[:60])
     # Правила, которым не нужна статья, — общие для любого пути записи
     # (pipeline/text_rules.py, 22 октября 2026): казенные обороты, служебные
     # пометки, «собеседник издания», желтый тон, жаргон, «(Коммерсантъ)».
     from pipeline import text_rules
-    for _code, why in text_rules.problems(orig_new):
+    for _code, why in text_rules.problems(new):
         if why not in bad:
             bad.append(why)
-    if re.search(r'не\s+раскры', orig_new, re.I) and len(orig_new) < 120 and not re.search(r'\d', orig_new):
+    if re.search(r'не\s+раскры', new, re.I) and len(new) < 120 and not re.search(r'\d', new):
         bad.append('в поле только «не раскрыто» — оставьте поле пустым («—»)')
     return bad
 
@@ -175,6 +109,7 @@ def absorb_earlier(fix, card, fixes, fingerprint):
 
 def self_check(quote_is_real):
     """Вызывается из `review._self_check`."""
+    verbatim_check.self_check()
     # Текстовое поле пишется своими словами: копия цитаты и ее скелет с
     # заменой слов — отказ, свой пересказ по тем же фактам — проходит.
     q_prose = ('Продажа состоялась по минимальной цене, поскольку других '
