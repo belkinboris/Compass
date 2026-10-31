@@ -12,6 +12,7 @@ LLM: DeepSeek 4 Flash через Yandex AI Studio Responses API.
 работает в демо-режиме (fallback=true).
 """
 import functools
+from contextlib import asynccontextmanager
 import hashlib
 import json
 import logging
@@ -77,7 +78,26 @@ _MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 logger = logging.getLogger("kompas")
 
-app = FastAPI(title="КОМПАС")
+
+
+@asynccontextmanager
+async def lifespan(_app):
+    """Один порядок старта вместо восьми `on_event("startup")`: таблицы
+    аккаунтов, сверка подписок, сводка за неделю, подтягивание данных,
+    докачка ФНС, индекс ассистента, опрос Telegram, сводка притока. Все
+    долгое — в своих потоках; остановка процессу не нужна (потоки daemon)."""
+    _create_account_tables()
+    _match_subscriptions_against_new_deals()
+    _start_weekly_digest()
+    _start_data_refresh()
+    _sync_fns_from_registry()
+    _warm_assistant_index()
+    _start_telegram_polling()
+    _start_intake_summary()
+    yield
+
+
+app = FastAPI(title="КОМПАС", lifespan=lifespan)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
@@ -250,7 +270,6 @@ def _ensure_user_columns(db_engine) -> None:
             conn.execute(text("ALTER TABLE users ADD COLUMN comment_name_consent_at TIMESTAMP"))
 
 
-@app.on_event("startup")
 def _create_account_tables():
     try:
         DBBase.metadata.create_all(engine)
@@ -337,7 +356,6 @@ def _create_account_tables():
 # есть что сверять, — новые карточки теперь приезжают подтягиванием данных без
 # перезапуска (data_refresh.py), и после каждой такой замены сверка зовется
 # оттуда же. Здесь она осталась ради первого прогона после деплоя.
-@app.on_event("startup")
 def _match_subscriptions_against_new_deals():
     subscription_feed.scan_on_startup()
 
@@ -378,7 +396,6 @@ def _weekly_digest_once(db, now_utc: datetime | None = None) -> int | None:
     return send_digest(db, list(deal_catalog.load_deals().values()), msk_today, SITE_URL)
 
 
-@app.on_event("startup")
 def _start_weekly_digest():
     if not WEEKLY_DIGEST or os.environ.get("PYTEST_CURRENT_TEST"):
         return
@@ -402,7 +419,6 @@ def _start_weekly_digest():
 # Свежая база без пересборки: рутины коммитят данные 4–5 раз в час, и каждый
 # такой пуш до 3 сентября 2026 перезапускал сайт (три пуша за минуту дали 502
 # на девять минут). Почему так и что качается — docstring data_refresh.py.
-@app.on_event("startup")
 def _start_data_refresh():
     data_refresh.ON_CHANGE.append(_console_after_refresh)
     data_refresh.start()
@@ -416,7 +432,6 @@ def _start_data_refresh():
 # fns_client.py), и сайт не должен ждать их, чтобы начать отвечать на
 # обычные запросы. Ключа нет — тихо пропускаем: это НЕ сбой (ключ на боевом
 # хосте может быть еще не добавлен, локальная разработка — тем более).
-@app.on_event("startup")
 def _sync_fns_from_registry():
     if not os.environ.get("API_FNS_KEY"):
         return
@@ -922,7 +937,7 @@ def build_fingerprint() -> dict:
     out = {}
     for name in _BUILD_FILES:
         try:
-            data = (pathlib.Path(__file__).resolve().parent / name).read_bytes()
+            data = (pathlib.Path(BASE_DIR) / name).read_bytes()
             out[name] = hashlib.sha256(data).hexdigest()[:8]
         except OSError:
             out[name] = None
@@ -2875,7 +2890,7 @@ class AskPrep:
 # пользователей». Теперь ей уходит то, что есть в базе: описание, собственники
 # с долями, группа, отчетность Банка России или ФНС, — и прямо сказано, чего
 # нет («собственники не указаны»), чтобы пустое место не заполнялось догадкой.
-_BANK_FINANCE_PATH = pathlib.Path(__file__).resolve().parent / "static" / "data" / "bank_finance.json"
+_BANK_FINANCE_PATH = pathlib.Path(BASE_DIR) / "static" / "data" / "bank_finance.json"
 _bank_finance_cache: dict = {}
 
 
@@ -3478,7 +3493,6 @@ def _ask(req: AskRequest, request: Request, db):
         return JSONResponse({"fallback": True})
 
 
-@app.on_event("startup")
 def _warm_assistant_index():
     """Индекс базы для ассистента строится ~1 с; греем его в фоне при старте,
     чтобы первый вопрос посетителя не платил за это ожиданием."""
@@ -4506,7 +4520,7 @@ _SECTOR_TTL_SECONDS = 60
 
 
 def _sector_multiples(db=None) -> dict:
-    deals_path = pathlib.Path(__file__).resolve().parent / "static" / "data" / "deals_promoted.json"
+    deals_path = pathlib.Path(BASE_DIR) / "static" / "data" / "deals_promoted.json"
     try:
         stamp = deals_path.stat().st_mtime
     except OSError:
@@ -5660,7 +5674,6 @@ def _telegram_reachable(token: str) -> bool:
         return False
 
 
-@app.on_event("startup")
 def _start_telegram_polling():
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
     if not TELEGRAM_POLLING or not token or os.environ.get("PYTEST_CURRENT_TEST"):
@@ -7675,7 +7688,6 @@ def ops_intake_summary(token: str = "", db=Depends(get_db)):
     return {"sent": _intake_summary_once(db, force=True)}
 
 
-@app.on_event("startup")
 def _start_intake_summary():
     if not INTAKE_SUMMARY or os.environ.get("PYTEST_CURRENT_TEST"):
         return
