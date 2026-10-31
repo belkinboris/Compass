@@ -539,11 +539,11 @@ def build_plan(resend=None, only=None):
         #   перед консолью читает другая сессия (second_reading.py).
         # Придержанная и не пропущенная приемкой (`held`/`hold_reason`) тоже
         # не показывается заново — она ждет человека, а не отправки.
-        st = readiness.state(card)
+        st = readiness.state(card, comps)
         if st != 'ready_unsent' and not readiness.is_shown(card):
             if st in ('unreviewed', 'accepted_unread'):
                 unread += 1
-            elif st == 'unaccepted':
+            elif st in ('unaccepted', 'stale'):
                 unaccepted += 1
             elif st == 'unread2':
                 unread2 += 1

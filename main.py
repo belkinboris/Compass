@@ -5980,7 +5980,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # Состояние — readiness.state: все, что ждет приток (чтение,
             # приемку, второе чтение); не пропущенные приемкой — в «Сомнительных».
             items = [c for c in not_held
-                     if _card_state(c) in ("unreviewed", "accepted_unread", "unaccepted", "unread2")]
+                     if _card_state(c) in ("unreviewed", "accepted_unread", "unaccepted", "stale", "unread2")]
             head = ("📖 <b>Ждут прочтения, второго чтения или приемки: %d</b>\nПока карточку не сверят с "
                     "источником и не примут целиком — молчание ее не публикует, сама не выйдет."
                     % len(items))

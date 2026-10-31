@@ -196,14 +196,17 @@ def apply_late_discard(data, state, deal, now):
                 'at': now.isoformat(timespec='seconds'), 'by': 'late_discard'}
 
 
-def dead_ends(cards):
+def dead_ends(cards, comps=None):
     """Готовые, но не показанные карточки (readiness `ready_unsent`): ждущая
-    второго чтения или приемки — очередь притока, а не тупик, и здесь ее нет."""
-    return [c for c in cards if readiness.state(c) == 'ready_unsent']
+    второго чтения, приемки или переприемки — очередь притока, а не тупик,
+    и здесь ее нет."""
+    return [c for c in cards if readiness.state(c, comps) == 'ready_unsent']
 
 
-def plan_actions(cards, decisions, now):
+def plan_actions(cards, decisions, now, comps=None):
     """(публикуем, придерживаем, ждем) — чистая функция, ее держат тесты.
+    `comps` — справочник компаний: с ним отпечаток приемки сверяется и по
+    именам профилей сторон (readiness.fingerprint).
 
     Ответ с текстом на сообщение [пост <id>] приходит вердиктом 'approve' с
     edited_text — правя пост, человек одновременно одобряет карточку."""
@@ -256,7 +259,7 @@ def plan_actions(cards, decisions, now):
             # — НЕ ПОКАЗАННАЯ по молчанию не выходит: молчание — согласие
             #   только того, кто сообщение получил.
             # Явное решение владельца («опубликовать») выше всех этих веток.
-            st = readiness.state(card)
+            st = readiness.state(card, comps)
             if st == 'shown' and hours_pending(card, now) >= SILENCE_HOURS:
                 publish.append((card, None, 'молчание %d ч — публикуем как есть' % SILENCE_HOURS))
             elif st == 'shown':
@@ -318,8 +321,8 @@ def main(write=False):
     pending = json.load(open(PENDING, encoding='utf-8'))
     decisions, handle = fetch_decisions()
     now = datetime.now(timezone.utc)
-    publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now)
     base_now = json.load(open(DATA, encoding='utf-8'))
+    publish, hold, wait, discard = plan_actions(pending['cards'], decisions, now, base_now.get('companies') or {})
     late = late_decisions(base_now['deals'], pending['cards'], decisions)
     for deal, d in late:
         posted = deal['id'] in (base_now.get('telegram_posts') or {})
@@ -333,7 +336,7 @@ def main(write=False):
     # владелец — «если карточка готова, в чем проблема ее показать?»).
     # Сухой прогон approve.py — первый шаг каждого прогона публикации, и он
     # называет такие карточки по имени: следующий шаг — send_drafts.py --write.
-    for card in dead_ends(pending['cards']):
+    for card in dead_ends(pending['cards'], base_now.get('companies') or {}):
         print('  ТУПИК: %s «%s» — готова, но в консоли не показана: '
               'python3 pipeline/ingest/send_drafts.py --write' % (card['id'], str(card.get('title') or '')[:70]))
 

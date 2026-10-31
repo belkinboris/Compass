@@ -9587,3 +9587,65 @@ def test_approve_treats_a_card_waiting_for_second_reading_as_a_queue_not_a_dead_
     assert "второго чтения" in why["r2"] and "ТУПИК" not in why["r2"]
     assert "не показана" in why["ok"]
     assert "решения" in why["db"] and "молчани" in why["db"]
+
+
+def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
+    """H4 аудита кода (31 октября 2026): после `review/proofread/enrich --write`
+    поля менялись, штампы оставались. Теперь приемка и второе чтение пишут
+    отпечаток содержимого; разошелся у непоказанной карточки — `stale`, ее
+    берут заново приемка и не показывает консоль. У показанной отпечаток
+    только информационный: правка качества штамп не снимает (решение
+    владельца, docs/card_acceptance.md). Старый штамп без отпечатка свежим
+    не считается несвежим."""
+    from datetime import datetime, timedelta, timezone
+    import accept_card
+    import approve
+    import readiness
+    import second_reading
+    comps = {"b1": {"name": "ООО «Ромашка»"}}
+    card = {"id": "gh1", "title": "«Ромашка» купила «Лютик»", "reviewed": "2026-10-20",
+            "accepted": "2026-10-20", "buyer": "b1", "eco": {"context": "Актив продан из-за долгов."},
+            "law": {"appr": "ФАС."}, "src": [["Т", "https://t.example/1"]]}
+    # Старый штамп без отпечатка — не stale, а обычная очередь второго чтения.
+    assert readiness.state(card, comps) == "unread2"
+    ok = {"id": "gh1", "fields": {f: "ok" for f in second_reading.filled_fields(card)},
+          "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS}, "verdict": "ok"}
+    assert second_reading.apply(ok, card, day="2026-10-21", comps=comps)[0] == "stamped"
+    assert card["second_read_hash"] == readiness.fingerprint(card, comps)
+    card["accepted_hash"] = readiness.fingerprint(card, comps)
+    assert readiness.state(card, comps) == "ready_unsent"
+    # Правка после приемки на непоказанной карточке — переприемка.
+    edited = dict(card, eco={"context": "Актив продан из-за санкций."})
+    assert readiness.state(edited, comps) == "stale"
+    assert readiness.state(edited) == "stale", "без справочника компаний часть полей все равно сверяется"
+    base = {"companies": comps, "deals": [], "telegram_posts": {}}
+    assert [c["id"] for c in accept_card.queue(base, {"cards": [edited]})] == ["gh1"]
+    assert [c["id"] for c in accept_card.queue(base, {"cards": [card]})] == []
+    now = datetime.now(timezone.utc)
+    stale_since = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    publish, _h, wait, _d = approve.plan_actions([dict(edited, pending_since=stale_since)], [], now, comps)
+    assert not publish and "переприемка" in wait[0][1]
+    assert approve.dead_ends([edited], comps) == []
+    # Та же правка на показанной карточке состояние не меняет.
+    shown = dict(edited, draft_sent=True)
+    assert readiness.state(shown, comps) == "shown"
+    publish, _h, _w, _d = approve.plan_actions([dict(shown, pending_since=stale_since)], [], now, comps)
+    assert [c["id"] for c, _o, _w in publish] == ["gh1"]
+    # Типографика штамп не снимает; переименование профиля стороны — снимает.
+    typo = dict(card, eco={"context": "Актив продан - из за долгов"})
+    assert readiness.state(typo, comps) == "ready_unsent"
+    assert readiness.state(card, {"b1": {"name": "ООО «Лютик»"}}) == "stale"
+    # После переприемки правленой карточки — снова второе чтение, не вечный stale.
+    reaccepted = dict(edited, accepted_hash=readiness.fingerprint(edited, comps))
+    assert readiness.state(reaccepted, comps) == "unread2"
+    assert [c["id"] for c in second_reading.queue(base, {"cards": [reaccepted]})] == ["gh1"]
+    # Бэкфилл ставит отпечатки только туда, где штамп есть, а отпечатка нет.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "backfill_stamp_hashes", str(Path(__file__).parent / "pipeline" / "backfill_stamp_hashes_2026_10_31.py"))
+    bf = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bf)
+    old = {"id": "old", "accepted": "2026-09-01", "second_read": "2026-10-10", "reviewed": "d"}
+    plan = bf.stamp_hashes({"companies": comps, "deals": [old, {"id": "none"}]}, {"cards": [card]})
+    assert [(w, i, s) for w, i, s, _f in plan] == [("base", "old", "accepted"), ("base", "old", "second_read")]
+    assert plan[0][3] == readiness.fingerprint(old, comps)

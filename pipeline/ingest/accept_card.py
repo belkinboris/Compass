@@ -231,12 +231,14 @@ def queue(base, pending):
     ровно те, кого гейты ниже по течению не пропустят. Состояние — одно
     место, readiness.state: придержанную и не пропущенную приемкой
     (`hold_reason`) очередь не берет — они ждут человека."""
-    out = [c for c in pending.get('cards', []) if readiness.state(c) in ('unaccepted', 'unreviewed')]
+    comps = base.get('companies') or {}
+    out = [c for c in pending.get('cards', [])
+           if readiness.state(c, comps) in ('unaccepted', 'unreviewed', 'stale')]
     posts = base.get('telegram_posts') or {}
     for c in base['deals']:
-        if c.get(STAMP) or c['id'] in posts or c.get('no_post') or c.get('post_override'):
+        if c['id'] in posts or c.get('no_post') or c.get('post_override'):
             continue
-        if format_post.is_fresh(c):
+        if readiness.state(c, comps) in ('unaccepted', 'unreviewed', 'stale') and format_post.is_fresh(c):
             out.append(c)
     return out
 
@@ -1411,6 +1413,9 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         return lines, False
     if ans.get('verdict') == 'accept' and not left:
         card[STAMP] = day or date.today().isoformat()
+        # Штамп привязан к содержимому, пока карточку не показали (H4,
+        # 31 октября 2026): разошелся отпечаток — readiness.state = stale.
+        card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
         notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
                                    ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
                                    ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes'))) if v}

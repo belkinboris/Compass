@@ -85,8 +85,9 @@ def needs_second_reading(card):
 def queue(base, pending):
     """Что ждет второго чтения — состояние `unread2` (readiness.state):
     показанную в консоли карточку второй раз не читают."""
+    comps, posts = base.get('companies') or {}, base.get('telegram_posts') or {}
     return [c for c in list(pending.get('cards') or []) + list(base.get('deals') or [])
-            if readiness.state(c) == 'unread2']
+            if c['id'] not in posts and readiness.state(c, comps) == 'unread2']
 
 
 def questionnaire(card, base):
@@ -134,13 +135,16 @@ def check(ans, card):
     return bad, problems
 
 
-def apply(ans, card, day=None):
+def apply(ans, card, day=None, comps=None):
     bad, problems = check(ans, card)
     if bad:
         return 'refused', bad
     if problems:
         return 'fix', ['%s: %s' % (k, v) for k, v in problems]
     card[STAMP] = day or date.today().isoformat()
+    # Штамп привязан к содержимому, пока карточку не показали (H4): правка
+    # после второго чтения возвращает карточку в очередь второго чтения.
+    card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
     return 'stamped', []
 
 
@@ -168,7 +172,7 @@ def main(argv):
         if not card:
             print('  ОТКАЗ  %s: карточки нет' % ans.get('id'))
             continue
-        state, notes = apply(ans, card)
+        state, notes = apply(ans, card, comps=base.get('companies') or {})
         if state == 'refused':
             print('  ОТКАЗ  %s: %s' % (card['id'], '; '.join(notes)))
         elif state == 'fix':
