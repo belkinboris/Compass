@@ -46,7 +46,7 @@ if ROOT not in sys.path:
 _INGEST = os.path.join(ROOT, 'pipeline', 'ingest')
 if _INGEST not in sys.path:
     sys.path.insert(0, _INGEST)
-from review import _same_word  # noqa: E402
+from textmatch import _same_word  # noqa: E402  (31.10.2026: без review и fixes/)
 # Адрес витрины, который уходит в ссылки телеграм-поста. Домен был вписан
 # в код числом — и не тот: сайт живет на projectcompass.ru, а посты вели бы
 # читателя на kompas.deals. Берем из переменной окружения `APP_BASE_URL` (той
