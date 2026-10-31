@@ -3974,7 +3974,7 @@ def test_open_filter_list_does_not_overflow(browser, base_url, width):
 UNCLAMP = "html{overflow-x:visible!important}body{overflow-x:visible!important}"
 
 WIDE_ROUTES = ["#/", "#/deals", "#/companies", "#/advisors", "#/materials",
-               "#/analytics", "#/assistant", "#/account",
+               "#/analytics", "#/assistant", "#/account", "#/app",
                "#/companies/g28ff15bb", "#/deal/gf12c6323"]
 
 _OFFENDERS_JS = """() => {
@@ -5218,3 +5218,17 @@ def test_deals_tab_opens_the_feed_not_the_hero(page, base_url):
     top = page.evaluate("document.getElementById('feed').getBoundingClientRect().top")
     header = page.evaluate("document.querySelector('.top').offsetHeight")
     assert abs(top - header) <= 4, (top, header)
+
+
+def test_phone_app_page_and_channel_link(page, base_url):
+    """Владелец, 31 октября 2026: нужна инструкция, как добавить Компас на экран
+    «Домой» айфона, и ссылка на Telegram-канал на сайте. Страница #/app
+    описывает шаги для Safari и Chrome; подвал ведет в канал и на страницу."""
+    visit(page, base_url, "#/app")
+    text = page.inner_text("#app")
+    assert "Поделиться" in text and "На экран" in text and "Chrome" in text
+    assert page.locator('#app a[href="https://t.me/projectcompassru"]').count() == 1
+    assert page.locator('footer a[href="https://t.me/projectcompassru"]').count() == 1
+    assert page.locator('footer a[href="#/app"]').count() == 1
+    # на обычном браузере подсказки про «Домой» нет — она только для Safari на айфоне
+    assert page.locator("#phoneHint").count() == 0

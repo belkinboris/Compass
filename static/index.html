@@ -2030,7 +2030,7 @@ body{overflow-x:clip}
 /* ---------- footer ---------- */
 footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2430 100%);color:#A9BDB2}
 .foot-in{max-width:1120px;margin:0 auto;padding:56px 28px 0}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px;border-bottom:1px solid rgba(243,241,233,.12)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px;border-bottom:1px solid rgba(243,241,233,.12)}
 /* ЗДЕСЬ СТОЯЛО `.foot-brand span{color:#C9AE7C}` — тот же класс бага, что был
    утром в шапке (.wordmark span): в разметке футера ДВА span (значок и текст),
    и оба красились бронзой. Буквы М/А давно переехали на <em> и красятся
@@ -2375,6 +2375,11 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
 
 .legal-page{max-width:720px}
+.phone-hint{position:fixed;top:68px;left:16px;right:16px;z-index:49;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--accent-soft);color:var(--accent-deep);font-size:13px;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.phone-hint span{flex:1}.phone-hint a{text-decoration:underline;font-weight:600}
+.phone-hint button{background:none;border:0;font-size:20px;line-height:1;color:var(--accent-deep);padding:0 4px;cursor:pointer}
+.app-steps{margin:18px 0 6px}.app-steps ol{margin:0 0 10px;padding-left:22px}.app-steps li{font-size:14px;line-height:1.7;margin:0 0 8px}
+.app-page .btn-main{display:inline-block;background:var(--accent-deep,#0F2B21);color:#fff;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:600}
 .legal-page h2{font-family:var(--f-display);font-size:19px;font-weight:400;margin:34px 0 10px}
 .legal-page h3{font-size:14px;font-weight:600;margin:22px 0 8px;color:var(--ink)}
 .legal-page p,.legal-page li{font-size:14px;line-height:1.7;color:var(--ink);margin:0 0 12px;overflow-wrap:anywhere}
@@ -2531,6 +2536,12 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
         <a href="#/advisors">Консультанты</a>
         <a href="#/materials">Материалы</a>
         <a href="#/assistant">Ассистент</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">Следить за сделками</div>
+        <a href="https://t.me/projectcompassru" target="_blank" rel="noopener">Канал в Telegram</a>
+        <a href="#/app">Компас на экране телефона</a>
+        <div class="foot-desc" style="margin:8px 0 0">Новые сделки — постом в канале в день появления на сайте.</div>
       </div>
       <div class="foot-col">
         <div class="foot-h">Нашли ошибку?</div>
@@ -4029,6 +4040,7 @@ function route(){
   }
   else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
   else if(page==="legal"){renderLegal(arg);}
+  else if(page==="app"){renderPhoneApp();}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
   else if(page==="account"){renderAccount(qs);mark("account");}
   else {renderDeals();mark("deals");}
@@ -10733,11 +10745,36 @@ function renderLegal(kind){
   rerun();
 }
 
+/* «Компас на экране телефона» (владелец, 31 октября 2026: нужна удобная
+   инструкция по добавлению на экран «Домой» айфона). Значки и манифест
+   стоят с 5 сентября; страница объясняет три нажатия и ведет в канал. */
+function renderPhoneApp(){
+  const steps = (title, items) => `<div class="app-steps"><h2>${title}</h2><ol>${items.map(t=>`<li>${t}</li>`).join("")}</ol></div>`;
+  app.innerHTML = `<div class="sec-head reveal"><span class="label">На телефоне</span><h1>Компас на экране телефона</h1>
+    <p>Сайт открывается как приложение: своя иконка, во весь экран, без адресной строки. Ставить ничего не нужно, это три нажатия в браузере.</p></div>
+  <div class="legal-page app-page reveal">
+    ${steps("iPhone (Safari)", [
+      "Откройте <b>projectcompass.ru</b> в Safari. Из другого браузера не получится: нужен именно Safari.",
+      "Нажмите кнопку <b>«Поделиться»</b> внизу экрана (квадрат со стрелкой вверх).",
+      "В списке выберите <b>«На экран „Домой“»</b>. Если пункта не видно, прокрутите список вниз.",
+      "Нажмите <b>«Добавить»</b> справа вверху. Иконка «Компас» появится рядом с другими приложениями."])}
+    ${steps("Android (Chrome)", [
+      "Откройте <b>projectcompass.ru</b> в Chrome.",
+      "Нажмите три точки справа вверху.",
+      "Выберите <b>«Добавить на главный экран»</b> (или «Установить приложение») и подтвердите."])}
+    <h2>Новые сделки в Telegram</h2>
+    <p>Пост о каждой новой сделке выходит в канале в день, когда карточка появляется на сайте: стороны, сумма, статус и ссылка на карточку.</p>
+    <p><a class="btn-main" href="https://t.me/projectcompassru" target="_blank" rel="noopener">Открыть канал «Проект Компас»</a></p>
+    <p class="acct-note">Иконку с экрана «Домой» можно убрать так же, как любое приложение: удерживайте ее и выберите «Удалить».</p>
+  </div>`;
+  rerun();
+}
+
 async function renderMaterials(){
   app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Авторам</span><h1>Материалы</h1><p class="ph-desc">Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
   <div class="materials-pitch reveal">
     <button class="mp-item" type="button" data-pitch="column"><h2>Вести колонку</h2><p>Разбор сделки, комментарий к закону, обзор отрасли. Выходит с вашим именем и фирмой.</p><span class="mp-go">Оставить заявку →</span></button>
-    <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем канале.</p><span class="mp-go">Оставить заявку →</span></button>
+    <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем Telegram-канале.</p><span class="mp-go">Оставить заявку →</span></button>
     <button class="mp-item" type="button" data-pitch="profile"><h2>Профиль автора</h2><p>Ваши материалы собираются на странице фирмы рядом с ее сделками.</p><span class="mp-go">Оставить заявку →</span></button>
   </div>
   <p class="acct-note mp-note reveal">Раздел открылся недавно: анонсы вебинаров и колонки появятся позже. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
@@ -11946,11 +11983,34 @@ function showCookieNote(){
   // Кнопка ассистента справа внизу встает над плашкой, а не поверх «Понятно».
   document.body.style.setProperty("--cookie-h", el.offsetHeight + "px");
 }
+/* Одноразовая подсказка на айфоне: сайт можно держать на экране «Домой»
+   (владелец, 31 октября 2026). Только Safari на iPhone/iPad, только пока
+   сайт не открыт как приложение, только один раз на устройство. */
+const PHONE_HINT_KEY = "kx_phone_hint";
+function showPhoneHint(){
+  try{
+    if(localStorage.getItem(PHONE_HINT_KEY) === "1") return;
+    const ua = navigator.userAgent;
+    const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const safari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|YaBrowser|OPT\//.test(ua);
+    const standalone = navigator.standalone === true || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    if(!ios || !safari || standalone || document.body.classList.contains("chat-page")) return;
+  }catch(e){ return; }
+  const el = document.createElement("div");
+  el.id = "phoneHint"; el.className = "phone-hint";
+  el.innerHTML = `<span>Компас можно открывать как приложение. <a href="#/app">Как добавить на экран «Домой»</a></span><button type="button" aria-label="Закрыть" id="phoneHintOk">×</button>`;
+  const done = () => { try{ localStorage.setItem(PHONE_HINT_KEY, "1"); }catch(e){} el.remove(); };
+  el.querySelector("#phoneHintOk").onclick = done;
+  el.querySelector("a").onclick = done;
+  const main = document.getElementById("app");
+  main.parentNode.insertBefore(el, main);
+}
 refreshMe();
 
 route();
 aiDockSync();
 showCookieNote();
+showPhoneHint();
 </script>
 <!-- Yandex.Metrika counter -->
 <script>
