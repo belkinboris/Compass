@@ -131,17 +131,40 @@ def check_fixes(fixes, card, data):
     return found, bool(texts)
 
 
-def save_batch(deal_id, fixes):
-    name = 'written_%s_%s.py' % (deal_id, date.today().strftime('%Y_%m_%d'))
-    path = os.path.join(FIXES_DIR, name)
-    n = 2
-    while os.path.exists(path):
-        path = os.path.join(FIXES_DIR, name[:-3] + '_%d.py' % n)
-        n += 1
+def session_suffix():
+    """Кусок имени дневного файла, свой у каждой сессии: `FIXES_SESSION` из
+    окружения, иначе отпечаток имени машины (контейнер рутины — своя машина).
+    Две сессии в один день пишут в разные файлы и не сталкиваются в git."""
+    import hashlib
+    import socket
+    tag = os.environ.get('FIXES_SESSION') or socket.gethostname()
+    return re.sub(r'[^a-z0-9]', '', tag.lower())[:12] or hashlib.sha1(tag.encode()).hexdigest()[:6]
+
+
+def save_batch(deal_id, fixes, folder=None, day=None):
+    """Дописать правки в ДНЕВНОЙ файл `written_<ГГГГ_ММ_ДД>_<сессия>.py`.
+
+    До 31 октября 2026 на каждую карточку заводился свой файл — 1183 файла
+    `written_*` за полмесяца, и все грузились при каждом `import review`
+    (бэклог H6). Повторный вызов в тот же день читает FIXES из файла и
+    дописывает (как resolve_duplicates), файл остается верным Python."""
+    folder = folder or FIXES_DIR
+    day = day or date.today()
+    path = os.path.join(folder, 'written_%s_%s.py' % (day.strftime('%Y_%m_%d'), session_suffix()))
+    existing, ids = [], []
+    if os.path.exists(path):
+        ns = {}
+        exec(open(path, encoding='utf-8').read(), ns)          # noqa: S102
+        existing = ns.get('FIXES') or []
+        ids = ns.get('CARDS') or sorted({f['id'] for f in existing})
+    if deal_id not in ids:
+        ids.append(deal_id)
     body = ('# -*- coding: utf-8 -*-\n'
-            '"""Текст карточки %s, написанный по фактам (write_card.py, WRITING_BRIEF.md).\n\n'
-            'Запуск: python3 pipeline/ingest/review.py --write\n"""\n\n'
-            'FIXES = %s\n' % (deal_id, pprint.pformat(fixes, width=100, sort_dicts=False)))
+            '"""Тексты карточек за %s, написанные по фактам (write_card.py, WRITING_BRIEF.md).\n\n'
+            'Карточки: %s. Запуск: python3 pipeline/ingest/review.py --write\n"""\n\n'
+            'CARDS = %r\n\n'
+            'FIXES = %s\n' % (day.isoformat(), ', '.join(ids), ids,
+                               pprint.pformat(existing + fixes, width=100, sort_dicts=False)))
     open(path, 'w', encoding='utf-8').write(body)
     return path
 

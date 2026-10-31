@@ -6434,6 +6434,90 @@ def test_draft_self_checks_pass():
         "самопроверка draft.py снова выполняется при импорте"
 
 
+def test_write_card_save_batch_appends_to_a_daily_file(tmp_path, monkeypatch):
+    """Бэклог H6: write_card писал файл на каждую карточку (1183 файла за
+    полмесяца). Теперь — дневной файл с суффиксом сессии, повторный вызов
+    дописывает в него, файл остается верным Python, записи — в порядке записи."""
+    import os
+    import datetime as _dt
+    import write_card
+    monkeypatch.setenv("FIXES_SESSION", "Test-Session")
+    day = _dt.date(2026, 10, 31)
+    p1 = write_card.save_batch("g0000aaaa", [{"id": "g0000aaaa", "field": "sum", "old": None, "new": "1 млрд ₽"}],
+                               folder=str(tmp_path), day=day)
+    p2 = write_card.save_batch("g0000bbbb", [{"id": "g0000bbbb", "field": "status", "old": None, "new": "Закрыта"}],
+                               folder=str(tmp_path), day=day)
+    assert p1 == p2 and os.path.basename(p1) == "written_2026_10_31_testsession.py"
+    assert [f.name for f in tmp_path.glob("*.py")] == ["written_2026_10_31_testsession.py"]
+    ns = {}
+    exec(compile(open(p1, encoding="utf-8").read(), p1, "exec"), ns)
+    assert [f["id"] for f in ns["FIXES"]] == ["g0000aaaa", "g0000bbbb"] and ns["CARDS"] == ["g0000aaaa", "g0000bbbb"]
+    assert "g0000aaaa, g0000bbbb" in ns["__doc__"]
+
+
+def test_discard_drops_fixes_from_daily_files_and_the_archive(tmp_path):
+    """«Выкинуть» снимает записи карточки и из дневного файла write_card (он
+    переписывается без нее, чужие записи остаются), и из JSON-архива партий."""
+    import os
+    import fix_files
+    import write_card
+    fixes = tmp_path / "fixes"
+    fixes.mkdir()
+    (fixes / "__init__.py").write_text("")
+    write_card.save_batch("g0000aaaa", [{"id": "g0000aaaa", "field": "sum", "old": None, "new": "1 млрд ₽"}],
+                          folder=str(fixes))
+    daily = write_card.save_batch("g0000bbbb", [{"id": "g0000bbbb", "field": "status", "old": None, "new": "Закрыта"}],
+                                  folder=str(fixes))
+    archive = tmp_path / "fixes_archive"
+    archive.mkdir()
+    (archive / "2026-09.json").write_text(json.dumps({"files": {"batch_2026_09_01": {
+        "date": "2026-09-01", "applied_on": "2026-10-31", "doc": "партия",
+        "fixes": [{"id": "g0000aaaa", "field": "asset", "old": None, "new": "завод"},
+                  {"id": "g0000cccc", "field": "asset", "old": None, "new": "сеть"}]}}}, ensure_ascii=False),
+        encoding="utf-8")
+    touched = fix_files.drop_fixes_for("g0000aaaa", folder=str(fixes))
+    assert {os.path.basename(p) for p in touched} == {os.path.basename(daily), "2026-09.json"}
+    ns = {}
+    exec(compile(open(daily, encoding="utf-8").read(), daily, "exec"), ns)
+    assert [f["id"] for f in ns["FIXES"]] == ["g0000bbbb"] and ns["CARDS"] == ["g0000bbbb"]
+    store = json.loads((archive / "2026-09.json").read_text(encoding="utf-8"))
+    assert [f["id"] for f in store["files"]["batch_2026_09_01"]["fixes"]] == ["g0000cccc"]
+
+
+def test_fixes_compact_archives_only_applied_batches_older_than_n_days(tmp_path):
+    """Бэклог H6: примененные партии старше N дней уезжают в
+    fixes_archive/<ГГГГ-ММ>.json, свежие и непримененные остаются в .py;
+    архив несет те же словари, дату партии и первую строку докстринга."""
+    import datetime as _dt
+    import fixes_compact
+    fixes = tmp_path / "fixes"
+    fixes.mkdir()
+    (fixes / "__init__.py").write_text("")
+    (fixes / "batch_2026_09_01.py").write_text(
+        '"""Партия сентября.\n\nПодробности."""\n'
+        "FIXES = [{'id': 'g1', 'field': 'sum', 'old': None, 'new': '1 млрд ₽', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    (fixes / "batch_2026_09_02.py").write_text(
+        "FIXES = [{'id': 'g1', 'field': 'status', 'old': None, 'new': 'Закрыта', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    (fixes / "batch_2026_10_30.py").write_text(
+        "FIXES = [{'id': 'g1', 'field': 'asset', 'old': None, 'new': 'завод', 'quote': 'q', 'why': 'w'}]\n",
+        encoding="utf-8")
+    cards = {"g1": {"id": "g1", "sum": "1 млрд ₽", "status": "Обсуждается", "asset": "завод"}}
+    archive = tmp_path / "fixes_archive"
+    today = _dt.date(2026, 10, 31)
+    n = fixes_compact.compact(14, write=False, folder=str(fixes), archive=str(archive), today=today, cards=cards)
+    assert n == 1 and not archive.exists(), "сухой прогон ничего не пишет"
+    n = fixes_compact.compact(14, write=True, folder=str(fixes), archive=str(archive), today=today, cards=cards)
+    assert n == 1
+    assert sorted(f.name for f in fixes.glob("*.py")) == ["__init__.py", "batch_2026_09_02.py", "batch_2026_10_30.py"], \
+        "непримененная (status) и свежая партии остаются в .py"
+    store = json.loads((archive / "2026-09.json").read_text(encoding="utf-8"))
+    batch = store["files"]["batch_2026_09_01"]
+    assert batch["date"] == "2026-09-01" and batch["applied_on"] == "2026-10-31" and batch["doc"] == "Партия сентября."
+    assert batch["fixes"] == [{"id": "g1", "field": "sum", "old": None, "new": "1 млрд ₽", "quote": "q", "why": "w"}]
+
+
 def test_fix_batches_live_in_separate_files():
     """Партии правок разложены по файлам — иначе параллельное чтение невозможно.
 
