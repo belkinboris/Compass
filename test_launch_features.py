@@ -12,6 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import core
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -2551,7 +2552,7 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
             "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {},
             "pending_since": "2026-10-27T17:00:00+00:00"}
     unread = dict(card, id="gshow2", second_read=None)
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": [card, unread]} if "pending" in path else default)
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card, unread]} if "pending" in path else default)
     monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
@@ -2734,7 +2735,7 @@ def test_a_card_in_the_base_whose_post_is_not_out_yet_still_takes_the_owner_text
     """29 октября 2026, Velle: карточка уже применена в базу, пост ждет pytest —
     ответ владельца своим текстом должен записаться, а не отбиться как
     «уже на сайте»; «уже на сайте» — только когда и пост вышел."""
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": []})
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": []})
     monkeypatch.setattr(main.base_data, "promoted", lambda: {
         "deals": [{"id": "gV1"}, {"id": "gV2"}], "telegram_posts": {"gV2": 238}})
     assert not main._already_on_site("gV1")
@@ -3414,7 +3415,7 @@ def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
     def fake_read(path, default):
         return {"cards": []}
 
-    monkeypatch.setattr(main, "_read_json", fake_read)
+    monkeypatch.setattr(core, "_read_json", fake_read)
     # База читается через общий кэш `base_data` (заведен 8 сентября 2026
     # против OOM), а не своим json.load на каждый вызов, — подменяем его.
     monkeypatch.setattr(main.base_data, "promoted", lambda: fake)
@@ -3463,7 +3464,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
                    "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
                   {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»",
@@ -3502,7 +3503,7 @@ def test_unread_card_is_not_counted_as_soon(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Еще не прочитана", "buyer_name": "«Компания»"},
                   {"id": "gs1", "title": "Прочитана, ждет таймаута",
                    "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01", "draft_sent": True}],
@@ -3536,7 +3537,7 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Сырой заголовок из новости",
                    "buyer_name": "«Компания» [входит в холдинг]"},
                   {"id": "gu2", "title": "Нероссийская сделка", "buyer_name": "Orlen",
@@ -3603,7 +3604,7 @@ def test_empty_queue_answers_instead_of_silence(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append(kw) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json",
+    monkeypatch.setattr(core, "_read_json",
                         lambda path, default: {"cards": []} if "pending" in path else default)
     assert main._send_queue_batch(-100, "held") == 0
     assert any("пусто" in kw.get("text", "") for kw in sent)
@@ -4518,14 +4519,14 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
     # --- сторона сайта ------------------------------------------------------
     # Тип чата сайт узнает тем же способом и тоже помнит; здесь подставляем
     # ответ Telegram, чтобы тест не ходил в сеть.
-    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
+    monkeypatch.setattr(core, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
     assert "-1004448538393" not in main._review_chat_ids()
     assert main._review_chat_ids() == ["160794536", "57671646"]
 
     # И то же самое, когда номер канала известен, а тип спросить не у кого
     # (нет токена): работает сравнение по номерам — второй рубеж.
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004448538393")
-    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {}, raising=False)
+    monkeypatch.setattr(core, "_CHAT_IS_CHANNEL", {}, raising=False)
     assert main._review_chat_ids() == ["160794536", "57671646"]
 
 
@@ -4911,7 +4912,7 @@ def test_access_gate_is_off_by_default_since_launch():
     """3 октября 2026 — запуск для всех: дверь «Войти / Запросить доступ» снята,
     умолчание ACCESS_GATE — «0» (docs/access_gate.md). Включается обратно только
     переменной окружения."""
-    src = open(os.path.join(os.path.dirname(__file__), "main.py"), encoding="utf-8").read()
+    src = open(os.path.join(os.path.dirname(__file__), "app", "core.py"), encoding="utf-8").read()
     assert 'os.environ.get("ACCESS_GATE", "0") == "1"' in src
 
 
@@ -5098,7 +5099,7 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     # Владелец: «если спрашивают и вопросительный знак в конце — не отправляй
     # карту в канал, а отвечай на вопрос». Вопрос придерживает карточку и
     # получает ответ следом.
-    monkeypatch.setattr(main, "_in_background", lambda fn: fn())
+    monkeypatch.setattr(core, "_in_background", lambda fn: fn())
     monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
     reply("Что такое luminor?", draft)
     assert decisions() == [("hold", None, False), ("note", "Что такое luminor?", False)]
@@ -5318,7 +5319,7 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
          "reviewed": "2026-10-28", "accepted": "2026-10-28", "second_read": "2026-10-28",
          "draft_sent": True},
     ]}
-    monkeypatch.setattr(main, "_read_json", lambda path, default:
+    monkeypatch.setattr(core, "_read_json", lambda path, default:
                         pending if "pending" in path else (hold if "hold" in path else {}))
     monkeypatch.setattr(main.os.path, "isdir", lambda p: True)
     monkeypatch.setattr(main.os, "listdir", lambda p: ["2026-10-28.json"])

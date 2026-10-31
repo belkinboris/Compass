@@ -9,6 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import core
 import yandex_search as ys
 
 # ---------- yandex_search ----------
@@ -297,7 +298,7 @@ def test_call_llm_thinking_budget_and_retry(monkeypatch):
             return httpx.Response(500, text="boom")
         return httpx.Response(200, json=RESPONSES_OK)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     text = main.call_llm("sys", "user", max_tokens=700)
     assert text == "Ответ ассистента"
     assert calls["n"] == 2  # первый упал, второй прошел
@@ -319,7 +320,7 @@ def test_call_llm_stops_when_the_deadline_has_passed(monkeypatch):
         calls["n"] += 1
         return httpx.Response(500, text="boom")
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     # Дедлайн уже в прошлом — ни одной попытки быть не должно.
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700, deadline=time.monotonic() - 1)
@@ -485,9 +486,22 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
         def start(self):
             self.target(*self.args)
 
+    # Номер группы-консоли, выученный другим набором (test_launch_features
+    # учит его из вебхука), не должен перебивать переменную окружения этого
+    # теста: тестовая база одна на весь прогон, а _review_chat_ids спрашивает
+    # базу первой.
+    db0 = get_session()
+    try:
+        learned = db0.get(main.AppSetting, core.REVIEW_GROUP_SETTING)
+        if learned:
+            db0.delete(learned)
+            db0.commit()
+    finally:
+        db0.close()
+
     asked = []
     real_thread_id = main._console_thread_id
-    monkeypatch.setattr(main, "_console_thread_id",
+    monkeypatch.setattr(core, "_console_thread_id",
                         lambda db, kind: asked.append(kind) or real_thread_id(db, kind))
     monkeypatch.setattr(main.threading, "Thread", SyncThread)
     with TestClient(main.app) as c:
@@ -544,7 +558,7 @@ def test_call_llm_passes_model_and_reasoning_effort(monkeypatch):
         payloads.append(json.loads(request.content))
         return httpx.Response(200, json=RESPONSES_WITH_USAGE)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     stats = {}
     text = main.call_llm("sys", "user", max_tokens=700, model="yandexgpt/latest",
                          reasoning_effort="low", stats=stats)
@@ -571,7 +585,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         raise httpx.ReadTimeout("read timed out", request=request)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(slow)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(slow)))
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700)
     assert calls["n"] == 1
@@ -585,7 +599,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         return httpx.Response(200, json=exhausted)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(truncated)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(truncated)))
     stats = {}
     with pytest.raises(RuntimeError) as err:
         main.call_llm("sys", "user", max_tokens=700, stats=stats)
@@ -599,7 +613,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         return httpx.Response(500, text="boom")
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(boom)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(boom)))
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700)
     assert calls["n"] == 1 + main.LLM_RETRIES
@@ -720,7 +734,7 @@ def test_intake_runs_are_collected_and_the_day_summary_goes_once_after_18(monkey
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda day="today", token=None, client=None: {
         "users": 812, "visits": 1034, "pageviews": 3210, "avg_seconds": 135, "new_pct": 64.2,
         "sources": [("Переходы из поисковых систем", 38), ("Прямые заходы", 20)],
@@ -759,7 +773,7 @@ def test_day_summary_says_so_when_intake_was_silent(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
     db = get_session()
     try:
@@ -784,7 +798,7 @@ def test_summary_asked_for_after_18_counts_as_the_days_summary(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
     db = get_session()
     try:
@@ -1005,7 +1019,7 @@ def test_call_llm_treats_an_incomplete_answer_with_text_as_cut_off(monkeypatch):
         calls["n"] += 1
         return httpx.Response(200, json=partial)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     with pytest.raises(main.LLMCutOff) as err:
         main.call_llm("sys", "user", max_tokens=1000)
     assert calls["n"] == 1 and err.value.partial == "- **300 млрд ₽** –"

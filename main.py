@@ -73,11 +73,10 @@ from sqlalchemy import func, inspect, select, text
 from sqlalchemy.exc import SQLAlchemyError
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
-_MD_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
-logger = logging.getLogger("kompas")
-
+from app import core
+from app import reexport as _reexport
+from app.core import BASE_DIR, STATIC_DIR, logger, get_db, _current_user, _plain, _moderation_token_ok, _yandex_ready, _is_reviewer, SITE_URL, _MD_LINK_RE, COOKIE_SECURE, CONSOLE_TOPIC_NAMES, CONSOLE_TOPIC_FALLBACK, _topic_slug, CHANNEL_SETTING, REALTY_CHANNEL_SETTING, REVIEW_GROUP_SETTING, _channel_chat_ids, _chat_is_channel  # noqa: F401
 
 
 @asynccontextmanager
@@ -98,9 +97,6 @@ async def lifespan(_app):
 
 
 app = FastAPI(title="КОМПАС", lifespan=lifespan)
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 # Сжатие ответов. База сделок — 4,6 МБ текста, и до этого она уезжала в браузер
 # как есть: 4695 КБ по сети на каждый первый заход. JSON сжимается в шесть раз,
@@ -252,7 +248,7 @@ def _ensure_user_columns(db_engine) -> None:
         for col in ("full_name", "company", "position"):
             if col not in cols:
                 conn.execute(text(f"ALTER TABLE users ADD COLUMN {col} VARCHAR(200)"))
-        # approved добавлен 2 сентября (вход по заявке, ACCESS_GATE). Всем
+        # approved добавлен 2 сентября (вход по заявке, core.ACCESS_GATE). Всем
         # УЖЕ существующим аккаунтам ставим True — иначе владелец и партнер,
         # зарегистрировавшиеся до гейта, оказались бы за дверью, которую
         # сами же и держат. Значение задаем отдельным UPDATE с параметром, а
@@ -557,28 +553,6 @@ def _fns_requests_today(db) -> int:
     return total
 
 
-def get_db():
-    session = get_session()
-    try:
-        yield session
-    finally:
-        session.close()
-
-
-COOKIE_SECURE = os.environ.get("COOKIE_SECURE", "true").lower() != "false"
-
-# ВХОД ПО ЗАЯВКЕ — этап закрытого тестирования (просьба владельца 2 сентября
-# 2026: «как в Автопосте»). Пока включено, посетитель без входа видит вместо
-# любого экрана сайта блок «Войти / Запросить доступ»; регистрация создает
-# аккаунт с approved=False и шлет заявку в Telegram-консоль, где владелец или
-# партнер нажимает «Одобрить» — только после этого вход по этим данным
-# работает. По умолчанию ВКЛЮЧЕНО (на боевом хосте переменной нет), выключить
-# — `ACCESS_GATE=0` в окружении или одна правка здесь. Гейт визуальный: API
-# сделок и компаний не закрываются, закрыт только вход в аккаунт.
-# 3 октября 2026 — запуск для всех: дверь «Войти / Запросить доступ» снята,
-# умолчание «0». Включить обратно на время — ACCESS_GATE=1 в окружении.
-ACCESS_GATE = os.environ.get("ACCESS_GATE", "0") == "1"
-
 # «Компания сегодня» не показывает отчетность старше этого числа лет от
 # текущего года — правило владельца от 18 августа 2026 после жалобы на
 # видимые на сайте показатели банков за 2020-2021 год.
@@ -730,13 +704,6 @@ LLM_REASONING_EFFORT = os.environ.get("LLM_REASONING_EFFORT", "").strip()
 # текст, а не искать факты. На это 800 токенов рассуждения хватает с запасом.
 # Значение вынесено в переменную окружения, чтобы подбирать его без выкладки кода.
 THINKING_BUDGET = int(os.environ.get("LLM_THINKING_BUDGET", "800"))
-
-# Общий keep-alive клиент (урок TruePost: не создавать новый на каждый вызов).
-_http = httpx.Client(
-    timeout=LLM_TIMEOUT,
-    transport=httpx.HTTPTransport(retries=2),
-    limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
-)
 
 # Границы разговора — общие для обоих режимов. Стоят ВТОРЫМ рубежом: первый
 # и главный — детерминированный гейт `assistant_policy.classify`, он не
@@ -907,9 +874,6 @@ class AssistantFeedbackRequest(BaseModel):
     feedback_id: int | None = None
 
 
-def _yandex_ready() -> bool:
-    return bool(os.environ.get("YANDEX_API_KEY")) and bool(os.environ.get("YANDEX_FOLDER_ID"))
-
 
 # HEAD, а не только GET: проверка живости у хостинга ходит методом HEAD, а
 # FastAPI — в отличие от «голого» Starlette — сам HEAD к GET-маршруту НЕ
@@ -1051,7 +1015,7 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
         info["attempts"] = attempt + 1
         started = time.monotonic()
         try:
-            resp = _http.post(RESPONSES_URL, json=payload, headers=headers, timeout=timeout)
+            resp = core._http.post(RESPONSES_URL, json=payload, headers=headers, timeout=timeout)
             took = time.monotonic() - started
             if resp.status_code != 200:
                 raise RuntimeError(f"Responses API HTTP {resp.status_code}: {resp.text[:300]}")
@@ -3233,7 +3197,7 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
     results: list = []
     if mode == "web":
         try:
-            results = yandex_search(question, config=SearchConfig.from_env(), client=_http)
+            results = yandex_search(question, config=SearchConfig.from_env(), client=core._http)
             if results:
                 search_block = build_search_block(results)
                 status = _kompas_status_block(ret)
@@ -3622,97 +3586,15 @@ def assistant_suggestions():
         return {"suggestions": []}
 
 
-def _review_chat_ids(db=None) -> list[str]:
-    """Куда слать в консоль. Группа — id из `TELEGRAM_REVIEW_GROUP_ID`, но
-    4 сентября 2026 выяснилось, что этот номер может устареть НЕЗАМЕТНО и БЕЗ
-    участия человека: как только владелец включил в группе темы (форум),
-    Telegram сам превратил ее в супергруппу — а у супергруппы ВСЕГДА другой
-    chat_id, старый отвечает 400 «group chat was upgraded to a supergroup
-    chat». Переменная окружения при этом продолжает выглядеть настроенной.
-    Поэтому здесь та же иерархия, что у адреса канала, только источники
-    поменялись местами: САЙТ уже знает свежий id (учит его из любого
-    сообщения владельца/партнера в группе, см. `_learn_review_group`) —
-    спрашиваем БД первой, а переменная окружения остается запасным путем для
-    вызовов без доступа к базе (фоновые потоки без своей сессии)."""
-    forbidden = _channel_chat_ids(db)
-
-    def usable(chat_id: str) -> bool:
-        return bool(chat_id) and chat_id not in forbidden and not _chat_is_channel(chat_id)
-
-    if db is not None:
-        row = db.get(AppSetting, REVIEW_GROUP_SETTING)
-        if row and row.value and usable(row.value):
-            return [row.value]
-    group = os.environ.get("TELEGRAM_REVIEW_GROUP_ID", "").strip()
-    if usable(group):
-        return [group]
-    return [x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",")
-            if x.strip() and x.strip() not in forbidden]
-
-
-def _channel_chat_ids(db=None) -> set[str]:
-    """Адреса канала публикации — все, что о нем известно сайту.
-
-    КОНСОЛЬ И КАНАЛ НЕЛЬЗЯ ПЕРЕПУТАТЬ НИ ПРИ КАКОМ СБОЕ. 7 сентября 2026
-    отчет рутины ушел в публичный канал, к подписчикам: в контейнере рутин
-    `TELEGRAM_REVIEW_GROUP_ID` содержал номер КАНАЛА, сайт в ту минуту
-    перезапускался после сборки, и запасной путь честно отработал по
-    неверному адресу. Цена ошибки несимметрична: сообщение консоли, не
-    дошедшее до владельца, — неудобство; ушедшее подписчикам — публичный
-    ущерб. Поэтому адрес канала вычеркивается из кандидатов в консоль
-    всегда, откуда бы он ни пришел; если после этого ничего не осталось,
-    пишем лично владельцу и партнеру."""
-    ids = set()
-    env = (os.environ.get("TELEGRAM_CHANNEL_ID") or "").strip()
-    if env:
-        ids.add(env)
-    if db is not None:
-        for key in (CHANNEL_SETTING, REALTY_CHANNEL_SETTING):
-            row = db.get(AppSetting, key)
-            if row and row.value:
-                ids.add(str(row.value))
-    return ids
-
-
-_CHAT_IS_CHANNEL: dict[str, bool] = {}
-
-
-def _chat_is_channel(chat_id) -> bool:
-    """Правда ли, что этот адрес — КАНАЛ. Спрашиваем сам Telegram.
-
-    Сравнения с известным номером канала мало, и это выяснилось в тот же
-    вечер, что и утечка: владелец, поправляя переменные, записал в
-    `TELEGRAM_CHANNEL_ID` старое @имя канала — а оно перестало существовать,
-    когда канал сделали приватным. Номера канала мы после этого не знали
-    вообще, и защита, построенная только на сравнении номеров, стала пустой.
-    Тип чата — свойство самого чата: он не может «не быть» из-за того, что
-    кто-то не так заполнил переменную. Один запрос на адрес за жизнь
-    процесса; сеть молчит — не блокируем (сравнение по номерам остается
-    вторым рубежом)."""
-    chat_id = str(chat_id or "").strip()
-    if not chat_id:
-        return False
-    if chat_id in _CHAT_IS_CHANNEL:
-        return _CHAT_IS_CHANNEL[chat_id]
-    if not os.environ.get("TELEGRAM_BOT_TOKEN", "").strip():
-        return False
-    answer = notification_service.tg_api("getChat", chat_id=chat_id) or {}
-    if answer.get("ok"):
-        verdict = str((answer.get("result") or {}).get("type") or "") == "channel"
-        _CHAT_IS_CHANNEL[chat_id] = verdict
-        return verdict
-    return False
-
-
 def _notify_access_request(user: User, db=None) -> None:
     """Заявка на доступ — в Telegram-консоль основателей, с кнопками
     «Одобрить»/«Отклонить» (callback_data `acc:<id>:ok|no`, разбирается в
     telegram_webhook рядом с `mod:`). Тот же путь, что у обратной связи
-    ассистента: `_review_chat_ids()` + `notification_service.tg_api`. Сбой
+    ассистента: `core._review_chat_ids()` + `notification_service.tg_api`. Сбой
     отправки регистрацию не роняет — заявка уже в таблице, а без токена
     (локальная разработка, тесты) вызов молча ничего не делает."""
     try:
-        chats = _review_chat_ids(db)
+        chats = core._review_chat_ids(db)
         if not chats:
             logger.warning("заявка на доступ #%s: консоль не настроена, в Telegram не ушла", user.id)
             return
@@ -3725,7 +3607,7 @@ def _notify_access_request(user: User, db=None) -> None:
         ])
         keys = [[{"text": "✅ Одобрить", "callback_data": "acc:%d:ok" % user.id},
                  {"text": "🗑 Отклонить", "callback_data": "acc:%d:no" % user.id}]]
-        thread = _console_thread_id(db, "admin") if db is not None else None
+        thread = core._console_thread_id(db, "admin") if db is not None else None
         for chat in chats:
             notification_service.tg_api("sendMessage", chat_id=chat, text=text,
                                         reply_markup={"inline_keyboard": keys},
@@ -3744,10 +3626,10 @@ def _forward_note_to_console(row: AssistantFeedback) -> None:
     # закрывается вместе с ответом клиенту раньше, чем поток успеет ее читать.
     thread_db = get_session()
     try:
-        chats = _review_chat_ids(thread_db)
+        chats = core._review_chat_ids(thread_db)
         if not chats:
             return
-        thread = _console_thread_id(thread_db, "user_notes")
+        thread = core._console_thread_id(thread_db, "user_notes")
     finally:
         thread_db.close()
     for chat in chats:
@@ -3779,10 +3661,10 @@ def _forward_feedback_to_console(row: AssistantFeedback) -> None:
     text = "\n".join(lines)
     thread_db = get_session()
     try:
-        chats = _review_chat_ids(thread_db)
+        chats = core._review_chat_ids(thread_db)
         if not chats:
             return
-        thread = _console_thread_id(thread_db, "user_notes")
+        thread = core._console_thread_id(thread_db, "user_notes")
     finally:
         thread_db.close()
     for chat in chats:
@@ -3919,10 +3801,6 @@ class DealExportIn(BaseModel):
     title: str | None = None
 
 
-def _current_user(request: Request, db=Depends(get_db)) -> User | None:
-    return auth.current_user(db, request.cookies.get(auth.SESSION_COOKIE))
-
-
 GATE_PENDING_TEXT = "Заявка получена, доступ откроем после проверки. Попробуйте войти позже."
 
 
@@ -3930,10 +3808,10 @@ GATE_PENDING_TEXT = "Заявка получена, доступ откроем 
 def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
     user, err = auth.register_user(db, req.email, req.password, req.full_name,
                                     company=req.company, position=req.position, role=req.role,
-                                    approved=not ACCESS_GATE)
+                                    approved=not core.ACCESS_GATE)
     if not user:
         return JSONResponse({"error": err}, status_code=400)
-    if ACCESS_GATE:
+    if core.ACCESS_GATE:
         # Заявка, а не вход: сессию не ставим, владельцу уходит сообщение с
         # кнопками. Войти человек сможет после «Одобрить» (см. telegram_webhook).
         _notify_access_request(user, db)
@@ -3949,7 +3827,7 @@ def login(req: LoginRequest, response: Response, db=Depends(get_db)):
     user, err = auth.authenticate(db, req.email, req.password)
     if not user:
         return JSONResponse({"error": err}, status_code=400)
-    if ACCESS_GATE and not user.approved:
+    if core.ACCESS_GATE and not user.approved:
         # Пароль верный, но заявка еще не одобрена (или отклонена — снаружи это
         # одно и то же «доступ не открыт», отклоненных не удаляем и не выдаем).
         return JSONResponse({"error": GATE_PENDING_TEXT, "pending": True}, status_code=403)
@@ -3976,13 +3854,13 @@ def me(user: User | None = Depends(_current_user)):
     # нарушает правило «в консоли нет ошибок» (test_ui.py) для анонимного
     # визитора, то есть почти всегда.
     # gate — включен ли вход по заявке: по нему интерфейс решает, показывать
-    # сайт или экран «Войти / Запросить доступ» (см. ACCESS_GATE).
+    # сайт или экран «Войти / Запросить доступ» (см. core.ACCESS_GATE).
     if not user:
-        return {"logged_in": False, "gate": ACCESS_GATE}
+        return {"logged_in": False, "gate": core.ACCESS_GATE}
     return {"logged_in": True, "email": user.email, "role": user.role.value,
             "tier": user.tier.value, "is_verified": user.is_verified,
             "full_name": user.full_name, "company": user.company, "position": user.position,
-            "gate": ACCESS_GATE, "approved": bool(user.approved),
+            "gate": core.ACCESS_GATE, "approved": bool(user.approved),
             "comment_name_consent": user.comment_name_consent_at is not None}
 
 
@@ -4075,14 +3953,6 @@ def delete_account(payload: AccountDeleteIn, request: Request, response: Respons
 
 
 # ==================== ФНС: ЕГРЮЛ, БФО, история изменений ====================
-
-def _plain(value):
-    if isinstance(value, Decimal):
-        return float(value)
-    if hasattr(value, "isoformat"):
-        return value.isoformat()
-    return value
-
 
 def _entity_payload(entity: LegalEntity) -> dict:
     fields = (
@@ -4702,7 +4572,7 @@ def deal_full_analysis(deal_id: str, request: Request):
     web_results: list = []
     if _yandex_ready():
         try:
-            web_results = yandex_search(str(deal.get("title") or "")[:120], config=SearchConfig.from_env(), client=_http)[:6]
+            web_results = yandex_search(str(deal.get("title") or "")[:120], config=SearchConfig.from_env(), client=core._http)[:6]
         except Exception as exc:  # noqa: BLE001 — разбор по базе лучше, чем ничего
             logger.info("разбор сделки %s: поиск не удался (%s)", deal_id, exc)
     facts_text = facts_text + deal_analysis.web_block(web_results)
@@ -5014,7 +4884,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     обновления, забранные опросом (`getUpdates`). Единственная разница между
     путями — как обновление к нам попало."""
     # Учится молча на КАЖДОМ апдейте из группы-консоли, ничего не решает и не
-    # мешает обработке ниже — id группы мог смениться (см. _review_chat_ids).
+    # мешает обработке ниже — id группы мог смениться (см. core._review_chat_ids).
     _learn_review_group(payload, db)
     # Пост в канале или смена прав бота — не команда и не вердикт: у них одна
     # задача, назвать числовой адрес канала (см. TelegramWebhookIn).
@@ -5142,7 +5012,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # нажатия: где нажали — дело случая, а решение всегда ждут в одном
             # месте.
             pressed_in = (callback.get("message") or {}).get("message_thread_id")
-            thread = _console_thread_id(db, "decision") if db is not None else None
+            thread = core._console_thread_id(db, "decision") if db is not None else None
             where = ("Открыл очередь в «%s»." % CONSOLE_TOPIC_NAMES["decision"]
                      if thread and thread != pressed_in else None)
             _answer_and_do(callback,
@@ -5151,7 +5021,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                            text=where)
             return {"ok": True}
 
-        # Заявка на доступ к сайту (ACCESS_GATE): «Одобрить»/«Отклонить» под
+        # Заявка на доступ к сайту (core.ACCESS_GATE): «Одобрить»/«Отклонить» под
         # сообщением из _notify_access_request. В отличие от `mod:`, решение
         # применяется ЗДЕСЬ ЖЕ, без таблицы и рутины: аккаунты живут в этой
         # же базе, а не в git-файле. Право решать — по отправителю
@@ -5491,7 +5361,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                       if kind != "сырье" else "Это вопрос — ответ пришлю следующим сообщением."),
                 disable_web_page_preview=True, **_thread_kwargs(reply))
             thread = _thread_kwargs(reply)
-            _in_background(lambda: _answer_console_question(raw_id, text.strip(), chat_id, thread))
+            core._in_background(lambda: _answer_console_question(raw_id, text.strip(), chat_id, thread))
         elif asked:
             notification_service.tg_api(
                 "sendMessage", chat_id=str(chat_id),
@@ -5778,9 +5648,6 @@ BOT_HELP = (
 )
 
 
-SITE_URL = os.environ.get("APP_BASE_URL", "https://projectcompass.ru").rstrip("/")
-
-
 # Тексты для читателя в личке с ботом. Правило «Язык для людей» (CLAUDE.md):
 # ни слова о модерации, черновиках и очередях — это консоль, ее видят двое.
 READER_WELCOME = (
@@ -5943,12 +5810,12 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             raw    — сомнительные новости, которые ворота не пропустили.
     """
     if kind == "raw":
-        state = _read_json("data/inbox/moderation_state.json", {})
+        state = core._read_json("data/inbox/moderation_state.json", {})
         decided = set(state.get("decided_raw") or {})
         hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
         names = sorted(n for n in os.listdir(hold_dir)
                        if n.endswith(".json")) if os.path.isdir(hold_dir) else []
-        drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
+        drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
                   .get("drafts") if names else None) or []
         answered = _answered_decisions()
         all_items = [d for d in drafts if str(d.get("draft_id")) not in decided]
@@ -5963,7 +5830,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         # такая карточка попадала в блок «ждут прочтения», хотя ждать ей
         # нечего: ее уже прочитали. Показываем ее там, где человек решает
         # судьбу сомнительного, — рядом с сырьем, которое не прошло ворота.
-        doubted = [c for c in (_read_json("static/data/pending.json", {}).get("cards") or [])
+        doubted = [c for c in (core._read_json("static/data/pending.json", {}).get("cards") or [])
                    if _card_state(c) == "doubted"]
         already += sum(1 for c in doubted if str(c.get("id")) in answered)
         items = items + [c for c in doubted if str(c.get("id")) not in answered]
@@ -5976,7 +5843,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
                      "ближайшей публикации (в течение часа днем, утром — если ночью)." % already)
     else:
         answered = _answered_decisions()
-        pending = _read_json("static/data/pending.json", {}).get("cards") or []
+        pending = core._read_json("static/data/pending.json", {}).get("cards") or []
         not_held = [c for c in pending if not c.get("held")]
         if kind == "held":
             items = [c for c in pending if c.get("held")]
@@ -6145,14 +6012,6 @@ def _stats_report() -> str:
     ) % n
 
 
-def _read_json(path, default):
-    try:
-        with open(os.path.join(BASE_DIR, path), encoding="utf-8") as f:
-            return json.load(f)
-    except (OSError, ValueError):
-        return default
-
-
 def _queue_report() -> str:
     """Сводка по трем типам сообщений консоли — теми же значками, что и они.
 
@@ -6160,7 +6019,7 @@ def _queue_report() -> str:
     сутки уходят как есть. ⚠️ — сырье, которое ворота не пропустили: решается
     только кнопкой под своим сообщением, по молчанию не публикуется никогда.
     """
-    pending = _read_json("static/data/pending.json", {}).get("cards") or []
+    pending = core._read_json("static/data/pending.json", {}).get("cards") or []
     held = [c for c in pending if c.get("held")]
     active = [c for c in pending if not c.get("held")]
     lines = ["🗂📣 Карточки и посты на проверке: %d" % len(active)]
@@ -6173,12 +6032,12 @@ def _queue_report() -> str:
         for card in held[:5]:
             lines.append("• %s" % str(card.get("title") or "")[:90])
 
-    state = _read_json("data/inbox/moderation_state.json", {})
+    state = core._read_json("data/inbox/moderation_state.json", {})
     decided = set((state.get("decided_raw") or {}))
     hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
     names = sorted(n for n in os.listdir(hold_dir) if n.endswith(".json")) \
         if os.path.isdir(hold_dir) else []
-    drafts = (_read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts")
+    drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts")
               if names else None) or []
     answered = _answered_decisions()
     drafts = [d for d in drafts if str(d.get("draft_id")) not in decided]
@@ -6230,16 +6089,6 @@ _VERDICT_LABEL = {
 # каждом посте. Память живет в процессе: перезапуск сайта бывает только при
 # сборке, и повторить сообщение раз в несколько дней не страшно.
 _CHANNEL_IDS_TOLD: set[str] = set()
-
-
-REVIEW_GROUP_SETTING = "telegram_review_group_id"
-CHANNEL_SETTING = "telegram_channel_id"
-# Второй канал — «Компас - Недвижимость» (2 октября 2026). Пока канал был один,
-# любой канал, кроме записанного в окружении, считался ОСНОВНЫМ: владелец
-# добавил бота в новый канал, и сайт записал его адрес в ячейку основного.
-# Публикацию спасла только переменная окружения рутин. Теперь канал узнается
-# по названию: «недвижимость» в нем — своя ячейка.
-REALTY_CHANNEL_SETTING = "telegram_channel_id:realty"
 
 
 def _is_realty_channel_title(title) -> bool:
@@ -6297,44 +6146,6 @@ def _remember_setting(db, key: str, value: str) -> None:
     except SQLAlchemyError as exc:  # noqa: BLE001
         db.rollback()
         logger.error("настройку %s записать не удалось: %s", key, exc)
-
-
-# ТОПИКИ КОНСОЛИ. 4 сентября 2026 владелец превратил группу-консоль в форум
-# и завел темы («Подтверждение постов», «Обновления», «Общая информация»),
-# чтобы решения, отчеты рутин и разное не лежали одной кучей. Bot API не
-# дает список тем группы (нет метода вроде getForumTopics) — номер темы
-# (`message_thread_id`) узнается так же, как адрес приватного канала выше:
-# из служебного сообщения о создании/переименовании темы (несет имя и id
-# напрямую), а для уже существующих тем, чье служебное сообщение прошло ДО
-# того, как бот начал их слушать, — разовым бутстрапом: человек печатает
-# точное название темы внутри нее самой.
-CONSOLE_TOPIC_NAMES = {
-    "decision": "Подтверждение постов",   # чего-то ждет ваше решение
-    "update": "Обновления",               # отчет рутины о прогоне
-    "info": "Общая информация",           # служебное: канал отозвался, адрес запомнили
-    # Все, что написал ПОСЕТИТЕЛЬ: уточнение с карточки сделки, заметка из
-    # футера и обе половины отзыва об ассистенте («Ответ помог?» и «Чем не
-    # помог?»). Отзывы жили в «Общей информации» и тонули среди отчетов о
-    # прогонах — переехали 22 сентября 2026.
-    "user_notes": "Заметки от пользователей",
-    # Служебные очереди, где вы отвечаете на ТЕХНИЧЕСКИЙ вопрос, а не решаете
-    # судьбу поста. Заведена 22 сентября 2026, чтобы в «Подтверждении постов»
-    # остались только посты и карточки.
-    "admin": "Админ",
-    # Сообщения владельца и партнера агенту Claude: задачи, правки, вопросы.
-    # Ловит их _claude_topic_message, читает рутина «тема Клод»
-    # (routines/claude_topic.md), ответ приходит в ту же тему. 17 октября 2026.
-    "claude": "Клод",
-}
-
-# Запасная тема, пока номер не закреплен: пропасть очереди заявок на вход
-# хуже, чем полежать не в той теме. Дублирует pipeline/console_topics.FALLBACK.
-CONSOLE_TOPIC_FALLBACK = {"admin": "decision"}
-
-
-def _topic_slug(name: str) -> str:
-    s = re.sub(r"[^\w\s-]", "", name.strip().lower(), flags=re.UNICODE)
-    return re.sub(r"\s+", "-", s)
 
 
 def _learn_console_topics(payload, db=None) -> bool:
@@ -6447,20 +6258,6 @@ def _offer_topic_binding(message: dict, chat_id, sender_id) -> None:
         reply_markup=keyboard, disable_web_page_preview=True)
 
 
-def _console_thread_id(db, kind: str) -> int | None:
-    """Номер темы для сообщений вида `kind`, запущенных из этого же процесса
-    (сайт уже держит базу — незачем ходить за собой по HTTP, как это делают
-    рутины через /api/moderation/topics)."""
-    name = CONSOLE_TOPIC_NAMES.get(kind)
-    if not name:
-        return None
-    row = db.get(AppSetting, "telegram_topic:%s" % _topic_slug(name))
-    if row and row.value.lstrip("-").isdigit():
-        return int(row.value)
-    spare = CONSOLE_TOPIC_FALLBACK.get(kind)
-    return _console_thread_id(db, spare) if spare else None
-
-
 
 # ТЕМА «КЛОД» (17 октября 2026). Владелец и партнер пишут в эту тему
 # сообщения агенту Claude; сайт складывает их в таблицу claude_messages, рутина
@@ -6553,12 +6350,6 @@ def _is_question(text: str) -> bool:
     return bool(t) and (t.endswith("?") or bool(QUESTION_START.match(t) and len(t) < 200 and "?" in t))
 
 
-def _in_background(fn) -> None:
-    """Долгая работа (ответ модели) — не в потоке опроса Telegram: пока он
-    ждет модель, бот не слышит ни одной кнопки. Тесты подменяют на вызов."""
-    threading.Thread(target=fn, daemon=True).start()
-
-
 CONSOLE_QA_SYSTEM = (
     "Ты помогаешь владельцу «Компаса» проверить карточку сделки перед публикацией в "
     "Telegram-канале. Отвечай по-русски, коротко — два-пять предложений, как коллега в "
@@ -6569,7 +6360,7 @@ CONSOLE_QA_SYSTEM = (
 
 def _console_card(deal_id: str) -> dict:
     """Карточка из очереди консоли или из базы — то, о чем спросили."""
-    for card in (_read_json("static/data/pending.json", {}).get("cards") or []):
+    for card in (core._read_json("static/data/pending.json", {}).get("cards") or []):
         if card.get("id") == deal_id:
             return card
     return get_deal(deal_id) or {}
@@ -6585,7 +6376,7 @@ def _console_answer(deal_id: str, question: str) -> str | None:
     block = ""
     try:
         query = ("%s %s" % (question, str(card.get("title") or "")[:90])).strip()
-        block = build_search_block(yandex_search(query, config=SearchConfig.from_env(), client=_http))
+        block = build_search_block(yandex_search(query, config=SearchConfig.from_env(), client=core._http))
     except Exception as exc:                                  # noqa: BLE001
         logger.info("консоль: поиск для ответа не удался (%s)", exc)
     user_msg = "Вопрос: %s\n\nКарточка:\n%s\n\n%s" % (
@@ -6630,7 +6421,7 @@ def _thread_kwargs(source: dict | None) -> dict:
 def _learn_review_group(payload, db=None) -> None:
     """Запомнить актуальный id группы-консоли — той же болезни, что у адреса
     канала, только источник другой: не смена имени, а то, что Telegram САМ
-    меняет id при переходе группы в супергруппу (см. `_review_chat_ids`).
+    меняет id при переходе группы в супергруппу (см. `core._review_chat_ids`).
     Источник истины — любое сообщение от владельца/партнера ИЗ группы: его
     `chat.id` — единственно верный, актуальный номер прямо сейчас. Ничего не
     возвращает и не мешает дальнейшей обработке того же апдейта.
@@ -6781,8 +6572,8 @@ def _announce_channel_id(payload, db=None) -> bool:
         role = ("Посты о недвижимости пойдут туда; о крупных сделках "
                 "(от 1 млрд ₽) — и туда, и в основной канал, со ссылкой "
                 "друг на друга.\n\n" if realty else "")
-        thread = _console_thread_id(db, "info") if db is not None else None
-        for target in _review_chat_ids(db):
+        thread = core._console_thread_id(db, "info") if db is not None else None
+        for target in core._review_chat_ids(db):
             notification_service.tg_api(
                 "sendMessage", chat_id=target, disable_web_page_preview=True,
                 text=("\U0001F4E1 Канал «%s» отозвался — адрес запомнили.\n\n%s"
@@ -6805,7 +6596,7 @@ def _already_on_site(deal_id: str) -> bool:
     did = str(deal_id or "")
     if not did or "~" in did:
         return False
-    pending = {str(c.get("id")) for c in (_read_json("static/data/pending.json", {}).get("cards") or [])}
+    pending = {str(c.get("id")) for c in (core._read_json("static/data/pending.json", {}).get("cards") or [])}
     if did in pending:
         return False
     base = base_data.promoted() or {}
@@ -6858,18 +6649,6 @@ def _mark_decided(callback: dict, verdict: str, answered: bool = False) -> None:
         logger.warning("не удалось дописать решение в сообщение: %s", exc)
 
 
-def _is_reviewer(chat_id) -> bool:
-    """Право решать есть только у чатов из TELEGRAM_REVIEW_CHAT_IDS (владелец и
-    партнер). Любой другой человек, нашедший бота, решений не оставит."""
-    allowed = {x.strip() for x in os.environ.get("TELEGRAM_REVIEW_CHAT_IDS", "").split(",") if x.strip()}
-    return chat_id is not None and str(chat_id) in allowed
-
-
-def _moderation_token_ok(token: str) -> bool:
-    expected = os.environ.get("MODERATION_TOKEN") or os.environ.get("TELEGRAM_WEBHOOK_SECRET") or ""
-    return bool(expected) and token == expected
-
-
 def _ops_numbers() -> dict:
     """Цифры для дашборда основателей — считаются из тех же файлов, что и сайт.
 
@@ -6879,7 +6658,7 @@ def _ops_numbers() -> dict:
     """
     base = base_data.promoted()   # общий кэш, а не свой разбор 10 МБ на запрос
     deals = base.get("deals") or []
-    pending = (_read_json("static/data/pending.json", {}).get("cards") or [])
+    pending = (core._read_json("static/data/pending.json", {}).get("cards") or [])
 
     def lens_len(card) -> int:
         eco, law = card.get("eco") or {}, card.get("law") or {}
@@ -7211,8 +6990,8 @@ def ops_traffic_report(token: str = "", db=Depends(get_db)):
     import traffic
     lines = _metrika_lines() + [""] + traffic.console_lines(_traffic_stats(db, 1))
     text = "\n".join(lines)
-    chats = _review_chat_ids(db)
-    thread = _console_thread_id(db, "update")
+    chats = core._review_chat_ids(db)
+    thread = core._console_thread_id(db, "update")
     sent = 0
     for chat in chats:
         res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, parse_mode="HTML",
@@ -7304,7 +7083,7 @@ def _access_row(u: User) -> dict:
 
 @app.get("/api/access/requests")
 def access_requests(token: str = "", db=Depends(get_db)):
-    """Заявки на доступ (ACCESS_GATE) для владельца, который смотрит не в
+    """Заявки на доступ (core.ACCESS_GATE) для владельца, который смотрит не в
     Telegram, а через сессию Claude: аккаунты живут в базе сайта (приватная
     сеть Timeweb), и единственный путь до нее снаружи — сам сервер, тем же
     токеном, что у /api/moderation/decisions. Отдаем ожидающих (approved=False)
@@ -7318,7 +7097,7 @@ def access_requests(token: str = "", db=Depends(get_db)):
                                .order_by(User.created_at)).all())
     return {"pending": [_access_row(u) for u in pending],
             "approved": [_access_row(u) for u in approved],
-            "approved_count": len(approved), "gate": ACCESS_GATE}
+            "approved_count": len(approved), "gate": core.ACCESS_GATE}
 
 
 class AccessDecideIn(BaseModel):
@@ -7400,19 +7179,19 @@ def _console_ready_cards(db, cards: list) -> list:
 
 def console_show_ready_cards() -> dict:
     """Показать в консоли готовые карточки из pending.json. Возвращает счет."""
-    pending = (_read_json("static/data/pending.json", {}) or {}).get("cards") or []
+    pending = (core._read_json("static/data/pending.json", {}) or {}).get("cards") or []
     db = get_session()
     try:
         ready = _console_ready_cards(db, pending)
         if not ready:
             return {"shown": 0}
-        chats = _review_chat_ids(db)
+        chats = core._review_chat_ids(db)
         if not chats:
             logger.error("готовых карточек %d, а консоли нет — показывать некому", len(ready))
             return {"shown": 0, "error": "консоли нет"}
         sd = _send_drafts_module()
         comps = (base_data.promoted() or {}).get("companies") or {}
-        thread = _console_thread_id(db, "decision")
+        thread = core._console_thread_id(db, "decision")
         shown = 0
         for card in ready:
             common = {"chat_id": chats[0], "disable_web_page_preview": True}
@@ -7662,8 +7441,8 @@ def _intake_summary_once(db, now_utc: datetime | None = None, force: bool = Fals
     except Exception as exc:                                 # noqa: BLE001
         logger.error("свой счетчик посещений не посчитался: %s", exc)
     text = _intake_summary_text(runs, msk.date(), metrika_lines)
-    chats = _review_chat_ids(db)
-    thread = _console_thread_id(db, "update")
+    chats = core._review_chat_ids(db)
+    thread = core._console_thread_id(db, "update")
     sent = 0
     for chat in chats:
         res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, parse_mode="HTML",
@@ -7770,7 +7549,7 @@ def _main_channel_id(db) -> str:
 
 def _milestone_already_out(event_id: str) -> bool:
     """Этап уже вышел (рутиной — например, по суткам молчания)."""
-    base = _read_json("static/data/deals_promoted.json", {})
+    base = core._read_json("static/data/deals_promoted.json", {})
     return event_id in (base.get("telegram_milestones") or {})
 
 
@@ -7788,7 +7567,7 @@ def _instant_milestone_post(combo: str, decision_id: int, db=None) -> int | None
         if _milestone_already_out(str(draft.get("event_id") or "")):
             return None
         channel = _main_channel_id(db)
-        if not channel or channel in _review_chat_ids(db):
+        if not channel or channel in core._review_chat_ids(db):
             return None
         # Ключ «уже публикуем» пишется ДО отправки: второе нажатие (партнер
         # в ту же минуту) не выпустит пост дважды. Та же отметка — в самом
@@ -8128,10 +7907,10 @@ def _save_correction(deal_id: str | None, correction: CorrectionIn, user: User |
 
 
 def _forward_consultant_to_console(db, row: CorrectionRequest) -> bool:
-    chats = _review_chat_ids(db)
+    chats = core._review_chat_ids(db)
     if not chats:
         return False
-    thread = _console_thread_id(db, "user_notes")
+    thread = core._console_thread_id(db, "user_notes")
     text = ("🤝 Консультант хочет связаться\n%s\nКонтакт: %s"
             % (row.body, row.contact or "не указан"))
     ok = False
@@ -8273,7 +8052,7 @@ def _notify_company_claim(db, row: CompanyClaim, user: User) -> bool:
     _handle_telegram_update рядом с `acc:`). Сбой отправки заявку не роняет:
     она в базе, и ее видно по `GET /api/ops/claims?token=…`."""
     try:
-        chats = _review_chat_ids(db)
+        chats = core._review_chat_ids(db)
         if not chats:
             logger.warning("заявка на карточку #%s: консоль не настроена", row.id)
             return False
@@ -8296,7 +8075,7 @@ def _notify_company_claim(db, row: CompanyClaim, user: User) -> bool:
                   "Подтвердите, только если уверены, что человек работает в этой компании."]
         keys = [[{"text": "✅ Подтвердить", "callback_data": "claim:ok:%d" % row.id},
                  {"text": "🗑 Отклонить", "callback_data": "claim:no:%d" % row.id}]]
-        thread = _console_thread_id(db, "user_notes")
+        thread = core._console_thread_id(db, "user_notes")
         ok = False
         for chat in chats:
             res = notification_service.tg_api("sendMessage", chat_id=chat, text="\n".join(lines),
@@ -8550,3 +8329,9 @@ def index(full_path: str, request: Request):
         resp.headers["Cache-Control"] = "no-cache"
         scrape_guard.issue_cookie(resp, request)
     return resp
+
+# ИМЕНА ДЛЯ ТЕСТОВ И СКРИПТОВ. Все, что раньше жило в main.py, читается через
+# `main.<имя>` по-прежнему. Подменять (monkeypatch) нужно в модуле-владельце:
+# `app.assistant.call_llm`, а не `main.call_llm` — иначе роутер подмены не
+# увидит. Попытка подменить через main падает с подсказкой, где владелец.
+_reexport.install(globals(), (core,))

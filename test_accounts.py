@@ -9,6 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import core
 from db.models import AssistantFeedback, AssistantThread, Base, CorrectionRequest, User
 from db.session import engine, get_session
 
@@ -426,7 +427,7 @@ def test_corrections_consume_deletes_shown_rows(client, monkeypatch):
 # каждом вызове, monkeypatch ее видит.
 
 def _gate_on(monkeypatch):
-    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    monkeypatch.setattr(core, "ACCESS_GATE", True)
     monkeypatch.setenv("TELEGRAM_WEBHOOK_SECRET", "тайна")
     monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
     monkeypatch.setenv("TELEGRAM_REVIEW_GROUP_ID", "-1001234567890")
@@ -453,7 +454,7 @@ def _request_access(client, email, **extra):
 def test_me_reports_whether_the_gate_is_on(client, monkeypatch):
     """Интерфейс решает, показывать ли экран входа вместо сайта, по полю gate."""
     assert client.get("/api/me").json() == {"logged_in": False, "gate": False}
-    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    monkeypatch.setattr(core, "ACCESS_GATE", True)
     assert client.get("/api/me").json() == {"logged_in": False, "gate": True}
 
 
@@ -585,14 +586,14 @@ def test_telegram_failure_does_not_break_the_registration(client, monkeypatch):
 def test_gate_off_registers_approved_users_and_logs_them_in(client, monkeypatch):
     """Выключенный гейт (ACCESS_GATE=0) — прежнее поведение: сессия сразу,
     approved=True, чтобы при последующем включении гейта эти люди вошли."""
-    monkeypatch.setattr(main, "ACCESS_GATE", False)
+    monkeypatch.setattr(core, "ACCESS_GATE", False)
     login(client, "до-гейта@firm.ru")
     s = get_session()
     try:
         assert s.query(User).filter_by(email="до-гейта@firm.ru").one().approved is True
     finally:
         s.close()
-    monkeypatch.setattr(main, "ACCESS_GATE", True)
+    monkeypatch.setattr(core, "ACCESS_GATE", True)
     other = TestClient(main.app)
     r = other.post("/api/auth/login", json={"email": "до-гейта@firm.ru", "password": TEST_PASSWORD})
     assert r.status_code == 200
