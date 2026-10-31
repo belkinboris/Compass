@@ -994,7 +994,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
      ценой; отрасли · темы · отрасли по сумме; крупнейшие · консультанты ·
      серийные покупатели. «Статус» — один на всю ширину, в две колонки. */
   .an-c-years{order:1}.an-c-sumyears{order:2}.an-c-discl{order:3}
-  .an-c-topind{order:4}.an-c-themes{order:5}.an-c-indmoney{order:6}
+  .an-c-topind{order:4}.an-c-inddyn{order:5}.an-c-themes{order:6}.an-c-indmoney{order:7}
   .fact-verified{margin:10px 0 18px;font-size:13px;color:var(--muted)}.fact-verified ul{margin:6px 0 0;padding-left:18px}.fact-verified li{margin:3px 0;line-height:1.45}.fact-verified a{color:inherit}
 .an-c-topsum{order:7}.an-c-firms{order:8}.an-c-buyers{order:9}
   /* .an-card.an-c-status, а не .an-c-status: правило .an-card{display:flex}
@@ -1013,6 +1013,17 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
    и «Переговоры без н…» на 360px теряли ровно то слово, ради которого строка есть. */
 .an-key{color:var(--ink);overflow:hidden;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:normal;overflow-wrap:anywhere}
 .an-bar{height:9px;background:var(--paper2,#F0EFEA);border-radius:5px;overflow:hidden}
+.an-c-inddyn{grid-column:1/-1}
+.dyn-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.dyn{border-collapse:separate;border-spacing:4px 3px;width:100%;font-size:13.5px}
+.dyn th{font-weight:500;text-align:left;color:var(--ink);padding:2px 6px 2px 0;white-space:nowrap}
+.dyn thead th{text-align:center;color:var(--muted);font-size:12.5px;padding:0 0 4px}
+.dyn th a{color:inherit;text-decoration:none}.dyn th a:hover{color:var(--accent)}
+.dyn td{text-align:center;padding:0;min-width:52px}
+.dyn-cell{display:block;padding:7px 4px;border-radius:7px;background:rgba(29,90,68,var(--a,0));color:var(--ink);font-variant-numeric:tabular-nums}
+.dyn-cell.dyn-dark{color:#fff}
+.dyn .dyn-on{outline:2px solid var(--accent);outline-offset:-2px;border-radius:7px}
+@media(max-width:720px){.dyn{border-spacing:3px 3px}.dyn th:first-child{max-width:104px;white-space:normal;line-height:1.2;font-size:12px;padding-right:4px}.dyn td{min-width:40px}.dyn-cell{padding:6px 1px;font-size:12.5px}}
 .an-bar div{height:100%;background:linear-gradient(90deg,var(--accent),#33556B);border-radius:5px;min-width:3px;transform-origin:left;animation:wipe .7s var(--ease) both}
 .an-val{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .an-deal{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink);text-decoration:none}
@@ -9672,6 +9683,16 @@ function renderAnalytics(){
   const byInd = {};
   all.forEach(d=>{(d.industries||[d.ind]).filter(Boolean).forEach(i=>{byInd[i]=(byInd[i]||0)+1;});});
   const topInd = Object.entries(byInd).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  /* Динамика по отраслям (владелец, 31 октября 2026): отрасль × год, без
+     фильтра по году — иначе динамики не видно. Строки — восемь самых частых
+     отраслей за все годы (или выбранная отрасль), клетка — число сделок. */
+  const dynYears = [...yearsAvail].sort();
+  const dynBase = raw.filter(x=>okInd(x)&&okType(x)&&/^20\d\d$/.test(yearOf(x)));
+  const dynTot = {}, dynCell = {};
+  dynBase.forEach(x=>{const y=yearOf(x);(x.industries||[x.ind]).filter(Boolean).forEach(i=>{
+    dynTot[i]=(dynTot[i]||0)+1; dynCell[i+"|"+y]=(dynCell[i+"|"+y]||0)+1;});});
+  const dynRows = Object.entries(dynTot).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([i])=>i);
+  const dynMax = Math.max(1,...dynRows.flatMap(i=>dynYears.map(y=>dynCell[i+"|"+y]||0)));
   const topIndSum = topInd.reduce((s,[,n])=>s+n,0);
   const maxI = topInd.length?topInd[0][1]:1;
   const parseB = d => priceRub(d)/1e9;
@@ -9852,6 +9873,15 @@ function renderAnalytics(){
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. Сделка с двумя отраслями учтена в обеих.</p>
     </div>
+    ${dynRows.length&&dynYears.length>1?`
+    <div class="an-card an-c-inddyn reveal">
+      <span class="label">Динамика по отраслям</span>
+      <div class="dyn-wrap"><table class="dyn">
+        <thead><tr><th></th>${dynYears.map(y=>`<th class="num${anYear===y?" dyn-on":""}">${y}</th>`).join("")}</tr></thead>
+        <tbody>${dynRows.map(i=>`<tr><th><a href="#/industry/${encodeURIComponent(i)}">${i}</a></th>${dynYears.map(y=>{const n=dynCell[i+"|"+y]||0;const a=n?0.12+0.78*n/dynMax:0;return `<td class="num${anYear===y?" dyn-on":""}"><span class="dyn-cell${a>0.55?" dyn-dark":""}" style="--a:${a.toFixed(2)}">${n||"·"}</span></td>`;}).join("")}</tr>`).join("")}</tbody>
+      </table></div>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Число сделок в год, ${anInd==="Все"?"восемь самых частых отраслей":"выбранная отрасль"}${anType==="Все"?"":" (тип: "+anType.toLowerCase()+")"}; чем темнее клетка, тем больше сделок. ${dynYears[dynYears.length-1]===String(new Date().getFullYear())?`${dynYears[dynYears.length-1]} год показан по сегодняшний день.`:""} Сделка с двумя отраслями учтена в обеих.</p>
+    </div>`:""}
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
       ${topSum.length?topSum.map((d,i)=>`<a class="an-deal" href="#/deal/${d.id}"><div class="an-deal-head"><span class="num" style="color:var(--muted)">${i+1}.</span> <span class="an-deal-t">${d.title}</span></div><span class="an-deal-s num">${sumHtml(d.sum)}</span></a>`).join(""):`<p style="color:var(--muted);font-size:13.5px;margin:0">Список появится, когда цены крупнейших покупок будут сверены с источниками.</p>`}
