@@ -60,6 +60,7 @@ import review                      # noqa: E402
 import format_post                 # noqa: E402
 import check_post                  # noqa: E402
 import proofread                   # noqa: E402
+import readiness                   # noqa: E402
 import source_names                # noqa: E402
 import normalize_sum               # noqa: E402
 
@@ -227,8 +228,10 @@ def find_card(cid, base, pending):
 def queue(base, pending):
     """Что ждет приемки: вся очередь предпросмотра без штампа и карточки базы,
     которым еще предстоит ПЕРВЫЙ пост (свежие, без записи в telegram_posts) —
-    ровно те, кого гейты ниже по течению не пропустят."""
-    out = [c for c in pending.get('cards', []) if not c.get(STAMP)]
+    ровно те, кого гейты ниже по течению не пропустят. Состояние — одно
+    место, readiness.state: придержанную и не пропущенную приемкой
+    (`hold_reason`) очередь не берет — они ждут человека."""
+    out = [c for c in pending.get('cards', []) if readiness.state(c) in ('unaccepted', 'unreviewed')]
     posts = base.get('telegram_posts') or {}
     for c in base['deals']:
         if c.get(STAMP) or c['id'] in posts or c.get('no_post') or c.get('post_override'):

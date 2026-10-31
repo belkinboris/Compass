@@ -42,6 +42,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 
 import format_post                                        # noqa: E402
 import promote                                            # noqa: E402
+import readiness                                          # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
@@ -124,19 +125,9 @@ def consume_pending():
 
 
 def hours_pending(card, now):
-    # Без `pending_since` часы раньше стояли на нуле НАВСЕГДА: три карточки,
-    # заведенные 18 сентября разовым скриптом мимо promote.py (Мадрид, Nestlé,
-    # «Ашан»), три недели висели в «выйдут сами в ближайшие сутки» с «0 ч из
-    # 24». Теперь отсчет идет от приемки (или чтения) — раньше карточка в
-    # консоль не уходит; а test_data держит, что отметка есть у каждой.
-    stamp = card.get('pending_since') or card.get('accepted') or card.get('reviewed')
-    try:
-        since = datetime.fromisoformat(str(stamp))
-    except ValueError:
-        return 0.0
-    if since.tzinfo is None:
-        since = since.replace(tzinfo=timezone.utc)
-    return (now - since).total_seconds() / 3600.0
+    """Одно определение — readiness.hours_pending (отсчет от pending_since,
+    иначе от приемки или чтения)."""
+    return readiness.hours_pending(card, now)
 
 
 # Вердикты и их роли. КАРТОЧНЫЕ решают судьбу карточки (approve/hold);
@@ -205,6 +196,12 @@ def apply_late_discard(data, state, deal, now):
                 'at': now.isoformat(timespec='seconds'), 'by': 'late_discard'}
 
 
+def dead_ends(cards):
+    """Готовые, но не показанные карточки (readiness `ready_unsent`): ждущая
+    второго чтения или приемки — очередь притока, а не тупик, и здесь ее нет."""
+    return [c for c in cards if readiness.state(c) == 'ready_unsent']
+
+
 def plan_actions(cards, decisions, now):
     """(публикуем, придерживаем, ждем) — чистая функция, ее держат тесты.
 
@@ -238,39 +235,34 @@ def plan_actions(cards, decisions, now):
             discard.append((card, 'решение: выкинуть'))
         elif decision:
             hold.append((card, 'решение: придержать'))
-        elif card.get('held'):
-            wait.append((card, 'придержана ранее — ждет ручного решения'))
-        elif not card.get('reviewed'):
-            # НЕПРОЧИТАННАЯ КАРТОЧКА НЕ ВЫХОДИТ ПО МОЛЧАНИЮ, И ЭТО ГЛАВНАЯ
-            # ЗАЩИТА ОТ КОСЯЧНЫХ КАРТОЧЕК. Черновик рождается из ЗАГОЛОВКА:
-            # `guess_parties()` режет его и раскладывает куски по полям, тип
-            # ставит классификатор. Владелец 9 августа открыл три такие
-            # карточки рядом со статьями и нашел в каждой каркасный дефект —
-            # «Инвестиция» у покупки 100% долей, «бывшая лизинговая „дочка"
-            # Mercedes-Benz» вместо ООО «МБ РУС Финанс», «Внуково» в прямых
-            # кавычках вместо АО «Международный аэропорт „Внуково"» — и сказал
-            # прямо: такие карточки не должны появляться, пока не изучена
-            # статья. Раньше сутки молчания публиковали карточку КАК ЕСТЬ,
-            # то есть ровно в том виде, в каком ее собрал разбор заголовка.
-            # Отметку `reviewed` ставит только `review.py` — при правках сам,
-            # при бедном источнике через `--mark-read`. Молчание по-прежнему
-            # согласие, но согласие на ПРОЧИТАННУЮ карточку.
-            wait.append((card, 'не прочитана против источника — молчание ее не публикует'))
-        elif not card.get('accepted'):
-            # ПРИЕМКА (11 сентября 2026): карточка, которую никто не прочитал
-            # целиком глазами читателя — предмет назван и в именительном
-            # падеже, стороны привязаны к профилям, «Зачем» о мотиве, проза
-            # без газеты, пост читается, — по молчанию не выходит. Штамп
-            # ставит `pipeline/ingest/accept_card.py` по ответу читателя;
-            # без него консоль карточку и не показывала (send_drafts), так
-            # что «молчание» здесь — не согласие, а отсутствие вопроса.
-            # Явное решение владельца («опубликовать») выше этой ветки и
-            # по-прежнему сильнее.
-            wait.append((card, 'не прошла приемку (accept_card.py) — молчание ее не публикует'))
-        elif card.get('draft_sent') and hours_pending(card, now) >= SILENCE_HOURS:
-            publish.append((card, None, 'молчание %d ч — публикуем как есть' % SILENCE_HOURS))
         else:
-            wait.append((card, 'ждем решения (%.0f ч из %d)' % (hours_pending(card, now), SILENCE_HOURS)))
+            # ЧЕГО ЖДЕТ КАРТОЧКА — ОДНО МЕСТО: readiness.state (31 октября 2026).
+            # Молчание публикует только ПОКАЗАННУЮ, прочитанную и принятую
+            # карточку; все остальное ждет с текстом по состоянию. Что здесь
+            # жило и живет:
+            # — НЕПРОЧИТАННАЯ НЕ ВЫХОДИТ ПО МОЛЧАНИЮ — главная защита от
+            #   косячных карточек: черновик рождается из заголовка, владелец
+            #   9 августа нашел в трех таких карточках каркасный дефект
+            #   («Инвестиция» у покупки 100%, «Внуково» в прямых кавычках).
+            #   Молчание — согласие на ПРОЧИТАННУЮ карточку (review.py).
+            # — ПРИЕМКА (11 сентября 2026): без штампа accept_card.py консоль
+            #   карточку и не показывала, так что «молчание» — не согласие,
+            #   а отсутствие вопроса.
+            # — ВТОРОЕ ЧТЕНИЕ: принятая с 9 октября без `second_read` ждет
+            #   приток, а не владельца (раньше approve этого не знал и печатал
+            #   «ждем решения» и «ТУПИК»).
+            # — НЕ ПРОПУЩЕННАЯ ПРИЕМКОЙ (`hold_reason`) ждет решения человека:
+            #   консоль обещает «без вашего слова не публикуются никогда».
+            # — НЕ ПОКАЗАННАЯ по молчанию не выходит: молчание — согласие
+            #   только того, кто сообщение получил.
+            # Явное решение владельца («опубликовать») выше всех этих веток.
+            st = readiness.state(card)
+            if st == 'shown' and hours_pending(card, now) >= SILENCE_HOURS:
+                publish.append((card, None, 'молчание %d ч — публикуем как есть' % SILENCE_HOURS))
+            elif st == 'shown':
+                wait.append((card, 'ждем решения (%.0f ч из %d)' % (hours_pending(card, now), SILENCE_HOURS)))
+            else:
+                wait.append((card, readiness.WAIT_TEXT[st]))
     return publish, hold, wait, discard
 
 
@@ -341,11 +333,9 @@ def main(write=False):
     # владелец — «если карточка готова, в чем проблема ее показать?»).
     # Сухой прогон approve.py — первый шаг каждого прогона публикации, и он
     # называет такие карточки по имени: следующий шаг — send_drafts.py --write.
-    for card in pending['cards']:
-        if card.get('reviewed') and card.get('accepted') and not card.get('draft_sent') \
-                and not card.get('held') and not card.get('hold_reason'):
-            print('  ТУПИК: %s «%s» — готова, но в консоли не показана: '
-                  'python3 pipeline/ingest/send_drafts.py --write' % (card['id'], str(card.get('title') or '')[:70]))
+    for card in dead_ends(pending['cards']):
+        print('  ТУПИК: %s «%s» — готова, но в консоли не показана: '
+              'python3 pipeline/ingest/send_drafts.py --write' % (card['id'], str(card.get('title') or '')[:70]))
 
     # СЫРЬЕ РАЗБИРАЕТСЯ ДО СУХОГО ПРОГОНА. Раньше решения по сырью («это
     # сделка — в работу» / «не сделка») применялись только под `--write`, а

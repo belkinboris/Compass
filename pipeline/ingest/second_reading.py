@@ -13,7 +13,7 @@ SECOND_READING_BRIEF.md): на каждое заполненное поле — 
     python3 pipeline/ingest/second_reading.py --apply ответ.json [--write]
 
 Штамп `second_read` обязателен для карточек, принятых с SINCE и позже
-(`send_drafts.needs_second_reading`); принятые раньше идут по-старому.
+(`readiness.needs_second_reading`); принятые раньше идут по-старому.
 """
 import json
 import os
@@ -28,9 +28,10 @@ sys.path.insert(0, os.path.join(HERE, '..', '..'))
 
 import accept_card                     # noqa: E402
 import format_post                     # noqa: E402
+import readiness                       # noqa: E402
 
 STAMP = 'second_read'
-SINCE = '2026-10-09'                   # принятые с этого дня без второго чтения в консоль не идут
+SINCE = readiness.SECOND_READING_SINCE   # принятые с этого дня без второго чтения в консоль не идут
 
 FIELD_QUESTIONS = {
     'title': 'Можно сказать вслух партнеру — кто, что сделал, с чем? Без обрывка формулировки издания и прямых кавычек? '
@@ -76,15 +77,16 @@ def filled_fields(card):
 
 
 def needs_second_reading(card):
-    """Принята с SINCE и позже и еще не прочитана второй раз. У старых
-    фикстур `accepted: True` — не дата, они идут по-старому."""
-    acc = card.get(accept_card.STAMP)
-    return isinstance(acc, str) and acc >= SINCE and not card.get(STAMP)
+    """Принята с SINCE и позже и еще не прочитана второй раз — одно
+    определение на всех: readiness.needs_second_reading."""
+    return readiness.needs_second_reading(card)
 
 
 def queue(base, pending):
+    """Что ждет второго чтения — состояние `unread2` (readiness.state):
+    показанную в консоли карточку второй раз не читают."""
     return [c for c in list(pending.get('cards') or []) + list(base.get('deals') or [])
-            if needs_second_reading(c)]
+            if readiness.state(c) == 'unread2']
 
 
 def questionnaire(card, base):

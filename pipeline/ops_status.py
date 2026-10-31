@@ -571,38 +571,45 @@ def post_status(client, token, chat, text, keyboard=None):
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 
 
+def _readiness():
+    ingest = os.path.join(ROOT, 'pipeline', 'ingest')
+    if ingest not in sys.path:
+        sys.path.insert(0, ingest)
+    import readiness
+    return readiness
+
+
 def queue_counts(path=PENDING):
     """(soon, held, unread) из pending.json — те же три группы и те же условия,
     что у кнопок «Что скоро выйдет / Что придержано / Что ждет прочтения»
     (`main._queue_reply`). До 9 октября 2026 числа считала рутина и
     передавала ключами, и отчет сказал «5 карточек вы придержали», а кнопка
     ответила «Вы придержали: 0» — в pending.json ни одной `held` не было.
-    Файл не прочитался — None, и тогда берутся числа из ключей."""
+    Файл не прочитался — None, и тогда берутся числа из ключей.
+    Состояние карточки — одно место, readiness.state (31 октября 2026):
+    «выйдет сама» — только показанная в консоли (молчание публикует только
+    ее, approve.plan_actions); «ждет прочтения» — все, что ждет приток
+    (чтение, приемку, второе чтение); не пропущенная приемкой — в
+    «сомнительных», не здесь."""
     try:
         cards = json.load(open(path, encoding='utf-8')).get('cards') or []
     except (OSError, ValueError):
         return None
-    held = [c for c in cards if c.get('held')]
-    rest = [c for c in cards if not c.get('held')]
-    # Молчание публикует только показанную в консоли карточку (approve.plan_actions).
-    soon = [c for c in rest if c.get('reviewed') and c.get('accepted') and c.get('draft_sent')]
-    unread = [c for c in rest if not is_read_through(c) and not c.get('hold_reason')]
-    return len(soon), len(held), len(unread)
+    counts = state_counts(cards)
+    return (counts['shown'], counts['held'],
+            sum(counts[s] for s in _readiness().WAITING_INTAKE))
+
+
+def state_counts(cards):
+    """Counter по состояниям readiness.state — одна таблица для отчета."""
+    from collections import Counter
+    readiness = _readiness()
+    return Counter(readiness.state(c) for c in cards)
 
 
 def needs_second_reading(card):
-    """Принята с 9 октября 2026 и еще не прочитана второй раз — консоль ее не
-    показывает (send_drafts), и ждет она не владельца, а приток
-    (second_reading.py). Правило — в pipeline/ingest/second_reading.py."""
-    acc = card.get('accepted')
-    if not (isinstance(acc, str) and acc[:4].isdigit()):   # старые фикстуры: accepted: True / 'd'
-        return False
-    try:
-        sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
-        import second_reading
-        return bool(second_reading.needs_second_reading(card))
-    except Exception:                                      # noqa: BLE001 — нет модуля в тестовой песочнице
-        return acc >= '2026-10-09' and not card.get('second_read')
+    """Одно определение — readiness.needs_second_reading."""
+    return _readiness().needs_second_reading(card)
 
 
 def is_read_through(card):
@@ -611,15 +618,13 @@ def is_read_through(card):
     была принята, но второго чтения не прошла — и попала в строку «⛔ Сбой»,
     хотя ждала обычного шага притока. Состояние «ждет второго чтения» —
     очередь, а не сбой, и считается вместе с «ждут прочтения»."""
-    return bool(card.get('reviewed') and card.get('accepted')
-                and (card.get('draft_sent') or not needs_second_reading(card)))
+    return _readiness().state(card) in ('shown', 'ready_unsent')
 
 
 def is_unsent(card):
     """Принята, прочитана, но в консоли еще не показана — ни в «скоро выйдут»,
     ни в «ждут прочтения» такая карточка не попадала (27 октября 2026)."""
-    return bool(is_read_through(card) and not card.get('draft_sent')
-                and not card.get('held') and not card.get('hold_reason'))
+    return _readiness().state(card) == 'ready_unsent'
 
 
 def unsent_cards(path=PENDING):
@@ -646,7 +651,7 @@ def doubted_count(path=PENDING, inbox=None):
         cards = json.load(open(path, encoding='utf-8')).get('cards') or []
     except (OSError, ValueError):
         cards = []
-    n = sum(1 for c in cards if c.get('hold_reason') and not c.get('held'))
+    n = sum(1 for c in cards if _readiness().state(c) == 'doubted')
     inbox = inbox or os.path.join(ROOT, 'data', 'inbox')
     hold_dir = os.path.join(inbox, 'hold')
     try:
