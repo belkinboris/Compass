@@ -12,7 +12,7 @@ WebFetch, но echofm.online не забран притоком и не лежи
 кэше (`data/inbox/raw/*-articles.jsonl`), поэтому механическая проверка
 `quote_is_real()` отклоняет запись («цитаты нет в тексте источника») —
 тот же класс случая, что уже описан в
-`pipeline/fix_agrosila_prodo_perm_closed.py`. Не обходим проверку.
+`pipeline/archive/2026-07/fix_agrosila_prodo_perm_closed.py`. Не обходим проверку.
 
 Запуск: python3 pipeline/ingest/review.py ga142d8e0 --mark-followup --write
 """

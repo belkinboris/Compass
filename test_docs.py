@@ -303,6 +303,11 @@ def test_a_document_read_on_a_step_is_split_not_trimmed():
 
 
 _REF_FILE = re.compile(r"`?((?:docs|routines|pipeline)/[\w./-]+\.md)`?")
+# Путь к скрипту: `pipeline/x.py`, в том числе внутри вызова
+# `python3 pipeline/x.py --write` — проверяется только существование файла.
+# Шаблоны вида `pipeline/<имя>.py` и `pipeline/ingest/fixes/*.py` под
+# регулярное выражение не попадают: «<» и «*» не входят в путь.
+_REF_SCRIPT = re.compile(r"(?<![\w/])((?:docs|routines|pipeline)/[\w./-]+\.py)\b")
 _REF_SECTION = re.compile(r"(?:раздел[а-я]*|см\.)\s+((?:«(?:[^«»]|«[^«»]*»)+»(?:,\s*|\s+и\s+)?)+)")
 
 
@@ -349,6 +354,34 @@ def test_every_reference_in_the_read_documents_leads_somewhere():
                     continue
                 missing.append("%s → раздел «%s»" % (name, ref))
     assert not missing, "ссылки ведут в никуда:\n  " + "\n  ".join(missing)
+
+
+def test_every_script_named_in_a_read_document_exists():
+    """Путь к скрипту в документе — адрес, по которому пойдет следующий
+    агент. 1 ноября 2026 (бэклог H9) 2025 одноразовых скриптов переехали
+    из корня `pipeline/` в `pipeline/archive/<месяц>/`: 130 ссылок
+    переписаны, и заодно нашлись 7 путей, которые не вели никуда уже до
+    переноса (партии `pipeline/ingest/fixes/*.py`, свернутые в JSON-архив,
+    и два снятых скрипта). Проверяются CLAUDE.md, routines/, docs/ и
+    known_issues/ (его файл темы открывают целиком, когда чинят ее);
+    PRODUCT_ROADMAP_ARCHIVE.md не проверяется — он ищется, а не читается,
+    и старые пути в нем законны. Снятый скрипт называют без пути с
+    пометкой «снят, в истории git», а не ссылкой."""
+    texts = dict(_governed())
+    base = os.path.join(ROOT, "known_issues")
+    for name in sorted(os.listdir(base)):
+        if name.endswith(".md"):
+            texts["known_issues/" + name] = io.open(
+                os.path.join(base, name), encoding="utf-8").read()
+    missing = []
+    for name, text in texts.items():
+        for path in sorted(set(_REF_SCRIPT.findall(text))):
+            if not os.path.isfile(os.path.join(ROOT, path)):
+                missing.append("%s → %s" % (name, path))
+    assert not missing, (
+        "ссылки на скрипты ведут в никуда (перенесен в pipeline/archive/<месяц>/? "
+        "снят — назовите без пути с пометкой «снят, в истории git»):\n  "
+        + "\n  ".join(missing))
 
 
 def test_a_promise_from_the_chat_lands_in_the_backlog_by_script(tmp_path):

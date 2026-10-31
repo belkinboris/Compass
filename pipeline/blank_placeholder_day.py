@@ -86,7 +86,7 @@ def main(write=False):
     cache = json.load(open(CACHE, encoding='utf-8')) if os.path.exists(CACHE) else {}
     if not cache:
         print('ВНИМАНИЕ: кэша дат статей нет (data/inbox/raw/source_dates.json).')
-        print('Сначала `python3 pipeline/fix_placeholder_dates.py --fetch`, иначе')
+        print('Сначала `python3 pipeline/archive/2026-09/fix_placeholder_dates.py --fetch`, иначе')
         print('настоящее первое января отличить не от чего.')
         return 1
 

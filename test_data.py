@@ -115,7 +115,7 @@ def test_one_company_holds_one_role_in_a_deal(deals):
 # Карточки M&A без единой названной стороны, которые пока не удалось
 # заполнить уверенно (источник неоднозначен) — разобрать и вычеркнуть.
 # Список только сокращается: новая карточка без сторон сюда не дописывается,
-# ее чинят. См. pipeline/fill_missing_parties_2026_10_12.py.
+# ее чинят. См. pipeline/archive/2026-10/fill_missing_parties_2026_10_12.py.
 MA_PARTIES_BACKLOG = {"g8e9d37ba", "g36386bcf", "cdcc6f67f", "cd51336b7", "g6e1bb001"}
 
 
@@ -239,7 +239,7 @@ def test_company_industries_are_from_the_known_list(companies):
     фильтра отрасли, хотя он остается виден без фильтра. До 10 августа этот
     инвариант проверялся только у сделок; у компаний нашлось четыре профиля
     вне списка («Металлургия», «Нефтесервис», «Промышленность») — починено
-    `pipeline/fix_company_industries_off_list.py`."""
+    `pipeline/archive/2026-08/fix_company_industries_off_list.py`."""
     html = INDEX.read_text(encoding="utf-8")
     listed = set(re.search(r'const INDUSTRIES\s*=\s*\[(.*?)\]', html, re.S).group(1)
                  .replace('"', '').split(","))
@@ -758,7 +758,7 @@ def test_lot_profile_composition_is_named_somewhere_the_reader_sees(base):
     одна компания…»). Раньше тест требовал, чтобы юрлица были перечислены в
     ИМЕНИ, — и это прямо противоречило правилу «имя профиля — компания, а не
     состав сделки» (просьба владельца 3 сентября 2026,
-    `pipeline/fix_company_names_are_real_companies.py`): у лота с общим
+    `pipeline/archive/2026-07/fix_company_names_are_real_companies.py`): у лота с общим
     брендом имя теперь «Термоклип», а перечень юрлиц переехал в описание.
 
     Инвариант не отменен, а заменен на более слабый и все еще механический:
@@ -1185,7 +1185,7 @@ def test_party_name_is_in_the_nominative_case(deals):
     родительный уезжает на экран как имя. Владелец нашел это 9 августа в
     карточке «Флит Лизинга»; прогон признака по всей базе дал 37 кандидатов, из
     которых 21 оказались настоящим дефектом (починены
-    `pipeline/fix_party_name_case.py`).
+    `pipeline/archive/2026-07/fix_party_name_case.py`).
 
     Тест держит границу на будущее: любое НОВОЕ имя, первое слово которого
     уверенно стоит в косвенном падеже, роняет прогон. Проверен на себе — на
@@ -1244,7 +1244,7 @@ def test_followup_researched_never_appears_without_weekly_researched(deals):
     шаг, а не два разных. `stamp_followup_researched` отказывает без
     `weekly_researched` — 183 карточки с историческим `followup_researched`
     (до появления среднего уровня 18 августа 2026) обратно проставлены
-    `pipeline/backfill_weekly_researched.py`.
+    `pipeline/archive/2026-07/backfill_weekly_researched.py`.
     """
     bad = [d["id"] for d in deals
            if d.get("followup_researched") and not d.get("weekly_researched")]
@@ -1456,7 +1456,7 @@ def test_admitted_deals_pass_number_checks(deals):
 # снятая строка — прочитанный источник. 13 сентября 2026 (задача #114)
 # дочитаны все 26, что стояли в очереди 9 сентября: 25 карточек получили
 # продавца дословной цитатой из уже стоявшего в них же текста
-# (`pipeline/fix_auction_sellers_batch1.py`), «cf9ca3b8f» оказалась
+# (`pipeline/archive/2026-07/fix_auction_sellers_batch1.py`), «cf9ca3b8f» оказалась
 # дублем, слитым в `gcc677615` (у него продавец — «РЖД» — уже был назван
 # раньше). Список пуст — это норма, как и у `NOT_DUPLICATES`: пустой
 # список ничего не теряет, он просто значит «непрочитанных не осталось
@@ -1587,7 +1587,7 @@ DENIAL_ALLOWED_IN_LAW = {
                   # fix_fonbet_stone_kurskaya_denial.py (21.08.2026)
     "gfcfba8c9",  # Renaissance/«Аура» — денай касается только сургутской
                   # половины лота, статус осознанно не менялся, разбор
-                  # pipeline/fix_aura_surgut_denial.py (30.08.2026)
+                  # pipeline/archive/2026-08/fix_aura_surgut_denial.py (30.08.2026)
 }
 
 
@@ -1648,7 +1648,7 @@ def test_no_two_cards_claim_one_deal_is_both_closed_and_unconfirmed(base):
     в «Контексте» которой прямым текстом стояло «Подтверждений тому, что
     сделка после этого закрыта, в открытых источниках нет». Читатель,
     открывший обе, справедливо перестает верить обеим. Слито в одну сделку
-    с этапом-согласованием (`pipeline/merge_aeroflot_aeromar_stages.py`).
+    с этапом-согласованием (`pipeline/archive/2026-10/merge_aeroflot_aeromar_stages.py`).
 
     Две пары, которые тест обязан ПРОПУСКАТЬ, — настоящие разные сделки на
     одном активе, и они перечислены поименно: «Башнефть» (часть блокирующего
