@@ -9348,3 +9348,37 @@ def test_triage_sends_a_weak_match_through_the_gate_not_into_enrich():
     assert not m.is_strong("общее название в кавычках и общие слова: 1")
     src = (ROOT / "pipeline" / "ingest" / "triage.py").read_text(encoding="utf-8")
     assert "if deal_id and not matcher.is_strong(why):" in src
+
+
+def test_discard_drops_fix_files_only_about_that_card(tmp_path):
+    """Бэклог A25: «выкинуть» снимает файлы правок выкинутой карточки, но не
+    трогает файл партии, где есть записи про другие карточки."""
+    import os
+    import fix_files
+    (tmp_path / '__init__.py').write_text('')
+    (tmp_path / 'written_g0000aaaa_2026_10_31.py').write_text(
+        "FIXES = [{'id': 'g0000aaaa', 'field': 'sum', 'old': None, 'new': '1 млрд ₽'},\n"
+        " {'id': 'g0000aaaa', 'field': 'status', 'old': None, 'new': 'Закрыта'}]\n",
+        encoding='utf-8')
+    (tmp_path / 'batch_2026_10_31.py').write_text(
+        "FIXES = [{'id': 'g0000aaaa', 'field': 'sum', 'old': None, 'new': '1 млрд ₽'},\n"
+        " {'id': 'g0000bbbb', 'field': 'sum', 'old': None, 'new': '2 млрд ₽'}]\n",
+        encoding='utf-8')
+    dry = fix_files.drop_fixes_for('g0000aaaa', folder=str(tmp_path), write=False)
+    assert [os.path.basename(p) for p in dry] == ['written_g0000aaaa_2026_10_31.py']
+    assert (tmp_path / 'written_g0000aaaa_2026_10_31.py').exists(), 'сухой прогон не удаляет'
+    fix_files.drop_fixes_for('g0000aaaa', folder=str(tmp_path))
+    assert not (tmp_path / 'written_g0000aaaa_2026_10_31.py').exists()
+    assert (tmp_path / 'batch_2026_10_31.py').exists(), 'смешанный файл партии остается'
+    assert fix_files.drop_fixes_for('g0000zzzz', folder=str(tmp_path)) == []
+
+
+def test_auction_starting_price_is_not_a_deal_sum():
+    """Бэклог A25: стартовая цена торгов — не цена сделки."""
+    import draft as drafter
+    for text in ('Начальная цена объекта снизилась до 143,6 млн рублей.',
+                 'Стартовая стоимость лота составляет 16,1 млрд рублей.',
+                 'Минимальная цена продажи — 290 млн руб.'):
+        assert drafter.guess_sum(text), 'предпосылка: число тут есть'
+        assert drafter.sum_from_text(text) is None, text
+    assert drafter.sum_from_text('Начальная цена была 1 млрд руб. Актив продан за 1,4 млрд руб.') == '1,4 млрд ₽'

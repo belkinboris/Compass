@@ -440,6 +440,11 @@ def main(write=False):
         card['held'] = True
     gone_ids = {c['id'] for c, _o, _w in publish} | {c['id'] for c, _w in discard}
     pending['cards'] = [c for c in pending['cards'] if c['id'] not in gone_ids]
+    # Файлы правок выкинутой карточки больше никому не нужны (бэклог A25).
+    import fix_files
+    for card, _why in discard:
+        for path in fix_files.drop_fixes_for(card['id']):
+            print('  СНЯТ ФАЙЛ ПРАВОК %s' % os.path.relpath(path, ROOT))
 
     # СЫРЬЕ: «это сделка — в работу» превращает черновик в карточку
     # предпросмотра (дальше он придет в группу сообщениями «пост» и
