@@ -3326,8 +3326,29 @@ _HOW_TO_USE = re.compile(
     r"(?:«?компас\w*»?|сервис\w*|сайт\w*|ассистент\w*|приложени\w*|этим|вами|тобой)\s*[?!.]*\s*$", re.I)
 
 
+# ОДНОВРЕМЕННЫХ ВОПРОСОВ — НЕ БОЛЬШЕ ASK_MAX_CONCURRENT (аудит кода 28 октября
+# 2026, H7): один вопрос держит поток сервера до 60 с, потоков 40 — сорок
+# вопросов разом, и молчит даже /health. Лишний вопрос ждет до
+# ASK_QUEUE_WAIT секунд и получает вежливый ответ, а не вешает сайт.
+ASK_MAX_CONCURRENT = max(1, int(os.environ.get("ASK_MAX_CONCURRENT") or 8))
+ASK_QUEUE_WAIT = float(os.environ.get("ASK_QUEUE_WAIT") or 12)
+_ask_slots = threading.BoundedSemaphore(ASK_MAX_CONCURRENT)
+ASK_BUSY_ANSWER = ("Сейчас ассистенту задают много вопросов. Подождите минуту и "
+                   "спросите еще раз, вопрос можно оставить в поле как есть.")
+
+
 @app.post("/api/ask")
 def ask(req: AskRequest, request: Request, db=Depends(get_db)):
+    if not _ask_slots.acquire(timeout=ASK_QUEUE_WAIT):
+        logger.warning("ассистент: все %d мест заняты, вопрос отклонен", ASK_MAX_CONCURRENT)
+        return {"answer": ASK_BUSY_ANSWER, "deals": [], "intent": "busy", "model": False}
+    try:
+        return _ask(req, request, db)
+    finally:
+        _ask_slots.release()
+
+
+def _ask(req: AskRequest, request: Request, db):
     started = time.monotonic()
     question = _CONTEXT_PREFIX_RE.sub("", req.question or "").strip()
     # ПОЛИТИКА — ПЕРВЫМ ДЕЛОМ, до поиска по базе, до Яндекса и до модели.
@@ -6678,8 +6699,17 @@ def _remember_manual_channel_edit(post: dict, db) -> None:
     if not chat or not mid:
         return
     key = "%s%s:%s" % (CHANNEL_EDIT_PREFIX, chat, mid)
+    # Текст после правки — тоже (31 октября 2026): владелец просит показывать
+    # закономерности своих правок, а без текста сравнивать было не с чем.
+    text = post.get("text") or post.get("caption") or ""
+    entities = post.get("entities") or post.get("caption_entities")
+    try:
+        html_text = _telegram_text_as_html(text, entities) if text else ""
+    except Exception:  # noqa: BLE001 — разметка не важнее факта правки
+        html_text = text
     value = json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-                        "edit_date": post.get("edit_date")})
+                        "edit_date": post.get("edit_date"),
+                        "text": text[:4096], "html": html_text[:8192]}, ensure_ascii=False)
     try:
         row = db.get(AppSetting, key)
         if row:
