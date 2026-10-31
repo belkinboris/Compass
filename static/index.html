@@ -7814,9 +7814,10 @@ function renderCompanies(){
    по закрытым сделкам) и весь код рендера остаются на месте — чтобы вернуть
    строки «Контроль у», «Под контролем», «Входит в группу», «В группу входит»
    и «Портфель» на страницу компании, достаточно поставить здесь true.
-   «Собственники» (доля с датой и ссылкой на источник) под выключатель не
-   попадают: это факт о самой компании, а не связь, построенная по нашей
-   базе, и на этот блок ссылается вкладка «Участники» из ЕГРЮЛ. */
+   «Собственники» (доля с датой и ссылкой на источник) с 31 октября 2026
+   тоже под выключателем: владелец — «уберем пока раздел собственники, он
+   не нужен, если люди могут заглянуть в ЕГРЮЛ» (вкладка «Участники» в
+   блоке отчетности остается). Данные `ownership` в базе не трогаются. */
 const SHOW_COMPANY_LINKS = false;
 const CTRL_WORDS = /контрольн[а-яё]*\s+(?:пакет|дол)|единственн[а-яё]*\s+(?:участник|акционер)|100%\s*(?:долей|акций|уставного)/i;
 const isControlDeal = d => {
@@ -8825,7 +8826,7 @@ function renderCompany(id){
       if(over.length) rows.push(`<div><b>Под контролем (${over.length}):</b> <span style="color:var(--muted)">${over.slice(0,6).map(d=>`<a href="#/companies/${assetOf(d)}">${co(assetOf(d)).name}</a>`).join(", ")}${over.length>6?` и еще ${over.length-6}`:""}</span></div>`);
       if(links && holding) rows.push(`<div><b>${c.holding.confidence==="rumored"?"По неподтвержденным данным входит в группу":"Входит в группу"}:</b> <a href="#/companies/${c.holding.id}">${holding.name}</a>${siblings.length?` <span style="color:var(--muted)">· другие карточки группы: ${siblings.map(([sid,s])=>`<a href="#/companies/${sid}">${s.name}</a>`).join(", ")}</span>`:""}${c.holding.source?` <a href="${c.holding.source[1]}" target="_blank" rel="noopener" style="font-size:12px;color:var(--muted)">(источник: ${c.holding.source[0]} ↗)</a>`:""}</div>`);
       if(links && groupMembers.length) rows.push(`<div><b>В группу входит (${groupMembers.length}):</b><div id="group-members" style="width:100%;margin-top:4px"></div></div>`);
-      if(c.ownership&&c.ownership.length) rows.push(`<div>${links?`<b>Собственники:</b>`:""}<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
+      if(links&&c.ownership&&c.ownership.length) rows.push(`<div>${links?`<b>Собственники:</b>`:""}<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px">
         ${c.ownership.map(o=>`<div style="font-size:13px;color:var(--muted)">
           ${o.id&&co(o.id)?`<a href="#/companies/${o.id}">${esc(o.name)}</a>`:esc(o.name)}${o.share?` — ${esc(o.share)}`:""}
           <span style="font-size:12px">(${esc(asOfText(o.as_of))}${o.source?`, источник: <a href="${o.source[1]}" target="_blank" rel="noopener">${esc(o.source[0])} ↗</a>`:""})</span>
@@ -8835,7 +8836,7 @@ function renderCompany(id){
       if(!rows.length) return "";
       const notes = [];
       if(got||over.length) notes.push("контроль показан по закрытым сделкам в базе — более поздние изменения могут быть еще не учтены");
-      if((links && (groupMembers.length||portfolio.length))||(c.ownership&&c.ownership.length)){
+      if(links && (groupMembers.length||portfolio.length||(c.ownership&&c.ownership.length))){
         let n = "собственники и доли — на дату источника, сейчас могут быть другими";
         if(links && groupMembers.length) n += "; консолидированная отчетность группы обычно не раскрывается — показатели ниже относятся к каждому юрлицу отдельно";
         if(links && portfolio.length) n += "; портфель — не операционная группа, доля не означает интеграцию бренда/управления";
@@ -8863,17 +8864,13 @@ function renderCompany(id){
   </div>
   <div id="co-signals"></div>
   ${companyAdvisorsHtml(id, structured)}
-  <!-- СДЕЛКИ ВЫШЕ ОТЧЕТНОСТИ. «Компас» — про сделки; ЕГРЮЛ и финансы это
-       справка о стороне сделки, а не главное на странице. Блок с пятью
-       вкладками стоял выше и занимал целый экран, так что до списка сделок
-       читатель доходил прокруткой и находил его случайно (оба партнера —
-       по отдельности, 19 сентября 2026: «поднять наверх, рядом с
-       Обзор/Участники/Финансы»). Вкладкой в тот ряд сделки поставить нельзя:
-       ряд рисуется только у компаний с сопоставленным юрлицом, и у остальных
-       список сделок исчез бы вовсе. Перестановка дает то же самое и работает
-       для всех. -->
-  ${companyDealsCompactHtml(id,structured,mentions)}
+  <!-- ОТЧЕТНОСТЬ ВЫШЕ СДЕЛОК (владелец, 31 октября 2026: «блок сделок
+       перемести под ЕГРЮЛ и финансы»). До этого, с 19 сентября 2026, было
+       наоборот: оба партнера просили поднять сделки над блоком с пятью
+       вкладками, который занимал целый экран. Если решение снова поменяется,
+       достаточно поменять местами две строки ниже. -->
   <div id="fns-company"></div>
+  ${companyDealsCompactHtml(id,structured,mentions)}
   ${(structured.length+mentions.length)?"":companyEmptyHtml(c)}
   ${miniAIHtml("Спросите об этой компании…")}`;
   const compareButton=document.getElementById("compareCompany");

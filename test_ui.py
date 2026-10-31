@@ -1721,9 +1721,11 @@ def test_owned_company_shows_investor_in_ownership_block(page, base_url):
     а не выдуманная цифра."""
     visit(page, base_url, "#/companies/g69c88bc7")
     body = page.inner_text("#app").lower()
-    assert "собственники" in body
-    assert "афк" in body and "система" in body
-    assert "42,085%" in page.inner_text("#app")
+    # 31 октября 2026: блок «Собственники» снят с экрана решением владельца
+    # (данные остались в базе — проверяет test_data), поэтому доли АФК
+    # «Система» на странице нет, а страница по-прежнему открывается.
+    assert "мтс" in body
+    assert "42,085%" not in page.inner_text("#app")
 
 
 def test_group_badge_shown_even_without_current_dependent_profiles(page, base_url):
@@ -1775,10 +1777,12 @@ def test_company_ownership_block_shown_only_when_known(page, base_url):
     """
     visit(page, base_url, "#/companies/gfd143c7d")
     body = page.inner_text("#app").lower()
-    assert "собственники" in body
-    assert "деметра-холдинг" in body
-    assert "100%" in body
-    assert "октябрь 2024" in body
+    # 31 октября 2026, владелец: «уберем пока раздел собственники, он не
+    # нужен, если люди могут заглянуть в ЕГРЮЛ». Данные в базе остались,
+    # блок на странице не рисуется (SHOW_COMPANY_LINKS), вкладка «Участники»
+    # в отчетности — отдельный блок, его тест не трогает.
+    assert "деметра" in body, "страница компании открылась"
+    assert page.locator("#app .tag.steel:has-text('Собственники')").count() == 0
 
     visit(page, base_url, "#/companies/yandex")
     assert "собственники" not in page.inner_text("#app").lower()
@@ -3451,9 +3455,8 @@ def test_company_links_are_hidden_while_the_data_is_incomplete(page, base_url):
             assert not any(h.startswith(label) for h in heads), (company_id, label, heads)
         assert "структура и связи" not in page.inner_text("#app .d-head").lower(), company_id
         assert page.locator("#group-members, #portfolio-members").count() == 0, company_id
-    visit(page, base_url, "#/companies/g69c88bc7")  # МТС: собственники с долей и источником остаются
-    body = page.inner_text("#app").lower()
-    assert "собственники" in body and "42,085%" in page.inner_text("#app")
+    visit(page, base_url, "#/companies/g69c88bc7")  # МТС: с 31 октября 2026 и «Собственники» сняты
+    assert "собственники" not in page.inner_text("#app .d-head").lower()
 
 
 def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, browser):
@@ -5248,3 +5251,16 @@ def test_analytics_shows_industry_dynamics_by_year(page, base_url):
     first = page.locator(".an-c-inddyn tbody tr").first.inner_text()
     assert "Недвижимость" in first or "ИТ" in first
     assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") == 0
+
+
+def test_company_page_puts_reports_above_the_deal_list(page, base_url):
+    """Владелец, 31 октября 2026: блок сделок компании — под ЕГРЮЛ и финансами
+    (до этого, с 19 сентября, сделки стояли выше отчетности)."""
+    visit(page, base_url, "#/companies/g28ff15bb")
+    page.wait_for_selector("#fns-company", state="attached", timeout=15000)
+    order = page.evaluate("""() => {
+      const f = document.getElementById('fns-company');
+      const d = document.querySelector('.company-deals-compact');
+      return f && d ? (f.compareDocumentPosition(d) & Node.DOCUMENT_POSITION_FOLLOWING ? 'fns-first' : 'deals-first') : 'missing:' + (!!f) + (!!d);
+    }""")
+    assert order == "fns-first", order

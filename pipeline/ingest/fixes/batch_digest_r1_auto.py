@@ -449,14 +449,6 @@ FIXES = [
     # g4165ba00/eco.context продолжен публичным опровержением переговоров
     # (Курцер, 29.08.2025) — см.
     # pipeline/fix_mat_i_ditya_invitro_denial_context.py.
-    dict(id='c0ea790b6', field='law.struct', old=None,
-         new='Размер пакета акций/долей: 100% (51% + 49%) ООО «ТрансЛес», 100% Грузовой компании',
-         quote='Размер пакета акций/долей: 100% (51% + 49%) ООО «ТрансЛес», 100% Грузовой компании',
-         why='из digest ChatGPT round1, сверено с https://www.kommersant.ru/doc/8077927'),
-    dict(id='c0ea790b6', field='law.appr', old=None,
-         new='Сделка получила одобрение Федеральной антимонопольной службы.',
-         quote='Сделка получила одобрение Федеральной антимонопольной службы.',
-         why='из digest ChatGPT round1, сверено с https://www.kommersant.ru/doc/7834211'),
     # g755cbf86/law.struct продолжен структурой покупателя после
     # закрытия сделки — см.
     # pipeline/fix_afk_sistema_niarmedik_closed.py.
@@ -487,14 +479,6 @@ FIXES = [
          new='Федеральная антимонопольная служба пока не получала ходатайство о сделке',
          quote='Федеральная антимонопольная служба пока не получала ходатайство о сделке',
          why='из digest ChatGPT round1, сверено с https://www.interfax.ru/russia/1030650'),
-    dict(id='ce4fca919', field='law.struct', old='—',
-         new='В рамках сделки переданы товарные знаки, права аренды на локации с оборудованием, программное обеспечение, социальные сети и домен «клаустрофобия.рф».',
-         quote='В рамках сделки переданы товарные знаки, права аренды на локации с оборудованием, программное обеспечение, социальные сети и домен «клаустрофобия.рф».',
-         why='из digest ChatGPT round1, сверено с https://incrussia.ru/news/krupnejshaya-set-kvestov-klaustrofobiya-pereshla-k-konkurentam/'),
-    dict(id='ce4fca919', field='eco.rationale', old='—',
-         new='Прежние управляющие, связанные с президентом ГК «Основа» Ручьевым, посчитали нецелесообразным развитие непрофильного актива в текущей экономике',
-         quote='Прежние управляющие, связанные с президентом ГК «Основа» Ручьевым, посчитали нецелесообразным развитие непрофильного актива в текущей экономике',
-         why='из digest ChatGPT round1, сверено с https://rt.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799'),
     # gad4a5636/eco.target_fin расширен 31.08.2026 (месячная очередь,
     # восьмидесятый заход) обвалом показателей цели за 2024-2025 годы
     # (реорганизация в форме выделения с мая 2026) — см.
@@ -948,18 +932,6 @@ FIXES = [
          new=['medvestnik.ru', 'https://medvestnik.ru/content/news/Mat-i-ditya-rassmatrivaet-priobretenie-Invitro.html'],
          quote='В 2023 году основатель и владелец «Инвитро» Александр Островский продал сеть предпринимателю Роману Мирончику.',
          why='источник из digest ChatGPT round1'),
-    dict(id='c0ea790b6', field='src', old=None,
-         new=['Коммерсантъ', 'https://www.kommersant.ru/doc/8077927'],
-         quote='Размер пакета акций/долей: 100% (51% + 49%) ООО «ТрансЛес», 100% Грузовой компании',
-         why='источник из digest ChatGPT round1'),
-    dict(id='c0ea790b6', field='src', old=None,
-         new=['Ведомости', 'https://www.vedomosti.ru/business/articles/2025/06/25/1119813-demetra-holding-prodal-vse-svoi-zheleznodorozhnie-aktivi'],
-         quote='«Деметра-холдинг» продал принадлежащие ему 49% железнодорожного оператора «Транслес» и 100% Грузовой компании',
-         why='источник из digest ChatGPT round1'),
-    dict(id='c0ea790b6', field='src', old=None,
-         new=['Коммерсантъ', 'https://www.kommersant.ru/doc/7834211'],
-         quote='Сделка получила одобрение Федеральной антимонопольной службы.',
-         why='источник из digest ChatGPT round1'),
     dict(id='g755cbf86', field='src', old=None,
          new=['Ведомости', 'https://www.vedomosti.ru/business/articles/2025/06/24/1119502-afk-sistema-mozhet-prodat-svoyu-dolyu-v-seti-klinik-niarmedik'],
          quote='корпорации через ряд юридических лиц принадлежит 50% в операционной структуре сети ООО «ОК Ниармедик – Доктор рядом».',
@@ -983,14 +955,6 @@ FIXES = [
     dict(id='g829e5f99', field='src', old=None,
          new=['Интерфакс', 'https://www.interfax.ru/russia/1030650'],
          quote='Федеральная антимонопольная служба пока не получала ходатайство о сделке',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ce4fca919', field='src', old=None,
-         new=['incrussia.ru', 'https://incrussia.ru/news/krupnejshaya-set-kvestov-klaustrofobiya-pereshla-k-konkurentam/'],
-         quote='В рамках сделки переданы товарные знаки, права аренды на локации с оборудованием, программное обеспечение, социальные сети и домен «клаустрофобия.рф».',
-         why='источник из digest ChatGPT round1'),
-    dict(id='ce4fca919', field='src', old=None,
-         new=['РБК', 'https://rt.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799'],
-         quote='Прежние управляющие, связанные с президентом ГК «Основа» Ручьевым, посчитали нецелесообразным развитие непрофильного актива в текущей экономике',
          why='источник из digest ChatGPT round1'),
     dict(id='gad4a5636', field='src', old=None,
          new=['Коммерсантъ', 'https://www.kommersant.ru/doc/6852571'],

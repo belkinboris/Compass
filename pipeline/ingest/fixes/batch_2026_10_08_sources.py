@@ -55,9 +55,4 @@ FIXES = [
          quote=QUOTE_PEVEK_OWNER,
          why='первоисточник вместо агрегатора 08.10.2026: mergers.ru '
              'пересказывал републикацию заметки Коммерсанта'),
-    dict(id='c29710ac5', field='src', old=None,
-         new=['Интерфакс', 'https://www.interfax.ru/russia/1033832'],
-         quote=QUOTE_EFKO_BUNGE,
-         why='первоисточник вместо агрегатора 08.10.2026: разрешение ФАС '
-             'на сделку — Интерфакс'),
 ]
