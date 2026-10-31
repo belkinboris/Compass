@@ -730,7 +730,11 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # все единообразно было»; база переписана партией G3) — новая карточка
     # проверяется тем же правилом: длина, юрлицо вместо бренда, канцелярит,
     # вторая мысль, глагол по статусу (title_style.py, docs/card_title.md).
-    for problem in title_style.title_style_findings(card.get('title'), comps, card.get('status')):
+    # Сверяются профили СТОРОН карточки, а не вся база: иначе ЗАО «Глобус»
+    # (покупатель-юрлицо) ловилось об авиакомпанию «Глобус» S7 (1 ноября 2026).
+    party_profiles = {k: comps[k] for k in (card.get('buyer'), card.get('seller_id'), card.get('target'),
+                                            card.get('asset_id')) if k and k in comps}
+    for problem in title_style.title_style_findings(card.get('title'), party_profiles, card.get('status')):
         if 'вложил' in problem:
             continue  # уже названо выше, своей находкой
         out.append(('title_style', 'заголовок не по стилю базы: %s — перепишите по docs/card_title.md' % problem))
