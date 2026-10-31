@@ -114,14 +114,6 @@ QUOTE_BASIS_BEZKOROVAINY = (
 )
 
 FIXES = [
-    dict(id='ga4d82b1c', field='law.struct', old='—',
-         new=QUOTE_VAMIN_OWNER, quote=QUOTE_VAMIN_OWNER,
-         why='карточка без reviewed 07.10.2026: владельцы и бенефициар '
-             '«Вамин Р» — Интерфакс (уже в src)'),
-    dict(id='ga4d82b1c', field='eco.target_fin', old='—',
-         new=QUOTE_HN_FIN_2023, quote=QUOTE_HN_FIN_2023,
-         why='карточка без reviewed 07.10.2026: финансы «Эйч энд Эн»/«Эйч '
-             'энд Эн трейд» за 2023 (данные СПАРК-Интерфакс) — Интерфакс'),
     dict(id='gb20ec0ef', field='law.terms', old='—',
          new=QUOTE_HYATT_360EHM, quote=QUOTE_HYATT_360EHM,
          why='карточка без reviewed 07.10.2026: 360 EHM управляет отелем, '

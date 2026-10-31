@@ -69,10 +69,6 @@ FIXES = [
          new=QUOTE_CHELYABINSKOBLGAZ_ASSET, quote=QUOTE_CHELYABINSKOBLGAZ_ASSET,
          why='недельная очередь 06.10.2026: состав актива (участки, АЗС, '
              'здания) — 74.ru, то же издание, что уже в src'),
-    dict(id='g6d711306', field='law.struct', old='—',
-         new=QUOTE_VYMPELKOM_AUCTION, quote=QUOTE_VYMPELKOM_AUCTION,
-         why='дневная очередь 06.10.2026: механика голландского аукциона '
-             '(минимальная цена 735 млн ₽) — moskvichmag.ru'),
     dict(id='gafde5488', field='eco.val', old='—',
          new=QUOTE_NMTEH_VALUATION_GAP, quote=QUOTE_NMTEH_VALUATION_GAP,
          why='недельная очередь 06.10.2026: главная причина, почему '

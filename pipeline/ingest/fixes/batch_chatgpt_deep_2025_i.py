@@ -26,10 +26,4 @@ FIXES = [
 
     # === ce4fca919: Клаустрофобия — продажа бизнеса ===
     # Sostav.ru подтверждает выход владельцев и параметры сделки.
-    dict(id='ce4fca919', field='src', old=None,
-         new=['Sostav.ru',
-              'https://www.sostav.ru/publication/set-kvestov-klaustrofobiya-proda-t-biznes-69680.html'],
-         quote='Сеть квестов «Клаустрофобия» продаёт бизнес',
-         why='Sostav фиксирует факт продажи и параметры — первый независимый '
-             'источник помимо Forbes в карточке; скачан и сверен'),
 ]

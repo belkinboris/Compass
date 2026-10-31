@@ -65,10 +65,6 @@ FIXES = [
          new=QUOTE_MEGA_RATIONALE, quote=QUOTE_MEGA_RATIONALE,
          why='месячная очередь 08.10.2026: смена гендиректора УК «Мега» '
              'одновременно с передачей управления — Retail.ru'),
-    dict(id='g672c6dfe', field='eco.target_fin', old='—',
-         new=QUOTE_RCF_FIN_2024, quote=QUOTE_RCF_FIN_2024,
-         why='месячная очередь 08.10.2026: финансы самой РЧФ за 2024 '
-             'год — Коммерсантъ (уже в src)'),
     dict(id='g2b1ff5cb', field='src', old=None,
          new=['Советская Белоруссия', 'https://www.sb.by/articles/svyazuyushchee-zveno-tekhnologicheskogo-suvereniteta.html'],
          quote=QUOTE_NORNICKEL_BELAZ_PUTIN,

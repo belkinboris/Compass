@@ -382,6 +382,14 @@ def strip_fixes(ids: set[str], write: bool) -> int:
             path.write_text(new_text, encoding='utf-8')
             assert not fixes_entries(path, ids), path
             assert before == len(spans)
+        # Файл одной карточки (`written_<id>_*.py`) после снятия ее записей
+        # остается без `FIXES` вовсе — `review.py` упал бы на импорте
+        # (`module.FIXES`). Такой файл удаляется целиком (1 ноября 2026, G15).
+        if not any(isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'FIXES' for t in n.targets)
+                   for n in ast.walk(ast.parse(new_text))):
+            print(f'FIXES {path.name}: таблицы не остается — файл удаляется')
+            if write:
+                path.unlink()
     return removed
 
 

@@ -723,6 +723,8 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
         new = _pick_novel_sentences(src, ref, limit=min(per_source, limit - len(picked)),
                                     max_chars=budget, drop=drop)
         new = [x for x in (_strip_registry_ids(n) for n in new) if x]
+        if src is not share:
+            new = [x for x in (shorten_detail(n, DETAIL_SUBJECT_MAX) for n in new) if x]
         if new:
             picked += new
             ref = ref + ' ' + ' '.join(new)
@@ -842,6 +844,39 @@ _LEGAL_ENTITY_NOTE = re.compile(r'^Юрлиц[оа]\b')
 _BARE_LEGAL_ENTITY_NOTE = re.compile(r'^Юрлиц[оа]\b[^,;:(]*$')
 
 
+# ПОЯСНЕНИЕ К СТОРОНЕ И ПРЕДМЕТУ — ОДНА КОРОТКАЯ ФРАЗА (31 октября 2026).
+# Сравнение 32 пар «наш пост → правка владельца»: в 28 случаях он сокращал,
+# и почти всегда резал именно пояснения к сторонам — юрлица, историю
+# прошлых покупок, показатели, перечни заводов. Описание стороны после тире
+# — «кто это», одной фразой: «строительный холдинг», «входит в группу
+# Газпромбанка». Длинное предложение режется по первой границе части
+# («;», «:», тире, запятая) — так остается главное, а не выбрасывается все
+# предложение целиком. Обрезок короче 15 знаков или с незакрытой кавычкой
+# не годится — тогда имя стоит одно.
+DETAIL_PARTY_MAX = 110
+DETAIL_SUBJECT_MAX = 140
+
+
+def shorten_detail(text, cap):
+    """Первая законченная часть предложения не длиннее `cap`, или None."""
+    text = re.sub(r'\s+', ' ', str(text or '')).strip()
+    if not text:
+        return None
+    if len(text) <= cap:
+        return text
+    text = text.rstrip('.')
+    for sep in (';', ':', ' — ', ', '):
+        pos = text.find(sep, 20)
+        while 0 < pos and pos <= cap:
+            head = text[:pos].rstrip(' ,;:—')
+            if len(head) >= 15 and head.count('«') == head.count('»') and head.count('(') == head.count(')'):
+                return head
+            pos = text.find(sep, pos + 1)
+            if pos > cap:
+                break
+    return None
+
+
 def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, max_chars=200):
     """Одно дословное предложение о СТОРОНЕ (обычно — покупателе): профиль
     компании (`desc`), иначе поле `eco`, названное в `eco_field` (для
@@ -886,7 +921,7 @@ def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, 
                                        limit=limit, max_chars=max_chars,
                                        drop=lambda s: bool(_LEGAL_ENTITY_NOTE.match(s)))
         if picked:
-            return ' '.join(picked)
+            return shorten_detail(' '.join(picked), DETAIL_PARTY_MAX)
     # Фолбэк на `eco.context` с 28 октября 2026 — только предложение, которое
     # НАЧИНАЕТСЯ с имени стороны («Ромашка» — крупный девелопер…», «Иван
     # Тырышкин ранее возглавлял…»). Чтение 20 карточек владельцем: «Покупатель:
@@ -900,7 +935,7 @@ def _party_detail(deal, companies, ref_field_id, eco_field, reference, limit=1, 
         picked = _pick_novel_sentences(eco[eco_field], reference,
                                        limit=limit, max_chars=max_chars, drop=drop)
         if picked:
-            return ' '.join(picked)
+            return shorten_detail(' '.join(picked), DETAIL_PARTY_MAX)
     return None
 
 
