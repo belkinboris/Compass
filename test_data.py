@@ -1383,6 +1383,18 @@ def test_fns_registry_cbr_regnum_is_not_shared_between_two_profiles(fns_registry
     assert not dupes, "один regnum ЦБ подтвержден нескольким профилям: %r" % dupes
 
 
+def test_fns_registry_module_stays_a_loader_not_a_data_file():
+    """С 31 октября 2026 записи реестра лежат в pipeline/fns_registry.json;
+    в .py скрипты дописывают только свежий хвост, который
+    `fns_registry_compact.py --write` (шаг рутины качества) сворачивает в JSON.
+    До переезда файл весил 1,66 МБ и разбирался как код при каждом импорте."""
+    src = (ROOT / "pipeline" / "fns_registry.py").read_text(encoding="utf-8")
+    assert "REGISTRY = _load()" in src
+    assert len(src) < 60_000, (
+        "fns_registry.py снова разросся до %d знаков — пора `python3 "
+        "pipeline/fns_registry_compact.py --write`" % len(src))
+
+
 def test_fns_registry_cbr_regnum_only_on_bank_entries(fns_registry):
     bad = [row["company_id"] for row in fns_registry.REGISTRY
            if row.get("cbr_regnum") and row["decision"] != "bank"]
