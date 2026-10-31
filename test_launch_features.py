@@ -12,7 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import core, fns
+from app import assistant, core, fns
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -745,7 +745,7 @@ def test_saved_assistant_thread(client, monkeypatch):
     _login(client, "assistant-launch@firm.ru")
     monkeypatch.setenv("YANDEX_API_KEY", "key")
     monkeypatch.setenv("YANDEX_FOLDER_ID", "folder")
-    monkeypatch.setattr(main, "call_llm", lambda system, user, max_tokens, deadline=None: "Ответ по карточке")
+    monkeypatch.setattr(assistant, "call_llm", lambda system, user, max_tokens, deadline=None: "Ответ по карточке")
     response = client.post("/api/ask", json={
         "question": "Что важно в этой сделке?", "context": "{}", "mode": "base",
         "context_type": "deal", "context_id": "g1d36d186", "save_thread": True,
@@ -5289,15 +5289,15 @@ def test_ask_refuses_politely_when_all_slots_are_busy(client, monkeypatch):
     потоков 40 — сорок вопросов разом вешали бы сайт. Лишний вопрос получает
     вежливый ответ, а не очередь на минуту."""
     import threading
-    monkeypatch.setattr(main, "_ask_slots", threading.BoundedSemaphore(1))
-    monkeypatch.setattr(main, "ASK_QUEUE_WAIT", 0.05)
-    assert main._ask_slots.acquire(timeout=1)
+    monkeypatch.setattr(assistant, "_ask_slots", threading.BoundedSemaphore(1))
+    monkeypatch.setattr(assistant, "ASK_QUEUE_WAIT", 0.05)
+    assert assistant._ask_slots.acquire(timeout=1)
     try:
         r = client.post("/api/ask", json={"question": "Крупнейшие сделки 2026 года"})
         assert r.status_code == 200 and r.json()["intent"] == "busy"
         assert "много вопросов" in r.json()["answer"]
     finally:
-        main._ask_slots.release()
+        assistant._ask_slots.release()
 
 
 def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(monkeypatch):
