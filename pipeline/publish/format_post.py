@@ -58,16 +58,24 @@ SITE = (os.environ.get('APP_BASE_URL') or 'https://projectcompass.ru').rstrip('/
 # национализация, собственник не меняется. Одно имя на весь конвейер.
 CUSTODY_TYPE = 'Временное управление'
 
+# Какой статус утверждает этап сделки — одно место для притока (enrich: не
+# возвращать снятый статус через этап) и публикации (send_telegram: этап уже
+# рассказан первым постом). До 1 ноября 2026 у enrich не было «cancelled» —
+# снятое «Не состоялась» возвращалось этапом.
+STAGE_STATUS = {'closed': 'Закрыта', 'cancelled': 'Не состоялась',
+                'approval': 'Согласование получено', 'signed': 'Подписана'}
+
 SIGNIFICANT = ('sum', 'buyer', 'buyer_name', 'seller', 'target', 'asset', 'status', 'advisers', 'events')
 
-PLACEHOLDER = re.compile(
-    r'^\s*(?:[—-]|н/д|нет\s+данных|не\s+раскры[а-яё]*|не\s+привлекал[а-яё]*'
-    r'|(?:публично|официально)\s+не\s+[а-яё]+)\s*\.?\s*$', re.I)
+# «Пусто» — одно определение на весь код (pipeline/placeholders.py, 1 ноября
+# 2026): своя копия здесь пропускала в пост «не указан», «–», «неизвестно»,
+# которые сайт и приемка прячут (аудит одинаковых понятий, 1 ноября 2026).
+from pipeline import placeholders as _placeholders  # noqa: E402
+PLACEHOLDER = _placeholders.PLACEHOLDER
 
 
 def has(value):
-    v = re.sub(r'\s+', ' ', str(value or '')).strip()
-    return bool(v) and not PLACEHOLDER.match(v)
+    return _placeholders.has(value)
 
 
 from pipeline.textutil import plural as _plural  # noqa: E402

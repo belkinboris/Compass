@@ -44,7 +44,7 @@ FIXES_DIR = os.path.join(HERE, 'fixes')
 # Заголовок пишется по правилам docs/card_parties.md и правится обычной
 # правкой title — здесь он только печатается как предложение.
 WRITTEN_FIELDS = tuple(sorted(review.PROSE_WRITTEN))
-EMPTY = ('', '—', None)
+from pipeline import placeholders  # noqa: E402  одно «пусто» на весь код
 
 
 def load_evidence(path):
@@ -82,8 +82,8 @@ def build_fixes(deal_id, card, evidence, written):
         text = str((item or {}).get('text', '')).strip()
         idx = (item or {}).get('facts') or []
         old = review.get_field(card, field)
-        if text in EMPTY:
-            if old not in EMPTY:
+        if placeholders.is_empty(text):
+            if not placeholders.is_empty(old):
                 notes.append('%s: пишущий оставил пусто, в карточке есть текст — не стираю' % field)
             continue
         if text == old:

@@ -110,12 +110,8 @@ STATUS_WORDS = {
                        'не будет', 'отозв'),
 }
 
-# Временное управление по указу совершается указом: «Росимущество получило во
-# временное управление», «передал во временное управление». Глаголы сделки
-# купли-продажи («закрыл», «купил») в таких новостях не встречаются, а общий
-# «получил» в словарь «Закрыта» пускать нельзя («получил одобрение ФАС» —
-# это не закрытие). Поэтому слова — по типу сделки (решение владельца по
-# DMG MORI, 1 ноября 2026: у временного управления статус «Закрыта»).
+# Слова статуса по типу сделки: «получило во временное управление» —
+# закрытие только у этого типа (docs/card_status_dates.md, 1 ноября 2026).
 STATUS_WORDS_BY_TYPE = {
     ('Временное управление', 'Закрыта'): ('получил', 'передал', 'передан', 'перешл', 'перешел'),
 }
@@ -432,6 +428,16 @@ def source_urls():
                     continue
                 if url:
                     urls.add(str(url))
+    # data/inbox/triage — те же записи, что читает source_texts().
+    if os.path.isdir(TRIAGE):
+        for name in sorted(os.listdir(TRIAGE)):
+            if not name.endswith('.json'):
+                continue
+            try:
+                items = json.load(open(os.path.join(TRIAGE, name), encoding='utf-8')).get('items', [])
+            except (ValueError, OSError, AttributeError):
+                continue
+            urls.update(str(r['url']) for r in items if isinstance(r, dict) and r.get('url'))
     return urls
 
 
@@ -580,7 +586,7 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
     elif field == 'status':
         if new not in STATUS_WORDS:
             bad.append('неизвестный статус %r' % new)
-        elif not any(w in quote.lower() for w in status_words(new, card.get('type'))):
+        elif not any(w in quote.lower().replace('ё', 'е') for w in status_words(new, card.get('type'))):
             bad.append('в цитате нет слова, подтверждающего статус «%s»' % new)
     elif field == 'stake_acquired':
         # Доля, приобретаемая в ЭТОЙ сделке (проценты): число обязано стоять в
@@ -609,7 +615,7 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
     elif field == 'type':
         if new not in TYPE_WORDS:
             bad.append('неизвестный тип сделки %r — из %s' % (new, sorted(TYPE_WORDS)))
-        elif not any(w in quote.lower() for w in TYPE_WORDS[new]):
+        elif not any(w in quote.lower().replace('ё', 'е') for w in TYPE_WORDS[new]):
             bad.append('в цитате нет слова, подтверждающего тип «%s»' % new)
     elif field in ('sum', 'eco.sum') and new is not None:
         problem = sum_is_supported(new, quote)
@@ -648,8 +654,6 @@ def _self_check():
     # Причастие «Закрыта» из шаблона @dealsma («Статус сделки: Закрыта») —
     # не глагол «закрыл», отдельная проверка на регресс.
     assert any(w in 'статус сделки закрыта' for w in STATUS_WORDS['Закрыта'])
-    # Временное управление: «получило во временное управление» — закрытие,
-    # но только у этого типа; у M&A «получил одобрение» закрытием не станет.
     assert any(w in 'росимущество получило во временное управление'
                for w in status_words('Закрыта', 'Временное управление'))
     assert not any(w in 'получил одобрение фас' for w in status_words('Закрыта', 'M&A'))

@@ -6698,23 +6698,23 @@ def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
         assert word not in low, word
 
 
-def test_monthly_digest_does_not_count_auction_start_prices_and_failed_deals():
-    """Цифра есть, а сделки за ней нет: у незакрытых торгов в `sum` стоит
-    стартовая цена лота, у сорвавшейся сделки — цена, которую никто не
-    заплатил. Ни то, ни другое не складывается с ценами состоявшихся."""
-    assert not monthly_digest.counts_as_price(
-        {"status": "Обсуждается", "type": "Продажа с торгов", "sum": "7,8 млрд ₽"})
-    assert monthly_digest.counts_as_price(
-        {"status": "Закрыта", "type": "Продажа с торгов", "sum": "7,8 млрд ₽"})
-    assert not monthly_digest.counts_as_price({"status": "Не состоялась", "sum": "10 млрд ₽"})
-    assert monthly_digest.counts_as_price({"status": "Закрыта", "type": "M&A", "sum": "1 млрд ₽"})
-
-
-def test_monthly_digest_counts_only_named_ruble_prices():
-    assert monthly_digest.rub_billions("40 млрд ₽") == 40.0
-    assert monthly_digest.rub_billions("1,3 трлн ₽") == 1300.0
-    assert monthly_digest.rub_billions("50–100 млрд ₽ (по оценке)") is None
-    assert monthly_digest.rub_billions("$2,42 млрд") is None
+def test_monthly_digest_counts_money_by_the_same_rule_as_the_analytics_screen(base):
+    """Сумма месяца и «крупнейшие» в канале — ровно те цены, что допущены к
+    «Аналитике» (`facts.admitted`), в рублях из `facts.price.value_rub`.
+    До 1 ноября 2026 сводка разбирала строку `sum` сама: складывала раунды,
+    непрочитанные цены, обсуждаемые оферты и теряла валютные сделки."""
+    deal = lambda adm, top, rub: {"facts": {"admitted": {"purchase_sums": adm, "top_purchases": top},
+                                            "price": {"value_rub": rub}}, "sum": "999 млрд ₽"}
+    assert monthly_digest.admitted_price(deal(True, True, 4.2e9)) == 4.2
+    assert monthly_digest.admitted_price(deal(False, False, 4.2e9)) is None      # раунд, непрочитанная цена…
+    assert monthly_digest.admitted_price(deal(True, False, 7e9), "top_purchases") is None  # «Обсуждается»
+    assert monthly_digest.admitted_price({"sum": "40 млрд ₽"}) is None             # строка sum не считается
+    y, m = 2026, 9
+    st = monthly_digest.stats(base, y, m)
+    cur = [d for d in base["deals"] if str(d.get("date") or "").startswith("2026-09")]
+    want = sum(d["facts"]["price"]["value_rub"] for d in cur
+               if d.get("facts", {}).get("admitted", {}).get("purchase_sums") and d["facts"]["price"].get("value_rub"))
+    assert abs(st["priced_sum"] - want / 1e9) < 1e-6
 
 
 def test_monthly_digest_shows_themes_only_when_they_say_something(base):

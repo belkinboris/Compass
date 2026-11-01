@@ -96,7 +96,7 @@ has = format_post.has
 
 # Какой статус утверждает этап. Нужен, чтобы снятый статус не возвращался
 # в карточку через этап того же смысла (см. `retracted` у is_retracted).
-EVENT_STATUS = {'closed': 'Закрыта', 'approval': 'Согласование получено', 'signed': 'Подписана'}
+EVENT_STATUS = format_post.STAGE_STATUS
 
 
 def is_strong(why):
