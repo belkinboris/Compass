@@ -2199,7 +2199,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "seller": "АО «Антрацит»"
+   "seller": "АО «Антрацит»",
+   "seller_id": "g337092b8"
   },
   {
    "id": "g015e2da2",
@@ -79610,7 +79611,8 @@
    "separate_transaction_reviewed": true,
    "related_deal_ids": [
     "g5eb6ff22"
-   ]
+   ],
+   "seller_id": "g4f522aee"
   },
   {
    "id": "g1c47b363",
@@ -81187,7 +81189,8 @@
      "multiple_text": "target_bank"
     }
    },
-   "seller": "Почта России"
+   "seller": "Почта России",
+   "seller_id": "g5c38f30d"
   },
   {
    "id": "g248d3c20",
@@ -112091,7 +112094,8 @@
      "https://t.me/LawFirms/7765"
     ]
    ],
-   "seller": "СУЭК"
+   "seller": "СУЭК",
+   "seller_id": "ga39d16dd"
   },
   {
    "id": "g3b67afa3",
@@ -155919,7 +155923,8 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "seller": "Azimut Hotels"
+   "seller": "Azimut Hotels",
+   "seller_id": "g05c33d81"
   },
   {
    "id": "g054eba01",
@@ -209877,7 +209882,8 @@
    "separate_transaction_reviewed": true,
    "related_deal_ids": [
     "g926d097b"
-   ]
+   ],
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g18e39dbf",
@@ -210083,7 +210089,8 @@
     ]
    },
    "buyer": "g95724924",
-   "accepted_hash": "9d6574a65144.8b1607"
+   "accepted_hash": "9d6574a65144.8b1607",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g17362840",
@@ -210237,7 +210244,8 @@
    },
    "proofread": "2026-10-10",
    "buyer": "gaf25df73",
-   "accepted_hash": "4e23c168648b.df5d44"
+   "accepted_hash": "4e23c168648b.df5d44",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g8ed5083e",
@@ -210402,7 +210410,8 @@
    "proofread": "2026-10-10",
    "target": "g2bd8386e",
    "reviewed": "2026-10-24",
-   "accepted_hash": "5a1738b76d98.0ec88a"
+   "accepted_hash": "5a1738b76d98.0ec88a",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "ga142d8e0",
@@ -210883,7 +210892,8 @@
    },
    "seller_id": "g8bafde28",
    "separate_transaction_reviewed": true,
-   "accepted_hash": "1c5ccb82d422.2f6ab4"
+   "accepted_hash": "1c5ccb82d422.2f6ab4",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "gafde5488",
@@ -211053,7 +211063,8 @@
     "eco.context": []
    },
    "target": "gff89c3d4",
-   "accepted_hash": "fcd7b8464016.0b5620"
+   "accepted_hash": "fcd7b8464016.0b5620",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g3c7dd2e2",
@@ -211194,7 +211205,8 @@
      "98cca22112eb"
     ]
    },
-   "accepted_hash": "bd6a57cb7551.ace5bd"
+   "accepted_hash": "bd6a57cb7551.ace5bd",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "gd4728207",
@@ -211331,7 +211343,8 @@
    "weekly_researched": "2026-10-06",
    "target": "g92042c1c",
    "separate_transaction_reviewed": true,
-   "accepted_hash": "aad7edc67e5b.fee648"
+   "accepted_hash": "aad7edc67e5b.fee648",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "gcf07a1ef",
@@ -211475,7 +211488,8 @@
    "proofread": "2026-10-04",
    "weekly_researched": "2026-10-06",
    "seller_id": "g10d432cb",
-   "accepted_hash": "3725c28b2ebc.5dbe98"
+   "accepted_hash": "3725c28b2ebc.5dbe98",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g3504df38",
@@ -211633,7 +211647,8 @@
    "proofread": "2026-09-29",
    "deep_researched": "2026-09-30",
    "weekly_researched": "2026-09-30",
-   "accepted_hash": "b78c67f82430.ee8060"
+   "accepted_hash": "b78c67f82430.ee8060",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "ge816c5b4",
@@ -211794,7 +211809,8 @@
    "weekly_researched": "2026-10-06",
    "seller_id": "g2e2b0b0c",
    "separate_transaction_reviewed": true,
-   "accepted_hash": "61a8602076e9.ee0951"
+   "accepted_hash": "61a8602076e9.ee0951",
+   "followup_researched": "2026-11-01"
   },
   {
    "id": "g5e7d168d",
@@ -228173,17 +228189,61 @@
      "card_hash": "791535f92a64"
     },
     "price": {
-     "value_rub": 509000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "7dfe1995f4a0"
+     "basis": "read",
+     "card_hash": "7dfe1995f4a0",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
+     "source": "https://abireg.ru/newsitem/118647/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value_rub": 509000000,
+       "meaning": "auction_start",
+       "scope": "unknown",
+       "attribution": "parties",
+       "quote": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя",
+       "source": "https://abireg.ru/newsitem/118647/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-19",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "2eec0c0126da"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "2eec0c0126da",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя Олеся Шухманина · 19 октября 2026, 15:52",
+     "source": "https://abireg.ru/newsitem/118647/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value": "2026-10-19",
+       "meaning": "publication",
+       "quote": "Воронежский «Сосновый бор» снова продают за 509 млн рублей после четырех лет поиска покупателя Олеся Шухманина · 19 октября 2026, 15:52",
+       "source": "https://abireg.ru/newsitem/118647/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -228215,8 +228275,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -228582,17 +228642,56 @@
      "card_hash": "730659e1bb0d"
     },
     "price": {
-     "value_rub": 130000000.0,
+     "value_rub": 130000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "a7f022e4c8d7"
+     "basis": "read",
+     "card_hash": "a7f022e4c8d7",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "История замка на Затоне, который выкупила мэрия Краснодара за 130 млн рублей",
+     "source": "https://93.ru/text/gorod/2026/10/25/76718933/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value_rub": 130000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "История замка на Затоне, который выкупила мэрия Краснодара за 130 млн рублей",
+       "source": "https://93.ru/text/gorod/2026/10/25/76718933/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-25",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "88bb266679de"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "88bb266679de",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Замок на Затоне забрали у города и вернули прежнему владельцу. Теперь компания должна мэрии 130 млн рублей Неожиданный поворот в деле пятилетней давности 25 октября 2026, 22:08",
+     "source": "https://93.ru/text/gorod/2026/10/25/76718933/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value": "2026-10-25",
+       "meaning": "publication",
+       "quote": "Замок на Затоне забрали у города и вернули прежнему владельцу. Теперь компания должна мэрии 130 млн рублей Неожиданный поворот в деле пятилетней давности 25 октября 2026, 22:08",
+       "source": "https://93.ru/text/gorod/2026/10/25/76718933/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -228624,8 +228723,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_author_unknown",
+     "top_purchases": "price_author_unknown",
      "multiple_text": "no_target"
     }
    },
@@ -232779,17 +232878,61 @@
      "card_hash": "dd01ee8933f8"
     },
     "price": {
-     "value_rub": 614500000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "58e0016c6abc"
+     "basis": "read",
+     "card_hash": "58e0016c6abc",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Один из крупнейших застройщиков ХМАО — группа компаний «Сибпромстрой» — выставил на продажу пятиэтажное торгово-офисное здание в Сургуте за 614,5 млн рублей.",
+     "source": "https://ura.news/news/1053139525",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value_rub": 614500000,
+       "meaning": "auction_start",
+       "scope": "unknown",
+       "attribution": "parties",
+       "quote": "Один из крупнейших застройщиков ХМАО — группа компаний «Сибпромстрой» — выставил на продажу пятиэтажное торгово-офисное здание в Сургуте за 614,5 млн рублей.",
+       "source": "https://ura.news/news/1053139525",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-28",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "f6bc4c29aeba"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "f6bc4c29aeba",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Крупный девелопер из ХМАО продает офисный центр за 600 млн рублей 28 октября 2026 в 08:20",
+     "source": "https://ura.news/news/1053139525",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value": "2026-10-28",
+       "meaning": "publication",
+       "quote": "Крупный девелопер из ХМАО продает офисный центр за 600 млн рублей 28 октября 2026 в 08:20",
+       "source": "https://ura.news/news/1053139525",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -232821,8 +232964,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -232911,17 +233054,61 @@
      "card_hash": "53e26c2ed9d5"
     },
     "price": {
-     "value_rub": 1300000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "cc15da14b095"
+     "basis": "read",
+     "card_hash": "cc15da14b095",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Объект оценили в 1,3 млрд рублей.",
+     "source": "https://ufa1.ru/text/gorod/2026/10/25/76723013/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value_rub": 1300000000,
+       "meaning": "auction_start",
+       "scope": "unknown",
+       "attribution": "parties",
+       "quote": "Объект оценили в 1,3 млрд рублей.",
+       "source": "https://ufa1.ru/text/gorod/2026/10/25/76723013/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-25",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "88bb266679de"
+     "meaning": "publication",
+     "basis": "read",
+     "card_hash": "88bb266679de",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Цену за год сбросили. Здание банка «Уралсиб» в Уфе выставили на продажу за 1,3 млрд рублей Цену за год сбросили. Здание банка «Уралсиб» в Уфе выставили на продажу за 1,3 млрд рублей В 2025 году его стоимость оценивали в 1,59 млрд рублей 25 октября 2026, 13:25",
+     "source": "https://ufa1.ru/text/gorod/2026/10/25/76723013/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-01",
+     "readings": [
+      {
+       "value": "2026-10-25",
+       "meaning": "publication",
+       "quote": "Цену за год сбросили. Здание банка «Уралсиб» в Уфе выставили на продажу за 1,3 млрд рублей Цену за год сбросили. Здание банка «Уралсиб» в Уфе выставили на продажу за 1,3 млрд рублей В 2025 году его стоимость оценивали в 1,59 млрд рублей 25 октября 2026, 13:25",
+       "source": "https://ufa1.ru/text/gorod/2026/10/25/76723013/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -232953,14 +233140,15 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
    "deep_researched": "2026-10-30",
    "accepted_hash": "235be093cb02.ace5bd",
-   "second_read_hash": "235be093cb02.ace5bd"
+   "second_read_hash": "235be093cb02.ace5bd",
+   "seller_id": "gc8bb35e1"
   },
   {
    "id": "g8ad8ce9d",
@@ -233253,7 +233441,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Для проекта уже готовы инженерные изыскания, проектная документация и положительное заключение экспертизы, эскиз согласован с охраной памятников, заключены договоры на подключение инженерных сетей. По условиям аукциона часть здания — помещения для допобразования на 360 кв. м — победитель обязан бесплатно передать Петербургу. Дом.РФ в этой сделке выступает не продавцом, а агентом собственника: организует торги и сопровождает сделку, таким образом она работает с 2025 года.",
+    "context": "Проект уже прошел подготовку: сделаны инженерные изыскания, готов проект здания, экспертиза дала положительное заключение, эскиз одобрила охрана памятников, а на подключение сетей заключены договоры. Условие аукциона: часть здания — 360 кв. м под допобразование — победитель отдает Петербургу бесплатно. Дом.РФ в этой сделке не продавец, а агент собственника: с 2025 года организует торги и ведет сопровождение.",
     "finadv": "—"
    },
    "law": {
@@ -233293,7 +233481,9 @@
     ],
     "eco.val": [],
     "law.struct": [],
-    "eco.context": []
+    "eco.context": [
+     "9ab7932c3a4f"
+    ]
    },
    "themes": [
     "Продажа с торгов"
@@ -233365,7 +233555,8 @@
    },
    "deep_researched": "2026-10-31",
    "accepted_hash": "ac9ad01605c0.181fa0",
-   "second_read_hash": "ac9ad01605c0.181fa0"
+   "second_read_hash": "ac9ad01605c0.181fa0",
+   "proofread": "2026-11-01"
   },
   {
    "id": "g8f548826",
@@ -233970,7 +234161,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Базой владеет ООО «Иртыш Ривьера», а им — Сергей Милютин. В 2025 году у компании чистый убыток 11 млн ₽ при выручке 46 млн ₽. Помимо турбазы, Милютин совладелец ИТ-компании «Нейронити» (информационная безопасность, 1С-разработка, ИТ-аутсорсинг) и аптечной сети «Фармакопейка».",
+    "context": "Базой владеет ООО «Иртыш Ривьера», а самой компанией — Сергей Милютин. За 2025 год компания получила чистый убыток 11 млн ₽ при выручке 46 млн ₽. Кроме турбазы, у Милютина есть доля в ИТ-компании «Нейронити» (информационная безопасность, 1С-разработка, ИТ-аутсорсинг) и в аптечной сети «Фармакопейка».",
     "finadv": "—"
    },
    "law": {
@@ -234004,7 +234195,8 @@
     "eco.share": [],
     "eco.val": [],
     "eco.context": [
-     "ccc5df94dfde"
+     "ccc5df94dfde",
+     "257a85285430"
     ],
     "extra": []
    },
@@ -234082,7 +234274,8 @@
    },
    "deep_researched": "2026-10-31",
    "accepted_hash": "c7cdf6495486.5b5513",
-   "second_read_hash": "c7cdf6495486.5b5513"
+   "second_read_hash": "c7cdf6495486.5b5513",
+   "proofread": "2026-11-01"
   },
   {
    "id": "g831d0fc8",
@@ -234462,7 +234655,8 @@
     }
    },
    "accepted_hash": "34f0f34c76ef.bd8a58",
-   "second_read_hash": "34f0f34c76ef.bd8a58"
+   "second_read_hash": "34f0f34c76ef.bd8a58",
+   "deep_researched": "2026-11-01"
   }
  ],
  "companies": {
