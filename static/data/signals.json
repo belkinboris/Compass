@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31",
+ "updated": "2026-11-01",
  "signals": [
   {
    "id": "sabac8fd48",
@@ -754,6 +754,20 @@
    "strength": "strong"
   },
   {
+   "id": "s0ee73670f",
+   "company_id": "g41f567f1",
+   "date": "2026-07-09",
+   "kind": "buy",
+   "summary": "МГКЛ (Мосгорломбард) — обсуждается сделка ««МГКЛ» планирует купить банк для работы с драгоценными металлами»",
+   "source": [
+    "МГКЛ",
+    "https://mgkl.group/news-center/news/pao-mgkl-priobretet-bank_45436/"
+   ],
+   "origin": "card",
+   "deal_id": "c4fcc6d29",
+   "strength": "normal"
+  },
+  {
    "id": "s8ae5b0936",
    "company_id": "g50c327a7",
    "date": "2026-07-07",
@@ -1178,7 +1192,7 @@
    "company_id": "g3e551f6e",
    "date": "2026-04-15",
    "kind": "buy",
-   "summary": "АО «Новый старт» — обсуждается сделка «Газпром продал спутниковый завод Gazprom SPKA компании «Новый старт»»",
+   "summary": "АО «Новый старт» — обсуждается сделка «Газпром продает спутниковый завод «Газпром СПКА» компании «Новый старт»»",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8689589"
@@ -1192,7 +1206,7 @@
    "company_id": "g1ec82cf4",
    "date": "2026-04-15",
    "kind": "sell",
-   "summary": "Газпром космические системы — обсуждается сделка «Газпром продал спутниковый завод Gazprom SPKA компании «Новый старт»»",
+   "summary": "Газпром космические системы — обсуждается сделка «Газпром продает спутниковый завод «Газпром СПКА» компании «Новый старт»»",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8689589"
@@ -1556,7 +1570,7 @@
    "company_id": "gcafc31dc",
    "date": "2025-12-01",
    "kind": "sell",
-   "summary": "ВТБ — обсуждается сделка «Банк решил распродать сельхозактивы по отдельности»",
+   "summary": "ВТБ — обсуждается сделка «ВТБ распродает сельхозактивы агрокомплекса «Лабинский» по отдельности»",
    "source": [
     "Reuters",
     "https://www.reuters.com/sustainability/boards-policy-regulation/russian-bank-vtb-create-agriculture-giant-nationalised-assets-ceo-says-2025-12-01/"
@@ -1634,20 +1648,6 @@
    "origin": "card",
    "deal_id": "g84fd8194",
    "strength": "normal"
-  },
-  {
-   "id": "s733de8e2b",
-   "company_id": "ge9c9390f",
-   "date": "2025-11-16",
-   "kind": "for_sale",
-   "summary": "АО «Страховой дом ВСК» — обсуждается продажа компании или доли",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8209968"
-   ],
-   "origin": "card",
-   "deal_id": "g27543cdc",
-   "strength": "strong"
   },
   {
    "id": "sbc3333687",
@@ -1902,48 +1902,6 @@
    "strength": "strong"
   },
   {
-   "id": "sfa07f3331",
-   "company_id": "g3e551f6e",
-   "date": "2025-03-03",
-   "kind": "buy",
-   "summary": "АО «Новый старт» — обсуждается покупка: Газпром СПКА",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/7550441"
-   ],
-   "origin": "card",
-   "deal_id": "g029b7531",
-   "strength": "normal"
-  },
-  {
-   "id": "sf6e037f5f",
-   "company_id": "gc0f11fd7",
-   "date": "2025-03-03",
-   "kind": "sell",
-   "summary": "ПАО «Газпром» — обсуждается продажа: Газпром СПКА",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/7550441"
-   ],
-   "origin": "card",
-   "deal_id": "g029b7531",
-   "strength": "strong"
-  },
-  {
-   "id": "s71b6250b2",
-   "company_id": "g3049a270",
-   "date": "2025-03-03",
-   "kind": "for_sale",
-   "summary": "Газпром СПКА — обсуждается продажа компании или доли; возможный покупатель — АО «Новый старт»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/7550441"
-   ],
-   "origin": "card",
-   "deal_id": "g029b7531",
-   "strength": "strong"
-  },
-  {
    "id": "s88e0b732b",
    "company_id": "ga3bc7294",
    "date": "2025-03-01",
@@ -2040,34 +1998,6 @@
    "origin": "card",
    "deal_id": "g09cee885",
    "strength": "strong"
-  },
-  {
-   "id": "s71548c2ff",
-   "company_id": "g7ab0b23d",
-   "date": "2024-12-26",
-   "kind": "sell",
-   "summary": "O'Key Group — обсуждается сделка «Менеджмент выкупает часть бизнеса гипермаркетов «О'Кей» у O'Key Group»",
-   "source": [
-    "Коммерсантъ — «Сделки года»",
-    "https://www.kommersant.ru/doc/8077927"
-   ],
-   "origin": "card",
-   "deal_id": "g31136d69",
-   "strength": "strong"
-  },
-  {
-   "id": "s47aaa59df",
-   "company_id": "g4949ccfd",
-   "date": "2024-12-26",
-   "kind": "buy",
-   "summary": "«РБФ ритейл» — обсуждается сделка «Менеджмент выкупает часть бизнеса гипермаркетов «О'Кей» у O'Key Group»",
-   "source": [
-    "Коммерсантъ — «Сделки года»",
-    "https://www.kommersant.ru/doc/8077927"
-   ],
-   "origin": "card",
-   "deal_id": "g31136d69",
-   "strength": "normal"
   }
  ]
 }
