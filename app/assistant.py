@@ -2,36 +2,25 @@
 """Ассистент: /api/ask и быстрый поиск, вызов модели, чистка ответа, стенд
 моделей, обратная связь, история диалогов, «Анализ Компаса» на карточке
 (docs/server_layout.md)."""
-import functools
 import hashlib
 import json
-import logging
-import mimetypes
 import os
-import pathlib
-import random
 import re
 import threading
 from collections import Counter
 import time
-from datetime import datetime, timedelta, timezone
-from decimal import Decimal
-from html import escape as html_escape
+from datetime import datetime, timezone
 
 import httpx
-from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.gzip import GZipMiddleware
+from fastapi import APIRouter, Depends, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 import assistant_policy
 import assistant_product
 import assistant_retrieval
 import auth
-import base_data
 import company_finance
-import data_refresh
 import deal_catalog
 import deal_multiples
 import notification_service
@@ -39,36 +28,26 @@ import price_estimate
 import context_analysis
 import deal_analysis
 import scrape_guard
-import seo_pages
-import telegram_endpoint
-import subscription_feed
-from company_catalog import get_company_profile, load_company_catalog
+from company_catalog import get_company_profile
 from deal_catalog import get_deal
-from deal_export import render_companies_pdf, render_deal_pdf
-from db.models import Base as DBBase
 from db.models import (
-    AppSetting,
-    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, ClaudeMessage, Comment,
-    CompanyClaim,
-    CorrectionRequest,
-    DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
-    ModerationDecision, Notification,
-    NotificationPreference, OwnershipSnapshot, OwnershipStake, PageView, RegistryEvent,
-    SavedFilter, User, UserRole, UserTier, Webinar,
+    AssistantFeedback,
+    AssistantMessage,
+    AssistantThread,
+    FinancialReport,
+    LegalEntity,
+    LegalEntityMatchStatus,
+    User,
 )
-from db.session import engine, get_session
-from fns_client import ApiFnsClient, ApiFnsError, change_text, full_lines_payload
-from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
-from sqlalchemy import func, inspect, select, text
-from sqlalchemy.exc import SQLAlchemyError
+from db.session import get_session
+from sqlalchemy import select
 from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
 
-
-from fastapi import APIRouter
 from app import core, fns
-from app.core import BASE_DIR, get_db, logger, _current_user, _moderation_token_ok, _yandex_ready, _MD_LINK_RE
+from app.core import get_db, logger, _current_user, _moderation_token_ok, _yandex_ready, _MD_LINK_RE
 
 router = APIRouter()
+
 
 RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # Умолчание сменено 2 сентября 2026 по замеру стенда на боевом сервере

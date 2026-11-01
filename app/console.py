@@ -2,73 +2,48 @@
 """Telegram-консоль: вебхук и опрос, разбор обновлений, кнопки решений, темы
 форума, мост к рутинам (/api/moderation/*, /api/claude/*), посты об этапах
 (docs/server_layout.md)."""
-import functools
-import hashlib
 import json
-import logging
-import mimetypes
 import os
-import pathlib
-import random
 import re
 import threading
-from collections import Counter
 import time
 from datetime import datetime, timedelta, timezone
-from decimal import Decimal
 from html import escape as html_escape
 
 import httpx
-from fastapi import Depends, FastAPI, Request, Response
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, StreamingResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.gzip import GZipMiddleware
+from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-import assistant_policy
-import assistant_product
-import assistant_retrieval
-import auth
 import base_data
-import company_finance
-import data_refresh
-import deal_catalog
-import deal_multiples
 import notification_service
-import price_estimate
-import context_analysis
-import deal_analysis
-import scrape_guard
-import seo_pages
 import telegram_endpoint
-import subscription_feed
-from company_catalog import get_company_profile, load_company_catalog
 from deal_catalog import get_deal
-from deal_export import render_companies_pdf, render_deal_pdf
-from db.models import Base as DBBase
-from db.models import (
-    AppSetting,
-    AssistantFeedback, AssistantMessage, AssistantThread, AuthSession, ClaudeMessage, Comment,
-    CompanyClaim,
-    CorrectionRequest,
-    DealWatch, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
-    ModerationDecision, Notification,
-    NotificationPreference, OwnershipSnapshot, OwnershipStake, PageView, RegistryEvent,
-    SavedFilter, User, UserRole, UserTier, Webinar,
-)
-from db.session import engine, get_session
-from fns_client import ApiFnsClient, ApiFnsError, change_text, full_lines_payload
-from pipeline.fns_registry import by_company_id as fns_registry_by_company_id
-from sqlalchemy import func, inspect, select, text
+from db.models import AppSetting, ClaudeMessage, CompanyClaim, ModerationDecision, User
+from db.session import get_session
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
-from yandex_search import SearchConfig, SearchError, SearchResult, build_search_block, yandex_search
+from yandex_search import SearchConfig, build_search_block, yandex_search
 
-
-from fastapi import APIRouter
-from app import core, fns, assistant, accounts, ops
-from app.core import BASE_DIR, get_db, logger, _current_user, _moderation_token_ok, _is_reviewer, _yandex_ready, SITE_URL, REVIEW_GROUP_SETTING, CHANNEL_SETTING, REALTY_CHANNEL_SETTING, CONSOLE_TOPIC_NAMES, CONSOLE_TOPIC_FALLBACK, _topic_slug, _channel_chat_ids, _chat_is_channel
+from app import core, assistant, accounts, ops
+from app.core import (
+    BASE_DIR,
+    get_db,
+    logger,
+    _moderation_token_ok,
+    _is_reviewer,
+    _yandex_ready,
+    SITE_URL,
+    REVIEW_GROUP_SETTING,
+    CHANNEL_SETTING,
+    REALTY_CHANNEL_SETTING,
+    CONSOLE_TOPIC_NAMES,
+    _topic_slug,
+    _channel_chat_ids,
+)
 
 router = APIRouter()
+
 
 class TelegramWebhookIn(BaseModel):
     update_id: int | None = None

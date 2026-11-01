@@ -12,7 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
-from app import assistant, console, core, fns
+from app import assistant, console, core, fns, site
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -771,16 +771,16 @@ def test_pdf_export_is_open_to_every_signed_in_user_until_the_subscription_exist
     free_email, paid_email = f"export-free-{stamp}@firm.ru", f"export-paid-{stamp}@firm.ru"
     guest = TestClient(main.app).post("/api/deals/g1d36d186/export", json={})
     assert guest.status_code == 200 and guest.content.startswith(b"%PDF"), "гость скачивает PDF без входа"
-    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", False)
+    monkeypatch.setattr(site, "DEAL_EXPORT_GUESTS", False)
     assert TestClient(main.app).post("/api/deals/g1d36d186/export", json={}).status_code == 401
-    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", True)
+    monkeypatch.setattr(site, "DEAL_EXPORT_GUESTS", True)
     _login(client, free_email)
     response = client.post("/api/deals/g1d36d186/export", json={})
     assert response.status_code == 200
     assert response.headers["content-type"].startswith("application/pdf")
     assert response.content.startswith(b"%PDF")
 
-    monkeypatch.setattr(main, "DEAL_EXPORT_ALL_FREE", False)
+    monkeypatch.setattr(site, "DEAL_EXPORT_ALL_FREE", False)
     assert client.post("/api/deals/g1d36d186/export", json={}).status_code == 403
 
     paid_client = TestClient(main.app)

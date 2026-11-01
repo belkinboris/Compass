@@ -486,25 +486,24 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
         def start(self):
             self.target(*self.args)
 
-    # Номер группы-консоли, выученный другим набором (test_launch_features
-    # учит его из вебхука), не должен перебивать переменную окружения этого
-    # теста: тестовая база одна на весь прогон, а _review_chat_ids спрашивает
-    # базу первой.
-    db0 = get_session()
-    try:
-        learned = db0.get(main.AppSetting, core.REVIEW_GROUP_SETTING)
-        if learned:
-            db0.delete(learned)
-            db0.commit()
-    finally:
-        db0.close()
-
     asked = []
     real_thread_id = main._console_thread_id
     monkeypatch.setattr(core, "_console_thread_id",
                         lambda db, kind: asked.append(kind) or real_thread_id(db, kind))
     monkeypatch.setattr(main.threading, "Thread", SyncThread)
     with TestClient(main.app) as c:
+        # Номер группы-консоли, выученный другим набором (test_launch_features
+        # учит его из вебхука), не должен перебивать переменную окружения
+        # этого теста: тестовая база одна на весь прогон, а _review_chat_ids
+        # спрашивает базу первой. Таблицы есть только после старта приложения.
+        db0 = get_session()
+        try:
+            learned = db0.get(main.AppSetting, core.REVIEW_GROUP_SETTING)
+            if learned:
+                db0.delete(learned)
+                db0.commit()
+        finally:
+            db0.close()
         bad = c.post("/api/assistant/feedback", json={"question": "q", "answer": "a", "verdict": "maybe"})
         assert bad.status_code == 400
         r = c.post("/api/assistant/feedback", json={
