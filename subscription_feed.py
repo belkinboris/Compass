@@ -140,6 +140,27 @@ def _num(value):
     return ("%.0f" % value) if abs(value - round(value)) < 1e-9 else ("%.1f" % value)
 
 
+def deal_industries(deal):
+    """Отрасли сделки так же, как их видит сайт (`dealIndustries` в
+    static/index.html): весь список `industries`, а без него — `ind`. До
+    1 ноября 2026 подписка смотрела только `ind`, и сделка ИТ + Банки на
+    странице «Банки» была, а подписчику «Банков» уведомление не шло."""
+    inds = [i for i in (deal.get("industries") or []) if i]
+    return inds or ([deal["ind"]] if deal.get("ind") else [])
+
+
+def deal_amount_mln_rub(deal):
+    """Сумма для порога подписки — та же рублевая цена, что на сайте
+    (`facts.price.value_rub`, валюта переведена по курсу ЦБ). Строка `sum`
+    читается, только пока слой фактов карточку еще не обсчитал (новая
+    карточка до facts_derive). До 1 ноября 2026 порог видел только ₽ —
+    сделка на $484 млн ни под какой порог не попадала."""
+    rub = (((deal.get("facts") or {}).get("price") or {}).get("value_rub"))
+    if rub:
+        return rub / 1e6
+    return amount_mln_rub(deal.get("sum"))
+
+
 def match_reason(flt, deal, companies):
     """Почему эта сделка подходит подписке. None — не подходит."""
     reasons = []
@@ -160,7 +181,7 @@ def match_reason(flt, deal, companies):
         name = ((companies or {}).get(company_id) or {}).get("name") or ""
         reasons.append("компания «%s»" % name if name else "подписка на компанию")
     if industry:
-        if (deal.get("ind") or "") != industry:
+        if industry not in deal_industries(deal):
             return None
         reasons.append("отрасль «%s»" % industry)
     if keyword:
@@ -168,7 +189,7 @@ def match_reason(flt, deal, companies):
             return None
         reasons.append("упоминание «%s»" % keyword)
     if floor is not None:
-        value = amount_mln_rub(deal.get("sum"))
+        value = deal_amount_mln_rub(deal)
         if value is None or value < float(floor):
             return None
         reasons.append("сумма от %s млн ₽" % _num(float(floor)))

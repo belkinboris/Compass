@@ -178,7 +178,10 @@ CANCELLED = r'сделка\s+не\s+состоял|отказал\w*\s+от\s+с
 
 
 def guess_status(text):
-    text = str(text or '')
+    # Источник пишет «приобрёл», «перешёл»: словари выписаны через «е»
+    # (strip_yo, 26 октября 2026), поэтому «ё» снимается со ВХОДА, как в
+    # classify.py, — а не возвращается в шаблоны.
+    text = str(text or '').replace('ё', 'е').replace('Ё', 'Е')
     if re.search(CANCELLED, text, re.I):
         return 'Не состоялась'
     if re.search(DONE, text, re.I):
@@ -913,6 +916,7 @@ def raw_subject(title):
     отрасль бралась по всему заголовку и прилетала от покупателя).
     """
     title = re.sub(r'\s+', ' ', str(title or '')).strip()
+    title = str(title or '').replace('ё', 'е').replace('Ё', 'Е')
     m = BUY_VERB.search(title) or BUY_NOUN.search(title)
     if m:
         tail = title[m.end():]
@@ -947,6 +951,7 @@ def _parties_self_check():
     assert guess_parties('AstraZeneca изучает возможность покупки Bristol Myers Squibb')[0] is None
     # Существительное «покупку» глаголом не считается, даже без служебного слова.
     assert BUY_VERB.search('рассматривает покупку актива') is None
+    assert guess_status('Сбербанк приобрёл 100% компании') == 'Закрыта'
     # Описание — не имя, и в карточку оно не попадает.
     assert _named('новому собственнику') is None
     assert _named('«Строма»') == '«Строма»'

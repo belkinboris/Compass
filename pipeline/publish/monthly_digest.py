@@ -19,9 +19,9 @@
 только когда хотя бы у двух тем набралось по две сделки (см. `stats()`):
 раздел, пустой у каждого второго месяца, хуже отсутствующего.
 
-Разбор рублевой суммы здесь свой, а не импортом из `deal_multiples.py`: тот
-модуль тянет sqlalchemy на уровне импорта, а этот код исполняется в контейнере
-рутины публикации, где лишняя зависимость — лишняя точка отказа.
+Цены и допуск — из слоя фактов карточки (`facts.admitted`, `facts.price`),
+то есть ровно те, что на «Аналитике»; своего разбора строки `sum` здесь нет
+(1 ноября 2026, см. `admitted_price`).
 
 Запуск:
     python3 pipeline/publish/monthly_digest.py               # сводка за прошлый месяц
@@ -78,51 +78,22 @@ MIN_THEMES_TO_SHOW = 2
 # аналитика, а признак того, что приток стоял.
 MIN_DEALS = 8
 
-_UNIT = {'тыс': 1e-6, 'млн': 1e-3, 'млрд': 1.0, 'трлн': 1e3}   # -> млрд ₽
-_RUB = re.compile(r'(?P<n1>\d[\d\s\xa0]*(?:[.,]\d+)?)'
-                  r'(?:\s*[–—-]\s*(?P<n2>\d[\d\s\xa0]*(?:[.,]\d+)?))?'
-                  r'\s*(?P<unit>тыс|млн|млрд|трлн)\.?\s*₽', re.I)
-_ESTIMATE = re.compile(r'оценк|оценив|по\s+оценке|ориентировочн', re.I)
+def admitted_price(deal, metric='purchase_sums'):
+    """Цена сделки в млрд ₽ — если сделка допущена к показателю «Аналитики»,
+    иначе None. Одно правило с сайтом (аудит одинаковых понятий, 1 ноября
+    2026): допуск `facts.admitted` и рублевая цена `facts.price.value_rub`
+    уже посчитаны `facts_derive.py` и лежат в карточке. До этого сводка
+    разбирала строку `sum` сама и складывала то, чего на сайте нет: раунды и
+    допэмиссии, непрочитанные цены, середину диапазона без слова «оценка»,
+    обсуждаемые оферты в «крупнейших» — и теряла валютные сделки.
 
-
-def rub_billions(text):
-    """Сумма в млрд ₽ или None. Только рубли и только названная цена —
-    оценка эксперта суммой сделки не считается (то же правило, что на
-    «Аналитике»: иначе прозрачность рынка и полнота базы завышаются)."""
-    if not text or _ESTIMATE.search(str(text)):
+    `metric`: 'purchase_sums' — сумма месяца, 'top_purchases' — крупнейшие
+    (там еще нет «Обсуждается»)."""
+    f = deal.get('facts') or {}
+    if not (f.get('admitted') or {}).get(metric):
         return None
-    m = _RUB.search(str(text))
-    if not m:
-        return None
-    num = lambda s: float(s.replace(' ', '').replace('\xa0', '').replace(',', '.'))
-    lo = num(m.group('n1'))
-    hi = num(m.group('n2')) if m.group('n2') else lo
-    return (lo + hi) / 2 * _UNIT[m.group('unit').lower()]
-
-
-# Правила проверены на себе — это те форматы, что реально лежат в базе.
-assert rub_billions('40 млрд ₽') == 40.0
-assert rub_billions('1,3 трлн ₽') == 1300.0
-assert abs(rub_billions('650 млн ₽') - 0.65) < 1e-9
-assert rub_billions('50–100 млрд ₽ (по оценке)') is None       # оценка — не цена
-assert rub_billions('$2,42 млрд') is None                       # не рубли
-assert rub_billions('Не раскрыта') is None
-
-
-def counts_as_price(deal):
-    """Идет ли цена этой сделки в сумму месяца и в список самых дорогих.
-
-    Два исключения, оба про то, что цифра есть, а сделки за ней нет:
-    сорвавшаяся сделка (ее цену нельзя складывать с состоявшимися) и
-    незакрытые торги — там в `sum` стоит СТАРТОВАЯ цена лота, которую
-    назначил продавец, а не цена, о которой договорились стороны (пример:
-    лот «Хортицы» на 7,8 млрд ₽ в августе 2026 — торги еще шли)."""
-    status = str(deal.get('status') or '')
-    if status == 'Не состоялась':
-        return False
-    if str(deal.get('type') or '') == 'Продажа с торгов' and status != 'Закрыта':
-        return False
-    return True
+    rub = (f.get('price') or {}).get('value_rub')
+    return rub / 1e9 if rub else None
 
 
 def fmt_b(v):
@@ -156,8 +127,10 @@ def stats(base, year, month):
     deals = base.get('deals', [])
     companies = base.get('companies', {})
     cur = month_deals(deals, year, month)
-    priced = [(rub_billions(d.get('sum')), d) for d in cur if counts_as_price(d)]
+    priced = [(admitted_price(d), d) for d in cur]
     priced = [(v, d) for v, d in priced if v]
+    tops = [(admitted_price(d, 'top_purchases'), d) for d in cur]
+    tops = sorted(((v, d) for v, d in tops if v), key=lambda t: -t[0])[:TOP_DEALS]
     prev_year, prev_month = (year - 1, 12) if month == 1 else (year, month - 1)
     before = month_deals(deals, prev_year, prev_month)
 
@@ -188,8 +161,8 @@ def stats(base, year, month):
         'prev_total': len(before), 'prev_key': month_key(prev_year, prev_month),
         'priced': len(priced),
         'priced_sum': sum(v for v, _ in priced),
-        'top': [d for _, d in sorted(priced, key=lambda t: -t[0])[:TOP_DEALS]],
-        'top_sums': [v for v, _ in sorted(priced, key=lambda t: -t[0])[:TOP_DEALS]],
+        'top': [d for _, d in tops],
+        'top_sums': [v for v, _ in tops],
         'industries': sorted(industries.items(), key=lambda kv: (-kv[1], kv[0]))[:TOP_INDUSTRIES],
         'serial_buyers': sorted(((companies[b]['name'], n) for b, n in buyers.items() if n >= 2),
                                 key=lambda kv: -kv[1])[:3],

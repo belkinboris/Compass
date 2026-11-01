@@ -62,6 +62,7 @@ import check_post                  # noqa: E402
 import proofread                   # noqa: E402
 import readiness                   # noqa: E402
 import title_style                 # noqa: E402
+from fns_registry import inn_is_valid  # noqa: E402
 import source_names                # noqa: E402
 import normalize_sum               # noqa: E402
 
@@ -1183,8 +1184,10 @@ def check_answer(ans, card, base):
             bad.append('profiles: роль %r не из target/buyer/seller' % role)
             continue
         inn, legal = p.get('inn'), str(p.get('legal_name') or '').strip()
-        if inn is not None and not re.fullmatch(r'\d{10}', str(inn)):
-            bad.append('profiles: inn %r — ИНН юрлица это десять цифр' % inn)
+        # Контрольное число — то же, что у реестра (fns_registry.inn_is_valid):
+        # опечатка в одной цифре дает чужую компанию и ее выручку в посте.
+        if inn is not None and not (re.fullmatch(r'\d{10}', str(inn)) and inn_is_valid(str(inn))):
+            bad.append('profiles: inn %r — ИНН юрлица это десять цифр с верным контрольным числом' % inn)
         if legal and '"' in legal:
             bad.append('profiles: прямые кавычки в legal_name %r' % legal)
         if legal and inn is None and not resolve_inn(legal):

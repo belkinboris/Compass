@@ -1,4 +1,44 @@
 {
  "made": "2026-11-01",
- "drafts": []
+ "drafts": [
+  {
+   "draft_id": "d48387251",
+   "title": "Иран заявил о покупке российских Су-35 и назвал условие их получения",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9078414"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-01",
+     "title": "Сделка завершена",
+     "note": "Армия Ирана уже закупила российские истребители Су-35, сообщил представитель вооруженных сил страны Мохаммед Акраминия. По его словам, Тегеран ожидает их поставки после окончания войны с США.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9078414"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
 }

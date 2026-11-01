@@ -545,8 +545,10 @@ def build_fin(deal, confirmed_inns, client, bank_finance=None):
 
 
 def sendable(deal):
-    return format_post.has(deal.get('sum')) or (deal.get('seller') or deal.get('seller_id')) \
-        or (deal.get('target') or deal.get('asset') or deal.get('asset_id'))
+    # Прочерк у продавца или предмета — не сторона (одно «пусто», placeholders).
+    has = format_post.has
+    return bool(has(deal.get('sum')) or has(deal.get('seller')) or has(deal.get('seller_id'))
+                or has(deal.get('target')) or has(deal.get('asset')) or has(deal.get('asset_id')))
 
 
 def initial_post_text(deal, comps):
@@ -602,8 +604,7 @@ MILESTONE_MAX_SILENCE_DAYS = 7
 # 27 октября уже «Закрыта», а через два дня консоль предложила веху
 # «закрытие», партнер нажал — в канале два одинаковых поста
 # («Мы это уже постили»).
-_STAGE_STATUS = {'closed': 'Закрыта', 'cancelled': 'Не состоялась',
-                 'approval': 'Согласование получено'}
+_STAGE_STATUS = format_post.STAGE_STATUS
 
 
 def first_post_already_told(event, post_snapshot):
