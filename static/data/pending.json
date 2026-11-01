@@ -1,3 +1,79 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "gb42bc45e",
+   "date": "2026-10-29",
+   "title": "Совладельцы Rostic’s купили ресторанный бизнес франчайзи в Калуге",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9078466"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "50 млн ₽ (по оценке)",
+   "seller": "Бежан Кобешавидзе, Виктор Борсук",
+   "buyer_name": "ООО «Рестораны быстрого питания»",
+   "asset": "ООО «ТК» — франчайзи Rostic’s в Калуге",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-29",
+     "title": "Сделка завершена",
+     "note": "ООО «Рестораны быстрого питания» — подконтрольная совладельцам бренда Rostic’s и партнеру International Restaurant Brands компания — получила 100% в ООО «ТК», франчайзи сети в Калуге, по данным СПАРК.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9078466"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ООО «Рестораны быстрого питания»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9078466"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «ТК» — франчайзи Rostic’s в Калуге",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9078466"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Бежан Кобешавидзе, Виктор Борсук",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9078466"
+     }
+    ]
+   },
+   "pending_since": "2026-11-01T12:34:35+00:00"
+  }
+ ]
 }
