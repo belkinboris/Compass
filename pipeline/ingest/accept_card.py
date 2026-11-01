@@ -100,7 +100,23 @@ STALE_STATEMENT_RE = re.compile(
     r'|планир(?:ует|уется|ует[а-яё]*)\s+(?:провести|заключить|закрыть|осуществить)'
     r'|рассматрива(?:ет|ют)\s+возможность\s+(?:провед|заключ|закрыти|осуществ)'
     r'|ожида(?:ется|ем)\s+закрыти'
-    r'|в случае одобрени', re.I)
+    r'|в случае одобрени'
+    # Намерение в НАСТОЯЩЕМ/БУДУЩЕМ времени о самой сделке, дожившее до «Закрыта»
+    # (ВТБ/«Деметра», 1 ноября 2026: «продать долю планируют в этом году»,
+    # «посредством которой будет продаваться доля»). Только настоящее время:
+    # «собиралась купить, но вышла» — прошлая история, ей место в контексте.
+    r'|планир(?:ует|уют|уется|уются)\s+(?:\w+\s+){0,2}(?:продать|купить|приобрести|выкупить)'
+    r'|продать\s+(?:\S+\s+){0,3}планиру(?:ют|ется)'
+    r'|(?:намерен\w*|собира(?:ется|ются))\s+(?:\w+\s+){0,2}(?:продать|купить|приобрести|выкупить)'
+    r'|будет\s+продава\w+|будут\s+продава\w+|ожидаемая\s+(?:дополнительная\s+)?эмисси', re.I)
+# Допэмиссия (деньги в саму компанию) описана как ЭТАП ПРОДАЖИ доли: в карточке
+# типа M&A это перепутанные сделки — ВТБ/«Деметра», фраза «один из ее этапов —
+# допэмиссия холдинга» стояла три месяца. В карточке типа «Инвестиция» допэмиссия
+# и есть сделка, там слово законно.
+CASH_IN_STAGE_RE = re.compile(
+    r'этап\w*\W+(?:\w+\W+){0,5}(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*|закрыт\w+\s+подписк\w*)'
+    r'|(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*)\W+(?:\w+\W+){0,5}этап\w*', re.I)
+CASH_IN_STAGE_TYPES = ('M&A',)
 # ТОЛЬКО law.struct/law.terms: `eco.context` — ЕДИНСТВЕННОЕ документированное
 # место для «кто опроверг» и «чем кончилось потом» (см. семантику поля в
 # CARD_ACCEPTANCE_BRIEF.md/READER_BRIEF) — сканировать его на слово
@@ -108,7 +124,7 @@ STALE_STATEMENT_RE = re.compile(
 # Проверено на живой базе 12 сентября 2026: с этим набором полей находки —
 # ровно два уже известных, сознательно оставленных исключения
 # (`DENIAL_ALLOWED_IN_LAW` в test_data.py), новых ложных срабатываний нет.
-STALE_STATEMENT_FIELDS = ('law.struct', 'law.terms')
+STALE_STATEMENT_FIELDS = ('law.struct', 'law.terms', 'eco.rationale')
 # «Активы <иностранца>»/«(российский бизнес X)»/«(бренд X в России)» —
 # документированное соглашение для проданного российского бизнеса
 # иностранной компании (см. «Knauf (российский бизнес)», «российские активы
@@ -1056,6 +1072,18 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                 out.append(('stale_statement:' + field,
                             'денай или неснятая гипотеза о механике сделки в %s при статусе «%s»: %r'
                             % (field, card.get('status'), str(v)[:120])))
+    # Допэмиссия как «этап» продажи в карточке M&A — другая сделка, а не часть этой.
+    if card.get('type') in CASH_IN_STAGE_TYPES:
+        for field in STALE_STATEMENT_FIELDS:
+            if field in waived_stale:
+                continue
+            v = _text(card, field)
+            m = CASH_IN_STAGE_RE.search(str(v)) if has(v) else None
+            if m:
+                out.append(('stale_statement:' + field,
+                            'допэмиссия (деньги в саму компанию) названа этапом продажи в %s: %r — это отдельная сделка; '
+                            'если допэмиссия законно часть этой сделки, скажите причиной (stale_ok)'
+                            % (field, str(v)[max(0, m.start() - 40):m.end() + 40])))
     try:
         text = format_post.render(card, base.get('companies') or {})
         for p in check_post.check(text):
@@ -1526,6 +1554,18 @@ def _self_check():
     card7c = {'id': 'gtest7c', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
               'eco': {'context': 'Компания публично опровергала переговоры об этом активе.'}, 'src': src1}
     assert not any(c.startswith('stale_statement:') for c, _t in findings(card7c, base))
+    # Намерение в настоящем/будущем времени при «Закрыта» и допэмиссия «этапом» продажи.
+    card7d = {'id': 'gtest7d', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+              'eco': {'rationale': 'Продать долю планируют в этом году.'}, 'src': src1}
+    assert any(c == 'stale_statement:eco.rationale' for c, _t in findings(card7d, base))
+    card7e = {'id': 'gtest7e', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта', 'src': src1,
+              'law': {'struct': 'Продажа шла сделкой, и один из её этапов — допэмиссия холдинга.'}}
+    assert any(c == 'stale_statement:law.struct' for c, _t in findings(card7e, base))
+    card7f = dict(card7e, id='gtest7f', type='Инвестиция')   # допэмиссия и есть сделка — слово законно
+    assert not any(c == 'stale_statement:law.struct' for c, _t in findings(card7f, base))
+    card7g = {'id': 'gtest7g', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта', 'src': src1,
+              'eco': {'rationale': 'Покупатель давно собирался выкупить актив, но торги сорвались.'}}
+    assert not any(c.startswith('stale_statement:') for c, _t in findings(card7g, base))   # прошедшее время — история
     # Явная причина читателя (`stale_ok`) снимает находку без правки текста.
     assert not any(c.startswith('stale_statement:') for c, _t in
                    findings(card7, base, waived_stale={'law.struct': 'осознанно оставлено, полная история'}))

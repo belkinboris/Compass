@@ -45,6 +45,7 @@ FIXES_DIR = os.path.join(HERE, 'fixes')
 # правкой title — здесь он только печатается как предложение.
 WRITTEN_FIELDS = tuple(sorted(review.PROSE_WRITTEN))
 from pipeline import placeholders  # noqa: E402  одно «пусто» на весь код
+import prose_gate  # noqa: E402  (HERE в sys.path: pipeline/ingest)
 
 
 def load_evidence(path):
@@ -100,6 +101,12 @@ def build_fixes(deal_id, card, evidence, written):
         if not quotes:
             notes.append('%s: у фактов %s нет цитат — поле пропущено' % (field, idx))
             continue
+        lost = prose_gate.hedge_lost(quotes, text)
+        if lost and not (item or {}).get('hedge_ok'):
+            notes.append('%s: в цитатах осторожность (%s), а в тексте ее нет — прогноз или слух стал фактом. '
+                         'Верните «по данным…», «ожидается», время глагола; если факт теперь подтвержден — '
+                         '"hedge_ok": "чем подтвержден" в ответе пишущего — поле пропущено' % (field, ', '.join(lost)))
+            continue
         fixes.append(dict(id=deal_id, field=field, old=old, new=text,
                           quote=' … '.join(quotes),
                           why='текст написан по фактам %s (WRITING_BRIEF.md)'
@@ -119,12 +126,19 @@ def find_card(deal_id):
     raise SystemExit('карточки %s нет ни в базе, ни в очереди' % deal_id)
 
 
-def check_fixes(fixes, card, data):
+def check_fixes(fixes, card, data, card_text_ok=False):
+    """Проверки записи. По умолчанию цитата обязана лежать в ТЕКСТЕ СТАТЬИ
+    (data/inbox/raw, triage — `save_source.py`), а текст самой карточки ее не
+    подтверждает: с 14 по 26 октября 2026 пересказ сверялся с нынешним текстом
+    карточки (`prose_gate.known_texts`), и ошибка, уже стоявшая в карточке,
+    возвращалась в нее с цитатой, «подтвержденной» ею самой (2906 полей у 1169
+    карточек; ВТБ/«Деметра»). `card_text_ok` — только для правки слов без
+    изменения смысла, явным ключом `--card-text-ok`."""
     texts = review.source_texts()
     inds, urls = review.industries(), review.source_urls()
     found = {}
     for fix in fixes:
-        known = review.prose_gate.known_texts(fix, card, review.FIXES, review.get_field)
+        known = review.prose_gate.known_texts(fix, card, review.FIXES, review.get_field) if card_text_ok else []
         bad = review.check(fix, card, texts + known, data['companies'], inds, urls)
         if bad:
             found[fix['field']] = bad
@@ -174,6 +188,8 @@ def main(argv=None):
     ap.add_argument('--facts', metavar='EVIDENCE')
     ap.add_argument('--check', nargs=3, metavar=('ID', 'EVIDENCE', 'WRITTEN'))
     ap.add_argument('--write', action='store_true')
+    ap.add_argument('--card-text-ok', action='store_true',
+                    help='цитаты могут лежать в нынешнем тексте карточки, а не в статье (только правка слов без смысла)')
     a = ap.parse_args(argv)
     if a.facts:
         print(facts_text(load_evidence(a.facts)))
@@ -185,7 +201,7 @@ def main(argv=None):
     written = json.load(open(wr_path, encoding='utf-8'))
     card, data = find_card(deal_id)
     fixes, notes = build_fixes(deal_id, card, evidence, written)
-    found, have_texts = check_fixes(fixes, card, data)
+    found, have_texts = check_fixes(fixes, card, data, a.card_text_ok)
     for f in fixes:
         mark = 'ОТКАЗ' if f['field'] in found else 'ок'
         print('[%s] %s: %s' % (mark, f['field'], f['new']))
