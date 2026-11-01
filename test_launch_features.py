@@ -4713,12 +4713,16 @@ def test_health_carries_a_build_fingerprint(client):
     body = client.get("/health").json()
     assert body["status"] == "ok"
     build = body.get("build")
-    assert build and set(build) == {"main.py", "static/index.html"}, build
+    # С 1 ноября 2026 маршруты лежат в app/ (H7): правка роутера не трогает
+    # main.py, поэтому у папки свой ключ — иначе сравнение «сайт отстал»
+    # не увидело бы выкладку роутеров.
+    assert build and set(build) == {"main.py", "static/index.html", "app/"}, build
     root = Path(m.__file__).resolve().parent
-    for name, got in build.items():
+    for name in ("main.py", "static/index.html"):
         want = hashlib.sha256((root / name).read_bytes()).hexdigest()[:8]
-        assert got == want, f"отпечаток {name} не совпадает с файлом"
-        assert len(got) == 8
+        assert build[name] == want, f"отпечаток {name} не совпадает с файлом"
+        assert len(build[name]) == 8
+    assert len(build["app/"]) == 8
 
     # Сравнение «сайт и чекаут совпадают» живет одной функцией, а не
     # переписывается заново в каждой рутине.

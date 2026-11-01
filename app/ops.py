@@ -61,17 +61,35 @@ router = APIRouter()
 # контейнере каталога .git может не быть вовсе, а файлы есть всегда. Для
 # сравнения «сайт и репозиторий совпадают» этого достаточно — рутине не
 # нужно знать номер коммита, ей нужно знать, тот же это код или нет.
+#
+# С 1 ноября 2026 маршруты живут в пакете app/ (H7), и правка роутера не
+# меняет main.py — поэтому третий ключ, «app/»: один отпечаток по всем
+# app/*.py (имя и содержимое, в алфавитном порядке). Тот же расчет —
+# pipeline/check_deploy.py; разойдутся — сравнение «сайт отстал» ослепнет.
 _BUILD_FILES = ("main.py", "static/index.html")
+_BUILD_DIRS = ("app/",)
+
+
+def _dir_digest(folder: pathlib.Path) -> str:
+    h = hashlib.sha256()
+    for path in sorted(folder.glob("*.py")):
+        h.update(path.name.encode("utf-8") + b"\0" + path.read_bytes() + b"\0")
+    return h.hexdigest()[:8]
 
 
 @functools.lru_cache(maxsize=1)
 def build_fingerprint() -> dict:
-    """Короткий отпечаток выложенного кода: по восемь знаков на файл."""
+    """Короткий отпечаток выложенного кода: по восемь знаков на файл (и на папку app/)."""
     out = {}
     for name in _BUILD_FILES:
         try:
             data = (pathlib.Path(BASE_DIR) / name).read_bytes()
             out[name] = hashlib.sha256(data).hexdigest()[:8]
+        except OSError:
+            out[name] = None
+    for name in _BUILD_DIRS:
+        try:
+            out[name] = _dir_digest(pathlib.Path(BASE_DIR) / name)
         except OSError:
             out[name] = None
     return out

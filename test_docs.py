@@ -250,6 +250,9 @@ def test_a_document_with_a_cyrillic_name_is_not_deployed_as_code():
     """
     from pipeline import release
     assert release.is_code("main.py")
+    # Роутеры сайта (H7, 1 ноября 2026): правка app/*.py — это код, и без
+    # пересборки на сайт она не попадет.
+    assert release.is_code("app/console.py") and release.is_code("app/__init__.py")
     assert release.is_code("pipeline/ingest/draft.py")
     assert not release.is_code("CLAUDE.md")
     assert not release.is_code("finance/ЗАПИСКА_финмодель.md")

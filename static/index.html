@@ -4511,6 +4511,19 @@ async function runAsk(q, mode, meta, w){
     });
   const a=await aiAnswer(q, mode, meta);
   done=true; stopWait(); if(stopMore) stopMore(); w.classList.remove("wait");
+  /* ВСЕ МЕСТА ЗАНЯТЫ (1 ноября 2026, H7). Сервер пускает к модели не больше
+     ASK_MAX_CONCURRENT вопросов разом; лишний получает короткий ответ с
+     intent "busy". Это не ответ модели: без «Спросите конкретнее», без
+     кнопок продолжения и без «Ответ помог?» — только мягкая плашка, а
+     вопрос возвращается в поле, чтобы «спросите еще раз» было одним
+     нажатием. Быстрые факты из базы, если успели прийти, остаются выше. */
+  if(a.ok && a.intent==="busy"){
+    w.innerHTML=(quick&&quick.answer?mdToHtml(quick.answer):"")+`<div class="ai-note ai-busy"><p>${esc(a.raw)}</p></div>`;
+    const mini=w.closest(".miniai");
+    const input=mini?mini.querySelector("input"):document.getElementById("q");
+    if(input && !input.value.trim()) input.value=q;
+    return {ok:true, raw:"", html:w.innerHTML, intent:"busy", model:false, deals:[]};
+  }
   /* Под отказом не спрашивают «Ответ помог?»: помочь мы и не пытались, а
      кнопка «Нет» тут значит «ответьте все-таки» — и мы будем копить ее как
      жалобу на качество ответа, которого не было. */
