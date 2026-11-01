@@ -147,7 +147,25 @@ def _already_resolved(item, claude_text, deals_by_id, merged):
     return None
 
 
+# Сначала искать самому, спрашивать — только если ответа нет (владелец,
+# 1 ноября 2026: «надо чтобы ты сам решал все такие вопросы, спрашивай у
+# меня, только если не можешь сам найти ответ»). Новый вопрос обязан нести
+# `searched` — где искали (издания, реестры, раскрытия, сайты сторон) и
+# почему этого не хватило. Без него вопрос не уходит: так в консоль не
+# попадает то, что решается поиском (5 из 7 вопросов 1 ноября 2026).
+SEARCH_MIN_CHARS = 40
+
+
+def not_searched(item):
+    """Причина не отправлять вопрос: не записано, где искали ответ."""
+    text = str(item.get("searched") or "").strip()
+    if len(text) < SEARCH_MIN_CHARS:
+        return "не записано, где искали ответ сами (поле searched) — сначала поиск, потом вопрос"
+    return None
+
+
 def render(item, number, total):
+    searched = ["Где искали сами: " + item["searched"], ""] if item.get("searched") else []
     return "\n".join([
         "❓ Вопрос %d из %d — нужен ваш ответ" % (number, total),
         "[карточка %s] %s" % (item["id"], item["title"]),
@@ -156,6 +174,7 @@ def render(item, number, total):
         "",
         "Что нашли: " + item["found"],
         "",
+    ] + searched + [
         "Что решить: " + item["ask"],
         "",
         "Карточка: %s/#/deal/%s" % (SITE, item["id"]),
@@ -197,6 +216,13 @@ def main():
         pending = json.load(open(pending_path, encoding='utf-8'))
         for c in pending.get('cards') or []:
             deals_by_id.setdefault(c['id'], c)
+
+    unsearched = [(q, not_searched(q)) for q in todo if not_searched(q)]
+    if unsearched:
+        print("Не отправляю — ответ сначала ищется самостоятельно:", len(unsearched))
+        for q, reason in unsearched:
+            print("  %s [%s] — %s" % (q['id'], _key(q), reason))
+        todo = [q for q in todo if not not_searched(q)]
 
     stale = []
     fresh_todo = []

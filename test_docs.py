@@ -417,3 +417,19 @@ def test_journal_refuses_a_question_to_the_owner_that_is_not_in_the_console():
     assert ja.check(head + 'Что нужно от вас: решить по gffffffff, какой пост оставить.' + tail)
     assert ja.check(head + 'Что нужно от вас: какой пост оставить по g73dba9d6.' + tail) is None
     assert ja.check(head + 'Что нужно от вас: ничего.' + tail) is None
+
+
+def test_question_to_the_owner_goes_out_only_after_own_search():
+    """Владелец, 1 ноября 2026: «надо чтобы ты сам решал все такие вопросы,
+    спрашивай у меня, только если не можешь сам найти ответ». Вопрос без
+    `searched` (где искали и почему не хватило) в консоль не уходит, а с ним
+    — показывает владельцу, где уже искали."""
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import send_open_questions as soq
+    q = {"id": "g00000000", "title": "т", "now": "н", "found": "ф", "ask": "а"}
+    assert soq.not_searched(q)
+    assert soq.not_searched(dict(q, searched="интернет"))
+    full = dict(q, searched="Коммерсантъ, Ведомости, Интерфакс, ЕГРЮЛ, e-disclosure: сумма не названа нигде")
+    assert soq.not_searched(full) is None
+    assert "Где искали сами: Коммерсантъ" in soq.render(full, 1, 1)
