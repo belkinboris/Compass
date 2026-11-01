@@ -2,17 +2,17 @@
  "made": "2026-11-01",
  "drafts": [
   {
-   "draft_id": "d66088381",
-   "title": "Как я отбираю идеи для покупки",
+   "draft_id": "d53182828",
+   "title": "«Почта России» выставила на торги здание бывшего Московского императорского почтамта",
    "date": "2026-11-01",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1369474.php"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/01/pochta-rossii-vystavila-na-torgi-zdanie-byvshego-moskovskogo-imperatorskogo-pochtamta/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -23,11 +23,51 @@
     "asset": null,
     "seller": null
    },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50940113",
+   "title": "Rostic’s выкупает бизнес калужского франчайзи/Владельцы Rostic’s выкупили бизнес калужского франчайзи",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/kaluga/2026/11/1/rostics-vykupaet-biznes-kaluzhskogo-franchajzivladelczy-rostics-vykupili-biznes-kaluzhskogo-franchajzi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-01",
+     "title": "Сделка завершена",
+     "note": "Совладельцы Rostic’s совместно с крупнейшим партнером International Restaurant Brands решили забрать под свой контроль бизнес калужского франчайзи сети через компанию ООО «Рестораны быстрого питания». Об этом стало известно изданию «Коммерсант».",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/kaluga/2026/11/1/rostics-vykupaet-biznes-kaluzhskogo-franchajzivladelczy-rostics-vykupili-biznes-kaluzhskogo-franchajzi"
+     ]
+    }
+   ],
+   "buyer_name": "Rostic’s",
+   "asset": "бизнес калужского франчайзи/Владельцы Rostic’s выкупили бизнес калужского франчайзи",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Rostic’s",
+    "asset": "бизнес калужского франчайзи/Владельцы Rostic’s выкупили бизнес калужского франчайзи",
+    "seller": null
+   },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию",
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку gb42bc45e (общие слова заголовка: 3) — проверьте, не дубль ли"
    ]
   }
  ]
