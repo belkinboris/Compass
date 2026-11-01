@@ -314,6 +314,11 @@ class Merge:
             keep['extra'] = (base + ' ' if base else '') + ' '.join(self.extra_take)
         if self.src_take:
             keep.setdefault('src', []).extend(self.src_take)
+            # Агрегатор рядом с первоисточником читателю не показывается
+            # (test_data: aggregator_is_not_a_fact_source) — то же правило,
+            # что у притока и чтения, а не своя версия.
+            from source_names import settle_sources
+            settle_sources(keep)
         if self.events_take:
             keep.setdefault('events', []).extend(self.events_take)
             keep['events'].sort(key=lambda e: e.get('date') or '')
