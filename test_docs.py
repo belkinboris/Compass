@@ -403,3 +403,17 @@ def test_a_promise_from_the_chat_lands_in_the_backlog_by_script(tmp_path):
     assert re.match(r"- \*\*D\d+\. проверить, что пункт дописался\*\*$", last), last
     assert out.replace(last + "\n", "") == src, "скрипт тронул что-то кроме нового пункта"
     assert rb.add_item("Z", "нет такого блока", str(path)) == 1
+
+
+def test_journal_refuses_a_question_to_the_owner_that_is_not_in_the_console():
+    """1 ноября 2026: вопросы владельцу по карточкам остались только в чате и в
+    журнале — журнал ответа не возвращает. Запись с вопросом по карточке
+    принимается, только если вопрос уже стоит в open_questions.json."""
+    import importlib.util, pathlib
+    spec = importlib.util.spec_from_file_location('journal_add', pathlib.Path('pipeline/journal_add.py'))
+    ja = importlib.util.module_from_spec(spec); spec.loader.exec_module(ja)
+    head = '### 2026-11-01 (разработка, 10:00 МСК) — проверка\n\n'
+    tail = '\n\nЗнание: нет — проверка'
+    assert ja.check(head + 'Что нужно от вас: решить по gffffffff, какой пост оставить.' + tail)
+    assert ja.check(head + 'Что нужно от вас: какой пост оставить по g73dba9d6.' + tail) is None
+    assert ja.check(head + 'Что нужно от вас: ничего.' + tail) is None

@@ -36,7 +36,40 @@ def check(entry):
         return 'последняя строка должна начинаться с «Знание: …» (CLAUDE.md)'
     if 'ё' in entry or 'Ё' in entry:
         return 'в тексте для людей буква «е» вместо «ё»'
+    missing = questions_not_queued(entry)
+    if missing:
+        return ('вопрос владельцу по карточкам %s есть только в этой записи: журнал ответа не '
+                'возвращает. Поставьте вопрос в консоль — запись в pipeline/open_questions.json и '
+                'python3 pipeline/send_open_questions.py --write (CLAUDE.md, «Открытые вопросы к '
+                'владельцу живут в консоли»)' % ', '.join(missing))
     return None
+
+
+# ВОПРОС ВЛАДЕЛЬЦУ — ТОЛЬКО ЧЕРЕЗ КОНСОЛЬ (1 ноября 2026). Сессия разбора
+# списка владельца задала шесть вопросов по карточкам в чате и в строке
+# «Что нужно от вас» журнала; ни в консоль, ни в бэклог они не попали, и
+# владелец спросил: «они теряются?». Журнал и чат ответа не возвращают —
+# консоль возвращает (ответ на сообщение идет через мост решений). Поэтому
+# запись, которая просит владельца решить что-то по карточке, принимается,
+# только когда вопрос по этой карточке уже лежит в open_questions.json.
+_ASK_LINE = re.compile(r'^Что нужно от вас:(.*)$', re.M)
+_CARD_ID = re.compile(r'\b(?:g[0-9a-f]{8}|c[0-9a-f]{8})\b')
+
+
+def questions_not_queued(entry):
+    m = _ASK_LINE.search(entry)
+    if not m:
+        return []
+    ids = sorted(set(_CARD_ID.findall(m.group(1))))
+    if not ids:
+        return []
+    import json
+    path = os.path.join(ROOT, 'pipeline', 'open_questions.json')
+    try:
+        queued = {q.get('id') for q in json.load(io.open(path, encoding='utf-8'))}
+    except (OSError, ValueError):
+        return []
+    return [i for i in ids if i not in queued]
 
 
 def main(argv=None):
