@@ -12,6 +12,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import assistant, console, core, fns, site
 from db.models import (
     AppSetting, Company, DealSeen, FinancialReport, FnsSyncRun, LegalEntity, LegalEntityMatchStatus,
     Notification, OwnershipSnapshot, OwnershipStake, RegistryEvent, SavedFilter, User,
@@ -120,7 +121,7 @@ def test_fns_company_dossier_free_and_paid_access(client, monkeypatch):
     (pipeline/COMPANY_FINANCE_BRIEF.md, раздел П6). Сейчас флаг стоит True
     (см. test_fns_all_free_shows_full_history_to_anonymous_visitors ниже) —
     это не отменяет саму границу, она просто временно не применяется."""
-    monkeypatch.setattr(main, "FNS_ALL_FREE", False)
+    monkeypatch.setattr(fns, "FNS_ALL_FREE", False)
     _seed_fns_company()
     anonymous = client.get("/api/companies/launch-fns-company/fns")
     assert anonymous.status_code == 200
@@ -246,8 +247,8 @@ def test_analytics_multiples_endpoint_applies_the_full_filter_chain(client, monk
     }
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile",
                          lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-clean-target" else None)
 
     body = client.get("/api/analytics/multiples").json()
@@ -291,8 +292,8 @@ def test_analytics_multiples_endpoint_flags_unverified_deals_as_computed(client,
     registry = {"mult-unread-target": {"company_id": "mult-unread-target", "decision": "confirmed", "inn": "7710000601"}}
     deal["facts"] = facts.derive(deal, {"registry": registry, "lot_ids": set()})
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: {"mult-unread-deal": deal})
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile", lambda cid: None)
 
     body = client.get("/api/analytics/multiples").json()
     assert body["candidates_total"] == 1 and body["awaiting_reading"] == 1
@@ -322,8 +323,8 @@ def test_analytics_multiples_endpoint_names_every_verified_deal_it_hides(client,
     registry = {"mult-out-target": {"company_id": "mult-out-target", "decision": "confirmed", "inn": "7710000701"}}
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile", lambda cid: None)
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile", lambda cid: None)
 
     body = client.get("/api/analytics/multiples").json()
     assert [d["id"] for d in body["deals"]] == ["mult-out-deal"] and body["not_shown"] == []
@@ -357,8 +358,8 @@ def test_analytics_multiples_endpoint_computes_operating_profit_multiple_too(cli
     }
     deals = {k: _with_verified_facts(v, registry) for k, v in deals.items()}
     monkeypatch.setattr(main.deal_catalog, "load_deals", lambda: deals)
-    monkeypatch.setattr(main, "fns_registry_by_company_id", lambda: registry)
-    monkeypatch.setattr(main, "get_company_profile",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id", lambda: registry)
+    monkeypatch.setattr(fns, "get_company_profile",
                          lambda cid: {"ind": "Тестовая отрасль"} if cid == "mult-op-target" else None)
 
     body = client.get("/api/analytics/multiples").json()
@@ -504,7 +505,7 @@ def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(clie
         ("foreign", "Иностранное юридическое лицо"),
         ("state_org", "Государственный орган"),
     ):
-        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+        monkeypatch.setattr(fns, "fns_registry_by_company_id",
                             lambda d=decision: {"launch-fns-category-test": {"decision": d}})
         body = client.get("/api/companies/launch-fns-category-test/fns").json()
         assert body["available"] is False
@@ -520,7 +521,7 @@ def test_fns_person_and_lot_categories_are_hidden_not_empty(client, monkeypatch)
     import main as main_module
 
     for decision in ("person", "lot"):
-        monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+        monkeypatch.setattr(fns, "fns_registry_by_company_id",
                             lambda d=decision: {"launch-fns-hidden-test": {"decision": d}})
         body = client.get("/api/companies/launch-fns-hidden-test/fns").json()
         assert body["available"] is False
@@ -550,7 +551,7 @@ def test_fns_category_is_carried_even_when_a_legal_entity_is_already_matched(cli
     import main as main_module
 
     company_id = _seed_fns_company("launch-fns-bank-with-matched-entity")
-    monkeypatch.setattr(main_module, "fns_registry_by_company_id",
+    monkeypatch.setattr(fns, "fns_registry_by_company_id",
                         lambda: {"launch-fns-bank-with-matched-entity": {"decision": "bank", "cbr_regnum": 1481}})
     body = client.get("/api/companies/launch-fns-bank-with-matched-entity/fns").json()
     assert body["available"] is True
@@ -744,7 +745,7 @@ def test_saved_assistant_thread(client, monkeypatch):
     _login(client, "assistant-launch@firm.ru")
     monkeypatch.setenv("YANDEX_API_KEY", "key")
     monkeypatch.setenv("YANDEX_FOLDER_ID", "folder")
-    monkeypatch.setattr(main, "call_llm", lambda system, user, max_tokens, deadline=None: "Ответ по карточке")
+    monkeypatch.setattr(assistant, "call_llm", lambda system, user, max_tokens, deadline=None: "Ответ по карточке")
     response = client.post("/api/ask", json={
         "question": "Что важно в этой сделке?", "context": "{}", "mode": "base",
         "context_type": "deal", "context_id": "g1d36d186", "save_thread": True,
@@ -770,16 +771,16 @@ def test_pdf_export_is_open_to_every_signed_in_user_until_the_subscription_exist
     free_email, paid_email = f"export-free-{stamp}@firm.ru", f"export-paid-{stamp}@firm.ru"
     guest = TestClient(main.app).post("/api/deals/g1d36d186/export", json={})
     assert guest.status_code == 200 and guest.content.startswith(b"%PDF"), "гость скачивает PDF без входа"
-    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", False)
+    monkeypatch.setattr(site, "DEAL_EXPORT_GUESTS", False)
     assert TestClient(main.app).post("/api/deals/g1d36d186/export", json={}).status_code == 401
-    monkeypatch.setattr(main, "DEAL_EXPORT_GUESTS", True)
+    monkeypatch.setattr(site, "DEAL_EXPORT_GUESTS", True)
     _login(client, free_email)
     response = client.post("/api/deals/g1d36d186/export", json={})
     assert response.status_code == 200
     assert response.headers["content-type"].startswith("application/pdf")
     assert response.content.startswith(b"%PDF")
 
-    monkeypatch.setattr(main, "DEAL_EXPORT_ALL_FREE", False)
+    monkeypatch.setattr(site, "DEAL_EXPORT_ALL_FREE", False)
     assert client.post("/api/deals/g1d36d186/export", json={}).status_code == 403
 
     paid_client = TestClient(main.app)
@@ -1300,7 +1301,7 @@ def test_fns_sync_once_skips_when_daily_cap_already_reached(monkeypatch):
     П1) — тот проверяется отдельным тестом ниже."""
     import json as _json
     from pipeline import sync_fns
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 50)
     monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 0)
     db = get_session()
     try:
@@ -1333,10 +1334,10 @@ def test_fns_sync_once_uses_high_cap_when_registry_backlog_is_large(monkeypatch)
     сделав тест то зеленым, то красным в зависимости от того, сколько
     раз файл уже прогоняли сегодня."""
     from pipeline import sync_fns
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 50)
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP_HIGH", 300)
-    monkeypatch.setattr(main, "FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP", 120)
-    monkeypatch.setattr(main, "_fns_requests_today", lambda db: 100)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 50)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP_HIGH", 300)
+    monkeypatch.setattr(fns, "FNS_BACKLOG_THRESHOLD_FOR_HIGH_CAP", 120)
+    monkeypatch.setattr(fns, "_fns_requests_today", lambda db: 100)
     monkeypatch.setattr(sync_fns, "registry_backlog", lambda db: 500)
     fake_stats = {"confirmed_now": 1, "synced": 0, "skipped_fresh": 0, "errors": 0, "requests": 1}
     monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)
@@ -1356,7 +1357,7 @@ def test_fns_sync_once_records_a_run_that_counts_toward_the_cap(monkeypatch):
     """Успешная попытка обязана оставить след в FnsSyncRun — иначе следующий
     рестарт того же дня не увидит уже потраченные запросы и потолок не
     сработает вовсе."""
-    monkeypatch.setattr(main, "FNS_DAILY_REQUEST_CAP", 200)
+    monkeypatch.setattr(fns, "FNS_DAILY_REQUEST_CAP", 200)
     fake_stats = {"confirmed_now": 1, "synced": 2, "skipped_fresh": 3, "errors": 0, "requests": 7}
     from pipeline import sync_fns
     monkeypatch.setattr(sync_fns, "sync_from_registry", lambda db, client, limit=None: fake_stats)
@@ -2551,7 +2552,7 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
             "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {},
             "pending_since": "2026-10-27T17:00:00+00:00"}
     unread = dict(card, id="gshow2", second_read=None)
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": [card, unread]} if "pending" in path else default)
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card, unread]} if "pending" in path else default)
     monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
@@ -2636,7 +2637,7 @@ def test_milestone_goes_to_the_channel_on_the_button_without_waiting_for_the_rou
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
                         or {"ok": True, "result": {"message_id": 9001}})
-    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
     combo = "g%s~approval" % uuid.uuid4().hex[:8]
     draft = {"token": "тайна", "combo": combo, "event_id": combo.replace("~", "-"),
              "text": "📌 <b>Президент разрешил сделку</b>",
@@ -2691,10 +2692,10 @@ def test_site_leaves_realty_failed_and_already_posted_milestones_to_the_routine(
         assert main._instant_milestone_post(realty, store(realty, ["main", "realty"]), db) is None
         assert replies == []
         out = "o%s~closed" % tag
-        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: True)
+        monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: True)
         assert main._instant_milestone_post(out, store(out, ["main"]), db) is None
         assert replies == []
-        monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+        monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
         failed = "f%s~closed" % tag
         failed_id = store(failed, ["main"])
         assert main._instant_milestone_post(failed, failed_id, db) is None
@@ -2734,7 +2735,7 @@ def test_a_card_in_the_base_whose_post_is_not_out_yet_still_takes_the_owner_text
     """29 октября 2026, Velle: карточка уже применена в базу, пост ждет pytest —
     ответ владельца своим текстом должен записаться, а не отбиться как
     «уже на сайте»; «уже на сайте» — только когда и пост вышел."""
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {"cards": []})
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": []})
     monkeypatch.setattr(main.base_data, "promoted", lambda: {
         "deals": [{"id": "gV1"}, {"id": "gV2"}], "telegram_posts": {"gV2": 238}})
     assert not main._already_on_site("gV1")
@@ -2750,7 +2751,7 @@ def test_old_draft_of_a_published_card_does_not_record_a_decision(client, monkey
     calls = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **payload: calls.append((method, payload)) or {"ok": True})
-    monkeypatch.setattr(main, "_already_on_site", lambda did: did == "gpublished")
+    monkeypatch.setattr(console, "_already_on_site", lambda did: did == "gpublished")
     client.post("/api/telegram/webhook/тайна", json={
         "callback_query": {"id": "cb-pub", "from": {"id": 222}, "data": "mod:gpublished:ok",
                             "message": {"message_id": 9, "chat": {"id": 222}, "text": "[карточка gpublished]"}}})
@@ -3414,7 +3415,7 @@ def test_ops_week_counter_ignores_bulk_import_days(monkeypatch):
     def fake_read(path, default):
         return {"cards": []}
 
-    monkeypatch.setattr(main, "_read_json", fake_read)
+    monkeypatch.setattr(core, "_read_json", fake_read)
     # База читается через общий кэш `base_data` (заведен 8 сентября 2026
     # против OOM), а не своим json.load на каждый вызов, — подменяем его.
     monkeypatch.setattr(main.base_data, "promoted", lambda: fake)
@@ -3463,7 +3464,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gh1", "title": "Придержанная сделка", "held": True,
                    "buyer_name": "«Покупатель»", "sum": "1 млрд ₽"},
                   {"id": "gs1", "title": "Выйдет сама", "buyer_name": "«Другой»",
@@ -3502,7 +3503,7 @@ def test_unread_card_is_not_counted_as_soon(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Еще не прочитана", "buyer_name": "«Компания»"},
                   {"id": "gs1", "title": "Прочитана, ждет таймаута",
                    "buyer_name": "«Другая»", "reviewed": "2026-08-01", "accepted": "2026-08-01", "draft_sent": True}],
@@ -3536,7 +3537,7 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json", lambda path, default: {
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {
         "cards": [{"id": "gu1", "title": "Сырой заголовок из новости",
                    "buyer_name": "«Компания» [входит в холдинг]"},
                   {"id": "gu2", "title": "Нероссийская сделка", "buyer_name": "Orlen",
@@ -3603,7 +3604,7 @@ def test_empty_queue_answers_instead_of_silence(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append(kw) or {"ok": True})
-    monkeypatch.setattr(main, "_read_json",
+    monkeypatch.setattr(core, "_read_json",
                         lambda path, default: {"cards": []} if "pending" in path else default)
     assert main._send_queue_batch(-100, "held") == 0
     assert any("пусто" in kw.get("text", "") for kw in sent)
@@ -4458,7 +4459,7 @@ def test_telegram_updates_are_polled_and_one_bad_update_does_not_stall_the_queue
                 {"update_id": 12, "message": {"text": "три"}},
             ]}
 
-    monkeypatch.setattr(main, "_handle_telegram_update", fake_handle)
+    monkeypatch.setattr(console, "_handle_telegram_update", fake_handle)
     monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: FakeResponse())
     monkeypatch.setitem(main._poll_state, "offset", None)
 
@@ -4518,14 +4519,14 @@ def test_console_never_sends_to_the_publication_channel(monkeypatch):
     # --- сторона сайта ------------------------------------------------------
     # Тип чата сайт узнает тем же способом и тоже помнит; здесь подставляем
     # ответ Telegram, чтобы тест не ходил в сеть.
-    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
+    monkeypatch.setattr(core, "_CHAT_IS_CHANNEL", {"-1004448538393": True}, raising=False)
     assert "-1004448538393" not in main._review_chat_ids()
     assert main._review_chat_ids() == ["160794536", "57671646"]
 
     # И то же самое, когда номер канала известен, а тип спросить не у кого
     # (нет токена): работает сравнение по номерам — второй рубеж.
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "-1004448538393")
-    monkeypatch.setattr(main, "_CHAT_IS_CHANNEL", {}, raising=False)
+    monkeypatch.setattr(core, "_CHAT_IS_CHANNEL", {}, raising=False)
     assert main._review_chat_ids() == ["160794536", "57671646"]
 
 
@@ -4712,12 +4713,16 @@ def test_health_carries_a_build_fingerprint(client):
     body = client.get("/health").json()
     assert body["status"] == "ok"
     build = body.get("build")
-    assert build and set(build) == {"main.py", "static/index.html"}, build
+    # С 1 ноября 2026 маршруты лежат в app/ (H7): правка роутера не трогает
+    # main.py, поэтому у папки свой ключ — иначе сравнение «сайт отстал»
+    # не увидело бы выкладку роутеров.
+    assert build and set(build) == {"main.py", "static/index.html", "app/"}, build
     root = Path(m.__file__).resolve().parent
-    for name, got in build.items():
+    for name in ("main.py", "static/index.html"):
         want = hashlib.sha256((root / name).read_bytes()).hexdigest()[:8]
-        assert got == want, f"отпечаток {name} не совпадает с файлом"
-        assert len(got) == 8
+        assert build[name] == want, f"отпечаток {name} не совпадает с файлом"
+        assert len(build[name]) == 8
+    assert len(build["app/"]) == 8
 
     # Сравнение «сайт и чекаут совпадают» живет одной функцией, а не
     # переписывается заново в каждой рутине.
@@ -4911,7 +4916,7 @@ def test_access_gate_is_off_by_default_since_launch():
     """3 октября 2026 — запуск для всех: дверь «Войти / Запросить доступ» снята,
     умолчание ACCESS_GATE — «0» (docs/access_gate.md). Включается обратно только
     переменной окружения."""
-    src = open(os.path.join(os.path.dirname(__file__), "main.py"), encoding="utf-8").read()
+    src = open(os.path.join(os.path.dirname(__file__), "app", "core.py"), encoding="utf-8").read()
     assert 'os.environ.get("ACCESS_GATE", "0") == "1"' in src
 
 
@@ -5098,8 +5103,8 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     # Владелец: «если спрашивают и вопросительный знак в конце — не отправляй
     # карту в канал, а отвечай на вопрос». Вопрос придерживает карточку и
     # получает ответ следом.
-    monkeypatch.setattr(main, "_in_background", lambda fn: fn())
-    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
+    monkeypatch.setattr(core, "_in_background", lambda fn: fn())
+    monkeypatch.setattr(console, "_console_answer", lambda deal_id, q: "Luminor — банк в странах Балтии.")
     reply("Что такое luminor?", draft)
     assert decisions() == [("hold", None, False), ("note", "Что такое luminor?", False)]
     texts = [kw["text"] for m, kw in sent if m == "sendMessage"]
@@ -5107,7 +5112,7 @@ def test_question_on_a_post_draft_is_a_note_and_a_rewrite_can_be_undone(client, 
     assert texts[-1] == "Ответ: Luminor — банк в странах Балтии."
     assert not any(m == "editMessageText" for m, _ in sent), "проект поста с кнопками правиться не должен"
     # Модель не ответила — честно говорим, кто ответит.
-    monkeypatch.setattr(main, "_console_answer", lambda deal_id, q: None)
+    monkeypatch.setattr(console, "_console_answer", lambda deal_id, q: None)
     sent.clear()
     reply("А кто покупатель?", {"message_id": 503, "text": "[карточка %s] OTP" % deal})
     assert decisions()[-2:] == [("hold", None, False), ("note", "А кто покупатель?", False)]
@@ -5188,7 +5193,7 @@ def test_text_reply_to_a_milestone_replaces_its_post_and_publishes_it(client, mo
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
                         or {"ok": True, "result": {"message_id": 9100}})
-    monkeypatch.setattr(main, "_milestone_already_out", lambda event_id: False)
+    monkeypatch.setattr(console, "_milestone_already_out", lambda event_id: False)
     deal = "g%s" % uuid.uuid4().hex[:8]
     combo = deal + "~closed"
     assert client.post("/api/ops/milestone-draft", json={
@@ -5288,15 +5293,15 @@ def test_ask_refuses_politely_when_all_slots_are_busy(client, monkeypatch):
     потоков 40 — сорок вопросов разом вешали бы сайт. Лишний вопрос получает
     вежливый ответ, а не очередь на минуту."""
     import threading
-    monkeypatch.setattr(main, "_ask_slots", threading.BoundedSemaphore(1))
-    monkeypatch.setattr(main, "ASK_QUEUE_WAIT", 0.05)
-    assert main._ask_slots.acquire(timeout=1)
+    monkeypatch.setattr(assistant, "_ask_slots", threading.BoundedSemaphore(1))
+    monkeypatch.setattr(assistant, "ASK_QUEUE_WAIT", 0.05)
+    assert assistant._ask_slots.acquire(timeout=1)
     try:
         r = client.post("/api/ask", json={"question": "Крупнейшие сделки 2026 года"})
         assert r.status_code == 200 and r.json()["intent"] == "busy"
         assert "много вопросов" in r.json()["answer"]
     finally:
-        main._ask_slots.release()
+        assistant._ask_slots.release()
 
 
 def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(monkeypatch):
@@ -5308,7 +5313,7 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **kw: sent.append((method, kw)) or {"ok": True})
-    monkeypatch.setattr(main, "_answered_decisions", lambda: {"d1": "drop", "gs2": "approve"})
+    monkeypatch.setattr(console, "_answered_decisions", lambda: {"d1": "drop", "gs2": "approve"})
     hold = {"drafts": [{"draft_id": "d1", "title": "Отвеченная новость", "hold_reasons": ["x"]},
                        {"draft_id": "d2", "title": "Новая новость", "hold_reasons": ["y"]}]}
     pending = {"cards": [
@@ -5318,7 +5323,7 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
          "reviewed": "2026-10-28", "accepted": "2026-10-28", "second_read": "2026-10-28",
          "draft_sent": True},
     ]}
-    monkeypatch.setattr(main, "_read_json", lambda path, default:
+    monkeypatch.setattr(core, "_read_json", lambda path, default:
                         pending if "pending" in path else (hold if "hold" in path else {}))
     monkeypatch.setattr(main.os.path, "isdir", lambda p: True)
     monkeypatch.setattr(main.os, "listdir", lambda p: ["2026-10-28.json"])
@@ -5348,7 +5353,6 @@ def test_telegram_poll_retries_within_seconds_not_a_minute():
     """30 октября 2026: связь хостинга с Telegram рвется часто (186 обрывов
     SSL на 22 ответа за два часа), а пауза после обрыва росла до минуты —
     кнопка в консоли висела. Потолок паузы — несколько секунд."""
-    import main
-    assert main.POLL_PAUSE_MAX <= 5 and main.TELEGRAM_POLL_TIMEOUT <= 10
-    src = (Path(main.__file__)).read_text(encoding="utf-8")
+    assert console.POLL_PAUSE_MAX <= 5 and console.TELEGRAM_POLL_TIMEOUT <= 10
+    src = (Path(console.__file__)).read_text(encoding="utf-8")
     assert "pause = min(pause * 2, POLL_PAUSE_MAX)" in src and "pause * 2, 60.0" not in src

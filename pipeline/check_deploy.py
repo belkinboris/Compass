@@ -28,13 +28,24 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ("main.py", "static/index.html")
+# Ключи те же, что отдает /health (app/ops.py, build_fingerprint): два файла
+# и папка роутеров app/ (с 1 ноября 2026 — один отпечаток по всем app/*.py).
+FILES = ("main.py", "static/index.html", "app/")
 SITE = os.environ.get("APP_BASE_URL", "https://projectcompass.ru").rstrip("/")
 
 
+def _digest(name: str) -> str:
+    path = ROOT / name
+    if path.is_dir():
+        h = hashlib.sha256()
+        for item in sorted(path.glob("*.py")):
+            h.update(item.name.encode("utf-8") + b"\0" + item.read_bytes() + b"\0")
+        return h.hexdigest()[:8]
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+
+
 def local_fingerprint() -> dict:
-    return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()[:8]
-            for name in FILES}
+    return {name: _digest(name) for name in FILES}
 
 
 def site_fingerprint():

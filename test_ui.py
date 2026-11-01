@@ -5264,3 +5264,36 @@ def test_company_page_puts_reports_above_the_deal_list(page, base_url):
       return f && d ? (f.compareDocumentPosition(d) & Node.DOCUMENT_POSITION_FOLLOWING ? 'fns-first' : 'deals-first') : 'missing:' + (!!f) + (!!d);
     }""")
     assert order == "fns-first", order
+
+
+def test_busy_assistant_answer_is_a_soft_note_not_a_model_answer(browser, base_url):
+    """Лимит одновременных вопросов (H7, 1 ноября 2026): когда все места
+    заняты, сервер отвечает коротким текстом с intent "busy". Владелец:
+    «нужно какое-то комфортное сообщение пользователю». На экране это
+    плашка, а не ответ модели: без «Спросите конкретнее», без кнопок
+    продолжения и «Ответ помог?»; вопрос возвращается в поле, чтобы
+    «спросите еще раз» было одним нажатием."""
+    busy = json.dumps({"answer": "Сейчас ассистенту задают много вопросов. Подождите минуту и "
+                                 "спросите еще раз, вопрос можно оставить в поле как есть.",
+                       "deals": [], "intent": "busy", "model": False}, ensure_ascii=False)
+    ctx, pg, errors = _assistant_page(browser, base_url, 1280, 1000)
+    try:
+        pg.route("**/api/ask", lambda route: route.fulfill(
+            status=200, content_type="application/json", body=busy))
+        pg.route("**/api/assistant/lookup", lambda route: route.fulfill(
+            status=200, content_type="application/json", body='{"answer": null}'))
+        question = "Какие сделки были в ритейле в 2025 году?"
+        pg.fill("#q", question)
+        pg.click("#send")
+        pg.wait_for_selector(".ai-busy", timeout=15000)
+        note = pg.locator(".ai-busy")
+        assert "много вопросов" in note.inner_text()
+        last = pg.locator("#chatbox .msg.ai").last
+        text = last.inner_text()
+        assert "Ответ помог" not in text, "под плашкой спрашивают оценку ответа, которого не было"
+        assert "Спросите конкретнее" not in text, "плашка занятости выглядит как общий ответ модели"
+        assert last.locator(".ai-next").count() == 0, "кнопки продолжения под плашкой занятости"
+        assert pg.input_value("#q") == question, "вопрос не вернулся в поле ввода"
+        assert not errors, errors
+    finally:
+        ctx.close()

@@ -8,6 +8,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import console
 
 CHAT = {"id": -100111, "type": "supergroup", "is_forum": True}
 THREAD = 4242
@@ -37,10 +38,10 @@ def env(monkeypatch):
         # Прочитать все, что осталось от прошлых тестов: база у модуля общая.
         old = c.get("/api/claude/inbox", params={"token": "тайна"}).json()["messages"]
         c.post("/api/claude/inbox/consume", json={"token": "тайна", "ids": [m["id"] for m in old]})
-        main_quiet = main.CLAUDE_ACK_QUIET_SECONDS
+        main_quiet = console.CLAUDE_ACK_QUIET_SECONDS
         calls.clear()
         yield c, calls
-        main.CLAUDE_ACK_QUIET_SECONDS = main_quiet
+        console.CLAUDE_ACK_QUIET_SECONDS = main_quiet
     with get_session() as s:
         for k, v in before.items():
             row = s.get(main.AppSetting, k)
@@ -97,7 +98,7 @@ def test_reviewer_message_in_claude_topic_is_saved_and_acknowledged(env):
     assert [m for m, _kw in calls if m == "sendMessage"] == []
 
     # Через минуту тишины — снова подтверждаем.
-    main.CLAUDE_ACK_QUIET_SECONDS = 0
+    console.CLAUDE_ACK_QUIET_SECONDS = 0
     calls.clear()
     c.post(HOOK, json=_msg("третье", mid=12))
     assert len([m for m, _kw in calls if m == "sendMessage"]) == 1

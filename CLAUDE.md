@@ -9,8 +9,10 @@
 ## Структура
 
 ```
-main.py                       FastAPI: раздача статики, /health, /api/ask,
-                              /api/assistant/bench (стенд сравнения моделей, по токену)
+main.py                       точка входа FastAPI: lifespan, статика, middleware, роутеры
+app/                          сервер по областям (docs/server_layout.md): core, fns,
+                              assistant (/api/ask, стенд моделей), accounts, ops (/health),
+                              console (Telegram), site (SEO, ловилка адресов)
 yandex_search.py              обёртка над Яндекс XML-поиском (для ассистента)
 seo_pages.py                  открытые страницы для поисковиков: /deal/<id>, /company/<id>,
                               /sitemap.xml, /llms.txt (docs/scraping_protection.md)
@@ -121,6 +123,7 @@ finance/                      финмодель (книга Excel, двойни
 | `docs/channel_special_posts.md` | пост об этапе сделки, месячная сводка, подборка «Кто готовится к сделкам» |
 | `docs/publication_pitfalls.md` | шаг рутины публикации: зависание, «выкинуть», придержать пост, конфликт при rebase, сбои |
 | `docs/release.md` | выкладка, сервер, окружение, CI, тесты |
+| `docs/server_layout.md` | добавляете маршрут API, шаг старта или поток сервера; тест подменяет серверную функцию (`main.py`, `app/`) |
 | `docs/assistant.md` | ассистент: границы разговора, порядок поиска |
 | `docs/assistant_checks.md` | ассистент: проверки на 100 вопросах, чистка ответа, как прогнать проверку |
 | `docs/access_gate.md` | регистрация, вход, заявки на доступ |

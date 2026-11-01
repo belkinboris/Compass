@@ -9,6 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import main
+from app import assistant, console, core, fns
 import yandex_search as ys
 
 # ---------- yandex_search ----------
@@ -156,7 +157,7 @@ def test_ask_base_mode(client, monkeypatch):
         captured.update(system=system, user=user, max_tokens=max_tokens)
         return "Ответ ассистента"
 
-    monkeypatch.setattr(main, "call_llm", fake_llm)
+    monkeypatch.setattr(assistant, "call_llm", fake_llm)
     r = client.post("/api/ask", json={"question": "Кто купил X?", "context": "{}", "mode": "base"})
     assert r.json()["answer"] == "Ответ ассистента"
     assert captured["system"] == main.SYSTEM_BASE
@@ -172,8 +173,8 @@ def test_question_about_the_service_gets_a_ready_answer_without_the_model(client
     быстром поиске."""
     def no_llm(*a, **k):
         raise AssertionError("модель не должна вызываться на вопрос о сервисе")
-    monkeypatch.setattr(main, "call_llm", no_llm)
-    monkeypatch.setattr(main, "yandex_search", no_llm)
+    monkeypatch.setattr(assistant, "call_llm", no_llm)
+    monkeypatch.setattr(assistant, "yandex_search", no_llm)
     q = "Чем мы можете ьыть полезны для меня"
     for mode in ("base", "web"):
         body = client.post("/api/ask", json={"question": q, "context": "{}", "mode": mode}).json()
@@ -223,13 +224,13 @@ def test_ask_web_mode_with_results(client, monkeypatch):
     # (см. main._sources_footer): это гарантия цитирования, а не опция.
     captured = {}
     results = ys.parse_search_xml(XML_OK.encode())
-    monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: results)
+    monkeypatch.setattr(assistant, "yandex_search", lambda q, config=None, client=None: results)
 
     def fake_llm(system, user, max_tokens, deadline=None):
         captured.update(system=system, user=user, max_tokens=max_tokens)
         return "Ответ с фактами"
 
-    monkeypatch.setattr(main, "call_llm", fake_llm)
+    monkeypatch.setattr(assistant, "call_llm", fake_llm)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json()["answer"] == "Ответ с фактами" + main._sources_footer(results)
     assert captured["system"] == main.SYSTEM_WEB
@@ -240,11 +241,11 @@ def test_ask_web_mode_with_results(client, monkeypatch):
 def test_ask_web_mode_model_already_cited_no_footer(client, monkeypatch):
     # Модель сама вставила markdown-ссылку -> источники повторно не приписываем.
     monkeypatch.setattr(
-        main, "yandex_search",
+        assistant, "yandex_search",
         lambda q, config=None, client=None: ys.parse_search_xml(XML_OK.encode()),
     )
     cited = "Ответ с фактами и [ссылкой на источник](https://fresh.example.ru/b)."
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: cited)
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None: cited)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json()["answer"] == cited
 
@@ -255,8 +256,8 @@ def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
     def broken_search(q, config=None, client=None):
         raise ys.SearchError("403")
 
-    monkeypatch.setattr(main, "yandex_search", broken_search)
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
+    monkeypatch.setattr(assistant, "yandex_search", broken_search)
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json()["answer"] == "Ответ по базе"  # пользователь не видит ошибку
     assert captured["system"] == main.SYSTEM_BASE
@@ -264,8 +265,8 @@ def test_ask_web_mode_search_fails_degrades_to_base(client, monkeypatch):
 
 def test_ask_web_mode_empty_results_degrades_to_base(client, monkeypatch):
     captured = {}
-    monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: [])
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
+    monkeypatch.setattr(assistant, "yandex_search", lambda q, config=None, client=None: [])
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(system=s) or "Ответ по базе")
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     assert r.json()["answer"] == "Ответ по базе"
     assert captured["system"] == main.SYSTEM_BASE
@@ -274,7 +275,7 @@ def test_ask_web_mode_empty_results_degrades_to_base(client, monkeypatch):
 def test_ask_llm_dead_returns_fallback(client, monkeypatch):
     def dead(s, u, max_tokens, deadline=None):
         raise RuntimeError("LLM недоступен")
-    monkeypatch.setattr(main, "call_llm", dead)
+    monkeypatch.setattr(assistant, "call_llm", dead)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "base"})
     assert r.json() == {"fallback": True}
 
@@ -297,7 +298,7 @@ def test_call_llm_thinking_budget_and_retry(monkeypatch):
             return httpx.Response(500, text="boom")
         return httpx.Response(200, json=RESPONSES_OK)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     text = main.call_llm("sys", "user", max_tokens=700)
     assert text == "Ответ ассистента"
     assert calls["n"] == 2  # первый упал, второй прошел
@@ -319,7 +320,7 @@ def test_call_llm_stops_when_the_deadline_has_passed(monkeypatch):
         calls["n"] += 1
         return httpx.Response(500, text="boom")
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     # Дедлайн уже в прошлом — ни одной попытки быть не должно.
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700, deadline=time.monotonic() - 1)
@@ -338,12 +339,12 @@ def test_web_mode_returns_found_sources_when_the_model_is_silent(client, monkeyp
     """Поиск отработал, модель — нет. Пустой экран после минуты ожидания читается
     как «ассистент сломан»; найденные ссылки по делу и их надо отдать."""
     results = ys.parse_search_xml(XML_OK.encode())
-    monkeypatch.setattr(main, "yandex_search", lambda q, config=None, client=None: results)
+    monkeypatch.setattr(assistant, "yandex_search", lambda q, config=None, client=None: results)
 
     def dead(s, u, max_tokens, deadline=None):
         raise RuntimeError("LLM недоступен")
 
-    monkeypatch.setattr(main, "call_llm", dead)
+    monkeypatch.setattr(assistant, "call_llm", dead)
     r = client.post("/api/ask", json={"question": "q", "context": "{}", "mode": "web"})
     body = r.json()
     assert "fallback" not in body
@@ -365,7 +366,7 @@ def test_ask_gives_the_model_a_verified_summary_and_cards(client, monkeypatch):
         captured.update(user=user)
         return "Ответ"
 
-    monkeypatch.setattr(main, "call_llm", fake_llm)
+    monkeypatch.setattr(assistant, "call_llm", fake_llm)
     body = client.post("/api/ask", json={"question": ORION_Q}).json()
     assert "СВОДКА" in captured["user"] and "КАРТОЧКИ" in captured["user"]
     assert "#/advisors/orion" in captured["user"]
@@ -386,7 +387,7 @@ def test_ask_llm_dead_but_the_base_knows_returns_facts(client, monkeypatch):
     def dead(s, u, max_tokens, deadline=None):
         raise RuntimeError("LLM недоступен")
 
-    monkeypatch.setattr(main, "call_llm", dead)
+    monkeypatch.setattr(assistant, "call_llm", dead)
     body = client.post("/api/ask", json={"question": ORION_Q}).json()
     assert "fallback" not in body
     assert body["model"] is False and "#/advisors/orion" in body["answer"]
@@ -395,7 +396,7 @@ def test_ask_llm_dead_but_the_base_knows_returns_facts(client, monkeypatch):
 
 def test_ask_passes_guest_history_to_the_model(client, monkeypatch):
     captured = {}
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
     client.post("/api/ask", json={
         "question": "А кто консультировал?",
         "history": [{"role": "user", "body": "Кто купил Ситибанк?"},
@@ -407,7 +408,7 @@ def test_ask_passes_guest_history_to_the_model(client, monkeypatch):
 
 def test_ask_strips_the_context_prefix_of_old_clients(client, monkeypatch):
     captured = {}
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None: captured.update(user=u) or "Ответ")
     client.post("/api/ask", json={
         "question": "Контекст: пользователь смотрит «Магнит». Вопрос: какие сделки были у Магнита?",
         "context_type": "company", "context_id": "gd19e26bf",
@@ -487,10 +488,22 @@ def test_feedback_is_stored_and_a_down_vote_reaches_the_console(monkeypatch):
 
     asked = []
     real_thread_id = main._console_thread_id
-    monkeypatch.setattr(main, "_console_thread_id",
+    monkeypatch.setattr(core, "_console_thread_id",
                         lambda db, kind: asked.append(kind) or real_thread_id(db, kind))
     monkeypatch.setattr(main.threading, "Thread", SyncThread)
     with TestClient(main.app) as c:
+        # Номер группы-консоли, выученный другим набором (test_launch_features
+        # учит его из вебхука), не должен перебивать переменную окружения
+        # этого теста: тестовая база одна на весь прогон, а _review_chat_ids
+        # спрашивает базу первой. Таблицы есть только после старта приложения.
+        db0 = get_session()
+        try:
+            learned = db0.get(main.AppSetting, core.REVIEW_GROUP_SETTING)
+            if learned:
+                db0.delete(learned)
+                db0.commit()
+        finally:
+            db0.close()
         bad = c.post("/api/assistant/feedback", json={"question": "q", "answer": "a", "verdict": "maybe"})
         assert bad.status_code == 400
         r = c.post("/api/assistant/feedback", json={
@@ -544,7 +557,7 @@ def test_call_llm_passes_model_and_reasoning_effort(monkeypatch):
         payloads.append(json.loads(request.content))
         return httpx.Response(200, json=RESPONSES_WITH_USAGE)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     stats = {}
     text = main.call_llm("sys", "user", max_tokens=700, model="yandexgpt/latest",
                          reasoning_effort="low", stats=stats)
@@ -571,7 +584,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         raise httpx.ReadTimeout("read timed out", request=request)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(slow)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(slow)))
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700)
     assert calls["n"] == 1
@@ -585,7 +598,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         return httpx.Response(200, json=exhausted)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(truncated)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(truncated)))
     stats = {}
     with pytest.raises(RuntimeError) as err:
         main.call_llm("sys", "user", max_tokens=700, stats=stats)
@@ -599,7 +612,7 @@ def test_call_llm_does_not_retry_a_timeout_or_an_exhausted_budget(monkeypatch):
         calls["n"] += 1
         return httpx.Response(500, text="boom")
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(boom)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(boom)))
     with pytest.raises(RuntimeError):
         main.call_llm("sys", "user", max_tokens=700)
     assert calls["n"] == 1 + main.LLM_RETRIES
@@ -647,7 +660,7 @@ def test_bench_measures_each_model_on_the_same_prompt(client, monkeypatch):
         time.sleep(0.05)
         return f"Ответ модели {model}"
 
-    monkeypatch.setattr(main, "call_llm", fake_llm)
+    monkeypatch.setattr(assistant, "call_llm", fake_llm)
     r = client.post("/api/assistant/bench", json={
         "token": "secret", "question": ORION_Q, "models": ["current", "broken/latest"],
         "repeats": 2, "reasoning_effort": "low"})
@@ -720,7 +733,7 @@ def test_intake_runs_are_collected_and_the_day_summary_goes_once_after_18(monkey
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda day="today", token=None, client=None: {
         "users": 812, "visits": 1034, "pageviews": 3210, "avg_seconds": 135, "new_pct": 64.2,
         "sources": [("Переходы из поисковых систем", 38), ("Прямые заходы", 20)],
@@ -759,7 +772,7 @@ def test_day_summary_says_so_when_intake_was_silent(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
     db = get_session()
     try:
@@ -784,7 +797,7 @@ def test_summary_asked_for_after_18_counts_as_the_days_summary(monkeypatch):
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api",
                         lambda method, **p: sent.append((method, p)) or {"ok": True})
-    monkeypatch.setattr(main, "_review_chat_ids", lambda db=None: ["-100500"])
+    monkeypatch.setattr(core, "_review_chat_ids", lambda db=None: ["-100500"])
     monkeypatch.setattr(metrika, "day_stats", lambda *a, **k: None)
     db = get_session()
     try:
@@ -900,8 +913,8 @@ def test_product_questions_get_a_ready_answer_without_the_model(client, monkeypa
     kind, must = PRODUCT_QUESTIONS[question]
     def no_llm(*a, **k):
         raise AssertionError("модель не должна вызываться на вопрос о продукте")
-    monkeypatch.setattr(main, "call_llm", no_llm)
-    monkeypatch.setattr(main, "yandex_search", no_llm)
+    monkeypatch.setattr(assistant, "call_llm", no_llm)
+    monkeypatch.setattr(assistant, "yandex_search", no_llm)
     for mode in ("base", "web"):
         body = client.post("/api/ask", json={"question": question, "mode": mode}).json()
         assert body["intent"] == "about" and body["product"] == kind and body["model"] is False
@@ -977,7 +990,7 @@ def test_polish_fixes_links_codes_footnotes_and_latin_letters():
 def test_a_cut_off_answer_is_replaced_by_the_summary(client, monkeypatch):
     """№13 проверки: «Топ-10 крупнейших сделок 2025 года» → одна строка
     «- **300 млрд ₽** –». Обрубок не показываем — показываем сводку."""
-    monkeypatch.setattr(main, "call_llm", lambda s, u, max_tokens, deadline=None:
+    monkeypatch.setattr(assistant, "call_llm", lambda s, u, max_tokens, deadline=None:
                         "**Топ-6 крупнейших сделок 2025 года:**\n\n- **300 млрд ₽** –")
     body = client.post("/api/ask", json={"question": ORION_Q}).json()
     assert body["model"] is False and "#/advisors/orion" in body["answer"]
@@ -1005,7 +1018,7 @@ def test_call_llm_treats_an_incomplete_answer_with_text_as_cut_off(monkeypatch):
         calls["n"] += 1
         return httpx.Response(200, json=partial)
 
-    monkeypatch.setattr(main, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(handler)))
     with pytest.raises(main.LLMCutOff) as err:
         main.call_llm("sys", "user", max_tokens=1000)
     assert calls["n"] == 1 and err.value.partial == "- **300 млрд ₽** –"
@@ -1387,7 +1400,7 @@ def test_how_to_use_kompas_is_answered_about_the_service(client, monkeypatch):
     """№88: «Как пользоваться Компасом?» — отказ модели вместо рассказа о сервисе."""
     def no_llm(*a, **k):
         raise AssertionError("модель не должна вызываться")
-    monkeypatch.setattr(main, "call_llm", no_llm)
+    monkeypatch.setattr(assistant, "call_llm", no_llm)
     for q in ("Как пользоваться Компасом?", "как пользоваться сервисом", "Как работать с ассистентом?"):
         body = client.post("/api/ask", json={"question": q, "mode": "base"}).json()
         assert body["intent"] == "about" and "#/deals" in body["answer"], (q, body)
@@ -2100,7 +2113,7 @@ def test_deal_multiple_of_a_bought_company_reaches_the_model(monkeypatch):
     посчитан, а ассистент отвечал «посчитать невозможно» (21 октября 2026)."""
     import assistant_retrieval
     idx = assistant_retrieval.get_index()
-    monkeypatch.setattr(main, "_sector_multiples", lambda db=None: {
+    monkeypatch.setattr(fns, "_sector_multiples", lambda db=None: {
         "metrics": [{"key": "ev_op", "label": "EV / операционная прибыль"}, {"key": "ps", "label": "P/S"}],
         "rows": [{"id": "g91ec3558", "title": "«Магнит» купил контрольный пакет «Азбуки вкуса»", "year": 2025,
                   "target_id": "g52fa4c83", "price_full_rub": 36.36e9, "stake": 81.55, "report_year": 2024,
@@ -2130,7 +2143,7 @@ def test_redteam_questions_the_gate_catches_stay_refused_before_the_model(monkey
     assert caught
     monkeypatch.setenv("YANDEX_API_KEY", "k")
     monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
-    monkeypatch.setattr(main, "call_llm", lambda *a, **k: pytest.fail("гейт должен ответить без модели"))
+    monkeypatch.setattr(assistant, "call_llm", lambda *a, **k: pytest.fail("гейт должен ответить без модели"))
     client = TestClient(main.app)
     for q in caught:
         assert assistant_policy.classify(q["q"]).kind == q["gate"], q["n"]
