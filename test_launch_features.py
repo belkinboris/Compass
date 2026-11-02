@@ -5379,6 +5379,7 @@ def test_text_reply_to_a_digest_draft_becomes_the_digest_text(client, monkeypatc
         "reply_to_message": {"message_id": 32, "text": marker}}})
     rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
             if d["deal_id"] == "digest~" + key]
+    # Ответ в консоли — всегда публикация (владелец, 2 ноября 2026).
     assert {d["verdict"] for d in rows} == {"note", "post_yes"}, rows
     assert next(d for d in rows if d["verdict"] == "post_yes")["edited_text"] == new
     assert any("сводка выйдет в канал с вашим текстом" in str(p.get("text")) for _m, p in sent)

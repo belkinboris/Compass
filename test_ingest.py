@@ -4635,7 +4635,7 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     codes = {c for c, _t in accept_card.findings(card, base)}
     assert {"asset_case", "asset_description", "party_unlinked:buyer", "party_unlinked:target", "why"} <= codes, codes
     assert any(c.startswith("press:") for c in codes), codes
-    clean = {"id": "gt2", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+    clean = {"id": "gt2", "ind": "ИТ и интернет", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
              "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {},
              # С 14 октября 2026 пустой продавец новой покупки — находка, пока
@@ -4853,7 +4853,7 @@ def test_acceptance_refuses_invented_names_descriptions_and_twins():
     import accept_card
     base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
             "deals": [], "telegram_posts": {}}
-    card = {"id": "gt1", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
             "date": FRESH_DATE, "buyer_name": "«Совко капитал партнерс»", "src": [["В", "https://v.ru/1"]],
             "eco": {}, "law": {}}
     full = {k: True for k in accept_card.CHECKLIST}
@@ -4882,7 +4882,7 @@ def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
     import accept_card
     base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
             "deals": [], "telegram_posts": {}}
-    card = {"id": "gt1", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
             "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "«Совко капитал партнерс»",
             "reviewed": FRESH_DATE,
             "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {"struct": "Так пишут «Ведомости»."}}
@@ -8276,7 +8276,7 @@ def test_console_draft_says_which_channel_the_post_goes_to():
     assert send_drafts.post_message_text(other, {}, rendered="текст").startswith("📣 [пост gR6] — В ОСНОВНОЙ КАНАЛ, на проверку")
     # Отрасль не определена: пост пойдет в основной — консоль говорит это и предупреждает (Главпочтамт, 2 ноября 2026).
     unknown = dict(small, ind="Не определена")
-    assert "В ОСНОВНОЙ КАНАЛ (отрасль не определена" in send_drafts.post_message_text(unknown, {}, rendered="текст")
+    assert "ОТРАСЛЬ НЕ ОПРЕДЕЛЕНА" in send_drafts.post_message_text(unknown, {}, rendered="текст")
 
 
 def test_realty_channel_from_the_site_is_never_taken_for_the_main_one(monkeypatch):
@@ -9764,22 +9764,24 @@ def test_monthly_digest_does_not_show_an_industry_as_a_theme():
     assert "Недвижимость" not in names and "Продажа с торгов" in names
 
 
-def test_digest_goes_out_with_the_owner_text_when_he_replied(monkeypatch):
-    """Владелец, 2 ноября 2026: переписал сводку за октябрь ответом на черновик;
-    текст терялся. Решение с текстом (или `owner_text` в состоянии) — это и есть
-    сводка: без пересборки, без нашей проверки стиля, в ближайшее окно."""
+def test_digest_goes_out_with_the_owner_text_from_the_console(monkeypatch):
+    """Ответ своим текстом на черновик сводки В КОНСОЛИ — публикация этим
+    текстом (владелец, 2 ноября 2026: «ответ в консоли — это публикация
+    всегда»). Текст из чата сессии решением не является."""
     import datetime
     import send_telegram
-    decisions = [{"deal_id": "digest~2030-04", "verdict": "post_yes", "id": 7, "edited_text": " Мой текст сводки "}]
+    yes = [{"deal_id": "digest~2030-04", "verdict": "post_yes", "id": 7, "edited_text": " Мой текст сводки "}]
     data = {"deals": [], "telegram_digests": {"2030-04": {"drafted_at": "2030-05-02T07:00:00+00:00"}}}
-    assert send_telegram.digest_owner_text(data, decisions, "2030-04") == "Мой текст сводки"
-    assert send_telegram.digest_owner_text(data, [], "2030-04") == ""
     monkeypatch.setattr(send_telegram, "digest_due", lambda d, today: (2030, 4))
     now = datetime.datetime(2030, 5, 2, 9, 0, tzinfo=datetime.timezone.utc)
     assert send_telegram.plan_digest(data, [], now)[0] is None                      # ждет решения
-    assert send_telegram.plan_digest(data, decisions, now)[:2] == ("send", "2030-04")
+    assert send_telegram.plan_digest(data, yes, now)[:2] == ("send", "2030-04")
+    assert send_telegram.digest_owner_text(data, yes, "2030-04") == "Мой текст сводки"
+    assert send_telegram.digest_owner_text(data, [], "2030-04") == ""
+    # Текст в состоянии (owner_text) — чем выйдет, а не когда: без кнопки/ответа/молчания не выходит.
     data["telegram_digests"]["2030-04"]["owner_text"] = "Текст из состояния"
-    action, key, why, _ids = send_telegram.plan_digest(data, [], now)
-    assert (action, key) == ("send", "2030-04") and "владельца" in why
+    assert send_telegram.plan_digest(data, [], now)[0] is None
     assert send_telegram.digest_owner_text(data, [], "2030-04") == "Текст из состояния"
-    assert "В ОСНОВНОЙ КАНАЛ" in send_telegram.digest_draft_message("т", "2030-04", monthly_digest.render_buttons(2030, 4))
+    late = datetime.datetime(2030, 5, 3, 9, 0, tzinfo=datetime.timezone.utc)
+    assert send_telegram.plan_digest(data, [], late)[:2] == ("send", "2030-04")            # сутки молчания
+    assert "заменит пост" in send_telegram.digest_draft_message("т", "2030-04", monthly_digest.render_buttons(2030, 4))

@@ -497,7 +497,8 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     # без следа (ни решения, ни заметки, ни ответа). Теперь, как у проекта поста:
     # полный текст — решение `digest~<месяц>`/post_yes с ним (рутина публикации
     # выпускает сводку этим текстом, `send_telegram.digest_owner_text`); вопрос
-    # или короткая реплика — заметка.
+    # или короткая реплика — заметка. Ответ в консоли — всегда публикация
+    # (владелец, 2 ноября 2026).
     digest = re.search(r"\[сводка (\d{4}-\d{2})\]", str(reply.get("text") or ""))
     if digest and not marker and text.strip() and _is_reviewer(sender_id):
         key = digest.group(1)
@@ -516,6 +517,8 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         body = text.strip()
         if message.get("entities"):
             body = _telegram_text_as_html(text, message.get("entities")).strip()
+        # Ответ в консоли — всегда публикация (владелец, 2 ноября 2026), как у
+        # проекта поста: полный текст выпускает сводку этим текстом.
         db.add(ModerationDecision(deal_id="digest~" + key, verdict="post_yes", edited_text=body,
                                   decided_by=str(sender_id),
                                   chat_id=str(chat_id) if chat_id is not None else None,
