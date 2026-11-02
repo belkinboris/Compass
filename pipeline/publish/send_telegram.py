@@ -1636,15 +1636,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         print('Придержано паузой между постами: %d — уйдут следующим прогоном.' % gap_held)
     for did, err in failed:
         print('  %s: %s' % (did, err))
-    if deleted:
-        print('УДАЛЕННЫЕ ПОСТЫ (%d) — нужно решение человека, не сбой:' % len(deleted))
-        for did, mid, ch in deleted:
-            title = (deals_by_id.get(did) or {}).get('title', did)
-            store = 'telegram_posts_realty' if ch == channels.REALTY else 'telegram_posts'
-            print('  пост сделки «%s» (%s, message_id %s) удален из канала%s — '
-                 'перепостить (снять message_id из %s и запустить снова) '
-                 'или пометить «без поста»' % (title, did, mid,
-                                               ' недвижимости' if ch == channels.REALTY else '', store))
+    # Удаленные из канала посты в отчет не выводятся (владелец, 2 ноября 2026:
+    # «зачем вообще посты в отчетах упоминать» — посты удаляют сами владельцы,
+    # на карточки это не влияет). Список `deleted` остается для отладки.
 
 
 def parse_skip_ids(argv):

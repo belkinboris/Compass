@@ -1186,14 +1186,17 @@ def post_roles(deal):
         # поля сторон пусты, поэтому строки печатаются только если названы
         # (черновик притока до чтения), без «не раскрыт».
         return 'Временный управляющий', 'Собственник', 'Предмет', {'subject'}
+    # Несколько продавцов текстом — «Продавцы» (владелец, 2 ноября 2026, Domina Пулково).
+    sl = 'Продавцы' if (not deal.get('seller_id')
+                        and re.search(r',|\sи\s', str(deal.get('seller') or ''))) else 'Продавец'
     if deal.get('type') == 'Инвестиция' or kind == 'financing':
-        return 'Инвестор', 'Продавец', 'Предмет', {'buyer', 'subject'}
+        return 'Инвестор', sl, 'Предмет', {'buyer', 'subject'}
     if kind == 'acquisition':
-        return 'Покупатель', 'Продавец', 'Предмет', {'buyer', 'seller', 'subject'}
+        return 'Покупатель', sl, 'Предмет', {'buyer', 'seller', 'subject'}
     if kind == 'jv':
         # Покупателя у СП нет; `render` печатает одну строку «Участники СП».
-        return 'Участник СП', 'Продавец', 'Предмет', set()
-    return _buyer_label(deal), 'Продавец', 'Предмет', {'subject'}
+        return 'Участник СП', sl, 'Предмет', set()
+    return _buyer_label(deal), sl, 'Предмет', {'subject'}
 
 
 def render(deal, companies, updates=(), today=None, fin=None):
