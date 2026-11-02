@@ -2,6 +2,66 @@
  "made": "2026-11-02",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d61943902",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261101/glavpochtamt-2128502165.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -87,19 +147,30 @@
    ]
   },
   {
-   "draft_id": "d16433650",
-   "title": "В РФ усовершенствуют механизмы привлечения инвестиций в строительство генерации",
+   "draft_id": "d22532873",
+   "title": "SpaceX ведет переговоры о покупке оператора Boost Mobile, пишет WP",
    "date": "2026-11-02",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28278751"
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/wp-874861970.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-02",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261102/wp-874861970.html"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -111,20 +182,21 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d61218266",
-   "title": "Исторический Главпочтамт в центре Москвы выставили на продажу",
+   "draft_id": "d48053289",
+   "title": "Пытавшегося купить вейп российского школьника арестовали по делу о теракте",
    "date": "2026-11-02",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/istoricheskij-glavpochtamt-v-tsentre-moskvy-vystavili-na-prodazhu/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/02/pytavshegosya-kupit-veyp-rossiyskogo-shkolnika-arestovali-po-delu-o-terakte/"
     ]
    ],
-   "sum": "7,7 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -139,8 +211,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc6fa5d80 (общие редкие слова: выстав, главпо) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
