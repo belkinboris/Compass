@@ -120,6 +120,14 @@ CASH_IN_STAGE_RE = re.compile(
     r'этап\w*\W+(?:\w+\W+){0,5}(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*|закрыт\w+\s+подписк\w*)'
     r'|(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*)\W+(?:\w+\W+){0,5}этап\w*', re.I)
 CASH_IN_STAGE_TYPES = ('M&A',)
+SHARE_FORM_RE = re.compile(
+    r'\s*(?:\d+(?:[.,]\d+)?\s*%(?:\s*(?:плюс|\+)\s*(?:1|одна)\s*акци\w*)?|контрольн\w+|блокирующ\w+|миноритарн\w+)'
+    r'\s+(?:доли|долей|акций|пакет\w*\s+акций)\s+(?:в\s+)?(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«', re.I)
+PLAIN_WORDS_RE = re.compile(
+    r'(?<![\wа-яё])в\s+минусе(?![\wа-яё])|теря\w*\s+деньги|(?<![\wа-яё])сам(?:а|о|и)?(?![\wа-яё])'
+    r'|не\s+раскрыва\w+\s+в\s+силу|(?:^|\.\s+)(?:Покупка|Продажа)\s+всех\s+долей', re.I)
+PROSE_CHECK_FIELDS = ('eco.share', 'eco.val', 'eco.target_fin', 'eco.fin', 'eco.fin_context', 'eco.rationale',
+                      'eco.context', 'law.struct', 'law.terms', 'law.appr', 'extra')
 LITIGATION_LAWYER_RE = re.compile(
     r'адвокат\w*\s+(?:\S+\s+){0,2}(?:ответчик|обвиняем|подсудим|осужденн|истц|бывш\w+\s+владел)|защитник\w*\b|сторон\w+\s+(?:ответчик|обвинени|защит)', re.I)
 # ТОЛЬКО law.struct/law.terms: `eco.context` — ЕДИНСТВЕННОЕ документированное
@@ -344,7 +352,7 @@ _RESOLVED = {}
 
 
 SINGLE_LEGAL = re.compile(
-    r'^\s*(?:ООО|ОАО|ПАО|ЗАО|НАО|АО|МКПАО|МКООО|АНО|ГУП|ФГУП|МУП|НПАО)\s*«.+»\s*$', re.I)
+    r'^\s*(?:ООО|ОАО|ПАО|ЗАО|НАО|АО|МКПАО|МКАО|МКООО|АНО|ГУП|ФГУП|МУП|НПАО)\s*«.+»\s*$', re.I)
 # Закрывающая елочка, за которой идет запятая или «и», — это перечисление,
 # а не одно имя: «АО «Норд-Вест СВ», «Инструмент-СВ»…». Внутри ОДНОГО имени
 # кавычки бывают вложенными («ООО «Кинокомпания «Парадиз продакшнз»»»),
@@ -1096,6 +1104,38 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         out.append(('industry_undefined', 'отрасль не определена — назовите ее в ответе '
                     '(industry: {"value": "<из списка>", "why": "<по предмету сделки>"}); '
                     'без отрасли пост о недвижимости уйдет в основной канал'))
+    # ПРЕДМЕТ СДЕЛКИ — ДОЛЯ В КОНКРЕТНОМ ОБЩЕСТВЕ (владелец, 2 ноября 2026,
+    # ПармаВуд: «мы же договорились писать столько-то доли в конкретной
+    # компании: 100% доли в ООО «ПармаВуд» или 56% акций в АО»). У покупки
+    # общества `eco.share` начинается с доли и называет общество с формой.
+    comps_ = base.get('companies') or {}
+    tgt = comps_.get(card.get('target') or '') or {}
+    share_v = str((card.get('eco') or {}).get('share') or '')
+    if card.get('type') == 'M&A' and tgt.get('legal_short') and has(share_v) \
+            and not SHARE_FORM_RE.match(share_v):
+        out.append(('share_form', 'eco.share %r — предмет пишется долей в обществе: «100%% доли в %s» '
+                    '(несколько ООО — «долей в ООО «А» и ООО «Б»», АО — «N%% акций АО «X»»), описание — в контекст'
+                    % (share_v[:80], tgt['legal_short'])))
+    # СТОРОНЫ С ПРАВОВОЙ ФОРМОЙ (владелец, 2 ноября 2026: «тремя разными
+    # способами написаны стороны»): у российского юрлица с ИНН в реестре —
+    # `legal_short` профиля (pipeline/party_legal_names.py).
+    reg_ids = {r.get('company_id') for r in (fns_registry.REGISTRY if registry is None else registry)
+               if r.get('decision') == 'confirmed' and r.get('inn')}
+    for role in ('buyer', 'seller_id', 'target'):
+        cid = card.get(role)
+        if cid and cid in comps_ and cid in reg_ids and not comps_[cid].get('legal_short') \
+                and not SINGLE_LEGAL.match(str(comps_[cid].get('name') or '')):
+            out.append(('party_legal_form:' + role, 'у стороны «%s» нет имени с правовой формой (legal_short) — '
+                        'python3 pipeline/party_legal_names.py %s' % (comps_[cid].get('name'), card.get('id'))))
+    # РАЗГОВОРНЫЕ И ЖЕЛТЫЕ СЛОВА (владелец, 2 ноября 2026: «в минусе» —
+    # слишком разговорно; «теряет деньги» — желтушно; «сам» — зачем?;
+    # «не раскрываются в силу обязательств» — если не раскрываются, не писать).
+    for field in PROSE_CHECK_FIELDS:
+        v = _text(card, field)
+        m = PLAIN_WORDS_RE.search(str(v)) if has(v) else None
+        if m:
+            out.append(('plain_words:' + field, 'в %s «%s» — разговорно, оценочно или пусто; написать фактом '
+                        '(«по отчетности компания убыточна несколько лет»), пустое — снять' % (field, m.group(0))))
     # ДАТА НА 15-Е БЕЗ ОСНОВАНИЯ (вычитка 2 ноября 2026: X5/ВКТ — 15 мая при
     # «4 мая» во всех статьях, Cosmos — 15 июня без источника; в базе 58 таких).
     # Пятнадцатое — след старой заглушки «середина месяца». Читатель называет,
@@ -1446,6 +1486,10 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
                              registry=registry, path=registry_path, day=day)
             known.add(cid)
             lines.append('реестр ИНН + %s: %s (%s)' % (cid, inn, legal or comps[cid]['name']))
+        # Имя с правовой формой для схемы и «Отчетности сторон» (2 ноября 2026).
+        if legal and SINGLE_LEGAL.match(legal) and not comps[cid].get('legal_short'):
+            comps[cid]['legal_short'] = legal
+            lines.append('legal_short %s: %s' % (cid, legal))
         if legal and legal not in str(comps[cid].get('desc') or ''):
             desc = str(comps[cid].get('desc') or '').rstrip()
             comps[cid]['desc'] = ((desc.rstrip('.') + '. ') if desc else '') + 'Юрлицо — %s.' % legal
@@ -1635,6 +1679,17 @@ def _self_check():
     card7y = dict(card7x, id='gtest7y', date_basis='регистрация в ЕГРЮЛ 15 мая', eco={'rationale': 'X5 приобрела 100%.'},
                   law={'adv': [['Юридический консультант', 'Delcredere', 'консультант продавца']]})
     assert not {'stale_statement:eco.rationale', 'date_unbased', 'adviser_not_deal'} & {c for c, _t in findings(card7y, base)}
+    # Владелец, 2 ноября 2026: предмет — доля в обществе, стороны с правовой формой, без «в минусе» и «сам».
+    base_l = dict(base, companies=dict(base.get('companies') or {},
+                                       t9={'name': 'ПармаВуд', 'legal_short': 'ООО «ПармаВуд»'}))
+    card7z = {'id': 'gtest7z', 'title': 'x', 'type': 'M&A', 'ind': 'Лесопром', 'status': 'Закрыта', 'src': src1,
+              'target': 't9', 'eco': {'share': 'Лесозаготовительная компания ПармаВуд.',
+                                      'target_fin': 'В минусе компания работает несколько лет.'}}
+    codes_z = {c for c, _t in findings(card7z, base_l)}
+    assert {'share_form', 'plain_words:eco.target_fin'} <= codes_z, codes_z
+    card7w = dict(card7z, id='gtest7w', eco={'share': '100% доли в ООО «ПармаВуд».',
+                                             'target_fin': 'По отчетности компания убыточна несколько лет.'})
+    assert not {'share_form', 'plain_words:eco.target_fin'} & {c for c, _t in findings(card7w, base_l)}
     # Отрасль не определена — находка; ответ `industry` ставит ее без цитаты (2 ноября 2026).
     card7h = {'id': 'gtest7h', 'title': 'x', 'type': 'Продажа с торгов', 'status': 'Обсуждается',
               'ind': 'Не определена', 'src': src1, 'reviewed': '2026-11-02'}

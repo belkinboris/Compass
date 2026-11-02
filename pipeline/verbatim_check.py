@@ -68,7 +68,7 @@ NEAR_SHARE = 0.7         # доля основ в том же порядке —
 QUOTE_MIN_WORDS = 5      # кавычки от стольких слов — чужая речь, а не название
 ANCHOR = 3               # длина якоря при поиске общих цепочек
 
-PROSE_FIELDS = frozenset(('extra', 'eco.share', 'eco.val', 'eco.target_fin', 'eco.fin',
+PROSE_FIELDS = frozenset(('extra', 'eco.share', 'eco.val', 'eco.target_fin', 'eco.fin', 'eco.fin_context',
                           'eco.rationale', 'eco.context', 'law.struct', 'law.terms', 'law.appr'))
 STRUCTURAL_FIELDS = frozenset(('title', 'asset', 'target', 'seller', 'buyer_name', 'buyer', 'sum', 'eco.sum',
                                'date', 'status', 'type', 'ind', 'stake_acquired', 'date_basis', 'sum_basis',

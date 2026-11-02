@@ -25,6 +25,10 @@
    - открыть КАЖДЫЙ источник карточки (WebFetch), текст сохранить
      `pipeline/ingest/save_source.py`; не открылся — искать ту же новость в
      другом издании (WebSearch);
+   - `python3 pipeline/party_legal_names.py <id>` — правовая форма сторон и
+     история участников покупаемого ООО из реестра: продавец, доля и дата
+     перехода берутся отсюда (вход через увеличение уставного капитала —
+     продавца нет); `--write` ставит `legal_short` сторонам;
    - проверить каждое поле против статьи и правил: `docs/card_title.md`,
      `docs/card_status_dates.md`, `docs/card_money.md`, `docs/card_parties.md`,
      `docs/card_editing.md` (пересказ — по статье), `pipeline/ingest/WRITING_BRIEF.md`,

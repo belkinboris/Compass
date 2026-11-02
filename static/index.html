@@ -1037,7 +1037,9 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .an-deal-t{flex:1;line-height:1.4;min-width:0}
 .an-deal-s{display:block;color:var(--muted);font-size:13px}  /* без отступа: сумма под заголовком в одну линию (владелец, 27 октября 2026) */
 .firm-inds{margin-top:6px;display:flex;gap:5px;flex-wrap:wrap}
-.related{margin:28px 0;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px}
+/* Та же рамка, что у разделов вкладок (#facts): владелец, 2 ноября 2026 —
+   «блок «похожие сделки» имеет более закругленные края и отступ больше». */
+.related{margin:10px 0 28px;padding:17px 18px;background:var(--card,#fff);border:1px solid var(--line);border-radius:var(--radius)}
 .related>.label{display:block;margin-bottom:8px}
 /* Темы сделки (раньше назывались «сюжеты» — слово путало) */
 .theme-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
@@ -1149,7 +1151,7 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 #facts .spec-row .label,#facts .stat-hero .label{display:block;margin-bottom:8px}
 #facts .spec-row .spec-v{display:block;max-width:none;font-size:14.5px;line-height:1.55}
 #facts .spec-list>.spec-row:has(.spec-v-text){flex-basis:100%}
-#facts .spec-row .spec-v-text{line-height:1.65}
+#facts .spec-row .spec-v-text{line-height:1.65;white-space:pre-line}
 #facts .stat-hero{margin-bottom:10px}
 #facts .stat-hero + .fact-note{margin:2px 0 16px}
 .pe-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
@@ -3448,6 +3450,20 @@ function matchesCompany(text, id){
    buyer и target, поэтому сделки, где компания была ПРОДАВЦОМ или сама была
    предметом сделки, на ее странице не показывались вовсе: у Сбербанка так
    пропадало 5 сделок, у АФК «Система» и ВТБ — по 4, всего 139 связей. */
+/* Имя стороны с правовой формой — в схеме сделки и в «Отчетности сторон»
+   (владелец, 2 ноября 2026: «в схеме тремя разными способами написаны
+   стороны», «ПармаВуд ООО, а Сыктывкарский ЛПК без ОПФ — нужно единообразно»).
+   `legal_short` профиля — «ООО «ПармаВуд»», ставит вычитка по реестру ФНС
+   (pipeline/party_legal_names.py); без него — имя профиля. */
+function coLegal(id){
+  const c = co(id);
+  return c ? (c.legal_short || c.name) : "";
+}
+/* Несколько продавцов текстом («Евгений Войтенков, Виктория Войтенкова и …»)
+   — подпись во множественном числе (владелец, 2 ноября 2026, Domina Пулково). */
+function sellerLabel(d){
+  return (!d.seller_id && /,|\sи\s/.test(String(d.seller||""))) ? "Продавцы" : "Продавец";
+}
 function companyRole(d, id){
   const kind = dealKindOf(d.type);
   const reorg = kind === "reorg";
@@ -7309,14 +7325,14 @@ function renderDeal(id, qs, previewCard){
            а не бывшему владельцу. Пустая плашка «Продавец — не раскрыт» тут не
            честное пустое состояние, а выдуманная роль, поэтому ее не рисуем. */
         const sellerBox = d.seller_id && co(d.seller_id)
-          ? party("Продавец", d.seller_id, co(d.seller_id).name)
+          ? party("Продавец", d.seller_id, coLegal(d.seller_id))
           : d.seller
-            ? `<div class="dp-party"><span class="dp-role">Продавец</span><span class="dp-name">${d.seller}</span></div>`
+            ? `<div class="dp-party"><span class="dp-role">${sellerLabel(d)}</span><span class="dp-name">${d.seller}</span></div>`
             : isRound(d)
               ? ""
               : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
         const buyerBox = buyerName
-          ? party(buyerRole(d), d.buyer, buyerName)
+          ? party(buyerRole(d), d.buyer, coLegal(d.buyer))
           : d.buyer_name
             ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">${d.buyer_name}</span></div>`
             : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
@@ -7354,7 +7370,20 @@ function renderDeal(id, qs, previewCard){
         const stakeLine = targetName&&share?share:(d.asset_share||stakeTxt||stakeFromAsset);
         const stakeWord = legalForm ? (legalForm==="ООО" ? "долей" : "акций") : "";
         const bareName = assetName.replace(/^[«"]|[»"]$/g,"");
-        const stakeWithName = legalForm && stakeLine
+        /* Профиль с правовой формой из реестра (`legal_short`): «100% доли в
+           ООО «ПармаВуд»», «56% акций АО «X»» — одна строка, без серой доли
+           под ней (владелец, 2 ноября 2026). */
+        const tLegal = assetRef && co(assetRef) && co(assetRef).legal_short;
+        /* Поле доли уже записано по правилу («100% долей в ООО «А» и ООО «Б»»)
+           — оно и есть предмет: показываем его целиком. */
+        const shareText = String((d.eco&&d.eco.share)||"").trim().replace(/\.$/,"");
+        const FORM_NAME = "(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\\s+«[^»]+(?:«[^»]*»[^»]*)?»";
+        const shareIsForm = new RegExp("^\\d+(?:[.,]\\d+)?\\s*%(?:\\s*(?:плюс|\\+)\\s*(?:1|одна)\\s*акци\\S*)?\\s+(?:доли|долей|акций)\\s+(?:в\\s+)?" + FORM_NAME + "(?:\\s*(?:,|и)\\s*" + FORM_NAME + ")*$", "i").test(shareText);
+        const pctOnly = ((String(stakeLine||"").match(/^\s*(\d+(?:[.,]\d+)?\s*%(?:\s*(?:плюс|\+)\s*(?:1|одна|одну)\s*акци\w*)?)/i))||[])[1] || "";
+        const stakeWithName = shareIsForm ? shareText
+          : tLegal && pctOnly
+          ? `${pctOnly} ${/^ООО\s/.test(tLegal) ? "доли в" : "акций"} ${tLegal}`
+          : legalForm && stakeLine
           ? (stakeLine.includes(bareName) ? stakeLine
              : `${stakeLine}${/акци|дол[еия]/i.test(stakeLine) ? "" : " " + stakeWord} ${legalForm} «${bareName}»`)
           : "";
@@ -7363,7 +7392,7 @@ function renderDeal(id, qs, previewCard){
         const asset = assetName ? `
           <div class="dp-asset">
             <span class="dp-asset-role">Предмет сделки</span>
-            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${stakeWithName || (legalForm?`${legalForm} «${assetName.replace(/^[«"]|[»"]$/g,"")}»`:assetName)}</a>`
+            ${assetLink?`<a class="dp-asset-name" href="#/companies/${assetRef}">${stakeWithName || (tLegal || (legalForm?`${legalForm} «${assetName.replace(/^[«"]|[»"]$/g,"")}»`:assetName))}</a>`
                        :`<span class="dp-asset-name">${assetName}</span>`}
             ${assetMeta?`<span class="dp-asset-meta num">${assetMeta}</span>`:""}
           </div>` : "";
@@ -7498,9 +7527,14 @@ function renderDeal(id, qs, previewCard){
         specRow(targetMetricLabel(kindKey), eco.target_fin),
         specRow("Форма расчетов", eco.fin),
       ]);
+      /* «Финансовый контекст» (владелец, 2 ноября 2026): финансы сторон вокруг
+         сделки — долги, убытки, отчетность продавца — не в «Контексте» и не в
+         «Дополнительном контексте», а здесь, на «Финансах». */
+      const finCtx = para("Финансовый контекст", eco.fin_context);
       f.innerHTML = `
       ${finHero}
-      ${finSpec || (finHero ? "" : `<p class="fact-note">Сумма, оценка и форма расчетов публично не раскрывались. Ниже — отчетность сторон сделки.</p>`)}
+      ${finSpec || (finHero || finCtx ? "" : `<p class="fact-note">Сумма, оценка и форма расчетов публично не раскрывались. Ниже — отчетность сторон сделки.</p>`)}
+      ${finCtx ? `<div class="spec-list">${finCtx}</div>` : ""}
       <div id="deal-mult"></div>
       <div id="deal-fns"></div>`;
     }
@@ -7551,7 +7585,7 @@ function renderDeal(id, qs, previewCard){
            продают действующие акционеры, а «инвестицией» у нас записана и
            покупка миноритарной доли у конкретного человека. Так было скрыто
            6 карточек из 597 с известным продавцом. */
-        specRow("Продавец", (kindKey==="acquisition" && hasSeller) ? ""
+        specRow(sellerLabel(d), (kindKey==="acquisition" && hasSeller) ? ""
           : (d.seller_id && co(d.seller_id) ? co(d.seller_id).name : (d.seller || ""))),
         specRow("Предмет", assetNamed ? "" : eco.share),
         specRow("Статус", d.status),
@@ -8559,7 +8593,7 @@ async function mountDealFns(d){
     }catch(e){return {...x, data:null, entry:null, latest:null};}
   }));
   if(!mount.isConnected) return;
-  const head = (p, badge) => `<div class="fns-head"><div><span class="label">${esc(String(p.role))}</span><h2><a href="#/companies/${p.id}">${esc(co(p.id)?co(p.id).name:(p.data&&p.data.company_name)||p.id)}</a></h2></div>${badge||""}</div>`;
+  const head = (p, badge) => `<div class="fns-head"><div><span class="label">${esc(String(p.role))}</span><h2><a href="#/companies/${p.id}">${esc(co(p.id)?coLegal(p.id):(p.data&&p.data.company_name)||p.id)}</a></h2></div>${badge||""}</div>`;
   const blocks = fetched.map(p=>{
     const c=co(p.id);
     if(p.data && p.data.hidden) return "";  // физлицо или лот — блока не бывает

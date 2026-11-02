@@ -515,7 +515,7 @@ def test_post_party_block_is_the_same_across_the_base(base):
     for deal in base["deals"][-300:]:
         labels = re.findall(r"<b>([^<:]+):</b>", format_post.render(deal, comps))
         roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Временный управляющий",
-                                            "Продавец", "Собственник", "Предмет")]
+                                            "Продавец", "Продавцы", "Собственник", "Предмет")]
         buyer_label, seller_label, subject_label, required = format_post.post_roles(deal)
         want = [l for key, l in (("buyer", buyer_label), ("seller", seller_label),
                                  ("subject", subject_label)) if key in required]
@@ -2467,7 +2467,8 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     to edit not found» — пост был удален из канала человеком. Такая ошибка
     не должна ронять весь прогон (другие отправки/правки того же батча
     обязаны дойти) и не должна затеряться в общем списке ошибок — нужна
-    отдельная, явно читаемая строка отчета с именем сделки."""
+    отдельная строка отчета (до 2 ноября 2026; теперь удаленный пост молча
+    пропускается — решение владельца)."""
     deal_edit = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
                  "buyer": "b1", "sum": "1 млрд ₽", "status": "Закрыта",
                  "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
@@ -2496,8 +2497,9 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     send_telegram.main(write=True, ignore_pace=True)  # не должно бросить исключение
 
     out = capsys.readouterr().out
-    assert "УДАЛЕННЫЕ ПОСТЫ" in out
-    assert "gX1" in out and "«Ромашка» купила «Одуванчик»" in out
+    # Владелец, 2 ноября 2026: удаленные посты в отчет не выводятся — их
+    # удаляют сами владельцы, на карточки это не влияет. И сбоем это не считается.
+    assert "УДАЛЕННЫЕ ПОСТЫ" not in out and "ошибок: 0" in out
 
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_posts"]["gX2"] == 1001, "второй элемент батча обязан дойти, несмотря на ошибку первого"
