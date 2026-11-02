@@ -2,6 +2,66 @@
  "made": "2026-11-02",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d61943902",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261101/glavpochtamt-2128502165.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -149,17 +209,58 @@
    ]
   },
   {
-   "draft_id": "d82383677",
-   "title": "В МИД прокомментировал передачу активов Nestle во временное управление",
+   "draft_id": "d46190601",
+   "title": "Химический холдинг «Концентрация» привлек 1,2 млрд рублей на разработку химических продуктов",
    "date": "2026-11-02",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261102/mid-2128698912.html"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
     ]
    ],
    "sum": null,
-   "type": "Временное управление",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-02",
+     "title": "Переговоры",
+     "note": "Деньги вложили профильные российские фонды, их названия не раскрываются. Сделка выстроена по модели cash-in: весь объем средств поступит в компанию. Он пойдет будет направлен химических продуктов и расширение производственных мощностей. Стратегия…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Химический холдинг «Концентрация»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Химический холдинг «Концентрация»",
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d10246545",
+   "title": "Путин утвердил новый порядок передачи государству выморочного имущества",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/02/76740976/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -170,25 +271,53 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb3837d4d (общие слова заголовка: 3) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d28823599",
-   "title": "Northwood Space raises $375M Series C at a $2B valuation from a16z and DFJ growth",
+   "draft_id": "d46142610",
+   "title": "Эксперт посоветовал сверять IMEI при покупке смартфона из-за границы",
    "date": "2026-11-02",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/02/northwood-space-raises-375m-series-c-at-a-2b-valuation-from-a16z-and-dfj-growth/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/ekspert-874879514.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74292869",
+   "title": "Египет провел крупнейшее в истории страны IPO",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/egipet-874879276.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,

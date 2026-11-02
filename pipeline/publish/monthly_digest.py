@@ -246,7 +246,7 @@ def render(base, year, month):
 
 def render_buttons(year, month):
     return {'inline_keyboard': [
-        [{'text': 'Все сделки в «Компасе»', 'url': '%s/#/deals?year=%d' % (SITE, year)}],
+        [{'text': 'Сделки в Компасе', 'url': '%s/#/deals?year=%d' % (SITE, year)}],
         # Кнопку «Аналитика рынка» владелец снял 2 ноября 2026.
     ]}
 
