@@ -2751,7 +2751,7 @@ def test_console_drafts_of_posts_are_sent_with_markup(monkeypatch):
     event = {"kind": "closed", "headline": "A & B закрыли сделку",
              "snapshot": {"buyer": "A", "seller": "B", "asset": "C", "status": "Закрыта"}}
     msg = send_milestone_drafts.milestone_message(deal, event)
-    assert msg.startswith("📌 [веха g1~closed] — В КАНАЛ, на проверку")
+    assert msg.startswith("📌 [веха g1~closed] — В ОСНОВНОЙ КАНАЛ")
     assert "A &amp; B" in msg and "<b>Покупатель:</b> A" in msg
     assert re.search(r"\[веха ([\w~-]+)\]", send_drafts.plain_text(msg)).group(1) == "g1~closed"
 
@@ -8273,7 +8273,10 @@ def test_console_draft_says_which_channel_the_post_goes_to():
     assert "В КАНАЛ «Компас - Недвижимость»" in send_drafts.post_message_text(small, {}, rendered="текст")
     assert "В ОБА КАНАЛА" in send_drafts.post_message_text(big, {}, rendered="текст")
     other = dict(big, ind="ИТ и интернет")
-    assert send_drafts.post_message_text(other, {}, rendered="текст").startswith("📣 [пост gR6] — В КАНАЛ, на проверку")
+    assert send_drafts.post_message_text(other, {}, rendered="текст").startswith("📣 [пост gR6] — В ОСНОВНОЙ КАНАЛ, на проверку")
+    # Отрасль не определена: пост пойдет в основной — консоль говорит это и предупреждает (Главпочтамт, 2 ноября 2026).
+    unknown = dict(small, ind="Не определена")
+    assert "В ОСНОВНОЙ КАНАЛ (отрасль не определена" in send_drafts.post_message_text(unknown, {}, rendered="текст")
 
 
 def test_realty_channel_from_the_site_is_never_taken_for_the_main_one(monkeypatch):
@@ -9744,3 +9747,39 @@ def test_acceptance_flags_a_title_off_the_house_style():
              'status': 'Закрыта', 'src': [['Ъ', 'https://k.ru/2']]}
     kinds = [k for k, _ in accept_card.findings(card2, base)]
     assert 'title_style' not in kinds
+
+
+def test_monthly_digest_does_not_show_an_industry_as_a_theme():
+    """Сводка за октябрь 2026: «Недвижимость — 44» в отраслях и «Недвижимость —
+    13» в особенностях месяца — тег-тема совпал по названию с отраслью, но стоит
+    у части сделок. Такая тема в «Особенностях месяца» не показывается."""
+    deals = ([{"id": "r%d" % i, "date": "2030-05-0%d" % (i + 1), "ind": "Недвижимость", "themes": ["Недвижимость"]}
+              for i in range(3)]
+             + [{"id": "q%d" % i, "date": "2030-05-1%d" % i, "ind": "Недвижимость", "themes": []} for i in range(3)]
+             + [{"id": "t%d" % i, "date": "2030-05-2%d" % i, "ind": "Ритейл", "themes": ["Продажа с торгов"]} for i in range(3)]
+             + [{"id": "n%d" % i, "date": "2030-05-2%d" % (i + 3), "ind": "Ритейл", "themes": ["Национализация"]} for i in range(3)])
+    st = monthly_digest.stats({"deals": deals, "companies": {}}, 2030, 5)
+    assert dict(st["industries"])["Недвижимость"] == 6
+    names = [t for t, _n in st["themes"]]
+    assert "Недвижимость" not in names and "Продажа с торгов" in names
+
+
+def test_digest_goes_out_with_the_owner_text_when_he_replied(monkeypatch):
+    """Владелец, 2 ноября 2026: переписал сводку за октябрь ответом на черновик;
+    текст терялся. Решение с текстом (или `owner_text` в состоянии) — это и есть
+    сводка: без пересборки, без нашей проверки стиля, в ближайшее окно."""
+    import datetime
+    import send_telegram
+    decisions = [{"deal_id": "digest~2030-04", "verdict": "post_yes", "id": 7, "edited_text": " Мой текст сводки "}]
+    data = {"deals": [], "telegram_digests": {"2030-04": {"drafted_at": "2030-05-02T07:00:00+00:00"}}}
+    assert send_telegram.digest_owner_text(data, decisions, "2030-04") == "Мой текст сводки"
+    assert send_telegram.digest_owner_text(data, [], "2030-04") == ""
+    monkeypatch.setattr(send_telegram, "digest_due", lambda d, today: (2030, 4))
+    now = datetime.datetime(2030, 5, 2, 9, 0, tzinfo=datetime.timezone.utc)
+    assert send_telegram.plan_digest(data, [], now)[0] is None                      # ждет решения
+    assert send_telegram.plan_digest(data, decisions, now)[:2] == ("send", "2030-04")
+    data["telegram_digests"]["2030-04"]["owner_text"] = "Текст из состояния"
+    action, key, why, _ids = send_telegram.plan_digest(data, [], now)
+    assert (action, key) == ("send", "2030-04") and "владельца" in why
+    assert send_telegram.digest_owner_text(data, [], "2030-04") == "Текст из состояния"
+    assert "В ОСНОВНОЙ КАНАЛ" in send_telegram.digest_draft_message("т", "2030-04", monthly_digest.render_buttons(2030, 4))

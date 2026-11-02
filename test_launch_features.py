@@ -5356,3 +5356,30 @@ def test_telegram_poll_retries_within_seconds_not_a_minute():
     assert console.POLL_PAUSE_MAX <= 5 and console.TELEGRAM_POLL_TIMEOUT <= 10
     src = (Path(console.__file__)).read_text(encoding="utf-8")
     assert "pause = min(pause * 2, POLL_PAUSE_MAX)" in src and "pause * 2, 60.0" not in src
+
+
+def test_text_reply_to_a_digest_draft_becomes_the_digest_text(client, monkeypatch):
+    """2 ноября 2026: владелец переписал сводку за октябрь ответом на черновик
+    «[сводка 2026-10]», а разбора такой метки не было — текст пропал без
+    решения и без ответа. Полный текст — решение `digest~<месяц>`/post_yes с
+    ним; вопрос — заметка."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))
+                        or {"ok": True, "result": {"message_id": 9300}})
+    key = "2030-05"
+    marker = "📊 [сводка %s] — В ОСНОВНОЙ КАНАЛ, на проверку\nИтоги месяца одним постом." % key
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": "А почему так мало сделок?", "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 31, "text": marker}}})
+    new = ("📊 Рынок слияний и поглощений в мае 2030\n\nЗа май мы рассказали о 115 сделках.\n\n"
+           "В каких отраслях больше всего сделок: недвижимость — 44, ГМК и добыча — 12.\n\n#статистика #MA")
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "text": new, "chat": {"id": 222}, "from": {"id": 222},
+        "reply_to_message": {"message_id": 32, "text": marker}}})
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "digest~" + key]
+    assert {d["verdict"] for d in rows} == {"note", "post_yes"}, rows
+    assert next(d for d in rows if d["verdict"] == "post_yes")["edited_text"] == new
+    assert any("сводка выйдет в канал с вашим текстом" in str(p.get("text")) for _m, p in sent)
+    client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
