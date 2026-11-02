@@ -678,15 +678,15 @@ def test_consultants_are_labelled_by_kind(idx):
 
 def test_model_card_keeps_valuation_terms_and_multiples_whole(idx):
     """Мультипликаторы и условия не отрезаются (№7, 14, 30, 34)."""
-    b2b = ar.compact(idx.by_id["g12a761e4"])
-    assert "EV/EBITDA" in b2b["valuation"] and "P/E" in b2b["valuation"]
+    whoosh = ar.compact(idx.by_id["g58d70492"])
+    assert "EV/EBITDA" in whoosh["multiples"] and "P/E" in whoosh["multiples"]
     wink = ar.compact(idx.by_id["g1125c0ec"])
     assert "earn-out" in wink["terms"] and "500 млн" in wink["terms"]
     coffee = ar.compact(idx.by_id["ge6e9c77a"])
     assert "EBITDA" in coffee["valuation"]
     assert all(len(ar.compact(d).get("facts", "")) <= 320 for d in idx.docs[:200])
-    r = ar.retrieve("При каких мультипликаторах прошло IPO B2B-РТС?", idx=idx)
-    assert r.docs[0].id == "g12a761e4" and "EV/EBITDA" in r.answer
+    r = ar.retrieve("При каких мультипликаторах прошло IPO Whoosh?", idx=idx)
+    assert r.docs[0].id == "g58d70492" and "EV/EBITDA" in r.answer
     r = ar.retrieve("Какие мультипликаторы были в сделках с ресторанами и кофейнями?", idx=idx)
     assert "ge6e9c77a" in {d.id for d in r.docs}
     r = ar.retrieve("Какие мультипликаторы EV/EBITDA встречались в сделках в ИТ?", idx=idx)
