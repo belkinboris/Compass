@@ -65,7 +65,7 @@ MONTHS_IN = ('январе', 'феврале', 'марте', 'апреле', 'м
 MONTHS_NOM = ('январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
               'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь')
 
-TOP_DEALS = 5
+TOP_DEALS = 3   # владелец, 2 ноября 2026: в его тексте сводки — три
 TOP_INDUSTRIES = 3
 TOP_THEMES = 3
 # Тема попадает в сводку, только если ею помечено больше одной сделки: строка
@@ -126,7 +126,11 @@ def stats(base, year, month):
     можно было проверить без Telegram и без сети."""
     deals = base.get('deals', [])
     companies = base.get('companies', {})
-    cur = month_deals(deals, year, month)
+    # Только закрытые сделки (владелец, 2 ноября 2026, сводка за октябрь:
+    # «вместо 115 укажи цифру именно закрытых сделок; в каких отраслях больше
+    # всего — тоже только закрытых»). Все сделки месяца — `all_total`.
+    all_cur = month_deals(deals, year, month)
+    cur = [d for d in all_cur if str(d.get('status') or '') == 'Закрыта']
     priced = [(admitted_price(d), d) for d in cur]
     priced = [(v, d) for v, d in priced if v]
     tops = [(admitted_price(d, 'top_purchases'), d) for d in cur]
@@ -147,7 +151,7 @@ def stats(base, year, month):
             buyers[bid] = buyers.get(bid, 0) + 1
 
     themes = {}
-    for d in cur:
+    for d in all_cur:
         for t in (d.get('themes') or []):
             themes[t] = themes.get(t, 0) + 1
     # Тема с названием отрасли («Недвижимость») в «Особенностях месяца» не
@@ -158,11 +162,11 @@ def stats(base, year, month):
     themes = [(t, n) for t, n in sorted(themes.items(), key=lambda kv: (-kv[1], kv[0]))
               if n >= MIN_THEME_DEALS and t not in industry_names][:TOP_THEMES]
 
-    closed = sum(1 for d in cur if str(d.get('status') or '') == 'Закрыта')
-    talks = sum(1 for d in cur if str(d.get('status') or '') in ('Обсуждается', 'Подписана'))
+    closed = len(cur)
+    talks = sum(1 for d in all_cur if str(d.get('status') or '') in ('Обсуждается', 'Подписана'))
     return {
         'year': year, 'month': month, 'key': month_key(year, month),
-        'total': len(cur),
+        'total': len(cur), 'all_total': len(all_cur),
         'prev_total': len(before), 'prev_key': month_key(prev_year, prev_month),
         'priced': len(priced),
         'priced_sum': sum(v for v, _ in priced),
@@ -190,6 +194,12 @@ def enough(st):
     return st['total'] >= MIN_DEALS and bool(st['top'])
 
 
+def _lower_first(name):
+    """«Недвижимость» → «недвижимость», аббревиатуры (ГМК, ИТ) — как есть."""
+    w = name.split(' ')[0]
+    return name if (len(w) > 1 and w[1:2].isupper()) else name[:1].lower() + name[1:]
+
+
 def render(base, year, month):
     """Текст поста. Пусто, если месяц слишком пустой для сводки."""
     st = stats(base, year, month)
@@ -206,48 +216,27 @@ def render(base, year, month):
     # Сумма месяца не пропала: она стоит у каждой сделки в разделе «Самые
     # дорогие», где у цифры есть адрес. prev_total/priced в stats() остаются
     # для аналитики и тестов, в текст не идут.
+    # Образец — текст владельца 2 ноября 2026 (сводка за октябрь): число
+    # закрытых сделок, «самые дорогие» по раскрытой сумме — пункты через пустую
+    # строку, отрасли со строчной буквы; без «Особенностей месяца», без строки
+    # «Из N сделок…» и без оговорки о публичных данных — владелец их снял.
     lines.append('За %s мы рассказали о %d %s.'
-                 % (mon_nom, n, plural(n, 'сделке', 'сделках', 'сделках')))
+                 % (mon_nom, n, plural(n, 'закрытой сделке', 'закрытых сделках', 'закрытых сделках')))
     lines.append('')
 
     if st['top']:
-        lines.append('<b>Самые дорогие сделки месяца</b>')
+        lines.append('<b>Самые дорогие сделки (по раскрытой сумме)</b>')
+        lines.append('')
         for i, d in enumerate(st['top'], 1):
             lines.append('%d. <a href="%s/#/deal/%s">%s</a> — %s'
                          % (i, SITE, d['id'], esc(d.get('title') or ''), esc(d.get('sum') or '')))
-        lines.append('')
+            lines.append('')
 
     if st['industries']:
-        parts = ['%s — %d' % (name, cnt) for name, cnt in st['industries']]
-        lines.append('<b>Где сделок больше всего:</b> %s.' % esc(', '.join(parts)))
+        parts = ['%s — %d' % (_lower_first(name), cnt) for name, cnt in st['industries']]
+        lines.append('<b>В каких отраслях больше всего сделок:</b> %s.' % esc(', '.join(parts)))
+        lines.append('')
 
-    if st['themes']:
-        parts = ['%s — %d' % (name, cnt) for name, cnt in st['themes']]
-        lines.append('<b>Особенности месяца:</b> %s.' % esc(', '.join(parts)))
-
-    if st['serial_buyers']:
-        parts = ['%s (%d)' % (name, cnt) for name, cnt in st['serial_buyers']]
-        lines.append('<b>Покупали не по одному разу:</b> %s.' % esc(', '.join(parts)))
-
-    if st['closed'] or st['talks']:
-        state = []
-        if st['closed']:
-            state.append('%d уже закрыты' % st['closed'])
-        if st['talks']:
-            state.append('%d пока в работе' % st['talks'])
-        lines.append('Из %d %s %s.' % (n, plural(n, 'сделки', 'сделок', 'сделок'),
-                                       ' и '.join(state)))
-    lines.append('')
-
-    # ЧЕСТНАЯ ОГОВОРКА — не украшение. Число «столько-то сделок за месяц»
-    # обязано называть свое множество (CLAUDE.md: «у числа на экране два
-    # свойства: величина и множество»), иначе его перескажут как статистику
-    # всего рынка. Первая редакция («это не весь рынок. Цифры за свежий месяц
-    # еще подрастут…») владельцу показалась оправданием («что за свежий
-    # месяц, как вообще такое писать?») — оставлена одна спокойная фраза о
-    # том, откуда берутся сделки.
-    lines.append('Мы собираем только сделки, информация о которых публично доступна.')
-    lines.append('')
     # «#итогимесяца» партнер (7 сентября 2026) предложила заменить на
     # «#статистика»: по этому слову сводку ищут, а «итоги месяца» — наш
     # внутренний ярлык рубрики.

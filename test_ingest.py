@@ -6716,9 +6716,9 @@ def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
     assert monthly_digest.MONTHS_IN[m - 1] in text and str(y) in text
     assert str(st["total"]) in text
     assert text.count("/#/deal/") == len(st["top"]) and st["top"], text[:400]
-    # Число обязано называть свое множество: без оговорки его перескажут как
-    # статистику всего рынка (CLAUDE.md, «у числа два свойства»).
-    assert "публично доступна" in text
+    # Число называет свое множество — закрытые сделки (владелец, 2 ноября 2026);
+    # оговорку о публичных данных владелец снял своим текстом.
+    assert "закрыт" in text and "по раскрытой сумме" in text and "Особенности месяца" not in text
     # Никакого нашего диалекта — сводку читают в канале, а не в репозитории.
     low = text.lower()
     for word in ("карточк", "база", "знаменател", "bulk", "json", "инвариант"):
@@ -9760,6 +9760,7 @@ def test_monthly_digest_does_not_show_an_industry_as_a_theme():
              + [{"id": "q%d" % i, "date": "2030-05-1%d" % i, "ind": "Недвижимость", "themes": []} for i in range(3)]
              + [{"id": "t%d" % i, "date": "2030-05-2%d" % i, "ind": "Ритейл", "themes": ["Продажа с торгов"]} for i in range(3)]
              + [{"id": "n%d" % i, "date": "2030-05-2%d" % (i + 3), "ind": "Ритейл", "themes": ["Национализация"]} for i in range(3)])
+    deals = [dict(d, status="Закрыта") for d in deals]   # отрасли — по закрытым (2 ноября 2026)
     st = monthly_digest.stats({"deals": deals, "companies": {}}, 2030, 5)
     assert dict(st["industries"])["Недвижимость"] == 6
     names = [t for t, _n in st["themes"]]
