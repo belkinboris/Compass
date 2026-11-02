@@ -2,6 +2,66 @@
  "made": "2026-11-02",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d61943902",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261101/glavpochtamt-2128502165.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -87,42 +147,126 @@
    ]
   },
   {
-   "draft_id": "d64436553",
-   "title": "Инвестиции в индийские стартапы рухнули почти в два раза за месяц",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/investitsii-v-indijskie-startapy-ruhnuli-pochti-v-dva-raza-za-mesyats/"
-    ]
-   ],
-   "sum": "$678 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d86304640",
-   "title": "Нигерия нарастила долю энергоресурсов в общем объеме экспорта",
+   "draft_id": "d84766648",
+   "title": "Marvell Technology покупает Lumentum за 115 миллиардов долларов",
    "date": "2026-11-02",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261102/nigerija-874864491.html"
+     "https://1prime.ru/20261102/lumentum-874866229.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Marvell Technology",
+   "asset": "Lumentum",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Marvell Technology",
+    "asset": "Lumentum",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d77717896",
+   "title": "«Дом.РФ» выставил на торги проект КРТ в Воронеже",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261102/voronezh-2128671458.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d58232232",
+   "title": "Яркие лоты отечественной селекции: как прошел национальный аукцион лошадей",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261102/auktsion-2128653173.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d30009088",
+   "title": "В «Локомотиве» признались в нежелании продавать Батракова",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/02/v-lokomotive-priznalis-v-nezhelanii-prodavat-batrakova/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37788677",
+   "title": "Семейную ипотеку предложили расширить на покупку машино-места",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/02/semeynuyu-ipoteku-predlozhili-rasshirit-na-pokupku-mashino-mesta/"
     ]
    ],
    "sum": null,
@@ -145,43 +289,31 @@
    ]
   },
   {
-   "draft_id": "d83886361",
-   "title": "Ликсутов: завод купил оборудование для обработки плат при поддержке столицы",
+   "draft_id": "d30521217",
+   "title": "У зоопарка: в Челябинске выставили на продажу необычный бутик-отель. Фото",
    "date": "2026-11-02",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261102/liksutov-2128661363.html"
+     "web:ura.news",
+     "https://ura.news/news/1053140953"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-02",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261102/liksutov-2128661363.html"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "оборудование для обработки плат при поддержке столицы",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "оборудование для обработки плат при поддержке столицы",
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -212,6 +344,37 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d23803516",
+   "title": "«Концентрация» поможет отечественной фарме «сложной химией».   Российский химхолдинг привлек 1,2 млрд рублей инвестиций от нескольких профильных российских фондов.  Деньги пойдут на научно-исследовате",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/8201"
+    ]
+   ],
+   "sum": "1,2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
    ]
   }
