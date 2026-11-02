@@ -9744,3 +9744,18 @@ def test_acceptance_flags_a_title_off_the_house_style():
              'status': 'Закрыта', 'src': [['Ъ', 'https://k.ru/2']]}
     kinds = [k for k, _ in accept_card.findings(card2, base)]
     assert 'title_style' not in kinds
+
+
+def test_monthly_digest_does_not_show_an_industry_as_a_theme():
+    """Сводка за октябрь 2026: «Недвижимость — 44» в отраслях и «Недвижимость —
+    13» в особенностях месяца — тег-тема совпал по названию с отраслью, но стоит
+    у части сделок. Такая тема в «Особенностях месяца» не показывается."""
+    deals = ([{"id": "r%d" % i, "date": "2030-05-0%d" % (i + 1), "ind": "Недвижимость", "themes": ["Недвижимость"]}
+              for i in range(3)]
+             + [{"id": "q%d" % i, "date": "2030-05-1%d" % i, "ind": "Недвижимость", "themes": []} for i in range(3)]
+             + [{"id": "t%d" % i, "date": "2030-05-2%d" % i, "ind": "Ритейл", "themes": ["Продажа с торгов"]} for i in range(3)]
+             + [{"id": "n%d" % i, "date": "2030-05-2%d" % (i + 3), "ind": "Ритейл", "themes": ["Национализация"]} for i in range(3)])
+    st = monthly_digest.stats({"deals": deals, "companies": {}}, 2030, 5)
+    assert dict(st["industries"])["Недвижимость"] == 6
+    names = [t for t, _n in st["themes"]]
+    assert "Недвижимость" not in names and "Продажа с торгов" in names

@@ -150,8 +150,13 @@ def stats(base, year, month):
     for d in cur:
         for t in (d.get('themes') or []):
             themes[t] = themes.get(t, 0) + 1
+    # Тема с названием отрасли («Недвижимость») в «Особенностях месяца» не
+    # показывается: у отрасли свой счет («Где сделок больше всего: Недвижимость —
+    # 44»), а тег-тема стоит лишь у части этих сделок (13 из 44), и читатель видел
+    # одно слово с двумя числами (владелец, 2 ноября 2026, сводка за октябрь).
+    industry_names = {i for d in deals for i in (d.get('industries') or [d.get('ind')]) if i}
     themes = [(t, n) for t, n in sorted(themes.items(), key=lambda kv: (-kv[1], kv[0]))
-              if n >= MIN_THEME_DEALS][:TOP_THEMES]
+              if n >= MIN_THEME_DEALS and t not in industry_names][:TOP_THEMES]
 
     closed = sum(1 for d in cur if str(d.get('status') or '') == 'Закрыта')
     talks = sum(1 for d in cur if str(d.get('status') or '') in ('Обсуждается', 'Подписана'))
