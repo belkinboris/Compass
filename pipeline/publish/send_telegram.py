@@ -823,8 +823,21 @@ def digest_decisions(decisions):
         did = str(d.get('deal_id') or '')
         if not did.startswith('digest~') or d.get('verdict') not in ('post_yes', 'post_no'):
             continue
-        out[did.split('~', 1)[1]] = (d['verdict'], d['id'])
+        out[did.split('~', 1)[1]] = (d['verdict'], d['id'], d.get('edited_text'))
     return out
+
+
+def digest_owner_text(data, decisions, key):
+    """Текст сводки, который прислал сам человек, или ''. Ответ своим текстом
+    на черновик «[сводка <месяц>]» — решение `post_yes` с `edited_text`
+    (app/console.py); он же может лежать в `telegram_digests[<месяц>].owner_text`,
+    если решение занесли вручную. 2 ноября 2026 владелец переписал сводку за
+    октябрь ответом на черновик, а обработчика на такие ответы не было — текст
+    потерялся, хотя черновик обещал «ответ своим текстом заменит пост»."""
+    decision = digest_decisions(decisions).get(key)
+    if decision and decision[0] == 'post_yes' and decision[2]:
+        return str(decision[2]).strip()
+    return str(((data.get('telegram_digests') or {}).get(key) or {}).get('owner_text') or '').strip()
 
 
 def digest_age_hours(state, now):
@@ -854,6 +867,8 @@ def plan_digest(data, decisions, now, today=None):
         return None, key, 'основатели решили не публиковать', [decision[1]]
     if decision and decision[0] == 'post_yes':
         return 'send', key, 'одобрено в консоли', [decision[1]]
+    if state.get('owner_text') and not state.get('message_id'):
+        return 'send', key, 'текст владельца из консоли', []
     if not state.get('drafted_at'):
         return 'draft', key, 'черновик еще не отправлен в консоль', []
     age = digest_age_hours(state, now)
@@ -909,7 +924,7 @@ def digest_keyboard(key):
 
 def digest_draft_message(text, key, buttons):
     """Уходит с разметкой (`send_one(..., html=True)`), как и сам пост."""
-    return ('📊 [сводка %s] — В КАНАЛ, на проверку\n'
+    return ('📊 [сводка %s] — В ОСНОВНОЙ КАНАЛ, на проверку\n'
             'Итоги месяца одним постом. Молчание сутки — выходит как есть; '
             'ответ своим текстом заменит пост.\n'
             '━━━━━━━━━━━━\n%s\n\n%s'
@@ -1157,8 +1172,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     digest_text = ''
     if digest_action:
         y, mth = int(digest_key_[:4]), int(digest_key_[5:7])
-        digest_text = monthly_digest.render(data, y, mth)
-        problems = check_post.check_digest(digest_text) if digest_text else ["сводка не собралась"]
+        owner_text = digest_owner_text(data, m_decisions, digest_key_) if digest_action == 'send' else ''
+        # Текст человека не пересобирается и не проверяется на наш стиль: он его
+        # написал сам и одобрил тем, что прислал.
+        digest_text = owner_text or monthly_digest.render(data, y, mth)
+        problems = [] if owner_text else (check_post.check_digest(digest_text) if digest_text else ["сводка не собралась"])
         if problems:
             print('Сводка %s не отправлена: %s' % (digest_key_, '; '.join(problems)))
             digest_action, digest_text = None, ''

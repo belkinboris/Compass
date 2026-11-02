@@ -491,6 +491,42 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                   "Передумали — ответьте на это сообщение словом «отмена». (правка поста %s~edit)" % deal_id),
             disable_web_page_preview=True, **_thread_kwargs(reply))
         return {"ok": True}
+    # ОТВЕТ ТЕКСТОМ НА ЧЕРНОВИК МЕСЯЧНОЙ СВОДКИ (2 ноября 2026). Черновик
+    # «[сводка 2026-10]» обещал «ответ своим текстом заменит пост», а разбора
+    # такой метки не было: владелец переписал сводку за октябрь, и текст пропал
+    # без следа (ни решения, ни заметки, ни ответа). Теперь, как у проекта поста:
+    # полный текст — решение `digest~<месяц>`/post_yes с ним (рутина публикации
+    # выпускает сводку этим текстом, `send_telegram.digest_owner_text`); вопрос
+    # или короткая реплика — заметка.
+    digest = re.search(r"\[сводка (\d{4}-\d{2})\]", str(reply.get("text") or ""))
+    if digest and not marker and text.strip() and _is_reviewer(sender_id):
+        key = digest.group(1)
+        if _is_question(text) or _not_a_post_text(text, reply.get("text")):
+            db.add(ModerationDecision(deal_id="digest~" + key, verdict="note", edited_text=text.strip(),
+                                      decided_by=str(sender_id),
+                                      chat_id=str(chat_id) if chat_id is not None else None,
+                                      reply_message_id=reply.get("message_id")))
+            db.commit()
+            notification_service.tg_api(
+                "sendMessage", chat_id=str(chat_id),
+                text=("Это не похоже на новый текст сводки — она не тронута, замечание записано. "
+                      "Чтобы заменить сводку, пришлите ответом полный текст; предложенный — кнопкой «Пост в канал»."),
+                disable_web_page_preview=True, **_thread_kwargs(reply))
+            return {"ok": True}
+        body = text.strip()
+        if message.get("entities"):
+            body = _telegram_text_as_html(text, message.get("entities")).strip()
+        db.add(ModerationDecision(deal_id="digest~" + key, verdict="post_yes", edited_text=body,
+                                  decided_by=str(sender_id),
+                                  chat_id=str(chat_id) if chat_id is not None else None,
+                                  reply_message_id=reply.get("message_id")))
+        db.commit()
+        notification_service.tg_api(
+            "sendMessage", chat_id=str(chat_id),
+            text=("Принято: сводка выйдет в канал с вашим текстом ближайшим прогоном публикации. "
+                  "Передумали — нажмите «Без поста» под черновиком."),
+            disable_web_page_preview=True, **_thread_kwargs(reply))
+        return {"ok": True}
     milestone = re.search(r"\[веха ([\w-]{1,50}~[\w-]{1,30})\]", str(reply.get("text") or ""))
     if milestone and not marker and text.strip() and _is_reviewer(sender_id):
         combo = milestone.group(1)
