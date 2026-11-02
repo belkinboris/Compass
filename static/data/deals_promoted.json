@@ -236779,6 +236779,406 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "gf5bdb983",
+   "date": "2026-11-02",
+   "title": "«Стройдевелопмент» выкупил застройщика недостроенного бизнес-центра на Гвардейской площади в Ростове",
+   "ind": "Строительство",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "161.ru",
+     "https://161.ru/text/business/2026/11/02/76740160/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "У делового центра на Гвардейской площади в Ростове-на-Дону за почти 20 лет стройки было несколько собственников. До «Носты» зданием владела московская фирма «Фрихауз» — с 2023 года она в процедуре банкротства. В 2025 году «Носта» говорила, что рассчитывает закончить объект во втором квартале 2027 года, полностью переработав изначальную концепцию: вложения в завершение превысят 2 млрд ₽, а площадь здания составит более 44 тысяч квадратных метров. Кроме офисов в комплексе анонсированы ресторан, конференц-залы, спа-зона и гостиница под брендом Cosmos Hotel Group. У «ССК» в Ростовской области уже есть свои жилые комплексы — «Октябрь парк» на Таганрогской улице и «Придонье» в Аксае, а всего компания строит еще в пяти городах — Новороссийске, Анапе, Краснодаре, Майкопе и Калининграде.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Городская администрация подтвердила: срок действующего разрешения на возведение этого делового центра истекает 9 апреля 2027 года, а продлевать его «Носта» не обращалась.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "компания «Фрихауз»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-02",
+     "title": "Сделка завершена",
+     "note": "Достроить обещали в 2027 году",
+     "source": [
+      "161.ru",
+      "https://161.ru/text/business/2026/11/02/76740160/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Стройдевелопмент»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://161.ru/text/business/2026/11/02/76740160/"
+     }
+    ],
+    "target": [
+     {
+      "value": "компания «Фрихауз»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://161.ru/text/business/2026/11/02/76740160/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "АО «Ремида»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://161.ru/text/business/2026/11/02/76740160/"
+     }
+    ]
+   },
+   "seller": "АО «Ремида»",
+   "proofread_absorbed": {
+    "eco.context": [
+     "17d09864684f"
+    ],
+    "law.struct": []
+   },
+   "reviewed": "2026-11-02",
+   "seller_id": "gfee59860",
+   "buyer": "g836a96e4",
+   "target": "gfe9dd828",
+   "accepted": "2026-11-02",
+   "accepted_hash": "b7aa872df236.20e9e9",
+   "accepted_notes": {
+    "no_inn": {
+     "target": "Веб-поиск и реестр ЕГРЮЛ по точному имени «Фрихауз» не дали ни одного юрлица; проверены также реестр банкротств (Федресурс) и картотека арбитражных дел Ростовской области — совпадений нет."
+    },
+    "notes": "Переприемка после второго чтения 02.11.2026: eco.context поправлен через review.py — убрана ошибочная характеристика городов «Стройдевелопмент»/«ССК» как юга России (один из пяти названных источником городов — Калининград, не юг); остальные поля, привязки сторон и ИНН без изменений."
+   },
+   "second_read": "2026-11-02",
+   "second_read_hash": "b7aa872df236.20e9e9",
+   "added": "2026-11-02",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "50682da6272e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-11-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d7a1cff34bdc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "5c0b51adf44a"
+    },
+    "target": {
+     "company_id": "gfe9dd828",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "c925f4589d0e"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "g343bc58c",
+   "date": "2026-11-02",
+   "title": "«Дом.РФ» выставил на торги бывший пионерлагерь «Орленок» в Можайском районе Подмосковья",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261102/pionerlager-2128685456.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "14,28 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Лот включает участок площадью 5,88 га и 13 объектов недвижимости общей площадью 2,8 тысячи квадратных метров рядом с деревнями Вышнее и Бурцево. «Дом.РФ» предлагает использовать территорию под девелоперский проект — например, построить загородный дом отдыха.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Аукцион назначен на 13 ноября.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "участок площадью 5,88 гектара и 13 объектов недвижимости",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "участок площадью 5,88 гектара и 13 объектов недвижимости",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://realty.ria.ru/20261102/pionerlager-2128685456.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261102/pionerlager-2128685456.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "proofread_absorbed": {
+    "eco.context": [],
+    "law.struct": []
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-11-02",
+   "sum": "14,28 млн ₽",
+   "accepted": "2026-11-02",
+   "accepted_hash": "15191a874f6e.181fa0",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "земельный участок и объекты недвижимости (лот аукциона), не компания — профиль не нужен; тот же класс, что gab80558c"
+    },
+    "notes": "Открытый аукцион «Дом.РФ», тот же класс сделки, что g1833e545/gab80558c; покупатель определится на торгах 13 ноября, продавец — профиль АО «ДОМ.РФ» уже привязан."
+   },
+   "second_read": "2026-11-02",
+   "second_read_hash": "15191a874f6e.181fa0",
+   "added": "2026-11-02",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "fa2fa17fe02a"
+    },
+    "price": {
+     "value_rub": 14280000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "f6d4deb471d2"
+    },
+    "date": {
+     "value": "2026-11-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b6030d78d7be"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "01d207cadf8b"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
+  },
+  {
+   "id": "g004a92b7",
+   "date": "2026-11-02",
+   "title": "«Дом.РФ» разыграет на торгах право на комплексное развитие территории в Воронеже",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261102/voronezh-2128671458.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "136,96 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Площадка в северной части Воронежа, у Московского проспекта, 179, собрана из десяти соседних участков — вместе 15,74 га. Здесь планируют построить до 150 тысяч квадратных метров жилья с инфраструктурой.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Аукцион назначен на 13 ноября.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "136,96 млн ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "проект комплексного развития территории (КРТ) в Воронеже",
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "проект комплексного развития территории (КРТ) в Воронеже",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261102/voronezh-2128671458.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261102/voronezh-2128671458.html"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.context": [],
+    "law.struct": []
+   },
+   "reviewed": "2026-11-02",
+   "seller_id": "gb2b066c3",
+   "accepted": "2026-11-02",
+   "accepted_hash": "875105134022.181fa0",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "право на КРТ (лот аукциона), не компания — профиль не нужен; тот же класс, что g343bc58c/gab80558c"
+    },
+    "notes": "Открытый аукцион «Дом.РФ» на право заключить договор о КРТ, тот же класс сделки и те же торги 13 ноября, что g343bc58c; продавец — профиль АО «ДОМ.РФ» уже привязан."
+   },
+   "second_read": "2026-11-02",
+   "second_read_hash": "875105134022.181fa0",
+   "added": "2026-11-02",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c75c174043f6"
+    },
+    "price": {
+     "value_rub": 136960000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "63e27648ba4c"
+    },
+    "date": {
+     "value": "2026-11-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b6030d78d7be"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "505b787def39"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
