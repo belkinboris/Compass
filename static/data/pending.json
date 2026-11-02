@@ -52,58 +52,6 @@
    },
    "second_read": "2026-11-02",
    "second_read_hash": "880a2b6a3dcb.ace5bd"
-  },
-  {
-   "id": "g9c97677e",
-   "date": "2026-11-02",
-   "title": "TotalEnergies приобретает 30%-ную долю в газовых месторождениях в Малайзии",
-   "ind": "Нефть и газ",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "ПРАЙМ",
-     "https://1prime.ru/20261102/totalenergies-874851153.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "asset": "ную долю в газовых месторождениях в Малайзии",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "TotalEnergies",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://1prime.ru/20261102/totalenergies-874851153.html"
-     }
-    ],
-    "target": [
-     {
-      "value": "ную долю в газовых месторождениях в Малайзии",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://1prime.ru/20261102/totalenergies-874851153.html"
-     }
-    ]
-   },
-   "buyer": "g30486604",
-   "pending_since": "2026-11-02T08:53:28+00:00"
   }
  ]
 }
