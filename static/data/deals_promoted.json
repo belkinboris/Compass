@@ -269792,7 +269792,8 @@
   "g831d0fc8": null,
   "g39fc7468": null,
   "gb42bc45e": null,
-  "gc6fa5d80": null
+  "gc6fa5d80": null,
+  "gab80558c": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -270328,7 +270329,8 @@
   "gbc517ec2": 46,
   "gadee3ca7": 47,
   "g831d0fc8": 48,
-  "gc6fa5d80": 49
+  "gc6fa5d80": 49,
+  "gab80558c": 50
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -275059,7 +275061,21 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "gab80558c": {
+   "seller": "Москва",
+   "asset": "нежилое помещение площадью 923,1 кв. м возле станции метро «Проспект Мира»",
+   "status": "Обсуждается",
+   "title": "Москва продает на торгах помещение у метро «Проспект Мира»",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-10-30T16:32:15+00:00"
+ "telegram_last_post_at": "2026-11-02T10:00:22+00:00"
 }
