@@ -185,6 +185,34 @@ def is_stale(card, comps=None):
     return not hash_matches(card.get(ACCEPTED + '_hash'), fingerprint(card, comps))
 
 
+# ---------------------------------------------------------------------------
+# Правка опубликованной карточки возвращает ее на проверку (2 ноября 2026)
+#
+# До этого дня отпечаток у показанной карточки был только информационным:
+# правка качества штамп не снимала, и правки опубликованных карточек не
+# проходили ни приемку, ни второе чтение. Так прошел октябрьский пересказ
+# (76% базы) и ВТБ/«Деметра», где прогноз стал фактом. Решение владельца
+# 2 ноября 2026: «Проверки должны быть всеобъемлющие, как когда карта
+# создается». Карточка с сайта не снимается — она встает первой в очередь
+# вычитки (pipeline/reread_queue.py, routines/reread.md), и вычитка ставит
+# `reread_hash`. Совпадение с ЛЮБЫМ из сохраненных отпечатков значит: текст
+# ровно тот, который кто-то проверил (или взят за точку отсчета
+# `gate_baseline_hash` при включении правила).
+
+CHECKED_HASHES = ('reread_hash', 'second_read_hash', 'accepted_hash', 'gate_baseline_hash')
+
+
+def changed_after_check(card, comps=None):
+    """Текст карточки не совпадает ни с одним проверенным. Без единого
+    сохраненного отпечатка — False (точку отсчета ставит
+    pipeline/gate_baseline_2026_11_02.py для всей базы)."""
+    stored = [card.get(k) for k in CHECKED_HASHES if card.get(k)]
+    if not stored:
+        return False
+    cur = fingerprint(card, comps)
+    return not any(hash_matches(h, cur) for h in stored)
+
+
 def hours_pending(card, now=None):
     """Сколько часов карточка ждет решения. Без `pending_since` отсчет идет от
     приемки или чтения (раньше без отметки часы стояли на нуле навсегда —
@@ -227,6 +255,13 @@ def _self_check():
     assert state(renamed, {'b1': {'name': 'ООО «Лютик»'}}) == 'stale' and state(renamed) == 'ready_unsent'
     reaccepted = dict(edited, accepted_hash=fingerprint(edited, comps))
     assert state(reaccepted, comps) == 'unread2', 'после переприемки — снова второе чтение'
+    shown = dict(card, draft_sent=True)
+    assert not changed_after_check(shown, comps)
+    assert changed_after_check(dict(edited, draft_sent=True), comps), 'правка показанной — на проверку'
+    assert not changed_after_check(dict(typo, draft_sent=True), comps)
+    reread = dict(edited, reread_hash=fingerprint(edited, comps))
+    assert not changed_after_check(reread, comps), 'вычитка снимает с очереди'
+    assert not changed_after_check({'eco': {'context': 'x'}}), 'без отпечатков — не очередь'
 
 
 _self_check()

@@ -9785,3 +9785,30 @@ def test_digest_goes_out_with_the_owner_text_from_the_console(monkeypatch):
     late = datetime.datetime(2030, 5, 3, 9, 0, tzinfo=datetime.timezone.utc)
     assert send_telegram.plan_digest(data, [], late)[:2] == ("send", "2030-04")            # сутки молчания
     assert "заменит пост" in send_telegram.digest_draft_message("т", "2030-04", monthly_digest.render_buttons(2030, 4))
+
+
+def test_edit_of_a_published_card_goes_back_to_checks():
+    """Правка опубликованной карточки — снова на проверку (владелец, 2 ноября 2026).
+
+    Октябрьский пересказ переписал 76% базы мимо приемки и второго чтения:
+    у опубликованной карточки отпечаток ни на что не влиял. Теперь
+    правка ставит ее первой в очередь вычитки, а массовая правка без пробы
+    на десяти отказывает."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import readiness
+    import mass_edit_guard
+    import reread_queue
+    readiness._self_check()
+    mass_edit_guard._self_check()
+    reread_queue._self_check()
+    comps = {}
+    card = {"id": "g1", "title": "Покупатель купил актив", "draft_sent": True}
+    card["gate_baseline_hash"] = readiness.fingerprint(card, comps)
+    assert not readiness.changed_after_check(card, comps)
+    card["eco"] = {"rationale": "Выдуманная цель сделки."}
+    assert readiness.changed_after_check(card, comps)
+    data = {"companies": {}, "deals": [card]}
+    assert [c["id"] for c, w in reread_queue.queue(data) if w == "изменена после проверки"] == ["g1"]
+    approvals = json.loads((ROOT / "pipeline" / "mass_edit_approvals.json").read_text(encoding="utf-8"))
+    assert all(a.get("key") and a.get("pilot") and a.get("owner") for a in approvals), \
+        "запись пробы без ключа, карточек пробы или ответа владельца"
