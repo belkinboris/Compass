@@ -2,6 +2,66 @@
  "made": "2026-11-02",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d61943902",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261101/glavpochtamt-2128502165.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -27,6 +87,103 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82201838",
+   "title": "Химический холдинг «Концентрация» [ранее AppScience] привлек 1,2 млрд рублей от российских инвестфондов, чьи названия не раскрываются. Сделка структурирована по модели cash-in: все привлеченные средст",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7820"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d62935089",
+   "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/business/2026/11/02/76738898/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40074960",
+   "title": "«Коломенский» приобрёл московский хлебокомбинат «Пеко»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/kolomenskij-priobrjol-moskovskij-hlebokombinat-peko/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-02",
+     "title": "Сделка завершена",
+     "note": "В состав приобретённых активов вошёл производственный комплекс мощностью до 200 тонн продукции в сутки. Сообщение «Коломенский» приобрёл московский хлебокомбинат «Пеко» появились сначала на RETAILER.ru .",
+     "source": [
+      "web:retailer.ru",
+      "https://retailer.ru/kolomenskij-priobrjol-moskovskij-hlebokombinat-peko/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gmru-kolomenskoe-peko (по всей базе: та же сторона и редкое слово: хлебок) — проверьте, не дубль ли"
    ]
   }
  ]
