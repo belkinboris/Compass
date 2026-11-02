@@ -2,30 +2,19 @@
  "made": "2026-11-02",
  "drafts": [
   {
-   "draft_id": "d58202350",
-   "title": "«Почта России» выставила на продажу историческое здание почтамта в центре Москвы",
-   "date": "2026-11-02",
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/11/02/1241886-pochta-rossii-vistavila"
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
     ]
    ],
    "sum": null,
    "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-02",
-     "title": "Переговоры",
-     "note": "«Почта России» продаст единым лотом комплекс зданий Московского императорского почтамта, расположенный между Мясницкой улицей и Чистопрудным бульваром в центре столицы. Как сообщил «Ведомостям» представитель Российского аукционного дома (РАД), отвечающего за…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/realty/articles/2026/11/02/1241886-pochta-rossii-vistavila"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -38,73 +27,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g0baffbb4 (общее название в кавычках) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d97827336",
-   "title": "В Перми продают действующую сеть магазинов кулинарии",
-   "date": "2026-11-02",
+   "draft_id": "d61943902",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053140775"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d01073841",
-   "title": "В Тюменской области ввели выплату детям-сиротам на покупку жилья",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28277465"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23883302",
-   "title": "Мосбиржа проводит дискретный аукцион по акциям ВК",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28277427"
+     "web:ria.ru",
+     "https://ria.ru/20261101/glavpochtamt-2128502165.html"
     ]
    ],
    "sum": null,
@@ -121,8 +54,11 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -154,58 +90,17 @@
    ]
   },
   {
-   "draft_id": "d48075333",
-   "title": "Совладельцы Rostic’s и крупнейший франчайзи сети выкупили калужского партнера и могут приобрести еще трех 🟢 Статус сделки: приобретение ООО «ТК» закрыто 29 октября 2026 года. 🟡 Потенциальная консолида",
+   "draft_id": "d48796912",
+   "title": "Мосбиржа проводит дискретный аукцион по акциям VK",
    "date": "2026-11-02",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7530"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/02/1241926-mosbirzha-provodit"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-02",
-     "title": "Сделка завершена",
-     "note": "Совладельцы Rostic’s и крупнейший франчайзи сети выкупили калужского партнера и могут приобрести еще трех 🟢 Статус сделки: приобретение ООО «ТК» закрыто 29 октября 2026 года. 🟡 Потенциальная консолидация: приобретение еще 3-х франчайзи пока не подтверждено.…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7530"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "калужский партнёр и могут приобрести еще трех 🟢 Статус сделки: приобретение ООО «ТК» закрыто 29 ок",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "калужский партнёр и могут приобрести еще трех 🟢 Статус сделки: приобретение ООО «ТК» закрыто 29 ок",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gb42bc45e (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83184208",
-   "title": "Быстрее теряет влагу и высыхает. Пекарь рассказала, какой хлеб никогда не покупает в супермаркетах",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/health/2026/11/02/76736231/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -216,20 +111,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d73463904",
-   "title": "Быстрее теряет влагу и высыхает. Пекарь рассказала, какой хлеб никогда не покупает в супермаркетах",
+   "draft_id": "d84061880",
+   "title": "«Почта России» хочет продать почтамт на Мясницкой",
    "date": "2026-11-02",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/health/2026/11/02/76736238/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/moscow/1126496"
     ]
    ],
    "sum": null,
@@ -244,7 +139,180 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Ритейл",
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли",
+    "та же новость, что ««Почта России» выставила на торги здание Главпочтамта в Моск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d17051275",
+   "title": "Мосбиржа проводит дискретный аукцион для акций «ВК» из-за роста цены",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1126492"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d98227065",
+   "title": "Титов: странам ШОС нужна консолидированная позиция по ЦУР",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28277697"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36603963",
+   "title": "Прозорова проиграла в первом раунде турнира в Гонконге",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261102/prozorova-2128564226.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d96003688",
+   "title": "Москва выставила на аукцион помещение возле станции метро «Проспект Мира»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261102/auktsion-2128477469.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1833e545 (общие редкие слова: выстав, москва, помеще) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d82201838",
+   "title": "Химический холдинг «Концентрация» [ранее AppScience] привлек 1,2 млрд рублей от российских инвестфондов, чьи названия не раскрываются. Сделка структурирована по модели cash-in: все привлеченные средст",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7820"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d62935089",
+   "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/business/2026/11/02/76738898/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
