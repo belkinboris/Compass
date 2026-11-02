@@ -85,6 +85,63 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d16433650",
+   "title": "В РФ усовершенствуют механизмы привлечения инвестиций в строительство генерации",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28278751"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61218266",
+   "title": "Исторический Главпочтамт в центре Москвы выставили на продажу",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/istoricheskij-glavpochtamt-v-tsentre-moskvy-vystavili-na-prodazhu/"
+    ]
+   ],
+   "sum": "7,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общие редкие слова: выстав, главпо) — проверьте, не дубль ли"
+   ]
   }
  ]
 }
