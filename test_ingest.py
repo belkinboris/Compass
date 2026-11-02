@@ -2747,7 +2747,7 @@ def test_console_drafts_of_posts_are_sent_with_markup(monkeypatch):
     разметку не принял, черновик уходит тем же текстом без нее."""
     import send_drafts
     import send_milestone_drafts
-    deal = {"id": "g1", "type": "M&A"}
+    deal = {"id": "g1", "type": "M&A", "ind": "ИТ и интернет"}
     event = {"kind": "closed", "headline": "A & B закрыли сделку",
              "snapshot": {"buyer": "A", "seller": "B", "asset": "C", "status": "Закрыта"}}
     msg = send_milestone_drafts.milestone_message(deal, event)
