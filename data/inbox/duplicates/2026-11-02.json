@@ -31,6 +31,68 @@
     "needs_review": true
    },
    "queued": "2026-11-02"
+  },
+  {
+   "key": "https://www.comnews.ru/content/248189/2026-11-02/2026-w45/1009/pochta-rossii-prodast-kompleks-glavpochtamta-centre-moskvy::gc6fa5d80",
+   "candidate_id": "gc6fa5d80",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d38020282",
+    "title": "«Почта России» продаст комплекс Главпочтамта в центре Москвы",
+    "date": "2026-11-02",
+    "src": [
+     [
+      "web:comnews.ru",
+      "https://www.comnews.ru/content/248189/2026-11-02/2026-w45/1009/pochta-rossii-prodast-kompleks-glavpochtamta-centre-moskvy"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "комплекс Главпочтамта в центре Москвы",
+    "seller": "«Почта России»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "комплекс Главпочтамта в центре Москвы",
+     "seller": "«Почта России»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-02"
+  },
+  {
+   "key": "https://realty.ria.ru/20261102/pionerlager-2128685456.html::g1f1d470a",
+   "candidate_id": "g1f1d470a",
+   "reason": "общее название в кавычках и общие слова: 2",
+   "draft": {
+    "draft_id": "d76811277",
+    "title": "«Дом.РФ» продает бывший пионерлагерь на западе Подмосковья",
+    "date": "2026-11-02",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261102/pionerlager-2128685456.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "бывший пионерлагерь на западе Подмосковья",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "бывший пионерлагерь на западе Подмосковья",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-02"
   }
  ]
 }
