@@ -248,6 +248,92 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
    ]
+  },
+  {
+   "draft_id": "d10246545",
+   "title": "Путин утвердил новый порядок передачи государству выморочного имущества",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/02/76740976/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d46142610",
+   "title": "Эксперт посоветовал сверять IMEI при покупке смартфона из-за границы",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/ekspert-874879514.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74292869",
+   "title": "Египет провел крупнейшее в истории страны IPO",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/egipet-874879276.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
   }
  ]
 }
