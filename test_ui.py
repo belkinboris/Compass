@@ -317,8 +317,9 @@ def test_advanced_filter_panel_with_new_select_has_no_overflow(browser, base_url
         pg = ctx.new_page()
         pg.crashes = []
         pg.on("pageerror", lambda e: pg.crashes.append(f"pageerror: {e}"))
-        pg.goto(base_url + "/#/deals?ind=Банки", wait_until="networkidle")  # advOpen=true через параметр ленты
-        pg.wait_for_timeout(900)
+        pg.goto(base_url + "/#/deals?ind=Банки", wait_until="networkidle")
+        _open_filters(pg, "#selrev")
+        pg.wait_for_timeout(500)
         assert pg.locator("#selrev").count() == 1, "нет фильтра «Финансы цели» в открытой панели"
         assert not pg.crashes
         assert pg.evaluate(
@@ -3879,6 +3880,17 @@ def test_account_login_forms_do_not_overflow(browser, base_url, width):
         ctx.close()
 
 
+def _open_filters(pg, sel="#selind"):
+    """С 2 ноября 2026 панель фильтров не раскрывается сама даже при фильтре в
+    адресе (владелец: «пусть фильтры показывает, только если человек нажал на
+    кнопку Фильтры»): тест открывает ее тем же нажатием, что и человек."""
+    pg.wait_for_selector("#advtoggle", timeout=15000)
+    pg.wait_for_selector(sel, state="attached", timeout=15000)
+    if not pg.is_visible("#advpanel"):
+        pg.click("#advtoggle")
+    pg.wait_for_selector(sel, timeout=15000)
+
+
 def _feed_total(pg):
     """Сколько карточек в выдаче: видимые строки плюс «осталось N»."""
     rows = pg.eval_on_selector_all("#feedlist a[href^='#/deal/']", "e=>e.length")
@@ -3891,15 +3903,15 @@ def test_filters_accept_several_industries_at_once(page, base_url):
     """Артем: «в фильтрах надо сделать возможность выбора нескольких опций
     (несколько годов, отраслей etc)». Между выбранными значениями — ИЛИ."""
     page.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
-    page.wait_for_selector("#selind", timeout=15000)
+    _open_filters(page)
     agro = _feed_total(page)
 
     page.goto(base_url + "/#/deals?ind=Пищепром и напитки", wait_until="domcontentloaded")
-    page.wait_for_selector("#selind", timeout=15000)
+    _open_filters(page)
     food = _feed_total(page)
 
     page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки", wait_until="domcontentloaded")
-    page.wait_for_selector("#selind", timeout=15000)
+    _open_filters(page)
     both = _feed_total(page)
 
     assert agro > 0 and food > 0, "одна из отраслей пуста — проверка ничего не докажет"
@@ -3912,14 +3924,14 @@ def test_single_value_links_saved_earlier_keep_working(page, base_url):
     """Значения лежат в адресе через запятую, и старая ссылка с одним
     значением обязана открываться ровно как раньше."""
     page.goto(base_url + "/#/deals?ind=Агро&year=2024", wait_until="domcontentloaded")
-    page.wait_for_selector("#selind", timeout=15000)
+    _open_filters(page)
     assert page.inner_text("#selind .ms-txt").strip() == "Агро"
     assert page.inner_text("#selyear .ms-txt").strip() == "2024"
 
 
 def test_choosing_a_second_year_widens_the_feed_and_the_link(page, base_url):
     page.goto(base_url + "/#/deals?year=2024", wait_until="domcontentloaded")
-    page.wait_for_selector("#selyear", timeout=15000)
+    _open_filters(page, "#selyear")
     one = _feed_total(page)
 
     page.click("#selyear .ms-btn")
@@ -3937,7 +3949,7 @@ def test_choosing_a_second_year_widens_the_feed_and_the_link(page, base_url):
 
 def test_filter_reset_clears_every_chosen_value(page, base_url):
     page.goto(base_url + "/#/deals?ind=Агро,Пищепром и напитки&year=2024", wait_until="domcontentloaded")
-    page.wait_for_selector("#selind", timeout=15000)
+    _open_filters(page)
     page.click("#selind .ms-btn")
     page.click("#selind .ms-clear")
     page.wait_for_timeout(500)
@@ -3951,7 +3963,7 @@ def test_open_filter_list_does_not_overflow(browser, base_url, width):
     try:
         pg = ctx.new_page()
         pg.goto(base_url + "/#/deals?ind=Агро", wait_until="domcontentloaded")
-        pg.wait_for_selector("#selind", timeout=15000)
+        _open_filters(pg)
         pg.click("#selind .ms-btn")
         pg.wait_for_timeout(400)
         over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
@@ -4240,6 +4252,7 @@ def test_the_deal_feed_can_be_narrowed_to_calendar_days(page, base_url):
         assert str(year_only) in note, (note, year_only)
 
     # Быстрая кнопка ставит обе даты и снимает галочки по годам.
+    _open_filters(page, ".dr-q[data-q='90']")
     page.click(".dr-q[data-q='90']")
     page.wait_for_timeout(800)
     assert page.input_value("#dfrom") and page.input_value("#dto")
@@ -4552,6 +4565,54 @@ def test_account_notifications_tab_has_no_dead_rows_and_fits_a_phone(browser, ba
             assert not errors, errors[:3]
         finally:
             ctx.close()
+
+
+def test_notifications_collapse_into_short_rows(page, base_url):
+    """Владелец и партнер, 2 ноября 2026: «вот такой мэсс в личном кабинете».
+    Новые сделки одной подписки за день — одна строка со списком названий,
+    недельная сводка свернута, видны первые 12 строк."""
+    page.goto(base_url + "/#/", wait_until="domcontentloaded")
+    page.wait_for_function("typeof notifListHtml === 'function'")
+    out = page.evaluate("""(() => {
+      const now = new Date().toISOString();
+      const sub = i => ({title: NOTIF_SUB_PREFIX + "Сделка " + i, body: "Совпало: отрасль «Недвижимость», сумма от 10 млн ₽.",
+                         link: "#/deal/g" + i, is_read: false, created_at: now});
+      const rows = [...Array(7)].map((_, i) => sub(i));
+      rows.push({title: "Сводка «Компаса» за неделю", body: "За неделю в «Компасе» 14 новых сделок:\\n• А — закрыта",
+                 is_read: true, created_at: now});
+      for(let i = 0; i < 15; i++) rows.push({title: "Сделка обновлена " + i, body: "", is_read: true, created_at: now});
+      const box = document.createElement("div"); box.innerHTML = notifListHtml(rows);
+      return {items: box.querySelectorAll(".notif-item").length,
+              hidden: box.querySelectorAll(".notif-item.notif-hidden").length,
+              group: box.querySelector(".notif-item .notif-top b").textContent,
+              groupLinks: box.querySelectorAll(".notif-deals li").length,
+              groupHidden: box.querySelectorAll(".notif-deals li.notif-hidden").length,
+              digestOpen: box.querySelector("details.notif-digest").open,
+              digestHead: box.querySelector("details.notif-digest summary b").textContent,
+              more: (box.querySelector("#notifMore") || {}).textContent};
+    })()""")
+    assert out["items"] == 17, out           # 7 по подписке — одна строка, сводка, 15 прочих
+    assert out["group"] == "Недвижимость, от 10 млн ₽: 7 новых сделок", out
+    assert out["groupLinks"] == 7 and out["groupHidden"] == 2, out
+    assert out["digestOpen"] is False and out["digestHead"] == "Сводка за неделю · 14 новых сделок", out
+    assert out["hidden"] == 5 and out["more"] == "Показать еще 5", out
+
+
+def test_filter_in_the_link_shows_a_line_not_the_open_panel(page, base_url):
+    """Партнер, 2 ноября 2026: по ссылке из канала («Сделки в Компасе» ведет
+    на подборку года) открывалась вся панель фильтров, «никто не долистает до
+    сделок». Панель закрыта, условие видно строкой над лентой со сбросом."""
+    page.goto(base_url + "/#/deals?year=2025", wait_until="domcontentloaded")
+    page.wait_for_selector(".feed-active", timeout=15000)
+    assert not page.is_visible("#advpanel")
+    line = page.inner_text(".feed-active")
+    assert "год 2025" in line and "Сбросить" in line, line
+    one = _feed_total(page)
+    page.click(".feed-active #feedreset")
+    page.wait_for_timeout(500)
+    assert page.locator(".feed-active").count() == 0
+    assert _feed_total(page) > one
+    assert "year=" not in page.evaluate("location.hash")
 
 
 def test_subscription_form_answers_in_every_outcome(browser, base_url):

@@ -343,16 +343,23 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   /* Не выше видимой части окна: во встроенном браузере телеграма снизу своя
      панель, и точки слайдера уходили под нее (12 октября 2026). Если окно
      ниже, сцена теряет немного неба сверху (svg прижат к низу), точки на виду. */
-  .heroslider{--hs-h:min(calc(366px + 100vw), max(548px, 100svh));height:var(--hs-h);min-height:0}
-  @supports (height:100dvh){.heroslider{--hs-h:min(calc(366px + 100vw), max(548px, 100dvh))}}
+  /* Ровно в высоту окна (2 ноября 2026): при потолке «366px + ширина» на
+     высоком телефоне снизу выглядывала строка поиска ленты — наполовину под
+     нижней панелью разделов, обрезанная. */
+  .heroslider{--hs-h:max(548px, 100svh);height:var(--hs-h);min-height:0}
+  @supports (height:100dvh){.heroslider{--hs-h:max(548px, 100dvh)}}
   .hs-in{height:auto;overflow:visible;padding-top:92px}
   .hs-in > p{margin-bottom:0}
   .hs-in h1.hs-word{font-size:40px}
   .hs-in p{font-size:14.5px;margin-top:14px;height:calc(1.6em * 5)}
   .hs-gap{height:96px}
   .hs-bar{margin-top:18px;width:auto}
-  .hs-slide svg.hx-scene{inset:auto;top:auto;bottom:40px;left:calc(50vw - var(--fx) / 1440 * var(--k) * 100vw);
-    width:calc(var(--k) * 100vw);height:min(calc(var(--k) * 100vw * 780 / 1440), calc(var(--hs-h) - 368px));
+  /* Сцена стоит там же, где стояла при прежней высоте героя («366px +
+     ширина»): лишняя высота окна уходит в темную полосу под ней, за нижней
+     панелью разделов, а яхта не прячется под панель. */
+  .heroslider{--hs-sc:min(calc(366px + 100vw), var(--hs-h))}
+  .hs-slide svg.hx-scene{inset:auto;top:auto;bottom:calc(40px + var(--hs-h) - var(--hs-sc));left:calc(50vw - var(--fx) / 1440 * var(--k) * 100vw);
+    width:calc(var(--k) * 100vw);height:min(calc(var(--k) * 100vw * 780 / 1440), calc(var(--hs-sc) - 368px));
     -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 84%,transparent 100%)}
   .hx-tick{font-size:30px}
   .hx-shore{transform:translateX(215px)}
@@ -1060,6 +1067,8 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .theme-note{margin:0 0 16px;padding:11px 14px;border:1px solid var(--line);border-left:3px solid var(--bronze);
   border-radius:6px;background:var(--card);font-size:13px;color:var(--muted);line-height:1.5}
 .theme-note a{color:var(--accent);margin-left:4px}
+.feed-active{margin:0 0 14px;font-size:13px;color:var(--muted);line-height:1.5}
+.feed-active .linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer}
 .spinner{width:26px;height:26px;border:2.5px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
 .loading{padding:64px 26px;text-align:center}
 .loading .l-head{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:10px}
@@ -2371,6 +2380,21 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .notif-item{display:block;background:var(--card);border:1px solid var(--line);padding:17px 19px}
 .notif-item.unread{border-left:3px solid var(--accent)}
 .notif-item h3{font-size:14px;margin-bottom:4px}.notif-item p{font-size:13px;color:var(--muted)}
+.notif-item{padding:12px 16px}
+.notif-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;line-height:1.4}
+.notif-top b{font-weight:600;min-width:0}
+.notif-top time{flex:none;margin:0 !important;font-size:12px;color:var(--muted);white-space:nowrap}
+.notif-item p{margin-top:6px;line-height:1.5}
+.notif-deals{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px;font-size:13px;line-height:1.4}
+.notif-deals a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.notif-deals a:hover{color:var(--accent)}
+.notif-sub-more{margin-top:8px;font-size:13px}
+.notif-digest summary{cursor:pointer;list-style:none}
+.notif-digest summary::-webkit-details-marker{display:none}
+.notif-digest summary b::after{content:" ▾";color:var(--muted);font-weight:400}
+.notif-digest[open] summary b::after{content:" ▴"}
+.notif-hidden{display:none !important}
+#notifMore{justify-self:start;margin-top:4px}
 .notif-link{color:var(--accent);cursor:pointer;text-decoration:underline}
 .notif-item time{font-size:11px;color:var(--muted);display:block;margin-top:8px}
 .pref-grid{display:grid;gap:10px;margin-top:14px}
@@ -3884,7 +3908,9 @@ function applyFeedParams(qs){
   feedPage = 1;
   // Панель открывается сама, если фильтр не виден в свернутом виде: иначе
   // пришедший по ссылке видит отфильтрованную ленту и не понимает почему.
-  advOpen = FEED_PARAMS.some(([key])=>key!=="q" && p.get(key));
+  // Панель сама не раскрывается (владелец, 2 ноября 2026): условия из адреса
+  // видны строкой «Отобрано: …» над лентой (feedListHtml).
+  advOpen = false;
 }
 /* СВОЙ СЧЕТЧИК ПОСЕЩЕНИЙ (14 октября 2026, Метрика перестала отвечать).
    На каждый открытый экран — одна отметка в /api/t: адрес экрана внутри
@@ -3994,7 +4020,7 @@ function route(){
   // Имя темы кодируется: в нем бывает «/» («IPO / SPO»), который иначе разрезал бы хэш.
   else if(page==="theme"){
     filterTheme = arg?decodeURIComponent(arg):"Все";
-    filterInd="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; feedPage=1; advOpen=true;
+    filterInd="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; feedPage=1; advOpen=false;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -4004,7 +4030,7 @@ function route(){
   // («ГМК и добыча» безопасна, а «Нефть/газ» разрезала бы хэш).
   else if(page==="ind"){
     filterInd = arg?decodeURIComponent(arg):"Все";
-    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=true;
+    filterTheme="Все"; feedYear="Все"; filterFirm="Все"; filterAdvisorGroup="Все"; filterMinRevenue="Все"; feedQuery=""; onlyFull=false; feedPage=1; advOpen=false;
     renderDeals(); mark("deals");
     const fl=document.getElementById("feed"); if(fl) setTimeout(()=>fl.scrollIntoView({behavior:"smooth"}),60);
   }
@@ -4090,7 +4116,10 @@ function updTop(){
   const top = document.querySelector(".top"); if(!top) return;
   const h = location.hash.replace("#","");
   // За закрытым гейтом главной с темным героем нет — шапке нужен светлый режим.
-  const onHome = (h==="" || h==="/") && !gated();
+  /* Темный герой есть и у «Сделок» (#/deals — тот же экран, куда ведут
+     кнопки канала): без входа там была светлая шапка над темным героем
+     (партнер, 2 ноября 2026: «вот так выглядит верхняя часть странички»). */
+  const onHome = (h==="" || h==="/" || !!document.querySelector(".heroslider")) && !gated();
   /* Раньше строка пряталась КАЖДЫЙ раз, когда пользователь возвращался к
      началу главной, — вкладки то появлялись, то исчезали. Прячем только до
      первого показа: сначала видно чистый экран с героем, а как только он
@@ -5594,7 +5623,19 @@ function feedListHtml(){
       && (!lo || d.date>=lo) && (!hi || d.date<=hi)).length;
     return n ? `<p class="feed-period-note reveal">Еще ${n} ${plural(n,"сделка","сделки","сделок")} ${plural(n,"относится","относятся","относятся")} к этим годам, но в источниках назван только год без числа — в выборку по календарю ${plural(n,"она не попала","они не попали","они не попали")}.</p>` : "";
   })() : "";
+  /* ЧТО ОТОБРАНО — ОДНОЙ СТРОКОЙ (владелец и партнер, 2 ноября 2026: «пусть
+     эти фильтры показывает, только если человек нажал на кнопку Фильтры, а то
+     никто не долистает до сделок»). Раньше панель фильтров раскрывалась сама,
+     если в адресе был фильтр (кнопка канала ведет на подборку 2026 года), и
+     на телефоне закрывала ленту на два экрана. Теперь панель закрыта, а
+     условия видны строкой над лентой со сбросом. Поиск и «без недвижимости»
+     видны на своих кнопках, тема — в своей строке. */
+  const shownFilters = allRows.length ? feedActiveFilters().filter(a=>!["q","norealty","theme"].includes(a.k)) : [];
+  const filterLine = shownFilters.length
+    ? `<div class="feed-active reveal">Отобрано: ${shownFilters.map(a=>a.t).join(" · ")} · ${allRows.length} ${plural(allRows.length,"сделка","сделки","сделок")}. <button type="button" class="linkbtn" id="feedreset">Сбросить</button></div>`
+    : "";
   return `
+  ${filterLine}
   ${periodNote}
   ${filterTheme!=="Все"?`<div class="reveal theme-note">Тема: <b>${filterTheme}</b> · ${allRows.length} ${plural(allRows.length,"карточка","карточки","карточек")}. Тема определяется по содержанию карточки; в этой подборке показываются сделки с подробным разбором. <a href="#" id="clrtheme">Сбросить</a></div>`:""}
   ${shown.join("")}
@@ -5605,7 +5646,7 @@ function feedListHtml(){
    сделок в базе пока нет», даже когда отрасль не выбиралась вовсе, а пусто было
    из-за текстового запроса. Теперь называем настоящую причину и даем сбросить
    именно ее — иначе пользователь не понимает, что именно отсекло выдачу. */
-function emptyFeedHtml(){
+function feedActiveFilters(){
   const active = [];
   if(feedQuery.trim()) active.push({k:"q", t:`запрос «${esc(feedQuery.trim())}»`});
   /* Значений в фильтре может быть несколько — перечисляем их все: человеку,
@@ -5637,6 +5678,10 @@ function emptyFeedHtml(){
     const label = REVENUE_BUCKETS.find(([v])=>v===filterMinRevenue);
     active.push({k:"rev", t:`выручка покупаемой компании: ${label?label[1]:filterMinRevenue}`});
   }
+  return active;
+}
+function emptyFeedHtml(){
+  const active = feedActiveFilters();
   const head = active.length
     ? `Под эти условия ничего не нашлось: ${active.map(a=>a.t).join(" · ")}.`
     : "В базе пока нет ни одной записи.";
@@ -11665,6 +11710,66 @@ function renderClaimsTab(body){
   };
   draw(true);
 }
+/* СПИСОК УВЕДОМЛЕНИЙ В КАБИНЕТЕ (владелец и партнер, 2 ноября 2026: «вот
+   такой мэсс в личном кабинете, надо оптимизировать»). Было: каждое
+   уведомление — крупная карточка с заголовком в три строки, строкой
+   «Совпало: …» и временем до секунды; недельная сводка разворачивалась
+   целиком, на два экрана. Теперь:
+   - новые сделки по одной подписке за один день — одна строка «По подписке
+     «…»: N сделок» со списком названий-ссылок (первые пять, остальное по
+     нажатию);
+   - недельная сводка свернута до строки «Сводка за неделю · дата · N новых
+     сделок», текст раскрывается по нажатию;
+   - прочее — одна строка: что случилось и дата без секунд;
+   - видны первые 12 строк, остальное — кнопкой «Показать еще». */
+const NOTIF_SUB_PREFIX = "Новая сделка по вашей подписке: ";
+function notifLinkHtml(text){
+  return esc(text).replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g,(m,t,u)=>`<span class="notif-link" data-href="${u}">${t}</span>`).replace(/\n/g,"<br>");
+}
+/* «отрасль «Недвижимость», сумма от 10 млн ₽» → «Недвижимость, от 10 млн ₽». */
+function notifWhy(why){
+  return String(why).replace(/отрасль «([^»]+)»/g,"$1").replace(/сумма от/g,"от").replace(/^./,c=>c.toUpperCase());
+}
+function notifDay(iso){
+  const d=new Date(iso); if(isNaN(d)) return "";
+  const today=new Date(); const same=(a,b)=>a.toDateString()===b.toDateString();
+  const y=new Date(today); y.setDate(today.getDate()-1);
+  if(same(d,today)) return "сегодня";
+  if(same(d,y)) return "вчера";
+  return d.toLocaleDateString("ru-RU",{day:"numeric",month:"long",...(d.getFullYear()!==today.getFullYear()?{year:"numeric"}:{})});
+}
+function notifHref(n){
+  const l=n.link||"#/account?tab=notifications";
+  return l.startsWith(location.origin)?(l.slice(location.origin.length).replace(/^\/(?=#)/,"")||"#/"):l;
+}
+function notifListHtml(rows){
+  const items=[]; const subGroups={};
+  rows.forEach(n=>{
+    const day=notifDay(n.created_at);
+    if(String(n.title||"").startsWith(NOTIF_SUB_PREFIX)){
+      const why=String(n.body||"").replace(/^Совпало:\s*/,"").replace(/\.\s*$/,"");
+      const key=day+"|"+why;
+      if(!subGroups[key]){subGroups[key]={kind:"sub",day,why,list:[],unread:false};items.push(subGroups[key]);}
+      subGroups[key].list.push(n); if(!n.is_read) subGroups[key].unread=true;
+    }else items.push({kind:/за неделю/.test(n.title||"")?"digest":"one",n,day,unread:!n.is_read});
+  });
+  const html=items.map((it,i)=>{
+    const cls=`notif-item${it.unread?" unread":""}${i>=12?" notif-hidden":""}`;
+    if(it.kind==="sub"){
+      const titles=it.list.map((n,j)=>`<li${j>=5?' class="notif-hidden"':""}><a href="${notifHref(n)}">${esc(n.title.slice(NOTIF_SUB_PREFIX.length))}</a></li>`).join("");
+      const more=it.list.length>5?`<button type="button" class="link-btn notif-sub-more">Еще ${it.list.length-5}</button>`:"";
+      return `<div class="${cls}"><div class="notif-top"><b>${it.why?`${esc(notifWhy(it.why))}: `:""}${it.list.length} ${plural(it.list.length,"новая сделка","новые сделки","новых сделок")}</b><time>${it.day}</time></div><ul class="notif-deals">${titles}</ul>${more}</div>`;
+    }
+    const n=it.n;
+    if(it.kind==="digest"){
+      const m=String(n.body||"").match(/(\d+)\s+нов[а-я]*\s+сдел[а-я]*/);
+      return `<details class="${cls} notif-digest"><summary class="notif-top"><b>Сводка за неделю${m?` · ${esc(m[0])}`:""}</b><time>${it.day}</time></summary><p>${notifLinkHtml(String(n.body||"").replace(/^[^\n]*\n/,""))}</p></details>`;
+    }
+    return `<a class="${cls}" href="${notifHref(n)}"><div class="notif-top"><b>${esc(n.title)}</b><time>${it.day}</time></div>${n.body?`<p>${notifLinkHtml(n.body)}</p>`:""}</a>`;
+  }).join("");
+  const rest=items.length-12;
+  return html+(rest>0?`<button type="button" class="chip" id="notifMore">Показать еще ${rest}</button>`:"");
+}
 async function renderAccount(qs){
   await refreshMe();
   const params = new URLSearchParams(qs||"");
@@ -11791,8 +11896,10 @@ async function renderAccount(qs){
     };
     const loadNotifications=async()=>{const r=await fetch("/api/notifications"),rows=r.ok?await r.json():[];const mount=document.getElementById("notifList");if(!mount)return;
       const pr=await fetch("/api/notification-preferences"),pp=pr.ok?await pr.json():{};
-      mount.innerHTML=rows.length?rows.map(n=>`<a class="notif-item ${n.is_read?"":"unread"}" href="${n.link||"#/account?tab=notifications"}"><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body).replace(/\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g,(m,t,u)=>`<span class="notif-link" data-href="${u}">${t}</span>`).replace(/\n/g,"<br>")}</p>`:""}<time>${new Date(n.created_at).toLocaleString("ru-RU")}</time></a>`).join("")
+      mount.innerHTML=rows.length?notifListHtml(rows)
         :`<div class="fns-empty">${pp.in_app_enabled===false?"Уведомления на сайте выключены.":"Уведомлений пока нет. Подпишитесь на компанию, отрасль или сделку — сообщим о новом."}</div>`;
+      mount.querySelectorAll(".notif-sub-more").forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll("li.notif-hidden").forEach(x=>x.classList.remove("notif-hidden"));b.remove();});
+      const nm=document.getElementById("notifMore"); if(nm) nm.onclick=()=>{mount.querySelectorAll(".notif-hidden").forEach(x=>x.classList.remove("notif-hidden"));nm.remove();};
       mount.querySelectorAll(".notif-link").forEach(el=>el.onclick=e=>{e.preventDefault();e.stopPropagation();const u=el.dataset.href;location.href=u.startsWith(location.origin)?u.slice(location.origin.length)||"/":u;});
       const ra=document.getElementById("readAll"); if(ra) ra.hidden=!rows.some(n=>!n.is_read);};
     document.getElementById("readAll").onclick=async()=>{await fetch("/api/notifications/read",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({all:true})});loadNotifications();};
