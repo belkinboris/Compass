@@ -829,11 +829,12 @@ def digest_decisions(decisions):
 
 def digest_owner_text(data, decisions, key):
     """Текст сводки, который прислал сам человек, или ''. Ответ своим текстом
-    на черновик «[сводка <месяц>]» — решение `post_yes` с `edited_text`
-    (app/console.py); он же может лежать в `telegram_digests[<месяц>].owner_text`,
-    если решение занесли вручную. 2 ноября 2026 владелец переписал сводку за
-    октябрь ответом на черновик, а обработчика на такие ответы не было — текст
-    потерялся, хотя черновик обещал «ответ своим текстом заменит пост»."""
+    на черновик «[сводка <месяц>]» в консоли — решение `post_yes` с
+    `edited_text` (app/console.py): ответ в консоли — всегда публикация
+    (владелец, 2 ноября 2026). Тот же текст может лежать в
+    `telegram_digests[<месяц>].owner_text`, если решение занесли вручную.
+    Текст, присланный в чат сессии, решением НЕ является — 2 ноября 2026 его
+    по ошибке поставили на выпуск и сняли за четыре минуты до прогона."""
     decision = digest_decisions(decisions).get(key)
     if decision and decision[0] == 'post_yes' and decision[2]:
         return str(decision[2]).strip()
@@ -867,8 +868,8 @@ def plan_digest(data, decisions, now, today=None):
         return None, key, 'основатели решили не публиковать', [decision[1]]
     if decision and decision[0] == 'post_yes':
         return 'send', key, 'одобрено в консоли', [decision[1]]
-    if state.get('owner_text') and not state.get('message_id'):
-        return 'send', key, 'текст владельца из консоли', []
+    # `owner_text` в состоянии — ТЕКСТ, которым выйдет сводка, а не решение о
+    # выпуске: выпуск — кнопка, ответ в консоли или сутки молчания.
     if not state.get('drafted_at'):
         return 'draft', key, 'черновик еще не отправлен в консоль', []
     age = digest_age_hours(state, now)
@@ -926,7 +927,7 @@ def digest_draft_message(text, key, buttons):
     """Уходит с разметкой (`send_one(..., html=True)`), как и сам пост."""
     return ('📊 [сводка %s] — В ОСНОВНОЙ КАНАЛ, на проверку\n'
             'Итоги месяца одним постом. Молчание сутки — выходит как есть; '
-            'ответ своим текстом заменит пост.\n'
+            'ответ своим текстом заменит пост и выпустит его.\n'
             '━━━━━━━━━━━━\n%s\n\n%s'
             % (format_post.esc(key), text, format_post.esc(format_post.buttons_preview(buttons))))
 
@@ -1174,7 +1175,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         y, mth = int(digest_key_[:4]), int(digest_key_[5:7])
         owner_text = digest_owner_text(data, m_decisions, digest_key_) if digest_action == 'send' else ''
         # Текст человека не пересобирается и не проверяется на наш стиль: он его
-        # написал сам и одобрил тем, что прислал.
+        # написал сам и одобрил тем, что прислал в консоль.
         digest_text = owner_text or monthly_digest.render(data, y, mth)
         problems = [] if owner_text else (check_post.check_digest(digest_text) if digest_text else ["сводка не собралась"])
         if problems:

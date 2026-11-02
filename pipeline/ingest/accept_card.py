@@ -1067,6 +1067,14 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # 27 октября 2026: «Обзор» — «Не раскрыта», «Экономист» — 1,427 млрд ₽).
     elif has(eco_sum) and not has(top_sum) and re.match(r'\s*(?:≈|~|более|около|не менее|свыше|до)?\s*\d', str(eco_sum), re.I):
         out.append(('sum_fields_differ', 'eco.sum %r назван, а sum пуст — «Обзор» покажет «Не раскрыта»' % eco_sum))
+    # ОТРАСЛЬ — РЕШЕНИЕ ЧИТАТЕЛЯ, НЕ СЛОВАРЯ (владелец, 2 ноября 2026, Главпочтамт):
+    # карточка с «Не определена» не принимается. Читатель ставит отрасль в
+    # ответе (`industry: {value, why}`) — без цитаты и без словаря: отрасль
+    # не факт из статьи, а классификация по предмету сделки (docs/card_parties.md).
+    if card.get('ind') in (None, '', 'Не определена'):
+        out.append(('industry_undefined', 'отрасль не определена — назовите ее в ответе '
+                    '(industry: {"value": "<из списка>", "why": "<по предмету сделки>"}); '
+                    'без отрасли пост о недвижимости уйдет в основной канал'))
     if card.get('status') in ('Закрыта', 'Не состоялась'):
         for field in STALE_STATEMENT_FIELDS:
             if field in waived_stale:
@@ -1310,6 +1318,14 @@ def check_answer(ans, card, base):
             bad.append('stale_ok: поле %r не из %s' % (field, STALE_STATEMENT_FIELDS))
         elif not str(reason or '').strip():
             bad.append('stale_ok: у %s нет причины' % field)
+    ind = ans.get('industry')
+    if ind is not None:
+        if not isinstance(ind, dict) or not str(ind.get('value') or '').strip():
+            bad.append('industry: ожидается {"value": "<отрасль из списка>", "why": "<по предмету сделки>"}')
+        elif ind['value'] == 'Не определена' or ind['value'] not in industries(base):
+            bad.append('industry: %r не из списка отраслей (и не «Не определена»)' % ind.get('value'))
+        elif not str(ind.get('why') or '').strip():
+            bad.append('industry: нет why — по какому предмету сделки выбрана отрасль')
     title = ans.get('title')
     if title:
         old_blob = ' '.join(str(card.get(k) or '') for k in ('title', 'asset', 'buyer_name', 'seller', 'extra'))
@@ -1407,6 +1423,12 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         if ans.get(k) and card.get(k) != ans[k]:
             lines.append('%s: %r -> %r' % (k, card.get(k), ans[k]))
             card[k] = ans[k]
+    ind = ans.get('industry')
+    if ind and ind.get('value') and card.get('ind') != ind['value']:
+        lines.append('ind: %r -> %r (%s)' % (card.get('ind'), ind['value'], ind.get('why')))
+        card['ind'] = ind['value']
+        if card.get('industries') and ind['value'] not in card['industries']:
+            card['industries'] = [ind['value']] + [i for i in card['industries'] if i != 'Не определена']
     if ans.get('share'):
         card.setdefault('eco', {})['share'] = ans['share']
         lines.append('eco.share -> %r' % ans['share'])
@@ -1465,7 +1487,7 @@ def _new_profile_id(base, name):
 def _self_check():
     base = {'companies': {'gsb': {'name': 'ПАО «Совкомбанк»', 'ind': 'Банки', 'desc': 'Банк.'}},
             'deals': [], 'telegram_posts': {}}
-    card = {'id': 'gtest', 'title': '«Совко капитал партнерс» нарастил долю в Совкомбанке за счет акционера',
+    card = {'id': 'gtest', 'ind': 'Банки', 'title': '«Совко капитал партнерс» нарастил долю в Совкомбанке за счет акционера',
             'type': 'M&A', 'date': '2026-09-09', 'status': 'Обсуждается', 'buyer_name': '«Совко капитал партнерс»',
             'src': [['Ведомости', 'https://www.vedomosti.ru/x']],
             'eco': {'rationale': 'По оценке компании, объем рынка может достичь 8 млрд рублей.'},
@@ -1514,14 +1536,14 @@ def _self_check():
     # дитя/«Инвитро», Dogma/ПИК) — здесь на минимальных карточках, чтобы
     # проверка не зависела от текущего состояния базы.
     src1 = [['Ведомости', 'https://www.vedomosti.ru/x']]
-    card4 = {'id': 'gtest4', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card4 = {'id': 'gtest4', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
              'seller_id': 'gsb', 'target': 'gsb', 'src': src1}
     assert 'self_sale' in {c for c, _t in findings(card4, base)}, findings(card4, base)
 
     base5 = {'companies': {'gpik2': {'name': '2 участка ГК ПИК в Москве (6 га)',
                                      'ind': 'Недвижимость', 'desc': 'x'}},
              'deals': [], 'telegram_posts': {}}
-    card5 = {'id': 'gtest5', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card5 = {'id': 'gtest5', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
              'target': 'gpik2', 'seller': 'ГК ПИК', 'src': src1}
     assert 'party_in_asset_name:seller' in {c for c, _t in findings(card5, base5)}, findings(card5, base5)
     card5b = dict(card5); card5b['seller'] = 'Не раскрыт'
@@ -1531,45 +1553,52 @@ def _self_check():
     base5c = {'companies': {'gpik3': {'name': '2 участка ГК ПИК в Москве (6 га)',
                                       'ind': 'Недвижимость', 'desc': 'x', 'lot': True}},
               'deals': [], 'telegram_posts': {}}
-    card5c = {'id': 'gtest5c', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card5c = {'id': 'gtest5c', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
               'target': 'gpik3', 'seller': 'ГК ПИК', 'src': src1}
     assert 'party_in_asset_name:seller' not in {c for c, _t in findings(card5c, base5c)}
     base5d = {'companies': {'gknauf': {'name': 'Knauf (российский бизнес)', 'ind': 'Строительство', 'desc': 'x'}},
               'deals': [], 'telegram_posts': {}}
-    card5d = {'id': 'gtest5d', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card5d = {'id': 'gtest5d', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
               'target': 'gknauf', 'seller': 'Knauf', 'src': src1}
     assert 'party_in_asset_name:seller' not in {c for c, _t in findings(card5d, base5d)}
     assert 'party_in_asset_name:seller' not in \
         {c for c, _t in findings(card5, base5, waived_names={'seller': 'дочка названа в честь материнской'})}
 
-    card6 = {'id': 'gtest6', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card6 = {'id': 'gtest6', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
              'sum': '12 млрд ₽', 'eco': {'sum': '15 млрд ₽'}, 'src': src1}
     assert 'sum_fields_differ' in {c for c, _t in findings(card6, base)}, findings(card6, base)
     card6b = dict(card6); card6b['eco'] = {'sum': '12 млрд ₽'}
     assert 'sum_fields_differ' not in {c for c, _t in findings(card6b, base)}
 
-    card7 = {'id': 'gtest7', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+    card7 = {'id': 'gtest7', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта',
              'law': {'struct': 'Сделка возможно, будет проведена через SPV.'}, 'src': src1}
     assert any(c.startswith('stale_statement:') for c, _t in findings(card7, base)), findings(card7, base)
     card7b = dict(card7); card7b['status'] = 'Обсуждается'
     assert not any(c.startswith('stale_statement:') for c, _t in findings(card7b, base))
     # eco.context — документированное место для «кто опроверг»: то же слово
     # там НЕ находка (иначе проверка ловила бы факт ровно там, где ему место).
-    card7c = {'id': 'gtest7c', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+    card7c = {'id': 'gtest7c', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта',
               'eco': {'context': 'Компания публично опровергала переговоры об этом активе.'}, 'src': src1}
     assert not any(c.startswith('stale_statement:') for c, _t in findings(card7c, base))
     # Намерение в настоящем/будущем времени при «Закрыта» и допэмиссия «этапом» продажи.
-    card7d = {'id': 'gtest7d', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта',
+    card7d = {'id': 'gtest7d', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта',
               'eco': {'rationale': 'Продать долю планируют в этом году.'}, 'src': src1}
     assert any(c == 'stale_statement:eco.rationale' for c, _t in findings(card7d, base))
-    card7e = {'id': 'gtest7e', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта', 'src': src1,
+    card7e = {'id': 'gtest7e', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта', 'src': src1,
               'law': {'struct': 'Продажа шла сделкой, и один из её этапов — допэмиссия холдинга.'}}
     assert any(c == 'stale_statement:law.struct' for c, _t in findings(card7e, base))
     card7f = dict(card7e, id='gtest7f', type='Инвестиция')   # допэмиссия и есть сделка — слово законно
     assert not any(c == 'stale_statement:law.struct' for c, _t in findings(card7f, base))
-    card7g = {'id': 'gtest7g', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта', 'src': src1,
+    card7g = {'id': 'gtest7g', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта', 'src': src1,
               'eco': {'rationale': 'Покупатель давно собирался выкупить актив, но торги сорвались.'}}
     assert not any(c.startswith('stale_statement:') for c, _t in findings(card7g, base))   # прошедшее время — история
+    # Отрасль не определена — находка; ответ `industry` ставит ее без цитаты (2 ноября 2026).
+    card7h = {'id': 'gtest7h', 'title': 'x', 'type': 'Продажа с торгов', 'status': 'Обсуждается',
+              'ind': 'Не определена', 'src': src1, 'reviewed': '2026-11-02'}
+    assert any(c == 'industry_undefined' for c, _t in findings(card7h, base))
+    assert any('industry' in b for b in check_answer({'verdict': 'accept', 'industry': {'value': 'Космос'}}, card7h, base))
+    assert not any('industry' in b for b in check_answer(
+        {'verdict': 'accept', 'industry': {'value': 'Недвижимость', 'why': 'здание на торгах'}}, card7h, base))
     # Явная причина читателя (`stale_ok`) снимает находку без правки текста.
     assert not any(c.startswith('stale_statement:') for c, _t in
                    findings(card7, base, waived_stale={'law.struct': 'осознанно оставлено, полная история'}))
@@ -1620,7 +1649,7 @@ def _self_check():
     _RESOLVED.update(saved)
 
     # Аудит 13 сентября 2026 — пять новых механических классов.
-    card8 = {'id': 'gtest8', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card8 = {'id': 'gtest8', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
              'events': [{'kind': 'closed', 'date': '2026-01-01', 'title': 'x',
                          'note': 'История 2026: компания купила другую в январе…'}],
              'src': src1}
@@ -1632,7 +1661,7 @@ def _self_check():
     codes8b = {c for c, _t in findings(card8b, base)}
     assert not any(c.startswith(('tadviser_markup', 'truncated')) for c in codes8b), codes8b
 
-    card9 = {'id': 'gtest9', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card9 = {'id': 'gtest9', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
              'eco': {'rationale': 'Компания расширяет присутствие на рынке за счет нового актива.',
                      'context': 'Компания расширяет присутствие на рынке за счет нового актива.'},
              'src': src1}
@@ -1643,11 +1672,11 @@ def _self_check():
     base10 = {'companies': {'gdesc': {'name': 'компания-разработчик решений для ритейла',
                                       'ind': 'ИТ и интернет', 'desc': 'x'}},
               'deals': [], 'telegram_posts': {}}
-    card10 = {'id': 'gtest10', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card10 = {'id': 'gtest10', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
               'target': 'gdesc', 'src': src1}
     assert 'profile_name_is_description:target' in {c for c, _t in findings(card10, base10)}
 
-    card11 = {'id': 'gtest11', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается', 'target': 'gsb',
+    card11 = {'id': 'gtest11', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается', 'target': 'gsb',
               'src': [['@dealsma (Telegram)', 'https://torgi.gov.ru/x']]}
     assert 'source_telegram_mismatch' in {c for c, _t in findings(card11, base)}, findings(card11, base)
     card11b = dict(card11); card11b['src'] = [['@dealsma (Telegram)', 'https://t.me/dealsma/12345']]
@@ -1665,7 +1694,7 @@ def _self_check():
                                        'desc': 'Медиахолдинг: деловой телеканал, интернет-издание '
                                                'и печатные издания РБК.'}},
               'deals': [], 'telegram_posts': {}}
-    card12 = {'id': 'gtest12', 'title': 'x', 'type': 'M&A', 'status': 'Обсуждается',
+    card12 = {'id': 'gtest12', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Обсуждается',
               'buyer': 'gnote', 'src': src1}
     assert 'profile_desc_source_note:buyer' in {c for c, _t in findings(card12, base12)}
     # Слово «издание» у медиахолдинга — факт о нем самом, а не пометка о нас.
