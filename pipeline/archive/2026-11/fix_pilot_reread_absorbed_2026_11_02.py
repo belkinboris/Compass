@@ -17,7 +17,10 @@ import review  # noqa: E402
 
 BASE = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PILOT = ('g1d36d186', 'g6663f201', 'gc9ea6b08', 'g7bbe19c2', 'g56d19a38',
-         'g489b4309', 'g53bd1536', 'g718e3d0e', 'gcf05509a', 'gb92f7119')
+         'g489b4309', 'g53bd1536', 'g718e3d0e', 'gcf05509a', 'gb92f7119',
+         # вторая десятка вычитки (партии c и d)
+         'g2b1ff5cb', 'gcbf6e44b', 'g2b62ae77', 'g73dba9d6', 'g076af76a',
+         'g5b4e85aa', 'g3c7dd2e2', 'ge816c5b4', 'g5e7d168d', 'gf66151c1')
 
 
 def main(write):
@@ -32,7 +35,11 @@ def main(write):
                 recs.setdefault(f['field'], []).append(f)
         for field, rs in recs.items():
             marks = cards[cid].setdefault('proofread_absorbed', {}).setdefault(field, [])
-            for f in rs[:-1]:
+            # прежние записи — и любая запись, чье поле разовый скрипт вычитки
+            # потом переписал (g2b1ff5cb ind: архив ставил «ГМК и добыча»,
+            # вычитка — «Машиностроение»)
+            stale = [f for f in rs if not review.already_applied(f, cards[cid], data['companies'])]
+            for f in rs[:-1] + [f for f in stale if f is rs[-1]]:
                 fp = review.fix_fingerprint(f['new'])
                 if fp not in marks:
                     marks.append(fp)

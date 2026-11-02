@@ -110,6 +110,36 @@ def signals(card, data):
     return out
 
 
+def registry_lines(card, data, fetch=None):
+    """Стороны по реестру — в досье само, без напоминания (2 ноября 2026:
+    знание о продавце по истории участников ООО, записанное 14 октября,
+    в новой рутине потерялось). Правовая форма сторон и история участников
+    покупаемого общества: продавец, доля, дата перехода."""
+    import party_legal_names as pln
+    fetch = fetch or pln.fetch
+    comps = data.get('companies') or {}
+    out = ['РЕЕСТР (сайт /api/companies/<id>/fns):']
+    for role in pln.ROLES:
+        cid = card.get(role)
+        if not cid or cid not in comps:
+            continue
+        try:
+            info = fetch(cid)
+        except Exception as e:  # сеть недоступна — читающий ищет сам (READING_BRIEF.md, datanewton по ОГРН)
+            out.append('  %s %s: реестр недоступен (%s)' % (role, comps[cid].get('name'), e))
+            continue
+        ents = info.get('entities') or []
+        if not info.get('available') or not ents:
+            out.append('  %s %s: %s — искать по ОГРН (READING_BRIEF.md)'
+                       % (role, comps[cid].get('name'), info.get('reason') or 'нет в реестре'))
+            continue
+        ent = ents[0]['entity']
+        out.append('  %s %s: %s, ИНН %s' % (role, comps[cid].get('name'), ent.get('short_name'), ent.get('inn')))
+        if role in ('target', 'asset_id'):
+            out += pln.owners_text(ents[0])[:14]
+    return out if len(out) > 1 else []
+
+
 def _findings(card, data):
     import accept_card
     return accept_card.findings(card, data)
@@ -125,6 +155,7 @@ def dossier(card, why, data):
     lines += ['  %s %s %s' % ('!' if c.split(':')[0] in BLOCKING else '-', c, t) for c, t in f]
     for s in signals(card, data):
         lines.append('ПОДСКАЗКА: ' + s)
+    lines += registry_lines(card, data)
     lines.append(second_reading.questionnaire(card, data))
     lines.append('ВОПРОСЫ ПО СТАТЬЕ')
     lines += ['[%s] %s' % (k, q) for k, q in SOURCE_QUESTIONS.items()]
@@ -150,7 +181,7 @@ def check(ans, card, data):
     if fx:
         import review
         mine = [r for r in review.load_fixes() if r.get('id') == card['id']]
-        pending = [r for r in mine if not review.already_applied(r, card)] if hasattr(review, 'already_applied') else []
+        pending = [r for r in mine if not review.already_applied(r, card, data.get('companies'))]
         if not mine:
             bad.append('в %s нет записей на эту карточку' % fx)
         elif pending:
@@ -192,6 +223,11 @@ def _self_check():
     data['deals'][0][STAMP] = '2026-11-02'
     assert [(c['id'], w) for c, w in queue(data)] == [('g0', 'изменена после проверки'), ('g1', 'по порядку')]
     assert signals(data['deals'][1], data)
+    fake = lambda cid: {'available': True, 'entities': [{'entity': {'short_name': 'ООО "Т"', 'inn': '1'},
+                        'ownership': {'history': [{'date': '2026-06-01', 'kind': 'left', 'owner': {'name': 'ООО "Л"'},
+                                                   'before_share': 100.0, 'after_share': None}]}}]}
+    reg = registry_lines(data['deals'][1], data, fetch=fake)
+    assert any('left: ООО "Л"' in l for l in reg), reg
 
 
 def main(argv):
