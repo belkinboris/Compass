@@ -108,7 +108,10 @@ STALE_STATEMENT_RE = re.compile(
     r'|планир(?:ует|уют|уется|уются)\s+(?:\w+\s+){0,2}(?:продать|купить|приобрести|выкупить)'
     r'|продать\s+(?:\S+\s+){0,3}планиру(?:ют|ется)'
     r'|(?:намерен\w*|собира(?:ется|ются))\s+(?:\w+\s+){0,2}(?:продать|купить|приобрести|выкупить)'
-    r'|будет\s+продава\w+|будут\s+продава\w+|ожидаемая\s+(?:дополнительная\s+)?эмисси', re.I)
+    r'|будет\s+продава\w+|будут\s+продава\w+|ожидаемая\s+(?:дополнительная\s+)?эмисси'
+    # Сама сделка в настоящем времени при «Закрыта» (X5/ВКТ, 2 ноября 2026:
+    # «X5 Group приобретает 100% долей…» в цели сделки закрытой покупки).
+    r'|(?:приобрета|покупа|выкупа|прода)(?:ет|ют)\s+(?:\S+\s+){0,2}\d+(?:[,.]\d+)?\s*%', re.I)
 # Допэмиссия (деньги в саму компанию) описана как ЭТАП ПРОДАЖИ доли: в карточке
 # типа M&A это перепутанные сделки — ВТБ/«Деметра», фраза «один из ее этапов —
 # допэмиссия холдинга» стояла три месяца. В карточке типа «Инвестиция» допэмиссия
@@ -117,6 +120,8 @@ CASH_IN_STAGE_RE = re.compile(
     r'этап\w*\W+(?:\w+\W+){0,5}(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*|закрыт\w+\s+подписк\w*)'
     r'|(?:допэмисси\w*|дополнительн\w+\s+эмисси\w*)\W+(?:\w+\W+){0,5}этап\w*', re.I)
 CASH_IN_STAGE_TYPES = ('M&A',)
+LITIGATION_LAWYER_RE = re.compile(
+    r'адвокат\w*\s+(?:\S+\s+){0,2}(?:ответчик|обвиняем|подсудим|осужденн|истц|бывш\w+\s+владел)|защитник\w*\b|сторон\w+\s+(?:ответчик|обвинени|защит)', re.I)
 # ТОЛЬКО law.struct/law.terms: `eco.context` — ЕДИНСТВЕННОЕ документированное
 # место для «кто опроверг» и «чем кончилось потом» (см. семантику поля в
 # CARD_ACCEPTANCE_BRIEF.md/READER_BRIEF) — сканировать его на слово
@@ -564,28 +569,44 @@ FIN_IS_REPORTING = re.compile(
     r'Совокупная выручка|В \d{4} году выручка|Оборот)', re.I)
 
 
-_SOURCES = None
+_SOURCE_INDEX = None   # адрес -> подготовленный текст, один раз на процесс
 
 
-def _sources():
-    """Тексты источников с диска (`review.source_texts`: забранные статьи и
-    сырье притока), подготовленные политикой дословности, — один раз на процесс."""
-    global _SOURCES
-    if _SOURCES is None:
-        from pipeline import verbatim_check
-        _SOURCES = verbatim_check.prepare(review.source_texts())
-    return _SOURCES
+def _sources(card=None):
+    """Тексты источников САМОЙ карточки (по адресам из `src`), подготовленные
+    политикой дословности. До 2 ноября 2026 здесь были все тексты на диске
+    (56 тыс.), и каждая карточка сверялась со всеми: минута на карточку,
+    проверка всей базы — больше суток. Списать фразу можно только из статьи,
+    которую читали, — то есть из источника карточки."""
+    global _SOURCE_INDEX
+    from pipeline import verbatim_check
+    if _SOURCE_INDEX is None:
+        raw = {}
+        for r in source_records():
+            text = re.sub(r'\s+', ' ', ' '.join((r['title'], r['summary']))).strip()
+            if text and len(text) > len(raw.get(r['url'], '')):
+                raw[r['url']] = text
+        _SOURCE_INDEX = {'raw': raw, 'prepared': {}}
+    urls = [str(s[1]) for s in (card or {}).get('src') or [] if isinstance(s, (list, tuple)) and len(s) > 1]
+    out = []
+    for u in urls:
+        if u not in _SOURCE_INDEX['raw']:
+            continue
+        if u not in _SOURCE_INDEX['prepared']:
+            _SOURCE_INDEX['prepared'][u] = verbatim_check.prepare([_SOURCE_INDEX['raw'][u]])
+        out.extend(_SOURCE_INDEX['prepared'][u])
+    return out
 
 
 def verbatim_findings(card, texts=None):
     """Находки политики дословности (`pipeline/verbatim_check.py`, решение
     владельца 31 октября 2026) по прозе карточки против текстов источников:
-    `texts` — строки или `verbatim_check.prepare(...)`; по умолчанию — все
-    сырье на диске. До 31 октября здесь жили свои меры: 12 любых слов подряд
+    `texts` — строки или `verbatim_check.prepare(...)`; по умолчанию — тексты
+    источников самой карточки, что лежат на диске. До 31 октября здесь жили свои меры: 12 любых слов подряд
     (`verbatim_runs`), скелет предложения (`near_copy_sentences`) и
     `proofread.long_quotes` — любая цитата длиннее 6 слов, даже с автором."""
     from pipeline import verbatim_check
-    sources = _sources() if texts is None else verbatim_check.prepare(texts)
+    sources = _sources(card) if texts is None else verbatim_check.prepare(texts)
     return verbatim_check.check_card(card, sources)
 
 
@@ -1075,6 +1096,19 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         out.append(('industry_undefined', 'отрасль не определена — назовите ее в ответе '
                     '(industry: {"value": "<из списка>", "why": "<по предмету сделки>"}); '
                     'без отрасли пост о недвижимости уйдет в основной канал'))
+    # ДАТА НА 15-Е БЕЗ ОСНОВАНИЯ (вычитка 2 ноября 2026: X5/ВКТ — 15 мая при
+    # «4 мая» во всех статьях, Cosmos — 15 июня без источника; в базе 58 таких).
+    # Пятнадцатое — след старой заглушки «середина месяца». Читатель называет,
+    # откуда день (`date_basis`), или ставит настоящую дату.
+    if re.match(r'\d{4}-\d{2}-15$', str(card.get('date') or '')) and not has(card.get('date_basis')):
+        out.append(('date_unbased', 'дата %s — 15-е число без основания (date_basis): назовите, откуда день, '
+                    'или поставьте дату из статьи (docs/card_status_dates.md#Дата)' % card.get('date')))
+    # АДВОКАТ СТОРОНЫ СПОРА — НЕ КОНСУЛЬТАНТ СДЕЛКИ (CarPrice/Ростех, 2 ноября
+    # 2026: адвокат ответчика стояла в «Команде сделки», docs/card_parties.md).
+    adv = str((card.get('law') or {}).get('adv') or '')
+    if has(adv) and LITIGATION_LAWYER_RE.search(adv):
+        out.append(('adviser_not_deal', 'в консультантах сделки — защитник стороны спора: %r; '
+                    'это проза (eco.context), а не «Команда сделки»' % adv[:120]))
     if card.get('status') in ('Закрыта', 'Не состоялась'):
         for field in STALE_STATEMENT_FIELDS:
             if field in waived_stale:
@@ -1592,6 +1626,15 @@ def _self_check():
     card7g = {'id': 'gtest7g', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта', 'src': src1,
               'eco': {'rationale': 'Покупатель давно собирался выкупить актив, но торги сорвались.'}}
     assert not any(c.startswith('stale_statement:') for c, _t in findings(card7g, base))   # прошедшее время — история
+    # Вычитка 2 ноября 2026: сама сделка в настоящем времени, дата 15-го без основания, адвокат в консультантах.
+    card7x = {'id': 'gtest7x', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта', 'src': src1,
+              'date': '2026-05-15', 'eco': {'rationale': 'X5 Group приобретает 100% долей дистрибьютора.'},
+              'law': {'adv': [['Юридический консультант', 'Кира Корума', 'адвокат Галицкого (сторона ответчика)']]}}
+    codes_x = {c for c, _t in findings(card7x, base)}
+    assert {'stale_statement:eco.rationale', 'date_unbased', 'adviser_not_deal'} <= codes_x, codes_x
+    card7y = dict(card7x, id='gtest7y', date_basis='регистрация в ЕГРЮЛ 15 мая', eco={'rationale': 'X5 приобрела 100%.'},
+                  law={'adv': [['Юридический консультант', 'Delcredere', 'консультант продавца']]})
+    assert not {'stale_statement:eco.rationale', 'date_unbased', 'adviser_not_deal'} & {c for c, _t in findings(card7y, base)}
     # Отрасль не определена — находка; ответ `industry` ставит ее без цитаты (2 ноября 2026).
     card7h = {'id': 'gtest7h', 'title': 'x', 'type': 'Продажа с торгов', 'status': 'Обсуждается',
               'ind': 'Не определена', 'src': src1, 'reviewed': '2026-11-02'}

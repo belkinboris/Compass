@@ -1152,6 +1152,8 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
     import facts as facts_layer
     from pipeline import fns_registry as _fns_registry
     facts_layer.derive_all(data, facts_layer.build_ctx(data, _fns_registry.REGISTRY))
+    from pipeline import mass_edit_guard  # проба на 10 до массовой правки
+    mass_edit_guard.check(json.load(open(DATA, encoding='utf-8')), data, os.environ.get('MASS_OK'))
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     if pending['cards']:
         json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
