@@ -6718,7 +6718,7 @@ def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
     assert text.count("/#/deal/") == len(st["top"]) and st["top"], text[:400]
     # Число называет свое множество — закрытые сделки (владелец, 2 ноября 2026);
     # оговорку о публичных данных владелец снял своим текстом.
-    assert "закрыт" in text and "по раскрытой сумме" in text and "Особенности месяца" not in text
+    assert "закрыт" in text and "с раскрытой суммой" in text and "Особенности месяца" not in text
     # Никакого нашего диалекта — сводку читают в канале, а не в репозитории.
     low = text.lower()
     for word in ("карточк", "база", "знаменател", "bulk", "json", "инвариант"):
@@ -9815,3 +9815,17 @@ def test_edit_of_a_published_card_goes_back_to_checks():
     approvals = json.loads((ROOT / "pipeline" / "mass_edit_approvals.json").read_text(encoding="utf-8"))
     assert all(a.get("key") and a.get("pilot") and a.get("owner") for a in approvals), \
         "запись пробы без ключа, карточек пробы или ответа владельца"
+
+
+def test_founders_text_skips_the_full_pytest_only_when_every_decision_is_their_text():
+    """Владелец, 2 ноября 2026: посты, которые основатели правят в консоли,
+    выпускаются без полного pytest (тесты данных остаются); все прочее —
+    полный прогон, как велит правило 20 октября."""
+    sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    import ship_decisions as sd
+    rows = ["ПУБЛИКУЕМ g1 «Пост»"]
+    assert sd.founders_text_only(rows, [{"verdict": "post_yes", "edited_text": "Мой текст"}])
+    assert not sd.founders_text_only(rows, [{"verdict": "post_yes", "edited_text": ""}])
+    assert not sd.founders_text_only(rows + ["ВЫКИНУТА g2"], [{"verdict": "post_yes", "edited_text": "т"}])
+    assert not sd.founders_text_only([], [])
+
