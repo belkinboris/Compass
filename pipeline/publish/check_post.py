@@ -158,8 +158,8 @@ def check_digest(text):
         problems.append('на экране служебное слово (undefined/null/NaN)')
     if '/#/deal/' not in text:
         problems.append('в сводке нет ни одной сделки — рассказывать не о чем')
-    if 'публично доступн' not in text:
-        problems.append('потеряна оговорка о том, что мы собираем только публично доступные сделки')
+    # Оговорку «мы собираем только публично доступные сделки» владелец снял
+    # своим текстом сводки за октябрь (2 ноября 2026) — больше не требуется.
     return problems
 
 
@@ -206,7 +206,6 @@ def _self_check():
     assert not check_digest(digest), check_digest(digest)
     assert check(digest), 'общая проверка не должна признавать сводку постом о сделке'
     assert any('ни одной сделки' in p for p in check_digest('Просто текст, информация публично доступна.'))
-    assert any('оговорка' in p for p in check_digest('<a href="https://x/#/deal/g1">Сделка</a>'))
 
 
 if __name__ == '__main__':
