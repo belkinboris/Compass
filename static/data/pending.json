@@ -1,3 +1,56 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "g7ab8cd45",
+   "date": "2026-11-02",
+   "title": "Стилист получила условный срок по делу о продаже Лерчек подделок",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261102/yankovskaya-2128618315.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Стилист",
+   "asset": "условный срок по делу о продаже Лерчек подделок",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Стилист",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261102/yankovskaya-2128618315.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "условный срок по делу о продаже Лерчек подделок",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261102/yankovskaya-2128618315.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-02T10:52:46+00:00"
+  }
+ ]
 }
