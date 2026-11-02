@@ -6718,7 +6718,7 @@ def test_monthly_digest_tells_the_month_in_human_words_and_links_to_deals(base):
     assert text.count("/#/deal/") == len(st["top"]) and st["top"], text[:400]
     # Число называет свое множество — закрытые сделки (владелец, 2 ноября 2026);
     # оговорку о публичных данных владелец снял своим текстом.
-    assert "закрыт" in text and "по раскрытой сумме" in text and "Особенности месяца" not in text
+    assert "закрыт" in text and "с раскрытой суммой" in text and "Особенности месяца" not in text
     # Никакого нашего диалекта — сводку читают в канале, а не в репозитории.
     low = text.lower()
     for word in ("карточк", "база", "знаменател", "bulk", "json", "инвариант"):

@@ -225,7 +225,7 @@ def render(base, year, month):
     lines.append('')
 
     if st['top']:
-        lines.append('<b>Самые дорогие сделки (по раскрытой сумме)</b>')
+        lines.append('<b>Самые дорогие сделки (с раскрытой суммой)</b>')
         lines.append('')
         for i, d in enumerate(st['top'], 1):
             lines.append('%d. <a href="%s/#/deal/%s">%s</a> — %s'
@@ -246,7 +246,7 @@ def render(base, year, month):
 
 def render_buttons(year, month):
     return {'inline_keyboard': [
-        [{'text': 'Все сделки на «Компасе»', 'url': '%s/#/deals?year=%d' % (SITE, year)}],
+        [{'text': 'Все сделки в «Компасе»', 'url': '%s/#/deals?year=%d' % (SITE, year)}],
         # Кнопку «Аналитика рынка» владелец снял 2 ноября 2026.
     ]}
 
