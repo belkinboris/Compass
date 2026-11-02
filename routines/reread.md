@@ -48,7 +48,8 @@
    партия вычитки идет под ключом `MASS_OK=reread`; ключ появляется в
    `pipeline/mass_edit_approvals.json`, когда владелец одобрил пробу на первых
    десяти карточках, — до этого рутина правит не больше 10 карточек за запись),
-   `python3 facts_derive.py --write`, затем
+   `python3 pipeline/split_discovery_sources.py --write` (агрегатор рядом с
+   первоисточником уходит из видимых источников), `python3 pipeline/facts_derive.py --write`, затем
    `python3 pipeline/reread_queue.py --stamp answers.json --write`.
 5. `python3 -m pytest test_data.py -q`, семантический diff к `origin/main`,
    `python3 pipeline/publication_busy.py --wait 40`, коммит, push.

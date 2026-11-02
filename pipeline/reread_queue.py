@@ -181,7 +181,7 @@ def check(ans, card, data):
     if fx:
         import review
         mine = [r for r in review.load_fixes() if r.get('id') == card['id']]
-        pending = [r for r in mine if not review.already_applied(r, card)] if hasattr(review, 'already_applied') else []
+        pending = [r for r in mine if not review.already_applied(r, card, data.get('companies'))]
         if not mine:
             bad.append('в %s нет записей на эту карточку' % fx)
         elif pending:
