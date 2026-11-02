@@ -74,6 +74,7 @@
 [{"id": "g…",
   "fields": {"title": "ok", "eco.context": "про энергоактивы и уголовное дело, а не про эту сделку"},
   "general": {"verbatim": "ok", "parties": "ok", "status_date": "ok", "post": "ok",
+              "language": "ok", "modality": "ok",
               "coherent": "Обзор — «Не раскрыта», Экономист — 1,427 млрд ₽"},
   "verdict": "fix"}]
 ```

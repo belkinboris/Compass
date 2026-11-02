@@ -432,6 +432,25 @@ def test_second_reading_gates_cards_accepted_since_october_9():
     assert "[eco.rationale]" in text and "[verbatim]" in text and "Пост" in text
 
 
+def test_card_text_labels_an_open_auction_sum_as_starting_price():
+    """2 ноября 2026, второе чтение gc6fa5d80: `card_text.render_screens` (экран
+    «Обзор» в досье второго чтения) всегда писал «Сумма», хотя сайт
+    (`static/index.html`, `isListing`) и пост (`format_post.py`) для открытых
+    торгов ("Продажа с торгов", статус не «Закрыта») пишут «Начальная цена
+    лота» — второй читатель видел не то, что увидит подписчик."""
+    import card_text
+    listing = {"id": "gl1", "title": "Т", "type": "Продажа с торгов", "status": "Обсуждается",
+               "sum": "7,7 млрд ₽", "eco": {}, "law": {}}
+    text = card_text.render_screens(listing, {})
+    assert "Начальная цена лота: 7,7 млрд ₽" in text and "Сумма: 7,7 млрд ₽" not in text, text
+    closed = dict(listing, status="Закрыта")
+    text2 = card_text.render_screens(closed, {})
+    assert "Сумма: 7,7 млрд ₽" in text2 and "Начальная цена лота" not in text2, text2
+    ma = dict(listing, type="M&A", status="Закрыта")
+    text3 = card_text.render_screens(ma, {})
+    assert "Сумма: 7,7 млрд ₽" in text3, text3
+
+
 def test_acceptance_flags_a_bare_surname_in_the_title():
     """Владелец, 9 октября 2026: «агробизнес Боброва и Бикова» без имен читается
     газетно — человек в заголовке называется по имени и фамилии."""
@@ -4639,6 +4658,12 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     explained = dict(clean, accepted_notes=dict(clean["accepted_notes"],
                      notes="ООО «Киберок» — юрлицо предмета, профиль CyberOK и есть оно"))
     assert "entity_in_source" not in {c for c, _t in accept_card.findings(explained, base, registry=known, source_records=recs)}
+    # Рекламная плашка видеоплеера на странице источника несет СВОЕ юрлицо
+    # сети, не сторону сделки (Lenta.ru, gc6fa5d80, 2 ноября 2026).
+    ad_recs = [{"url": "https://www.vedomosti.ru/x", "title": "Positive Technologies купила CyberOK",
+                "summary": "Компания купила бренд CyberOK. Реклама. 12+. ООО «Единое Видео». "
+                           "VK Видео: vkvideo.ru"}]
+    assert "entity_in_source" not in {c for c, _t in accept_card.findings(clean, base, registry=known, source_records=ad_recs)}
     # «Реестры закрыты» без проверки истории участников ЕГРЮЛ — не довод (Nomi, 15.10.2026).
     lazy = dict(clean, asset="100% ООО «КиберОК»",
                 accepted_notes={"no_profile": {"seller": "rusprofile и checko закрыты (403)"}})

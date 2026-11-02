@@ -35,7 +35,8 @@ def render_screens(card, companies):
     listing = card.get('type') == 'Продажа с торгов' and card.get('status') != 'Закрыта'
     out = ['ШАПКА', '%s · %s · %s' % (card.get('date') or 'дата не указана', card.get('status') or 'статус не указан', card.get('ind') or ''),
            '%s → %s' % (buyer or '?', asset or '?'), card.get('title') or '', 'Тип: %s' % (card.get('type') or ''), '',
-           'ОБЗОР', 'Сумма: %s' % (card.get('sum') if has(card.get('sum')) else 'Не раскрыта')]
+           'ОБЗОР', '%s: %s' % ('Начальная цена лота' if listing else 'Сумма',
+                                 card.get('sum') if has(card.get('sum')) else 'Не раскрыта')]
     out += _row('Продавец', seller) + _row('Предмет сделки', card.get('asset') or asset) + _row('Покупатель', buyer)
     # С 28 октября 2026 на сайте две вкладки: «Обзор» (стороны, структура,
     # согласования, условия, консультанты, цель, контекст) и «Финансы»
