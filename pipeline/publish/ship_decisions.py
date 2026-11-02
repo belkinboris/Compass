@@ -157,6 +157,24 @@ def decisions_planned():
     return rows, out
 
 
+# ТЕКСТ ОСНОВАТЕЛЕЙ — БЕЗ ПОЛНОГО ПРОГОНА (владелец, 2 ноября 2026: «в
+# отношении конкретных постов, которые пишут основатели в консоли, правя твои
+# варианты постов, можно полный pytest не делать»). Правило 20 октября («только
+# полноценные проверки») остается для всего прочего. Когда каждое решение
+# прогона — «опубликовать» с текстом основателя, хватает тестов данных: база,
+# факты, аналитика, приток (около 3 минут вместо 22).
+DATA_SUITES = ('test_data.py', 'test_audit_queue.py', 'test_gold_analytics.py', 'test_facts.py', 'test_ingest.py')
+
+
+def founders_text_only(rows, decisions):
+    """Все строки прогона — ПУБЛИКУЕМ, и у каждого решения «опубликовать» есть
+    текст основателя (`edited_text`)."""
+    if not rows or any(not r.startswith('ПУБЛИКУЕМ') for r in rows):
+        return False
+    yes = [d for d in decisions if d.get('verdict') == 'post_yes']
+    return bool(yes) and all(str(d.get('edited_text') or '').strip() for d in yes)
+
+
 LOCK = os.path.join(ROOT, 'data', 'inbox', 'ship_decisions.lock')
 
 
@@ -232,9 +250,19 @@ def _main(argv, write):
             break
     log('Слой фактов пересчитан.')
 
-    log('Полный pytest — ждем (обычно 15 минут). Пока он идет, других pytest в этой копии не запускать: тесты делят одну базу.')
+    fast = False
+    try:
+        sys.path.insert(0, INGEST)
+        import approve  # noqa: E402
+        fast = founders_text_only(rows, approve.fetch_decisions()[0])
+    except Exception as e:  # не узнали — проверяем полностью
+        log('Не удалось разобрать решения (%s) — полный pytest.' % e)
+    if fast:
+        log('Все решения — посты с текстом основателей: тесты данных (около 3 минут), не полный pytest.')
+    else:
+        log('Полный pytest — ждем (обычно 20 минут). Пока он идет, других pytest в этой копии не запускать: тесты делят одну базу.')
     t0 = time.monotonic()
-    r = run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider'], must=False)
+    r = run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', *(DATA_SUITES if fast else ())], must=False)
     if r.returncode:
         # УПАВШИЕ ТЕСТЫ — ЕЩЕ РАЗ, ТОЛЬКО ИХ. 29 октября 2026: тест отзыва
         # ассистента (test_kompas) и тест кнопки ассистента (test_ui) падали
