@@ -1,0 +1,36 @@
+{
+ "made": "2026-11-02",
+ "items": [
+  {
+   "key": "https://mergers.ru/news/Rostics-vykupaet-biznes-kaluzhskogo-franchajzi-seti-87721::gb42bc45e",
+   "candidate_id": "gb42bc45e",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d20992749",
+    "title": "Rostic’s выкупает бизнес калужского франчайзи сети",
+    "date": "2026-11-02",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Rostics-vykupaet-biznes-kaluzhskogo-franchajzi-seti-87721"
+     ]
+    ],
+    "sum": "260 млн ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Rostic’s",
+    "asset": "бизнес калужского франчайзи сети",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Rostic’s",
+     "asset": "бизнес калужского франчайзи сети",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-02"
+  }
+ ]
+}
