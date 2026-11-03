@@ -240696,6 +240696,258 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "g17a522dc",
+   "date": "2026-11-03",
+   "title": "В Кургане продают автоцентр с автомойкой и сервисом за 114,8 млн рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053140870"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "114,8 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Участок и здание оформлены в собственность, а не в аренду; на площадке есть своя газовая котельная, трансформаторная подстанция и скважина для воды. Арендаторы первого этажа — автомойка «Автобаня», сервис FIT Service, магазин автотоваров «Канистра» и отдельный магазин автоаккумуляторов; наверху — офисы разных компаний.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "from_raw": {
+    "draft_id": "d92129667",
+    "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей"
+   },
+   "asset": "Двухэтажное кирпичное здание площадью 1851,9 квадратного метра продается вместе с земельным участком площадью 3199 квадратных метров",
+   "sum": "114,8 млн ₽",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-11-03",
+   "no_parties": "Продавец и покупатель не раскрыты: объявление о продаже на сайте недвижимости не называет стороны; поиск по адресу и названию объекта (2ГИС, Rusprofile) не дал совпадения с юрлицом-владельцем.",
+   "accepted": "2026-11-03",
+   "accepted_hash": "54ec912092e8.ace5bd",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "здание и земельный участок (не компания), профиль не нужен",
+     "seller": "не раскрыт: частное объявление о продаже на сайте недвижимости, искали в 2ГИС и Rusprofile — юрлицо-владельца не нашли",
+     "buyer": "не раскрыт: продажа еще не состоялась, покупатель не определен"
+    },
+    "notes": "Повторная приемка после снятия ложной пометки «(по оценке)» у суммы (подробности — known_issues/intake.md)."
+   },
+   "second_read": "2026-11-03",
+   "second_read_hash": "54ec912092e8.ace5bd",
+   "post_preview": "📣 [пост g17a522dc] — В КАНАЛ «Компас - Недвижимость», на проверку\nНиже — текст поста как он уйдет подписчикам. Ответ на это сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n━━━━━━━━━━━━\n<b>В Кургане продают автоцентр с автомойкой и сервисом за 114,8 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> Двухэтажное кирпичное здание площадью 1851,9 квадратного метра продается вместе с земельным участком площадью 3199 квадратных метров\n<b>Сумма:</b> 114,8 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053140870\">URA.RU</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g17a522dc\">карточке сделки</a>\n\nКнопки под постом: Открыть карточку сделки — https://projectcompass.ru/#/deal/g17a522dc",
+   "added": "2026-11-03",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "f49ebb9f65b3"
+    },
+    "price": {
+     "value_rub": 114800000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "937d20ef1008"
+    },
+    "date": {
+     "value": "2026-11-03",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "ed3c3dbd966f"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "1db519b9c6c9"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g4b315d34",
+   "date": "2026-11-03",
+   "title": "Группа «Эфко» решила продать бизнес-центр «Аркус IV» в Москве",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/7431944"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Здание площадью 25 тыс. кв. м у станций метро ЦСКА и «Динамо» группа «Эфко» купила у девелопера AB Development годом ранее под собственную штаб-квартиру; консультанты оценивали эту покупку в 10–11 млрд руб. Среди арендаторов здания на момент покупки были Kraft Heinz, Cargill, поставщик шин «Пауэр Интернэшнл», автопроизводитель «Соллерс» и инвесткомпания Altera Capital.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Группа «Эфко»",
+   "asset": "бизнес-центр «Аркус IV» на Ленинградском проспекте",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "После ареста основателя группы «Эфко» и нескольких ее топ-менеджеров компания решила отказаться от бизнес-центра, который купила годом ранее для собственной штаб-квартиры.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "бизнес-центр «Аркус IV» на Ленинградском проспекте",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Группа «Эфко»",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-11-03",
+   "seller_id": "g5db3de73",
+   "accepted": "2026-11-03",
+   "accepted_hash": "01338f0dc9f1.0abc17",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "бизнес-центр (здание), не компания — профиль не нужен",
+     "buyer": "не раскрыт: продажа только объявлена, покупатель пока не определен"
+    },
+    "notes": "Продавец — АО «ЭФКО» (бренд «Слобода» принадлежит группе). Решение о продаже здания, купленного годом ранее под штаб-квартиру, принято после ареста основателя группы и нескольких топ-менеджеров (Коммерсантъ подтверждает детали покупки годом ранее). Статус «Обсуждается», не «Закрыта»: источник говорит о решении продать, а не о состоявшейся передаче — ворота ошибочно сочли слово «приобрела» (о прошлой покупке) признаком закрытия текущей сделки."
+   },
+   "second_read": "2026-11-03",
+   "second_read_hash": "01338f0dc9f1.0abc17",
+   "post_preview": "<b>Группа «Эфко» решила продать бизнес-центр «Аркус IV» в Москве</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> ЭФКО\n<b>Предмет:</b> бизнес-центр «Аркус IV» на Ленинградском проспекте\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4\">РБК</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g4b315d34\">карточке сделки</a>",
+   "added": "2026-11-03",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "24221642f7d4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-11-03",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "bfe9b5d543c4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "532ed517a385"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
