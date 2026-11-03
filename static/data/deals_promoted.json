@@ -275945,7 +275945,9 @@
   "g8f75eaf5": null,
   "g03475792": 254,
   "g82e9441a": null,
-  "g76cf4203": null
+  "g76cf4203": null,
+  "g4b315d34": null,
+  "g17a522dc": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -276495,7 +276497,8 @@
   "g7005cf1d": 53,
   "g8f75eaf5": 54,
   "g82e9441a": 55,
-  "g76cf4203": 56
+  "g76cf4203": 56,
+  "g4b315d34": 57
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -281378,7 +281381,25 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g4b315d34": {
+   "seller": "Группа «Эфко»",
+   "asset": "бизнес-центр «Аркус IV» на Ленинградском проспекте",
+   "status": "Обсуждается",
+   "title": "Группа «Эфко» решила продать бизнес-центр «Аркус IV» в Москве",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-03T12:08:36+00:00"
+ "telegram_last_post_at": "2026-11-03T12:45:10+00:00"
 }
