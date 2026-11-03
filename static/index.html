@@ -9970,7 +9970,7 @@ function renderAnalytics(){
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
       ${topInd.map(([i,n],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(n/maxI*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}. Если у сделки две отрасли, она посчитана в обеих.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Десять самых частых отраслей из ${Object.keys(byInd).length}: в них ${topIndSum} ${plural(topIndSum,"сделка","сделки","сделок")}${ofTotal(topIndSum,all.length)}.</p>
     </div>
     ${dynRows.length&&dynYears.length>1?`
     <div class="an-card an-c-inddyn reveal">
@@ -9979,7 +9979,7 @@ function renderAnalytics(){
         <thead><tr><th></th>${dynYears.map(y=>`<th class="num${anYear===y?" dyn-on":""}">${y}</th>`).join("")}</tr></thead>
         <tbody>${dynRows.map(i=>`<tr><th><a href="#/industry/${encodeURIComponent(i)}">${i}</a></th>${dynYears.map(y=>{const n=dynCell[i+"|"+y]||0;const a=n?0.12+0.78*n/dynMax:0;return `<td class="num${anYear===y?" dyn-on":""}"><span class="dyn-cell${a>0.55?" dyn-dark":""}" style="--a:${a.toFixed(2)}">${n||"·"}</span></td>`;}).join("")}</tr>`).join("")}</tbody>
       </table></div>
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Число сделок в год, ${anInd==="Все"?"восемь самых частых отраслей":"выбранная отрасль"}${anType==="Все"?"":" (тип: "+anType.toLowerCase()+")"}; чем темнее клетка, тем больше сделок. ${dynYears[dynYears.length-1]===String(new Date().getFullYear())?`${dynYears[dynYears.length-1]} год показан по сегодняшний день.`:""} Если у сделки две отрасли, она посчитана в обеих.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">Число сделок в год, ${anInd==="Все"?"восемь самых частых отраслей":"выбранная отрасль"}${anType==="Все"?"":" (тип: "+anType.toLowerCase()+")"}; чем темнее клетка, тем больше сделок. ${dynYears[dynYears.length-1]===String(new Date().getFullYear())?`${dynYears[dynYears.length-1]} год показан по сегодняшний день.`:""}</p>
     </div>`:""}
     <div class="an-card an-c-topsum reveal">
       <span class="label">Крупнейшие сделки по раскрытой сумме</span>
@@ -10031,7 +10031,7 @@ function renderAnalytics(){
     <div class="an-card an-c-indmoney reveal">
       <span class="label">Отрасли по сумме сделок</span>
       ${topIndMoney.map(([i,v],ri)=>`<div class="an-row"><a class="an-key" href="#/industry/${encodeURIComponent(i)}" style="color:inherit;text-decoration:none">${i}</a><div class="an-bar"><div style="width:${Math.round(v.sum/maxIM*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sum)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}: считаем только цены в рублях, которые назвали сами стороны и которые совпадают с источником. Если у сделки две отрасли, ее сумма вошла в обе. Не учтены инвестиции, IPO, примерные оценки и суммы в иностранной валюте.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${moneyCards} ${plural(moneyCards,"сделки","сделок","сделок")}${ofTotal(moneyCards,deals.length)}: считаем только цены в рублях, которые назвали сами стороны и которые совпадают с источником. Не учтены инвестиции, IPO, примерные оценки и суммы в иностранной валюте.</p>
     </div>`:""}
     ${disclYears.length?`
     <div class="an-card an-c-discl reveal">
