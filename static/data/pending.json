@@ -316,6 +316,135 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>«Дом.РФ» выставил на торги право на КРТ у Барнаула для коттеджного поселка</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Предмет:</b> право заключения договора о КРТ участков общей площадью 270,22 га у Барнаула\n<b>Начальная цена лота:</b> 62,69 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261103/krt-2128868293.html\">РИА Недвижимость</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g76cf4203\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g56449413",
+   "date": "2026-11-03",
+   "title": "Норвежский холдинг купил крупнейшего производителя носков в Финляндии",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Норвежский холдинг",
+   "asset": "крупнейший производитель носков в Финляндии",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Норвежский холдинг",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
+     }
+    ],
+    "target": [
+     {
+      "value": "крупнейший производитель носков в Финляндии",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T10:52:18+00:00"
+  },
+  {
+   "id": "gbba3f649",
+   "date": "2026-11-03",
+   "title": "Бывший сотрудник Росгвардии похитил и продал изъятое оружие",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Бывший сотрудник Росгвардии похитил и",
+   "asset": "изъятое оружие",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "изъятое оружие",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Бывший сотрудник Росгвардии похитил и",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T10:52:18+00:00"
   }
  ]
 }
