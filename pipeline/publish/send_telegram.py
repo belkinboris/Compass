@@ -1191,6 +1191,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
             to_send_m = [(d, e, t) for d, e, t in to_send_m if e['id'] != event['id']]
 
     to_send, to_edit, to_seed, needs_review, needs_acceptance = [], [], [], [], []
+    awaiting_post = []
+    post_yes_cards = {str(d.get('deal_id')) for d in m_decisions
+                      if d.get('verdict') == 'post_yes' and '~' not in str(d.get('deal_id') or '')}
     # Предложенная правка вышедшего поста, одобренная в консоли
     # (`propose_post_edit.py`, 29 октября 2026): правится и пост с текстом
     # владельца — владелец сам одобрил новый текст, он и становится его текстом.
@@ -1285,6 +1288,13 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 # гейт его не перекрывает; правки уже вышедших постов
                 # (`to_edit`) — тоже не здесь.
                 needs_acceptance.append(did)
+            elif not (deal.get('post_approved') or deal.get('post_override') or did in post_yes_cards):
+                # ПОСТ — ТОЛЬКО ПО КНОПКЕ (владелец, 3 ноября 2026: «вышел пост,
+                # который я не одобрял»; «без кнопки никогда»). Одобренная
+                # карточка выходит на сайт, первый пост ждет «📣 Пост в канал»
+                # под своим проектом в консоли — ни молчание, ни ✅ карточки
+                # его не выпускают.
+                awaiting_post.append(did)
             else:
                 # Текст, который владелец продиктовал в Telegram при модерации
                 # черновика (`post_override`), или снимок того, что он уже
@@ -1378,6 +1388,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
 
     print('Новых постов: %d, правок существующих: %d, без поста по решению: %d, новых вех: %d'
           % (len(to_send), len(to_edit), len(to_seed), len(to_send_m)))
+    if awaiting_post:
+        print('Ждут кнопки «Пост в канал» в консоли: %d — %s'
+              % (len(awaiting_post), ', '.join(awaiting_post)))
     if needs_review:
         # П2-9: не тормоз — окно. Карточка не потеряна, просто первый пост
         # ждет того же чтения источника, что и дневной обыск G7: тот же

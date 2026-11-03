@@ -2213,7 +2213,7 @@ def test_main_dry_run_with_a_real_token_prints_full_post_text(monkeypatch, tmp_p
             "buyer": "b1", "seller": "Иван Петрович Сидоров",
             "sum": "1 млрд ₽", "status": "Закрыта", "ind": "ИТ и интернет",
             "date": FRESH_DATE,
-            "reviewed": "2026-08-01", "accepted": "2026-08-01",
+            "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01",
             # Предложение контекста обязано НАЗЫВАТЬ покупателя — иначе с 30
             # августа оно законно отсеется из строки «Покупатель» (правило
             # _mentions_party) и пост станет короче своей контрольной метки.
@@ -2253,9 +2253,9 @@ def test_main_write_skips_specified_ids_without_marking_them_sent(monkeypatch, t
     """--skip задерживает конкретную карточку в ЭТОМ прогоне, но не
     помечает ее отправленной: следующий прогон должен увидеть ее снова."""
     deal_skip = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
-                "sum": "1 млрд ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+                "sum": "1 млрд ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+                "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_skip, deal_send]
     real_data["companies"] = {}
@@ -2498,9 +2498,9 @@ def test_main_reports_a_deleted_post_without_crashing_the_run(monkeypatch, tmp_p
     пропускается — решение владельца)."""
     deal_edit = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»",
                  "buyer": "b1", "sum": "1 млрд ₽", "status": "Закрыта",
-                 "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+                 "date": FRESH_DATE, "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01"}
     deal_send = {"id": "gX2", "title": "«Лютик» купил «Ландыш»",
-                 "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+                 "sum": "500 млн ₽", "date": FRESH_DATE, "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01"}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal_edit, deal_send]
     real_data["companies"] = {"b1": {"name": "«Ромашка»"}}
@@ -2645,7 +2645,7 @@ def test_main_sends_the_post_without_a_financial_line_and_without_asking_fns(mon
             # reviewed: карточку УЖЕ читали — иначе П2-9 отложит ее до
             # дочитывания, и этот тест (он про финстроку, не про П2-9) не
             # увидит ни одной реальной отправки.
-            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+            "reviewed": "2026-08-01", "post_approved": True, "accepted": "2026-08-01"}
     companies = {"b1": {"name": "«Ромашка»"}}
     real_data = json.loads(Path(send_telegram.DATA).read_text(encoding="utf-8"))
     real_data["deals"] = [deal]
@@ -8101,10 +8101,23 @@ import channels  # noqa: E402
 MAIN_CH, REALTY_CH = "-1001111111111", "-1002222222222"
 
 
+def test_first_post_waits_for_the_post_button_not_for_the_card_approval(monkeypatch, tmp_path, capsys):
+    """Владелец, 3 ноября 2026: «вышел пост, который я не одобрял» — Шерегеш:
+    ✅ стояло у карточки, кнопку «Пост в канал» никто не нажимал. «Без кнопки
+    никогда»: одобренная карточка без `post_approved` первого поста не получает."""
+    deal = _realty_deal("gW1", "2 млрд ₽")
+    deal.pop("post_approved")
+    _channels_world(monkeypatch, tmp_path, [deal])
+    send_telegram.main(write=False, ignore_pace=True)
+    out = capsys.readouterr().out
+    assert "Ждут кнопки «Пост в канал» в консоли: 1 — gW1" in out, out[-600:]
+    assert "Новых постов: 0" in out
+
+
 def _realty_deal(did, sum_, status="Закрыта", ind="Недвижимость", type_="M&A"):
     return {"id": did, "title": "«Ромашка» купила бизнес-центр «Лютик»", "ind": ind,
             "type": type_, "status": status, "sum": sum_, "date": FRESH_DATE,
-            "reviewed": "2026-08-01", "accepted": "2026-08-01"}
+            "reviewed": "2026-08-01", "accepted": "2026-08-01", "post_approved": True}
 
 
 def _channels_world(monkeypatch, tmp_path, deals, posts=None, realty_posts=None,
@@ -8256,7 +8269,7 @@ def test_owner_text_sent_after_the_decision_was_taken_still_becomes_the_first_po
     deal = {"id": "gV1", "title": "«Логика молока» купила владельца бренда Velle", "date": "2026-10-29",
             "status": "Закрыта", "type": "M&A", "buyer_name": "Логика молока", "seller": "Владислав Романовский",
             "asset": "ООО «Велле Холдинг»", "ind": "Пищепром и напитки", "src": [["ТАСС", "https://tass.ru/1"]],
-            "reviewed": "2026-10-29", "accepted": "2026-10-29"}
+            "reviewed": "2026-10-29", "post_approved": True, "accepted": "2026-10-29"}
     _channels_world(monkeypatch, tmp_path, [deal], realty="")
     owner = "«Логика молока» купила бренд растительных продуктов Velle\n\nПокупатель: Логика молока\nПродавцы: Владислав Романовский, Петр Жуков\nСтатус: Закрыта"
     decisions = [{"id": 1092, "deal_id": "gV1", "verdict": "approve", "edited_text": owner,

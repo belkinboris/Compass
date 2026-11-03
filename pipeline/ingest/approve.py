@@ -438,6 +438,15 @@ def main(write=False):
         post = post_mod.get(card['id'])
         if post:
             card['post_verdict'] = post['verdict']
+    # Кнопка под проектом поста у карточки, которая УЖЕ на сайте (пост
+    # показали заново после правки) — та же отметка у карточки в базе.
+    for deal in data['deals']:
+        post = post_mod.get(deal['id'])
+        if post and post['verdict'] == 'post_yes':
+            deal['post_approved'] = True
+            deal.pop('no_post', None)
+        elif post and post['verdict'] == 'post_no' and not deal.get('post_approved'):
+            deal['no_post'] = True
     fresh = []
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
@@ -462,6 +471,11 @@ def main(write=False):
             {'verdict': card['post_verdict']} if card.get('post_verdict') else None)
         if post and post['verdict'] == 'post_no':
             clean['no_post'] = True
+        # ПОСТ — ТОЛЬКО ПО КНОПКЕ (владелец, 3 ноября 2026: «без кнопки
+        # никогда»): одобрение карточки выпускает только карточку; пост ждет
+        # «📣 Пост в канал» (или текста владельца в ответ на проект поста).
+        if (post and post['verdict'] == 'post_yes') or override:
+            clean['post_approved'] = True
         import strip_yo  # pipeline/strip_yo.py: база без «е» (27 октября 2026)
         clean = strip_yo.strip_values(clean)
         data['deals'].append(clean)
