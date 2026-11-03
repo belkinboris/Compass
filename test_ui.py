@@ -3031,7 +3031,9 @@ def test_deal_team_is_grouped_by_side_without_duplicate_firms(page, base_url):
     # условия сделки — на «Обзоре» (с 28 октября 2026): наш текст без «как предполагал „Ъ“»
     law = page.inner_text("#app")
     assert "как и предполагал" not in law.lower()
-    assert "Сделка не предусматривает соглашений об обратном выкупе" in law
+    # Фраза об обратном выкупе — наша, в любой редакции (вычитка 3 ноября 2026
+    # переписала «Сделка не предусматривает соглашений об обратном выкупе»).
+    assert re.search(r"обратн\w+\s+выкуп", law.lower()), law[:400]
     assert "замещающие" not in law
 
 
@@ -3070,7 +3072,8 @@ def test_firm_page_reads_the_advised_side_from_context(page, base_url):
     visit(page, base_url, "#/deal/g6206d0f7")
     page.wait_for_selector(".team")
     cols = {c.locator(".team-kind").text_content(): c.text_content() for c in page.locator(".team-col").all()}
-    assert "Nextons" in cols.get("Со стороны эмитента", ""), cols
+    # Nextons снят с карточки вычиткой 3 ноября 2026 (источник не подтвердил);
+    # колонка организаторов остается, «не уточнена» не появляется.
     assert "VERBA" in cols.get("Со стороны организаторов и кредиторов", ""), cols
     assert "Сторона не уточнена" not in cols, cols
     # Финансирование: подпись колонки — по типу сделки, «(не кредитор)» — не кредитор
