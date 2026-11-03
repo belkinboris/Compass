@@ -239459,7 +239459,7 @@
      "value": "2026-11-01",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "b453c23eb1ca"
+     "card_hash": "b7c14de3d9ea"
     },
     "nature": {
      "control_change": true,
@@ -239505,7 +239505,25 @@
    "reread_hash": "3806dc994757.214b5a",
    "reread_note": "статьи: 8",
    "deep_researched": "2026-11-02",
-   "proofread": "2026-11-02"
+   "proofread": "2026-11-02",
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Pochta-Rossii-vystavila-zdanie-Glavpochtamta-na-aukcion-za-77-mlrd-rublej-87733"
+    ]
+   ],
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "Компания планирует продать актив в формате аукциона. Торги состоятся 9 декабря. Стартовая цена составит 7,7 млрд руб. Прием заявок на участие в аукционе завершится 3 декабря. Согласно сведениям о лоте, представленным на сайте, потенциальному покупателю…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Pochta-Rossii-vystavila-zdanie-Glavpochtamta-na-aukcion-za-77-mlrd-rublej-87733"
+     ]
+    }
+   ]
   },
   {
    "id": "gab80558c",
