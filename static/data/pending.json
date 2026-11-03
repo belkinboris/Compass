@@ -35,6 +35,135 @@
     "draft_id": "d92129667",
     "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей"
    }
+  },
+  {
+   "id": "g4b315d34",
+   "date": "2026-11-03",
+   "title": "Производитель майонеза «Слобода» продаст свой офис на севере Москвы",
+   "ind": "Финтех",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Производитель майонеза «Слобода»",
+   "asset": "свой офис на севере Москвы",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "Группа «Эфко» решила продать бизнес-центр «Аркус IV» на Ленинградском проспекте в Москве, который она приобрела годом ранее под штаб-квартиру. Это произошло после ареста основателя компании и ряда ее топ-менеджеров",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "свой офис на севере Москвы",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Производитель майонеза «Слобода»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/03/11/2026/6ae8ae796bb9e5802d392dc4"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T09:52:12+00:00"
+  },
+  {
+   "id": "g6f6660eb",
+   "date": "2026-11-03",
+   "title": "Скандал с пыточной под Киевом приобрел всемирное звучание, заявили в Кремле",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261103/peskov-2128895612.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Скандал с пыточной под Киевом",
+   "asset": "всемирное звучание, заявили в Кремле",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261103/peskov-2128895612.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Скандал с пыточной под Киевом",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261103/peskov-2128895612.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "всемирное звучание, заявили в Кремле",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261103/peskov-2128895612.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T09:52:12+00:00"
   }
  ]
 }
