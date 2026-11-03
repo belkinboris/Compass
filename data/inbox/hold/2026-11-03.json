@@ -219,41 +219,52 @@
    ]
   },
   {
-   "draft_id": "d43270155",
-   "title": "Корпоративные заемщики привлекли 743 млрд рублей в октябре",
+   "draft_id": "d78972178",
+   "title": "Крупнейший банк Венгрии не смог продать российскую «дочку»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9079428"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/03/11/2026/6ae97af53783f8c91dc64163"
     ]
    ],
-   "sum": "743 млрд ₽",
+   "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Согласование получено",
+   "events": [
+    {
+     "kind": "approval",
+     "date": "2026-11-03",
+     "title": "Согласование получено",
+     "note": "Главный исполнительный директор OTP Group Петер Чани заявил, что банк искал потенциального покупателя, который бы получил одобрение Москвы на покупку «дочки» венгерского банка и предложил приемлемую цену, но такого не нашли",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/03/11/2026/6ae97af53783f8c91dc64163"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": "Корпоративные заемщики",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Корпоративные заемщики",
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d94586573",
-   "title": "Путин установил порядок передачи государству средств умерших россиян",
+   "draft_id": "d92129667",
+   "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей",
    "date": "2026-11-03",
    "src": [
     [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/313643"
+     "web:ura.news",
+     "https://ura.news/news/1053140870"
     ]
    ],
    "sum": null,
@@ -275,42 +286,13 @@
    ]
   },
   {
-   "draft_id": "d28467977",
-   "title": "Реплику автомобиля KITT из культового сериала выставили на аукцион",
+   "draft_id": "d15889791",
+   "title": "«Торговые точки будут убирать». Землю под ростовским рынком «Темерник» выставили на продажу",
    "date": "2026-11-03",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/repliku-avtomobilya-kitt-iz-kultovogo-seriala-vystavili-na-auktsion/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d80386493",
-   "title": "Продажа алкоголя, работа автобусов и больниц: какие ограничения ждут тюменцев 4 ноября",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141155"
+     "web:161.ru",
+     "https://161.ru/text/gorod/2026/11/03/76740713/"
     ]
    ],
    "sum": null,
@@ -329,63 +311,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d17637575",
-   "title": "Россияне смогут купить товары с большими скидками за 99 рублей",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141016"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64904089",
-   "title": "«Прибыли хватает только купить еду». Кооперативному рынку в Краснодаре 150 лет — что с ним сейчас?",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/11/03/76739539/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку ge1b2eba1 (общие редкие слова: выстав, рынком) — проверьте, не дубль ли"
    ]
   }
  ]
