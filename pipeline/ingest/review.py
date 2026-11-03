@@ -837,6 +837,11 @@ def build_snapshot(card, companies):
     }
 
 
+def _ms_copied(card, kind, headline):
+    from accept_card import milestone_copied
+    return milestone_copied(card, kind, headline)
+
+
 def mark_milestone(card, kind):
     """Помечает этап `kind` (`negotiations`/`approval`/`signed`/`closed`/
     `cancelled`) вехой: `newsworthy=True` + `snapshot` — карточка КАК ОНА
@@ -1042,18 +1047,16 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         elif not str(mheadline or '').strip():
             refused.append((dict(id=mid, field='milestone'),
                             ['заголовок вехи пуст']))
+        elif _ms_copied(cards[mid], mkind, mheadline):  # своей фразой: docs/card_title.md
+            refused.append((dict(id=mid, field='milestone'), ['заголовок вехи повторяет заголовок источника '
+                            '«%s» — своей фразой' % _ms_copied(cards[mid], mkind, mheadline)[:90]]))
         else:
             event = mark_milestone(cards[mid], mkind)
             if event is None:
                 refused.append((dict(id=mid, field='milestone'),
                                 ['у карточки %s нет этапа %r в events[]' % (mid, mkind)]))
-            # Уже вехой, и заголовок УЖЕ есть, — вот это повторный прогон, его
-            # и отклоняем (снимок не переписываем, см. write-шаг ниже). Уже
-            # вехой, но БЕЗ заголовка — переходное состояние: часть 1 (снимок
-            # + панель этапа) ставилась до того, как заголовок вообще
-            # появился в схеме, и такой этап иначе никогда бы не получил
-            # заголовок. Разрешаем ДОПИСАТЬ заголовок задним числом, не
-            # трогая уже снятый снимок.
+            # Веха с заголовком — повтор, отклоняем; веха без заголовка (старая
+            # схема) — заголовок дописываем, снимок не трогаем.
             elif event.get('newsworthy') and str(event.get('headline') or '').strip():
                 refused.append((dict(id=mid, field='milestone'),
                                 ['этап %r карточки %s уже помечен вехой' % (mkind, mid)]))
