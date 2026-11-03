@@ -315,9 +315,32 @@ class LLMCutOff(RuntimeError):
         self.partial = partial
 
 
+FALLBACK_MODEL = os.environ.get("LLM_FALLBACK_MODEL", "yandexgpt/latest")
+
+
 def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = None,
              model: str | None = None, reasoning_effort: str | None = None,
              stats: dict | None = None) -> str:
+    """Основная модель, а отказала в доступе (HTTP 401/403/404) — запасная.
+
+    3 ноября 2026 gpt-oss-120b начала отвечать 403, и «Разбор сделки», «Контекст»
+    и ассистент на сайте писали «Ассистент сейчас недоступен», хотя YandexGPT
+    в той же папке отвечала за 4 секунды. Явно заданную модель (стенд сравнения)
+    не подменяем."""
+    try:
+        return _call_llm_once(system, user, max_tokens, deadline, model, reasoning_effort, stats)
+    except Exception as e:  # noqa: BLE001
+        if model or current_model() == FALLBACK_MODEL or not re.search(r"HTTP (401|403|404)", str(e)):
+            raise
+        if deadline is not None and deadline - time.monotonic() < LLM_MIN_ATTEMPT:
+            raise
+        logger.warning("LLM %s отказала в доступе (%s) — запасная модель %s", current_model(), e, FALLBACK_MODEL)
+        return _call_llm_once(system, user, max_tokens, deadline, FALLBACK_MODEL, "", stats)
+
+
+def _call_llm_once(system: str, user: str, max_tokens: int, deadline: float | None = None,
+                   model: str | None = None, reasoning_effort: str | None = None,
+                   stats: dict | None = None) -> str:
     """Вызов Yandex AI Studio Responses API с ретраями. Пустой ответ/сбой -> RuntimeError.
 
     `deadline` — момент (time.monotonic), после которого попыток больше не будет.
