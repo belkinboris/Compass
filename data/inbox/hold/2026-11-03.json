@@ -307,45 +307,6 @@
    ]
   },
   {
-   "draft_id": "d76715509",
-   "title": "Пассажиры «бесконечного круиза» не договорились о выкупе лайнера",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/11/03/1242458-passazhiri-beskonechnogo"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-03",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/business/news/2026/11/03/1242458-passazhiri-beskonechnogo"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d74098275",
    "title": "Росимущество начало отбор организатора продажи 7,8% - 1 акция «Совкомфлота»",
    "date": "2026-11-03",
@@ -373,208 +334,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d70743112",
-   "title": "Петербург получит льготный лизинг на покупку 200 трамваев",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/03/peterburg-poluchit-lgotnij"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финансовые услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d99245726",
-   "title": "Команду «Формулы-1» Cadillac могут продать за $3 млрд",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/komandu-formuly-1-cadillac-mogut-prodat-za-3-mlrd/"
-    ]
-   ],
-   "sum": "$3 млрд",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-03",
-     "title": "Переговоры",
-     "note": "Совладелец команды Марк Уолтер рассматривает возможность продажи своей доли в проекте, стоимость которого может достигать $3 млрд.",
-     "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/komandu-formuly-1-cadillac-mogut-prodat-za-3-mlrd/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73599386",
-   "title": "Mercedes-Benz продал свою сеть быстрых зарядных станций Electra",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261103/mercedes-benz-874904295.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261103/mercedes-benz-874904295.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "своя сеть быстрых зарядных станций Electra",
-   "seller": "Mercedes-Benz",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "своя сеть быстрых зарядных станций Electra",
-    "seller": "Mercedes-Benz"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d92373570",
-   "title": "Россия и Буркина-Фасо безвозмездно передадут вакцины от оспы птиц",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261103/rossija-874903574.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29945714",
-   "title": "Форум «Слияния и поглощения в России» пройдет в ноябре",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/company_news/266617/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d04598866",
-   "title": "Задержана женщина, сообщившая о пытках в доме-концлагере под Киевом. Буданов заявил, что она купила форму и следила за объектом",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/long-zaderzhana-zhenschina-soobschivshaya-o-pytkah-v-dome-kontslagere-pod-kievom-budanov-zayavil-chto-ona-kupila-formu-i-sledila-za-ob-ektom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/11/03/long-zaderzhana-zhenschina-soobschivshaya-o-pytkah-v-dome-kontslagere-pod-kievom-budanov-zayavil-chto-ona-kupila-formu-i-sledila-za-ob-ektom/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "форма и следила за объектом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "форма и следила за объектом",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -607,30 +366,19 @@
    ]
   },
   {
-   "draft_id": "d78034594",
-   "title": "Туристке не продали обложку Louis Vuitton из-за российского гражданства",
+   "draft_id": "d67385926",
+   "title": "Крупный инвестиционный проект в Финляндии остановили из-за лягушки",
    "date": "2026-11-03",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/3/turistke-ne-prodali-oblozhku-louis-vuitton-iz-za-rossijskogo-grazhdanstva"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/03/direktiva-es-o-zashhite-ljagushki"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "Во Флоренции россиянке отказались продать обложку для документов от Louis Vuitton стоимостью 36 тыс. рублей.",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/news/2026/11/3/turistke-ne-prodali-oblozhku-louis-vuitton-iz-za-rossijskogo-grazhdanstva"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -642,6 +390,150 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54964405",
+   "title": "Адвокат предупредила о рисках покупки квартиры с материнским капиталом",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2195718/advokat-predupredila-o-riskakh-pokupki-kvartiry-s-materinskim-kapitalom-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d13801983",
+   "title": "Тюменская область ввела выплаты сиротам на покупку жилья",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261103/vyplaty-2129031824.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d13624950",
+   "title": "Немецкий автоконцерн приступил к сокращениям на совместном предприятии в Китае",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/03/nemetskiy-avtokontsern-pristupil-k-sokrascheniyam-na-sovmestnom-predpriyatii-v-kitae/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d10395225",
+   "title": "Трамп похвастался продажами оружия Украине через Европу",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053141353"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17969734",
+   "title": "Как сделать exit в 2026 году? Готовитесь продать компанию, но покупатель оценивает бизнес ниже потенциала и предлагает earn-out в течение нескольких лет, пока вы отвечаете за KPI? В какой-то момент пр",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7824"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
