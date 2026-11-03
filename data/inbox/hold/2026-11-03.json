@@ -366,13 +366,13 @@
    ]
   },
   {
-   "draft_id": "d67385926",
-   "title": "Крупный инвестиционный проект в Финляндии остановили из-за лягушки",
+   "draft_id": "d55945052",
+   "title": "Трамп заявил, что продолжает продавать оружие на Украину",
    "date": "2026-11-03",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/03/direktiva-es-o-zashhite-ljagushki"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/03/1242516-o-prodolzhenii-postavok"
     ]
    ],
    "sum": null,
@@ -394,13 +394,13 @@
    ]
   },
   {
-   "draft_id": "d54964405",
-   "title": "Адвокат предупредила о рисках покупки квартиры с материнским капиталом",
+   "draft_id": "d90285511",
+   "title": "В Архангельске пироги передали на ледокол «Диксон» в рамках акции «Пирог на четвертое»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2195718/advokat-predupredila-o-riskakh-pokupki-kvartiry-s-materinskim-kapitalom-izi"
+     "web:tass.ru",
+     "https://tass.ru/spb-news/28282931"
     ]
    ],
    "sum": null,
@@ -418,80 +418,60 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13801983",
-   "title": "Тюменская область ввела выплаты сиротам на покупку жилья",
+   "draft_id": "d10032415",
+   "title": "XRG приобрела у Shell долю в проекте по производству СПГ в Австралии",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261103/xrg--874907916.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261103/xrg--874907916.html"
+     ]
+    }
+   ],
+   "buyer_name": "XRG",
+   "asset": null,
+   "seller": "Shell долю в проекте по производству СПГ в Австралии",
+   "parsed_parties": {
+    "buyer": "XRG",
+    "asset": null,
+    "seller": "Shell долю в проекте по производству СПГ в Австралии"
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56342693",
+   "title": "Приданкина пробилась во второй раунд турнира категории WTA 250 в Гонконге",
    "date": "2026-11-03",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261103/vyplaty-2129031824.html"
+     "https://ria.ru/20261103/pridankina-2129032964.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d13624950",
-   "title": "Немецкий автоконцерн приступил к сокращениям на совместном предприятии в Китае",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/nemetskiy-avtokontsern-pristupil-k-sokrascheniyam-na-sovmestnom-predpriyatii-v-kitae/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d10395225",
-   "title": "Трамп похвастался продажами оружия Украине через Европу",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141353"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -509,13 +489,42 @@
    ]
   },
   {
-   "draft_id": "d17969734",
-   "title": "Как сделать exit в 2026 году? Готовитесь продать компанию, но покупатель оценивает бизнес ниже потенциала и предлагает earn-out в течение нескольких лет, пока вы отвечаете за KPI? В какой-то момент пр",
+   "draft_id": "d61105597",
+   "title": "В Пермском крае рядом с популярным санаторием выставили на продажу детский лагерь",
    "date": "2026-11-03",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7824"
+     "web:ura.news",
+     "https://ura.news/news/1053141355"
+    ]
+   ],
+   "sum": "90 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g76850877 (общие редкие слова: выстав, пермск) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d36444045",
+   "title": "Новые высотки возле КЗКТ и запрет продажи алкоголя: главное в Кургане за 3 ноября",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053141354"
     ]
    ],
    "sum": null,
@@ -533,7 +542,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
