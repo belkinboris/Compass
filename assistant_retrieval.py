@@ -3170,8 +3170,20 @@ def _search_is_specific(intent: Intent, docs: list[Doc], idx: Index) -> bool:
     if not docs:
         return False
     top = docs[0]
-    return any(len(t) >= 4 and _term_weight(t, idx) >= 3.0 and any(_name_word_match(s, t) for s in top.strong)
-               for t in intent.terms)
+
+    def names_one_deal(t: str) -> bool:
+        # Год («2026») и число — не имя: «какие сделки вели в 2026 году?» со
+        # страницы сделки попадало в случайную карточку с «2026» в заголовке
+        # (3 ноября 2026). Слово категории («кофейни», «сеть») стоит в
+        # заголовках нескольких найденных сделок — это тема для списка, а не
+        # попадание в одну сделку: «сделки с кофейнями» отвечало одной
+        # карточкой Starbucks, когда вычитка вписала «кофейни» в ее заголовок.
+        if t.isdigit() or not any(_name_word_match(s, t) for s in top.strong):
+            return False
+        carriers = sum(1 for d in docs[:12] if any(_name_word_match(s, t) for s in d.strong))
+        return carriers <= 2
+
+    return any(len(t) >= 4 and _term_weight(t, idx) >= 3.0 and names_one_deal(t) for t in intent.terms)
 
 
 def _scoped(context_type: str | None, context_id: str | None, idx: Index) -> list[Doc] | None:
