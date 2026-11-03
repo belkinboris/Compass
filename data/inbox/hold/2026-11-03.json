@@ -247,197 +247,6 @@
    ]
   },
   {
-   "draft_id": "d89896005",
-   "title": "Татарстан вошел в число наиболее активных пользователей инвестиционного сервиса МТС",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-03_tatarstan_voshel_v_chislo_naibolee"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87457342",
-   "title": "В России обвал продаж новых ноутбуков. Россияне покупают подержанные и используют их «до дыр»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-03_v_rossii_kollaps_rynka_novyh"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "подержанные и используют их «до дыр»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "подержанные и используют их «до дыр»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d17788527",
-   "title": "МТС открыла продажи iPhone Duo",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-02_mts_otkryla_prodazhi_iphone_duo"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d49244338",
-   "title": "Главный в мире чипмейкер внезапно и срочно купил завод экранов для iPad и MacBook",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-30_samyj_glavnyj_v_mire_chipmejker"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-30",
-     "title": "Сделка завершена",
-     "note": "TSMC стала владельцем завода компании AUO по выпуску дисплеев. Раньше AUO поставляла матрицы для устройств Apple – планшетов iPhone и ноутбуков MacBook. Планов по производству дисплеев у TSMC пока нет – это крупнейший в мире вендор микросхем, в том числе для…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-30_samyj_glavnyj_v_mire_chipmejker"
-     ]
-    }
-   ],
-   "buyer_name": "Главный в мире чипмейкер внезапно и срочно",
-   "asset": "завод экранов для iPad и MacBook",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Главный в мире чипмейкер внезапно и срочно",
-    "asset": "завод экранов для iPad и MacBook",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d85795911",
-   "title": "Microsoft «убила» Windows 10, чтобы озолотиться на Windows 11. Вместо этого ее продажи рухнули на четверть",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-30_microsoft_sela_v_luzhuona_ubila"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-10-30",
-     "title": "Сделка завершена",
-     "note": "Microsoft констатировала 27-процентный обвал продаж Windows 11 – единственной ее пользовательской ОС, которая пока поддерживается. По всему миру пользователи отказываются переходить на нее и сидят на давно купленной Windows 10, техподдержка которой…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-30_microsoft_sela_v_luzhuona_ubila"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15338280",
-   "title": "А вы поверили. Mail.ru отобрала у пользователей бесплатный терабайт в облаке, который дарила навсегда",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-30_a_vy_poverilimailru_otobrala"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d02556203",
    "title": "Росимущество начало отбор юрлица для организации продажи акций «Совкомфлота»",
    "date": "2026-11-03",
@@ -551,148 +360,6 @@
    ]
   },
   {
-   "draft_id": "d60039269",
-   "title": "Малый бизнес привлек более 2 млрд рублей льготного лизинга Корпорации МСП",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261103/lizing-2128751367.html"
-    ]
-   ],
-   "sum": "2 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Малый бизнес",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Малый бизнес",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d89688666",
-   "title": "Крупнейший банк Кыргызстана готовит IPO в Лондоне и выпуск юаневых облигаций",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/313671"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16362920",
-   "title": "Президент подписал указ о порядке передачи выморочных вкладов государству",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266610/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d21050329",
-   "title": "Ирина Аллегрова избавилась от подаренной Лужковым квартиры",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/irina-allegrova-izbavilas-ot-podarennoy-luzhkovym-kvartiry/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89243505",
-   "title": "Блендер: ошибки, которые при покупке совершают почти все",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053141191"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d02012328",
    "title": "DST Global Юрия Мильнера вложился в американский ИИ-стартап Dulo . В раунде на $130 млн участвовали фонды Construct Capital и Lowercarbon Capital, бывший гендиректор Google Эрик Шмидт и председатель K",
    "date": "2026-11-03",
@@ -722,17 +389,326 @@
    ]
   },
   {
-   "draft_id": "d06151640",
-   "title": "Открыты продажи на летние рейсы из Сочи в Тель-Авив. Сколько стоят билеты?",
+   "draft_id": "d79791989",
+   "title": "Росимущество начало отбор организатора для продажи акций «Совкомфлота»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:93.ru",
-     "https://93.ru/text/transport/2026/11/03/76741565/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9079634"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d03943343",
+   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/03/1242319-rosimuschestvo-nachalo-podgotovku"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d53310146",
+   "title": "Бумаги «Совкомфлота» упали на новости о продаже части акций",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "Росимущество планирует продать часть принадлежащих государству акций «Совкомфлота», выставив на торги почти 7,8% бумаг компании",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19388209",
+   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/03/11/2026/6ae9972ca0c29c8950bc0ffb"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d72180837",
+   "title": "Росимущество начало отбор организатора продажи 7,8% - 1 акция «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1126734"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d84313586",
+   "title": "Популярные в России автомобили Li Auto взломаны хакерами и превращены в «кирпичи». Теперь они даже не заводятся, а мошенники требуют огромный выкуп",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-03_populyarnye_v_rossii_avtomobili"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69954013",
+   "title": "Росимущество начало отбор юридического лица для продажи «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261103/sovkomflot-874889120.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d39916884",
+   "title": "«Дом.РФ» выставил на торги проект КРТ под Омском",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261103/krt-2128869941.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d99088551",
+   "title": "«Дом.РФ» выставил на торги проект КРТ под Барнаулом",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261103/krt-2128868293.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт, торги) — проверьте, не дубль ли",
+    "та же новость, что ««Дом.РФ» выставил на торги проект КРТ под Омском» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d79574295",
+   "title": "Росимущество начало отбор организатора продажи 7,8% акций «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/313719"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42572767",
+   "title": "ВС уточнил подход к ответственности за незаконную продажу жилья на торгах",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266613/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
