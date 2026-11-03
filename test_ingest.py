@@ -4647,6 +4647,23 @@ def test_raw_console_hides_foreign_only_deals(monkeypatch):
         "иностранный черновик все равно попал в план рассылки"
 
 
+def test_a_single_source_card_needs_a_written_search():
+    """Владелец, 3 ноября 2026, «Концентрация»: «там источник только
+    mergers.ru, мы же только сегодня обсуждали, как можно глубже искать».
+    Одна ссылка — находка, пока не перечислено пять мест, где искали еще."""
+    import accept_card
+    base = {"companies": {}, "deals": [], "telegram_posts": {}}
+    card = {"id": "gs1", "title": "x", "src": [["Mergers.ru", "https://mergers.ru/news/1"]]}
+    codes = [c for c, _ in accept_card.findings(card, base)]
+    assert "one_source" in codes
+    card["accepted_notes"] = {"searched": ["Интерфакс", "Коммерсантъ", "сайт компании", "Telegram консультанта",
+                                           "e-disclosure"]}
+    assert "one_source" not in [c for c, _ in accept_card.findings(card, base)]
+    card.pop("accepted_notes")
+    card["src"].append(["Buzko Legal", "https://t.me/BuzkoLegal/1"])
+    assert "one_source" not in [c for c, _ in accept_card.findings(card, base)]
+
+
 def test_acceptance_findings_point_at_what_the_owner_saw():
     """11 сентября 2026: предмет-описание в косвенном падеже, стороны текстом,
     газетная фраза в поле, «Зачем» об объеме рынка — все это механика обязана
@@ -4666,7 +4683,8 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert any(c.startswith("press:") for c in codes), codes
     clean = {"id": "gt2", "ind": "ИТ и интернет", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
-             "src": [["Ведомости", "https://www.vedomosti.ru/x"]], "eco": {}, "law": {},
+             "src": [["Ведомости", "https://www.vedomosti.ru/x"], ["Интерфакс", "https://www.interfax.ru/y"]],
+             "eco": {}, "law": {},
              # С 14 октября 2026 пустой продавец новой покупки — находка, пока
              # читатель не записал, где искал владельца («Соликамскбумпром»).
              "accepted_notes": {"no_profile": {"seller": "искали в истории участников ЕГРЮЛ и статьях о CyberOK — не назван"}}}
