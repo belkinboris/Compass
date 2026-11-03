@@ -505,7 +505,7 @@ def build_plan(resend=None, only=None):
         card = target[0]
         card['draft_sent'] = False
         card['post_draft_sent'] = False
-        card.pop('post_preview', None)
+        old_preview = card.pop('post_preview', None)
         card['pending_since'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
         answered = {}
     for card in pending['cards']:
@@ -589,6 +589,24 @@ def build_plan(resend=None, only=None):
             card['_pending_post_preview'] = rendered
             plan.append((post_message_text(card, comps, rendered=rendered), post_keyboard(card),
                          ('card', card, 'post_draft_sent')))
+    if resend:
+        # ПОВТОРНЫЙ ПОКАЗ ВИДЕН КАК ПОВТОРНЫЙ (владелец, 3 ноября 2026,
+        # Шерегеш: «почему-то два раза отправили и карту и пост» — второй
+        # показ ничем не отличался от первого на вид). Карточка помечается
+        # «показываем заново», а проект поста, не изменившийся ни буквой,
+        # второй раз не шлется: прежний текст и отметка остаются.
+        fixed = []
+        for text, kb, (kind, c, flag) in plan:
+            if c is target[0] and flag == 'post_draft_sent' and c.get('_pending_post_preview') == old_preview:
+                c['post_draft_sent'] = True
+                c['post_preview'] = old_preview
+                c.pop('_pending_post_preview', None)
+                continue
+            if c is target[0] and flag == 'draft_sent':
+                text = ('🔁 ПОКАЗЫВАЕМ ЗАНОВО: карточку поправили после первого показа, '
+                        'прежние кнопки не действуют.\n' + text)
+            fixed.append((text, kb, (kind, c, flag)))
+        plan = fixed
     state = promote.load_state()
     seen = set(state.get('sent_raw', [])) | set(state.get('decided_raw', {}))
     # Память и по ЗАГОЛОВКУ, не только по draft_id: одна и та же новость на
@@ -788,6 +806,16 @@ def main(write=False, resend=None, only=None):
     thread = console_topics.thread_id('decision')
     with httpx.Client(timeout=20) as client:
         for i, (text, keyboard, (kind, item, mark)) in enumerate(plan):
+            # Прямо перед отправкой — еще раз память сайта: второй прогон
+            # (другой контейнер, тот же час) мог показать карточку минутой
+            # раньше (3 ноября 2026, Шерегеш: карточка и пост ушли дважды
+            # в 09:39 — план строился до чужого показа).
+            if kind == 'card' and not resend:
+                fresh = (site_shown() or {}).get('cards') or {}
+                if item['id'] in fresh:
+                    item['draft_sent'] = item['post_draft_sent'] = True
+                    item.pop('_pending_post_preview', None)
+                    continue
             if i:
                 time.sleep(PAUSE)
             ok_all = True
@@ -813,6 +841,8 @@ def main(write=False, resend=None, only=None):
                     mark_sent(item, mark)
                     if mark == 'post_draft_sent' and pending_preview is not None:
                         item['post_preview'] = pending_preview
+                    if mark == 'post_draft_sent' or not goes_to_channel(item):
+                        record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}])
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
                     state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'
