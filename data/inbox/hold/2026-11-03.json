@@ -219,63 +219,6 @@
    ]
   },
   {
-   "draft_id": "d66484144",
-   "title": "Право застройки 15,7 га в Воронеже выставили на торги за 137 млн рублей",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/5000130-pravo-zastroyki-15-7-ga-v-voronezhe-vystavili-na-torgi-za-137-mln-rubley/"
-    ]
-   ],
-   "sum": "137 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5257a627 (общие редкие слова: вороне, выстав, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d03943343",
-   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/11/03/1242319-rosimuschestvo-nachalo-podgotovku"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d53310146",
    "title": "Бумаги «Совкомфлота» упали на новости о продаже части акций",
    "date": "2026-11-03",
@@ -310,10 +253,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -343,7 +284,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -373,7 +314,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -403,7 +344,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -433,102 +374,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d71328431",
-   "title": "Круглый стол «ДП» об инвестициях в корпоративное здоровье: прямая трансляция",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/03/kruglij-stol-dp-ob-investicijah"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80451055",
-   "title": "Октябрь стал рекордным по продажам новых автомобилей в РФ с начала года",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2195598/2026-11-03/oktiabr-stal-rekordnym-po-prodazham-novykh-avtomobilei-v-rf-s-nachala-goda"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51000133",
-   "title": "Пассажиры «бесконечного круиза» хотели выкупить лайнер вместо высадки на берег",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2195590/passazhiry-beskonechnogo-kruiza-khoteli-vykupit-lainer-vmesto-vysadki-na-bereg-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "Пассажиры круизного лайнера Odyssey компании Villa Vie отказались от попытки выкупить судно и продолжить его эксплуатацию. Переговоры с кредитором продолжались два месяца, но завершились безрезультатно. Об этом 2 ноября сообщил портал Business Insider .…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2195590/passazhiry-beskonechnogo-kruiza-khoteli-vykupit-lainer-vmesto-vysadki-na-bereg-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -558,17 +404,17 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Росимущество начало подготовку к продаже доли в «Совкомфлоте» — второе издание, в группу не шлем"
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d26667098",
-   "title": "Под Челябинском продается дом в стиле «прованс» из бруса с травяной кухней. Фото",
+   "draft_id": "d77639254",
+   "title": "Хабенский допустил слияние МХТ им. Чехова и МХАТ им. Горького в будущем",
    "date": "2026-11-03",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053141218"
+     "web:interfax.ru",
+     "https://www.interfax.ru/culture/1126792"
     ]
    ],
    "sum": null,
@@ -583,7 +429,141 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Пищепром и напитки",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23518640",
+   "title": "Business Insider: пассажиры застрявшего в Камбодже лайнера попытались его выкупить",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28282789"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "Группа договорилась внести \"значительную сумму\", однако ее оказалось недостаточно, сообщил член Совета резидентов лайнера Пол Монтойя",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28282789"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77972298",
+   "title": "Mercedes-Benz продал свою европейскую сеть быстрых зарядных станций",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28282699"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "Покупателем стал французский оператор зарядной инфраструктуры Electra",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28282699"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "своя европейская сеть быстрых зарядных станций",
+   "seller": "Mercedes-Benz",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "своя европейская сеть быстрых зарядных станций",
+    "seller": "Mercedes-Benz"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d88406565",
+   "title": "Власти Петербурга привлекут федеральные кредиты на 20 млрд рублей",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/03/76742327/"
+    ]
+   ],
+   "sum": "20 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Власти Петербурга",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Власти Петербурга",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d98661039",
+   "title": "Россиян предупредили о риске покупки одного вида квартир",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/03/rossiyan-predupredili-o-riske-pokupki-odnogo-vida-kvartir/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
