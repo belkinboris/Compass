@@ -156,36 +156,6 @@
    ]
   },
   {
-   "draft_id": "d19910519",
-   "title": "Росимущество ищет агента для продажи акций «Совкомфлота»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266621/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d64182504",
    "title": "«Совкомфлот» готовят к отплытию // Росимущество начало подготовку к продаже 7,8% «Совкомфлота»",
    "date": "2026-11-03",
@@ -245,30 +215,47 @@
    ]
   },
   {
-   "draft_id": "d72442064",
-   "title": "Миллиардер из США планирует купить зарубежные активы «Лукойла», пишут СМИ",
+   "draft_id": "d11427610",
+   "title": "В «Читай-городе» рассказали об утилизации снятых с продажи книг",
    "date": "2026-11-03",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261103/boeli-874911944.html"
+     "https://1prime.ru/20261103/knigi-874913438.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-03",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261103/boeli-874911944.html"
-     ]
-    }
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87547759",
+   "title": "СМИ: консорциум миллиардера Боэли хочет купить зарубежные активы «Лукойла»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261103/lukoyl-2129072987.html"
+    ]
    ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
