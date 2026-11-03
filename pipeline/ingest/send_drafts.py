@@ -496,7 +496,7 @@ def build_plan(resend=None, only=None):
             card['draft_sent'] = True
             card['post_draft_sent'] = True
             if rec.get('post_preview') and not card.get('post_preview'):
-                card['post_preview'] = rec['post_preview']
+                card['post_preview'] = format_post.strip_console_wrapper(rec['post_preview'])
     postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
     if resend:
         target = [c for c in pending['cards'] if c['id'] == resend]

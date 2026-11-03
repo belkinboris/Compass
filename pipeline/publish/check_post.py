@@ -77,11 +77,19 @@ def _party_narrative(value):
     return bool(PARTY_NARRATIVE.search(value or ''))
 
 
+CONSOLE_WRAPPER_RE = re.compile(r'\[пост [\w~-]+\]|на проверку\s*$|Кнопки под постом:|ЗАМЕНИТ пост|━━━━━━', re.M)
+
+
 def check(text):
     """Список причин, по которым пост нельзя публиковать молча. Пусто — можно."""
     problems = []
     if not text or not text.strip():
         return ['пост пуст']
+    # Текст сообщения КОНСОЛИ вместо поста (3 ноября 2026, «Дом.РФ»/усадьба
+    # Елизарьева: в «Компас - Недвижимость» ушли «[пост g7005cf1d] — В КАНАЛ …,
+    # на проверку», «Ответ на это сообщение…» и «Кнопки под постом: …»).
+    if CONSOLE_WRAPPER_RE.search(text):
+        problems.append('в посте служебный текст консоли («на проверку», «Кнопки под постом»)')
 
     if re.search(r'\bundefined\b|\bnull\b|\bNaN\b', text):
         problems.append('на экране служебное слово (undefined/null/NaN)')
