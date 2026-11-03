@@ -256,6 +256,59 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "📣 [пост g90784f0a] — В КАНАЛ «Компас - Недвижимость», на проверку\nНиже — текст поста как он уйдет подписчикам. Ответ на это сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n━━━━━━━━━━━━\n<b>В Пермском крае продают детский лагерь у санатория «Усть-Качка» за 90 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> действующий детский лагерь в районе Усть-Качки\n<b>Сумма:</b> 90 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053141355\">URA.RU</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g90784f0a\">карточке сделки</a>\n\nКнопки под постом: Открыть карточку сделки — https://projectcompass.ru/#/deal/g90784f0a"
+  },
+  {
+   "id": "g5c32c213",
+   "date": "2026-11-03",
+   "title": "В АЭИ рассказали, какую продукцию покупает Бразилия у России",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261103/brazilija-874911049.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "России",
+   "asset": "Бразилия",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "Бразилия",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/brazilija-874911049.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "России",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/brazilija-874911049.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T17:54:11+00:00"
   }
  ]
 }

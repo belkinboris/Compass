@@ -156,36 +156,6 @@
    ]
   },
   {
-   "draft_id": "d69954013",
-   "title": "Росимущество начало отбор юридического лица для продажи «Совкомфлота»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261103/sovkomflot-874889120.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d79574295",
    "title": "Росимущество начало отбор организатора продажи 7,8% акций «Совкомфлота»",
    "date": "2026-11-03",
@@ -277,64 +247,6 @@
    ]
   },
   {
-   "draft_id": "d35681708",
-   "title": "В Перми продают за 400 млн рублей крупный бизнес-центр",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141325"
-    ]
-   ],
-   "sum": "400 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g17a522dc (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d61105597",
-   "title": "В Пермском крае рядом с популярным санаторием выставили на продажу детский лагерь",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141355"
-    ]
-   ],
-   "sum": "90 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g76850877 (общие редкие слова: выстав, пермск) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d89743859",
    "title": "Reuters узнал о сделке, которая «положит конец» продаже активов ЛУКОЙЛа",
    "date": "2026-11-03",
@@ -363,13 +275,13 @@
    ]
   },
   {
-   "draft_id": "d59861184",
-   "title": "Число банкротств граждан РФ в III квартале впервые перешло к снижению",
+   "draft_id": "d55486403",
+   "title": "Reuters узнал о подготовке сделки по продаже активов «Лукойла»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1126805"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/03/1242542-reuters-uznal"
     ]
    ],
    "sum": null,
@@ -385,154 +297,50 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50246002",
-   "title": "Модный бренд начал продавать в России чехлы для презервативов за 12 тысяч рублей",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/modnyy-brend-nachal-prodavat-v-rossii-chehly-dlya-prezervativov-za-12-tysyach-rubley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64182504",
-   "title": "«Совкомфлот» готовят к отплытию // Росимущество начало подготовку к продаже 7,8% «Совкомфлота»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9079902"
-    ]
-   ],
-   "sum": "15 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
    "needs_review": true,
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g601b6589 (общие редкие слова: готовя, продаж) — проверьте, не дубль ли",
-    "та же новость, что «Росимущество начало отбор юридического лица для продажи «Сов» — второе издание, в группу не шлем"
+    "та же новость, что «Reuters узнал о сделке, которая «положит конец» продаже акти» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d35681708",
-   "title": "В Перми продают за 400 млн рублей крупный бизнес-центр",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141325"
-    ]
-   ],
-   "sum": "400 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g17a522dc (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d50246002",
-   "title": "Модный бренд начал продавать в России чехлы для презервативов за 12 тысяч рублей",
+   "draft_id": "d40124370",
+   "title": "Россиянин купил в Китае машину с «нелегальным мигрантом»",
    "date": "2026-11-03",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/modnyy-brend-nachal-prodavat-v-rossii-chehly-dlya-prezervativov-za-12-tysyach-rubley/"
+     "https://lenta.ru/news/2026/11/03/rossiyanin-kupil-v-kitae-mashinu-s-nelegalnym-migrantom/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/11/03/rossiyanin-kupil-v-kitae-mashinu-s-nelegalnym-migrantom/"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "в Китае машину с «нелегальным мигрантом»",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "в Китае машину с «нелегальным мигрантом»",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61105597",
-   "title": "В Пермском крае рядом с популярным санаторием выставили на продажу детский лагерь",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141355"
-    ]
-   ],
-   "sum": "90 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g76850877 (общие редкие слова: выстав, пермск) — проверьте, не дубль ли"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
