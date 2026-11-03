@@ -501,9 +501,9 @@ def test_fns_category_gives_an_honest_reason_instead_of_generic_placeholder(clie
     import main as main_module
 
     for decision, expected_snippet in (
-        ("bank", "Кредитная организация"),
-        ("foreign", "Иностранное юридическое лицо"),
-        ("state_org", "Государственный орган"),
+        ("bank", "Это банк"),
+        ("foreign", "Это иностранная компания"),
+        ("state_org", "Это госорган"),
     ):
         monkeypatch.setattr(fns, "fns_registry_by_company_id",
                             lambda d=decision: {"launch-fns-category-test": {"decision": d}})

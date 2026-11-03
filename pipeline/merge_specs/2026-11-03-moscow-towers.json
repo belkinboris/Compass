@@ -1,0 +1,24 @@
+[
+ {
+  "pair": ["g10f783e8", "gda61c5b8"],
+  "keep": "g10f783e8",
+  "drop": "gda61c5b8",
+  "reason": "Одна продажа небоскреба Moscow Towers: в декабре 2025 года правительство поручило РЖД продать здание, 6 апреля 2026 года его выставили на аукцион за 280,8 млрд ₽, 18 мая 2026 года торги не состоялись. Декабрьская карточка уже несла апрельские и майские материалы; по docs/duplicates.md и docs/card_status_dates.md это один незакрытый процесс, раунд торгов — этап. Найдено ночной вычиткой 2 ноября 2026, проверено исследователем 3 ноября 2026 (AK&M, РИА Недвижимость, Reuters). Ошибочная eco.sum дубля ($2,42 млрд — цена покупки 2024 года) не переносится.",
+  "set": {},
+  "append_extra": "Правительство России обязало РЖД продать 350 тыс. кв. м (85% площади) небоскреба Moscow Towers в Москва-Сити для погашения долгов компании. РЖД поручено продать здание не ниже цены приобретения в 2024 году. Интерес инвесторов могла бы вызвать скидка в 30% — так оценивает Николай Горюнов из IBC Real Estate, где он руководит офисным направлением; Марина Малахатько из NF Group, директор офисного департамента, ориентируется на скидку около 25%. По мнению инвестбанкира Арика Шабанова, покупатель смотрит на экономику самого здания, а не на то, за сколько его купили и продают, и провал аукциона показал, что заявленную цену рынок без вопросов не принимает.",
+  "add_src": [
+   ["Reuters", "https://www.reuters.com/business/finance/russia-orders-russian-railways-sell-24-billion-moscow-towers-pay-debts-three-2025-12-18/"],
+   ["AK&M", "https://www.akm.ru/news/rzhd_prodayut_neboskryeb_moscow_towers_v_moskva_siti/"],
+   ["Коммерсантъ (18.05.2026)", "https://www.kommersant.ru/doc/8671762"],
+   ["Москва Агентство новостей (19.05.2026)", "https://www.mskagency.ru/materials/3549153"],
+   ["Rambler Финансы", "https://finance.rambler.ru/realty/56935612-arik-shabanov-pochemu-rynok-ne-speshit-pokupat-moscow-towers-dazhe-za-280-8-mlrd-rubley/"]
+  ],
+  "events": [
+   {"kind": "announced", "date": "2025-12-18", "title": "Правительство поручило РЖД продать Moscow Towers", "note": "", "source": ["Reuters", "https://www.reuters.com/business/finance/russia-orders-russian-railways-sell-24-billion-moscow-towers-pay-debts-three-2025-12-18/"]},
+   {"kind": "other", "date": "2026-04-06", "title": "Здание выставлено на аукцион за 280,8 млрд ₽", "note": "", "source": ["AK&M", "https://www.akm.ru/news/rzhd_prodayut_neboskryeb_moscow_towers_v_moskva_siti/"]},
+   {"kind": "other", "date": "2026-05-18", "title": "Торги не состоялись: заявок не подали", "note": "", "source": ["РИА Недвижимость", "https://realty.ria.ru/20260518/auktsion-2093117549.html"]}
+  ],
+  "add_themes": [],
+  "notes": "keep=g10f783e8 — в ней структура торгов, площади, оценки и девять источников. Постов в канале нет ни у одной."
+ }
+]

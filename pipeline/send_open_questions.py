@@ -262,7 +262,7 @@ def main():
 
     import httpx
     sent = 0
-    thread = console_topics.thread_id('decision')
+    thread = console_topics.thread_id('admin')
     with httpx.Client(timeout=20) as client:
         # Шапка — один раз, первым сообщением: 44 сообщения без объяснения,
         # что это и зачем, читаются как поломка бота.

@@ -693,6 +693,16 @@ def title_copied_from(card, records=None):
     return None
 
 
+def milestone_copied(card, kind, headline):
+    """Заголовок вехи (поста об этапе) повторяет заголовок источника этапа —
+    тот же запрет, что у заголовка карточки (владелец, 3 ноября 2026, OTP:
+    «отвратительное название полностью скопировав из РБК, мы же это тоже
+    обсуждали»). Возвращает заголовок источника или None."""
+    src = [list(e['source'])[:2] for e in card.get('events') or []
+           if isinstance(e, dict) and e.get('kind') == kind and e.get('source')]
+    return title_copied_from({'title': headline, 'src': src})
+
+
 def _card_blob(card, comps):
     parts = [str(card.get(k) or '') for k in ('title', 'asset', 'extra', 'seller', 'buyer_name')]
     parts += [str(v or '') for sec in ('eco', 'law') for v in (card.get(sec) or {}).values() if isinstance(v, str)]

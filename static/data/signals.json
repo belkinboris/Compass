@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02",
+ "updated": "2026-11-03",
  "signals": [
   {
    "id": "sabac8fd48",
@@ -768,6 +768,62 @@
    "strength": "strong"
   },
   {
+   "id": "sd41aa8abf",
+   "company_id": "ge91f2256",
+   "date": "2026-06-26",
+   "kind": "sell",
+   "summary": "EKE — обсуждается продажа: San Gally Park",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8765167"
+   ],
+   "origin": "card",
+   "deal_id": "g60c082cf",
+   "strength": "strong"
+  },
+  {
+   "id": "sb6b215dac",
+   "company_id": "g77f87dcc",
+   "date": "2026-06-26",
+   "kind": "buy",
+   "summary": "Инвестиционный холдинг «Кама Капитал» — обсуждается покупка: San Gally Park",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8765167"
+   ],
+   "origin": "card",
+   "deal_id": "g60c082cf",
+   "strength": "normal"
+  },
+  {
+   "id": "se8abbe5a5",
+   "company_id": "ge96b97f1",
+   "date": "2026-06-23",
+   "kind": "for_sale",
+   "summary": "«Апрель» — обсуждается продажа компании или доли",
+   "source": [
+    "Известия",
+    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
+   ],
+   "origin": "card",
+   "deal_id": "g34b9af03",
+   "strength": "strong"
+  },
+  {
+   "id": "sab0a6f102",
+   "company_id": "gfaa74309",
+   "date": "2026-06-23",
+   "kind": "sell",
+   "summary": "Вадим Анисимов — обсуждается продажа: «Апрель»",
+   "source": [
+    "Известия",
+    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
+   ],
+   "origin": "card",
+   "deal_id": "g34b9af03",
+   "strength": "strong"
+  },
+  {
    "id": "sf31335cee",
    "company_id": "g6184fe81",
    "date": "2026-06-17",
@@ -794,132 +850,6 @@
    "origin": "card",
    "deal_id": "gmru-sutochno-onetwotrip",
    "strength": "strong"
-  },
-  {
-   "id": "se8abbe5a5",
-   "company_id": "ge96b97f1",
-   "date": "2026-06-15",
-   "kind": "for_sale",
-   "summary": "«Апрель» — обсуждается продажа компании или доли",
-   "source": [
-    "Известия",
-    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
-   ],
-   "origin": "card",
-   "deal_id": "g34b9af03",
-   "strength": "strong"
-  },
-  {
-   "id": "sd41aa8abf",
-   "company_id": "ge91f2256",
-   "date": "2026-06-15",
-   "kind": "sell",
-   "summary": "EKE — обсуждается сделка «EKE может продать проект San Gally Park в Санкт-Петербурге компании «Кама Капитал»»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8765167"
-   ],
-   "origin": "card",
-   "deal_id": "g60c082cf",
-   "strength": "strong"
-  },
-  {
-   "id": "sbb7e119cf",
-   "company_id": "gcafc31dc",
-   "date": "2026-06-15",
-   "kind": "sell",
-   "summary": "ВТБ — обсуждается сделка «Wildberries и Russ (РВБ) может купить Росгосстрах у ВТБ»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8708228"
-   ],
-   "origin": "card",
-   "deal_id": "gd774ce6b",
-   "strength": "strong"
-  },
-  {
-   "id": "sb6b215dac",
-   "company_id": "g77f87dcc",
-   "date": "2026-06-15",
-   "kind": "buy",
-   "summary": "Инвестиционный холдинг «Кама Капитал» — обсуждается сделка «EKE может продать проект San Gally Park в Санкт-Петербурге компании «Кама Капитал»»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8765167"
-   ],
-   "origin": "card",
-   "deal_id": "g60c082cf",
-   "strength": "normal"
-  },
-  {
-   "id": "sab0a6f102",
-   "company_id": "gfaa74309",
-   "date": "2026-06-15",
-   "kind": "sell",
-   "summary": "Вадим Анисимов — обсуждается продажа: «Апрель»",
-   "source": [
-    "Известия",
-    "https://iz.ru/2119894/denis-kuznetcov/set-aptek-aprel-mozhet-smenit-vladelca"
-   ],
-   "origin": "card",
-   "deal_id": "g34b9af03",
-   "strength": "strong"
-  },
-  {
-   "id": "s7268db2ea",
-   "company_id": "gddadfff8",
-   "date": "2026-06-15",
-   "kind": "buy",
-   "summary": "X5 Group — обсуждается сделка «X5 Group может войти в капитал сети пиццерий Zotman Pizza»",
-   "source": [
-    "Известия",
-    "https://iz.ru/2090778/denis-kuznetcov/x5-mozhet-stat-sovladelcem-zotman-pizza"
-   ],
-   "origin": "card",
-   "deal_id": "g489b4309-1",
-   "strength": "normal"
-  },
-  {
-   "id": "s5d9a4a215",
-   "company_id": "g549ab474",
-   "date": "2026-06-15",
-   "kind": "buy",
-   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается сделка «Wildberries и Russ (РВБ) может купить Росгосстрах у ВТБ»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8708228"
-   ],
-   "origin": "card",
-   "deal_id": "gd774ce6b",
-   "strength": "normal"
-  },
-  {
-   "id": "s79a4420a4",
-   "company_id": "gd211fde4",
-   "date": "2026-06-05",
-   "kind": "investor",
-   "summary": "АрхиТех ИИ — обсуждается вход инвестора в капитал; возможный покупатель — Группа УКМ",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8712628"
-   ],
-   "origin": "card",
-   "deal_id": "gecce5162",
-   "strength": "normal"
-  },
-  {
-   "id": "s38175078a",
-   "company_id": "g3daf2d35",
-   "date": "2026-06-05",
-   "kind": "buy",
-   "summary": "Группа УКМ — обсуждается вложение в АрхиТех ИИ",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8712628"
-   ],
-   "origin": "card",
-   "deal_id": "gecce5162",
-   "strength": "normal"
   },
   {
    "id": "s7167ad25b",
@@ -950,31 +880,59 @@
    "strength": "strong"
   },
   {
-   "id": "se8e84decb",
-   "company_id": "gad00bf5e",
-   "date": "2026-05-25",
-   "kind": "buy",
-   "summary": "АО «Горизонт Индастриз» — обсуждается покупка: элеваторы и зерновой терминал в порту Азов",
+   "id": "sbb7e119cf",
+   "company_id": "gcafc31dc",
+   "date": "2026-05-31",
+   "kind": "sell",
+   "summary": "ВТБ — обсуждается продажа: Росгосстрах",
    "source": [
     "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8798465"
+    "https://www.kommersant.ru/doc/8708228"
    ],
    "origin": "card",
-   "deal_id": "g304f9065",
+   "deal_id": "gd774ce6b",
+   "strength": "strong"
+  },
+  {
+   "id": "s5d9a4a215",
+   "company_id": "g549ab474",
+   "date": "2026-05-31",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается покупка: Росгосстрах",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8708228"
+   ],
+   "origin": "card",
+   "deal_id": "gd774ce6b",
    "strength": "normal"
   },
   {
-   "id": "s168aa8a1a",
-   "company_id": "gad59ad7c",
-   "date": "2026-05-25",
-   "kind": "sell",
-   "summary": "Louis Dreyfus Company — обсуждается продажа: элеваторы и зерновой терминал в порту Азов",
+   "id": "sc2946bb12",
+   "company_id": "g3e551f6e",
+   "date": "2026-05-26",
+   "kind": "buy",
+   "summary": "АО «Новый старт» — обсуждается покупка: ООО «Газпром СПКА»",
    "source": [
     "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8798465"
+    "https://www.kommersant.ru/doc/8689589"
    ],
    "origin": "card",
-   "deal_id": "g304f9065",
+   "deal_id": "g029b7531",
+   "strength": "normal"
+  },
+  {
+   "id": "sa7003a01b",
+   "company_id": "g1ec82cf4",
+   "date": "2026-05-26",
+   "kind": "sell",
+   "summary": "Газпром космические системы — обсуждается продажа: ООО «Газпром СПКА»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8689589"
+   ],
+   "origin": "card",
+   "deal_id": "g029b7531",
    "strength": "strong"
   },
   {
@@ -1020,20 +978,6 @@
    "strength": "strong"
   },
   {
-   "id": "s2cad7a9a8",
-   "company_id": "g80f34727",
-   "date": "2026-05-20",
-   "kind": "for_sale",
-   "summary": "СПИ-РВВК — обсуждается продажа компании или доли",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/russia/1090749"
-   ],
-   "origin": "card",
-   "deal_id": "ga402c91b",
-   "strength": "strong"
-  },
-  {
    "id": "s255919c17",
    "company_id": "gd09d2e9d",
    "date": "2026-05-19",
@@ -1076,18 +1020,18 @@
    "strength": "normal"
   },
   {
-   "id": "s08cb33f25",
+   "id": "sf18b9e452",
    "company_id": "g238791a2",
    "date": "2026-05-13",
-   "kind": "ipo",
-   "summary": "Х-Скаут — обсуждается размещение акций",
+   "kind": "investor",
+   "summary": "Х-Скаут — обсуждается вход инвестора в капитал",
    "source": [
     "Агентство Бизнес Новостей (ABN)",
     "https://abn.agency/2026/05/13/proizvoditel-premialnogo-myasa-hskaut-zapuskaet-investraund-dlya-pokupki-kombinata-v-lenoblasti/"
    ],
    "origin": "card",
    "deal_id": "g4feb5ec3",
-   "strength": "strong"
+   "strength": "normal"
   },
   {
    "id": "saa85172d9",
@@ -1115,6 +1059,20 @@
    ],
    "origin": "card",
    "deal_id": "g36bc7831",
+   "strength": "normal"
+  },
+  {
+   "id": "s7268db2ea",
+   "company_id": "gddadfff8",
+   "date": "2026-05-05",
+   "kind": "buy",
+   "summary": "X5 Group — обсуждается покупка: Zotman Pizza",
+   "source": [
+    "Известия",
+    "https://iz.ru/2090778/denis-kuznetcov/x5-mozhet-stat-sovladelcem-zotman-pizza"
+   ],
+   "origin": "card",
+   "deal_id": "g489b4309-1",
    "strength": "normal"
   },
   {
@@ -1158,34 +1116,6 @@
    "origin": "card",
    "deal_id": "gd1b1a94e",
    "strength": "normal"
-  },
-  {
-   "id": "sc2946bb12",
-   "company_id": "g3e551f6e",
-   "date": "2026-04-15",
-   "kind": "buy",
-   "summary": "АО «Новый старт» — обсуждается сделка «Газпром продает спутниковый завод «Газпром СПКА» компании «Новый старт»»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8689589"
-   ],
-   "origin": "card",
-   "deal_id": "g029b7531",
-   "strength": "normal"
-  },
-  {
-   "id": "sa7003a01b",
-   "company_id": "g1ec82cf4",
-   "date": "2026-04-15",
-   "kind": "sell",
-   "summary": "Газпром космические системы — обсуждается сделка «Газпром продает спутниковый завод «Газпром СПКА» компании «Новый старт»»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8689589"
-   ],
-   "origin": "card",
-   "deal_id": "g029b7531",
-   "strength": "strong"
   },
   {
    "id": "s007655d91",
@@ -1493,20 +1423,6 @@
    ],
    "origin": "card",
    "deal_id": "g596c8144",
-   "strength": "strong"
-  },
-  {
-   "id": "scc55b0fbe",
-   "company_id": "g8ec7e7bf",
-   "date": "2025-12-18",
-   "kind": "sell",
-   "summary": "РЖД — обсуждается продажа: Бизнес-центр Moscow Towers",
-   "source": [
-    "Reuters",
-    "https://www.reuters.com/business/finance/russia-orders-russian-railways-sell-24-billion-moscow-towers-pay-debts-three-2025-12-18/"
-   ],
-   "origin": "card",
-   "deal_id": "gda61c5b8",
    "strength": "strong"
   },
   {
