@@ -59,35 +59,6 @@
    ]
   },
   {
-   "draft_id": "d82201838",
-   "title": "Химический холдинг «Концентрация» [ранее AppScience] привлек 1,2 млрд рублей от российских инвестфондов, чьи названия не раскрываются. Сделка структурирована по модели cash-in: все привлеченные средст",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7820"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
-    "seller": null
-   },
-   "ind": "Химия и удобрения",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d62935089",
    "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
    "date": "2026-11-02",
@@ -113,109 +84,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42723555",
-   "title": "АО «Концентрация» (AppScience) привлекло 1,2 млрд ₽ от российских инвестиционных фондов Статус сделки: 🟢 инвестиционный раунд закрыт 02 ноября 2026 года. Имена инвесторов и параметры распределения дол",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7531"
-    ]
-   ],
-   "sum": "1,2 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "АО «Концентрация» (AppScience)",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "АО «Концентрация» (AppScience)",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d23803516",
-   "title": "«Концентрация» поможет отечественной фарме «сложной химией».   Российский химхолдинг привлек 1,2 млрд рублей инвестиций от нескольких профильных российских фондов.  Деньги пойдут на научно-исследовате",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "tg:bezrec",
-     "https://t.me/bezrec/8201"
-    ]
-   ],
-   "sum": "1,2 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d46190601",
-   "title": "Химический холдинг «Концентрация» привлек 1,2 млрд рублей на разработку химических продуктов",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-02",
-     "title": "Переговоры",
-     "note": "Деньги вложили профильные российские фонды, их названия не раскрываются. Сделка выстроена по модели cash-in: весь объем средств поступит в компанию. Он пойдет будет направлен химических продуктов и расширение производственных мощностей. Стратегия…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Химический холдинг «Концентрация»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Химический холдинг «Концентрация»",
-    "seller": null
-   },
-   "ind": "Химия и удобрения",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -408,16 +276,16 @@
    ]
   },
   {
-   "draft_id": "d77639254",
-   "title": "Хабенский допустил слияние МХТ им. Чехова и МХАТ им. Горького в будущем",
+   "draft_id": "d64182504",
+   "title": "«Совкомфлот» готовят к отплытию // Росимущество начало подготовку к продаже 7,8% «Совкомфлота»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/culture/1126792"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9079902"
     ]
    ],
-   "sum": null,
+   "sum": "15 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -429,20 +297,23 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Управление активами",
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g601b6589 (общие редкие слова: готовя, продаж) — проверьте, не дубль ли",
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d23518640",
-   "title": "Business Insider: пассажиры застрявшего в Камбодже лайнера попытались его выкупить",
+   "draft_id": "d76715509",
+   "title": "Пассажиры «бесконечного круиза» не договорились о выкупе лайнера",
    "date": "2026-11-03",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28282789"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/03/1242458-passazhiri-beskonechnogo"
     ]
    ],
    "sum": null,
@@ -453,10 +324,10 @@
      "kind": "negotiations",
      "date": "2026-11-03",
      "title": "Переговоры",
-     "note": "Группа договорилась внести \"значительную сумму\", однако ее оказалось недостаточно, сообщил член Совета резидентов лайнера Пол Монтойя",
+     "note": "",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28282789"
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/business/news/2026/11/03/1242458-passazhiri-beskonechnogo"
      ]
     }
    ],
@@ -475,13 +346,111 @@
    ]
   },
   {
-   "draft_id": "d77972298",
-   "title": "Mercedes-Benz продал свою европейскую сеть быстрых зарядных станций",
+   "draft_id": "d74098275",
+   "title": "Росимущество начало отбор организатора продажи 7,8% - 1 акция «Совкомфлота»",
    "date": "2026-11-03",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28282699"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Rosimuschestvo-nachalo-otbor-organizatora-prodazhi-78-1-akciya-Sovkomflota-87735"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d70743112",
+   "title": "Петербург получит льготный лизинг на покупку 200 трамваев",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/03/peterburg-poluchit-lgotnij"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финансовые услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d99245726",
+   "title": "Команду «Формулы-1» Cadillac могут продать за $3 млрд",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/komandu-formuly-1-cadillac-mogut-prodat-za-3-mlrd/"
+    ]
+   ],
+   "sum": "$3 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "Совладелец команды Марк Уолтер рассматривает возможность продажи своей доли в проекте, стоимость которого может достигать $3 млрд.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/komandu-formuly-1-cadillac-mogut-prodat-za-3-mlrd/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73599386",
+   "title": "Mercedes-Benz продал свою сеть быстрых зарядных станций Electra",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261103/mercedes-benz-874904295.html"
     ]
    ],
    "sum": null,
@@ -492,19 +461,19 @@
      "kind": "closed",
      "date": "2026-11-03",
      "title": "Сделка завершена",
-     "note": "Покупателем стал французский оператор зарядной инфраструктуры Electra",
+     "note": "",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28282699"
+      "web:1prime.ru",
+      "https://1prime.ru/20261103/mercedes-benz-874904295.html"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "своя европейская сеть быстрых зарядных станций",
+   "asset": "своя сеть быстрых зарядных станций Electra",
    "seller": "Mercedes-Benz",
    "parsed_parties": {
     "buyer": null,
-    "asset": "своя европейская сеть быстрых зарядных станций",
+    "asset": "своя сеть быстрых зарядных станций Electra",
     "seller": "Mercedes-Benz"
    },
    "ind": null,
@@ -514,25 +483,92 @@
    ]
   },
   {
-   "draft_id": "d88406565",
-   "title": "Власти Петербурга привлекут федеральные кредиты на 20 млрд рублей",
+   "draft_id": "d92373570",
+   "title": "Россия и Буркина-Фасо безвозмездно передадут вакцины от оспы птиц",
    "date": "2026-11-03",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/03/76742327/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261103/rossija-874903574.html"
     ]
    ],
-   "sum": "20 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Власти Петербурга",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Власти Петербурга",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29945714",
+   "title": "Форум «Слияния и поглощения в России» пройдет в ноябре",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/company_news/266617/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d04598866",
+   "title": "Задержана женщина, сообщившая о пытках в доме-концлагере под Киевом. Буданов заявил, что она купила форму и следила за объектом",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/03/long-zaderzhana-zhenschina-soobschivshaya-o-pytkah-v-dome-kontslagere-pod-kievom-budanov-zayavil-chto-ona-kupila-formu-i-sledila-za-ob-ektom/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/11/03/long-zaderzhana-zhenschina-soobschivshaya-o-pytkah-v-dome-kontslagere-pod-kievom-budanov-zayavil-chto-ona-kupila-formu-i-sledila-za-ob-ektom/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "форма и следила за объектом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "форма и следила за объектом",
     "seller": null
    },
    "ind": null,
@@ -542,19 +578,59 @@
    ]
   },
   {
-   "draft_id": "d98661039",
-   "title": "Россиян предупредили о риске покупки одного вида квартир",
+   "draft_id": "d35681708",
+   "title": "В Перми продают за 400 млн рублей крупный бизнес-центр",
    "date": "2026-11-03",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/03/rossiyan-predupredili-o-riske-pokupki-odnogo-vida-kvartir/"
+     "web:ura.news",
+     "https://ura.news/news/1053141325"
+    ]
+   ],
+   "sum": "400 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g17a522dc (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d78034594",
+   "title": "Туристке не продали обложку Louis Vuitton из-за российского гражданства",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/3/turistke-ne-prodali-oblozhku-louis-vuitton-iz-za-rossijskogo-grazhdanstva"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "Во Флоренции россиянке отказались продать обложку для документов от Louis Vuitton стоимостью 36 тыс. рублей.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/11/3/turistke-ne-prodali-oblozhku-louis-vuitton-iz-za-rossijskogo-grazhdanstva"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
