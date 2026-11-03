@@ -2,35 +2,6 @@
  "made": "2026-11-03",
  "drafts": [
   {
-   "draft_id": "d63204062",
-   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
-   "date": "2026-11-01",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -216,102 +187,6 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d78972178",
-   "title": "Крупнейший банк Венгрии не смог продать российскую «дочку»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/03/11/2026/6ae97af53783f8c91dc64163"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Согласование получено",
-   "events": [
-    {
-     "kind": "approval",
-     "date": "2026-11-03",
-     "title": "Согласование получено",
-     "note": "Главный исполнительный директор OTP Group Петер Чани заявил, что банк искал потенциального покупателя, который бы получил одобрение Москвы на покупку «дочки» венгерского банка и предложил приемлемую цену, но такого не нашли",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/03/11/2026/6ae97af53783f8c91dc64163"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92129667",
-   "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053140870"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15889791",
-   "title": "«Торговые точки будут убирать». Землю под ростовским рынком «Темерник» выставили на продажу",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:161.ru",
-     "https://161.ru/text/gorod/2026/11/03/76740713/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ge1b2eba1 (общие редкие слова: выстав, рынком) — проверьте, не дубль ли"
    ]
   }
  ]
