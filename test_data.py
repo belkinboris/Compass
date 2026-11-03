@@ -116,7 +116,7 @@ def test_one_company_holds_one_role_in_a_deal(deals):
 # заполнить уверенно (источник неоднозначен) — разобрать и вычеркнуть.
 # Список только сокращается: новая карточка без сторон сюда не дописывается,
 # ее чинят. См. pipeline/archive/2026-10/fill_missing_parties_2026_10_12.py.
-MA_PARTIES_BACKLOG = {"g8e9d37ba", "g36386bcf", "cdcc6f67f", "cd51336b7", "g6e1bb001"}
+MA_PARTIES_BACKLOG = {"g36386bcf", "cdcc6f67f", "cd51336b7", "g6e1bb001"}
 
 
 def test_ma_deal_names_a_party(deals):
@@ -1095,7 +1095,9 @@ def test_reviewed_duplicate_cards_are_reconciled(base, deals):
     labquest = next(d for d in deals if d["id"] == "g40477661")
     assert labquest.get("buyer") == "g67ef3e91"
     assert labquest.get("target") == "g0b6a8c17"
-    assert labquest.get("seller") == "Александр и Рашида Марковы"
+    # вычитка 3 ноября 2026: по реестру доля Рашиды Марковой перешла к Александру
+    # 28.04.2023, 30.05.2023 он продал все 90% — продавец один
+    assert labquest.get("seller") == "Александр Марков"
     assert "g0b6a8c17" in base["companies"]
 
 
