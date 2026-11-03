@@ -15,7 +15,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "15,275 млн ₽",
     "share": "—",
     "val": "—",
     "target_fin": "—",
@@ -243,7 +243,127 @@
     "notes": "Тот же класс сделки, что g1833e545/gab80558c/g343bc58c — город продает нежилое помещение на открытых торгах через Росэлторг. Цена лота в источнике не названа."
    },
    "second_read": "2026-11-03",
-   "second_read_hash": "236600eb8e14.ace5bd"
+   "second_read_hash": "236600eb8e14.ace5bd",
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "📣 [пост g8f75eaf5] — В КАНАЛ «Компас - Недвижимость», на проверку\nНиже — текст поста как он уйдет подписчикам. Ответ на это сообщение своим текстом ЗАМЕНИТ пост (и одобрит карточку).\n━━━━━━━━━━━━\n<b>Москва выставила на торги нежилое здание на Каширском шоссе</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> Москва\n<b>Предмет:</b> нежилое одноэтажное здание площадью 898,3 кв. м с земельным участком на Каширском шоссе\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ria.ru/20261103/zdanie-2128772089.html\">РИА Новости</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g8f75eaf5\">карточке сделки</a>\n\nКнопки под постом: Открыть карточку сделки — https://projectcompass.ru/#/deal/g8f75eaf5"
+  },
+  {
+   "id": "gec6c7ad1",
+   "date": "2026-11-03",
+   "title": "Банк России купил юаней на внутреннем рынке на 12,1 миллиарда рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261103/bank-874886960.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "России",
+   "asset": "юани на внутреннем рынке на 12,1 миллиарда рублей",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-03",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261103/bank-874886960.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "России",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/bank-874886960.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "юани на внутреннем рынке на 12,1 миллиарда рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/bank-874886960.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T08:06:51+00:00"
+  },
+  {
+   "id": "g74fb29f6",
+   "date": "2026-11-03",
+   "title": "ТОР, СПВ и АЗРФ вложили 571,3 млрд руб в проекты на Дальнем Востоке",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261103/rezidenty-874886343.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "571,3 млрд ₽",
+   "buyer_name": "ТОР, СПВ и АЗРФ",
+   "asset": "проекты на Дальнем Востоке",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ТОР, СПВ и АЗРФ",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/rezidenty-874886343.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "проекты на Дальнем Востоке",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261103/rezidenty-874886343.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-03T08:06:51+00:00"
   }
  ]
 }

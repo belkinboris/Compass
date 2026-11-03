@@ -713,7 +713,10 @@ def test_every_condition_of_the_question_is_applied(idx):
     r = ar.retrieve("Сравни АЛРУД и ЕПАМ: какие сделки вела каждая фирма?", idx=idx)
     assert f"{len(idx.firm_deals['alrud'])} сдел" in r.answer
     r = ar.retrieve("Приведи примеры сделок с дисконтом 60% и добровольным взносом в бюджет", idx=idx)
-    assert len(r.pool) >= 3 and all(re.search("дисконт", d.facts, re.I) for d in r.pool)
+    # Обоим условиям отвечают две карточки (вычитка 3 ноября 2026 сняла с ОТП Банка
+    # общее описание правил продажи — оно не было фактом сделки); важно, что
+    # условия применены ОБА, а не сколько карточек нашлось.
+    assert len(r.pool) >= 2 and all(re.search("дисконт", d.facts, re.I) for d in r.pool)
     r = ar.retrieve("Какие венчурные раунды были в искусственном интеллекте?", idx=idx)
     assert r.pool and all("Венчур / раунд" in d.themes or d.type == "Инвестиция" for d in r.pool)
     assert all("Искусственный интеллект" in d.industries + d.themes for d in r.pool)

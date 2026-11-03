@@ -2,6 +2,35 @@
  "made": "2026-11-03",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -187,6 +216,513 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d92129667",
+   "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053140870"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02556203",
+   "title": "Росимущество начало отбор юрлица для организации продажи акций «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28281439"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01312503",
+   "title": "Суд постановил изъять у жителя Обояни исторический дом для продажи с торгов",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000131-sud-postanovil-izyat-u-zhitelya-oboyani-istoricheskiy-dom-dlya-prodazhi-s-torgov/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66484144",
+   "title": "Право застройки 15,7 га в Воронеже выставили на торги за 137 млн рублей",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000130-pravo-zastroyki-15-7-ga-v-voronezhe-vystavili-na-torgi-za-137-mln-rubley/"
+    ]
+   ],
+   "sum": "137 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5257a627 (общие редкие слова: вороне, выстав, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33133395",
+   "title": "Мусороперерабатывающий комплекс выставили на продажу под Тамбовом за 220 млн рублей",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/"
+    ]
+   ],
+   "sum": "220 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02012328",
+   "title": "DST Global Юрия Мильнера вложился в американский ИИ-стартап Dulo . В раунде на $130 млн участвовали фонды Construct Capital и Lowercarbon Capital, бывший гендиректор Google Эрик Шмидт и председатель K",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7822"
+    ]
+   ],
+   "sum": "$130 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79791989",
+   "title": "Росимущество начало отбор организатора для продажи акций «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9079634"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d03943343",
+   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/03/1242319-rosimuschestvo-nachalo-podgotovku"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d53310146",
+   "title": "Бумаги «Совкомфлота» упали на новости о продаже части акций",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-03",
+     "title": "Переговоры",
+     "note": "Росимущество планирует продать часть принадлежащих государству акций «Совкомфлота», выставив на торги почти 7,8% бумаг компании",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19388209",
+   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/03/11/2026/6ae9972ca0c29c8950bc0ffb"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d72180837",
+   "title": "Росимущество начало отбор организатора продажи 7,8% - 1 акция «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1126734"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d84313586",
+   "title": "Популярные в России автомобили Li Auto взломаны хакерами и превращены в «кирпичи». Теперь они даже не заводятся, а мошенники требуют огромный выкуп",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-03_populyarnye_v_rossii_avtomobili"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69954013",
+   "title": "Росимущество начало отбор юридического лица для продажи «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261103/sovkomflot-874889120.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d39916884",
+   "title": "«Дом.РФ» выставил на торги проект КРТ под Омском",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261103/krt-2128869941.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d99088551",
+   "title": "«Дом.РФ» выставил на торги проект КРТ под Барнаулом",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261103/krt-2128868293.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g420352ff (общие редкие слова: выстав, крт, торги) — проверьте, не дубль ли",
+    "та же новость, что ««Дом.РФ» выставил на торги проект КРТ под Омском» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d79574295",
+   "title": "Росимущество начало отбор организатора продажи 7,8% акций «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/313719"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Росимущество начало отбор юрлица для организации продажи акц» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42572767",
+   "title": "ВС уточнил подход к ответственности за незаконную продажу жилья на торгах",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266613/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
