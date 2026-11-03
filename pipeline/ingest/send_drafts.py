@@ -786,6 +786,13 @@ def main(write=False, resend=None, only=None):
         # на карточку, не дошла бы до консоли никогда.
         if write:
             promote.save_state(state)
+            # build_plan() мог догнать отметки карточки по памяти сайта
+            # (другой контейнер уже показал ее) и из-за этого план стал
+            # пустым — тогда отметки есть только в памяти, пока не записаны
+            # сюда (известная ошибка: карточка реально доставлена, а
+            # draft_sent/post_draft_sent в pending.json остаются None,
+            # 3 ноября 2026, known_issues/intake.md).
+            json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
         return 0
     token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
     if not (write and token and chats):
