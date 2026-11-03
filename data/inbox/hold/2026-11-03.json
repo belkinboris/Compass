@@ -2,6 +2,35 @@
  "made": "2026-11-03",
  "drafts": [
   {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d06426147",
    "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
    "date": "2026-11-02",
@@ -187,6 +216,537 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d92129667",
+   "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053140870"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89896005",
+   "title": "Татарстан вошел в число наиболее активных пользователей инвестиционного сервиса МТС",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-03_tatarstan_voshel_v_chislo_naibolee"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87457342",
+   "title": "В России обвал продаж новых ноутбуков. Россияне покупают подержанные и используют их «до дыр»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-03_v_rossii_kollaps_rynka_novyh"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "подержанные и используют их «до дыр»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "подержанные и используют их «до дыр»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d17788527",
+   "title": "МТС открыла продажи iPhone Duo",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-02_mts_otkryla_prodazhi_iphone_duo"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49244338",
+   "title": "Главный в мире чипмейкер внезапно и срочно купил завод экранов для iPad и MacBook",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-30_samyj_glavnyj_v_mire_chipmejker"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-30",
+     "title": "Сделка завершена",
+     "note": "TSMC стала владельцем завода компании AUO по выпуску дисплеев. Раньше AUO поставляла матрицы для устройств Apple – планшетов iPhone и ноутбуков MacBook. Планов по производству дисплеев у TSMC пока нет – это крупнейший в мире вендор микросхем, в том числе для…",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-30_samyj_glavnyj_v_mire_chipmejker"
+     ]
+    }
+   ],
+   "buyer_name": "Главный в мире чипмейкер внезапно и срочно",
+   "asset": "завод экранов для iPad и MacBook",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Главный в мире чипмейкер внезапно и срочно",
+    "asset": "завод экранов для iPad и MacBook",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d85795911",
+   "title": "Microsoft «убила» Windows 10, чтобы озолотиться на Windows 11. Вместо этого ее продажи рухнули на четверть",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-30_microsoft_sela_v_luzhuona_ubila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-10-30",
+     "title": "Сделка завершена",
+     "note": "Microsoft констатировала 27-процентный обвал продаж Windows 11 – единственной ее пользовательской ОС, которая пока поддерживается. По всему миру пользователи отказываются переходить на нее и сидят на давно купленной Windows 10, техподдержка которой…",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-30_microsoft_sela_v_luzhuona_ubila"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15338280",
+   "title": "А вы поверили. Mail.ru отобрала у пользователей бесплатный терабайт в облаке, который дарила навсегда",
+   "date": "2026-10-30",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-30_a_vy_poverilimailru_otobrala"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d02556203",
+   "title": "Росимущество начало отбор юрлица для организации продажи акций «Совкомфлота»",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28281439"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01312503",
+   "title": "Суд постановил изъять у жителя Обояни исторический дом для продажи с торгов",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000131-sud-postanovil-izyat-u-zhitelya-oboyani-istoricheskiy-dom-dlya-prodazhi-s-torgov/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66484144",
+   "title": "Право застройки 15,7 га в Воронеже выставили на торги за 137 млн рублей",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000130-pravo-zastroyki-15-7-ga-v-voronezhe-vystavili-na-torgi-za-137-mln-rubley/"
+    ]
+   ],
+   "sum": "137 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g5257a627 (общие редкие слова: вороне, выстав, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d33133395",
+   "title": "Мусороперерабатывающий комплекс выставили на продажу под Тамбовом за 220 млн рублей",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/"
+    ]
+   ],
+   "sum": "220 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60039269",
+   "title": "Малый бизнес привлек более 2 млрд рублей льготного лизинга Корпорации МСП",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261103/lizing-2128751367.html"
+    ]
+   ],
+   "sum": "2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малый бизнес",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малый бизнес",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d89688666",
+   "title": "Крупнейший банк Кыргызстана готовит IPO в Лондоне и выпуск юаневых облигаций",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/313671"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16362920",
+   "title": "Президент подписал указ о порядке передачи выморочных вкладов государству",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266610/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d21050329",
+   "title": "Ирина Аллегрова избавилась от подаренной Лужковым квартиры",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/03/irina-allegrova-izbavilas-ot-podarennoy-luzhkovym-kvartiry/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89243505",
+   "title": "Блендер: ошибки, которые при покупке совершают почти все",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053141191"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d02012328",
+   "title": "DST Global Юрия Мильнера вложился в американский ИИ-стартап Dulo . В раунде на $130 млн участвовали фонды Construct Capital и Lowercarbon Capital, бывший гендиректор Google Эрик Шмидт и председатель K",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7822"
+    ]
+   ],
+   "sum": "$130 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d06151640",
+   "title": "Открыты продажи на летние рейсы из Сочи в Тель-Авив. Сколько стоят билеты?",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/transport/2026/11/03/76741565/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
