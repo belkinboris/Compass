@@ -1478,10 +1478,20 @@ def is_joint_post(deal):
     return bool((deal or {}).get('post_covers'))
 
 
+def strip_console_wrapper(text):
+    """Текст поста без обертки сообщения консоли (3 ноября 2026: в канал ушли
+    «[пост …] — В КАНАЛ …, на проверку» и «Кнопки под постом: …» — снимок
+    одобренного поста записали вместе с шапкой консоли). Чистый текст не меняет."""
+    text = str(text or '')
+    if '━━━━━━' in text and re.match(r'\s*📣?\s*\[пост ', text):
+        text = text.split('━━━━━━━━━━━━', 1)[-1].lstrip('━').lstrip('\n')
+    return '\n'.join(l for l in text.split('\n') if not l.startswith('Кнопки под постом:'))
+
+
 def with_card_link(text, deal):
     """Текст поста с одной строкой-ссылкой на карточку в самом конце."""
     line = '' if is_joint_post(deal) else card_link_line(deal)
-    lines = [l for l in str(text or '').split('\n') if not _OWN_LINK_LINE.match(l)]
+    lines = [l for l in strip_console_wrapper(text).split('\n') if not _OWN_LINK_LINE.match(l)]
     body = re.sub(r'\n{3,}', '\n\n', '\n'.join(lines)).strip()
     return (body + '\n\n' + line) if line else body
 
