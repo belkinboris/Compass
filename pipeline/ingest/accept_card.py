@@ -125,7 +125,11 @@ SHARE_FORM_RE = re.compile(
     r'\s+(?:доли|долей|акций|пакет\w*\s+акций)\s+(?:в\s+)?(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«', re.I)
 PLAIN_WORDS_RE = re.compile(
     r'(?<![\wа-яё])в\s+минусе(?![\wа-яё])|теря\w*\s+деньги|(?<![\wа-яё])сам(?:а|о|и)?(?![\wа-яё])'
-    r'|не\s+раскрыва\w+\s+в\s+силу|(?:^|\.\s+)(?:Покупка|Продажа)\s+всех\s+долей', re.I)
+    r'|не\s+раскрыва\w+\s+в\s+силу|(?:^|\.\s+)(?:Покупка|Продажа)\s+всех\s+долей'
+    # Рассказ о НАШЕМ поиске вместо факта о сделке (партнер, 3 ноября 2026,
+    # Шерегеш: «найти сведения о покупателе за пределами этой связи не удалось»).
+    r'|найти\s+(?:\w+\s+){0,4}не\s+удалось|не\s+удалось\s+найти|источник\s+не\s+наш[её]л'
+    r'|за\s+пределами\s+(?:этой\s+)?связи', re.I)
 PROSE_CHECK_FIELDS = ('eco.share', 'eco.val', 'eco.target_fin', 'eco.fin', 'eco.fin_context', 'eco.rationale',
                       'eco.context', 'law.struct', 'law.terms', 'law.appr', 'extra')
 LITIGATION_LAWYER_RE = re.compile(
@@ -1470,6 +1474,16 @@ def check_answer(ans, card, base):
     return bad
 
 
+def _restore_notes(card, notes_before):
+    """Откатывает временную запись accepted_notes, если приемка не состоялась
+    (см. apply_answer: searched нужен findings() до того, как ясно, что
+    ответ принят)."""
+    if notes_before is None:
+        card.pop(STAMP + '_notes', None)
+    else:
+        card[STAMP + '_notes'] = notes_before
+
+
 def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, fns=None):
     """Применяет проверенный ответ к карточке. Возвращает строки отчета и
     признак «штамп поставлен». `registry`/`registry_path`/`fns` подменяются в
@@ -1541,6 +1555,17 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
     if source_names.settle_sources(card):
         lines.append('агрегатор ушел из видимых источников (discovery_src)')
     waived = ans.get('no_profile') or {}
+    # `searched` читается findings() только из card[accepted_notes] — проставляем
+    # заранее, иначе свежий ответ с пятью местами поиска всегда покажет
+    # one_source на первой же приемке (notes на карточке еще нет). Если
+    # приемка не состоится (ниже), временную запись откатываем.
+    notes_before = card.get(STAMP + '_notes')
+    pending_notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
+                                       ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
+                                       ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes')),
+                                       ('searched', ans.get('searched'))) if v}
+    if pending_notes:
+        card[STAMP + '_notes'] = pending_notes
     left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
                     waived_sources=ans.get('no_source') or {}, registry=registry,
                     waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {})
@@ -1551,6 +1576,7 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
     # день карточка лежала невидимой, пока владелец не нашел сделку у
     # конкурента. Штамп ставится только прочитанной карточке.
     if ans.get('verdict') == 'accept' and not left and not card.get('reviewed'):
+        _restore_notes(card, notes_before)
         lines.append('штамп НЕ поставлен — карточку еще не прочитали: сначала шаг 9 '
                      '(review.py правкой или --mark-read), потом приемка')
         return lines, False
@@ -1559,13 +1585,11 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         # Штамп привязан к содержимому, пока карточку не показали (H4,
         # 31 октября 2026): разошелся отпечаток — readiness.state = stale.
         card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
-        notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
-                                   ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
-                                   ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes'))) if v}
-        if notes:
-            card[STAMP + '_notes'] = notes
+        if pending_notes:
+            card[STAMP + '_notes'] = pending_notes
         lines.append('ПРИНЯТА (%s)' % card[STAMP])
         return lines, True
+    _restore_notes(card, notes_before)
     if ans.get('verdict') == 'hold':
         card['hold_reason'] = ans['hold_reason']
         lines.append('НА РЕШЕНИЕ ЧЕЛОВЕКУ: %s' % ans['hold_reason'])
