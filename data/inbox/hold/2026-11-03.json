@@ -1,0 +1,392 @@
+{
+ "made": "2026-11-03",
+ "drafts": [
+  {
+   "draft_id": "d63204062",
+   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
+   "date": "2026-11-01",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc6fa5d80 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d06426147",
+   "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/birzha-874847090.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Рынок ценных бумаг",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82201838",
+   "title": "Химический холдинг «Концентрация» [ранее AppScience] привлек 1,2 млрд рублей от российских инвестфондов, чьи названия не раскрываются. Сделка структурирована по модели cash-in: все привлеченные средст",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7820"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Химический холдинг «Концентрация» [ранее AppScience]",
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d62935089",
+   "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/business/2026/11/02/76738898/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42723555",
+   "title": "АО «Концентрация» (AppScience) привлекло 1,2 млрд ₽ от российских инвестиционных фондов Статус сделки: 🟢 инвестиционный раунд закрыт 02 ноября 2026 года. Имена инвесторов и параметры распределения дол",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7531"
+    ]
+   ],
+   "sum": "1,2 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "АО «Концентрация» (AppScience)",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "АО «Концентрация» (AppScience)",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d23803516",
+   "title": "«Концентрация» поможет отечественной фарме «сложной химией».   Российский химхолдинг привлек 1,2 млрд рублей инвестиций от нескольких профильных российских фондов.  Деньги пойдут на научно-исследовате",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/8201"
+    ]
+   ],
+   "sum": "1,2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d46190601",
+   "title": "Химический холдинг «Концентрация» привлек 1,2 млрд рублей на разработку химических продуктов",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-02",
+     "title": "Переговоры",
+     "note": "Деньги вложили профильные российские фонды, их названия не раскрываются. Сделка выстроена по модели cash-in: весь объем средств поступит в компанию. Он пойдет будет направлен химических продуктов и расширение производственных мощностей. Стратегия…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Химический холдинг «Концентрация»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Химический холдинг «Концентрация»",
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Химический холдинг «Концентрация» [ранее AppScience] привлек» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d43270155",
+   "title": "Корпоративные заемщики привлекли 743 млрд рублей в октябре",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9079428"
+    ]
+   ],
+   "sum": "743 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Корпоративные заемщики",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Корпоративные заемщики",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d94586573",
+   "title": "Путин установил порядок передачи государству средств умерших россиян",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/313643"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28467977",
+   "title": "Реплику автомобиля KITT из культового сериала выставили на аукцион",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/03/repliku-avtomobilya-kitt-iz-kultovogo-seriala-vystavili-na-auktsion/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d80386493",
+   "title": "Продажа алкоголя, работа автобусов и больниц: какие ограничения ждут тюменцев 4 ноября",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053141155"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d17637575",
+   "title": "Россияне смогут купить товары с большими скидками за 99 рублей",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053141016"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64904089",
+   "title": "«Прибыли хватает только купить еду». Кооперативному рынку в Краснодаре 150 лет — что с ним сейчас?",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/03/76739539/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
