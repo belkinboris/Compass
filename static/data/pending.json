@@ -3,8 +3,8 @@
   {
    "id": "g17a522dc",
    "date": "2026-11-03",
-   "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей",
-   "ind": "Не определена",
+   "title": "Действующий автоцентр с арендаторами в Кургане выставили на продажу за 115 миллионов рублей",
+   "ind": "Недвижимость",
    "type": "M&A",
    "status": "Обсуждается",
    "src": [
@@ -16,7 +16,7 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "Двухэтажное кирпичное здание автоцентра с земельным участком в собственности на пересечении улиц Маршала Голикова и Родькина; арендаторы — автомойка, автосервис и магазины автотоваров, второй этаж занят офисами.",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
@@ -34,15 +34,16 @@
    "from_raw": {
     "draft_id": "d92129667",
     "title": "В Кургане продают действующий автоцентр за 115 миллионов рублей"
-   }
+   },
+   "asset": "здание автоцентра с земельным участком в Заозерном районе Кургана"
   },
   {
    "id": "g4b315d34",
    "date": "2026-11-03",
-   "title": "Производитель майонеза «Слобода» продаст свой офис на севере Москвы",
-   "ind": "Финтех",
+   "title": "«Эфко» продает бизнес-центр в Москве, купленный под штаб-квартиру",
+   "ind": "Недвижимость",
    "type": "M&A",
-   "status": "Закрыта",
+   "status": "Обсуждается",
    "src": [
     [
      "РБК",
@@ -52,7 +53,7 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "Здание бизнес-центра «Аркус IV» на Ленинградском проспекте в Москве, которое группа купила годом ранее под свою штаб-квартиру.",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
@@ -67,7 +68,7 @@
     "terms": "—"
    },
    "seller": "Производитель майонеза «Слобода»",
-   "asset": "свой офис на севере Москвы",
+   "asset": "бизнес-центр «Аркус IV» на Ленинградском проспекте в Москве",
    "events": [
     {
      "kind": "closed",
@@ -99,200 +100,8 @@
      }
     ]
    },
-   "pending_since": "2026-11-03T09:52:12+00:00"
-  },
-  {
-   "id": "g6f6660eb",
-   "date": "2026-11-03",
-   "title": "Скандал с пыточной под Киевом приобрел всемирное звучание, заявили в Кремле",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "РИА Новости",
-     "https://ria.ru/20261103/peskov-2128895612.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "Скандал с пыточной под Киевом",
-   "asset": "всемирное звучание, заявили в Кремле",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "РИА Новости",
-      "https://ria.ru/20261103/peskov-2128895612.html"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Скандал с пыточной под Киевом",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://ria.ru/20261103/peskov-2128895612.html"
-     }
-    ],
-    "target": [
-     {
-      "value": "всемирное звучание, заявили в Кремле",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://ria.ru/20261103/peskov-2128895612.html"
-     }
-    ]
-   },
-   "pending_since": "2026-11-03T09:52:12+00:00"
-  },
-  {
-   "id": "g56449413",
-   "date": "2026-11-03",
-   "title": "Норвежский холдинг купил крупнейшего производителя носков в Финляндии",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Деловой Петербург",
-     "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "Норвежский холдинг",
-   "asset": "крупнейший производитель носков в Финляндии",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "Деловой Петербург",
-      "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Норвежский холдинг",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
-     }
-    ],
-    "target": [
-     {
-      "value": "крупнейший производитель носков в Финляндии",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.dp.ru/a/2026/11/03/finskij-postavshhik-noskov-dlja"
-     }
-    ]
-   },
-   "pending_since": "2026-11-03T10:52:18+00:00"
-  },
-  {
-   "id": "gbba3f649",
-   "date": "2026-11-03",
-   "title": "Бывший сотрудник Росгвардии похитил и продал изъятое оружие",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Лента.ру",
-     "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Бывший сотрудник Росгвардии похитил и",
-   "asset": "изъятое оружие",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-03",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "Лента.ру",
-      "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "изъятое оружие",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Бывший сотрудник Росгвардии похитил и",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/03/byvshiy-sotrudnik-rosgvardii-pohitil-i-prodal-iz-yatoe-oruzhie/"
-     }
-    ]
-   },
-   "pending_since": "2026-11-03T10:52:18+00:00"
+   "pending_since": "2026-11-03T09:52:12+00:00",
+   "seller_id": "g5db3de73"
   },
   {
    "id": "g6be210fa",
