@@ -376,6 +376,23 @@ def test_recent_question_about_advisors_answers_about_advisors(idx):
     assert "#/advisors" in answer
 
 
+def test_deal_page_questions_about_asset_origin_use_the_card(idx):
+    """«Как правительство получило эти активы?» и «есть карточка по
+    национализации этого актива?» со страницы сделки — ответ из самой карточки
+    («контекст») и честное «отдельной карточки нет», а не 73 сделки по теме
+    и не поиск по интернету (Артем, 4 ноября 2026, Инфорион)."""
+    deal = "g08d1c155"
+    if deal not in idx.by_id:
+        pytest.skip("карточки Инфорион нет в базе")
+    for q in ("Как Правительство получило в собственность эти активы?",
+              "Есть карточка по национализации этого актива?",
+              "Конкретно по этому активу есть карточка?"):
+        res = ar.retrieve(q, "deal", deal, idx=idx)
+        assert res.intent == "deal", q
+        assert "Генпрокуратура" in (res.answer or ""), q
+        assert "нет" in res.answer, q
+
+
 def test_compare_keeps_both_companies(idx):
     """«Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону
     теряло молча — и человек получал ответ про одну компанию."""

@@ -490,7 +490,9 @@ def party_name_key(name):
 def already_applied(fix, card, companies=None):
     """Правка уже в базе: прогон идемпотентен."""
     if fix['field'] == 'src':
-        return has_source(card, fix['new'][1])
+        from pipeline.source_names import is_undesirable
+        return (has_source(card, fix['new'][1]) or is_undesirable(fix['new'][1])
+                or fix_fingerprint(fix['new'][1]) in ((card.get('proofread_absorbed') or {}).get('src') or []))
     current = get_field(card, fix['field'])
     if current == fix['new']:
         return True
@@ -502,10 +504,7 @@ def already_applied(fix, card, companies=None):
         profile = (companies.get(card['buyer']) or {}).get('name')
         if profile and party_name_key(profile) == party_name_key(fix['new']):
             return True
-        # Имя юрлица из таблицы («ООО «Кинокомпания «Парадиз продакшнз»»»)
-        # переехало в профиль с брендом («Парадиз») скриптом, который сверил
-        # компанию чтением и оставил отпечаток снятого текста в
-        # `proofread_absorbed` (кампания профилей сторон, 23 октября 2026).
+        # Имя юрлица переехало в профиль с брендом: отпечаток — в proofread_absorbed.
         if fix_fingerprint(fix['new']) in ((card.get('proofread_absorbed') or {}).get('buyer_name') or []):
             return True
     # «Снять неверную ссылку» достигнуто, если этой ссылки больше нет. У

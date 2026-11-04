@@ -858,6 +858,13 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # консультанта (Buzko Legal), abn.agency и разбор канала — поиск не делали.
     # Одна ссылка проходит, только если в `accepted_notes.searched` перечислено
     # не меньше пяти мест, где искали еще (READING_BRIEF.md, «ПЕРВОИСТОЧНИКИ»).
+    # ИЗДАНИЕ, ПРИЗНАННОЕ В РФ НЕЖЕЛАТЕЛЬНЫМ, — НЕ ИСТОЧНИК (4 ноября 2026,
+    # Артем: «мы же убирали везде»). Список — source_names.UNDESIRABLE_HOSTS.
+    from pipeline.source_names import is_undesirable
+    banned = [u for _l, u in (card.get('src') or []) + (card.get('discovery_src') or []) if u and is_undesirable(u)]
+    if banned:
+        out.append(('undesirable_source', 'источник — издание, признанное в РФ нежелательным (%s): уберите ссылку '
+                    'и найдите то же в другом источнике' % ', '.join(sorted(set(banned)))))
     outlets = {re.sub(r'^www\.', '', re.sub(r'^https?://', '', str(u)).split('/')[0])
                for _l, u in (card.get('src') or []) if u}
     searched = notes.get('searched') or []
