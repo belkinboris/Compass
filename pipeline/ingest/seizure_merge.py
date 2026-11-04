@@ -31,6 +31,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 import accept_card  # noqa: E402
 from pipeline.source_names import is_undesirable  # noqa: E402
 
+REGISTRY_JSON = os.path.join(ROOT, 'pipeline', 'fns_registry.json')
 REQUIRED = ('title', 'date', 'type', 'status', 'src', 'eco', 'law', 'themes', 'ind')
 
 
@@ -67,6 +68,34 @@ def problems(card, base):
     return out
 
 
+def profile_id(key):
+    return 'g' + hashlib.sha1(('profile:' + key).encode('utf-8')).hexdigest()[:8]
+
+
+def apply_profiles(draft, base, registry, today):
+    """Новые профили компаний из черновика: {key, name, ind, desc, inn, inn_reason}.
+    Профиль + запись реестра ФНС (ИНН подтвержден чтением реестра/rusprofile)."""
+    import fns_registry as fr
+    made, problems_ = {}, []
+    comps = base.setdefault('companies', {})
+    for p in draft.get('profiles') or []:
+        pid = profile_id(p['key'])
+        if not fr.inn_is_valid(str(p.get('inn') or '')):
+            problems_.append('профиль %s: ИНН %r не проходит контрольную сумму' % (p['key'], p.get('inn')))
+            continue
+        for k in ('name', 'ind', 'desc', 'inn_reason'):
+            if not p.get(k):
+                problems_.append('профиль %s: нет поля %s' % (p['key'], k))
+        if pid in comps:
+            made[p['key']] = pid
+            continue
+        comps[pid] = {'name': p['name'], 'ind': p['ind'], 'desc': p['desc'], 'kpi': ['Профиль', 'Автоматический']}
+        registry.append({'company_id': pid, 'decision': 'confirmed', 'inn': str(p['inn']),
+                         'reason': p['inn_reason'], 'date': today})
+        made[p['key']] = pid
+    return made, problems_
+
+
 def main(argv):
     path = next((a for a in argv if a.endswith('.json')), None)
     if not path:
@@ -78,10 +107,22 @@ def main(argv):
     deals = base['deals']
     by_id = {d['id']: d for d in deals}
     today = date.today().isoformat()
-    ready, bad = [], 0
+    registry = json.load(open(REGISTRY_JSON, encoding='utf-8'))
+    profiles, profile_problems = apply_profiles(draft, base, registry, today)
+    for text in profile_problems:
+        print('!!', text)
+    ready, bad = [], len(profile_problems)
     taken = set(by_id)
     for entry in draft.get('cards') or []:
         card = build(entry, taken, today)
+        ref = card.pop('target_profile', None)       # ключ профиля из черновика -> id
+        if ref:
+            if ref not in profiles:
+                print('!!', entry['key'], 'профиль', ref, 'не описан в profiles')
+                bad += 1
+                continue
+            card['target'] = profiles[ref]
+            (card.get('accepted_notes') or {}).get('no_profile', {}).pop('target', None)
         taken.add(card['id'])
         keep = entry.get('keep_id')
         if keep and keep not in by_id:
@@ -120,7 +161,10 @@ def main(argv):
         with open(accept_card.DATA, 'w', encoding='utf-8') as f:
             json.dump(base, f, ensure_ascii=False, indent=1)
             f.write('\n')
-        print('Записано: %d' % len(ready))
+        with open(REGISTRY_JSON, 'w', encoding='utf-8') as f:
+            json.dump(registry, f, ensure_ascii=False, indent=1)
+            f.write('\n')
+        print('Записано: %d, профилей: %d' % (len(ready), len(profiles)))
     return 0 if not bad else 2
 
 
