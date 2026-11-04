@@ -253899,6 +253899,1401 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "date": "2022-05-16",
+   "title": "Renault передала городу Москве завод «Рено Россия», а долю в «АвтоВАЗе» — институту НАМИ",
+   "ind": "Автопром",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5355365"
+    ],
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/rossiyskie-aktivy-gruppy-renault-perekhodyat-v-gosudarstvennuyu-sobstvennost-16-maya-2022-216716/"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "100% акций ЗАО «Рено Россия» (московский завод) и 67,69% акций «АвтоВАЗа».",
+    "val": "Цена в статьях не названа; сообщалось, что за «Рено Россия» заплатили символический рубль. Стоимость российского бизнеса Renault на конец 2021 года составляла 2,195 млрд евро.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Французская Renault 16 мая 2022 года закрыла две сделки. 100% акций ЗАО «Рено Россия», владеющего московским заводом, перешли правительству Москвы. 67,69% акций «АвтоВАЗа» получил ФГУП НАМИ, подведомственный Минпромторгу; остальные акции остались у «Ростеха». Renault получила опцион на обратный выкуп доли в «АвтоВАЗе», срок — шесть лет. На московском заводе планировали вернуться к выпуску машин под маркой «Москвич». Российские операции Renault стала учитывать как прекращенную деятельность.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Две отдельные сделки: завод покупает правительство Москвы, пакет «АвтоВАЗа» — ФГУП НАМИ. У «Ростеха» остается оставшаяся часть акций «АвтоВАЗа».",
+    "appr": "Обе сделки одобрила ФАС России.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "У Renault есть шестилетний опцион на обратный выкуп доли в «АвтоВАЗе». Цена в статьях не названа."
+   },
+   "asset": "Российские активы Renault: завод «Рено Россия» в Москве и 67,69% акций «АвтоВАЗа»",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Renault",
+   "extra": "Французская Renault передала свои российские активы государству: завод в Москве — правительству города, 67,69% «АвтоВАЗа» — институту НАМИ.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль не заводили по заданию (ИНН не искали).",
+     "buyer": "Правительство Москвы и ФГУП НАМИ — государственные покупатели, профиль не заводили по заданию.",
+     "seller": "Renault — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "buyer_name": "Правительство Москвы (завод) и ФГУП НАМИ (доля в «АвтоВАЗе»)",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "g3bda868d",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "68dfa7d3cf87"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022-05-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7214a84011ab"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f056c275cbb8"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-11-23",
+   "title": "Nissan передала петербургский завод и московский офис продаж институту НАМИ",
+   "ind": "Автопром",
+   "src": [
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/peterburgskiy-avtozavod-nissan-pereshel-v-sobstvennost-nami-24-noyabrya-2022-222906/"
+    ],
+    [
+     "Kolesa.ru",
+     "https://www.kolesa.ru/news/sdelka-zavershena-nissan-prodal-svoy-zavod-v-sankt-peterburge-i-drugie-rossiyskie-aktivy"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "100% уставного капитала ООО «Ниссан Мэнуфэкчуринг Рус» (завод в Санкт-Петербурге).",
+    "val": "Цена в прочитанных статьях не названа. По оценке Nissan, убытки от ухода из России составят 100 млрд иен.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Nissan передала ФГУП НАМИ, подведомственному Минпромторгу, все российские активы: завод в Санкт-Петербурге, научный центр и центр продаж и маркетинга в Москве. Изменения в учредительные документы завода внесли 23 ноября 2022 года по данным ЕГРЮЛ, на которые ссылается Интерфакс; в НАМИ подтвердили, что сделка завершена. Nissan оставила за собой право выкупить предприятие обратно в течение шести лет. В НАМИ заявили, что сделка сохранит производственный цикл и рабочие места.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ФГУП НАМИ, государственный научный институт при Минпромторге. Объект — петербургское юрлицо с заводом, к нему относятся научный центр и московский офис продаж.",
+    "appr": "Публично не сообщалось",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Право обратного выкупа в течение шести лет — по Kolesa.ru; Retail.ru его не упоминает. Цена не названа."
+   },
+   "asset": "Петербургский автозавод (ООО «Ниссан Мэнуфэкчуринг Рус») и российские офисы компании",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Nissan",
+   "extra": "Японская Nissan завершила передачу петербургского завода и других российских активов институту НАМИ, сохранив право выкупа в течение шести лет.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль не заводили по заданию (ИНН не искали).",
+     "buyer": "ФГУП НАМИ — государственный институт, профиль не заводили по заданию.",
+     "seller": "Nissan — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "buyer_name": "ФГУП НАМИ",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "gdf5fb4fe",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "19ecf0717746"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022-11-23",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "74de1f177963"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "df035e8d7f53"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-05-25",
+   "title": "Лукойл купил у Shell сеть из 411 заправок и завод масел в Торжке",
+   "ind": "Нефть и газ",
+   "src": [
+    [
+     "Forbes.ua",
+     "https://forbes.ua/ru/news/shell-prodae-biznes-u-rosii-lukoylu-tse-411-azs-i-zavod-iz-virobnitstva-mastilnikh-materialiv-12052022-5974"
+    ],
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2022/05/19/71344193/"
+    ],
+    [
+     "БФМ",
+     "https://www.bfm.ru/news/501719"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "99,9% долей в ООО «Шелл нефть».",
+    "val": "Цена не раскрыта. Ранее эксперты оценивали топливный бизнес Shell в России в 600 млн долларов, но итоговая цена могла быть вдвое ниже.",
+    "target_fin": "Выручка ООО «Шелл нефть» за 2021 год — 135 млрд ₽, чистая прибыль — 4 млрд ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Shell объявила о выходе из российской розницы и производства масел 8 марта 2022 года. «Лукойл» заявил о покупке 12 мая, ФАС одобрила сделку 19 мая, закрытие «Лукойл» объявил 25 мая 2022 года. В бизнес входят 411 заправок и завод масел в Торжке. Более 350 сотрудников сохраняют работу. Заправки «Лукойл» оставил отдельным дочерним обществом и перевел под финский бренд Teboil в течение года.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "«Лукойл» купил юрлицо целиком — ООО «Шелл нефть», в которое входят заправки и завод.",
+    "appr": "ФАС России одобрила сделку 19 мая 2022 года с предписанием: «Лукойл» должен регулярно продавать на бирже определенные объемы нефтепродуктов и не заключать биржевые сделки в основную торговую сессию.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена не раскрыта. Условие по сотрудникам: более 350 человек продолжают работу у нового владельца."
+   },
+   "asset": "ООО «Шелл нефть» — сеть АЗС и завод смазочных материалов",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Shell",
+   "extra": "Британская Shell продала «Лукойлу» российское юрлицо с 411 заправками и заводом масел в Торжке.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль ООО «Шелл нефть» не заводили по заданию (ИНН не искали).",
+     "buyer": "«Лукойл» — крупная российская компания, профиль в этой карточке не заводили по заданию.",
+     "seller": "Shell — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ ООО «Шелл нефть» не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "buyer_name": "«Лукойл»",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "g889097b8",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 99.9,
+     "basis": "rule",
+     "card_hash": "df5c9070596b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022-05-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "641571fea1f2"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a6c6ff9ffe1a"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "Eurasia Drilling Company продала «Буровую компанию «Евразия»» холдингу «Развитие»",
+   "ind": "Нефть и газ",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/840163"
+    ],
+    [
+     "Сноб",
+     "https://snob.ru/news/eurasia-drilling-company-prodala-burovuyu-kompaniyu-evraziya/"
+    ],
+    [
+     "AK&M",
+     "https://www.akm.ru/news/s_gadzhiev_i_z_salimkhanov_snizili_svoi_doli_v_bke/"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "100% доли в ООО «Буровая компания «Евразия»».",
+    "val": "Цена не названа. Эксперт Advance Capital оценил возможную сделку в 20–30 млрд ₽.",
+    "target_fin": "Выручка за 2021 год — 48,8 млрд ₽, чистая прибыль — 4,1 млрд ₽ (по Сноб).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Покупатель — ООО «Буровая компания «Развитие»», созданное 7 апреля 2022 года вице-президентом «Евразии» по правовым вопросам. С 22 апреля 49% в нем у Салиха Гаджиева, основного акционера нефтесервисной компании «Петроинжиниринг», и 51% у Зубаира Салимханова, юриста «Петроинжиниринга». «Развитие» подало в ФАС ходатайство о покупке, об этом стало известно 11 мая. По данным AK&M, в мае 2022 года «Развитие» стало владельцем 100% «Евразии». В компании заявили, что смена владельца не затронет действующие договоры и управление производством. Юристы объясняли сделку тем, что работать через зарубежные юрисдикции стало нецелесообразно.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — группа Eurasia Drilling Company, покупатель — российское ООО «Буровая компания «Развитие»», связанное с владельцами «Петроинжиниринга».",
+    "appr": "Покупатель подал ходатайство в ФАС (11 мая 2022 года); решение ФАС в прочитанных статьях не приведено.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена и условия закрытия в статьях не названы."
+   },
+   "asset": "ООО «Буровая компания «Евразия»» — российская буровая компания, основной актив группы-продавца",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Eurasia Drilling Company",
+   "extra": "Eurasia Drilling Company продала российскую «дочку» «Буровая компания «Евразия»» холдингу «Развитие», связанному с владельцами «Петроинжиниринга».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль не заводили по заданию (ИНН не искали).",
+     "buyer": "ООО «Буровая компания «Развитие»» — недавно созданный холдинг, профиль не заводили по заданию.",
+     "seller": "Eurasia Drilling Company — группа с зарубежной регистрацией по данным юристов в Интерфаксе, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "buyer_name": "ООО «Буровая компания «Развитие»»",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "gbeafddf2",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "6ba36d80ad11"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f59124523886"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "Группа «Венталл» выкупила у PPF логопарк «Южные врата» в Домодедове",
+   "ind": "Недвижимость",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2022/12/30/957779-proizvoditel-metallokonstruktsii-ventall-zakril-odnu-iz-krupneishih-sdelok"
+    ],
+    [
+     "Property Forum",
+     "https://www.property-forum.eu/news/ppf-sells-majority-stake-in-russian-logistics-centre/14412"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "Логопарк «Южные врата»: покупателю переходят 460 тыс. кв. м, еще 180 тыс. кв. м резидентов остаются под его управлением.",
+    "val": "Цена не раскрыта. Оценки рынка: 18–20 млрд ₽ (IBC Real Estate) и 20–23 млрд ₽ (Nikoliers).",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "О сделке стало известно 30 декабря 2022 года; о переговорах стало известно в начале сентября. Покупатель — производитель металлоконструкций «Венталл» (через «Венталл-девелопмент»), продавцы — чешская PPF Real Estate Russia и фонд RLREF. По данным Property Forum, PPF продавала 60%, остальное принадлежало наследникам Криса ван Ритте. Девелопер проекта Radius Group подтвердил сделку и продолжит строить оставшиеся очереди. PPF решила продать актив после начала военной операции на Украине, говорили консультанты.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — «Венталл» через «Венталл-девелопмент»; продавцы — PPF Real Estate Russia и фонд RLREF.",
+    "appr": "По неофициальным данным Ведомостей, сделку одобрила правительственная комиссия; в ноябре 2022 года ФАС рассматривала ходатайство о покупке.",
+    "adv": [
+     [
+      "Продавец и покупатель",
+      "NF Group",
+      "Консультант назван в Ведомостях; чью сторону представлял, статья не уточняет"
+     ]
+    ],
+    "terms": "Цена не раскрыта. Радиус Групп (Radius Group) остается девелопером достройки."
+   },
+   "asset": "Логопарк «Южные врата» в Домодедове (около 640 тыс. кв. м после всех очередей)",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "seller": "PPF Real Estate Russia и фонд RLREF",
+   "extra": "Чешская PPF вместе с фондом RLREF продала логопарк «Южные врата» в Домодедове группе «Венталл»; сделку одобрила правкомиссия.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль логопарка не заводили по заданию (ИНН не искали).",
+     "buyer": "«Венталл-девелопмент» — профиль не заводили по заданию.",
+     "seller": "PPF Real Estate Russia и RLREF — профили не заводили по заданию; история участников ЕГРЮЛ не запрашивалась, продавцы названы в статьях."
+    }
+   },
+   "buyer_name": "«Венталл» («Венталл-девелопмент»)",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "ged24607a",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "f4c0f08d307e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "41ad55bfaac5"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-12-20",
+   "title": "Halyk Bank продал российскую «дочку» Москоммерцбанк неназванному покупателю за 7,3 млрд тенге",
+   "ind": "Банки",
+   "src": [
+    [
+     "BES.media",
+     "https://bes.media/news/dochku-halyk-bank-prodali-kompanii-ne-affilirovannoj-s-kazahstanom-ili-bankom-728/"
+    ],
+    [
+     "Forbes Kazakhstan",
+     "https://forbes.kz/articles/skolko_halyk_bank_poteryal_iz-za_prodaji_dochek"
+    ]
+   ],
+   "eco": {
+    "sum": "7,3 млрд тенге",
+    "share": "100% акций АО КБ «Москоммерцбанк» (чуть более 7,9 млн акций).",
+    "val": "По годовой отчетности Halyk Bank за 2022 год, банк получил за «дочку» 7,3 млрд тенге. Группа Halyk понесла убытки 18,78 млрд тенге, курсовая разница — 5,4 млрд тенге.",
+    "target_fin": "На конец 2021 года активы банка — около 21,2 млрд ₽, это 1% активов группы Halyk и 0,6% ее чистой прибыли.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Договор предусматривал продажу 18 ноября 2022 года, процедуру завершили 20 декабря, а Halyk Bank сообщил об этом 22 декабря. Покупателя не назвали: председатель правления Halyk Bank Умут Шаяхметова сказала, что это компания, не связанная ни с Казахстаном, ни с банком. Новый владелец закрыл сведения о своем единственном акционере. В феврале 2023 года в банке сменился председатель правления, банк работает под прежним названием.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — казахстанский Halyk Bank, продал все акции российского банка. Покупатель не раскрыт.",
+    "appr": "Публично не сообщалось",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена 7,3 млрд тенге по годовой отчетности продавца. Сведения о покупателе не раскрываются."
+   },
+   "asset": "АО КБ «Москоммерцбанк» — российский банк, 100% акций",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Halyk Bank",
+   "extra": "Казахстанский Halyk Bank продал 100% акций Москоммерцбанка покупателю, которого не назвал; по отчетности банк получил 7,3 млрд тенге.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль не заводили по заданию (ИНН не искали).",
+     "buyer": "Покупатель не раскрыт ни продавцом, ни источниками.",
+     "seller": "Halyk Bank — иностранный банк, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "sum": "7,3 млрд тенге",
+   "buyer_name": "Не раскрыт",
+   "kind": "acquisition",
+   "type": "M&A",
+   "status": "Закрыта",
+   "id": "gc23d6f1a",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "94437da7145b"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "unparsed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "1582d5a135cb"
+    },
+    "date": {
+     "value": "2022-12-20",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d3f88c0bb87d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7baee3b5f6b0"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2024-04-12",
+   "title": "Ceetrus передала «Торговым галереям» российскую структуру с 40 торговыми центрами",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2024/04/14/1031773-gruppu"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/ceetrus-67222.html"
+    ],
+    [
+     "ABNews",
+     "https://abnews.ru/news/2024/4/15/franczuzskij-vladelecz-ashana-zakryl-sdelku-po-prodazhe-aktivov-v-rf"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "100% ООО «Ситрас»",
+    "val": "Цена не раскрывалась.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Ceetrus входит во французскую группу Auchan и в России управляла 40 торговыми центрами и галереями, среди них «Тройка» в Москве и «Акварель» в Пушкине, Волгограде и Тольятти. Предварительный договор был подписан в октябре 2023 года, 25 марта 2024 года сделку заверили у нотариуса, а с 12 апреля 2024 года по данным ЕГРЮЛ ООО «Торговые галереи» стало единственным владельцем ООО «Ситрас». Покупатель связан с Тагиром Шаймардановым, который владеет им через АО «Кама капитал» и УК «Кама капитал». Ведомости в марте 2024 года называли возможным покупателем «Лидертранс», но в итоге он в сделке не назван.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «Торговые галереи», владелец — Тагир Шаймарданов через «Кама капитал». Предмет сделки — 100% российского юрлица ООО «Ситрас».",
+    "appr": "Правительственная комиссия по контролю за иностранными инвестициями и ФАС России дали согласие в конце 2023 года (по ABNews); Sostav называет только ФАС.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Предварительный договор — октябрь 2023 года, нотариальное заверение — 25 марта 2024 года, смена владельца в ЕГРЮЛ — 12 апреля 2024 года."
+   },
+   "asset": "Российские торговые центры и галереи группы Ceetrus (Auchan)",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "seller": "Ceetrus (группа Auchan)",
+   "extra": "Французская Ceetrus продала «Торговым галереям» Тагира Шаймарданова российское юрлицо ООО «Ситрас», управлявшее 40 торговыми центрами и галереями.",
+   "sum": "—",
+   "buyer_name": "ООО «Торговые галереи» (Тагир Шаймарданов, «Кама капитал»)",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль ООО «Ситрас» не заводили по заданию (ИНН не искали).",
+     "buyer": "ООО «Торговые галереи» — профиль не заводили по заданию.",
+     "seller": "Ceetrus — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
+    }
+   },
+   "id": "g08c11c6b",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "be7d0ea89f64"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "d72d79918f0b"
+    },
+    "date": {
+     "value": "2024-04-12",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a6eef05a62c0"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "b160c2fd9012"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "Reebok передала российский бизнес турецкому холдингу FLO Retailing, сумма не названа",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Коммерсантъ (через Сноб)",
+     "https://snob.ru/news/rossijskoe-podrazdelenie-seti-reebok-smenilo-vladelca/"
+    ],
+    [
+     "New Retail",
+     "https://new-retail.ru/novosti/retail/rossiyskiy_biznes_reebok_pereshel_k_turetskomu_kholdingu4279/"
+    ],
+    [
+     "Just Style",
+     "https://www.just-style.com/news/authentic-brands-in-talks-to-offload-reebok-russia-stores/"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "Российская розничная сеть Reebok — более 100 магазинов.",
+    "val": "Цена не раскрыта; эксперты оценивали сеть примерно в 1,5 млрд ₽, но не исключали, что сумма сделки втрое ниже.",
+    "target_fin": "Reebok в России контролируется через ООО «Адидас», его выручка за 2021 год — 55,6 млрд ₽; это данные юрлица группы, а не отдельно сети Reebok.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В мае 2022 года источник, близкий к FLO, сообщил, что сделка закрыта и более 100 магазинов перешли к турецкому холдингу. Покупатель собирался сменить название магазинов, сохранив бренд. По данным 2ГИС, в крупных городах было не менее 117 магазинов Reebok. Председатель FLO Мехмет Зиылан сказал Reuters, что стороны ведут переговоры, но сделка не завершена; владелец бренда, Authentic Brands Group, и FLO на запрос Just Style не ответили. Поэтому точный день передачи и ее завершение публично не подтверждены.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — турецкий холдинг FLO Retailing, продавец — российское подразделение сети Reebok; оно контролируется через ООО «Адидас».",
+    "appr": "Публично не сообщалось",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Условия не раскрывались; стороны сделку публично не подтвердили."
+   },
+   "asset": "Российская розничная сеть Reebok (более 100 магазинов)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Reebok (Authentic Brands Group)",
+   "extra": "Турецкий холдинг FLO Retailing получил российский бизнес Reebok; председатель FLO сделку как завершенную отрицает.",
+   "sum": "—",
+   "buyer_name": "FLO Retailing",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль российского юрлица не заводили по заданию (ИНН не искали); статьи не называют юрлицо, которое передано.",
+     "buyer": "FLO Retailing — иностранный холдинг, профиль не заводили по заданию.",
+     "seller": "Authentic Brands Group — иностранный владелец бренда, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась."
+    }
+   },
+   "id": "gb6d97747",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "02875c98c904"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "8254f7cfa6fb"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "35b6d584cfad"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-10-20",
+   "title": "Softline передала российскую часть бизнеса основателю Игорю Боровикову за символический $1",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/russia/866876"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/222702/2022-10-20/2022-w42/kompaniya-softline-zavershila-vydelenie-rossiyskoy-chasti-biznesa"
+    ],
+    [
+     "Хабр",
+     "https://habr.com/ru/post/694744"
+    ]
+   ],
+   "eco": {
+    "sum": "1 $",
+    "share": "Весь российский бизнес группы Softline (российские компании группы).",
+    "val": "Цена символическая — $1; стоимость российской и зарубежной частей группы сравнивали как 1 к 3.",
+    "target_fin": "Руководитель российского бизнеса Владимир Лавров назвал оборот выше $1 млрд.",
+    "fin": "—",
+    "rationale": "Причина по словам компании: санкции ЕС против НРД заблокировали операции между Euroclear и НРД, и российские акции нельзя было распределить через клиринговые системы.",
+    "context": "Группа Softline разделила бизнес на российский и международный: зарубежная часть сначала называлась Softline Global, потом Noventiq. Об отделении объявили 19 июля 2022 года, подробности раскрыли 7 октября, а о завершении сделки сообщили 20 октября. Доля Боровикова в глобальной группе по плану снижалась с 53% до 44%. Российская часть работает как «Группа компаний Softline»; гендиректор Владимир Лавров, финансовый директор Артем Тараканов. В российский контур входят, например, АО «Софтлайн Трейд», ООО «Софтлайн Платформы» и ООО «Софтлайн Интеграция». Последующую продажу фонду в прочитанных статьях подтвердить не удалось.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — основатель группы Игорь Боровиков; зарубежный холдинг остался отдельно под названием Noventiq с листингом на Лондонской бирже. Акционерам компенсировали разводнение бонусной эмиссией (кроме Боровикова и российской структуры).",
+    "appr": "Раздел бизнеса отдельного одобрения акционеров не требовал; бонусную эмиссию утверждало собрание акционеров 25 октября 2022 года. Согласий государственных органов статьи не называют.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена $1; соотношение стоимости российской и зарубежной части 1 к 3; закрытие — 20 октября 2022 года."
+   },
+   "asset": "Российская часть группы Softline (ИТ-дистрибуция и услуги)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Softline Holding PLC",
+   "extra": "Международная группа Softline отделила и передала российский бизнес основателю Игорю Боровикову за $1; зарубежная часть стала Noventiq.",
+   "sum": "1 $",
+   "buyer_name": "Игорь Боровиков",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль российской части не заводили по заданию (ИНН не искали); статьи называют несколько юрлиц группы, а не одно.",
+     "buyer": "Игорь Боровиков — физлицо, профиль не заводили по заданию.",
+     "seller": "Softline Holding PLC — иностранная материнская компания, профиль не заводили по заданию; история участников ЕГРЮЛ российских юрлиц не запрашивалась."
+    }
+   },
+   "id": "g58ebb771",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "4be844ef6051"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "6fd1046ac023"
+    },
+    "date": {
+     "value": "2022-10-20",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f4a43d61b75b"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "932a155510fa"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-10-11",
+   "title": "Siemens Energy продала «Интер РАО» долю в СТГТ и воронежский трансформаторный завод",
+   "ind": "Энергетика",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/83910/"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2022/10/14/945601-inter-rao-priobrela-doli-siemens"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "65% ООО «Сименс Технологии газовых турбин» и воронежское ООО «Воронежский трансформатор».",
+    "val": "Цена не раскрывалась.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "«Интер РАО» хотела дополнить инжиниринговые активы, купленные в 2021 году, и организовать инспекции зарубежных газовых турбин.",
+    "context": "Siemens Energy вышла из российских активов: 65% в ООО «Сименс Технологии газовых турбин» (Санкт-Петербург, совместное предприятие с «Силовыми машинами», у которых осталось 35%) и Воронежский завод, ранее ООО «Сименс Энерджи Трансформаторс», перешли к «Интер РАО». Воронежский завод получила нидерландская RAO Intertech B.V., изменения в ЕГРЮЛ внесены 11 октября 2022 года. Две сделки одного продавца и одного покупателя описаны в этой карточке вместе; про Ногинск в прочитанных статьях ничего нет.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ПАО «Интер РАО» (завод — через нидерландскую RAO Intertech B.V.); продавец — Siemens Energy (завод принадлежал Siemens Energy Global GmbH & Co. KG). По неофициальным данным Интерфакса, «Интер РАО» получила все необходимые разрешения; какой орган их дал, не сказано.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена и сроки не раскрывались; в ЕГРЮЛ перемена владельца завода — 11 октября 2022 года."
+   },
+   "asset": "65% СТГТ (газовые турбины) и Воронежский трансформаторный завод",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Siemens Energy",
+   "extra": "Siemens Energy продала «Интер РАО» 65% совместного предприятия СТГТ и Воронежский трансформаторный завод.",
+   "sum": "—",
+   "buyer": "gf8ed5e7f",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профили СТГТ и воронежского завода не заводили по заданию (ИНН не искали).",
+     "seller": "Siemens Energy — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российских юрлиц не запрашивалась."
+    }
+   },
+   "id": "g9c218ea2",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 65.0,
+     "basis": "rule",
+     "card_hash": "eb499ef8a1bd"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "d72d79918f0b"
+    },
+    "date": {
+     "value": "2022-10-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7b8df75a7ab4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "71b3011de29e"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-10-06",
+   "title": "Sylvamo продала российские активы с Светогорским ЦБК менеджменту за $420 млн",
+   "ind": "Лесопром",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Хабр",
+     "https://habr.com/ru/post/692050"
+    ],
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/proizvoditel-bumagi-svetocopy-ushel-iz-rossii-i-prodal-svoi-aktivy-7-oktyabrya-2022-221204/"
+    ]
+   ],
+   "eco": {
+    "sum": "420 млн $",
+    "share": "Все российские активы Sylvamo, включая Светогорский ЦБК.",
+    "val": "Цена 420 млн долларов; с учетом курса и комиссий Sylvamo получила около 390 млн долларов наличными.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Решение об уходе объявили в мае 2022 года; на Россию приходилось около 15% выручки Sylvamo за 2021 год. Около 325 млн долларов выручки компания направит на погашение долга.",
+    "context": "Американская Sylvamo, выделенная из International Paper осенью 2021 года, работала в России через АО «Сильвамо Корпорейшн Рус». Комбинат в Светогорске (Ленинградская область) мощностью 720 тыс. тонн в год делает офисную и офсетную бумагу, картон и термомеханическую массу. Покупатель — только что созданное ООО «Палп Инвест» гендиректора российской компании Тимура Габидуллина. Раньше в прессе называли ориентиры 500 млн долларов и среди возможных покупателей Segezha Group и «Илим»; итоговая цена и покупатель оказались другими.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «Палп Инвест», принадлежит гендиректору АО «Сильвамо Корпорейшн Рус» Тимуру Габидуллину; российский актив — АО «Сильвамо Корпорейшн Рус».",
+    "appr": "Сделка закрыта после одобрения правительственной комиссии по контролю за иностранными инвестициями; Минпромторг знал о сделке.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена 420 млн долларов, около 390 млн долларов на руки после курса и комиссий; 6 октября 2022 года сделка объявлена закрытой."
+   },
+   "asset": "Российские активы Sylvamo — Светогорский ЦБК (АО «Сильвамо Корпорейшн Рус»)",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "seller": "Sylvamo Corporation",
+   "extra": "Американская Sylvamo продала российские активы, включая Светогорский ЦБК, менеджменту через ООО «Палп Инвест» за 420 млн долларов.",
+   "sum": "420 млн $",
+   "buyer_name": "ООО «Палп Инвест» (Тимур Габидуллин)",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Профиль АО «Сильвамо Корпорейшн Рус» не заводили по заданию (ИНН не искали).",
+     "buyer": "ООО «Палп Инвест» — профиль не заводили по заданию.",
+     "seller": "Sylvamo Corporation — иностранная публичная компания, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась."
+    }
+   },
+   "id": "g14acee12",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "3fb94e41428f"
+    },
+    "price": {
+     "value_rub": 24949806000,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "a6a841eb247b",
+     "currency": "USD",
+     "amount": 420000000.0,
+     "fx_rate": 59.4043,
+     "fx_date": "2022-10-06",
+     "fx_method": "day"
+    },
+    "date": {
+     "value": "2022-10-06",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "ae1b808fb888"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "01f7f0393e65"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "Консорциум во главе с Vitol продал 5% «Восток Ойл» компании Fossil Trading из Дубая",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/86639/"
+    ],
+    [
+     "Vitol",
+     "https://www.vitol.com/vitol-divests-interest-in-vostok/"
+    ],
+    [
+     "Euronews",
+     "https://www.euronews.com/next/2022/12/30/vitol-vostok-rosneft"
+    ]
+   ],
+   "eco": {
+    "sum": "—",
+    "share": "5% ООО «Восток Ойл»",
+    "val": "Цена не раскрыта; консорциум покупал эту долю в октябре 2021 года, а за сколько — источники расходятся: 3,5 млрд евро или 4 млрд долларов.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Vitol и Mercantile & Maritime владели долей в «Восток Ойл» — одном из крупнейших проектов «Роснефти» — через Amur Investments. Продажа согласована в июле 2022 года и завершена после выполнения всех условий; Vitol объявил о ней 30 декабря 2022 года. Покупатель Fossil Trading FZCO зарегистрирован в Дубае; по данным Euronews, он — материнская компания женевской Energopole SA. В начале ноября 2022 года Владимир Путин разрешил сделки с долями «Восток Ойл», иначе они запрещены. Про голландских фондов-продавцов в статьях ничего нет.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — консорциум под управлением Vitol (совместное предприятие с Mercantile & Maritime, 75% у Vitol), владел долей через Amur Investments; покупатель — Fossil Trading FZCO (Дубай).",
+    "appr": "Сделки с долями «Восток Ойл» разрешил президент России в начале ноября 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Соглашение — июль 2022 года; закрытие после выполнения отлагательных условий, объявлено 30 декабря 2022 года."
+   },
+   "asset": "Доля 5% в «Восток Ойл» (проект «Роснефти»)",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "seller": "Vitol и Mercantile & Maritime",
+   "extra": "Консорциум Vitol продал 5% проекта «Восток Ойл» компании Fossil Trading из Дубая.",
+   "sum": "—",
+   "target": "g7393665f",
+   "buyer_name": "Fossil Trading FZCO",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Fossil Trading FZCO — иностранная компания, профиль не заводили по заданию.",
+     "seller": "Vitol и Mercantile & Maritime — иностранные, профили не заводили по заданию; история участников ЕГРЮЛ не запрашивалась (долю держали через Amur Investments)."
+    }
+   },
+   "id": "g728757d3",
+   "added": "2026-11-04",
+   "no_post": true,
+   "reviewed": "2026-11-04",
+   "accepted": "2026-11-04",
+   "facts": {
+    "stake": {
+     "value": 5.0,
+     "basis": "rule",
+     "card_hash": "50119834b4e0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "d72d79918f0b"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c4cc7205bba0"
+    },
+    "target": {
+     "company_id": "g7393665f",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "7f969f9e4937"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
   }
  ],
  "companies": {
@@ -274675,7 +276070,8 @@
      "since": "2026-07-23",
      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601845"
     }
-   ]
+   ],
+   "legal_short": "ПАО «Интер РАО»"
   },
   "g8e1a15a7": {
    "name": "Озон Фармацевтика",
