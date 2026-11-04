@@ -184,13 +184,13 @@
    ]
   },
   {
-   "draft_id": "d56373587",
-   "title": "На автовокзале Великого Новгорода установили новый терминал для покупки билетов",
+   "draft_id": "d87640945",
+   "title": "20% первичного жилья в Москве и области приобретается в уже построенных домах",
    "date": "2026-11-04",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/velikiy-novgorod/2026/11/4/na-avtovokzale-velikogo-novgoroda-ustanovili-novyj-terminal-dlya-pokupki-biletov"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9080358"
     ]
    ],
    "sum": null,
@@ -209,6 +209,63 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16528002",
+   "title": "Kraft Heinz продаст 70% кофейного бизнеса",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28286223"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "70% кофейного бизнеса",
+   "seller": "Kraft Heinz",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "70% кофейного бизнеса",
+    "seller": "Kraft Heinz"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d15104634",
+   "title": "Киберугонщики дистанционно блокируют элитные китайские авто ради выкупа",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2196180/video/kiberugonshchiki-distantcionno-blokiruiut-elitnye-kitaiskie-avto-radi-vykupa"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
