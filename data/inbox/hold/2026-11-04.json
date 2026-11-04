@@ -86,13 +86,41 @@
    ]
   },
   {
-   "draft_id": "d51416229",
-   "title": "Минфин объяснил начало отбора организатора продажи доли «Совкомфлота»",
+   "draft_id": "d84041757",
+   "title": "Минфин учтет конъюнктуру рынка при определении сроков и объема размещения акций «Совкомфлота»",
    "date": "2026-11-04",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/11/04/1242591-minfin-obyasnil"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1126962"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64747701",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/incidents/2026/11/04/76744218/"
     ]
    ],
    "sum": null,
@@ -114,13 +142,13 @@
    ]
   },
   {
-   "draft_id": "d47645632",
-   "title": "Что значит приватизация «Совкомфлота» и что будет с акциями компании",
+   "draft_id": "d52314560",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
    "date": "2026-11-04",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/04/11/2026/6adaeb5a9a794784f488949c"
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/incidents/2026/11/04/76744218/"
     ]
    ],
    "sum": null,
@@ -137,10 +165,680 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Минфин объяснил начало отбора организатора продажи доли «Сов» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89497651",
+   "title": "«Без серьезных ДТП и шпаклёвки»: спорткар Nissan Fairlady Z в тюнинге продают в Новосибирске",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/11/04/76741781/"
+    ]
+   ],
+   "sum": "2,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72058169",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38979598",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75434428",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52409066",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83661130",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46467133",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13732270",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26082991",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77151923",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08713124",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64747701",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52314560",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89497651",
+   "title": "«Без серьезных ДТП и шпаклёвки»: спорткар Nissan Fairlady Z в тюнинге продают в Новосибирске",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/11/04/76741781/"
+    ]
+   ],
+   "sum": "2,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72058169",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38979598",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75434428",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52409066",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83661130",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46467133",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13732270",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26082991",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77151923",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08713124",
+   "title": "В Турции задержали более 30 россиянок и забрали у них телефоны: что они сделали",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/incidents/2026/11/04/76744218/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
