@@ -1798,7 +1798,7 @@ def test_no_undesirable_outlet_named_in_card_text(deals):
     """Издание, признанное в РФ нежелательным, не называется и в тексте
     карточки (4 ноября 2026: The Insider в «Контексте» трех карточек)."""
     import re
-    rx = re.compile(r"The Insider|Meduza|Медуза|Радио Свобода|Важные истории", re.I)
+    rx = re.compile(r"The Insider|Meduza|Медуза|Радио Свобода|Важные истории|Moscow Times|The Bell|Медиазона|Вёрстка|Голос Америки|Новая газета", re.I)
     bad = [d["id"] for d in deals for v in (d.get("eco") or {}).values() if isinstance(v, str) and rx.search(v)]
     assert not bad, "нежелательное издание названо в тексте: %s" % sorted(set(bad))[:8]
 
