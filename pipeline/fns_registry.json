@@ -4099,10 +4099,10 @@
  },
  {
   "company_id": "g8b68e6e4",
-  "decision": "confirmed",
-  "inn": "6905062011",
-  "reason": "Единственный результат поиска — АО «Диэлектрические кабельные системы», Тверь — точное совпадение с юрлицом, названным в самом имени профиля.",
-  "date": "2026-08-24"
+  "decision": "no_match",
+  "inn": null,
+  "reason": "Профиль — описание структур, связанных с АО «Диэлектрические кабельные системы»; ИНН 6905062011 принадлежит самому АО — отдельный профиль g8dd89999 (4 ноября 2026).",
+  "date": "2026-11-04"
  },
  {
   "company_id": "g1035d8d8",
@@ -15382,6 +15382,97 @@
   "decision": "confirmed",
   "inn": "7735606263",
   "reason": "opensanctions.org (ИНН 7735606263, ОГРН 5147746298178, Зеленоград, Георгиевский пр-т, 5)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g1d523151",
+  "decision": "confirmed",
+  "inn": "8602067092",
+  "reason": "раскрытие эмитента, сайт компании unipro.energy (https://unipro.energy/files/26664/), строка 1.5 «ИНН эмитента»; ОГРН 1058602056985",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g03791183",
+  "decision": "confirmed",
+  "inn": "7813399867",
+  "reason": "audit-it.ru/contragent/1079847134014_ooo-fregat (ОГРН 1079847134014, Владимирский пр-кт, 9, лит. а)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g2725bc9f",
+  "decision": "confirmed",
+  "inn": "7728201178",
+  "reason": "audit-it.ru/contragent/1157746168007_ooo-ki-invest (ОГРН 1157746168007); list-org.com/company/8104707",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g54852609",
+  "decision": "confirmed",
+  "inn": "3731023288",
+  "reason": "list-org.com, поиск по ИНН 3731023288 (ОАО «ИЗТС»); rusprofile.ru/id/3492715",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g141b412e",
+  "decision": "confirmed",
+  "inn": "6672184222",
+  "reason": "rusprofile.ru/id/1092242, checko.ru/company/korporaciya-atomstroykompleks-1056604409784, ОГРН 1056604409784",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g93550e8a",
+  "decision": "confirmed",
+  "inn": "6671028735",
+  "reason": "rusprofile.ru/id/10252843, companies.rbc.ru/id/1156658098266-ao-oblkommunenergo, ОГРН 1156658098266",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g784fc9aa",
+  "decision": "confirmed",
+  "inn": "4824006696",
+  "reason": "list-org.com, поиск по названию (компания /company/8927), https://www.list-org.com/company/8927",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gb8988a5d",
+  "decision": "confirmed",
+  "inn": "3908018946",
+  "reason": "rusprofile.ru/id/1046701, ОГРН 1023901862676; совпадает со СПАРК, Контур.Фокус, РБК, list-org",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gf15b9e5a",
+  "decision": "confirmed",
+  "inn": "2309005897",
+  "reason": "rusprofile.ru/id/77680, ОГРН 1022301424177; совпадает со СПАРК и РБК",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g853742b0",
+  "decision": "confirmed",
+  "inn": "7609000881",
+  "reason": "rusprofile.ru/id/4396483, ОГРН 1027601066569; совпадает с list-org и Saby",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gcf0ab88e",
+  "decision": "confirmed",
+  "inn": "7805058077",
+  "reason": "datanewton.ru/contragents/1027802712904 (ОГРН 1027802712904), поиск по названию",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g85ca3ea3",
+  "decision": "confirmed",
+  "inn": "7801474566",
+  "reason": "datanewton.ru/contragents/1089847283217 (ОГРН 1089847283217); участники Семенов 98% и общество 2% совпадают с данными Делового Петербурга",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g8dd89999",
+  "decision": "confirmed",
+  "inn": "6905062011",
+  "reason": "productcenter.ru/producers/10819 (АО «ДКС», ИНН 6905062011); совпадает с записью реестра для профиля g8b68e6e4 (ЕГРЮЛ, Тверь)",
   "date": "2026-11-04"
  }
 ]

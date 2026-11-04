@@ -127,6 +127,11 @@ def main(argv):
     by_id = {d['id']: d for d in deals}
     today = date.today().isoformat()
     registry = json.load(open(REGISTRY_JSON, encoding='utf-8'))
+    # legal_short существующим профилям: {"legal_shorts": {"<id профиля>": "АО «Имя»"}}
+    for cid, short in (draft.get('legal_shorts') or {}).items():
+        comp = (base.get('companies') or {}).get(cid)
+        if comp and not comp.get('legal_short'):
+            comp['legal_short'] = short
     profiles, profile_problems = apply_profiles(draft, base, registry, today)
     for text in profile_problems:
         print('!!', text)
@@ -165,10 +170,22 @@ def main(argv):
             card['reviewed'] = today
             card[accept_card.STAMP] = today
             ready.append((entry, card))
+    retags = draft.get('retag') or []
+    for r in retags:
+        card = by_id.get(r['existing_id'])
+        print('РАЗМЕТКА', r['existing_id'], '—', 'нет в базе' if not card else r.get('why', '')[:100])
     for item in draft.get('unresolved') or []:
         print('БЕЗ КАРТОЧКИ', item.get('key'), '—', item.get('why'))
     print('Готово к записи: %d, с претензиями: %d' % (len(ready), bad))
-    if write and ready:
+    if write and retags:
+        for r in retags:
+            card = by_id.get(r['existing_id'])
+            if card:
+                themes = card.setdefault('themes', [])
+                for t in r.get('add_themes') or []:
+                    if t not in themes:
+                        themes.append(t)
+    if write and (ready or retags):
         for entry, card in ready:
             keep = entry.get('keep_id')
             if keep:
