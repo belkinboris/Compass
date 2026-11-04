@@ -2,6 +2,19 @@
  "updated": "2026-11-04",
  "signals": [
   {
+   "id": "s0910c2278",
+   "company_id": "gcc3a75c1",
+   "date": "2026-11-04",
+   "kind": "state_sale",
+   "summary": "Совкомфлот — государство готовит продажу пакета",
+   "source": [
+    "rbc.ru",
+    "https://www.rbc.ru/quote/04/11/2026/6adaeb5a9a794784f488949c"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "sb2c8675bd",
    "company_id": "g5c8c6494",
    "date": "2026-11-03",
