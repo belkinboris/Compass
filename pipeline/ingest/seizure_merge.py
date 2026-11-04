@@ -68,6 +68,22 @@ def problems(card, base):
     return out
 
 
+def absorb_old_fixes(card, old, keep):
+    """Карточка переписана целиком: прежние записи таблицы правок (FIXES) к ней больше не совпадают
+    с полями. Как у вычитки, их отпечатки уходят в `proofread_absorbed` — `already_applied` их засчитает."""
+    import review
+    absorbed = {k: list(v) for k, v in (old.get('proofread_absorbed') or {}).items()}
+    for fix in review.FIXES:
+        if fix['id'] != keep or fix['new'] is None:
+            continue
+        value = fix['new'][1] if fix['field'] == 'src' else fix['new']
+        fp = review.fix_fingerprint(value)
+        if fp not in absorbed.setdefault(fix['field'], []):
+            absorbed[fix['field']].append(fp)
+    if absorbed:
+        card['proofread_absorbed'] = absorbed
+
+
 def profile_id(key):
     return 'g' + hashlib.sha1(('profile:' + key).encode('utf-8')).hexdigest()[:8]
 
@@ -90,8 +106,9 @@ def apply_profiles(draft, base, registry, today):
             made[p['key']] = pid
             continue
         comps[pid] = {'name': p['name'], 'ind': p['ind'], 'desc': p['desc'], 'kpi': ['Профиль', 'Автоматический']}
-        registry.append({'company_id': pid, 'decision': 'confirmed', 'inn': str(p['inn']),
-                         'reason': p['inn_reason'], 'date': today})
+        if not any(r['company_id'] == pid for r in registry):      # повторный свод не дублирует запись
+            registry.append({'company_id': pid, 'decision': 'confirmed', 'inn': str(p['inn']),
+                             'reason': p['inn_reason'], 'date': today})
         made[p['key']] = pid
     return made, problems_
 
@@ -135,7 +152,7 @@ def main(argv):
             continue
         probe = dict(card)
         base_view = {**base, 'deals': [d for d in deals if d['id'] != keep]}
-        found = problems(card, base) + [f for f in accept_card.findings(probe, base_view)]
+        found = problems(card, base) + [f for f in accept_card.findings(probe, base_view, registry=registry)]
         print('%s %-9s %s | %s' % ('ОШИБКИ' if found else 'ок    ', card['id'], card['title'][:70], entry.get('op')))
         for code, text in found:
             print('      -', code, ':', str(text)[:240])
@@ -155,6 +172,7 @@ def main(argv):
                 old = by_id[keep]
                 idx = deals.index(old)
                 card.setdefault('added', old.get('added'))
+                absorb_old_fixes(card, old, keep)
                 deals[idx] = card
             else:
                 deals.append(card)
