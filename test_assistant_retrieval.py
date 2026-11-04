@@ -390,7 +390,10 @@ def test_deal_page_questions_about_asset_origin_use_the_card(idx):
         res = ar.retrieve(q, "deal", deal, idx=idx)
         assert res.intent == "deal", q
         assert "Генпрокуратура" in (res.answer or ""), q
-        assert "нет" in res.answer, q
+        # Отдельные карточки об изъятии появились 4 ноября 2026 (g4f9a1741,
+        # g6f98005b) — ответ ведет на них; пока их не было, честно говорил «нет».
+        assert ("Другие карточки об этом активе" in res.answer and "#/deal/" in res.answer) \
+            or "Отдельной карточки об изъятии" in res.answer, q
 
 
 def test_compare_keeps_both_companies(idx):
