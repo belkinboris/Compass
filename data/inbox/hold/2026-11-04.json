@@ -1,0 +1,89 @@
+{
+ "made": "2026-11-04",
+ "drafts": [
+  {
+   "draft_id": "d06426147",
+   "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261102/birzha-874847090.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Рынок ценных бумаг",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62935089",
+   "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
+   "date": "2026-11-02",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/business/2026/11/02/76738898/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89743859",
+   "title": "Reuters узнал о сделке, которая «положит конец» продаже активов ЛУКОЙЛа",
+   "date": "2026-11-03",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/03/11/2026/6aea0c660dbbc5bef016522b"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}

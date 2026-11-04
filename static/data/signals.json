@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03",
+ "updated": "2026-11-04",
  "signals": [
   {
    "id": "sb2c8675bd",
@@ -878,6 +878,20 @@
    "strength": "strong"
   },
   {
+   "id": "sd1cbab5e1",
+   "company_id": "g676ca6df",
+   "date": "2026-05-31",
+   "kind": "for_sale",
+   "summary": "Росгосстрах — обсуждается продажа компании или доли; возможный покупатель — ООО «РВБ» (Wildberries & Russ)",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8708228"
+   ],
+   "origin": "card",
+   "deal_id": "gd774ce6b",
+   "strength": "strong"
+  },
+  {
    "id": "sbb7e119cf",
    "company_id": "gcafc31dc",
    "date": "2026-05-31",
@@ -910,7 +924,7 @@
    "company_id": "g3e551f6e",
    "date": "2026-05-26",
    "kind": "buy",
-   "summary": "АО «Новый старт» — обсуждается покупка: ООО «Газпром СПКА»",
+   "summary": "АО «Новый старт» — обсуждается покупка: Газпром СПКА",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8689589"
@@ -924,7 +938,21 @@
    "company_id": "g1ec82cf4",
    "date": "2026-05-26",
    "kind": "sell",
-   "summary": "Газпром космические системы — обсуждается продажа: ООО «Газпром СПКА»",
+   "summary": "Газпром космические системы — обсуждается продажа: Газпром СПКА",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8689589"
+   ],
+   "origin": "card",
+   "deal_id": "g029b7531",
+   "strength": "strong"
+  },
+  {
+   "id": "s955ea81a0",
+   "company_id": "g3049a270",
+   "date": "2026-05-26",
+   "kind": "for_sale",
+   "summary": "Газпром СПКА — обсуждается продажа компании или доли; возможный покупатель — АО «Новый старт»",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/8689589"

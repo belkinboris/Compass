@@ -171,7 +171,7 @@ def test_the_journal_in_the_main_file_is_short():
 
 
 _KNOW = re.compile(r"^Знание:\s*(\S.*)$", re.M)
-_KNOW_TARGET = re.compile(r"((?:docs|routines|pipeline)/[\w./-]+\.(?:md|py)|[A-Z_]+\.md|test_\w+\.py)"
+_KNOW_TARGET = re.compile(r"((?:docs|routines|pipeline|known_issues)/[\w./-]+\.(?:md|py)|[A-Z_]+\.md|test_\w+\.py)"
                           r"(?:#([^;]+?)|::(\w+))?\s*(?:;|$)")
 
 
