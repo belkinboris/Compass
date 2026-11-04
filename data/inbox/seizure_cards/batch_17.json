@@ -1,0 +1,84 @@
+{
+ "items": [
+  {
+   "key": "petrus_petrus_812",
+   "op": "create",
+   "asset": "PET.RUS (Petrus)",
+   "date_hint": "2025",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "Бюджет.ру: во временное управление передали 35 пакетов акций",
+   "list_url": "https://bujet.ru/article/527590.php",
+   "existing_ids": "['ga5336065', 'gf9ab3267']"
+  },
+  {
+   "key": "adventus_978",
+   "op": "create",
+   "asset": "Adventus",
+   "date_hint": "2025-2026 (дата не указана)",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "ТКС: Metro стала 28-й иностранной компанией (29.09.2026)",
+   "list_url": "https://www.tks.ru/reviews/2026/09/29/0001/metro-stala-28-j-inostrannoj-kompaniej-chi-aktivyi-peredali-vo-vremennoe-upravlenie/",
+   "existing_ids": "['g63fc05ab']"
+  },
+  {
+   "key": "__167",
+   "op": "create",
+   "asset": "Ланта (оператор связи, отель Берендей, торговые центры)",
+   "date_hint": "окт. 2025",
+   "basis_hint": "суд: признание участником экстремистского объединения",
+   "list_source": "Т—Ж: Национализация в России, список компаний",
+   "list_url": "https://t-j.ru/list/nationalized-companies/",
+   "existing_ids": "['g42e11ded', 'gb101d54d']"
+  },
+  {
+   "key": "__537",
+   "op": "create",
+   "asset": "Петербургский нефтяной терминал",
+   "date_hint": "апрель 2025",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "Фонтанка: Итоги национализации в 2025 году (07.01.2026)",
+   "list_url": "https://www.fontanka.ru/2026/01/07/76191869/",
+   "existing_ids": "['g7ae9bb53', 'gmru-roshim-vnt']"
+  },
+  {
+   "key": "__870",
+   "op": "create",
+   "asset": "Дворец труда (Николаевский дворец), Санкт-Петербург",
+   "date_hint": "2024",
+   "basis_hint": "суд по иску Генпрокуратуры, незаконное владение",
+   "list_source": "Фонтанка: Итоги национализации в 2025 году (07.01.2026)",
+   "list_url": "https://www.fontanka.ru/2026/01/07/76191869/",
+   "existing_ids": "['gb6a90572']"
+  },
+  {
+   "key": "__806",
+   "op": "create",
+   "asset": "ДК имени Кирова, Санкт-Петербург",
+   "date_hint": "сент. 2025",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "Фонтанка: Итоги национализации в 2025 году (07.01.2026)",
+   "list_url": "https://www.fontanka.ru/2026/01/07/76191869/",
+   "existing_ids": "['g1b5e8ab8', 'g3aa57efe']"
+  },
+  {
+   "key": "_65__243",
+   "op": "create",
+   "asset": "Русагро (65% акций)",
+   "date_hint": "май 2026",
+   "basis_hint": "Хамовнический суд, антикоррупционный иск Генпрокуратуры",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": "['g81a766ac', 'g91606f1b']"
+  },
+  {
+   "key": "__439",
+   "op": "create",
+   "asset": "Коттеджный поселок Сенатор Клуб",
+   "date_hint": "до 03.10.2024 (дата не указана)",
+   "basis_hint": "суд по иску Генпрокуратуры: антикоррупционное законодательство",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": "['gadee3ca7', 'g76cf4203']"
+  }
+ ]
+}

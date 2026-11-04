@@ -1,0 +1,56 @@
+{
+ "items": [
+  {
+   "key": "murmaneld",
+   "op": "create",
+   "asset": "Мурманельд-2, Рыболовецкий колхоз Заря, Компания Андромеда (Задворный, рыбопромысловые активы)",
+   "date_hint": "20-21.05.2026",
+   "basis_hint": "Арбитражный суд Москвы, иск Генпрокуратуры: иностранный контроль над стратегическими предприятиями, взыскано около 43,1 млрд руб., договоры о квотах признаны недействительными",
+   "urls_read_by_scout": [
+    "https://51.ru/text/gorod/2026/05/21/76432698/"
+   ]
+  },
+  {
+   "key": "altayagro",
+   "op": "create",
+   "asset": "Алтайагроснаб (агрохолдинг, более 10 млрд руб.)",
+   "date_hint": "февраль 2026 (первая инстанция ноябрь 2025)",
+   "basis_hint": "Новосибирский облсуд (апелляция) по иску Генпрокуратуры к бывшему главе Южно-Сибирского управления Росприроднадзора Фролову: антикоррупционные нарушения",
+   "urls_read_by_scout": [
+    "https://www.vedomosti.ru/business/news/2026/02/17/1176897-agroholding-obraschen"
+   ]
+  },
+  {
+   "key": "ntk",
+   "op": "create",
+   "asset": "Национальная топливная компания, Кубаньойл, Сочипетрол и недвижимость Напсо",
+   "date_hint": "25.11.2025",
+   "basis_hint": "Краснодарский краевой суд (апелляция) по иску Генпрокуратуры: имущество экс-депутата Госдумы Напсо на родственниках, 1,4 млрд руб.",
+   "urls_read_by_scout": [
+    "https://sochi-bloknot.ru/news/u-eks-deputata-napso-izyali-aktivov-v-2-raza-bolsh"
+   ]
+  },
+  {
+   "key": "voronovsky",
+   "op": "create",
+   "asset": "Предприятия и недвижимость Вороновского и связанных лиц (19 компаний, 207 объектов, Сочи)",
+   "date_hint": "20.02.2026",
+   "basis_hint": "Центральный райсуд Сочи, дело 2-97/2026, иск Генпрокуратуры: доходы от дорожной отрасли Кубани, 23,3 млрд руб.",
+   "urls_read_by_scout": [
+    "https://pravo.ru/news/262504/",
+    "https://krd.gorod.space/u-chetyreh-byvshih-vitse-gubernatorov-krasnodarskogo-kraya-izyali-aktivy-na-35-mlrd-rubley/"
+   ]
+  },
+  {
+   "key": "korobka",
+   "op": "create",
+   "asset": "Имущество и доли в 12 компаниях, 135 участков, права аренды 12,5 тыс. га (Коробка, Кубань)",
+   "date_hint": "07.04.2026",
+   "basis_hint": "Ленинский райсуд Краснодара, иск Генпрокуратуры, около 10 млрд руб.",
+   "urls_read_by_scout": [
+    "https://krd.gorod.space/u-chetyreh-byvshih-vitse-gubernatorov-krasnodarskogo-kraya-izyali-aktivy-na-35-mlrd-rubley/",
+    "https://pravo.ru/story/263741/"
+   ]
+  }
+ ]
+}

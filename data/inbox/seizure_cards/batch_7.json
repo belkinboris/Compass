@@ -1,0 +1,24 @@
+{
+ "items": [
+  {
+   "key": "decree_sep17",
+   "op": "create",
+   "asset": "Активы из указа от 17 сентября 2026, у которых нет карточки: «Леман ПРО» (бывший Leroy Merlin), три юрлица FM Logistic, восемь юрлиц Batilogistic, «Энжэ Строй» (NG Concept)",
+   "existing_ids": [
+    "g64462179",
+    "g2daf32fe"
+   ],
+   "hint": "Nestlé и «Ашан» из этого указа уже есть отдельными карточками. Бизнес на актив: Леман ПРО; FM Logistic; Batilogistic; NG Concept — 4 карточки, тип Временное управление"
+  },
+  {
+   "key": "wintershall",
+   "op": "create",
+   "asset": "Wintershall Dea / OMV в России (проверь, было ли временное управление или изъятие)",
+   "existing_ids": [
+    "g4cd1fa52",
+    "g3bb1fadb"
+   ],
+   "hint": "если это не изъятие и не временное управление — в unresolved с причиной"
+  }
+ ]
+}
