@@ -32,6 +32,8 @@ import accept_card  # noqa: E402
 from pipeline.source_names import is_undesirable  # noqa: E402
 
 REGISTRY_JSON = os.path.join(ROOT, 'pipeline', 'fns_registry.json')
+# --defer-legal: `legal_short` профилей проставляет party_legal_names.py уже после записи
+DEFER_LEGAL = '--defer-legal' in sys.argv
 REQUIRED = ('title', 'date', 'type', 'status', 'src', 'eco', 'law', 'themes', 'ind')
 
 
@@ -152,7 +154,8 @@ def main(argv):
             continue
         probe = dict(card)
         base_view = {**base, 'deals': [d for d in deals if d['id'] != keep]}
-        found = problems(card, base) + [f for f in accept_card.findings(probe, base_view, registry=registry)]
+        found = problems(card, base) + [f for f in accept_card.findings(probe, base_view, registry=registry)
+                                        if not (DEFER_LEGAL and f[0].startswith('party_legal_form'))]
         print('%s %-9s %s | %s' % ('ОШИБКИ' if found else 'ок    ', card['id'], card['title'][:70], entry.get('op')))
         for code, text in found:
             print('      -', code, ':', str(text)[:240])

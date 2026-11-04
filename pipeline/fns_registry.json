@@ -15299,5 +15299,89 @@
   "inn": "0107018096",
   "reason": "rusprofile.ru/id/1138299, checko.ru/company/silgan-metal-pehkadzhing-ehnem-1090107001511 (ОГРН 1090107001511)",
   "date": "2026-11-04"
+ },
+ {
+  "company_id": "g193370bd",
+  "decision": "confirmed",
+  "inn": "5026014060",
+  "reason": "ПАО Банк «Агропромкредит» (ОГРН 1095000004252): ИНН по сайту Банка России cbr.ru и brobank.ru; контрольная сумма сходится (4 ноября 2026, читатель карточки изъятия).",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g097e34b2-target",
+  "decision": "lot",
+  "inn": null,
+  "reason": "Профиль — лот из двух юрлиц («Южгазэнерджи» и «Кейтеринг-Юг», проданы одним лотом): единого ИНН у лота нет. ИНН ООО «Южгазэнерджи» — 0105046700 (saby.ru), 4 ноября 2026.",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g10d09025",
+  "decision": "confirmed",
+  "inn": "5029047184",
+  "reason": "opensanctions.org/entities/ru-inn-5029047184 (ОГРН 1025003530826), письма ФТС с реквизитами ООО «Родник и К», Мытищи",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g73bdef4f",
+  "decision": "confirmed",
+  "inn": "3435900563",
+  "reason": "реестр лицензий МЧС России (digital.mchs.gov.ru/fgpn/license/34-07-2008-000155/pdf), ОГРН 1023402000511",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g3543e98f",
+  "decision": "confirmed",
+  "inn": "5029069967",
+  "reason": "декларации пожарной безопасности МЧС (digital.mchs.gov.ru), ОГРН 1035005516105; переименование — retail.ru, 6 марта 2024",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g70d3a2c9",
+  "decision": "confirmed",
+  "inn": "5047027173",
+  "reason": "companies.rbc.ru, каталог ФМ (ОГРН 1025006174731), alta.ru/svh",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gc33ceafa",
+  "decision": "confirmed",
+  "inn": "7718957575",
+  "reason": "tbank.ru/business/contractor/legal/5137746121981, opensanctions.org/entities/ru-inn-7718957575 (ОГРН 5137746121981)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g293d265a",
+  "decision": "confirmed",
+  "inn": "4101134135",
+  "reason": "opensanctions.org/entities/ru-inn-4101134135 (ОГРН 1094101005778)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gc60de9c9",
+  "decision": "confirmed",
+  "inn": "7805033570",
+  "reason": "tbank.ru/business/contractor/legal/1027802743847/ (ОГРН 1027802743847)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gfcd555bc",
+  "decision": "confirmed",
+  "inn": "7805029076",
+  "reason": "tbank.ru/business/contractor/legal/1027802760875/ (ОГРН 1027802760875)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "gf2cf567d",
+  "decision": "confirmed",
+  "inn": "7840002743",
+  "reason": "tapki.com/company/894097075 (ОГРН 1037865005309)",
+  "date": "2026-11-04"
+ },
+ {
+  "company_id": "g06894f80",
+  "decision": "confirmed",
+  "inn": "7735606263",
+  "reason": "opensanctions.org (ИНН 7735606263, ОГРН 5147746298178, Зеленоград, Георгиевский пр-т, 5)",
+  "date": "2026-11-04"
  }
 ]
