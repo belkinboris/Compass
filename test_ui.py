@@ -4237,7 +4237,7 @@ def test_the_deal_feed_can_be_narrowed_to_calendar_days(page, base_url):
     ссылка period переживает перезагрузку, и карточки, у которых известен
     только год, честно посчитаны отдельно, а не подмешаны в выборку по дням.
     """
-    page.goto(f"{base_url}/#/deals?from=2025-03-01&to=2025-04-30")
+    page.goto(f"{base_url}/#/deals?from=2025-03-01&to=2025-04-30&norealty=0")
     page.wait_for_timeout(2500)
 
     expected = page.evaluate(
@@ -4975,21 +4975,24 @@ def test_hero_dots_visible_in_short_in_app_browser(browser, base_url):
 
 
 def test_feed_hides_real_estate_with_one_button(browser, base_url):
-    """«Убрать недвижимость» рядом с «Фильтры» скрывает все сделки отрасли
-    «Недвижимость» и возвращает их вторым нажатием (владелец, 12 октября 2026:
-    новичок принимает «Компас» за портал недвижимости)."""
+    """Недвижимость в ленте скрыта по умолчанию (владелец, 4 ноября 2026; до
+    этого — кнопкой «Убрать недвижимость», 12 октября: новичок принимает
+    «Компас» за портал недвижимости). Кнопка «Вернуть недвижимость» возвращает
+    сделки, в адресе — norealty=0; повторное нажатие прячет снова."""
     pg = browser.new_page(viewport={"width": 1280, "height": 900})
     try:
         pg.goto(base_url + "/#/", wait_until="networkidle")
         pg.wait_for_selector("#norealty")
         rows = lambda: pg.evaluate("[...document.querySelectorAll('#feedlist .deal-row')].filter(r=>/Недвижимость/i.test(r.innerText)).length")
-        assert rows() > 0, "в первой странице ленты нет недвижимости — тест ничего не проверит"
-        pg.click("#norealty"); pg.wait_for_timeout(300)
         assert rows() == 0
-        assert "norealty=1" in pg.evaluate("location.hash")
         assert pg.inner_text("#norealty") == "Вернуть недвижимость"
         pg.click("#norealty"); pg.wait_for_timeout(300)
-        assert rows() > 0
+        assert rows() > 0, "после «Вернуть недвижимость» в первой странице ленты нет недвижимости"
+        assert "norealty=0" in pg.evaluate("location.hash")
+        assert pg.inner_text("#norealty") == "Убрать недвижимость"
+        pg.click("#norealty"); pg.wait_for_timeout(300)
+        assert rows() == 0
+        assert "norealty" not in pg.evaluate("location.hash")
     finally:
         pg.close()
 

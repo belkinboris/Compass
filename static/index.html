@@ -3868,7 +3868,7 @@ function feedHash(){
     .map(([key,name])=>{
       const v = st[name];
       if(name==="onlyFull") return v ? "full=1" : "";
-      if(name==="noRealty") return v ? "norealty=1" : "";
+      if(name==="noRealty") return v ? "" : "norealty=0";
       return (v && v!=="Все") ? `${key}=${encodeURIComponent(v)}` : "";
     })
     .filter(Boolean);
@@ -3908,7 +3908,7 @@ function applyFeedParams(qs){
      «Только с разбором» против «Все сделки» показывал бы один и тот же список
      и был мертвым выбором. Разбор параметра оставлен для старых ссылок. */
   onlyFull = p.get("full") === "1";
-  noRealty = p.get("norealty") === "1";
+  noRealty = p.get("norealty") !== "0";
   feedPage = 1;
   // Панель открывается сама, если фильтр не виден в свернутом виде: иначе
   // пришедший по ссылке видит отфильтрованную ленту и не понимает почему.
@@ -5205,8 +5205,11 @@ let feedQuery = "";
 let onlyFull = false;
 /* «Убрать недвижимость» (владелец, 12 октября 2026): сделок с недвижимостью
    в базе больше всех, и новичок принимает «Компас» за портал недвижимости.
-   Одна кнопка рядом с «Фильтры» убирает их из ленты; в адресе — norealty=1. */
-let noRealty = false;
+   Одна кнопка рядом с «Фильтры» убирает их из ленты. С 4 ноября 2026 (владелец)
+   фильтр включен по умолчанию, кнопка показывает «Вернуть недвижимость»; в
+   адресе молчание = включен, norealty=0 = недвижимость возвращена. Если выбрана
+   отрасль «Недвижимость», фильтр не мешает: иначе лента была бы пустой. */
+let noRealty = true;
 let feedYear = "Все";
 /* ПЕРИОД ПО КАЛЕНДАРЮ. Галочки по годам отвечают на «что было в 2025-м», но
    не на «что было с 3 марта по 12 апреля» — а именно так спрашивают, когда
@@ -5584,7 +5587,7 @@ function unifiedFeedItems(){
     const yes = firmPrice(((it.rec.facts||{}).price||{}));
     return want.includes(yes ? "Цена раскрыта" : "Цена не раскрыта");
   };
-  const matchRealty = it => !noRealty || !(it.kind==="full" ? hasIndustry(it.rec,"Недвижимость") : it.ind==="Недвижимость");
+  const matchRealty = it => !noRealty || msValues(filterInd).includes("Недвижимость") || !(it.kind==="full" ? hasIndustry(it.rec,"Недвижимость") : it.ind==="Недвижимость");
   const filtered = items.filter(it=>matchRealty(it) && matchInd(it) && matchQ(it) && matchY(it) && matchPeriod(it) && (!onlyFull||it.kind==="full") && matchFirm(it) && matchAdvisorGroup(it) && matchTheme(it) && matchRevenue(it) && matchStatus(it) && matchType(it) && matchAppr(it) && matchPriced(it));
   /* ПОРЯДОК — ПО ДАТЕ СДЕЛКИ (первой новости о ней), внутри одного дня — по
      дате появления в базе. Решение владельца 3 октября 2026 (см. rowHtml):
@@ -5732,7 +5735,7 @@ function bindFeedListEvents(){
   if(fr) fr.onclick = ()=>{
     feedQuery=""; filterInd="Все"; feedYear="Все"; filterTheme="Все"; filterFirm="Все"; filterAdvisorGroup="Все";
     feedFrom=""; feedTo="";
-    onlyFull=false; noRealty=false; filterMinRevenue="Все"; feedPage=1;
+    onlyFull=false; noRealty=true; filterMinRevenue="Все"; feedPage=1;
     filterStatus="Все"; filterType="Все"; filterAppr="Все"; filterPriced="Все";
     const q=document.getElementById("feedq"); if(q) q.value="";
     ["selind","selyear","seltheme","selfirm","selstatus","seldtype","selappr","selpriced"].forEach(msReset);
