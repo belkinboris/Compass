@@ -184,13 +184,13 @@
    ]
   },
   {
-   "draft_id": "d16528002",
-   "title": "Kraft Heinz продаст 70% кофейного бизнеса",
+   "draft_id": "d39324660",
+   "title": "Гуляем на свои // Израиль лишится дотаций на покупку американского оружия",
    "date": "2026-11-04",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28286223"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9080356"
     ]
    ],
    "sum": null,
@@ -198,17 +198,45 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "70% кофейного бизнеса",
-   "seller": "Kraft Heinz",
+   "asset": null,
+   "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "70% кофейного бизнеса",
-    "seller": "Kraft Heinz"
+    "asset": null,
+    "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86867001",
+   "title": "«Копим на квартиру»: в Новосибирске продают серебряную шкатулку XIX века",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/entertainment/2026/11/04/76744732/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
