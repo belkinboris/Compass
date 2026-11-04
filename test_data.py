@@ -1778,6 +1778,22 @@ def test_a_company_description_never_says_where_we_read_it(companies):
     assert not bad, 'пометки о происхождении в описаниях компаний:\n' + '\n'.join(bad[:20])
 
 
+def test_no_undesirable_outlet_in_sources(deals):
+    """4 ноября 2026, Артем и владелец: на карточках оставались ссылки The
+    Insider и Meduza — издания признаны в РФ нежелательными. Список —
+    `pipeline/source_names.UNDESIRABLE_HOSTS`; ссылка снимается, а факт
+    подтверждается другим источником."""
+    from pipeline.source_names import is_undesirable
+    bad = []
+    for d in deals:
+        for field in ("src", "discovery_src"):
+            bad += [d["id"] for s in d.get(field) or [] if isinstance(s, list) and len(s) > 1 and is_undesirable(s[1])]
+        for fact in (d.get("facts") or {}).values():
+            if isinstance(fact, dict) and is_undesirable(fact.get("source") or ""):
+                bad.append(d["id"])
+    assert not bad, "ссылки на нежелательные издания: %s" % sorted(set(bad))[:8]
+
+
 def test_aggregator_is_not_a_fact_source_when_an_original_exists(deals):
     """Правило владельца 3 октября 2026: агрегатор (mergers.ru, @dealsma,
     @LawFirms) годится, чтобы сделку обнаружить, но читателю как источник

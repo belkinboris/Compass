@@ -230,6 +230,21 @@ def is_aggregator(url):
     return False
 
 
+# ИЗДАНИЯ, ПРИЗНАННЫЕ В РФ НЕЖЕЛАТЕЛЬНЫМИ ОРГАНИЗАЦИЯМИ, — НЕ ИСТОЧНИК
+# (владелец и Артем, 4 ноября 2026: «мы же убирали везде нежелательные в РФ
+# источники» — на карточках оставалось 12 ссылок The Insider и 10 Meduza).
+# Ссылка на такое издание на сайте российского сервиса — риск для читателя и
+# для нас. Список ограничен тем, в чем нет сомнений; спорное (иноагенты,
+# «Медиазона», «Новая газета Европа») идет вопросом владельцу. Проверка —
+# `is_undesirable`: приемка карточки, `settle_sources` и тест базы.
+UNDESIRABLE_HOSTS = ('theins.ru', 'meduza.io', 'svoboda.org', 'istories.media')
+
+
+def is_undesirable(url):
+    host = host_of(url)
+    return any(host == h or host.endswith('.' + h) for h in UNDESIRABLE_HOSTS)
+
+
 def has_source(card, url):
     """Ссылка уже у карточки — на виду или в `discovery_src`."""
     return any(isinstance(s, list) and len(s) > 1 and s[1] == url
@@ -243,12 +258,18 @@ def _http_sources(items):
 def settle_sources(card):
     """Агрегаторы из `src` — в `discovery_src`, если в `src` есть настоящий
     источник. Возвращает True, если карточка изменилась. Идемпотентно."""
+    changed = False
+    for field in ('src', 'discovery_src'):
+        kept = [s for s in (card.get(field) or []) if not (isinstance(s, list) and len(s) > 1 and is_undesirable(s[1]))]
+        if len(kept) != len(card.get(field) or []):
+            card[field] = kept
+            changed = True
     src = card.get('src') or []
     if not any(not is_aggregator(s[1]) for s in _http_sources(src)):
-        return False
+        return changed
     moved = [s for s in _http_sources(src) if is_aggregator(s[1])]
     if not moved:
-        return False
+        return changed
     card['src'] = [s for s in src if s not in moved]
     bucket = card.setdefault('discovery_src', [])
     for s in moved:
