@@ -1,0 +1,54 @@
+{
+ "items": [
+  {
+   "key": "__658",
+   "op": "create",
+   "asset": "Ивановский завод тяжелого станкостроения",
+   "date_hint": "ноябрь 2025",
+   "basis_hint": "суд, деприватизация (приватизация 1996 г.)",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  },
+  {
+   "key": "__95",
+   "op": "create",
+   "asset": "Сады Майендорф (земельные участки)",
+   "date_hint": "2024-2025",
+   "basis_hint": "суд по иску Генпрокуратуры, незаконное владение",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  },
+  {
+   "key": "marton_marton_946",
+   "op": "create",
+   "asset": "Marton (сеть бизнес-отелей Marton)",
+   "date_hint": "окт. 2025",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "Право.ру: Хроника национализации",
+   "list_url": "https://pravo.ru/story/260781/",
+   "existing_ids": []
+  },
+  {
+   "key": "__993",
+   "op": "create",
+   "asset": "Атомстройкомплекс (земельные участки)",
+   "date_hint": "март 2026",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "Smart-lab: Национализация по-русски (05.04.2026)",
+   "list_url": "https://smart-lab.ru/blog/1287017.php",
+   "existing_ids": []
+  },
+  {
+   "key": "x_933",
+   "op": "create",
+   "asset": "Облкоммунэнерго",
+   "date_hint": "2025-2026",
+   "basis_hint": "суд по иску Генпрокуратуры, антикоррупционное законодательство",
+   "list_source": "ya62.ru: Активы миллиардеров Forbes (28.02.2026)",
+   "list_url": "https://ya62.ru/text/economics/2026/02/28/76286099/",
+   "existing_ids": []
+  }
+ ]
+}

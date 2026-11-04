@@ -1,0 +1,64 @@
+{
+ "items": [
+  {
+   "key": "__339",
+   "op": "create",
+   "asset": "Гостиница Золотая Страна / Автор",
+   "date_hint": "дек. 2025",
+   "basis_hint": "суд, дело Rietumu",
+   "list_source": "Фонтанка: Итоги национализации в 2025 году (07.01.2026)",
+   "list_url": "https://www.fontanka.ru/2026/01/07/76191869/",
+   "existing_ids": []
+  },
+  {
+   "key": "_4__996",
+   "op": "create",
+   "asset": "Апарт-отель на ул. Глинки, 4, Санкт-Петербург",
+   "date_hint": "дек. 2025",
+   "basis_hint": "суд, дело Rietumu",
+   "list_source": "Фонтанка: Итоги национализации в 2025 году (07.01.2026)",
+   "list_url": "https://www.fontanka.ru/2026/01/07/76191869/",
+   "existing_ids": []
+  },
+  {
+   "key": "__297",
+   "op": "create",
+   "asset": "КИМП (холдинг)",
+   "date_hint": "2026",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  },
+  {
+   "key": "__277",
+   "op": "create",
+   "asset": "Элма и Прамо (ГК Элма)",
+   "date_hint": "2026",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  },
+  {
+   "key": "__319",
+   "op": "create",
+   "asset": "Трансбункер (холдинг)",
+   "date_hint": "июль 2026",
+   "basis_hint": "Арбитражный суд Москвы по иску Генпрокуратуры",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  },
+  {
+   "key": "x_657",
+   "op": "create",
+   "asset": "Краснодарзернопродукт",
+   "date_hint": "1-е полугодие 2026",
+   "basis_hint": "суд по иску Генпрокуратуры",
+   "list_source": "NSP: Национализация активов (трекер)",
+   "list_url": "https://nationalization.nsplaw.com/",
+   "existing_ids": []
+  }
+ ]
+}

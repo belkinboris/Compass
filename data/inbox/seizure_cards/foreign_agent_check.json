@@ -1,0 +1,142 @@
+[
+ {
+  "host": "ru.themoscowtimes.com",
+  "outlet": "The Moscow Times",
+  "status": "иноагент и нежелательная",
+  "since": "иноагент с 2023-11-17; нежелательная с 2024-07-10 (по сообщениям; ruwiki: решение 2024-07-03)",
+  "evidence": "Иноагент: Минюст, 17.11.2023 https://novayagazeta.eu/articles/2023/11/17/miniust-priznal-inoagentom-izdanie-the-moscow-times-news ; нежелательная: Генпрокуратура, сообщение 10.07.2024 https://zona.media/news/2024/07/10/moscow_times (ruwiki называет 03.07.2024 датой решения, расхождение)"
+ },
+ {
+  "host": "themoscowtimes.com",
+  "outlet": "The Moscow Times",
+  "status": "иноагент и нежелательная",
+  "since": "иноагент с 2023-11-17; нежелательная с 2024-07-10 (по сообщениям; ruwiki: решение 2024-07-03)",
+  "evidence": "Иноагент: Минюст, 17.11.2023 https://novayagazeta.eu/articles/2023/11/17/miniust-priznal-inoagentom-izdanie-the-moscow-times-news ; нежелательная: Генпрокуратура, сообщение 10.07.2024 https://zona.media/news/2024/07/10/moscow_times (ruwiki называет 03.07.2024 датой решения, расхождение)"
+ },
+ {
+  "host": "moscowtimes.ru",
+  "outlet": "The Moscow Times (RU)",
+  "status": "иноагент и нежелательная",
+  "since": "иноагент с 2023-11-17; нежелательная с 2024-07-10 (по сообщениям; ruwiki: решение 2024-07-03)",
+  "evidence": "Иноагент: Минюст, 17.11.2023 https://novayagazeta.eu/articles/2023/11/17/miniust-priznal-inoagentom-izdanie-the-moscow-times-news ; нежелательная: Генпрокуратура, сообщение 10.07.2024 https://zona.media/news/2024/07/10/moscow_times (ruwiki называет 03.07.2024 датой решения, расхождение)"
+ },
+ {
+  "host": "thebell.io",
+  "outlet": "The Bell",
+  "status": "иноагент (издание)",
+  "since": "2022-12-09",
+  "evidence": "Издание The Bell внесено в реестр 09.12.2022 https://zona.media/news/2022/12/09/inoagenty ; отдельно 01.04.2022 иноагентами признаны люди (издатель Елизавета Осетинская, главред Ирина Малкова), https://ru.wikipedia.org/wiki/The_Bell . О нежелательности данных не найдено."
+ },
+ {
+  "host": "en.thebell.io",
+  "outlet": "The Bell (англ.)",
+  "status": "иноагент (издание)",
+  "since": "2022-12-09",
+  "evidence": "Издание The Bell внесено в реестр 09.12.2022 https://zona.media/news/2022/12/09/inoagenty ; отдельно 01.04.2022 иноагентами признаны люди (издатель Елизавета Осетинская, главред Ирина Малкова), https://ru.wikipedia.org/wiki/The_Bell . О нежелательности данных не найдено."
+ },
+ {
+  "host": "verstka.media",
+  "outlet": "Вёрстка",
+  "status": "иноагент (издание)",
+  "since": "2023-12-22",
+  "evidence": "ruwiki: внесено Минюстом 22.12.2023 (вместе с Олегом Куваевым как отдельным лицом) https://ru.wikipedia.org/wiki/Вёрстка_(издание) . Нежелательной организацией не найдено: сайт заблокирован РКН с 14.06.2022, это не реестр. В поиске нашлись и сведения, что главред Лола Тагаева признана иноагентом отдельно (янв. 2024) https://www.vedomosti.ru/society/articles/2024/01/19/1015948-v-reestr"
+ },
+ {
+  "host": "zona.media",
+  "outlet": "Медиазона",
+  "status": "иноагент",
+  "since": "2021-09-29 (издатель ООО «ЗП», Верзилов и Смирнов как люди); сам сайт-издание внесено 2026-08-21",
+  "evidence": "2021: https://pravo.ru/news/235241/ (иноагентами стали ООО «ЗП» — учредитель издания, и люди). 21.08.2026 Минюст внес интернет-издание «Медиазона»: https://www.dp.ru/a/2026/08/21/internet-izdanie-mediazona . Нежелательной организацией не найдено."
+ },
+ {
+  "host": "novayagazeta.eu",
+  "outlet": "Новая газета Европа",
+  "status": "нежелательная",
+  "since": "2023-06-28 (сообщение; решение от 26.06.2023)",
+  "evidence": "https://zona.media/news/2023/06/28/nge ; https://novayagazeta.eu/articles/2023/06/28/genprokuratura-rf-priznala-novuiu-gazeta-evropa-nezhelatelnoi-organizatsiei-news . Иноагентом как издание не найдено."
+ },
+ {
+  "host": "novayagazeta.ru",
+  "outlet": "Новая газета",
+  "status": "иноагент (издание)",
+  "since": "2026-09-04 (дата сообщения)",
+  "evidence": "https://novayagazeta.eu/articles/2026/09/04/novuiu-gazetu-vnesli-v-reestr-inoagentov-news : Минюст внес само издание; свыше 100 человек внесены как «участники» (иной статус). Дмитрий Муратов признан иноагентом отдельно (по памяти, 2023, в этой проверке не подтверждено). Нежелательной не найдено."
+ },
+ {
+  "host": "golosameriki.com",
+  "outlet": "Голос Америки",
+  "status": "иноагент (СМИ)",
+  "since": "2017-12-05",
+  "evidence": "ruwiki: внесен Минюстом 05.12.2017 https://ru.wikipedia.org/wiki/Голос_Америки . Нежелательной организацией не найдено (в 2017 только обсуждалась)."
+ },
+ {
+  "host": "rtvi.com",
+  "outlet": "RTVI",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Ни в одном поиске нет ни иноагента, ни нежелательной. ruwiki https://ru.wikipedia.org/wiki/RTVI : по состоянию на 2022 иноагентом не признан. Свежее подтверждение отсутствия не получено."
+ },
+ {
+  "host": "kyivindependent.com",
+  "outlet": "Kyiv Independent",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Сообщений о признании нежелательным не найдено; официальный перечень не проверен напрямую."
+ },
+ {
+  "host": "hindenburgresearch.com",
+  "outlet": "Hindenburg Research",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Сообщений о признании в РФ не найдено; фирма закрылась в январе 2025."
+ },
+ {
+  "host": "business-humanrights.org",
+  "outlet": "Business & Human Rights Resource Centre",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Сообщений о признании нежелательным не найдено; официальный перечень не проверен напрямую."
+ },
+ {
+  "host": "leave-russia.org",
+  "outlet": "Leave-Russia.org",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Поиск ничего не дал."
+ },
+ {
+  "host": "ewdn.com",
+  "outlet": "East-West Digital News",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Поиск ничего не дал."
+ },
+ {
+  "host": "frankmedia.ru",
+  "outlet": "Frank Media",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Поиск по Frank Media / Frank RG ничего не дал."
+ },
+ {
+  "host": "frankrg.com",
+  "outlet": "Frank Media",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "См. frankmedia.ru."
+ },
+ {
+  "host": "vlasti.io",
+  "outlet": "Vlasti.io",
+  "status": "не удалось подтвердить",
+  "since": null,
+  "evidence": "Издание в поиске не найдено."
+ },
+ {
+  "host": "en.wikipedia.org",
+  "outlet": "Wikipedia (EN) / Фонд Викимедиа",
+  "status": "нет в реестрах (по найденному)",
+  "since": null,
+  "evidence": "Фонд штрафовался, включен в реестр «приземления» РКН; статуса иноагента или нежелательной не найдено."
+ }
+]

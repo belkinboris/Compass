@@ -1,0 +1,94 @@
+{
+ "items": [
+  {
+   "key": "_uniper_824",
+   "op": "create",
+   "asset": "Юнипро (Uniper)",
+   "date_hint": "25.04.2023",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": []
+  },
+  {
+   "key": "_nch_capital_975",
+   "op": "create",
+   "asset": "Агротерра (NCH Capital)",
+   "date_hint": "08.04.2024",
+   "basis_hint": "указ №248 от 08.04.2024",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": []
+  },
+  {
+   "key": "_falcon_7x_falcon_2000ex_342",
+   "op": "create",
+   "asset": "Самолеты Falcon 7X и Falcon 2000EX (ZGG Zarubezhgazneftechim Trading)",
+   "date_hint": "06.09.2024",
+   "basis_hint": "указ №753 от 06.09.2024",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": []
+  },
+  {
+   "key": "_universal_beverage_comp_275",
+   "op": "create",
+   "asset": "Главпродукт (Universal Beverage Company)",
+   "date_hint": "октябрь 2024; доход государства 2025",
+   "basis_hint": "указ о временном управлении; затем иск Генпрокуратуры (суд, март-июль 2025)",
+   "list_source": "Т—Ж: Национализация в России, список компаний",
+   "list_url": "https://t-j.ru/list/nationalized-companies/",
+   "existing_ids": []
+  },
+  {
+   "key": "_nidda_lynx_149",
+   "op": "create",
+   "asset": "Нижегородский химико-фармацевтический завод (Nidda Lynx)",
+   "date_hint": "2025",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "Бюджет.ру: во временное управление передали 35 пакетов акций",
+   "list_url": "https://bujet.ru/article/527590.php",
+   "existing_ids": []
+  },
+  {
+   "key": "air_liquide_severstal__941",
+   "op": "create",
+   "asset": "Air Liquide Severstal (доля иностранного партнера)",
+   "date_hint": "2025",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "Бюджет.ру: во временное управление передали 35 пакетов акций",
+   "list_url": "https://bujet.ru/article/527590.php",
+   "existing_ids": []
+  },
+  {
+   "key": "capefar_39",
+   "op": "create",
+   "asset": "Capefar",
+   "date_hint": "2025-2026",
+   "basis_hint": "указ о временном управлении (№302 от 25.04.2023 и последующие)",
+   "list_source": "ТКС: Metro стала 28-й иностранной компанией (29.09.2026)",
+   "list_url": "https://www.tks.ru/reviews/2026/09/29/0001/metro-stala-28-j-inostrannoj-kompaniej-chi-aktivyi-peredali-vo-vremennoe-upravlenie/",
+   "existing_ids": []
+  },
+  {
+   "key": "2_shell_216",
+   "op": "create",
+   "asset": "Сахалин-2 (доля Shell)",
+   "date_hint": "17.02.2023",
+   "basis_hint": "распоряжение Президента №45-рп",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": []
+  },
+  {
+   "key": "1_exxonmobil_791",
+   "op": "create",
+   "asset": "Сахалин-1 (доля ExxonMobil)",
+   "date_hint": "2023-2024",
+   "basis_hint": "распоряжение Президента; срок продажи продлен указом №249 от 08.04.2024",
+   "list_source": "NSP (Некторов, Савельев и партнеры): список изъятого имущества, 03.10.2024",
+   "list_url": "https://www.nsplaw.com/backend/media/filer_public/f8/c6/f8c64673-2250-4129-bedf-501e95c3951f/nsp_tablitsa_iziatykh_aktivov_03102024.pdf",
+   "existing_ids": []
+  }
+ ]
+}

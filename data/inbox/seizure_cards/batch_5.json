@@ -1,0 +1,49 @@
+{
+ "items": [
+  {
+   "key": "pokrovsky",
+   "op": "create",
+   "asset": "Агрохолдинг «Покровский» (ВТБ купил у Росимущества)",
+   "existing_ids": [
+    "g2668950b"
+   ],
+   "hint": "проверь: изъятие/залог"
+  },
+  {
+   "key": "kr_properties",
+   "op": "create",
+   "asset": "KR Properties",
+   "existing_ids": [
+    "gf3c5069f"
+   ],
+   "hint": ""
+  },
+  {
+   "key": "khortytsia",
+   "op": "create",
+   "asset": "Бывшие активы производителя водки «Хортиця» (8 юрлиц, лот Росимущества)",
+   "existing_ids": [
+    "g01e3fd26"
+   ],
+   "hint": "одна группа — один актив"
+  },
+  {
+   "key": "uralbiofarm",
+   "op": "create",
+   "asset": "Уралбиофарм",
+   "existing_ids": [
+    "g53389708"
+   ],
+   "hint": ""
+  },
+  {
+   "key": "conti",
+   "op": "create",
+   "asset": "Кондитерская группа «Конти» (Конти-Рус, Кэндимакс, Мерлетто)",
+   "existing_ids": [
+    "g2cdd8d6b"
+   ],
+   "hint": "одна группа — один актив"
+  }
+ ]
+}

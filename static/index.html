@@ -3407,7 +3407,12 @@ const fuzzyIncludes = (query, text) => {
   const qwords = wordsOf(query);
   if(!qwords.length) return true;
   const twords = wordsOf(text);
-  return qwords.every(qw => twords.some(tw => sameWordFuzzy(qw, tw)));
+  /* Общее начало считается только когда слово ЗАПРОСА не длиннее слова текста:
+     «сбер» находит «сбербанк», но короткое слово карточки не должно ловить
+     длинный запрос — «flo» (FLO Retailing) находило «flowwow» (4 ноября 2026).
+     Для более короткого слова текста остается только опечатка в одну букву. */
+  return qwords.every(qw => twords.some(tw => tw.length >= qw.length ? sameWordFuzzy(qw, tw)
+                                                                    : (qw.length >= 4 && levenshtein1(qw, tw))));
 };
 const capType = s => s ? s.split("·").map(p=>{const t=p.trim();return t?t.charAt(0).toUpperCase()+t.slice(1):t;}).join(" · ") : s;
 /* счетчики статистики: число набегает от 0 до значения за ~0.9с (ease-out).

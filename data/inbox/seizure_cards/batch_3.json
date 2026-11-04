@@ -1,0 +1,49 @@
+{
+ "items": [
+  {
+   "key": "sayansk",
+   "op": "create",
+   "asset": "Саянскхимпласт",
+   "existing_ids": [
+    "gcc232775"
+   ],
+   "hint": "изъятие у владельцев; продажа Роснефти 2026 — отдельная карточка"
+  },
+  {
+   "key": "rodnye_polya",
+   "op": "create",
+   "asset": "Родные поля",
+   "existing_ids": [
+    "gmru-rodnye-polya"
+   ],
+   "hint": ""
+  },
+  {
+   "key": "chelyabinskoblgaz",
+   "op": "create",
+   "asset": "Челябинскоблгаз",
+   "existing_ids": [
+    "g5e7d168d"
+   ],
+   "hint": ""
+  },
+  {
+   "key": "spi_rvvk",
+   "op": "create",
+   "asset": "СПИ-РВВК (Калининград)",
+   "existing_ids": [
+    "ga402c91b"
+   ],
+   "hint": ""
+  },
+  {
+   "key": "amber_talvis",
+   "op": "create",
+   "asset": "Амбер Талвис",
+   "existing_ids": [
+    "g63c7d1bb"
+   ],
+   "hint": ""
+  }
+ ]
+}
