@@ -85,7 +85,60 @@ def data_base_file(request: Request, token: str = ""):
     if etag in (request.headers.get("if-none-match") or ""):
         return Response(status_code=304, headers=headers)
     scrape_guard.bump("served")
-    return FileResponse(path, media_type="application/json", headers=headers)
+    if scrape_guard.service_key_ok(request.headers, token):
+        return FileResponse(path, media_type="application/json", headers=headers)
+    body = _page_base(path, etag)
+    if body is None:
+        return FileResponse(path, media_type="application/json", headers=headers)
+    if "gzip" in (request.headers.get("accept-encoding") or "").lower():
+        return Response(body[1], media_type="application/json", headers={**headers, "Content-Encoding": "gzip",
+                                                                       "Vary": "Accept-Encoding"})
+    return Response(body[0], media_type="application/json", headers=headers)
+
+
+# БАЗА ДЛЯ СТРАНИЦЫ — без служебных полей и сжатая один раз (4 ноября 2026,
+# Артем: «даже при отключенном VPN долго грузится»). Файл на диске — 12,9 МБ
+# с отступами; каждое открытие сайта сжимало его заново (GZipMiddleware,
+# уровень 9) и отдавало поля, которых экран не читает: записи вычитки,
+# доказательства сторон, черновики постов, состояние канала. Кэш живет до
+# смены файла (ETag = mtime+размер). Сервисный ключ получает файл целиком.
+PAGE_DROP_TOP = ("consumed_urls", "telegram_post_state", "telegram_posts", "telegram_posts_realty",
+                 "telegram_milestones", "telegram_digests", "telegram_last_post_at")
+PAGE_DROP_DEAL = ("proofread_absorbed", "accepted_notes", "party_evidence", "post_preview", "discovery_src",
+                  "post_override", "gate_baseline_hash", "proofread")
+# История чтений факта (readings) и отпечаток карточки нужны проверкам базы,
+# экран показывает только итог: значение, цитату, источник.
+PAGE_DROP_FACT = ("readings", "reading", "card_hash")
+_PAGE_CACHE: dict = {}
+
+
+def _page_base(path: str, etag: str):
+    if _PAGE_CACHE.get("etag") == etag:
+        return _PAGE_CACHE["body"]
+    import gzip
+    import json
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return None
+    for k in PAGE_DROP_TOP:
+        data.pop(k, None)
+    for deal in data.get("deals") or []:
+        if isinstance(deal, dict):
+            for k in PAGE_DROP_DEAL:
+                deal.pop(k, None)
+            facts = deal.get("facts")
+            if isinstance(facts, dict):
+                for fact in facts.values():
+                    if isinstance(fact, dict):
+                        for k in PAGE_DROP_FACT:
+                            fact.pop(k, None)
+    raw = json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    body = (raw, gzip.compress(raw, compresslevel=6))
+    _PAGE_CACHE.clear()
+    _PAGE_CACHE.update(etag=etag, body=body)
+    return body
 
 # Таблицы аккаунтов (db/models.py) — заготовка лежала не подключенной с 22
 # июля, main.py по-прежнему читает static/data/*.json напрямую для сделок и
