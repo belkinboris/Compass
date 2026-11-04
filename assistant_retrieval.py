@@ -3048,6 +3048,72 @@ def _answer_deal(doc: Doc, more: list[Doc] | None = None) -> Retrieval:
     return Retrieval("deal", "\n".join(lines), docs, doc.title)
 
 
+# Вопросы о происхождении и дальнейшей судьбе актива со страницы сделки: «как
+# государство получило эти активы», «есть карточка по национализации этого
+# актива», «перепродан ли он». Раньше они уходили в поиск по теме («73 сделки
+# по национализации») или в интернет, хотя ответ лежит в самой карточке —
+# в поле «контекст» (Артем, 4 ноября 2026: Инфорион и Статус комплайнс).
+ASSET_HISTORY_WORDS = re.compile(
+    r"как\w*\s+\w+\s+получил\w*\s+в\s+собственность|получил\w*\s+в\s+собственность|"
+    r"национализ|изъят|конфиск|обращен\w*\s+в\s+доход|генпрокуратур|"
+    r"откуда\s+(?:у\s+(?:государства|правительства)|эти|этот|эта)|почему\s+(?:эт\w+\s+)?(?:актив|компани)\w*\s+(?:у\s+)?государств|"
+    r"перепрода\w*|история\s+(?:актива|этих|этой|сделки)|"
+    r"кому\s+принадлежал\w*|раньше\s+(?:принадлеж|владел)|"
+    r"карточк\w*\s+(?:по|про|об|о)\s+(?:этому|этой|этом|этих|нему|ним|ней)|"
+    r"по\s+этому\s+актив\w*[^?]{0,25}карточк|карточк\w*[^?]{0,30}этого\s+актив",
+    re.I)
+HISTORY_SENTENCE = re.compile(
+    r"национализ|изъят|изъя\w+|конфиск|генпрокуратур|в\s+доход\s+государства|государственной\s+собственностью|"
+    r"в\s+собственность\s+(?:государства|правительства|рф)|временн\w+\s+управлен|иск\b|суд\b|суда\b|судом|"
+    r"перепрод|ранее\s+принадлежал|принадлежал\w*", re.I)
+QUOTED_NAME = re.compile(r"«([^«»]{3,40})»")
+
+
+def _related_asset_docs(doc: Doc, idx: Index) -> list[Doc]:
+    """Другие карточки об этом же активе: по компании-цели или по названию в
+    кавычках из заголовка и предмета сделки."""
+    own_names = {q.lower() for q in QUOTED_NAME.findall(f"{doc.title} {doc.asset or ''}")}
+    related: list[Doc] = []
+    raw_target = (doc.raw or {}).get("target")
+    for other in idx.docs:
+        if other.id == doc.id:
+            continue
+        o_target = (other.raw or {}).get("target")
+        same_target = bool(raw_target and o_target and raw_target == o_target and not str(raw_target).endswith("-target"))
+        o_names = {q.lower() for q in QUOTED_NAME.findall(f"{other.title} {other.asset or ''}")}
+        if same_target or (own_names & o_names):
+            related.append(other)
+    related.sort(key=lambda d: d.date)
+    return related
+
+
+def _answer_asset_history(doc: Doc, idx: Index) -> Retrieval:
+    """Как актив попал к нынешнему владельцу и что с ним было дальше — из карточки
+    страницы и других карточек об этом же активе."""
+    eco, law = doc.raw.get("eco") or {}, doc.raw.get("law") or {}
+    lines = [f"По карточке {_link(doc)}:"]
+    seen: list[str] = []
+    for text in (eco.get("context"), eco.get("rationale"), law.get("appr"), law.get("struct")):
+        for sent in re.split(r"(?<=[.;])\s+", str(text or "")):
+            if has_fact(sent) and HISTORY_SENTENCE.search(sent) and sent not in seen:
+                seen.append(sent.strip().rstrip(";") + ("" if sent.strip().endswith(".") else "."))
+    if seen:
+        lines.append(_clip(" ".join(seen), 1500))
+    elif any("Национализация" in t or "Правкомиссия" in t for t in doc.themes):
+        lines.append("Карточка помечена темой «" + "», «".join(t for t in doc.themes if "Национализация" in t or "Правкомиссия" in t)
+                     + "», но подробностей изъятия в ней нет.")
+    else:
+        lines.append("Как актив попал к нынешнему владельцу, в карточке не описано.")
+    related = _related_asset_docs(doc, idx)
+    if related:
+        lines.append("Другие карточки об этом активе:")
+        lines += [_line(d) for d in related[:MAX_LISTED]]
+    else:
+        lines.append("Отдельной карточки об изъятии, национализации или перепродаже этого актива в «Компасе» нет: "
+                     "все, что известно, — в этой карточке.")
+    return Retrieval("deal", "\n".join(lines), [doc] + related[:MAX_DEALS_FOR_MODEL - 1], doc.title)
+
+
 def _answer_entity(context_type: str | None, context_id: str | None, intent: Intent, idx: Index) -> Retrieval | None:
     """Ответ о сущности страницы, с которой задан вопрос, — когда сам вопрос
     ее не называет. «Что известно?» или «Кто консультировал сделки?» на
@@ -3325,6 +3391,10 @@ def retrieve(question: str, context_type: str | None = None, context_id: str | N
     signal = assistant_signals.answer(question, context_type, context_id, idx)
     if signal:
         return signal
+    if context_type == "deal" and context_id and ASSET_HISTORY_WORDS.search(question):
+        doc = idx.by_id.get(context_id)
+        if doc:
+            return _answer_asset_history(doc, idx)
     intent = route(question, idx)
     # Уточнение к прошлому ответу («а какие из них самые крупные?», «а за
     # сколько?») ищется сначала внутри его сделок: до 14 октября 2026 слово

@@ -2567,7 +2567,15 @@ def _prepare_ask(question: str, ret, mode: str, history: str, context_type: str 
     results: list = []
     if mode == "web":
         try:
-            results = yandex_search(question, config=SearchConfig.from_env(), client=core._http)
+            query = question
+            # «Как правительство получило эти активы?» со страницы сделки: без
+            # названия актива поиск находил карточки учета и справочники
+            # (Артем, 4 ноября 2026) — добавляем заголовок сделки страницы.
+            if context_type == "deal" and context_id and idx is not None:
+                page_doc = idx.by_id.get(context_id)
+                if page_doc and not re.search(r"«[^»]{3,}»", question):
+                    query = f"{question} {page_doc.title}"[:300]
+            results = yandex_search(query, config=SearchConfig.from_env(), client=core._http)
             if results:
                 search_block = build_search_block(results)
                 status = _kompas_status_block(ret)
