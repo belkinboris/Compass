@@ -84,6 +84,65 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d44477877",
+   "title": "Минфин начал отбор организатора продажи доли «Совкомфлота»",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9080173"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g4afd35d0 (общие редкие слова: начал, продаж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d13201100",
+   "title": "Минфин сообщил о начале отбора организатора продажи доли «Совкомфлота»",
+   "date": "2026-11-04",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28284939"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Минфин начал отбор организатора продажи доли «Совкомфлота»» — второе издание, в группу не шлем"
+   ]
   }
  ]
 }
