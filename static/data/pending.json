@@ -1,3 +1,62 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "g81f69519",
+   "date": "2026-11-04",
+   "title": "Kraft Heinz продаст 70% кофейного бизнеса",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28286223"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Kraft Heinz",
+   "asset": "70% кофейного бизнеса",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "70% кофейного бизнеса",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28286223"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Kraft Heinz",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28286223"
+     }
+    ]
+   },
+   "seller_id": "g40bd8916",
+   "pending_since": "2026-11-04T14:54:03+00:00",
+   "from_raw": {
+    "draft_id": "d16528002",
+    "title": "Kraft Heinz продаст 70% кофейного бизнеса"
+   }
+  }
+ ]
 }
