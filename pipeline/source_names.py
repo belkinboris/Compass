@@ -237,7 +237,12 @@ def is_aggregator(url):
 # для нас. Список ограничен тем, в чем нет сомнений; спорное (иноагенты,
 # «Медиазона», «Новая газета Европа») идет вопросом владельцу. Проверка —
 # `is_undesirable`: приемка карточки, `settle_sources` и тест базы.
-UNDESIRABLE_HOSTS = ('theins.ru', 'meduza.io', 'svoboda.org', 'istories.media')
+# 4 ноября 2026 владелец: «и надо убедиться, что иноагентов нет» — в список добавлены издания,
+# признанные иноагентами (проверка по реестрам и новостям о признании; RTVI, Kyiv Independent
+# и ряд других подтвердить не удалось — они в список не входят, вопрос владельцу).
+UNDESIRABLE_HOSTS = ('theins.ru', 'meduza.io', 'svoboda.org', 'istories.media',
+                     'themoscowtimes.com', 'moscowtimes.ru', 'thebell.io', 'verstka.media', 'zona.media',
+                     'novayagazeta.eu', 'novayagazeta.ru', 'golosameriki.com')
 
 
 def is_undesirable(url):
