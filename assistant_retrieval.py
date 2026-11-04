@@ -1586,8 +1586,11 @@ def route(question: str, idx: Index | None = None) -> Intent:
         # Яндекса за неделю» — не лента всего рынка.
         recent_company = company if company and (len(set(matched)) >= 2 or any(
             t in evident or stem(t) in evident for t in matched)) else None
+        # «Кто сопровождал сделки за неделю?» — вопрос о консультантах свежих
+        # сделок: без признака ответ был голой лентой, модель говорила «нет
+        # данных» и уходила искать в интернет (Артем, 4 ноября 2026).
         return Intent("recent", days=30 if RECENT_MONTH.search(question) else 7,
-                      industry=industry, terms=terms, company_id=recent_company)
+                      industry=industry, terms=terms, company_id=recent_company, wants_advisors=wants_adv)
     # Компанию узнали по слову, которое одновременно называет отрасль, тему
     # или регион («фарм», «банк», «агро»), и признака имени у него нет — это
     # вопрос про отрасль, а не про компанию. Имя из нескольких слов,
@@ -2389,6 +2392,10 @@ def _answer_recent(intent: Intent, idx: Index) -> Retrieval:
     n = len(pool)
     lines = [f"За {period}{scope} в «Компасе» появилось {n} "
              f"{_plural(n, 'сделка', 'сделки', 'сделок')}:"]
+    if intent.wants_advisors:
+        lines = lines[:1] + _recent_advisor_lines(pool, idx, period)
+        pool = [d for d in pool if d.advisors] + [d for d in pool if not d.advisors]
+        lines.append("Сделки:")
     lines += [_line(d) for d in pool[:MAX_LISTED]]
     if n > MAX_LISTED:
         lines.append(f"Еще {n - MAX_LISTED} — в [ленте сделок](#/deals).")
@@ -2863,6 +2870,23 @@ def _short_advisor(raw: str) -> str:
 
 
 SIZE_WORDS = ("средн", "мал", "мелк", "небольш", "крупн")
+
+
+def _recent_advisor_lines(pool: list[Doc], idx: Index, period: str) -> list[str]:
+    """Консультанты свежих сделок и, для сравнения, самые частые за все время."""
+    lines = []
+    stats = _advisor_stats(pool, idx)
+    named = sum(1 for d in pool if d.advisors)
+    if stats:
+        lines.append(f"Консультанты названы у {named} из них: " + ", ".join(f"{f} — {c}" for f, c in stats) + ".")
+    else:
+        lines.append(f"Ни у одной сделки за {period} консультанты публично не назывались.")
+    overall = _advisor_stats([d for d in idx.docs if not d.listing], idx)[:5]
+    if overall:
+        lines.append("За все время чаще других: " + ", ".join(f"{f} — {c}" for f, c in overall)
+                     + ". Полный список — на странице [Консультанты](#/advisors).")
+    lines.append(NOTE_ADVISORS)
+    return lines
 
 
 def _answer_advisors_overall(intent: Intent, idx: Index) -> Retrieval:

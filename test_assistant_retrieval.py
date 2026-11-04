@@ -365,6 +365,17 @@ def test_recent_counts_by_the_day_a_deal_appeared_here(idx):
         assert str((doc.raw or {}).get("added") or "") >= edge
 
 
+def test_recent_question_about_advisors_answers_about_advisors(idx):
+    """«Кто сопровождал сделки за неделю, или вообще?» — ответ называет
+    консультантов (свежих сделок и самых частых за все время), а не голую
+    ленту, после которой модель говорила «нет данных» (Артем, 4 ноября 2026)."""
+    q = "У тебя нет информации о том, кто сопровождал сделки за неделю, или вообще?"
+    assert ar.route(q, idx).wants_advisors
+    answer = ar.retrieve(q, idx=idx).answer or ""
+    assert "Консультанты" in answer or "консультанты" in answer
+    assert "#/advisors" in answer
+
+
 def test_compare_keeps_both_companies(idx):
     """«Сравни Сбербанк и ВТБ» находило только Сбербанк, вторую сторону
     теряло молча — и человек получал ответ про одну компанию."""
