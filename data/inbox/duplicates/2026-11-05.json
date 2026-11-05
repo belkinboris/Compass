@@ -1,0 +1,67 @@
+{
+ "made": "2026-11-05",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/9080934::gb6b371c3",
+   "candidate_id": "gb6b371c3",
+   "reason": "по всей базе: совпали две стороны (asset, buyer)",
+   "draft": {
+    "draft_id": "d12852137",
+    "title": "MOL получила лицензию США на подготовку к покупке российской доли в NIS",
+    "date": "2026-11-05",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9080934"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "MOL",
+    "asset": "лицензия США на подготовку к покупке российской доли в NIS",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "MOL",
+     "asset": "лицензия США на подготовку к покупке российской доли в NIS",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-05"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28288857::gb6b371c3",
+   "candidate_id": "gb6b371c3",
+   "reason": "по всей базе: совпали две стороны (asset, buyer)",
+   "draft": {
+    "draft_id": "d73695093",
+    "title": "MOL получила лицензию США на операции по подготовке к покупке российской доли в NIS",
+    "date": "2026-11-05",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28288857"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "MOL",
+    "asset": "лицензия США на операции по подготовке к покупке российской доли в NIS",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "MOL",
+     "asset": "лицензия США на операции по подготовке к покупке российской доли в NIS",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-05"
+  }
+ ]
+}

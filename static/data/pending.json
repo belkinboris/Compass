@@ -75,6 +75,308 @@
    },
    "buyer": "g526a652d",
    "hold_reason": "Сделка целиком иностранная, российской стороны и российского актива у нее нет. Kraft Heinz продает фонду One Rock Capital Partners 70% своего кофейного бизнеса в Северной Америке: бренды Maxwell House, Gevalia, Nabob, Yuban, Tassimo, Ethical Bean и Sanka, заводы в Джексонвилле (Флорида) и Ванкувере (Канада), около 250 сотрудников; Kraft Heinz оставляет себе 30%. В России у Kraft Heinz кофейного бизнеса нет: кофейные марки Maxwell House, Jacobs и Tassimo в России принадлежат другой компании, JDE Peet's (ООО «Якобс Дау Эгбертс Рус», завод в Горелове), которой они отошли при разделении Kraft Foods в 2012 году; с 2023 года JDE продает их в России под местными марками Monarch и Milicano. В России Kraft Heinz держит только завод кетчупов и соусов в Отрадном (ООО «Петропродукт-Отрадное»), а заводы детского питания продала «Черноголовке» в 2024 году (карточка gfca749be). Вы взяли эту новость в работу сами, поэтому не выкидываем без вашего слова: оставить ее в базе как иностранную сделку или выкинуть?"
+  },
+  {
+   "id": "gcc6ff548",
+   "date": "2026-11-05",
+   "title": "RBE Group выкупила рыболовную компанию на Камчатке",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9080799"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "рыболовная компания на Камчатке",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-05",
+     "title": "Сделка завершена",
+     "note": "Поставщик корпоративного питания — RBE Group Андрея Шокина — стал владельцем компании «Сильвер Салмон», занимающейся организацией на Камчатке любительской рыбалки. Актив вряд ли будет развиваться как полноценный промысел и скорее говорит о стремлении компании…",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9080799"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "RBE Group",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9080799"
+     }
+    ],
+    "target": [
+     {
+      "value": "рыболовная компания на Камчатке",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9080799"
+     }
+    ]
+   },
+   "buyer": "gee79811a",
+   "pending_since": "2026-11-05T12:23:45+00:00"
+  },
+  {
+   "id": "gf26f4994",
+   "date": "2026-11-05",
+   "title": "Московский инвестор купил один из крупнейших садов Ставрополья за 247 млн руб.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "247 млн ₽",
+   "buyer_name": "Московский инвестор",
+   "asset": "один из крупнейших садов Ставрополья",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-05",
+     "title": "Сделка завершена",
+     "note": "Конкурсный управляющий банкротящегося агрохолдинга ООО «Сады Бештау» Павел Чесноков реализовал единый имущественный комплекс предприятия. По итогам повторных торгов, состоявшихся на «Всероссийской Электронной Торговая Площадке», покупателем выступило…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     ]
+    }
+   ],
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Московский инвестор",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     }
+    ],
+    "target": [
+     {
+      "value": "один из крупнейших садов Ставрополья",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     }
+    ]
+   },
+   "pending_since": "2026-11-05T12:23:45+00:00"
+  },
+  {
+   "id": "g5b2cf7bd",
+   "date": "2026-11-05",
+   "title": "ГК «Цифровые привычки» приобретает Umbrella IT, сделка будет закрыта в первом квартале 2027 года",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-05_gk_tsifrovye_privychki_priobretaet"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "Umbrella IT, сделка будет закрыта в первом квартале 2027 года",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ГК «Цифровые привычки»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-05_gk_tsifrovye_privychki_priobretaet"
+     }
+    ],
+    "target": [
+     {
+      "value": "Umbrella IT, сделка будет закрыта в первом квартале 2027 года",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-05_gk_tsifrovye_privychki_priobretaet"
+     }
+    ]
+   },
+   "buyer": "g6017899e",
+   "pending_since": "2026-11-05T12:23:45+00:00"
+  },
+  {
+   "id": "gfc81c93f",
+   "date": "2026-11-05",
+   "title": "Минфин в ноябре купит валюты и золота на 312,6 млрд рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/314034"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "312,6 млрд ₽",
+   "buyer_name": "Минфин в ноябре",
+   "asset": "валюты и золота на 312,6 млрд рублей",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-05",
+     "title": "Переговоры",
+     "note": "Это почти на 12% больше октябрьского плана Сообщение Минфин в ноябре купит валюты и золота на 312,6 млрд рублей появилось сначала на Frank Media .",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/314034"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Минфин в ноябре",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/314034"
+     }
+    ],
+    "target": [
+     {
+      "value": "валюты и золота на 312,6 млрд рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/314034"
+     }
+    ]
+   },
+   "pending_since": "2026-11-05T12:23:45+00:00"
+  },
+  {
+   "id": "g0e56f1f5",
+   "date": "2026-11-05",
+   "title": "VVP Group привлекла 4 млрд рублей от Сбербанка",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Retailer.ru",
+     "https://retailer.ru/vvp-group-privlekla-4-mlrd-rublej-ot-sberbanka/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "4 млрд ₽",
+   "buyer_name": "Сбербанка",
+   "asset": "VVP Group",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Сбербанка",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/vvp-group-privlekla-4-mlrd-rublej-ot-sberbanka/"
+     }
+    ],
+    "target": [
+     {
+      "value": "VVP Group",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/vvp-group-privlekla-4-mlrd-rublej-ot-sberbanka/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-05T12:23:45+00:00"
   }
  ]
 }
