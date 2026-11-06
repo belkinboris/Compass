@@ -102,8 +102,10 @@ def health():
     # `YANDEX_MODEL` задается переменной окружения хоста, и снаружи узнать ее
     # было нельзя. Догадка вместо факта стоит дороже строки в /health: это
     # идентификатор модели, а не секрет.
+    # Последний успех и сбой по каждой модели (assistant.LLM_STATUS): вид сбоя — код HTTP,
+    # таймаут, заглушка; ни текста ответа, ни ключей (6 ноября 2026, «Разбор сделки»).
     return {"status": "ok", "ai": _yandex_ready(), "model": assistant.current_model(),
-            "build": build_fingerprint()}
+            "llm": assistant.LLM_STATUS, "build": build_fingerprint()}
 
 
 def _ops_numbers() -> dict:

@@ -211,7 +211,11 @@ def raw_message(draft):
     """⚠️ Сырье, которое ворота не пропустили, — с причиной."""
     src = next((s[1] for s in draft.get('src') or [] if len(s) > 1), '')
     reasons = '\n'.join('• %s' % r for r in (draft.get('hold_reasons') or ['причина не записана']))
-    return ('⚠️ [сырье %s] — СОМНИТЕЛЬНАЯ, нужно ваше слово\n'
+    # «⚡ Важное» — вне очереди, но через консоль (владелец, 6 ноября 2026; pipeline/ingest/priority.py).
+    import priority
+    hot = priority.reason(draft.get('title'), draft.get('sum'))
+    return (('⚡ ВАЖНОЕ (%s) — решите в первую очередь\n' % hot if hot else '') +
+            '⚠️ [сырье %s] — СОМНИТЕЛЬНАЯ, нужно ваше слово\n'
             '%s\n\n'
             'Почему не пропущена автоматически:\n%s\n\n'
             '%s%s%s%s'

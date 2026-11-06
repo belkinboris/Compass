@@ -60,7 +60,10 @@ RESPONSES_URL = "https://ai.api.cloud.yandex.net/v1/responses"
 # для базы сделок эпохи санкций это дисквалификация; gpt-oss-120b — 4–10 с,
 # 10 ответов из 10 в обоих режимах, полные списки со ссылками и честными
 # оговорками. Переменная YANDEX_MODEL на хосте по-прежнему перекрывает.
-DEFAULT_MODEL = "gpt-oss-120b/latest"
+# 6 ноября 2026 (владелец: «модель пусть пока будет дипсик»): gpt-oss-120b в папке
+# отвечает 403 с 3 ноября, а deepseek-v4-flash на стенде — 10/10 «по базе» за 7 с и
+# 5/5 «по интернету» за 6 с, без рассуждения и без отказов на темах санкций.
+DEFAULT_MODEL = "deepseek-v4-flash/latest"
 # СКОЛЬКО ЖДЕТ ПОЛЬЗОВАТЕЛЬ. Раньше здесь стояли только «таймаут одной попытки
 # 60 с» и «повторов 2» — и это молча означало худший случай 180 с ожидания с
 # ПУСТЫМ ответом в конце: замер 7 августа на бою поймал ровно такой запрос
@@ -319,9 +322,11 @@ class LLMCutOff(RuntimeError):
 # папке отвечают 403, а YandexGPT на темы указов, изъятий и ухода иностранцев вместо
 # ответа отдает заглушку в 65 знаков (status=incomplete, 0 токенов) — «Разбор сделки»
 # по JTI, Tarkett, McDonald's писал «Ассистент недоступен». DeepSeek v4 flash в той же
-# папке отвечает за 4 с и таких тем не избегает — она первая. Замер — pipeline/assistant_bench.py.
+# папке отвечает за 4 с и таких тем не избегает — она первая (и основная, DEFAULT_MODEL);
+# основной из списка пропускается. gpt-oss-120b — на случай, если доступ к ней вернут.
+# Замер — pipeline/assistant_bench.py.
 FALLBACK_MODELS = [m.strip() for m in os.environ.get(
-    "LLM_FALLBACK_MODELS", os.environ.get("LLM_FALLBACK_MODEL", "deepseek-v4-flash/latest,yandexgpt/latest")
+    "LLM_FALLBACK_MODELS", os.environ.get("LLM_FALLBACK_MODEL", "deepseek-v4-flash/latest,gpt-oss-120b/latest,yandexgpt/latest")
 ).split(",") if m.strip()]
 FALLBACK_MODEL = FALLBACK_MODELS[0] if FALLBACK_MODELS else "yandexgpt/latest"
 
@@ -351,6 +356,39 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
         except Exception as e:  # noqa: BLE001 — заглушка-отказ или нет доступа: следующая модель
             last = e
     raise last
+
+
+# ЧТО С МОДЕЛЬЮ — ВИДНО СНАРУЖИ (6 ноября 2026): gpt-oss-120b с 3 ноября отвечала 403,
+# YandexGPT отдавала заглушку на темах санкций, а сайт показывал только «Ассистент
+# недоступен» — причину искали вслепую 15 минут. Последний успех и последний сбой по
+# каждой модели пишутся сюда и показываются в /health: время и вид сбоя (код HTTP,
+# таймаут, заглушка), без текста ответа и без ключей. Живет в памяти процесса.
+LLM_STATUS: dict = {}
+
+
+def _llm_mark(model: str, ok: bool, why: str = "") -> None:
+    now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    row = LLM_STATUS.setdefault(model, {"ok": None, "err": None, "why": None})
+    if ok:
+        row["ok"] = now
+    else:
+        row["err"], row["why"] = now, why[:60]
+
+
+def _llm_why(err) -> str:
+    text = str(err or "")
+    m = re.search(r"HTTP (\d{3})", text)
+    if m:
+        return "HTTP " + m.group(1)
+    if isinstance(err, LLMCutOff):
+        return "ответ оборван или заглушка"
+    if isinstance(err, httpx.TimeoutException) or "timeout" in text.lower():
+        return "таймаут"
+    if "бюджет вывода" in text:
+        return "весь бюджет ушел на рассуждение"
+    if "пустой текст" in text:
+        return "пустой ответ"
+    return "другой сбой"
 
 
 def _call_llm_once(system: str, user: str, max_tokens: int, deadline: float | None = None,
@@ -442,6 +480,7 @@ def _call_llm_once(system: str, user: str, max_tokens: int, deadline: float | No
                 logger.warning("LLM %s: попытка %d — %s", model, attempt + 1, last_err)
                 break
             if text:
+                _llm_mark(model, True)
                 return text
             if data.get("status") == "incomplete":
                 reason = (data.get("incomplete_details") or {}).get("reason") or "incomplete"
@@ -463,6 +502,7 @@ def _call_llm_once(system: str, user: str, max_tokens: int, deadline: float | No
             logger.warning("LLM %s: попытка %d/%d не удалась (%.1f с): %s",
                            model, attempt + 1, 1 + LLM_RETRIES, time.monotonic() - started, e)
     info["error"] = str(last_err)
+    _llm_mark(model, False, _llm_why(last_err))
     if isinstance(last_err, LLMCutOff):
         raise last_err
     raise RuntimeError(f"LLM недоступен после {info['attempts']} попыток: {last_err}")
