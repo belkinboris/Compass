@@ -1726,7 +1726,7 @@ def _self_check():
                         'desc': 'Холдинговая компания основных акционеров Совкомбанка.', 'group': True,
                         'inn': '3906406196', 'legal_name': 'МКАО «Совко Капитал Партнерс»'}],
           'no_profile': {'seller': 'один из акционеров, имя не раскрыто'},
-          'title': '«Совко Капитал Партнерс» увеличил долю в Совкомбанке',
+          'title': '«Совко Капитал Партнерс» купил акции Совкомбанка',
           'asset': 'акции Совкомбанка', 'status': 'Закрыта',
           'src_add': [['Совкомбанк', 'https://sovcombank.ru/press']]}
     assert not check_answer(ok, card, base), check_answer(ok, card, base)

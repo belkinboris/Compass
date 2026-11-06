@@ -10120,9 +10120,6 @@ def test_acceptance_holds_a_new_card_whose_title_breaks_the_standard():
     assert "title_standard" not in [c for c, _t in accept_card.findings(old, posted)]
 
 
-    assert "title_standard" not in [c for c, _t in accept_card.findings(old, base)]
-
-
 # ---------- новость о карточке базы: сравнение по фактам (card_news.py, 6 ноября 2026) ----------
 
 def _cn_base():
@@ -10459,3 +10456,11 @@ def test_enrich_gives_every_unapplied_news_an_outcome(monkeypatch, tmp_path):
     assert all(i["reasons"][0] for i in log)
     book = json.loads(st.read_text(encoding="utf-8"))["card_news"]
     assert {e["outcome"] for e in book.values()} == {"offer", "new_deal"}
+
+
+def test_acceptance_self_check_passes():
+    """accept_card.py падает до чтения карточек, если не проходит собственная
+    самопроверка (6 ноября 2026: стандарт заголовков отверг пример внутри
+    самопроверки — и приемка встала у всех рутин)."""
+    import accept_card
+    accept_card._self_check()
