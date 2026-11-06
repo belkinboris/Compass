@@ -515,6 +515,7 @@ def test_post_party_block_is_the_same_across_the_base(base):
     for deal in base["deals"][-300:]:
         labels = re.findall(r"<b>([^<:]+):</b>", format_post.render(deal, comps))
         roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Временный управляющий",
+                                            "Управляющая компания",
                                             "Продавец", "Продавцы", "Собственник", "Предмет")]
         buyer_label, seller_label, subject_label, required = format_post.post_roles(deal)
         want = [l for key, l in (("buyer", buyer_label), ("seller", seller_label),
