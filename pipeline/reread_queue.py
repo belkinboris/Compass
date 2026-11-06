@@ -204,6 +204,19 @@ def check(ans, card, data):
     return bad
 
 
+def keep_post_title(data, card):
+    """Вычитка не переписывает пост в канале (см. «Чего не делать» в routines/reread.md):
+    заголовок, исправленный в вычитке по стандарту, остается на сайте, а вышедший пост — каким
+    был. Публикация правит пост «молча», когда заголовок карточки расходится со снимком поста
+    (send_telegram.card_changes_since_post), — поэтому снимок получает новый заголовок
+    (6 ноября 2026: стандарт заголовков — для карточек, посты свободнее)."""
+    snap = (data.get('telegram_post_state') or {}).get(card['id'])
+    if snap and snap.get('title') is not None and snap.get('title') != card.get('title'):
+        snap['title'] = card.get('title')
+        return True
+    return False
+
+
 def stamp(card, ans, comps, day=None):
     card[STAMP] = day or date.today().isoformat()
     card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
@@ -276,6 +289,7 @@ def main(argv):
             by_id = {d['id']: d for d in fresh['deals']}
             for ans in good:
                 stamp(by_id[ans['id']], ans, comps)
+                keep_post_title(fresh, by_id[ans['id']])
             json.dump(fresh, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
             print('Записано отметок: %d' % len(good))
         elif good:
