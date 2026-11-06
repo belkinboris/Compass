@@ -263,8 +263,19 @@ def _main(argv, write):
     # decided_raw), а решения, нажатые ПОСЛЕ остановки, иначе остались бы
     # в плане без применения — 28 октября 2026 продолжение так уперлось в
     # проверку «ПУБЛИКУЕМ есть, а карточки в базе нет» по gf2b5f78c.
-    run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write'])
-    log('Решения применены локально%s.' % (' (продолжение: заново применены только новые)' if resume else ''))
+    applied = run([sys.executable, os.path.join(INGEST, 'approve.py'), '--write']).stdout
+    # Второй запрос решений (уже в --write) тоже может упереться в сайт:
+    # 6 ноября 2026 сухой план показал «В РАБОТУ» и «ОТБРОШЕНА», а --write
+    # получил 502, применил пустой список и молча пошел в 15-минутный
+    # pytest — сырье осталось без карточки и без decided_raw, а сайт тот
+    # же вопрос задавал каждый час заново.
+    failure = site_failure(applied)
+    if failure:
+        log('СТОП: решения с сайта не прочитаны при применении (%s) — ничего не применено, повторите команду через минуту.' % failure)
+        return 1
+    summary = [l for l in applied.splitlines() if l.startswith('Опубликовано:')]
+    log('Решения применены локально%s. %s' % (' (продолжение: заново применены только новые)' if resume else '',
+                                              summary[0] if summary else ''))
     for _ in range(4):
         r = run([sys.executable, os.path.join(ROOT, 'pipeline', 'facts_derive.py'), '--write'])
         if 'актуально' in r.stdout:
