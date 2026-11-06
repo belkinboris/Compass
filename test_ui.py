@@ -130,6 +130,23 @@ def page(base_url, browser):
     pg.close()
 
 
+
+def serve_pending(target, cards):
+    """Браузер видит `cards` как содержимое static/data/pending.json, а файл
+    на диске не трогается (6 ноября 2026). Раньше тесты предпросмотра на
+    время переписывали настоящую очередь своей карточкой: параллельный
+    прогон, рутина или приемка в это время читали очередь из одной тестовой
+    карточки и падали или теряли «Циан». `target` — страница или контекст
+    браузера; снять подмену — `target.unroute(PENDING_URL)`."""
+    import json as _json
+    body = _json.dumps({"cards": cards}, ensure_ascii=False)
+    target.route(PENDING_URL, lambda r: r.fulfill(
+        status=200, content_type="application/json; charset=utf-8", body=body))
+
+
+PENDING_URL = "**/static/data/pending.json*"
+
+
 def visit(page, base_url, hash_):
     page.crashes.clear()
     page.goto(base_url + "/" + hash_, wait_until="networkidle")
@@ -2444,9 +2461,6 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
     сайта нигде, кроме #/preview/<id>: попади она в ленту или поиск до решения
     владельца, предпросмотр перестал бы быть предпросмотром.
     """
-    import json as _json
-    pending_path = Path("static/data/pending.json")
-    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
     card = {"id": "gtest-preview", "date": "2026-08-05",
             "title": "Тестовая компания «Альфа-Превью» купила завод «Бета-Превью»",
             "ind": "ИТ и интернет", "type": "M&A", "status": "Закрыта",
@@ -2455,7 +2469,7 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
                      "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
             "law": {"struct": "—", "appr": "—", "adv": [], "terms": "—"},
             "pending_since": "2026-08-05T00:00:00+00:00"}
-    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    serve_pending(page, [card])
     try:
         visit(page, base_url, "#/preview/gtest-preview")
         page.wait_for_timeout(900)
@@ -2473,6 +2487,7 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
         # `opacity:0` НАВСЕГДА: `inner_text` ее видит, человек нет.
         # Проверено на себе: без `rerun()` в конце `renderPreview` здесь 12.
         cold = browser.new_context()
+        serve_pending(cold, [card])
         try:
             cpg = cold.new_page()
             cpg.goto(base_url + "/#/preview/gtest-preview", wait_until="networkidle")
@@ -2491,10 +2506,7 @@ def test_preview_route_renders_a_pending_card(page, base_url, browser):
         page.wait_for_timeout(700)
         assert "не найден" in page.inner_text("#app").lower()
     finally:
-        if backup is None:
-            pending_path.unlink(missing_ok=True)
-        else:
-            pending_path.write_text(backup, encoding="utf-8")
+        page.unroute(PENDING_URL)
 
 
 def test_temporary_management_type_card_shows_no_party_placeholders(page, base_url):
@@ -2502,9 +2514,6 @@ def test_temporary_management_type_card_shows_no_party_placeholders(page, base_u
     у карточки нет — управляющий и собственник названы в тексте. Плашка
     показывает только актив под управлением, без «Покупатель/Продавец» и без
     «Не раскрыт»; тип подписан на карточке."""
-    import json as _json
-    pending_path = Path("static/data/pending.json")
-    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
     card = {"id": "gtest-tempmgmt", "date": "2026-10-16",
             "title": "Активы «Тест-Тара» переданы во временное управление",
             "ind": "Производство тары", "type": "Временное управление", "status": "Закрыта",
@@ -2516,7 +2525,7 @@ def test_temporary_management_type_card_shows_no_party_placeholders(page, base_u
             "law": {"struct": "Временным управляющим назначено ООО «Тест-Управление».",
                     "appr": "—", "adv": [], "terms": "—"},
             "pending_since": "2026-10-16T00:00:00+00:00"}
-    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    serve_pending(page, [card])
     errors = []
     try:
         page.on("pageerror", lambda e: errors.append(str(e)))
@@ -2531,10 +2540,7 @@ def test_temporary_management_type_card_shows_no_party_placeholders(page, base_u
         assert "не раскрыт" not in head.lower(), head
         assert not errors, errors
     finally:
-        if backup is None:
-            pending_path.unlink(missing_ok=True)
-        else:
-            pending_path.write_text(backup, encoding="utf-8")
+        page.unroute(PENDING_URL)
 
 
 def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
@@ -2551,9 +2557,6 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
     управлением», без «Продавца» вовсе. `g9ba426b0` (АО «Л.Е.В. Менеджмент»)
     и `gd835e8a5` («Ашан») — настоящие профили из базы, не выдуманные для
     теста."""
-    import json as _json
-    pending_path = Path("static/data/pending.json")
-    backup = pending_path.read_text(encoding="utf-8") if pending_path.exists() else None
     card = {"id": "gtest-custody", "date": "2026-09-17",
             "title": "«Тест-Превью» в России передан во временное управление по указу Президента РФ",
             "ind": "Ритейл", "type": "M&A", "status": "Закрыта", "kind": "custody",
@@ -2563,7 +2566,7 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
                      "val": "—", "target_fin": "—", "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
             "law": {"struct": "Указ вступает в силу со дня опубликования.", "appr": "—", "adv": [], "terms": "—"},
             "pending_since": "2026-09-17T00:00:00+00:00"}
-    pending_path.write_text(_json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    serve_pending(page, [card])
     errors = []
     try:
         page.on("pageerror", lambda e: errors.append(str(e)))
@@ -2585,10 +2588,7 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
             "выдуманная пустая роль вместо честного отсутствия покупателя/продавца: %r" % roles
         assert not errors, "pageerror при рендере плашки custody: %s" % errors
     finally:
-        if backup is None:
-            pending_path.unlink(missing_ok=True)
-        else:
-            pending_path.write_text(backup, encoding="utf-8")
+        page.unroute(PENDING_URL)
 
 
 def test_slow_load_hint_mentions_vpn(page, base_url):
