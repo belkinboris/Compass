@@ -1202,7 +1202,10 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   transition:transform .25s var(--ease),background .2s var(--ease),opacity .25s var(--ease),visibility 0s linear 0s}
 .ai-fab:hover{background:#163B2C}
 .ai-fab:active{transform:scale(.96)}
-.ai-fab[hidden]{display:none}
+/* Кнопка появляется и уходит плавно, а не рывком (владелец, 6 ноября 2026: «значок компаса чтобы
+   плавно расходился»); hidden — без display:none, иначе переход не виден. */
+.ai-fab[hidden]{display:grid;opacity:0;visibility:hidden;transform:scale(.7);pointer-events:none;
+  transition:transform .25s var(--ease),opacity .25s var(--ease),visibility 0s linear .25s}
 body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px + var(--cookie-h,140px) + 12px)}
 .ai-fab svg polygon{transition:transform .5s var(--ease);transform-origin:24px 24px}
 .ai-fab.on svg polygon{transform:rotate(45deg)}
@@ -1321,7 +1324,12 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
   .ai-sheet.full .chat-shell.in-sheet .chat-scrim[hidden]{display:none}
 }
 @media(min-width:900px){
-  .ai-sheet{left:auto;right:16px;width:460px;border-radius:18px;bottom:90px;height:min(680px,calc(100svh - 120px));transform:translateY(calc(100% + 120px))}
+  /* На компьютере окно раскрывается из значка компаса и сворачивается в него обратно
+     (владелец, 6 ноября 2026): центр масштаба — у кнопки, под правым нижним углом окна. */
+  .ai-sheet{left:auto;right:16px;width:460px;border-radius:18px;bottom:90px;height:min(680px,calc(100svh - 120px));
+    transform:scale(.08);opacity:0;transform-origin:calc(100% - 30px) calc(100% + 50px);
+    transition:transform .38s var(--ease),opacity .28s var(--ease),height .35s var(--ease),visibility 0s linear .38s}
+  .ai-sheet.half,.ai-sheet.full{transform:none;opacity:1;transition:transform .38s var(--ease),opacity .2s var(--ease),height .35s var(--ease),visibility 0s}
   .ai-sheet.full{height:calc(100svh - 110px)}
   html.ai-sheet-open,html.ai-sheet-open body{overflow:auto}
   .ai-sheet-scrim{display:none}

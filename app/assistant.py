@@ -315,13 +315,22 @@ class LLMCutOff(RuntimeError):
         self.partial = partial
 
 
-FALLBACK_MODEL = os.environ.get("LLM_FALLBACK_MODEL", "yandexgpt/latest")
+# Запасные модели — по очереди. 6 ноября 2026: gpt-oss-120b (и qwen3, gpt-oss-20b) в
+# папке отвечают 403, а YandexGPT на темы указов, изъятий и ухода иностранцев вместо
+# ответа отдает заглушку в 65 знаков (status=incomplete, 0 токенов) — «Разбор сделки»
+# по JTI, Tarkett, McDonald's писал «Ассистент недоступен». DeepSeek v4 flash в той же
+# папке отвечает за 4 с и таких тем не избегает — она первая. Замер — pipeline/assistant_bench.py.
+FALLBACK_MODELS = [m.strip() for m in os.environ.get(
+    "LLM_FALLBACK_MODELS", os.environ.get("LLM_FALLBACK_MODEL", "deepseek-v4-flash/latest,yandexgpt/latest")
+).split(",") if m.strip()]
+FALLBACK_MODEL = FALLBACK_MODELS[0] if FALLBACK_MODELS else "yandexgpt/latest"
 
 
 def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = None,
              model: str | None = None, reasoning_effort: str | None = None,
              stats: dict | None = None) -> str:
-    """Основная модель, а отказала в доступе (HTTP 401/403/404) — запасная.
+    """Основная модель, а отказала в доступе (HTTP 401/403/404) — запасные по очереди
+    (`FALLBACK_MODELS`); у запасной следующей идет и при заглушке-отказе.
 
     3 ноября 2026 gpt-oss-120b начала отвечать 403, и «Разбор сделки», «Контекст»
     и ассистент на сайте писали «Ассистент сейчас недоступен», хотя YandexGPT
@@ -330,12 +339,18 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
     try:
         return _call_llm_once(system, user, max_tokens, deadline, model, reasoning_effort, stats)
     except Exception as e:  # noqa: BLE001
-        if model or current_model() == FALLBACK_MODEL or not re.search(r"HTTP (401|403|404)", str(e)):
+        if model or not re.search(r"HTTP (401|403|404)", str(e)):
             raise
+        last: Exception = e
+    for spare in [m for m in FALLBACK_MODELS if m != current_model()]:
         if deadline is not None and deadline - time.monotonic() < LLM_MIN_ATTEMPT:
-            raise
-        logger.warning("LLM %s отказала в доступе (%s) — запасная модель %s", current_model(), e, FALLBACK_MODEL)
-        return _call_llm_once(system, user, max_tokens, deadline, FALLBACK_MODEL, "", stats)
+            break
+        logger.warning("LLM %s не ответила (%s) — запасная модель %s", current_model(), last, spare)
+        try:
+            return _call_llm_once(system, user, max_tokens, deadline, spare, "", stats)
+        except Exception as e:  # noqa: BLE001 — заглушка-отказ или нет доступа: следующая модель
+            last = e
+    raise last
 
 
 def _call_llm_once(system: str, user: str, max_tokens: int, deadline: float | None = None,
