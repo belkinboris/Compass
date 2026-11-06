@@ -146,6 +146,37 @@
     "needs_review": true
    },
    "queued": "2026-11-06"
+  },
+  {
+   "key": "https://smart-lab.ru/blog/1371734.php::g9b4c2e71",
+   "candidate_id": "g9b4c2e71",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d57946264",
+    "title": "Т покупает Циан за 77 млрд: Циан или выкуп своих акций – что выгоднее акционерам",
+    "date": "2026-11-06",
+    "src": [
+     [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1371734.php"
+     ]
+    ],
+    "sum": "77,1 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Т",
+    "asset": "Циан",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Т",
+     "asset": "Циан",
+     "seller": null
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-11-06"
   }
  ]
 }
