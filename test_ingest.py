@@ -10098,5 +10098,9 @@ def test_acceptance_holds_a_new_card_whose_title_breaks_the_standard():
     assert "title_standard" in codes
     good = dict(card, title="Агрохолдинг в Омской области выставлен на продажу за 970 млн ₽")
     assert "title_standard" not in [c for c, _t in accept_card.findings(good, base)]
+    # Дата сделки не освобождает: «Хогвартс» (5 ноября) прошел приемку 6 ноября.
     old = dict(card, date="2026-10-01")
-    assert "title_standard" not in [c for c, _t in accept_card.findings(old, base)]
+    assert "title_standard" in [c for c, _t in accept_card.findings(old, base)]
+    # Освобождает только вышедший пост — их переписывают партиями.
+    posted = dict(base, telegram_posts={"gt1": 101})
+    assert "title_standard" not in [c for c, _t in accept_card.findings(old, posted)]

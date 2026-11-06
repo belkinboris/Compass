@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 import review  # noqa: E402
 
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
-IDS = {'g8eb9ed40', 'g8317fa58', 'g9b4c2e71'}
+IDS = {'gfd435463'}
 
 
 def apply(pending):
