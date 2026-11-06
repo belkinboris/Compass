@@ -424,17 +424,31 @@ def resolve_inn(legal_name):
     return _RESOLVED[key]
 
 
-def add_registry_row(cid, name, inn, legal_name, card_id, registry=None, path=None, day=None):
+def add_registry_row(cid, name, inn, legal_name, card_id, registry=None, path=None, day=None,
+                      from_egrul_match=False):
     """Дописывает подтвержденный ИНН в `pipeline/fns_registry.py` — тем же
     блоком в конце REGISTRY, что и очередь «нужен ИНН». Реестр — код, который
     импортирует сайт: строка доедет до боевого процесса со следующей сборкой
-    `release`, а пост канала (send_telegram.build_fin) увидит ее сразу."""
+    `release`, а пост канала (send_telegram.build_fin) увидит ее сразу.
+
+    `from_egrul_match` — ИНН нашелся сам, точным совпадением имени в ЕГРЮЛ
+    (`resolve_inn(legal_name)`); иначе ИНН назвал читатель прямо в ответе
+    (`inn`) — обоснование в `accepted_notes` карточки, не в ЕГРЮЛ-поиске, и
+    запись реестра должна говорить это честно, а не всегда одно и то же
+    (6 ноября 2026, нашло второе чтение: запись на «Островную» заявляла
+    ЕГРЮЛ-совпадение, хотя ИНН был выведен через управляющего, названного в
+    двух отраслевых источниках, а не через поиск по имени)."""
     registry = fns_registry.REGISTRY if registry is None else registry
     path = path or REGISTRY_PATH
     day = day or date.today().isoformat()
-    reason = ('Приемка карточки %s (%s): юрлицо %s названо читателем, ИНН подтвержден точным '
-              'совпадением имени в ЕГРЮЛ (единственное действующее юрлицо).'
-              % (card_id, day, (legal_name or name).replace('"', "'")))
+    if from_egrul_match:
+        reason = ('Приемка карточки %s (%s): юрлицо %s названо читателем, ИНН подтвержден точным '
+                  'совпадением имени в ЕГРЮЛ (единственное действующее юрлицо).'
+                  % (card_id, day, (legal_name or name).replace('"', "'")))
+    else:
+        reason = ('Приемка карточки %s (%s): юрлицо %s и его ИНН названы читателем прямо в ответе '
+                  '(обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).'
+                  % (card_id, day, (legal_name or name).replace('"', "'")))
     row = {'company_id': cid, 'decision': 'confirmed', 'inn': str(inn), 'reason': reason, 'date': day}
     src = open(path, encoding='utf-8').read()
     marker = "\n\ndef by_company_id() -> dict[str, dict]:"
@@ -1590,12 +1604,15 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
                 card['asset'] = comps[cid]['name']
         lines.append('%s -> %s (%s)' % (role, cid, comps[cid]['name']))
         inn, legal = p.get('inn'), str(p.get('legal_name') or '').strip()
+        inn_from_egrul_match = False
         if legal and inn is None:
             hit = resolve_inn(legal)
             inn = hit[0] if hit else None
+            inn_from_egrul_match = inn is not None
         if inn and cid not in known:
             add_registry_row(cid, comps[cid]['name'], inn, legal or None, card['id'],
-                             registry=registry, path=registry_path, day=day)
+                             registry=registry, path=registry_path, day=day,
+                             from_egrul_match=inn_from_egrul_match)
             known.add(cid)
             lines.append('реестр ИНН + %s: %s (%s)' % (cid, inn, legal or comps[cid]['name']))
         # Имя с правовой формой для схемы и «Отчетности сторон» (2 ноября 2026).
