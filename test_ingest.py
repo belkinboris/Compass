@@ -9965,3 +9965,17 @@ def test_important_news_is_marked_and_goes_first_but_still_through_the_console()
     assert msg.startswith("⚡ ВАЖНОЕ") and "«Это сделка»" in msg
     plain = send_drafts.raw_message({"draft_id": "d2", "title": "Продают дом в Перми", "src": [], "hold_reasons": ["r"]})
     assert not plain.startswith("⚡")
+
+
+def test_ship_decisions_stops_when_the_site_did_not_return_decisions():
+    """6 ноября 2026: сайт три раза за день не отдал решения, approve.py
+    напечатал причину, а ship_decisions ответила «Решений нет» кодом 0 — и
+    решения владельца ждали повторного запуска. Такой ответ — СТОП с причиной."""
+    import importlib.util, pathlib
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert mod.site_failure('Сайт ответил 502 на запрос решений — работаем без них.\nСухой прогон.') == \
+        'Сайт ответил 502 на запрос решений — работаем без них.'
+    assert mod.site_failure('Решения недоступны (ReadTimeout) — работаем без них.').startswith('Решения недоступны')
+    assert mod.site_failure('  ЖДЕТ        g9b4c2e71   ждем решения (3 ч из 24)\nСухой прогон. Применение — с ключом --write.') == ''
