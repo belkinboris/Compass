@@ -3520,7 +3520,7 @@ function companyRole(d, id){
   // блоке «Финансовый контекст» карточки Яндекс/VK, 8 октября 2026). Тот же
   // ключ, что у плашки карточки (`kindKey`): тип, а при обычной покупке — `kind`.
   const jv = kind === "jv" || (kind === "acquisition" && d.kind === "jv");
-  const roles = reorg ? reorgRoles(d) : isCustody(d) ? CUSTODY_ROLES : null;
+  const roles = reorg ? reorgRoles(d) : isCustody(d) ? CUSTODY_ROLES : isManagement(d) ? MANAGEMENT_ROLES : null;
   if(d.buyer===id) return roles ? roles.a : jv ? "Участник СП" : "Покупатель";
   if(d.seller_id===id) return "Продавец";
   if(d.target===id || d.asset_id===id) return roles ? roles.b : jv ? "Участник СП" : "Предмет сделки";
@@ -5431,6 +5431,7 @@ const KIND_BADGE_META = {
   ipo:         {label:"IPO", cls:"badge-ipo"},
   reorg:       {label:"Реорганизация", cls:"badge-reorg"},
   custody:     {label:"Временное управление", cls:"badge-reorg"},
+  management:  {label:"Передача в управление", cls:"badge-reorg"},
 };
 /* Разметка строки ленты — снаружи функции отбора: ею пользуется
    unifiedFeed(), а сама функция отбора теперь возвращает записи. */
@@ -6262,6 +6263,12 @@ const KIND_LABELS = {
      карточки нет (buyer/seller пусты, причина — в no_parties), управляющий
      и собственник названы в прозе. Пустая шапка — не «не раскрыт». */
   custody:     {a:"Временный управляющий",b:"Актив под управлением",empty:"",arrow:true},
+  /* ПЕРЕДАЧА В УПРАВЛЕНИЕ (решение владельца 6 ноября 2026, птицефабрика
+     «Островная»): собственник сам, не по указу, передает управление компанией
+     управляющей компании — например по итогам конкурса; собственность не
+     переходит. Управляющая компания — сторона карточки (`buyer`), актив — в
+     `target`; продавца нет, «Не раскрыт» не рисуем. */
+  management:  {a:"Управляющая компания",b:"Актив под управлением",empty:"",arrow:true},
 };
 function dealKindOf(typeStr){
   const t = (typeStr||"").toLowerCase();
@@ -6285,6 +6292,10 @@ function dealKindOf(typeStr){
   // владельца 16 октября 2026) — не покупка: собственник не меняется,
   // государство передает только управление.
   if(/временн[а-яё]* управлен/.test(t)) return "custody";
+  // ПЕРЕДАЧА В УПРАВЛЕНИЕ (тип «Передача в управление», решение владельца
+  // 6 ноября 2026) — собственник сам передает управление управляющей
+  // компании (по конкурсу, по договору), собственность не переходит.
+  if(/передач[а-яё]* в управлен/.test(t)) return "management";
   if(/финансирован|венчурн|раунд|\bseed\b|допэмисси/.test(t)) return "financing";
   return "acquisition";
 }
@@ -6804,7 +6815,7 @@ const ecoHasContent = d => {
 // Денежные поля вкладки «Финансы» (без «Цели сделки» и «Контекста» — они на «Обзоре»).
 const finHasContent = d => {
   const e = d.eco || {};
-  return hasFact(e.sum) || hasFact(e.val) || hasFact(e.target_fin) || hasFact(e.fin);
+  return hasFact(e.sum) || hasFact(e.val) || hasFact(e.target_fin) || hasFact(e.fin) || hasFact(e.price_per_share);
 };
 /* «Что известно о сделке» — общий блок для обоих пустых состояний: когда линза
    пуста, юристу все равно нужны стороны, предмет и статус, а не пустой экран. */
@@ -6866,8 +6877,12 @@ const reorgRoles = d => REORG_ROLES[d.reorg_form] || {a:"Правопреемн�
    различает только явно проставленный d.kind (см. KIND_LABELS.custody). */
 const isCustody = d => dealKindOf(d.type) === "custody" || (d.kind === "custody" && dealKindOf(d.type) === "acquisition");
 const CUSTODY_ROLES = {a:"Временный управляющий", b:"Актив под управлением"};
-const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : isCustody(d) ? CUSTODY_ROLES.a : "Покупатель";
-const targetRole = d => isReorg(d) ? reorgRoles(d).b : isCustody(d) ? CUSTODY_ROLES.b : "Предмет сделки";
+/* Передача в управление (6 ноября 2026): управляющая компания — сторона
+   карточки с ролью «Управляющая компания», не покупатель. */
+const isManagement = d => dealKindOf(d.type) === "management";
+const MANAGEMENT_ROLES = {a:"Управляющая компания", b:"Актив под управлением"};
+const buyerRole = d => isRound(d) ? "Инвестор" : isReorg(d) ? reorgRoles(d).a : isCustody(d) ? CUSTODY_ROLES.a : isManagement(d) ? MANAGEMENT_ROLES.a : "Покупатель";
+const targetRole = d => isReorg(d) ? reorgRoles(d).b : isCustody(d) ? CUSTODY_ROLES.b : isManagement(d) ? MANAGEMENT_ROLES.b : "Предмет сделки";
 
 function knownRowsHtml(d, withSum){
   const known = [];
@@ -7366,7 +7381,9 @@ function renderDeal(id, qs, previewCard){
          ниже рисовала бы оба как «Не раскрыт» — это не честная пустота, а
          несуществующие роли, поданные как забытые поля (тот же класс, что уже
          описан для допэмиссии cash-in в правилах проекта). */
-      if(kindKey==="custody"){
+      /* Передача в управление (6 ноября 2026) — та же пара боксов:
+         управляющая компания → актив под управлением, без продавца. */
+      if(kindKey==="custody" || kindKey==="management"){
         if(!buyerName && !d.buyer_name && !targetName && !d.asset) return "";
         /* Тип «Временное управление» (16 октября 2026): управляющий — не
            сторона карточки, он назван в тексте. Пустой бокс «Не раскрыт»
@@ -7382,7 +7399,7 @@ function renderDeal(id, qs, previewCard){
               ? party(targetRole(d), d.target, targetName)
               : `<div class="dp-party"><span class="dp-role">${targetRole(d)}</span><span class="dp-name">${custodyAssetName}</span></div>`)
           : "";
-        if(!managerBox) return assetBox ? `<div class="deal-plate"><span class="label">Под временным управлением</span>
+        if(!managerBox) return assetBox ? `<div class="deal-plate"><span class="label">${kindKey==="management" ? "Передано в управление" : "Под временным управлением"}</span>
           <div class="dp-row">${assetBox}</div></div>` : "";
         return `<div class="deal-plate"><span class="label">Структура сделки</span>
           <div class="dp-row">
@@ -7603,6 +7620,9 @@ function renderDeal(id, qs, previewCard){
       /* Только деньги (владелец, 28 октября 2026: «в блоке финансы нужно было
          оставить только сугубо финансовый блок»): доля и консультанты — на «Обзоре». */
       const finSpec = specBlock([
+        /* Цена за акцию (оферта, выкуп) — отдельное поле eco.price_per_share
+           (владелец, 6 ноября 2026; docs/card_money.md): та же строка, что в посте. */
+        specRow("Цена", eco.price_per_share),
         specRow("Оценка и дисконт", eco.val),
         specRow(targetMetricLabel(kindKey), eco.target_fin),
         specRow("Форма расчетов", eco.fin),
@@ -7621,7 +7641,7 @@ function renderDeal(id, qs, previewCard){
     /* У временного управления по указу цены нет по природе — это не продажа
        (решение владельца 16 октября 2026); «Сумма: не раскрыта» выдала бы
        отсутствующую величину за скрытую. */
-    else if(isCustody(d) && !has(d.sum)) f.innerHTML = `
+    else if((isCustody(d) || isManagement(d)) && !has(d.sum)) f.innerHTML = `
       ${dealPlate()}
       ${dealAnalysisHtml(d)}
       ${factsVerifiedHtml(d)}

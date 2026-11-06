@@ -1958,7 +1958,7 @@ def test_every_pending_card_has_pending_since():
 # фильтр «Тип сделки» покажет ярлык, которому никто не назначил роли сторон.
 DEAL_TYPES = {"M&A", "Инвестиция", "Продажа с торгов", "IPO", "Создание СП", "Реорганизация",
               "Финансирование · структурная сделка", "Продажа недвижимости",
-              "Временное управление"}
+              "Временное управление", "Передача в управление"}
 
 
 def _all_cards(base):
@@ -1984,6 +1984,76 @@ def test_temporary_management_has_no_buyer_or_seller(base):
         named = [f for f in ("buyer", "buyer_name", "seller", "seller_id") if d.get(f)]
         if named or not str(d.get("no_parties") or "").strip():
             bad.append((d["id"], named or "нет no_parties"))
+    assert not bad, bad
+
+
+def test_temporary_management_is_by_decree(base):
+    """«Временное управление» — только по указу президента (владелец, 6 ноября
+    2026, птицефабрика «Островная»): собственник сам передал управление по
+    конкурсу — это «Передача в управление». Та же проверка — в приемке
+    (`accept_card`, находка `custody_not_decree`)."""
+    import sys
+    sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
+    import accept_card
+    bad = [d["id"] for d in _all_cards(base) if d.get("type") == "Временное управление"
+           and not accept_card.CUSTODY_DECREE.search(accept_card._custody_blob(d))]
+    assert not bad, f"временное управление без указа — нужен тип «Передача в управление»: {bad}"
+
+
+def test_management_handover_names_the_manager(base):
+    """Передача в управление (решение владельца 6 ноября 2026): управляющая
+    компания — сторона карточки (`buyer` профилем или `buyer_name`), на плашке,
+    в шапке и в посте — «Управляющая компания»; продавца нет — собственность не
+    переходит. `kind` — не «custody»: роли временного управляющего у нее нет."""
+    bad = []
+    for d in _all_cards(base):
+        if d.get("type") != "Передача в управление":
+            continue
+        if not (d.get("buyer") or d.get("buyer_name")):
+            bad.append((d["id"], "нет управляющей компании"))
+        if d.get("buyer") and d["buyer"] not in base["companies"]:
+            bad.append((d["id"], "buyer не профиль"))
+        if d.get("seller") or d.get("seller_id"):
+            bad.append((d["id"], "продавец у передачи в управление"))
+        if d.get("kind") == "custody":
+            bad.append((d["id"], "kind custody"))
+    assert not bad, bad
+
+
+OFFER_RE = re.compile(r"(?:добровольн|обязательн)\w*\s+(?:публичн\w+\s+)?(?:предложени|оферт)\w*"
+                      r"[^.]{0,40}?(?:акционер|миноритари)", re.I)
+
+
+def test_offer_seller_is_the_shareholders(base):
+    """Оферта всем акционерам — продавец «Акционеры «<компания>»» (владелец,
+    6 ноября 2026, «Т-Технологии»/«Циан»; так же «Миноритарные акционеры
+    «Квадры»» у g552abe79): у сделки, где структура — добровольное или
+    обязательное предложение акционерам, продавец не пустой."""
+    bad = []
+    for d in _all_cards(base):
+        if d.get("type") != "M&A":
+            continue
+        blob = " ".join(str(v or "") for v in (d.get("title"), (d.get("law") or {}).get("struct"), d.get("extra")))
+        if OFFER_RE.search(blob) and not (d.get("seller") or d.get("seller_id")):
+            bad.append((d["id"], d.get("title")))
+    assert not bad, f"оферта акционерам без продавца — впишите «Акционеры «<компания>»»: {bad}"
+
+
+PRICE_PER_SHARE_RE = re.compile(r"^\d[\d\s]*(?:,\d+)?\s*(?:₽|руб\.?)\s+за\s+(?:\w+\s+)?акци"
+                                r"|^\$\d[\d,.]*\s+за\s+(?:\w+\s+)?акци", re.I)
+
+
+def test_price_per_share_is_a_bare_price(base):
+    """`eco.price_per_share` (владелец, 6 ноября 2026; docs/card_money.md) —
+    голая цена «993,05 ₽ за акцию»: пост печатает ее строкой «Цена: …», и
+    премии к рынку («на 29,3% выше») там быть не должно — «не пиши, что выше»."""
+    bad = []
+    for d in _all_cards(base):
+        v = str((d.get("eco") or {}).get("price_per_share") or "").strip()
+        if not v:
+            continue
+        if not PRICE_PER_SHARE_RE.search(v) or re.search(r"%|выше|ниже|преми|дороже|дешевле", v, re.I):
+            bad.append((d["id"], v))
     assert not bad, bad
 
 

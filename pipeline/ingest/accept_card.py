@@ -765,6 +765,17 @@ def entities_missing_from_card(card, comps, records=None):
     return out
 
 
+MANAGEMENT_TYPE = 'Передача в управление'
+MANAGEMENT_WORDS = re.compile(r'переда\w*\s+в\s+управлени', re.I)
+CUSTODY_DECREE = re.compile(r'указ', re.I)
+
+
+def _custody_blob(card):
+    law, eco = card.get('law') or {}, card.get('eco') or {}
+    return ' '.join(str(v or '') for v in (card.get('title'), card.get('no_parties'), card.get('extra'),
+                                           law.get('struct'), law.get('appr'), eco.get('context')))
+
+
 CUSTODY_TAKEN = re.compile(r'\b(?:забра\w*|отобра\w*|отня\w*|отнял\w*|лиши\w*|изъя\w*|конфиск\w*|национализ\w*|'
                            r'перешл\w*\s+(?:к\s+)?государств\w*|стал\w*\s+собственник\w*)', re.I)
 
@@ -856,9 +867,35 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             out.append(('custody_title_taken', 'заголовок временного управления говорит, что активы '
                         'забрали или компания их лишилась, а собственник не меняется — «переданы во '
                         'временное управление …»'))
+        # Временное управление — только по указу президента (владелец, 6 ноября
+        # 2026, «Островная»): собственник сам передал управление по конкурсу —
+        # это «Передача в управление», со стороной «Управляющая компания».
+        if not CUSTODY_DECREE.search(_custody_blob(card)):
+            out.append(('custody_not_decree', 'временное управление без указа: если управление передал сам '
+                        'собственник (по конкурсу, по договору) — тип «Передача в управление», управляющая '
+                        'компания — в buyer'))
         if not has(card.get('no_parties')):
             out.append(('custody_no_parties', 'временное управление без no_parties — впишите «Временное '
                         'управление по указу, собственность не переходила — покупателя и продавца нет.»'))
+    # ПЕРЕДАЧА В УПРАВЛЕНИЕ (решение владельца 6 ноября 2026): собственник сам
+    # передает управление управляющей компании; собственность не переходит.
+    # Управляющая компания — сторона карточки (`buyer` профилем или
+    # `buyer_name`), продавца нет. Заголовок «X передана в управление Y».
+    mgmt_words = MANAGEMENT_WORDS.search(str(card.get('title') or ''))
+    if mgmt_words and card.get('type') == 'M&A':
+        out.append(('management_type', 'передача в управление с типом «M&A» — нужен тип «Передача в '
+                    'управление» (собственность не переходит)'))
+    if card.get('type') == MANAGEMENT_TYPE:
+        if not (has(card.get('buyer')) or has(card.get('buyer_name'))):
+            out.append(('management_manager', 'у передачи в управление не названа управляющая компания — '
+                        'поставьте ее в buyer (профиль) или buyer_name, она видна как «Управляющая компания»'))
+        sold = [f for f in ('seller', 'seller_id') if has(card.get(f))]
+        if sold:
+            out.append(('management_seller', 'у передачи в управление нет продавца — собственность не '
+                        'переходит: очистите %s, собственника — в прозу (law.struct)' % ', '.join(sold)))
+        if not mgmt_words:
+            out.append(('management_title', 'заголовок передачи в управление — «X передана в управление Y» '
+                        '(pipeline/title_standard.py)'))
     for role, (text_field, id_field) in ROLES.items():
         text = card.get(text_field)
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))

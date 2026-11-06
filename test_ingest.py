@@ -529,12 +529,13 @@ def test_post_kind_matches_the_site_classifier():
     html = (Path(__file__).parent / "static" / "index.html").read_text(encoding="utf-8")
     js = html[html.index("function dealKindOf(typeStr){"):]
     js = js[:js.index("\n}\n") + 3]
-    for word in ("ipo", "совместн", "синдицированн", "под залог", "реорганизац", "допэмисси", "временн"):
+    for word in ("ipo", "совместн", "синдицированн", "под залог", "реорганизац", "допэмисси", "временн",
+                 "передач"):
         assert word in js, "в dealKindOf нет «%s» — сверьте копию в format_post" % word
     cases = {"IPO": "ipo", "Создание СП": "jv", "Реорганизация": "reorg",
              "Финансирование · структурная сделка": "structured", "M&A": "acquisition",
              "Инвестиция": "acquisition", "Продажа с торгов": "acquisition",
-             "Временное управление": "custody"}
+             "Временное управление": "custody", "Передача в управление": "management"}
     for type_str, kind in cases.items():
         assert format_post._kind_from_type(type_str) == kind, type_str
 
@@ -8678,6 +8679,96 @@ def test_temporary_management_post_names_no_buyer_or_seller():
     import send_drafts
     msg = send_drafts.card_message(dict(deal, buyer_name="«Центр Капитал»"), {})
     assert "Временный управляющий: «Центр Капитал»" in msg and "Покупатель" not in msg, msg
+
+
+# ---------- передача в управление и оферта (решения владельца 6 ноября 2026) ----------
+
+def test_management_handover_gets_its_own_type_on_intake(base):
+    """Собственник сам (не указом) передал управление компанией управляющей
+    компании — тип «Передача в управление» (птицефабрика «Островная»), не
+    «Временное управление» и не «M&A». Приемка требует управляющую компанию
+    стороной и не пускает продавца; временное управление без указа — находка."""
+    import draft as draft_mod
+    import promote
+    import accept_card
+    import review
+    title = "Сахалинскую птицефабрику передали в управление частной компании"
+    assert draft_mod.guess_type(title) == "Передача в управление"
+    assert draft_mod.guess_type("Путин передал во временное управление «Центр Капиталу» активы") \
+        == "Временное управление"
+    assert draft_mod.guess_type("Акции переданы в доверительное управление") == "M&A"
+    assert review.TYPE_WORDS["Передача в управление"]
+    assert any(w in "фабрика передана в управление ооо"
+               for w in review.status_words("Закрыта", "Передача в управление"))
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": title, "date": FRESH_DATE, "ind": sorted(inds)[0], "type": "Передача в управление",
+             "src": [["источник", "https://example.invalid/mgmt-1"]], "asset": "птицефабрика «Тест»"}
+    _bad, hold = promote.check(draft, base, idx, inds)
+    assert not any("не названа ни одна сторона" in r for r in hold), hold
+    comps = {"gmgr": {"name": "Тест-Управление", "ind": "Агро", "desc": "Управляет фабриками."}}
+    card = {"id": "gmg1", "title": "Птицефабрика «Тест» передана в управление «Тест-Управлению»",
+            "type": "M&A", "asset": "управление птицефабрикой «Тест»", "eco": {}, "law": {}}
+    codes = [c for c, _ in accept_card.findings(card, {"companies": comps})]
+    assert "management_type" in codes, codes
+    mg = dict(card, type="Передача в управление", seller="Правительство области")
+    codes = [c for c, _ in accept_card.findings(mg, {"companies": comps})]
+    assert "management_manager" in codes and "management_seller" in codes, codes
+    ok = dict(card, type="Передача в управление", buyer="gmgr")
+    codes = [c for c, _ in accept_card.findings(ok, {"companies": comps})]
+    assert not {"management_type", "management_manager", "management_seller", "management_title"} & set(codes), codes
+    codes = [c for c, _ in accept_card.findings(dict(ok, title="«Тест» сменила руководство"),
+                                                {"companies": comps})]
+    assert "management_title" in codes, codes
+    # Временное управление без указа — повод сменить тип.
+    custody = dict(card, type="Временное управление", buyer=None,
+                   no_parties="Управление передано по конкурсу, собственность не переходила.")
+    codes = [c for c, _ in accept_card.findings(custody, {"companies": comps})]
+    assert "custody_not_decree" in codes, codes
+
+
+def test_management_handover_post_names_the_managing_company():
+    """Пост о передаче в управление: строка «Управляющая компания» вместо
+    «Покупатель», без «Продавец: не раскрыт», хэштег #передача_в_управление;
+    так же консоль (`send_drafts.card_message`)."""
+    comps = {"gmgr": {"name": "Тест-Управление", "ind": "Агро", "desc": "Компания с опытом управления фабриками."}}
+    deal = {"id": "gmg2", "title": "Птицефабрика «Тест» передана в управление «Тест-Управлению»",
+            "type": "Передача в управление", "status": "Закрыта", "date": FRESH_DATE,
+            "buyer": "gmgr", "asset": "управление птицефабрикой «Тест»", "ind": "Агро"}
+    text = format_post.render(deal, comps)
+    assert "<b>Управляющая компания:</b> Тест-Управление" in text, text
+    assert "Покупатель" not in text and "Продавец" not in text and "не раскрыт" not in text, text
+    assert "#передача_в_управление" in text and "#MA" not in text and "#временное_управление" not in text, text
+    assert format_post.deal_kind(deal) == "management"
+    import send_drafts
+    msg = send_drafts.card_message(deal, comps)
+    assert "Управляющая компания: Тест-Управление" in msg and "Покупатель" not in msg, msg
+    # Без управляющей компании — «не раскрыт», а не молчание: это сторона карточки.
+    bare = format_post.render(dict(deal, buyer=None), comps)
+    assert "<b>Управляющая компания:</b> не раскрыт" in bare, bare
+
+
+def test_post_shows_price_per_share_without_premium():
+    """Цена за акцию (оферта, выкуп) — строка «Цена: 993,05 ₽ за акцию» из
+    `eco.price_per_share`; премию («на 29,3% выше») пост не печатает
+    (владелец, 6 ноября 2026: «не пиши, что выше»), `check_post` ее ловит."""
+    import check_post
+    deal = {"id": "gof1", "title": "«Тест-Покупатель» собирается купить до 100% «Тест-Сервиса»",
+            "type": "M&A", "status": "Обсуждается", "date": FRESH_DATE, "ind": "ИТ и интернет",
+            "buyer_name": "«Тест-Покупатель»", "seller": "Акционеры «Тест-Сервиса»",
+            "asset": "акции «Тест-Сервиса»",
+            "eco": {"price_per_share": "993,05 ₽ за акцию",
+                    "val": "Цена предложения на 29,3% выше цены закрытия торгов."}}
+    text = format_post.render(deal, {})
+    assert "<b>Цена:</b> 993,05 ₽ за акцию" in text, text
+    assert "29,3" not in text and "выше" not in text, text
+    assert "<b>Продавец:</b> Акционеры «Тест-Сервиса»" in text, text
+    lines = text.splitlines()
+    assert lines.index("<b>Цена:</b> 993,05 ₽ за акцию") < next(i for i, l in enumerate(lines) if "Статус" in l)
+    # Премия, вписанная в само поле, строку не дает вовсе.
+    with_premium = dict(deal, eco={"price_per_share": "993,05 ₽ за акцию, на 29,3% выше рынка"})
+    assert "<b>Цена:</b>" not in format_post.render(with_premium, {})
+    assert format_post.price_per_share_line({"eco": {}}) is None
+    assert any("премия" in p for p in check_post.check("<b>Цена:</b> 993 ₽ за акцию, на 29% выше"))
 
 
 def test_joint_post_goes_out_once_for_all_its_cards(monkeypatch, tmp_path):

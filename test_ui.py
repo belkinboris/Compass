@@ -2543,6 +2543,61 @@ def test_temporary_management_type_card_shows_no_party_placeholders(page, base_u
         page.unroute(PENDING_URL)
 
 
+def test_management_handover_card_shows_the_managing_company(page, base_url):
+    """Тип «Передача в управление» (решение владельца 6 ноября 2026, птицефабрика
+    «Островная»): управляющая компания — сторона карточки с ролью «Управляющая
+    компания» на плашке и в шапке; продавца и «Не раскрыт» нет. Цена за акцию
+    (`eco.price_per_share`) — строкой «Цена» на «Финансах» (другая карточка)."""
+    card = {"id": "gtest-mgmt", "date": "2026-11-06",
+            "title": "Птицефабрика «Тест» передана в управление «Тест-Управлению»",
+            "ind": "Агро", "type": "Передача в управление", "status": "Закрыта",
+            "kind": "management", "buyer_name": "ООО «Тест-Управление»",
+            "asset": "управление птицефабрикой «Тест»",
+            "src": [["источник", "https://example.invalid/mgmt"]],
+            "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
+                    "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "Все акции остаются у собственника, передано только управление.",
+                    "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-11-06T00:00:00+00:00"}
+    offer = {"id": "gtest-offer", "date": "2026-11-06",
+             "title": "«Тест-Покупатель» собирается купить до 100% «Тест-Сервиса»",
+             "ind": "ИТ и интернет", "type": "M&A", "status": "Обсуждается",
+             "buyer_name": "«Тест-Покупатель»", "seller": "Акционеры «Тест-Сервиса»",
+             "asset": "акции «Тест-Сервиса»",
+             "src": [["источник", "https://example.invalid/offer"]],
+             "eco": {"sum": "Не раскрыта", "share": "—", "val": "—", "target_fin": "—",
+                     "fin": "Оплата деньгами.", "price_per_share": "993,05 ₽ за акцию",
+                     "rationale": "—", "context": "—", "finadv": "—"},
+             "law": {"struct": "Добровольное предложение всем акционерам.", "appr": "—", "adv": [], "terms": "—"},
+             "pending_since": "2026-11-06T00:00:00+00:00"}
+    serve_pending(page, [card, offer])
+    errors = []
+    try:
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        visit(page, base_url, "#/preview/gtest-mgmt")
+        page.wait_for_timeout(900)
+        roles = page.eval_on_selector_all(
+            ".deal-plate .dp-party", "els => els.map(el => el.innerText.toUpperCase())")
+        assert any("УПРАВЛЯЮЩАЯ КОМПАНИЯ" in r and "ТЕСТ-УПРАВЛЕНИЕ" in r for r in roles), roles
+        assert any("АКТИВ ПОД УПРАВЛЕНИЕМ" in r for r in roles), roles
+        assert not any(w in r for r in roles for w in ("ПРОДАВЕЦ", "ПОКУПАТЕЛЬ", "НЕ РАСКРЫТ")), roles
+        head = page.inner_text(".d-head")
+        assert "Тест-Управление" in head and "Передача в управление" in head, head
+        assert "не раскрыт" not in head.lower(), head
+
+        visit(page, base_url, "#/preview/gtest-offer")
+        page.wait_for_timeout(900)
+        plate = page.inner_text(".deal-plate")
+        assert "Акционеры «Тест-Сервиса»" in plate, plate
+        page.click('.lens button[data-l="fin"]')
+        page.wait_for_timeout(500)
+        fin = page.inner_text("#app")
+        assert "993,05 ₽ за акцию" in fin, fin[:1500]
+        assert not errors, errors
+    finally:
+        page.unroute(PENDING_URL)
+
+
 def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
     """18 сентября 2026: владелец увидел черновик карточки «Ашана»
     (национализация/временное управление по указу президента) и написал

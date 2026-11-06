@@ -443,7 +443,9 @@ def from_cards(data, today=None):
                 if ok(a):
                     other = (' с %s' % companies[b]['name']) if b in companies else ''
                     rows.append((a, 'investor', '%s — обсуждается совместное предприятие%s' % (companies[a]['name'], other)))
-        elif typ == 'Временное управление':
+        elif typ in ('Временное управление', 'Передача в управление'):
+            # Не покупка: собственник не меняется (передача в управление —
+            # решение владельца 6 ноября 2026), признака будущей сделки нет.
             continue
         else:
             invest = typ == 'Инвестиция'

@@ -151,6 +151,11 @@ def card_message(card, companies=None):
         # продавец, а управляющий и собственник — и только если названы.
         sides = (field('Временный управляющий', buyer) + field('Собственник', seller)
                  + field('Предмет', asset))
+    elif format_post.deal_kind(card) == 'management':
+        # Передача в управление (владелец, 6 ноября 2026): управляющая
+        # компания — сторона карточки, собственник не меняется.
+        sides = (field('Управляющая компания', buyer) + field('Собственник', seller)
+                 + field('Предмет', asset))
     channel = '' if goes_to_channel(card) else _channel_gate_line(card)
     return ('🗂 [карточка %s] — НА САЙТ, на проверку\n'
             '%s\n\n'
