@@ -780,9 +780,6 @@ CUSTODY_TAKEN = re.compile(r'\b(?:забра\w*|отобра\w*|отня\w*|от
                            r'перешл\w*\s+(?:к\s+)?государств\w*|стал\w*\s+собственник\w*)', re.I)
 
 
-TITLE_STANDARD_SINCE = '2026-11-06'
-
-
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None, source_records=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -899,11 +896,13 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if not mgmt_words:
             out.append(('management_title', 'заголовок передачи в управление — «X передана в управление Y» '
                         '(pipeline/title_standard.py)'))
-    # СТАНДАРТ ЗАГОЛОВКА (владелец одобрил 6 ноября 2026: «Заголовки ок»; новые
-    # карточки — сразу по стандарту, старые переписываются партиями по 50 в
-    # день). Глагол — по типу и статусу (pipeline/title_standard.py, RULES);
-    # карточки до этого дня ждут своей партии и приемку не держат.
-    if str(card.get('date') or '') >= TITLE_STANDARD_SINCE:
+    # СТАНДАРТ ЗАГОЛОВКА (владелец одобрил 6 ноября 2026: «Заголовки ок»).
+    # Глагол — по типу и статусу (pipeline/title_standard.py, RULES). Держит
+    # ВСЕ, что еще не вышло постом, — по дате сделки отсекать нельзя: в тот же
+    # день «Хогвартс» (сделка 5 ноября) и «Модный сезон» (30 октября) прошли
+    # приемку с заголовками не по стандарту. Опубликованные (есть запись в
+    # telegram_posts) переписываются партиями по 50 в день.
+    if card.get('id') not in (base.get('telegram_posts') or {}):
         import title_standard
         if title_standard.verb_ok(card) is False:
             out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s'
@@ -1727,7 +1726,7 @@ def _self_check():
                         'desc': 'Холдинговая компания основных акционеров Совкомбанка.', 'group': True,
                         'inn': '3906406196', 'legal_name': 'МКАО «Совко Капитал Партнерс»'}],
           'no_profile': {'seller': 'один из акционеров, имя не раскрыто'},
-          'title': '«Совко Капитал Партнерс» увеличил долю в Совкомбанке',
+          'title': '«Совко Капитал Партнерс» купил акции Совкомбанка',
           'asset': 'акции Совкомбанка', 'status': 'Закрыта',
           'src_add': [['Совкомбанк', 'https://sovcombank.ru/press']]}
     assert not check_answer(ok, card, base), check_answer(ok, card, base)

@@ -4541,11 +4541,16 @@ def test_raw_like_a_card_waits_for_intake_then_goes_to_the_console(monkeypatch, 
     Раньше новость, похожая на заголовок карточки, помечалась дублем и
     исчезала, и приток ее уже не видел. Теперь: повтор решенной новости —
     выбрасывается; похожесть на карточку — ждет притока ENRICH_WAIT_H часов и
-    потом идет в консоль с подсказкой."""
+    потом идет в консоль. С 6 ноября 2026 — не «сомнительной», а конкретным
+    предложением «к карточке … добавить: источник» (card_news.py); без адреса
+    предлагать нечего — тогда, как раньше, сырьем с подсказкой."""
     import send_drafts
     from datetime import datetime, timedelta, timezone
     drafts = [
         {"draft_id": "d-card", "title": "Путин: турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую»",
+         "src": [["РБК", "https://www.rbc.ru/akkuyu-1"]],
+         "hold_reasons": ["не установлен предмет сделки"]},
+        {"draft_id": "d-nourl", "title": "Турецкие компании готовы выкупить часть пакета в проекте АЭС «Аккую», заявил Путин",
          "hold_reasons": ["не установлен предмет сделки"]},
         {"draft_id": "d-again", "title": "«Алроса» выставила на аукцион 49% акций ГМК «Тимир»",
          "hold_reasons": ["не установлен предмет сделки"]},
@@ -4569,15 +4574,24 @@ def test_raw_like_a_card_waits_for_intake_then_goes_to_the_console(monkeypatch, 
     assert [i.get("draft_id") for _t, _k, (kind, i, _m) in plan if kind == "raw"] == []
     assert st["decided_raw"].get("d-again") == "auto-drop"          # повтор решенной новости
     assert "d-card" not in st["decided_raw"]                         # не выброшена: ждет притока
-    assert st["enrich_wait"]["d-card"]["card"] == "g1111aaaa"
+    assert st["card_news"]["d-card"]["deal_id"] == "g1111aaaa"
+    assert st["card_news"]["d-card"]["outcome"] == "read"
+    assert not [k for _t, _k, (k, _i, _m) in plan if k == "offer"]
 
-    # три часа спустя приток так ничего и не решил — новость в консоль
-    st["enrich_wait"]["d-card"]["since"] = (datetime.now(timezone.utc) - timedelta(hours=4)).isoformat()
+    # три часа спустя приток так ничего и не решил — предложение в консоль
+    for key in ("d-card", "d-nourl"):
+        st["card_news"][key]["since"] = (datetime.now(timezone.utc) - timedelta(hours=4)).isoformat()
     plan, *_ = send_drafts.build_plan()
+    offers = [(t, kb, i) for t, kb, (kind, i, _m) in plan if kind == "offer"]
+    assert [i["id"] for _t, _kb, i in offers] == ["d-card"]
+    text, kb, _entry = offers[0]
+    assert "К карточке «Путин заявил о готовности турецких компаний" in text
+    assert "/#/deal/g1111aaaa" in text and "Источник: https://www.rbc.ru/akkuyu-1" in text
+    assert [b["callback_data"] for row in kb["inline_keyboard"] for b in row] == [
+        "mod:d-card:add", "mod:d-card:other"]
     shown = [i for _t, _k, (kind, i, _m) in plan if kind == "raw"]
-    assert [i["draft_id"] for i in shown] == ["d-card"]
+    assert [i["draft_id"] for i in shown] == ["d-nourl"]                # без адреса — сырьем, как раньше
     assert any("похоже на карточку g1111aaaa" in r for r in shown[0]["hold_reasons"])
-    assert "g1111aaaa" in send_drafts.raw_message(shown[0])
 
 
 def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tmp_path):
@@ -10098,5 +10112,355 @@ def test_acceptance_holds_a_new_card_whose_title_breaks_the_standard():
     assert "title_standard" in codes
     good = dict(card, title="Агрохолдинг в Омской области выставлен на продажу за 970 млн ₽")
     assert "title_standard" not in [c for c, _t in accept_card.findings(good, base)]
+    # Дата сделки не освобождает: «Хогвартс» (5 ноября) прошел приемку 6 ноября.
     old = dict(card, date="2026-10-01")
-    assert "title_standard" not in [c for c, _t in accept_card.findings(old, base)]
+    assert "title_standard" in [c for c, _t in accept_card.findings(old, base)]
+    # Освобождает только вышедший пост — их переписывают партиями.
+    posted = dict(base, telegram_posts={"gt1": 101})
+    assert "title_standard" not in [c for c, _t in accept_card.findings(old, posted)]
+
+
+# ---------- новость о карточке базы: сравнение по фактам (card_news.py, 6 ноября 2026) ----------
+
+def _cn_base():
+    """Маленькая база: Selectel/M1Cloud без консультантов, офис «Билайна»,
+    слитая карточка и «ВИМ»/Swordfish со стадией «Подписана»."""
+    return {
+        "companies": {"selectel": {"name": "Selectel"}, "m1": {"name": "M1Cloud"}},
+        "merged": {"gold0001": "gsel0001"},
+        "deals": [
+            {"id": "gsel0001", "date": "2026-09-18", "title": "Selectel купил облачного провайдера M1Cloud",
+             "buyer": "selectel", "target": "m1", "status": "Закрыта", "type": "M&A", "sum": "2,6 млрд ₽",
+             "eco": {"sum": "2,6 млрд ₽", "share": "—", "finadv": "Публично не сообщалось"},
+             "law": {"adv": [["Стороны сделки", "Не раскрывались",
+                              "Юридические консультанты в публичных источниках не раскрывались"]]},
+             "src": [["ComNews", "https://www.comnews.ru/content/247422"]]},
+            {"id": "gbee0001", "date": "2026-10-05", "title": "«Билайн» продает свой офис на 1-й Тверской-Ямской",
+             "seller": "ВымпелКом", "asset": "офисное здание на 1-й Тверской-Ямской улице",
+             "status": "Обсуждается", "type": "M&A", "src": [["CNews", "https://www.cnews.ru/bilajn"]]},
+            {"id": "gswo0001", "date": "2026-11-01", "title": "«ВИМ Инвестиции» договорились о покупке доли Swordfish Security",
+             "buyer_name": "«ВИМ Инвестиции»", "asset": "Swordfish Security", "status": "Подписана",
+             "type": "M&A", "src": [["РБК", "https://www.rbc.ru/swordfish"]], "eco": {}, "law": {"adv": []}},
+        ]}
+
+
+NSP_POST = {"title": "АБ NSP сообщает: NSP сопровождало облачного провайдера Selectel в сделке по "
+                     "приобретению компании M1Cloud (ООО \"Стек Групп\")",
+            "url": "https://t.me/LawFirms/11405", "date": "2026-09-18", "source_id": "tg:LawFirms"}
+
+
+def datetime_utc(day):
+    from datetime import datetime, timezone
+    return datetime.strptime(day, "%Y-%m-%d").replace(tzinfo=timezone.utc, hour=12)
+
+
+def test_card_news_lawfirm_post_is_an_offer_with_the_adviser_and_its_quote():
+    """6 ноября 2026: пост @LawFirms о том, что NSP вела покупателя Selectel/
+    M1Cloud, семь недель пролежал в hold/*-enrich.json «слабым совпадением».
+    Объявление фирмы о своей роли — новый факт: владельцу уходит конкретное
+    предложение с цитатой и кнопками, а не «сомнительная»."""
+    import card_news
+    import draft as drafter
+    base = _cn_base()
+    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert entry["outcome"] == "offer", entry
+    adv = [f for f in entry["facts"] if f["field"] == "law.adv"]
+    assert adv and adv[0]["value"][1] == "NSP" and adv[0]["value"][0].startswith("Юридический консультант")
+    assert "NSP сопровождало" in adv[0]["quote"]
+    assert any(f["field"] == "src" for f in entry["facts"])
+    text = card_news.offer_message(entry)
+    assert "К карточке «Selectel купил облачного провайдера M1Cloud»" in text
+    assert "https://projectcompass.ru/#/deal/gsel0001" in text
+    assert "NSP" in text and "Источник: https://t.me/LawFirms/11405" in text
+    assert "СОМНИТЕЛЬНАЯ" not in text and "ё" not in text
+    keys = [b["callback_data"] for row in card_news.offer_keyboard(entry)["inline_keyboard"] for b in row]
+    assert keys == ["mod:%s:add" % entry["id"], "mod:%s:other" % entry["id"]]       # этапа нет — кнопки нет
+    assert entry["id"] == drafter.draft_id_for(NSP_POST)                               # тот же номер, что у сырья
+
+
+def test_card_news_known_source_without_new_facts_is_dropped_with_a_reason():
+    """Адрес уже стоит в источниках карточки — читающий этот текст видел; что
+    в карточку не попало, не попало сознательно. Новость снимается молча, с
+    причиной, и для сырья помечается решенной (не всплывет снова)."""
+    import card_news
+    base = _cn_base()
+    news = {"title": "«Билайн» выставил офис за 1,05 млрд рублей", "url": "https://www.cnews.ru/bilajn",
+            "draft_id": "d-bee"}
+    entry = card_news.sort_news(news, "gbee0001", "тот же адрес источника", base, [], "raw")
+    assert entry["outcome"] == "same" and "уже в карточке" in entry["reason"]
+    state = {}
+    card_news.register(state, entry)
+    assert state["decided_raw"]["d-bee"] == "enrich:gbee0001"
+    assert state["auto_drop_reasons"]["d-bee"] == entry["reason"]
+
+
+def test_card_news_wrong_card_goes_the_new_deal_way():
+    """DDX/Vesper (6 ноября 2026): ворота привязали две новости о покупке
+    здания структурой DDX к карточке офиса «Билайна» по общим словам
+    («здание в центре Москвы»), а ту карточку позже слили — сделка не дошла
+    никуда. Признаки ошибки: карточки нет, или общие только общие слова."""
+    import card_news
+    base = _cn_base()
+    ddx = {"title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
+           "url": "https://www.kommersant.ru/doc/9008598", "date": "2026-11-05"}
+    weak = card_news.sort_news(ddx, "gbee0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert weak["outcome"] == "new_deal" and "общие только общие слова" in weak["reason"]
+    gone = card_news.sort_news(ddx, "gnone0001", "название в кавычках и сумма", base, [], "enrich")
+    assert gone["outcome"] == "new_deal" and "нет ни в базе, ни в очереди" in gone["reason"]
+    # обычный путь — ворота: черновик из записи новости, пока она свежая
+    state = {}
+    card_news.register(state, weak)
+    drafts = card_news.rerouted_drafts(state, {}, base["deals"], now=datetime_utc("2026-11-06"))
+    assert [d["draft_id"] for d in drafts] == [weak["id"]] and drafts[0]["title"] == ddx["title"]
+    assert drafts[0]["src"][0][1] == ddx["url"]
+    # карточка по этой новости уже собрана — в ворота второй раз не идет
+    carded = base["deals"] + [{"id": "gddx0001", "src": [["Ъ", ddx["url"]]]}]
+    assert card_news.rerouted_drafts(state, {}, carded, now=datetime_utc("2026-11-06")) == []
+    # давняя — не в ворота (карточки о давних сделках без чтения), а агенту
+    assert card_news.rerouted_drafts(state, {}, base["deals"], now=datetime_utc("2026-12-31")) == []
+    _reads, old_new, _stages = card_news.queue(state, now=datetime_utc("2026-12-31"))
+    assert [e["id"] for e in old_new] == [weak["id"]]
+
+
+def test_card_news_follows_a_merged_card_and_a_stale_same_url():
+    """Слитая карточка живет под номером той, в которую ее слили; «тот же адрес
+    источника», которого в карточке больше нет, — уже не сильное совпадение
+    («Софтэкс»/Western Union висел на карточке Metro по адресу общего указа)."""
+    import card_news
+    base = _cn_base()
+    entry = card_news.sort_news(NSP_POST, "gold0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert entry["deal_id"] == "gsel0001" and entry["outcome"] == "offer"
+    softex = {"title": "«Софтэкс» получил разрешение на покупку российской «дочки» Western Union",
+              "url": "https://www.interfax.ru/business/1048850"}
+    stale = card_news.sort_news(softex, "gbee0001", "тот же адрес источника", base, [], "enrich")
+    assert stale["outcome"] == "new_deal"
+
+
+def test_card_news_rounded_sum_is_not_a_clash_but_another_number_is_read():
+    """«1,3 млрд» против «1,318 млрд» и «42%» против «42,152%» — одна величина
+    с разной точностью; другое число — расхождение, его читает агент, в базу
+    оно само не идет."""
+    import card_news
+    assert card_news.same_money("6 млрд ₽", "6 082 198 500 ₽")
+    assert card_news.same_money("1,3 млрд ₽", "1,318 млрд ₽")
+    assert not card_news.same_money("3 млрд ₽", "5–6 млрд ₽ (по оценке)")
+    assert card_news.same_share(42.0, [42.152]) and not card_news.same_share(51.0, [49.0])
+    base = _cn_base()
+    news = {"title": "Selectel купил M1Cloud за 3,1 млрд рублей", "url": "https://www.vedomosti.ru/sel"}
+    entry = card_news.sort_news(news, "gsel0001", "совпали покупатель и предмет", base, [], "enrich")
+    assert entry["outcome"] == "read" and "сумма" in entry["reason"]
+    same = card_news.sort_news(dict(news, title="Selectel купил M1Cloud за 2,6 млрд рублей",
+                                    url="https://www.vedomosti.ru/sel2"),
+                               "gsel0001", "совпали покупатель и предмет", base, [], "enrich")
+    assert same["outcome"] == "same"
+
+
+def test_card_news_weak_match_without_facts_waits_for_reading_and_reading_is_checked():
+    """Слабое совпадение без новых фактов — не решение механики: статью читает
+    агент в рутине притока. Его ответ проходит ту же проверку цитаты, что
+    review.py: цитаты нет в тексте — ответ не принят целиком."""
+    import card_news
+    base = _cn_base()
+    news = {"title": "Selectel рассказал о планах после покупки M1Cloud", "url": "https://www.cnews.ru/sel-plans",
+            "summary": "Команда M1Cloud останется в компании. Консультантом покупателя выступил Альфа-Банк."}
+    entry = card_news.sort_news(news, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert entry["outcome"] == "read", entry
+    state = {}
+    card_news.register(state, entry)
+    reads, _old, _st = card_news.queue(state)
+    assert [e["id"] for e in reads] == [entry["id"]]
+    bad = [{"id": entry["id"], "outcome": "offer", "reason": "консультант покупателя",
+            "facts": [{"field": "law.adv", "value": "Альфа-Банк", "role": "Финансовый консультант покупателя",
+                       "quote": "Альфа-Банк консультировал Selectel"}]}]
+    problems = card_news.check_answer(bad, state, base, texts=[])
+    assert any("цитаты нет" in p for p in problems[entry["id"]])
+    good = [{"id": entry["id"], "outcome": "offer", "reason": "консультант покупателя",
+             "facts": [{"field": "law.adv", "value": "Альфа-Банк", "role": "Финансовый консультант покупателя",
+                        "quote": "Консультантом покупателя выступил Альфа-Банк."}]}]
+    assert card_news.check_answer(good, state, base, texts=[]) == {}
+    card_news.apply_answer(good, state)
+    got = state["card_news"][entry["id"]]
+    assert got["outcome"] == "offer" and got["read_by"] == "agent"
+    assert [f["field"] for f in got["facts"]] == ["law.adv", "src"]
+    assert "Что увидели при чтении" in card_news.offer_message(got)
+    same = [{"id": entry["id"], "outcome": "same", "reason": "пересказ той же новости"}]
+    card_news.apply_answer(same, state)
+    assert state["card_news"][entry["id"]]["outcome"] == "same"
+
+
+def test_card_news_stage_offer_and_applying_add_and_stage():
+    """Новость об этапе — кнопка «Новый этап сделки»; «Добавить» вносит факты
+    с цитатой и источник, этап — только по «Новому этапу». Ответ владельцу
+    говорит «добавлено» только о том, что правда дошло до карточки."""
+    import card_news
+    base = _cn_base()
+    news = {"title": "«ВИМ Инвестиции» закрыли сделку по покупке 42% Swordfish Security",
+            "summary": "BIRCH консультировала «ВИМ Инвестиции» в сделке по приобретению доли в Swordfish Security.",
+            "url": "https://t.me/LawFirms/12001", "date": "2026-11-06"}
+    entry = card_news.sort_news(news, "gswo0001", "совпали покупатель и предмет", base, [], "enrich")
+    assert entry["outcome"] == "offer"
+    fields = {f["field"] for f in entry["facts"]}
+    assert {"law.adv", "stage", "stake_acquired", "src"} <= fields, fields
+    keys = [b["callback_data"] for row in card_news.offer_keyboard(entry)["inline_keyboard"] for b in row]
+    assert "mod:%s:stage" % entry["id"] in keys
+    assert "Новый этап сделки" in card_news.offer_message(entry)
+
+    plain = json.loads(json.dumps(base))
+    done, failed, where = card_news.apply_offer(json.loads(json.dumps(entry)), "card_add", plain, {"cards": []})
+    card = plain["deals"][2]
+    assert where == "base" and not failed, failed
+    assert card["law"]["adv"][0][1] == "BIRCH" and card["law"]["adv"][0][0].startswith("Юридический консультант")
+    assert card["stake_acquired"] == 42.0 and card["eco"]["share"] == "42%"
+    assert news["url"] in card_news.card_urls(card)
+    assert card["status"] == "Подписана" and not card.get("events")       # этап — только по своей кнопке
+    text = card_news.closure_text(entry, card, done, failed, where)
+    assert "добавлено" in text and "BIRCH" in text and "источник встал в список" in text
+
+    staged = json.loads(json.dumps(base))
+    card_news.apply_offer(json.loads(json.dumps(entry)), "card_stage", staged, {"cards": []})
+    card = staged["deals"][2]
+    assert card["status"] == "Закрыта"
+    assert [e["kind"] for e in card["events"]] == ["signed", "closed"]     # прежний этап не теряется
+
+    gone = card_news.apply_offer(json.loads(json.dumps(entry)), "card_add", {"deals": [], "companies": {}},
+                                 {"cards": []})
+    assert gone[0] == [] and gone[2] is None
+    text = card_news.closure_text(entry, None, gone[0], gone[1], None)
+    assert "ничего не добавлено" in text and "BIRCH" not in text
+
+
+def test_console_offer_buttons_are_routed_as_their_own_verdicts():
+    """Кнопки предложения — свои вердикты, не take/drop: старые кнопки сырья
+    работают как раньше."""
+    src = (ROOT / "app" / "console.py").read_text(encoding="utf-8")
+    assert "take|drop|edit|add|stage|other" in src
+    assert '"add": "card_add", "stage": "card_stage", "other": "card_other"' in src
+    import card_news
+    assert set(card_news.OFFER_VERDICTS) == {"card_add", "card_stage", "card_other"}
+
+
+def test_approve_applies_offer_decisions_and_answers_after_push(tmp_path, monkeypatch):
+    """«Добавить в карточку» пишет факт в карточку базы, «Это другая сделка»
+    собирает карточку в очередь тем же путем, что «в работу»; решение по
+    предложению, которого нет в памяти, сайту остается живым. Ответ владельцу
+    ждет `--consume` — после push."""
+    import approve, promote, card_news
+    base = _cn_base()
+    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    other_news = {"title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
+                  "url": "https://www.kommersant.ru/doc/9008598", "date": "2026-11-05"}
+    other = card_news.sort_news(other_news, "gsel0001", "совпали покупатель и предмет", base, [], "enrich")
+    other.update(outcome="offer", sent_at="2026-11-06T10:00:00+00:00")
+    state = {"decided_raw": {}, "raw_titles": {}, "card_news": {entry["id"]: entry, other["id"]: other}}
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}, ensure_ascii=False), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    st = tmp_path / "state.json"
+    st.write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+    consume_file = tmp_path / "consume_pending.json"
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)
+    decisions = [{"id": 1, "deal_id": entry["id"], "verdict": "card_add", "edited_text": None},
+                 {"id": 2, "deal_id": other["id"], "verdict": "card_other", "edited_text": None},
+                 {"id": 3, "deal_id": "d00000000", "verdict": "card_add", "edited_text": None}]
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(consume_file))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: (decisions, ("https://example.test", "t")))
+    monkeypatch.setattr(promote, "STATE", str(st))
+    import send_drafts
+    monkeypatch.setattr(send_drafts, "main", lambda **k: 0)          # без рассылки
+    approve.main(write=True)
+    card = next(d for d in json.loads(data.read_text(encoding="utf-8"))["deals"] if d["id"] == "gsel0001")
+    assert [r[1] for r in card["law"]["adv"]] == ["NSP"]               # заглушка «Не раскрывались» снята
+    assert NSP_POST["url"] in card_news.card_urls(card)
+    cards = json.loads(pending.read_text(encoding="utf-8"))["cards"]
+    assert [c["title"] for c in cards] == [other_news["title"]]
+    saved_state = json.loads(st.read_text(encoding="utf-8"))
+    assert saved_state["card_news"][entry["id"]]["outcome"] == "decided"
+    assert saved_state["decided_raw"][other["id"]] == "take"
+    saved = json.loads(consume_file.read_text(encoding="utf-8"))
+    assert sorted(saved["ids"]) == [1, 2]                              # решение без записи — сайту живым
+    assert any("NSP" in a and "добавлено" in a for a in saved["answers"])
+    assert any("отдельную карточку" in a for a in saved["answers"])
+
+
+def test_send_drafts_sends_an_offer_once_and_remembers_it(monkeypatch, tmp_path):
+    """Предложение уходит в консоль одним сообщением с кнопками и больше не
+    повторяется: отметка `sent_at` у записи и память показа на сайте."""
+    import send_drafts, card_news
+    base = _cn_base()
+    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    state = {"decided_raw": {}, "sent_raw": [], "raw_titles": {}, "card_news": {entry["id"]: entry}}
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}), encoding="utf-8")
+    monkeypatch.setattr(send_drafts, "DATA", str(data))
+    monkeypatch.setattr(send_drafts, "PENDING", str(pending))
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {})
+    recorded = []
+    monkeypatch.setattr(send_drafts, "record_shown", lambda cards=(), raw=(): recorded.extend(raw))
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
+    monkeypatch.setattr(send_drafts.promote, "save_state", lambda s: None)
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["111"])
+    sent = []
+    monkeypatch.setattr(send_drafts, "send_one", lambda c, t, chat, text, kb, thread=None, html=False:
+                        sent.append((text, kb)) or True)
+    monkeypatch.setattr(send_drafts.time, "sleep", lambda s: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "x")
+    send_drafts.main(write=True)
+    assert len(sent) == 1 and sent[0][0].startswith("🧩 [дополнение %s]" % entry["id"])
+    assert state["card_news"][entry["id"]]["sent_at"]
+    assert recorded == ["offer:%s" % entry["id"]]
+    sent.clear()
+    send_drafts.main(write=True)
+    assert sent == []
+
+
+def test_enrich_gives_every_unapplied_news_an_outcome(monkeypatch, tmp_path):
+    """hold/*-enrich.json перестает быть ящиком: у каждой записи — исход и
+    причина, а предложения и обычный путь новой сделки попадают в память
+    (moderation_state.json). Новость, источник которой уже в карточке, снята."""
+    import enrich, promote
+    from datetime import datetime, timezone
+    base = _cn_base()
+    day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    triage_dir = tmp_path / "triage"
+    triage_dir.mkdir()
+    items = [dict(NSP_POST, verdict="enrich:gsel0001", why="общие слова заголовка: 3"),
+             {"title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
+              "url": "https://www.kommersant.ru/doc/9008598", "date": day,
+              "verdict": "enrich:gbee0001", "why": "общие слова заголовка: 3"},
+             {"title": "«Билайн» продает свой офис", "url": "https://www.cnews.ru/bilajn", "date": day,
+              "verdict": "enrich:gbee0001", "why": "тот же адрес источника"}]
+    (triage_dir / (day + ".json")).write_text(json.dumps({"items": items}, ensure_ascii=False), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    st = tmp_path / "state.json"
+    st.write_text(json.dumps({}), encoding="utf-8")
+    monkeypatch.setattr(enrich, "DATA", str(data))
+    monkeypatch.setattr(enrich, "TRIAGE", str(triage_dir))
+    monkeypatch.setattr(enrich, "HOLD", str(tmp_path / "hold"))
+    monkeypatch.setattr(enrich, "UPDATES", str(tmp_path / "updates"))
+    monkeypatch.setattr(promote, "STATE", str(st))
+    monkeypatch.setattr(promote, "load_pending", lambda: {"cards": []})
+    enrich.main(["--write"])
+    log = json.loads((tmp_path / "hold" / (day + "-enrich.json")).read_text(encoding="utf-8"))["items"]
+    outcomes = {i["news"]: i["outcome"] for i in log}
+    assert outcomes == {NSP_POST["url"]: "offer", items[1]["url"]: "new_deal"}, outcomes
+    assert all(i["reasons"][0] for i in log)
+    book = json.loads(st.read_text(encoding="utf-8"))["card_news"]
+    assert {e["outcome"] for e in book.values()} == {"offer", "new_deal"}
+
+
+def test_acceptance_self_check_passes():
+    """accept_card.py падает до чтения карточек, если не проходит собственная
+    самопроверка (6 ноября 2026: стандарт заголовков отверг пример внутри
+    самопроверки — и приемка встала у всех рутин)."""
+    import accept_card
+    accept_card._self_check()

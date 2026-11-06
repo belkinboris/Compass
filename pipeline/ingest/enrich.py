@@ -35,7 +35,11 @@
     кавычках — 4 из 568 (0,7%), причем половина из этих четырех — настоящий
     дубль базы (две карточки про выход Volkswagen), а не ошибка правила.
     Дописать факт не в ту карточку хуже, чем не дописать вовсе, поэтому слабое
-    совпадение уходит человеку в `data/inbox/hold/`.
+    совпадение сравнивается с карточкой по фактам в `card_news.py` (с 6 ноября
+    2026): нового нет — снимается с причиной, новое есть — предложение
+    владельцу в консоль, ворота ошиблись карточкой — обычный путь новой сделки,
+    механика не решает — чтение агентом. `data/inbox/hold/<день>-enrich.json`
+    теперь журнал этих исходов, а не очередь.
   * ПРЕДМЕТ СДЕЛКИ НЕ ДОПИСЫВАЕТСЯ. Его качество не измерено (в замере
     `draft.py --measure` столбца «предмет» нет), а неизмеренному правилу базу не
     доверяем.
@@ -570,27 +574,45 @@ def main(argv):
         print('Новостей о сделках из базы за %s нет.' % day)
         return
 
-    applied, held, nothing, updates = [], [], 0, []
+    # НОВОСТЬ, КОТОРУЮ ЭТОТ ШАГ САМ НЕ ДОПИСАЛ, — НЕ В ЯЩИК (6 ноября 2026).
+    # Раньше слабое совпадение, пропавшая карточка и расхождение ложились в
+    # hold/*-enrich.json, который никто не читал (юрист NSP у Selectel/M1Cloud
+    # семь недель, сделка DDX/Vesper целиком). Теперь каждая получает исход в
+    # card_news.py: снята с причиной, предложение владельцу, чтение агентом или
+    # обычный путь новой сделки. И у дописанной новости проверяется то, чего
+    # этот шаг не пишет сам: консультанты и доля — они идут предложением.
+    import card_news
+    import promote as _promote
+    pending_cards = _promote.load_pending().get('cards') or []
+    firms = card_news.firm_dictionary(data)
+    applied, held, nothing, updates, news_entries = [], [], 0, [], []
     for item in items:
-        deal_id = item['verdict'].split(':', 1)[1]
+        deal_id = card_news.resolve_id(item['verdict'].split(':', 1)[1], data)
         deal = by_id.get(deal_id)
-        if deal is None:
-            held.append((item, None, [('—', '', 'расхождение', 'карточка %s не найдена' % deal_id)]))
-            continue
-        if not is_strong(item.get('why')):
-            held.append((item, deal, [('—', '', 'расхождение',
-                                       'слабое совпадение: %s' % item.get('why'))]))
+        if deal is None or not card_news.strong_now(item.get('why'), deal, item):
+            entry = card_news.sort_news(item, deal_id, item.get('why'), data, pending_cards, 'enrich', firms=firms)
+            news_entries.append(entry)
+            held.append((item, entry))
             continue
         props = proposals(deal, item, names, data['companies'], data.get('match_keys'))
-        clash = [p for p in props if p[2] == 'расхождение']
         good = [p for p in props if p[2] != 'расхождение']
-        if clash:
-            held.append((item, deal, clash))
+        after = apply_props(json.loads(json.dumps(deal)), good) if good else json.loads(json.dumps(deal))
+        # Сверка — с карточкой ПОСЛЕ автоматической дописки, но адрес этой
+        # новости, если его дописали только что, не считается известным: иначе
+        # сверка решила бы «карточку собирали по этому тексту» и не увидела бы
+        # консультанта.
+        probe = json.loads(json.dumps(after))
+        if any(p[0] == 'src' for p in good):
+            probe['src'] = [s for s in probe.get('src') or [] if not (len(s) > 1 and s[1] == item.get('url'))]
+        entry = card_news.sort_news(item, deal_id, item.get('why'), data, pending_cards, 'enrich',
+                                    card=probe, firms=firms)
+        if entry['outcome'] != 'same':
+            news_entries.append(entry)
+            held.append((item, entry))
         if not good:
             nothing += 1
             continue
         before = json.loads(json.dumps(deal))
-        after = apply_props(json.loads(json.dumps(deal)), good)
         change_list = format_post.changes(before, after)
         applied.append((item, deal_id, good, change_list))
         if write:
@@ -600,7 +622,7 @@ def main(argv):
                         'notify': format_post.should_notify(change_list),
                         'fields': [p[0] for p in good]})
 
-    print('Новостей о сделках из базы: %d | дописать: %d | на решение: %d | нечего добавить: %d'
+    print('Новостей о сделках из базы: %d | дописать: %d | на разбор: %d | нечего добавить: %d'
           % (len(items), len(applied), len(held), nothing))
     for item, deal_id, good, change_list in applied:
         print('  ДОПИСАТЬ     %s -> %s' % (str(item.get('title'))[:60], deal_id))
@@ -610,20 +632,31 @@ def main(argv):
         if change_list:
             print('               пост: %s | уведомлять: %s'
                   % (', '.join(change_list), 'да' if format_post.should_notify(change_list) else 'нет'))
-    for item, _deal, reasons in held:
-        print('  НА РЕШЕНИЕ   %s' % str(item.get('title'))[:60])
-        for field, _value, _kind, why in reasons:
-            print('               %s: %s' % (field, why))
+    word = {'same': 'СНЯТА', 'offer': 'ПРЕДЛОЖЕНИЕ', 'read': 'ЧИТАТЬ', 'new_deal': 'НОВАЯ СДЕЛКА'}
+    for item, entry in held:
+        print('  %-12s %s -> %s' % (word.get(entry['outcome'], entry['outcome']),
+                                     str(item.get('title'))[:60], entry['deal_id']))
+        print('               %s' % entry.get('reason'))
+        for f in entry.get('facts') or []:
+            if f['field'] != 'src':
+                print('               + %s' % f['label'])
 
     if held:
+        # Тот же файл, но у каждой записи — исход и причина (что с ней стало,
+        # видно без чтения кода): hold-файл больше не очередь, а журнал.
         os.makedirs(HOLD, exist_ok=True)
         out = os.path.join(HOLD, day + '-enrich.json')
         json.dump({'made': day, 'items': [
             {'news': i.get('url'), 'title': i.get('title'), 'verdict': i.get('verdict'),
-             'why': i.get('why'), 'reasons': [r[3] for r in reasons]}
-            for i, _d, reasons in held]}, open(out, 'w', encoding='utf-8'),
+             'why': i.get('why'), 'id': e['id'], 'deal_id': e['deal_id'], 'outcome': e['outcome'],
+             'reasons': [e.get('reason')] + list(e.get('clashes') or [])}
+            for i, e in held]}, open(out, 'w', encoding='utf-8'),
             indent=1, ensure_ascii=False)
-        print('  (ожидающие решения: %s)' % os.path.relpath(out, ROOT))
+        print('  (разбор записан: %s; предложения и чтение — card_news.py)' % os.path.relpath(out, ROOT))
+
+    if write and news_entries:
+        card_news.save_entries(news_entries)
+        print('  Исходы записаны в moderation_state.json: %d.' % len(news_entries))
 
     if not write:
         print('\nСухой прогон. Запись — с ключом --write.')

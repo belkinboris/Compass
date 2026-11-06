@@ -910,6 +910,15 @@ def main(write):
     for name in files:
         if name.endswith('.json'):
             drafts += json.load(open(os.path.join(DRAFTS, name), encoding='utf-8'))['drafts']
+    # НОВОСТЬ, КОТОРУЮ ФИЛЬТР ПРИВЯЗАЛ НЕ К ТОЙ КАРТОЧКЕ, — СНОВА В ВОРОТА
+    # (6 ноября 2026, DDX/Vesper: карточку, к которой фильтр привязал две
+    # новости, слили, и сделка не дошла никуда). card_news.py помнит такие
+    # новости в moderation_state.json; ворота получают их обычным черновиком,
+    # пока они свежие, и разбирают как любую новую сделку.
+    import card_news
+    have = {str(d.get('draft_id')) for d in drafts}
+    drafts += [d for d in card_news.rerouted_drafts(load_state(), data['companies'], data['deals'] + queued)
+               if str(d.get('draft_id')) not in have]
     if not drafts:
         print('Черновиков нет — сначала fetch.py, triage.py и draft.py.')
         return
