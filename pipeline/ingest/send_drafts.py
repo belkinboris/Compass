@@ -646,10 +646,11 @@ def build_plan(resend=None, only=None):
     # или дополнение: консоль не видит его ENRICH_WAIT_H часов, пока приток
     # (raw_screen.py --enrich) читает статью; не разобрал — новость идет в
     # консоль с пометкой, на какую карточку похожа.
+    import card_news
+    firms = card_news.firm_dictionary(base)
     known_titles = promote.known_raw_titles(state, [], [])
     known_cards = promote.known_card_titles(pending.get('cards') or [], base.get('deals') or [])
     waiting = state.setdefault('enrich_wait', {})
-    now_iso = datetime.now(timezone.utc).isoformat(timespec='seconds')
     for d in ([] if resend else latest_hold_drafts()):
         if str(d['draft_id']) in seen or promote.raw_key(d.get('title')) in seen_titles \
                 or promote.raw_key(d.get('title')) in shown_raw \
@@ -669,27 +670,44 @@ def build_plan(resend=None, only=None):
             twin, twin_title = promote.card_same_news(d.get('title'), known_cards)
             why_twin = 'похожий заголовок: «%s»' % str(twin_title or '')[:80]
         if twin:
+            # Новость о сделке, которая уже есть в базе, — не вопрос «это
+            # сделка?»: «Это сделка» делала дубль, а новое из новости в ту
+            # карточку доходило не всегда (6 ноября 2026, BIRCH/Swordfish).
+            # Новость сравнивается с карточкой по фактам (card_news.py): нового
+            # нет — снята с причиной; новое есть — конкретное предложение
+            # «добавить в карточку» (ниже, plan_offers); ворота ошиблись
+            # карточкой — обычное сырье без подсказки на чужую карточку;
+            # механика не решает — ждет чтения агентом ENRICH_WAIT_H часов,
+            # потом владельцу предложением «добавить источник».
             did = str(d.get('draft_id'))
-            first = waiting.setdefault(did, {'card': twin, 'since': now_iso})['since']
-            if _hours_since(first) >= ENRICH_WAIT_H:
-                # Приток не дописал карточку и не выкинул новость — значит, не
-                # уверен. Решает человек, с подсказкой.
+            entry = card_news.sort_news(card_news.news_of_draft(d), twin, why_twin, base,
+                                        pending.get('cards') or [], 'raw', firms=firms)
+            old_wait = waiting.pop(did, None)
+            if old_wait and old_wait.get('since'):
+                entry['since'] = old_wait['since']
+            entry = card_news.register(state, entry)
+            card_news.escalate(entry)
+            if entry['outcome'] == 'new_deal':
+                d = dict(d, hold_reasons=[r for r in d.get('hold_reasons') or []
+                                          if promote.DUP_CANDIDATE_MARK not in str(r)] + [
+                    'ворота сочли новость похожей на карточку %s, но %s — похоже на новую сделку'
+                    % (twin, entry.get('reason'))])
+                fresh_raw.append(d)
+            elif entry['outcome'] == 'same':
+                print('  повтор карточки %s, нового нет — снята: «%s» (%s)'
+                      % (entry['deal_id'], str(d.get('title'))[:60], entry.get('reason')))
+            elif entry['outcome'] == 'read' and _hours_since(entry.get('since')) >= ENRICH_WAIT_H \
+                    and not entry.get('clashes'):
+                # Предлагать нечего (у сырья нет адреса) — тогда, как раньше,
+                # владельцу сырьем с подсказкой, на какую карточку похоже.
                 d = dict(d, hold_reasons=list(d.get('hold_reasons') or []) + [
                     'похоже на карточку %s (%s), но приток не нашел, что в нее дописать, — '
                     'возможно, это другая сделка или новый этап' % (twin, why_twin)])
-                waiting.pop(did, None)
                 fresh_raw.append(d)
-                continue
-            # Новость о сделке, которая уже есть в базе (ворота нашли карточку
-            # по общим редким словам или названию в кавычках), — не вопрос
-            # владельцу: «Это сделка» сделает дубль, «Не сделка» — неправда.
-            # 29 октября 2026 «„Бумеранг Капитал“ приобрел 50% Baggins Coffee»
-            # пришел в консоль через утро после поста о той же сделке
-            # (g25a6766d): «Что тут нажать? Очевидно у нас уже эта сделка
-            # выходила». Остается в сырье для притока: raw_screen.py --enrich.
-            print('  возможно, этап или дополнение карточки %s (%s) — ждет притока до %d ч, потом в консоль: '
-                  'raw_screen.py --enrich %s=%s | «%s»'
-                  % (twin, why_twin, ENRICH_WAIT_H, d.get('draft_id'), twin, str(d.get('title'))[:60]))
+            elif entry['outcome'] == 'read':
+                print('  похоже на карточку %s (%s) — ждет чтения (card_news.py --queue) до %d ч, '
+                      'потом предложением в консоль | «%s»'
+                      % (entry['deal_id'], why_twin, ENRICH_WAIT_H, str(d.get('title'))[:60]))
             continue
         # Иностранный контур без российского элемента не публикуем (решение
         # владельца 5–6 августа) — и в консоль не носим: сырье по молчанию не
@@ -705,6 +723,13 @@ def build_plan(resend=None, only=None):
         fresh_raw.append(d)
     for draft in ([] if only else fresh_raw[:RAW_PER_RUN]):
         plan.append((raw_message(draft), raw_keyboard(draft), ('raw', draft, None)))
+    # Предложения «добавить в карточку» (card_news.py): из обогащения, из
+    # сырья выше, из чтения агентом. Ссылка ведет на ту карточку — значит, она
+    # уже на сайте или в очереди, которую сайт отдает.
+    if not (resend or only):
+        for entry in card_news.plan_offers(state, base, pending.get('cards') or [], shown=shown_raw):
+            plan.append((card_news.offer_message(entry), card_news.offer_keyboard(entry),
+                         ('offer', entry, None)))
     return plan, pending, state, max(0, len(fresh_raw) - RAW_PER_RUN), postponed, foreign, unread, unaccepted, unread2
 
 
@@ -859,6 +884,8 @@ def main(write=False, resend=None, only=None):
                         item['post_preview'] = pending_preview
                     if mark == 'post_draft_sent' or not goes_to_channel(item):
                         record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}])
+                elif kind == 'offer':
+                    item['sent_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
                 else:
                     state.setdefault('sent_raw', []).append(str(item['draft_id']))
                     state.setdefault('raw_titles', {})[promote.raw_key(item.get('title'))] = 'sent'
@@ -870,7 +897,9 @@ def main(write=False, resend=None, only=None):
     record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}
                         for _t, _k, (kind, item, mark) in plan if kind == 'card' and item.get(mark)],
                  raw=[promote.raw_key(item.get('title')) for _t, _k, (kind, item, _m) in plan
-                      if kind == 'raw' and str(item['draft_id']) in state.get('sent_raw', [])])
+                      if kind == 'raw' and str(item['draft_id']) in state.get('sent_raw', [])]
+                 + ['offer:%s' % item['id'] for _t, _k, (kind, item, _m) in plan
+                    if kind == 'offer' and item.get('sent_at')])
     print('Отправлено сообщений: %d' % sent)
     return 0
 

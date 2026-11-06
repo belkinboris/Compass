@@ -120,6 +120,12 @@ def consume_pending():
         return 0
     consume((site, token), ids)
     os.remove(PENDING_CONSUME)
+    # Ответы владельцу на «Добавить в карточку» / «Это другая сделка» — только
+    # теперь, когда записанное пережило push (то же правило, что «поправлено»
+    # в ответах на заметки: не раньше, чем правка в origin/main).
+    if saved.get('answers'):
+        import drop_pending
+        drop_pending.notify_console(saved['answers'])
     print('Подтверждено примененных решений: %d.' % len(ids))
     return 0
 
@@ -369,6 +375,19 @@ def main(write=False):
                         seen_draft_ids.add(did)
                         raw_all.append(draft)
     taken, dropped = plan_raw(raw_all, decisions, decided_raw, state.get('raw_sent_titles') or {})
+    # ПРЕДЛОЖЕНИЯ «К КАРТОЧКЕ … ДОБАВИТЬ» (card_news.py, 6 ноября 2026):
+    # кнопки «Добавить в карточку» / «Новый этап сделки» / «Это другая
+    # сделка». Запись предложения лежит в moderation_state.json (в git), так
+    # что ее видит любой контейнер; решение без записи — не наше, сайту
+    # остается живым, как сырье без черновика.
+    import card_news
+    offers, offers_orphan = [], []
+    for nid, d in card_news.decided_offers(decisions).items():
+        entry = card_news.book(state).get(nid)
+        if entry is None:
+            offers_orphan.append(d)
+        elif entry.get('outcome') != 'decided':
+            offers.append((entry, d))
     # РЕШЕНИЕ, КОТОРОЕ НЕКУДА ПРИМЕНИТЬ, НЕЛЬЗЯ ОБЪЯВЛЯТЬ ПРИМЕНЕННЫМ.
     # Сырье лежит в `data/inbox/hold/` — а эта папка не хранится в git и
     # живет на диске той рутины, которая ее создала. Прогон в другом
@@ -403,6 +422,13 @@ def main(write=False):
 
     for draft in taken:
         print('  В РАБОТУ    %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
+    for entry, d in offers:
+        print('  %-11s %-11s %s -> %s' % ({'card_add': 'В КАРТОЧКУ', 'card_stage': 'НОВЫЙ ЭТАП',
+                                           'card_other': 'ДРУГАЯ'}[d['verdict']], entry['id'],
+                                          str((entry.get('news') or {}).get('title'))[:50], entry['deal_id']))
+    for d in offers_orphan:
+        print('  НЕ ПРИМЕНЕНО %-10s решение «%s» по предложению, которого нет в памяти — оставляю сайту'
+              % (d['deal_id'], d['verdict']))
     for draft in dropped:
         print('  ОТБРОШЕНА   %-11s %s' % (draft['draft_id'], str(draft.get('title'))[:56]))
     # Решение, чей черновик не появился ни на одном диске за неделю, не
@@ -526,6 +552,29 @@ def main(write=False):
     # Карточка, рожденная кнопкой «это сделка — в работу», проходит те же
     # шаги, что и карточка из ворот: иначе стороны остаются текстом и
     # карточка некликабельна (замер 11 сентября 2026 — 107 из 145).
+    # «Это другая сделка» — тот же путь, что «Это сделка — в работу»: черновик
+    # (сырье из hold или сборка из записи новости) становится карточкой.
+    # «Добавить» и «Новый этап» пишут факты с цитатой в ту карточку; ответ
+    # владельцу уходит после push (`--consume`), и «добавлено» в нем — только
+    # если источник новости правда стоит в карточке.
+    offer_answers = []
+    for entry, d in offers:
+        verdict = d['verdict']
+        if verdict == 'card_other':
+            draft = card_news.draft_for(entry, raw_all, data['companies'])
+            if str(draft.get('draft_id')) not in {str(x.get('draft_id')) for x in taken}:
+                taken.append(draft)
+            entry.update(outcome='decided', decision=verdict, decided_at=now.isoformat(timespec='seconds'))
+            offer_answers.append(card_news.other_text(entry))
+            continue
+        done, failed, where = card_news.apply_offer(entry, verdict, data, pending, now)
+        card, _w = card_news.find_card(entry['deal_id'], data, pending['cards'])
+        if where == 'base':
+            base_changed = True
+        card_news.mark_raw(state, entry, 'enrich:%s' % entry['deal_id'])
+        offer_answers.append(card_news.closure_text(entry, card, done, failed, where))
+        print('  %s: %s%s' % (entry['deal_id'], ', '.join(done) or 'ничего',
+                              ('; не внесено — ' + '; '.join('%s: %s' % x for x in failed)) if failed else ''))
     import link_parties
     party_index = link_parties.build_index(data['companies'])
     for draft in taken:
@@ -576,7 +625,7 @@ def main(write=False):
         state.setdefault('decided_raw', {})[str(d['deal_id'])] = d['verdict']
     if stale_orphan:
         promote.save_state(state)
-    orphan_ids = {d['id'] for d in orphan}
+    orphan_ids = {d['id'] for d in orphan} | {d['id'] for d in offers_orphan}
     # ЧУЖИЕ РЕШЕНИЯ НЕ ГАСИМ (30 октября 2026). Решение с «~» в deal_id — не
     # о карточке: этап (`<id>~closed`), сводка (`digest~2026-10`), правка
     # поста (`<id>~edit`), ИНН (`инн~<id>`). Их читает и гасит send_telegram
@@ -589,7 +638,7 @@ def main(write=False):
                       and not foreign_decision(d)]
     if handle and ids_to_consume:
         site, token = handle
-        json.dump({'site': site, 'token': token, 'ids': ids_to_consume},
+        json.dump({'site': site, 'token': token, 'ids': ids_to_consume, 'answers': offer_answers},
                   open(PENDING_CONSUME, 'w', encoding='utf-8'))
         print('Решений отложено на подтверждение после push: %d (approve.py --consume).'
               % len(ids_to_consume))

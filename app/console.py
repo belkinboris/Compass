@@ -313,7 +313,10 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         # уже занят разбором `mod:<id>:<вердикт>` целиком. Длина увеличена
         # с 40 до 60 — комбинация «id сделки + ~ + вид этапа» бывает длиннее
         # одного голого id.
-        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|take|drop|edit)$",
+        # add / stage / other — кнопки предложения «к карточке … добавить»
+        # (pipeline/ingest/card_news.py, 6 ноября 2026): номер — номер новости,
+        # применяет approve.py. Старые take/drop под сырьем работают как раньше.
+        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|take|drop|edit|add|stage|other)$",
                          str(callback.get("data") or ""))
         if match and match.group(2) == "edit" and _is_reviewer(from_id):
             # «Изменить» — не вердикт, а подсказка, как продиктовать правку:
@@ -328,7 +331,8 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         if match and _is_reviewer(from_id):
             verdict = {"ok": "approve", "hold": "hold", "discard": "discard",
                        "post_ok": "post_yes",
-                       "post_no": "post_no", "take": "take", "drop": "drop"}[match.group(2)]
+                       "post_no": "post_no", "take": "take", "drop": "drop",
+                       "add": "card_add", "stage": "card_stage", "other": "card_other"}[match.group(2)]
             if verdict in ("approve", "hold", "discard", "post_yes", "post_no") \
                     and _already_on_site(match.group(1)):
                 if callback.get("id"):
@@ -1356,6 +1360,9 @@ _VERDICT_LABEL = {
     "discard": "🗑 Выкинута — не выйдет ни на сайт, ни в канал",
     "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
     "take": "✅ Признана сделкой — уйдет в работу", "drop": "🗑 Отброшена как не-сделка",
+    "card_add": "✅ Добавим в карточку",
+    "card_stage": "📌 Запишем новым этапом сделки",
+    "card_other": "🆕 Другая сделка — соберем отдельную карточку",
     "acc_ok": "✅ Доступ открыт — человек может войти",
     "acc_no": "🗑 Отклонено — доступ не открыт",
     "claim_ok": "✅ Подтверждено — карточка подключена к кабинету",
