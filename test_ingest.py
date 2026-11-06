@@ -9979,3 +9979,16 @@ def test_ship_decisions_stops_when_the_site_did_not_return_decisions():
         'Сайт ответил 502 на запрос решений — работаем без них.'
     assert mod.site_failure('Решения недоступны (ReadTimeout) — работаем без них.').startswith('Решения недоступны')
     assert mod.site_failure('  ЖДЕТ        g9b4c2e71   ждем решения (3 ч из 24)\nСухой прогон. Применение — с ключом --write.') == ''
+
+
+def test_post_not_before_holds_the_first_post_until_the_date():
+    """Владелец, 6 ноября 2026: посты подтверждены, но выйти должны не сегодня.
+    `post_not_before` держит пост между прогонами, `--skip` — только один вызов."""
+    import datetime as _dt
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('send_telegram_hold', 'pipeline/publish/send_telegram.py')
+    st = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(st)
+    deals = [{'id': 'a', 'post_not_before': '2026-11-07'}, {'id': 'b'}, {'id': 'c', 'post_not_before': '2026-11-06'}]
+    assert st.held_until(deals, _dt.date(2026, 11, 6)) == frozenset({'a'})
+    assert st.held_until(deals, _dt.date(2026, 11, 7)) == frozenset()
