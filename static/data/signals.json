@@ -2,20 +2,6 @@
  "updated": "2026-11-06",
  "signals": [
   {
-   "id": "sac22a0cae",
-   "company_id": "g65d1691b",
-   "date": "2026-11-06",
-   "kind": "buy",
-   "summary": "Группа Т-Технологии — возможная покупка: Циан",
-   "source": [
-    "kommersant.ru",
-    "https://www.kommersant.ru/doc/9081524"
-   ],
-   "origin": "news",
-   "strength": "normal",
-   "object_id": "g163cfc8b"
-  },
-  {
    "id": "s9b318d5cb",
    "company_id": "g65d1691b",
    "date": "2026-11-06",
@@ -44,6 +30,20 @@
    "object_id": "g163cfc8b"
   },
   {
+   "id": "s61b595e5e",
+   "company_id": "g163cfc8b",
+   "date": "2026-11-06",
+   "kind": "for_sale",
+   "summary": "Циан — обсуждается продажа компании или доли; возможный покупатель — Группа Т-Технологии",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9081524"
+   ],
+   "origin": "card",
+   "deal_id": "g9b4c2e71",
+   "strength": "strong"
+  },
+  {
    "id": "s42a9b22e5",
    "company_id": "g65d1691b",
    "date": "2026-11-06",
@@ -56,6 +56,20 @@
    "origin": "news",
    "strength": "normal",
    "object_id": "g163cfc8b"
+  },
+  {
+   "id": "s2fb373928",
+   "company_id": "g65d1691b",
+   "date": "2026-11-06",
+   "kind": "buy",
+   "summary": "Группа Т-Технологии — обсуждается покупка: Циан",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9081524"
+   ],
+   "origin": "card",
+   "deal_id": "g9b4c2e71",
+   "strength": "normal"
   },
   {
    "id": "s271db3f69",
