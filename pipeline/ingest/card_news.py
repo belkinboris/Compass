@@ -527,8 +527,22 @@ def misrouted(deal_id, card, news, why, companies):
         return 'карточки %s нет ни в базе, ни в очереди' % deal_id
     if strong_now(why, card, news):
         return None
+    text = news_text(news)
+    # РАЗНЫЕ НАЗВАНИЯ В КАВЫЧКАХ — РАЗНЫЕ ОБЪЕКТЫ (владелец, 6 ноября 2026: пермский
+    # ЖК «Сибирский квартал» предложили дописать к ДЦ «Волна» — общими были только
+    # «Перми» и «продают»). Город, отрасль, глагол сделку не опознают; название
+    # объекта или компании в кавычках — опознает. У карточки есть свои названия,
+    # ни одного нет в новости, а в новости стоит свое — это другая сделка.
+    card_quoted = [q for q in matcher.quoted(' '.join(str(card.get(k) or '') for k in ('title', 'asset')))
+                   if len(flat(q)) >= 3]
+    news_quoted = [q for q in matcher.quoted(text) if len(flat(q)) >= 3]
+    if card_quoted and news_quoted and not names_in_text(card_quoted, text) \
+            and not any(flat(q) in flat(' '.join(card_quoted)) for q in news_quoted):
+        return ('у карточки %s свои названия (%s), в новости другие (%s) — другой объект'
+                % (deal_id, ', '.join('«%s»' % q for q in card_quoted[:3]),
+                   ', '.join('«%s»' % q for q in news_quoted[:3])))
     names = card_names(card, companies) + title_names(card.get('title'))
-    if not names_in_text(names, news_text(news)):
+    if not names_in_text(names, text):
         return 'с карточкой %s общие только общие слова (%s), ни одного ее имени в новости нет' % (deal_id, why)
     return None
 
@@ -610,17 +624,26 @@ def mark_raw(state, entry, verdict):
 
 
 def escalate(entry, now=None):
-    """Сырье, которое агент не прочитал за READ_WAIT_H часов, — владельцу, но
-    конкретным предложением «добавить источник», а не «сомнительной»."""
+    """Слабое совпадение, которое агент не прочитал за READ_WAIT_H часов, —
+    обычным путем новой сделки, а не вопросом владельцу «та же ли это сделка»
+    (владелец, 6 ноября 2026: «это автоматом должно было без меня решиться»).
+    Владельцу идут только предложения с конкретным новым фактом."""
     if entry.get('outcome') != 'read' or entry.get('origin') != 'raw' or entry.get('clashes'):
         return False
     if _hours_since(entry.get('since'), now) < READ_WAIT_H:
         return False
-    if not any(f['field'] == 'src' for f in entry.get('facts') or []):
-        return False
-    entry['outcome'] = 'offer'
-    entry['reason'] = ('проверили механически: новых чисел, консультантов или этапа нет, '
-                       'и мы не уверены, что это та же сделка')
+    news = entry.get('news') or {}
+    text = news_text(news)
+    quoted = [q for q in matcher.quoted(entry.get('card_title') or '') if len(flat(q)) >= 3]
+    if quoted and names_in_text(quoted, text):
+        # Название из карточки в новости есть, нового факта нет — та же сделка.
+        entry['outcome'] = 'same'
+        entry['reason'] = ('в новости то же название, что в карточке %s (%s), нового для нее нет — '
+                           'снята как повтор' % (entry.get('deal_id'), ', '.join('«%s»' % q for q in quoted[:2])))
+    else:
+        entry['outcome'] = 'new_deal'
+        entry['reason'] = ('совпадение с карточкой %s слабое: ее названия в новости нет, нового факта для '
+                           'нее нет — новость идет как новая сделка' % entry.get('deal_id'))
     return True
 
 

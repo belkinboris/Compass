@@ -678,7 +678,9 @@ def build_plan(resend=None, only=None):
             # «добавить в карточку» (ниже, plan_offers); ворота ошиблись
             # карточкой — обычное сырье без подсказки на чужую карточку;
             # механика не решает — ждет чтения агентом ENRICH_WAIT_H часов,
-            # потом владельцу предложением «добавить источник».
+            # потом решается сама (card_news.escalate): название карточки в
+            # новости есть — повтор, снята; нет — новая сделка обычным путем.
+            # Вопроса «та же ли это сделка» владельцу нет (6 ноября 2026).
             did = str(d.get('draft_id'))
             entry = card_news.sort_news(card_news.news_of_draft(d), twin, why_twin, base,
                                         pending.get('cards') or [], 'raw', firms=firms)
@@ -686,7 +688,8 @@ def build_plan(resend=None, only=None):
             if old_wait and old_wait.get('since'):
                 entry['since'] = old_wait['since']
             entry = card_news.register(state, entry)
-            card_news.escalate(entry)
+            if card_news.escalate(entry) and entry['outcome'] == 'same':
+                card_news.mark_raw(state, entry, 'enrich:%s' % entry['deal_id'])
             if entry['outcome'] == 'new_deal':
                 d = dict(d, hold_reasons=[r for r in d.get('hold_reasons') or []
                                           if promote.DUP_CANDIDATE_MARK not in str(r)] + [
