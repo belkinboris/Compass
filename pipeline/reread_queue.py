@@ -74,7 +74,7 @@ SOURCE_QUESTIONS = {
 # Находки приемки, с которыми отметка не ставится без причины в `ok_findings`:
 # смысловые и те, что видны читателю. Формальные (ИНН, профиль стороны,
 # строка поста) правятся своими шагами и отметку не держат.
-BLOCKING = ('share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
+BLOCKING = ('title_standard', 'share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
             'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants')
 
 
@@ -141,8 +141,19 @@ def registry_lines(card, data, fetch=None):
 
 
 def _findings(card, data):
+    """Находки приемки плюс стандарт заголовка. Приемка у опубликованной
+    карточки заголовок не проверяет (переписывать вышедшее — не ее дело), а
+    вычитка — проверяет: заголовок переписывается в том же проходе, что и
+    остальные поля, а не отдельной партией (владелец, 6 ноября 2026: «добавь
+    изменение названия в глубокую проверку… двойная работа не нужна»)."""
     import accept_card
-    return accept_card.findings(card, data)
+    out = [f for f in accept_card.findings(card, data) if f[0] != 'title_standard']
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import title_standard
+    if title_standard.verb_ok(card) is False:
+        out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s (pipeline/title_standard.py)'
+                    % (card.get('type'), card.get('status'), title_standard.hint(card))))
+    return out
 
 
 def dossier(card, why, data):
