@@ -37,7 +37,11 @@ def render_screens(card, companies):
            '%s → %s' % (buyer or '?', asset or '?'), card.get('title') or '', 'Тип: %s' % (card.get('type') or ''), '',
            'ОБЗОР', '%s: %s' % ('Начальная цена лота' if listing else 'Сумма',
                                  card.get('sum') if has(card.get('sum')) else 'Не раскрыта')]
-    out += _row('Продавец', seller) + _row('Предмет сделки', card.get('asset') or asset) + _row('Покупатель', buyer)
+    # Подпись покупателя — как на плашке сайта: у передачи в управление это
+    # «Управляющая компания» (владелец, 6 ноября 2026).
+    buyer_label = {'management': 'Управляющая компания', 'custody': 'Временный управляющий'}.get(
+        format_post.deal_kind(card), 'Покупатель')
+    out += _row('Продавец', seller) + _row('Предмет сделки', card.get('asset') or asset) + _row(buyer_label, buyer)
     # С 28 октября 2026 на сайте две вкладки: «Обзор» (стороны, структура,
     # согласования, условия, консультанты, цель, контекст) и «Финансы»
     # (сумма и оценка, доля, показатели из статьи, форма расчетов,
@@ -54,7 +58,7 @@ def render_screens(card, companies):
     out += ['', 'ФИНАНСЫ']
     if has(eco.get('sum')) and (listing or _norm(eco.get('sum')) != _norm(card.get('sum'))):
         out += _row('Начальная цена лота' if listing else 'Сумма сделки', eco.get('sum'))
-    out += (_row('Оценка и дисконт', eco.get('val')) + _row('Показатели компании', eco.get('target_fin'))
+    out += (_row('Цена', eco.get('price_per_share')) + _row('Оценка и дисконт', eco.get('val')) + _row('Показатели компании', eco.get('target_fin'))
             + _row('Форма расчетов', eco.get('fin')))
     out += ['', 'ПОСТ В КАНАЛ']
     try:

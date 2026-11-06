@@ -3137,7 +3137,9 @@ def _estimate_report(db, deal: dict):
     ).order_by(FinancialReport.year.desc()))
     if not row:
         return None, (entity.legal_name if entity else None)
-    return deal_multiples.report_dict(row), entity.legal_name
+    # ОКВЭД юрлица — признак холдинга: его РСБУ без выручки дочерних обществ
+    # (price_estimate.report_mismatch, «Медскан», 6 ноября 2026).
+    return dict(deal_multiples.report_dict(row), okved_code=getattr(entity, "okved_code", None)), entity.legal_name
 
 
 @router.get("/api/deals/{deal_id}/price-estimate")
@@ -3196,8 +3198,9 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
         "range_kind": summary.get("range_kind") or "estimate",
         "paragraphs": paragraphs or price_estimate.template_text(summary),
         "by": by,
-        "methods": [{"label": m["label"], "base": f'{m["base_name"]} за {m["report_year"]} год — '
-                     f'{price_estimate.money(m["base_rub"])}',
+        "methods": [{"label": m["label"], "base": f'{m["base_name"]}'
+                     + (f' за {m["report_year"]} год' if m["report_year"] else "")
+                     + f' — {price_estimate.money(m["base_rub"])}',
                      "multiple": str(m["median"]).replace(".", ",") + "×",
                      "where": (f'{m["external"]["source"]}: {"сделки" if m["external"]["kind"] == "deals" else "биржа"}, '
                                f'«{m["external"]["label"]}», {m["external"]["year"]}')
@@ -3205,6 +3208,9 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
                      ((f'база Компаса, отрасль «{m["industry"]}»' if m["industry"] else "база Компаса, все отрасли")
                       + ', ' + price_estimate.deals_word(m["count"])),
                      "url": (m.get("external") or {}).get("url"),
+                     # Метод не вошел в итог (отчетность не той компании, меньше
+                     # баланса) — строка остается, с причиной (6 ноября 2026).
+                     "unreliable": price_estimate.UNRELIABLE_TEXT.get(m.get("unreliable") or ""),
                      "result": price_estimate.money(m["stake_rub"] or m["full_rub"])}
                     for m in summary["methods"]],
         # Мировой ориентир (Дамодаран) — только когда российских методов нет:
@@ -3226,6 +3232,12 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
                          + (f' за {price_estimate._pct(c["stake"])}' if c["stake"] and c["stake"] < 99.5 else "")}
                         for c in summary["comparables"]],
         "experts": summary["experts"],
+        # Оценка источников числом — рядом с итогом, с расхождением и причиной
+        # (владелец, 6 ноября 2026: «ориентируйся на оценочное число тоже»).
+        "source": ({"line": price_estimate.source_line(summary),
+                    "divergent": bool(summary["source_value"].get("divergent")),
+                    "reason": summary["source_value"].get("reason")}
+                   if summary.get("source_value") and summary.get("range_kind") != "sources" else None),
         "stake": summary["stake"],
     }
     if by == "model" or not os.environ.get("YANDEX_API_KEY"):

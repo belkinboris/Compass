@@ -122,18 +122,124 @@ COMPARABLES_MAX = 5
 # 521 млн ₽) сравнивали с Росспиртпромом за 8,3 млрд ₽ (владелец, 27 октября
 # 2026: «они вообще несопоставимы»).
 SIZE_RATIO_MAX = 6.0
-_CARD_REVENUE = re.compile(r'выручк\w*[^.;]{0,80}?(\d+(?:[.,]\d+)?)\s*(млрд|млн)\s*(?:₽|руб)', re.I)
+_CARD_REVENUE = re.compile(r'выручк\w*[^.;]{0,120}?(\d+(?:[.,]\d+)?)\s*(млрд|млн)\s*(?:₽|руб)', re.I)
+# Предложение о выручке ПОКУПАТЕЛЯ — не размер покупаемой компании: у «Гранд
+# Премьер» (gd66af0f7) «рост выручки… до 8,48 млрд ₽… относится к покупателю
+# Nelt» читался как выручка цели и уводил расчет в 20 раз вверх (6 ноября 2026).
+_CARD_REVENUE_NOT_TARGET = re.compile(r'покупател', re.I)
 
 
 def revenue_from_card(deal: dict) -> float | None:
-    """Выручка покупаемой компании из текста карточки (eco.target_fin, eco.fin),
-    когда отчетности ФНС в базе нет: «выручка за 2025 год — 521 млн ₽»."""
+    """Выручка покупаемой компании из текста карточки (eco.target_fin, eco.fin):
+    «выручка за 2025 год — 521 млн ₽». Нужна, когда отчетности ФНС в базе нет
+    или она не той компании (`report_mismatch`)."""
     eco = deal.get('eco') or {}
     for text in (eco.get('target_fin'), eco.get('fin')):
-        m = _CARD_REVENUE.search(str(text or ''))
-        if m:
-            return float(m.group(1).replace(',', '.')) * (1e9 if m.group(2).lower() == 'млрд' else 1e6)
+        for sent in _SENTENCE.split(str(text or '')):
+            if _CARD_REVENUE_NOT_TARGET.search(sent):
+                continue
+            m = _CARD_REVENUE.search(sent)
+            if m:
+                return float(m.group(1).replace(',', '.')) * (1e9 if m.group(2).lower() == 'млрд' else 1e6)
     return None
+
+
+# ОЦЕНКА ИЗ ИСТОЧНИКОВ — ВТОРАЯ ОПОРА (владелец, 6 ноября 2026, «Медскан»: «по
+# оценке написано где-то 30 миллиардов, а если нажать "рассчитать", там чуть ли
+# не 1 млрд… ориентируйся на оценочное число тоже»). Число берется из суммы
+# карточки «X (по оценке)», иначе из первого предложения `eco.val`, где кто-то
+# что-то ОЦЕНИВАЕТ в рублях. Предложения про ущерб, долг, кадастр, иск,
+# капитализацию, активы и стартовую цену — не оценка цены бизнеса: пропускаются
+# (пустое честнее чужого числа).
+_SRC_VERB = re.compile(r'(?<!пере)оцени|(?<!пере)оценк|могл\w* стоить', re.I)
+_SRC_NOT_PRICE = re.compile(
+    r'ущерб|долг|задолженн|кадастр|начальн|стартов|капитализац|\bиск|исков|\bсуд(?!я)|прокурат|изъят|актив'
+    r'|запас|вложени|привлеч|инвестиц|за\s+акци|акци\w*\s+по\b', re.I)
+_SENTENCE = re.compile(r'(?<=[.!?])\s+')
+# Расхождение «в разы» (владелец, 6 ноября 2026: «больше чем в 3 раза») —
+# показывается явно, рядом с итогом и с вероятной причиной.
+DIVERGENCE_MAX = 3.0
+# «На порядок»: выручка юрлица в 10 раз меньше, чем следует из карточки или
+# из оценки источников, — отчетность не той компании (одно юрлицо группы,
+# холдинг без консолидации). Методы по ней в итог не входят.
+SCALE_MISMATCH = 10.0
+# ОКВЭД «Деятельность холдинговых компаний»: собственная отчетность такого
+# юрлица (РСБУ, без консолидации) не включает выручку дочерних обществ —
+# АО «Медскан» с выручкой 341 млн ₽ при выручке группы 28 млрд ₽.
+HOLDING_OKVED = ('64.20',)
+
+
+def source_value(deal: dict) -> dict | None:
+    """Оценка из открытых источников числом: {'lo', 'hi', 'text', 'origin'}
+    или None. За долю она или за всю компанию — из текста не видно, поэтому
+    сравнение с расчетом идет по обеим базам (`_distance`)."""
+    s = str(deal.get('sum') or '')
+    if 'оценк' in s.lower():
+        rng = dm.parse_rub_range(s)
+        if rng:
+            return {'lo': rng[0], 'hi': rng[1], 'text': _join_range(rng) if rng[0] != rng[1] else money(rng[0]),
+                    'origin': 'sum'}
+    val = str((deal.get('eco') or {}).get('val') or '')
+    for sent in _SENTENCE.split(val):
+        if not _SRC_VERB.search(sent) or _SRC_NOT_PRICE.search(sent):
+            continue
+        rng = dm.parse_rub_range(sent)
+        if rng:
+            return {'lo': rng[0], 'hi': rng[1], 'text': _join_range(rng) if rng[0] != rng[1] else money(rng[0]),
+                    'origin': 'val'}
+    return None
+
+
+def _distance(a: tuple[float, float], b: tuple[float, float]) -> float:
+    """Во сколько раз расходятся два диапазона: 1 — пересекаются, иначе
+    отношение ближних концов."""
+    if a[0] <= 0 or b[0] <= 0:
+        return 1.0
+    return max(a[0] / b[1], b[0] / a[1], 1.0)
+
+
+def times(n: float) -> str:
+    """30 → «в 30 раз», 3 → «в 3 раза», 21 → «в 21 раз»."""
+    k = int(round(n))
+    word = 'раза' if 2 <= k % 10 <= 4 and not 12 <= k % 100 <= 14 else 'раз'
+    return f'в {k} {word}'
+
+
+def report_mismatch(report: dict | None, card_revenue: float | None, src: dict | None,
+                    table: dict, ind: str | None) -> dict | None:
+    """Отчетность ФНС — не той компании, о которой сделка (владелец, 6 ноября
+    2026, «Медскан»). Три признака, любой достаточен:
+    - юрлицо по реестру — холдинговая компания (ОКВЭД 64.20): ее РСБУ не
+      включает выручку дочерних обществ;
+    - выручка из карточки (`card_revenue`) в `SCALE_MISMATCH` раз и больше
+      выручки юрлица;
+    - оценка источников, деленная на верхний квартиль P/S базы, в
+      `SCALE_MISMATCH` раз и больше выручки юрлица: бизнес такой цены с такой
+      выручкой не бывает даже по самым дорогим сделкам базы.
+    Возвращает {'signals': [...], 'text': объяснение словами} или None."""
+    if not report or not report.get('year'):
+        return None
+    rev = _pick(report, 'revenue_rub', '2110')
+    signals, parts = [], []
+    if str(report.get('okved_code') or '') in HOLDING_OKVED:
+        signals.append('holding')
+        parts.append('по реестру это холдинговая компания, и в ее собственную отчетность не входит выручка '
+                     'дочерних компаний')
+    if rev and rev > 0 and card_revenue and card_revenue >= SCALE_MISMATCH * rev:
+        signals.append('card_revenue')
+        parts.append(f'выручка по ее отчетности — {money(rev)}, а выручка бизнеса по данным источника — '
+                     f'{money(card_revenue)}, {times(card_revenue / rev)} больше')
+    if rev and rev > 0 and src and 'card_revenue' not in signals:
+        cell = (dm.find_cell(table, 'ps', ind, None) if ind else None) or dm.find_cell(table, 'ps', None, None)
+        q3 = _q(_cell_values(table, cell, 'ps'), 0.75) if cell else None
+        if q3 and q3 > 0 and src['lo'] / q3 >= SCALE_MISMATCH * rev:
+            signals.append('source_scale')
+            parts.append(f'выручка по ее отчетности — {money(rev)}, а оценка источников ({src["text"]}) '
+                         'предполагает бизнес как минимум на порядок крупнее')
+    if not signals:
+        return None
+    return {'signals': signals,
+            'text': 'Отчетность ФНС, судя по всему, — только одной компании, а не всего бизнеса: ' + '; '.join(parts)}
 
 
 def needs_estimate(deal: dict) -> bool:
@@ -249,15 +355,35 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         ind, report if report and report.get('year') else None, net_debt, stake, external)
     methods.extend(ext_methods)
 
-    # Отчетности нет, но карточка называет выручку: метод P/S считается по ней,
-    # с оговоркой — это цифра из источника, а не из реестра.
-    card_revenue = None
-    if not methods and not (report and report.get('year')):
-        card_revenue = revenue_from_card(deal)
+    # ОТЧЕТНОСТЬ НЕ ТОЙ КОМПАНИИ (владелец, 6 ноября 2026, «Медскан»: P/S по
+    # выручке холдингового АО 341 млн ₽ дал «до 1,1 млрд ₽» при оценке
+    # источников 31–36 млрд ₽ и выручке группы 28 млрд ₽). Методы по такой
+    # отчетности остаются в сводке с пометкой, но в итог не входят; мировой
+    # ориентир по ней же — не показывается.
+    card_revenue = revenue_from_card(deal)
+    src = source_value(deal)
+    mismatch = report_mismatch(report, card_revenue, src, table, ind)
+    if mismatch:
+        for m in methods:
+            m['unreliable'] = 'report_scale'
+        global_methods = []
+
+    # Отчетности нет (или она не той компании), но карточка называет выручку:
+    # метод P/S считается по ней, с оговоркой — это цифра из источника, а не из
+    # реестра.
+    # Отчетность не той компании заменяется выручкой карточки, только если та
+    # описывает бизнес крупнее: у элеватора (gafc80ee1) карточка называет ту же
+    # выручку 11 млн ₽, что и отчетность, — подставлять нечего.
+    rev_report = _pick(report, 'revenue_rub', '2110') if report and report.get('year') else None
+    card_base = bool(card_revenue) and (
+        (not methods and not (report and report.get('year')))
+        or bool(mismatch and ('card_revenue' in mismatch['signals']
+                              or ('holding' in mismatch['signals'] and card_revenue > (rev_report or 0)))))
+    if card_base:
         cell, scope = (dm.find_cell(table, 'ps', ind, None) if ind else None), 'отрасль'
         if not cell or cell.get('median') is None:
             cell, scope = dm.find_cell(table, 'ps', None, None), 'все отрасли'
-        if card_revenue and cell and cell.get('median') is not None:
+        if cell and cell.get('median') is not None:
             vals = _cell_values(table, cell, 'ps')
             med = float(cell['median'])
             methods.append({
@@ -295,7 +421,12 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
     # Ближе по размеру важнее, чем ближе по году: клинику за 77 млн ₽ не с чем
     # сравнивать в сети за 18 млрд ₽. Размер — выручка компании, если она есть.
     import math
-    size = (_pick(report, 'revenue_rub', '2110') if report else None) or card_revenue
+    # Отчетность не той компании — ее выручка не размер бизнеса; берется выручка
+    # из карточки, а без нее размер неизвестен.
+    if mismatch:
+        size = card_revenue if card_base else None
+    else:
+        size = (_pick(report, 'revenue_rub', '2110') if report else None) or card_revenue
     for c in comps:
         full = c['price_rub'] * 100 / c['stake'] if c['stake'] else c['price_rub']
         ps = c['multiples'].get('ps')
@@ -337,8 +468,20 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         floor = {'equity_rub': equity, 'report_year': report['year'],
                  'stake_rub': equity * stake / 100 if stake else None}
 
+    # ДИАПАЗОН НЕ НИЖЕ БАЛАНСА (владелец, 6 ноября 2026). Метод, который дает за
+    # 100% меньше собственного капитала, считает не по той базе: выручка или
+    # прибыль этого юрлица не отражают масштаб бизнеса. Он остается в сводке с
+    # пометкой и в итог не входит; нижний конец диапазона поднимается до
+    # капитала, а диапазон целиком ниже капитала не показывается вовсе.
+    if floor:
+        for m in methods + global_methods:
+            if not m.get('unreliable') and m['full_rub'] < floor['equity_rub']:
+                m['unreliable'] = 'below_floor'
+    reliable = [m for m in methods if not m.get('unreliable')]
+    global_ok = [m for m in global_methods if not m.get('unreliable')]
+
     rng, range_kind = None, 'estimate'
-    basis = methods or global_methods
+    basis = reliable or global_ok
     centrals = [m['stake_rub'] if stake else m['full_rub'] for m in basis]
     if len(centrals) >= 2:
         rng = (min(centrals), max(centrals))
@@ -348,12 +491,33 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         lo = m['base_rub'] * (m['q1'] or m['median']) * k
         hi = m['base_rub'] * (m['q3'] or m['median']) * k
         rng = (min(lo, hi), max(lo, hi)) if hi > 0 else None
+    floor_cut = False
+    if rng and floor:
+        fl = floor['stake_rub'] or floor['equity_rub']
+        if rng[1] < fl:
+            rng = None
+        elif rng[0] < fl:
+            rng, floor_cut = (fl, rng[1]), True
     if rng:
         rng = (_round2(rng[0]), _round2(rng[1]))
-    if rng and not methods:
+    if rng and not reliable:
         range_kind = 'upper'          # только мировой ориентир: верхняя граница
+    elif not rng and src:
+        range_kind = 'sources'        # расчет не годится — опора на оценку источников
     elif not rng and floor:
         range_kind = 'floor'          # только баланс: нижняя граница
+
+    # Расхождение с оценкой источников: за долю она или за всю компанию — из
+    # текста не видно, поэтому берется ближняя из двух баз.
+    if src and rng:
+        bases = [rng] + ([(rng[0] * 100 / stake, rng[1] * 100 / stake)] if stake and stake < 99.5 else [])
+        d = min(_distance((src['lo'], src['hi']), b) for b in bases)
+        src = dict(src, ratio=d, direction=('higher' if src['lo'] > rng[1] else 'lower') if d > 1 else None,
+                   divergent=d > DIVERGENCE_MAX)
+        if src['divergent']:
+            src['reason'] = _divergence_reason(src, card_revenue if mismatch and card_base else None, methods)
+    elif src:
+        src = dict(src, ratio=None, direction=None, divergent=False)
 
     return {
         'deal_id': deal.get('id'), 'title': deal.get('title'), 'year': year,
@@ -364,9 +528,38 @@ def build(deal: dict, report: dict | None, table: dict, deals: dict[str, dict],
         'methods': methods, 'benchmarks': benchmarks, 'global_methods': global_methods, 'floor': floor,
         'comparables': comps, 'experts': experts,
         'card_revenue_rub': card_revenue, 'size_unknown': size_unknown, 'hidden_for_size': hidden_for_size,
-        'range': rng, 'range_kind': range_kind,
-        'range_text': range_text(rng, stake, range_kind, floor),
+        'range': rng, 'range_kind': range_kind, 'floor_cut': floor_cut,
+        'source_value': src, 'report_mismatch': mismatch, 'card_base': card_base,
+        'range_text': range_text(rng, stake, range_kind, floor, src),
     }
+
+
+# Почему метод не вошел в итог — одной фразой для сводки, шаблона и карточки.
+UNRELIABLE_TEXT = {
+    'report_scale': 'в итог не входит: отчетность ФНС — только одной компании, а не всего бизнеса',
+    'below_floor': 'в итог не входит: дает меньше балансового капитала — выручка или прибыль по отчетности '
+                   'не отражают масштаб бизнеса',
+}
+
+
+def _divergence_reason(src: dict, card_base_rub: float | None, methods: list[dict]) -> str:
+    """Вероятная причина, по которой оценка источников и расчет расходятся в
+    разы. Отчетность не той компании причиной уже не бывает: с ней расчет либо
+    перешел на выручку из карточки (`card_base_rub`), либо в итог не вошел."""
+    if card_base_rub and src['direction'] == 'lower':
+        return (f'расчет Компаса идет по выручке бизнеса из источника — {money(card_base_rub)}, а оценка '
+                'могла относиться к меньшей его части или учитывать долг и скидку за неконтрольную долю')
+    if card_base_rub:
+        return (f'расчет Компаса идет по выручке бизнеса из источника — {money(card_base_rub)}; источник '
+                'оценки мог считать по прибыли или прогнозу; по открытым данным точнее не сказать')
+    if src['direction'] == 'higher':
+        if any(m.get('unreliable') == 'below_floor' for m in methods):
+            return ('выручка или прибыль по отчетности ФНС малы для бизнеса такого масштаба: '
+                    'возможно, это отчетность не всей группы')
+        return ('источник мог считать по отчетности всей группы, по прогнозу или с учетом долга; '
+                'по открытым данным точнее не сказать')
+    return ('источник мог оценивать купленную долю, а не всю компанию, или учитывать долг и скидку '
+            'за срочную продажу; по открытым данным точнее не сказать')
 
 
 def can_estimate(s: dict) -> bool:
@@ -378,9 +571,13 @@ def can_estimate(s: dict) -> bool:
                 or s.get('comparables') or s.get('experts'))
 
 
-def range_text(rng, stake, range_kind='estimate', floor=None) -> str | None:
+def range_text(rng, stake, range_kind='estimate', floor=None, src=None) -> str | None:
     what = f'за {_pct(stake)}' if stake and stake < 99.5 else 'за 100%'
     if not rng:
+        # За долю оценка источников или за всю компанию — из текста не видно,
+        # поэтому без «за X%».
+        if range_kind == 'sources' and src:
+            return f'≈ {src["text"]} по оценке источников'
         if range_kind == 'floor' and floor:
             return f'не ниже {money(floor["stake_rub"] or floor["equity_rub"])} {what}'
         return None
@@ -413,6 +610,28 @@ def _pct(p: float | None) -> str:
     return s + '%'
 
 
+def _method_tail(m: dict) -> str:
+    return f' — {UNRELIABLE_TEXT[m["unreliable"]]}' if m.get('unreliable') else ''
+
+
+def source_line(s: dict) -> str | None:
+    """Оценка источников рядом с итогом — одна строка для сводки и карточки:
+    «31–36 млрд ₽, в 30 раз выше расчета Компаса»."""
+    src = s.get('source_value')
+    if not src:
+        return None
+    if src.get('divergent'):
+        return (f'{src["text"]}, {times(src["ratio"])} '
+                f'{"выше" if src["direction"] == "higher" else "ниже"} расчета Компаса')
+    if s.get('range_kind') == 'sources':
+        return src['text']
+    if src.get('ratio') == 1.0:
+        return f'{src["text"]}, в пределах расчета Компаса'
+    if src.get('ratio'):
+        return f'{src["text"]}, близко к расчету Компаса'
+    return src['text']
+
+
 def facts_text(s: dict) -> str:
     """Сводка для модели — та же, по которой проверяются числа ответа."""
     lines = [f'Сделка: {s["title"]}', f'Год сделки: {s["year"] or "не установлен"}']
@@ -426,6 +645,11 @@ def facts_text(s: dict) -> str:
         lines.append(f'Отчетность ФНС за {s["report_year"]} год: выручка {money(s["revenue_rub"])}, {profit}')
         if s['report_note']:
             lines.append(f'Оговорка: {s["report_note"]}')
+        if s.get('report_mismatch'):
+            mm = s['report_mismatch']['text']
+            lines.append(f'Оговорка: {mm[0].lower() + mm[1:]}. Методы по этой отчетности в итог не входят'
+                         + ('; вместо нее взята выручка бизнеса по данным источника — '
+                            f'{money(s["card_revenue_rub"])}' if s.get('card_base') else ''))
     elif s.get('card_revenue_rub'):
         lines.append(f'Отчетности покупаемой компании в базе нет; по данным источника ее выручка — {money(s["card_revenue_rub"])}')
     else:
@@ -440,14 +664,14 @@ def facts_text(s: dict) -> str:
             lines.append(
                 f'Метод {m["label"]} по данным {e["source"]} ({what}, сектор «{e["label"]}», {e["year"]} год): '
                 f'{m["base_name"]} {money(m["base_rub"])} × {str(m["median"]).replace(".", ",")}× = {money(m["full_rub"])} за 100%'
-                + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else ''))
+                + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else '') + _method_tail(m))
             continue
         where = f'отрасль «{m["industry"]}»' if m['industry'] else 'все отрасли (в отрасли мало сделок)'
         lines.append(
             f'Метод {m["label"]} по базе Компаса: {m["base_name"]} {money(m["base_rub"])} × медиана {str(m["median"]).replace(".", ",")}× '
             f'({where}, {deals_word(m["count"])}) = {money(m["full_rub"])} за 100%'
-            + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else ''))
-    if any(m.get('external') and m['metric'] == 'ev_ebitda' for m in s['methods']):
+            + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else '') + _method_tail(m))
+    if any(m.get('external') and m['metric'] == 'ev_ebitda' and not m.get('unreliable') for m in s['methods']):
         lines.append('Оговорка: EBITDA в отчетности ФНС нет, мультипликатор EV/EBITDA применен к операционной прибыли '
                      '(без амортизации), поэтому такая оценка скорее занижена')
     for m in s.get('global_methods') or []:
@@ -456,16 +680,27 @@ def facts_text(s: dict) -> str:
             f'Мировой ориентир, {e["source"]}, сектор «{e["label"]}», {e["year"]} год: {m["label"]} '
             f'{m["base_name"]} {money(m["base_rub"])} × {str(m["median"]).replace(".", ",")}× = {money(m["full_rub"])} за 100%'
             + (f', за долю {_pct(s["stake"])} — {money(m["stake_rub"])}' if m['stake_rub'] else '')
-            + '; уровни там в 2–3 раза выше российских, поэтому это верхняя граница, а не оценка')
+            + ('; уровни там в 2–3 раза выше российских, поэтому это верхняя граница, а не оценка'
+               if not m.get('unreliable') else _method_tail(m)))
     if s.get('floor'):
         f = s['floor']
         lines.append(f'Балансовый капитал по отчетности ФНС за {f["report_year"]} год: {money(f["equity_rub"])}'
                      + (f', на долю {_pct(s["stake"])} — {money(f["stake_rub"])}' if f['stake_rub'] else '')
                      + ' — нижняя граница: дешевле собственного капитала компании продают редко')
+        if s.get('floor_cut'):
+            lines.append('Нижний конец диапазона поднят до балансового капитала: итог Компаса не бывает ниже него')
     if s['range_text']:
-        kind = {'upper': 'Верхняя граница по мировому ориентиру', 'floor': 'Нижняя граница по балансу'}.get(
+        kind = {'upper': 'Верхняя граница по мировому ориентиру', 'floor': 'Нижняя граница по балансу',
+                'sources': 'Итог — оценка из открытых источников (расчет по отчетности для этой компании не годится)'}.get(
             s.get('range_kind'), 'Итоговый диапазон Компаса')
         lines.append(f'{kind}: {s["range_text"]}')
+    src = s.get('source_value')
+    if src and s.get('range_kind') != 'sources':
+        lines.append(f'Оценка из открытых источников числом: {source_line(s)} '
+                     '(за долю она или за всю компанию — как сказано в источнике)')
+        if src.get('divergent'):
+            lines.append(f'Расхождение с оценкой источников {times(src["ratio"])}; вероятная причина: {src["reason"]}. '
+                         'Назвать это рядом с итогом, в первом абзаце')
     for c in s['comparables']:
         mult = ', '.join(f'{k.upper().replace("PS", "P/S").replace("PE", "P/E")} {str(round(v, 1)).replace(".", ",")}×'
                          for k, v in c['multiples'].items())
@@ -476,26 +711,58 @@ def facts_text(s: dict) -> str:
     return '\n'.join(lines)
 
 
+def _why_not_counted(s: dict) -> str | None:
+    """Почему методы по отчетности не вошли в итог — одной фразой с точкой."""
+    if s.get('report_mismatch'):
+        return s['report_mismatch']['text'] + '.'
+    low = [m for m in s['methods'] + (s.get('global_methods') or []) if m.get('unreliable') == 'below_floor']
+    if low and s.get('floor'):
+        names = ', '.join(dict.fromkeys(m['label'] for m in low))
+        return (f'Мультипликаторы ({names}) дают меньше балансового капитала компании '
+                f'({money(s["floor"]["equity_rub"])}), значит, выручка или прибыль по отчетности не отражают '
+                'масштаб бизнеса, и в итог они не входят.')
+    return None
+
+
 def template_text(s: dict) -> list[str]:
     """Объяснение без модели: модель недоступна или назвала лишнее число.
-    Четыре случая (владелец, 29 октября 2026): есть российские методы —
-    диапазон; только мировой ориентир — верхняя граница; только баланс —
-    нижняя граница; ничего — одна фраза, кнопки на карточке в этом случае
-    нет вовсе."""
+    Случаи (владелец, 29 октября и 6 ноября 2026): есть российские методы —
+    диапазон; только мировой ориентир — верхняя граница; расчет по
+    отчетности не годится, но есть оценка источников — она и итог; только
+    баланс — нижняя граница; ничего — одна фраза, кнопки на карточке в этом
+    случае нет вовсе. Оценка источников, расходящаяся с расчетом в разы,
+    называется в первом абзаце вместе с вероятной причиной."""
     out = []
     kind = s.get('range_kind') or 'estimate'
+    src = s.get('source_value')
+    reliable = [m for m in s['methods'] if not m.get('unreliable')]
+    why_not = _why_not_counted(s)
     if s['range_text'] and kind == 'estimate':
-        out.append(f'По расчету Компаса сделка могла стоить {s["range_text"].replace("≈ ", "около ")}. '
-                   'Это прикидка по отчетности и мультипликаторам похожих сделок, а не цена договора.')
-        names = ', '.join(dict.fromkeys(m['label'] for m in s['methods']))
-        if s['methods'][0]['report_year']:
-            ext_names = sorted({m['external']['source'] for m in s['methods'] if m.get('external')})
-            own = any(not m.get('external') for m in s['methods'])
+        core = s["range_text"].replace("≈ ", "около ")
+        if src and src.get('divergent'):
+            out.append(f'Оценка из открытых источников — {src["text"]}, а расчет Компаса дает {core}: '
+                       f'{times(src["ratio"])} {"меньше" if src["direction"] == "higher" else "больше"}. '
+                       f'Вероятная причина: {src["reason"]}.')
+        else:
+            out.append(f'По расчету Компаса сделка могла стоить {core}. '
+                       'Это прикидка по отчетности и мультипликаторам похожих сделок, а не цена договора.'
+                       + (f' Оценка из открытых источников — {source_line(s)}.' if src else ''))
+        names = ', '.join(dict.fromkeys(m['label'] for m in reliable))
+        if s.get('report_mismatch') and not reliable[0]['report_year']:
+            out.append(f'{s["report_mismatch"]["text"]}. Поэтому взяли выручку бизнеса по данным источника — '
+                       f'{money(reliable[0]["base_rub"])} — и медианный мультипликатор {names} по сделкам '
+                       'с известной ценой.')
+        elif reliable[0]['report_year']:
+            ext_names = sorted({m['external']['source'] for m in reliable if m.get('external')})
+            own = any(not m.get('external') for m in reliable)
             parts = (['медианы по сделкам с известной ценой из базы Компаса'] if own else []) \
                 + ([f'отраслевые ориентиры из открытых исследований ({", ".join(ext_names)})'] if ext_names else [])
-            out.append(f'Взяли отчетность компании за {s["methods"][0]["report_year"]} год и мультипликаторы '
+            out.append(f'Взяли отчетность компании за {reliable[0]["report_year"]} год и мультипликаторы '
                        f'({names}): {" и ".join(parts)}. Разные методы дают разный результат — '
-                       'отсюда ширина диапазона; ниже видно, что дает каждый.')
+                       'отсюда ширина диапазона; ниже видно, что дает каждый.'
+                       + (f' {why_not}' if why_not else '')
+                       + (' Нижний конец диапазона — балансовый капитал: дешевле него продают редко.'
+                          if s.get('floor_cut') else ''))
         else:
             out.append(f'Отчетности компании в базе нет, взяли выручку по данным источника и медианный '
                        f'мультипликатор {names} по сделкам отрасли с известной ценой.')
@@ -504,13 +771,25 @@ def template_text(s: dict) -> list[str]:
         out.append(f'Российских ориентиров по этой отрасли нет: ни сделок с известной ценой, ни биржевых '
                    f'мультипликаторов. Есть мировые ({g["source"]}, {g["year"]} год), но там компании '
                    'оцениваются в 2–3 раза дороже российских, поэтому по ним можно назвать только '
-                   f'верхнюю границу: {s["range_text"]}.')
+                   f'верхнюю границу: {s["range_text"]}.'
+                   + (f' Оценка из открытых источников — {source_line(s)}.' if src else ''))
+    elif s['range_text'] and kind == 'sources':
+        out.append(f'Опираемся на оценку из открытых источников: {src["text"]}. Посчитать цену по отчетности '
+                   'не получилось' + (f': {why_not[0].lower() + why_not[1:]}' if why_not else '.'))
+        if s.get('floor'):
+            out.append(f'Балансовый капитал по отчетности за {s["floor"]["report_year"]} год — '
+                       f'{money(s["floor"]["stake_rub"] or s["floor"]["equity_rub"])}; дешевле него продают редко.')
     elif s['range_text'] and kind == 'floor':
         f = s['floor']
-        out.append(f'Посчитать цену по мультипликаторам не получилось: нет российских ориентиров по отрасли'
-                   + (' и прибыли у компании' if (s.get('net_profit_rub') or 0) <= 0 else '')
-                   + f'. Есть только балансовый капитал за {f["report_year"]} год — дешевле него продают '
-                   f'редко, поэтому это нижняя граница: {s["range_text"]}.')
+        if why_not:
+            out.append(f'Посчитать цену по мультипликаторам не получилось. {why_not} Есть балансовый капитал '
+                       f'за {f["report_year"]} год — дешевле него продают редко, поэтому это нижняя граница: '
+                       f'{s["range_text"]}.')
+        else:
+            out.append(f'Посчитать цену по мультипликаторам не получилось: нет российских ориентиров по отрасли'
+                       + (' и прибыли у компании' if (s.get('net_profit_rub') or 0) <= 0 else '')
+                       + f'. Есть только балансовый капитал за {f["report_year"]} год — дешевле него продают '
+                       f'редко, поэтому это нижняя граница: {s["range_text"]}.')
     elif s['comparables'] or s['experts']:
         out.append('Посчитать цену по отчетности не получилось: '
                    + ('нет отчетности покупаемой компании за год до сделки.' if not s['report_year']
@@ -578,7 +857,11 @@ def clean_answer(text: str, facts: str, min_paragraphs: int = 2) -> list[str] | 
 SYSTEM = (
     'Ты — аналитик сервиса «Компас» о сделках M&A в России. Цену сделки стороны не раскрыли; объясни читателю, '
     'сколько она могла стоить, — только по сводке ниже. Никаких чисел, которых нет в сводке, ничего не пересчитывай, '
-    'итог бери ровно из сводки: это диапазон, или верхняя граница по мировому ориентиру, или нижняя граница по балансу. '
+    'итог бери ровно из сводки: это диапазон, или верхняя граница по мировому ориентиру, или оценка из открытых '
+    'источников, или нижняя граница по балансу. Методы с пометкой «в итог не входит» итогом не называй, скажи '
+    'коротко, почему они не вошли. Если в сводке есть строка «Расхождение с оценкой источников», в первом абзаце '
+    'рядом с итогом назови оценку источников, во сколько раз она расходится с расчетом и вероятную причину — '
+    'так, как в сводке. '
     'Все числа цифрами и в том виде, как в сводке (1,6 млрд ₽, а не «полтора миллиарда»). '
     'Пиши по-русски, просто и по-деловому, без заголовков, списков и markdown; два-три коротких абзаца через пустую '
     'строку: 1) итог и что он за долю; 2) из чего получился — какие методы и источники, названные как в сводке, и '

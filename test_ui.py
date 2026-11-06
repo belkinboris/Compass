@@ -2543,6 +2543,61 @@ def test_temporary_management_type_card_shows_no_party_placeholders(page, base_u
         page.unroute(PENDING_URL)
 
 
+def test_management_handover_card_shows_the_managing_company(page, base_url):
+    """Тип «Передача в управление» (решение владельца 6 ноября 2026, птицефабрика
+    «Островная»): управляющая компания — сторона карточки с ролью «Управляющая
+    компания» на плашке и в шапке; продавца и «Не раскрыт» нет. Цена за акцию
+    (`eco.price_per_share`) — строкой «Цена» на «Финансах» (другая карточка)."""
+    card = {"id": "gtest-mgmt", "date": "2026-11-06",
+            "title": "Птицефабрика «Тест» передана в управление «Тест-Управлению»",
+            "ind": "Агро", "type": "Передача в управление", "status": "Закрыта",
+            "kind": "management", "buyer_name": "ООО «Тест-Управление»",
+            "asset": "управление птицефабрикой «Тест»",
+            "src": [["источник", "https://example.invalid/mgmt"]],
+            "eco": {"sum": "—", "share": "—", "val": "—", "target_fin": "—", "fin": "—",
+                    "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "Все акции остаются у собственника, передано только управление.",
+                    "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-11-06T00:00:00+00:00"}
+    offer = {"id": "gtest-offer", "date": "2026-11-06",
+             "title": "«Тест-Покупатель» собирается купить до 100% «Тест-Сервиса»",
+             "ind": "ИТ и интернет", "type": "M&A", "status": "Обсуждается",
+             "buyer_name": "«Тест-Покупатель»", "seller": "Акционеры «Тест-Сервиса»",
+             "asset": "акции «Тест-Сервиса»",
+             "src": [["источник", "https://example.invalid/offer"]],
+             "eco": {"sum": "Не раскрыта", "share": "—", "val": "—", "target_fin": "—",
+                     "fin": "Оплата деньгами.", "price_per_share": "993,05 ₽ за акцию",
+                     "rationale": "—", "context": "—", "finadv": "—"},
+             "law": {"struct": "Добровольное предложение всем акционерам.", "appr": "—", "adv": [], "terms": "—"},
+             "pending_since": "2026-11-06T00:00:00+00:00"}
+    serve_pending(page, [card, offer])
+    errors = []
+    try:
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        visit(page, base_url, "#/preview/gtest-mgmt")
+        page.wait_for_timeout(900)
+        roles = page.eval_on_selector_all(
+            ".deal-plate .dp-party", "els => els.map(el => el.innerText.toUpperCase())")
+        assert any("УПРАВЛЯЮЩАЯ КОМПАНИЯ" in r and "ТЕСТ-УПРАВЛЕНИЕ" in r for r in roles), roles
+        assert any("АКТИВ ПОД УПРАВЛЕНИЕМ" in r for r in roles), roles
+        assert not any(w in r for r in roles for w in ("ПРОДАВЕЦ", "ПОКУПАТЕЛЬ", "НЕ РАСКРЫТ")), roles
+        head = page.inner_text(".d-head")
+        assert "Тест-Управление" in head and "Передача в управление" in head, head
+        assert "не раскрыт" not in head.lower(), head
+
+        visit(page, base_url, "#/preview/gtest-offer")
+        page.wait_for_timeout(900)
+        plate = page.inner_text(".deal-plate")
+        assert "Акционеры «Тест-Сервиса»" in plate, plate
+        page.click('.lens button[data-l="fin"]')
+        page.wait_for_timeout(500)
+        fin = page.inner_text("#app")
+        assert "993,05 ₽ за акцию" in fin, fin[:1500]
+        assert not errors, errors
+    finally:
+        page.unroute(PENDING_URL)
+
+
 def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
     """18 сентября 2026: владелец увидел черновик карточки «Ашана»
     (национализация/временное управление по указу президента) и написал
@@ -5215,6 +5270,54 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     page.goto(base_url + "/#/deal/" + priced["id"], wait_until="domcontentloaded")
     page.wait_for_selector(".stat-hero", timeout=15000)
     assert page.locator("#pe-btn").count() == 0
+
+
+def test_price_estimate_panel_shows_the_source_estimate_under_the_range(page, base_url):
+    """«Медскан» (владелец, 6 ноября 2026): оценка источников — сразу под итогом,
+    метод по отчетности не той компании — серым и с причиной; подписи-плашки
+    «расчет, а не цена сделки» в шапке нет («это и так понятно»). Ответ сервера
+    подменяется: отчетности ФНС в тестовой базе нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
+                and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
+                and d.get("type") == "M&A")
+    answer = {"available": True, "range_text": "≈ 16–88 млрд ₽ за 100%", "range_kind": "estimate", "by": "template",
+              "paragraphs": ["По расчету Компаса сделка могла стоить около 16–88 млрд ₽ за 100%."],
+              "methods": [{"label": "P/S", "base": "выручка за 2024 год — 341 млн ₽", "multiple": "1,75×",
+                           "where": "база Компаса, все отрасли, 28 сделок", "url": None, "result": "597 млн ₽",
+                           "unreliable": "в итог не входит: отчетность ФНС — только одной компании, а не всего бизнеса"},
+                          {"label": "P/S", "base": "выручка по данным источника — 28 млрд ₽", "multiple": "1,75×",
+                           "where": "база Компаса, все отрасли, 28 сделок", "url": None, "result": "49 млрд ₽",
+                           "unreliable": None}],
+              "global_methods": [], "floor": None, "comparables": [], "experts": "31–36 млрд ₽ (по оценке)",
+              "source": {"line": "31–36 млрд ₽, в пределах расчета Компаса", "divergent": False, "reason": None},
+              "stake": None}
+    route = "**/api/deals/" + deal["id"] + "/price-estimate*"
+    page.route(route, lambda r: r.fulfill(status=200, content_type="application/json",
+                                           body=_json.dumps(answer, ensure_ascii=False)))
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    try:
+        for width in (360, 1280):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.goto(base_url + "/#/deals", wait_until="domcontentloaded")  # карточка рисуется заново, панель закрыта
+            page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+            page.wait_for_selector("#pe-btn", timeout=15000)
+            page.click("#pe-btn")
+            page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=30000)
+            assert page.locator(".pe-panel .pe-tag").count() == 0
+            assert page.inner_text(".pe-panel .pe-h").strip().lower() == "анализ компаса"
+            order = page.evaluate("[...document.querySelector('.pe-panel').children].map(e=>e.className)")
+            assert order.index("pe-range num") + 1 == order.index("pe-src"), order
+            assert "Оценка источников: 31–36 млрд ₽" in page.inner_text(".pe-panel .pe-src")
+            assert page.locator(".pe-panel .pe-r .pe-off").count() == 1
+            assert "в итог не входит" in page.inner_text(".pe-panel .pe-rows")
+            over = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+        assert not errors, errors[:3]
+    finally:
+        page.unroute(route)
 
 
 def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):

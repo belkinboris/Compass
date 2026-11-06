@@ -685,7 +685,10 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
                   or draft.get('seller') or draft.get('seller_id'))
     if not (draft.get('target') or draft.get('asset_id') or draft.get('asset')):
         hold.append('не установлен предмет сделки — из заголовка не видно, что продают')
-    elif not named_side and draft.get('type') != 'Временное управление':
+    elif not named_side and draft.get('type') not in ('Временное управление', 'Передача в управление'):
+        # Передача в управление (6 ноября 2026): управляющую компанию разбор
+        # заголовка часто не вытаскивает; ее ставит чтение, а требует
+        # приемка (`accept_card`, находка `management_manager`).
         # У временного управления по указу сторон нет вовсе (решение
         # владельца 16 октября 2026): собственник не меняется, управляющий —
         # не покупатель. Требовать от такого черновика покупателя или
