@@ -35,6 +35,7 @@ sys.path.insert(0, HERE)
 import promote  # noqa: E402
 
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
+BASE = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 
 
 def drop(pending, state, ids, reason, now):
@@ -60,19 +61,59 @@ def drop_fix_files(ids):
             print('  снят файл правок %s' % os.path.relpath(path, ROOT))
 
 
-def closure_text(card, reason):
-    """Что сказать владельцу, если выкинутая карточка родилась из его «в работу».
-    Причина с id другой карточки (g…) — это слияние: сделка уже есть в базе."""
+def merge_target(card_id, reason, dropped=()):
+    """С какой карточкой слита выкинутая — или None, если из причины это не
+    следует однозначно (6 ноября 2026: одной командой сняли два дубля с общей
+    причиной «gf18c700f — та же сделка, что g1eda1117 …; gc3faa809 — та же
+    сделка, что g9b4c2e71 …», и обе новости владельцу отослали к первому
+    номеру в тексте — к самой выкинутой gf18c700f). Номер самой карточки и
+    других выкинутых целью не бывает; если причина называет карточку, цель
+    ищется в ее куске — до номера следующей выкинутой."""
     import re
+    ids_re = r'\bg[0-9a-f]{8}\b'
+    text = reason or ''
+    gone = set(dropped) | {card_id}
+    at = text.find(card_id)
+    if at >= 0:
+        rest = text[at + len(card_id):]
+        cut = [m.start() for m in re.finditer(ids_re, rest) if m.group(0) in gone]
+        text = rest[:cut[0]] if cut else rest
+    found = [m for m in re.findall(ids_re, text) if m not in gone]
+    return found[0] if len(set(found)) == 1 else None
+
+
+def _urls(card):
+    return {str(x[1]) for x in (card or {}).get('src') or [] if len(x) > 1 and str(x[1]).startswith('http')}
+
+
+def closure_text(card, reason, dropped=(), base_ids=None, pending_ids=None, targets=None):
+    """Что сказать владельцу, если выкинутая карточка родилась из его «в работу».
+    Слияние — ссылка на ту карточку: в базе — страница сделки, в очереди —
+    предпросмотр; цель неоднозначна или ее нет нигде — без ссылки, с причиной.
+
+    «Новое добавлено» говорится, только если в той карточке есть источник из
+    выкинутой (6 ноября 2026, BIRCH/Swordfish: владельцу ответили «новое из
+    новости добавлено», а в карточку не попало ничего — и консультант
+    покупателя потерялся). Не добавлено — так и сказано, с причиной: владелец
+    видит, что именно рутина сочла «ничего нового», и может поправить."""
     raw = card.get('from_raw') or {}
     if not raw:
         return None
-    merged = re.search(r'\bg[0-9a-f]{8}\b', reason or '')
+    merged = merge_target(card.get('id', ''), reason, dropped)
     head = 'Ваше решение «это сделка» по новости «%s» применено.' % (raw.get('title') or card.get('title') or '')[:120]
-    if merged:
-        return ('%s Это та же сделка, что уже есть в базе: https://projectcompass.ru/#/deal/%s — новое из новости '
-                'добавлено в ту карточку, отдельной карточки и поста не будет.' % (head, merged.group(0)))
-    return '%s Но карточку пришлось снять: %s.' % (head, (reason or '').strip().rstrip('.'))
+    why = (reason or '').strip().rstrip('.')
+    if merged and (base_ids is None or merged in base_ids):
+        where = 'Это та же сделка, что уже есть в базе: https://projectcompass.ru/#/deal/%s' % merged
+    elif merged and pending_ids is not None and merged in pending_ids:
+        where = 'Это та же сделка, что карточка на проверке: https://projectcompass.ru/#/preview/%s' % merged
+    else:
+        return '%s Но карточку пришлось снять: %s.' % (head, why)
+    target = (targets or {}).get(merged)
+    if targets is None or (_urls(card) & _urls(target)):
+        return ('%s %s — новое из новости добавлено в ту карточку, отдельной карточки и поста не будет.'
+                % (head, where))
+    return ('%s %s. Новость в ту карточку не добавлена — по оценке рутины, нового в ней нет: %s. '
+            'Если это не так, ответьте здесь.' % (head, where, why))
 
 
 def notify_console(texts):
@@ -117,7 +158,11 @@ def main(argv):
     promote.save_state(state)
     # Карточка из решения владельца («в работу») выкинута или слита — он должен
     # узнать об этом из консоли, а не из тишины (28 октября 2026, «Аккую»).
-    notify_console([t for t in (closure_text(c, reason) for c in gone) if t])
+    base_deals = json.load(open(BASE, encoding='utf-8')).get('deals', [])
+    targets = {d.get('id'): d for d in base_deals + pending_fresh['cards']}
+    base_ids = {d.get('id') for d in base_deals}
+    pending_ids = {c.get('id') for c in pending_fresh['cards']}
+    notify_console([t for t in (closure_text(c, reason, ids, base_ids, pending_ids, targets) for c in gone) if t])
     return 0
 
 

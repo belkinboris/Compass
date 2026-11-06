@@ -448,3 +448,18 @@ def test_no_tracked_file_is_listed_in_gitignore():
     out = subprocess.run(["git", "ls-files", "-ci", "--exclude-standard"], capture_output=True, text=True,
                          cwd=root).stdout.split()
     assert not out, f"в git лежат файлы из .gitignore (git rm --cached): {out[:10]}"
+
+
+def test_ui_tests_do_not_rewrite_the_live_queue_file():
+    """Тест интерфейса не переписывает static/data/pending.json (6 ноября 2026).
+    Три теста предпросмотра на время клали в настоящую очередь свою карточку:
+    параллельный прогон, приемка или рутина в эти секунды видели очередь из
+    одной тестовой карточки. Тестовая карточка подается браузеру подменой
+    ответа (`serve_pending` в test_ui.py), файл на диске не трогается."""
+    import glob
+    bad = []
+    for path in glob.glob(os.path.join(ROOT, "test_*.py")):
+        src = io.open(path, encoding="utf-8").read()
+        if re.search(r'Path\(\s*["\']static/data/pending\.json["\']\s*\)', src):
+            bad.append(os.path.basename(path))
+    assert not bad, f"тест открывает настоящую очередь как файл: {bad} — используйте serve_pending"

@@ -9324,6 +9324,47 @@ def test_dropping_a_card_born_from_the_owners_click_tells_him_why():
     assert drop_pending.closure_text({'id': 'g2', 'title': 'Т'}, 'дубль g2f22b1dc') is None
 
 
+def test_two_duplicates_dropped_together_each_point_to_its_own_card():
+    """6 ноября 2026: одной командой сняли два дубля с общей причиной, и обе
+    новости владельцу отослали к первому номеру в тексте — к самой выкинутой
+    gf18c700f, а «Циан» к карточке про КИТ. Каждая выкинутая — к своей цели;
+    карточка из очереди — ссылкой на предпросмотр, а не на несуществующую
+    страницу сделки."""
+    import drop_pending
+    reason = ('дубль: gf18c700f — та же сделка, что g1eda1117 (Денисенков/КИТ), без новых фактов; '
+              'gc3faa809 — та же сделка, что g9b4c2e71 (Т-Технологии/Циан)')
+    ids = ['gf18c700f', 'gc3faa809']
+    assert drop_pending.merge_target('gf18c700f', reason, ids) == 'g1eda1117'
+    assert drop_pending.merge_target('gc3faa809', reason, ids) == 'g9b4c2e71'
+    raw = {'draft_id': 'd1', 'title': 'Т-Банк покупает Циан'}
+    t = drop_pending.closure_text({'id': 'gc3faa809', 'from_raw': raw}, reason, ids,
+                                  base_ids={'g1eda1117'}, pending_ids={'g9b4c2e71'})
+    assert '#/preview/g9b4c2e71' in t and 'gf18c700f' not in t.split('применено')[1].split('Т-Технологии')[0]
+    # Две возможные цели без указания, какая чья — без ссылки, с причиной.
+    assert drop_pending.merge_target('gx0000001', 'дубль g1eda1117 и g9b4c2e71', ['gx0000001']) is None
+    # Цели нет ни в базе, ни в очереди — не ссылаемся в пустоту.
+    t2 = drop_pending.closure_text({'id': 'gc3faa809', 'from_raw': raw}, reason, ids,
+                                   base_ids=set(), pending_ids=set())
+    assert 'пришлось снять' in t2
+
+
+def test_merge_message_says_added_only_when_the_news_reached_the_card():
+    """6 ноября 2026, BIRCH/Swordfish: владельцу ответили «новое из новости
+    добавлено в ту карточку», а в карточке не было ни поста BIRCH, ни BIRCH
+    консультантом. «Добавлено» — только если источник выкинутой есть в той
+    карточке; иначе ответ говорит, что не добавлено и почему."""
+    import drop_pending
+    card = {'id': 'g73f77d93', 'from_raw': {'draft_id': 'd1', 'title': 'BIRCH консультировала ВИМ'},
+            'src': [['BIRCH', 'https://t.me/BIRCHLEGAL/2343']]}
+    reason = 'дубль: та же сделка, что уже в базе (gf6c084b9), без единого нового факта'
+    bare = {'gf6c084b9': {'id': 'gf6c084b9', 'src': [['Ведомости', 'https://www.vedomosti.ru/x']]}}
+    t = drop_pending.closure_text(card, reason, ['g73f77d93'], {'gf6c084b9'}, set(), bare)
+    assert 'не добавлена' in t and 'без единого нового факта' in t and 'добавлено в ту карточку' not in t
+    fed = {'gf6c084b9': {'id': 'gf6c084b9', 'src': bare['gf6c084b9']['src'] + card['src']}}
+    t2 = drop_pending.closure_text(card, reason, ['g73f77d93'], {'gf6c084b9'}, set(), fed)
+    assert 'добавлено в ту карточку' in t2
+
+
 def test_draft_reads_became_co_owner_as_a_purchase():
     """«Коммерсантъ» о Baggins Coffee (28 октября 2026): «Фонд «Бумеранг Капитал»
     стал совладельцем Baggins Coffee» — разбор не видел ни сторон, ни предмета,
