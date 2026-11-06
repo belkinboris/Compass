@@ -149,6 +149,23 @@ def base_lost(old, new):
     return lost
 
 
+# Сайт отдает решения не всегда: 6 ноября 2026 три раза за день команда
+# отвечала «Решений нет», хотя сухой прогон за десять секунд до и после
+# показывал решения владельца, — approve.py печатал причину («Сайт ответил
+# 5xx…» / «Решения недоступны (…)»), а команда ее не показывала и выходила
+# кодом 0, как будто очередь пуста. Теперь такой ответ — «СТОП» с причиной:
+# повторить команду через минуту, а не ждать следующего прогона.
+SITE_FAILURE_MARKS = ('Сайт ответил', 'Решения недоступны', 'не заданы — решения не прочитать')
+
+
+def site_failure(out):
+    """Строка approve.py о том, что решения с сайта не прочитаны, или ''."""
+    for line in out.splitlines():
+        if any(m in line for m in SITE_FAILURE_MARKS):
+            return line.strip()
+    return ''
+
+
 def decisions_planned():
     """Сухой approve.py: строки ПУБЛИКУЕМ/ПРИДЕРЖАНА/ВЫКИНУТА/В РАБОТУ/ОТБРОШЕНА."""
     out = run([sys.executable, os.path.join(INGEST, 'approve.py')], must=False).stdout
@@ -226,6 +243,10 @@ def _main(argv, write):
     if resume:
         log('В рабочей копии уже есть незакоммиченные правки базы и очереди — продолжаю: применяю только новые решения, потом полный pytest.')
     if not rows and not resume:
+        failure = site_failure(out)
+        if failure:
+            log('СТОП: решения с сайта не прочитаны (%s) — повторите команду через минуту.' % failure)
+            return 1
         log('Решений нет.')
         return 0
     for r in rows:

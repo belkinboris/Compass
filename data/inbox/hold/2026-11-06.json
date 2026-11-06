@@ -184,64 +184,6 @@
    ]
   },
   {
-   "draft_id": "d06378074",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-05",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/11/05/1242692-u-torgovoi-galerei-smenilsya-vladelets"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g67feb893 (по всей базе: та же сторона и редкое слово: галере) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d32184280",
-   "title": "MOL получила доплицензию на подготовительные сделки в рамках выкупа доли в NIS",
-   "date": "2026-11-05",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1127167"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "MOL",
-   "asset": "доплицензия на подготовительные сделки в рамках выкупа доли в NIS",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "MOL",
-    "asset": "доплицензия на подготовительные сделки в рамках выкупа доли в NIS",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку gb6b371c3 (по всей базе: совпали две стороны (asset, buyer)) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d44286970",
    "title": "Правительство Германии договорилось о покупке 50% акций KNDS, пишет Reuters",
    "date": "2026-11-05",
@@ -281,35 +223,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
     "та же новость, что «Reuters узнал о сделке, которая «положит конец» продаже акти» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d91149550",
-   "title": "Тамбовский «Хогвартс» вновь выставили на продажу за рубль",
-   "date": "2026-11-05",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/118989-tambovskiy-khogvarts-vnov-vystavili-na-prodazhu-za-rubl/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g896a22ba (общие редкие слова: выстав, рубль) — проверьте, не дубль ли"
    ]
   },
   {
@@ -526,35 +439,6 @@
    ]
   },
   {
-   "draft_id": "d50228729",
-   "title": "В Тюмени по частям продают торговый центр «Премьер»",
-   "date": "2026-11-05",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053141847"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g6e759772 (общие редкие слова: продаю, тюмени) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d81266828",
    "title": "JTI анализирует последствия передачи активов под управление РФ",
    "date": "2026-11-06",
@@ -648,35 +532,6 @@
    ]
   },
   {
-   "draft_id": "d87203528",
-   "title": "«Дом.РФ» выставил на торги памятник деревянной архитектуры в Томске",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261106/tomsk-2129634207.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbd59b112 (общие редкие слова: выстав, томске) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d16082503",
    "title": "Рынок WorkTech и HRTech в октябре: инвестиции, сделки, M&A",
    "date": "2026-11-06",
@@ -749,35 +604,6 @@
    ]
   },
   {
-   "draft_id": "d50466558",
-   "title": "Акции «Циана» выросли после предложения «Т-Технологий» о выкупе",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/06/akcii-ciana-virosli-posle"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d54203247",
    "title": "Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после покупки «Циана»",
    "date": "2026-11-06",
@@ -801,11 +627,9 @@
    },
    "ind": "Банки",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Акции «Циана» выросли после предложения «Т-Технологий» о вык» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -836,7 +660,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Акции «Циана» выросли после предложения «Т-Технологий» о вык» — второе издание, в группу не шлем"
+    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -867,7 +691,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Акции «Циана» выросли после предложения «Т-Технологий» о вык» — второе издание, в группу не шлем"
+    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -929,7 +753,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Акции «Циана» выросли после предложения «Т-Технологий» о вык» — второе издание, в группу не шлем"
+    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -1019,178 +843,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Акции «Циана» выросли после предложения «Т-Технологий» о вык» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d11270778",
-   "title": "Минздрав разъяснил особенности продажи лекарств на почте и в мобильных аптеках",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28292769"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d86017149",
-   "title": "Вьетнам и США провели 14-й раунд диалога по вопросам оборонной политики",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28292753"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d97284856",
-   "title": "Продажи новостроек в Петербурге и Ленобласти могут снизиться на 25–30% к концу года",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/06/76748791/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84322371",
-   "title": "Концерт Басты возглавил топ-10 мероприятий России по продажам билетов",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/kontsert-874990797.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46055685",
-   "title": "Десять городов обеспечили более 607 млрд рублей инвестиций в ГЧП и концессии",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119050-desyat-gorodov-obespechili-bolee-607-mlrd-rubley-investitsiy-v-gchp-i-kontsessii/"
-    ]
-   ],
-   "sum": "607 млрд ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47012182",
-   "title": "Продажа лекарств в отделениях почты в селах без аптек охватит всю страну",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261106/kuznetsov-2129733749.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -1223,13 +876,125 @@
    ]
   },
   {
-   "draft_id": "d50137326",
-   "title": "Под Волгоградом выставлен на торги центральный рынок в районном центре",
+   "draft_id": "d08571253",
+   "title": "Россиянам дали список продуктов для заблаговременной покупки к Новому году",
    "date": "2026-11-06",
    "src": [
     [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/11/06/76748856/"
+     "web:iz.ru",
+     "https://iz.ru/2197382/rossiianam-dali-spisok-produktov-dlia-zablagovremennoi-pokupki-k-novomu-godu/ize"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54276315",
+   "title": "«Автотор» объяснил исчезновение пикапа Ambertruck Work из продажи",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2197376/avtotor-obiasnil-ischeznovenie-pikapa-ambertruck-work-iz-prodazhi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49241206",
+   "title": "Продажи Geely EX2 превысили миллион экземпляров по всему миру — электрокар появится в России в конце 2026 года",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/prodazhi-geely-ex2-prevysili-million-ekzemplyarov-po-vsemu-miru-elektrokar-poyavitsya-v-rossii-v-konce-2026-goda/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52117222",
+   "title": "В Молдавии готовы распродать страну из-за дыр в бюджете, заявила оппозиция",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261106/vlah-2129765987.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48324180",
+   "title": "Купить биткоин можно. Забрать себе - никогда",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1371593.php"
     ]
    ],
    "sum": null,
@@ -1248,6 +1013,95 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29838421",
+   "title": "Слава захотела купить жилье в пивоварне",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/06/slava-zahotela-kupit-zhilie-v-pivovarne/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d38808099",
+   "title": "И рыбку съесть, и в сауну сходить: в Челябинске продается бизнес-куб. Фото",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053142031"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58173634",
+   "title": "💠 BIRCH выступила юридическим консультантом фонда под управлением АО ВИМ Инвестиции в рамках инвестиции в капитал ГК Swordfish Security Корпоративная / M&A практика BIRCH выступила юридическим консуль",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "tg:LawFirms",
+     "https://t.me/LawFirms/11624"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf6c084b9 (общие редкие слова: securi, swordf) — проверьте, не дубль ли",
+    "та же новость, что «Рынок WorkTech и HRTech в октябре: инвестиции, сделки, M&A» — второе издание, в группу не шлем"
    ]
   }
  ]
