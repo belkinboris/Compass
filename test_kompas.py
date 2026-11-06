@@ -2202,7 +2202,23 @@ def test_main_model_refusing_access_falls_back_to_the_spare_model(monkeypatch):
     monkeypatch.setattr(assistant, "_call_llm_once", fake)
     monkeypatch.delenv("YANDEX_MODEL", raising=False)
     assert assistant.call_llm("s", "u", 100) == "ответ запасной модели"
-    assert calls == [None, assistant.FALLBACK_MODEL]
+    assert calls == [None, assistant.FALLBACK_MODELS[0]]
+    # Первая запасная отказала заглушкой (YandexGPT на темах указов, 6 ноября 2026) —
+    # идет следующая.
+    calls.clear()
+
+    def fake2(system, user, max_tokens, deadline=None, model=None, reasoning_effort=None, stats=None):
+        calls.append(model)
+        if model is None:
+            raise RuntimeError('Responses API HTTP 403: {"type":null}')
+        if model == "a":
+            raise assistant.LLMCutOff("ответ оборван на 65 знаках", partial="К сожалению")
+        return "ответ второй запасной"
+
+    monkeypatch.setattr(assistant, "_call_llm_once", fake2)
+    monkeypatch.setattr(assistant, "FALLBACK_MODELS", ["a", "b"])
+    assert assistant.call_llm("s", "u", 100) == "ответ второй запасной"
+    assert calls == [None, "a", "b"]
     # Явно заданную модель (стенд сравнения) не подменяем.
     calls.clear()
     import pytest

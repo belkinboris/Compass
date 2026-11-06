@@ -758,6 +758,10 @@ def entities_missing_from_card(card, comps, records=None):
     return out
 
 
+CUSTODY_TAKEN = re.compile(r'\b(?:забра\w*|отобра\w*|отня\w*|отнял\w*|лиши\w*|изъя\w*|конфиск\w*|национализ\w*|'
+                           r'перешл\w*\s+(?:к\s+)?государств\w*|стал\w*\s+собственник\w*)', re.I)
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None, source_records=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -838,6 +842,13 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             out.append(('custody_parties', 'у временного управления нет покупателя и продавца: '
                         'очистите %s, управляющего и собственника — в прозу '
                         '(law.struct/eco.context)' % ', '.join(named)))
+        # Заголовок не говорит, что указ «забрал» активы или компания их «лишилась»
+        # (владелец, 6 ноября 2026: «Как указ что-то может забрать?» — Tarkett, «Каппа Рус»):
+        # собственник не меняется, активы «переданы во временное управление».
+        if CUSTODY_TAKEN.search(str(card.get('title') or '')):
+            out.append(('custody_title_taken', 'заголовок временного управления говорит, что активы '
+                        'забрали или компания их лишилась, а собственник не меняется — «переданы во '
+                        'временное управление …»'))
         if not has(card.get('no_parties')):
             out.append(('custody_no_parties', 'временное управление без no_parties — впишите «Временное '
                         'управление по указу, собственность не переходила — покупателя и продавца нет.»'))

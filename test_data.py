@@ -2128,3 +2128,17 @@ def test_placeholder_canon_matches_the_screen():
         assert screen.match(v.strip()), repr(v)
     for v in placeholders.NOT_EXAMPLES:
         assert not screen.match(v), repr(v)
+
+
+def test_custody_title_does_not_say_assets_were_taken(deals):
+    """Временное управление собственность не меняет: заголовок не говорит, что указ
+    «забрал» активы или компания их «лишилась» (владелец, 6 ноября 2026, Tarkett и
+    «Каппа Рус»: «Как указ что-то может забрать?»). Та же проверка — в приемке
+    (`accept_card.custody_title_taken`)."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "ingest"))
+    import accept_card
+    bad = [(d["id"], d["title"]) for d in deals
+           if (d.get("type") == "Временное управление" or d.get("kind") == "custody")
+           and accept_card.CUSTODY_TAKEN.search(str(d.get("title") or ""))]
+    assert not bad, f"заголовок временного управления говорит об изъятии: {bad[:5]}"

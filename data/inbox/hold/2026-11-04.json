@@ -182,34 +182,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d16528002",
-   "title": "Kraft Heinz продаст 70% кофейного бизнеса",
-   "date": "2026-11-04",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28286223"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "70% кофейного бизнеса",
-   "seller": "Kraft Heinz",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "70% кофейного бизнеса",
-    "seller": "Kraft Heinz"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
   }
  ]
 }
