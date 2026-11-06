@@ -1594,6 +1594,19 @@
    "last_error": null
   },
   {
+   "id": "tg:whitesquarenews",
+   "name": "White Square (@whitesquarenews)",
+   "kind": "telegram",
+   "url": "https://t.me/whitesquarenews",
+   "feed": "https://t.me/s/whitesquarenews",
+   "feed_checked": true,
+   "tier": 1,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-11-06",
+   "last_error": null
+  },
+  {
    "id": "firm:alumni",
    "name": "ALUMNI Partners",
    "kind": "html",

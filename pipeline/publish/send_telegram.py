@@ -1376,6 +1376,11 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
               'карточки, ссылка в посте вела бы в никуда (%s).'
               % (len(not_on_site), ', '.join(sorted(not_on_site))))
 
+    # ПОСТ НЕ РАНЬШЕ ДАТЫ (владелец, 6 ноября 2026: «про агрохолдинг и
+    # птицефабрику я посты подтвердил, но давай их не выкладывать сегодня»).
+    # `--skip` живет один вызов, а следующий прогон публикации выложил бы пост;
+    # `post_not_before` (дата YYYY-MM-DD по Москве) держит его в карточке.
+    skip_ids = frozenset(skip_ids) | held_until(data['deals'], datetime.now(MSK).date())
     # П3-10: решение читающего — «эта карточка сейчас не идет», даже если
     # механическая вычитка ее пропустила. Не помечается отправленной —
     # следующий прогон увидит ее заново, если ее не отредактируют иначе.
@@ -1652,6 +1657,12 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # Удаленные из канала посты в отчет не выводятся (владелец, 2 ноября 2026:
     # «зачем вообще посты в отчетах упоминать» — посты удаляют сами владельцы,
     # на карточки это не влияет). Список `deleted` остается для отладки.
+
+
+def held_until(deals, today):
+    """id сделок, чей первый пост ждет даты `post_not_before` (позже `today`)."""
+    return frozenset(d['id'] for d in deals
+                     if str(d.get('post_not_before') or '') > today.isoformat())
 
 
 def parse_skip_ids(argv):
