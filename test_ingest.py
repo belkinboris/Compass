@@ -4674,7 +4674,7 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     import accept_card
     base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
             "deals": [], "telegram_posts": {}}
-    card = {"id": "gt1", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+    card = {"id": "gt1", "title": "Positive Technologies купила долю в CyberOK", "type": "M&A",
             "date": FRESH_DATE, "status": "Закрыта", "buyer_name": "Positive Technologies",
             "asset": "долю в компании-разработчике решений в области кибербезопасности CyberOK",
             "src": [["Ведомости", "https://www.vedomosti.ru/x"]],
@@ -4683,7 +4683,7 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     codes = {c for c, _t in accept_card.findings(card, base)}
     assert {"asset_case", "asset_description", "party_unlinked:buyer", "party_unlinked:target", "why"} <= codes, codes
     assert any(c.startswith("press:") for c in codes), codes
-    clean = {"id": "gt2", "ind": "ИТ и интернет", "title": "Positive Technologies приобрела долю в CyberOK", "type": "M&A",
+    clean = {"id": "gt2", "ind": "ИТ и интернет", "title": "Positive Technologies купила долю в CyberOK", "type": "M&A",
              "date": FRESH_DATE, "status": "Закрыта", "buyer": "gsb", "target": "gsb2", "asset": "CyberOK",
              "src": [["Ведомости", "https://www.vedomosti.ru/x"], ["Интерфакс", "https://www.interfax.ru/y"]],
              "eco": {}, "law": {},
@@ -4902,7 +4902,7 @@ def test_acceptance_refuses_invented_names_descriptions_and_twins():
     import accept_card
     base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
             "deals": [], "telegram_posts": {}}
-    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» купил долю в Совкомбанке", "type": "M&A",
             "date": FRESH_DATE, "buyer_name": "«Совко капитал партнерс»", "src": [["В", "https://v.ru/1"]],
             "eco": {}, "law": {}}
     full = {k: True for k in accept_card.CHECKLIST}
@@ -4931,7 +4931,7 @@ def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
     import accept_card
     base = {"companies": {"gsb": {"name": "ПАО «Совкомбанк»", "ind": "Банки", "desc": "Банк."}},
             "deals": [], "telegram_posts": {}}
-    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» нарастил долю в Совкомбанке", "type": "M&A",
+    card = {"id": "gt1", "ind": "Банки", "title": "«Совко капитал партнерс» купил долю в Совкомбанке", "type": "M&A",
             "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "«Совко капитал партнерс»",
             "reviewed": FRESH_DATE,
             "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {"struct": "Так пишут «Ведомости»."}}
@@ -10084,3 +10084,19 @@ def test_post_not_before_holds_the_first_post_until_the_date():
     deals = [{'id': 'a', 'post_not_before': '2026-11-07'}, {'id': 'b'}, {'id': 'c', 'post_not_before': '2026-11-06'}]
     assert st.held_until(deals, _dt.date(2026, 11, 6)) == frozenset({'a'})
     assert st.held_until(deals, _dt.date(2026, 11, 7)) == frozenset()
+
+
+def test_acceptance_holds_a_new_card_whose_title_breaks_the_standard():
+    """Владелец одобрил стандарт заголовков 6 ноября 2026 («Заголовки ок»): новые
+    карточки сразу по стандарту — приемка не пропускает «Собственник
+    агрохолдинга продает бизнес и уезжает в Сочи»; старые ждут своей партии."""
+    import accept_card
+    base = {"deals": [], "companies": {}}
+    card = {"id": "gt1", "date": "2026-11-07", "type": "M&A", "status": "Обсуждается",
+            "title": "Собственник агрохолдинга под Омском продает бизнес и уезжает в Сочи"}
+    codes = [c for c, _t in accept_card.findings(card, base)]
+    assert "title_standard" in codes
+    good = dict(card, title="Агрохолдинг в Омской области выставлен на продажу за 970 млн ₽")
+    assert "title_standard" not in [c for c, _t in accept_card.findings(good, base)]
+    old = dict(card, date="2026-10-01")
+    assert "title_standard" not in [c for c, _t in accept_card.findings(old, base)]
