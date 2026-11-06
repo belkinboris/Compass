@@ -1350,8 +1350,10 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
   transition:max-height .6s var(--ease),opacity .3s var(--ease),margin .35s var(--ease),padding .35s var(--ease)}
 .pe-panel.open{max-height:4000px;opacity:1;margin-top:16px;padding-top:14px;border-top-color:var(--line)}
 .pe-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);font-weight:600}
-.pe-tag{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:400;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
 .pe-range{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.15;color:var(--ink);margin:12px 0 10px;display:inline-block}
+.pe-src{font-size:14px;line-height:1.45;color:var(--ink);margin:-4px 0 10px;padding-left:10px;border-left:2px solid var(--accent-deep)}
+.pe-src b{font-weight:600}
+.pe-off{color:var(--muted)}
 .pe-text{margin-top:4px}
 .pe-text p{margin:0 0 9px;font-size:14.5px;line-height:1.6;color:var(--ink)}
 .pe-wait{font-size:14.5px;color:var(--muted);margin-top:10px}
@@ -1381,7 +1383,6 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
 .pe-cta a{display:inline-block;background:var(--accent-deep);color:#fff;text-decoration:none;border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600}
 .pe-cta a:hover{background:#163B2C}
 @media (max-width:480px){.pe-r{grid-template-columns:1fr;gap:2px}.pe-k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}}
-@media(max-width:600px){.pe-tag{margin-left:0}}
 .ai-row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 #facts .spec-row .ai-row-head .label{margin-bottom:0}
 .ai-ask{--pe-hub:var(--card);display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 inherit;font-family:inherit;color:var(--ink);
@@ -10441,7 +10442,9 @@ function priceEstTail(r){
   // Откуда мультипликаторы — docs/price_estimate_sources.md.
   const src = m => m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.where)}</a>`:esc(m.where);
   const row = (k, v, small) => `<div class="pe-r"><span class="pe-k">${k}</span><span class="pe-v">${v}${small?`<small>${small}</small>`:""}</span></div>`;
-  const methods = (r.methods||[]).map(m=>row(esc(m.label), `<span class="num">${esc(m.result)}</span>`, `${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}`)).join("");
+  // Метод, не вошедший в итог (отчетность не той компании, меньше баланса), —
+  // серым и с причиной (владелец, 6 ноября 2026, «Медскан»).
+  const methods = (r.methods||[]).map(m=>row(esc(m.label), `<span class="num${m.unreliable?" pe-off":""}">${esc(m.result)}</span>`, `${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}${m.unreliable?`; ${esc(m.unreliable)}`:""}`)).join("");
   const global = (r.global_methods||[]).map(m=>row("Мировой ориентир", `до <span class="num">${esc(m.result)}</span> — верхняя граница`, `${esc(m.label)} ${esc(m.multiple)}, ${src(m)}; за рубежом компании оцениваются в 2–3 раза дороже российских`)).join("");
   const floor = r.floor?row("Не ниже", `<span class="num">${esc(r.floor.result)}</span> — нижняя граница`, `${esc(r.floor.base)}, ФНС; дешевле собственного капитала продают редко`):"";
   const comps = (r.comparables||[]).map(c=>`<li><a class="pe-ct" href="#/deal/${encodeURIComponent(c.id)}">${esc(c.title)}</a><span class="pe-cy">${c.year}</span><span class="pe-cp num">${esc(c.price)}</span></li>`).join("");
@@ -10468,8 +10471,12 @@ async function typeInto(el, text, fast, caret){
   }
 }
 async function fillPriceEst(panel, r, fast){
-  panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span><span class="pe-tag">расчет, а не цена сделки</span></div>
-    ${r.range_text?`<div class="pe-range num"></div>`:""}<div class="pe-text"></div><div class="pe-tailwrap"></div>`;
+  // Подписи-плашки в шапке больше нет (владелец, 6 ноября 2026: «это и так
+  // понятно»). Оценка источников — сразу под итогом, а не в последней
+  // строке: с ней сверяются первой (тогда же, «Медскан»).
+  const srcLine = r.source && r.source.line ? `<div class="pe-src">Оценка источников: <b>${esc(r.source.line)}</b></div>` : "";
+  panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div>
+    ${r.range_text?`<div class="pe-range num"></div>`:""}${srcLine}<div class="pe-text"></div><div class="pe-tailwrap"></div>`;
   const caret = document.createElement("span"); caret.className = "pe-caret";
   if(r.range_text) await typeInto(panel.querySelector(".pe-range"), r.range_text.charAt(0).toUpperCase() + r.range_text.slice(1), fast, caret);
   const box = panel.querySelector(".pe-text");

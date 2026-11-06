@@ -115,6 +115,9 @@ _RUB_AMOUNT = re.compile(
     r'(?:\s*[–—-]\s*(?P<n2>\d[\d\s\xa0]*(?:[.,]\d+)?))?'
     r'\s*(?P<unit>тыс|млн|млрд|трлн)\.?\s*₽',
     re.I)
+_RUB_RANGE_TWO_UNITS = re.compile(
+    r'(?P<n1>\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(?P<u1>тыс|млн|млрд|трлн)\.?\s*[–—-]\s*'
+    r'(?P<n2>\d[\d\s\xa0]*(?:[.,]\d+)?)\s*(?P<u2>тыс|млн|млрд|трлн)\.?\s*₽', re.I)
 _STAKE_PCT = re.compile(r'(\d{1,3}(?:[.,]\d+)?)\s*%')
 # Процент, который НЕ доля: «на 30% выше», «дисконт 20%», «выросла на 15%»,
 # «ставка 12%» — рядом с ним стоит слово о сравнении величин, а не о
@@ -272,19 +275,41 @@ def parse_rub_sum(text: str | None) -> float | None:
     «Диапазон при разборе может схлопнуться в одну цифру»), но для оценки
     порядка величины мультипликатора этого достаточно; сама карточка
     диапазон не теряет, он остается в `sum` как есть."""
+    rng = _rub_range_one_unit(text)
+    return (rng[0] + rng[1]) / 2 if rng else None
+
+
+def parse_rub_range(text: str | None) -> tuple[float, float] | None:
+    """(от, до) в рублях по первой ₽-сумме строки: «31–36 млрд ₽» → (31e9, 36e9),
+    «2 млрд ₽» → (2e9, 2e9); не ₽-сумма — None. Оценка цены
+    (price_estimate.source_value) берет диапазон целиком, без усреднения."""
     if not text:
-        return None
-    m = _RUB_AMOUNT.search(text)
-    if not m:
         return None
     def num(s: str) -> float:
         return float(s.replace(' ', '').replace('\xa0', '').replace(',', '.'))
-    n1 = num(m.group('n1'))
-    n2 = num(m.group('n2')) if m.group('n2') else None
+    # «900 млн – 2 млрд ₽»: у концов разные единицы (элеватор gafc80ee1)
+    two = _RUB_RANGE_TWO_UNITS.search(text)
+    if two:
+        lo = num(two.group('n1')) * UNIT_MULT[two.group('u1').lower()]
+        hi = num(two.group('n2')) * UNIT_MULT[two.group('u2').lower()]
+        return (min(lo, hi), max(lo, hi))
+    return _rub_range_one_unit(text)
+
+
+def _rub_range_one_unit(text: str | None) -> tuple[float, float] | None:
+    """Первая ₽-сумма с одной единицей на оба конца («36–45 млн ₽») — разбор,
+    на котором стоит `parse_rub_sum` с сентября 2026; его не трогаем."""
+    if not text:
+        return None
+    def num(s: str) -> float:
+        return float(s.replace(' ', '').replace('\xa0', '').replace(',', '.'))
+    m = _RUB_AMOUNT.search(text)
+    if not m:
+        return None
     mult = UNIT_MULT[m.group('unit').lower()]
-    lo = n1 * mult
-    hi = (n2 * mult) if n2 is not None else lo
-    return (lo + hi) / 2
+    lo = num(m.group('n1')) * mult
+    hi = num(m.group('n2')) * mult if m.group('n2') else lo
+    return (min(lo, hi), max(lo, hi))
 
 
 def is_estimate(text: str | None) -> bool:

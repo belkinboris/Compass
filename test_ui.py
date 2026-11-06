@@ -5217,6 +5217,54 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     assert page.locator("#pe-btn").count() == 0
 
 
+def test_price_estimate_panel_shows_the_source_estimate_under_the_range(page, base_url):
+    """«Медскан» (владелец, 6 ноября 2026): оценка источников — сразу под итогом,
+    метод по отчетности не той компании — серым и с причиной; подписи-плашки
+    «расчет, а не цена сделки» в шапке нет («это и так понятно»). Ответ сервера
+    подменяется: отчетности ФНС в тестовой базе нет."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if str(d.get("sum") or "").startswith("Не раскрыт")
+                and ((d.get("facts") or {}).get("price") or {}).get("meaning") not in ("disclosed", "foreign_currency", "auction_start")
+                and d.get("type") == "M&A")
+    answer = {"available": True, "range_text": "≈ 16–88 млрд ₽ за 100%", "range_kind": "estimate", "by": "template",
+              "paragraphs": ["По расчету Компаса сделка могла стоить около 16–88 млрд ₽ за 100%."],
+              "methods": [{"label": "P/S", "base": "выручка за 2024 год — 341 млн ₽", "multiple": "1,75×",
+                           "where": "база Компаса, все отрасли, 28 сделок", "url": None, "result": "597 млн ₽",
+                           "unreliable": "в итог не входит: отчетность ФНС — только одной компании, а не всего бизнеса"},
+                          {"label": "P/S", "base": "выручка по данным источника — 28 млрд ₽", "multiple": "1,75×",
+                           "where": "база Компаса, все отрасли, 28 сделок", "url": None, "result": "49 млрд ₽",
+                           "unreliable": None}],
+              "global_methods": [], "floor": None, "comparables": [], "experts": "31–36 млрд ₽ (по оценке)",
+              "source": {"line": "31–36 млрд ₽, в пределах расчета Компаса", "divergent": False, "reason": None},
+              "stake": None}
+    route = "**/api/deals/" + deal["id"] + "/price-estimate*"
+    page.route(route, lambda r: r.fulfill(status=200, content_type="application/json",
+                                           body=_json.dumps(answer, ensure_ascii=False)))
+    errors = []
+    page.on("pageerror", lambda e: errors.append(str(e)))
+    try:
+        for width in (360, 1280):
+            page.set_viewport_size({"width": width, "height": 900})
+            page.goto(base_url + "/#/deals", wait_until="domcontentloaded")  # карточка рисуется заново, панель закрыта
+            page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+            page.wait_for_selector("#pe-btn", timeout=15000)
+            page.click("#pe-btn")
+            page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=30000)
+            assert page.locator(".pe-panel .pe-tag").count() == 0
+            assert page.inner_text(".pe-panel .pe-h").strip().lower() == "анализ компаса"
+            order = page.evaluate("[...document.querySelector('.pe-panel').children].map(e=>e.className)")
+            assert order.index("pe-range num") + 1 == order.index("pe-src"), order
+            assert "Оценка источников: 31–36 млрд ₽" in page.inner_text(".pe-panel .pe-src")
+            assert page.locator(".pe-panel .pe-r .pe-off").count() == 1
+            assert "в итог не входит" in page.inner_text(".pe-panel .pe-rows")
+            over = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
+        assert not errors, errors[:3]
+    finally:
+        page.unroute(route)
+
+
 def test_assistant_button_opens_a_sheet_from_any_page(page, base_url):
     """Владелец 26 октября 2026: справа внизу всегда кнопка-компас; снизу
     выезжает ассистент, потянуть вверх — чат на весь экран. На экране
