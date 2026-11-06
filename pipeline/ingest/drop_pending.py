@@ -82,22 +82,38 @@ def merge_target(card_id, reason, dropped=()):
     return found[0] if len(set(found)) == 1 else None
 
 
-def closure_text(card, reason, dropped=(), base_ids=None, pending_ids=None):
+def _urls(card):
+    return {str(x[1]) for x in (card or {}).get('src') or [] if len(x) > 1 and str(x[1]).startswith('http')}
+
+
+def closure_text(card, reason, dropped=(), base_ids=None, pending_ids=None, targets=None):
     """Что сказать владельцу, если выкинутая карточка родилась из его «в работу».
     Слияние — ссылка на ту карточку: в базе — страница сделки, в очереди —
-    предпросмотр; цель неоднозначна или ее нет нигде — без ссылки, с причиной."""
+    предпросмотр; цель неоднозначна или ее нет нигде — без ссылки, с причиной.
+
+    «Новое добавлено» говорится, только если в той карточке есть источник из
+    выкинутой (6 ноября 2026, BIRCH/Swordfish: владельцу ответили «новое из
+    новости добавлено», а в карточку не попало ничего — и консультант
+    покупателя потерялся). Не добавлено — так и сказано, с причиной: владелец
+    видит, что именно рутина сочла «ничего нового», и может поправить."""
     raw = card.get('from_raw') or {}
     if not raw:
         return None
     merged = merge_target(card.get('id', ''), reason, dropped)
     head = 'Ваше решение «это сделка» по новости «%s» применено.' % (raw.get('title') or card.get('title') or '')[:120]
+    why = (reason or '').strip().rstrip('.')
     if merged and (base_ids is None or merged in base_ids):
-        return ('%s Это та же сделка, что уже есть в базе: https://projectcompass.ru/#/deal/%s — новое из новости '
-                'добавлено в ту карточку, отдельной карточки и поста не будет.' % (head, merged))
-    if merged and pending_ids is not None and merged in pending_ids:
-        return ('%s Это та же сделка, что карточка на проверке: https://projectcompass.ru/#/preview/%s — новое из '
-                'новости добавлено туда, отдельной карточки и поста не будет.' % (head, merged))
-    return '%s Но карточку пришлось снять: %s.' % (head, (reason or '').strip().rstrip('.'))
+        where = 'Это та же сделка, что уже есть в базе: https://projectcompass.ru/#/deal/%s' % merged
+    elif merged and pending_ids is not None and merged in pending_ids:
+        where = 'Это та же сделка, что карточка на проверке: https://projectcompass.ru/#/preview/%s' % merged
+    else:
+        return '%s Но карточку пришлось снять: %s.' % (head, why)
+    target = (targets or {}).get(merged)
+    if targets is None or (_urls(card) & _urls(target)):
+        return ('%s %s — новое из новости добавлено в ту карточку, отдельной карточки и поста не будет.'
+                % (head, where))
+    return ('%s %s. Новость в ту карточку не добавлена — по оценке рутины, нового в ней нет: %s. '
+            'Если это не так, ответьте здесь.' % (head, where, why))
 
 
 def notify_console(texts):
@@ -142,9 +158,11 @@ def main(argv):
     promote.save_state(state)
     # Карточка из решения владельца («в работу») выкинута или слита — он должен
     # узнать об этом из консоли, а не из тишины (28 октября 2026, «Аккую»).
-    base_ids = {d.get('id') for d in json.load(open(BASE, encoding='utf-8')).get('deals', [])}
+    base_deals = json.load(open(BASE, encoding='utf-8')).get('deals', [])
+    targets = {d.get('id'): d for d in base_deals + pending_fresh['cards']}
+    base_ids = {d.get('id') for d in base_deals}
     pending_ids = {c.get('id') for c in pending_fresh['cards']}
-    notify_console([t for t in (closure_text(c, reason, ids, base_ids, pending_ids) for c in gone) if t])
+    notify_console([t for t in (closure_text(c, reason, ids, base_ids, pending_ids, targets) for c in gone) if t])
     return 0
 
 

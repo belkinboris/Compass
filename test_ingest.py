@@ -9348,6 +9348,23 @@ def test_two_duplicates_dropped_together_each_point_to_its_own_card():
     assert 'пришлось снять' in t2
 
 
+def test_merge_message_says_added_only_when_the_news_reached_the_card():
+    """6 ноября 2026, BIRCH/Swordfish: владельцу ответили «новое из новости
+    добавлено в ту карточку», а в карточке не было ни поста BIRCH, ни BIRCH
+    консультантом. «Добавлено» — только если источник выкинутой есть в той
+    карточке; иначе ответ говорит, что не добавлено и почему."""
+    import drop_pending
+    card = {'id': 'g73f77d93', 'from_raw': {'draft_id': 'd1', 'title': 'BIRCH консультировала ВИМ'},
+            'src': [['BIRCH', 'https://t.me/BIRCHLEGAL/2343']]}
+    reason = 'дубль: та же сделка, что уже в базе (gf6c084b9), без единого нового факта'
+    bare = {'gf6c084b9': {'id': 'gf6c084b9', 'src': [['Ведомости', 'https://www.vedomosti.ru/x']]}}
+    t = drop_pending.closure_text(card, reason, ['g73f77d93'], {'gf6c084b9'}, set(), bare)
+    assert 'не добавлена' in t and 'без единого нового факта' in t and 'добавлено в ту карточку' not in t
+    fed = {'gf6c084b9': {'id': 'gf6c084b9', 'src': bare['gf6c084b9']['src'] + card['src']}}
+    t2 = drop_pending.closure_text(card, reason, ['g73f77d93'], {'gf6c084b9'}, set(), fed)
+    assert 'добавлено в ту карточку' in t2
+
+
 def test_draft_reads_became_co_owner_as_a_purchase():
     """«Коммерсантъ» о Baggins Coffee (28 октября 2026): «Фонд «Бумеранг Капитал»
     стал совладельцем Baggins Coffee» — разбор не видел ни сторон, ни предмета,
