@@ -497,6 +497,257 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Российские активы JTI переданы во временное управление АО «Промышленные активы»</b>\n\n<b>Предмет:</b> JTI Россия — российское подразделение табачной группы Japan Tobacco International.\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Пищепром и напитки\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9080919\">Коммерсантъ</a>\nЕще 3 источника — в карточке сделки\n\n#потребрынок #пищепром #временное_управление\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g7994f736\">карточке сделки</a>"
+  },
+  {
+   "id": "g3aa9bab5",
+   "date": "2026-11-05",
+   "title": "Московский инвестор купил один из крупнейших садов Ставрополья за 247 млн руб.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "247 млн ₽",
+   "buyer_name": "Московский инвестор",
+   "asset": "один из крупнейших садов Ставрополья",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-05",
+     "title": "Сделка завершена",
+     "note": "Конкурсный управляющий банкротящегося агрохолдинга ООО «Сады Бештау» Павел Чесноков реализовал единый имущественный комплекс предприятия. По итогам повторных торгов, состоявшихся на «Всероссийской Электронной Торговая Площадке», покупателем выступило…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     ]
+    }
+   ],
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Московский инвестор",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     }
+    ],
+    "target": [
+     {
+      "value": "один из крупнейших садов Ставрополья",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Moskovskij-investor-kupil-odin-iz-krupnejshih-sadov-Stavropolya-za-247-mln-rub-87737"
+     }
+    ]
+   },
+   "pending_since": "2026-11-06T05:52:37+00:00"
+  },
+  {
+   "id": "g13f5c85b",
+   "date": "2026-11-06",
+   "title": "Разработчик систем безопасности «Рубеж» приобрел офис на западе Москвы",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9081283"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Разработчик систем безопасности «Рубеж»",
+   "asset": "офис на западе Москвы",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-06",
+     "title": "Сделка завершена",
+     "note": "«Рубеж», российский разработчик интеллектуальных систем безопасности, приобрел 5 тыс. кв. м офисной недвижимости в офисном здании «Upside Кунцево» на западе Москвы. Об этом рассказали два источника “Ъ” на рынке недвижимости.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9081283"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Разработчик систем безопасности «Рубеж»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9081283"
+     }
+    ],
+    "target": [
+     {
+      "value": "офис на западе Москвы",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9081283"
+     }
+    ]
+   },
+   "pending_since": "2026-11-06T05:52:37+00:00"
+  },
+  {
+   "id": "gf6587da0",
+   "date": "2026-11-06",
+   "title": "Самую большую квартиру продали в Москве в 2026 году за 3,4 млрд рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261106/kvartira-2129487096.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "3,4 млрд ₽",
+   "seller": "Самую большую квартиру",
+   "asset": "в Москве в 2026 году",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-06",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261106/kvartira-2129487096.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "в Москве в 2026 году",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261106/kvartira-2129487096.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Самую большую квартиру",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261106/kvartira-2129487096.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-06T05:52:37+00:00"
+  },
+  {
+   "id": "g406b1533",
+   "date": "2026-11-05",
+   "title": "Какие российские компании выкупают свои акции?",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Smart-Lab",
+     "https://smart-lab.ru/blog/1371175.php"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "15 млрд ₽",
+   "buyer_name": "Какие российские компании",
+   "asset": "свои акции?",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Какие российские компании",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://smart-lab.ru/blog/1371175.php"
+     }
+    ],
+    "target": [
+     {
+      "value": "свои акции?",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://smart-lab.ru/blog/1371175.php"
+     }
+    ]
+   },
+   "pending_since": "2026-11-06T05:52:37+00:00"
   }
  ]
 }
