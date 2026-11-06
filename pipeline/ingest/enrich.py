@@ -402,11 +402,25 @@ def proposals(deal, item, names, comps, match_keys=None):
         # завершена» от Mergers.ru поверх закрытия 27 октября, сайт показал
         # два одинаковых этапа, а веха о закрытии повторила первый пост.
         # Такая новость — еще один источник уже известного этапа.
+        # Карточка без единой записи `events` (собрана сразу в конечном
+        # статусе, без истории переходов) выглядит для проверки выше
+        # «первой», даже когда она целиком уже представляет этот самый
+        # этап: «Концентрация»/«Шереметьево»/дом Спиридонова, 6 ноября
+        # 2026 — три ложных «новых этапа» в одном прогоне (known_issues/
+        # intake.md). Вторая защита: если своих `events` еще нет, но
+        # (вид, дата) совпадают с ТЕКУЩИМ статусом+датой карточки, или
+        # ссылка уже стоит в ее `src`/`discovery_src`, — это не первое
+        # открытие этапа, а повторное чтение уже известного.
+        own_stage_key = (STAGE_KIND.get(deal.get('status')) or '', str(deal.get('date') or ''))
+        already_known_stage = not existing_events and (
+            event_key == own_stage_key or (event_url and editions.has_source(deal, event_url)))
         terminal_twin = None
         if event_key[0] in ('closed', 'cancelled'):
             terminal_twin = next((e for e in existing_events
                                   if str(e.get('kind') or '') == event_key[0]), None)
-        if terminal_twin is not None:
+        if already_known_stage:
+            pass
+        elif terminal_twin is not None:
             if event_url and event_url not in {u for _l, u in format_post.milestone_sources(terminal_twin)}:
                 out.append(('event_source', {'kind': event_key[0], 'date': str(terminal_twin.get('date') or ''),
                                              'source': list(event['source'][:2])},

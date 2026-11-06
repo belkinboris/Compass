@@ -62,6 +62,48 @@
     "needs_review": true
    },
    "queued": "2026-11-06"
+  },
+  {
+   "key": "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713::g25a6766d",
+   "candidate_id": "g25a6766d",
+   "reason": "общее название в кавычках и общие слова: 3",
+   "draft": {
+    "draft_id": "d48793385",
+    "title": "Фонд «Бумеранг Капитал» и сооснователь «Цех 85» выкупили сеть кофеен Baggins Coffee",
+    "date": "2026-10-29",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713"
+     ]
+    ],
+    "sum": "350 млн ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-10-29",
+      "title": "Сделка завершена",
+      "note": "50% в компании выкупил фонд «Бумеранг Капитал», став управляющим партнером. Оставшиеся 50% перешли предпринимателю Антону Петрову. Ранее Baggins Coffee контролировал ее сооснователь Андрей Павлов, который теперь займется развитием других проектов, включая…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713"
+      ]
+     }
+    ],
+    "buyer_name": "«Бумеранг Капитал» и сооснователь «Цех 85»",
+    "asset": "сеть кофеен Baggins Coffee",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Бумеранг Капитал» и сооснователь «Цех 85»",
+     "asset": "сеть кофеен Baggins Coffee",
+     "seller": null
+    },
+    "ind": "Пищепром и напитки",
+    "needs_review": true
+   },
+   "queued": "2026-11-06"
   }
  ]
 }
