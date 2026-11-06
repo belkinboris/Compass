@@ -10131,6 +10131,26 @@ def test_acceptance_holds_a_new_card_whose_title_breaks_the_standard():
     assert "title_standard" not in [c for c, _t in accept_card.findings(old, posted)]
 
 
+def test_title_standard_knows_a_seller_who_walked_away_and_a_free_transfer():
+    """6 ноября 2026: у сорвавшейся сделки отказаться может и продавец — Flowwow
+    не устроили условия «Яндекса» (g718e3d0e): «Z отказался продать Y X». Доля,
+    перешедшая без денег («Боржоми», g7cb5d8f8), — «X безвозмездно получил N% Y
+    от Z». Голое «получил» глаголом покупки не считается («получил одобрение ФАС»)."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard as ts
+    failed = {"type": "M&A", "status": "Не состоялась"}
+    assert ts.verb_ok(failed, "Flowwow отказался продать «Яндексу» российский бизнес") is True
+    assert ts.verb_ok(failed, "Совладельцы отказались от продажи сети «Бетта»") is True
+    assert ts.verb_ok(failed, "«Яндекс» отказался от покупки Flowwow") is True
+    assert ts.verb_ok(failed, "Продажа российского бизнеса Flowwow «Яндексу» сорвалась") is False
+    assert "отказался продать" in ts.hint(failed)
+    closed = {"type": "M&A", "status": "Закрыта"}
+    assert ts.verb_ok(closed, "Правительство Грузии безвозмездно получило от «Альфа-Групп» 7,73% владельца «Боржоми»") is True
+    assert ts.verb_ok(closed, "Правительство бесплатно получило 10% завода") is True
+    assert ts.verb_ok(closed, "«Маяк» получил одобрение ФАС на покупку «Воркутаугля»") is False
+    assert ts.verb_ok(closed, "«Литекс» купил ТЦ «Июнь» в Красногорске у «Финансовых решений»") is True
+
+
 # ---------- новость о карточке базы: сравнение по фактам (card_news.py, 6 ноября 2026) ----------
 
 def _cn_base():

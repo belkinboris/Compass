@@ -1036,7 +1036,7 @@
   {
    "id": "g718e3d0e",
    "date": "2026-05-28",
-   "title": "Продажа российского бизнеса Flowwow «Яндексу» сорвалась",
+   "title": "Flowwow отказался продать «Яндексу» российский бизнес",
    "buyer": "yandex",
    "target": "g578c62cd",
    "ind": "E-commerce",
@@ -1173,7 +1173,9 @@
    "deep_researched": "2026-08-16",
    "followup_researched": "2026-08-16",
    "weekly_researched": "2026-08-16",
-   "themes": [],
+   "themes": [
+    "Уход иностранного владельца"
+   ],
    "proofread_absorbed": {
     "eco.target_fin": [
      "f2d240f86cc3"
@@ -1183,7 +1185,9 @@
     "eco.context": [],
     "law.struct": [],
     "law.appr": [],
-    "title": [],
+    "title": [
+     "9cf1974015bb"
+    ],
     "seller": []
    },
    "proofread": "2026-09-02",
@@ -1191,7 +1195,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "ac4c4fe5ce51"
+     "card_hash": "b6b76b2c086b"
     },
     "price": {
      "value_rub": null,
@@ -1214,7 +1218,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c30a41a3b69d"
+     "card_hash": "55f74755d197"
     },
     "target": {
      "company_id": "g578c62cd",
@@ -19276,12 +19280,12 @@
   },
   {
    "id": "gde4f9941",
-   "date": "2023-02-14",
-   "title": "ТЦ «Июнь» в Красногорске продан компании «Литекс»",
+   "date": "2026-09-02",
+   "title": "«Литекс» купил ТЦ «Июнь» в Красногорске у «Финансовых решений»",
    "buyer": "ge1bf3988",
    "target": "g57782a33",
    "ind": "Недвижимость",
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
    "sum": "Не раскрыта",
@@ -19379,30 +19383,30 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "210387dda263"
+     "card_hash": "70db78fb4f49"
     },
     "price": {
      "value_rub": null,
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "8237985cc020"
+     "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2023-02-14",
+     "value": "2026-09-02",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "393f07613006"
+     "card_hash": "91013c0e662b"
     },
     "nature": {
      "control_change": true,
      "cash_in": false,
      "financing": false,
-     "auction": true,
+     "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "b8d6914f1d37"
+     "card_hash": "b7b5025bcaa6"
     },
     "target": {
      "company_id": "g57782a33",
@@ -19426,7 +19430,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "not_control_change"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "events": [
@@ -19446,7 +19450,7 @@
     },
     {
      "kind": "closed",
-     "date": "2026-10-01",
+     "date": "2026-09-02",
      "title": "Сделка завершена",
      "note": "Новым собственником ТЦ «Июнь» стало ООО «Литекс» (создано в мае 2025 года, производит промышленное холодильное и вентиляционное оборудование, входит в холдинг «Стройэнергоактив» Елены Крыловой и Алексея Громова) — компания планирует перепрофилировать комплекс (около 45 тыс. кв. м) в научно-производственный центр для разработки, испытаний и производства высокотехнологичного оборудования. Прежний собственник, «Финансовые решения», с 2023 года несколько раз снижал цену — с 3,8 млрд ₽ до 999 млн ₽ к августу 2026 года; итоговая цена сделки не раскрыта.",
      "source": [
@@ -35566,7 +35570,7 @@
   {
    "id": "g7cb5d8f8",
    "date": "2022-06-13",
-   "title": "«Альфа-Групп» бесплатно передала Грузии долю в производителе «Боржоми»",
+   "title": "Правительство Грузии безвозмездно получило от «Альфа-Групп» 7,73% владельца «Боржоми»",
    "buyer": null,
    "target": null,
    "ind": "Пищепром и напитки",
@@ -35648,14 +35652,17 @@
     "law.appr": [],
     "eco.context": [],
     "eco.val": [],
-    "extra": []
+    "extra": [],
+    "title": [
+     "e14c37afb079"
+    ]
    },
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
      "value": 7.73,
      "basis": "rule",
-     "card_hash": "f3d828551fbc"
+     "card_hash": "56d2f559d05b"
     },
     "price": {
      "value_rub": null,
@@ -35678,7 +35685,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "9591431080c5"
+     "card_hash": "f575116dfb05"
     },
     "target": {
      "company_id": null,
@@ -284977,6 +284984,18 @@
    "ind": "Недвижимость",
    "desc": "Управляет рыночным комплексом и землей под ним в Палласовке (Волгоградская область). Работает в нынешнем виде с 2024 года.",
    "kpi": []
+  },
+  "gad8cd049": {
+   "name": "ООО «Проект Лаки»",
+   "ind": "Недвижимость",
+   "desc": "Компания, связанная с сетью фитнес-клубов DDX. По данным СПАРК, ее владельцы — ЗПИФ «СГ-Инвестиции» и Татьяна Ситникова (по 30%), фонд «Биге» (22,62%), Андрей Суздальцев (10,38%), Ольга Зиновьева и Оксана Астахова.",
+   "kpi": []
+  },
+  "gec252e76": {
+   "name": "Vesper (девелопер)",
+   "ind": "Недвижимость",
+   "desc": "Московский девелопер элитного жилья.",
+   "kpi": []
   }
  },
  "match_keys": {
@@ -291646,6 +291665,12 @@
   ],
   "g2f4f1e3e": [
    "центральный городской рынок"
+  ],
+  "gad8cd049": [
+   "проект лаки"
+  ],
+  "gec252e76": [
+   "vesper девелопер"
   ]
  },
  "merged": {
