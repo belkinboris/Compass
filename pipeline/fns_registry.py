@@ -168,6 +168,13 @@ REGISTRY += [
      "date": '2026-11-06'},
 ]
 
+# Приемка карточки g13f5c85b — 2026-11-06 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g251f238a', "decision": "confirmed", "inn": '7743912465',
+     "reason": 'Приемка карточки g13f5c85b (2026-11-06): юрлицо ООО «Апсайд Девелопмент» названо читателем, ИНН подтвержден точным совпадением имени в ЕГРЮЛ (единственное действующее юрлицо).',
+     "date": '2026-11-06'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
