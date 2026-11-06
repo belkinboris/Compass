@@ -268,14 +268,6 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    фиксированной высоты, поэтому кнопка стоит в одной точке на каждом слайде. */
 .hs-slide{transition:opacity .8s ease,visibility 0s .8s}
 .hs-slide.on{transition:opacity .8s ease}
-/* НА ТЕЛЕФОНЕ — ЛЕНТА ПОД ПАЛЬЦЕМ (владелец, 6 ноября 2026: на айфоне cross-fade
-   «слишком медленный, видно, как сделки меняются на компании, неестественно»).
-   Слайд едет за пальцем и доезжает за .34 с, как в обычной карусели телефона;
-   положение и видимость ставит JS (hsPlace), здесь только снят fade. На
-   компьютере остается спокойный cross-fade выше. */
-.heroslider.hs-mob .hs-slide{opacity:1;transition:none;will-change:transform}
-.heroslider.hs-mob .hs-bar a{transition:opacity .25s ease,transform .3s var(--ease)}
-.heroslider.hs-mob .hs-bar a.on{transition-delay:.08s}
 .hs-in{justify-content:flex-start;padding-top:clamp(120px,calc(50svh - 170px),420px)}
 .hs-in p{height:calc(1.6em * 3);overflow:hidden}
 .hs-gap{display:block;flex:none;height:82px}
@@ -6088,41 +6080,8 @@ function renderDeals(){
   const hsDots = app.querySelectorAll("[data-dot]");
   const hsLabels = app.querySelectorAll(".hs-bar a");
   heroFx(app.querySelector(".heroslider"));
-  const slider=app.querySelector(".heroslider");
-  /* Телефон: слайды — лента, текущий в 0, соседний за краем экрана. */
-  const hsMobQ = matchMedia("(max-width:720px)");
-  const hsMob = () => !!slider && slider.classList.contains("hs-mob");
-  const HS_EASE = "transform .34s cubic-bezier(.22,.61,.36,1)";
-  const hsW = () => (slider && slider.clientWidth) || innerWidth;
-  const hsPlace = (s, x, anim) => {
-    s.style.transition = anim ? HS_EASE : "none";
-    s.style.transform = `translateX(${x}px)`;
-    s.style.visibility = "visible";
-  };
-  let hsHideT = null;
-  const hsHideOthers = delay => {
-    clearTimeout(hsHideT);
-    hsHideT = setTimeout(()=>hsSlides.forEach((s,k)=>{ if(k!==hsIdx){ s.style.visibility="hidden"; s.style.transition="none"; s.style.transform=""; } }), delay);
-  };
-  const hsSetMob = () => {
-    if(!slider) return;
-    slider.classList.toggle("hs-mob", hsMobQ.matches);
-    hsSlides.forEach(s=>{ s.style.transition=""; s.style.transform=""; s.style.visibility=""; });
-  };
-  hsSetMob();
-  if(window.hsMobOff) window.hsMobOff();
-  hsMobQ.addEventListener("change", hsSetMob);
-  window.hsMobOff = () => hsMobQ.removeEventListener("change", hsSetMob);
-  const hsGo = (i, dir) => {
-    const prev = hsIdx;
+  const hsGo = i => {
     hsIdx = (i + hsSlides.length) % hsSlides.length;
-    if(hsMob() && hsIdx!==prev){
-      dir = dir || (i > prev ? 1 : -1);
-      const inS = hsSlides[hsIdx], outS = hsSlides[prev], w = hsW();
-      if(inS.style.visibility!=="visible"){ hsPlace(inS, dir*w, false); void inS.offsetWidth; }
-      hsPlace(inS, 0, true); hsPlace(outS, -dir*w, true);
-      hsHideOthers(380);
-    }
     hsSlides.forEach((s,k)=>s.classList.toggle("on",k===hsIdx));
     hsDots.forEach((d,k)=>d.classList.toggle("on",k===hsIdx));
     hsLabels.forEach((a,k)=>a.classList.toggle("on",k===hsIdx));
@@ -6132,44 +6091,15 @@ function renderDeals(){
   const hsPrev=app.querySelector(".hs-arrow.prev"), hsNext=app.querySelector(".hs-arrow.next");
   if(hsPrev) hsPrev.onclick=()=>hsGo(hsIdx-1);
   if(hsNext) hsNext.onclick=()=>hsGo(hsIdx+1);
+  const slider=app.querySelector(".heroslider");
   if(slider){
-    /* Свайп. На телефоне слайд едет за пальцем: направление определяется по
-       первым 8px (горизонталь — листаем, вертикаль — отдаем прокрутке
-       страницы); отпустили дальше 20% ширины или быстрым движением — листаем,
-       иначе слайд возвращается. На широком экране — прежний порог 48px. */
-    let tx=null, ty=0, t0=0, drag=null, nb=null;
-    const nIdx = d => (hsIdx + d + hsSlides.length) % hsSlides.length;
-    slider.addEventListener("touchstart",e=>{
-      if(e.target.closest("input")) { tx=null; return; }
-      tx=e.touches[0].clientX; ty=e.touches[0].clientY; t0=Date.now(); drag=null; nb=null;
+    let tx=null;
+    slider.addEventListener("touchstart",e=>{tx=e.touches[0].clientX;},{passive:true});
+    slider.addEventListener("touchend",e=>{
+      if(tx===null)return;
+      const dx=e.changedTouches[0].clientX-tx; tx=null;
+      if(Math.abs(dx)>48) hsGo(hsIdx+(dx<0?1:-1));
     },{passive:true});
-    slider.addEventListener("touchmove",e=>{
-      if(tx===null || !hsMob()) return;
-      const dx=e.touches[0].clientX-tx, dy=e.touches[0].clientY-ty;
-      if(drag===null){ if(Math.abs(dx)<8 && Math.abs(dy)<8) return; drag=Math.abs(dx)>Math.abs(dy); if(drag) clearTimeout(hsHideT); }
-      if(!drag) return;
-      const w=hsW(), d=dx<0?1:-1, k=nIdx(d);
-      if(nb!==null && nb!==k){ const o=hsSlides[nb]; o.style.visibility="hidden"; o.style.transform=""; }
-      nb=k;
-      hsPlace(hsSlides[hsIdx], dx, false);
-      hsPlace(hsSlides[k], dx + d*w, false);
-    },{passive:true});
-    const hsEnd = e => {
-      if(tx===null) return;
-      const dx=(e.changedTouches[0]||{clientX:tx}).clientX-tx; tx=null;
-      if(!hsMob()){ if(Math.abs(dx)>48) hsGo(hsIdx+(dx<0?1:-1)); return; }
-      if(!drag) return;
-      const d=dx<0?1:-1, fast=Math.abs(dx)>30 && Math.abs(dx)/Math.max(1,Date.now()-t0)>0.4;
-      if(Math.abs(dx)>hsW()*0.2 || fast){ hsGo(hsIdx+d, d); }
-      else {
-        hsPlace(hsSlides[hsIdx], 0, true);
-        if(nb!==null) hsPlace(hsSlides[nb], d*hsW(), true);
-        hsHideOthers(380);
-      }
-      drag=null; nb=null;
-    };
-    slider.addEventListener("touchend",hsEnd,{passive:true});
-    slider.addEventListener("touchcancel",hsEnd,{passive:true});
   }
   if(window.hsKeys) document.removeEventListener("keydown",window.hsKeys);
   window.hsKeys=e=>{
