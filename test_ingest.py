@@ -10475,3 +10475,34 @@ def test_acceptance_self_check_passes():
     самопроверки — и приемка встала у всех рутин)."""
     import accept_card
     accept_card._self_check()
+
+
+def test_reread_holds_the_stamp_on_a_title_off_the_standard():
+    """Владелец, 6 ноября 2026: заголовок переписывается в вычитке, вместе с
+    остальными полями, а не отдельной партией. Досье вычитки показывает находку
+    `title_standard` с «!», и отметка без исправления не ставится."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('reread_queue_t', 'pipeline/reread_queue.py')
+    rq = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rq)
+    data = {"deals": [], "companies": {}, "telegram_posts": {"gr1": 5}}
+    card = {"id": "gr1", "type": "M&A", "status": "Закрыта", "title": "Сыктывкарский ЛПК выкупил «ПармаВуд»"}
+    assert "title_standard" in [c for c, _t in rq._findings(card, data)]
+    assert "title_standard" in rq.BLOCKING
+    good = dict(card, title="Сыктывкарский ЛПК купил лесозаготовителя «ПармаВуд»")
+    assert "title_standard" not in [c for c, _t in rq._findings(good, data)]
+
+
+def test_reread_title_fix_does_not_rewrite_the_channel_post():
+    """Вычитка пост в канале не переписывает: заголовок, исправленный по стандарту,
+    обновляет снимок поста, и публикация не правит вышедший пост (6 ноября 2026)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('reread_queue_p', 'pipeline/reread_queue.py')
+    rq = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rq)
+    import send_telegram
+    card = {"id": "gP1", "title": "«Росатом» купил 51% группы «Дело»", "status": "Закрыта", "sum": "1 млрд ₽"}
+    state = {"gP1": dict(send_telegram.post_snapshot(card), title="«Росатом» завершил выкуп 51% «Дела»")}
+    data = {"deals": [card], "telegram_post_state": state}
+    assert rq.keep_post_title(data, card) is True
+    assert send_telegram.card_changes_since_post([card], {"gP1": 7}, {}, state) == {}

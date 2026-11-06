@@ -915,7 +915,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # ВСЕ, что еще не вышло постом, — по дате сделки отсекать нельзя: в тот же
     # день «Хогвартс» (сделка 5 ноября) и «Модный сезон» (30 октября) прошли
     # приемку с заголовками не по стандарту. Опубликованные (есть запись в
-    # telegram_posts) переписываются партиями по 50 в день.
+    # telegram_posts) переписываются в вычитке (routines/reread.md).
     if card.get('id') not in (base.get('telegram_posts') or {}):
         import title_standard
         if title_standard.verb_ok(card) is False:
