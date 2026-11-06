@@ -369,6 +369,43 @@ def seo_llms():
                     headers={"Cache-Control": "public, max-age=3600"})
 
 
+# ПЕРЕХОДЫ ПО ССЫЛКАМ ИЗ ПОСТОВ (владелец, 6 ноября 2026: пост про M&A Форум — «хочу
+# отследить, сколько людей от нас нажимали на ссылку»). В посте стоит наша короткая
+# ссылка /go/<имя>; сайт записывает переход в ту же таблицу посещений (раздел «go»,
+# без IP и без браузера — как /api/t), отсеивает роботов (превью ссылки в Telegram
+# ходит как TelegramBot) и сразу уводит на адрес назначения с UTM-меткой — ее видят
+# в своей аналитике и организаторы. Адреса — ТОЛЬКО из этого списка: произвольный
+# адрес в ссылке был бы открытым перенаправлением, которым пользуются фишеры.
+GO_LINKS = {
+    "ma-forum-2026": "https://ma-conference-moscow.ru/?utm_source=projectcompass&utm_medium=telegram"
+                     "&utm_campaign=ma_forum_2026&utm_content=channel_post",
+}
+
+
+@router.api_route("/go/{slug}", methods=["GET", "HEAD"], include_in_schema=False)
+def go_link(slug: str, request: Request, db=Depends(get_db)):
+    target = GO_LINKS.get(slug)
+    if not target:
+        return RedirectResponse(SITE_URL + "/", status_code=302)
+    resp = RedirectResponse(target, status_code=302)
+    import secrets
+    import traffic
+    from db.models import PageView
+    visitor = request.cookies.get("kgo") or ""
+    if not re.fullmatch(r"[a-f0-9]{16,32}", visitor):
+        visitor = secrets.token_hex(12)
+    if request.method == "GET" and not traffic.is_bot(request.headers.get("user-agent", "")):
+        ip = (request.headers.get("x-forwarded-for") or (request.client.host if request.client else "")).split(",")[0].strip()
+        if not traffic.too_fast("go:" + (ip or "?"), limit=30):
+            ua = request.headers.get("user-agent", "")
+            db.add(PageView(visitor=visitor, session=secrets.token_hex(8), path="/go/" + slug, section="go",
+                            ref_host=None, device="mobile" if re.search(r"Mobile|Android|iPhone", ua) else "desktop",
+                            logged_in=False))
+            db.commit()
+    resp.set_cookie("kgo", visitor, max_age=400 * 86400, httponly=True, samesite="lax", secure=True)
+    return resp
+
+
 # Тот же HEAD: этот маршрут ловит «/» и любой адрес одностраничного
 # приложения — именно сюда приходит проверка живости хостинга.
 # FileResponse на HEAD сам не отправляет тело, только заголовки.

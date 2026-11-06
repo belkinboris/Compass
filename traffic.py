@@ -36,7 +36,7 @@ SECTION_NAMES = {
     "theme": "Тема", "deal": "Карточки сделок", "companies": "Каталог компаний", "company": "Профили компаний",
     "advisors": "Каталог консультантов", "advisor": "Профили консультантов", "industry": "Сводки по отраслям",
     "analytics": "Аналитика", "assistant": "Ассистент", "materials": "Материалы", "account": "Личный кабинет",
-    "compare": "Сравнение компаний", "about": "О проекте", "other": "Другое",
+    "compare": "Сравнение компаний", "about": "О проекте", "go": "Переходы по ссылкам из постов", "other": "Другое",
 }
 _SAFE_ID = re.compile(r"^[A-Za-z0-9_-]{1,40}$")
 _hits: dict[str, list[float]] = defaultdict(list)

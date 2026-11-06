@@ -433,3 +433,18 @@ def test_question_to_the_owner_goes_out_only_after_own_search():
     full = dict(q, searched="Коммерсантъ, Ведомости, Интерфакс, ЕГРЮЛ, e-disclosure: сумма не названа нигде")
     assert soq.not_searched(full) is None
     assert "Где искали сами: Коммерсантъ" in soq.render(full, 1, 1)
+
+
+def test_no_tracked_file_is_listed_in_gitignore():
+    """Файл из .gitignore не лежит в git (6 ноября 2026: `git add -f data/inbox/triage`
+    закоммитил 17 служебных файлов, и ship_decisions не смог переключить свою рабочую
+    копию на origin/main — там те же файлы лежали неотслеживаемыми)."""
+    import shutil
+    import subprocess
+    import pytest
+    root = os.path.dirname(os.path.abspath(__file__))
+    if not shutil.which("git") or not os.path.exists(os.path.join(root, ".git")):
+        pytest.skip("нет git-репозитория")
+    out = subprocess.run(["git", "ls-files", "-ci", "--exclude-standard"], capture_output=True, text=True,
+                         cwd=root).stdout.split()
+    assert not out, f"в git лежат файлы из .gitignore (git rm --cached): {out[:10]}"

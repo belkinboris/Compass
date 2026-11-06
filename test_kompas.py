@@ -303,7 +303,7 @@ def test_call_llm_thinking_budget_and_retry(monkeypatch):
     assert text == "Ответ ассистента"
     assert calls["n"] == 2  # первый упал, второй прошел
     p = calls["payload"]
-    assert p["model"] == "gpt://f/gpt-oss-120b/latest"
+    assert p["model"] == "gpt://f/" + main.current_model()
     assert p["max_output_tokens"] == 700 + main.THINKING_BUDGET
     assert p["instructions"] == "sys"
 
@@ -2202,7 +2202,7 @@ def test_main_model_refusing_access_falls_back_to_the_spare_model(monkeypatch):
     monkeypatch.setattr(assistant, "_call_llm_once", fake)
     monkeypatch.delenv("YANDEX_MODEL", raising=False)
     assert assistant.call_llm("s", "u", 100) == "ответ запасной модели"
-    assert calls == [None, assistant.FALLBACK_MODELS[0]]
+    assert calls == [None, [m for m in assistant.FALLBACK_MODELS if m != assistant.current_model()][0]]
     # Первая запасная отказала заглушкой (YandexGPT на темах указов, 6 ноября 2026) —
     # идет следующая.
     calls.clear()
@@ -2227,3 +2227,60 @@ def test_main_model_refusing_access_falls_back_to_the_spare_model(monkeypatch):
         monkeypatch.setattr(assistant, "_call_llm_once",
                             lambda *a, **k: (_ for _ in ()).throw(RuntimeError("Responses API HTTP 403")))
         assistant.call_llm("s", "u", 100, model=fake_model)
+
+
+def test_llm_status_is_visible_in_health(monkeypatch):
+    """Последний успех и вид последнего сбоя модели видны в /health (6 ноября 2026: причину
+    «Ассистент недоступен» искали вслепую) — код HTTP, без текста ответа и ключей."""
+    from app import assistant
+    monkeypatch.setenv("YANDEX_API_KEY", "k")
+    monkeypatch.setenv("YANDEX_FOLDER_ID", "f")
+    monkeypatch.setattr(assistant, "LLM_STATUS", {})
+
+    def deny(request):
+        return httpx.Response(403, text='{"detail":"No permission secret-ish"}')
+
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(deny)))
+    import pytest
+    with pytest.raises(RuntimeError):
+        assistant._call_llm_once("s", "u", 50, model="m-denied")
+    row = assistant.LLM_STATUS["m-denied"]
+    assert row["why"] == "HTTP 403" and row["err"] and row["ok"] is None
+    assert "secret" not in json.dumps(assistant.LLM_STATUS)
+
+    monkeypatch.setattr(core, "_http", httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(200, json=RESPONSES_OK))))
+    assert assistant._call_llm_once("s", "u", 50, model="m-ok") == "Ответ ассистента"
+    assert assistant.LLM_STATUS["m-ok"]["ok"]
+    h = TestClient(main.app).get("/health").json()
+    assert h["llm"]["m-denied"]["why"] == "HTTP 403" and h["llm"]["m-ok"]["ok"]
+
+
+def test_go_link_counts_a_click_and_redirects_only_to_listed_targets():
+    """/go/<имя> — счетчик переходов из постов (6 ноября 2026, M&A Форум): переход
+    записан, роботы не считаются, неизвестное имя ведет на главную — открытого
+    перенаправления нет."""
+    from db.models import PageView
+    from db.session import get_session
+    with TestClient(main.app) as c:
+        _go_link_checks(c)
+
+
+def _go_link_checks(c):
+    from db.models import PageView
+    from db.session import get_session
+    def count():
+        db = get_session()
+        try:
+            return db.query(PageView).filter(PageView.path == "/go/ma-forum-2026").count()
+        finally:
+            db.close()
+    before = count()
+    r = c.get("/go/ma-forum-2026", headers={"user-agent": "Mozilla/5.0 (iPhone) Mobile"}, follow_redirects=False)
+    assert r.status_code == 302 and r.headers["location"].startswith("https://ma-conference-moscow.ru/?utm_source=projectcompass")
+    assert count() == before + 1
+    c.get("/go/ma-forum-2026", headers={"user-agent": "TelegramBot (like TwitterBot)"}, follow_redirects=False)
+    assert count() == before + 1
+    r = c.get("/go/https%3A%2F%2Fevil.example", follow_redirects=False)
+    assert "evil" not in r.headers.get("location", "")
+    r = c.get("/go/unknown-name", follow_redirects=False)
+    assert r.status_code == 302 and r.headers["location"].rstrip("/").endswith("projectcompass.ru")

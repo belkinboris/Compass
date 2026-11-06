@@ -9887,3 +9887,40 @@ def test_founders_text_skips_the_full_pytest_only_when_every_decision_is_their_t
     assert not sd.founders_text_only(rows + ["ВЫКИНУТА g2"], [{"verdict": "post_yes", "edited_text": "т"}])
     assert not sd.founders_text_only([], [])
 
+
+
+def test_second_reading_ok_with_a_note_is_ok_but_a_hidden_remark_is_not():
+    """«ok (цифры сверены)» — ok (6 ноября 2026: лишний круг чтения по двум карточкам);
+    «ok, но …» и пояснение с признаком правки — замечание, оно не теряется."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "ingest"))
+    import second_reading as sr
+    assert sr.is_ok("ok") and sr.is_ok(" OK ")
+    assert sr.is_ok("ok (цифры оценки и 43 участка прав аренды сверены с Коммерсантом)")
+    assert sr.is_ok("ok: 246,93 млн ₽ на Обзоре, в посте и на Финансах одинаково")
+    assert not sr.is_ok("ok, но в посте стоит уточнить дату")
+    assert not sr.is_ok("ok (кроме пункта про Пескова в law.struct)")
+    assert not sr.is_ok("ok (лучше убрать вторую фразу)")
+    assert not sr.is_ok("ok (мелочь: фраза тяжеловата)")
+    assert not sr.is_ok("цифры верны, но источник — сообщение самой группы")
+    assert not sr.is_ok("okay")
+
+
+def test_important_news_is_marked_and_goes_first_but_still_through_the_console():
+    """Важное (указ, оферта, сумма от 1 млрд ₽, крупная компания) помечается «⚡» в консоли
+    и встает первым в очередь приемки; само ничего не публикует (6 ноября 2026)."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline" / "ingest"))
+    import priority
+    import send_drafts
+    assert priority.reason("Путин передал во временное управление активы JTI")
+    assert priority.reason("«Т-Технологии» планируют выкупить до 100% «Циана»")
+    assert priority.reason("Росатом купил завод за 3 млрд рублей")
+    assert not priority.reason("В Тюмени по частям продают торговый центр «Премьер»")
+    msg = send_drafts.raw_message({"draft_id": "d1", "title": "Путин передал во временное управление активы JTI",
+                                   "src": [["x", "https://example.com"]], "hold_reasons": ["r"]})
+    assert msg.startswith("⚡ ВАЖНОЕ") and "«Это сделка»" in msg
+    plain = send_drafts.raw_message({"draft_id": "d2", "title": "Продают дом в Перми", "src": [], "hold_reasons": ["r"]})
+    assert not plain.startswith("⚡")

@@ -26,6 +26,7 @@ DOMAIN_NAMES = {
     'yandex.ru': 'Яндекс',            # пресс-центр компании, не издание
     'mgkl.group': 'МГКЛ',             # сообщение самой компании
     'promomed.ru': 'Промомед',        # сообщение самой компании
+    'cdn.tbank-online.com': 'Т-Технологии',  # пресс-релизы группы (PDF), ссылка с t-technologies.ru
     'fintelegram.com': 'FinTelegram',
     'max.ru': 'MAX',
     'more.tv': 'More.tv',

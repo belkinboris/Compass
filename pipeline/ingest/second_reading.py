@@ -121,6 +121,25 @@ def questionnaire(card, base):
     return '\n'.join(lines)
 
 
+# «ok (цифры сверены с Коммерсантом)» — тоже ok: 6 ноября 2026 читатель писал пояснение в
+# скобках, и ответ «ok» по двум карточкам отклонялся целиком — лишний круг чтения. Но
+# пояснение с признаком замечания («ok, но …», «ok (лучше убрать …)») остается замечанием:
+# скрытое замечание не должно потеряться.
+_REMARK = re.compile(r'\b(?:но|однако|кроме|хотя|лучше|стоит|нужно|надо|следует|исправ\w*|замен\w*|убра\w*|'
+                     r'добав\w*|перепис\w*|уточн\w*|ошиб\w*|неверн\w*|не\s+сказан\w*|нет\s+в\s+источник\w*|'
+                     r'мелоч\w*|придирк\w*|неловк\w*|тяжеловат\w*|не\s+совпада\w*)\b', re.I)
+
+
+def is_ok(value):
+    """«ok» ровно — или «ok» с пояснением, в котором нет признака замечания."""
+    text = str(value or '').strip()
+    low = text.lower()
+    if low == 'ok':
+        return True
+    m = re.match(r'ok\b\s*[(:—–,.-]?\s*(.*)$', low, re.S)
+    return bool(m) and not _REMARK.search(m.group(1))
+
+
 def check(ans, card):
     """Причины, по которым ответ принять нельзя: ответ обязан покрыть каждое
     заполненное поле и каждый общий вопрос."""
@@ -134,7 +153,7 @@ def check(ans, card):
         if k not in general:
             bad.append('нет ответа на общий вопрос %s' % k)
     problems = [(k, v) for k, v in list(fields.items()) + list(general.items())
-                if str(v).strip().lower() != 'ok']
+                if not is_ok(v)]
     if ans.get('verdict') not in ('ok', 'fix'):
         bad.append('verdict — ok или fix')
     elif ans.get('verdict') == 'ok' and problems:

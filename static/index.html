@@ -1201,6 +1201,10 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset,0 0 0 7px rgba(15,43,33,.07);
   transition:transform .25s var(--ease),background .2s var(--ease),opacity .25s var(--ease),visibility 0s linear 0s}
 .ai-fab:hover{background:#163B2C}
+/* На компьютере — круг с мягкой тенью: квадрат 60×60 с радиусом 20 и жестким
+   кольцом-обводкой читался резким (владелец, 6 ноября 2026). На телефоне кнопка
+   остается квадратом в размер нижней панели (решение 28 октября). */
+@media(min-width:721px){.ai-fab{border-radius:50%;box-shadow:0 8px 24px rgba(15,43,33,.28),0 2px 6px rgba(15,43,33,.16)}}
 .ai-fab:active{transform:scale(.96)}
 /* Кнопка появляется и уходит плавно, а не рывком (владелец, 6 ноября 2026: «значок компаса чтобы
    плавно расходился»); hidden — без display:none, иначе переход не виден. */
@@ -1288,10 +1292,16 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
 .ai-sheet.half,.ai-sheet.full{transform:none;visibility:visible;transition:transform .35s var(--ease),height .35s var(--ease),visibility 0s}
 .ai-sheet.full{height:calc(100svh - 10px)}
 .ai-sheet.drag{transition:none}
-.ai-sheet-grip{flex:0 0 auto;height:26px;display:grid;place-items:center;cursor:grab;touch-action:none}
+/* Верхняя полоса окна — 40px: ручка по центру, слева «Открыть полностью», справа «×».
+   Раньше крестик стоял на стыке белой полосы и фона заголовка и налезал на его
+   текстуру (владелец, 6 ноября 2026, компьютер и телефон). */
+.ai-sheet-grip{flex:0 0 auto;height:40px;display:grid;place-items:center;cursor:grab;touch-action:none}
 .ai-sheet-grip span{width:44px;height:5px;border-radius:3px;background:var(--line)}
-.ai-sheet-close{position:absolute;top:6px;right:12px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;
+.ai-sheet-close{position:absolute;top:4px;right:10px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;
   font:400 24px/1 var(--f-body);color:var(--muted);cursor:pointer;z-index:2}
+.ai-sheet-close:hover{background:var(--paper2,#F0EFEA)}
+.ai-sheet-full{position:absolute;top:8px;left:14px;height:24px;padding:0 4px;border:0;background:transparent;cursor:pointer;z-index:2;
+  font:600 12.5px/24px var(--f-body);color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .ai-sheet-body{flex:1;min-height:0;display:flex;flex-direction:column}
 .chat-shell.in-sheet{height:100%;grid-template-columns:minmax(0,1fr)}
 .chat-shell.in-sheet .chat-side,.chat-shell.in-sheet .chat-scrim,.chat-shell.in-sheet .chat-burger{display:none}
@@ -11043,6 +11053,7 @@ function aiDockEls(){
   const sheet = document.createElement("section");
   sheet.id = "aiSheet"; sheet.className = "ai-sheet"; sheet.setAttribute("aria-label", "Ассистент Компаса");
   sheet.innerHTML = `<div class="ai-sheet-grip" id="aiGrip" title="Потяните вверх — чат на весь экран"><span></span></div>
+    <button class="ai-sheet-full" id="aiSheetFull" type="button">Открыть полностью</button>
     <button class="ai-sheet-close" id="aiSheetClose" type="button" aria-label="Закрыть ассистента">×</button>
     <div class="ai-sheet-body" id="aiSheetBody"></div>`;
   document.body.append(scrim, sheet, fab);
@@ -11192,6 +11203,25 @@ async function renderAssistant(root, inSheet){
   document.getElementById("chatBurger").onclick=openSide;
   document.getElementById("chatSideClose").onclick=closeSide;
   scrim.onclick=closeSide;
+  /* «Открыть полностью» из окна ассистента (владелец, 6 ноября 2026): тот же разговор
+     переезжает на экран #/assistant — лента, история реплик гостя и id сохраненного
+     диалога передаются через sessionStorage и забираются один раз. */
+  if(inSheet){
+    const fb=document.getElementById("aiSheetFull");
+    if(fb) fb.onclick=()=>{
+      try{ sessionStorage.setItem("aiCarry", JSON.stringify({html: turns>0 ? box.innerHTML : "", history: history.slice(),
+        thread: activeThreadId, turns, lastQ})); }catch(e){}
+      aiDockClose(); location.hash="#/assistant";
+    };
+  } else {
+    let carry=null;
+    try{ carry=JSON.parse(sessionStorage.getItem("aiCarry")||"null"); sessionStorage.removeItem("aiCarry"); }catch(e){ carry=null; }
+    if(carry && carry.html){
+      box.innerHTML=carry.html; history.push(...(carry.history||[]));
+      activeThreadId=carry.thread||null; turns=carry.turns||0; lastQ=carry.lastQ||"";
+      setTimeout(()=>{ paintState(); box.scrollTop=box.scrollHeight; }, 0);
+    }
+  }
   // Подсказки-примеры — приглашение к ПЕРВОМУ вопросу: начался разговор —
   // место под ним отдаем самой переписке (на телефоне это две-три строки).
   const paintState=()=>{ shell.classList.toggle("started", turns>0); };
