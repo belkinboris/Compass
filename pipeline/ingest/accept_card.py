@@ -780,6 +780,9 @@ CUSTODY_TAKEN = re.compile(r'\b(?:забра\w*|отобра\w*|отня\w*|от
                            r'перешл\w*\s+(?:к\s+)?государств\w*|стал\w*\s+собственник\w*)', re.I)
 
 
+TITLE_STANDARD_SINCE = '2026-11-06'
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
              waived_names=None, waived_stale=None, source_records=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
@@ -896,6 +899,16 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if not mgmt_words:
             out.append(('management_title', 'заголовок передачи в управление — «X передана в управление Y» '
                         '(pipeline/title_standard.py)'))
+    # СТАНДАРТ ЗАГОЛОВКА (владелец одобрил 6 ноября 2026: «Заголовки ок»; новые
+    # карточки — сразу по стандарту, старые переписываются партиями по 50 в
+    # день). Глагол — по типу и статусу (pipeline/title_standard.py, RULES);
+    # карточки до этого дня ждут своей партии и приемку не держат.
+    if str(card.get('date') or '') >= TITLE_STANDARD_SINCE:
+        import title_standard
+        if title_standard.verb_ok(card) is False:
+            out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s'
+                        % (card.get('type'), card.get('status'),
+                           title_standard.hint(card))))
     for role, (text_field, id_field) in ROLES.items():
         text = card.get(text_field)
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))
