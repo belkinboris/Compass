@@ -1,0 +1,116 @@
+{
+ "made": "2026-11-06",
+ "items": [
+  {
+   "news": "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729",
+   "title": "Химический холдинг «Концентрация» привлек 1,2 млрд рублей на разработку химических продуктов",
+   "verdict": "enrich:g2ab91f78",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «АО «Концентрация»»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Logika-moloka-kupila-proizvoditelya-rastitelnyh-produktov-Velle-87725",
+   "title": "«Логика молока» купила производителя растительных продуктов Velle",
+   "verdict": "enrich:g3555ea6e",
+   "why": "общее редкое название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке «Velle (Велле Холдинг)»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Bank-Agropromkredit-prodali-na-aukcione-za-14-mlrd-rublej-holdingu-SFI-87709",
+   "title": "Банк «Агропромкредит» продали на аукционе за 1,4 млрд рублей холдингу SFI",
+   "verdict": "enrich:g1f8414a3",
+   "why": "совпали название в кавычках и сумма",
+   "reasons": [
+    "в карточке «1,427 млрд ₽»",
+    "в карточке «ПАО «ЭсЭфАй»»",
+    "в карточке «Агропромкредит»",
+    "в карточке «Российская Федерация»"
+   ]
+  },
+  {
+   "news": "https://mergers.ru/news/Logika-moloka-kupila-vladelca-brenda-rastitelnyh-napitkov-5Yes-87693",
+   "title": "«Логика молока» купила владельца бренда растительных напитков 5Yes!",
+   "verdict": "enrich:g90ccbac0",
+   "why": "общее редкое название в кавычках и общие слова: 3",
+   "reasons": [
+    "в карточке «Полигрин»"
+   ]
+  },
+  {
+   "news": "https://www.cnews.ru/news/line/2026-11-06_ekspanta_voshla_v_kapital",
+   "title": "«Экспанта» вошла в капитал разработчика AI-native платформы «Ирактис Трекер»",
+   "verdict": "enrich:ga09376f6",
+   "why": "общее редкое название в кавычках и общие слова: 2",
+   "reasons": [
+    "в карточке ««Стаксель»»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261103/ploschadka-2128883873.html",
+   "title": "\"Дом.РФ\" продает площадку рядом с Астраханью под крупный жилой комплекс",
+   "verdict": "enrich:g82e9441a",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «три участка общей площадью 149,44 гектара»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261102/pionerlager-2128685456.html",
+   "title": "\"Дом.РФ\" продает бывший пионерлагерь на западе Подмосковья",
+   "verdict": "enrich:g343bc58c",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «участок площадью 5,88 гектара и 13 объектов недвижимости»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261030/peterburg-2128161330.html",
+   "title": "В Петербурге продали доходный дом Спиридонова",
+   "verdict": "enrich:g831d0fc8",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «особняк на Фурштатской улице, 60А»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261030/moskva-2128058390.html",
+   "title": "Ava Group продает площадку в Таганском районе Москвы",
+   "verdict": "enrich:gadee3ca7",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Ривьера парк»"
+   ]
+  },
+  {
+   "news": "https://realty.ria.ru/20261030/proekt-2128012523.html",
+   "title": "\"Дом.РФ\" продает девелоперский проект в Петербурге",
+   "verdict": "enrich:gbc517ec2",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «100% долей в уставном капитале компании «Стройкомфорт»»"
+   ]
+  },
+  {
+   "news": "https://abireg.ru/newsitem/118951-moskovskiy-prodavets-kompyuterov-poluchil-70-lipetskogo-myasa-na-fone-ubytkov-i-dolgov-predpriyatiya/",
+   "title": "Московский продавец компьютеров получил 70% «Липецкого мяса» на фоне убытков и долгов предприятия",
+   "verdict": "enrich:g39fc7468",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Телтекс Системс»"
+   ]
+  },
+  {
+   "news": "https://t.me/rusven/7820",
+   "title": "Химический холдинг “Концентрация” [ранее AppScience] привлек 1,2 млрд рублей от российских инвестфондов, чьи названия не раскрываются. Сделка структурирована по модели cash-in: все привлеченные средст",
+   "verdict": "enrich:g2ab91f78",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «АО «Концентрация»»"
+   ]
+  }
+ ]
+}

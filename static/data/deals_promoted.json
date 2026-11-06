@@ -77087,7 +77087,7 @@
    },
    "law": {
     "struct": "—",
-    "appr": "Завершение требует одобрения OFAC США и других регуляторных разрешений в Сербии.",
+    "appr": "OFAC США предоставило MOL и MOL Serbia Investment Kft. лицензию на подготовку к покупке российской доли в NIS: она разрешает «осуществление определенных операций», включая получение разрешений российского правительства, но не саму сделку — для нее нужна отдельная лицензия OFAC. Срок действия — до 28 февраля 2027 года. Завершение требует и других регуляторных разрешений в Сербии.",
     "adv": [
      [
       "Стороны сделки",
@@ -77135,7 +77135,8 @@
     ],
     "eco.context": [
      "4a663a11ec39"
-    ]
+    ],
+    "law.appr": []
    },
    "proofread": "2026-09-03",
    "facts": {
@@ -229368,6 +229369,10 @@
     [
      "ЕГРЮЛ: история участников ООО «СиЭс Технологии»",
      "https://datanewton.ru/contragents/1137746030982/history/timeline"
+    ],
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-06_ekspanta_voshla_v_kapital"
     ]
    ],
    "from_ingest": true,
@@ -229407,6 +229412,10 @@
       [
        "Телеграм-канал: Сделки M&A",
        "https://t.me/dealsma/7482"
+      ],
+      [
+       "CNews",
+       "https://www.cnews.ru/news/line/2026-11-06_ekspanta_voshla_v_kapital"
       ]
      ]
     }
@@ -230812,7 +230821,13 @@
    "deep_researched": "2026-10-22",
    "weekly_researched": "2026-10-30",
    "accepted_hash": "20451bc9796b.db1dfa",
-   "second_read_hash": "20451bc9796b.db1dfa"
+   "second_read_hash": "20451bc9796b.db1dfa",
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/RBK-Sheremetevo-nachalo-peregovory-o-prodazhe-75-turoperatora-Biblio-Globus-87681"
+    ]
+   ]
   },
   {
    "id": "gc44a1e70",
@@ -233348,6 +233363,16 @@
      "source": [
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/9060532"
+     ],
+     "sources": [
+      [
+       "Коммерсантъ",
+       "https://www.kommersant.ru/doc/9060532"
+      ],
+      [
+       "Mergers.ru",
+       "https://mergers.ru/news/Logika-moloka-kupila-vladelca-brenda-rastitelnyh-napitkov-5Yes-87693"
+      ]
      ]
     },
     {
@@ -233464,7 +233489,13 @@
    "deep_researched": "2026-10-27",
    "separate_transaction_reviewed": true,
    "accepted_hash": "aaa486f18b81.73e362",
-   "second_read_hash": "aaa486f18b81.73e362"
+   "second_read_hash": "aaa486f18b81.73e362",
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Logika-moloka-kupila-vladelca-brenda-rastitelnyh-napitkov-5Yes-87693"
+    ]
+   ]
   },
   {
    "id": "g76850877",
@@ -245581,6 +245612,10 @@
     [
      "Русский венчур (Telegram)",
      "https://t.me/rusven/7820"
+    ],
+    [
+     "Телеграм-канал @bezrec",
+     "https://t.me/bezrec/8201"
     ]
    ],
    "from_ingest": true,
@@ -245659,6 +245694,10 @@
     [
      "Mergers.ru",
      "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729"
+    ],
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7531"
     ]
    ],
    "accepted": "2026-11-04",

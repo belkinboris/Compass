@@ -273,5 +273,20 @@
   "verdict": "separate",
   "candidate_id": "g9d9e7ab6",
   "day": "2026-11-03"
+ },
+ "https://www.kommersant.ru/doc/9080934::gb6b371c3": {
+  "verdict": "enrich",
+  "candidate_id": "gb6b371c3",
+  "day": "2026-11-06"
+ },
+ "https://tass.ru/ekonomika/28288857::gb6b371c3": {
+  "verdict": "same_fact",
+  "candidate_id": "gb6b371c3",
+  "day": "2026-11-06"
+ },
+ "https://mergers.ru/news/Fond-Bumerang-Kapital-i-soosnovatel-Ceh-85-vykupili-set-kofeen-Baggins-Coffee-87713::g25a6766d": {
+  "verdict": "same_fact",
+  "candidate_id": "g25a6766d",
+  "day": "2026-11-06"
  }
 }
