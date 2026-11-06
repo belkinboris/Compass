@@ -2,6 +2,15 @@
  "made": "2026-11-06",
  "items": [
   {
+   "news": "https://www.kommersant.ru/doc/9080799",
+   "title": "RBE Group выкупила рыболовную компанию на Камчатке",
+   "verdict": "enrich:gcc6ff548",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Сильвер Салмон»"
+   ]
+  },
+  {
    "news": "https://mergers.ru/news/Himicheskij-holding-Koncentraciya-privlek-12-mlrd-rublej-na-razrabotku-himicheskih-produktov-87729",
    "title": "Химический холдинг «Концентрация» привлек 1,2 млрд рублей на разработку химических продуктов",
    "verdict": "enrich:g2ab91f78",
@@ -44,7 +53,7 @@
    "news": "https://www.cnews.ru/news/line/2026-11-06_ekspanta_voshla_v_kapital",
    "title": "«Экспанта» вошла в капитал разработчика AI-native платформы «Ирактис Трекер»",
    "verdict": "enrich:ga09376f6",
-   "why": "общее редкое название в кавычках и общие слова: 2",
+   "why": "тот же адрес источника",
    "reasons": [
     "в карточке ««Стаксель»»"
    ]
