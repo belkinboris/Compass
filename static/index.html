@@ -272,6 +272,15 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hs-in p{height:calc(1.6em * 3);overflow:hidden}
 .hs-gap{display:block;flex:none;height:82px}
 .heroslider .hs-shared{position:absolute;inset:0;z-index:7;pointer-events:none}
+/* Значок канала в Telegram — в правом верхнем углу картинок главной (владелец,
+   6 ноября 2026: вариант 2, «стекло», цветом луны). Лежит в .heroslider, а не в
+   слайде, поэтому при перелистывании остается на месте. Цвет — луна сцены (#E9DCBE). */
+.hs-tg{position:absolute;z-index:8;top:92px;right:28px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#E9DCBE;background:rgba(233,220,190,.12);border:1px solid rgba(233,220,190,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .25s ease,border-color .25s ease,transform .25s ease}
+.hs-tg:hover{background:rgba(233,220,190,.22);border-color:rgba(233,220,190,.7);transform:translateY(-1px)}
+.hs-tg:focus-visible{outline:2px solid #E9DCBE;outline-offset:3px}
+@media(max-width:720px){.hs-tg{top:76px;right:16px;width:40px;height:40px}}
 .hs-shared h1,.hs-shared p{visibility:hidden}
 .hs-bar{position:relative;margin-top:32px;width:300px;height:50px;flex:none;background:var(--ivory);border-radius:4px;pointer-events:auto;transition:background .2s}
 .hs-bar:hover{background:#fff}
@@ -5864,6 +5873,7 @@ function renderFeedList(){
 function renderDeals(){
   app.innerHTML = `
   <div class="heroslider">
+    <a class="hs-tg" href="https://t.me/projectcompassru" target="_blank" rel="noopener" aria-label="Канал «Проект Компас» в Telegram" title="Наш канал в Telegram"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M9.04 15.6 8.7 20.1c.5 0 .7-.2 1-.5l2.4-2.3 5 3.7c.9.5 1.6.2 1.8-.9l3.3-15.4c.3-1.4-.5-1.9-1.4-1.6L1.6 10.2c-1.3.5-1.3 1.3-.2 1.6l5 1.6 11.6-7.3c.5-.3 1-.1.6.2z"/></svg></a>
     <div class="hs-slide on">${HERO_SVG}
       <div class="hs-in">
         <h1 class="hs-word">Сделки</h1>
