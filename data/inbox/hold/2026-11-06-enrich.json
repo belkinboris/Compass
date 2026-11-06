@@ -2,6 +2,15 @@
  "made": "2026-11-06",
  "items": [
   {
+   "news": "https://www.kommersant.ru/doc/9081283",
+   "title": "Разработчик систем безопасности «Рубеж» приобрел офис на западе Москвы",
+   "verdict": "enrich:g13f5c85b",
+   "why": "тот же адрес источника",
+   "reasons": [
+    "в карточке «Три этажа (5 тыс. кв. м) в бизнес-центре «Upside Кунцево»»"
+   ]
+  },
+  {
    "news": "https://www.kommersant.ru/doc/9080799",
    "title": "RBE Group выкупила рыболовную компанию на Камчатке",
    "verdict": "enrich:gcc6ff548",
