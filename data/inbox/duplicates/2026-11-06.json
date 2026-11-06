@@ -104,6 +104,48 @@
     "needs_review": true
    },
    "queued": "2026-11-06"
+  },
+  {
+   "key": "https://mergers.ru/news/RBE-Group-vykupila-rybolovnuyu-kompaniyu-na-Kamchatke-87749::gcc6ff548",
+   "candidate_id": "gcc6ff548",
+   "reason": "общие редкие слова: rbe, камчат",
+   "draft": {
+    "draft_id": "d91679605",
+    "title": "RBE Group выкупила рыболовную компанию на Камчатке",
+    "date": "2026-11-06",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/RBE-Group-vykupila-rybolovnuyu-kompaniyu-na-Kamchatke-87749"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-06",
+      "title": "Сделка завершена",
+      "note": "Головная компания RBE Group Андрея Шокина — ООО РБЕ — 31 октября получила 100% в ООО «Сильвер Салмон». Структура зарегистрирована в Петропавловске-Камчатском, а среди видов ее деятельности — туризм и рыбный промысел. За «Сильвер Салмон» закреплены квоты по…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/RBE-Group-vykupila-rybolovnuyu-kompaniyu-na-Kamchatke-87749"
+      ]
+     }
+    ],
+    "buyer_name": "RBE Group",
+    "asset": "рыболовная компания на Камчатке",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "RBE Group",
+     "asset": "рыболовная компания на Камчатке",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-06"
   }
  ]
 }
