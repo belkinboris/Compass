@@ -4578,20 +4578,31 @@ def test_raw_like_a_card_waits_for_intake_then_goes_to_the_console(monkeypatch, 
     assert st["card_news"]["d-card"]["outcome"] == "read"
     assert not [k for _t, _k, (k, _i, _m) in plan if k == "offer"]
 
-    # три часа спустя приток так ничего и не решил — предложение в консоль
+    # три часа спустя приток так ничего и не решил — решается само, без вопроса
+    # владельцу (6 ноября 2026): название карточки («Аккую») в новости есть —
+    # повтор, снята с причиной.
     for key in ("d-card", "d-nourl"):
         st["card_news"][key]["since"] = (datetime.now(timezone.utc) - timedelta(hours=4)).isoformat()
-    plan, *_ = send_drafts.build_plan()
-    offers = [(t, kb, i) for t, kb, (kind, i, _m) in plan if kind == "offer"]
-    assert [i["id"] for _t, _kb, i in offers] == ["d-card"]
-    text, kb, _entry = offers[0]
-    assert "К карточке «Путин заявил о готовности турецких компаний" in text
-    assert "/#/deal/g1111aaaa" in text and "Источник: https://www.rbc.ru/akkuyu-1" in text
-    assert [b["callback_data"] for row in kb["inline_keyboard"] for b in row] == [
-        "mod:d-card:add", "mod:d-card:other"]
-    shown = [i for _t, _k, (kind, i, _m) in plan if kind == "raw"]
-    assert [i["draft_id"] for i in shown] == ["d-nourl"]                # без адреса — сырьем, как раньше
-    assert any("похоже на карточку g1111aaaa" in r for r in shown[0]["hold_reasons"])
+    plan, _p, st, *_ = send_drafts.build_plan()
+    assert not [k for _t, _k, (k, _i, _m) in plan if k == "offer"]
+    assert st["card_news"]["d-card"]["outcome"] == "same"
+    assert st["decided_raw"].get("d-card") == "enrich:g1111aaaa"
+
+
+def test_weak_match_with_other_quoted_names_is_a_new_deal():
+    """6 ноября 2026: пермский ЖК «Сибирский квартал» предложили владельцу
+    дописать к ДЦ «Волна» — общими были «Перми» и «продают». Разные названия в
+    кавычках — разные объекты: новость идет как новая сделка, без вопроса."""
+    import card_news
+    base = {"companies": {}, "deals": [{"id": "g4e184429", "date": "2026-11-03", "status": "Обсуждается",
+            "title": "В Перми продают здание делового центра «Волна» за 400 млн рублей",
+            "asset": "здание делового центра «Волна»", "src": [["URA", "https://ura.news/1"]]}]}
+    news = {"title": "В Перми за полмиллиарда рублей продают торгово-офисный этаж в недостроенном жилом комплексе",
+            "summary": "На продажу выставлен этаж в ЖК «Сибирский квартал» в Перми.",
+            "url": "https://ura.news/news/1053142146"}
+    entry = card_news.sort_news(news, "g4e184429", "общие редкие слова: перми, прода", base, [], "raw")
+    assert entry["outcome"] == "new_deal", entry
+    assert "сибирский квартал" in entry["reason"].lower()
 
 
 def test_raw_console_skips_news_about_a_deal_already_in_the_base(monkeypatch, tmp_path):
