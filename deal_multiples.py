@@ -620,6 +620,12 @@ def admission(d: dict[str, Any], confirmed_ids: set[str], bank_ids: set[str],
         return None, 'target'
     if lot_ids and target in lot_ids:
         return None, 'target_lot'
+    # Периметр сделки шире предмета (7 ноября 2026, «Киви»: куплено АО «Киви»
+    # вместе с КИВИ Банком — отчетность АО не покрывает банк). Предмет — одна
+    # компания, поэтому профиль не «лот»; признак ставится на сделку разовым
+    # скриптом по чтению статьи.
+    if d.get('perimeter_beyond_target'):
+        return None, 'target_lot'
     if target in bank_ids:
         return None, 'target_bank'
     if target not in confirmed_ids:
