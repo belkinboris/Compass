@@ -4,7 +4,7 @@
 ЗАЧЕМ. В Яндекс Вебмастере раздел «Файлы Sitemap» у Яндекса переведен в режим «только
 для чтения» — добавить карту сайта или отправить ее на переобход владелец не может.
 IndexNow — открытый протокол, который Яндекс принимает напрямую: сайт подтверждает
-право ключом-файлом (static/indexnow/<KEY>.txt, отдается по /static/indexnow/<KEY>.txt),
+право ключом в корне сайта (/<KEY>.txt, маршрут в app/site.py),
 и адреса уходят на переобход без Вебмастера. За раз — до 10 000 адресов.
 
     python3 pipeline/indexnow.py            # сухой прогон: сколько адресов уйдет
@@ -17,7 +17,7 @@ import urllib.request
 
 HOST = 'projectcompass.ru'
 KEY = 'eb72eb6f35d87d366278454f3772a60d'
-KEY_LOCATION = 'https://%s/static/indexnow/%s.txt' % (HOST, KEY)
+KEY_LOCATION = 'https://%s/%s.txt' % (HOST, KEY)   # только корень: ключ в подпапке Яндекс отвергает (422)
 ENDPOINT = 'https://yandex.com/indexnow'
 UA = 'Mozilla/5.0 (compatible; KompasIndexNow/1.0)'
 
