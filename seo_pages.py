@@ -233,10 +233,10 @@ def deal_html(deal: dict, base: str) -> str:
             f"{src_html}")
     ld = {"@context": "https://schema.org", "@type": "Article", "headline": title[:110],
           "inLanguage": "ru", "url": f"{base}/deal/{did}", "description": description,
-          "publisher": {"@type": "Organization", "name": "Компас", "url": base + "/"}}
+          "publisher": {"@type": "Organization", "name": "Проект Компас", "url": base + "/"}}
     if re.match(r"^\d{4}-\d{2}-\d{2}$", str(deal.get("date") or "")):
         ld["datePublished"] = deal["date"]
-    return _page(base, f"/deal/{did}", f"{title} — Компас", description, body, _ld(ld))
+    return _page(base, f"/deal/{did}", f"{title} — Проект Компас", description, body, _ld(ld))
 
 
 def company_html(company_id: str, company: dict, base: str) -> str:
@@ -260,7 +260,7 @@ def company_html(company_id: str, company: dict, base: str) -> str:
             + f"<h2>Сделки</h2><ul>{items}</ul>")
     ld = {"@context": "https://schema.org", "@type": "Organization", "name": name,
           "url": f"{base}/company/{company_id}", "description": desc or description}
-    return _page(base, f"/company/{company_id}", f"{name} — сделки M&A — Компас", description, body, _ld(ld))
+    return _page(base, f"/company/{company_id}", f"{name} — сделки M&A — Проект Компас", description, body, _ld(ld))
 
 
 def sitemap_xml(base: str) -> str:
@@ -310,7 +310,7 @@ def llms_txt(base: str) -> str:
 
 
 def missing_html(base: str) -> str:
-    return _page(base, "/", "Страница не найдена — Компас", "Такой страницы в «Компасе» нет.",
+    return _page(base, "/", "Страница не найдена — Проект Компас", "Такой страницы в «Компасе» нет.",
                  '<h1>Такой страницы нет</h1><p>Возможно, карточку объединили с другой или адрес '
                  'набран с ошибкой.</p><a href="/">На главную «Компаса»</a>')
 

@@ -9,7 +9,7 @@
 <script>(function(){var m=location.pathname.match(/^\/(deal|company)\/([A-Za-z0-9_-]+)\/?$/);if(m)history.replaceState(null,"","/#/"+(m[1]==="deal"?"deal":"companies")+"/"+m[2]);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0A1210">
-<title>КОМПАС — сделки и компании российского рынка M&A</title>
+<title>Проект Компас — сделки и компании российского рынка M&A</title>
 <!-- Favicon — знак компаса (вариант 01), а не старая стрелка-дротик: тот же
      рисунок, что в шапке, герое и подвале, вырезанный до маленького варианта
      без центральной точки (на 16-32px она превращалась бы в шум). Заливка
@@ -33,11 +33,15 @@
 <link rel="manifest" href="/static/site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Компас">
 <meta name="yandex-verification" content="c76538994d1a82ce">
-<meta name="description" content="База сделок M&A российского рынка: 1500+ сделок со ссылками на первоисточники, профили компаний, каталог юридических и инвестиционных консультантов. Каждая сделка — глазами экономиста и юриста.">
-<meta property="og:title" content="КОМПАС — сделки российского рынка M&A">
+<meta name="description" content="Проект Компас — база сделок M&A российского рынка: 1500+ сделок со ссылками на первоисточники, профили компаний, каталог юридических и инвестиционных консультантов. Каждая сделка — глазами экономиста и юриста.">
+<meta property="og:title" content="Проект Компас — сделки российского рынка M&A">
+<meta property="og:site_name" content="Проект Компас">
 <meta property="og:description" content="1500+ сделок с первоисточниками, профили компаний, консультанты по сделкам. Каждая сделка — глазами экономиста и юриста.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
+<!-- Имя сайта для поисковиков (7 ноября 2026: по запросу «проект компас» Яндекс нас не находил —
+     на странице не было этих слов): WebSite + Organization с названием канала «Проект Компас». -->
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Проект Компас","alternateName":["Компас","Project Compass","projectcompass.ru"],"url":"https://projectcompass.ru/","inLanguage":"ru"},{"@type":"Organization","name":"Проект Компас","alternateName":"Компас","url":"https://projectcompass.ru/","logo":"https://projectcompass.ru/static/icons/icon-192.png","sameAs":["https://t.me/projectcompassru"]}]}</script>
 <!-- Шрифты подключались с fonts.googleapis.com — и это не работало: из России
      домен недоступен, запрос обрывается (ERR_CONNECTION_RESET), страница молча
      съезжала на запасные шрифты. Внешних CDN у нас быть не должно вовсе, поэтому

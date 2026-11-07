@@ -36,7 +36,7 @@ def test_deal_page_is_the_site_page_with_the_deal_written_in(client, data):
     assert "<h1>«Северсталь» приобрела «Дмитровский металлоцентр»</h1>" in page
     assert '<link rel="canonical" href="https://projectcompass.ru/deal/g0b187624">' in page
     assert "Северсталь" in page and "ООО «Металлстандарт»" in page
-    assert "<title>«Северсталь» приобрела «Дмитровский металлоцентр» — Компас</title>" in page
+    assert "<title>«Северсталь» приобрела «Дмитровский металлоцентр» — Проект Компас</title>" in page
     # Человек видит обычную карточку сайта: это та же страница приложения,
     # а ранний скрипт переводит адрес в #/deal/<id> (владелец 23 октября 2026).
     assert '<main class="wrap" id="app"><article class="seo-snapshot">' in page
@@ -115,3 +115,16 @@ def test_www_redirects_to_the_main_address(client):
     assert r.status_code == 301
     assert r.headers["location"] == "https://projectcompass.ru/deal/g0b187624?x=1"
     assert client.get("/health").status_code == 200
+
+
+def test_site_name_for_search_engines_is_project_compass():
+    """По запросу «проект компас» Яндекс сайт не находил: на страницах не было этих слов
+    (7 ноября 2026). Заголовок главной, og:site_name и разметка schema.org называют сайт
+    так же, как канал, — «Проект Компас»."""
+    import json, re
+    html = open('static/index.html', encoding='utf-8').read()
+    assert '<title>Проект Компас' in html
+    assert '<meta property="og:site_name" content="Проект Компас">' in html
+    ld = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S).group(1)
+    names = {n.get('name') for n in json.loads(ld)['@graph']}
+    assert names == {'Проект Компас'}
