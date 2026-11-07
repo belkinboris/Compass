@@ -10543,3 +10543,20 @@ def test_central_bank_currency_purchase_is_not_a_deal():
     assert classify.looks_like_deal(
         "Сбербанк купил 100% банка, работающего на внутреннем рынке")
 
+
+def test_to_card_puts_the_sum_in_the_economist_too():
+    """Сумма черновика — и на «Обзоре», и в «Экономисте» (бэклог E12).
+
+    До 7 ноября 2026 `to_card` писал только `sum`, а `eco.sum` оставался
+    «—»: цена торгов пять раз за неделю роняла полный pytest при выпуске
+    постов (test_audit_queue::test_the_sum_on_the_overview_is_the_sum_in_the_economist).
+    Без суммы «Экономист» остается заглушкой, а не выдумывается.
+    """
+    import promote
+    base = {"date": "2026-11-05", "title": "Имущество «Садов Бештау» продано с торгов",
+            "src": [["источник", "https://example.invalid/z"]]}
+    card = promote.to_card(dict(base, sum="247 млн ₽"), "gtest0003")
+    assert card["sum"] == card["eco"]["sum"] == "247 млн ₽"
+    empty = promote.to_card(dict(base, sum="—"), "gtest0004")
+    assert "sum" not in empty and empty["eco"]["sum"] == "—"
+
