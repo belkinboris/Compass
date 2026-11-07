@@ -252577,7 +252577,6 @@
    "extra": "Финский производитель упаковки Huhtamaki продал весь российский бизнес компании Espetina Ltd за 151 млн евро.",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль российской компании не заводили по заданию (ИНН не искали); юрлицо по СПАРК — ООО «Хухтамаки С.Н.Г.», но статья прямо не подтверждает, что оно целиком вошло в сделку.",
      "buyer": "Espetina Ltd — кипрская компания Говора и Кушнерова, профиль не заводили по заданию.",
      "seller": "Huhtamaki — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ ее российского юрлица не запрашивалась, продавец назван в статьях."
     }
@@ -252624,14 +252623,14 @@
      "card_hash": "7d279f16491c"
     },
     "target": {
-     "company_id": null,
+     "company_id": "gd4d9e766",
      "inn": null,
      "confirmed": false,
      "bank": false,
-     "lot": false,
-     "basis": "unknown",
+     "lot": true,
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "884378410831"
     },
     "admitted": {
      "count": true,
@@ -252645,9 +252644,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "target_lot"
     }
-   }
+   },
+   "target": "gd4d9e766"
   },
   {
    "date": "2023-04-05",
@@ -252930,7 +252930,6 @@
    "extra": "Американская Xerox продала российское подразделение «Ксерокс (СНГ)» его руководству — ООО «Кселаб».",
    "accepted_notes": {
     "no_profile": {
-     "target": "ООО «Ксерокс (СНГ)» — профиль и ИНН не заводили по заданию.",
      "seller": "Xerox Limited — по данным СПАРК-Интерфакса владела 100% долей; история участников ЕГРЮЛ отдельно не запрашивалась, профиль не заводили по заданию."
     }
    },
@@ -252969,14 +252968,14 @@
      "card_hash": "495b2940bad9"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g871a7ad5",
+     "inn": "7705029530",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "de7d573837a0"
     },
     "admitted": {
      "count": true,
@@ -252990,10 +252989,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "buyer": "g2d7b9c0c"
+   "buyer": "g2d7b9c0c",
+   "target": "g871a7ad5"
   },
   {
    "date": "2025-05-08",
@@ -253047,7 +253047,6 @@
    "extra": "Швейцарская ABB получила разрешение президента на продажу российского ООО «АББ» московскому АО «Концепт-Инвест».",
    "accepted_notes": {
     "no_profile": {
-     "target": "ООО «АББ» — профиль и ИНН не заводили по заданию.",
      "buyer": "АО «Концепт-Инвест» — ЕГРЮЛ содержит две одноименные компании, какая именно покупатель, статьи не говорят; профиль не заводили.",
      "seller": "ABB Asea Brown Boveri Ltd и ABB Verwaltungs AG — владельцы названы в распоряжении президента; история участников ЕГРЮЛ отдельно не запрашивалась, профиль не заводили по заданию."
     }
@@ -253088,14 +253087,14 @@
      "card_hash": "20b75fc474ed"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g7e2a8149",
+     "inn": "7727180430",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "1c7486d2cf12"
     },
     "admitted": {
      "count": true,
@@ -253109,9 +253108,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "g7e2a8149"
   },
   {
    "date": "2023-04-19",
@@ -253508,7 +253508,6 @@
    "extra": "Французская Renault передала свои российские активы государству: завод в Москве — правительству города, 67,69% «АвтоВАЗа» — институту НАМИ.",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль не заводили по заданию (ИНН не искали).",
      "buyer": "Правительство Москвы и ФГУП НАМИ — государственные покупатели, профиль не заводили по заданию.",
      "seller": "Renault — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
     }
@@ -253552,14 +253551,14 @@
      "card_hash": "f056c275cbb8"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g9c71a554",
+     "inn": "7709259743",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "a51a89f0c631"
     },
     "admitted": {
      "count": true,
@@ -253573,9 +253572,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "g9c71a554"
   },
   {
    "date": "2022-11-23",
@@ -253621,7 +253621,6 @@
    "extra": "Японская Nissan завершила передачу петербургского завода и других российских активов институту НАМИ, сохранив право выкупа в течение шести лет.",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль не заводили по заданию (ИНН не искали).",
      "buyer": "ФГУП НАМИ — государственный институт, профиль не заводили по заданию.",
      "seller": "Nissan — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
     }
@@ -253665,14 +253664,14 @@
      "card_hash": "df035e8d7f53"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g89d0a677",
+     "inn": "7842337791",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "0612e845f69e"
     },
     "admitted": {
      "count": true,
@@ -253686,9 +253685,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
-   }
+   },
+   "target": "g89d0a677"
   },
   {
    "date": "2022-05-25",
@@ -253738,7 +253738,6 @@
    "extra": "Британская Shell продала «Лукойлу» российское юрлицо с 411 заправками и заводом масел в Торжке.",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль ООО «Шелл нефть» не заводили по заданию (ИНН не искали).",
      "seller": "Shell — иностранная публичная группа, профиль не заводили по заданию; история участников ЕГРЮЛ ООО «Шелл нефть» не запрашивалась, продавец назван в статьях."
     }
    },
@@ -253780,14 +253779,14 @@
      "card_hash": "a6c6ff9ffe1a"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g9e96e9dd",
+     "inn": "7743792870",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "29c98b826009"
     },
     "admitted": {
      "count": true,
@@ -253801,10 +253800,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "buyer": "g5c8c6494"
+   "buyer": "g5c8c6494",
+   "target": "g9e96e9dd"
   },
   {
    "date": "2022",
@@ -254081,7 +254081,6 @@
    "extra": "Казахстанский Halyk Bank продал 100% акций Москоммерцбанка покупателю, которого не назвал; по отчетности банк получил 7,3 млрд тенге.",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль не заводили по заданию (ИНН не искали).",
      "buyer": "Покупатель не раскрыт ни продавцом, ни источниками.",
      "seller": "Halyk Bank — иностранный банк, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
     }
@@ -254126,14 +254125,14 @@
      "card_hash": "7baee3b5f6b0"
     },
     "target": {
-     "company_id": null,
+     "company_id": "g889de071",
      "inn": null,
      "confirmed": false,
-     "bank": false,
+     "bank": true,
      "lot": false,
-     "basis": "unknown",
+     "basis": "rule",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "c9886df71068"
     },
     "admitted": {
      "count": true,
@@ -254147,9 +254146,10 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "target_bank"
     }
-   }
+   },
+   "target": "g889de071"
   },
   {
    "date": "2024-04-12",
@@ -254204,7 +254204,6 @@
    "sum": "—",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль ООО «Ситрас» не заводили по заданию (ИНН не искали).",
      "seller": "Ceetrus — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях."
     }
    },
@@ -254243,14 +254242,14 @@
      "card_hash": "b160c2fd9012"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g027eec23",
+     "inn": "7708238412",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "d5c0ee864c1e"
     },
     "admitted": {
      "count": true,
@@ -254264,10 +254263,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "buyer": "gbb14d1cf"
+   "buyer": "gbb14d1cf",
+   "target": "g027eec23"
   },
   {
    "date": "2022",
@@ -254667,7 +254667,6 @@
    "sum": "420 млн $",
    "accepted_notes": {
     "no_profile": {
-     "target": "Профиль АО «Сильвамо Корпорейшн Рус» не заводили по заданию (ИНН не искали).",
      "seller": "Sylvamo Corporation — иностранная публичная компания, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась."
     }
    },
@@ -254711,14 +254710,14 @@
      "card_hash": "01f7f0393e65"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "gf143d6fe",
+     "inn": "4704012472",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "b55d5849b2aa"
     },
     "admitted": {
      "count": true,
@@ -254732,10 +254731,11 @@
      "industry": "ok",
      "purchase_sums": "price_not_read",
      "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_verified"
     }
    },
-   "buyer": "g0d37f18c"
+   "buyer": "g0d37f18c",
+   "target": "gf143d6fe"
   },
   {
    "date": "2022",
@@ -276601,12 +276601,13 @@
   },
   "gf143d6fe": {
    "name": "Светогорский ЦБК",
-   "ind": "Химия и удобрения",
-   "desc": "Целлюлозно-бумажный комбинат в Ленинградской области.",
+   "ind": "Лесопром",
+   "desc": "Целлюлозно-бумажный комбинат в Светогорске (Ленинградская область); до октября 2022 года общество называлось АО «Сильвамо Корпорейшн Рус», а до 2021 года — ЗАО «Интернешнл Пейпер».",
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "НПАО «Светогорский ЦБК»"
   },
   "g67e99c13": {
    "name": "ООО «АВС-Медицина»",
@@ -285148,6 +285149,62 @@
    "ind": "Пищепром и напитки",
    "desc": "Сеть пиццерий, основана в 2019 году шеф-поваром Дмитрием Зотовым, Станиславом Еникеевым и Андреем Дуниловым: больше 30 пиццерий в девяти городах России, работает по франшизе. Управляющая компания — ООО «Зотман Партнерс».",
    "kpi": []
+  },
+  "g9c71a554": {
+   "name": "Московский автомобильный завод «Москвич»",
+   "ind": "Автопром",
+   "desc": "Автозавод в Москве; до июня 2022 года общество называлось ЗАО «Рено Россия», а до 2014 года — «Автофрамос».",
+   "kpi": [],
+   "legal_short": "АО МАЗ «Москвич»"
+  },
+  "g89d0a677": {
+   "name": "Автозавод «Санкт-Петербург»",
+   "ind": "Автопром",
+   "desc": "Автозавод в Санкт-Петербурге; до июня 2023 года общество называлось ООО «Ниссан Мэнуфэкчуринг Рус», затем недолго — ООО «Лада Санкт-Петербург».",
+   "kpi": [],
+   "legal_short": "ООО «Автозавод «Санкт-Петербург»"
+  },
+  "g9e96e9dd": {
+   "name": "Тебойл Рус",
+   "ind": "Нефть и газ",
+   "desc": "Сеть заправок и завод смазочных материалов в Торжке; до июня 2022 года общество называлось ООО «Шелл нефть». Принадлежит «Лукойлу».",
+   "kpi": [],
+   "legal_short": "ООО «Тебойл Рус»"
+  },
+  "g7e2a8149": {
+   "name": "Руцис",
+   "ind": "Машиностроение",
+   "desc": "Бывшее российское общество ABB: до июля 2025 года называлось ООО «АББ». С 2025 года принадлежит АО «Концепт-Инвест».",
+   "kpi": [],
+   "legal_short": "ООО «Руцис»"
+  },
+  "g871a7ad5": {
+   "name": "Техноэволаб",
+   "ind": "ИТ и интернет",
+   "desc": "Бывшее российское общество Xerox: до октября 2023 года называлось ООО «Ксерокс (СНГ)». Принадлежит ООО «Кселаб» Антона и Светланы Бородихиных.",
+   "kpi": [],
+   "legal_short": "ООО «Техноэволаб»"
+  },
+  "g889de071": {
+   "name": "Москоммерцбанк",
+   "ind": "Банки",
+   "desc": "Московский банк; до 2022 года принадлежал казахстанскому Halyk Bank.",
+   "kpi": [],
+   "legal_short": "КБ «Москоммерцбанк» (АО)"
+  },
+  "g027eec23": {
+   "name": "Ситрас",
+   "ind": "Недвижимость",
+   "desc": "Бывшее российское общество Ceetrus (группа Auchan), управляло торговыми центрами и галереями; до 2018 года называлось ООО «Иммошан», с июня 2024 года — ООО «Акварель». Принадлежит ООО «Торговые галереи» Тагира Шаймарданова.",
+   "kpi": [],
+   "legal_short": "ООО «Акварель»"
+  },
+  "gd4d9e766": {
+   "name": "Скандипакк",
+   "ind": "Производство тары",
+   "desc": "Российский бизнес Huhtamaki — два общества: ООО «Скандипакк» в Ивантеевке (до 2023 года ООО «Хухтамаки С.Н.Г.») и ООО «Скандипакк Алабуга» в Татарстане (до 2023 года ООО «Хухтамаки Алабуга»).",
+   "kpi": [],
+   "lot": true
   }
  },
  "match_keys": {
@@ -291823,6 +291880,27 @@
   ],
   "gec252e76": [
    "vesper девелопер"
+  ],
+  "g9c71a554": [
+   "рено россия"
+  ],
+  "g89d0a677": [
+   "ниссан мэнуфэкчуринг рус"
+  ],
+  "g9e96e9dd": [
+   "шелл нефть"
+  ],
+  "g871a7ad5": [
+   "ксерокс (снг)"
+  ],
+  "g889de071": [
+   "москоммерцбанк"
+  ],
+  "g027eec23": [
+   "ситрас"
+  ],
+  "gd4d9e766": [
+   "хухтамаки"
   ]
  },
  "merged": {
