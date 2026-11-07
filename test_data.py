@@ -2176,15 +2176,20 @@ def test_placeholders_canon_catches_every_variant_seen_in_the_base():
         if p not in _sys.path:
             _sys.path.insert(0, p)
     import accept_card, promote, check_post, proofread, subscription_feed, assistant_retrieval, deal_export  # noqa: E401,E402
+    # Сравнение по образцу, а не `is`: модуль грузится и как `placeholders`
+    # (pipeline/ в sys.path), и как `pipeline.placeholders`; один и тот же
+    # объект давал только кэш re.compile, а после сотен регэкспов притока
+    # (test_ingest при сборке) кэш вытеснялся и тест падал от порядка файлов.
+    canon = (placeholders.PLACEHOLDER.pattern, placeholders.PLACEHOLDER.flags)
     for mod in (accept_card, promote, check_post, proofread, subscription_feed, assistant_retrieval):
-        assert mod.PLACEHOLDER is placeholders.PLACEHOLDER, mod.__name__
-    assert deal_export._PLACEHOLDER is placeholders.PLACEHOLDER
+        assert (mod.PLACEHOLDER.pattern, mod.PLACEHOLDER.flags) == canon, mod.__name__
+    assert (deal_export._PLACEHOLDER.pattern, deal_export._PLACEHOLDER.flags) == canon
     assert accept_card.has("не раскрыта.") is False and accept_card.has("н/д") is False
     # Аудит 1 ноября 2026 (бэклог D5.3): последние свои проверки «пусто» —
     # review_lawfirms.has, learn, promote.to_card, консоль, seo_pages — тоже на каноне.
     import review_lawfirms, learn, seo_pages  # noqa: E401,E402
     from app import console
-    assert seo_pages._DASH is placeholders.DASHES
+    assert seo_pages._DASH == placeholders.DASHES
     for v in placeholders.EXAMPLES:
         assert review_lawfirms.has(v) is False, repr(v)
         assert learn.failure_classes([{"field": "sum", "old": v}]) == {("sum", "промолчала"): 1}, repr(v)

@@ -6471,7 +6471,10 @@ def test_learning_log_separates_lies_from_silence():
     assert any(k[1] == 'СОВРАЛА' for k in classes)
     assert any(k[1] == 'промолчала' for k in classes)
     lied = sum(v for k, v in classes.items() if k[1] == 'СОВРАЛА')
-    assert lied == sum(1 for f in review.FIXES if f['old'] not in (None, '—', ''))
+    # «Промолчала» — пустое поле по одному канону (placeholders, бэклог D5):
+    # «не раскрыта» на месте значения — тоже молчание, а не ложь.
+    from pipeline import placeholders
+    assert lied == sum(1 for f in review.FIXES if not placeholders.is_empty(f['old']))
 
 
 def test_no_duplicate_fix_for_one_field():
