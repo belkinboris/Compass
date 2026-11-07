@@ -43,14 +43,24 @@ BASE = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 RAW = os.path.join(ROOT, 'data', 'inbox', 'raw')
 
+sys.path.insert(0, HERE)
+from strip_comments import cut_comment_text, strip_comment_html  # noqa: E402
+
 
 def article_text(raw_html):
     """Текст без разметки. Скрипты и стили выкидываются целиком: внутри них
-    цитат не бывает, а мусора — мегабайты."""
-    raw_html = re.sub(r'<script\b.*?</script>|<style\b.*?</style>', ' ',
-                      raw_html, flags=re.S | re.I)
-    text = html_lib.unescape(re.sub(r'<[^>]+>', ' ', raw_html))
-    return re.sub(r'\s+', ' ', text).strip()
+    цитат не бывает, а мусора — мегабайты. Комментарии читателей под статьей
+    тоже (с 7 ноября 2026, бэклог A30): иначе обрывок чужого мнения проходит
+    проверку цитат как факт источника — `strip_comments.py`."""
+    def plain(page):
+        page = re.sub(r'<script\b.*?</script>|<style\b.*?</style>', ' ',
+                      page, flags=re.S | re.I)
+        text = html_lib.unescape(re.sub(r'<[^>]+>', ' ', page))
+        return cut_comment_text(re.sub(r'\s+', ' ', text).strip())[0]
+    text = plain(strip_comment_html(raw_html))
+    # Класс «comments» на обертке всей страницы срезал бы и статью: тогда
+    # остается только отрез хвоста по словам (ярус 2).
+    return text if len(text) > 200 else plain(raw_html)
 
 
 TG_POST_RE = re.compile(r'^https://t\.me/([^/s][^/]*)/(\d+)/?$')
