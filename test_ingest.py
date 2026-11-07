@@ -6471,7 +6471,10 @@ def test_learning_log_separates_lies_from_silence():
     assert any(k[1] == 'СОВРАЛА' for k in classes)
     assert any(k[1] == 'промолчала' for k in classes)
     lied = sum(v for k, v in classes.items() if k[1] == 'СОВРАЛА')
-    assert lied == sum(1 for f in review.FIXES if f['old'] not in (None, '—', ''))
+    # «Промолчала» — пустое поле по одному канону (placeholders, бэклог D5):
+    # «не раскрыта» на месте значения — тоже молчание, а не ложь.
+    from pipeline import placeholders
+    assert lied == sum(1 for f in review.FIXES if not placeholders.is_empty(f['old']))
 
 
 def test_no_duplicate_fix_for_one_field():
@@ -6713,7 +6716,7 @@ def test_report_deal_name_is_not_the_first_capitalized_word():
         # g6f83d85e (Продажа Veeam Software…) — карточка 2020 года удалена 27 октября 2026
         "gdde6bef5": "Слияние",           # Слияние Whoosh и МТС Юрент...
         "g9c4b80a7": "Российские",        # Российские активы CanPack...
-        "g3074f98b": "Государственный",   # Государственный пенсионный фонд Норвегии...
+        # g3074f98b (Государственный пенсионный фонд Норвегии…) — снята 7 ноября 2026 как не сделка
         "ga5336065": "Продажа",           # Продажа золоторудного месторождения Ямалзолото
     }
     for cid, banned in cases.items():

@@ -58,6 +58,27 @@ def test_index_holds_only_deals_the_site_shows(idx):
     assert all(d.year >= ar.SITE_MIN_YEAR for d in idx.docs)
 
 
+def test_index_holds_every_deal_the_site_shows(idx):
+    """Обратная сторона: что сайт показывает, то ассистент и находит.
+
+    Сайт (`isDealShownOnSite` в static/index.html) показывает и сделку с датой
+    «unknown» — год не разобрался, прятать ее нечестно; индекс ассистента
+    такую выкидывает (аудит 1 ноября 2026, бэклог D5.4). На 7 ноября 2026
+    таких сделок 0 — тест держит, чтобы первая не прошла молча: тогда ее
+    надо либо датировать, либо научить индекс году None.
+    """
+    import pathlib
+    data = json.loads((pathlib.Path(ar.__file__).resolve().parent
+                       / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    shown = set()
+    for d in data["deals"]:
+        head = str(d.get("date") or "")[:4]
+        if not head.isdigit() or int(head) >= ar.SITE_MIN_YEAR:
+            shown.add(str(d["id"]))
+    missing = sorted(shown - {d.id for d in idx.docs})
+    assert not missing, "сайт показывает, ассистент не находит: %s" % missing[:5]
+
+
 def test_firm_catalog_is_read_from_the_interface_file(idx):
     names = {f.name for f in idx.firms}
     assert {"Orion", "Better Chance"} <= names
