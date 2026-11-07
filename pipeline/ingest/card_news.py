@@ -952,6 +952,10 @@ def apply_offer(entry, verdict, base, pending, now=None):
     if url and url.startswith('http') and url not in card_urls(card):
         label = editions.edition_label(url) or 'источник'
         card.setdefault('src', []).append([label, url])
+    # Агрегатор (@dealsma, @LawFirms, mergers.ru) рядом с первоисточником —
+    # в `discovery_src`, как у любого источника притока (SASCO, 7 ноября 2026:
+    # кнопка поставила @dealsma видимым рядом с «Коммерсантом»).
+    editions.settle_sources(card)
     entry.update(outcome='decided', decision=verdict, decided_at=now_iso(now),
                  applied=done, not_applied=[list(x) for x in failed], where=where)
     return done, failed, where

@@ -10512,6 +10512,9 @@ def test_enrich_gives_every_unapplied_news_an_outcome(monkeypatch, tmp_path):
     assert {e.get("decision") for e in book.values()} >= {"card_auto"}
     card = next(d for d in json.loads(data.read_text(encoding="utf-8"))["deals"] if d["id"] == "gsel0001")
     assert [r[1] for r in card["law"]["adv"]] == ["NSP"] and NSP_POST["url"] in card_news_urls(card)
+    # агрегатор рядом с первоисточником (ComNews) — не видимым источником
+    assert NSP_POST["url"] not in [s[1] for s in card["src"]]
+    assert NSP_POST["url"] in [s[1] for s in card["discovery_src"]]
 
 
 def card_news_urls(card):
