@@ -2180,6 +2180,20 @@ def test_placeholders_canon_catches_every_variant_seen_in_the_base():
         assert mod.PLACEHOLDER is placeholders.PLACEHOLDER, mod.__name__
     assert deal_export._PLACEHOLDER is placeholders.PLACEHOLDER
     assert accept_card.has("не раскрыта.") is False and accept_card.has("н/д") is False
+    # Аудит 1 ноября 2026 (бэклог D5.3): последние свои проверки «пусто» —
+    # review_lawfirms.has, learn, promote.to_card, консоль, seo_pages — тоже на каноне.
+    import review_lawfirms, learn, seo_pages  # noqa: E401,E402
+    from app import console
+    assert seo_pages._DASH is placeholders.DASHES
+    for v in placeholders.EXAMPLES:
+        assert review_lawfirms.has(v) is False, repr(v)
+        assert learn.failure_classes([{"field": "sum", "old": v}]) == {("sum", "промолчала"): 1}, repr(v)
+    assert review_lawfirms.has("не раскрыта (EV оценена в 21 млрд ₽)")
+    assert "Продавец" not in console._card_line({"title": "т", "seller": "не раскрыт"})
+    assert "Продавец: ООО «А»" in console._card_line({"title": "т", "seller": "ООО «А»"})
+    card = promote.to_card({"date": "2026-11-07", "title": "т", "seller": "не раскрыт",
+                            "src": [["и", "https://example.invalid/p"]]}, "gtest0007")
+    assert "seller" not in card
 
 
 def test_placeholder_canon_matches_the_screen():

@@ -31,8 +31,10 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
 
 import advisors                # noqa: E402
+import placeholders            # noqa: E402
 import classify                # noqa: E402
 import draft                   # noqa: E402
 import enrich                  # noqa: E402
@@ -44,11 +46,9 @@ SINCE = '2022-01-01'
 
 
 def has(value):
-    """Заполнено ли поле. Заглушка («не раскрыта», «—») — это пустота."""
-    text = str(value or '').strip().lower()
-    if not text or text in ('—', '-', 'н/д'):
-        return False
-    return not text.startswith(('не раскры', 'не привлекал', 'публично не', 'не сообщал'))
+    """Заполнено ли поле. Заглушка («не раскрыта», «—») — это пустота.
+    Один канон на весь код — pipeline/placeholders.py (бэклог D5, 7 ноября 2026)."""
+    return placeholders.has(value)
 
 
 # Все подписанные поля карточки, кроме заголовка и даты. Список полный

@@ -850,7 +850,8 @@ def to_card(draft, deal_id):
     for field in ('sum', 'seller', 'buyer_name', 'asset'):
         # «—» в `sum` — не пустота для экрана и тестов (у `sum` своя заглушка
         # «Не раскрыта», KNOWN_ISSUES 27 октября 2026): поле без суммы не пишется.
-        if draft.get(field) and str(draft[field]).strip() not in ('—', '-', '–'):
+        # Заглушка — по одному канону (pipeline/placeholders.py, бэклог D5).
+        if draft.get(field) and not placeholders.is_empty(draft[field]):
             card[field] = draft[field]
     if card.get('sum'):
         # «Экономист» показывает ту же сумму, что «Обзор» (test_audit_queue::

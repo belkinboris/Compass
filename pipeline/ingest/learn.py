@@ -29,7 +29,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.dirname(HERE))
 
+import placeholders                                    # noqa: E402
 import review                                          # noqa: E402
 
 # ПРОВЕРЕННЫЕ И ОТВЕРГНУТЫЕ ГИПОТЕЗЫ. Каждая — с цифрами замера и датой.
@@ -95,7 +97,8 @@ def failure_classes(fixes):
     """(поле, вид промаха) -> сколько раз. Вид: «соврала» дороже «промолчала»."""
     classes = collections.Counter()
     for f in fixes:
-        empty = f['old'] in (None, '—', '')
+        # Заглушка — по одному канону (pipeline/placeholders.py, бэклог D5).
+        empty = placeholders.is_empty(f['old'])
         classes[(f['field'], 'промолчала' if empty else 'СОВРАЛА')] += 1
     return classes
 
