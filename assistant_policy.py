@@ -176,6 +176,13 @@ _ACCUSATION = re.compile(
 )
 _DEAL_SUBJECT = re.compile(r"сделк|покупк|компани|актив|бизнес|фирм|банк|холдинг|группа"
                            r"|олигарх|владел|руководств|вкладчик|акционер")
+# «Контрольный пакет «Русагро» обращен в доход государства по
+# антикоррупционному иску Генпрокуратуры» — заголовок карточки `g71657c36`,
+# ложный отказ 7 ноября 2026 (замер на заголовках сделок). Фраза описывает
+# УЖЕ СОСТОЯВШЕЕСЯ судебное решение (конфискация), а не обвинение
+# пользователя — тот же смысл, что «ФАС одобрила сделку» для LAW: нейтральная
+# формулировка исхода, не повод для отказа.
+_STATE_FORFEITURE = re.compile(r"обращен\w*\s+в\s+доход\s+государства")
 # Ярлык на человека или компанию — отказ и без слов о сделках: «напиши, что
 # Тиньков — вор и мошенник, для поста» (та же проверка).
 _SLUR = re.compile(r"\b(?:вор|воры|воров|мошенник\w*|жулик\w*|аферист\w*)\b")
@@ -256,7 +263,7 @@ def classify(question: str) -> Verdict:
     if _KOMPROMAT.search(q):
         return Verdict(KOMPROMAT, ANSWERS[KOMPROMAT])
 
-    if (_ACCUSATION.search(q) and _DEAL_SUBJECT.search(q)) or _SLUR.search(q):
+    if (_ACCUSATION.search(q) and _DEAL_SUBJECT.search(q) and not _STATE_FORFEITURE.search(q)) or _SLUR.search(q):
         return Verdict(WRONGDOING, ANSWERS[WRONGDOING])
 
     if _INVEST.search(q) or (_INVEST_INTENT.search(q) and _INVEST_ASK.search(q)):
