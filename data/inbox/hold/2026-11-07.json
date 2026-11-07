@@ -897,13 +897,13 @@
    ]
   },
   {
-   "draft_id": "d02807313",
-   "title": "Почти 65% волгоградцев высказались за полный запрет продажи вейпов",
+   "draft_id": "d76641542",
+   "title": "Россиянин решил купить поддельный диплом врача и поплатился",
    "date": "2026-11-07",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/volgograd/2026/11/7/pochti-65-volgogradczev-vyskazalis-za-polnyj-zapret-prodazhi-vejpov"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/07/rossiyanin-reshil-kupit-poddelnyy-diplom-vracha-i-poplatilsya/"
     ]
    ],
    "sum": null,
@@ -921,8 +921,211 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26443619",
+   "title": "В Новосибирске признали несостоявшимся аукцион на продажу пяти долгостроев",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/novosibirsk/2026/11/7/v-novosibirske-priznali-nesostoyavshimsya-aukczion-na-prodazhu-pyati-dolgostroev"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57008750",
+   "title": "«Сбоя не было». В ЮУЖД прокомментировали стремительные продажи билетов на Поезд Деда Мороза",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/entertainment/2026/11/07/76751065/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51193456",
+   "title": "Мебельную компанию с 30-летней историей в Петербурге выставили на торги",
+   "date": "2026-10-26",
+   "src": [
+    [
+     null,
+     "https://www.dp.ru/a/2026/10/26/mebelnuju-kompaniju-s-30-letnej"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "rerouted_from": "g49431b3c",
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку g2bd95d6e (общие редкие слова: истори, петерб) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d01605749",
+   "title": "Четыре объекта для бизнеса в Левобережном районе Москвы выставили на торги",
+   "date": "2026-10-27",
+   "src": [
+    [
+     null,
+     "https://ria.ru/20261027/auktsion-2127202530.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "rerouted_from": "gbcf07c78",
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g343bc58c (общие редкие слова: выстав, районе, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d82622029",
+   "title": "В Москве на Фестивальной улице выставили на торги четыре помещения для бизнеса",
+   "date": "2026-10-27",
+   "src": [
+    [
+     null,
+     "https://abnews.ru/center/news/msk/2026/10/27/v-moskve-na-festivalnoj-ulicze-vystavili-na-torgi-chetyre-pomeshheniya-dlya-biznesa"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "rerouted_from": "gbcf07c78",
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1833e545 (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d54890484",
+   "title": "В Калининградской области газопровод протяженностью выставили на торги",
+   "date": "2026-10-27",
+   "src": [
+    [
+     null,
+     "https://abnews.ru/szfo/news/kaliningrad/2026/10/27/v-kaliningradskoj-oblasti-gazoprovod-protyazhennostyu-vystavili-na-torgi"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "rerouted_from": "g35c2f65e",
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36180184",
+   "title": "Отель «Савой» в центре Москвы выставили на продажу на «Авито»",
+   "date": "2026-10-27",
+   "src": [
+    [
+     null,
+     "https://1prime.ru/20261027/otel-874645156.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "rerouted_from": "gbcf07c78",
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

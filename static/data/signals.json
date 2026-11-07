@@ -16,6 +16,20 @@
    "object_id": "g163cfc8b"
   },
   {
+   "id": "secaf11645",
+   "company_id": "g2f4f1e3e",
+   "date": "2026-11-06",
+   "kind": "for_sale",
+   "summary": "Центральный городской рынок — выставлена на торги",
+   "source": [
+    "V1.ru",
+    "https://v1.ru/text/gorod/2026/11/06/76748856/"
+   ],
+   "origin": "card",
+   "deal_id": "g41bcec82",
+   "strength": "strong"
+  },
+  {
    "id": "s61b595e5e",
    "company_id": "g163cfc8b",
    "date": "2026-11-06",
@@ -1169,6 +1183,20 @@
    "origin": "card",
    "deal_id": "g36bc7831",
    "strength": "normal"
+  },
+  {
+   "id": "sefb78ce75",
+   "company_id": "g3159278f",
+   "date": "2026-05-05",
+   "kind": "for_sale",
+   "summary": "Zotman Pizza — обсуждается продажа компании или доли; возможный покупатель — X5 Group",
+   "source": [
+    "Известия",
+    "https://iz.ru/2090778/denis-kuznetcov/x5-mozhet-stat-sovladelcem-zotman-pizza"
+   ],
+   "origin": "card",
+   "deal_id": "g489b4309-1",
+   "strength": "strong"
   },
   {
    "id": "s7268db2ea",
