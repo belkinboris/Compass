@@ -583,6 +583,112 @@ def test_telegram_failure_does_not_break_the_registration(client, monkeypatch):
         s.close()
 
 
+# ---- Заявитель узнает о решении в Telegram (F4, 7 ноября 2026) ----
+# Бот не может написать первым тому, кто его не запускал: под отправленной
+# заявкой — ссылка t.me/<бот>?start=acc_<ключ>, по «Старт» чат запоминается
+# у заявки, по «Одобрить» туда уходит сообщение. Telegram подменен (_gate_on).
+
+def _apply_with_telegram_link(client, monkeypatch, email):
+    monkeypatch.setenv("TELEGRAM_BOT_USERNAME", "@kompas_test_bot")
+    r = client.post("/api/auth/register", json={"email": email, "password": TEST_PASSWORD,
+                                                "full_name": "Заявка Заявкина"})
+    body = r.json()
+    assert r.status_code == 200 and body["pending"] is True
+    assert body["telegram_url"].startswith("https://t.me/kompas_test_bot?start=acc_")
+    s = get_session()
+    try:
+        uid = s.query(User).filter_by(email=email).one().id
+    finally:
+        s.close()
+    return uid, body["telegram_url"].split("?start=", 1)[1]
+
+
+def _private(client, chat_id, text):
+    client.post("/api/telegram/webhook/тайна", json={"message": {
+        "chat": {"id": chat_id, "type": "private"}, "from": {"id": chat_id}, "text": text}})
+
+
+def _press(client, uid, verdict, from_id=111):
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "5", "data": f"acc:{uid}:{verdict}", "from": {"id": from_id},
+                            "message": {"chat": {"id": -1001234567890}, "message_id": 8, "text": "Заявка"}}})
+
+
+def _to_chat(sent, chat_id):
+    return [kw for m, kw in sent if m == "sendMessage" and str(kw.get("chat_id")) == str(chat_id)]
+
+
+def test_applicant_links_telegram_by_start_and_hears_about_the_approval(client, monkeypatch):
+    sent = _gate_on(monkeypatch)
+    uid, payload = _apply_with_telegram_link(client, monkeypatch, "в-телеграм@firm.ru")
+    sent.clear()
+    _private(client, 700001, "/start " + payload)
+    replies = _to_chat(sent, 700001)
+    assert len(replies) == 1 and "Заявку получили" in replies[0]["text"]
+    assert "ё" not in replies[0]["text"].lower()
+    # Второй «Старт» по той же ссылке — тот же спокойный ответ, не «устарела».
+    sent.clear()
+    _private(client, 700001, "/start " + payload)
+    assert "Заявку получили" in _to_chat(sent, 700001)[0]["text"]
+
+    sent.clear()
+    _press(client, uid, "ok")
+    told = _to_chat(sent, 700001)
+    assert len(told) == 1, sent
+    assert "открыт" in told[0]["text"] and "почтой и паролем" in told[0]["text"]
+    assert "projectcompass.ru" in told[0]["text"] and "ё" not in told[0]["text"].lower()
+    assert told[0]["reply_markup"]["inline_keyboard"][0][0]["url"].startswith("http")
+    # Повторное нажатие «Одобрить» второго человека — без второго сообщения.
+    sent.clear()
+    _press(client, uid, "ok", from_id=222)
+    assert _to_chat(sent, 700001) == []
+    r = client.post("/api/auth/login", json={"email": "в-телеграм@firm.ru", "password": TEST_PASSWORD})
+    assert r.status_code == 200
+
+
+def test_rejected_applicant_gets_no_telegram_message(client, monkeypatch):
+    sent = _gate_on(monkeypatch)
+    uid, payload = _apply_with_telegram_link(client, monkeypatch, "в-телеграм-отказ@firm.ru")
+    _private(client, 700002, payload)            # ключ текстом, без «Старт»
+    sent.clear()
+    _press(client, uid, "no")
+    assert _to_chat(sent, 700002) == []
+
+
+def test_approval_without_telegram_link_sends_nothing_and_does_not_fail(client, monkeypatch):
+    sent = _gate_on(monkeypatch)
+    uid, _ = _apply_with_telegram_link(client, monkeypatch, "без-телеграма@firm.ru")
+    sent.clear()
+    _press(client, uid, "ok")
+    assert all(kw.get("chat_id") in (None, -1001234567890, "-1001234567890")
+               for m, kw in sent if m == "sendMessage"), sent
+    assert client.post("/api/auth/login", json={"email": "без-телеграма@firm.ru",
+                                                "password": TEST_PASSWORD}).status_code == 200
+
+
+def test_approval_by_token_also_tells_the_applicant(client, monkeypatch):
+    sent = _gate_on(monkeypatch)
+    monkeypatch.setenv("MODERATION_TOKEN", "секрет")
+    uid, payload = _apply_with_telegram_link(client, monkeypatch, "по-токену@firm.ru")
+    _private(client, 700003, "/start " + payload)
+    sent.clear()
+    client.post("/api/access/decide", json={"token": "секрет", "user_id": uid, "approve": True})
+    assert "открыт" in _to_chat(sent, 700003)[0]["text"]
+
+
+def test_unknown_access_link_gets_a_plain_answer(client, monkeypatch):
+    sent = _gate_on(monkeypatch)
+    _private(client, 700004, "/start acc_" + "z" * 32)
+    replies = _to_chat(sent, 700004)
+    assert len(replies) == 1 and "Не нашли заявку" in replies[0]["text"]
+
+
+def test_no_bot_configured_means_no_telegram_button(client, monkeypatch):
+    _gate_on(monkeypatch)
+    monkeypatch.delenv("TELEGRAM_BOT_USERNAME", raising=False)
+    _request_access(client, "без-бота@firm.ru")     # ответ ровно {"ok", "pending"}
+
+
 def test_gate_off_registers_approved_users_and_logs_them_in(client, monkeypatch):
     """Выключенный гейт (ACCESS_GATE=0) — прежнее поведение: сессия сразу,
     approved=True, чтобы при последующем включении гейта эти люди вошли."""

@@ -282,9 +282,12 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # Отклоненный остается в базе с approved=False: повторная заявка
             # тем же адресом не создаст дубля (почта уникальна), а вход
             # отвечает тем же «доступ не открыт».
+            was_approved = bool(applicant.approved)
             applicant.approved = acc.group(2) == "ok"
             db.commit()
             _mark_decided(callback, "acc_ok" if applicant.approved else "acc_no")
+            if applicant.approved and not was_approved:
+                _notify_access_approved(db, applicant)
             return {"ok": True}
 
         # «Это моя компания» (кабинет компании, 14 октября 2026): кнопки
@@ -701,6 +704,17 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
     chat = message.get("chat") or {}
     private = chat.get("type") == "private" or (
         chat_id is not None and sender_id is not None and str(chat_id) == str(sender_id))
+    # Заявка на доступ (F4, 7 ноября 2026): ссылка «Узнать о решении в
+    # Telegram» под отправленной заявкой — `?start=acc_<ключ>`. Тот же ключ
+    # привязки, что у «Подключить» в кабинете, но ответ — про заявку. Ключ,
+    # как и там, можно прислать просто текстом.
+    acc_link = re.match(r"^(?:/start\s+)?acc_([A-Za-z0-9_-]{16,})$", text.strip())
+    if acc_link and chat_id is not None and (private or text.strip().startswith("/start")):
+        reply_text, markup = _access_link_reply(db, acc_link.group(1), chat_id)
+        notification_service.tg_api("sendMessage", chat_id=str(chat_id), text=reply_text,
+                                    disable_web_page_preview=True,
+                                    **({"reply_markup": markup} if markup else {}))
+        return {"ok": True}
     link = re.match(r"^(?:/start\s+)?kompas_([A-Za-z0-9_-]{16,})$", text.strip())
     if link and chat_id is not None and (private or text.strip().startswith("/start")):
         ok = notification_service.bind_telegram(db, link.group(1), str(chat_id))
@@ -964,6 +978,54 @@ READER_ONLY_NOTIFIES = (
     "поправка — через «Написать нам» на сайте."
 )
 READER_CONSOLE_HINT = "\n\nВы участник консоли «Компаса»: инструкция модерации — /help."
+
+
+# Заявка на доступ к сайту (F4, 7 ноября 2026; решение владельца — только
+# Telegram, без почты). Вход на сайт — почта и пароль, которые человек
+# указал в заявке (docs/access_gate.md).
+ACCESS_WAITING = "Заявку получили. Напишем сюда, когда откроем доступ."
+ACCESS_APPROVED = (
+    "Доступ к «Проекту Компас» открыт: войдите на projectcompass.ru с почтой "
+    "и паролем, которые указали в заявке."
+)
+ACCESS_LINK_UNKNOWN = (
+    "Не нашли заявку по этой ссылке. Если вы ее уже отправили, мы проверим ее "
+    "и откроем доступ; войти можно будет на projectcompass.ru с почтой и паролем из заявки."
+)
+
+
+def _site_button() -> dict:
+    return {"inline_keyboard": [[{"text": "Открыть «Компас»", "url": SITE_URL + "/"}]]}
+
+
+def _access_link_reply(db, token: str, chat_id) -> tuple[str, dict | None]:
+    """/start acc_<ключ>: запомнить чат у заявки и ответить заявителю."""
+    prefs = notification_service.preferences_by_connect_token(db, token)
+    if prefs is None:
+        # Ключ уже использован — второй «Старт» по той же ссылке.
+        prefs = notification_service.linked_preferences(db, chat_id)
+        if prefs is None:
+            return ACCESS_LINK_UNKNOWN, None
+    else:
+        notification_service.bind_telegram(db, token, str(chat_id))
+    applicant = db.get(User, prefs.user_id)
+    if applicant is not None and applicant.approved:
+        return ACCESS_APPROVED, _site_button()
+    return ACCESS_WAITING, None
+
+
+def _notify_access_approved(db, applicant: User) -> None:
+    """После «Одобрить» — сообщение заявителю, если он нажал «Старт» по
+    ссылке под заявкой. Без привязки — ничего; сбой решение не отменяет.
+    При «Отклонить» ничего не шлем (docs/access_gate.md)."""
+    try:
+        chat = notification_service.telegram_chat_of(db, applicant.id)
+        if chat:
+            notification_service.tg_api("sendMessage", chat_id=chat, text=ACCESS_APPROVED,
+                                        reply_markup=_site_button(),
+                                        disable_web_page_preview=True)
+    except Exception as exc:  # noqa: BLE001
+        logger.error("доступ #%s открыт, но сообщение заявителю не ушло: %s", applicant.id, exc)
 
 
 def _reader_menu() -> dict:
@@ -2032,8 +2094,11 @@ def access_decide(req: AccessDecideIn, db=Depends(get_db)):
     applicant = db.get(User, int(req.user_id))
     if not applicant:
         return JSONResponse({"error": "аккаунта с таким id нет"}, status_code=404)
+    was_approved = bool(applicant.approved)
     applicant.approved = bool(req.approve)
     db.commit()
+    if applicant.approved and not was_approved:
+        _notify_access_approved(db, applicant)
     return {"ok": True, "user_id": applicant.id, "email": applicant.email, "approved": applicant.approved}
 
 
