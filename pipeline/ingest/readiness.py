@@ -24,7 +24,18 @@ ops_status и две в main.py. Они расходились: approve не з�
     stale           — принята, но после приемки содержимое изменилось, а в
                       консоли ее еще не показали: переприемка (accept_card.py)
     ready_unsent    — все есть, в консоли не показана: send_drafts.py --write
+    reshow          — показана, потом поправлена и заново принята и прочитана:
+                      send_drafts.py --write покажет новую версию с пометкой
+                      «поправили» (бэклог D7, 7 ноября 2026)
     shown           — показана в консоли (draft_sent): ждет решения или молчания
+
+Правка ПОКАЗАННОЙ, но не опубликованной карточки (D7, 7 ноября 2026; 6 ноября
+«Островной», «Циан», Омск, «Хогвартс», «Сезон» проводили руками): текст,
+который видел владелец, — `shown_hash` (ставит send_drafts при показе; у
+показанных раньше — `accepted_hash`, его `stamp_hash` переносит в
+`shown_hash` перед переприемкой). Разошелся — карточка снова `stale` →
+`unread2` → `reshow`, молчание ее не публикует. У опубликованной отметок
+показа нет (approve их снимает) — ее ведет вычитка (`changed_after_check`).
 
 Штамп привязан к содержимому, пока карточку не показали (H4, 31 октября
 2026). Решение владельца (docs/card_acceptance.md; устройство — docs/card_readiness.md): правка качества штамп не
@@ -63,7 +74,7 @@ SECOND_READING_SINCE = '2026-10-09'      # принятые с этого дня
 ACCEPTED, SECOND_READ = 'accepted', 'second_read'
 
 STATES = ('held', 'doubted', 'unreviewed', 'accepted_unread', 'unaccepted',
-          'stale', 'unread2', 'ready_unsent', 'shown')
+          'stale', 'unread2', 'ready_unsent', 'reshow', 'shown')
 # Карточка ждет приток (чтение, приемку, второе чтение), а не человека.
 WAITING_INTAKE = frozenset({'unreviewed', 'accepted_unread', 'unaccepted', 'stale', 'unread2'})
 # Что человеку говорит состояние, когда молчание карточку не публикует.
@@ -74,6 +85,8 @@ WAIT_TEXT = {
     'stale': 'переприемка после правок (accept_card.py) — молчание ее не публикует',
     'unread2': 'ждет второго чтения (second_reading.py) — молчание ее не публикует',
     'ready_unsent': 'в консоли не показана (send_drafts.py --write) — молчание ее не публикует',
+    'reshow': 'поправлена после показа, новая версия в консоли еще не показана (send_drafts.py --write) — '
+              'молчание ее не публикует',
     'doubted': 'приемка не пропустила — ждет вашего решения, по молчанию не выходит',
     'held': 'придержана ранее — ждет ручного решения',
 }
@@ -115,7 +128,16 @@ def state(card, comps=None):
     if not card.get(ACCEPTED):
         return 'unaccepted'
     if is_shown(card):
-        return 'shown'
+        if not edited_after_shown(card, comps):
+            return 'shown'
+        # Поправлена после показа (D7): та же дорога, что у новой карточки —
+        # приемка, второе чтение, потом показ новой версии.
+        if not card.get(ACCEPTED + '_hash') or \
+                not hash_matches(card.get(ACCEPTED + '_hash'), fingerprint(card, comps)):
+            return 'stale'
+        if needs_second_reading(card, comps):
+            return 'unread2'
+        return 'reshow'
     if is_stale(card, comps):
         return 'stale'
     if needs_second_reading(card, comps):
@@ -176,10 +198,31 @@ def hash_matches(stored, current):
     return s_fields == c_fields and (not s_names or not c_names or s_names == c_names)
 
 
+def edited_after_shown(card, comps=None):
+    """Показана в консоли, и текст с тех пор изменился: сверка с `shown_hash`
+    (что видел владелец), без него — с `accepted_hash` (показывают только
+    принятую, и до D7 правка штамп не снимала). Ни того, ни другого — старый
+    штамп, правку не отличить: False."""
+    if not is_shown(card) or not card.get(ACCEPTED):
+        return False
+    ref = card.get('shown_hash') or card.get(ACCEPTED + '_hash')
+    return bool(ref) and not hash_matches(ref, fingerprint(card, comps))
+
+
+def stamp_hash(card, stamp, comps=None):
+    """Отпечаток к штампу `stamp` (accepted / second_read). У показанной
+    карточки без `shown_hash` прежний `accepted_hash` сначала переезжает в
+    `shown_hash`: иначе после переприемки не узнать, что владелец видел
+    другой текст, и новая версия в консоль не попадет."""
+    if stamp == ACCEPTED and is_shown(card) and not card.get('shown_hash') and card.get(ACCEPTED + '_hash'):
+        card['shown_hash'] = card[ACCEPTED + '_hash']
+    card[stamp + '_hash'] = fingerprint(card, comps)
+
+
 def is_stale(card, comps=None):
     """Принята, но содержимое с тех пор изменилось, а карточку еще не
-    показали. У показанной отпечаток только информационный: правка качества
-    штамп не снимает (решение владельца, docs/card_acceptance.md)."""
+    показали. Показанную ведет своя ветка `state` (`edited_after_shown`, D7);
+    опубликованную — вычитка (`changed_after_check`)."""
     if is_shown(card) or not card.get(ACCEPTED):
         return False
     return not hash_matches(card.get(ACCEPTED + '_hash'), fingerprint(card, comps))
@@ -250,7 +293,17 @@ def _self_check():
     assert state(typo, comps) == 'ready_unsent', 'типографика штамп не снимает'
     edited = dict(card, eco={'context': 'Актив продан из-за санкций.'})
     assert state(edited, comps) == 'stale' and state(edited) == 'stale'
-    assert state(dict(edited, draft_sent=True), comps) == 'shown'
+    assert state(dict(card, draft_sent=True), comps) == 'shown'
+    shown_edited = dict(edited, draft_sent=True)
+    assert state(shown_edited, comps) == 'stale', 'правка показанной — переприемка (D7)'
+    stamp_hash(shown_edited, ACCEPTED, comps)
+    assert shown_edited['shown_hash'] == card['accepted_hash']
+    assert state(shown_edited, comps) == 'unread2'
+    stamp_hash(shown_edited, SECOND_READ, comps)
+    assert state(shown_edited, comps) == 'reshow' and state(shown_edited) == 'reshow'
+    assert state(dict(shown_edited, shown_hash=fingerprint(shown_edited, comps)), comps) == 'shown'
+    assert state({'reviewed': 'd', 'accepted': 'd', 'draft_sent': True, 'title': 'x'}) == 'shown', \
+        'старый штамп без отпечатка — правку не отличить'
     renamed = dict(card)
     assert state(renamed, {'b1': {'name': 'ООО «Лютик»'}}) == 'stale' and state(renamed) == 'ready_unsent'
     reaccepted = dict(edited, accepted_hash=fingerprint(edited, comps))

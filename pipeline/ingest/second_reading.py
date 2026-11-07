@@ -172,7 +172,7 @@ def apply(ans, card, day=None, comps=None):
     card[STAMP] = day or date.today().isoformat()
     # Штамп привязан к содержимому, пока карточку не показали (H4): правка
     # после второго чтения возвращает карточку в очередь второго чтения.
-    card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
+    readiness.stamp_hash(card, STAMP, comps)   # у показанной — и shown_hash (D7)
     return 'stamped', []
 
 
