@@ -2,6 +2,20 @@
  "updated": "2026-11-07",
  "signals": [
   {
+   "id": "s5cde64d07",
+   "company_id": "g65d1691b",
+   "date": "2026-11-07",
+   "kind": "buy",
+   "summary": "Группа Т-Технологии — возможная покупка: Циан",
+   "source": [
+    "tg:atomic_capital_channel",
+    "https://t.me/atomic_capital_channel/589"
+   ],
+   "origin": "news",
+   "strength": "normal",
+   "object_id": "g163cfc8b"
+  },
+  {
    "id": "s61b595e5e",
    "company_id": "g163cfc8b",
    "date": "2026-11-06",
