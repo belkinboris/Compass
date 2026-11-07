@@ -357,10 +357,20 @@ def _main(argv, write):
     if r.returncode:
         log('СТОП: отправка постов не прошла (код %d) — см. строки выше; база уже в main.' % r.returncode)
         return 1
-    silent = posts_not_sent(json.load(open(BASE, encoding='utf-8')), expected)
-    if silent:
-        log('ВНИМАНИЕ: карточки вышли на сайт, а поста по ним нет: %s — '
-            'отправьте руками: python3 %s --write --finish' % (', '.join(silent), SEND_TELEGRAM))
+    base_now = json.load(open(BASE, encoding='utf-8'))
+    silent = posts_not_sent(base_now, expected)
+    # С 3 ноября 2026 первый пост уходит только по кнопке «📣 Пост в канал»
+    # (post_approved); карточка с одним ✅ выходит на сайт и ждет кнопки —
+    # это не сбой, и «отправьте руками» тут нарушило бы правило владельца
+    # (routines/publication.md, «Пост — только по кнопке»).
+    approved = {d.get('id') for d in base_now.get('deals') or [] if d.get('post_approved')}
+    waiting = [i for i in silent if i not in approved]
+    unsent = [i for i in silent if i in approved]
+    if waiting:
+        log('Вышли на сайт без поста — ждут кнопки «Пост в канал» в консоли: %s' % ', '.join(waiting))
+    if unsent:
+        log('ВНИМАНИЕ: кнопка «Пост в канал» нажата, а пост не ушел: %s — '
+            'повторите команду; руками не отправлять' % ', '.join(unsent))
     if git('status', '--porcelain', '--', 'static/data/deals_promoted.json'):
         run([sys.executable, '-m', 'pytest', 'test_data.py', '-q', '-p', 'no:cacheprovider'])
         git('add', '--', 'static/data/deals_promoted.json')
