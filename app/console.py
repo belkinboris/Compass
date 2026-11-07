@@ -1131,8 +1131,8 @@ def _answered_decisions() -> dict:
 
 def _card_state(card: dict) -> str:
     """Чего ждет карточка — одно место на весь код: pipeline/ingest/readiness.py
-    (held, doubted, unreviewed, accepted_unread, unaccepted, unread2,
-    ready_unsent, shown)."""
+    (held, doubted, unreviewed, accepted_unread, unaccepted, stale, unread2,
+    ready_unsent, reshow, shown)."""
     from pipeline.ingest import readiness
     return readiness.state(card)
 

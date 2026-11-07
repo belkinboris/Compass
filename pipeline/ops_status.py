@@ -618,13 +618,13 @@ def is_read_through(card):
     была принята, но второго чтения не прошла — и попала в строку «⛔ Сбой»,
     хотя ждала обычного шага притока. Состояние «ждет второго чтения» —
     очередь, а не сбой, и считается вместе с «ждут прочтения»."""
-    return _readiness().state(card) in ('shown', 'ready_unsent')
+    return _readiness().state(card) in ('shown', 'ready_unsent', 'reshow')
 
 
 def is_unsent(card):
     """Принята, прочитана, но в консоли еще не показана — ни в «скоро выйдут»,
     ни в «ждут прочтения» такая карточка не попадала (27 октября 2026)."""
-    return _readiness().state(card) == 'ready_unsent'
+    return _readiness().state(card) in ('ready_unsent', 'reshow')   # reshow — новая версия не показана (D7)
 
 
 def unsent_cards(path=PENDING):

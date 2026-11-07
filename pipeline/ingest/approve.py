@@ -205,8 +205,9 @@ def apply_late_discard(data, state, deal, now):
 def dead_ends(cards, comps=None):
     """Готовые, но не показанные карточки (readiness `ready_unsent`): ждущая
     второго чтения, приемки или переприемки — очередь притока, а не тупик,
-    и здесь ее нет."""
-    return [c for c in cards if readiness.state(c, comps) == 'ready_unsent']
+    и здесь ее нет. Поправленная после показа и заново принятая (`reshow`,
+    D7) — тоже ждет показа новой версии."""
+    return [c for c in cards if readiness.state(c, comps) in ('ready_unsent', 'reshow')]
 
 
 def plan_actions(cards, decisions, now, comps=None):

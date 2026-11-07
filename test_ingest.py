@@ -9843,9 +9843,8 @@ def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
     """H4 аудита кода (31 октября 2026): после `review/proofread/enrich --write`
     поля менялись, штампы оставались. Теперь приемка и второе чтение пишут
     отпечаток содержимого; разошелся у непоказанной карточки — `stale`, ее
-    берут заново приемка и не показывает консоль. У показанной отпечаток
-    только информационный: правка качества штамп не снимает (решение
-    владельца, docs/card_acceptance.md). Старый штамп без отпечатка свежим
+    берут заново приемка и не показывает консоль. С 7 ноября 2026 (D7) так же
+    и у показанной, но не опубликованной. Старый штамп без отпечатка свежим
     не считается несвежим."""
     from datetime import datetime, timedelta, timezone
     import accept_card
@@ -9876,11 +9875,15 @@ def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
     publish, _h, wait, _d = approve.plan_actions([dict(edited, pending_since=stale_since)], [], now, comps)
     assert not publish and "переприемка" in wait[0][1]
     assert approve.dead_ends([edited], comps) == []
-    # Та же правка на показанной карточке состояние не меняет.
-    shown = dict(edited, draft_sent=True)
-    assert readiness.state(shown, comps) == "shown"
-    publish, _h, _w, _d = approve.plan_actions([dict(shown, pending_since=stale_since)], [], now, comps)
+    # Показанная без правки выходит молчанием; правка показанной — тоже
+    # переприемка (бэклог D7, 7 ноября 2026; весь путь —
+    # test_an_edited_shown_card_is_reaccepted_reread_and_shown_again).
+    publish, _h, _w, _d = approve.plan_actions([dict(card, draft_sent=True, pending_since=stale_since)], [], now, comps)
     assert [c["id"] for c, _o, _w in publish] == ["gh1"]
+    shown = dict(edited, draft_sent=True)
+    assert readiness.state(shown, comps) == "stale"
+    publish, _h, wait, _d = approve.plan_actions([dict(shown, pending_since=stale_since)], [], now, comps)
+    assert not publish and "переприемка" in wait[0][1]
     # Типографика штамп не снимает; переименование профиля стороны — снимает.
     typo = dict(card, eco={"context": "Актив продан - из за долгов"})
     assert readiness.state(typo, comps) == "ready_unsent"
@@ -10709,3 +10712,98 @@ def test_save_source_drops_comment_tail(tmp_path):
     path = save_source.save("https://example.org/c", "Заголовок", text, day="2026-11-07", folder=str(tmp_path))
     saved = json.load(open(path, encoding="utf-8"))["items"][0]["summary"]
     assert "пока нет" not in saved and saved.endswith("1 млрд рублей.")
+
+
+def test_an_edited_shown_card_is_reaccepted_reread_and_shown_again(tmp_path, monkeypatch):
+    """Бэклог D7 (6 ноября 2026): заголовки «Островного», «Циана», Омска,
+    «Хогвартса» (geddb685d) и «Сезона» (gfd435463) поправили ПОСЛЕ показа в
+    консоли. Карточка оставалась «показанной»: приемка ее не брала, молчание
+    выпустило бы новый текст, которого владелец не видел, а `--resend` молча
+    не слал (после снятия отметок она «несвежая»). Теперь правка показанной —
+    снова приемка, второе чтение и повторный показ с пометкой «поправили»;
+    непримененный ответ владельца повторный показ держит."""
+    from datetime import datetime, timedelta, timezone
+    import accept_card
+    import approve
+    import promote
+    import readiness
+    import second_reading
+    import send_drafts
+    now = datetime.now(timezone.utc)
+    comps = {"b1": {"name": "ООО «Ромашка»"}}
+    card = {"id": "gd7", "title": "«Ромашка» купила «Лютик»", "date": FRESH_DATE, "status": "Закрыта",
+            "type": "M&A", "reviewed": "2026-11-05", "accepted": "2026-11-05", "second_read": "2026-11-05",
+            "buyer": "b1", "asset": "ООО «Лютик»", "eco": {"context": "Актив продан из-за долгов."}, "law": {},
+            "src": [["Т", "https://t.example/d7"]], "draft_sent": True, "post_draft_sent": True,
+            "post_preview": "старый пост", "pending_since": (now - timedelta(hours=30)).isoformat(timespec="seconds")}
+    card["accepted_hash"] = card["second_read_hash"] = readiness.fingerprint(card, comps)
+    assert readiness.state(card, comps) == "shown"
+    posted = {"id": "gpub", "title": "«Мак» купил «Василек»", "reviewed": "2026-11-01", "accepted": "2026-11-01",
+              "second_read": "2026-11-01", "src": [["Т", "https://t.example/p"]]}
+    posted["accepted_hash"] = posted["second_read_hash"] = readiness.fingerprint(posted, comps)
+    posted["title"] = "«Мак» купил 100% «Василька»"
+    base = {"companies": comps, "deals": [posted], "telegram_posts": {"gpub": {"id": 1}}}
+
+    card["title"] = "«Ромашка» купила 100% «Лютика»"          # правка показанной карточки
+    # 1. Снова приемка: очередь берет, молчание не публикует, консоль молчит.
+    assert readiness.state(card, comps) == "stale" and readiness.state(card) == "stale"
+    assert [c["id"] for c in accept_card.queue(base, {"cards": [card]})] == ["gd7"], \
+        "опубликованная карточка (есть в telegram_posts) идет своим путем — вычиткой"
+    publish, _h, wait, _d = approve.plan_actions([card], [], now, comps)
+    assert not publish and "переприемка" in wait[0][1]
+    # 2. Приемка ставит штамп — текст, который видел владелец, запоминается.
+    readiness.stamp_hash(card, "accepted", comps)
+    assert card["shown_hash"] != readiness.fingerprint(card, comps)
+    assert readiness.state(card, comps) == "unread2"
+    assert [c["id"] for c in second_reading.queue(base, {"cards": [card]})] == ["gd7"]
+    # 3. Второе чтение — карточка ждет повторного показа, молчание ее все еще не публикует.
+    ok = {"id": "gd7", "fields": {f: "ok" for f in second_reading.filled_fields(card)},
+          "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS}, "verdict": "ok"}
+    assert second_reading.apply(ok, card, day="2026-11-07", comps=comps)[0] == "stamped"
+    assert readiness.state(card, comps) == "reshow"
+    publish, _h, wait, _d = approve.plan_actions([card], [], now, comps)
+    assert not publish and wait
+    assert [c["id"] for c in approve.dead_ends([card], comps)] == ["gd7"]
+
+    # 4. send_drafts показывает заново — с пометкой; пока есть непримененный ответ — нет.
+    pending_path, data_path = tmp_path / "pending.json", tmp_path / "deals.json"
+    pending_path.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    data_path.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    state_path = tmp_path / "state.json"
+    state_path.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(send_drafts, "PENDING", str(pending_path))
+    monkeypatch.setattr(send_drafts, "DATA", str(data_path))
+    monkeypatch.setattr(promote, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "t")
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(send_drafts, "PAUSE", 0)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: None)
+    monkeypatch.setattr(send_drafts, "record_shown", lambda **k: True)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "goes_to_channel", lambda c: True)
+    monkeypatch.setattr(send_drafts.console_topics, "thread_id", lambda kind: None)
+    monkeypatch.setattr(approve, "consume", lambda handle, ids: None)
+    sent = []
+    monkeypatch.setattr(send_drafts, "send_one",
+                        lambda client, token, chat, text, kb, thread=None, html=False: sent.append(text) or True)
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: (
+        [{"id": 9, "deal_id": "gd7", "verdict": "note", "created_at": "2026-11-07T08:00"}], ("site", "t")))
+    send_drafts.main(write=True)
+    assert sent == [], "показали заново поверх непримененного ответа («Медси»)"
+    assert readiness.state(json.loads(pending_path.read_text(encoding="utf-8"))["cards"][0], comps) == "reshow"
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], None))
+    send_drafts.main(write=True)
+    assert sent == [], "решения консоли не прочитаны — заново не показываем"
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], ("site", "t")))
+    send_drafts.main(write=True)
+    assert len(sent) == 2, sent
+    assert sent[0].startswith("🔁 ПОКАЗЫВАЕМ ЗАНОВО: карточку поправили") and "100%" in sent[0]
+    after = json.loads(pending_path.read_text(encoding="utf-8"))["cards"][0]
+    assert readiness.state(after, comps) == "shown"
+    assert after["shown_hash"] == readiness.fingerprint(after, comps)
+    assert after["pending_since"] > card["pending_since"], "сутки молчания — с нового показа"
+    assert after["post_preview"] != "старый пост"
+    send_drafts.main(write=True)
+    assert len(sent) == 2, "второй раз не шлем"

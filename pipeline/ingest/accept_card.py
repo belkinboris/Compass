@@ -1675,7 +1675,7 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         card[STAMP] = day or date.today().isoformat()
         # Штамп привязан к содержимому, пока карточку не показали (H4,
         # 31 октября 2026): разошелся отпечаток — readiness.state = stale.
-        card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
+        readiness.stamp_hash(card, STAMP, comps)   # у показанной — и shown_hash (D7)
         if pending_notes:
             card[STAMP + '_notes'] = pending_notes
         lines.append('ПРИНЯТА (%s)' % card[STAMP])

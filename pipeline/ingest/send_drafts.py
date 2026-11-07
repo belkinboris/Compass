@@ -400,12 +400,50 @@ def answered_cards():
         # ответа партнера («Медси», 13 октября 2026). Причина — в отчет.
         print('ответы консоли недоступны: %s — карточки с ответами не отличить' % e)
         return {}
+    return _answered(decisions, approve)
+
+
+def _answered(decisions, approve):
     answered = {}
     for d in decisions or []:
         if d.get('verdict') in approve.RAW_VERDICTS:
             continue
         answered.setdefault(str(d.get('deal_id')), []).append(d.get('verdict'))
     return answered
+
+
+def reshow_queue():
+    """[id] карточек, поправленных ПОСЛЕ показа и заново принятых и
+    прочитанных (readiness `reshow`, бэклог D7, 7 ноября 2026), — их main()
+    показывает заново тем же путем, что `--resend`: с пометкой «поправили»,
+    сутки молчания с нуля. До этого дня такая карточка застревала в консоли со
+    старым текстом (6 ноября: «Островной», «Циан», Омск, «Хогвартс», «Сезон» —
+    вручную). Ответ владельца по прежней версии, еще не примененный, повторный
+    показ держит («Медси», answered_cards); решения консоли не прочитались —
+    тоже держит: поверх ответа, которого мы не видим, не показываем."""
+    if not os.path.exists(PENDING):
+        return []
+    pending = promote.load_pending()
+    comps = json.load(open(DATA, encoding='utf-8')).get('companies') or {}
+    ids = [c['id'] for c in pending.get('cards') or [] if readiness.state(c, comps) == 'reshow']
+    if not ids:
+        return []
+    import approve
+    decisions, handle = approve.fetch_decisions()
+    if handle is None:
+        print('НЕ ПОКАЗЫВАЮ ЗАНОВО %s: карточку поправили после показа, но ответы консоли не '
+              'прочитаны — по прежней версии может быть ответ; следующий прогон.' % ', '.join(ids))
+        return []
+    answered = _answered(decisions, approve)
+    out = []
+    for cid in ids:
+        if cid in answered:
+            print('НЕ ПОКАЗЫВАЮ ЗАНОВО %s: карточку поправили после показа, а в консоли есть ответ '
+                  'по прежней версии (%s), он не применен — сначала approve.py / заметка.'
+                  % (cid, ', '.join(answered[cid])))
+        else:
+            out.append(cid)
+    return out
 
 # ТЕМП ОТПРАВКИ. Telegram пускает в группу около 20 сообщений в минуту, а
 # 21-е возвращает 429 с полем `retry_after`. Прогон 6 августа отправил ровно
@@ -517,6 +555,8 @@ def build_plan(resend=None, only=None):
         if not target:
             raise SystemExit('Карточки %s нет в очереди (pending.json) — переслать нечего.' % resend)
         card = target[0]
+        before = {k: card[k] for k in ('draft_sent', 'post_draft_sent', 'post_preview', 'pending_since')
+                  if k in card}
         card['draft_sent'] = False
         card['post_draft_sent'] = False
         old_preview = card.pop('post_preview', None)
@@ -554,6 +594,26 @@ def build_plan(resend=None, only=None):
         # Придержанная и не пропущенная приемкой (`held`/`hold_reason`) тоже
         # не показывается заново — она ждет человека, а не отправки.
         st = readiness.state(card, comps)
+        if resend and st != 'ready_unsent':
+            # Поправленную, но не принятую заново — не шлем и отметки
+            # показа возвращаем: снятые, они ушли бы в pending.json, и
+            # карточка потеряла бы «показана» (бэклог D7, 7 ноября 2026).
+            for k in ('draft_sent', 'post_draft_sent', 'post_preview', 'pending_since'):
+                card.pop(k, None)
+            card.update(before)
+            print('ПЕРЕСЫЛКА ОТЛОЖЕНА: %s — %s. После этого send_drafts.py --write покажет ее '
+                  'заново сам.' % (card['id'], readiness.WAIT_TEXT.get(st, st)))
+            continue
+        # Показанная, но поправленная после показа (D7): ждет переприемки и
+        # второго чтения, а готовую новую версию показывает main() через
+        # reshow_queue — с пометкой «поправили». Второе сообщение по старому
+        # тексту не догоняем.
+        if readiness.is_shown(card) and st in ('stale', 'unread2', 'reshow'):
+            if st == 'stale':
+                unaccepted += 1
+            elif st == 'unread2':
+                unread2 += 1
+            continue
         if st != 'ready_unsent' and not readiness.is_shown(card):
             if st in ('unreviewed', 'accepted_unread'):
                 unread += 1
@@ -773,7 +833,7 @@ def drop_old_decisions(card_id):
     return True
 
 
-def mark_sent(card, mark, now=None):
+def mark_sent(card, mark, now=None, comps=None):
     """Отметка «показано в консоли». Сутки молчания считаются от ПОКАЗА, а не от
     приемки: 27 октября 2026 тринадцать карточек трое суток не доходили до
     консоли, и первая же отправка выпустила бы их молчанием через час —
@@ -781,11 +841,20 @@ def mark_sent(card, mark, now=None):
     карточки `pending_since` переставляется на сейчас."""
     first = not (card.get('draft_sent') or card.get('post_draft_sent'))
     card[mark] = True
+    if mark == 'draft_sent':
+        # Какой текст видел владелец: правка после этого — снова приемка и
+        # повторный показ (readiness.edited_after_shown, D7).
+        card['shown_hash'] = readiness.fingerprint(card, comps)
     if first:
         card['pending_since'] = (now or datetime.now(timezone.utc)).isoformat(timespec='seconds')
 
 
 def main(write=False, resend=None, only=None):
+    if not (resend or only):
+        for cid in reshow_queue():
+            print('Карточку %s поправили после показа, приемка и второе чтение пройдены — '
+                  'показываю заново.' % cid)
+            main(write=write, resend=cid)
     plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend, only=only)
     if unread2:
         print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
@@ -850,6 +919,7 @@ def main(write=False, resend=None, only=None):
         return 1
     import httpx
     sent = 0
+    comps = json.load(open(DATA, encoding='utf-8')).get('companies') or {}
     # Все три вида сообщений (пост/карточка/сырье) ждут решения владельца или
     # партнера — тема одна на всех, «Подтверждение постов».
     thread = console_topics.thread_id('decision')
@@ -887,7 +957,7 @@ def main(write=False, resend=None, only=None):
             if ok_all:
                 sent += 1
                 if kind == 'card':
-                    mark_sent(item, mark)
+                    mark_sent(item, mark, comps=comps)
                     if mark == 'post_draft_sent' and pending_preview is not None:
                         item['post_preview'] = pending_preview
                     if mark == 'post_draft_sent' or not goes_to_channel(item):
