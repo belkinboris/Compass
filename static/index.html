@@ -8016,8 +8016,14 @@ const isControlDeal = d => {
   return !!m && +m[1] >= 50 && +m[1] <= 100;
 };
 /* Физлицо в роли предмета сделки — не «компания группы»: «Владимир Селегень
-   входит в группу ЛСР» звучало бы дико. Имя человека отличаем по форме. */
-const looksLikePerson = n => /^[А-ЯЁ][а-яё]+\s+[А-ЯЁ][а-яё]+(?:\s+[А-ЯЁ][а-яё]+)?$/.test(String(n||"").trim());
+   входит в группу ЛСР» звучало бы дико. Имя человека отличаем по форме,
+   а слово-признак компании («Банк России», «Почта Банк», «Агрокультура
+   Групп») имя человека отменяет — тот же COMPANY_CUE, что в
+   pipeline/sanctions_match.py (аудит 1 ноября 2026, бэклог D5; равенство
+   держит test_data.py). */
+const PERSON_COMPANY_CUE = /(ООО|ОАО|ЗАО|ПАО|АО\b|НАО|ГК\b|УК\b|ИП\b|Групп|групп|Group|Holding|Invest|Инвест|Фонд|Корпорац|Компан|Завод|Комбинат|Банк|банк|Лтд|Ltd|LLC|Inc|Ойл|Медиа|Девелопмент|Петролеум|Технолог|Систем|Сервис|Проект|Логистик)/;
+const looksLikePerson = n => { const s = String(n||"").trim();
+  return /^[А-ЯЁ][а-яё]+\s+[А-ЯЁ][а-яё]+(?:\s+[А-ЯЁ][а-яё]+)?$/.test(s) && !PERSON_COMPANY_CUE.test(s); };
 const assetOf = d => d.target || d.asset_id || null;
 const controlGot = id => DEALS
   .filter(d => assetOf(d)===id && d.buyer!==id && isControlDeal(d) && !looksLikePerson(co(id)&&co(id).name))
