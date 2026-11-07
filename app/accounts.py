@@ -349,7 +349,17 @@ def register(req: RegisterRequest, response: Response, db=Depends(get_db)):
         # Заявка, а не вход: сессию не ставим, владельцу уходит сообщение с
         # кнопками. Войти человек сможет после «Одобрить» (см. telegram_webhook).
         _notify_access_request(user, db)
-        return {"ok": True, "pending": True}
+        out = {"ok": True, "pending": True}
+        # Кнопка «Узнать о решении в Telegram» под заявкой (F4): только когда
+        # бот настроен; без бота экран показывает прежний текст без кнопки.
+        try:
+            url = notification_service.access_request_telegram_url(db, user.id)
+        except Exception as exc:  # noqa: BLE001 — заявка важнее кнопки
+            logger.error("заявка на доступ #%s: ссылка на бота не собрана: %s", user.id, exc)
+            url = None
+        if url:
+            out["telegram_url"] = url
+        return out
     cookie = auth.create_session(db, user)
     response.set_cookie(auth.SESSION_COOKIE, cookie, max_age=int(auth.SESSION_TTL.total_seconds()),
                          httponly=True, samesite="lax", secure=COOKIE_SECURE)

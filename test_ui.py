@@ -77,7 +77,8 @@ def gated_url():
     Без TELEGRAM_BOT_TOKEN уведомление владельцам молча не уходит (сети нет),
     а вебхук с секретом и списком решающих — живой."""
     env = {"ACCESS_GATE": "1", "TELEGRAM_WEBHOOK_SECRET": "ui-secret",
-           "TELEGRAM_REVIEW_CHAT_IDS": "111", "TELEGRAM_BOT_TOKEN": ""}
+           "TELEGRAM_REVIEW_CHAT_IDS": "111", "TELEGRAM_BOT_TOKEN": "",
+           "TELEGRAM_BOT_USERNAME": "kompas_ui_bot"}   # ссылка «Узнать о решении» (F4)
     proc, url = _start_server(env)
     yield url
     proc.terminate()
@@ -3577,6 +3578,15 @@ def test_access_gate_shows_login_screen_until_the_owner_approves(gated_url, brow
         pg.click("#gateRegisterForm button[type=submit]")
         pg.wait_for_selector("#gateDone", timeout=10000)
         assert "Заявка отправлена" in pg.inner_text("#gateCard")
+        # Под заявкой — ссылка на бота: «Старт» в нем, и ответ о решении придет туда (F4).
+        tg = pg.locator("#gateTelegram")
+        assert tg.is_visible() and "Узнать о решении в Telegram" in tg.inner_text()
+        assert tg.get_attribute("href").startswith("https://t.me/kompas_ui_bot?start=acc_")
+        for w in WIDTHS:
+            pg.set_viewport_size({"width": w, "height": 900})
+            over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+            assert over <= 0, f"гейт (заявка отправлена) переполняет экран на {w}px: {over}px"
+        assert not crashes, crashes[:3]
 
         db = get_session()
         try:

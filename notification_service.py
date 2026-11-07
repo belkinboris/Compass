@@ -172,6 +172,28 @@ def telegram_connect_url(db, user_id: int) -> str | None:
     return f"https://t.me/{username}?start=kompas_{prefs.telegram_connect_token}"
 
 
+def access_request_telegram_url(db, user_id: int) -> str | None:
+    """Ссылка «Узнать о решении в Telegram» под отправленной заявкой на
+    доступ (F4, 7 ноября 2026). Тот же бот и тот же ключ привязки, что у
+    «Подключить Telegram» в кабинете; другая только приставка `acc_` — по ней
+    бот отвечает про заявку, а не про подписки. Бот не может написать
+    первым тому, кто его не запускал, поэтому без нажатия «Старт» ответ
+    о решении дойти не может — поле ника в форме ничего бы не дало."""
+    url = telegram_connect_url(db, user_id)
+    return url.replace("?start=kompas_", "?start=acc_", 1) if url else None
+
+
+def preferences_by_connect_token(db, connect_token: str) -> NotificationPreference | None:
+    return db.scalar(select(NotificationPreference).where(
+        NotificationPreference.telegram_connect_token == connect_token))
+
+
+def telegram_chat_of(db, user_id: int) -> str | None:
+    """Чат Telegram, привязанный к аккаунту, — или None (без создания строки)."""
+    prefs = db.scalar(select(NotificationPreference).where(NotificationPreference.user_id == user_id))
+    return prefs.telegram_chat_id if prefs and prefs.telegram_chat_id else None
+
+
 def telegram_connect_code(db, user_id: int) -> str | None:
     """Тот же ключ текстом — его можно просто отправить боту, если Telegram
     открыл чат без кнопки «Старт» (так бывает, когда чат с ботом уже есть)."""
