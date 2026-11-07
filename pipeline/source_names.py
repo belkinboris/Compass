@@ -243,7 +243,11 @@ def is_aggregator(url):
 # и ряд других подтвердить не удалось — они в список не входят, вопрос владельцу).
 UNDESIRABLE_HOSTS = ('theins.ru', 'meduza.io', 'svoboda.org', 'istories.media',
                      'themoscowtimes.com', 'moscowtimes.ru', 'thebell.io', 'verstka.media', 'zona.media',
-                     'novayagazeta.eu', 'novayagazeta.ru', 'golosameriki.com')
+                     'novayagazeta.eu', 'novayagazeta.ru', 'golosameriki.com',
+                     # 7 ноября 2026, владелец: «иноагентов убираем» — и спорные, о которых
+                     # 4 ноября не было уверенности: RTVI, Kyiv Independent.
+                     'rtvi.com', 'kyivindependent.com', 'voanews.com', 'currenttime.tv', 'tvrain.tv',
+                     'holod.media', 'agents.media', 'proekt.media', 'sotaproject.com', 'doxa.team')
 
 
 def is_undesirable(url):
