@@ -293755,7 +293755,9 @@
   "g1eda1117": null,
   "g9b4c2e71": 258,
   "g8eb9ed40": 260,
-  "g8317fa58": 261
+  "g8317fa58": 261,
+  "g8b57089b": 262,
+  "g41bcec82": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -294313,7 +294315,8 @@
   "ge163d93c": 61,
   "gedab395b": 62,
   "g75283fd4": 63,
-  "g5ee7977b": 64
+  "g5ee7977b": 64,
+  "g8b57089b": 65
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -299449,7 +299452,27 @@
      "kind": "closed"
     }
    ]
+  },
+  "g8b57089b": {
+   "sum": "1,2–1,8 млрд ₽ (по оценке)",
+   "buyer": "gad8cd049",
+   "seller": "Vesper",
+   "asset": "Здание на 6 тыс. кв. м в жилом комплексе Lucky в центре Москвы",
+   "status": "Закрыта",
+   "title": "Связанная с DDX компания «Проект Лаки» купила у Vesper здание в ЖК Lucky",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-07T07:30:14+00:00"
+ "telegram_last_post_at": "2026-11-07T10:26:39+00:00"
 }
