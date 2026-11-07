@@ -6080,7 +6080,7 @@ function renderDeals(){
   const hsDots = app.querySelectorAll("[data-dot]");
   const hsLabels = app.querySelectorAll(".hs-bar a");
   heroFx(app.querySelector(".heroslider"));
-  /* Значок Telegram — на высоте заглавной буквы заголовка слайда («Сделки»,
+  /* Значок Telegram на ТЕЛЕФОНЕ — на высоте заглавной буквы заголовка слайда («Сделки»,
      «Консультанты»; владелец, 7 ноября 2026: «выглядеть будет ровнее»).
      Центр значка = середина заглавной буквы: верх строки + 0,556 кегля
      (PT Serif, замер на 40 и 80px). Отступ заголовка разный на каждой
@@ -6088,6 +6088,7 @@ function renderDeals(){
   const hsTgAlign = () => {
     const sl=app.querySelector(".heroslider"), tg=sl&&sl.querySelector(".hs-tg"), h=sl&&sl.querySelector(".hs-slide h1.hs-word");
     if(!tg||!h||!h.offsetHeight) return;
+    if(!matchMedia("(max-width:720px)").matches){ tg.style.top=""; return; }  // компьютер — прежний угол (владелец, 7 ноября 2026: «на компе было лучше»)
     const fs=parseFloat(getComputedStyle(h).fontSize)||0, lh=h.getBoundingClientRect().height/Math.max(1,h.getClientRects().length);
     const top=h.getBoundingClientRect().top-sl.getBoundingClientRect().top+(lh-fs*1.1)/2+fs*0.556-tg.offsetHeight/2;
     tg.style.top=Math.round(top)+"px";
