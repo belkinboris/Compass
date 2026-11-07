@@ -10526,3 +10526,20 @@ def test_reread_title_fix_does_not_rewrite_the_channel_post():
     data = {"deals": [card], "telegram_post_state": state}
     assert rq.keep_post_title(data, card) is True
     assert send_telegram.card_changes_since_post([card], {"gP1": 7}, {}, state) == {}
+
+
+def test_central_bank_currency_purchase_is_not_a_deal():
+    """Ежедневная валютная операция ЦБ «на внутреннем рынке» — не сделка.
+
+    2 ноября 2026 она третий раз прошла ворота новой карточкой (g162e3085;
+    known_issues/intake.md): «купил» и сумма в рублях проходят положительные
+    признаки. Держит фраза «<валюта> на внутреннем рынке», а покупка
+    компании «на внутреннем рынке» остается сделкой.
+    """
+    assert not classify.looks_like_deal(
+        "ЦБ РФ с 30 октября купил юаней на внутреннем рынке на 12,1 млрд рублей")
+    assert not classify.looks_like_deal(
+        "Банк России продаст валюту на внутреннем рынке на 4,5 млрд рублей в день")
+    assert classify.looks_like_deal(
+        "Сбербанк купил 100% банка, работающего на внутреннем рынке")
+
