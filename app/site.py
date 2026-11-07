@@ -382,6 +382,17 @@ GO_LINKS = {
 }
 
 
+# Ключ IndexNow (7 ноября 2026): Яндекс принимает адреса на переобход только если ключ лежит
+# в КОРНЕ сайта — ключ в подпапке подтверждает лишь адреса внутри нее (ответ 422).
+# Отправка — pipeline/indexnow.py; файл ключа — static/indexnow/<ключ>.txt.
+INDEXNOW_KEY = "eb72eb6f35d87d366278454f3772a60d"
+
+
+@router.api_route("/" + INDEXNOW_KEY + ".txt", methods=["GET", "HEAD"], include_in_schema=False)
+def indexnow_key():
+    return Response(INDEXNOW_KEY, media_type="text/plain; charset=utf-8")
+
+
 @router.api_route("/go/{slug}", methods=["GET", "HEAD"], include_in_schema=False)
 def go_link(slug: str, request: Request, db=Depends(get_db)):
     target = GO_LINKS.get(slug)

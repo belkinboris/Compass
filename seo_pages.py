@@ -29,6 +29,7 @@ import threading
 from typing import Any
 
 import base_data
+from pipeline import placeholders
 
 SITE_MIN_YEAR = 2022          # тот же порог, что в static/index.html
 _LOCK = threading.Lock()
@@ -36,7 +37,7 @@ _CACHE: dict[str, Any] = {"src": None}
 
 _MONTHS = ("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
            "августа", "сентября", "октября", "ноября", "декабря")
-_DASH = {"", "—", "-", "–", "None", "null"}
+_DASH = placeholders.DASHES      # один канон «пусто» (бэклог D5)
 # Агрегаторы читателю как источник не показываются (правило владельца
 # 3 октября 2026); на этих страницах — тем более.
 try:

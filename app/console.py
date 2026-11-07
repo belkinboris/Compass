@@ -16,6 +16,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 import base_data
+from pipeline import placeholders
 import notification_service
 import telegram_endpoint
 from deal_catalog import get_deal
@@ -989,7 +990,7 @@ def _card_line(card: dict) -> str:
     for label, key in (("Продавец", "seller"), ("Покупатель", "buyer_name"),
                        ("Предмет", "asset")):
         value = card.get(key)
-        if value and str(value) not in ("—", "Не раскрыта"):
+        if placeholders.has(value):     # один канон «пусто» (бэклог D5)
             who.append("%s: %s" % (label, html_escape(str(value))))
     if who:
         parts.append("\n".join(who))
