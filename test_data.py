@@ -2250,3 +2250,53 @@ def test_custody_title_does_not_say_assets_were_taken(deals):
            if (d.get("type") == "Временное управление" or d.get("kind") == "custody")
            and accept_card.CUSTODY_TAKEN.search(str(d.get("title") or ""))]
     assert not bad, f"заголовок временного управления говорит об изъятии: {bad[:5]}"
+
+
+# --- Указ № 520: отметка на профиле ведет на настоящий акт ------------------
+
+# Акты, которыми общества внесены в перечни указа № 520, — на сайте Президента.
+# Номер страницы сверен с самим актом 7 ноября 2026 (kremlin.ru/acts/bank/<id>
+# называет номер и дату распоряжения и несет текст перечня).
+DECREE520_ACT_PAGES = {
+    "372-рп": ("2022-11-09", "http://kremlin.ru/acts/bank/48500"),
+    "396-рп": ("2023-11-27", "http://kremlin.ru/acts/bank/49999"),
+    "357-рп": ("2022-10-26", "http://kremlin.ru/acts/bank/48447"),
+}
+
+
+def test_decree520_marks_come_from_the_checked_file_and_link_the_act():
+    """Владелец, 7 ноября 2026: «отметь все компании, на которых 520 указ, чтобы
+    можно было нажать и попасть на первоисточник, как с санкциями». Отметка в
+    базе — только из сверенного файла (pipeline/decree520_confirmed.json), и ее
+    ссылка — на распоряжение, которым общество внесено в перечень, а не на
+    пересказ. Совпадение «имя в имя» проверяется механически, ИНН — по реестру ФНС."""
+    from pipeline import decree520 as d520
+    data = json.loads(DATA.read_text(encoding="utf-8"))
+    lst = d520.load_list()
+    confirmed, rejected = d520.load_confirmed(), d520.load_rejected()
+    assert not d520.problems(data, lst, confirmed, rejected)
+    assert {a: (v["date"], v["url"]) for a, v in lst["acts"].items() if a != "520"} \
+        == DECREE520_ACT_PAGES
+    copy = json.loads(json.dumps(data))
+    assert d520.apply_to_base(copy, lst, confirmed) == 0, "файл сверки не разнесен: decree520.py --write"
+    idx = d520.entry_index(lst)
+    marked = 0
+    for cid, c in data["companies"].items():
+        for m in c.get("decree520") or []:
+            marked += 1
+            assert cid in confirmed, cid
+            assert (m["act"], m["item"]) in idx, (cid, m)
+            assert (m["since"], m["url"]) == DECREE520_ACT_PAGES[m["act"]], (cid, m)
+    assert marked >= len(confirmed)
+
+
+def test_decree520_list_keeps_only_items_in_force():
+    """Исключенные из перечней пункты отметки не дают: № 372-рп п. 30 снят
+    распоряжением № 396-рп, № 357-рп пп. 10, 22, 25, 39, 44 — № 156-рп,
+    № 308-рп, № 133-рп и № 201-рп (2024–2026)."""
+    from pipeline import decree520 as d520
+    lst = d520.load_list()
+    items = {(e["act"], e["item"]) for e in lst["entries"]}
+    gone = {("372-рп", "30")} | {("357-рп", n) for n in ("10", "22", "25", "39", "44")}
+    assert not items & gone
+    assert len(items) == len(lst["entries"]) == 233
