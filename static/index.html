@@ -1771,6 +1771,11 @@ a.dp-asset-name:hover{color:var(--accent)}
 .sanc-badge:hover{background:#f8ecd2}
 .sanc-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#c98a1e;flex:0 0 auto}
 .sanc-note{margin-top:6px;font-size:12.5px;color:var(--muted);max-width:72ch}
+/* Указ № 520 — российская мера, не санкции: та же форма ссылки на документ,
+   но спокойный стальной цвет вместо предупреждающего. */
+.sanc-badge.decree{border-color:#b9c4cf;background:#f1f4f7;color:#3d4f61;white-space:normal;border-radius:14px}
+.sanc-badge.decree:hover{background:#e4e9ee}
+.sanc-badge.decree::before{background:#6b7f93}
 .co-nums .label{white-space:nowrap}
 /* Телефон: карточки идут в одну колонку, и выравнивать их по высоте не с чем —
    пустые 30px под коротким именем и 20px под коротким описанием только
@@ -8912,6 +8917,32 @@ function sanctionsHtml(c){
   return `<div class="sanc-row">${chips}</div>
     <div class="sanc-note">${lead} (ссылки ведут на сами списки).${when} Совпадение проверено вручную, ${tail}.</div>`;
 }
+/* Указ № 520 (5 августа 2022): сделки иностранцев из недружественных стран
+   с долями обществ из перечней указа — только с разрешения президента.
+   Владелец, 7 ноября 2026: «как с санкциями — нажать и попасть на
+   первоисточник». Ссылка ведет на распоряжение, которым общество внесено
+   в перечень (kremlin.ru). В профиль попадает только сверенное
+   (pipeline/decree520_confirmed.json, собирает pipeline/decree520.py). */
+const DECREE_ACT = {"372-рп":"распоряжение № 372-рп", "396-рп":"распоряжение № 396-рп", "357-рп":"распоряжение № 357-рп"};
+function decree520Html(c){
+  const marks = (c && c.decree520) || [];
+  if(!marks.length) return "";
+  const bank = marks.some(m => m.act === "357-рп");
+  const acts = [...new Set(marks.map(m=>m.act))];
+  const chips = acts.map(a=>{
+    const m = marks.find(x=>x.act===a);
+    return `<a class="sanc-badge decree" href="${esc(m.url)}" target="_blank" rel="noopener noreferrer"
+      title="Открыть ${esc(DECREE_ACT[a]||"распоряжение")} на сайте Президента">Указ № 520: сделки с долями — с разрешения президента</a>`;
+  }).join("");
+  const src = acts.map(a=>{
+    const m = marks.find(x=>x.act===a);
+    return `${DECREE_ACT[a]||a} от ${sancDate(m.since)} года`;
+  }).join(", ");
+  const who = bank ? "Банк" : (marks.length > 1 ? "Компании" : "Компания");
+  const verb = marks.length > 1 && !bank ? "внесены" : "внесен" + (bank ? "" : "а");
+  return `<div class="sanc-row">${chips}</div>
+    <div class="sanc-note">${who} ${verb} в список к указу президента № 520 (${src}, ссылка ведет на документ): иностранцы из недружественных стран могут купить или продать долю только с разрешения президента.</div>`;
+}
 /* ПРИЗНАКИ ВОЗМОЖНЫХ СДЕЛОК. Партнер владельца, 19 октября 2026: показывать,
    у кого вероятна сделка, не процентом, а доводами с датой и ссылкой —
    компания заявила о продаже, ищет инвестора, обсуждается сделка. Данные —
@@ -9000,6 +9031,7 @@ function renderCompany(id){
     <h1>${c.name}</h1>
     <div class="d-parties"><span>${c.desc}</span></div>
     ${sanctionsHtml(c)}
+    ${decree520Html(c)}
     ${c.lot?`<div class="d-parties" style="margin-top:8px;font-size:14px;flex-direction:column;align-items:flex-start;gap:6px">
       <span class="tag steel">Несколько юрлиц</span>
       <span style="color:var(--muted);font-size:12.5px;max-width:72ch">Это не одна компания: под этим именем в сделке шли несколько юридических лиц, проданных одним лотом. Что вошло в лот и какие доли — в карточке сделки.</span>
