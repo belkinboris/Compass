@@ -17,7 +17,10 @@
 (`card_news[<номер новости>]`, номер — `draft.draft_id_for`, тот же, что у
 сырья по этому адресу) с ОДНИМ из исходов:
   * `same`     — нового нет; снята как дубль, причина записана (`reason`);
-  * `offer`    — новое есть: в консоль уходит конкретное предложение
+  * `apply`    — новое есть, и новость точно о ТОЙ ЖЕ сделке (те же стороны и
+                 предмет, факт дословно в тексте): вносится в карточку само,
+                 без вопроса владельцу (владелец, 7 ноября 2026), — `apply_ready`;
+  * `offer`    — новое есть, но есть и сомнение: в консоль уходит конкретное предложение
                  «К карточке … добавить: <факт> — <цитата>» с кнопками
                  «Добавить в карточку» / «Новый этап сделки» / «Это другая сделка»;
   * `read`     — механика не может решить (расходятся числа, общие только
@@ -43,13 +46,14 @@
     python3 pipeline/ingest/card_news.py --queue            # что читать агенту
     python3 pipeline/ingest/card_news.py --check ответ.json
     python3 pipeline/ingest/card_news.py --apply ответ.json --write
+    python3 pipeline/ingest/card_news.py --auto [--write]   # внести уверенные (`apply`)
     python3 pipeline/ingest/card_news.py --backlog [--write] # разобрать старые hold/*-enrich.json
 """
 import json
 import os
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -89,6 +93,17 @@ OFFER_VERDICTS = {'card_add': 'add', 'card_stage': 'stage', 'card_other': 'other
 # Поля, которые может предложить механика или агент (ответ `--apply`).
 FACT_FIELDS = ('src', 'sum', 'stake_acquired', 'law.adv', 'buyer_name', 'seller', 'stage')
 FACT_LABEL = {'sum': 'Сумма', 'stake_acquired': 'Доля', 'buyer_name': 'Покупатель', 'seller': 'Продавец'}
+# ВНОСИТСЯ САМО, БЕЗ ВОПРОСА ВЛАДЕЛЬЦУ (владелец, 7 ноября 2026: «Блин зачем
+# ты это предлагаешь? Ты бы и сам по ним легко понял… Тут только wb вообще не
+# то. Остальное видно и по сторонам и по тексту»). Механика — только числа и
+# консультант (стороны из разбора заголовка — шум, этап двигает статус и
+# зовет пост об этапе: это решает владелец кнопкой). Агент, прочитавший
+# статью, может внести и сторону; этап — всегда предложением.
+AUTO_FIELDS = ('sum', 'stake_acquired', 'law.adv')
+AGENT_AUTO_FIELDS = AUTO_FIELDS + ('buyer_name', 'seller')
+# Та же сделка по названию предмета — только если новость вышла не дальше
+# этого от даты карточки: тот же торговый центр через год — скорее новая продажа.
+SAME_DEAL_DAYS = 120
 ADV_ROLE = re.compile(r'^(?:Юридический|Финансовый) консультант')
 PLACEHOLDER = re.compile(r'раскры|сообща', re.I)
 
@@ -464,6 +479,12 @@ def compare(card, news, base, firms=None, strong=True):
         current = enrich.current_value(card, 'sum', comps)
         number = re.match(r'[$€]?\s*(\d[\d,.]*)', money)
         quote = sentence_with(text, number.group(1) if number else money)
+        # «Сделку оценили в 10 млрд рублей» — оценка, не цена: та же пометка,
+        # что требует review.sum_is_supported (иначе факт не внесется ни сам,
+        # ни по кнопке владельца — «Город Косино», 7 ноября 2026).
+        import review
+        if '(по оценке)' not in money and review.sum_is_supported(money + ' (по оценке)', quote) is None:
+            money += ' (по оценке)'
         if not current and enrich.is_retracted(card, 'sum', money):
             clashes.append('сумма %s: это значение уже снимали как неверное' % money)
         elif not current:
@@ -527,6 +548,11 @@ def misrouted(deal_id, card, news, why, companies):
         return 'карточки %s нет ни в базе, ни в очереди' % deal_id
     if strong_now(why, card, news):
         return None
+    # Предмет и сторона карточки названы в новости — это она, даже если
+    # кавычки разные (SASCO, 7 ноября 2026: у карточки «Дело», в новости
+    # «Росатом» и полное имя пароходства — а Шишкарев и SASCO те же).
+    if sure_same_deal(card, news, why, companies):
+        return None
     text = news_text(news)
     # РАЗНЫЕ НАЗВАНИЯ В КАВЫЧКАХ — РАЗНЫЕ ОБЪЕКТЫ (владелец, 6 ноября 2026: пермский
     # ЖК «Сибирский квартал» предложили дописать к ДЦ «Волна» — общими были только
@@ -544,6 +570,65 @@ def misrouted(deal_id, card, news, why, companies):
     names = card_names(card, companies) + title_names(card.get('title'))
     if not names_in_text(names, text):
         return 'с карточкой %s общие только общие слова (%s), ни одного ее имени в новости нет' % (deal_id, why)
+    return None
+
+
+def _day(value):
+    try:
+        return date.fromisoformat(str(value or '')[:10])
+    except ValueError:
+        return None
+
+
+def sure_same_deal(card, news, why, companies):
+    """Почему механика уверена, что новость — о ТОЙ ЖЕ сделке, или None.
+
+    Уверенность — одно из трех: сильное совпадение ворот; предмет карточки
+    (покупаемая компания, актив) И еще одна ее сторона (покупатель или
+    продавец) названы в новости — NSP о Selectel и M1Cloud; название предмета в
+    кавычках стоит в новости — торговый центр «Город Косино». Для двух последних
+    новость должна выйти не дальше SAME_DEAL_DAYS от даты карточки. Покупка ВТБ
+    5% WB Банка у карточки «RWB выкупили офис „Открытия“ у ВТБ» не проходит:
+    стороны общие, а предмета карточки (офис «Открытия») в новости нет."""
+    if card is None:
+        return None
+    if strong_now(why, card, news):
+        return 'та же сделка (%s)' % why
+    a, b = _day(card.get('date')), _day(news.get('date'))
+    if not (a and b) or abs((a - b).days) > SAME_DEAL_DAYS:
+        return None
+    text = news_text(news)
+    body = flat(text)
+
+    def names(*refs):
+        out = []
+        for ref in refs:
+            row = (companies or {}).get(card.get(ref)) or {}
+            out += [row.get('name'), row.get('legal_name')]
+        return [n for n in out if isinstance(n, str) and len(flat(n)) >= 3]
+    subject_quoted = [q for q in matcher.quoted(str(card.get('asset') or '')) if len(flat(q)) >= 4]
+    hit = [q for q in subject_quoted if flat(q) in body]
+    if hit:
+        return 'в новости то же название предмета, что в карточке («%s»)' % hit[0]
+    subject = names('target', 'asset_id') + ([card['asset']] if card.get('asset') else [])
+    sides = names('buyer', 'seller_id') + [card.get(k) for k in ('buyer_name', 'seller')
+                                            if isinstance(card.get(k), str)]
+    got_subject, got_side = names_in_text(subject, text), names_in_text(sides, text)
+    if got_subject and got_side:
+        return 'в новости тот же предмет и та же сторона, что в карточке (%s; %s)' % (got_subject[0], got_side[0])
+    return None
+
+
+def doubt_of(card, news, why, companies, cmp):
+    """Почему новое из новости нельзя внести самим (None — можно): ровно то,
+    что владелец увидит строкой «Почему спрашиваем»."""
+    if cmp['clashes']:
+        return 'источники расходятся с карточкой: %s' % '; '.join(cmp['clashes'])
+    other = [f['label'] for f in cmp['facts'] if f['field'] not in AUTO_FIELDS + ('src',)]
+    if other:
+        return 'в новости %s — это меняет карточку, решаете вы' % ', '.join(x.lower() for x in other)
+    if not sure_same_deal(card, news, why, companies):
+        return 'не уверены, что это та же сделка: в новости нет предмета карточки или ее сторон'
     return None
 
 
@@ -578,8 +663,13 @@ def sort_news(news, deal_id, why, base, pending_cards=(), origin='enrich', card=
     cmp = compare(card, news, base, firms, strong=strong)
     entry['facts'], entry['clashes'] = cmp['facts'], cmp['clashes']
     new = [f for f in cmp['facts'] if f['field'] != 'src']
+    comps = base.get('companies') or {}
     if new:
-        entry.update(outcome='offer', reason='в новости есть то, чего нет в карточке')
+        doubt = doubt_of(card, news, why, comps, cmp)
+        if doubt:
+            entry.update(outcome='offer', reason='в новости есть то, чего нет в карточке', doubt=doubt)
+        else:
+            entry.update(outcome='apply', reason='%s; новое внесем сами' % sure_same_deal(card, news, why, comps))
     elif cmp['clashes']:
         entry.update(outcome='read', reason='источники расходятся: %s' % '; '.join(cmp['clashes']))
     elif cmp['url_known']:
@@ -587,6 +677,11 @@ def sort_news(news, deal_id, why, base, pending_cards=(), origin='enrich', card=
     elif strong:
         entry.update(outcome='same', reason='та же сделка, что %s (%s); кроме источника, нового нет'
                      % (deal_id, why or 'совпадение ворот'))
+    elif sure_same_deal(card, news, why, comps):
+        # SASCO (7 ноября 2026): те же Шишкарев и SASCO, та же доля 58,67% —
+        # читать тут нечего, это повтор.
+        entry.update(outcome='same', reason='%s; нового для карточки %s нет'
+                     % (sure_same_deal(card, news, why, comps), deal_id))
     else:
         entry.update(outcome='read', reason='похоже на карточку %s (%s); механика не нашла новых чисел, '
                      'консультантов или этапа — прочитать статью' % (deal_id, why))
@@ -687,6 +782,8 @@ def offer_message(entry):
     lines.append('Новость: «%s»' % _short(news.get('title'), 200))
     if entry.get('read_by') == 'agent' and entry.get('reason'):
         lines.append('Что увидели при чтении: %s' % _short(entry['reason'], 300))
+    if entry.get('doubt'):
+        lines.append('Почему спрашиваем: %s.' % _short(entry['doubt'], 300).rstrip('.'))
     elif 'не уверены' in str(entry.get('reason') or ''):
         lines.append('Что проверили: %s.' % entry['reason'])
     lines.append('')
@@ -860,6 +957,87 @@ def apply_offer(entry, verdict, base, pending, now=None):
     return done, failed, where
 
 
+# Отказ apply_fact, который значит «это уже есть в карточке», а не «факт не
+# подтвержден»: уверенную новость он не останавливает (SASCO: доля 58,67% уже
+# стоит в предмете карточки — внести остается только источник).
+ALREADY = re.compile(r'^в карточке уже')
+
+
+def apply_sure(entry, base, pending, now=None):
+    """Внести уверенную новость (`apply`) тем же `apply_offer`, что кнопка
+    «Добавить в карточку», но целиком или никак: факт не подтвердился цитатой
+    (`review.quote_is_real`, `sum_is_supported`) — карточка не меняется, новость
+    уходит на чтение агенту. Где лежит карточка ('base' | 'pending') или None."""
+    card, where = find_card(entry['deal_id'], base, (pending or {}).get('cards') or [])
+    if card is None:
+        entry.update(outcome='read', reason='внести само не вышло: карточки %s уже нет' % entry['deal_id'])
+        return None
+    trial = json.loads(json.dumps(card))
+    probe = json.loads(json.dumps(entry))
+    trial_base = {'deals': [trial] if where == 'base' else [], 'companies': base.get('companies') or {}}
+    done, failed, _w = apply_offer(probe, 'card_auto', trial_base,
+                                   {'cards': [trial] if where == 'pending' else []}, now)
+    bad = [(label, why) for label, why in failed if not ALREADY.search(str(why))]
+    if bad:
+        entry.update(outcome='read', reason='внести само не вышло (%s) — прочитать статью'
+                     % '; '.join('%s: %s' % x for x in bad))
+        entry.pop('read_by', None)
+        return None
+    card.clear()
+    card.update(trial)
+    entry.update(outcome='decided', decision='card_auto', decided_at=now_iso(now), where=where,
+                 applied=done, not_applied=[list(x) for x in failed],
+                 decided_by=entry.get('read_by') or 'mechanics')
+    return where
+
+
+def _write_base(data, path):
+    """Записать базу так же, как approve.py: факты витрины пересчитаны."""
+    if ROOT not in sys.path:
+        sys.path.insert(0, ROOT)
+    import facts as facts_layer
+    from pipeline import fns_registry as _fns_registry
+    facts_layer.derive_all(data, facts_layer.build_ctx(data, _fns_registry.REGISTRY))
+    json.dump(data, open(path, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+
+
+def apply_ready(state=None, pending=None, write=True, now=None, data_path=None):
+    """Внести в карточки все уверенные новости (`apply`). Базу перечитывает
+    прямо перед записью (другой прогон мог ее записать). `state` и `pending`
+    переданы — правятся на месте, записывает их вызвавший (send_drafts.py);
+    не переданы — читаются и пишутся здесь. Сообщений в консоль нет: правка
+    опубликованной карточки доходит до поста сама (send_telegram.
+    card_changes_since_post). `data_path` — база вызвавшего (его DATA).
+    Возвращает [(запись, где)]."""
+    own_state, own_pending = state is None, pending is None
+    state = promote.load_state() if own_state else state
+    ready = [e for e in book(state).values() if e.get('outcome') == 'apply']
+    if not ready:
+        return []
+    pending = promote.load_pending() if own_pending else pending
+    data_path = data_path or DATA
+    data = json.load(open(data_path, encoding='utf-8'))
+    out = []
+    for entry in sorted(ready, key=lambda e: str(e.get('since') or '')):
+        where = apply_sure(entry, data, pending, now)
+        out.append((entry, where))
+        if where:
+            mark_raw(state, entry, 'enrich:%s' % entry['deal_id'])
+            print('  ВНЕСЕНО САМО %s -> %s: %s | %s' % (entry['id'], entry['deal_id'],
+                                                       ', '.join(entry.get('applied') or []) or 'ничего',
+                                                       _short((entry.get('news') or {}).get('title'), 80)))
+        else:
+            print('  НЕ ВНЕСЕНО  %s -> %s: %s' % (entry['id'], entry['deal_id'], entry.get('reason')))
+    if write:
+        if any(w == 'base' for _e, w in out):
+            _write_base(data, data_path)
+        if own_pending and any(w == 'pending' for _e, w in out):
+            promote.save_pending(pending)
+        if own_state:
+            promote.save_state(state)
+    return out
+
+
 def closure_text(entry, card, done, failed, where):
     """Ответ владельцу — честный: «добавлено» только если источник новости
     правда стоит в карточке (перечитано после записи)."""
@@ -987,7 +1165,7 @@ def render_queue(state, base, pending_cards=()):
               % (entry['deal_id'], kind, entry['deal_id'], kind, entry['id']))
 
 
-ANSWER_OUTCOMES = ('same', 'offer', 'separate', 'milestone_done')
+ANSWER_OUTCOMES = ('same', 'apply', 'offer', 'separate', 'milestone_done')
 
 
 def check_answer(answer, state, base, pending_cards=(), texts=None):
@@ -1004,16 +1182,24 @@ def check_answer(answer, state, base, pending_cards=(), texts=None):
         outcome = item.get('outcome')
         if outcome not in ANSWER_OUTCOMES:
             bad.append('исход вне списка %s' % ', '.join(ANSWER_OUTCOMES))
-        if outcome in ('same', 'separate', 'offer') and not str(item.get('reason') or '').strip():
+        if outcome in ('same', 'separate', 'offer', 'apply') and not str(item.get('reason') or '').strip():
             bad.append('нужна причина (reason) — она уйдет в память и, для offer, владельцу')
+        if outcome == 'offer' and not str(item.get('doubt') or '').strip():
+            bad.append('offer без сомнения (doubt): та же сделка и факт в статье — ответ apply, '
+                       'вносится сам; offer — только когда есть в чем сомневаться')
         deal_id = item.get('deal_id') or entry['deal_id']
         card, _where = find_card(deal_id, base, pending_cards)
-        if outcome in ('same', 'offer') and card is None:
+        if outcome in ('same', 'offer', 'apply') and card is None:
             bad.append('карточки %s нет ни в базе, ни в очереди' % deal_id)
-        if outcome == 'offer':
+        if outcome in ('offer', 'apply'):
             facts = item.get('facts') or []
             if not facts:
-                bad.append('offer без фактов')
+                bad.append('%s без фактов' % outcome)
+            if outcome == 'apply':
+                for f in facts:
+                    if f.get('field') not in AGENT_AUTO_FIELDS:
+                        bad.append('apply: поле %r само не вносится (%s) — это offer'
+                                   % (f.get('field'), ', '.join(AGENT_AUTO_FIELDS)))
             pool = (texts if texts is not None else review.source_texts()) + [news_text(entry.get('news') or {})]
             for f in facts:
                 field = f.get('field')
@@ -1053,8 +1239,9 @@ def _answer_fact(item_fact, news):
 
 
 def apply_answer(answer, state, now=None):
-    """Ответ агента — в память. Пишет только moderation_state.json; база
-    меняется лишь по кнопке владельца (approve.py)."""
+    """Ответ агента — в память (moderation_state.json). `apply` вносит в базу
+    потом `apply_ready` (тот же прогон `--apply --write`), `offer` — кнопка
+    владельца (approve.py)."""
     for item in answer:
         entry = book(state)[str(item['id'])]
         outcome = item['outcome']
@@ -1076,7 +1263,11 @@ def apply_answer(answer, state, now=None):
         else:
             src = [f for f in entry.get('facts') or [] if f['field'] == 'src']
             entry['facts'] = [_answer_fact(f, entry.get('news') or {}) for f in item['facts']] + src
-            entry['outcome'] = 'offer'
+            entry['outcome'] = outcome
+            if outcome == 'offer':
+                entry['doubt'] = item.get('doubt')
+            else:
+                entry.pop('doubt', None)
             entry.pop('sent_at', None)
 
 
@@ -1150,6 +1341,18 @@ def main(argv):
         apply_answer(answer, state)
         promote.save_state(state)
         print('Записано. Предложения уйдут в консоль следующим send_drafts.py --write.')
+        if any(where for _e, where in apply_ready()):
+            print('Уверенные новости внесены в карточки — база изменилась: facts_derive, pytest, diff, коммит.')
+        return 0
+    if '--auto' in argv:
+        ready = [e for e in book(state).values() if e.get('outcome') == 'apply']
+        if not write:
+            for e in ready:
+                print('  ВНЕСТИ %s -> %s: %s' % (e['id'], e['deal_id'], ', '.join(
+                    f['label'] for f in e.get('facts') or [] if f['field'] != 'src') or 'источник'))
+            print('Уверенных новостей: %d. Сухой прогон. Запись — с ключом --write.' % len(ready))
+            return 0
+        apply_ready()
         return 0
     if '--backlog' in argv:
         entries = sort_backlog(state, base, pending_cards)

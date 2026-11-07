@@ -663,9 +663,13 @@ def main(argv):
         return
     if not applied:
         print('\nЗаписывать нечего.')
+        # Уверенные новости о тех же сделках (card_news `apply`) — в карточку
+        # сразу, после записи этого шага: apply_ready перечитывает базу сам.
+        card_news.apply_ready(data_path=DATA)
         return
     with open(DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
+    card_news.apply_ready(data_path=DATA)
     os.makedirs(UPDATES, exist_ok=True)
     json.dump({'made': day, 'updates': updates},
               open(os.path.join(UPDATES, day + '.json'), 'w', encoding='utf-8'),

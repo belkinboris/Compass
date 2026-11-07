@@ -856,6 +856,19 @@ def main(write=False, resend=None, only=None):
                   'показываю заново.' % cid)
             main(write=write, resend=cid)
     plan, pending, state, deferred, postponed, foreign, unread, unaccepted, unread2 = build_plan(resend, only=only)
+    if write and not (resend or only):
+        # Новость о ТОЙ ЖЕ сделке с фактом, дословно стоящим в тексте, —
+        # в карточку сразу, без вопроса владельцу (card_news.apply_ready,
+        # владелец 7 ноября 2026). Сразу и записываем: ниже есть выходы без
+        # записи памяти, а база уже изменена.
+        import card_news
+        applied = card_news.apply_ready(state=state, pending=pending, data_path=DATA)
+        if applied:
+            promote.save_state(state)
+            json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+        if any(where for _e, where in applied):
+            print('Новости о тех же сделках внесены в карточки сами — база изменилась: '
+                  'facts_derive, pytest, diff, коммит и push.')
     if unread2:
         print('Не показано карточек без второго чтения: %d — second_reading.py --queue → '
               'саб-агент по SECOND_READING_BRIEF.md → second_reading.py --apply <ответ> --write.' % unread2)
