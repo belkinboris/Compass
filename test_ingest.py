@@ -10582,3 +10582,17 @@ def test_console_line_about_no_post_names_the_same_age_limit_as_the_channel():
     archive = {"id": "gtest0006", "date": (today - timedelta(days=45)).isoformat()}
     assert not format_post.is_fresh(archive)
     assert "не старше 30 дней" in send_drafts._channel_gate_line(archive)
+
+
+def test_owner_can_send_a_realty_post_to_both_channels():
+    """Владелец, 7 ноября 2026: пост «Сезона» (сумма не раскрыта) — «и в недвижимости
+    и в основном». `post_channels` в карточке главнее правила суммы."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'pipeline', 'publish'))
+    import channels
+    deal = {'ind': 'Недвижимость', 'status': 'Закрыта', 'sum': 'Не раскрыта'}
+    assert channels.channels_for(deal) == (channels.REALTY,)
+    deal['post_channels'] = ['realty', 'main']
+    assert channels.channels_for(deal) == (channels.MAIN, channels.REALTY)
+    assert 'ОБА КАНАЛА' in channels.destination(deal)
+    assert channels.channels_for(deal, realty_known=False) == (channels.MAIN,)

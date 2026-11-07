@@ -65,6 +65,15 @@ def channels_for(deal, realty_known=True):
     Адрес канала недвижимости неизвестен (`realty_known=False`) — пост идет в
     основной, как до 2 октября 2026: потерять пост хуже, чем выпустить его не
     в тот канал."""
+    # КАНАЛЫ ПО РЕШЕНИЮ ВЛАДЕЛЬЦА (7 ноября 2026, «Сезон»/Four Seasons:
+    # «опубликуем и в недвижимости и в основном» — сумма не раскрыта, правило
+    # дало бы только канал недвижимости). `post_channels` в карточке главнее
+    # правила; ставится скриптом только по слову владельца.
+    forced = [c for c in (MAIN, REALTY) if c in (deal.get('post_channels') or ())]
+    if forced:
+        if not realty_known:
+            return (MAIN,)
+        return tuple(forced)
     if not realty_known or not is_realty(deal):
         return (MAIN,)
     return (MAIN, REALTY) if is_big_deal(deal) else (REALTY,)
