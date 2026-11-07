@@ -5470,3 +5470,17 @@ def test_busy_assistant_answer_is_a_soft_note_not_a_model_answer(browser, base_u
         assert not errors, errors
     finally:
         ctx.close()
+
+
+def test_decree520_badge_links_the_presidential_act(page, base_url):
+    """Владелец, 7 ноября 2026: компании из перечней указа № 520 отмечены так
+    же, как санкции, — значок ведет на распоряжение на сайте Президента."""
+    page.goto(base_url + "/#/companies/g1d523151", wait_until="domcontentloaded")
+    page.wait_for_selector(".sanc-badge.decree", timeout=15000)
+    label = page.inner_text(".sanc-badge.decree").strip()
+    assert label == "Указ № 520: сделки с долями — с разрешения президента", label
+    href = page.get_attribute(".sanc-badge.decree", "href")
+    assert href == "http://kremlin.ru/acts/bank/48500", href
+    note = page.locator(".sanc-note").last.inner_text()
+    assert "распоряжение № 372-рп от 9 ноября 2022 года" in note, note
+    assert "ё" not in note and "ё" not in label

@@ -2214,6 +2214,25 @@ def test_placeholder_canon_matches_the_screen():
         assert not screen.match(v), repr(v)
 
 
+def test_person_detection_on_the_screen_uses_the_same_company_cue():
+    """«Банк России» — не человек (аудит 1 ноября 2026, бэклог D5).
+
+    `looksLikePerson` в static/index.html считал человеком любые два слова с
+    заглавной: «Банк России», «Почта Банк», «Агрокультура Групп». Экран
+    берет признак компании из `sanctions_match.COMPANY_CUE` слово в слово."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "pipeline"))
+    import sanctions_match
+    html = INDEX.read_text(encoding="utf-8")
+    m = re.search(r"^const PERSON_COMPANY_CUE = /(.*)/;$", html, re.M)
+    assert m, "в index.html нет const PERSON_COMPANY_CUE"
+    assert m.group(1) == sanctions_match.COMPANY_CUE.pattern
+    cue = re.compile(m.group(1))
+    for name in ("Банк России", "Почта Банк", "Агрокультура Групп"):
+        assert cue.search(name), name
+    assert not cue.search("Владимир Селегень")
+
+
 def test_custody_title_does_not_say_assets_were_taken(deals):
     """Временное управление собственность не меняет: заголовок не говорит, что указ
     «забрал» активы или компания их «лишилась» (владелец, 6 ноября 2026, Tarkett и
