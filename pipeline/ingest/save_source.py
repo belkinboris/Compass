@@ -13,7 +13,11 @@
 
 Файл с текстом — то, что вернул WebFetch/браузер; сохраняется как есть (в
 git эта папка не попадает: чужие тексты целиком в репозитории не храним —
-docs/sources_legal.md).
+docs/sources_legal.md), кроме хвоста с комментариями читателей: он
+отрезается по словам начала блока («Комментарии 5 Гость…», «Комментариев
+пока нет», «Ответить» под именем и датой) — `strip_comments.cut_comment_text`.
+Иначе чужое мнение под статьей проходит проверку цитат как факт источника
+(бэклог A30, карточка g004a92b7).
 """
 import argparse
 import json
@@ -25,9 +29,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 TRIAGE = os.path.join(ROOT, 'data', 'inbox', 'triage')
 
+sys.path.insert(0, HERE)
+from strip_comments import cut_comment_text  # noqa: E402
+
 
 def save(url, title, text, day=None, folder=None):
     folder = folder or TRIAGE
+    text = cut_comment_text(text)[0]
     os.makedirs(folder, exist_ok=True)
     path = os.path.join(folder, 'sources_%s.json' % (day or date.today().isoformat()))
     store = json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {'made': 'save_source.py', 'items': []}
@@ -44,6 +52,9 @@ def main(argv=None):
     ap.add_argument('--file', required=True, help='файл с текстом статьи')
     a = ap.parse_args(argv)
     text = open(a.file, encoding='utf-8').read().strip()
+    text, cut = cut_comment_text(text)
+    if cut:
+        print('Отрезан хвост с комментариями читателей: %d знаков.' % cut)
     if len(text) < 200:
         print('Текст короче 200 знаков — похоже на «Captcha»/«Loading…», а не на статью. Не сохраняю.')
         return 1

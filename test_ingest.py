@@ -10596,3 +10596,116 @@ def test_owner_can_send_a_realty_post_to_both_channels():
     assert channels.channels_for(deal) == (channels.MAIN, channels.REALTY)
     assert 'ОБА КАНАЛА' in channels.destination(deal)
     assert channels.channels_for(deal, realty_known=False) == (channels.MAIN,)
+
+
+# --- комментарии читателей не попадают в сохраненный текст статьи (A30, 7 ноября 2026) ---
+
+COMMENT_FIXTURES = ROOT / "pipeline" / "fixtures" / "comments"
+
+
+@pytest.mark.parametrize("name, body, comments", [
+    # 93.ru и вся сеть (fontanka, e1, 74, ngs, ufa1, 161): «Читайте также»
+    # стоит ПОСРЕДИ статьи — абзац после него тоже статья.
+    ("93ru.html",
+     ["уже 15 лет стоит недостроенным здание", "ООО «Кубаньагроторг»",
+      "Читайте также", "спустя 5 лет решение отменили", "130 млн рублей",
+      "Ctrl+Enter", "Дожди и похолодание"],
+     ["первышов", "Читать все комментарии", "Гость 26 октября"]),
+    # Абирег — сам случай g004a92b7: «Грин парк» только в комментарии.
+    ("abireg_118131.html",
+     ["учебные корпуса и общежития ВГТУ", "136,96 млн рублей", "Выходные данные"],
+     ["Грин парк", "Юдинков", "Подпись под комментарием", "Ваш комментарий"]),
+    ("bnkomi.html",
+     ["Сумма сделки составила 15 млрд рублей", "Материалы по теме"],
+     ["крепостными", "Безработный шахтер", "Ответить", "вежливость и уважение"]),
+    ("ura.html",
+     ["Ему перешло 50% долей", "Ксения Фикс", "Умерла актриса"],
+     ["Свердловской области построят", "Светлана", "Ответить"]),
+    ("chelny.html",
+     ["Сделка закрыта в июне", "Артемия Лебедева", "Другая новость"],
+     ["зачем это всем знать", "Татарин", "Ответить"]),
+])
+def test_article_text_drops_reader_comments(name, body, comments):
+    """`fetch_article_texts.article_text()` вырезает блок комментариев по
+    разметке страницы, а тело статьи оставляет целиком. Карточка g004a92b7
+    получила «Грин парк» из читательского комментария под статьей Абирега:
+    проверка цитат ищет подстроку во всем тексте страницы и не знает, где
+    кончилась статья."""
+    import fetch_article_texts as articles
+    text = articles.article_text((COMMENT_FIXTURES / name).read_text(encoding="utf-8"))
+    for piece in body:
+        assert piece in text, "%s: пропал кусок статьи %r" % (name, piece)
+    for piece in comments:
+        assert piece not in text, "%s: в тексте остался комментарий %r" % (name, piece)
+
+
+def test_comment_markup_keeps_expert_comment_and_page_wrappers():
+    """Одинокое `comment` и `expert-comment` — врезка эксперта, это статья;
+    `has-comments` на `<article>` — признак, а не блок; `correspondent` —
+    подпись автора (в нем есть буквы «respond»)."""
+    import fetch_article_texts as articles
+    page = ('<html><body class="page comments-open"><article class="post has-comments">'
+            '<p>Сделка закрыта в октябре.</p>'
+            '<div class="expert-comment"><p>Партнер фирмы: цена выше рынка.</p></div>'
+            '<div class="comment"><p>Аналитик: покупатель переплатил.</p></div>'
+            '<span class="article__correspondent">Иван Петров</span>'
+            + '<p>Еще абзац статьи.</p>' * 20 +
+            '</article><div id="disqus_thread"><p>Читатель: все куплено</p></div>'
+            '<div id="hypercomments_widget"><p>Читатель два</p></div>'
+            '<div id="mc-container"><p>Читатель три</p></div>'
+            '<div id="respond"><p>Оставить ответ</p></div></body></html>')
+    text = articles.article_text(page)
+    for piece in ("Сделка закрыта", "цена выше рынка", "покупатель переплатил", "Иван Петров"):
+        assert piece in text
+    for piece in ("все куплено", "Читатель два", "Читатель три", "Оставить ответ"):
+        assert piece not in text
+
+
+def test_article_text_without_comments_is_unchanged():
+    """Страница без блока комментариев дает ровно прежний текст: правка не
+    меняет кэш для остальных сайтов."""
+    import fetch_article_texts as articles
+    page = ('<html><head><style>p{}</style><script>var a="<div class=comments>"</script></head>'
+            '<body><h1>Заголовок</h1><p>Компания &laquo;Ромашка&raquo; купила завод.</p>'
+            + '<p>Абзац статьи без комментариев.</p>' * 15 + '</body></html>')
+    raw = re.sub(r'<script\b.*?</script>|<style\b.*?</style>', ' ', page, flags=re.S | re.I)
+    import html as html_lib
+    old = re.sub(r'\s+', ' ', html_lib.unescape(re.sub(r'<[^>]+>', ' ', raw))).strip()
+    assert articles.article_text(page) == old
+
+
+def test_cut_comment_text_on_saved_text_without_markup():
+    """`save_source.py` получает готовый текст (WebFetch), разметки нет: хвост
+    режется по словам начала блока, но только после статьи. «Написать
+    комментарий» под заголовком у старой «Фонтанки» — кнопка ДО статьи, и
+    статья после нее остается."""
+    from strip_comments import cut_comment_text
+    article = "Компания купила завод за 1 млрд рублей. " * 40
+    hearst = (article + "Увидели опечатку? Выделите фрагмент и нажмите Ctrl+Enter \n Комментарии 5 \n Гость \n"
+              " 26 октября, 08:13 \n казалось бы, а при чем здесь первышов ))) \n +2 –0 \n Новости СМИ2")
+    head, cut = cut_comment_text(hearst)
+    assert "первышов" not in head and head.startswith(article.strip()[:200]) and cut > 0
+    bnkomi = (article + "\n Комментарии (22) \n Добавить комментарий\n Имя * \n Сообщение * \n Ввп \n"
+              " 26 марта 2026 г., 8:22:18\n Ответить \n Сказал будем национализировать все\n"
+              " Игорь \n 26 марта 2026 г., 9:20:48\n Ответить \n Деньги любят тишину")
+    head, _ = cut_comment_text(bnkomi)
+    assert "национализировать" not in head and "Ввп" not in head and "1 млрд рублей" in head
+    fontanka = ("Бизнес РБК: Компания купила производителя 30 сентября 2024, 19:22 14 814 "
+                "Написать комментарий " + article + "О покупке сообщает РБК.")
+    pad = "Меню сайта. " * 60
+    head, cut = cut_comment_text(pad + fontanka)
+    assert cut == 0, "кнопка «Написать комментарий» над статьей отрезала статью"
+    ria = article + "Обсуждение закрыто. Участвовать в дискуссии можно в течение 24 часов. Вход на сайт"
+    assert "Обсуждение закрыто" not in cut_comment_text(ria)[0]
+    # метка в шапке, до статьи, — не начало комментариев
+    head, cut = cut_comment_text("Обсуждение закрыто " + article)
+    assert cut == 0
+
+
+def test_save_source_drops_comment_tail(tmp_path):
+    import save_source
+    article = "Компания купила завод за 1 млрд рублей. " * 40
+    text = article + "Комментарии Комментариев к материалу пока нет. Ваш комментарий Подпись"
+    path = save_source.save("https://example.org/c", "Заголовок", text, day="2026-11-07", folder=str(tmp_path))
+    saved = json.load(open(path, encoding="utf-8"))["items"][0]["summary"]
+    assert "пока нет" not in saved and saved.endswith("1 млрд рублей.")
