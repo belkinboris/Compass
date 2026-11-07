@@ -10560,3 +10560,21 @@ def test_to_card_puts_the_sum_in_the_economist_too():
     empty = promote.to_card(dict(base, sum="—"), "gtest0004")
     assert "sum" not in empty and empty["eco"]["sum"] == "—"
 
+
+def test_console_line_about_no_post_names_the_same_age_limit_as_the_channel():
+    """Строка «поста не будет» называет тот же порог, что применяет канал.
+
+    Аудит 1 ноября 2026 (бэклог D5): строка всегда писала «не старше 30 дней»,
+    а `format_post.is_fresh` для свежей карточки притока пускает сделку до 180
+    дней от ее даты. Старая архивная карточка — по-прежнему 30.
+    """
+    import send_drafts
+    from datetime import timedelta
+    today = date.today()
+    ingest = {"id": "gtest0005", "from_ingest": True, "added": today.isoformat(),
+              "date": (today - timedelta(days=200)).isoformat()}
+    assert not format_post.is_fresh(ingest)
+    assert "не старше 180 дней" in send_drafts._channel_gate_line(ingest)
+    archive = {"id": "gtest0006", "date": (today - timedelta(days=45)).isoformat()}
+    assert not format_post.is_fresh(archive)
+    assert "не старше 30 дней" in send_drafts._channel_gate_line(archive)

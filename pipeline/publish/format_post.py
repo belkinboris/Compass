@@ -987,6 +987,30 @@ def _party_name_for(deal, companies, ref_field_id):
     return ''
 
 
+def _fresh_ingest(deal, now):
+    """Карточку притока завели не позже FRESH_DAYS дней назад.
+
+    Карточка еще ждет решения в pending.json — поля `added` у нее нет
+    (его ставит approve.py при выпуске), и ручная сборка с датой-годом
+    теряла пост («Атолл Капитал»/Aspace, 18 октября 2026). День, когда
+    карточка легла в очередь, — тот же день притока."""
+    added = str(deal.get('added') or str(deal.get('pending_since') or '')[:10])
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
+        return False
+    try:
+        return (now - datetime.strptime(added, '%Y-%m-%d').date()).days <= FRESH_DAYS
+    except ValueError:
+        return False
+
+
+def fresh_limit_days(deal, today=None):
+    """Сколько дней от даты сделки карточка считается свежей для канала —
+    тот же порог, что применяет `is_fresh` (для подписи в консоли, бэклог D5)."""
+    if deal.get('from_ingest') and _fresh_ingest(deal, today or date.today()):
+        return INGEST_DEAL_MAX_AGE_DAYS
+    return FRESH_DAYS
+
+
 def is_fresh(deal, today=None):
     """Свежая сделка — обычный пост. Старая — «новое о сделке».
 
@@ -1018,18 +1042,7 @@ def is_fresh(deal, today=None):
     age = deal_age_days(deal, today)
     raw = str(deal.get('date') or '')
     if deal.get('from_ingest'):
-        # Карточка еще ждет решения в pending.json — поля `added` у нее нет
-        # (его ставит approve.py при выпуске), и ручная сборка с датой-годом
-        # теряла пост («Атолл Капитал»/Aspace, 18 октября 2026). День, когда
-        # карточка легла в очередь, — тот же день притока.
-        added = str(deal.get('added') or str(deal.get('pending_since') or '')[:10])
-        added_age = None
-        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', added):
-            try:
-                added_age = (now - datetime.strptime(added, '%Y-%m-%d').date()).days
-            except ValueError:
-                added_age = None
-        if added_age is not None and added_age <= FRESH_DAYS:
+        if _fresh_ingest(deal, now):
             if age is not None:
                 return age <= INGEST_DEAL_MAX_AGE_DAYS
             if re.fullmatch(r'\d{4}', raw):
