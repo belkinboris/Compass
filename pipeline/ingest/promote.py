@@ -852,6 +852,13 @@ def to_card(draft, deal_id):
         # «Не раскрыта», KNOWN_ISSUES 27 октября 2026): поле без суммы не пишется.
         if draft.get(field) and str(draft[field]).strip() not in ('—', '-', '–'):
             card[field] = draft[field]
+    if card.get('sum'):
+        # «Экономист» показывает ту же сумму, что «Обзор» (test_audit_queue::
+        # test_the_sum_on_the_overview_is_the_sum_in_the_economist). До 7 ноября
+        # 2026 сюда писался только `sum`, и цена торгов («Сумма сделки составила
+        # 246,93 млн руб.») пять раз за неделю роняла полный pytest при выпуске
+        # постов (бэклог E12, known_issues/intake.md).
+        card['eco']['sum'] = card['sum']
     if draft.get('buyer_hint'):
         # П1-10: остаток хвоста стороны в косвенном падеже («структурам
         # Алексея Репика») — не факт, подсказка для чтения (см. docstring

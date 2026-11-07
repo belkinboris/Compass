@@ -10526,3 +10526,55 @@ def test_reread_title_fix_does_not_rewrite_the_channel_post():
     data = {"deals": [card], "telegram_post_state": state}
     assert rq.keep_post_title(data, card) is True
     assert send_telegram.card_changes_since_post([card], {"gP1": 7}, {}, state) == {}
+
+
+def test_central_bank_currency_purchase_is_not_a_deal():
+    """Ежедневная валютная операция ЦБ «на внутреннем рынке» — не сделка.
+
+    2 ноября 2026 она третий раз прошла ворота новой карточкой (g162e3085;
+    known_issues/intake.md): «купил» и сумма в рублях проходят положительные
+    признаки. Держит фраза «<валюта> на внутреннем рынке», а покупка
+    компании «на внутреннем рынке» остается сделкой.
+    """
+    assert not classify.looks_like_deal(
+        "ЦБ РФ с 30 октября купил юаней на внутреннем рынке на 12,1 млрд рублей")
+    assert not classify.looks_like_deal(
+        "Банк России продаст валюту на внутреннем рынке на 4,5 млрд рублей в день")
+    assert classify.looks_like_deal(
+        "Сбербанк купил 100% банка, работающего на внутреннем рынке")
+
+
+def test_to_card_puts_the_sum_in_the_economist_too():
+    """Сумма черновика — и на «Обзоре», и в «Экономисте» (бэклог E12).
+
+    До 7 ноября 2026 `to_card` писал только `sum`, а `eco.sum` оставался
+    «—»: цена торгов пять раз за неделю роняла полный pytest при выпуске
+    постов (test_audit_queue::test_the_sum_on_the_overview_is_the_sum_in_the_economist).
+    Без суммы «Экономист» остается заглушкой, а не выдумывается.
+    """
+    import promote
+    base = {"date": "2026-11-05", "title": "Имущество «Садов Бештау» продано с торгов",
+            "src": [["источник", "https://example.invalid/z"]]}
+    card = promote.to_card(dict(base, sum="247 млн ₽"), "gtest0003")
+    assert card["sum"] == card["eco"]["sum"] == "247 млн ₽"
+    empty = promote.to_card(dict(base, sum="—"), "gtest0004")
+    assert "sum" not in empty and empty["eco"]["sum"] == "—"
+
+
+def test_console_line_about_no_post_names_the_same_age_limit_as_the_channel():
+    """Строка «поста не будет» называет тот же порог, что применяет канал.
+
+    Аудит 1 ноября 2026 (бэклог D5): строка всегда писала «не старше 30 дней»,
+    а `format_post.is_fresh` для свежей карточки притока пускает сделку до 180
+    дней от ее даты. Старая архивная карточка — по-прежнему 30.
+    """
+    import send_drafts
+    from datetime import timedelta
+    today = date.today()
+    ingest = {"id": "gtest0005", "from_ingest": True, "added": today.isoformat(),
+              "date": (today - timedelta(days=200)).isoformat()}
+    assert not format_post.is_fresh(ingest)
+    assert "не старше 180 дней" in send_drafts._channel_gate_line(ingest)
+    archive = {"id": "gtest0006", "date": (today - timedelta(days=45)).isoformat()}
+    assert not format_post.is_fresh(archive)
+    assert "не старше 30 дней" in send_drafts._channel_gate_line(archive)
