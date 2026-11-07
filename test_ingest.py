@@ -10185,6 +10185,9 @@ def _cn_base():
 NSP_POST = {"title": "АБ NSP сообщает: NSP сопровождало облачного провайдера Selectel в сделке по "
                      "приобретению компании M1Cloud (ООО \"Стек Групп\")",
             "url": "https://t.me/LawFirms/11405", "date": "2026-09-18", "source_id": "tg:LawFirms"}
+# Тот же пост, но через полгода после сделки: стороны те же, а сделка могла
+# быть другой — это уже сомнение, и решает владелец (предложение в консоль).
+NSP_DOUBT = dict(NSP_POST, date="2026-02-01")
 
 
 def datetime_utc(day):
@@ -10195,13 +10198,18 @@ def datetime_utc(day):
 def test_card_news_lawfirm_post_is_an_offer_with_the_adviser_and_its_quote():
     """6 ноября 2026: пост @LawFirms о том, что NSP вела покупателя Selectel/
     M1Cloud, семь недель пролежал в hold/*-enrich.json «слабым совпадением».
-    Объявление фирмы о своей роли — новый факт: владельцу уходит конкретное
-    предложение с цитатой и кнопками, а не «сомнительная»."""
+    Объявление фирмы о своей роли — новый факт. С 7 ноября 2026 пост о той же
+    сделке (Selectel и M1Cloud названы, дата та же) вносится сам (`apply`);
+    тот же пост через полгода — сомнение: владельцу конкретное предложение с
+    цитатой, кнопками и строкой «Почему спрашиваем»."""
     import card_news
     import draft as drafter
     base = _cn_base()
-    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    sure = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert sure["outcome"] == "apply" and "предмет" in sure["reason"], sure
+    entry = card_news.sort_news(NSP_DOUBT, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
     assert entry["outcome"] == "offer", entry
+    assert "Почему спрашиваем: не уверены, что это та же сделка" in card_news.offer_message(entry)
     adv = [f for f in entry["facts"] if f["field"] == "law.adv"]
     assert adv and adv[0]["value"][1] == "NSP" and adv[0]["value"][0].startswith("Юридический консультант")
     assert "NSP сопровождало" in adv[0]["quote"]
@@ -10267,7 +10275,7 @@ def test_card_news_follows_a_merged_card_and_a_stale_same_url():
     import card_news
     base = _cn_base()
     entry = card_news.sort_news(NSP_POST, "gold0001", "общие слова заголовка: 3", base, [], "enrich")
-    assert entry["deal_id"] == "gsel0001" and entry["outcome"] == "offer"
+    assert entry["deal_id"] == "gsel0001" and entry["outcome"] == "apply"
     softex = {"title": "«Софтэкс» получил разрешение на покупку российской «дочки» Western Union",
               "url": "https://www.interfax.ru/business/1048850"}
     stale = card_news.sort_news(softex, "gbee0001", "тот же адрес источника", base, [], "enrich")
@@ -10313,14 +10321,19 @@ def test_card_news_weak_match_without_facts_waits_for_reading_and_reading_is_che
     problems = card_news.check_answer(bad, state, base, texts=[])
     assert any("цитаты нет" in p for p in problems[entry["id"]])
     good = [{"id": entry["id"], "outcome": "offer", "reason": "консультант покупателя",
+             "doubt": "в статье не сказано, что это та же покупка",
              "facts": [{"field": "law.adv", "value": "Альфа-Банк", "role": "Финансовый консультант покупателя",
                         "quote": "Консультантом покупателя выступил Альфа-Банк."}]}]
+    # offer без сомнения — отказ: та же сделка и факт в статье вносятся сами (apply)
+    no_doubt = [dict(good[0], doubt="")]
+    assert any("offer без сомнения" in p for p in card_news.check_answer(no_doubt, state, base, texts=[])[entry["id"]])
     assert card_news.check_answer(good, state, base, texts=[]) == {}
     card_news.apply_answer(good, state)
     got = state["card_news"][entry["id"]]
     assert got["outcome"] == "offer" and got["read_by"] == "agent"
     assert [f["field"] for f in got["facts"]] == ["law.adv", "src"]
     assert "Что увидели при чтении" in card_news.offer_message(got)
+    assert "Почему спрашиваем: в статье не сказано" in card_news.offer_message(got)
     same = [{"id": entry["id"], "outcome": "same", "reason": "пересказ той же новости"}]
     card_news.apply_answer(same, state)
     assert state["card_news"][entry["id"]]["outcome"] == "same"
@@ -10384,7 +10397,8 @@ def test_approve_applies_offer_decisions_and_answers_after_push(tmp_path, monkey
     ждет `--consume` — после push."""
     import approve, promote, card_news
     base = _cn_base()
-    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    entry = card_news.sort_news(NSP_DOUBT, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert entry["outcome"] == "offer"
     other_news = {"title": "Структуры сети фитнес-клубов DDX приобрели здание в центре Москвы",
                   "url": "https://www.kommersant.ru/doc/9008598", "date": "2026-11-05"}
     other = card_news.sort_news(other_news, "gsel0001", "совпали покупатель и предмет", base, [], "enrich")
@@ -10429,7 +10443,7 @@ def test_send_drafts_sends_an_offer_once_and_remembers_it(monkeypatch, tmp_path)
     повторяется: отметка `sent_at` у записи и память показа на сайте."""
     import send_drafts, card_news
     base = _cn_base()
-    entry = card_news.sort_news(NSP_POST, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    entry = card_news.sort_news(NSP_DOUBT, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
     state = {"decided_raw": {}, "sent_raw": [], "raw_titles": {}, "card_news": {entry["id"]: entry}}
     data = tmp_path / "deals.json"
     data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
@@ -10490,10 +10504,159 @@ def test_enrich_gives_every_unapplied_news_an_outcome(monkeypatch, tmp_path):
     enrich.main(["--write"])
     log = json.loads((tmp_path / "hold" / (day + "-enrich.json")).read_text(encoding="utf-8"))["items"]
     outcomes = {i["news"]: i["outcome"] for i in log}
-    assert outcomes == {NSP_POST["url"]: "offer", items[1]["url"]: "new_deal"}, outcomes
+    assert outcomes == {NSP_POST["url"]: "apply", items[1]["url"]: "new_deal"}, outcomes
     assert all(i["reasons"][0] for i in log)
     book = json.loads(st.read_text(encoding="utf-8"))["card_news"]
-    assert {e["outcome"] for e in book.values()} == {"offer", "new_deal"}
+    # пост NSP о той же сделке внесен сам, тем же прогоном (7 ноября 2026)
+    assert {e["outcome"] for e in book.values()} == {"decided", "new_deal"}
+    assert {e.get("decision") for e in book.values()} >= {"card_auto"}
+    card = next(d for d in json.loads(data.read_text(encoding="utf-8"))["deals"] if d["id"] == "gsel0001")
+    assert [r[1] for r in card["law"]["adv"]] == ["NSP"] and NSP_POST["url"] in card_news_urls(card)
+    # агрегатор рядом с первоисточником (ComNews) — не видимым источником
+    assert NSP_POST["url"] not in [s[1] for s in card["src"]]
+    assert NSP_POST["url"] in [s[1] for s in card["discovery_src"]]
+
+
+def card_news_urls(card):
+    import card_news
+    return card_news.card_urls(card)
+
+
+def _kosino_base():
+    """Торговый центр «Город Косино» (7 ноября 2026) и офис «Открытия» у RWB."""
+    return {
+        "companies": {"afkap": {"name": "Афкап"}, "gpbi": {"name": "Газпромбанк-инвест"},
+                      "kosino": {"name": "Город Косино"}, "rwb": {"name": "Wildberries & Russ"},
+                      "bm": {"name": "БМ-банк"}},
+        "deals": [
+            {"id": "gkos0001", "date": "2026-09-04", "title": "«Газпромбанк-инвест» продал торговый центр «Город Косино»",
+             "buyer": "afkap", "seller": "«Газпромбанк-инвест»", "seller_id": "gpbi", "target": "kosino",
+             "asset": "торговый центр «Город Косино»", "status": "Закрыта", "type": "M&A",
+             "src": [["Ведомости", "https://www.vedomosti.ru/kosino"]], "eco": {}, "law": {"adv": []}},
+            {"id": "grwb0001", "date": "2026-08-07", "title": "Wildberries и Russ (RWB) выкупили офис «Открытия» у ВТБ",
+             "buyer": "rwb", "seller": "БМ-банк (входит в ВТБ)", "seller_id": "bm",
+             "asset": "бывший офис банка «Открытие»", "status": "Закрыта", "type": "M&A",
+             "sum": "7,7–13,5 млрд ₽ (по оценке)",
+             "src": [["РБК", "https://www.rbc.ru/rwb-office"]], "eco": {}, "law": {"adv": []}},
+        ]}
+
+
+KOSINO = {"title": "Азербайджанский предприниматель выкупил торговый центр «Город Косино» в Москве. "
+                   "Сделку оценили в 10 млрд рублей",
+          "url": "https://www.tadviser.ru/a/972280", "date": "2026-10-13"}
+WB_BANK = {"title": "ВТБ перенес покупку 5% WB Банка на сентябрь ВТБ сохраняет планы по приобретению "
+                    "миноритарной доли в WB Банке и других финтех-активах объединенной компании "
+                    "Wildberries & Russ (RWB)",
+           "url": "https://t.me/dealsma/7339", "date": "2026-09-08"}
+
+
+def test_card_news_same_deal_is_applied_by_itself_and_only_doubt_goes_to_console(monkeypatch, tmp_path):
+    """Владелец, 7 ноября 2026: «Блин зачем ты это предлагаешь? Ты бы и сам по
+    ним легко понял… Тут только wb вообще не то». «Город Косино» — та же сделка
+    (название предмета в кавычках, месяц спустя): сумма с цитатой и источник
+    вносятся сами, в консоль ничего. Покупка ВТБ 5% WB Банка у карточки офиса
+    «Открытия» — стороны общие, предмета нет: это и только это — предложение.
+    Вышедший пост о «Городе Косино» правится тем механизмом, что уже есть."""
+    import send_drafts, card_news
+    sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    import send_telegram
+    base = _kosino_base()
+    sure = card_news.sort_news(KOSINO, "gkos0001", "общее название в кавычках и общие слова: 2", base, [], "enrich")
+    doubt = card_news.sort_news(WB_BANK, "grwb0001", "общие слова заголовка: 4", base, [], "enrich")
+    assert sure["outcome"] == "apply" and [f["field"] for f in sure["facts"]] == ["src", "sum"], sure
+    assert doubt["outcome"] == "offer" and "не уверены" in doubt["doubt"], doubt
+    post_state = {}
+    send_telegram.card_changes_since_post(base["deals"], {"gkos0001": 101}, {}, post_state)   # пост вышел
+    state = {"decided_raw": {}, "sent_raw": [], "raw_titles": {},
+             "card_news": {sure["id"]: sure, doubt["id"]: doubt}}
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}), encoding="utf-8")
+    monkeypatch.setattr(send_drafts, "DATA", str(data))
+    monkeypatch.setattr(send_drafts, "PENDING", str(pending))
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {})
+    monkeypatch.setattr(send_drafts, "record_shown", lambda cards=(), raw=(): None)
+    monkeypatch.setattr(send_drafts.promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(send_drafts.promote, "load_state", lambda: state)
+    monkeypatch.setattr(send_drafts.promote, "save_state", lambda s: None)
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["111"])
+    sent = []
+    monkeypatch.setattr(send_drafts, "send_one", lambda c, t, chat, text, kb, thread=None, html=False:
+                        sent.append(text) or True)
+    monkeypatch.setattr(send_drafts.time, "sleep", lambda s: None)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "x")
+    send_drafts.main(write=True)
+    assert len(sent) == 1 and sent[0].startswith("🧩 [дополнение %s]" % doubt["id"])     # только WB
+    assert "Почему спрашиваем" in sent[0] and "Город Косино" not in sent[0]
+    deals = {d["id"]: d for d in json.loads(data.read_text(encoding="utf-8"))["deals"]}
+    kos = deals["gkos0001"]
+    assert kos["sum"] == "10 млрд ₽ (по оценке)" and KOSINO["url"] in card_news.card_urls(kos)
+    rwb = {k: v for k, v in deals["grwb0001"].items() if k != "facts"}               # facts — пересчет витрины
+    assert rwb == base["deals"][1]                                                     # чужая карточка не тронута
+    got = state["card_news"][sure["id"]]
+    assert got["outcome"] == "decided" and got["decision"] == "card_auto" and got["decided_by"] == "mechanics"
+    assert state["decided_raw"][sure["id"]] == "enrich:gkos0001"
+    # пост о той же сделке правится существующим механизмом: «добавлена сумма»
+    changed = send_telegram.card_changes_since_post(list(deals.values()), {"gkos0001": 101}, {}, post_state)
+    assert any("сумма" in c for c in changed.get("gkos0001") or []), changed
+    sent.clear()
+    send_drafts.main(write=True)                                                       # второй прогон — тишина
+    assert sent == [] and json.loads(data.read_text(encoding="utf-8"))["deals"][0]["sum"] == "10 млрд ₽ (по оценке)"
+
+
+def test_card_news_sure_fact_without_its_quote_is_not_applied(tmp_path):
+    """Уверенность в сделке не заменяет цитату: факта нет дословно в тексте
+    новости — карточка не меняется вовсе (ни сумма, ни источник), новость
+    уходит на чтение агенту."""
+    import card_news
+    base = _kosino_base()
+    entry = card_news.sort_news(KOSINO, "gkos0001", "общее название в кавычках", base, [], "enrich")
+    assert entry["outcome"] == "apply"
+    for f in entry["facts"]:
+        if f["field"] == "sum":
+            f["quote"] = "Сделку оценили в 12 млрд рублей"
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    state = {"card_news": {entry["id"]: entry}}
+    out = card_news.apply_ready(state=state, pending={"cards": []}, data_path=str(data))
+    assert out and out[0][1] is None
+    assert json.loads(data.read_text(encoding="utf-8")) == base                       # база не тронута
+    got = state["card_news"][entry["id"]]
+    assert got["outcome"] == "read" and "цитаты нет" in got["reason"]
+    reads, _o, _s = card_news.queue(state)
+    assert [e["id"] for e in reads] == [entry["id"]]
+
+
+def test_card_news_agent_answer_apply_goes_into_the_card(tmp_path, monkeypatch):
+    """Шаг 13а: агент прочитал статью — та же сделка (стороны и предмет те же),
+    факт дословно в статье — ответ `apply`, вносится тем же `--apply --write`.
+    Этап сам не вносится (двигает статус и зовет пост) — только offer."""
+    import card_news, promote
+    base = _cn_base()
+    news = {"title": "Selectel рассказал о планах после покупки M1Cloud", "url": "https://www.cnews.ru/sel-plans",
+            "summary": "Команда M1Cloud останется в компании. Консультантом покупателя выступил Альфа-Банк."}
+    entry = card_news.sort_news(news, "gsel0001", "общие слова заголовка: 3", base, [], "enrich")
+    assert entry["outcome"] == "read"
+    state = {"card_news": {entry["id"]: entry}}
+    fact = {"field": "law.adv", "value": "Альфа-Банк", "role": "Финансовый консультант покупателя",
+            "quote": "Консультантом покупателя выступил Альфа-Банк."}
+    stage = [{"id": entry["id"], "outcome": "apply", "reason": "те же Selectel и M1Cloud",
+              "facts": [fact, {"field": "stage", "value": "closed", "quote": "после покупки M1Cloud"}]}]
+    assert any("само не вносится" in p for p in card_news.check_answer(stage, state, base, texts=[])[entry["id"]])
+    answer = [{"id": entry["id"], "outcome": "apply", "reason": "те же Selectel и M1Cloud", "facts": [fact]}]
+    assert card_news.check_answer(answer, state, base, texts=[]) == {}
+    card_news.apply_answer(answer, state)
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    card_news.apply_ready(state=state, pending={"cards": []}, data_path=str(data))
+    card = json.loads(data.read_text(encoding="utf-8"))["deals"][0]
+    assert [r[1] for r in card["law"]["adv"]] == ["Альфа-Банк"] and news["url"] in card_news.card_urls(card)
+    got = state["card_news"][entry["id"]]
+    assert got["outcome"] == "decided" and got["decided_by"] == "agent"
+    assert card_news.plan_offers(state, base) == []                                  # в консоль ничего
 
 
 def test_acceptance_self_check_passes():

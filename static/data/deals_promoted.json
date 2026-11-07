@@ -203197,6 +203197,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/8925383"
+    ],
+    [
+     "TAdviser",
+     "https://www.tadviser.ru/a/972280"
     ]
    ],
    "from_ingest": true,
@@ -221608,7 +221612,13 @@
    "weekly_researched": "2026-10-14",
    "target": "g88ed8fd7",
    "seller_id": "delo",
-   "accepted_hash": "f5d42e0299e2.60205e"
+   "accepted_hash": "f5d42e0299e2.60205e",
+   "discovery_src": [
+    [
+     "Телеграм-канал: Сделки M&A",
+     "https://t.me/dealsma/7458"
+    ]
+   ]
   },
   {
    "id": "ge1b2eba1",
@@ -257027,8 +257037,8 @@
    },
    "accepted": "2026-11-06",
    "accepted_hash": "d034b4d26400.181fa0",
-   "second_read": "2026-11-06",
-   "second_read_hash": "c3993c9410bd.181fa0",
+   "second_read": "2026-11-07",
+   "second_read_hash": "d034b4d26400.181fa0",
    "post_preview": "<b>Деревянный купеческий дом в Томске выставил на торги «Дом.РФ»</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Предмет:</b> деревянный купеческий дом XIX века в центре Томска — здание площадью 580,2 квадратного метра\n<b>Начальная цена лота:</b> 12,17 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261106/tomsk-2129634207.html\">РИА Недвижимость</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g5ee7977b\">карточке сделки</a>\n",
    "added": "2026-11-06",
    "post_approved": true,
@@ -257526,7 +257536,8 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
-   }
+   },
+   "post_approved": true
   },
   {
    "id": "g8b57089b",
@@ -257714,6 +257725,175 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "id": "g2883c476",
+   "date": "2026-11-06",
+   "title": "«Ориент Продактс» купил тамбовский маслозавод «Моршанский» у Максима Емельянова",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "У «Моршанского» 181 сотрудник и прибыль 102 млн ₽ за 2025 год — рост более чем в 14 раз; выручка за тот же год — 1,02 млрд ₽, на 26% больше, чем годом раньше.",
+    "fin": "—",
+    "rationale": "«Ориент Продактс» не входит ни в один открытый рейтинг и не называет других активов в своем портфеле — о планах нового владельца по заводу открытых данных нет.",
+    "context": "Остальной бизнес Емельянова в сделку не попал: за ним и партнерами в Москве сохранились доли в ООО «Альфа» (управляет недвижимостью) и ООО «Капитал» (оптовая торговля), а молочное производство в Моршанске целиком отошло новому собственнику. Емельянов и совладелец Павел Митюков с лета 2026 года судились за доступ к документам компании и порядок управления ею (Арбитражный суд Тамбовской области, дело № А64-5321/2026); в октябре стороны обсуждали мировое соглашение по этому спору, а смена владельца завода произошла почти сразу за этими переговорами.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Переход 100% долей ООО «Маслодельный завод «Моршанский»» к «Ориент Продактс» зафиксирован записью в ЕГРЮЛ от 6 ноября 2026 года.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Максим Емельянов",
+   "asset": "100% ООО «Маслодельный завод «Моршанский»»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-06",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Абирег",
+      "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ООО «Ориент Продактс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+     }
+    ],
+    "target": [
+     {
+      "value": "100% ООО «Маслодельный завод «Моршанский»»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Максим Емельянов",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.target_fin": [],
+    "eco.rationale": [
+     "3f6d19f0eea6"
+    ],
+    "eco.context": [
+     "3380b83e8cd9",
+     "a1062887fff7",
+     "a485b87bd658"
+    ],
+    "law.appr": [
+     "2985bde29ece"
+    ],
+    "law.struct": [
+     "697a7c3a236d"
+    ]
+   },
+   "reviewed": "2026-11-07",
+   "target": "g37441f46",
+   "buyer": "ga7f5f1e6",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "физлицо, профиля нет; историю участников ЕГРЮЛ цели через datanewton проверить не удалось — ОГРН ООО «Маслодельный завод «Моршанский»» (ИНН 6826006487) ни в одном найденном реестре не указан, egrul.nalog.ru/rusprofile/list-org/checko отдали 403/503 с этой машины"
+    },
+    "no_inn": {
+     "buyer": "Под именем «Ориент Продактс» в реестрах (ИНН 7826145683, ОГРН 1027810220866, Сертолово, Ленинградская область) значится действующая компания — производитель хлебцев (бренды «Круазетт», «Щедрые!»), по ряду источников входящая в скандинавский концерн Lantmannen. Ее профиль (крупный известный холдинг с публичными брендами) противоречит описанию покупателя у Абирега («ранее не фигурировала в открытых индексах и рейтингах, других активов не выявлено, стратегия не раскрывалась») — похоже на другое юрлицо с тем же названием. Egrul.nalog.ru, rusprofile.ru и kad.arbitr.ru отдали 403/503 с этой машины, прямую выписку на дату сделки получить не удалось — ИНН не привязан, пока юрлицо не подтверждено напрямую."
+    },
+    "notes": "Юрлицо «Триумф» из механической находки — не сторона сделки: упомянуто в блоке «По теме» на странице источника (отдельное уголовное дело о хищении при благоустройстве, не связано ни с «Моршанским», ни с «Ориент Продактс») — известный класс находки, известный баг (known_issues/intake.md, «Приемка ищет юрлица в блоке «По теме»…»).",
+    "searched": [
+     "WebSearch: «Ориент Продактс» ИНН 7826145683 — нашли только компанию-производителя хлебцев в Сертолово, профиль не совпал",
+     "WebSearch: «Ориент Продактс» Моршанский маслозавод — других публикаций о сделке с этим именем, кроме Абирега, не нашли",
+     "WebFetch egrul.nalog.ru — сервис отдал 503 с этой машины",
+     "WebFetch rusprofile.ru/id/1027810220866 — отдал 403 с этой машины",
+     "Отдельный агент прогнал более 10 запросов (имена сторон Емельянов/Митюков, номер дела А64-5321/2026, «смена владельца», отраслевая пресса молочного рынка DairyNews/Milknews, тамбовские издания) — независимой публикации о сделке с «Ориент Продактс», кроме Абирега, не нашлось; Коммерсантъ, РБК, ТАСС, Интерфакс о сделке не писали"
+    ]
+   },
+   "accepted": "2026-11-07",
+   "accepted_hash": "3e3192ddb74b.5d8b5e",
+   "second_read": "2026-11-07",
+   "second_read_hash": "3e3192ddb74b.5d8b5e",
+   "post_preview": "<b>«Ориент Продактс» купил тамбовский маслозавод «Моршанский» у Максима Емельянова</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Максим Емельянов\n<b>Предмет:</b> 100% ООО «Маслодельный завод «Моршанский»»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Пищепром и напитки\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/\">Абирег</a>\n\n#потребрынок #пищепром #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g2883c476\">карточке сделки</a>\n",
+   "added": "2026-11-07",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "8cf0b7ac5131"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2026-11-06",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "865a62c10090"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "4b3e47efec72"
+    },
+    "target": {
+     "company_id": "g37441f46",
+     "inn": "6826006487",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "c492e287cef6"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    }
   }
@@ -285206,6 +285386,19 @@
    "desc": "Российский бизнес Huhtamaki — два общества: ООО «Скандипакк» в Ивантеевке (до 2023 года ООО «Хухтамаки С.Н.Г.») и ООО «Скандипакк Алабуга» в Татарстане (до 2023 года ООО «Хухтамаки Алабуга»).",
    "kpi": [],
    "lot": true
+  },
+  "g37441f46": {
+   "name": "Маслодельный завод «Моршанский»",
+   "ind": "Пищепром и напитки",
+   "desc": "Производитель сыра и молочных продуктов в городе Моршанск Тамбовской области. Юрлицо — ООО Маслодельный Завод «Моршанский».",
+   "kpi": [],
+   "legal_short": "ООО «Маслодельный завод «Моршанский»»"
+  },
+  "ga7f5f1e6": {
+   "name": "Ориент Продактс",
+   "ind": "Пищепром и напитки",
+   "desc": "Петербургская компания, купившая тамбовский молочный завод «Моршанский». По открытым рейтингам и спискам активов не встречалась, точное юрлицо не подтверждено.",
+   "kpi": []
   }
  },
  "match_keys": {
