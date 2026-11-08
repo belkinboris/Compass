@@ -92,18 +92,8 @@ def undecided(state=None):
     что в `send_drafts.build_plan()` — держать в одном месте нельзя (файлы
     разных рутин), но логика обязана совпадать дословно."""
     state = state if state is not None else promote.load_state()
-    decided_ids = set(state.get('decided_raw', {}))
-    decided_titles = set(state.get('raw_titles', {}))
-    out = []
-    for d in all_raw_drafts():
-        if str(d.get('draft_id')) in decided_ids:
-            continue
-        if promote.raw_key(d.get('title')) in decided_titles:
-            continue
-        if d.get('dup_in_batch'):
-            continue
-        out.append(d)
-    return out
+    import readiness
+    return readiness.undecided_raw(all_raw_drafts(), state)
 
 
 def best_match(draft, idx):

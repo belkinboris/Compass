@@ -658,9 +658,8 @@ def doubted_count(path=PENDING, inbox=None):
         names = sorted(x for x in os.listdir(hold_dir) if x.endswith('.json'))
         state = json.load(open(os.path.join(inbox, 'moderation_state.json'), encoding='utf-8')) \
             if os.path.exists(os.path.join(inbox, 'moderation_state.json')) else {}
-        decided = set(state.get('decided_raw') or {})
         drafts = json.load(open(os.path.join(hold_dir, names[-1]), encoding='utf-8')).get('drafts') or [] if names else []
-        n += sum(1 for d in drafts if str(d.get('draft_id')) not in decided)
+        n += len(_readiness().undecided_raw(drafts, state))
     except (OSError, ValueError):
         pass
     return n
