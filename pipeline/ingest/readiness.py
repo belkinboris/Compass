@@ -318,3 +318,27 @@ def _self_check():
 
 
 _self_check()
+
+
+def raw_key(title):
+    """Ключ памяти о сырье — нормализованный заголовок (дословно как
+    `promote.raw_key`; совпадение держит test_ingest)."""
+    return re.sub(r'[^\wа-яё]+', '', str(title or ''), flags=re.I).lower()
+
+
+def undecided_raw(drafts, state):
+    """Сырье, которое действительно ждет человека: не решено ни по draft_id,
+    ни по заголовку, не дубль внутри партии. ОДНО определение для отчета
+    публикации (`ops_status.doubted_count`), кнопки «Сомнительные» и сводки
+    очереди в консоли (`app/console.py`) и `raw_screen.undecided`.
+    8 ноября 2026: отчет писал «Сомнительных: 33», а ждали решения 0 —
+    счетчик и кнопка смотрели только `decided_raw` и не видели повторов
+    одной новости, уже решенных по заголовку (`raw_titles`)."""
+    state = state or {}
+    decided_ids = set(state.get('decided_raw') or {})
+    decided_titles = set(state.get('raw_titles') or {})
+    return [d for d in drafts or []
+            if str(d.get('draft_id')) not in decided_ids
+            and raw_key(d.get('title')) not in decided_titles
+            and not d.get('dup_in_batch')]
+

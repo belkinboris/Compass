@@ -1163,7 +1163,8 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
                   .get("drafts") if names else None) or []
         answered = _answered_decisions()
-        all_items = [d for d in drafts if str(d.get("draft_id")) not in decided]
+        from pipeline.ingest import readiness
+        all_items = readiness.undecided_raw(drafts, state)
         # Нажатое, но еще не примененное решение — не повод показывать то же
         # сырье снова (28 октября 2026: «я вроде на все ответил, почему 13?»).
         items = [d for d in all_items if str(d.get("draft_id")) not in answered]
@@ -1385,7 +1386,8 @@ def _queue_report() -> str:
     drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {}).get("drafts")
               if names else None) or []
     answered = _answered_decisions()
-    drafts = [d for d in drafts if str(d.get("draft_id")) not in decided]
+    from pipeline.ingest import readiness
+    drafts = readiness.undecided_raw(drafts, state)
     already = sum(1 for d in drafts if str(d.get("draft_id")) in answered)
     drafts = [d for d in drafts if str(d.get("draft_id")) not in answered]
     if already:

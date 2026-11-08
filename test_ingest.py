@@ -10977,3 +10977,23 @@ def test_an_edited_shown_card_is_reaccepted_reread_and_shown_again(tmp_path, mon
     assert after["post_preview"] != "старый пост"
     send_drafts.main(write=True)
     assert len(sent) == 2, "второй раз не шлем"
+
+
+def test_doubted_count_skips_raw_decided_by_title_and_batch_duplicates(tmp_path):
+    """8 ноября 2026: отчет публикации писал «Сомнительных: 33», а решения ждали 0 —
+    счетчик смотрел только `decided_raw` и не видел повторов одной новости,
+    уже решенных по заголовку (`raw_titles`), и дублей внутри партии."""
+    import json, sys
+    sys.path[:0] = ['pipeline', 'pipeline/ingest']
+    import ops_status, readiness, promote
+    assert readiness.raw_key('«Циан» — 100%!') == promote.raw_key('«Циан» — 100%!')
+    inbox = tmp_path / 'inbox'; (inbox / 'hold').mkdir(parents=True)
+    drafts = [{'draft_id': 'd1', 'title': 'Новость А'},            # решена по id
+              {'draft_id': 'd2', 'title': 'Новость Б (повтор)'},   # решена по заголовку
+              {'draft_id': 'd3', 'title': 'Новость В', 'dup_in_batch': True},
+              {'draft_id': 'd4', 'title': 'Новость Г'}]            # ждет человека
+    (inbox / 'hold' / '2026-11-08.json').write_text(json.dumps({'drafts': drafts}, ensure_ascii=False))
+    state = {'decided_raw': {'d1': 'drop'}, 'raw_titles': {promote.raw_key('Новость Б (повтор)'): 'drop'}}
+    (inbox / 'moderation_state.json').write_text(json.dumps(state, ensure_ascii=False))
+    pending = tmp_path / 'pending.json'; pending.write_text('{"cards": []}')
+    assert ops_status.doubted_count(str(pending), str(inbox)) == 1
