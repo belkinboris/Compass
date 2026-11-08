@@ -43,6 +43,8 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 SOURCES = os.path.join(HERE, 'sources.json')
 INBOX = os.path.join(ROOT, 'data', 'inbox')
 RAW = os.path.join(INBOX, 'raw')
+sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+from source_names import is_undesirable  # noqa: E402
 FIXTURES = os.path.join(INBOX, 'fixtures')
 UA = 'Mozilla/5.0 (compatible; KompasBot/0.1; +https://kompas.deals)'
 TIMEOUT = 20
@@ -239,6 +241,11 @@ def main(argv):
                 continue
             for item in items:
                 if item['url'] in known:
+                    continue
+                # Нежелательные, иноагенты, экстремисты (source_names.UNDESIRABLE_HOSTS):
+                # в сырье не попадают вовсе, даже если ссылку принес агрегатор
+                # (владелец, 8 ноября 2026: «чтобы таких источников в притоках не было»).
+                if is_undesirable(item['url']):
                     continue
                 known.add(item['url'])
                 item['fetched'] = day

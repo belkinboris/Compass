@@ -472,17 +472,6 @@
    "enabled": false
   },
   {
-   "id": "web:ru.themoscowtimes.com",
-   "name": "Reuters / The Moscow Times",
-   "kind": "html",
-   "url": "https://ru.themoscowtimes.com/",
-   "feed": null,
-   "feed_checked": false,
-   "tier": 2,
-   "deals_seen": 9,
-   "enabled": false
-  },
-  {
    "id": "web:secretmag.ru",
    "name": "Secret Mag",
    "kind": "rss",
@@ -559,17 +548,6 @@
    "name": "АФК «Система»",
    "kind": "html",
    "url": "https://sistema.ru/",
-   "feed": null,
-   "feed_checked": false,
-   "tier": 2,
-   "deals_seen": 8,
-   "enabled": false
-  },
-  {
-   "id": "web:leave-russia.org",
-   "name": "Leave-Russia.org",
-   "kind": "html",
-   "url": "https://leave-russia.org/",
    "feed": null,
    "feed_checked": false,
    "tier": 2,
@@ -1053,17 +1031,6 @@
    "enabled": false
   },
   {
-   "id": "web:moscowtimes.ru",
-   "name": "The Moscow Times",
-   "kind": "html",
-   "url": "https://moscowtimes.ru/",
-   "feed": null,
-   "feed_checked": false,
-   "tier": 2,
-   "deals_seen": 4,
-   "enabled": false
-  },
-  {
    "id": "web:iidf.ru",
    "name": "ФРИИ",
    "kind": "html",
@@ -1108,17 +1075,6 @@
    "enabled": false
   },
   {
-   "id": "web:rtvi.com",
-   "name": "RTVI",
-   "kind": "html",
-   "url": "https://rtvi.com/",
-   "feed": null,
-   "feed_checked": false,
-   "tier": 2,
-   "deals_seen": 3,
-   "enabled": false
-  },
-  {
    "id": "web:x5.ru",
    "name": "X5 Group",
    "kind": "html",
@@ -1145,17 +1101,6 @@
    "name": "Фармацевтический вестник",
    "kind": "html",
    "url": "https://pharmvestnik.ru/",
-   "feed": null,
-   "feed_checked": false,
-   "tier": 2,
-   "deals_seen": 3,
-   "enabled": false
-  },
-  {
-   "id": "web:thebell.io",
-   "name": "The Bell",
-   "kind": "html",
-   "url": "https://thebell.io/",
    "feed": null,
    "feed_checked": false,
    "tier": 2,
