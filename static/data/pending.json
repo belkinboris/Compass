@@ -1,3 +1,58 @@
 {
- "cards": []
+ "cards": [
+  {
+   "id": "g9522b975",
+   "date": "2026-11-08",
+   "title": "Тюменец продает столетний Cadillac. Посмотрите на эту красоту — фото",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "72.ru",
+     "https://72.ru/text/auto/2026/11/08/76748779/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "13 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "13 млн ₽",
+   "seller": "Тюменец",
+   "asset": "столетний Cadillac. Посмотрите на эту красоту — фото",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "столетний Cadillac. Посмотрите на эту красоту — фото",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://72.ru/text/auto/2026/11/08/76748779/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Тюменец",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://72.ru/text/auto/2026/11/08/76748779/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-08T09:53:50+00:00"
+  }
+ ]
 }
