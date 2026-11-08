@@ -1794,12 +1794,34 @@ def test_no_undesirable_outlet_in_sources(deals):
     assert not bad, "ссылки на нежелательные издания: %s" % sorted(set(bad))[:8]
 
 
+def test_no_undesirable_link_anywhere_in_card(deals):
+    """Ссылка на нежелательное издание, иноагента или экстремистскую
+    организацию не живет НИГДЕ в карточке: ни в событиях, ни в подтверждениях
+    сторон (8 ноября 2026: The Moscow Times в событиях трех карточек,
+    «Верстка» в подтверждении продавца — старая проверка смотрела только `src`)."""
+    import copy
+    from pipeline.source_names import scrub_undesirable
+    bad = [d["id"] for d in deals if scrub_undesirable(copy.deepcopy(d))]
+    assert not bad, "ссылки на нежелательные издания: %s" % sorted(set(bad))[:8]
+
+
+def test_intake_registry_has_no_undesirable_source():
+    """В реестре притока нет нежелательных изданий даже выключенными:
+    выключенный источник однажды включат обратно (владелец, 8 ноября 2026)."""
+    import json
+    from pipeline.source_names import is_undesirable
+    src = json.load(open("pipeline/ingest/sources.json", encoding="utf-8"))["sources"]
+    bad = [s["id"] for s in src if any(is_undesirable(s.get(k) or "") for k in ("url", "feed"))]
+    assert not bad, "нежелательные источники в реестре притока: %s" % bad
+
+
 def test_no_undesirable_outlet_named_in_card_text(deals):
     """Издание, признанное в РФ нежелательным, не называется и в тексте
     карточки (4 ноября 2026: The Insider в «Контексте» трех карточек)."""
     import re
-    rx = re.compile(r"The Insider|Meduza|Медуза|Радио Свобода|Важные истории|Moscow Times|The Bell|Медиазона|Вёрстка|Голос Америки|Новая газета", re.I)
-    bad = [d["id"] for d in deals for v in (d.get("eco") or {}).values() if isinstance(v, str) and rx.search(v)]
+    rx = re.compile(r"The Insider|Meduza|Медуза|Радио Свобода|Важные истории|Moscow Times|The Bell|Медиазона|В[её]рстка|Голос Америки|Новая газета|RTVI|Deutsche Welle|Bellingcat|OCCRP|телеканал[а-я]* «Дожд|Эхо Москвы|Kyiv Independent|УНИАН|UNIAN", re.I)
+    texts = lambda d: [v for f in ("eco", "law") for v in (d.get(f) or {}).values()] + [d.get("title"), d.get("extra"), d.get("post_preview"), d.get("post_override")]
+    bad = [d["id"] for d in deals for v in texts(d) if isinstance(v, str) and rx.search(v)]
     assert not bad, "нежелательное издание названо в тексте: %s" % sorted(set(bad))[:8]
 
 

@@ -247,12 +247,65 @@ UNDESIRABLE_HOSTS = ('theins.ru', 'meduza.io', 'svoboda.org', 'istories.media',
                      # 7 ноября 2026, владелец: «иноагентов убираем» — и спорные, о которых
                      # 4 ноября не было уверенности: RTVI, Kyiv Independent.
                      'rtvi.com', 'kyivindependent.com', 'voanews.com', 'currenttime.tv', 'tvrain.tv',
-                     'holod.media', 'agents.media', 'proekt.media', 'sotaproject.com', 'doxa.team')
+                     'holod.media', 'agents.media', 'proekt.media', 'sotaproject.com', 'doxa.team',
+                     # 8 ноября 2026, владелец: «проверь, нет ли больше нежелательных
+                     # организаций, иноагентов, экстремистов… и чтобы в притоках не было».
+                     # Нежелательные (реестр Минюста): DW, Bellingcat, OCCRP, сайты Радио
+                     # Свобода по регионам, Белсат, B4Ukraine, HRW, Transparency, Free Russia.
+                     'dw.com', 'bellingcat.com', 'occrp.org', 'rferl.org', 'krymr.com', 'sibreal.org',
+                     'idelreal.org', 'kavkazr.com', 'severreal.org', 'factograph.info', 'belsat.eu',
+                     'vot-tak.tv', 'b4ukraine.org', 'hrw.org', 'transparency.org', 'freerussia.org',
+                     'tvrain.ru', 'istories.media',
+                     # Иноагенты-СМИ: Эхо, Собеседник, 7x7, ОВД-Инфо, The New Times, Каспаров.
+                     'echofm.online', 'sobesednik.ru', '7x7-journal.ru', 'ovd.info', 'ovdinfo.org',
+                     'newtimes.ru', 'kasparov.ru',
+                     # Экстремистские организации: ФБК, Meta (Facebook, Instagram).
+                     'fbk.info', 'navalny.com', 'facebook.com', 'instagram.com',
+                     # Украинские издания — как Kyiv Independent 7 ноября.
+                     'unian.net', 'unian.ua', 'ua.news', 'forbes.ua', 'pravda.com.ua', 'epravda.com.ua',
+                     'ukrinform.ru', 'ukrinform.ua', 'nv.ua', 'censor.net', 'liga.net', 'rbc.ua')
 
 
 def is_undesirable(url):
     host = host_of(url)
     return any(host == h or host.endswith('.' + h) for h in UNDESIRABLE_HOSTS)
+
+
+def scrub_undesirable(card):
+    """Ссылки на издания из UNDESIRABLE_HOSTS — вон из ВСЕЙ карточки, а не
+    только из `src`: события (`events[].source/sources`), подтверждения сторон
+    (`party_evidence`), чтения фактов. 8 ноября 2026 так нашлись The Moscow
+    Times в событиях трех карточек и «Верстка» в подтверждении продавца.
+    Возвращает число снятых ссылок."""
+    removed = [0]
+
+    def bad(v):
+        if isinstance(v, str):
+            return v.startswith('http') and is_undesirable(v)
+        if isinstance(v, list) and len(v) > 1 and isinstance(v[1], str):
+            return v[1].startswith('http') and is_undesirable(v[1])
+        if isinstance(v, dict):
+            # Подтверждение стороны ({value, url}) держится на ссылке — снимается
+            # целиком; событие с `source` остается, снимается только ссылка.
+            u = v.get('url')
+            return isinstance(u, str) and u.startswith('http') and is_undesirable(u)
+        return False
+
+    def walk(o):
+        if isinstance(o, dict):
+            for k in list(o):
+                if bad(o[k]) and not isinstance(o[k], dict):
+                    del o[k]; removed[0] += 1
+                else:
+                    walk(o[k])
+        elif isinstance(o, list):
+            keep = [x for x in o if not bad(x)]
+            removed[0] += len(o) - len(keep)
+            o[:] = keep
+            for x in o:
+                walk(x)
+    walk(card)
+    return removed[0]
 
 
 def has_source(card, url):
@@ -268,7 +321,7 @@ def _http_sources(items):
 def settle_sources(card):
     """Агрегаторы из `src` — в `discovery_src`, если в `src` есть настоящий
     источник. Возвращает True, если карточка изменилась. Идемпотентно."""
-    changed = False
+    changed = bool(scrub_undesirable(card))
     for field in ('src', 'discovery_src'):
         kept = [s for s in (card.get(field) or []) if not (isinstance(s, list) and len(s) > 1 and is_undesirable(s[1]))]
         if len(kept) != len(card.get(field) or []):
