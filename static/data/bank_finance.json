@@ -233,6 +233,42 @@
     "net_profit_rub": 47550140000,
     "regnum": 2209
   },
+  "g889de071": {
+    "as_of_balance": "2026-07-01",
+    "as_of_profit": "2026-10-01",
+    "assets_rub": 53478196000,
+    "assets_rub_prior_year": 52173998000,
+    "derived": {
+      "metrics": [
+        {
+          "group": "Капитал",
+          "how": "собственные средства к активам",
+          "key": "equity_to_assets",
+          "kind": "percent",
+          "label": "Собственные средства к активам",
+          "primary": true,
+          "value": 20.9
+        },
+        {
+          "group": "Капитал",
+          "how": "прибыль с начала года ÷ собственные средства",
+          "key": "return_on_equity",
+          "kind": "percent",
+          "label": "Рентабельность капитала за 9 мес. 2026",
+          "primary": true,
+          "value": 15.5
+        }
+      ],
+      "notes": [
+        "Прибыль за 9 мес. 2026 года, без пересчета на год."
+      ]
+    },
+    "equity_rub": 11169734000,
+    "equity_rub_prior_year": 10032236000,
+    "legal_name": "Коммерческий банк «Москоммерцбанк» (акционерное общество)",
+    "net_profit_rub": 1733830000,
+    "regnum": 3365
+  },
   "g8bafde28": {
     "as_of_balance": "2026-07-01",
     "as_of_profit": "2026-10-01",
@@ -484,15 +520,6 @@
     "legal_name": "Банк ВТБ (публичное акционерное общество)",
     "net_profit_rub": 412895277000,
     "regnum": 1000
-  },
-  "gd5d02d09": {
-    "as_of_profit": "2024-01-01",
-    "derived": {
-      "metrics": [],
-      "notes": []
-    },
-    "net_profit_rub": 9880788000,
-    "regnum": 2241
   },
   "gdc4235da": {
     "as_of_profit": "2026-10-01",
