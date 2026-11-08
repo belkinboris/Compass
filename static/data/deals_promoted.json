@@ -295160,7 +295160,8 @@
   "gfd435463": 263,
   "g2883c476": null,
   "g8e5cc555": null,
-  "ge659eeb6": null
+  "ge659eeb6": null,
+  "gde69fa27": 264
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -295720,7 +295721,8 @@
   "g75283fd4": 63,
   "g5ee7977b": 64,
   "g8b57089b": 65,
-  "gfd435463": 66
+  "gfd435463": 66,
+  "gde69fa27": 67
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -300891,7 +300893,27 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "gde69fa27": {
+   "sum": "2–2,4 млрд ₽ (по оценке)",
+   "buyer": "gd4473050",
+   "seller": "Девелопер Forma",
+   "asset": "4 тыс. кв. м в бизнес-центре «Порта» на Большой Филевской улице",
+   "status": "Закрыта",
+   "title": "VVP Group купил у девелопера Forma офис в бизнес-центре «Порта»",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-07T12:45:20+00:00"
+ "telegram_last_post_at": "2026-11-08T15:24:14+00:00"
 }
