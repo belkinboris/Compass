@@ -258820,6 +258820,170 @@
      "multiple_text": "not_control_change"
     }
    }
+  },
+  {
+   "id": "gde69fa27",
+   "date": "2026-11-08",
+   "title": "VVP Group купил у девелопера Forma офис в бизнес-центре «Порта»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9092156"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2–2,4 млрд ₽ (по оценке)",
+    "share": "—",
+    "val": "Ни покупатель, ни продавец сумму сделки не подтвердили — цена известна только по оценкам сторонних экспертов. Руководитель офисного департамента «Инвест7» Ксения Харкевич оценивает стоимость покупки в 2–2,2 млрд рублей. Партнер CMWP Дмитрий Венчковский называет более высокую цифру — 2,4 млрд рублей.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Директор по продажам офисной недвижимости Nikoliers Андрей Кухар считает, что покупку могла подтолкнуть скидка 10–15% на оставшиеся площади «Порты».",
+    "context": "Девелопер Forma работает в составе группы компаний ПИК. Бизнес-центр «Порта» к моменту сделки был в основном распродан: часть площадей уже нашла покупателей, а на оставшиеся девелопер дает скидку 10–15% к обычной цене. Штаб-квартира VVP Group сейчас находится в Химках; в «Порту» компания планирует ее перенести.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2–2,4 млрд ₽ (по оценке)",
+   "asset": "4 тыс. кв. м в бизнес-центре «Порта» на Большой Филевской улице",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-08",
+     "title": "Сделка завершена",
+     "note": "VVP Group закрыла покупку офисного блока у Forma: 4 тыс. кв. м в «Порте», цена — по оценкам экспертов рынка, стороны ее не подтвердили.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9092156"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Дистрибутор VVP Group",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9092156"
+     }
+    ],
+    "target": [
+     {
+      "value": "4 тыс. кв. м в бизнес-центре «Порта» на Большой Филевской улице",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/9092156"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Девелопер Forma",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/9092156"
+     }
+    ]
+   },
+   "seller": "Девелопер Forma",
+   "proofread_absorbed": {
+    "eco.context": [
+     "2fa0115e7877"
+    ],
+    "eco.rationale": [
+     "d65ca3f9444b"
+    ],
+    "eco.val": []
+   },
+   "reviewed": "2026-11-08",
+   "buyer": "gd4473050",
+   "seller_id": "g437baf41",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет — офисные площади в БЦ «Порта» (имущество, не юрлицо) — профиль компании не заводится."
+    },
+    "no_inn": {
+     "buyer": "ИНН VVP Group в источнике не назван; юрлицо ООО «Центр Дистрибьюции» (Химки) найдено через EMIS, точный ИНН/ОГРН не добыт — rusprofile и checko отдают 403, карточки EMIS/tapki.com с номерами реестра закрыты подпиской/недоступны (503).",
+     "seller": "ИНН девелопера Forma в источнике не назван; принадлежность группе ПИК подтверждена независимо (novostroy-m.ru и объявления о БЦ «Порта»), но юрлицо Forma через rusprofile/checko (403) и реестр не нашли."
+    },
+    "notes": "Повторная приемка после второго чтения: переписаны eco.rationale (ссылка «эта скидка» на еще не показанное поле) и eco.context (последняя фраза была самопротиворечивой — переезд штаб-квартиры пока не состоялся, а не произошел и планируется одновременно).",
+    "searched": [
+     "WebFetch kommersant.ru (основная статья) — прочитана целиком",
+     "WebSearch: VVP Group офис Порта Москва-Сити 2026 — других изданий с этой новостью не нашли (эксклюзив Ъ от 08.11.2026, три анонимных источника рынка недвижимости)",
+     "WebSearch: VVP Group ИНН ОГРН Химки — нашли юрлицо ООО «Центр Дистрибьюции» через EMIS, точный номер реестра не добыт (rusprofile/checko 403)",
+     "WebSearch: Forma девелопер ПИК БЦ Порта Большая Филевская — принадлежность группе ПИК подтверждена независимо (novostroy-m.ru)",
+     "WebSearch: cre.ru VVP Group Порта покупка офис — профильное издание о коммерческой недвижимости новость не нашло",
+     "WebSearch: «Электроника осваивается в Порте» Коммерсантъ — материал, на который ссылается статья, отдельно не найден",
+     "WebSearch: VVP Group штаб-квартира Химки переезд Москва — переезд штаб-квартиры из Химок подтвержден только самой статьей Ъ, независимо не нашли"
+    ]
+   },
+   "accepted": "2026-11-08",
+   "accepted_hash": "34db63f1a9af.69ada9",
+   "second_read": "2026-11-08",
+   "second_read_hash": "34db63f1a9af.69ada9",
+   "post_preview": "<b>VVP Group купил у девелопера Forma офис в бизнес-центре «Порта»</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Forma\n<b>Предмет:</b> 4 тыс. кв. м в бизнес-центре «Порта» на Большой Филевской улице\n<b>Сумма:</b> 2–2,4 млрд ₽ (по оценке)\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9092156\">Коммерсантъ</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gde69fa27\">карточке сделки</a>\n",
+   "added": "2026-11-08",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c76ee1194a17"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "range",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "cc5c35487b7c"
+    },
+    "date": {
+     "value": "2026-11-08",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b04fa8f28662"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ff199776da77"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
