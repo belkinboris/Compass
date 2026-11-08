@@ -1031,13 +1031,41 @@
    ]
   },
   {
-   "draft_id": "d12090694",
-   "title": "❓Мирный трек: покупать или продавать? Часть 2",
+   "draft_id": "d64555348",
+   "title": "В метро Петербурга 9 ноября начнут продавать новый «Подорожник» с хоккеистами",
    "date": "2026-11-08",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1371949.php"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/08/v-metro-peterburga-9-nojabrja"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17202735",
+   "title": "Почти 85 миллионов: в Новосибирске продают квартиру с окнами на Михайловскую набережную",
+   "date": "2026-11-08",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/realty/2026/11/08/76751933/"
     ]
    ],
    "sum": null,
