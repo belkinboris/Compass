@@ -11024,3 +11024,17 @@ def test_sweep_settles_rebase_conflict_in_hold_files(tmp_path, monkeypatch):
     assert sweep.settle_rebase()
     assert (me / 'data/inbox/hold/d.json').read_text() == '{"drafts": [1]}\n'
     assert not sweep.rebasing()
+
+
+def test_title_style_catches_animate_noun_after_numeral():
+    """Владелец, 9 ноября 2026: «ГК „ССК“ купила два застройщика» — нужно
+    «двух застройщиков». Заводы и бизнес-центры неодушевленные — их не трогаем."""
+    import sys
+    sys.path.insert(0, 'pipeline/ingest')
+    import title_style
+    bad = lambda t: any('одушевленные' in f for f in title_style.title_style_findings(t, {}, 'Закрыта'))
+    assert bad('ГК «ССК» купила два застройщика группы «Носта»')
+    assert bad('Фонд купил три региональных оператора связи')
+    assert not bad('ГК «ССК» купила двух застройщиков группы «Носта»')
+    assert not bad('Холдинг «Адамант» купил два стекольных завода AGC в России')
+    assert not bad('Softline приобрел три компании-разработчика бизнес-приложений')
