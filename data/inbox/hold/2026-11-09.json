@@ -1145,6 +1145,141 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g30db3641 (общие редкие слова: миллио, почти, рублей) — проверьте, не дубль ли"
    ]
+  },
+  {
+   "draft_id": "d54644086",
+   "title": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»)",
+   "date": "2022-07-08",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=3"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с…",
+     "source": [
+      "tg:kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=3"
+     ]
+    }
+   ],
+   "buyer_name": "«Интеррос»",
+   "asset": null,
+   "seller": "Global Payments процессинговую компанию UCS (АО «Компания объ",
+   "parsed_parties": {
+    "buyer": "«Интеррос»",
+    "asset": null,
+    "seller": "Global Payments процессинговую компанию UCS (АО «Компания объ"
+   },
+   "ind": "Холдинги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-2 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d93807669",
+   "title": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
+   "date": "2022-10-27",
+   "src": [
+    [
+     "tg:alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/329"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-10-27",
+     "title": "Сделка завершена",
+     "note": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca). ALUMNI Partners консультирует The GBFoods в связи с продажей её бизнеса в России Команда ALUMNI Partners успешно завершила юридическое сопровождение The GBFoods S.A. в сделке по…",
+     "source": [
+      "tg:alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/329"
+     ]
+    }
+   ],
+   "buyer_name": "HYSG Group («Доширак»)",
+   "asset": null,
+   "seller": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
+   "parsed_parties": {
+    "buyer": "HYSG Group («Доширак»)",
+    "asset": null,
+    "seller": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81970774",
+   "title": "Evermount Capital Group покупает у NK Group строящийся склад в «NK Домодедово-1»",
+   "date": "2025-10-06",
+   "src": [
+    [
+     "tg:alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2230"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Evermount Capital Group",
+   "asset": null,
+   "seller": "NK Group строящийся склад в «NK Домодедово-1»",
+   "parsed_parties": {
+    "buyer": "Evermount Capital Group",
+    "asset": null,
+    "seller": "NK Group строящийся склад в «NK Домодедово-1»"
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92523887",
+   "title": "Radius Group и частный инвестор создали СП для индустриального парка «Северные врата»",
+   "date": "2025-10-07",
+   "src": [
+    [
+     "tg:alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2232"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }

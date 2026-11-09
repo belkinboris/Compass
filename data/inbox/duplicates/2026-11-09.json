@@ -73,6 +73,121 @@
     "needs_review": true
    },
    "queued": "2026-11-09"
+  },
+  {
+   "key": "https://t.me/kkmpconnect/404::gb9fdfce4",
+   "candidate_id": "gb9fdfce4",
+   "reason": "по всей базе: совпали две стороны (asset, seller)",
+   "draft": {
+    "draft_id": "d95485871",
+    "title": "АФК «Система» покупает 47,7% Melon Fashion Group у Eastnine и East Capital за 15,8 млрд рублей",
+    "date": "2022-10-19",
+    "src": [
+     [
+      "tg:kkmpconnect",
+      "https://t.me/kkmpconnect/404"
+     ]
+    ],
+    "sum": "15,8 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "АФК «Система»",
+    "asset": "Melon Fashion Group",
+    "seller": "Eastnine и East Capital",
+    "parsed_parties": {
+     "buyer": "АФК «Система»",
+     "asset": "Melon Fashion Group",
+     "seller": "Eastnine и East Capital"
+    },
+    "ind": "Ритейл",
+    "needs_review": true
+   },
+   "queued": "2026-11-09"
+  },
+  {
+   "key": "https://t.me/alumnipartnerslawfirm/128::ge361bfa8",
+   "candidate_id": "ge361bfa8",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d31980313",
+    "title": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate)",
+    "date": "2022-07-04",
+    "src": [
+     [
+      "tg:alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/128"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2022-07-04",
+      "title": "Сделка завершена",
+      "note": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate). ALUMNI Partners консультирует Jones Lang LaSalle в связи с продажей ее российского бизнеса Команда ALUMNI Partners успешно завершила юридическое сопровождение интересов Jones…",
+      "source": [
+       "tg:alumnipartnerslawfirm",
+       "https://t.me/alumnipartnerslawfirm/128"
+      ]
+     }
+    ],
+    "buyer_name": "(IBC Real Estate)",
+    "asset": "российский бизнес",
+    "seller": "Jones Lang LaSalle",
+    "parsed_parties": {
+     "buyer": "(IBC Real Estate)",
+     "asset": "российский бизнес",
+     "seller": "Jones Lang LaSalle"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-09"
+  },
+  {
+   "key": "https://t.me/BIRCHLEGAL/834::g1f402dc5",
+   "candidate_id": "g1f402dc5",
+   "reason": "общие редкие слова: россий, руково",
+   "draft": {
+    "draft_id": "d07409264",
+    "title": "Mantsinen Group продала российскую «дочку» компании ее руководителя",
+    "date": "2024-03-01",
+    "src": [
+     [
+      "tg:BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/834"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2024-03-01",
+      "title": "Сделка завершена",
+      "note": "Mantsinen Group продала российскую «дочку» компании ее руководителя. ⚡️ Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже дочернего общества Mantsinen Group российскому менеджменту. ❗️ Mantsinen Group – крупнейшая европейская…",
+      "source": [
+       "tg:BIRCHLEGAL",
+       "https://t.me/BIRCHLEGAL/834"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "российская «дочка» компании ее руководителя",
+    "seller": "Mantsinen Group",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "российская «дочка» компании ее руководителя",
+     "seller": "Mantsinen Group"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-09"
   }
  ]
 }

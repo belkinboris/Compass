@@ -547,6 +547,1030 @@
     ]
    },
    "pending_since": "2026-11-09T13:02:04+00:00"
+  },
+  {
+   "id": "g0d873779",
+   "date": "2022-07-08",
+   "title": "Wandle Holdings продала 29,99% акций «Полюса» (2022)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=1"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Wandle Holdings",
+   "asset": "29,99% акций «Полюса» (2022)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "Wandle Holdings продала 29,99% акций «Полюса» (2022). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с момента создания фирмы юристы ККМП сопровождали ряд…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=1"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "29,99% акций «Полюса» (2022)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=1"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Wandle Holdings",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=1"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g148fae22",
+   "date": "2022-07-08",
+   "title": "«Интеррос» купил 35% TCS Group Holding (Тинькофф)",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=2"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "TCS Group Holding (Тинькофф)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "«Интеррос» купил 35% TCS Group Holding (Тинькофф). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с момента создания фирмы юристы ККМП сопровождали ряд крупнейших…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=2"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Интеррос»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=2"
+     }
+    ],
+    "target": [
+     {
+      "value": "TCS Group Holding (Тинькофф)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=2"
+     }
+    ]
+   },
+   "buyer": "g088e8f9f",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gcc6afd66",
+   "date": "2023-12-30",
+   "title": "Sitronics Group продала группе ВТБ 28% Emperium (производитель электросудов)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/1384"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Sitronics Group",
+   "asset": "группе ВТБ 28% Emperium (производитель электросудов)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-12-30",
+     "title": "Сделка завершена",
+     "note": "Sitronics Group продала группе ВТБ 28% Emperium (производитель электросудов). Команда юристов ККМП представляла интересы Sitronics Group в сделке по продаже 28% долей в компании Emperium, управляющей производством электросудов, в пользу Группы ВТБ. Emperium –…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/1384"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "группе ВТБ 28% Emperium (производитель электросудов)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/1384"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Sitronics Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/1384"
+     }
+    ]
+   },
+   "seller_id": "g0d41f06b",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gacef0a9d",
+   "date": "2022-10-31",
+   "title": "«Черкизово» купило СГЦ «Вишневский» в Оренбургской области",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/333"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "СГЦ «Вишневский» в Оренбургской области",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-10-31",
+     "title": "Сделка завершена",
+     "note": "«Черкизово» купило СГЦ «Вишневский» в Оренбургской области. ALUMNI Partners консультирует Группу «Черкизово» в связи с приобретением селекционно-генетического центра «Вишневский» в Оренбургской области Команда ALUMNI Partners успешно завершила юридическое…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/333"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Черкизово»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/333"
+     }
+    ],
+    "target": [
+     {
+      "value": "СГЦ «Вишневский» в Оренбургской области",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/333"
+     }
+    ]
+   },
+   "buyer": "gd3bb09b3",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g69b41d86",
+   "date": "2022-12-22",
+   "title": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/422"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Хайв» (ВымпелКом)",
+   "asset": "миноритарная доля в стартапе Knomary",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-12-22",
+     "title": "Сделка завершена",
+     "note": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary. ALUMNI Partners консультирует Хайв / ВымпелКом в связи с покупкой доли в Knomary Команда ALUMNI Partners оказала полную правовую поддержку ООО «Хайв», дочерней компании ПАО «Вымпелком» (бренд…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/422"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Хайв» (ВымпелКом)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ],
+    "target": [
+     {
+      "value": "миноритарная доля в стартапе Knomary",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g5e31a7f2",
+   "date": "2023-08-07",
+   "title": "Структура «Интерроса» купила 20% группы «Рексофт»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/731?deal=2"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Интерроса»",
+   "asset": "«Рексофт»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-08-07",
+     "title": "Сделка завершена",
+     "note": "Структура «Интерроса» купила 20% группы «Рексофт». ALUMNI Partners консультировала группу РЕКСОФТ в рамках приобретения бизнеса RNT Group Команда ALUMNI Partners успешно завершила консультирование российской IT-группы «Рексофт», закрывшей сделку по…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Интерроса»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Рексофт»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     }
+    ]
+   },
+   "target": "g93d5a796",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g1c8087ad",
+   "date": "2023-08-18",
+   "title": "X5 Group купила «Виктория Балтия» (магазины «Виктория»)",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/746"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "«Виктория Балтия» (магазины «Виктория»)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-08-18",
+     "title": "Сделка завершена",
+     "note": "X5 Group купила «Виктория Балтия» (магазины «Виктория»). ALUMNI Partners оказала юридическую поддержку X5 Group в проекте по приобретению сети магазинов «Виктория Балтия» Команда ALUMNI Partners выступила юридическим консультантом X5 Group в рамках сделки по…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/746"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "X5 Group",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/746"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Виктория Балтия» (магазины «Виктория»)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/746"
+     }
+    ]
+   },
+   "buyer": "gddadfff8",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g0a1f1895",
+   "date": "2024-05-27",
+   "title": "Структура «ГЕМ Инвест» купила ООО «Моди» (сеть Modi)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/1175"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "ООО «Моди» (сеть Modi)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-05-27",
+     "title": "Сделка завершена",
+     "note": "Структура «ГЕМ Инвест» купила ООО «Моди» (сеть Modi). ALUMNI Partners консультировала клиента в сделке по приобретению сети магазинов Modi 💼 Команда ALUMNI Partners выступила юридическим консультантом структуры инвестиционной компании «ГЕМ Инвест» в рамках…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/1175"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«ГЕМ Инвест»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1175"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «Моди» (сеть Modi)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1175"
+     }
+    ]
+   },
+   "buyer": "g0e89d473",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "ge31110bc",
+   "date": "2025-04-17",
+   "title": "ВымпелКом купил 44% ООО «Вока-Тек»",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/1936"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "ООО «Вока-Тек»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-04-17",
+     "title": "Сделка завершена",
+     "note": "ВымпелКом купил 44% ООО «Вока-Тек». ALUMNI Partners сопровождала ВымпелКом в сделке по приобретению доли в Voca-Tech 🤝 ALUMNI Partners выступила юридическим консультантом ПАО «ВымпелКом» в сделке по приобретению 44% долей в уставном капитале ООО «Вока-Тек»…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/1936"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ВымпелКом",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1936"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «Вока-Тек»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1936"
+     }
+    ]
+   },
+   "buyer": "gd685b926",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gb7b2da31",
+   "date": "2025-11-24",
+   "title": "Фонд Pre-IPO 1 (ВИМ Инвестиции) продал пакет GetCourse",
+   "ind": "Не определена",
+   "type": "IPO",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2309"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Pre-IPO 1 (ВИМ Инвестиции)",
+   "asset": "пакет GetCourse",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-11-24",
+     "title": "Сделка завершена",
+     "note": "Фонд Pre-IPO 1 (ВИМ Инвестиции) продал пакет GetCourse. ALUMNI Partners сопровождала выход Фонда Pre-IPO 1 из капитала GetCourse 🎓 Команда ALUMNI Partners выступила юридическим консультантом на стороне покупателя в рамках сделки по приобретению пакета в…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/2309"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "IPO / SPO"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "пакет GetCourse",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2309"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Pre-IPO 1 (ВИМ Инвестиции)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2309"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g5db4bcc2",
+   "date": "2025-12-08",
+   "title": "Accent Capital продала ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза» за 6,7 млрд рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2334"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "6,7 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "6,7 млрд ₽",
+   "seller": "Accent Capital",
+   "asset": "ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-12-08",
+     "title": "Сделка завершена",
+     "note": "Accent Capital продала ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза» за 6,7 млрд рублей. ALUMNI Partners сопровождала Accent Capital в сделке по продаже БЦ Дельта Плаза 💼 ALUMNI Partners выступила юридическим консультантом Accent Capital в сделке по продаже 100%…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/2334"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2334"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Accent Capital",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2334"
+     }
+    ]
+   },
+   "seller_id": "g985fe66e",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g82d2175e",
+   "date": "2022-12-06",
+   "title": "«Медскан» купил российский бизнес сети клиник Medical On Group",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/318"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "российский бизнес сети клиник Medical On Group",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-12-06",
+     "title": "Сделка завершена",
+     "note": "«Медскан» купил российский бизнес сети клиник Medical On Group. 📢 Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже российского бизнеса Medical On Group, сети многофункциональных клиник, холдингу «Медскан» . 🩺 Medical On Group…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/318"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Медскан»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/318"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский бизнес сети клиник Medical On Group",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/318"
+     }
+    ]
+   },
+   "buyer": "g729ef6c5",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g627ecd3f",
+   "date": "2024-07-25",
+   "title": "«Евразия-Логистика» купила Таганрогский зерновой терминал",
+   "ind": "Агро",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1050"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Евразия-Логистика»",
+   "asset": "Таганрогский зерновой терминал",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-07-25",
+     "title": "Сделка завершена",
+     "note": "«Евразия-Логистика» купила Таганрогский зерновой терминал. 💠 NEWS. Корпоративная практика и M&A Команда BIRCH LEGAL оказала комплексное юридическое сопровождение сделки по приобретению Таганрогского зернового терминала логистической компанией…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/1050"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Евразия-Логистика»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1050"
+     }
+    ],
+    "target": [
+     {
+      "value": "Таганрогский зерновой терминал",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1050"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gde2618e8",
+   "date": "2024-10-08",
+   "title": "Purmo Group продала две российские «дочки» (радиаторы) российской инвесткомпании",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1159"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Purmo Group",
+   "asset": "две российские «дочки» (радиаторы) российской инвесткомпании",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-10-08",
+     "title": "Сделка завершена",
+     "note": "Purmo Group продала две российские «дочки» (радиаторы) российской инвесткомпании. 💠 NEWS. Корпоративная практика и M&A Команда BIRCH LEGAL оказала комплексное юридическое сопровождение сделки по продаже двух дочерних компаний Purmo Group, занимающихся…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/1159"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "две российские «дочки» (радиаторы) российской инвесткомпании",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1159"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Purmo Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1159"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gba225690",
+   "date": "2025-01-30",
+   "title": "РБК вошел в капитал платформы мобильной видеорекламы Hyper",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1358"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "РБК",
+   "asset": "платформы мобильной видеорекламы Hyper",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "РБК",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1358"
+     }
+    ],
+    "target": [
+     {
+      "value": "платформы мобильной видеорекламы Hyper",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1358"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g6fe89f91",
+   "date": "2024-09-30",
+   "title": "«Севергрупп инвестиции» купила 19,91% «Автостэлс»",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @whitesquarenews",
+     "https://t.me/whitesquarenews/153"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Севергрупп инвестиции»",
+   "asset": "«Автостэлс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-09-30",
+     "title": "Сделка завершена",
+     "note": "«Севергрупп инвестиции» купила 19,91% «Автостэлс». White Square консультирует «Автостэлс» в сделке по приобретению «Севергрупп инвестиции» 19,91% компании Команда White Square выступила юридическим консультантом «Автостэлс», ведущей платформы по торговле…",
+     "source": [
+      "Телеграм-канал @whitesquarenews",
+      "https://t.me/whitesquarenews/153"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Севергрупп инвестиции»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Автостэлс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
   }
  ]
 }
