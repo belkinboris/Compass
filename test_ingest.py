@@ -10997,3 +10997,30 @@ def test_doubted_count_skips_raw_decided_by_title_and_batch_duplicates(tmp_path)
     (inbox / 'moderation_state.json').write_text(json.dumps(state, ensure_ascii=False))
     pending = tmp_path / 'pending.json'; pending.write_text('{"cards": []}')
     assert ops_status.doubted_count(str(pending), str(inbox)) == 1
+
+
+def test_sweep_settles_rebase_conflict_in_hold_files(tmp_path, monkeypatch):
+    """9 ноября 2026: приток и забор одновременно записали hold/<день>.json,
+    ребейз забора встал на конфликте и оставил файл с маркерами. Конфликт в
+    служебных файлах сырья решается версией из main, ребейз доводится."""
+    import subprocess, sys
+    sys.path.insert(0, 'pipeline/ingest')
+    import sweep
+
+    def g(*a, cwd):
+        return subprocess.run(['git', *a], cwd=cwd, capture_output=True, text=True, check=False)
+    up, me = tmp_path / 'up', tmp_path / 'me'
+    up.mkdir(); g('init', '-q', '-b', 'main', cwd=up)
+    g('config', 'user.email', 't@t', cwd=up); g('config', 'user.name', 't', cwd=up)
+    (up / 'data/inbox/hold').mkdir(parents=True)
+    f = up / 'data/inbox/hold/d.json'
+    f.write_text('{"drafts": []}\n'); g('add', '.', cwd=up); g('commit', '-qm', 'base', cwd=up)
+    g('clone', '-q', str(up), str(me), cwd=tmp_path)
+    g('config', 'user.email', 't@t', cwd=me); g('config', 'user.name', 't', cwd=me)
+    f.write_text('{"drafts": [1]}\n'); g('commit', '-qam', 'upstream', cwd=up)
+    (me / 'data/inbox/hold/d.json').write_text('{"drafts": [2]}\n'); g('commit', '-qam', 'mine', cwd=me)
+    assert g('pull', '--rebase', 'origin', 'main', cwd=me).returncode
+    monkeypatch.setattr(sweep, 'ROOT', str(me))
+    assert sweep.settle_rebase()
+    assert (me / 'data/inbox/hold/d.json').read_text() == '{"drafts": [1]}\n'
+    assert not sweep.rebasing()

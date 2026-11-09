@@ -257468,11 +257468,19 @@
     [
      "Известия",
      "https://iz.ru/2197343/t-tekhnologii-anonsirovali-plany-kupit-tcian-izi"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/articles/2026/11/09/1243517-t-tehnologii-gotovi-priobresti-tsian"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/248262/2026-11-09/2026-w46/1007/u-banka-poyavitsya-kvartira-t-tekhnologii-sobiraetsya-kupit-cian"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "77,1 млрд ₽",
     "share": "100% акций МКПАО «Циан» — таков потолок предложения; минимум для принятия — 50% размещенных обыкновенных акций.",
     "val": "Цена предложения на 29,3% выше цены закрытия торгов 5 ноября 2026 года.",
     "target_fin": "За первое полугодие 2026 года выручка «Циана» выросла на 20,5%, до 8,32 млрд ₽, а чистая прибыль по МСФО — вдвое, с 1,007 до 2,045 млрд ₽.",
@@ -257559,6 +257567,16 @@
        "https://iz.ru/2197343/t-tekhnologii-anonsirovali-plany-kupit-tcian-izi"
       ]
      ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-11-09",
+     "title": "Переговоры",
+     "note": "«Т-технологии» намерены выкупить до 100% акций онлайн-платформы для операций с недвижимостью «Циан» по 993,05 руб. за бумагу, сообщила группа. Это на 29,3% выше цены закрытия основной торговой сессии на Мосбирже 5 ноября 2026 г. Всю компанию холдинг таким…",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/investments/articles/2026/11/09/1243517-t-tehnologii-gotovi-priobresti-tsian"
+     ]
     }
    ],
    "party_evidence": {
@@ -257628,17 +257646,17 @@
      "card_hash": "1d16360ff286"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 77100000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "92725277de89"
+     "basis": "rule",
+     "card_hash": "67357c5c6974"
     },
     "date": {
      "value": "2026-11-06",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "a67400e1a17f"
+     "card_hash": "e706a4c03a2d"
     },
     "nature": {
      "control_change": true,
@@ -257670,12 +257688,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
     }
    },
-   "seller": "Акционеры «Циана»"
+   "seller": "Акционеры «Циана»",
+   "sum": "77,1 млрд ₽"
   },
   {
    "id": "g75283fd4",

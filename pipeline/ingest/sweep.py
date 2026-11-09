@@ -59,13 +59,51 @@ def commit_and_push(message):
         return 0
     git('commit', '-q', '-m', message)
     for i in range(4):
-        git('pull', '--rebase', '--autostash', 'origin', 'main')
+        if git('pull', '--rebase', '--autostash', 'origin', 'main').returncode and rebasing() \
+                and not settle_rebase():
+            print('git pull: конфликт не в служебных файлах сырья — ребейз отменен, '
+                  'очередь останется локальной до следующего забора.')
+            return 1
         if git('push', '-u', 'origin', 'main').returncode == 0:
             print('Запушено.')
             return 0
         time.sleep(2 ** (i + 1))
     print('push не прошел после четырех попыток — очередь останется локальной до следующего забора.')
     return 1
+
+
+def rebasing():
+    """Ребейз еще идет (REBASE_HEAD для этого не годится: он остается и после конца)."""
+    return any(os.path.exists(os.path.join(ROOT, git('rev-parse', '--git-path', d).stdout.strip()))
+               for d in ('rebase-merge', 'rebase-apply'))
+
+
+def settle_rebase():
+    """Ребейз остановился на конфликте. 9 ноября 2026: приток и забор в одну
+    минуту записали `data/inbox/hold/<день>.json`, ребейз встал посреди файла
+    с маркерами конфликта, и следующий забор упал на чтении JSON. Файлы
+    сырья (`hold/`) каждый прогон собирает заново — берем версию из main и
+    продолжаем. Конфликт в чем-то другом — ребейз отменяется, ничего не
+    теряется. Возвращает True, если ребейз довели до конца."""
+    while True:
+        files = [f for f in git('diff', '--name-only', '--diff-filter=U').stdout.split() if f]
+        if not files:
+            if rebasing():
+                git('rebase', '--abort')
+                return False
+            return True
+        if not all(f.startswith('data/inbox/hold/') for f in files):
+            git('rebase', '--abort')
+            return False
+        git('checkout', '--ours', '--', *files)
+        git('add', '--', *files)
+        r = subprocess.run(['git', 'rebase', '--continue'], cwd=ROOT, capture_output=True, text=True,
+                           env=dict(os.environ, GIT_EDITOR='true'))
+        if r.returncode and not git('diff', '--name-only', '--diff-filter=U').stdout.strip():
+            # пустой коммит после разрешения — пропускаем его
+            git('rebase', '--skip')
+        if not rebasing():
+            return True
 
 
 STALE_DECISION_MIN = 30
@@ -96,6 +134,8 @@ def stale_decisions_warning(now=None):
 def main(argv):
     write, send = '--write' in argv, '--send' in argv
     g = git('pull', '--rebase', '--autostash', 'origin', 'main')
+    if g.returncode and rebasing() and settle_rebase():
+        g = g.__class__(g.args, 0, g.stdout, g.stderr)
     if g.returncode:
         raise SystemExit('git pull: %s' % (g.stderr or g.stdout).strip()[-300:])
     if send:

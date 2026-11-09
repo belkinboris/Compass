@@ -1031,109 +1031,13 @@
    ]
   },
   {
-   "draft_id": "d16900434",
-   "title": "В сельской местности лекарства разрешили продавать в спецмашинах и на почте",
+   "draft_id": "d77748741",
+   "title": "«Яндекс Маркет» запускает продажи в прямых эфирах мобильного приложения",
    "date": "2026-11-09",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/society/articles/2026/11/09/1243516-lekarstva-razreshili-prodavat-v-spetsmashinah"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d80973841",
-   "title": "Чем будет важен раунд переговоров США, России и Украины в Абу-Даби",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/politics/articles/2026/11/09/1243523-raund-peregovorov-ssha-rossii-ukraini"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40936194",
-   "title": "Продюсер Джафаров: «Трудно быть богом» планируют продать на зарубежные платформы",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28297291"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-09",
-     "title": "Переговоры",
-     "note": "Основатель и генеральный продюсер студии Team Films сообщил, что ведутся соответствующие переговоры",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/kultura/28297291"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20281859",
-   "title": "Ноябрьские распродажи стали напоминать ежегодный «ритуал по инерции»",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/09/sem-chjornih-pjatnic-na-nedele"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9092493"
     ]
    ],
    "sum": null,
@@ -1155,17 +1059,17 @@
    ]
   },
   {
-   "draft_id": "d51297498",
-   "title": "ЦБ Казахстана впервые выставит на аукцион обычные и цифровые ноты",
+   "draft_id": "d58937309",
+   "title": "Юрист предупредила о мошеннической схеме при продаже подержанных машин",
    "date": "2026-11-09",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261109/natsbank-875012698.html"
+     "https://1prime.ru/20261109/avto-875016037.html"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1181,91 +1085,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d28808561",
-   "title": "В Сургуте выставили на продажу ресторан морской кухни с 20-летней историей",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053142466"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8cf4df95 (общие редкие слова: выстав, продаж, сургут) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d86399662",
-   "title": "«Автомобиль новый»: джип Willys Jeepster 1948 года продают в Новосибирске — машина без пробега",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/auto/2026/11/09/76747412/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88026563",
-   "title": "Песцы, еноты, норки и «трендовые» экошубки — что почем можно купить на Колхозном рынке?",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/entertainment/2026/11/09/76747049/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
