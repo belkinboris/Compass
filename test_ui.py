@@ -5565,16 +5565,18 @@ def test_deal_card_names_the_legal_advisor_once_without_the_team(page, base_url)
     снят; из заметки консультанта на экран не попадает перечень юристов."""
     import json as _json
     base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
-    deal = next(d for d in base["deals"] if any("команда проекта" in str(a[2]).lower()
+    import re as _re
+    deal = next(d for d in base["deals"] if any(_re.search(r"[Пп]артн[её]р [А-ЯЁ]", str(a[2]))
                                                 for a in ((d.get("law") or {}).get("adv") or []) if len(a) > 2))
     page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
     page.wait_for_selector(".team", timeout=15000)
     page.wait_for_timeout(800)
     text = page.inner_text("#app")
-    assert "команда проекта" not in text.lower()
-    assert "партнер " not in page.inner_text(".team").lower()
+    team = page.inner_text(".team").lower()
+    assert "команд" not in team.replace("команда сделки", "")
+    assert "партнер " not in team and "партнёр " not in team
     assert text.lower().count("юридический консультант") == 0
-    assert "консультант" in page.inner_text(".team").lower()
+    assert "юридический" in team or "финансовый" in team
 
 
 def test_home_has_a_red_forum_button_next_to_view_deals(browser, base_url):

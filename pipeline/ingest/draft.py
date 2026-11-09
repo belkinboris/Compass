@@ -371,6 +371,27 @@ SPORTS_POSITION = re.compile(
 # позиции. Родня уже исключенной футбольной позиции в SPORTS_POSITION —
 # предмет, который сигналит «это не корпоративный актив», а не сторона.
 COMMODITY_LOT = re.compile(r'^парти[юя]\s', re.I)
+def _split_seller_name(text):
+    """«Natura российский бизнес Avon» → («Natura», «российский бизнес Avon»).
+    Слова-описания перед именем («аэропорта Домодедово», «группы «Ситроникс»»,
+    «братьев Нагелей») остаются при имени; имя — кавычки целиком или подряд
+    идущие слова с заглавной / латиницей / правовой формой."""
+    toks = re.findall(r'«[^»]*»(?:[^«»\s]*»)?|"[^"]*"|\S+', text.strip())
+    out, i = [], 0
+    while i < len(toks) and re.fullmatch(r'[а-яё]+', toks[i]) and len(out) < 3:
+        out.append(toks[i]); i += 1
+    named = False
+    while i < len(toks):
+        t = toks[i]
+        if t.startswith(('«', '"')) or re.match(r'[A-ZА-ЯЁ0-9&]', t) and not re.match(r'\d+(?:[.,]\d+)?%?$', t):
+            out.append(t); named = True; i += 1
+            continue
+        if named:
+            break
+        out.append(t); i += 1
+    return ' '.join(out), ' '.join(toks[i:])
+
+
 FROM_WHOM = re.compile(r'\bу\s+((?:[а-яё]+\s+){0,3}[«"А-ЯЁA-Z][^.;,]{2,60})')
 # ДАТИВ-ХВОСТ (25 августа, CLAUDE.md, повод — Pridex/Multispace). Список
 # расширен по замеру на 1037 предметах из заголовков базы (точка
@@ -842,10 +863,20 @@ def guess_parties(title):
             buyer = _named(clean_name(head))
         tail = title[m.end():]
         u = FROM_WHOM.search(tail)
-        if u:
-            seller = _named(clean_name(u.group(1)))
-            tail = tail[:u.start()]
-        asset = clean_name(LEADING_SHARE.sub('', tail.strip()))
+        if u and not tail[:u.start()].strip():
+            # Стандарт заголовка «X купил у Z предмет» (6 ноября 2026): продавец
+            # стоит ПЕРЕД предметом, и «у Natura российский бизнес Avon» целиком
+            # уходил в продавца (9 ноября 2026: 40 расхождений на базе после
+            # переписанных заголовков). Имя продавца — до первого строчного
+            # слова или числа после имени; остальное — предмет.
+            name, rest = _split_seller_name(u.group(1) + tail[u.end():])
+            seller = _named(clean_name(name))
+            asset = clean_name(LEADING_SHARE.sub('', rest.strip())) if rest.strip() else None
+        else:
+            if u:
+                seller = _named(clean_name(u.group(1)))
+                tail = tail[:u.start()]
+            asset = clean_name(LEADING_SHARE.sub('', tail.strip()))
     elif changed:
         asset = clean_name(changed.group(1))
     elif _first_affirmative(INVEST_VERB, title):

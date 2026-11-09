@@ -55,7 +55,8 @@ def test_name_match_is_stricter_than_same_word():
 
 def test_index_holds_only_deals_the_site_shows(idx):
     assert idx.docs
-    assert all(d.year >= ar.SITE_MIN_YEAR for d in idx.docs)
+    # «unknown» — год 0: сделка видна на сайте и в поиске, но не в отборе по году (9 ноября 2026).
+    assert all(d.year >= ar.SITE_MIN_YEAR or (d.year == 0 and d.date == "unknown") for d in idx.docs)
 
 
 def test_index_holds_every_deal_the_site_shows(idx):

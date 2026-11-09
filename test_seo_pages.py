@@ -33,10 +33,11 @@ def test_deal_page_is_the_site_page_with_the_deal_written_in(client, data):
     r = client.get("/deal/g0b187624")
     assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
     page = r.text
-    assert "<h1>«Северсталь» приобрела «Дмитровский металлоцентр»</h1>" in page
+    # Заголовок — из карточки: вычитка переписывает его по стандарту (9 ноября 2026).
+    assert "<h1>%s</h1>" % deal["title"] in page
     assert '<link rel="canonical" href="https://projectcompass.ru/deal/g0b187624">' in page
     assert "Северсталь" in page and "ООО «Металлстандарт»" in page
-    assert "<title>«Северсталь» приобрела «Дмитровский металлоцентр» — Проект Компас</title>" in page
+    assert "<title>%s — Проект Компас</title>" % deal["title"] in page
     # Человек видит обычную карточку сайта: это та же страница приложения,
     # а ранний скрипт переводит адрес в #/deal/<id> (владелец 23 октября 2026).
     assert '<main class="wrap" id="app"><article class="seo-snapshot">' in page
