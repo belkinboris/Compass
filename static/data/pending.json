@@ -326,6 +326,70 @@
     "draft_id": "d92146923",
     "title": "Путин передал еще ряд активов производителя Winston во внешнее управление"
    }
+  },
+  {
+   "id": "gc3750bdb",
+   "date": "2026-11-09",
+   "title": "«УльтимаТек» купила 50% «1С»-интегратора «АртАйТи»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "«1С»-интегратора «АртАйТи»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "50% капитала петербургского «1С»-интегратора «АртАйТи» перешло к промышленному ИТ-интегратору «УльтимаТек». Об...",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«УльтимаТек»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     }
+    ],
+    "target": [
+     {
+      "value": "«1С»-интегратора «АртАйТи»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     }
+    ]
+   },
+   "buyer": "gultimatekgroup01",
+   "pending_since": "2026-11-09T09:55:07+00:00"
   }
  ]
 }

@@ -2475,6 +2475,10 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
 .materials-pitch.one{grid-template-columns:minmax(0,560px)}
 .mat-tabs{margin-bottom:24px}
+/* Четыре вкладки «Материалов» — в одну строку на любом айфоне (владелец, 9 ноября
+   2026): на телефоне промежутки и шрифт чуть меньше, чем у вкладок консультантов. */
+@media(max-width:430px){.type-tabs.mat-tabs{gap:10px 16px!important;flex-wrap:nowrap!important}.type-tabs.mat-tabs button{font-size:13.5px!important}}
+@media(max-width:360px){.type-tabs.mat-tabs{gap:10px 9px!important}.type-tabs.mat-tabs button{font-size:12.5px!important}}
 /* МЕРОПРИЯТИЯ (владелец, 9 ноября 2026: «макет мероприятия можешь выкладывать») —
    стили из одобренного макета 29 октября; красный — цвет форума, не наш акцент. */
 
@@ -11269,7 +11273,7 @@ function matPitchHtml(tab){
 }
 async function renderMaterials(arg){
   const tab=MAT_TABS.some(t=>t[0]===arg)?arg:"events";
-  app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Авторам</span><h1>Материалы</h1><p class="ph-desc">Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
+  app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Мероприятия и колонки</span><h1>Материалы</h1><p class="ph-desc">Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
   <div class="type-tabs mat-tabs reveal">${MAT_TABS.map(([k,n])=>`<button type="button" data-mt="${k}" class="${k===tab?"on":""}">${n}</button>`).join("")}</div>
   <div id="matBody">${tab==="events"?eventsSectionHtml():matPitchHtml(tab)}</div>
   ${tab==="webinars"?`<div id="webinarList"></div>`:""}
