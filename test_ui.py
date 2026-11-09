@@ -5575,3 +5575,22 @@ def test_deal_card_names_the_legal_advisor_once_without_the_team(page, base_url)
     assert "партнер " not in page.inner_text(".team").lower()
     assert text.lower().count("юридический консультант") == 0
     assert "консультант" in page.inner_text(".team").lower()
+
+
+def test_home_has_a_red_forum_button_next_to_view_deals(browser, base_url):
+    """Владелец 9 ноября 2026: рядом с белой «Смотреть сделки» — такая же по
+    размеру красная «Ежегодный M&A Форум»; на компьютере справа, на телефоне под ней."""
+    for w, side in ((1280, True), (390, False)):
+        pg = browser.new_page(viewport={"width": w, "height": 844})
+        pg.goto(base_url + "/#/", wait_until="domcontentloaded")
+        pg.wait_for_selector(".hs-forum", timeout=15000)
+        a = pg.locator(".hs-bar").bounding_box()
+        b = pg.locator(".hs-forum").bounding_box()
+        assert pg.locator(".hs-forum").get_attribute("href") == "#/event/ma-forum-2026"
+        assert abs(a["height"] - b["height"]) < 1 and abs(a["width"] - b["width"]) < 1
+        if side:
+            assert b["x"] > a["x"] + a["width"] and abs(a["y"] - b["y"]) < 1
+        else:
+            assert b["y"] > a["y"] + a["height"]
+        assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+        pg.close()
