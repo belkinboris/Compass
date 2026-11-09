@@ -295689,7 +295689,8 @@
   "g2883c476": null,
   "g8e5cc555": null,
   "ge659eeb6": null,
-  "gde69fa27": 264
+  "gde69fa27": 264,
+  "gaa5d4eb6": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -296250,7 +296251,8 @@
   "g5ee7977b": 64,
   "g8b57089b": 65,
   "gfd435463": 66,
-  "gde69fa27": 67
+  "gde69fa27": 67,
+  "gaa5d4eb6": 68
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -301441,7 +301443,23 @@
      "kind": "closed"
     }
    ]
+  },
+  "gaa5d4eb6": {
+   "sum": "700–800 млн ₽ (по оценке)",
+   "buyer": "ga609f9d0",
+   "seller": "ГК «Носта»",
+   "asset": "100% долей ООО СЗ «Фрихауз», 100% долей ООО СЗ «Весенний бриз»",
+   "status": "Закрыта",
+   "title": "ГК «ССК» купила двух застройщиков группы «Носта»",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-11-08T15:24:14+00:00"
+ "telegram_last_post_at": "2026-11-09T08:40:13+00:00"
 }
