@@ -474,13 +474,125 @@
    ]
   },
   {
-   "draft_id": "d16039260",
-   "title": "Продажи кроссовера V5 нового российского бренда Votour стартовали",
+   "draft_id": "d77290112",
+   "title": "«Литфонд» выставит на торги фотографию Цоя на сорванном концерте в кафе «Метелица»",
    "date": "2026-11-09",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261109/prodazhi-875026401.html"
+     "web:tass.ru",
+     "https://tass.ru/kultura/28298739"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d72257569",
+   "title": "Алиханов раскрыл объемы продажи химпродукции РФ на мировом рынке",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28298703"
+    ]
+   ],
+   "sum": "$32 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20386576",
+   "title": "На Херсонщине снизили порог инвестиций участников СЭЗ в первый год до 10%",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28298645"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25740584",
+   "title": "«Почте России» разрешили продавать 132 препарата в населенных пунктах без аптек",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/11/09/pochte-rossii-razreshili-prodavat-132-preparata-v-naselennykh-punktakh-bez-aptek/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60368343",
+   "title": "Под Петербургом мужчину двое суток держали в водонапорной башне ради выкупа",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261109/lenoblast-2130318864.html"
     ]
    ],
    "sum": null,
@@ -502,13 +614,13 @@
    ]
   },
   {
-   "draft_id": "d75860594",
-   "title": "Суд взыскал с управляющего транспортный налог и пени. Комментарий Михаила Карпенко для PRO банкротство ⚖️ Компанию признали банкротом. После продажи заложенных транспортных средств конкурсный управляю",
+   "draft_id": "d37876826",
+   "title": "Элитный особняк Блиновской в Подмосковье перешел в собственность государства",
    "date": "2026-11-09",
    "src": [
     [
-     "tg:alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/2870"
+     "web:ura.news",
+     "https://ura.news/news/1053142705"
     ]
    ],
    "sum": null,
@@ -523,10 +635,9 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
