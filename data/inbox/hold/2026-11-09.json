@@ -1128,45 +1128,17 @@
    ]
   },
   {
-   "draft_id": "d78992752",
-   "title": "Аресты с недвижимости Блиновской сняли для передачи государству",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/09/aresti-s-nedvizhimosti-blinovskoj"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d06812014",
-   "title": "Переговорщик от Украины раскрыл ожидания от первого раунда переговоров в Абу-Даби",
+   "draft_id": "d72642440",
+   "title": "Россиян предупредили об активности мошенников перед распродажей 11.11",
    "date": "2026-11-09",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/09/peregovorschik-ot-ukrainy-raskryl-ozhidaniya-ot-pervogo-raunda-peregovorov-v-abu-dabi/"
+     "https://lenta.ru/news/2026/11/09/rossiyan-predupredili-ob-aktivnosti-moshennikov-pered-rasprodazhey-11-11/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
