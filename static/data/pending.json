@@ -2452,7 +2452,9 @@
    "accepted": "2026-11-09",
    "accepted_hash": "a1104b6a9b60.ace5bd",
    "second_read": "2026-11-09",
-   "second_read_hash": "a1104b6a9b60.ace5bd"
+   "second_read_hash": "a1104b6a9b60.ace5bd",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
