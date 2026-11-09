@@ -2457,6 +2457,113 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
 .mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
+/* МЕРОПРИЯТИЯ (владелец, 9 ноября 2026: «макет мероприятия можешь выкладывать») —
+   стили из одобренного макета 29 октября; красный — цвет форума, не наш акцент. */
+
+.ev{margin-top:30px}
+.ev-hero{position:relative;border-radius:12px;overflow:hidden;background:#C8321E;color:#fff;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.ev-hero .l{padding:34px 34px 30px;display:flex;flex-direction:column;gap:14px}
+.ev-hero .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;opacity:.85}
+.ev-hero h2{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,4vw,46px);line-height:1.05;margin:0}
+.ev-hero p{margin:0;font-size:15px;line-height:1.55;max-width:520px;opacity:.95}
+.ev-hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.ev-hero .meta span{border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:5px 12px;font-size:12.5px}
+.ev-hero .r{background:#9E2716;padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.ev-hero .r .big{font-family:var(--f-display);font-size:64px;line-height:1}
+.ev-hero .r .cap{font-size:13px;opacity:.85;line-height:1.4}
+.ev-hero .r .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ev-hero .partner{font-size:12px;opacity:.9;border-top:1px solid rgba(255,255,255,.3);padding-top:12px}
+.ev-hero .partner b{font-family:var(--f-display);font-weight:400;font-size:17px;letter-spacing:.04em}
+.ev-nav{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:22px 0 22px;font-size:14px;overflow-x:auto}
+.ev-nav span{padding:10px 0;color:var(--muted);white-space:nowrap}
+.ev-nav span.on{color:var(--ink);border-bottom:2px solid var(--accent-deep);font-weight:600}
+.ev-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.ev-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ev-tag{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+.ev-card h3{font-family:var(--f-display);font-weight:400;font-size:23px;line-height:1.25;margin:0}
+.ev-card p{margin:0;font-size:14px;line-height:1.6}
+.ev-card .by{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:6px}
+.ev-card a.go{color:var(--accent-deep);font-weight:600;font-size:13.5px;text-decoration:none}
+.ev-quote{border-left:3px solid #C8321E;padding:2px 0 2px 14px;font-family:var(--f-display);font-size:17px;line-height:1.45}
+.ev-quote small{display:block;font-family:var(--f-body);font-size:12px;color:var(--muted);margin-top:6px}
+.ev-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:34px 0 14px}
+.ev-h h2{font-family:var(--f-display);font-weight:400;font-size:26px;margin:0}
+.ev-h small{color:var(--muted);font-size:13px}
+.ev-vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.ev-v{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.ev-v .th{position:relative;aspect-ratio:16/9;max-width:100%;background:linear-gradient(135deg,#1b1f24,#3a1712 70%,#C8321E);color:#fff;display:flex;align-items:flex-end;padding:14px}
+.ev-v .th .n{position:absolute;top:12px;left:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.ev-v .th .pl{position:absolute;inset:0;margin:auto;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
+.ev-v .th .pl::after{content:"";border-left:16px solid #C8321E;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.ev-v .th .d{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.65);border-radius:4px;padding:2px 7px;font-size:12px;font-variant-numeric:tabular-nums}
+.ev-v .th .t{font-family:var(--f-display);font-size:15px;line-height:1.25;max-width:78%;opacity:.95}
+.ev-v .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.ev-v .bd b{font-size:14px;line-height:1.35}
+.ev-v .bd span{font-size:12.5px;color:var(--muted);line-height:1.45}
+.ev-v .bd em{font-style:normal;font-size:12px;color:var(--accent);font-weight:600}
+.ev-org{display:flex;flex-wrap:wrap;gap:10px}
+.ev-org a{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 18px;font-weight:600;font-size:14px;color:var(--ink);text-decoration:none}
+.ev-org a small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+@media(max-width:760px){.ev-hero{grid-template-columns:1fr}.ev-two{grid-template-columns:1fr}.ev-hero .l{padding:26px 20px}.ev-hero .r{padding:22px 20px}}
+
+.mts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.mt{display:flex;flex-direction:column;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;text-decoration:none;color:inherit;min-width:0}
+.mt:hover{border-color:#C8321E}
+.mt-ic{flex:none;width:40px;height:48px;border-radius:4px 12px 4px 4px;background:#C8321E;color:#fff;font:700 11px/48px var(--f-body);text-align:center;letter-spacing:.04em}
+.mt-b{display:flex;flex-direction:column;gap:4px;min-width:0;overflow-wrap:anywhere;hyphens:auto}
+.mt-k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.mt-t{font-size:14px;line-height:1.35;font-weight:600}
+.mt-d{font-size:12.5px;color:#C8321E;font-weight:600;margin-top:2px}
+
+.ev-prog{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ev-p{display:grid;grid-template-columns:86px minmax(0,1fr);gap:4px 20px;padding:18px 22px;border-top:1px solid var(--line-soft)}
+.ev-p:first-child{border-top:0}
+.ev-p .tm{font-family:var(--f-display);font-size:24px;line-height:1;color:#C8321E;font-variant-numeric:tabular-nums}
+.ev-p .tm small{display:block;font-family:var(--f-body);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.ev-p h4{font-family:var(--f-display);font-weight:400;font-size:19px;line-height:1.3;margin:0 0 6px}
+.ev-p .md{font-size:13px;font-weight:600;margin-bottom:3px}
+.ev-p .sp{font-size:13px;color:var(--muted);line-height:1.5}
+.ev-cta{display:inline-block;background:#fff;color:#C8321E;font-weight:700;font-size:14px;border-radius:999px;padding:11px 22px;text-decoration:none;width:fit-content}
+.ev-cd{display:flex;gap:14px}
+.ev-cd div{min-width:0}
+.ev-why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ev-why div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.ev-why b{display:block;font-family:var(--f-display);font-weight:400;font-size:18px;margin-bottom:6px}
+.ev-why span{font-size:13px;color:var(--muted);line-height:1.5}
+@media(max-width:760px){.ev-p{grid-template-columns:1fr;padding:16px}.mt{flex-direction:row}}
+
+.evl{margin:34px 0 8px}
+.evl-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.evl-h h2{font-family:var(--f-display);font-weight:400;font-size:28px;margin:0}
+.evl-tabs{display:flex;gap:8px}
+.evl-tabs span{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);background:#fff}
+.evl-tabs span.on{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+.evl-item{display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:22px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px;text-decoration:none;color:inherit}
+.evl-item:hover{border-color:#C8321E}
+.evl-date{background:#C8321E;color:#fff;border-radius:10px;text-align:center;padding:12px 6px}
+.evl-date b{display:block;font-family:var(--f-display);font-weight:400;font-size:38px;line-height:1}
+.evl-date span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+.evl-date small{display:block;font-size:11px;opacity:.85;margin-top:2px}
+.evl-kind{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#C8321E}
+.evl-t{font-family:var(--f-display);font-size:23px;line-height:1.2;margin:4px 0 6px}
+.evl-m{font-size:13px;color:var(--muted);line-height:1.5}
+.evl-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.evl-chips span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--ink)}
+.evl-go{font-weight:600;font-size:13.5px;color:var(--accent-deep);white-space:nowrap}
+.evl-note{font-size:13px;color:var(--muted);margin:12px 2px 0}
+@media(max-width:760px){
+.evl-item{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden}
+.evl-date{display:flex;align-items:baseline;gap:8px;border-radius:0;text-align:left;padding:12px 16px}
+.evl-date b{font-size:26px}.evl-date span,.evl-date small{display:inline;margin:0;font-size:13px;letter-spacing:.06em}
+.evl-item>div:nth-child(2){padding:14px 16px 4px}
+.evl-t{font-size:20px}
+.evl-go{display:block;margin:10px 16px 16px;text-align:center;background:var(--accent-deep);color:#fff;border-radius:999px;padding:11px}
+.evl-tabs span{padding:6px 12px}}
+.evp-crumbs{font-size:13px;color:var(--muted);margin:28px 0 0}.evp-crumbs a{color:inherit;text-decoration:none}
+.evl-empty{font-size:14px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:18px 22px}
+.evl-tabs button{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);background:#fff;cursor:pointer;font-family:inherit}
+.evl-tabs button.on{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
+.ev-wrap{max-width:1180px;margin:0 auto}
 
 .legal-page{max-width:720px}
 .phone-hint{position:fixed;top:68px;left:16px;right:16px;z-index:49;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--accent-soft);color:var(--accent-deep);font-size:13px;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.18)}
@@ -3799,7 +3906,7 @@ async function loadBulkDeals(attempt=0){
   // на медленной мобильной, где домен грузится дольше всего, шанс попасть в
   // это окно выше всего.
   const currentPage = (location.hash.replace("#","")||"/").split("?")[0].split("/")[1];
-  if(!["materials","webinars","legal","assistant","account"].includes(currentPage)) route();
+  if(!["materials","webinars","event","legal","assistant","account"].includes(currentPage)) route();
 }
 loadBulkDeals();
 // Кнопка «Повторить» появляется в разных местах разметки (лента, карточка,
@@ -4144,6 +4251,7 @@ function route(){
     mark("analytics");
   }
   else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
+  else if(page==="event"){renderEvent(arg);mark("materials");}
   else if(page==="legal"){renderLegal(arg);}
   else if(page==="app"){renderPhoneApp();}
   else if(page==="assistant"){renderAssistant();mark("assistant");}
@@ -11031,16 +11139,105 @@ function renderPhoneApp(){
   rerun();
 }
 
+/* МЕРОПРИЯТИЯ в «Материалах» (владелец, 29 октября и 9 ноября 2026): конференции
+   и вебинары, где Компас — информационный партнер. Блок стоит НАД карточками
+   «Вести колонку»/«Провести вебинар»: первым человек видит сами материалы, а
+   приглашения авторам — ниже. Страница мероприятия — #/event/<id>.
+   Регистрация ведет через нашу короткую ссылку /go/… (app/site.py, GO_LINKS):
+   переход считается у нас, а организаторы видят его по UTM-метке. */
+const EVENTS = [{
+  id:"ma-forum-2026", kind:"Конференция", date:"2026-11-12", time:"9:45",
+  title:"Слияния и поглощения в России. 4-й Форум M&A", heroTitle:"Слияния и поглощения в России",
+  place:"Москва, The Carlton Moscow", placeShort:"The Carlton Moscow",
+  orgs:[["alrud","АЛРУД"],["nikolskaya","Никольская Консалтинг"],["orion","Orion"],["stonebridge","Stonebridge Legal"],["kkmp","ККМП"]],
+  lead:"4-й Форум слияний и поглощений: юристы, банкиры и инвесторы о рынке сделок 2026 года, оценке компаний, продаже выделенного бизнеса и трансграничных M&A.",
+  speakersFrom:"Сбербанка, Яндекса, Россельхозбанка, Севергрупп, ВымпелКома, Сибура, Магнита, ВТБ, ПМХ, ЕвроХима",
+  register:"/go/ma-forum-2026-site", site:"https://ma-conference-moscow.ru/",
+  program:[{"t": "9:45", "title": "Обзор рынка слияний и поглощений в России: реальность и перспективы", "mod": "Максим Кулешов, ККМП", "sp": "Илья Шумов (Россельхозбанк), Саид Абакаров (Яндекс), Борис Квасов («Старт Капитал»), Ренат Насретдинов (Aspring Capital)"}, {"t": "11:15", "title": "Внутри M&A сделки: откровенный разговор с руководителями юридических департаментов", "mod": "Андрей Жарский, АЛРУД", "sp": "Максим Распутин («Иванян и партнеры»), Екатерина Кватернюк (Яндекс), Инна Калугина («Севергрупп»), Петр Иванцов (ВымпелКом, Билайн)"}, {"t": "12:45", "title": "Продажа недавно выделенного бизнеса и распределение рисков между сторонами", "mod": "Алексей Рудяк, «Никольская Консалтинг»", "sp": "Дмитрий Марчан (Melling, Voitishkin & Partners), Евгений Школун (Asari Legal), Ольга Ахмедшина, Заур Чемсо («Магнит»), Анна Хлыстова"}, {"t": "15:00", "title": "Оценка компаний: подходы и отражение в документации", "mod": "Григорий Гаджиев, Orion", "sp": "Булат Жамбалнимбуев (Nextons), Фуад Алиев (Сбербанк), Антон Логинов (ВТБ), Андрей Филиппенко (Forward Legal)"}, {"t": "16:30", "title": "Трансграничные M&A: защита инвестиций, арбитраж и реструктуризация владения", "mod": "Роман Бутенко, Stonebridge Legal", "sp": "Тимур Байрамов (ELWI), Александр Рудяков (VERBA LEGAL), Даниил Петрух («Сибур»), Светлана Романова (ПМХ), Татьяна Кассирова («ЕвроХим»)"}],
+  materials:[{"k": "Статья", "t": "Рынок M&A: тренды и прогнозы 2026–2027", "u": "https://ma-conference-moscow.ru/upload/iblock/4ec/bnu2lo03hgd9f8e6mse4gd2i3kzc1baw/Rynok_MA_Trendy_i_prognozy_2026_2027.pdf"}, {"k": "Статья", "t": "Совместные предприятия: наследование, опционы, deadlock", "u": "https://ma-conference-moscow.ru/upload/iblock/b00/6qfph8q6tw2v2zku6qc6ilzxhdh5tuce/M_A_Forum_Sovmestnye_predpriyatiya.pdf"}, {"k": "Исследование", "t": "Tech M&A 2025, часть 1: инвестиционный ландшафт и тренды 2026", "u": "https://ma-conference-moscow.ru/upload/iblock/04b/0c48at6hhxedu7xq01xmaf8cb8xpv0j6/Tech_M_A_2025_chast_1_Investitsionnyy_landshaft_trendy_2026_vzglyad.pdf"}, {"k": "Исследование", "t": "Tech M&A 2025, часть 2: due diligence, структурирование, управление", "u": "https://ma-conference-moscow.ru/upload/iblock/2ea/tee7cfbc7buakkfp0rx7jb3e09rjc4w1/Tech_M_A_2025_chast_2_Due_diligence_strukturirovanie_upravlenie.pdf"}, {"k": "Исследование", "t": "M&A-сделки в России за 2022–2024 годы", "u": "https://ma-conference-moscow.ru/upload/iblock/ba5/fwp2beb2gej781gpbw5xwt19k675fzfw/Issledovanie_M_A_sdelok_v_Rossii_za_2022_2024_gody.pdf"}]
+}];
+const EV_MONTHS=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+function evDays(ev){
+  const [y,m,d]=ev.date.split("-").map(Number);
+  const now=new Date(); const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  return Math.round((Date.UTC(y,m-1,d)-today)/86400000);
+}
+function evDateParts(ev){const [y,m,d]=ev.date.split("-").map(Number);return {y,m,d,mon:EV_MONTHS[m-1]};}
+function evOrgsText(ev){return ev.orgs.map(o=>o[1]).join(", ");}
+function eventsListHtml(tab){
+  const list=EVENTS.filter(ev=>tab==="past"?evDays(ev)<0:evDays(ev)>=0)
+    .sort((a,b)=>tab==="past"?b.date.localeCompare(a.date):a.date.localeCompare(b.date));
+  const items=list.map(ev=>{const p=evDateParts(ev);const left=evDays(ev);
+    const chips=[`${ev.program.length} сессий`, ev.materials.length?`${ev.materials.length} материалов`:"", left>=0?"регистрация открыта":"прошло"].filter(Boolean);
+    return `<a class="evl-item" href="#/event/${ev.id}"><div class="evl-date"><b>${p.d}</b><span>${p.mon}</span><small>${p.y} · ${esc(ev.time)}</small></div>
+<div><span class="evl-kind">${esc(ev.kind)} · Информационный партнер — Компас</span><div class="evl-t">${esc(ev.title)}</div>
+<div class="evl-m">${esc(ev.place)}</div><div class="evl-m">Организаторы: ${esc(evOrgsText(ev))}</div>
+<div class="evl-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div></div>
+<span class="evl-go">Подробнее →</span></a>`;}).join("");
+  return items||`<p class="evl-empty">${tab==="past"?"Прошедших мероприятий пока нет.":"Новых мероприятий пока нет."}</p>`;
+}
+function eventsSectionHtml(){
+  const tab=EVENTS.some(ev=>evDays(ev)>=0)?"soon":"past";
+  return `<section class="evl reveal"><div class="evl-h"><h2>Мероприятия</h2><div class="evl-tabs"><button type="button" data-evtab="soon" class="${tab==="soon"?"on":""}">Предстоящие</button><button type="button" data-evtab="past" class="${tab==="past"?"on":""}">Прошедшие</button></div></div>
+<div id="evlList">${eventsListHtml(tab)}</div></section>`;
+}
+function bindEventTabs(){
+  app.querySelectorAll("[data-evtab]").forEach(b=>b.onclick=()=>{
+    app.querySelectorAll("[data-evtab]").forEach(x=>x.classList.toggle("on",x===b));
+    const m=document.getElementById("evlList"); if(m) m.innerHTML=eventsListHtml(b.dataset.evtab);
+  });
+}
+function renderEvent(id){
+  const ev=EVENTS.find(e=>e.id===id);
+  if(!ev){location.hash="#/materials";return;}
+  const p=evDateParts(ev); const left=evDays(ev);
+  const kick=left>0?`Скоро · ${p.d} ${p.mon} ${p.y}, Москва`:left===0?`Сегодня · ${p.d} ${p.mon} ${p.y}, Москва`:`Прошло · ${p.d} ${p.mon} ${p.y}, Москва`;
+  const count=left>0?`<div><div class="big">${left}</div><div class="cap">${plural(left,"день","дня","дней")} до форума</div></div>`:
+              left===0?`<div><div class="big">Сегодня</div><div class="cap">форум идет</div></div>`:"";
+  const article=ev.materials[0];
+  const prog=ev.program.map((s,i)=>`<div class="ev-p"><div class="tm">${esc(s.t)}<small>Сессия ${i+1}</small></div><div><h4>${esc(s.title)}</h4><div class="md">Модератор: ${esc(s.mod)}</div><div class="sp">${esc(s.sp)}</div></div></div>`).join("");
+  const mats=ev.materials.map(m=>`<a class="mt" href="${m.u}" target="_blank" rel="noopener"><span class="mt-ic">PDF</span><span class="mt-b"><span class="mt-k">${esc(m.k)}</span><span class="mt-t">${esc(m.t)}</span><span class="mt-d">Скачать ↓</span></span></a>`).join("");
+  const orgs=ev.orgs.map(([fid,n])=>`<a href="#/advisors/${fid}">${esc(n)}<small>страница фирмы</small></a>`).join("");
+  app.innerHTML=`<div class="ev-wrap"><div class="evp-crumbs"><a href="#/materials">Материалы</a> → <a href="#/materials">Мероприятия</a> → Форум M&amp;A</div>
+<section class="ev">
+<div class="ev-hero"><div class="l"><span class="kick">${esc(kick)}</span>
+<h2>${esc(ev.heroTitle)}</h2>
+<p>${esc(ev.lead)} Организаторы: ${esc(evOrgsText(ev))}.</p>
+<div class="meta"><span>${esc(ev.placeShort)}</span><span>${ev.program.length} сессий</span><span>начало в ${esc(ev.time)}</span></div>
+${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener">Регистрация и программа →</a>`:`<a class="ev-cta" href="${ev.site}" target="_blank" rel="noopener">Сайт форума →</a>`}</div>
+<div class="r"><div class="ev-cd">${count}<div><div class="big">${esc(ev.time)}</div><div class="cap">начало первой сессии</div></div></div>
+<div class="cap">Среди спикеров — представители ${esc(ev.speakersFrom)}</div>
+<div class="partner">Информационный партнер<br><b>КОМПАС</b></div></div></div>
+<div style="height:22px"></div>
+<div class="ev-two">
+<article class="ev-card"><span class="ev-tag">Анонс</span><h3>${p.d} ${p.mon} — 4-й Форум слияний и поглощений</h3>
+<p>Форум — одно из ключевых событий года для юристов и специалистов по сделкам. Пять сессий за день: от обзора рынка до трансграничных сделок и арбитража. Модераторы — партнеры ККМП, АЛРУД, «Никольской Консалтинг», Orion и Stonebridge Legal.</p>
+<p>Компас — информационный партнер форума. После мероприятия здесь появятся записи сессий и материалы спикеров.</p>
+<div class="by">Редакция Компаса</div><a class="go" href="${ev.site}" target="_blank" rel="noopener">Сайт форума →</a></article>
+<article class="ev-card"><span class="ev-tag">Аналитическая статья</span><h3>${esc(article.t)}</h3>
+<p>Организаторы форума разобрали, что ждет рынок сделок в России в 2027 году. Эти вопросы будут в центре обсуждения на сессиях ${p.d} ${p.mon}.</p>
+<div class="by">${esc(evOrgsText(ev))}</div><a class="go" href="${article.u}" target="_blank" rel="noopener">Читать статью (PDF) →</a></article></div>
+<div class="ev-h"><h2>Материалы форума</h2><small>Статьи и исследования организаторов · PDF с сайта форума</small></div>
+<div class="mts">${mats}</div>
+<div class="ev-h"><h2>Программа</h2><small>${p.d} ${p.mon} · по сайту организатора</small></div>
+<div class="ev-prog">${prog}</div>
+<div class="ev-h"><h2>Организаторы</h2><small>Страницы фирм в Компасе</small></div>
+<div class="ev-org">${orgs}</div></section><div style="height:40px"></div></div>`;
+  document.title=`${ev.heroTitle} — ${p.d} ${p.mon} ${p.y} · Проект Компас`;
+}
+
 async function renderMaterials(){
   app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Авторам</span><h1>Материалы</h1><p class="ph-desc">Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
+  ${eventsSectionHtml()}
   <div class="materials-pitch reveal">
     <button class="mp-item" type="button" data-pitch="column"><h2>Вести колонку</h2><p>Разбор сделки, комментарий к закону, обзор отрасли. Выходит с вашим именем и фирмой.</p><span class="mp-go">Оставить заявку →</span></button>
     <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем Telegram-канале.</p><span class="mp-go">Оставить заявку →</span></button>
     <button class="mp-item" type="button" data-pitch="profile"><h2>Профиль автора</h2><p>Ваши материалы собираются на странице фирмы рядом с ее сделками.</p><span class="mp-go">Оставить заявку →</span></button>
   </div>
-  <p class="acct-note mp-note reveal">Раздел открылся недавно: анонсы вебинаров и колонки появятся позже. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
+  <p class="acct-note mp-note reveal">Здесь появляются конференции и вебинары, где Компас — информационный партнер, колонки и вебинары авторов. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
   <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
   rerun();
+  bindEventTabs();
   const pitchLink=document.getElementById("materialsPitchLink");
   if(pitchLink) pitchLink.onclick=e=>{e.preventDefault();openCorrectionDialog();};
   /* Карточки — кнопки заявки (владелец, 4 октября 2026): открывают тот же

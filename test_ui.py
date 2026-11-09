@@ -4913,8 +4913,28 @@ def test_materials_page_has_no_empty_webinar_card(page, base_url):
     text = page.inner_text("#app")
     assert "Первый вебинар" not in text and "появятся здесь" not in text, text[-300:]
     assert "ниже анонсы" not in text
-    # формулировка владельца 7 октября 2026: без «ниже», «и» вместо запятой
-    assert "Раздел открылся недавно: анонсы вебинаров и колонки появятся позже." in text
+    # 9 ноября 2026 строка «Раздел открылся недавно: анонсы … появятся позже»
+    # снята: над карточками заявки встал блок «Мероприятия» (одобренный макет
+    # 29 октября), и строка противоречила бы готовому анонсу.
+    assert "Раздел открылся недавно" not in text
+
+
+def test_materials_lists_events_and_event_page_opens(page, base_url):
+    """Владелец, 9 ноября 2026: «Макет мероприятия можешь выкладывать». Блок
+    «Мероприятия» стоит над карточками заявки, строка ведет на страницу форума,
+    где есть регистрация через нашу ссылку, материалы, программа и организаторы."""
+    visit(page, base_url, "#/materials")
+    page.wait_for_selector(".evl")
+    top = page.evaluate("[document.querySelector('.evl').getBoundingClientRect().top,"
+                        " document.querySelector('.materials-pitch').getBoundingClientRect().top]")
+    assert top[0] < top[1], top
+    page.click(".evl-item")
+    page.wait_for_selector(".ev-hero")
+    text = page.inner_text("#app")
+    for part in ("Регистрация", "Материалы форума", "Программа", "Организаторы", "Информационный партнер"):
+        assert part in text or part.upper() in text, part
+    assert page.get_attribute(".ev-cta", "href").startswith("/go/ma-forum-2026")
+    assert page.locator(".ev-org a").count() == 5
 
 
 def test_page_source_does_not_name_the_team():
