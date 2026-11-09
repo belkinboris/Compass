@@ -633,6 +633,24 @@ def _weak_match(why):
     return not matcher.is_strong(why)
 
 
+# Telegram-каналы юрфирм, которые приток читает (pipeline/ingest/sources.json).
+FIRM_CHANNELS = ('kkmpconnect', 'alumnipartnerslawfirm', 'alumnimna', 'BIRCHLEGAL', 'LevelLegalServices',
+                 'LKPconsult', 'whitesquarenews', 'stonebridge_legal')
+_FIRM_ADVISED = re.compile(r'консультирова|сопровожда|представлял[аи]? интересы|выступил[аи]? (?:юридическ|консультант)',
+                           re.I)
+_FIRM_DEAL = re.compile(r'сделк|приобрет|покупк|продаж|выкуп|совместн\w* предприят|\bСП\b|IPO|размещени|дол[июе]\b|акци',
+                        re.I)
+
+
+def is_firm_advisory_post(draft):
+    """Черновик из канала юрфирмы, где фирма пишет, что вела сделку."""
+    src = ' '.join(str(x) for s in (draft.get('src') or []) for x in s)
+    if not any('t.me/%s/' % ch in src or 'tg:%s' % ch in src for ch in FIRM_CHANNELS):
+        return False
+    text = '%s %s' % (draft.get('title') or '', draft.get('note') or draft.get('summary') or '')
+    return bool(_FIRM_ADVISED.search(text) and _FIRM_DEAL.search(text))
+
+
 def check(draft, base, idx, inds, df=None, dup_out=None):
     """(причины отказа, причины «на решение»). Обе пусты — карточку пишем.
 
@@ -642,6 +660,7 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
     чтением, см. `resolve_duplicates.py`) от «дубль — один из нескольких
     поводов на решение» (обычный hold, дочитывание дубля ничего не изменит)."""
     bad, hold = [], []
+    firm_post = is_firm_advisory_post(draft)
     if not str(draft.get('title') or '').strip():
         bad.append('нет заголовка')
     if not DATE.match(str(draft.get('date') or '')):
@@ -669,7 +688,7 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
     if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
         hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию')
     _title = str(draft.get('title') or '').strip()
-    if len(_title) >= TITLE_CUT_LEN and not TITLE_ENDS_WELL.search(_title):
+    if len(_title) >= TITLE_CUT_LEN and not TITLE_ENDS_WELL.search(_title) and not firm_post:
         hold.append('заголовок не написан, а обрезан от текста новости на полуслове — '
                     'карточку так показывать нельзя, нужен нормальный заголовок')
     _asset = str(draft.get('asset') or '').strip()
@@ -690,7 +709,13 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
     # слово IPO уводило запись мимо единственной проверки на содержание.
     named_side = (draft.get('buyer') or draft.get('buyer_name')
                   or draft.get('seller') or draft.get('seller_id'))
-    if not (draft.get('target') or draft.get('asset_id') or draft.get('asset')):
+    if firm_post:
+        # Пост юрфирмы «консультировали X в сделке по…» — сделка по определению
+        # (владелец, 9 ноября 2026: «пришли сомнительные сделки из ККМП, это
+        # конечно сделки»). Заголовок, предмет и стороны пишет чтение статьи
+        # (review.py), а не разбор первой фразы поста.
+        pass
+    elif not (draft.get('target') or draft.get('asset_id') or draft.get('asset')):
         hold.append('не установлен предмет сделки — из заголовка не видно, что продают')
     elif not named_side and draft.get('type') not in ('Временное управление', 'Передача в управление'):
         # Передача в управление (6 ноября 2026): управляющую компанию разбор

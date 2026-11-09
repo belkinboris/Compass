@@ -418,6 +418,1757 @@
    "shown_hash": "8d190325ff16.17fe5a",
    "post_draft_sent": true,
    "post_preview": "<b>ГК «Ультиматек» купила половину петербургского ИТ-интегратора «АртАйТи»</b>\n\n<b>Покупатель:</b> ГК «Ультиматек» — интегратор индустриальных цифровых решений.\n<b>Продавец:</b> Прежние совладельцы «АртАйТи» (источник имя не называет)\n<b>Предмет:</b> 50% капитала петербургского ИТ-интегратора «АртАйТи», который специализируется на переходе промышленных предприятий с SAP на «1С»\n<b>Сумма:</b> 300 млн ₽ (по оценке сторон)\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora\">CNews</a>\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gc3750bdb\">карточке сделки</a>"
+  },
+  {
+   "id": "g01cb9ffc",
+   "date": "2026-11-09",
+   "title": "Покупатель приобрел три квартиры в доме на острове Балчуг за 511 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261109/balchug-2130315647.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "511 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "511 млн ₽",
+   "buyer_name": "Покупатель",
+   "asset": "три квартиры в доме на острове Балчуг",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261109/balchug-2130315647.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Покупатель",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "три квартиры в доме на острове Балчуг",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:02:04+00:00"
+  },
+  {
+   "id": "g30db3641",
+   "date": "2026-11-09",
+   "title": "«Столото» ищет счастливчика из Прикамья — житель края купил лотерейный билет за 5600 и выиграл почти 22 миллиона рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "59.ru",
+     "https://59.ru/text/entertainment/2026/11/09/76753822/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Столото» ищет счастливчика из Прикамья — житель края",
+   "asset": "лотерейный билет",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Победитель еще не обратился за своим призом",
+     "source": [
+      "59.ru",
+      "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Столото» ищет счастливчика из Прикамья — житель края",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ],
+    "target": [
+     {
+      "value": "лотерейный билет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:02:04+00:00"
+  },
+  {
+   "id": "g0d873779",
+   "date": "2022-07-08",
+   "title": "Wandle Holdings продала 29,99% акций «Полюса» (2022)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=1"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Wandle Holdings",
+   "asset": "29,99% акций «Полюса» (2022)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "Wandle Holdings продала 29,99% акций «Полюса» (2022). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с момента создания фирмы юристы ККМП сопровождали ряд…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=1"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "29,99% акций «Полюса» (2022)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=1"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Wandle Holdings",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=1"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g148fae22",
+   "date": "2022-07-08",
+   "title": "«Интеррос» купил 35% TCS Group Holding (Тинькофф)",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=2"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "TCS Group Holding (Тинькофф)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "«Интеррос» купил 35% TCS Group Holding (Тинькофф). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с момента создания фирмы юристы ККМП сопровождали ряд крупнейших…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=2"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Интеррос»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=2"
+     }
+    ],
+    "target": [
+     {
+      "value": "TCS Group Holding (Тинькофф)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=2"
+     }
+    ]
+   },
+   "buyer": "g088e8f9f",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gcc6afd66",
+   "date": "2023-12-30",
+   "title": "Sitronics Group продала группе ВТБ 28% Emperium (производитель электросудов)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/1384"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Sitronics Group",
+   "asset": "группе ВТБ 28% Emperium (производитель электросудов)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-12-30",
+     "title": "Сделка завершена",
+     "note": "Sitronics Group продала группе ВТБ 28% Emperium (производитель электросудов). Команда юристов ККМП представляла интересы Sitronics Group в сделке по продаже 28% долей в компании Emperium, управляющей производством электросудов, в пользу Группы ВТБ. Emperium –…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/1384"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "группе ВТБ 28% Emperium (производитель электросудов)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/1384"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Sitronics Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/1384"
+     }
+    ]
+   },
+   "seller_id": "g0d41f06b",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gacef0a9d",
+   "date": "2022-10-31",
+   "title": "«Черкизово» купило СГЦ «Вишневский» в Оренбургской области",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/333"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "СГЦ «Вишневский» в Оренбургской области",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-10-31",
+     "title": "Сделка завершена",
+     "note": "«Черкизово» купило СГЦ «Вишневский» в Оренбургской области. ALUMNI Partners консультирует Группу «Черкизово» в связи с приобретением селекционно-генетического центра «Вишневский» в Оренбургской области Команда ALUMNI Partners успешно завершила юридическое…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/333"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Черкизово»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/333"
+     }
+    ],
+    "target": [
+     {
+      "value": "СГЦ «Вишневский» в Оренбургской области",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/333"
+     }
+    ]
+   },
+   "buyer": "gd3bb09b3",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g69b41d86",
+   "date": "2022-12-22",
+   "title": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/422"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Хайв» (ВымпелКом)",
+   "asset": "миноритарная доля в стартапе Knomary",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-12-22",
+     "title": "Сделка завершена",
+     "note": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary. ALUMNI Partners консультирует Хайв / ВымпелКом в связи с покупкой доли в Knomary Команда ALUMNI Partners оказала полную правовую поддержку ООО «Хайв», дочерней компании ПАО «Вымпелком» (бренд…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/422"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Хайв» (ВымпелКом)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ],
+    "target": [
+     {
+      "value": "миноритарная доля в стартапе Knomary",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g5e31a7f2",
+   "date": "2023-08-07",
+   "title": "Структура «Интерроса» купила 20% группы «Рексофт»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/731?deal=2"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Интерроса»",
+   "asset": "«Рексофт»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-08-07",
+     "title": "Сделка завершена",
+     "note": "Структура «Интерроса» купила 20% группы «Рексофт». ALUMNI Partners консультировала группу РЕКСОФТ в рамках приобретения бизнеса RNT Group Команда ALUMNI Partners успешно завершила консультирование российской IT-группы «Рексофт», закрывшей сделку по…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Интерроса»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Рексофт»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/731?deal=2"
+     }
+    ]
+   },
+   "target": "g93d5a796",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g1c8087ad",
+   "date": "2023-08-18",
+   "title": "X5 Group купила «Виктория Балтия» (магазины «Виктория»)",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/746"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "«Виктория Балтия» (магазины «Виктория»)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2023-08-18",
+     "title": "Сделка завершена",
+     "note": "X5 Group купила «Виктория Балтия» (магазины «Виктория»). ALUMNI Partners оказала юридическую поддержку X5 Group в проекте по приобретению сети магазинов «Виктория Балтия» Команда ALUMNI Partners выступила юридическим консультантом X5 Group в рамках сделки по…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/746"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "X5 Group",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/746"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Виктория Балтия» (магазины «Виктория»)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/746"
+     }
+    ]
+   },
+   "buyer": "gddadfff8",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g0a1f1895",
+   "date": "2024-05-27",
+   "title": "Структура «ГЕМ Инвест» купила ООО «Моди» (сеть Modi)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/1175"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "ООО «Моди» (сеть Modi)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-05-27",
+     "title": "Сделка завершена",
+     "note": "Структура «ГЕМ Инвест» купила ООО «Моди» (сеть Modi). ALUMNI Partners консультировала клиента в сделке по приобретению сети магазинов Modi 💼 Команда ALUMNI Partners выступила юридическим консультантом структуры инвестиционной компании «ГЕМ Инвест» в рамках…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/1175"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«ГЕМ Инвест»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1175"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «Моди» (сеть Modi)",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1175"
+     }
+    ]
+   },
+   "buyer": "g0e89d473",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "ge31110bc",
+   "date": "2025-04-17",
+   "title": "ВымпелКом купил 44% ООО «Вока-Тек»",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/1936"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "ООО «Вока-Тек»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-04-17",
+     "title": "Сделка завершена",
+     "note": "ВымпелКом купил 44% ООО «Вока-Тек». ALUMNI Partners сопровождала ВымпелКом в сделке по приобретению доли в Voca-Tech 🤝 ALUMNI Partners выступила юридическим консультантом ПАО «ВымпелКом» в сделке по приобретению 44% долей в уставном капитале ООО «Вока-Тек»…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/1936"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ВымпелКом",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1936"
+     }
+    ],
+    "target": [
+     {
+      "value": "ООО «Вока-Тек»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/1936"
+     }
+    ]
+   },
+   "buyer": "gd685b926",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gb7b2da31",
+   "date": "2025-11-24",
+   "title": "Фонд Pre-IPO 1 (ВИМ Инвестиции) продал пакет GetCourse",
+   "ind": "Не определена",
+   "type": "IPO",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2309"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Pre-IPO 1 (ВИМ Инвестиции)",
+   "asset": "пакет GetCourse",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-11-24",
+     "title": "Сделка завершена",
+     "note": "Фонд Pre-IPO 1 (ВИМ Инвестиции) продал пакет GetCourse. ALUMNI Partners сопровождала выход Фонда Pre-IPO 1 из капитала GetCourse 🎓 Команда ALUMNI Partners выступила юридическим консультантом на стороне покупателя в рамках сделки по приобретению пакета в…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/2309"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "IPO / SPO"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "пакет GetCourse",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2309"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Pre-IPO 1 (ВИМ Инвестиции)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2309"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g5db4bcc2",
+   "date": "2025-12-08",
+   "title": "Accent Capital продала ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза» за 6,7 млрд рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2334"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "6,7 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "6,7 млрд ₽",
+   "seller": "Accent Capital",
+   "asset": "ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2025-12-08",
+     "title": "Сделка завершена",
+     "note": "Accent Capital продала ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза» за 6,7 млрд рублей. ALUMNI Partners сопровождала Accent Capital в сделке по продаже БЦ Дельта Плаза 💼 ALUMNI Partners выступила юридическим консультантом Accent Capital в сделке по продаже 100%…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/2334"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "ЗПИФ «ВИМ Недвижимость» БЦ «Дельта Плаза»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2334"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Accent Capital",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2334"
+     }
+    ]
+   },
+   "seller_id": "g985fe66e",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g82d2175e",
+   "date": "2022-12-06",
+   "title": "«Медскан» купил российский бизнес сети клиник Medical On Group",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/318"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "российский бизнес сети клиник Medical On Group",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-12-06",
+     "title": "Сделка завершена",
+     "note": "«Медскан» купил российский бизнес сети клиник Medical On Group. 📢 Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже российского бизнеса Medical On Group, сети многофункциональных клиник, холдингу «Медскан» . 🩺 Medical On Group…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/318"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Медскан»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/318"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский бизнес сети клиник Medical On Group",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/318"
+     }
+    ]
+   },
+   "buyer": "g729ef6c5",
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g627ecd3f",
+   "date": "2024-07-25",
+   "title": "«Евразия-Логистика» купила Таганрогский зерновой терминал",
+   "ind": "Агро",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1050"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Евразия-Логистика»",
+   "asset": "Таганрогский зерновой терминал",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-07-25",
+     "title": "Сделка завершена",
+     "note": "«Евразия-Логистика» купила Таганрогский зерновой терминал. 💠 NEWS. Корпоративная практика и M&A Команда BIRCH LEGAL оказала комплексное юридическое сопровождение сделки по приобретению Таганрогского зернового терминала логистической компанией…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/1050"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Евразия-Логистика»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1050"
+     }
+    ],
+    "target": [
+     {
+      "value": "Таганрогский зерновой терминал",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1050"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gde2618e8",
+   "date": "2024-10-08",
+   "title": "Purmo Group продала две российские «дочки» (радиаторы) российской инвесткомпании",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1159"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Purmo Group",
+   "asset": "две российские «дочки» (радиаторы) российской инвесткомпании",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-10-08",
+     "title": "Сделка завершена",
+     "note": "Purmo Group продала две российские «дочки» (радиаторы) российской инвесткомпании. 💠 NEWS. Корпоративная практика и M&A Команда BIRCH LEGAL оказала комплексное юридическое сопровождение сделки по продаже двух дочерних компаний Purmo Group, занимающихся…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/1159"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "две российские «дочки» (радиаторы) российской инвесткомпании",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1159"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Purmo Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1159"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "gba225690",
+   "date": "2025-01-30",
+   "title": "РБК вошел в капитал платформы мобильной видеорекламы Hyper",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/1358"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "РБК",
+   "asset": "платформы мобильной видеорекламы Hyper",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "РБК",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1358"
+     }
+    ],
+    "target": [
+     {
+      "value": "платформы мобильной видеорекламы Hyper",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/1358"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g6fe89f91",
+   "date": "2024-09-30",
+   "title": "«Севергрупп инвестиции» купила 19,91% «Автостэлс»",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @whitesquarenews",
+     "https://t.me/whitesquarenews/153"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Севергрупп инвестиции»",
+   "asset": "«Автостэлс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-09-30",
+     "title": "Сделка завершена",
+     "note": "«Севергрупп инвестиции» купила 19,91% «Автостэлс». White Square консультирует «Автостэлс» в сделке по приобретению «Севергрупп инвестиции» 19,91% компании Команда White Square выступила юридическим консультантом «Автостэлс», ведущей платформы по торговле…",
+     "source": [
+      "Телеграм-канал @whitesquarenews",
+      "https://t.me/whitesquarenews/153"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Севергрупп инвестиции»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Автостэлс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:10:03+00:00"
+  },
+  {
+   "id": "g117aeb0f",
+   "date": "2026-11-09",
+   "title": "Участок на Обской в Новосибирске выставлен на торги почти за 320 млн ₽",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Ngs.ru",
+     "https://ngs.ru/text/realty/2026/11/09/76753936/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "319,1 млн ₽ (стартовая цена)",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Проект КРТ территории впервые анонсирован в июле 2026 года, когда мэрия Новосибирска опубликовала проект постановления о комплексном развитии. Сейчас на участке 16 частных домов и 3 многоквартирных дома; в заголовке источника они названы «аварийными», но текст статьи не уточняет, все ли постройки признаны аварийными. Дом на Обской, 78, не расселяют 8 лет — в августе 2026 года этим заинтересовался глава СК РФ Александр Бастрыкин, после чего следственные органы региона возбудили уголовное дело о халатности по статье 293 УК РФ. Победитель торгов обязан расселить и снести все постройки до 1 августа 2030 года, построить на их месте жилой комплекс, достроить и оборудовать детский сад на 265 мест по улице Владимира Заровного, 9 (к концу 2030 года), построить дорогу по Бердскому переулку от Обской до перспективной 2-й Обской улицы, провести инфраструктуру и благоустройство; срок завершения строительства — 1 ноября 2033 года, благоустройства — 1 декабря 2033 года.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "319,1 млн ₽ (стартовая цена)",
+   "seller": "Организатор торгов не назван явно источником (объявление на площадке «ГИС Торги»; проект КРТ анонсировала мэрия Новосибирска в июле 2026 года)",
+   "asset": "Участок почти 1,8 га на берегу Оби в Новосибирске (улицы Обская, Бердский переулок, Закавказская) под проект комплексного развития территории (КРТ) — с обязательствами по расселению, строительству жилого комплекса, детского сада и дороги",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-09",
+     "title": "Торги назначены",
+     "note": "Аукцион по продаже проекта КРТ назначен на конец ноября 2026 года (точная дата в источнике не указана), площадка — «ГИС Торги».",
+     "source": [
+      "Ngs.ru",
+      "https://ngs.ru/text/realty/2026/11/09/76753936/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов",
+    "Недвижимость"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "Участок почти 1,8 га на берегу Оби в Новосибирске (улицы Обская, Бердский переулок, Закавказская) под проект комплексного развития территории (КРТ) — с обязательствами по расселению, строительству жилого комплекса, детского сада и дороги",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ngs.ru/text/realty/2026/11/09/76753936/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Организатор торгов не назван явно источником (объявление на площадке «ГИС Торги»; проект КРТ анонсировала мэрия Новосибирска в июле 2026 года)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ngs.ru/text/realty/2026/11/09/76753936/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T12:29:09+00:00",
+   "reviewed": "2026-11-09",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет — земельный участок под проект КРТ, не компания — профиль не нужен",
+     "seller": "организатор торгов источник прямо не называет — текстом, без профиля"
+    },
+    "searched": [
+     "ngs.ru (первоисточник, прочитан целиком)",
+     "WebSearch: КРТ Обская Бердский переулок Новосибирск аукцион",
+     "WebSearch: ГИС Торги Новосибирск КРТ 319 млн",
+     "сайт мэрии Новосибирска (проект постановления о КРТ, июль 2026) — не проверялся напрямую",
+     "другие новосибирские издания (ngs.ru — единственное найденное, второго не нашли)"
+    ]
+   },
+   "accepted": "2026-11-09",
+   "accepted_hash": "5bb25b97dcb7.ace5bd",
+   "second_read": "2026-11-09",
+   "second_read_hash": "5bb25b97dcb7.ace5bd"
+  },
+  {
+   "id": "ged4a9761",
+   "date": "2026-11-09",
+   "title": "Покупатель приобрел три квартиры в доме на острове Балчуг за 511 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261109/balchug-2130315647.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "511 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "511 млн ₽",
+   "buyer_name": "Покупатель",
+   "asset": "три квартиры в доме на острове Балчуг",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261109/balchug-2130315647.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Покупатель",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "три квартиры в доме на острове Балчуг",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T12:37:04+00:00"
+  },
+  {
+   "id": "g3755c36c",
+   "date": "2026-11-09",
+   "title": "«Столото» ищет счастливчика из Прикамья — житель края купил лотерейный билет за 5600 и выиграл почти 22 миллиона рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "59.ru",
+     "https://59.ru/text/entertainment/2026/11/09/76753822/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Столото» ищет счастливчика из Прикамья — житель края",
+   "asset": "лотерейный билет",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Победитель еще не обратился за своим призом",
+     "source": [
+      "59.ru",
+      "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Столото» ищет счастливчика из Прикамья — житель края",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ],
+    "target": [
+     {
+      "value": "лотерейный билет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T12:37:04+00:00"
+  },
+  {
+   "id": "g8aea35e0",
+   "date": "2023-02-10",
+   "title": "Команда юристов ККМП консультировала ПАО «ГМК «Норильский никель» при создании совместного предприятия с Горнорудным дивизионом Госкорпорации «Росатом» на базе вновь созданной компании ООО «Полярный л",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/700"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "themes": [
+    "Создание СП"
+   ],
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d20843737",
+    "title": "Команда юристов ККМП консультировала ПАО «ГМК «Норильский никель» при создании совместного предприятия с Горнорудным дивизионом Госкорпорации «Росатом» на базе вновь созданной компании ООО «Полярный л"
+   }
+  },
+  {
+   "id": "g4d2a7b61",
+   "date": "2024-02-06",
+   "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/1449"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d73176431",
+    "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская"
+   }
+  },
+  {
+   "id": "g60130b7f",
+   "date": "2024-11-05",
+   "title": "🎉 Команда юристов ККМП представляла интересы покупателя в сделке по приобретению контролирующего пакета акций в АО «ПРОГРЕСС», являющегося лидером на рынке детского питания в России и производящего бо",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/2091"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d28688476",
+    "title": "🎉 Команда юристов ККМП представляла интересы покупателя в сделке по приобретению контролирующего пакета акций в АО «ПРОГРЕСС», являющегося лидером на рынке детского питания в России и производящего бо"
+   }
+  },
+  {
+   "id": "g9e9c96fd",
+   "date": "2024-12-20",
+   "title": "🎉 Команда юристов ККМП сопровождала покупателя в сделке по выкупу одного из крупнейших в России элитных торговых центров «Времена Года», ранее принадлежавшего группе RD Property Holdings. ККМП сопрово",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/2209"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d89177448",
+    "title": "🎉 Команда юристов ККМП сопровождала покупателя в сделке по выкупу одного из крупнейших в России элитных торговых центров «Времена Года», ранее принадлежавшего группе RD Property Holdings. ККМП сопрово"
+   }
+  },
+  {
+   "id": "g5d91f991",
+   "date": "2022-07-08",
+   "title": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»)",
+   "ind": "Холдинги",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @kkmpconnect",
+     "https://t.me/kkmpconnect/105?deal=3"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Global Payments процессинговую компанию UCS (АО «Компания объ",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-07-08",
+     "title": "Сделка завершена",
+     "note": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с…",
+     "source": [
+      "Телеграм-канал @kkmpconnect",
+      "https://t.me/kkmpconnect/105?deal=3"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Интеррос»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=3"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Global Payments процессинговую компанию UCS (АО «Компания объ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/kkmpconnect/105?deal=3"
+     }
+    ]
+   },
+   "buyer": "g088e8f9f",
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d54644086",
+    "title": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»)"
+   }
+  },
+  {
+   "id": "g05d87236",
+   "date": "2022-10-27",
+   "title": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/329"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
+   "buyer_name": "HYSG Group («Доширак»)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-10-27",
+     "title": "Сделка завершена",
+     "note": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca). ALUMNI Partners консультирует The GBFoods в связи с продажей её бизнеса в России Команда ALUMNI Partners успешно завершила юридическое сопровождение The GBFoods S.A. в сделке по…",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/329"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "HYSG Group («Доширак»)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/329"
+     }
+    ],
+    "seller": [
+     {
+      "value": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/329"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d93807669",
+    "title": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)"
+   }
+  },
+  {
+   "id": "g0c7ad0fb",
+   "date": "2025-10-06",
+   "title": "Evermount Capital Group покупает у NK Group строящийся склад в «NK Домодедово-1»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2230"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "NK Group строящийся склад в «NK Домодедово-1»",
+   "buyer_name": "Evermount Capital Group",
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Evermount Capital Group",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2230"
+     }
+    ],
+    "seller": [
+     {
+      "value": "NK Group строящийся склад в «NK Домодедово-1»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/2230"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d81970774",
+    "title": "Evermount Capital Group покупает у NK Group строящийся склад в «NK Домодедово-1»"
+   }
+  },
+  {
+   "id": "gc708f8c0",
+   "date": "2025-10-07",
+   "title": "Radius Group и частный инвестор создали СП для индустриального парка «Северные врата»",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/2232"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "themes": [
+    "Создание СП"
+   ],
+   "pending_since": "2026-11-09T13:22:24+00:00",
+   "from_raw": {
+    "draft_id": "d92523887",
+    "title": "Radius Group и частный инвестор создали СП для индустриального парка «Северные врата»"
+   }
   }
  ]
 }

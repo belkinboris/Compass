@@ -1513,6 +1513,19 @@
    "last_error": null
   },
   {
+   "id": "tg:stonebridge_legal",
+   "name": "Stonebridge Legal",
+   "kind": "telegram",
+   "url": "https://t.me/stonebridge_legal",
+   "feed": "https://t.me/s/stonebridge_legal",
+   "feed_checked": true,
+   "tier": 3,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": null,
+   "last_error": null
+  },
+  {
    "id": "tg:bezrec",
    "name": "Без рецепта",
    "kind": "telegram",
