@@ -257308,7 +257308,7 @@
      "value": "2026-11-05",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "85f452d43946"
+     "card_hash": "af14dd23cbf2"
     },
     "nature": {
      "control_change": true,
@@ -257349,7 +257349,37 @@
     [
      "Телеграм-канал: Сделки M&A",
      "https://t.me/dealsma/7550"
+    ],
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/GK-Cifrovye-privychki-priobretaet-Umbrella-IT-87757"
     ]
+   ],
+   "events": [
+    {
+     "id": "signed-2026-11-05",
+     "kind": "signed",
+     "date": "2026-11-05",
+     "title": "Документы подписаны",
+     "historicalTitle": "«Цифровые привычки» покупают разработчика корпоративного ПО Umbrella IT",
+     "note": "",
+     "sources": [
+      [
+       "CNews",
+       "https://www.cnews.ru/news/line/2026-11-05_gk_tsifrovye_privychki_priobretaet"
+      ]
+     ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-11-09",
+     "title": "Переговоры",
+     "note": "Соглашение подписано в сентябре 2026 года, сделку планируется завершить в первом квартале 2027 года. Это первая M&A-сделка группы «Цифровые привычки» в 2026 году. Условия приобретения предусматривают механизм earn-out: часть вознаграждения зависит от…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/GK-Cifrovye-privychki-priobretaet-Umbrella-IT-87757"
+     ]
+    }
    ]
   },
   {
