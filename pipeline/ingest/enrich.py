@@ -248,8 +248,11 @@ def proposals(deal, item, names, comps, match_keys=None):
     out = []
 
     url = str(item.get('url') or '')
-    known = {str(s[1]) for s in (deal.get('src') or []) if len(s) > 1}
-    if url.startswith('http') and url not in known:
+    # Источник уже известен, если он лежит в `src` ИЛИ в `discovery_src` —
+    # туда `settle_sources()` переносит агрегаторы сразу после записи, и
+    # без этой проверки `enrich.py` предлагал их заново каждый час
+    # (`known_issues/intake.md`, Mergers.ru у Главпочтамта/Росатома).
+    if url.startswith('http') and not editions.has_source(deal, url):
         # Имя издания — по домену ссылки, не по внутреннему id ленты
         # («Источник — то, что подтверждает факт, а не то, как о нем
         # узнали»): у агрегаторов вроде `tg:dealsma` реестр называет канал,

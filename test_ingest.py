@@ -1740,6 +1740,17 @@ def test_enrich_adds_a_new_source_but_not_a_known_one(base):
              "url": "https://example.invalid/another", "source_id": "web:rbc.ru"}
     assert [p for p in enrich.proposals(deal, fresh, {}, base["companies"]) if p[0] == "src"]
 
+    # 9 ноября 2026: агрегатор, перенесенный в discovery_src после settle_sources(),
+    # предлагался заново каждый час — proposals() сверял известные ссылки только с src
+    import copy
+    with_discovery = copy.deepcopy(deal)
+    with_discovery.setdefault("discovery_src", []).append(
+        ["Агрегатор", "https://example.invalid/aggregator"])
+    discovered = {"title": "Та же новость с агрегатора",
+                  "url": "https://example.invalid/aggregator"}
+    assert not [p for p in enrich.proposals(with_discovery, discovered, {}, base["companies"])
+                if p[0] == "src"]
+
 
 def test_enrich_writes_only_on_a_strong_match():
     """Слабое совпадение в базу не пишет: в корзине «общие слова заголовка»
