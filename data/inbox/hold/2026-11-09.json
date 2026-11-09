@@ -1128,13 +1128,42 @@
    ]
   },
   {
-   "draft_id": "d72642440",
-   "title": "Россиян предупредили об активности мошенников перед распродажей 11.11",
+   "draft_id": "d69592197",
+   "title": "Uber добавил в приложение в США функцию поиска и бронирования парковок после покупки сервиса SpotHero",
    "date": "2026-11-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/09/rossiyan-predupredili-ob-aktivnosti-moshennikov-pered-rasprodazhey-11-11/"
+     "web:vc.ru",
+     "https://vc.ru/transport/3245197-uber-zapusk-funktsii-poiska-parkingov-v-ssha?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d93813943",
+   "title": "В Севастополе введут компенсации за покупку генераторов",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261109/sevastopol-2130429542.html"
     ]
    ],
    "sum": null,
