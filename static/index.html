@@ -627,6 +627,22 @@ nav a.on::after,nav a:hover::after{width:100%}
   .page-hero{padding:106px 20px 38px;margin-bottom:30px}
   .page-hero h1{font-size:27px}
 }
+/* ТЕЛЕФОН: ОТ ПОЛОСЫ РАЗДЕЛА — ТОЛЬКО УЗКАЯ ЛЕНТА С ПОДПИСЬЮ (владелец, 9 ноября
+   2026, обвел на снимках «Каталог»/«Авторам»: «верхнюю штуку во всех вкладках
+   убрать с названием страницы… она слишком много места занимает»). Название
+   раздела на телефоне и так подсвечено в нижней панели; заголовок остается в
+   разметке для поиска и экранного диктора, но не занимает места. Шапка сайта
+   на телефоне — 65px, лента начинается сразу под ней. */
+@media(max-width:720px){
+  .page-hero{padding:80px 20px 14px;margin-bottom:20px}
+  .page-hero h1{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .page-hero .ph-in{display:flex;align-items:center;min-height:21px}
+  .page-hero .label{display:inline-block;font-size:10.5px;line-height:21px}
+  .page-hero .ph-bg{display:none}
+  .page-hero .adv-cta-top{position:absolute;right:20px;top:79px;margin:0;z-index:3}
+}
+.adv-cta-top .cta-short{display:none}
+@media(max-width:400px){.adv-cta-top .cta-long{display:none}.adv-cta-top .cta-short{display:inline}}
 
 /* ---------- section / filters ---------- */
 .sec-head{margin:56px 0 26px}
@@ -2457,6 +2473,8 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .mp-item h2{font-family:var(--f-display);font-size:18px;font-weight:400;margin:0 0 8px}
 .mp-item p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 @media (max-width:760px){.materials-pitch{grid-template-columns:1fr}}
+.materials-pitch.one{grid-template-columns:minmax(0,560px)}
+.mat-tabs{margin-bottom:24px}
 /* МЕРОПРИЯТИЯ (владелец, 9 ноября 2026: «макет мероприятия можешь выкладывать») —
    стили из одобренного макета 29 октября; красный — цвет форума, не наш акцент. */
 
@@ -4256,7 +4274,7 @@ function route(){
     else renderAnalytics();
     mark("analytics");
   }
-  else if(page==="materials"||page==="webinars"){renderMaterials();mark("materials");}
+  else if(page==="materials"||page==="webinars"){renderMaterials(page==="webinars"?"webinars":arg);mark("materials");}
   else if(page==="event"){renderEvent(arg);mark("materials");}
   else if(page==="legal"){renderLegal(arg);}
   else if(page==="app"){renderPhoneApp();}
@@ -9444,7 +9462,7 @@ function renderAdvisors(){
     <!-- Компактная кнопка для самих фирм — наверху, рядом с заголовком, а не
          только большим блоком после списка (владелец, 8 октября 2026: «лаконичнее,
          чтобы не мешало смотреть контент ниже»). Письмо уходит в консоль сразу. -->
-    <button class="adv-cta-top reveal" id="firmCtaTop" type="button">Вы консультант? Свяжитесь с нами</button>
+    <button class="adv-cta-top reveal" id="firmCtaTop" type="button"><span class="cta-long">Вы консультант? Свяжитесь с нами</span><span class="cta-short">Вы консультант? Напишите</span></button>
     <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p class="ph-desc">Юристы, инвестиционные банки и другие советники по сделкам — по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
   <div class="feed-search reveal"><input id="advq" placeholder="Найти консультанта по названию…" value="${esc(advQuery)}" aria-label="Поиск по консультантам" autocomplete="off"><div class="ac" id="advac" hidden></div></div>
@@ -11186,7 +11204,7 @@ function eventsListHtml(tab){
 }
 function eventsSectionHtml(){
   const tab=EVENTS.some(ev=>evDays(ev)>=0)?"soon":"past";
-  return `<section class="evl reveal"><div class="evl-h"><h2>Мероприятия</h2><div class="evl-tabs"><button type="button" data-evtab="soon" class="${tab==="soon"?"on":""}">Предстоящие</button><button type="button" data-evtab="past" class="${tab==="past"?"on":""}">Прошедшие</button></div></div>
+  return `<section class="evl reveal"><div class="evl-h"><div class="evl-tabs"><button type="button" data-evtab="soon" class="${tab==="soon"?"on":""}">Предстоящие</button><button type="button" data-evtab="past" class="${tab==="past"?"on":""}">Прошедшие</button></div></div>
 <div id="evlList">${eventsListHtml(tab)}</div></section>`;
 }
 function bindEventTabs(){
@@ -11234,16 +11252,32 @@ ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener
   document.title=`${ev.heroTitle} — ${p.d} ${p.mon} ${p.y} · Проект Компас`;
 }
 
-async function renderMaterials(){
+/* ВКЛАДКИ «МАТЕРИАЛОВ» (владелец и партнер, 9 ноября 2026: «Материалы должны быть
+   вкладкой, как в консультантах по видам… на главной мероприятия, а остальное во
+   вкладках»). Вместо трех карточек-заявок над и под мероприятиями — вкладки, как
+   «Юридические / Инвестиционные…» у консультантов. Вкладка в адресе:
+   #/materials/<вкладка>, переключение без перезагрузки и без прыжка наверх. */
+const MAT_TABS=[["events","Мероприятия"],["columns","Колонки"],["webinars","Вебинары"],["authors","Авторам"]];
+const MAT_PITCH={
+  columns:{key:"column",h:"Вести колонку",p:"Разбор сделки, комментарий к закону, обзор отрасли. Выходит с вашим именем и фирмой."},
+  webinars:{key:"webinar",h:"Провести вебинар",p:"Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем Telegram-канале."},
+  authors:{key:"profile",h:"Профиль автора",p:"Ваши материалы собираются на странице фирмы рядом с ее сделками."},
+};
+function matPitchHtml(tab){
+  const m=MAT_PITCH[tab]; if(!m) return "";
+  return `<div class="materials-pitch one reveal"><button class="mp-item" type="button" data-pitch="${m.key}"><h2>${m.h}</h2><p>${m.p}</p><span class="mp-go">Оставить заявку →</span></button></div>`;
+}
+async function renderMaterials(arg){
+  const tab=MAT_TABS.some(t=>t[0]===arg)?arg:"events";
   app.innerHTML = `<div class="page-hero light"><div class="ph-in reveal"><span class="label">Авторам</span><h1>Материалы</h1><p class="ph-desc">Колонки и вебинары юристов, экономистов и консультантов. Каждый материал подписан автором и его фирмой.</p></div></div>
-  ${eventsSectionHtml()}
-  <div class="materials-pitch reveal">
-    <button class="mp-item" type="button" data-pitch="column"><h2>Вести колонку</h2><p>Разбор сделки, комментарий к закону, обзор отрасли. Выходит с вашим именем и фирмой.</p><span class="mp-go">Оставить заявку →</span></button>
-    <button class="mp-item" type="button" data-pitch="webinar"><h2>Провести вебинар</h2><p>Пришлите дату, тему и ссылку. Анонс выйдет здесь и в нашем Telegram-канале.</p><span class="mp-go">Оставить заявку →</span></button>
-    <button class="mp-item" type="button" data-pitch="profile"><h2>Профиль автора</h2><p>Ваши материалы собираются на странице фирмы рядом с ее сделками.</p><span class="mp-go">Оставить заявку →</span></button>
-  </div>
-  <p class="acct-note mp-note reveal">Здесь появляются конференции и вебинары, где Компас — информационный партнер, колонки и вебинары авторов. Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>
-  <div id="webinarList"><p class="acct-note reveal">Загружаем…</p></div>`;
+  <div class="type-tabs mat-tabs reveal">${MAT_TABS.map(([k,n])=>`<button type="button" data-mt="${k}" class="${k===tab?"on":""}">${n}</button>`).join("")}</div>
+  <div id="matBody">${tab==="events"?eventsSectionHtml():matPitchHtml(tab)}</div>
+  ${tab==="webinars"?`<div id="webinarList"></div>`:""}
+  <p class="acct-note mp-note reveal">Вопросы — <a href="#" id="materialsPitchLink">напишите редакции</a>.</p>`;
+  app.querySelectorAll("[data-mt]").forEach(b=>b.onclick=()=>{
+    history.replaceState(null,"",b.dataset.mt==="events"?"#/materials":"#/materials/"+b.dataset.mt);
+    renderMaterials(b.dataset.mt).then(()=>app.querySelectorAll(".reveal").forEach(e=>e.classList.add("in")));
+  });
   rerun();
   bindEventTabs();
   const pitchLink=document.getElementById("materialsPitchLink");
@@ -11257,6 +11291,7 @@ async function renderMaterials(){
   };
   app.querySelectorAll("[data-pitch]").forEach(b=>b.onclick=()=>openCorrectionDialog(null, PITCH[b.dataset.pitch]));
   const mount=document.getElementById("webinarList");
+  if(!mount) return;
   try{
     const r=await fetch("/api/webinars"); const rows=r.ok?await r.json():[];
     /* Пока вебинаров нет, под карточками заявки ничего не рисуется: пустая
