@@ -78,6 +78,21 @@ BLOCKING = ('title_standard', 'share_form', 'party_legal_form', 'plain_words', '
             'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants')
 
 
+# Короткая проверка (владелец, 9 ноября 2026: «пройдись короткой проверкой по 273
+# картам после 3 октября»). Карточки, созданные после 3 октября, прошли приемку по
+# статье при создании; на 17 вычитанных из них неверных покупателей не нашлось,
+# правки были в дате, доле и продавце. Поэтому сверяется только каркас сделки:
+# стороны, дата и статус, сумма и доля, консультанты, заголовок. Отметка та же
+# (`reread`), с `reread_scope: short` — полная вычитка такие карточки не берет.
+SHORT_FROM = '2026-10-03'
+SHORT_FIELDS = ('title', 'eco.sum', 'eco.share')
+SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers')
+SHORT_BLOCKING = ('title_standard', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
+                  'parties_missing', 'jv_participants', 'party_legal_form')
+SHORT_ADVISERS_Q = ('Консультанты (law.adv, eco.finadv): каждый подтвержден источником, у роли назван клиент '
+                    '(или «одной из сторон», если ни один источник и устройство сделки его не дают)?')
+
+
 def load():
     return json.load(open(DATA, encoding='utf-8'))
 
@@ -173,13 +188,43 @@ def dossier(card, why, data):
     return '\n'.join(lines)
 
 
+def short_dossier(card, data):
+    """Досье короткой проверки: карточка, находки, вопросы только о каркасе сделки."""
+    import second_reading
+    keys = ('title', 'type', 'status', 'date', 'buyer', 'buyer_name', 'seller', 'seller_name', 'target', 'asset',
+            'sum')
+    lines = ['#' * 78, '%s  %s%s  (короткая проверка, добавлена %s)' % (card['id'], SITE, card['id'], card.get('added'))]
+    lines += ['  %s: %s' % (k, card.get(k)) for k in keys if card.get(k) not in (None, '', [])]
+    eco, law = card.get('eco') or {}, card.get('law') or {}
+    for k in ('sum', 'share', 'finadv'):
+        if eco.get(k):
+            lines.append('  eco.%s: %s' % (k, eco[k]))
+    for a in law.get('adv') or []:
+        lines.append('  law.adv: %s' % ' | '.join(str(x) for x in a))
+    lines += ['  src: %s' % ' '.join(str(x) for x in s) for s in card.get('src') or []]
+    f = [x for x in _findings(card, data) if x[0].split(':')[0] in SHORT_BLOCKING]
+    lines += ['  ! %s %s' % (c, t) for c, t in f]
+    lines += registry_lines(card, data)
+    q = dict(second_reading.GENERAL_QUESTIONS, **SOURCE_QUESTIONS, advisers=SHORT_ADVISERS_Q)
+    lines += ['[%s] %s' % (k, q[k]) for k in SHORT_GENERAL]
+    return '\n'.join(lines)
+
+
 def check(ans, card, data):
     import second_reading
+    short = ans.get('scope') == 'short'
     general_q = dict(second_reading.GENERAL_QUESTIONS, **SOURCE_QUESTIONS)
     bad = []
     fields, general = ans.get('fields') or {}, ans.get('general') or {}
-    bad += ['нет ответа по полю %s' % f for f in second_reading.filled_fields(card) if f not in fields]
-    bad += ['нет ответа на вопрос %s' % k for k in general_q if k not in general]
+    if short:
+        if (card.get('added') or '') < SHORT_FROM:
+            bad.append('короткая проверка — только для карточек, добавленных с %s' % SHORT_FROM)
+        bad += ['нет ответа по полю %s' % f for f in SHORT_FIELDS
+                if f in second_reading.filled_fields(card) and f not in fields]
+        bad += ['нет ответа на вопрос %s' % k for k in SHORT_GENERAL if k not in general]
+    else:
+        bad += ['нет ответа по полю %s' % f for f in second_reading.filled_fields(card) if f not in fields]
+        bad += ['нет ответа на вопрос %s' % k for k in general_q if k not in general]
     left = [k for k, v in list(fields.items()) + list(general.items()) if str(v).strip().lower() != 'ok']
     if left:
         bad.append('замечания не исправлены (ответ не «ok»): %s' % ', '.join(left))
@@ -199,7 +244,7 @@ def check(ans, card, data):
             bad.append('правки не записаны (review.py --write): %s' % ', '.join(r['field'] for r in pending))
     ok = ans.get('ok_findings') or {}
     for c, _t in _findings(card, data):
-        if c.split(':')[0] in BLOCKING and not (len(str(ok.get(c) or '')) >= 15):
+        if c.split(':')[0] in (SHORT_BLOCKING if short else BLOCKING) and not (len(str(ok.get(c) or '')) >= 15):
             bad.append('находка приемки без причины: %s' % c)
     return bad
 
@@ -220,6 +265,10 @@ def keep_post_title(data, card):
 def stamp(card, ans, comps, day=None):
     card[STAMP] = day or date.today().isoformat()
     card[STAMP + '_hash'] = readiness.fingerprint(card, comps)
+    if ans.get('scope') == 'short':
+        card[STAMP + '_scope'] = 'short'
+    else:
+        card.pop(STAMP + '_scope', None)
     opened = [u for u in ans.get('sources_opened') or [] if str(u).startswith('http')]
     card[STAMP + '_note'] = ('статьи: %d' % len(opened)) if opened else ('без статьи: ' + str(ans.get('note')))
 
@@ -267,6 +316,16 @@ def main(argv):
         by_id = {d['id']: d for d in data['deals']}
         for cid in want:
             print(dossier(by_id[cid], 'вне очереди', data))
+        return 0
+    if '--short' in argv:
+        # Карточки для короткой проверки: не вычитаны, добавлены с SHORT_FROM.
+        n = int(argv[argv.index('--short') + 1])
+        todo = [c for c, _why in queue(data) if not c.get(STAMP) and (c.get('added') or '') >= SHORT_FROM]
+        if '--list' in argv:
+            print('\n'.join(c['id'] for c in todo[:n]))
+            return 0
+        for c in todo[:n]:
+            print(short_dossier(c, data))
         return 0
     if '--next' in argv:
         n = int(argv[argv.index('--next') + 1])

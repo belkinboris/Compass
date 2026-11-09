@@ -11060,3 +11060,24 @@ def test_firm_channel_post_is_recognized_as_advisory_deal():
     assert not promote.is_firm_advisory_post(rating)
     media = dict(deal, src=[["РБК", "https://www.rbc.ru/x"]])
     assert not promote.is_firm_advisory_post(media)
+
+
+def test_short_reread_is_only_for_cards_added_after_october_3_and_marks_its_scope():
+    """Владелец, 9 ноября 2026: карточки, созданные с 3 октября, проходят короткую
+    проверку (стороны, дата, сумма, доля, консультанты, заголовок), полная вычитка —
+    для более старых. Короткий ответ не годится для старой карточки, а отметка
+    помечает объем проверки."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('reread_queue_s', 'pipeline/reread_queue.py')
+    rq = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rq)
+    data = {"deals": [], "companies": {}}
+    card = {"id": "gs1", "type": "M&A", "status": "Закрыта", "added": "2026-10-20",
+            "title": "«Альфа» купила 100% «Беты» у «Гаммы»"}
+    ans = {"id": "gs1", "scope": "short", "verdict": "ok", "sources_opened": ["https://example.ru/a"],
+           "fields": {"title": "ok"}, "general": {k: "ok" for k in rq.SHORT_GENERAL}}
+    assert not [b for b in rq.check(ans, card, data) if "нет ответа" in b or "короткая" in b]
+    old = dict(card, added="2026-08-01")
+    assert any("короткая проверка" in b for b in rq.check(ans, old, data))
+    rq.stamp(card, ans, {})
+    assert card["reread_scope"] == "short" and card["reread"]
