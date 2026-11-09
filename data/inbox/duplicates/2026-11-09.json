@@ -1,0 +1,36 @@
+{
+ "made": "2026-11-09",
+ "items": [
+  {
+   "key": "https://www.dp.ru/a/2026/11/08/appetitnij-aktiv-semja-prigozhina::gfc3e1ae2",
+   "candidate_id": "gfc3e1ae2",
+   "reason": "общие редкие слова: контро, перешл",
+   "draft": {
+    "draft_id": "d34339802",
+    "title": "Сеть магазинов готовой еды Uppetit перешла под контроль семьи Пригожина",
+    "date": "2026-11-09",
+    "src": [
+     [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/11/08/appetitnij-aktiv-semja-prigozhina"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [],
+    "buyer_name": "АО «Деловые связи»",
+    "asset": "100% долей ООО «Аппетит»",
+    "seller": "Антон Дулов",
+    "parsed_parties": {
+     "buyer": "АО «Деловые связи»",
+     "asset": "100% долей ООО «Аппетит»",
+     "seller": "Антон Дулов"
+    },
+    "ind": "Ритейл",
+    "needs_review": true
+   },
+   "queued": "2026-11-09"
+  }
+ ]
+}
