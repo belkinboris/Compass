@@ -1031,74 +1031,6 @@
    ]
   },
   {
-   "draft_id": "d88640779",
-   "title": "Основатель ГК «Урбантех» Андрей Денисенков купил 18,2% в производителе коммутаторов КИТ",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Osnovatel-GK-Urbanteh-Andrej-Denisenkov-kupil-182-v-proizvoditele-kommutatorov-KIT-87759"
-    ]
-   ],
-   "sum": "98 млрд ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-09",
-     "title": "Сделка завершена",
-     "note": "Инвестиция осуществлена за счет личных средств, сумму сделки в компании отказались раскрыть. Средства пойдут на ускорение создания новых линеек коммутаторов для корпоративных сетей, ЦОД и инфраструктуры искусственного интеллекта. По оценке КИТ, объем…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Osnovatel-GK-Urbanteh-Andrej-Denisenkov-kupil-182-v-proizvoditele-kommutatorov-KIT-87759"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "производитель коммутаторов КИТ",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "производитель коммутаторов КИТ",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g1eda1117 (общие слова заголовка: 6) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d80675673",
-   "title": "В Тульской области работу получили 77,5% ветеранов СВО",
-   "date": "2026-11-09",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28299733"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "етеранов СВО",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "етеранов СВО",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d37340433",
    "title": "Эксперты оценили перспективы продажи активов АЗС «Трасса» после банкротства",
    "date": "2026-11-09",
@@ -1127,13 +1059,126 @@
    ]
   },
   {
-   "draft_id": "d79593069",
-   "title": "Скидки до 90% и пустой кошелек: раскрыты ловушки распродажи 11 ноября",
+   "draft_id": "d16080969",
+   "title": "ЦБ: тесты для покупки криптовалюты на российском рынке появятся в ноябре",
    "date": "2026-11-09",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/9/skidki-do-90-i-pustoj-koshelek-raskryty-lovushki-rasprodazhi-11-noyabrya"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/09/1243819-testi-dlya-pokupki-kriptovalyuti"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88117248",
+   "title": "Знаменитый российский производитель электроники перешел к неизвестному владельцу на фоне розыска прежнего собственника",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-09_krupnyj_proizvoditel_elektroniki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g83ad1f72 (общие редкие слова: переше, россий) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d78992752",
+   "title": "Аресты с недвижимости Блиновской сняли для передачи государству",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/09/aresti-s-nedvizhimosti-blinovskoj"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22718422",
+   "title": "Правительство Ботсваны увеличит долю в алмазодобывающей компании De Beer",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/pravitelstvo-875042292.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01692826",
+   "title": "Известный тюменский ресторан доставки выставили на продажу",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053142596"
     ]
    ],
    "sum": null,
@@ -1153,6 +1198,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d86702213",
+   "title": "В Новосибирске продают шайбу с автографом обладателя Кубка Стэнли — сколько за нее просят",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/entertainment/2026/11/09/76754795/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

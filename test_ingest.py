@@ -1740,6 +1740,17 @@ def test_enrich_adds_a_new_source_but_not_a_known_one(base):
              "url": "https://example.invalid/another", "source_id": "web:rbc.ru"}
     assert [p for p in enrich.proposals(deal, fresh, {}, base["companies"]) if p[0] == "src"]
 
+    # 9 ноября 2026: агрегатор, перенесенный в discovery_src после settle_sources(),
+    # предлагался заново каждый час — proposals() сверял известные ссылки только с src
+    import copy
+    with_discovery = copy.deepcopy(deal)
+    with_discovery.setdefault("discovery_src", []).append(
+        ["Агрегатор", "https://example.invalid/aggregator"])
+    discovered = {"title": "Та же новость с агрегатора",
+                  "url": "https://example.invalid/aggregator"}
+    assert not [p for p in enrich.proposals(with_discovery, discovered, {}, base["companies"])
+                if p[0] == "src"]
+
 
 def test_enrich_writes_only_on_a_strong_match():
     """Слабое совпадение в базу не пишет: в корзине «общие слова заголовка»
@@ -11081,3 +11092,14 @@ def test_short_reread_is_only_for_cards_added_after_october_3_and_marks_its_scop
     assert any("короткая проверка" in b for b in rq.check(ans, old, data))
     rq.stamp(card, ans, {})
     assert card["reread_scope"] == "short" and card["reread"]
+
+
+def test_title_standard_accepts_the_confiscation_construction():
+    """9 ноября 2026: правило «Изъятие» в стандарте заголовка было, а глагола в проверке
+    не было, и находка горела на ~60 изъятиях при любом заголовке."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard
+    card = {"type": "M&A", "status": "Закрыта"}
+    assert title_standard.verb_ok(card, "Активы вице-губернатора Кубани обращены в доход государства")
+    assert title_standard.verb_ok(card, "79,6% акций «Порта Пермь» истребованы в пользу государства")
+    assert not title_standard.verb_ok(card, "Активы X изъяты по иску прокуратуры")
