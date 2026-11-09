@@ -1031,17 +1031,74 @@
    ]
   },
   {
-   "draft_id": "d86756133",
-   "title": "Мосбиржа объявила дискретный аукцион по акциям Уралсиба",
+   "draft_id": "d42068676",
+   "title": "Туристы в Турции стали меньше тратить на покупки, пишут СМИ",
    "date": "2026-11-09",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/09/1243597-po-aktsiyam-uralsiba"
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/turisty-875020028.html"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76288855",
+   "title": "У сети магазинов готовой еды Uppetit в Санкт-Петербурге сменился владелец",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261109/uppetit-2130254043.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "сети магазинов готовой еды Uppetit в Санкт-Петербурге",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "сети магазинов готовой еды Uppetit в Санкт-Петербурге",
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g00f36bab (общие редкие слова: uppeti, готово) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d71036286",
+   "title": "Инвестиции компаний из ОЭЗ «Технополис Москва» выросли в шесть раз",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261109/investitsii-2130230478.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1059,52 +1116,70 @@
    ]
   },
   {
-   "draft_id": "d54845839",
-   "title": "В Бурятии участок россыпного золота продали почти в 20 раз дороже стартовой цены",
+   "draft_id": "d04719154",
+   "title": "Когда покупать / продавать баксы (динамика курса доллара по месяцам за последние 23 года)",
    "date": "2026-11-09",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28297803"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1372218.php"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-09",
-     "title": "Сделка завершена",
-     "note": "Его купили за 574 млн рублей",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28297803"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "почти в 20 раз дороже стартовой цены",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "почти в 20 раз дороже стартовой цены",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d27568989",
-   "title": "Мосбиржа проводит дискретный аукцион по акциям банка «Уралсиб»",
+   "draft_id": "d39969896",
+   "title": "Уныние российского корпоративного сектора разорвала новость о покупке Т банком Циана!",
    "date": "2026-11-09",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261109/mosbirzha-875019473.html"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1372197.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74738546",
+   "title": "Недостроенный завод у Соловьиной рощи в Ростове продадут на аукционе",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/gorod/2026/11/09/76753123/"
     ]
    ],
    "sum": null,
@@ -1119,7 +1194,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

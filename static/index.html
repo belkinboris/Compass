@@ -2501,9 +2501,14 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-v .bd b{font-size:14px;line-height:1.35}
 .ev-v .bd span{font-size:12.5px;color:var(--muted);line-height:1.45}
 .ev-v .bd em{font-style:normal;font-size:12px;color:var(--accent);font-weight:600}
-.ev-org{display:flex;flex-wrap:wrap;gap:10px}
-.ev-org a{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 18px;font-weight:600;font-size:14px;color:var(--ink);text-decoration:none}
-.ev-org a small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+/* Организаторы — ровная сетка одинаковых прямоугольников (владелец, 9 ноября 2026:
+   «сделай просто ровные симпатичные прямоугольники», порядок — латиница, потом кириллица). */
+.ev-org{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:1fr;gap:10px}
+.ev-org a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:64px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-weight:600;font-size:14.5px;line-height:1.3;color:var(--ink);text-decoration:none;min-width:0}
+.ev-org a::after{content:"→";color:var(--muted);font-weight:400;flex:none}
+.ev-org a:hover{border-color:#C8321E}
+@media(max-width:1000px){.ev-org{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.ev-org{grid-template-columns:1fr}.ev-org a{min-height:56px}}
 @media(max-width:760px){.ev-hero{grid-template-columns:1fr}.ev-two{grid-template-columns:1fr}.ev-hero .l{padding:26px 20px}.ev-hero .r{padding:22px 20px}}
 
 .mts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
@@ -2524,6 +2529,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-p .md{font-size:13px;font-weight:600;margin-bottom:3px}
 .ev-p .sp{font-size:13px;color:var(--muted);line-height:1.5}
 .ev-cta{display:inline-block;background:#fff;color:#C8321E;font-weight:700;font-size:14px;border-radius:999px;padding:11px 22px;text-decoration:none;width:fit-content}
+@media(max-width:400px){.ev-cta{white-space:nowrap;font-size:13.5px;padding:11px 18px}}
 .ev-cd{display:flex;gap:14px}
 .ev-cd div{min-width:0}
 .ev-why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
@@ -11163,7 +11169,9 @@ function evDays(ev){
   return Math.round((Date.UTC(y,m-1,d)-today)/86400000);
 }
 function evDateParts(ev){const [y,m,d]=ev.date.split("-").map(Number);return {y,m,d,mon:EV_MONTHS[m-1]};}
-function evOrgsText(ev){return ev.orgs.map(o=>o[1]).join(", ");}
+/* Латиница, потом кириллица, внутри — по алфавиту (владелец, 9 ноября 2026). */
+function evOrgsSorted(ev){return [...ev.orgs].sort((a,b)=>(/^[A-Za-z]/.test(a[1])?0:1)-(/^[A-Za-z]/.test(b[1])?0:1)||a[1].localeCompare(b[1],"ru"));}
+function evOrgsText(ev){return evOrgsSorted(ev).map(o=>o[1]).join(", ");}
 function eventsListHtml(tab){
   const list=EVENTS.filter(ev=>tab==="past"?evDays(ev)<0:evDays(ev)>=0)
     .sort((a,b)=>tab==="past"?b.date.localeCompare(a.date):a.date.localeCompare(b.date));
@@ -11197,7 +11205,7 @@ function renderEvent(id){
   const article=ev.materials[0];
   const prog=ev.program.map((s,i)=>`<div class="ev-p"><div class="tm">${esc(s.t)}<small>Сессия ${i+1}</small></div><div><h4>${esc(s.title)}</h4><div class="md">Модератор: ${esc(s.mod)}</div><div class="sp">${esc(s.sp)}</div></div></div>`).join("");
   const mats=ev.materials.map(m=>`<a class="mt" href="${m.u}" target="_blank" rel="noopener"><span class="mt-ic">PDF</span><span class="mt-b"><span class="mt-k">${esc(m.k)}</span><span class="mt-t">${esc(m.t)}</span><span class="mt-d">Скачать ↓</span></span></a>`).join("");
-  const orgs=ev.orgs.map(([fid,n])=>`<a href="#/advisors/${fid}">${esc(n)}<small>страница фирмы</small></a>`).join("");
+    const orgs=evOrgsSorted(ev).map(([fid,n])=>`<a href="#/advisors/${fid}">${esc(n)}</a>`).join("");
   app.innerHTML=`<div class="ev-wrap"><div class="evp-crumbs"><a href="#/materials">Материалы</a> → <a href="#/materials">Мероприятия</a> → Форум M&amp;A</div>
 <section class="ev">
 <div class="ev-hero"><div class="l"><span class="kick">${esc(kick)}</span>
@@ -11211,7 +11219,7 @@ ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener
 <div style="height:22px"></div>
 <div class="ev-two">
 <article class="ev-card"><span class="ev-tag">Анонс</span><h3>${p.d} ${p.mon} — 4-й Форум слияний и поглощений</h3>
-<p>Форум — одно из ключевых событий года для юристов и специалистов по сделкам. Пять сессий за день: от обзора рынка до трансграничных сделок и арбитража. Модераторы — партнеры ККМП, АЛРУД, «Никольской Консалтинг», Orion и Stonebridge Legal.</p>
+<p>Форум — одно из ключевых событий года для юристов и специалистов по сделкам. Пять сессий за день: от обзора рынка до трансграничных сделок и арбитража. Модераторы — партнеры Orion, Stonebridge Legal, АЛРУД, ККМП и «Никольской Консалтинг».</p>
 <p>Компас — информационный партнер форума. После мероприятия здесь появятся записи сессий и материалы спикеров.</p>
 <div class="by">Редакция Компаса</div><a class="go" href="${ev.site}" target="_blank" rel="noopener">Сайт форума →</a></article>
 <article class="ev-card"><span class="ev-tag">Аналитическая статья</span><h3>${esc(article.t)}</h3>
@@ -11221,7 +11229,7 @@ ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener
 <div class="mts">${mats}</div>
 <div class="ev-h"><h2>Программа</h2><small>${p.d} ${p.mon} · по сайту организатора</small></div>
 <div class="ev-prog">${prog}</div>
-<div class="ev-h"><h2>Организаторы</h2><small>Страницы фирм в Компасе</small></div>
+<div class="ev-h"><h2>Организаторы</h2></div>
 <div class="ev-org">${orgs}</div></section><div style="height:40px"></div></div>`;
   document.title=`${ev.heroTitle} — ${p.d} ${p.mon} ${p.y} · Проект Компас`;
 }

@@ -4934,7 +4934,11 @@ def test_materials_lists_events_and_event_page_opens(page, base_url):
     for part in ("Регистрация", "Материалы форума", "Программа", "Организаторы", "Информационный партнер"):
         assert part in text or part.upper() in text, part
     assert page.get_attribute(".ev-cta", "href").startswith("/go/ma-forum-2026")
-    assert page.locator(".ev-org a").count() == 5
+    names = page.locator(".ev-org a").all_inner_texts()
+    assert [n.strip() for n in names] == ["Orion", "Stonebridge Legal", "АЛРУД", "ККМП", "Никольская Консалтинг"], names
+    assert "Страницы фирм" not in text
+    widths = page.evaluate("[...document.querySelectorAll('.ev-org a')].map(a=>Math.round(a.getBoundingClientRect().width))")
+    assert len(set(widths)) == 1, widths   # ровная сетка: все прямоугольники одной ширины
 
 
 def test_page_source_does_not_name_the_team():
