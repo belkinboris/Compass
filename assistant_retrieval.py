@@ -159,6 +159,15 @@ def same_word(a: str, b: str) -> bool:
             break
         n += 1
     short = min(len(a), len(b))
+    # Разные слова с общим началом: у обоих после него свой заметный хвост.
+    # «Ситибанк» и «Ситинг» («Магна Ситинг», дочка Magna) совпадали по «Сити»,
+    # и на «Кто купил Ситибанк?» ассистент отвечал заводами Magna (9 ноября
+    # 2026, после вычитки карточки Magna). Падежи («банк»/«банка»,
+    # «компании»/«компания», «Иван»/«Иванов») хвост в одну букву или пустой.
+    ta, tb = len(a) - n, len(b) - n
+    # Только кириллица: в латинских названиях хвосты чаще опечатка («Wildberis»).
+    if min(ta, tb) >= 2 and max(ta, tb) >= 3 and re.match(r"[а-яё]", a or ""):
+        return False
     return n >= 3 and n >= 0.6 * short
 
 
@@ -674,9 +683,18 @@ def _build(data: dict, firms: list[Firm], mtime: float) -> Index:
     company_deals: dict[str, list[Doc]] = defaultdict(list)
     for deal in data.get("deals") or []:
         ds = str(deal.get("date") or "")
-        if not ds[:4].isdigit() or int(ds[:4]) < SITE_MIN_YEAR:
+        # «unknown» — законная запись даты (docs/card_status_dates.md): сайт
+        # такую карточку показывает, значит, и ассистент должен ее находить;
+        # в отбор по году она не попадает (год 0). До 9 ноября 2026 карточка
+        # выпадала из индекса целиком (Денисенков/КИТ, g1eda1117).
+        if ds[:4].isdigit():
+            if int(ds[:4]) < SITE_MIN_YEAR:
+                continue
+            year = int(ds[:4])
+        elif ds == "unknown":
+            year = 0
+        else:
             continue
-        year = int(ds[:4])
         buyer = _company_name(companies, deal.get("buyer")) or (deal.get("buyer_name") or "")
         seller = _company_name(companies, deal.get("seller_id")) or (deal.get("seller") or "")
         target = _company_name(companies, deal.get("target") or deal.get("asset_id"))
@@ -2192,7 +2210,7 @@ def _list_answer(kind: str, intent: Intent, idx: Index, pool: list[Doc], head: s
     if not intent.span or intent.span[0] != intent.span[1]:
         by_year = Counter(d.year for d in pool)
         if len(by_year) > 1:
-            lines.append("По годам: " + ", ".join(f"{y} — {c}" for y, c in sorted(by_year.items())) + ".")
+            lines.append("По годам: " + ", ".join((f"{y} — {c}" if y else f"год не известен — {c}") for y, c in sorted(by_year.items())) + ".")
     if intent.wants_advisors:
         stats = _advisor_stats(pool, idx)
         named = sum(1 for d in pool if d.advisors)
@@ -2469,7 +2487,7 @@ def _answer_count(intent: Intent, idx: Index) -> Retrieval:
     if pool:
         by_year = Counter(d.year for d in pool)
         if not span_single(intent.span) and len(by_year) > 1:
-            lines.append("По годам: " + ", ".join(f"{y} — {c}" for y, c in sorted(by_year.items())) + ".")
+            lines.append("По годам: " + ", ".join((f"{y} — {c}" if y else f"год не известен — {c}") for y, c in sorted(by_year.items())) + ".")
         if intent.wants_price:
             lines += _price_lines(pool, intent)
         lines.append("Последние:")
@@ -3568,7 +3586,7 @@ def suggestions(idx: Index | None = None) -> list[str]:
     if by_industry:
         top_ind = max(by_industry.items(), key=lambda kv: kv[1])[0]
         out.append(f"Какие сделки были в отрасли «{top_ind}»?")
-    years = sorted({d.year for d in idx.docs}, reverse=True)
+    years = sorted({d.year for d in idx.docs if d.year}, reverse=True)
     if years:
         y = years[1] if len(years) > 1 else years[0]
         out.append(f"Самые крупные сделки {y} года")
