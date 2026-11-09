@@ -289,6 +289,15 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
 .hs-shared h1,.hs-shared p{visibility:hidden}
 .hs-bar{position:relative;margin-top:32px;width:300px;height:50px;flex:none;background:var(--ivory);border-radius:4px;pointer-events:auto;transition:background .2s}
 .hs-bar:hover{background:#fff}
+/* Кнопка форума рядом с «Смотреть сделки» (владелец, 9 ноября 2026): того же
+   размера, красная в цвет страницы форума (.ev-hero); на компьютере справа,
+   на телефоне под кнопкой. */
+.hs-ctas{display:flex;gap:12px;margin-top:32px;pointer-events:auto}
+.hs-ctas .hs-bar{margin-top:0}
+.hs-forum{width:300px;height:50px;flex:none;display:flex;align-items:center;justify-content:center;background:#C8321E;color:#fff;border-radius:4px;
+  font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;pointer-events:auto;transition:background .2s}
+.hs-forum:hover{background:#9E2716}
+.hs-forum:focus-visible{outline:2px solid #F3F4F1;outline-offset:3px}
 .hs-bar a{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--accent-deep);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
   opacity:0;pointer-events:none;transform:translateY(5px);transition:opacity .5s ease,transform .6s var(--ease)}
 .hs-bar a.on{opacity:1;pointer-events:auto;transform:none;transition-delay:.2s}
@@ -368,6 +377,8 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-in p{font-size:14.5px;margin-top:14px;height:calc(1.6em * 5)}
   .hs-gap{height:96px}
   .hs-bar{margin-top:18px;width:auto}
+  .hs-ctas{flex-direction:column;margin-top:18px;gap:10px}
+  .hs-forum{width:auto}
   /* Сцена стоит там же, где стояла при прежней высоте героя («366px +
      ширина»): лишняя высота окна уходит в темную полосу под ней, за нижней
      панелью разделов, а яхта не прячется под панель. */
@@ -395,6 +406,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
   .hs-in h1.hs-word{font-size:52px}
   .hs-in p{font-size:16px;height:calc(1.6em * 3)}
   .hs-bar{width:320px}
+  .hs-forum{width:320px}
   .heroslider{--hs-h:min(calc(348px + 100vw), max(628px, 100dvh));height:var(--hs-h)}
   .hx-tick{font-size:17px}
 }
@@ -6071,7 +6083,7 @@ function renderDeals(){
         ${modeToggleHtml(false)}
       </div>
     </div>
-    <div class="hs-in hs-shared"><h1 class="hs-word">&nbsp;</h1><p></p><div class="hs-dots">${[0,1,2,3,4].map(i=>`<button data-dot="${i}" class="${i===0?"on":""}" aria-label="Слайд ${i+1}"></button>`).join("")}</div><div class="hs-bar"><a class="on" href="#feed" data-scroll>Смотреть сделки</a><a href="#/companies">Открыть компании</a><a href="#/advisors">Открыть консультантов</a><a href="#/analytics">Открыть аналитику</a><a href="#/assistant">Открыть ассистента</a></div></div>
+    <div class="hs-in hs-shared"><h1 class="hs-word">&nbsp;</h1><p></p><div class="hs-dots">${[0,1,2,3,4].map(i=>`<button data-dot="${i}" class="${i===0?"on":""}" aria-label="Слайд ${i+1}"></button>`).join("")}</div><div class="hs-ctas"><div class="hs-bar"><a class="on" href="#feed" data-scroll>Смотреть сделки</a><a href="#/companies">Открыть компании</a><a href="#/advisors">Открыть консультантов</a><a href="#/analytics">Открыть аналитику</a><a href="#/assistant">Открыть ассистента</a></div><a class="hs-forum" href="#/event/ma-forum-2026">Ежегодный M&amp;A Форум</a></div></div>
     <button class="hs-arrow prev" aria-label="Предыдущий слайд">←</button>
     <button class="hs-arrow next" aria-label="Следующий слайд">→</button>
     <div class="hs-cue">↓</div>
