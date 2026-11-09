@@ -4907,7 +4907,7 @@ def test_materials_page_has_no_empty_webinar_card(page, base_url):
     """Владелец 6 октября 2026: карточку «Первый вебинар готовится. Анонсы и
     записи появятся здесь» убрать — пока вебинаров нет, под карточками заявки
     ничего не стоит, и строка над ними не обещает «ниже анонсы»."""
-    visit(page, base_url, "#/materials")
+    visit(page, base_url, "#/materials/webinars")
     page.wait_for_selector(".materials-pitch")
     page.wait_for_timeout(800)
     text = page.inner_text("#app")
@@ -4925,9 +4925,17 @@ def test_materials_lists_events_and_event_page_opens(page, base_url):
     где есть регистрация через нашу ссылку, материалы, программа и организаторы."""
     visit(page, base_url, "#/materials")
     page.wait_for_selector(".evl")
-    top = page.evaluate("[document.querySelector('.evl').getBoundingClientRect().top,"
-                        " document.querySelector('.materials-pitch').getBoundingClientRect().top]")
-    assert top[0] < top[1], top
+    # 9 ноября 2026 (владелец и партнер): «Материалы» — вкладками, как виды консультантов;
+    # по умолчанию «Мероприятия», заявки «Вести колонку…» — в своих вкладках.
+    tabs = [t.strip() for t in page.locator(".mat-tabs button").all_inner_texts()]
+    assert [t.lower() for t in tabs] == ["мероприятия", "колонки", "вебинары", "авторам"], tabs
+    assert page.locator(".mat-tabs button.on").inner_text().strip().lower() == "мероприятия"
+    assert page.locator(".materials-pitch").count() == 0
+    page.click("[data-mt=columns]")
+    page.wait_for_selector(".materials-pitch [data-pitch=column]")
+    assert page.url.endswith("#/materials/columns")
+    page.click("[data-mt=events]")
+    page.wait_for_selector(".evl-item")
     page.click(".evl-item")
     page.wait_for_selector(".ev-hero")
     text = page.inner_text("#app")
@@ -5403,6 +5411,29 @@ def test_section_descriptions_hide_on_a_phone(page, base_url):
         page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
         page.wait_for_selector(".page-hero h1", timeout=15000)
         assert page.locator(".page-hero p.ph-desc").is_visible() == shown, size
+
+
+def test_section_hero_is_a_thin_strip_on_a_phone(page, base_url):
+    """Владелец 9 ноября 2026: на телефоне полоса с названием раздела «слишком
+    много места занимает» — остается узкая лента с подписью («Каталог»,
+    «Авторам») сразу под шапкой; на компьютере полоса прежняя."""
+    for route in ("#/companies", "#/advisors", "#/materials", "#/analytics"):
+        page.set_viewport_size({"width": 320, "height": 700})
+        page.goto(base_url + "/" + route, wait_until="domcontentloaded")
+        page.wait_for_selector(".page-hero .label", timeout=15000)
+        page.wait_for_timeout(400)
+        box = page.evaluate("(()=>{const r=document.querySelector('.page-hero').getBoundingClientRect();return r.bottom})()")
+        assert box <= 120, (route, box)
+        assert not page.locator(".page-hero h1").is_visible() or page.evaluate(
+            "document.querySelector('.page-hero h1').getBoundingClientRect().height<=1"), route
+        if route == "#/advisors":
+            lb = page.evaluate("document.querySelector('.page-hero .label').getBoundingClientRect().right")
+            cta = page.evaluate("document.getElementById('firmCtaTop').getBoundingClientRect().left")
+            assert lb < cta, (lb, cta)   # кнопка «Вы консультант?» не налезает на подпись
+    page.set_viewport_size({"width": 1280, "height": 900})
+    page.goto(base_url + "/#/companies", wait_until="domcontentloaded")
+    page.wait_for_selector(".page-hero h1", timeout=15000)
+    assert page.locator(".page-hero h1").is_visible()
 
 
 def test_deal_card_has_a_full_analysis_button_under_the_scheme(page, base_url):
