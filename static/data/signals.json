@@ -138,20 +138,6 @@
    "strength": "strong"
   },
   {
-   "id": "sd6c996174",
-   "company_id": "gbdba5da3",
-   "date": "2026-10-28",
-   "kind": "for_sale",
-   "summary": "ГМК «Тимир» — выставлена на торги; продавец — АЛРОСА",
-   "source": [
-    "ТАСС",
-    "https://tass.ru/ekonomika/28261803"
-   ],
-   "origin": "card",
-   "deal_id": "g98ad52f7",
-   "strength": "strong"
-  },
-  {
    "id": "s9c25fc68f",
    "company_id": "gbcf3f414",
    "date": "2026-10-28",
@@ -204,6 +190,20 @@
     "https://rb.ru/news/sheremetevo-obsuzhdaet-prodazhu-75-biblio-globusa-pokupatelem-mozhet-stat-struktura-blizkaya-k-rwb/"
    ],
    "origin": "news",
+   "strength": "strong"
+  },
+  {
+   "id": "sd6c996174",
+   "company_id": "gbdba5da3",
+   "date": "2026-10-21",
+   "kind": "for_sale",
+   "summary": "ГМК «Тимир» — выставлена на торги; продавец — АЛРОСА",
+   "source": [
+    "ТАСС",
+    "https://tass.ru/ekonomika/28261803"
+   ],
+   "origin": "card",
+   "deal_id": "g98ad52f7",
    "strength": "strong"
   },
   {
@@ -307,7 +307,7 @@
   {
    "id": "s09b073fae",
    "company_id": "ga1db6755",
-   "date": "2026-10-09",
+   "date": "2026-10-08",
    "kind": "for_sale",
    "summary": "Уралбиофарм — выставлена на торги; продавец — Росимущество",
    "source": [
