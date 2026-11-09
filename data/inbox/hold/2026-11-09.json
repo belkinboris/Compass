@@ -1031,17 +1031,17 @@
    ]
   },
   {
-   "draft_id": "d77748741",
-   "title": "«Яндекс Маркет» запускает продажи в прямых эфирах мобильного приложения",
+   "draft_id": "d86756133",
+   "title": "Мосбиржа объявила дискретный аукцион по акциям Уралсиба",
    "date": "2026-11-09",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9092493"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/09/1243597-po-aktsiyam-uralsiba"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1059,17 +1059,56 @@
    ]
   },
   {
-   "draft_id": "d58937309",
-   "title": "Юрист предупредила о мошеннической схеме при продаже подержанных машин",
+   "draft_id": "d54845839",
+   "title": "В Бурятии участок россыпного золота продали почти в 20 раз дороже стартовой цены",
    "date": "2026-11-09",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261109/avto-875016037.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28297803"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Его купили за 574 млн рублей",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28297803"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "почти в 20 раз дороже стартовой цены",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "почти в 20 раз дороже стартовой цены",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d27568989",
+   "title": "Мосбиржа проводит дискретный аукцион по акциям банка «Уралсиб»",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/mosbirzha-875019473.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1080,11 +1119,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
