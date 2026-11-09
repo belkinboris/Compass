@@ -1031,13 +1031,215 @@
    ]
   },
   {
-   "draft_id": "d93563852",
-   "title": "В Кремле прокомментировали новость о передаче активов Coca-Cola",
+   "draft_id": "d20843737",
+   "title": "Команда юристов ККМП консультировала ПАО «ГМК «Норильский никель» при создании совместного предприятия с Горнорудным дивизионом Госкорпорации «Росатом» на базе вновь созданной компании ООО «Полярный л",
+   "date": "2023-02-10",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/700"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73176431",
+   "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская",
+   "date": "2024-02-06",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/1449"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28688476",
+   "title": "🎉 Команда юристов ККМП представляла интересы покупателя в сделке по приобретению контролирующего пакета акций в АО «ПРОГРЕСС», являющегося лидером на рынке детского питания в России и производящего бо",
+   "date": "2024-11-05",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/2091"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89177448",
+   "title": "🎉 Команда юристов ККМП сопровождала покупателя в сделке по выкупу одного из крупнейших в России элитных торговых центров «Времена Года», ранее принадлежавшего группе RD Property Holdings. ККМП сопрово",
+   "date": "2024-12-20",
+   "src": [
+    [
+     "tg:kkmpconnect",
+     "https://t.me/kkmpconnect/2209"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05404253",
+   "title": "Минпромторг ждет роста инвестиций в химпроме в 2027 году после спада в 2026 году",
    "date": "2026-11-09",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/09/v-kremle-prokommentirovali-novost-o-peredache-aktivov-coca-cola/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1127838"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d85079854",
+   "title": "Алиханов оценил объем инвестиций в химкомплекс РФ",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28299047"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50246060",
+   "title": "Бывший владелец сети Uppetit рассказал о причинах продажи бизнеса",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/09/bivshij-vladelec-seti-uppetit"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d56308267",
+   "title": "ВТБ начал выдавать льготную ипотеку на покупку строящегося жилья в Крыму",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/vtb-875034263.html"
     ]
    ],
    "sum": null,
@@ -1059,13 +1261,211 @@
    ]
   },
   {
-   "draft_id": "d53243656",
-   "title": "Росимущество распродает активы фигурантов дела экс-главы челябинского нацпарка «Таганай»",
+   "draft_id": "d44535992",
+   "title": "Решетников рассказал о новом инвестиционном цикле в России",
    "date": "2026-11-09",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053142683"
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/reshetnikov-875034181.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79996637",
+   "title": "Минпромторг оценил объем инвестиций в химпром в 2026 году",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261109/minpromtorg-875033306.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d31889051",
+   "title": "Выгоду от покупки новостройки и вторички сравнили",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/09/vygodu-ot-pokupki-novostroyki-i-vtorichki-sravnili/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d34485313",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/realty/2026/11/09/76754010/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22008831",
+   "title": "Продавать бизнес в 2026 году или подождать? Уже 19 ноября состоится конференция M&A Tech 2026 , на которой участники успешных сделок этого года поделятся практическим опытом продажи и покупки бизнеса.",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7557"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08120848",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/realty/2026/11/09/76753992/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d30569631",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/realty/2026/11/09/76753997/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91106306",
+   "title": "Участок с частными и авариными домами у берега Оби выставили на торги — за землю просят почти 320 миллионов рублей",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/realty/2026/11/09/76753936/"
     ]
    ],
    "sum": null,
@@ -1080,7 +1480,298 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Управление активами",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48071397",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/realty/2026/11/09/76753988/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18854596",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/realty/2026/11/09/76754000/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d74267763",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/realty/2026/11/09/76754003/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13693915",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/realty/2026/11/09/76754007/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52623074",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/realty/2026/11/09/76754001/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50520595",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/realty/2026/11/09/76753991/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81682861",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/realty/2026/11/09/76753990/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49702110",
+   "title": "Администрация Волгограда отказалась решать судьбу национализированного торгового центра, на месте которого планировался ФОК",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/11/09/76753183/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-09",
+     "title": "Переговоры",
+     "note": "Ранее «Севен парк» обратили в доход государства в рамках дела о коррупции экс-депутата Алексея Зверева",
+     "source": [
+      "web:v1.ru",
+      "https://v1.ru/text/gorod/2026/11/09/76753183/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45250634",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/realty/2026/11/09/76753986/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94565263",
+   "title": "Дети Леонида Куравлева продают его квартиру за 100 миллионов: почему они избавляются от жилья",
+   "date": "2026-11-09",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/realty/2026/11/09/76754008/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

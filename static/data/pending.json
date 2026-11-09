@@ -418,6 +418,135 @@
    "shown_hash": "8d190325ff16.17fe5a",
    "post_draft_sent": true,
    "post_preview": "<b>ГК «Ультиматек» купила половину петербургского ИТ-интегратора «АртАйТи»</b>\n\n<b>Покупатель:</b> ГК «Ультиматек» — интегратор индустриальных цифровых решений.\n<b>Продавец:</b> Прежние совладельцы «АртАйТи» (источник имя не называет)\n<b>Предмет:</b> 50% капитала петербургского ИТ-интегратора «АртАйТи», который специализируется на переходе промышленных предприятий с SAP на «1С»\n<b>Сумма:</b> 300 млн ₽ (по оценке сторон)\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora\">CNews</a>\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gc3750bdb\">карточке сделки</a>"
+  },
+  {
+   "id": "g01cb9ffc",
+   "date": "2026-11-09",
+   "title": "Покупатель приобрел три квартиры в доме на острове Балчуг за 511 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261109/balchug-2130315647.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "511 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "511 млн ₽",
+   "buyer_name": "Покупатель",
+   "asset": "три квартиры в доме на острове Балчуг",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261109/balchug-2130315647.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Покупатель",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "три квартиры в доме на острове Балчуг",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261109/balchug-2130315647.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:02:04+00:00"
+  },
+  {
+   "id": "g30db3641",
+   "date": "2026-11-09",
+   "title": "«Столото» ищет счастливчика из Прикамья — житель края купил лотерейный билет за 5600 и выиграл почти 22 миллиона рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "59.ru",
+     "https://59.ru/text/entertainment/2026/11/09/76753822/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Столото» ищет счастливчика из Прикамья — житель края",
+   "asset": "лотерейный билет",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Победитель еще не обратился за своим призом",
+     "source": [
+      "59.ru",
+      "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Столото» ищет счастливчика из Прикамья — житель края",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ],
+    "target": [
+     {
+      "value": "лотерейный билет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://59.ru/text/entertainment/2026/11/09/76753822/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:02:04+00:00"
   }
  ]
 }
