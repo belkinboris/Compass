@@ -1031,104 +1031,17 @@
    ]
   },
   {
-   "draft_id": "d73176431",
-   "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская",
-   "date": "2024-02-06",
-   "src": [
-    [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/1449"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28688476",
-   "title": "🎉 Команда юристов ККМП представляла интересы покупателя в сделке по приобретению контролирующего пакета акций в АО «ПРОГРЕСС», являющегося лидером на рынке детского питания в России и производящего бо",
-   "date": "2024-11-05",
-   "src": [
-    [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/2091"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89177448",
-   "title": "🎉 Команда юристов ККМП сопровождала покупателя в сделке по выкупу одного из крупнейших в России элитных торговых центров «Времена Года», ранее принадлежавшего группе RD Property Holdings. ККМП сопрово",
-   "date": "2024-12-20",
-   "src": [
-    [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/2209"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91106306",
-   "title": "Участок с частными и авариными домами у берега Оби выставили на торги — за землю просят почти 320 миллионов рублей",
+   "draft_id": "d97388145",
+   "title": "Суд снял аресты с недвижимости Блиновской для передачи государству",
    "date": "2026-11-09",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/realty/2026/11/09/76753936/"
+     "web:iz.ru",
+     "https://iz.ru/2198707/sud-snial-aresty-s-nedvizhimosti-blinovskoi-dlia-peredachi-gosudarstvu-izi"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1138,114 +1051,6 @@
     "buyer": null,
     "asset": null,
     "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g30db3641 (общие редкие слова: миллио, почти, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d54644086",
-   "title": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»)",
-   "date": "2022-07-08",
-   "src": [
-    [
-     "tg:kkmpconnect",
-     "https://t.me/kkmpconnect/105?deal=3"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2022-07-08",
-     "title": "Сделка завершена",
-     "note": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»). Юридическая фирма « Кучер Кулешов Максименко и партнеры » ( ККМП ) начала свою деятельность с лидирующих позиций в сфере М&A. В первые месяцы с…",
-     "source": [
-      "tg:kkmpconnect",
-      "https://t.me/kkmpconnect/105?deal=3"
-     ]
-    }
-   ],
-   "buyer_name": "«Интеррос»",
-   "asset": null,
-   "seller": "Global Payments процессинговую компанию UCS (АО «Компания объ",
-   "parsed_parties": {
-    "buyer": "«Интеррос»",
-    "asset": null,
-    "seller": "Global Payments процессинговую компанию UCS (АО «Компания объ"
-   },
-   "ind": "Холдинги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку pending-2 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d93807669",
-   "title": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
-   "date": "2022-10-27",
-   "src": [
-    [
-     "tg:alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/329"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2022-10-27",
-     "title": "Сделка завершена",
-     "note": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca). ALUMNI Partners консультирует The GBFoods в связи с продажей её бизнеса в России Команда ALUMNI Partners успешно завершила юридическое сопровождение The GBFoods S.A. в сделке по…",
-     "source": [
-      "tg:alumnipartnerslawfirm",
-      "https://t.me/alumnipartnerslawfirm/329"
-     ]
-    }
-   ],
-   "buyer_name": "HYSG Group («Доширак»)",
-   "asset": null,
-   "seller": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)",
-   "parsed_parties": {
-    "buyer": "HYSG Group («Доширак»)",
-    "asset": null,
-    "seller": "The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81970774",
-   "title": "Evermount Capital Group покупает у NK Group строящийся склад в «NK Домодедово-1»",
-   "date": "2025-10-06",
-   "src": [
-    [
-     "tg:alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/2230"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Evermount Capital Group",
-   "asset": null,
-   "seller": "NK Group строящийся склад в «NK Домодедово-1»",
-   "parsed_parties": {
-    "buyer": "Evermount Capital Group",
-    "asset": null,
-    "seller": "NK Group строящийся склад в «NK Домодедово-1»"
    },
    "ind": "Недвижимость",
    "needs_review": true,
@@ -1254,17 +1059,17 @@
    ]
   },
   {
-   "draft_id": "d92523887",
-   "title": "Radius Group и частный инвестор создали СП для индустриального парка «Северные врата»",
-   "date": "2025-10-07",
+   "draft_id": "d72408953",
+   "title": "ВС запретил администрации муниципалитета отказывать в выкупе земли из-за размера дома",
+   "date": "2026-11-09",
    "src": [
     [
-     "tg:alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/2232"
+     "web:pravo.ru",
+     "https://pravo.ru/news/266699/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1278,6 +1083,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69921678",
+   "title": "26 сентября 2026 года стартует ежегодный практический спецкурс «Сделки слияний и поглощений» для студентов юридического факультета МГУ имени М. В. Ломоносова. Лекторами курса выступят партнёры и совет",
+   "date": "2026-09-24",
+   "src": [
+    [
+     "tg:stonebridge_legal",
+     "https://t.me/stonebridge_legal/453"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

@@ -2169,6 +2169,59 @@
     "draft_id": "d92523887",
     "title": "Radius Group и частный инвестор создали СП для индустриального парка «Северные врата»"
    }
+  },
+  {
+   "id": "ge6c78cb5",
+   "date": "2026-11-09",
+   "title": "Предприятия «Технополиса Москва» вложили в экономику столицы почти 656 млрд рублей",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/11/9/redpriyatiya-tehnopolisa-moskva-vlozhili-v-ekonomiku-stoliczy-pochti-656-mlrd-rub"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "656 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "656 млрд ₽",
+   "buyer_name": "Предприятия «Технополиса Москва»",
+   "asset": "экономика столицы почти 656 млрд рублей",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Предприятия «Технополиса Москва»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/center/news/msk/2026/11/9/redpriyatiya-tehnopolisa-moskva-vlozhili-v-ekonomiku-stoliczy-pochti-656-mlrd-rub"
+     }
+    ],
+    "target": [
+     {
+      "value": "экономика столицы почти 656 млрд рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/center/news/msk/2026/11/9/redpriyatiya-tehnopolisa-moskva-vlozhili-v-ekonomiku-stoliczy-pochti-656-mlrd-rub"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T13:54:36+00:00"
   }
  ]
 }
