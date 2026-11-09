@@ -11043,3 +11043,18 @@ def test_title_style_catches_animate_noun_after_numeral():
     assert not bad('ГК «ССК» купила двух застройщиков группы «Носта»')
     assert not bad('Холдинг «Адамант» купил два стекольных завода AGC в России')
     assert not bad('Softline приобрел три компании-разработчика бизнес-приложений')
+
+
+def test_firm_channel_post_is_recognized_as_advisory_deal():
+    """9 ноября 2026 («Как мы эту сделку упустили?», t.me/kkmpconnect/700):
+    пост юрфирмы о сделке, которую она вела, ворота держали за «заголовок
+    обрезан» и «не названа сторона». Такой пост теперь узнается, а пост той
+    же фирмы о рейтинге — нет."""
+    import promote
+    deal = {"title": "ККМП выступила юридическим консультантом при приобретении 100% долей компании",
+            "src": [["ККМП", "https://t.me/kkmpconnect/700"]]}
+    assert promote.is_firm_advisory_post(deal)
+    rating = {"title": "ККМП вошла в рейтинг Право-300", "src": [["ККМП", "https://t.me/kkmpconnect/701"]]}
+    assert not promote.is_firm_advisory_post(rating)
+    media = dict(deal, src=[["РБК", "https://www.rbc.ru/x"]])
+    assert not promote.is_firm_advisory_post(media)

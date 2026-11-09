@@ -1,4 +1,6 @@
-"""9 ноября 2026, владелец: «Как мы эту сделку упустили?» (t.me/kkmpconnect/700).
+"""Вторая партия (stonebridge_legal) — STONEBRIDGE ниже; запуск: --stonebridge.
+
+9 ноября 2026, владелец: «Как мы эту сделку упустили?» (t.me/kkmpconnect/700).
 Сверка архивов Telegram-каналов юрфирм (ККМП, ALUMNI, LEVEL, BIRCH, White Square,
 ЛКП) с базой: у сделок ниже фирма сама пишет, что консультировала, а в карточке
 консультант не указан («не раскрывались»). Дописывает фирму в law.adv со ссылкой
@@ -19,6 +21,11 @@ ADD = {
     'citibank': ('Консультант покупателя по регуляторным согласованиям («Ренессанс Капитал»)', 'ALUMNI Partners', 'Получение согласований Банка России и Президента РФ. Источник: https://t.me/alumnipartnerslawfirm/2444'),
 }
 
+STONEBRIDGE = {
+    'g1125c0ec': ('Юридический консультант покупателя (ООО «Рестрим Медиа», Wink)', 'Stonebridge Legal', 'Юридическая проверка покупаемого актива, структура сделки, документы. Источник: https://t.me/stonebridge_legal/463'),
+    'g90ccbac0': ('Юридический консультант продавцов', 'Stonebridge Legal', 'Продажа ООО «Полигрин» группе «Логика молока». Источник: https://t.me/stonebridge_legal/462'),
+}
+
 
 def is_placeholder(a):
     return isinstance(a, list) and len(a) > 1 and str(a[1]).strip().lower() in ('не раскрывались', 'не раскрыты', '—', '')
@@ -27,7 +34,7 @@ def is_placeholder(a):
 def main(write):
     data = json.load(open(DATA, encoding='utf-8'))
     by = {d['id']: d for d in data['deals']}
-    for cid, entry in ADD.items():
+    for cid, entry in (STONEBRIDGE if '--stonebridge' in sys.argv else ADD).items():
         d = by[cid]
         law = d.setdefault('law', {})
         adv = [a for a in (law.get('adv') or []) if not is_placeholder(a)]

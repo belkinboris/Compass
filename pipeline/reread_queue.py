@@ -260,6 +260,14 @@ def main(argv):
     if '--stats' in argv or not argv:
         stats(data)
         return 0
+    if '--ids' in argv:
+        # Досье на выбранные карточки вне очереди (владелец, 9 ноября 2026: вычитать
+        # все карточки, где консультанты — организаторы форума M&A).
+        want = [x.strip() for x in argv[argv.index('--ids') + 1].split(',') if x.strip()]
+        by_id = {d['id']: d for d in data['deals']}
+        for cid in want:
+            print(dossier(by_id[cid], 'вне очереди', data))
+        return 0
     if '--next' in argv:
         n = int(argv[argv.index('--next') + 1])
         for c, why in queue(data)[:n]:

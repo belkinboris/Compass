@@ -5555,3 +5555,23 @@ def test_decree520_badge_links_the_presidential_act(page, base_url):
     note = page.locator(".sanc-note").last.inner_text()
     assert "распоряжение № 372-рп от 9 ноября 2022 года" in note, note
     assert "ё" not in note and "ё" not in label
+
+
+def test_deal_card_names_the_legal_advisor_once_without_the_team(page, base_url):
+    """Владелец 9 ноября 2026 (карточка «Полюса», ККМП): «юридический
+    консультант два раза назван. Второй блок можно убрать. И из первого убери
+    команду. Но конечно нужно оставить какой консультант и кого
+    консультировал». Блок «Юридический консультант» под «Командой сделки»
+    снят; из заметки консультанта на экран не попадает перечень юристов."""
+    import json as _json
+    base = _json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in base["deals"] if any("команда проекта" in str(a[2]).lower()
+                                                for a in ((d.get("law") or {}).get("adv") or []) if len(a) > 2))
+    page.goto(base_url + "/#/deal/" + deal["id"], wait_until="domcontentloaded")
+    page.wait_for_selector(".team", timeout=15000)
+    page.wait_for_timeout(800)
+    text = page.inner_text("#app")
+    assert "команда проекта" not in text.lower()
+    assert "партнер " not in page.inner_text(".team").lower()
+    assert text.lower().count("юридический консультант") == 0
+    assert "консультант" in page.inner_text(".team").lower()
