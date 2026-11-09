@@ -11081,3 +11081,14 @@ def test_short_reread_is_only_for_cards_added_after_october_3_and_marks_its_scop
     assert any("короткая проверка" in b for b in rq.check(ans, old, data))
     rq.stamp(card, ans, {})
     assert card["reread_scope"] == "short" and card["reread"]
+
+
+def test_title_standard_accepts_the_confiscation_construction():
+    """9 ноября 2026: правило «Изъятие» в стандарте заголовка было, а глагола в проверке
+    не было, и находка горела на ~60 изъятиях при любом заголовке."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard
+    card = {"type": "M&A", "status": "Закрыта"}
+    assert title_standard.verb_ok(card, "Активы вице-губернатора Кубани обращены в доход государства")
+    assert title_standard.verb_ok(card, "79,6% акций «Порта Пермь» истребованы в пользу государства")
+    assert not title_standard.verb_ok(card, "Активы X изъяты по иску прокуратуры")
