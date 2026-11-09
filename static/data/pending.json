@@ -290,6 +290,42 @@
    "draft_sent": true,
    "shown_hash": "06299207f784.ace5bd",
    "post_draft_sent": true
+  },
+  {
+   "id": "gfac0b945",
+   "date": "2026-11-07",
+   "title": "Путин передал еще ряд активов производителя Winston во внешнее управление",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/07/11/2026/6aee418f3d849af9e9b0e752"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-09T09:21:38+00:00",
+   "from_raw": {
+    "draft_id": "d92146923",
+    "title": "Путин передал еще ряд активов производителя Winston во внешнее управление"
+   }
   }
  ]
 }
