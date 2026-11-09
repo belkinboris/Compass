@@ -379,6 +379,10 @@ def seo_llms():
 GO_LINKS = {
     "ma-forum-2026": "https://ma-conference-moscow.ru/?utm_source=projectcompass&utm_medium=telegram"
                      "&utm_campaign=ma_forum_2026&utm_content=channel_post",
+    # Кнопка «Регистрация» на странице мероприятия #/event/ma-forum-2026 (9 ноября 2026):
+    # отдельное имя, чтобы переходы с сайта и из поста считались порознь.
+    "ma-forum-2026-site": "https://ma-conference-moscow.ru/?utm_source=projectcompass&utm_medium=site"
+                          "&utm_campaign=ma_forum_2026&utm_content=event_page",
 }
 
 
