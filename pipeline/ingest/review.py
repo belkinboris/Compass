@@ -497,6 +497,10 @@ def already_applied(fix, card, companies=None):
     current = get_field(card, fix['field'])
     if current == fix['new']:
         return True
+    # `law.adv` тоже аддитивный: строки `new` в списке — применена.
+    if fix['field'] == 'law.adv' and isinstance(current, list) and isinstance(fix['new'], list) \
+            and all(row in current for row in fix['new']):
+        return True
     # Имя покупателя переехало в ссылку на профиль: `link_parties` снимает
     # `buyer_name` (пара «ссылка + текст» запрещена). Факт не потерян —
     # записан сильнее. Сверяем ИМЯ профиля, иначе любая привязка засчитывала
@@ -516,12 +520,9 @@ def already_applied(fix, card, companies=None):
     if fix['new'] is None and fix['field'] in ('target', 'asset_id', 'buyer', 'seller_id', 'seller') \
             and current != fix['old']:
         return True
-    # ВЫЧИТКА (2 сентября 2026). Поле переписано редактором (или снято
-    # чтением, 28 октября 2026), и совпадать с `new` оно больше не будет —
-    # но запись была применена: ее отпечаток лежит в `proofread_absorbed`
-    # карточки (туда попадают ТОЛЬКО записи, примененные до вычитки;
-    # proofread.py отказывает в записи, пока есть непримененные). Запись,
-    # добавленная после вычитки, отпечатка не имеет и проверяется как обычно.
+    # ВЫЧИТКА: поле переписано редактором и с `new` больше не совпадет — но
+    # запись применена: ее отпечаток в `proofread_absorbed` (только записи
+    # до вычитки).
     if fix['new'] is not None and fix_fingerprint(fix['new']) in ((card.get('proofread_absorbed') or {}).get(fix['field']) or []):
         return True
     if current is None or fix['new'] is None:
