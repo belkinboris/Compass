@@ -248,6 +248,7 @@
   "no_source": {"https://…/другая-статья": "о другой сделке того же покупателя"},
   "name_ok": {},
   "stale_ok": {},
+  "checked": {"date_not_in_source": "день 5 октября — регистрация в ЕГРЮЛ (datanewton), date_basis registry поставлен"},
   "industry": {"value": "Банки", "why": "предмет — акции банка"},
   "title": "…", "asset": "акции Совкомбанка", "share": "Акции Совкомбанка. Размер пакета стороны не раскрыли.",
   "status": "Закрыта",
@@ -290,3 +291,12 @@
 опровержение или неснятая гипотеза без причины в `stale_ok`
 (`stale_statement`), пока отрасль «Не определена» и в ответе нет `industry`
 (`industry_undefined`).
+
+**Сверка со статьей (9 ноября 2026).** Находки `date_not_in_source`,
+`custody_news_day`, `sum_is_estimate`, `party_is_target`, `adviser_in_source`,
+`seller_adviser_no_seller`, `seller_known`, `status_title_done`,
+`auction_type`, `fund_status` сравнивают карточку с текстом ее источников.
+Чините поле (дата годом или днем события с `date_basis`; «(по оценке)» в
+сумме; продавец и консультант по статье и реестру; статус по событию).
+Ошибся признак — причина в `checked`: что проверено и почему это не ошибка
+(`docs/card_acceptance.md`, «Короткая проверка 9 ноября 2026»).

@@ -150,6 +150,32 @@ def exact_company_id(value, comps, match_keys=None):
     return found[0] if len(found) == 1 else None
 
 
+def other_subject(deal, asset_guess, comps, match_keys=None):
+    """Имя в кавычках из предмета, разобранного по заголовку новости, которого
+    в карточке нет нигде (предмет, профиль предмета и его ключи, заголовок,
+    проза), — или None. Нет кавычек в разобранном предмете — нет и вывода."""
+    text = str(asset_guess or '')
+    # «офис недалеко от «Москва-Сити»» — ориентир, а не предмет (VVP Group, gde69fa27)
+    names = [m.group(1) for m in re.finditer(r'[«"]([^»"]{2,80})[»"]', text)
+             if not re.search(r'(?:недалеко\s+от|рядом\s+с|возле|около|напротив|в\s+районе|у)\s*$',
+                              text[:m.start()], re.I)]
+    if not names:
+        return None
+    tc = deal.get('target') or deal.get('asset_id')
+    parts = [deal.get('title'), deal.get('asset'), deal.get('extra'), deal.get('buyer_name'), deal.get('seller')]
+    for cid in (tc, deal.get('buyer'), deal.get('seller_id')):
+        row = (comps or {}).get(cid) or {}
+        parts += [row.get('name'), row.get('legal_short'), row.get('legal_name'), *((match_keys or {}).get(cid) or [])]
+    for sec in ('eco', 'law'):
+        parts += [v for v in (deal.get(sec) or {}).values() if isinstance(v, str)]
+    blob = norm(' '.join(str(p) for p in parts if p))
+    for name in names:
+        key = norm(name)
+        if len(key) >= 3 and key not in blob:
+            return name
+    return None
+
+
 def evidence_prop(role, value, item, field):
     url = str(item.get('url') or '')
     if not value or not url.startswith('http'):
@@ -245,6 +271,13 @@ def proposals(deal, item, names, comps, match_keys=None):
     """
     text = ' '.join(x for x in (item.get('title'), item.get('summary')) if x)
     buyer, asset, seller, _ = draft.guess_parties(item.get('title'))
+    other = other_subject(deal, asset, comps, match_keys)
+    if other:
+        # Новость о ДРУГОМ предмете того же покупателя — не источник этой
+        # сделки (короткая проверка 9 ноября 2026, «Экспанта»/«Стаксель»,
+        # ga09376f6: CNews о 15% «Ирактис Трекер» легла в src и в этап).
+        return [('asset', asset, 'расхождение',
+                 'новость называет другой предмет «%s» — похоже на другую сделку, источник не добавлен' % other)]
     out = []
 
     url = str(item.get('url') or '')

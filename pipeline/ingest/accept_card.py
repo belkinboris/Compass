@@ -681,7 +681,8 @@ def source_records():
             except (ValueError, OSError):
                 continue
             out += [{'url': str(r.get('url') or ''), 'title': str(r.get('title') or ''),
-                     'summary': str(r.get('summary') or '')} for r in recs if isinstance(r, dict) and r.get('url')]
+                     'summary': str(r.get('summary') or ''), 'published': str(r.get('published') or '')}
+                    for r in recs if isinstance(r, dict) and r.get('url')]
     return out
 
 
@@ -707,15 +708,43 @@ def title_copied_from(card, records=None):
     if urls:
         records = source_records() if records is None else records
         candidates += [r['title'] for r in records if r.get('url') in urls and r.get('title')]
-    for t in candidates:
-        theirs = _title_wordset(t)
-        if not theirs:
-            continue
-        if review.flat(str(card.get('title'))) == review.flat(str(t)):
-            return t
-        if len(mine & theirs) / len(mine | theirs) >= 0.75:
-            return t
+    import difflib
+    mine_seq = _title_stems(card.get('title'))
+    for full in candidates:
+        # Заголовок страницы на диске часто несет хвост сайта («… — РБК Поиск
+        # Смена региона», «--> понедельник, 09 ноября», «Реклама www…»): с ним
+        # доля общих слов падала ниже порога, и дословная копия проходила
+        # (короткая проверка 9 ноября 2026: «Уралбиофарм», Вольчек). Сверяем и
+        # полный заголовок, и его начало до разделителя.
+        for t in dict.fromkeys((full, _headline(full))):
+            theirs = _title_wordset(t)
+            if not theirs:
+                continue
+            if review.flat(str(card.get('title'))) == review.flat(str(t)):
+                return t
+            if len(mine & theirs) / len(mine | theirs) >= 0.75:
+                return t
+            # Те же слова в том же порядке с другими окончаниями («купила 25%
+            # в разработчике» → «купила 25% разработчика», «Экспанта»/«Стаксель»).
+            theirs_seq = _title_stems(t)
+            if len(mine_seq) >= 3 and difflib.SequenceMatcher(None, mine_seq, theirs_seq).ratio() >= 0.85:
+                return t
     return None
+
+
+HEADLINE_CUT = re.compile(
+    r'\s+(?:—|–|-|\||::)\s+|\s*-->|\s+Реклама\b|\s+\d{1,2}\s+(?:%s)\s+\d{4}|'
+    r'\s+(?:понедельник|вторник|среда|четверг|пятница|суббота|воскресенье),' % '|'.join(
+        ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября',
+         'ноября', 'декабря')), re.I)
+
+
+def _headline(t):
+    return HEADLINE_CUT.split(str(t or ''), 1)[0].strip()
+
+
+def _title_stems(t):
+    return [w[:6] for w in re.findall(r'[\wа-яё]+', str(t or '').lower().replace('ё', 'е')) if len(w) >= 3]
 
 
 def milestone_copied(card, kind, headline):
@@ -794,8 +823,334 @@ CUSTODY_TAKEN = re.compile(r'\b(?:забра\w*|отобра\w*|отня\w*|от
                            r'перешл\w*\s+(?:к\s+)?государств\w*|стал\w*\s+собственник\w*)', re.I)
 
 
+# ---------------------------------------------------------------------------
+# Короткая проверка 9 ноября 2026: 273 карточки, созданные с 3 октября, прошли
+# приемку, а сверка с источниками нашла ошибки по существу. Ниже — находки,
+# закрывающие механизм каждой ошибки (known_issues/card.md, «Короткая проверка
+# 9 ноября»). Каждая сверяет карточку с ТЕКСТАМИ ЕЕ ИСТОЧНИКОВ на диске; нет
+# текста — находка молчит (ее вопрос остается за чтением).
+
+MONTHS_GEN = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа',
+              'сентября', 'октября', 'ноября', 'декабря')
+ISO_DAY = re.compile(r'\d{4}-\d{2}-\d{2}$')
+# Статусы, у которых дата — день СОБЫТИЯ (закрытие, подписание, срыв), а не
+# день новости (docs/card_status_dates.md, «Дата: какое событие и в каком виде»).
+EVENT_DAY_STATUSES = ('Закрыта', 'Подписана', 'Не состоялась')
+
+
+def _resolve_records(records):
+    """Записи сырья: переданные или с диска (параметр `source_records` у
+    findings() затеняет имя функции, поэтому разрешаем здесь)."""
+    return records if records is not None else globals()['source_records']()
+
+
+def source_texts(card, records=None, discovery=True):
+    """{адрес: текст} — тексты источников ЭТОЙ карточки, что лежат на диске."""
+    pairs = list(card.get('src') or []) + (list(card.get('discovery_src') or []) if discovery else [])
+    urls = {str(s[1]) for s in pairs if isinstance(s, (list, tuple)) and len(s) > 1 and s[1]}
+    if not urls:
+        return {}
+    out = {}
+    for r in _resolve_records(records):
+        u = r.get('url')
+        if u in urls:
+            t = re.sub(r'\s+', ' ', '%s . %s' % (r.get('title') or '', r.get('summary') or '')).strip()
+            if len(t) > len(out.get(u, '')):
+                out[u] = t
+    return out
+
+
+def day_named_in(texts, iso):
+    """Назван ли день `iso` (ГГГГ-ММ-ДД) хоть в одном тексте: «5 октября»,
+    «05.10.2026», «2026-10-05»."""
+    y, m, d = int(iso[:4]), int(iso[5:7]), int(iso[8:10])
+    words = re.compile(r'(?<!\d)0?%d\s+%s' % (d, MONTHS_GEN[m - 1]), re.I)
+    digits = re.compile(r'(?<!\d)0?%d\.0?%d\.(?:%d|%02d)(?!\d)' % (d, m, y, y % 100))
+    return any(words.search(t) or digits.search(t) or iso in t for t in texts)
+
+
+def date_not_in_sources(card, records=None):
+    """Дата-день у закрытой/подписанной/сорвавшейся сделки, которой нет ни в
+    одном тексте ее источников, и без `date_basis` — или None.
+
+    Самый частый тип ошибки короткой проверки 9 ноября 2026 (20 карточек):
+    черновик рождается с днем публикации статьи (`triage.to_date`: published,
+    а без него — день забора), и если читатель день не заменил, он доезжает до
+    базы. Или читатель сам ставит «1 сентября» за «закрыта в сентябре». Когда
+    день назван в статье, его можно сверить; когда не назван — он взят не из
+    статьи: день публикации, день добавления карточки или выдуманное число.
+    Замер на 299 карточках с 3 октября: находка помечает 19, у 9 из них дата
+    оказалась ошибкой; у сделок «Обсуждается» (12 помеченных, ни одной
+    ошибки) не применяется."""
+    dt = str(card.get('date') or '')
+    if not ISO_DAY.match(dt) or has(card.get('date_basis')) or card.get('status') not in EVENT_DAY_STATUSES:
+        return None
+    texts = list(source_texts(card, records).values())
+    if not texts or day_named_in(texts, dt):
+        return None
+    return dt
+
+
+def _url_days(url):
+    out = set()
+    for m in re.finditer(r'(?<!\d)(20\d\d)[/_.-](\d\d)[/_.-](\d\d)(?!\d)', url):
+        out.add('%s-%s-%s' % m.groups())
+    for m in re.finditer(r'/(20\d\d)(\d\d)(\d\d)(?:/|-|$)', url):
+        out.add('%s-%s-%s' % m.groups())
+    for m in re.finditer(r'(?<!\d)(\d\d)/(\d\d)/(20\d\d)(?!\d)', url):
+        out.add('%s-%s-%s' % (m.group(3), m.group(2), m.group(1)))
+    return {d for d in out if 1 <= int(d[5:7]) <= 12 and 1 <= int(d[8:10]) <= 31}
+
+
+def source_days(card, records=None):
+    """Дни публикации источников карточки: по дате в адресе и по полю
+    `published` записи сырья."""
+    from email.utils import parsedate_to_datetime
+    days = set()
+    urls = [str(s[1]) for s in (card.get('src') or []) if isinstance(s, (list, tuple)) and len(s) > 1 and s[1]]
+    for u in urls:
+        days |= _url_days(u)
+    want = set(urls)
+    for r in _resolve_records(records):
+        p = r.get('published')
+        if r.get('url') in want and p:
+            try:
+                days.add(parsedate_to_datetime(str(p)).date().isoformat())
+            except (TypeError, ValueError, IndexError):
+                if ISO_DAY.match(str(p)[:10]):
+                    days.add(str(p)[:10])
+    return days
+
+
+# Число из суммы и слова оценки рядом с ним в статье (короткая проверка
+# 9 ноября 2026: «Карат» — «может составлять 1,5–2 млрд руб., оценивает
+# источник РБК»; Desport — «как оценивают аналитики… 458 млн»; Baggins —
+# «считает, что стоимость сети не превышает 350 млн»; «Масловский» —
+# «оценили в 395 млн»). Сумма шла в карточку голым числом, как цена.
+SUM_NUMBER = re.compile(r'(\d+(?:[  ]\d{3})*(?:[,.]\d+)?)\s*(тыс|млн|млрд|трлн)')
+SUM_UNIT_WORDS = {'тыс': r'тыс\w*', 'млн': r'(?:млн|миллион\w*)', 'млрд': r'(?:млрд|миллиард\w*)',
+                  'трлн': r'(?:трлн|триллион\w*)'}
+ESTIMATE_NEAR = re.compile(
+    r'\bоценива\w*|\bоценил\w*|\bпо\s+(?:нашей\s+|его\s+|ее\s+|их\s+)?оценк\w*|\bсобеседник\w*'
+    r'|\bисточник\w*\s+(?:[«"]?[А-ЯA-Z]\w*\s+)?(?:на\s+рынке|в\s+отрасли|близк\w*|знаком\w*|в\s+окружении)'
+    r'|\bпо\s+данным\s+(?:источник|собеседник)\w*'
+    r'|\bпо\s+(?:словам|информации|сведениям)\s+(?:источник|собеседник|неназван|участник\w*\s+рынка|знаком|близк)\w*'
+    r'|\bпо\s+(?:подсчетам|расчетам|прикидкам)\b|\bмо(?:жет|гла|гли|г)\s+(?:составить|составлять|стоить|обойтись)'
+    r'|\bне\s+превыша\w*|\bпо\s+неофициальн\w*', re.I)
+# Смысл суммы, который читатель уже назвал явно (deal_multiples.SUM_BASES):
+# сайт подписывает такую сумму сам. «range» и «lower_bound» говорят о форме
+# числа, а не о том, кто его назвал («Карат»: «2 млрд ₽» с range), — не спасают;
+# «estimate» без «(по оценке)» в самой сумме — тоже (Baggins, «Пометка
+# недостоверности — только «(по оценке)»», docs/card_money.md).
+SUM_BASIS_NOT_ESTIMATE = ('disclosed', 'reported', 'auction_start', 'not_a_price', 'raise', 'valuation',
+                          'undisclosed')
+
+
+def sum_estimate_sentence(card, records=None):
+    """Отрывок статьи, где число суммы карточки названо оценкой (оценивают,
+    по данным источников, не превышает, может составить), а в сумме нет
+    «(по оценке)» — или None."""
+    s = str(card.get('sum') or '')
+    if not has(s) or re.search(r'оценк|не\s+раскры', s, re.I) or card.get('sum_basis') in SUM_BASIS_NOT_ESTIMATE:
+        return None
+    m = SUM_NUMBER.search(s)
+    if not m:
+        return None
+    num = m.group(1).replace(' ', '').replace(' ', '')
+    rx = re.compile(r'(?<![\d,.])' + re.sub(r'\\?[,.]', '[,.]', re.escape(num)) + r'(?:[,.]0+)?\s*'
+                    + SUM_UNIT_WORDS[m.group(2)], re.I)
+    for text in source_texts(card, records).values():
+        for found in rx.finditer(text):
+            # то же предложение: 120 знаков до числа (с начала предложения) и 40 после
+            window = re.split(r'(?<=[.!?])\s+', text[max(0, found.start() - 120):found.start()])[-1] \
+                + text[found.start():found.end() + 40].split('. ')[0]
+            if ESTIMATE_NEAR.search(window):
+                return window.strip()
+    return None
+
+
+def party_is_target(card, comps):
+    """Покупатель или продавец назван тем же юрлицом, что и предмет («Местное
+    руководство (ООО «Ново Пакаджинг ББ»)» при предмете «…теперь «Ново
+    Пакаджинг ББ»», Stora Enso, g3e6171f4: доля перешла к ООО «Новопак», а
+    в покупатели попал сам покупаемый завод). Возвращает (роль, имя) или None."""
+    tc = card.get('target') or card.get('asset_id') or ''
+    tgt = ' '.join(str(x or '') for x in (card.get('asset'), (comps.get(tc) or {}).get('name'),
+                                          (comps.get(tc) or {}).get('legal_short')))
+    target_names = {n.strip().lower().replace('ё', 'е') for n in re.findall(r'[«"]([^»"]{2,80})[»"]', tgt)}
+    if not target_names:
+        return None
+    # Только покупатель: продавец-юрлицо, чье имущество продают (ООО «Донстар»
+    # при «имущественном комплексе «Донстар»»), — законная пара (замер: 5 из 5).
+    for role, text_f, id_f in (('buyer', 'buyer_name', 'buyer'),):
+        texts = [str(card.get(text_f) or '')]
+        cid = card.get(id_f)
+        if cid and cid != tc:
+            texts += [str((comps.get(cid) or {}).get(k) or '') for k in ('name', 'legal_short')]
+        for t in texts:
+            for m in LEGAL_ENTITY.finditer(t):
+                if m.group(1).strip().lower().replace('ё', 'е') in target_names:
+                    return role, m.group(0)
+    return None
+
+
+# Консультант назван в источнике (сайт юрфирмы, пресс-релиз), а в карточке
+# «Не раскрывались»: Huhtamaki (castren.fi — «We advised Huhtamaki in the sale
+# of its operations in Russia»), Frigoglass (milbank.com — «Milbank Advises
+# Frigoglass»). Глаголы — только о сопровождении СДЕЛКИ: «сопровождалась»,
+# «выступают ответчиками» и рейтинги сюда не попадают (замер по базе: 4
+# карточки, 3 — настоящие пропуски).
+ADVISER_IN_SOURCE = re.compile(
+    r'консультировал\w*|сопровожда\w*\s+(?:\w+\s+){0,2}сделк\w*'
+    r'|сопроводил\w*\s+(?:\w+\s+){0,2}(?:сделк|продаж|покупк|приобретени)\w*'
+    r'|выступил\w*\s+(?:\w+\s+){0,3}(?:консультант|советник)\w*'
+    r'|(?:юридическ\w+|финансов\w+)\s+(?:консультант\w*|советник\w*)\s+(?:сделки|продавц\w*|покупател\w*|сторон\w*)'
+    r'|консультант\w*\s+(?:сделки|продавц\w*|покупател\w*)'
+    r'|\badvis(?:ed|es|ing)\b|\bacted\s+as\s+(?:\w+\s+){0,3}(?:counsel|advis\w+)|\bcounsel\s+to\b', re.I)
+NOT_DISCLOSED = re.compile(r'не\s+раскры|не\s+сообщ|не\s+назван|^\s*(?:—|-)?\s*$', re.I)
+
+
+def card_has_advisers(card):
+    adv = (card.get('law') or {}).get('adv') or []
+    names = [str(a[1]) for a in adv if isinstance(a, (list, tuple)) and len(a) > 1]
+    fin = str((card.get('eco') or {}).get('finadv') or '')
+    return any(not NOT_DISCLOSED.search(n) for n in names) or (has(fin) and not NOT_DISCLOSED.search(fin))
+
+
+def adviser_sentence(card, records=None):
+    """Предложение источника о консультанте сделки при карточке без
+    консультантов — или None."""
+    if card_has_advisers(card):
+        return None
+    for text in source_texts(card, records, discovery=False).values():
+        for sentence in re.split(r'(?<=[.!?])\s+', text):
+            if len(sentence) <= 400 and ADVISER_IN_SOURCE.search(sentence):
+                return sentence.strip()
+    return None
+
+
+def seller_adviser_without_seller(card):
+    """У сделки есть консультант продавца, а продавца нет (ВИМ/Swordfish
+    Security, gf6c084b9: ALUMNI «консультировала основателей», Advance Capital
+    — «консультант продавцов», а карточка вышла «Инвестицией» без продавца)."""
+    if has(card.get('seller')) or has(card.get('seller_id')) or card.get('type') not in ('M&A', 'Инвестиция'):
+        return None
+    adv = (card.get('law') or {}).get('adv') or []
+    roles = [str(a[0]) for a in adv if isinstance(a, (list, tuple)) and len(a) > 1 and not NOT_DISCLOSED.search(str(a[1]))]
+    for text in roles + [str((card.get('eco') or {}).get('finadv') or '')]:
+        m = re.search(r'консультант\w*\s+(?:\w+\s+)?продав\w*', text, re.I)
+        if m:
+            return text.strip()[:120]
+    return None
+
+
+# Владельцы с долями в заметке о «продавце нет» и смена состава участников —
+# продавцы известны (Umbrella IT, g5b2cf7bd: «учредители — Мешков (90%) и
+# Меньшинский (10%)… изменение состава 24 сентября 2026», продавец не вписан).
+OWNER_WITH_SHARE = re.compile(r'[А-ЯЁA-Z][а-яёa-z]+(?:\s+[А-ЯЁA-Z][а-яёa-z]+)?\s*\(\s*\d+(?:[,.]\d+)?\s*%')
+COMPOSITION_CHANGED = re.compile(r'измен\w*\s+состав|смен\w*\s+(?:состав|участник|учредител|владел)|'
+                                 r'вышл[аио]?\b|выбыл\w*|перешл[аио]?\b|переш[её]л\b', re.I)
+
+
+def seller_known_in_note(card, waived):
+    note = str((waived or {}).get('seller') or '')
+    if not note or has(card.get('seller')) or has(card.get('seller_id')) or has(card.get('no_parties')):
+        return None
+    if re.match(r'\s*Продавца нет', note):
+        return None
+    m = OWNER_WITH_SHARE.search(note)
+    if m and COMPOSITION_CHANGED.search(note):
+        return m.group(0)
+    return None
+
+
+# Заголовок о свершившемся при статусе «Обсуждается» (изъятия по суду
+# 4 ноября 2026: «изъяты в доход государства», «обращены», «истребовано», а
+# статус остался «Обсуждается», хотя решение вступило в силу).
+DONE_IN_TITLE = re.compile(
+    r'\b(?:обращен[аоы]?|изъят[аоы]?|истребован[аоы]?|конфискован[аоы]?|национализирован[аоы]?|'
+    r'перешл[аои]|переш[её]л|купил[аио]?|продал[аио]?|приобр[её]л[аио]?|выкупил[аио]?|закрыл[аио]?|'
+    r'завершил[аио]?|стал[аио]?\s+владел\w*|получил[аио]?\s+контроль)\b', re.I)
+AUCTION_WORDS = re.compile(r'\b(?:торг(?:и|ах|ов|ам)|аукцион\w*|с\s+молотка|начальн\w+\s+цен\w*|'
+                           r'стартов\w+\s+цен\w*)\b', re.I)
+FUND_LAUNCH = re.compile(r'\b(?:запусти\w*|созда\w*|объяви\w*|сформирова\w*)\b[^.]{0,60}\bфонд\w*|'
+                         r'\bфонд\w*\b[^.]{0,40}\b(?:запущен|создан)\w*', re.I)
+
+
+# Коды находок, которые читатель может закрыть причиной (`checked`): их
+# признак — текст статьи, и он изредка ошибается (замеры — в known_issues/card.md).
+CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
+                 'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
+                 'auction_type', 'fund_status')
+
+
+def new_source_findings(card, comps, waived=None, records=None):
+    """[(код, текст)] — находки короткой проверки 9 ноября 2026 (без учета `checked`)."""
+    out = []
+    dt = date_not_in_sources(card, records)
+    if dt:
+        out.append(('date_not_in_source',
+                    'дата %s при статусе «%s» — этого дня нет ни в одном источнике карточки: день статьи, день '
+                    'добавления или выдуманное число не годятся. Статья называет только месяц или сезон — '
+                    'дата годом («%s»); день события есть в реестре или документе — поставьте его и запишите '
+                    'date_basis (registry/closing/signing) правкой review.py (docs/card_status_dates.md#Дата)'
+                    % (dt, card.get('status'), dt[:4])))
+    if card.get('type') == 'Временное управление' and ISO_DAY.match(str(card.get('date') or '')) \
+            and not has(card.get('date_basis')) and card.get('date') in source_days(card, records):
+        out.append(('custody_news_day',
+                    'дата временного управления %s — день публикации новости; нужна дата подписания указа '
+                    '(publication.pravo.gov.ru, номер указа) с date_basis signing' % card.get('date')))
+    est = sum_estimate_sentence(card, records)
+    if est:
+        out.append(('sum_is_estimate',
+                    'сумма %r в источнике — оценка, а не цена сторон: «%s». Пишется «N (по оценке)» в sum и '
+                    'eco.sum, кто оценил — в eco.val (docs/card_money.md); цену назвали стороны — '
+                    'sum_basis disclosed с цитатой' % (card.get('sum'), est[:160])))
+    same = party_is_target(card, comps)
+    if same:
+        out.append(('party_is_target',
+                    '%s назван тем же юрлицом, что и предмет (%s): покупаемое общество не может быть своим '
+                    'покупателем — по истории участников ЕГРЮЛ найдите, к кому перешла доля'
+                    % ({'buyer': 'покупатель', 'seller': 'продавец'}[same[0]], same[1])))
+    adv = adviser_sentence(card, records)
+    if adv:
+        out.append(('adviser_in_source',
+                    'в источнике назван консультант сделки, а в карточке консультантов нет: «%s» — впишите '
+                    'его в law.adv / eco.finadv с клиентом' % adv[:200]))
+    seller_adv = seller_adviser_without_seller(card)
+    if seller_adv and 'seller' not in (waived or {}):
+        out.append(('seller_adviser_no_seller',
+                    'у сделки есть консультант продавца («%s»), а продавца нет: кто продавал — назовите '
+                    '(чья доля уменьшилась по ЕГРЮЛ, кого консультировали)' % seller_adv))
+    owner = seller_known_in_note(card, waived)
+    if owner:
+        out.append(('seller_known',
+                    'в заметке «продавца нет» названы владельцы с долями («%s…») и смена состава участников: '
+                    'вышедшие участники и есть продавцы — впишите их или объясните, почему нет' % owner))
+    if card.get('status') == 'Обсуждается':
+        m = DONE_IN_TITLE.search(str(card.get('title') or ''))
+        if m:
+            out.append(('status_title_done',
+                        'заголовок говорит о свершившемся («%s»), а статус «Обсуждается»: решение вступило в '
+                        'силу или сделка закрыта — статус «Закрыта» по событию; не закрыта — заголовок по '
+                        'стандарту идущей сделки (pipeline/title_standard.py)' % m.group(0)))
+        blob = ' '.join(str(card.get(k) or '') for k in ('title', 'sum', 'asset')) + ' ' + \
+            str((card.get('eco') or {}).get('sum') or '')
+        m = AUCTION_WORDS.search(blob) if card.get('type') == 'M&A' else None
+        if m:
+            out.append(('auction_type',
+                        'продажа идет через торги («%s»), а тип «M&A»: тип «Продажа с торгов», сумма — '
+                        'начальная цена лота' % m.group(0)))
+    if card.get('status') == 'Закрыта' and not (card.get('target') or card.get('asset_id')) \
+            and FUND_LAUNCH.search(str(card.get('title') or '')):
+        out.append(('fund_status',
+                    'запуск фонда со статусом «Закрыта»: фонд закрыт, только когда собраны деньги (первое '
+                    'закрытие); объявление о создании — «Обсуждается»'))
+    return out
+
+
 def findings(card, base, waived=None, waived_inn=None, waived_sources=None, registry=None,
-             waived_names=None, waived_stale=None, source_records=None):
+             waived_names=None, waived_stale=None, source_records=None, waived_checked=None):
     """Список (код, текст). Пусто — механика претензий не имеет; смысл судит
     читатель. `waived` — роли, для которых читатель назвал причину без профиля;
     `waived_inn` — роли, у которых юрлица с ИНН быть не может (иностранец,
@@ -814,12 +1169,14 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     waived_sources = set(waived_sources or notes.get('no_source') or {})
     waived_names = waived_names or notes.get('name_ok') or {}
     waived_stale = set(waived_stale or notes.get('stale_ok') or {})
+    checked = set(waived_checked if waived_checked is not None else (notes.get('checked') or {}))
+    records = _resolve_records(source_records)
     out = []
     comps = base.get('companies') or {}
     # «ВЛОЖИЛСЯ» — НЕ НАШЕ СЛОВО (владелец, 21 октября 2026: «Не пиши больше
     # „вложился“, пиши „проинвестировал“»). Заголовок карточки — и заголовок
     # поста в канале.
-    for name in entities_missing_from_card(card, comps, source_records):
+    for name in entities_missing_from_card(card, comps, records):
         out.append(('entity_in_source', 'в источнике названо юрлицо «%s», а на карточке его нет: это предмет или '
                     'сторона сделки — заведите профиль с ИНН (история участников ЕГРЮЛ покажет и продавцов), '
                     'или запишите в заметке приемки, почему это не сторона сделки' % name))
@@ -954,7 +1311,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                     'остальные (сообщения сторон и консультантов, раскрытие, отраслевые издания, '
                     'Telegram-каналы сторон) или перечислите не меньше пяти мест поиска в '
                     'accepted_notes.searched' % (', '.join(sorted(outlets)) or 'нет ссылок')))
-    copied = title_copied_from(card, source_records)
+    copied = title_copied_from(card, records)
     if copied:
         out.append(('title_copied', 'заголовок повторяет заголовок источника «%s» — перепишите своими словами: '
                     'другая конструкция фразы, не перестановка слов (docs/card_parties.md)' % copied[:90]))
@@ -1286,6 +1643,13 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                             'допэмиссия (деньги в саму компанию) названа этапом продажи в %s: %r — это отдельная сделка; '
                             'если допэмиссия законно часть этой сделки, скажите причиной (stale_ok)'
                             % (field, str(v)[max(0, m.start() - 40):m.end() + 40])))
+    # КОРОТКАЯ ПРОВЕРКА 9 НОЯБРЯ 2026 (known_issues/card.md, «Короткая проверка
+    # 9 ноября»): ошибки по существу у карточек, прошедших приемку. Каждая
+    # находка снимается правкой поля или причиной в `accepted_notes.checked`
+    # ({код: почему это не ошибка}) — читатель ответил, а не промолчал.
+    for code, text in new_source_findings(card, comps, waived, records):
+        if code not in checked:
+            out.append((code, text))
     try:
         text = format_post.render(card, base.get('companies') or {})
         for p in check_post.check(text):
@@ -1503,6 +1867,11 @@ def check_answer(ans, card, base):
             bad.append('no_source: ключ должен быть адресом публикации')
         elif not str(reason or '').strip():
             bad.append('no_source: у %s нет причины' % url)
+    for code, reason in (ans.get('checked') or {}).items():
+        if code not in CHECKED_CODES:
+            bad.append('checked: находку %r причиной не закрыть (можно: %s)' % (code, ', '.join(CHECKED_CODES)))
+        elif len(str(reason or '').strip()) < 15:
+            bad.append('checked: у %s нет причины — что проверено и почему это не ошибка' % code)
     for field, reason in (ans.get('stale_ok') or {}).items():
         if field not in STALE_STATEMENT_FIELDS:
             bad.append('stale_ok: поле %r не из %s' % (field, STALE_STATEMENT_FIELDS))
@@ -1653,13 +2022,15 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
     notes_before = card.get(STAMP + '_notes')
     pending_notes = {k: v for k, v in (('no_profile', waived), ('no_inn', ans.get('no_inn')),
                                        ('no_source', ans.get('no_source')), ('name_ok', ans.get('name_ok')),
-                                       ('stale_ok', ans.get('stale_ok')), ('notes', ans.get('notes')),
+                                       ('stale_ok', ans.get('stale_ok')), ('checked', ans.get('checked')),
+                                       ('notes', ans.get('notes')),
                                        ('searched', ans.get('searched'))) if v}
     if pending_notes:
         card[STAMP + '_notes'] = pending_notes
     left = findings(card, base, waived=waived, waived_inn=ans.get('no_inn') or {},
                     waived_sources=ans.get('no_source') or {}, registry=registry,
-                    waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {})
+                    waived_names=ans.get('name_ok') or {}, waived_stale=ans.get('stale_ok') or {},
+                    waived_checked=ans.get('checked') or {})
     # ПРИЕМКА БЕЗ ПРОЧТЕНИЯ — ТУПИК (4 октября 2026, OTP Bank `gd937c845`).
     # Порядок притока — сначала чтение (шаг 9, `reviewed`), потом приемка (шаг
     # 10). Карточку приняли, а отметку прочтения не поставили: консоль ее не

@@ -11103,3 +11103,193 @@ def test_title_standard_accepts_the_confiscation_construction():
     assert title_standard.verb_ok(card, "Активы вице-губернатора Кубани обращены в доход государства")
     assert title_standard.verb_ok(card, "79,6% акций «Порта Пермь» истребованы в пользу государства")
     assert not title_standard.verb_ok(card, "Активы X изъяты по иску прокуратуры")
+
+
+# --- Короткая проверка 9 ноября 2026: как ошибки попадали в карточки и что их теперь ловит
+# (known_issues/card.md, «Короткая проверка 9 ноября 2026»). Примеры — реальные карточки.
+
+def _codes_9nov(card, recs, base=None, **kw):
+    import accept_card
+    return [c for c, _ in accept_card.findings(card, base or {"companies": {}}, source_records=recs, **kw)]
+
+
+def test_9nov_date_not_named_in_any_source_is_refused():
+    """«ССК»/«Носта» (gaa5d4eb6): «закрыта в сентябре 2026 года» — в карточке стояло
+    1 сентября; Uppetit (g00f36bab): «сделка закрылась летом» — стоял день
+    добавления карточки. День, которого нет ни в одной статье, не из статьи."""
+    url = "https://161.ru/text/business/2026/11/02/76740160/"
+    recs = [{"url": url, "title": "Застройщик долгостроя на Гвардейской площади сменил владельца",
+             "summary": "Статус сделки: закрыта в сентябре 2026 года. Покупатель — ГК «ССК»."}]
+    card = {"id": "gaa5d4eb6", "title": "ГК «ССК» купила двух застройщиков группы «Носта»", "type": "M&A",
+            "status": "Закрыта", "date": "2026-09-01", "src": [["161.RU", url]]}
+    assert "date_not_in_source" in _codes_9nov(card, recs)
+    assert "date_not_in_source" not in _codes_9nov(dict(card, date="2026"), recs)
+    assert "date_not_in_source" not in _codes_9nov(dict(card, date_basis="registry"), recs)
+    assert "date_not_in_source" not in _codes_9nov(dict(card, status="Обсуждается"), recs)
+    said = [dict(recs[0], summary="Сделку закрыли 1 сентября 2026 года.")]
+    assert "date_not_in_source" not in _codes_9nov(card, said)
+    # причина читателя закрывает находку
+    assert "date_not_in_source" not in _codes_9nov(card, recs, waived_checked={"date_not_in_source": "x" * 20})
+
+
+def test_9nov_custody_dated_by_the_news_day_is_refused():
+    """«Каппа Рус» (g19410fc2): указ № 738 подписан 15 октября, в карточке — 16-е,
+    день новостей. Временное управление датируется днем указа."""
+    url = "https://runews24.ru/politics/16/10/2026/putin-podpisal-ukaz-4-upakovoc"
+    card = {"id": "g19410fc2", "title": "Акции «Каппа Рус» переданы во временное управление",
+            "type": "Временное управление", "status": "Закрыта", "date": "2026-10-16", "src": [["Runews24", url]]}
+    assert "custody_news_day" in _codes_9nov(card, [])
+    assert "custody_news_day" not in _codes_9nov(dict(card, date="2026-10-15"), [])
+    assert "custody_news_day" not in _codes_9nov(dict(card, date_basis="signing"), [])
+
+
+def test_9nov_estimate_written_as_a_price_is_refused():
+    """«Карат» (g62577a1d): «может составлять 1,5–2 млрд руб., оценивает источник РБК» —
+    в сумме стояло «2 млрд ₽»; Desport (g4a53d81b): «как оценивают аналитики… 458 млн»;
+    «Масловский» (g221460e5): «оценили в 395 млн рублей»."""
+    url = "https://www.rbc.ru/business/14/10/2026/6ace399d9a79476d4244c153"
+    recs = [{"url": url, "title": "«Карат» купил Павловский молочный завод",
+             "summary": "Стоимость производственного комплекса может составлять 1,5–2 млрд руб., "
+                        "оценивает источник РБК на рынке. Компания ООО «Карат» сделку подтвердила."}]
+    card = {"id": "g62577a1d", "title": "«Карат» купил Павловский молочный завод", "type": "M&A",
+            "status": "Закрыта", "sum": "2 млрд ₽", "sum_basis": "range", "src": [["РБК", url]]}
+    assert "sum_is_estimate" in _codes_9nov(card, recs)
+    assert "sum_is_estimate" not in _codes_9nov(dict(card, sum="2 млрд ₽ (по оценке)"), recs)
+    assert "sum_is_estimate" not in _codes_9nov(dict(card, sum_basis="disclosed"), recs)
+    price = [dict(recs[0], summary="Сумма сделки составила 2 млрд руб., сообщил покупатель.")]
+    assert "sum_is_estimate" not in _codes_9nov(card, price)
+    url2 = "https://abireg.ru/newsitem/118711"
+    recs2 = [{"url": url2, "title": "Производственную базу выставили на продажу",
+              "summary": "Два здания, оборудование и участок на 27,5 сотки оценили в 395 млн рублей."}]
+    card2 = {"id": "g221460e5", "title": "База выставлена на продажу", "type": "M&A", "status": "Обсуждается",
+             "sum": "395 млн ₽", "src": [["Абирег", url2]]}
+    assert "sum_is_estimate" in _codes_9nov(card2, recs2)
+
+
+def test_9nov_buyer_named_as_the_target_itself_is_refused():
+    """Stora Enso (g3e6171f4): покупателем записан ООО «Ново Пакаджинг ББ» — сам
+    покупаемый завод (бывшее ООО «Стора Энсо Пакаджинг ББ»); долю получило ООО «Новопак»."""
+    card = {"id": "g3e6171f4", "title": "Stora Enso продала три завода гофроупаковки", "type": "M&A",
+            "status": "Закрыта", "buyer_name": "Местное руководство заводов (ООО «Ново Пакаджинг ББ»)",
+            "asset": "Три завода гофроупаковки (ООО «Стора Энсо Пакаджинг ББ», теперь «Ново Пакаджинг ББ»)"}
+    assert "party_is_target" in _codes_9nov(card, [])
+    assert "party_is_target" not in _codes_9nov(dict(card, buyer_name="ООО «Новопак»"), [])
+
+
+def test_9nov_adviser_named_in_the_source_must_be_on_the_card():
+    """Huhtamaki (g11e381eb): на castren.fi — «We advised Huhtamaki in the sale of its
+    operations in Russia», а в карточке «Не раскрывались»."""
+    url = "https://www.castren.fi/cases/huhtamaki-sale-of-russian-operations/"
+    recs = [{"url": url, "title": "Huhtamaki – Sale of Russian operations",
+             "summary": "We advised Huhtamaki in the sale of its operations in Russia to Espetina Ltd."}]
+    card = {"id": "g11e381eb", "title": "Huhtamaki продала российский бизнес", "type": "M&A", "status": "Закрыта",
+            "src": [["Castrén & Snellman", url]],
+            "law": {"adv": [["Стороны сделки", "Не раскрывались", "—"]]}, "eco": {"finadv": "—"}}
+    assert "adviser_in_source" in _codes_9nov(card, recs)
+    named = dict(card, law={"adv": [["Юридический консультант продавца (Huhtamaki)", "Castrén & Snellman", "—"]]})
+    assert "adviser_in_source" not in _codes_9nov(named, recs)
+
+
+def test_9nov_seller_adviser_means_there_is_a_seller():
+    """ВИМ/Swordfish Security (gf6c084b9): ALUMNI — «консультант продавца», а карточка
+    вышла «Инвестицией» без продавца; доли основателей упали с 50% до 28,92%."""
+    card = {"id": "gf6c084b9", "title": "ЗПИФ «ВИМ инвестиций» проинвестировал в 42% Swordfish Security",
+            "type": "Инвестиция", "status": "Закрыта", "buyer": "g1",
+            "law": {"adv": [["Консультант продавца", "ALUMNI Partners", "—"]]}}
+    assert "seller_adviser_no_seller" in _codes_9nov(card, [])
+    assert "seller_adviser_no_seller" not in _codes_9nov(dict(card, seller="Александр Пинаев и Юрий Сергеев"), [])
+
+
+def test_9nov_owners_named_in_the_no_seller_note_are_the_sellers():
+    """Umbrella IT (g5b2cf7bd): в заметке «продавца нет» — учредители с долями и смена
+    состава участников 24 сентября; продавцы известны."""
+    note = ("продавцы в источниках не названы; по агрегаторам учредители ООО «Амбрелла Альянс» — Станислав "
+            "Мешков (90%) и Михаил Меньшинский (10%), история участников показывает изменение состава 24 сентября 2026")
+    card = {"id": "g5b2cf7bd", "title": "«Цифровые привычки» покупают Umbrella IT", "type": "M&A",
+            "status": "Подписана", "buyer": "g1", "accepted_notes": {"no_profile": {"seller": note}}}
+    assert "seller_known" in _codes_9nov(card, [])
+    seizure = dict(card, accepted_notes={"no_profile": {"seller": "Продавца нет: изъятие по суду. " + note}})
+    assert "seller_known" not in _codes_9nov(seizure, [])
+
+
+def test_9nov_status_must_match_the_title_auction_and_fund():
+    """Изъятия 4 ноября (gad9394d1): «обращены в доход государства» при «Обсуждается»;
+    ТРК Mari (g37e971b1): торги с типом M&A; Indie GO (g4ae30fd2): фонд объявлен — «Закрыта»."""
+    seized = {"id": "gad9394d1", "title": "Акции Климовского патронного завода обращены в доход государства",
+              "type": "M&A", "status": "Обсуждается"}
+    assert "status_title_done" in _codes_9nov(seized, [])
+    assert "status_title_done" not in _codes_9nov(dict(seized, status="Закрыта"), [])
+    mari = {"id": "g37e971b1", "title": "ФСК продает торгово-развлекательный комплекс Mari", "type": "M&A",
+            "status": "Обсуждается", "sum": "3,5 млрд ₽ (стартовая цена)"}
+    assert "auction_type" in _codes_9nov(mari, [])
+    assert "auction_type" not in _codes_9nov(dict(mari, type="Продажа с торгов"), [])
+    fund = {"id": "g4ae30fd2", "title": "Indie GO запустила венчурный фонд Indie GO Fund II объемом 5 млрд ₽",
+            "type": "Инвестиция", "status": "Закрыта"}
+    assert "fund_status" in _codes_9nov(fund, [])
+    assert "fund_status" not in _codes_9nov(dict(fund, status="Обсуждается"), [])
+
+
+def test_9nov_title_copied_through_page_tail_and_word_endings():
+    """«Уралбиофарм» (g53389708): заголовок страницы на диске — «… выставили на торги — РБК
+    Поиск Смена региона…», хвост сайта уводил долю общих слов ниже порога; «Экспанта»
+    (ga09376f6): «купила 25% в разработчике» → «купила 25% разработчика» — те же слова
+    в том же порядке с другими окончаниями."""
+    import accept_card
+    u1 = "https://ekb.rbc.ru/ekb/freenews/6ac8952cff1d1491484b8f7f"
+    recs = [{"url": u1, "title": "Национализированный «Уралбиофарм» выставили на торги — РБК Поиск Смена "
+                                "региона Написать в поддержку Войти Другие проекты", "summary": ""}]
+    card = {"id": "g53389708", "title": "Национализированный «Уралбиофарм» выставили на торги", "src": [["РБК", u1]]}
+    assert accept_card.title_copied_from(card, recs)
+    u2 = "https://www.kommersant.ru/doc/9042127"
+    recs2 = [{"url": u2, "title": "Экспанта купила 25% в разработчике PLM-платформы Стаксель Реклама "
+                                 "www.kommersant.ru/ad КоммерсантЪ", "summary": ""}]
+    card2 = {"id": "ga09376f6", "title": "«Экспанта» купила 25% разработчика PLM-платформы «Стаксель»",
+             "src": [["Коммерсантъ", u2]]}
+    assert accept_card.title_copied_from(card2, recs2)
+    assert not accept_card.title_copied_from(
+        dict(card2, title="«Экспанта» вошла в капитал «СиЭс Технологии» — разработчика «Стакселя»"), recs2)
+
+
+def test_9nov_news_about_another_subject_is_not_attached_as_a_source():
+    """«Экспанта»/«Стаксель» (ga09376f6): приток приложил к карточке CNews о другой
+    сделке того же покупателя («Ирактис Трекер») — в источники и в этап."""
+    import enrich
+    deal = {"id": "ga09376f6", "title": "«Экспанта» купила 25% разработчика PLM-платформы «Стаксель»",
+            "asset": "«Стаксель»", "src": [["Коммерсантъ", "https://www.kommersant.ru/doc/9042127"]]}
+    item = {"title": "«Экспанта» вошла в капитал разработчика AI-native платформы «Ирактис Трекер»",
+            "summary": "", "url": "https://www.cnews.ru/news/line/2026-11-06_ekspanta"}
+    props = enrich.proposals(deal, item, {}, {}, {})
+    assert not [p for p in props if p[2] != "расхождение"], props
+    same = dict(item, title="«Экспанта» купила 25% разработчика «Стаксель»")
+    assert any(p[0] == "src" and p[2] == "добавить" for p in enrich.proposals(deal, same, {}, {}, {}))
+    landmark = {"title": "Дистрибутор VVP Group купил офис недалеко от «Москва-Сити»", "summary": "",
+                "url": "https://www.kommersant.ru/doc/1"}
+    office = {"id": "gde69fa27", "title": "VVP Group купил офис", "asset": "офис в бизнес-центре", "src": []}
+    assert any(p[0] == "src" for p in enrich.proposals(office, landmark, {}, {}, {}))
+
+
+def test_9nov_checked_waiver_needs_a_known_code_and_a_reason():
+    import accept_card
+    card = {"id": "gx", "title": "x"}
+    base = {"companies": {}}
+    bad = accept_card.check_answer({"verdict": "hold", "hold_reason": "x", "checked": {"title_copied": "причина длинная"}},
+                                   card, base)
+    assert any("причиной не закрыть" in b for b in bad)
+    bad = accept_card.check_answer({"verdict": "hold", "hold_reason": "x", "checked": {"date_not_in_source": ""}},
+                                   card, base)
+    assert any("нет причины" in b for b in bad)
+
+
+# Карточки, положенные в базу разовым скриптом мимо приемки до этого правила
+# (Novus Capital, 9 октября 2026, pipeline/archive/2026-10/add_cards_novus_capital_2026_10_09.py).
+# Список не растет: новая карточка без штампа приемки — ошибка пути, а не исключение.
+NOT_ACCEPTED_LEGACY = {"g8e027018", "ge9d4edaa", "gcb1ce023"}
+
+
+def test_9nov_every_card_added_since_october_3_passed_acceptance(base):
+    """«Универсальные пищевые технологии» (gcb1ce023): карточку положил в базу разовый
+    скрипт с сайта консультанта, приемка ее не видела — покупатель и продавец остались
+    «не названы», хотя оба есть в реестре."""
+    missing = [d["id"] for d in base["deals"] if str(d.get("added") or "") >= "2026-10-03"
+               and not d.get("accepted") and d["id"] not in NOT_ACCEPTED_LEGACY]
+    assert not missing, "в базе без приемки (accept_card.py): %s" % missing
