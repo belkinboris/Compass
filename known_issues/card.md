@@ -111,6 +111,41 @@
 
 ---
 
+## Правило из golden-записи и защита sum_basis повторно сработали (9 ноября 2026) — но для двух НОВЫХ полей
+
+- Симптом: полный `pytest` после `facts_confirm.py --apply --write` 9 ноября
+  упал на пяти тестах: `g321bdead` (Эталон/«Бизнес-Недвижимость») — три
+  golden-теста аналитики и один UI-тест; `g1125c0ec` (Wink/«Смотрешка») —
+  `test_review_table_is_applied_and_not_pending`.
+- Причина: та же природа, что в записи ниже про `g321bdead` от 11 октября
+  (сама запись не предотвратила повтор — правило «сверяться с
+  `analytics_gold.json` перед facts_confirm» не было выполнено перед
+  сегодняшним прогоном, карточка снова подалась как «свежий» кандидат) —
+  `intragroup`/`control_change` у `g321bdead` снова затёрты механическим
+  чтением цитаты о покупке 100%. Второй случай — новый вариант того же
+  класса: у `g1125c0ec` два читателя сошлись на `date.meaning=closing` (по
+  прямой цитате «сделка была закрыта 19 января»), а в карточке уже стоял
+  `date.meaning=registry` из вычитки 2 ноября (запись в ЕГРЮЛ) — `closing`
+  слабее `registry` в `DATE_STRENGTH`/`EVENT_STRENGTH`
+  (`pipeline/facts_confirm.py`: `registry`=4, `closing`=3), но число (дата)
+  совпало, поэтому `--check` прошёл чисто, а падение поймал только
+  `test_review_table_is_applied_and_not_pending` (старая запись в
+  `fixes/*.py` про `date_basis=registry` разошлась с базой).
+- Исправлено: `g321bdead.facts.nature` — откат `intragroup=true`,
+  `control_change=false` с обновлённым `override_note` (третий раз за
+  карточку); `g1125c0ec.facts.date`/`date_basis` — откат к
+  `meaning=registry`, `basis=rule`. `facts_derive.py --write` пересчитал
+  оба. Правило на будущее, усиленное: перед `--apply --write` сверять
+  КАЖДОЕ поле каждой карточки очереди не только с `fixes/*.py` (правило
+  было), но и с `analytics_gold.json` (правило было, не применено) И с
+  `DATE_STRENGTH`/`EVENT_STRENGTH`/`SUM_BASES`-порядком самого
+  `facts_confirm.py`: новое согласие двух читателей НЕ перезаписывает
+  текущее значение того же поля, если оно уже `verified`/`rule`-с-пометкой
+  и новая категория (`meaning`/`attribution`) слабее прежней, даже когда
+  число (цена, дата) совпадает.
+
+---
+
 ## Перед facts_confirm — проверять не только `fixes/*.py`, но и `pipeline/gold/analytics_gold.json`
 - Симптом: два свежих независимых чтения `g321bdead` (Эталон/«Бизнес-
   Недвижимость», 11 октября 2026) честно дали `intragroup=false` по
