@@ -2225,6 +2225,134 @@
     ]
    },
    "pending_since": "2026-11-09T13:54:36+00:00"
+  },
+  {
+   "id": "g31e93c36",
+   "date": "2026-11-09",
+   "title": "Компания «Медприбор» приобрела крупного поставщика медицинского оборудования «ВТС»",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Kompaniya-Medpribor-priobrela-krupnogo-postavschika-medicinskogo-oborudovaniya-VTS-87755"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Медприбор»",
+   "asset": "крупный поставщик медицинского оборудования «ВТС»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Сделка прошла осенью этого года. «Медприбор» владеет рядом юрлиц, связанных с группой компаний «Центральная медицинская база». ГК занимается поставками медицинского оборудования и расходных материалов. Также в ее состав входит сеть ICLINIC, включающая 14…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Kompaniya-Medpribor-priobrela-krupnogo-postavschika-medicinskogo-oborudovaniya-VTS-87755"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Медприбор»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Kompaniya-Medpribor-priobrela-krupnogo-postavschika-medicinskogo-oborudovaniya-VTS-87755"
+     }
+    ],
+    "target": [
+     {
+      "value": "крупный поставщик медицинского оборудования «ВТС»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Kompaniya-Medpribor-priobrela-krupnogo-postavschika-medicinskogo-oborudovaniya-VTS-87755"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T15:53:41+00:00"
+  },
+  {
+   "id": "g1d9e232d",
+   "date": "2026-11-09",
+   "title": "Связанная с ICLINIC компания приобрела российского партнера Siemens Healthineers",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Vademecum",
+     "https://vademec.ru/news/2026/11/09/svyazannaya-s-iclinic-kompaniya-priobrela-rossiyskogo-partnera-siemens-healthineers/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Связанная с ICLINIC компания",
+   "asset": "российский партнёр Siemens Healthineers",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "Компания «Медприбор» (связана с ГК «Центральная медицинская база» – «ЦМБ», в которую входит сеть медцентров ICLINIC) приобрела официального бизнес-партнера Siemens Healthineers в России – поставщика медизделий «ВТС». «ВТС» специализируется на поставке и…",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2026/11/09/svyazannaya-s-iclinic-kompaniya-priobrela-rossiyskogo-partnera-siemens-healthineers/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Связанная с ICLINIC компания",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://vademec.ru/news/2026/11/09/svyazannaya-s-iclinic-kompaniya-priobrela-rossiyskogo-partnera-siemens-healthineers/"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский партнёр Siemens Healthineers",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://vademec.ru/news/2026/11/09/svyazannaya-s-iclinic-kompaniya-priobrela-rossiyskogo-partnera-siemens-healthineers/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-09T15:53:41+00:00"
   }
  ]
 }
