@@ -31,6 +31,48 @@
     "needs_review": true
    },
    "queued": "2026-11-09"
+  },
+  {
+   "key": "https://1prime.ru/20261109/uchastok-875025316.html::gd0a21a58",
+   "candidate_id": "gd0a21a58",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d36928161",
+    "title": "Участок золота в Бурятии продали на торгах по цене в 20 раз выше стартовой",
+    "date": "2026-11-09",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261109/uchastok-875025316.html"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-09",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261109/uchastok-875025316.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах по цене в 20 раз выше стартовой",
+    "seller": "Участок золота в Бурятии",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах по цене в 20 раз выше стартовой",
+     "seller": "Участок золота в Бурятии"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-09"
   }
  ]
 }
