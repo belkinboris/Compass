@@ -1,0 +1,495 @@
+{
+ "items": [
+  {
+   "id": "g1e331a43",
+   "add": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/883239"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "gbfb079af",
+   "add": [],
+   "rejected": [
+    {
+     "url": "https://vc.ru/finance/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-banka-blank-i-osnovatelya-kudago",
+     "why": "та же статья vc.ru (№567570) уже есть в источниках карточки под адресом vc.ru/money/…; адрес из заметки переадресует на нее"
+    }
+   ],
+   "fetched": false,
+   "diffs": []
+  },
+  {
+   "id": "g323cf076",
+   "add": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/30/06/2026/692065659a7947250172aad1?from=my_rbc"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось",
+   "diffs": []
+  },
+  {
+   "id": "g17d26389",
+   "add": [
+    [
+     "vc.ru",
+     "https://vc.ru/finance/458429-kompaniya-osnovnogo-vladelca-qiwi-predlozhila-vykupit-akcii-u-minoritariev-na-summu-do-25-mln"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "law.struct",
+     "card": "Dalliance Services Company (DSC), зарегистрированная на Маршалловых Островах",
+     "article": "кипрская компания",
+     "quote": "Принадлежащая Сергею Солонину кипрская компания Dalliance Services Company (DCS)"
+    },
+    {
+     "field": "eco.context",
+     "card": "С 28 февраля ADS Qiwi на NASDAQ не торгуются",
+     "article": "не торгуются с 25 февраля",
+     "quote": "Акции на Nasdaq не торгуются с 25 февраля, тогда они стоили $5,67 за штуку"
+    }
+   ]
+  },
+  {
+   "id": "g3cc2009d",
+   "add": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/855208"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "g711eb87e",
+   "add": [],
+   "rejected": [
+    {
+     "url": "https://track.prex.app/c/b8593508584726af73385be224cdb4ed4c73518db46608fbedff2bc812734043/609cf61528dadc1cb848e932239610fe/",
+     "why": "ссылка-счетчик рассылки (трекер), не статья; первоисточник заметки — интервью Интерфаксу, оно уже в карточке (interfax.ru/business/886097)"
+    }
+   ],
+   "fetched": false,
+   "diffs": []
+  },
+  {
+   "id": "ge6f1e0ae",
+   "add": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/19/03/2025/67da617b9a79479a1d7c2361?from=from_main_2"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось; заметка ссылается на РБК только в абзаце о переезде Globaltrans с Кипра в Абу-Даби, поэтому перед добавлением стоит открыть статью",
+   "diffs": []
+  },
+  {
+   "id": "g39752167",
+   "add": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/833256"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "g1d003324",
+   "add": [
+    [
+     "Агентство Бизнес Новостей",
+     "https://abn.agency/2025/10/17/bratya-osnovateli-kompanii-bask-vpustili-v-semejnyj-biznes-pre-ipo-investorov/"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "date",
+     "card": "2025-09-01",
+     "article": "фонд вошел в капитал в конце сентября 2025, второй инвестор — в середине октября",
+     "quote": "В конце сентября соучредителем компании стал ЗПИКФ «Фонд пре-АйПиО 2», находящийся под управлением АО «ВИМ Инвестиции»"
+    }
+   ]
+  },
+  {
+   "id": "g5ccd2edb",
+   "add": [
+    [
+     "РБК",
+     "https://www.rbc.ru/newspaper/2024/12/23/676566319a79470f5f57c01f"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось",
+   "diffs": []
+  },
+  {
+   "id": "g3d0699a8",
+   "add": [],
+   "rejected": [
+    {
+     "url": "https://www.forbes.ru/tekhnologii/540561-a-a-milogo-uznau-po-ulybke-fond-potanina-voshod-vlozilsa-v-raspoznavanie-emocij",
+     "why": "другая сделка: раунд 2025 года на 100 млн ₽ с фондом «Восход» (12,09% «Кенди Флип Роботс»), а карточка — о вложении Вымпелкома в 2023 году; статья не открылась (капча), суждение по заметке mergers.ru от 27.06.2025. Возможно, это отдельная сделка для базы"
+    }
+   ],
+   "fetched": false,
+   "diffs": []
+  },
+  {
+   "id": "gmru-prime-pervy-poliplastik",
+   "add": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8844198"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "date",
+     "card": "2026-07-27",
+     "article": "статья обновлена 24.07.2026 — сделка известна не позже 24 июля",
+     "quote": "Обновлено 24.07.2026, 20:43"
+    },
+    {
+     "field": "eco.context / прежний владелец",
+     "card": "не сказано, у кого остается остальная доля",
+     "article": "остальные 57,69% СИГП и 8,59% напрямую остаются у Льва Гориловского",
+     "quote": "Оставшаяся доля в СИГП (57,69%), а также 8,59% напрямую в компании сохранятся за председателем совета директоров Львом Гориловским"
+    }
+   ]
+  },
+  {
+   "id": "gmru-nordline-totalenergies-arctic",
+   "add": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1093537"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1105073"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "gmru-vostok-sever-pevek",
+   "add": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8799170"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "date",
+     "card": "2026",
+     "article": "владельцем 100% фонд стал в конце апреля 2026 года",
+     "quote": "Владельцем 100% АО «Морпорт Певек» в конце апреля стал личный фонд «Восток-Север»"
+    },
+    {
+     "field": "seller",
+     "card": "поле пустое (прежний владелец назван только в eco.context)",
+     "article": "прежний владелец с 2022 года — Вячеслав Доманин",
+     "quote": "По данным СПАРК, прежним владельцем АО «Морпорт Певек» с 2022 года был Вячеслав Доманин"
+    }
+   ]
+  },
+  {
+   "id": "gmru-darkin-vladmorribport",
+   "add": [
+    [
+     "InfraNews",
+     "https://www.infranews.ru/novosti/70469-sergej-darkin-zakryl-sdelku-po-vykupu-doli-vladmorrybporta/?ysclid=mrb7lehilr864807036"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "date",
+     "card": "2026-06-23",
+     "article": "новость опубликована 22 июня 2026 года",
+     "quote": "Июнь 22, 2026, 13:40"
+    }
+   ]
+  },
+  {
+   "id": "c51d0bb64",
+   "add": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28052579"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось (заметка: Дмитрий Пьянов 31.08.2026 сказал ТАСС, что покупку 5% WB Банка перенесли на сентябрь)",
+   "diffs": []
+  },
+  {
+   "id": "g97e1f483",
+   "add": [
+    [
+     "Фармацевтический вестник",
+     "https://pharmvestnik.ru/content/news/rigla-zdravsiti-kupila-set-aptek-v-voronejskoi-oblasti.html"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "g677f3309",
+   "add": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/media/articles/2026/08/06/1219137-knizhnaya-set-respublika-smenila-vladeltsev?from=copy_text"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/u-knizhnoj-seti-respublika-smenilsya-vladelets-85886.html"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "seller",
+     "card": "Александра Лютикова и Айбек Баймахан",
+     "article": "за прежними владельцами стояла казахстанская Aq Niet Group Кайрата Итемгенова (подтвердил топ-менеджер книжной сети)",
+     "quote": "То, что ранее «Республика» принадлежала Aq Niet Group, подтвердил «Ведомостям» и топ-менеджер крупной российской книжной сети"
+    }
+   ]
+  },
+  {
+   "id": "gebead2e8",
+   "add": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/technologies/industries_and_markets/news/2026/08/14/1221030-headhunter-priobrel"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "date",
+     "card": "2026-08-18",
+     "article": "о сделке сообщено 14 августа 2026 года",
+     "quote": "14 августа, 08:27 / Отрасли и рынки"
+    },
+    {
+     "field": "eco.share",
+     "card": "—",
+     "article": "51%",
+     "quote": "Рекрутинговая платформа HeadHunter приобрела 51% компании Happy Job"
+    }
+   ]
+  },
+  {
+   "id": "ge0cc0dfe",
+   "add": [
+    [
+     "РБК Новосибирск",
+     "https://nsk.rbc.ru/nsk/07/09/2026/6a9eb95b9a7947b80c1c7d41"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "eco.context",
+     "card": "246,2 млн т по категории C2",
+     "article": "101,92 млн т по категории С2",
+     "quote": "Запасы блока составляют 250,52 млн т по категории С1 и 101,92 млн т по категории С2"
+    },
+    {
+     "field": "eco.context (соседняя сделка)",
+     "card": "не упомянуто",
+     "article": "тот же покупатель купил у «Распадской» 81,3% «УК «Межегейуголь» (ЕГРЮЛ, 3 сентября) — отдельная сделка",
+     "quote": "Компания выкупила 100% долей в ООО «Улугхемуголь» у «Северстали» и 81,3% акций ООО «УК «Межегейуголь» у ПАО «Распадская»"
+    }
+   ]
+  },
+  {
+   "id": "g3ecb7b86",
+   "add": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8939053"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "gb20ec0ef",
+   "add": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/16/10/2025/68f0bbda9a7947b84a3f9af9"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось",
+   "diffs": []
+  },
+  {
+   "id": "g7a96dda2",
+   "add": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-09-10_vladelets_razrabotchika_skandalnogo"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": []
+  },
+  {
+   "id": "gb7ea4703",
+   "add": [
+    [
+     "Банкфакс",
+     "https://www.bankfax.ru/povestka/167696/"
+    ],
+    [
+     "Shopper's",
+     "https://shoppers.media/news/30163_lenta-kupila-krupneisuiu-sibirskuiu-torgovuiu-set-mariia-ra"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "sum",
+     "card": "60 млрд ₽",
+     "article": "цены сделки нет; 40–60 млрд ₽ — оценка аналитика Совкомбанка",
+     "quote": "стоимость розничного бизнеса «Мария-Ра» может находиться в диапазоне 40-60 млрд рублей"
+    },
+    {
+     "field": "seller",
+     "card": "Александр Ракшин",
+     "article": "владелец ООО «Розница» — в равных долях Александр, Галина, Алла и Евгений Ракшины",
+     "quote": "которым в равных долях владели основатель сети Александр Ракшин, его супруга Галина и их дети Алла и Евгений"
+    },
+    {
+     "field": "eco.target_fin",
+     "card": "«Розница К-1»: выручка почти 128 млрд ₽, чистая прибыль 2,7 млрд ₽",
+     "article": "выручка 127,5 млрд ₽ (+5%), чистая прибыль 2,6 млрд ₽ (−8%)",
+     "quote": "Чистая прибыль сократилась на 8% до 2,6 млрд руб."
+    },
+    {
+     "field": "events (дата)",
+     "card": "2026-09-23 — сотрудникам объявили о смене собственника",
+     "article": "объявили 18 сентября, Банкфакс сообщил 21 сентября",
+     "quote": "утром 18 сентября коллективам магазинов «Мария-Ра» заявили о смене собственника торговой сети"
+    }
+   ]
+  },
+  {
+   "id": "g5850b57f",
+   "add": [
+    [
+     "РБК",
+     "https://www.rbc.ru/technology_and_media/22/09/2026/6ab127299a7947537c1fd7c6?from=my_rbc"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось",
+   "diffs": []
+  },
+  {
+   "id": "g4afd35d0",
+   "add": [
+    [
+     "Forbes.ru",
+     "https://www.forbes.ru/biznes/570774-rbk-uznal-ob-interese-blizkoj-k-rwb-kompanii-k-pokupke-biblio-globusa-u-seremet-evo"
+    ]
+   ],
+   "rejected": [],
+   "fetched": false,
+   "note": "статья не открылась (РБК/ТАСС/Forbes отдают пустую страницу или капчу); что она о той же сделке, видно по адресу и пересказу в заметке mergers.ru — сверить с карточкой не удалось",
+   "diffs": []
+  },
+  {
+   "id": "g31e93c36",
+   "add": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9092327"
+    ]
+   ],
+   "rejected": [],
+   "fetched": true,
+   "diffs": [
+    {
+     "field": "seller",
+     "card": "не указан",
+     "article": "прежний владелец ООО «ВТС» — предпринимательница Александра Губа",
+     "quote": "стало владельцем ООО «ВТС», ранее принадлежавшего малоизвестной в медийном поле предпринимательнице Александре Губе"
+    },
+    {
+     "field": "date",
+     "card": "2026-11-09 (дата публикации)",
+     "article": "сделка прошла осенью 2026 года, точная дата не названа",
+     "quote": "сделка прошла осенью этого года"
+    },
+    {
+     "field": "sum / eco.val",
+     "card": "—",
+     "article": "оценка Infoline-Аналитики: 1,2–1,3 млрд ₽ за 100% с учетом денег на счетах; цена не раскрыта",
+     "quote": "оценивает стоимость 100% долей ВТС в 1,2–1,3 млрд рублей с учетом средств на счетах"
+    },
+    {
+     "field": "eco.target_fin",
+     "card": "—",
+     "article": "ВТС за 2025 год: выручка 1,67 млрд ₽, чистая прибыль 346 млн ₽, из них 431,7 млн ₽ — сервис",
+     "quote": "ООО «ВТС» по итогам 2025 года выручило 1,67 млрд рублей, заработав 346 млн чистой прибыли"
+    },
+    {
+     "field": "buyer / eco.context",
+     "card": "«Медприбор»",
+     "article": "АО «Медприбор» (Петербург) связано с ГК «Центральная медицинская база» Эдуарда Иванова (сеть ICLINIC); Иванов — учредитель «Медприбора»",
+     "quote": "Петербургское АО «Медприбор», связанное с ГК «Центральная медицинская база» Эдуарда Иванова"
+    },
+    {
+     "field": "asset",
+     "card": "крупный поставщик медицинского оборудования «ВТС»",
+     "article": "ООО «ВТС» — официальный бизнес-партнер Siemens Healthineers (КТ, МРТ, УЗИ), с 2003 года, 20+ регионов",
+     "quote": "является официальным бизнес-партнером Siemens Healthineers"
+    }
+   ]
+  }
+ ]
+}
