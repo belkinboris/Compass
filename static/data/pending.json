@@ -329,70 +329,6 @@
    "pending_since": "2026-11-09T13:10:03+00:00"
   },
   {
-   "id": "g69b41d86",
-   "date": "2022-12-22",
-   "title": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Телеграм-канал @alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/422"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "buyer_name": "«Хайв» (ВымпелКом)",
-   "asset": "миноритарная доля в стартапе Knomary",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2022-12-22",
-     "title": "Сделка завершена",
-     "note": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary. ALUMNI Partners консультирует Хайв / ВымпелКом в связи с покупкой доли в Knomary Команда ALUMNI Partners оказала полную правовую поддержку ООО «Хайв», дочерней компании ПАО «Вымпелком» (бренд…",
-     "source": [
-      "Телеграм-канал @alumnipartnerslawfirm",
-      "https://t.me/alumnipartnerslawfirm/422"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Хайв» (ВымпелКом)",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/422"
-     }
-    ],
-    "target": [
-     {
-      "value": "миноритарная доля в стартапе Knomary",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/422"
-     }
-    ]
-   },
-   "pending_since": "2026-11-09T13:10:03+00:00"
-  },
-  {
    "id": "g5e31a7f2",
    "date": "2023-08-07",
    "title": "Структура «Интерроса» купила 20% группы «Рексофт»",
@@ -1604,27 +1540,27 @@
    "pending_since": "2026-11-10T05:52:38+00:00"
   },
   {
-   "id": "g47b0f86b",
-   "date": "2026-11-10",
-   "title": "Москва выставила на торги три помещения в Южном Медведкове",
-   "ind": "Недвижимость",
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
+   "id": "g0966b2e2",
+   "date": "2022-07-04",
+   "title": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate)",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
    "src": [
     [
-     "abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/10/v-rajone-yuzhnoe-medvedkovo-vystavili-na-torgi-tri-pomeshheniya"
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/128"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "—",
     "share": "—",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Три нежилых помещения площадью от 67,7 до 76,3 кв. м на первом этаже дома на Полярной улице — с отдельными входами. Подать заявку можно до 11 ноября; покупку решат аукционом 20 ноября — через электронную систему «Росэлторг».",
+    "context": "—",
     "finadv": "—"
    },
    "law": {
@@ -1633,58 +1569,181 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "Не раскрыта",
-   "seller_src": "text",
-   "seller": "Департамент городского имущества Москвы",
-   "asset": "Три нежилых помещения на Полярной улице в Южном Медведкове",
+   "seller": "Jones Lang LaSalle",
+   "buyer_name": "(IBC Real Estate)",
+   "asset": "российский бизнес",
    "events": [
     {
-     "kind": "announced",
-     "date": "2026-11-10",
-     "title": "Москва выставила помещения на торги",
-     "note": "Торги назначены на 20 ноября 2026 года; о планах рассказал руководитель департамента по конкурентной политике Кирилл Пуртов.",
+     "kind": "closed",
+     "date": "2022-07-04",
+     "title": "Сделка завершена",
+     "note": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate). ALUMNI Partners консультирует Jones Lang LaSalle в связи с продажей ее российского бизнеса Команда ALUMNI Partners успешно завершила юридическое сопровождение интересов Jones…",
      "source": [
-      "abnews.ru",
-      "https://abnews.ru/center/news/msk/2026/11/10/v-rajone-yuzhnoe-medvedkovo-vystavili-na-torgi-tri-pomeshheniya"
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/128"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "(IBC Real Estate)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/128"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский бизнес",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/128"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Jones Lang LaSalle",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/128"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T08:39:19+00:00"
+  },
+  {
+   "id": "gc06d6caf",
+   "date": "2024-03-01",
+   "title": "Mantsinen Group продала российскую «дочку» компании ее руководителя",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/834"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Mantsinen Group",
+   "asset": "российская «дочка» компании ее руководителя",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-03-01",
+     "title": "Сделка завершена",
+     "note": "Mantsinen Group продала российскую «дочку» компании ее руководителя. ⚡️ Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже дочернего общества Mantsinen Group российскому менеджменту. ❗️ Mantsinen Group – крупнейшая европейская…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/834"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российская «дочка» компании ее руководителя",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/834"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Mantsinen Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/834"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T08:39:21+00:00"
+  },
+  {
+   "id": "gb14c2bae",
+   "date": "2026-11-10",
+   "title": "Китай выкупил российского производителя автокомпонентов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/10/kupili/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Китай",
+   "asset": "российский производитель автокомпонентов",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-10",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/10/kupili/"
      ]
     }
    ],
    "party_evidence": {
-    "seller": [
+    "buyer": [
      {
-      "value": "Департамент городского имущества Москвы",
-      "field": "seller",
-      "method": "human_review",
-      "url": "https://abnews.ru/center/news/msk/2026/11/10/v-rajone-yuzhnoe-medvedkovo-vystavili-na-torgi-tri-pomeshheniya"
+      "value": "Китай",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/10/kupili/"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский производитель автокомпонентов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/10/kupili/"
      }
     ]
    },
-   "from_raw": {
-    "draft_id": "d65463613",
-    "title": "В районе Южное Медведково выставили на торги три помещения"
-   },
-   "pending_since": "2026-11-10T09:50:00+00:00",
-   "themes": [
-    "Продажа с торгов"
-   ],
-   "reviewed": "2026-11-10",
-   "accepted_notes": {
-    "no_profile": {
-     "target": "помещения, не компания — профиль не нужен",
-     "seller": "Департамент городского имущества Москвы — орган власти, профиль не нужен"
-    },
-    "searched": [
-     "WebFetch источника (abnews.ru) — полный текст статьи",
-     "deals_promoted.json и pending.json — поиск по «Южное Медведково»/«Полярная улица» на дубли",
-     "WebSearch по теме — других изданий об этих же торгах не нашлось (узкая муниципальная новость)",
-     "проверка аналогичного прецедента в базе (gab80558c, тот же тип сделки — город выставляет на торги через Росэлторг)",
-     "ЕГРЮЛ/rusprofile — не применимо, стороны не юрлица"
-    ]
-   },
-   "accepted": "2026-11-10",
-   "accepted_hash": "556ac7a2cbc4.ace5bd",
-   "second_read": "2026-11-10",
-   "second_read_hash": "556ac7a2cbc4.ace5bd"
+   "pending_since": "2026-11-10T09:53:15+00:00"
   }
  ]
 }

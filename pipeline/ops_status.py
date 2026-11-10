@@ -197,7 +197,7 @@ def send_intake_run(looked=0, found=0, cards=0, screened=0, client=None):
 
 
 def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, nothing=False, doubted=0, unsent=0,
-                   unsent_names=None):
+                   unsent_names=None, waiting_posts=0):
     """Публикация: что вышло в канал и что еще ждет.
 
     `soon` и `unread` — РАЗНЫЕ причины ждать, и путать их нельзя: `soon` —
@@ -222,7 +222,7 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
         if applied:
             done.append('применили %d %s' % (applied, _plural(applied, 'ваше решение', 'ваших решения', 'ваших решений')))
         lines.append('Готово: %s.' % ', '.join(done))
-    if soon or held or unread or doubted or unsent:
+    if soon or held or waiting_posts or doubted or unsent:
         lines.append('')
         if unsent:
             # 27 октября 2026: 13 принятых карточек (в том числе 5Yes!) трое
@@ -243,17 +243,19 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
             for cid, title in (unsent_names or [])[:5]:
                 lines.append('   • <a href="https://projectcompass.ru/#/preview/%s">%s</a> — %s'
                              % (html.escape(cid), html.escape(cid), html.escape(_trim(title, 60)) or 'без заголовка'))
-        if soon:
-            # Согласуется и существительное, и ГЛАГОЛ: «1 карточка выйдет»,
-            # «6 карточек выйдут». Первая версия писала «1 карточка выйдут» —
-            # поймано своим же тестом, а не глазами.
-            lines.append('⏳ %d %s %s %s в ближайшие сутки, если не трогать'
-                         % (soon, _plural(soon, 'карточка', 'карточки', 'карточек'),
-                            _plural(soon, 'выйдет', 'выйдут', 'выйдут'),
-                            _plural(soon, 'сама', 'сами', 'сами')))
-        if unread:
-            lines.append('📖 %d %s ждут прочтения, второго чтения или приемки — сами не выйдут, пока их не сверят со статьей и не примут целиком'
-                         % (unread, _plural(unread, 'карточка', 'карточки', 'карточек')))
+        # ВЛАДЕЛЬЦУ — ТОЛЬКО ТО, ЧТО ЖДЕТ ЕГО (10 ноября 2026: «если я должен принимать
+        # решения, то какие и где, а если нет, то зачем эта цифра?»). Очередь притока
+        # (карточки, которые еще сверяются со статьей) — внутренняя работа рутины, в
+        # отчет не выносится; `unread` оставлен в сигнатуре ради совместимости.
+        if soon or waiting_posts:
+            parts = []
+            if soon:
+                parts.append('%d %s' % (soon, _plural(soon, 'проект карточки', 'проекта карточек', 'проектов карточек')))
+            if waiting_posts:
+                parts.append('%d %s' % (waiting_posts, _plural(waiting_posts, 'проект поста', 'проекта постов',
+                                                               'проектов постов')))
+            lines.append('🗂 Вы еще не ответили: %s. Карточка без ответа выйдет на сайт через сутки после '
+                         'показа, пост без кнопки не выйдет' % ' и '.join(parts))
         if held:
             lines.append('✋ %d %s вы придержали — %s вашего слова'
                          % (held, _plural(held, 'карточку', 'карточки', 'карточек'),
@@ -265,8 +267,8 @@ def render_publish(posted=0, edited=0, applied=0, soon=0, held=0, unread=0, noth
             # Число то же, что у кнопки «Сомнительные»: новости, не прошедшие
             # проверку, и прочитанные, но не принятые карточки (29 октября
             # 2026: «написано 2 сомнительные, нажимаю — кидают 11»).
-            lines.append('⚠️ Сомнительных: %d — новости и карточки, которые проверку не прошли; '
-                         'ждут вашего решения, без вас не выйдут' % doubted)
+            lines.append('⚠️ Новостей без вашего ответа: %d — мы присылали их с вопросом «сделка или нет», '
+                         'без ответа не выйдут' % doubted)
     return '\n'.join(lines)
 
 
@@ -523,14 +525,12 @@ def queue_keyboard(soon=0, held=0, unread=0, doubted=0, unsent=0):
     """Кнопки «показать, что там» — чтобы не идти искать руками."""
     row = []
     if soon:
-        row.append({'text': '👀 Что скоро выйдет', 'callback_data': 'show:soon'})
-    if unread:
-        row.append({'text': '📖 Что ждет прочтения или приемки', 'callback_data': 'show:unread'})
+        row.append({'text': '🗂 Без ответа', 'callback_data': 'show:soon'})
     if held:
         row.append({'text': '✋ Что придержано', 'callback_data': 'show:held'})
     rows = [row] if row else []
     if doubted:
-        rows.append([{'text': '⚠️ Сомнительные — ждут решения', 'callback_data': 'show:raw'}])
+        rows.append([{'text': '⚠️ Новости без ответа', 'callback_data': 'show:raw'}])
     return {'inline_keyboard': rows} if rows else None
 
 
@@ -598,6 +598,34 @@ def queue_counts(path=PENDING):
     counts = state_counts(cards)
     return (counts['shown'], counts['held'] + held_posts_count(),
             sum(counts[s] for s in _readiness().WAITING_INTAKE))
+
+
+WAITING_POST_DAYS = 7
+
+
+def waiting_posts(base):
+    """Карточки на сайте, чей пост показан владельцу и ждет кнопки: решения о посте
+    нет (не одобрен, не «без поста», не придержан), пост не вышел, сделка свежая
+    (иначе в канал она не пойдет вовсе) и карточка вышла не раньше недели назад."""
+    from datetime import date, timedelta
+    ingest = os.path.join(ROOT, 'pipeline', 'ingest')
+    if ingest not in sys.path:
+        sys.path.insert(0, ingest)
+    import send_drafts
+    since = (date.today() - timedelta(days=WAITING_POST_DAYS)).isoformat()
+    posted = base.get('telegram_posts') or {}
+    return [d for d in base.get('deals') or []
+            if str(d.get('added') or '') >= since and not posted.get(d.get('id'))
+            and not (d.get('post_approved') or d.get('no_post') or d.get('post_held') or d.get('post_override'))
+            and send_drafts.goes_to_channel(d)]
+
+
+def waiting_posts_count(path=None):
+    path = path or os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+    try:
+        return len(waiting_posts(json.load(open(path, encoding='utf-8'))))
+    except (OSError, ValueError):
+        return 0
 
 
 def held_posts_count(path=None):
@@ -681,7 +709,11 @@ def doubted_count(path=PENDING, inbox=None):
         cards = json.load(open(path, encoding='utf-8')).get('cards') or []
     except (OSError, ValueError):
         cards = []
-    n = sum(1 for c in cards if _readiness().state(c) == 'doubted')
+    # Только новости, которые МЫ ПРИСЛАЛИ владельцу с вопросом «сделка или нет» и на
+    # которые он не ответил (владелец, 10 ноября 2026: «зачем выносить сомнительные,
+    # где ты и сам можешь принять решение»). Прочитанные и не принятые карточки решает
+    # рутина притока, в отчет владельцу они не идут.
+    n = 0
     inbox = inbox or os.path.join(ROOT, 'data', 'inbox')
     hold_dir = os.path.join(inbox, 'hold')
     try:
@@ -689,7 +721,8 @@ def doubted_count(path=PENDING, inbox=None):
         state = json.load(open(os.path.join(inbox, 'moderation_state.json'), encoding='utf-8')) \
             if os.path.exists(os.path.join(inbox, 'moderation_state.json')) else {}
         drafts = json.load(open(os.path.join(hold_dir, names[-1]), encoding='utf-8')).get('drafts') or [] if names else []
-        n += len(_readiness().undecided_raw(drafts, state))
+        shown = set((state.get('raw_sent_titles') or {}))
+        n += sum(1 for d in _readiness().undecided_raw(drafts, state) if str(d.get('draft_id')) in shown)
     except (OSError, ValueError):
         pass
     return n
@@ -709,10 +742,14 @@ def build(args):
         doubted = doubted_count(path, getattr(args, 'inbox', None))
         names = unsent_cards(path)
         unsent = len(names)
+        # Посты, ждущие кнопки, — из базы рядом с этой очередью (тест с чужим
+        # pending.json не видит боевую базу).
+        base_path = os.path.join(os.path.dirname(os.path.abspath(path)), 'deals_promoted.json')
+        waiting = waiting_posts_count(base_path) if os.path.exists(base_path) else 0
         text = render_publish(args.posted, args.edited, args.applied,
                               args.soon, args.held, args.unread, args.nothing, doubted, unsent,
-                              unsent_names=names)
-        return text, queue_keyboard(args.soon, args.held, args.unread, doubted, unsent)
+                              unsent_names=names, waiting_posts=waiting)
+        return text, queue_keyboard(args.soon + waiting, args.held, 0, doubted, unsent)
     ids = [i.strip() for i in args.ids.split(',') if i.strip()]
     if args.routine == 'вычитка':
         return render_proofread(args.proofread, args.refused, args.left, ids), None
@@ -853,9 +890,10 @@ def _self_check():
     # выдуманное «имя» по первой заглавной букве.
     assert short_name({'title': 'ВЭБ.РФ объявила о приобретении ГТЛК'}) == 'ВЭБ.РФ объявила о'
     # Склонения, ради которых все и затевалось.
-    assert 'карточка' in render_publish(nothing=True, soon=1)
-    assert 'карточки' in render_publish(nothing=True, soon=3)
-    assert 'карточек' in render_publish(nothing=True, soon=6)
+    assert '1 проект карточки' in render_publish(nothing=True, soon=1)
+    assert '3 проекта карточек' in render_publish(nothing=True, soon=3)
+    assert '6 проектов карточек' in render_publish(nothing=True, soon=6)
+    assert '2 проекта постов' in render_publish(nothing=True, waiting_posts=2)
     # Пустой прогон обязан быть внятным, а не молчаливым.
     assert 'публиковать нечего' in render_publish(nothing=True).lower()
     assert 'тихие дни' in render_intake(looked=1633)
@@ -870,9 +908,11 @@ def _self_check():
     # «Скоро выйдет» и «ждет прочтения» — РАЗНЫЕ утверждения, путать их
     # нельзя (18 августа так и застряли «Ленобласть»/«М.видео»): у карточки,
     # которую еще не прочитали, текст не должен обещать, что она выйдет сама.
+    # Очередь притока владельцу не выносится (10 ноября 2026: «если я должен принимать
+    # решения, то какие и где, а если нет, то зачем эта цифра?»).
     unread_text = render_publish(nothing=True, unread=2)
-    assert 'выйдут сами' not in unread_text and 'ждут прочтения' in unread_text
-    assert queue_keyboard(0, 0, 3)['inline_keyboard'][0][0]['callback_data'] == 'show:unread'
+    assert 'прочтения' not in unread_text
+    assert queue_keyboard(0, 0, 3) is None
     # Вычитка: обещание «факты не менялись» — в каждом отчете, отказы названы
     # по-человечески, пустой час не выглядит как молчание.
     text = render_proofread(58, 3, 1334, base={'deals': []})

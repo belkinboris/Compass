@@ -2,37 +2,6 @@
  "made": "2026-11-10",
  "items": [
   {
-   "key": "https://krasrab.ru/news/finansy/60082::g30db3641",
-   "candidate_id": "g30db3641",
-   "reason": "общие редкие слова: миллио, почти, рублей",
-   "draft": {
-    "draft_id": "d79905662",
-    "title": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и получил 5 лет колонии",
-    "date": "2026-11-10",
-    "src": [
-     [
-      "web:krasrab.ru",
-      "https://krasrab.ru/news/finansy/60082"
-     ]
-    ],
-    "sum": null,
-    "type": "M&A",
-    "status": null,
-    "events": [],
-    "buyer_name": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
-    "asset": "5 лет колонии",
-    "seller": null,
-    "parsed_parties": {
-     "buyer": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
-     "asset": "5 лет колонии",
-     "seller": null
-    },
-    "ind": null,
-    "needs_review": true
-   },
-   "queued": "2026-11-10"
-  },
-  {
    "key": "https://t.me/kkmpconnect/404::gb9fdfce4",
    "candidate_id": "gb9fdfce4",
    "reason": "по всей базе: совпали две стороны (asset, seller)",
@@ -99,68 +68,6 @@
      "buyer": "(IBC Real Estate)",
      "asset": "российский бизнес",
      "seller": "Jones Lang LaSalle"
-    },
-    "ind": null,
-    "needs_review": true
-   },
-   "queued": "2026-11-10"
-  },
-  {
-   "key": "https://krasrab.ru/news/finansy/60082::g3755c36c",
-   "candidate_id": "g3755c36c",
-   "reason": "общие редкие слова: миллио, почти, рублей",
-   "draft": {
-    "draft_id": "d79905662",
-    "title": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и получил 5 лет колонии",
-    "date": "2026-11-10",
-    "src": [
-     [
-      "web:krasrab.ru",
-      "https://krasrab.ru/news/finansy/60082"
-     ]
-    ],
-    "sum": null,
-    "type": "M&A",
-    "status": null,
-    "events": [],
-    "buyer_name": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
-    "asset": "5 лет колонии",
-    "seller": null,
-    "parsed_parties": {
-     "buyer": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
-     "asset": "5 лет колонии",
-     "seller": null
-    },
-    "ind": null,
-    "needs_review": true
-   },
-   "queued": "2026-11-10"
-  },
-  {
-   "key": "https://www.rbc.ru/rbcfreenews/6af1f47592fca89cd54c1825::ge6c78cb5",
-   "candidate_id": "ge6c78cb5",
-   "reason": "общие слова заголовка: 5",
-   "draft": {
-    "draft_id": "d12770683",
-    "title": "Предприятия ОЭЗ Москвы вложили в экономику столицы почти 656 млрд руб.",
-    "date": "2026-11-10",
-    "src": [
-     [
-      "web:rbc.ru",
-      "https://www.rbc.ru/rbcfreenews/6af1f47592fca89cd54c1825"
-     ]
-    ],
-    "sum": "656 млрд ₽",
-    "type": "M&A",
-    "status": null,
-    "events": [],
-    "buyer_name": "Предприятия ОЭЗ Москвы",
-    "asset": "экономика столицы почти 656 млрд руб.",
-    "seller": null,
-    "parsed_parties": {
-     "buyer": "Предприятия ОЭЗ Москвы",
-     "asset": "экономика столицы почти 656 млрд руб.",
-     "seller": null
     },
     "ind": null,
     "needs_review": true

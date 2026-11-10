@@ -3560,16 +3560,15 @@ def test_unaccepted_card_in_the_queue_says_nobody_read_it(monkeypatch):
         assert "✅ Опубликовать" not in buttons and "✋ Придержать" not in buttons, buttons
         assert buttons == ["✏️ Изменить", "🗑 Выкинуть"], buttons
 
-    # …а показывается она там, где человек решает судьбу сомнительного —
-    # рядом с сырьем, которое не прошло ворота (вопрос владельца 21 сентября).
+    # …и владельцу не носится вовсе: прочитанную и не принятую карточку решает
+    # рутина притока (владелец, 10 ноября 2026: «зачем выносить сомнительные, где
+    # ты и сам можешь спокойно принять решение»).
     sent.clear()
     monkeypatch.setattr(main.os.path, "isdir", lambda p: False)
     main._send_queue_batch(-100, "raw")
     texts = [kw.get("text", "") for _m, kw in sent]
-    assert any("Сомнительные" in t for t in texts), texts
-    held = next(t for t in texts if "gu2" in t)
-    assert held.index("обе стороны иностранные") < held.index("Orlen"), \
-        "вывод приемки должен стоять выше машинных полей"
+    assert any("Новости без вашего ответа" in t for t in texts), texts
+    assert not [t for t in texts if "gu2" in t], texts
 
 
 def test_queue_batch_says_out_loud_when_it_shows_only_a_part():
@@ -5323,14 +5322,16 @@ def test_queue_hides_raw_the_owner_already_answered_and_names_second_reading(mon
          "reviewed": "2026-10-28", "accepted": "2026-10-28", "second_read": "2026-10-28",
          "draft_sent": True},
     ]}
+    state = {"raw_sent_titles": {"d1": "Отвеченная новость", "d2": "Новая новость"}}
     monkeypatch.setattr(core, "_read_json", lambda path, default:
-                        pending if "pending" in path else (hold if "hold" in path else {}))
+                        pending if "pending" in path else (hold if "hold" in path
+                                                           else (state if "moderation_state" in path else {})))
     monkeypatch.setattr(main.os.path, "isdir", lambda p: True)
     monkeypatch.setattr(main.os, "listdir", lambda p: ["2026-10-28.json"])
 
     main._send_queue_batch(-100, "raw")
     texts = [kw.get("text", "") for _m, kw in sent]
-    assert any("Сомнительные: 1" in t and "Еще 1 вы уже решили" in t for t in texts), texts
+    assert any("без вашего ответа: 1" in t and "Еще 1 вы уже решили" in t for t in texts), texts
     assert not [t for t in texts if "d1" in t], "отвеченное сырье показано снова"
     assert [t for t in texts if "d2" in t]
 
