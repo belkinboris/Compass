@@ -262572,6 +262572,5317 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "date": "2022-09-09",
+   "title": "Бывшие российские менеджеры Halliburton купили ее бизнес в России",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/82988/"
+    ],
+    [
+     "Halliburton (отчет на SEC)",
+     "https://www.sec.gov/Archives/edgar/data/45012/000004501222000065/hal-20221025.htm"
+    ],
+    [
+     "Сноб",
+     "https://snob.ru/news/nefteservisnaya-kompaniya-halliburton-ushla-iz-rossii/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Весь российский бизнес Halliburton",
+    "val": "Цена не раскрыта. Во втором квартале 2022 года Halliburton списала по российскому бизнесу 344 млн долларов.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Американская нефтесервисная Halliburton объявила о сворачивании работы в России в марте 2022 года: санкции запрещали часть операций и работу на некоторых российских государственных заказчиков, в том числе «Роснефть» и «Газпром нефть». В сентябре компания сообщила, что продала бизнес бывшей российской команде управленцев и больше не работает в России. Бизнес и активы перешли к ООО «Бурсервис», которое не зависит от Halliburton. По оценке Vygon Consulting, доля Halliburton на российском рынке нефтесервиса составляла около 2%. Позже «Бурсервис» продолжил покупки: в 2025 году получил разрешение на покупку российского бизнеса Aggreko, в 2026 году — 51% «Уфабурмаша».",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — бывший российский менеджмент Halliburton; бизнес работает под названием ООО «Бурсервис». С 8 сентября 2022 года сменился владелец ООО «Апстрим Сервисес», которым раньше полностью владела нидерландская структура Halliburton.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Условия сделки Halliburton не раскрыла."
+   },
+   "asset": "Российский нефтесервисный бизнес американской группы (теперь ООО «Бурсервис»)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Halliburton",
+   "extra": "Американская Halliburton продала российский нефтесервисный бизнес своим бывшим российским управленцам; он работает под названием «Бурсервис».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Бурсервис» (бывшая российская дочка Halliburton): ИНН в прочитанных статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403). Профиль АО «Бурсервис» (g69e44ed5) — другое юрлицо, зарегистрированное в 2022 году.",
+     "buyer": "Покупатель — группа менеджеров без названного юрлица-покупателя, профиль не заводили.",
+     "seller": "Halliburton — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "closing",
+   "buyer_name": "Бывший российский менеджмент Halliburton",
+   "id": "g6797d158",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "584a50ff1fa2"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-09-09",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "827842eaf811"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "fbd42bd1ceb3"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "«Новатэк» купил у TotalEnergies 49% «Тернефтегаза»",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/82590/"
+    ],
+    [
+     "Новатэк",
+     "https://www.novatek.ru/en/press/releases/index.php?id_4=5154"
+    ],
+    [
+     "ТАСС",
+     "https://tass.com/economy/1502891"
+    ],
+    [
+     "TotalEnergies (отчет за III квартал 2022)",
+     "https://www.investegate.co.uk/announcement/bzw/totalenergies-se--tte/totalenergies-se-third-quarter-2022-results/7203901"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "49% акций АО «Тернефтегаз»",
+    "val": "Цена не раскрыта. По словам TotalEnergies, условия позволили ей вернуть вложенные в месторождение средства.",
+    "target_fin": "В 2021 году на месторождении добыли 2,622 млрд куб. м газа (+5%) и 754 тыс. тонн жидких углеводородов (+27%).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Тернефтегаз» разрабатывает Термокарстовое газоконденсатное месторождение в Красноселькупском районе Ямала, оно работает с 2010 года. TotalEnergies договорилась продать свою долю «Новатэку» 18 июля 2022 года, 8 августа подала заявку на одобрение, 25 августа российские власти согласовали сделку, 26 августа стороны подписали окончательный договор. После сделки «Новатэк» стал единственным владельцем «Тернефтегаза». В отчете за третий квартал 2022 года TotalEnergies отметила продажу доли как состоявшуюся.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель по указу президента — ООО «Новатэк Московская область», дочерняя компания «Новатэка»; продавец — TotalEnergies EP Termokarstovoye. Предмет — 1,714 млрд обыкновенных акций «Тернефтегаза».",
+    "appr": "Согласие российских властей 25 августа 2022 года; указ президента от 5 сентября 2022 года разрешил покупку.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Цена не раскрыта; закрытие ожидалось в сентябре 2022 года при выполнении обычных условий."
+   },
+   "asset": "49% АО «Тернефтегаз» (Термокарстовое месторождение)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "TotalEnergies",
+   "extra": "Французская TotalEnergies продала «Новатэку» свои 49% в «Тернефтегазе», который разрабатывает Термокарстовое месторождение; «Новатэк» стал единственным владельцем.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "АО «Тернефтегаз»: ИНН в прочитанных статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "seller": "TotalEnergies — профиль g30486604 есть, но продает ее дочка TotalEnergies EP Termokarstovoye; поле seller заполнено словами. История участников ЕГРЮЛ «Тернефтегаза» не запрашивалась: ОГРН в статьях не назван, реестр ФНС из этой среды не открылся; переход акций подтверждают указ президента и сообщения обеих сторон."
+    }
+   },
+   "sum": "Не раскрыта",
+   "buyer": "ga5ef20dd",
+   "id": "g4fb4d8b0",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "7933ce193b92"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f5af3c6c1075"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-09-13",
+   "title": "Группа «Дело» купила у Maersk 30,75% Global Ports",
+   "ind": "Порты и инфраструктура",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/861889"
+    ],
+    [
+     "Группа «Дело»",
+     "https://www.delo-group.com/news/816/"
+    ],
+    [
+     "PortNews",
+     "https://en.portnews.ru/news/342680"
+    ]
+   ],
+   "eco": {
+    "sum": "135 млн $",
+    "share": "30,75% акций Global Ports Investments Plc",
+    "val": "При сделке цена не раскрывалась; в годовом отчете A.P. Moller-Maersk за 2022 год указано 135 млн долларов.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Global Ports — один из крупнейших операторов контейнерных терминалов в России. До сделки группа «Дело» Сергея Шишкарева и «Росатома» и APM Terminals (терминальная компания датской Maersk) владели по 30,75%, по 9% было у Ilibrinio Establishment и Polozio Enterprises, около 20,5% — в свободном обращении. После сделки доля «Дела» выросла до 61,5%. Maersk объявила об уходе из России после начала войны на Украине; соглашение о продаже доли было объявлено в августе 2022 года. Стороны оставили APM Terminals возможность в будущем вернуться к совместному бизнесу.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — APM Terminals B.V. (группа A.P. Moller-Maersk); покупатель — группа «Дело».",
+    "appr": "Сделка закрыта после получения необходимых разрешений российских властей.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Сделка на рыночных условиях; предусмотрена возможность возврата APM Terminals к совместному бизнесу с группой."
+   },
+   "asset": "30,75% Global Ports Investments Plc (контейнерные терминалы)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "A.P. Moller-Maersk (APM Terminals)",
+   "extra": "Датская Maersk продала группе «Дело» свою долю 30,75% в операторе контейнерных терминалов Global Ports; доля «Дела» выросла до 61,5%.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Global Ports Investments Plc — компания, зарегистрированная на Кипре; профиля в базе нет, российского ИНН у нее в 2022 году не было.",
+     "seller": "A.P. Moller-Maersk — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "135 млн $",
+   "date_basis": "closing",
+   "buyer": "delo",
+   "id": "ge0af58de",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 30.75,
+     "basis": "rule",
+     "card_hash": "414bc20210ad"
+    },
+    "price": {
+     "value_rub": 8161668000,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "67b211a87774",
+     "currency": "USD",
+     "amount": 135000000.0,
+     "fx_rate": 60.4568,
+     "fx_date": "2022-09-13",
+     "fx_method": "day"
+    },
+    "date": {
+     "value": "2022-09-13",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "28e69ad2acad"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "10b0145a311e"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-05-12",
+   "title": "Copacker Agro купила российский потребительский бизнес Raisio",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Raisio",
+     "https://news.cision.com/raisio-oyj/r/raisio-plc-s-consumer-business-in-russia-transferred-to-the-new-owner,c3566481"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/79090/"
+    ]
+   ],
+   "eco": {
+    "sum": "1,5 млн €",
+    "share": "100% ООО «Раисио Нутришн»",
+    "val": "Общая цена 1,5 млн евро, включая права на марку Nordic в России и Белоруссии. Raisio ожидала убыток от продажи около 3,6 млн евро, из них 2,9 млн евро списаны в первом квартале.",
+    "target_fin": "Выручка ООО «Раисио Нутришн» за 2021 год — 789 млн ₽, чистая прибыль — 76,6 млн ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Финская пищевая компания Raisio вела потребительский бизнес в России через ООО «Раисио Нутришн» (каши и хлопья под маркой Nordic). Покупатель — российская компания Copacker Agro, с 12 мая 2022 года ей принадлежит 100% «Раисио Нутришн». Права на марку Nordic для России и Белоруссии отдельно купила эстонская Nordgate Trading Oü. В первом квартале 2022 года Raisio учла российский бизнес как прекращенную деятельность.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Юрлицо купила Copacker Agro; права на марку Nordic в России и Белоруссии — эстонская Nordgate Trading Oü.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Договоры подписаны 29 апреля 2022 года; сделка зарегистрирована 12 мая 2022 года."
+   },
+   "asset": "ООО «Раисио Нутришн» (каши и хлопья под маркой Nordic)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Raisio",
+   "extra": "Финская Raisio продала российский бизнес по выпуску каш и хлопьев компании Copacker Agro за 1,5 млн евро вместе с правами на марку Nordic.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Раисио Нутришн»: ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Copacker Agro (ООО «Копакер Агро» в латинской записи Интерфакса): ИНН не найден по той же причине.",
+     "seller": "Raisio — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "1,5 млн €",
+   "date_basis": "registry",
+   "buyer_name": "Copacker Agro",
+   "id": "g083ec8ce",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "2079b9f65b9b"
+    },
+    "price": {
+     "value_rub": 108947100,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "ccc284b4d683",
+     "currency": "EUR",
+     "amount": 1500000.0,
+     "fx_rate": 72.6314,
+     "fx_date": "2022-05-12",
+     "fx_method": "day"
+    },
+    "date": {
+     "value": "2022-05-12",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "650a20750bbc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "04fa886ae9a2"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-04-12",
+   "title": "Российское руководство Accenture купило ее бизнес в России",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/219733/2022-04-12/2022-w15/biznes-accenture-rossii-polnostyu-peredan-rossiyskomu-rukovodstvu"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/861726"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% российского бизнеса Accenture",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Accenture объявила об уходе из России в начале марта 2022 года. В апреле российская практика полностью перешла в собственность местного руководства и стала независимой от международной сети. Гендиректор Вартан Диланян. В сентябре 2022 года компания выбрала новый бренд Axenix («Аксеникс»); временно она работала как ООО «АксТим». В компании около 2 тыс. сотрудников в Москве, Твери, Ростове-на-Дону, Петербурге, Краснодаре и Алматы.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Бизнес перешел в 100% собственность российского руководства; временное юрлицо — ООО «АксТим».",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "Российская практика международной консалтинговой сети (теперь Axenix)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Accenture",
+   "extra": "Американо-ирландская Accenture передала российский бизнес местному руководству; компания стала работать под брендом Axenix.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «АксТим» (Axenix): ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Покупатель — группа менеджеров без названного юрлица, профиль не заводили.",
+     "seller": "Accenture — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "announcement",
+   "buyer_name": "Российское руководство (гендиректор Вартан Диланян)",
+   "id": "gef7d7e86",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "bbbf4dbcc6e0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-04-12",
+     "meaning": "announcement",
+     "basis": "rule",
+     "card_hash": "583fe1085daf"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "bca3c18cda51"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-07-15",
+   "title": "Местное руководство покупает российский бизнес Danfoss",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Подписана",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.com/economy/1480799"
+    ],
+    [
+     "Retail.ru (пресс-релиз «Данфосс»)",
+     "https://www.retail.ru/rbc/pressreleases/novyy-status-kompanii-danfoss-v-rossii/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Российский и белорусский бизнес Danfoss (ООО «Данфосс»)",
+    "val": "Цена не раскрыта. По сообщениям Danfoss, обесценение чистых активов в России — 85 млн евро.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Датская Danfoss решила уйти из России и Белоруссии 1 апреля 2022 года. 15 июля концерн подписал соглашение о передаче ООО «Данфосс» его руководству; закрытие ожидалось в сентябре. Заводы — в Московской и Нижегородской областях; компания работает в России почти 30 лет. Продукцию для тепло- и холодоснабжения стали выпускать под маркой «Ридан». Гендиректор — Михаил Шапиро. В российском бизнесе работало около 1,1 тыс. человек, на него приходилось около 2% продаж группы.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Закрытие ожидалось в сентябре 2022 года; после него Danfoss перестает работать в России и Белоруссии."
+   },
+   "asset": "Российский и белорусский бизнес датского концерна (марка «Ридан»)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Danfoss",
+   "extra": "Датская Danfoss подписала соглашение о передаче российского и белорусского бизнеса местному руководству; продукция выходит под маркой «Ридан».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Данфосс» (позже «Ридан»): ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Покупатель — руководство компании без названного юрлица, профиль не заводили.",
+     "seller": "Danfoss — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "signing",
+   "buyer_name": "Местное руководство российского бизнеса",
+   "id": "g5442f060",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "75931d931551"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "f98fc919393c"
+    },
+    "date": {
+     "value": "2022-07-15",
+     "meaning": "signing",
+     "basis": "rule",
+     "card_hash": "4bec60807d76"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "1c42de229133"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-04-25",
+   "title": "Местное руководство покупает у Stora Enso лесопилки в Неболчах и Импилахти",
+   "ind": "Лесопром",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Подписана",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/78549/"
+    ],
+    [
+     "ТАСС",
+     "https://tass.com/economy/1442543"
+    ],
+    [
+     "Stora Enso (PR Newswire)",
+     "https://www.prnewswire.co.uk/news-releases/stora-enso-divests-its-sawmills-and-forest-operations-in-russia-841188759.html"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Лесопильные заводы ООО «Сетлес» (Импилахти) и ООО «Сетново» (Неболчи) и лесозаготовительный бизнес",
+    "val": "Цена не раскрыта. Stora Enso списала 70 млн евро в первом квартале и ожидала дополнительный убыток около 60 млн евро при закрытии, в основном из-за курсовых разниц.",
+    "target_fin": "За 2021 год: «Сетлес» — выручка 4,5 млрд ₽, чистая прибыль 1,4 млрд ₽; «Сетново» — выручка 4,9 млрд ₽, чистая прибыль 1,3 млрд ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Финско-шведская Stora Enso продает местному руководству два лесопильных завода — в Импилахти (Карелия) и Неболчах (Новгородская область) — общей мощностью 350 тыс. куб. м пиломатериалов в год, а также лесозаготовительный бизнес, который снабжает заводы: около 170 сотрудников и права на заготовку примерно на 370 тыс. гектаров. Отдельной сделкой Stora Enso в мае 2022 года продала три завода гофроупаковки.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Закрытие ожидалось во втором квартале 2022 года после необходимых одобрений."
+   },
+   "asset": "Лесопилки в Импилахти и Неболчах и лесозаготовительный бизнес в России",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Stora Enso",
+   "extra": "Stora Enso договорилась продать местному руководству две российские лесопилки и лесозаготовительный бизнес.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Сетлес» и ООО «Сетново» — два юрлица; ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Покупатель — руководство заводов без названного юрлица, профиль не заводили.",
+     "seller": "Stora Enso — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "announcement",
+   "buyer_name": "Местное руководство заводов",
+   "id": "g2b958c12",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "ef1aaf7b3fb5"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "f98fc919393c"
+    },
+    "date": {
+     "value": "2022-04-25",
+     "meaning": "announcement",
+     "basis": "rule",
+     "card_hash": "37060cffc0db"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "e6074810ba82"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-07-27",
+   "title": "Ice Development из группы S8 Capital купила российский бизнес Otis",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/81685/"
+    ],
+    [
+     "Otis",
+     "https://otisinvestors.com/news/news-details/2022/Otis-Sells-Its-Russia-Business-07-27-2022/default.aspx"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Российский бизнес Otis: ООО «Отис Лифт», АО «МОС Отис» и ЗАО «Щербинка Отис Лифт»",
+    "val": "—",
+    "target_fin": "Выручка ООО «Отис Лифт» за 2021 год — 15,8 млрд ₽, чистая прибыль — 1,6 млрд ₽; 16 региональных филиалов.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Американская Otis в марте 2022 года перестала принимать новые заказы и вкладываться в Россию; на страну приходилось около 2% ее выручки за 2021 год. Покупатель — Ice Development, инвестиционная компания из холдинга S8 Capital Армена Саркисяна, работающая в недвижимости и жилищном строительстве. Завод в Петербурге рассчитан на выпуск до 7 тыс. лифтов в год; новый владелец собирался возобновить производство под новой маркой (позже — Meteor Lift). Сделку поддержал Минпромторг. В 2026 году лифтовый бизнес S8 Capital купил «Дом.РФ».",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "По сообщению Otis, разрешения регуляторов получены; Минпромторг поддержал сделку.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "Лифтовый завод в Петербурге и сервисный бизнес в России",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Otis",
+   "extra": "Американская Otis продала российский лифтовый бизнес с заводом в Петербурге компании Ice Development из холдинга S8 Capital.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Отис Лифт» и еще два юрлица; ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "seller": "Otis — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "closing",
+   "buyer": "gd392372b",
+   "id": "g0ecc5666",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "edd9af73f116"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-27",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "6acd3ceae409"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "962128418262"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-05-13",
+   "title": "Rise Expo купила российский выставочный бизнес Hyve Group",
+   "ind": "Медиа",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/77852/"
+    ],
+    [
+     "Hyve Group (биржевое сообщение)",
+     "https://www.lse.co.uk/rns/HYVE/proposed-disposal-of-russian-business-1ntp9k6jxndmwil.html"
+    ],
+    [
+     "MarketScreener",
+     "https://www.marketscreener.com/quote/stock/HYVE-GROUP-PLC-4001832/news/Rise-Expo-Limited-completed-the-acquisition-of-Russian-Business-of-Hyve-Group-Plc-40751802/"
+    ]
+   ],
+   "eco": {
+    "sum": "До 72 млн £",
+    "share": "Российский выставочный бизнес Hyve Group",
+    "val": "До 72 млн фунтов: вся сумма отложена и выплачивается ежегодно из прибыли бизнеса до 30 сентября 2032 года; если ее выплатят до конца сентября 2027 года, потолок — 60 млн фунтов.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Британская Hyve Group (бывшая ITE Group) работала в России с 1991 года и проводила здесь 19 выставок, в том числе MITT и MosBuild. В 2021 году на Россию пришлось 27% ее выручки, в российском бизнесе работали 206 человек. О выходе из России компания объявила 15 марта 2022 года, 6 апреля — о продаже бизнеса Rise Expo Ltd; сделка закрыта 13 мая.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "Сделку должны были одобрить акционеры Hyve, кредиторы и регуляторы.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Вся цена — отложенные выплаты из прибыли бизнеса в течение десяти лет."
+   },
+   "asset": "Российский выставочный бизнес британской группы (MITT, MosBuild и другие выставки)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Hyve Group",
+   "extra": "Британская Hyve Group продала российский выставочный бизнес (MITT, MosBuild и другие выставки) компании Rise Expo за сумму до 72 млн фунтов с выплатой за десять лет.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Российские юрлица выставочного бизнеса в статьях не названы; ИНН установить не удалось (реестр ФНС из этой среды не открылся).",
+     "buyer": "Rise Expo Ltd — иностранная компания без российского ИНН в статьях, профиль не заводили.",
+     "seller": "Hyve Group — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "До 72 млн £",
+   "date_basis": "closing",
+   "buyer_name": "Rise Expo Ltd",
+   "id": "g9aaaaa3e",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "5e33fe91673e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "3e3503ffa17a"
+    },
+    "date": {
+     "value": "2022-05-13",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "158e269f615b"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "86ecac57dbc5"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022",
+   "title": "Местный менеджмент купил российскую дочернюю компанию Kerry Group",
+   "ind": "Пищепром и напитки",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "src": [
+    [
+     "RTÉ",
+     "https://www.rte.ie/news/business/2023/0216/1356949-kerry-group-full-year-results"
+    ],
+    [
+     "Irish Times",
+     "https://www.irishtimes.com/business/2023/02/09/smurfit-leads-iseq-multinationals-when-counting-costs-of-retreat-from-russia"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% ООО «Керри»",
+    "val": "Цена не раскрыта. В первом полугодии 2022 года Kerry списала около 38 млн евро, обнулив стоимость активов в России и Белоруссии.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Ирландская Kerry Group, производитель вкусовых и пищевых ингредиентов, приостановила работу в России и Белоруссии в апреле 2022 года. Затем она продала 100% российской дочерней компании (Kerry Limited Liability Company) местному менеджменту, а белорусский бизнес договорилась продать отдельно. Разовые расходы группы за 2022 год, в основном из-за ухода из России и Белоруссии, составили 124,2 млн евро.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "Российская дочерняя компания ирландского производителя пищевых ингредиентов",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Kerry Group",
+   "extra": "Ирландская Kerry Group продала российскую дочернюю компанию местному менеджменту.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Керри»: ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Покупатель — менеджеры без названного юрлица, профиль не заводили.",
+     "seller": "Kerry Group — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "buyer_name": "Местный менеджмент",
+   "id": "g88dcf73e",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "4b759f8ce6d6"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c9b89281f4df"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "date": "2022-12-14",
+   "title": "Местное руководство покупает российский бизнес Holcim",
+   "ind": "Строительство",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Подписана",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/86101/"
+    ],
+    [
+     "Holcim",
+     "https://www.holcim.com/media/media-releases/holcim-russia-divestment"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/87569/"
+    ],
+    [
+     "Retail.ru (пресс-релиз «Цементум»)",
+     "https://www.retail.ru/rbc/pressreleases/tsementum-novoe-imya-holcim-v-rossii/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Весь российский бизнес Holcim",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Швейцарская Holcim решила уйти из России в марте 2022 года и с тех пор не учитывает российский бизнес в отчетности; на Россию приходилось меньше 1% выручки группы. В России у нее четыре цементных завода — в Воскресенске и Коломне (Московская область), Ферзиково (Калужская область) и Вольске (Саратовская область), три карьера нерудных материалов в Карелии и около 1,8 тыс. сотрудников. В феврале 2023 года бизнес сменил название на «Цементум», гендиректор — Максим Гончаров.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "Закрытие зависело от одобрения регуляторов; кто и когда одобрил, в прочитанных источниках не сказано.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Новые владельцы работают независимо под новым названием."
+   },
+   "asset": "Четыре цементных завода и три карьера в России (теперь «Цементум»)",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "seller": "Holcim",
+   "extra": "Швейцарская Holcim подписала соглашение о продаже российского бизнеса с четырьмя цементными заводами местному руководству; бизнес стал называться «Цементум».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Холсим (Рус)» / «Цементум»: ИНН в статьях не назван, реестр ФНС из этой среды не открылся (egrul.nalog.ru сбрасывал соединение, rusprofile и checko отвечают 403).",
+     "buyer": "Покупатель — руководство компании без названного юрлица, профиль не заводили.",
+     "seller": "Holcim — иностранная группа, профиль не заводили по заданию; продавец назван в статьях и в сообщениях сторон. История участников ЕГРЮЛ российского юрлица не запрашивалась: ОГРН в статьях не назван, а реестр ФНС из этой среды не открылся."
+    }
+   },
+   "sum": "Не раскрыта",
+   "date_basis": "signing",
+   "buyer_name": "Местное руководство (компания «Цементум»)",
+   "id": "g1e6bcc9d",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "673f80a6bbbb"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "f98fc919393c"
+    },
+    "date": {
+     "value": "2022-12-14",
+     "meaning": "signing",
+     "basis": "rule",
+     "card_hash": "6ba4cc6bcdf9"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ca4dfbe3354d"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-12-30",
+   "title": "«Соллерс» купил у Ford 49% совместного автозавода в Елабуге",
+   "ind": "Автопром",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Autonews",
+     "https://www.autonews.ru/amp/news/63594d0f9a794742da61969b"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/86731/"
+    ]
+   ],
+   "asset": "49% в совместном предприятии «Соллерс Форд» (Елабуга)",
+   "seller": "Ford Motor",
+   "buyer": "g4ef21c08",
+   "extra": "Американская Ford вышла из совместного предприятия с «Соллерсом», продав свои 49% по номиналу с правом выкупить их обратно в течение пяти лет.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Форд Соллерс Холдинг» / ООО «Соллерс Форд» — ИНН в прочитанных статьях не назван и в открытых справочниках за время чтения не найден, профиль не заводили.",
+     "seller": "Ford Motor — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "По номинальной стоимости доли",
+    "share": "49% в совместном предприятии Ford и «Соллерса» (ООО «Соллерс Форд», завод в Елабуге)",
+    "val": "Ford продала долю по номиналу; денежная сумма в статьях не названа.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Совместное предприятие собирало в Елабуге фургоны Ford Transit; выпуск остановили весной 2022 года, когда Ford приостановила работу в России. До конца 2022 года СП владела нидерландская Ford Sollers Netherlands B.V., где 51% принадлежал российской стороне и 49% — Ford. О решении продать долю Ford объявила 26 октября 2022 года, а 30 декабря, по данным реестра, 100% ООО «Форд Соллерс Холдинг», которое контролирует СП, перешли к ПАО «Соллерс». «Соллерс» подтвердил закрытие сделки, но подробностей не раскрыл.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Доля Ford перешла к российской стороне СП; по реестру 30 декабря 2022 года 100% ООО «Форд Соллерс Холдинг» получило ПАО «Соллерс».",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "У Ford есть право выкупить долю обратно в течение пяти лет."
+   },
+   "sum": "По номинальной стоимости доли",
+   "id": "g221282a6",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 49.0,
+     "basis": "rule",
+     "card_hash": "542e47d60438"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "not_a_price",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "72a925416973"
+    },
+    "date": {
+     "value": "2022-12-30",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "eeb68741da75"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f97a2faf315c"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "date": "2022",
+   "title": "«Зарубежнефть» купила у TotalEnergies 20% Харьягинского нефтяного проекта",
+   "ind": "Нефть и газ",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2022/07/06/930216-frantsuzskaya-totalenergies"
+    ],
+    [
+     "Коммерсантъ",
+     "https://kommersant.ru/doc/5448063"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/81651/"
+    ]
+   ],
+   "asset": "20% в Харьягинском соглашении о разделе продукции",
+   "seller": "TotalEnergies",
+   "buyer_name": "АО «Зарубежнефть»",
+   "extra": "Французская TotalEnergies передала свои 20% в Харьягинском нефтяном проекте государственной «Зарубежнефти», которая уже была его оператором.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Харьягинское соглашение о разделе продукции — проект, а не юрлицо; профиля и ИНН у него нет.",
+     "buyer": "«Зарубежнефть» — профиля в базе нет, ИНН в статьях не назван; покупатель записан словами.",
+     "seller": "TotalEnergies — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "20% в соглашении о разделе продукции по Харьягинскому месторождению",
+    "val": "Цена не названа. По неофициальным данным, допускалось, что передача пройдет без оплаты; аналитик «Финама» Сергей Кауфман оценивал возможную цену в несколько десятков миллионов долларов.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Харьягинское месторождение в Ненецком автономном округе разрабатывают по соглашению о разделе продукции с 1999 года, срок продлен до конца 2031 года; в 2021 году там добыли 1,56 млн т нефти. TotalEnergies была оператором до 2016 года, затем передала эту роль и половину своей доли «Зарубежнефти». До выхода иностранцев доли были такими: «Зарубежнефть» — 40%, Equinor — 30%, TotalEnergies — 20%, Ненецкая нефтяная компания — 10%. TotalEnergies объявила о передаче своих 20% 6 июля 2022 года; после выхода Equinor и TotalEnergies у «Зарубежнефти» 90%, у Ненецкой нефтяной компании — 10%.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Доля передается в рамках соглашения о разделе продукции; для этого к соглашению подписывается дополнение.",
+    "appr": "Правительство 26 июля 2022 года распорядилось передать доли TotalEnergies и Equinor «Зарубежнефти» и поручило министру энергетики подписать дополнение к соглашению.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Вместе с долей с TotalEnergies снимаются инвестиционные обязательства по проекту."
+   },
+   "sum": "Не раскрыта",
+   "id": "g46b308d6",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 20.0,
+     "basis": "rule",
+     "card_hash": "21521a1d4559"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d8f050df89b2"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-05-04",
+   "title": "Предприниматель Викас Сои купил российский бизнес Paulig с заводом в Твери",
+   "ind": "Пищепром и напитки",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/839498"
+    ],
+    [
+     "Paulig",
+     "https://www.pauliggroup.com/news/paulig-has-completed-the-sale-of-its-business-in-russia"
+    ]
+   ],
+   "asset": "Российский бизнес Paulig: ООО «Паулиг Рус» и обжарочный завод в Твери",
+   "seller": "Paulig",
+   "target": "gb9ead213",
+   "buyer_name": "Викас Сои",
+   "extra": "Финская Paulig продала российскую компанию с кофейным заводом в Твери частному инвестору Викасу Сои; марки Paulig в сделку не вошли.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Викас Сои — частное лицо, профиль не заводили.",
+     "seller": "Paulig — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Милфудс» (до мая 2022 года — ООО «Паулиг Рус»)",
+    "val": "Цена не раскрыта. На Россию приходилось меньше 5% выручки Paulig, которая в 2021 году составила 966 млн евро.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Глава Paulig Рольф Ладау объяснил уход изменившейся обстановкой после начала военной операции на Украине; продажу компания сочла лучшим вариантом для сотрудников и покупателей.",
+    "context": "Финская семейная Paulig объявила об уходе из России в начале марта 2022 года. Покупатель — частный инвестор Викас Сои, гражданин Индии, больше 30 лет живущий в России; раньше он руководил Milagro Beverage Company. Вместе с компанией к нему перешли обжарочный завод в Твери и около 200 сотрудников. Торговые марки и рецептуры Paulig в сделку не вошли; зеленый кофе новому владельцу поставляли еще не больше трех месяцев.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель получил доли в ООО «Паулиг Рус»; смену владельца зарегистрировали 4 мая 2022 года.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Бренды и рецептуры Paulig остались у продавца; переходные поставки сырья — до трех месяцев."
+   },
+   "sum": "Не раскрыта",
+   "id": "g64f192e9",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "df1ab95aa3c7"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-05-04",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "4f9d303c45b5"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3b818bb29be1"
+    },
+    "target": {
+     "company_id": "gb9ead213",
+     "inn": "6949003920",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "51a60efcfa14"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-01",
+   "title": "Руководители российского Samsonite купили у американской компании ее местный бизнес",
+   "ind": "Ритейл",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/amerikanskiy-proizvoditel-chemodanov-samsonite-prodal-rossiyskiy-biznes-23-avgusta-2022-219657/"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/amerikanskij-proizvoditel-chemodanov-samsonite-prodal-rossijskij-biznes-56119.html"
+    ],
+    [
+     "Samsonite International",
+     "https://www1.hkexnews.hk/listedco/listconews/sehk/2022/1111/2022111101130.pdf"
+    ]
+   ],
+   "asset": "Российский бизнес Samsonite — ООО «Самсонайт» (ныне «Чемодан Про»)",
+   "seller": "Samsonite International",
+   "target": "g0b5326aa",
+   "buyer_name": "Андрей Языков и «Робинзон Логистикс» Вячеслава Шикулова",
+   "extra": "Производитель чемоданов Samsonite продал российскую компанию ее руководителям — Андрею Языкову и Вячеславу Шикулову; магазины стали работать под вывеской «Чемодан Про».",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Покупатели — частные лица и их ООО «Робинзон Логистикс»; профиль не заводили по заданию.",
+     "seller": "Samsonite International — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Чемодан Про» (до июля 2022 года — ООО «Самсонайт»)",
+    "val": "Цена не раскрыта. По оценке «Infoline-Аналитики», до февраля 2022 года бизнес мог стоить не меньше 100 млн долларов, а при продаже — лишь несколько сотен миллионов рублей; консультант Анна Савенко допускала символическую цену.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Samsonite остановила продажи в России 14 марта 2022 года. До продажи у нее было 37 собственных магазинов; на Samsonite, по данным Infoline, приходилось больше 14% российского рынка чемоданов. После сделки компания получила название «Чемодан Про», а в августе первые магазины открылись под этой вывеской в московских «Европейском», «Атриуме» и «Метрополисе». В 2026 году «Робинзон Логистикс» выкупил у Андрея Языкова оставшиеся 30%.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатели — гендиректор Андрей Языков (30%) и ООО «Робинзон Логистикс» президента компании Вячеслава Шикулова (70%).",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Окончательное соглашение подписано 30 июня 2022 года, сделка закрыта 1 июля; по данным СПАРК, изменения в реестре — 8 июля."
+   },
+   "sum": "Не раскрыта",
+   "id": "ge5d7cce6",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "867b9ca1f087"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-01",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "539c451acbe2"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2137fe40f8fc"
+    },
+    "target": {
+     "company_id": "g0b5326aa",
+     "inn": "7706644419",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "0d13b3a57e01"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-05-13",
+   "title": "Партнеры российского офиса McKinsey купили его у американской компании",
+   "ind": "Профессиональные услуги",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5355464"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/82415/"
+    ]
+   ],
+   "asset": "Российское подразделение McKinsey — ООО «Мак-Кинзи и компания СиАйЭс» (ныне «Яков и партнеры»)",
+   "seller": "McKinsey & Company",
+   "buyer_name": "Яков Сергиенко и еще четыре управляющих партнера",
+   "extra": "Пятеро управляющих партнеров российского офиса McKinsey во главе с Яковом Сергиенко стали его владельцами; позже компания сменила название на «Яков и партнеры».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Яков и партнеры» — ИНН в статьях не назван; в list-org по названию найдено только недействующее тверское ООО с тем же именем (другая компания), московское юрлицо за время чтения не найдено.",
+     "buyer": "Покупатели — частные лица, профиль не заводили.",
+     "seller": "McKinsey & Company — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% ООО «Мак-Кинзи и компания СиАйЭс» (с августа 2022 года — ООО «Яков и партнеры»)",
+    "val": "Цена не раскрыта; эксперт Алексей Соловьев считал, что она могла достигать примерно годовой выручки.",
+    "target_fin": "Выручка бизнеса в России и СНГ за 2021 год — 22,9 млрд ₽, чистая прибыль — 4,2 млрд ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "McKinsey в марте 2022 года перестала брать новые проекты в России, а затем ушла из страны. Из-за санкций головная компания не могла дальше работать с российским подразделением, но передала партнерам отношения с клиентами. К маю в офисе оставалось около 100 консультантов, к августу — больше 180 сотрудников. 22 августа 2022 года компания сменила название на «Яков и партнеры».",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Владельцами стали гендиректор Яков Сергиенко (33%), а также Сергей Заборов, Елена Кузнецова, Тигран Саакян и Виктор Сурков (по 16,75%). Смена владельцев внесена в реестр 13 мая 2022 года.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Бывший офис отказался от бренда McKinsey."
+   },
+   "sum": "Не раскрыта",
+   "id": "g340d3e65",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "7d545399a982"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-05-13",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "860b06c373a8"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "9db93732ba7c"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-12",
+   "title": "Гонконгская Nord Axis купила у Trafigura 10% «Восток Ойла»",
+   "ind": "Нефть и газ",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/81263/"
+    ],
+    [
+     "Trafigura",
+     "https://www.trafigura.com/press-releases/trafigura-completes-the-exit-of-its-investment-in-vostok-oil/"
+    ]
+   ],
+   "asset": "10% проекта «Восток Ойл»",
+   "seller": "Trafigura",
+   "target": "g7393665f",
+   "buyer_name": "Nord Axis Limited (Гонконг)",
+   "extra": "Сырьевой трейдер Trafigura продал свои 10% в нефтяном проекте «Роснефти» «Восток Ойл» гонконгской Nord Axis вместе с долгом, взятым на их покупку.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Nord Axis Limited — гонконгская компания без российского юрлица, профиль не заводили.",
+     "seller": "Trafigura — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "10% в проекте «Восток Ойл»",
+    "val": "Цена не раскрыта. Вместе с долей покупатель принял на себя связанный с ней банковский долг без права обращения на Trafigura. В 2020 году Trafigura купила эту долю у «Роснефти» за 7 млрд евро.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Восток Ойл» — проект «Роснефти» на севере Красноярского края: 52 лицензионных участка, в том числе Ванкорское, Сузунское и Пайяхское месторождения. До сделки 85% проекта было у «РН-Трейда», 10% — у швейцарской CB Enterprises Sarl, связанной с Trafigura, 5% — у консорциума Vitol и Mercantile & Maritime Energy. Покупатель Nord Axis Limited — независимая трейдинговая компания, зарегистрированная в Гонконге; кто ее владельцы, в статьях не сказано.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Долей владела швейцарская CB Enterprises Sarl; покупатель — Nord Axis Limited (Гонконг).",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Вместе с долей к покупателю перешел банковский долг, взятый на ее покупку."
+   },
+   "sum": "Не раскрыта",
+   "id": "g4c30b416",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 10.0,
+     "basis": "rule",
+     "card_hash": "77285c05d7f7"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-12",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b76dc7912c49"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "dc9a129683fe"
+    },
+    "target": {
+     "company_id": "g7393665f",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "7f969f9e4937"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022",
+   "title": "Местный менеджмент купил российский бизнес Electrolux",
+   "ind": "Потребительские товары",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/electrolux-pokidaet-rossiyskiy-rynok-2-sentyabrya-2022-220045/"
+    ],
+    [
+     "Коммерсантъ",
+     "https://kommersant.ru/doc/5773590"
+    ],
+    [
+     "Electrolux Group",
+     "https://www.electroluxgroup.com/en/electrolux-has-decided-to-exit-russia-34511/"
+    ]
+   ],
+   "asset": "ООО «Е.Кампани» — российская дочерняя компания шведского производителя техники",
+   "seller": "Electrolux",
+   "buyer_name": "Местный менеджмент (владелец — Павел Потапов)",
+   "extra": "Шведская Electrolux продала российскую компанию местному руководству; позже бывшее подразделение запустило свою марку бытовой техники Vard.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Е.Кампани» — ИНН в статьях не назван, в list-org по названию за время чтения не найден.",
+     "buyer": "Павел Потапов — частное лицо, профиль не заводили.",
+     "seller": "Electrolux — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Российская дочерняя компания Electrolux — ООО «Е.Кампани»",
+    "val": "Цена не раскрыта. Electrolux оценила разовый убыток от выхода примерно в 350 млн шведских крон и отразила его в третьем квартале 2022 года.",
+    "target_fin": "По данным СПАРК-Интерфакса, выручка ООО «Е.Кампани» за 2021 год — 17,9 млрд ₽, чистая прибыль — 2,3 млрд ₽.",
+    "fin": "—",
+    "rationale": "Electrolux объяснила уход тем, что санкции сделали работу в России невозможной.",
+    "context": "2 сентября 2022 года шведская Electrolux объявила, что уходит из России и продает местную компанию ее руководству. На Россию приходилось 4% продаж компании в Европе и 1,6% продаж группы в 2021 году; производства в стране у нее не было. Новый владелец продолжил обслуживать уже проданную технику, а в 2023 году бывшее подразделение запустило собственную марку Vard. Владельцем ООО «Е.Кампани» с сентября 2022 года стал Павел Потапов.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продана российская дочерняя компания ООО «Е.Кампани»; ее владельцем стал Павел Потапов, гендиректор — Алексей Беляков.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Electrolux больше не поставляет технику в Россию; гарантийное обслуживание остается за новым владельцем."
+   },
+   "sum": "Не раскрыта",
+   "id": "g373439fe",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "b17aad5e2099"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "4fbf4c51c514"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022",
+   "title": "Местный менеджмент купил российский бизнес Inchcape за 76 млн евро",
+   "ind": "Автопром",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5329758"
+    ],
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2022/04/28/71292941/"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/78735/"
+    ],
+    [
+     "Inchcape",
+     "https://www.inchcape.com/wp-content/uploads/2022/07/Inchcape-1H22-RNS-FINAL61.pdf"
+    ]
+   ],
+   "asset": "Розничный автобизнес британского дилера в Москве (19 салонов)",
+   "seller": "Inchcape",
+   "buyer_name": "Местный менеджмент (генеральный и финансовый директора)",
+   "extra": "Британский автодилер Inchcape продал московские салоны местному руководству за 76 млн евро с рассрочкой на пять лет.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Российские юрлица Inchcape в статьях не названы; ИНН не найден, профиль не заводили.",
+     "buyer": "Покупатели — частные лица, в статьях не названы по именам.",
+     "seller": "Inchcape — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "76 млн €",
+    "share": "Весь оставшийся российский бизнес Inchcape — розничная продажа автомобилей в Москве",
+    "val": "Цена 76 млн евро (63 млн фунтов) с оплатой ежегодными платежами в течение пяти лет. До февраля 2022 года 19 салонов оценивались почти в 400 млн евро.",
+    "target_fin": "Выручка российского бизнеса за 2021 год — около 740 млн фунтов, прибыль до налогов — 47 млн фунтов (отчет Inchcape).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Британский дилер Inchcape работал в России больше 16 лет. Продавался только розничный бизнес в Москве — 19 салонов BMW, Toyota, Jaguar Land Rover, Volvo и других марок. Покупатели — местные руководители во главе с нынешними генеральным и финансовым директорами. В 2021 году Inchcape уже продала петербургские салоны Toyota и Audi «Ключавто» за 70 млн фунтов. Деньги от сделки компания направит на основной дистрибьюторский бизнес и возвращаться в Россию не собирается.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — местный менеджмент российского бизнеса во главе с генеральным и финансовым директорами.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Оплата в рассрочку на пять лет. У Inchcape есть опцион на семь лет: она получит часть выгоды, если стоимость бизнеса вырастет, особенно при его перепродаже. Сделку собирались закрыть в мае 2022 года; по отчету Inchcape за полугодие, продажа прошла во втором квартале."
+   },
+   "sum": "76 млн €",
+   "id": "g47188b89",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "048dc997fe96"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "ee8c21b45750"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "23224d1d64fd"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-08-22",
+   "title": "Управляющий директор российской «дочки» Lindab купил ее у шведской группы",
+   "ind": "Машиностроение",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20220822/837851940.html"
+    ],
+    [
+     "Lindab",
+     "https://news.cision.com/lindab/r/lindab-has-completed-the-exit-from-russia,c3617679"
+    ]
+   ],
+   "asset": "Российская дочерняя компания шведского производителя вентиляции",
+   "seller": "Lindab",
+   "buyer_name": "Управляющий директор российской компании",
+   "extra": "Шведская Lindab продала российскую дочернюю компанию ее руководителю и с 1 августа 2022 года не работает в России.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Название российского юрлица в статьях не приводится, ИНН не найден.",
+     "buyer": "Покупатель — частное лицо, имя в статьях не названо.",
+     "seller": "Lindab — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Российская дочерняя компания Lindab",
+    "val": "Цена не раскрыта. Lindab оценила разовые расходы на выход в 22 млн шведских крон (в первом квартале ожидала 19 млн).",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Шведский производитель систем вентиляции Lindab решил уйти из России после начала военных действий на Украине. С 1 августа 2022 года компания не ведет в стране ни работы, ни продаж, ни закупок. Покупатель — местный управляющий директор; его компания сменит название и будет работать с местными поставщиками.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Российскую дочернюю компанию купил ее управляющий директор.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта",
+   "id": "g1def0d4f",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "ba44cb8fbf3c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-08-22",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "dd3ddaf72537"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "2887fe792c78"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-13",
+   "title": "Компания «АМТ» купила у Iveco 33,3% совместного завода грузовиков в Миассе",
+   "ind": "Автопром",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Autonews",
+     "https://www.autonews.ru/news/62cecad49a79479d73c7820c"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/898390"
+    ]
+   ],
+   "asset": "33,3% совместного предприятия «АМТ-Ивеко» в Миассе",
+   "seller": "Iveco Group",
+   "buyer_name": "ООО «АМТ» (Владимир и Андрей Новики)",
+   "extra": "Итальянская Iveco передала свою треть в совместном заводе тяжелых грузовиков в Миассе российскому партнеру — компании «АМТ».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «АМТ Н.В.» — ИНН в статьях не назван, за время чтения не найден.",
+     "buyer": "ООО «АМТ» — профиля в базе нет, ИНН не найден; покупатель записан словами.",
+     "seller": "Iveco Group — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "33,3% в совместном предприятии «АМТ-Ивеко» (ныне ООО «АМТ Н.В.»)",
+    "val": "Цена не раскрыта.",
+    "target_fin": "Выручка «АМТ Н.В.» в 2022 году упала втрое, до 2,85 млрд ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Совместное предприятие в Миассе работает с 1994 года и собирало тяжелые полноприводные грузовики Iveco Trakker; в 2022 году там планировали выпустить 600–700 машин. В марте 2022 года Iveco остановила поставки в Россию и Белоруссию, а 13 июля глава группы Геррит Маркс сообщил, что доля передана местному партнеру. К августу 2022 года долю консолидировало ООО «АМТ», которым владеют Владимир (80%) и Андрей (20%) Новики. После выхода Iveco предприятие сменило название на «АМТ Н.В.».",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Доля Iveco перешла к российскому совладельцу — ООО «АМТ», которое теперь владеет 100% ООО «АМТ Н.В.».",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта",
+   "id": "g9e27d3f1",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 33.3,
+     "basis": "rule",
+     "card_hash": "e4e2f42cc95c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-13",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "b8bd11c15c94"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "da4025d24650"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2023-04-11",
+   "title": "Местный менеджмент купил у AFRY ее российскую дочернюю компанию",
+   "ind": "Профессиональные услуги",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Lesprom",
+     "https://www.lesprom.com/en/news/AFRY_divests_its_operations_in_Russia_104759"
+    ],
+    [
+     "AFRY",
+     "https://afry.com/en/newsroom/press-releases/afry-divests-its-operations-in-russia"
+    ],
+    [
+     "AFRY",
+     "https://afry.com/en/newsroom/press-releases/afry-completes-divestment-its-operations-in-russia"
+    ]
+   ],
+   "asset": "Российская дочерняя компания шведской инженерной группы",
+   "seller": "AFRY",
+   "buyer_name": "Местный менеджмент",
+   "extra": "Шведская инженерная группа AFRY продала российскую дочернюю компанию ее руководству: соглашение подписали в сентябре 2022 года, закрыли в апреле 2023 года.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Название российского юрлица в статьях не приводится, ИНН не найден.",
+     "buyer": "Покупатели — частные лица, в статьях не названы.",
+     "seller": "AFRY — иностранная группа, профиль не заводили по заданию; история участников ЕГРЮЛ российского юрлица не запрашивалась, продавец назван в статьях и в сообщении самой компании."
+    }
+   },
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Российская дочерняя компания AFRY",
+    "val": "Цена не раскрыта. Сделка уменьшила чистый результат AFRY на 66 млн шведских крон; убыток отражен в третьем квартале 2022 года.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Шведская инженерно-консалтинговая группа AFRY (бывшая Pöyry) решила уйти из России в 2022 году. Российский бизнес давал меньше 1% продаж группы, в нем работало около 125 человек. Соглашение о продаже местному руководству подписали 28 сентября 2022 года, закрыть его рассчитывали в четвертом квартале, но завершили только в апреле 2023 года. После сделки компания работает под другим брендом.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Российскую дочернюю компанию купило ее местное руководство.",
+    "appr": "Сделка требовала одобрения российских регуляторов; 11 апреля 2023 года AFRY сообщила, что продажа завершена и зарегистрирована российскими властями.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Соглашение подписано 28 сентября 2022 года."
+   },
+   "sum": "Не раскрыта",
+   "id": "g34074060",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "7d5394efcb88"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2023-04-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3c267b2fe135"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7e5ea7187870"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-12-14",
+   "title": "«Соллерс» купил у Mazda 50% завода во Владивостоке за 1 евро",
+   "ind": "Автопром",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Autonews (РБК), подписание",
+     "https://www.autonews.ru/news/636cc3519a79478ad09bf431"
+    ],
+    [
+     "Российская газета",
+     "https://rg.ru/2022/11/11/reg-dfo/bez-mazda.html"
+    ],
+    [
+     "Autonews (РБК), закрытие",
+     "https://www.autonews.ru/news/639b03159a794749e5d40793"
+    ],
+    [
+     "MarketScreener",
+     "https://marketscreener.com/quote/stock/SOLLERS-6497745/news/Sollers-Public-Joint-Stock-Company-completed-the-acquisition-of-remaining-50-stake-in-Mazda-Sollers-42577394"
+    ]
+   ],
+   "eco": {
+    "sum": "€1",
+    "share": "50% доли в ООО «Мазда Соллерс Мануфэкчуринг Рус»",
+    "val": "Цена символическая — один евро.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Совместный завод Mazda и «Соллерса» во Владивостоке работал с 2012 года; партнерам принадлежало по 50%. Там собирали Mazda6, CX-5 и CX-9, проектная мощность — 100 тыс. машин в год. В марте 2022 года Mazda перестала поставлять комплектующие, с конца апреля завод стоял. Японская компания оценила потери от ухода из России примерно в 12 млрд иен (около 82 млн долларов). В конце ноября 2022 года предприятие переименовали в «Автомобильные индустриальные технологии», «Соллерс» собирался запустить на нем машины новых партнеров в 2023 году.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Соглашение о передаче доли Mazda подписано 24 октября 2022 года; о нем стало известно 10 ноября из отчета Mazda для инвесторов. По данным ЕГРЮЛ, сведения о новом владельце обновились 14 декабря 2022 года, и «Соллерс» стал единственным участником компании.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Mazda сохранила право в течение трех лет выкупить долю обратно по той же цене."
+   },
+   "asset": "50% совместного завода Mazda и «Соллерса» во Владивостоке",
+   "seller": "Mazda Motor",
+   "buyer": "g4ef21c08",
+   "extra": "Японская Mazda за один евро передала «Соллерсу» свою половину совместного автозавода во Владивостоке и ушла из российского производства.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Mazda Motor — японская публичная компания, российского юрлица-продавца нет. История участников ЕГРЮЛ (datanewton, ОГРН 1117746345958): 50% у Mazda Motor Corporation и 50% у ПАО «Соллерс», 14.12.2022 Mazda выбыла, у «Соллерса» 100%."
+    }
+   },
+   "sum": "€1",
+   "id": "g0858a500",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g982e9d1e",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 50.0,
+     "basis": "rule",
+     "card_hash": "da4450d37c25"
+    },
+    "price": {
+     "value_rub": 67,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "2dacef85cc00",
+     "currency": "EUR",
+     "amount": 1.0,
+     "fx_rate": 66.7017,
+     "fx_date": "2022-12-14",
+     "fx_method": "day"
+    },
+    "date": {
+     "value": "2022-12-14",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "328afdcafff6"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "fab1497a3a17"
+    },
+    "target": {
+     "company_id": "g982e9d1e",
+     "inn": "7743816842",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "9b74355f16fd"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-16",
+   "title": "X5 купила у финской SOK петербургские супермаркеты Prisma",
+   "ind": "Ритейл",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/846496"
+    ],
+    [
+     "ТАСС",
+     "https://tass.com/economy/1465899"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "Выручка ООО «Призма» в 2021 году — 8,08 млрд ₽, на уровне 2020 года; убыток от продаж — 329,4 млн ₽, чистый убыток вырос на 24,7%, до 436,6 млн ₽.",
+    "fin": "—",
+    "rationale": "Почти все магазины X5 собиралась перевести под вывеску «Перекресток».",
+    "context": "Финская SOK объявила об уходе сети Prisma из России в начале марта 2022 года. Сеть работала в Петербурге с 2008 года, в ней было около тысячи сотрудников.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "X5 покупала у SOK Retail Int. Oy компанию, которая управляла 15 супермаркетами Prisma в Петербурге и кулинарным цехом, со всеми ее правами и обязательствами, кроме прав на товарные знаки Prisma.",
+    "appr": "ФАС одобрила ходатайство X5 15 июня 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Ключевые условия — сохранить рабочие места персонала магазинов и выполнить обязательства перед партнерами, в том числе арендодателями. Магазины должны были снова открыться до середины июля после юридических процедур, смены вывески и завоза товара X5."
+   },
+   "asset": "ООО «Призма»",
+   "seller": "SOK (S Group)",
+   "buyer": "gddadfff8",
+   "extra": "X5 купила у финской SOK компанию, которая управляла 15 супермаркетами Prisma в Петербурге, и превратила магазины в «Перекрестки».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Статьи прямо не называют юрлицо-предмет; финансы Интерфакс приводит по ООО «Призма». ИНН искали: datanewton.ru «Призма» (2492 действующих, в Петербурге только две компании не из розницы), WebSearch по реквизитам ООО «Призма» и SOK Retail Int., rusprofile и list-org (закрыты проверкой на робота). Вероятно, компания после покупки присоединена к структурам X5 и в списке действующих ее нет.",
+     "seller": "SOK — финский кооператив S Group, продавец — его SOK Retail Int. Oy, российского юрлица-продавца нет. Историю участников в datanewton проверить не удалось: юрлицо-предмет в списке действующих не найдено."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "gab63a02f",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "263d35628057"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-06-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "60fe7f950848"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a62663249046"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-05-16",
+   "title": "«Черкизово» купило у финской Atria поставщика фастфуда «Сибилла Рус»",
+   "ind": "Пищепром и напитки",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/840989"
+    ],
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2022/05/16/71333732/"
+    ],
+    [
+     "AK&M",
+     "https://www.akm.ru/news/cherkizovo_kupilo_sibilla_rus/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Сибилла Рус»",
+    "val": "—",
+    "target_fin": "В 2021 году чистые продажи «Сибилла Рус» превысили 3 млрд ₽, в натуральном выражении — больше 10 тыс. т продукции.",
+    "fin": "—",
+    "rationale": "Покупка укладывается в стратегию «Черкизово» по росту в общепите: группа и так поставляет мясо крупнейшим сетям быстрого питания.",
+    "context": "«Сибилла Рус» продает готовые решения для хот-догов, бургеров и тортилий в формате «магазин в магазине», в основном на АЗС, в парках и на стадионах. Продукция шла в 4,4 тыс. точек: 3,8 тыс. в России, остальные в Казахстане, Белоруссии, Киргизии и Таджикистане. Весной 2021 года «Черкизово» уже купило у Atria ООО «Пит-Продукт» в Ленинградской области — два мясных завода и товарные знаки, включая Pit Product; эти заводы и поставляли мясо для «Сибилла Рус». Бренд Sibylla в сделку не вошел, и в сентябре 2022 года группа объявила, что переименует бизнес во «ВкусON».",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «АПК «Михайловский»» из группы «Черкизово». В сделку вошли контракты на поставки, оборудование, рецептуры и логистика.",
+    "appr": "ФАС дала предварительное согласие на покупку.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Бренд Sibylla остался у продавца."
+   },
+   "asset": "ООО «Сибилла Рус»",
+   "seller": "Atria",
+   "buyer": "gd3bb09b3",
+   "extra": "Группа «Черкизово» купила у финской Atria компанию «Сибилла Рус», которая снабжает хот-догами и бургерами 4,4 тыс. точек на АЗС и в парках.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Atria — финская публичная компания, российского юрлица-продавца нет. Историю участников в datanewton проверить не удалось: ООО «Сибилла Рус» там не найдено ни по имени, ни по новому бренду.",
+     "target": "ИНН ООО «Сибилла Рус» не найден: datanewton («Сибилла Рус», «Сибилла» — 27 тезок без связи с фастфудом, «Вкусон», «Вкус он»), WebSearch по имени и бренду «ВкусON»; rusprofile и list-org закрыты проверкой на робота. Вероятно, компания переименована или присоединена к структурам «Черкизово»."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g660f4097",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "7836d2ee9fd1"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-05-16",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7214a84011ab"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "315a076f2bef"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-09-13",
+   "title": "Гендиректор и юрист российской Helly Hansen купили компанию у Canadian Tire",
+   "ind": "Ритейл",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2022/11/14/950123-kanadskii-helly-hansen-ushel-iz-rossii"
+    ],
+    [
+     "Sostav",
+     "https://www.sostav.ru/publication/na-meste-helly-hansen-otkroyutsya-butiki-pod-brendom-move-57542.html"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Хелли Хансен»",
+    "val": "Эксперты рынка допускают, что сделка была безденежной; в CBRE считают, что сумма, если и была, символическая.",
+    "target_fin": "Выручка ООО «Хелли Хансен» в 2021 году — 2,5 млрд ₽, чистая прибыль — 500,5 млн ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Canadian Tire, которой принадлежит бренд Helly Hansen, в марте 2022 года приостановила работу в России. У компании было 48 магазинов, семь из них по франшизе. После смены владельцев шесть аутлетов под вывеской «Хансен» распродавали остатки, большая часть магазинов закрылась. Новые владельцы собирались открыть на месте части точек сеть мультибрендовых магазинов спортивной одежды Move.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Новым единственным участником ООО «Хелли Хансен» вместо Helly Hansen Russia AS стало ООО «Редиг»; по ЕГРЮЛ запись внесена 13 сентября 2022 года. «Редиг» принадлежит гендиректору Игорю Рогановичу (99,01%) и юристу Андрею Карасеву (0,99%). В октябре 2022 года компанию переименовали в ООО «Ритейл РЦ».",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "ООО «Хелли Хансен»",
+   "seller": "Helly Hansen (Canadian Tire)",
+   "extra": "Российскую сеть Helly Hansen из 48 магазинов забрали ее гендиректор и юрист; компания сменила название и собралась открывать магазины Move.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Продавец — норвежская Helly Hansen Russia AS из группы Canadian Tire, российского юрлица-продавца нет. История участников ЕГРЮЛ (datanewton, ОГРН 1137746670522): 100% у Helly Hansen Russia AS до 13.09.2022, затем у ООО «Редиг»."
+    }
+   },
+   "sum": "Не раскрыта",
+   "buyer": "g408d5306",
+   "id": "gd77af086",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g69ccb585",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "07c09fbd677c"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-09-13",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "424e48f802dc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a124f16ea41f"
+    },
+    "target": {
+     "company_id": "g69ccb585",
+     "inn": "7729747033",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "36b1ccebf5d4"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-05-17",
+   "title": "Пять руководителей российского офиса JLL купили компанию у британской материнской структуры",
+   "ind": "Недвижимость",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2022/05/25/71359883/"
+    ],
+    [
+     "CRE",
+     "https://www.cre.ru/news/86916"
+    ],
+    [
+     "ALUMNI Partners",
+     "https://alumnipartners.ru/en/projects/4/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Джонс Лэнг ЛаСаль»",
+    "val": "—",
+    "target_fin": "По данным СПАРК, выручка ООО «Джонс Лэнг ЛаСаль» в 2021 году — 1,3 млрд ₽, чистая прибыль — почти 50 млн ₽, в среднем в компании работали 105 человек.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В начале марта 2022 года JLL объявила, что российский офис выйдет из глобальной сети и будет работать в России и СНГ самостоятельно. После сделки команда продолжила работу как IBC Real Estate; гендиректором стал Алексей Ефимов, в компании с 2003 года. Для услуг по строительству и оценке компания заключила партнерства с RITM Project и DMA Valuation.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — британская Jones Lang LaSalle European Holdings Limited. По данным ЕГРЮЛ на 17 мая 2022 года, доли получили пять руководителей московского офиса: Евгений Бумагин и Алексей Ефимов — по 35%, Микаэл Казарян — 15%, Екатерина Белова — 10%, Игорь Кротенков — 5%. О завершении сделки компания объявила 30 мая.",
+    "appr": "—",
+    "adv": [
+     [
+      "Юридический консультант",
+      "ALUMNI Partners",
+      "консультант Jones Lang LaSalle; команду вел партнер Матвей Каплухий"
+     ],
+     [
+      "Юридический консультант",
+      "Platforma.Legal",
+      "назван среди консультантов сделки"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "ООО «Джонс Лэнг ЛаСаль»",
+   "seller": "Jones Lang LaSalle (JLL)",
+   "buyer_name": "Евгений Бумагин, Алексей Ефимов, Микаэл Казарян, Екатерина Белова и Игорь Кротенков",
+   "extra": "Пять руководителей российского офиса JLL выкупили компанию у британской материнской структуры; бизнес работает под названием IBC Real Estate.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Покупатели — пять физлиц, руководители компании.",
+     "seller": "Продавец — британская Jones Lang LaSalle European Holdings Limited, российского юрлица-продавца нет. История участников ЕГРЮЛ (datanewton, ОГРН 1037739102279): 100% у Jones Lang LaSalle European Holdings Limited с 2016 года до 17.05.2022, затем пять физлиц."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g1e61ec63",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g7e554284",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "58bb6611a8dc"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-05-17",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "064f98661153"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "f6b7336a69dd"
+    },
+    "target": {
+     "company_id": "g7e554284",
+     "inn": "7710257780",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "92ff5b79402e"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-28",
+   "title": "Малик Хатажаев купил у Wargaming российскую студию «Леста»",
+   "ind": "ИТ и интернет",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Forbes Казахстан (по данным Forbes.ru)",
+     "https://forbes.kz/news/newsid_279663"
+    ],
+    [
+     "Хабр",
+     "https://habr.com/ru/post/675752"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Леста»",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В начале апреля 2022 года Wargaming объявила, что больше не будет владеть и управлять бизнесом в России и Белоруссии; с 31 марта им управляла петербургская студия «Леста». Хатажаев 12 лет руководил российской студией и в середине июня 2022 года передал пост гендиректора Юрию Сухареву. Одновременно он получил 91,8% белорусского СООО «Гейм стрим» — Wargaming успела продать доли до 1 июля, когда в Белоруссии вступил в силу запрет собственникам из «недружественных» стран продавать доли в 190 компаниях. В 2025 году суд по иску Генпрокуратуры обратил доли компаний «Лесты» в доход государства, а в 2026 году Росимущество продало студию.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Кипрская Wargaming Group Limited вышла из состава участников: Хатажаев стал единственным владельцем ООО «Леста» с 28 июня 2022 года, а в белорусском «Гейм стрим» доля перешла к нему с 1 июля.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "ООО «Леста»",
+   "seller": "Wargaming",
+   "target": "geafdfc99",
+   "buyer_name": "Малик Хатажаев",
+   "extra": "Кипрская Wargaming передала российскую студию «Леста» ее бывшему гендиректору Малику Хатажаеву, который стал единственным владельцем.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Покупатель — физлицо, бывший гендиректор студии.",
+     "seller": "Продавец — кипрская Wargaming Group Limited, российского юрлица-продавца нет. История участников ЕГРЮЛ (datanewton, ОГРН 1037816024883): смена участников 28.06.2022, имена в записях 2022 года скрыты; в 2024 году 99% у Хатажаева."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g605d8d30",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "5ccecaac2ad0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-06-28",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f4eb7c5c6375"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "940ac3196bba"
+    },
+    "target": {
+     "company_id": "geafdfc99",
+     "inn": "7806038436",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "e6e5d9018347"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-06",
+   "title": "Местные руководители купили российский бизнес Electrolux Professional",
+   "ind": "Машиностроение",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/81141/"
+    ],
+    [
+     "RTÉ (Reuters)",
+     "https://www.rte.ie/news/business/2022/0711/1309526-electrolux-professional-sells-russia-business"
+    ],
+    [
+     "Electrolux Professional — отчет за II квартал 2022",
+     "https://www.electroluxprofessionalgroup.com/en/?p=4653"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "В России у компании было 25 сотрудников, продажи в стране в 2021 году — около 1% продаж группы.",
+    "fin": "—",
+    "rationale": "Компания решила, что продолжать работу в России в нынешних условиях невозможно, а продажа местному менеджменту позволяет соблюдать санкции.",
+    "context": "Electrolux Professional — шведский производитель оборудования для ресторанов, гостиниц и прачечных, выделенный из Electrolux. Об уходе из России компания объявила 11 июля 2022 года.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — местный менеджмент российской дочерней компании; имена не названы.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Расходы на выход из России — 35 млн шведских крон, они отражены в отчетности за II квартал 2022 года как разовые."
+   },
+   "asset": "Российские активы Electrolux Professional",
+   "seller": "Electrolux Professional",
+   "buyer_name": "местный менеджмент",
+   "extra": "Шведская Electrolux Professional продала российскую дочернюю компанию ее руководителям и ушла из страны.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Юрлицо российской дочерней компании ни одна статья не называет. Искали: datanewton («Электролюкс», 157 компаний, профессионального оборудования среди видимых нет), WebSearch «Электролюкс Профешнл» ИНН, rusprofile и list-org закрыты проверкой на робота.",
+     "buyer": "Покупатель — местный менеджмент, имена и юрлицо не раскрыты.",
+     "seller": "Electrolux Professional — шведская публичная группа, российского юрлица-продавца нет."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g5019c6ae",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "2aab9d090268"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-06",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "ca79c8d35dd6"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ad39a15de094"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-29",
+   "title": "«Атомстройкомплекс» купил у Jotun завод красок в Ленинградской области",
+   "ind": "Химия и удобрения",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/854967"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2022/08/30/Novij_vladelec_zavoda_kra"
+    ],
+    [
+     "E1.ru",
+     "https://www.e1.ru/text/business/2022/08/02/71537294/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% доли в ООО «Йотун Пэйнтс»",
+    "val": "Jotun оценивала вложения в завод более чем в 1,7 млрд ₽.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Завод в Тосненском районе открылся в 2014 году; он выпускал до 12 млн л жидких красок и 3,6 тыс. т порошковых покрытий в год, в штате около 200 человек. Jotun приостановила работу в России в начале марта 2022 года. «Атомстройкомплекс» — крупнейший застройщик жилья в Екатеринбурге и Свердловской области, у него 11 своих заводов стройматериалов. С 26 августа 2022 года компания называется ООО «Литум»; позже на ее основе выросла группа «Литум», которая купила российские заводы Hempel и PPG.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "По ЕГРЮЛ, 29 июля 2022 года 100% ООО «Йотун Пэйнтс» перешли от Jotun A/S к ООО «Атомстройкомплекс-Промышленность». Бенефициарами завода стали владельцы группы Валерий Ананьев и Павел Кузнецов, по 50%. В октябре 2023 года долю передали АО «Промышленная компания «Литум»».",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Бренды, интеллектуальная собственность и технологии Jotun в сделку не вошли; сотрудники сохранили места."
+   },
+   "asset": "ООО «Йотун Пэйнтс»",
+   "seller": "Jotun",
+   "buyer": "g141b412e",
+   "target": "g4b22714c",
+   "extra": "Уральская группа «Атомстройкомплекс» купила российский завод норвежской Jotun в Тосненском районе и переименовала его в «Литум».",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Jotun — норвежская компания, российского юрлица-продавца нет. История участников ЕГРЮЛ (datanewton, ОГРН 1047855160550): 100% у Jotun A/S до 29.07.2022, затем ООО «Атомстройкомплекс-Промышленность», с 25.10.2023 — АО «ПК «Литум»."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "gfb282142",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "a0daea0e8ac0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-29",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "558d3bb39b98"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "721ad4966d03"
+    },
+    "target": {
+     "company_id": "g4b22714c",
+     "inn": "6685208470",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "bbe83aceb7e9"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-02",
+   "title": "Местные руководители покупают российский бизнес Oerlikon",
+   "ind": "Машиностроение",
+   "status": "Подписана",
+   "src": [
+    [
+     "Oerlikon — пресс-релиз",
+     "https://oerlikon.com/en/company/media/press-releases/exited-russian-operations"
+    ],
+    [
+     "Swissinfo (Keystone-SDA)",
+     "https://www.swissinfo.ch/eng/business/oerlikon-to-sell-russia-business-to-local-owners/47642402"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "В России у Oerlikon было 48 сотрудников на шести площадках, продажи в 2021 году — меньше 5 млн швейцарских франков.",
+    "fin": "—",
+    "rationale": "Продажа — последний шаг выхода из России: 4 марта 2022 года Oerlikon прекратила всю трансграничную работу с Россией.",
+    "context": "Oerlikon — швейцарская промышленная группа (покрытия, аддитивное производство, оборудование для полимеров). Ее миноритарный акционер — Виктор Вексельберг.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Oerlikon подписала соглашение о продаже всего российского бизнеса местной команде руководителей; после сделки бизнес работает самостоятельно.",
+    "appr": "—",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "Российские активы Oerlikon",
+   "seller": "Oerlikon",
+   "buyer_name": "местный менеджмент",
+   "extra": "Швейцарская Oerlikon договорилась продать российский бизнес — 48 сотрудников на шести площадках — местным руководителям.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Юрлицо российского бизнеса ни пресс-релиз, ни статьи не называют. Искали: datanewton «Эрликон» (25 компаний, связи с Oerlikon не видно), WebSearch, rusprofile и list-org закрыты проверкой на робота.",
+     "buyer": "Покупатель — местная команда руководителей, имена не раскрыты.",
+     "seller": "Oerlikon — швейцарская публичная группа, российского юрлица-продавца нет."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "gd0af0377",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "e4a49bf80e4a"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "f98fc919393c"
+    },
+    "date": {
+     "value": "2022-06-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "ec170dcdfa8d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "b0d378e9058c"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-08-09",
+   "title": "Директор YE Russia Юрье Пенни купил у финской Boreo 90% компании",
+   "ind": "Машиностроение",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Inderes",
+     "https://www.inderes.fi/content/analyst-comments/boreo-myy-venajan-liiketoimintonsa"
+    ],
+    [
+     "Castrén & Snellman",
+     "https://www.castren.fi/cases/cases-2022/boreo2/"
+    ],
+    [
+     "Boreo — сообщение для биржи",
+     "https://www.globenewswire.com/news-release/2022/08/09/2495218/0/en/Boreo-divests-its-operations-in-Russia.html"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "90% доли в YE Russia",
+    "val": "Часть цены покупатель заплатил 8000 акций Boreo, которыми владел.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "YE Russia — дистрибьютор электронных компонентов. Boreo весной 2022 года начала искать решение для российского бизнеса и уже в отчете за полугодие учла его как прекращенную деятельность. От сделки Boreo признала во II квартале обесценение около 5,9 млн евро, влияние на капитал — около 8,7 млн евро. Аналитики Inderes назвали продажу ожидаемой.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатели — компании, которые контролирует Юрье Пенни, гендиректор YE Russia и владелец оставшихся 10%.",
+    "appr": "—",
+    "adv": [
+     [
+      "Юридический консультант",
+      "Castrén & Snellman",
+      "консультант Boreo"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "90% в YE Russia",
+   "seller": "Boreo",
+   "buyer_name": "Юрье Пенни",
+   "extra": "Финская Boreo продала 90% российского дистрибьютора электронных компонентов его директору, которому уже принадлежали остальные 10%.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Русское юрлицо YE Russia источники не называют. Искали: datanewton («ЮИ Интернешнл», 3254 совпадения, связи не видно), WebSearch по Yleiselektroniikka и имени покупателя; в базах экспортного контроля встречается АО «YE-International» в Петербурге без ИНН — что это предмет сделки, источники не подтверждают.",
+     "buyer": "Покупатель — компании физлица Юрье Пенни, юрлица не названы.",
+     "seller": "Boreo — финская публичная компания, российского юрлица-продавца нет."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g16540a36",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 90.0,
+     "basis": "rule",
+     "card_hash": "a68b1ba130b6"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-08-09",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a6700f5cce7c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "4b3793067800"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2023-02-22",
+   "title": "Руководители российской Elopak купили компанию у норвежского владельца",
+   "ind": "Производство тары",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Reuters (Yahoo Finance)",
+     "https://uk.finance.yahoo.com/news/norways-elopak-sells-russian-operations-073919511.html"
+    ],
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/proizvoditel-upakovki-elopak-prodal-rossiyskiy-biznes-menedzhmentu-15-iyulya-2022-218662/"
+    ],
+    [
+     "ТАСС",
+     "https://tass.com/economy/1558111"
+    ],
+    [
+     "Elopak — сообщение о закрытии (MarketScreener)",
+     "https://www.marketscreener.com/quote/stock/ELOPAK-ASA-123776297/news/Elopak-ASA-Closing-of-sale-of-Russian-subsidiary-and-full-divestment-of-Russian-operations-43048623/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% акций АО «Элопак»",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "Цена выплачивается пятью ежегодными платежами в рублях; на момент закрытия Elopak денег еще не получила.",
+    "rationale": "—",
+    "context": "Elopak — норвежский производитель картонной упаковки и разливочного оборудования, работала в России с 1998 года. В марте 2022 года компания приостановила российскую работу, в мае объявила о поиске покупателя завода. Россия и Украина вместе давали 9% выручки группы.",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — Packaging Management and Investing LLC, конечные владельцы которой — руководители АО «Элопак». Соглашение подписано 15 июля 2022 года, закрытие ожидалось в III–IV квартале 2022 года, но прошло 22 февраля 2023 года.",
+    "appr": "30 декабря 2022 года Elopak сообщила, что покупатель получил неформальное одобрение властей, а формальное ожидается вскоре.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ],
+    "terms": "Первый из пяти ежегодных платежей — вскоре после закрытия. Elopak могла выйти из сделки до закрытия, если бы она стала незаконной по норвежскому праву."
+   },
+   "asset": "АО «Элопак»",
+   "seller": "Elopak",
+   "buyer_name": "Packaging Management and Investing LLC",
+   "extra": "Норвежская Elopak продала российскую дочернюю компанию ее руководству; договор подписали в июле 2022 года, закрыли в феврале 2023-го.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Packaging Management and Investing LLC — компания руководителей российской дочерней компании Elopak, русское имя юрлица источники не называют; в datanewton по латинскому имени не ищется.",
+     "seller": "Elopak — норвежская публичная компания, российского юрлица-продавца нет. Историю участников в datanewton проверить не удалось: АО «Элопак» там не найдено (только СП «Элопак-Россия» 1990 года).",
+     "target": "ИНН АО «Элопак» не найден: datanewton «Элопак» (одна запись — СП «Элопак-Россия», Петербург, 1990), WebSearch по реквизитам и Лобне; rusprofile и list-org закрыты проверкой на робота. Вероятно, компания после сделки переименована."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "gcdf0303d",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "00dda73ae974"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2023-02-22",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "3b1fc7a0e9a9"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "51dbb40159f7"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-05-25",
+   "title": "«Роснефть» купила доли Equinor в четырех совместных предприятиях",
+   "ind": "Нефть и газ",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/79546/"
+    ],
+    [
+     "Equinor",
+     "https://www.equinor.com/where-we-are/russia"
+    ],
+    [
+     "Коммерсантъ",
+     "https://kommersant.ru/doc/5237592"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Доли Equinor в четырех совместных предприятиях с «Роснефтью»",
+    "val": "Цена не раскрывалась; Equinor не сообщила, получила ли она что-то за доли. По итогам I квартала 2022 года компания списала около $1,08 млрд вложений в Россию.",
+    "rationale": "27–28 февраля 2022 года совет директоров Equinor решил прекратить новые вложения в Россию и выйти из совместных предприятий; выход проведен в рамках норвежских и европейских санкций.",
+    "context": "Equinor работала в России больше 30 лет и с 2012 года сотрудничала с «Роснефтью» по трудноизвлекаемым запасам и шельфу. Среди совместных проектов — «Севкомнефтегаз» (Северо-Комсомольское месторождение в ЯНАО, доля Equinor 33,3%), «Ангаранефть» в Восточной Сибири (49% Equinor купила у «Роснефти» в 2020 году) и Domanik Oil в Самарской области. В 2021 году на долю Equinor в «Ангаранефти» приходилось около 11 тыс., в «Севкомнефтегазе» — около 5 тыс. баррелей нефтяного эквивалента в сутки. Одновременно Equinor подписала соглашение о выходе из Харьягинского СРП — эта сделка закрыта в сентябре 2022 года.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Equinor передала «Роснефти» свои доли в четырех российских совместных предприятиях и освобождена от будущих обязательств по ним.",
+    "appr": "—",
+    "terms": "О завершении выхода Equinor объявила 25 мая 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "Доли Equinor в четырех совместных предприятиях с «Роснефтью»",
+   "seller": "Equinor ASA",
+   "buyer": "g300b9ead",
+   "extra": "Норвежская Equinor передала «Роснефти» доли в четырех совместных предприятиях, в том числе в «Севкомнефтегазе» и «Ангаранефти», и освободилась от обязательств по ним.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Предмет — доли в четырех совместных предприятиях; поименно Equinor и Интерфакс назвали только два («Севкомнефтегаз», «Ангаранефть»), поэтому один профиль с ИНН предмету не назначить.",
+     "seller": "Equinor ASA — норвежская компания, доли держала напрямую или через иностранные структуры; российского юрлица-продавца в источниках нет."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g9a5a4ca9",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "6fe0b01a84e1"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-05-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "641571fea1f2"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "26ca98541f94"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-09-02",
+   "title": "«Зарубежнефть» купила 30% Харьягинского проекта у Equinor",
+   "ind": "Нефть и газ",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Equinor",
+     "https://www.equinor.com/news/20220902-completes-exit-process-from-russia"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/79546/"
+    ],
+    [
+     "Коммерсантъ",
+     "https://kommersant.ru/doc/5448063"
+    ],
+    [
+     "Нефтегаз.RU",
+     "https://neftegaz.ru/tech-library/mestorozhdeniya/141704-kharyaginskoe-neftyanoe-mestorozhdenie/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "30% в Харьягинском соглашении о разделе продукции",
+    "val": "Цена не раскрывалась. Equinor сообщила, что при выходе покрыла накопленные обязательства по ликвидации промыслов.",
+    "rationale": "Выход из России по решению совета директоров Equinor от 28 февраля 2022 года, в рамках норвежских и европейских санкций.",
+    "context": "Харьягинское месторождение в Ненецком автономном округе разрабатывается по соглашению о разделе продукции; оператор с 2016 года — «Зарубежнефть». До выхода иностранцев доли были такими: «Зарубежнефть» — 40%, Equinor — 30%, TotalEnergies — 20%, Ненецкая нефтяная компания — 10%. Соглашение о выходе Equinor подписала в мае 2022 года, тогда же о продаже своей доли договорилась TotalEnergies. Распоряжение правительства от 25 июля 2022 года № 2034-р дало основание для передачи долей обеих компаний. После сделок у «Зарубежнефти» 90% проекта, у Ненецкой нефтяной компании — 10%. Доля Equinor в добыче на Харьяге в 2021 году — около 10 тыс. баррелей нефтяного эквивалента в сутки.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Доля Equinor в Харьягинском СРП перешла к «Зарубежнефти» — оператору проекта.",
+    "appr": "Распоряжение правительства РФ от 25 июля 2022 года № 2034-р о передаче долей TotalEnergies и Equinor (по данным Нефтегаз.RU).",
+    "terms": "Соглашение о выходе подписано в мае 2022 года, о полном выходе Equinor объявила 2 сентября 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "30% в Харьягинском соглашении о разделе продукции",
+   "seller": "Equinor ASA",
+   "buyer_name": "АО «Зарубежнефть»",
+   "extra": "Норвежская Equinor вышла из Харьягинского СРП в Ненецком автономном округе: ее 30% перешли «Зарубежнефти», у которой теперь 90% проекта.",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Предмет — доля в соглашении о разделе продукции, а не юрлицо: ИНН у него нет.",
+     "seller": "Equinor ASA — норвежская компания, участвовала в СРП напрямую; российского юрлица-продавца в источниках нет.",
+     "buyer": "АО «Зарубежнефть» — профиля в базе нет, ИНН в этой партии не искали; покупатель назван словами."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g5192332c",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 30.0,
+     "basis": "rule",
+     "card_hash": "2203dd0269c0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-09-02",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "0440c31ed0e4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "07db03ea0c8d"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-21",
+   "title": "Александр Ермаков и Юрий Шумаков купили петербургские отели Sokos у S Group",
+   "ind": "Гостиницы и туризм",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ДП",
+     "https://www.dp.ru/a/2022/06/22/Prodazha_Sokos__otkritie_n2"
+    ],
+    [
+     "ComNews",
+     "https://www.comnews.ru/content/220878/2022-06-23/2022-w25/gruppa-kompaniy-awara-it-popolnilas-setyu-oteley"
+    ],
+    [
+     "Турдом",
+     "https://www.tourdom.ru/news/finskie-oteli-sokos-otoshli-rossiyskim-investoram.html"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5459061"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% долей ООО «Сокотель» (ныне ООО «Ван Хотелс»)",
+    "val": "Цена и другие условия не раскрывались. Эксперты оценивали бизнес S Group в Петербурге и отели Sokos примерно в 2,5 млрд ₽ — это оценка, а не цена сделки.",
+    "rationale": "Финская S Group в марте 2022 года объявила об уходе из России и начала искать покупателей.",
+    "context": "В Петербурге у сети Sokos было три отеля на 927 номеров: Palace Bridge (5 звезд), Vasilievsky и Olympia Garden (по 4 звезды). Покупатели — владельцы ИТ-группы Awara IT Александр Ермаков и Юрий Шумаков. В одних публикациях речь идет обо всех трех отелях, в других со ссылкой на пресс-службу — о двух, а Vasilievsky будто бы уходит другому инвестору, имя которого не названо. Покупателям перешли договоры аренды зданий, трудовые договоры и другие обязательства; марку Sokos они использовать не могут. Сейчас отели работают под маркой Wone Hotels.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — финская SOK Retail International Oy (S Group), владевшая 100% ООО «Сокотель». По ЕГРЮЛ с 29 июня 2022 года доли поровну у Юрия Шумакова и Александра Ермакова, владельцев Awara IT. Покупателям перешел операционный бизнес Sokos Hotels в Петербурге: аренда зданий, персонал, обязательства. Права на марку Sokos в сделку не вошли.",
+    "appr": "—",
+    "terms": "Сделка завершена 21 июня 2022 года, смена участников в ЕГРЮЛ — 29 июня 2022 года; управление отелями перешло покупателям с 30 июня.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Сокотель» (петербургские отели Sokos)",
+   "seller": "SOK Retail International Oy (S Group)",
+   "buyer_name": "Александр Ермаков и Юрий Шумаков (владельцы Awara IT)",
+   "extra": "Финская S Group продала бизнес отелей Sokos в Петербурге владельцам Awara IT Александру Ермакову и Юрию Шумакову; марку Sokos покупатели не получили.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "SOK Retail International Oy — финская компания группы S Group (SOK); по истории участников ЕГРЮЛ (datanewton) владела 100% ООО «Сокотель» до 29.06.2022, российского юрлица-продавца нет.",
+     "buyer": "Покупатели — два физических лица (Ермаков и Шумаков); профиль Awara IT Group есть (g66a64a9f), но сделку статьи описывают как покупку самими владельцами, а не группой."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g3c3b789c",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g1a50dda8",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "69d74b49a276"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-06-21",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "a96a43f1384c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "3953f1f6c327"
+    },
+    "target": {
+     "company_id": "g1a50dda8",
+     "inn": "7841338200",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "78f546e2cc45"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-14",
+   "title": "Компания «МВК» купила российский бизнес Tchibo",
+   "ind": "Пищепром и напитки",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5504485"
+    ],
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/proizvoditel-kofe-tchibo-gmbh-ukhodit-iz-rf-12-avgusta-2022-219378/"
+    ],
+    [
+     "BFM.ru",
+     "https://www.bfm.ru/news/537721"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "78% долей ООО «Чибо СНГ» (остальные 22% перешли самому обществу)",
+    "val": "Цена не раскрывалась.",
+    "rationale": "Уход немецкой Tchibo GmbH из России.",
+    "context": "«Чибо СНГ» продает кофе марок Tchibo и Davidoff; в 2021 году выручка выросла на 7%, до 3,18 млрд ₽, больше 70% продаж в 2020 году давала продукция местного производства. Доля марки Tchibo на российском рынке кофе — около 2,6% в натуральном выражении и 1,6% в деньгах. Права на марки Tchibo и Davidoff остались у компании до конца 2022 года, затем ей предстояло перейти на собственную марку; в ноябре 2023 года стало известно, что новая марка — Tibio.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «МВК» Михаила Ковалевского, генерального директора «Чибо СНГ». По ЕГРЮЛ 5 июля 2022 года «МВК» получило 78%, 14 июля 2022 года оставшиеся 22% Tchibo GmbH перешли самому ООО «Чибо СНГ», а в июле 2023 года у «МВК» стало 100%. Доля «МВК» находится в залоге у Tchibo GmbH.",
+    "appr": "—",
+    "terms": "5 июля 2022 года — 78% у «МВК», 14 июля 2022 года Tchibo GmbH вышла из числа участников полностью.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Чибо СНГ»",
+   "seller": "Tchibo GmbH",
+   "buyer_name": "ООО «МВК» (Михаил Ковалевский)",
+   "extra": "Немецкая Tchibo GmbH продала российское ООО «Чибо СНГ» компании «МВК» его гендиректора Михаила Ковалевского; доля нового владельца заложена у Tchibo.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Tchibo GmbH — немецкая компания, по истории участников ЕГРЮЛ (datanewton) владела 100% «Чибо СНГ» напрямую; российского продавца нет.",
+     "buyer": "ООО «МВК» (ОГРН 1227700315237 по истории участников ЕГРЮЛ) — ИНН в этой партии не установлен, профиль не заводили; покупатель назван словами с владельцем."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g1d7832e2",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g7596e45b",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 78.0,
+     "basis": "rule",
+     "card_hash": "46e11ad8773d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-14",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "021e6ad61dea"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ca2d23ff14c0"
+    },
+    "target": {
+     "company_id": "g7596e45b",
+     "inn": "7710502329",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "c143d67c1a6d"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-03",
+   "title": "Российские менеджеры L’Occitane купили местный бизнес сети за €44,5 млн",
+   "ind": "Ритейл",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2022/06/16/926989-loccitane-vikupil-top-menedzhment"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/business/01/03/2023/63fdee0e9a7947f151b7788c"
+    ],
+    [
+     "AdIndex",
+     "https://adindex.ru/news/marketing/2022/06/17/304963.phtml"
+    ],
+    [
+     "Retail.ru",
+     "https://www.retail.ru/news/frantsuzskiy-kosmeticheskiy-kontsern-l-occitane-prodal-rossiyskiy-biznes-mestnom-1-marta-2023-226277/"
+    ]
+   ],
+   "eco": {
+    "sum": "€44,5 млн",
+    "share": "100% долей ООО «Л’Окситан Рус»",
+    "val": "По отчетности L’Occitane, справедливая стоимость российского бизнеса на 3 июня 2022 года — €44,5 млн, около 2,9 млрд ₽ по курсу ЦБ на ту дату; эту сумму покупатели выплачивают траншами в течение четырех лет начиная с 2025 года. Аналитик Infoline Михаил Бурмистров оценивал бизнес на начало 2022 года не меньше чем в 6 млрд ₽.",
+    "rationale": "В апреле 2022 года L’Occitane закрыла магазины в России и прекратила онлайн-продажи; на Россию приходилось около 3,5% продаж группы.",
+    "context": "В 2021 году выручка ООО «Л’Окситан Рус» — 5,4 млрд ₽, чистая прибыль — 584 млн ₽, в сети было 112 магазинов. Магазины вновь открылись в июне 2022 года под новой вывеской. В Ведомостях юристы допускали, что продажа сотрудникам может сохранить влияние прежнего владельца.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Новые владельцы — генеральный директор Ростислав Коваленко (31%), директор по развитию новых брендов Ольга Сабирова, директор по логистике Алексей Шумов и финансовый директор Наталья Милехина (по 23%). Все доли заложены у прежнего владельца — L’Occitane International S.A. (Люксембург).",
+    "appr": "—",
+    "terms": "По отчетности L’Occitane сделка прошла 3 июня 2022 года, смена участников в ЕГРЮЛ — 10 июня 2022 года. Оплата траншами в течение четырех лет начиная с 2025 года. L’Occitane вправе ежегодно в течение пяти лет начиная с 3 июня 2025 года выкупить доли обратно по справедливой стоимости, определенной независимой оценкой.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Л’Окситан Рус»",
+   "seller": "L’Occitane International S.A.",
+   "buyer_name": "Ростислав Коваленко, Ольга Сабирова, Алексей Шумов и Наталья Милехина (топ-менеджеры «Л’Окситан Рус»)",
+   "extra": "L’Occitane International продала российское ООО «Л’Окситан Рус» четырем топ-менеджерам за €44,5 млн с рассрочкой с 2025 года и правом обратного выкупа.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "L’Occitane International S.A. — люксембургская компания; по истории участников ЕГРЮЛ (datanewton) владела 100% до 10.06.2022, российского продавца нет.",
+     "buyer": "Покупатели — четыре физических лица (топ-менеджеры), профилей не заводили."
+    }
+   },
+   "sum": "€44,5 млн",
+   "id": "g8fd370fb",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g52058786",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "2dcca9e7e707"
+    },
+    "price": {
+     "value_rub": 2888285850,
+     "meaning": "foreign_currency",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "aaf23c80c29e",
+     "currency": "EUR",
+     "amount": 44500000.0,
+     "fx_rate": 64.9053,
+     "fx_date": "2022-06-03",
+     "fx_method": "day"
+    },
+    "date": {
+     "value": "2022-06-03",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "5082e3a6f06c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "9bdf03a27d07"
+    },
+    "target": {
+     "company_id": "g52058786",
+     "inn": "7707591760",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "f04b8cbe2f54"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "price_not_verified"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022",
+   "title": "Менеджмент Mediascope купил долю Kantar в измерителе",
+   "ind": "Медиа",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2022/10/05/944022-velikobritaniya-vishla-iz-edinogo-izmeritelya-tele--i-internet-auditorii"
+    ],
+    [
+     "AdIndex",
+     "https://adindex.ru/news/media/2022/10/5/306940.phtml"
+    ],
+    [
+     "New Retail",
+     "https://new-retail.ru/novosti/retail/kantar_prodal_rossiyskie_aktivy_mestnomu_menedzhmentu6937/"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "20% акций АО «Медиаскоп»",
+    "val": "Mediascope отказалась называть условия и сроки сделки.",
+    "rationale": "В марте 2022 года Kantar сообщила Mediascope о намерении приостановить работу в России.",
+    "context": "Mediascope — единый измеритель телевизионной и интернет-аудитории в России, генеральный директор — Руслан Тагиев. Поправки 2016 года запретили измерять аудиторию компаниям, где иностранцам принадлежит больше 20%, поэтому Kantar тогда сократила свою долю до 20%. После выхода Kantar измеритель, по словам компании, полностью российский. Сделка не затронула ARMI Marketing; российское подразделение Kantar TNS временно сменило название на «Маркетинговый информационный центр».",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Kantar передала свои российские активы, включая 20% Mediascope, менеджменту Mediascope; кто именно из менеджеров стал владельцем, компания не сообщила.",
+    "appr": "—",
+    "terms": "Окончательно договорились в сентябре 2022 года; о выходе Kantar из акционеров Mediascope сообщила 5 октября 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "АО «Медиаскоп»",
+   "seller": "Kantar (Великобритания)",
+   "buyer_name": "Менеджмент Mediascope",
+   "extra": "Британская Kantar вышла из акционеров Mediascope: в сентябре 2022 года ее 20% и другие российские активы перешли менеджменту измерителя.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Kantar — британская группа; держатель 20% в статьях не назван. Историю участников ЕГРЮЛ (datanewton) проверил: Медиаскоп — АО, акционеров ЕГРЮЛ не показывает (последняя запись об участниках — 2 января 2022 года, выбытие при смене формы).",
+     "buyer": "Покупатель — менеджмент Mediascope без поименного списка; профиля нет."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g50412a76",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "ge7bf9251",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 20.0,
+     "basis": "rule",
+     "card_hash": "dc22a2cb1058"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f21e46c8316a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "6aad331dc1d3"
+    },
+    "target": {
+     "company_id": "ge7bf9251",
+     "inn": "7714117913",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "16fc9d92c106"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-04-20",
+   "title": "Группа IBS купила российский бизнес Luxoft у DXC Technology",
+   "ind": "ИТ и интернет",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/78509/"
+    ],
+    [
+     "Хабр",
+     "https://habr.com/ru/articles/662461"
+    ],
+    [
+     "DXC Technology",
+     "https://dxc.com/newsroom/05252022"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% долей ООО «Люксофт Профешнл»",
+    "val": "Сумма сделки не раскрывалась.",
+    "rationale": "4 марта 2022 года DXC Technology объявила, что больше не ведет бизнес в России и выходит с рынка; Luxoft объявила об уходе в начале марта.",
+    "context": "Luxoft основали в 2000 году, среди учредителей был Анатолий Карачинский. IBS была крупнейшим акционером Luxoft и в 2019 году продала свою долю американской DXC Technology (сделка на $2 млрд). Теперь российское юрлицо вернулось в группу IBS. 25 мая 2022 года DXC сообщила, что после окончания квартала вышла из внутреннего российского бизнеса.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "По истории участников ЕГРЮЛ продавцы — Luxoft International Company Limited (99%) и Luxoft UK Limited (1%) из группы DXC Technology. 99% ООО «Люксофт Профешнл» получило АО «ИБС ИТ Услуги», 1% — ООО «Информационные бизнес системы». Вместе с ним группе IBS передана АНО ДПО «Учебный центр Люксофт».",
+    "appr": "—",
+    "terms": "Переход оформлен 20 апреля 2022 года, сведения внесены в ЕГРЮЛ.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Люксофт Профешнл»",
+   "seller": "Luxoft International (DXC Technology)",
+   "seller_id": "gc216a92e",
+   "extra": "Структуры DXC Technology передали группе IBS Анатолия Карачинского российское ООО «Люксофт Профешнл» и учебный центр Luxoft.",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Покупатели — АО «ИБС ИТ Услуги» (ОГРН 1177746672905) и ООО «Информационные бизнес системы» (ОГРН 1027739159898) по истории участников ЕГРЮЛ; у профиля группы IBS (g4f201549) нет ИНН в реестре, поэтому покупатель назван словами."
+    }
+   },
+   "sum": "Не раскрыта",
+   "buyer_name": "АО «ИБС ИТ Услуги» и ООО «Информационные бизнес системы» (группа IBS)",
+   "id": "gee7be9ef",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "gbf8ba360",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "8c7527385add"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-04-20",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "8475ab599f64"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "950044b23b20"
+    },
+    "target": {
+     "company_id": "gbf8ba360",
+     "inn": "7713605227",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "2b796623cd08"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-11",
+   "title": "Константин Норцев купил ООО «Вяртсиля Восток» у Wärtsilä",
+   "ind": "Машиностроение",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ДП",
+     "https://www.dp.ru/a/2022/07/15/Kak_v_more_korabli"
+    ],
+    [
+     "Wärtsilä",
+     "https://www.wartsila.com/media/news/21-07-2022-wartsila-completes-russian-market-exit-3130664"
+    ],
+    [
+     "ПортНьюс",
+     "https://en.portnews.ru/news/332605"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% долей ООО «Вяртсиля Восток»",
+    "val": "Цена не раскрывалась; оценить ее нельзя, потому что условия неизвестны — в том числе есть ли у прежнего владельца право обратного выкупа.",
+    "rationale": "В апреле 2022 года Wärtsilä решила свернуть работу в России; в I квартале компания создала резервы около €200 млн.",
+    "context": "«Вяртсиля Восток» обслуживает судовое оборудование. В 2021 году выручка выросла на 405 млн ₽, до 3,6 млрд ₽, чистая прибыль — 227 млн ₽. Новый владелец — 42-летний Константин Норцев, который работал в Wärtsilä больше 15 лет и с сентября 2020 года руководил «Вяртсиля Восток». Компания продолжает работу под названием V-Vostok (ООО «В-Восток»). Тогда же Wärtsilä продала местным менеджерам «Транзас Навигатор» и закрыла петербургский офис Wärtsilä Digital Technologies.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Прежний владелец 100% — А/О «Вяртсиля Технолоджи» из группы Wärtsilä; с 11 июля 2022 года единственный владелец — Константин Норцев.",
+    "appr": "—",
+    "terms": "Соглашение подписано в мае–июне 2022 года, смена владельца — 11 июля 2022 года; о полном уходе из России Wärtsilä объявила 21 июля 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Вяртсиля Восток»",
+   "seller": "Wärtsilä",
+   "buyer_name": "Константин Норцев",
+   "extra": "Финская Wärtsilä продала петербургское ООО «Вяртсиля Восток» его руководителю Константину Норцеву; компания работает под названием V-Vostok.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Wärtsilä — финская группа; по истории участников ЕГРЮЛ (datanewton) 100% до 11.07.2022 принадлежали АО «Вяртсиля Технолоджи» (иностранное юрлицо группы), российского продавца нет.",
+     "buyer": "Покупатель — физическое лицо (Константин Норцев)."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g070084ad",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g6eae96aa",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "5757d8f95819"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-07-11",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "062506c7976a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "d719135bcd29"
+    },
+    "target": {
+     "company_id": "g6eae96aa",
+     "inn": "7841339690",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "bd429e162020"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-06-24",
+   "title": "Менеджеры «Транзас Навигатора» купили компанию у Wärtsilä",
+   "ind": "ИТ и интернет",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ДП",
+     "https://www.dp.ru/a/2022/07/15/Kak_v_more_korabli"
+    ],
+    [
+     "Wärtsilä",
+     "https://www.wartsila.com/media/news/21-07-2022-wartsila-completes-russian-market-exit-3130664"
+    ],
+    [
+     "ПортНьюс",
+     "https://en.portnews.ru/news/332605"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% долей ООО «Транзас Навигатор»",
+    "val": "Цена не раскрывалась.",
+    "rationale": "В апреле 2022 года Wärtsilä решила свернуть работу в России.",
+    "context": "Бизнес Transas Navigator после сделки работает как независимая компания и обслуживает местных клиентов; Wärtsilä не поставляет ему ни услуг, ни запчастей. Одновременно Wärtsilä продала «Вяртсиля Восток» его руководителю Константину Норцеву. В январе 2023 года 100% «Транзас Навигатора» сосредоточил Дмитрий Лагутин, в октябре 2023 года владельцем стал Анатолий Пантелеев.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Продавец — Wärtsilä Voyage Limited, владевшая 100%. С 24 июня 2022 года компанией владеют Дмитрий Лагутин (52%), Алексей Зенин, Сергей Комаров и Евгений Семенов (по 16%).",
+    "appr": "—",
+    "terms": "Соглашение подписано в мае–июне 2022 года, смена участников в ЕГРЮЛ — 24 июня 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Транзас Навигатор»",
+   "seller": "Wärtsilä Voyage Ltd. (группа Wärtsilä)",
+   "buyer_name": "Дмитрий Лагутин, Алексей Зенин, Сергей Комаров и Евгений Семенов",
+   "extra": "Wärtsilä Voyage вышла из ООО «Транзас Навигатор»: компанией теперь владеют четверо менеджеров, крупнейшая доля — 52% — у Дмитрия Лагутина.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Wärtsilä Voyage Ltd. — иностранная компания группы Wärtsilä; по истории участников ЕГРЮЛ (datanewton) владела 100% до 24.06.2022, российского продавца нет.",
+     "buyer": "Покупатели — четыре физических лица."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g887ba980",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g822b704c",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "8008c9ba1cea"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-06-24",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "f4144eaf19a9"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "db0eb1e753c5"
+    },
+    "target": {
+     "company_id": "g822b704c",
+     "inn": "7801410107",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "721de7925f33"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-07-05",
+   "title": "Компания «Ной-М» купила российскую сеть Pizza Hut у AmRest",
+   "ind": "Ритейл",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/5392616"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2022/06/07/925416-pizza-hut"
+    ],
+    [
+     "Nation’s Restaurant News",
+     "https://www.nrn.com/quick-service/yum-brands-is-completely-exiting-russia"
+    ]
+   ],
+   "eco": {
+    "sum": "300 млн ₽ (по оценке)",
+    "share": "—",
+    "val": "По оценке «Коммерсанта» — около 300 млн ₽; гендиректор Infoline-Аналитики Михаил Бурмистров считает, что больше эта сумма вряд ли была. Стороны цену не называли.",
+    "rationale": "Американская Yum! Brands, владелец марки, уходила из России; по данным «Коммерсанта», продажу начал владелец бренда из-за слабой работы российской сети.",
+    "context": "В России работало около 70 пиццерий Pizza Hut (по другим данным — около 50). Мастер-франшизой владел польский холдинг AmRest через ООО «Амрест Пицца». Раньше AmRest вела переговоры о продаже сети структуре «ВТБ Капитала», но сделка сорвалась из-за санкций против ВТБ. После покупки пиццерии сменили вывеску на «Пицца Н» (сеть «ПиццаН»). В 2025 году 60% «Ной-М» купил Ростислав Ордовский-Танаевский Бланко.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «Ной-М», основанное топ-менеджерами группы «Ростик»: старший вице-президент «Ростика» Владимир Мехришвили (80%), гендиректор «Ной-М» Алексей Чайка (10%) и Светлана Берснева (10%), по данным «Картотеки». Продавец — AmRest, владелец мастер-франшизы.",
+    "appr": "—",
+    "terms": "По сведениям на 7 июня 2022 года сделка уже была закрыта; Yum! Brands объявила о завершении передачи бизнеса Pizza Hut местному оператору 5 июля 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "Российская сеть пиццерий Pizza Hut",
+   "seller": "AmRest (мастер-франчайзи Pizza Hut в России)",
+   "seller_id": "ge8da9337",
+   "buyer": "g37927fa2",
+   "extra": "Польский AmRest, владевший мастер-франшизой Pizza Hut в России, продал сеть из примерно 70 пиццерий компании «Ной-М» топ-менеджеров группы «Ростик»; сеть стала «ПиццаН».",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Предмет — сеть пиццерий (бизнес мастер-франшизы); юрлицо, через которое перешел бизнес, в статьях не названо: ООО «Амрест Пицца» названо как прежний оператор, но перешло ли оно покупателю — не сказано."
+    }
+   },
+   "sum": "300 млн ₽ (по оценке)",
+   "id": "ga024ea1e",
+   "added": "2026-11-10",
+   "no_post": true,
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "d264b1b76662"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "59485e6bc2b4"
+    },
+    "date": {
+     "value": "2022-07-05",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "9eddb108882c"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "1022f8a18368"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца"
+   ],
+   "date": "2022-04-01",
+   "title": "Компания «Ф109 Лимитед» купила российский бизнес Kingspan",
+   "ind": "Строительство",
+   "status": "Закрыта",
+   "src": [
+    [
+     "The Irish Times",
+     "https://www.irishtimes.com/business/transport-and-tourism/kingspan-sells-russian-business-while-kerry-suspends-activities-1.4844554"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/russia/833213"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/news/2022/04/05/916673-kingspan-peredast-upravlenie-rossiiskimi-zavodami"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "100% долей ООО «Кингспан»",
+    "val": "Цена не раскрывалась; по данным The Irish Times, Kingspan получила по сделке небольшой убыток.",
+    "rationale": "Kingspan решила уйти из России в начале марта 2022 года; на Россию приходилось меньше 1% ее бизнеса.",
+    "context": "У ирландской Kingspan в России два завода сэндвич-панелей и металлоконструкций — в Гатчине (Ленинградская область) и в Невинномысске (Ставропольский край), на них работало около 180 человек. Власти Ленинградской области сообщили, что заводы продолжат работу под новой маркой и обеспечены долгосрочными заказами. Компания говорила, что подготовка к выходу заняла несколько недель.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "По истории участников ЕГРЮЛ 1 апреля 2022 года 100% ООО «Кингспан» перешли от Kingspan Holdings (Irl) Limited к компании «Ф109 Лимитед»; Kingspan назвала покупателя местным менеджментом. В октябре–декабре 2022 года 100% перешли гендиректору Игорю Федотченко; в феврале 2023 года общество переименовано в ООО «РП Гатчина».",
+    "appr": "—",
+    "terms": "Смена участника в ЕГРЮЛ — 1 апреля 2022 года, о завершении продажи Kingspan сообщила 4 апреля 2022 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "ООО «Кингспан» (заводы в Гатчине и Невинномысске)",
+   "seller": "Kingspan Group plc",
+   "buyer_name": "«Ф109 Лимитед» (местный менеджмент; с декабря 2022 года — Игорь Федотченко)",
+   "extra": "Ирландская Kingspan продала местному менеджменту ООО «Кингспан» с заводами сэндвич-панелей в Гатчине и Невинномысске, где работало около 180 человек.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Kingspan Holdings (Irl) Limited — ирландская компания группы Kingspan; по истории участников ЕГРЮЛ (datanewton) владела 100% до 01.04.2022, российского продавца нет.",
+     "buyer": "«Ф109 Лимитед» — иностранная компания без ИНН (так записана в ЕГРЮЛ), профиль не заводили; с декабря 2022 года доля у физлица Игоря Федотченко."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "g19f07141",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g676b4bdd",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "867150facec0"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2022-04-01",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "1a8d5f10965a"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "1334909925b9"
+    },
+    "target": {
+     "company_id": "g676b4bdd",
+     "inn": "4705033556",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "97e01ab92643"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "type": "M&A",
+   "kind": "acquisition",
+   "themes": [
+    "Уход иностранного владельца",
+    "Правкомиссия / указ президента"
+   ],
+   "date": "2023-03-31",
+   "title": "Менеджеры «Метрана» купили российский бизнес Emerson",
+   "ind": "Машиностроение",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/865148"
+    ],
+    [
+     "Emerson",
+     "https://ir.emerson.com/news-events/press-releases/detail/108/emerson-announces-agreement-to-divest-its-russia-business-to-local-management"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.com/newsroom/top-stories/88173/"
+    ],
+    [
+     "Emerson (отчет 10-Q)",
+     "https://www.sec.gov/Archives/edgar/data/32604/000003260423000037/emr-20230630.htm"
+    ]
+   ],
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "Акции АО «ПГ «Метран»» (178 + 1 обыкновенная) и 100% ООО «Эмерсон»",
+    "val": "Цена не раскрывалась. Emerson отразила убыток до налогов $162 млн в III квартале 2022 финансового года и еще $47 млн в I квартале 2023 финансового года в связи с уходом из России.",
+    "rationale": "4 мая 2022 года Emerson объявила об уходе из России; на Россию приходилось около 1,5% ее продаж за 2021 финансовый год.",
+    "context": "«Метран» в Челябинске выпускает оборудование для автоматизации производственных процессов, ООО «Эмерсон» в Москве продает и обслуживает его продукцию. Гендиректор «Метрана» с января 2021 года — Антон Дружинин, гендиректор ООО «Эмерсон» — Николай Шестаков. Для сделки они создали 12 августа 2022 года ООО «Метран холдинг» и ООО «Метран проект», где у каждого по 50%.",
+    "target_fin": "—",
+    "fin": "—",
+    "finadv": "Публично не сообщалось"
+   },
+   "law": {
+    "struct": "Покупатель — ООО «Метран холдинг» (поровну у Антона Дружинина и Николая Шестакова). Продавцы — нидерландская Tranmet Holdings B.V. (178 акций «Метрана»), британская Tranmet Holdings Ltd. (одна акция) и нидерландская Emerson Electric Niderland B.V. (100% ООО «Эмерсон»).",
+    "appr": "Распоряжение президента РФ, опубликованное 21 февраля 2023 года.",
+    "terms": "Соглашение подписано 27 сентября 2022 года, разрешение президента — 21 февраля 2023 года, по отчету Emerson продажа «Метрана» завершена 31 марта 2023 года. По ЕГРЮЛ ООО «Метран холдинг» записано единственным акционером «Метрана» 4 мая 2023 года.",
+    "adv": [
+     [
+      "Стороны сделки",
+      "Не раскрывались",
+      "Юридические консультанты в публичных источниках не раскрывались"
+     ]
+    ]
+   },
+   "asset": "АО «Промышленная группа «Метран»",
+   "seller": "Emerson Electric Co.",
+   "buyer_name": "ООО «Метран холдинг» (Антон Дружинин и Николай Шестаков)",
+   "extra": "Американская Emerson продала местным менеджерам российский бизнес — челябинский «Метран» и ООО «Эмерсон»; сделку закрыли в марте 2023 года после разрешения президента.",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Emerson Electric Co. — американская компания; продавцы — ее нидерландские и британская структуры (Интерфакс). История участников ЕГРЮЛ (datanewton, ОГРН 1027402540065): 04.05.2023 единственный акционер — ООО «Метран холдинг»; российского продавца нет.",
+     "buyer": "ООО «Метран холдинг» — ИНН в статьях не назван, профиль не заводили; покупатель назван словами с владельцами."
+    }
+   },
+   "sum": "Не раскрыта",
+   "id": "gdc38f29c",
+   "added": "2026-11-10",
+   "no_post": true,
+   "target": "g2ce6c3f9",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "4890b0f93685"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
+    },
+    "date": {
+     "value": "2023-03-31",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "16843e9d5832"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "844bd605ee42"
+    },
+    "target": {
+     "company_id": "g2ce6c3f9",
+     "inn": "7448024720",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "1f42c3d85ffd"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
@@ -270019,7 +275330,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «Ной-М»"
   },
   "g79f93ccb": {
    "name": "сети OBI",
@@ -278298,7 +283610,8 @@
      "since": "",
      "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=44880"
     }
-   ]
+   ],
+   "legal_short": "ПАО «Соллерс»"
   },
   "gd2e49cff": {
    "name": "Nukem Technologies Engineering Services",
@@ -282581,7 +287894,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «Милфудс»"
   },
   "gb4502630": {
    "name": "ООО «Клен»",
@@ -288127,7 +293441,8 @@
    "name": "Литум",
    "ind": "Химия и удобрения",
    "desc": "Екатеринбургская группа — производитель лакокрасочных покрытий. Юрлицо головной компании — ООО ГК «Литум».",
-   "kpi": []
+   "kpi": [],
+   "legal_short": "ООО ГК «Литум»"
   },
   "g94a46021": {
    "name": "ГК «Регион»",
@@ -290235,6 +295550,123 @@
    "ind": "ИТ и интернет",
    "legal_short": "ООО «Артайти групп»",
    "desc": "Петербургский интегратор «1С»: переводит промышленные предприятия с SAP на «1С». Основан в 2012 году Виталием Мальцевым.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g982e9d1e": {
+   "name": "ООО «Автомобильные индустриальные технологии»",
+   "ind": "Автопром",
+   "desc": "Автосборочный завод во Владивостоке, до 2022 года — совместное предприятие Mazda и «Соллерса» «Мазда Соллерс Мануфэкчуринг Рус».",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g69ccb585": {
+   "name": "ООО «Ритейл РЦ»",
+   "ind": "Ритейл",
+   "desc": "Бывшая российская компания Helly Hansen (до октября 2022 года — ООО «Хелли Хансен»), сеть магазинов спортивной одежды.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7e554284": {
+   "name": "ООО «Айбиси Реал Эстейт»",
+   "ind": "Недвижимость",
+   "desc": "Консультант по коммерческой недвижимости IBC Real Estate, до 2022 года — российская компания JLL (ООО «Джонс Лэнг ЛаСаль»).",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g408d5306": {
+   "name": "ООО «Редиг»",
+   "ind": "Холдинги",
+   "desc": "Компания Игоря Рогановича и Андрея Карасева, которая в 2022 году получила российскую компанию Helly Hansen.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g1a50dda8": {
+   "name": "ООО «Ван Хотелс»",
+   "ind": "Гостиницы и туризм",
+   "desc": "Петербургская гостиничная компания (ранее ООО «Сокотель»), владелец товарных знаков Sokos Hotels в Петербурге; в 2022 году бизнес отелей Sokos перешел к Александру Ермакову и Юрию Шумакову.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g7596e45b": {
+   "name": "ООО «Чибо СНГ»",
+   "ind": "Пищепром и напитки",
+   "desc": "Российский производитель и поставщик кофе (с 2023 года — марка Tibio); до июля 2022 года принадлежал немецкой Tchibo GmbH.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g52058786": {
+   "name": "ООО «Л’Окситан Рус»",
+   "ind": "Ритейл",
+   "desc": "Российская сеть магазинов косметики L’Occitane (около 110 магазинов); в июне 2022 года перешла к российским топ-менеджерам.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "ge7bf9251": {
+   "name": "АО «Медиаскоп»",
+   "ind": "Медиа",
+   "desc": "Единый измеритель телевизионной и интернет-аудитории в России (Mediascope); до 2022 года 20% принадлежали британской Kantar.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "gbf8ba360": {
+   "name": "ООО «Люксофт Профешнл»",
+   "ind": "ИТ и интернет",
+   "desc": "Главное российское юрлицо разработчика ПО Luxoft; в апреле 2022 года перешло к группе IBS.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g6eae96aa": {
+   "name": "ООО «В-Восток»",
+   "ind": "Машиностроение",
+   "desc": "Петербургская компания по обслуживанию судового оборудования (бывшее ООО «Вяртсиля Восток»); в июле 2022 года перешла от Wärtsilä к Константину Норцеву.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g822b704c": {
+   "name": "ООО «Транзас Навигатор»",
+   "ind": "ИТ и интернет",
+   "desc": "Петербургский разработчик навигационных систем для судов.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g676b4bdd": {
+   "name": "ООО «РП Гатчина»",
+   "ind": "Строительство",
+   "desc": "Производитель сэндвич-панелей и металлоконструкций в Гатчине (до 2023 года — ООО «Кингспан»); в апреле 2022 года перешел от ирландской Kingspan к местному менеджменту.",
+   "kpi": [
+    "Профиль",
+    "Автоматический"
+   ]
+  },
+  "g2ce6c3f9": {
+   "name": "АО «Промышленная группа «Метран»",
+   "ind": "Машиностроение",
+   "desc": "Челябинский производитель приборов для автоматизации производственных процессов; до 2023 года входил в американскую Emerson.",
    "kpi": [
     "Профиль",
     "Автоматический"

@@ -1684,9 +1684,11 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     for code, text in new_source_findings(card, comps, waived, records):
         if code not in checked:
             out.append((code, text))
+    # Карточка без поста (`no_post`: исторические сделки, сводимые партией)
+    # в канал не уходит — проверять строку поста у нее нечего.
     try:
-        text = format_post.render(card, base.get('companies') or {})
-        for p in check_post.check(text):
+        text = '' if card.get('no_post') else format_post.render(card, base.get('companies') or {})
+        for p in (check_post.check(text) if text else []):
             out.append(('post', 'пост: %s' % p))
     except Exception as e:  # пост, который не собирается, — тоже находка
         out.append(('post', 'пост не собирается: %s' % e))
