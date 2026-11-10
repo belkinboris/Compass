@@ -1087,8 +1087,14 @@ CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'p
 
 def _url_key(url):
     """Адрес без схемы, www и хвостового слеша: так сравниваются ссылки."""
-    u = re.sub(r'^https?://(?:www\.)?', '', str(url or '').strip().lower())
-    return u.split('#', 1)[0].rstrip('/')
+    u = re.sub(r'^https?://(?:www\.)?', '', str(url or '').strip().lower()).split('#', 1)[0]
+    # Метки перехода (`?from=copy_text`, `utm_*`, `%20tg`) — та же статья (10 ноября 2026: пять ложных
+    # «первоисточников» отличались от адреса в src только хвостом).
+    if '?' in u:
+        path, query = u.split('?', 1)
+        keep = [q for q in query.split('&') if q and not re.match(r'(utm_\w+|from|%20tg|tg|ref)(=|$)', q)]
+        u = path + ('?' + '&'.join(keep) if keep else '')
+    return u.rstrip('/')
 
 
 def aggregator_cited_missing(card, records=None):
