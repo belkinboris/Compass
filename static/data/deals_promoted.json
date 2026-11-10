@@ -273300,6 +273300,165 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g69b41d86",
+   "date": "2022",
+   "title": "«Хайв» (ВымпелКом) купил миноритарную долю в стартапе Knomary",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @alumnipartnerslawfirm",
+     "https://t.me/alumnipartnerslawfirm/422"
+    ],
+    [
+     "Kod.ru",
+     "https://kod.ru/beeline-invest-knomary"
+    ],
+    [
+     "Mobile-review.com",
+     "https://mobile-review.com/all/press_releases/bilajn-investiroval-v-knomary-belorusskogo-razrabotchika-reshenij-dlya-korporativnogo-obucheniya/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Хайв» — инвестиционная структура «ВымпелКома» (бренд «билайн»), созданная в 2022 году для вложений в технологические стартапы. Knomary — компания с офисами в Минске и Москве, основана в 2016 году; делает ПО для автоматизации обучения и развития сотрудников (дистанционная адаптация, курсы, учебный контент). Размер купленной доли и сумма сделки не раскрывались; сооснователь Knomary Евгений Селевич говорил, что инвестиция поможет быстрее выпускать новые модули продукта.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "Публично не сообщалось",
+    "adv": [
+     [
+      "Покупатель",
+      "ALUMNI Partners",
+      "Полное юридическое сопровождение сделки — команда партнера Антона Панченкова и старшего юриста Анастасии Кудряшовой"
+     ],
+     [
+      "Проект (роль в тексте не уточнена)",
+      "«Степановский, Папакуль и партнеры», Revera Legal",
+      "Белорусские юридические компании, упомянутые как участники сопровождения сделки"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "миноритарная доля в стартапе Knomary",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2022-12-22",
+     "title": "Сделка завершена",
+     "note": "ООО «Хайв» (дочерняя структура «ВымпелКома») купило миноритарную долю в Knomary; юридическое сопровождение покупателя обеспечила ALUMNI Partners, в проекте участвовали также белорусские юридические компании «Степановский, Папакуль и партнеры» и Revera Legal.",
+     "source": [
+      "Телеграм-канал @alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/422"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Хайв» (ВымпелКом)",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ],
+    "target": [
+     {
+      "value": "миноритарная доля в стартапе Knomary",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/alumnipartnerslawfirm/422"
+     }
+    ]
+   },
+   "buyer_id": "g1209e3c2",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавец (владелец доли до сделки) не назван ни в одном найденном источнике; из основателей упомянут только сооснователь Евгений Селевич, без доли и подтверждения, что продавал именно он — история участников не проверена через datanewton (предмет — белорусское ООО «Нomari Prodakshn», ЕГРЮЛ на нее не распространяется, а платный белорусский реестр egr.gov.by не открывали), искали иначе (см. searched)",
+     "target": "Knomary — белорусская компания (резидент ПВТ, УНП 192705530, Минск), не российское юрлицо: профиль с ИНН не заводим, ЕГРЮЛ по ней не ищут — проверяли через park.by (карточки резидента) и career.habr.com; состав учредителей не раскрыт ни там, ни в белорусском egr.gov.by (платный, не ходили)"
+    },
+    "searched": [
+     "Телеграм-канал @alumnipartnerslawfirm/422 (первоисточник, прочитан целиком)",
+     "kod.ru, 20-22.12.2022 (kod.ru/beeline-invest-knomary)",
+     "mobile-review.com, 23.12.2022 (пресс-релиз, тот же факт)",
+     "WebSearch: Knomary founder / основатель / CEO",
+     "park.by — карточки резидента ПВТ (Knomary Production, Knomary Software): юр. реквизиты без состава учредителей",
+     "career.habr.com/companies/knomary — нет данных о команде/учредителях"
+    ]
+   },
+   "buyer": "g1209e3c2",
+   "deep_researched": "2026-11-10",
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "accepted_hash": "c77db1c5cd98.01049a",
+   "second_read": "2026-11-10",
+   "second_read_hash": "c77db1c5cd98.01049a",
+   "shown_hash": "c77db1c5cd98.01049a",
+   "added": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "8b67870dba23"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44"
+    },
+    "date": {
+     "value": "2022",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "626ab3eaaa6d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "a190e308e004"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
