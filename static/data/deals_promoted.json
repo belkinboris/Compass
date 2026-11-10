@@ -259775,6 +259775,14 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/investments/news/2026/11/10/1244078-t-tehnologii-hotyat"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261110/tsian-2130672271.html"
+    ],
+    [
+     "Rusbase",
+     "https://rb.ru/news/t-tehnologii-nazvali-klyuchevoe-uslovie-vykupa-akcij-cian-poluchenie-polnogo-kontrolya-nad-onlajn-platformoj/"
     ]
    ],
    "from_ingest": true,
@@ -259875,6 +259883,16 @@
      "source": [
       "Ведомости",
       "https://www.vedomosti.ru/investments/articles/2026/11/09/1243517-t-tehnologii-gotovi-priobresti-tsian"
+     ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-11-10",
+     "title": "Переговоры",
+     "note": "«Т-Технологии» выкупят акции сервиса недвижимости «Циан» только в случае получения контроля над онлайн-платформой, сообщил журналистам во время телеконференции финансовый директор компании Игорь Герасимов. Группа объявила о намерении выкупить до 100% акций…",
+     "source": [
+      "Rusbase",
+      "https://rb.ru/news/t-tehnologii-nazvali-klyuchevoe-uslovie-vykupa-akcij-cian-poluchenie-polnogo-kontrolya-nad-onlajn-platformoj/"
      ]
     }
    ],
@@ -260021,7 +260039,7 @@
     "date": {
      "value": "2026-11-06",
      "meaning": "announcement",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "9d5d65f2941d",
      "meaning_variants": [
       "announcement"
@@ -260047,7 +260065,8 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "nature": {
      "control_change": true,
