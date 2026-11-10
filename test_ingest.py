@@ -11293,3 +11293,24 @@ def test_9nov_every_card_added_since_october_3_passed_acceptance(base):
     missing = [d["id"] for d in base["deals"] if str(d.get("added") or "") >= "2026-10-03"
                and not d.get("accepted") and d["id"] not in NOT_ACCEPTED_LEGACY]
     assert not missing, "в базе без приемки (accept_card.py): %s" % missing
+
+
+def test_aggregator_cited_primary_link_is_kept_and_required():
+    """«Медприбор» (gb89d3a84, 10 ноября 2026): заметка mergers.ru пересказывала
+    «Коммерсантъ» со ссылкой в тексте, а карточка и пост вышли со ссылкой на
+    mergers. Ссылка из абзаца заметки сохраняется (`cites`), меню и реклама — нет;
+    приемка не пускает карточку, пока первоисточник не стоит в src."""
+    import fetch_article_texts as fat
+    page = ('<div class="menu"><a href="https://investfunds.ru/indexes/1/">Индекс</a></div>'
+            '<p>Как стало известно «<a href="https://www.kommersant.ru/doc/9092327" target="_blank">'
+            'Коммерсанту</a>», сделка прошла осенью. <a href="https://t.me/x/1">tg</a> '
+            '<a href="https://mergers.ru/news/other">своя</a></p>')
+    assert fat.cited_links(page, "https://mergers.ru/news/a-1") == ["https://www.kommersant.ru/doc/9092327"]
+    agg = "https://mergers.ru/news/a-1"
+    recs = [{"url": agg, "title": "", "summary": "", "cites": ["https://www.kommersant.ru/doc/9092327"]}]
+    card = {"id": "t", "title": "АО «Медприбор» купило долю в ООО «ВТС»", "status": "Закрыта",
+            "date": "2026", "src": [["Mergers.ru", agg]]}
+    assert "aggregator_cites_primary" in _codes_9nov(card, recs)
+    fixed = dict(card, src=[["Коммерсантъ", "https://kommersant.ru/doc/9092327/"]],
+                 discovery_src=[["Mergers.ru", agg]])
+    assert "aggregator_cites_primary" not in _codes_9nov(fixed, recs)

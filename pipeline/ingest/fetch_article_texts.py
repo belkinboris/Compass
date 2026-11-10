@@ -45,6 +45,8 @@ RAW = os.path.join(ROOT, 'data', 'inbox', 'raw')
 
 sys.path.insert(0, HERE)
 from strip_comments import cut_comment_text, strip_comment_html  # noqa: E402
+sys.path.insert(0, os.path.dirname(HERE))
+from source_names import is_aggregator  # noqa: E402
 
 
 def article_text(raw_html):
@@ -61,6 +63,40 @@ def article_text(raw_html):
     # Класс «comments» на обертке всей страницы срезал бы и статью: тогда
     # остается только отрез хвоста по словам (ярус 2).
     return text if len(text) > 200 else plain(raw_html)
+
+
+# ПЕРВОИСТОЧНИК ЗА АГРЕГАТОРОМ (владелец, 10 ноября 2026, «Медприбор»
+# gb89d3a84: «статья mergers отсылает на статью коммерсанта… ты плохо читаешь
+# статью и не видишь, что там важный источник отмечен»). Заметка агрегатора
+# часто пересказывает чужую статью и ставит на нее ссылку прямо в тексте
+# («Как стало известно „Коммерсанту“»). Текст без разметки эту ссылку теряет,
+# поэтому адреса из абзацев заметки сохраняются в записи (`cites`) и
+# скачиваются вместе с ней, а приемка (`accept_card`, aggregator_cites_primary)
+# не пускает карточку, пока процитированный первоисточник не стоит в `src`.
+CITE_SKIP_HOSTS = ('t.me', 'telegram.me', 'vk.com', 'ok.ru', 'twitter.com', 'x.com', 'facebook.com',
+                   'youtube.com', 'dzen.ru', 'zen.yandex.ru', 'yandex.ru', 'google.com', 'apple.com',
+                   'instagram.com', 'linkedin.com', 'wa.me')
+
+
+def cited_links(raw_html, page_url):
+    """Адреса, на которые заметка ссылается В ТЕКСТЕ (внутри абзацев <p>):
+    чужие сайты, не соцсети и не главная страница. Меню, реклама и счетчики
+    стоят вне абзацев и сюда не попадают."""
+    from source_names import host_of, is_undesirable
+    own = host_of(page_url)
+    out = []
+    for para in re.findall(r'<p\b[^>]*>(.*?)</p>', raw_html, re.S | re.I):
+        for href in re.findall(r'href="(https?://[^"#]+)"', para, re.I):
+            href = html_lib.unescape(href).strip()
+            host = host_of(href)
+            path = urlsplit(href).path.strip('/')
+            if not host or host == own or not path or is_undesirable(href):
+                continue
+            if any(host == h or host.endswith('.' + h) for h in CITE_SKIP_HOSTS):
+                continue
+            if href not in out:
+                out.append(href)
+    return out
 
 
 TG_POST_RE = re.compile(r'^https://t\.me/([^/s][^/]*)/(\d+)/?$')
@@ -150,7 +186,11 @@ def fetch_and_store(targets, write=True):
     skip = already_fetched()
     out = os.path.join(RAW, '%s-articles.jsonl' % date.today().isoformat())
     records, failed = [], 0
-    for label, url, title in targets:
+    targets = list(targets)
+    i = 0
+    while i < len(targets):
+        label, url, title = targets[i]
+        i += 1
         if url in skip:
             print('  УЖЕ ЕСТЬ  %s %s' % (label, url))
             continue
@@ -183,8 +223,16 @@ def fetch_and_store(targets, write=True):
             print('  НЕ ЗАБРАН %s %s (%s)' % (label, url, e))
             failed += 1
             continue
-        records.append({'url': url, 'title': title, 'summary': text})
+        rec = {'url': url, 'title': title, 'summary': text}
+        if not tg and is_aggregator(url):
+            cites = cited_links(body, url)
+            if cites:
+                rec['cites'] = cites
+                targets += [('первоисточник агрегатора', c, title) for c in cites]
+        records.append(rec)
         print('  ЗАБРАН    %s %s (%d знаков)' % (label, url, len(text)))
+        for c in rec.get('cites') or []:
+            print('            ссылается на %s' % c)
     if write and records:
         os.makedirs(RAW, exist_ok=True)
         with open(out, 'a', encoding='utf-8') as f:
