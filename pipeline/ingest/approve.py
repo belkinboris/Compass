@@ -159,7 +159,7 @@ def hours_pending(card, now):
 # потребляет и НЕ трактует. Смешение ролей уже стреляло: старый код считал
 # «любой не-approve вердикт» придержанием, и post_no придержал бы карточку.
 CARD_VERDICTS = {'approve', 'hold', 'discard'}
-POST_VERDICTS = {'post_yes', 'post_no'}
+POST_VERDICTS = {'post_yes', 'post_no', 'post_hold'}   # post_hold — пост придержан (10 ноября 2026)
 RAW_VERDICTS = {'take', 'drop'}
 ORPHAN_MAX_DAYS = 7                     # решение по сырью без черновика дольше этого — устарело
 
@@ -495,10 +495,14 @@ def main(write=False):
         if post and post['verdict'] == 'post_yes':
             deal['post_approved'] = True
             deal.pop('no_post', None)
+            deal.pop('post_held', None)
             if post.get('channels'):
                 deal['post_channels'] = list(post['channels'])
+        elif post and post['verdict'] == 'post_hold' and not deal.get('post_approved'):
+            deal['post_held'] = True
         elif post and post['verdict'] == 'post_no' and not deal.get('post_approved'):
             deal['no_post'] = True
+            deal.pop('post_held', None)
     fresh = []
     for card, override, _why in publish:
         assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
@@ -523,6 +527,9 @@ def main(write=False):
             {'verdict': card['post_verdict']} if card.get('post_verdict') else None)
         if post and post['verdict'] == 'post_no':
             clean['no_post'] = True
+        # «✋ Придержать пост»: карточка выходит, пост ждет в «Что придержано».
+        if post and post['verdict'] == 'post_hold':
+            clean['post_held'] = True
         # ПОСТ — ТОЛЬКО ПО КНОПКЕ (владелец, 3 ноября 2026: «без кнопки
         # никогда»): одобрение карточки выпускает только карточку; пост ждет
         # «📣 Пост в канал» (или текста владельца в ответ на проект поста).

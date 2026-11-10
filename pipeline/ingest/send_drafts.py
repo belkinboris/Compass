@@ -241,11 +241,12 @@ def raw_message(draft):
 
 def card_keyboard(card):
     return {'inline_keyboard': [[
+        # «Придержать» у карточки не нужно (владелец, 10 ноября 2026: «сразу понятно, хотим ли мы
+        # такое на сайт или нет») — придерживают пост, его кнопка под проектом поста.
         {'text': '✅ Опубликовать', 'callback_data': 'mod:%s:ok' % card['id']},
-        {'text': '✋ Придержать', 'callback_data': 'mod:%s:hold' % card['id']},
+        {'text': '🗑 Выкинуть', 'callback_data': 'mod:%s:discard' % card['id']},
     ], [
         {'text': '✏️ Изменить', 'callback_data': 'mod:%s:edit' % card['id']},
-        {'text': '🗑 Выкинуть', 'callback_data': 'mod:%s:discard' % card['id']},
     ]]}
 
 
@@ -258,6 +259,10 @@ def post_keyboard(card):
         # вторым рядом, иначе на телефоне подписи обрезаются.
         {'text': '🏠 Только недвижимость', 'callback_data': 'mod:%s:post_realty' % card['id']},
         {'text': '📰 Только основной', 'callback_data': 'mod:%s:post_main' % card['id']},
+    ], [
+        # Придержать ПОСТ (владелец, 10 ноября 2026): карточка выходит на сайт, пост ждет в
+        # «✋ Что придержано» — вдруг утром будут сделки круче; оттуда — одной кнопкой.
+        {'text': '✋ Придержать пост', 'callback_data': 'mod:%s:post_hold' % card['id']},
     ]]}
 
 

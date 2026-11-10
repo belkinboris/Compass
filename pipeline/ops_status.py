@@ -596,8 +596,20 @@ def queue_counts(path=PENDING):
     except (OSError, ValueError):
         return None
     counts = state_counts(cards)
-    return (counts['shown'], counts['held'],
+    return (counts['shown'], counts['held'] + held_posts_count(),
             sum(counts[s] for s in _readiness().WAITING_INTAKE))
+
+
+def held_posts_count(path=None):
+    """Посты, придержанные кнопкой «✋ Придержать пост» (10 ноября 2026): карточка на
+    сайте, пост ждет в «Что придержано» — кнопка отчета должна их показывать."""
+    path = path or os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
+    try:
+        base = json.load(open(path, encoding='utf-8'))
+    except (OSError, ValueError):
+        return 0
+    posted = base.get('telegram_posts') or {}
+    return sum(1 for d in base.get('deals') or [] if d.get('post_held') and not posted.get(d.get('id')))
 
 
 def state_counts(cards):
