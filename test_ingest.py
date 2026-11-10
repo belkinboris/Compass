@@ -11342,3 +11342,22 @@ def test_unsent_report_trusts_the_site_memory(monkeypatch, tmp_path):
     monkeypatch.setattr(ops_status, "is_unsent", lambda c: True)
     monkeypatch.setattr(ops_status, "_site_shown_ids", lambda: {"a"})
     assert ops_status.unsent_cards(str(p)) == [("b", "B")]
+
+
+def test_post_keyboard_has_channel_buttons_and_approve_reads_them():
+    """Карандаш снят; кнопки канала — вторым рядом. Решение `post_realty` для всех
+    читателей — одобрение поста, канал едет в `channels` и попадает в `post_channels`."""
+    import send_drafts, approve
+    sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
+    import channels
+    kb = send_drafts.post_keyboard({"id": "g1"})["inline_keyboard"]
+    datas = [b["callback_data"] for row in kb for b in row]
+    assert datas == ["mod:g1:post_ok", "mod:g1:post_no", "mod:g1:post_realty", "mod:g1:post_main"]
+    assert not any(b["text"].startswith("✏") for row in kb for b in row)
+    out = approve.normalize_channels([{"deal_id": "g1", "verdict": "post_realty"},
+                                      {"deal_id": "g2", "verdict": "post_main"}, {"deal_id": "g3", "verdict": "post_yes"}])
+    assert [(d["verdict"], d.get("channels")) for d in out] == [("post_yes", ["realty"]), ("post_yes", ["main"]),
+                                                               ("post_yes", None)]
+    big_realty = {"ind": "Недвижимость", "status": "Закрыта", "sum": "5 млрд ₽"}
+    assert channels.channels_for(dict(big_realty, post_channels=["realty"])) == ("realty",)
+    assert channels.channels_for(dict(big_realty, post_channels=["main"])) == ("main",)

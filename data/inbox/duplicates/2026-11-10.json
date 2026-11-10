@@ -104,6 +104,99 @@
     "needs_review": true
    },
    "queued": "2026-11-10"
+  },
+  {
+   "key": "https://krasrab.ru/news/finansy/60082::g3755c36c",
+   "candidate_id": "g3755c36c",
+   "reason": "общие редкие слова: миллио, почти, рублей",
+   "draft": {
+    "draft_id": "d79905662",
+    "title": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и получил 5 лет колонии",
+    "date": "2026-11-10",
+    "src": [
+     [
+      "web:krasrab.ru",
+      "https://krasrab.ru/news/finansy/60082"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
+    "asset": "5 лет колонии",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
+     "asset": "5 лет колонии",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
+  },
+  {
+   "key": "https://www.rbc.ru/rbcfreenews/6af1f47592fca89cd54c1825::ge6c78cb5",
+   "candidate_id": "ge6c78cb5",
+   "reason": "общие слова заголовка: 5",
+   "draft": {
+    "draft_id": "d12770683",
+    "title": "Предприятия ОЭЗ Москвы вложили в экономику столицы почти 656 млрд руб.",
+    "date": "2026-11-10",
+    "src": [
+     [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6af1f47592fca89cd54c1825"
+     ]
+    ],
+    "sum": "656 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Предприятия ОЭЗ Москвы",
+    "asset": "экономика столицы почти 656 млрд руб.",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Предприятия ОЭЗ Москвы",
+     "asset": "экономика столицы почти 656 млрд руб.",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
+  },
+  {
+   "key": "https://rb.ru/news/servis-kiksheringa-yurent-vlozhil-706-mln-v-bezopasnost-elektrosamokatov-999-poezdok-proshli-bez-proisshestvij/::gc64703e2",
+   "candidate_id": "gc64703e2",
+   "reason": "по всей базе: та же сторона и редкое слово: кикшер",
+   "draft": {
+    "draft_id": "d44600673",
+    "title": "Сервис кикшеринга Юрент вложил 706 млн ₽ в безопасность электросамокатов — 99,9% поездок прошли без происшествий",
+    "date": "2026-11-10",
+    "src": [
+     [
+      "web:rb.ru",
+      "https://rb.ru/news/servis-kiksheringa-yurent-vlozhil-706-mln-v-bezopasnost-elektrosamokatov-999-poezdok-proshli-bez-proisshestvij/"
+     ]
+    ],
+    "sum": "706 млн ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Сервис кикшеринга Юрент",
+    "asset": "безопасность электросамокатов — 99,9% поездок прошли без происшествий",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Сервис кикшеринга Юрент",
+     "asset": "безопасность электросамокатов — 99,9% поездок прошли без происшествий",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
   }
  ]
 }
