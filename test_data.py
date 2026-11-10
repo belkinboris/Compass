@@ -2322,3 +2322,18 @@ def test_decree520_list_keeps_only_items_in_force():
     gone = {("372-рп", "30")} | {("357-рп", n) for n in ("10", "22", "25", "39", "44")}
     assert not items & gone
     assert len(items) == len(lst["entries"]) == 233
+
+
+SUM_THOUSANDS_MLN = re.compile(r"(?<![\d,–-])\d{1,3}[\s ]\d{3}(?:,\d+)?\s*млн")
+
+
+def test_sum_over_billion_in_mlrd(deals):
+    """Сумма от миллиарда — в миллиардах: «2,5 млрд ₽», не «2 500 млн ₽».
+
+    Владелец, 10 ноября 2026, карточка VK/«Р7» (g075e9738): «что это за цена?».
+    Так же держит находка `sum_format` в `accept_card.py` (приемка и вычитка).
+    """
+    bad = [(d["id"], f, v) for d in deals
+           for f, v in (("sum", d.get("sum")), ("eco.sum", (d.get("eco") or {}).get("sum")))
+           if isinstance(v, str) and SUM_THOUSANDS_MLN.search(v)]
+    assert not bad, f"сумма от миллиарда в миллионах: {bad[:5]}"

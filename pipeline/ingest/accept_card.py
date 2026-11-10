@@ -1080,6 +1080,12 @@ FUND_LAUNCH = re.compile(r'\b(?:запусти\w*|созда\w*|объяви\w*|
 
 # Коды находок, которые читатель может закрыть причиной (`checked`): их
 # признак — текст статьи, и он изредка ошибается (замеры — в known_issues/card.md).
+SUM_THOUSANDS_MLN = re.compile(r'(?<![\d,–-])\d{1,3}[\s\u00a0]\d{3}(?:,\d+)?\s*млн')
+# «Половину проекта», «треть здания» — часть объекта, не доля в капитале: ловится только
+# словесная доля перед «акций / доли / капитала / пакета».
+WORD_SHARE_TITLE = re.compile(r'(?i)(?<![\w])(четверть|половин[ауы]|треть[юи]?)\s+'
+                              r'(акций|дол[ииейю]\w*|капитала|пакета|уставного)')
+
 CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
                  'auction_type', 'fund_status', 'aggregator_cites_primary')
@@ -1319,6 +1325,17 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s'
                         % (card.get('type'), card.get('status'),
                            title_standard.hint(card))))
+    # СУММА ОТ МИЛЛИАРДА — В МИЛЛИАРДАХ, ДОЛЯ В ЗАГОЛОВКЕ — ЧИСЛОМ (владелец, 10 ноября
+    # 2026, VK/«Р7» g075e9738: «что это название? что это за цена?» — было «Холдинг VK
+    # купил четверть акций «Р7»» и «2 500 млн ₽» после вычитки). Механика держит форму,
+    # чтобы читатель не пропускал ее второй раз.
+    for f, v in (('sum', card.get('sum')), ('eco.sum', (card.get('eco') or {}).get('sum'))):
+        if isinstance(v, str) and SUM_THOUSANDS_MLN.search(v):
+            out.append(('sum_format', '%s «%s»: сумма от миллиарда пишется в миллиардах — '
+                        '«2,5 млрд ₽», а не «2 500 млн ₽» (docs/card_money.md)' % (f, v)))
+    if WORD_SHARE_TITLE.search(str(card.get('title') or '')):
+        out.append(('title_word_share', 'доля в заголовке словом («четверть», «половина», «треть») — '
+                    'пишется числом из поля доли: «купил 25% «Р7»» (docs/card_title.md)'))
     for role, (text_field, id_field) in ROLES.items():
         text = card.get(text_field)
         linked = card.get(id_field) or (role == 'target' and card.get('asset_id'))
