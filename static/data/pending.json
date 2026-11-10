@@ -408,7 +408,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-10T09:22:32+00:00",
    "buyer_id": "g1209e3c2",
    "accepted_notes": {
     "no_profile": {
@@ -431,7 +431,9 @@
    "accepted": "2026-11-10",
    "accepted_hash": "c77db1c5cd98.01049a",
    "second_read": "2026-11-10",
-   "second_read_hash": "c77db1c5cd98.01049a"
+   "second_read_hash": "c77db1c5cd98.01049a",
+   "draft_sent": true,
+   "shown_hash": "c77db1c5cd98.01049a"
   },
   {
    "id": "g5e31a7f2",
@@ -1725,7 +1727,10 @@
    "accepted": "2026-11-10",
    "accepted_hash": "556ac7a2cbc4.ace5bd",
    "second_read": "2026-11-10",
-   "second_read_hash": "556ac7a2cbc4.ace5bd"
+   "second_read_hash": "556ac7a2cbc4.ace5bd",
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "<b>Москва выставила на торги три помещения в Южном Медведкове</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> Департамент городского имущества Москвы\n<b>Предмет:</b> Три нежилых помещения на Полярной улице в Южном Медведкове\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abnews.ru/center/news/msk/2026/11/10/v-rajone-yuzhnoe-medvedkovo-vystavili-na-torgi-tri-pomeshheniya\">abnews.ru</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g47b0f86b\">карточке сделки</a>\n"
   },
   {
    "id": "g0966b2e2",
