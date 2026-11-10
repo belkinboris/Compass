@@ -681,7 +681,8 @@ def source_records():
             except (ValueError, OSError):
                 continue
             out += [{'url': str(r.get('url') or ''), 'title': str(r.get('title') or ''),
-                     'summary': str(r.get('summary') or ''), 'published': str(r.get('published') or '')}
+                     'summary': str(r.get('summary') or ''), 'published': str(r.get('published') or ''),
+                     'cites': [str(c) for c in (r.get('cites') or []) if c]}
                     for r in recs if isinstance(r, dict) and r.get('url')]
     return out
 
@@ -1081,12 +1082,45 @@ FUND_LAUNCH = re.compile(r'\b(?:запусти\w*|созда\w*|объяви\w*|
 # признак — текст статьи, и он изредка ошибается (замеры — в known_issues/card.md).
 CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
-                 'auction_type', 'fund_status')
+                 'auction_type', 'fund_status', 'aggregator_cites_primary')
+
+
+def _url_key(url):
+    """Адрес без схемы, www и хвостового слеша: так сравниваются ссылки."""
+    u = re.sub(r'^https?://(?:www\.)?', '', str(url or '').strip().lower())
+    return u.split('#', 1)[0].rstrip('/')
+
+
+def aggregator_cited_missing(card, records=None):
+    """Адреса, на которые ссылается заметка агрегатора этой карточки (поле
+    `cites` записи сырья, его пишет fetch_article_texts), а в `src` карточки их
+    нет. Агрегатор пересказал чужую статью — читателю показываем ее, а не
+    пересказ (владелец, 10 ноября 2026, «Медприбор» gb89d3a84)."""
+    pairs = list(card.get('src') or []) + list(card.get('discovery_src') or [])
+    aggs = {_url_key(s[1]) for s in pairs if isinstance(s, (list, tuple)) and len(s) > 1
+            and source_names.is_aggregator(s[1])}
+    if not aggs:
+        return []
+    have = {_url_key(s[1]) for s in (card.get('src') or []) if isinstance(s, (list, tuple)) and len(s) > 1}
+    out = []
+    for r in _resolve_records(records):
+        if _url_key(r.get('url')) in aggs:
+            for c in r.get('cites') or []:
+                if _url_key(c) not in have and c not in out and not source_names.is_undesirable(c):
+                    out.append(c)
+    return out
 
 
 def new_source_findings(card, comps, waived=None, records=None):
     """[(код, текст)] — находки короткой проверки 9 ноября 2026 (без учета `checked`)."""
     out = []
+    cited = aggregator_cited_missing(card, records)
+    if cited:
+        out.append(('aggregator_cites_primary',
+                    'заметка агрегатора пересказывает чужую статью и ссылается на нее: %s — это первоисточник: '
+                    'скачайте (fetch_article_texts.py <адрес> --write), прочитайте и поставьте первым в src, '
+                    'факты дополните из него; агрегатор уйдет в discovery_src (docs/card_reading.md)'
+                    % ', '.join(cited[:3])))
     dt = date_not_in_sources(card, records)
     if dt:
         out.append(('date_not_in_source',
