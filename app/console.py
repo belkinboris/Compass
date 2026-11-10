@@ -1151,8 +1151,22 @@ def _held_posts() -> list:
     return [d for d in base.get("deals") or [] if d.get("post_held") and not posted.get(d.get("id"))]
 
 
-def _send_held_posts(chat_id, deals, thread_kw) -> None:
-    """Каждый придержанный пост — проектом поста с кнопками выпуска."""
+def _waiting_posts() -> list:
+    """Посты карточек на сайте, показанные владельцу и ждущие кнопки (то же условие,
+    что `pipeline/ops_status.waiting_posts`): решения о посте нет, пост не вышел,
+    сделка свежая, карточка вышла не раньше недели назад."""
+    since = (datetime.utcnow() - timedelta(days=7)).date().isoformat()
+    base = base_data.promoted() or {}
+    posted = base.get("telegram_posts") or {}
+    sd = _send_drafts_module()
+    return [d for d in base.get("deals") or []
+            if str(d.get("added") or "") >= since and not posted.get(d.get("id"))
+            and not (d.get("post_approved") or d.get("no_post") or d.get("post_held") or d.get("post_override"))
+            and sd.goes_to_channel(d)]
+
+
+def _send_held_posts(chat_id, deals, thread_kw, hold_button=False) -> None:
+    """Каждый придержанный (или ждущий ответа) пост — проектом поста с кнопками выпуска."""
     sd = _send_drafts_module()
     comps = (base_data.promoted() or {}).get("companies") or {}
     answered = _answered_decisions()
@@ -1163,6 +1177,8 @@ def _send_held_posts(chat_id, deals, thread_kw) -> None:
                  {"text": "🔕 Без поста", "callback_data": "mod:%s:post_no" % did}],
                 [{"text": "🏠 Только недвижимость", "callback_data": "mod:%s:post_realty" % did},
                  {"text": "📰 Только основной", "callback_data": "mod:%s:post_main" % did}]]
+        if hold_button:
+            keys.append([{"text": "✋ Придержать пост", "callback_data": "mod:%s:post_hold" % did}])
         if did in answered:
             text += "\n\n%s — ваше решение записано, применится при ближайшей публикации." \
                     % html_escape(_VERDICT_LABEL.get(answered[did], answered[did]))
@@ -1208,7 +1224,11 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         # Нажатое, но еще не примененное решение — не повод показывать то же
         # сырье снова (28 октября 2026: «я вроде на все ответил, почему 13?»).
         items = [d for d in all_items if str(d.get("draft_id")) not in answered]
-        already = len(all_items) - len(items)
+        # Только новости, которые владельцу ПРИСЫЛАЛИ с вопросом «сделка или нет»
+        # (владелец, 10 ноября 2026): остальное сырье решает рутина сама.
+        sent = set(state.get("raw_sent_titles") or {})
+        items = [d for d in items if str(d.get("draft_id")) in sent]
+        already = len([d for d in all_items if str(d.get("draft_id")) in sent]) - len(items)
         # ПРОЧИТАННАЯ И ОТВЕРГНУТАЯ КАРТОЧКА — ТОЖЕ СОМНИТЕЛЬНАЯ (21 сентября
         # 2026, вопрос владельца: «а разве она не должна оказаться в
         # сомнительных тогда?»). Приемка (accept_card.py) читает источник и у
@@ -1216,13 +1236,13 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         # такая карточка попадала в блок «ждут прочтения», хотя ждать ей
         # нечего: ее уже прочитали. Показываем ее там, где человек решает
         # судьбу сомнительного, — рядом с сырьем, которое не прошло ворота.
-        doubted = [c for c in (core._read_json("static/data/pending.json", {}).get("cards") or [])
-                   if _card_state(c) == "doubted"]
+        # Прочитанные и не принятые карточки решает рутина притока, владельцу их
+        # больше не носим (10 ноября 2026).
+        doubted = []
         already += sum(1 for c in doubted if str(c.get("id")) in answered)
         items = items + [c for c in doubted if str(c.get("id")) not in answered]
-        head = ("⚠️ <b>Сомнительные: %d</b>\n"
-                "Новости, которые не прошли ворота, и карточки, которые прочитали "
-                "и не приняли. Без вашего слова не публикуются никогда."
+        head = ("⚠️ <b>Новости без вашего ответа: %d</b>\n"
+                "Мы присылали их с вопросом «сделка или нет». Без вашего слова не публикуются."
                 % len(items))
         if already:
             head += ("\n\nЕще %d вы уже решили — решения записаны и применятся при "
@@ -1231,6 +1251,7 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         answered = _answered_decisions()
         pending = core._read_json("static/data/pending.json", {}).get("cards") or []
         not_held = [c for c in pending if not c.get("held")]
+        held_posts, waiting = [], []
         if kind == "held":
             items = [c for c in pending if c.get("held")]
             held_posts = _held_posts()
@@ -1258,16 +1279,18 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             # владельцу впервые именно отсюда — как «выйдут сами», хотя сами
             # выйти не могли и на подтверждение не приходили.
             items = [c for c in not_held if _card_state(c) == "shown"]
-            head = ("⏳ <b>Выйдут сами: %d</b>\nЕсли ничего не нажимать — опубликуются "
-                    "в течение суток." % len(items))
+            waiting = _waiting_posts()
+            head = ("🗂 <b>Вы еще не ответили: карточек %d, постов %d</b>\nКарточка без ответа "
+                    "выйдет на сайт через сутки после показа, пост без кнопки не выйдет."
+                    % (len(items), len(waiting)))
 
     thread_kw = {"message_thread_id": thread} if thread else {}
     notification_service.tg_api("sendMessage", chat_id=chat_id, text=head,
                                 parse_mode="HTML", disable_web_page_preview=True, **thread_kw)
-    if kind == "held" and held_posts:
-        _send_held_posts(chat_id, held_posts, thread_kw)
-        if not items:
-            return len(held_posts)
+    extra_posts = held_posts if kind == "held" else (waiting if kind == "soon" else [])
+    if extra_posts and not items:
+        _send_held_posts(chat_id, extra_posts, thread_kw, hold_button=(kind == "soon"))
+        return len(extra_posts)
     if not items:
         notification_service.tg_api("sendMessage", chat_id=chat_id,
                                     text="Сейчас пусто — решать нечего.", **thread_kw)
@@ -1361,6 +1384,9 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             disable_web_page_preview=True,
             **({"reply_markup": {"inline_keyboard": keys}} if keys else {}), **thread_kw)
 
+    if extra_posts:
+        # Посты (придержанные или ждущие кнопки) — после карточек.
+        _send_held_posts(chat_id, extra_posts, thread_kw, hold_button=(kind == "soon"))
     if len(items) > len(shown):
         # Умолчавший предел читается как «это все» — называем его вслух.
         notification_service.tg_api(

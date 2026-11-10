@@ -481,9 +481,9 @@ def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_p
     args.inbox = str(tmp_path / "no-inbox")
     text, kb = ops_status.build(args)
     assert "1 карточку вы придержали" in text and "5 карточек" not in text, text
-    # Сомнительные (проверку не прошли) — строкой с числом и кнопкой (9 октября 2026).
-    assert "⚠️ Сомнительных: 1 — новости и карточки" in text, text
-    assert kb["inline_keyboard"][-1][0]["callback_data"] == "show:raw"
+    # Сомнительные карточки (приемка не пропустила) решает рутина притока — владельцу
+    # в отчет только присланные ему и неотвеченные новости (10 ноября 2026).
+    assert "Сомнительных" not in text and "Новостей без вашего ответа" not in text, text
 
 
 def test_joint_venture_post_names_participants_not_a_buyer():
@@ -6153,9 +6153,9 @@ def test_ops_status_writes_human_russian_with_correct_plurals():
     """Партнер читает «6 карточек», а не «6 карточка»: склонение — часть
     понятности, а не украшение."""
     assert "1 карточка выйдут" not in ops_status.render_publish(nothing=True, soon=1)
-    assert "карточка" in ops_status.render_publish(nothing=True, soon=1)
-    assert "карточки" in ops_status.render_publish(nothing=True, soon=3)
-    assert "карточек" in ops_status.render_publish(nothing=True, soon=6)
+    assert "1 проект карточки" in ops_status.render_publish(nothing=True, soon=1)
+    assert "3 проекта карточек" in ops_status.render_publish(nothing=True, soon=3)
+    assert "6 проектов карточек" in ops_status.render_publish(nothing=True, soon=6)
     # 1633 -> «новости» (оканчивается на 3), 1635 -> «новостей», 11 -> «новостей»
     # (11–14 — исключение, несмотря на последнюю цифру).
     assert "1633 новости" in ops_status.render_intake(looked=1633)
@@ -6181,7 +6181,7 @@ def test_ops_status_offers_buttons_only_when_there_is_something_to_show():
     # «Ждет прочтения» — третья, отдельная причина ждать (не «скоро выйдет»,
     # не «придержано человеком») — своя кнопка между ними.
     kb3 = ops_status.queue_keyboard(6, 4, 2)["inline_keyboard"][0]
-    assert [b["callback_data"] for b in kb3] == ["show:soon", "show:unread", "show:held"]
+    assert [b["callback_data"] for b in kb3] == ["show:soon", "show:held"]  # очередь притока — не владельцу
 
 
 def test_site_answers_the_queue_buttons():
@@ -9564,8 +9564,8 @@ def test_card_waiting_for_second_reading_is_a_queue_not_a_failure(tmp_path):
     args.inbox = str(tmp_path / "no-inbox")
     text, _kb = ops_status.build(args)
     assert "⛔ Сбой: 1 карточка" in text and "#/preview/gbad" in text and "Готова, не показана" in text, text
-    assert "1 карточка ждут прочтения, второго чтения или приемки" in text, text
-    assert "1 карточка выйдет сама" in ops_status.render_publish(nothing=True, soon=1)
+    assert "прочтения" not in text, text   # очередь притока владельцу не выносится (10 ноября 2026)
+    assert "1 проект карточки" in ops_status.render_publish(nothing=True, soon=1)
 
 
 def test_stale_raw_decision_without_a_draft_is_remembered_and_consumed(tmp_path, monkeypatch, capsys):
@@ -11011,7 +11011,8 @@ def test_doubted_count_skips_raw_decided_by_title_and_batch_duplicates(tmp_path)
               {'draft_id': 'd3', 'title': 'Новость В', 'dup_in_batch': True},
               {'draft_id': 'd4', 'title': 'Новость Г'}]            # ждет человека
     (inbox / 'hold' / '2026-11-08.json').write_text(json.dumps({'drafts': drafts}, ensure_ascii=False))
-    state = {'decided_raw': {'d1': 'drop'}, 'raw_titles': {promote.raw_key('Новость Б (повтор)'): 'drop'}}
+    state = {'decided_raw': {'d1': 'drop'}, 'raw_titles': {promote.raw_key('Новость Б (повтор)'): 'drop'},
+             'raw_sent_titles': {'d1': 'Новость А', 'd2': 'Новость Б (повтор)', 'd3': 'Новость В', 'd4': 'Новость Г'}}
     (inbox / 'moderation_state.json').write_text(json.dumps(state, ensure_ascii=False))
     pending = tmp_path / 'pending.json'; pending.write_text('{"cards": []}')
     assert ops_status.doubted_count(str(pending), str(inbox)) == 1
