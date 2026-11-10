@@ -76678,7 +76678,8 @@
      "multiple_text": "target_unconfirmed"
     }
    },
-   "gate_baseline_hash": "01ae32bf5867.b515c5"
+   "gate_baseline_hash": "01ae32bf5867.b515c5",
+   "separate_transaction_reviewed": true
   },
   {
    "id": "ge0f7b957",
@@ -255852,7 +255853,8 @@
    "reread": "2026-11-09",
    "reread_hash": "8c589a20400f.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "separate_transaction_reviewed": true
   },
   {
    "date": "2023-10-10",

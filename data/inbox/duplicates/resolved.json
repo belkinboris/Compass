@@ -308,5 +308,25 @@
   "verdict": "enrich",
   "candidate_id": "gd0a21a58",
   "day": "2026-11-09"
+ },
+ "https://rb.ru/news/servis-kiksheringa-yurent-vlozhil-706-mln-v-bezopasnost-elektrosamokatov-999-poezdok-proshli-bez-proisshestvij/::gc64703e2": {
+  "verdict": "same_fact",
+  "candidate_id": "gc64703e2",
+  "day": "2026-11-10"
+ },
+ "https://t.me/kkmpconnect/404::gb9fdfce4": {
+  "verdict": "same_fact",
+  "candidate_id": "gb9fdfce4",
+  "day": "2026-11-10"
+ },
+ "https://t.me/alumnipartnerslawfirm/128::ge361bfa8": {
+  "verdict": "separate",
+  "candidate_id": "ge361bfa8",
+  "day": "2026-11-10"
+ },
+ "https://t.me/BIRCHLEGAL/834::g1f402dc5": {
+  "verdict": "separate",
+  "candidate_id": "g1f402dc5",
+  "day": "2026-11-10"
  }
 }

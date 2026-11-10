@@ -543,63 +543,6 @@
    ]
   },
   {
-   "draft_id": "d63909183",
-   "title": "Anthropic отозвала разосланные банкам детали IPO почти на $70 млрд",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9093370"
-    ]
-   ],
-   "sum": "$70 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d86794213",
-   "title": "В Гонконге объем IPO с начала года достиг максимума за шесть лет",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1127981"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d67108543",
    "title": "В Челябинске продают завод за полмиллиарда. Фото",
    "date": "2026-11-10",
@@ -628,17 +571,73 @@
    ]
   },
   {
-   "draft_id": "d65463613",
-   "title": "В районе Южное Медведково выставили на торги три помещения",
+   "draft_id": "d38999051",
+   "title": "В Белоруссии в декабре пройдет 1-й раунд консультаций по Хартии многообразия",
    "date": "2026-11-10",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/10/v-rajone-yuzhnoe-medvedkovo-vystavili-na-torgi-tri-pomeshheniya"
+     "web:tass.ru",
+     "https://tass.ru/mezhdunarodnaya-panorama/28301727"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d95057989",
+   "title": "В Москве стартовал прием заявок на грант для бизнеса на покупку оборудования",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2198906/2026-11-10/v-moskve-startoval-priem-zaiavok-na-grant-dlia-biznesa-na-pokupku-oborudovaniia"
+    ]
+   ],
+   "sum": "8 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01448279",
+   "title": "Риелтор рассказал, где самые высокие налоги на покупку жилья иностранцами",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261110/nalogi-875059813.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -653,7 +652,119 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d04281362",
+   "title": "ФСК вышла из капитала управляющей компании «Комфорт»",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261110/fsk-2130473920.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87962697",
+   "title": "Арестованный недострой «Клевера» в Белгороде повторно выставили на торги за 126 млн рублей",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119111-arestovannyy-nedostroy-klevera-v-belgorode-povtorno-vystavili-na-torgi-za-126-mln-rubley/"
+    ]
+   ],
+   "sum": "126 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88160477",
+   "title": "Сеть кофеен HQ! coffee начала продавать кофе с бодрящими заголовками «Ленты.ру»",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/10/drip/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99045047",
+   "title": "В России в продаже появились новые кроссоверы Kia Sportage",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/10/v-rossii-v-prodazhe-poyavilis-novye-krossovery-kia-sportage/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
