@@ -305201,7 +305201,8 @@
   "g887ba980": null,
   "ga024ea1e": null,
   "g19f07141": null,
-  "gdc38f29c": null
+  "gdc38f29c": null,
+  "g93df6a58": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -305763,7 +305764,8 @@
   "g8b57089b": 65,
   "gfd435463": 66,
   "gde69fa27": 67,
-  "gaa5d4eb6": 68
+  "gaa5d4eb6": 68,
+  "g93df6a58": 69
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -311020,7 +311022,28 @@
      "kind": "closed"
     }
    ]
+  },
+  "g93df6a58": {
+   "sum": "700 млн ₽",
+   "buyer": "g2aba7ae9",
+   "seller": "ГК ФСК",
+   "target": "g54ecc168",
+   "asset": "50% долей в группе «Комфорт»",
+   "status": "Закрыта",
+   "title": "Группа «К+» купила оставшиеся 50% УК «Комфорт» у ГК ФСК",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-10T07:09:31+00:00"
+ "telegram_last_post_at": "2026-11-10T08:54:21+00:00"
 }
