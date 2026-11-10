@@ -1,0 +1,170 @@
+{
+ "items": [
+  {
+   "op": "create",
+   "key": "exit22_00",
+   "seller": "Halliburton",
+   "target": "российский бизнес Halliburton",
+   "buyer": "местный менеджмент (ООО «БурСервис»)",
+   "date_hint": "2022-09-09",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/82988/",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_04",
+   "seller": "TotalEnergies",
+   "target": "49% ООО «Тернефтегаз»",
+   "buyer": "«Новатэк»",
+   "date_hint": "2022-08-26 (подписана), закрытие 2022-09",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://uk.finance.yahoo.com/news/totalenergies-sell-russian-terneftegaz-stake-132614888.html",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_08",
+   "seller": "A.P. Moller-Maersk (APM Terminals)",
+   "target": "30,75% Global Ports Investments",
+   "buyer": "группа «Дело»",
+   "date_hint": "2022-09-13",
+   "amount_hint": "≈$135 млн (по отчету Maersk)",
+   "urls": [
+    "https://www.interfax.ru/business/861889",
+    "https://www.delo-group.com/news/816/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_12",
+   "seller": "Raisio",
+   "target": "ООО «Раисио Нутришн» (потребительский бизнес)",
+   "buyer": "Copacker Agro",
+   "date_hint": "2022-05-12",
+   "amount_hint": "≈€1,5 млн",
+   "urls": [
+    "https://news.cision.com/raisio-oyj/r/raisio-plc-s-consumer-business-in-russia-transferred-to-the-new-owner,c3566481",
+    "https://interfax.com/newsroom/top-stories/79090/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_16",
+   "seller": "Accenture",
+   "target": "российский бизнес Accenture (позже Axenix)",
+   "buyer": "российский менеджмент (Вартан Диланян)",
+   "date_hint": "2022-04",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.comnews.ru/content/219733/2022-04-12/2022-w15/biznes-accenture-rossii-polnostyu-peredan-rossiyskomu-rukovodstvu",
+    "https://www.interfax.ru/business/861726"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_20",
+   "seller": "Danfoss",
+   "target": "российский и белорусский бизнес (ООО «Ридан»)",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022-07-15 (подписана), деконсолидация 2022-08-31",
+   "amount_hint": "не раскрыта (списание €85 млн)",
+   "urls": [
+    "https://www.danfoss.com/en/about-danfoss/news/cf/danfoss-announces-local-management-buyout-of-its-russian-businesses/",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_24",
+   "seller": "Stora Enso",
+   "target": "лесопильные заводы в Неболчах и Импилахти и лесной бизнес",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022-04-25 (подписана), закрытие 2022",
+   "amount_hint": "не раскрыта (убыток ≈€130 млн)",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/78549/",
+    "https://www.storaenso.com/en/newsroom/regulatory-and-investor-releases/2022/4/stora-enso-divests-its-sawmills-and-forest-operations-in-russia"
+   ],
+   "note": "у нас есть только сделка по гофрозаводам (g3e6171f4)"
+  },
+  {
+   "op": "create",
+   "key": "exit22_28",
+   "seller": "Otis",
+   "target": "российский бизнес Otis (завод в Петербурге)",
+   "buyer": "Ice Development (S8 Capital)",
+   "date_hint": "2022-07-27",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/81685/",
+    "https://otisinvestors.com/news/news-details/2022/Otis-Sells-Its-Russia-Business-07-27-2022/default.aspx"
+   ],
+   "note": "у нас есть только перепродажа S8 → «Дом.РФ» 2026 (g3ecb7b86)"
+  },
+  {
+   "op": "create",
+   "key": "exit22_32",
+   "seller": "Hyve Group",
+   "target": "российский выставочный бизнес (ITE)",
+   "buyer": "Rise Expo Ltd",
+   "date_hint": "2022-05-13",
+   "amount_hint": "до £72 млн (earn-out на 10 лет)",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/77852/",
+    "https://www.marketscreener.com/quote/stock/HYVE-GROUP-PLC-4001832/news/Rise-Expo-Limited-completed-the-acquisition-of-Russian-Business-of-Hyve-Group-Plc-40751802/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_36",
+   "seller": "Kerry Group",
+   "target": "российская дочерняя компания",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; низкая уверенность"
+  },
+  {
+   "op": "create",
+   "key": "exit22_40",
+   "seller": "Soprano",
+   "target": "ООО «МИФ Россия»",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; мелкая сделка"
+  },
+  {
+   "op": "create",
+   "key": "exit22_44",
+   "seller": "Holcim",
+   "target": "ООО «Холсим (Рус)» — 4 цементных завода",
+   "buyer": "местный менеджмент («Цементум»)",
+   "date_hint": "2022-12-14 (подписана)",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/86101/",
+    "https://www.holcim.com/media/media-releases/holcim-russia-divestment"
+   ],
+   "note": "signed_2022: подписана в 2022, закрытие 2023"
+  }
+ ]
+}

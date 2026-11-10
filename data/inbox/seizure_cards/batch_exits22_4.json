@@ -1,0 +1,155 @@
+{
+ "items": [
+  {
+   "op": "create",
+   "key": "exit22_03",
+   "seller": "Equinor",
+   "target": "доли в 4 СП с «Роснефтью» и 30% Харьягинского СРП",
+   "buyer": "«Роснефть» (СП), «Зарубежнефть» (Харьяга)",
+   "date_hint": "2022-05-25 (СП), 2022-09-02 (Харьяга)",
+   "amount_hint": "не раскрыта (списание $1,1 млрд)",
+   "urls": [
+    "https://www.interfax.ru/business/839187",
+    "https://www.equinor.com/where-we-are/russia"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_07",
+   "seller": "SOK (S Group)",
+   "target": "три отеля Sokos в Петербурге",
+   "buyer": "Александр Ермаков и Юрий Шумаков (Awara IT, WONE)",
+   "date_hint": "2022-06-30",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.kommersant.ru/doc/5459061",
+    "https://www.dp.ru/a/2022/06/22/Prodazha_Sokos__otkritie_n2"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_11",
+   "seller": "Tchibo GmbH",
+   "target": "ООО «Чибо СНГ»",
+   "buyer": "ООО «МВК» (Михаил Ковалевский, бывший гендиректор)",
+   "date_hint": "2022-07",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.retail.ru/news/proizvoditel-kofe-tchibo-gmbh-ukhodit-iz-rf-12-avgusta-2022-219378",
+    "https://incrussia.ru/news/tchibo-prodal-rossijskij-biznes/"
+   ],
+   "note": "доля покупателя в залоге у Tchibo"
+  },
+  {
+   "op": "create",
+   "key": "exit22_15",
+   "seller": "L'Occitane International",
+   "target": "ООО «Л’Окситан Рус»",
+   "buyer": "топ-менеджеры (Ростислав Коваленко и др.)",
+   "date_hint": "2022-06",
+   "amount_hint": "€44,5 млн (по отчету, траншами с 2025)",
+   "urls": [
+    "https://www.vedomosti.ru/business/articles/2022/06/16/926989-loccitane-vikupil-top-menedzhment",
+    "https://adindex.ru/news/marketing/2022/06/17/304963.phtml"
+   ],
+   "note": "опцион обратного выкупа"
+  },
+  {
+   "op": "create",
+   "key": "exit22_19",
+   "seller": "Kantar",
+   "target": "20% Mediascope и российские активы Kantar",
+   "buyer": "менеджмент Mediascope",
+   "date_hint": "2022-09",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.vedomosti.ru/business/news/2022/10/05/944022-velikobritaniya-vishla-iz-edinogo-izmeritelya-tele--i-internet-auditorii",
+    "https://adindex.ru/news/media/2022/10/5/306940.phtml"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_23",
+   "seller": "DXC Technology (Luxoft)",
+   "target": "ООО «Люксофт Профешнл» и др. российские юрлица",
+   "buyer": "группа IBS («ИБС Ит Услуги»)",
+   "date_hint": "2022-04-20",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://zoom.cnews.ru/news/item/559437",
+    "https://habr.com/ru/articles/662461"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_27",
+   "seller": "Wärtsilä",
+   "target": "Transas Navigator и ООО «Вяртсиля Восток»",
+   "buyer": "местный менеджмент (V-Vostok)",
+   "date_hint": "2022-05/06, выход завершен 2022-07-21",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.wartsila.com/media/news/21-07-2022-wartsila-completes-russian-market-exit-3130664"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_31",
+   "seller": "Yum! Brands",
+   "target": "бизнес Pizza Hut в России",
+   "buyer": "ООО «Ной-М» (оператор Costa Coffee и TGI Friday's в России)",
+   "date_hint": "2022-05/07 (закрытие объявлено 2022-07-05)",
+   "amount_hint": "≈300 млн ₽",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/84245/",
+    "https://www.restaurantdive.com/news/Yum-Brands-sells-KFC-Russia-restaurants/634838/"
+   ],
+   "note": "у нас есть только последующая сделка по «Ной-М» 2025 (g38e5718e)"
+  },
+  {
+   "op": "create",
+   "key": "exit22_35",
+   "seller": "Kingspan",
+   "target": "российский бизнес",
+   "buyer": "не назван (продажа объявлена в марте 2022)",
+   "date_hint": "2022-03",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.irishtimes.com/business/transport-and-tourism/kingspan-sells-russian-business-while-kerry-suspends-activities-1.4844554"
+   ],
+   "note": "покупатель не назван; уточнить"
+  },
+  {
+   "op": "create",
+   "key": "exit22_39",
+   "seller": "Brunel International",
+   "target": "российский бизнес",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; мелкая сделка"
+  },
+  {
+   "op": "create",
+   "key": "exit22_43",
+   "seller": "Emerson",
+   "target": "ПГ «Метран» и ООО «Эмерсон»",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022-09-27 (подписана), разрешение 2023-02-21",
+   "amount_hint": "не раскрыта (убыток $162 млн)",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/83386/",
+    "https://ir.emerson.com/news-events/press-releases/detail/108/emerson-announces-agreement-to-divest-its-russia-business-to-local-management"
+   ],
+   "note": "signed_2022: подписана в 2022, закрыта в 2023"
+  }
+ ]
+}
