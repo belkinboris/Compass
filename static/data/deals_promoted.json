@@ -268055,6 +268055,602 @@
      "multiple_text": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g99f697c1",
+   "date": "2026",
+   "title": "«АГР Холдинг» купил бизнес-центр «Химки бизнес парк», бывший офис владельца ИКЕА",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9093249"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта (оценки аналитиков расходятся: 3–3,3 млрд ₽ — Николай Горюнов, IBC Real Estate; 3,3–4,6 млрд ₽ — Антон Калистратов, CMWP; 6,5–7 млрд ₽ — Екатерина Андреева, Bright Rich | CORFAC International)",
+    "share": "—",
+    "val": "—",
+    "target_fin": "По данным ГИР БО, выручка ООО «Химки бизнес парк» за 2025 год — 679,6 млн ₽ (за 2024 год — 615,2 млн ₽), чистая прибыль — 108,7 млн ₽ (за 2024 год — прибыль 250,8 млн ₽). Средняя численность работников за 2025 год — 21 человек (ЕГРЮЛ).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Шведская Ingka Centres — владелец сети ИКЕА и управляющая российскими торгово-развлекательными центрами «Мега» — решила уйти с российского рынка в 2022 году и начала распродавать активы. «Химки бизнес парк» перешел к «КЛС-Химки» в 2023 году, бенефициарами которой тогда стали Григорий Саакян и Аркадий Даниелян; передавал ли кто-то из них контроль «АГР Холдингу» сейчас, неизвестно.\n\n«АГР Холдинг» — структура AGR Automotive Group. В ее периметре — бывшие заводы Hyundai в Санкт-Петербурге и Volkswagen в Калуге, где выпускаются автомобили брендов Tenet, Solaris, Jeland, Esteo и Votour; продажи идут через отдельную сеть из 850 дилерских центров. По оценке «Автостата», холдинг занимал 24,4% российского рынка автопрома за январь—июль 2026 года. Кому принадлежит «АГР Холдинг», публично неизвестно; до 2022 года бизнесом управлял Андрей Павлович, занимавший тогда пост президента дилерской группы «Авилон».",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "В начале ноября 2026 года владельцем ООО «Химки бизнес парк» через ООО «КЛС Химки» и ООО «А-финанс» стало ООО «АГР Холдинг» — переход заметили по данным СПАРК, стороны о сделке не сообщали.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "ООО «Химки бизнес парк» — бизнес-центр площадью 42 тыс. кв. м на Ленинградской улице в Химках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026",
+     "title": "«АГР Холдинг» стал бенефициаром «Химки бизнес парк»",
+     "note": "Переход обнаружен «Коммерсантом» в базе СПАРК в начале ноября 2026 года; контроль получен через ООО «КЛС Химки» и ООО «А-финанс».",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9093249"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«АГР Холдинг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9093249"
+     }
+    ],
+    "target": [
+     {
+      "value": "бывшая штаб-квартира владельца IKEA в России",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9093249"
+     }
+    ]
+   },
+   "sum": "Не раскрыта (оценки аналитиков расходятся: 3–3,3 млрд ₽ — Николай Горюнов, IBC Real Estate; 3,3–4,6 млрд ₽ — Антон Калистратов, CMWP; 6,5–7 млрд ₽ — Екатерина Андреева, Bright Rich | CORFAC International)",
+   "reviewed": "2026-11-10",
+   "target": "gc90a815f",
+   "buyer": "ge861b78a",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Статья не называет, кто передал контроль над «КЛС-Химки» «АГР Холдингу» — сделку нашли по данным СПАРК, стороны не объявляли. Известно, что в 2023 году бенефициарами «КЛС-Химки» (владельца «Химки бизнес парк» до перехода) стали Григорий Саакян (99%) и Аркадий Даниелян (1%) — но WebSearch не подтвердил, что именно они (а не промежуточный владелец) продали долю в 2026 году. История участников ЕГРЮЛ (datanewton) не поднята: без ОГРН «КЛС-Химки» запрос history?attributes=OWNERS невозможен, а rusprofile/list-org/checko отсюда закрыты; прямого указания на продавца при добросовестном поиске не нашлось."
+    },
+    "no_inn": {
+     "buyer": "ООО «АГР Холдинг» — WebSearch по точному имени и по связке с AGR Automotive Group/Hyundai Санкт-Петербург/Volkswagen Калуга не дал ИНН; ЕГРЮЛ (egrul.nalog.ru, TLS-таймаут из песочницы) и rusprofile.ru (403) недоступны из песочницы; реквизиты холдинга не публикует и сам источник."
+    },
+    "searched": [
+     "WebFetch источника (Коммерсантъ) — полный текст статьи",
+     "WebSearch «ООО «Химки бизнес парк» ИНН СПАРК»",
+     "WebSearch «ООО «АГР Холдинг» ИНН СПАРК»",
+     "WebSearch «КЛС-Химки Саакян Даниелян» — история покупки 2023 года",
+     "WebSearch «АГР Холдинг AGR Automotive Group учредители»",
+     "ЕГРЮЛ (egrul.nalog.ru) и rusprofile.ru — недоступны из песочницы"
+    ]
+   },
+   "accepted": "2026-11-10",
+   "accepted_hash": "91f2574da312.8db7fc",
+   "second_read": "2026-11-10",
+   "second_read_hash": "91f2574da312.8db7fc",
+   "post_preview": "<b>«АГР Холдинг» купил бизнес-центр «Химки бизнес парк», бывший офис владельца ИКЕА</b>\n\n<b>Покупатель:</b> АГР Холдинг — структура AGR Automotive Group.\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> Химки бизнес парк — бизнес-центр площадью 42 тыс. кв. м на Ленинградской улице в Химках.\n<b>Сумма:</b> Не раскрыта (оценки аналитиков расходятся: 3–3,3 млрд ₽ — Николай Горюнов, IBC Real Estate; 3,3–4,6 млрд ₽ — Антон Калистратов, CMWP; 6,5–7 млрд ₽ — Екатерина Андреева, Bright Rich | CORFAC International)\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9093249\">Коммерсантъ</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g99f697c1\">карточке сделки</a>\n",
+   "added": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "eaa1adbd787d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "range",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "e93a2693aad5"
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d20c7bb0ee12"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "bf24506ffee9"
+    },
+    "target": {
+     "company_id": "gc90a815f",
+     "inn": "7728050401",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "4b47b43a0000"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g93df6a58",
+   "date": "2026-09-14",
+   "date_basis": "closing",
+   "title": "Группа «К+» купила оставшиеся 50% УК «Комфорт» у ГК ФСК",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "700 млн ₽",
+    "share": "У группы «К+» теперь 100% долей в «Комфорте» — выкупленная доля была последней, что оставалось у ГК ФСК.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "ГК ФСК владела половиной группы «Комфорт» с 2018 года и теперь полностью вышла из этого актива. Группа «Комфорт» — по собственным данным, одна из трех крупнейших частных компаний по управлению жилыми домами: портфель — свыше 5,5 млн кв. м (около 400 объектов) в Москве, Московской и Калужской областях.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "До сделки доли в группе «Комфорт» делили пополам ГК ФСК и группа «К+»; «К+» выкупила долю ФСК и стала единственным владельцем компании.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "700 млн ₽",
+   "seller": "ГК ФСК",
+   "asset": "50% долей в группе «Комфорт»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-09-14",
+     "title": "Группа «К+» консолидировала 100% группы «Комфорт»",
+     "note": "Сделка закрыта 14 сентября 2026 года по данным СПАРК-Интерфакса; сумма — 700 млн ₽.",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "ГК ФСК",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Группа «К+»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+     }
+    ],
+    "target": [
+     {
+      "value": "50% долей в группе «Комфорт»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d04654277",
+    "title": "ГК ФСК вышла из капитала одной из крупнейших в Московском регионе УК"
+   },
+   "themes": [
+    "Консолидация доли"
+   ],
+   "reviewed": "2026-11-10",
+   "seller_id": "g9da3df10",
+   "target": "g54ecc168",
+   "buyer": "g2aba7ae9",
+   "discovery_src": [
+    [
+     "dealsma (Telegram)",
+     "https://t.me/dealsma/7558"
+    ]
+   ],
+   "accepted_notes": {
+    "no_inn": {
+     "target": "WebSearch по «ООО «Комфорт» управляющая компания Москва ИНН СПАРК» дал несколько похожих, но не точно совпадающих юрлиц (А101-Комфорт, УК «Комфорт» с прекращенной лицензией, СП «Комфорт» в Щербинке) — ни одно не подтверждено как управляющая компания из статьи; ЕГРЮЛ/rusprofile недоступны из песочницы.",
+     "buyer": "WebSearch по «группа «К+» управляющая компания недвижимость ИНН учредители» точного совпадения не дал; ЕГРЮЛ/rusprofile недоступны из песочницы, статья реквизитов не называет."
+    },
+    "searched": [
+     "WebFetch источника (Ведомости) — открытая часть статьи",
+     "Telegram-сообщение dealsma/7558 — полный текст с деталями портфеля",
+     "WebSearch «ООО «Комфорт» управляющая компания Москва ИНН СПАРК»",
+     "WebSearch «группа «К+» управляющая компания недвижимость ИНН учредители»",
+     "deals_promoted.json и pending.json — поиск «Комфорт»/ФСК на дубли",
+     "ЕГРЮЛ (egrul.nalog.ru) и rusprofile.ru — недоступны из песочницы"
+    ]
+   },
+   "accepted": "2026-11-10",
+   "accepted_hash": "898768b284c9.db3a3a",
+   "second_read": "2026-11-10",
+   "second_read_hash": "898768b284c9.db3a3a",
+   "post_preview": "<b>Группа «К+» купила оставшиеся 50% УК «Комфорт» у ГК ФСК</b>\n\n<b>Покупатель:</b> К+ — группа компаний в сфере управления недвижимостью.\n<b>Продавец:</b> ФСК\n<b>Предмет:</b> Комфорт — группа компаний по управлению жилой недвижимостью.\n<b>Сумма:</b> 700 млн ₽\n<b>Статус:</b> Закрыта · сентябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala\">Ведомости</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g93df6a58\">карточке сделки</a>\n",
+   "added": "2026-11-10",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": 50.0,
+     "basis": "rule",
+     "card_hash": "d4abe90601da"
+    },
+    "price": {
+     "value_rub": 700000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "9d1da756cda1"
+    },
+    "date": {
+     "value": "2026-09-14",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "d831e870f0d4"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "e830a306aacc"
+    },
+    "target": {
+     "company_id": "g54ecc168",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "bd5d6d8712af"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_read",
+     "top_purchases": "price_not_read",
+     "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "g1953287c",
+   "date": "2026-11-05",
+   "date_basis": "closing",
+   "title": "Hefei Hengyi купил 49% КСБ, дочерней компании «Соллерса»",
+   "ind": "Автопром",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9093216"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "49% получила Hefei Hengyi, 49% осталось у «Соллерса», 2% — у Павла Ячникова, замгендиректора «Джак Автомобиля»",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "По словам «Соллерса», партнерство нужно для развития линейки электронных модулей и блоков управления для автомобилей — сделка должна обеспечить передачу в Россию ноу-хау и прав на интеллектуальную собственность.",
+    "context": "Hefei Hengyi International Trade — китайская компания, предположительно связанная с автоконцерном JAC. Сделка выглядит как обмен технологии на долю. Дополнительные условия «Соллерс» не раскрыл, а связаться с Hefei Hengyi не удалось.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "5 ноября 2026 года доля «Соллерса» в ООО «Компоненты системы безопасности» сократилась до 49% — остальное получили Hefei Hengyi (49%) и Павел Ячников (2%).",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта",
+   "seller_src": "text",
+   "asset": "ООО «Компоненты системы безопасности» (КСБ)",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-05",
+     "title": "Hefei Hengyi вошла в капитал КСБ",
+     "note": "Доля «Соллерса» в КСБ сократилась до 49%; Hefei Hengyi получила 49%, Павел Ячников — 2%.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9093216"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Hefei Hengyi International Trade",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.kommersant.ru/doc/9093216"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d19876251",
+    "title": "Компания из КНР вошла в проект «Соллерса» по выпуску автокомпонентов"
+   },
+   "reviewed": "2026-11-10",
+   "target": "g0aa64318",
+   "buyer": "g5dbfa2ca",
+   "accepted_notes": {
+    "no_inn": {
+     "target": "WebSearch по «ООО «Компоненты системы безопасности» Соллерс ИНН СПАРК КСБ» точного совпадения не дал; ЕГРЮЛ/rusprofile недоступны из песочницы.",
+     "buyer": "Hefei Hengyi International Trade — иностранная (китайская) компания, ИНН не применим; реквизиты в статье не названы, связаться с компанией журналистам не удалось."
+    },
+    "searched": [
+     "WebFetch источника (Коммерсантъ) — полный текст статьи",
+     "WebSearch «ООО «Компоненты системы безопасности» Соллерс ИНН СПАРК»",
+     "WebSearch «Hefei Hengyi International Trade JAC»",
+     "deals_promoted.json и pending.json — поиск «Соллерс»/КСБ на дубли",
+     "ЕГРЮЛ (egrul.nalog.ru) и rusprofile.ru — недоступны из песочницы"
+    ]
+   },
+   "accepted": "2026-11-10",
+   "accepted_hash": "652bc6f6ee19.62a37f",
+   "second_read": "2026-11-10",
+   "second_read_hash": "652bc6f6ee19.62a37f",
+   "post_preview": "<b>Hefei Hengyi купил 49% КСБ, дочерней компании «Соллерса»</b>\n\n<b>Инвестор:</b> Hefei Hengyi International Trade — китайская торговая компания, предположительно связанная с автоконцерном JAC.\n<b>Предмет:</b> Компоненты системы безопасности — ООО «Компоненты системы безопасности» (КСБ) — дочернее предприятие «Соллерса», выпускает автокомпоненты.\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Автопром\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9093216\">Коммерсантъ</a>\n\n#промышленность #автопром #инвестиции\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g1953287c\">карточке сделки</a>\n",
+   "added": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "8f2dabe18d7d"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c5a00ea28944"
+    },
+    "date": {
+     "value": "2026-11-05",
+     "meaning": "closing",
+     "basis": "rule",
+     "card_hash": "db29d483d7ed"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "4b3aba2eecef"
+    },
+    "target": {
+     "company_id": "g0aa64318",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "e7bb62085c9d"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   }
+  },
+  {
+   "id": "gc23d4f64",
+   "date": "2026",
+   "date_basis": "publication",
+   "title": "«Форум-Групп» купил здание ресторанов «Райсан» и «Лариса Ивановна» в Екатеринбурге",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "e1.ru",
+     "https://www.e1.ru/text/realty/2026/11/10/76748043/"
+    ],
+    [
+     "e1.ru",
+     "https://www.e1.ru/text/realty/2026/10/29/76731166/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта (оценка — 0,83–1,25 млрд ₽)",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Здание снесут — на его месте может появиться дом бизнес-класса почти на 300 квартир с паркингом.",
+    "context": "Здание принадлежало Алексею Харитонову, владельцу издательства «Абак-Пресс»: офисы издательства тоже находились здесь, а на этих же площадях работали рестораны «Райсан» и «Лариса Ивановна». Дом стоит напротив клубного дома «Тихвин»; площадь участка под самим зданием — 0,6 гектара.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "Не раскрыта (оценка — 0,83–1,25 млрд ₽)",
+   "asset": "Здание на улице Радищева, 23 в Екатеринбурге",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026",
+     "title": "«Форум-Групп» купил здание на Радищева, 23",
+     "note": "Сумму сделки оценили в 830 млн — 1,25 млрд ₽; зданию прочат снос.",
+     "source": [
+      "e1.ru",
+      "https://www.e1.ru/text/realty/2026/11/10/76748043/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "АО «Форум-Групп»",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://www.e1.ru/text/realty/2026/11/10/76748043/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Алексей Харитонов",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.e1.ru/text/realty/2026/10/29/76731166/"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d24538571",
+    "title": "Тоже под снос? В Екатеринбурге застройщик выкупил здание в элитном квартале"
+   },
+   "reviewed": "2026-11-10",
+   "buyer": "g32edbd29",
+   "accepted_notes": {
+    "no_profile": {
+     "target": "Предмет — конкретное здание (Радищева, 23), а не юрлицо: отдельного юрлица-владельца объекта статьи не называют, искать нечего.",
+     "seller": "Алексей Харитонов — физическое лицо, владелец издательства «Абак-Пресс»; профиль физлицу не заводится. История участников ЕГРЮЛ (datanewton) не поднята отдельно — продавец уже назван по имени статьей, не нужно искать его через реестр."
+    },
+    "no_inn": {
+     "buyer": "WebSearch по «Форум-Групп» Екатеринбург застройщик ИНН учредители» точного ИНН самого АО «Форум-Групп» не дал (нашлись только связанные СЗ-компании бренда «Форум»); ЕГРЮЛ/rusprofile недоступны из песочницы."
+    },
+    "searched": [
+     "WebFetch источника от 10.11.2026 (e1.ru) и прямая выгрузка HTML для разбора абзацев",
+     "Вторая статья e1.ru от 29.10.2026 — нашлась через ссылку в первой статье, назвала продавца и площадь участка",
+     "WebSearch «Форум-Групп Екатеринбург застройщик ИНН учредители»",
+     "WebSearch «Радищева 23 Екатеринбург здание собственник ресторан Райсан»",
+     "deals_promoted.json и pending.json — поиск «Форум-Групп»/Радищева/Харитонов на дубли",
+     "ЕГРЮЛ (egrul.nalog.ru) и rusprofile.ru — недоступны из песочницы"
+    ]
+   },
+   "accepted": "2026-11-10",
+   "accepted_hash": "1c7eefd2a872.eab523",
+   "seller": "Алексей Харитонов",
+   "second_read": "2026-11-10",
+   "second_read_hash": "1c7eefd2a872.eab523",
+   "post_preview": "<b>«Форум-Групп» купил здание ресторанов «Райсан» и «Лариса Ивановна» в Екатеринбурге</b>\n\n<b>Покупатель:</b> Форум-Групп — застройщик в Екатеринбурге; управляющая компания группы специализированных застройщиков под брендом «Форум».\n<b>Продавец:</b> Алексей Харитонов\n<b>Предмет:</b> Здание на улице Радищева, 23 в Екатеринбурге\n<b>Сумма:</b> Не раскрыта (оценка — 0,83–1,25 млрд ₽)\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.e1.ru/text/realty/2026/11/10/76748043/\">e1.ru</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gc23d4f64\">карточке сделки</a>\n",
+   "added": "2026-11-10",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "2c4d567c520e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "range",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "d1c28ad8745c"
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "publication",
+     "basis": "rule",
+     "card_hash": "3211a90cec16"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "ebe35ab74bd2"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target"
+    }
+   }
   }
  ],
  "companies": {
