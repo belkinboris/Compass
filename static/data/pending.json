@@ -1878,6 +1878,70 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Росимущество снова выставило на торги недострой «Клевера» в Белгороде за 126 млн ₽</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> Росимущество\n<b>Предмет:</b> Недостроенное нежилое здание площадью 5538,5 кв. м на проспекте Богдана Хмельницкого, 4, в Белгороде (готовность 32%)\n<b>Начальная цена лота:</b> 126,14 млн ₽ (стартовая цена)\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/119111-arestovannyy-nedostroy-klevera-v-belgorode-povtorno-vystavili-na-torgi-za-126-mln-rubley/\">Абирег</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g519fa06e\">карточке сделки</a>\n"
+  },
+  {
+   "id": "gb14c2bae",
+   "date": "2026-11-10",
+   "title": "Китай выкупил российского производителя автокомпонентов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/10/kupili/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Китай",
+   "asset": "российский производитель автокомпонентов",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-10",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/10/kupili/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Китай",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/10/kupili/"
+     }
+    ],
+    "target": [
+     {
+      "value": "российский производитель автокомпонентов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/10/kupili/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T09:53:15+00:00"
   }
  ]
 }
