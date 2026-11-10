@@ -320,7 +320,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         # add / stage / other — кнопки предложения «к карточке … добавить»
         # (pipeline/ingest/card_news.py, 6 ноября 2026): номер — номер новости,
         # применяет approve.py. Старые take/drop под сырьем работают как раньше.
-        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|post_realty|post_main|take|drop|edit|add|stage|other)$",
+        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|post_realty|post_main|post_hold|take|drop|edit|add|stage|other)$",
                          str(callback.get("data") or ""))
         if match and match.group(2) == "edit" and _is_reviewer(from_id):
             # «Изменить» — не вердикт, а подсказка, как продиктовать правку:
@@ -338,10 +338,10 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                        # Пост только в один канал (владелец, 10 ноября 2026: «Форум-Групп» —
                        # «опубликовать только в недвижимость, без основного»): то же одобрение
                        # поста, канал применяет approve.py (`post_channels` карточки).
-                       "post_realty": "post_realty", "post_main": "post_main",
+                       "post_realty": "post_realty", "post_main": "post_main", "post_hold": "post_hold",
                        "post_no": "post_no", "take": "take", "drop": "drop",
                        "add": "card_add", "stage": "card_stage", "other": "card_other"}[match.group(2)]
-            if verdict in ("approve", "hold", "discard", "post_yes", "post_no", "post_realty", "post_main") \
+            if verdict in ("approve", "hold", "discard", "post_yes", "post_no", "post_realty", "post_main", "post_hold") \
                     and _already_on_site(match.group(1)):
                 if callback.get("id"):
                     notification_service.tg_api("answerCallbackQuery", callback_query_id=callback["id"],
@@ -929,7 +929,7 @@ BOT_HELP = (
     "Каждое утро платформа просматривает новости и присылает сюда найденные "
     "сделки — проект поста, черновик карточки и кнопки под ними.\n\n"
     "• <b>✅ Опубликовать</b> — сделка выйдет на сайт и в канал\n"
-    "• <b>✋ Придержать</b> — останется ждать, пока вы не решите\n"
+    "• <b>✋ Придержать пост</b> — карточка выйдет на сайт, пост подождет в «Что придержано»\n"
     "• <b>🗑 Выкинуть</b> — не наша тема, больше не покажем\n"
     "• Просто <b>ответьте своим текстом</b> — им заменится текст поста\n\n"
     "Если промолчать сутки — сделка выйдет как есть. Сомнительные новости "
@@ -1141,6 +1141,42 @@ def _card_state(card: dict) -> str:
     return readiness.state(card)
 
 
+def _held_posts() -> list:
+    """Карточки на сайте, чей пост придержан кнопкой «✋ Придержать пост»
+    (владелец, 10 ноября 2026: «мы можем не захотеть опубликовать карточку
+    утром… если не будет хороших сделок — войти в „придержано" и по одной
+    кнопке опубликовать пост»). Пост вышел — уже не придержан."""
+    base = base_data.promoted() or {}
+    posted = base.get("telegram_posts") or {}
+    return [d for d in base.get("deals") or [] if d.get("post_held") and not posted.get(d.get("id"))]
+
+
+def _send_held_posts(chat_id, deals, thread_kw) -> None:
+    """Каждый придержанный пост — проектом поста с кнопками выпуска."""
+    sd = _send_drafts_module()
+    comps = (base_data.promoted() or {}).get("companies") or {}
+    answered = _answered_decisions()
+    for deal in deals[:BATCH_LIMIT]:
+        did = str(deal.get("id"))
+        text = sd.post_message_text(deal, comps)
+        keys = [[{"text": "📣 Пост в канал", "callback_data": "mod:%s:post_ok" % did},
+                 {"text": "🔕 Без поста", "callback_data": "mod:%s:post_no" % did}],
+                [{"text": "🏠 Только недвижимость", "callback_data": "mod:%s:post_realty" % did},
+                 {"text": "📰 Только основной", "callback_data": "mod:%s:post_main" % did}]]
+        if did in answered:
+            text += "\n\n%s — ваше решение записано, применится при ближайшей публикации." \
+                    % html_escape(_VERDICT_LABEL.get(answered[did], answered[did]))
+            keys = None
+        r = notification_service.tg_api("sendMessage", chat_id=chat_id, text=text, parse_mode="HTML",
+                                        disable_web_page_preview=True,
+                                        **({"reply_markup": {"inline_keyboard": keys}} if keys else {}),
+                                        **thread_kw)
+        if not (r and r.get("ok")):
+            notification_service.tg_api("sendMessage", chat_id=chat_id, text=re.sub(r"<[^>]+>", "", text),
+                                        **({"reply_markup": {"inline_keyboard": keys}} if keys else {}),
+                                        **thread_kw)
+
+
 def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
     """Прислать карточки очереди — каждую своим сообщением с кнопками.
 
@@ -1197,8 +1233,9 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
         not_held = [c for c in pending if not c.get("held")]
         if kind == "held":
             items = [c for c in pending if c.get("held")]
-            head = ("✋ <b>Вы придержали: %d</b>\nВыйдут только после «Опубликовать»."
-                    % len(items))
+            held_posts = _held_posts()
+            head = ("✋ <b>Придержано: карточек %d, постов %d</b>\nКарточки выйдут после «Опубликовать», "
+                    "посты — после «📣 Пост в канал» (или кнопки канала)." % (len(items), len(held_posts)))
         elif kind == "unread":
             # Приемка (11 сентября 2026): прочитанная, но не принятая карточка
             # по молчанию тоже не выходит (approve.plan_actions) — и обещать
@@ -1227,6 +1264,10 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
     thread_kw = {"message_thread_id": thread} if thread else {}
     notification_service.tg_api("sendMessage", chat_id=chat_id, text=head,
                                 parse_mode="HTML", disable_web_page_preview=True, **thread_kw)
+    if kind == "held" and held_posts:
+        _send_held_posts(chat_id, held_posts, thread_kw)
+        if not items:
+            return len(held_posts)
     if not items:
         notification_service.tg_api("sendMessage", chat_id=chat_id,
                                     text="Сейчас пусто — решать нечего.", **thread_kw)
@@ -1306,10 +1347,10 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
                 keys = [[{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
                          {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
             else:
+                # «Придержать» у карточки снято (владелец, 10 ноября 2026) — придерживают пост.
                 keys = [[{"text": "✅ Опубликовать", "callback_data": "mod:%s:ok" % ident},
-                         {"text": "✋ Придержать", "callback_data": "mod:%s:hold" % ident}],
-                        [{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident},
-                         {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}]]
+                         {"text": "🗑 Выкинуть", "callback_data": "mod:%s:discard" % ident}],
+                        [{"text": "✏️ Изменить", "callback_data": "mod:%s:edit" % ident}]]
             if ident in answered:
                 # Решение уже нажато и ждет рутину — кнопки второй раз не нужны.
                 text += "\n\n%s — ваше решение записано, применится при ближайшей публикации." \
@@ -1381,6 +1422,11 @@ def _queue_report() -> str:
         lines.append("✋ Придержано вами: %d" % len(held))
         for card in held[:5]:
             lines.append("• %s" % str(card.get("title") or "")[:90])
+    held_posts = _held_posts()
+    if held_posts:
+        lines.append("✋ Придержанных постов: %d" % len(held_posts))
+        for deal in held_posts[:5]:
+            lines.append("• %s" % str(deal.get("title") or "")[:90])
 
     state = core._read_json("data/inbox/moderation_state.json", {})
     decided = set((state.get("decided_raw") or {}))
@@ -1430,6 +1476,7 @@ _VERDICT_LABEL = {
     "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
     "post_realty": "🏠 Пост одобрен — только в «Компас - Недвижимость»",
     "post_main": "📰 Пост одобрен — только в основной канал",
+    "post_hold": "✋ Пост придержан — карточка выйдет на сайт, пост ждет в «Что придержано»",
     "take": "✅ Признана сделкой — уйдет в работу", "drop": "🗑 Отброшена как не-сделка",
     "card_add": "✅ Добавим в карточку",
     "card_stage": "📌 Запишем новым этапом сделки",

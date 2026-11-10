@@ -3479,7 +3479,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     # черновике (send_drafts.card_keyboard). Раньше /queue урезал до двух
     # (ok/discard для held, hold/discard для soon) — владелец 10 августа не
     # нашел кнопку «Опубликовать» у карточки, которая скоро выйдет сама.
-    assert data == ["mod:gh1:ok", "mod:gh1:hold", "mod:gh1:edit", "mod:gh1:discard"], data
+    assert data == ["mod:gh1:ok", "mod:gh1:discard", "mod:gh1:edit"], data  # «Придержать» у карточки снято 10 ноября 2026
     # Заголовок и факты видны прямо в сообщении — решать можно не открывая сайт.
     card_text = [kw["text"] for _m, kw in sent if "gh1" in kw.get("text", "")][0]
     assert "Придержанная сделка" in card_text and "1 млрд ₽" in card_text
@@ -3488,7 +3488,7 @@ def test_queue_buttons_send_actionable_cards_not_a_plain_list(monkeypatch, tmp_p
     main._send_queue_batch(-100, "soon")
     kb = [kw.get("reply_markup") for _m, kw in sent if kw.get("reply_markup")][0]
     data = [b["callback_data"] for row in kb["inline_keyboard"] for b in row]
-    assert data == ["mod:gs1:ok", "mod:gs1:hold", "mod:gs1:edit", "mod:gs1:discard"], data
+    assert data == ["mod:gs1:ok", "mod:gs1:discard", "mod:gs1:edit"], data  # «Придержать» у карточки снято 10 ноября 2026
 
 
 def test_unread_card_is_not_counted_as_soon(monkeypatch):
@@ -5400,3 +5400,26 @@ def test_post_channel_buttons_record_a_channel_choice(client, monkeypatch):
             if d["deal_id"] in ("gchanr", "gchanm")]
     assert {(r["deal_id"], r["verdict"]) for r in rows} == {("gchanr", "post_realty"), ("gchanm", "post_main")}
     client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [r["id"] for r in rows]})
+
+
+def test_held_post_waits_and_shows_in_held_list(client, monkeypatch):
+    """«✋ Придержать пост» (владелец, 10 ноября 2026): сайт принимает нажатие, а
+    придержанный пост карточки на сайте показывается в «Что придержано» с кнопками выпуска."""
+    _mod_env(monkeypatch)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p)) or {"ok": True})
+    client.post("/api/telegram/webhook/тайна", json={
+        "callback_query": {"id": "cb-h", "from": {"id": 222, "first_name": "Борис"}, "data": "mod:gheld1:post_hold",
+                            "message": {"message_id": 9, "chat": {"id": 222}, "text": "[пост gheld1] x"}}})
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] == "gheld1"]
+    assert [r["verdict"] for r in rows] == ["post_hold"]
+    client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [r["id"] for r in rows]})
+    from app import console
+    deal = {"id": "gheld1", "title": "Тест", "post_held": True, "ind": "ИТ", "status": "Закрыта", "src": []}
+    monkeypatch.setattr(console.base_data, "promoted", lambda: {"deals": [deal], "companies": {}, "telegram_posts": {}})
+    assert [d["id"] for d in console._held_posts()] == ["gheld1"]
+    sent.clear()
+    console._send_held_posts(1, [deal], {})
+    kb = [m for m, p in sent if m == "sendMessage" and p.get("reply_markup")]
+    assert kb, sent

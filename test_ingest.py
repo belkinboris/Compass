@@ -11352,7 +11352,9 @@ def test_post_keyboard_has_channel_buttons_and_approve_reads_them():
     import channels
     kb = send_drafts.post_keyboard({"id": "g1"})["inline_keyboard"]
     datas = [b["callback_data"] for row in kb for b in row]
-    assert datas == ["mod:g1:post_ok", "mod:g1:post_no", "mod:g1:post_realty", "mod:g1:post_main"]
+    assert datas == ["mod:g1:post_ok", "mod:g1:post_no", "mod:g1:post_realty", "mod:g1:post_main", "mod:g1:post_hold"]
+    card_datas = [b["callback_data"] for row in send_drafts.card_keyboard({"id": "g1"})["inline_keyboard"] for b in row]
+    assert "mod:g1:hold" not in card_datas and "mod:g1:ok" in card_datas
     assert not any(b["text"].startswith("✏") for row in kb for b in row)
     out = approve.normalize_channels([{"deal_id": "g1", "verdict": "post_realty"},
                                       {"deal_id": "g2", "verdict": "post_main"}, {"deal_id": "g3", "verdict": "post_yes"}])
