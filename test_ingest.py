@@ -11314,3 +11314,18 @@ def test_aggregator_cited_primary_link_is_kept_and_required():
     fixed = dict(card, src=[["Коммерсантъ", "https://kommersant.ru/doc/9092327/"]],
                  discovery_src=[["Mergers.ru", agg]])
     assert "aggregator_cites_primary" not in _codes_9nov(fixed, recs)
+
+
+def test_reread_asks_for_the_primary_source_behind_an_aggregator():
+    """Владелец, 10 ноября 2026: «добавь этот момент в серьезную проверку» — вычитка
+    (полная и короткая) спрашивает о первоисточнике, и находка про ссылку агрегатора
+    держит отметку."""
+    import reread_queue as rq
+    assert "primary_source" in rq.SOURCE_QUESTIONS and "primary_source" in rq.SHORT_GENERAL
+    assert "aggregator_cites_primary" in rq.BLOCKING and "aggregator_cites_primary" in rq.SHORT_BLOCKING
+    agg = "https://mergers.ru/news/x-1"
+    card = {"id": "t", "src": [["Mergers.ru", agg]]}
+    recs = [{"url": agg, "cites": ["https://www.interfax.ru/business/1"]}]
+    assert rq.primary_lines(card, recs) and "interfax.ru/business/1" in rq.primary_lines(card, recs)[0]
+    assert not rq.primary_lines(dict(card, src=[["Интерфакс", "https://interfax.ru/business/1"]],
+                                     discovery_src=[["Mergers.ru", agg]]), recs)

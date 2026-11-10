@@ -70,12 +70,19 @@ SOURCE_QUESTIONS = {
     'reader': 'Прочитайте карточку глазами читателя: у каждого предложения есть подлежащее, нет разговорного '
               '(«в минусе», «сам»), оценочного («теряет деньги») и пустого; разные темы контекста — отдельными абзацами?',
     'other_deal': 'В карточке нет фактов другой сделки — согласования, цены или участников предыдущей продажи актива?',
+    # Владелец, 10 ноября 2026 («Медприбор»: заметка mergers ссылалась на «Коммерсантъ», а в карточке и посте —
+    # mergers): «добавь этот момент в серьезную проверку, чтобы мы таким образом не упускали источники».
+    'primary_source': 'Источник карточки — первоисточник? Агрегатор (mergers.ru, @dealsma) или заметка, которая '
+                      'пересказывает другое издание («как стало известно „Коммерсанту“», «по данным РБК», ссылка в '
+                      'тексте) — открыта сама эта статья, стоит первой в src, факты сверены с ней; агрегатор — в '
+                      'discovery_src. Ссылки, которые заметка агрегатора дает в тексте, — в строке ПЕРВОИСТОЧНИК досье.',
 }
 # Находки приемки, с которыми отметка не ставится без причины в `ok_findings`:
 # смысловые и те, что видны читателю. Формальные (ИНН, профиль стороны,
 # строка поста) правятся своими шагами и отметку не держат.
 BLOCKING = ('title_standard', 'share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
-            'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants')
+            'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants',
+            'aggregator_cites_primary')
 
 
 # Короткая проверка (владелец, 9 ноября 2026: «пройдись короткой проверкой по 273
@@ -86,9 +93,9 @@ BLOCKING = ('title_standard', 'share_form', 'party_legal_form', 'plain_words', '
 # (`reread`), с `reread_scope: short` — полная вычитка такие карточки не берет.
 SHORT_FROM = '2026-10-03'
 SHORT_FIELDS = ('title', 'eco.sum', 'eco.share')
-SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers')
+SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers', 'primary_source')
 SHORT_BLOCKING = ('title_standard', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
-                  'parties_missing', 'jv_participants', 'party_legal_form')
+                  'parties_missing', 'jv_participants', 'party_legal_form', 'aggregator_cites_primary')
 SHORT_ADVISERS_Q = ('Консультанты (law.adv, eco.finadv): каждый подтвержден источником, у роли назван клиент '
                     '(или «одной из сторон», если ни один источник и устройство сделки его не дают)?')
 
@@ -155,6 +162,14 @@ def registry_lines(card, data, fetch=None):
     return out if len(out) > 1 else []
 
 
+def primary_lines(card, records=None):
+    """Строки досье: на какие статьи ссылается заметка агрегатора этой карточки,
+    а в src их нет (поле `cites` сырья, accept_card.aggregator_cited_missing)."""
+    import accept_card
+    return ['ПЕРВОИСТОЧНИК: заметка агрегатора ссылается на %s — открыть, поставить первой в src' % u
+            for u in accept_card.aggregator_cited_missing(card, records)]
+
+
 def _findings(card, data):
     """Находки приемки плюс стандарт заголовка. Приемка у опубликованной
     карточки заголовок не проверяет (переписывать вышедшее — не ее дело), а
@@ -181,6 +196,7 @@ def dossier(card, why, data):
     lines += ['  %s %s %s' % ('!' if c.split(':')[0] in BLOCKING else '-', c, t) for c, t in f]
     for s in signals(card, data):
         lines.append('ПОДСКАЗКА: ' + s)
+    lines += primary_lines(card)
     lines += registry_lines(card, data)
     lines.append(second_reading.questionnaire(card, data))
     lines.append('ВОПРОСЫ ПО СТАТЬЕ')
@@ -204,6 +220,7 @@ def short_dossier(card, data):
     lines += ['  src: %s' % ' '.join(str(x) for x in s) for s in card.get('src') or []]
     f = [x for x in _findings(card, data) if x[0].split(':')[0] in SHORT_BLOCKING]
     lines += ['  ! %s %s' % (c, t) for c, t in f]
+    lines += primary_lines(card)
     lines += registry_lines(card, data)
     q = dict(second_reading.GENERAL_QUESTIONS, **SOURCE_QUESTIONS, advisers=SHORT_ADVISERS_Q)
     lines += ['[%s] %s' % (k, q[k]) for k in SHORT_GENERAL]
