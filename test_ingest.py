@@ -11329,3 +11329,16 @@ def test_reread_asks_for_the_primary_source_behind_an_aggregator():
     assert rq.primary_lines(card, recs) and "interfax.ru/business/1" in rq.primary_lines(card, recs)[0]
     assert not rq.primary_lines(dict(card, src=[["Интерфакс", "https://interfax.ru/business/1"]],
                                      discovery_src=[["Mergers.ru", agg]]), recs)
+
+
+def test_unsent_report_trusts_the_site_memory(monkeypatch, tmp_path):
+    """10 ноября 2026: четыре карточки показал другой прогон, отметка в pending.json
+    этого чекаута не записалась — отчет публикации назвал их «⛔ Сбой». Сбой — только
+    то, чего не помнит и сайт."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import ops_status
+    p = tmp_path / "pending.json"
+    p.write_text(json.dumps({"cards": [{"id": "a", "title": "A"}, {"id": "b", "title": "B"}]}), encoding="utf-8")
+    monkeypatch.setattr(ops_status, "is_unsent", lambda c: True)
+    monkeypatch.setattr(ops_status, "_site_shown_ids", lambda: {"a"})
+    assert ops_status.unsent_cards(str(p)) == [("b", "B")]

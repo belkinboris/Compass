@@ -635,7 +635,25 @@ def unsent_cards(path=PENDING):
         cards = json.load(open(path, encoding='utf-8')).get('cards') or []
     except (OSError, ValueError):
         return []
-    return [(str(c.get('id') or ''), str(c.get('title') or '')) for c in cards if is_unsent(c)]
+    out = [(str(c.get('id') or ''), str(c.get('title') or '')) for c in cards if is_unsent(c)]
+    if out:
+        # Карточку мог показать другой прогон: сайт помнит показ, а отметка
+        # `draft_sent` в pending.json этого чекаута еще не записана (10 ноября
+        # 2026: четыре карточки, показанные в 10:00 МСК, отчет назвал «⛔ Сбой»).
+        # Сбой — только то, чего не помнит и сайт.
+        shown = _site_shown_ids()
+        out = [(cid, t) for cid, t in out if cid not in shown]
+    return out
+
+
+def _site_shown_ids():
+    """id карточек, которые сайт помнит показанными в консоли; пусто, если сайт не ответил."""
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ingest'))
+        import send_drafts
+        return set(((send_drafts.site_shown() or {}).get('cards') or {}).keys())
+    except Exception:
+        return set()
 
 
 def unsent_count(path=PENDING):
