@@ -310035,7 +310035,48 @@
   "ga024ea1e": null,
   "g19f07141": null,
   "gdc38f29c": null,
-  "g93df6a58": null
+  "g93df6a58": null,
+  "gc23d4f64": null,
+  "g5dffcb32": null,
+  "g67bced75": null,
+  "g7f1f9992": null,
+  "gbfd7c740": null,
+  "g8981b3fd": null,
+  "gdf6f72b9": null,
+  "g37be7b6a": null,
+  "g90a3128a": null,
+  "g0e9b1b92": null,
+  "g3b95a20e": null,
+  "g3766be95": null,
+  "gf0796603": null,
+  "g412a9a73": null,
+  "g9279acfb": null,
+  "gac8cfa76": null,
+  "g420af896": null,
+  "g02cbc362": null,
+  "g3ce61e68": null,
+  "g737b71a1": null,
+  "g6d218e37": null,
+  "g2fc45372": null,
+  "g7e3e7bfe": null,
+  "g8920a6dc": null,
+  "ge07b938e": null,
+  "gcf4012d3": null,
+  "g70c5c6f6": null,
+  "ga15bb063": null,
+  "g74c84c09": null,
+  "gdbe3527f": null,
+  "g2eb24828": null,
+  "g67e276e2": null,
+  "g01d717f8": null,
+  "gb594f326": null,
+  "gb6a9b674": null,
+  "g519084ea": null,
+  "g32d9b54f": null,
+  "g06fbafb6": null,
+  "gf1e49a26": null,
+  "g320f3f3f": null,
+  "g31b151e6": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -310598,7 +310639,8 @@
   "gfd435463": 66,
   "gde69fa27": 67,
   "gaa5d4eb6": 68,
-  "g93df6a58": 69
+  "g93df6a58": 69,
+  "gc23d4f64": 70
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -315876,7 +315918,27 @@
      "kind": "closed"
     }
    ]
+  },
+  "gc23d4f64": {
+   "sum": "Не раскрыта (оценка — 0,83–1,25 млрд ₽)",
+   "buyer": "g32edbd29",
+   "seller": "Алексей Харитонов",
+   "asset": "Здание на улице Радищева, 23 в Екатеринбурге",
+   "status": "Закрыта",
+   "title": "«Форум-Групп» купил здание ресторанов «Райсан» и «Лариса Ивановна» в Екатеринбурге",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-10T08:54:21+00:00"
+ "telegram_last_post_at": "2026-11-10T09:51:09+00:00"
 }
