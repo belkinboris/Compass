@@ -543,106 +543,30 @@
    ]
   },
   {
-   "draft_id": "d27996071",
-   "title": "В IBC Real Estate оценили риски инвестиций в складскую недвижимость",
+   "draft_id": "d84812279",
+   "title": "Создаваемая микроэлектронная корпорация может купить новую фабрику у знаменитого создателя мобильных чипов",
    "date": "2026-11-10",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261110/riski-875068436.html"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
     ]
    ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d93687248",
-   "title": "«Дом.РФ» выставил на торги крупную площадку под застройку в Ленобласти",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261110/lenoblast-2130558927.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7005cf1d (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d66804039",
-   "title": "Консультант предупредил о рисках инвестиций в складскую недвижимость",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261110/ekspert-2130554313.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d08551375",
-   "title": "Бывший радиоцентр в Ленобласти продают за 1,5 млрд рублей под застройку",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/"
-    ]
-   ],
-   "sum": "1,5 млрд ₽",
+   "sum": "170 млрд ₽",
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-10",
+     "title": "Переговоры",
+     "note": "В рамках создания «Объединенной микроэлектронной корпорации» рассматривается возможность приобрести фабрику «Элко», принадлежащую разработчику мобильных процессоров НПЦ «ЭЛВИС». Покупка намечена на 2027 год, на который в проекте стратегии предусмотрено 170…",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -651,54 +575,37 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Машиностроение",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d87244421",
-   "title": "Почти 100 земельно-имущественных аукционов провели в Подмосковье",
+   "draft_id": "d67822126",
+   "title": "Оператор карт «Мир» не планирует IPO в ближайшем будущем",
    "date": "2026-11-10",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261110/torgi-2130554570.html"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1128136"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10442760",
-   "title": "Объем IPO в Гонконге достиг $51,9 млрд и стал вторым за всю историю биржи",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/314819"
-    ]
-   ],
-   "sum": "$51,9 млрд",
    "type": "IPO",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-10",
+     "title": "Переговоры",
+     "note": "Национальная система платежных карт (НСПК, оператор карт \"Мир\"), не планирует IPO в ближайшем будущем, заявила глава департамента национальной платежной системы ЦБ Алла Бакина.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1128136"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -714,16 +621,16 @@
    ]
   },
   {
-   "draft_id": "d67374454",
-   "title": "Житель Казачинского вернёт государству 350 тысяч рубей за фиктивную покупку оборудования",
+   "draft_id": "d34796672",
+   "title": "Сколько кв.метров можно купить в Москве за 100 млн. руб. по районам.",
    "date": "2026-11-10",
    "src": [
     [
-     "web:krasrab.ru",
-     "https://krasrab.ru/news/finansy/60096"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1372945.php"
     ]
    ],
-   "sum": null,
+   "sum": "100 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -739,64 +646,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d94545405",
-   "title": "В Марий Эл приняли закон о запрете продажи вейпов",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261110/veypy-2130570959.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d06261039",
-   "title": "ИИ в M&A и инвестбанкинге: реальный эффект или хайп? ИИ уже пишет черновики тизеров, разбирает документы в VDR, собирает лонг-листы покупателей. А продавцы и покупатели всё чаще приходят на переговоры",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7560"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
