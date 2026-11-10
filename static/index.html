@@ -1336,7 +1336,7 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
 .ai-sheet.half,.ai-sheet.full{transform:none;visibility:visible;transition:transform .35s var(--ease),height .35s var(--ease),visibility 0s}
 .ai-sheet.full{height:calc(100svh - 10px)}
 .ai-sheet.drag{transition:none}
-/* Верхняя полоса окна — 40px: ручка по центру, слева «Открыть полностью», справа «×».
+/* Верхняя полоса окна — 40px: ручка по центру, слева значок «на весь экран», справа «×».
    Раньше крестик стоял на стыке белой полосы и фона заголовка и налезал на его
    текстуру (владелец, 6 ноября 2026, компьютер и телефон). */
 .ai-sheet-grip{flex:0 0 auto;height:40px;display:grid;place-items:center;cursor:grab;touch-action:none}
@@ -1344,8 +1344,13 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
 .ai-sheet-close{position:absolute;top:4px;right:10px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;
   font:400 24px/1 var(--f-body);color:var(--muted);cursor:pointer;z-index:2}
 .ai-sheet-close:hover{background:var(--paper2,#F0EFEA)}
-.ai-sheet-full{position:absolute;top:8px;left:14px;height:24px;padding:0 4px;border:0;background:transparent;cursor:pointer;z-index:2;
-  font:600 12.5px/24px var(--f-body);color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+/* «Открыть полностью» — значком «развернуть» (две стрелки в углы), а не словами
+   (владелец, 11 ноября 2026: «сделать символом, который понятно, что значит расширить
+   полностью»). Размер и место — как у крестика справа. */
+.ai-sheet-full{position:absolute;top:4px;left:10px;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:transparent;
+  cursor:pointer;z-index:2;color:var(--muted);display:grid;place-items:center}
+.ai-sheet-full:hover{background:var(--paper2,#F0EFEA);color:var(--ink)}
+.ai-sheet-full svg{width:18px;height:18px}
 .ai-sheet-body{flex:1;min-height:0;display:flex;flex-direction:column}
 .chat-shell.in-sheet{height:100%;grid-template-columns:minmax(0,1fr)}
 .chat-shell.in-sheet .chat-side,.chat-shell.in-sheet .chat-scrim,.chat-shell.in-sheet .chat-burger{display:none}
@@ -11397,7 +11402,7 @@ function aiDockEls(){
   const sheet = document.createElement("section");
   sheet.id = "aiSheet"; sheet.className = "ai-sheet"; sheet.setAttribute("aria-label", "Ассистент Компаса");
   sheet.innerHTML = `<div class="ai-sheet-grip" id="aiGrip" title="Потяните вверх — чат на весь экран"><span></span></div>
-    <button class="ai-sheet-full" id="aiSheetFull" type="button">Открыть полностью</button>
+    <button class="ai-sheet-full" id="aiSheetFull" type="button" aria-label="Открыть ассистента на весь экран" title="Открыть на весь экран"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button>
     <button class="ai-sheet-close" id="aiSheetClose" type="button" aria-label="Закрыть ассистента">×</button>
     <div class="ai-sheet-body" id="aiSheetBody"></div>`;
   document.body.append(scrim, sheet, fab);
