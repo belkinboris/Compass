@@ -1680,6 +1680,71 @@
     ]
    },
    "pending_since": "2026-11-10T09:53:15+00:00"
+  },
+  {
+   "id": "gb8a84b47",
+   "date": "2026-11-10",
+   "title": "Крупный тюменский застройщик продал проект ЖК на «Тайване»",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053143046"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Крупный тюменский застройщик",
+   "asset": "проект ЖК на «Тайване»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-10",
+     "title": "Сделка завершена",
+     "note": "В Тюмени застройщик «Звезда» передал проект нового ЖК на ДОКе «Создателям». Как объяснили в пресс-службе девелопера, смена компании не повлияет на гарантии дольщиков, процесс перехода держат на контроле.",
+     "source": [
+      "URA.RU",
+      "https://ura.news/news/1053143046"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "проект ЖК на «Тайване»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053143046"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Крупный тюменский застройщик",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053143046"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T12:54:36+00:00"
   }
  ]
 }
