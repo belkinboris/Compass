@@ -273483,6 +273483,152 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "gbed7c5f6",
+   "date": "2026-11-10",
+   "title": "«Дом.РФ» выставил на торги территорию бывшего радиоцентра в Тосненском районе Ленобласти",
+   "ind": "Недвижимость",
+   "type": "Продажа с торгов",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261110/lenoblast-2130558927.html"
+    ]
+   ],
+   "from_ingest": true,
+   "seller": "«Дом.РФ»",
+   "seller_id": "gb2b066c3",
+   "asset": "Два смежных участка общей площадью 748,8 га и 61 объект недвижимости (15,6 тыс. кв. м) бывшего радиоцентра в Тосненском районе Ленобласти",
+   "sum": "1,5 млрд ₽ (стартовая цена)",
+   "eco": {
+    "sum": "1,5 млрд ₽ (стартовая цена)",
+    "share": "—",
+    "val": "Торги пройдут 4 декабря 2026 года; участие в них можно принять, подав заявку не позднее 30 ноября.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Дом.РФ» продает территорию бывшего радиоцентра целиком одним лотом: два смежных участка площадью 748,8 га и 61 объект недвижимости (всего 15,6 тыс. кв. м). Площадка стоит рядом с трассой М-10 «Россия», в 30 км от КАД Петербурга — по заявлению «Дом.РФ», там рассчитывают построить промышленный кластер, жилье и инфраструктуру, но детали застройки, объем инвестиций и сроки в сообщении не раскрыты.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-10",
+     "title": "Торги объявлены",
+     "note": "«Дом.РФ» объявил о продаже площадки бывшего радиоцентра в Тосненском районе одним лотом; итоги аукциона станут известны 4 декабря 2026 года.",
+     "source": [
+      "Абирег",
+      "https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/"
+     }
+    ],
+    "target": [
+     {
+      "value": "Два смежных участка общей площадью 748,8 га и 61 объект недвижимости (15,6 тыс. кв. м) бывшего радиоцентра в Тосненском районе Ленобласти",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "target": "предмет — земля и здания, не компания — профиль не нужен (как у других торгов «Дом.РФ» в базе)"
+    },
+    "searched": [
+     "Абирег (первоисточник, прочитан целиком)",
+     "РИА Недвижимость (второй источник, тот же факт и цифры)",
+     "WebSearch: Дом.РФ радиоцентр Тосненский район торги",
+     "WebSearch: Красный Бор радиоцентр аукцион 1,5 млрд",
+     "torgi.gov.ru / земля.дом.рф — упомянуты источниками как площадка размещения лота"
+    ]
+   },
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "reviewed": "2026-11-10",
+   "accepted": "2026-11-10",
+   "accepted_hash": "004dcefe515e.181fa0",
+   "second_read": "2026-11-10",
+   "second_read_hash": "004dcefe515e.181fa0",
+   "post_preview": "<b>«Дом.РФ» выставил на торги территорию бывшего радиоцентра в Тосненском районе Ленобласти</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Предмет:</b> Два смежных участка общей площадью 748,8 га и 61 объект недвижимости (15,6 тыс. кв. м) бывшего радиоцентра в Тосненском районе Ленобласти\n<b>Начальная цена лота:</b> 1,5 млрд ₽ (стартовая цена)\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/119123-byvshiy-radiotsentr-v-lenoblasti-prodayut-za-1-5-mlrd-rubley-pod-zastroyku/\">Абирег</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbed7c5f6\">карточке сделки</a>\n",
+   "added": "2026-11-10",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "f33f775bf119"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "f78f8e323df0"
+    },
+    "date": {
+     "value": "2026-11-10",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7c32a11c7e70"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": true,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c6b8a642e567"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": false,
+     "industry": false,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "auction_open",
+     "industry": "auction_open",
+     "purchase_sums": "auction_open",
+     "top_purchases": "auction_open",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
