@@ -261081,13 +261081,17 @@
     [
      "Абирег",
      "https://abireg.ru/newsitem/119071-tambovskiy-maslozavod-morshanskiy-pereshel-pod-kontrol-ooo-orient-prodakts/"
+    ],
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2026/11/10/76755984/"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "0,6–1 млрд ₽ (по оценке)",
     "share": "—",
-    "val": "—",
+    "val": "Оценку 0,6–1 млрд ₽ дает «Коммерсант»; сами стороны сумму не раскрывали.",
     "target_fin": "У «Моршанского» 181 сотрудник и прибыль 102 млн ₽ за 2025 год — рост более чем в 14 раз; выручка за тот же год — 1,02 млрд ₽, на 26% больше, чем годом раньше.",
     "fin": "—",
     "rationale": "«Ориент Продактс» не входит ни в один открытый рейтинг и не называет других активов в своем портфеле — о планах нового владельца по заводу открытых данных нет.",
@@ -261156,7 +261160,8 @@
     ],
     "law.struct": [
      "697a7c3a236d"
-    ]
+    ],
+    "eco.val": []
    },
    "reviewed": "2026-11-07",
    "target": "g37441f46",
@@ -261202,10 +261207,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "basis": "rule",
+     "card_hash": "65ac03ee04d0"
     },
     "date": {
      "value": "2026-11-06",
@@ -261251,7 +261256,8 @@
    "reread": "2026-11-09",
    "reread_hash": "3e3192ddb74b.5d8b5e",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "sum": "0,6–1 млрд ₽ (по оценке)"
   },
   {
    "id": "g8e5cc555",
