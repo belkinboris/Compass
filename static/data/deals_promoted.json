@@ -304387,7 +304387,53 @@
   "g134d5b0e": null,
   "g8cbd8987": null,
   "g117aeb0f": null,
-  "gb89d3a84": 265
+  "gb89d3a84": 265,
+  "g09b38753": 266,
+  "g6797d158": null,
+  "g4fb4d8b0": null,
+  "ge0af58de": null,
+  "g083ec8ce": null,
+  "gef7d7e86": null,
+  "g5442f060": null,
+  "g2b958c12": null,
+  "g0ecc5666": null,
+  "g9aaaaa3e": null,
+  "g88dcf73e": null,
+  "g1e6bcc9d": null,
+  "g221282a6": null,
+  "g46b308d6": null,
+  "g64f192e9": null,
+  "ge5d7cce6": null,
+  "g340d3e65": null,
+  "g4c30b416": null,
+  "g373439fe": null,
+  "g47188b89": null,
+  "g1def0d4f": null,
+  "g9e27d3f1": null,
+  "g34074060": null,
+  "g0858a500": null,
+  "gab63a02f": null,
+  "g660f4097": null,
+  "gd77af086": null,
+  "g1e61ec63": null,
+  "g605d8d30": null,
+  "g5019c6ae": null,
+  "gfb282142": null,
+  "gd0af0377": null,
+  "g16540a36": null,
+  "gcdf0303d": null,
+  "g9a5a4ca9": null,
+  "g5192332c": null,
+  "g3c3b789c": null,
+  "g1d7832e2": null,
+  "g8fd370fb": null,
+  "g50412a76": null,
+  "gee7be9ef": null,
+  "g070084ad": null,
+  "g887ba980": null,
+  "ga024ea1e": null,
+  "g19f07141": null,
+  "gdc38f29c": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -310185,7 +310231,28 @@
      "kind": "closed"
     }
    ]
+  },
+  "g09b38753": {
+   "sum": "Не раскрыта (по оценке аналитиков — не выше 3 млрд ₽)",
+   "buyer": "gf16f4ae7",
+   "seller": "Сергей Эскин и Алексей Ирисов",
+   "target": "g03b0a5e0",
+   "asset": "100% ООО «ДЕПО Электроникс» (бренд DEPO Computers — серверы, системы хранения данных, коммутаторы, рабочие станции, моноблоки, ноутбуки и персональные компьютеры)",
+   "status": "Закрыта",
+   "title": "«Кванто Спейс» купил производителя электроники DEPO Computers у Сергея Эскина",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "Выручка ООО «ДЕПО Электроникс» за 2025 год — 15 млрд ₽ (+24% к 2024 году), чистая прибыль — 610,4 млн ₽ (-21% к 2024 году); среднесписочная численность на конец 2025 года — 461 человек.",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-09T20:18:23+00:00"
+ "telegram_last_post_at": "2026-11-10T07:09:31+00:00"
 }
