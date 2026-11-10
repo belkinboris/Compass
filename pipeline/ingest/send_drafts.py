@@ -253,7 +253,11 @@ def post_keyboard(card):
     return {'inline_keyboard': [[
         {'text': '📣 Пост в канал', 'callback_data': 'mod:%s:post_ok' % card['id']},
         {'text': '🔕 Без поста', 'callback_data': 'mod:%s:post_no' % card['id']},
-        {'text': '✏️', 'callback_data': 'mod:%s:edit' % card['id']},
+    ], [
+        # Карандаш ничего не делал (владелец, 10 ноября 2026) — вместо него канал;
+        # вторым рядом, иначе на телефоне подписи обрезаются.
+        {'text': '🏠 Только недвижимость', 'callback_data': 'mod:%s:post_realty' % card['id']},
+        {'text': '📰 Только основной', 'callback_data': 'mod:%s:post_main' % card['id']},
     ]]}
 
 

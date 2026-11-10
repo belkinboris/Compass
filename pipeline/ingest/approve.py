@@ -63,10 +63,26 @@ def fetch_decisions():
         if r.status_code != 200:
             print('Сайт ответил %s на запрос решений — работаем без них.' % r.status_code)
             return [], None
-        return r.json().get('decisions', []), (site, token)
+        return normalize_channels(r.json().get('decisions', [])), (site, token)
     except Exception as e:
         print('Решения недоступны (%s) — работаем без них.' % e)
         return [], None
+
+
+# Кнопки «🏠 Только недвижимость» / «📰 Только основной» под проектом поста
+# (владелец, 10 ноября 2026): это одобрение поста с выбором канала. Для всех
+# читателей решений это `post_yes`; канал едет рядом (`channels`) и
+# записывается карточке в `post_channels` (pipeline/publish/channels.py).
+CHANNEL_VERDICTS = {'post_realty': ['realty'], 'post_main': ['main']}
+
+
+def normalize_channels(decisions):
+    out = []
+    for d in decisions or []:
+        if d.get('verdict') in CHANNEL_VERDICTS:
+            d = dict(d, channels=CHANNEL_VERDICTS[d['verdict']], verdict='post_yes')
+        out.append(d)
+    return out
 
 
 def consume(handle, ids):
@@ -470,6 +486,8 @@ def main(write=False):
             post = post_mod[card['id']] = {'verdict': 'post_no'}
         if post:
             card['post_verdict'] = post['verdict']
+            if post.get('channels'):
+                card['post_channels'] = list(post['channels'])
     # Кнопка под проектом поста у карточки, которая УЖЕ на сайте (пост
     # показали заново после правки) — та же отметка у карточки в базе.
     for deal in data['deals']:
@@ -477,6 +495,8 @@ def main(write=False):
         if post and post['verdict'] == 'post_yes':
             deal['post_approved'] = True
             deal.pop('no_post', None)
+            if post.get('channels'):
+                deal['post_channels'] = list(post['channels'])
         elif post and post['verdict'] == 'post_no' and not deal.get('post_approved'):
             deal['no_post'] = True
     fresh = []
@@ -508,6 +528,8 @@ def main(write=False):
         # «📣 Пост в канал» (или текста владельца в ответ на проект поста).
         if (post and post['verdict'] == 'post_yes') or override:
             clean['post_approved'] = True
+        if post and post.get('channels'):
+            clean['post_channels'] = list(post['channels'])
         import strip_yo  # pipeline/strip_yo.py: база без «е» (27 октября 2026)
         clean = strip_yo.strip_values(clean)
         data['deals'].append(clean)

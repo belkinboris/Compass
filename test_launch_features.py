@@ -5384,3 +5384,19 @@ def test_text_reply_to_a_digest_draft_becomes_the_digest_text(client, monkeypatc
     assert next(d for d in rows if d["verdict"] == "post_yes")["edited_text"] == new
     assert any("сводка выйдет в канал с вашим текстом" in str(p.get("text")) for _m, p in sent)
     client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [d["id"] for d in rows]})
+
+
+def test_post_channel_buttons_record_a_channel_choice(client, monkeypatch):
+    """«🏠 Только недвижимость» / «📰 Только основной» под проектом поста (владелец,
+    10 ноября 2026, «Форум-Групп»): сайт принимает нажатие и хранит выбор канала."""
+    _mod_env(monkeypatch)
+    monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: {"ok": True})
+    for did, btn in (("gchanr", "post_realty"), ("gchanm", "post_main")):
+        client.post("/api/telegram/webhook/тайна", json={
+            "callback_query": {"id": "cb-" + did, "from": {"id": 222, "first_name": "Борис"},
+                                "data": "mod:%s:%s" % (did, btn),
+                                "message": {"message_id": 9, "chat": {"id": 222}, "text": "[пост %s] x" % did}}})
+    rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+            if d["deal_id"] in ("gchanr", "gchanm")]
+    assert {(r["deal_id"], r["verdict"]) for r in rows} == {("gchanr", "post_realty"), ("gchanm", "post_main")}
+    client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [r["id"] for r in rows]})
