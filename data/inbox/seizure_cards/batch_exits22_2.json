@@ -1,0 +1,170 @@
+{
+ "items": [
+  {
+   "op": "create",
+   "key": "exit22_01",
+   "seller": "Ford Motor",
+   "target": "49% СП Sollers Ford (Елабуга)",
+   "buyer": "ПАО «Соллерс»",
+   "date_hint": "2022-10-26 (объявлена), реестр 2022-12-30",
+   "amount_hint": "номинальная стоимость",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/86731/",
+    "https://www.autonews.ru/amp/news/63594d0f9a794742da61969b"
+   ],
+   "note": "опцион обратного выкупа 5 лет"
+  },
+  {
+   "op": "create",
+   "key": "exit22_05",
+   "seller": "TotalEnergies",
+   "target": "20% в Харьягинском СРП",
+   "buyer": "«Зарубежнефть»",
+   "date_hint": "2022-07-06 (соглашение), 2022-08 (закрыта)",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.vedomosti.ru/business/articles/2022/07/06/930216-frantsuzskaya-totalenergies",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_09",
+   "seller": "Paulig",
+   "target": "ООО «Паулиг Рус» (обжарочный завод в Твери)",
+   "buyer": "Викас Сои (позже «Милфудс»)",
+   "date_hint": "2022-05-04",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.interfax.ru/business/839498",
+    "https://www.pauliggroup.com/news/paulig-has-completed-the-sale-of-its-business-in-russia"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_13",
+   "seller": "Samsonite",
+   "target": "российское подразделение Samsonite",
+   "buyer": "топ-менеджмент / Вячеслав Шикулов («Чемодан Про»)",
+   "date_hint": "2022-07-08",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.retail.ru/news/amerikanskiy-proizvoditel-chemodanov-samsonite-prodal-rossiyskiy-biznes-23-avgusta-2022-219657/",
+    "https://www.intellinews.com/samsonite-packs-its-bags-and-sells-its-russian-business-to-the-suitcase-king-254457"
+   ],
+   "note": "у нас есть только перепродажа 2026 (g83ad1f72)"
+  },
+  {
+   "op": "create",
+   "key": "exit22_17",
+   "seller": "McKinsey & Company",
+   "target": "российское подразделение (ООО «Яков и партнеры»)",
+   "buyer": "российские партнеры (Яков Сергиенко и др.)",
+   "date_hint": "2022-06",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.sostav.ru/publication/mckinsey-v-rossii-obyavili-o-smene-nazvaniya-56092.html",
+    "https://new-retail.ru/novosti/retail/mckinsey_prodala_rossiyskiy_biznes_mestnym_partneram9969/"
+   ],
+   "note": "продажа практики партнерам"
+  },
+  {
+   "op": "create",
+   "key": "exit22_21",
+   "seller": "Trafigura",
+   "target": "10% «Восток Ойл»",
+   "buyer": "Nord Axis Ltd (Гонконг)",
+   "date_hint": "2022-07-12",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/81263/",
+    "https://www.akm.ru/news/trafigura_prodala_10_vostok_oyl/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_25",
+   "seller": "Electrolux",
+   "target": "российский бизнес Electrolux (ООО «Е.Кампани»)",
+   "buyer": "местный менеджмент (Павел Потапов)",
+   "date_hint": "2022-09-02",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.retail.ru/news/electrolux-pokidaet-rossiyskiy-rynok-2-sentyabrya-2022-220045/",
+    "https://snob.ru/news/electrolux-prodala-svoj-rossijskij-biznes-mestnomu-menedzhmentu/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_29",
+   "seller": "Inchcape",
+   "target": "российский дистрибуторский и розничный автобизнес",
+   "buyer": "местный менеджмент (CEO и CFO)",
+   "date_hint": "2022-04-28 (подписана), закрытие Q2 2022",
+   "amount_hint": "£63 млн / ≈€76 млн в рассрочку на 5 лет",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/78735/",
+    "https://europe.autonews.com/retail/europes-third-largest-dealership-group-inchcape-sell-russia-operations-local-management"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_33",
+   "seller": "Lindab",
+   "target": "российская дочерняя компания",
+   "buyer": "местный управляющий директор",
+   "date_hint": "2022",
+   "amount_hint": "затраты SEK 22 млн",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox",
+    "https://new-retail.ru/novosti/retail/shvedskiy_proizvoditel_sistem_ventilyatsii_lindab_ushel_s_rossiyskogo_rynka4476/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_37",
+   "seller": "Iveco",
+   "target": "33% СП «АМТ» (сборка грузовиков)",
+   "buyer": "местный партнер",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox"
+  },
+  {
+   "op": "create",
+   "key": "exit22_41",
+   "seller": "Apator (Powogaz)",
+   "target": "100% АО «Тепловодомер»",
+   "buyer": "не назван",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; мелкая сделка"
+  },
+  {
+   "op": "create",
+   "key": "exit22_45",
+   "seller": "AFRY",
+   "target": "российская дочерняя компания",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022 (подписана), закрытие ожидалось Q4 2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://afry.com/en/newsroom/press-releases/afry-divests-its-operations-in-russia",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "signed_2022: подписана в 2022"
+  }
+ ]
+}

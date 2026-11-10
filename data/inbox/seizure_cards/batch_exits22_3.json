@@ -1,0 +1,154 @@
+{
+ "items": [
+  {
+   "op": "create",
+   "key": "exit22_02",
+   "seller": "Mazda",
+   "target": "50% СП Mazda Sollers Manufacturing Rus (Владивосток)",
+   "buyer": "ПАО «Соллерс»",
+   "date_hint": "2022-10 (подписана), закрыта 2022-12-15",
+   "amount_hint": "€1",
+   "urls": [
+    "https://marketscreener.com/quote/stock/SOLLERS-6497745/news/Sollers-Public-Joint-Stock-Company-completed-the-acquisition-of-remaining-50-stake-in-Mazda-Sollers-42577394",
+    "https://www.autonews.ru/news/690af15c9a7947f15d7cf314"
+   ],
+   "note": "опцион на 3 года истек в 2025"
+  },
+  {
+   "op": "create",
+   "key": "exit22_06",
+   "seller": "SOK (S Group)",
+   "target": "15 супермаркетов Prisma в Петербурге и кулинарный цех",
+   "buyer": "X5 Group",
+   "date_hint": "2022-06-16",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.interfax.ru/business/846496",
+    "https://tass.com/economy/1465899"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_10",
+   "seller": "Atria",
+   "target": "ООО «Сибилла Рус» (полуфабрикаты для фастфуда)",
+   "buyer": "АПК «Михайловский» (группа «Черкизово»)",
+   "date_hint": "2022-05-16",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.akm.ru/news/cherkizovo_kupilo_sibilla_rus/",
+    "https://www.fontanka.ru/2022/05/16/71333732/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_14",
+   "seller": "Helly Hansen (Canadian Tire)",
+   "target": "ООО «Хелли Хансен» (48 магазинов)",
+   "buyer": "гендиректор Игорь Роганович и юрист Андрей Карасев",
+   "date_hint": "2022-08 (конец)",
+   "amount_hint": "символическая",
+   "urls": [
+    "https://www.vedomosti.ru/business/articles/2022/11/14/950123-kanadskii-helly-hansen-ushel-iz-rossii"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_18",
+   "seller": "Jones Lang LaSalle (JLL)",
+   "target": "ООО «Джонс Лэнг ЛаСаль» (IBC Real Estate)",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022-05",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://new-retail.ru/novosti/retail/jll_prodala_rossiyskiy_biznes_mestnomu_menedzhmentu9596/"
+   ],
+   "note": "источник отраслевой; лучше добавить Интерфакс/РБК"
+  },
+  {
+   "op": "create",
+   "key": "exit22_22",
+   "seller": "Wargaming",
+   "target": "ООО «Леста» и «Гейм стрим» (российский бизнес)",
+   "buyer": "Малик Хатажаев (бывший гендиректор «Лесты»)",
+   "date_hint": "2022-06-28",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://forbes.kz/news/newsid_279663",
+    "https://habr.com/ru/post/675752"
+   ],
+   "note": "у нас есть только изъятие 2025 и продажа 2026"
+  },
+  {
+   "op": "create",
+   "key": "exit22_26",
+   "seller": "Electrolux Professional",
+   "target": "российский бизнес Electrolux Professional",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022-07-11",
+   "amount_hint": "затраты SEK 35 млн",
+   "urls": [
+    "https://interfax.com/newsroom/top-stories/81141/",
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_30",
+   "seller": "Jotun",
+   "target": "ООО «Йотун Пэйнтс» (завод красок в Ленобласти)",
+   "buyer": "«Атомстройкомплекс» (В. Ананьев, П. Кузнецов)",
+   "date_hint": "2022-08-02",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.dp.ru/a/2022/08/30/Novij_vladelec_zavoda_kra",
+    "https://www.e1.ru/text/business/2022/08/02/71537294/"
+   ],
+   "note": ""
+  },
+  {
+   "op": "create",
+   "key": "exit22_34",
+   "seller": "Oerlikon",
+   "target": "российский бизнес",
+   "buyer": "местный менеджмент",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; дату уточнить"
+  },
+  {
+   "op": "create",
+   "key": "exit22_38",
+   "seller": "Boreo",
+   "target": "90% ООО «YE Russia»",
+   "buyer": "компании директора Юрье Пённи",
+   "date_hint": "2022",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.euronews.com/2022/10/10/ukraine-crisis-russia-sale-factbox"
+   ],
+   "note": "только Reuters factbox; мелкая сделка"
+  },
+  {
+   "op": "create",
+   "key": "exit22_42",
+   "seller": "Elopak",
+   "target": "АО «Элопак» (завод в Лобне)",
+   "buyer": "Packaging Management and Investing LLC (менеджмент)",
+   "date_hint": "2022-07-15 (подписана), закрытие 2023-02-22",
+   "amount_hint": "не раскрыта",
+   "urls": [
+    "https://www.elopak.com/2022/07/15/elopak-to-sell-russian-operations-to-local-management-and-exit-market",
+    "https://www.retail.ru/news/proizvoditel-upakovki-elopak-prodal-rossiyskiy-biznes-menedzhmentu-15-iyulya-2022-218662/"
+   ],
+   "note": "signed_2022: подписана в 2022, закрыта в 2023"
+  }
+ ]
+}
