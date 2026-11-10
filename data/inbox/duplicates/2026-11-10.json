@@ -104,48 +104,6 @@
     "needs_review": true
    },
    "queued": "2026-11-10"
-  },
-  {
-   "key": "https://www.fontanka.ru/2026/11/10/76755984/::g7c4e8ef0",
-   "candidate_id": "g7c4e8ef0",
-   "reason": "общие слова заголовка: 3",
-   "draft": {
-    "draft_id": "d74405072",
-    "title": "Производитель хрустящих хлебцев из Ленобласти купил тамбовский маслодельный завод",
-    "date": "2026-11-10",
-    "src": [
-     [
-      "web:fontanka.ru",
-      "https://www.fontanka.ru/2026/11/10/76755984/"
-     ]
-    ],
-    "sum": null,
-    "type": "M&A",
-    "status": "Закрыта",
-    "events": [
-     {
-      "kind": "closed",
-      "date": "2026-11-10",
-      "title": "Сделка завершена",
-      "note": "",
-      "source": [
-       "web:fontanka.ru",
-       "https://www.fontanka.ru/2026/11/10/76755984/"
-      ]
-     }
-    ],
-    "buyer_name": "Производитель хрустящих хлебцев из Ленобласти",
-    "asset": "тамбовский маслодельный завод",
-    "seller": null,
-    "parsed_parties": {
-     "buyer": "Производитель хрустящих хлебцев из Ленобласти",
-     "asset": "тамбовский маслодельный завод",
-     "seller": null
-    },
-    "ind": null,
-    "needs_review": true
-   },
-   "queued": "2026-11-10"
   }
  ]
 }
