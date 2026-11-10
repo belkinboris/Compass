@@ -1139,80 +1139,13 @@
    ]
   },
   {
-   "draft_id": "d40564709",
-   "title": "На аукцион в Нью-Йорке выставили около 300 предметов из коллекции Романовых",
+   "draft_id": "d40123302",
+   "title": "Кушнер назвал обнадеживающим первый раунд переговоров в Абу-Даби",
    "date": "2026-11-10",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/society/news/2026/11/10/1244228-na-auktsion-vistavili"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36314529",
-   "title": "ЦБ: НСПК пока не планирует IPO",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261110/tsb-875090714.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-10",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261110/tsb-875090714.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82747941",
-   "title": "Кушнер назвал первый раунд переговоров в Абу-Даби конструктивным",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261110/kushner-2130749359.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9094092"
     ]
    ],
    "sum": null,
@@ -1228,6 +1161,62 @@
     "seller": null
    },
    "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54270249",
+   "title": "Кушнер назвал конструктивным первый раунд переговоров в Абу-Даби",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2199557/kushner-nazval-konstruktivnym-pervyi-raund-peregovorov-v-abu-dabi-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60779895",
+   "title": "Раскрыто время начала второго раунда переговоров по Украине в Абу-Даби",
+   "date": "2026-11-10",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/11/raskryto-vremya-nachala-vtorogo-raunda-peregovorov-po-ukraine-v-abu-dabi/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
