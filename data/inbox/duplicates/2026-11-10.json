@@ -1,0 +1,109 @@
+{
+ "made": "2026-11-10",
+ "items": [
+  {
+   "key": "https://t.me/kkmpconnect/404::gb9fdfce4",
+   "candidate_id": "gb9fdfce4",
+   "reason": "по всей базе: совпали две стороны (asset, seller)",
+   "draft": {
+    "draft_id": "d95485871",
+    "title": "АФК «Система» покупает 47,7% Melon Fashion Group у Eastnine и East Capital за 15,8 млрд рублей",
+    "date": "2022-10-19",
+    "src": [
+     [
+      "tg:kkmpconnect",
+      "https://t.me/kkmpconnect/404"
+     ]
+    ],
+    "sum": "15,8 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "АФК «Система»",
+    "asset": "Melon Fashion Group",
+    "seller": "Eastnine и East Capital",
+    "parsed_parties": {
+     "buyer": "АФК «Система»",
+     "asset": "Melon Fashion Group",
+     "seller": "Eastnine и East Capital"
+    },
+    "ind": "Ритейл",
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
+  },
+  {
+   "key": "https://t.me/alumnipartnerslawfirm/128::ge361bfa8",
+   "candidate_id": "ge361bfa8",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d31980313",
+    "title": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate)",
+    "date": "2022-07-04",
+    "src": [
+     [
+      "tg:alumnipartnerslawfirm",
+      "https://t.me/alumnipartnerslawfirm/128"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2022-07-04",
+      "title": "Сделка завершена",
+      "note": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate). ALUMNI Partners консультирует Jones Lang LaSalle в связи с продажей ее российского бизнеса Команда ALUMNI Partners успешно завершила юридическое сопровождение интересов Jones…",
+      "source": [
+       "tg:alumnipartnerslawfirm",
+       "https://t.me/alumnipartnerslawfirm/128"
+      ]
+     }
+    ],
+    "buyer_name": "(IBC Real Estate)",
+    "asset": "российский бизнес",
+    "seller": "Jones Lang LaSalle",
+    "parsed_parties": {
+     "buyer": "(IBC Real Estate)",
+     "asset": "российский бизнес",
+     "seller": "Jones Lang LaSalle"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
+  },
+  {
+   "key": "https://krasrab.ru/news/finansy/60082::g30db3641",
+   "candidate_id": "g30db3641",
+   "reason": "общие редкие слова: миллио, почти, рублей",
+   "draft": {
+    "draft_id": "d79905662",
+    "title": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и получил 5 лет колонии",
+    "date": "2026-11-10",
+    "src": [
+     [
+      "web:krasrab.ru",
+      "https://krasrab.ru/news/finansy/60082"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
+    "asset": "5 лет колонии",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Курьер забрал у отца погибшего бойца почти 5 миллионов рублей и",
+     "asset": "5 лет колонии",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-10"
+  }
+ ]
+}

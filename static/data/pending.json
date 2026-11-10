@@ -1976,6 +1976,199 @@
     ]
    },
    "pending_since": "2026-11-09T15:53:41+00:00"
+  },
+  {
+   "id": "g9878a8ba",
+   "date": "2024-03-01",
+   "title": "Mantsinen Group продала российскую «дочку» компании ее руководителя",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @BIRCHLEGAL",
+     "https://t.me/BIRCHLEGAL/834"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Mantsinen Group",
+   "asset": "российская «дочка» компании ее руководителя",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024-03-01",
+     "title": "Сделка завершена",
+     "note": "Mantsinen Group продала российскую «дочку» компании ее руководителя. ⚡️ Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже дочернего общества Mantsinen Group российскому менеджменту. ❗️ Mantsinen Group – крупнейшая европейская…",
+     "source": [
+      "Телеграм-канал @BIRCHLEGAL",
+      "https://t.me/BIRCHLEGAL/834"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "российская «дочка» компании ее руководителя",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/834"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Mantsinen Group",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://t.me/BIRCHLEGAL/834"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T05:52:38+00:00"
+  },
+  {
+   "id": "g74e5efbe",
+   "date": "2026-11-10",
+   "title": "«АГР Холдинг» приобрел бывшую штаб-квартиру владельца IKEA в России",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9093249"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«АГР Холдинг»",
+   "asset": "бывшая штаб-квартира владельца IKEA в России",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-10",
+     "title": "Сделка завершена",
+     "note": "Бенефициаром ООО «Химки бизнес парк» в начале ноября стало ООО «АГР Холдинг», обнаружил “Ъ” в базе СПАРК. Контроль над этим юридическим лицом компания получила, став владельцем ООО «КЛС Химки» через ООО «А-финанс».",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9093249"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«АГР Холдинг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9093249"
+     }
+    ],
+    "target": [
+     {
+      "value": "бывшая штаб-квартира владельца IKEA в России",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9093249"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T05:52:38+00:00"
+  },
+  {
+   "id": "g7c4e8ef0",
+   "date": "2026-11-10",
+   "title": "Компания из Ленобласти купила крупнейшего производителя сыра в Тамбове",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/11/10/kompanija-iz-lenoblasti-kupila"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "из Ленобласти",
+   "asset": "крупнейший производитель сыра в Тамбове",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-10",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/11/10/kompanija-iz-lenoblasti-kupila"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "из Ленобласти",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/10/kompanija-iz-lenoblasti-kupila"
+     }
+    ],
+    "target": [
+     {
+      "value": "крупнейший производитель сыра в Тамбове",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/10/kompanija-iz-lenoblasti-kupila"
+     }
+    ]
+   },
+   "pending_since": "2026-11-10T05:52:38+00:00"
   }
  ]
 }
