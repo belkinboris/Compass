@@ -524,7 +524,10 @@ def fin_prose(rows, legal_name=None, employees=None):
         parts.append(s)
     if latest.get('net_profit_rub') is not None:
         v = float(latest['net_profit_rub'])
-        s = '%s — %s' % ('чистая прибыль' if v >= 0 else 'чистый убыток', format_post._fmt_rub(abs(v)))
+        # Без выручки год больше нигде не назван — «чистая прибыль — 85,6 млрд ₽» читалась
+        # без года (второе чтение, 11 ноября 2026, АО «О23»).
+        s = '%s%s — %s' % ('чистая прибыль' if v >= 0 else 'чистый убыток',
+                           '' if parts else ' за %d год' % latest['year'], format_post._fmt_rub(abs(v)))
         if prior and prior.get('net_profit_rub') is not None:
             pv = float(prior['net_profit_rub'])
             s += ' (за %d год — %s %s)' % (prior['year'], 'прибыль' if pv >= 0 else 'убыток',
@@ -1093,7 +1096,11 @@ REGISTRY_PLACE = re.compile(r'(?i)datanewton|датаньютон|egrul\.nalog|�
 
 CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
-                 'auction_type', 'fund_status', 'aggregator_cites_primary')
+                 'auction_type', 'fund_status', 'aggregator_cites_primary',
+                 # Источник не говорит, что доля сменила владельца (утрата контроля без
+                 # названного способа, «О23» / Ozon, g90767425, 11 ноября 2026): форма
+                 # «N% / контрольный пакет акций» была бы выдумкой — читатель закрывает причиной.
+                 'share_form')
 
 
 def _url_key(url):
@@ -1656,7 +1663,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     tgt = comps_.get(card.get('target') or '') or {}
     share_v = str((card.get('eco') or {}).get('share') or '')
     if card.get('type') == 'M&A' and tgt.get('legal_short') and has(share_v) \
-            and not SHARE_FORM_RE.match(share_v):
+            and not SHARE_FORM_RE.match(share_v) and 'share_form' not in checked:
         out.append(('share_form', 'eco.share %r — предмет пишется долей в обществе: «100%% доли в %s» '
                     '(несколько ООО — «долей в ООО «А» и ООО «Б»», АО — «N%% акций АО «X»»), описание — в контекст'
                     % (share_v[:80], tgt['legal_short'])))

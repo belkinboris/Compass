@@ -62,7 +62,11 @@ def render_screens(card, companies):
             + _row('Форма расчетов', eco.get('fin')))
     out += ['', 'ПОСТ В КАНАЛ']
     try:
-        post = format_post.render(card, companies)
+        # Заданный текст поста (`post_override`) — тот, что уйдет: второе чтение обязано
+        # читать его, а не автоформат (11 ноября 2026, «О23» / Ozon, g90767425) — так же,
+        # как `send_drafts.draft_post_text`.
+        post = (format_post.with_card_link(format_post.strip_platform_links(card['post_override']), card)
+                if card.get('post_override') else format_post.render(card, companies))
         post = re.sub(r'<a href="([^"]*)">([^<]*)</a>', r'\2 (\1)', post)
         out.append(re.sub(r'<[^>]+>', '', post))
     except Exception as e:  # noqa: BLE001
