@@ -20,14 +20,17 @@ DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 CID = 'g8a3b7795'
 OLD = ('Московская холдинговая компания, крупнейший акционер Ozon; конечный бенефициар — '
        'Александр Чачава. Юрлицо — АО «О23».')
-NEW = 'Московская холдинговая компания, крупнейший акционер Ozon. Юрлицо — АО «О23».'
+MID = 'Московская холдинговая компания, крупнейший акционер Ozon. Юрлицо — АО «О23».'
+# Второе чтение, 11 ноября 2026: слов «московская холдинговая» в источниках карточки нет,
+# а пост ставит первую фразу описания в строку «Предмет». Юрлицо теперь в legal_short.
+NEW = 'Акционерное общество, крупнейший акционер Ozon.'
 
 
 def apply(data):
     prof = data['companies'][CID]
-    if prof['desc'] == NEW:
+    if prof['desc'].startswith(NEW):   # приемка дописывает «Юрлицо — АО «О23».»
         return False
-    assert prof['desc'] == OLD, prof['desc']
+    assert prof['desc'] in (OLD, MID), prof['desc']
     prof['desc'] = NEW
     return True
 

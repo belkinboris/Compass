@@ -11113,9 +11113,11 @@ def test_title_standard_accepts_a_loss_of_control_without_a_named_buyer():
     sys.path.insert(0, str(ROOT / "pipeline"))
     import title_standard
     card = {"type": "M&A", "status": "Закрыта"}
-    assert title_standard.verb_ok(card, "Крупнейший акционер Ozon «О23» вышел из-под контроля Александра Чачавы")
+    assert title_standard.verb_ok(card, "Александр Чачава лишился контроля над «О23», крупнейшим акционером Ozon")
     assert title_standard.verb_ok(card, "Александр Чачава утратил контроль над «О23»")
     assert not title_standard.verb_ok(card, "«О23» сменил владельца")
+    # «вышел из-под контроля» читается как «стал неуправляемым» (второе чтение, 11 ноября 2026)
+    assert not title_standard.verb_ok(card, "Крупнейший акционер Ozon «О23» вышел из-под контроля Александра Чачавы")
 
 
 # --- Короткая проверка 9 ноября 2026: как ошибки попадали в карточки и что их теперь ловит
