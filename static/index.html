@@ -3349,7 +3349,7 @@ const FIRMS = [
  {id:"liniya",n:"Линия Права",g:["С-hi"]},
  {id:"nikolaev",n:"МКА «Николаев и партнеры»",g:["С-hi","К-hi"],site:"https://nikolaew.ru"},
  {id:"nikolskaya",n:"Никольская Консалтинг",g:["С-hi","К-hi"],site:"https://nikolskaya.ru/",
-  brand:{logo:"/static/brands/nikolskaya.svg",logoOn:"/static/brands/nikolskaya-white.svg",ratio:3.63,h:42,ink:"#1C2A36",accent:["#3A5269"],fill:"#3A5269"}},
+  brand:{logo:"/static/brands/nikolskaya.svg",logoOn:"/static/brands/nikolskaya-white.svg",ratio:3.63,h:42,ink:"#1C2A36",accent:["#3A5269"],fill:"#3A5269",sortAs:"Nikolskaya"}},
  {id:"tedo",n:"Технологии Доверия",g:["С-hi"]},
  {id:"tomashevskaya",n:"Томашевская и партнеры",g:["С-hi","К-hi"]},
  {id:"maxima",n:"Maxima Legal",g:["К-hi"]},
@@ -9707,7 +9707,9 @@ const advCount = id => advInd==="Все" ? firmCount(id) : firmIndCount(id, advI
    же порядке. */
 const advPinned = r => firmBrand(r.f) ? 0 : 1;
 /* Плашка с логотипом стоит по тому, что на логотипе написано: у ККМП это латинское
-   KKMP, поэтому она идет перед Orion, а не после Stonebridge (владелец, 12 ноября 2026). */
+   KKMP, поэтому она идет перед Orion, а не после Stonebridge; «Никольская» стоит как
+   Nikolskaya — между KKMP и Orion: четыре партнера читаются подряд K, N, O, S
+   (владелец, 12 ноября 2026: «почему Никольская в конце, ты что, алфавит не знаешь?»). */
 const advName = f => (f.brand && f.brand.sortAs) || f.n;
 const advSortKey = (a,b) => advPinned(a)-advPinned(b) || (advInd!=="Все" ? (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))
   : (firmSort==="alpha" ? firmAlpha(advName(a.f),advName(b.f)) : (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))));
