@@ -1139,35 +1139,6 @@
    ]
   },
   {
-   "draft_id": "d95962855",
-   "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7837"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "компании. Также в капитал ООО «Твинби» вошло АО «ВО",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "компании. Также в капитал ООО «Твинби» вошло АО «ВО",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d67457706",
    "title": "Совладельцы «Адаманта» выкупили доли в петербургских пышечных Ginza Project",
    "date": "2026-11-11",
@@ -1207,130 +1178,17 @@
    ]
   },
   {
-   "draft_id": "d06749910",
-   "title": "Лавров: МТК «Север - Юг» призван стать драйвером торговли и инвестиций в Евразии",
+   "draft_id": "d02333586",
+   "title": "«Почта России» заявила о готовности к эксперименту с продажей российского вина",
    "date": "2026-11-11",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28306527"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66789466",
-   "title": "«Почта России» подготовила мощности для продажи вина",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28306591"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/11/1244430-pochta-rossii-zayavila"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d07574251",
-   "title": "Эксперимент по продаже российского вина через «Почту России» могут завершить раньше срока",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28306581"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88541172",
-   "title": "Родстер SLR Stirling Moss от Mercedes-Benz выставят на аукцион за $6 млн",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28306347"
-    ]
-   ],
-   "sum": "$6 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d44339691",
-   "title": "Исторические железнодорожные постройки Финляндии выставили на торги",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/11/istoricheskie-zheleznodorozhnie"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1348,42 +1206,13 @@
    ]
   },
   {
-   "draft_id": "d76770179",
-   "title": "Крупнейшие сервисы продажи билетов в США столкнулись с финансовым кризисом",
+   "draft_id": "d97190290",
+   "title": "Pосо X8s выходит на российский рынок: 6,35 дюйма, оптический зум и 100-ваттная зарядка",
    "date": "2026-11-11",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/krupnejshie-servisy-prodazhi-biletov-v-ssha-stolknulis-s-finansovym-krizisom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d99715527",
-   "title": "Какой сегодня праздник, 11 ноября 2026 года: День экономиста, распродажа 11.11 и годовщина окончания Первой мировой войны",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/11/76758487/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-11_poso_x8s_vyhodit_na_rossijskij"
     ]
    ],
    "sum": null,
@@ -1405,13 +1234,125 @@
    ]
   },
   {
-   "draft_id": "d30661819",
-   "title": "В России продажа новых электромобилей едва превысила 1%",
+   "draft_id": "d51991849",
+   "title": "ГД приняла в I чтении законопроект о продаже вина РФ онлайн через «Почту России»",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28306853"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17142984",
+   "title": "Турецкий производитель опроверг сведения о покупке ковра Тимом Куком за $18 тыс.",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28306815"
+    ]
+   ],
+   "sum": "$18 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67026642",
+   "title": "Заксобрание Петербурга одобрило в I чтении запрет продажи вейпов на пять лет",
    "date": "2026-11-11",
    "src": [
     [
      "web:iz.ru",
-     "https://iz.ru/2199812/video/v-rossii-prodazha-novykh-elektromobilei-edva-prevysila-1"
+     "https://iz.ru/2199835/zaksobranie-peterburga-odobrilo-zapret-prodazhi-veipov-na-piat-let-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18833491",
+   "title": "В МИА «Россия сегодня» создали экспертную платформу",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261111/mia-2130862882.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40935337",
+   "title": "Минфин оценил, как онлайн-продажи вина отразятся на пьянстве в России",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053143339"
     ]
    ],
    "sum": null,
