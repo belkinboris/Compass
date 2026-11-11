@@ -1210,42 +1210,13 @@
    ]
   },
   {
-   "draft_id": "d57485172",
-   "title": "Ozon: структуры Александра Чачавы утратили контроль над АО «О23»",
+   "draft_id": "d27797207",
+   "title": "SCMP: мужчина в Китае приобрел двухкомнатную квартиру за 11 юаней",
    "date": "2026-11-11",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/11/11/1244594-strukturi-chachavi-utratili-kontrol"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d72881122",
-   "title": "Структуры Чачавы перестали контролировать крупнейшего акционера Ozon",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/11/11/2026/6af4a557f2211a6be34a87b1"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28308795"
     ]
    ],
    "sum": null,
@@ -1256,37 +1227,36 @@
      "kind": "closed",
      "date": "2026-11-11",
      "title": "Сделка завершена",
-     "note": "Структуры Чачавы утратили контроль над АО «О23», которому принадлежат 34,95% акций Ozon. Инвестор приобрел долю в маркетплейсе в 2024 году, а в апреле 2026-го стал его крупнейшим акционером",
+     "note": "По данным газеты, начальная цена объекта составляла 1 юань",
      "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/business/11/11/2026/6af4a557f2211a6be34a87b1"
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28308795"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "двухкомнатная квартира",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "двухкомнатная квартира",
     "seller": null
    },
-   "ind": "E-commerce",
+   "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d83895571",
-   "title": "Структуры Чачавы перестали контролировать крупнейшего акционера Ozon",
+   "draft_id": "d90956640",
+   "title": "Структуры бизнесмена Чачавы утратили контроль над крупным пакетом акций Ozon",
    "date": "2026-11-11",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Struktury-Chachavy-perestali-kontrolirovat-krupnejshego-akcionera-Ozon-87775"
+     "web:iz.ru",
+     "https://iz.ru/2200215/2026-11-11/struktury-biznesmena-chachavy-utratili-kontrol-nad-krupnym-paketom-aktcii-ozon"
     ]
    ],
    "sum": null,
@@ -1303,20 +1273,19 @@
    },
    "ind": "E-commerce",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g90767425 (общие редкие слова: ozon, контро, чачавы) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d70130210",
-   "title": "Структуры Александра Чачавы утратили контроль над АО «О23»",
+   "draft_id": "d14218555",
+   "title": "With $720M round, Britain’s Fractile gets a leg up in the race for AI chips",
    "date": "2026-11-11",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28308537"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/11/with-720m-round-britains-fractile-gets-a-leg-up-in-the-race-for-ai-chips/"
     ]
    ],
    "sum": null,
@@ -1333,134 +1302,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d11535384",
-   "title": "Структуры Чачавы утратили контроль над АО «О23», владеющей 34,95% «Озона»",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/struktury-875132339.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d89665528",
-   "title": "Структуры Александра Чачавы утратили контроль над АО «О23», которому принадлежит 34,95% акций Ozon",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/news/1373633.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d10275835",
-   "title": "Александр Чачава утратил контроль над крупнейшим акционером Ozon",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/315219"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gcd450a79 (общие редкие слова: алекса, чачава) — проверьте, не дубль ли",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d11102971",
-   "title": "Структуры инвестора Александра Чачавы перестали контролировать крупнейшего акционера Ozon",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/marketplace/3250030-struktury-investora-aleksandra-chachavy-perestali-kontrolirovat-krupneishego-akcionera-ozon?from=rss"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
-    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]

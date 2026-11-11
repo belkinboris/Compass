@@ -2312,6 +2312,80 @@
    },
    "accepted": "2026-11-11",
    "accepted_hash": "090a6541d65a.d2ab69"
+  },
+  {
+   "id": "ge2c36d16",
+   "date": "2026-11-11",
+   "title": "Россия в октябре купила у Бразилии имбиря на максимальную сумму за пять лет",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261111/rossija-875135469.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Бразилии",
+   "buyer_name": "Россия в октябре",
+   "asset": "имбирь на максимальную сумму за пять лет",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261111/rossija-875135469.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Россия в октябре",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "имбирь на максимальную сумму за пять лет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Бразилии",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-11T20:14:17+00:00"
   }
  ]
 }
