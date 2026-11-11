@@ -76,6 +76,12 @@ def check(old_data, new_data, key=None):
     p = problem(old_data, new_data, key)
     if p:
         raise SystemExit('ОТКАЗ (массовая правка): ' + p)
+    # Правка факта — только с цитатой источника (владелец, 11 ноября 2026):
+    # эту функцию зовет каждый пишущий базу скрипт, поэтому проверка живет здесь.
+    if HERE not in sys.path:
+        sys.path.insert(0, HERE)
+    import fact_edit_guard
+    fact_edit_guard.check(old_data, new_data)
 
 
 def _self_check():

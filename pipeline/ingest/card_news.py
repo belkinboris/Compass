@@ -848,6 +848,13 @@ def _texts(entry):
     return [t for t in texts if t]
 
 
+def _log_fact(card, field, value, quote, url):
+    """Правка факта подтверждена цитатой новости (fact_edit_guard, 11 ноября 2026)."""
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    import fact_edit_guard
+    fact_edit_guard.log(card, field, value, quote, url, 'card_news')
+
+
 def apply_fact(card, f, entry, texts, base):
     """Внести один факт в карточку. None — внесен; иначе — почему нет."""
     import review
@@ -866,7 +873,7 @@ def apply_fact(card, f, entry, texts, base):
         problem = review.sum_is_supported(value, quote)
         if problem:
             return problem
-        enrich.apply_props(card, [('sum', value, 'добавить', '')])
+        enrich.apply_props(card, [('sum', value, 'добавить', '')], (quote, url, 'card_news'))
         return None
     if field == 'stake_acquired':
         if card_percents(card):
@@ -877,6 +884,7 @@ def apply_fact(card, f, entry, texts, base):
         eco = card.setdefault('eco', {})
         if eco.get('share') in (None, '', '—'):
             eco['share'] = _pct(float(value))
+            _log_fact(card, 'eco.share', eco['share'], quote, url)
         return None
     if field == 'law.adv':
         role, firm = value[0], value[1]
@@ -891,6 +899,7 @@ def apply_fact(card, f, entry, texts, base):
                                                        and PLACEHOLDER.search(str(r[1])))]
         rows.append([role, firm, 'Источник: %s' % re.sub(r'^https?://(www\.)?', '', url)])
         law['adv'] = rows
+        _log_fact(card, 'law.adv', rows, quote, url)
         return None
     if field in ('buyer_name', 'seller'):
         if enrich.current_value(card, field, comps):
@@ -898,7 +907,7 @@ def apply_fact(card, f, entry, texts, base):
         problem = review.name_is_supported(value, quote) if review.flat(value) not in review.flat(quote) else None
         if problem:
             return problem
-        enrich.apply_props(card, [(field, value, 'добавить', '')])
+        enrich.apply_props(card, [(field, value, 'добавить', '')], (quote, url, 'card_news'))
         return None
     if field == 'stage':
         kind, status = value.get('kind'), value.get('status')
@@ -922,7 +931,7 @@ def apply_fact(card, f, entry, texts, base):
         if (status == 'Не состоялась' and card.get('status') not in ('Не состоялась', 'Закрыта')) \
                 or (card.get('status') != 'Не состоялась' and rank_new > rank_old):
             props.append(('status', status, 'обновить', ''))
-        enrich.apply_props(card, props)
+        enrich.apply_props(card, props, (quote, url, 'card_news'))
         return None
     return 'поле %s не из списка' % field
 
