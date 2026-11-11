@@ -5386,7 +5386,15 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     # кнопка «Посчитать» — в самом блоке «Сумма», панель выдвигается там же
     assert page.locator(".stat-hero.pe-host #pe-btn").inner_text().strip() == "Посчитать"
     page.click("#pe-btn")
+    # 12 ноября 2026: пока считает, кнопка сжата в круглый компас; потом раскрывается в «Свернуть»
+    page.wait_for_timeout(700)
+    box = page.locator("#pe-btn.busy").bounding_box()
+    assert box and abs(box["width"] - box["height"]) <= 1, box
+    assert page.locator("#pe-btn .pe-ico svg").evaluate("e=>getComputedStyle(e.parentNode).opacity") == "1"
     page.wait_for_selector(".pe-panel.open .pe-tailwrap.in", timeout=60000)
+    page.wait_for_timeout(700)
+    assert page.locator("#pe-btn").inner_text().strip() == "Свернуть"
+    assert page.locator("#pe-btn").bounding_box()["width"] > box["width"] * 2
     txt = page.inner_text(".pe-panel").lower()
     assert "анализ компаса" in txt and "как считали" in txt and "спросить ассистента" in txt
     assert page.locator(".pe-panel .pe-r").count() >= 1  # хотя бы одна строка «что есть»
