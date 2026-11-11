@@ -11364,3 +11364,21 @@ def test_post_keyboard_has_channel_buttons_and_approve_reads_them():
     big_realty = {"ind": "Недвижимость", "status": "Закрыта", "sum": "5 млрд ₽"}
     assert channels.channels_for(dict(big_realty, post_channels=["realty"])) == ("realty",)
     assert channels.channels_for(dict(big_realty, post_channels=["main"])) == ("main",)
+
+
+def test_fact_edit_needs_a_source_quote():
+    """Правка факта в существующей карточке — только с цитатой (владелец, 11 ноября 2026).
+
+    Смена формы («2 500 млн ₽» → «2,5 млрд ₽», привязка текста к профилю того же
+    имени) проходит; новый продавец или заголовок без записи с цитатой — отказ.
+    """
+    import fact_edit_guard
+    fact_edit_guard._self_check()
+    old = {'companies': {'p1': {'name': 'Ромашка'}},
+           'deals': [{'id': 'a', 'title': 'X купил Ромашку', 'asset': 'сеть «Ромашка»', 'target': None}]}
+    linked = {'companies': old['companies'],
+              'deals': [dict(old['deals'][0], target='p1')]}
+    assert fact_edit_guard.unbacked(old, linked, []) == []
+    wrong = {'companies': {'p2': {'name': 'Лютик'}},
+             'deals': [dict(old['deals'][0], target='p2')]}
+    assert fact_edit_guard.unbacked(old, wrong, [])

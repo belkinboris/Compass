@@ -1139,45 +1139,16 @@
    ]
   },
   {
-   "draft_id": "d89922765",
-   "title": "У радиостанции Rock FM сменился владелец",
+   "draft_id": "d22298897",
+   "title": "ГК ФСК вышла из капитала одной из крупнейших в Московском регионе УК",
    "date": "2026-11-11",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/media/articles/2026/11/11/1244238-u-rock-fm-smenilsya-vladelets"
+     "web:mergers.ru",
+     "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "радиостанции Rock FM",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "радиостанции Rock FM",
-    "seller": null
-   },
-   "ind": "Медиа",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d26806121",
-   "title": "Совладельцы «Адаманта» выкупили доли в петербургских пышечных Ginza Project",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/10/sovladelci-adamanta-vikupili"
-    ]
-   ],
-   "sum": null,
+   "sum": "700 млн ₽",
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -1185,41 +1156,13 @@
      "kind": "closed",
      "date": "2026-11-11",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК. Об этом рассказал представитель первой организации. Он добавляет, что сумма сделки составила 700 млн руб. В ФСК факт сделки подтвердили. По данным…",
      "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/11/10/sovladelci-adamanta-vikupili"
+      "web:mergers.ru",
+      "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "петербургских пышечных Ginza Project",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "петербургских пышечных Ginza Project",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d54353709",
-   "title": "All 7 Anthropic founders will each cash out about $250M in IPO",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/10/all-7-anthropic-founders-will-each-cash-out-about-250m-in-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1231,60 +1174,59 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d16674427",
-   "title": "Производитель хлебцев Kruazett купил сырный завод",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/proizvoditel-hlebcev-kruazett-kupil-syrnyj-zavod/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-10",
-     "title": "Сделка завершена",
-     "note": "Компания «Ориент Продактс», выпускающая хлебцы под брендами «Щедрые» и Kruazett, приобрела 100% долей маслодельного завода «Моршанский» в Тамбовской области. Сообщение Производитель хлебцев Kruazett купил сырный завод появились сначала на RETAILER.ru .",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/proizvoditel-hlebcev-kruazett-kupil-syrnyj-zavod/"
-     ]
-    }
-   ],
-   "buyer_name": "Производитель хлебцев Kruazett",
-   "asset": "сырный завод",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Производитель хлебцев Kruazett",
-    "asset": "сырный завод",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d48763317",
-   "title": "В Шадринске выставили на продажу бывший завод за 100 млн рублей. Фото",
+   "draft_id": "d45381973",
+   "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»",
    "date": "2026-11-11",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053143103"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
     ]
    ],
-   "sum": "100 млн ₽",
+   "sum": "170 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "Переговоры",
+     "note": "В рамках создания «Объединенной микроэлектронной корпорации» («ОМК») в ее контур может войти фабрика — «Элко». Согласно проекту стратегии, покупка планируется в 2027 г. На этот год в рамках стратегии на разные проекты предусмотрено 170 млрд руб. По всей…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d09392513",
+   "title": "FT: жители стран Персидского залива экономят на покупках из-за ситуации с Ираном",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28305567"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1303,41 +1245,13 @@
    ]
   },
   {
-   "draft_id": "d74117258",
-   "title": "Тамбовская область за девять месяцев привлекла в экономику региона более 14 млрд рублей федеральных средств",
+   "draft_id": "d99687339",
+   "title": "Минфин США может разрешить покупку подсанкционных танкеров",
    "date": "2026-11-11",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119143-tambovskaya-oblast-za-devyat-mesyatsev-privlekla-v-ekonomiku-regiona-bolee-14-mlrd-rubley/"
-    ]
-   ],
-   "sum": "14 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Тамбовская область за девять месяцев",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Тамбовская область за девять месяцев",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d33089318",
-   "title": "От туй до сосен: курганским садоводам рассказали, как вырастить хвойные деревья без покупки саженцев",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053142998"
+     "web:1prime.ru",
+     "https://1prime.ru/20261111/ssha-875101301.html"
     ]
    ],
    "sum": null,
@@ -1360,13 +1274,13 @@
    ]
   },
   {
-   "draft_id": "d63102892",
-   "title": "Пермяки стали чаще интересоваться покупкой квартир в ипотеку в новых домах",
+   "draft_id": "d07967258",
+   "title": "Психолог рассказала, чем опасен поиск выгоды на распродажах",
    "date": "2026-11-11",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053143209"
+     "web:ria.ru",
+     "https://ria.ru/20261111/psiholog-2130804553.html"
     ]
    ],
    "sum": null,
@@ -1389,46 +1303,84 @@
    ]
   },
   {
-   "draft_id": "d21111809",
-   "title": "В Басманном районе Москвы выставили на торги два нежилых помещения",
+   "draft_id": "d93859943",
+   "title": "После скандала Киркоров не может продать почти половину билетов на концерт",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053143252"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "Переговоры",
+     "note": "Певец Филипп Киркоров может не заработать почти 20 миллионов рублей.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053143252"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93110625",
+   "title": "Как раз к сезону: в Челябинской области продают горнолыжный комплекс",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053143029"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82170436",
+   "title": "В Новосибирске инвестиции в 2026 году могут сократиться на 74 млрд рублей",
    "date": "2026-11-11",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/11/v-basmannom-rajone-moskvy-prodayut-dva-nezhilyh-pomeshheniya"
+     "https://abnews.ru/siberia/news/novosibirsk/2026/11/11/v-novosibirske-investiczii-v-2026-godu-mogut-sokratitsya-na-74-mlrd-rublej"
     ]
    ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d73754799",
-   "title": "В Тюмени начали продавать билеты на балет «Щелкунчик» — вы обалдеете от цен на вип-места",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/entertainment/2026/11/11/76757948/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "74 млрд ₽",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,

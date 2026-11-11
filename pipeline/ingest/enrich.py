@@ -491,8 +491,17 @@ def proposals(deal, item, names, comps, match_keys=None):
     return out
 
 
-def apply_props(deal, props):
-    """Применить к карточке то, что разрешено: «добавить» и «обновить»."""
+def apply_props(deal, props, source=None):
+    """Применить к карточке то, что разрешено: «добавить» и «обновить».
+
+    `source` = (цитата, адрес, кто): правка факта записывается в `fact_log`
+    карточки — без нее `fact_edit_guard` отказывает записи (11 ноября 2026)."""
+    if source:
+        sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        import fact_edit_guard
+        for field, value, kind, _why in props:
+            if kind != 'расхождение' and field in fact_edit_guard.FACT_FIELDS:
+                fact_edit_guard.log(deal, field, value, source[0], source[1], source[2])
     for field, value, kind, _why in props:
         if kind == 'расхождение':
             continue
@@ -652,7 +661,8 @@ def main(argv):
         change_list = format_post.changes(before, after)
         applied.append((item, deal_id, good, change_list))
         if write:
-            apply_props(deal, good)
+            apply_props(deal, good, (str(item.get('text') or item.get('summary') or item.get('title') or '')[:600],
+                                     item.get('url'), 'enrich'))
         updates.append({'deal_id': deal_id, 'news': item.get('url'),
                         'changes': change_list,
                         'notify': format_post.should_notify(change_list),
