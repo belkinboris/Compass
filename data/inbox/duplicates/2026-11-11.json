@@ -1,0 +1,78 @@
+{
+ "made": "2026-11-11",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/9094307::g1cc071e4",
+   "candidate_id": "g1cc071e4",
+   "reason": "по всей базе: та же сторона и редкое слово: my",
+   "draft": {
+    "draft_id": "d46557790",
+    "title": "Российский бизнесмен Александр Чачава продает My.Games топ-менеджменту компании",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9094307"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "My.Games",
+    "seller": "Российский бизнесмен Александр Чачава",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "My.Games",
+     "seller": "Российский бизнесмен Александр Чачава"
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
+  },
+  {
+   "key": "https://mergers.ru/news/Orient-Prodakts-kupila-maslodelnyj-zavod-Morshanskij-v-Tambovskoj-oblasti-87773::g2883c476",
+   "candidate_id": "g2883c476",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d43679148",
+    "title": "«Ориент Продактс» купила маслодельный завод «Моршанский» в Тамбовской области",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Orient-Prodakts-kupila-maslodelnyj-zavod-Morshanskij-v-Tambovskoj-oblasti-87773"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-11",
+      "title": "Сделка завершена",
+      "note": "ООО «Ориент Продактс», принадлежащее бизнесмену Андрею Зокину, приобрело 100% долей в одном из крупнейших производителей сыра и молочных продуктов в Тамбовской области — ООО «Маслодельный завод \"Моршанский\"». До февраля 2026 года заводом владели Максим…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Orient-Prodakts-kupila-maslodelnyj-zavod-Morshanskij-v-Tambovskoj-oblasti-87773"
+      ]
+     }
+    ],
+    "buyer_name": "«Ориент Продактс»",
+    "asset": "маслодельный завод «Моршанский» в Тамбовской области",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Ориент Продактс»",
+     "asset": "маслодельный завод «Моршанский» в Тамбовской области",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
+  }
+ ]
+}
