@@ -166,6 +166,48 @@
     "needs_review": true
    },
    "queued": "2026-11-11"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9094805::gb3029360",
+   "candidate_id": "gb3029360",
+   "reason": "общие слова заголовка: 4",
+   "draft": {
+    "draft_id": "d64335821",
+    "title": "Командные игры // Александр Чачава продал My.Games топ-менеджменту компании",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9094805"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-11",
+      "title": "Сделка завершена",
+      "note": "Разработчик и издатель видеоигр My.Games объявил о выкупе компании менеджментом у своего единственного акционера Александра Чачавы. Среди новых владельцев — гендиректор компании Елена Григорян и операционный директор Денис Савута.",
+      "source": [
+       "web:kommersant.ru/daily",
+       "https://www.kommersant.ru/doc/9094805"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "My.Games",
+    "seller": "Командные игры // Александр Чачава",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "My.Games",
+     "seller": "Командные игры // Александр Чачава"
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
   }
  ]
 }
