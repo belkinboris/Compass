@@ -1304,10 +1304,10 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
     visit(page, base_url, "#/advisors")
     page.click('[data-t="legal"]')
     cards = page.locator(".advisor-list .advisor-card")
-    # порядок партнеров: KKMP, Orion, Stonebridge, «Никольская» в конце (владелец, 12 ноября 2026, окончательно)
-    assert "ККМП" in cards.nth(0).inner_text() and "Orion" in cards.nth(1).inner_text()
-    assert "Stonebridge" in cards.nth(2).inner_text() and "Никольская" in cards.nth(3).inner_text()
-    for i, colour in ((0, "rgb(49, 69, 96)"), (1, "rgb(65, 135, 230)"), (2, "rgb(132, 102, 94)"), (3, "rgb(58, 82, 105)")):
+    # порядок партнеров по надписи на логотипе: KKMP, Nikolskaya, Orion, Stonebridge (владелец, 12 ноября 2026, окончательно)
+    assert "ККМП" in cards.nth(0).inner_text() and "Никольская" in cards.nth(1).inner_text()
+    assert "Orion" in cards.nth(2).inner_text() and "Stonebridge" in cards.nth(3).inner_text()
+    for i, colour in ((0, "rgb(49, 69, 96)"), (1, "rgb(58, 82, 105)"), (2, "rgb(65, 135, 230)"), (3, "rgb(132, 102, 94)")):
         card = cards.nth(i)
         assert "fill" in card.get_attribute("class")
         assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == "rgb(255, 255, 255)"
