@@ -7349,7 +7349,9 @@ function renderDeal(id, qs, previewCard){
   const kindKey = (kindFromType!=="acquisition" ? kindFromType : (d.kind || kindFromType));
   const kind = KIND_LABELS[kindKey] || KIND_LABELS.acquisition;
   const buyerName = d.buyer && co(d.buyer) ? co(d.buyer).name : null;
-  const targetName = d.target && co(d.target) ? co(d.target).name : null;
+  // Предмет из ДВУХ обществ (пышечные Ginza, 11 ноября 2026): профиль один, а
+  // куплены два — схема и шапка называют оба (`target_label`), а не первый.
+  const targetName = d.target_label || (d.target && co(d.target) ? co(d.target).name : null);
   // Кнопка вкладки «Экономист» и решение, что рисовать ВНУТРИ нее (строка ниже,
   // в ветке lens==="eco"), должны опираться на одно и то же условие — иначе
   // кнопка не появляется вовсе, и уже написанный код показа `extra` при пустых
@@ -7655,7 +7657,7 @@ function renderDeal(id, qs, previewCard){
         /* Профиль с правовой формой из реестра (`legal_short`): «100% доли в
            ООО «ПармаВуд»», «56% акций АО «X»» — одна строка, без серой доли
            под ней (владелец, 2 ноября 2026). */
-        const tLegal = assetRef && co(assetRef) && co(assetRef).legal_short;
+        const tLegal = d.target_label || (assetRef && co(assetRef) && co(assetRef).legal_short);
         /* Поле доли уже записано по правилу («100% долей в ООО «А» и ООО «Б»»)
            — оно и есть предмет: показываем его целиком. */
         const shareText = String((d.eco&&d.eco.share)||"").trim().replace(/\.$/,"");
