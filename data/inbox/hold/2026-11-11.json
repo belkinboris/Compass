@@ -1100,45 +1100,6 @@
    ]
   },
   {
-   "draft_id": "d84812279",
-   "title": "Создаваемая микроэлектронная корпорация может купить новую фабрику у знаменитого создателя мобильных чипов",
-   "date": "2026-11-10",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
-    ]
-   ],
-   "sum": "170 млрд ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-10",
-     "title": "Переговоры",
-     "note": "В рамках создания «Объединенной микроэлектронной корпорации» рассматривается возможность приобрести фабрику «Элко», принадлежащую разработчику мобильных процессоров НПЦ «ЭЛВИС». Покупка намечена на 2027 год, на который в проекте стратегии предусмотрено 170…",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d22298897",
    "title": "ГК ФСК вышла из капитала одной из крупнейших в Московском регионе УК",
    "date": "2026-11-11",
@@ -1178,405 +1139,6 @@
    ]
   },
   {
-   "draft_id": "d45381973",
-   "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
-    ]
-   ],
-   "sum": "170 млрд ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-11",
-     "title": "Переговоры",
-     "note": "В рамках создания «Объединенной микроэлектронной корпорации» («ОМК») в ее контур может войти фабрика — «Элко». Согласно проекту стратегии, покупка планируется в 2027 г. На этот год в рамках стратегии на разные проекты предусмотрено 170 млрд руб. По всей…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93110625",
-   "title": "Как раз к сезону: в Челябинской области продают горнолыжный комплекс",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143029"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d04888921",
-   "title": "Акварели Волошина и Бенуа выставят на торги 14 ноября",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/culture/1128246"
-    ]
-   ],
-   "sum": "2,6 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d95537206",
-   "title": "Депутаты проголосовали за полный запрет продажи вейпов в Петербурге с 1 марта",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1128243"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d00552446",
-   "title": "Акварель Богаевского с автографом Цветаевой выставили на торги",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28305807"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51680619",
-   "title": "Зоны продажи табака в Петербурге планируют ограничить с марта 2027 года",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/11/zoni-prodazhi-tabaka-v-peterburge"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-11",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/11/11/zoni-prodazhi-tabaka-v-peterburge"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d04356354",
-   "title": "Запрет продажи вейпов в Петербурге прошёл первое чтение",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/11/zapret-prodazhi-vejpov-v-peterburge"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d00827255",
-   "title": "Потеснить OpenAI и Microsoft: Anthropic начала подготовку к крупнейшему IPO в истории",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/potesnit-openai-i-microsoft-anthropic-nachala-podgotovku-k-krupnejshemu-ipo-v-istorii/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d70917449",
-   "title": "«Полумер быть не может, только полный запрет». В Заксобрании проголосовали против продажи вейпов в Петербурге",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/11/76758147/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52560761",
-   "title": "В среднем россияне готовы потратить на покупку нового авто 2,4 млн рублей",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2199351/2026-11-11/v-srednem-rossiiane-gotovy-potratit-na-pokupku-novogo-avto-24-mln-rublei"
-    ]
-   ],
-   "sum": "2,4 млн ₽",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-11",
-     "title": "Переговоры",
-     "note": "В среднем россияне готовы потратить на покупку нового автомобиля 2,4 млн рублей. Об этом эксперты «Авито Авто» и «Авито Промо» рассказали «Известиям» 11 ноября по итогам опроса 10 тыс. россиян. Согласно результатам исследования, почти половина опрошенных…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2199351/2026-11-11/v-srednem-rossiiane-gotovy-potratit-na-pokupku-novogo-avto-24-mln-rublei"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d09493127",
-   "title": "В Роспотребнадзоре предупредили о поддельных сайтах с распродажами",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/rospotrebnadzor-875104291.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79790571",
-   "title": "Начался второй раунд переговоров России, США и Украины в Абу-Даби",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/11/nachalsya-vtoroy-raund-peregovorov-rossii-ssha-i-ukrainy-v-abu-dabi/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78145130",
-   "title": "На аукцион выставили последний Mercedes SLR McLaren Stirling Moss",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/11/na-auktsion-vystavili-posledniy-mercedes-slr-mclaren-stirling-moss/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d95962855",
    "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО",
    "date": "2026-11-11",
@@ -1603,6 +1165,310 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d84261291",
+   "title": "Второй раунд переговоров России, Украины и США проходит в закрытом формате",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9094477"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37380599",
+   "title": "Акционер «Яндекса» и Ozon продаст долю в My.Games менеджменту",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/11/11/2026/6af421848e50cc57a4cae551"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "доля в My.Games",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "доля в My.Games",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 3) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d80848823",
+   "title": "Рукопись речи Мартина Лютера Кинга «У меня есть мечта» выставят на торги",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6af42b811312d8d71227d4aa"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86655507",
+   "title": "Заксобрание Петербурга одобрило полный запрет продажи вейпов",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/11/11/2026/6af42cf15339650161aba0b6"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42749131",
+   "title": "В Петербурге приняли в первом чтении законопроект о запрете продажи вейпов",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28306133"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29793449",
+   "title": "В России разработают рекомендации по улучшению инвестиционного климата в регионах",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/v-rossii-razrabotayut-rekomendatsii-po-uluchsheniyu-investitsionnogo-klimata-v-regionah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67457706",
+   "title": "Совладельцы «Адаманта» выкупили доли в петербургских пышечных Ginza Project",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261111/sovladeltsy-2130832883.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261111/sovladeltsy-2130832883.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "петербургских пышечных Ginza Project",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "петербургских пышечных Ginza Project",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d59724499",
+   "title": "РЭЦ изучил, как зарубежные ИИ-сервисы отвечают на вопросы о покупке товаров",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261111/ii-2130844191.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97483577",
+   "title": "На концерт Киркорова в Ярославле не продали около трети билетов",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261111/kirkorov-2130837352.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:ria.ru",
+      "https://ria.ru/20261111/kirkorov-2130837352.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51147924",
+   "title": "IP-риски в M&A: почему одинаковые дефекты закрываются по-разному в FMCG и IT? Подкаст из вебинара « IP и Data protection риски в рамках сделок M&A» спикеров: ⚡️ Никиты Айрапетова , лидера направления ",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "tg:whitesquarenews",
+     "https://t.me/whitesquarenews/1574"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
