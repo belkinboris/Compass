@@ -3349,7 +3349,7 @@ const FIRMS = [
  {id:"liniya",n:"Линия Права",g:["С-hi"]},
  {id:"nikolaev",n:"МКА «Николаев и партнеры»",g:["С-hi","К-hi"],site:"https://nikolaew.ru"},
  {id:"nikolskaya",n:"Никольская Консалтинг",g:["С-hi","К-hi"],site:"https://nikolskaya.ru/",
-  brand:{logo:"/static/brands/nikolskaya.svg",logoOn:"/static/brands/nikolskaya-white.svg",ratio:3.63,h:42,ink:"#1C2A36",accent:["#3A5269"],fill:"#3A5269",sortAs:"Nikolskaya"}},
+  brand:{logo:"/static/brands/nikolskaya.svg",logoOn:"/static/brands/nikolskaya-white.svg",ratio:3.63,h:42,ink:"#1C2A36",accent:["#3A5269"],fill:"#3A5269"}},
  {id:"tedo",n:"Технологии Доверия",g:["С-hi"]},
  {id:"tomashevskaya",n:"Томашевская и партнеры",g:["С-hi","К-hi"]},
  {id:"maxima",n:"Maxima Legal",g:["К-hi"]},
@@ -9707,9 +9707,8 @@ const advCount = id => advInd==="Все" ? firmCount(id) : firmIndCount(id, advI
    же порядке. */
 const advPinned = r => firmBrand(r.f) ? 0 : 1;
 /* Плашка с логотипом стоит по тому, что на логотипе написано: у ККМП это латинское
-   KKMP, поэтому она идет перед Orion, а не после Stonebridge; «Никольская» стоит как
-   Nikolskaya — между KKMP и Orion: четыре партнера читаются подряд K, N, O, S
-   (владелец, 12 ноября 2026: «почему Никольская в конце, ты что, алфавит не знаешь?»). */
+   KKMP, поэтому она идет перед Orion, а не после Stonebridge. «Никольская» — в конце
+   (владелец, 12 ноября 2026, окончательно: «поставь в конец»): KKMP, Orion, Stonebridge, «Никольская». */
 const advName = f => (f.brand && f.brand.sortAs) || f.n;
 const advSortKey = (a,b) => advPinned(a)-advPinned(b) || (advInd!=="Все" ? (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))
   : (firmSort==="alpha" ? firmAlpha(advName(a.f),advName(b.f)) : (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))));
@@ -11837,7 +11836,7 @@ function renderEvent(id){
 <div class="ev-hero"><div class="l"><span class="kick">${esc(kick)}</span>
 <h2>${esc(ev.heroTitle)}</h2>
 <p>${esc(ev.lead)} Организаторы: ${esc(evOrgsText(ev))}.</p>
-<div class="meta"><span>${esc(ev.placeShort)}</span><span>${ev.program.length} сессий</span><span>начало в ${esc(ev.time)}</span></div>
+<div class="meta"><span>${esc(ev.placeShort)}</span><span>${ev.program.length} сессий</span></div>
 ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener">Регистрация и программа →</a>`:`<a class="ev-cta" href="${ev.site}" target="_blank" rel="noopener">Сайт форума →</a>`}</div>
 <div class="r"><div class="ev-cd" id="evCd">${left===0?evTodayHtml(ev):`${count}<div><div class="big">${esc(ev.time)}</div><div class="cap">начало первой сессии</div></div>`}</div>
 <div class="cap">Среди спикеров — представители ${esc(ev.speakersFrom)}</div>
