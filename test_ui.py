@@ -1304,9 +1304,10 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
     visit(page, base_url, "#/advisors")
     page.click('[data-t="legal"]')
     cards = page.locator(".advisor-list .advisor-card")
-    assert "Orion" in cards.nth(0).inner_text() and "Stonebridge" in cards.nth(1).inner_text()
-    assert "ККМП" in cards.nth(2).inner_text() and "Никольская" in cards.nth(3).inner_text()
-    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)"), (2, "rgb(49, 69, 96)"), (3, "rgb(58, 82, 105)")):
+    # по алфавиту логотипов: KKMP, Orion, Stonebridge, «Никольская» (владелец, 12 ноября 2026)
+    assert "ККМП" in cards.nth(0).inner_text() and "Orion" in cards.nth(1).inner_text()
+    assert "Stonebridge" in cards.nth(2).inner_text() and "Никольская" in cards.nth(3).inner_text()
+    for i, colour in ((0, "rgb(49, 69, 96)"), (1, "rgb(65, 135, 230)"), (2, "rgb(132, 102, 94)"), (3, "rgb(58, 82, 105)")):
         card = cards.nth(i)
         assert "fill" in card.get_attribute("class")
         assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == "rgb(255, 255, 255)"
@@ -1360,6 +1361,13 @@ def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
         shown = page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length")
         assert shown == min(n, 4), (fid, shown, n)
         assert page.locator(".fp a.fp-team").count() == 1, fid
+        # нажимается вся плашка сделки, а не только слова «Карточка сделки»
+        if fid != "orion":
+            first_id = page.locator('.fp a[href^="#/deal/"]').first.get_attribute("href")
+            page.locator(".fp .fp-click").first.click(position={"x": 12, "y": 12})
+            page.wait_for_function("h=>location.hash===h", arg=first_id)
+            page.go_back()
+            page.wait_for_selector(f".fp.{cls}")
         if n > 4:
             page.click("#fpAllDeals")
             assert page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length") == n
