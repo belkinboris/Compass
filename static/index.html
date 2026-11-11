@@ -2235,15 +2235,14 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .advisor-card.brand.fill:hover{background:var(--b-fill);border-color:var(--b-fill);box-shadow:0 18px 34px -22px color-mix(in srgb,var(--b-fill) 80%,transparent)}
   .advisor-card.brand.fill:hover .brand-logo{opacity:0}
   .advisor-card.brand.fill:hover .brand-logo.on{opacity:1}
-  .advisor-card.brand.fill:hover .count-btn{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
+  .advisor-card.brand.fill:hover .count-btn,.advisor-card.brand.fill:hover .brand-text,.advisor-card.brand.fill:hover .label,.advisor-card.brand.fill:hover .brand-slogan{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
 }
-/* На телефоне наведения нет: та же заливка — на время нажатия (владелец, 11 ноября 2026: «когда нажимаешь, дешевая каемка вместо заливки»). */
-@media (hover:none){
-  .advisor-card.brand.fill:active{background:var(--b-fill);border-color:var(--b-fill)}
-  .advisor-card.brand.fill:active .brand-logo{opacity:0}
-  .advisor-card.brand.fill:active .brand-logo.on{opacity:1}
-  .advisor-card.brand.fill:active .count-btn{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
-}
+/* На телефоне наведения нет: та же заливка — по нажатию: класс pressed ставит bindAdvisorsBody и держит долю секунды до перехода (владелец, 11 ноября 2026: «дешевая каемка вместо заливки», затем «закрашиваются, только если нажать и держать, а если просто нажать — серым»). */
+.advisor-card.brand.fill,.advisor-card.brand.fill a{-webkit-tap-highlight-color:transparent}
+.advisor-card.brand.fill.pressed{background:var(--b-fill);border-color:var(--b-fill);transition:none}
+.advisor-card.brand.fill.pressed .brand-logo{opacity:0;transition:none}
+.advisor-card.brand.fill.pressed .brand-logo.on{opacity:1}
+.advisor-card.brand.fill.pressed .count-btn,.advisor-card.brand.fill.pressed .brand-text,.advisor-card.brand.fill.pressed .label,.advisor-card.brand.fill.pressed .brand-slogan{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
 .brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
 /* Описание короче соседних, и при обычном переносе на вторую строку уходило
    одно слово («сделок.») — абзац выглядел оборванным. `pretty` переносит
@@ -2454,6 +2453,11 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   font-family:'Manrope',system-ui,sans-serif;color:var(--xb-ink);font-size:15.5px;line-height:1.5;
   width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;margin-bottom:-80px;background:var(--xb-bg)}
 .xb a{color:inherit}
+/* Execburo — тоже листом внутри нашей страницы (см. .fp-inset). */
+.xb.xb-inset{background:var(--paper,#F5F5F1);padding:65px 28px 72px}
+.xb-sheet{max-width:1180px;margin:0 auto;background:var(--xb-bg);border:1px solid var(--line,#E3E4DE);border-radius:6px;overflow:hidden}
+.xb-inset .xb-hero .xb-in{padding-top:48px}
+@media(max-width:860px){.xb.xb-inset{padding:65px 12px 48px}.xb-inset .xb-hero .xb-in{padding-top:30px}}
 /* Подвал сайта встает вплотную к бордовой плашке «Нужен руководитель?». */
 #app:has(> .xb) + footer{margin-top:0}
 .xb h1,.xb h2,.xb h3{font-family:'Manrope',system-ui,sans-serif;margin:0;color:var(--xb-ink)}
@@ -3359,7 +3363,7 @@ const EXEC_FIRMS = [
   links:[["Telegram","https://t.me/sofyasavenkova"],["WhatsApp","https://wa.me/79105390039"],["LinkedIn","https://www.linkedin.com/in/sofia-belyandinova-savenkova-563074167/"]],
   desc:"Поиск и привлечение топ-менеджеров: CEO, CFO, CTO, HRD и весь senior-менеджмент. 7 стран, бутиковый формат.",
   brand:{logo:"/static/brands/execburo.svg",ratio:5.9,font:"Commissioner",ink:"#1F1C1C",
-         accent:["#64181C","#82363A","#E5E3D1"],slogan:"Найти тех, кто поведет бизнес вперед"},
+         accent:["#64181C","#82363A","#E5E3D1"],slogan:"Найти тех, кто поведет бизнес вперед",logoOn:"/static/brands/execburo-white.svg",fill:"#64181C"},
   mark:"/static/brands/execburo-mark.svg", city:"Москва",
   h1:"Мы помогаем найти тех, кто поведет бизнес вперед",
   lead:"Поиск и привлечение топ-менеджеров и руководителей: от CEO и владельца P&L до функционального руководства — COO, CFO, CCO, CMO, CPO, CTO, CLO, HRD.",
@@ -9675,6 +9679,19 @@ function bindAdvisorsBody(root){
   root.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>{firmSort=b.dataset.sort;renderAdvisors();rerun();});
   const advSel=root.querySelector("#advind");
   if(advSel) advSel.onchange=()=>{advInd=advSel.value;renderAdvisors();rerun();};
+  // Фирменная плашка на телефоне: заливка сразу по касанию и короткая задержка
+  // перехода, чтобы ее было видно и при быстром нажатии.
+  root.querySelectorAll(".advisor-card.brand.fill").forEach(card=>{
+    const off=()=>card.classList.remove("pressed");
+    card.addEventListener("touchstart",()=>card.classList.add("pressed"),{passive:true});
+    card.addEventListener("touchmove",off,{passive:true});
+    card.addEventListener("touchcancel",off,{passive:true});
+    card.addEventListener("click",e=>{
+      const a=e.target.closest("a"); if(!a || !window.matchMedia("(hover:none)").matches) return;
+      e.preventDefault(); card.classList.add("pressed");
+      setTimeout(()=>{location.hash=a.getAttribute("href");},180);
+    });
+  });
 }
 function renderAdvisorsBody(){
   const el=document.getElementById("advBody");
@@ -10051,14 +10068,13 @@ function renderExecFirm(f){
   const mark = (sz) => `<img class="xb-mark" src="${f.mark}" alt="" width="${sz}" height="${sz}">`;
   const chips = (arr, hl) => `<div class="xb-chips">${arr.map(x=>`<span class="xb-chip${hl?" hl":""}">${esc(x)}</span>`).join("")}</div>`;
   const link = (t,u) => `<a href="${u}" target="_blank" rel="noopener">${esc(t)}</a>`;
-  app.innerHTML = `<div class="xb">
+  app.innerHTML = `<div class="xb xb-inset"><div class="fp-out"><a href="#/advisors">Консультанты</a> / Executive Search / <b>${esc(f.n)}</b></div><div class="xb-sheet">
   <section class="xb-hero"><div class="xb-in">
-    <div class="xb-crumbs"><a href="#/advisors">Консультанты</a> / Executive Search / ${esc(f.n)}</div>
     <div class="xb-idrow">${mark(52)}<div class="xb-word">${esc(f.n)}<small>Executive search · ${esc(f.city)}</small></div></div>
     <div class="xb-kicker">Executive Search · профиль в Компасе</div>
     <h1>${esc(f.h1)}</h1>
     <p class="xb-lead">${esc(f.lead)}</p>
-    <div class="xb-btns"><a class="xb-btn fill" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a><a class="xb-btn line" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
+    <div class="xb-btns"><a class="xb-btn fill" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a><a class="xb-btn line" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы <svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a></div>
     <div class="xb-facts">${f.facts.map(([a,c])=>`<span><b>${esc(a)}</b> ${esc(c)}</span>`).join("")}<span>Основатель — <b>${esc(f.founderName)}</b></span></div>
     ${claimLineHtml()}
   </div></section>
@@ -10090,7 +10106,7 @@ function renderExecFirm(f){
   <section class="xb-cta"><div class="xb-in"><div><h3>Нужен руководитель?</h3><p>Заявка уходит в фирму; Компас не посредник и не берет комиссию.</p></div>
     <div class="ct"><b>${esc(f.email)}</b><b><a href="tel:${f.tel}">${esc(f.phone)}</a></b><span>${f.links.map(([t,u])=>link(t,u)).join(" · ")}</span></div>
     <a class="xb-btn" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a></div></section>
-  </div>`;
+  </div></div>`;
   mountClaimLine("firm", f.id);
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
