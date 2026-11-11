@@ -1086,6 +1086,11 @@ SUM_THOUSANDS_MLN = re.compile(r'(?<![\d,–-])\d{1,3}[\s\u00a0]\d{3}(?:,\d+)?\s
 WORD_SHARE_TITLE = re.compile(r'(?i)(?<![\w])(четверть|половин[ауы]|треть[юи]?)\s+'
                               r'(акций|дол[ииейю]\w*|капитала|пакета|уставного)')
 
+LEGAL_ENTITY_NAMED = re.compile(r'(?:ООО|АО|ПАО|ЗАО|ОАО|НАО)\s*«[^»]{2,60}»')
+INN_SEARCH_PLACES = re.compile(r'(?i)datanewton|датаньютон|egrul|егрюл|saby|sbis|сбис|спарк|spark|rusprofile|руспрофайл|'
+                               r'checko|чекко|list-org|т-банк|tbank|контур|zachestny|rbc\.ru|companies\.rbc')
+REGISTRY_PLACE = re.compile(r'(?i)datanewton|датаньютон|egrul\.nalog|егрюл')
+
 CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
                  'auction_type', 'fund_status', 'aggregator_cites_primary')
@@ -1898,6 +1903,27 @@ def check_answer(ans, card, base):
                 # («Лента»/«Мария-Ра», 23 сентября 2026).
                 text = str(card.get(ROLES[role][0]) or '')
                 named = single_legal_entity(text)
+                # НЕСКОЛЬКО НАЗВАННЫХ ЮРЛИЦ — ТОЖЕ НЕ ПРИЧИНА (11 ноября 2026,
+                # пышечные Ginza, g1c060772): предмет — доли ДВУХ ООО, читатель
+                # записал «профиль не заводится, слишком малые, ИНН не нашли»
+                # после двух веб-поисков, и проверка «одно юрлицо» его пропустила.
+                # Пост вышел без финансов и без оценки цены; оба ИНН нашлись одним
+                # запросом к datanewton.ru/search. Владелец: «если не нашел, надо
+                # как минимум еще в 5 источниках проверить». Названное юрлицо
+                # (купленное или покупатель) без профиля принимается, только если
+                # причина перечисляет не меньше пяти мест поиска, включая реестр.
+                entities = LEGAL_ENTITY_NAMED.findall(text)
+                if role in ('target', 'buyer') and len(entities) >= 2 and not named:
+                    places = {m.lower()[:6] for m in INN_SEARCH_PLACES.findall(
+                        str(reason) + ' ' + ' '.join(map(str, card.get('accepted_notes', {}).get('searched') or []))
+                        + ' ' + ' '.join(map(str, ans.get('searched') or [])))}
+                    if len(places) < 5 or not REGISTRY_PLACE.search(str(reason) + ' '.join(
+                            map(str, (ans.get('searched') or []) + (card.get('accepted_notes', {}).get('searched') or [])))):
+                        bad.append('no_profile: %s — названы юрлица (%s): профиль не откладывается, пока ИНН не '
+                                   'искали минимум в пяти местах, включая реестр (datanewton.ru/search?query=<имя>, '
+                                   'egrul.nalog.ru, Saby, СПАРК, Rusprofile/Checko/List-org через веб-поиск по имени '
+                                   'и адресу). Найдено мест: %d. «Слишком малые» — не причина (docs/company_data.md)'
+                                   % (role, ', '.join(entities[:3]), len(places)))
                 if named:
                     bad.append('no_profile: %s назван одним юрлицом «%s» — заведите профиль, '
                                'а не откладывайте: имя есть, ИНН ищется по ЕГРЮЛ, и тогда '
