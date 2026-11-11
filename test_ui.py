@@ -1295,6 +1295,26 @@ def test_execburo_in_executive_search_tab_and_its_profile(page, base_url):
     page.click('[data-t="legal"]')
 
 
+def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_url):
+    """11 ноября 2026, владелец («4 огонь»): Orion и Stonebridge Legal стоят
+    наверху списка юридических консультантов; в покое карточка белая с
+    логотипом в цветах фирмы, при наведении заливается цветом фирмы, логотип
+    становится белым."""
+    visit(page, base_url, "#/advisors")
+    page.click('[data-t="legal"]')
+    cards = page.locator(".advisor-list .advisor-card")
+    assert "Orion" in cards.nth(0).inner_text() and "Stonebridge" in cards.nth(1).inner_text()
+    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)")):
+        card = cards.nth(i)
+        assert "fill" in card.get_attribute("class")
+        assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == "rgb(255, 255, 255)"
+        card.hover(position={"x": 300, "y": 20})
+        page.wait_for_timeout(450)
+        assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == colour
+        assert card.locator(".brand-logo.on").evaluate("e=>getComputedStyle(e).opacity") == "1"
+    page.mouse.move(5, 5)
+
+
 def test_account_form_is_visible_after_async_auth_check(page, base_url):
     visit(page, base_url, "#/account")
     assert page.locator("#loginForm").is_visible()
@@ -2216,7 +2236,8 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     assert "Strategy Partners" in text and "Форштадт" not in text
     assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
     # ни одна фирма сейчас не фирменная, и порядок — чистый алфавит
-    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).length") == 0
+    # фирменные среди юридических и инвестиционных — только Orion и Stonebridge Legal (11 ноября 2026)
+    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "orion,stonebridge"
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
