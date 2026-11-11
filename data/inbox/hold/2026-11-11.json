@@ -1168,74 +1168,6 @@
    ]
   },
   {
-   "draft_id": "d59253837",
-   "title": "Три новых проектора Wanbo уже в продаже",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-11_tri_novyh_proektora_wanbo_uzhe"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64467267",
-   "title": "В Абу-Даби на аукцион выставят вещи Майкла Джексона и принцессы Дианы",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2200021/video/v-abu-dabi-na-auktcion-vystaviat-veshchi-maikla-dzheksona-i-printcessy-diany"
-    ]
-   ],
-   "sum": "$10 млн",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "Вещи Майкла Джексона и принцессы Дианы выставят на аукцион в Абу-Даби. Торги состоятся с 7 по 9 декабря, передает телеканал «Известия» . Куртку Майкла Джексона Thriller оценили более чем в $10 млн. На аукционе также представят 400 вещей музыканта. Перчатку…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2200021/video/v-abu-dabi-na-auktcion-vystaviat-veshchi-maikla-dzheksona-i-printcessy-diany"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88675015",
    "title": "MY.GAMES снова продают: топ-менеджеры выкупят разработчика видеоигр у бизнесмена Александра Чачавы",
    "date": "2026-11-11",
@@ -1275,6 +1207,64 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 5) — проверьте, не дубль ли",
     "та же новость, что «Инвестор Александр Чачава, в 2022 году выкупивший у VK её иг» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d41915235",
+   "title": "Верховный суд разъяснил порядок выкупа смежного участка",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261111/sud-2130956526.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d24152898",
+   "title": "Акции Nvidia перешли к росту после обвала из-за шпионского скандала",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/11/aktsii-nvidia-pereshli-k-rostu-posle-obvala-iz-za-shpionskogo-skandala/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
