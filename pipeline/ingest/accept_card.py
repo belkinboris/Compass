@@ -1313,6 +1313,15 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if not mgmt_words:
             out.append(('management_title', 'заголовок передачи в управление — «X передана в управление Y» '
                         '(pipeline/title_standard.py)'))
+    # ПОЛЯ ИЗ ЗАКРЫТЫХ СПИСКОВ (11 ноября 2026): у «Адаманта»/Ginza (g1c060772)
+    # в очереди стояло `date_basis: unknown`, приемка его пропустила, а тест базы
+    # остановил выпуск сразу пяти постов на час. Проверка та же, что в
+    # test_data.test_explicit_date_basis_and_stake_acquired_are_valid.
+    if has(card.get('date_basis')):
+        import deal_multiples as _dm
+        if card['date_basis'] not in _dm.DATE_BASES:
+            out.append(('date_basis_invalid', 'date_basis «%s» не из списка %s — поставьте верное значение '
+                        'или снимите поле' % (card['date_basis'], ', '.join(_dm.DATE_BASES))))
     # СТАНДАРТ ЗАГОЛОВКА (владелец одобрил 6 ноября 2026: «Заголовки ок»).
     # Глагол — по типу и статусу (pipeline/title_standard.py, RULES). Держит
     # ВСЕ, что еще не вышло постом, — по дате сделки отсекать нельзя: в тот же
