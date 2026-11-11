@@ -222,6 +222,13 @@ def main(argv):
     finally:
         if write and os.path.exists(LOCK):
             os.remove(LOCK)
+        if write:
+            try:
+                sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+                import publication_lock  # noqa: E402
+                publication_lock.release(WORK if os.path.isdir(WORK) else ROOT)
+            except BaseException as e:  # замок устареет сам
+                log('Замок публикации не снят (%s) — устареет сам.' % e)
 
 
 def _main(argv, write):
@@ -255,6 +262,14 @@ def _main(argv, write):
         log('В очереди есть готовые, но не показанные карточки — их покажет send_drafts.py --write (это не мешает решениям).')
     if not write:
         log('Сухой прогон: применила бы решения, прогнала полный pytest, запушила, подтвердила сайту и отправила посты. Запись — с ключом --write.')
+        return 0
+
+    # ЗАМОК МЕЖДУ СЕССИЯМИ (11 ноября 2026): публикация запускается в новой
+    # сессии каждый раз, и прогоны могут пересечься — pipeline/publication_lock.py.
+    sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+    import publication_lock  # noqa: E402
+    if publication_lock.acquire(WORK):
+        log('ГОТОВО: решения выпускает другой прогон публикации — этот ничего не делает.')
         return 0
 
     old = load_json(git('show', 'origin/main:static/data/deals_promoted.json'))
