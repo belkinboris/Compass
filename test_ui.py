@@ -1356,6 +1356,13 @@ def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
         assert "ё" not in body
         n = page.evaluate(f"firmDeals('{fid}').full.length")
         assert n >= 2 and page.locator('.fp a[href^="#/deal/"]').count() == n
+        # 12 ноября 2026: видно четыре сделки, остальные — по кнопке «Все сделки»; под партнерами — «Вся команда»
+        shown = page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length")
+        assert shown == min(n, 4), (fid, shown, n)
+        assert page.locator(".fp a.fp-team").count() == 1, fid
+        if n > 4:
+            page.click("#fpAllDeals")
+            assert page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length") == n
     # «Никольская» попросила не показывать в профиле сделку по «Петроваксу»: в счете и на странице ее нет
     assert page.evaluate("firmDeals('nikolskaya').full.every(d=>d.id!=='g82725e96')")
     assert "Петровакс" not in page.locator("#app").inner_text()
@@ -5669,3 +5676,20 @@ def test_home_has_a_red_forum_button_next_to_view_deals(browser, base_url):
             assert b["y"] > a["y"] + a["height"]
         assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
         pg.close()
+
+
+def test_forum_day_block_shows_the_nearest_session(page, base_url):
+    """12 ноября 2026, владелец: в полночь дня форума стояло «Сегодня9:45 / форум
+    идет». В день форума блок показывает ближайшую сессию и не врет до начала."""
+    visit(page, base_url, "#/event/ma-forum-2026")
+    page.wait_for_selector(".ev-hero")
+    get = lambda m: page.evaluate("m=>{const d=document.createElement('div');d.innerHTML=evTodayHtml(EVENTS[0],m);return d.innerText||d.textContent}", m)
+    early = get(30)
+    assert "9:45" in early and "начало первой сессии" in early and "идет" not in early
+    mid = get(13 * 60)
+    assert "15:00" in mid and "ближайшая сессия" in mid and "Сейчас идет сессия 3" in mid
+    assert "последняя сессия" in get(17 * 60)
+    assert "завершена" in get(20 * 60)
+    # статья стоит отдельной карточкой и в списке материалов не повторяется
+    assert page.locator(".mts .mt").count() == page.evaluate("EVENTS[0].materials.length") - 1
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0

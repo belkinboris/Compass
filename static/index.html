@@ -2275,6 +2275,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp-ask>div{display:flex;flex-wrap:wrap;gap:9px}
 .fp-ask button{font:inherit;font-size:14px;line-height:1.2;color:inherit;background:none;border:1px solid currentColor;border-radius:99px;padding:9px 16px;cursor:pointer;opacity:.9;transition:background .2s,color .2s,opacity .2s}
 .fp-ask button:hover{opacity:1;background:rgba(127,127,127,.14)}
+.fp .fp-hid{display:none!important}
+.fp .fp-more{display:inline-flex;align-items:center;margin-top:22px;padding:11px 20px;border:1px solid currentColor;border-radius:999px;background:none;color:inherit;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;opacity:.85;transition:opacity .2s}
+.fp .fp-more:hover{opacity:1}
 .fp-arr{width:11px;height:11px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
 /* «Лист» фирмы внутри нашей страницы (владелец, 11 ноября 2026: у «Никольской»
    страница встроена в сайт, а Orion и Stonebridge занимали весь экран — «как
@@ -2382,7 +2385,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 @media(max-width:860px){
   .fp{font-size:15px}.fp-in{padding:0 18px}
   .fp-sb .q-hero{padding-bottom:40px}.fp-sb .q-bar{flex-direction:column;align-items:stretch}.fp-sb .q-hmeta{padding:12px 0 0}.fp-sb .q-lt{padding:0 16px;height:52px}.fp-sb .q-lt span{display:none}
-  .fp-sb .q-body{grid-template-columns:1fr;gap:28px;margin-top:34px}.fp-sb .q-mark img{width:120px}.fp-sb .q-hero h1{font-size:38px}.fp-sb .q-hero p{font-size:15.5px}.fp-sb .q-btns{flex-direction:column}
+  .fp-sb .q-body{grid-template-columns:1fr;gap:28px;margin-top:34px}.fp-sb .q-mark img{width:120px}.fp-sb .q-hero h1{font-size:33px}.fp-sb .q-hero p{font-size:15.5px}.fp-sb .q-btns{flex-direction:column}
   .fp-sb .q-stats{grid-template-columns:1fr 1fr;padding:24px 20px;gap:22px}.fp-sb .q-stats b{font-size:28px}.fp-sb h2{font-size:27px;flex-direction:column;align-items:flex-start;gap:4px;margin-top:44px}
   .fp-sb .q-feat{grid-template-columns:1fr}.fp-sb .q-feat .q-img{height:170px;order:-1}.fp-sb .q-feat .q-img img{width:120px}.fp-sb .q-feat .q-t{padding:22px 20px}.fp-sb .q-feat h3{font-size:22px}
   .fp-sb .q-grid,.fp-sb .q-pi,.fp-sb .q-team{grid-template-columns:1fr}.fp-sb .q-pi{gap:30px}
@@ -2829,7 +2832,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-cta{display:inline-block;background:#fff;color:#C8321E;font-weight:700;font-size:14px;border-radius:999px;padding:11px 22px;text-decoration:none;width:fit-content}
 @media(max-width:400px){.ev-cta{white-space:nowrap;font-size:13.5px;padding:11px 18px}}
 .ev-cd{display:flex;gap:14px}
-.ev-cd div{min-width:0}
+.ev-cd div{min-width:0}.ev-cd .ev-now{margin-top:10px}.ev-hero .r,.ev-hero .l{min-width:0}
 .ev-why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .ev-why div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
 .ev-why b{display:block;font-family:var(--f-display);font-weight:400;font-size:18px;margin-bottom:6px}
@@ -10191,6 +10194,18 @@ function renderFirmPage(f){
       <div class="q-contact"><div><h3>Связаться с Orion</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn q-pri" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div>
     </div></div></div>`;
   }
+  /* «Вся команда» ведет на сайт фирмы; сделок на странице видно четыре, остальные —
+     по кнопке «Все сделки» (партнер, 12 ноября 2026). Скрытые остаются в разметке. */
+  const TEAM = {orion:"https://orion-law.com/team", stonebridge:"https://stonebridgelegal.ru/ru/team/", kkmp:"https://kkmp.legal/team/", nikolskaya:"https://nikolskaya.ru/persons"}[f.id];
+  const teamBox = app.querySelector(".fp .q-team");
+  if(TEAM && teamBox) teamBox.insertAdjacentHTML("afterend", `<a class="fp-more fp-team" href="${TEAM}" target="_blank" rel="noopener">Вся команда на сайте фирмы ${arr}</a>`);
+  const dealBox = app.querySelector(f.id==="stonebridge" ? ".fp .q-grid" : ".fp .q-deals");
+  const keep = f.id==="stonebridge" ? 3 : 4;
+  if(dealBox && dealBox.children.length>keep){
+    [...dealBox.children].slice(keep).forEach(c=>c.classList.add("fp-hid"));
+    dealBox.insertAdjacentHTML("afterend", `<button type="button" class="fp-more" id="fpAllDeals">Все сделки (${deals.length})</button>`);
+    document.getElementById("fpAllDeals").onclick = e => { dealBox.querySelectorAll(".fp-hid").forEach(c=>c.classList.remove("fp-hid")); e.currentTarget.remove(); };
+  }
   const askBox = document.getElementById("fpAsk"), askBtn = document.getElementById("prepInterviewFirm");
   if(askBox && askBtn){
     askBtn.onclick = () => { askBox.hidden = !askBox.hidden; };
@@ -11781,11 +11796,10 @@ function renderEvent(id){
   if(!ev){location.hash="#/materials";return;}
   const p=evDateParts(ev); const left=evDays(ev);
   const kick=left>0?`Скоро · ${p.d} ${p.mon} ${p.y}, Москва`:left===0?`Сегодня · ${p.d} ${p.mon} ${p.y}, Москва`:`Прошло · ${p.d} ${p.mon} ${p.y}, Москва`;
-  const count=left>0?`<div><div class="big">${left}</div><div class="cap">${plural(left,"день","дня","дней")} до форума</div></div>`:
-              left===0?`<div><div class="big">Сегодня</div><div class="cap">форум идет</div></div>`:"";
+  const count=left>0?`<div><div class="big">${left}</div><div class="cap">${plural(left,"день","дня","дней")} до форума</div></div>`:"";
   const article=ev.materials[0];
   const prog=ev.program.map((s,i)=>`<div class="ev-p"><div class="tm">${esc(s.t)}<small>Сессия ${i+1}</small></div><div><h4>${esc(s.title)}</h4><div class="md">Модератор: ${esc(s.mod)}</div><div class="sp">${esc(s.sp)}</div></div></div>`).join("");
-  const mats=ev.materials.map(m=>`<a class="mt" href="${m.u}" target="_blank" rel="noopener"><span class="mt-ic">PDF</span><span class="mt-b"><span class="mt-k">${esc(m.k)}</span><span class="mt-t">${esc(m.t)}</span><span class="mt-d">Скачать ↓</span></span></a>`).join("");
+  const mats=ev.materials.slice(1).map(m=>`<a class="mt" href="${m.u}" target="_blank" rel="noopener"><span class="mt-ic">PDF</span><span class="mt-b"><span class="mt-k">${esc(m.k)}</span><span class="mt-t">${esc(m.t)}</span><span class="mt-d">Скачать ↓</span></span></a>`).join("");
     const orgs=evOrgsSorted(ev).map(([fid,n])=>`<a href="#/advisors/${fid}">${esc(n)}</a>`).join("");
   app.innerHTML=`<div class="ev-wrap"><div class="evp-crumbs"><a href="#/materials">Материалы</a> → <a href="#/materials">Мероприятия</a> → Форум M&amp;A</div>
 <section class="ev">
@@ -11794,7 +11808,7 @@ function renderEvent(id){
 <p>${esc(ev.lead)} Организаторы: ${esc(evOrgsText(ev))}.</p>
 <div class="meta"><span>${esc(ev.placeShort)}</span><span>${ev.program.length} сессий</span><span>начало в ${esc(ev.time)}</span></div>
 ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener">Регистрация и программа →</a>`:`<a class="ev-cta" href="${ev.site}" target="_blank" rel="noopener">Сайт форума →</a>`}</div>
-<div class="r"><div class="ev-cd">${count}<div><div class="big">${esc(ev.time)}</div><div class="cap">начало первой сессии</div></div></div>
+<div class="r"><div class="ev-cd" id="evCd">${left===0?evTodayHtml(ev):`${count}<div><div class="big">${esc(ev.time)}</div><div class="cap">начало первой сессии</div></div>`}</div>
 <div class="cap">Среди спикеров — представители ${esc(ev.speakersFrom)}</div>
 <div class="partner">Информационный партнер<br><b>КОМПАС</b></div></div></div>
 <div style="height:22px"></div>
@@ -11813,6 +11827,23 @@ ${left>=0?`<a class="ev-cta" href="${ev.register}" target="_blank" rel="noopener
 <div class="ev-h"><h2>Организаторы</h2></div>
 <div class="ev-org">${orgs}</div></section><div style="height:40px"></div></div>`;
   document.title=`${ev.heroTitle} — ${p.d} ${p.mon} ${p.y} · Проект Компас`;
+  if(left===0){ clearInterval(window._evTick); window._evTick=setInterval(()=>{
+    const m=document.getElementById("evCd"); if(!m){clearInterval(window._evTick);return;} m.innerHTML=evTodayHtml(ev); },30000); }
+}
+/* В день форума блок времени показывает БЛИЖАЙШУЮ сессию и меняется сам
+   (владелец, 12 ноября 2026: в полночь стояло «Сегодня9:45 / форум идет» —
+   слипшиеся слова и неправда: форум еще не начался). Время — московское,
+   где бы ни был читатель. Сессия считается идущей до начала следующей;
+   последняя — полтора часа. */
+function evTodayHtml(ev, nowMin){
+  if(nowMin==null){ const t=new Date(Date.now()+3*3600e3); nowMin=t.getUTCHours()*60+t.getUTCMinutes(); }
+  const mins=ev.program.map(s=>{const [h,m]=s.t.split(":").map(Number);return h*60+m;});
+  const next=mins.findIndex(m=>m>nowMin);
+  let cur=-1; mins.forEach((m,i)=>{ if(m<=nowMin) cur=i; });
+  if(cur===mins.length-1 && nowMin>=mins[cur]+90) return `<div><div class="big">Сегодня</div><div class="cap">программа форума завершена</div></div>`;
+  const now=cur>=0?`<div class="cap ev-now">Сейчас идет сессия ${cur+1}: ${esc(ev.program[cur].title)}</div>`:"";
+  if(next<0) return `<div><div class="big">${esc(ev.program[cur].t)}</div><div class="cap">идет последняя сессия: ${esc(ev.program[cur].title)}</div></div>`;
+  return `<div><div class="big">${esc(ev.program[next].t)}</div><div class="cap">${cur<0?"сегодня, начало первой сессии":`ближайшая сессия — ${next+1}-я из ${mins.length}`}</div>${now}</div>`;
 }
 
 /* ВКЛАДКИ «МАТЕРИАЛОВ» (владелец и партнер, 9 ноября 2026: «Материалы должны быть
