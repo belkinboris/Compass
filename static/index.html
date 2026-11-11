@@ -9947,7 +9947,7 @@ const FIRM_PAGES = {
   stonebridge:{
     since:"с 2022 года", h1:"Вне времени.<br>Вне обстоятельств",
     lead:"Независимая юридическая фирма, образованная частью партнеров и юристов, ранее работавших в российской практике Freshfields и отмеченных ведущими международными юридическими рейтингами. Основываясь на тридцатилетнем опыте сопровождения знаковых проектов в области M&A, рынков капитала и крупнейших судебных и арбитражных споров в России и за рубежом, фирма продолжает оказывать юридические услуги, придерживаясь тех же высоких стандартов качества и профессионализма.",
-    stats:[["30","лет опыта команды","со слов фирмы: партнеры и юристы бывшей российской практики Freshfields"],["6","партнеров","и более 50 юристов — со слов фирмы"],["12","практик","9 отраслей — по разделу «Услуги» на сайте фирмы"]],
+    stats:[["30","лет опыта команды","со слов фирмы: партнеры и юристы бывшей российской практики Freshfields"],["6","партнеров","и более 50 юристов"],["12","практик","9 отраслей"]],
     practices:[["Корпоративное право / M&A","Слияния и поглощения, совместные предприятия и стратегические альянсы, корпоративная реструктуризация, покупка и продажа публичных компаний, финансирование приобретений."],
       ["Рынки капитала","IPO и SPO, подготовка и реструктуризация перед IPO, выпуск облигаций и нот, выкуп акций и депозитарных расписок; работа на стороне эмитентов, андеррайтеров и акционеров-продавцов."],
       ["Банковское и финансовое право","Сопровождение широкого круга сделок на российском и международном финансовых рынках и консультирование по регуляторным вопросам."],
@@ -9971,7 +9971,7 @@ const FIRM_PAGES = {
     address:"Москва, Павелецкая площадь, 2, стр. 2", email:"info@orion-law.com", phone:"+7 499 395-10-10", site:"https://orion-law.com/"},
   nikolskaya:{
     lead:"Независимый юридический бизнес со слаженной командой, которая в течение многих лет реализует самые сложные проекты.",
-    stats:[["25+","лет опыта","со слов фирмы"],["16","партнеров и советников","со слов фирмы"],["6","практик, 13 отраслей","со слов фирмы"]],
+    stats:[["25+","лет опыта",""],["16","партнеров и советников",""],["6","практик, 13 отраслей",""]],
     practices:[["Корпоративная практика, слияния и поглощения","M&A, реструктуризации, частные инвестиции, совместные предприятия, MBO/LBO, редомициляция бизнеса"],["Финансовая практика","Синдицированное кредитование, проектное финансирование"],
       ["Разрешение споров и международный арбитраж","Трансграничные споры, арбитраж, российские суды, спортивный арбитраж"],["Строительство, инфраструктура и ГЧП","От инициирования проекта до коммерческого и финансового закрытия"],
       ["Регуляторная практика","Согласование сделок с регуляторами, антимонопольные требования, структурирование сделок M&A"],["Санкционная практика","Санкционные риски, оспаривание санкций, разблокировка активов, контрсанкции"]],
@@ -10028,7 +10028,7 @@ function renderFirmPage(f){
     ["С кем работала на сделках", `Какие другие консультанты работали на сделках вместе с фирмой «${f.n}» или напротив нее? Списком по сделкам.`],
     ["Вопросы для встречи", `Готовлюсь к встрече с юридической фирмой «${f.n}». Предложи пять вопросов, которые стоит задать, с опорой на ее последние сделки из базы.`]];
   const ask = `<div class="fp-ask" id="fpAsk" hidden><span>Спросить ассистента о фирме</span><div>${ASKS.map(([t],i)=>`<button type="button" data-ask="${i}">${esc(t)}</button>`).join("")}</div></div>`;
-  const note = `Только сделки, где фирма публично названа консультантом; у каждого факта в карточке сделки есть ссылка на источник. Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
+  const note = `Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
   if(f.id==="nikolskaya"){
     const meta = x => `<b>${esc(x.d.type||"M&A")}</b> · ${esc([fmtDateLong(x.d.date), x.d.ind].filter(Boolean).join(" · "))}`;
     app.innerHTML = `<div class="fp fp-nk"><div class="fp-in">
@@ -10037,21 +10037,21 @@ function renderFirmPage(f){
         <div class="q-id"><img src="/static/brands/nikolskaya.svg" alt="Nikolskaya Consulting" width="167" height="46"><span class="q-kind">Юридический консультант · Москва</span></div>
         <h1><img src="/static/brands/nikolskaya-title.svg" alt="${esc(f.n)}" width="590" height="65"></h1>
         <div class="q-rule"></div>
-        <p class="q-lead">${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
+        <p class="q-lead">${esc(p.lead)}</p>
         <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}
-      </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div></section>
+      </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span>${c?`<small>${esc(c)}</small>`:""}</div>`).join("")}</div></section>
       </div>${prep}<div class="fp-in">
-      <h2>Сделки в Компасе<small>свежие сверху</small></h2>
-      <p class="q-sub">Сделки, где фирма названа консультантом в открытых источниках. В карточке сделки у каждого факта — ссылка на источник.</p>
+      <h2>Сделки в Компасе</h2>
+      <p class="q-sub">Сделки, где фирма названа консультантом в открытых источниках.</p>
       <div class="q-deals">${deals.map(x=>`<div class="q-card"><div class="q-meta">${meta(x)}</div><h3>${esc(x.title)}</h3><div class="q-role"><i>Роль фирмы</i>${esc(x.role)}</div>
         <div class="q-oth">${x.others.length?`Другие консультанты: ${esc(x.others.join("; "))}`:"Другие консультанты публично не назывались"}</div>
         <div class="q-ft"><span>${esc(x.sum||"Сумма не раскрыта")}</span>${x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div></div>`).join("")}</div>
-      <h2>Практики и отрасли<small>со слов фирмы</small></h2>
+      <h2>Практики и отрасли</h2>
       <div class="q-prs">${p.practices.map(([t,d],i)=>`<div><svg aria-hidden="true"><use href="/static/brands/nikolskaya-icons.svg#p${i+1}"/></svg><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>
       <div class="q-inds"><i>Отрасли</i><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
       <h2>Проекты, которые называет фирма<small>со слов фирмы · в базе Компаса этих сделок пока нет</small></h2>
       <div class="q-proj">${p.projects.map(([t,x])=>`<i>${esc(t)}</i><span>${esc(x)}</span>`).join("")}</div>
-      <h2>Партнеры<small>со слов фирмы</small></h2>
+      <h2>Партнеры</h2>
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><b>${esc(nm)}</b><span><em>${esc(r)}</em> · ${esc(a)}</span></div>`).join("")}</div>
       <div class="q-contact"><img src="/static/brands/nikolskaya.svg" alt="" width="145" height="40"><div><h3>Связаться с фирмой</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы — nikolskaya.ru</a></div>
       <p class="q-note">${note}</p>
@@ -10066,19 +10066,19 @@ function renderFirmPage(f){
     <section class="q-hero fp-dark"><div class="fp-in">
       <div class="q-bar"><div class="q-lt"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="226" height="15"><span>юридический консультант</span></div><div class="q-hmeta">Москва · ${p.since} · ${nWord} в Компасе</div></div>
       <div class="q-body"><div class="q-mark">${mark}</div><div><div class="q-lab">Профиль консультанта в Компасе</div><h1>${p.h1}</h1>
-        <p>${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
+        <p>${esc(p.lead)}</p>
         <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}</div></div>
     </div></section>
     ${prep}
     <div class="fp-in">
       <div class="q-stats"><div><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>${p.since}, из открытых источников</small></div>${p.stats.map(([a,b,c])=>`<div><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div>
-      <h2>Сделки с участием фирмы<small>${nWord} в Компасе · свежие сверху</small></h2>
+      <h2>Сделки с участием фирмы<small>${nWord} в Компасе</small></h2>
       ${first?`<div class="q-feat"><div class="q-t"><div class="q-meta">${meta(first)}</div><h3>${esc(first.title)}</h3><div class="q-role">${esc(first.role)}</div>${oth(first)}${ft(first,true)}</div><div class="q-img">${mark}</div></div>`:""}
       <div class="q-grid">${deals.slice(1).map(x=>`<div class="q-card"><div class="q-top">${meta(x)}</div><div class="q-in"><h3>${esc(x.title)}</h3><div class="q-role">${esc(x.role)}</div>${oth(x)}${ft(x)}</div></div>`).join("")}</div>
-      <h2>Практики и отрасли<small>со слов фирмы</small></h2>
+      <h2>Практики и отрасли</h2>
       <div class="q-pi"><div><h4>Практики</h4><div class="q-pr">${p.practices.map(([t,d],i)=>`<div><i>${String(i+1).padStart(2,"0")}</i><div><b>${esc(t)}</b><span>${esc(d)}</span></div></div>`).join("")}</div></div>
         <div><h4>Отрасли</h4><div class="q-ind">${p.industries.map(x=>`<div>${esc(x)}</div>`).join("")}</div></div></div>
-      <h2>Партнеры<small>со слов фирмы</small></h2>
+      <h2>Партнеры</h2>
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><b>${esc(nm)}</b><span><em>${esc(r)}</em> · ${esc(a)}</span></div>`).join("")}</div>
       <div class="q-contact fp-dark"><div><div class="q-lg"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="380" height="25"></div><div class="q-tag">${esc(p.tag)}</div></div>
         <div><p>${esc(p.address)}</p><p>${esc(p.email)} · ${esc(p.phone)}</p><p>Telegram: ${esc(p.tg)}</p><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div></div>
@@ -10106,7 +10106,7 @@ function renderFirmPage(f){
       <div class="q-rate">${p.ratings.map(([s,t],i)=>`<div><b>${String(i+1).padStart(2,"0")}</b><i>${esc(s)}</i><span>${esc(t)}</span></div>`).join("")}</div>
     </div></section>
     <div class="fp-in q-sec">
-      <div class="q-hd"><h2>Партнеры</h2><small>С сайта фирмы</small></div>
+      <div class="q-hd"><h2>Партнеры</h2></div>
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><i>${esc(r)}</i><b>${esc(nm)}</b><span>${esc(a)}</span></div>`).join("")}</div>
       <p class="q-note">${note}</p>
       <div class="q-contact"><div><h3>Связаться с Orion</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn q-pri" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div>
