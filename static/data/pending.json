@@ -1781,6 +1781,71 @@
     "draft_id": "d01916000",
     "title": "Условием выкупа акций «Циана» является получение контрольного пакета"
    }
+  },
+  {
+   "id": "g1ef42ca0",
+   "date": "2026-11-11",
+   "title": "Аллегрова продала «шубохранилище» за 75 млн: почему продешевила",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/articles/1053143156"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Аллегрова",
+   "asset": "«шубохранилище»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "Ирина Аллегрова, которую все считают «исчезнувшей», на самом деле тихо проворачивает крупные сделки.",
+     "source": [
+      "URA.RU",
+      "https://ura.news/articles/1053143156"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "«шубохранилище»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/articles/1053143156"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Аллегрова",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/articles/1053143156"
+     }
+    ]
+   },
+   "pending_since": "2026-11-11T05:53:58+00:00"
   }
  ]
 }
