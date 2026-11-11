@@ -611,13 +611,13 @@
    ]
   },
   {
-   "draft_id": "d08938397",
-   "title": "Продажи кроссовера Lada Azimut стартуют в начале декабря 2026 года",
+   "draft_id": "d45740586",
+   "title": "Продажи новых электрокаров могут стать рекордными в России в 2026 году",
    "date": "2026-11-11",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/avtovaz-875122955.html"
+     "web:iz.ru",
+     "https://iz.ru/2199993/2026-11-11/prodazhi-novykh-elektrokarov-mogut-stat-rekordnymi-v-rossii-v-2026-godu"
     ]
    ],
    "sum": null,
@@ -635,8 +635,49 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88675015",
+   "title": "MY.GAMES снова продают: топ-менеджеры выкупят разработчика видеоигр у бизнесмена Александра Чачавы",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/mygames-snova-prodayut-top-menedzhery-vykupyat-razrabotchika-videoigr-u-biznesmena-aleksandra-chachavy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Подписана",
+   "events": [
+    {
+     "kind": "signed",
+     "date": "2026-11-11",
+     "title": "Документы подписаны",
+     "note": "Руководство MY.GAMES выкупит разработчика видеоигр у её единственного акционера Александра Чачавы, говорится в сообщении компании. Стороны подписали соглашение о покупке. Инициаторы выкупа — гендиректор компании Елена Григорян и операционный директор Денис…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/mygames-snova-prodayut-top-menedzhery-vykupyat-razrabotchika-videoigr-u-biznesmena-aleksandra-chachavy/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 5) — проверьте, не дубль ли",
+    "та же новость, что «Инвестор Александр Чачава, в 2022 году выкупивший у VK её иг» — второе издание, в группу не шлем"
    ]
   }
  ]

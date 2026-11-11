@@ -135,6 +135,37 @@
     "needs_review": true
    },
    "queued": "2026-11-11"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9094866::gb3029360",
+   "candidate_id": "gb3029360",
+   "reason": "общие слова заголовка: 5",
+   "draft": {
+    "draft_id": "d64690558",
+    "title": "My.Games объявил о выкупе компании менеджментом у акционера Александра Чачавы",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9094866"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "My.Games",
+    "asset": "менеджмент",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "My.Games",
+     "asset": "менеджмент",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
   }
  ]
 }
