@@ -144,6 +144,8 @@
     ставится (`docs/intake_run.md`, «Шаг 10: приёмка только после чтения»).
     Строку «ТУПИК: …» в выводе `send_drafts.py` разбирать в том же прогоне,
     а не оставлять следующему.
+    `python3 pipeline/party_registry_audit.py --ids <новые карточки>` — стороны схемы
+    сверяются с ЕГРЮЛ до показа владельцу (`docs/card_parties.md`, «те, кто в реестре»).
     `python3 pipeline/ingest/accept_card.py --queue` → чтение по
     `CARD_ACCEPTANCE_BRIEF.md` (саб-агент), правки фактов — через
     `review.py --write`, прозы — через `pipeline/proofread.py --write`
