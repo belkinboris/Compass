@@ -11394,3 +11394,17 @@ def test_consume_only_what_main_proves():
                              {'id': 3, 'deal_id': 'g3', 'verdict': 'post_yes'},
                              {'id': 4, 'deal_id': 'd1', 'verdict': 'take'}], base)
     assert [d['id'] for d in keep] == [2]
+
+
+def test_owner_text_for_card_already_on_site_is_not_dropped():
+    """Ответ своим текстом на проект поста карточки, которая уже на сайте, —
+    это текст поста, а не «уже вышла» (11 ноября 2026, «АГР Холдинг»)."""
+    import approve
+    deals = [{'id': 'g1', 'title': 'т'}]
+    late = approve.late_decisions(deals, [], [{'id': 1, 'deal_id': 'g1', 'verdict': 'approve',
+                                               'edited_text': 'Мой текст', 'created_at': '2026-11-10T20:48:00'}])
+    assert late and late[0][1]['edited_text'] == 'Мой текст'
+    base = {'deals': [{'id': 'g1'}], 'telegram_posts': {}}
+    assert approve.unproven([{'id': 1, 'deal_id': 'g1', 'verdict': 'approve', 'has_text': True}], base)
+    base['deals'][0]['post_override'] = 'Мой текст'
+    assert not approve.unproven([{'id': 1, 'deal_id': 'g1', 'verdict': 'approve', 'has_text': True}], base)
