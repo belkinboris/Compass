@@ -2079,10 +2079,27 @@ def _mark_decided(callback: dict, verdict: str, answered: bool = False) -> None:
 
 
 @router.get("/api/moderation/decisions")
-def moderation_decisions(token: str = "", db=Depends(get_db)):
+def moderation_decisions(token: str = "", deal_id: str = "", history: int = 0, db=Depends(get_db)):
     """Мост к рутине публикации: она в другом облаке и до базы не достает."""
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
+    # ИСТОРИЯ РЕШЕНИЙ ПО КАРТОЧКЕ, ВКЛЮЧАЯ ПОГАШЕННЫЕ (11 ноября 2026): текст поста,
+    # которым владелец ответил в консоли по «АГР Холдингу», погасили без применения,
+    # и достать его было нечем — пост вышел нашим текстом. `?deal_id=<id>&history=1`.
+    return _decisions_history(db, deal_id) if (history and deal_id) else _decisions_live(db)
+
+
+def _decisions_history(db, deal_id: str):
+    rows = list(db.scalars(select(ModerationDecision)
+                           .where(ModerationDecision.deal_id.in_([deal_id, deal_id + "~edit"]))
+                           .order_by(ModerationDecision.created_at)).all())
+    return {"decisions": [{"id": r.id, "deal_id": r.deal_id, "verdict": r.verdict,
+                           "edited_text": r.edited_text, "decided_by": r.decided_by,
+                           "consumed": bool(r.consumed),
+                           "created_at": r.created_at.isoformat()} for r in rows]}
+
+
+def _decisions_live(db):
     rows = list(db.scalars(select(ModerationDecision)
                            .where(ModerationDecision.consumed.is_(False))
                            .order_by(ModerationDecision.created_at)).all())
