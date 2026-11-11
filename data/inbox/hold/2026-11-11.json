@@ -1210,52 +1210,42 @@
    ]
   },
   {
-   "draft_id": "d74691140",
-   "title": "Браслет с уникальным сапфиром продали за рекордные 4,9 млн долларов",
+   "draft_id": "d57485172",
+   "title": "Ozon: структуры Александра Чачавы утратили контроль над АО «О23»",
    "date": "2026-11-11",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/braslet-875134071.html"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/11/1244594-strukturi-chachavi-utratili-kontrol"
     ]
    ],
-   "sum": "$4,9 млн",
+   "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261111/braslet-875134071.html"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "за рекордные 4,9 млн долларов",
-   "seller": "Браслет с уникальным сапфиром",
+   "asset": null,
+   "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "за рекордные 4,9 млн долларов",
-    "seller": "Браслет с уникальным сапфиром"
+    "asset": null,
+    "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d21587536",
-   "title": "Китаец купил двухкомнатную квартиру на распродаже менее чем за два доллара",
+   "draft_id": "d72881122",
+   "title": "Структуры Чачавы перестали контролировать крупнейшего акционера Ozon",
    "date": "2026-11-11",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/11/kitaets-kupil-dvuhkomnatnuyu-kvartiru-na-rasprodazhe-menee-chem-za-dva-dollara/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/11/11/2026/6af4a557f2211a6be34a87b1"
     ]
    ],
    "sum": null,
@@ -1266,25 +1256,211 @@
      "kind": "closed",
      "date": "2026-11-11",
      "title": "Сделка завершена",
-     "note": "",
+     "note": "Структуры Чачавы утратили контроль над АО «О23», которому принадлежат 34,95% акций Ozon. Инвестор приобрел долю в маркетплейсе в 2024 году, а в апреле 2026-го стал его крупнейшим акционером",
      "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/11/11/kitaets-kupil-dvuhkomnatnuyu-kvartiru-na-rasprodazhe-menee-chem-za-dva-dollara/"
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/11/11/2026/6af4a557f2211a6be34a87b1"
      ]
     }
    ],
-   "buyer_name": "Китаец",
-   "asset": "двухкомнатная квартира на распродаже менее чем за два доллара",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Китаец",
-    "asset": "двухкомнатная квартира на распродаже менее чем за два доллара",
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d83895571",
+   "title": "Структуры Чачавы перестали контролировать крупнейшего акционера Ozon",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Struktury-Chachavy-perestali-kontrolirovat-krupnejshego-akcionera-Ozon-87775"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d70130210",
+   "title": "Структуры Александра Чачавы утратили контроль над АО «О23»",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28308537"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d11535384",
+   "title": "Структуры Чачавы утратили контроль над АО «О23», владеющей 34,95% «Озона»",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261111/struktury-875132339.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d89665528",
+   "title": "Структуры Александра Чачавы утратили контроль над АО «О23», которому принадлежит 34,95% акций Ozon",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/news/1373633.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d10275835",
+   "title": "Александр Чачава утратил контроль над крупнейшим акционером Ozon",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/315219"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gcd450a79 (общие редкие слова: алекса, чачава) — проверьте, не дубль ли",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d11102971",
+   "title": "Структуры инвестора Александра Чачавы перестали контролировать крупнейшего акционера Ozon",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/marketplace/3250030-struktury-investora-aleksandra-chachavy-perestali-kontrolirovat-krupneishego-akcionera-ozon?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb3029360 (общие редкие слова: алекса, чачавы) — проверьте, не дубль ли",
+    "та же новость, что «Ozon: структуры Александра Чачавы утратили контроль над АО «» — второе издание, в группу не шлем"
    ]
   }
  ]
