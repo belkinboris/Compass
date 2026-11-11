@@ -282,19 +282,18 @@ def _main(argv, write):
             break
     log('Слой фактов пересчитан.')
 
-    fast = False
-    try:
-        sys.path.insert(0, INGEST)
-        import approve  # noqa: E402
-        fast = founders_text_only(rows, approve.fetch_decisions()[0])
-    except Exception as e:  # не узнали — проверяем полностью
-        log('Не удалось разобрать решения (%s) — полный pytest.' % e)
-    if fast:
-        log('Все решения — посты с текстом основателей: тесты данных (около 3 минут), не полный pytest.')
-    else:
-        log('Полный pytest — ждем (обычно 20 минут). Пока он идет, других pytest в этой копии не запускать: тесты делят одну базу.')
+    # ТОЛЬКО ТЕСТЫ, ЧИТАЮЩИЕ ДАННЫЕ (11 ноября 2026). Решения владельца меняют
+    # базу, а не код; код на каждый push в main проверяет CI целиком
+    # (.github/workflows/tests.yml). Полный pytest здесь шел 20 минут каждый
+    # час и останавливал посты на тестах, которые от решений не зависят
+    # (браузер, сервер). Владелец: «подумай, эффективно ли гонять все тесты
+    # настолько часто». Набор — pipeline/prepush_check.SUITES, около 1,5 минуты.
+    sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+    import prepush_check  # noqa: E402
+    suites = [x for x in prepush_check.SUITES if os.path.exists(os.path.join(ROOT, x))]
+    log('Тесты, читающие данные (около 1,5 минуты): %s.' % ', '.join(suites))
     t0 = time.monotonic()
-    r = run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', *(DATA_SUITES if fast else ())], must=False)
+    r = run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', *suites], must=False)
     if r.returncode:
         # УПАВШИЕ ТЕСТЫ — ЕЩЕ РАЗ, ТОЛЬКО ИХ. 29 октября 2026: тест отзыва
         # ассистента (test_kompas) и тест кнопки ассистента (test_ui) падали
@@ -311,11 +310,11 @@ def _main(argv, write):
                     % ((time.monotonic() - t0) / 60))
                 r = again
         if r.returncode:
-            log('СТОП: полный pytest красный (%d мин). База не закоммичена, сайту ничего не подтверждено. Хвост:\n%s'
+            log('СТОП: тесты данных красные (%d мин). База не закоммичена, сайту ничего не подтверждено. Хвост:\n%s'
                 % ((time.monotonic() - t0) / 60, r.stdout[-2000:]))
             return 1
     else:
-        log('Полный pytest зеленый (%.0f мин).' % ((time.monotonic() - t0) / 60))
+        log('Тесты данных зеленые (%.0f мин).' % ((time.monotonic() - t0) / 60))
 
     new = json.load(open(BASE, encoding='utf-8'))
     lost = base_lost(old, new)

@@ -11382,3 +11382,15 @@ def test_fact_edit_needs_a_source_quote():
     wrong = {'companies': {'p2': {'name': 'Лютик'}},
              'deals': [dict(old['deals'][0], target='p2')]}
     assert fact_edit_guard.unbacked(old, wrong, [])
+
+
+def test_consume_only_what_main_proves():
+    """Решение о посте гасится на сайте, только если отметка уже в origin/main
+    (11 ноября 2026: «АГР Холдинг» и Hefei — решения погасили, а пост не вышел)."""
+    import approve
+    base = {'deals': [{'id': 'g1', 'post_approved': True}, {'id': 'g2'}], 'telegram_posts': {'g3': 1}}
+    keep = approve.unproven([{'id': 1, 'deal_id': 'g1', 'verdict': 'post_yes'},
+                             {'id': 2, 'deal_id': 'g2', 'verdict': 'post_yes'},
+                             {'id': 3, 'deal_id': 'g3', 'verdict': 'post_yes'},
+                             {'id': 4, 'deal_id': 'd1', 'verdict': 'take'}], base)
+    assert [d['id'] for d in keep] == [2]

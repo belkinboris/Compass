@@ -31,6 +31,7 @@
     python3 pipeline/ingest/approve.py --consume   # подтвердить сайту — ПОСЛЕ push
 """
 import json
+import subprocess
 import os
 import sys
 from datetime import datetime, timedelta, timezone
@@ -106,6 +107,49 @@ def foreign_decision(d):
     return '~' in str(d.get('deal_id') or '')
 
 
+def unproven(detail, base=None):
+    """Решения, результата которых нет в базе на origin/main.
+
+    post_yes — карточка в базе с `post_approved` (или пост уже вышел);
+    post_no / post_hold — `no_post` / `post_held` (или пост вышел); approve —
+    карточка в базе. Остальные виды (сырье, этапы, заметки) здесь не
+    проверяются: их результат живет не в базе."""
+    if base is None:
+        try:
+            subprocess.run(['git', 'fetch', '-q', 'origin', 'main'], cwd=ROOT, timeout=120)
+            raw = subprocess.run(['git', 'show', 'origin/main:static/data/deals_promoted.json'], cwd=ROOT,
+                                 capture_output=True, text=True, timeout=120).stdout
+            base = json.loads(raw)
+        except Exception as e:  # не прочитали main — ничего не гасим вслепую
+            print('origin/main не прочитан (%s) — подтверждение отложено целиком.' % e)
+            return list(detail)
+    deals = {d['id']: d for d in base.get('deals') or []}
+    posted = set(base.get('telegram_posts') or {})
+    try:
+        queued = {c.get('id') for c in json.load(open(PENDING, encoding='utf-8')).get('cards') or []}
+    except Exception:
+        queued = set()
+    out = []
+    for d in detail:
+        did, v = d.get('deal_id'), d.get('verdict')
+        card = deals.get(did)
+        if v in ('post_yes', 'post_realty', 'post_main'):
+            ok = did in posted or (card is not None and card.get('post_approved'))
+        elif v == 'post_no':
+            ok = did in posted or (card is not None and card.get('no_post'))
+        elif v == 'post_hold':
+            ok = did in posted or (card is not None and card.get('post_held'))
+        elif v == 'approve':
+            # карточка вышла — или осталась в очереди (придержана приемкой):
+            # решение ей записано, держать его живым на сайте незачем
+            ok = card is not None or did in queued
+        else:
+            ok = True
+        if not ok:
+            out.append(d)
+    return out
+
+
 def consume_pending():
     """Второй, ОТДЕЛЬНЫЙ шаг: сказать сайту «решения применены» — только
     ПОСЛЕ того, как результат `--write` пережил git push.
@@ -134,6 +178,20 @@ def consume_pending():
     if not (site and token and ids):
         os.remove(PENDING_CONSUME)
         return 0
+    # ПОДТВЕРЖДАЕМ САЙТУ ТОЛЬКО ТО, ЧТО ВИДНО В origin/main (11 ноября 2026).
+    # Решения «📣 Пост в канал» по «АГР Холдингу» и Hefei Hengyi пропали: их
+    # погасили на сайте, а в main отметки `post_approved` так и не оказалось
+    # (прогон публикации остановился на красном тесте, правка в его рабочей
+    # копии не дожила до push, а подтверждение ушло). Владелец: «не может же
+    # так получаться, что посты не выходят и потом теряются». Теперь каждое
+    # решение о посте и о карточке сверяется с базой на origin/main; не видно
+    # результата — решение остается живым на сайте, следующий прогон применит
+    # его заново (применение идемпотентно).
+    keep = unproven(saved.get('detail') or [])
+    if keep:
+        print('НЕ ПОДТВЕРЖДАЮ сайту %d решений: их результата нет в origin/main — применит следующий прогон: %s'
+              % (len(keep), ', '.join('%s %s' % (d['verdict'], d['deal_id']) for d in keep)))
+        ids = [i for i in ids if i not in {d['id'] for d in keep}]
     consume((site, token), ids)
     os.remove(PENDING_CONSUME)
     # Ответы владельцу на «Добавить в карточку» / «Это другая сделка» — только
@@ -668,7 +726,10 @@ def main(write=False):
                       and not foreign_decision(d)]
     if handle and ids_to_consume:
         site, token = handle
-        json.dump({'site': site, 'token': token, 'ids': ids_to_consume, 'answers': offer_answers},
+        detail = [{'id': d['id'], 'deal_id': str(d.get('deal_id') or ''), 'verdict': d['verdict']}
+                  for d in decisions if d['id'] in set(ids_to_consume)]
+        json.dump({'site': site, 'token': token, 'ids': ids_to_consume, 'answers': offer_answers,
+                   'detail': detail},
                   open(PENDING_CONSUME, 'w', encoding='utf-8'))
         print('Решений отложено на подтверждение после push: %d (approve.py --consume).'
               % len(ids_to_consume))
