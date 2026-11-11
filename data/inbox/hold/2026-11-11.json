@@ -1168,175 +1168,6 @@
    ]
   },
   {
-   "draft_id": "d84261291",
-   "title": "Второй раунд переговоров России, Украины и США проходит в закрытом формате",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9094477"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37380599",
-   "title": "Акционер «Яндекса» и Ozon продаст долю в My.Games менеджменту",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/11/11/2026/6af421848e50cc57a4cae551"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "доля в My.Games",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "доля в My.Games",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d80848823",
-   "title": "Рукопись речи Мартина Лютера Кинга «У меня есть мечта» выставят на торги",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6af42b811312d8d71227d4aa"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d86655507",
-   "title": "Заксобрание Петербурга одобрило полный запрет продажи вейпов",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/society/11/11/2026/6af42cf15339650161aba0b6"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42749131",
-   "title": "В Петербурге приняли в первом чтении законопроект о запрете продажи вейпов",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28306133"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29793449",
-   "title": "В России разработают рекомендации по улучшению инвестиционного климата в регионах",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/v-rossii-razrabotayut-rekomendatsii-po-uluchsheniyu-investitsionnogo-klimata-v-regionah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d67457706",
    "title": "Совладельцы «Адаманта» выкупили доли в петербургских пышечных Ginza Project",
    "date": "2026-11-11",
@@ -1376,58 +1207,19 @@
    ]
   },
   {
-   "draft_id": "d59724499",
-   "title": "РЭЦ изучил, как зарубежные ИИ-сервисы отвечают на вопросы о покупке товаров",
+   "draft_id": "d06749910",
+   "title": "Лавров: МТК «Север - Юг» призван стать драйвером торговли и инвестиций в Евразии",
    "date": "2026-11-11",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261111/ii-2130844191.html"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28306527"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d97483577",
-   "title": "На концерт Киркорова в Ярославле не продали около трети билетов",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261111/kirkorov-2130837352.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261111/kirkorov-2130837352.html"
-     ]
-    }
-   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1443,13 +1235,13 @@
    ]
   },
   {
-   "draft_id": "d51147924",
-   "title": "IP-риски в M&A: почему одинаковые дефекты закрываются по-разному в FMCG и IT? Подкаст из вебинара « IP и Data protection риски в рамках сделок M&A» спикеров: ⚡️ Никиты Айрапетова , лидера направления ",
+   "draft_id": "d66789466",
+   "title": "«Почта России» подготовила мощности для продажи вина",
    "date": "2026-11-11",
    "src": [
     [
-     "tg:whitesquarenews",
-     "https://t.me/whitesquarenews/1574"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28306591"
     ]
    ],
    "sum": null,
@@ -1467,7 +1259,176 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d07574251",
+   "title": "Эксперимент по продаже российского вина через «Почту России» могут завершить раньше срока",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28306581"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88541172",
+   "title": "Родстер SLR Stirling Moss от Mercedes-Benz выставят на аукцион за $6 млн",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28306347"
+    ]
+   ],
+   "sum": "$6 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d44339691",
+   "title": "Исторические железнодорожные постройки Финляндии выставили на торги",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/11/istoricheskie-zheleznodorozhnie"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76770179",
+   "title": "Крупнейшие сервисы продажи билетов в США столкнулись с финансовым кризисом",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/krupnejshie-servisy-prodazhi-biletov-v-ssha-stolknulis-s-finansovym-krizisom/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d99715527",
+   "title": "Какой сегодня праздник, 11 ноября 2026 года: День экономиста, распродажа 11.11 и годовщина окончания Первой мировой войны",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/11/76758487/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d30661819",
+   "title": "В России продажа новых электромобилей едва превысила 1%",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2199812/video/v-rossii-prodazha-novykh-elektromobilei-edva-prevysila-1"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

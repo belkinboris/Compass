@@ -2298,6 +2298,75 @@
    "shown_hash": "dae25afffcba.f89d16",
    "post_draft_sent": true,
    "post_preview": "<b>Топ-менеджмент покупает My.Games у Александра Чачавы</b>\n\n<b>Покупатель:</b> Елена Григорян и Денис Савута при финансовой поддержке Георгия Нурисламова, частного инвестора из Объединенных Арабских Эмиратов\n<b>Продавец:</b> Александр Чачава\n<b>Предмет:</b> My.Games — международный разработчик и издатель мобильных и PC-игр (War Robots, Hustle Castle, Left to Survive).\n<b>Статус:</b> Подписана\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9094307\">Коммерсантъ</a>\nЕще 3 источника — в карточке сделки\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gb3029360\">карточке сделки</a>"
+  },
+  {
+   "id": "g4a14848a",
+   "date": "2026-11-11",
+   "title": "Портсигар с бриллиантовым вензелем Николая II продали в Париже за €15 тысяч",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9094557"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "€15 тыс",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "€15 тыс",
+   "seller": "Портсигар с бриллиантовым вензелем Николая II",
+   "asset": "в Париже",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "Золотой портсигар с бриллиантовым вензелем Николая II продали на торгах в Париже за €15,3 тыс. (около $17,8 тыс.), сообщил аукционный дом Sotheby's.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9094557"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "в Париже",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9094557"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Портсигар с бриллиантовым вензелем Николая II",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9094557"
+     }
+    ]
+   },
+   "pending_since": "2026-11-11T10:54:01+00:00"
   }
  ]
 }
