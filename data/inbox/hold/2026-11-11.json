@@ -1217,131 +1217,6 @@
    ]
   },
   {
-   "draft_id": "d09392513",
-   "title": "FT: жители стран Персидского залива экономят на покупках из-за ситуации с Ираном",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28305567"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99687339",
-   "title": "Минфин США может разрешить покупку подсанкционных танкеров",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/ssha-875101301.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d07967258",
-   "title": "Психолог рассказала, чем опасен поиск выгоды на распродажах",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261111/psiholog-2130804553.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d93859943",
-   "title": "После скандала Киркоров не может продать почти половину билетов на концерт",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143252"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-11",
-     "title": "Переговоры",
-     "note": "Певец Филипп Киркоров может не заработать почти 20 миллионов рублей.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053143252"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d93110625",
    "title": "Как раз к сезону: в Челябинской области продают горнолыжный комплекс",
    "date": "2026-11-11",
@@ -1370,16 +1245,291 @@
    ]
   },
   {
-   "draft_id": "d82170436",
-   "title": "В Новосибирске инвестиции в 2026 году могут сократиться на 74 млрд рублей",
+   "draft_id": "d04888921",
+   "title": "Акварели Волошина и Бенуа выставят на торги 14 ноября",
    "date": "2026-11-11",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/novosibirsk/2026/11/11/v-novosibirske-investiczii-v-2026-godu-mogut-sokratitsya-na-74-mlrd-rublej"
+     "web:interfax.ru",
+     "https://www.interfax.ru/culture/1128246"
     ]
    ],
-   "sum": "74 млрд ₽",
+   "sum": "2,6 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d95537206",
+   "title": "Депутаты проголосовали за полный запрет продажи вейпов в Петербурге с 1 марта",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1128243"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00552446",
+   "title": "Акварель Богаевского с автографом Цветаевой выставили на торги",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28305807"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51680619",
+   "title": "Зоны продажи табака в Петербурге планируют ограничить с марта 2027 года",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/11/zoni-prodazhi-tabaka-v-peterburge"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/11/11/zoni-prodazhi-tabaka-v-peterburge"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d04356354",
+   "title": "Запрет продажи вейпов в Петербурге прошёл первое чтение",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/11/zapret-prodazhi-vejpov-v-peterburge"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00827255",
+   "title": "Потеснить OpenAI и Microsoft: Anthropic начала подготовку к крупнейшему IPO в истории",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/potesnit-openai-i-microsoft-anthropic-nachala-podgotovku-k-krupnejshemu-ipo-v-istorii/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d70917449",
+   "title": "«Полумер быть не может, только полный запрет». В Заксобрании проголосовали против продажи вейпов в Петербурге",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/11/76758147/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52560761",
+   "title": "В среднем россияне готовы потратить на покупку нового авто 2,4 млн рублей",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2199351/2026-11-11/v-srednem-rossiiane-gotovy-potratit-na-pokupku-novogo-avto-24-mln-rublei"
+    ]
+   ],
+   "sum": "2,4 млн ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "Переговоры",
+     "note": "В среднем россияне готовы потратить на покупку нового автомобиля 2,4 млн рублей. Об этом эксперты «Авито Авто» и «Авито Промо» рассказали «Известиям» 11 ноября по итогам опроса 10 тыс. россиян. Согласно результатам исследования, почти половина опрошенных…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2199351/2026-11-11/v-srednem-rossiiane-gotovy-potratit-na-pokupku-novogo-avto-24-mln-rublei"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d09493127",
+   "title": "В Роспотребнадзоре предупредили о поддельных сайтах с распродажами",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261111/rospotrebnadzor-875104291.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79790571",
+   "title": "Начался второй раунд переговоров России, США и Украины в Абу-Даби",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/11/nachalsya-vtoroy-raund-peregovorov-rossii-ssha-i-ukrainy-v-abu-dabi/"
+    ]
+   ],
+   "sum": null,
    "type": "Инвестиция",
    "status": null,
    "events": [],
@@ -1395,6 +1545,64 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78145130",
+   "title": "На аукцион выставили последний Mercedes SLR McLaren Stirling Moss",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/11/na-auktsion-vystavili-posledniy-mercedes-slr-mclaren-stirling-moss/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d95962855",
+   "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7837"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "компании. Также в капитал ООО «Твинби» вошло АО «ВО",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "компании. Также в капитал ООО «Твинби» вошло АО «ВО",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
