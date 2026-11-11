@@ -275752,6 +275752,10 @@
     [
      "Деловой Петербург",
      "https://www.dp.ru/a/2026/11/10/sovladelci-adamanta-vikupili"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261111/sovladeltsy-2130832883.html"
     ]
    ],
    "from_ingest": true,
@@ -275784,6 +275788,16 @@
      "source": [
       "Деловой Петербург",
       "https://www.dp.ru/a/2026/11/10/sovladelci-adamanta-vikupili"
+     ],
+     "sources": [
+      [
+       "Деловой Петербург",
+       "https://www.dp.ru/a/2026/11/10/sovladelci-adamanta-vikupili"
+      ],
+      [
+       "РИА Недвижимость",
+       "https://realty.ria.ru/20261111/sovladeltsy-2130832883.html"
+      ]
      ]
     }
    ],
