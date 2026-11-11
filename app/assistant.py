@@ -2742,8 +2742,8 @@ _HOW_TO_USE = re.compile(
 # 2026, H7): один вопрос держит поток сервера до 60 с, потоков 40 — сорок
 # вопросов разом, и молчит даже /health. Лишний вопрос ждет до
 # ASK_QUEUE_WAIT секунд и получает вежливый ответ, а не вешает сайт.
-ASK_MAX_CONCURRENT = max(1, int(os.environ.get("ASK_MAX_CONCURRENT") or 8))
-ASK_QUEUE_WAIT = float(os.environ.get("ASK_QUEUE_WAIT") or 12)
+ASK_MAX_CONCURRENT = max(1, int(os.environ.get("ASK_MAX_CONCURRENT") or 16))
+ASK_QUEUE_WAIT = float(os.environ.get("ASK_QUEUE_WAIT") or 25)
 _ask_slots = threading.BoundedSemaphore(ASK_MAX_CONCURRENT)
 ASK_BUSY_ANSWER = ("Сейчас ассистенту задают много вопросов. Подождите минуту и "
                    "спросите еще раз, вопрос можно оставить в поле как есть.")
@@ -3114,7 +3114,7 @@ def assistant_feedback(req: AssistantFeedbackRequest, request: Request, db=Depen
 # кэшируется по сводке — пока данные те же, второй посетитель не тратит квоту.
 _estimate_cache: dict = {}
 _estimate_hits: dict = {}
-ESTIMATE_PER_IP_HOUR = 20
+ESTIMATE_PER_IP_HOUR = 200  # было 20: зал конференции за одним адресом (11 ноября 2026)
 
 
 def _estimate_allowed(ip: str) -> bool:

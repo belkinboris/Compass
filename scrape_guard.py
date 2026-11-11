@@ -197,15 +197,20 @@ def foreign_origin(headers, host: str) -> bool:
 # Частота запросов. Скользящее окно на (группа, адрес). Числа с запасом на
 # офис за одним адресом: аудитория — юристы и банкиры, у которых весь этаж
 # выходит в сеть через один NAT.
+# 11 ноября 2026, перед Форумом M&A: база — 1500 вместо 60, ассистент — 400
+# вместо 40. Зал конференции сидит за одним адресом Wi-Fi; одно открытие сайта
+# — два запроса группы «база», и при 60 сайт перестал бы открываться после
+# тридцатого посетителя за десять минут. От выкачивания базы защищает токен,
+# а не это число.
 # --------------------------------------------------------------------------
 WINDOW = 600.0
 _GROUPS = (
     # (имя, переменная окружения, умолчание за 10 минут, проверка пути)
-    ("data", "RATE_DATA_PER_10MIN", 60,
+    ("data", "RATE_DATA_PER_10MIN", 1500,
      lambda p, m: p in (DATA_PATH, SESSION_PATH, STATIC_DATA_PATH)),
-    ("assistant", "RATE_ASSISTANT_PER_10MIN", 40,
+    ("assistant", "RATE_ASSISTANT_PER_10MIN", 400,
      lambda p, m: m == "POST" and p in ("/api/ask", "/api/assistant/lookup")),
-    ("pdf", "RATE_PDF_PER_10MIN", 30,
+    ("pdf", "RATE_PDF_PER_10MIN", 200,
      lambda p, m: m == "POST" and (p == "/api/companies/export"
                                    or (p.startswith("/api/deals/") and p.endswith("/export")))),
     ("fns_paid", "RATE_FNS_PAID_PER_10MIN", 20,
@@ -213,7 +218,7 @@ _GROUPS = (
     ("fns", "RATE_FNS_PER_10MIN", 300,
      lambda p, m: (p.startswith("/api/companies/") and p.endswith("/fns"))
      or p in ("/api/finance/screening", "/api/analytics/multiples")),
-    ("auth", "RATE_AUTH_PER_10MIN", 30,
+    ("auth", "RATE_AUTH_PER_10MIN", 300,
      lambda p, m: m == "POST" and p in ("/api/auth/login", "/api/auth/register",
                                          "/api/auth/password")),
 )
