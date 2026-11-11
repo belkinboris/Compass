@@ -2285,6 +2285,9 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp-ask button{font:inherit;font-size:14px;line-height:1.2;color:inherit;background:none;border:1px solid currentColor;border-radius:99px;padding:9px 16px;cursor:pointer;opacity:.9;transition:background .2s,color .2s,opacity .2s}
 .fp-ask button:hover{opacity:1;background:rgba(127,127,127,.14)}
 .fp .fp-hid{display:none!important}
+.fp .fp-click{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+@media(hover:hover){.fp .fp-click:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.10)}}
+.fp .fp-click:active{transform:scale(.99)}
 .fp .fp-more{display:inline-flex;align-items:center;margin-top:22px;padding:11px 20px;border:1px solid currentColor;border-radius:999px;background:none;color:inherit;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;opacity:.85;transition:opacity .2s}
 .fp .fp-more:hover{opacity:1}
 .fp-arr{width:11px;height:11px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -3341,7 +3344,7 @@ const FIRMS = [
  {id:"epam",n:"ЕПАМ (Егоров, Пугинский, Афанасьев и партнеры)",g:["С-hi","К-hi"],site:"http://epam.ru"},
  {id:"ivanyan",n:"Иванян и партнеры",g:["С-hi","К-hi"],site:"https://ivanyan.partners/"},
  {id:"kkmp",n:"ККМП | Кучер Кулешов Максименко и партнеры",g:["С-hi","К-hi"],site:"http://kkmp.legal",
-  brand:{logo:"/static/brands/kkmp.svg",logoOn:"/static/brands/kkmp-white.svg",ratio:2.378,h:44,ink:"#1B2A3F",accent:["#314560"],fill:"#314560"}},
+  brand:{logo:"/static/brands/kkmp.svg",logoOn:"/static/brands/kkmp-white.svg",ratio:2.378,h:44,ink:"#1B2A3F",accent:["#314560"],fill:"#314560",sortAs:"KKMP"}},
  {id:"lgs",n:"ЛГС Юридические Услуги",g:["С-hi"],site:"https://lgs.law/"},
  {id:"liniya",n:"Линия Права",g:["С-hi"]},
  {id:"nikolaev",n:"МКА «Николаев и партнеры»",g:["С-hi","К-hi"],site:"https://nikolaew.ru"},
@@ -9703,8 +9706,11 @@ const advCount = id => advInd==="Все" ? firmCount(id) : firmIndCount(id, advI
    выбранном порядке (алфавит или число сделок), ниже — все остальные в том
    же порядке. */
 const advPinned = r => firmBrand(r.f) ? 0 : 1;
-const advSortKey = (a,b) => advPinned(a)-advPinned(b) || (advInd!=="Все" ? (b.n-a.n)||firmAlpha(a.f.n,b.f.n)
-  : (firmSort==="alpha" ? firmAlpha(a.f.n,b.f.n) : (b.n-a.n)||firmAlpha(a.f.n,b.f.n)));
+/* Плашка с логотипом стоит по тому, что на логотипе написано: у ККМП это латинское
+   KKMP, поэтому она идет перед Orion, а не после Stonebridge (владелец, 12 ноября 2026). */
+const advName = f => (f.brand && f.brand.sortAs) || f.n;
+const advSortKey = (a,b) => advPinned(a)-advPinned(b) || (advInd!=="Все" ? (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))
+  : (firmSort==="alpha" ? firmAlpha(advName(a.f),advName(b.f)) : (b.n-a.n)||firmAlpha(advName(a.f),advName(b.f))));
 const advIndSelectHtml = () => `<select id="advind" aria-label="Отрасль"><option ${advInd==="Все"?"selected":""}>Все</option>${INDUSTRIES.filter(i=>i!=="Все").map(i=>`<option ${i===advInd?"selected":""}>${i}</option>`).join("")}</select>`;
 const advCountHtml = r => r.n
   ? `<a class="count-btn" href="#/advisors/${r.f.id}">${r.n} ${plural(r.n,"сделка","сделки","сделок")}${advInd==="Все"?"":` в отрасли «${advInd}»`} →</a>`
@@ -10205,6 +10211,11 @@ function renderFirmPage(f){
   }
   /* «Вся команда» ведет на сайт фирмы; сделок на странице видно четыре, остальные —
      по кнопке «Все сделки» (партнер, 12 ноября 2026). Скрытые остаются в разметке. */
+  app.querySelectorAll(".fp .q-deal, .fp .q-card, .fp .q-feat").forEach(c=>{
+    const a = c.matches("a") ? null : c.querySelector('a[href^="#/deal/"]'); if(!a) return;
+    c.classList.add("fp-click");
+    c.addEventListener("click", e=>{ if(e.target.closest("a,button")) return; if(String(getSelection())) return; location.hash = a.getAttribute("href"); });
+  });
   const TEAM = {orion:"https://orion-law.com/team", stonebridge:"https://stonebridgelegal.ru/ru/team/", kkmp:"https://kkmp.legal/team/", nikolskaya:"https://nikolskaya.ru/persons"}[f.id];
   const teamBox = app.querySelector(".fp .q-team");
   if(TEAM && teamBox) teamBox.insertAdjacentHTML("afterend", `<a class="fp-more fp-team" href="${TEAM}" target="_blank" rel="noopener">Вся команда на сайте фирмы ${arr}</a>`);
