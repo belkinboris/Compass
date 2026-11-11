@@ -2227,7 +2227,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 /* Вид «заливка» — правило у BRAND_TOKENS. */
 .advisor-card.brand.fill{background:var(--card);transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .3s var(--ease)}
 .advisor-card.brand.fill::before{display:none}
-.advisor-card.brand.fill .brand-name a{position:static;display:grid}
+.advisor-card.brand.fill .brand-name a{position:static;display:grid;min-height:50px;align-content:center}
 .advisor-card.brand.fill .brand-logo{grid-area:1/1;transition:opacity .25s var(--ease)}
 .advisor-card.brand.fill .brand-logo.on{opacity:0}
 @media (hover:hover){
@@ -2253,6 +2253,179 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 @font-face{font-family:'Manrope';src:url(/static/fonts/manrope-latin-500.woff2) format('woff2');font-weight:500;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
 @font-face{font-family:'Manrope';src:url(/static/fonts/manrope-latin-600.woff2) format('woff2');font-weight:600;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
 @font-face{font-family:'Manrope';src:url(/static/fonts/manrope-latin-700.woff2) format('woff2');font-weight:700;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212}
+/* СТРАНИЦЫ ФИРМ ПО СОГЛАСОВАННЫМ МАКЕТАМ (Stonebridge Legal, Orion; 11 ноября
+   2026) — см. FIRM_PAGES. Палитра и шрифт фирмы — только внутри `.fp`; шапка и
+   подвал сайта — наши. */
+.fp{width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;margin-bottom:-80px;font-size:15.5px;line-height:1.5}
+#app:has(> .fp) + footer{margin-top:0}
+.fp a{color:inherit}
+.fp-in{max-width:1180px;margin:0 auto;padding:0 28px}
+.fp h1,.fp h2,.fp h3,.fp h4{margin:0;font-family:inherit}
+.fp .fp-prep{padding-top:26px}
+.fp .claim-line{margin:26px 0 0}
+/* Stonebridge Legal: черный первый экран, Manrope, коричневый #84665E, бледно-голубой #BECAD8, серые карточки #F3F0EF */
+.fp-sb{--brown:#84665E;--blue:#BECAD8;--grey:#F3F0EF;--mut:#6F6A68;background:#fff;color:#000;font-family:'Manrope',system-ui,sans-serif;padding-bottom:64px}
+.fp-sb .q-hero{background:#000;color:#fff;padding:65px 0 64px}
+.fp-sb .q-bar{display:flex;align-items:center;justify-content:space-between;min-height:62px}
+.fp-sb .q-lt{background:var(--brown);padding:0 24px;height:62px;display:flex;align-items:center;gap:14px;font-size:12px;color:rgba(255,255,255,.85)}
+.fp-sb .q-lt img{height:15px;width:auto;display:block}
+.fp-sb .q-hmeta{font-size:13px;color:rgba(255,255,255,.7)}
+.fp-sb .q-crumbs{font-size:12.5px;color:rgba(255,255,255,.55);padding:18px 0 0}.fp-sb .q-crumbs a{border-bottom:1px solid rgba(255,255,255,.3)}
+.fp-sb .q-body{display:grid;grid-template-columns:230px 1fr;gap:70px;align-items:start;margin-top:54px}
+.fp-sb .q-mark img{width:190px;height:auto;display:block;margin-top:10px}
+.fp-sb .q-lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+.fp-sb .q-hero h1{font-weight:700;font-size:62px;line-height:1.02;margin:0 0 26px;letter-spacing:-.02em;color:#fff}
+.fp-sb .q-hero p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.86);max-width:680px;margin:0}
+.fp-sb .q-hero .q-src{font-size:12px;color:rgba(255,255,255,.5);margin-top:10px}
+.fp-sb .q-btns{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.fp-sb .q-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;font:700 14.5px 'Manrope',sans-serif;border:1.5px solid #fff;color:#fff;border-radius:3px;background:none;cursor:pointer;transition:background .2s,color .2s}
+.fp-sb .q-btn:hover{background:#fff;color:#000}
+.fp-sb .q-btn.q-pri{background:var(--brown);border-color:var(--brown)}.fp-sb .q-btn.q-pri:hover{background:#6f544d;border-color:#6f544d;color:#fff}
+.fp-sb .q-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--grey);margin-top:48px;padding:34px 36px;gap:30px}
+.fp-sb .q-stats b{display:block;font-size:34px;font-weight:700;color:var(--brown);line-height:1}.fp-sb .q-stats span{display:block;font-size:15px;font-weight:700;margin-top:10px}.fp-sb .q-stats small{display:block;font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.4}
+.fp-sb h2{font-size:34px;font-weight:700;color:var(--brown);margin:60px 0 22px;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.fp-sb h2 small{font-size:12.5px;font-weight:400;color:var(--mut);letter-spacing:0}
+.fp-sb .q-feat{display:grid;grid-template-columns:1fr 380px;background:var(--grey);border-radius:4px;overflow:hidden;margin-bottom:18px}
+.fp-sb .q-feat .q-t{padding:34px 36px}.fp-sb .q-feat .q-img{background:var(--brown);display:flex;align-items:center;justify-content:center}.fp-sb .q-feat .q-img img{width:200px;height:auto;opacity:.95}
+.fp-sb .q-meta{font-size:12.5px;color:var(--mut)}
+.fp-sb .q-feat h3{font-size:30px;line-height:1.2;margin:14px 0 18px;font-weight:700;letter-spacing:-.01em}
+.fp-sb .q-role{font-size:15px;color:var(--brown);font-weight:700}.fp-sb .q-oth{font-size:13px;color:var(--mut);margin-top:8px;line-height:1.45}
+.fp-sb .q-ft{display:flex;gap:18px;align-items:center;margin-top:22px;font-size:13px;color:var(--mut);flex-wrap:wrap}.fp-sb .q-ft .q-st{color:#1D5A44;font-weight:700}.fp-sb .q-ft .q-st::before{content:"●";font-size:9px;margin-right:6px}
+.fp-sb .q-ft a{font-weight:700;color:#000;border-bottom:2px solid var(--brown);padding-bottom:2px;margin-left:auto}
+.fp-sb .q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fp-sb .q-card{background:var(--grey);border-radius:4px;padding:0 0 24px;display:flex;flex-direction:column}
+.fp-sb .q-card .q-top{background:var(--blue);padding:12px 22px;font-size:12px;color:#2B3A4A;font-weight:700;letter-spacing:.02em}
+.fp-sb .q-card .q-in{padding:18px 22px 0;display:flex;flex-direction:column;flex:1}
+.fp-sb .q-card h3{font-size:19px;line-height:1.3;margin:0 0 12px;font-weight:700}
+.fp-sb .q-card .q-role{font-size:13.5px}.fp-sb .q-card .q-ft{margin-top:auto;padding-top:18px;gap:10px 16px}
+.fp-sb .q-pi{display:grid;grid-template-columns:1fr 1fr;gap:0 48px}.fp-sb .q-pi h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brown);font-weight:700;padding-bottom:10px;border-bottom:2px solid #000}
+.fp-sb .q-pr>div{padding:16px 0;border-bottom:1px solid #D9D9D9;display:flex;gap:14px}.fp-sb .q-pr i{font-style:normal;font-size:12px;color:var(--brown);font-weight:700;padding-top:3px;min-width:22px}
+.fp-sb .q-pr b{display:block;font-size:16.5px;margin-bottom:5px}.fp-sb .q-pr span{font-size:13.5px;color:var(--mut);line-height:1.5}
+.fp-sb .q-ind div{padding:14px 0;border-bottom:1px solid #D9D9D9;font-size:16px;font-weight:700}
+.fp-sb .q-team{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 40px}.fp-sb .q-team div{border-top:3px solid var(--blue);padding-top:14px}
+.fp-sb .q-team b{display:block;font-size:18px}.fp-sb .q-team span{display:block;font-size:13px;color:var(--mut);margin-top:6px;line-height:1.45}.fp-sb .q-team em{font-style:normal;color:var(--brown);font-weight:700}
+.fp-sb .q-contact{background:var(--brown);color:#fff;margin-top:64px;padding:48px 44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.fp-sb .q-contact .q-lg img{width:min(100%,380px);height:auto;display:block}
+.fp-sb .q-contact .q-tag{font-size:34px;font-weight:700;margin-top:26px;letter-spacing:-.01em}
+.fp-sb .q-contact p{margin:0 0 6px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.9)}
+.fp-sb .q-contact .q-btn{margin-top:18px}
+.fp-sb .q-note{font-size:12.5px;color:var(--mut);margin:26px 0 0;max-width:80ch;line-height:1.55}
+/* Orion: белый фон, графит #001D2A, синий #4187E6, Commissioner */
+.fp-or{--blue:#4187E6;--ink:#001D2A;--mut:#5E6B73;--line:#E3E7EA;background:#fff;color:var(--ink);font-family:'Commissioner',system-ui,sans-serif}
+.fp-or .q-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);padding:95px 0 96px}
+.fp-or .q-crumbs{font-size:12.5px;color:var(--mut)}.fp-or .q-crumbs a{border-bottom:1px solid var(--line)}
+.fp-or .q-id{display:flex;align-items:center;gap:20px;margin-top:22px;font-size:13px;color:var(--mut)}
+.fp-or .q-id img{height:44px;width:auto;display:block}.fp-or .q-id span{border-left:1px solid var(--line);padding-left:20px}
+.fp-or .q-lab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin:64px 0 18px;font-weight:500}
+.fp-or .q-lead{font-size:21px;line-height:1.45;max-width:640px;margin:0;font-weight:400}
+.fp-or .q-btns{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;position:relative;z-index:1}
+.fp-or .q-btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 28px;font:600 14px 'Commissioner',sans-serif;border:1.5px solid var(--ink);color:var(--ink);background:#fff;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.fp-or .q-btn:hover{background:var(--ink);color:#fff}
+.fp-or .q-btn.q-pri{background:var(--blue);border-color:var(--blue);color:#fff}.fp-or .q-btn.q-pri:hover{background:#2F6FD0;border-color:#2F6FD0}
+.fp-or .q-ghost{position:absolute;right:-40px;bottom:-58px;font-weight:700;font-size:300px;line-height:1;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1px #E9EEF2;pointer-events:none;user-select:none}
+.fp-or .q-hd{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid var(--line);padding-bottom:22px}
+.fp-or h2{font-size:38px;font-weight:700;letter-spacing:-.015em;line-height:1.1;color:inherit}
+.fp-or .q-hd small{font-size:12px;color:var(--mut)}
+.fp-or .q-sec{padding-top:72px}
+.fp-or .q-deals{display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
+.fp-or .q-deal{display:block;padding:22px 0 24px;border-bottom:1px solid var(--line)}
+.fp-or .q-deal .q-m{font-size:12px;color:var(--mut)}
+.fp-or .q-deal h3{font-size:17px;font-weight:600;line-height:1.3;margin:8px 0 8px;transition:color .2s}.fp-or .q-deal:hover h3{color:var(--blue)}
+.fp-or .q-deal .q-r{font-size:13px;color:var(--blue)}.fp-or .q-deal .q-s{font-size:13px;font-weight:600;margin-top:8px}
+.fp-or .q-pi{display:grid;grid-template-columns:1fr 1fr;gap:30px 52px;padding:64px 0 72px}
+.fp-or .q-pi h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-weight:500;margin-bottom:14px}
+.fp-or .q-chips{display:flex;flex-wrap:wrap;gap:10px}.fp-or .q-chips span{border:1px solid var(--line);padding:9px 14px;font-size:13px;line-height:1.3}
+.fp-or .q-dark{background:var(--ink);color:#fff;padding:0 0 76px;position:relative}
+.fp-or .q-dark::before{content:"";display:block;width:15%;min-width:120px;height:8px;background:var(--blue);margin-bottom:64px}
+.fp-or .q-dark .q-hd{border-color:rgba(255,255,255,.14)}.fp-or .q-dark .q-hd small{color:rgba(255,255,255,.55)}
+.fp-or .q-rate{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;margin-top:30px}
+.fp-or .q-rate b{display:block;font-size:38px;font-weight:700;color:var(--blue);line-height:1}
+.fp-or .q-rate i{display:block;font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:12px 0 12px;line-height:1.4}
+.fp-or .q-rate span{font-size:16px;font-weight:600;line-height:1.4}
+.fp-or .q-team{display:grid;grid-template-columns:repeat(5,1fr);gap:34px 22px;margin-top:34px}
+.fp-or .q-team div{border-bottom:1px solid var(--line);padding-bottom:22px}
+.fp-or .q-team div::before{content:"";display:block;width:40px;height:4px;background:var(--blue);margin-bottom:16px}
+.fp-or .q-team i{display:block;font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.fp-or .q-team b{display:block;font-size:17.5px;font-weight:700;margin:8px 0 8px;line-height:1.25}.fp-or .q-team span{font-size:12.5px;color:var(--mut);line-height:1.4;display:block}
+.fp-or .q-contact{background:#E4E9F1;margin:72px 0 64px;padding:0 44px 40px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.fp-or .q-contact::before{content:"";display:block;width:19%;min-width:120px;height:8px;background:var(--blue);margin:0 0 36px -44px;flex-basis:100%;max-width:19%}
+.fp-or .q-contact h3{font-size:32px;font-weight:700;letter-spacing:-.01em}.fp-or .q-contact p{margin:10px 0 0;font-size:14px;color:#33444E}
+.fp-or .q-note{font-size:12.5px;color:var(--mut);margin:22px 0 0;max-width:80ch;line-height:1.55}
+@media(max-width:860px){
+  .fp{font-size:15px}.fp-in{padding:0 18px}
+  .fp-sb .q-hero{padding-bottom:40px}.fp-sb .q-bar{flex-direction:column;align-items:stretch}.fp-sb .q-hmeta{padding:12px 0 0}.fp-sb .q-lt{padding:0 16px;height:52px}.fp-sb .q-lt span{display:none}
+  .fp-sb .q-body{grid-template-columns:1fr;gap:28px;margin-top:34px}.fp-sb .q-mark img{width:120px}.fp-sb .q-hero h1{font-size:38px}.fp-sb .q-hero p{font-size:15.5px}.fp-sb .q-btns{flex-direction:column}
+  .fp-sb .q-stats{grid-template-columns:1fr 1fr;padding:24px 20px;gap:22px}.fp-sb .q-stats b{font-size:28px}.fp-sb h2{font-size:27px;flex-direction:column;align-items:flex-start;gap:4px;margin-top:44px}
+  .fp-sb .q-feat{grid-template-columns:1fr}.fp-sb .q-feat .q-img{height:170px;order:-1}.fp-sb .q-feat .q-img img{width:120px}.fp-sb .q-feat .q-t{padding:22px 20px}.fp-sb .q-feat h3{font-size:22px}
+  .fp-sb .q-grid,.fp-sb .q-pi,.fp-sb .q-team{grid-template-columns:1fr}.fp-sb .q-pi{gap:30px}
+  .fp-sb .q-contact{grid-template-columns:1fr;padding:30px 22px}.fp-sb .q-contact .q-tag{font-size:26px}.fp-sb .q-ft a{margin-left:0;width:100%}
+  .fp-or .q-hero{padding-bottom:56px}.fp-or .q-id img{height:38px}.fp-or .q-lab{margin-top:40px}.fp-or .q-lead{font-size:17.5px}.fp-or .q-btns{flex-direction:column}.fp-or .q-ghost{font-size:120px;bottom:-24px;right:-14px}
+  .fp-or h2{font-size:28px}.fp-or .q-hd{flex-direction:column;gap:6px;padding-bottom:16px}.fp-or .q-sec{padding-top:48px}
+  .fp-or .q-deals,.fp-or .q-pi{grid-template-columns:1fr}.fp-or .q-pi{padding:44px 0 52px}
+  .fp-or .q-dark{padding-bottom:52px}.fp-or .q-dark::before{margin-bottom:44px}.fp-or .q-rate{grid-template-columns:1fr 1fr;gap:30px 22px}.fp-or .q-rate span{font-size:14.5px}
+  .fp-or .q-team{grid-template-columns:1fr 1fr}.fp-or .q-contact{padding:0 22px 30px;margin:52px 0 44px}.fp-or .q-contact::before{margin-left:-22px;max-width:40%}.fp-or .q-contact h3{font-size:25px}.fp-or .q-contact .q-btn{width:100%}
+}
+/* «Никольская Консалтинг»: светлая бумага, сине-серый #3A5269, заголовок фирменным шрифтом (картинкой), PT Serif и Commissioner */
+.fp-nk{--firm:#3A5269;--ink:#15191D;--mut:#66707A;--line:#E3E4DE;--soft:#F3F0EE;background:var(--paper,#F5F5F1);color:var(--ink);font-family:'Commissioner',system-ui,sans-serif;padding:65px 0 72px}
+.fp-nk .q-crumbs{font-size:13px;color:var(--mut);padding:26px 0 16px}.fp-nk .q-crumbs a{border-bottom:1px solid var(--line)}.fp-nk .q-crumbs b{font-weight:500;color:var(--ink)}
+.fp-nk .q-hero{display:grid;grid-template-columns:1fr 300px;background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;position:relative}
+.fp-nk .q-hero::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--firm),#8FA6BD)}
+.fp-nk .q-l{padding:44px 44px 48px}
+.fp-nk .q-id{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.fp-nk .q-id img{height:46px;width:auto;display:block}
+.fp-nk .q-kind{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.fp-nk h1{margin:34px 0 0;line-height:0}.fp-nk h1 img{width:min(100%,590px);height:auto;display:block}
+.fp-nk .q-rule{width:74px;height:1px;background:var(--firm);margin:30px 0 26px}
+.fp-nk .q-lead{font-size:17px;line-height:1.55;color:#3B444C;max-width:600px;margin:0}
+.fp-nk .q-src{font-size:12.5px;color:var(--mut);margin-top:10px}
+.fp-nk .q-btns{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.fp-nk .q-btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 26px;font:500 14.5px 'Commissioner',sans-serif;border:1.2px solid var(--firm);color:var(--firm);background:#fff;border-radius:3px;cursor:pointer;transition:background .2s,color .2s}
+.fp-nk .q-btn:hover{background:var(--firm);color:#fff}.fp-nk .q-btn.q-pri{background:var(--firm);color:#fff}.fp-nk .q-btn.q-pri:hover{background:#2C4055}
+.fp-nk .q-r{background:var(--soft);border-left:1px solid var(--line);padding:22px 36px}
+.fp-nk .q-stat{padding:20px 0;border-bottom:1px solid #D9D6D2}.fp-nk .q-stat:last-child{border-bottom:0}
+.fp-nk .q-stat b{display:block;font-family:var(--f-display);font-weight:400;font-size:36px;line-height:1;color:var(--firm)}
+.fp-nk .q-stat span{display:block;font-size:14px;margin-top:10px;color:#4A5560}.fp-nk .q-stat small{display:block;font-size:12px;color:var(--mut);margin-top:5px}
+.fp-nk h2{font-family:var(--f-display);font-weight:400;font-size:28px;color:var(--ink);margin:60px 0 0;padding-bottom:14px;border-bottom:1.5px solid #8FA6BD;display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.fp-nk h2 small{font:400 12.5px 'Commissioner',sans-serif;color:var(--mut)}
+.fp-nk .q-sub{font-size:14.5px;color:var(--mut);max-width:620px;margin:16px 0 0;line-height:1.55}
+.fp-nk .q-deals{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.fp-nk .q-card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--firm);border-radius:3px;padding:24px 24px 20px;display:flex;flex-direction:column}
+.fp-nk .q-meta{font-size:12px;color:var(--mut)}.fp-nk .q-meta b{color:var(--firm);font-weight:600}
+.fp-nk .q-card h3{font-family:var(--f-display);font-weight:400;font-size:20px;line-height:1.35;margin:14px 0 20px}
+.fp-nk .q-role{background:var(--soft);padding:12px 14px;font-size:13.5px;line-height:1.4;margin-top:auto}
+.fp-nk .q-role i{display:block;font-style:normal;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--firm);font-weight:600;margin-bottom:5px}
+.fp-nk .q-oth{font-size:12.5px;color:var(--mut);margin-top:14px;line-height:1.5}
+.fp-nk .q-ft{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:18px;font-size:12.5px;color:var(--mut)}
+.fp-nk .q-ft .q-st{color:#1D5A44;font-weight:600}.fp-nk .q-ft .q-st::before{content:"●";font-size:8px;margin-right:6px;vertical-align:1px}
+.fp-nk .q-ft a{margin-left:auto;color:var(--ink);font-weight:500;border-bottom:1px solid var(--firm);padding-bottom:2px}
+.fp-nk .q-prs{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1px solid var(--line);border-radius:3px;margin-top:22px}
+.fp-nk .q-prs>div{display:grid;grid-template-columns:40px 1fr;gap:6px 18px;padding:26px 26px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.fp-nk .q-prs>div:nth-child(3n){border-right:0}.fp-nk .q-prs>div:nth-last-child(-n+3){border-bottom:0}
+.fp-nk .q-prs svg{width:36px;height:36px;grid-row:span 2}
+.fp-nk .q-prs b{font-size:15.5px;font-weight:600;line-height:1.35}.fp-nk .q-prs span{font-size:13.5px;color:var(--mut);line-height:1.5;grid-column:2}
+.fp-nk .q-inds{display:grid;grid-template-columns:140px 1fr;gap:10px;margin-top:26px;align-items:start}
+.fp-nk .q-inds>i{font-style:normal;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);padding-top:10px}
+.fp-nk .q-chips{display:flex;flex-wrap:wrap;gap:9px}.fp-nk .q-chips span{background:#fff;border:1px solid #D5D8D6;border-radius:99px;padding:7px 15px;font-size:13.5px}
+.fp-nk .q-proj{display:grid;grid-template-columns:150px 1fr;margin-top:8px}
+.fp-nk .q-proj i,.fp-nk .q-proj span{padding:16px 0;border-bottom:1px solid var(--line)}
+.fp-nk .q-proj i{font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--firm);padding-top:20px}
+.fp-nk .q-proj span{font-family:var(--f-display);font-size:16.5px;line-height:1.45}
+.fp-nk .q-team{display:grid;grid-template-columns:repeat(3,1fr);gap:0 36px;margin-top:8px}
+.fp-nk .q-team div{padding:18px 0;border-bottom:1px solid var(--line)}
+.fp-nk .q-team b{display:block;font-family:var(--f-display);font-weight:400;font-size:17px}.fp-nk .q-team span{display:block;font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.45}.fp-nk .q-team em{font-style:normal;color:var(--firm);font-weight:500}
+.fp-nk .q-contact{background:#fff;border:1px solid var(--line);border-radius:3px;margin-top:56px;padding:30px 34px;display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.fp-nk .q-contact img{height:40px;width:auto}.fp-nk .q-contact h3{font-family:var(--f-display);font-weight:400;font-size:21px}.fp-nk .q-contact p{margin:6px 0 0;font-size:13.5px;color:var(--mut)}
+.fp-nk .q-contact .q-btn{margin-left:auto}
+.fp-nk .q-note{font-size:12.5px;color:var(--mut);margin:24px 0 0;max-width:80ch;line-height:1.55}
+@media(max-width:860px){
+  .fp-nk{padding-bottom:48px}.fp-nk .q-hero{grid-template-columns:1fr}.fp-nk .q-l{padding:30px 20px 32px}.fp-nk .q-id{flex-direction:column;align-items:flex-start;gap:14px}.fp-nk .q-id img{height:40px}.fp-nk .q-kind{font-size:10.5px}
+  .fp-nk h1{margin-top:24px}.fp-nk .q-rule{margin:22px 0 20px}.fp-nk .q-lead{font-size:15.5px}.fp-nk .q-btns{flex-direction:column}
+  .fp-nk .q-r{border-left:0;border-top:1px solid var(--line);padding:8px 20px;display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.fp-nk .q-stat{border-bottom:0;padding:16px 0}.fp-nk .q-stat b{font-size:30px}
+  .fp-nk h2{font-size:23px;flex-direction:column;gap:4px;margin-top:44px}
+  .fp-nk .q-deals,.fp-nk .q-prs,.fp-nk .q-team{grid-template-columns:1fr}.fp-nk .q-prs>div{border-right:0;border-bottom:1px solid var(--line)!important;padding:20px}.fp-nk .q-prs>div:last-child{border-bottom:0!important}
+  .fp-nk .q-inds,.fp-nk .q-proj{grid-template-columns:1fr}.fp-nk .q-inds>i{padding-top:0}.fp-nk .q-proj i{border-bottom:0;padding:16px 0 0}.fp-nk .q-proj span{padding-top:6px}
+  .fp-nk .q-ft a{margin-left:0;width:100%}.fp-nk .q-contact{padding:24px 20px;gap:18px}.fp-nk .q-contact .q-btn{margin-left:0;width:100%}
+}
 .xb{--xb-bg:#FFFCEF;--xb-ink:#030303;--xb-mut:#6E6A62;--xb-line:#E5E3D1;--xb-wine:#64181C;--xb-wine2:#82363A;--xb-sand:#F5F4E6;
   font-family:'Manrope',system-ui,sans-serif;color:var(--xb-ink);font-size:15.5px;line-height:1.5;
   width:100vw;margin-left:calc(50% - 50vw);margin-top:-74px;margin-bottom:-80px;background:var(--xb-bg)}
@@ -2658,6 +2831,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-card-groups{font-size:14px}
   .brand-logo{height:23px}
   .advisor-card.brand.fill .brand-logo{height:min(var(--b-h,26px),44px)}
+  .advisor-card.brand.fill .brand-name a{min-height:44px}
   .relationship-head{padding:19px 18px}.relationship-body{padding:18px}
   .relationship-map{grid-template-columns:1fr}.relationship-center{min-height:0;padding:18px}
   .relationship-center:after{display:none}.relationship-grid{grid-template-columns:1fr}
@@ -3070,7 +3244,7 @@ const FIRMS = [
   brand:{logo:"/static/brands/orion.svg",logoOn:"/static/brands/orion-white.svg",ratio:2.057,h:50,ink:"#001D2A",accent:["#4187E6"],fill:"#4187E6"}},
  {id:"seamless",n:"SEAMLESS Legal",g:["К-hi"]},
  {id:"stonebridge",n:"Stonebridge Legal",g:["С-hi","К-hi"],site:"http://www.stonebridgelegal.ru",
-  brand:{logo:"/static/brands/stonebridge.svg",logoOn:"/static/brands/stonebridge-white.svg",ratio:15.06,h:21,ink:"#2A1F1C",accent:["#84665E"],fill:"#84665E"}},
+  brand:{logo:"/static/brands/stonebridge.svg",logoOn:"/static/brands/stonebridge-white.svg",ratio:15.06,h:27,ink:"#2A1F1C",accent:["#84665E"],fill:"#84665E"}},
  {id:"verba",n:"VERBA LEGAL",g:["С-hi","К-hi"],site:"https://verba.legal/"},
  {id:"vkpartners",n:"VK Partners",g:["С-hi","К-hi"]},
  {id:"whitesquare",n:"White Square",g:["С-hi","К-hi"],site:"https://whitesquarepartners.com/ru"},
@@ -3084,7 +3258,8 @@ const FIRMS = [
  {id:"lgs",n:"ЛГС Юридические Услуги",g:["С-hi"],site:"https://lgs.law/"},
  {id:"liniya",n:"Линия Права",g:["С-hi"]},
  {id:"nikolaev",n:"МКА «Николаев и партнеры»",g:["С-hi","К-hi"],site:"https://nikolaew.ru"},
- {id:"nikolskaya",n:"Никольская Консалтинг",g:["С-hi","К-hi"],site:"https://nikolskaya.ru/"},
+ {id:"nikolskaya",n:"Никольская Консалтинг",g:["С-hi","К-hi"],site:"https://nikolskaya.ru/",
+  brand:{logo:"/static/brands/nikolskaya.svg",logoOn:"/static/brands/nikolskaya-white.svg",ratio:3.63,h:42,ink:"#1C2A36",accent:["#3A5269"],fill:"#3A5269"}},
  {id:"tedo",n:"Технологии Доверия",g:["С-hi"]},
  {id:"tomashevskaya",n:"Томашевская и партнеры",g:["С-hi","К-hi"]},
  {id:"maxima",n:"Maxima Legal",g:["К-hi"]},
@@ -3803,8 +3978,9 @@ const firmRx = id => {
 function firmDeals(id, withListings){
   const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
+  const hidden = (typeof FIRM_HIDDEN_DEALS!=="undefined" && FIRM_HIDDEN_DEALS[id]) || [];
   return {
-    full: DEALS.filter(d=>(withListings||!isListing(d))&&((d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||""))),
+    full: DEALS.filter(d=>!hidden.includes(d.id)&&(withListings||!isListing(d))&&((d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||""))),
     mini: MINI_DEALS.filter(m=>m.firm===id),
     bulk: BULK_DEALS.filter(b=>b.firm===id)
   };
@@ -9634,6 +9810,7 @@ function firmSummaryHtml(id, full, mini, bulk){
 function renderFirm(id){
   const f = ALL_FIRM(id); if(!f){renderAdvisors();return;}
   if(EXEC_FIRMS.includes(f)){ renderExecFirm(f); return; }
+  if(FIRM_PAGES[id]){ renderFirmPage(f); return; }
   const isLegal = !!FIRMS.find(x=>x.id===id);
   const {full,mini,bulk} = firmDeals(id);
   app.innerHTML = `
@@ -9669,6 +9846,177 @@ function renderFirm(id){
     `Подготовка к собеседованию: «${f.n}»`, {type:"advisor", id});
   mountMiniAI(f.n,"advisor",id);
   mountClaimLine("firm", id);
+}
+/* СТРАНИЦЫ ФИРМ ПО СОГЛАСОВАННЫМ МАКЕТАМ. Владелец, 11 ноября 2026: «где сами
+   страницы-то? вставляй их, чтобы они по нажатию открывались». Макеты —
+   «Stonebridge Legal в Компасе» (фирма одобрила 11 ноября 2026) и «Orion в
+   Компасе». Сделки — живые, из базы (firmDeals); практики, отрасли, партнеры,
+   рейтинги и контакты — со слов фирмы, лежат здесь. Кнопки «Следить за
+   сделками фирмы» из макета нет: подписки на фирму на сайте нет. Почта —
+   текстом (почтовых ссылок на сайте нет). */
+const FIRM_PAGES = {
+  stonebridge:{
+    since:"с 2022 года", h1:"Вне времени.<br>Вне обстоятельств",
+    lead:"Независимая юридическая фирма, образованная частью партнеров и юристов, ранее работавших в российской практике Freshfields и отмеченных ведущими международными юридическими рейтингами. Основываясь на тридцатилетнем опыте сопровождения знаковых проектов в области M&A, рынков капитала и крупнейших судебных и арбитражных споров в России и за рубежом, фирма продолжает оказывать юридические услуги, придерживаясь тех же высоких стандартов качества и профессионализма.",
+    stats:[["30","лет опыта команды","со слов фирмы: партнеры и юристы бывшей российской практики Freshfields"],["6","партнеров","и более 50 юристов — со слов фирмы"],["12","практик","9 отраслей — по разделу «Услуги» на сайте фирмы"]],
+    practices:[["Корпоративное право / M&A","Слияния и поглощения, совместные предприятия и стратегические альянсы, корпоративная реструктуризация, покупка и продажа публичных компаний, финансирование приобретений."],
+      ["Рынки капитала","IPO и SPO, подготовка и реструктуризация перед IPO, выпуск облигаций и нот, выкуп акций и депозитарных расписок; работа на стороне эмитентов, андеррайтеров и акционеров-продавцов."],
+      ["Банковское и финансовое право","Сопровождение широкого круга сделок на российском и международном финансовых рынках и консультирование по регуляторным вопросам."],
+      ["ГЧП и инфраструктурные проекты","Правовое сопровождение концессионных и ГЧП-проектов в России и странах СНГ на всех стадиях: от конкурса до финансового закрытия и эксплуатации; M&A в сфере инфраструктуры."],
+      ["Разрешение споров","Споры по сделкам M&A, корпоративные, подрядные и кредитные споры в российских и зарубежных судах и арбитражных центрах; международный арбитраж, банкротство и реструктуризация."],
+      ["Санкционное право","Более 10 лет консультирования по санкциям ООН, ЕС, США, Великобритании; оценка сделок на соответствие санкционному режиму, контрсанкционное законодательство РФ."]],
+    industries:["Энергетика и природные ресурсы","ТМТ (технологии, медиа, телекоммуникации)","Фармацевтика","FMCG","Ретейл и электронная коммерция","Банки и финансовые институты","Инвестиционные фонды","Инфраструктура и строительство","Недвижимость"],
+    partners:[["Роман Прудентов","Партнер, генеральный директор (с 1 мая 2026)","Корпоративное право/M&A, Финансы"],["Дмитрий Позин","Партнер","Корпоративное право/M&A; генеральный директор в 2022–2026"],
+      ["Дмитрий Суриков","Партнер","ГЧП, Корпоративное право/M&A, Разрешение споров"],["Михаил Локтионов","Партнер","Корпоративное право/M&A, Финансы, Рынки капитала"],
+      ["Сергей Дьяченко","Партнер","Корпоративное право/M&A, Энергетика и природные ресурсы"],["Роман Бутенко","Партнер","Разрешение споров (включая международный арбитраж) (с марта 2026)"]],
+    address:"119017, Москва, Кадашевская наб., д. 14, к. 2", email:"info@stonebridgelegal.ru", phone:"+7 495 785 30 00", tg:"t.me/stonebridge_legal", tag:"#SimplyBestLawyers", site:"https://stonebridgelegal.ru"},
+  orion:{
+    city:"Москва · более 90 юристов",
+    lead:"Orion объединяет команду экспертов из Linklaters, Herbert Smith, Cleary Gottlieb, Clifford Chance, Freshfields и White & Case. Мы помогаем клиентам достигать исключительных результатов, сопровождая наиболее сложные проекты в области корпоративных сделок, разрешения споров, финансовых сделок, частного капитала и международного налогообложения.",
+    practices:["Корпоративная практика","Практика прямых частных инвестиций","Практика венчурного инвестирования","Антимонопольная практика","Финансовая практика","Практика структурного финансирования и финансирования активов","Практика разрешения споров","Практика санкционного права","Налоговая практика","Практика частного капитала","Практика защиты активов","Практика строительства и недвижимости"],
+    industries:["Банки и финансовые организации","Информационные и цифровые технологии, телекоммуникации","Промышленность и транспорт","Энергетика и природные ресурсы"],
+    ratings:[["Право-300, 2025","Единственная юридическая фирма в I группе рейтинга одновременно в 11 ключевых категориях"],["Коммерсантъ, «Лидеры рынка юридических услуг России 2026»","Единственная юридическая фирма в наивысшей, 1 группе одновременно в 13 категориях"],
+      ["Russia PE&VC Awards 2026","В тройке лидеров юридического сопровождения венчурных инвестиций"],["Wealth Navigator Awards 2025","«Юридическая компания года»"]],
+    partners:[["Роман Баханец","Партнер, адвокат","Налоги, защита активов, частный капитал"],["Григорий Гаджиев","Партнер","Корпоративная практика"],["Евгений Зеленский","Партнер","Прямые инвестиции и рынки капитала"],["Мария Зиборова","Партнер","Корпоративная практика"],["Максим Крайнов","Партнер, адвокат","Проектное финансирование"],
+      ["Николай Курмашев","Партнер","Финансовая практика"],["Владимир Мельников","Партнер","Разрешение споров"],["Константин Олефир","Партнер","Венчурные инвестиции"],["Вадим Турцев","Партнер, адвокат","Структурное финансирование"],["Александр Хретинин","Партнер","Санкционное право"]],
+    address:"Москва, Павелецкая площадь, 2, стр. 2", email:"info@orion-law.com", phone:"+7 499 395-10-10", site:"https://orion-law.com/"},
+  nikolskaya:{
+    lead:"Независимый юридический бизнес со слаженной командой, которая в течение многих лет реализует самые сложные проекты.",
+    stats:[["25+","лет опыта","со слов фирмы"],["16","партнеров и советников","со слов фирмы"],["6","практик, 13 отраслей","со слов фирмы"]],
+    practices:[["Корпоративная практика, слияния и поглощения","M&A, реструктуризации, частные инвестиции, совместные предприятия, MBO/LBO, редомициляция бизнеса"],["Финансовая практика","Синдицированное кредитование, проектное финансирование"],
+      ["Разрешение споров и международный арбитраж","Трансграничные споры, арбитраж, российские суды, спортивный арбитраж"],["Строительство, инфраструктура и ГЧП","От инициирования проекта до коммерческого и финансового закрытия"],
+      ["Регуляторная практика","Согласование сделок с регуляторами, антимонопольные требования, структурирование сделок M&A"],["Санкционная практика","Санкционные риски, оспаривание санкций, разблокировка активов, контрсанкции"]],
+    industries:["Энергетика и природные ресурсы","Банки и финансовые организации","Промышленность","Фармацевтика и здравоохранение","Информационные и цифровые технологии","Инфраструктура и транспорт","Недвижимость","Страхование","Розничная торговля","Сельское хозяйство","Автомобильная промышленность","Туризм","Спорт"],
+    projects:[["M&A","Консультирование Inchcape PLC по продаже российских активов текущему менеджменту"],["M&A","Консультирование «Зарубежнефти» по приобретению у Premier Oil доли в СРП на шельфе Индонезии"],
+      ["ГЧП","Концессия с ЯНАО на проектирование, создание и эксплуатацию аэропорта Салехарда"],["Финансирование","Финансирование комплекса по производству СПГ, нефтеперекачивающей станции и нефтеконденсатопровода"]],
+    partners:[["Алексей Рудяк","Старший партнер","Корпоративная практика, слияния и поглощения"],["Арт\u0435м Булыгин","Партнер","Финансовая практика"],["Дмитрий Губарев","Партнер","Финансовая практика"],
+      ["Данил Гурьянов","Партнер","Корпоративная практика, слияния и поглощения, санкционная практика"],["Дмитрий Малюкевич","Партнер","Разрешение споров и международный арбитраж"],["Алексей Панич","Партнер, адвокат","Разрешение споров и международный арбитраж"],
+      ["Григорий Смирнов","Партнер","Строительство, инфраструктура и ГЧП"],["Иван Теселкин","Партнер","Разрешение споров и международный арбитраж"],["Евгений Юрьев","Партнер","Корпоративная практика, энергетика, регуляторная практика"]],
+    address:"Москва, ул. Никольская, д. 10", email:"partners@nikolskaya.ru", phone:"+7 495 740 22 77", site:"https://nikolskaya.ru/"},
+};
+/* Сделки, которые фирма попросила не показывать в своем профиле (11 ноября
+   2026, «Никольская Консалтинг» — «Петровакс»): из счета фирмы и ее страницы
+   сделка уходит, сама карточка сделки остается как была. */
+const FIRM_HIDDEN_DEALS = {nikolskaya:["g82725e96"]};
+/* Сделки фирмы для страницы-макета: роль фирмы словами из карточки («Юридический
+   консультант покупателя — «Магнит»»), другие консультанты, свежие сверху. */
+function firmPageDeals(id){
+  const rx = firmRx(id), noYo = t => String(t||"").replace(/ё/g,"е").replace(/Ё/g,"Е");
+  const side = role => {
+    role = String(role||""); const m = role.match(/\(([^)]+)\)/);
+    let core = role.split(/\s*\((?:команда|в составе)/)[0].replace(/\s*\([^)]*\)/g,"").trim();
+    core = core.charAt(0).toUpperCase() + core.slice(1);
+    return noYo(core + (m ? " — " + m[1].trim() : ""));
+  };
+  const other = a => {
+    const r = String(a[0]||"").toLowerCase();
+    const how = /покупател|инвестор/.test(r) ? "за покупателя" : /продавц|продавец/.test(r) ? "за продавца" : /эмитент/.test(r) ? "за эмитента"
+      : (r.replace(/^юридический консультант\s*/,"").trim() || "консультант");
+    return noYo(a[1] + " — " + how);
+  };
+  return firmDeals(id).full.map(d=>{
+    const adv = (d.law&&d.law.adv||[]).filter(a=>Array.isArray(a)&&a.length>1);
+    const mine = adv.find(a=>rx.test(a[1]));
+    return {d, title:noYo(d.title), role: mine ? side(mine[0]) : "Консультант сделки",
+      others: adv.filter(a=>!rx.test(a[1]) && !/не раскрыв|не указ/i.test(a[1])).slice(0,3).map(other),
+      sum: undisclosed(d.sum)||d.sum==="—" ? "" : noYo(d.sum), src:(d.src||[]).length};
+  }).sort((a,b)=>String(b.d.date||"").localeCompare(String(a.d.date||"")));
+}
+function renderFirmPage(f){
+  const p = FIRM_PAGES[f.id], deals = firmPageDeals(f.id), n = deals.length;
+  const nWord = `${n} ${plural(n,"сделка","сделки","сделок")}`;
+  const prep = `<div class="fp-in fp-prep">${interviewPanelHtml()}${claimLineHtml()}</div>`;
+  const note = `Только сделки, где фирма публично названа консультантом; у каждого факта в карточке сделки есть ссылка на источник. Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
+  if(f.id==="nikolskaya"){
+    const meta = x => `<b>${esc(x.d.type||"M&A")}</b> · ${esc([fmtDateLong(x.d.date), x.d.ind].filter(Boolean).join(" · "))}`;
+    app.innerHTML = `<div class="fp fp-nk"><div class="fp-in">
+      <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / Юридические / <b>${esc(f.n)}</b></div>
+      <section class="q-hero"><div class="q-l">
+        <div class="q-id"><img src="/static/brands/nikolskaya.svg" alt="Nikolskaya Consulting" width="167" height="46"><span class="q-kind">Юридический консультант · Москва</span></div>
+        <h1><img src="/static/brands/nikolskaya-title.svg" alt="${esc(f.n)}" width="590" height="65"></h1>
+        <div class="q-rule"></div>
+        <p class="q-lead">${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
+      </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div></section>
+      </div>${prep}<div class="fp-in">
+      <h2>Сделки в Компасе<small>свежие сверху</small></h2>
+      <p class="q-sub">Сделки, где фирма названа консультантом в открытых источниках. В карточке сделки у каждого факта — ссылка на источник.</p>
+      <div class="q-deals">${deals.map(x=>`<div class="q-card"><div class="q-meta">${meta(x)}</div><h3>${esc(x.title)}</h3><div class="q-role"><i>Роль фирмы</i>${esc(x.role)}</div>
+        <div class="q-oth">${x.others.length?`Другие консультанты: ${esc(x.others.join("; "))}`:"Другие консультанты публично не назывались"}</div>
+        <div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div></div>`).join("")}</div>
+      <h2>Практики и отрасли<small>со слов фирмы</small></h2>
+      <div class="q-prs">${p.practices.map(([t,d],i)=>`<div><svg aria-hidden="true"><use href="/static/brands/nikolskaya-icons.svg#p${i+1}"/></svg><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>
+      <div class="q-inds"><i>Отрасли</i><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
+      <h2>Проекты, которые называет фирма<small>со слов фирмы · в базе Компаса этих сделок пока нет</small></h2>
+      <div class="q-proj">${p.projects.map(([t,x])=>`<i>${esc(t)}</i><span>${esc(x)}</span>`).join("")}</div>
+      <h2>Партнеры<small>со слов фирмы</small></h2>
+      <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><b>${esc(nm)}</b><span><em>${esc(r)}</em> · ${esc(a)}</span></div>`).join("")}</div>
+      <div class="q-contact"><img src="/static/brands/nikolskaya.svg" alt="" width="145" height="40"><div><h3>Связаться с фирмой</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы — nikolskaya.ru</a></div>
+      <p class="q-note">${note}</p>
+    </div></div>`;
+  } else if(f.id==="stonebridge"){
+    const mark = `<img src="/static/brands/stonebridge-mark.svg" alt="" width="190" height="190">`;
+    const meta = x => [x.d.type||"M&A", fmtDateLong(x.d.date), x.d.ind].filter(Boolean).map(esc).join(" · ");
+    const oth = x => x.others.length ? `<div class="q-oth">Другие консультанты: ${esc(x.others.join("; "))}</div>` : "";
+    const ft = (x, withSrc) => `<div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${withSrc&&x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div>`;
+    const first = deals[0];
+    app.innerHTML = `<div class="fp fp-sb">
+    <section class="q-hero"><div class="fp-in">
+      <div class="q-bar"><div class="q-lt"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="226" height="15"><span>юридический консультант</span></div><div class="q-hmeta">Москва · ${p.since} · ${nWord} в Компасе</div></div>
+      <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / ${esc(f.n)}</div>
+      <div class="q-body"><div class="q-mark">${mark}</div><div><div class="q-lab">Профиль консультанта в Компасе</div><h1>${p.h1}</h1>
+        <p>${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div></div></div>
+    </div></section>
+    ${prep}
+    <div class="fp-in">
+      <div class="q-stats"><div><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>${p.since}, из открытых источников</small></div>${p.stats.map(([a,b,c])=>`<div><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div>
+      <h2>Сделки с участием фирмы<small>${nWord} в Компасе · свежие сверху</small></h2>
+      ${first?`<div class="q-feat"><div class="q-t"><div class="q-meta">${meta(first)}</div><h3>${esc(first.title)}</h3><div class="q-role">${esc(first.role)}</div>${oth(first)}${ft(first,true)}</div><div class="q-img">${mark}</div></div>`:""}
+      <div class="q-grid">${deals.slice(1).map(x=>`<div class="q-card"><div class="q-top">${meta(x)}</div><div class="q-in"><h3>${esc(x.title)}</h3><div class="q-role">${esc(x.role)}</div>${oth(x)}${ft(x)}</div></div>`).join("")}</div>
+      <h2>Практики и отрасли<small>со слов фирмы</small></h2>
+      <div class="q-pi"><div><h4>Практики</h4><div class="q-pr">${p.practices.map(([t,d],i)=>`<div><i>${String(i+1).padStart(2,"0")}</i><div><b>${esc(t)}</b><span>${esc(d)}</span></div></div>`).join("")}</div></div>
+        <div><h4>Отрасли</h4><div class="q-ind">${p.industries.map(x=>`<div>${esc(x)}</div>`).join("")}</div></div></div>
+      <h2>Партнеры<small>со слов фирмы</small></h2>
+      <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><b>${esc(nm)}</b><span><em>${esc(r)}</em> · ${esc(a)}</span></div>`).join("")}</div>
+      <div class="q-contact"><div><div class="q-lg"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="380" height="25"></div><div class="q-tag">${esc(p.tag)}</div></div>
+        <div><p>${esc(p.address)}</p><p>${esc(p.email)} · ${esc(p.phone)}</p><p>Telegram: ${esc(p.tg)}</p><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div></div>
+      <p class="q-note">${note}</p>
+    </div></div>`;
+  } else {
+    const when = d => /^\d{4}-\d{2}/.test(String(d)) ? fmtMonthYear(String(d).slice(0,7)) : fmtDateLong(d);
+    app.innerHTML = `<div class="fp fp-or">
+    <section class="q-hero"><div class="fp-in">
+      <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / ${esc(f.n)}</div>
+      <div class="q-id"><img src="/static/brands/orion.svg" alt="Orion" width="91" height="44"><span>${esc(p.city)}</span></div>
+      <div class="q-lab">Профиль консультанта в Компасе</div>
+      <p class="q-lead">${esc(p.lead)}</p>
+      <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
+      <div class="q-ghost" aria-hidden="true">ORION</div>
+    </div></section>
+    ${prep}
+    <div class="fp-in q-sec">
+      <div class="q-hd"><h2>Сделки с участием фирмы</h2><small>${nWord} в Компасе · из открытых источников</small></div>
+      <div class="q-deals">${deals.map(x=>`<a class="q-deal" href="#/deal/${x.d.id}"><div class="q-m">${esc([when(x.d.date), x.d.ind].filter(Boolean).join(" · "))}</div><h3>${esc(x.title)}</h3><div class="q-r">${esc(x.role)}</div>${x.sum?`<div class="q-s">${esc(x.sum)}</div>`:""}</a>`).join("")}</div>
+      <div class="q-pi"><div><h4>Практики</h4><div class="q-chips">${p.practices.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
+        <div><h4>Отрасли</h4><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div></div>
+    </div>
+    <section class="q-dark"><div class="fp-in">
+      <div class="q-hd"><h2>Рейтинги и премии</h2><small>По данным сайта фирмы</small></div>
+      <div class="q-rate">${p.ratings.map(([s,t],i)=>`<div><b>${String(i+1).padStart(2,"0")}</b><i>${esc(s)}</i><span>${esc(t)}</span></div>`).join("")}</div>
+    </div></section>
+    <div class="fp-in q-sec">
+      <div class="q-hd"><h2>Партнеры</h2><small>С сайта фирмы</small></div>
+      <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><i>${esc(r)}</i><b>${esc(nm)}</b><span>${esc(a)}</span></div>`).join("")}</div>
+      <p class="q-note">${note}</p>
+      <div class="q-contact"><div><h3>Связаться с Orion</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn q-pri" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div>
+    </div></div>`;
+  }
+  bindInterviewPrep("prepInterviewFirm", resume => interviewQuestion(
+    `Готовлюсь к встрече с юридической фирмой «${f.n}». Коротко, по пунктам: ее последние сделки — списком со ссылками на карточки «Компаса» `
+    + `и с ролью фирмы в каждой — за покупателя, продавца или эмитента; в каких отраслях работает чаще всего. В конце — три вопроса, которые стоит задать фирме.`, resume, "фирмой"),
+    `Подготовка к встрече: «${f.n}»`, {type:"advisor", id:f.id});
+  mountClaimLine("firm", f.id);
 }
 /* СТРАНИЦА ФИРМЫ EXECUTIVE SEARCH — по макету «Execburo в Компасе»
    (см. EXEC_FIRMS). Своя палитра и шрифт Manrope — только внутри `.xb`;

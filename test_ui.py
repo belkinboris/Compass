@@ -201,7 +201,8 @@ def test_every_firm_page_opens(page, base_url):
         page.crashes.clear()
         page.goto(f"{base_url}/#/advisors/{fid}", wait_until="networkidle")
         page.wait_for_timeout(230)
-        ok = page.evaluate("() => !!document.querySelector('#app .d-head h1')")
+        # у Orion и Stonebridge Legal — своя страница по макету (.fp), без общего заголовка
+        ok = page.evaluate("() => !!document.querySelector('#app .d-head h1, #app .fp .q-hero')")
         if not ok or page.crashes:
             broken.append((fid, page.crashes[:1]))
     assert not broken, f"страница фирмы не открылась: {broken[:5]}"
@@ -1304,7 +1305,8 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
     page.click('[data-t="legal"]')
     cards = page.locator(".advisor-list .advisor-card")
     assert "Orion" in cards.nth(0).inner_text() and "Stonebridge" in cards.nth(1).inner_text()
-    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)")):
+    assert "Никольская" in cards.nth(2).inner_text()
+    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)"), (2, "rgb(58, 82, 105)")):
         card = cards.nth(i)
         assert "fill" in card.get_attribute("class")
         assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == "rgb(255, 255, 255)"
@@ -1313,6 +1315,32 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
         assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == colour
         assert card.locator(".brand-logo.on").evaluate("e=>getComputedStyle(e).opacity") == "1"
     page.mouse.move(5, 5)
+    # обе фирменные плашки — одной высоты (владелец: «надо делать единообразно»)
+    hs = [cards.nth(i).evaluate("e=>Math.round(e.getBoundingClientRect().height)") for i in (0, 1, 2)]
+    assert hs[0] == hs[1] == hs[2], hs
+
+
+def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
+    """11 ноября 2026, владелец: «где сами страницы-то? вставляй их, чтобы они
+    по нажатию открывались». Плашка ведет на страницу по согласованному макету:
+    свои цвета внутри .fp, сделки — живые из базы, со ссылками на карточки."""
+    for fid, cls, parts in (("orion", "fp-or", ("Рейтинги и премии", "Григорий Гаджиев", "Связаться с Orion")),
+                            ("stonebridge", "fp-sb", ("Вне времени", "Роман Прудентов", "Практики и отрасли")),
+                            ("nikolskaya", "fp-nk", ("Сделки в Компасе", "Алексей Рудяк", "Проекты, которые называет фирма"))):
+        visit(page, base_url, "#/advisors")
+        page.click('[data-t="legal"]')
+        page.locator(f'.advisor-card.brand.fill a[href="#/advisors/{fid}"]').first.click(position={"x": 20, "y": 10})
+        page.wait_for_selector(f".fp.{cls}")
+        body = page.locator("#app").inner_text()
+        for part in parts + ("Подготовка к встрече",):
+            assert part.lower() in body.lower(), (fid, part)
+        assert "ё" not in body
+        n = page.evaluate(f"firmDeals('{fid}').full.length")
+        assert n >= 2 and page.locator('.fp a[href^="#/deal/"]').count() == n
+    # «Никольская» попросила не показывать в профиле сделку по «Петроваксу»: в счете и на странице ее нет
+    assert page.evaluate("firmDeals('nikolskaya').full.every(d=>d.id!=='g82725e96')")
+    assert "Петровакс" not in page.locator("#app").inner_text()
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
 
 
 def test_account_form_is_visible_after_async_auth_check(page, base_url):
@@ -2236,8 +2264,8 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     assert "Strategy Partners" in text and "Форштадт" not in text
     assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
     # ни одна фирма сейчас не фирменная, и порядок — чистый алфавит
-    # фирменные среди юридических и инвестиционных — только Orion и Stonebridge Legal (11 ноября 2026)
-    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "orion,stonebridge"
+    # фирменные среди юридических и инвестиционных — Orion, Stonebridge Legal и «Никольская Консалтинг» (11 ноября 2026)
+    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "nikolskaya,orion,stonebridge"
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
