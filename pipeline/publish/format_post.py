@@ -401,6 +401,9 @@ def party_names(deal, companies):
     seller = name(deal.get('seller_id'), deal.get('seller'))
     buyer = name(deal.get('buyer'), deal.get('buyer_name'))
     asset = name(deal.get('target'), deal.get('asset'))
+    # Предмет из двух обществ (пышечные Ginza, 11 ноября 2026): назвать оба.
+    if has(deal.get('target_label')):
+        asset = deal['asset'] if has(deal.get('asset')) else deal['target_label']
     if not asset and deal.get('asset_id') and companies.get(deal['asset_id']):
         asset = companies[deal['asset_id']]['name']
     return seller, asset, buyer
@@ -1389,7 +1392,8 @@ def render(deal, companies, updates=(), today=None, fin=None):
     asset = _strip_registry_ids(asset) if asset else asset
     # У СП главное после предмета — как поделят доли; это отдельная строка,
     # а не продолжение предмета через тире.
-    detail = '' if jv else _join_subject_sentences(
+    # предмет из двух обществ: описание одного профиля к двум не подходит
+    detail = '' if (jv or has(deal.get('target_label'))) else _join_subject_sentences(
         _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
     if asset and detail and not has_novelty(asset, detail) and _starts_with_name(asset, detail):
         # Деталь сама называет предмет — имя перед тире не повторяем (пост о

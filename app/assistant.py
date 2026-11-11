@@ -3139,7 +3139,25 @@ def _estimate_report(db, deal: dict):
         return None, (entity.legal_name if entity else None)
     # ОКВЭД юрлица — признак холдинга: его РСБУ без выручки дочерних обществ
     # (price_estimate.report_mismatch, «Медскан», 6 ноября 2026).
-    return dict(deal_multiples.report_dict(row), okved_code=getattr(entity, "okved_code", None)), entity.legal_name
+    report = dict(deal_multiples.report_dict(row), okved_code=getattr(entity, "okved_code", None))
+    name = entity.legal_name
+    # ПРЕДМЕТ ИЗ ДВУХ ОБЩЕСТВ (пышечные Ginza, 11 ноября 2026): оценка считалась по
+    # одному из двух купленных ООО. Когда карточка называет оба (`target_label`) и у
+    # второго (`asset_id`) есть подтвержденная отчетность за тот же год, показатели
+    # складываются; строки отчета не складываем — по ним считается только EBITDA.
+    second_id = deal.get("asset_id")
+    if deal.get("target_label") and second_id and second_id != target_id:
+        second = fns._confirmed_entity(db, second_id)
+        row2 = second and db.scalar(select(FinancialReport).where(
+            FinancialReport.legal_entity_id == second.id, FinancialReport.year == row.year))
+        if row2:
+            other = deal_multiples.report_dict(row2)
+            for key, value in other.items():
+                if key.endswith("_rub") and isinstance(value, (int, float)):
+                    report[key] = (report.get(key) or 0) + value if isinstance(report.get(key), (int, float)) or report.get(key) is None else report[key]
+            report["lines"] = {}
+            name = str(deal["target_label"])
+    return report, name
 
 
 @router.get("/api/deals/{deal_id}/price-estimate")
