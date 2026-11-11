@@ -143,6 +143,8 @@ def unproven(detail, base=None):
             # карточка вышла — или осталась в очереди (придержана приемкой):
             # решение ей записано, держать его живым на сайте незачем
             ok = card is not None or did in queued
+            if d.get('has_text') and card is not None and did not in queued:
+                ok = bool(card.get('post_override'))
         else:
             ok = True
         if not ok:
@@ -410,7 +412,8 @@ def main(write=False):
         print('  ПОЗДНЕЕ РЕШЕНИЕ по опубликованной %-11s %s — %s%s'
               % (deal['id'], str(deal.get('title') or '')[:56],
                  {'discard': 'снимаем с сайта', 'hold': 'уже вышла, придержать нечего',
-                  'approve': 'уже вышла'}.get(d['verdict'], d['verdict']),
+                  'approve': ('текст владельца станет текстом поста'
+                              if str(d.get('edited_text') or '').strip() else 'уже вышла')}.get(d['verdict'], d['verdict']),
                  '; пост в канале был — удалите руками, если нужно' if posted and d['verdict'] == 'discard' else ''))
     # ГОТОВАЯ КАРТОЧКА, КОТОРУЮ ВЛАДЕЛЕЦ НЕ ВИДЕЛ, — ТУПИК, А НЕ ОЧЕРЕДЬ
     # (27 октября 2026: 13 принятых карточек трое суток не показывались;
@@ -603,6 +606,23 @@ def main(write=False):
         card['held'] = True
     base_changed = False
     for deal, d in late_decisions(data['deals'], pending['cards'], decisions):
+        # ОТВЕТ СВОИМ ТЕКСТОМ НА ПРОЕКТ ПОСТА КАРТОЧКИ, КОТОРАЯ УЖЕ НА САЙТЕ
+        # (11 ноября 2026, «АГР Холдинг» и Hefei): решение приходит как
+        # `approve` с текстом, карточки в очереди уже нет — оно считалось
+        # «уже вышла» и гасилось, а пост уходил нашим текстом. Владелец: «вышел
+        # пост не таким текстом, каким я его правил в консоли». Текст владельца —
+        # это текст поста и разрешение на пост (как у карточки из очереди).
+        if d['verdict'] == 'approve' and str(d.get('edited_text') or '').strip():
+            text = format_post.owner_text_as_html(d['edited_text'])
+            if deal.get('post_override') != text:
+                deal['post_override'] = text
+                deal['post_approved'] = True
+                deal.pop('no_post', None)
+                deal.pop('post_held', None)
+                base_changed = True
+                print('  ТЕКСТ ПОСТА   %-11s %s (текст владельца к карточке на сайте)'
+                      % (deal['id'], str(deal.get('title'))[:56]))
+            continue
         if d['verdict'] == 'discard':
             apply_late_discard(data, state, deal, now)
             base_changed = True
@@ -726,7 +746,8 @@ def main(write=False):
                       and not foreign_decision(d)]
     if handle and ids_to_consume:
         site, token = handle
-        detail = [{'id': d['id'], 'deal_id': str(d.get('deal_id') or ''), 'verdict': d['verdict']}
+        detail = [{'id': d['id'], 'deal_id': str(d.get('deal_id') or ''), 'verdict': d['verdict'],
+                   'has_text': bool(str(d.get('edited_text') or '').strip())}
                   for d in decisions if d['id'] in set(ids_to_consume)]
         json.dump({'site': site, 'token': token, 'ids': ids_to_consume, 'answers': offer_answers,
                    'detail': detail},
