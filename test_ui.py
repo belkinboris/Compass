@@ -1305,8 +1305,8 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
     page.click('[data-t="legal"]')
     cards = page.locator(".advisor-list .advisor-card")
     assert "Orion" in cards.nth(0).inner_text() and "Stonebridge" in cards.nth(1).inner_text()
-    assert "Никольская" in cards.nth(2).inner_text()
-    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)"), (2, "rgb(58, 82, 105)")):
+    assert "ККМП" in cards.nth(2).inner_text() and "Никольская" in cards.nth(3).inner_text()
+    for i, colour in ((0, "rgb(65, 135, 230)"), (1, "rgb(132, 102, 94)"), (2, "rgb(49, 69, 96)"), (3, "rgb(58, 82, 105)")):
         card = cards.nth(i)
         assert "fill" in card.get_attribute("class")
         assert card.evaluate("e=>getComputedStyle(e).backgroundColor") == "rgb(255, 255, 255)"
@@ -1316,8 +1316,26 @@ def test_orion_and_stonebridge_cards_fill_with_firm_colour_on_hover(page, base_u
         assert card.locator(".brand-logo.on").evaluate("e=>getComputedStyle(e).opacity") == "1"
     page.mouse.move(5, 5)
     # обе фирменные плашки — одной высоты (владелец: «надо делать единообразно»)
-    hs = [cards.nth(i).evaluate("e=>Math.round(e.getBoundingClientRect().height)") for i in (0, 1, 2)]
-    assert hs[0] == hs[1] == hs[2], hs
+    hs = [cards.nth(i).evaluate("e=>Math.round(e.getBoundingClientRect().height)") for i in (0, 1, 2, 3)]
+    assert len(set(hs)) == 1, hs
+    # Партнеры не перемешиваются с остальными ни при каком порядке (владелец,
+    # 11 ноября 2026: «привилегия тем, кто с нами партнерится»): по алфавиту,
+    # по числу сделок и при выбранной отрасли сначала идут все фирменные плашки.
+    def brand_flags():
+        return page.locator(".advisor-list .advisor-card").evaluate_all("c=>c.map(e=>e.classList.contains('brand')?1:0)")
+    def counts():
+        return page.locator(".advisor-list .advisor-card").evaluate_all(
+            "c=>c.map(e=>parseInt((e.innerText.match(/(\\d+)\\s+сдел/)||[0,0])[1]))")
+    for setup in ("firmSort='active';advInd='Все'", "firmSort='alpha';advInd='Финансовые услуги'", "firmSort='active';advInd='Финансовые услуги'"):
+        page.evaluate(setup + ";renderAdvisorsBody()")
+        page.wait_for_timeout(300)
+        flags = brand_flags()
+        k = sum(flags)
+        assert k >= 1 and flags == [1] * k + [0] * (len(flags) - k), (setup, flags[:8])
+        if "deals" in setup or "Финанс" in setup:
+            ns = counts()
+            assert ns[:k] == sorted(ns[:k], reverse=True) and ns[k:] == sorted(ns[k:], reverse=True), (setup, ns[:10])
+    page.evaluate("firmSort='alpha';advInd='Все';renderAdvisorsBody()")
 
 
 def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
@@ -1326,6 +1344,7 @@ def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
     свои цвета внутри .fp, сделки — живые из базы, со ссылками на карточки."""
     for fid, cls, parts in (("orion", "fp-or", ("Рейтинги и премии", "Григорий Гаджиев", "Связаться с Orion")),
                             ("stonebridge", "fp-sb", ("Вне времени", "Роман Прудентов", "Практики и отрасли")),
+                            ("kkmp", "fp-kk", ("Сделки с участием фирмы", "Алена Кучер", "Практики и индустрии")),
                             ("nikolskaya", "fp-nk", ("Сделки в Компасе", "Алексей Рудяк", "Проекты, которые называет фирма"))):
         visit(page, base_url, "#/advisors")
         page.click('[data-t="legal"]')
@@ -2264,8 +2283,8 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     assert "Strategy Partners" in text and "Форштадт" not in text
     assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
     # ни одна фирма сейчас не фирменная, и порядок — чистый алфавит
-    # фирменные среди юридических и инвестиционных — Orion, Stonebridge Legal и «Никольская Консалтинг» (11 ноября 2026)
-    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "nikolskaya,orion,stonebridge"
+    # фирменные среди юридических и инвестиционных — Orion, Stonebridge Legal, ККМП и «Никольская Консалтинг» (11 ноября 2026)
+    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "kkmp,nikolskaya,orion,stonebridge"
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
@@ -4607,9 +4626,14 @@ def test_advisors_rank_by_industry_when_an_industry_is_chosen(page, base_url):
     page.wait_for_selector("#advind")
     page.select_option("#advind", "ИТ и интернет")
     page.wait_for_timeout(600)
-    counts = page.evaluate("""() => [...document.querySelectorAll('.advisor-card .count-btn')]
-        .map(e => parseInt(e.innerText) || 0)""")
-    assert counts and counts == sorted(counts, reverse=True), counts[:10]
+    # с 11 ноября 2026 партнеры стоят первыми; счет убывает отдельно у них и у остальных
+    rows = page.evaluate("""() => [...document.querySelectorAll('.advisor-card')]
+        .map(e => [e.classList.contains('brand') ? 1 : 0, parseInt(e.querySelector('.count-btn').innerText) || 0])""")
+    k = sum(r[0] for r in rows)
+    assert rows and [r[0] for r in rows] == [1] * k + [0] * (len(rows) - k), rows[:10]
+    for part in (rows[:k], rows[k:]):
+        counts = [r[1] for r in part]
+        assert counts == sorted(counts, reverse=True), counts[:10]
     first = page.locator(".advisor-card .count-btn").first.inner_text()
     assert "в отрасли «ИТ и интернет»" in first, first
     page.select_option("#advind", "Все")
