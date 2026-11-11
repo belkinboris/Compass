@@ -2226,7 +2226,8 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .brand-logo{display:block;height:var(--b-h,26px);width:auto;max-width:100%}
 /* Вид «заливка» — правило у BRAND_TOKENS. */
 .advisor-card.brand.fill{background:var(--card);transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .3s var(--ease)}
-.advisor-card.brand.fill::before{display:none}
+.advisor-card.brand.fill::before{background:var(--b-fill)}
+.advisor-card.brand.fill:hover{border-color:var(--line);box-shadow:none}
 .advisor-card.brand.fill .brand-name a{position:static;display:grid;min-height:50px;align-content:center}
 .advisor-card.brand.fill .brand-logo{grid-area:1/1;transition:opacity .25s var(--ease)}
 .advisor-card.brand.fill .brand-logo.on{opacity:0}
@@ -2235,6 +2236,13 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .advisor-card.brand.fill:hover .brand-logo{opacity:0}
   .advisor-card.brand.fill:hover .brand-logo.on{opacity:1}
   .advisor-card.brand.fill:hover .count-btn{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
+}
+/* На телефоне наведения нет: та же заливка — на время нажатия (владелец, 11 ноября 2026: «когда нажимаешь, дешевая каемка вместо заливки»). */
+@media (hover:none){
+  .advisor-card.brand.fill:active{background:var(--b-fill);border-color:var(--b-fill)}
+  .advisor-card.brand.fill:active .brand-logo{opacity:0}
+  .advisor-card.brand.fill:active .brand-logo.on{opacity:1}
+  .advisor-card.brand.fill:active .count-btn{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
 }
 .brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
 /* Описание короче соседних, и при обычном переносе на вторую строку уходило
@@ -2263,6 +2271,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp h1,.fp h2,.fp h3,.fp h4{margin:0;font-family:inherit}
 .fp .fp-prep{padding-top:26px}
 .fp .claim-line{margin:26px 0 0}
+.fp-arr{width:11px;height:11px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
 /* Stonebridge Legal: черный первый экран, Manrope, коричневый #84665E, бледно-голубой #BECAD8, серые карточки #F3F0EF */
 .fp-sb{--brown:#84665E;--blue:#BECAD8;--grey:#F3F0EF;--mut:#6F6A68;background:#fff;color:#000;font-family:'Manrope',system-ui,sans-serif;padding-bottom:64px}
 .fp-sb .q-hero{background:#000;color:#fff;padding:65px 0 64px}
@@ -2322,7 +2331,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp-or .q-btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 28px;font:600 14px 'Commissioner',sans-serif;border:1.5px solid var(--ink);color:var(--ink);background:#fff;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .fp-or .q-btn:hover{background:var(--ink);color:#fff}
 .fp-or .q-btn.q-pri{background:var(--blue);border-color:var(--blue);color:#fff}.fp-or .q-btn.q-pri:hover{background:#2F6FD0;border-color:#2F6FD0}
-.fp-or .q-ghost{position:absolute;right:-40px;bottom:-58px;font-weight:700;font-size:300px;line-height:1;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1px #E9EEF2;pointer-events:none;user-select:none}
+.fp-or .q-ghost{position:absolute;right:0;bottom:0;width:min(46%,620px);height:auto;fill:#EDF3FC;pointer-events:none}
 .fp-or .q-hd{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid var(--line);padding-bottom:22px}
 .fp-or h2{font-size:38px;font-weight:700;letter-spacing:-.015em;line-height:1.1;color:inherit}
 .fp-or .q-hd small{font-size:12px;color:var(--mut)}
@@ -2359,7 +2368,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .fp-sb .q-feat{grid-template-columns:1fr}.fp-sb .q-feat .q-img{height:170px;order:-1}.fp-sb .q-feat .q-img img{width:120px}.fp-sb .q-feat .q-t{padding:22px 20px}.fp-sb .q-feat h3{font-size:22px}
   .fp-sb .q-grid,.fp-sb .q-pi,.fp-sb .q-team{grid-template-columns:1fr}.fp-sb .q-pi{gap:30px}
   .fp-sb .q-contact{grid-template-columns:1fr;padding:30px 22px}.fp-sb .q-contact .q-tag{font-size:26px}.fp-sb .q-ft a{margin-left:0;width:100%}
-  .fp-or .q-hero{padding-bottom:56px}.fp-or .q-id img{height:38px}.fp-or .q-lab{margin-top:40px}.fp-or .q-lead{font-size:17.5px}.fp-or .q-btns{flex-direction:column}.fp-or .q-ghost{font-size:120px;bottom:-24px;right:-14px}
+  .fp-or .q-hero{padding-bottom:56px}.fp-or .q-id img{height:38px}.fp-or .q-lab{margin-top:40px}.fp-or .q-lead{font-size:17.5px}.fp-or .q-btns{flex-direction:column}.fp-or .q-ghost{width:62%;opacity:.8}
   .fp-or h2{font-size:28px}.fp-or .q-hd{flex-direction:column;gap:6px;padding-bottom:16px}.fp-or .q-sec{padding-top:48px}
   .fp-or .q-deals,.fp-or .q-pi{grid-template-columns:1fr}.fp-or .q-pi{padding:44px 0 52px}
   .fp-or .q-dark{padding-bottom:52px}.fp-or .q-dark::before{margin-bottom:44px}.fp-or .q-rate{grid-template-columns:1fr 1fr;gap:30px 22px}.fp-or .q-rate span{font-size:14.5px}
@@ -3244,7 +3253,7 @@ const FIRMS = [
   brand:{logo:"/static/brands/orion.svg",logoOn:"/static/brands/orion-white.svg",ratio:2.057,h:50,ink:"#001D2A",accent:["#4187E6"],fill:"#4187E6"}},
  {id:"seamless",n:"SEAMLESS Legal",g:["К-hi"]},
  {id:"stonebridge",n:"Stonebridge Legal",g:["С-hi","К-hi"],site:"http://www.stonebridgelegal.ru",
-  brand:{logo:"/static/brands/stonebridge.svg",logoOn:"/static/brands/stonebridge-white.svg",ratio:15.06,h:27,ink:"#2A1F1C",accent:["#84665E"],fill:"#84665E"}},
+  brand:{logo:"/static/brands/stonebridge.svg",logoOn:"/static/brands/stonebridge-white.svg",ratio:15.06,h:18,ink:"#2A1F1C",accent:["#84665E"],fill:"#84665E"}},
  {id:"verba",n:"VERBA LEGAL",g:["С-hi","К-hi"],site:"https://verba.legal/"},
  {id:"vkpartners",n:"VK Partners",g:["С-hi","К-hi"]},
  {id:"whitesquare",n:"White Square",g:["С-hi","К-hi"],site:"https://whitesquarepartners.com/ru"},
@@ -4562,7 +4571,8 @@ function tabbarAdapt(){
   // над подвалом и на белом — хорошо; лента «Сделок» — светлое стекло.
   const over = el => { if(!el || !r.height) return false; const b = el.getBoundingClientRect();
     return b.top < r.top + r.height / 2 && b.bottom > r.top; };
-  const dark = overFooter || over(document.querySelector(".heroslider")) || over(document.querySelector(".page-hero:not(.light)"));
+  const dark = overFooter || over(document.querySelector(".heroslider")) || over(document.querySelector(".page-hero:not(.light)"))
+    || [...document.querySelectorAll(".fp-dark")].some(over);
   bar.classList.toggle("on-dark", dark);
   if(fab) fab.classList.toggle("on-dark", dark);
 }
@@ -9925,6 +9935,7 @@ function firmPageDeals(id){
 function renderFirmPage(f){
   const p = FIRM_PAGES[f.id], deals = firmPageDeals(f.id), n = deals.length;
   const nWord = `${n} ${plural(n,"сделка","сделки","сделок")}`;
+  const arr = `<svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>`;
   const prep = `<div class="fp-in fp-prep">${interviewPanelHtml()}${claimLineHtml()}</div>`;
   const note = `Только сделки, где фирма публично названа консультантом; у каждого факта в карточке сделки есть ссылка на источник. Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
   if(f.id==="nikolskaya"){
@@ -9936,7 +9947,7 @@ function renderFirmPage(f){
         <h1><img src="/static/brands/nikolskaya-title.svg" alt="${esc(f.n)}" width="590" height="65"></h1>
         <div class="q-rule"></div>
         <p class="q-lead">${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
-        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>
       </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div></section>
       </div>${prep}<div class="fp-in">
       <h2>Сделки в Компасе<small>свежие сверху</small></h2>
@@ -9961,12 +9972,12 @@ function renderFirmPage(f){
     const ft = (x, withSrc) => `<div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${withSrc&&x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div>`;
     const first = deals[0];
     app.innerHTML = `<div class="fp fp-sb">
-    <section class="q-hero"><div class="fp-in">
+    <section class="q-hero fp-dark"><div class="fp-in">
       <div class="q-bar"><div class="q-lt"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="226" height="15"><span>юридический консультант</span></div><div class="q-hmeta">Москва · ${p.since} · ${nWord} в Компасе</div></div>
       <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / ${esc(f.n)}</div>
       <div class="q-body"><div class="q-mark">${mark}</div><div><div class="q-lab">Профиль консультанта в Компасе</div><h1>${p.h1}</h1>
         <p>${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
-        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div></div></div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div></div></div>
     </div></section>
     ${prep}
     <div class="fp-in">
@@ -9979,7 +9990,7 @@ function renderFirmPage(f){
         <div><h4>Отрасли</h4><div class="q-ind">${p.industries.map(x=>`<div>${esc(x)}</div>`).join("")}</div></div></div>
       <h2>Партнеры<small>со слов фирмы</small></h2>
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><b>${esc(nm)}</b><span><em>${esc(r)}</em> · ${esc(a)}</span></div>`).join("")}</div>
-      <div class="q-contact"><div><div class="q-lg"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="380" height="25"></div><div class="q-tag">${esc(p.tag)}</div></div>
+      <div class="q-contact fp-dark"><div><div class="q-lg"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="380" height="25"></div><div class="q-tag">${esc(p.tag)}</div></div>
         <div><p>${esc(p.address)}</p><p>${esc(p.email)} · ${esc(p.phone)}</p><p>Telegram: ${esc(p.tg)}</p><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div></div>
       <p class="q-note">${note}</p>
     </div></div>`;
@@ -9991,8 +10002,8 @@ function renderFirmPage(f){
       <div class="q-id"><img src="/static/brands/orion.svg" alt="Orion" width="91" height="44"><span>${esc(p.city)}</span></div>
       <div class="q-lab">Профиль консультанта в Компасе</div>
       <p class="q-lead">${esc(p.lead)}</p>
-      <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ↗</a></div>
-      <div class="q-ghost" aria-hidden="true">ORION</div>
+      <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>
+      <svg class="q-ghost" viewBox="0 0 555 120" aria-hidden="true"><path d="M0 96h116v24H0zM116 48h168v24H116zM284 0h271v24H284z"/></svg>
     </div></section>
     ${prep}
     <div class="fp-in q-sec">
@@ -10001,7 +10012,7 @@ function renderFirmPage(f){
       <div class="q-pi"><div><h4>Практики</h4><div class="q-chips">${p.practices.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
         <div><h4>Отрасли</h4><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div></div>
     </div>
-    <section class="q-dark"><div class="fp-in">
+    <section class="q-dark fp-dark"><div class="fp-in">
       <div class="q-hd"><h2>Рейтинги и премии</h2><small>По данным сайта фирмы</small></div>
       <div class="q-rate">${p.ratings.map(([s,t],i)=>`<div><b>${String(i+1).padStart(2,"0")}</b><i>${esc(s)}</i><span>${esc(t)}</span></div>`).join("")}</div>
     </div></section>
