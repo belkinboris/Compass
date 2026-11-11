@@ -2208,6 +2208,91 @@
     ]
    },
    "pending_since": "2026-11-11T08:57:59+00:00"
+  },
+  {
+   "id": "gbb89fc13",
+   "date": "2026-11-11",
+   "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "170 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "170 млрд ₽",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "Переговоры",
+     "note": "В рамках создания «Объединенной микроэлектронной корпорации» («ОМК») в ее контур может войти фабрика — «Элко». Согласно проекту стратегии, покупка планируется в 2027 г. На этот год в рамках стратегии на разные проекты предусмотрено 170 млрд руб. По всей…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+     ]
+    }
+   ],
+   "pending_since": "2026-11-11T09:06:39+00:00",
+   "from_raw": {
+    "draft_id": "d45381973",
+    "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»"
+   }
+  },
+  {
+   "id": "gbdd5b031",
+   "date": "2026-11-11",
+   "title": "Как раз к сезону: в Челябинской области продают горнолыжный комплекс",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053143029"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-11T09:06:39+00:00",
+   "from_raw": {
+    "draft_id": "d93110625",
+    "title": "Как раз к сезону: в Челябинской области продают горнолыжный комплекс"
+   }
   }
  ]
 }
