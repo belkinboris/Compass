@@ -2270,6 +2270,11 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp h1,.fp h2,.fp h3,.fp h4{margin:0;font-family:inherit}
 .fp .fp-prep{padding-top:26px}
 .fp .claim-line{margin:26px 0 0}
+.fp-ask{margin-top:22px;max-width:680px}
+.fp-ask>span{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.65;margin-bottom:12px}
+.fp-ask>div{display:flex;flex-wrap:wrap;gap:9px}
+.fp-ask button{font:inherit;font-size:14px;line-height:1.2;color:inherit;background:none;border:1px solid currentColor;border-radius:99px;padding:9px 16px;cursor:pointer;opacity:.9;transition:background .2s,color .2s,opacity .2s}
+.fp-ask button:hover{opacity:1;background:rgba(127,127,127,.14)}
 .fp-arr{width:11px;height:11px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
 /* «Лист» фирмы внутри нашей страницы (владелец, 11 ноября 2026: у «Никольской»
    страница встроена в сайт, а Orion и Stonebridge занимали весь экран — «как
@@ -3730,9 +3735,20 @@ const co = id => COMPANIES[id];
    график рисовал январский всплеск, которого на рынке не было); «unknown» —
    не знаем и года. `new Date("2024")` молча дает первое января, поэтому
    год-только надо ловить ДО разбора, а не после. */
-const fmtDate = d => d==="unknown" ? "Дата уточняется"
-  : /^\d{4}$/.test(String(d)) ? String(d)+" год"
-  : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"short",year:"numeric"}).replace(" г.","");
+/* toLocaleDateString медленный, а лента зовет fmtDate на каждую строку при
+   каждом открытии — ответ запоминается по строке даты (11 ноября 2026). */
+const _fmtDateMemo = new Map();
+const fmtDate = d => {
+  if(d==="unknown") return "Дата уточняется";
+  const k = String(d);
+  let v = _fmtDateMemo.get(k);
+  if(v === undefined){
+    v = /^\d{4}$/.test(k) ? k+" год"
+      : new Date(d).toLocaleDateString("ru-RU",{day:"numeric",month:"short",year:"numeric"}).replace(" г.","");
+    _fmtDateMemo.set(k, v);
+  }
+  return v;
+};
 /* Дата сделки рядом с датой публикации — коротко, месяцем: в ленте главная
    дата теперь «когда появилось у нас», и день сделки рядом с ней спорил бы за
    внимание, а год без месяца ничего не уточняет. */
@@ -4003,15 +4019,29 @@ const firmRx = id => {
 /* `withListings` — вместе с лотами на торгах, которые еще не куплены: для
    счета и рейтингов они не сделки (isListing), но знать, что фирма названа
    организатором такого лота, иногда нужно (тест каталога инвестконсультантов). */
+/* Результат запоминается, пока база та же (11 ноября 2026, перед Форумом:
+   «вкладки не сразу открываются»): «Аналитика» и «Консультанты» спрашивают
+   сделки каждой из сотни фирм, и каждый раз это был проход регуляркой по всей
+   базе — до секунды на телефоне при каждом открытии вкладки. Наружу уходят
+   копии массивов: вызывающий может их сортировать. */
+const _firmDealsMemo = {stamp:"", map:new Map()};
 function firmDeals(id, withListings){
   const rx = firmRx(id);
   if(!rx) return {full:[],mini:[],bulk:[]};
-  const hidden = (typeof FIRM_HIDDEN_DEALS!=="undefined" && FIRM_HIDDEN_DEALS[id]) || [];
-  return {
-    full: DEALS.filter(d=>!hidden.includes(d.id)&&(withListings||!isListing(d))&&((d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||""))),
-    mini: MINI_DEALS.filter(m=>m.firm===id),
-    bulk: BULK_DEALS.filter(b=>b.firm===id)
-  };
+  const stamp = DEALS.length+":"+MINI_DEALS.length+":"+BULK_DEALS.length;
+  if(_firmDealsMemo.stamp !== stamp){ _firmDealsMemo.stamp = stamp; _firmDealsMemo.map.clear(); }
+  const key = id+"|"+(withListings?1:0);
+  let hit = _firmDealsMemo.map.get(key);
+  if(!hit){
+    const hidden = (typeof FIRM_HIDDEN_DEALS!=="undefined" && FIRM_HIDDEN_DEALS[id]) || [];
+    hit = {
+      full: DEALS.filter(d=>!hidden.includes(d.id)&&(withListings||!isListing(d))&&((d.law&&d.law.adv||[]).some(a=>rx.test(a[1]))||rx.test((d.eco&&d.eco.finadv)||""))),
+      mini: MINI_DEALS.filter(m=>m.firm===id),
+      bulk: BULK_DEALS.filter(b=>b.firm===id)
+    };
+    _firmDealsMemo.map.set(key, hit);
+  }
+  return {full:hit.full.slice(), mini:hit.mini.slice(), bulk:hit.bulk.slice()};
 }
 const firmCount = id => {const x=firmDeals(id);return x.full.length+x.mini.length+x.bulk.length;};
 const TOTAL_DEALS = () => DEALS.length + MINI_DEALS.length + CHANNEL_DEALS.length + BULK_DEALS.length;
@@ -4173,6 +4203,23 @@ async function loadBulkDeals(attempt=0){
   // это окно выше всего.
   const currentPage = (location.hash.replace("#","")||"/").split("?")[0].split("/")[1];
   if(!["materials","webinars","event","legal","assistant","account"].includes(currentPage)) route();
+  warmCaches();
+}
+/* Прогрев после загрузки базы: счет сделок каждой фирмы и даты ленты считаются
+   заранее, небольшими порциями в простое, — чтобы первое открытие «Аналитики»,
+   «Консультантов» и ленты не ждало этого расчета (11 ноября 2026). */
+function warmCaches(){
+  const firms = FIRMS.concat(INV_FIRMS).map(f=>f.id);
+  let i = 0, j = 0;
+  const idle = window.requestIdleCallback || (fn => setTimeout(()=>fn({timeRemaining:()=>8}), 60));
+  const step = dl => {
+    try{
+      while(i < firms.length && dl.timeRemaining() > 3) firmDeals(firms[i++]);
+      while(i >= firms.length && j < DEALS.length && dl.timeRemaining() > 2){ fmtDate(DEALS[j].date); if(DEALS[j].added) fmtDate(DEALS[j].added); j++; }
+    }catch(e){ return; }
+    if(i < firms.length || j < DEALS.length) idle(step);
+  };
+  setTimeout(()=>idle(step), 1200);
 }
 loadBulkDeals();
 // Кнопка «Повторить» появляется в разных местах разметки (лента, карточка,
@@ -9969,7 +10016,18 @@ function renderFirmPage(f){
   const nWord = `${n} ${plural(n,"сделка","сделки","сделок")}`;
   const arr = `<svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>`;
   const out = `<div class="fp-out"><a href="#/advisors">Консультанты</a> / Юридические / <b>${esc(f.n)}</b></div>`;
-  const prep = `<div class="fp-in fp-prep">${interviewPanelHtml()}${claimLineHtml()}</div>`;
+  const prep = `<div class="fp-in fp-prep">${claimLineHtml()}</div>`;
+  /* «Подготовка к встрече» — готовые вопросы прямо под кнопкой (владелец, 11 ноября
+     2026: панель с резюме «спускается хрен пойми куда», нужна «удобная выборка
+     предвопросов»). Нажатие открывает шторку ассистента с этим вопросом; поля
+     ввода и прокрутки нет. */
+  const ASKS = [
+    ["Последние сделки фирмы", `Какие последние сделки сопровождала фирма «${f.n}»? Списком со ссылками на карточки «Компаса» и с ролью фирмы в каждой.`],
+    ["На чьей стороне работает", `На чьей стороне чаще работает фирма «${f.n}» — покупателя, продавца или эмитента? Коротко, с примерами сделок из базы.`],
+    ["В каких отраслях сделки", `В каких отраслях у фирмы «${f.n}» больше всего сделок в базе «Компаса»? Коротко, с примерами.`],
+    ["С кем работала на сделках", `Какие другие консультанты работали на сделках вместе с фирмой «${f.n}» или напротив нее? Списком по сделкам.`],
+    ["Вопросы для встречи", `Готовлюсь к встрече с юридической фирмой «${f.n}». Предложи пять вопросов, которые стоит задать, с опорой на ее последние сделки из базы.`]];
+  const ask = `<div class="fp-ask" id="fpAsk" hidden><span>Спросить ассистента о фирме</span><div>${ASKS.map(([t],i)=>`<button type="button" data-ask="${i}">${esc(t)}</button>`).join("")}</div></div>`;
   const note = `Только сделки, где фирма публично названа консультантом; у каждого факта в карточке сделки есть ссылка на источник. Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
   if(f.id==="nikolskaya"){
     const meta = x => `<b>${esc(x.d.type||"M&A")}</b> · ${esc([fmtDateLong(x.d.date), x.d.ind].filter(Boolean).join(" · "))}`;
@@ -9980,14 +10038,14 @@ function renderFirmPage(f){
         <h1><img src="/static/brands/nikolskaya-title.svg" alt="${esc(f.n)}" width="590" height="65"></h1>
         <div class="q-rule"></div>
         <p class="q-lead">${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
-        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}
       </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div></section>
       </div>${prep}<div class="fp-in">
       <h2>Сделки в Компасе<small>свежие сверху</small></h2>
       <p class="q-sub">Сделки, где фирма названа консультантом в открытых источниках. В карточке сделки у каждого факта — ссылка на источник.</p>
       <div class="q-deals">${deals.map(x=>`<div class="q-card"><div class="q-meta">${meta(x)}</div><h3>${esc(x.title)}</h3><div class="q-role"><i>Роль фирмы</i>${esc(x.role)}</div>
         <div class="q-oth">${x.others.length?`Другие консультанты: ${esc(x.others.join("; "))}`:"Другие консультанты публично не назывались"}</div>
-        <div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div></div>`).join("")}</div>
+        <div class="q-ft"><span>${esc(x.sum||"Сумма не раскрыта")}</span>${x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div></div>`).join("")}</div>
       <h2>Практики и отрасли<small>со слов фирмы</small></h2>
       <div class="q-prs">${p.practices.map(([t,d],i)=>`<div><svg aria-hidden="true"><use href="/static/brands/nikolskaya-icons.svg#p${i+1}"/></svg><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>
       <div class="q-inds"><i>Отрасли</i><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
@@ -10002,14 +10060,14 @@ function renderFirmPage(f){
     const mark = `<img src="/static/brands/stonebridge-mark.svg" alt="" width="190" height="190">`;
     const meta = x => [x.d.type||"M&A", fmtDateLong(x.d.date), x.d.ind].filter(Boolean).map(esc).join(" · ");
     const oth = x => x.others.length ? `<div class="q-oth">Другие консультанты: ${esc(x.others.join("; "))}</div>` : "";
-    const ft = (x, withSrc) => `<div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${withSrc&&x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div>`;
+    const ft = (x, withSrc) => `<div class="q-ft"><span>${esc(x.sum||"Сумма не раскрыта")}</span>${withSrc&&x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div>`;
     const first = deals[0];
     app.innerHTML = `<div class="fp fp-sb fp-inset">${out}<div class="fp-sheet">
     <section class="q-hero fp-dark"><div class="fp-in">
       <div class="q-bar"><div class="q-lt"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="226" height="15"><span>юридический консультант</span></div><div class="q-hmeta">Москва · ${p.since} · ${nWord} в Компасе</div></div>
       <div class="q-body"><div class="q-mark">${mark}</div><div><div class="q-lab">Профиль консультанта в Компасе</div><h1>${p.h1}</h1>
         <p>${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
-        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div></div></div>
+        <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}</div></div>
     </div></section>
     ${prep}
     <div class="fp-in">
@@ -10033,7 +10091,7 @@ function renderFirmPage(f){
       <div class="q-id"><img src="/static/brands/orion.svg" alt="Orion" width="91" height="44"><span>${esc(p.city)}</span></div>
       <div class="q-lab">Профиль консультанта в Компасе</div>
       <p class="q-lead">${esc(p.lead)}</p>
-      <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>
+      <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}
       <svg class="q-ghost" viewBox="0 0 555 120" aria-hidden="true"><path d="M0 96h116v24H0zM116 48h168v24H116zM284 0h271v24H284z"/></svg>
     </div></section>
     ${prep}
@@ -10054,10 +10112,11 @@ function renderFirmPage(f){
       <div class="q-contact"><div><h3>Связаться с Orion</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn q-pri" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div>
     </div></div></div>`;
   }
-  bindInterviewPrep("prepInterviewFirm", resume => interviewQuestion(
-    `Готовлюсь к встрече с юридической фирмой «${f.n}». Коротко, по пунктам: ее последние сделки — списком со ссылками на карточки «Компаса» `
-    + `и с ролью фирмы в каждой — за покупателя, продавца или эмитента; в каких отраслях работает чаще всего. В конце — три вопроса, которые стоит задать фирме.`, resume, "фирмой"),
-    `Подготовка к встрече: «${f.n}»`, {type:"advisor", id:f.id});
+  const askBox = document.getElementById("fpAsk"), askBtn = document.getElementById("prepInterviewFirm");
+  if(askBox && askBtn){
+    askBtn.onclick = () => { askBox.hidden = !askBox.hidden; };
+    askBox.querySelectorAll("[data-ask]").forEach(b=>b.onclick=()=>aiDockAsk(ASKS[+b.dataset.ask][1]));
+  }
   mountClaimLine("firm", f.id);
 }
 /* СТРАНИЦА ФИРМЫ EXECUTIVE SEARCH — по макету «Execburo в Компасе»
