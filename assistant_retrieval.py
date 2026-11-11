@@ -3288,6 +3288,16 @@ def _search_is_specific(intent: Intent, docs: list[Doc], idx: Index) -> bool:
         # карточкой Starbucks, когда вычитка вписала «кофейни» в ее заголовок.
         if t.isdigit() or not any(_name_word_match(s, t) for s in top.strong):
             return False
+        # Имя — с большой буквы или в кавычках в заголовке. Слово со строчной
+        # («российские кофейни Starbucks») — род бизнеса, тема для списка:
+        # 11 ноября 2026 вычитка убрала «кофеен» из заголовка Prosto Barista,
+        # «кофейни» осталось у одной Starbucks, счетчик ниже дал «одна сделка»,
+        # и красный тест на main остановил публикацию постов.
+        raw = re.findall(r"«[^»]*»|[\w-]+", top.title or "")
+        hits = [w for w in raw if any(_name_word_match(stem(x), t) or _name_word_match(x.lower(), t)
+                                      for x in tokens(w))]
+        if hits and not any(w.startswith("«") or w[:1].isupper() for w in hits):
+            return False
         carriers = sum(1 for d in docs[:12] if any(_name_word_match(s, t) for s in d.strong))
         return carriers <= 2
 
