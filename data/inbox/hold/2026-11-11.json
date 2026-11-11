@@ -1210,81 +1210,52 @@
    ]
   },
   {
-   "draft_id": "d59522341",
-   "title": "Депутаты поспорили о продаже вина через сайт «Почты России»",
+   "draft_id": "d74691140",
+   "title": "Браслет с уникальным сапфиром продали за рекордные 4,9 млн долларов",
    "date": "2026-11-11",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9095002"
+     "web:1prime.ru",
+     "https://1prime.ru/20261111/braslet-875134071.html"
     ]
    ],
-   "sum": null,
+   "sum": "$4,9 млн",
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d14792402",
-   "title": "FT: банкиры планируют повысить оценку Anthropic на IPO до $1,5 трлн",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/11/1244593-povisit-otsenku-anthropic"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-11-11",
-     "title": "Переговоры",
+     "title": "Сделка завершена",
      "note": "",
      "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/investments/news/2026/11/11/1244593-povisit-otsenku-anthropic"
+      "web:1prime.ru",
+      "https://1prime.ru/20261111/braslet-875134071.html"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "asset": "за рекордные 4,9 млн долларов",
+   "seller": "Браслет с уникальным сапфиром",
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
-    "seller": null
+    "asset": "за рекордные 4,9 млн долларов",
+    "seller": "Браслет с уникальным сапфиром"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d38885165",
-   "title": "Житель Китая в День холостяка купил двухкомнатную квартиру за $1,7",
+   "draft_id": "d21587536",
+   "title": "Китаец купил двухкомнатную квартиру на распродаже менее чем за два доллара",
    "date": "2026-11-11",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6af49abce0d103017e85548b"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/11/kitaets-kupil-dvuhkomnatnuyu-kvartiru-na-rasprodazhe-menee-chem-za-dva-dollara/"
     ]
    ],
    "sum": null,
@@ -1295,92 +1266,25 @@
      "kind": "closed",
      "date": "2026-11-11",
      "title": "Сделка завершена",
-     "note": "В Китае мужчина приобрел двухкомнатную квартиру за символическую сумму в 11 юаней (около $1,7).",
+     "note": "",
      "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/rbcfreenews/6af49abce0d103017e85548b"
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/11/11/kitaets-kupil-dvuhkomnatnuyu-kvartiru-na-rasprodazhe-menee-chem-za-dva-dollara/"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "двухкомнатная квартира",
+   "buyer_name": "Китаец",
+   "asset": "двухкомнатная квартира на распродаже менее чем за два доллара",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": "двухкомнатная квартира",
+    "buyer": "Китаец",
+    "asset": "двухкомнатная квартира на распродаже менее чем за два доллара",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d33630326",
-   "title": "Продажи новых электромобилей в России обновили рекорд — в октябре реализовано более 4 тыс. машин",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/prodazhi-novyh-elektromobilej-v-rossii-obnovili-rekord-v-oktyabre-realizovano-bolee-4-tys-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "В октябре 2026 года в России продали 4 030 новых электромобилей — это рекорд за всю историю наблюдений, следует из данных аналитического агентства «Автостат». Месяцем ранее продажи впервые превысили 3 тыс. машин. Доля электрокаров в структуре рынка новых…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/prodazhi-novyh-elektromobilej-v-rossii-obnovili-rekord-v-oktyabre-realizovano-bolee-4-tys-mashin/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18269690",
-   "title": "Что из этого действительно продают на маркетплейсах, а что мы придумали? Тест 161.RU",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:161.ru",
-     "https://161.ru/text/entertainment/2026/11/11/76758026/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
