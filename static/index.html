@@ -2272,6 +2272,21 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp .fp-prep{padding-top:26px}
 .fp .claim-line{margin:26px 0 0}
 .fp-arr{width:11px;height:11px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* «Лист» фирмы внутри нашей страницы (владелец, 11 ноября 2026: у «Никольской»
+   страница встроена в сайт, а Orion и Stonebridge занимали весь экран — «как
+   будто сайт внутри сайта»). Айдентика фирмы остается внутри листа; вокруг —
+   наш фон, наши поля и наши «хлебные крошки». */
+.fp-inset{background:var(--paper,#F5F5F1)!important;padding:65px 28px 72px!important}
+.fp-out{max-width:1180px;margin:0 auto;padding:26px 0 16px;font:400 13px 'Commissioner',system-ui,sans-serif;color:#66707A}
+.fp-out a{border-bottom:1px solid #D9DBD5}.fp-out b{font-weight:500;color:#15191D}
+.fp-sheet{max-width:1180px;margin:0 auto;background:#fff;border:1px solid var(--line,#E3E4DE);border-radius:6px;overflow:hidden}
+.fp-inset .fp-in{max-width:none;padding:0 44px}
+.fp-sb.fp-inset .q-hero{padding-top:0}.fp-sb.fp-inset .fp-sheet{padding-bottom:48px}
+.fp-or.fp-inset .q-hero{padding-top:44px}.fp-or.fp-inset .q-contact{margin-bottom:44px}
+@media(max-width:860px){
+  .fp-inset{padding:65px 12px 48px!important}.fp-out{padding:20px 4px 12px}.fp-inset .fp-in{padding:0 18px}
+  .fp-sb.fp-inset .fp-sheet{padding-bottom:30px}.fp-or.fp-inset .q-hero{padding-top:28px}
+}
 /* Stonebridge Legal: черный первый экран, Manrope, коричневый #84665E, бледно-голубой #BECAD8, серые карточки #F3F0EF */
 .fp-sb{--brown:#84665E;--blue:#BECAD8;--grey:#F3F0EF;--mut:#6F6A68;background:#fff;color:#000;font-family:'Manrope',system-ui,sans-serif;padding-bottom:64px}
 .fp-sb .q-hero{background:#000;color:#fff;padding:65px 0 64px}
@@ -9936,6 +9951,7 @@ function renderFirmPage(f){
   const p = FIRM_PAGES[f.id], deals = firmPageDeals(f.id), n = deals.length;
   const nWord = `${n} ${plural(n,"сделка","сделки","сделок")}`;
   const arr = `<svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>`;
+  const out = `<div class="fp-out"><a href="#/advisors">Консультанты</a> / Юридические / <b>${esc(f.n)}</b></div>`;
   const prep = `<div class="fp-in fp-prep">${interviewPanelHtml()}${claimLineHtml()}</div>`;
   const note = `Только сделки, где фирма публично названа консультантом; у каждого факта в карточке сделки есть ссылка на источник. Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
   if(f.id==="nikolskaya"){
@@ -9971,10 +9987,9 @@ function renderFirmPage(f){
     const oth = x => x.others.length ? `<div class="q-oth">Другие консультанты: ${esc(x.others.join("; "))}</div>` : "";
     const ft = (x, withSrc) => `<div class="q-ft"><span class="q-st">${esc(x.d.status||"")}</span><span>${esc(x.sum||"Сумма не раскрыта")}</span>${withSrc&&x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div>`;
     const first = deals[0];
-    app.innerHTML = `<div class="fp fp-sb">
+    app.innerHTML = `<div class="fp fp-sb fp-inset">${out}<div class="fp-sheet">
     <section class="q-hero fp-dark"><div class="fp-in">
       <div class="q-bar"><div class="q-lt"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="226" height="15"><span>юридический консультант</span></div><div class="q-hmeta">Москва · ${p.since} · ${nWord} в Компасе</div></div>
-      <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / ${esc(f.n)}</div>
       <div class="q-body"><div class="q-mark">${mark}</div><div><div class="q-lab">Профиль консультанта в Компасе</div><h1>${p.h1}</h1>
         <p>${esc(p.lead)}</p><div class="q-src">Так фирма описывает себя на своем сайте</div>
         <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div></div></div>
@@ -9993,12 +10008,11 @@ function renderFirmPage(f){
       <div class="q-contact fp-dark"><div><div class="q-lg"><img src="/static/brands/stonebridge-white.svg" alt="Stonebridge Legal" width="380" height="25"></div><div class="q-tag">${esc(p.tag)}</div></div>
         <div><p>${esc(p.address)}</p><p>${esc(p.email)} · ${esc(p.phone)}</p><p>Telegram: ${esc(p.tg)}</p><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div></div>
       <p class="q-note">${note}</p>
-    </div></div>`;
+    </div></div></div>`;
   } else {
     const when = d => /^\d{4}-\d{2}/.test(String(d)) ? fmtMonthYear(String(d).slice(0,7)) : fmtDateLong(d);
-    app.innerHTML = `<div class="fp fp-or">
+    app.innerHTML = `<div class="fp fp-or fp-inset">${out}<div class="fp-sheet">
     <section class="q-hero"><div class="fp-in">
-      <div class="q-crumbs"><a href="#/advisors">Консультанты</a> / ${esc(f.n)}</div>
       <div class="q-id"><img src="/static/brands/orion.svg" alt="Orion" width="91" height="44"><span>${esc(p.city)}</span></div>
       <div class="q-lab">Профиль консультанта в Компасе</div>
       <p class="q-lead">${esc(p.lead)}</p>
@@ -10021,7 +10035,7 @@ function renderFirmPage(f){
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><i>${esc(r)}</i><b>${esc(nm)}</b><span>${esc(a)}</span></div>`).join("")}</div>
       <p class="q-note">${note}</p>
       <div class="q-contact"><div><h3>Связаться с Orion</h3><p>${esc(p.address)} · ${esc(p.email)} · ${esc(p.phone)}</p></div><a class="q-btn q-pri" href="${p.site}" target="_blank" rel="noopener">Перейти на сайт фирмы</a></div>
-    </div></div>`;
+    </div></div></div>`;
   }
   bindInterviewPrep("prepInterviewFirm", resume => interviewQuestion(
     `Готовлюсь к встрече с юридической фирмой «${f.n}». Коротко, по пунктам: ее последние сделки — списком со ссылками на карточки «Компаса» `
