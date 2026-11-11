@@ -2223,7 +2223,19 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .advisor-card.brand .advisor-card-count{position:relative;z-index:1}
 .brand-name a{display:block;line-height:0}
 .brand-name a:hover{text-decoration:none}
-.brand-logo{display:block;height:26px;width:auto;max-width:100%}
+.brand-logo{display:block;height:var(--b-h,26px);width:auto;max-width:100%}
+/* Вид «заливка» — правило у BRAND_TOKENS. */
+.advisor-card.brand.fill{background:var(--card);transition:background .25s var(--ease),border-color .25s var(--ease),box-shadow .3s var(--ease)}
+.advisor-card.brand.fill::before{display:none}
+.advisor-card.brand.fill .brand-name a{position:static;display:grid}
+.advisor-card.brand.fill .brand-logo{grid-area:1/1;transition:opacity .25s var(--ease)}
+.advisor-card.brand.fill .brand-logo.on{opacity:0}
+@media (hover:hover){
+  .advisor-card.brand.fill:hover{background:var(--b-fill);border-color:var(--b-fill);box-shadow:0 18px 34px -22px color-mix(in srgb,var(--b-fill) 80%,transparent)}
+  .advisor-card.brand.fill:hover .brand-logo{opacity:0}
+  .advisor-card.brand.fill:hover .brand-logo.on{opacity:1}
+  .advisor-card.brand.fill:hover .count-btn{color:#fff!important;border-bottom-color:rgba(255,255,255,.8)!important}
+}
 .brand-slogan{display:block;margin-top:10px;font-family:var(--b-font,var(--f-body));font-weight:300;font-size:14.5px;line-height:1.35;color:var(--b-ink)}
 /* Описание короче соседних, и при обычном переносе на вторую строку уходило
    одно слово («сделок.») — абзац выглядел оборванным. `pretty` переносит
@@ -2645,6 +2657,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   .advisor-card-name{font-size:21px}.advisor-card-count{justify-self:start;white-space:normal}
   .advisor-card-groups{font-size:14px}
   .brand-logo{height:23px}
+  .advisor-card.brand.fill .brand-logo{height:min(var(--b-h,26px),44px)}
   .relationship-head{padding:19px 18px}.relationship-body{padding:18px}
   .relationship-map{grid-template-columns:1fr}.relationship-center{min-height:0;padding:18px}
   .relationship-center:after{display:none}.relationship-grid{grid-template-columns:1fr}
@@ -3053,9 +3066,11 @@ const FIRMS = [
  {id:"mvp",n:"Melling, Voitishkin & Partners",g:["С-hi","К-hi"],site:"http://mv.legal"},
  {id:"nextons",n:"Nextons",g:["С-hi","К-hi"],site:"https://nextons.ru/"},
  {id:"o2",n:"O2 Consulting",g:["С-hi","К-hi"],site:"https://o2consult.com/"},
- {id:"orion",n:"Orion",g:["С-hi","К-hi"],site:"https://orion-law.com/"},
+ {id:"orion",n:"Orion",g:["С-hi","К-hi"],site:"https://orion-law.com/",
+  brand:{logo:"/static/brands/orion.svg",logoOn:"/static/brands/orion-white.svg",ratio:2.057,h:50,ink:"#001D2A",accent:["#4187E6"],fill:"#4187E6"}},
  {id:"seamless",n:"SEAMLESS Legal",g:["К-hi"]},
- {id:"stonebridge",n:"Stonebridge Legal",g:["С-hi","К-hi"],site:"http://www.stonebridgelegal.ru"},
+ {id:"stonebridge",n:"Stonebridge Legal",g:["С-hi","К-hi"],site:"http://www.stonebridgelegal.ru",
+  brand:{logo:"/static/brands/stonebridge.svg",logoOn:"/static/brands/stonebridge-white.svg",ratio:15.06,h:21,ink:"#2A1F1C",accent:["#84665E"],fill:"#84665E"}},
  {id:"verba",n:"VERBA LEGAL",g:["С-hi","К-hi"],site:"https://verba.legal/"},
  {id:"vkpartners",n:"VK Partners",g:["С-hi","К-hi"]},
  {id:"whitesquare",n:"White Square",g:["С-hi","К-hi"],site:"https://whitesquarepartners.com/ru"},
@@ -3195,12 +3210,19 @@ const EXEC_FIRMS = [
    чужих адресов), шрифт — только из тех, что лежат у нас в static/fonts
    (сайт работает из России без внешних загрузок), темный цвет обязан быть
    темным, оттенков кромки не больше трех, девиз короткий. Не прошла проверку
-   — карточка рисуется обычной, а не «как вышло». */
+   — карточка рисуется обычной, а не «как вышло».
+   ВТОРОЙ ВИД — «ЗАЛИВКА» (владелец, 11 ноября 2026, Orion и Stonebridge
+   Legal: «4 огонь»): в покое карточка белая, как соседи, логотип — в цветах
+   фирмы по ее брендбуку (`logo`); при наведении карточка заливается цветом
+   фирмы (`fill`), логотип меняется на белый (`logoOn`). Без кромки, отсвета
+   и девиза — чтобы две фирмы рядом не спорили. `h` — высота логотипа, когда
+   26px мало (у Orion знак с лесенкой: по брендбуку не уже 65px). На телефоне
+   наведения нет — карточка остается белой. */
 const BRAND_TOKENS = {
   hex: /^#[0-9A-Fa-f]{6}$/,
   logo: /^\/static\/brands\/[a-z0-9-]+\.svg$/,
   fonts: ["Commissioner"],
-  maxAccent: 3, maxSlogan: 40,
+  maxAccent: 3, maxSlogan: 40, maxLogoH: 56,
   // относительная яркость по WCAG: ниже 0,05 — темный цвет, которым можно
   // набирать текст по белому
   maxInkLuminance: 0.05,
@@ -3217,11 +3239,14 @@ const firmBrand = f => {
   if(!accent.length || accent.length > T.maxAccent || !accent.every(c=>T.hex.test(c))) return null;
   if(b.font && !T.fonts.includes(b.font)) return null;
   if(String(b.slogan||"").length > T.maxSlogan) return null;
+  if(b.fill && (!T.hex.test(b.fill) || !T.logo.test(b.logoOn||""))) return null;
+  if(b.h && !(b.h >= 16 && b.h <= T.maxLogoH)) return null;
   return b;
 };
 const brandStyle = b => {
   const a = b.accent, pick = i => a[Math.min(i, a.length-1)];
   return `--b-ink:${b.ink};--b-a1:${pick(0)};--b-a2:${pick(1)};--b-a3:${pick(2)};--b-ratio:${b.ratio}`
+    + (b.fill ? `;--b-fill:${b.fill}` : "") + (b.h ? `;--b-h:${b.h}px` : "")
     + (b.font ? `;--b-font:'${b.font}'` : "");
 };
 const GROUP_LABEL = {"С-hi":"Сопровождение сделок — крупный бизнес","К-hi":"Корпоративное консультирование — крупный бизнес","mid":"Средний бизнес"};
@@ -9392,12 +9417,12 @@ function advNoMatchHtml(){
 function advisorCardHtml(r, withProfile, exec){
   const b = firmBrand(r.f);
   const name = b
-    ? `<div class="advisor-card-name brand-name"><a href="#/advisors/${r.f.id}"><img class="brand-logo" src="${b.logo}" alt="" width="${Math.round(26*b.ratio)}" height="26"><span class="vh">${r.f.n}</span></a>${b.slogan?`<span class="brand-slogan">${esc(b.slogan)}</span>`:""}</div>`
+    ? `<div class="advisor-card-name brand-name"><a href="#/advisors/${r.f.id}"><img class="brand-logo" src="${b.logo}" alt="" width="${Math.round((b.h||26)*b.ratio)}" height="${b.h||26}">${b.fill?`<img class="brand-logo on" src="${b.logoOn}" alt="" width="${Math.round((b.h||26)*b.ratio)}" height="${b.h||26}">`:""}<span class="vh">${r.f.n}</span></a>${b.slogan?`<span class="brand-slogan">${esc(b.slogan)}</span>`:""}</div>`
     : `<div class="advisor-card-name"><a href="#/advisors/${r.f.id}">${r.f.n}</a></div>`;
   const profile = withProfile
     ? `<div class="advisor-card-groups"><span class="label">Профиль</span><br><span class="brand-text">${r.f.desc||r.f.g.join(" · ")}</span></div>`
     : "";
-  return `<article class="advisor-card${b?" brand":""}"${b?` style="${brandStyle(b)}"`:""}>
+  return `<article class="advisor-card${b?" brand":""}${b&&b.fill?" fill":""}"${b?` style="${brandStyle(b)}"`:""}>
       ${name}
       ${profile}
       <div class="advisor-card-count">${exec?`<a class="count-btn" href="#/advisors/${r.f.id}">Профиль фирмы →</a>`:advCountHtml(r)}</div>

@@ -1139,34 +1139,6 @@
    ]
   },
   {
-   "draft_id": "d77754217",
-   "title": "В Минфине исключили рост потребления алкоголя из-за онлайн-продажи вина",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9094702"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d20368597",
    "title": "Инвестор Александр Чачава, в 2022 году выкупивший у VK её игровое подразделение My.Games за $642 млн, продаст студию менеджменту",
    "date": "2026-11-11",
@@ -1193,301 +1165,6 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 4) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d06129927",
-   "title": "Создан первый поглощающий свет и расщепляющий воду органический катализатор",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nauka/28307221"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d53200822",
-   "title": "Жданова: милитаризация Европы приобретает необратимый характер",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28307251"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "необратимый характер",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "необратимый характер",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d91123486",
-   "title": "Депутат Алтухов: законопроект о продаже вина онлайн поможет небольшим винодельням",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28306871"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93502553",
-   "title": "Черновик речи Мартина Лютера Кинга выставили на аукцион с оценкой $10 млн",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28306897"
-    ]
-   ],
-   "sum": "$10 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80674909",
-   "title": "Венгерский банк OTP решит к концу года, стоит ли ему уходить из России",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28307057"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63023185",
-   "title": "В Китае покупатели начали массово использовать ИИ для поиска и покупки товаров",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/v-kitae-pokupateli-nachali-massovo-ispolzovat-ii-dlya-poiska-i-pokupki-tovarov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d42387113",
-   "title": "Золотой портсигар Николая II ушел с молотка в Париже",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/11/76758852/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g4a14848a (общие слова заголовка: 4) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d08813818",
-   "title": "«Почта России» готова к эксперименту по онлайн-продаже российского вина",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/pochta-875117956.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d35770814",
-   "title": "Тима Кука обманули на базаре в Стамбуле: экс-глава Apple купил за $18 тыс. ковер, который стоит в десять раз меньше",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/tima-kuka-obmanuli-na-bazare-v-stambule-eks-glava-apple-kupil-za-18-tys-kover-kotoryj-stoit-v-desyat-raz-menshe/"
-    ]
-   ],
-   "sum": "$18 тыс",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "Бывший генеральный директор Apple Тим Кук приобрел ковёр за $18 тыс. (около 1,5 млн рублей) во время прогулки по Гранд-базару в Стамбуле. По данным турецкого издания Haberler, фотографии миллиардера опубликовал в соцсетях один из местных торговцев. После…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/tima-kuka-obmanuli-na-bazare-v-stambule-eks-glava-apple-kupil-za-18-tys-kover-kotoryj-stoit-v-desyat-raz-menshe/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "за $18 тыс. ковер, который стоит в десять раз меньше",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "за $18 тыс. ковер, который стоит в десять раз меньше",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d20863854",
-   "title": "Россияне назвали предельную сумму для покупки новой машины",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/11/rossiyane-nazvali-predelnuyu-summu-dlya-pokupki-novoy-mashiny/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -1529,6 +1206,207 @@
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g9a4c7065 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d57153801",
+   "title": "Госдума приняла в первом чтении проект о продаже вина через сайт «Почты России»",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/business/news/2026/11/11/1244481-proekt-o-prodazhe-vina"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16215943",
+   "title": "Xiaomi выпустила дешевый смартфон с огромной батареей и солидным объемом памяти. Продается в России",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-11_xiaomi_privezla_v_rossiyu_nedorogoj"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17911044",
+   "title": "Инвестор Александр Чачава, в 2022 году выкупивший у VK её игровое подразделение My.Games за $642 млн, продаст студию менеджменту",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/services/3249253-prodazha-my-games-menedzhmentu?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "студия",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "студия",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gb3029360 (общие слова заголовка: 4) — проверьте, не дубль ли",
+    "та же новость, что «Инвестор Александр Чачава, в 2022 году выкупивший у VK её иг» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d59329654",
+   "title": "Орешкин назвал платформенную торговлю главным способом продажи непродовольственных товаров",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28307661"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d79218678",
+   "title": "Продажи кроссоверов Lada Azimut начнутся в начале декабря",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28307627"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d20946735",
+   "title": "ГД в I чтении приняла законопроект о продаже вина РФ онлайн через «Почту России»",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2199941/gd-v-i-chtenii-priniala-zakonoproekt-o-prodazhe-vina-rf-onlain-cherez-pochtu-rossii-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d09151520",
+   "title": "Нефтегазовые доходы России поглощаются рекордными возвратами в пользу нефтяников Пока...",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1373482.php"
+    ]
+   ],
+   "sum": "971.2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

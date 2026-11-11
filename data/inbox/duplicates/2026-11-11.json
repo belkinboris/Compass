@@ -73,6 +73,68 @@
     "needs_review": true
    },
    "queued": "2026-11-11"
+  },
+  {
+   "key": "https://www.vedomosti.ru/media/news/2026/11/11/1244504-mygames-vikupit-kompaniyu::gb3029360",
+   "candidate_id": "gb3029360",
+   "reason": "общие слова заголовка: 4",
+   "draft": {
+    "draft_id": "d82970848",
+    "title": "Менеджмент My.Games выкупит компанию у основателя Leta Capital Чачавы",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/media/news/2026/11/11/1244504-mygames-vikupit-kompaniyu"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Менеджмент My.Games",
+    "asset": "компания",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Менеджмент My.Games",
+     "asset": "компания",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
+  },
+  {
+   "key": "https://frankmedia.ru/315141::gb3029360",
+   "candidate_id": "gb3029360",
+   "reason": "общие слова заголовка: 5",
+   "draft": {
+    "draft_id": "d89671746",
+    "title": "Менеджмент My.Games выкупит компанию у Александра Чачавы",
+    "date": "2026-11-11",
+    "src": [
+     [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/315141"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Менеджмент My.Games",
+    "asset": "компания",
+    "seller": "Александра Чачавы",
+    "parsed_parties": {
+     "buyer": "Менеджмент My.Games",
+     "asset": "компания",
+     "seller": "Александра Чачавы"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-11"
   }
  ]
 }
