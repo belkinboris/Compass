@@ -1139,46 +1139,6 @@
    ]
   },
   {
-   "draft_id": "d03962281",
-   "title": "Каждый из основателей Anthropic получит по $250 млн в ходе IPO",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9094144"
-    ]
-   ],
-   "sum": "$250 млн",
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-11",
-     "title": "Переговоры",
-     "note": "При подготовке к IPO компания Anthropic раскрыла информацию о том, сколько акций планирует продать каждый из семи соучредителей -- они продадут чуть более 3,3 млн акций каждый. При средней цене $74 за акцию они получат по $250 млн, подсчитал портал Techcrunch.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9094144"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d89922765",
    "title": "У радиостанции Rock FM сменился владелец",
    "date": "2026-11-11",
@@ -1205,64 +1165,6 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d78476188",
-   "title": "Кузбасские предприятия в 2,6 раза нарастили инвестиции в роботов-секретарей",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-11_kuzbasskie_predpriyatiya_v"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d93118506",
-   "title": "Купить и вернуть: как избавиться от последствий ажиотажного шопинга",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28303727"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
@@ -1305,90 +1207,6 @@
    ]
   },
   {
-   "draft_id": "d10755281",
-   "title": "Неизвестную ранее картину Айвазовского выставят на торги за $800 тыс.",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2199642/2026-11-11/neizvestnuiu-ranee-kartinu-aivazovskogo-vystaviat-na-torgi-za-800-tys"
-    ]
-   ],
-   "sum": "$800 тыс",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d01075608",
-   "title": "Полноприводная версия кроссовера Tenet Plus L6 выходит на российский рынок",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261111/versija-875095184.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d82332553",
-   "title": "Неизвестную ранее картину Айвазовского впервые выставят на торги",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261111/kartina-2130768266.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d54353709",
    "title": "All 7 Anthropic founders will each cash out about $250M in IPO",
    "date": "2026-11-10",
@@ -1412,11 +1230,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Каждый из основателей Anthropic получит по $250 млн в ходе I» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -1459,147 +1275,6 @@
    ]
   },
   {
-   "draft_id": "d39044006",
-   "title": "Экономист назвал способ распознать мошенников на распродажах",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/11/ekonomist-nazval-sposob-raspoznat-moshennikov-na-rasprodazhah/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d61729265",
-   "title": "В Кургане распродают автопарк перевозчика-должника. Фото",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143193"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64887777",
-   "title": "Распродажа 11.11 в России 2026: полный гид по Всемирному дню шопинга",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/articles/1053143168"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d95356410",
-   "title": "По кружечке недорого: под Челябинском продают пивзавод за 96 миллионов",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053142949"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47841251",
-   "title": "«Возможно выращивание натуральных продуктов»: в Пермском крае по цене квартиры продают ферму",
-   "date": "2026-11-11",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143129"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d48763317",
    "title": "В Шадринске выставили на продажу бывший завод за 100 млн рублей. Фото",
    "date": "2026-11-11",
@@ -1628,13 +1303,128 @@
    ]
   },
   {
-   "draft_id": "d62718370",
-   "title": "Коллекционную «Чайку» продают в Новосибирске — на машине ездили чиновники питерской мэрии",
+   "draft_id": "d74117258",
+   "title": "Тамбовская область за девять месяцев привлекла в экономику региона более 14 млрд рублей федеральных средств",
    "date": "2026-11-11",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/auto/2026/11/11/76755526/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119143-tambovskaya-oblast-za-devyat-mesyatsev-privlekla-v-ekonomiku-regiona-bolee-14-mlrd-rubley/"
+    ]
+   ],
+   "sum": "14 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Тамбовская область за девять месяцев",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Тамбовская область за девять месяцев",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d33089318",
+   "title": "От туй до сосен: курганским садоводам рассказали, как вырастить хвойные деревья без покупки саженцев",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053142998"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d63102892",
+   "title": "Пермяки стали чаще интересоваться покупкой квартир в ипотеку в новых домах",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053143209"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d21111809",
+   "title": "В Басманном районе Москвы выставили на торги два нежилых помещения",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/11/11/v-basmannom-rajone-moskvy-prodayut-dva-nezhilyh-pomeshheniya"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d73754799",
+   "title": "В Тюмени начали продавать билеты на балет «Щелкунчик» — вы обалдеете от цен на вип-места",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/entertainment/2026/11/11/76757948/"
     ]
    ],
    "sum": null,
