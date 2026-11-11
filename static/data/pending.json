@@ -2144,6 +2144,70 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Отель «Савой» в Москве выставлен на продажу за 10 млрд ₽</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> АО «Инфа-отель»\n<b>Предмет:</b> Здание отеля «Савой» на углу Рождественки и Пушечной в Москве — 29 тыс. кв. м, 273 номера\n<b>Сумма:</b> 10 млрд ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Гостиницы и туризм\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261027/otel-874645156.html\">РИА Недвижимость</a>\n\n#недвижимость #гостиницы #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g8e847626\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g9a4c7065",
+   "date": "2026-11-11",
+   "title": "«Медисорб» купил химическую группу «Пермхим»",
+   "ind": "Химия и удобрения",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2026/11/11/1244329-medisorb-kupil-himicheskuyu"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Медисорб»",
+   "asset": "химическая группа «Пермхим»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "Пермский фармпроизводитель «Медисорб» приобрел 100% долей группы компаний «Пермхим», специализирующейся на выпуске промышленной химии, газов и реагентов. Сделка была закрыта в октябре 2026 г., сообщил «Ведомостям» представитель «Медисорба». Ее сумму компания…",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/business/articles/2026/11/11/1244329-medisorb-kupil-himicheskuyu"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Медисорб»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/articles/2026/11/11/1244329-medisorb-kupil-himicheskuyu"
+     }
+    ],
+    "target": [
+     {
+      "value": "химическая группа «Пермхим»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/business/articles/2026/11/11/1244329-medisorb-kupil-himicheskuyu"
+     }
+    ]
+   },
+   "pending_since": "2026-11-11T08:57:59+00:00"
   }
  ]
 }
