@@ -2942,10 +2942,12 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   /* Отрасль — во всю строку, сортировка — под ней: в одну прокручиваемую
      строку «По алфавиту» уезжало за правый край телефона (владелец,
      17 октября 2026). */
-  .advisor-filters{display:flex;flex-wrap:wrap;gap:12px 22px}
-  .advisor-filters>select{flex:1 1 100%;width:100%;min-width:0}
+  /* 12 ноября 2026, партнер: «эту штуку с отраслями перенести сюда — место
+     освободить». Сортировка слева, выбор отрасли справа, одной строкой. */
+  .advisor-filters{display:flex;flex-wrap:nowrap;gap:0 16px;align-items:center}
+  .advisor-filters>select{order:3;flex:0 1 auto;width:auto;max-width:44%;min-width:0;margin-left:auto;padding-top:7px;padding-bottom:7px;font-size:13px}
   .advisor-filters>span[style]{display:none}
-  .advisor-filters .chip{flex:0 0 auto;white-space:nowrap}
+  .advisor-filters .chip{order:1;flex:0 0 auto;white-space:nowrap}
   .fns-head{padding:20px}.fns-body{padding:20px}.fns-gap{padding:12px 20px 0}.fns-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fns-metric:nth-child(2){border-right:none}.fns-metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .fns-registry{grid-template-columns:1fr}.fns-event{grid-template-columns:1fr;gap:2px}.owner-current{grid-template-columns:1fr}
   .webinar-grid{grid-template-columns:1fr}.fns-charts{grid-template-columns:1fr}
