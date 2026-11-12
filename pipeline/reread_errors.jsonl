@@ -413,3 +413,19 @@
 {"id": "g8cc36866", "field": "src", "class": "aggregator_source", "was": "только @dealsma", "now": "Consul Group и Filatoff — первоисточники", "tag": "m004"}
 {"id": "g7074c53b", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (45% без контроля, деньги на разработки)", "tag": "m004"}
 {"id": "g7074c53b", "field": "law.struct", "class": "other", "was": "«сейчас по 18,3%» — устарело", "now": "кто и сколько уступил по ЕГРЮЛ", "tag": "m004"}
+{"id": "gf3a811bd", "field": "seller", "class": "wrong_seller", "was": "Алексей Сучков", "now": "снят: по ЕГРЮЛ доля Сучкова не уменьшалась, 50% были долей самого общества", "tag": "m019"}
+{"id": "gf3a811bd", "field": "date", "class": "wrong_date", "was": "2025-03-01", "now": "2025-03-06 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "gf3a811bd", "field": "eco.sum", "class": "sum_meaning", "was": "≈50 млн ₽ (по оценке) — мнение эксперта", "now": "Не раскрыта", "tag": "m019"}
+{"id": "gf3a811bd", "field": "eco.context", "class": "unsupported_claim", "was": "приостановка метановых Lada год спустя", "now": "снято", "tag": "m019"}
+{"id": "gf3a811bd", "field": "title", "class": "title_standard", "was": "Умар Кремлев приобрел 51% в ООО «АТС-Авто» — компании…", "now": "«УНК Холдинг» купил 51% «АТС-Авто»", "tag": "m019"}
+{"id": "g5880d206", "field": "law.struct", "class": "unsupported_claim", "was": "дисконт 60% к рыночной стоимости", "now": "снято", "tag": "m019"}
+{"id": "g5880d206", "field": "title", "class": "title_standard", "was": "…приобрел ООО «Фольксваген банк Рус»…", "now": "Игорь Ким купил «Фольксваген банк Рус» у Volkswagen Financial Services", "tag": "m019"}
+{"id": "g6a6de6a6", "field": "extra", "class": "language", "was": "может производить сам", "now": "может выпускать на собственном производстве", "tag": "m019"}
+{"id": "ga95b1d54", "field": "eco.sum", "class": "sum_meaning", "was": "6 млрд ₽ (по оценке) — стоимость бизнеса", "now": "Не раскрыта; оценка в eco.val", "tag": "m019"}
+{"id": "ga95b1d54", "field": "date", "class": "wrong_date", "was": "2025-02-01", "now": "2025-02-10 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "ga95b1d54", "field": "extra", "class": "version_as_fact", "was": "ГАП «Ресурс» приобрела… (версия собеседника как факт)", "now": "по неофициальным данным", "tag": "m019"}
+{"id": "ga95b1d54", "field": "eco.context", "class": "unsupported_claim", "was": "заявления кредиторов о банкротстве, май 2026", "now": "снято", "tag": "m019"}
+{"id": "ga95b1d54", "field": "title", "class": "title_standard", "was": "ГАП «Ресурс» приобрела агрофирму «Рубеж»", "now": "…купила агрофирму «Рубеж» у Павла Артемова", "tag": "m019"}
+{"id": "g150f6855", "field": "date", "class": "wrong_date", "was": "2025-01-16 (день статьи)", "now": "2024-12-20 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "g150f6855", "field": "eco.context", "class": "foreign_fact", "was": "«Яндекс» купил «Клиентский сервис» в мае 2025", "now": "снято", "tag": "m019"}
+{"id": "g150f6855", "field": "extra", "class": "invented_rationale", "was": "Цель покупки — цифровизация деятельности компании", "now": "слова представителя: проект «Цифровая УК»", "tag": "m019"}
