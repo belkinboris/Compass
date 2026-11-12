@@ -653,175 +653,6 @@
    ]
   },
   {
-   "draft_id": "d14562129",
-   "title": "Греф допустил приобретения на рынке ЦОДов",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1128540"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d02332618",
-   "title": "Сбер до конца года продаст маркетплейсам 100% ненужных складов",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28310535"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "маркетплейсам 100% ненужных складов",
-   "seller": "Сбер до конца года",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "маркетплейсам 100% ненужных складов",
-    "seller": "Сбер до конца года"
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d08038312",
-   "title": "В «Авито» рассказали, за сколько в России можно купить «квартиру-дворец»",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261112/kvartira-875151810.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26334016",
-   "title": "Греф не исключил приобретение Сбербанком игроков на рынке ЦОДов",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261112/tsod-875150838.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89275416",
-   "title": "Греф предложил маркетплейсам купить склады у Сбербанка",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261112/sberbank-875150121.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27553018",
-   "title": "В Екатеринбурге редкую коллекционную пластинку выставили на продажу за 1,4 млн рублей",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143604"
-    ]
-   ],
-   "sum": "1,4 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -881,6 +712,238 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
     "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d73809365",
+   "title": "«Яндекс» не планирует объединить продажи интернет-рекламы с другими крупными игроками",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1128559"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-12",
+     "title": "Переговоры",
+     "note": "МКПАО \"Яндекс\" не планирует объединения продаж интернет-рекламы с другими игроками, сообщили \"Интерфаксу\" в пресс-службе компании.\"Анонимные слухи о едином сейлз-хаусе недостоверны.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1128559"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90989760",
+   "title": "«Неубиваемые» новинки Ulefone уже в продаже",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-12_neubivaemye_novinki_ulefone"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d46868579",
+   "title": "МТС: тюменский бизнес на треть нарастил инвестиции в умное видеонаблюдение",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-12_mts_tyumenskij_biznes_na"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11627140",
+   "title": "«Сбер» планирует продать складские помещения маркетплейсам",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/315471"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-12",
+     "title": "Переговоры",
+     "note": "Продажа намечена на 2026 год Сообщение &#171;Сбер&#187; планирует продать складские помещения маркетплейсам появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/315471"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86994151",
+   "title": "«Сбер» рассматривает приобретение игроков на рынке ЦОДов",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/315423"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-12",
+     "title": "Переговоры",
+     "note": "По словам Германа Грефа, &#171;Сбер&#187; хочет стать компанией номер один в предоставлении ИИ-услуг Сообщение &#171;Сбер&#187; рассматривает приобретение игроков на рынке ЦОДов появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/315423"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Сбер» планирует продать складские помещения маркетплейсам» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d41812603",
+   "title": "Греф заявил об инвестициях Сбера в технологии продления жизни",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/12/gref-zayavil-ob-investitsiyah-sbera-v-tehnologii-prodleniya-zhizni/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48993687",
+   "title": "Греф рассказал о продаже складов Сбера маркетплейсам",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/12/gref-rasskazal-o-prodazhe-skladov-sbera-marketpleysam/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку pending-1 (общие редкие слова: маркет, складо) — проверьте, не дубль ли"
    ]
   }
  ]
