@@ -523,3 +523,26 @@
 {"id": "gcfa149c5", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Медиа", "tag": "m015"}
 {"id": "gcfa149c5", "field": "title", "class": "title_standard", "was": "…51% в агентстве инфлюенс-маркетинга Hello Blogger", "now": "Kokoc Group купила 51% Hello Blogger", "tag": "m015"}
 {"id": "gcfa149c5", "field": "eco.rationale", "class": "verbatim", "was": "почти дословно ComNews", "now": "пересказ", "tag": "m015"}
+{"id": "g45ba6605", "field": "title", "class": "title_standard", "was": "Холдинг «Коломенский» приобрел производителя готовой еды «Продмастер»", "now": "«Коломенский» купил «Продмастер»", "tag": "m017"}
+{"id": "g45ba6605", "field": "seller", "class": "wrong_seller", "was": "Железогло", "now": "Алена Железогло, Лариса Ларионова", "tag": "m017"}
+{"id": "g45ba6605", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ сделки вместо мотива", "now": "мотив словами Тулупова и пресс-службы", "tag": "m017"}
+{"id": "g45ba6605", "field": "eco.target_fin", "class": "unsupported_claim", "was": "«классическую и азиатскую кухню»", "now": "выручка, прибыль, мощность по РБК", "tag": "m017"}
+{"id": "g45ba6605", "field": "extra", "class": "other", "was": "повтор цели сделки", "now": "ассортимент, сети, ПМЭФ", "tag": "m017"}
+{"id": "g77a1043b", "field": "seller", "class": "wrong_seller", "was": "Владислав Ресин, Алексей Алешин", "now": "ООО «ТриАрк Майнинг» (ЕГРЮЛ)", "tag": "m017"}
+{"id": "g77a1043b", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ сделки", "now": "—", "tag": "m017"}
+{"id": "g09242ae2", "field": "title", "class": "title_standard", "was": "Концерн «Детскосельский» продал … ООО «Плодородие»", "now": "ООО «Плодородие» купило молочный комплекс концерна «Детскосельский»", "tag": "m017"}
+{"id": "g09242ae2", "field": "eco.context", "class": "language", "was": "«Сам концерн…»", "now": "фраза с подлежащим", "tag": "m017"}
+{"id": "g09242ae2", "field": "company.desc", "class": "profile_text", "was": "Плодородие — «молочный комплекс… куплен в 2024»", "now": "компания Чистякова и Шишлянниковой", "tag": "m017"}
+{"id": "g65deaa28", "field": "eco.context", "class": "wrong_share", "was": "12,09%", "now": "12,9%", "tag": "m017"}
+{"id": "g65deaa28", "field": "title", "class": "title_standard", "was": "Фонд «Восход» инвестировал в «Кенди Флип Роботс»", "now": "«Восход» купил 12,9% «Кенди Флип Роботс»", "tag": "m017"}
+{"id": "g65deaa28", "field": "eco.rationale", "class": "language", "was": "«обслуживают себя сами»", "now": "цель словами Марголина", "tag": "m017"}
+{"id": "g713c9c18", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Kismet Capital Group", "tag": "m017"}
+{"id": "g713c9c18", "field": "eco.context", "class": "unsupported_claim", "was": "«это лишь допущение — решения нет»", "now": "Naspers, РСХБ — кредитор 2022 года", "tag": "m017"}
+{"id": "g713c9c18", "field": "title", "class": "title_standard", "was": "…приобрела 50% Avito", "now": "…купила 50% Avito", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Goldman Sachs", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "eco.context", "class": "verbatim", "was": "предложение о лицензии почти дословно", "now": "пересказ", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "title", "class": "title_standard", "was": "Фонд Balchug Capital приобрел российскую «дочку» Goldman Sachs", "now": "Balchug Capital купил «Голдман Сакс Банк» у Goldman Sachs", "tag": "m017"}
+{"id": "g9b746362", "field": "title", "class": "title_standard", "was": "ГК «Полипластик» приобрела 49% в «РусИнжГидро»", "now": "«Полипластик» купил 49% «РусИнжГидро»", "tag": "m017"}
+{"id": "g1a475dee", "field": "date", "class": "wrong_date", "was": "2025-04-16 (релиз юрфирмы)", "now": "2025-04-14 (ЕГРЮЛ)", "tag": "m017"}
+{"id": "g1a475dee", "field": "eco.rationale", "class": "unsupported_claim", "was": "«10–15% рынка Data Management»", "now": "план Arenadata по CNews", "tag": "m017"}
+{"id": "g1a475dee", "field": "title", "class": "title_standard", "was": "Группа Arenadata инвестировала в …", "now": "Группа Arenadata купила 20% ООО «Решения Гармония»", "tag": "m017"}
