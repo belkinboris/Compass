@@ -183,6 +183,9 @@ def unbacked(old_data, new_data, fixes=None):
 def log(card, field, new, quote, url, by, date=None):
     """Подтвердить правку факта словами источника (для разовых скриптов и enrich.py)."""
     import datetime
+    # Цитата хранится в карточке, а в карточке буквы «ё» нет (test_cards_have_no_yo_letter):
+    # 12 ноября 2026 цитата со «ё» из статьи трижды роняла запись партий вычитки.
+    quote = str(quote or '').replace('ё', 'е').replace('Ё', 'Е')
     card.setdefault('fact_log', []).append({
         'field': field, 'new': new, 'quote': quote, 'url': url, 'by': by,
         'date': date or datetime.date.today().isoformat()})
