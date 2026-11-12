@@ -383,6 +383,10 @@ GO_LINKS = {
     # отдельное имя, чтобы переходы с сайта и из поста считались порознь.
     "ma-forum-2026-site": "https://ma-conference-moscow.ru/?utm_source=projectcompass&utm_medium=site"
                           "&utm_campaign=ma_forum_2026&utm_content=event_page",
+    # Кнопка «Зарегистрироваться» на странице встречи клуба «Сикомора»
+    # #/event/pearl-meeting-2026 (12 ноября 2026; адрес — страница регистрации на TimePad, выбор владельца).
+    "pearl-meeting-site": "https://afisha.timepad.ru/moscow/events/vozmozhnosti-rynka-m-a-4278432?utm_source=projectcompass&utm_medium=site"
+                          "&utm_campaign=pearl_meeting_2026&utm_content=event_page",
 }
 
 

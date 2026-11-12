@@ -5007,11 +5007,25 @@ def test_materials_page_has_no_empty_webinar_card(page, base_url):
     assert "Раздел открылся недавно" not in text
 
 
-def test_materials_lists_events_and_event_page_opens(page, base_url):
+def _events_page(browser, base_url, day, hash_, width=1280):
+    """Страница с подмененным «сегодня» (полдень по Москве): мероприятия делятся
+    на предстоящие и прошедшие по дате, и тест не должен зависеть от календаря."""
+    import datetime as _dt
+    pg = browser.new_page(viewport={"width": width, "height": 900})
+    pg.crashes = []
+    pg.on("pageerror", lambda e: pg.crashes.append(f"pageerror: {e}"))
+    pg.clock.set_fixed_time(_dt.datetime.fromisoformat(day + "T12:00:00+03:00"))
+    pg.goto(base_url + "/" + hash_, wait_until="networkidle")
+    pg.wait_for_timeout(900)
+    return pg
+
+
+def test_materials_lists_events_and_event_page_opens(browser, base_url):
     """Владелец, 9 ноября 2026: «Макет мероприятия можешь выкладывать». Блок
     «Мероприятия» стоит над карточками заявки, строка ведет на страницу форума,
-    где есть регистрация через нашу ссылку, материалы, программа и организаторы."""
-    visit(page, base_url, "#/materials")
+    где есть регистрация через нашу ссылку, материалы, программа и организаторы.
+    «Сегодня» подменено на 10 ноября 2026: до форума, пока регистрация открыта."""
+    page = _events_page(browser, base_url, "2026-11-10", "#/materials")
     page.wait_for_selector(".evl")
     # 9 ноября 2026 (владелец и партнер): «Материалы» — вкладками, как виды консультантов;
     # по умолчанию «Мероприятия», заявки «Вести колонку…» — в своих вкладках.
@@ -5030,7 +5044,7 @@ def test_materials_lists_events_and_event_page_opens(page, base_url):
         tops = page.evaluate("[...document.querySelectorAll('.mat-tabs button')].map(b=>Math.round(b.getBoundingClientRect().top))")
         assert len(set(tops)) == 1, (w, tops)
     page.set_viewport_size({"width": 1280, "height": 900})
-    page.click(".evl-item")
+    page.click(".evl-item[href='#/event/ma-forum-2026']")
     page.wait_for_selector(".ev-hero")
     text = page.inner_text("#app")
     for part in ("Регистрация", "Материалы форума", "Программа", "Организаторы", "Информационный партнер"):
@@ -5041,6 +5055,7 @@ def test_materials_lists_events_and_event_page_opens(page, base_url):
     assert "Страницы фирм" not in text
     widths = page.evaluate("[...document.querySelectorAll('.ev-org a')].map(a=>Math.round(a.getBoundingClientRect().width))")
     assert len(set(widths)) == 1, widths   # ровная сетка: все прямоугольники одной ширины
+    page.close()
 
 
 def test_page_source_does_not_name_the_team():
@@ -5677,9 +5692,12 @@ def test_deal_card_names_the_legal_advisor_once_without_the_team(page, base_url)
 
 def test_home_has_a_red_forum_button_next_to_view_deals(browser, base_url):
     """Владелец 9 ноября 2026: рядом с белой «Смотреть сделки» — такая же по
-    размеру красная «Ежегодный M&A Форум»; на компьютере справа, на телефоне под ней."""
+    размеру красная «Ежегодный M&A Форум»; на компьютере справа, на телефоне под ней.
+    «Сегодня» подменено на 10 ноября: кнопка живет, пока мероприятие впереди."""
+    import datetime
     for w, side in ((1280, True), (390, False)):
         pg = browser.new_page(viewport={"width": w, "height": 844})
+        pg.clock.set_fixed_time(datetime.datetime.fromisoformat("2026-11-10T12:00:00+03:00"))
         pg.goto(base_url + "/#/", wait_until="domcontentloaded")
         pg.wait_for_selector(".hs-forum", timeout=15000)
         a = pg.locator(".hs-bar").bounding_box()
@@ -5694,11 +5712,12 @@ def test_home_has_a_red_forum_button_next_to_view_deals(browser, base_url):
         pg.close()
 
 
-def test_forum_day_block_shows_the_nearest_session(page, base_url):
+def test_forum_day_block_shows_the_nearest_session(browser, base_url):
     """12 ноября 2026, владелец: в полночь дня форума стояло «Сегодня9:45 / форум
     идет». В день форума блок показывает ближайшую сессию и не врет до начала."""
-    visit(page, base_url, "#/event/ma-forum-2026")
+    page = _events_page(browser, base_url, "2026-11-12", "#/event/ma-forum-2026")
     page.wait_for_selector(".ev-hero")
+    assert page.locator("#evCd").count() == 1
     get = lambda m: page.evaluate("m=>{const d=document.createElement('div');d.innerHTML=evTodayHtml(EVENTS[0],m);return d.innerText||d.textContent}", m)
     early = get(30)
     assert "9:45" in early and "начало первой сессии" in early and "идет" not in early
@@ -5709,6 +5728,109 @@ def test_forum_day_block_shows_the_nearest_session(page, base_url):
     # статья стоит отдельной карточкой и в списке материалов не повторяется
     assert page.locator(".mts .mt").count() == page.evaluate("EVENTS[0].materials.length") - 1
     assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+    page.close()
+
+
+def test_events_split_into_upcoming_and_past_by_moscow_date(browser, base_url):
+    """Владелец, 12 ноября 2026: «Форум уже можно оставить как прошедшее
+    мероприятие, а это как грядущее». Раздел делится на «Предстоящие» и
+    «Прошедшие» по дате (по Москве, на следующий день после даты); прошедшее
+    приглушено; пустые «Предстоящие» — одна строка без рамки."""
+    pg = _events_page(browser, base_url, "2026-11-13", "#/materials")
+    try:
+        pg.wait_for_selector(".evl")
+        heads = [h.strip() for h in pg.locator(".evl-h h2").all_inner_texts()]
+        assert heads == ["Предстоящие", "Прошедшие"], heads
+        soon = pg.locator("[data-evl=soon] .evl-item").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
+        past = pg.locator("[data-evl=past] .evl-item").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
+        assert soon == ["#/event/pearl-meeting-2026"] and past == ["#/event/ma-forum-2026"], (soon, past)
+        assert pg.locator("[data-evl=past] .evl-item.evl-past").count() == 1
+        assert "регистрация открыта" not in pg.inner_text("[data-evl=past]")
+        # после встречи предстоящих нет: спокойная строка, без пустой рамки
+        pg.evaluate("EVENTS.forEach(e=>{if(e.id==='pearl-meeting-2026')e.date='2026-11-12'}); renderMaterials('events')")
+        pg.wait_for_timeout(300)
+        q = pg.locator("p.evl-quiet")
+        assert q.count() == 1 and q.inner_text().strip() == "Ближайшее мероприятие объявим здесь"
+        assert pg.evaluate("getComputedStyle(document.querySelector('p.evl-quiet')).borderTopStyle") == "none"
+        assert pg.locator("[data-evl=past] .evl-item").count() == 2
+        assert not pg.crashes, pg.crashes
+    finally:
+        pg.close()
+
+
+def test_past_forum_page_keeps_the_program_without_registration(browser, base_url):
+    """С 13 ноября 2026 форум прошел: вместо отсчета — «Мероприятие прошло
+    12 ноября 2026 года», кнопки регистрации нет, программа и материалы остаются."""
+    for w in (1280, 390):
+        pg = _events_page(browser, base_url, "2026-11-13", "#/event/ma-forum-2026", width=w)
+        try:
+            pg.wait_for_selector(".ev-hero")
+            text = pg.inner_text("#app")
+            assert "Мероприятие прошло 12 ноября 2026 года" in text
+            assert pg.locator("#evCd").count() == 0 and "до форума" not in text and "ближайшая сессия" not in text
+            assert pg.locator("a[href^='/go/']").count() == 0, "по прошедшему мероприятию не зовем регистрироваться"
+            assert "Регистрация" not in text and "Зарегистрироваться" not in text
+            assert pg.locator(".ev-prog .ev-p").count() == 5 and pg.locator(".mts .mt").count() == 4
+            assert "Программа" in text and "Материалы форума" in text
+            assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0, w
+            assert not pg.crashes, pg.crashes
+        finally:
+            pg.close()
+
+
+def test_meeting_page_is_one_record_and_shows_only_known_fields(browser, base_url):
+    """Встреча клуба «Сикомора» (12 ноября 2026) — одна запись в EVENTS без правки
+    рендера: шапка с отсчетом, «О чем встреча», участие, кто проводит, организатор,
+    регистрация через /go/pearl-meeting-site. Время не объявлено — его нет на
+    странице вовсе; промокода на сайте нет."""
+    for w in (1280, 390, 360):
+        pg = _events_page(browser, base_url, "2026-11-13", "#/event/pearl-meeting-2026", width=w)
+        try:
+            pg.wait_for_selector(".ev-hero")
+            text = pg.evaluate("document.getElementById('app').textContent")
+            assert "4" in pg.inner_text("#evCd") and "дня до встречи" in text
+            for part in ("О чем встреча", "Что обсудят", "Кто участвует", "Сергей Шершень", "Илья Кармишин",
+                         "Инвестиционный клуб «Сикомора»", "7 990 ₽", "проспект Андропова, 18к6"):
+                assert part in text, part
+            assert "Время" not in pg.inner_text(".ev-join") and "промокод" not in text.lower()
+            assert pg.locator("a.ev-btn, a.ev-cta").evaluate_all("a=>a.map(x=>x.getAttribute('href'))") == ["/go/pearl-meeting-site"] * 3
+            assert "ё" not in text.lower()
+            assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0, w
+            assert not pg.crashes, pg.crashes
+        finally:
+            pg.close()
+
+
+def test_draft_event_is_hidden_everywhere(browser, base_url):
+    """draft:true — черновик: его нет в списке, прямая ссылка ведет в «Материалы»,
+    кнопки на главной нет, в карте сайта мероприятий нет."""
+    pg = _events_page(browser, base_url, "2026-11-13", "#/")
+    try:
+        pg.evaluate("EVENTS.push({id:'draft-x',draft:true,kind:'Встреча',title:'Черновик X',date:'2026-11-20',homeCta:'Черновик X',orgs:[]})")
+        pg.evaluate("location.hash='#/materials'"); pg.wait_for_timeout(500)
+        assert "Черновик X" not in pg.inner_text("#app")
+        pg.evaluate("location.hash='#/event/draft-x'"); pg.wait_for_timeout(500)
+        assert pg.url.endswith("#/materials") and "Черновик X" not in pg.inner_text("#app")
+        assert "Черновик X" not in pg.evaluate("evHomeCtaHtml()")
+    finally:
+        pg.close()
+    import urllib.request
+    assert "/event/" not in urllib.request.urlopen(base_url + "/sitemap.xml").read().decode()
+
+
+def test_home_event_button_disappears_after_the_date(browser, base_url):
+    """Кнопка мероприятия на главной (место красной кнопки форума) ведет на
+    ближайшее предстоящее мероприятие с homeCta и исчезает сама на следующий
+    день после даты — без правки руками."""
+    for day, want in (("2026-11-12", "#/event/ma-forum-2026"), ("2026-11-13", "#/event/pearl-meeting-2026"),
+                      ("2026-11-18", None)):
+        pg = _events_page(browser, base_url, day, "#/")
+        try:
+            pg.wait_for_selector(".hs-ctas", timeout=15000)
+            got = pg.locator(".hs-forum").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
+            assert got == ([want] if want else []), (day, got)
+        finally:
+            pg.close()
 
 
 def test_compare_tray_only_on_company_pages_and_above_the_tabbar(browser, base_url):
