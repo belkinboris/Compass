@@ -1702,6 +1702,12 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             and 'share_form' not in checked and 'share_missing' not in checked:
         out.append(('share_missing', 'предмет не записан долей в обществе (eco.share пуст): «100%% доли в %s»; '
                     'размер не назван — «Доля в %s»' % (named, named)))
+    # Доля записана, но не по форме, а профиля у предмета нет («51% ООО «X»» без «доли в»):
+    # проверка смотрела только на профиль (m053, 12 ноября 2026: ga2e9c5b1, ga8cb5cab).
+    if card.get('type') == 'M&A' and named and not tgt.get('legal_short') and has(share_v) \
+            and not SHARE_FORM_RE.match(share_v) and 'share_form' not in checked:
+        out.append(('share_form', 'eco.share %r — предмет пишется долей в обществе: «100%% доли в %s» '
+                    '(размер не назван — «Доля в %s»), описание — в контекст' % (share_v[:80], named, named)))
     if card.get('type') == 'M&A' and tgt.get('legal_short') and has(share_v) \
             and not SHARE_FORM_RE.match(share_v) and 'share_form' not in checked:
         out.append(('share_form', 'eco.share %r — предмет пишется долей в обществе: «100%% доли в %s» '
