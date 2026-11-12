@@ -50837,12 +50837,15 @@
    "followup_researched": "2026-08-22",
    "proofread_absorbed": {
     "eco.share": [
-     "ad0e8000695d"
+     "ad0e8000695d",
+     "7f346cf64294"
     ],
     "law.struct": [
      "a6007aa7b862"
     ],
-    "extra": []
+    "extra": [
+     "ceda1a3057c2"
+    ]
    },
    "proofread": "2026-09-03",
    "asset": "бизнес-центр на Арбате в Москве (6,3 тыс. м²)",
@@ -52999,6 +53002,9 @@
     ],
     "buyer_name": [
      "2d8233887520"
+    ],
+    "eco.val": [
+     "ad12a1d41d1a"
     ]
    },
    "proofread": "2026-09-03",
