@@ -687,3 +687,39 @@
 {"id": "g5b4a3bf8", "field": "sum", "class": "sum_meaning", "was": "2,5 млрд ₽ (расчет инвестбанкира)", "now": "Не раскрыта", "tag": "m023"}
 {"id": "g5b4a3bf8", "field": "seller", "class": "wrong_seller", "was": "Александр Колобов", "now": "Александр Колобов и Илья Черномзав", "tag": "m023"}
 {"id": "g5b4a3bf8", "field": "title", "class": "title_standard", "was": "ГК «Таврос» приобрела…", "now": "«Таврос» купил производителя булок United buns", "tag": "m023"}
+{"id": "g57a44f07", "field": "title", "class": "title_standard", "was": "ГК «Элемент» приобрела 51%…", "now": "«Корпорация роботов» купила 51% «Эйдос Робототехники»", "tag": "m022"}
+{"id": "g57a44f07", "field": "company.desc", "class": "profile_text", "was": "100%-ная структура АФК «Система»", "now": "структура группы «Элемент»", "tag": "m022"}
+{"id": "gb3211ae8", "field": "sum", "class": "sum_meaning", "was": "≈5 млрд ₽", "now": "Не раскрыта (ориентир анонимного источника)", "tag": "m022"}
+{"id": "gb3211ae8", "field": "extra", "class": "version_as_fact", "was": "планирует IPO до конца 2025, формат cash-in", "now": "по неофициальным данным могла провести IPO; cash-in снят", "tag": "m022"}
+{"id": "g7b4be1c4", "field": "sum", "class": "sum_meaning", "was": "6–7 млрд ₽ (или 9,4–9,5)", "now": "Не раскрыта", "tag": "m022"}
+{"id": "g7b4be1c4", "field": "eco.context", "class": "unsupported_claim", "was": "организатор IPO Газпромбанк, 12–14х EV/EBITDA", "now": "подготовка к IPO по Росатому; передача пакета Туголукова", "tag": "m022"}
+{"id": "g7b4be1c4", "field": "law.struct", "class": "other", "was": "перестройка владения 2026, UpHealth", "now": "—", "tag": "m022"}
+{"id": "g7b4be1c4", "field": "title", "class": "title_standard", "was": "Харитонин предложил выкупить…", "now": "Харитонин может купить долю…", "tag": "m022"}
+{"id": "g7ce0250d", "field": "sum", "class": "sum_meaning", "was": "≈1,5 млрд ₽ (оценка EV)", "now": "400–450 млн ₽ (по собеседнику Ъ)", "tag": "m022"}
+{"id": "g7ce0250d", "field": "date", "class": "wrong_date", "was": "2025-08-27 (день статьи)", "now": "2025-08-22", "tag": "m022"}
+{"id": "g7ce0250d", "field": "eco.target_fin", "class": "other", "was": "прибыль 2024 — 432 млн", "now": "453,7 млн ₽", "tag": "m022"}
+{"id": "g7ce0250d", "field": "title", "class": "title_standard", "was": "выкупил", "now": "купил", "tag": "m022"}
+{"id": "g321bdead", "field": "eco.share", "class": "wrong_share", "was": "состав портфеля", "now": "100% акций", "tag": "m022"}
+{"id": "ga58eb450", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "группа Pioneer и группа KCap", "tag": "m022"}
+{"id": "ga58eb450", "field": "eco.share", "class": "wrong_share", "was": "прежние владельцы", "now": "26% акций, первый этап", "tag": "m022"}
+{"id": "ga58eb450", "field": "title", "class": "title_standard", "was": "приобрел 26% акций индийского…", "now": "купил 26% Pioneer Aluminium Industries", "tag": "m022"}
+{"id": "g5a22a31a", "field": "title", "class": "title_standard", "was": "«Степь» продает портовые активы", "now": "Портовые активы «Степи» выставлены на продажу", "tag": "m022"}
+{"id": "g5a22a31a", "field": "asset", "class": "wrong_target", "was": "пусто", "now": "терминал в Азове и элеватор в Волгодонске", "tag": "m022"}
+{"id": "g829e5f99", "field": "sum", "class": "sum_meaning", "was": "50–100 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m022"}
+{"id": "g829e5f99", "field": "extra", "class": "version_as_fact", "was": "Магнит обсуждает продажу до 446 магазинов", "now": "по неофициальным данным Лента рассматривает покупку", "tag": "m022"}
+{"id": "g829e5f99", "field": "title", "class": "title_standard", "was": "выкупает", "now": "может купить", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "eco.context", "class": "foreign_fact", "was": "покупка OBI Лентой в январе 2026", "now": "история владения до сделки", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "extra", "class": "foreign_fact", "was": "сделку закрыли в январе 2026, актив перешел Ленте", "now": "закрыта в июле 2025 по ЕГРЮЛ", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "date", "class": "wrong_date", "was": "2025-04-29 (день статьи)", "now": "2025-07-11 (ЕГРЮЛ)", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "title", "class": "wrong_buyer", "was": "Севергрупп выкупил", "now": "«Гермес» купил контрольный пакет", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "law.struct", "class": "version_as_fact", "was": "не исключено, что покупка в два этапа", "now": "—", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "eco.val", "class": "foreign_fact", "was": "оценки сделки с Лентой 2026", "now": "оценки 2025 года с именами", "tag": "m022"}
+{"id": "gcdd2b6de", "field": "seller", "class": "language", "was": "Синдики", "now": "ХК «Синдика»", "tag": "m022"}
+{"id": "g473685f6", "field": "ind", "class": "wrong_industry", "was": "Финансовые услуги", "now": "Агро", "tag": "m022"}
+{"id": "g473685f6", "field": "title", "class": "title_standard", "was": "увеличил долю до 73,35%", "now": "купил долю", "tag": "m022"}
+{"id": "gf8dfe9c4", "field": "eco.context", "class": "version_as_fact", "was": "рамочное соглашение объявили", "now": "объявлено о планах подписать", "tag": "m022"}
+{"id": "gf8dfe9c4", "field": "extra", "class": "unsupported_claim", "was": "у продавца остается 49%", "now": "снято", "tag": "m022"}
+{"id": "gf8dfe9c4", "field": "title", "class": "title_standard", "was": "Softline покупает", "now": "SL Soft собирается купить", "tag": "m022"}
+{"id": "gec433848", "field": "extra", "class": "version_as_fact", "was": "Сделка закрыта в 2025 году", "now": "по неофициальным данным; Росатом не подтвердил", "tag": "m022"}
+{"id": "gec433848", "field": "law.terms", "class": "unsupported_claim", "was": "опцион на оставшиеся 51%", "now": "возможность дальнейшего выкупа", "tag": "m022"}
+{"id": "gec433848", "field": "eco.share", "class": "wrong_share", "was": "Росатом приобрел 49% акций…", "now": "49% акций АО «Топ Системы»", "tag": "m022"}
