@@ -336,3 +336,41 @@
 {"id": "g181d7687", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Машиностроение", "tag": "m002"}
 {"id": "g181d7687", "field": "eco.context", "class": "verbatim", "was": "33 слова как в CNews", "now": "пересказ", "tag": "m002"}
 {"id": "g181d7687", "field": "title", "class": "title_standard", "was": "копия заголовка", "now": "Yadro купил 38% «КБ Борей»", "tag": "m002"}
+{"id": "g58d70492", "field": "sum", "class": "sum_meaning", "was": "2,1 млрд ₽ (размещение); рыночная капитализация 20,6 млрд ₽", "now": "2,1 млрд ₽", "tag": "m009"}
+{"id": "g58d70492", "field": "eco.val", "class": "version_as_fact", "was": "до листинга оценивали в 24–40 млрд ₽", "now": "ожидаемая оценка после листинга, по неофициальным данным", "tag": "m009"}
+{"id": "g58d70492", "field": "eco.target_fin", "class": "foreign_fact", "was": "финансы 2025 года у IPO 2022 года", "now": "рост выручки и рентабельность на момент IPO", "tag": "m009"}
+{"id": "g58d70492", "field": "eco.fin", "class": "foreign_fact", "was": "долговая нагрузка 2025 года", "now": "расчеты при IPO: cash-in 2,1 млрд ₽, 0,2 млрд ₽ на стабилизацию", "tag": "m009"}
+{"id": "g58d70492", "field": "src", "class": "source_not_about", "was": "отчетность 2025 года и страница дивидендов", "now": "сняты", "tag": "m009"}
+{"id": "g58d70492", "field": "title", "class": "title_standard", "was": "IPO кикшеринг-сервиса Whoosh на Московской бирже", "now": "Whoosh провел IPO на Мосбирже", "tag": "m009"}
+{"id": "g58d70492", "field": "law.terms", "class": "language", "was": "«Калянов» без имени, мнение аналитика в условиях", "now": "только условие lock-up", "tag": "m009"}
+{"id": "g71bd68cf", "field": "law.struct", "class": "foreign_fact", "was": "шаги апреля и июня 2025 года («Ростех»), почти дословно", "now": "механика декабря 2024 года по ЕГРЮЛ", "tag": "m009"}
+{"id": "g71bd68cf", "field": "title", "class": "title_standard", "was": "«Цифровой вектор» получил 30%", "now": "«Цифровой вектор» купил 30%", "tag": "m009"}
+{"id": "g8a66f3c7", "field": "sum", "class": "wrong_sum", "was": "45–55 млн ₽ (по оценке)", "now": "Не раскрыта", "tag": "m009"}
+{"id": "g8a66f3c7", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Дмитрий Юзепчук (ИП, владелец Reddock)", "tag": "m009"}
+{"id": "g8a66f3c7", "field": "law.terms", "class": "unsupported_claim", "was": "пересказ закона о хостинге", "now": "переход клиентов в течение месяца", "tag": "m009"}
+{"id": "g8a66f3c7", "field": "eco.share", "class": "other", "was": "описание компании", "now": "клиентская база до 2,5 тыс. пользователей", "tag": "m009"}
+{"id": "g6fe7016f", "field": "date", "class": "wrong_date", "was": "2024", "now": "2023-10-03 (ЕГРЮЛ)", "tag": "m009"}
+{"id": "g6fe7016f", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "ООО «ОМП — центр разработки»", "tag": "m009"}
+{"id": "g6fe7016f", "field": "eco.context", "class": "foreign_fact", "was": "умные телевизоры «Ростелекома» 2025 года", "now": "история ОМП и продажи", "tag": "m009"}
+{"id": "g6fe7016f", "field": "src", "class": "source_not_about", "was": "Коммерсантъ о производстве смарт-ТВ", "now": "снят", "tag": "m009"}
+{"id": "g6fe7016f", "field": "law.terms", "class": "language", "was": "(Хабр, 5 октября 2023 года)", "now": "без пресс-пометки", "tag": "m009"}
+{"id": "g7c8f9112", "field": "eco.share", "class": "other", "was": "описание платформы", "now": "14,28% ООО «Эйчар Рокет»", "tag": "m009"}
+{"id": "g7c8f9112", "field": "extra", "class": "unsupported_claim", "was": "«укрепить позиции фонда»", "now": "в источнике — позиции HR Rocket; текст переписан", "tag": "m009"}
+{"id": "g7c8f9112", "field": "title", "class": "title_standard", "was": "инвестировал в HR Rocket", "now": "купил 14,28% HR Rocket", "tag": "m009"}
+{"id": "g3875e8f5", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Закрыта (ЕГРЮЛ: «Велана» 99,9% с 02.03.2026)", "tag": "m009"}
+{"id": "g3875e8f5", "field": "date", "class": "wrong_date", "was": "2025", "now": "2026-03-02", "tag": "m009"}
+{"id": "g3875e8f5", "field": "buyer", "class": "wrong_buyer", "was": "Capital Group", "now": "ООО «Велана» (в реестре)", "tag": "m009"}
+{"id": "g3875e8f5", "field": "eco.share", "class": "other", "was": "описание ТВК", "now": "83,4% долей ООО «ТВК «Тишинка»»", "tag": "m009"}
+{"id": "gcb309b35", "field": "eco.context", "class": "wrong_sum", "was": "годовая прибыль 139 млрд ₽", "now": "валовая прибыль 139 млрд ₽", "tag": "m009"}
+{"id": "gcb309b35", "field": "eco.context", "class": "unsupported_claim", "was": "иск в августе 2025 года, арест в октябре", "now": "решение суда 1 октября 2025 года", "tag": "m009"}
+{"id": "gcb309b35", "field": "eco.share", "class": "wrong_share", "was": "пусто", "now": "18,07% акций АО «Кондитерус Ком»", "tag": "m009"}
+{"id": "g0a6cea12", "field": "date", "class": "wrong_date", "was": "2025-04-15 (подписание)", "now": "2025-04-16 (ЕГРЮЛ)", "tag": "m009"}
+{"id": "g0a6cea12", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив продавца без подлежащего", "now": "мотив покупателя словами Артема Клецкина", "tag": "m009"}
+{"id": "g0a6cea12", "field": "title", "class": "title_standard", "was": "Полюс продал…", "now": "ЮГК купил ООО «Марокское» у «Полюса»", "tag": "m009"}
+{"id": "g62ea52ce", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "АО «ЦУГИ»", "tag": "m009"}
+{"id": "g703c4f62", "field": "eco.val", "class": "other", "was": "прибыль МКБ в «Оценке»", "now": "перенесено в показатели", "tag": "m009"}
+{"id": "g703c4f62", "field": "eco.fin", "class": "other", "was": "активы МКБ в «Форме расчетов»", "now": "перенесено в показатели", "tag": "m009"}
+{"id": "g703c4f62", "field": "eco.rationale", "class": "language", "was": "«Сам Авдеев видит…»", "now": "без разговорного", "tag": "m009"}
+{"id": "g703c4f62", "field": "title", "class": "title_standard", "was": "Роман Авдеев продал…", "now": "Структуры Сергея Сударикова купили долю…", "tag": "m009"}
+{"id": "gdda3e685", "field": "eco.share", "class": "other", "was": "история компании", "now": "99% акций ПАО «Инград»", "tag": "m009"}
+{"id": "gdda3e685", "field": "title", "class": "title_standard", "was": "Продажа «Инграда» девелоперу Sminex", "now": "Девелопер Sminex купил у «Россиума» группу «Инград»", "tag": "m009"}
