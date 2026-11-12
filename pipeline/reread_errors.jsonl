@@ -440,3 +440,48 @@
 {"id": "g7596ae81", "field": "date", "class": "wrong_date", "was": "2025-04-01", "now": "2025-04-17", "tag": "m018"}
 {"id": "g7596ae81", "field": "extra", "class": "unsupported_claim", "was": "доли 42% и 48%, Семенов", "now": "снято", "tag": "m018"}
 {"id": "g7596ae81", "field": "title", "class": "title_standard", "was": "ИК «Кама капитал» выкупила …", "now": "«Кама Капитал» купил …", "tag": "m018"}
+{"id": "ge6b63fd9", "field": "buyer", "class": "wrong_buyer", "was": "фирма «Аптекарский» (версия двух консультантов)", "now": "ЗПИФ «Гермес» — по официальным данным", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "sum", "class": "sum_meaning", "was": "8 млрд ₽ как цена (оценка до сделки)", "now": "10 млрд ₽ (по оценке) после закрытия", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "eco.rationale", "class": "invented_rationale", "was": "история «Аптекарского» вместо мотива", "now": "мотив по оценке NF Group", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "eco.fin", "class": "other", "was": "финансы компании в «Форме расчетов»", "now": "—, цифры в показателях", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "title", "class": "title_standard", "was": "Продажа торгового центра…", "now": "Фонд «Гермес» купил «Невский центр» у PPF Real Estate", "tag": "m010"}
+{"id": "gf76413f3", "field": "buyer", "class": "wrong_buyer", "was": "Структуры бывшего менеджмента СУЭК (предположительно НТК)", "now": "не назван; НТК — дочка самой СУЭК", "tag": "m010"}
+{"id": "gf76413f3", "field": "eco.share", "class": "unsupported_claim", "was": "Видимо, НТК…", "now": "терминалы в Мурманске, Ванино, Восточном, Туапсе", "tag": "m010"}
+{"id": "gf76413f3", "field": "eco.context", "class": "foreign_fact", "was": "грузооборот терминала в 2025 году", "now": "снято", "tag": "m010"}
+{"id": "gf76413f3", "field": "title", "class": "title_standard", "was": "СУЭК продал портовые активы структурам…", "now": "Структуры бывших менеджеров купили портовые активы СУЭК", "tag": "m010"}
+{"id": "gef02a680", "field": "sum", "class": "sum_meaning", "was": "45–48 млн $ (как цена)", "now": "$45–48 млн (по оценке)", "tag": "m010"}
+{"id": "gef02a680", "field": "eco.context", "class": "unsupported_claim", "was": "Богданов остается владельцем по ЕГРЮЛ (ЕГРЮЛ акционеров АО не показывает)", "now": "только гендиректор по ЕГРЮЛ", "tag": "m010"}
+{"id": "gef02a680", "field": "extra", "class": "unsupported_claim", "was": "Идут переговоры", "now": "снято", "tag": "m010"}
+{"id": "gef02a680", "field": "title", "class": "title_standard", "was": "Продажа ЗАО…", "now": "«Мультимедиа Холдинг» выставлен на продажу", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "eco.rationale", "class": "invented_rationale", "was": "описание сервиса как цель", "now": "—", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "10% долей в ООО «АБД»", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "title", "class": "title_standard", "was": "Авито (КЕХ Екоммерц) выкупил…", "now": "Авито купил 10% «Автотеки» у РОАД", "tag": "m010"}
+{"id": "g9876feaa", "field": "sum", "class": "wrong_sum", "was": "63,8 млн ₽", "now": "63,9 млн ₽ (ЕФРСБ: 63 899 999 ₽)", "tag": "m010"}
+{"id": "g9876feaa", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m010"}
+{"id": "g9876feaa", "field": "buyer_name", "class": "party_text_no_profile", "was": "покупатель пуст, имя только в контексте", "now": "Марк Негодуйко", "tag": "m010"}
+{"id": "g9876feaa", "field": "eco.context", "class": "unsupported_claim", "was": "Светлана Железнова, «Коломяги», старт 120,6 млн ₽", "now": "сняты", "tag": "m010"}
+{"id": "g9876feaa", "field": "law.appr", "class": "other", "was": "история банкротства в «Согласованиях»", "now": "—", "tag": "m010"}
+{"id": "g694126dd", "field": "buyer", "class": "wrong_buyer", "was": "Бэсткон", "now": "ООО «Премиум эстейт» (по СПАРК)", "tag": "m010"}
+{"id": "g694126dd", "field": "sum", "class": "wrong_sum", "was": "1,2–2 млрд ₽", "now": "Не раскрыта", "tag": "m010"}
+{"id": "g694126dd", "field": "title", "class": "title_standard", "was": "Евгений Гинер продал… девелоперу «Бэсткон»", "now": "«Премиум эстейт» купил торговый центр «Старт» у Евгения Гинера", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "target", "class": "wrong_target", "was": "«Киевская, 22»", "now": "«Киевское, 22»", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "extra", "class": "unsupported_claim", "was": "15 га, 72 000 кв. м, льготы", "now": "сняты", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "title", "class": "title_standard", "was": "Покупка складского комплекса…", "now": "СФН может купить складской комплекс «Киевское, 22»", "tag": "m010"}
+{"id": "g8348fea5", "field": "sum", "class": "wrong_sum", "was": "3,71 млрд ₽", "now": "3,7 млрд ₽", "tag": "m010"}
+{"id": "g8348fea5", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m010"}
+{"id": "g8348fea5", "field": "extra", "class": "unsupported_claim", "was": "опровержение Бойко, «на август 2026 признаков нет»", "now": "сняты", "tag": "m010"}
+{"id": "g8348fea5", "field": "src", "class": "dead_source", "was": "news.mail.ru (404)", "now": "снят", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "date", "class": "wrong_date", "was": "2023-02-04 (сообщение о договоре)", "now": "2023 (срыв в феврале–апреле)", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "eco.share", "class": "other", "was": "Нюрбургринг в «Предмет / доля»", "now": "аэропорт", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "title", "class": "title_standard", "was": "Сделка… сорвалась", "now": "Конкурсный управляющий отказался продать аэропорт Франкфурт-Хан NR Holding", "tag": "m010"}
+{"id": "gf9932079", "field": "sum", "class": "wrong_sum", "was": "40–75 млрд ₽ (по оценке аналитиков без имени)", "now": "Не раскрыта", "tag": "m010"}
+{"id": "gf9932079", "field": "date", "class": "wrong_date", "was": "2025-05-15", "now": "2025 (покупка в августе)", "tag": "m010"}
+{"id": "gf9932079", "field": "extra", "class": "unsupported_claim", "was": "бенефициары Узун и Ротенберг, 2-й квартал", "now": "сняты", "tag": "m010"}
+{"id": "gf9932079", "field": "title", "class": "title_standard", "was": "ВЭБ.РФ довел долю…", "now": "ВЭБ.РФ купил 25% «Просвещения»", "tag": "m010"}
+{"id": "g381ff192", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Правительство России", "tag": "m010"}
+{"id": "g381ff192", "field": "date", "class": "wrong_date", "was": "2025-05-15", "now": "2025", "tag": "m010"}
+{"id": "g381ff192", "field": "eco.fin", "class": "other", "was": "прибыль в «Форме расчетов»", "now": "—", "tag": "m010"}
+{"id": "g381ff192", "field": "title", "class": "title_standard", "was": "«Росхим» приобрел контрольный пакет…", "now": "«Росхим» купил 57,43% «Башкирской содовой компании»", "tag": "m010"}
+{"id": "g8a67edea", "field": "date", "class": "wrong_date", "was": "2025-12-31 (день указа о временном управлении)", "now": "2026-02-09 (предложение выкупа)", "tag": "m010"}
+{"id": "g8a67edea", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Rockwool A/S", "tag": "m010"}
+{"id": "g8a67edea", "field": "title", "class": "title_standard", "was": "Выкуп российских активов Rockwool…", "now": "РСА собирается купить российские заводы Rockwool", "tag": "m010"}
