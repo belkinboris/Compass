@@ -206,7 +206,10 @@ def main(argv):
     stamp_cmd = [py, 'pipeline/reread_queue.py', '--stamp', plan['answers']] + (['--write'] if write else [])
     code, out = run(stamp_cmd, env=env)
     refusals = [l for l in out.splitlines() if 'ОТКАЗ' in l or l.strip().startswith('- ')]
-    if code:
+    # Отказ в отметке одной карточке — не сбой партии: остальные отметки и правки записываются,
+    # причина отказа уходит в отчет. (До 12 ноября 2026 код возврата 1 при отказе откатывал всю
+    # партию: m004 шесть раз подряд занимала полосу записи по 13 минут из-за одной карточки.)
+    if code and 'ответов' not in out:
         return fail('отметки (reread_queue.py --stamp)', out, write)
     code, out = run([py, 'pipeline/fact_edit_guard.py'], env=env)
     if code:
