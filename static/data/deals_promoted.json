@@ -44667,10 +44667,12 @@
     "eco.context": [
      "dce8bcec608e",
      "9ec27468ea57",
-     "ea4736cfaba6"
+     "ea4736cfaba6",
+     "e2030e87c0d0"
     ],
     "eco.share": [
-     "8c5cfe0be72e"
+     "8c5cfe0be72e",
+     "9dd9d61c4dea"
     ]
    },
    "proofread": "2026-09-03",
@@ -44821,7 +44823,8 @@
    "proofread_absorbed": {
     "eco.context": [
      "2abb07228b5c",
-     "6cd1cdde2dca"
+     "6cd1cdde2dca",
+     "2b29c3725088"
     ],
     "eco.share": [],
     "eco.target_fin": [],
@@ -45196,7 +45199,8 @@
     ],
     "eco.share": [
      "e83951d467e8",
-     "e7485423d177"
+     "e7485423d177",
+     "f14ed3f592a6"
     ],
     "law.terms": [
      "191e9d632c65"
@@ -45951,7 +45955,8 @@
     ],
     "law.struct": [
      "aed8b0837bc7",
-     "0a855de0f905"
+     "0a855de0f905",
+     "4c43e6a8f1e6"
     ],
     "eco.fin": [
      "9ef301b74a9a"
@@ -46308,7 +46313,8 @@
     ],
     "eco.rationale": [
      "c9a928cdafdc",
-     "15426e57805b"
+     "15426e57805b",
+     "d301367bb056"
     ],
     "eco.share": [
      "9ab14e82f67b"
@@ -46452,7 +46458,8 @@
      "446b3801820c"
     ],
     "eco.share": [
-     "8c2d2bf93cf5"
+     "8c2d2bf93cf5",
+     "624d93a8fcd9"
     ],
     "law.terms": [],
     "extra": []
@@ -46586,7 +46593,8 @@
    "proofread_absorbed": {
     "eco.share": [
      "36d66632f109",
-     "8bb717530da8"
+     "8bb717530da8",
+     "765c8ed8702f"
     ],
     "eco.rationale": [
      "13ec2c191c73"
@@ -46750,7 +46758,8 @@
     ],
     "eco.val": [
      "19c55e32ebc9",
-     "00f7cfa3d74d"
+     "00f7cfa3d74d",
+     "22c80a11d251"
     ],
     "eco.rationale": [
      "2096ff95d708"
@@ -46884,7 +46893,8 @@
     ],
     "eco.share": [
      "2bc2b1f3065a",
-     "7da99072bc41"
+     "7da99072bc41",
+     "379fd6dcf212"
     ],
     "law.struct": [
      "b20588026427"
@@ -59322,7 +59332,8 @@
     ],
     "eco.share": [
      "d5648540664b",
-     "1b0f0f4519d0"
+     "1b0f0f4519d0",
+     "f8056d8602ed"
     ],
     "eco.target_fin": [
      "f2a6810e2d22"
@@ -62349,7 +62360,8 @@
     ],
     "eco.share": [
      "fa3ce1130ac2",
-     "7d436a0b2b38"
+     "7d436a0b2b38",
+     "c3ffd1e26157"
     ],
     "eco.context": [
      "6bcb510a39e3"
@@ -116776,14 +116788,16 @@
     ],
     "law.appr": [
      "8a7b8eb46122",
-     "3956b4e20a73"
+     "3956b4e20a73",
+     "73902d5623b1"
     ],
     "eco.target_fin": [
      "bc058994838b"
     ],
     "law.struct": [
      "9da672f15a48",
-     "981c39570f4d"
+     "981c39570f4d",
+     "4d3a9b4a11f8"
     ],
     "eco.share": [],
     "eco.context": [],
@@ -140145,7 +140159,8 @@
     ],
     "eco.context": [
      "eb03ae113bd8",
-     "2fdbcca1972f"
+     "2fdbcca1972f",
+     "937eedffc6fb"
     ],
     "eco.rationale": [
      "adc5ddd4b69d"
@@ -148766,7 +148781,8 @@
     ],
     "eco.share": [
      "19e19a70097c",
-     "ce1b11c70240"
+     "ce1b11c70240",
+     "c90d8aec9dc6"
     ],
     "eco.context": [
      "4328101231ff"
@@ -159572,7 +159588,8 @@
     ],
     "eco.share": [
      "5f066b8207eb",
-     "a462e41c67f1"
+     "a462e41c67f1",
+     "d3088b6d0798"
     ],
     "eco.target_fin": [
      "fe667529ec3b"
@@ -159580,13 +159597,15 @@
     "eco.context": [
      "75e604c0bb57",
      "2093e7b5e240",
-     "291854f44c33"
+     "291854f44c33",
+     "e69441e88a6f"
     ],
     "eco.val": [
      "ac6c41c71cdf"
     ],
     "extra": [
-     "b65a20336ae5"
+     "b65a20336ae5",
+     "3f1786c0ea48"
     ],
     "law.terms": []
    },
@@ -193745,7 +193764,8 @@
     ],
     "law.struct": [
      "767ec6f5be7a",
-     "1633df54790d"
+     "1633df54790d",
+     "b0ae6ab372b9"
     ],
     "law.terms": [
      "02f6588bce22"
@@ -204820,11 +204840,11 @@
   },
   {
    "id": "gb5d8a18a",
-   "date": "2026-08-13",
-   "title": "ЦБ зарегистрировал допэмиссию акций «М.видео» по закрытой подписке",
+   "date": "2026-11-12",
+   "title": "«М.видео» закрыла допэмиссию: акционеры выкупили весь выпуск за 24,95 млрд рублей",
    "ind": "Ритейл",
    "type": "Инвестиция",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "Ведомости",
@@ -204841,13 +204861,17 @@
     [
      "Abn.Agency",
      "https://abn.agency/2026/09/17/m-video-opredelit-czenu-razmeshheniya-akczij-dopemissii-na-30-mlrd-rublej/"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261112/dopemissija-875162299.html"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "24,95 млрд ₽",
     "share": "—",
-    "val": "—",
+    "val": "Цену размещения совет директоров определил в 49,9 ₽ за акцию; при 500 млн размещенных бумаг это дает 24,95 млрд рублей.",
     "target_fin": "Выручка ПАО «М.Видео» по МСФО в 2025 году сократилась на 28%, до 324,8 млрд ₽.",
     "fin": "—",
     "rationale": "Закрытая подписка позволит «М.видео» завершить дофинансирование на 30 млрд ₽. Деньги компания намерена потратить на ключевые направления бизнеса, среди которых новая стратегия — мультикатегорийный маркетплейс. Та же стратегия предполагает развитие офлайн-магазинов, сети партнерских пунктов выдачи и постаматов.",
@@ -204885,20 +204909,20 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "3bf019c6ddc7"
+     "card_hash": "a9f64d9af31b"
     },
     "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
+     "value_rub": 24950000000.0,
+     "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "9ab5e5d274b5"
+     "basis": "rule",
+     "card_hash": "8418c896c802"
     },
     "date": {
-     "value": "2026-08-13",
+     "value": "2026-11-12",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "95a9090a221d"
+     "card_hash": "bfba8ed89153"
     },
     "nature": {
      "control_change": false,
@@ -204908,7 +204932,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "540498a391fa"
+     "card_hash": "e17806442893"
     },
     "target": {
      "company_id": "g444cac01",
@@ -204937,7 +204961,48 @@
    },
    "followup_researched": "2026-09-18",
    "separate_transaction_reviewed": true,
-   "gate_baseline_hash": "d35cd90af154.b89d75"
+   "gate_baseline_hash": "d35cd90af154.b89d75",
+   "sum": "24,95 млрд ₽",
+   "events": [
+    {
+     "id": "negotiations-2026-08-13",
+     "kind": "negotiations",
+     "date": "2026-08-13",
+     "title": "Переговоры",
+     "historicalTitle": "ЦБ зарегистрировал допэмиссию акций «М.видео» по закрытой подписке",
+     "note": "",
+     "sources": [
+      [
+       "Ведомости",
+       "https://www.vedomosti.ru/investments/news/2026/08/13/1220924-dopemissiyu-mvideo"
+      ]
+     ]
+    },
+    {
+     "kind": "closed",
+     "date": "2026-11-12",
+     "title": "Сделка завершена",
+     "note": "Размещение закрыто: все 500 млн акций дополнительного выпуска выкуплены по 49,9 ₽ за акцию — компания разместила 100% предусмотренного объема.",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261112/dopemissija-875162299.html"
+     ],
+     "id": "gb5d8a18a-closed",
+     "newsworthy": true,
+     "snapshot": {
+      "title": "«М.видео» закрыла допэмиссию: акционеры выкупили весь выпуск за 24,95 млрд рублей",
+      "type": "Инвестиция",
+      "status": "Закрыта",
+      "sum": "24,95 млрд ₽",
+      "buyer": "ООО «Кэпиталгард», ПАО «Эсэфай», ООО «Эсэфай кэпитал», ООО «Лэнбури»",
+      "seller": null,
+      "asset": "М.Видео",
+      "ind": "Ритейл"
+     },
+     "headline": "«М.видео» закрыла допэмиссию: акционеры выкупили весь выпуск за 24,95 млрд рублей",
+     "milestone_drafted_at": "2026-11-12T12:30:18+00:00"
+    }
+   ]
   },
   {
    "id": "gebead2e8",
