@@ -921,3 +921,43 @@
 {"id": "g7bffe474", "field": "target", "class": "profile_text", "was": "«завод Hyundai в Санкт-Петербурге», ранее завод Volkswagen", "now": "ООО «Хендэ Мотор Мануфактуринг Рус», ИНН 7801463902", "tag": "m036"}
 {"id": "g7bffe474", "field": "law.terms", "class": "verbatim", "was": "опцион почти дословно из Ъ", "now": "пересказ", "tag": "m036"}
 {"id": "g7bffe474", "field": "extra", "class": "unsupported_claim", "was": "структура холдинга «Авилон»", "now": "снято", "tag": "m036"}
+{"id": "g61cccee7", "field": "sum", "class": "sum_meaning", "was": "≈1 млрд ₽", "now": "Не раскрыта (1–2 млрд — оценка аналитиков, в eco.val)", "tag": "m035"}
+{"id": "g61cccee7", "field": "date", "class": "wrong_date", "was": "2024-03-01", "now": "2024-03-29 (ЕГРЮЛ: фонды вошли в ООО «Суточно»)", "tag": "m035"}
+{"id": "g61cccee7", "field": "target", "class": "profile_wrong_inn", "was": "ИНН 7325147009 (ООО «Суточно.ру», Кузнецов 100%)", "now": "ИНН 7709908155 (ООО «Суточно»)", "tag": "m035"}
+{"id": "g61cccee7", "field": "eco.context", "class": "version_as_fact", "was": "VK заявлял о намерении купить", "now": "по неофициальным данным, рассматривал покупку", "tag": "m035"}
+{"id": "g61cccee7", "field": "law.struct", "class": "unsupported_claim", "was": "83,97%, EV 6–7 млрд (только Forbes, не открылся)", "now": "84% / 16% по открытым источникам", "tag": "m035"}
+{"id": "g61cccee7", "field": "title", "class": "title_standard", "was": "Pre-IPO фонд «ВИМ Инвестиций» приобрел 16,03% сервиса аренды жилья «Суточно.ру»", "now": "Фонды «ВИМ Инвестиций» купили 16% «Суточно.ру»", "tag": "m035"}
+{"id": "g6822cbf4", "field": "buyer", "class": "wrong_buyer", "was": "Антон Пак", "now": "АО «Симаррон Холдинг» (ЕГРЮЛ)", "tag": "m035"}
+{"id": "g6822cbf4", "field": "sum", "class": "sum_meaning", "was": "7,5–10 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка экспертов Ъ — в eco.val)", "tag": "m035"}
+{"id": "g6822cbf4", "field": "date", "class": "wrong_date", "was": "2024-03-01", "now": "2024-04-26 (ЕГРЮЛ)", "tag": "m035"}
+{"id": "g6822cbf4", "field": "eco.context", "class": "foreign_fact", "was": "покупка Sokolov в 2025 году", "now": "снято", "tag": "m035"}
+{"id": "g6822cbf4", "field": "eco.context", "class": "verbatim", "was": "предложение Ъ дословно", "now": "пересказ", "tag": "m035"}
+{"id": "g6822cbf4", "field": "title", "class": "title_standard", "was": "Антон Пак приобрел процессинговую компанию E1 Card у Кирилла Бохана", "now": "«Симаррон Холдинг» купил E1 Card", "tag": "m035"}
+{"id": "g1964bb40", "field": "eco.context", "class": "verbatim", "was": "14 слов подряд из Ъ", "now": "пересказ", "tag": "m035"}
+{"id": "g1964bb40", "field": "law.appr", "class": "other", "was": "в согласованиях — закрытие по ЕГРЮЛ", "now": "только разрешение правкомиссии", "tag": "m035"}
+{"id": "gb43c8bcb", "field": "law.struct", "class": "unsupported_claim", "was": "«Сибагро» — единственный участник торгов", "now": "допущены двое: «Сибагро» и Александр Гуров", "tag": "m035"}
+{"id": "gb43c8bcb", "field": "date", "class": "wrong_date", "was": "2024-03-01", "now": "2024 (день торгов не назван)", "tag": "m035"}
+{"id": "gb43c8bcb", "field": "title", "class": "title_standard", "was": "Сибагро приобрела 51% Богдановичского комбикормового завода", "now": "«Сибагро» купил на торгах 51% Богдановичского комбикормового завода", "tag": "m035"}
+{"id": "g173f659d", "field": "eco.context", "class": "version_as_fact", "was": "интеграция завершилась ребрендингом", "now": "ребрендинг объявлен, идет постепенно", "tag": "m035"}
+{"id": "g173f659d", "field": "title", "class": "title_standard", "was": "ГК «Росводоканал» приобрела ООО «Томскводоканал»", "now": "«Росводоканал» купил «Томскводоканал»", "tag": "m035"}
+{"id": "g1e73548b", "field": "extra", "class": "other", "was": "Заволжье Новгородской области", "now": "Заволжье Нижегородской области", "tag": "m035"}
+{"id": "g1e73548b", "field": "eco.context", "class": "unsupported_claim", "was": "«АвтоВАЗ» — новый заказчик взамен Renault", "now": "«АвтоВАЗ» был заказчиком и раньше", "tag": "m035"}
+{"id": "g1e73548b", "field": "title", "class": "title_standard", "was": "Leoni продала российский завод по производству электрожгутов ООО «Импульс»", "now": "ООО «Импульс» купило российский завод Leoni", "tag": "m035"}
+{"id": "g60c0956e", "field": "title", "class": "title_standard", "was": "Автодом приобрел завод автокомпонентов Autoliv в Тольятти", "now": "«Автодом» купил завод Autoliv в Тольятти", "tag": "m035"}
+{"id": "g088a43f9", "field": "sum", "class": "wrong_sum", "was": "1,8 млрд ₽", "now": "Не раскрыта (Ъ: «сумма сделки не раскрывается»)", "tag": "m035"}
+{"id": "g088a43f9", "field": "title", "class": "title_standard", "was": "ГК «Монополия» приобрела 72% долей в пермской ООО «Умная логистика»", "now": "«Монополия» купила 72% «Умной логистики»", "tag": "m035"}
+{"id": "gcf0f7334", "field": "buyer", "class": "wrong_buyer", "was": "Холдинг «Адамант»", "now": "Игорь Лейтис (ЕГРЮЛ, Интерфакс)", "tag": "m035"}
+{"id": "gcf0f7334", "field": "law.appr", "class": "foreign_fact", "was": "ФАС 2025 — внутригрупповая передача АО «Управляющая компания»", "now": "правкомиссия (по данным консультанта)", "tag": "m035"}
+{"id": "gcf0f7334", "field": "ind", "class": "wrong_industry", "was": "ГМК и добыча", "now": "Строительство", "tag": "m035"}
+{"id": "gcf0f7334", "field": "eco.context", "class": "unsupported_claim", "was": "бренд AIG, модернизация до 2026 года", "now": "снято", "tag": "m035"}
+{"id": "gcf0f7334", "field": "title", "class": "title_standard", "was": "Холдинг «Адамант» купил два стекольных завода AGC в России", "now": "Игорь Лейтис купил у AGC Борский и Клинский стекольные заводы", "tag": "m035"}
+{"id": "g26b319ff", "field": "date", "class": "wrong_date", "was": "2024-02-14 (день публикации)", "now": "2023 (закрыта в декабре 2023)", "tag": "m035"}
+{"id": "g26b319ff", "field": "title", "class": "title_standard", "was": "Банк «Траст» вышел из Объединенной вагонной компании с убытком", "now": "Акционеры УГМК купили у «Траста» 96% Объединенной вагонной компании", "tag": "m035"}
+{"id": "g26b319ff", "field": "law.struct", "class": "unsupported_claim", "was": "продал отраслевому инвестору", "now": "четырем акционерам УГМК напрямую", "tag": "m035"}
+{"id": "g90317ad0", "field": "sum", "class": "sum_meaning", "was": "4,5 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка EV без автора снята)", "tag": "m035"}
+{"id": "g90317ad0", "field": "extra", "class": "other", "was": "регионы заводов перепутаны; залог у Сбербанка", "now": "«Винербергер кирпич» — Владимирская обл., «Куркачи» — Татарстан; залог снят", "tag": "m035"}
+{"id": "g90317ad0", "field": "title", "class": "title_standard", "was": "Wienerberger продал заводы по производству кирпича в России холдингу АлфиГрупп", "now": "«АлфиГрупп» купил российские заводы Wienerberger", "tag": "m035"}
+{"id": "g4cac8db4", "field": "date", "class": "wrong_date", "was": "2024-02-01", "now": "2025-10-08 (срыв сделки)", "tag": "m035"}
+{"id": "g4cac8db4", "field": "law.appr", "class": "unsupported_claim", "was": "в марте 2024 рассчитывал на одобрение правкомиссии", "now": "Минпромторг: согласовано с опционом обратного выкупа", "tag": "m035"}
+{"id": "g4cac8db4", "field": "title", "class": "title_standard", "was": "Knauf не смогла продать российский бизнес по производству стройматериалов местному менеджменту", "now": "Покупатель отказался от покупки российского бизнеса Knauf", "tag": "m035"}
+{"id": "g90317ad0", "field": "date", "class": "wrong_date", "was": "2024-02-12 (нет ни в одном источнике)", "now": "2024", "tag": "m035"}
