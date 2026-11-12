@@ -391,119 +391,6 @@
    "pending_since": "2026-11-09T13:10:03+00:00"
   },
   {
-   "id": "g1c8087ad",
-   "date": "2023-08-14",
-   "title": "X5 Group купила «Виктория Балтия» (магазины «Виктория»)",
-   "ind": "Ритейл",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Телеграм-канал @alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/746"
-    ],
-    [
-     "ALUMNI Partners",
-     "https://alumnipartners.ru/news/alumni-partners-soprovozhdala-x5-group-v-proekte-po-priobreteniyu-seti-magazinov-viktoriya"
-    ],
-    [
-     "Интерфакс",
-     "https://www.interfax.ru/business/914249"
-    ],
-    [
-     "New Retail",
-     "https://new-retail.ru/novosti/retail/x5_group_zakryla_sdelku_po_pokupke_seti_viktoriya/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "Выручка «Виктория Балтия» за 2022 год — 40,9 млрд рублей, чистая прибыль — 846,6 млн рублей.",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "ФАС одобрила сделку при условии: часть торговых точек в Долгопрудном Московской области передали третьим лицам, раз доля X5 там и так превышала 25%, а на купленную компанию распространили прежние обязательства X5 не повышать наценку на отдельные продукты.",
-    "appr": "—",
-    "adv": [
-     [
-      "Юридический консультант покупателя",
-      "ALUMNI Partners",
-      "«Команда ALUMNI Partners выступила юридическим консультантом X5 Group в рамках сделки по покупке компании «Виктория Балтия»». Источник: alumnipartners.ru"
-     ]
-    ],
-    "terms": "—"
-   },
-   "asset": "«Виктория Балтия»: сети «Виктория» и «Дешево»",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2023-08-18",
-     "title": "Сделка завершена",
-     "note": "Юридическим консультантом X5 Group по сделке выступила компания ALUMNI Partners — помогала структурировать покупку с точки зрения недвижимости.",
-     "source": [
-      "Телеграм-канал @alumnipartnerslawfirm",
-      "https://t.me/alumnipartnerslawfirm/746"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "X5 Group",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/746"
-     }
-    ],
-    "target": [
-     {
-      "value": "«Виктория Балтия» (магазины «Виктория»)",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/746"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Сергей Студенников и Николай Тяка",
-      "field": "seller",
-      "method": "human_review",
-      "url": "https://t.me/alumnipartnerslawfirm/746"
-     }
-    ]
-   },
-   "buyer": "gddadfff8",
-   "pending_since": "2026-11-09T13:10:03+00:00",
-   "proofread_absorbed": {
-    "eco.target_fin": [],
-    "law.struct": []
-   },
-   "reviewed": "2026-11-12",
-   "target": "g72c0655b",
-   "accepted_notes": {
-    "no_profile": {
-     "seller": "продавцы — физлица (Сергей Студенников, Николай Тяка и другие совладельцы), профиль не заводится по правилу"
-    },
-    "no_inn": {
-     "target": "искали в rusprofile, list-org, companies.rbc.ru, saby.ru, прямым веб-поиском по названию — точного юрлица «Виктория Балтия» не нашли (возможно, после покупки X5 переименовала или слила его в свою структуру)"
-    },
-    "notes": "Цена сделки не раскрывалась ни одним из источников (Reuters/Moscow Times, Interfax, Kommersant, Vedomosti) — честный пропуск, не находка."
-   },
-   "accepted": "2026-11-12",
-   "accepted_hash": "98c02d4b22a7.8802f1",
-   "seller": "Сергей Студенников и Николай Тяка",
-   "date_basis": "registry",
-   "second_read": "2026-11-12",
-   "second_read_hash": "98c02d4b22a7.8802f1",
-   "draft_sent": true,
-   "post_draft_sent": true
-  },
-  {
    "id": "g0a1f1895",
    "date": "2024-05-27",
    "title": "Структура «ГЕМ Инвест» купила ООО «Моди» (сеть Modi)",
@@ -673,114 +560,7 @@
    "accepted": "2026-11-12",
    "accepted_hash": "c3db96ac7efc.d9cc1d",
    "second_read": "2026-11-12",
-   "second_read_hash": "c3db96ac7efc.d9cc1d"
-  },
-  {
-   "id": "gb7b2da31",
-   "date": "2025",
-   "title": "«Инвесттехцентр» купил долю GetCourse у «ВИМ Инвестиции»",
-   "ind": "ИТ и интернет",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Телеграм-канал @alumnipartnerslawfirm",
-     "https://t.me/alumnipartnerslawfirm/2309"
-    ],
-    [
-     "vc.ru",
-     "https://vc.ru/theedinorogblog/2247141-getcourse-vykupila-dolyu-u-vim-investitsiy"
-    ],
-    [
-     "ALUMNI Partners",
-     "https://alumnipartners.ru/news/alumni-partners-soprovozhdala-vyhod-fonda-pre-ipo-1-iz-kapitala-getcourse/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "Для фонда «ВИМ Инвестиции» это был полный выход из капитала GetCourse с доходностью 4,7х на вложенный капитал (Cash-on-Cash).",
-    "target_fin": "Основное юрлицо (ООО «Система Геткурс») закрыло 2024 год с оборотом 6,4 млрд рублей — плюс 32% к предыдущему году; с 2020 года цифра увеличилась десятикратно.",
-    "fin": "—",
-    "rationale": "—",
-    "context": "«ВИМ Инвестиции» (тогда — «ВТБ Капитал Управление Активами») впервые вошла в капитал GetCourse осенью 2020 года; в 2021-м часть пакета перекупил консорциум Goldman Sachs, Baring Vostok и Winter Capital. Остаток фонд держал последние несколько лет, а продал в итоге стороне, связанной с самим GetCourse: почти половина нового владельца, «Инвесттехцентра», принадлежит дочерней структуре GetCourse, оставшаяся доля — бывшему топ-менеджеру компании, Татьяне Коробовой. Переход доли к «Инвесттехцентру» прошел в августе 2025 года — ALUMNI Partners опубликовала пресс-релиз о своей роли в ней позже, 24 ноября.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [
-     [
-      "Юридический консультант покупателя",
-      "ALUMNI Partners",
-      "«Команда ALUMNI Partners выступила юридическим консультантом на стороне покупателя в рамках сделки по приобретению пакета в капитале GetCourse». Источник: alumnipartners.ru"
-     ]
-    ],
-    "terms": "—"
-   },
-   "seller": "Pre-IPO 1 (ВИМ Инвестиции)",
-   "asset": "Доля в GetCourse",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2025",
-     "title": "Сделка завершена",
-     "note": "Юридическим консультантом покупателя выступила ALUMNI Partners — готовила документы, вела переговоры и организовала подписание и закрытие сделки.",
-     "source": [
-      "Телеграм-канал @alumnipartnerslawfirm",
-      "https://t.me/alumnipartnerslawfirm/2309"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "IPO / SPO"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "пакет GetCourse",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/2309"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Pre-IPO 1 (ВИМ Инвестиции)",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/2309"
-     }
-    ]
-   },
-   "pending_since": "2026-11-09T13:10:03+00:00",
-   "proofread_absorbed": {
-    "eco.target_fin": [],
-    "eco.context": [
-     "3829fcdaf8e2"
-    ],
-    "eco.val": []
-   },
-   "reviewed": "2026-11-12",
-   "seller_id": "g17451b4f",
-   "buyer": "g511a2f75",
-   "target": "g30a74362",
-   "accepted_notes": {
-    "no_inn": {
-     "buyer": "компания создана в июне 2025 года специально под эту сделку — живой поиск ЕГРЮЛ по названию скрипт сделает сам; если не найдет (название общее, без организационно-правовой формы в источниках), оставить без ИНН",
-     "target": "GetCourse — бренд; юрлицо ООО «Система Геткурс» названо в источнике без ИНН, живой поиск ЕГРЮЛ скрипт сделает сам при записи"
-    },
-    "checked": {
-     "date_not_in_source": "источники (vc.ru, ALUMNI Partners) называют только месяц сделки — август 2025; второе чтение подтвердило, что 2025-11-24 был днем публикации пресс-релиза ALUMNI Partners, не днем сделки — дата откатана на год (2025), месяц перенесен в eco.context словами"
-    },
-    "notes": "Цена сделки не раскрыта — известна только доходность продавца (4,7х CoC), это честный пропуск, не находка."
-   },
-   "accepted": "2026-11-12",
-   "accepted_hash": "484db509f6b6.76b246",
-   "second_read": "2026-11-12",
-   "second_read_hash": "484db509f6b6.76b246",
+   "second_read_hash": "c3db96ac7efc.d9cc1d",
    "draft_sent": true,
    "post_draft_sent": true
   },
@@ -2545,6 +2325,42 @@
     "eco.val": []
    },
    "reviewed": "2026-11-12"
+  },
+  {
+   "id": "gf30ca8c1",
+   "date": "2026-11-12",
+   "title": "Сбербанк выставил на продажу ТРЦ «Город Лефортово» в Москве",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261112/trts-2131042248.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-12T08:54:50+00:00",
+   "from_raw": {
+    "draft_id": "d29660741",
+    "title": "Сбербанк выставил на продажу ТРЦ «Город Лефортово» в Москве"
+   }
   }
  ]
 }
