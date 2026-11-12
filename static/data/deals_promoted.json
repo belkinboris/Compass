@@ -179429,7 +179429,7 @@
    "title": "«Арнест» выкупает часть российского бизнеса Reckitt Benckiser",
    "ind": "Потребительские товары",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "Коммерсантъ",
@@ -179438,6 +179438,10 @@
     [
      "Inc. Russia",
      "https://incrussia.ru/news/arnest-priobretet-rossijskij-biznes-reckitt-po-proizvodstvu-bytovoj-himii/"
+    ],
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28311225"
     ]
    ],
    "from_ingest": true,
@@ -179468,6 +179472,20 @@
      "source": [
       "Mergers.ru",
       "https://mergers.ru/news/Arnest-vykupaet-chast-biznesa-Reckitt-Benckiser-87265"
+     ]
+    },
+    {
+     "id": "closed-2026-11-12",
+     "kind": "closed",
+     "date": "2026-11-12",
+     "title": "Сделка завершена",
+     "historicalTitle": "Группа «Арнест» купила российский бизнес Reckitt в сегменте бытовой химии",
+     "note": "Группа «Арнест» купила российский бизнес Reckitt в сегменте бытовой химии",
+     "sources": [
+      [
+       "ТАСС",
+       "https://tass.ru/ekonomika/28311225"
+      ]
      ]
     }
    ],
@@ -179511,13 +179529,13 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "92725277de89"
+     "card_hash": "529698fcab44"
     },
     "date": {
      "value": "2026-07-27",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "1b49b8ea41a8"
+     "card_hash": "b0a0424f76a6"
     },
     "nature": {
      "control_change": true,
@@ -179527,7 +179545,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a87a152c1b67"
+     "card_hash": "269aa90d6287"
     },
     "target": {
      "company_id": "g087c141d",
@@ -179563,7 +179581,17 @@
      "https://mergers.ru/news/Arnest-vykupaet-chast-biznesa-Reckitt-Benckiser-87265"
     ]
    ],
-   "gate_baseline_hash": "b6fc8d70bafe.e89d6a"
+   "gate_baseline_hash": "b6fc8d70bafe.e89d6a",
+   "fact_log": [
+    {
+     "field": "status",
+     "new": "Закрыта",
+     "quote": "Группа «Арнест» купила российский бизнес Reckitt в сегменте бытовой химии",
+     "url": "https://tass.ru/ekonomika/28311225",
+     "by": "card_news",
+     "date": "2026-11-12"
+    }
+   ]
   },
   {
    "id": "gmru-mariholodmash-borsky",
@@ -284512,6 +284540,289 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "gc3750bdb",
+   "date": "2026-11-09",
+   "title": "ГК «Ультиматек» купила половину петербургского ИТ-интегратора «АртАйТи»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+    ],
+    [
+     "Агентство Бизнес Новостей",
+     "https://abn.agency/2026/11/09/ultimatek-kupil-50-1s-integratora-artajti-za-300-mln-rublej/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "300 млн ₽ (по оценке)",
+    "share": "50% доли в ООО «Артайти групп»",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«АртАйТи» — петербургский интегратор, который помогает промышленным предприятиям переходить с немецкой системы SAP на российскую «1С». Переход непростой: по данным опроса SAPLand и Size Marketing, 58% компаний еще работают на SAP, а полностью заменили ее только 17%. Разница в цене заметная — сопровождение «1С» на крупном предприятии стоит около 20 млн рублей в год, SAP — до 100 млн. Миграция технически рискованная: системы устроены по-разному, и автоматический перенос кода ненадежен.\n\nУ «Ультиматека» уже были направления «1С», Global и «Галактика» и консалтинговое подразделение «Активо»; с этой сделкой у группы появилась своя команда, которая внедряет «1С:ERP» на промышленных предприятиях. Генеральный директор ГК «Ультиматек» Павел Растопшин объясняет объединение тем, что так можно ускорить самую долгую и дорогую часть проекта — обследование, подготовку и проектирование. На этих этапах объединенная команда будет использовать ИИ-агентов; по оценке сторон, это снизит трудозатраты на 30-50%. По прогнозу Gartner, к 2029 году доля проектов обновления программ с применением искусственного интеллекта дойдет до 90%.\n\nОснователь «АртАйТи» Виталий Мальцев считает, что союз с «Ультиматеком» поднимет методику его компании на новый уровень и поможет задать новые стандарты импортозамещения.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "50% капитала петербургского ИТ-интегратора «АртАйТи», который специализируется на переходе промышленных предприятий с SAP на «1С»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-09",
+     "title": "Сделка завершена",
+     "note": "ГК «Ультиматек» закрыла покупку 50% капитала петербургского интегратора «АртАйТи», который переводит промышленные предприятия с SAP на «1С». Стороны оценили сделку в 300 млн рублей. Объединенная команда будет использовать ИИ-агентов, чтобы ускорить самые трудоемкие этапы перехода предприятий с SAP на «1С».",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«УльтимаТек»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     }
+    ],
+    "target": [
+     {
+      "value": "«1С»-интегратора «АртАйТи»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Виталий Мальцев (90% → 40%); ООО «Ультиматек» — 50% с 09.11.2026; Андрей Сурков — 10% без изменений",
+      "method": "registry_owner_history",
+      "url": "https://egrul.nalog.ru (выписка 09.11.2026, ГРН 2267802871950)"
+     }
+    ]
+   },
+   "buyer": "gultimatekgroup01",
+   "sum": "300 млн ₽ (по оценке)",
+   "seller": "Виталий Мальцев",
+   "seller_src": "registry",
+   "reviewed": "2026-11-09",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Продавец — Виталий Мальцев, основатель «АртАйТи»: история участников ООО «Артайти групп» (datanewton, ОГРН 1127847397413) показывает, что по выписке ЕГРЮЛ от 09.11.2026 его доля снизилась с 90% до 40%, а ООО «Ультиматек» получило 50% — частное лицо, профиль не заводим. Отдельно: «Учредитель и издатель — ООО «Агентство Бизнес Новостей»» в источнике ABN — футер издания, не сторона сделки."
+    },
+    "no_inn": {
+     "seller": "физлицо — продавец Виталий Мальцев, ИНН человека не ищем"
+    },
+    "notes": "Повторная приемка 12 ноября 2026 после правки суммы «300 млн ₽ (по оценке сторон)» → «300 млн ₽ (по оценке)» (pipeline/ingest/fixes/artaiti_sum_note_2026_11_12.py; источник: «Стороны оценили сделку в 300 млн руб.»). ООО «1С-Битрикс» в тексте CNews — рекламодатель из рекламного блока «Профиль месяца» на странице издания («erid… Рекламодатель: ООО «1С-Битрикс» ИНН/ОГРН…»), не сторона и не предмет сделки. Вычитка eco.context (data/inbox/proofread/2026-11-12-gc3750bdb.json): по CNews «Теперь у группы есть и своя команда, внедряющая «1С:ERP»» — команда появилась с этой сделкой, а прежний текст говорил, что «Ультиматек» уже ею занимался; Global и «Галактика» — направления группы, а не бренды; у Gartner «до 90%», а не «90%». Второе чтение 12 ноября вернуло «fix» по eco.context: снижение трудозатрат на 30-50% — по оценке сторон, а не слова Растопшина (у CNews это текст редакции, у АБН — «по оценке партнеров»); слова Мальцева переданы ближе к смыслу (союз с «Ультиматеком» выводит методику «АртАйТи» на следующую ступень и задает новые стандарты импортозамещения); предложение про чужие проекты перехода с SAP («Полюс», «Росатом» и др.) снято; «закрывает контур ERP-внедрений» заменено простым «с этой сделкой у группы появилась своя команда». Правка — pipeline/archive/2026-11/artaiti_context_sr_2026_11_12.py (proofread.py не дает снять список имен).",
+    "searched": [
+     "CNews (текст в кэше) — прочитан целиком, сверены сумма, доля, стороны, цитаты Растопшина и Мальцева, данные SAPLand/Size Marketing и Gartner",
+     "ЕГРЮЛ: история участников ООО «Артайти групп» (ОГРН 1127847397413), выписка 09.11.2026 — из приемки 11 ноября"
+    ]
+   },
+   "accepted": "2026-11-12",
+   "accepted_hash": "a8fdf4ff9ca7.de5769",
+   "second_read": "2026-11-12",
+   "second_read_hash": "a8fdf4ff9ca7.de5769",
+   "shown_hash": "a8fdf4ff9ca7.de5769",
+   "target": "gartaitigroup",
+   "date_basis": "registry",
+   "proofread": "2026-11-12",
+   "post_preview": "<b>ГК «Ультиматек» купила половину петербургского ИТ-интегратора «АртАйТи»</b>\n\n<b>Покупатель:</b> ГК «Ультиматек» — интегратор индустриальных цифровых решений.\n<b>Продавец:</b> Виталий Мальцев\n<b>Предмет:</b> АртАйТи — петербургский интегратор «1С»: переводит промышленные предприятия с SAP на «1С». 50% доли в ООО «Артайти групп»\n<b>Сумма:</b> 300 млн ₽ (по оценке)\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-09_ultimatek_kupila_50_1s-integratora\">CNews</a>\nЕще 1 источник — в карточке сделки\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gc3750bdb\">карточке сделки</a>",
+   "added": "2026-11-12",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 50.0,
+     "basis": "rule",
+     "card_hash": "2015e0c01007"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "59485e6bc2b4"
+    },
+    "date": {
+     "value": "2026-11-09",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "d0b82c7a7eed"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "c418a84cf88f"
+    },
+    "target": {
+     "company_id": "gartaitigroup",
+     "inn": "7810877579",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "7ca85ba17b6b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "gf30ca8c1",
+   "date": "2026-11-12",
+   "title": "ТРЦ «Город Лефортово» в Москве выставлен на продажу за 8,63 млрд рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261112/trts-2131042248.html"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261112/investory-875173454.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "8,63 млрд ₽",
+    "share": "Лот — целиком юрлицо-владелец: здание (159 688 кв. м) и земля под ним (7,3 га) идут в комплекте, одной покупкой доли.",
+    "val": "—",
+    "target_fin": "По словам Сбербанка, актив стабилизирован и заметно нарастил чистый операционный доход. Эксперты считают стартовую цену справедливой при сроке окупаемости 8–9 лет.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "В ноябре 2023 года этот и еще пять торговых центров корпорации «Тэн» перешли Сбербанку в счет погашения долгов; теперь банк считает актив непрофильным и выставил его на торги, которые должны состояться в середине декабря. Покупатели на него уже есть, хотя круг тех, кто способен купить, узок: нужны крупные деньги и готовность проверять не только объект, но и обязательства владеющей им компании.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Продается не ТРЦ напрямую, а 100% долей ООО «Город Лефортово» — юрлица, на балансе которого стоит и комплекс, и права на землю.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "from_raw": {
+    "draft_id": "d29660741",
+    "title": "Сбербанк выставил на продажу ТРЦ «Город Лефортово» в Москве"
+   },
+   "asset": "ООО «Город Лефортово»",
+   "seller": "Сбербанк",
+   "sum": "8,63 млрд ₽",
+   "sum_basis": "auction_start",
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.target_fin": [
+     "1c7571c3ffab"
+    ],
+    "eco.context": [
+     "d68717ee00d3",
+     "68ef5a31ee6c"
+    ],
+    "law.struct": []
+   },
+   "reviewed": "2026-11-12",
+   "seller_id": "g28ff15bb",
+   "target": "g75378dfb",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "покупатель не раскрыт — торги еще не состоялись (назначены на середину декабря 2026 года), участники неизвестны"
+    },
+    "no_inn": {
+     "target": "ИНН ООО «Город Лефортово» не найден: прямой запрос к ЕГРЮЛ не прошел (сетевая ошибка через прокси, egrul.nalog.ru), EMIS показывает профиль компании (создана 4 июля 2023, адрес Энтузиастов 12 стр.2) без ИНН в открытой части, rusprofile.ru и list-org карточку по точному имени не отдали, WebSearch по ИНН/ОГРН тоже не дал результата"
+    },
+    "notes": "искали ИНН ООО «Город Лефортово»: EMIS (создана 4 июля 2023, адрес Энтузиастов 12 стр.2, ИНН не раскрыт в открытой части), rusprofile.ru и list-org — карточки по точному имени не нашли, WebSearch по ИНН/ОГРН тоже не дал результата; пусть скрипт попробует бесплатный поиск ЕГРЮЛ по точному имени."
+   },
+   "accepted": "2026-11-12",
+   "accepted_hash": "57d10ef1d5f8.13220d",
+   "second_read": "2026-11-12",
+   "second_read_hash": "57d10ef1d5f8.13220d",
+   "post_preview": "<b>ТРЦ «Город Лефортово» в Москве выставлен на продажу за 8,63 млрд рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Сбербанк\n<b>Предмет:</b> «Город Лефортово» — торгово-развлекательный центр на востоке Москвы (159 688 кв. м), построен корпорацией «Тэн» в 2009 году.\n<b>Сумма:</b> 8,63 млрд ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261112/trts-2131042248.html\">РИА Недвижимость</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gf30ca8c1\">карточке сделки</a>\n",
+   "added": "2026-11-12",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "c8a86148f840"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "065cf4e2cb23"
+    },
+    "date": {
+     "value": "2026-11-12",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "67477016e73d"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "8bbef0d9ac0a"
+    },
+    "target": {
+     "company_id": "g75378dfb",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "a538fd501d93"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed"
     }
    }
   }
