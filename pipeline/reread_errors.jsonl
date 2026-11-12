@@ -78,3 +78,49 @@
 {"id": "ge1fbcfb8", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-12-03 (ЕГРЮЛ)", "tag": "m003"}
 {"id": "ge1fbcfb8", "field": "profile.desc", "class": "profile_text", "was": "купила в 2023 году", "now": "2024 год, «Оптиком» 20%", "tag": "m003"}
 {"id": "ge1fbcfb8", "field": "eco.share", "class": "other", "was": "описание компании", "now": "все доли общества", "tag": "m003"}
+{"id": "g8dfb3aa0", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Закрыта (ЕГРЮЛ 06.03.2026)", "tag": "m005"}
+{"id": "g8dfb3aa0", "field": "date", "class": "wrong_date", "was": "2026-02-20 (публикация)", "now": "2026-03-06", "tag": "m005"}
+{"id": "g8dfb3aa0", "field": "ind", "class": "wrong_industry", "was": "Пищепром и напитки", "now": "Производство тары", "tag": "m005"}
+{"id": "g8dfb3aa0", "field": "extra", "class": "unsupported_claim", "was": "«в стадии закрытия»", "now": "—", "tag": "m005"}
+{"id": "g8dfb3aa0", "field": "title", "class": "title_standard", "was": "покупает курского производителя этикеток", "now": "купил «Лейблпак»", "tag": "m005"}
+{"id": "g003e4867", "field": "sum", "class": "sum_meaning", "was": "3,5–6 млрд ₽", "now": "3,5–6 млрд ₽ (по оценке NF Group)", "tag": "m005"}
+{"id": "g003e4867", "field": "asset", "class": "wrong_target", "was": "нет предмета / «жилой проект»", "now": "часть проекта «Рублевские кварталы»", "tag": "m005"}
+{"id": "g003e4867", "field": "date", "class": "wrong_date", "was": "2025-09-16 (публикация)", "now": "2025", "tag": "m005"}
+{"id": "g003e4867", "field": "eco.context", "class": "version_as_fact", "was": "«продажа объясняется» без автора", "now": "мнение Тимура Рывкина (Nikoliers)", "tag": "m005"}
+{"id": "g003e4867", "field": "title", "class": "title_standard", "was": "Самолет продала проект", "now": "Брусника купила часть проекта", "tag": "m005"}
+{"id": "g6ccd4122", "field": "law.struct", "class": "foreign_fact", "was": "сведения о покупателе из статьи 2023 года", "now": "механика: долю продало ООО «Медиа Инвест»", "tag": "m005"}
+{"id": "g6ccd4122", "field": "eco.context", "class": "other", "was": "«новый совладелец» ПИФ СВБ без даты", "now": "июнь 2025 года", "tag": "m005"}
+{"id": "g6ccd4122", "field": "eco.rationale", "class": "language", "was": "«сам шаг»", "now": "«продажа доли»", "tag": "m005"}
+{"id": "g6ccd4122", "field": "title", "class": "title_standard", "was": "продала … компании АО «Кубера»", "now": "АО «Кубера» купило 51% NMi Group", "tag": "m005"}
+{"id": "g52b8df38", "field": "extra", "class": "wrong_target", "was": "20% акций ООО «Спецзастройщик»", "now": "финансирование 7 млрд ₽, ключи в 2027", "tag": "m005"}
+{"id": "g52b8df38", "field": "eco.rationale", "class": "version_as_fact", "was": "«Эксперты считают» без имени", "now": "только названные аналитики", "tag": "m005"}
+{"id": "g52b8df38", "field": "title", "class": "title_standard", "was": "приобрел 20% в девелопере проекта", "now": "купил 20% ООО «„ЗаСтрой“ Спецзастройщик»", "tag": "m005"}
+{"id": "g162c155f", "field": "buyer", "class": "wrong_buyer", "was": "ООО «Мастерфуд»", "now": "Мехрубон Садыков (ЕГРЮЛ)", "tag": "m005"}
+{"id": "g162c155f", "field": "sum", "class": "sum_meaning", "was": "≈5 млрд ₽", "now": "5 млрд ₽ (по оценке)", "tag": "m005"}
+{"id": "g162c155f", "field": "eco.context", "class": "version_as_fact", "was": "«новому владельцу грозит рост себестоимости»", "now": "снято", "tag": "m005"}
+{"id": "g162c155f", "field": "eco.target_fin", "class": "language", "was": "«Сама Biennale Group…» и история в финансах", "now": "только финансы", "tag": "m005"}
+{"id": "gbb9adb9d", "field": "sum", "class": "sum_meaning", "was": "1,8–2 млрд ₽ (EV до дисконта)", "now": "Не раскрыта", "tag": "m005"}
+{"id": "gbb9adb9d", "field": "ind", "class": "wrong_industry", "was": "Химия и удобрения", "now": "Строительство", "tag": "m005"}
+{"id": "gbb9adb9d", "field": "asset", "class": "wrong_target", "was": "предмета нет", "now": "ООО «Рока Рус» и ООО «Акватон Рус»", "tag": "m005"}
+{"id": "gbb9adb9d", "field": "eco.context", "class": "wrong_buyer", "was": "прошлые покупки приписаны «Миру керамики»", "now": "их сделал владелец Алексей Филин", "tag": "m005"}
+{"id": "gbb9adb9d", "field": "title", "class": "title_standard", "was": "Roca Group продала …", "now": "«Мир керамики» купил …", "tag": "m005"}
+{"id": "g5801d5b9", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Benteler Automobiltechnik GmbH", "tag": "m005"}
+{"id": "g5801d5b9", "field": "extra", "class": "unsupported_claim", "was": "Горлов — гендиректор обеих компаний и единственный владелец", "now": "снято", "tag": "m005"}
+{"id": "g5801d5b9", "field": "eco.rationale", "class": "invented_rationale", "was": "«второй немецкий производитель» как цель", "now": "—", "tag": "m005"}
+{"id": "g5801d5b9", "field": "title", "class": "title_standard", "was": "приобрел калужский завод", "now": "купил «Бентелер Аутомотив» у Benteler", "tag": "m005"}
+{"id": "gbdd4f990", "field": "eco.val", "class": "version_as_fact", "was": "оценка 650 млн ₽ без источника", "now": "с оговоркой и оценкой аналитика «Регблока»", "tag": "m005"}
+{"id": "gbdd4f990", "field": "title", "class": "title_standard", "was": "приобрел контроль в производителе", "now": "купил 56,25% «Звезды»", "tag": "m005"}
+{"id": "gd4c470d0", "field": "seller", "class": "wrong_seller", "was": "продавец пуст", "now": "Marelli Automotive Lighting Reutlingen", "tag": "m005"}
+{"id": "gd4c470d0", "field": "extra", "class": "unsupported_claim", "was": "30% у ООО «Кью Кэпитал»", "now": "30% у Елены Орловой", "tag": "m005"}
+{"id": "gd4c470d0", "field": "law.adv", "class": "adviser_wrong", "was": "Носкова — антимонопольное согласование", "now": "юрист практики корпоративного права; разрешение Правкомиссии", "tag": "m005"}
+{"id": "gd4c470d0", "field": "law.appr", "class": "other", "was": "Публично не сообщалось", "now": "требовалось разрешение Правительственной комиссии", "tag": "m005"}
+{"id": "gd4c470d0", "field": "title", "class": "title_standard", "was": "приобрела завод … в Рязани", "now": "купил «Марелли Аутомотив Лайтинг Рус»", "tag": "m005"}
+{"id": "g69437311", "field": "sum", "class": "sum_meaning", "was": "150–250 млн ₽", "now": "150–250 млн ₽ (по оценке)", "tag": "m005"}
+{"id": "g69437311", "field": "title", "class": "title_standard", "was": "приобрел 100% долей компании", "now": "купил «Простые правила»", "tag": "m005"}
+{"id": "gb4923dfc", "field": "sum", "class": "sum_meaning", "was": "6 млрд ₽ (оценка Infoline)", "now": "Не раскрыта", "tag": "m005"}
+{"id": "gb4923dfc", "field": "title", "class": "title_standard", "was": "Home Shopping Europe продала … Илье Кирику", "now": "«К2 Инвест» купил Shopping Live", "tag": "m005"}
+{"id": "gb4923dfc", "field": "profile", "class": "profile_text", "was": "«за 6 млрд ₽» в описаниях профилей", "now": "снято", "tag": "m005"}
+{"id": "gf7e349aa", "field": "seller", "class": "wrong_seller", "was": "Лев Гориловский через ООО «СИГП»", "now": "ООО «СИГП»", "tag": "m005"}
+{"id": "gf7e349aa", "field": "extra", "class": "unsupported_claim", "was": "СИГП до сделки 90%", "now": "снято", "tag": "m005"}
+{"id": "gf7e349aa", "field": "eco.target_fin", "class": "other", "was": "род занятий в финансах", "now": "объем продаж ~100 млрд ₽", "tag": "m005"}
+{"id": "gf7e349aa", "field": "title", "class": "title_standard", "was": "приобрел 25% доли в ГК", "now": "купил 25% «Полипластика»", "tag": "m005"}
