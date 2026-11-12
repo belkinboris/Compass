@@ -707,45 +707,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d18962904",
-   "title": "Россияне поделились планами на распродажи",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/12/rossiyane-podelilis-planami-na-rasprodazhi/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-12",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/11/12/rossiyane-podelilis-planami-na-rasprodazhi/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
