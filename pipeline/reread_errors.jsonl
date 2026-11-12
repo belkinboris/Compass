@@ -813,3 +813,41 @@
 {"id": "g941f2b2b", "field": "extra", "class": "unsupported_claim", "was": "«инвестировав 15 млрд ₽» — стоимость реконструкции выдана за вложения покупателя", "now": "пять корсаковских компаний", "tag": "m030"}
 {"id": "g941f2b2b", "field": "eco.context", "class": "foreign_fact", "was": "реконструкция 2025–2026 годов за счет бюджета", "now": "порт и договоренность с «Росатомом»", "tag": "m030"}
 {"id": "g941f2b2b", "field": "title", "class": "title_standard", "was": "Группа компаний «Дело» приобрела контроль в Корсаковском морском торговом порту", "now": "«Логин Дело» купило 64,26% «Корсаковского морского торгового порта»", "tag": "m030"}
+{"id": "g4b275e25", "field": "law.adv", "class": "adviser_wrong", "was": "CLS — консультант продавца", "now": "снят: CLS — место работы учредителей продавца", "tag": "m025"}
+{"id": "g4b275e25", "field": "eco.context", "class": "verbatim", "was": "первое предложение — копия «Ведомостей»", "now": "пересказ + у кого купила «Кэпитал менеджмент»", "tag": "m025"}
+{"id": "g4b275e25", "field": "target.desc", "class": "profile_text", "was": "в 2024 году купила на аукционе", "now": "в апреле 2025 года на торгах", "tag": "m025"}
+{"id": "g99448cd9", "field": "extra", "class": "unsupported_claim", "was": "выкуплены четыре юрлица", "now": "куплено по 30%", "tag": "m025"}
+{"id": "g99448cd9", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024", "tag": "m025"}
+{"id": "g99448cd9", "field": "title", "class": "title_standard", "was": "приобрела ... с земельным банком 150 тыс. га", "now": "купила по 30% в четырех агрокомпаниях", "tag": "m025"}
+{"id": "g99448cd9", "field": "eco.rationale", "class": "invented_rationale", "was": "расширяет земельный банк (стороны не комментировали)", "now": "—", "tag": "m025"}
+{"id": "g99448cd9", "field": "law.appr", "class": "version_as_fact", "was": "вместе с имевшимися долями это дало 100%", "now": "ФАС разрешила купить 70%", "tag": "m025"}
+{"id": "g2668950b", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024-12-19 (ЕГРЮЛ)", "tag": "m025"}
+{"id": "g2668950b", "field": "eco.context", "class": "version_as_fact", "was": "причина — регулирование ЦБ; не намерен развивать актив", "now": "версия аналитика снята, позиция ВТБ по его заявлению", "tag": "m025"}
+{"id": "g2668950b", "field": "eco.val", "class": "unsupported_claim", "was": "бизнес стоит больше 100 млрд, 242 тыс. га, 67 млрд — без автора", "now": "оценка BGP Capital с автором", "tag": "m025"}
+{"id": "g2668950b", "field": "extra", "class": "unsupported_claim", "was": "купило 100%; стратегию менять не планирует", "now": "стало владельцем; команда не менялась", "tag": "m025"}
+{"id": "g2668950b", "field": "title", "class": "title_standard", "was": "ВТБ приобрела", "now": "ВТБ купил", "tag": "m025"}
+{"id": "g576de71f", "field": "extra", "class": "wrong_target", "was": "12,5% в ООО «Моторика»", "now": "12,5% в МК ООО «Хомо Ауктус»", "tag": "m025"}
+{"id": "g576de71f", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024", "tag": "m025"}
+{"id": "g84a06224", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024-12-20 (ЕГРЮЛ)", "tag": "m025"}
+{"id": "g84a06224", "field": "eco.context", "class": "aggregator_source", "was": "по данным ADPASS (со ссылкой на «Коммерсантъ»)", "now": "без пресс-атрибуции", "tag": "m025"}
+{"id": "g84a06224", "field": "eco.share", "class": "other", "was": "описание хода сделки", "now": "100% долей трех ООО", "tag": "m025"}
+{"id": "g211615eb", "field": "eco.sum", "class": "wrong_sum", "was": "807 млн ₽ деньгами плюс доля 4,9%...", "now": "807 млн ₽", "tag": "m025"}
+{"id": "g211615eb", "field": "eco.rationale", "class": "language", "was": "«Сделка.» обрывок", "now": "мотив по отчетности МТС", "tag": "m025"}
+{"id": "g211615eb", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024", "tag": "m025"}
+{"id": "g5160d16f", "field": "buyer", "class": "wrong_buyer", "was": "Банк «Точка» (ООО «Банк Точка»)", "now": "АО «Точка» (ЕГРЮЛ, ComNews)", "tag": "m025"}
+{"id": "g5160d16f", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024-12-10 (ЕГРЮЛ)", "tag": "m025"}
+{"id": "g5160d16f", "field": "sum", "class": "sum_meaning", "was": "300–350 млн ₽ как цена", "now": "300–350 млн ₽ (по оценке): неофициальные данные", "tag": "m025"}
+{"id": "g5160d16f", "field": "ind", "class": "wrong_industry", "was": "Банки", "now": "Финтех", "tag": "m025"}
+{"id": "g2c9ecddc", "field": "eco.context", "class": "foreign_fact", "was": "основатели Хусид и Шардин (это основатели Miro)", "now": "снято", "tag": "m025"}
+{"id": "g2c9ecddc", "field": "date", "class": "wrong_date", "was": "2024-12-01", "now": "2024-12-03", "tag": "m025"}
+{"id": "gff20fb8d", "field": "extra", "class": "wrong_target", "was": "Крапивин выкупил 100% акций Highway Operations B.V.", "now": "доли ОССП перешли Крапивину, затем АО «ГК НПС»", "tag": "m025"}
+{"id": "gff20fb8d", "field": "date", "class": "wrong_date", "was": "2025-01-22 (день статьи)", "now": "2025-01-20 (ЕГРЮЛ)", "tag": "m025"}
+{"id": "gff20fb8d", "field": "title", "class": "title_standard", "was": "выкупил 50% акций Highway Operations B.V..., став единоличным владельцем ОССП", "now": "купил 50% ОССП у Vinci", "tag": "m025"}
+{"id": "gf217e953", "field": "eco.context", "class": "unsupported_claim", "was": "братья Амаряны; доля в «Пулково»; дочка Goldman Sachs", "now": "владельцы Амарян и Орусь; БЦ «Пулково Скай»; Goldman Sachs снят", "tag": "m025"}
+{"id": "gf217e953", "field": "eco.rationale", "class": "other", "was": "представитель «Радуги» подан как представитель фонда", "now": "перенесено в extra с правильной атрибуцией", "tag": "m025"}
+{"id": "gf217e953", "field": "law.adv", "class": "adviser_wrong", "was": "Юридический консультант (без клиента)", "now": "Юридический консультант покупателя (Balchug Capital)", "tag": "m025"}
+{"id": "g81a22b7c", "field": "extra", "class": "unsupported_claim", "was": "АФК «Система» 77,5% и «КРАУНИНВЕСТ» 22,5%; бывший замглавы Росрыболовства", "now": "снято", "tag": "m025"}
+{"id": "g81a22b7c", "field": "eco.rationale", "class": "invented_rationale", "was": "история сборки холдинга АФК как цель", "now": "—", "tag": "m025"}
+{"id": "ge945a8e1", "field": "sum", "class": "sum_meaning", "was": "7 млрд ₽ (по оценке) — оценка всей компании как цена 50%", "now": "Не раскрыта", "tag": "m025"}
+{"id": "ge945a8e1", "field": "title", "class": "title_standard", "was": "Росатом планирует купить (при статусе «Не состоялась»)", "now": "«Росатом» не купил 50% Future Technologies", "tag": "m025"}
+{"id": "ge945a8e1", "field": "law.appr", "class": "other", "was": "Публично не сообщалось", "now": "на согласовании ФАС (РБК)", "tag": "m025"}
