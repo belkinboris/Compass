@@ -227,3 +227,51 @@
 {"id": "g6304cf91", "field": "sum", "class": "sum_meaning", "was": "498,14 млн ₽", "now": "498,14 млн ₽ (по оценке)", "tag": "m011"}
 {"id": "g6304cf91", "field": "eco.fin", "class": "other", "was": "план ГОКа в «Форме расчетов»", "now": "в контекст", "tag": "m011"}
 {"id": "g6304cf91", "field": "title", "class": "title_standard", "was": "Highland Gold продала 24,9% доли в месторождении…", "now": "Фонды УК «Восхождение» купили 24,9% ООО «Клен» у «Ареала»", "tag": "m011"}
+{"id": "g8f638d63", "field": "date", "class": "wrong_date", "was": "2023-03-31 (день сообщения компании)", "now": "2023-08-24 (ЕГРЮЛ)", "tag": "m007"}
+{"id": "g8f638d63", "field": "title", "class": "title_standard", "was": "Новосталь-М приобрела металлотрейдера…", "now": "Холдинг «Новосталь-М» купил «Ариэль Металл»", "tag": "m007"}
+{"id": "g8f638d63", "field": "eco.share", "class": "wrong_share", "was": "описание компании", "now": "100% акций АО «Ариэль Металл» и контроль над АМД и Вольфагролес", "tag": "m007"}
+{"id": "g8f638d63", "field": "extra", "class": "other", "was": "повтор согласования", "now": "—", "tag": "m007"}
+{"id": "g96da922c", "field": "date", "class": "wrong_date", "was": "2024-05-01", "now": "2024-05-17", "tag": "m007"}
+{"id": "g96da922c", "field": "title", "class": "title_standard", "was": "Danone продала… Health & Nutrition компании «Вамин Р»", "now": "«Вамин Р» купил российский бизнес Danone", "tag": "m007"}
+{"id": "g96da922c", "field": "law.struct", "class": "unsupported_claim", "was": "доплатить 9,9 млрд; долг закрыла сама", "now": "схема 17,7/7,7 млрд по FT", "tag": "m007"}
+{"id": "g96da922c", "field": "eco.rationale", "class": "invented_rationale", "was": "оценка аналитика как цель", "now": "—", "tag": "m007"}
+{"id": "g96da922c", "field": "law.appr", "class": "unsupported_claim", "was": "правкомиссия; 23 марта", "now": "22 марта, Минсельхоз", "tag": "m007"}
+{"id": "g96da922c", "field": "extra", "class": "unsupported_claim", "was": "пошлина 10%, 106 млрд, 23 марта", "now": "снято", "tag": "m007"}
+{"id": "g7d64b437", "field": "sum", "class": "sum_meaning", "was": "10–15 млрд ₽ (подзаголовок)", "now": "Не раскрыта; диапазон в оценке", "tag": "m007"}
+{"id": "g7d64b437", "field": "eco.val", "class": "unsupported_claim", "was": "EV 12 млрд ₽", "now": "снято", "tag": "m007"}
+{"id": "g7d64b437", "field": "eco.share", "class": "wrong_share", "was": "описание компании", "now": "100% акций АО «НПФ «Микран»»", "tag": "m007"}
+{"id": "g7d64b437", "field": "title", "class": "title_standard", "was": "…НПМ «Микран» у «Газпром Тех»", "now": "«ИКС Холдинг» купил НПФ «Микран»", "tag": "m007"}
+{"id": "gd21bbce8", "field": "title", "class": "title_standard", "was": "Совладельцы Merlion приобрели…", "now": "«Бюрократ» купил «Натиксис банк» у Natixis", "tag": "m007"}
+{"id": "gd21bbce8", "field": "eco.share", "class": "wrong_share", "was": "владельцы покупателя", "now": "100% акций АО «Натиксис банк»", "tag": "m007"}
+{"id": "gd21bbce8", "field": "extra", "class": "unsupported_claim", "was": "дисконт 70–90% к капиталу", "now": "дисконт по подсчету Ъ, в оценку", "tag": "m007"}
+{"id": "gd21bbce8", "field": "law.struct", "class": "foreign_fact", "was": "присоединение 2026 года как структура сделки", "now": "в контекст", "tag": "m007"}
+{"id": "g8bbbc262", "field": "extra", "class": "unsupported_claim", "was": "продавца связывают с Дмитрием Маматовым", "now": "снято", "tag": "m007"}
+{"id": "g8bbbc262", "field": "eco.context", "class": "verbatim", "was": "8 слов подряд Ъ", "now": "пересказ", "tag": "m007"}
+{"id": "gac4491d6", "field": "sum", "class": "sum_meaning", "was": "30–40 млрд ₽ (оценки консультантов)", "now": "Не раскрыта", "tag": "m007"}
+{"id": "gac4491d6", "field": "date", "class": "wrong_date", "was": "2024-05-01", "now": "2024-05-28", "tag": "m007"}
+{"id": "gac4491d6", "field": "title", "class": "other", "was": "Фонд «Кама капитал»", "now": "Холдинг «Кама Капитал»", "tag": "m007"}
+{"id": "gac4491d6", "field": "law.adv", "class": "adviser_wrong", "was": "нет Б1", "now": "Б1 — консультант покупателя", "tag": "m007"}
+{"id": "gac4491d6", "field": "law.appr", "class": "other", "was": "только правкомиссия", "now": "подкомиссия и ФАС", "tag": "m007"}
+{"id": "g1437f510", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-04-26 (ЕГРЮЛ)", "tag": "m007"}
+{"id": "g1437f510", "field": "title", "class": "title_standard", "was": "Тольятти Инвест приобрел 100%…", "now": "«Тольятти Инвест» купил «Джей Ви Системз» у АвтоВАЗа", "tag": "m007"}
+{"id": "g1437f510", "field": "eco.rationale", "class": "invented_rationale", "was": "заметка из отчетности предмета", "now": "—", "tag": "m007"}
+{"id": "g1437f510", "field": "eco.share", "class": "wrong_share", "was": "описание компании", "now": "100% доли в ООО «Джей Ви Системз»", "tag": "m007"}
+{"id": "g7edd263c", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "ГК ПИК", "tag": "m007"}
+{"id": "g7edd263c", "field": "title", "class": "title_standard", "was": "ERA Capital инвестировала в Rubetek 1,5 млрд рублей", "now": "ERA Capital купил 45% Rubetek у ПИК", "tag": "m007"}
+{"id": "g7edd263c", "field": "law.struct", "class": "language", "was": "«сам ПИК»", "now": "переписано", "tag": "m007"}
+{"id": "ge760cc08", "field": "date", "class": "wrong_date", "was": "2023", "now": "2025", "tag": "m007"}
+{"id": "ge760cc08", "field": "sum", "class": "unsupported_claim", "was": "30 млн ₽", "now": "Не раскрыта", "tag": "m007"}
+{"id": "ge760cc08", "field": "extra", "class": "foreign_fact", "was": "весной, Пронин, форматы (похоже на Picvario)", "now": "снято", "tag": "m007"}
+{"id": "ge760cc08", "field": "target", "class": "profile_text", "was": "агротех-стартап", "now": "интеграционная платформа", "tag": "m007"}
+{"id": "gfbf1350d", "field": "eco.context", "class": "foreign_fact", "was": "оценка 500 млн и ангелы из раунда 2026 года", "now": "подписаны как следующий раунд", "tag": "m007"}
+{"id": "gfbf1350d", "field": "title", "class": "title_standard", "was": "…инвестировали в сеть складов", "now": "Rein Capital купил долю…", "tag": "m007"}
+{"id": "gd9c4a5eb", "field": "sum", "class": "sum_meaning", "was": "$6 млн (оценка 100%)", "now": "Не раскрыта", "tag": "m007"}
+{"id": "gd9c4a5eb", "field": "extra", "class": "version_as_fact", "was": "оценка $6 млн как факт", "now": "догадка Dsight в оценке", "tag": "m007"}
+{"id": "gd9c4a5eb", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "четыре участника по ЕГРЮЛ", "tag": "m007"}
+{"id": "gd9c4a5eb", "field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка 2024–2025", "now": "снято", "tag": "m007"}
+{"id": "gd9c4a5eb", "field": "date", "class": "wrong_date", "was": "2024-04-09", "now": "2024-04-05 (ЕГРЮЛ)", "tag": "m007"}
+{"id": "g167e415a", "field": "date", "class": "wrong_date", "was": "2024-05-15", "now": "2024-02-06", "tag": "m007"}
+{"id": "g167e415a", "field": "sum", "class": "wrong_sum", "was": "3–10 млрд ₽ (план)", "now": "4,2 млрд ₽", "tag": "m007"}
+{"id": "g167e415a", "field": "target", "class": "wrong_target", "was": "профиль «Делимобиля» = ООО «Делимобиль Холдинг»", "now": "ПАО «Каршеринг Руссия» (эмитент)", "tag": "m007"}
+{"id": "g167e415a", "field": "target", "class": "profile_text", "was": "имя «Делимобиля»", "now": "«Делимобиль»", "tag": "m007"}
+{"id": "g167e415a", "field": "extra", "class": "wrong_status", "was": "IPO «планировалось»", "now": "итоги IPO", "tag": "m007"}
