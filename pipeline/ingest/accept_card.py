@@ -124,8 +124,13 @@ SHARE_FORM_RE = re.compile(
     # «До 100% акций МКПАО «Циан»» — доля добровольного предложения: оферта на
     # покупку ДО N% акций, итог зависит от того, сколько акционеров ее примут
     # (g637fe00a, 6 ноября 2026: «100% акций» выдавало верхнюю границу за итог).
-    r'\s*(?:до\s+)?(?:\d+(?:[.,]\d+)?\s*%(?:\s*(?:плюс|\+)\s*(?:1|одна)\s*акци\w*)?|контрольн\w+|контролирующ\w+|блокирующ\w+|миноритарн\w+)'
-    r'\s+(?:доли|долей|акций|пакет\w*\s+акций)\s+(?:в\s+)?(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«', re.I)
+    r'\s*(?:(?:до\s+)?(?:\d+(?:[.,]\d+)?\s*%(?:\s*(?:плюс|\+)\s*(?:1|одна)\s*акци\w*)?|контрольн\w+|контролирующ\w+|блокирующ\w+|миноритарн\w+)'
+    r'\s+(?:доли|долей|акций|пакет\w*\s+акций)'
+    # размер доли источники не называют — «Доля в ООО «X»» / «Акции АО «X»» (12 ноября 2026, ВТС)
+    r'|доля|акции|пакет\s+акций)\s+(?:в\s+)?(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«', re.I)
+LEGAL_NAME_HEAD = re.compile(r'(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«')
+# «ООО «ВТС» — поставщик медицинского оборудования…»: имя и следом описание через тире.
+ASSET_NAME_THEN_DESCRIPTION = re.compile(r'»\s+[—–]\s+[а-яё]')
 PLAIN_WORDS_RE = re.compile(
     r'(?<![\wа-яё])в\s+минусе(?![\wа-яё])|теря\w*\s+деньги|(?<![\wа-яё])сам(?:а|о|и)?(?![\wа-яё])'
     r'|не\s+раскрыва\w+\s+в\s+силу|(?:^|\.\s+)(?:Покупка|Продажа)\s+всех\s+долей'
@@ -1283,6 +1288,11 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if review.ASSET_IS_A_DESCRIPTION.search(asset):
             out.append(('asset_description', 'предмет — описание, а не имя компании: %r — найдите юрлицо '
                                           '(реестр, сайт компании, другие издания)' % asset))
+        elif ASSET_NAME_THEN_DESCRIPTION.search(asset) and 'asset_description' not in checked:
+            # Владелец, 12 ноября 2026 (ВТС): «откуда тут описание?» — у предмета только имя
+            # общества; чем оно занимается — в «Контекст».
+            out.append(('asset_description', 'в предмете после имени стоит описание: %r — оставьте имя общества, '
+                                          'описание перенесите в контекст' % asset[:90]))
     if not (card.get('target') or card.get('asset_id') or has(asset)) \
             and card.get('type') in ('M&A', 'Продажа с торгов', 'Инвестиция') and 'target' not in waived:
         out.append(('asset_missing', 'предмет сделки не назван (ни профиль, ни текст) — найдите, что именно '
@@ -1684,6 +1694,14 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     comps_ = base.get('companies') or {}
     tgt = comps_.get(card.get('target') or '') or {}
     share_v = str((card.get('eco') or {}).get('share') or '')
+    # Профиля предмета нет (ИНН не нашли), но общество названо в тексте предмета — правило то же:
+    # 12 ноября 2026 карточка ВТС прошла приемку с «Доля: —» и описанием вместо предмета,
+    # потому что проверка смотрела только на профиль.
+    named = tgt.get('legal_short') or (LEGAL_NAME_HEAD.search(str(card.get('asset') or '')) and str(card.get('asset')).split(' — ')[0].strip())
+    if card.get('type') == 'M&A' and named and not has(share_v) and not tgt.get('legal_short') \
+            and 'share_form' not in checked and 'share_missing' not in checked:
+        out.append(('share_missing', 'предмет не записан долей в обществе (eco.share пуст): «100%% доли в %s»; '
+                    'размер не назван — «Доля в %s»' % (named, named)))
     if card.get('type') == 'M&A' and tgt.get('legal_short') and has(share_v) \
             and not SHARE_FORM_RE.match(share_v) and 'share_form' not in checked:
         out.append(('share_form', 'eco.share %r — предмет пишется долей в обществе: «100%% доли в %s» '
