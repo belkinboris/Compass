@@ -651,3 +651,39 @@
 {"id": "g7bc4ff53", "field": "extra", "class": "invented_rationale", "was": "чтобы ответить на спрос профильных клиентов", "now": "снято, по Frank Media", "tag": "m024"}
 {"id": "g7bc4ff53", "field": "ind", "class": "wrong_industry", "was": "Банки", "now": "ИТ и интернет", "tag": "m024"}
 {"id": "g7bc4ff53", "field": "src", "class": "aggregator_source", "was": "Frank Media первым", "now": "Ведомости первыми", "tag": "m024"}
+{"id": "gfa1163ce", "field": "title", "class": "title_standard", "was": "Леонид Федун продал 10% акций Лукойла компании", "now": "«Лукойл» купил 10% своих акций у Леонида Федуна", "tag": "m023"}
+{"id": "gfa1163ce", "field": "eco.val", "class": "language", "was": "«ни сам Федун»", "now": "«ни Федун»", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "law.struct", "class": "verbatim", "was": "копия абзаца Ведомостей", "now": "пересказ", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "eco.context", "class": "verbatim", "was": "копия описания клиники", "now": "пересказ", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "extra", "class": "unsupported_claim", "was": "«Хадасса», «частные лица из строительного бизнеса»", "now": "снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "buyer", "class": "profile_text", "was": "Павел Харанек", "now": "Павел Харанека", "tag": "m023"}
+{"id": "g1cc071e4", "field": "title", "class": "title_standard", "was": "Павел Харанек приобрел…", "now": "Павел Харанека купил…", "tag": "m023"}
+{"id": "g1cc071e4", "field": "sum", "class": "sum_meaning", "was": "4–10 млн $ (оценки аналитиков)", "now": "Не раскрыта", "tag": "m023"}
+{"id": "g1cc071e4", "field": "eco.context", "class": "unsupported_claim", "was": "Broadsmart строит элитное жилье; «без признаков повторной продажи»", "now": "облачная связь; снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "law.struct", "class": "unsupported_claim", "was": "CEBC перешла Харанеке; товарные знаки на Zaya", "now": "продана CEBC B.V.; снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "eco.rationale", "class": "invented_rationale", "was": "первым — «достался не VK»", "now": "мотив My.Games по ее релизу", "tag": "m023"}
+{"id": "g1cc071e4", "field": "seller_id", "class": "profile_wrong_company", "was": "legal_short ООО «Аструм»", "now": "снят (иностранная компания)", "tag": "m023"}
+{"id": "g1cc071e4", "field": "date_basis", "class": "wrong_date", "was": "без основания", "now": "closing (релиз 11.12.2024)", "tag": "m023"}
+{"id": "g2469d33a", "field": "title", "class": "title_standard", "was": "СберИнвест приобрел 12% акций производителя…", "now": "«СберИнвест» купил 12% «Аквариуса»", "tag": "m023"}
+{"id": "g2469d33a", "field": "eco.share", "class": "other", "was": "предложение о сделке", "now": "12% капитала", "tag": "m023"}
+{"id": "g2469d33a", "field": "eco.context", "class": "version_as_fact", "was": "вторые 12% как факт", "now": "по словам источников CNews", "tag": "m023"}
+{"id": "g2469d33a", "field": "extra", "class": "unsupported_claim", "was": "закрыта в первой половине 2024", "now": "ноябрь 2024", "tag": "m023"}
+{"id": "gb207417a", "field": "seller", "class": "wrong_seller", "was": "Александр Файн", "now": "нет (вход через увеличение уставного капитала)", "tag": "m023"}
+{"id": "gb207417a", "field": "title", "class": "title_standard", "was": "Александр Файн продал 5% доли…", "now": "«Плитэксперт» купил 5% Unitile", "tag": "m023"}
+{"id": "gb207417a", "field": "law.struct", "class": "version_as_fact", "was": "«прошла на безденежной основе»", "now": "«могла пройти без денег»", "tag": "m023"}
+{"id": "gb207417a", "field": "extra", "class": "wrong_seller", "was": "5% получил Файн", "now": "5% получил «Плитэксперт»", "tag": "m023"}
+{"id": "gb207417a", "field": "eco.context", "class": "language", "was": "«сам Файн», «осенью прошлого года»", "now": "без «сам», осенью 2024 года", "tag": "m023"}
+{"id": "g3aa57efe", "field": "date", "class": "wrong_date", "was": "2024-12-27 (публикация)", "now": "2024-12-25 (реестр)", "tag": "m023"}
+{"id": "g3aa57efe", "field": "eco.rationale", "class": "version_as_fact", "was": "мотив без атрибуции", "now": "слова представителя", "tag": "m023"}
+{"id": "g66c6db22", "field": "eco.share", "class": "other", "was": "контекст в поле доли", "now": "100% долей", "tag": "m023"}
+{"id": "gc215d8b0", "field": "title", "class": "title_standard", "was": "Каппа РУС приобрела 100% долей…", "now": "«Каппа Рус» купила Окуловскую бумажную фабрику", "tag": "m023"}
+{"id": "gc215d8b0", "field": "eco.share", "class": "wrong_share", "was": "99,99% и 0,01%", "now": "99,9% и 0,1% (реестр на 27.12.2024)", "tag": "m023"}
+{"id": "gc215d8b0", "field": "ind", "class": "wrong_industry", "was": "Производство тары", "now": "Лесопром", "tag": "m023"}
+{"id": "g7f396659", "field": "date", "class": "wrong_date", "was": "2024-12-26 (публикация)", "now": "2024", "tag": "m023"}
+{"id": "g7f396659", "field": "eco.rationale", "class": "invented_rationale", "was": "фраза о будущей стратегии", "now": "снято", "tag": "m023"}
+{"id": "g7f396659", "field": "extra", "class": "unsupported_claim", "was": "эксперты видят вертикальную интеграцию", "now": "снято", "tag": "m023"}
+{"id": "g14443784", "field": "title", "class": "title_standard", "was": "Пикалевская сода приобрела…", "now": "«Пикалевская сода» купила…", "tag": "m023"}
+{"id": "g14443784", "field": "eco.share", "class": "other", "was": "описание месторождения", "now": "100% долей", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "sum", "class": "sum_meaning", "was": "2,5 млрд ₽ (расчет инвестбанкира)", "now": "Не раскрыта", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "seller", "class": "wrong_seller", "was": "Александр Колобов", "now": "Александр Колобов и Илья Черномзав", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "title", "class": "title_standard", "was": "ГК «Таврос» приобрела…", "now": "«Таврос» купил производителя булок United buns", "tag": "m023"}
