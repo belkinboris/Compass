@@ -413,3 +413,277 @@
 {"id": "g8cc36866", "field": "src", "class": "aggregator_source", "was": "только @dealsma", "now": "Consul Group и Filatoff — первоисточники", "tag": "m004"}
 {"id": "g7074c53b", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (45% без контроля, деньги на разработки)", "tag": "m004"}
 {"id": "g7074c53b", "field": "law.struct", "class": "other", "was": "«сейчас по 18,3%» — устарело", "now": "кто и сколько уступил по ЕГРЮЛ", "tag": "m004"}
+{"id": "gf3a811bd", "field": "seller", "class": "wrong_seller", "was": "Алексей Сучков", "now": "снят: по ЕГРЮЛ доля Сучкова не уменьшалась, 50% были долей самого общества", "tag": "m019"}
+{"id": "gf3a811bd", "field": "date", "class": "wrong_date", "was": "2025-03-01", "now": "2025-03-06 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "gf3a811bd", "field": "eco.sum", "class": "sum_meaning", "was": "≈50 млн ₽ (по оценке) — мнение эксперта", "now": "Не раскрыта", "tag": "m019"}
+{"id": "gf3a811bd", "field": "eco.context", "class": "unsupported_claim", "was": "приостановка метановых Lada год спустя", "now": "снято", "tag": "m019"}
+{"id": "gf3a811bd", "field": "title", "class": "title_standard", "was": "Умар Кремлев приобрел 51% в ООО «АТС-Авто» — компании…", "now": "«УНК Холдинг» купил 51% «АТС-Авто»", "tag": "m019"}
+{"id": "g5880d206", "field": "law.struct", "class": "unsupported_claim", "was": "дисконт 60% к рыночной стоимости", "now": "снято", "tag": "m019"}
+{"id": "g5880d206", "field": "title", "class": "title_standard", "was": "…приобрел ООО «Фольксваген банк Рус»…", "now": "Игорь Ким купил «Фольксваген банк Рус» у Volkswagen Financial Services", "tag": "m019"}
+{"id": "g6a6de6a6", "field": "extra", "class": "language", "was": "может производить сам", "now": "может выпускать на собственном производстве", "tag": "m019"}
+{"id": "ga95b1d54", "field": "eco.sum", "class": "sum_meaning", "was": "6 млрд ₽ (по оценке) — стоимость бизнеса", "now": "Не раскрыта; оценка в eco.val", "tag": "m019"}
+{"id": "ga95b1d54", "field": "date", "class": "wrong_date", "was": "2025-02-01", "now": "2025-02-10 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "ga95b1d54", "field": "extra", "class": "version_as_fact", "was": "ГАП «Ресурс» приобрела… (версия собеседника как факт)", "now": "по неофициальным данным", "tag": "m019"}
+{"id": "ga95b1d54", "field": "eco.context", "class": "unsupported_claim", "was": "заявления кредиторов о банкротстве, май 2026", "now": "снято", "tag": "m019"}
+{"id": "ga95b1d54", "field": "title", "class": "title_standard", "was": "ГАП «Ресурс» приобрела агрофирму «Рубеж»", "now": "…купила агрофирму «Рубеж» у Павла Артемова", "tag": "m019"}
+{"id": "g150f6855", "field": "date", "class": "wrong_date", "was": "2025-01-16 (день статьи)", "now": "2024-12-20 (ЕГРЮЛ)", "tag": "m019"}
+{"id": "g150f6855", "field": "eco.context", "class": "foreign_fact", "was": "«Яндекс» купил «Клиентский сервис» в мае 2025", "now": "снято", "tag": "m019"}
+{"id": "g150f6855", "field": "extra", "class": "invented_rationale", "was": "Цель покупки — цифровизация деятельности компании", "now": "слова представителя: проект «Цифровая УК»", "tag": "m019"}
+{"id": "gf019cd92", "field": "title", "class": "title_standard", "was": "приобрел … за 40,5 млрд руб. (оценка как цена)", "now": "Станислав Карабут купил бизнес-парк «Арма»", "tag": "m018"}
+{"id": "gf019cd92", "field": "eco.context", "class": "language", "was": "Сам Карабут", "now": "Станислав Карабут", "tag": "m018"}
+{"id": "gf019cd92", "field": "src", "class": "unsupported_claim", "was": "контекст без источника", "now": "+ Коммерсантъ 8691575", "tag": "m018"}
+{"id": "g9da487d4", "field": "extra", "class": "invented_rationale", "was": "банк рассчитывает расширить присутствие, кросс-продажи", "now": "банк сделку не комментировал", "tag": "m018"}
+{"id": "g9da487d4", "field": "eco.context", "class": "version_as_fact", "was": "Банк, по всей видимости, продолжает", "now": "По оценке «Делового Петербурга»", "tag": "m018"}
+{"id": "g9da487d4", "field": "title", "class": "title_standard", "was": "приобрел 70% ООО «…»", "now": "купил 70% агентской компании «Гамбит»", "tag": "m018"}
+{"id": "g7596ae81", "field": "sum", "class": "sum_meaning", "was": "8–9 млрд ₽ (оценка одного Пулково)", "now": "9–10 млрд ₽ (по оценке цены сделки)", "tag": "m018"}
+{"id": "g7596ae81", "field": "seller", "class": "wrong_seller", "was": "Структуры Виктора Семенова и компания Hines", "now": "Фонды Hines и группа «Белая Дача»", "tag": "m018"}
+{"id": "g7596ae81", "field": "date", "class": "wrong_date", "was": "2025-04-01", "now": "2025-04-17", "tag": "m018"}
+{"id": "g7596ae81", "field": "extra", "class": "unsupported_claim", "was": "доли 42% и 48%, Семенов", "now": "снято", "tag": "m018"}
+{"id": "g7596ae81", "field": "title", "class": "title_standard", "was": "ИК «Кама капитал» выкупила …", "now": "«Кама Капитал» купил …", "tag": "m018"}
+{"id": "ge6b63fd9", "field": "buyer", "class": "wrong_buyer", "was": "фирма «Аптекарский» (версия двух консультантов)", "now": "ЗПИФ «Гермес» — по официальным данным", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "sum", "class": "sum_meaning", "was": "8 млрд ₽ как цена (оценка до сделки)", "now": "10 млрд ₽ (по оценке) после закрытия", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "eco.rationale", "class": "invented_rationale", "was": "история «Аптекарского» вместо мотива", "now": "мотив по оценке NF Group", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "eco.fin", "class": "other", "was": "финансы компании в «Форме расчетов»", "now": "—, цифры в показателях", "tag": "m010"}
+{"id": "ge6b63fd9", "field": "title", "class": "title_standard", "was": "Продажа торгового центра…", "now": "Фонд «Гермес» купил «Невский центр» у PPF Real Estate", "tag": "m010"}
+{"id": "gf76413f3", "field": "buyer", "class": "wrong_buyer", "was": "Структуры бывшего менеджмента СУЭК (предположительно НТК)", "now": "не назван; НТК — дочка самой СУЭК", "tag": "m010"}
+{"id": "gf76413f3", "field": "eco.share", "class": "unsupported_claim", "was": "Видимо, НТК…", "now": "терминалы в Мурманске, Ванино, Восточном, Туапсе", "tag": "m010"}
+{"id": "gf76413f3", "field": "eco.context", "class": "foreign_fact", "was": "грузооборот терминала в 2025 году", "now": "снято", "tag": "m010"}
+{"id": "gf76413f3", "field": "title", "class": "title_standard", "was": "СУЭК продал портовые активы структурам…", "now": "Структуры бывших менеджеров купили портовые активы СУЭК", "tag": "m010"}
+{"id": "gef02a680", "field": "sum", "class": "sum_meaning", "was": "45–48 млн $ (как цена)", "now": "$45–48 млн (по оценке)", "tag": "m010"}
+{"id": "gef02a680", "field": "eco.context", "class": "unsupported_claim", "was": "Богданов остается владельцем по ЕГРЮЛ (ЕГРЮЛ акционеров АО не показывает)", "now": "только гендиректор по ЕГРЮЛ", "tag": "m010"}
+{"id": "gef02a680", "field": "extra", "class": "unsupported_claim", "was": "Идут переговоры", "now": "снято", "tag": "m010"}
+{"id": "gef02a680", "field": "title", "class": "title_standard", "was": "Продажа ЗАО…", "now": "«Мультимедиа Холдинг» выставлен на продажу", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "eco.rationale", "class": "invented_rationale", "was": "описание сервиса как цель", "now": "—", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "10% долей в ООО «АБД»", "tag": "m010"}
+{"id": "ga58cd8e7", "field": "title", "class": "title_standard", "was": "Авито (КЕХ Екоммерц) выкупил…", "now": "Авито купил 10% «Автотеки» у РОАД", "tag": "m010"}
+{"id": "g9876feaa", "field": "sum", "class": "wrong_sum", "was": "63,8 млн ₽", "now": "63,9 млн ₽ (ЕФРСБ: 63 899 999 ₽)", "tag": "m010"}
+{"id": "g9876feaa", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m010"}
+{"id": "g9876feaa", "field": "buyer_name", "class": "party_text_no_profile", "was": "покупатель пуст, имя только в контексте", "now": "Марк Негодуйко", "tag": "m010"}
+{"id": "g9876feaa", "field": "eco.context", "class": "unsupported_claim", "was": "Светлана Железнова, «Коломяги», старт 120,6 млн ₽", "now": "сняты", "tag": "m010"}
+{"id": "g9876feaa", "field": "law.appr", "class": "other", "was": "история банкротства в «Согласованиях»", "now": "—", "tag": "m010"}
+{"id": "g694126dd", "field": "buyer", "class": "wrong_buyer", "was": "Бэсткон", "now": "ООО «Премиум эстейт» (по СПАРК)", "tag": "m010"}
+{"id": "g694126dd", "field": "sum", "class": "wrong_sum", "was": "1,2–2 млрд ₽", "now": "Не раскрыта", "tag": "m010"}
+{"id": "g694126dd", "field": "title", "class": "title_standard", "was": "Евгений Гинер продал… девелоперу «Бэсткон»", "now": "«Премиум эстейт» купил торговый центр «Старт» у Евгения Гинера", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "target", "class": "wrong_target", "was": "«Киевская, 22»", "now": "«Киевское, 22»", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "extra", "class": "unsupported_claim", "was": "15 га, 72 000 кв. м, льготы", "now": "сняты", "tag": "m010"}
+{"id": "gd0d10f9f", "field": "title", "class": "title_standard", "was": "Покупка складского комплекса…", "now": "СФН может купить складской комплекс «Киевское, 22»", "tag": "m010"}
+{"id": "g8348fea5", "field": "sum", "class": "wrong_sum", "was": "3,71 млрд ₽", "now": "3,7 млрд ₽", "tag": "m010"}
+{"id": "g8348fea5", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m010"}
+{"id": "g8348fea5", "field": "extra", "class": "unsupported_claim", "was": "опровержение Бойко, «на август 2026 признаков нет»", "now": "сняты", "tag": "m010"}
+{"id": "g8348fea5", "field": "src", "class": "dead_source", "was": "news.mail.ru (404)", "now": "снят", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "date", "class": "wrong_date", "was": "2023-02-04 (сообщение о договоре)", "now": "2023 (срыв в феврале–апреле)", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "eco.share", "class": "other", "was": "Нюрбургринг в «Предмет / доля»", "now": "аэропорт", "tag": "m010"}
+{"id": "g21c5ee1e", "field": "title", "class": "title_standard", "was": "Сделка… сорвалась", "now": "Конкурсный управляющий отказался продать аэропорт Франкфурт-Хан NR Holding", "tag": "m010"}
+{"id": "gf9932079", "field": "sum", "class": "wrong_sum", "was": "40–75 млрд ₽ (по оценке аналитиков без имени)", "now": "Не раскрыта", "tag": "m010"}
+{"id": "gf9932079", "field": "date", "class": "wrong_date", "was": "2025-05-15", "now": "2025 (покупка в августе)", "tag": "m010"}
+{"id": "gf9932079", "field": "extra", "class": "unsupported_claim", "was": "бенефициары Узун и Ротенберг, 2-й квартал", "now": "сняты", "tag": "m010"}
+{"id": "gf9932079", "field": "title", "class": "title_standard", "was": "ВЭБ.РФ довел долю…", "now": "ВЭБ.РФ купил 25% «Просвещения»", "tag": "m010"}
+{"id": "g381ff192", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Правительство России", "tag": "m010"}
+{"id": "g381ff192", "field": "date", "class": "wrong_date", "was": "2025-05-15", "now": "2025", "tag": "m010"}
+{"id": "g381ff192", "field": "eco.fin", "class": "other", "was": "прибыль в «Форме расчетов»", "now": "—", "tag": "m010"}
+{"id": "g381ff192", "field": "title", "class": "title_standard", "was": "«Росхим» приобрел контрольный пакет…", "now": "«Росхим» купил 57,43% «Башкирской содовой компании»", "tag": "m010"}
+{"id": "g8a67edea", "field": "date", "class": "wrong_date", "was": "2025-12-31 (день указа о временном управлении)", "now": "2026-02-09 (предложение выкупа)", "tag": "m010"}
+{"id": "g8a67edea", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Rockwool A/S", "tag": "m010"}
+{"id": "g8a67edea", "field": "title", "class": "title_standard", "was": "Выкуп российских активов Rockwool…", "now": "РСА собирается купить российские заводы Rockwool", "tag": "m010"}
+{"id": "gca59a6b6", "field": "eco.sum", "class": "sum_meaning", "was": "2,1 млрд ₽ (по оценке)", "now": "Не раскрыта (чистые активы всей компании по мнению эксперта)", "tag": "m016"}
+{"id": "gca59a6b6", "field": "title", "class": "title_standard", "was": "РФПИ продал долю … турецкой структуре", "now": "La Lorraine Bakery Group купила у РФПИ 15,9% «Ла Лоррен Рус»", "tag": "m016"}
+{"id": "gca59a6b6", "field": "extra", "class": "unsupported_claim", "was": "EV эксперт Neo приравнял; сценарии разбирала BGP Capital", "now": "мнение Ивана Пешкова с автором", "tag": "m016"}
+{"id": "gca59a6b6", "field": "company.ind", "class": "profile_text", "was": "РФПИ: Искусственный интеллект", "now": "Управление активами", "tag": "m016"}
+{"id": "g88304d3a", "field": "title", "class": "title_standard", "was": "РФПИ и УК «Первая» инвестируют 1 млрд руб…", "now": "РФПИ и УК «Первая» купили долю в Medical Visual Systems", "tag": "m016"}
+{"id": "g88304d3a", "field": "ind", "class": "wrong_industry", "was": "Искусственный интеллект", "now": "Здравоохранение", "tag": "m016"}
+{"id": "g88304d3a", "field": "eco.share", "class": "unsupported_claim", "was": "история фонда НТИ (РВК, банк «Россия»)", "now": "доля не раскрыта, владельцы по СПАРК", "tag": "m016"}
+{"id": "g88304d3a", "field": "eco.target_fin", "class": "unsupported_claim", "was": "чистая прибыль 245 млн ₽, темпы", "now": "228,3 млн ₽ (РСБУ)", "tag": "m016"}
+{"id": "g506ea8c4", "field": "eco.sum", "class": "sum_meaning", "was": "10–12 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка BGP Capital всего бизнеса с долгом)", "tag": "m016"}
+{"id": "g506ea8c4", "field": "law.terms", "class": "unsupported_claim", "was": "доля Горбатского в залоге у Курявого", "now": "—", "tag": "m016"}
+{"id": "g506ea8c4", "field": "extra", "class": "unsupported_claim", "was": "Бобров — основатель «Русского лосося»", "now": "совладелец ТД «Балтийский берег»", "tag": "m016"}
+{"id": "g506ea8c4", "field": "title", "class": "title_standard", "was": "Антон Курявый приобрел контрольный пакет … (51% доля), владеющего 100%…", "now": "Антон Курявый купил 51% владельца «Русского лосося»", "tag": "m016"}
+{"id": "g506ea8c4", "field": "eco.val", "class": "unsupported_claim", "was": "оценка без автора", "now": "Пешков (BGP Capital), Шумов", "tag": "m016"}
+{"id": "gee450f17", "field": "eco.target_fin", "class": "unsupported_claim", "was": "более 15 млрд ₽ GMV", "now": "—", "tag": "m016"}
+{"id": "gee450f17", "field": "title", "class": "title_standard", "was": "1С приобрела контрольную долю в ООО «Селлематикс»", "now": "1С купила 51% «Селлематикса»", "tag": "m016"}
+{"id": "g076a2f4e", "field": "eco.sum", "class": "sum_meaning", "was": "3 млрд ₽ (по оценке)", "now": "Не раскрыта; «возможная сумма» — в eco.val с автором", "tag": "m016"}
+{"id": "g076a2f4e", "field": "seller", "class": "wrong_seller", "was": "Группа «Жилкапинвест» (продавец)", "now": "предмет; продавцы — бенефициары Коробов и Румянцев", "tag": "m016"}
+{"id": "g076a2f4e", "field": "eco.share", "class": "verbatim", "was": "«серьезного игрока на рынке Владивостока» без автора", "now": "100% долей компаний группы, 239 тыс. кв. м", "tag": "m016"}
+{"id": "g076a2f4e", "field": "title", "class": "title_standard", "was": "Продажа девелоперских проектов группы «Жилкапинвест» группе Glorax", "now": "GloraX купил «Жилкапинвест»", "tag": "m016"}
+{"id": "g3ece5143", "field": "eco.sum", "class": "sum_meaning", "was": "1,8–2 млрд ₽ (оценка всего завода)", "now": "≈1 млрд ₽ (по оценке, цена 51%)", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.share", "class": "wrong_share", "was": "другие владельцы завода, дословно", "now": "51%", "tag": "m015"}
+{"id": "g3ece5143", "field": "law.struct", "class": "unsupported_claim", "was": "«компания группы ТВЗ», «свыше 30 знаков»", "now": "по Ведомостям", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение эксперта без имени", "now": "с именем Андрея Московского", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.context", "class": "foreign_fact", "was": "Татспиртпром, Амбер Талвис", "now": "снято", "tag": "m015"}
+{"id": "g3ece5143", "field": "title", "class": "title_standard", "was": "Росспиртпром приобрел 51% ООО «…»", "now": "«Росспиртпром» купил 51% «…»", "tag": "m015"}
+{"id": "g081ac83c", "field": "eco.sum", "class": "wrong_sum", "was": "270–750 млн ₽ (нет в источниках)", "now": "≈500 млн ₽ (по оценке)", "tag": "m015"}
+{"id": "g081ac83c", "field": "date", "class": "wrong_date", "was": "2025-08-01", "now": "2025-08-25 (ЕГРЮЛ)", "tag": "m015"}
+{"id": "g081ac83c", "field": "law.struct", "class": "version_as_fact", "was": "догадки «по-видимому», «по опциону»", "now": "шаги по ЕГРЮЛ", "tag": "m015"}
+{"id": "g081ac83c", "field": "eco.context", "class": "verbatim", "was": "дословно ComNews", "now": "пересказ", "tag": "m015"}
+{"id": "g081ac83c", "field": "title", "class": "title_standard", "was": "ГК «Солар» (Ростелеком) купила 90% ООО «СОФТ ПЛЮС» (Hexway)", "now": "«Солар» купил 90% Hexway", "tag": "m015"}
+{"id": "g139db8c2", "field": "eco.sum", "class": "wrong_sum", "was": "До 100 млрд ₽", "now": "80–120 млрд ₽ (по оценке)", "tag": "m015"}
+{"id": "g139db8c2", "field": "date", "class": "wrong_date", "was": "2025-08-01", "now": "2025", "tag": "m015"}
+{"id": "g139db8c2", "field": "extra", "class": "unsupported_claim", "was": "Bridgestone, Otis; пресс-атрибуция", "now": "снято", "tag": "m015"}
+{"id": "g139db8c2", "field": "eco.context", "class": "unsupported_claim", "was": "наши выводы об опровержении и Махмудове", "now": "факты с атрибуцией", "tag": "m015"}
+{"id": "g139db8c2", "field": "title", "class": "title_standard", "was": "… (участие «МТ-Интеграции» компания отрицает)", "now": "S8 Capital купил долю в «Аквариусе»", "tag": "m015"}
+{"id": "gcfa149c5", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Медиа", "tag": "m015"}
+{"id": "gcfa149c5", "field": "title", "class": "title_standard", "was": "…51% в агентстве инфлюенс-маркетинга Hello Blogger", "now": "Kokoc Group купила 51% Hello Blogger", "tag": "m015"}
+{"id": "gcfa149c5", "field": "eco.rationale", "class": "verbatim", "was": "почти дословно ComNews", "now": "пересказ", "tag": "m015"}
+{"id": "g45ba6605", "field": "title", "class": "title_standard", "was": "Холдинг «Коломенский» приобрел производителя готовой еды «Продмастер»", "now": "«Коломенский» купил «Продмастер»", "tag": "m017"}
+{"id": "g45ba6605", "field": "seller", "class": "wrong_seller", "was": "Железогло", "now": "Алена Железогло, Лариса Ларионова", "tag": "m017"}
+{"id": "g45ba6605", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ сделки вместо мотива", "now": "мотив словами Тулупова и пресс-службы", "tag": "m017"}
+{"id": "g45ba6605", "field": "eco.target_fin", "class": "unsupported_claim", "was": "«классическую и азиатскую кухню»", "now": "выручка, прибыль, мощность по РБК", "tag": "m017"}
+{"id": "g45ba6605", "field": "extra", "class": "other", "was": "повтор цели сделки", "now": "ассортимент, сети, ПМЭФ", "tag": "m017"}
+{"id": "g77a1043b", "field": "seller", "class": "wrong_seller", "was": "Владислав Ресин, Алексей Алешин", "now": "ООО «ТриАрк Майнинг» (ЕГРЮЛ)", "tag": "m017"}
+{"id": "g77a1043b", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ сделки", "now": "—", "tag": "m017"}
+{"id": "g09242ae2", "field": "title", "class": "title_standard", "was": "Концерн «Детскосельский» продал … ООО «Плодородие»", "now": "ООО «Плодородие» купило молочный комплекс концерна «Детскосельский»", "tag": "m017"}
+{"id": "g09242ae2", "field": "eco.context", "class": "language", "was": "«Сам концерн…»", "now": "фраза с подлежащим", "tag": "m017"}
+{"id": "g09242ae2", "field": "company.desc", "class": "profile_text", "was": "Плодородие — «молочный комплекс… куплен в 2024»", "now": "компания Чистякова и Шишлянниковой", "tag": "m017"}
+{"id": "g65deaa28", "field": "eco.context", "class": "wrong_share", "was": "12,09%", "now": "12,9%", "tag": "m017"}
+{"id": "g65deaa28", "field": "title", "class": "title_standard", "was": "Фонд «Восход» инвестировал в «Кенди Флип Роботс»", "now": "«Восход» купил 12,9% «Кенди Флип Роботс»", "tag": "m017"}
+{"id": "g65deaa28", "field": "eco.rationale", "class": "language", "was": "«обслуживают себя сами»", "now": "цель словами Марголина", "tag": "m017"}
+{"id": "g713c9c18", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Kismet Capital Group", "tag": "m017"}
+{"id": "g713c9c18", "field": "eco.context", "class": "unsupported_claim", "was": "«это лишь допущение — решения нет»", "now": "Naspers, РСХБ — кредитор 2022 года", "tag": "m017"}
+{"id": "g713c9c18", "field": "title", "class": "title_standard", "was": "…приобрела 50% Avito", "now": "…купила 50% Avito", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Goldman Sachs", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "eco.context", "class": "verbatim", "was": "предложение о лицензии почти дословно", "now": "пересказ", "tag": "m017"}
+{"id": "gaa82c6f6", "field": "title", "class": "title_standard", "was": "Фонд Balchug Capital приобрел российскую «дочку» Goldman Sachs", "now": "Balchug Capital купил «Голдман Сакс Банк» у Goldman Sachs", "tag": "m017"}
+{"id": "g9b746362", "field": "title", "class": "title_standard", "was": "ГК «Полипластик» приобрела 49% в «РусИнжГидро»", "now": "«Полипластик» купил 49% «РусИнжГидро»", "tag": "m017"}
+{"id": "g1a475dee", "field": "date", "class": "wrong_date", "was": "2025-04-16 (релиз юрфирмы)", "now": "2025-04-14 (ЕГРЮЛ)", "tag": "m017"}
+{"id": "g1a475dee", "field": "eco.rationale", "class": "unsupported_claim", "was": "«10–15% рынка Data Management»", "now": "план Arenadata по CNews", "tag": "m017"}
+{"id": "g1a475dee", "field": "title", "class": "title_standard", "was": "Группа Arenadata инвестировала в …", "now": "Группа Arenadata купила 20% ООО «Решения Гармония»", "tag": "m017"}
+{"id": "g5612a3b3", "field": "sum", "class": "wrong_sum", "was": "15 млрд ₽", "now": "3,3 млрд ₽", "tag": "m008"}
+{"id": "g5612a3b3", "field": "eco.val", "class": "unsupported_claim", "was": "обвал акций в мае 2026 по данным T-Investments", "now": "снято, цена и капитализация IPO", "tag": "m008"}
+{"id": "g5612a3b3", "field": "eco.context", "class": "language", "was": "основатели, которые сами развивают бизнес", "now": "доли акционеров до и после IPO", "tag": "m008"}
+{"id": "g6ba5f232", "field": "extra", "class": "other", "was": "тикер EMLT", "now": "ELMT", "tag": "m008"}
+{"id": "g6ba5f232", "field": "eco.context", "class": "unsupported_claim", "was": "прогноз аналитика: 15% аллокации, переподписка 5–10 раз", "now": "история группы, итог аллокации", "tag": "m008"}
+{"id": "g6ba5f232", "field": "eco.val", "class": "sum_meaning", "was": "вся компания оценена в 90–100 млрд ₽", "now": "105 млрд ₽ с привлеченным, 90–100 без", "tag": "m008"}
+{"id": "g0be691b7", "field": "sum", "class": "wrong_sum", "was": "500–700 млн ₽ (план)", "now": "750 млн ₽", "tag": "m008"}
+{"id": "g0be691b7", "field": "date", "class": "wrong_date", "was": "2024-05-01", "now": "2024", "tag": "m008"}
+{"id": "g0be691b7", "field": "title", "class": "title_standard", "was": "Pre-IPO раунд «Бери заряд!» на платформе Rounds", "now": "Инвесторы pre-IPO купили 15,88% «Бери заряд!»", "tag": "m008"}
+{"id": "g0be691b7", "field": "eco.finadv", "class": "adviser_wrong", "was": "Публично не сообщалось", "now": "Альфа-банк — агент по размещению", "tag": "m008"}
+{"id": "g0be691b7", "field": "eco.context", "class": "language", "was": "сам сервис купил «Яндекс»", "now": "сервис купил «Яндекс»", "tag": "m008"}
+{"id": "g00a0318e", "field": "extra", "class": "unsupported_claim", "was": "Седов продал все акции", "now": "Седов сохранил преобладающую долю, free-float ~15%", "tag": "m008"}
+{"id": "g00a0318e", "field": "law.terms", "class": "foreign_fact", "was": "дивиденды за 2025 год", "now": "lock-up 180 дней", "tag": "m008"}
+{"id": "g00a0318e", "field": "sum", "class": "sum_meaning", "was": "3,5 млрд ₽ (привлечено), капитализация 23,5 млрд ₽", "now": "3,5 млрд ₽", "tag": "m008"}
+{"id": "g3ed36abe", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "SFI (профиль)", "tag": "m008"}
+{"id": "g3ed36abe", "field": "sum", "class": "wrong_sum", "was": "12,5–13,1 млрд ₽ (ожидание)", "now": "13,1 млрд ₽", "tag": "m008"}
+{"id": "g3ed36abe", "field": "eco.val", "class": "unsupported_claim", "was": "P/E 6,8–7, P/B 2,2–2,3, спрос до закрытия книги", "now": "цена 875 ₽, капитализация 105 млрд ₽", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "date", "class": "wrong_date", "was": "2024-02-13", "now": "2024-02-22", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "eco.context", "class": "unsupported_claim", "was": "котировка 1,9 ₽ на 22.08.2026, «одна из самых слабых»", "now": "снято", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "eco.share", "class": "other", "was": "пересказ размещения", "now": "13,14% акций ПАО «АГК»", "tag": "m008"}
+{"id": "g202f49be", "field": "law.struct", "class": "wrong_status", "was": "будущее время («составят»)", "now": "прошедшее", "tag": "m008"}
+{"id": "g202f49be", "field": "extra", "class": "foreign_fact", "was": "фраза из отчета 2025 года", "now": "снята", "tag": "m008"}
+{"id": "gaa7602e7", "field": "type", "class": "wrong_type", "was": "IPO", "now": "Инвестиция", "tag": "m008"}
+{"id": "gaa7602e7", "field": "sum", "class": "wrong_sum", "was": "700–1000 млн ₽ (план)", "now": "900 млн ₽", "tag": "m008"}
+{"id": "gaa7602e7", "field": "date", "class": "wrong_date", "was": "2024-11-11 (день заметки о плане)", "now": "2025-05-19", "tag": "m008"}
+{"id": "gaa7602e7", "field": "title", "class": "title_standard", "was": "Pre-IPO размещение ГК «Цифровые привычки» на 0,7-1 млрд руб.", "now": "Инвесторы pre-IPO купили акции ГК «Цифровые привычки»", "tag": "m008"}
+{"id": "gaa7602e7", "field": "eco.val", "class": "version_as_fact", "was": "«аналитики» без имени", "now": "Артем Тузов (ИВА Партнерс)", "tag": "m008"}
+{"id": "g6a453b19", "field": "type", "class": "wrong_type", "was": "IPO", "now": "Инвестиция", "tag": "m008"}
+{"id": "g6a453b19", "field": "extra", "class": "wrong_status", "was": "книга заявок открыта", "now": "итог 565 млн ₽", "tag": "m008"}
+{"id": "g6a453b19", "field": "eco.finadv", "class": "adviser_wrong", "was": "Публично не сообщалось", "now": "«Альфа-Инвестиции» — агент", "tag": "m008"}
+{"id": "g572a4aca", "field": "eco.fin", "class": "other", "was": "операционные показатели в «Форме расчетов»", "now": "перенесены в показатели", "tag": "m008"}
+{"id": "g572a4aca", "field": "eco.share", "class": "other", "was": "описание ломбарда", "now": "14,6% акций ПАО «МГКЛ»", "tag": "m008"}
+{"id": "g5f24bb26", "field": "extra", "class": "foreign_fact", "was": "падение до 103,25 ₽ на старте торгов; половина — допэмиссия", "now": "падение — апрель 2026 после дефолта; вся сумма — допэмиссия", "tag": "m008"}
+{"id": "g5f24bb26", "field": "eco.fin", "class": "unsupported_claim", "was": "обрывок про иски на 12 млрд ₽", "now": "снято", "tag": "m008"}
+{"id": "g75920ee3", "field": "title", "class": "title_standard", "was": "заинтересована в покупке", "now": "может купить", "tag": "m012"}
+{"id": "g75920ee3", "field": "seller_id", "class": "wrong_seller", "was": "пусто", "now": "ЛУКОЙЛ", "tag": "m012"}
+{"id": "g75920ee3", "field": "date", "class": "wrong_date", "was": "2025-11-23 (публикация РБК)", "now": "2025-11-21 (заявление IHC)", "tag": "m012"}
+{"id": "g75920ee3", "field": "extra", "class": "unsupported_claim", "was": "покупка акций, НПЗ и доли в месторождениях", "now": "интерес к зарубежным активам без перечня", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "ind", "class": "wrong_industry", "was": "Пищепром и напитки", "now": "Потребительские товары", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "title", "class": "title_standard", "was": "ВИМ вышли из капитала", "now": "Mixit купила 32,98% собственных долей", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "extra", "class": "unsupported_claim", "was": "IPO на Мосбирже", "now": "IPO", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "eco.target_fin", "class": "other", "was": "завод, парфюмерия, одежда в финансах", "now": "только финансы; факты — в контекст", "tag": "m012"}
+{"id": "g84fd8194", "field": "sum", "class": "sum_meaning", "was": "$20–22 млрд (оценка всего портфеля)", "now": "Не раскрыта", "tag": "m012"}
+{"id": "g84fd8194", "field": "seller_id", "class": "wrong_seller", "was": "пусто", "now": "ЛУКОЙЛ", "tag": "m012"}
+{"id": "g84fd8194", "field": "extra", "class": "unsupported_claim", "was": "Западная Курна-2 и европейская инфраструктура в интересах Chevron", "now": "только общие с Chevron активы", "tag": "m012"}
+{"id": "g84fd8194", "field": "title", "class": "title_standard", "was": "рассматривает приобретение", "now": "может купить", "tag": "m012"}
+{"id": "g61182014", "field": "seller", "class": "wrong_seller", "was": "с Мариной Чадеевой (вышла в 12.2024)", "now": "Мельничук, Зайцев-Зотов, Степанов", "tag": "m012"}
+{"id": "g61182014", "field": "eco.finadv", "class": "adviser_wrong", "was": "Novus Capital", "now": "Публично не сообщалось", "tag": "m012"}
+{"id": "g61182014", "field": "extra", "class": "unsupported_claim", "was": "купило через СФО «Аргентум»", "now": "«Аргентум» владеет покупателем", "tag": "m012"}
+{"id": "g61182014", "field": "buyer.desc", "class": "profile_text", "was": "«Новый интеллект» — СФО", "now": "АО, принадлежащее фонду через СФО", "tag": "m012"}
+{"id": "g335d3cdc", "field": "date", "class": "wrong_date", "was": "2025-11-10", "now": "2025-11-11 (ЕГРЮЛ)", "tag": "m012"}
+{"id": "g335d3cdc", "field": "law.struct", "class": "verbatim", "was": "копия AK&M", "now": "пересказ, два шага", "tag": "m012"}
+{"id": "g335d3cdc", "field": "eco.rationale", "class": "invented_rationale", "was": "итоги интеграции и планы ТД ММК", "now": "мотив по словам ММК", "tag": "m012"}
+{"id": "g335d3cdc", "field": "eco.val", "class": "unsupported_claim", "was": "около 1% EBITDA ММК, без имени аналитика", "now": "оценка Ахмеда Алиева", "tag": "m012"}
+{"id": "g335d3cdc", "field": "title", "class": "title_standard", "was": "приобрел металлотрейдера…", "now": "купил «Кама-Трейд Татарстан»", "tag": "m012"}
+{"id": "g3fb43064", "field": "sum", "class": "wrong_sum", "was": "6–7 млрд ₽ (по оценке)", "now": "≈6 млрд ₽ (по оценке)", "tag": "m012"}
+{"id": "g3fb43064", "field": "date", "class": "wrong_date", "was": "2025-11-05", "now": "2025-11-07 (ЕГРЮЛ)", "tag": "m012"}
+{"id": "g3fb43064", "field": "target.inn", "class": "profile_wrong_inn", "was": "3652001387 (АО МЭЗ «Лискинский»)", "now": "3652011018 (ООО «Исток»)", "tag": "m012"}
+{"id": "g3fb43064", "field": "law.appr", "class": "unsupported_claim", "was": "одобрение ФАС, договорились в октябре", "now": "проходила согласование в ФАС", "tag": "m012"}
+{"id": "g3fb43064", "field": "buyer.desc", "class": "profile_text", "was": "владелец ГК «Интегра»", "now": "бывший вице-президент", "tag": "m012"}
+{"id": "g3fb43064", "field": "eco.target_fin", "class": "wrong_date", "was": "выручка за 2025 год", "now": "за 2024 год", "tag": "m012"}
+{"id": "g8af20254", "field": "eco.context", "class": "verbatim", "was": "копия Ъ", "now": "пересказ", "tag": "m012"}
+{"id": "g8af20254", "field": "eco.context", "class": "version_as_fact", "was": "банк возьмет, Seller Capital предложит", "now": "может, планировали", "tag": "m012"}
+{"id": "g8af20254", "field": "title", "class": "other", "was": "МФК «Займер»", "now": "«Займер» (МКК)", "tag": "m012"}
+{"id": "ge56325d9", "field": "date", "class": "wrong_date", "was": "2025-11-01 (заглушка)", "now": "2025", "tag": "m012"}
+{"id": "ge56325d9", "field": "extra", "class": "unsupported_claim", "was": "ООО «КСН»; ТРЦ полностью у CP и «Авроры»", "now": "снято", "tag": "m012"}
+{"id": "ge56325d9", "field": "target.desc", "class": "profile_text", "was": "«Аврора» довела владение до 100%", "now": "половина у «Авроры»", "tag": "m012"}
+{"id": "ge56325d9", "field": "eco.target_fin", "class": "language", "was": "«прибыль компании составляет — 657 772 000 ₽»", "now": "пересказ", "tag": "m012"}
+{"id": "ga218f75c", "field": "buyer", "class": "wrong_buyer", "was": "Акульчев — предприниматель", "now": "компания «Акульчев» (ООО «ПК «Акульчев»»)", "tag": "m012"}
+{"id": "ga218f75c", "field": "sum", "class": "sum_meaning", "was": "≈500 млн ₽ (с долгом)", "now": "Не раскрыта", "tag": "m012"}
+{"id": "ga218f75c", "field": "target.desc", "class": "profile_text", "was": "в 2023 году", "now": "в 2025 году", "tag": "m012"}
+{"id": "ga218f75c", "field": "eco.share", "class": "other", "was": "мощности фабрики", "now": "95% доли в ООО «ПТК «Колос»»", "tag": "m012"}
+{"id": "ga218f75c", "field": "eco.context", "class": "unsupported_claim", "was": "погиб на трассе Южноуральск — Магнитогорск", "now": "снято", "tag": "m012"}
+{"id": "gc9461b5c", "field": "title", "class": "title_standard", "was": "вышли из капитала", "now": "купил 39% у «Сбербанк Инвестиций»", "tag": "m012"}
+{"id": "gc9461b5c", "field": "eco.target_fin", "class": "language", "was": "«этих предприятий»", "now": "названы компании", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "law.struct", "class": "unsupported_claim", "was": "по пояснениям к отчетности юрлицо перешло к покупателю", "now": "Демура остался владельцем; ЕГРЮЛ — АО «Трэвел Груп»", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "ind", "class": "wrong_industry", "was": "Транспорт и логистика", "now": "Гостиницы и туризм", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "sum", "class": "sum_meaning", "was": "≈$200 млн; альт. EV ≈50 млрд", "now": "15–16 млрд ₽ (по оценке)", "tag": "m012"}
+{"id": "gd66af0f7", "field": "extra", "class": "wrong_share", "was": "у «РСХБ-Финанс» осталось 0,76%", "now": "получил 0,76% в день сделки", "tag": "m012"}
+{"id": "gd66af0f7", "field": "eco.context", "class": "unsupported_claim", "was": "с 2020 года выпускает собственную продукцию", "now": "в 2020 году — площадка для сыров", "tag": "m012"}
+{"id": "gd66af0f7", "field": "title", "class": "title_standard", "was": "приобрел 25% доли в производителе сыров…", "now": "Nelt купил 25% Moloko Group", "tag": "m012"}
+{"id": "g2369d101", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Сибур («Биаксплен»)", "tag": "m020"}
+{"id": "g2369d101", "field": "title", "class": "title_standard", "was": "Дочка Сибура вышла из капитала…", "now": "Loren SPV и L&M купили 50% Manucor у «Сибура»", "tag": "m020"}
+{"id": "g10053480", "field": "title", "class": "title_standard", "was": "ГК «Таврос» покупает…", "now": "«Таврос» может купить…", "tag": "m020"}
+{"id": "gd1b1a94e", "field": "sum", "class": "sum_meaning", "was": "1,25–1,4 млрд ₽ (оценка аналитика)", "now": "Не раскрыта", "tag": "m020"}
+{"id": "gd1b1a94e", "field": "title", "class": "title_standard", "was": "рассматривает приобретение", "now": "может купить", "tag": "m020"}
+{"id": "g8a86fc9b", "field": "title", "class": "title_standard", "was": "юрлицо в скобках", "now": "VK Tech купила CedrusData", "tag": "m020"}
+{"id": "g34cab70b", "field": "date", "class": "wrong_date", "was": "2026", "now": "2026-02-26 (ЕГРЮЛ)", "tag": "m020"}
+{"id": "g34cab70b", "field": "title", "class": "title_standard", "was": "…в Тамбовской области", "now": "«Русагро» купила 51% ООО «Центральное»", "tag": "m020"}
+{"id": "gd2696c44", "field": "title", "class": "title_standard", "was": "покупает Trivio — платформу…", "now": "Tutu.ru может купить Trivio", "tag": "m020"}
+{"id": "g5b8fa758", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Emerging Travel Group", "tag": "m020"}
+{"id": "gcdf7065a", "field": "title", "class": "title_standard", "was": "передал 1% … Татьяне Ким", "now": "Ким безвозмездно получила 1% Wildberries от Бакальчука", "tag": "m024"}
+{"id": "gcdf7065a", "field": "eco.context", "class": "unsupported_claim", "was": "жалоба в ФАС, «имущество превысило долю», совет директоров ВсеИнструменты", "now": "сняты", "tag": "m024"}
+{"id": "gcdf7065a", "field": "eco.context", "class": "foreign_fact", "was": "«М.Видео», банкротство «ВБ Девелопмент»", "now": "сняты, контекст о сделке", "tag": "m024"}
+{"id": "g23ff3a09", "field": "date", "class": "wrong_date", "was": "2024-12-12", "now": "2024-12-24 (ЕГРЮЛ)", "tag": "m024"}
+{"id": "g23ff3a09", "field": "extra", "class": "unsupported_claim", "was": "«закрыта 12 декабря», «производит 40 000»", "now": "мощность 40 000, без даты", "tag": "m024"}
+{"id": "g23ff3a09", "field": "companies.g8fef8630.desc", "class": "profile_text", "was": "продали братья Николай и Павел Кузнецовы", "now": "продал Николай Кузнецов", "tag": "m024"}
+{"id": "g06a6081f", "field": "title", "class": "title_standard", "was": "ВТБ выкупил 49,99% долю «Почты России» в Почта Банке", "now": "ВТБ купил 49,99% Почта банка у «Почты России»", "tag": "m024"}
+{"id": "g06a6081f", "field": "date", "class": "wrong_date", "was": "2024-12-10 (слова министра)", "now": "2024-12-26 (закрытие, сообщение ВТБ)", "tag": "m024"}
+{"id": "g06a6081f", "field": "eco.context", "class": "unsupported_claim", "was": "с 1 мая 2026, 19 тыс. банкоматов", "now": "сняты", "tag": "m024"}
+{"id": "g06a6081f", "field": "eco.target_fin", "class": "other", "was": "мотив ВТБ в финансах предмета", "now": "перенесен в eco.rationale", "tag": "m024"}
+{"id": "g06a6081f", "field": "extra", "class": "verbatim", "was": "near_copy Интерфакса", "now": "пересказ", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "extra", "class": "invented_rationale", "was": "чтобы ответить на спрос профильных клиентов", "now": "снято, по Frank Media", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "ind", "class": "wrong_industry", "was": "Банки", "now": "ИТ и интернет", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "src", "class": "aggregator_source", "was": "Frank Media первым", "now": "Ведомости первыми", "tag": "m024"}
+{"id": "gfa1163ce", "field": "title", "class": "title_standard", "was": "Леонид Федун продал 10% акций Лукойла компании", "now": "«Лукойл» купил 10% своих акций у Леонида Федуна", "tag": "m023"}
+{"id": "gfa1163ce", "field": "eco.val", "class": "language", "was": "«ни сам Федун»", "now": "«ни Федун»", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "law.struct", "class": "verbatim", "was": "копия абзаца Ведомостей", "now": "пересказ", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "eco.context", "class": "verbatim", "was": "копия описания клиники", "now": "пересказ", "tag": "m023"}
+{"id": "ga75a4d0a", "field": "extra", "class": "unsupported_claim", "was": "«Хадасса», «частные лица из строительного бизнеса»", "now": "снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "buyer", "class": "profile_text", "was": "Павел Харанек", "now": "Павел Харанека", "tag": "m023"}
+{"id": "g1cc071e4", "field": "title", "class": "title_standard", "was": "Павел Харанек приобрел…", "now": "Павел Харанека купил…", "tag": "m023"}
+{"id": "g1cc071e4", "field": "sum", "class": "sum_meaning", "was": "4–10 млн $ (оценки аналитиков)", "now": "Не раскрыта", "tag": "m023"}
+{"id": "g1cc071e4", "field": "eco.context", "class": "unsupported_claim", "was": "Broadsmart строит элитное жилье; «без признаков повторной продажи»", "now": "облачная связь; снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "law.struct", "class": "unsupported_claim", "was": "CEBC перешла Харанеке; товарные знаки на Zaya", "now": "продана CEBC B.V.; снято", "tag": "m023"}
+{"id": "g1cc071e4", "field": "eco.rationale", "class": "invented_rationale", "was": "первым — «достался не VK»", "now": "мотив My.Games по ее релизу", "tag": "m023"}
+{"id": "g1cc071e4", "field": "seller_id", "class": "profile_wrong_company", "was": "legal_short ООО «Аструм»", "now": "снят (иностранная компания)", "tag": "m023"}
+{"id": "g1cc071e4", "field": "date_basis", "class": "wrong_date", "was": "без основания", "now": "closing (релиз 11.12.2024)", "tag": "m023"}
+{"id": "g2469d33a", "field": "title", "class": "title_standard", "was": "СберИнвест приобрел 12% акций производителя…", "now": "«СберИнвест» купил 12% «Аквариуса»", "tag": "m023"}
+{"id": "g2469d33a", "field": "eco.share", "class": "other", "was": "предложение о сделке", "now": "12% капитала", "tag": "m023"}
+{"id": "g2469d33a", "field": "eco.context", "class": "version_as_fact", "was": "вторые 12% как факт", "now": "по словам источников CNews", "tag": "m023"}
+{"id": "g2469d33a", "field": "extra", "class": "unsupported_claim", "was": "закрыта в первой половине 2024", "now": "ноябрь 2024", "tag": "m023"}
+{"id": "gb207417a", "field": "seller", "class": "wrong_seller", "was": "Александр Файн", "now": "нет (вход через увеличение уставного капитала)", "tag": "m023"}
+{"id": "gb207417a", "field": "title", "class": "title_standard", "was": "Александр Файн продал 5% доли…", "now": "«Плитэксперт» купил 5% Unitile", "tag": "m023"}
+{"id": "gb207417a", "field": "law.struct", "class": "version_as_fact", "was": "«прошла на безденежной основе»", "now": "«могла пройти без денег»", "tag": "m023"}
+{"id": "gb207417a", "field": "extra", "class": "wrong_seller", "was": "5% получил Файн", "now": "5% получил «Плитэксперт»", "tag": "m023"}
+{"id": "gb207417a", "field": "eco.context", "class": "language", "was": "«сам Файн», «осенью прошлого года»", "now": "без «сам», осенью 2024 года", "tag": "m023"}
+{"id": "g3aa57efe", "field": "date", "class": "wrong_date", "was": "2024-12-27 (публикация)", "now": "2024-12-25 (реестр)", "tag": "m023"}
+{"id": "g3aa57efe", "field": "eco.rationale", "class": "version_as_fact", "was": "мотив без атрибуции", "now": "слова представителя", "tag": "m023"}
+{"id": "g66c6db22", "field": "eco.share", "class": "other", "was": "контекст в поле доли", "now": "100% долей", "tag": "m023"}
+{"id": "gc215d8b0", "field": "title", "class": "title_standard", "was": "Каппа РУС приобрела 100% долей…", "now": "«Каппа Рус» купила Окуловскую бумажную фабрику", "tag": "m023"}
+{"id": "gc215d8b0", "field": "eco.share", "class": "wrong_share", "was": "99,99% и 0,01%", "now": "99,9% и 0,1% (реестр на 27.12.2024)", "tag": "m023"}
+{"id": "gc215d8b0", "field": "ind", "class": "wrong_industry", "was": "Производство тары", "now": "Лесопром", "tag": "m023"}
+{"id": "g7f396659", "field": "date", "class": "wrong_date", "was": "2024-12-26 (публикация)", "now": "2024", "tag": "m023"}
+{"id": "g7f396659", "field": "eco.rationale", "class": "invented_rationale", "was": "фраза о будущей стратегии", "now": "снято", "tag": "m023"}
+{"id": "g7f396659", "field": "extra", "class": "unsupported_claim", "was": "эксперты видят вертикальную интеграцию", "now": "снято", "tag": "m023"}
+{"id": "g14443784", "field": "title", "class": "title_standard", "was": "Пикалевская сода приобрела…", "now": "«Пикалевская сода» купила…", "tag": "m023"}
+{"id": "g14443784", "field": "eco.share", "class": "other", "was": "описание месторождения", "now": "100% долей", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "sum", "class": "sum_meaning", "was": "2,5 млрд ₽ (расчет инвестбанкира)", "now": "Не раскрыта", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "seller", "class": "wrong_seller", "was": "Александр Колобов", "now": "Александр Колобов и Илья Черномзав", "tag": "m023"}
+{"id": "g5b4a3bf8", "field": "title", "class": "title_standard", "was": "ГК «Таврос» приобрела…", "now": "«Таврос» купил производителя булок United buns", "tag": "m023"}

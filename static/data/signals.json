@@ -2,6 +2,19 @@
  "updated": "2026-11-12",
  "signals": [
   {
+   "id": "sd4f33c5ba",
+   "company_id": "g5ff0a3de",
+   "date": "2026-11-12",
+   "kind": "sell",
+   "summary": "ГК «Черноголовка» — готовит продажу части бизнеса",
+   "source": [
+    "vedomosti.ru",
+    "https://www.vedomosti.ru/business/news/2026/11/12/1244900-chernogolovka-rassmatrivaet"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "s71a449260",
    "company_id": "g28ff15bb",
    "date": "2026-11-12",
@@ -1323,6 +1336,34 @@
    "strength": "strong"
   },
   {
+   "id": "s52354b96c",
+   "company_id": "g4a98b303",
+   "date": "2026-02-09",
+   "kind": "for_sale",
+   "summary": "российские активы Rockwool — обсуждается продажа компании или доли; возможный покупатель — АО «Развитие строительных активов»",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
+   ],
+   "origin": "card",
+   "deal_id": "g8a67edea",
+   "strength": "strong"
+  },
+  {
+   "id": "s2553140f3",
+   "company_id": "g2508428e",
+   "date": "2026-02-09",
+   "kind": "buy",
+   "summary": "АО «Развитие строительных активов» — обсуждается покупка: российские активы Rockwool",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
+   ],
+   "origin": "card",
+   "deal_id": "g8a67edea",
+   "strength": "normal"
+  },
+  {
    "id": "sc95ba5748",
    "company_id": "g5c8c6494",
    "date": "2026-01-29",
@@ -1516,34 +1557,6 @@
    ],
    "origin": "card_text",
    "deal_id": "g934ee51b",
-   "strength": "normal"
-  },
-  {
-   "id": "s52354b96c",
-   "company_id": "g4a98b303",
-   "date": "2025-12-31",
-   "kind": "for_sale",
-   "summary": "российские активы Rockwool — обсуждается продажа компании или доли; возможный покупатель — АО «Развитие строительных активов»",
-   "source": [
-    "РБК Pro",
-    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
-   ],
-   "origin": "card",
-   "deal_id": "g8a67edea",
-   "strength": "strong"
-  },
-  {
-   "id": "s2553140f3",
-   "company_id": "g2508428e",
-   "date": "2025-12-31",
-   "kind": "buy",
-   "summary": "АО «Развитие строительных активов» — обсуждается покупка: российские активы Rockwool",
-   "source": [
-    "РБК Pro",
-    "https://pro.rbc.ru/demo/6985c6579a7947628cb2dfd6"
-   ],
-   "origin": "card",
-   "deal_id": "g8a67edea",
    "strength": "normal"
   },
   {
