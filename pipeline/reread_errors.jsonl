@@ -851,3 +851,48 @@
 {"id": "ge945a8e1", "field": "sum", "class": "sum_meaning", "was": "7 млрд ₽ (по оценке) — оценка всей компании как цена 50%", "now": "Не раскрыта", "tag": "m025"}
 {"id": "ge945a8e1", "field": "title", "class": "title_standard", "was": "Росатом планирует купить (при статусе «Не состоялась»)", "now": "«Росатом» не купил 50% Future Technologies", "tag": "m025"}
 {"id": "ge945a8e1", "field": "law.appr", "class": "other", "was": "Публично не сообщалось", "now": "на согласовании ФАС (РБК)", "tag": "m025"}
+{"id": "g9d09dc7c", "field": "title", "class": "title_standard", "was": "ТМК продала ... ООО «Фрунзе» (МеталлСервис)", "now": "ООО «Фрунзе» купило Ярцевский металлургический завод у ТМК", "tag": "m032"}
+{"id": "g9d09dc7c", "field": "eco.val", "class": "unsupported_claim", "was": "оценка аналитиков ИНФОЛОМ", "now": "—", "tag": "m032"}
+{"id": "g9d09dc7c", "field": "extra", "class": "version_as_fact", "was": "ТМК объявила о продаже ООО «Фрунзе», бенефициар — МеталлСервис", "now": "ТМК покупателя не назвала; бенефициар по неофициальным данным", "tag": "m032"}
+{"id": "g9d09dc7c", "field": "eco.context", "class": "language", "was": "«которую приводит Mashnews»", "now": "по отчетности ТМК по МСФО", "tag": "m032"}
+{"id": "g9d09dc7c", "field": "eco.rationale", "class": "verbatim", "was": "дословная фраза пресс-релиза без кавычек", "now": "пересказ позиции ТМК", "tag": "m032"}
+{"id": "g75aa1b3b", "field": "title", "class": "title_standard", "was": "Группа Астра приобрела 80% в ООО «Сатори» — разработчика ...", "now": "«Группа Астра» купила 80% ООО «Сатори»", "tag": "m032"}
+{"id": "g75aa1b3b", "field": "extra", "class": "wrong_share", "was": "80% акций; основатели сохранили 20%", "now": "по ЕГРЮЛ у Могилевкина 13,065%, двое вышли", "tag": "m032"}
+{"id": "g981fc9c5", "field": "buyer", "class": "wrong_buyer", "was": "Portofino Capital", "now": "ООО «ЛПФ Капитал» (ЕГРЮЛ)", "tag": "m032"}
+{"id": "g981fc9c5", "field": "title", "class": "title_standard", "was": "Кирилл Игнахин и Portofino Capital купили российские активы Doka", "now": "ООО «ЛПФ Капитал» купило российские компании Doka", "tag": "m032"}
+{"id": "g981fc9c5", "field": "law.struct", "class": "other", "was": "владельцы покупателя в структуре сделки", "now": "перенесены в eco.context", "tag": "m032"}
+{"id": "g981fc9c5", "field": "eco.context", "class": "unsupported_claim", "was": "18.06.2024 переименовано в «Реформу»", "now": "без даты, которой нет в источниках", "tag": "m032"}
+{"id": "g1ce3ddfc", "field": "seller", "class": "wrong_seller", "was": "IDS Borjomi Russia", "now": "ООО «Компания Чистая вода» и ООО «Минводы Боржоми» (ЕГРЮЛ)", "tag": "m032"}
+{"id": "g1ce3ddfc", "field": "title", "class": "title_standard", "was": "IDS Borjomi Russia продала завод ... «Чистозерье»", "now": "ТД «Усть-Каменский» купил «Карачинскую звезду»", "tag": "m032"}
+{"id": "g1ce3ddfc", "field": "extra", "class": "version_as_fact", "was": "сделка включала права на бренд и мощности", "now": "по словам эксперта Алены Кондратьевой", "tag": "m032"}
+{"id": "g88236336", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (25% без контроля)", "tag": "m032"}
+{"id": "g88236336", "field": "seller", "class": "wrong_seller", "was": "Роман Рис и Артем Жилонов", "now": "снят: доли сократились пропорционально, продажа не доказана", "tag": "m032"}
+{"id": "g88236336", "field": "title", "class": "title_standard", "was": "Алексей Ученов приобрел 25% в производителе банкоматов BFS", "now": "Алексей Ученов купил 25% BFS", "tag": "m032"}
+{"id": "g88236336", "field": "eco.context", "class": "foreign_fact", "was": "планы «Гознака» 2025 года, ИИ Smart Engines, «(Mashnews)»", "now": "история компании и покупателя", "tag": "m032"}
+{"id": "gfeb4e569", "field": "buyer", "class": "wrong_buyer", "was": "En+ Group", "now": "ООО «Парк-отель Бурдугуз»", "tag": "m032"}
+{"id": "gfeb4e569", "field": "sum", "class": "wrong_sum", "was": "4–7 млрд ₽ (по оценке экспертов без имени)", "now": "Не раскрыта", "tag": "m032"}
+{"id": "gfeb4e569", "field": "title", "class": "title_standard", "was": "En+ Group (структуры Дерипаски) приобрела гостиницу", "now": "«Парк-отель Бурдугуз» купил гостиницу «Амурский залив»", "tag": "m032"}
+{"id": "gfeb4e569", "field": "eco.context", "class": "unsupported_claim", "was": "планы стать главным игроком, покупка «Хаяттов» за 3,7 млрд", "now": "только реконструкция по соглашению с КРДВ", "tag": "m032"}
+{"id": "gaa0ca672", "field": "date", "class": "wrong_date", "was": "2024-06-26 (день публикации)", "now": "2024", "tag": "m032"}
+{"id": "gaa0ca672", "field": "title", "class": "title_standard", "was": "ГК Softline приобрела контроль в «МД Аудит»", "now": "Softline купил контроль в «МД Аудит»", "tag": "m032"}
+{"id": "gaa0ca672", "field": "eco.share", "class": "wrong_target", "was": "—", "now": "75% ООО «Кам» (Армения), владельца «МД Аудит»", "tag": "m032"}
+{"id": "gaa0ca672", "field": "extra", "class": "other", "was": "заметка о поиске второй сделки серии", "now": "факты о покупателе и серии сделок", "tag": "m032"}
+{"id": "g5a1ee21e", "field": "title", "class": "title_standard", "was": "НЛМК продает американские заводы Cleveland-Cliffs", "now": "Cleveland-Cliffs может купить американские заводы НЛМК", "tag": "m032"}
+{"id": "g5a1ee21e", "field": "sum", "class": "wrong_sum", "was": "00 млн (по оценке)", "now": "Более 00 млн (по оценке)", "tag": "m032"}
+{"id": "g5a1ee21e", "field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка 2021 ,2 млрд, EBITDA  млрд", "now": "—", "tag": "m032"}
+{"id": "g5a1ee21e", "field": "src", "class": "source_not_about", "was": "Primetals: награда заводу", "now": "снят, добавлен GMK Center", "tag": "m032"}
+{"id": "g5a1ee21e", "field": "law.terms", "class": "version_as_fact", "was": "Cliffs подписала соглашение о неразглашении", "now": "по неофициальным данным", "tag": "m032"}
+{"id": "g39218eec", "field": "title", "class": "title_standard", "was": "заголовок Коммерсанта", "now": "Softline купил ООО «Визитек»", "tag": "m032"}
+{"id": "g39218eec", "field": "eco.val", "class": "version_as_fact", "was": "по оценке экспертов EV 75–150 млн", "now": "оценка аналитика «РегБлока» Анны Авакимян", "tag": "m032"}
+{"id": "g39218eec", "field": "eco.context", "class": "verbatim", "was": "копия фразы Коммерсанта, неверная хронология выхода «Гиперион»", "now": "пересказ; хронология снята", "tag": "m032"}
+{"id": "gd84abf3e", "field": "seller", "class": "wrong_seller", "was": "Агрохолдинг «Василина»", "now": "Виктор Димитриев и ООО «Большечерниговский комбикормовый завод» (ЕГРЮЛ)", "tag": "m032"}
+{"id": "gd84abf3e", "field": "law.struct", "class": "other", "was": "Виктор Димитров", "now": "Виктор Димитриев", "tag": "m032"}
+{"id": "gd84abf3e", "field": "extra", "class": "unsupported_claim", "was": "элеватор на 100+ тыс. тонн, 7 тыс. га, «акций» ООО", "now": "факты АК&М и oboz.info", "tag": "m032"}
+{"id": "gd84abf3e", "field": "date", "class": "wrong_date", "was": "2024-05-14", "now": "2024", "tag": "m032"}
+{"id": "g56e609e3", "field": "ind", "class": "wrong_industry", "was": "ГМК и добыча", "now": "Лесопром", "tag": "m032"}
+{"id": "g56e609e3", "field": "eco.share", "class": "unsupported_claim", "was": "участки 1 млн га, лесосека 2,3 млн м3", "now": "доли в ООО «Мется Свирь» и ООО «Мется Форест Подпорожье»", "tag": "m032"}
+{"id": "g56e609e3", "field": "title", "class": "title_standard", "was": "Metsä Group продала ... группе ВЛП", "now": "ГК «Вологодские лесопромышленники» купила российские компании Metsä Group", "tag": "m032"}
+{"id": "g073bf58b", "field": "date", "class": "wrong_date", "was": "2024-05-07 (распоряжение Президента)", "now": "2024 (закрытие к 1 июля)", "tag": "m032"}
+{"id": "g073bf58b", "field": "eco.rationale", "class": "invented_rationale", "was": "может стать выходом на рынок ЛКМ для автопрома", "now": "—", "tag": "m032"}
+{"id": "g073bf58b", "field": "law.appr", "class": "unsupported_claim", "was": "исключение из перечня стратегических, 372-рп", "now": "распоряжение Президента опубликовано 7 мая 2024 года", "tag": "m032"}
+{"id": "g073bf58b", "field": "title", "class": "title_standard", "was": "BASF продал подмосковный завод ...", "now": "«Лакра Синтез» купила «БАСФ Восток» у BASF", "tag": "m032"}
