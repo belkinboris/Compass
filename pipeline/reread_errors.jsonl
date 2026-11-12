@@ -504,3 +504,22 @@
 {"id": "g076a2f4e", "field": "seller", "class": "wrong_seller", "was": "Группа «Жилкапинвест» (продавец)", "now": "предмет; продавцы — бенефициары Коробов и Румянцев", "tag": "m016"}
 {"id": "g076a2f4e", "field": "eco.share", "class": "verbatim", "was": "«серьезного игрока на рынке Владивостока» без автора", "now": "100% долей компаний группы, 239 тыс. кв. м", "tag": "m016"}
 {"id": "g076a2f4e", "field": "title", "class": "title_standard", "was": "Продажа девелоперских проектов группы «Жилкапинвест» группе Glorax", "now": "GloraX купил «Жилкапинвест»", "tag": "m016"}
+{"id": "g3ece5143", "field": "eco.sum", "class": "sum_meaning", "was": "1,8–2 млрд ₽ (оценка всего завода)", "now": "≈1 млрд ₽ (по оценке, цена 51%)", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.share", "class": "wrong_share", "was": "другие владельцы завода, дословно", "now": "51%", "tag": "m015"}
+{"id": "g3ece5143", "field": "law.struct", "class": "unsupported_claim", "was": "«компания группы ТВЗ», «свыше 30 знаков»", "now": "по Ведомостям", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение эксперта без имени", "now": "с именем Андрея Московского", "tag": "m015"}
+{"id": "g3ece5143", "field": "eco.context", "class": "foreign_fact", "was": "Татспиртпром, Амбер Талвис", "now": "снято", "tag": "m015"}
+{"id": "g3ece5143", "field": "title", "class": "title_standard", "was": "Росспиртпром приобрел 51% ООО «…»", "now": "«Росспиртпром» купил 51% «…»", "tag": "m015"}
+{"id": "g081ac83c", "field": "eco.sum", "class": "wrong_sum", "was": "270–750 млн ₽ (нет в источниках)", "now": "≈500 млн ₽ (по оценке)", "tag": "m015"}
+{"id": "g081ac83c", "field": "date", "class": "wrong_date", "was": "2025-08-01", "now": "2025-08-25 (ЕГРЮЛ)", "tag": "m015"}
+{"id": "g081ac83c", "field": "law.struct", "class": "version_as_fact", "was": "догадки «по-видимому», «по опциону»", "now": "шаги по ЕГРЮЛ", "tag": "m015"}
+{"id": "g081ac83c", "field": "eco.context", "class": "verbatim", "was": "дословно ComNews", "now": "пересказ", "tag": "m015"}
+{"id": "g081ac83c", "field": "title", "class": "title_standard", "was": "ГК «Солар» (Ростелеком) купила 90% ООО «СОФТ ПЛЮС» (Hexway)", "now": "«Солар» купил 90% Hexway", "tag": "m015"}
+{"id": "g139db8c2", "field": "eco.sum", "class": "wrong_sum", "was": "До 100 млрд ₽", "now": "80–120 млрд ₽ (по оценке)", "tag": "m015"}
+{"id": "g139db8c2", "field": "date", "class": "wrong_date", "was": "2025-08-01", "now": "2025", "tag": "m015"}
+{"id": "g139db8c2", "field": "extra", "class": "unsupported_claim", "was": "Bridgestone, Otis; пресс-атрибуция", "now": "снято", "tag": "m015"}
+{"id": "g139db8c2", "field": "eco.context", "class": "unsupported_claim", "was": "наши выводы об опровержении и Махмудове", "now": "факты с атрибуцией", "tag": "m015"}
+{"id": "g139db8c2", "field": "title", "class": "title_standard", "was": "… (участие «МТ-Интеграции» компания отрицает)", "now": "S8 Capital купил долю в «Аквариусе»", "tag": "m015"}
+{"id": "gcfa149c5", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Медиа", "tag": "m015"}
+{"id": "gcfa149c5", "field": "title", "class": "title_standard", "was": "…51% в агентстве инфлюенс-маркетинга Hello Blogger", "now": "Kokoc Group купила 51% Hello Blogger", "tag": "m015"}
+{"id": "gcfa149c5", "field": "eco.rationale", "class": "verbatim", "was": "почти дословно ComNews", "now": "пересказ", "tag": "m015"}
