@@ -49,8 +49,25 @@ ATTRIBUTION = ('\n\nCo-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>\n'
                'Claude-Session: https://claude.ai/code/session_01XhWnVZv9GScsFsvaXEfC2i')
 
 
+LOG = '/tmp/reread_apply.log'
+_T = {'tag': '?', 'steps': []}
+
+
+def note(text):
+    """Строка в общий журнал записи партий: кто, когда, чем кончилось, сколько шел шаг."""
+    try:
+        with open(LOG, 'a', encoding='utf-8') as f:
+            f.write('%s %s %s\n' % (time.strftime('%H:%M:%S'), _T['tag'], text))
+    except OSError:
+        pass
+
+
 def run(cmd, env=None, timeout=1500):
+    t = time.time()
     r = subprocess.run(cmd, cwd=ROOT, env=env, capture_output=True, text=True, timeout=timeout)
+    name = os.path.basename(cmd[1]) if len(cmd) > 1 and cmd[0] != 'git' else ' '.join(cmd[:2])
+    if time.time() - t > 5:
+        _T['steps'].append('%s %dс' % (name, time.time() - t))
     return r.returncode, (r.stdout or '') + (r.stderr or '')
 
 
@@ -76,6 +93,9 @@ def stamped(ids):
 def fail(step, out, write):
     print('СТОП на шаге «%s»:\n%s' % (step, tail(out)))
     if write:
+        last = [l for l in out.strip().splitlines() if l.strip()][-3:]
+        note('СТОП «%s» | %s | %s' % (step, ' / '.join(l.strip()[:140] for l in last), '; '.join(_T['steps'])))
+    if write:
         revert()
         print('Рабочая папка возвращена к последнему коммиту. Файлы правок партии целы — '
               'почините причину и запустите команду снова.')
@@ -87,6 +107,7 @@ def main(argv):
     plan_path = [a for a in argv if not a.startswith('--')][0]
     plan = json.load(open(plan_path, encoding='utf-8'))
     tag, ids = plan['tag'], plan['ids']
+    _T['tag'] = tag
     assert tag and len(tag) >= 3 and ids, 'в плане нужны tag и ids'
     bad_cls = sorted({e.get('class') for e in plan.get('errors') or []} - set(CLASSES))
     assert not bad_cls, 'неизвестные классы ошибок: %s (допустимые: %s)' % (bad_cls, ', '.join(CLASSES))
@@ -102,6 +123,7 @@ def main(argv):
         waited = int(time.time() - t0)
         if waited > 5:
             print('Ждали замок %d с.' % waited)
+        note('замок взят, ждали %d с' % waited)
 
     if write:
         left = dirty_tracked()
@@ -179,7 +201,7 @@ def main(argv):
     code, out = run(['git', 'commit', '-q', '-m', msg + ATTRIBUTION])
     if code and 'nothing to commit' not in out and 'нечего коммитить' not in out:
         return fail('git commit', out, False)
-    run([py, 'pipeline/publication_busy.py', '--wait', '40'])
+    run([py, 'pipeline/publication_busy.py', '--wait', '20'])
     for i in range(4):
         code, out = run(['git', 'pull', '-q', '--rebase', 'origin', 'main'])
         if code:
@@ -193,6 +215,8 @@ def main(argv):
     else:
         print('ВНИМАНИЕ: push не прошел, коммит остался локально:\n' + tail(out, 6))
         return 1
+    note('ЗАПИСАНО: %s | %s' % (msg, '; '.join(_T['steps'])))
+    fcntl.flock(lock, fcntl.LOCK_UN)          # сверка с реестром ходит в сеть — уже без замка
     code, audit = run([py, 'pipeline/party_registry_audit.py', '--ids'] + list(ids), env=env)
     print('ЗАПИСАНО И ЗАПУШЕНО: %s' % msg)
     missing = [i for i in ids if i not in done]
