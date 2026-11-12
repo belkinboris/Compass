@@ -29,6 +29,34 @@
    "object_id": "g8eabc0bc"
   },
   {
+   "id": "s7027d9f0a",
+   "company_id": "sheremetyevo",
+   "date": "2026-11-12",
+   "kind": "sell",
+   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
+  {
+   "id": "s1d1eac154",
+   "company_id": "g1279140f",
+   "date": "2026-11-12",
+   "kind": "for_sale",
+   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
+  {
    "id": "s011f3877d",
    "company_id": "g28ff15bb",
    "date": "2026-11-12",
@@ -1578,7 +1606,7 @@
    "company_id": "gc0f11fd7",
    "date": "2025-11-20",
    "kind": "sell",
-   "summary": "ПАО «Газпром» — обсуждается сделка «Газпром продает Газпром нефтехим Салават холдингу Росхим»",
+   "summary": "ПАО «Газпром» — обсуждается продажа: ООО «Газпром нефтехим Салават»",
    "source": [
     "Известия",
     "https://iz.ru/1993424/2025-11-20/gazprom-prodaet-krupnyi-neftekhimkompleks-roskhimu"
@@ -1592,7 +1620,7 @@
    "company_id": "g936f9597",
    "date": "2025-11-20",
    "kind": "buy",
-   "summary": "Росхим — обсуждается сделка «Газпром продает Газпром нефтехим Салават холдингу Росхим»",
+   "summary": "Росхим — обсуждается покупка: ООО «Газпром нефтехим Салават»",
    "source": [
     "Известия",
     "https://iz.ru/1993424/2025-11-20/gazprom-prodaet-krupnyi-neftekhimkompleks-roskhimu"
