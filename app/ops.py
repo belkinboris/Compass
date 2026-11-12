@@ -153,8 +153,9 @@ def _ops_numbers() -> dict:
         "deals": len(deals),
         "companies": len(base.get("companies") or {}),
         "added_week": len(week),
-        # «Скоро выйдет» — ТОЛЬКО прочитанные против источника: непрочитанная
-        # карточка не публикуется по молчанию никогда (approve.py,
+        # «Ждут кнопки» — показанные в консоли (с 12 ноября 2026 молчание не
+        # публикует ничего, approve.py). Раньше «скоро выйдет»: непрочитанная
+        # карточка не публиковалась по молчанию никогда (approve.py,
         # `plan_actions`), и раньше это число молча включало ее тоже —
         # владелец 18 августа поймал два таких «зависших» примера.
         "queue_soon": sum(1 for c in pending if not c.get("held") and c.get("reviewed") and c.get("accepted")
@@ -209,7 +210,7 @@ ol.prev .tag{font-size:12px;color:var(--acc);margin-left:6px;white-space:nowrap}
 </div>
 <h2>Ждет вашего решения</h2>
 <div class="grid">
-<div class="c"><div class="n">%(queue_soon)d</div><div class="l">выйдут сами в течение суток</div></div>
+<div class="c"><div class="n">%(queue_soon)d</div><div class="l">показаны вам, ждут кнопки — без нее не выйдут</div></div>
 <div class="c"><div class="n">%(queue_unread)d</div><div class="l">ждут прочтения или приемки — сами не выйдут</div></div>
 <div class="c"><div class="n">%(queue_held)d</div><div class="l">вы придержали</div></div>
 </div>

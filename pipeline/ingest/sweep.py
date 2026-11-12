@@ -8,7 +8,8 @@
   fetch.py → triage.py → draft.py → promote.py --write → signals.py --write
   → список несрешенного сырья (raw_screen.py) → [агент отсеивает мусор:
   raw_screen.py --drop] → send_drafts.py --write (сырье ⚠️ с кнопками;
-  готовые карточки, если их еще не показал сервер) → коммит очереди,
+  готовые карточки, если их еще не показал сервер) → напоминание в личку о
+  том, что сутки ждет решения (remind_undecided.py) → коммит очереди,
   hold-файлов и памяти о сырье → push.
 
 Две фазы, потому что между ними — единственный шаг по смыслу: отсев
@@ -35,7 +36,9 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
-TRACKED = ['static/data/pending.json', 'static/data/signals.json', 'data/inbox/hold', 'data/inbox/duplicates', 'data/inbox/moderation_state.json']
+TRACKED = ['static/data/pending.json', 'static/data/signals.json', 'data/inbox/hold', 'data/inbox/duplicates',
+           'data/inbox/moderation_state.json', 'data/inbox/undecided_reminders.json']
+REMINDERS = 'data/inbox/undecided_reminders.json'
 
 
 def run(name, *args, must=True):
@@ -92,10 +95,16 @@ def settle_rebase():
                 git('rebase', '--abort')
                 return False
             return True
-        if not all(f.startswith('data/inbox/hold/') for f in files):
+        if not all(f.startswith('data/inbox/hold/') or f == REMINDERS for f in files):
             git('rebase', '--abort')
             return False
-        git('checkout', '--ours', '--', *files)
+        # Отметки напоминаний — свежее наша версия (в ребейзе это --theirs):
+        # иначе через час напомнили бы еще раз о том же.
+        if REMINDERS in files:
+            git('checkout', '--theirs', '--', REMINDERS)
+        hold = [f for f in files if f != REMINDERS]
+        if hold:
+            git('checkout', '--ours', '--', *hold)
         git('add', '--', *files)
         r = subprocess.run(['git', 'rebase', '--continue'], cwd=ROOT, capture_output=True, text=True,
                            env=dict(os.environ, GIT_EDITOR='true'))
@@ -131,6 +140,23 @@ def stale_decisions_warning(now=None):
     return old
 
 
+def remind_undecided():
+    """Напоминание в личку о том, что сутки ждет решения в консоли
+    (pipeline/publish/remind_undecided.py, 12 ноября 2026: молчание больше не
+    публикует). Отметки «напомнили» коммитятся вместе с очередью. Сбой
+    напоминания забор не роняет."""
+    try:
+        path = os.path.join(ROOT, 'pipeline', 'publish', 'remind_undecided.py')
+        r = subprocess.run([sys.executable, path, '--write'], cwd=ROOT, capture_output=True,
+                           text=True, timeout=120)
+        tail = (r.stdout or '').strip().splitlines()[-2:]
+        print('remind_undecided.py --write → %s' % ' | '.join(tail)[:300])
+        if r.returncode:
+            print('Напоминание не сработало (код %d): %s' % (r.returncode, (r.stderr or '').strip()[-400:]))
+    except Exception as e:  # noqa: BLE001 — напоминание не должно ронять забор
+        print('Напоминание не сработало: %s' % e)
+
+
 def main(argv):
     write, send = '--write' in argv, '--send' in argv
     g = git('pull', '--rebase', '--autostash', 'origin', 'main')
@@ -141,6 +167,7 @@ def main(argv):
     if send:
         # Фаза 2: мусор уже отсеян (raw_screen.py --drop) — показать и записать.
         run('send_drafts.py', '--write', must=False)
+        remind_undecided()
         rc = commit_and_push('Забор новостей: сырье показано, очередь (sweep.py --send)')
         stale_decisions_warning()
         return rc

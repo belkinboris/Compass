@@ -21,7 +21,8 @@
   8. `approve.py --consume` — только теперь сайт считает решения примененными;
   9. `send_telegram.py --write --finish --wait-for-site 15` — посты по
      решениям, с ожиданием, пока сайт подтянет базу, и паузой между постами;
- 10. коммит отметок об отправке, `pytest test_data.py`, push.
+ 10. коммит отметок об отправке, `pytest test_data.py`, push;
+ 11. напоминание в личку о том, что сутки ждет решения (remind_undecided.py).
 
     python3 pipeline/publish/ship_decisions.py            # сухой прогон: что бы сделала
     python3 pipeline/publish/ship_decisions.py --write
@@ -201,6 +202,32 @@ def posts_not_sent(base, expected):
     deals = {d.get('id'): d for d in base.get('deals') or []}
     return [i for i in expected
             if i in deals and i not in posted and not deals[i].get('no_post')]
+
+
+REMINDERS = 'data/inbox/undecided_reminders.json'
+
+
+def remind_undecided():
+    """После выпуска — напоминание в личку о том, что сутки ждет решения
+    (remind_undecided.py, 12 ноября 2026: молчание больше не публикует).
+    Отметки «напомнили» коммитятся и пушатся отдельно. Любой сбой здесь
+    только печатается: посты уже ушли."""
+    try:
+        r = run([sys.executable, os.path.join(WORK, 'pipeline', 'publish', 'remind_undecided.py'), '--write'],
+                must=False, timeout=120)
+        for l in [l for l in r.stdout.splitlines() if l.strip()][-2:]:
+            log('  ' + l)
+        if r.returncode:
+            log('Напоминание не сработало (код %d): %s' % (r.returncode, r.stderr.strip()[-300:]))
+            return
+        if git('status', '--porcelain', '--', REMINDERS, must=False):
+            git('add', '--', REMINDERS)
+            git('commit', '-q', '-m', 'Публикация: отметки напоминаний в личку')
+            err = push_with_retry()
+            if err:
+                log('Отметки напоминаний не запушены (%s) — не страшно, следующий прогон повторит.' % err)
+    except (Exception, SystemExit) as e:  # noqa: BLE001 — напоминание не роняет публикацию
+        log('Напоминание не сработало: %s' % e)
 
 
 def main(argv):
@@ -393,6 +420,7 @@ def _main(argv, write):
         if err:
             log('СТОП: отметки об отправке не запушены (%s) — повторите push руками, посты уже ушли.' % err)
             return 1
+    remind_undecided()
     run(['git', 'pull', '-q', '--rebase', '--autostash', 'origin', 'main'], cwd=ROOT, must=False)
     log('ГОТОВО: решения применены, база в main, посты отправлены.')
     return 0

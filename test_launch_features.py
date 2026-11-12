@@ -2903,11 +2903,13 @@ def test_moderation_rejects_strangers_and_bad_tokens(client, monkeypatch):
     assert client.get("/api/moderation/decisions", params={"token": ""}).status_code == 404
 
 
-def test_approve_publishes_on_decision_or_silence_and_respects_hold():
-    """Три исхода модерации: решение, молчание сутки, «придержать».
+def test_approve_publishes_only_on_decision_and_respects_hold():
+    """Исходы модерации: решение, «придержать», ожидание.
 
-    Молчание — согласие: немой шаг, который держит весь поток, у нас уже был
-    (тормоз E9), второй раз те же грабли не берем.
+    До 12 ноября 2026 сутки молчания публиковали карточку как есть. Владелец:
+    «Отмени правило молчания 1 день что выпускается пост. Теперь если вдруг
+    мы не отреагировали, то пиши мне и артему в личку, что такой-то пост не
+    опубликован». Теперь молчание — ожидание с причиной «ждет решения N ч».
     """
     import sys
     sys.path.insert(0, str(Path("pipeline/ingest")))
@@ -2944,11 +2946,11 @@ def test_approve_publishes_on_decision_or_silence_and_respects_hold():
         {"deal_id": "a2", "verdict": "hold"},
     ]
     publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
-    assert {c["id"] for c, _o, _w in publish} == {"a1", "a3"}
+    assert {c["id"] for c, _o, _w in publish} == {"a1"}
     assert next(o for c, o, _ in publish if c["id"] == "a1") == "текст владельца"
     assert {c["id"] for c, _w in hold} == {"a2"}
-    assert {c["id"] for c, _w in wait} == {"a4", "a5", "a6", "a7"}
-    # Решение человека сильнее: прочитанность требуется только для молчания.
+    assert {c["id"] for c, _w in wait} == {"a3", "a4", "a5", "a6", "a7"}
+    assert next(w for c, w in wait if c["id"] == "a3") == "ждет решения 30 ч"
     assert "не прочитана" in next(w for c, w in wait if c["id"] == "a7")
 
 
@@ -3080,7 +3082,11 @@ def test_post_no_is_a_modifier_and_does_not_hold_the_card():
     decisions = [{"deal_id": "p1", "verdict": "post_no", "created_at": "x"}]
     publish, hold, wait, discard = approve.plan_actions(cards, decisions, now)
     assert not hold, "post_no придержал карточку — это модификатор, а не вердикт"
-    assert {c["id"] for c, _o, _w in publish} == {"p1"}, "таймаут молчания должен сработать"
+    # Молчание не публикует (12 ноября 2026): карточка ждет «Опубликовать».
+    assert not publish and [c["id"] for c, _w in wait] == ["p1"]
+    publish, hold, _w, _d = approve.plan_actions(
+        cards, decisions + [{"deal_id": "p1", "verdict": "approve", "created_at": "y"}], now)
+    assert not hold and {c["id"] for c, _o, _w in publish} == {"p1"}
     # …а сам модификатор читается отдельной выборкой.
     assert approve.last_by_deal(decisions, approve.POST_VERDICTS)["p1"]["verdict"] == "post_no"
 
@@ -3386,7 +3392,8 @@ def test_ops_dashboard_opens_with_the_token(client, monkeypatch):
     assert "панель основателей" in r.text
     # Подписи называют МНОЖЕСТВО, а не только величину (урок CLAUDE.md).
     assert "сделок на сайте" in r.text
-    assert "выйдут сами в течение суток" in r.text
+    assert "ждут кнопки — без нее не выйдут" in r.text
+    assert "выйдут сами" not in r.text   # молчание не публикует с 12.11.2026
 
 
 def test_ops_summary_counts_the_same_numbers_as_the_page(client, monkeypatch):

@@ -2880,10 +2880,13 @@ def test_plan_milestones_in_main_sees_the_first_post_snapshot(monkeypatch, tmp_p
         "telegram_posts": {"g1": 5},
         "telegram_post_state": {"g1": {"status": "Закрыта", "events": [{"kind": "closed"}]}}}
     now = _dt.datetime.now(_dt.timezone.utc)
-    send, hold, _d, _s = send_telegram.plan_milestones(data["deals"], {}, [], now, data["telegram_post_state"])
+    decisions = [{"id": 1, "deal_id": "g1~closed", "verdict": "post_yes",
+                  "created_at": now.isoformat()}]
+    send, hold, _d, _s = send_telegram.plan_milestones(data["deals"], {}, decisions, now,
+                                                       data["telegram_post_state"])
     assert send == [] and hold == []
-    # без снимка та же веха ушла бы по молчанию — ровно это и случилось
-    send, _h, _d, _s = send_telegram.plan_milestones(data["deals"], {}, [], now)
+    # без снимка та же веха ушла бы по кнопке — ровно это и случилось (тогда — по молчанию)
+    send, _h, _d, _s = send_telegram.plan_milestones(data["deals"], {}, decisions, now)
     assert [e["id"] for _deal, e in send] == ["g1-closed"]
     src = (ROOT / "pipeline" / "publish" / "send_telegram.py").read_text(encoding="utf-8")
     assert "plan_milestones(\n        data['deals'], milestones, m_decisions, now_utc, post_state)" in src
@@ -2918,12 +2921,12 @@ def test_milestone_decisions_parses_the_tilde_separated_id():
     }
 
 
-def test_plan_milestones_sends_on_silence_holds_before_it_and_respects_post_no():
-    """Три ветки одной функции: явное «пост в канал» — отправить сразу;
-    молчание меньше суток — придержать; молчание МЕНЬШЕ суток, но БЕЗ
-    решения, — тоже придержать; явное «без поста» — не отправлять никогда,
-    но decision id все равно идет на consume (иначе кнопка будет спрашивать
-    о себе на каждом прогоне)."""
+def test_plan_milestones_never_sends_on_silence_and_respects_post_no():
+    """С 12 ноября 2026 молчание веху не публикует (владелец: «Отмени правило
+    молчания 1 день что выпускается пост»): без решения — ждать хоть сутки,
+    хоть больше; явное «без поста» — не отправлять никогда, но decision id
+    все равно идет на consume (иначе кнопка будет спрашивать о себе на
+    каждом прогоне); явное «пост в канал» — отправить сразу."""
     from datetime import datetime, timedelta, timezone
     now = datetime(2026, 8, 22, 12, 0, tzinfo=timezone.utc)
     old = (now - timedelta(hours=30)).isoformat()
@@ -2939,11 +2942,15 @@ def test_plan_milestones_sends_on_silence_holds_before_it_and_respects_post_no()
     ]}]
     decisions = [{"id": 9, "deal_id": "d6~cancelled", "verdict": "post_no"}]
     send, hold, discard_ids, sent_ids = send_telegram.plan_milestones(deals, {}, decisions, now)
-    assert [e["id"] for _d, e in send] == ["d5-approval"], "истекшее молчание без решения — отправить"
-    hold_ids = {e["id"] for _d, e, *_ in hold}
-    assert "d5-closed" in hold_ids, "молчание еще не истекло — придержать"
+    assert send == [], "молчание (даже 30 ч) не публикует"
+    reasons = {e["id"]: why for _d, e, why in hold}
+    assert set(reasons) == {"d5-approval", "d5-closed"}
+    assert reasons["d5-approval"] == "ждет решения 30 ч"
     assert discard_ids == [9]
     assert sent_ids == []
+    decisions.append({"id": 10, "deal_id": "d5~approval", "verdict": "post_yes"})
+    send, _h, _dis, sent_ids = send_telegram.plan_milestones(deals, {}, decisions, now)
+    assert [e["id"] for _d, e in send] == ["d5-approval"] and sent_ids == [10]
 
 
 def test_plan_milestones_does_not_let_silence_publish_a_stale_milestone():
@@ -2965,7 +2972,7 @@ def test_plan_milestones_does_not_let_silence_publish_a_stale_milestone():
     send, hold, _discard, _sent = send_telegram.plan_milestones(deals, {}, decisions, now)
     assert [e["id"] for _d, e in send] == ["d8-closed"], "решение человека сильнее срока"
     assert [e["id"] for _d, e, *_ in hold] == ["d7-closed"]
-    assert "устарела" in hold[0][2]
+    assert hold[0][2].startswith("ждет решения")
 
 
 def test_main_sends_an_approved_milestone_and_records_dedup(monkeypatch, tmp_path):
@@ -5044,8 +5051,8 @@ def test_console_withholds_cards_that_passed_reading_but_not_acceptance(monkeypa
 
 
 def test_silence_does_not_publish_an_unaccepted_card():
-    """Молчание — согласие на ПРИНЯТУЮ карточку; явное «опубликовать» —
-    по-прежнему сильнее."""
+    """Молчание не публикует ни принятую, ни непринятую карточку (12 ноября
+    2026); явное «опубликовать» — сильнее приемки."""
     import approve
     from datetime import datetime, timedelta, timezone
     now = datetime.now(timezone.utc)
@@ -5058,8 +5065,9 @@ def test_silence_does_not_publish_an_unaccepted_card():
               "pending_since": stale, "reviewed": "2026-09-11"}]
     publish, _hold, wait, _discard = approve.plan_actions(
         cards, [{"deal_id": "s3", "verdict": "approve"}], now)
-    assert {c["id"] for c, _o, _w in publish} == {"s2", "s3"}
+    assert {c["id"] for c, _o, _w in publish} == {"s3"}
     assert any(c["id"] == "s1" and "приемк" in w for c, w in wait), wait
+    assert any(c["id"] == "s2" and w == "ждет решения 30 ч" for c, w in wait), wait
 
 
 def test_console_withholds_unreviewed_cards(monkeypatch):
@@ -6867,8 +6875,9 @@ def test_monthly_digest_skips_a_month_without_enough_deals(base):
 
 
 def test_monthly_digest_goes_out_once_and_only_after_a_day_in_the_console(base):
-    """Путь сводки — тот же, что у вехи: черновик в консоль, сутки молчания,
-    публикация. И ровно один раз за месяц."""
+    """Путь сводки — тот же, что у вехи: черновик в консоль, явное решение,
+    публикация (молчание не публикует с 12 ноября 2026). И ровно один раз за
+    месяц."""
     import datetime
     now = datetime.datetime(2026, 9, 3, 12, 0, tzinfo=datetime.timezone.utc)
     data = {"deals": base["deals"], "companies": base["companies"]}
@@ -6881,9 +6890,12 @@ def test_monthly_digest_goes_out_once_and_only_after_a_day_in_the_console(base):
     assert send_telegram.plan_digest(data, [], now, today=datetime.date(2026, 9, 1))[0] is None
 
     data["telegram_digests"] = {key: {"drafted_at": "2026-09-03T11:00:00+00:00"}}
-    assert send_telegram.plan_digest(data, [], now)[0] is None, "сутки еще не прошли"
+    assert send_telegram.plan_digest(data, [], now)[0] is None, "решения нет"
     data["telegram_digests"][key]["drafted_at"] = "2026-09-02T09:00:00+00:00"
-    assert send_telegram.plan_digest(data, [], now)[0] == "send"
+    action, _k, why, _ids = send_telegram.plan_digest(data, [], now)
+    assert action is None and why == "ждет решения 27 ч", "сутки молчания не публикуют"
+    yes = [{"deal_id": "digest~%s" % key, "verdict": "post_yes", "id": 41}]
+    assert send_telegram.plan_digest(data, yes, now)[:2] == ("send", key)
 
     no = [{"deal_id": "digest~%s" % key, "verdict": "post_no", "id": 42}]
     action, _k, _why, ids = send_telegram.plan_digest(data, no, now)
@@ -6915,7 +6927,8 @@ def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, t
     key = monthly_digest.month_key(y, m)
     if not monthly_digest.enough(monthly_digest.stats(data, y, m)):
         pytest.skip("за прошлый месяц в базе слишком мало сделок для сводки")
-    # Черновик «отправлен» сутки назад — значит по молчанию пора публиковать.
+    # Черновик показан давно, и в консоли нажали «пост в канал» (молчание с
+    # 12 ноября 2026 не публикует).
     data["telegram_digests"] = {key: {"drafted_at": "2000-01-01T00:00:00+00:00"}}
     tmp_data = tmp_path / "deals_promoted.json"
     tmp_data.write_text(json.dumps(data), encoding="utf-8")
@@ -6939,7 +6952,9 @@ def test_monthly_digest_actually_goes_to_the_channel_with_buttons(monkeypatch, t
     monkeypatch.setattr(send_telegram, "DATA", str(tmp_data))
     monkeypatch.setattr(send_telegram, "load_today_updates", lambda: {})
     monkeypatch.setattr(send_telegram, "fns_client_or_none", lambda: None)
-    monkeypatch.setattr(send_telegram.approve, "fetch_decisions", lambda: ([], None))
+    monkeypatch.setattr(send_telegram.approve, "fetch_decisions", lambda: (
+        [{"id": 7, "deal_id": "digest~%s" % key, "verdict": "post_yes",
+          "created_at": frozen_now.isoformat()}], None))
     monkeypatch.setattr(send_telegram.approve, "consume", lambda *a, **k: None)
     monkeypatch.setattr(send_telegram.time, "sleep", lambda s: None)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
@@ -8486,14 +8501,18 @@ def test_exit_from_russia_headlines_are_deals_with_seller_and_subject():
 def test_silence_clock_runs_without_pending_since():
     """Карточка без `pending_since` не должна ждать вечно: 18 сентября три
     карточки (Мадрид, Nestlé, «Ашан») завели мимо promote.py, и три недели
-    отчет обещал «выйдут сами в ближайшие сутки» при «0 ч из 24»."""
+    отчет обещал «выйдут сами в ближайшие сутки» при «0 ч из 24». Молчание
+    с 12 ноября 2026 не публикует, но часы ожидания (по ним напоминание в
+    личку) обязаны идти и без `pending_since`."""
     import approve
     from datetime import datetime, timedelta, timezone
     now = datetime.now(timezone.utc)
     old_day = (now - timedelta(days=3)).date().isoformat()
     cards = [{"id": "n1", "draft_sent": True, "reviewed": old_day, "accepted": old_day}]
-    publish, _hold, _wait, _discard = approve.plan_actions(cards, [], now)
-    assert [c["id"] for c, _o, _w in publish] == ["n1"]
+    publish, _hold, wait, _discard = approve.plan_actions(cards, [], now)
+    assert publish == []
+    assert [c["id"] for c, _w in wait] == ["n1"]
+    assert approve.hours_pending(cards[0], now) >= 48
 
 
 def test_a_no_post_decision_survives_a_hold_and_a_resend(tmp_path, monkeypatch):
@@ -8564,7 +8583,9 @@ def test_approve_keeps_a_preset_added_date(tmp_path, monkeypatch):
     monkeypatch.setattr(approve, "PENDING", str(pending))
     monkeypatch.setattr(approve, "DATA", str(data))
     monkeypatch.setattr(approve, "PENDING_CONSUME", str(tmp_path / "consume.json"))
-    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], None))
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1, "deal_id": "gold1", "verdict": "approve", "created_at": stale},
+        {"id": 2, "deal_id": "gnew1", "verdict": "approve", "created_at": stale}], None))
     import promote
     monkeypatch.setattr(promote, "STATE", str(state))
     monkeypatch.setattr(promote, "notify", lambda *a, **k: None)
@@ -9840,7 +9861,8 @@ def test_approve_treats_a_card_waiting_for_second_reading_as_a_queue_not_a_dead_
     """До 31 октября 2026 approve не знал о втором чтении: принятая с
     9 октября без `second_read` печаталась «ТУПИК» и «ждем решения (0 ч из
     24)», хотя ждала приток. Теперь — «ждет второго чтения», и в тупиках ее
-    нет; не пропущенная приемкой (`hold_reason`) по молчанию не выходит."""
+    нет; не пропущенная приемкой (`hold_reason`) ждет решения. Показанная
+    с 12 ноября 2026 молчанием тоже не выходит — «ждет решения N ч»."""
     from datetime import datetime, timedelta, timezone
     import approve
     now = datetime.now(timezone.utc)
@@ -9857,11 +9879,12 @@ def test_approve_treats_a_card_waiting_for_second_reading_as_a_queue_not_a_dead_
     ]
     assert [c["id"] for c in approve.dead_ends(cards)] == ["ok"]
     publish, _hold, wait, _discard = approve.plan_actions(cards, [], now)
-    assert {c["id"] for c, _o, _w in publish} == {"sh"}
+    assert publish == []
     why = {c["id"]: w for c, w in wait}
     assert "второго чтения" in why["r2"] and "ТУПИК" not in why["r2"]
     assert "не показана" in why["ok"]
-    assert "решения" in why["db"] and "молчани" in why["db"]
+    assert "решения" in why["db"]
+    assert why["sh"] == "ждет решения 30 ч"
 
 
 def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
@@ -9900,11 +9923,12 @@ def test_stamp_is_bound_to_content_until_the_card_is_shown(tmp_path):
     publish, _h, wait, _d = approve.plan_actions([dict(edited, pending_since=stale_since)], [], now, comps)
     assert not publish and "переприемка" in wait[0][1]
     assert approve.dead_ends([edited], comps) == []
-    # Показанная без правки выходит молчанием; правка показанной — тоже
-    # переприемка (бэклог D7, 7 ноября 2026; весь путь —
-    # test_an_edited_shown_card_is_reaccepted_reread_and_shown_again).
-    publish, _h, _w, _d = approve.plan_actions([dict(card, draft_sent=True, pending_since=stale_since)], [], now, comps)
-    assert [c["id"] for c, _o, _w in publish] == ["gh1"]
+    # Показанная без правки ждет решения (молчание не публикует с 12 ноября
+    # 2026); правка показанной — переприемка (бэклог D7, 7 ноября 2026; весь
+    # путь — test_an_edited_shown_card_is_reaccepted_reread_and_shown_again).
+    publish, _h, wait, _d = approve.plan_actions([dict(card, draft_sent=True, pending_since=stale_since)], [], now, comps)
+    assert not publish and wait[0][1].startswith("ждет решения")
+    assert readiness.state(dict(card, draft_sent=True), comps) == "shown"
     shown = dict(edited, draft_sent=True)
     assert readiness.state(shown, comps) == "stale"
     publish, _h, wait, _d = approve.plan_actions([dict(shown, pending_since=stale_since)], [], now, comps)
@@ -10029,12 +10053,12 @@ def test_digest_goes_out_with_the_owner_text_from_the_console(monkeypatch):
     assert send_telegram.plan_digest(data, yes, now)[:2] == ("send", "2030-04")
     assert send_telegram.digest_owner_text(data, yes, "2030-04") == "Мой текст сводки"
     assert send_telegram.digest_owner_text(data, [], "2030-04") == ""
-    # Текст в состоянии (owner_text) — чем выйдет, а не когда: без кнопки/ответа/молчания не выходит.
+    # Текст в состоянии (owner_text) — чем выйдет, а не когда: без кнопки/ответа не выходит.
     data["telegram_digests"]["2030-04"]["owner_text"] = "Текст из состояния"
     assert send_telegram.plan_digest(data, [], now)[0] is None
     assert send_telegram.digest_owner_text(data, [], "2030-04") == "Текст из состояния"
     late = datetime.datetime(2030, 5, 3, 9, 0, tzinfo=datetime.timezone.utc)
-    assert send_telegram.plan_digest(data, [], late)[:2] == ("send", "2030-04")            # сутки молчания
+    assert send_telegram.plan_digest(data, [], late)[0] is None             # сутки молчания не публикуют (12.11.2026)
     assert "заменит пост" in send_telegram.digest_draft_message("т", "2030-04", monthly_digest.render_buttons(2030, 4))
 
 
@@ -11441,3 +11465,188 @@ def test_milestone_headline_names_the_actor_in_neutral_words():
         assert accept_card.milestone_headline_style(h), h
     for h in good:
         assert accept_card.milestone_headline_style(h) is None, h
+
+
+# ---------- молчание не публикует; напоминание в личку (12 ноября 2026) ----------
+
+def _silence_fixture(now):
+    """Карточка, этап и сводка — все показаны в консоли 30 часов назад."""
+    from datetime import timedelta
+    old = (now - timedelta(hours=30)).isoformat(timespec="seconds")
+    card = {"id": "gq1", "title": "«Ромашка» купила «Лютик»", "draft_sent": True,
+            "pending_since": old, "reviewed": "2026-11-01", "accepted": "2026-11-01"}
+    deal = {"id": "gm1", "title": "Сделка", "events": [
+        {"kind": "closed", "newsworthy": True, "headline": "«Ромашка» закрыла сделку",
+         "id": "gm1-closed", "milestone_drafted_at": old}]}
+    data = {"deals": [deal], "companies": {}, "telegram_milestones": {},
+            "telegram_digests": {"2026-10": {"drafted_at": old}}}
+    return card, data
+
+
+def _frozen_digest(monkeypatch):
+    import send_telegram
+    monkeypatch.setattr(send_telegram, "digest_due", lambda d, today: (2026, 10))
+
+
+def test_silence_publishes_none_of_the_three_kinds(monkeypatch):
+    """Решение владельца 12 ноября 2026: «Отмени правило молчания 1 день что
+    выпускается пост». Сутки и больше без решения не выпускают ни карточку,
+    ни пост об этапе, ни сводку; явное решение — выпускает."""
+    from datetime import datetime, timezone
+    import approve
+    import send_telegram
+    _frozen_digest(monkeypatch)
+    now = datetime(2026, 11, 12, 12, 0, tzinfo=timezone.utc)
+    card, data = _silence_fixture(now)
+    publish, _h, wait, _d = approve.plan_actions([card], [], now)
+    assert publish == [] and wait[0][1] == "ждет решения 30 ч"
+    send, hold, _di, _s = send_telegram.plan_milestones(data["deals"], {}, [], now)
+    assert send == [] and hold[0][2] == "ждет решения 30 ч"
+    action, key, why, _ids = send_telegram.plan_digest(data, [], now)
+    assert action is None and key == "2026-10" and why == "ждет решения 30 ч"
+    # Неделя молчания — тоже нет.
+    from datetime import timedelta
+    week = now + timedelta(days=7)
+    assert approve.plan_actions([card], [], week)[0] == []
+    assert send_telegram.plan_milestones(data["deals"], {}, [], week)[0] == []
+    assert send_telegram.plan_digest(data, [], week)[0] is None
+    # Явное решение выпускает все три.
+    yes = [{"id": 1, "deal_id": "gq1", "verdict": "approve", "created_at": now.isoformat()},
+           {"id": 2, "deal_id": "gm1~closed", "verdict": "post_yes", "created_at": now.isoformat()},
+           {"id": 3, "deal_id": "digest~2026-10", "verdict": "post_yes", "created_at": now.isoformat()}]
+    assert [c["id"] for c, _o, _w in approve.plan_actions([card], yes, now)[0]] == ["gq1"]
+    assert [e["id"] for _d, e in send_telegram.plan_milestones(data["deals"], {}, yes, now)[0]] == ["gm1-closed"]
+    assert send_telegram.plan_digest(data, yes, now)[0] == "send"
+    # Константы выпуска по молчанию убраны насовсем.
+    assert not hasattr(approve, "SILENCE_HOURS")
+    assert not hasattr(send_telegram, "MILESTONE_SILENCE_HOURS")
+    assert not hasattr(send_telegram, "DIGEST_SILENCE_HOURS")
+
+
+def test_console_texts_no_longer_promise_publication_by_silence():
+    """Консоль, кнопки и отчеты не обещают «молчание сутки — выйдет»."""
+    import send_drafts
+    import send_telegram
+    import ops_status
+    card = {"id": "gq1", "title": "Т", "src": [["Ъ", "https://k.ru/1"]]}
+    text = send_drafts.card_message(card, {})
+    assert "напомним в личку" in text
+    for src in ("pipeline/ingest/send_drafts.py", "pipeline/publish/send_telegram.py",
+                "app/console.py", "pipeline/ops_status.py", "app/ops.py"):
+        body = (ROOT / src).read_text(encoding="utf-8")
+        for phrase in ("Молчание сутки", "промолчать сутки", "выйдет на сайт через сутки",
+                       "выйдут сами в течение суток", "уйдет на сайт как есть"):
+            assert phrase not in body, (src, phrase)
+    assert "напомним в личку" in send_telegram.digest_draft_message("т", "2026-10", monthly_digest.render_buttons(2026, 10))
+    assert "напомним в личку" in ops_status.render_publish(posted=1, soon=2)
+    assert "ё" not in text.lower()
+
+
+def test_reminder_finds_what_waits_longer_than_a_day(monkeypatch):
+    """remind_undecided.waiting/due: все три вида, ждущие дольше суток;
+    свежее и уже решенное — нет."""
+    from datetime import datetime, timedelta, timezone
+    import remind_undecided as ru
+    _frozen_digest(monkeypatch)
+    now = datetime(2026, 11, 12, 9, 0, tzinfo=timezone.utc)      # 12:00 МСК
+    card, data = _silence_fixture(now)
+    fresh = dict(card, id="gq2", title="Свежая", pending_since=(now - timedelta(hours=3)).isoformat())
+    items = ru.waiting(data, [card, fresh], [], now)
+    assert {it["key"] for it in items} == {"card:gq1", "card:gq2", "milestone:gm1-closed", "digest:2026-10"}
+    todo = ru.due(items, {}, now)
+    assert {it["key"] for it in todo} == {"card:gq1", "milestone:gm1-closed", "digest:2026-10"}
+    # Нажатое, но еще не примененное — не напоминаем.
+    pressed = [{"id": 5, "deal_id": "gq1", "verdict": "approve", "created_at": now.isoformat()}]
+    assert "card:gq1" not in {it["key"] for it in ru.waiting(data, [card], pressed, now)}
+    text = ru.message(todo)
+    assert "Не опубликовано, ждет вашего решения в консоли: 3." in text
+    assert "«Ромашка» купила «Лютик»" in text and "/#/preview/gq1" in text and "/#/deal/gm1" in text
+    assert "11 ноября, 06:00 МСК" in text            # 30 ч назад от 12:00 МСК
+    assert "ё" not in text.lower() and "молчани" not in text.lower()
+    one = ru.message(todo[:1])
+    assert one.startswith("Сделка не опубликована: «Ромашка» купила «Лютик». Ждет вашего решения в консоли с ")
+
+
+def _reminder_files(tmp_path, card, data):
+    d = tmp_path / "deals.json"
+    d.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    p = tmp_path / "pending.json"
+    p.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    return dict(data_path=str(d), pending_path=str(p), state_path=str(tmp_path / "rem.json"),
+                fetch=lambda: ([], ("site", "t")))
+
+
+def test_reminder_goes_to_each_private_chat_once_a_day_and_only_in_the_window(monkeypatch, tmp_path):
+    """Напоминание уходит каждому из TELEGRAM_REVIEW_CHAT_IDS одним сообщением;
+    в те же сутки повторно не уходит; вне 10:00–21:00 МСК не уходит вовсе;
+    без --write — только печать. Сеть и Telegram не трогаются."""
+    from datetime import datetime, timedelta, timezone
+    import remind_undecided as ru
+    _frozen_digest(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111, 222")
+    noon = datetime(2026, 11, 12, 9, 0, tzinfo=timezone.utc)     # 12:00 МСК
+    card, data = _silence_fixture(noon)
+    files = _reminder_files(tmp_path, card, data)
+    sent = []
+
+    def sender(chat, text):
+        sent.append((chat, text))
+        return True
+
+    # Сухой прогон — ничего не шлет и отметок не пишет.
+    ru.run(write=False, now=noon, sender=sender, **files)
+    assert sent == [] and not (tmp_path / "rem.json").exists()
+    # Ночь (23:00 МСК) — не шлет.
+    night = datetime(2026, 11, 12, 20, 0, tzinfo=timezone.utc)
+    ru.run(write=True, now=night, sender=sender, **files)
+    assert sent == []
+    assert not ru.in_window(datetime(2026, 11, 12, 6, 59, tzinfo=timezone.utc))    # 09:59 МСК
+    assert ru.in_window(datetime(2026, 11, 12, 7, 0, tzinfo=timezone.utc))         # 10:00 МСК
+    assert not ru.in_window(datetime(2026, 11, 12, 18, 0, tzinfo=timezone.utc))    # 21:00 МСК
+    # День — одно сообщение в каждый личный чат, со всеми тремя.
+    ru.run(write=True, now=noon, sender=sender, **files)
+    assert [c for c, _t in sent] == ["111", "222"]
+    assert sent[0][1] == sent[1][1] and "ждет вашего решения в консоли: 3" in sent[0][1]
+    marks = json.loads((tmp_path / "rem.json").read_text(encoding="utf-8"))
+    assert set(marks) == {"card:gq1", "milestone:gm1-closed", "digest:2026-10"}
+    # Через час и через 20 часов — не повторяет.
+    for later in (noon + timedelta(hours=1), noon + timedelta(hours=20)):
+        ru.run(write=True, now=later, sender=sender, **files)
+    assert len(sent) == 2
+    # Через сутки решения все нет — напоминает снова.
+    ru.run(write=True, now=noon + timedelta(hours=24), sender=sender, **files)
+    assert len(sent) == 4
+    # Решение пришло — запись уходит из отметок, напоминаний больше нет.
+    files["fetch"] = lambda: ([{"id": 1, "deal_id": "gq1", "verdict": "approve",
+                                "created_at": noon.isoformat()},
+                               {"id": 2, "deal_id": "gm1~closed", "verdict": "post_no",
+                                "created_at": noon.isoformat()},
+                               {"id": 3, "deal_id": "digest~2026-10", "verdict": "post_no",
+                                "created_at": noon.isoformat()}], ("site", "t"))
+    ru.run(write=True, now=noon + timedelta(hours=48), sender=sender, **files)
+    assert len(sent) == 4
+    assert json.loads((tmp_path / "rem.json").read_text(encoding="utf-8")) == {}
+
+
+def test_reminder_is_called_by_sweep_and_ship_decisions_without_breaking_them():
+    """sweep.py --send и ship_decisions.py --write зовут напоминание, и его
+    сбой их не роняет (try/except); отметки коммитятся."""
+    sweep = (ROOT / "pipeline" / "ingest" / "sweep.py").read_text(encoding="utf-8")
+    ship = (ROOT / "pipeline" / "publish" / "ship_decisions.py").read_text(encoding="utf-8")
+    assert "remind_undecided()" in sweep and "'data/inbox/undecided_reminders.json'" in sweep
+    assert "remind_undecided()" in ship and "REMINDERS = 'data/inbox/undecided_reminders.json'" in ship
+    import importlib
+    sys.path.insert(0, str(ROOT / "pipeline" / "ingest"))
+    sw = importlib.import_module("sweep")
+    calls = []
+
+    def boom(*a, **k):
+        calls.append(a)
+        raise OSError("нет python")
+    orig = sw.subprocess.run
+    sw.subprocess.run = boom
+    try:
+        sw.remind_undecided()                      # не падает
+    finally:
+        sw.subprocess.run = orig
+    assert calls and calls[0][0][-1] == "--write"
