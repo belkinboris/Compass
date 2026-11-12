@@ -126,6 +126,48 @@
     "needs_review": true
    },
    "queued": "2026-11-12"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28311225::gmru-arnest-reckitt",
+   "candidate_id": "gmru-arnest-reckitt",
+   "reason": "по всей базе: совпали две стороны (asset, buyer)",
+   "draft": {
+    "draft_id": "d59043640",
+    "title": "Группа «Арнест» купила российский бизнес Reckitt в сегменте бытовой химии",
+    "date": "2026-11-12",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28311225"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-12",
+      "title": "Сделка завершена",
+      "note": "В периметр сделки вошло предприятие в Клину в Московской области",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28311225"
+      ]
+     }
+    ],
+    "buyer_name": "«Арнест»",
+    "asset": "российский бизнес Reckitt в сегменте бытовой химии",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Арнест»",
+     "asset": "российский бизнес Reckitt в сегменте бытовой химии",
+     "seller": null
+    },
+    "ind": "Потребительские товары",
+    "needs_review": true
+   },
+   "queued": "2026-11-12"
   }
  ]
 }
