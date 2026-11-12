@@ -260,34 +260,6 @@
    "strength": "strong"
   },
   {
-   "id": "s7027d9f0a",
-   "company_id": "sheremetyevo",
-   "date": "2026-10-21",
-   "kind": "sell",
-   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
-   "source": [
-    "Деловой Петербург",
-    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
-   ],
-   "origin": "card",
-   "deal_id": "g4afd35d0",
-   "strength": "strong"
-  },
-  {
-   "id": "s1d1eac154",
-   "company_id": "g1279140f",
-   "date": "2026-10-21",
-   "kind": "for_sale",
-   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
-   "source": [
-    "Деловой Петербург",
-    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
-   ],
-   "origin": "card",
-   "deal_id": "g4afd35d0",
-   "strength": "strong"
-  },
-  {
    "id": "sf4f74786f",
    "company_id": "g41f567f1",
    "date": "2026-10-15",
@@ -759,48 +731,6 @@
    ],
    "origin": "card",
    "deal_id": "g8f7479bd",
-   "strength": "strong"
-  },
-  {
-   "id": "se672974e7",
-   "company_id": "arnest",
-   "date": "2026-07-27",
-   "kind": "buy",
-   "summary": "«Арнест» — обсуждается покупка: Рекитт Бенкизер",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8844212"
-   ],
-   "origin": "card",
-   "deal_id": "gmru-arnest-reckitt",
-   "strength": "normal"
-  },
-  {
-   "id": "sd85ab6ef9",
-   "company_id": "g087c141d",
-   "date": "2026-07-27",
-   "kind": "for_sale",
-   "summary": "Рекитт Бенкизер — обсуждается продажа компании или доли; возможный покупатель — «Арнест»",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8844212"
-   ],
-   "origin": "card",
-   "deal_id": "gmru-arnest-reckitt",
-   "strength": "strong"
-  },
-  {
-   "id": "s7f8846048",
-   "company_id": "g5ba54588",
-   "date": "2026-07-27",
-   "kind": "sell",
-   "summary": "Reckitt Benckiser — обсуждается продажа: Рекитт Бенкизер",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8844212"
-   ],
-   "origin": "card",
-   "deal_id": "gmru-arnest-reckitt",
    "strength": "strong"
   },
   {
@@ -1858,7 +1788,7 @@
    "company_id": "g63ba8735",
    "date": "2025-07-29",
    "kind": "sell",
-   "summary": "Агрохолдинг «Степь» — обсуждается сделка «Агрохолдинг «Степь» продает портовые активы в Азове и Волгодонске»",
+   "summary": "Агрохолдинг «Степь» — обсуждается продажа: Зерновой терминал в порту Азова и портовый элеватор в Волгодонске",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/7923855"
@@ -1872,7 +1802,7 @@
    "company_id": "gd19e26bf",
    "date": "2025-06-06",
    "kind": "sell",
-   "summary": "Магнит — обсуждается сделка ««Лента» выкупает крупноформатные магазины «Магнит»»",
+   "summary": "Магнит — обсуждается продажа: Гипермаркеты «Магнита»",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/7777609"
@@ -1886,7 +1816,7 @@
    "company_id": "gcca31da7",
    "date": "2025-06-06",
    "kind": "buy",
-   "summary": "Группа Лента — обсуждается сделка ««Лента» выкупает крупноформатные магазины «Магнит»»",
+   "summary": "Группа Лента — обсуждается покупка: Гипермаркеты «Магнита»",
    "source": [
     "Коммерсантъ",
     "https://www.kommersant.ru/doc/7777609"
