@@ -93,12 +93,15 @@ def main(argv):
     env = dict(os.environ, REVIEW_ONLY=tag, FIXES_SESSION=tag, MASS_OK='reread')
     py = sys.executable
 
-    lock = open(LOCK, 'w')
-    t0 = time.time()
-    fcntl.flock(lock, fcntl.LOCK_EX)
-    waited = int(time.time() - t0)
-    if waited > 5:
-        print('Ждали замок %d с.' % waited)
+    # Сухой прогон базу не пишет — замок ему не нужен (12 ноября 2026: сухие прогоны
+    # стояли в очереди за записью чужих партий по двадцать минут).
+    if write:
+        lock = open(LOCK, 'w')
+        t0 = time.time()
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        waited = int(time.time() - t0)
+        if waited > 5:
+            print('Ждали замок %d с.' % waited)
 
     if write:
         left = dirty_tracked()

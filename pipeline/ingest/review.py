@@ -266,8 +266,22 @@ def quote_is_real(quote, texts):
     # Несколько цитат через « … » (текстовое поле собирается из разных мест
     # статьи) — настоящей обязана быть каждая.
     parts = [p for p in QUOTE_SEP.split(str(quote or '')) if p.strip()] or [quote]
-    flat_texts = [flat(t) for t in texts]
-    return all(any(flat(p) in t for t in flat_texts) for p in parts)
+    blob = _flat_blob(texts)
+    return all(flat(p) in blob for p in parts)
+
+
+_FLAT_CACHE = {}
+
+
+def _flat_blob(texts):
+    """Все тексты источников одной строкой без знаков — считается один раз на список.
+    До 12 ноября 2026 список сплющивался заново на КАЖДУЮ цитату: 52 МБ текстов — 3,6 с
+    на цитату, партия вычитки из 60 цитат держала замок записи четыре минуты на одном шаге."""
+    key = (id(texts), len(texts))
+    if key not in _FLAT_CACHE:
+        _FLAT_CACHE.clear()
+        _FLAT_CACHE[key] = '\x00'.join(flat(t) for t in texts)
+    return _FLAT_CACHE[key]
 
 
 def date_is_supported(old, new, quote):
