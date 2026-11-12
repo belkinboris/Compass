@@ -123,6 +123,10 @@ def main(argv):
     if plan.get('legal_names') and write:
         steps.append(('правовая форма сторон', [py, 'pipeline/party_legal_names.py'] + list(plan['legal_names']) + ['--write']))
     if write:
+        # Прежние записи таблицы правок на поля, переписанные этой партией, гасятся отпечатком:
+        # иначе review.py отклонит их и остановит запись всем следующим партиям (m006, 12 ноября 2026).
+        steps.append(('гашение прежних записей таблицы правок',
+                      [py, 'pipeline/reread_absorb.py', '--ids'] + list(ids) + ['--write']))
         steps += [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
                   ('слой фактов', [py, 'pipeline/facts_derive.py', '--write'])]
     for name, cmd in steps:
