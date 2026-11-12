@@ -204871,6 +204871,10 @@
     [
      "ПРАЙМ",
      "https://1prime.ru/20261112/dopemissija-875162299.html"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2026/11/12/1244817-mvideo-zavershila"
     ]
    ],
    "from_ingest": true,
@@ -205006,7 +205010,17 @@
       "ind": "Ритейл"
      },
      "headline": "«М.видео» закрыла допэмиссию: акционеры выкупили весь выпуск за 24,95 млрд рублей",
-     "milestone_drafted_at": "2026-11-12T12:30:18+00:00"
+     "milestone_drafted_at": "2026-11-12T12:30:18+00:00",
+     "sources": [
+      [
+       "ПРАЙМ",
+       "https://1prime.ru/20261112/dopemissija-875162299.html"
+      ],
+      [
+       "Ведомости",
+       "https://www.vedomosti.ru/investments/news/2026/11/12/1244817-mvideo-zavershila"
+      ]
+     ]
     }
    ]
   },
