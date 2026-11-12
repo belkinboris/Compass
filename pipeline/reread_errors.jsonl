@@ -723,3 +723,20 @@
 {"id": "gec433848", "field": "extra", "class": "version_as_fact", "was": "Сделка закрыта в 2025 году", "now": "по неофициальным данным; Росатом не подтвердил", "tag": "m022"}
 {"id": "gec433848", "field": "law.terms", "class": "unsupported_claim", "was": "опцион на оставшиеся 51%", "now": "возможность дальнейшего выкупа", "tag": "m022"}
 {"id": "gec433848", "field": "eco.share", "class": "wrong_share", "was": "Росатом приобрел 49% акций…", "now": "49% акций АО «Топ Системы»", "tag": "m022"}
+{"id": "ga971155a", "field": "sum", "class": "sum_meaning", "was": "3–3,5 млрд ₽ (по оценке) — оценка аналитика", "now": "Не раскрыта", "tag": "m021"}
+{"id": "ga971155a", "field": "extra", "class": "foreign_fact", "was": "операционная компания ООО «ТК Лето», выручка 114 млрд ₽", "now": "ТК Лето — оператор «Победы»; снято", "tag": "m021"}
+{"id": "ga971155a", "field": "eco.target_fin", "class": "foreign_fact", "was": "показатели «Победы»/«ТК Лето»", "now": "только АО «Гулливер»", "tag": "m021"}
+{"id": "ga971155a", "field": "target", "class": "profile_wrong_inn", "was": "ИНН 7327067461 (ООО «ТК Лето»)", "now": "АО «Гулливер», ИНН 7326029150", "tag": "m021"}
+{"id": "ga971155a", "field": "eco.context", "class": "version_as_fact", "was": "NBO X5 как текущий шаг", "now": "X5 переговоров не ведет, активна «Лента» (по неофициальным данным)", "tag": "m021"}
+{"id": "ga971155a", "field": "eco.rationale", "class": "invented_rationale", "was": "интерес «прежде всего» из-за фабрик-кухонь, без автора", "now": "мнение Бурмистрова (Infoline)", "tag": "m021"}
+{"id": "gcdec4f24", "field": "sum", "class": "sum_meaning", "was": "6,5 млрд ₽ (по оценке) — оценка экспертов", "now": "Не раскрыта", "tag": "m021"}
+{"id": "gcdec4f24", "field": "date", "class": "wrong_date", "was": "2026-01-28 (день статьи)", "now": "2026-01-26 (ЕГРЮЛ)", "tag": "m021"}
+{"id": "gcdec4f24", "field": "extra", "class": "wrong_seller", "was": "Продавец — Михаил Несветайло", "now": "по реестру АО «Форум Капитал» 99% и И. Сильченко 1%", "tag": "m021"}
+{"id": "gcdec4f24", "field": "title", "class": "title_standard", "was": "Гонконгская SLH Group Limited приобрела…", "now": "SLH Group купила ювелирную сеть «Адамас»", "tag": "m021"}
+{"id": "gcdec4f24", "field": "law.struct", "class": "other", "was": "биография покупателя вместо механики", "now": "покупатель и периметр", "tag": "m021"}
+{"id": "gcdec4f24", "field": "eco.context", "class": "language", "was": "«а сам «Адамас-ювелирторг»…»", "now": "без «сам»", "tag": "m021"}
+{"id": "g9d9e7ab6", "field": "sum", "class": "sum_meaning", "was": "10,4–10,7 млрд ₽ (по капитализации)", "now": "Не раскрыта", "tag": "m021"}
+{"id": "g9d9e7ab6", "field": "eco.val", "class": "unsupported_claim", "was": "оценка пакета 10,4–10,7 млрд ₽ без автора", "now": "снята", "tag": "m021"}
+{"id": "g9d9e7ab6", "field": "eco.context", "class": "version_as_fact", "was": "1С вошел в переговоры, «Росатом» и банки заинтересованы", "now": "версии источников, «Росатом» опровергал", "tag": "m021"}
+{"id": "g9d9e7ab6", "field": "title", "class": "title_standard", "was": "«Группа Астра» ведет переговоры о продаже до 20%…", "now": "Стратегический инвестор может купить долю в ПАО «Группа Астра»", "tag": "m021"}
+{"id": "g9d9e7ab6", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "до 20% акций", "tag": "m021"}
