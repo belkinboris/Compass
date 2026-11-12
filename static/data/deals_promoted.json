@@ -82858,7 +82858,7 @@
   {
    "id": "g2369d101",
    "date": "2023-01-16",
-   "title": "Дочка Сибура вышла из капитала итальянского производителя БОПП-пленки Manucor",
+   "title": "Loren SPV и L&M купили 50% Manucor у «Сибура»",
    "buyer": "g747b0bfb",
    "target": "gdc5a674a",
    "ind": "Производство тары",
@@ -82926,9 +82926,9 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "6463a99b1b0f"
+     "value": 50.0,
+     "basis": "rule",
+     "card_hash": "566cb732de64"
     },
     "price": {
      "value_rub": null,
@@ -82951,7 +82951,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ed4c2cee5b2b"
+     "card_hash": "4da6e901c035"
     },
     "target": {
      "company_id": "gdc5a674a",
@@ -82978,7 +82978,38 @@
      "multiple_text": "target_unconfirmed"
     }
    },
-   "gate_baseline_hash": "db75b0abee53.65d7b8"
+   "gate_baseline_hash": "db75b0abee53.65d7b8",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Loren SPV и L&M купили 50% Manucor у «Сибура»",
+     "quote": "Manucor указывает, что 16 января была завершена «сложная операция», в результате которой компания «Биаксплен», входящая в «Сибур», вышла из состава ее акционеров. Владельцем 5% Manucor стала компания L&M S.p.A. … Другой акционер – Loren SPV S.r.l. – увеличил свою долю до 95%. … «Сибур» приобрел 50% Manucor",
+     "url": "https://www.vedomosti.ru/business/news/2023/01/31/961176-sibur-vishel-iz-manucor",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "seller",
+     "new": "Сибур",
+     "quote": "Manucor указывает, что 16 января была завершена «сложная операция», в результате которой компания «Биаксплен», входящая в «Сибур», вышла из состава ее акционеров. Владельцем 5% Manucor стала компания L&M S.p.A.",
+     "url": "https://www.vedomosti.ru/business/news/2023/01/31/961176-sibur-vishel-iz-manucor",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "seller_id",
+     "new": "g7f9a1e5e",
+     "quote": "Manucor указывает, что 16 января была завершена «сложная операция», в результате которой компания «Биаксплен», входящая в «Сибур», вышла из состава ее акционеров. Владельцем 5% Manucor стала компания L&M S.p.A.",
+     "url": "https://www.vedomosti.ru/business/news/2023/01/31/961176-sibur-vishel-iz-manucor",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "seller": "Сибур",
+   "seller_id": "g7f9a1e5e",
+   "reread": "2026-11-12",
+   "reread_hash": "6002bd6c1641.a5fec5",
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g670ed747",
@@ -83224,12 +83255,31 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "gate_baseline_hash": "3c409279b1f3.50416f"
+   "gate_baseline_hash": "3c409279b1f3.50416f",
+   "seller": "Emerging Travel Group",
+   "fact_log": [
+    {
+     "field": "seller",
+     "new": "Emerging Travel Group",
+     "quote": "Владелец платформы — компания Emerging Travel Group (ETG) — готов отдать ее за 20 млрд руб.",
+     "url": "https://www.kommersant.ru/doc/8692225",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Emerging Travel Group зарегистрирована в США, российские юрлица «Островка» контролирует Maletto Investments Ltd (ОАЭ) — профиль с ИНН не заводится (Ъ 8692225, ЕГРЮЛ ООО «Агентика Тревэл»; вычитка 12.11.2026, m020)"
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "70ef46101042.50416f",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "g10053480",
    "date": "2026-05-15",
-   "title": "ГК «Таврос» покупает «Саратов-Птицу»",
+   "title": "«Таврос» может купить «Саратов-Птицу»",
    "buyer": "gcaccecb1",
    "target": "g93505803",
    "ind": "Агро",
@@ -83283,7 +83333,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "a7150028e88d"
+     "card_hash": "c9fb70e2c1f2"
     },
     "price": {
      "value_rub": null,
@@ -83306,7 +83356,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "56ca64f662c2"
+     "card_hash": "eacefa2a4d96"
     },
     "target": {
      "company_id": "g93505803",
@@ -83333,7 +83383,25 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "gate_baseline_hash": "62e6952645c0.dd00a0"
+   "gate_baseline_hash": "62e6952645c0.dd00a0",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«Таврос» может купить «Саратов-Птицу»",
+     "quote": "Агрохолдинг «Таврос» ведет переговоры о покупке поволжского производителя «Саратов-Птица»",
+     "url": "https://www.kommersant.ru/doc/8655960",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавец не назван: Ъ 8655960 — бенефициары АО «УК „Саратов-Птица“» не раскрываются, в 2024 году бизнес контролировали Елена Высоцкая (70%) и Дмитрий Иванов (30%); сделка не закрыта, кто продаст — неизвестно; искали: Ъ, поиск по «Таврос Саратов-Птица», реестр АО (недоступен) (вычитка 12.11.2026, m020)"
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "4731838f2784.dd00a0",
+   "reread_note": "статьи: 1"
   },
   {
    "id": "ge361bfa8",
@@ -83585,16 +83653,16 @@
   {
    "id": "gd1b1a94e",
    "date": "2026-04-19",
-   "title": "Фонд «Бумеранг Капитал» рассматривает приобретение сети кофеен Cofix",
+   "title": "«Бумеранг Капитал» может купить российский бизнес Cofix",
    "buyer": "g81045bed",
    "target": "g017c7f83",
    "ind": "Ритейл",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Обсуждается",
-   "sum": "1,25–1,4 млрд ₽ (по оценке)",
+   "sum": "Не раскрыта",
    "eco": {
-    "sum": "1,25–1,4 млрд ₽ (по оценке)",
+    "sum": "Не раскрыта",
     "share": "—",
     "val": "Руководитель департамента M&A BGP Capital Иван Пешков оценивает потенциальную стоимость сети в 1,25–1,4 млрд ₽.",
     "target_fin": "Выручка «Урбан Кофикс Раша» за 2025 год составила 3,01 млрд ₽, чистая прибыль — 68,1 млн ₽.",
@@ -83648,14 +83716,14 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "97553e981ff9"
+     "card_hash": "0d13161ff63c"
     },
     "price": {
      "value_rub": null,
-     "meaning": "range",
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "fe6fca60edcc"
+     "basis": "unknown",
+     "card_hash": "ed82a2abf7a1"
     },
     "date": {
      "value": "2026-04-19",
@@ -83671,7 +83739,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "c378eab6d3d0"
+     "card_hash": "9f96150f62b6"
     },
     "target": {
      "company_id": "g017c7f83",
@@ -83698,7 +83766,41 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "gate_baseline_hash": "22d18b1e3929.ce9f42"
+   "gate_baseline_hash": "22d18b1e3929.ce9f42",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«Бумеранг Капитал» может купить российский бизнес Cofix",
+     "quote": "Наиболее вероятным покупателем один из них называет фонд «Бумеранг Капитал».",
+     "url": "https://www.kommersant.ru/doc/8604447",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "Не раскрыта",
+     "quote": "Руководитель департамента M&A BGP Capital Иван Пешков оценивает потенциальную стоимость сети в 1,25–1,4 млрд руб.",
+     "url": "https://www.kommersant.ru/doc/8604447",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "Не раскрыта",
+     "quote": "Руководитель департамента M&A BGP Capital Иван Пешков оценивает потенциальную стоимость сети в 1,25–1,4 млрд руб.",
+     "url": "https://www.kommersant.ru/doc/8604447",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавец не назван: сделка обсуждается; по ЕГРЮЛ 99,99% ООО «Урбан Кофикс Раша» у «Кофикс Глобал Лимитед», бенефициары по Ъ 8604447 — Cofix Group, Coffee Prime и Михаил и Григорий Печерские (в eco.context) (вычитка 12.11.2026, m020)"
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "8156e1099ff4.ce9f42",
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g76983314",
@@ -83844,7 +83946,7 @@
   {
    "id": "g8a86fc9b",
    "date": "2026-03-26",
-   "title": "VK Tech приобрела CedrusData (ООО «Кверифай Лабс»)",
+   "title": "VK Tech купила CedrusData",
    "buyer": "g592a5a2b",
    "target": "gdcc4bb02",
    "ind": "ИТ и интернет",
@@ -83903,7 +84005,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "cd96010b8f93"
+     "card_hash": "0eb08f503600"
     },
     "price": {
      "value_rub": null,
@@ -83926,7 +84028,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "8f87080170a5"
+     "card_hash": "dabfa9bb05ac"
     },
     "target": {
      "company_id": "gdcc4bb02",
@@ -83959,7 +84061,20 @@
      "https://t.me/dealsma/6938"
     ]
    ],
-   "gate_baseline_hash": "9a643f82f86a.96794a"
+   "gate_baseline_hash": "9a643f82f86a.96794a",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "VK Tech купила CedrusData",
+     "quote": "VK Tech купила CedrusData — независимого разработчика решений для больших данных и ИИ",
+     "url": "https://rb.ru/news/vk-tech-kupila-cedrusdata-nezavisimogo-razrabotchika-reshenij-dlya-bolshih-dannyh-i-ii/",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "reread": "2026-11-12",
+   "reread_hash": "a5065ae4401f.96794a",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "g0b081bb7",
@@ -84215,8 +84330,8 @@
   },
   {
    "id": "g34cab70b",
-   "date": "2026",
-   "title": "«Русагро» приобрела 51% ООО «Центральное» в Тамбовской области",
+   "date": "2026-02-26",
+   "title": "«Русагро» купила 51% ООО «Центральное»",
    "buyer": "g924985ab",
    "target": "g56e4248d",
    "ind": "Агро",
@@ -84282,7 +84397,7 @@
     "stake": {
      "value": 51.0,
      "basis": "rule",
-     "card_hash": "ddd5aa9dd8d7"
+     "card_hash": "0c9f49bd06e4"
     },
     "price": {
      "value_rub": null,
@@ -84292,10 +84407,10 @@
      "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2026",
-     "meaning": "unknown",
+     "value": "2026-02-26",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "7c8511cdb6ae"
+     "card_hash": "72a636a9947f"
     },
     "nature": {
      "control_change": true,
@@ -84305,7 +84420,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "87a5f35dc15e"
+     "card_hash": "68677f796e70"
     },
     "target": {
      "company_id": "g56e4248d",
@@ -84339,12 +84454,34 @@
     ]
    ],
    "separate_transaction_reviewed": true,
-   "gate_baseline_hash": "db55e1e71269.039f40"
+   "gate_baseline_hash": "db55e1e71269.039f40",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«Русагро» купила 51% ООО «Центральное»",
+     "quote": "Агрохолдинг «Русагро» вошел в уставный капитал ООО «Центральное» … Доля компании составила 51%",
+     "url": "https://www.kommersant.ru/doc/8443121",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2026-02-26",
+     "quote": "2026-02-26 share_changed: Рязанов Александр Николаевич (100.0 → 49.0); 2026-02-26 joined: ООО \"ТАМБОВСКИЙ БЕКОН\" (None → 51.0)",
+     "url": "https://projectcompass.ru/api/companies/g56e4248d/fns",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "reread": "2026-11-12",
+   "reread_hash": "5470a3acdf2a.039f40",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "gd2696c44",
    "date": "2026-01-20",
-   "title": "Tutu.ru покупает Trivio — платформу для организации корпоративных командировок",
+   "title": "Tutu.ru может купить Trivio",
    "buyer": "gaf243db4",
    "target": "g5615fb35",
    "ind": "Транспорт и логистика",
@@ -84409,7 +84546,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "de2f02f500e0"
+     "card_hash": "566510c7c4e9"
     },
     "price": {
      "value_rub": null,
@@ -84432,7 +84569,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "8b875191f5df"
+     "card_hash": "7c825d25db2d"
     },
     "target": {
      "company_id": "g5615fb35",
@@ -84459,7 +84596,25 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "gate_baseline_hash": "050fc0db3b7c.ec7569"
+   "gate_baseline_hash": "050fc0db3b7c.ec7569",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Tutu.ru может купить Trivio",
+     "quote": "«Туту» ведет переговоры о покупке платформы по организации командировок Trivio",
+     "url": "https://iz.ru/2027534/2026-01-20/tutu-vedet-peregovory-o-pokupke-servisa-delovykh-poezdok-trivio-za-8-mlrd-rublei",
+     "by": "reread m020",
+     "date": "2026-11-12"
+    }
+   ],
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "продавец не назван: Известия, dp.ru и tourdom.ru пишут о переговорах «Туту» с Trivio, но владельцев Trivio не называют; реестр Trivio недоступен (вычитка 12.11.2026, m020)"
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "c7f838eec0db.ec7569",
+   "reread_note": "статьи: 3"
   },
   {
    "id": "ga971155a",
@@ -284027,7 +284182,8 @@
    "holding": {
     "id": "g4e694234",
     "confidence": "disclosed"
-   }
+   },
+   "legal_short": "ООО «ВК Цифровые Технологии»"
   },
   "gfd4e10ae": {
    "name": "агрохолдинг «Покровский»",
@@ -286556,7 +286712,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «НТТ»"
   },
   "g165b1e54": {
    "name": "Агроцентр ЕвроХим-Украина",
@@ -288834,7 +288991,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "АО «Саратов-Птица»"
   },
   "gdb2fdb1a": {
    "name": "ООО «Апр-Сити/ТВД»",
@@ -290069,7 +290227,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ПАО «Сибур Холдинг»"
   },
   "gdc8edba1": {
    "name": "ЭР-Телеком Холдинг",
@@ -291259,7 +291418,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «Агентика Тревэл»"
   },
   "gdd1cdb39": {
    "name": "СГ-Транс",
@@ -294970,7 +295130,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «УК Таврос»"
   },
   "gtochnykod": {
    "name": "«Точный код»",
@@ -301588,7 +301749,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "АО «Тривио»"
   },
   "g5d0389f6": {
    "name": "ООО «Харьяга»",
@@ -306575,7 +306737,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «Кверифай Лабс»"
   },
   "gae376dd7": {
    "name": "«Медси»",
