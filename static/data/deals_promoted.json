@@ -42083,8 +42083,8 @@
   },
   {
    "id": "gfa14411d",
-   "date": "2022-05-23",
-   "title": "Польская LPP Group продала российскую сеть Reserved компании Far East Services FZCO",
+   "date": "2022-06-30",
+   "title": "Far East Services FZCO купил 95% «РЕ Трэйдинг» у LPP",
    "buyer": "gf2aef795",
    "target": "g03e5be54",
    "ind": "Ритейл",
@@ -42094,12 +42094,12 @@
    "sum": "≈$382 млн",
    "eco": {
     "sum": "≈$382 млн",
-    "share": "—",
-    "val": "—",
+    "share": "95% долей ООО «РЕ Трэйдинг»",
+    "val": "По данным отчета Hindenburg Research, LPP разделила сделку на две части: магазины — около $135 млн (601 млн злотых) с оплатой в рассрочку в течение 4 лет и старые товарные запасы — около $247 млн (1,1 млрд злотых) с оплатой до конца мая 2023 года. Денег при закрытии покупатель не платил.\n\nПо данным польского портала WNP.pl, за 100% российской компании стороны согласовали $135,5 млн.",
     "target_fin": "По данным «СПАРК-Интерфакс», выручка ООО «РЕ Трейдинг» в России в 2021 году составила 52,8 млрд ₽, чистая прибыль — 4,8 млрд ₽.",
     "fin": "—",
-    "rationale": "LPP Group продала российскую сеть магазинов (Reserved, Cropp, House, Mohito, Sinsay) зарегистрированной в Дубае Far East Services FZCO. Бенефициарное владение покупателя оспаривается исследованием Hindenburg Research — есть предположения о связи с прежним менеджментом LPP.",
-    "context": "Компания FES Retail по примеру других крупных fashion-операторов планирует оптимизировать бизнес, отказавшись от части своих магазинов. Под закрытие попадает около 50 точек. В марте 2024 года исследовательская компания Hindenburg Research опубликовала отчет с утверждением, что уход LPP из России был фиктивным: Far East Services была зарегистрирована в Дубае за день до объявления о сделке, а по данным таможенной статистики, с сентября 2022 по декабрь 2023 года в Россию через связанные компании было экспортировано товаров LPP на сумму не менее $706,5 млн. LPP категорически отрицает обвинения, называя отчет организованной атакой на котировки акций, и добилась расследования против самой Hindenburg по подозрению в манипулировании рынком — следствие польской прокуратуры по состоянию на середину 2026 года приостановлено в ожидании международной правовой помощи США.",
+    "rationale": "LPP уходила из России: в марте 2022 года компания закрыла все свои российские магазины из-за военной операции на Украине и прекратила продажи и инвестиции в стране.",
+    "context": "О продаже российского бизнеса «консорциуму из Китая» LPP объявила в мае 2022 года. Far East Services FZCO зарегистрирована в Дубае 18 мая 2022 года, за день до этого объявления. Прав на товарные знаки LPP покупатель не получил, и магазины открылись под вывесками Re, M и «Син».\n\nВ ноябре 2022 года FES Retail, к которой перешли магазины, объявила о закрытии около 50 из более чем 500 точек из-за невыгодных условий аренды.\n\nВ марте 2024 года Hindenburg Research заявила, что уход LPP из России фиктивный: по ее подсчетам, после сделки и до конца 2023 года «РЕ Трэйдинг» ввезла в Россию товаров не меньше чем на $706,5 млн. LPP обвинения отвергла, назвала отчет попыткой манипулировать курсом акций и обратилась в польскую прокуратуру. В июле 2025 года LPP согласилась заплатить 1,8 млн злотых, чтобы закрыть расследование финансового регулятора Польши о том, как компания раскрывала условия продажи.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -42107,22 +42107,14 @@
     "appr": "Публично не сообщалось",
     "adv": [
      [
-      "Юридический консультант продавца (ООО «РЕ Трэйдинг», LPP SA)",
+      "Юридический консультант продаваемой компании (ООО «РЕ Трэйдинг»)",
       "Пепеляев Групп",
-      "Продажа Reserved Far East Services FZCO. Источник: pgplaw.ru"
+      "Сопровождение продажи ООО «РЕ Трэйдинг» консорциуму китайских инвесторов, защита интересов «РЕ Трэйдинг» на переговорах. Источник: pgplaw.com"
      ]
     ],
-    "terms": "У нового покупателя также есть опцион на обратную продажу компании LPP до конца 2026 года, что дает LPP возможность вернуть себе российский бизнес после окончания войны."
+    "terms": "По данным Hindenburg Research, у покупателя есть опцион продать компанию обратно LPP до конца 2026 года. Консультант «РЕ Трэйдинг» Пепеляев Групп подтверждает, что сделка предусматривает возможность вернуться в капитал в оговоренный срок."
    },
    "src": [
-    [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/lpp-group"
-    ],
-    [
-     "Интерфакс",
-     "https://www.interfax.ru"
-    ],
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/5446520"
@@ -42130,6 +42122,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/5652618"
+    ],
+    [
+     "Пепеляев Групп",
+     "https://www.pgplaw.com/upload/iblock/0c7/qtphlbgforz2fcytqxc2r7fathr0mtya/2025_Corporate_eng.pdf"
     ],
     [
      "Hindenburg Research",
@@ -42142,11 +42138,15 @@
     [
      "Omnichannel News",
      "https://omnichannelnews.pl/2026/04/22/bledy-ksiegowe-lpp-knf-naklada-15-mln-zl-kary/"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/lpp-group"
     ]
    ],
-   "extra": "LPP Group продала российскую сеть магазинов (Reserved, Cropp, House, Mohito, Sinsay) зарегистрированной в Дубае Far East Services FZCO. Бенефициарное владение покупателя оспаривается исследованием Hindenburg Research — есть предположения о связи с прежним менеджментом LPP. Сведения сверены с трекером KSE Institute «Leave Russia» и независимой прессой там, где это было возможно.",
+   "extra": "LPP получала оплату за российский бизнес в рассрочку, а у покупателя остался опцион вернуть компанию LPP. Польский финансовый регулятор расследовал, вовремя ли LPP раскрыла ключевые условия и структуру этой продажи.",
    "auto": true,
-   "seller": "ООО «РЕ Трэйдинг», LPP SA",
+   "seller": "LPP SA",
    "seller_src": "adv",
    "added": "2026-07-22",
    "reviewed": "2026-08-10",
@@ -42181,14 +42181,17 @@
     ],
     "eco.target_fin": [
      "f72cb3dbcb20"
+    ],
+    "law.terms": [
+     "416505fd9827"
     ]
    },
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "216c3733ae71"
+     "value": 95.0,
+     "basis": "rule",
+     "card_hash": "67e0d74e611a"
     },
     "price": {
      "value_rub": null,
@@ -42198,10 +42201,10 @@
      "card_hash": "6a6937dd7094"
     },
     "date": {
-     "value": "2022-05-23",
-     "meaning": "unknown",
+     "value": "2022-06-30",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "c1dfbee00ea7"
+     "card_hash": "661b32f0b190"
     },
     "nature": {
      "control_change": true,
@@ -42211,7 +42214,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "173cf141ac5a"
+     "card_hash": "9cefc3afeb14"
     },
     "target": {
      "company_id": "g03e5be54",
@@ -42238,12 +42241,69 @@
      "multiple_text": "price_not_disclosed"
     }
    },
-   "gate_baseline_hash": "00004bae465c.ba16c9"
+   "gate_baseline_hash": "00004bae465c.ba16c9",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Far East Services FZCO купил 95% «РЕ Трэйдинг» у LPP",
+     "quote": "Новым владельцем ООО «РЕ Трэйдинг» — российского подразделения LPP стала зарегистрированная в ОАЭ компания «Фар ист сервисиз-фзко». Запись об этом в ЕГРЮЛ датирована 30 июня. Там указывается, что «Фар ист сервисиз-фзко» получила 95% «РЕ Трэйдинг», еще 5% перешли гендиректору российского дивизиона LPP Анне Пилюгиной … Legal support for a transaction that involved LPP S.A., one of the largest global retailers (known for brands such as Reserved, House, Cropp, Mohito, and Sinsay), selling its Russian subsidiary, LLC RE Trading, to a consortium of Chinese investors.",
+     "url": "https://www.kommersant.ru/doc/5446520",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2022-06-30",
+     "quote": "Новым владельцем ООО «РЕ Трэйдинг» — российского подразделения LPP стала зарегистрированная в ОАЭ компания «Фар ист сервисиз-фзко». Запись об этом в ЕГРЮЛ датирована 30 июня. Там указывается, что «Фар ист сервисиз-фзко» получила 95% «РЕ Трэйдинг», еще 5% перешли гендиректору российского дивизиона LPP Анне Пилюгиной",
+     "url": "https://www.kommersant.ru/doc/5446520",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "seller",
+     "new": "LPP SA",
+     "quote": "Legal support for a transaction that involved LPP S.A., one of the largest global retailers (known for brands such as Reserved, House, Cropp, Mohito, and Sinsay), selling its Russian subsidiary, LLC RE Trading, to a consortium of Chinese investors.",
+     "url": "https://www.pgplaw.com/upload/iblock/0c7/qtphlbgforz2fcytqxc2r7fathr0mtya/2025_Corporate_eng.pdf",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "95% долей ООО «РЕ Трэйдинг»",
+     "quote": "Новым владельцем ООО «РЕ Трэйдинг» — российского подразделения LPP стала зарегистрированная в ОАЭ компания «Фар ист сервисиз-фзко». Запись об этом в ЕГРЮЛ датирована 30 июня. Там указывается, что «Фар ист сервисиз-фзко» получила 95% «РЕ Трэйдинг», еще 5% перешли гендиректору российского дивизиона LPP Анне Пилюгиной",
+     "url": "https://www.kommersant.ru/doc/5446520",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [
+      [
+       "Юридический консультант продаваемой компании (ООО «РЕ Трэйдинг»)",
+       "Пепеляев Групп",
+       "Сопровождение продажи ООО «РЕ Трэйдинг» консорциуму китайских инвесторов, защита интересов «РЕ Трэйдинг» на переговорах. Источник: pgplaw.com"
+      ]
+     ],
+     "quote": "Legal support for a transaction that involved LPP S.A., one of the largest global retailers (known for brands such as Reserved, House, Cropp, Mohito, and Sinsay), selling its Russian subsidiary, LLC RE Trading, to a consortium of Chinese investors. … We also safeguarded the interests of LLC RE Trading during negotiations with the parties involved.",
+     "url": "https://www.pgplaw.com/upload/iblock/0c7/qtphlbgforz2fcytqxc2r7fathr0mtya/2025_Corporate_eng.pdf",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "retracted": {
+    "seller": [
+     "ООО «РЕ Трэйдинг», LPP SA"
+    ]
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "756afb4fc213.9b9937",
+   "reread_note": "статьи: 7"
   },
   {
    "id": "g55f1c662",
-   "date": "2022-06-01",
-   "title": "Финская Valio продала российский бизнес (бренд Viola) компании Velcom",
+   "date": "2022-12-29",
+   "title": "«Дэнир» купил российский бизнес Valio",
    "target": "g54913880",
    "ind": "Пищепром и напитки",
    "type": "M&A",
@@ -42252,16 +42312,16 @@
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
-    "share": "—",
+    "share": "100% долей ООО «Виола» (до октября 2022 года — ООО «Валио»)",
     "val": "—",
-    "target_fin": "Российский бизнес давал Valio около 5% мировых продаж: в 2020 г. это 85 млн евро из 1,8 млрд евро у всего концерна.",
+    "target_fin": "Российский бизнес давал Valio около 5% мировых продаж: в 2020 году — €87 млн из примерно €1,8 млрд.",
     "fin": "—",
     "rationale": "Продажа российского бизнеса стала частью ухода финской молочной компании Valio с российского рынка.",
-    "context": "7 марта финский концерн принял решение завершить деятельность в России на фоне военной спецоперации. Спустя несколько дней российское подразделение концерна ООО «Валио» заявило, что продолжит операционную деятельность. По неофициальным данным, новым владельцем бизнеса могла стать группа «Русагро». После сделки 2024 год «Виола» (бывшая «Валио») завершила с чистым убытком 19,8 млн ₽ против чистой прибыли 295,8 млн ₽ годом ранее — первым убытком за долгое время; выручка при этом выросла почти на 26%, до 11,3 млрд ₽. В 2025 году компания показала рекордные результаты: выручка достигла 12,3 млрд ₽ (максимум за пять лет), чистая прибыль — 90,2 млн ₽.",
+    "context": "Решение уйти из России Valio приняла 7 марта 2022 года; переговоры с группой «Велком» о продаже бизнеса закончились в апреле. В октябре 2022 года ООО «Валио» переименовали в ООО «Виола».\n\nПосле сделки «Виола» закончила 2024 год с чистым убытком 19,8 млн ₽ против прибыли 295,8 млн ₽ годом ранее, хотя выручка выросла почти на 26%, до 11,3 млрд ₽. В 2025 году выручка достигла 12,3 млрд ₽, чистая прибыль — 90,2 млн ₽.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "Покупатель получает марку Viola и завод в подмосковном Ершово, где делают плавленые и полутвердые сыры; весь коллектив остается. С 29 декабря 2022 г. ООО «Виола» принадлежит ООО «Дэнир», которым владеет бенефициар ГК «Велком».",
+    "struct": "Покупатель получил сырный завод в Ершово под Москвой, где выпускают плавленые и полутвердые сыры, и российские права на бренд Viola. 29 декабря 2022 года 100% ООО «Виола» перешли от финской Rushold M Oy (АО «Русхолд М») к ООО «Дэнир», которое принадлежит бенефициару группы «Велком».",
     "appr": "Публично не сообщалось",
     "adv": [
      [
@@ -42270,13 +42330,9 @@
       "«We advised Valio in its negotiations on the divestment of Valio's Russian operations to Velkom Group.» Источник: castren.fi/cases/cases-2022/valio3"
      ]
     ],
-    "terms": "Стороны условились держать цену и прочие условия в тайне."
+    "terms": "—"
    },
    "src": [
-    [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/valio"
-    ],
     [
      "Retail.ru",
      "https://www.retail.ru/news/rossiyskaya-dochka-valio-pereshla-v-sobstvennost-benefitsiara-velkoma-12-yanvarya-2023-224567/"
@@ -42286,15 +42342,23 @@
      "https://castren.fi/cases/cases-2022/valio3"
     ],
     [
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/g54913880/fns"
+    ],
+    [
      "Интерфакс",
      "https://www.interfax.ru/business/1018641"
     ],
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/Компания:Viola_(Виола)"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/valio"
     ]
    ],
-   "extra": "Финская молочная компания Valio продала российский бизнес под брендом Viola компании Velcom, уходя с российского рынка. Сделка отражена в трекере KSE Institute «Leave Russia» и сверена с независимой прессой там, где это было возможно.",
+   "extra": "Valio вышла из России, продав сырный завод в Ершово и бренд Viola структуре владельца группы «Велком» — производителя колбасных изделий из Центральной России.",
    "auto": true,
    "themes": [
     "Уход иностранного владельца"
@@ -42308,16 +42372,19 @@
    "followup_researched": "2026-08-21",
    "proofread_absorbed": {
     "law.struct": [
-     "adca1cc7cea5"
+     "adca1cc7cea5",
+     "473c2b721c4f"
     ],
     "eco.fin": [
      "6ff21f5b3508"
     ],
     "eco.target_fin": [
-     "c4e880f147f0"
+     "c4e880f147f0",
+     "6c0962c34045"
     ],
     "law.terms": [
-     "07238d121c60"
+     "07238d121c60",
+     "87c36259a186"
     ],
     "buyer_name": [
      "bdfd41c3ea82"
@@ -42326,9 +42393,9 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "2fa020d47c35"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "543f93656445"
     },
     "price": {
      "value_rub": null,
@@ -42338,10 +42405,10 @@
      "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2022-06-01",
-     "meaning": "unknown",
+     "value": "2022-12-29",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "7df8b0f05b66"
+     "card_hash": "ec3207e52093"
     },
     "nature": {
      "control_change": true,
@@ -42351,7 +42418,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "1c3fdf1d2697"
+     "card_hash": "67af9e20e3da"
     },
     "target": {
      "company_id": "g54913880",
@@ -42380,12 +42447,42 @@
    },
    "seller_id": "gca0a7c26",
    "buyer": "g4de3e3ed",
-   "gate_baseline_hash": "48041c427dc9.aa410c"
+   "gate_baseline_hash": "48041c427dc9.aa410c",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«Дэнир» купил российский бизнес Valio",
+     "quote": "С 29 декабря 2022 года владельцем бывшей российской «дочки» Valio — ООО «Виола» — стало ООО «Дэнир» , которое принадлежит бенефициару ГК «Велком»",
+     "url": "https://www.retail.ru/news/rossiyskaya-dochka-valio-pereshla-v-sobstvennost-benefitsiara-velkoma-12-yanvarya-2023-224567/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2022-12-29",
+     "quote": "С 29 декабря 2022 года владельцем бывшей российской «дочки» Valio — ООО «Виола» — стало ООО «Дэнир» , которое принадлежит бенефициару ГК «Велком» … 29 декабря 2022 года — АО \"РУСХОЛД М\" (RUSHOLD M OY) вышел из состава участников доля 100.0%. 29 декабря 2022 года — ООО \"ДЭНИР\" вошел в состав участников доля 100.0%.",
+     "url": "https://www.retail.ru/news/rossiyskaya-dochka-valio-pereshla-v-sobstvennost-benefitsiara-velkoma-12-yanvarya-2023-224567/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% долей ООО «Виола» (до октября 2022 года — ООО «Валио»)",
+     "quote": "29 декабря 2022 года — АО \"РУСХОЛД М\" (RUSHOLD M OY) вышел из состава участников доля 100.0%. 29 декабря 2022 года — ООО \"ДЭНИР\" вошел в состав участников доля 100.0%. … В октябре прошлого года ООО «Валио» сменило название на ООО «Виола». … С 29 декабря 2022 года владельцем бывшей российской «дочки» Valio — ООО «Виола» — стало ООО «Дэнир» , которое принадлежит бенефициару ГК «Велком»",
+     "url": "https://projectcompass.ru/api/companies/g54913880/fns",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "reread": "2026-11-12",
+   "reread_hash": "9eaa257fa79a.aa410c",
+   "reread_note": "статьи: 5"
   },
   {
    "id": "g57b3b93c",
-   "date": "2022-12-01",
-   "title": "Mayr-Melnhof Group продала российские заводы MM Packaging компании Granelle",
+   "date": "2022-12-16",
+   "title": "«Гранель» купила у Mayr-Melnhof заводы «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр»",
    "buyer": "g73bb8426",
    "target": "g7f6433d2",
    "ind": "Производство тары",
@@ -42395,12 +42492,12 @@
    "sum": "€134 млн",
    "eco": {
     "sum": "€134 млн",
-    "share": "—",
+    "share": "100% компаний «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр»",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "В 2021 году два завода вместе выручили около €124 млн. В 2023 году выручка «ММПОФ Пэкэджинг» составила 7,9 млрд ₽, «ММПОФ Ротогравюр» — 4,2 млрд ₽.",
     "fin": "—",
-    "rationale": "Австрийская Mayr-Melnhof Group продала российские упаковочные заводы (MM Packaging) в Санкт-Петербурге и Пскове локальному инвестору Granelle.",
-    "context": "Группа компаний Mayr-Melnhof (MM) продала свои предприятия в Санкт-Петербурге и Пскове местному инвестору Granelle после одобрения властей. В декабре 2024 года ГК «Гранель» перепродала все три предприятия (в их числе псковское «Танн Невский», к тому моменту переименованное в «Невские Грани») лесопромышленному холдингу «Свеза» — подробности этой более поздней сделки приведены в разделе «Этапы сделки», сумму стороны не раскрыли.",
+    "rationale": "—",
+    "context": "До сделки 99,99% «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр» принадлежали австрийской MM Packaging GmbH, остальное — MM Board & Paper GmbH. В том же декабре 2022 года к «Гранели» перешло и псковское предприятие «Невские грани», которым владела австрийская Tannpapier GmbH.\n\nВ марте 2023 года все три компании перешли к ООО «Форвард», а 27 декабря 2024 года основным бенефициаром «Форварда» (99,99%) стала лесопромышленная группа «Свеза».",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -42422,27 +42519,35 @@
    },
    "src": [
     [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/mm-packaging"
-    ],
-    [
-     "Printindustry.ru",
-     "https://printindustry.ru/mm-packaging-prodala-svoi-rossiyskie-predpriyatiya/"
+     "Mayr-Melnhof Group",
+     "https://mm.group/news/press-releases/mm-packaging-divests-production-sites-in-russia/"
     ],
     [
      "CMS Law",
      "https://cms.law/de/aut/news-information/mayr-melnhof-packaging-verkauft-russische-standorte-mit-rechtlicher-begleitung-von-cms"
     ],
     [
+     "Фонтанка",
+     "https://www.fontanka.ru/2025/01/11/74977775/"
+    ],
+    [
+     "AK&M",
+     "https://www.akm.ru/eng/news/sveza-acquired-three-paper-and-cardboard-manufacturing-companies/"
+    ],
+    [
      "Псковская Лента Новостей",
      "https://pln-pskov.ru/society/542100.html"
     ],
     [
-     "Фонтанка",
-     "https://www.fontanka.ru/2025/01/11/74977775/"
+     "Printindustry.ru",
+     "https://printindustry.ru/mm-packaging-prodala-svoi-rossiyskie-predpriyatiya/"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/mm-packaging"
     ]
    ],
-   "extra": "Австрийская Mayr-Melnhof Group продала российские упаковочные заводы (MM Packaging) в Санкт-Петербурге и Пскове локальному инвестору Granelle. Сведения взяты из трекера KSE Institute «Leave Russia» и сверены с независимой прессой там, где это было возможно.",
+   "extra": "Mayr-Melnhof продала два российских упаковочных завода девелоперу «Гранель» примерно за €134 млн, через два года их купила «Свеза».",
    "auto": true,
    "seller": "Mayr-Melnhof Group",
    "seller_src": "title",
@@ -42455,7 +42560,7 @@
      "kind": "closed",
      "date": "2024-12-27",
      "title": "Активы перепроданы холдингу «Свеза»",
-     "note": "Лесопромышленный холдинг «Свеза» купил две промышленные площадки в Ленобласти и одну в Пскове по производству картона и бумаги. До 2022 года эти активы принадлежали структурам австрийского холдинга Mayr-Melnhof, затем в течение двух лет предприятиями владел строительный холдинг «Гранель». Стороны подписали договор купли-продажи; сделку одобрила Федеральная антимонопольная служба. Сумму и условия сделки в «Свезе» не раскрывают.",
+     "note": "«Свеза» купила три предприятия по выпуску бумаги и картона: «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр» в Ломоносовском районе Ленинградской области и «Невские грани» в Пскове. Первые два до 2022 года принадлежали Mayr-Melnhof, «Невские грани» — австрийской Tannpapier; в декабре 2022 года все три перешли к «Гранели», в марте 2023 года — к ООО «Форвард», которое и купила «Свеза». Сделку одобрила ФАС; сумму «Свеза» не раскрывает.",
      "source": [
       "Псковская Лента Новостей",
       "https://pln-pskov.ru/society/542100.html"
@@ -42478,27 +42583,27 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "aae6aa0f0f07"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "7434af94ade9"
     },
     "price": {
-     "value_rub": 8448753600,
+     "value_rub": 9171898000,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
      "card_hash": "2706d52ecedf",
      "currency": "EUR",
      "amount": 134000000.0,
-     "fx_rate": 63.0504,
-     "fx_date": "2022-12-01",
+     "fx_rate": 68.447,
+     "fx_date": "2022-12-16",
      "fx_method": "day"
     },
     "date": {
-     "value": "2022-12-01",
-     "meaning": "unknown",
+     "value": "2022-12-16",
+     "meaning": "announcement",
      "basis": "rule",
-     "card_hash": "af9c1520212b"
+     "card_hash": "da9a6632a527"
     },
     "nature": {
      "control_change": true,
@@ -42508,7 +42613,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "0c961176e71b"
+     "card_hash": "5c667fea944a"
     },
     "target": {
      "company_id": "g7f6433d2",
@@ -42536,31 +42641,61 @@
     }
    },
    "seller_id": "ge12eac0a",
-   "gate_baseline_hash": "d5a2107b6e45.d3a4bf"
+   "gate_baseline_hash": "d5a2107b6e45.d3a4bf",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«Гранель» купила у Mayr-Melnhof заводы «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр»",
+     "quote": "приобрела на Северо-Западе три завода по выпуску бумаги и картона: в Ломоносовском районе Ленобласти «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр» и «Невские грани» во Пскове. … До начала СВО компаниями «ММПОФ Пэкэджинг» (выручка за 2023 год 7,9 млрд руб.) и «ММПОФ Ротогравюр» (4,2 млрд руб.) на 99,99 % владела австрийская компания MM PACKAGING GmbH, оставшаяся часть принадлежала MM BOARD & PAPER GmbH. «Невскими гранями» (выручка 2,3 млрд руб.) распоряжалась австрийская TANNPAPIER GmbH. В декабре 2022 года все три компании в полном объеме перешли к московской ГК «Гранель», а следом в марте 2023-го — к ООО «Форвард». По данным СПАРК, главным бенефициаром с долей 99,99 % «Форварда» «Свеза» стала еще 27 декабря прошлого года. … has sold its two Packaging sites in Russia, St. Petersburg and Pskov, to the local investor Granelle following approval by the governmental authorities. The selling price amounts to approx. EUR 134 million. In 2021, the plants generated combined sales of approx. EUR 124 million.",
+     "url": "https://www.fontanka.ru/2025/01/11/74977775/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2022-12-16",
+     "quote": "Pressemitteilung - 16. Dezember 2022 Die Mayr-Melnhof Gruppe (MM), ein weltweit führender Hersteller von Karton und Faltschachteln, hat ihre beiden Packaging-Standorte in Russland, St. Petersburg und Pskov, nach erfolgter Genehmigung durch die Behörden an den lokalen Investor Granelle verkauft.",
+     "url": "https://cms.law/de/aut/news-information/mayr-melnhof-packaging-verkauft-russische-standorte-mit-rechtlicher-begleitung-von-cms",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% компаний «ММПОФ Пэкэджинг» и «ММПОФ Ротогравюр»",
+     "quote": "До начала СВО компаниями «ММПОФ Пэкэджинг» (выручка за 2023 год 7,9 млрд руб.) и «ММПОФ Ротогравюр» (4,2 млрд руб.) на 99,99 % владела австрийская компания MM PACKAGING GmbH, оставшаяся часть принадлежала MM BOARD & PAPER GmbH. «Невскими гранями» (выручка 2,3 млрд руб.) распоряжалась австрийская TANNPAPIER GmbH. В декабре 2022 года все три компании в полном объеме перешли к московской ГК «Гранель», а следом в марте 2023-го — к ООО «Форвард». По данным СПАРК, главным бенефициаром с долей 99,99 % «Форварда» «Свеза» стала еще 27 декабря прошлого года.",
+     "url": "https://www.fontanka.ru/2025/01/11/74977775/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "announcement",
+   "reread": "2026-11-12",
+   "reread_hash": "d1fbb4b1d153.d3a4bf",
+   "reread_note": "статьи: 5"
   },
   {
    "id": "g1059432d",
-   "date": "2022-11-01",
-   "title": "Whirlpool продала российский завод и бренды Hotpoint/Indesit турецкой Arçelik",
+   "date": "2022-08-31",
+   "title": "Arçelik купил «Индезит Интернэшнл» и «Вирлпул Рус» у Whirlpool",
    "buyer": "g4b079e80",
    "target": "g13d18a65",
    "ind": "Потребительские товары",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "€220 млн",
+   "sum": "Не раскрыта",
    "eco": {
-    "sum": "€220 млн",
-    "share": "Помимо России, приобретенные Arcelik компании работают в Киргизии, Таджикистане, Туркмении, Узбекистане, Армении, Грузии, Азербайджане, Казахстане, Белоруссии и Монголии.",
-    "val": "—",
+    "sum": "Не раскрыта",
+    "share": "100% акций АО «Индезит Интернэшнл» и 100% долей ООО «Вирлпул Рус»",
+    "val": "Фиксированной цены стороны не назначали: выплаты зависели от результатов российского бизнеса и были ограничены согласованной стоимостью его чистых активов на дату закрытия. При подписании Arçelik сообщала, что сумма не превысит €220 млн; по отчетности Whirlpool за 2023 год этот предел составил €261 млн.",
     "target_fin": "Выручка «Вирлпул Рус» по РСБУ в 2021 году составила 40,8 млрд ₽, чистая прибыль — 1,9 млрд ₽; у «Индезит Интернэшнл» эти показатели составили 29,1 млрд ₽ и 220 млн ₽ соответственно. По итогам 2025 года выручка объединенного юрлица «Ай Эйч Пи Апплаенсес» (бывший липецкий завод) составила 36,8 млрд ₽ (+37% год к году), чистая прибыль — 1,2 млрд ₽ (+13,3%).",
     "fin": "—",
-    "rationale": "Американская Whirlpool продала завод бытовой техники в Липецке и права на бренды Hotpoint и Indesit в России турецкой Arçelik A.Ş. за €220 млн.",
-    "context": "Оба юрлица теперь принадлежат турецкой АК «Арчелик» как единственному учредителю и сменили названия. Липецкое АО «Индезит Интернэшнл» стало АО «Ай эйч пи апплаенсес» (IHP Appliances), московское ООО «Вирлпул Рус» — ООО «Ай эйч пи апплаенсес».",
+    "rationale": "—",
+    "context": "В начале марта 2022 года Whirlpool приостановила производство в России из-за падения спроса. Arçelik получила липецкие заводы мощностью 2,8 млн холодильников и стиральных машин в год, российские права на бренды Indesit, Hotpoint и Stinol, а также продажи в Казахстане и других странах СНГ: кроме России, купленные компании работают в Киргизии, Таджикистане, Туркмении, Узбекистане, Армении, Грузии, Азербайджане, Белоруссии и Монголии.\n\nПосле сделки оба юрлица сменили названия: АО «Индезит Интернэшнл» стало АО «Ай эйч пи апплаенсес», ООО «Вирлпул Рус» — ООО «Ай эйч пи апплаенсес». Единственный учредитель обоих — Arçelik.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "Турецкая Arçelik подписала с Whirlpool EMEA S.p.A. соглашение о покупке ее российских активов — АО «Индезит Интернэшнл» и ООО «Вирлпул Рус».",
+    "struct": "Whirlpool EMEA S.p.A. подписала договор о продаже 27 июня 2022 года, сделка закрыта 31 августа 2022 года. В ЕГРЮЛ переход 100% ООО «Вирлпул Рус» записан 7 сентября, 100% акций АО «Индезит Интернэшнл» — 16 сентября 2022 года.",
     "appr": "Публично не сообщалось",
     "adv": [
      [
@@ -42569,31 +42704,47 @@
       "Приобретение 100% Indesit International JSC и Whirlpool Rus LLC (завод в Липецке, бренды Hotpoint/Indesit) у Whirlpool EMEA S.p.A. за €220 млн. Партнер Артем Тамаев, ст. юрист Эмиль Шагиахметов, юрист Олеся Шлапак. Источник: betterchance.ru/en/news/better-chance-advises-arcelik-a-/"
      ]
     ],
-    "terms": "Изначальные условия сделки были заметно сложнее фиксированной суммы: итоговая стоимость актива должна была определяться на протяжении десяти лет после закрытия и зависела от финансовых показателей бизнеса и ряда дополнительных условий. Стороны решили упростить механизм расчетов и заменить его разовым платежом €40 млн. К марту 2026 года Arçelik уже накопила по этому соглашению долгосрочные обязательства примерно на €117 млн, так что новая договоренность почти втрое сократила итоговую сумму выплат. Общая сумма выплат (около €157 млн: €117 млн накопленных обязательств плюс €40 млн разового платежа) укладывается в объявленный при подписании максимум — по словам представителей Arçelik, «сумма сделки не превысит 220 млн евро»."
+    "terms": "Выплаты Arçelik зависели от результатов российского бизнеса и были растянуты на 10 лет. В июне 2026 года Arçelik сообщила, что закрыла все обязательства по этой покупке последним платежом €40 млн."
    },
    "src": [
     [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/whirlpool"
+     "Whirlpool (отчет 10-Q за III квартал 2022 года)",
+     "https://www.sec.gov/Archives/edgar/data/106640/000010664022000138/whr-20220930.htm"
     ],
     [
-     "Bloomberg",
-     "https://www.bloomberg.com"
-    ],
-    [
-     "Abireg",
-     "https://abireg.ru/newsitem/95576/"
+     "Whirlpool (отчет 10-Q за III квартал 2023 года)",
+     "https://www.sec.gov/Archives/edgar/data/106640/000010664023000131/whr-20230930.htm"
     ],
     [
      "Retail.ru",
      "https://www.retail.ru/news/turetskaya-kompaniya-arcelik-stala-vladeltsem-rossiyskogo-biznesa-whirlpool-28-sentyabrya-2022-220964/"
     ],
     [
+     "New Retail",
+     "https://new-retail.ru/novosti/retail/turetskaya_arcelik_priobrela_rossiyskiy_biznes_whirlpool9593/"
+    ],
+    [
+     "Better Chance",
+     "https://betterchance.ru/en/news/better-chance-advises-arcelik-a-/"
+    ],
+    [
+     "Daily Sabah (Reuters)",
+     "https://www.dailysabah.com/business/economy/turkish-home-appliance-maker-arcelik-takes-full-control-of-beko-europe"
+    ],
+    [
+     "Abireg",
+     "https://abireg.ru/newsitem/95576/"
+    ],
+    [
      "TAdviser",
      "https://www.tadviser.ru/index.php/Компания:IHPA_-_IHP_Appliances_Sales_-_Ай_Эйч_Пи_Апплаенсес_Сейлс_-_Вирлпул_Рус_(Whirlpool_Rus)"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/whirlpool"
     ]
    ],
-   "extra": "Американская Whirlpool продала турецкой Arçelik A.Ş. завод бытовой техники в Липецке и права на бренды Hotpoint и Indesit в России; сумма сделки — €220 млн. Сделка отражена в трекере уходов компаний с российского рынка KSE Institute «Leave Russia».",
+   "extra": "Arçelik получила липецкие заводы Whirlpool и российские права на Indesit, Hotpoint и Stinol без фиксированной цены: расчеты зависели от результатов бизнеса.",
    "auto": true,
    "seller": "Whirlpool",
    "seller_src": "title",
@@ -42607,33 +42758,32 @@
      "718b4b77ee61"
     ],
     "eco.context": [
-     "b68c69caba35"
+     "b68c69caba35",
+     "738ba0b32eb8"
+    ],
+    "law.struct": [
+     "b5d430095af9"
     ]
    },
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "431919b7f017"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "7e59ec084023"
     },
     "price": {
-     "value_rub": 13446312000,
-     "meaning": "foreign_currency",
+     "value_rub": null,
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "0c6573cb165d",
-     "currency": "EUR",
-     "amount": 220000000.0,
-     "fx_rate": 61.1196,
-     "fx_date": "2022-11-01",
-     "fx_method": "day"
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2022-11-01",
-     "meaning": "unknown",
+     "value": "2022-08-31",
+     "meaning": "closing",
      "basis": "rule",
-     "card_hash": "8edea374f423"
+     "card_hash": "3fda0a0de5a3"
     },
     "nature": {
      "control_change": true,
@@ -42643,7 +42793,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ff88bcd25e67"
+     "card_hash": "366a14f36c26"
     },
     "target": {
      "company_id": "g13d18a65",
@@ -42665,19 +42815,69 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    },
    "seller_id": "gadfb9f30",
-   "gate_baseline_hash": "edb7bf18e0e6.2f8077"
+   "gate_baseline_hash": "edb7bf18e0e6.2f8077",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Arçelik купил «Индезит Интернэшнл» и «Вирлпул Рус» у Whirlpool",
+     "quote": "По данным ЕГРЮЛ, с 16 сентября текущего года 100% уставного капитала АО «Индезит Интернэшнл» и с 7 сентября 100% уставного капитала ООО «Вирлпул Рус» принадлежат Arcelik Anonim Sirketi … On August 31, 2022, we completed the sale to Arcelik.",
+     "url": "https://www.retail.ru/news/turetskaya-kompaniya-arcelik-stala-vladeltsem-rossiyskogo-biznesa-whirlpool-28-sentyabrya-2022-220964/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2022-08-31",
+     "quote": "On August 31, 2022, we completed the sale to Arcelik.",
+     "url": "https://www.sec.gov/Archives/edgar/data/106640/000010664022000138/whr-20220930.htm",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "Не раскрыта",
+     "quote": "Additionally, the contingent consideration is subject to a cap based on the agreed net asset value of the Russian business as of closing. The net asset value is currently estimated at € 220 million … Additionally, the contingent consideration is subject to a cap based on the agreed net asset value of the Russia business of € 261 million at closing",
+     "url": "https://www.sec.gov/Archives/edgar/data/106640/000010664023000131/whr-20230930.htm",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "Не раскрыта",
+     "quote": "Additionally, the contingent consideration is subject to a cap based on the agreed net asset value of the Russian business as of closing. The net asset value is currently estimated at € 220 million … Additionally, the contingent consideration is subject to a cap based on the agreed net asset value of the Russia business of € 261 million at closing",
+     "url": "https://www.sec.gov/Archives/edgar/data/106640/000010664023000131/whr-20230930.htm",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% акций АО «Индезит Интернэшнл» и 100% долей ООО «Вирлпул Рус»",
+     "quote": "По данным ЕГРЮЛ, с 16 сентября текущего года 100% уставного капитала АО «Индезит Интернэшнл» и с 7 сентября 100% уставного капитала ООО «Вирлпул Рус» принадлежат Arcelik Anonim Sirketi",
+     "url": "https://www.retail.ru/news/turetskaya-kompaniya-arcelik-stala-vladeltsem-rossiyskogo-biznesa-whirlpool-28-sentyabrya-2022-220964/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "closing",
+   "retracted": {
+    "sum": [
+     "€220 млн"
+    ]
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "5f74ca7e42d1.2f8077",
+   "reread_note": "статьи: 8"
   },
   {
    "id": "gfc7e5649",
-   "date": "2022-07-01",
-   "title": "SoftwareONE продала российский бизнес по лицензированию ПО компании Awara IT Group",
-   "buyer": "g66a64a9f",
+   "date": "2022-05-19",
+   "title": "Александр Ермаков и Юрий Шумаков купили SoftwareONE Russia",
    "target": "ge90270b7",
    "ind": "ИТ и интернет",
    "type": "M&A",
@@ -42686,41 +42886,39 @@
    "sum": "Не раскрыта",
    "eco": {
     "sum": "Не раскрыта",
-    "share": "—",
+    "share": "100% долей ООО «СофтвэрУАН» (теперь ООО «Ван Ай Ти Трейд»): 60% у Александра Ермакова, 40% у Юрия Шумакова",
     "val": "—",
-    "target_fin": "Выручка «СофтвэрУАН» за 2020 год — без малого 9,59 млрд ₽, за 2021-й — около 9,47 млрд ₽. Это ООО, которым SoftwareONE владела целиком; общество зарегистрировано в феврале 2007 г. и успело сменить несколько названий — «Общество информационных технологий», «ПС-Вэйр», а с 2012 г. «Компарекс».",
+    "target_fin": "Выручка ООО «СофтвэрУАН» — около 9,59 млрд ₽ в 2020 году и около 9,47 млрд ₽ в 2021 году.",
     "fin": "—",
-    "rationale": "Швейцарская SoftwareONE продала российский бизнес по лицензированию программного обеспечения компании Awara IT Group в рамках ухода с российского рынка.",
-    "context": "После сделки появилась совместная мультивендорная ИТ-компания полного цикла под брендом WONE IT — сейчас она работает как ООО «Ван Ай Ти Трейд» под брендом Wone IT. Доли собственников с тех пор не изменились: 60% у Александра Ермакова, 40% у Юрия Шумакова.",
+    "rationale": "Швейцарская SoftwareONE уходила из России.",
+    "context": "SoftwareONE работала в России через ООО «СофтвэрУАН», созданное в 2007 году (прежние названия — «Общество информационных технологий», «ПС-Вэйр», с 2012 года — «Компарекс»). Группа Awara IT по выручке была в 18,6 раза меньше купленной компании: 507 млн ₽ против 9,47 млрд ₽ за 2021 год.\n\nГендиректором объединенной компании стал Юрий Шумаков, в ней рассчитывали на более чем 400 сотрудников. Доли владельцев с тех пор не менялись: 60% у Александра Ермакова, 40% у Юрия Шумакова.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "По данным ЕГРЮЛ, участники компании — Александр Ермаков с 56%-ной долей, Юрий Шумаков с 30%-ной и Александр Пирогов с 14%. Выручка ООО «Авара Ай Ти Солюшенс» по итогам 2020 года составила 271,7 млн ₽, за 2021 год — 297 млн ₽.",
+    "struct": "SoftwareONE AG продала 100% российской компании ООО «СофтвэрУАН» не самой Awara IT, а двум ее совладельцам: 60% получил Александр Ермаков, 40% — Юрий Шумаков. В ЕГРЮЛ переход записан 19 мая 2022 года. Компанию переименовали в ООО «Ван Ай Ти Трейд», российский бизнес Awara IT вошел в нее под брендом WONE IT.",
     "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Стороны сделки",
-      "Не раскрывались",
-      "Юридические консультанты в публичных источниках не раскрывались"
-     ]
-    ],
-    "terms": "В Awara IT ответили, что не разглашают сумму сделки."
+    "adv": [],
+    "terms": "—"
    },
    "src": [
     [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/softwareone"
-    ],
-    [
      "ComNews",
      "https://www.comnews.ru/content/220241/2022-05-17/2022-w20/awara-it-poglotila-aktivy-softwareone-rossii"
+    ],
+    [
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/ge90270b7/fns"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/softwareone"
     ],
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/Компания:Wone_IT_(Ван_Ай_Ти_Трейд,_ранее_SoftwareONE_Россия,_СофтвэрУАН_и_Awara_IT_Russia,_Авара_Ай_Ти_Солюшенс)"
     ]
    ],
-   "extra": "Швейцарская SoftwareONE продала российский бизнес по лицензированию программного обеспечения компании Awara IT Group, уходя с российского рынка. Сделка учтена в проекте KSE Institute «Leave Russia» и по возможности сверена с независимой прессой.",
+   "extra": "Российский бизнес SoftwareONE купила не компания Awara IT, а ее совладельцы; объединенный бизнес работает под брендом WONE IT.",
    "auto": true,
    "themes": [
     "Уход иностранного владельца"
@@ -42729,24 +42927,28 @@
    "seller_src": "title",
    "added": "2026-07-22",
    "reviewed": "2026-08-10",
-   "buyer_name": null,
+   "buyer_name": "Александр Ермаков и Юрий Шумаков (совладельцы Awara IT Group)",
    "deep_researched": "2026-08-15",
    "weekly_researched": "2026-08-18",
    "followup_researched": "2026-08-21",
    "proofread_absorbed": {
     "eco.target_fin": [
-     "d36de12318b6"
+     "d36de12318b6",
+     "ccbf2b25869d"
     ],
     "law.struct": [
      "3fb4264504a4"
+    ],
+    "law.terms": [
+     "db0016134bd7"
     ]
    },
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "25013f8bda7e"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "1f969e5a5c7e"
     },
     "price": {
      "value_rub": null,
@@ -42756,10 +42958,10 @@
      "card_hash": "c22efc030a0d"
     },
     "date": {
-     "value": "2022-07-01",
-     "meaning": "unknown",
+     "value": "2022-05-19",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "539c451acbe2"
+     "card_hash": "984f04fde6b9"
     },
     "nature": {
      "control_change": true,
@@ -42769,7 +42971,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "f8aaae849c43"
+     "card_hash": "f5763d79ae7f"
     },
     "target": {
      "company_id": "ge90270b7",
@@ -42797,32 +42999,86 @@
     }
    },
    "seller_id": "g83aa6681",
-   "gate_baseline_hash": "70ce4b1b0525.b6e565"
+   "gate_baseline_hash": "70ce4b1b0525.b6e565",
+   "fact_log": [
+    {
+     "field": "buyer",
+     "new": null,
+     "quote": "Российские частные инвесторы, совладельцы компании-интегратора Awara IT Group Александр Ермаков и Юрий Шумаков купили ООО \"СофтварэУАН\" (SoftwareONE Russia). Доли партнеров распределены как 60% и 40% соответственно. … 19 мая 2022 года — СОФТВЭРУАН АГ вышел из состава участников доля 100.0%. 19 мая 2022 года — Ермаков Александр Владимирович вошел в состав участников доля 60.0%. 19 мая 2022 года — Шумаков Юрий Алексеевич вошел в состав участников доля 40.0%.",
+     "url": "https://projectcompass.ru/api/companies/ge90270b7/fns",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "buyer_name",
+     "new": "Александр Ермаков и Юрий Шумаков (совладельцы Awara IT Group)",
+     "quote": "Российские частные инвесторы, совладельцы компании-интегратора Awara IT Group Александр Ермаков и Юрий Шумаков купили ООО \"СофтварэУАН\" (SoftwareONE Russia). Доли партнеров распределены как 60% и 40% соответственно. … 19 мая 2022 года — СОФТВЭРУАН АГ вышел из состава участников доля 100.0%. 19 мая 2022 года — Ермаков Александр Владимирович вошел в состав участников доля 60.0%. 19 мая 2022 года — Шумаков Юрий Алексеевич вошел в состав участников доля 40.0%.",
+     "url": "https://www.comnews.ru/content/220241/2022-05-17/2022-w20/awara-it-poglotila-aktivy-softwareone-rossii",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "title",
+     "new": "Александр Ермаков и Юрий Шумаков купили SoftwareONE Russia",
+     "quote": "Российские частные инвесторы, совладельцы компании-интегратора Awara IT Group Александр Ермаков и Юрий Шумаков купили ООО \"СофтварэУАН\" (SoftwareONE Russia). Доли партнеров распределены как 60% и 40% соответственно.",
+     "url": "https://www.comnews.ru/content/220241/2022-05-17/2022-w20/awara-it-poglotila-aktivy-softwareone-rossii",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2022-05-19",
+     "quote": "19 мая 2022 года — СОФТВЭРУАН АГ вышел из состава участников доля 100.0%. 19 мая 2022 года — Ермаков Александр Владимирович вошел в состав участников доля 60.0%. 19 мая 2022 года — Шумаков Юрий Алексеевич вошел в состав участников доля 40.0%.",
+     "url": "https://projectcompass.ru/api/companies/ge90270b7/fns",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% долей ООО «СофтвэрУАН» (теперь ООО «Ван Ай Ти Трейд»): 60% у Александра Ермакова, 40% у Юрия Шумакова",
+     "quote": "Российские частные инвесторы, совладельцы компании-интегратора Awara IT Group Александр Ермаков и Юрий Шумаков купили ООО \"СофтварэУАН\" (SoftwareONE Russia). Доли партнеров распределены как 60% и 40% соответственно. … 19 мая 2022 года — СОФТВЭРУАН АГ вышел из состава участников доля 100.0%. 19 мая 2022 года — Ермаков Александр Владимирович вошел в состав участников доля 60.0%. 19 мая 2022 года — Шумаков Юрий Алексеевич вошел в состав участников доля 40.0%. … ООО «ВАН АЙ ТИ ТРЕЙД», ИНН 5044057860",
+     "url": "https://www.comnews.ru/content/220241/2022-05-17/2022-w20/awara-it-poglotila-aktivy-softwareone-rossii",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [],
+     "quote": "Российские частные инвесторы, совладельцы компании-интегратора Awara IT Group Александр Ермаков и Юрий Шумаков купили ООО \"СофтварэУАН\" (SoftwareONE Russia). Доли партнеров распределены как 60% и 40% соответственно.",
+     "url": "https://www.comnews.ru/content/220241/2022-05-17/2022-w20/awara-it-poglotila-aktivy-softwareone-rossii",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "reread": "2026-11-12",
+   "reread_hash": "fc4663b99252.b60aaa",
+   "reread_note": "статьи: 3"
   },
   {
    "id": "gc677124b",
-   "date": "2025-11-20",
-   "title": "Aggreko продала евразийский бизнес по аренде энергооборудования «Бурсервису»",
+   "date": "2025-11-19",
+   "title": "«БурСервис» купил «Аггреко Евразия» у Aggreko",
    "buyer": "g69e44ed5",
    "target": "g69b9ab00",
    "ind": "Энергетика",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "$29 млн",
+   "sum": "$21 млн",
    "eco": {
-    "sum": "$29 млн",
-    "share": "Распоряжением разрешено приобретение 99% ООО «Аггреко Евразия», принадлежащих Aggreko Holdings Limited, и 1%, принадлежащего Aggreko UK Limited.",
-    "val": "—",
-    "target_fin": "По итогам 2024 года выручка «Аггреко Евразия» составила почти 10 млрд ₽, чистая прибыль — 2,43 млрд ₽.",
+    "sum": "$21 млн",
+    "share": "100% долей ООО «Аггреко Евразия»: 99% у Aggreko Holdings Limited, 1% у Aggreko UK Limited",
+    "val": "В апреле 2025 года Aggreko сообщила, что продает бизнес в Евразии неназванному покупателю за $29 млн: $21 млн за российскую часть и $8 млн за казахстанскую. Владелец Aggreko, Albion JVCo, ожидал после закрытия сделки списания $82 млн.",
+    "target_fin": "По итогам 2024 года выручка ООО «Аггреко Евразия» превысила 9,9 млрд ₽, чистая прибыль — 2,43 млрд ₽. Aggreko оценивала выручку российского бизнеса за 2024 год в $106 млн.",
     "fin": "—",
     "rationale": "Покупка должна расширить портфель услуг «БурСервиса» в русле комплексного подхода компании к строительству нефтегазовых скважин.",
-    "context": "В 2022 году Halliburton завершила продажу российского подразделения российской управленческой команде из бывших сотрудников Halliburton и больше не ведет операции в России. Команда менеджеров стала владеть бывшим бизнесом и активами Halliburton в России под названием «БурСервис», независимым от Halliburton. «БурСервис» продолжил консолидацию нефтесервисного рынка: в феврале 2026 года (запись в ЕГРЮЛ от 13 февраля) компания стала владельцем 51% производителя нефтегазового оборудования «Уфабурмаш». По оценке консультантов, эта сделка снижает зависимость группы от зарубежных поставщиков бурового инструмента в условиях санкций. В 2024 году выручка самого «БурСервиса» выросла на 21,1%, до 47,86 млрд ₽, чистая прибыль — на 17%, до 14 млрд ₽.",
+    "context": "Еще в марте 2022 года Aggreko решила продать российский бизнес; до продажи он работал отдельно от остальной группы, и инвестиции в него прекратились. «Аггреко Евразия» работает в СНГ с 2008 года: обеспечивает мобильное энергоснабжение и температурный контроль нефтегазовых, цементных, стекольных и горнорудных предприятий.\n\nПокупатель, «БурСервис», — нефтесервисная компания, преемник российских активов Halliburton. Покупка «Аггреко Евразия» — его вторая сделка M&A в 2025 году.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
     "struct": "—",
-    "appr": "Президент России Владимир Путин подписал распоряжение о специальном решении о совершении сделок АО «БурСервис». Документ опубликован на портале правовых актов.",
+    "appr": "Сделку разрешил президент России распоряжением № 196-рп от 26 мая 2025 года; других разрешений и согласований для нее не требовалось.",
     "adv": [
      [
       "Юридический консультант покупателя (АО «БурСервис»)",
@@ -42830,28 +43086,40 @@
       "Приобретение 100% долей ООО «Аггреко Евразия» у британской Aggreko; разрешение президента РФ получено 26.05.2025, сделка закрыта 20.11.2025. Партнер Денис Гаврилов. Источник: denuo.legal, burservis.ru/news/20-11-25"
      ]
     ],
-    "terms": "Других разрешений, согласий и согласований по законам РФ, в том числе предварительных, для сделок из распоряжения не нужно."
+    "terms": "—"
    },
    "src": [
     [
-     "KSE Institute — Leave Russia",
-     "https://leave-russia.org/aggreko-uk"
+     "БурСервис (пресс-релиз о закрытии)",
+     "https://www.burservis.ru/news/20-11-25"
     ],
     [
      "Интерфакс",
      "https://www.interfax.ru/russia/1027809"
     ],
     [
-     "БурСервис (пресс-релиз о закрытии)",
-     "https://www.burservis.ru/news/20-11-25"
+     "Kremlin.ru (текст распоряжения)",
+     "http://www.kremlin.ru/acts/bank/51958/print"
+    ],
+    [
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/g69b9ab00/fns"
+    ],
+    [
+     "International Rental News",
+     "https://www.internationalrentalnews.com/news/russia-/8062061.article"
+    ],
+    [
+     "International Rental News",
+     "https://www.internationalrentalnews.com/news/aggreko-finds-buyer-for-russian-business/8055543.article"
+    ],
+    [
+     "KSE Institute — Leave Russia",
+     "https://leave-russia.org/aggreko-uk"
     ],
     [
      "Denuo Legal — страница партнера Дениса Гаврилова",
      "https://denuo.legal/ru/people/denis-gavrilov/"
-    ],
-    [
-     "Kremlin.ru (текст распоряжения)",
-     "http://www.kremlin.ru/acts/bank/51958/print"
     ],
     [
      "Аггреко Евразия (объявление о смене собственника)",
@@ -42870,7 +43138,7 @@
      "https://www.kommersant.ru/doc/8442557"
     ]
    ],
-   "extra": "Британская Aggreko UK продала бизнес по аренде энергооборудования в Евразии (Россия и сопредельные страны) компании «Бурсервис» за $29 млн. Сделка учтена в трекере ухода иностранных компаний KSE Institute «Leave Russia».",
+   "extra": "«БурСервис», преемник российских активов Halliburton, купил российский бизнес британской Aggreko по мобильному энергоснабжению; Aggreko искала покупателя три года.",
    "auto": true,
    "seller": "Aggreko",
    "seller_src": "title",
@@ -42887,7 +43155,8 @@
      "98eace75efa0"
     ],
     "law.terms": [
-     "7e90be0595d7"
+     "7e90be0595d7",
+     "47a716d71b39"
     ],
     "eco.share": [
      "0b85076846df"
@@ -42899,27 +43168,27 @@
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
-     "value": 99.0,
+     "value": 100.0,
      "basis": "rule",
-     "card_hash": "5aa8d7cf374f"
+     "card_hash": "1acffbbd6425"
     },
     "price": {
-     "value_rub": 2347399200,
+     "value_rub": 1702148700,
      "meaning": "foreign_currency",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "84ebdc8b7178",
+     "card_hash": "0131c0698535",
      "currency": "USD",
-     "amount": 29000000.0,
-     "fx_rate": 80.9448,
-     "fx_date": "2025-11-20",
+     "amount": 21000000.0,
+     "fx_rate": 81.0547,
+     "fx_date": "2025-11-19",
      "fx_method": "day"
     },
     "date": {
-     "value": "2025-11-20",
-     "meaning": "unknown",
+     "value": "2025-11-19",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "fb26596a3036"
+     "card_hash": "622484237a1e"
     },
     "nature": {
      "control_change": true,
@@ -42929,7 +43198,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "ba432b09df98"
+     "card_hash": "8ddeed17875c"
     },
     "target": {
      "company_id": "g69b9ab00",
@@ -42963,27 +43232,78 @@
     ]
    ],
    "seller_id": "g7dde6491",
-   "gate_baseline_hash": "381b8662fba4.18aa3f"
+   "gate_baseline_hash": "381b8662fba4.18aa3f",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "«БурСервис» купил «Аггреко Евразия» у Aggreko",
+     "quote": "АО «БурСервис» сообщает о завершении сделки по приобретению ООО «Аггреко Евразия»",
+     "url": "https://www.burservis.ru/news/20-11-25",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2025-11-19",
+     "quote": "19 ноября 2025 года — КОМПАНИЯ С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ АГГРЕКО ХОЛДИНГЗ ЛИМИТЕД вышел из состава участников доля 99.0%. 19 ноября 2025 года — АО \"БУРСЕРВИС\" вошел в состав участников доля 100.0%.",
+     "url": "https://projectcompass.ru/api/companies/g69b9ab00/fns",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "$21 млн",
+     "quote": "Aggreko reported that the sales price comprised $21 million for the Russian segment and $8 million for Kazakhstan. Albion JVCo, Aggreko’s owner, said it would take an $82 million impairment charge on the sale once completed. The Russian business reported revenues of $106 million for the year ending December 28, 2024",
+     "url": "https://www.internationalrentalnews.com/news/russia-/8062061.article",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "$21 млн",
+     "quote": "Aggreko reported that the sales price comprised $21 million for the Russian segment and $8 million for Kazakhstan. Albion JVCo, Aggreko’s owner, said it would take an $82 million impairment charge on the sale once completed. The Russian business reported revenues of $106 million for the year ending December 28, 2024",
+     "url": "https://www.internationalrentalnews.com/news/russia-/8062061.article",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% долей ООО «Аггреко Евразия»: 99% у Aggreko Holdings Limited, 1% у Aggreko UK Limited",
+     "quote": "разрешить совершение акционерным обществом \"БурСервис\" сделок по приобретению 99 процентов долей в уставном капитале общества с ограниченной ответственностью \"Аггреко Евразия\", принадлежащих Аггреко Холдингз Лимитед (Aggreko Holdings Limited), и 1 процента долей в уставном капитале указанного общества, принадлежащего Аггреко ЮКей Лимитед (Aggreko UK Limited). 2. Для совершения сделок, указанных в настоящем распоряжении, не требуется получение иных предусмотренных законодательством Российской Федерации разрешений",
+     "url": "http://www.kremlin.ru/acts/bank/51958/print",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "retracted": {
+    "sum": [
+     "$29 млн"
+    ]
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "5a258849b736.18aa3f",
+   "reread_note": "статьи: 8"
   },
   {
    "id": "g94683ed2",
    "date": "2025-12-15",
-   "title": "Wildberries & Russ приобрела сеть «Рив Гош»",
+   "title": "Wildberries & Russ купил сеть «Рив Гош»",
    "buyer": "g549ab474",
    "target": null,
    "ind": "Ритейл",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "5–6 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
-    "share": "Сейчас у сети более 250 магазинов в 88 городах.",
-    "val": "Бурмистров оценивает сделку с учетом долга в 5–6 млрд ₽. Весь бизнес компании, по его оценке, стоит свыше 12 млрд ₽.",
-    "target_fin": "У «УК ПС Групп» в 2024 году выручка составила 1,36 млрд ₽, чистая прибыль — 2,98 млн ₽. Прибыль за год выросла в пять раз, выручка — на 3,4%.",
+    "sum": "5–6 млрд ₽ (по оценке)",
+    "share": "100% долей ООО «Аромалюкс» и ООО «УК ПС Групп»",
+    "val": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку с учетом долга в 5–6 млрд ₽, а весь бизнес «Рив Гош» — более чем в 12 млрд ₽. Стороны сумму не называли.",
+    "target_fin": "Выручка ООО «Аромалюкс», операционной компании сети, за 2024 год снизилась на 6%, до 37,4 млрд ₽, чистый убыток вырос почти втрое, до 1,5 млрд ₽. У ООО «УК ПС Групп» выручка за 2024 год — 1,36 млрд ₽ (+3,4%), чистая прибыль — 2,98 млн ₽, в пять раз больше, чем годом ранее.",
     "fin": "—",
-    "rationale": "По словам пресс-службы, присоединение «Рив Гош», одной из крупнейших сетей, к Wildberries позволит развить омниканальные продажи, заметно расширить ассортимент брендов на виртуальной витрине и сделать товары категории «Красота» доступнее для покупателей в регионах и странах присутствия.",
-    "context": "26 сентября Wildberries и «Рив Гош» объявили о стратегическом партнерстве. По его условиям магазины сети стали пунктами самовывоза заказов Wildberries, а сама «Рив Гош» получила отдельный раздел в каталоге парфюмерии и косметики маркетплейса.",
+    "rationale": "Wildberries & Russ объясняет покупку развитием омниканальных продаж: с «Рив Гош» маркетплейс получает больше брендов и может доставлять косметику покупателям в регионах и других странах.",
+    "context": "«Рив Гош» основали в 1995 году Павел и Лариса Карабань. Сеть продает в основном премиальную парфюмерию и косметику, у нее более 250 магазинов в 88 городах; по данным Infoline, это пятый по обороту парфюмерно-косметический ритейлер России. На 2021 год 51% кипрской Rive Gauche Group Ltd принадлежал Инне Мейер, 25% — у панамской Octapan Investments (ее бенефициарами называют основателей сети), 24% — у Lenka Investments, которую связывали с Олегом Бойко.\n\nПокупку сети раньше обсуждала «Севергрупп» Алексея Мордашова. 26 сентября 2025 года Wildberries и «Рив Гош» объявили о партнерстве: 252 магазина сети стали пунктами выдачи заказов маркетплейса, а сеть получила свой раздел в каталоге Wildberries.",
     "finadv": "Aspring Capital"
    },
    "law": {
@@ -42996,7 +43316,7 @@
       "Продажа 100% сети «Рив Гош» компании Wildberries & Russ (ООО «РВБ»). Источник: dgpartners.legal/mediaportal/news/dgp-advises-on-the-sale-of-rive-gauche-group-/"
      ]
     ],
-    "terms": "Дополнительно в залог ООО «РВБ» получило 100% долей ООО «Аромалюкс» и его дочернего ООО «Ароматех»."
+    "terms": "В октябре 2025 года, до перехода долей, ООО «РВБ» получило в залог 100% ООО «Аромалюкс» и его дочернего ООО «Ароматех»."
    },
    "src": [
     [
@@ -43005,22 +43325,30 @@
     ],
     [
      "Коммерсантъ",
-     "https://www.kommersant.ru/doc/8077406"
+     "https://www.kommersant.ru/doc/8292342"
     ],
     [
      "Коммерсантъ",
-     "https://www.kommersant.ru/doc/8292342"
+     "https://www.kommersant.ru/doc/8077406"
+    ],
+    [
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/g842a7fd2/fns"
+    ],
+    [
+     "Дякин, Горцунян и Партнеры",
+     "https://dgpartners.legal/mediaportal/news/dgp-advises-on-the-sale-of-rive-gauche-group-/"
     ],
     [
      "Malls.ru",
      "https://www.malls.ru/rus/news/riv-gosh-ukhodit-k-wildberries-zachem-marketpleysu-250-magazinov-krasoty.shtml"
     ]
    ],
-   "extra": "Юридическая фирма «Дякин, Горцунян и Партнеры» выступила советником акционеров «Рив Гош». Инвестиционно-банковская группа Aspring Capital также консультировала продающих акционеров.",
+   "extra": "Wildberries & Russ сначала подключил магазины «Рив Гош» к выдаче заказов, затем взял в залог операционную компанию сети и через три месяца после объявления о партнерстве стал ее владельцем.",
    "auto": true,
    "promoted_from_bulk": true,
    "target_was_seller": true,
-   "seller": "Акционеры Рив Гош",
+   "seller": "Rive Gauche Group Ltd",
    "seller_src": "text",
    "seller_id": null,
    "asset": "Рив Гош",
@@ -43050,37 +43378,44 @@
      "c27e45db34de"
     ],
     "law.terms": [
-     "54f5332d08fe"
+     "54f5332d08fe",
+     "110ebc852798"
     ],
     "eco.context": [
-     "1c9e33cfdd05"
+     "1c9e33cfdd05",
+     "3c51eb805ec6"
     ],
     "eco.val": [
-     "a9d9a8d91481"
+     "a9d9a8d91481",
+     "960d345b9d6b"
     ],
     "eco.target_fin": [
-     "9b6b9f0203c6"
+     "9b6b9f0203c6",
+     "2c98b11a198d"
+    ],
+    "eco.share": [
+     "4b87d750be86"
     ]
    },
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "9369f895dea1"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "307795c18e1f"
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "ac74799dc390"
     },
     "date": {
      "value": "2025-12-15",
-     "meaning": "unknown",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "c1dd591bbaf6"
+     "card_hash": "a92c1ef732a7"
     },
     "nature": {
      "control_change": true,
@@ -43090,7 +43425,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "3e9f6aa3897d"
+     "card_hash": "f8f3f2ca2e9b"
     },
     "target": {
      "company_id": "g842a7fd2",
@@ -43123,7 +43458,59 @@
      "https://t.me/LawFirms/9989"
     ]
    ],
-   "gate_baseline_hash": "ed26a3ed999a.f1040f"
+   "gate_baseline_hash": "ed26a3ed999a.f1040f",
+   "fact_log": [
+    {
+     "field": "seller",
+     "new": "Rive Gauche Group Ltd",
+     "quote": "Эти компании занимаются развитием парфюмерной сети «Рив Гош» и ранее контролировались кипрской структурой Rive Gauche Group Ltd. … 15 декабря 2025 года — КОМПАНИЯ \"РИВ ГОШ ГРУП (КИПР) ЛИМИТЕД\" вышел из состава участников доля 100.0%. 15 декабря 2025 года — ООО \"РВБ\" вошел в состав участников доля 100.0%.",
+     "url": "https://www.kommersant.ru/doc/8292342",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "title",
+     "new": "Wildberries & Russ купил сеть «Рив Гош»",
+     "quote": "Wildberries-Russ (ООО \"РВБ\") стала владельцем юрлиц парфюмерной сети \"Рив Гош\". По данным ЕГРЮЛ, сделка состоялась 15 декабря. \"РВБ\" получило 100% ООО \"Аромалюкс\" и ООО \"УК ПС Групп\", владельцами которых ранее была кипрская Rive Gauche Group Ltd.",
+     "url": "https://www.interfax.ru/business/1063390",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Стоимость сделки могла составить 5–6 млрд руб.",
+     "url": "https://www.kommersant.ru/doc/8292342",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Стоимость сделки могла составить 5–6 млрд руб.",
+     "url": "https://www.kommersant.ru/doc/8292342",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% долей ООО «Аромалюкс» и ООО «УК ПС Групп»",
+     "quote": "Wildberries-Russ (ООО \"РВБ\") стала владельцем юрлиц парфюмерной сети \"Рив Гош\". По данным ЕГРЮЛ, сделка состоялась 15 декабря. \"РВБ\" получило 100% ООО \"Аромалюкс\" и ООО \"УК ПС Групп\", владельцами которых ранее была кипрская Rive Gauche Group Ltd.",
+     "url": "https://www.interfax.ru/business/1063390",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "sum_basis": "estimate",
+   "retracted": {
+    "seller": [
+     "Акционеры Рив Гош"
+    ]
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "61208ce50209.f1040f",
+   "reread_note": "статьи: 6"
   },
   {
    "id": "g072d8c14",
@@ -43420,36 +43807,29 @@
   },
   {
    "id": "ga0a49202",
-   "date": "2025-07-01",
-   "title": "GrimTeam приобрел сеть квестов «Клаустрофобия»",
-   "buyer": "g6eb3c726",
+   "date": "2025-08-01",
+   "title": "Вадим Змовик и основатели GrimTeam купили сеть квестов «Клаустрофобия»",
    "target": "g8fd0df01",
    "ind": "Развлечения",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "400 млн ₽",
+   "sum": "400 млн ₽ (по оценке)",
    "eco": {
-    "sum": "400 млн ₽",
-    "share": "Покупатели — новые ООО «Клаустрофобия онлайн» и «Клаустрофобия офлайн»: в каждом 51% у Вадима Змовика, 33% у Павла Вараксина (GrimTeam), 16% у Евгения Авина.",
-    "val": "По экспертной оценке, сеть стоит 400–500 млн ₽.",
+    "sum": "400 млн ₽ (по оценке)",
+    "share": "Активы сети «Клаустрофобия»: товарные знаки, сайт, соцсети, программы и права аренды площадок вместе с оборудованием",
+    "val": "В августе 2024 года гендиректор «INFOLine-Аналитики» Михаил Бурмистров оценил бизнес «Клаустрофобии» не меньше чем в 400 млн ₽, по неофициальным данным — в 400–500 млн ₽. По словам Павла Вараксина, сделка прошла в пределах этой суммы.",
     "target_fin": "Выручка за 2024 год нулевая у обоих юрлиц, из которых до сделки состояла сеть, — ООО «Клаустрофобия — В» и ООО «Серьезные игры». Чистый убыток «Серьезных игр» — 121,7 млн ₽.",
     "fin": "—",
-    "context": "Сделка обсуждалась около полугода. Еще в августе 2024 года стало известно, что «Клаустрофобия» ищет покупателя бизнеса. По неофициальным данным, в 2023 году шли переговоры о продаже бизнеса «МТС Энтертеймент» (сейчас компания называется МТС Live), но стороны не сошлись по цене и сути сделки. «Клаустрофобия» основана в 2013 году Богданом Кравцовым, Тимуром Кадыровым и Сергеем Кузнецовым. В 2019 году ее приобрел Ручьев за 80 млн ₽.",
+    "context": "Сеть создали в 2013 году Богдан Кравцов, Тимур Кадыров и Сергей Кузнецов. Александр Ручьев, президент ГК «Основа» и бывший владелец застройщика «Мортон», купил ее в 2019 году, когда бизнес продавали с оценкой 80 млн ₽. До сделки сеть принадлежала двум юрлицам — ООО «Клаустрофобия — В» и ООО «Серьезные игры»; в 2024 году у нее было 37 точек и 169 активных квестов.\n\nПокупателя сеть искала с августа 2024 года. По неофициальным данным, в 2023 году ее пытались продать «МТС Энтертеймент» (теперь МТС Live), но стороны не договорились о цене и условиях.",
     "finadv": "Публично не сообщалось",
     "rationale": "Александр Ручьев, президент ГК «Основа» и прежний бенефициар «Клаустрофобии», считал сеть непрофильной, говорит Владимир Жиганов. Причинами продажи, по его словам, стали высокая ключевая ставка и экономическая ситуация."
    },
    "law": {
     "struct": "В конце июня 2025 года появились ООО «Клаустрофобия Офлайн» — для квестов и перформансов — и ООО «Клаустрофобия Онлайн», которое возьмет на себя агрегатор, франшизу и партнерские программы. Состав участников у них одинаковый: 51% — у инвестора в квесты Вадима Змовика, 33% — у инвестора GrimTeam Павла Вараксина, 16% — у сооснователя GrimTeam Евгения Авина (по документам Антонов), он же гендиректор.",
     "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Стороны сделки",
-      "Не раскрывались",
-      "Юридические консультанты в публичных источниках не раскрывались"
-     ]
-    ],
-    "terms": "По словам Павла Вараксина, в новой команде останутся все сотрудники, стоявшие у истоков сети. Владимир Жиганов и его менеджмент покинут проекты."
+    "adv": [],
+    "terms": "По словам Павла Вараксина, в сети останутся ключевые сотрудники, которые работали в ней с самого начала, а бывший управляющий Владимир Жиганов и его менеджмент уйдут."
    },
    "src": [
     [
@@ -43459,6 +43839,10 @@
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7971462"
+    ],
+    [
+     "РБК",
+     "https://www.rbc.ru/technology_and_media/27/08/2024/66cc760e9a794719ed48a5bd"
     ],
     [
      "Inc.",
@@ -43473,15 +43857,11 @@
      "https://www.sostav.ru/publication/cet-kvestov-klaustrofobiya-smenila-vladeltsev-77407.html"
     ],
     [
-     "РБК",
-     "https://www.rbc.ru/technology_and_media/27/08/2024/66cc760e9a794719ed48a5bd"
-    ],
-    [
      "Sostav.ru",
      "https://www.sostav.ru/publication/set-kvestov-klaustrofobiya-proda-t-biznes-69680.html"
     ]
    ],
-   "extra": "Сделка включала приобретение до 100% бизнеса сети «Клаустрофобия», в том числе товарных знаков, прав на программное обеспечение и социальные сети, а также переуступку прав аренды на 37 локаций и их оборудование. Сеть насчитывает 169 активных квестов, ее оборот — около 1–1,1 млрд ₽. Новые владельцы планируют запускать совместные проекты с российскими стриминговыми сервисами, развлекательными компаниями и блогерами, а также возрождать популярные квесты сети. Сеть квестов «Клаустрофобия» перешла от прежнего владельца — президента ГК «Основа» Александра Ручьева, владевшего сетью с 2019 года — команде конкурирующей сети GrimTeam: 1 августа 2025 года учреждены два юрлица, «Клаустрофобия онлайн» и «Клаустрофобия офлайн», где 51% принадлежит инвестору Вадиму Змовику, 33% — сооснователю GrimTeam Павлу Вараксину и 16% — Евгению Авину, назначенному генеральным директором. Ранее рассматривалась продажа МТС Live и Яндексу, но переговоры с МТС в итоге не привели к сделке — стороны не сошлись в цене и условиях.",
+   "extra": "Сделку оформили покупкой активов, а не долей: новым компаниям перешли бренды, домен, соцсети, программы и аренда площадок с оборудованием. По словам Павла Вараксина, новые владельцы планируют совместные проекты со стриминговыми сервисами, развлекательными компаниями и блогерами и хотят вернуть культовые квесты сети.",
    "auto": true,
    "promoted_from_bulk": true,
    "added": "2026-07-22",
@@ -43507,13 +43887,13 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "37fca88a8d51"
+     "card_hash": "e782614af63f"
     },
     "price": {
      "value_rub": null,
      "meaning": "estimate",
      "scope": "unknown",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "f8a4ffbe429b",
      "meaning_variants": [
       "estimate"
@@ -43565,12 +43945,13 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "stale_from": "verified"
     },
     "date": {
      "value": "2025-08-01",
      "meaning": "closing",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "1b0a59b933c9",
      "meaning_variants": [
       "closing"
@@ -43607,9 +43988,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "081434ec0fe4",
+     "card_hash": "9199729fcb71",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Крупнейшая российская сеть квестов «Клаустрофобия» перешла под контроль команды основного конкурента — сети GrimTeam, которая приобрела активы у прежнего владельца, президента ГК «Основа» Александра Ручьева.",
      "source": "https://incrussia.ru/news/krupnejshaya-set-kvestov-klaustrofobiya-pereshla-k-konkurentam/",
      "verified_by": "model×2",
@@ -43706,19 +44087,90 @@
      "kind": "negotiations",
      "date": "2024-08-27",
      "title": "Сеть выставлена на продажу",
-     "note": "Ранее рассматривалась продажа МТС Live и Яндексу, но переговоры с МТС в итоге не привели к сделке — стороны не сошлись в цене и условиях.",
+     "note": "Сеть начала искать покупателя. По неофициальным данным, в 2023 году шли переговоры о продаже «МТС Энтертеймент» (теперь МТС Live), но стороны не договорились о цене.",
      "source": [
       "РБК",
       "https://www.rbc.ru/technology_and_media/27/08/2024/66cc760e9a794719ed48a5bd"
      ]
     }
    ],
-   "gate_baseline_hash": "52de6eb968a9.23d380"
+   "gate_baseline_hash": "52de6eb968a9.23d380",
+   "fact_log": [
+    {
+     "field": "buyer",
+     "new": null,
+     "quote": "В конце июня 2025 года были учреждены два новых юрлица: ООО «Клаустрофобия Онлайн» и ООО «Клаустрофобия Офлайн». В обоих юрлицах 51% принадлежит инвестору в бизнес квестов Вадиму Змовику, 33% — инвестору GrimTeam Павлу Вараксину и 16% — сооснователю GrimTeam Евгению Авину … В рамках сделки новым юрлицам перешли товарные знаки, утверждает Вараксин.",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "buyer_name",
+     "new": "ООО «Клаустрофобия Офлайн» и ООО «Клаустрофобия Онлайн» (Вадим Змовик, Павел Вараксин, Евгений Авин)",
+     "quote": "В конце июня 2025 года были учреждены два новых юрлица: ООО «Клаустрофобия Онлайн» и ООО «Клаустрофобия Офлайн». В обоих юрлицах 51% принадлежит инвестору в бизнес квестов Вадиму Змовику, 33% — инвестору GrimTeam Павлу Вараксину и 16% — сооснователю GrimTeam Евгению Авину … В рамках сделки новым юрлицам перешли товарные знаки, утверждает Вараксин.",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "title",
+     "new": "Вадим Змовик и основатели GrimTeam купили сеть квестов «Клаустрофобия»",
+     "quote": "В конце июня 2025 года были учреждены два новых юрлица: ООО «Клаустрофобия Онлайн» и ООО «Клаустрофобия Офлайн». В обоих юрлицах 51% принадлежит инвестору в бизнес квестов Вадиму Змовику, 33% — инвестору GrimTeam Павлу Вараксину и 16% — сооснователю GrimTeam Евгению Авину … Владельцами сети квестов «Клаустрофобия» стали основатели ее конкурента — GrimTeam.",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "date",
+     "new": "2025-08-01",
+     "quote": "Владимир Жиганов в разговоре с РБК уточнил, что передача активов состоялась 1 августа.",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "400 млн ₽ (по оценке)",
+     "quote": "Аналитики тогда оценили компанию в 400 млн руб. Сделка, по словам Вараксина, прорабатывалась около полугода и прошла «в пределах озвученной ранее суммы».",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "400 млн ₽ (по оценке)",
+     "quote": "Аналитики тогда оценили компанию в 400 млн руб. Сделка, по словам Вараксина, прорабатывалась около полугода и прошла «в пределах озвученной ранее суммы».",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "Активы сети «Клаустрофобия»: товарные знаки, сайт, соцсети, программы и права аренды площадок вместе с оборудованием",
+     "quote": "В рамках сделки новым юрлицам перешли товарные знаки, утверждает Вараксин. … Также произошла переуступка прав аренды на локации и их оборудование, приобретение прав на программное обеспечение и социальные сети «Клаустрофобии». Домен «клаустрофобия.рф» — основной сайт сети — также переоформлен на одно из новых юрлиц",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [],
+     "quote": "В конце июня 2025 года были учреждены два новых юрлица: ООО «Клаустрофобия Онлайн» и ООО «Клаустрофобия Офлайн». В обоих юрлицах 51% принадлежит инвестору в бизнес квестов Вадиму Змовику, 33% — инвестору GrimTeam Павлу Вараксину и 16% — сооснователю GrimTeam Евгению Авину",
+     "url": "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "buyer_name": "ООО «Клаустрофобия Офлайн» и ООО «Клаустрофобия Онлайн» (Вадим Змовик, Павел Вараксин, Евгений Авин)",
+   "date_basis": "closing",
+   "reread": "2026-11-12",
+   "reread_hash": "00fa78ddd3ec.b41abf",
+   "reread_note": "статьи: 5"
   },
   {
    "id": "gd88cbe9a",
    "date": "2025-06-03",
-   "title": "Highland Gold купила ООО «Гейзер Голд» с лицензиями на месторождения золота и серебра на Камчатке",
+   "title": "Highland Gold купил «Гейзер Голд» с лицензиями на Камчатке",
    "buyer": "gb6301f1c",
    "target": "g849d19d0",
    "ind": "ГМК и добыча",
@@ -43729,29 +44181,27 @@
    "eco": {
     "sum": "Не раскрыта",
     "share": "—",
-    "val": "Объем финансирования проектов «Гейзер Голд» оценивается в 96 млн и 95 млн рублей.",
+    "val": "Цену стороны не раскрыли. По словам старшего менеджера «S+ Консалтинг» Дмитрия Гомера, в цене, вероятно, учтен дисконт за сложную логистику, высокую сейсмичность и отсутствие инфраструктуры.",
     "target_fin": "—",
     "fin": "—",
-    "context": "Прежним собственником «Гейзер Голд» было ООО «Гиперспэйс», которое на 80,9% принадлежит АО «Старт» (19% — Андрею Комарову). «Гиперспэйсу» также принадлежат ООО «Варна Минералз» и ООО «Гора: Голден Ратио», в которое входят ООО «Желтугинская ГРК», ООО «Камчатская горная компания» и «Тихоокеанская горная компания». «Старту» принадлежит 100% долей ООО «Федорово Минералз».",
+    "context": "«Гейзер Голд» зарегистрирована в Москве в феврале 2021 года. С лета 2022 года компания владеет двумя лицензиями на геологоразведку — участки Нимаевский и Кларин в Усть-Камчатском районе; они относятся к золотоносному Охотско-Чукотскому поясу. По данным Роснедр, работы по поиску и оценке рудного золота и серебра компания собиралась вести с третьего квартала 2023 года до второго квартала 2029 года, на два проекта заложено 96 млн и 95 млн ₽.\n\nООО «Гиперспэйс» основал бывший совладелец Челябинского трубопрокатного завода Андрей Комаров. По одним данным, 80,9% «Гиперспэйса» принадлежит АО «Старт», 19% — Комарову; по другим, владелец 99,9% компании в ЕГРЮЛ скрыт. Начальник аналитического отдела «Риком-Траста» Олег Абелев допускает, что прежний владелец вышел из актива, чтобы перенаправить инвестиции, из-за нехватки экспертизы или опасений, что разведка обойдется дороже плана.",
     "finadv": "Публично не сообщалось",
-    "rationale": "Highland Gold хочет усилить позиции в стратегически важном регионе — на участке Охотско-Чукотского пояса, где есть золото."
+    "rationale": "По мнению независимого эксперта Леонида Хазанова, «Хайлэнд Голд» рассчитывает найти на участках значительные запасы, а для разведки у компании есть опытные геологи и оборудование. В самой компании от комментариев отказались."
    },
    "law": {
-    "struct": "«Гейзер Голд» с лета 2022 держит лицензии на геологоизучение участков Нимаевский и Кларин в Усть-Камчатском районе. По данным Роснедр, с III кв. 2023 компания собиралась искать и оценивать на них рудное золото и серебро. Геологоизучение должно завершиться во II кв. 2029.",
+    "struct": "3 июня 2025 года 100% долей ООО «Гейзер Голд» перешли от ООО «Гиперспэйс» к МКАО «Ареал» — структуре «Хайлэнд Голд».",
     "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Стороны сделки",
-      "Не раскрывались",
-      "Юридические консультанты в публичных источниках не раскрывались"
-     ]
-    ],
+    "adv": [],
     "terms": "—"
    },
    "src": [
     [
      "Коммерсантъ",
      "https://www.kommersant.ru/doc/7796300"
+    ],
+    [
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/g849d19d0/fns"
     ],
     [
      "Золото и технологии",
@@ -43762,7 +44212,7 @@
      "https://www.eastrussia.ru/news/kompaniya-khaylend-gold-priobrela-aktivy-na-kamchatke/"
     ]
    ],
-   "extra": "Highland Gold приобрела 100% долей ООО «Гейзер Голд» с лицензиями на геологическое изучение месторождений золота и серебра на участках недр «Кларин» и «Нимаевский» в Усть-Камчатском районе. Продавец — Андрей Комаров (экс-владелец ЧТПЗ). Участки находятся на ранней стадии поисково-оценочных работ и принадлежат золотоносному Охотско-Чукотскому поясу. Прогнозные затраты на геологическое изучение — 100–250 млн ₽.",
+   "extra": "Highland Gold купила у ООО «Гиперспэйс», основанного бывшим совладельцем ЧТПЗ Андреем Комаровым, компанию с двумя лицензиями на поиск золота и серебра на Камчатке. Участки на ранней стадии изучения: по оценке независимого эксперта Максима Худалова, геологическое изучение стоит 100–250 млн ₽, а на Камчатке может обойтись вдвое дороже из-за нехватки техники и персонала.",
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "ООО «Гиперспэйс»",
@@ -43774,13 +44224,15 @@
    "followup_researched": "2026-08-21",
    "proofread_absorbed": {
     "law.struct": [
-     "6d7d1369ad77"
+     "6d7d1369ad77",
+     "4312fc776793"
     ],
     "eco.val": [
      "3c3245738aa6"
     ],
     "eco.rationale": [
-     "22c2cdf34485"
+     "22c2cdf34485",
+     "050880ed6aa7"
     ]
    },
    "proofread": "2026-09-03",
@@ -43788,7 +44240,7 @@
     "stake": {
      "value": null,
      "basis": "unknown",
-     "card_hash": "fe352cf85bb6"
+     "card_hash": "e6bc0077fbb2"
     },
     "price": {
      "value_rub": null,
@@ -43799,9 +44251,9 @@
     },
     "date": {
      "value": "2025-06-03",
-     "meaning": "unknown",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "3c99577e77d4"
+     "card_hash": "c49da7848f20"
     },
     "nature": {
      "control_change": true,
@@ -43811,7 +44263,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "a474aeb0cb77"
+     "card_hash": "abf051544ea9"
     },
     "target": {
      "company_id": "g849d19d0",
@@ -43846,7 +44298,29 @@
    ],
    "seller_id": "gb0536c82",
    "separate_transaction_reviewed": true,
-   "gate_baseline_hash": "4a291628bd32.df3aa9"
+   "gate_baseline_hash": "4a291628bd32.df3aa9",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Highland Gold купил «Гейзер Голд» с лицензиями на Камчатке",
+     "quote": "Структура «Хайлэнд Голд» Владислава Свиблова 3 июня стала владельцем компании «Гейзер Голд» с лицензиями на геологическое изучение месторождений золота и серебра на Камчатке, следует из данных ЕГРЮЛ и Роснедр. Прежним собственником «Гейзер Голд» было ООО «Гиперспэйс», основанное бывшим совладельцем Челябинского трубопрокатного завода (ЧТПЗ) Андреем Комаровым",
+     "url": "https://www.kommersant.ru/doc/7796300",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [],
+     "quote": "Структура «Хайлэнд Голд» Владислава Свиблова 3 июня стала владельцем компании «Гейзер Голд» с лицензиями на геологическое изучение месторождений золота и серебра на Камчатке, следует из данных ЕГРЮЛ и Роснедр. Прежним собственником «Гейзер Голд» было ООО «Гиперспэйс», основанное бывшим совладельцем Челябинского трубопрокатного завода (ЧТПЗ) Андреем Комаровым",
+     "url": "https://www.kommersant.ru/doc/7796300",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "reread": "2026-11-12",
+   "reread_hash": "c335d8242a97.df3aa9",
+   "reread_note": "статьи: 4"
   },
   {
    "id": "g15f35a5d",
@@ -43858,19 +44332,20 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не разглашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
+   "sum": "$400 млн (по оценке)",
    "eco": {
-    "sum": "Не разглашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
-    "share": "—",
-    "val": "—",
-    "target_fin": "Производство золота у ГК «Западная» в 2023 году — 108 871 унция. Из 13 проектов группы 10 пока на разведке; золото добывают на двух подземных рудниках, Бадране и Кедровке, и открытым способом на ГОКе Александровское. Проекты расположены в Якутии, Бурятии и Забайкалье, а сама группа существует 40 лет.",
-    "fin": "В 2023 году компания добыла 3,4 тонны золота, чистая прибыль составила около 1,86 млрд ₽, выручка — 5,83 млрд ₽. АО ГРК «Западная» в 2025 году увеличило чистую прибыль по РСБУ в 7,79 раза, до 7,869 млрд ₽, — в основном за счет 10,935 млрд ₽ дивидендов от дочернего ООО «АС Западная» (рудник «Кедровский» в Бурятии); выручка от продаж выросла на 28,8%, до 7,146 млрд ₽. Сам ГОК «Кедровский» (бывшая А/С «Западная») в 2025 году увеличил выручку на 18,2%, до 13,477 млрд ₽, прибыль от продаж — на 84,8%, до 7,032 млрд ₽, чистую прибыль — на 34,9%, до 3,709 млрд ₽.",
-    "context": "В 2024 году предприятия холдинга произвели в совокупности менее 3 т золота; некоторое снижение по сравнению с предыдущим годом руководство компании связывает со сложностями в приобретении и доставке запчастей и с дефицитом кадров. На 2025 год предприятия ГК «Западная» планировали произвести 3,207 т золота. Группа «ОКТО Золото» сменила название ООО «А/С Западная» на ГОК «Кедровский» и намерена создать предприятие с добычей более шести тонн золота в год.",
-    "finadv": "Публично не сообщалось"
+    "sum": "$400 млн (по оценке)",
+    "share": "100% акций МКАО «Западная Голд Майнинг Лимитед»",
+    "val": "Сумму стороны не раскрыли. В обзоре сделок года по данным юридической фирмы BIRCH, консультанта продавцов, возможная сумма сделки названа $400 млн со ссылкой на открытые источники.",
+    "target_fin": "Группа «Западная» добыла в 2023 году 3,4 т золота (108,87 тыс. унций) при выручке 5,83 млрд ₽ и чистой прибыли около 1,86 млрд ₽. У нее более 90 т утвержденных запасов и 390 т ресурсов.",
+    "fin": "—",
+    "context": "У «Западной» 40-летняя история и 13 проектов в Якутии, Бурятии и Забайкалье; золото добывают подземные рудники Бадран и Кедровка и карьер горно-обогатительного комплекса Александровское. До сделки, по данным группы, 65,41% акций держал менеджмент, 25,06% составлял казначейский пакет, 9,53% были у миноритариев.\n\nОКТО — частная группа, которая добывает уголь и золото: с 2021 года в нее входит «Разрез Степной» в Хакасии, в 2024 году она вместе с партнерами купила у «Полюса» ЗДК «Лензолото». Бенефициары группы не раскрываются. В июле 2026 года «ОКТО Золото» переименовала ООО «А/С Западная» в ГОК «Кедровский».",
+    "finadv": "Публично не сообщалось",
+    "rationale": "По неофициальным данным, с новым владельцем «Западная» будет активнее покупать участки и производственные активы, чтобы расширить сырьевую базу и нарастить добычу. Шеф-редактор журнала «Золото и технологии» Михаил Лесков считает, что «ОКТО» диверсифицирует активы и собирает портфель золотодобывающих проектов."
    },
    "law": {
-    "struct": "Приобретение до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед». Все стратегические решения будут приниматься в Москве, в офисе «ОКТО-Золото»: управление горнорудными компаниями предполагает взаимодействие с федеральными органами власти, в первую очередь надзорными.",
-    "appr": "Сделка потребовала согласия ФАС России; его получение сопровождала команда LEVEL Legal Services, которая также провела всестороннюю юридическую проверку приобретаемой группы компаний и консультировала покупателя по другим вопросам сделки.",
+    "struct": "АО «ОКТО Золото» купило у менеджмента и миноритариев 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед», головной компании группы. Сделку закрыли 25 апреля 2025 года.",
+    "appr": "Предварительное согласие ФАС на покупку до 100% голосующих акций МКАО «Западная Голд Майнинг Лимитед» АО «ОКТО Золото» получило в начале апреля 2025 года.",
     "adv": [
      [
       "Юридический консультант покупателя (частный инвестор / Группа ОКТО)",
@@ -43891,20 +44366,24 @@
      "https://www.rbc.ru/business/25/04/2025/680b35279a79473cf11967ae"
     ],
     [
-     "LEVEL Legal Services",
-     "https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya"
+     "Золото и технологии",
+     "https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/"
     ],
     [
-     "BIRCH Legal",
-     "https://www.birchlegal.ru/services/sectors/energy_and_natural_resources/"
+     "LEVEL Legal Services",
+     "https://www.level-legal.com/news/yuridicheskaya-firma-level-legal-services-osushestvila-kompleksnoe-yuridicheskoe-konsultirovanie-chastnogo-investora-v-svyazi-s-priobreteniem-gk-zapadnaya"
     ],
     [
      "Abireg",
      "https://abireg.ru/newsitem/106857/"
     ],
     [
+     "Коммерсантъ — «Сделки года»",
+     "https://www.kommersant.ru/doc/8077927"
+    ],
+    [
      "Золото и технологии",
-     "https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/"
+     "https://zolteh.ru/news/okto_zoloto_pereimenovalo_a_s_zapadnaya_v_gok_kedrovskiy/"
     ],
     [
      "НедраДВ",
@@ -43913,17 +44392,9 @@
     [
      "НедраДВ",
      "https://nedradv.ru/nedradv/ru/page_news?obj=bd23184a4151a5d68908f0107dbffe35"
-    ],
-    [
-     "Золото и технологии",
-     "https://zolteh.ru/news/okto_zoloto_pereimenovalo_a_s_zapadnaya_v_gok_kedrovskiy/"
-    ],
-    [
-     "Коммерсантъ — «Сделки года»",
-     "https://www.kommersant.ru/doc/8077927"
     ]
    ],
-   "extra": "Сделка — покупка 100% акционерного капитала МКАО «Западная Голд Майнинг Лимитед» группой ОКТО. Собственники до сделки: менеджмент 65,41%, казначейский пакет 25,06%, миноритарии 9,53%. ОКТО — частная многопрофильная группа по добыче полезных ископаемых (уголь, золото); в 2024 году она приобрела у Полюса ЗДК «Лензолото» и владеет угольным «Разрезом Степной» в Хакасии.",
+   "extra": "Группа ОКТО, которая в 2024 году купила у «Полюса» «Лензолото», получила еще одного золотодобытчика: «Западная» производит около 3 т золота в год и входит в топ-15 крупнейших в России.",
    "auto": true,
    "promoted_from_bulk": true,
    "added": "2026-07-22",
@@ -43936,31 +44407,36 @@
      "d5915c06c7a6"
     ],
     "eco.target_fin": [
-     "1b64f485fc41"
+     "1b64f485fc41",
+     "dc053968eabf"
     ],
     "law.struct": [
-     "51691f54fba8"
+     "51691f54fba8",
+     "e7c3394b5ece"
+    ],
+    "src": [
+     "0ecdebb966e9"
     ]
    },
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "d9624593ceec"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "31de2c9704f0"
     },
     "price": {
      "value_rub": null,
-     "meaning": "foreign_currency",
+     "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "9b0cf61ee9fb"
+     "card_hash": "4f2eb714bcbb"
     },
     "date": {
      "value": "2025-04-25",
-     "meaning": "unknown",
+     "meaning": "closing",
      "basis": "rule",
-     "card_hash": "0fda8f56213f"
+     "card_hash": "cf00522a0518"
     },
     "nature": {
      "control_change": true,
@@ -44001,41 +44477,75 @@
     [
      "РУЛЬФЫ, ИЛЬФЫ И ИНХАУСЫ (@LawFirms)",
      "https://t.me/LawFirms/8961"
+    ],
+    [
+     "Telegram — LawFirms (BIRCH)",
+     "https://t.me/LawFirms/8961"
     ]
    ],
-   "gate_baseline_hash": "bb39ec3c7aa8.c5bf20"
+   "gate_baseline_hash": "bb39ec3c7aa8.c5bf20",
+   "fact_log": [
+    {
+     "field": "sum",
+     "new": "$400 млн (по оценке)",
+     "quote": "лашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
+     "url": "https://www.kommersant.ru/doc/8077927",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "$400 млн (по оценке)",
+     "quote": "лашается (возможная сумма сделки — $400 млн, согласно открытым источникам)",
+     "url": "https://www.kommersant.ru/doc/8077927",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% акций МКАО «Западная Голд Майнинг Лимитед»",
+     "quote": "100% акций МКАО «Западная Голд Майнинг Лимитед» приобрела группа «ОКТО»",
+     "url": "https://zolteh.ru/news/gruppa_okto_priobrela_100_aktsiy_zolotodobyvayushchey_gk_zapadnaya/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "closing",
+   "sum_basis": "estimate",
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Продавцы — менеджмент группы (65,41% акций МКАО «Западная Голд Майнинг Лимитед») и миноритарии (9,53%), еще 25,06% — казначейский пакет (РБК; LEVEL Legal Services: «у менеджмента и миноритариев»; BIRCH — консультант «акционеров МКАО»). Имена продающих акционеров не названы ни в одном источнике: РБК, «Золото и технологии», Абирег, LEVEL Legal Services, BIRCH (Telegram LawFirms), «Коммерсантъ» («Сделки года»); реестр акционеров МКАО открыто не публикуется."
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "5f3c5db066f7.c5bf20",
+   "reread_note": "статьи: 8"
   },
   {
    "id": "gbc0b68bd",
    "date": "2025-04-10",
-   "title": "«Фаберлик» продала фабрику по пошиву одежды «Воентекстильпрому»",
+   "title": "«Воентекстильпром» купил «Фэшн фэктори» у «Фаберлика»",
    "buyer": "g2bda5372",
    "target": null,
    "ind": "Потребительские товары",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "150 млн ₽ (по оценке)",
+   "sum": "До 150 млн ₽ (по оценке)",
    "eco": {
-    "sum": "150 млн ₽ (по оценке)",
-    "share": "—",
+    "sum": "До 150 млн ₽ (по оценке)",
+    "share": "100% долей ООО «Фэшн фэктори»",
     "val": "Цену сделки в компании не раскрыли. По оценке гендиректора «Infoline-аналитики» Михаила Бурмистрова, актив стоит не более 150 млн ₽.",
     "target_fin": "Выручка ООО «Фэшн фэктори» по РСБУ в 2024 году выросла на 79,4%, до 345 млн ₽. Чистый убыток за год увеличился с 1 млн ₽ до 13,7 млн ₽.",
     "fin": "—",
-    "context": "«Воентекстильпром» шьет форму для Минобороны РФ и МЧС, у него шесть фабрик на Северном Кавказе. Аслану Аталикову в компании принадлежит 64%, АО «Военторг» — 26%, Залиму Кардангушеву — 10%. Сам «Фаберлик» приобрел и обновил завод в Чехове (Московская обл.), где планируют выпускать бытовую химию.",
+    "context": "«Воентекстильпром» шьет форму для Минобороны и МЧС, у него шесть фабрик в Карачаево-Черкесии и Кабардино-Балкарии. 64% компании принадлежат Аслану Аталикову, 26% — АО «Военторг», 10% — Залиму Кардангушеву.\n\n«Фаберлик» продает одежду с 2013 года, фабрику в Ивановской области запустил в 2017 году; она может выпускать до 750 тыс. изделий в год — футболки, водолазки, мужское белье и другой трикотаж. «Фаберлик» купил и модернизировал завод в Чехове (Московская область), где планирует выпускать бытовую химию.",
     "finadv": "Публично не сообщалось",
     "rationale": "Представитель «Фаберлика» объясняет продажу тем, что компания хочет сосредоточиться на продукции с наибольшим потенциалом продаж."
    },
    "law": {
     "struct": "—",
     "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Стороны сделки",
-      "Не раскрывались",
-      "Юридические консультанты в публичных источниках не раскрывались"
-     ]
-    ],
+    "adv": [],
     "terms": "—"
    },
    "src": [
@@ -44056,7 +44566,7 @@
      "https://www.sostav.ru/publication/faberlik-prodal-fabriku-po-poshivu-odezhdy-strukture-voentorga-74664.html"
     ]
    ],
-   "extra": "Фабрику продал «Фаберлик», производитель парфюмерно-косметической продукции. Купило ее ООО «Воентекстильпром», которое шьет военное обмундирование для Минобороны и МЧС. Предмет сделки — ООО «Фэшн фэктри» с фабрикой в Ивановской области мощностью 750 тыс. изделий в год.",
+   "extra": "«Фаберлик» продал швейную фабрику в Ивановской области производителю военной формы «Воентекстильпром», связанному с «Военторгом».",
    "auto": true,
    "promoted_from_bulk": true,
    "seller": "«Фаберлик»",
@@ -44079,7 +44589,8 @@
      "bb167efbae8b"
     ],
     "eco.context": [
-     "9c3a78779e7a"
+     "9c3a78779e7a",
+     "0f76b4798adc"
     ],
     "eco.rationale": [
      "5f84fe74f1d9"
@@ -44088,22 +44599,22 @@
    "proofread": "2026-09-03",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "325be75c4eeb"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "a201d4b435b3"
     },
     "price": {
      "value_rub": null,
      "meaning": "estimate",
      "scope": "unknown",
      "basis": "rule",
-     "card_hash": "f3006309ad05"
+     "card_hash": "125a29ee5ff0"
     },
     "date": {
      "value": "2025-04-10",
-     "meaning": "unknown",
+     "meaning": "registry",
      "basis": "rule",
-     "card_hash": "1d1ebf98d7b0"
+     "card_hash": "d04acc7e6a5d"
     },
     "nature": {
      "control_change": true,
@@ -44113,7 +44624,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6bba51b07854"
+     "card_hash": "0be7eea89a09"
     },
     "target": {
      "company_id": null,
@@ -44140,39 +44651,94 @@
      "multiple_text": "no_target"
     }
    },
-   "gate_baseline_hash": "acf1f20abb3c.c17727"
+   "gate_baseline_hash": "acf1f20abb3c.c17727",
+   "asset": "ООО «Фэшн фэктори»",
+   "fact_log": [
+    {
+     "field": "asset",
+     "new": "ООО «Фэшн фэктори»",
+     "quote": "Производитель косметики и парфюмерии «Фаберлик» продал 100% долей в ООО «Фэшн фэктори» (управляет фабрикой по пошиву одежды в Ивановской области) структуре «Военторга» – ООО «Воентекстильпром». Изменения в ЕГРЮЛе зарегистрированы 10 апреля",
+     "url": "https://www.vedomosti.ru/business/articles/2025/04/21/1105538-faberlik-prodala-fabriku-po-poshivu-odezhdi",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "title",
+     "new": "«Воентекстильпром» купил «Фэшн фэктори» у «Фаберлика»",
+     "quote": "Производитель косметики и парфюмерии «Фаберлик» продал 100% долей в ООО «Фэшн фэктори» (управляет фабрикой по пошиву одежды в Ивановской области) структуре «Военторга» – ООО «Воентекстильпром». Изменения в ЕГРЮЛе зарегистрированы 10 апреля",
+     "url": "https://www.vedomosti.ru/business/articles/2025/04/21/1105538-faberlik-prodala-fabriku-po-poshivu-odezhdi",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "До 150 млн ₽ (по оценке)",
+     "quote": "Гендиректор «INFOLine-аналитики» Михаил Бурмистров оценил стоимость актива в сумму не более 150 млн руб.",
+     "url": "https://www.retail.ru/news/kompaniya-faberlik-prodala-fabriku-po-poshivu-odezhdy-strukture-voentorga-21-aprelya-2025-263762/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "До 150 млн ₽ (по оценке)",
+     "quote": "Гендиректор «INFOLine-аналитики» Михаил Бурмистров оценил стоимость актива в сумму не более 150 млн руб.",
+     "url": "https://www.retail.ru/news/kompaniya-faberlik-prodala-fabriku-po-poshivu-odezhdy-strukture-voentorga-21-aprelya-2025-263762/",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "100% долей ООО «Фэшн фэктори»",
+     "quote": "Производитель косметики и парфюмерии «Фаберлик» продал 100% долей в ООО «Фэшн фэктори» (управляет фабрикой по пошиву одежды в Ивановской области) структуре «Военторга» – ООО «Воентекстильпром». Изменения в ЕГРЮЛе зарегистрированы 10 апреля",
+     "url": "https://www.vedomosti.ru/business/articles/2025/04/21/1105538-faberlik-prodala-fabriku-po-poshivu-odezhdi",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [],
+     "quote": "Производитель косметики и парфюмерии «Фаберлик» продал 100% долей в ООО «Фэшн фэктори» (управляет фабрикой по пошиву одежды в Ивановской области) структуре «Военторга» – ООО «Воентекстильпром». Изменения в ЕГРЮЛе зарегистрированы 10 апреля",
+     "url": "https://www.vedomosti.ru/business/articles/2025/04/21/1105538-faberlik-prodala-fabriku-po-poshivu-odezhdi",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "date_basis": "registry",
+   "sum_basis": "estimate",
+   "accepted_notes": {
+    "no_profile": {
+     "asset": "ИНН ООО «Фэшн фэктори» не найден: веб-поиск по имени и «Фаберлику», datanewton.ru, companies.rbc.ru — совпадений с ивановской фабрикой нет; в статьях (Ведомости, Retail.ru, New Retail, Sostav) ИНН не назван. Предмет записан текстом."
+    }
+   },
+   "reread": "2026-11-12",
+   "reread_hash": "37f0a4698bef.c17727",
+   "reread_note": "статьи: 4"
   },
   {
    "id": "g181d7687",
    "date": "2025-01-31",
-   "title": "«КНС Групп» (Yadro) приобрела 38% доли в «КБ БОРЕЙ»",
+   "title": "Yadro купил 38% «КБ Борей»",
    "buyer": "g2586fd42",
    "target": "g8f46008e",
-   "ind": "ИТ и интернет",
+   "ind": "Машиностроение",
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "100 млн ₽",
+   "sum": "100 млн ₽ (по оценке)",
    "eco": {
-    "sum": "100 млн ₽",
-    "share": "Доля Yadro — 1,9 млн ₽ из 5 млн ₽ уставного капитала «КБ Борей»; капитал не менялся с основания.",
-    "val": "По оценке аналитика ФГ «Финам» Леонида Делицына, состоявшуюся сделку можно оценить в 100 млн ₽, а оставшиеся 62% долей «КБ Борей» могут обойтись гораздо дороже — в несколько сотен миллионов рублей, поскольку индустрия дата-центров будет расти высокими темпами.",
-    "target_fin": "Выручка ООО «КБ Борей» в 2023 году составила 43,1 млн ₽ — втрое больше, чем в 2022 году (14,1 млн ₽). Чистая прибыль при этом снизилась на 83,2%: 107 тыс. ₽ против 638 тыс. ₽ годом ранее. За 2024 год прибыль составила 323 000 ₽, выручка — 85 342 000 ₽.",
+    "sum": "100 млн ₽ (по оценке)",
+    "share": "38% долей ООО «КБ Борей»",
+    "val": "Стороны сумму не называли. Аналитик ФГ «Финам» Леонид Делицын оценивает сделку в 100 млн ₽, а оставшиеся 62% — в несколько сотен миллионов рублей, потому что рынок дата-центров будет быстро расти. Алексей Замесов из «Руцентра» считает, что 38% стоят не дороже 100 млн ₽, и не исключает продажу по номиналу при условии, что «КНС Групп» проинвестирует развитие компании.",
+    "target_fin": "Выручка ООО «КБ Борей» за 2023 год — 43,1 млн ₽, втрое больше, чем в 2022 году (14,1 млн ₽); чистая прибыль снизилась на 83,2%, до 107 тыс. ₽. За 2024 год выручка — 85,3 млн ₽, чистая прибыль — 117 тыс. ₽.",
     "fin": "—",
-    "rationale": "Yadro открывает новое направление — продукты для инженерной инфраструктуры дата-центров — и хочет усилить позиции в этом сегменте; для этого ООО «КНС Групп» (бренд Yadro) купило 38% «КБ Борей», российского разработчика и производителя кондиционирования для ЦОД. Вести направление в Yadro будет Ратмир Трошин; по ЕГРЮЛ, остальные доли у соучредителей — 47% у Трошина, 15% сохранил Анатолий Ференцев. Директор по продуктам Yadro Павел Егоров объясняет сделку тем, что серверам, в том числе для ИИ, нужно много энергии и все более совершенное охлаждение — от чипов до стоек и ЦОДов. Вместе с экспертизой «КБ Борей» опыт Yadro, по его мнению, позволит предложить клиентам отечественные решения для управления данными — комплексные и более эффективные.",
-    "context": "Основанная в 2016 году компания «КБ Борей» занимается проектированием, производством, продажей и обслуживанием климатического оборудования. В частности, компания запатентовала технологию воздухораспределения в телекоммуникационных шкафах, разработала технологию использования воздушного рекуператора для фрикулинга в мини-ЦОД уличного исполнения. В июле 2026 года Yadro представила комплексное решение гибридной системы охлаждения ЦОД, объединяющее преимущества воздушного и жидкостного типов охлаждения. Оно состоит из инженерного контура BOREY «Посейдон», включающего драйкулер с гидравликой и блок распределения охлаждающей жидкости, а также вычислительных комплексов RACKSCALE с водоподготовкой. Ключевые особенности решения — технология Direct Liquid Cooling, позволяющая точечно отводить тепло от CPU и GPU, и блок распределения охлаждения БРО-300, равномерно подающий охлаждающую жидкость между серверными стойками.",
+    "rationale": "Yadro запускает направление продуктов для инженерной инфраструктуры дата-центров. Директор по продуктам Yadro Павел Егоров объясняет покупку тем, что серверам, в том числе для задач ИИ, нужно много энергии и все более совершенное охлаждение — от чипов до стоек и ЦОДов, а вместе с опытом «КБ Борей» компания сможет предложить клиентам комплексные российские решения.",
+    "context": "«КБ Борей», зарегистрированная в 2017 году, проектирует, производит, продает и обслуживает системы охлаждения для центров обработки данных. Среди ее разработок — способ распределять воздух в телекоммуникационных шкафах и фрикулинг через воздушный рекуператор для уличных мини-ЦОДов. Остальные доли сохранили соучредители: 47% у директора по развитию Ратмира Трошина, который будет вести новое направление в Yadro, 15% у Анатолия Ференцева.\n\nВ июле 2026 года Yadro представила гибридную систему охлаждения ЦОД, в которую входит инженерный контур BOREY «Посейдон».",
     "finadv": "Публично не сообщалось"
    },
    "law": {
-    "struct": "—",
+    "struct": "Продавец, Александр Калинин, по его словам, владел долей через третьих лиц, это была семейная доля. Переход 38% к ООО «КНС Групп» записан в ЕГРЮЛ 31 января 2025 года.",
     "appr": "Публично не сообщалось",
-    "adv": [
-     [
-      "Стороны сделки",
-      "Не раскрывались",
-      "Юридические консультанты в публичных источниках не раскрывались"
-     ]
-    ],
+    "adv": [],
     "terms": "—"
    },
    "src": [
@@ -44181,16 +44747,20 @@
      "https://www.rbc.ru/technology_and_media/04/02/2025/67a1ecc09a7947034c102e35"
     ],
     [
+     "Интерфакс",
+     "https://www.interfax.ru/business/1006209"
+    ],
+    [
      "ComNews",
      "https://www.comnews.ru/content/237587/2025-02-05/2025-w06/1007/yadro-priobrela-38-doley-kb-borey"
     ],
     [
-     "CNews",
-     "https://www.cnews.ru/news/top/2025-02-04_yadro_zajmetsya_sozdaniem_produktov"
+     "ЕГРЮЛ",
+     "https://projectcompass.ru/api/companies/g8f46008e/fns"
     ],
     [
-     "Интерфакс",
-     "https://www.interfax.ru/business/1006209"
+     "CNews",
+     "https://www.cnews.ru/news/top/2025-02-04_yadro_zajmetsya_sozdaniem_produktov"
     ],
     [
      "РБК Компании",
@@ -44215,15 +44785,18 @@
      "7963d41352b5"
     ],
     "eco.share": [
-     "161fbf2c23e6"
+     "161fbf2c23e6",
+     "1880e5b2261c"
     ],
-    "eco.rationale": []
+    "eco.rationale": [
+     "b58bddf459e4"
+    ]
    },
    "proofread": "2026-09-02",
    "facts": {
     "stake": {
      "value": 38.0,
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "1cf1123168f0",
      "object": "ООО \"КБ Борей\"",
      "event": "registry",
@@ -44260,7 +44833,7 @@
      "value_rub": null,
      "meaning": "estimate",
      "scope": "package",
-     "basis": "verified",
+     "basis": "stale",
      "card_hash": "7f1b098ca35b",
      "meaning_variants": [
       "estimate"
@@ -44310,7 +44883,8 @@
        "reader": "B"
       }
      ],
-     "attribution_quote": "Сумму сделки стороны не раскрывают."
+     "attribution_quote": "Сумму сделки стороны не раскрывают.",
+     "stale_from": "verified"
     },
     "date": {
      "value": "2025-01-31",
@@ -44351,9 +44925,9 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "4df971f84046",
+     "card_hash": "6c2f362f7de3",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "stale",
      "quote": "Оставшиеся доли сохранили соучредители компании - директор по развитию бизнеса \"КБ Борей\" Ратмир Трошин (47%) и Анатолий Ференцев (15%).",
      "source": "https://www.interfax.ru/business/1006209",
      "verified_by": "model×2",
@@ -44450,7 +45024,52 @@
    },
    "sum_basis": "estimate",
    "date_basis": "registry",
-   "gate_baseline_hash": "50dff506734f.0532cf"
+   "gate_baseline_hash": "50dff506734f.0532cf",
+   "fact_log": [
+    {
+     "field": "title",
+     "new": "Yadro купил 38% «КБ Борей»",
+     "quote": "Входящая в «ИКС Холдинг» «КНС Групп» (работает под брендом Yadro) 31 января стала владельцем 38% в компании — разработчике и производителе систем кондиционирования для центров обработки данных «КБ Борей» (бренд BOREY), следует из данных СПАРК.",
+     "url": "https://www.rbc.ru/technology_and_media/04/02/2025/67a1ecc09a7947034c102e35",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "100 млн ₽ (по оценке)",
+     "quote": "Аналитик ФГ \"Финам\" Леонид Делицын оценил сделку и предположил, во сколько могут обойтись в дальнейшем оставшиеся 62% долей \"КБ Борей\": Состоявшуюся сделку можно оценить в 100 млн руб. Поскольку индустрия дата-центров будет расти высокими темпами, цена оставшейся доли может быть гораздо выше - несколько сотен миллионов рублей\".",
+     "url": "https://www.comnews.ru/content/237587/2025-02-05/2025-w06/1007/yadro-priobrela-38-doley-kb-borey",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.sum",
+     "new": "100 млн ₽ (по оценке)",
+     "quote": "Аналитик ФГ \"Финам\" Леонид Делицын оценил сделку и предположил, во сколько могут обойтись в дальнейшем оставшиеся 62% долей \"КБ Борей\": Состоявшуюся сделку можно оценить в 100 млн руб. Поскольку индустрия дата-центров будет расти высокими темпами, цена оставшейся доли может быть гораздо выше - несколько сотен миллионов рублей\".",
+     "url": "https://www.comnews.ru/content/237587/2025-02-05/2025-w06/1007/yadro-priobrela-38-doley-kb-borey",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "eco.share",
+     "new": "38% долей ООО «КБ Борей»",
+     "quote": "ООО \"КНС Групп\" (производитель IT-оборудования, бренд Yadro, входит в \"ИКС Холдинг\") приобрело 38% ООО \"КБ Борей\" (производитель систем охлаждения для ЦОД) в рамках запуска нового бизнес-направления по созданию продуктов для инженерной инфраструктуры дата-центров. По данным ЕГРЮЛ, сделка зарегистрирована 31 января.",
+     "url": "https://www.interfax.ru/business/1006209",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    },
+    {
+     "field": "law.adv",
+     "new": [],
+     "quote": "Входящая в «ИКС Холдинг» «КНС Групп» (работает под брендом Yadro) 31 января стала владельцем 38% в компании — разработчике и производителе систем кондиционирования для центров обработки данных «КБ Борей» (бренд BOREY), следует из данных СПАРК.",
+     "url": "https://www.rbc.ru/technology_and_media/04/02/2025/67a1ecc09a7947034c102e35",
+     "by": "reread_m002",
+     "date": "2026-11-12"
+    }
+   ],
+   "reread": "2026-11-12",
+   "reread_hash": "ae5dc37a7504.0532cf",
+   "reread_note": "статьи: 6"
   },
   {
    "id": "g79f683bc",
@@ -280980,7 +281599,8 @@
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
-   ]
+   ],
+   "legal_short": "АО «АЙ ЭЙЧ ПИ Апплаенсес»"
   },
   "g6262b68a": {
    "name": "Дизайнмастер",
@@ -281900,7 +282520,7 @@
   "g66a64a9f": {
    "name": "Awara IT Group",
    "ind": "ИТ и интернет",
-   "desc": "ИТ-компания (ООО «Авара Ай Ти Солюшенс»): по данным ЕГРЮЛ, ее акционерами были Александр Ермаков (56%), Юрий Шумаков (30%) и Александр Пирогов (14%), выручка за 2021 год — 297 млн ₽. В 2022 году, купив российский бизнес SoftwareONE, образовала мультивендорную ИТ-компанию полного цикла под брендом WONE IT (сейчас — ООО «Ван Ай Ти Трейд», Wone IT).",
+   "desc": "ИТ-интегратор (ООО «Ван Ай Ти Солюшенс», ранее «Авара Ай Ти Солюшенс»); в 2022 году его совладельцы Александр Ермаков и Юрий Шумаков купили российский бизнес SoftwareONE.",
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
@@ -286012,11 +286632,12 @@
   "g8f46008e": {
    "name": "КБ БОРЕЙ",
    "ind": "ИТ и интернет",
-   "desc": "Компания, 38% которой в 2025 году купила «КНС Групп» (Yadro) за 100 млн ₽.",
+   "desc": "Разработчик и производитель систем охлаждения для центров обработки данных (бренд BOREY), Москва; с 2025 года 38% принадлежат «КНС Групп» (Yadro).",
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «КБ БОРЕЙ»"
   },
   "g456d8881": {
    "name": "ООО «Дока Рус» и ООО «Дока Липецк»",
@@ -287720,7 +288341,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "АО «Фаберлик»"
   },
   "gf3e0918b": {
    "name": "Молния",
@@ -288175,7 +288797,7 @@
   },
   "g7f6433d2": {
    "name": "MM Packaging (заводы в Санкт-Петербурге и Пскове)",
-   "ind": "Химия и удобрения",
+   "ind": "Производство тары",
    "desc": "Российские упаковочные заводы австрийской Mayr-Melnhof Group (MM Packaging) в Санкт-Петербурге и Пскове.",
    "kpi": [
     "Профиль",
@@ -288632,8 +289254,8 @@
   },
   "g8fd0df01": {
    "name": "Клаустрофобия",
-   "ind": "Медиа",
-   "desc": "Сеть квестов (169 активных локаций, оборот 1–1,1 млрд ₽); в 2025 году ее купил GrimTeam за 400 млн ₽.",
+   "ind": "Развлечения",
+   "desc": "Крупнейшая в России сеть квестов, основана в 2013 году; на 2024 год — 37 точек и 169 активных квестов.",
    "kpi": [
     "Профиль",
     "Автоматический"
@@ -292167,7 +292789,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "АО ГРК «Западная»"
   },
   "g90892f88": {
    "name": "Первое коллекторское бюро",
@@ -292179,13 +292802,14 @@
    ]
   },
   "g03e5be54": {
-   "name": "LPP Group Rus (Reserved, Cropp, House, Mohito, Sinsay)",
+   "name": "РЕ Трэйдинг",
    "ind": "Ритейл",
-   "desc": "Российская сеть магазинов польской LPP Group под брендами Reserved, Cropp, House, Mohito, Sinsay.",
+   "desc": "Российская компания польской LPP, управлявшая магазинами Reserved, Cropp, House, Mohito и Sinsay; в 2022 году 95% перешли к Far East Services FZCO из Дубая, 5% — гендиректору Анне Пилюгиной.",
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
-   ]
+   ],
+   "legal_short": "ООО «РЕ Трэйдинг»"
   },
   "g76cf6406": {
    "name": "Капитал МС",
@@ -292362,7 +292986,7 @@
   "g4b079e80": {
    "name": "Arçelik A.Ş.",
    "ind": "Потребительские товары",
-   "desc": "Турецкий производитель бытовой техники, купивший российские активы Whirlpool (завод в Липецке, бренды Hotpoint и Indesit) в 2022 году за €220 млн.",
+   "desc": "Турецкий производитель бытовой техники (марки Beko, Blomberg); в 2022 году купил российский бизнес Whirlpool — заводы в Липецке и права на бренды Indesit, Hotpoint и Stinol в России.",
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
@@ -292466,7 +293090,8 @@
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
-   ]
+   ],
+   "legal_short": "ООО «ВАН АЙ ТИ Трейд»"
   },
   "g6ab25fcc": {
    "name": "Щелковохлеб",
@@ -292830,43 +293455,11 @@
   },
   "g6eb3c726": {
    "name": "GrimTeam",
-   "ind": "Медиа",
-   "desc": "Купила в 2025 году сеть квестов «Клаустрофобия» (169 локаций, товарные знаки, права аренды) — точная сумма не раскрыта; по экспертной оценке, сеть стоит 400–500 млн ₽.",
+   "ind": "Развлечения",
+   "desc": "Сеть квестов и перформансов, основана в 2015 году и начинала с хоррор-квестов; среди ее квестов — «Амитивилль» на ВДНХ, «БШ2: Электрозавод» и «Дом Беллы».",
    "kpi": [
     "Профиль",
     "Автоматический"
-   ],
-   "ownership": [
-    {
-     "name": "Вадим Змовик",
-     "id": null,
-     "share": "51%",
-     "as_of": "2025-07",
-     "source": [
-      "РБК",
-      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
-     ]
-    },
-    {
-     "name": "Павел Вараксин",
-     "id": null,
-     "share": "33%",
-     "as_of": "2025-07",
-     "source": [
-      "РБК",
-      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
-     ]
-    },
-    {
-     "name": "Евгений Авин (Антонов)",
-     "id": null,
-     "share": "16%",
-     "as_of": "2025-07",
-     "source": [
-      "РБК",
-      "https://www.rbc.ru/technology_and_media/15/08/2025/689db55a9a7947b058474799"
-     ]
-    }
    ]
   },
   "g92a02997": {
@@ -293694,7 +294287,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "АО «Группа ОКТО»"
   },
   "g833a9ec6": {
    "name": "Scandic Construction",
@@ -295115,7 +295709,7 @@
   "g2bda5372": {
    "name": "Воентекстильпром",
    "ind": "Потребительские товары",
-   "desc": "Компания по пошиву военного обмундирования для Минобороны и МЧС; в 2025 году купила у «Фаберлик» фабрику одежды «Фэшн фэктри» в Ивановской области за 150 млн ₽.",
+   "desc": "Шьет форму для Минобороны и МЧС, у компании шесть фабрик в Карачаево-Черкесии и Кабардино-Балкарии; 26% принадлежат АО «Военторг».",
    "kpi": [
     "Профиль",
     "Автоматический"
@@ -295128,7 +295722,8 @@
      "since": "2022-06-03",
      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32022R0878&from=EN"
     }
-   ]
+   ],
+   "legal_short": "ООО «Воентекстильпром»"
   },
   "gbbd5b696": {
    "name": "Трансатлант",
@@ -295883,7 +296478,8 @@
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
-   ]
+   ],
+   "legal_short": "ООО «Виола»"
   },
   "g21adcd55": {
    "name": "Страховая компания КАРДИФ",
@@ -298221,11 +298817,12 @@
   "g73bb8426": {
    "name": "Granelle",
    "ind": "Химия и удобрения",
-   "desc": "Покупатель российских заводов MM Packaging (Mayr-Melnhof Group) в Санкт-Петербурге и Пскове.",
+   "desc": "Московская девелоперская группа «Гранель»; в декабре 2022 года купила российские упаковочные заводы австрийской Mayr-Melnhof.",
    "kpi": [
     "Профиль",
     "Исследование KSE Leave Russia"
-   ]
+   ],
+   "legal_short": "ООО «ГК \"гранель»"
   },
   "gdf730902": {
    "name": "ООО «Глобал МК»",
@@ -299579,7 +300176,8 @@
    "kpi": [
     "Профиль",
     "Автоматический"
-   ]
+   ],
+   "legal_short": "ООО «Аромалюкс»"
   },
   "g61f26c16": {
    "name": "ООО «Импульс»",
@@ -301075,7 +301673,7 @@
   "g849d19d0": {
    "name": "Гейзер Голд",
    "ind": "ГМК и добыча",
-   "desc": "ООО с лицензиями на месторождения золота и серебра на Камчатке (участки «Кларин» и «Нимаевский»); в 2025 году его купила Highland Gold у Андрея Комарова (экс-владельца ЧТПЗ).",
+   "desc": "ООО с лицензиями на геологическое изучение участков «Кларин» и «Нимаевский» на Камчатке (золото и серебро); с июня 2025 года принадлежит структуре Highland Gold.",
    "kpi": [
     "Профиль",
     "Автоматический"
@@ -301100,7 +301698,8 @@
      "since": "",
      "url": "https://sanctionssearch.ofac.treas.gov/Details.aspx?id=47853"
     }
-   ]
+   ],
+   "legal_short": "ООО «Гейзер Голд»"
   },
   "gf15f54d1": {
    "name": "ООО «Юнирест» (Rostic's)",
@@ -301475,7 +302074,8 @@
      "since": "2022-11-09",
      "url": "http://kremlin.ru/acts/bank/48500"
     }
-   ]
+   ],
+   "legal_short": "ООО «АГК»"
   },
   "gc1321af8": {
    "name": "Группа «Пионер»",
@@ -306560,7 +307160,8 @@
    "name": "Гиперспэйс",
    "ind": "ГМК и добыча",
    "desc": "Московская холдинговая компания геологоразведочных активов, связана с Андреем Комаровым (19%; 80,9% — у АО «Старт»); владеет ООО «Варна Минералз» и группой «Гора: Голден Ратио». Юрлицо — ООО «Гиперспэйс».",
-   "kpi": []
+   "kpi": [],
+   "legal_short": "ООО «Гиперспэйс»"
   },
   "g8f7ea52e": {
    "name": "Глобус (авиакомпания S7)",
@@ -306585,7 +307186,8 @@
    "name": "Дэнир",
    "ind": "Холдинги",
    "desc": "Компания из Московской области, связанная с владельцем группы Velcom; с конца 2022 года владеет бывшим российским бизнесом Valio (бренд Viola). Юрлицо — ООО «Дэнир».",
-   "kpi": []
+   "kpi": [],
+   "legal_short": "ООО «Дэнир»"
   },
   "g559d09e3": {
    "name": "Илим Глобал Тимбер Рус",

@@ -275,3 +275,64 @@
 {"id": "g167e415a", "field": "target", "class": "wrong_target", "was": "профиль «Делимобиля» = ООО «Делимобиль Холдинг»", "now": "ПАО «Каршеринг Руссия» (эмитент)", "tag": "m007"}
 {"id": "g167e415a", "field": "target", "class": "profile_text", "was": "имя «Делимобиля»", "now": "«Делимобиль»", "tag": "m007"}
 {"id": "g167e415a", "field": "extra", "class": "wrong_status", "was": "IPO «планировалось»", "now": "итоги IPO", "tag": "m007"}
+{"id": "gfa14411d", "field": "seller", "class": "wrong_seller", "was": "ООО «РЕ Трэйдинг», LPP SA", "now": "LPP SA (РЕ Трэйдинг — предмет)", "tag": "m002"}
+{"id": "gfa14411d", "field": "date", "class": "wrong_date", "was": "2022-05-23", "now": "2022-06-30 (ЕГРЮЛ)", "tag": "m002"}
+{"id": "gfa14411d", "field": "eco.rationale", "class": "invented_rationale", "was": "копия extra", "now": "мотив: уход LPP из России", "tag": "m002"}
+{"id": "gfa14411d", "field": "eco.context", "class": "unsupported_claim", "was": "следствие прокуратуры приостановлено до середины 2026", "now": "снято", "tag": "m002"}
+{"id": "gfa14411d", "field": "eco.context", "class": "verbatim", "was": "цитата FES Retail без кавычек", "now": "пересказ", "tag": "m002"}
+{"id": "gfa14411d", "field": "law.adv", "class": "adviser_wrong", "was": "Пепеляев — консультант продавца", "now": "консультант ООО «РЕ Трэйдинг»", "tag": "m002"}
+{"id": "gfa14411d", "field": "src", "class": "dead_source", "was": "https://www.interfax.ru (голый домен)", "now": "снят", "tag": "m002"}
+{"id": "gfa14411d", "field": "title", "class": "title_standard", "was": "Польская LPP Group продала…", "now": "Far East Services FZCO купил 95% «РЕ Трэйдинг» у LPP", "tag": "m002"}
+{"id": "gfa14411d", "field": "g03e5be54.name", "class": "profile_text", "was": "LPP Group Rus (Reserved, …)", "now": "РЕ Трэйдинг", "tag": "m002"}
+{"id": "g55f1c662", "field": "date", "class": "wrong_date", "was": "2022-06-01", "now": "2022-12-29 (ЕГРЮЛ)", "tag": "m002"}
+{"id": "g55f1c662", "field": "eco.target_fin", "class": "other", "was": "85 млн евро", "now": "€87 млн (Castren)", "tag": "m002"}
+{"id": "g55f1c662", "field": "eco.context", "class": "unsupported_claim", "was": "слух о «Русагро», заявление ООО «Валио»", "now": "сняты", "tag": "m002"}
+{"id": "g55f1c662", "field": "title", "class": "title_standard", "was": "Финская Valio продала… компании Velcom", "now": "«Дэнир» купил российский бизнес Valio", "tag": "m002"}
+{"id": "g57b3b93c", "field": "date", "class": "wrong_date", "was": "2022-12-01", "now": "2022-12-16", "tag": "m002"}
+{"id": "g57b3b93c", "field": "eco.rationale", "class": "invented_rationale", "was": "копия extra", "now": "—", "tag": "m002"}
+{"id": "g57b3b93c", "field": "events.0.note", "class": "foreign_fact", "was": "«Невские грани» до 2022 у Mayr-Melnhof", "now": "у Tannpapier", "tag": "m002"}
+{"id": "g57b3b93c", "field": "g7f6433d2.ind", "class": "wrong_industry", "was": "Химия и удобрения", "now": "Производство тары", "tag": "m002"}
+{"id": "g57b3b93c", "field": "title", "class": "title_standard", "was": "Mayr-Melnhof Group продала…", "now": "«Гранель» купила у Mayr-Melnhof…", "tag": "m002"}
+{"id": "g1059432d", "field": "sum", "class": "sum_meaning", "was": "€220 млн", "now": "Не раскрыта (предел условной цены, позже €261 млн)", "tag": "m002"}
+{"id": "g1059432d", "field": "law.terms", "class": "unsupported_claim", "was": "общая сумма ~€157 млн (117+40)", "now": "снято, платеж €40 млн", "tag": "m002"}
+{"id": "g1059432d", "field": "date", "class": "wrong_date", "was": "2022-11-01", "now": "2022-08-31 (закрытие по 10-Q)", "tag": "m002"}
+{"id": "g1059432d", "field": "eco.share", "class": "other", "was": "страны присутствия", "now": "100% акций/долей двух обществ", "tag": "m002"}
+{"id": "g1059432d", "field": "src", "class": "dead_source", "was": "https://www.bloomberg.com", "now": "снят", "tag": "m002"}
+{"id": "g1059432d", "field": "title", "class": "title_standard", "was": "Whirlpool продала…", "now": "Arçelik купил … у Whirlpool", "tag": "m002"}
+{"id": "gfc7e5649", "field": "buyer", "class": "wrong_buyer", "was": "Awara IT Group", "now": "Александр Ермаков и Юрий Шумаков (ЕГРЮЛ)", "tag": "m002"}
+{"id": "gfc7e5649", "field": "date", "class": "wrong_date", "was": "2022-07-01", "now": "2022-05-19 (ЕГРЮЛ)", "tag": "m002"}
+{"id": "gfc7e5649", "field": "law.adv", "class": "adviser_wrong", "was": "заглушка «Не раскрывались»", "now": "пусто", "tag": "m002"}
+{"id": "gfc7e5649", "field": "law.struct", "class": "other", "was": "владельцы и выручка покупателя", "now": "механика сделки", "tag": "m002"}
+{"id": "gc677124b", "field": "sum", "class": "sum_meaning", "was": "9 млн (Россия+Казахстан)", "now": "1 млн (российская часть)", "tag": "m002"}
+{"id": "gc677124b", "field": "eco.context", "class": "foreign_fact", "was": "покупка «Уфабурмаша», оценка без автора", "now": "сняты", "tag": "m002"}
+{"id": "gc677124b", "field": "date", "class": "wrong_date", "was": "2025-11-20", "now": "2025-11-19 (ЕГРЮЛ)", "tag": "m002"}
+{"id": "gc677124b", "field": "title", "class": "title_standard", "was": "Aggreko продала…", "now": "«БурСервис» купил «Аггреко Евразия» у Aggreko", "tag": "m002"}
+{"id": "g94683ed2", "field": "seller", "class": "wrong_seller", "was": "Акционеры Рив Гош", "now": "Rive Gauche Group Ltd", "tag": "m002"}
+{"id": "g94683ed2", "field": "sum", "class": "wrong_sum", "was": "Не раскрыта", "now": "5–6 млрд ₽ (по оценке)", "tag": "m002"}
+{"id": "g94683ed2", "field": "eco.share", "class": "other", "was": "число магазинов", "now": "100% долей двух ООО", "tag": "m002"}
+{"id": "g94683ed2", "field": "eco.rationale", "class": "verbatim", "was": "9 слов как в Интерфаксе", "now": "пересказ", "tag": "m002"}
+{"id": "ga0a49202", "field": "buyer", "class": "wrong_buyer", "was": "GrimTeam (ООО «Гримтим»)", "now": "ООО «Клаустрофобия Офлайн/Онлайн»", "tag": "m002"}
+{"id": "ga0a49202", "field": "date", "class": "wrong_date", "was": "2025-07-01", "now": "2025-08-01", "tag": "m002"}
+{"id": "ga0a49202", "field": "sum", "class": "sum_meaning", "was": "400 млн ₽", "now": "400 млн ₽ (по оценке)", "tag": "m002"}
+{"id": "ga0a49202", "field": "extra", "class": "unsupported_claim", "was": "юрлица учреждены 1 августа; до 100%", "now": "сняты", "tag": "m002"}
+{"id": "ga0a49202", "field": "eco.context", "class": "verbatim", "was": "18 слов как в Ъ", "now": "пересказ", "tag": "m002"}
+{"id": "ga0a49202", "field": "title", "class": "title_standard", "was": "копия заголовка РБК", "now": "Вадим Змовик и основатели GrimTeam купили…", "tag": "m002"}
+{"id": "ga0a49202", "field": "g6eb3c726.desc", "class": "profile_text", "was": "«купила за 400 млн», чужие владельцы", "now": "описание сети", "tag": "m002"}
+{"id": "gd88cbe9a", "field": "extra", "class": "wrong_seller", "was": "продавец — Андрей Комаров", "now": "ООО «Гиперспэйс»", "tag": "m002"}
+{"id": "gd88cbe9a", "field": "eco.rationale", "class": "invented_rationale", "was": "Highland Gold хочет усилить позиции", "now": "мнение эксперта Хазанова", "tag": "m002"}
+{"id": "gd88cbe9a", "field": "eco.val", "class": "sum_meaning", "was": "финансирование ГРР как оценка", "now": "дисконт по Гомеру", "tag": "m002"}
+{"id": "gd88cbe9a", "field": "g849d19d0.desc", "class": "profile_text", "was": "купила у Андрея Комарова", "now": "структура Highland Gold", "tag": "m002"}
+{"id": "g15f35a5d", "field": "sum", "class": "sum_meaning", "was": "«Не разглашается (возможная… 00 млн…)»", "now": "00 млн (по оценке)", "tag": "m002"}
+{"id": "g15f35a5d", "field": "eco.context", "class": "unsupported_claim", "was": "планы добычи >6 т, 3,207 т", "now": "сняты", "tag": "m002"}
+{"id": "g15f35a5d", "field": "law.struct", "class": "unsupported_claim", "was": "решения в Москве", "now": "снято", "tag": "m002"}
+{"id": "g15f35a5d", "field": "src", "class": "source_not_about", "was": "страница BIRCH «Энергетика»", "now": "пост BIRCH о сделке", "tag": "m002"}
+{"id": "g15f35a5d", "field": "eco.fin", "class": "other", "was": "показатели бизнеса в «Форме расчетов»", "now": "—", "tag": "m002"}
+{"id": "gbc0b68bd", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "ООО «Фэшн фэктори»", "tag": "m002"}
+{"id": "gbc0b68bd", "field": "sum", "class": "sum_meaning", "was": "150 млн ₽ (по оценке)", "now": "До 150 млн ₽ (по оценке)", "tag": "m002"}
+{"id": "gbc0b68bd", "field": "g2bda5372.desc", "class": "profile_text", "was": "купила за 150 млн ₽", "now": "описание компании", "tag": "m002"}
+{"id": "gbc0b68bd", "field": "title", "class": "title_standard", "was": "«Фаберлик» продала…", "now": "«Воентекстильпром» купил «Фэшн фэктори» у «Фаберлика»", "tag": "m002"}
+{"id": "g181d7687", "field": "sum", "class": "sum_meaning", "was": "100 млн ₽", "now": "100 млн ₽ (по оценке)", "tag": "m002"}
+{"id": "g181d7687", "field": "eco.target_fin", "class": "other", "was": "прибыль 2024 — 323 тыс.", "now": "117 тыс. ₽ (ФНС)", "tag": "m002"}
+{"id": "g181d7687", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Машиностроение", "tag": "m002"}
+{"id": "g181d7687", "field": "eco.context", "class": "verbatim", "was": "33 слова как в CNews", "now": "пересказ", "tag": "m002"}
+{"id": "g181d7687", "field": "title", "class": "title_standard", "was": "копия заголовка", "now": "Yadro купил 38% «КБ Борей»", "tag": "m002"}
