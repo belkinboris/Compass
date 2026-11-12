@@ -896,3 +896,28 @@
 {"id": "g073bf58b", "field": "eco.rationale", "class": "invented_rationale", "was": "может стать выходом на рынок ЛКМ для автопрома", "now": "—", "tag": "m032"}
 {"id": "g073bf58b", "field": "law.appr", "class": "unsupported_claim", "was": "исключение из перечня стратегических, 372-рп", "now": "распоряжение Президента опубликовано 7 мая 2024 года", "tag": "m032"}
 {"id": "g073bf58b", "field": "title", "class": "title_standard", "was": "BASF продал подмосковный завод ...", "now": "«Лакра Синтез» купила «БАСФ Восток» у BASF", "tag": "m032"}
+{"id": "gd297770d", "field": "seller", "class": "wrong_seller", "was": "Daimler Truck", "now": "Mercedes-Benz Group (Reuters: пакет держала и продала она)", "tag": "m036"}
+{"id": "gd297770d", "field": "date", "class": "wrong_date", "was": "2024-02-01", "now": "2024 (дня в источниках нет)", "tag": "m036"}
+{"id": "gd297770d", "field": "eco.context", "class": "verbatim", "was": "контекст почти дословно из Ведомостей", "now": "пересказ", "tag": "m036"}
+{"id": "gd297770d", "field": "title", "class": "title_standard", "was": "Daimler продал 15% акций ПАО «Камаз»", "now": "Неназванный покупатель купил у Mercedes-Benz 15% акций «Камаза»", "tag": "m036"}
+{"id": "g139d522a", "field": "date", "class": "wrong_date", "was": "2024-02-01 (день публикации)", "now": "2024-02-28 (запись в ЕГРЮЛ)", "tag": "m036"}
+{"id": "g139d522a", "field": "target", "class": "profile_wrong_inn", "was": "SK Capital как иностранная компания без ИНН", "now": "ООО «СК Капитал», ИНН 7731343493", "tag": "m036"}
+{"id": "g139d522a", "field": "eco.rationale", "class": "invented_rationale", "was": "покупка «укладывается в стратегию» — наш вывод", "now": "слова Шувалова", "tag": "m036"}
+{"id": "g139d522a", "field": "title", "class": "title_standard", "was": "ВЭБ.РФ вошла в акционерный капитал…", "now": "ВЭБ.РФ купил 50% Sk Capital", "tag": "m036"}
+{"id": "g3cac5f0f", "field": "eco.target_fin", "class": "wrong_sum", "was": "выручка 1,57 млрд и 897,2 млн (это доходы)", "now": "выручка 1 294,6 млн и 842 млн ₽", "tag": "m036"}
+{"id": "g3cac5f0f", "field": "eco.context", "class": "unsupported_claim", "was": "доля Иманова снизилась с 30% до 0%", "now": "выросла до 50% в мае 2025, вышел в апреле 2026", "tag": "m036"}
+{"id": "g3cac5f0f", "field": "eco.rationale", "class": "invented_rationale", "was": "цель без автора", "now": "слова Иманова и Соколова", "tag": "m036"}
+{"id": "g3cac5f0f", "field": "title", "class": "title_standard", "was": "Гусейн Иманов приобрел 30% доли в Schaub Lorenz", "now": "Гусейн Иманов купил 30% Schaub Lorenz", "tag": "m036"}
+{"id": "gc3452fa6", "field": "buyer", "class": "wrong_buyer", "was": "Газпромбанк", "now": "АО «ААА Управление капиталом» (ЕГРЮЛ)", "tag": "m036"}
+{"id": "gc3452fa6", "field": "sum", "class": "sum_meaning", "was": "1,3–1,9 млрд ₽ (оценка FitnessData)", "now": "Не раскрыта", "tag": "m036"}
+{"id": "gc3452fa6", "field": "extra", "class": "unsupported_claim", "was": "купила долю одного из совладельцев", "now": "вход через увеличение уставного капитала", "tag": "m036"}
+{"id": "gc3452fa6", "field": "title", "class": "title_standard", "was": "Газпромбанк инвестировал в сеть фитнес-клубов DDX Fitness", "now": "Структура Газпромбанка купила 11,1% DDX Fitness", "tag": "m036"}
+{"id": "g2a9fcf0f", "field": "target", "class": "profile_wrong_company", "was": "профиль агрохолдинга «Степь» АФК «Система»", "now": "ООО «Степь», ИНН 6115000350", "tag": "m036"}
+{"id": "g2a9fcf0f", "field": "sum", "class": "wrong_sum", "was": "665–950 млн ₽ (нет в источниках)", "now": "Не раскрыта", "tag": "m036"}
+{"id": "g2a9fcf0f", "field": "src", "class": "dead_source", "was": "gorodn.ru — страница не найдена", "now": "Ъ 6507852 первым", "tag": "m036"}
+{"id": "g2a9fcf0f", "field": "title", "class": "title_standard", "was": "Петр Ходыкин приобрел ООО «Степь» с 9,5 тыс. га…", "now": "Петр Ходыкин купил сельхозпредприятие «Степь» в Ростовской области", "tag": "m036"}
+{"id": "g7bffe474", "field": "date", "class": "wrong_date", "was": "2024-01-26 (публикация)", "now": "2024-01-24 (завершение сделки)", "tag": "m036"}
+{"id": "g7bffe474", "field": "seller", "class": "party_text_no_profile", "was": "продавца нет", "now": "Hyundai Motor", "tag": "m036"}
+{"id": "g7bffe474", "field": "target", "class": "profile_text", "was": "«завод Hyundai в Санкт-Петербурге», ранее завод Volkswagen", "now": "ООО «Хендэ Мотор Мануфактуринг Рус», ИНН 7801463902", "tag": "m036"}
+{"id": "g7bffe474", "field": "law.terms", "class": "verbatim", "was": "опцион почти дословно из Ъ", "now": "пересказ", "tag": "m036"}
+{"id": "g7bffe474", "field": "extra", "class": "unsupported_claim", "was": "структура холдинга «Авилон»", "now": "снято", "tag": "m036"}
