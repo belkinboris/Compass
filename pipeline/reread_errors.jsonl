@@ -1,0 +1,48 @@
+{"id": "g09d66114", "field": "date", "class": "wrong_date", "was": "2022-12-31 (выдуманный день)", "now": "2022-12-27 по ЕГРЮЛ", "tag": "m001"}
+{"id": "g09d66114", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Александр Егунов и Виктория Шурыгина (ЕГРЮЛ)", "tag": "m001"}
+{"id": "g09d66114", "field": "law.appr", "class": "unsupported_claim", "was": "Согласие ФАС получено", "now": "—", "tag": "m001"}
+{"id": "g09d66114", "field": "src", "class": "source_not_about", "was": "Коммерсантъ о «Варяге» и «Гвардейце»", "now": "Коммерсантъ 09.01.2023 о сделке", "tag": "m001"}
+{"id": "g09d66114", "field": "eco.share", "class": "wrong_share", "was": "описание земли и скота", "now": "99,999% доли в ООО «Агропромышленная корпорация»", "tag": "m001"}
+{"id": "ge8f45161", "field": "sum", "class": "sum_meaning", "was": "начальная цена лота 44 млрд ₽", "now": "экспертная оценка 44 млрд ₽ (по оценке)", "tag": "m001"}
+{"id": "ge8f45161", "field": "title", "class": "title_standard", "was": "РЖД планирует продать 49%… за 44 млрд рублей", "now": "РЖД собирается выставить на торги 49% ФГК", "tag": "m001"}
+{"id": "ge8f45161", "field": "law.struct", "class": "language", "was": "«сам РЖД»", "now": "без «сам»", "tag": "m001"}
+{"id": "ge8f45161", "field": "eco.context", "class": "other", "was": "фамилия Алафинов без имени", "now": "Иннокентий Алафинов", "tag": "m001"}
+{"id": "ge8f45161", "field": "extra", "class": "verbatim", "was": "почти дословный пересказ Коммерсанта и Интерфакса", "now": "балансовая и экспертная оценка своими словами", "tag": "m001"}
+{"id": "g5a1d102f", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "Утконос", "tag": "m001"}
+{"id": "g552abe79", "field": "title", "class": "title_standard", "was": "выкупил акции «Квадры» у миноритариев по оферте", "now": "купил 12,55% «Квадры» у миноритарных акционеров", "tag": "m001"}
+{"id": "g552abe79", "field": "eco.share", "class": "wrong_share", "was": "рассказ о выкупе с ценами", "now": "12,55% акций ПАО «Квадра»", "tag": "m001"}
+{"id": "g552abe79", "field": "law.struct", "class": "foreign_fact", "was": "покупка 82,47% у «Онэксима» и ее цена", "now": "механика обязательного предложения", "tag": "m001"}
+{"id": "g1e8cec22", "field": "date", "class": "wrong_date", "was": "2022-02-24", "now": "2022-02-21 по ЕГРЮЛ", "tag": "m001"}
+{"id": "g1e8cec22", "field": "eco.target_fin", "class": "unsupported_claim", "was": "цена «выглядит завышенной»", "now": "только показатели отчетности", "tag": "m001"}
+{"id": "g1e8cec22", "field": "eco.val", "class": "unsupported_claim", "was": "«по другим сведениям — почти 2 млрд ₽»", "now": "прежняя оценка 1 млрд и сравнение с «Мультикартой»", "tag": "m001"}
+{"id": "g1e8cec22", "field": "title", "class": "title_standard", "was": "Приобретение группой ВТБ 99%…", "now": "Группа ВТБ купила 99% процессинговой компании Paymo", "tag": "m001"}
+{"id": "g2543c41a", "field": "eco.share", "class": "wrong_share", "was": "не указана", "now": "16,667% доли по ЕГРЮЛ (вход через увеличение капитала)", "tag": "m001"}
+{"id": "g2543c41a", "field": "date", "class": "wrong_date", "was": "2022-06-14 (объявление)", "now": "2022-10-03 (запись ЕГРЮЛ)", "tag": "m001"}
+{"id": "g2543c41a", "field": "title", "class": "title_standard", "was": "Инвестиция VEB Ventures… в EdTech-платформу", "now": "VEB Ventures купил 16,67% «Профилума»", "tag": "m001"}
+{"id": "g2543c41a", "field": "law.struct", "class": "other", "was": "история основания компании", "now": "механика входа через увеличение капитала", "tag": "m001"}
+{"id": "g2543c41a", "field": "buyer", "class": "profile_text", "was": "отрасль профиля VEB Ventures «Транспорт и логистика»", "now": "«Управление активами»", "tag": "m001"}
+{"id": "g1dc82018", "field": "seller", "class": "wrong_seller", "was": "СУ-155", "now": "ООО «Серпуховский лифтостроительный завод» (банкрот, продавал конкурсный управляющий)", "tag": "m001"}
+{"id": "g1dc82018", "field": "target", "class": "wrong_target", "was": "ООО «СЛЗ» предметом", "now": "имущество завода; ООО «СЛЗ» — продавец", "tag": "m001"}
+{"id": "g1dc82018", "field": "law.struct", "class": "language", "was": "«Сам знак…»", "now": "без «сам»", "tag": "m001"}
+{"id": "g5c0f70c6", "field": "title", "class": "title_standard", "was": "Mondi Group — продажа АО…", "now": "Mondi отказался продать Сыктывкарский ЛПК компании Augment Investments", "tag": "m001"}
+{"id": "g5c0f70c6", "field": "law.appr", "class": "verbatim", "was": "дословный кусок источника", "now": "пересказ", "tag": "m001"}
+{"id": "g5c0f70c6", "field": "eco.context", "class": "other", "was": "«не первый актив» о покупке, которая была позже", "now": "«Позже, в феврале 2023 года»", "tag": "m001"}
+{"id": "g2ab512d7", "field": "sum", "class": "sum_meaning", "was": "$3,69 млрд (оценка АО с долгом)", "now": "$1,479 млрд вознаграждение продавцу", "tag": "m001"}
+{"id": "g2ab512d7", "field": "eco.share", "class": "wrong_share", "was": "хронология сделки", "now": "100% акций АО «Полиметалл»", "tag": "m001"}
+{"id": "g2ab512d7", "field": "title", "class": "title_standard", "was": "Polymetal продал… за $3,69 млрд", "now": "«Мангазея Плюс» купила АО «Полиметалл» у Polymetal", "tag": "m001"}
+{"id": "g2ab512d7", "field": "law.struct", "class": "verbatim", "was": "дословно о расчетах", "now": "пересказ", "tag": "m001"}
+{"id": "gca198c27", "field": "seller", "class": "wrong_seller", "was": "Сергей Шилов и Евгений Жуланов", "now": "не раскрыт (Жуланов нигде не найден)", "tag": "m001"}
+{"id": "gca198c27", "field": "date", "class": "wrong_date", "was": "2022-02-16 (нет в источниках)", "now": "2022", "tag": "m001"}
+{"id": "gca198c27", "field": "extra", "class": "unsupported_claim", "was": "«после закрытия Шилов и РЦР остались владельцами», «15 юрлиц»", "now": "состав группы и владельцы по Коммерсанту", "tag": "m001"}
+{"id": "gca198c27", "field": "eco.rationale", "class": "version_as_fact", "was": "цель как факт", "now": "по неофициальным данным", "tag": "m001"}
+{"id": "gca198c27", "field": "src", "class": "aggregator_source", "was": "первоисточник Интерфакс не стоял в src", "now": "Интерфакс первым", "tag": "m001"}
+{"id": "gca198c27", "field": "title", "class": "title_standard", "was": "Атомэнергопром / Русатом – Цифровые решения приобрели 92%…", "now": "«Атомэнергопром» купил 92% AT Consulting", "tag": "m001"}
+{"id": "g5030d3e8", "field": "date", "class": "wrong_date", "was": "2022-05-20 (объявление при «Закрыта»)", "now": "2022", "tag": "m001"}
+{"id": "g5030d3e8", "field": "title", "class": "title_standard", "was": "Zurich Insurance продала…", "now": "Менеджеры купили российскую СК «Цюрих» у Zurich Insurance", "tag": "m001"}
+{"id": "gad807a24", "field": "buyer", "class": "wrong_buyer", "was": "профиль «Retail Excellence LLC» (это сама покупаемая компания)", "now": "Денис Щукин", "tag": "m001"}
+{"id": "gad807a24", "field": "target", "class": "profile_wrong_company", "was": "профиль-двойник «PVH Rus» без ИНН", "now": "ООО «Пивиэйч Сторс Рус» (ныне «Ритэйл Экселенс»), ИНН 7705523330", "tag": "m001"}
+{"id": "gad807a24", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-08-17 по ЕГРЮЛ", "tag": "m001"}
+{"id": "gad807a24", "field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка 2021 года 3,52 млрд ₽", "now": "—", "tag": "m001"}
+{"id": "gad807a24", "field": "eco.rationale", "class": "invented_rationale", "was": "повтор «Дополнительно» вместо мотива", "now": "—", "tag": "m001"}
+{"id": "gad807a24", "field": "src", "class": "dead_source", "was": "общая лента Business & Human Rights", "now": "Sostav, New Retail, ЕГРЮЛ", "tag": "m001"}
+{"id": "gad807a24", "field": "title", "class": "title_standard", "was": "PVH Corp. продала…", "now": "Денис Щукин купил российскую розницу Calvin Klein и Tommy Hilfiger у PVH", "tag": "m001"}
