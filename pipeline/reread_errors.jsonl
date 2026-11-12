@@ -637,3 +637,17 @@
 {"id": "g34cab70b", "field": "title", "class": "title_standard", "was": "…в Тамбовской области", "now": "«Русагро» купила 51% ООО «Центральное»", "tag": "m020"}
 {"id": "gd2696c44", "field": "title", "class": "title_standard", "was": "покупает Trivio — платформу…", "now": "Tutu.ru может купить Trivio", "tag": "m020"}
 {"id": "g5b8fa758", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Emerging Travel Group", "tag": "m020"}
+{"id": "gcdf7065a", "field": "title", "class": "title_standard", "was": "передал 1% … Татьяне Ким", "now": "Ким безвозмездно получила 1% Wildberries от Бакальчука", "tag": "m024"}
+{"id": "gcdf7065a", "field": "eco.context", "class": "unsupported_claim", "was": "жалоба в ФАС, «имущество превысило долю», совет директоров ВсеИнструменты", "now": "сняты", "tag": "m024"}
+{"id": "gcdf7065a", "field": "eco.context", "class": "foreign_fact", "was": "«М.Видео», банкротство «ВБ Девелопмент»", "now": "сняты, контекст о сделке", "tag": "m024"}
+{"id": "g23ff3a09", "field": "date", "class": "wrong_date", "was": "2024-12-12", "now": "2024-12-24 (ЕГРЮЛ)", "tag": "m024"}
+{"id": "g23ff3a09", "field": "extra", "class": "unsupported_claim", "was": "«закрыта 12 декабря», «производит 40 000»", "now": "мощность 40 000, без даты", "tag": "m024"}
+{"id": "g23ff3a09", "field": "companies.g8fef8630.desc", "class": "profile_text", "was": "продали братья Николай и Павел Кузнецовы", "now": "продал Николай Кузнецов", "tag": "m024"}
+{"id": "g06a6081f", "field": "title", "class": "title_standard", "was": "ВТБ выкупил 49,99% долю «Почты России» в Почта Банке", "now": "ВТБ купил 49,99% Почта банка у «Почты России»", "tag": "m024"}
+{"id": "g06a6081f", "field": "date", "class": "wrong_date", "was": "2024-12-10 (слова министра)", "now": "2024-12-26 (закрытие, сообщение ВТБ)", "tag": "m024"}
+{"id": "g06a6081f", "field": "eco.context", "class": "unsupported_claim", "was": "с 1 мая 2026, 19 тыс. банкоматов", "now": "сняты", "tag": "m024"}
+{"id": "g06a6081f", "field": "eco.target_fin", "class": "other", "was": "мотив ВТБ в финансах предмета", "now": "перенесен в eco.rationale", "tag": "m024"}
+{"id": "g06a6081f", "field": "extra", "class": "verbatim", "was": "near_copy Интерфакса", "now": "пересказ", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "extra", "class": "invented_rationale", "was": "чтобы ответить на спрос профильных клиентов", "now": "снято, по Frank Media", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "ind", "class": "wrong_industry", "was": "Банки", "now": "ИТ и интернет", "tag": "m024"}
+{"id": "g7bc4ff53", "field": "src", "class": "aggregator_source", "was": "Frank Media первым", "now": "Ведомости первыми", "tag": "m024"}
