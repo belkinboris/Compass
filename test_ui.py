@@ -5709,3 +5709,25 @@ def test_forum_day_block_shows_the_nearest_session(page, base_url):
     # статья стоит отдельной карточкой и в списке материалов не повторяется
     assert page.locator(".mts .mt").count() == page.evaluate("EVENTS[0].materials.length") - 1
     assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+
+
+def test_compare_tray_only_on_company_pages_and_above_the_tabbar(browser, base_url):
+    """12 ноября 2026, партнер: плашка сравнения компаний на телефоне торчала из-под
+    нижней панели на всех экранах. Теперь она только на экранах компаний и
+    сравнения и стоит над панелью."""
+    ctx = browser.new_context(viewport={"width": 390, "height": 844})
+    try:
+        pg = ctx.new_page()
+        pg.goto(base_url + "/#/companies", wait_until="networkidle")
+        pg.wait_for_timeout(1500)
+        pg.evaluate("localStorage.setItem('kompas_compare_companies_v1', JSON.stringify(Object.keys(COMPANIES).slice(0,2)))")
+        for h, want in (("#/deals", False), ("#/advisors", False), ("#/companies", True), ("#/compare", True)):
+            pg.goto(base_url + "/" + h, wait_until="networkidle")
+            pg.reload(wait_until="networkidle")
+            pg.wait_for_timeout(1500)
+            assert (pg.locator("#compareTray").count() == 1) == want, h
+            if want:
+                gap = pg.evaluate("document.getElementById('tabbar').getBoundingClientRect().top - document.getElementById('compareTray').getBoundingClientRect().bottom")
+                assert gap >= 4, (h, gap)
+    finally:
+        ctx.close()

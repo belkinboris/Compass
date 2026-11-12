@@ -2821,6 +2821,18 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-org a::after{content:"→";color:var(--muted);font-weight:400;flex:none}
 .ev-org a:hover{border-color:#C8321E}
 @media(max-width:1000px){.ev-org{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Телефон: плашка стоит над нижней панелью (раньше правило выше опускало ее
+   под панель, и из-под стекла торчал хвост «ь») и сделана тем же стеклом. */
+@media(max-width:720px){
+  body .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 80px);left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));
+    width:auto;transform:none;border-radius:18px;border:0;color:var(--ink);
+    background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(28px) saturate(1.8);backdrop-filter:blur(28px) saturate(1.8);
+    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06)}
+  body .compare-tray-text{color:var(--muted)}body .compare-tray-text b{color:var(--ink)}
+  body .compare-tray a.chip,body .compare-tray a.chip:hover{background:var(--accent-deep)!important;border:1px solid var(--accent-deep)!important;color:#fff!important;border-radius:999px!important;padding:9px 16px!important;font-size:12px;text-decoration:none;box-shadow:none}
+  body .compare-tray a.chip::after,body .compare-tray a.chip::before{display:none}
+  body .compare-tray .compare-clear{color:var(--muted)}
+}
 @media(max-width:760px){.ev-org{grid-template-columns:1fr}.ev-org a{min-height:56px}}
 @media(max-width:760px){.ev-hero{grid-template-columns:1fr}.ev-two{grid-template-columns:1fr}.ev-hero .l{padding:26px 20px}.ev-hero .r{padding:22px 20px}}
 
@@ -3189,10 +3201,15 @@ function toggleCompared(id){
   if(ids.length>=COMPARE_MAX) return {ids,selected:false,error:`Можно сравнить не больше ${COMPARE_MAX} компаний одновременно.`};
   ids.push(id); return {ids:saveCompareIds(ids),selected:true};
 }
+/* Плашка «Выбрано N компаний — Сравнить» живет только там, где сравнивают:
+   в списке компаний, на странице компании и на самом сравнении (партнер,
+   12 ноября 2026: на телефоне она торчала из-под нижней панели на всех
+   экранах — «это кнопка сравнения компаний, и она всегда внизу. Это дичь»). */
+const COMPARE_TRAY_PAGES = /^#\/(companies|company|compare)(\/|\?|$)/;
 function renderCompareTray(){
   let tray=document.getElementById("compareTray");
   const ids=compareIds();
-  if(!ids.length){if(tray)tray.remove();return;}
+  if(!ids.length || !COMPARE_TRAY_PAGES.test(location.hash||"")){if(tray)tray.remove();return;}
   if(!tray){tray=document.createElement("div");tray.id="compareTray";tray.className="compare-tray";document.body.appendChild(tray);}
   const names=ids.map(id=>co(id).name);
   tray.innerHTML=`<div class="compare-tray-text"><b>Выбрано ${ids.length} из ${COMPARE_MAX}:</b> ${names.map(esc).join(" · ")}</div>${ids.length>=2?`<a class="chip" href="#/compare">Сравнить</a>`:`<a class="chip" href="#/companies">Добавить компанию</a>`}<button class="compare-clear" aria-label="Очистить сравнение">×</button>`;
