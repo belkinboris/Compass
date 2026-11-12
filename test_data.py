@@ -1908,6 +1908,14 @@ def test_approval_stages_name_the_authority(deals):
                if e.get("kind") == "approval" and (e.get("title") or "").strip() == "Согласование получено"
                and not (e.get("note") or "").strip()]
     assert not generic, "безымянный этап согласования без заметки: %s" % generic
+    # Одобрение совета директоров или собрания акционеров — корпоративное, а не согласование
+    # регулятора (владелец, 12 ноября 2026, «Библио-Глобус»): общим «Согласование получено»
+    # такой этап не называется.
+    corporate = [(d["id"], e.get("date")) for d in deals for e in d.get("events") or []
+                 if e.get("kind") == "approval" and (e.get("title") or "").strip() == "Согласование получено"
+                 and re.search(r"совет директоров|собрани\w+ акционеров|наблюдательн\w+ совет", e.get("note") or "", re.I)
+                 and not re.search(r"ФАС|Банк России|ЦБ|правкомисси|Президент|суд", e.get("note") or "")]
+    assert not corporate, "корпоративное одобрение названо «Согласование получено»: %s" % corporate
 
 
 def test_listings_are_not_admitted_to_counts(deals):

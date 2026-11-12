@@ -145,7 +145,15 @@ def main(argv):
                 for _p, plan in good:
                     for e in plan.get('errors') or []:
                         f.write(json.dumps(dict(e, tag=plan['tag']), ensure_ascii=False) + '\n')
-            ra.run(['git', 'add', '-u'])
+            # Чужие недописанные файлы правок (партии, которые еще читают) в коммит не берутся:
+            # 12 ноября 2026 вторая часть m034, дописанная в уже отслеживаемый файл, уехала в main
+            # раньше своей записи и уронила test_review_table_is_applied_and_not_pending.
+            ra.run(['git', 'add', '-u', '--', '.', ':!pipeline/ingest/fixes', ':!pipeline/archive'])
+            for _p, plan in good:
+                code, out = ra.run(['git', 'ls-files', '-m', 'pipeline/ingest/fixes', 'pipeline/archive'])
+                for f in out.split():
+                    if plan['tag'] in f:
+                        ra.run(['git', 'add', f])
             ra.run(['git', 'add', ra.ERRORS])
             code, out = ra.run(['git', 'ls-files', '--others', '--exclude-standard', 'pipeline/ingest/fixes'])
             untracked = out.split()

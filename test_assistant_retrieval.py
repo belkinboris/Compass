@@ -1070,8 +1070,8 @@ def test_compare_gives_the_ratio_and_all_of_few_deals(idx):
 
 def test_revenue_question_points_to_the_company_page(idx):
     """№77: «какая выручка у ВкусВилла» — ассистент отчетность не видит и
-    говорит, где она, а не только «нет сделок за 2025 год»."""
-    r = ar.retrieve("Какая выручка у «ВкусВилла» за 2025 год?", "general", None, idx)
+    говорит, где она, а не только «нет сделок за 2023 год»."""
+    r = ar.retrieve("Какая выручка у «ВкусВилла» за 2023 год?", "general", None, idx)
     assert r.intent == "company" and "Выручку и прибыль" in r.answer
     assert "#/companies/gb9570ff1" in r.answer.split("\n")[0]
     assert "Выручку" not in ar.retrieve("Какие сделки были у Магнита?", "general", None, idx).answer

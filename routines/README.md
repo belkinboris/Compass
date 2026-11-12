@@ -31,7 +31,7 @@
 | очередь «нужен ИНН» | ежедневно в 08:20 МСК | `routines/inn_queue.md` | `trig_01Wh7CsJh9MgbDrAeCgQX8Pc` |
 | банки — синхронизация с ЦБ | ежедневно в 08:25 МСК | `routines/banks.md` | `trig_017n2di1YZRowgFzvnZY4G52` |
 | тема «Клод» (сообщения агенту из консоли) | ежечасно в :38 | `routines/claude_topic.md` | заведён 17 октября 2026 (id — в `list_triggers`) |
-| конкуренты (сверка DealMap, Aspring, навигатора Бураковой) | понедельник 09:47 МСК | `routines/competitors.md` | `trig_01G4mfrrWpLMpQisZ9BcubZM` (в сессии владельца) |
+| конкуренты (сверка DealMap, Aspring, навигатора Бураковой) и подборка мероприятий по M&A в Москве | понедельник 09:47 МСК | `routines/competitors.md` | `trig_01G4mfrrWpLMpQisZ9BcubZM` (в сессии владельца) |
 | забор новостей (fetch → ворота → сырьё в консоль, без агента) | ежечасно в :50, 08–22 МСК | `routines/sweep.md` | `trig_01Nswq1s5SbVjDp1AUERTELv` (в сессии владельца) |
 | вычитка базы (50 опубликованных карточек в день — по правилам и по статье) | ежедневно в 12:41 МСК (ждет одобрения пробы) | `routines/reread.md` | `trig_01XGqPKC33EXeGcJPavKHKNb` (новая сессия на каждый запуск) |
 

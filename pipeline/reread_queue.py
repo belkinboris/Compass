@@ -80,7 +80,7 @@ SOURCE_QUESTIONS = {
 # Находки приемки, с которыми отметка не ставится без причины в `ok_findings`:
 # смысловые и те, что видны читателю. Формальные (ИНН, профиль стороны,
 # строка поста) правятся своими шагами и отметку не держат.
-BLOCKING = ('title_standard', 'sum_format', 'title_word_share', 'share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
+BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format', 'title_word_share', 'share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
             'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants',
             'aggregator_cites_primary')
 
@@ -94,7 +94,7 @@ BLOCKING = ('title_standard', 'sum_format', 'title_word_share', 'share_form', 'p
 SHORT_FROM = '2026-10-03'
 SHORT_FIELDS = ('title', 'eco.sum', 'eco.share')
 SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers', 'primary_source')
-SHORT_BLOCKING = ('title_standard', 'sum_format', 'title_word_share', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
+SHORT_BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format', 'title_word_share', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
                   'parties_missing', 'jv_participants', 'party_legal_form', 'aggregator_cites_primary')
 SHORT_ADVISERS_Q = ('Консультанты (law.adv, eco.finadv): каждый подтвержден источником, у роли назван клиент '
                     '(или «одной из сторон», если ни один источник и устройство сделки его не дают)?')
