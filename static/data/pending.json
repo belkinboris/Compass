@@ -499,7 +499,9 @@
    "seller": "Сергей Студенников и Николай Тяка",
    "date_basis": "registry",
    "second_read": "2026-11-12",
-   "second_read_hash": "98c02d4b22a7.8802f1"
+   "second_read_hash": "98c02d4b22a7.8802f1",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g0a1f1895",
@@ -778,7 +780,9 @@
    "accepted": "2026-11-12",
    "accepted_hash": "484db509f6b6.76b246",
    "second_read": "2026-11-12",
-   "second_read_hash": "484db509f6b6.76b246"
+   "second_read_hash": "484db509f6b6.76b246",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g5db4bcc2",
@@ -864,7 +868,7 @@
     ]
    },
    "seller_id": "g985fe66e",
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-12T08:54:32+00:00",
    "proofread_absorbed": {
     "law.struct": [],
     "eco.share": [],
@@ -889,7 +893,9 @@
    "accepted": "2026-11-12",
    "accepted_hash": "7ddd0f5309f6.42deda",
    "second_read": "2026-11-12",
-   "second_read_hash": "7ddd0f5309f6.42deda"
+   "second_read_hash": "7ddd0f5309f6.42deda",
+   "draft_sent": true,
+   "shown_hash": "7ddd0f5309f6.42deda"
   },
   {
    "id": "g82d2175e",
