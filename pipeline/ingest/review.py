@@ -155,14 +155,6 @@ TYPE_WORDS = {
 }
 
 # ---------------------------------------------------------------------------
-# Правки к gd057d2c1 (Visa/BioCatch) и g4a10e7a2 (Smallest.ai) сняты вместе с
-# самими карточками: 5 августа владелец решил не держать в базе сделки без
-# российской стороны, и обе удалены `pipeline/remove_out_of_scope_deals.py`.
-# Правка к карточке, которой нет, — это отказ на каждом прогоне.
-#
-# ТАБЛИЦА ПРАВОК. Прогон 5 августа 2026: 13 карточек, которые приток добавил
-# сам, прочитаны против текста источника. `quote` — дословный кусок источника,
-# `why` — что именно правило не увидело и почему.
 def load_fixes():
     """Собрать правки: архив `fixes_archive/*.json` (примененные партии, свернутые
     `fixes_compact.py`, 31.10.2026) + живые `fixes/*.py`, партии — в порядке имен.
@@ -183,9 +175,8 @@ def load_fixes():
                 store = json.load(open(os.path.join(archive, fn), encoding='utf-8'))
                 batches.extend((name, b['fixes']) for name, b in store['files'].items())
     folder = os.path.join(here, 'fixes')
-    # REVIEW_ONLY=<метка>[,<метка>] — из живых партий берутся только файлы с этой меткой
-    # в имени (12 ноября 2026, вычитка несколькими помощниками сразу: отклоненная запись
-    # в чужой недописанной партии останавливала запись своей — «не пишем НИЧЕГО»).
+    # REVIEW_ONLY=<метка> — грузить только партии с меткой в имени: чужая
+    # недописанная партия не должна блокировать запись своей.
     only = [t for t in (os.environ.get('REVIEW_ONLY') or '').split(',') if t.strip()]
     for mod in sorted(m.name for m in pkgutil.iter_modules([folder])):
         if only and not any(t.strip() in mod for t in only):
@@ -195,10 +186,8 @@ def load_fixes():
     return [f for _name, batch in batches for f in batch]
 
 
-# ТАБЛИЦА ПРАВОК ЛЕЖИТ В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ: одна общая таблица росла
-# на ~3 тыс. знаков с карточки и не влезала бы в контекст, а два потока, читающие
-# разные партии, конфликтовали бы на каждом коммите. `quote` — дословный кусок
-# источника, `why` — что именно правило не увидело.
+# ТАБЛИЦА ПРАВОК — В `fixes/`, ПО ФАЙЛУ НА ПАРТИЮ: общая таблица не влезала бы
+# в контекст, а параллельные партии конфликтовали бы на каждом коммите.
 FIXES = load_fixes()
 
 
@@ -266,8 +255,22 @@ def quote_is_real(quote, texts):
     # Несколько цитат через « … » (текстовое поле собирается из разных мест
     # статьи) — настоящей обязана быть каждая.
     parts = [p for p in QUOTE_SEP.split(str(quote or '')) if p.strip()] or [quote]
-    flat_texts = [flat(t) for t in texts]
-    return all(any(flat(p) in t for t in flat_texts) for p in parts)
+    blob = _flat_blob(texts)
+    return all(flat(p) in blob for p in parts)
+
+
+_FLAT_CACHE = {}
+
+
+def _flat_blob(texts):
+    """Все тексты источников одной строкой без знаков — считается один раз на список.
+    До 12 ноября 2026 список сплющивался заново на КАЖДУЮ цитату: 52 МБ текстов — 3,6 с
+    на цитату, партия вычитки из 60 цитат держала замок записи четыре минуты на одном шаге."""
+    key = (id(texts), len(texts))
+    if key not in _FLAT_CACHE:
+        _FLAT_CACHE.clear()
+        _FLAT_CACHE[key] = '\x00'.join(flat(t) for t in texts)
+    return _FLAT_CACHE[key]
 
 
 def date_is_supported(old, new, quote):
