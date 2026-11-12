@@ -106,7 +106,11 @@ def main(argv):
     good, refusals = apply_group(plans, results)
     committed = False
     if good:
-        env = dict(os.environ, MASS_OK='reread')
+        # Общие проверки видят только файлы правок партий группы — как и одиночная запись
+        # (REVIEW_ONLY): в рабочей папке лежат недописанные файлы партий, которые еще читают,
+        # и без этого test_proofread падал на чужой заготовке (12 ноября 2026, три группы подряд).
+        tags = ','.join(p['tag'] for _x, p in good)
+        env = dict(os.environ, MASS_OK='reread', REVIEW_ONLY=tags, FIXES_SESSION=tags)
         shared = [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
                   ('слой фактов', [py, 'pipeline/facts_derive.py', '--write']),
                   ('цитата у каждой правки факта (fact_edit_guard.py)', [py, 'pipeline/fact_edit_guard.py']),
