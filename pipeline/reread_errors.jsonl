@@ -580,3 +580,50 @@
 {"id": "g572a4aca", "field": "eco.share", "class": "other", "was": "описание ломбарда", "now": "14,6% акций ПАО «МГКЛ»", "tag": "m008"}
 {"id": "g5f24bb26", "field": "extra", "class": "foreign_fact", "was": "падение до 103,25 ₽ на старте торгов; половина — допэмиссия", "now": "падение — апрель 2026 после дефолта; вся сумма — допэмиссия", "tag": "m008"}
 {"id": "g5f24bb26", "field": "eco.fin", "class": "unsupported_claim", "was": "обрывок про иски на 12 млрд ₽", "now": "снято", "tag": "m008"}
+{"id": "g75920ee3", "field": "title", "class": "title_standard", "was": "заинтересована в покупке", "now": "может купить", "tag": "m012"}
+{"id": "g75920ee3", "field": "seller_id", "class": "wrong_seller", "was": "пусто", "now": "ЛУКОЙЛ", "tag": "m012"}
+{"id": "g75920ee3", "field": "date", "class": "wrong_date", "was": "2025-11-23 (публикация РБК)", "now": "2025-11-21 (заявление IHC)", "tag": "m012"}
+{"id": "g75920ee3", "field": "extra", "class": "unsupported_claim", "was": "покупка акций, НПЗ и доли в месторождениях", "now": "интерес к зарубежным активам без перечня", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "ind", "class": "wrong_industry", "was": "Пищепром и напитки", "now": "Потребительские товары", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "title", "class": "title_standard", "was": "ВИМ вышли из капитала", "now": "Mixit купила 32,98% собственных долей", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "extra", "class": "unsupported_claim", "was": "IPO на Мосбирже", "now": "IPO", "tag": "m012"}
+{"id": "g9fc75a9c", "field": "eco.target_fin", "class": "other", "was": "завод, парфюмерия, одежда в финансах", "now": "только финансы; факты — в контекст", "tag": "m012"}
+{"id": "g84fd8194", "field": "sum", "class": "sum_meaning", "was": "$20–22 млрд (оценка всего портфеля)", "now": "Не раскрыта", "tag": "m012"}
+{"id": "g84fd8194", "field": "seller_id", "class": "wrong_seller", "was": "пусто", "now": "ЛУКОЙЛ", "tag": "m012"}
+{"id": "g84fd8194", "field": "extra", "class": "unsupported_claim", "was": "Западная Курна-2 и европейская инфраструктура в интересах Chevron", "now": "только общие с Chevron активы", "tag": "m012"}
+{"id": "g84fd8194", "field": "title", "class": "title_standard", "was": "рассматривает приобретение", "now": "может купить", "tag": "m012"}
+{"id": "g61182014", "field": "seller", "class": "wrong_seller", "was": "с Мариной Чадеевой (вышла в 12.2024)", "now": "Мельничук, Зайцев-Зотов, Степанов", "tag": "m012"}
+{"id": "g61182014", "field": "eco.finadv", "class": "adviser_wrong", "was": "Novus Capital", "now": "Публично не сообщалось", "tag": "m012"}
+{"id": "g61182014", "field": "extra", "class": "unsupported_claim", "was": "купило через СФО «Аргентум»", "now": "«Аргентум» владеет покупателем", "tag": "m012"}
+{"id": "g61182014", "field": "buyer.desc", "class": "profile_text", "was": "«Новый интеллект» — СФО", "now": "АО, принадлежащее фонду через СФО", "tag": "m012"}
+{"id": "g335d3cdc", "field": "date", "class": "wrong_date", "was": "2025-11-10", "now": "2025-11-11 (ЕГРЮЛ)", "tag": "m012"}
+{"id": "g335d3cdc", "field": "law.struct", "class": "verbatim", "was": "копия AK&M", "now": "пересказ, два шага", "tag": "m012"}
+{"id": "g335d3cdc", "field": "eco.rationale", "class": "invented_rationale", "was": "итоги интеграции и планы ТД ММК", "now": "мотив по словам ММК", "tag": "m012"}
+{"id": "g335d3cdc", "field": "eco.val", "class": "unsupported_claim", "was": "около 1% EBITDA ММК, без имени аналитика", "now": "оценка Ахмеда Алиева", "tag": "m012"}
+{"id": "g335d3cdc", "field": "title", "class": "title_standard", "was": "приобрел металлотрейдера…", "now": "купил «Кама-Трейд Татарстан»", "tag": "m012"}
+{"id": "g3fb43064", "field": "sum", "class": "wrong_sum", "was": "6–7 млрд ₽ (по оценке)", "now": "≈6 млрд ₽ (по оценке)", "tag": "m012"}
+{"id": "g3fb43064", "field": "date", "class": "wrong_date", "was": "2025-11-05", "now": "2025-11-07 (ЕГРЮЛ)", "tag": "m012"}
+{"id": "g3fb43064", "field": "target.inn", "class": "profile_wrong_inn", "was": "3652001387 (АО МЭЗ «Лискинский»)", "now": "3652011018 (ООО «Исток»)", "tag": "m012"}
+{"id": "g3fb43064", "field": "law.appr", "class": "unsupported_claim", "was": "одобрение ФАС, договорились в октябре", "now": "проходила согласование в ФАС", "tag": "m012"}
+{"id": "g3fb43064", "field": "buyer.desc", "class": "profile_text", "was": "владелец ГК «Интегра»", "now": "бывший вице-президент", "tag": "m012"}
+{"id": "g3fb43064", "field": "eco.target_fin", "class": "wrong_date", "was": "выручка за 2025 год", "now": "за 2024 год", "tag": "m012"}
+{"id": "g8af20254", "field": "eco.context", "class": "verbatim", "was": "копия Ъ", "now": "пересказ", "tag": "m012"}
+{"id": "g8af20254", "field": "eco.context", "class": "version_as_fact", "was": "банк возьмет, Seller Capital предложит", "now": "может, планировали", "tag": "m012"}
+{"id": "g8af20254", "field": "title", "class": "other", "was": "МФК «Займер»", "now": "«Займер» (МКК)", "tag": "m012"}
+{"id": "ge56325d9", "field": "date", "class": "wrong_date", "was": "2025-11-01 (заглушка)", "now": "2025", "tag": "m012"}
+{"id": "ge56325d9", "field": "extra", "class": "unsupported_claim", "was": "ООО «КСН»; ТРЦ полностью у CP и «Авроры»", "now": "снято", "tag": "m012"}
+{"id": "ge56325d9", "field": "target.desc", "class": "profile_text", "was": "«Аврора» довела владение до 100%", "now": "половина у «Авроры»", "tag": "m012"}
+{"id": "ge56325d9", "field": "eco.target_fin", "class": "language", "was": "«прибыль компании составляет — 657 772 000 ₽»", "now": "пересказ", "tag": "m012"}
+{"id": "ga218f75c", "field": "buyer", "class": "wrong_buyer", "was": "Акульчев — предприниматель", "now": "компания «Акульчев» (ООО «ПК «Акульчев»»)", "tag": "m012"}
+{"id": "ga218f75c", "field": "sum", "class": "sum_meaning", "was": "≈500 млн ₽ (с долгом)", "now": "Не раскрыта", "tag": "m012"}
+{"id": "ga218f75c", "field": "target.desc", "class": "profile_text", "was": "в 2023 году", "now": "в 2025 году", "tag": "m012"}
+{"id": "ga218f75c", "field": "eco.share", "class": "other", "was": "мощности фабрики", "now": "95% доли в ООО «ПТК «Колос»»", "tag": "m012"}
+{"id": "ga218f75c", "field": "eco.context", "class": "unsupported_claim", "was": "погиб на трассе Южноуральск — Магнитогорск", "now": "снято", "tag": "m012"}
+{"id": "gc9461b5c", "field": "title", "class": "title_standard", "was": "вышли из капитала", "now": "купил 39% у «Сбербанк Инвестиций»", "tag": "m012"}
+{"id": "gc9461b5c", "field": "eco.target_fin", "class": "language", "was": "«этих предприятий»", "now": "названы компании", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "law.struct", "class": "unsupported_claim", "was": "по пояснениям к отчетности юрлицо перешло к покупателю", "now": "Демура остался владельцем; ЕГРЮЛ — АО «Трэвел Груп»", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "ind", "class": "wrong_industry", "was": "Транспорт и логистика", "now": "Гостиницы и туризм", "tag": "m012"}
+{"id": "gbb7e25e1", "field": "sum", "class": "sum_meaning", "was": "≈$200 млн; альт. EV ≈50 млрд", "now": "15–16 млрд ₽ (по оценке)", "tag": "m012"}
+{"id": "gd66af0f7", "field": "extra", "class": "wrong_share", "was": "у «РСХБ-Финанс» осталось 0,76%", "now": "получил 0,76% в день сделки", "tag": "m012"}
+{"id": "gd66af0f7", "field": "eco.context", "class": "unsupported_claim", "was": "с 2020 года выпускает собственную продукцию", "now": "в 2020 году — площадка для сыров", "tag": "m012"}
+{"id": "gd66af0f7", "field": "title", "class": "title_standard", "was": "приобрел 25% доли в производителе сыров…", "now": "Nelt купил 25% Moloko Group", "tag": "m012"}
