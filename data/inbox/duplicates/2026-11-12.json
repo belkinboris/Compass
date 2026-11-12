@@ -42,6 +42,90 @@
     "needs_review": true
    },
    "queued": "2026-11-12"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9095261::g75e01577",
+   "candidate_id": "g75e01577",
+   "reason": "общие редкие слова: продал, романо, сапфир",
+   "draft": {
+    "draft_id": "d83461187",
+    "title": "Браслет с сапфиром дома Романовых продали на торгах в Женеве почти за $5 млн",
+    "date": "2026-11-12",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9095261"
+     ]
+    ],
+    "sum": "$5 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-12",
+      "title": "Сделка завершена",
+      "note": "Браслет с уникальным сапфиром из коллекции дома Романовых продали на аукционе Sotheby’s в Женеве за $4,9 млн (около 411 млн руб.). Эта сумма более чем вдвое превысила верхнюю границу первоначальной оценки в $1-2 млн.",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/9095261"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах в Женеве почти",
+    "seller": "Браслет с сапфиром дома Романовых",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах в Женеве почти",
+     "seller": "Браслет с сапфиром дома Романовых"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-12"
+  },
+  {
+   "key": "https://www.vedomosti.ru/lifestyle/news/2026/11/12/1244681-sapfirom-romanovih::g75e01577",
+   "candidate_id": "g75e01577",
+   "reason": "общие редкие слова: продал, романо, сапфир",
+   "draft": {
+    "draft_id": "d34765901",
+    "title": "Браслет с сапфиром Романовых продали за 411 млн рублей",
+    "date": "2026-11-12",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/lifestyle/news/2026/11/12/1244681-sapfirom-romanovih"
+     ]
+    ],
+    "sum": "411 млн ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-12",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/lifestyle/news/2026/11/12/1244681-sapfirom-romanovih"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "за 411 млн рублей",
+    "seller": "Браслет с сапфиром Романовых",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "за 411 млн рублей",
+     "seller": "Браслет с сапфиром Романовых"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-12"
   }
  ]
 }
