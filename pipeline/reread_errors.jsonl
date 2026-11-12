@@ -546,3 +546,37 @@
 {"id": "g1a475dee", "field": "date", "class": "wrong_date", "was": "2025-04-16 (релиз юрфирмы)", "now": "2025-04-14 (ЕГРЮЛ)", "tag": "m017"}
 {"id": "g1a475dee", "field": "eco.rationale", "class": "unsupported_claim", "was": "«10–15% рынка Data Management»", "now": "план Arenadata по CNews", "tag": "m017"}
 {"id": "g1a475dee", "field": "title", "class": "title_standard", "was": "Группа Arenadata инвестировала в …", "now": "Группа Arenadata купила 20% ООО «Решения Гармония»", "tag": "m017"}
+{"id": "g5612a3b3", "field": "sum", "class": "wrong_sum", "was": "15 млрд ₽", "now": "3,3 млрд ₽", "tag": "m008"}
+{"id": "g5612a3b3", "field": "eco.val", "class": "unsupported_claim", "was": "обвал акций в мае 2026 по данным T-Investments", "now": "снято, цена и капитализация IPO", "tag": "m008"}
+{"id": "g5612a3b3", "field": "eco.context", "class": "language", "was": "основатели, которые сами развивают бизнес", "now": "доли акционеров до и после IPO", "tag": "m008"}
+{"id": "g6ba5f232", "field": "extra", "class": "other", "was": "тикер EMLT", "now": "ELMT", "tag": "m008"}
+{"id": "g6ba5f232", "field": "eco.context", "class": "unsupported_claim", "was": "прогноз аналитика: 15% аллокации, переподписка 5–10 раз", "now": "история группы, итог аллокации", "tag": "m008"}
+{"id": "g6ba5f232", "field": "eco.val", "class": "sum_meaning", "was": "вся компания оценена в 90–100 млрд ₽", "now": "105 млрд ₽ с привлеченным, 90–100 без", "tag": "m008"}
+{"id": "g0be691b7", "field": "sum", "class": "wrong_sum", "was": "500–700 млн ₽ (план)", "now": "750 млн ₽", "tag": "m008"}
+{"id": "g0be691b7", "field": "date", "class": "wrong_date", "was": "2024-05-01", "now": "2024", "tag": "m008"}
+{"id": "g0be691b7", "field": "title", "class": "title_standard", "was": "Pre-IPO раунд «Бери заряд!» на платформе Rounds", "now": "Инвесторы pre-IPO купили 15,88% «Бери заряд!»", "tag": "m008"}
+{"id": "g0be691b7", "field": "eco.finadv", "class": "adviser_wrong", "was": "Публично не сообщалось", "now": "Альфа-банк — агент по размещению", "tag": "m008"}
+{"id": "g0be691b7", "field": "eco.context", "class": "language", "was": "сам сервис купил «Яндекс»", "now": "сервис купил «Яндекс»", "tag": "m008"}
+{"id": "g00a0318e", "field": "extra", "class": "unsupported_claim", "was": "Седов продал все акции", "now": "Седов сохранил преобладающую долю, free-float ~15%", "tag": "m008"}
+{"id": "g00a0318e", "field": "law.terms", "class": "foreign_fact", "was": "дивиденды за 2025 год", "now": "lock-up 180 дней", "tag": "m008"}
+{"id": "g00a0318e", "field": "sum", "class": "sum_meaning", "was": "3,5 млрд ₽ (привлечено), капитализация 23,5 млрд ₽", "now": "3,5 млрд ₽", "tag": "m008"}
+{"id": "g3ed36abe", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "SFI (профиль)", "tag": "m008"}
+{"id": "g3ed36abe", "field": "sum", "class": "wrong_sum", "was": "12,5–13,1 млрд ₽ (ожидание)", "now": "13,1 млрд ₽", "tag": "m008"}
+{"id": "g3ed36abe", "field": "eco.val", "class": "unsupported_claim", "was": "P/E 6,8–7, P/B 2,2–2,3, спрос до закрытия книги", "now": "цена 875 ₽, капитализация 105 млрд ₽", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "date", "class": "wrong_date", "was": "2024-02-13", "now": "2024-02-22", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "eco.context", "class": "unsupported_claim", "was": "котировка 1,9 ₽ на 22.08.2026, «одна из самых слабых»", "now": "снято", "tag": "m008"}
+{"id": "gb21ab6d1", "field": "eco.share", "class": "other", "was": "пересказ размещения", "now": "13,14% акций ПАО «АГК»", "tag": "m008"}
+{"id": "g202f49be", "field": "law.struct", "class": "wrong_status", "was": "будущее время («составят»)", "now": "прошедшее", "tag": "m008"}
+{"id": "g202f49be", "field": "extra", "class": "foreign_fact", "was": "фраза из отчета 2025 года", "now": "снята", "tag": "m008"}
+{"id": "gaa7602e7", "field": "type", "class": "wrong_type", "was": "IPO", "now": "Инвестиция", "tag": "m008"}
+{"id": "gaa7602e7", "field": "sum", "class": "wrong_sum", "was": "700–1000 млн ₽ (план)", "now": "900 млн ₽", "tag": "m008"}
+{"id": "gaa7602e7", "field": "date", "class": "wrong_date", "was": "2024-11-11 (день заметки о плане)", "now": "2025-05-19", "tag": "m008"}
+{"id": "gaa7602e7", "field": "title", "class": "title_standard", "was": "Pre-IPO размещение ГК «Цифровые привычки» на 0,7-1 млрд руб.", "now": "Инвесторы pre-IPO купили акции ГК «Цифровые привычки»", "tag": "m008"}
+{"id": "gaa7602e7", "field": "eco.val", "class": "version_as_fact", "was": "«аналитики» без имени", "now": "Артем Тузов (ИВА Партнерс)", "tag": "m008"}
+{"id": "g6a453b19", "field": "type", "class": "wrong_type", "was": "IPO", "now": "Инвестиция", "tag": "m008"}
+{"id": "g6a453b19", "field": "extra", "class": "wrong_status", "was": "книга заявок открыта", "now": "итог 565 млн ₽", "tag": "m008"}
+{"id": "g6a453b19", "field": "eco.finadv", "class": "adviser_wrong", "was": "Публично не сообщалось", "now": "«Альфа-Инвестиции» — агент", "tag": "m008"}
+{"id": "g572a4aca", "field": "eco.fin", "class": "other", "was": "операционные показатели в «Форме расчетов»", "now": "перенесены в показатели", "tag": "m008"}
+{"id": "g572a4aca", "field": "eco.share", "class": "other", "was": "описание ломбарда", "now": "14,6% акций ПАО «МГКЛ»", "tag": "m008"}
+{"id": "g5f24bb26", "field": "extra", "class": "foreign_fact", "was": "падение до 103,25 ₽ на старте торгов; половина — допэмиссия", "now": "падение — апрель 2026 после дефолта; вся сумма — допэмиссия", "tag": "m008"}
+{"id": "g5f24bb26", "field": "eco.fin", "class": "unsupported_claim", "was": "обрывок про иски на 12 млрд ₽", "now": "снято", "tag": "m008"}
