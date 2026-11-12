@@ -1901,3 +1901,96 @@
 {"id": "gb89d3a84", "field": "title", "class": "title_standard", "was": "купило долю в ООО «ВТС»", "now": "купило ООО «ВТС»", "tag": "m101"}
 {"id": "gb89d3a84", "field": "sum", "class": "sum_meaning", "was": "1,2-1,3 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка аналитика — в eco.val)", "tag": "m101"}
 {"id": "gb89d3a84", "field": "date", "class": "wrong_date", "was": "2026-11-09 (публикация)", "now": "2026-10-19 (запись в ЕГРЮЛ)", "tag": "m101"}
+{"id": "g2d90c4d5", "field": "asset", "class": "wrong_target", "was": "asset: «100% акций АО «ИНГ Банк (Евразия)»», доля пуста", "now": "asset — имя АО, eco.share «100% акций АО …»", "tag": "m102"}
+{"id": "cb7eb501d", "field": "asset", "class": "wrong_target", "was": "eco.share пуст", "now": "99,999% доли в ООО «Форвард» (владелец трех заводов)", "tag": "m102"}
+{"id": "gee625a0f", "field": "asset", "class": "wrong_target", "was": "asset «100% ООО «Красная руда»», доля пуста", "now": "asset — имя ООО, eco.share «100% доли в ООО …»", "tag": "m102"}
+{"id": "g0710e7a1", "field": "asset", "class": "wrong_target", "was": "asset с описанием «(киносеть «Каро»)», доля пуста", "now": "имя ООО; 100% доли", "tag": "m102"}
+{"id": "gb5b08042", "field": "asset", "class": "wrong_target", "was": "asset «ПАО «УралАТИ» и шесть связанных компаний, включая…»", "now": "семь обществ по именам; акции и доли", "tag": "m102"}
+{"id": "g9b31784c", "field": "asset", "class": "wrong_target", "was": "asset с описанием «(нотное издательство и нотный архив)»", "now": "три общества по именам; 10 849 акций и доли", "tag": "m102"}
+{"id": "g06adc4cc", "field": "asset", "class": "wrong_target", "was": "asset «Холдинг КИМП: подшипниковые заводы …»", "now": "три общества по именам; доли и акции", "tag": "m102"}
+{"id": "ge28cd031", "field": "asset", "class": "wrong_target", "was": "asset «ГК «Элма» (АО «Элма» и складские и технопарки)…»", "now": "АО «Элма» и компания «Прамо»", "tag": "m102"}
+{"id": "gb03ecf13", "field": "asset", "class": "wrong_target", "was": "asset «Акции АО «Костромская верфь» (Кострома) — судостроительного предприятия»", "now": "АО «Костромская верфь»; описание в контекст", "tag": "m102"}
+{"id": "g5efa722b", "field": "asset", "class": "wrong_target", "was": "asset «Рыбопромысловые компании … (Мурманск)»", "now": "три общества по именам; акции и доля", "tag": "m102"}
+{"id": "g00f36bab", "field": "asset", "class": "wrong_target", "was": "asset «100% долей ООО «Аппетит»», доля пуста", "now": "asset — имя ООО, eco.share «100% долей ООО …»", "tag": "m102"}
+{"id": "cb7eb501d", "field": "eco.sum", "class": "sum_meaning", "was": "Не разглашается (возможная сумма — от 10 до 13 млрд руб.)", "now": "Не раскрыта; оценки экспертов — в eco.val", "tag": "m102"}
+{"id": "cb7eb501d", "field": "law.struct", "class": "language", "was": "«купила не сами заводы»", "now": "«Заводы «Свеза» купила через ООО «Форвард»»", "tag": "m102"}
+{"id": "gee625a0f", "field": "title", "class": "title_standard", "was": "«…купила «Красную руду» с лицензиями на Алтае»", "now": "«…купила 100% ООО «Красная руда»»", "tag": "m102"}
+{"id": "g00f36bab", "field": "title", "class": "title_standard", "was": "«…купило у Антона Дулова сеть готовой еды Uppetit»", "now": "«…купило 100% ООО «Аппетит»»", "tag": "m102"}
+{"id": "g6729202e", "field": "title", "class": "title_standard", "was": "«…возвращен государству…»", "now": "«Здания … истребованы в пользу государства»", "tag": "m102"}
+{"id": "gb03ecf13", "field": "title", "class": "title_standard", "was": "«Акции … обращены в доход государства» при статусе «Обсуждается»", "now": "«Арбитражный суд решил обратить акции … в доход государства»", "tag": "m102"}
+{"id": "g65d042bc", "field": "title", "class": "version_as_fact", "was": "Структура Александра Ткачева выкупила долги…", "now": "«Восточный актив» купил у Сбербанка долги завода «Сокра»", "tag": "m050"}
+{"id": "g65d042bc", "field": "date", "class": "wrong_date", "was": "2023-08-01 (выдуманное 1-е число)", "now": "2023", "tag": "m050"}
+{"id": "g65d042bc", "field": "eco.share", "class": "other", "was": "описание завода вместо предмета", "now": "права требования Сбербанка к заводу", "tag": "m050"}
+{"id": "g65d042bc", "field": "law.struct", "class": "unsupported_claim", "was": "«Прежние учредители», «по данным СПАРК»", "now": "учредители по ЕГРЮЛ на 1 марта 2024", "tag": "m050"}
+{"id": "g65d042bc", "field": "buyer.desc", "class": "profile_text", "was": "Структура Александра Ткачева и Евгения Свистулы", "now": "компания Евгения Свистулы; Ткачев — по неофициальным данным", "tag": "m050"}
+{"id": "g5792754e", "field": "sum", "class": "sum_meaning", "was": "40–60 млн ₽ (по оценке)", "now": "Не раскрыта; оценка Бурмистрова — в eco.val", "tag": "m050"}
+{"id": "g5792754e", "field": "date", "class": "wrong_date", "was": "2023-08-01", "now": "2023-08-10 (ЕГРЮЛ)", "tag": "m050"}
+{"id": "g5792754e", "field": "eco.val", "class": "unsupported_claim", "was": "«по оценке экспертов» без имени", "now": "Михаил Бурмистров (Infoline), другие — 15–60 млн ₽", "tag": "m050"}
+{"id": "g5792754e", "field": "title", "class": "title_standard", "was": "Эксмо приобрела 51% издательства Popcorn Books", "now": "«Эксмо» купило 51% Popcorn Books", "tag": "m050"}
+{"id": "g424715f8", "field": "extra", "class": "unsupported_claim", "was": "в июле 2022 года довела долю в «Заре» до 90%; детали «Лойд-Фиш»", "now": "90% «Зари» за 6,2 млрд ₽ куплены в 2021 году; выход «Краунинвеста» по ЕГРЮЛ в октябре 2024", "tag": "m050"}
+{"id": "g424715f8", "field": "title", "class": "title_standard", "was": "АФК «Система» продала 22,5% … компании АО «Краунинвест»", "now": "«Краунинвест» купил 22,5% рыбного холдинга «Восход» у АФК «Система»", "tag": "m050"}
+{"id": "g424715f8", "field": "eco.share", "class": "other", "was": "—", "now": "22,5% долей в ООО «Рыбопромышленный холдинг «Восход»»", "tag": "m050"}
+{"id": "g937b94f4", "field": "sum", "class": "sum_meaning", "was": "200–250 млн ₽ (по оценке)", "now": "Не раскрыта; оценка Шуляка — в eco.val", "tag": "m050"}
+{"id": "g937b94f4", "field": "seller", "class": "party_text_no_profile", "was": "пусто", "now": "Компания «Инвитро Холдинг Лимитед» (ЕГРЮЛ)", "tag": "m050"}
+{"id": "g937b94f4", "field": "eco.rationale", "class": "invented_rationale", "was": "версия Габышева о финансировании «Инвитро»", "now": "— (версия — в контексте)", "tag": "m050"}
+{"id": "g937b94f4", "field": "eco.context", "class": "unsupported_claim", "was": "рост сети в 2024–2026 годах, гендиректор", "now": "снято", "tag": "m050"}
+{"id": "g937b94f4", "field": "title", "class": "title_standard", "was": "Продажа сети ветеринарных клиник Vet Union (Инвитро) Дмитрию Кокину", "now": "Дмитрий Кокин купил сеть ветклиник Vet Union у «Инвитро»", "tag": "m050"}
+{"id": "ga1f2b443", "field": "title", "class": "title_standard", "was": "УльтимаТек приобрел доли в Датана и Датабриз", "now": "«УльтимаТек» купил 50% «Датаны» и 49% «Датабриза»", "tag": "m051"}
+{"id": "ga1f2b443", "field": "date", "class": "wrong_date", "was": "2023-07-01", "now": "2023 (июль 2023, дня нет)", "tag": "m051"}
+{"id": "ga1f2b443", "field": "eco.target_fin", "class": "language", "was": "теряла деньги, впервые вышла в плюс", "now": "числами по ФНС и TAdviser", "tag": "m051"}
+{"id": "ged59a2eb", "field": "buyer", "class": "party_text_no_profile", "was": "покупатель пуст", "now": "Southern Sea Investment (новый профиль)", "tag": "m051"}
+{"id": "ged59a2eb", "field": "extra", "class": "unsupported_claim", "was": "Southern Sea выкупила долю ВТБ (45%)", "now": "по Интерфаксу — не у ВТБ, а у якорного инвестора допэмиссии", "tag": "m051"}
+{"id": "ged59a2eb", "field": "eco.context", "class": "unsupported_claim", "was": "сделку закрыли за несколько дней до комментария", "now": "снято", "tag": "m051"}
+{"id": "ged59a2eb", "field": "eco.rationale", "class": "invented_rationale", "was": "механика сделки вместо мотива", "now": "снято", "tag": "m051"}
+{"id": "ged59a2eb", "field": "date", "class": "wrong_date", "was": "2023-07-01", "now": "2023", "tag": "m051"}
+{"id": "ged59a2eb", "field": "title", "class": "title_standard", "was": "Оманский инвестфонд инвестировал в Деметра-холдинг через допэмиссию", "now": "Southern Sea Investment купила долю в «Деметра-Холдинге»", "tag": "m051"}
+{"id": "ged59a2eb", "field": "target", "class": "profile_wrong_inn", "was": "ИНН 2370005261 (ООО «АПХ «Деметра», однофамилец)", "now": "ИНН 7703467183 ООО «Деметра-Холдинг»", "tag": "m051"}
+{"id": "g9ec93147", "field": "seller", "class": "wrong_seller", "was": "Олег Романович Рыбалов и Сбербанк", "now": "АО МЦ «Сова комфорт» и ООО «Сбербанк инвестиции»", "tag": "m051"}
+{"id": "g9ec93147", "field": "eco.rationale", "class": "invented_rationale", "was": "сделка позволит расширить присутствие (как факт)", "now": "по оценке «Ведомостей»", "tag": "m051"}
+{"id": "g9ec93147", "field": "eco.context", "class": "unsupported_claim", "was": "похоже на техническое управление залогом", "now": "снято", "tag": "m051"}
+{"id": "g9ec93147", "field": "target", "class": "profile_wrong_inn", "was": "ИНН держателя 90,01% АО МЦ «Сова комфорт»", "now": "brand_needs_inn, юрлицо ООО «Медицинская клиника «Сова»»", "tag": "m051"}
+{"id": "g3d73bbfc", "field": "buyer", "class": "wrong_buyer", "was": "Владимир Воронин", "now": "ФСК (ООО «Группа ФСК»)", "tag": "m051"}
+{"id": "g3d73bbfc", "field": "extra", "class": "wrong_target", "was": "STiS — стекольные заводы в семи городах", "now": "восемь площадок по выпуску стеклопакетов", "tag": "m051"}
+{"id": "g3d73bbfc", "field": "eco.context", "class": "unsupported_claim", "was": "Воронин лично выкупил Guardian", "now": "группа стала владельцем заводов Guardian", "tag": "m051"}
+{"id": "gaa0f4fb7", "field": "seller", "class": "wrong_seller", "was": "МКООО «Винда Лимитед» и венчурный фонд Add Venture", "now": "не назван (Винда — владелец юрлица, Add Venture — ранний инвестор)", "tag": "m045"}
+{"id": "gaa0f4fb7", "field": "date", "class": "wrong_date", "was": "2023-12-01 (заглушка)", "now": "2024-02-01, дата сообщения Forbes", "tag": "m045"}
+{"id": "gaa0f4fb7", "field": "sum", "class": "sum_meaning", "was": "4–4,5 млрд ₽ без пометки", "now": "4–4,5 млрд ₽ (по оценке)", "tag": "m045"}
+{"id": "gaa0f4fb7", "field": "eco.rationale", "class": "verbatim", "was": "слова Бурмистрова почти дословно без кавычек", "now": "пересказ с атрибуцией", "tag": "m045"}
+{"id": "gaa0f4fb7", "field": "extra", "class": "unsupported_claim", "was": "выход в Воронеж, Казань, Нижний Новгород — нет в источниках", "now": "снято", "tag": "m045"}
+{"id": "geda130b6", "field": "extra", "class": "unsupported_claim", "was": "«в июне 2024 года Чайка выкупил у Сеюкова 50% и довел долю до 99%»", "now": "по ЕГРЮЛ оба вышли, доли перешли компаниям группы", "tag": "m045"}
+{"id": "geda130b6", "field": "extra", "class": "foreign_fact", "was": "британские санкции против Чайки по «Нерудной компании Бердяуш»", "now": "снято", "tag": "m045"}
+{"id": "geda130b6", "field": "eco.context", "class": "unsupported_claim", "was": "«из капитала на деле не уходил» — нет в источниках", "now": "снято", "tag": "m045"}
+{"id": "geda130b6", "field": "title", "class": "title_standard", "was": "Артем Чайка приобрел 49% основного юрлица 3S Group", "now": "Артем Чайка купил 49% 3S Group", "tag": "m045"}
+{"id": "g9016d7ac", "field": "eco.val", "class": "wrong_sum", "was": ",015 млрд приписаны Кирсанову за 8,5 млн акций", "now": "общая сумма за пакет; Ломакин 290,5 млн по $3,41, Кирсанов 8,5 млн по $2,94", "tag": "m045"}
+{"id": "g9016d7ac", "field": "date", "class": "wrong_date", "was": "2023-12-01 (заглушка)", "now": "2023", "tag": "m045"}
+{"id": "g9016d7ac", "field": "extra", "class": "unsupported_claim", "was": "выручка и прибыль за 2025 год — нет в источниках", "now": "снято", "tag": "m045"}
+{"id": "g9016d7ac", "field": "eco.rationale", "class": "other", "was": "причина выхода продавца в «Цели сделки»", "now": "перенесено в контекст", "tag": "m045"}
+{"id": "g1e2b16c3", "field": "sum", "class": "sum_meaning", "was": "7,5–9,8 млрд ₽ (оценка аналитика)", "now": "Не раскрыта, оценка — в eco.val", "tag": "m045"}
+{"id": "g1e2b16c3", "field": "date", "class": "wrong_date", "was": "2023-12-01 (заглушка)", "now": "2023-12-26 (ЕГРЮЛ)", "tag": "m045"}
+{"id": "g1e2b16c3", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив продавца вместо цели покупателя", "now": "слова Торстена Шуберта о синергии", "tag": "m045"}
+{"id": "g1e2b16c3", "field": "eco.context", "class": "foreign_fact", "was": "согласование продажи холдинга «Севергрупп»", "now": "снято; поздняя судьба — в extra без согласования", "tag": "m045"}
+{"id": "g1e2b16c3", "field": "extra", "class": "unsupported_claim", "was": "«завод возобновил работу в ноябре 2024 года под Gislaved» — нет в источниках", "now": "снято", "tag": "m045"}
+{"id": "g19186bb9", "field": "eco.val", "class": "other", "was": "финансы предмета в «Оценке»; убыток 2021 года без источника", "now": "—", "tag": "m045"}
+{"id": "g19186bb9", "field": "title", "class": "title_standard", "was": "ВымпелКом через ООО Хайв купил контрольную долю в разработчике…", "now": "«Вымпелком» купил 50,01% T.one", "tag": "m045"}
+{"id": "g3db7d882", "field": "buyer", "class": "wrong_buyer", "was": "РумелкоАгро (ООО «Румелко-Агро», ИНН 6909008255)", "now": "ООО «Румелко» (ИНН 7727160666) — новый профиль", "tag": "m045"}
+{"id": "g3db7d882", "field": "eco.sum", "class": "sum_meaning", "was": "фраза статьи вместо суммы", "now": "589 млн ₽", "tag": "m045"}
+{"id": "g3db7d882", "field": "title", "class": "title_standard", "was": "копия заголовка Интерфакса с неверным покупателем", "now": "«Румелко» купил 80% «Кашина луга»", "tag": "m045"}
+{"id": "g3db7d882", "field": "extra", "class": "foreign_fact", "was": "покупка «Прогресса» структурами Лисина, версии источников", "now": "снято", "tag": "m045"}
+{"id": "g5f0d5d18", "field": "date", "class": "wrong_date", "was": "2024-12-19 (торги)", "now": "2025-03-06 (переход в ЕГРЮЛ)", "tag": "m052"}
+{"id": "g5f0d5d18", "field": "sum", "class": "sum_meaning", "was": "Более 1 млрд ₽ (стартовая цена)", "now": "Не раскрыта; стартовая цена — в оценке", "tag": "m052"}
+{"id": "g5f0d5d18", "field": "eco.context", "class": "unsupported_claim", "was": "неудачные попытки продажи; покупка у «Ростагро-Саратов» за 2,75 млрд ₽", "now": "снято", "tag": "m052"}
+{"id": "g5f0d5d18", "field": "extra", "class": "verbatim", "was": "пересказ объявления 2023 года", "now": "связь «Реста» с ГАП «Ресурс»", "tag": "m052"}
+{"id": "g5f0d5d18", "field": "title", "class": "title_standard", "was": "Банк «Траст» продал компании «Рест» земельный актив…", "now": "«Рест» купил «ТрастАгро-Нива 4» у банка «Траст»", "tag": "m052"}
+{"id": "g5f0d5d18", "field": "desc", "class": "profile_text", "was": "Руслана Беретаря, оптовая торговля мясом", "now": "руководитель — Руслан Беретар", "tag": "m052"}
+{"id": "gfda775ad", "field": "date", "class": "wrong_date", "was": "2023-07-18 (открытие центра)", "now": "2023", "tag": "m052"}
+{"id": "gfda775ad", "field": "eco.target_fin", "class": "other", "was": "финансы продавца ЕМС", "now": "перенесены в финансовый контекст", "tag": "m052"}
+{"id": "gfda775ad", "field": "eco.rationale", "class": "invented_rationale", "was": "размер сети покупателя", "now": "—", "tag": "m052"}
+{"id": "gfda775ad", "field": "desc", "class": "profile_text", "was": "«вела переговоры о покупке»", "now": "описание сети", "tag": "m052"}
+{"id": "gfe16916c", "field": "buyer", "class": "wrong_buyer", "was": "Владимир Якушин", "now": "ООО «Нортекс» (по ЕГРЮЛ)", "tag": "m052"}
+{"id": "gfe16916c", "field": "eco.share", "class": "wrong_share", "was": "состояние после сделки, «владелец — Якушин»", "now": "100% ООО «Ланксесс» — владельца завода", "tag": "m052"}
+{"id": "gfe16916c", "field": "law.struct", "class": "wrong_seller", "was": "учредители «Ланксесс Липецк» — Lanxess Deutschland", "now": "продавались доли ООО «Ланксесс»", "tag": "m052"}
+{"id": "gfe16916c", "field": "title", "class": "title_standard", "was": "Lanxess продал завод в Липецке Владимиру Якушину", "now": "«Нортекс» купил «Ланксесс Липецк» у Lanxess", "tag": "m052"}
+{"id": "g6f678b73", "field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка 2022 года 72,4 млн ₽", "now": "снята", "tag": "m052"}
+{"id": "g6f678b73", "field": "extra", "class": "foreign_fact", "was": "«позволит выйти на вторичный рынок»", "now": "рост базы объектов по расчету Волкова", "tag": "m052"}
+{"id": "g6f678b73", "field": "law.terms", "class": "other", "was": "интеграция после сделки", "now": "перенесена в контекст", "tag": "m052"}
+{"id": "g6f678b73", "field": "title", "class": "title_standard", "was": "ГК «Самолет» приобрела сеть риэлторских агентств «Золтор»", "now": "«Самолет Плюс» купил «Золтор»", "tag": "m052"}
