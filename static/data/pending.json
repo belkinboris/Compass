@@ -2307,13 +2307,17 @@
     [
      "Фонтанка",
      "https://www.fontanka.ru/2026/11/12/76760106/"
+    ],
+    [
+     "РИА Новости",
+     "https://ria.ru/20261112/sapfir-2131009864.html"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "$4,9 млн",
     "share": "Камень в 197,8 карата закреплен в геометрическом браслете с бриллиантами и горным хрусталем — украшение создал дом Cartier в стиле ар-деко.",
-    "val": "—",
+    "val": "До торгов эксперты называли вилку от одного до двух миллионов долларов — продажная цена ушла далеко за верхнюю границу.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
@@ -2357,74 +2361,10 @@
    "pending_since": "2026-11-12T05:25:01+00:00",
    "proofread_absorbed": {
     "eco.share": [],
-    "eco.context": []
+    "eco.context": [],
+    "eco.val": []
    },
    "reviewed": "2026-11-12"
-  },
-  {
-   "id": "g093c4c6f",
-   "date": "2026-11-12",
-   "title": "Сапфир из коллекции дома Романовых продали почти за пять миллионов долларов",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "РИА Новости",
-     "https://ria.ru/20261112/sapfir-2131009864.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Сапфир из коллекции дома Романовых",
-   "asset": "почти за пять миллионов долларов",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-12",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "РИА Новости",
-      "https://ria.ru/20261112/sapfir-2131009864.html"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "почти за пять миллионов долларов",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://ria.ru/20261112/sapfir-2131009864.html"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Сапфир из коллекции дома Романовых",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://ria.ru/20261112/sapfir-2131009864.html"
-     }
-    ]
-   },
-   "pending_since": "2026-11-12T05:53:43+00:00"
   },
   {
    "id": "g15bf116b",
