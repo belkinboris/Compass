@@ -1505,6 +1505,20 @@
    "strength": "strong"
   },
   {
+   "id": "sc4308194c",
+   "company_id": "gf7340794",
+   "date": "2026",
+   "kind": "investor",
+   "summary": "Balchug Capital — не исключает привлечения партнера (продавать активы не собирается)",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/10/12/2025/693849079a79472b89f59814"
+   ],
+   "origin": "card_text",
+   "deal_id": "g934ee51b",
+   "strength": "normal"
+  },
+  {
    "id": "s52354b96c",
    "company_id": "g4a98b303",
    "date": "2025-12-31",
@@ -1533,34 +1547,6 @@
    "strength": "normal"
   },
   {
-   "id": "sdb3d2b762",
-   "company_id": "yandex",
-   "date": "2025-12-23",
-   "kind": "buy",
-   "summary": "Яндекс — обсуждается покупка: платформа DIKIDI",
-   "source": [
-    "CNews",
-    "https://www.cnews.ru/news/line/2025-12-23_yandeks_pokupaet_dikidi_"
-   ],
-   "origin": "card",
-   "deal_id": "g596c8144",
-   "strength": "normal"
-  },
-  {
-   "id": "s5d0e2d827",
-   "company_id": "g68dceb64",
-   "date": "2025-12-23",
-   "kind": "for_sale",
-   "summary": "платформа DIKIDI — обсуждается продажа компании или доли; возможный покупатель — Яндекс",
-   "source": [
-    "CNews",
-    "https://www.cnews.ru/news/line/2025-12-23_yandeks_pokupaet_dikidi_"
-   ],
-   "origin": "card",
-   "deal_id": "g596c8144",
-   "strength": "strong"
-  },
-  {
    "id": "s9df81d45a",
    "company_id": "g75ffe423",
    "date": "2025-12-16",
@@ -1575,11 +1561,25 @@
    "strength": "strong"
   },
   {
+   "id": "scc6287456",
+   "company_id": "ga0716421",
+   "date": "2025-12-02",
+   "kind": "for_sale",
+   "summary": "ООО «Ширинское» — обсуждается продажа компании или доли",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/12/02/1159739-nornikel-planiruet-prodat-proekt-po-dobiche-zolota"
+   ],
+   "origin": "card",
+   "deal_id": "g352131ac",
+   "strength": "strong"
+  },
+  {
    "id": "s026113e2b",
    "company_id": "g2f93d858",
    "date": "2025-12-02",
    "kind": "sell",
-   "summary": "Норильский никель — обсуждается продажа: проект добычи золота Быстринско-Ширинское",
+   "summary": "Норильский никель — обсуждается продажа: ООО «Ширинское»",
    "source": [
     "Ведомости",
     "https://www.vedomosti.ru/business/articles/2025/12/02/1159739-nornikel-planiruet-prodat-proekt-po-dobiche-zolota"
@@ -1601,20 +1601,6 @@
    "origin": "card",
    "deal_id": "c7403d4db",
    "strength": "strong"
-  },
-  {
-   "id": "sc4308194c",
-   "company_id": "gf7340794",
-   "date": "2025-12-01",
-   "kind": "investor",
-   "summary": "Balchug Capital — не исключает привлечения партнера (продавать активы не собирается)",
-   "source": [
-    "РБК",
-    "https://www.rbc.ru/business/10/12/2025/693849079a79472b89f59814"
-   ],
-   "origin": "card_text",
-   "deal_id": "g934ee51b",
-   "strength": "normal"
   },
   {
    "id": "s81ce08c0d",

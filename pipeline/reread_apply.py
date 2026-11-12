@@ -11,7 +11,7 @@
 проверки красные, и печатает короткий итог. Команда повторяема: записанные правки
 пропускаются, отметки ставятся тем карточкам, что еще без них.
 
-    python3 pipeline/reread_apply.py <план.json>            # сухой прогон
+    python3 pipeline/reread_apply.py <план.json>            # репетиция в своей копии, без замка
     python3 pipeline/reread_apply.py <план.json> --write
 
 План (пишет помощник, читавший партию):
@@ -49,8 +49,25 @@ ATTRIBUTION = ('\n\nCo-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>\n'
                'Claude-Session: https://claude.ai/code/session_01XhWnVZv9GScsFsvaXEfC2i')
 
 
+LOG = '/tmp/reread_apply.log'
+_T = {'tag': '?', 'steps': []}
+
+
+def note(text):
+    """Строка в общий журнал записи партий: кто, когда, чем кончилось, сколько шел шаг."""
+    try:
+        with open(LOG, 'a', encoding='utf-8') as f:
+            f.write('%s %s %s\n' % (time.strftime('%H:%M:%S'), _T['tag'], text))
+    except OSError:
+        pass
+
+
 def run(cmd, env=None, timeout=1500):
+    t = time.time()
     r = subprocess.run(cmd, cwd=ROOT, env=env, capture_output=True, text=True, timeout=timeout)
+    name = os.path.basename(cmd[1]) if len(cmd) > 1 and cmd[0] != 'git' else ' '.join(cmd[:2])
+    if time.time() - t > 5:
+        _T['steps'].append('%s %dс' % (name, time.time() - t))
     return r.returncode, (r.stdout or '') + (r.stderr or '')
 
 
@@ -75,6 +92,12 @@ def stamped(ids):
 
 def fail(step, out, write):
     print('СТОП на шаге «%s»:\n%s' % (step, tail(out)))
+    if write and '--local' in sys.argv:
+        print('Это репетиция в своей копии — база не тронута. Почините причину и повторите.')
+        return 1
+    if write:
+        last = [l for l in out.strip().splitlines() if l.strip()][-3:]
+        note('СТОП «%s» | %s | %s' % (step, ' / '.join(l.strip()[:140] for l in last), '; '.join(_T['steps'])))
     if write:
         revert()
         print('Рабочая папка возвращена к последнему коммиту. Файлы правок партии целы — '
@@ -82,11 +105,53 @@ def fail(step, out, write):
     return 1
 
 
+def rehearse(plan_path, plan):
+    """Репетиция записи в своей копии репозитория, без замка (12 ноября 2026).
+
+    Запись под замком — одна полоса на всех; пока партия узнавала о красной проверке
+    только в ее конце, каждая неудача съедала у всех по четыре минуты, и очередь стояла.
+    Репетиция делает те же шаги до коммита в отдельной рабочей копии свежего main:
+    правки, проза, разовые скрипты, отметки, цитаты у фактов, проверки данных. Прошла —
+    запись под замком почти наверняка пройдет с первого раза."""
+    import shutil
+    tag = plan['tag']
+    wt = '/tmp/reread_rehearse_%s' % tag
+    run(['git', 'worktree', 'remove', '--force', wt])
+    shutil.rmtree(wt, ignore_errors=True)
+    run(['git', 'fetch', '-q', 'origin', 'main'])
+    code, out = run(['git', 'worktree', 'add', '--force', '--detach', wt, 'origin/main'])
+    if code:
+        print('Репетиция не началась (git worktree):\n' + tail(out, 5))
+        return 1
+    try:
+        inbox = os.path.join(wt, 'data', 'inbox')
+        shutil.rmtree(inbox, ignore_errors=True)
+        os.makedirs(os.path.dirname(inbox), exist_ok=True)
+        os.symlink(os.path.join(ROOT, 'data', 'inbox'), inbox)
+        fx = os.path.join('pipeline', 'ingest', 'fixes')
+        for fn in os.listdir(os.path.join(ROOT, fx)):
+            if tag in fn and fn.endswith('.py'):
+                shutil.copy(os.path.join(ROOT, fx, fn), os.path.join(wt, fx, fn))
+        for sc in plan.get('scripts') or []:
+            os.makedirs(os.path.dirname(os.path.join(wt, sc)), exist_ok=True)
+            shutil.copy(os.path.join(ROOT, sc), os.path.join(wt, sc))
+        shutil.copy(os.path.join(ROOT, 'pipeline', 'reread_apply.py'), os.path.join(wt, 'pipeline', 'reread_apply.py'))
+        r = subprocess.run([sys.executable, os.path.join(wt, 'pipeline', 'reread_apply.py'), plan_path, '--write', '--local'],
+                           cwd=wt, capture_output=True, text=True, timeout=1500)
+        print((r.stdout or '') + (r.stderr or '')[-1500:])
+        return r.returncode
+    finally:
+        run(['git', 'worktree', 'remove', '--force', wt])
+        shutil.rmtree(wt, ignore_errors=True)
+
+
 def main(argv):
     write = '--write' in argv
+    local = '--local' in argv            # репетиция: своя копия, без замка, коммита и push
     plan_path = [a for a in argv if not a.startswith('--')][0]
     plan = json.load(open(plan_path, encoding='utf-8'))
     tag, ids = plan['tag'], plan['ids']
+    _T['tag'] = tag
     assert tag and len(tag) >= 3 and ids, 'в плане нужны tag и ids'
     bad_cls = sorted({e.get('class') for e in plan.get('errors') or []} - set(CLASSES))
     assert not bad_cls, 'неизвестные классы ошибок: %s (допустимые: %s)' % (bad_cls, ', '.join(CLASSES))
@@ -95,15 +160,18 @@ def main(argv):
 
     # Сухой прогон базу не пишет — замок ему не нужен (12 ноября 2026: сухие прогоны
     # стояли в очереди за записью чужих партий по двадцать минут).
-    if write:
+    if not write:
+        return rehearse(plan_path, plan)
+    if write and not local:
         lock = open(LOCK, 'w')
         t0 = time.time()
         fcntl.flock(lock, fcntl.LOCK_EX)
         waited = int(time.time() - t0)
         if waited > 5:
             print('Ждали замок %d с.' % waited)
+        note('замок взят, ждали %d с' % waited)
 
-    if write:
+    if write and not local:
         left = dirty_tracked()
         if left:
             print('В рабочей папке чужие незаписанные правки отслеживаемых файлов — возвращаю к коммиту:\n'
@@ -138,15 +206,11 @@ def main(argv):
     stamp_cmd = [py, 'pipeline/reread_queue.py', '--stamp', plan['answers']] + (['--write'] if write else [])
     code, out = run(stamp_cmd, env=env)
     refusals = [l for l in out.splitlines() if 'ОТКАЗ' in l or l.strip().startswith('- ')]
-    if code:
+    # Отказ в отметке одной карточке — не сбой партии: остальные отметки и правки записываются,
+    # причина отказа уходит в отчет. (До 12 ноября 2026 код возврата 1 при отказе откатывал всю
+    # партию: m004 шесть раз подряд занимала полосу записи по 13 минут из-за одной карточки.)
+    if code and 'ответов' not in out:
         return fail('отметки (reread_queue.py --stamp)', out, write)
-    if not write:
-        print('Сухой прогон прошел: правки и проза принимаются.')
-        if refusals:
-            print('Отметку не получат (в сухом прогоне правки еще не записаны — отказ «правки не записаны» '
-                  'здесь ожидаем, остальные надо разобрать):\n' + '\n'.join('      ' + l.strip()[:260] for l in refusals))
-        return 0
-
     code, out = run([py, 'pipeline/fact_edit_guard.py'], env=env)
     if code:
         return fail('цитата у каждой правки факта (fact_edit_guard.py)', out, True)
@@ -163,6 +227,17 @@ def main(argv):
     if code:
         return fail('проверки данных (prepush_check.py)', out, True)
 
+    if local:
+        done = stamped(ids)
+        print('РЕПЕТИЦИЯ ПРОШЛА: правки, проза и скрипты записываются, проверки данных зеленые; '
+              'отметку получат %d из %d карточек.' % (len(done), len(ids)))
+        missing = [i for i in ids if i not in done]
+        if missing:
+            print('Без отметки останутся: %s' % ', '.join(missing))
+        if refusals:
+            print('Причины отказа в отметке:\n' + '\n'.join('      ' + l.strip()[:260] for l in refusals))
+        print('Теперь запись: та же команда с ключом --write.')
+        return 0
     if plan.get('errors'):
         with open(ERRORS, 'a', encoding='utf-8') as f:
             for e in plan['errors']:
@@ -179,7 +254,7 @@ def main(argv):
     code, out = run(['git', 'commit', '-q', '-m', msg + ATTRIBUTION])
     if code and 'nothing to commit' not in out and 'нечего коммитить' not in out:
         return fail('git commit', out, False)
-    run([py, 'pipeline/publication_busy.py', '--wait', '40'])
+    run([py, 'pipeline/publication_busy.py', '--wait', '20'])
     for i in range(4):
         code, out = run(['git', 'pull', '-q', '--rebase', 'origin', 'main'])
         if code:
@@ -193,6 +268,8 @@ def main(argv):
     else:
         print('ВНИМАНИЕ: push не прошел, коммит остался локально:\n' + tail(out, 6))
         return 1
+    note('ЗАПИСАНО: %s | %s' % (msg, '; '.join(_T['steps'])))
+    fcntl.flock(lock, fcntl.LOCK_UN)          # сверка с реестром ходит в сеть — уже без замка
     code, audit = run([py, 'pipeline/party_registry_audit.py', '--ids'] + list(ids), env=env)
     print('ЗАПИСАНО И ЗАПУШЕНО: %s' % msg)
     missing = [i for i in ids if i not in done]

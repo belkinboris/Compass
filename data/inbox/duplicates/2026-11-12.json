@@ -168,6 +168,37 @@
     "needs_review": true
    },
    "queued": "2026-11-12"
+  },
+  {
+   "key": "https://www.fontanka.ru/2026/11/12/76762144/::g4afd35d0",
+   "candidate_id": "g4afd35d0",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d51698116",
+    "title": "Wildberries&Russ выкупит 75% акций «Библио-Глобуса»",
+    "date": "2026-11-12",
+    "src": [
+     [
+      "web:fontanka.ru",
+      "https://www.fontanka.ru/2026/11/12/76762144/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Wildberries&Russ",
+    "asset": "«Библио-Глобуса»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Wildberries&Russ",
+     "asset": "«Библио-Глобуса»",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-12"
   }
  ]
 }

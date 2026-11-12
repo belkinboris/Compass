@@ -2105,7 +2105,9 @@ def test_signals_file_points_to_real_companies_and_sources(base):
         why = []
         if r.get("company_id") not in known:
             why.append("нет профиля")
-        if not re.fullmatch(r"\d{4}-\d{2}(?:-\d{2})?", str(r.get("date") or "")):
+        # Дата признака берется у карточки, а у карточки может быть известен только год
+        # (правило «нет дня — только год»; вычитка 12 ноября 2026 сняла выдуманный день у g934ee51b).
+        if not re.fullmatch(r"\d{4}(?:-\d{2}(?:-\d{2})?)?", str(r.get("date") or "")):
             why.append("дата")
         if r.get("kind") not in kinds:
             why.append("вид")

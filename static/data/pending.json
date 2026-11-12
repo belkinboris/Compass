@@ -2036,6 +2036,59 @@
     "draft_id": "d29660741",
     "title": "Сбербанк выставил на продажу ТРЦ «Город Лефортово» в Москве"
    }
+  },
+  {
+   "id": "g239b1e0b",
+   "date": "2026-11-12",
+   "title": "«Яндекс Go» вложил 1 млрд руб. в безопасность поездок на самокатах",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1 млрд ₽",
+   "buyer_name": "«Яндекс Go»",
+   "asset": "безопасность поездок на самокатах",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Яндекс Go»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+     }
+    ],
+    "target": [
+     {
+      "value": "безопасность поездок на самокатах",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+     }
+    ]
+   },
+   "pending_since": "2026-11-12T14:16:00+00:00"
   }
  ]
 }
