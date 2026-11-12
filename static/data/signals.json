@@ -651,20 +651,6 @@
    "strength": "strong"
   },
   {
-   "id": "s070986b7b",
-   "company_id": "g444cac01",
-   "date": "2026-08-13",
-   "kind": "investor",
-   "summary": "М.Видео — обсуждается вход инвестора в капитал",
-   "source": [
-    "Ведомости",
-    "https://www.vedomosti.ru/investments/news/2026/08/13/1220924-dopemissiyu-mvideo"
-   ],
-   "origin": "card",
-   "deal_id": "gb5d8a18a",
-   "strength": "normal"
-  },
-  {
    "id": "s79834d9d3",
    "company_id": "gf9a640d2",
    "date": "2026-08-12",
@@ -1334,34 +1320,6 @@
    ],
    "origin": "card",
    "deal_id": "ga5336065",
-   "strength": "strong"
-  },
-  {
-   "id": "s97fea02d7",
-   "company_id": "g6c733a7f",
-   "date": "2026-02-20",
-   "kind": "buy",
-   "summary": "Supplement Group — обсуждается покупка: Лейблпак",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8443530?from=main"
-   ],
-   "origin": "card",
-   "deal_id": "g8dfb3aa0",
-   "strength": "normal"
-  },
-  {
-   "id": "s1eef210b5",
-   "company_id": "g49dc2069",
-   "date": "2026-02-20",
-   "kind": "for_sale",
-   "summary": "Лейблпак — обсуждается продажа компании или доли; возможный покупатель — Supplement Group",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8443530?from=main"
-   ],
-   "origin": "card",
-   "deal_id": "g8dfb3aa0",
    "strength": "strong"
   },
   {
