@@ -485,3 +485,22 @@
 {"id": "g8a67edea", "field": "date", "class": "wrong_date", "was": "2025-12-31 (день указа о временном управлении)", "now": "2026-02-09 (предложение выкупа)", "tag": "m010"}
 {"id": "g8a67edea", "field": "seller", "class": "party_text_no_profile", "was": "продавец пуст", "now": "Rockwool A/S", "tag": "m010"}
 {"id": "g8a67edea", "field": "title", "class": "title_standard", "was": "Выкуп российских активов Rockwool…", "now": "РСА собирается купить российские заводы Rockwool", "tag": "m010"}
+{"id": "gca59a6b6", "field": "eco.sum", "class": "sum_meaning", "was": "2,1 млрд ₽ (по оценке)", "now": "Не раскрыта (чистые активы всей компании по мнению эксперта)", "tag": "m016"}
+{"id": "gca59a6b6", "field": "title", "class": "title_standard", "was": "РФПИ продал долю … турецкой структуре", "now": "La Lorraine Bakery Group купила у РФПИ 15,9% «Ла Лоррен Рус»", "tag": "m016"}
+{"id": "gca59a6b6", "field": "extra", "class": "unsupported_claim", "was": "EV эксперт Neo приравнял; сценарии разбирала BGP Capital", "now": "мнение Ивана Пешкова с автором", "tag": "m016"}
+{"id": "gca59a6b6", "field": "company.ind", "class": "profile_text", "was": "РФПИ: Искусственный интеллект", "now": "Управление активами", "tag": "m016"}
+{"id": "g88304d3a", "field": "title", "class": "title_standard", "was": "РФПИ и УК «Первая» инвестируют 1 млрд руб…", "now": "РФПИ и УК «Первая» купили долю в Medical Visual Systems", "tag": "m016"}
+{"id": "g88304d3a", "field": "ind", "class": "wrong_industry", "was": "Искусственный интеллект", "now": "Здравоохранение", "tag": "m016"}
+{"id": "g88304d3a", "field": "eco.share", "class": "unsupported_claim", "was": "история фонда НТИ (РВК, банк «Россия»)", "now": "доля не раскрыта, владельцы по СПАРК", "tag": "m016"}
+{"id": "g88304d3a", "field": "eco.target_fin", "class": "unsupported_claim", "was": "чистая прибыль 245 млн ₽, темпы", "now": "228,3 млн ₽ (РСБУ)", "tag": "m016"}
+{"id": "g506ea8c4", "field": "eco.sum", "class": "sum_meaning", "was": "10–12 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка BGP Capital всего бизнеса с долгом)", "tag": "m016"}
+{"id": "g506ea8c4", "field": "law.terms", "class": "unsupported_claim", "was": "доля Горбатского в залоге у Курявого", "now": "—", "tag": "m016"}
+{"id": "g506ea8c4", "field": "extra", "class": "unsupported_claim", "was": "Бобров — основатель «Русского лосося»", "now": "совладелец ТД «Балтийский берег»", "tag": "m016"}
+{"id": "g506ea8c4", "field": "title", "class": "title_standard", "was": "Антон Курявый приобрел контрольный пакет … (51% доля), владеющего 100%…", "now": "Антон Курявый купил 51% владельца «Русского лосося»", "tag": "m016"}
+{"id": "g506ea8c4", "field": "eco.val", "class": "unsupported_claim", "was": "оценка без автора", "now": "Пешков (BGP Capital), Шумов", "tag": "m016"}
+{"id": "gee450f17", "field": "eco.target_fin", "class": "unsupported_claim", "was": "более 15 млрд ₽ GMV", "now": "—", "tag": "m016"}
+{"id": "gee450f17", "field": "title", "class": "title_standard", "was": "1С приобрела контрольную долю в ООО «Селлематикс»", "now": "1С купила 51% «Селлематикса»", "tag": "m016"}
+{"id": "g076a2f4e", "field": "eco.sum", "class": "sum_meaning", "was": "3 млрд ₽ (по оценке)", "now": "Не раскрыта; «возможная сумма» — в eco.val с автором", "tag": "m016"}
+{"id": "g076a2f4e", "field": "seller", "class": "wrong_seller", "was": "Группа «Жилкапинвест» (продавец)", "now": "предмет; продавцы — бенефициары Коробов и Румянцев", "tag": "m016"}
+{"id": "g076a2f4e", "field": "eco.share", "class": "verbatim", "was": "«серьезного игрока на рынке Владивостока» без автора", "now": "100% долей компаний группы, 239 тыс. кв. м", "tag": "m016"}
+{"id": "g076a2f4e", "field": "title", "class": "title_standard", "was": "Продажа девелоперских проектов группы «Жилкапинвест» группе Glorax", "now": "GloraX купил «Жилкапинвест»", "tag": "m016"}
