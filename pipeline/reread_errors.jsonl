@@ -740,3 +740,26 @@
 {"id": "g9d9e7ab6", "field": "eco.context", "class": "version_as_fact", "was": "1С вошел в переговоры, «Росатом» и банки заинтересованы", "now": "версии источников, «Росатом» опровергал", "tag": "m021"}
 {"id": "g9d9e7ab6", "field": "title", "class": "title_standard", "was": "«Группа Астра» ведет переговоры о продаже до 20%…", "now": "Стратегический инвестор может купить долю в ПАО «Группа Астра»", "tag": "m021"}
 {"id": "g9d9e7ab6", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "до 20% акций", "tag": "m021"}
+{"id": "ge7ec25e7", "field": "seller", "class": "wrong_seller", "was": "INGKA / профиль «Ingka Centres (портфель ТЦ «Мега»)»", "now": "Ingka Group (новый профиль)", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "target", "class": "profile_text", "was": "профиль предмета «INGKA (склад в Есипово)»", "now": "«Склад IKEA в Есипово»", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "date", "class": "wrong_date", "was": "2024-11-08 (день статьи РБК)", "now": "2024", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "title", "class": "title_standard", "was": "INGKA продала склад в Есипово бизнесмену Роберту Узилову", "now": "Роберт Узилов купил склад IKEA в Есипово", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "eco.val", "class": "version_as_fact", "was": "оценка 16–18 млрд ₽ без автора", "now": "оценка Антона Алябьева (CORE.XP)", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "law.appr", "class": "version_as_fact", "was": "одобрение правкомиссии фактом", "now": "по неофициальным данным", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "eco.context", "class": "version_as_fact", "was": "«приспособить оказалось крайне сложно» фактом", "now": "по словам трех консультантов", "tag": "m026"}
+{"id": "ge7ec25e7", "field": "extra", "class": "unsupported_claim", "was": "«Это последний актив INGKA в России»", "now": "после продажи еще трех юрлиц через несколько дней", "tag": "m026"}
+{"id": "g42e11ded", "field": "target", "class": "profile_wrong_company", "was": "профиль ООО «Атлант» группы «Трансфин-М» (ИНН 7719806667)", "now": "новый профиль петербургского ООО «Атлант»", "tag": "m026"}
+{"id": "g42e11ded", "field": "eco.context", "class": "foreign_fact", "was": "покупки «Транслеса» и Грузовой компании «Атлантом» «Трансфин-М»", "now": "сняты, оговорка, что это другой «Атлант»", "tag": "m026"}
+{"id": "g42e11ded", "field": "src", "class": "source_not_about", "was": "Ведомости 25.06.2025, РБК Кубань", "now": "сняты", "tag": "m026"}
+{"id": "g42e11ded", "field": "eco.target_fin", "class": "unsupported_claim", "was": "прибыль «вдвое меньше» выручки", "now": "прибыль снизилась вдвое к прошлому году", "tag": "m026"}
+{"id": "g42e11ded", "field": "eco.fin", "class": "other", "was": "размер парка группы в «Форме расчетов»", "now": "—, факты — в контекст", "tag": "m026"}
+{"id": "g42e11ded", "field": "eco.share", "class": "other", "was": "описание парка вагонов", "now": "100% долей в ООО «Атлант»", "tag": "m026"}
+{"id": "g42e11ded", "field": "title", "class": "title_standard", "was": "«Деметра-Холдинг» приобрел 100% железнодорожного оператора «Атлант»", "now": "«Деметра-Холдинг» купил 100% петербургского оператора «Атлант»", "tag": "m026"}
+{"id": "gc9f8d104", "field": "date", "class": "wrong_date", "was": "2024-11-01", "now": "2024 (в отчетности — только «в ноябре»)", "tag": "m026"}
+{"id": "gc9f8d104", "field": "title", "class": "title_standard", "was": "АФК «Система» выкупила у Сбера оставшуюся долю в ГК «Ниармедик»", "now": "АФК «Система» купила у Сбербанка долю в ГК «Ниармедик»", "tag": "m026"}
+{"id": "gc9f8d104", "field": "law.terms", "class": "other", "was": "история покупки 2021 года вместо условий", "now": "право выкупа по соглашению 2021 года", "tag": "m026"}
+{"id": "gc9f8d104", "field": "eco.context", "class": "foreign_fact", "was": "перепродажа 14 клиник «АВС-медицине» и ее оценка", "now": "снято", "tag": "m026"}
+{"id": "gc9f8d104", "field": "eco.context", "class": "verbatim", "was": "9 слов подряд из Интерфакса", "now": "пересказ", "tag": "m026"}
+{"id": "g8e46beea", "field": "buyer", "class": "wrong_buyer", "was": "Агрокомплекс им. Ткачева", "now": "ООО «ТД Агрокомплекс» (по ЕГРЮЛ)", "tag": "m026"}
+{"id": "g8e46beea", "field": "date", "class": "wrong_date", "was": "2024-11-01", "now": "2024-11-15 (ЕГРЮЛ)", "tag": "m026"}
+{"id": "g8e46beea", "field": "title", "class": "title_standard", "was": "Агрокомплекс Ткачева приобрел контроль над «Селькомом» в ДНР", "now": "«ТД Агрокомплекс» купил 100% «Селькома» в ДНР", "tag": "m026"}
