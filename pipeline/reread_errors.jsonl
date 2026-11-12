@@ -1776,3 +1776,128 @@
 {"id": "g399c1f98", "field": "eco.val", "class": "unsupported_claim", "was": "вся компания оценена в 1,9 млрд ₽", "now": "—", "tag": "m038"}
 {"id": "g399c1f98", "field": "eco.context", "class": "other", "was": "«Алексей Ликин», доли всех троих по 16,08%", "now": "Ливикин; у Самойлова 16,83%", "tag": "m038"}
 {"id": "g399c1f98", "field": "title", "class": "title_standard", "was": "МТС приобрела 51% в разработчике…", "now": "МТС купила 51% разработчика видеоконференцсвязи Vinteo", "tag": "m038"}
+{"id": "g49c52cd4", "field": "title", "class": "title_standard", "was": "Группа «Аскон» приобрела контроль…", "now": "«Аскон» и его совладельцы купили 50,99% «Про текнолоджиз»", "tag": "m044"}
+{"id": "g49c52cd4", "field": "extra", "class": "wrong_share", "was": "«Аскон» приобрел 50,99% акций ООО", "now": "24% у структуры группы, 50,99% с совладельцами; доли ООО", "tag": "m044"}
+{"id": "g49c52cd4", "field": "extra", "class": "unsupported_claim", "was": "из разработчика превращается в интегратора", "now": "снято", "tag": "m044"}
+{"id": "g49c52cd4", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "50,99% доли в ООО «Про текнолоджиз»", "tag": "m044"}
+{"id": "g8b512496", "field": "buyer", "class": "wrong_buyer", "was": "Сергей Галицкий", "now": "ООО «СПП «Юг»» (ЕГРЮЛ)", "tag": "m044"}
+{"id": "g8b512496", "field": "title", "class": "title_standard", "was": "Сергей Галицкий приобрел маслозавод…", "now": "СПП «Юг» купило маслозавод «Южный полюс» в Кропоткине", "tag": "m044"}
+{"id": "g8b512496", "field": "eco.share", "class": "wrong_share", "was": "100% акций (ООО)", "now": "100% доли в ООО «Южный полюс»", "tag": "m044"}
+{"id": "g8b512496", "field": "eco.val", "class": "unsupported_claim", "was": "Enterprise Value — более 3,5 млрд ₽", "now": "снято", "tag": "m044"}
+{"id": "gb97fb345", "field": "buyer", "class": "wrong_buyer", "was": "Андрей Еськин", "now": "ООО «Олеот» (ЕГРЮЛ)", "tag": "m044"}
+{"id": "gb97fb345", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Febria Ltd (ЕГРЮЛ)", "tag": "m044"}
+{"id": "gb97fb345", "field": "sum", "class": "sum_meaning", "was": "82–109 млн ₽ (оценка доли по выручке)", "now": "Не раскрыта", "tag": "m044"}
+{"id": "gb97fb345", "field": "extra", "class": "unsupported_claim", "was": "выручка 2023–2025, ликвидация «Олеота»", "now": "снято; выход из участников по ЕГРЮЛ", "tag": "m044"}
+{"id": "gb97fb345", "field": "title", "class": "title_standard", "was": "Андрей Еськин приобрел 21%…", "now": "ООО «Олеот» купило 21%…", "tag": "m044"}
+{"id": "g0b733c0f", "field": "title", "class": "title_standard", "was": "AB InBev продает долю… (статус «Не состоялась»)", "now": "Правкомиссия не разрешила Anadolu Efes купить долю AB InBev…", "tag": "m044"}
+{"id": "g0b733c0f", "field": "law.struct", "class": "other", "was": "условия октября 2024 как сама сделка", "now": "соглашение декабря 2023 и новые условия", "tag": "m044"}
+{"id": "g0b733c0f", "field": "events", "class": "dead_source", "was": "второй отказ — Интерфакс, где его нет", "now": "RetailDetail", "tag": "m044"}
+{"id": "g8952793b", "field": "eco.share", "class": "wrong_share", "was": "60% акций ООО", "now": "60% доли в ООО «Кортеос»", "tag": "m044"}
+{"id": "g8952793b", "field": "title", "class": "title_standard", "was": "Ростелеком приобрел 60% акций платформы…", "now": "«Ростелеком» купил 60% ООО «Кортеос»", "tag": "m044"}
+{"id": "g97e55758", "field": "eco.fin", "class": "other", "was": "финансы «Норникеля» в форме расчетов", "now": "—", "tag": "m044"}
+{"id": "g97e55758", "field": "eco.share", "class": "verbatim", "was": "пересказ ЕГРЮЛ почти дословно из Интерфакса", "now": "50% доли в ООО «РНК-Холдинг» (и золотая выборка: share 50)", "tag": "m044"}
+{"id": "g21beb4c1", "field": "date", "class": "wrong_date", "was": "2024", "now": "2023", "tag": "m043"}
+{"id": "g21beb4c1", "field": "buyer", "class": "wrong_buyer", "was": "«Менеджмент автозавода «Урал»» (роль, а не имя)", "now": "пусто, причина в accepted_notes", "tag": "m043"}
+{"id": "g21beb4c1", "field": "extra", "class": "unsupported_claim", "was": "выручка 2020 года 27 млрд ₽", "now": "снято", "tag": "m043"}
+{"id": "g21beb4c1", "field": "title", "class": "title_standard", "was": "Стрежнев продал «Урал» менеджменту", "now": "Компания менеджмента купила «Урал» у Стрежнева", "tag": "m043"}
+{"id": "g8fb922a6", "field": "date", "class": "wrong_date", "was": "2023-04-21 (день статьи)", "now": "2023-04-13 (закрытие)", "tag": "m043"}
+{"id": "g8fb922a6", "field": "sum", "class": "sum_meaning", "was": "7–10 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m043"}
+{"id": "g8fb922a6", "field": "extra", "class": "unsupported_claim", "was": "оценка 7–10 млрд, ДельтаЛизинг — бывший лизинг Siemens", "now": "по статьям", "tag": "m043"}
+{"id": "g8fb922a6", "field": "title", "class": "title_standard", "was": "Siemens продал … «Инсайт»", "now": "«Инсайт» купил … у Siemens", "tag": "m043"}
+{"id": "g23827051", "field": "buyer", "class": "party_text_no_profile", "was": "Структуры братьев Остапишиных", "now": "Алексей и Александр Остапишины", "tag": "m043"}
+{"id": "g23827051", "field": "target", "class": "wrong_target", "was": "ООО «Томилино парк» (по ЕГРЮЛ у Остапишина с 2022)", "now": "доля PPF в комплексе — текстом", "tag": "m043"}
+{"id": "g23827051", "field": "title", "class": "unsupported_claim", "was": "продала 75%", "now": "долю (размер не раскрыт)", "tag": "m043"}
+{"id": "g23827051", "field": "sum", "class": "sum_meaning", "was": "6,2–7,5 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m043"}
+{"id": "g23827051", "field": "extra", "class": "unsupported_claim", "was": "сделка закрылась, раз Остапишин выступал от владельца", "now": "по статьям", "tag": "m043"}
+{"id": "g23827051", "field": "date", "class": "wrong_date", "was": "2023-02-20 (день статьи о будущей сделке)", "now": "2023", "tag": "m043"}
+{"id": "gcbcd9b28", "field": "date", "class": "wrong_date", "was": "2024", "now": "2023", "tag": "m043"}
+{"id": "gcbcd9b28", "field": "extra", "class": "unsupported_claim", "was": "выручка 2025, объем фонда, «20% акций»", "now": "по статьям", "tag": "m043"}
+{"id": "gcbcd9b28", "field": "companies.gedcf4bdc.desc", "class": "profile_text", "was": "в 2024 году фонд купил", "now": "род занятий", "tag": "m043"}
+{"id": "gb7a906e5", "field": "date", "class": "wrong_date", "was": "2023-01-27 (день статьи о будущей сделке)", "now": "2023", "tag": "m043"}
+{"id": "gb7a906e5", "field": "eco.rationale", "class": "version_as_fact", "was": "покупатель берет школу для фонда", "now": "по неофициальным данным", "tag": "m043"}
+{"id": "gb7a906e5", "field": "extra", "class": "unsupported_claim", "was": "«почему … не объяснялось», решение совета директоров", "now": "по статьям", "tag": "m043"}
+{"id": "gdf91b653", "field": "date", "class": "wrong_date", "was": "2023-01-19 (день статьи)", "now": "2023-01-17", "tag": "m043"}
+{"id": "gdf91b653", "field": "type", "class": "wrong_type", "was": "M&A (24,99%)", "now": "Инвестиция", "tag": "m043"}
+{"id": "gdf91b653", "field": "extra", "class": "unsupported_claim", "was": "девелопер может выкупить долю…, «дела идут устойчиво»", "now": "по статьям", "tag": "m043"}
+{"id": "gdf91b653", "field": "target", "class": "profile_wrong_company", "was": "«Компания-собственник…» (описание)", "now": "Вудвелл Инвестментс Лимитед", "tag": "m043"}
+{"id": "g95777200", "field": "date", "class": "wrong_date", "was": "2023-09-01", "now": "2023-09-14 (закрытие)", "tag": "m049"}
+{"id": "g95777200", "field": "buyer", "class": "wrong_buyer", "was": "консорциум российских инвесторов и местного менеджмента", "now": "BFI Holding (по ЕГРЮЛ)", "tag": "m049"}
+{"id": "g95777200", "field": "title", "class": "title_standard", "was": "BAT продала ... консорциуму", "now": "BFI Holding купил ... бизнес BAT", "tag": "m049"}
+{"id": "g95777200", "field": "extra", "class": "wrong_status", "was": "закрытие планировалось на октябрь", "now": "снято", "tag": "m049"}
+{"id": "g60fedbfd", "field": "sum", "class": "sum_meaning", "was": "170–210 млн ₽", "now": "Не раскрыта; оценка аналитика в eco.val", "tag": "m049"}
+{"id": "g60fedbfd", "field": "seller", "class": "wrong_seller", "was": "Татьяна Коваленко", "now": "не назван (владельцы не раскрываются)", "tag": "m049"}
+{"id": "g60fedbfd", "field": "eco.rationale", "class": "invented_rationale", "was": "стратегия «36,6» (слова аналитика)", "now": "снято", "tag": "m049"}
+{"id": "g60fedbfd", "field": "title", "class": "title_standard", "was": "«36,6» + Горздрав приобрели", "now": "Аптечная сеть «36,6» купила «Фармакон»", "tag": "m049"}
+{"id": "g508140b8", "field": "seller", "class": "unsupported_claim", "was": "Наталья Уснунц", "now": "не назван", "tag": "m049"}
+{"id": "g508140b8", "field": "extra", "class": "unsupported_claim", "was": "ООО «Ива Трейдинг», выручка 1,083 млрд", "now": "снято", "tag": "m049"}
+{"id": "g508140b8", "field": "law.struct", "class": "unsupported_claim", "was": "по СПАРК учредитель — ТД Шкуренко", "now": "снято", "tag": "m049"}
+{"id": "g508140b8", "field": "eco.context", "class": "wrong_date", "was": "«Бас-тон» незадолго до этого", "now": "февраль 2022 года", "tag": "m049"}
+{"id": "g2dfef7a3", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение эксперта Дубовикова о блокировке YouTube", "now": "слова вице-президента «билайна» Быкова", "tag": "m049"}
+{"id": "g2dfef7a3", "field": "title", "class": "title_standard", "was": "ВымпелКом приобрел 95% группы CDNVideo", "now": "«ВымпелКом» купил 95% «СДН-Видео»", "tag": "m049"}
+{"id": "ge578141f", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Подписана (соглашение 30.09.2025)", "tag": "m049"}
+{"id": "ge578141f", "field": "date", "class": "wrong_date", "was": "2023-08-22", "now": "2025-09-30", "tag": "m049"}
+{"id": "ge578141f", "field": "sum", "class": "unsupported_claim", "was": "≈5 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m049"}
+{"id": "ge578141f", "field": "law.terms", "class": "unsupported_claim", "was": "слова «Бурмистрова» о цене", "now": "снято", "tag": "m049"}
+{"id": "ge578141f", "field": "eco.context", "class": "wrong_date", "was": "на 2 сентября 2026 года", "now": "октябрь 2025 года", "tag": "m049"}
+{"id": "ge9d2a3e6", "field": "buyer", "class": "wrong_buyer", "was": "ООО «Сезар Групп» (ИНН 7718904164)", "now": "ООО «Сезар-Инвест» (ИНН 7718904157)", "tag": "m048"}
+{"id": "ge9d2a3e6", "field": "date", "class": "wrong_date", "was": "2023-10-01", "now": "2023-10-04", "tag": "m048"}
+{"id": "ge9d2a3e6", "field": "extra", "class": "unsupported_claim", "was": "братья Исай и Герман Захарьяевы; «материнская структура «Сезар-Инвест»»", "now": "Исай Захаряев и Руслан Семенов — участники покупателя", "tag": "m048"}
+{"id": "ge9d2a3e6", "field": "eco.rationale", "class": "invented_rationale", "was": "сообщение о досрочном закрытии", "now": "уход Mondi из России", "tag": "m048"}
+{"id": "ge9d2a3e6", "field": "title", "class": "title_standard", "was": "Mondi продала завод … компании Сезар Групп", "now": "«Сезар-Инвест» купил Сыктывкарский ЛПК у Mondi", "tag": "m048"}
+{"id": "ge9d2a3e6", "field": "buyer", "class": "profile_wrong_inn", "was": "профиль без ИНН, отрасль «Пищепром»", "now": "ИНН 7718904157, «Холдинги»", "tag": "m048"}
+{"id": "g630a6fbb", "field": "law.adv", "class": "adviser_wrong", "was": "Не раскрывались", "now": "LEVEL Legal Services (клиент не назван)", "tag": "m048"}
+{"id": "g630a6fbb", "field": "extra", "class": "unsupported_claim", "was": "LEVEL консультировала VK", "now": "клиент LEVEL не назван", "tag": "m048"}
+{"id": "g630a6fbb", "field": "extra", "class": "foreign_fact", "was": "конфликт «Что было дальше?» с VK Видео в 2026 году", "now": "снято", "tag": "m048"}
+{"id": "g630a6fbb", "field": "law.terms", "class": "other", "was": "—", "now": "отложенная оплата по выполнении условий, опцион на 49%", "tag": "m048"}
+{"id": "g630a6fbb", "field": "title", "class": "title_standard", "was": "VK приобрела 51%…", "now": "VK купил 51%…", "tag": "m048"}
+{"id": "gd246f586", "field": "sum", "class": "sum_meaning", "was": "До 120 млн ₽", "now": "Не раскрыта (оценка аналитиков — в eco.val)", "tag": "m048"}
+{"id": "gd246f586", "field": "date", "class": "wrong_date", "was": "2023-09-27 (день публикации)", "now": "2023", "tag": "m048"}
+{"id": "gd246f586", "field": "seller", "class": "other", "was": "Мальтийская Zebrainy Ltd", "now": "Zebrainy Ltd", "tag": "m048"}
+{"id": "gd246f586", "field": "extra", "class": "version_as_fact", "was": "встраивание в Плюс — как итог сделки", "now": "было в марте 2023, до сделки", "tag": "m048"}
+{"id": "gd246f586", "field": "target", "class": "profile_text", "was": "kidtech-платформа «Сказбука»", "now": "Сказбука", "tag": "m048"}
+{"id": "g6783c136", "field": "eco.rationale", "class": "version_as_fact", "was": "«возможно, пришел в связи с планами» (версия издания)", "now": "мнение Андрея Сизова", "tag": "m048"}
+{"id": "g6783c136", "field": "law.struct", "class": "verbatim", "was": "почти дословно Ъ", "now": "пересказ", "tag": "m048"}
+{"id": "g6783c136", "field": "extra", "class": "unsupported_claim", "was": "агробиотехнопарк 900 млн ₽; рост в 30 раз; 10 тыс. т первой очереди", "now": "снято; 5 тыс. т первая очередь, 10 тыс. т полная", "tag": "m048"}
+{"id": "g6783c136", "field": "eco.share", "class": "wrong_target", "was": "описание компании", "now": "50% трех ООО Ruseed через 100% ООО «Городские строительные решения»", "tag": "m048"}
+{"id": "g6783c136", "field": "title", "class": "title_standard", "was": "Иван Юзефович приобрел 50% поставщика семян Ruseed", "now": "Иван Юзефович купил 50% Ruseed", "tag": "m048"}
+{"id": "g8368bb6c", "field": "extra", "class": "unsupported_claim", "was": "52,1% через FCB Holding; прибыль 6,5→8,6 млрд; «состав не менялся»", "now": "снято", "tag": "m048"}
+{"id": "g8368bb6c", "field": "title", "class": "title_standard", "was": "Baring Vostok продал коллекторское агентство ПКБ…", "now": "Роман Ковалев купил 100% «Первого клиентского бюро»", "tag": "m048"}
+{"id": "g8368bb6c", "field": "target", "class": "profile_text", "was": "Первое коллекторское бюро, без ИНН", "now": "Первое клиентское бюро, НАО ПКО «ПКБ», ИНН 2723115222", "tag": "m048"}
+{"id": "gb83b2a3f", "field": "extra", "class": "wrong_share", "was": "100% ООО МЦ «Биологическая медицина» (… Антирефлюкс-Сургут)", "now": "два общества, во втором 75%", "tag": "m048"}
+{"id": "gb83b2a3f", "field": "extra", "class": "foreign_fact", "was": "покупка сети «Эксперт», итоги группы 2025", "now": "снято", "tag": "m048"}
+{"id": "gb83b2a3f", "field": "eco.rationale", "class": "verbatim", "was": "речь Курцера почти дословно без кавычек", "now": "пересказ", "tag": "m048"}
+{"id": "g3b91745f", "field": "title", "class": "title_standard", "was": "Владимир Воронин (ФСК) приобрел 10% акций АВС-Медицина", "now": "Владимир Воронин купил 10% «АВС-Медицины»", "tag": "m039"}
+{"id": "g3b91745f", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-10-22 (ЕГРЮЛ)", "tag": "m039"}
+{"id": "g3b91745f", "field": "eco.context", "class": "foreign_fact", "was": "покупки ФСК у Sibelco, Bonava, Pilkington, Guardian", "now": "история сети и причина выхода Кайбелова", "tag": "m039"}
+{"id": "g3b91745f", "field": "extra", "class": "foreign_fact", "was": "покупка 20% «Врача на дом» в 2026 году", "now": "убрано", "tag": "m039"}
+{"id": "g3b91745f", "field": "eco.rationale", "class": "invented_rationale", "was": "причина выхода продавца как цель сделки", "now": "—, в контекст", "tag": "m039"}
+{"id": "g3b91745f", "field": "eco.val", "class": "other", "was": "нет оценок цены доли", "now": "оценки Гераскина и Шубиной", "tag": "m039"}
+{"id": "gdc72cc35", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-11-19 (ЕГРЮЛ)", "tag": "m039"}
+{"id": "gdc72cc35", "field": "extra", "class": "language", "was": "пометки «(Интерфакс, 31 марта 2025 года)», дословная цитата", "now": "пересказ", "tag": "m039"}
+{"id": "gdc72cc35", "field": "eco.target_fin", "class": "other", "was": "рост рынка страхования жизни", "now": "показатели самой компании", "tag": "m039"}
+{"id": "gdc72cc35", "field": "title", "class": "title_standard", "was": "Inweasta купила ООО «ППФ Страхование жизни» у группы PPF", "now": "Inweasta купил «ППФ Страхование жизни» у PPF", "tag": "m039"}
+{"id": "g7e0c2ffb", "field": "sum", "class": "sum_meaning", "was": "До 6 млрд ₽", "now": "4–6 млрд ₽ (по оценке)", "tag": "m039"}
+{"id": "g7e0c2ffb", "field": "date", "class": "wrong_date", "was": "2024-10-17 (день публикации)", "now": "2024", "tag": "m039"}
+{"id": "g7e0c2ffb", "field": "extra", "class": "unsupported_claim", "was": "«первая значительная M&A-сделка Сбера в edtech», «бренды не слиты»", "now": "по статьям", "tag": "m039"}
+{"id": "g7e0c2ffb", "field": "profile:ga09e7dfc", "class": "profile_text", "was": "в 2021 году куплена Сбером", "now": "без года сделки", "tag": "m039"}
+{"id": "g7e0c2ffb", "field": "title", "class": "title_standard", "was": "Сбер приобрел Нетологию и Фоксфорд у Алексея Мордашова", "now": "Сбербанк купил «Нетологию» и «Фоксфорд»", "tag": "m039"}
+{"id": "g5512a325", "field": "date", "class": "wrong_date", "was": "2024-10-14 (день публикации)", "now": "2024-10-11 (ЕГРЮЛ)", "tag": "m039"}
+{"id": "g5512a325", "field": "extra", "class": "foreign_fact", "was": "сделка «Сапплемент Капитал» с «Лейблпаком»", "now": "убрано", "tag": "m039"}
+{"id": "g5512a325", "field": "title", "class": "title_standard", "was": "Supplement Group выкупила 80% ООО «Здоровая планета» (бренд Jump)", "now": "Supplement Group купил 80% ООО «Здоровая планета»", "tag": "m039"}
+{"id": "ga655a061", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m039"}
+{"id": "ga655a061", "field": "seller", "class": "wrong_seller", "was": "не указан", "now": "Росимущество", "tag": "m039"}
+{"id": "ga655a061", "field": "target", "class": "wrong_target", "was": "«деприватизированные заводы в Перми и Волгограде» (описание)", "now": "лот «Метафракс Кемикалс» и «Волжский оргсинтез»", "tag": "m039"}
+{"id": "ga655a061", "field": "extra", "class": "foreign_fact", "was": "покупка «Газпром нефтехим Салават»; 6 млрд дивидендов", "now": "убрано", "tag": "m039"}
+{"id": "ga655a061", "field": "law.terms", "class": "unsupported_claim", "was": "«оба завода проданы с условием»", "now": "условие только у «Волжского оргсинтеза»", "tag": "m039"}
+{"id": "ga655a061", "field": "title", "class": "title_standard", "was": "Росхим купил деприватизированные заводы в Перми и Волгограде", "now": "Росхим купил на торгах «Метафракс Кемикалс» и «Волжский оргсинтез»", "tag": "m039"}
+{"id": "g50571ec8", "field": "sum", "class": "sum_meaning", "was": "5 млрд ₽ (EV)", "now": "5 млрд ₽ (по оценке)", "tag": "m039"}
+{"id": "g50571ec8", "field": "eco.context", "class": "unsupported_claim", "was": "совладельцы погасили долги перед продажей", "now": "акционеры и продукция по статье", "tag": "m039"}
+{"id": "g50571ec8", "field": "extra", "class": "unsupported_claim", "was": "100% акционерного капитала", "now": "снято", "tag": "m039"}
+{"id": "g50571ec8", "field": "eco.target_fin", "class": "wrong_sum", "was": "выручка 2023 — 5,5 млрд ₽", "now": "5,6 млрд ₽", "tag": "m039"}
+{"id": "g50571ec8", "field": "date", "class": "wrong_date", "was": "2024-09-24 (день публикации)", "now": "2024", "tag": "m039"}
+{"id": "g50571ec8", "field": "title", "class": "title_standard", "was": "Росхим приостановил покупку Камтэкс-Химпрома", "now": "Росхим может купить «Камтэкс-Химпром»", "tag": "m039"}
+{"id": "gb89d3a84", "field": "asset", "class": "wrong_target", "was": "ООО «ВТС» — поставщик медоборудования…", "now": "ООО «ВТС»", "tag": "m101"}
+{"id": "gb89d3a84", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «ВТС»", "tag": "m101"}
+{"id": "gb89d3a84", "field": "title", "class": "title_standard", "was": "купило долю в ООО «ВТС»", "now": "купило ООО «ВТС»", "tag": "m101"}
+{"id": "gb89d3a84", "field": "sum", "class": "sum_meaning", "was": "1,2-1,3 млрд ₽ (по оценке)", "now": "Не раскрыта (оценка аналитика — в eco.val)", "tag": "m101"}
+{"id": "gb89d3a84", "field": "date", "class": "wrong_date", "was": "2026-11-09 (публикация)", "now": "2026-10-19 (запись в ЕГРЮЛ)", "tag": "m101"}
