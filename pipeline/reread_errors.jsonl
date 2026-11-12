@@ -961,3 +961,48 @@
 {"id": "g4cac8db4", "field": "law.appr", "class": "unsupported_claim", "was": "в марте 2024 рассчитывал на одобрение правкомиссии", "now": "Минпромторг: согласовано с опционом обратного выкупа", "tag": "m035"}
 {"id": "g4cac8db4", "field": "title", "class": "title_standard", "was": "Knauf не смогла продать российский бизнес по производству стройматериалов местному менеджменту", "now": "Покупатель отказался от покупки российского бизнеса Knauf", "tag": "m035"}
 {"id": "g90317ad0", "field": "date", "class": "wrong_date", "was": "2024-02-12 (нет ни в одном источнике)", "now": "2024", "tag": "m035"}
+{"id": "g6bf4b33c", "field": "date", "class": "wrong_date", "was": "2024-09-19 (подписание соглашения)", "now": "2024-10-02 (переход 50% в ЕГРЮЛ)", "tag": "m028"}
+{"id": "g6bf4b33c", "field": "eco.val", "class": "unsupported_claim", "was": "Долю оценивают в 15–17 млрд ₽, сделка, возможно, безденежная", "now": "снято — нет ни в одном источнике", "tag": "m028"}
+{"id": "g6bf4b33c", "field": "extra", "class": "unsupported_claim", "was": "AVA Group в ТОП-30 застройщиков РФ", "now": "топ-20 по объему текущего строительства (РБК Кубань)", "tag": "m028"}
+{"id": "g6bf4b33c", "field": "eco.rationale", "class": "verbatim", "was": "цитата Арутюняна без атрибуции", "now": "пересказ со ссылкой на Арутюняна и Кремлева", "tag": "m028"}
+{"id": "g6bf4b33c", "field": "title", "class": "title_standard", "was": "Умар Кремлев приобрел 50% AVA Group", "now": "Умар Кремлев купил 50% AVA Group", "tag": "m028"}
+{"id": "g8ef19fd4", "field": "date", "class": "wrong_date", "was": "2024-09-16 (день статьи)", "now": "2024-09-13 (переход 100% в ЕГРЮЛ)", "tag": "m028"}
+{"id": "g8ef19fd4", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив со слов анонимного собеседника «Ведомостей» как цель сделки", "now": "цель словами Genotek и «Яндекса»", "tag": "m028"}
+{"id": "g8ef19fd4", "field": "law.struct", "class": "other", "was": "пусто", "now": "продажа общества по ЕГРЮЛ, «Яндекс» остался миноритарием Genotek", "tag": "m028"}
+{"id": "g8ef19fd4", "field": "title", "class": "title_standard", "was": "Яндекс продал телемедицинский сервис «Яндекс.Здоровье» компании Genotek", "now": "Genotek купил «Яндекс.Здоровье» у «Яндекса»", "tag": "m028"}
+{"id": "g707633b2", "field": "buyer", "class": "wrong_buyer", "was": "ООО «РВБ» (Wildberries & Russ) — объединение появилось позже", "now": "Russ Outdoor (ООО «Русс Аутдор»), вошло в ЕГРЮЛ 11.09.2024", "tag": "m028"}
+{"id": "g707633b2", "field": "seller", "class": "wrong_seller", "was": "Олег Петрович Зеваков (бенефициар)", "now": "ООО «Абрис» — вышло из участников по ЕГРЮЛ", "tag": "m028"}
+{"id": "g707633b2", "field": "eco.share", "class": "wrong_share", "was": "проза о 490 павильонах и 80% рынка", "now": "100%", "tag": "m028"}
+{"id": "g707633b2", "field": "extra", "class": "unsupported_claim", "was": "Зеваков — владелец «Волгобалт Медиа»; Russ — 44,7% поверхностей", "now": "снято, нет в открытых источниках", "tag": "m028"}
+{"id": "g707633b2", "field": "eco.context", "class": "unsupported_claim", "was": "6–7 региональных сделок Russ в 2024 году (из мертвой страницы TAdviser)", "now": "договор с городом, доля Russ на остановках (ДП, Sostav)", "tag": "m028"}
+{"id": "g707633b2", "field": "src", "class": "dead_source", "was": "TAdviser — 404", "now": "Деловой Петербург, AdIndex", "tag": "m028"}
+{"id": "g707633b2", "field": "title", "class": "title_standard", "was": "ГК Russ приобрела оператора наружной рекламы «Медиа Простор»", "now": "Russ Outdoor купил «Медиа Простор»", "tag": "m028"}
+{"id": "g77b24b1c", "field": "eco.sum", "class": "sum_meaning", "was": "$1,7 млн как вложение «Хайва»", "now": "$1,7 млн — вложение трех инвесторов вместе (sum_basis raise), пояснено в law.struct", "tag": "m028"}
+{"id": "g77b24b1c", "field": "eco.share", "class": "wrong_share", "was": "проза о B-Pay и оборудовании", "now": "10,15%", "tag": "m028"}
+{"id": "g77b24b1c", "field": "extra", "class": "unsupported_claim", "was": "часть средств — на B-Pay и закупку оборудования", "now": "снято", "tag": "m028"}
+{"id": "g77b24b1c", "field": "eco.context", "class": "unsupported_claim", "was": "в портфеле фонда 15 компаний", "now": "снято", "tag": "m028"}
+{"id": "g77b24b1c", "field": "target", "class": "profile_text", "was": "профиль «ООО «Бриски»»", "now": "Briskly, ООО «Брискли»", "tag": "m028"}
+{"id": "g77b24b1c", "field": "title", "class": "title_standard", "was": "Фонд «Хайв» (ВымпелКом) купил долю в разработчике автономной торговли Briskly", "now": "«Хайв» купил 10,15% Briskly", "tag": "m028"}
+{"id": "gd6ce73ed", "field": "extra", "class": "unsupported_claim", "was": "Сделку оформили за две недели — рекордно быстро", "now": "снято, нет в источниках", "tag": "m028"}
+{"id": "gd6ce73ed", "field": "date", "class": "wrong_date", "was": "2024-09-10 (день статьи)", "now": "2024", "tag": "m028"}
+{"id": "gd6ce73ed", "field": "src", "class": "aggregator_source", "was": "первым стоял Retail.ru — пересказ Коммерсанта", "now": "Коммерсантъ первым", "tag": "m028"}
+{"id": "gd6ce73ed", "field": "eco.sum", "class": "sum_meaning", "was": "«Более 1 млрд ₽» без пометки", "now": "sum_basis estimate — оценка Коммерсанта", "tag": "m028"}
+{"id": "gd6ce73ed", "field": "title", "class": "title_standard", "was": "«Рубеж» выкупил площади в логистическом центре «Внуково 2»", "now": "«Рубеж» купил склад в логистическом центре «Внуково 2»", "tag": "m028"}
+{"id": "gb101d54d", "field": "seller", "class": "wrong_seller", "was": "АО «Аврора Инвест» (это компания, которую купил ВТБ)", "now": "пусто: продавцы — нераскрытые акционеры «Аврора Инвест»", "tag": "m028"}
+{"id": "gb101d54d", "field": "law.struct", "class": "other", "was": "залог вагонов февраля 2024 года", "now": "механика: ПГК вместе с «Аврора Инвест», денежная сделка", "tag": "m028"}
+{"id": "gb101d54d", "field": "eco.context", "class": "unsupported_claim", "was": "финансы ПГК 2025 года, прибыль «в 9 раз»", "now": "снято: источник противоречит сам себе", "tag": "m028"}
+{"id": "gb101d54d", "field": "seller_id", "class": "profile_text", "was": "Аврора Инвест: «до 2024 года владела ПГК»", "now": "владеет ПГК с ноября 2023 года, в 2024 году принадлежала ВТБ", "tag": "m028"}
+{"id": "gb101d54d", "field": "title", "class": "title_standard", "was": "ВТБ приобрел Первую грузовую компанию", "now": "ВТБ купил Первую грузовую компанию", "tag": "m028"}
+{"id": "g00773994", "field": "eco.sum", "class": "wrong_sum", "was": "4,5 млрд ₽ («порядка» из релиза)", "now": "4,58 млрд ₽ по отчету Softline (Интерфакс)", "tag": "m028"}
+{"id": "g00773994", "field": "eco.share", "class": "wrong_share", "was": "доли рынка «ИРЭ-Полюса»", "now": "100% доли в ООО «НТО «ИРЭ-Полюс»» (через «БВПГ»)", "tag": "m028"}
+{"id": "g00773994", "field": "law.appr", "class": "other", "was": "Публично не сообщалось", "now": "правкомиссия: дисконт 50% и взнос в бюджет 1,4 млрд ₽", "tag": "m028"}
+{"id": "g00773994", "field": "eco.target_fin", "class": "unsupported_claim", "was": "чистая прибыль почти 4 млрд ₽ в 2020–2021 годах", "now": "выручка 6,2 млрд ₽ и прибыль 817 млн ₽ за 2023 год (ФНС, ComNews)", "tag": "m028"}
+{"id": "g00773994", "field": "extra", "class": "language", "was": "спор «60%, а не 51%» с прежней версией карточки", "now": "доли рынка и штат по данным Softline", "tag": "m028"}
+{"id": "g00773994", "field": "title", "class": "title_standard", "was": "Softline приобрела контроль в производителе лазеров ИРЭ-Полюс у IPG Photonics", "now": "Softline купил «ИРЭ-Полюс» у IPG Photonics", "tag": "m028"}
+{"id": "g69a22dab", "field": "buyer", "class": "wrong_buyer", "was": "Умар Кремлев (бенефициар)", "now": "АО «Автомобильные технологии» — покупатель по отчетности", "tag": "m028"}
+{"id": "g69a22dab", "field": "eco.val", "class": "unsupported_claim", "was": "расчет EBITDA×3 = 40,3 млрд ₽ и «около 30 млрд с долгом»", "now": "снято, цена известна — 34,798 млрд ₽", "tag": "m028"}
+{"id": "g69a22dab", "field": "law.appr", "class": "unsupported_claim", "was": "оценка партнера NSP Арама Григоряна", "now": "снято: нет в источниках; оставлен указ о выводе из-под управления", "tag": "m028"}
+{"id": "g69a22dab", "field": "law.terms", "class": "version_as_fact", "was": "«Автотех» заложило права по договору от 27 августа", "now": "версия «Коммерсанта» о возможном залоге", "tag": "m028"}
+{"id": "g69a22dab", "field": "eco.context", "class": "unsupported_claim", "was": "предварительные итоги 2025 года (245 млрд ₽, Li Auto)", "now": "снято; оставлен убыток первого полугодия 2025 года (Интерфакс)", "tag": "m028"}
+{"id": "g69a22dab", "field": "extra", "class": "unsupported_claim", "was": "портфель Chery, BAIC… и 62 шоурума сейчас", "now": "21 марка и 62 шоурума до 2022 года (РБК)", "tag": "m028"}
+{"id": "g69a22dab", "field": "title", "class": "title_standard", "was": "Структура Умара Кремлева приобрела «Рольф» у Росимущества", "now": "«Автомобильные технологии» купили «Рольф» у Росимущества", "tag": "m028"}
