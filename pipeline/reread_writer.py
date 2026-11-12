@@ -129,7 +129,7 @@ def main(argv):
                 failed = ('семантическая сверка базы', 'пропали сделки или профили: %s' % sorted(lost - ok_lost)[:10])
         if failed is not None:
             ra.revert()
-            ra.note('СТОП группы «%s» — партии пойдут по одной' % failed[0])
+            ra.note('СТОП группы «%s» — партии пойдут по одной | %s' % (failed[0], ' / '.join(l.strip()[:150] for l in str(failed[1]).splitlines() if 'FAILED' in l or 'Error' in l)[:600]))
             fcntl.flock(lock, fcntl.LOCK_UN)
             for path, plan in good:                      # по одной, обычной командой (сама берет замок)
                 r = subprocess.run([py, 'pipeline/reread_apply.py', path, '--write'], cwd=ra.ROOT,
