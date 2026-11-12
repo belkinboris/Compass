@@ -51146,7 +51146,8 @@
    "followup_researched": "2026-08-22",
    "proofread_absorbed": {
     "law.struct": [
-     "94ccbe98b1cc"
+     "94ccbe98b1cc",
+     "35c716831dbe"
     ],
     "eco.rationale": [
      "45ba46381df2"
@@ -51659,16 +51660,19 @@
      "e5acec14965f"
     ],
     "eco.share": [
-     "42c514809f03"
+     "42c514809f03",
+     "a90e3fb7dafd"
     ],
     "law.struct": [
-     "48e98259f34b"
+     "48e98259f34b",
+     "7df9f0ca04c9"
     ],
     "eco.target_fin": [
      "de907061f262"
     ],
     "eco.fin": [
-     "f9542065def1"
+     "f9542065def1",
+     "0f7e9d1f1275"
     ],
     "law.terms": [
      "45b477a077f5"
@@ -51818,10 +51822,15 @@
    "followup_researched": "2026-08-22",
    "proofread_absorbed": {
     "eco.rationale": [
-     "f01f4ac51267"
+     "f01f4ac51267",
+     "1dac4c78e215"
     ],
     "eco.share": [
-     "a2233c483658"
+     "a2233c483658",
+     "c87cc9340e60"
+    ],
+    "law.struct": [
+     "d1bfa347354a"
     ]
    },
    "proofread": "2026-09-03",
@@ -51965,7 +51974,8 @@
      "eb167964e65b"
     ],
     "eco.share": [
-     "88f123de3c50"
+     "88f123de3c50",
+     "df800c38150b"
     ],
     "eco.rationale": [
      "90c235c71248"
@@ -52142,13 +52152,15 @@
      "fdcb03b04037"
     ],
     "eco.share": [
-     "5149012652f5"
+     "5149012652f5",
+     "ff829023749e"
     ],
     "eco.target_fin": [
      "2519481a53c0"
     ],
     "eco.context": [
-     "9d8c6ec53f4f"
+     "9d8c6ec53f4f",
+     "ee76d91c5e6c"
     ],
     "eco.val": [
      "c2815146373d"
@@ -52316,13 +52328,17 @@
    "followup_researched": "2026-08-22",
    "proofread_absorbed": {
     "eco.rationale": [
-     "232529c0164e"
+     "232529c0164e",
+     "a0179be31d2e"
     ],
     "eco.target_fin": [
      "e658163498f1"
     ],
     "eco.context": [
      "460c131f46ff"
+    ],
+    "eco.share": [
+     "9fb19af381be"
     ]
    },
    "proofread": "2026-09-03",
@@ -52495,6 +52511,12 @@
     ],
     "eco.rationale": [
      "2a8c9af13355"
+    ],
+    "seller": [
+     "937aec5fe09d"
+    ],
+    "eco.share": [
+     "fbdae4a411ac"
     ]
    },
    "proofread": "2026-09-04",
@@ -52652,10 +52674,12 @@
    ],
    "proofread_absorbed": {
     "law.appr": [
-     "28fa39966e50"
+     "28fa39966e50",
+     "ac606bf51458"
     ],
     "law.struct": [
-     "06deae5e1205"
+     "06deae5e1205",
+     "49467e04c96b"
     ],
     "eco.target_fin": [
      "c5a0ab12a63d"
@@ -52818,7 +52842,11 @@
      "e51c08d55f91"
     ],
     "eco.val": [
-     "c5c8bff40055"
+     "c5c8bff40055",
+     "5118a64178b2"
+    ],
+    "buyer_name": [
+     "ba3cf6c9a90a"
     ]
    },
    "proofread": "2026-09-03",
