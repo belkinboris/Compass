@@ -374,3 +374,42 @@
 {"id": "g703c4f62", "field": "title", "class": "title_standard", "was": "Роман Авдеев продал…", "now": "Структуры Сергея Сударикова купили долю…", "tag": "m009"}
 {"id": "gdda3e685", "field": "eco.share", "class": "other", "was": "история компании", "now": "99% акций ПАО «Инград»", "tag": "m009"}
 {"id": "gdda3e685", "field": "title", "class": "title_standard", "was": "Продажа «Инграда» девелоперу Sminex", "now": "Девелопер Sminex купил у «Россиума» группу «Инград»", "tag": "m009"}
+{"id": "g54dc2165", "field": "title", "class": "title_standard", "was": "Мегафон приобрел компанию oneFactor", "now": "«МегаФон» купил oneFactor", "tag": "m004"}
+{"id": "g54dc2165", "field": "date", "class": "wrong_date", "was": "2022", "now": "2022-12-28 (реестр и RB.ru)", "tag": "m004"}
+{"id": "g54dc2165", "field": "eco.share", "class": "other", "was": "описание компании в поле доли", "now": "100% долей ООО «Единый фактор»", "tag": "m004"}
+{"id": "g54dc2165", "field": "eco.rationale", "class": "unsupported_claim", "was": "мотив без автора", "now": "мотив со ссылкой на Александра Соболева", "tag": "m004"}
+{"id": "g7ae9bb53", "field": "date", "class": "wrong_date", "was": "2026-03-12 (день статьи)", "now": "2026-02-11 (реестр)", "tag": "m004"}
+{"id": "g7ae9bb53", "field": "eco.rationale", "class": "invented_rationale", "was": "перечень работ компании вместо мотива", "now": "—", "tag": "m004"}
+{"id": "g7ae9bb53", "field": "eco.context", "class": "foreign_fact", "was": "спор основателя об алиментах", "now": "кто продал, чем занимается предмет, кто покупатель", "tag": "m004"}
+{"id": "g7ae9bb53", "field": "title", "class": "title_standard", "was": "ООО «Энерготехника Северо-Запад» (Алексей Костин) купила…", "now": "«Энерготехника Северо-Запад» купила 100% «Ямалдорстроя»", "tag": "m004"}
+{"id": "g2d69802d", "field": "eco.rationale", "class": "version_as_fact", "was": "доводы консультанта продавца как мотив и «мнение отраслевых аналитиков»", "now": "мотив «Ресурса» и мнение Имрана Мирзаева (Unicorn) с атрибуцией", "tag": "m004"}
+{"id": "g2d69802d", "field": "eco.share", "class": "wrong_share", "was": "100% ТД «Алтан»", "now": "четыре компании холдинга, в том числе 100% ТД «Алтан»", "tag": "m004"}
+{"id": "g2d69802d", "field": "eco.finadv", "class": "adviser_wrong", "was": "Unicorn без клиента", "now": "Unicorn — финансовый консультант продавца", "tag": "m004"}
+{"id": "g99be4c1d", "field": "law.appr", "class": "other", "was": "«согласовали местные власти» + механика перехода", "now": "согласие антимонопольного регулятора", "tag": "m004"}
+{"id": "g99be4c1d", "field": "law.struct", "class": "language", "was": "«все акции» ООО", "now": "доли, дата подписания и состав переданного", "tag": "m004"}
+{"id": "g99be4c1d", "field": "title", "class": "title_standard", "was": "Ponsse продала российский бизнес компании «Бизон» из Хабаровска", "now": "«Бизон» купил российский бизнес Ponsse", "tag": "m004"}
+{"id": "g61eca68c", "field": "eco.val", "class": "other", "was": "одна оценка из трех", "now": "три оценки аналитиков с именами", "tag": "m004"}
+{"id": "g61eca68c", "field": "extra", "class": "language", "was": "Ozone", "now": "Ozon", "tag": "m004"}
+{"id": "g61eca68c", "field": "src", "class": "aggregator_source", "was": "нет ComNews (первоисточник речи и оценок)", "now": "ComNews добавлен", "tag": "m004"}
+{"id": "g7ca174fd", "field": "date", "class": "wrong_date", "was": "2025-06-22 (Коммерсантъ)", "now": "2025-07-22 (ЕГРЮЛ)", "tag": "m004"}
+{"id": "g7ca174fd", "field": "extra", "class": "wrong_share", "was": "99% долей", "now": "99,9% (в law.struct и eco.share)", "tag": "m004"}
+{"id": "g7ca174fd", "field": "extra", "class": "version_as_fact", "was": "предположения экспертов о вертикальной интеграции поданы фактом", "now": "предположения Гревцова и Московского с именами", "tag": "m004"}
+{"id": "g7ca174fd", "field": "eco.target_fin", "class": "unsupported_claim", "was": "капитала нет, прибыль 673 тыс. ₽", "now": "долги более 208 млн ₽ (СПАРК)", "tag": "m004"}
+{"id": "g7ca174fd", "field": "eco.fin", "class": "other", "was": "описание покупателя в «Форме расчетов»", "now": "—, перенесено в eco.fin_context", "tag": "m004"}
+{"id": "gadd238c3", "field": "eco.context", "class": "wrong_date", "was": "«Иннопром-2025»", "now": "«Иннопром-2026», 7 июля 2026", "tag": "m004"}
+{"id": "gadd238c3", "field": "eco.context", "class": "unsupported_claim", "was": "контракт с Fresenius, которая не ушла; аудит площадки", "now": "снято", "tag": "m004"}
+{"id": "gadd238c3", "field": "extra", "class": "unsupported_claim", "was": "«Купол» сохранит долю", "now": "снято", "tag": "m004"}
+{"id": "gadd238c3", "field": "profile", "class": "profile_text", "was": "в 2025 году купила 70%", "now": "в июле 2026 года", "tag": "m004"}
+{"id": "ga2af8643", "field": "profile", "class": "profile_wrong_inn", "was": "3121010168 (белгородское ООО «Электрощит-К»)", "now": "4001005954 (калужское ООО «Электрощит-К°»)", "tag": "m004"}
+{"id": "ga2af8643", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Мушег Маргарян (реестр)", "tag": "m004"}
+{"id": "g549ddd5a", "field": "date", "class": "wrong_date", "was": "2025-06-01", "now": "2025-08-27 (ЕГРЮЛ)", "tag": "m004"}
+{"id": "g549ddd5a", "field": "seller", "class": "wrong_seller", "was": "«Эксойл» (ООО ЭКСОЙЛ)", "now": "«КГА Холдинг ЛЛС» (реестр «Агроинвеста»)", "tag": "m004"}
+{"id": "g549ddd5a", "field": "extra", "class": "unsupported_claim", "was": "на бренды — 10% рынка (это доля ЭФКО)", "now": "доли «Олейны» и Ideal по NTech", "tag": "m004"}
+{"id": "g549ddd5a", "field": "law.struct", "class": "other", "was": "«доля вырастет» при закрытой сделке", "now": "два шага сделки с датами", "tag": "m004"}
+{"id": "gda5d56f5", "field": "date", "class": "wrong_date", "was": "2025-05-01 (выдуманный день)", "now": "2025", "tag": "m004"}
+{"id": "gda5d56f5", "field": "extra", "class": "unsupported_claim", "was": "пятерка крупнейших застройщиков, 80% работ своими силами, «крупнейший производитель»", "now": "снято, «одно из ведущих» — 35% рынка", "tag": "m004"}
+{"id": "g8cc36866", "field": "date", "class": "wrong_date", "was": "2025-01-13", "now": "2026-01-13 (Consul Group)", "tag": "m004"}
+{"id": "g8cc36866", "field": "buyer", "class": "wrong_buyer", "was": "ГК «Таврос» (отрицает участие)", "now": "АО «Виннер»", "tag": "m004"}
+{"id": "g8cc36866", "field": "src", "class": "aggregator_source", "was": "только @dealsma", "now": "Consul Group и Filatoff — первоисточники", "tag": "m004"}
+{"id": "g7074c53b", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (45% без контроля, деньги на разработки)", "tag": "m004"}
+{"id": "g7074c53b", "field": "law.struct", "class": "other", "was": "«сейчас по 18,3%» — устарело", "now": "кто и сколько уступил по ЕГРЮЛ", "tag": "m004"}
