@@ -1,0 +1,47 @@
+{
+ "made": "2026-11-12",
+ "items": [
+  {
+   "key": "https://ria.ru/20261112/sapfir-2131009864.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d10628934",
+    "title": "Сапфир из коллекции дома Романовых продали почти за пять миллионов долларов",
+    "date": "2026-11-12",
+    "src": [
+     [
+      "web:ria.ru",
+      "https://ria.ru/20261112/sapfir-2131009864.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-12",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:ria.ru",
+       "https://ria.ru/20261112/sapfir-2131009864.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "почти за пять миллионов долларов",
+    "seller": "Сапфир из коллекции дома Романовых",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "почти за пять миллионов долларов",
+     "seller": "Сапфир из коллекции дома Романовых"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-12"
+  }
+ ]
+}

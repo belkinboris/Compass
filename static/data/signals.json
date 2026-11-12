@@ -1,6 +1,20 @@
 {
- "updated": "2026-11-11",
+ "updated": "2026-11-12",
  "signals": [
+  {
+   "id": "s71a449260",
+   "company_id": "g28ff15bb",
+   "date": "2026-11-12",
+   "kind": "sell",
+   "summary": "Сбербанк — возможная продажа: ТЭН",
+   "source": [
+    "vedomosti.ru",
+    "https://www.vedomosti.ru/realty/articles/2026/11/12/1244624-sberbank-vistavil-na-prodazhu"
+   ],
+   "origin": "news",
+   "strength": "strong",
+   "object_id": "g8eabc0bc"
+  },
   {
    "id": "s56c9d2251",
    "company_id": "g5c38f30d",
