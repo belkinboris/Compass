@@ -124,3 +124,55 @@
 {"id": "gf7e349aa", "field": "extra", "class": "unsupported_claim", "was": "СИГП до сделки 90%", "now": "снято", "tag": "m005"}
 {"id": "gf7e349aa", "field": "eco.target_fin", "class": "other", "was": "род занятий в финансах", "now": "объем продаж ~100 млрд ₽", "tag": "m005"}
 {"id": "gf7e349aa", "field": "title", "class": "title_standard", "was": "приобрел 25% доли в ГК", "now": "купил 25% «Полипластика»", "tag": "m005"}
+{"id": "g3e3f233c", "field": "seller", "class": "wrong_seller", "was": "«Структура «Ростелекома» и «Сбербанка»»", "now": "ООО «Телеком-5»", "tag": "m006"}
+{"id": "g3e3f233c", "field": "sum", "class": "wrong_sum", "was": "1,55 млрд ₽ (нигде не найдено)", "now": "≈1,6 млрд ₽ (стартовая цена, РИА)", "tag": "m006"}
+{"id": "g3e3f233c", "field": "extra", "class": "unsupported_claim", "was": "«здание будут и дальше сдавать»", "now": "снято", "tag": "m006"}
+{"id": "g3e3f233c", "field": "title", "class": "title_standard", "was": "Структура … продала бизнес-центр компании ООО «Первый»", "now": "«Первый» купил бизнес-центр на Арбате", "tag": "m006"}
+{"id": "g04efcb3a", "field": "buyer", "class": "wrong_buyer", "was": "ООО «Гермес-Урал»", "now": "Полина Шарова (ЕГРЮЛ 27.04.2023)", "tag": "m006"}
+{"id": "g04efcb3a", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-04-19", "tag": "m006"}
+{"id": "g04efcb3a", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "ООО «Виссманн» и ООО «Виссманн Липецк»", "tag": "m006"}
+{"id": "g04efcb3a", "field": "law.struct", "class": "other", "was": "«завод все еще у немецкого холдинга» (устаревшее)", "now": "переход по ЕГРЮЛ", "tag": "m006"}
+{"id": "g04efcb3a", "field": "title", "class": "title_standard", "was": "Viessmann продала … «Гермес-Урал»", "now": "Полина Шарова купила российские активы Viessmann", "tag": "m006"}
+{"id": "g8170bf3a", "field": "target", "class": "profile_wrong_inn", "was": "ООО «Трансмашхолдинг» ИНН 7730294821", "now": "АО «Трансмашхолдинг» ИНН 7723199790", "tag": "m006"}
+{"id": "g8170bf3a", "field": "date", "class": "wrong_date", "was": "2024-05-08 (пресс-релиз Alstom)", "now": "2024 (закрыта в начале января)", "tag": "m006"}
+{"id": "g8170bf3a", "field": "eco.share", "class": "other", "was": "список акционеров вместо доли", "now": "20% акций АО «Трансмашхолдинг»", "tag": "m006"}
+{"id": "g8170bf3a", "field": "eco.val", "class": "version_as_fact", "was": "«выкуп за половину стоимости» без автора", "now": "по словам Кирилла Липы", "tag": "m006"}
+{"id": "g8170bf3a", "field": "title", "class": "title_standard", "was": "Alstom продал 20% долю … за 75 млн евро", "now": "Российские акционеры ТМХ купили 20% … у Alstom", "tag": "m006"}
+{"id": "gc4a95bd0", "field": "seller", "class": "language", "was": "Болтенков А.Ю. и Ермолаев Д.В.", "now": "Дмитрий Ермолаев и Александр Болтенков", "tag": "m006"}
+{"id": "gc4a95bd0", "field": "eco.fin", "class": "other", "was": "описание бизнеса покупателя в «Форме расчетов»", "now": "—", "tag": "m006"}
+{"id": "gc4a95bd0", "field": "title", "class": "title_standard", "was": "СКБ Контур приобрела 80% в сервисе…", "now": "СКБ Контур купил 80% Moneyplace", "tag": "m006"}
+{"id": "gde84040f", "field": "date", "class": "wrong_date", "was": "2023-10-01", "now": "2023-10-10 (ЕГРЮЛ)", "tag": "m006"}
+{"id": "gde84040f", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ сделки вместо мотива", "now": "—", "tag": "m006"}
+{"id": "gde84040f", "field": "title", "class": "title_standard", "was": "Xella Group продала завод … холдингу", "now": "«АлфиГрупп» купил завод … у Xella", "tag": "m006"}
+{"id": "ga518ff94", "field": "sum", "class": "sum_meaning", "was": "90–150 млн ₽ как цена", "now": "Не раскрыта (оценка аналитика 90–160 млн ₽)", "tag": "m006"}
+{"id": "ga518ff94", "field": "extra", "class": "version_as_fact", "was": "«будет приносить РБК доход»", "now": "обещание холдинга", "tag": "m006"}
+{"id": "g2ee78b0c", "field": "target", "class": "profile_wrong_company", "was": "ГК «Максима» (ООО «МТ-Интеграция»)", "now": "АО «МаксимаТелеком» (новый профиль)", "tag": "m006"}
+{"id": "g2ee78b0c", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "АО «Инвестмир»", "tag": "m006"}
+{"id": "g2ee78b0c", "field": "date", "class": "wrong_date", "was": "2023-04-01", "now": "2023-03-31", "tag": "m006"}
+{"id": "g2ee78b0c", "field": "eco.rationale", "class": "invented_rationale", "was": "повтор сделки вместо мотива", "now": "слова представителя «Макомнета»", "tag": "m006"}
+{"id": "g2ee78b0c", "field": "title", "class": "title_standard", "was": "Ростелеком приобрел 51% в МаксимаТелеком", "now": "Ростелеком через «Макомнет» купил 76,25%", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "sum", "class": "sum_meaning", "was": "$2–3 млн как цена 25%", "now": "Не раскрыта (оценка всей компании — в eco.val)", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "eco.rationale", "class": "invented_rationale", "was": "слух о совладельце как «цель»", "now": "мотив по оценке аналитика", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "extra", "class": "version_as_fact", "was": "«Валан менеджмент» аффилирован с «Детским миром»", "now": "по неофициальным данным", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "пятеро сооснователей (ЕГРЮЛ)", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "ind", "class": "wrong_industry", "was": "Ритейл", "now": "Потребительские товары", "tag": "m006"}
+{"id": "gb8f9bfc6", "field": "title", "class": "title_standard", "was": "ГК «Детский мир» приобрела 25% производителя…", "now": "«Детский мир» купил 25% Zebra Toys", "tag": "m006"}
+{"id": "g07fffba3", "field": "seller", "class": "language", "was": "Наталья, супруга Петра Белого", "now": "Наталья Белая (ЕГРЮЛ)", "tag": "m006"}
+{"id": "g07fffba3", "field": "title", "class": "title_standard", "was": "выкупила контрольную долю", "now": "«Промомед» купил 51% «Берахима»", "tag": "m006"}
+{"id": "g343154dd", "field": "eco.share", "class": "wrong_share", "was": "50% долей", "now": "100% (Коммерсантъ, ЕГРЮЛ)", "tag": "m006"}
+{"id": "g343154dd", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Cirus Holding B.V.", "tag": "m006"}
+{"id": "g343154dd", "field": "extra", "class": "unsupported_claim", "was": "активы 4,8 млрд ₽", "now": "снято", "tag": "m006"}
+{"id": "g343154dd", "field": "eco.context", "class": "unsupported_claim", "was": "«14 июля 2023 влился в Кредит Европа банк»", "now": "снято", "tag": "m006"}
+{"id": "g343154dd", "field": "title", "class": "title_standard", "was": "приобрел 50% долей", "now": "купил 100% Икано-банка", "tag": "m006"}
+{"id": "g343154dd", "field": "target", "class": "profile_text", "was": "«в 2022 году 50% выкупил»", "now": "исправлено описание профиля", "tag": "m006"}
+{"id": "gbc69f146", "field": "buyer", "class": "wrong_buyer", "was": "Орлова, Манцев, Крылова", "now": "ООО «ОБКМ Инвест» (ЕГРЮЛ)", "tag": "m006"}
+{"id": "gbc69f146", "field": "seller", "class": "wrong_seller", "was": "CapMan", "now": "Iolyco Investments (CapMan — 40% продавца)", "tag": "m006"}
+{"id": "gbc69f146", "field": "eco.share", "class": "wrong_share", "was": "40% (доля CapMan в продавце)", "now": "100% долей в ООО «Кидбург»", "tag": "m006"}
+{"id": "gbc69f146", "field": "eco.val", "class": "foreign_fact", "was": "оценка «CapMan мог получить $1 млн»", "now": "выручка Iolyco, по неподтвержденным данным", "tag": "m006"}
+{"id": "gbc69f146", "field": "ind", "class": "wrong_industry", "was": "Ритейл", "now": "Развлечения", "tag": "m006"}
+{"id": "gbc69f146", "field": "title", "class": "title_standard", "was": "CapMan продал 40% … основателям и ГД Крыловой", "now": "ООО «ОБКМ Инвест» купило 100% «Кидбурга»", "tag": "m006"}
+{"id": "g5c3eeb06", "field": "sum", "class": "sum_meaning", "was": "€240 млн (из СМИ; выручка на счете)", "now": "€226,8 млн (договор, profil/ORF)", "tag": "m006"}
+{"id": "g5c3eeb06", "field": "extra", "class": "unsupported_claim", "was": "Цехлинг «знакомый Грефа», «инвестбанкир «Базэла»»", "now": "работал в структурах Дерипаски", "tag": "m006"}
+{"id": "g5c3eeb06", "field": "eco.rationale", "class": "language", "was": "Alexander Vedyakhin, Russia", "now": "Александр Ведяхин, Россия", "tag": "m006"}
+{"id": "g5c3eeb06", "field": "law.struct", "class": "other", "was": "кто видел договор вместо механики", "now": "механика оплаты и передачи акций", "tag": "m006"}
+{"id": "g5c3eeb06", "field": "title", "class": "title_standard", "was": "Сбербанк продал … Штефану Зочлингу", "now": "Bepoda Beteiligungsgesellschaft купил 100%…", "tag": "m006"}
