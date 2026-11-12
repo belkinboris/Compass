@@ -2124,6 +2124,59 @@
     ]
    },
    "pending_since": "2026-11-12T14:16:00+00:00"
+  },
+  {
+   "id": "g562fa11c",
+   "date": "2026-11-12",
+   "title": "«Сбер» продаст ненужные склады маркетплейсам до конца года",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Retailer.ru",
+     "https://retailer.ru/sber-prodast-nenuzhnye-sklady-marketplejsam-do-konca-goda/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Сбер»",
+   "asset": "ненужные склады маркетплейсам до конца года",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "ненужные склады маркетплейсам до конца года",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/sber-prodast-nenuzhnye-sklady-marketplejsam-do-konca-goda/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Сбер»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/sber-prodast-nenuzhnye-sklady-marketplejsam-do-konca-goda/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-12T15:56:33+00:00"
   }
  ]
 }

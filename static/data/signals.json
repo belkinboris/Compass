@@ -1618,7 +1618,7 @@
   {
    "id": "s81ce08c0d",
    "company_id": "gba03a733",
-   "date": "2025-11-23",
+   "date": "2025-11-21",
    "kind": "buy",
    "summary": "IHC (International Holding Company) — обсуждается покупка: иностранные активы ЛУКОЙЛа",
    "source": [
@@ -1628,6 +1628,20 @@
    "origin": "card",
    "deal_id": "g75920ee3",
    "strength": "normal"
+  },
+  {
+   "id": "s5538172d6",
+   "company_id": "g5c8c6494",
+   "date": "2025-11-21",
+   "kind": "sell",
+   "summary": "ЛУКОЙЛ — обсуждается продажа: иностранные активы ЛУКОЙЛа",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/23/11/2025/6922415b9a7947690b7d4c30"
+   ],
+   "origin": "card",
+   "deal_id": "g75920ee3",
+   "strength": "strong"
   },
   {
    "id": "s7b8330f77",
@@ -1670,6 +1684,20 @@
    "origin": "card",
    "deal_id": "g84fd8194",
    "strength": "normal"
+  },
+  {
+   "id": "s4df30ee53",
+   "company_id": "g5c8c6494",
+   "date": "2025-11-17",
+   "kind": "sell",
+   "summary": "ЛУКОЙЛ — обсуждается продажа: часть зарубежных активов Лукойла",
+   "source": [
+    "Reuters",
+    "https://www.reuters.com/business/energy/chevron-joins-race-explore-potential-purchase-lukoil-assets-sources-say-2025-11-17/"
+   ],
+   "origin": "card",
+   "deal_id": "g84fd8194",
+   "strength": "strong"
   },
   {
    "id": "sbc3333687",
