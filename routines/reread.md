@@ -173,3 +173,5 @@
 вопросы `SHORT_GENERAL` (`parties`, `status_date`, `seller`, `numbers`, `registry`,
 `other_deal`, `advisers`). Отметка — та же `reread` с `reread_scope: short`; полная
 вычитка такую карточку не берет. Старой карточке короткий ответ отметку не дает.
+
+Марафон несколькими помощниками сразу (12 ноября 2026) — `docs/reread_marathon.md`: партии с меткой, запись одной командой `pipeline/reread_apply.py` под общим замком, журнал классов ошибок `pipeline/reread_errors.jsonl`.
