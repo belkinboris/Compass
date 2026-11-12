@@ -183,7 +183,13 @@ def load_fixes():
                 store = json.load(open(os.path.join(archive, fn), encoding='utf-8'))
                 batches.extend((name, b['fixes']) for name, b in store['files'].items())
     folder = os.path.join(here, 'fixes')
+    # REVIEW_ONLY=<метка>[,<метка>] — из живых партий берутся только файлы с этой меткой
+    # в имени (12 ноября 2026, вычитка несколькими помощниками сразу: отклоненная запись
+    # в чужой недописанной партии останавливала запись своей — «не пишем НИЧЕГО»).
+    only = [t for t in (os.environ.get('REVIEW_ONLY') or '').split(',') if t.strip()]
     for mod in sorted(m.name for m in pkgutil.iter_modules([folder])):
+        if only and not any(t.strip() in mod for t in only):
+            continue
         batches.append((mod, importlib.import_module('fixes.%s' % mod).FIXES))
     batches.sort(key=lambda b: b[0])
     return [f for _name, batch in batches for f in batch]

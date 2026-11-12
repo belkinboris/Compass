@@ -326,6 +326,24 @@ def main(argv):
     if '--stats' in argv or not argv:
         stats(data)
         return 0
+    if '--queue-list' in argv:
+        # Вся очередь одной таблицей, без досье: id, вид проверки (short — карточка
+        # создана с SHORT_FROM и прошла приемку по статье; full — полная вычитка), причина.
+        for c, why in queue(data):
+            short = not c.get(STAMP) and (c.get('added') or '') >= SHORT_FROM
+            print('%s\t%s\t%s' % (c['id'], 'short' if short else 'full', why))
+        return 0
+    if '--ids' in argv and '--auto' in argv:
+        # Досье на выбранные карточки, вид проверки — по карточке (как в --queue-list).
+        want = [x.strip() for x in argv[argv.index('--ids') + 1].split(',') if x.strip()]
+        by_id = {d['id']: d for d in data['deals']}
+        for cid in want:
+            c = by_id[cid]
+            if not c.get(STAMP) and (c.get('added') or '') >= SHORT_FROM:
+                print(short_dossier(c, data))
+            else:
+                print(dossier(c, 'марафон', data))
+        return 0
     if '--ids' in argv:
         # Досье на выбранные карточки вне очереди (владелец, 9 ноября 2026: вычитать
         # все карточки, где консультанты — организаторы форума M&A).
