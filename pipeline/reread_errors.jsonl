@@ -46,3 +46,35 @@
 {"id": "gad807a24", "field": "eco.rationale", "class": "invented_rationale", "was": "повтор «Дополнительно» вместо мотива", "now": "—", "tag": "m001"}
 {"id": "gad807a24", "field": "src", "class": "dead_source", "was": "общая лента Business & Human Rights", "now": "Sostav, New Retail, ЕГРЮЛ", "tag": "m001"}
 {"id": "gad807a24", "field": "title", "class": "title_standard", "was": "PVH Corp. продала…", "now": "Денис Щукин купил российскую розницу Calvin Klein и Tommy Hilfiger у PVH", "tag": "m001"}
+{"id": "g79f683bc", "field": "extra", "class": "unsupported_claim", "was": "класса А, ввод в 2026 году", "now": "введен в IV кв. 2025 года (промо Stone)", "tag": "m003"}
+{"id": "g9602cce9", "field": "eco.context", "class": "wrong_seller", "was": "владелец ООО — Александр Казаков", "now": "Казаков до мая 2022, продавец Виталий Федоров (ЕГРЮЛ)", "tag": "m003"}
+{"id": "g9602cce9", "field": "date", "class": "wrong_date", "was": "2024-12-12 (день статьи)", "now": "2024-12-10 (ЕГРЮЛ)", "tag": "m003"}
+{"id": "g9602cce9", "field": "title", "class": "title_standard", "was": "(владельца бренда водки) в заголовке", "now": "без описания предмета", "tag": "m003"}
+{"id": "gc991514e", "field": "profile.desc", "class": "unsupported_claim", "was": "связана с Артемом Чайкой", "now": "снято (нет в источниках)", "tag": "m003"}
+{"id": "gc991514e", "field": "eco.context", "class": "unsupported_claim", "was": "66,7% НПО «Экар» у Романовой", "now": "у «Лето Финанс»", "tag": "m003"}
+{"id": "gc991514e", "field": "law.struct", "class": "verbatim", "was": "пересказ Интерфакса почти дословно", "now": "переписано", "tag": "m003"}
+{"id": "g4577126f", "field": "sum", "class": "wrong_sum", "was": "€78,0 млн", "now": "Не раскрыта; оценка Ъ 7–10 млрд ₽ в eco.val", "tag": "m003"}
+{"id": "g4577126f", "field": "title", "class": "title_standard", "was": "приобрел", "now": "купил", "tag": "m003"}
+{"id": "g2b22dae9", "field": "sum", "class": "sum_meaning", "was": "2,5 млрд ₽", "now": "2,5 млрд ₽ (по оценке), оценщик Бурмистров", "tag": "m003"}
+{"id": "g2b22dae9", "field": "date", "class": "wrong_date", "was": "2024-08-02 (день статьи)", "now": "2024 (закрыта в марте 2024)", "tag": "m003"}
+{"id": "g2b22dae9", "field": "eco.share", "class": "other", "was": "заказчики завода", "now": "98,5% акций и цех «Сименс Привод»", "tag": "m003"}
+{"id": "g2b22dae9", "field": "eco.rationale", "class": "unsupported_claim", "was": "оценка Вадима Тедеева", "now": "снята, не найдена в источниках", "tag": "m003"}
+{"id": "g2b22dae9", "field": "title", "class": "title_standard", "was": "повтор заголовка Ъ", "now": "«Транскомпонент» купил завод", "tag": "m003"}
+{"id": "gba72051d", "field": "buyer", "class": "wrong_buyer", "was": "Агрокомплекс им. Ткачева", "now": "ООО «Ресурс» (ЕГРЮЛ), связь — версия", "tag": "m003"}
+{"id": "gba72051d", "field": "eco.rationale", "class": "invented_rationale", "was": "рассуждение без автора", "now": "мотив со слов Сизова и Рылько", "tag": "m003"}
+{"id": "gba72051d", "field": "eco.fin", "class": "version_as_fact", "was": "догадка без автора", "now": "по словам Дмитрия Габышева", "tag": "m003"}
+{"id": "gec6e9db6", "field": "extra", "class": "wrong_status", "was": "закрыта в октябре 2023", "now": "подписание в октябре, закрытие в ноябре", "tag": "m003"}
+{"id": "gec6e9db6", "field": "date", "class": "wrong_date", "was": "2023-10-19", "now": "2023-11-13 (ЕГРЮЛ)", "tag": "m003"}
+{"id": "gec6e9db6", "field": "title", "class": "title_standard", "was": "Bonava продал", "now": "Star Development купила", "tag": "m003"}
+{"id": "g03ae93e7", "field": "eco.rationale", "class": "foreign_fact", "was": "Гильварг — владелец «Полипласта»", "now": "Гильварг — владелец продавца; цель со слов Шамсутдинова", "tag": "m003"}
+{"id": "g03ae93e7", "field": "date", "class": "wrong_date", "was": "2023-09-06", "now": "2023", "tag": "m003"}
+{"id": "g0806cf90", "field": "extra", "class": "unsupported_claim", "was": "EBITDA 112 млн ₽", "now": "убыток 4,4 млн ₽ (РБК)", "tag": "m003"}
+{"id": "g0806cf90", "field": "date", "class": "wrong_date", "was": "2023-09-01", "now": "2023", "tag": "m003"}
+{"id": "g0806cf90", "field": "law.terms", "class": "verbatim", "was": "дословная фраза OHLEBE, не условие", "now": "в контекст с атрибуцией", "tag": "m003"}
+{"id": "g3ef24264", "field": "seller", "class": "wrong_seller", "was": "Дмитрий Столов и Игорь Савви", "now": "Дмитрий Столов (Савви вышел в 2017, ЕГРЮЛ)", "tag": "m003"}
+{"id": "g3ef24264", "field": "title", "class": "title_standard", "was": "приобрела оператора метромеди", "now": "купила «Метроном» у Дмитрия Столова", "tag": "m003"}
+{"id": "g02a89309", "field": "title", "class": "title_standard", "was": "Русская энергия продала", "now": "Структура Газпромбанка купила", "tag": "m003"}
+{"id": "g02a89309", "field": "eco.val", "class": "language", "was": "сама оценка", "now": "переписано", "tag": "m003"}
+{"id": "ge1fbcfb8", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-12-03 (ЕГРЮЛ)", "tag": "m003"}
+{"id": "ge1fbcfb8", "field": "profile.desc", "class": "profile_text", "was": "купила в 2023 году", "now": "2024 год, «Оптиком» 20%", "tag": "m003"}
+{"id": "ge1fbcfb8", "field": "eco.share", "class": "other", "was": "описание компании", "now": "все доли общества", "tag": "m003"}
