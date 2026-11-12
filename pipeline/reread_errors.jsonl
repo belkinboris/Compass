@@ -429,3 +429,14 @@
 {"id": "g150f6855", "field": "date", "class": "wrong_date", "was": "2025-01-16 (день статьи)", "now": "2024-12-20 (ЕГРЮЛ)", "tag": "m019"}
 {"id": "g150f6855", "field": "eco.context", "class": "foreign_fact", "was": "«Яндекс» купил «Клиентский сервис» в мае 2025", "now": "снято", "tag": "m019"}
 {"id": "g150f6855", "field": "extra", "class": "invented_rationale", "was": "Цель покупки — цифровизация деятельности компании", "now": "слова представителя: проект «Цифровая УК»", "tag": "m019"}
+{"id": "gf019cd92", "field": "title", "class": "title_standard", "was": "приобрел … за 40,5 млрд руб. (оценка как цена)", "now": "Станислав Карабут купил бизнес-парк «Арма»", "tag": "m018"}
+{"id": "gf019cd92", "field": "eco.context", "class": "language", "was": "Сам Карабут", "now": "Станислав Карабут", "tag": "m018"}
+{"id": "gf019cd92", "field": "src", "class": "unsupported_claim", "was": "контекст без источника", "now": "+ Коммерсантъ 8691575", "tag": "m018"}
+{"id": "g9da487d4", "field": "extra", "class": "invented_rationale", "was": "банк рассчитывает расширить присутствие, кросс-продажи", "now": "банк сделку не комментировал", "tag": "m018"}
+{"id": "g9da487d4", "field": "eco.context", "class": "version_as_fact", "was": "Банк, по всей видимости, продолжает", "now": "По оценке «Делового Петербурга»", "tag": "m018"}
+{"id": "g9da487d4", "field": "title", "class": "title_standard", "was": "приобрел 70% ООО «…»", "now": "купил 70% агентской компании «Гамбит»", "tag": "m018"}
+{"id": "g7596ae81", "field": "sum", "class": "sum_meaning", "was": "8–9 млрд ₽ (оценка одного Пулково)", "now": "9–10 млрд ₽ (по оценке цены сделки)", "tag": "m018"}
+{"id": "g7596ae81", "field": "seller", "class": "wrong_seller", "was": "Структуры Виктора Семенова и компания Hines", "now": "Фонды Hines и группа «Белая Дача»", "tag": "m018"}
+{"id": "g7596ae81", "field": "date", "class": "wrong_date", "was": "2025-04-01", "now": "2025-04-17", "tag": "m018"}
+{"id": "g7596ae81", "field": "extra", "class": "unsupported_claim", "was": "доли 42% и 48%, Семенов", "now": "снято", "tag": "m018"}
+{"id": "g7596ae81", "field": "title", "class": "title_standard", "was": "ИК «Кама капитал» выкупила …", "now": "«Кама Капитал» купил …", "tag": "m018"}
