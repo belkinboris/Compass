@@ -176,3 +176,54 @@
 {"id": "g5c3eeb06", "field": "eco.rationale", "class": "language", "was": "Alexander Vedyakhin, Russia", "now": "Александр Ведяхин, Россия", "tag": "m006"}
 {"id": "g5c3eeb06", "field": "law.struct", "class": "other", "was": "кто видел договор вместо механики", "now": "механика оплаты и передачи акций", "tag": "m006"}
 {"id": "g5c3eeb06", "field": "title", "class": "title_standard", "was": "Сбербанк продал … Штефану Зочлингу", "now": "Bepoda Beteiligungsgesellschaft купил 100%…", "tag": "m006"}
+{"id": "g3bcf9780", "field": "target", "class": "wrong_target", "was": "ООО «ОМНИТЕХ» (по реестру осталось у Матусевич)", "now": "Платформа Umnico, юрлицо не раскрыто", "tag": "m011"}
+{"id": "g3bcf9780", "field": "date", "class": "wrong_date", "was": "2025-12-29 (день публикации)", "now": "2025", "tag": "m011"}
+{"id": "g3bcf9780", "field": "extra", "class": "unsupported_claim", "was": "«договор подписан 29 декабря», «ЕГРЮЛ не проведены»", "now": "снято", "tag": "m011"}
+{"id": "g3bcf9780", "field": "title", "class": "title_standard", "was": "Т2 Мобайл приобрел платформу…", "now": "Т2 купил платформу Umnico", "tag": "m011"}
+{"id": "g3bcf9780", "field": "eco.target_fin", "class": "other", "was": "финансы «Омнитеха» как предмета", "now": "в контекст с оговоркой", "tag": "m011"}
+{"id": "g78986e22", "field": "eco.val", "class": "version_as_fact", "was": "«оценен в 65 млрд» фактом", "now": "по неофициальным данным", "tag": "m011"}
+{"id": "g78986e22", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив продавца без автора", "now": "мнение аналитика IPM Consulting", "tag": "m011"}
+{"id": "g78986e22", "field": "ind", "class": "wrong_industry", "was": "Транспорт и логистика", "now": "Финансовые услуги", "tag": "m011"}
+{"id": "g78986e22", "field": "title", "class": "title_standard", "was": "Альфа-банк приобрел 87,5% акций лизинговой компании…", "now": "Альфа-банк купил 87,5% «Европлана» у SFI", "tag": "m011"}
+{"id": "g78986e22", "field": "eco.target_fin", "class": "verbatim", "was": "копия AK&M", "now": "пересказ", "tag": "m011"}
+{"id": "g0a2088ba", "field": "eco.context", "class": "foreign_fact", "was": "покупка «Автотеха» в мае 2026", "now": "снято", "tag": "m011"}
+{"id": "g0a2088ba", "field": "eco.context", "class": "language", "was": "«сама «Дельта»»", "now": "переписано", "tag": "m011"}
+{"id": "g0a2088ba", "field": "title", "class": "title_standard", "was": "MGC Group приобрела 100% долей в российских структурах…", "now": "MGC Group купил два бывших завода Grupo Antolin в России", "tag": "m011"}
+{"id": "g0a2088ba", "field": "extra", "class": "verbatim", "was": "перечень продукции дословно", "now": "пересказ", "tag": "m011"}
+{"id": "g596c8144", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Закрыта (ЕГРЮЛ 13.01.2026)", "tag": "m011"}
+{"id": "g596c8144", "field": "date", "class": "wrong_date", "was": "2025-12-23 (анонс)", "now": "2026-01-13", "tag": "m011"}
+{"id": "g596c8144", "field": "eco.share", "class": "wrong_share", "was": "описание платформы", "now": "100% долей ООО «Интернет-Технологии»", "tag": "m011"}
+{"id": "g596c8144", "field": "title", "class": "title_standard", "was": "Яндекс покупает платформу…", "now": "Яндекс купил платформу DIKIDI", "tag": "m011"}
+{"id": "g948e18e1", "field": "sum", "class": "sum_meaning", "was": "Более $1 млрд", "now": "≈$1 млрд (по оценке)", "tag": "m011"}
+{"id": "g948e18e1", "field": "eco.context", "class": "foreign_fact", "was": "покупка ООО «Новая сырьевая компания» на Чукотке", "now": "снято", "tag": "m011"}
+{"id": "g948e18e1", "field": "src", "class": "source_not_about", "was": "abn.agency о Чукотке", "now": "снят, добавлен Интерфакс", "tag": "m011"}
+{"id": "g948e18e1", "field": "extra", "class": "language", "was": "«сам Харитонин»", "now": "переписано", "tag": "m011"}
+{"id": "g948e18e1", "field": "title", "class": "title_standard", "was": "Nordgold рассматривает продажу…", "now": "Рудники Nordgold в Буркина-Фасо выставлены на продажу", "tag": "m011"}
+{"id": "gecec7266", "field": "buyer", "class": "wrong_buyer", "was": "Фонд «Бумеранг капитал»", "now": "ООО «Прованс» (по СПАРК получило доли)", "tag": "m011"}
+{"id": "gecec7266", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "МКООО «Сиэсай Менеджмент»", "tag": "m011"}
+{"id": "gecec7266", "field": "extra", "class": "unsupported_claim", "was": "Ultra Fresh, поставки «Макдоналдс»", "now": "снято", "tag": "m011"}
+{"id": "gecec7266", "field": "eco.context", "class": "version_as_fact", "was": "скептическая оценка без автора", "now": "мнение Ивана Пешкова", "tag": "m011"}
+{"id": "gecec7266", "field": "title", "class": "title_standard", "was": "Фонд выкупил группу «Салатерия»", "now": "«Прованс» купил «Салатерию»", "tag": "m011"}
+{"id": "gecec7266", "field": "desc", "class": "profile_text", "was": "профиль: выкуплен в 2024 году, «Макдоналдс»", "now": "исправлено", "tag": "m011"}
+{"id": "g352131ac", "field": "sum", "class": "sum_meaning", "was": "180–200 млн ₽ до 2 млрд ₽ (по оценке)", "now": "Не раскрыта (оценки аналитиков стоимости актива)", "tag": "m011"}
+{"id": "g352131ac", "field": "eco.finadv", "class": "adviser_wrong", "was": "тендер на консультанта", "now": "Публично не сообщалось", "tag": "m011"}
+{"id": "g352131ac", "field": "law.struct", "class": "unsupported_claim", "was": "51% через АО «ХК Быстра»", "now": "снято", "tag": "m011"}
+{"id": "g352131ac", "field": "target", "class": "wrong_target", "was": "проект добычи золота Быстринско-Ширинское", "now": "ООО «Ширинское»", "tag": "m011"}
+{"id": "g352131ac", "field": "title", "class": "title_standard", "was": "Норникель планирует продать проект…", "now": "Золотой проект «Ширинское» «Норникеля» выставлен на продажу", "tag": "m011"}
+{"id": "gd5741cbd", "field": "extra", "class": "unsupported_claim", "was": "AIINS привлекла 20 млн ₽ в 2023 году", "now": "снято", "tag": "m011"}
+{"id": "gd5741cbd", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "51% долей ООО «Адепт»", "tag": "m011"}
+{"id": "gd5741cbd", "field": "title", "class": "title_standard", "was": "1С приобрела 51% компании AIINS (…)", "now": "Фирма «1С» купила 51% ООО «Адепт»", "tag": "m011"}
+{"id": "ge848daa0", "field": "date", "class": "wrong_date", "was": "2025-12-01 (выдуманный день)", "now": "2025", "tag": "m011"}
+{"id": "ge848daa0", "field": "law.struct", "class": "unsupported_claim", "was": "новые лицензии 31 марта 2026", "now": "снято", "tag": "m011"}
+{"id": "ge848daa0", "field": "title", "class": "title_standard", "was": "…АО «РНКБ Страхование»", "now": "МТС Банк купил «РНКБ Страхование»", "tag": "m011"}
+{"id": "g934ee51b", "field": "date", "class": "wrong_date", "was": "2025-12-01", "now": "2026 (активы перешли в мае 2026)", "tag": "m011"}
+{"id": "g934ee51b", "field": "sum", "class": "wrong_sum", "was": "≈2,613 млрд ₽ + 35% в бюджет", "now": "2,613 млрд ₽", "tag": "m011"}
+{"id": "g934ee51b", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Caterpillar", "tag": "m011"}
+{"id": "g934ee51b", "field": "eco.context", "class": "language", "was": "«сама хотела», повтор состава предмета", "now": "переписано", "tag": "m011"}
+{"id": "g4444b396", "field": "seller", "class": "wrong_seller", "was": "Козина и Травин (вышли в 2015 и 2010)", "now": "пусто", "tag": "m011"}
+{"id": "g4444b396", "field": "sum", "class": "sum_meaning", "was": "5–8,5 млрд ₽ (оценка всего комплекса)", "now": "Не раскрыта", "tag": "m011"}
+{"id": "g4444b396", "field": "eco.share", "class": "verbatim", "was": "копия фразы о доле Земцова", "now": "16,6% долей ООО «ТВК «Тишинка»»", "tag": "m011"}
+{"id": "g4444b396", "field": "title", "class": "title_standard", "was": "Capital Group приобрела 16,6%…", "now": "Велана купила 16,6% ТВК «Тишинка»", "tag": "m011"}
+{"id": "g6304cf91", "field": "sum", "class": "sum_meaning", "was": "498,14 млн ₽", "now": "498,14 млн ₽ (по оценке)", "tag": "m011"}
+{"id": "g6304cf91", "field": "eco.fin", "class": "other", "was": "план ГОКа в «Форме расчетов»", "now": "в контекст", "tag": "m011"}
+{"id": "g6304cf91", "field": "title", "class": "title_standard", "was": "Highland Gold продала 24,9% доли в месторождении…", "now": "Фонды УК «Восхождение» купили 24,9% ООО «Клен» у «Ареала»", "tag": "m011"}
