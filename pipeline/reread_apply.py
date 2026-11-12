@@ -242,7 +242,11 @@ def main(argv):
         with open(ERRORS, 'a', encoding='utf-8') as f:
             for e in plan['errors']:
                 f.write(json.dumps(dict(e, tag=tag), ensure_ascii=False) + '\n')
-    run(['git', 'add', '-u'])
+    run(['git', 'add', '-u', '--', '.', ':!pipeline/ingest/fixes', ':!pipeline/archive'])   # чужие недописанные файлы правок не берем
+    code, out = run(['git', 'ls-files', '-m', 'pipeline/ingest/fixes', 'pipeline/archive'])
+    for f in out.split():
+        if tag in f:
+            run(['git', 'add', f])
     for path in [ERRORS] + list(plan.get('scripts') or []):
         run(['git', 'add', path])
     code, out = run(['git', 'ls-files', '--others', '--exclude-standard', 'pipeline/ingest/fixes'])
