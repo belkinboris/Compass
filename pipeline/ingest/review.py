@@ -1063,6 +1063,9 @@ def main(write=False, mark_read=(), mark_deep=(), mark_weekly=(), mark_followup=
         elif _ms_copied(cards[mid], mkind, mheadline):  # своей фразой: docs/card_title.md
             refused.append((dict(id=mid, field='milestone'), ['заголовок вехи повторяет заголовок источника '
                             '«%s» — своей фразой' % _ms_copied(cards[mid], mkind, mheadline)[:90]]))
+        elif __import__('accept_card').milestone_headline_style(mheadline):  # владелец, 12 ноября 2026
+            refused.append((dict(id=mid, field='milestone'),
+                            ['заголовок вехи: ' + __import__('accept_card').milestone_headline_style(mheadline)]))
         else:
             event = mark_milestone(cards[mid], mkind)
             if event is None:

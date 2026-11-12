@@ -11424,3 +11424,20 @@ def test_owner_text_for_card_already_on_site_is_not_dropped():
     assert approve.unproven([{'id': 1, 'deal_id': 'g1', 'verdict': 'approve', 'has_text': True}], base)
     base['deals'][0]['post_override'] = 'Мой текст'
     assert not approve.unproven([{'id': 1, 'deal_id': 'g1', 'verdict': 'approve', 'has_text': True}], base)
+
+
+def test_milestone_headline_names_the_actor_in_neutral_words():
+    """Владелец, 12 ноября 2026 («Что с заголовками»): пост об этапе вышел в консоль с
+    «Сделку по покупке … группой «Арнест» закрыли» и «…дал добро … почти за 40 млрд»."""
+    import accept_card
+    bad = ['Сделку по покупке подмосковного завода бытовой химии Reckitt группой «Арнест» закрыли',
+           'Совет директоров Шереметьево дал добро на продажу 75% «Библио-Глобуса»',
+           'Wildberries покупает «Библио-Глобус» почти за 40 млрд рублей',
+           'Продажу завода «Арнесту» одобрили']
+    good = ['«Арнест» завершил покупку подмосковного завода бытовой химии Reckitt',
+            'Совет директоров Шереметьево одобрил продажу 75% «Библио-Глобуса» Wildberries & Russ примерно за 40 млрд рублей',
+            'Сделка Z закрыта']
+    for h in bad:
+        assert accept_card.milestone_headline_style(h), h
+    for h in good:
+        assert accept_card.milestone_headline_style(h) is None, h

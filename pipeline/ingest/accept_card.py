@@ -761,6 +761,28 @@ def milestone_copied(card, kind, headline):
     return title_copied_from({'title': headline, 'src': src})
 
 
+MS_OBJECT_FIRST = re.compile(r'^(сделку|продажу|покупку)\s', re.I)
+MS_COLLOQUIAL = re.compile(r'\bдал[аио]? добро\b|\bпочти\b|\bуш[её]л[аи]? за\b|\bприбрал[аи]?\b|\bзабрал[аи]?\b|\bдоговорил(?:ся|ась|ись) купить\b', re.I)
+MS_IMPERSONAL = re.compile(r'\b(закрыли|одобрили|согласовали|продали|купили|разрешили|запретили|завершили|сорвали|отменили)\s*$', re.I)
+
+
+def milestone_headline_style(headline):
+    """Заголовок поста об этапе пишется как заголовок карточки (docs/card_title.md):
+    кто действует — сказуемое — что. Владелец, 12 ноября 2026: «Сделку по покупке …
+    группой «Арнест» закрыли» и «Совет директоров Шереметьево дал добро … почти за
+    40 млрд» ушли в консоль. Возвращает причину отказа или None."""
+    h = str(headline or '').strip()
+    if MS_OBJECT_FIRST.search(h):
+        return 'заголовок начинается с предмета («%s…») — первым идет тот, кто действует' % h.split()[0]
+    m = MS_IMPERSONAL.search(h)
+    if m:
+        return 'безличное «%s» в конце — назовите, кто действует («X завершил покупку Y»)' % m.group(1)
+    m = MS_COLLOQUIAL.search(h)
+    if m:
+        return 'разговорное «%s» — нейтральным словом («одобрил», «примерно за»)' % m.group(0)
+    return None
+
+
 def _card_blob(card, comps):
     parts = [str(card.get(k) or '') for k in ('title', 'asset', 'extra', 'seller', 'buyer_name')]
     parts += [str(v or '') for sec in ('eco', 'law') for v in (card.get(sec) or {}).values() if isinstance(v, str)]
