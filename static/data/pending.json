@@ -2161,6 +2161,71 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>ТЦ «Европолис Ростокино» выставлен на продажу</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Максим Левченко (Fort Group)\n<b>Предмет:</b> ТЦ «Европолис Ростокино»\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://1prime.ru/20261113/vladelets-875211218.html\">ПРАЙМ</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gb5c49ac1\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g8eefa9e1",
+   "date": "2026-11-13",
+   "title": "Сапфир российской императорской семьи продали анонимному коллекционеру",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Сапфир российской императорской семьи",
+   "asset": "анонимный коллекционер",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "анонимный коллекционер",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Сапфир российской императорской семьи",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T15:57:48+00:00"
   }
  ]
 }
