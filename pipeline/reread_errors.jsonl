@@ -3352,3 +3352,184 @@
 {"id": "gcfae418d", "field": "eco.target_fin", "class": "foreign_fact", "was": "выручка «Скандинавии» (почти 13 млрд ₽) как финансы ЮМГ", "now": "выручка группы EMC 27,3 млрд ₽", "tag": "m201"}
 {"id": "gcfae418d", "field": "eco.share", "class": "other", "was": "—", "now": "20,9% акций МКПАО «ЮМГ»", "tag": "m201"}
 {"id": "gcfae418d", "field": "title", "class": "title_standard", "was": "Холдинг ЮМГ (EMC) привлек инвестицию «Севергрупп»…", "now": "«Севергрупп» купил 20,9% ЮМГ", "tag": "m201"}
+{"id": "c672707b3", "field": "title", "class": "title_standard", "was": "Продажа 25% акций клиники АО «Медицина» Григорием Ройтбергом", "now": "25% клиники «Медицина» выставлены на продажу", "tag": "m212"}
+{"id": "c672707b3", "field": "eco.share", "class": "wrong_share", "was": "Не меньше 25% акций АО «Медицина», которому принадлежат…", "now": "25% акций АО «Медицина»", "tag": "m212"}
+{"id": "c672707b3", "field": "eco.val", "class": "unsupported_claim", "was": "Эксперты оценивают 100% компании в 20 млрд ₽", "now": "—", "tag": "m212"}
+{"id": "c672707b3", "field": "eco.rationale", "class": "invented_rationale", "was": "Эксперты связывают поиск инвестора с расширением клиники", "now": "—", "tag": "m212"}
+{"id": "c672707b3", "field": "eco.context", "class": "unsupported_claim", "was": "Среди акционеров — МФК IFC", "now": "снято, добавлены история клиники и IPO-сюжет 2026", "tag": "m212"}
+{"id": "c4341479b", "field": "title", "class": "title_standard", "was": "Александр Новак приобрел 41,3 га земли Дмитрия Минца в Зыкове при банкротстве", "now": "Александр Новак купил у Дмитрия Минца 41,3 га земли в Зыкове", "tag": "m212"}
+{"id": "c4341479b", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Закрыта", "tag": "m212"}
+{"id": "c4341479b", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "Земельный участок 41,3 га в деревне Зыково", "tag": "m212"}
+{"id": "c4341479b", "field": "buyer", "class": "profile_text", "was": "профиль «Александр Новак (владелец «Арники»)», в описании «в 2022 году купил»", "now": "«Александр Новак», описание без ошибочного года", "tag": "m212"}
+{"id": "c3e0b0e8f", "field": "extra", "class": "unsupported_claim", "was": "Реорганизация завершена и зарегистрирована в ЕГРЮЛ", "now": "в ЕГРЮЛ запись о начале реорганизации", "tag": "m212"}
+{"id": "c3e0b0e8f", "field": "eco.rationale", "class": "invented_rationale", "was": "присоединение формально закрывает юрлицо (наш вывод)", "now": "—", "tag": "m212"}
+{"id": "c3e0b0e8f", "field": "eco.context", "class": "unsupported_claim", "was": "бенефициары — семья Владислава Филева", "now": "снято", "tag": "m212"}
+{"id": "c3e0b0e8f", "field": "eco.share", "class": "wrong_share", "was": "описание ООО «Глобус»", "now": "—", "tag": "m212"}
+{"id": "cfeca52ce", "field": "title", "class": "title_standard", "was": "Детский мир завершил реорганизацию … и запуском программы выкупа акций", "now": "«Детский мир» выделил операционный бизнес в ООО «ДМ»", "tag": "m212"}
+{"id": "cfeca52ce", "field": "date", "class": "wrong_date", "was": "2023-05-30 (пресс-релиз)", "now": "2023-05-02 (ЕГРЮЛ, регистрация ООО «ДМ»)", "tag": "m212"}
+{"id": "cfeca52ce", "field": "eco.fin", "class": "other", "was": "решение о ликвидации ПАО в «Форме расчетов»", "now": "—", "tag": "m212"}
+{"id": "cfeca52ce", "field": "eco.rationale", "class": "invented_rationale", "was": "параметры выкупа совпали с планами", "now": "мотив перехода в частную компанию со слов компании", "tag": "m212"}
+{"id": "cfeca52ce", "field": "eco.context", "class": "language", "was": "текст оборван на «15 февраля 2024 года», служебная скобка", "now": "пересказ заново", "tag": "m212"}
+{"id": "cfeca52ce", "field": "eco.share", "class": "wrong_share", "was": "Реорганизация в форме выделения: 100% операционного бизнеса…", "now": "100% долей в ООО «ДМ»", "tag": "m212"}
+{"id": "c1062263e", "field": "title", "class": "title_standard", "was": "Изъятие акций Метафракс Кемикалс в собственность государства по решению суда", "now": "Акции «Метафракс Кемикалс» обращены в доход государства", "tag": "m212"}
+{"id": "c1062263e", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-09-08 (решение суда)", "tag": "m212"}
+{"id": "c1062263e", "field": "eco.val", "class": "unsupported_claim", "was": "370 млн и 116 млрд ₽ (возражение ответчика)", "now": "—", "tag": "m212"}
+{"id": "c1062263e", "field": "eco.target_fin", "class": "other", "was": "финансы «Метафракс Групп» по МСФО", "now": "финансы АО «Метафракс Кемикалс» по РСБУ", "tag": "m212"}
+{"id": "c1062263e", "field": "law.appr", "class": "other", "was": "доводы суда вместо согласования", "now": "решения трех судебных инстанций", "tag": "m212"}
+{"id": "c1062263e", "field": "extra", "class": "verbatim", "was": "22 слова подряд из Коммерсанта", "now": "пересказ", "tag": "m212"}
+{"id": "c011c4ee1", "field": "title", "class": "title_standard", "was": "GeoPost ведет переговоры о продаже российской службы доставки DPD", "now": "Российский бизнес DPD выставлен на продажу", "tag": "m212"}
+{"id": "c011c4ee1", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-09-06", "tag": "m212"}
+{"id": "c011c4ee1", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Обсуждается", "tag": "m212"}
+{"id": "c011c4ee1", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение Ивана Кургузова о привлекательности актива", "now": "—", "tag": "m212"}
+{"id": "c011c4ee1", "field": "eco.context", "class": "language", "was": "гендиректор «Войнов», «Сама компания»", "now": "Николай Воинов, пересказ", "tag": "m212"}
+{"id": "c011c4ee1", "field": "extra", "class": "unsupported_claim", "was": "опровергла пресс-служба GeoPost", "now": "опроверг гендиректор DPD в России", "tag": "m212"}
+{"id": "c011c4ee1", "field": "law.terms", "class": "other", "was": "предупреждение юриста о риске", "now": "—", "tag": "m212"}
+{"id": "caac79625", "field": "title", "class": "title_standard", "was": "Продажа Росэлектроникой 100% акций АО «Спецмагнит» с недвижимостью на Дмитровском шоссе", "now": "Артем Ченцов купил на торгах АО «Спецмагнит»", "tag": "m210"}
+{"id": "caac79625", "field": "date", "class": "wrong_date", "was": "2024-09-01 (нет в источниках)", "now": "2024", "tag": "m210"}
+{"id": "caac79625", "field": "asset", "class": "wrong_target", "was": "не назван", "now": "АО «Спецмагнит»", "tag": "m210"}
+{"id": "caac79625", "field": "eco.share", "class": "wrong_share", "was": "На продажу выставлены 100% акций АО «Спецмагнит», принадлежащих Росэлектронике.", "now": "100% акций АО «Спецмагнит»", "tag": "m210"}
+{"id": "caac79625", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение Telegram-канала без автора про КРТ", "now": "—", "tag": "m210"}
+{"id": "caac79625", "field": "eco.context", "class": "verbatim", "was": "предложение почти дословно из @dealsma", "now": "пересказ по Ведомостям", "tag": "m210"}
+{"id": "caac79625", "field": "eco.val", "class": "other", "was": "итоговая цена повторяла sum", "now": "только стартовая и минимальная цена", "tag": "m210"}
+{"id": "caac79625", "field": "src", "class": "other", "was": "один источник — TAdviser", "now": "Движение, TAdviser, Ведомости", "tag": "m210"}
+{"id": "c01291410", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Подписана (соглашение 13.08.2024)", "tag": "m210"}
+{"id": "c01291410", "field": "title", "class": "title_standard", "was": "Kismet Capital Group продала медиаактивы группе инвесторов", "now": "«Медиа-Телеком» и другие инвесторы покупают «Медиа 1» у Kismet Capital Group", "tag": "m210"}
+{"id": "c01291410", "field": "eco.share", "class": "wrong_share", "was": "описание каналов холдинга", "now": "Активы холдинга «Медиа 1»", "tag": "m210"}
+{"id": "c01291410", "field": "eco.val", "class": "unsupported_claim", "was": "оценки Хоффмана, Либина 8–12 млрд, Иншутина 15–20 млрд — нет в статьях", "now": "мультипликатор Либина с автором", "tag": "m210"}
+{"id": "c01291410", "field": "eco.rationale", "class": "invented_rationale", "was": "слова Таврина без автора", "now": "с атрибуцией Ивану Таврину", "tag": "m210"}
+{"id": "c01291410", "field": "sum", "class": "other", "was": "пусто", "now": "Не раскрыта", "tag": "m210"}
+{"id": "cc16fce80", "field": "title", "class": "title_standard", "was": "Росимущество продало золотодобывающую компанию ЮГК структуре Руслана Байсарова", "now": "«БТС-Мост Холдинг» купил на торгах 67,2% акций ЮГК", "tag": "m210"}
+{"id": "cc16fce80", "field": "eco.share", "class": "wrong_share", "was": "с описанием «ранее конфискованные у Струкова»", "now": "67,2% акций ПАО «ЮГК» и доли связанных структур", "tag": "m210"}
+{"id": "cc16fce80", "field": "eco.val", "class": "unsupported_claim", "was": "оценка Freedom Global и «80% Арбат-Сити — 1 ₽» — нет в источниках", "now": "оценки Росимущества", "tag": "m210"}
+{"id": "cc16fce80", "field": "law.appr", "class": "unsupported_claim", "was": "предписание Банка России Росимуществу (не согласование, без источника)", "now": "—", "tag": "m210"}
+{"id": "cc16fce80", "field": "eco.context", "class": "verbatim", "was": "10 слов подряд из статьи", "now": "пересказ", "tag": "m210"}
+{"id": "c06611bae", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (вход в будущее СП)", "tag": "m210"}
+{"id": "c06611bae", "field": "status", "class": "wrong_status", "was": "Не состоялась (по опровержению FESCO)", "now": "Обсуждается", "tag": "m210"}
+{"id": "c06611bae", "field": "date", "class": "wrong_date", "was": "2026-06-15 (день статьи)", "now": "2026", "tag": "m210"}
+{"id": "c06611bae", "field": "buyer", "class": "wrong_buyer", "was": "не назван", "now": "ООО «РВБ» (Wildberries & Russ)", "tag": "m210"}
+{"id": "c06611bae", "field": "title", "class": "title_standard", "was": "Wildberries рассматривает участие в Национальной цифровой транспортно-логистической платформе РЖД и FESCO", "now": "Wildberries & Russ может купить долю в Национальной логистической платформе РЖД и FESCO", "tag": "m210"}
+{"id": "c06611bae", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив без автора", "now": "—", "tag": "m210"}
+{"id": "c06611bae", "field": "eco.context", "class": "unsupported_claim", "was": "учредители ООО «ЦТЛП Лотус» — без источника", "now": "снято", "tag": "m210"}
+{"id": "cacdb5edc", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Передача в управление", "tag": "m210"}
+{"id": "cacdb5edc", "field": "buyer", "class": "wrong_buyer", "was": "не назван", "now": "ВЭБ.РФ", "tag": "m210"}
+{"id": "cacdb5edc", "field": "date", "class": "wrong_date", "was": "2026-02-13 (день пресс-релиза)", "now": "2026-02-18 (ЕГРЮЛ)", "tag": "m210"}
+{"id": "cacdb5edc", "field": "title", "class": "title_standard", "was": "ВЭБ.РФ и VK приступают к трансформации Группы «Просвещение»", "now": "«Просвещение» передано в управление ВЭБ.РФ", "tag": "m210"}
+{"id": "cacdb5edc", "field": "eco.share", "class": "wrong_share", "was": "ВЭБ.РФ (75%) и РФПИ (25%) стали партнерами в управлении", "now": "Полномочия единоличного исполнительного органа АО «Просвещение»", "tag": "m210"}
+{"id": "cacdb5edc", "field": "ind", "class": "wrong_industry", "was": "Медиа", "now": "Образование", "tag": "m210"}
+{"id": "cacdb5edc", "field": "eco.rationale", "class": "invented_rationale", "was": "цели без автора", "now": "со ссылкой на пресс-службу ВЭБ.РФ", "tag": "m210"}
+{"id": "cacdb5edc", "field": "eco.target_fin", "class": "unsupported_claim", "was": "цифры АО «Издательство «Просвещение»» и про дивиденды — нет в источниках", "now": "снято", "tag": "m210"}
+{"id": "cacdb5edc", "field": "extra", "class": "other", "was": "«Статья описывает…»", "now": "факт о кураторе", "tag": "m210"}
+{"id": "c460a1f82", "field": "date", "class": "wrong_date", "was": "2024-02-20 (день статьи)", "now": "2024", "tag": "m211"}
+{"id": "c460a1f82", "field": "seller", "class": "wrong_seller", "was": "Альберт Авдолян (бенефициар)", "now": "ООО «Порт «Вера» Менеджмент» (ЕГРЮЛ)", "tag": "m211"}
+{"id": "c460a1f82", "field": "title", "class": "title_standard", "was": "Альберт Авдолян продает угольный порт Вера в Приморском крае", "now": "Порт Вера выставлен на продажу", "tag": "m211"}
+{"id": "c460a1f82", "field": "ind", "class": "wrong_industry", "was": "Уголь", "now": "Порты и инфраструктура", "tag": "m211"}
+{"id": "c460a1f82", "field": "eco.rationale", "class": "invented_rationale", "was": "Авдолян, возможно, продает порт… (без автора)", "now": "—", "tag": "m211"}
+{"id": "c460a1f82", "field": "eco.context", "class": "other", "was": "«Информационное сообщение о начале поиска покупателя»", "now": "контекст по статье", "tag": "m211"}
+{"id": "c460a1f82", "field": "eco.sum", "class": "other", "was": "—", "now": "Не раскрыта", "tag": "m211"}
+{"id": "c6b59f911", "field": "date", "class": "wrong_date", "was": "2024", "now": "2023-11-08 (указ)", "tag": "m211"}
+{"id": "c6b59f911", "field": "status", "class": "wrong_status", "was": "—", "now": "Закрыта", "tag": "m211"}
+{"id": "c6b59f911", "field": "eco.share", "class": "wrong_share", "was": "По решению суда конфискации подлежали более 92% акций", "now": "92,5% акций ПАО «ДВМП»", "tag": "m211"}
+{"id": "c6b59f911", "field": "law.appr", "class": "other", "was": "решение Хамовнического суда о конфискации", "now": "Указ Президента РФ от 8 ноября 2023 года", "tag": "m211"}
+{"id": "c6b59f911", "field": "src", "class": "source_not_about", "was": "Ведомости 2026 и atomic-energy (СП с DP World)", "now": "сняты, добавлены Коммерсантъ, Интерфакс, Ведомости 2023", "tag": "m211"}
+{"id": "c6b59f911", "field": "eco.context", "class": "foreign_fact", "was": "СП с DP World, согласования ФАС и правкомиссии", "now": "снято", "tag": "m211"}
+{"id": "c6b59f911", "field": "title", "class": "title_standard", "was": "Передача акций ДВМП (FESCO) от государства «Росатому»", "now": "«Росатом» безвозмездно получил государственный пакет акций ДВМП", "tag": "m211"}
+{"id": "ca754c77a", "field": "date", "class": "wrong_date", "was": "2023-08-15 (публикация)", "now": "2023-08-14 (торги)", "tag": "m211"}
+{"id": "ca754c77a", "field": "asset", "class": "wrong_target", "was": "не назван", "now": "ООО «Эльдако»", "tag": "m211"}
+{"id": "ca754c77a", "field": "eco.share", "class": "wrong_share", "was": "99,8% долей принадлежит ООО «КМК»…", "now": "100% долей ООО «Эльдако»", "tag": "m211"}
+{"id": "ca754c77a", "field": "eco.context", "class": "verbatim", "was": "перечень условий аукциона словами статьи", "now": "пересказ", "tag": "m211"}
+{"id": "ca754c77a", "field": "title", "class": "title_standard", "was": "Продажа завода «Эльдако» через аукцион", "now": "«Управление известково-цементными активами» купило на торгах завод «Эльдако»", "tag": "m211"}
+{"id": "c15d1a169", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Создание СП", "tag": "m211"}
+{"id": "c15d1a169", "field": "buyer", "class": "party_text_no_profile", "was": "не названы участники", "now": "«Мираторг» и АО «ГК Плюс Менеджмент» (ЕГРЮЛ)", "tag": "m211"}
+{"id": "c15d1a169", "field": "date", "class": "wrong_date", "was": "2024", "now": "2023-02-22 (ЕГРЮЛ)", "tag": "m211"}
+{"id": "c15d1a169", "field": "sum", "class": "sum_meaning", "was": "До 11,8 млрд ₽ (инвестиции в завод)", "now": "Не раскрыта", "tag": "m211"}
+{"id": "c15d1a169", "field": "ind", "class": "wrong_industry", "was": "Агро", "now": "Пищепром и напитки", "tag": "m211"}
+{"id": "c15d1a169", "field": "eco.rationale", "class": "invented_rationale", "was": "мотив без автора", "now": "слова Олега Пароева", "tag": "m211"}
+{"id": "c15d1a169", "field": "eco.context", "class": "verbatim", "was": "8–9 слов подряд из статьи АК&М", "now": "пересказ", "tag": "m211"}
+{"id": "c15d1a169", "field": "title", "class": "title_standard", "was": "Мираторг и «Вкусно — и точка» создают СП…", "now": "«Мираторг» и «ГК Плюс Менеджмент» создали СП по переработке картофеля", "tag": "m211"}
+{"id": "ca71a7545", "field": "buyer", "class": "party_text_no_profile", "was": "участники СП не привязаны", "now": "«Ростелеком» и НМГ профилями", "tag": "m211"}
+{"id": "ca71a7545", "field": "src", "class": "dead_source", "was": "More.tv (главная страница сервиса)", "now": "AdIndex", "tag": "m211"}
+{"id": "ca71a7545", "field": "eco.target_fin", "class": "unsupported_claim", "was": "доли рынка по ТМТ Консалтинг", "now": "—", "tag": "m211"}
+{"id": "ca71a7545", "field": "eco.context", "class": "language", "was": "«Структурирование… (обе стороны сделки: …)»", "now": "связный контекст", "tag": "m211"}
+{"id": "c4a6060cd", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Временное управление", "tag": "m211"}
+{"id": "c4a6060cd", "field": "status", "class": "wrong_status", "was": "—", "now": "Закрыта", "tag": "m211"}
+{"id": "c4a6060cd", "field": "eco.share", "class": "wrong_share", "was": "В новом холдинге участвуют 14 компаний…", "now": "Доли иностранных участников в ООО «Холдинг ВВСС»", "tag": "m211"}
+{"id": "c4a6060cd", "field": "title", "class": "title_standard", "was": "Передача управления аэропортом Пулково…", "now": "Доли иностранных совладельцев Пулково переданы во временное управление российским компаниям", "tag": "m211"}
+{"id": "c4a6060cd", "field": "law.appr", "class": "other", "was": "—", "now": "Указ Президента РФ от 30 ноября 2023 года", "tag": "m211"}
+{"id": "ca26e72c6", "field": "eco.share", "class": "wrong_share", "was": "Кенин (30,7%), П.А.", "now": "Акции ПАО «ГК «Самолет»» на сумму до 10 млрд ₽", "tag": "m213"}
+{"id": "ca26e72c6", "field": "buyer", "class": "party_text_no_profile", "was": "нет (no_parties «обратный выкуп»)", "now": "ПАО «ГК «Самолет»» (профиль)", "tag": "m213"}
+{"id": "ca26e72c6", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-05-29 (решение совета директоров, Интерфакс)", "tag": "m213"}
+{"id": "ca26e72c6", "field": "eco.context", "class": "unsupported_claim", "was": "Голубков 28,87%, Евтушевский 5,76% (ни в одном источнике)", "now": "крупнейшие акционеры Кенин и Голубков без долей", "tag": "m213"}
+{"id": "ca26e72c6", "field": "eco.target_fin", "class": "version_as_fact", "was": "«капитализация крайне мало» — мнение блогера", "now": "план EBITDA 90 млрд ₽", "tag": "m213"}
+{"id": "ca26e72c6", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ роста компании", "now": "слова Антона Елистратова о недооцененных акциях", "tag": "m213"}
+{"id": "ca26e72c6", "field": "title", "class": "title_standard", "was": "ГК «Самолет» объявляет buyback акций…", "now": "«Самолет» собирается купить собственные акции…", "tag": "m213"}
+{"id": "ca26e72c6", "field": "src", "class": "aggregator_source", "was": "Smart-Lab (блог) единственный", "now": "Интерфакс первым", "tag": "m213"}
+{"id": "c6eb3063c", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "ООО «Республика» (банкрот, торги)", "tag": "m213"}
+{"id": "c6eb3063c", "field": "eco.sum", "class": "wrong_sum", "was": "4,8 млн ₽ (при начальной цене лота 53,5 млн ₽)", "now": "4,8 млн ₽", "tag": "m213"}
+{"id": "c6eb3063c", "field": "eco.rationale", "class": "invented_rationale", "was": "история сети вместо мотива", "now": "—", "tag": "m213"}
+{"id": "c6eb3063c", "field": "src", "class": "aggregator_source", "was": "Коммерсантъ 5813079 (февраль, выставление лота) первым", "now": "Коммерсантъ 6123362 (итоги торгов) первым", "tag": "m213"}
+{"id": "c6eb3063c", "field": "src", "class": "source_not_about", "was": "Retail.ru 2026 — смена владельца франчайзи", "now": "Retail.ru 25.07.2023 об этой продаже", "tag": "m213"}
+{"id": "c6eb3063c", "field": "eco.context", "class": "foreign_fact", "was": "смена владельца «Пролайфа» в 2026 году, его выручка", "now": "снято", "tag": "m213"}
+{"id": "c6eb3063c", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "товарные знаки, сайт и приложение сети", "tag": "m213"}
+{"id": "cdcf1a650", "field": "title", "class": "title_standard", "was": "Передача долей в сети типографий…", "now": "Российские активы Amedia переданы во временное управление Росимущества", "tag": "m213"}
+{"id": "cdcf1a650", "field": "law.appr", "class": "unsupported_claim", "was": "—", "now": "указ № 686 от 18.09.2023", "tag": "m213"}
+{"id": "cdcf1a650", "field": "eco.share", "class": "wrong_share", "was": "пересказ указа", "now": "акции и доли пяти обществ по указу", "tag": "m213"}
+{"id": "cdcf1a650", "field": "eco.target_fin", "class": "foreign_fact", "was": "права учредителя у ДГИ Москвы — поздняя судьба в финансах", "now": "перенесено в контекст", "tag": "m213"}
+{"id": "cd175a614", "field": "date", "class": "wrong_date", "was": "2022-08-01 (выдуманное 1-е число)", "now": "2023-10-16 (кассация)", "tag": "m213"}
+{"id": "cd175a614", "field": "law.appr", "class": "unsupported_claim", "was": "Арбитражный суд МО «аннулировал» сделку", "now": "первая инстанция в иске отказала; в law.appr — отсутствие разрешения правкомиссии", "tag": "m213"}
+{"id": "cd175a614", "field": "sum", "class": "wrong_sum", "was": "не указана", "now": "130 млн ₽ (из материалов суда)", "tag": "m213"}
+{"id": "cd175a614", "field": "eco.context", "class": "unsupported_claim", "was": "конкурсное производство «Бауэр технологии»", "now": "снято (источника нет)", "tag": "m213"}
+{"id": "cd175a614", "field": "title", "class": "title_standard", "was": "Продажа земли и недвижимости…", "now": "Суд отменил продажу…", "tag": "m213"}
+{"id": "cd175a614", "field": "src", "class": "aggregator_source", "was": "Forbes (пересказ Ведомостей)", "now": "Ведомости первыми", "tag": "m213"}
+{"id": "c7fd83d05", "field": "eco.context", "class": "unsupported_claim", "was": "переименована в Life & Nutrition; приближенные Кадырова в совете", "now": "Health & Nutrition; второе снято", "tag": "m213"}
+{"id": "c7fd83d05", "field": "law.appr", "class": "unsupported_claim", "was": "—", "now": "указ № 520 от 16.07.2023, отмена указом № 186", "tag": "m213"}
+{"id": "c7fd83d05", "field": "title", "class": "title_standard", "was": "Переход акций Danone Россия под управление Росимущества", "now": "Российские активы Danone переданы во временное управление Росимущества", "tag": "m213"}
+{"id": "c7fd83d05", "field": "eco.share", "class": "wrong_share", "was": "пересказ события", "now": "Акции АО «Данон Россия», принадлежавшие PLFEE и ООО «Данон Трейд»", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Передача в управление", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "buyer", "class": "wrong_buyer", "was": "не назван", "now": "FESCO (управляющая компания)", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Закрыта", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "extra", "class": "wrong_share", "was": "девять быстроходных судов", "now": "восемь судов (в target_fin)", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "law.appr", "class": "other", "was": "решение суда о конфискации (не согласование передачи)", "now": "— ; в контекст", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "law.struct", "class": "unsupported_claim", "was": "единоличный исполнительный орган по распоряжению Росимущества", "now": "учредитель РФ, оперативное управление FESCO", "tag": "m213"}
+{"id": "c1aa8b20d", "field": "title", "class": "title_standard", "was": "Fesco получила в управление…", "now": "…переданы в управление FESCO", "tag": "m213"}
+{"id": "gbb7e25e1", "field": "status", "class": "version_as_fact", "was": "Закрыта (одна газета со слов источника)", "now": "Обсуждается", "tag": "m104"}
+{"id": "gbb7e25e1", "field": "seller", "class": "wrong_seller", "was": "«Севергрупп»", "now": "пусто: по ЕГРЮЛ 75% у Демуры, 25% у ФС Холдинга", "tag": "m104"}
+{"id": "gbb7e25e1", "field": "eco.rationale", "class": "invented_rationale", "was": "вход в туристический рынок", "now": "—", "tag": "m104"}
+{"id": "g927f3242", "field": "deal", "class": "other", "was": "четыре покупки в одной карточке", "now": "одна — «Волжский пекарь», «Пролетарец» — своя карточка", "tag": "m104"}
+{"id": "g927f3242", "field": "date", "class": "wrong_date", "was": "2024", "now": "2022", "tag": "m104"}
+{"id": "g927f3242", "field": "eco.share", "class": "wrong_share", "was": "цели покупок", "now": "Контрольный пакет акций АО «Волжский пекарь»", "tag": "m104"}
+{"id": "g927f3242", "field": "eco.target_fin", "class": "foreign_fact", "was": "заводы «Дарницы»", "now": "показатели «Волжского пекаря» 2021 года", "tag": "m104"}
+{"id": "g927f3242", "field": "eco.rationale", "class": "foreign_fact", "was": "мотив покупки Fazer", "now": "слова Козлова о «Волжском пекаре»", "tag": "m104"}
+{"id": "g927f3242", "field": "src", "class": "source_not_about", "was": "Известия о Fazer, Коммерсантъ о «Дарнице»", "now": "сняты", "tag": "m104"}
+{"id": "g927f3242", "field": "title", "class": "title_standard", "was": "приобрел Fazer, «Пролетарец», «Дарницу», «Волжский пекарь»", "now": "БКХ «Коломенский» купил «Волжский пекарь»", "tag": "m104"}
+{"id": "ga5f64060", "field": "seller", "class": "wrong_seller", "was": "Essity", "now": "Игорь Шилов и Андрей Яновский (ЕГРЮЛ)", "tag": "m104"}
+{"id": "ga5f64060", "field": "sum", "class": "foreign_fact", "was": "$117 млн (цена продажи Essity)", "now": "Не раскрыта", "tag": "m104"}
+{"id": "ga5f64060", "field": "target", "class": "wrong_target", "was": "пусто", "now": "ООО «Эссиэй Хайджин Продактс»", "tag": "m104"}
+{"id": "ga5f64060", "field": "date", "class": "wrong_date", "was": "2023-08-01", "now": "2023-08-03 (ЕГРЮЛ)", "tag": "m104"}
+{"id": "ga5f64060", "field": "law.appr", "class": "foreign_fact", "was": "одобрение Минпромторга продажи Essity", "now": "—", "tag": "m104"}
+{"id": "g87443ed1", "field": "status", "class": "wrong_status", "was": "Согласование получено", "now": "Закрыта (Лучшее решение владеет предприятиями)", "tag": "m104"}
+{"id": "g87443ed1", "field": "date", "class": "wrong_date", "was": "2024-01-25 (день распоряжения)", "now": "2024", "tag": "m104"}
+{"id": "gef939ff4", "field": "type", "class": "not_a_deal", "was": "M&A: права акционера через ФНС", "now": "продажа с торгов 2026 года (без заявок)", "tag": "m104"}
+{"id": "g2ecf6ee9", "field": "type", "class": "wrong_type", "was": "Финансирование · структурная сделка", "now": "Временное управление", "tag": "m104"}
+{"id": "g2ecf6ee9", "field": "buyer", "class": "wrong_buyer", "was": "Росхим", "now": "сторон нет, управляющий в прозе", "tag": "m104"}
+{"id": "g2ecf6ee9", "field": "eco.share", "class": "wrong_share", "was": "описание компании", "now": "47% акций АО «БСК»", "tag": "m104"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "title", "class": "title_standard", "was": "ЗПИФ «Прайм Первый» приобрел 14% в группе «Полипластик»", "now": "ЗПИФ «Прайм Первый» купил 14% «Полипластика»", "tag": "m208"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "date", "class": "wrong_date", "was": "2026-07-27 (заметка mergers.ru)", "now": "2026-07-24 (запись ЕГРЮЛ)", "tag": "m208"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "eco.share", "class": "wrong_share", "was": "опосредованно 37,7% через СИГП", "now": "14,08% напрямую + 42,31% СИГП, всего 37,7%", "tag": "m208"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "eco.rationale", "class": "unsupported_claim", "was": "мотив без того, кто его назвал", "now": "Хубежова (инфраструктура) и Гориловский (снижение долга)", "tag": "m208"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "eco.target_fin", "class": "other", "was": "род занятий в показателях", "now": "только числа", "tag": "m208"}
+{"id": "gmru-prime-pervy-poliplastik", "field": "asset", "class": "wrong_target", "was": "14% в группе «Полипластик»", "now": "Группа «Полипластик»", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "seller", "class": "wrong_seller", "was": "Гилядов, Фрольцова, Цебоева (СПАРК)", "now": "Галина Фрольцова (ЕГРЮЛ: остальные вышли в 2024)", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "sum", "class": "sum_meaning", "was": "800–900 млн ₽ (по оценке консультанта, вся компания с долгом)", "now": "Не раскрыта, оценка в eco.val", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "date", "class": "wrong_date", "was": "2026-07-27", "now": "2026-07-23 (ЕГРЮЛ)", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "title", "class": "title_standard", "was": "ГК «Коломенский» приобрела хлебокомбинат «Пеко»", "now": "«Коломенский» купил хлебокомбинат «Пеко»", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "law.appr", "class": "other", "was": "нет самого согласования ФАС, «обернулась»", "now": "ФАС одобрила с предписанием на пять лет", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "eco.rationale", "class": "unsupported_claim", "was": "мотив без автора", "now": "со слов гендиректора Дмитрия Козлова", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "eco.fin", "class": "other", "was": "доля рынка покупателя в «Форме расчетов»", "now": "—, факт в контексте", "tag": "m208"}
+{"id": "gmru-kolomenskoe-peko", "field": "law.struct", "class": "verbatim", "was": "дословно из статьи, устаревший СПАРК", "now": "пересказ по ЕГРЮЛ", "tag": "m208"}
+{"id": "gmru-mariholodmash-borsky", "field": "title", "class": "title_standard", "was": "«Марихолодмаш» выкупил Борский завод торгового оборудования", "now": "«Марихолодмаш» купил Борский завод торгового оборудования", "tag": "m208"}
+{"id": "gmru-mariholodmash-borsky", "field": "eco.rationale", "class": "version_as_fact", "was": "мотив анонимного источника как факт", "now": "«по неофициальным данным»", "tag": "m208"}
+{"id": "gmru-mariholodmash-borsky", "field": "eco.share", "class": "other", "was": "описание завода вместо доли", "now": "доли, проданные Деревянко и Лабазиным", "tag": "m208"}
+{"id": "gmru-mariholodmash-borsky", "field": "events.0.note", "class": "verbatim", "was": "почти дословно «Коммерсантъ»", "now": "пересказ", "tag": "m208"}
+{"id": "gmru-nordline-totalenergies-arctic", "field": "seller", "class": "wrong_seller", "was": "TotalEnergies (концерн, профиль)", "now": "TotalEnergies EP Salmanov (сторона по распоряжению и ЕГРЮЛ)", "tag": "m208"}
+{"id": "gmru-nordline-totalenergies-arctic", "field": "title", "class": "title_standard", "was": "«Нордлайн» выкупил у TotalEnergies 10% в «Арктик СПГ 2»", "now": "«Нордлайн» купил 10% «Арктик СПГ 2» у TotalEnergies", "tag": "m208"}
+{"id": "gmru-nordline-totalenergies-arctic", "field": "eco.share", "class": "other", "was": "описание проекта вместо доли", "now": "10% ООО «Арктик СПГ 2», у НОВАТЭКа 70%", "tag": "m208"}
