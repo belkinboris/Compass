@@ -4919,3 +4919,23 @@
 {"id": "g82725e96", "field": "title", "class": "title_standard", "was": "«Фарминвест» купил «Петровакс» у «Интерроса»", "now": "Михаил Цыферов и VB Partners купили «Петровакс» у «Интерроса»", "tag": "m106bb"}
 {"id": "g74c84c09", "field": "eco.rationale", "class": "invented_rationale", "was": "добавляет бренды к агробизнесу Лисина", "now": "—", "tag": "m106bb"}
 {"id": "g74c84c09", "field": "extra", "class": "version_as_fact", "was": "Структуры Лисина купили", "now": "по неофициальным данным", "tag": "m106bb"}
+{"id": "gf708b89d", "field": "seller", "class": "wrong_seller", "was": "Дмитрий Пискулов, Роман Тихоненко и еще десять совладельцев", "now": "… и еще пять совладельцев (ЕГРЮЛ на 16.04.2023 — семь участников)", "tag": "m106cb"}
+{"id": "gf708b89d", "field": "law.struct", "class": "unsupported_claim", "was": "по ЕГРЮЛ 51% — ООО «Инвест», 49% — ООО «К.Н.Холдинг»", "now": "по ЕГРЮЛ 99,99% и 0,01%", "tag": "m106cb"}
+{"id": "gf708b89d", "field": "buyer_name", "class": "wrong_buyer", "was": "ЛУКОЙЛ и ЗПИФ «Газпромбанк-Фрезия»", "now": "ООО «Инвест» и ООО «К.Н. Холдинг» (участники по ЕГРЮЛ)", "tag": "m106cb"}
+{"id": "gf708b89d", "field": "date", "class": "wrong_date", "was": "2023-04-18 (день статьи)", "now": "2023-04-17 (ЕГРЮЛ)", "tag": "m106cb"}
+{"id": "cd47c5acc", "field": "sum", "class": "other", "was": "—", "now": "Не раскрыта", "tag": "m106cb"}
+{"id": "c1659a21f", "field": "sum", "class": "wrong_sum", "was": "— (цена €1 в eco.val со ссылкой на издание)", "now": "€1, sum_basis reported", "tag": "m106cb"}
+{"id": "c1659a21f", "field": "eco.val", "class": "language", "was": "По неофициальным данным «Интерфакса»", "now": "по неофициальным данным", "tag": "m106cb"}
+{"id": "cc846f75c", "field": "sum", "class": "other", "was": "—", "now": "Не раскрыта", "tag": "m106cb"}
+{"id": "cc846f75c", "field": "eco.share", "class": "wrong_share", "was": "50% доли в ООО «БКИ «Эквифакс»», поровну между покупателями.", "now": "50% доли в ООО «БКИ Эквифакс»", "tag": "m106cb"}
+{"id": "cc846f75c", "field": "target", "class": "profile_text", "was": "Описание компании пока не добавлено; отрасль «Банки»", "now": "описание кредитного бюро; «Финансовые услуги»", "tag": "m106cb"}
+{"id": "g139db8c2", "field": "sum", "class": "sum_meaning", "was": "80–120 млрд ₽ (по оценке) — оценка экспертов", "now": "Не раскрыта, оценки — в eco.val", "tag": "m106cb"}
+{"id": "g334b5760", "field": "eco.context", "class": "verbatim", "was": "18 слов подряд из ComNews", "now": "пересказ", "tag": "m106cb"}
+{"id": "g334b5760", "field": "eco.rationale", "class": "verbatim", "was": "пересказ слов Егорова близко к тексту без автора", "now": "прямая речь Александра Егорова", "tag": "m106cb"}
+{"id": "g334b5760", "field": "eco.share", "class": "wrong_share", "was": "100% долей «Амара Лаб». Это интегратор ПО…", "now": "100% доли в ООО «Амара Лаб»", "tag": "m106cb"}
+{"id": "g334b5760", "field": "extra", "class": "other", "was": "повтор других полей и продавца", "now": "выручка группы и участники ООО «Рексофт»", "tag": "m106cb"}
+{"id": "g334b5760", "field": "target", "class": "profile_text", "was": "в описании профиля снятая оценка цены 55–500 млн ₽", "now": "без цены", "tag": "m106cb"}
+{"id": "gmru-arnest-reckitt", "field": "buyer", "class": "wrong_buyer", "was": "АО «Арнест»", "now": "ООО «Арнест Менеджмент» (Arnest Management LLC в пресс-релизе Reckitt)", "tag": "m106cb"}
+{"id": "gmru-arnest-reckitt", "field": "seller", "class": "wrong_seller", "was": "Reckitt Benckiser (Великобритания)", "now": "Reckitt Benckiser (Hygiene Home) Holdings Limited (ЕГРЮЛ)", "tag": "m106cb"}
+{"id": "gmru-arnest-reckitt", "field": "asset", "class": "wrong_target", "was": "завод по выпуску бытовой химии в Клину (бренды …)", "now": "ООО «Рекитт Бенкизер» (завод бытовой химии в Клину)", "tag": "m106cb"}
+{"id": "c1659a21f", "field": "eco.share", "class": "wrong_share", "was": "Все акции АО «Тетра Пак» (ныне АО «Упаковочные системы»).", "now": "100% акций АО «Тетра Пак»", "tag": "m106cb"}
