@@ -11853,3 +11853,26 @@ def test_milestone_snapshot_subject_is_entity_and_share():
     assert snap["asset"] == "75% доли в ООО «Библио-Глобус Туроператор»"
     card2 = {"title": "y", "target": "t", "asset": "ООО «Рекитт Бенкизер» (завод бытовой химии в Клину)", "eco": {}}
     assert review.build_snapshot(card2, {"t": {"name": "Рекитт Бенкизер"}})["asset"] == "ООО «Рекитт Бенкизер»"
+
+
+def test_sweep_commits_even_when_a_tracked_file_does_not_exist_yet(tmp_path, monkeypatch):
+    """13 ноября 2026: файла напоминаний еще не было, `git add` со всеми путями
+    отказывался добавлять что-либо, коммит не создавался, а прогон писал
+    «Запушено» — отсев новостей с 12 ноября не доходил до main."""
+    import subprocess, sweep
+    repo = tmp_path / "r"; repo.mkdir()
+    def g(*a):
+        return subprocess.run(["git", *a], cwd=repo, capture_output=True, text=True)
+    g("init", "-q"); g("config", "user.email", "t@t"); g("config", "user.name", "t")
+    (repo / "data" / "inbox").mkdir(parents=True)
+    (repo / "data" / "inbox" / "moderation_state.json").write_text("{}")
+    g("add", "-A"); g("commit", "-qm", "init")
+    (repo / "data" / "inbox" / "moderation_state.json").write_text('{"x": 1}')
+    monkeypatch.setattr(sweep, "ROOT", str(repo))
+    monkeypatch.setattr(sweep, "git", lambda *a: g(*a))
+    calls = []
+    real = sweep.git
+    monkeypatch.setattr(sweep, "git", lambda *a: (calls.append(a), g(*a))[1] if a[0] not in ("pull", "push") else
+                        subprocess.CompletedProcess(a, 0, "", ""))
+    assert sweep.commit_and_push("тест") == 0
+    assert "moderation_state" in g("show", "--stat", "HEAD").stdout, "коммит не создан"

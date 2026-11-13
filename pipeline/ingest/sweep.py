@@ -56,11 +56,21 @@ def git(*args):
 
 
 def commit_and_push(message):
-    git('add', *TRACKED)
-    if not git('status', '--porcelain', '--', *TRACKED).stdout.strip():
+    # Только существующие пути: `git add` с несуществующим путем отказывается
+    # добавлять ВСЕ (13 ноября 2026: файла напоминаний еще не было, коммит не
+    # создавался, а прогон писал «Запушено» — отсев терялся с 12 ноября).
+    paths = [p for p in TRACKED if os.path.exists(os.path.join(ROOT, p))]
+    added = git('add', *paths)
+    if added.returncode:
+        print('git add не прошел: %s' % added.stderr.strip()[:200])
+        return 1
+    if not git('diff', '--cached', '--name-only', '--', *paths).stdout.strip():
         print('Нового нет — коммитить нечего.')
         return 0
-    git('commit', '-q', '-m', message)
+    made = git('commit', '-q', '-m', message)
+    if made.returncode:
+        print('КОММИТ НЕ СОЗДАН: %s' % (made.stderr or made.stdout).strip()[:200])
+        return 1
     for i in range(4):
         if git('pull', '--rebase', '--autostash', 'origin', 'main').returncode and rebasing() \
                 and not settle_rebase():
