@@ -643,13 +643,108 @@
    ]
   },
   {
-   "draft_id": "d36702119",
-   "title": "Продажи «Домодедово» и ЮГК стали крупнейшими сделками Росимущества",
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
    "date": "2026-11-13",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/business/news/2026/11/13/1245181-prodazhi-domodedovoi"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76305734",
+   "title": "Повторный аукцион на месторождение Тенкергин на Чукотке не состоялся",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261113/auktsion-875208128.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ГМК и добыча",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d26586950",
+   "title": "СМИ: ФРГ планирует выкупить долю в компании по обогащению урана Urenco",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261113/smi-875207870.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261113/smi-875207870.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31127369",
+   "title": "Гущина перешла к новому тренеру",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/13/guschina-pereshla-k-novomu-treneru/"
     ]
    ],
    "sum": null,
@@ -668,34 +763,23 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gde122875 (общие редкие слова: росиму, югк) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d33319032",
-   "title": "«Черноголовка» планирует продавать печенье в Афганистане",
+   "draft_id": "d64385813",
+   "title": "Покупка Skoda Superb из Китая оказалась для россиян дешевле Tenet и Volga",
    "date": "2026-11-13",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/chernogolovka-planiruet-prodavat-pechene-v-afganistane/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/13/pokupka-skoda-superb-iz-kitaya-okazalas-dlya-rossiyan-deshevle-tenet-i-volga/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "Сейчас «Черноголовка» ведет переговоры с потенциальными партнерами. Сообщение «Черноголовка» планирует продавать печенье в Афганистане появились сначала на RETAILER.ru .",
-     "source": [
-      "web:retailer.ru",
-      "https://retailer.ru/chernogolovka-planiruet-prodavat-pechene-v-afganistane/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -704,40 +788,39 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Пищепром и напитки",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13963697",
-   "title": "DST Global инвестировал в британский стартап Fractile . Раунд на $720 млн возглавили Lightspeed, Founders Fund, Thrive Capital и Redpoint при участии Google CapitalG, BlackRock, SV Angel, Balderton, S",
+   "draft_id": "d66036252",
+   "title": "Юбилейный аукцион по продаже недостроенного ТЦ «Подсолнух» провалился — готовность объекта оценили в 74%",
    "date": "2026-11-13",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7844"
+     "web:ngs.ru",
+     "https://ngs.ru/text/gorod/2026/11/13/76763948/"
     ]
    ],
-   "sum": "$720 млн",
-   "type": "Инвестиция",
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
-   "buyer_name": "DST Global",
-   "asset": "британский стартап Fractile . Раунд на $720 млн возглавили Lightspeed, Founders Fund, Thrive Capital",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "DST Global",
-    "asset": "британский стартап Fractile . Раунд на $720 млн возглавили Lightspeed, Founders Fund, Thrive Capital",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga241b1af (общие редкие слова: оценил, продаж) — проверьте, не дубль ли"
    ]
   }
  ]
