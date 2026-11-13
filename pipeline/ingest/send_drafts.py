@@ -309,6 +309,30 @@ def record_shown(cards=(), raw=()):
         return False
 
 
+def claim_show(card_id):
+    """Занять показ карточки на сайте ДО отправки. True — показ наш; False —
+    карточку уже показал сервер или другой прогон; None — сайт не ответил
+    (тогда НЕ шлем: сервер покажет карточку сам, а двойной показ хуже
+    отложенного). Без токена (тесты, сухой прогон) — True."""
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return True
+    import httpx
+    for attempt in range(4):
+        try:
+            r = httpx.post('%s/api/moderation/shown' % SITE,
+                           json={'token': token, 'cards': [{'id': card_id}], 'claim': True}, timeout=15)
+            if r.status_code == 200:
+                body = r.json()
+                if 'claimed' not in body:      # сервер старой версии: показ записан, шлем как раньше
+                    return True
+                return card_id in body['claimed']
+        except Exception as e:                               # noqa: BLE001
+            print('занять показ на сайте не удалось: %s' % e)
+        time.sleep(3)
+    return None
+
+
 def site_pending_ids():
     """Какие черновики уже ВИДНЫ на сайте. None — проверить не удалось.
 
@@ -959,6 +983,18 @@ def main(write=False, resend=None, only=None):
                     item['draft_sent'] = item['post_draft_sent'] = True
                     item.pop('_pending_post_preview', None)
                     continue
+                if mark != 'post_draft_sent':
+                    got = claim_show(item['id'])
+                    if got is None:
+                        print('  %s: сайт не ответил — карточку не шлю, покажет сервер или следующий прогон' % item['id'])
+                        item['_skip_this_run'] = True
+                        continue
+                    if got is False:
+                        item['draft_sent'] = item['post_draft_sent'] = True
+                        item.pop('_pending_post_preview', None)
+                        continue
+                elif item.get('_skip_this_run') or item.get('post_draft_sent'):
+                    continue
             if i:
                 time.sleep(PAUSE)
             ok_all = True
@@ -994,6 +1030,8 @@ def main(write=False, resend=None, only=None):
                     # Номер -> заголовок: по нему approve.py найдет новость,
                     # даже если ее номер к моменту решения сменился.
                     state.setdefault('raw_sent_titles', {})[str(item['draft_id'])] = str(item.get('title') or '')
+    for _c in pending['cards']:
+        _c.pop('_skip_this_run', None)
     json.dump(pending, open(PENDING, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     promote.save_state(state)
     record_shown(cards=[{'id': item['id'], 'post_preview': item.get('post_preview')}

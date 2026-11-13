@@ -2575,6 +2575,12 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     r = client.get("/api/moderation/shown", params={"token": "тайна"})
     assert r.status_code == 200 and "gshow1" in r.json()["cards"]
     assert r.json()["cards"]["gshow1"].get("post_preview"), "снимок поста не сохранен"
+    # Рутина занимает показ ДО отправки (13 ноября 2026, «Библио-Глобус» пришел
+    # дважды): уже показанная карточка ей не достается, новая — достается раз.
+    r = client.post("/api/moderation/shown", json={"token": "тайна", "claim": True, "cards": [{"id": "gshow1"}, {"id": "gnew9"}]})
+    assert r.json() == {"claimed": ["gnew9"]}, r.json()
+    r = client.post("/api/moderation/shown", json={"token": "тайна", "claim": True, "cards": [{"id": "gnew9"}]})
+    assert r.json() == {"claimed": []}
     # Рутина тоже может записать показ: карточки и ключи сырья.
     r = client.post("/api/moderation/shown", json={"token": "тайна", "cards": [{"id": "gother"}], "raw": ["новостьпрозавод"]})
     assert r.json()["recorded"] == 2
