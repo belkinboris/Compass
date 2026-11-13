@@ -4840,3 +4840,25 @@
 {"id": "g6797d158", "field": "date", "class": "wrong_date", "was": "2022-09-09 (сообщение)", "now": "2022-09-08 (ЕГРЮЛ)", "tag": "m226"}
 {"id": "g6797d158", "field": "eco.share", "class": "wrong_share", "was": "Весь российский бизнес Halliburton", "now": "100% доли в ООО «Апстрим Сервисес»", "tag": "m226"}
 {"id": "g083ec8ce", "field": "eco.share", "class": "wrong_share", "was": "100% ООО «Раисио Нутришн»", "now": "100% доли в ООО «Раисио Нутришн»", "tag": "m226"}
+{"id": "g8d64901c", "field": "law.struct", "class": "unsupported_claim", "was": "новые направления — шумоизоляция для судостроения, подлодки", "now": "снято; планы управляющего по статье — в eco.context", "tag": "m238"}
+{"id": "g3e86b22f", "field": "eco.context", "class": "other", "was": "оценка Бурмистрова и в eco.val, и в eco.context", "now": "только в eco.val", "tag": "m238"}
+{"id": "g3e86b22f", "field": "date_basis", "class": "wrong_date", "was": "нет основания (день новости)", "now": "signing — указ № 661 от 17.09.2026", "tag": "m238"}
+{"id": "g9b4c2e71", "field": "events.1.note", "class": "verbatim", "was": "кусок статьи Ведомостей с многоточием", "now": "пересказ", "tag": "m238"}
+{"id": "g9b4c2e71", "field": "events.2.note", "class": "verbatim", "was": "кусок статьи Rusbase с многоточием", "now": "пересказ", "tag": "m238"}
+{"id": "g2883c476", "field": "sum", "class": "sum_meaning", "was": "0,6–1 млрд ₽ (по оценке) — мнение аналитика", "now": "Не раскрыта; оценки Тедеева и Косаревой в eco.val", "tag": "m238"}
+{"id": "g2883c476", "field": "eco.rationale", "class": "invented_rationale", "was": "Эксперты считают покупку логичным шагом", "now": "мнение Вадима Тедеева (IPM Consulting)", "tag": "m238"}
+{"id": "g2883c476", "field": "eco.val", "class": "language", "was": "дает «Коммерсант»; сами стороны", "now": "оценки с именами", "tag": "m238"}
+{"id": "g09b38753", "field": "seller", "class": "wrong_seller", "was": "Сергей Эскин и Алексей Ирисов", "now": "Сергей Эскин (Ирисов вышел в 2014 году по ЕГРЮЛ)", "tag": "m238"}
+{"id": "g09b38753", "field": "sum", "class": "sum_meaning", "was": "Не раскрыта (по оценке аналитиков — не выше 3 млрд ₽)", "now": "Не раскрыта; оценка в eco.val", "tag": "m238"}
+{"id": "g09b38753", "field": "asset", "class": "wrong_target", "was": "описание продукции в предмете", "now": "100% ООО «ДЕПО Электроникс» (DEPO Computers)", "tag": "m238"}
+{"id": "g09b38753", "field": "title", "class": "title_standard", "was": "купил производителя электроники DEPO Computers", "now": "купил DEPO Computers", "tag": "m238"}
+{"id": "g09b38753", "field": "profile.inn", "class": "profile_wrong_inn", "was": "нет ИНН у «Кванто Спейс»", "now": "9718299457 (ЕГРЮЛ)", "tag": "m238"}
+{"id": "g93df6a58", "field": "title", "class": "title_standard", "was": "купила оставшиеся 50% УК «Комфорт»", "now": "купила 50% группы «Комфорт»", "tag": "m238"}
+{"id": "g93df6a58", "field": "eco.share", "class": "wrong_share", "was": "У группы «К+» теперь 100%…", "now": "50% долей в группе «Комфорт»", "tag": "m238"}
+{"id": "g1953287c", "field": "title", "class": "title_standard", "was": "49% КСБ, дочерней компании «Соллерса»", "now": "49% «Компонентов системы безопасности»", "tag": "m238"}
+{"id": "g1953287c", "field": "eco.share", "class": "wrong_share", "was": "распределение долей всех участников", "now": "49% доли в ООО «Компоненты системы безопасности»", "tag": "m238"}
+{"id": "gc23d4f64", "field": "sum", "class": "sum_meaning", "was": "Не раскрыта (оценка — 0,83–1,25 млрд ₽)", "now": "Не раскрыта; оценка в eco.val", "tag": "m238"}
+{"id": "gc23d4f64", "field": "title", "class": "title_standard", "was": "здание ресторанов «Райсан» и «Лариса Ивановна»", "now": "здание на Радищева, 23", "tag": "m238"}
+{"id": "gc23d4f64", "field": "src", "class": "source_not_about", "was": "первой стояла статья о соседнем здании (Радищева, 21)", "now": "первой — статья о Радищева, 23", "tag": "m238"}
+{"id": "g1c060772", "field": "asset", "class": "wrong_target", "was": "описание после имен обществ", "now": "только имена обществ", "tag": "m238"}
+{"id": "g1c060772", "field": "sum", "class": "other", "was": "—", "now": "Не раскрыта", "tag": "m238"}
