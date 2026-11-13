@@ -2346,6 +2346,7 @@ class ModerationShownIn(BaseModel):
     token: str = ""
     cards: list[dict] = []     # [{"id": ..., "post_preview": ...}]
     raw: list[str] = []        # ключи заголовков сырья (promote.raw_key)
+    claim: bool = False        # занять показ: в ответе `claimed` — кому из карточек показ достался
 
 
 @router.get("/api/moderation/shown")
@@ -2370,6 +2371,14 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
     if not _moderation_token_ok(req.token):
         return JSONResponse({"error": "not found"}, status_code=404)
     now = datetime.utcnow().isoformat(timespec="seconds")
+    if req.claim:
+        # Рутина спрашивает ДО отправки: показ достается тому, кто первым
+        # вставил ключ (13 ноября 2026: карточку «Библио-Глобуса» показали и
+        # сервер, и рутина — каждый проверил память до показа другого).
+        with _SHOW_LOCK:
+            claimed = [cid for cid in (str(i.get("id") or "").strip() for i in req.cards)
+                       if cid and _claim_show(db, cid)]
+        return {"claimed": claimed}
     n = 0
     for item in req.cards:
         cid = str(item.get("id") or "").strip()
