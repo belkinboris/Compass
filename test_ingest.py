@@ -8313,6 +8313,7 @@ def test_realty_post_goes_to_main_channel_while_realty_address_is_unknown(monkey
     2 октября 2026: потерять пост хуже, чем выпустить его не в тот канал."""
     deal = _realty_deal("gR3", "48,7 млн ₽", status="Обсуждается")
     tmp_data = _channels_world(monkeypatch, tmp_path, [deal], realty="")
+    monkeypatch.setattr(send_telegram, "site_channels", lambda: {})  # сайт ответил: адреса нет
     fake = _FakeClient([_ok(801)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
     send_telegram.main(write=True, ignore_pace=True)
@@ -8320,6 +8321,24 @@ def test_realty_post_goes_to_main_channel_while_realty_address_is_unknown(monkey
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     assert written["telegram_posts"]["gR3"] == 801
     assert "telegram_posts_realty" not in written
+
+
+def test_realty_post_waits_when_the_site_did_not_answer(monkeypatch, tmp_path):
+    """13 ноября 2026: связь с сайтом рвалась, адрес канала недвижимости не
+    узнали — пост «Газпром межрегионгаза» (офис в Челябинске) ушел в основной
+    канал. Сайт не ответил — пост ждет следующего прогона."""
+    deal = _realty_deal("gR5", "48,7 млн ₽", status="Обсуждается")
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal], realty="")
+    def _silent_site():
+        send_telegram.SITE_UNREACHABLE = True
+        return {}
+    monkeypatch.setattr(send_telegram, "site_channels", _silent_site)
+    fake = _FakeClient([_ok(802)])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    assert not [j for u, j in fake.calls if u.endswith("sendMessage")], fake.calls
+    written = json.loads(tmp_data.read_text(encoding="utf-8"))
+    assert "gR5" not in (written.get("telegram_posts") or {})
 
 
 def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path):
