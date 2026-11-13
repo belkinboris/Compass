@@ -828,11 +828,18 @@ def entities_missing_from_card(card, comps, records=None):
             # «Единое Видео». VK Видео: ...», Lenta.ru, gc6fa5d80, 2 ноября
             # 2026): юрлицо рекламной сети на странице издания, не сторона
             # сделки, о которой эта страница пишет.
-            prefix = text[max(0, m.start() - 20):m.start()]
-            if '©' in prefix or re.search(r'(?i)учредител|реклама', prefix):
-                continue
             name = m.group(1).strip()
             key = name.lower().replace('ё', 'е')
+            prefix = text[max(0, m.start() - 20):m.start()]
+            if '©' in prefix or re.search(r'(?i)учредител|реклама', prefix):
+                # Юрлицо издателя страницы встречается в её футере не всегда
+                # рядом со значком — у "Ведомостей" оно повторяется дважды:
+                # один раз после "Учредитель:", второй — без маркера рядом
+                # (блок про персональные данные). Запоминаем по имени, а не
+                # только по отдельному вхождению, иначе второе упоминание
+                # того же издательского юрлица снова всплывает находкой.
+                seen.add(key)
+                continue
             if key in seen or key in blob:
                 continue
             seen.add(key)
