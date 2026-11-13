@@ -8724,12 +8724,14 @@ def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_pat
     monkeypatch.setattr(send_telegram, "in_window_after", lambda *a, **k: True)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setenv("TELEGRAM_REALTY_CHANNEL_ID", "@realty")  # без адреса посты о недвижимости ждут
     sleeps, saved_after_first = [], []
 
     def fake_sleep(s):
         sleeps.append(s)
         if len(sleeps) == 2:      # перед вторым постом первый уже на диске
-            saved_after_first.append(json.loads(tmp_data.read_text(encoding="utf-8"))["telegram_posts"])
+            disk = json.loads(tmp_data.read_text(encoding="utf-8"))
+            saved_after_first.append({**disk["telegram_posts"], **(disk.get("telegram_posts_realty") or {})})
     monkeypatch.setattr(send_telegram.time, "sleep", fake_sleep)
     fake = _FakeClient([{"ok": True, "result": {"message_id": 2000 + i}} for i in range(3)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
@@ -8740,9 +8742,11 @@ def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_pat
 
     assert len(fake.calls) == 2, "третий пост не помещается в 45 минут ожидания — уходит следующим прогоном"
     assert len(sleeps) == 2 and all(1150 < s <= 1200 for s in sleeps), sleeps
-    assert any(v for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
+    assert any(v in (2000, 2001, 2002) for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
-    assert written["telegram_last_post_at"] and len([v for v in written["telegram_posts"].values() if v]) == 2
+    sent = [v for v in list(written["telegram_posts"].values()) + list((written.get("telegram_posts_realty") or {}).values())
+            if v in (2000, 2001, 2002)]
+    assert written["telegram_last_post_at"] and len(sent) == 2
     # Один пост и давно не было постов — уходит сразу, без паузы.
     assert send_telegram.gap_wait_s("2026-01-01T00:00:00+00:00") == 0
 
