@@ -12065,3 +12065,12 @@ def test_send_plan_does_not_show_card_twin(monkeypatch, tmp_path):
     komfort["accepted_notes"] = {"checked": {"duplicate_card": "другой пакет: вторые 50%"}}
     pending["cards"].remove(queue_twin)
     assert shown_ids() == {"g5540db5e", "gA"}
+
+
+def test_party_name_check_spares_camelcase_brand():
+    """13 ноября 2026: «НордЭнергоГрупп» (продавец g4d2a7b61) проверка падежа
+    приняла за родительный и остановила публикацию; «Автодома» ловится как раньше."""
+    import review
+    assert review.name_is_nominative("НордЭнергоГрупп") is None
+    assert review.name_is_nominative("Сетново Групп") is None
+    assert review.name_is_nominative("Автодома")

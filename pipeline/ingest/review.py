@@ -384,6 +384,8 @@ def name_is_nominative(new):
     word = re.split(r'[\s,(]+', text)[0].strip('«»"“”„()')
     if not re.match(r'^[А-Яа-яЁё-]{4,}$', word) or word.isupper():
         return None
+    if re.search(r'[а-яё][А-ЯЁ]', word) or word.lower().endswith('групп'):
+        return None  # имя-слитка («НордЭнергоГрупп»), не падеж
     parses = _morph.parse(word)
     best = max(parses, key=lambda p: p.score)
     if best.tag.case in (None, 'nomn'):
@@ -836,10 +838,8 @@ from milestone_subject import snapshot_subject  # noqa: E402  (13 ноября 2
 def build_snapshot(card, companies):
     """Компактный снимок карточки — «что было известно на этот момент».
 
-    Не полная карточка (`eco`/`law` целиком раздули бы каждую веху) — только
-    то, что показывается плашкой сторон и заголовком: тип, статус, сумма,
-    стороны, предмет. Стороны резолвятся до имени компании там, где есть
-    ссылка (`buyer`/`target`/`seller_id`), иначе остается текст."""
+    Только то, что показывает плашка сторон и заголовок; стороны — именем
+    компании там, где есть ссылка, иначе текстом."""
     def party(id_field, text_field):
         cid = card.get(id_field)
         if cid and cid in companies:
