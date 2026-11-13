@@ -4084,3 +4084,80 @@
 {"id": "g560a4b70", "field": "extra", "class": "unsupported_claim", "was": "«21 июля», фирма «Гордеевский»", "now": "нет в источниках — снято", "tag": "m105"}
 {"id": "g560a4b70", "field": "src", "class": "source_not_about", "was": "РИА Недвижимость (аренда Совкомбанка, 2025)", "now": "снят", "tag": "m105"}
 {"id": "g560a4b70", "field": "eco.context", "class": "language", "was": "пересказ прессы с «(Коммерсантъ)», издание без текста в src", "now": "пересказ Ведомостей с атрибуцией", "tag": "m105"}
+{"id": "g2f5143f4", "field": "title", "class": "title_standard", "was": "Минфин планирует продать госпакет аэропорта Шереметьево до конца года", "now": "Госпакет акций аэропорта Шереметьево выставлен на продажу", "tag": "m219"}
+{"id": "g2f5143f4", "field": "eco.share", "class": "wrong_share", "was": "На конец января 2026 года Росимуществу принадлежало около 30% акций…", "now": "Пакет акций АО «МАШ»", "tag": "m219"}
+{"id": "g2f5143f4", "field": "eco.context", "class": "foreign_fact", "was": "продать собираются и акции Росимущества, и акции ФНБ (про SPO «Аэрофлота»)", "now": "снято", "tag": "m219"}
+{"id": "g2f5143f4", "field": "eco.context", "class": "unsupported_claim", "was": "Механизм продажи — аукцион, SPO или другой — пока не определен", "now": "пакет выставят на торги (Моисеев)", "tag": "m219"}
+{"id": "g2f5143f4", "field": "eco.sum", "class": "other", "was": "—", "now": "Не раскрыта", "tag": "m219"}
+{"id": "g672dcca1", "field": "title", "class": "title_standard", "was": "Минфин сохраняет планы продать госдолю в Новороссийском морском торговом порту до конца года", "now": "Госпакет акций НМТП выставлен на продажу", "tag": "m219"}
+{"id": "g672dcca1", "field": "eco.share", "class": "wrong_share", "was": "Государство владеет 20% ПАО «НМТП» через Росимущество.", "now": "20% акций ПАО «НМТП»", "tag": "m219"}
+{"id": "g672dcca1", "field": "eco.context", "class": "version_as_fact", "was": "Наиболее вероятный покупатель — крупный российский профильный инвестор…", "now": "мнение Дмитрия Баранова («Финам менеджмент»)", "tag": "m219"}
+{"id": "g672dcca1", "field": "law.appr", "class": "version_as_fact", "was": "сделка может потребовать согласования… (без автора)", "now": "по оценке юриста Forward Legal Максима Игнатова", "tag": "m219"}
+{"id": "g672dcca1", "field": "eco.val", "class": "other", "was": "при интересе стратегического инвестора — дороже", "now": "может приблизиться к верхней границе или превысить ее", "tag": "m219"}
+{"id": "gb0f1f736", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Максим Гинжук, Александр Чачава, Павел Шувалов, Лев Грунин и Сергей Федотов (ЕГРЮЛ, 29.10.2025)", "tag": "m219"}
+{"id": "gb0f1f736", "field": "eco.sum", "class": "other", "was": "Сумма сделки не раскрывается", "now": "Не раскрыта", "tag": "m219"}
+{"id": "gb0f1f736", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Даблюайби»", "tag": "m219"}
+{"id": "gb0f1f736", "field": "asset", "class": "wrong_target", "was": "платформа аналитики и подбора блогеров WhoIsBlogger", "now": "ООО «Даблюайби» (платформа WhoIsBlogger)", "tag": "m219"}
+{"id": "gb0f1f736", "field": "companies.g71a251f8.desc", "class": "profile_text", "was": "описание с ходом сделки", "now": "кто это", "tag": "m219"}
+{"id": "gaee6179c", "field": "title", "class": "title_standard", "was": "«Самолет» выкупает долю партнера в жилом комплексе во Владивостоке", "now": "«Самолет» собирается купить 49% застройщика ЖК «Сабанеева 125» во Владивостоке", "tag": "m219"}
+{"id": "gaee6179c", "field": "eco.share", "class": "wrong_share", "was": "Проект — ЖК «Сабанеева 125»: три дома…", "now": "49% доли в ООО «СЗ «Самолет-Сабанеева»»", "tag": "m219"}
+{"id": "gaee6179c", "field": "law.appr", "class": "unsupported_claim", "was": "прокуратура объявила гендиректору предостережение (PrimaMedia)", "now": "снято; в источнике только «проводит проверку»", "tag": "m219"}
+{"id": "gaee6179c", "field": "law.appr", "class": "other", "was": "Газпромбанк согласовал схему выкупа (не орган)", "now": "в law.struct", "tag": "m219"}
+{"id": "gaee6179c", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ заголовка вместо мотива", "now": "слова Алексея Федорова об обязательствах перед дольщиками", "tag": "m219"}
+{"id": "g70c0a9ff", "field": "date", "class": "wrong_date", "was": "2026-09-03 (объявление)", "now": "2026-09-09 (ЕГРЮЛ, ООО «ЛДВ Пресс»)", "tag": "m219"}
+{"id": "g70c0a9ff", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "75,1% доли в ООО «ЛДВ Пресс»", "tag": "m219"}
+{"id": "g70c0a9ff", "field": "law.struct", "class": "unsupported_claim", "was": "по оценке Adindex около 60,5% капитала ИД", "now": "по расчету AdIndex 2017 года около 60,2%", "tag": "m219"}
+{"id": "g70c0a9ff", "field": "eco.context", "class": "unsupported_claim", "was": "вывести свои проекты на новый уровень", "now": "дословная цитата Олеси Носовой", "tag": "m219"}
+{"id": "g70c0a9ff", "field": "companies.gb04d9cfd.desc", "class": "profile_text", "was": "описание с ходом сделки", "now": "кто это", "tag": "m219"}
+{"id": "g01e3fd26", "field": "sum", "class": "sum_meaning", "was": "7,8 млрд ₽ (стартовая цена торгов)", "now": "Не раскрыта; цифра — в eco.val", "tag": "m216"}
+{"id": "g01e3fd26", "field": "eco.context", "class": "unsupported_claim", "was": "«восьмая подряд неудачная продажа (четыре аукциона и четыре публичных предложения)», «на сентябрь лот непродан»", "now": "только попытки, названные в статьях", "tag": "m216"}
+{"id": "g01e3fd26", "field": "eco.context", "class": "verbatim", "was": "29 слов подряд из «Коммерсанта»", "now": "пересказ", "tag": "m216"}
+{"id": "g01e3fd26", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "АО «Феодосийский завод коньяков и вин» и шесть ООО", "tag": "m216"}
+{"id": "g01e3fd26", "field": "eco.share", "class": "wrong_share", "was": "«Лот — доли восьми юрлиц, которые разливали…»", "now": "84,59% акций АО «ФЗКВ» и 100% долей шести ООО", "tag": "m216"}
+{"id": "ge482f106", "field": "sum", "class": "sum_meaning", "was": "450–800 млн ₽ (по оценке) — оценка анонимного источника", "now": "Не раскрыта; оценка — в eco.val", "tag": "m216"}
+{"id": "ge482f106", "field": "seller", "class": "wrong_seller", "was": "Ольга Давыдова (основательница)", "now": "пусто — продавца статьи и реестр не называют", "tag": "m216"}
+{"id": "ge482f106", "field": "eco.rationale", "class": "invented_rationale", "was": "«разумный шаг» без автора", "now": "слова гендиректора «36,6» Александра Кузина", "tag": "m216"}
+{"id": "ge482f106", "field": "eco.target_fin", "class": "other", "was": "финансы «Витта компани» (не предмет)", "now": "только числа шести ООО", "tag": "m216"}
+{"id": "ge482f106", "field": "eco.share", "class": "wrong_share", "was": "описание сети", "now": "Доли в шести ООО «Диалог»", "tag": "m216"}
+{"id": "ge482f106", "field": "title", "class": "title_standard", "was": "купила московского фармритейлера «Диалог»", "now": "купила сеть аптек «Диалог»", "tag": "m216"}
+{"id": "ge482f106", "field": "events.1", "class": "aggregator_source", "was": "Mergers.ru, в заметке описание компании", "now": "Фармвестник, факт о периметре", "tag": "m216"}
+{"id": "g692dcc6b", "field": "target", "class": "wrong_target", "was": "Экоагрофарминг (49% через холдинг)", "now": "ООО «Ремтехно» (ИНН 7735196190)", "tag": "m216"}
+{"id": "g692dcc6b", "field": "buyer_name", "class": "party_text_no_profile", "was": "Создатели «Ситилинка»", "now": "Алексей Абрамов, Владислав Мангутов и Олег Карчев", "tag": "m216"}
+{"id": "g692dcc6b", "field": "date", "class": "wrong_date", "was": "2026-08-06 (публикация)", "now": "2026-07-30 (ЕГРЮЛ)", "tag": "m216"}
+{"id": "g692dcc6b", "field": "eco.share", "class": "wrong_share", "was": "раскладка через «Ремтехно»", "now": "100% доли в ООО «Ремтехно»", "tag": "m216"}
+{"id": "g692dcc6b", "field": "law.struct", "class": "unsupported_claim", "was": "АО «ЕТС» — «промежуточный держатель перед продажей»", "now": "история участников без толкования", "tag": "m216"}
+{"id": "g692dcc6b", "field": "eco.context", "class": "language", "was": "«сама PepsiCo»", "now": "переписано фактом", "tag": "m216"}
+{"id": "g692dcc6b", "field": "title", "class": "title_standard", "was": "купили долю в производителе картошки для чипсов Lay’s", "now": "купили «Ремтехно»", "tag": "m216"}
+{"id": "g998e5eb5", "field": "law.struct", "class": "verbatim", "was": "11 слов подряд из сообщения банка", "now": "пересказ", "tag": "m216"}
+{"id": "g8f7479bd", "field": "sum", "class": "sum_meaning", "was": "404 млн ₽ (цена объявления)", "now": "Не раскрыта; цифра — в eco.val", "tag": "m216"}
+{"id": "g8f7479bd", "field": "eco.rationale", "class": "other", "was": "мотив без автора", "now": "прямая речь директора Виталия Ганина", "tag": "m216"}
+{"id": "g8f7479bd", "field": "title", "class": "title_standard", "was": "«Еврострой» продает базу за 404 млн ₽", "now": "база выставлена на продажу", "tag": "m216"}
+{"id": "gab0f3dde", "field": "date", "class": "wrong_date", "was": "2026-08-07 (статья)", "now": "2026-08-06 (ЕГРЮЛ)", "tag": "m216"}
+{"id": "gab0f3dde", "field": "law.terms", "class": "foreign_fact", "was": "опцион «Автодома» на бизнес Mercedes-Benz (сделка 2023 года)", "now": "—", "tag": "m216"}
+{"id": "gab0f3dde", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «МБ РУС Финанс»", "tag": "m216"}
+{"id": "gab0f3dde", "field": "title", "class": "title_standard", "was": "купил бывшую лизинговую «дочку» Mercedes-Benz", "now": "купил «МБ РУС Финанс» у «Автодома»", "tag": "m216"}
+{"id": "gab0f3dde", "field": "eco.rationale", "class": "verbatim", "was": "слова Савинова без кавычек", "now": "пересказ и прямая речь в кавычках", "tag": "m216"}
+{"id": "gab0f3dde", "field": "events.1", "class": "aggregator_source", "was": "Mergers.ru", "now": "Коммерсантъ", "tag": "m216"}
+{"id": "gab0f3dde", "field": "profile", "class": "profile_text", "was": "отрасль профиля «Транспорт и логистика»", "now": "Финансовые услуги", "tag": "m216"}
+{"id": "g94268c8d", "field": "seller", "class": "wrong_seller", "was": "АО «Международный аэропорт «Шереметьево»»", "now": "пусто — вклад в уставный капитал", "tag": "m216"}
+{"id": "g94268c8d", "field": "eco.rationale", "class": "other", "was": "слова Василенко о проблемах «Домодедово» вместо мотива", "now": "его слова о партнерстве", "tag": "m216"}
+{"id": "g94268c8d", "field": "eco.share", "class": "wrong_share", "was": "описание с остатком у «Шереметьево»", "now": "25,01% доли в ООО «Перспектива»", "tag": "m216"}
+{"id": "g94268c8d", "field": "title", "class": "title_standard", "was": "приобрело 25,01% в контролирующей «Домодедово» компании", "now": "купило 25,01% владельца «Домодедово»", "tag": "m216"}
+{"id": "g94268c8d", "field": "events.0", "class": "aggregator_source", "was": "Mergers.ru", "now": "Интерфакс", "tag": "m216"}
+{"id": "g7f6d55a9", "field": "eco.rationale", "class": "other", "was": "перебои с бензином и восстановление сети", "now": "—", "tag": "m216"}
+{"id": "g7f6d55a9", "field": "date", "class": "wrong_date", "was": "2026-08-07 (заметка Интерфакса)", "now": "2026 (дня перехода в источниках нет)", "tag": "m216"}
+{"id": "g7f6d55a9", "field": "eco.share", "class": "wrong_share", "was": "шесть станций как факт", "now": "две версии: шесть из 12 и вся сеть из 11", "tag": "m216"}
+{"id": "g7f6d55a9", "field": "title", "class": "title_standard", "was": "Семья бизнесмена Говора приобрела частную сеть АЗС", "now": "«Кузбасский деловой союз» купил сеть АЗС Elke Auto", "tag": "m216"}
+{"id": "g7f6d55a9", "field": "eco.context", "class": "version_as_fact", "was": "«ее муж, если верить открытым данным»; одна версия владельца УК", "now": "обе версии с атрибуцией", "tag": "m216"}
+{"id": "g18a6d375", "field": "eco.context", "class": "unsupported_claim", "was": "квартальная выручка Freedom 732,5 млн долл.", "now": "снято", "tag": "m216"}
+{"id": "g18a6d375", "field": "date", "class": "wrong_date", "was": "2026-08-07", "now": "2026-08-06 (объявление)", "tag": "m216"}
+{"id": "g18a6d375", "field": "ind", "class": "wrong_industry", "was": "ИТ и интернет", "now": "Образование", "tag": "m216"}
+{"id": "g18a6d375", "field": "eco.sum", "class": "sum_meaning", "was": "фраза о нераскрытии в поле суммы", "now": "Не раскрыта", "tag": "m216"}
+{"id": "gdfa13cf0", "field": "eco.rationale", "class": "unsupported_claim", "was": "«Концепцию развития площадки девелопер пока только готовит»", "now": "—", "tag": "m216"}
+{"id": "gdfa13cf0", "field": "src", "class": "dead_source", "was": "MirKvartir (404)", "now": "снят", "tag": "m216"}
+{"id": "gdfa13cf0", "field": "eco.share", "class": "wrong_share", "was": "описание здания", "now": "участок с БЦ, адрес и площадь", "tag": "m216"}
+{"id": "g15386e04", "field": "date", "class": "wrong_date", "was": "2026-08-07 (заметка CNews)", "now": "2025-09-22 (договор, отчетность Softline)", "tag": "m216"}
+{"id": "g15386e04", "field": "title", "class": "title_standard", "was": "потратил 340 миллионов на покупку бывшего подразделения KPMG", "now": "купил 51% BeringPro", "tag": "m216"}
+{"id": "g15386e04", "field": "law.terms", "class": "unsupported_claim", "was": "поэтапное высвобождение 1/6 пакета ежемесячно", "now": "только lock-up шесть месяцев", "tag": "m216"}
+{"id": "g15386e04", "field": "eco.context", "class": "other", "was": "BeringPoint", "now": "BearingPoint", "tag": "m216"}
+{"id": "g57b2c1aa", "field": "deal", "class": "not_a_deal", "was": "соглашение ivideon и Skynet о запуске инвестиционного проекта Vizor", "now": "снята: нет доли, инвестора и цены", "tag": "m216"}
