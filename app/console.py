@@ -2256,8 +2256,42 @@ def _console_ready_cards(db, cards: list) -> list:
     return out
 
 
+_SHOW_LOCK = threading.Lock()
+
+
+def _claim_show(db, card_id: str) -> bool:
+    """Занять показ карточки ДО отправки: запись `console_shown:<id>` вставляется
+    первой, и второй поток/процесс, пришедший за той же карточкой, получает
+    отказ по ключу. 13 ноября 2026 проект поста «Газпром межрегионгаза»
+    (g16da1d05) пришел в консоль дважды: память показа писалась ПОСЛЕ отправки,
+    и два обновления данных подряд оба считали карточку непоказанной."""
+    try:
+        db.add(AppSetting(key=CONSOLE_SHOWN_PREFIX + card_id, value=datetime.utcnow().isoformat(timespec="seconds")))
+        db.commit()
+        return True
+    except SQLAlchemyError:
+        db.rollback()
+        return False
+
+
+def _release_show(db, card_id: str) -> None:
+    """Отправка не удалась — снять занятый показ, чтобы карточка ушла в следующий раз."""
+    try:
+        row = db.get(AppSetting, CONSOLE_SHOWN_PREFIX + card_id)
+        if row is not None:
+            db.delete(row)
+            db.commit()
+    except SQLAlchemyError:
+        db.rollback()
+
+
 def console_show_ready_cards() -> dict:
     """Показать в консоли готовые карточки из pending.json. Возвращает счет."""
+    with _SHOW_LOCK:
+        return _console_show_ready_cards()
+
+
+def _console_show_ready_cards() -> dict:
     pending = (core._read_json("static/data/pending.json", {}) or {}).get("cards") or []
     db = get_session()
     try:
@@ -2273,6 +2307,8 @@ def console_show_ready_cards() -> dict:
         thread = core._console_thread_id(db, "decision")
         shown = 0
         for card in ready:
+            if not _claim_show(db, card["id"]):
+                continue  # показ уже занят другим потоком или процессом
             common = {"chat_id": chats[0], "disable_web_page_preview": True}
             if thread:
                 common["message_thread_id"] = thread
@@ -2280,6 +2316,7 @@ def console_show_ready_cards() -> dict:
                                             reply_markup=sd.card_keyboard(card), **common)
             if not (r and r.get("ok")):
                 logger.error("карточка %s в консоль не ушла: %s", card["id"], r)
+                _release_show(db, card["id"])
                 continue
             preview = None
             if sd.goes_to_channel(card):
@@ -2291,7 +2328,6 @@ def console_show_ready_cards() -> dict:
                                                      reply_markup=sd.post_keyboard(card), **common)
                 if not (rp and rp.get("ok")):
                     preview = None
-            _remember_setting(db, CONSOLE_SHOWN_PREFIX + card["id"], datetime.utcnow().isoformat(timespec="seconds"))
             if preview:
                 _remember_setting(db, CONSOLE_PREVIEW_PREFIX + card["id"], preview)
             shown += 1
