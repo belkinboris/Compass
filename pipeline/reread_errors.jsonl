@@ -3216,3 +3216,18 @@
 {"field": "buyer", "class": "party_text_no_profile", "was": "пусто, обе компании текстом в предмете", "now": "профили Башнефтегеофизика (покупатель) и Геотек (предмет)", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
 {"field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка БНГФ 2023 года 24,7 млрд ₽ (покупателя, без источника)", "now": "выручка «Геотека» 2025 года", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
 {"field": "title", "class": "title_standard", "was": "«Геотек» и «Башнефтегеофизика» объединяют нефтесервисные активы", "now": "«Башнефтегеофизика» собирается купить «Геотек»", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
+{"id": "g3acbe2ec", "field": "date", "class": "wrong_date", "was": "2024-10-03 (пост юристов)", "now": "2024-10-01 (начало торгов)", "tag": "m214"}
+{"id": "g3acbe2ec", "field": "sum", "class": "wrong_sum", "was": "Не раскрыта", "now": "2,7 млрд ₽ (объем IPO, раскрыт компанией)", "tag": "m214"}
+{"id": "g3acbe2ec", "field": "title", "class": "title_standard", "was": "IPO «Группа Аренадата» на Московской бирже", "now": "«Группа Аренадата» провела IPO на Московской бирже", "tag": "m214"}
+{"id": "g3acbe2ec", "field": "eco.val", "class": "other", "was": "оценка 17–19 млрд ₽ — пересчет диапазона, «Сам диапазон»", "now": "цена 95 ₽ и капитализация 19 млрд ₽ по статье", "tag": "m214"}
+{"id": "g3acbe2ec", "field": "law.struct", "class": "other", "was": "первичное предложение акций", "now": "продавали акции действующие владельцы, компания денег не получила", "tag": "m214"}
+{"id": "g3acbe2ec", "field": "eco.context", "class": "verbatim", "was": "10 слов подряд из поста юристов", "now": "пересказ", "tag": "m214"}
+{"id": "g4c98dcba", "field": "date", "class": "wrong_date", "was": "2024-04-22 (пост юристов)", "now": "2024-04-19 (размещение)", "tag": "m214"}
+{"id": "g4c98dcba", "field": "title", "class": "title_standard", "was": "SPO «Группа Астра»: продано 21 млн акций по 555 ₽", "now": "«Группа Астра» провела SPO на Московской бирже", "tag": "m214"}
+{"id": "g4c98dcba", "field": "eco.rationale", "class": "invented_rationale", "was": "рекорды и «голубые фишки» из поста консультанта", "now": "слова гендиректора Ильи Сивцева о листинге и индексе", "tag": "m214"}
+{"id": "g4c98dcba", "field": "law.terms", "class": "language", "was": "Фролов", "now": "Денис Фролов", "tag": "m214"}
+{"id": "gb1cacbc1", "field": "sum", "class": "wrong_sum", "was": "Не раскрыта", "now": "3,5 млрд ₽", "tag": "m214"}
+{"id": "gb1cacbc1", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Денис Фролов и Илья Сивцев", "tag": "m214"}
+{"id": "gb1cacbc1", "field": "eco.share", "class": "wrong_share", "was": "описание компании и пересчет долей изданием", "now": "10,5 млн акций — 5% капитала", "tag": "m214"}
+{"id": "gb1cacbc1", "field": "title", "class": "title_standard", "was": "IPO «Группа Астра» на Московской бирже", "now": "«Группа Астра» провела IPO на Московской бирже", "tag": "m214"}
+{"id": "gb1cacbc1", "field": "eco.finadv", "class": "other", "was": "фраза статьи с тикерами", "now": "список организаторов «фирма — роль»", "tag": "m214"}
