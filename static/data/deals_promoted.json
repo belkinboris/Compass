@@ -123891,6 +123891,18 @@
     [
      "Frank Media",
      "https://frankmedia.ru/313124"
+    ],
+    [
+     "Агроинвестор",
+     "https://www.agroinvestor.ru/companies/news/45794-vtb-reshil-prodat-agroaktivy/"
+    ],
+    [
+     "Агроинвестор",
+     "https://www.agroinvestor.ru/markets/news/45251-vtb-planiruet-sozdat-krupnyy-agrokholding/"
+    ],
+    [
+     "Reuters",
+     "https://www.reuters.com/sustainability/boards-policy-regulation/russian-bank-vtb-create-agriculture-giant-nationalised-assets-ceo-says-2025-12-01/"
     ]
    ],
    "extra": "—",
@@ -124121,6 +124133,16 @@
      ]
     },
     {
+     "kind": "announced",
+     "date": "2026-04-08",
+     "title": "ВТБ решил продать все сельхозактивы",
+     "note": "Глава ВТБ Андрей Костин объявил, что банк продаст все сельхозактивы и будет работать только в городе.",
+     "source": [
+      "Агроинвестор",
+      "https://www.agroinvestor.ru/companies/news/45794-vtb-reshil-prodat-agroaktivy/"
+     ]
+    },
+    {
      "kind": "other",
      "date": "2026-10-20",
      "title": "СМИ сообщили о закрытии сделки",
@@ -124243,9 +124265,9 @@
      "date": "2026-11-12"
     }
    ],
-   "reread": "2026-11-12",
-   "reread_hash": "e07525da5bbb.7105df",
-   "reread_note": "статьи: 9"
+   "reread": "2026-11-13",
+   "reread_hash": "fe3e4540ddf0.7105df",
+   "reread_note": "статьи: 1"
   },
   {
    "id": "gf0ce42ac",
@@ -210818,116 +210840,6 @@
    "reread_note": "статьи: 5"
   },
   {
-   "id": "c59e65efb",
-   "date": "2024-01-13",
-   "title": "Роман Абрамович инвестировал $63 млн в европейские стартапы через Target Global",
-   "ind": "Финансовые услуги",
-   "type": "Инвестиция",
-   "src": [
-    [
-     "Forbes",
-     "https://www.forbes.ru/milliardery/504146-roman-abramovic-tajno-investiroval-63-mln-v-rad-evropejskih-startapov"
-    ],
-    [
-     "RB.RU",
-     "https://rb.ru/news/abramovich-63mln/"
-    ]
-   ],
-   "from_compact": "bulk",
-   "sum": "$63 млн",
-   "eco": {
-    "sum": "$63 млн",
-    "share": "Российский миллиардер Роман Абрамович через инвестиционный фонд Target Global вложил свыше $63 млн в европейские технологические стартапы, среди которых — Auto1, Flo, Revolut, Cazoo, Circ и др.",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "Роман Абрамович попал под антироссийские санкции. Еще до их введения, с 2015 по 2021 год, он был соинвестором и партнером с ограниченной ответственностью фонда Target Global и мог вкладывать средства в перспективные проекты, передав в управление фонду десятки миллионов долларов США. Прямых санкционных последствий именно для этих долей (заморозка, изъятие, иск регулятора) после публикации Forbes не нашлось. Target Global публично заявил, что инвестиции сделаны до вторжения России в Украину и до введения санкций против Абрамовича, отметив, что у фонда более 200 разных партнеров с ограниченной ответственностью и он регулируется в нескольких юрисдикциях.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "До 2021 года Абрамович вкладывался через Target Global — в том числе через отдельные подразделения фонда, которым он выдавал кредиты, — и через Ervington, компанию, которую тоже связывают с бизнесменом. Деньги шли в финтех-стартап Revolut, шеринговые сервисы Cazoo и Circ, приложение для женщин Flo, службу доставки Delivery Hero и немецкого продавца автомобилей с пробегом Auto1.",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-22",
-   "deep_researched": "2026-08-22",
-   "weekly_researched": "2026-08-22",
-   "proofread_absorbed": {
-    "eco.context": [
-     "1e2b92cc24c8"
-    ],
-    "law.struct": [
-     "7b08c4489c2a"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "3a355a494451"
-    },
-    "price": {
-     "value_rub": 5552341200,
-     "meaning": "foreign_currency",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "38278698bf7d",
-     "currency": "USD",
-     "amount": 63000000.0,
-     "fx_rate": 88.1324,
-     "fx_date": "2024-01-13",
-     "fx_method": "day"
-    },
-    "date": {
-     "value": "2024-01-13",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "b3da73f6b63b"
-    },
-    "nature": {
-     "control_change": false,
-     "cash_in": true,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "7f5a652ee3ba"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "not_purchase",
-     "top_purchases": "not_purchase",
-     "multiple_text": "not_control_change"
-    }
-   },
-   "status": "Закрыта",
-   "followup_researched": "2026-09-07",
-   "gate_baseline_hash": "0e056d38059c.ace5bd"
-  },
-  {
    "id": "c788bf9cc",
    "date": "2023",
    "title": "Барак Абрамов не купил израильский Yango у «Яндекса»",
@@ -211033,104 +210945,6 @@
    "reread": "2026-11-13",
    "reread_hash": "867cfe764f7f.887fe9",
    "reread_note": "статьи: 2"
-  },
-  {
-   "id": "cfdb3878d",
-   "date": "2023-05-18",
-   "title": "Ростех создаст холдинг для импортозамещения в нефтехимии",
-   "ind": "Химия и удобрения",
-   "type": "Инвестиция",
-   "src": [
-    [
-     "АК&М",
-     "https://www.akm.ru/news/rostekh_obedinit_ne_menee_15_predpriyatiy/"
-    ],
-    [
-     "URA.RU",
-     "https://ura.news/news/1052650433"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "В новый холдинг войдут не менее 15 предприятий химической отрасли, в том числе 13 предприятий «Росхимзащиты», Институт пластмасс имени Петрова и ГНИИХТЭОС. Головной структурой станет «Союзхимэкспорт». Генеральный директор — Алексей Станкин.",
-   "sum": "4 млрд ₽ (инвестиции в новые производства)",
-   "eco": {
-    "sum": "4 млрд ₽ (инвестиции в новые производства)",
-    "share": "—",
-    "val": "4 млрд ₽ (инвестиции в новые производства)",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "Создание нового холдинга путем объединения не менее 15 предприятий химической отрасли, включая 13 предприятий «Росхимзащиты», Институт пластмасс им. Петрова, ГНИИХТЭОС и других организаций. Головной структурой станет «Союзхимэкспорт». Генеральный директор — Алексей Станкин.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-22",
-   "deep_researched": "2026-08-22",
-   "weekly_researched": "2026-08-22",
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "28bd8fc9a216"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "not_a_price",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "33badab3f47a"
-    },
-    "date": {
-     "value": "2023-05-18",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "74535945c599"
-    },
-    "nature": {
-     "control_change": false,
-     "cash_in": true,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "21c4875e3a6d"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "not_purchase",
-     "top_purchases": "not_purchase",
-     "multiple_text": "not_control_change"
-    }
-   },
-   "followup_researched": "2026-09-07",
-   "sum_basis": "not_a_price",
-   "gate_baseline_hash": "b3ff6e667c52.ace5bd"
   },
   {
    "id": "c01524a40",
@@ -211252,113 +211066,6 @@
    "reread": "2026-11-13",
    "reread_hash": "de7104a69cc9.ebf962",
    "reread_note": "статьи: 2"
-  },
-  {
-   "id": "c7403d4db",
-   "date": "2025-12-01",
-   "title": "ВТБ распродает сельхозактивы агрокомплекса «Лабинский» по отдельности",
-   "ind": "Агро",
-   "type": "M&A",
-   "src": [
-    [
-     "Reuters",
-     "https://www.reuters.com/sustainability/boards-policy-regulation/russian-bank-vtb-create-agriculture-giant-nationalised-assets-ceo-says-2025-12-01/"
-    ],
-    [
-     "Агроинвестор",
-     "https://www.agroinvestor.ru/markets/news/45251-vtb-planiruet-sozdat-krupnyy-agrokholding/"
-    ],
-    [
-     "Агроинвестор",
-     "https://www.agroinvestor.ru/companies/news/45794-vtb-reshil-prodat-agroaktivy/"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Решение продать все сельхозактивы банка и работать только в городе глава ВТБ Андрей Костин объявил в кулуарах форума Data Fusion: «У нас есть сельскохозяйственные (активы), но я принял решение их продать. Все будем (продавать), будем только в городе работать», — сказал он.",
-   "eco": {
-    "context": "ВТБ отказался от прежнего плана собрать крупный агрохолдинг и продает сельхозактивы по отдельности: глава банка Андрей Костин связывает это с регулированием ЦБ, которое с 1 апреля 2027 года ограничит вложения банков в непрофильные активы. Весь пакет оценивается больше чем в 55 млрд ₽; по крупнейшему активу, агрокомплексу «Лабинский», соглашение с покупателем об условиях продажи подписано к сентябрю 2026 года, закрыть продажу рассчитывают до конца 2026 года, покупатель не назван. Банк хочет сначала получить в управление, а потом продать 13 юрлиц из Краснодарского края, владеющих сельхозактивами, — среди них «Лосево», «Маяк Революции», «Юг-Агропром», «Агрофирма „Дружба“», «Агрофирма „Воздвиженская“» и другие; с такой просьбой — дать поручение правительству, Минфину и Генпрокуратуре — Костин обратился к Путину в середине октября. Эти компании прежде контролировала семья Виталия Очкаласова, бывшего главы Кавказского района Краснодарского края, а в мае суд по иску Генпрокуратуры передал их федеральным властям; следствие считает активы полученными преступным путем, их суммарная стоимость оценивалась в 5,5 млрд ₽.",
-    "share": "Агрокомплекс «Лабинский» — многопрофильный холдинг, прежде всего сельское хозяйство и переработка: растениеводство, молочные и свиные фермы, элеваторы, сахарные заводы и мясопереработка; основные предприятия — в Краснодарском крае."
-   },
-   "added": "2026-08-03",
-   "status": "Обсуждается",
-   "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "themes": [
-    "Национализация / иск Генпрокуратуры"
-   ],
-   "proofread_absorbed": {
-    "eco.context": [
-     "e9e7f0dc1ce4",
-     "72da946c31db"
-    ],
-    "extra": [
-     "88d1e97a662c"
-    ],
-    "eco.share": [
-     "75f738a6f599"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "2da9bd1be6e3"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "92725277de89"
-    },
-    "date": {
-     "value": "2025-12-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "b3620c07e2ba"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "6558175a595e"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   },
-   "followup_researched": "2026-09-07",
-   "seller": "ВТБ",
-   "seller_src": "text",
-   "seller_id": "gcafc31dc",
-   "gate_baseline_hash": "dea012ceca2f.534983"
   },
   {
    "id": "c85ba6042",
@@ -213535,116 +213242,6 @@
    "reread": "2026-11-13",
    "reread_hash": "6d24159755a7.4b8a03",
    "reread_note": "статьи: 7"
-  },
-  {
-   "id": "c197ac551",
-   "date": "2024-11-01",
-   "title": "ВЭБ.РФ выделяет ₽25 млрд на инвестиции в технологические холдинги через «Вертикаль Инвестиции»",
-   "ind": "Финансовые услуги",
-   "type": "Инвестиция",
-   "src": [
-    [
-     "РБК",
-     "https://www.rbc.ru/technology_and_media/08/11/2024/672cce9a9a794719c8d8ec0e"
-    ],
-    [
-     "Sk.ru",
-     "https://sk.ru/news/vebrf-vydelila-25-mlrd-na-investicii-v-tehnologicheskie-kompanii"
-    ],
-    [
-     "Парламентская газета",
-     "https://finance.rambler.ru/business/56522702-veb-proinvestiroval-10-milliardov-rubley-v-dvuh-tehnologicheskih-liderov/"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "ВЭБ.РФ зарегистрировала холдинг «Вертикаль Инвестиции», управляющая компания — Sk Capital, структура фонда «Сколково». Холдинг создается для инвестиций в технологические компании по модели консолидации вокруг лидеров рынка. Первым траншем планируется выделить 25 млрд ₽ на создание холдингов по 5–10 млрд ₽ каждый в приоритетных направлениях: кибербезопасность, БПЛА, информационные технологии, медицина, промышленные технологии.",
-   "sum": "25 млрд ₽",
-   "eco": {
-    "sum": "25 млрд ₽",
-    "share": "Две первые сделки закрыты, в сумме на 10 млрд ₽: это вложения в холдинг по кибербезопасности «Сайберус» и в Softline.",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "Задача холдинга — помочь появлению российских высокотехнологичных публичных компаний, отметил Владимир Сакович.",
-    "context": "ВЭБ.РФ зарегистрировала холдинг «Вертикаль Инвестиции» с управляющей компанией Sk Capital (структура фонда «Сколково»). Холдинг создается для инвестиций в технологические компании по модели консолидации вокруг лидеров рынка. Планируется выделить ₽25 млрд (первый транш) для создания холдингов объемом 5–10 млрд руб. каждый в приоритетных направлениях: кибербезопасность, БПЛА, информационные технологии, медицина, промышленные технологии.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "proofread_absorbed": {
-    "eco.rationale": [
-     "548e2a0b7d7e"
-    ],
-    "eco.share": [
-     "92cff790d4dd"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "3055c5a5d00d"
-    },
-    "price": {
-     "value_rub": 25000000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "76f124e852c8"
-    },
-    "date": {
-     "value": "2024-11-01",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "163d53bf510b"
-    },
-    "nature": {
-     "control_change": false,
-     "cash_in": true,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "7f5a652ee3ba"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "not_purchase",
-     "top_purchases": "not_purchase",
-     "multiple_text": "not_control_change"
-    }
-   },
-   "status": "Закрыта",
-   "followup_researched": "2026-09-08",
-   "gate_baseline_hash": "02df4dbc3fd5.ace5bd"
   },
   {
    "id": "cfdc0e962",
@@ -355021,7 +354618,8 @@
   "c1d0f3d54": "g96b1cdaf",
   "c51777ade": "c7fd83d05",
   "cccedc36b": "gdf93c62d",
-  "g35357328": "g92476095"
+  "g35357328": "g92476095",
+  "c7403d4db": "g97679d43"
  },
  "merged_companies": {
   "g942e9f9e": "g5ca09975",
@@ -355732,7 +355330,6 @@
   "gc9ea6b08": null,
   "g998e5eb5": 36,
   "g0931ce83": 93,
-  "c7403d4db": null,
   "c56a6cc5f": null,
   "gdcda51be": null,
   "c71e19cc1": null,
