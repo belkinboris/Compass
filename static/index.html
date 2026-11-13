@@ -10270,11 +10270,6 @@ function renderFirmPage(f){
       <div class="q-pi"><div><h4>Практики</h4><div class="q-chips">${p.practices.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div>
         <div><h4>Отрасли</h4><div class="q-chips">${p.industries.map(x=>`<span>${esc(x)}</span>`).join("")}</div></div></div>
     </div>
-    <section class="q-dark fp-dark"><div class="fp-in">
-      <div class="q-hd"><h2>Рейтинги и премии</h2><small>По данным сайта фирмы</small></div>
-      <div class="q-rate">${p.ratings.map(([s,t],i)=>`<div><b>${String(i+1).padStart(2,"0")}</b><i>${esc(s)}</i><span>${esc(t)}</span></div>`).join("")}</div>
-    </div></section>
-    <div class="fp-in q-sec">
       <div class="q-hd"><h2>Партнеры</h2></div>
       <div class="q-team">${p.partners.map(([nm,r,a])=>`<div><i>${esc(r)}</i><b>${esc(nm)}</b><span>${esc(a)}</span></div>`).join("")}</div>
       <p class="q-note">${note}</p>
@@ -10886,7 +10881,7 @@ function renderAnalytics(){
       <span class="label">${anYear==="Все"?"Сделок по годам":`Сделок по месяцам, ${anYear}`}</span>
       ${byPeriod.map(([k,n],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${anYear==="Все"
-        ? [where.trim(), thinNote, ndCount?`У ${ndCount} ${plural(ndCount,"сделки","сделок","сделок")} дата неизвестна, на графике их нет.`:""].filter(Boolean).join(" ") || "Сделки по году, когда о них стало известно."
+        ? [where.trim(), thinNote].filter(Boolean).join(" ") || "Сделки по году, когда о них стало известно."
         : `${where}${all.length-yearOnly} ${plural(all.length-yearOnly,"сделка","сделки","сделок")} с известным месяцем${yearOnly?`; еще у ${yearOnly} известен только год, на графике их нет`:""}. У части сделок это месяц новости, а не подписания.`}</p>
     </div>
     ${sumByPeriod.length?`
