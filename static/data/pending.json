@@ -627,7 +627,9 @@
    "accepted": "2026-11-13",
    "accepted_hash": "0e4a99b3c15d.0b7c51",
    "second_read": "2026-11-13",
-   "second_read_hash": "0e4a99b3c15d.0b7c51"
+   "second_read_hash": "0e4a99b3c15d.0b7c51",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g8aea35e0",
@@ -702,7 +704,7 @@
     "adv": [],
     "terms": "—"
    },
-   "pending_since": "2026-11-09T13:22:24+00:00",
+   "pending_since": "2026-11-13T17:11:40+00:00",
    "from_raw": {
     "draft_id": "d73176431",
     "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская"
@@ -745,7 +747,9 @@
    "accepted": "2026-11-13",
    "accepted_hash": "43c7e9898459.fb8243",
    "second_read": "2026-11-13",
-   "second_read_hash": "43c7e9898459.fb8243"
+   "second_read_hash": "43c7e9898459.fb8243",
+   "draft_sent": true,
+   "shown_hash": "43c7e9898459.fb8243"
   },
   {
    "id": "g60130b7f",
