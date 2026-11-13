@@ -320444,6 +320444,148 @@
      "multiple_text": "no_target"
     }
    }
+  },
+  {
+   "id": "g6fe89f91",
+   "date": "2024",
+   "title": "«Севергрупп инвестиции» купила 19,91% «Автостэлс»",
+   "ind": "Автопром",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Телеграм-канал @whitesquarenews",
+     "https://t.me/whitesquarenews/153"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "По данным ГИР БО, выручка ООО «Автостэлс» за 2024 год — 12,5 млрд ₽ (за 2023 год — 10,8 млрд ₽), чистая прибыль — 128,3 млн ₽ (за 2023 год — прибыль 92,5 млн ₽). Средняя численность работников за 2025 год — 420 человек (ЕГРЮЛ).",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Автостэлс» — крупная платформа торговли автозапчастями; новые деньги компания планирует направить на развитие логистики и IT-систем и на закупку запаса ходовых запчастей. «Севергрупп инвестиции» вкладывается в быстрорастущие прибыльные компании и помогает им выйти на рынки капитала — это и привлекло инвестора к сделке.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [
+     [
+      "Юридический консультант «Автостэлс»",
+      "White Square",
+      "партнер Антон Куликов, советник Валерий Лавров, юрист Григор Восканян"
+     ]
+    ],
+    "terms": "—"
+   },
+   "asset": "«Автостэлс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024",
+     "title": "Сделка завершена",
+     "note": "«Севергрупп инвестиции» купила 19,91% «Автостэлс». Сделку для «Автостэлс» юридически сопровождала команда White Square. Новые деньги компания собирается потратить на склады, логистику и IT, а также закупить запас ходовых запчастей.",
+     "source": [
+      "Телеграм-канал @whitesquarenews",
+      "https://t.me/whitesquarenews/153"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Севергрупп инвестиции»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Автостэлс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/whitesquarenews/153"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-11-13",
+   "buyer": "gc267fcd7",
+   "target": "ge01599c3",
+   "accepted_notes": {
+    "searched": [
+     "WebSearch: \"Севергрупп инвестиции\" \"Автостэлс\" 19,91%",
+     "WebSearch: \"Автостэлс\" торговля автозапчастями оборот выручка",
+     "WebSearch: White Square Севергрупп Автостэлс сделка пресс-релиз",
+     "WebSearch: \"Автостэлс\" Мордашов инвестиции 2024 доля сделка",
+     "WebFetch: datanewton.ru/search?query=Автостэлс и query=7721568730 (подтвержден ИНН цели)"
+    ]
+   },
+   "accepted": "2026-11-13",
+   "accepted_hash": "0e4a99b3c15d.0b7c51",
+   "second_read": "2026-11-13",
+   "second_read_hash": "0e4a99b3c15d.0b7c51",
+   "added": "2026-11-13",
+   "facts": {
+    "stake": {
+     "value": 19.91,
+     "basis": "rule",
+     "card_hash": "b94ba4f61b0e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "3a68f7b82a0b"
+    },
+    "date": {
+     "value": "2024",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "60a610ab54d0"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7f5a652ee3ba"
+    },
+    "target": {
+     "company_id": "ge01599c3",
+     "inn": "7721568730",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "5068ccde9e61"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change"
+    }
+   }
   }
  ],
  "companies": {
