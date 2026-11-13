@@ -3659,3 +3659,115 @@
 {"id": "g7ccf80f9", "field": "eco.context", "class": "unsupported_claim", "was": "«обещание выполняется», слова Кумпеля об AdRiver", "now": "снято", "tag": "m206"}
 {"id": "g7ccf80f9", "field": "title", "class": "title_standard", "was": "приобрела ГК Internest (AdRiver и Soloway)", "now": "купил группу Internest", "tag": "m206"}
 {"id": "gc567457f", "field": "eco.share", "class": "other", "was": "пересказ хода сделки", "now": "доли в обществах", "tag": "m206"}
+{"id": "cef2d9366", "field": "type", "class": "wrong_type", "was": "Реорганизация", "now": "M&A", "tag": "m212"}
+{"id": "cef2d9366", "field": "buyer", "class": "wrong_buyer", "was": "не указан", "now": "«Восток Инвестиции»", "tag": "m212"}
+{"id": "cef2d9366", "field": "seller", "class": "wrong_seller", "was": "не указан", "now": "Baring Vostok", "tag": "m212"}
+{"id": "cef2d9366", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Закрыта (2024)", "tag": "m212"}
+{"id": "cef2d9366", "field": "date", "class": "wrong_date", "was": "2023-03-31 (день статьи о параметрах)", "now": "2024", "tag": "m212"}
+{"id": "cef2d9366", "field": "title", "class": "title_standard", "was": "Раздел активов Baring Vostok между российской и зарубежной командой", "now": "«Восток Инвестиции» купили российские активы Baring Vostok", "tag": "m212"}
+{"id": "cef2d9366", "field": "eco.rationale", "class": "invented_rationale", "was": "уголовное преследование Калви как цель", "now": "—", "tag": "m212"}
+{"id": "cef2d9366", "field": "law.appr", "class": "other", "was": "«сейчас на согласовании» (снимок 2023 года)", "now": "указ Президента, февраль 2024 года", "tag": "m212"}
+{"id": "c61052e8d", "field": "date", "class": "wrong_date", "was": "2023-03-01 (выдуманное 1-е число)", "now": "2023-05-23", "tag": "m212"}
+{"id": "c61052e8d", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Обсуждается", "tag": "m212"}
+{"id": "c61052e8d", "field": "title", "class": "title_standard", "was": "Raiffeisen Bank International планирует выделение российского подразделения", "now": "Российский Райффайзенбанк выставлен на продажу", "tag": "m212"}
+{"id": "c61052e8d", "field": "eco.share", "class": "wrong_share", "was": "пусто", "now": "Доля в АО «Райффайзенбанк»", "tag": "m212"}
+{"id": "c61052e8d", "field": "eco.context", "class": "unsupported_claim", "was": "блокировка продажи в октябре 2025 года, 7 млрд € прибыли, отсрочка кредитов военным", "now": "сняты: нет в открытых источниках", "tag": "m212"}
+{"id": "c61052e8d", "field": "eco.rationale", "class": "version_as_fact", "was": "RBI активизирует усилия (без оговорки)", "now": "по неофициальным данным", "tag": "m212"}
+{"id": "gc4c76129", "field": "buyer", "class": "wrong_buyer", "was": "МТС Entertainment", "now": "ООО «МТС Лайв» (ЕГРЮЛ)", "tag": "m104"}
+{"id": "gc4c76129", "field": "seller", "class": "wrong_seller", "was": "Егор Егерев", "now": "Ticketscloud Ltd (ЕГРЮЛ, 85%)", "tag": "m104"}
+{"id": "gc4c76129", "field": "sum", "class": "sum_meaning", "was": "500 млн – 2 млрд ₽ (оценки всей компании)", "now": "до 900 млн ₽ (по оценке)", "tag": "m104"}
+{"id": "gc4c76129", "field": "eco.share", "class": "wrong_share", "was": "описание сервиса", "now": "85% доли в ООО «Тикетсклауд»", "tag": "m104"}
+{"id": "gc4c76129", "field": "title", "class": "title_standard", "was": "МТС купила TicketsCloud", "now": "МТС купила 85% TicketsCloud", "tag": "m104"}
+{"id": "g756f35a3", "field": "title", "class": "title_standard", "was": "Росимущество продало 100% акций … Денису Избрехту", "now": "Денис Избрехт купил «Первую образцовую типографию» у Росимущества", "tag": "m104"}
+{"id": "g756f35a3", "field": "eco.share", "class": "wrong_share", "was": "все акции + площади", "now": "100% акций АО «Первая образцовая типография»", "tag": "m104"}
+{"id": "gff93974e", "field": "eco.share", "class": "wrong_share", "was": "описание SmartDeal", "now": "100% доли в ООО «Практика Успеха»", "tag": "m104"}
+{"id": "g94683ed2", "field": "deal", "class": "duplicate", "was": "залог «Рив Гош» отдельной карточкой c3bdd7fd4 (год 2024)", "now": "этап 2025-09-23", "tag": "m104"}
+{"id": "g323cf076", "field": "deal", "class": "duplicate", "was": "выставление портфеля Raven Russia отдельной карточкой caeac8f4e", "now": "этап 2025-10-28", "tag": "m104"}
+{"id": "cc0e7565f", "field": "deal", "class": "not_a_deal", "was": "оценка бизнеса Russ аудитором", "now": "снята", "tag": "m104"}
+{"id": "c2397cc97", "field": "deal", "class": "not_a_deal", "was": "программа выкупа медофисов «Инвитро»", "now": "снята", "tag": "m104"}
+{"id": "c6a6cb6ee", "field": "deal", "class": "not_a_deal", "was": "запуск акселератора МТС", "now": "снята", "tag": "m104"}
+{"id": "c4534c6d1", "field": "deal", "class": "not_a_deal", "was": "просьба «Самолета» о господдержке", "now": "снята", "tag": "m104"}
+{"id": "gmru-mtsbank-kdpay", "field": "sum", "class": "sum_meaning", "was": "50–150 млн ₽ (оценка аналитика «Финама»)", "now": "Не раскрыта, оценка в eco.val", "tag": "m208"}
+{"id": "gmru-mtsbank-kdpay", "field": "title", "class": "title_standard", "was": "МТС Банк купил платежный сервис KD Pay (заголовок ComNews)", "now": "МТС Банк купил 51% владельца KD Pay", "tag": "m208"}
+{"id": "gmru-mtsbank-kdpay", "field": "eco.rationale", "class": "unsupported_claim", "was": "планы банка без того, кто их назвал", "now": "со слов Антона Пашкевича и сообщения банка", "tag": "m208"}
+{"id": "gmru-mtsbank-kdpay", "field": "eco.share", "class": "other", "was": "описание сервиса", "now": "51% доли, у кого сколько куплено", "tag": "m208"}
+{"id": "gmru-mtsbank-kdpay", "field": "seller", "class": "other", "was": "«(основатели)» у Дубова", "now": "Олег Пономарев и Леонид Дубов", "tag": "m208"}
+{"id": "gmru-roshim-vnt", "field": "ind", "class": "wrong_industry", "was": "Химия и удобрения (по покупателю)", "now": "Порты и инфраструктура (терминал)", "tag": "m208"}
+{"id": "gmru-roshim-vnt", "field": "eco.rationale", "class": "invented_rationale", "was": "«часть стратегии по консолидации портовой логистики»", "now": "по неофициальным данным — вывоз продукции «Газпром нефтехим Салавата»", "tag": "m208"}
+{"id": "gmru-roshim-vnt", "field": "seller", "class": "party_text_no_profile", "was": "пусто", "now": "ООО «СпецХимТранс» (нынешний владелец)", "tag": "m208"}
+{"id": "gmru-roshim-vnt", "field": "title", "class": "title_standard", "was": "«Росхим» может приобрести … в Приморье (заголовок Ъ)", "now": "«Росхим» может купить Восточный нефтехимический терминал", "tag": "m208"}
+{"id": "gmru-roshim-vnt", "field": "eco.context", "class": "unsupported_claim", "was": "владелец с января 2026 года как факт", "now": "по ЕГРЮЛ — ООО «СХТ» с мая 2024 года, январь 2026 года — другая версия", "tag": "m208"}
+{"id": "gmru-geopromining-zabaikalie", "field": "date", "class": "wrong_date", "was": "2026-07-20 (публикация)", "now": "2026-05-27 (ЕГРЮЛ)", "tag": "m208"}
+{"id": "gmru-geopromining-zabaikalie", "field": "title", "class": "title_standard", "was": "ГеоПроМайнинг купил активы по добыче золота в Забайкалье (заголовок Ъ)", "now": "«ГеоПроМайнинг» купил 25% «Золотоноши»", "tag": "m208"}
+{"id": "gmru-geopromining-zabaikalie", "field": "eco.val", "class": "version_as_fact", "was": "оценка анонимного собеседника без оговорки", "now": "«по неофициальной оценке»", "tag": "m208"}
+{"id": "gmru-geopromining-zabaikalie", "field": "eco.target_fin", "class": "version_as_fact", "was": "запасы со слов источника как факт", "now": "«по неофициальным данным»", "tag": "m208"}
+{"id": "gmru-geopromining-zabaikalie", "field": "eco.share", "class": "other", "was": "описание лицензий", "now": "25% доли в ООО «Золотоноша»", "tag": "m208"}
+{"id": "gmru-rostech-avia-holding", "field": "type", "class": "wrong_type", "was": "Создание СП", "now": "Реорганизация", "tag": "m208"}
+{"id": "gmru-rostech-avia-holding", "field": "eco.context", "class": "unsupported_claim", "was": "прибыль Red Wings «по данным Rusprofile»", "now": "снято: нет ни в статье, ни в поиске", "tag": "m208"}
+{"id": "gmru-rostech-avia-holding", "field": "title", "class": "title_standard", "was": "«Ростех» объединяет …", "now": "«Ростех» собирается объединить …", "tag": "m208"}
+{"id": "gmru-rostech-avia-holding", "field": "eco.rationale", "class": "unsupported_claim", "was": "цель без того, кто ее назвал", "now": "«В „Ростехе“ объясняют»", "tag": "m208"}
+{"id": "gmru-vysochaishy-komi-oil", "field": "sum", "class": "sum_meaning", "was": "$30 млн (цена в объявлении о продаже)", "now": "Не раскрыта, цена объявления в eco.val", "tag": "m208"}
+{"id": "gmru-vysochaishy-komi-oil", "field": "asset", "class": "wrong_target", "was": "нефтяной проект в Коми", "now": "ООО «Нефтегеосервис» и ООО НК «Севергеофизика»", "tag": "m208"}
+{"id": "gmru-vysochaishy-komi-oil", "field": "title", "class": "title_standard", "was": "Сооснователь «Высочайшего» продает нефтяной проект в Коми", "now": "Нефтяной проект в Коми выставлен на продажу за $30 млн", "tag": "m208"}
+{"id": "gmru-vysochaishy-komi-oil", "field": "eco.val", "class": "verbatim", "was": "дословно объявление о продаже", "now": "пересказ, инфраструктура — в контекст", "tag": "m208"}
+{"id": "gmru-sucden-poetti", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Финансирование · структурная сделка (залог 35% под товарный кредит)", "tag": "m208"}
+{"id": "gmru-sucden-poetti", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Закрыта (договор залога — июнь 2026 года)", "tag": "m208"}
+{"id": "gmru-sucden-poetti", "field": "asset", "class": "wrong_target", "was": "партнерство с «Милфудс»", "now": "35% доли в ООО «Милфудс»", "tag": "m208"}
+{"id": "gmru-sucden-poetti", "field": "title", "class": "title_standard", "was": "… — ООО «СДС» (две мысли через тире)", "now": "Sucden получил в залог 35% «Милфудс» по товарному кредиту", "tag": "m208"}
+{"id": "cccedc36b", "field": "eco.val", "class": "version_as_fact", "was": "«Оценочно цена — 0,8–1 млрд ₽» без автора", "now": "по неофициальной оценке отраслевого издания", "tag": "m208"}
+{"id": "g724e85ed", "field": "buyer", "class": "wrong_buyer", "was": "Структуры Владимира Потанина", "now": "МКООО «Каталитик Пипл» (СП «Т-Технологий» 50,01% и «Интерроса» 49,99%) по ЕГРЮЛ", "tag": "m204"}
+{"id": "g724e85ed", "field": "title", "class": "title_standard", "was": "Структуры Потанина купили долю…", "now": "«Каталитик Пипл» купила 100% ООО «Меридиан-Сервис» у Александра Рязанова", "tag": "m204"}
+{"id": "g724e85ed", "field": "date", "class": "wrong_date", "was": "2025-05-27 (день статьи)", "now": "2025-05-26 (запись ЕГРЮЛ)", "tag": "m204"}
+{"id": "g724e85ed", "field": "eco.context", "class": "unsupported_claim", "was": "Потанин — главный претендент два года", "now": "снято; контекст по Интерфаксу", "tag": "m204"}
+{"id": "g724e85ed", "field": "extra", "class": "wrong_buyer", "was": "«Структуры Потанина через «Каталитик пипл» приобрели»", "now": "мнение аналитика Atomic Capital", "tag": "m204"}
+{"id": "g724e85ed", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% долей ООО «Меридиан-Сервис»", "tag": "m204"}
+{"id": "gdf93c62d", "field": "sum", "class": "wrong_sum", "was": "1,8 млрд ₽ / EV ≈2 млрд ₽ (по оценке)", "now": "1,8 млрд ₽ (EV нет в источниках)", "tag": "m204"}
+{"id": "gdf93c62d", "field": "eco.share", "class": "wrong_target", "was": "куплено ООО «АВС-электро»", "now": "куплен бизнес; доли ООО по ЕГРЮЛ не менялись", "tag": "m204"}
+{"id": "gdf93c62d", "field": "extra", "class": "unsupported_claim", "was": "ЭТМ купил ООО «АВС-электро»", "now": "про IPO ЭТМ", "tag": "m204"}
+{"id": "gdf93c62d", "field": "title", "class": "title_standard", "was": "ЭТМ приобрел дистрибьютора АВС Электро", "now": "ЭТМ купил бизнес «АВС-Электро»", "tag": "m204"}
+{"id": "gdf93c62d", "field": "eco.context", "class": "verbatim", "was": "почти дословный пересказ Ъ", "now": "пересказ своими словами", "tag": "m204"}
+{"id": "g016f1b13", "field": "seller", "class": "wrong_seller", "was": "Абрамян Рузанна Рудиковна (не названа продавцом)", "now": "снят, поиск записан", "tag": "m204"}
+{"id": "g016f1b13", "field": "extra", "class": "unsupported_claim", "was": "покупатель — ЗПИФ «Терс» под управлением ООО «УК ФИН-ПАРТНЕР»", "now": "снято: нет ни в одном источнике", "tag": "m204"}
+{"id": "g016f1b13", "field": "date", "class": "wrong_date", "was": "2025-05-21", "now": "2025-05-22 (сообщение Vizant)", "tag": "m204"}
+{"id": "g016f1b13", "field": "eco.finadv", "class": "adviser_wrong", "was": "IBC Real Estate без роли", "now": "консультант сделки, клиент не назван", "tag": "m204"}
+{"id": "g016f1b13", "field": "title", "class": "title_standard", "was": "Компания Vizant (Аркадий Ротенберг) приобрела…", "now": "Vizant купила отель LesArt Resort", "tag": "m204"}
+{"id": "g016f1b13", "field": "eco.target_fin", "class": "other", "was": "число гостей вместо финансов", "now": "выручка и прибыль ООО «Лесресорт» за 2023 год", "tag": "m204"}
+{"id": "g23cad370", "field": "date", "class": "wrong_date", "was": "2025-05-16", "now": "2025-05-15 (ЕГРЮЛ)", "tag": "m204"}
+{"id": "g23cad370", "field": "eco.rationale", "class": "invented_rationale", "was": "запись ЕГРЮЛ вместо мотива", "now": "мнения Федотова (Aspring Capital) и Худалова", "tag": "m204"}
+{"id": "g23cad370", "field": "eco.context", "class": "unsupported_claim", "was": "оценка 3,69 млрд $ российского бизнеса", "now": "снято", "tag": "m204"}
+{"id": "g23cad370", "field": "extra", "class": "unsupported_claim", "was": "«покупатель не назван», «100% акционерного капитала»", "now": "снято", "tag": "m204"}
+{"id": "g23cad370", "field": "title", "class": "title_standard", "was": "Полиметалл продал 100% акций НОРК", "now": "Охотская ГГК купила НОРК у «Полиметалла»", "tag": "m204"}
+{"id": "g5d835058", "field": "title", "class": "wrong_share", "was": "74% доля в медцентре", "now": "клиника «Русмед» (74% нет в источниках)", "tag": "m204"}
+{"id": "g5d835058", "field": "extra", "class": "unsupported_claim", "was": "74% куплено, продавец сохранил 26% и здание", "now": "снято", "tag": "m204"}
+{"id": "g5d835058", "field": "target", "class": "profile_wrong_company", "was": "ООО «Новые медицинские технологии»", "now": "ООО «Русмед» (ИНН 5260446420)", "tag": "m204"}
+{"id": "g5d835058", "field": "eco.context", "class": "version_as_fact", "was": "Маргасов оценил вложения в 1,3 млрд", "now": "по словам Маргасова, вложения составят 1,3 млрд", "tag": "m204"}
+{"id": "g2a3a597b", "field": "extra", "class": "wrong_sum", "was": "2,4 млрд — на замещение кредитов Альфа-банка и Сбербанка", "now": "2,4 млрд — на замену долга с плавающей ставкой", "tag": "m204"}
+{"id": "g2a3a597b", "field": "date", "class": "wrong_date", "was": "2025-05-01", "now": "2025-01-29 (первое объявление)", "tag": "m204"}
+{"id": "g2a3a597b", "field": "title", "class": "title_standard", "was": "Pre-IPO ГК «Марэкс» (бывший …)", "now": "ГК «Марэкс» готовит pre-IPO на 4,5 млрд ₽", "tag": "m204"}
+{"id": "gafc80ee1", "field": "sum", "class": "wrong_sum", "was": "sum 900 млн–2 млрд ≠ eco.sum 2 млрд", "now": "обе — 1–2 млрд ₽ (по оценке)", "tag": "m204"}
+{"id": "gafc80ee1", "field": "law.struct", "class": "other", "was": "«ФАС это одобрила» в структуре", "now": "согласование — в law.appr", "tag": "m204"}
+{"id": "gafc80ee1", "field": "extra", "class": "unsupported_claim", "was": "«Сделка в процессе закрытия»", "now": "версии мотива по неофициальным данным", "tag": "m204"}
+{"id": "gafc80ee1", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "87% производственных активов в пользование", "tag": "m204"}
+{"id": "gd4645195", "field": "date", "class": "wrong_date", "was": "2025-04-01", "now": "2025-06-24 (ЕГРЮЛ)", "tag": "m204"}
+{"id": "gd4645195", "field": "title", "class": "version_as_fact", "was": "«структуре Softline» как факт", "now": "Softline связь отрицает; заголовок по стандарту", "tag": "m204"}
+{"id": "gd4645195", "field": "extra", "class": "unsupported_claim", "was": "«Интерскол» опроверг интерес", "now": "снято; позиция Softline и SVP", "tag": "m204"}
+{"id": "gd4645195", "field": "eco.rationale", "class": "other", "was": "—", "now": "мотив продавца по словам «Севергрупп»", "tag": "m204"}
+{"id": "gd7fd670e", "field": "date", "class": "wrong_date", "was": "2025-04-01", "now": "2025-04-14 (ЕГРЮЛ)", "tag": "m204"}
+{"id": "gd7fd670e", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "КГА холдинг ЛЛС (100% → 68,6% по ЕГРЮЛ)", "tag": "m204"}
+{"id": "gd7fd670e", "field": "eco.share", "class": "wrong_share", "was": "«до 15 января 2024 года Агроинвест на 100% владел Ваценян»", "now": "31,4% долей ООО «Агроинвест»", "tag": "m204"}
+{"id": "gd7fd670e", "field": "eco.val", "class": "unsupported_claim", "was": "EV 16,8 млрд ₽ по оценке экспертов", "now": "эксперты оценивают бизнес в 18–20 млрд ₽", "tag": "m204"}
+{"id": "gd7fd670e", "field": "eco.target_fin", "class": "wrong_sum", "was": "выручка 32 млрд, прибыль 2,7 млрд (−19%), долг, EBITDA", "now": "выручка 32,4 млрд, прибыль 2,8 млрд (Ъ по отчетности)", "tag": "m204"}
+{"id": "gd7fd670e", "field": "title", "class": "title_standard", "was": "Эфко приобрела 31,4% доли в Масленице", "now": "ЭФКО купила 31,4% ООО «Агроинвест»", "tag": "m204"}
+{"id": "g81510c02", "field": "eco.context", "class": "wrong_date", "was": "британские санкции в феврале 2024 года", "now": "24 февраля 2025 года", "tag": "m204"}
+{"id": "g81510c02", "field": "law.struct", "class": "foreign_fact", "was": "продажа доли в «Сейф-Ломбарде» как механика этой сделки", "now": "две сделки разведены", "tag": "m204"}
+{"id": "g81510c02", "field": "extra", "class": "unsupported_claim", "was": "активы 11 млн USD (пересчет)", "now": "снято", "tag": "m204"}
+{"id": "g81510c02", "field": "ind", "class": "wrong_industry", "was": "Банки", "now": "Финансовые услуги (МФО)", "tag": "m204"}
+{"id": "g81510c02", "field": "title", "class": "title_standard", "was": "Игорь Ким передал МФО … «Сейф-Ломбарду», подконтрольному Эдуарду Ли", "now": "«Сейф-Ломбард» купил МФО «Береке» у Игоря Кима", "tag": "m204"}
+{"id": "g93724e30", "field": "eco.share", "class": "wrong_share", "was": "описание владельцев МКК", "now": "51% долей ООО МКК «Содействие XXI»", "tag": "m204"}
+{"id": "g93724e30", "field": "eco.rationale", "class": "verbatim", "was": "9 слов подряд из сообщения «Займера»", "now": "пересказ", "tag": "m204"}
+{"id": "g93724e30", "field": "extra", "class": "verbatim", "was": "почти дословное предложение источника", "now": "пересказ условий Seller Capital", "tag": "m204"}
+{"id": "g93724e30", "field": "title", "class": "title_standard", "was": "МФК «Займер» приобрел 51% контроля…", "now": "«Займер» купил 51% МКК «Содействие XXI»", "tag": "m204"}
+{"id": "g93724e30", "field": "eco.target_fin", "class": "other", "was": "только 2 млрд ₽ выдач", "now": "обе версии: 2 млрд (Сколково) и 5 млрд («Займер»)", "tag": "m204"}
+{"id": "gdd4bb811", "field": "sum", "class": "wrong_sum", "was": "Более 250 млрд ₽", "now": "250 млрд ₽ (по оценке): «порядка 250 млрд» затрат по оценке Сечина", "tag": "m204"}
+{"id": "gdd4bb811", "field": "eco.rationale", "class": "unsupported_claim", "was": "«работа продолжится при нем», без автора", "now": "слова Андрея Костина: денег нет, тема закрыта", "tag": "m204"}
+{"id": "gdd4bb811", "field": "extra", "class": "unsupported_claim", "was": "100% акций АО «СТС», «согласованная цена»", "now": "снято; Томтор по неофициальным данным", "tag": "m204"}
