@@ -685,6 +685,9 @@ def _strip_registry_ids(text):
     return re.sub(r'\s{2,}', ' ', out).strip(' ,;—–-')
 
 
+LEGAL_FORM_IN_SHARE = re.compile(r'(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«')
+
+
 def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     """Дословные предложения о ПРЕДМЕТЕ сделки — точное юрлицо/доля и род
     занятий — с новизной к `reference` (заголовок + уже показанное имя).
@@ -706,10 +709,12 @@ def _subject_detail(deal, companies, reference, limit=2, max_chars=260):
     # `eco.share`/`target_fin` («У Perfectum 115 МГц спектра…», «По итогам
     # 2021 года ХКФ банк занимал 30-е место…»), и строка не отвечала на
     # вопрос «что покупают». Описание профиля предмета отвечает.
-    target_id = deal.get('target')
-    if target_id and companies.get(target_id) and has(companies[target_id].get('desc')):
-        sources.append((companies[target_id]['desc'],
-                        lambda s: bool(_BARE_LEGAL_ENTITY_NOTE.match(s)), 1))
+    # ОПИСАНИЕ ПРОФИЛЯ В «ПРЕДМЕТ» БОЛЬШЕ НЕ ИДЕТ (владелец, 12 ноября 2026,
+    # пост об этапе ВТС: «как правильно писать предмет — с названием общества
+    # корректным и количеством доли/акций, откуда тут описание?»). Строка —
+    # юрлицо и доля; что это за компания — в карточке сделки. Правило
+    # партнера 19 октября («Perfectum — узбекский мобильный оператор»)
+    # отменено этим решением.
     # `extra` и `eco.target_fin` как источники пояснения к предмету сняты
     # 28 октября 2026 (чтение 20 карточек владельцем): «Предмет: … — В штате
     # компании 153 человека; из имущества…» (ga8c26ffd), «— от сдачи этих
@@ -1395,7 +1400,11 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # предмет из двух обществ: описание одного профиля к двум не подходит
     detail = '' if (jv or has(deal.get('target_label'))) else _join_subject_sentences(
         _subject_detail(deal, companies, reference + (' ' + asset if asset else '')))
-    if asset and detail and not has_novelty(asset, detail) and _starts_with_name(asset, detail):
+    if detail and LEGAL_FORM_IN_SHARE.search(detail):
+        # «100% доли в ООО «Город Лефортово»» сама называет общество — имя
+        # перед ней было бы повтором (13 ноября 2026).
+        add('%s %s' % (_lab(subject_label), esc(detail.rstrip('.'))))
+    elif asset and detail and not has_novelty(asset, detail) and _starts_with_name(asset, detail):
         # Деталь сама называет предмет — имя перед тире не повторяем (пост о
         # госпакете Шереметьево, 2 сентября 2026: одно и то же дважды).
         # Только если деталь С ИМЕНИ НАЧИНАЕТСЯ: VEON/Perfectum (19 октября

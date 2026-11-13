@@ -898,7 +898,8 @@ def test_post_subject_line_names_the_subject_not_its_revenue():
     companies = {"t1": {"name": "ООО «Протосервисез»",
                         "desc": "Московская компания, работает с 2014 года."}}
     text = format_post.render(deal, companies)
-    assert "<b>Предмет:</b> ООО «Протосервисез» — московская компания, работает с 2014 года." in text
+    # с 12 ноября 2026 описание профиля в «Предмет» не идет (владелец, ВТС)
+    assert "<b>Предмет:</b> ООО «Протосервисез»\n" in text, text
     assert "9,5 млн руб." not in text, "показатели предмета выданы за предмет"
 
     # Предложение «Финансов предмета», которое называет юрлицо, а не показатель,
@@ -932,7 +933,8 @@ def test_post_subject_sentences_from_different_sources_get_a_period_between_them
     text = format_post.render(deal, companies)
     # С 19 октября 2026 первым идет описание предмета, потом доля.
     assert "кредитование 7,52%" not in text, "два источника склеены без знака препинания"
-    assert "опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
+    # с 12 ноября 2026 описание профиля в «Предмет» не идет — остается доля
+    assert "<b>Предмет:</b> Газпромбанк — 7,52% голосующих ценных бумаг." in text, text
 
 
 def test_sentence_split_does_not_break_multi_dot_abbreviations():
@@ -996,7 +998,8 @@ def test_sentence_split_keeps_address_abbreviations_and_dots_inside_quotes():
                                 "деятельности по ЕГРЮЛ — аренда и управление собственной недвижимостью."},
                  "b1": {"name": "Уральская нефтяная компания", "desc": "Торговля топливом."}}
     text = format_post.render(deal, companies)
-    assert 'г. Челябинск, основной вид деятельности' in text, text
+    # с 12 ноября 2026 описание профиля предмета в пост не идет
+    assert 'основной вид деятельности' not in text, text
     assert '», г.\n' not in text, text
 
 
@@ -1055,7 +1058,7 @@ def test_party_detail_skips_bare_legal_entity_note():
                                  "с лицензиями на поиск золота на Алтае."},
                   "b2": {"name": "РМК", "desc": "Медный холдинг."}}
     text2 = format_post.render(deal2, companies2)
-    assert 'Красная руда — геологоразведочная компания' in text2, text2
+    assert '<b>Предмет:</b> Красная руда\n' in text2, text2
     # Пометка с продолжением для предмета остается.
     assert format_post._BARE_LEGAL_ENTITY_NOTE.match('Юрлицо — ООО «Красная руда».')
     assert not format_post._BARE_LEGAL_ENTITY_NOTE.match(
@@ -8912,7 +8915,21 @@ def test_post_subject_names_the_company_then_says_what_it_is():
     companies = {"t1": {"name": "Perfectum",
                         "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
     line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
-    assert "<b>Предмет:</b> Perfectum — узбекский мобильный оператор" in line
+    # С 12 ноября 2026 (владелец, ВТС) описание профиля в «Предмет» не идет.
+    assert "мобильный оператор" not in line, line
+
+
+def test_post_subject_is_entity_and_share_without_profile_description():
+    """Владелец, 12 ноября 2026: предмет — правильное название общества и доля,
+    без описания. «Город Лефортово» (gf30ca8c1) печатался ««Город Лефортово» —
+    торгово-развлекательный центр… 100% доли в ООО «Город Лефортово»»."""
+    deal = {"id": "x", "title": "Сбербанк выставил на торги ТРЦ «Город Лефортово» в Москве",
+            "status": "Обсуждается", "date": "2026-11-12", "target": "t1", "type": "M&A",
+            "asset": "ООО «Город Лефортово»", "eco": {"share": "100% доли в ООО «Город Лефортово»"}}
+    companies = {"t1": {"name": "«Город Лефортово»",
+                        "desc": "«Город Лефортово» — торгово-развлекательный центр на востоке Москвы."}}
+    line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
+    assert line == "<b>Предмет:</b> 100% доли в ООО «Город Лефортово»", line
 
 
 # --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
@@ -11651,3 +11668,68 @@ def test_reminder_is_called_by_sweep_and_ship_decisions_without_breaking_them():
     finally:
         sw.subprocess.run = orig
     assert calls and calls[0][0][-1] == "--write"
+
+
+def test_reread_writer_survives_stale_index_lock_and_names_dirty_files(tmp_path, monkeypatch):
+    """Писатель вычитки, 13 ноября 2026: (1) Bus error оставил пустой .git/index.lock —
+    девять партий подряд получили «git pull --rebase не прошел»; теперь пустой замок
+    без живого git снимается; (2) rebase не шел из-за чужих грязных файлов — журнал
+    обязан их назвать; (3) commit не создан — HEAD сверяется (здесь — сама сверка)."""
+    import subprocess as sp
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import reread_writer as rw
+    git = lambda cwd, *a: sp.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *a], cwd=cwd,
+                                 capture_output=True, text=True, check=True)
+    origin = tmp_path / "o.git"
+    git(tmp_path, "init", "-q", "--bare", "-b", "main", str(origin))
+    a, b = tmp_path / "a", tmp_path / "b"
+    git(tmp_path, "clone", "-q", str(origin), str(a))
+    (a / "x.txt").write_text("1")
+    (a / "y.txt").write_text("1")
+    git(a, "add", ".")
+    git(a, "commit", "-q", "-m", "1")
+    git(a, "push", "-q", "origin", "HEAD:main")
+    git(tmp_path, "clone", "-q", str(origin), str(b))
+    (b / "x.txt").write_text("2")
+    git(b, "commit", "-q", "-am", "2")
+    git(b, "push", "-q", "origin", "HEAD:main")
+    monkeypatch.setattr(rw.ra, "ROOT", str(a))
+    monkeypatch.setattr(rw.ra, "LOG", str(tmp_path / "log"))
+    lock = a / ".git" / "index.lock"
+    lock.write_text("")
+    assert not rw.clear_stale_index_lock(git_running=True) and lock.exists(), "живой git — замок не трогаем"
+    assert rw.clear_stale_index_lock(git_running=False) and not lock.exists()
+    lock.write_text("x")
+    assert not rw.clear_stale_index_lock(git_running=False), "непустой замок — не наш случай"
+    lock.unlink()
+    (a / "x.txt").write_text("чужая правка")
+    before = rw.head()
+    code, out = rw.pull()
+    assert code and "x.txt" in out and "Грязные отслеживаемые файлы" in out
+    assert rw.head() == before
+    assert "x.txt" in (tmp_path / "log").read_text()
+
+
+def test_removed_card_takes_its_signals_with_it(tmp_path):
+    """Снятая карточка («не сделка», слияние) уносит свои признаки будущих сделок —
+    в одном месте, `signals.sync_with_base` (13 ноября 2026: m216b чистил signals.json
+    разовым скриптом, другие пути забывали). Настоящий случай — g0748e794
+    («Росспиртпром» и «Башспирт»), у нее же дата одним годом: признак обязан остаться,
+    пока карточка в базе."""
+    import copy
+    import signals
+    data = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    path = str(tmp_path / "signals.json")
+    signals._save(signals.load_existing(), path)
+    card = next(d for d in data["deals"] if d["id"] == "g0748e794")
+    assert card.get("status") == "Обсуждается"
+    signals.sync_with_base(data, path)
+    rows = signals.load_existing(path)
+    assert any(r.get("deal_id") == "g0748e794" for r in rows), "карточка с годом вместо дня потеряла признаки"
+    gone = copy.deepcopy(data)
+    gone["deals"] = [d for d in gone["deals"] if d["id"] != "g0748e794"]
+    signals.sync_with_base(gone, path)
+    rows = signals.load_existing(path)
+    assert not any(r.get("deal_id") == "g0748e794" for r in rows)
+    deal_ids = {d["id"] for d in gone["deals"]}
+    assert all(not r.get("deal_id") or r["deal_id"] in deal_ids for r in rows)

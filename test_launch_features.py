@@ -2565,6 +2565,13 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     assert any(p.get("parse_mode") == "HTML" for _m, p in sent), "проект поста без разметки"
     # Второй раз та же карточка не уходит — сервер помнит показ.
     assert main.console_show_ready_cards() == {"shown": 0}
+    # Показ занимается ДО отправки (13 ноября 2026, g16da1d05 пришла дважды):
+    # второй поток с тем же списком готовых карточек получает отказ по ключу.
+    db = console.get_session()
+    try:
+        assert not console._claim_show(db, "gshow1"), "показ занят повторно"
+    finally:
+        db.close()
     r = client.get("/api/moderation/shown", params={"token": "тайна"})
     assert r.status_code == 200 and "gshow1" in r.json()["cards"]
     assert r.json()["cards"]["gshow1"].get("post_preview"), "снимок поста не сохранен"

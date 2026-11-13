@@ -29,6 +29,50 @@ import reread_apply as ra  # noqa: E402
 py = sys.executable
 
 
+def clear_stale_index_lock(root=None, git_running=None):
+    """Снять пустой .git/index.lock, оставленный упавшим git (13 ноября 2026: Bus error
+    оставил замок, и девять партий подряд получили «git pull --rebase не прошел»).
+    Снимается только пустой файл и только когда в системе нет ни одного процесса git."""
+    lock = os.path.join(root or ra.ROOT, '.git', 'index.lock')
+    if not os.path.exists(lock) or os.path.getsize(lock):
+        return False
+    if git_running is None:
+        git_running = subprocess.run(['pgrep', '-x', 'git'], capture_output=True).returncode == 0
+    if git_running:
+        return False
+    try:
+        os.remove(lock)
+    except OSError:
+        return False
+    ra.note('снят пустой .git/index.lock (git не запущен)')
+    return True
+
+
+def dirty_note():
+    """Какие отслеживаемые файлы грязные — их группа не трогала (свое она закоммитила
+    или откатила), и именно они не дают git pull --rebase пройти."""
+    dirty = [l[3:].strip() for l in ra.dirty_tracked()]
+    if not dirty:
+        return ''
+    return '\nГрязные отслеживаемые файлы, которых группа не трогала (из-за них rebase не идет): %s' % (
+        ', '.join(dirty[:12]) + (' и еще %d' % (len(dirty) - 12) if len(dirty) > 12 else ''))
+
+
+def head():
+    return ra.run(['git', 'rev-parse', 'HEAD'])[1].strip()
+
+
+def pull():
+    clear_stale_index_lock()
+    code, out = ra.run(['git', 'pull', '-q', '--rebase', 'origin', 'main'])
+    if code:
+        extra = dirty_note()
+        ra.run(['git', 'rebase', '--abort'])
+        out += extra
+        ra.note('git pull --rebase не прошел | %s' % ' / '.join(l.strip()[:160] for l in out.strip().splitlines()[-3:]))
+    return code, out
+
+
 def plan_steps(plan, env):
     """Шаги одной партии до отметок. (ok, текст сбоя, отказы в отметке)."""
     ids = plan['ids']
@@ -94,11 +138,11 @@ def main(argv):
     fcntl.flock(lock, fcntl.LOCK_EX)
     ra._T['tag'] = '+'.join(p['tag'] for _x, p in plans)
     ra.note('замок взят группой, ждали %d с' % (time.time() - t0))
+    clear_stale_index_lock()
     if ra.dirty_tracked():
         ra.revert()
-    code, out = ra.run(['git', 'pull', '-q', '--rebase', 'origin', 'main'])
+    code, out = pull()
     if code:
-        ra.run(['git', 'rebase', '--abort'])
         for _p, plan in plans:
             print('### %s\nСТОП: git pull --rebase не прошел, повторите READY позже.\n%s' % (plan['tag'], ra.tail(out, 5)))
         return 1
@@ -113,6 +157,8 @@ def main(argv):
         env = dict(os.environ, MASS_OK='reread', REVIEW_ONLY=tags, FIXES_SESSION=tags)
         shared = [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
                   ('слой фактов', [py, 'pipeline/facts_derive.py', '--write']),
+                  # снятая карточка («не сделка», слияние) — снятые признаки будущих сделок (13 ноября 2026)
+                  ('признаки будущих сделок по базе', [py, 'pipeline/ingest/signals.py', '--base', '--write']),
                   # исправленные старые нарушения правил текста — из базовой линии (список только сокращается;
                   # шесть партий 12–13 ноября 2026 делали это сами и мешали друг другу)
                   ('базовая линия правил текста', [py, 'pipeline/text_rules.py', '--rebaseline']),
@@ -171,26 +217,45 @@ def main(argv):
             msg = 'Вычитка, партии %s: отметки %d из %d карточек' % (
                 ', '.join(p['tag'] for _x, p in good), sum(len(v) for v in done.values()),
                 sum(len(p['ids']) for _x, p in good))
-            code, out = ra.run(['git', 'commit', '-q', '-m', msg + ra.ATTRIBUTION])
-            ra.run([py, 'pipeline/publication_busy.py', '--wait', '20'])
+            before = head()
+            clear_stale_index_lock()
+            code, cout = ra.run(['git', 'commit', '-q', '-m', msg + ra.ATTRIBUTION])
+            made = bool(before) and head() != before
             pushed = False
-            for i in range(4):
-                code, out = ra.run(['git', 'pull', '-q', '--rebase', 'origin', 'main'])
+            why = ''
+            if not made:
+                # 13 ноября 2026: commit упал (замок индекса), а партии получили «записано
+                # локально» — отметки жили только в рабочей папке и стирались следующим revert.
+                why = 'КОММИТ НЕ СОЗДАН (код %s): %s' % (code, ' / '.join(l.strip()[:160] for l in cout.strip().splitlines()[-3:]))
+                ra.note(why)
+            else:
+                ra.run([py, 'pipeline/publication_busy.py', '--wait', '20'])
+            for i in range(4 if made else 0):
+                code, out = pull()
                 if code:
-                    ra.run(['git', 'rebase', '--abort'])
+                    why = 'git pull --rebase не прошел: %s' % ' / '.join(l.strip()[:200] for l in out.strip().splitlines()[-3:])
                     break
                 code, out = ra.run(['git', 'push', '-q', 'origin', 'HEAD:main'])
                 if not code:
                     pushed = True
                     break
                 time.sleep(2 ** (i + 1))
-            ra.note('%s: %s | %s' % ('ЗАПИСАНО' if pushed else 'НЕ ЗАПУШЕНО', msg, '; '.join(ra._T['steps'][-14:])))
+            ra.note('%s: %s | %s' % ('ЗАПИСАНО' if pushed else ('НЕ ЗАПУШЕНО' if made else 'КОММИТ НЕ СОЗДАН'),
+                                    msg, '; '.join(ra._T['steps'][-14:])))
+            if not made:
+                ra.run(['git', 'reset', '-q'])
+                ra.revert()
             fcntl.flock(lock, fcntl.LOCK_UN)
             committed = True
             for _p, plan in good:
                 tag, ids = plan['tag'], plan['ids']
+                if not made:
+                    results[tag] = ('СТОП: КОММИТ НЕ СОЗДАН — база не записана, рабочая папка откачена. '
+                                    'Файлы правок партии целы, снова READY.\n      ' + why)
+                    continue
                 lines = ['ЗАПИСАНО И ЗАПУШЕНО: партия %s, отметки %d из %d карточек' % (tag, len(done[tag]), len(ids))
-                         if pushed else 'ВНИМАНИЕ: записано локально, push не прошел — сообщите в отчете']
+                         if pushed else 'ВНИМАНИЕ: записано локально, push не прошел — сообщите в отчете'
+                         + ('\n      ' + why if why else '')]
                 missing = [i for i in ids if i not in done[tag]]
                 if missing:
                     lines.append('Без отметки остались: %s' % ', '.join(missing))
