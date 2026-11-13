@@ -1343,7 +1343,7 @@ def test_sources_registry_is_honest():
     sources = reg["sources"]
     assert len(sources) >= 100, "реестр подозрительно мал"
     for s in sources:
-        assert s["id"] and s["name"] and s["kind"] in ("rss", "html", "html_mergers", "telegram")
+        assert s["id"] and s["name"] and s["kind"] in ("rss", "html", "html_mergers", "telegram", "deal_page")
         if s.get("feed_checked"):
             assert s.get("last_check"), f"{s['id']}: помечен проверенным без даты проверки"
     assert any(s["kind"] == "telegram" for s in sources)
@@ -12084,3 +12084,235 @@ def test_party_name_check_spares_camelcase_brand():
     assert review.name_is_nominative("НордЭнергоГрупп") is None
     assert review.name_is_nominative("Сетново Групп") is None
     assert review.name_is_nominative("Автодома")
+
+
+# ---------- страницы сделок консультантов (deal_pages.py, 13 ноября 2026) ----------
+
+ADVANCE_PAGE = """
+<div class="deals-block"><h2>2026</h2>
+ <div class="slide-d"><svg><path d="M1 2"/></svg>
+  <span class="top-label">Технологии</span>
+  <h3 class="title-slide">Продажа миноритарной доли ГК Swordfish Security ВИМ Инвестициям</h3>
+  <div class="summ-block"><p class="summ-text">Сумма сделки<br> не разглашается</p></div>
+  <p class="bottom-text tx-01">Финансовый консультант продавцов</p>
+  <p class="bottom-text tx-02">Октябрь 2026</p>
+  <div class="hover-text"><div>Advance Capital рад объявить о завершении сделки по продаже доли фонду Pre-IPO 2</div>
+   <a href="https://advancecapital.ru/news/news/press-releases/473/" class="link-btn">подробнее</a></div>
+ </div>
+ <div class="slide-d">
+  <span class="top-label">АПК</span>
+  <h3 class="title-slide">Продажа крупного производителя яблок стратегическому инвестору</h3>
+  <p class="bottom-text tx-01">Финансовый консультант продавца</p>
+  <p class="bottom-text tx-02">Май 2026</p>
+ </div>
+ <div class="slide-d">
+  <span class="top-label">Ритейл</span>
+  <h3 class="title-slide">Продажа 100% долей торговой сети Молния Ленте</h3>
+  <p class="bottom-text tx-01">Финансовый консультант продавца</p>
+  <p class="bottom-text tx-02">Июнь 2025</p>
+ </div>
+ <h2>2019</h2>
+ <div class="slide-d">
+  <h3 class="title-slide">Продажа сети клиник Здоровье фонду Baring Vostok</h3>
+  <p class="bottom-text tx-01">Финансовый консультант продавца</p>
+  <p class="bottom-text tx-02">Март 2019</p>
+ </div>
+</div>"""
+
+ASPRING_PAGE = """
+<div class="services--item_wrap"><div class="deal-card-2 dropdown"><div class="deal-card__info-2">
+ <h3 class="deal-item__title text-small">Продажа Рив Гош в пользу Wildberries &amp; Russ</h3>
+ <div class="deal-card__date-2 text-mini"><div class="dateclass-month-2">Декабрь </div><div class="dateclass-year">2025</div></div></div></div>
+ <div class="bullet-text_wrapper"><h3 class="deal-item__title text-small">Aspring Capital выступил финансовым советником «Рив Гош» в сделке по продаже в пользу Wildberries &amp; Russ.</h3></div></div>
+<div class="services--item_wrap"><div class="deal-card-2 dropdown"><div class="deal-card__info-2">
+ <h3 class="deal-item__title text-small">Реструктуризация еврооблигаций VEON</h3>
+ <div class="deal-card__date-2 text-mini"><div class="dateclass-month-2">Март </div><div class="dateclass-year">2025</div></div></div></div>
+ <div class="bullet-text_wrapper"><h3 class="deal-item__title text-small">Aspring Capital выступил финансовым советником VEON в рамках consent solicitation.</h3></div></div>"""
+
+BIRCH_PAGE = """
+<div class="media_item"><strong><a href="/projects/4027/">Команда BIRCH сопровождала инвестицию фонда под управлением АО ВИМ Инвестиции в ГК Swordfish Security</a></strong>
+ <p>Команда BIRCH выступила юридическим консультантом фонда.</p><div><a href="/projects/4027/">Читать далее</a> <span>5 ноября 2026</span></div></div>
+<div class="media_item"><strong><a href="/projects/4001/">BIRCH вошла в рейтинг лучших консультантов по сделкам M&amp;A</a></strong>
+ <p>Рейтинг года.</p><div><a href="/projects/4001/">Читать далее</a> <span>1 ноября 2026</span></div></div>
+<div class="media_item"><strong><a href="/projects/3990/">Партнер BIRCH выступил на конференции о сделках с акциями</a></strong>
+ <p>Форум.</p><div><a href="/projects/3990/">Читать далее</a> <span>20 октября 2026</span></div></div>"""
+
+
+def test_deal_page_tombstones_of_an_investment_bank():
+    """Плитки Advance Capital: названная сделка идет в сырье с датой, адресом
+    пресс-релиза (или страницы с якорем) и шапкой, по которой приток узнает
+    консультанта; обезличенная плитка и сделка до 2022 года — нет."""
+    import advisors
+    import deal_pages
+    items = deal_pages.parse(ADVANCE_PAGE, "firm:advancecap", today=date(2026, 11, 13))
+    assert [i["title"] for i in items] == [
+        "Продажа миноритарной доли ГК Swordfish Security ВИМ Инвестициям",
+        "Продажа 100% долей торговой сети Молния Ленте"]
+    first, second = items
+    assert first["url"] == "https://advancecapital.ru/news/news/press-releases/473/"
+    assert first["published"] == "2026-10-15" and second["published"] == "2025-06-15"
+    assert second["url"].startswith("https://advancecapital.ru/sdelki/#deal-")
+    assert first["source_name"] == "сайт Advance Capital" and first["source_id"] == "firm:advancecap"
+    firms, role, _ = advisors.lead_advisor(first["summary"])
+    assert firms == ["Advance Capital"] and role == "Финансовый консультант продавца"
+    assert deal_pages.is_nameless("Продажа крупного производителя яблок стратегическому инвестору")
+    assert deal_pages.is_nameless("Продажа IT-компании финансовому инвестору из России")
+    assert not deal_pages.is_nameless("Продажа 50% долей Парус электро Росатому")
+    assert not deal_pages.is_nameless("Продажа «Улыбки радуги» в пользу Ленты")
+
+
+def test_deal_page_skips_debt_restructuring():
+    """Aspring Capital: реструктуризация облигаций и consent solicitation — не
+    сделки M&A; текст плитки уже начинается с имени фирмы и идет как есть."""
+    import advisors
+    import deal_pages
+    items = deal_pages.parse(ASPRING_PAGE, "firm:aspring", today=date(2026, 11, 13))
+    assert [i["title"] for i in items] == ["Продажа Рив Гош в пользу Wildberries & Russ"]
+    assert items[0]["published"] == "2025-12-15"
+    assert items[0]["summary"].startswith("Aspring Capital выступил финансовым советником «Рив Гош»")
+    assert advisors.lead_advisor(items[0]["summary"])[0] == ["Aspring Capital"]
+
+
+def test_deal_page_news_feed_takes_only_deal_announcements():
+    """Лента юрфирмы: объявление о сопровождении сделки идет, рейтинг и
+    конференция — нет (иначе очередь получала бы поток не-сделок)."""
+    import deal_pages
+    items = deal_pages.parse(BIRCH_PAGE, "firm:birch", today=date(2026, 11, 13))
+    assert len(items) == 1
+    assert items[0]["url"] == "https://birchlegal.ru/projects/4027/"
+    assert items[0]["published"] == "2026-11-05"
+    assert items[0]["summary"].startswith("Команда BIRCH сопровождала")
+
+
+def test_deal_page_dates():
+    import deal_pages
+    today = date(2026, 11, 13)
+    assert deal_pages.find_date("05 / 11 / 2026", today) == "2026-11-05"
+    assert deal_pages.find_date("<span>21 / </span><span>05 / </span><span>2026</span>", today) == "2026-05-21"
+    assert deal_pages.find_date("5 ноября 2026 года", today) == "2026-11-05"
+    assert deal_pages.find_date("Май 2024", today) == "2024-05-15"
+    assert deal_pages.find_date("Март 2024", today) == "2024-03-15"
+    # месяц без дня не уходит в будущее
+    assert deal_pages.find_date("Ноябрь 2026", today) == "2026-11-13"
+    assert deal_pages.find_date("без даты", today) == ""
+
+
+def test_deal_page_memory_seeds_then_gives_only_new():
+    """Первое включение источника помечает виденным все, что уже на странице,
+    и не отдает ничего; дальше идет только новое. Та же сделка с новым адресом
+    (фирма дописала ссылку на пресс-релиз) и давняя сделка новыми не считаются."""
+    import deal_pages
+    items = deal_pages.parse(ADVANCE_PAGE, "firm:advancecap", today=date(2026, 11, 13))
+    seen = {}
+    assert deal_pages.fresh("firm:advancecap", items, seen, "2026-11-13") == []
+    assert seen["firm:advancecap"]["seeded"] == "2026-11-13"
+    assert deal_pages.fresh("firm:advancecap", items, seen, "2026-11-14") == []
+    new = dict(items[0], url="https://advancecapital.ru/news/news/press-releases/480/",
+               title="Продажа 100% долей сервиса Ромашка Яндексу", published="2026-11-15")
+    relinked = dict(items[1], url="https://advancecapital.ru/news/news/press-releases/481/")
+    old = dict(items[0], url="https://advancecapital.ru/sdelki/#deal-old",
+               title="Продажа портала Василек стратегическому инвестору", published="2022-09-15")
+    got = deal_pages.fresh("firm:advancecap", items + [new, relinked, old], seen, "2026-11-20")
+    assert [i["title"] for i in got] == ["Продажа 100% долей сервиса Ромашка Яндексу"]
+    assert deal_pages.fresh("firm:advancecap", items + [new, relinked, old], seen, "2026-11-21") == []
+    # пустая страница (сбой разбора) памятью не становится
+    assert deal_pages.fresh("firm:aspring", [], seen, "2026-11-20") == [] and "firm:aspring" not in seen
+
+
+def test_fetch_reads_deal_page_once(tmp_path, monkeypatch):
+    """Забор: страница сделок консультанта идет в то же сырье, что ленты, —
+    один раз. Первый забор — засев, второй отдает только новую плитку."""
+    import deal_pages
+    src = [{"id": "firm:advancecap", "name": "сайт Advance Capital", "kind": "deal_page",
+            "feed": "https://advancecapital.ru/sdelki/", "enabled": True}]
+    page = {"body": ADVANCE_PAGE}
+    monkeypatch.setattr(fetch, "load_sources", lambda: src)
+    monkeypatch.setattr(fetch, "RAW", str(tmp_path / "raw"))
+    monkeypatch.setattr(deal_pages, "SEEN", str(tmp_path / "seen.json"))
+    monkeypatch.setattr(deal_pages, "http_get", lambda url, **kw: page["body"].encode("utf-8"))
+
+    def raw_rows():
+        return [json.loads(line) for f in sorted((tmp_path / "raw").glob("*.jsonl"))
+                for line in f.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+    fetch.main([])
+    assert raw_rows() == []
+    assert "firm:advancecap" in json.loads((tmp_path / "seen.json").read_text(encoding="utf-8"))
+    fresh_block = """<div class="slide-d"><h3 class="title-slide">Продажа 100% долей сервиса Ромашка Яндексу</h3>
+      <p class="bottom-text tx-01">Финансовый консультант продавца</p>
+      <p class="bottom-text tx-02">DAY</p>
+      <div class="hover-text"><div>Сделка закрыта.</div>
+      <a href="/news/news/press-releases/480/" class="link-btn">подробнее</a></div></div>""".replace(
+        "DAY", date.today().strftime("%d.%m.%Y"))
+    page["body"] = ADVANCE_PAGE.replace('<h2>2026</h2>', '<h2>2026</h2>' + fresh_block)
+    fetch.main([])
+    fetch.main([])
+    rows = raw_rows()
+    assert [r["title"] for r in rows] == ["Продажа 100% долей сервиса Ромашка Яндексу"]
+    assert rows[0]["url"] == "https://advancecapital.ru/news/news/press-releases/480/"
+    assert rows[0]["source_name"] == "сайт Advance Capital" and rows[0]["advisor"] == "Advance Capital"
+
+
+def test_fetch_reports_a_deal_page_that_stopped_parsing(monkeypatch):
+    """Сайт сменил разметку — источник попадает в ошибки забора, а не молчит."""
+    import deal_pages
+    monkeypatch.setattr(deal_pages, "http_get", lambda url, **kw: b"<html><body>new design</body></html>")
+    items, err = fetch.fetch_source({"id": "firm:advancecap", "kind": "deal_page",
+                                     "feed": "https://advancecapital.ru/sdelki/"})
+    assert items == [] and "разметка" in err
+
+
+def test_firm_page_record_finds_its_card_by_parties():
+    """Плитка называет стороны без кавычек и в падеже, дата — месяц закрытия:
+    карточка находится по сторонам в тексте записи. Одна названная сторона —
+    только подсказка («прочитать»), а не решение."""
+    deals = [
+        {"id": "boxberry", "date": "2025-04-24", "title": "«Яндекс» купил службу доставки Boxberry",
+         "status": "Закрыта", "buyer_name": "Яндекс", "asset": "ООО «Смарт Логистик Боксберри»",
+         "src": [["РБК", "https://rbc.ru/1"]]},
+        {"id": "other", "date": "2025-05-20", "title": "«Яндекс» купил сервис доставки еды «Ромашка»",
+         "status": "Закрыта", "buyer_name": "Яндекс", "asset": "Ромашка", "src": [["РБК", "https://rbc.ru/2"]]},
+        {"id": "magna", "date": "2023-08-01", "title": "«Е-Мобиль» купил российские заводы Magna",
+         "status": "Закрыта", "buyer_name": "Е-Мобиль", "asset": "Магна Ситинг Рус", "src": [["РБК", "https://rbc.ru/3"]]},
+    ]
+    idx = matcher.index_base(deals)
+    item = {"title": "Продажа 100% долей службы доставки Boxberry Яндексу", "advisor": "Advance Capital",
+            "summary": "Advance Capital выступил финансовым консультантом продавца", "date": "2025-04-15",
+            "url": "https://advancecapital.ru/news/news/press-releases/400/"}
+    deal_id, why = matcher.match(item, idx)
+    assert deal_id == "boxberry" and matcher.is_strong(why)
+    weak = dict(item, title="Продажа российских активов Magna International", date="2023-08-15")
+    deal_id, why = matcher.match(weak, idx)
+    assert deal_id == "magna" and not matcher.is_strong(why)
+    # без пометки «страница консультанта» правило не работает: обычная новость идет прежним путем
+    plain = {k: v for k, v in item.items() if k != "advisor"}
+    assert matcher.firm_page_match(dict(item, date="2027-06-01"), idx) == (None, None)
+    assert matcher.match(dict(plain, title="Продажа доли неназванной компании инвестору"), idx)[0] is None
+
+
+def test_triage_treats_firm_page_record_as_deal():
+    """Запись со страницы сделок консультанта — сделка по определению: для нее
+    работает только отказная половина фильтра."""
+    import triage
+    title = "Orion консультирует ВТБ в сделке на 320 млрд рублей"
+    assert not classify.looks_like_deal(title, "")
+    assert not triage.is_deal({"title": title, "summary": ""})
+    assert triage.is_deal({"title": title, "summary": "", "advisor": "Orion"})
+
+
+def test_deal_pages_are_registered_and_named_plainly():
+    """У каждого правила разбора есть включенный источник в реестре, имя для
+    людей — «сайт <фирма>», без буквы «ё»; ворота узнают такой источник."""
+    import deal_pages
+    import promote
+    from source_names import edition_label
+    reg = {s["id"]: s for s in json.loads(
+        (ROOT / "pipeline" / "ingest" / "sources.json").read_text(encoding="utf-8"))["sources"]}
+    for sid, rule in deal_pages.PAGES.items():
+        row = reg.get(sid)
+        assert row and row["kind"] == "deal_page" and row["enabled"] and row["feed"] == rule["page"], sid
+        label = deal_pages.label_of(sid)
+        assert label.startswith("сайт ") and "ё" not in label and row["name"] == label
+        assert edition_label(rule["page"]) == label, sid
+        assert promote.from_firm_deal_page("сайт %s" % rule["page"]), sid
+    assert "pipeline/ingest/deal_pages_seen.json" in __import__("sweep").TRACKED

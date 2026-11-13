@@ -213,6 +213,68 @@ push), и только потом — enrich известных карточек
 Правила прогона и ловушки, собранные из архива журнала 7 октября 2026, —
 `docs/intake_run.md`.
 
+## Страницы сделок консультантов (`deal_pages.py`, 13 ноября 2026)
+
+Владелец: «добавь сайты advance и aspring в проверку притока так и других
+консультантов которые публикуют сделки». У Advance Capital на сайте было 28
+сделок с 2022 года, в базе фирма стояла в трех: приток читал СМИ и телеграм,
+сайты фирм в реестре были выключены.
+
+Источник вида `deal_page` в `sources.json` — страница со списком сделок на
+сайте фирмы. Разбор один, правило на фирму в `deal_pages.PAGES`: чем страница
+режется на блоки и где в блоке заголовок, дата, ссылка, текст, роль. Три вида
+страниц: `tombstone` (плитки инвестбанка: обезличенные и долговые истории —
+`is_nameless`, `NOT_MNA` — не идут), `news` (лента фирмы: только объявление о
+сопровождении сделки — `NEED_ADVISED` и `NEED_DEAL`, без `SKIP_NEWS`),
+`project` (плитки проектов юрфирмы без даты). Запись уходит в обычное сырье с
+именем «сайт <фирма>» и полем `advisor`; ее текст начинается шапкой «<Фирма>
+выступил …», по которой `advisors.lead_advisor` узнает консультанта, как у
+постов @LawFirms. Дальше путь общий: `triage.py` (запись с `advisor` — сделка
+по определению, работает только отказная половина фильтра) → `match.py`
+(`firm_page_match`: две стороны карточки названы в записи — сильное
+совпадение и `enrich`/`card_news`, которые приносят карточке источник и
+консультанта; одна — подсказка «прочитать») → иначе `draft.py` и ворота
+(`promote.from_firm_deal_page`: объявление фирмы, как пост канала юрфирмы).
+
+Память — `pipeline/ingest/deal_pages_seen.json` (в git, коммитит `sweep.py`;
+прогон притока кладет файл в свой коммит): запись идет в сырье один раз, по
+адресу или заголовку. Источник, которого в памяти нет, при первом заборе
+помечает виденным все, что уже на странице, и не отдает ничего (засев);
+запись старше года запоминается, но не отдается. Страница открылась, а
+сделок на ней ноль — ошибка источника в отчете забора (сменилась разметка):
+поправить правило и фикстуру в `test_ingest.py` (`test_deal_page_*`).
+Проверка без записи: `python3 pipeline/ingest/deal_pages.py --match`.
+Новая фирма — правило в `PAGES`, строка в `sources.json` и в
+`source_names.DOMAIN_NAMES`, тест реестра подскажет недостающее.
+
+Обход сайтов 13 ноября 2026 (в скобках — записей о сделках с 2022 года,
+видных на странице без листания):
+
+| фирма | страница | в притоке |
+|---|---|---|
+| Advance Capital | advancecapital.ru/sdelki/ (28, из них 3 обезличены) | да |
+| Aspring Capital | aspring.capital/services (7) | да |
+| ALUMNI Partners | alumnipartners.ru/projects/ (11, без дат) | да |
+| Orion | orion-law.com/news (12) | да |
+| Althaus | althausgroup.ru/news/ (9) | да |
+| LEVEL Legal Services | level-legal.com/news (8) | да |
+| Stonebridge Legal | stonebridgelegal.ru/ru/news/ (6) | да |
+| Denuo | denuo.legal/ru/insights/releases/ (4) | да |
+| BIRCH | birchlegal.ru/projects/ (3) | да |
+| Asari Legal | asari.legal/news/ (3) | да |
+| ДГП, ЕПАМ, «Николаев и партнеры», Better Chance | dgpartners.legal/mediaportal/, epam.ru/ru/news, nikolaew.ru/media/, betterchance.ru/projects/ (по 2) | да |
+| White Square, «Иванян и партнеры» | whitesquarepartners.com/ru/news, ivanyan.partners/news/ (по 1) | да |
+| O2 Consulting | o2consult.com/news/ | уже читается лентой RSS |
+| VERBA LEGAL, АЛРУД, «Никольская Консалтинг», Delcredere, «Ренессанс Капитал», Unicorn Capital | новости и опыт | нет: страница собирается скриптом |
+| Nextons, Astoria Capital, Atomic Capital | — | нет: сайт не открылся |
+| ККМП, ELWI, ЛГС, VEGAS LEX, ФБК Право, Amond & Smith, INGVARR, Forward Legal | новости | нет: в ленте события, рейтинги и комментарии, объявлений о сделках 0–1 (ККМП читается каналом @kkmpconnect) |
+| CLS, Novus Capital | cls.ru/projects/, novuscapital.ru | нет: сделки обезличены |
+| Melling, Voitishkin & Partners, Б1, Strategy Partners, SEAMLESS Legal, «Пепеляев Групп», ASB Consulting | — | нет: списка сделок на сайте нет |
+| Nikoliers, NF Group, CORE.XP, IBC Real Estate | новости, кейсы | нет: обзоры рынка и аренда, не сделки с бизнесом |
+
+Банки из каталога (Сбер, ВТБ и другие) списков сделок не ведут и не
+обходились.
+
 ## Признаки будущих сделок (`signals.py`, 19 октября 2026)
 
 Партнёр владельца и практика M&A: полезно показывать, у кого вероятна
