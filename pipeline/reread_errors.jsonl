@@ -3231,3 +3231,23 @@
 {"id": "gb1cacbc1", "field": "eco.share", "class": "wrong_share", "was": "описание компании и пересчет долей изданием", "now": "10,5 млн акций — 5% капитала", "tag": "m214"}
 {"id": "gb1cacbc1", "field": "title", "class": "title_standard", "was": "IPO «Группа Астра» на Московской бирже", "now": "«Группа Астра» провела IPO на Московской бирже", "tag": "m214"}
 {"id": "gb1cacbc1", "field": "eco.finadv", "class": "other", "was": "фраза статьи с тикерами", "now": "список организаторов «фирма — роль»", "tag": "m214"}
+{"id": "g9995eb50", "field": "date", "class": "wrong_date", "was": "2024-12-16", "now": "2022-12-27 (ЕГРЮЛ)", "tag": "m207"}
+{"id": "g9995eb50", "field": "seller", "class": "wrong_seller", "was": "«Центр фанерной торговли» (сама покупаемая компания)", "now": "ООО УК «Альфа-Капитал»", "tag": "m207"}
+{"id": "g9995eb50", "field": "target", "class": "wrong_target", "was": "участок в Марьине", "now": "ООО «ЦФТ» (100% долей)", "tag": "m207"}
+{"id": "g9995eb50", "field": "law.appr", "class": "unsupported_claim", "was": "одобрил совет директоров", "now": "собрание участников — в структуре сделки", "tag": "m207"}
+{"id": "g9995eb50", "field": "eco.context", "class": "unsupported_claim", "was": "закрытие в декабре 2024, 8,8 млрд — «оценка»", "now": "история владения и проекта по статьям", "tag": "m207"}
+{"id": "g9995eb50", "field": "title", "class": "title_standard", "was": "купила участок … за 8,8 млрд руб.", "now": "«Элит строй» купил ООО «ЦФТ»", "tag": "m207"}
+{"id": "gb6a90572", "field": "date", "class": "wrong_date", "was": "2024-12-14 (день статьи)", "now": "2024", "tag": "m207"}
+{"id": "gb6a90572", "field": "sum", "class": "wrong_sum", "was": "193 млрд ₽ (оценка)", "now": "193,1 млрд ₽ (раскрыта РЖД)", "tag": "m207"}
+{"id": "gb6a90572", "field": "eco.context", "class": "unsupported_claim", "was": "на отделку требовалось 100 млрд ₽", "now": "снято", "tag": "m207"}
+{"id": "gb6a90572", "field": "eco.context", "class": "verbatim", "was": "предложение Ъ почти дословно", "now": "пересказ", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "buyer", "class": "wrong_buyer", "was": "Искандар Махмудов и Андрей Бокарев (общий профиль)", "now": "ООО «Виолан» и ООО «Элариум»", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Инвестиция (9,3%)", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "date", "class": "wrong_date", "was": "2024-12-12", "now": "2024-12-25 (ЕГРЮЛ)", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "eco.rationale", "class": "invented_rationale", "was": "перечень долей", "now": "—", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "eco.target_fin", "class": "unsupported_claim", "was": "структура собственности не менялась", "now": "снято; перераспределение 2025 — в контексте", "tag": "m207"}
+{"id": "g51fbc8c8", "field": "title", "class": "title_standard", "was": "вошли в капитал", "now": "купили 9,3% «Регент Голд»", "tag": "m207"}
+{"id": "g248d3c20", "field": "target", "class": "profile_wrong_company", "was": "профиль АО «Семейный доктор» (другая сеть)", "now": "профиль ООО «МК «Семейный доктор»»", "tag": "m207"}
+{"id": "g248d3c20", "field": "buyer", "class": "wrong_buyer", "was": "АО «Альфастрахование»", "now": "ООО «Медицина Альфастрахования» (ЕГРЮЛ)", "tag": "m207"}
+{"id": "g248d3c20", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "четыре прежних участника", "tag": "m207"}
+{"id": "g248d3c20", "field": "eco.context", "class": "unsupported_claim", "was": "клиника работает под новым брендом", "now": "снято", "tag": "m207"}
