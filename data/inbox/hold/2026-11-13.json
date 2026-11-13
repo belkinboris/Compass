@@ -614,47 +614,70 @@
    ]
   },
   {
-   "draft_id": "d20908036",
-   "title": "Мотоцикл с автографом Шварценеггера выставили на благотворительный аукцион",
+   "draft_id": "d72644783",
+   "title": "Mercedes-Benz приостановил инвестиции в Германии и может закрыть часть заводов",
    "date": "2026-11-13",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/shvartsenegger-875220483.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53148790",
-   "title": "Инвестиции в основной капитал в России снизились в третьем квартале",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/investitsii-875219741.html"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/mercedes-benz-priostanovil-investitsii-v-germanii-i-mozhet-zakryt-chast-zavodov/"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Mercedes-Benz замораживает инвестиции в заводы Германии и рассматривает их закрытие на фоне роста издержек и кризиса автопрома.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/mercedes-benz-priostanovil-investitsii-v-germanii-i-mozhet-zakryt-chast-zavodov/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d81282749",
+   "title": "SpaceX может купить землю в Техасе",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261113/spacex-875221329.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261113/spacex-875221329.html"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -670,17 +693,17 @@
    ]
   },
   {
-   "draft_id": "d74598900",
-   "title": "Мотоцикл с автографом Шварценеггера выставили на благотворительный аукцион",
+   "draft_id": "d99616035",
+   "title": "Венчурные инвестиции в России упали на 36% — число сделок уменьшилось до 105",
    "date": "2026-11-13",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261113/shvartsenegger-2131456012.html"
+     "web:rb.ru",
+     "https://rb.ru/news/venchurnye-investicii-v-rossii-upali-na-36-chislo-sdelok-umenshilos-do-105/"
     ]
    ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "sum": "8,1 млрд ₽",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
