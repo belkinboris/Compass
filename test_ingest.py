@@ -2329,6 +2329,9 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    # Посты о недвижимости без адреса своего канала теперь ждут (13 ноября
+    # 2026) — тест про лимит, поэтому у канала недвижимости есть адрес.
+    monkeypatch.setenv("TELEGRAM_REALTY_CHANNEL_ID", "@realty")
 
     sleeps = []
     monkeypatch.setattr(send_telegram.time, "sleep", lambda s: sleeps.append(s))
@@ -2357,7 +2360,9 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     # это не отправка, а честное «не публикуем», и она не считается в лимит.
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     real_sends = [v for v in written["telegram_posts"].values() if v]
-    assert len(real_sends) == 3
+    sent_ids = {1000 + i for i in range(3)}
+    realty_new = [v for v in (written.get("telegram_posts_realty") or {}).values() if v in sent_ids]
+    assert len(real_sends) + len(realty_new) == 3
 
 
 def test_main_skips_seeded_backlog_entries_without_new_facts(monkeypatch, tmp_path):
@@ -8308,20 +8313,20 @@ def test_big_realty_deal_goes_to_both_channels_with_the_same_keyboard(monkeypatc
     assert written["telegram_posts_realty"]["gR2"] == 701
 
 
-def test_realty_post_goes_to_main_channel_while_realty_address_is_unknown(monkeypatch, tmp_path):
-    """Адреса канала недвижимости нет — пост уходит в основной, как до
-    2 октября 2026: потерять пост хуже, чем выпустить его не в тот канал."""
+def test_realty_post_never_goes_to_main_channel_when_realty_address_is_unknown(monkeypatch, tmp_path):
+    """Владелец, 13 ноября 2026: «как после того, как я нажал кнопку, когда на
+    посте было написано «Опубликуется в канал недвижимость», пост публикуется в
+    основной канал?» Правило 2 октября («адреса нет — в основной») снято: пост
+    идет только туда, куда его одобрили, иначе ждет."""
     deal = _realty_deal("gR3", "48,7 млн ₽", status="Обсуждается")
     tmp_data = _channels_world(monkeypatch, tmp_path, [deal], realty="")
-    monkeypatch.setattr(send_telegram, "site_channels", lambda: {})  # сайт ответил: адреса нет
+    monkeypatch.setattr(send_telegram, "site_channels", lambda: {})
     fake = _FakeClient([_ok(801)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
     send_telegram.main(write=True, ignore_pace=True)
-    assert [j["chat_id"] for _u, j in fake.calls] == [MAIN_CH]
+    assert not [j for u, j in fake.calls if u.endswith("sendMessage")], fake.calls
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
-    assert written["telegram_posts"]["gR3"] == 801
-    assert "telegram_posts_realty" not in written
-
+    assert "gR3" not in (written.get("telegram_posts") or {})
 
 def test_realty_post_waits_when_the_site_did_not_answer(monkeypatch, tmp_path):
     """13 ноября 2026: связь с сайтом рвалась, адрес канала недвижимости не

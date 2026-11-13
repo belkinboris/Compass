@@ -1110,8 +1110,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     realty_chat = realty_channel_address(site, chat_id) if token else ''
     if token and not realty_chat:
         print('Адрес канала «Компас - Недвижимость» неизвестен — посты о '
-              'недвижимости %s.' % ('ждут следующего прогона (сайт не ответил)'
-                                     if SITE_UNREACHABLE else 'идут в основной канал, как раньше'))
+              'недвижимости ждут следующего прогона, в основной канал не уходят.')
     addr = {channels.MAIN: chat_id, channels.REALTY: realty_chat}
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
@@ -1565,14 +1564,17 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         if kind in ('send', 'milestone'):
             text = payload if kind == 'send' else payload[1]
             route = channels.channels_for(deal, realty_known=bool(realty_chat))
-            if (not realty_chat and SITE_UNREACHABLE
-                    and channels.REALTY in channels.channels_for(deal, realty_known=True)):
-                # Адрес канала недвижимости не узнали (сайт не ответил) — пост
-                # ждет следующего прогона, а не уходит в основной канал
-                # (13 ноября 2026: «Газпром межрегионгаз», офис в Челябинске,
-                # вышел в «Проект Компас» вместо «Компас - Недвижимость»).
-                print('  %s: адрес канала недвижимости неизвестен — пост отложен до следующего прогона' % did)
+            # ПОСТ ИДЕТ ТОЛЬКО ТУДА, КУДА ЕГО ОДОБРИЛ ВЛАДЕЛЕЦ (13 ноября 2026).
+            # Проект в консоли пишет «В КАНАЛ «Компас - Недвижимость»»; кнопка
+            # одобряет именно это. Адрес канала недвижимости не узнали — пост
+            # ждет следующего прогона, в другой канал не уходит НИКОГДА.
+            # Правило 2 октября «адреса нет — в основной» снято: 13 ноября оно
+            # выпустило «Газпром межрегионгаз» (g16da1d05) в «Проект Компас».
+            if not realty_chat and channels.REALTY in channels.channels_for(deal, realty_known=True):
+                print('  %s: адрес канала недвижимости неизвестен — пост НЕ отправлен, ждет следующего прогона' % did)
+                failed.append((did, 'адрес канала «Компас - Недвижимость» неизвестен — пост ждет'))
                 continue
+            route = channels.channels_for(deal, realty_known=True)
             mids, error = post_to_channels(client, token, addr, route, text, buttons)
             if error:
                 failed.append((did, error))
