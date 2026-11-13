@@ -4901,3 +4901,21 @@
 {"id": "g7393665f", "field": "profile", "class": "profile_wrong_inn", "was": "нет юрлица", "now": "ООО «Восток Ойл» 7727568649", "tag": "m106c"}
 {"id": "gd873b039", "field": "profile", "class": "profile_wrong_inn", "was": "7730289934 (бывшее ООО «Лизинг КРС»)", "now": "9703105684", "tag": "m106c"}
 {"id": "gb2b066c3", "field": "profile", "class": "profile_wrong_company", "was": "АО «ДОМ.РФ»", "now": "ПАО «ДОМ.РФ» (legal_short)", "tag": "m106c"}
+{"id": "c2adff6d3", "field": "card", "class": "duplicate", "was": "отдельная карточка о разделении бизнеса Qiwi", "now": "слита этапом в g0fadc207", "tag": "m106ac"}
+{"id": "ca7a871ee", "field": "card", "class": "not_a_deal", "was": "запуск венчурного фонда «Консоль»", "now": "карточка снята", "tag": "m106ac"}
+{"id": "ca599969b", "field": "card", "class": "not_a_deal", "was": "план листинга GDR «Полюса» в Астане", "now": "карточка снята", "tag": "m106ac"}
+{"id": "c59db5494", "field": "card", "class": "not_a_deal", "was": "запуск венчурного фонда Sk Capital", "now": "карточка снята", "tag": "m106ac"}
+{"id": "g26608f96", "field": "sum", "class": "sum_meaning", "was": "40–55 млрд ₽ (оценка эксперта)", "now": "Не раскрыта, оценка с автором в eco.val", "tag": "m106bb"}
+{"id": "g26608f96", "field": "date", "class": "wrong_date", "was": "2025-06-01", "now": "2025-06-03", "tag": "m106bb"}
+{"id": "g26608f96", "field": "title", "class": "title_standard", "was": "…вел переговоры… — сделка не состоялась", "now": "Искандер Махмудов не купил контроль в «Аквариусе»", "tag": "m106bb"}
+{"id": "g26608f96", "field": "eco.share", "class": "wrong_share", "was": "описание переговоров", "now": "51% акций АО «Группа Аквариус»", "tag": "m106bb"}
+{"id": "g26608f96", "field": "extra", "class": "version_as_fact", "was": "Махмудов через свои структуры приобретает 51%", "now": "по неофициальным данным", "tag": "m106bb"}
+{"id": "g1b5e8ab8", "field": "title", "class": "title_standard", "was": "…попытался продать долю…", "now": "RBI не продал долю в российском Райффайзенбанке", "tag": "m106bb"}
+{"id": "g1b5e8ab8", "field": "asset", "class": "wrong_target", "was": "пусто", "now": "АО «Райффайзенбанк»", "tag": "m106bb"}
+{"id": "g1b5e8ab8", "field": "eco.context", "class": "foreign_fact", "was": "иск к Rasperia, смена гендиректора RBI", "now": "снято", "tag": "m106bb"}
+{"id": "g1b5e8ab8", "field": "src", "class": "source_not_about", "was": "EQS-News, Vindobona", "now": "сняты; добавлена перепечатка Reuters", "tag": "m106bb"}
+{"id": "g1b5e8ab8", "field": "eco.val", "class": "other", "was": "7 млрд € заблокированной прибыли", "now": "—, факт в контексте", "tag": "m106bb"}
+{"id": "ce6b8c447", "field": "sum", "class": "sum_meaning", "was": "71 млрд ₽ как сумма иска", "now": "Более 71 млрд ₽ — цена «Балтики» в рамочном соглашении", "tag": "m106bb"}
+{"id": "g82725e96", "field": "title", "class": "title_standard", "was": "«Фарминвест» купил «Петровакс» у «Интерроса»", "now": "Михаил Цыферов и VB Partners купили «Петровакс» у «Интерроса»", "tag": "m106bb"}
+{"id": "g74c84c09", "field": "eco.rationale", "class": "invented_rationale", "was": "добавляет бренды к агробизнесу Лисина", "now": "—", "tag": "m106bb"}
+{"id": "g74c84c09", "field": "extra", "class": "version_as_fact", "was": "Структуры Лисина купили", "now": "по неофициальным данным", "tag": "m106bb"}
