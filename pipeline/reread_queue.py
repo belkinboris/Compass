@@ -82,7 +82,9 @@ SOURCE_QUESTIONS = {
 # строка поста) правятся своими шагами и отметку не держат.
 BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format', 'title_word_share', 'share_form', 'party_legal_form', 'plain_words', 'stale_statement', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ', 'industry_undefined',
             'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants',
-            'aggregator_cites_primary')
+            'aggregator_cites_primary',
+            # марафон вычитки, 13 ноября 2026 (docs/card_acceptance.md): сторона «менеджмент», оценка эксперта в sum
+            'party_placeholder', 'sum_is_expert_estimate')
 
 
 # Короткая проверка (владелец, 9 ноября 2026: «пройдись короткой проверкой по 273
@@ -95,7 +97,8 @@ SHORT_FROM = '2026-10-03'
 SHORT_FIELDS = ('title', 'eco.sum', 'eco.share')
 SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers', 'primary_source')
 SHORT_BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format', 'title_word_share', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
-                  'parties_missing', 'jv_participants', 'party_legal_form', 'aggregator_cites_primary')
+                  'parties_missing', 'jv_participants', 'party_legal_form', 'aggregator_cites_primary',
+                  'party_placeholder', 'sum_is_expert_estimate')
 SHORT_ADVISERS_Q = ('Консультанты (law.adv, eco.finadv): каждый подтвержден источником, у роли назван клиент '
                     '(или «одной из сторон», если ни один источник и устройство сделки его не дают)?')
 
@@ -188,6 +191,7 @@ def _findings(card, data):
 
 def dossier(card, why, data):
     import second_reading
+    import accept_card
     lines = ['#' * 78, '%s  %s%s  (%s)' % (card['id'], SITE, card['id'], why),
              'добавлена %s · проверки: приемка %s, второе чтение %s, вычитка %s'
              % (card.get('added'), card.get('accepted') or '—', card.get('second_read') or '—', card.get(STAMP) or '—')]
@@ -196,6 +200,8 @@ def dossier(card, why, data):
     lines += ['  %s %s %s' % ('!' if c.split(':')[0] in BLOCKING else '-', c, t) for c, t in f]
     for s in signals(card, data):
         lines.append('ПОДСКАЗКА: ' + s)
+    for _c, t in accept_card.hints(card, data):
+        lines.append('ПОДСКАЗКА: ' + t)
     lines += primary_lines(card)
     lines += registry_lines(card, data)
     lines.append(second_reading.questionnaire(card, data))
@@ -207,6 +213,7 @@ def dossier(card, why, data):
 def short_dossier(card, data):
     """Досье короткой проверки: карточка, находки, вопросы только о каркасе сделки."""
     import second_reading
+    import accept_card
     keys = ('title', 'type', 'status', 'date', 'buyer', 'buyer_name', 'seller', 'seller_name', 'target', 'asset',
             'sum')
     lines = ['#' * 78, '%s  %s%s  (короткая проверка, добавлена %s)' % (card['id'], SITE, card['id'], card.get('added'))]
@@ -220,6 +227,8 @@ def short_dossier(card, data):
     lines += ['  src: %s' % ' '.join(str(x) for x in s) for s in card.get('src') or []]
     f = [x for x in _findings(card, data) if x[0].split(':')[0] in SHORT_BLOCKING]
     lines += ['  ! %s %s' % (c, t) for c, t in f]
+    lines += ['  ПОДСКАЗКА: %s' % t for c, t in accept_card.hints(card, data)
+              if c in ('sum_estimate_prose', 'date_is_article_day', 'auction_in_text')]
     lines += primary_lines(card)
     lines += registry_lines(card, data)
     q = dict(second_reading.GENERAL_QUESTIONS, **SOURCE_QUESTIONS, advisers=SHORT_ADVISERS_Q)

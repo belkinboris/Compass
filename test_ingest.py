@@ -3597,12 +3597,31 @@ def test_industry_is_read_from_the_deal_itself():
     assert draft.industry_by_words("«Альфа» купила «Бету»") is None
 
 
+def test_industry_profile_is_found_in_an_oblique_case():
+    """Заголовок после вычитки 13 ноября 2026 зовет предмет в родительном падеже
+    («купил 70% "Рестера"»), профиль — в именительном («Рестер»)."""
+    import draft
+    comps = {"a": {"name": "Рестер", "ind": "Фармацевтика"},
+             "b": {"name": "Масленица", "ind": "Пищепром и напитки"},
+             "c": {"name": "AT Consulting", "ind": "ИТ и интернет"}}
+    assert draft.industry_for("«Фармасинтез» купил 70% «Рестера»", comps) == "Фармацевтика"
+    assert draft.industry_for("ЭФКО купил 100% «Масленицы»", comps) == "Пищепром и напитки"
+    # Латинское имя не склоняется — ищется как есть.
+    assert draft._name_forms("AT Consulting") == ("at consulting",)
+    assert draft.industry_for("«Альфа» купила «Рестерию»", {"a": comps["a"]}) is None
+
+
 def test_industry_rule_is_measured_on_the_base():
     """Словарь отраслей проверяется на 1538 карточках с известной отраслью.
 
     Замер 4 августа: покрытие 74%, точность 84,5%. Выше согласованности
     собственной разметки правило не прыгнет — «аэропорт» в базе размечен как
     «Транспорт и логистика» 5 раз и как «Порты и инфраструктура» 5 раз.
+
+    13 ноября 2026 покрытие упало до 64,6%: вычитка переписала заголовки
+    короче («купил 70% "Рестера"»), и имя предмета в родительном падеже
+    перестало совпадать с профилем. Порог не тронут — правило научилось
+    падежам (draft._CASE_ENDINGS): покрытие 70,2%, точность 82,8%.
     """
     import draft
     base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
@@ -6545,11 +6564,23 @@ def test_no_duplicate_fix_for_one_field():
         cards.update({c["id"]: c for c in
                       json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
 
+    # Живая запись цепочки — та, чей отпечаток не поглощен; она одна и она
+    # совпадает с тем, что поле несет сейчас. Где она стоит в порядке файлов,
+    # не важно. До 13 ноября 2026 тест считал живой ПОСЛЕДНЮЮ запись
+    # (`recs[:-1]`), а порядок `review.FIXES` — алфавит имен партий, не время:
+    # архивные партии до 31 октября названы по карточке
+    # (`written_<id>_2026_10_15`), новые — по дню (`written_2026_11_13_m208`,
+    # `reread_2026_11_12_*`), и новая сортируется раньше старой (known_issues/
+    # card.md, «absorb_fix_chain.py считает живой последнюю запись по порядку
+    # файлов»: там же записано, как чинить — по совпадению с полем). Замер 13
+    # ноября: 180 цепочек после вычитки 12–13 ноября, у всех прежние записи уже
+    # поглощены, а единственная живая совпадает с полем — и стояла не последней.
     def absorbed_chain(key):
         recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
         card = cards.get(key[0]) or {}
         marks = (card.get("proofread_absorbed") or {}).get(key[1]) or []
-        return all(review.fix_fingerprint(f["new"]) in marks for f in recs[:-1])
+        live = [f for f in recs if review.fix_fingerprint(f["new"]) not in marks]
+        return not live or (len(live) == 1 and review.already_applied(live[0], card, base["companies"]))
 
     dups = [k for k, n in seen.items() if n > 1 and not absorbed_chain(k)]
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
@@ -11733,3 +11764,64 @@ def test_removed_card_takes_its_signals_with_it(tmp_path):
     assert not any(r.get("deal_id") == "g0748e794" for r in rows)
     deal_ids = {d["id"] for d in gone["deals"]}
     assert all(not r.get("deal_id") or r["deal_id"] in deal_ids for r in rows)
+
+
+def test_reread_marathon_findings_on_real_cards():
+    """Находки марафона вычитки 13 ноября 2026 — на настоящих карточках базы (значения
+    полей скопированы: карточки поправят, а граница правила должна остаться).
+    Блокирующие: сторона «менеджмент» и оценка эксперта в sum; остальные — подсказки."""
+    import accept_card as ac
+    import reread_queue as rq
+    # (а) g88dcf73e: покупатель «Местный менеджмент»
+    assert ac.party_placeholder({"buyer_name": "Местный менеджмент"}) == [("buyer_name", "Местный менеджмент")]
+    for ok in ("Менеджмент «Ростелекома» во главе с Иваном Петровым", "ООО «Менеджмент Групп»", "Сергей Иванов"):
+        assert not ac.party_placeholder({"buyer_name": ok}), ok
+    assert ac.party_placeholder({"seller": "руководство компании"})
+    # (б) g15b9d8e2: «Бурмистров оценивает покупку в 300–350 млн ₽», сумма «(по оценке)»
+    est = {"id": "g15b9d8e2", "type": "M&A", "sum": "300–350 млн ₽ (по оценке)",
+           "eco": {"sum": "300–350 млн ₽ (по оценке)", "val": "Конов цену не назвал. Гендиректор «INFOLine-Аналитики» "
+                   "Михаил Бурмистров оценивает покупку в 300–350 млн ₽."}}
+    assert ac.sum_is_expert_estimate(est)
+    assert "sum_is_expert_estimate" in {c for c, _t in ac.marathon_findings(est, {})}
+    # g0bbc9e9e: «по неофициальным данным могла составить» — неофициальная цена сделки, не блокирует
+    unoff = dict(est, sum="≈2 млрд ₽ (по оценке)", eco={"val": "Стороны цену не раскрывают; по неофициальным данным, "
+                                                         "она могла составить около 2 млрд ₽."})
+    assert not ac.sum_is_expert_estimate(unoff) and ac.sum_estimate_in_prose(unoff)
+    assert "sum_estimate_prose" in {c for c, _t in ac.hints(unoff)}
+    # g075e9738: «VK заплатила 2,5 млрд ₽; исходя из этой цены…» — цена, никаких находок
+    paid = {"type": "M&A", "sum": "2,5 млрд ₽", "eco": {"val": "VK заплатила 2,5 млрд ₽; исходя из этой цены вся "
+                                                         "компания стоит около 10 млрд ₽."}}
+    assert not ac.sum_estimate_in_prose(paid)
+    # (в) дата = день публикации первого источника, без date_basis
+    day = {"type": "M&A", "status": "Закрыта", "date": "2026-07-01", "src": [["РБК", "https://x.ru/2026/07/01/a"]]}
+    assert ac.date_is_article_day(day, records=[])
+    assert not ac.date_is_article_day(dict(day, date_basis="registry"), records=[])
+    assert not ac.date_is_article_day(dict(day, status="Обсуждается"), records=[])
+    # (г) g3cd0f85e: M&A, а в прозе «аукцион на повышение с начальной ценой 10 млрд ₽»
+    auc = {"type": "M&A", "eco": {"context": "Продажу на торгах объявил «Галс-Девелопмент»: аукцион на повышение с "
+                                             "начальной ценой 10 млрд ₽ прошел 8 августа 2025 года."}}
+    assert ac.auction_in_text(auc)
+    assert not ac.auction_in_text(dict(auc, type="Продажа с торгов"))
+    assert not ac.auction_in_text({"type": "M&A", "eco": {"context": "«Траст» продал пакет не через аукцион, а напрямую."}})
+    # (д) g74fd5cdb: закрыта в декабре 2025, в law.struct — «в начале июня 2026 года … перешли к «Ленте»»
+    late = {"status": "Закрыта", "date": "2025-12-10",
+            "law": {"struct": "ООО «Земун» получило 99% в декабре 2025 года. В начале июня 2026 года 100% «РБФ Ритейл» "
+                              "перешли к «Ленте».", "terms": "Покупатель обязан достроить завод до 2029 года."}}
+    got = ac.late_event_in_terms(late, today="2026-11-13")
+    assert [f for f, _s in got] == ["law.struct"] and "Ленте" in got[0][1]
+    # блокирующие — только две; подсказки отметку не держат
+    assert {"party_placeholder", "sum_is_expert_estimate"} <= set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    for hint in ("sum_estimate_prose", "date_is_article_day", "auction_in_text", "late_event_in_terms"):
+        assert hint not in rq.BLOCKING
+
+
+def test_milestone_snapshot_subject_is_entity_and_share():
+    """Пост об этапе «Библио-Глобуса» (12 ноября 2026) вышел с «Предмет:
+    Туроператор БГ» — именем профиля. Предмет снимка — общество и доля."""
+    import review
+    card = {"title": "x", "target": "t", "asset": "75% доли в ООО «Библио-Глобус Туроператор»",
+            "eco": {"share": "75% доли в ООО «Библио-Глобус Туроператор»"}}
+    snap = review.build_snapshot(card, {"t": {"name": "Туроператор БГ"}})
+    assert snap["asset"] == "75% доли в ООО «Библио-Глобус Туроператор»"
+    card2 = {"title": "y", "target": "t", "asset": "ООО «Рекитт Бенкизер» (завод бытовой химии в Клину)", "eco": {}}
+    assert review.build_snapshot(card2, {"t": {"name": "Рекитт Бенкизер"}})["asset"] == "ООО «Рекитт Бенкизер»"

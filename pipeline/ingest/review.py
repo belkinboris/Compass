@@ -832,6 +832,9 @@ def stamp_followup_researched(card, day=None):
     return False
 
 
+from milestone_subject import snapshot_subject  # noqa: E402  (13 ноября 2026: review.py у потолка)
+
+
 def build_snapshot(card, companies):
     """Компактный снимок карточки — «что было известно на этот момент».
 
@@ -852,9 +855,10 @@ def build_snapshot(card, companies):
         'sum': card.get('sum'),
         'buyer': party('buyer', 'buyer_name'),
         'seller': party('seller_id', 'seller'),
-        'asset': party('target', 'asset'),
+        'asset': snapshot_subject(card, companies),
         'ind': card.get('ind'),
     }
+
 
 
 def _ms_copied(card, kind, headline):

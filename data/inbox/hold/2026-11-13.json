@@ -615,92 +615,6 @@
    ]
   },
   {
-   "draft_id": "d63414380",
-   "title": "Глава Euroclear объяснила, чем грозит передача активов РФ новой структуре",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28314403"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43968942",
-   "title": "В Китае прошло крупное IPO конкурента Nvidia в сфере чипов для робототехники",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/v-kitae-proshlo-krupnoe-ipo-konkurenta-nvidia-v-sfere-chipov-dlya-robototehniki/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d69539241",
-   "title": "В Казахстане предложили усилить контроль за продажей лекарств и медизделий",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/11/13/v-kazakhstane-predlozhili-usilit-kontrol-za-prodazhey-lekarstv-i-medizdeliy/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d05357032",
    "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
    "date": "2026-11-13",
@@ -708,34 +622,6 @@
     [
      "web:fontanka.ru",
      "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d16772270",
-   "title": "Инвестиции России в IT-сектор Узбекистана за два года выросли втрое",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/uzbekistan-875188693.html"
     ]
    ],
    "sum": null,
@@ -850,6 +736,114 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54888311",
+   "title": "В Японии сообщили о планах властей выкупать устаревшее оборудование предприятий",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2201056/2026-11-13/v-iaponii-soobshchili-o-planakh-vlastei-vykupat-ustarevshee-oborudovanie-predpriiatii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Власти Японии рассматривают возможность временного перехода в государственную собственность устаревшего оборудования предприятий, выпускающих важную для экономической безопасности страны продукцию. Речь идет, в частности, о химических товарах и литейных…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2201056/2026-11-13/v-iaponii-soobshchili-o-planakh-vlastei-vykupat-ustarevshee-oborudovanie-predpriiatii"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d07520609",
+   "title": "Российскую нефть стали продавать с максимальными скидками",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/13/skidochka/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52333763",
+   "title": "«Арнест» закрыл сделку по приобретению российского бизнеса Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периметр сделки вошёл российский бизнес Reckitt в сегменте бытовой ",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7567"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "«Арнест» закрыл сделку по приобретению российского бизнеса Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периметр сделки вошёл российский бизнес Reckitt в сегменте бытовой химии, включая завод в Клину Московской области и…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7567"
+     ]
+    }
+   ],
+   "buyer_name": "«Арнест»",
+   "asset": "российский бизнес Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периме",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«Арнест»",
+    "asset": "российский бизнес Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периме",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "похоже на уже описанную сделку gmru-arnest-reckitt (общее название в кавычках и общие слова: 2) — проверьте, не дубль ли"
    ]
   }
  ]

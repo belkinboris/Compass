@@ -4,7 +4,7 @@
 Карточки: gmru-prime-pervy-poliplastik, gmru-kolomenskoe-peko, gmru-mariholodmash-borsky, gmru-nordline-totalenergies-arctic, gmru-mtsbank-kdpay, gmru-roshim-vnt, gmru-geopromining-zabaikalie, gmru-rostech-avia-holding, gmru-vysochaishy-komi-oil, gmru-sucden-poetti, cccedc36b. Запуск: python3 pipeline/ingest/review.py --write
 """
 
-CARDS = ['gmru-prime-pervy-poliplastik', 'gmru-kolomenskoe-peko', 'gmru-mariholodmash-borsky', 'gmru-nordline-totalenergies-arctic', 'gmru-mtsbank-kdpay', 'gmru-roshim-vnt', 'gmru-geopromining-zabaikalie', 'gmru-rostech-avia-holding', 'gmru-vysochaishy-komi-oil', 'gmru-sucden-poetti', 'cccedc36b']
+CARDS = ['gmru-prime-pervy-poliplastik', 'gmru-kolomenskoe-peko', 'gmru-mariholodmash-borsky', 'gmru-nordline-totalenergies-arctic', 'gmru-mtsbank-kdpay', 'gmru-roshim-vnt', 'gmru-geopromining-zabaikalie', 'gmru-rostech-avia-holding', 'gmru-vysochaishy-komi-oil', 'gmru-sucden-poetti']
 
 FIXES = [{'id': 'gmru-prime-pervy-poliplastik',
   'field': 'eco.share',
@@ -499,17 +499,4 @@ FIXES = [{'id': 'gmru-prime-pervy-poliplastik',
            'что планов входить в уставный капитал «Милфудс» нет. Хотя один из источников “Ъ” на '
            'аграрном рынке убежден, что фактически речь идет о завуалированной покупке. Другой '
            'собеседник “Ъ” знает, что «Милфудс» прицельно искала покупателя на бизнес.',
-  'why': 'текст написан по фактам 5, 6, 7 (WRITING_BRIEF.md)'},
- {'id': 'cccedc36b',
-  'field': 'eco.val',
-  'old': 'Сумму и условия сделки не раскрыли. Оценочно цена — 0,8–1 млрд ₽. В основе оценки два '
-         'показателя «АВС-Электро»: прибыль за 2024 год — 198 млн ₽, чистые активы на конец 2024 '
-         'года — 1,1 млрд ₽.',
-  'new': 'Стороны сумму и условия не раскрыли. По неофициальной оценке отраслевого издания, бизнес '
-         'мог стоить 0,8–1 млрд ₽: у «АВС-Электро» за 2024 год было 198 млн ₽ прибыли и 1,1 млрд ₽ '
-         'чистых активов на конец года.',
-  'quote': 'Сумма сделки и конкретные условия "слияния" компаний не сообщаются. Речь может идти об '
-           'оценке на уровне 0,8-1 млрд. рублей, так как В 2024 году ООО "АВС - ЭЛЕКТРО" за 2024 '
-           'год показала прибыль в размере 198 млн руб, а чистые активы ООО "АВС - ЭЛЕКТРО" по '
-           'состоянию на 31.12.2024 составили 1,1 млрд руб.',
-  'why': 'текст написан по фактам 1 (WRITING_BRIEF.md)'}]
+  'why': 'текст написан по фактам 5, 6, 7 (WRITING_BRIEF.md)'}]

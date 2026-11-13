@@ -26,6 +26,7 @@
     python3 pipeline/ingest/draft.py --measure       # замер на своей базе
     python3 pipeline/ingest/draft.py                 # собрать черновики из разбора
 """
+import functools
 import json
 import os
 import re
@@ -1049,19 +1050,49 @@ def _parties_self_check():
 
 
 # --- отрасль ---------------------------------------------------------------
+# Падежи имени компании. Вычитка 12–13 ноября 2026 переписала заголовки по
+# docs/card_title.md («"Фармасинтез" купил 70% "Рестера"» вместо «ГК
+# "Фармасинтез" приобрела 70% акций АО "Рестер" — производителя диализных
+# растворов»): описательные слова ушли, предмет остался одним именем — и в
+# родительном падеже. Профиль называется «Рестер», в заголовке «Рестера», и
+# поиск по точному имени перестал узнавать компанию: покрытие правила отрасли
+# на базе упало с 70% до 64,6% (181 карточка). Новости о сделках пишут так же
+# («купил 51% "Селлематикса"»), поэтому падеж нужен и притоку, а не только
+# замеру. Склоняется только последнее слово кириллического имени не короче
+# 4 букв; замер 13 ноября: покрытие 70,2%, точность 82,8% (без падежей —
+# 64,6% и 82,8%), то есть новых ошибок падеж не принес.
+_CASE_ENDINGS = {'а': ('ы', 'и', 'у', 'е', 'ой'), 'я': ('и', 'ю', 'е', 'ей'),
+                 'й': ('я', 'ю', 'ем', 'е'), 'ь': ('я', 'и', 'ю', 'ем', 'е')}
+
+
+@functools.lru_cache(maxsize=None)
+def _name_forms(core):
+    low = core.lower()
+    forms = [low]
+    if len(low.split()[-1]) < 4 or not re.search(r'[а-яё]$', low):
+        return tuple(forms)
+    if low[-1] in _CASE_ENDINGS:
+        forms += [low[:-1] + e for e in _CASE_ENDINGS[low[-1]]]
+    elif re.search(r'[бвгджзклмнпрстфхцчшщ]$', low):
+        forms += [low + e for e in ('а', 'у', 'ом', 'е')]
+    return tuple(forms)
+
+
 def guess_industry(text, companies):
     """Отрасль берется у профиля компании, найденного в тексте, а не угадывается
-    по словам: угаданная отрасль — это выдумка, а профиль — факт базы."""
+    по словам: угаданная отрасль — это выдумка, а профиль — факт базы.
+    Имя узнается и в косвенном падеже («купил 70% "Рестера"»): см. _CASE_ENDINGS."""
     low = ' ' + re.sub(r'\s+', ' ', str(text or '')).lower() + ' '
     best = None
     for comp in companies.values():
         name = str(comp.get('name') or '')
         core = re.sub(r'^(ООО|АО|ПАО|ЗАО|ГК|МКООО)\s+', '', name).strip('«» "')
-        if len(core) < 4:
+        if len(core) < 4 or not comp.get('ind'):
             continue
-        if ' ' + core.lower() + ' ' in low or '«%s»' % core.lower() in low:
-            if comp.get('ind') and (best is None or len(core) > best[1]):
-                best = (comp['ind'], len(core))
+        if best is not None and len(core) <= best[1]:
+            continue
+        if any(' ' + f + ' ' in low or '«%s»' % f in low for f in _name_forms(core)):
+            best = (comp['ind'], len(core))
     return best[0] if best else None
 
 
