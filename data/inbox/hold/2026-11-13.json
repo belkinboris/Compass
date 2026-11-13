@@ -1,0 +1,1711 @@
+{
+ "made": "2026-11-13",
+ "drafts": [
+  {
+   "draft_id": "d31516979",
+   "title": "МИД Японии выразил протест российскому послу из-за передачи активов JTI",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1127334"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда, россий) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d61830598",
+   "title": "Передача JTI под временное управление стала прецедентом для табачного рынка",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/05/peredacha-jti-pod-vremennoe"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d60871491",
+   "title": "AI-AINA: Путин передал табачные активы JTI новому управляющему, в Петербурге дорожает жильё, в «Пулково-2» сносят огороды",
+   "date": "2026-11-05",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/05/76746770/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d59216979",
+   "title": "МИД Японии выразил протест послу России из-за передачи активов JTI",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2197087/2026-11-06/mid-iaponii-vyrazil-protest-poslu-rossii-iz-za-peredachi-aktivov-jti"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d77671333",
+   "title": "Япония потребовала отменить передачу активов JTI",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/japonija-potrebovala-otmenit-peredachu-aktivov-jti/"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d06309082",
+   "title": "JTI анализирует передачу активов в РФ под временное управление",
+   "date": "2026-11-05",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053141874"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d05806765",
+   "title": "Компания «СиЭс Технологии» , которая разрабатывает платформу «Стаксель» для управления жизненным циклом инженерного продукта [PLM], привлекла 50 млн рублей от холдинга промышленного ПО «Экспанта» в об",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7808"
+    ]
+   ],
+   "sum": "50 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "промышленного ПО «Экспанта» в об",
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "промышленного ПО «Экспанта» в об",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga09376f6 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d00365062",
+   "title": "Какие активы JTI в России передали во временное управление",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/business/articles/2026/11/06/1243116-aktivi-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d64862519",
+   "title": "БТК опровергла связь с передачей во временное управление активов JTI",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/economics/06/11/2026/6aed80c0b292bf71ed81054c"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d59568127",
+   "title": "Холдинг «Экспанта» приобрел 15% в российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями и сервисными процессами. Сумма сделки не разглашается. «Ирактис» в",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7827"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-06",
+     "title": "Сделка завершена",
+     "note": "Холдинг “Экспанта” приобрел 15% в российской ИТ-компании “Ирактис” , которая разработала платформу для управления проектами, знаниями и сервисными процессами. Сумма сделки не разглашается. “Ирактис” в 2025 году основали Роман Третьяков и Иван Машинцев.…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7827"
+     ]
+    }
+   ],
+   "buyer_name": "«Экспанта»",
+   "asset": "российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«Экспанта»",
+    "asset": "российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями",
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок"
+   ]
+  },
+  {
+   "draft_id": "d23202963",
+   "title": "День 1718: на бывшем заводе Huyndai начали сборку автомобилей российского бренда Votour, Путин передал во временное управление ещё три компании японской JTI",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/money/3240901-den-1718-na-byvshem-zavode-huyndai-nachali-sborku-avtomobilei-rossiiskogo-brenda-votour-putin-peredal-vo-vremennoe-upravlenie-eshe-tri-kompanii-yaponskoi-jti?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d33482330",
+   "title": "День 1718: на бывшем заводе Huyndai начали сборку автомобилей российского бренда Votour, Путин передал во временное управление ещё три компании японской JTI",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/money/3240901-sborka-avtomobiley-votour-na-zavode-hyundai?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d54330594",
+   "title": "Временный управляющий назвал задачи по работе с активами JTI",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/07/11/2026/6aedfd11f8de70aa4e34c024"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-07",
+     "title": "Переговоры",
+     "note": "Временный управляющий российских активов JTI рассказал о своих основных задачах. Глава АО «Промышленные активы» Антон Пивоваров заявил о намерении обеспечить стабильную работу предприятий, выпускающих сигареты Winston и Camel",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/business/07/11/2026/6aedfd11f8de70aa4e34c024"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42985189",
+   "title": "Тайная галерея и личный спа-центр. В Сочи выставили на продажу виллу за 3,5 миллиарда рублей",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/07/76745191/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d85479153",
+   "title": "РБК: временный управляющий назвал задачи по работе с активами JTI",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28295123"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d61699634",
+   "title": "Временный управляющий активами JTI назвал свои первостепенные задачи",
+   "date": "2026-11-07",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/7/vremennyj-upravlyayushhij-aktivami-jti-nazval-svoi-pervostepennye-zadachi"
+    ]
+   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d22298897",
+   "title": "ГК ФСК вышла из капитала одной из крупнейших в Московском регионе УК",
+   "date": "2026-11-11",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
+    ]
+   ],
+   "sum": "700 млн ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК. Об этом рассказал представитель первой организации. Он добавляет, что сумма сделки составила 700 млн руб. В ФСК факт сделки подтвердили. По данным…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7842"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d46458559",
+   "title": "Mercedes-Benz заморозил инвестиции в производство в Германии и допустил закрытие заводов // Mercedes-Benz решил заморозить дальнейшие инвестиции в производство в Германии",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9095998"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d99252642",
+   "title": "С начала года коллекторы приобрели долгов на 332 млрд рублей",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9095959"
+    ]
+   ],
+   "sum": "332 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "Рейтинговое агентство «Эксперт РА» впервые провело исследование коллекторского рынка и представило его результаты на круглом столе Национальной ассоциации профессиональных коллекторских агентств «Вопросы урегулирования просроченной задолженности». По данным…",
+     "source": [
+      "web:kommersant.ru/daily",
+      "https://www.kommersant.ru/doc/9095959"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "долгов на 332 млрд рублей",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "долгов на 332 млрд рублей",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d10358810",
+   "title": "Mercedes-Benz заморозил инвестиции в производство в Германии",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/auto/news/2026/11/12/1244981-mercedes-benz-zamorozil-investitsii"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Mercedes-Benz заморозил инвестиции в производство в Германии» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d52942921",
+   "title": "В Японии задумались о национализации стратегически важных предприятий",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/politics/13/11/2026/6af691760a51d90fe79da4ff"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Государство может начать национализировать частные заводы, остановка которых грозит дефицитом важных материалов. Власти намерены обновлять оборудование за cчет бюджетных средств, а затем возвращать предприятия прежним владельцам",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/politics/13/11/2026/6af691760a51d90fe79da4ff"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d84130997",
+   "title": "Во Франции за €321 тыс. продали сервиз дочери Николая I",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6af65365695dacaedbae4ef9"
+    ]
+   ],
+   "sum": "€321 тыс",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "Чайно-кофейный сервиз, принадлежавший княгине Ольге Николаевне, дочери императора Николая I, был продан на аукционе Aguttes во французском Нёйи-сюр-Сен за &euro;321 тыс.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6af65365695dacaedbae4ef9"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "сервиз дочери Николая I",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "сервиз дочери Николая I",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g4a14848a (общие редкие слова: никола, продал) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d18258098",
+   "title": "Кушнер: новый раунд переговоров по Украине пройдёт на следующей неделе",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/12/kushner-novij-raund-peregovorov"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92294918",
+   "title": "Mercedes приостанавливает инвестиции в Германии. Рассматривается закрытие заводов",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/12/76762533/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-12",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:fontanka.ru",
+      "https://www.fontanka.ru/2026/11/12/76762533/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Mercedes-Benz заморозил инвестиции в производство в Германии» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d63506939",
+   "title": "Как китайские технологии меняют лицо гонконгских IPO",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261113/gonkong-875152611.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d99853917",
+   "title": "Кушнер заявил об участии Европы в следующем раунде переговоров по Украине",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261113/peregovory-2131250671.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10290742",
+   "title": "Кушнер пообещал объявить детали следующего раунда переговоров по Украине",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261113/peregovory-2131249545.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02188774",
+   "title": "Россия и Украина согласились на участие Европы в следующем раунде",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053143814"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Россия и Украина договорились расширить состав следующего переговорного раунда и включить в него европейских партнеров.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053143814"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d90922323",
+   "title": "«Отвалите от бизнеса»: предпринимателю из Архангельска пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/business/2026/11/13/76761549/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d58332923",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d61034341",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48807068",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/business/2026/11/13/76761530/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33479190",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86437098",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/business/2026/11/13/76761536/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d13456288",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/business/2026/11/13/76761524/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d13343008",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16228288",
+   "title": "В сети вирусятся ролики из пермского магазина с импортными товарами — смотрим, что там продают, какие цены и откуда везут",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/food/2026/11/13/76758052/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d42169587",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/business/2026/11/13/76761539/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d80330866",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97793450",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/business/2026/11/13/76761542/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d45070845",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94344480",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/business/2026/11/13/76761546/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d54678184",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73868989",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/business/2026/11/13/76761540/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d80823700",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00900137",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/business/2026/11/13/76761529/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d96865423",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34766914",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/business/2026/11/13/76761527/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d89713632",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d21073535",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/business/2026/11/13/76761522/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d65829771",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19228271",
+   "title": "«Отвалите от российского бизнеса»: предпринимателю пришлось продать бар русских вин из-за долгов",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/business/2026/11/13/76761547/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Отвалите от российского бизнеса»: предпринимателю пришлось » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d87917928",
+   "title": "Новый раунд переговоров и обмен пленными: Зеленский встретился с посланниками Трампа — главные заявления",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/politics/2026/11/13/76762565/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
