@@ -4057,3 +4057,30 @@
 {"id": "g3f0400db", "field": "eco.rationale", "class": "other", "was": "—", "now": "мотив со слов CorpSoft24", "tag": "m217"}
 {"id": "g6bf41023", "field": "date", "class": "wrong_date", "was": "2026-08-24 (день забора)", "now": "2026", "tag": "m217"}
 {"id": "g6bf41023", "field": "eco.context", "class": "verbatim", "was": "абзац Frank Media дословно; «мера проблему не решила» без источника", "now": "пересказ, вывод снят", "tag": "m217"}
+{"id": "g2c9ecddc", "field": "law.struct", "class": "other", "was": "—", "now": "ЕГРЮЛ: доли «Пруффми» у ООО «Технояк» и ООО «Интерсерч Солюшнс» — юрлиц группы «Яндекса»", "tag": "m105"}
+{"id": "g2c9ecddc", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Пруффми»", "tag": "m105"}
+{"id": "ga2e9c5b1", "field": "buyer", "class": "wrong_buyer", "was": "Александр Кахидзе (физлицо)", "now": "ООО «КЛК Холдинг» (ЕГРЮЛ: 50% → 100% 12.04.2023; 99% у Кахидзе)", "tag": "m105"}
+{"id": "ga2e9c5b1", "field": "law.struct", "class": "wrong_seller", "was": "вышли «Сиэмэй Сиджиэм Интермодал Россия» и «СиСиАйЭс Рус» (по 50%)", "now": "вышло только ООО «СиСиАйЭс Рус» (50%); первая структура вышла в 2021 году", "tag": "m105"}
+{"id": "ga2e9c5b1", "field": "extra", "class": "verbatim", "was": "пересказ подзаголовка Ведомостей", "now": "свой пересказ", "tag": "m105"}
+{"id": "gec6e9db6", "field": "profile.inn", "class": "profile_wrong_inn", "was": "Bonava (продавец): ИНН 7841322136 проданной дочки", "now": "Bonava — иностранная; ИНН у нового профиля ООО «Бонава Санкт-Петербург» (предмет)", "tag": "m105"}
+{"id": "gec6e9db6", "field": "target", "class": "party_text_no_profile", "was": "предмет текстом «ООО «Бонава Санкт-Петербург»»", "now": "профиль ООО «Бонава Санкт-Петербург» (ИНН 7841322136)", "tag": "m105"}
+{"id": "geda130b6", "field": "target", "class": "profile_wrong_company", "was": "3S Group (ООО «Три ЭС ГРУП»)", "now": "ООО «Три Эс Проперти Девелопмент» (ИНН 7708271434)", "tag": "m105"}
+{"id": "g334b5760", "field": "profile.inn", "class": "profile_wrong_inn", "was": "ООО «Амара Лаб» с ИНН 9704133758 (ООО «Амара Протектив Лаб»)", "now": "ИНН 7722327304 (ОГРН 1157746436462)", "tag": "m105"}
+{"id": "g334b5760", "field": "sum", "class": "sum_meaning", "was": "55–500 млн ₽ (по оценке)", "now": "Не раскрыта (оценки аналитиков — в eco.val)", "tag": "m105"}
+{"id": "g334b5760", "field": "title", "class": "title_standard", "was": "Рексофт приобрела интегратора ПО Амара Лаб", "now": "«Рексофт» купил «Амара Лаб»", "tag": "m105"}
+{"id": "g57a44f07", "field": "profile.inn", "class": "profile_wrong_company", "was": "ООО «Эйдос-Робототехника» (ИНН 1655268265)", "now": "АО «Эйдос Робототехника» (ИНН 1655497610)", "tag": "m105"}
+{"id": "g139db8c2", "field": "profile.inn", "class": "profile_wrong_inn", "was": "ГК «Аквариус» — ООО «ПК Аквариус» (7701256405), операционная дочка", "now": "АО «Группа Аквариус» (7751334708), головное юрлицо", "tag": "m105"}
+{"id": "ga75a4d0a", "field": "buyer", "class": "wrong_buyer", "was": "Евроонко (ООО «ЦИМТ»)", "now": "ООО «812 Капитал» (ЕГРЮЛ: 100% «Юни Медика» с 20.06.2025)", "tag": "m105"}
+{"id": "ga75a4d0a", "field": "sum", "class": "sum_meaning", "was": "До 2 млрд ₽ (по оценке)", "now": "Не раскрыта (1,2–2 млрд ₽ — оценка актива экспертами)", "tag": "m105"}
+{"id": "g4b275e25", "field": "buyer", "class": "wrong_buyer", "was": "ООО СЗ «Азалия» (Киевская площадь)", "now": "ООО «Достижение» (ЕГРЮЛ: 100% «ВГ Холдинга» с 16.04.2025)", "tag": "m105"}
+{"id": "g90317ad0", "field": "buyer", "class": "wrong_buyer", "was": "ООО «УК «Алфигрупп» (управляющая компания)", "now": "ООО «Строймикс» (ЕГРЮЛ: 100% с 12.02.2024)", "tag": "m105"}
+{"id": "g90317ad0", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-02-12 (ЕГРЮЛ)", "tag": "m105"}
+{"id": "g576de71f", "field": "eco.share", "class": "wrong_share", "was": "12,5% МК ООО «Хомо Ауктус» (группа «Моторика»); покупатель — дочерняя компания…", "now": "12,5% доли в МК ООО «Хомо Ауктус»", "tag": "m105"}
+{"id": "g576de71f", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-12-27 (ЕГРЮЛ)", "tag": "m105"}
+{"id": "g560a4b70", "field": "title", "class": "title_standard", "was": "PPF Real Estate продала бизнес-центр Comcity структуре Авигдора Ярдени", "now": "Inventa купил бизнес-центр Comcity у PPF Real Estate", "tag": "m105"}
+{"id": "g560a4b70", "field": "date", "class": "wrong_date", "was": "2022-08-01", "now": "2022 (середина октября, дня нет)", "tag": "m105"}
+{"id": "g560a4b70", "field": "sum", "class": "sum_meaning", "was": "25–30 млрд ₽", "now": "Не раскрыта; 25–27 млрд ₽ — оценка Николая Горюнова (IBC) в eco.val", "tag": "m105"}
+{"id": "g560a4b70", "field": "eco.share", "class": "wrong_share", "was": "описание очередей бизнес-парка", "now": "100% Comcity Office B.V.", "tag": "m105"}
+{"id": "g560a4b70", "field": "extra", "class": "unsupported_claim", "was": "«21 июля», фирма «Гордеевский»", "now": "нет в источниках — снято", "tag": "m105"}
+{"id": "g560a4b70", "field": "src", "class": "source_not_about", "was": "РИА Недвижимость (аренда Совкомбанка, 2025)", "now": "снят", "tag": "m105"}
+{"id": "g560a4b70", "field": "eco.context", "class": "language", "was": "пересказ прессы с «(Коммерсантъ)», издание без текста в src", "now": "пересказ Ведомостей с атрибуцией", "tag": "m105"}
