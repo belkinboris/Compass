@@ -1356,21 +1356,21 @@ def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
             assert part.lower() in body.lower(), (fid, part)
         assert "ё" not in body
         n = page.evaluate(f"firmDeals('{fid}').full.length")
-        assert n >= 2 and page.locator('.fp a[href^="#/deal/"]').count() == n
+        assert n >= 2 and page.locator('.fp a[href^="#/deal/"]:not(.q-last)').count() == n
         # 12 ноября 2026: видно четыре сделки, остальные — по кнопке «Все сделки»; под партнерами — «Вся команда»
-        shown = page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length")
+        shown = page.locator('.fp a[href^="#/deal/"]:not(.q-last)').evaluate_all("e=>e.filter(x=>x.offsetParent).length")
         assert shown == min(n, 4), (fid, shown, n)
         assert page.locator(".fp a.fp-team").count() == 1, fid
         # нажимается вся плашка сделки, а не только слова «Карточка сделки»
         if fid != "orion":
-            first_id = page.locator('.fp a[href^="#/deal/"]').first.get_attribute("href")
+            first_id = page.locator('.fp a[href^="#/deal/"]:not(.q-last)').first.get_attribute("href")
             page.locator(".fp .fp-click").first.click(position={"x": 12, "y": 12})
             page.wait_for_function("h=>location.hash===h", arg=first_id)
             page.go_back()
             page.wait_for_selector(f".fp.{cls}")
         if n > 4:
             page.click("#fpAllDeals")
-            assert page.locator('.fp a[href^="#/deal/"]').evaluate_all("e=>e.filter(x=>x.offsetParent).length") == n
+            assert page.locator('.fp a[href^="#/deal/"]:not(.q-last)').evaluate_all("e=>e.filter(x=>x.offsetParent).length") == n
     # «Никольская» попросила не показывать в профиле сделку по «Петроваксу»: в счете и на странице ее нет
     assert page.evaluate("firmDeals('nikolskaya').full.every(d=>d.id!=='g82725e96')")
     assert "Петровакс" not in page.locator("#app").inner_text()

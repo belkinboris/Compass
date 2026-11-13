@@ -2398,7 +2398,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .fp{font-size:15px}.fp-in{padding:0 18px}
   .fp-sb .q-hero{padding-bottom:40px}.fp-sb .q-bar{flex-direction:column;align-items:stretch}.fp-sb .q-hmeta{padding:12px 0 0}.fp-sb .q-lt{padding:0 16px;height:52px}.fp-sb .q-lt span{display:none}
   .fp-sb .q-body{grid-template-columns:1fr;gap:28px;margin-top:34px}.fp-sb .q-mark img{width:120px}.fp-sb .q-hero h1{font-size:33px}.fp-sb .q-hero p{font-size:15.5px}.fp-sb .q-btns{flex-direction:column}
-  .fp-sb .q-stats{grid-template-columns:1fr 1fr;padding:24px 20px;gap:22px}.fp-sb .q-stats b{font-size:28px}.fp-sb h2{font-size:27px;flex-direction:column;align-items:flex-start;gap:4px;margin-top:44px}
+  .fp-sb .q-stats{grid-template-columns:1fr 1fr;padding:24px 20px;gap:22px}.fp-sb .q-last{grid-column:1/-1}.fp-sb .q-stats b{font-size:28px}.fp-sb h2{font-size:27px;flex-direction:column;align-items:flex-start;gap:4px;margin-top:44px}
   .fp-sb .q-feat{grid-template-columns:1fr}.fp-sb .q-feat .q-img{height:170px;order:-1}.fp-sb .q-feat .q-img img{width:120px}.fp-sb .q-feat .q-t{padding:22px 20px}.fp-sb .q-feat h3{font-size:22px}
   .fp-sb .q-grid,.fp-sb .q-pi,.fp-sb .q-team{grid-template-columns:1fr}.fp-sb .q-pi{gap:30px}
   .fp-sb .q-contact{grid-template-columns:1fr;padding:30px 22px}.fp-sb .q-contact .q-tag{font-size:26px}.fp-sb .q-ft a{margin-left:0;width:100%}
@@ -2468,6 +2468,8 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 .fp-nk .q-r{background:var(--soft);border-left:1px solid var(--line);padding:22px 36px}
 .fp-nk .q-stat{padding:20px 0;border-bottom:1px solid #D9D6D2}.fp-nk .q-stat:last-child{border-bottom:0}
 .fp-nk .q-stat b{display:block;font-family:var(--f-display);font-weight:400;font-size:36px;line-height:1;color:var(--firm)}
+.fp .q-last{display:block;text-decoration:none;color:inherit}.fp .q-last small:first-child{margin-top:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase}.fp .q-last span{font-weight:600;line-height:1.35;margin-top:9px}.fp .q-last:hover span{text-decoration:underline;text-underline-offset:3px}
+.fp-nk .q-last span{font-size:15.5px;color:var(--firm)}.fp-sb .q-last span{font-size:16px;color:var(--brown)}
 .fp-nk .q-stat span{display:block;font-size:14px;margin-top:10px;color:#4A5560}.fp-nk .q-stat small{display:block;font-size:12px;color:var(--mut);margin-top:5px}
 .fp-nk h2{font-family:var(--f-display);font-weight:400;font-size:28px;color:var(--ink);margin:60px 0 0;padding-bottom:14px;border-bottom:1.5px solid #8FA6BD;display:flex;justify-content:space-between;align-items:baseline;gap:20px}
 .fp-nk h2 small{font:400 12.5px 'Commissioner',sans-serif;color:var(--mut)}
@@ -2504,7 +2506,7 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
 @media(max-width:860px){
   .fp-nk{padding-bottom:48px}.fp-nk .q-hero{grid-template-columns:1fr}.fp-nk .q-l{padding:30px 20px 32px}.fp-nk .q-id{flex-direction:column;align-items:flex-start;gap:14px}.fp-nk .q-id img{height:40px}.fp-nk .q-kind{font-size:10.5px}
   .fp-nk h1{margin-top:24px}.fp-nk .q-rule{margin:22px 0 20px}.fp-nk .q-lead{font-size:15.5px}.fp-nk .q-btns{flex-direction:column}
-  .fp-nk .q-r{border-left:0;border-top:1px solid var(--line);padding:8px 20px;display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.fp-nk .q-stat{border-bottom:0;padding:16px 0}.fp-nk .q-stat b{font-size:30px}
+  .fp-nk .q-r{border-left:0;border-top:1px solid var(--line);padding:8px 20px;display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.fp-nk .q-stat{border-bottom:0;padding:16px 0}.fp-nk .q-last{grid-column:1/-1;border-bottom:1px solid #D9D6D2}.fp-nk .q-stat b{font-size:30px}
   .fp-nk h2{font-size:23px;flex-direction:column;gap:4px;margin-top:44px}
   .fp-nk .q-deals,.fp-nk .q-prs,.fp-nk .q-team{grid-template-columns:1fr}.fp-nk .q-prs>div{border-right:0;border-bottom:1px solid var(--line)!important;padding:20px}.fp-nk .q-prs>div:last-child{border-bottom:0!important}
   .fp-nk .q-inds,.fp-nk .q-proj{grid-template-columns:1fr}.fp-nk .q-inds>i{padding-top:0}.fp-nk .q-proj i{border-bottom:0;padding:16px 0 0}.fp-nk .q-proj span{padding-top:6px}
@@ -10172,6 +10174,10 @@ function renderFirmPage(f){
     ["Подготовиться к собеседованию", `Готовлюсь к собеседованию в юридическую фирму «${f.n}». Коротко, по пунктам: ее последние сделки — списком со ссылками на карточки «Компаса» и с ролью фирмы в каждой — за покупателя или продавца; в каких отраслях работает чаще всего. В конце — три вопроса, которые стоит задать работодателю.`],
     ["Подготовиться к деловой встрече", `Готовлюсь к встрече с юридической фирмой «${f.n}». Коротко, по пунктам: ее последние сделки — списком со ссылками на карточки «Компаса» и с ролью фирмы в каждой; на чьей стороне и в каких отраслях она работает чаще всего; с какими консультантами встречалась на сделках. В конце — пять вопросов, которые стоит задать на встрече.`]];
   const ask = `<div class="fp-ask" id="fpAsk" hidden><span>Спросить ассистента о фирме</span><div>${ASKS.map(([t],i)=>`<button type="button" data-ask="${i}">${esc(t)}</button>`).join("")}</div></div>`;
+  /* Вместо плитки с крупным числом сделок — последняя сделка фирмы со ссылкой
+     на карточку (владелец, 13 ноября 2026: «убери блок, где большая цифра
+     сколько сделок»). Сделок нет — плитки нет. */
+  const last = cls => deals.length ? `<a class="${cls} q-last" href="#/deal/${deals[0].d.id}"><small>Последняя сделка в Компасе</small><span>${esc(deals[0].title)}</span><small>${esc(fmtDateLong(deals[0].d.date))}</small></a>` : "";
   const note = `Практики, отрасли, команда и контакты — со слов фирмы, с ее сайта. Компас не составляет рейтингов и не рекомендует консультантов.`;
   if(f.id==="kkmp"){
     const meta = x => esc([x.d.type||"M&A", fmtDateLong(x.d.date), x.d.ind].filter(Boolean).join(" · "));
@@ -10206,7 +10212,7 @@ function renderFirmPage(f){
         <div class="q-rule"></div>
         <p class="q-lead">${esc(p.lead)}</p>
         <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}
-      </div><div class="q-r"><div class="q-stat"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, по открытым источникам</small></div>${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span>${c?`<small>${esc(c)}</small>`:""}</div>`).join("")}</div></section>
+      </div><div class="q-r">${last("q-stat")}${p.stats.map(([a,b,c])=>`<div class="q-stat"><b>${esc(a)}</b><span>${esc(b)}</span>${c?`<small>${esc(c)}</small>`:""}</div>`).join("")}</div></section>
       </div>${prep}<div class="fp-in">
       <h2>Сделки в Компасе</h2>
       <p class="q-sub">Сделки, где фирма названа консультантом в открытых источниках.</p>
@@ -10238,7 +10244,7 @@ function renderFirmPage(f){
     </div></section>
     ${prep}
     <div class="fp-in">
-      <div class="q-stats"><div><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>${p.since}, из открытых источников</small></div>${p.stats.map(([a,b,c])=>`<div><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div>
+      <div class="q-stats">${last("q-st")}${p.stats.map(([a,b,c])=>`<div><b>${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></div>`).join("")}</div>
       <h2>Сделки с участием фирмы<small>${nWord} в Компасе</small></h2>
       ${first?`<div class="q-feat"><div class="q-t"><div class="q-meta">${meta(first)}</div><h3>${esc(first.title)}</h3><div class="q-role">${esc(first.role)}</div>${oth(first)}${ft(first,true)}</div><div class="q-img">${mark}</div></div>`:""}
       <div class="q-grid">${deals.slice(1).map(x=>`<div class="q-card"><div class="q-top">${meta(x)}</div><div class="q-in"><h3>${esc(x.title)}</h3><div class="q-role">${esc(x.role)}</div>${oth(x)}${ft(x)}</div></div>`).join("")}</div>
