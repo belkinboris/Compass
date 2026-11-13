@@ -4161,3 +4161,28 @@
 {"id": "g15386e04", "field": "law.terms", "class": "unsupported_claim", "was": "поэтапное высвобождение 1/6 пакета ежемесячно", "now": "только lock-up шесть месяцев", "tag": "m216"}
 {"id": "g15386e04", "field": "eco.context", "class": "other", "was": "BeringPoint", "now": "BearingPoint", "tag": "m216"}
 {"id": "g57b2c1aa", "field": "deal", "class": "not_a_deal", "was": "соглашение ivideon и Skynet о запуске инвестиционного проекта Vizor", "now": "снята: нет доли, инвестора и цены", "tag": "m216"}
+{"id": "g7ea48d66", "field": "title", "class": "title_standard", "was": "«Дом.РФ» продает на торгах историческое здание в Петергофе", "now": "«Дом.РФ» выставил на торги флигель дачи Кожевникова в Петергофе", "tag": "m219"}
+{"id": "g7ea48d66", "field": "asset", "class": "wrong_target", "was": "флигель старинной дачи в Петергофе", "now": "Флигель дачи Кожевникова в Петергофе (Собственный пр., 3; 1,8 тыс. кв. м)", "tag": "m219"}
+{"id": "gddb34475", "field": "title", "class": "title_standard", "was": "«Газпромбанк-инвест» продал торговый центр «Город Косино»", "now": "«Афкап» купил ТЦ «Город Косино» у «Газпромбанк-инвеста»", "tag": "m219"}
+{"id": "gddb34475", "field": "date", "class": "wrong_date", "was": "2026-09-04 (статья)", "now": "2026-09-02 (ЕГРЮЛ)", "tag": "m219"}
+{"id": "gddb34475", "field": "eco.share", "class": "wrong_share", "was": "Торговый центр «Город Косино» площадью 130 тыс. кв. м открылся…", "now": "100% доли в ООО «Строй инвест»", "tag": "m219"}
+{"id": "gddb34475", "field": "src", "class": "aggregator_source", "was": "короткая заметка «Коммерсанта» первой", "now": "основная статья «Инвестор прикупил торговли» первой", "tag": "m219"}
+{"id": "gddb34475", "field": "companies.g218f246e.desc", "class": "profile_text", "was": "описание с ходом сделки", "now": "кто это", "tag": "m219"}
+{"id": "g749a7844", "field": "title", "class": "title_standard", "was": "Московский «ПИК» планирует продать еще один свой проект в центре Петербурга", "now": "«Геометрия» может купить у ПИК участки на Малом проспекте Петроградской стороны", "tag": "m219"}
+{"id": "g749a7844", "field": "law.appr", "class": "version_as_fact", "was": "Сначала нынешний владелец должен пройти Градостроительную комиссию…", "now": "по неофициальным данным…", "tag": "m219"}
+{"id": "gbdefd889", "field": "title", "class": "title_standard", "was": "ПИК готовится продать свой участок в Петербурге за 8 млрд рублей", "now": "«Геометрия» может купить у ПИК участок у Шкиперского протока в Петербурге", "tag": "m219"}
+{"id": "gbdefd889", "field": "sum", "class": "sum_meaning", "was": "цена сделки со слов источников в eco.val, sum пуст", "now": "8 млрд ₽ (по оценке), расчет — в eco.fin", "tag": "m219"}
+{"id": "gbdefd889", "field": "eco.context", "class": "unsupported_claim", "was": "почти договорился: переговоры на финальной стадии", "now": "может стать первым проданным активом; окончательных договоренностей нет", "tag": "m219"}
+{"id": "g39e9e9c2", "field": "title", "class": "title_standard", "was": "Отель «Азимут» в Ярославле ушел на торгах его собственному оператору", "now": "Структура Azimut Hotels купила на торгах гостиницу Azimut в Ярославле", "tag": "m219"}
+{"id": "g39e9e9c2", "field": "eco.sum", "class": "other", "was": "361,9 млн ₽ (при стартовой цене 723,9 млн ₽)", "now": "361,9 млн ₽", "tag": "m219"}
+{"id": "g39e9e9c2", "field": "eco.context", "class": "language", "was": "по данным «Коммерсанта», как выяснили «Ведомости»", "now": "без пересказа прессы; по данным СПАРК-Интерфакса", "tag": "m219"}
+{"id": "g39e9e9c2", "field": "law.struct", "class": "unsupported_claim", "was": "вторая попытка 4 сентября по той же стартовой цене", "now": "снято", "tag": "m219"}
+{"id": "g39e9e9c2", "field": "law.appr", "class": "other", "was": "жалоба в УФАС как согласование", "now": "в eco.context", "tag": "m219"}
+{"id": "g0d72e1d5", "field": "sum", "class": "sum_meaning", "was": "0,8–1 млрд ₽ (по прежним предложениям на рынке)", "now": "Не раскрыта; оценка NF Group — в eco.val", "tag": "m219"}
+{"id": "g0d72e1d5", "field": "eco.context", "class": "wrong_date", "was": "Сделка закрыта в ноябре 2024 года", "now": "по ЕГРЮЛ — 19 сентября 2024 года, в ноябре о ней написали", "tag": "m219"}
+{"id": "g0d72e1d5", "field": "eco.rationale", "class": "verbatim", "was": "10 слов подряд из «Коммерсанта»", "now": "пересказ", "tag": "m219"}
+{"id": "g0d72e1d5", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Петроэстейт»", "tag": "m219"}
+{"id": "g04edfc17", "field": "title", "class": "title_standard", "was": "«Дедал» получил долю Tawazun (36%) в Aurus", "now": "«Дедал» купил 36% Aurus у Tawazun", "tag": "m219"}
+{"id": "g04edfc17", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-12-23 (ЕГРЮЛ)", "tag": "m219"}
+{"id": "g04edfc17", "field": "eco.context", "class": "foreign_fact", "was": "сумма сделки «Газпром Теха» 12–13 млрд ₽", "now": "снято, поздняя судьба — одной фразой", "tag": "m219"}
+{"id": "g04edfc17", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "36% доли в ООО «Аурус»", "tag": "m219"}
