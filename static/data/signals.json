@@ -1564,7 +1564,7 @@
    "company_id": "sheremetyevo",
    "date": "2026",
    "kind": "sell",
-   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
+   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Библио-Глобус Туроператор",
    "source": [
     "Деловой Петербург",
     "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
@@ -1634,7 +1634,7 @@
    "company_id": "g1279140f",
    "date": "2026",
    "kind": "for_sale",
-   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
+   "summary": "Библио-Глобус Туроператор — обсуждается продажа компании или доли",
    "source": [
     "Деловой Петербург",
     "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
@@ -1840,6 +1840,34 @@
    "strength": "normal"
   },
   {
+   "id": "s9c45f2308",
+   "company_id": "gf1f56e08",
+   "date": "2025-09-19",
+   "kind": "buy",
+   "summary": "Газпромбанк — обсуждается вложение в ГК «Медскан»",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
+   ],
+   "origin": "card",
+   "deal_id": "g2197ed53",
+   "strength": "normal"
+  },
+  {
+   "id": "s63a8d4b66",
+   "company_id": "g729ef6c5",
+   "date": "2025-09-19",
+   "kind": "investor",
+   "summary": "ГК «Медскан» — обсуждается вход инвестора в капитал; возможный покупатель — Газпромбанк",
+   "source": [
+    "Ведомости",
+    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
+   ],
+   "origin": "card",
+   "deal_id": "g2197ed53",
+   "strength": "normal"
+  },
+  {
    "id": "s119c8a905",
    "company_id": "g00f14033",
    "date": "2025-09-11",
@@ -1894,34 +1922,6 @@
    "origin": "card",
    "deal_id": "g7b4be1c4",
    "strength": "strong"
-  },
-  {
-   "id": "s9c45f2308",
-   "company_id": "gf1f56e08",
-   "date": "2025-09-01",
-   "kind": "buy",
-   "summary": "Газпромбанк — обсуждается вложение в ГК «Медскан»",
-   "source": [
-    "Ведомости",
-    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
-   ],
-   "origin": "card",
-   "deal_id": "g2197ed53",
-   "strength": "normal"
-  },
-  {
-   "id": "s63a8d4b66",
-   "company_id": "g729ef6c5",
-   "date": "2025-09-01",
-   "kind": "investor",
-   "summary": "ГК «Медскан» — обсуждается вход инвестора в капитал; возможный покупатель — Газпромбанк",
-   "source": [
-    "Ведомости",
-    "https://www.vedomosti.ru/business/articles/2025/09/19/1140473-gazprombank-mozhet"
-   ],
-   "origin": "card",
-   "deal_id": "g2197ed53",
-   "strength": "normal"
   },
   {
    "id": "se3aa8a582",

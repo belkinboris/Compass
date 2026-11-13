@@ -342,6 +342,9 @@ def site_channel_edits():
     return None
 
 
+SITE_UNREACHABLE = False   # токен к сайту есть, а сайт не ответил
+
+
 def site_channels():
     """Адреса каналов, которые сайт услышал от самого Telegram:
     {'chat_id': основной, 'realty_chat_id': недвижимость} — или {}, если
@@ -350,13 +353,19 @@ def site_channels():
     token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
     if not token:
         return {}
-    try:
-        import httpx
-        r = httpx.get('%s/api/moderation/channel' % site, params={'token': token}, timeout=20)
-        if r.status_code == 200:
-            return r.json() or {}
-    except Exception as e:                                    # noqa: BLE001
-        print('Адрес канала у сайта не спросить (%s).' % e)
+    import time as _time
+    for attempt in range(3):   # связь с сайтом рвется (13 ноября 2026) — три попытки
+        try:
+            import httpx
+            r = httpx.get('%s/api/moderation/channel' % site, params={'token': token}, timeout=20)
+            if r.status_code == 200:
+                return r.json() or {}
+        except Exception as e:                                # noqa: BLE001
+            print('Адрес канала у сайта не спросить (%s).' % e)
+        if attempt < 2:
+            _time.sleep(5)
+    global SITE_UNREACHABLE
+    SITE_UNREACHABLE = True
     return {}
 
 
@@ -1087,6 +1096,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # реальный, воспроизводимый сетевой вызов там, где по докстрингу и
     # тесту (`test_main_without_token_never_touches_network_or_writes`)
     # его быть не должно.
+    global SITE_UNREACHABLE
+    SITE_UNREACHABLE = False
     site = site_channels() if token else {}
     chat_id = channel_address(site) if token else ''
     # КАНАЛ НЕДВИЖИМОСТИ (2 октября 2026, см. `channels.py`). Его посты
@@ -1099,7 +1110,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     realty_chat = realty_channel_address(site, chat_id) if token else ''
     if token and not realty_chat:
         print('Адрес канала «Компас - Недвижимость» неизвестен — посты о '
-              'недвижимости идут в основной канал, как раньше.')
+              'недвижимости %s.' % ('ждут следующего прогона (сайт не ответил)'
+                                     if SITE_UNREACHABLE else 'идут в основной канал, как раньше'))
     addr = {channels.MAIN: chat_id, channels.REALTY: realty_chat}
     data = json.load(open(DATA, encoding='utf-8'))
     posts = data.setdefault('telegram_posts', {})
@@ -1553,6 +1565,14 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         if kind in ('send', 'milestone'):
             text = payload if kind == 'send' else payload[1]
             route = channels.channels_for(deal, realty_known=bool(realty_chat))
+            if (not realty_chat and SITE_UNREACHABLE
+                    and channels.REALTY in channels.channels_for(deal, realty_known=True)):
+                # Адрес канала недвижимости не узнали (сайт не ответил) — пост
+                # ждет следующего прогона, а не уходит в основной канал
+                # (13 ноября 2026: «Газпром межрегионгаз», офис в Челябинске,
+                # вышел в «Проект Компас» вместо «Компас - Недвижимость»).
+                print('  %s: адрес канала недвижимости неизвестен — пост отложен до следующего прогона' % did)
+                continue
             mids, error = post_to_channels(client, token, addr, route, text, buttons)
             if error:
                 failed.append((did, error))
