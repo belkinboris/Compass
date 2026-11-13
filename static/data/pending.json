@@ -543,9 +543,9 @@
   },
   {
    "id": "g6fe89f91",
-   "date": "2024-09-30",
+   "date": "2024",
    "title": "«Севергрупп инвестиции» купила 19,91% «Автостэлс»",
-   "ind": "Не определена",
+   "ind": "Автопром",
    "type": "Инвестиция",
    "status": "Закрыта",
    "src": [
@@ -559,26 +559,31 @@
     "sum": "—",
     "share": "—",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "По данным ГИР БО, выручка ООО «Автостэлс» за 2024 год — 12,5 млрд ₽ (за 2023 год — 10,8 млрд ₽), чистая прибыль — 128,3 млн ₽ (за 2023 год — прибыль 92,5 млн ₽). Средняя численность работников за 2025 год — 420 человек (ЕГРЮЛ).",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "«Автостэлс» — крупная платформа торговли автозапчастями; новые деньги компания планирует направить на развитие логистики и IT-систем и на закупку запаса ходовых запчастей. «Севергрупп инвестиции» вкладывается в быстрорастущие прибыльные компании и помогает им выйти на рынки капитала — это и привлекло инвестора к сделке.",
     "finadv": "—"
    },
    "law": {
     "struct": "—",
     "appr": "—",
-    "adv": [],
+    "adv": [
+     [
+      "Юридический консультант «Автостэлс»",
+      "White Square",
+      "партнер Антон Куликов, советник Валерий Лавров, юрист Григор Восканян"
+     ]
+    ],
     "terms": "—"
    },
-   "buyer_name": "«Севергрупп инвестиции»",
    "asset": "«Автостэлс»",
    "events": [
     {
      "kind": "closed",
-     "date": "2024-09-30",
+     "date": "2024",
      "title": "Сделка завершена",
-     "note": "«Севергрупп инвестиции» купила 19,91% «Автостэлс». White Square консультирует «Автостэлс» в сделке по приобретению «Севергрупп инвестиции» 19,91% компании Команда White Square выступила юридическим консультантом «Автостэлс», ведущей платформы по торговле…",
+     "note": "«Севергрупп инвестиции» купила 19,91% «Автостэлс». Сделку для «Автостэлс» юридически сопровождала команда White Square. Новые деньги компания собирается потратить на склады, логистику и IT, а также закупить запас ходовых запчастей.",
      "source": [
       "Телеграм-канал @whitesquarenews",
       "https://t.me/whitesquarenews/153"
@@ -603,7 +608,26 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:10:03+00:00"
+   "pending_since": "2026-11-09T13:10:03+00:00",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "reviewed": "2026-11-13",
+   "buyer": "gc267fcd7",
+   "target": "ge01599c3",
+   "accepted_notes": {
+    "searched": [
+     "WebSearch: \"Севергрупп инвестиции\" \"Автостэлс\" 19,91%",
+     "WebSearch: \"Автостэлс\" торговля автозапчастями оборот выручка",
+     "WebSearch: White Square Севергрупп Автостэлс сделка пресс-релиз",
+     "WebSearch: \"Автостэлс\" Мордашов инвестиции 2024 доля сделка",
+     "WebFetch: datanewton.ru/search?query=Автостэлс и query=7721568730 (подтвержден ИНН цели)"
+    ]
+   },
+   "accepted": "2026-11-13",
+   "accepted_hash": "0e4a99b3c15d.0b7c51",
+   "second_read": "2026-11-13",
+   "second_read_hash": "0e4a99b3c15d.0b7c51"
   },
   {
    "id": "g8aea35e0",
@@ -646,15 +670,19 @@
   },
   {
    "id": "g4d2a7b61",
-   "date": "2024-02-06",
-   "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская",
+   "date": "2024",
+   "title": "«Интер РАО» купила у «НордЭнергоГрупп» 50% «Каширской ГРЭС»",
    "ind": "Не определена",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "Телеграм-канал @kkmpconnect",
      "https://t.me/kkmpconnect/1449"
+    ],
+    [
+     "Интерфакс",
+     "https://www.interfax.ru/business/944337"
     ]
    ],
    "from_ingest": true,
@@ -678,7 +706,23 @@
    "from_raw": {
     "draft_id": "d73176431",
     "title": "Команда юристов ККМП представляла интересы ООО «НордЭнергоГрупп» (дочернее общество Севергрупп) в сделке по продаже своей 50%-ной доли в ООО «Каширская ГРЭС» компаниям группы Интер РАО. ООО «Каширская"
-   }
+   },
+   "buyer_name": "Интер РАО",
+   "seller": "НордЭнергоГрупп",
+   "asset": "Каширская ГРЭС",
+   "reviewed": "2026-11-13",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2024",
+     "title": "Сделка завершена",
+     "note": "«Интер РАО» выкупила у «НордЭнергоГрупп» вторую половину совместного предприятия «Каширская ГРЭС» — консолидировала 99,99% долей. Партнеры объяснили это желанием избежать задержек в модернизации станции: проектирование и производство оборудования уже шли успешно, и для их продолжения было решено оставить долю у одного участника.",
+     "source": [
+      "Интерфакс",
+      "https://www.interfax.ru/business/944337"
+     ]
+    }
+   ]
   },
   {
    "id": "g60130b7f",
@@ -1129,71 +1173,6 @@
    "pending_since": "2026-11-10T08:39:19+00:00"
   },
   {
-   "id": "gc06d6caf",
-   "date": "2024-03-01",
-   "title": "Mantsinen Group продала российскую «дочку» компании ее руководителя",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Телеграм-канал @BIRCHLEGAL",
-     "https://t.me/BIRCHLEGAL/834"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Mantsinen Group",
-   "asset": "российская «дочка» компании ее руководителя",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2024-03-01",
-     "title": "Сделка завершена",
-     "note": "Mantsinen Group продала российскую «дочку» компании ее руководителя. ⚡️ Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже дочернего общества Mantsinen Group российскому менеджменту. ❗️ Mantsinen Group – крупнейшая европейская…",
-     "source": [
-      "Телеграм-канал @BIRCHLEGAL",
-      "https://t.me/BIRCHLEGAL/834"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "российская «дочка» компании ее руководителя",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://t.me/BIRCHLEGAL/834"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Mantsinen Group",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://t.me/BIRCHLEGAL/834"
-     }
-    ]
-   },
-   "pending_since": "2026-11-10T08:39:21+00:00"
-  },
-  {
    "id": "gb14c2bae",
    "date": "2026-11-10",
    "title": "Китай выкупил российского производителя автокомпонентов",
@@ -1324,26 +1303,25 @@
   },
   {
    "id": "gbb89fc13",
-   "date": "2026-11-11",
-   "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»",
+   "date": "2026-11-10",
+   "title": "«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»",
    "ind": "Машиностроение",
    "type": "M&A",
    "status": "Обсуждается",
    "src": [
     [
-     "Mergers.ru",
-     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
     ]
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "170 млрд ₽",
     "share": "—",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "«Элко» пока небольшая: выручка за 2025 год — 41,5 млн рублей при убытке 31,8 млн, баланс — 1,9 млрд рублей, уставный капитал — 501 млн. Производство только планируется — компания подбирает поставщиков сырья внутри страны, часть договоров с ними уже подписана.",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "ОМК задумана как объединяющая структура всей российской микроэлектронной отрасли: кроме «Элко», в нее должны войти «Элемент», «Ангстрем» и «НМ-Тех», а все развитие корпорации до 2030 года оценивают в 1,1 трлн рублей. Цель — закрыть всю производственную цепочку своими силами, и для этого нужен собственный контрактный сборщик электроники.",
     "finadv": "—"
    },
    "law": {
@@ -1352,13 +1330,12 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "170 млрд ₽",
    "events": [
     {
      "kind": "negotiations",
-     "date": "2026-11-11",
+     "date": "2026-11-10",
      "title": "Переговоры",
-     "note": "В рамках создания «Объединенной микроэлектронной корпорации» («ОМК») в ее контур может войти фабрика — «Элко». Согласно проекту стратегии, покупка планируется в 2027 г. На этот год в рамках стратегии на разные проекты предусмотрено 170 млрд руб. По всей…",
+     "note": "Создаваемая «Объединенная микроэлектронная корпорация» рассматривает покупку фабрики «Элко» у НПЦ «ЭЛВИС» — пока как один из вариантов стратегии, сама покупка намечена на 2027 год. Цена не названа.",
      "source": [
       "Mergers.ru",
       "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
@@ -1369,7 +1346,43 @@
    "from_raw": {
     "draft_id": "d45381973",
     "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»"
-   }
+   },
+   "seller": "НПЦ «ЭЛВИС»",
+   "asset": "«Элко»",
+   "reviewed": "2026-11-13",
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.target_fin": []
+   },
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+    ]
+   ],
+   "deep_researched": "2026-11-13",
+   "seller_id": "g230d43db",
+   "target": "g044fd178",
+   "buyer": "gcef42bfe",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "«Объединенная микроэлектронная корпорация» — юрлицо еще не создано, оно на стадии стратегии (покупка намечена на 2027 год), ИНН в принципе нет"
+    },
+    "notes": "ИНН ОМК не ставим — юрлицо еще не создано (стадия стратегии, 2027 год). Сумма сделки не раскрыта: 170 млрд руб из источника — бюджет стратегии ОМК на разные проекты 2027 года, а не цена покупки «Элко».",
+    "searched": [
+     "WebSearch: ОМК Элко ЭЛВИС покупка фабрика",
+     "WebSearch: Объединенная микроэлектронная корпорация стратегия 2027",
+     "WebSearch: ОМК ЭЛВИС Элко официальный комментарий опровержение сделка",
+     "WebSearch: \"Элко\" ЭЛВИС Зенкина сделка ОМК",
+     "WebSearch: \"Элко\" OSAT печатные платы ЭЛВИС завод Зеленоград",
+     "WebFetch: datanewton.ru/search?query=НПЦ ЭЛВИС и query=7735582816 (ИНН продавца подтвержден)",
+     "WebFetch: www1.ru перепечатка CNews от 11.11.2026 (финансы Элко подтверждены повторно)"
+    ]
+   },
+   "accepted": "2026-11-13",
+   "accepted_hash": "f5d40cf17a11.a527c5",
+   "second_read": "2026-11-13",
+   "second_read_hash": "f5d40cf17a11.a527c5"
   },
   {
    "id": "gbdd5b031",
@@ -1453,180 +1466,6 @@
     "draft_id": "d95962855",
     "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО"
    }
-  },
-  {
-   "id": "gcd450a79",
-   "date": "2026-11-11",
-   "title": "Инвестор Александр Чачава, в 2022 году выкупивший у VK её игровое подразделение My.Games за $642 млн, продаст студию менеджменту",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "VC.ru",
-     "https://vc.ru/services/3249253-investor-aleksandr-chachava-v-2022-godu-vykupivshii-u-vk-ee-igrovoe-podrazdelenie-mygames-za-642-mln-prodast-studiyu-menedzhmentu?from=rss"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "asset": "студия",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "студия",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://vc.ru/services/3249253-investor-aleksandr-chachava-v-2022-godu-vykupivshii-u-vk-ee-igrovoe-podrazdelenie-mygames-za-642-mln-prodast-studiyu-menedzhmentu?from=rss"
-     }
-    ]
-   },
-   "pending_since": "2026-11-11T13:55:41+00:00",
-   "from_raw": {
-    "draft_id": "d20368597",
-    "title": "Инвестор Александр Чачава, в 2022 году выкупивший у VK её игровое подразделение My.Games за $642 млн, продаст студию менеджменту"
-   }
-  },
-  {
-   "id": "ge2c36d16",
-   "date": "2026-11-11",
-   "title": "Россия в октябре купила у Бразилии имбиря на максимальную сумму за пять лет",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "ПРАЙМ",
-     "https://1prime.ru/20261111/rossija-875135469.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Бразилии",
-   "buyer_name": "Россия в октябре",
-   "asset": "имбирь на максимальную сумму за пять лет",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "ПРАЙМ",
-      "https://1prime.ru/20261111/rossija-875135469.html"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Россия в октябре",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://1prime.ru/20261111/rossija-875135469.html"
-     }
-    ],
-    "target": [
-     {
-      "value": "имбирь на максимальную сумму за пять лет",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://1prime.ru/20261111/rossija-875135469.html"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Бразилии",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://1prime.ru/20261111/rossija-875135469.html"
-     }
-    ]
-   },
-   "pending_since": "2026-11-11T20:14:17+00:00"
-  },
-  {
-   "id": "g239b1e0b",
-   "date": "2026-11-12",
-   "title": "«Яндекс Go» вложил 1 млрд руб. в безопасность поездок на самокатах",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "РБК",
-     "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "1 млрд ₽",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "1 млрд ₽",
-   "buyer_name": "«Яндекс Go»",
-   "asset": "безопасность поездок на самокатах",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Яндекс Go»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
-     }
-    ],
-    "target": [
-     {
-      "value": "безопасность поездок на самокатах",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
-     }
-    ]
-   },
-   "pending_since": "2026-11-12T14:16:00+00:00"
   },
   {
    "id": "g562fa11c",
@@ -1804,140 +1643,6 @@
     "draft_id": "d78178449",
     "title": "В Перми выставлена на продажу территория целого завода: за участок будут биться застройщики"
    }
-  },
-  {
-   "id": "g234afedb",
-   "date": "2026-11-12",
-   "title": "Сервиз дочери Николая I продали на аукционе во Франции за €321 тыс.",
-   "ind": "Не определена",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "src": [
-    [
-     "ТАСС",
-     "https://tass.ru/obschestvo/28313377"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "€321 тыс",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "€321 тыс",
-   "seller": "Сервиз дочери Николая I",
-   "asset": "на аукционе во Франции",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-12",
-     "title": "Сделка завершена",
-     "note": "Изначально лот оценивался в €40-80 тыс.",
-     "source": [
-      "ТАСС",
-      "https://tass.ru/obschestvo/28313377"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "Продажа с торгов"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "на аукционе во Франции",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28313377"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Сервиз дочери Николая I",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28313377"
-     }
-    ]
-   },
-   "pending_since": "2026-11-13T10:11:02+00:00"
-  },
-  {
-   "id": "g8eefa9e1",
-   "date": "2026-11-13",
-   "title": "Сапфир российской императорской семьи продали анонимному коллекционеру",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Лента.ру",
-     "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "seller": "Сапфир российской императорской семьи",
-   "asset": "анонимный коллекционер",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-13",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "Лента.ру",
-      "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "party_evidence": {
-    "target": [
-     {
-      "value": "анонимный коллекционер",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Сапфир российской императорской семьи",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
-     }
-    ]
-   },
-   "pending_since": "2026-11-13T15:57:48+00:00"
   },
   {
    "id": "g7ade16ba",
