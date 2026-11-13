@@ -2,6 +2,19 @@
  "updated": "2026-11-13",
  "signals": [
   {
+   "id": "s1858c08a7",
+   "company_id": "g5ff0a3de",
+   "date": "2026-11-13",
+   "kind": "sell",
+   "summary": "ГК «Черноголовка» — готовит продажу части бизнеса",
+   "source": [
+    "retailer.ru",
+    "https://retailer.ru/chernogolovka-planiruet-prodavat-pechene-v-afganistane/"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "sd4f33c5ba",
    "company_id": "g5ff0a3de",
    "date": "2026-11-12",
