@@ -16425,7 +16425,7 @@
     "target_fin": "—",
     "fin": "По условиям, объявленным в феврале 2024 года, не меньше половины цены платилось деньгами: продавец должен был получить эквивалент как минимум 230 млрд ₽ в юанях и до 176 млн собственных акций класса A, которые покупатель уже имел или собирался купить. На первом этапе Yandex N.V. получила деньги и до 67,8 млн своих акций, на втором — до 108 млн акций и остаток в юанях, если он был.",
     "rationale": "—",
-    "context": "—",
+    "context": "В сентябре 2024 года 15 миноритариев Yandex N.V. (теперь Nebius Group) потребовали в арбитражном суде Калининграда признать продажу недействительной: по их словам, после сделки они не могли продать акции по справедливой цене. В декабре 2024 года суд в иске отказал.",
     "finadv": "Публично не сообщалось"
    },
    "law": {
@@ -16511,6 +16511,26 @@
     [
      "Morgan Lewis (официальный сайт)",
      "https://www.morganlewis.com/news/2024/07/ynv-announces-completion-of-the-divestment-of-its-russia-based-businesses"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/6254171"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/investments/news/2024/07/15/1050031-yandex-nv"
+    ],
+    [
+     "Forbes",
+     "https://www.forbes.ru/investicii/520567-minoritarii-byvsej-yandex-n-v-podali-vtoroj-isk-k-konsorciumu-investorov"
+    ],
+    [
+     "BES.media",
+     "https://bes.media/news/aktsioneri-bivshey-yandex-nv-podali-isk-s-trebovaniem-priznat-nedeystvitelnoy-prodazhu-niderladskoy-chasti-biznesa-bbf412/"
+    ],
+    [
+     "BES.media",
+     "https://bes.media/news/aktsioneri-bivshey-yandex-nv-proigrali-sud-ob-osparivanii-prodazhi-niderladskoy-chasti-biznesa-575833/"
     ]
    ],
    "extra": "В сделку вошел весь бизнес группы, кроме зарубежных стартапов Nebius, Toloka, Avride, TripleTen и дата-центра в Финляндии.\n\nДоли в ЗПИФ «Консорциум.Первый»: 35% — у ООО «ФМП» менеджеров «Яндекса», 25% — у «Инфинити Менеджмент» Александра Чачавы, по 15% — у IT.Elaboration Павла Прасса и у «Аргонавта» группы «Лукойл», 10% — у «Меридиан-Сервиса» Александра Рязанова; контрольной доли нет ни у кого. «Фонд менеджеров» «Яндекса» получил право вето по особым вопросам — крупным сделкам, бюджету, уставу. Акции МКПАО «Яндекс» торгуются на Мосбирже под тикером YDEX с 24 июля 2024 года.",
@@ -16861,9 +16881,9 @@
     "gf87a65f7"
    ],
    "gate_baseline_hash": "9162233266fa.46e900",
-   "reread": "2026-11-09",
-   "reread_hash": "28282f69738e.46e900",
-   "reread_note": "статьи: 5"
+   "reread": "2026-11-13",
+   "reread_hash": "520ff8a9d3fe.46e900",
+   "reread_note": "статьи: 4"
   },
   {
    "id": "gc3d735fc",
@@ -187647,6 +187667,10 @@
     [
      "Finance Mail.ru",
      "https://finance.mail.ru/article/el5-energo-zavershilo-protsess-prisoedineniya-novyih-aktivov-69203657/"
+    ],
+    [
+     "Neftegaz.RU",
+     "https://neftegaz.ru/news/companies/746492-sdelki-po-prodazhe-enel-i-fortum-rossiyskikh-aktivov-zamorozheny-na-neopredelennyy-srok/"
     ]
    ],
    "extra": "Продавца второго шага стороны не назвали, но ЛУКОЙЛ выкупил ровно 29,5% — столько получил фонд «Газпромбанк-Фрезия», а позже фонд вышел из акционеров.",
@@ -187710,7 +187734,7 @@
      "value": "2022",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "f21e46c8316a"
+     "card_hash": "6045eea3f3d2"
     },
     "nature": {
      "control_change": true,
@@ -187787,9 +187811,21 @@
      "137 млн € (за пакет Enel)"
     ]
    },
-   "reread": "2026-11-12",
-   "reread_hash": "9ccac3374d8a.306463",
-   "reread_note": "статьи: 4"
+   "reread": "2026-11-13",
+   "reread_hash": "ef14b94f885d.306463",
+   "reread_note": "статьи: 1",
+   "events": [
+    {
+     "kind": "other",
+     "date": "2022-08-05",
+     "title": "Продажу приостановил указ № 520",
+     "note": "Продажу российских активов Enel приостановили из-за указа Президента № 520 о временном порядке сделок с недружественными инвесторами.",
+     "source": [
+      "Neftegaz.RU",
+      "https://neftegaz.ru/news/companies/746492-sdelki-po-prodazhe-enel-i-fortum-rossiyskikh-aktivov-zamorozheny-na-neopredelennyy-srok/"
+     ]
+    }
+   ]
   },
   {
    "id": "gac36eece",
@@ -190137,6 +190173,14 @@
     [
      "Жуковские вести",
      "https://www.zhukvesti.ru/articles/detail/69548/"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/7988696"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8005070"
     ]
    ],
    "extra": "Покупатель расплатился деньгами — собственными и заемными. Оставшиеся 33% «Атрана» числятся за самой компанией: в ноябре 2025 года на нее переписали долю умершего совладельца Романа Дровянникова, и его наследники оспаривают продажу в Арбитражном суде Москвы.",
@@ -190187,7 +190231,7 @@
      "value": "2025-12-30",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "4885a64b495b"
+     "card_hash": "c2b883b63f5f"
     },
     "nature": {
      "control_change": true,
@@ -190250,9 +190294,31 @@
      "seller": "Продавцы — владельцы группы «Волга-Днепр» (основатель Алексей Исайкин); какие юрлица продали «Волга-Днепр-Москву», «Эйрбриджкарго», «Волга-Днепр Техникс» и долю «Атрана», Ъ 8041497 и 8361364 и Жуковские вести не называют; история участников ЕГРЮЛ из контейнера недоступна."
     }
    },
-   "reread": "2026-11-12",
-   "reread_hash": "9f1277e8b7a5.159fb9",
-   "reread_note": "статьи: 3"
+   "reread": "2026-11-13",
+   "reread_hash": "bc97eeea7ba0.159fb9",
+   "reread_note": "статьи: 2",
+   "events": [
+    {
+     "kind": "other",
+     "date": "2025-08-24",
+     "title": "Основатель предложил передать группу государству",
+     "note": "Основатель «Волга-Днепр» Алексей Исайкин объявил, что группу могут передать государству.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/7988696"
+     ]
+    },
+    {
+     "kind": "other",
+     "date": "2025-08-29",
+     "title": "Акционеры заявили об отказе от акций в пользу государства",
+     "note": "Акционеры «Волга-Днепр» направили в правительство заявление об отказе от акций в пользу государства.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/8005070"
+     ]
+    }
+   ]
   },
   {
    "id": "gf962d8a9",
@@ -206741,6 +206807,10 @@
     [
      "Банковское обозрение",
      "https://bosfera.ru/press-release/investgruppa-absolyut-prodala-100-kompanii-absolyut-strahovanie"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/6790872"
     ]
    ],
    "origin": "curated",
@@ -206767,7 +206837,7 @@
      "value": "2026-06-26",
      "meaning": "registry",
      "basis": "rule",
-     "card_hash": "0f179b844cd5"
+     "card_hash": "ea0415147968"
     },
     "nature": {
      "control_change": true,
@@ -206842,9 +206912,21 @@
      "≈10 млрд ₽ (по оценке)"
     ]
    },
-   "reread": "2026-11-12",
-   "reread_hash": "484185a1fd8e.b580ca",
-   "reread_note": "статьи: 4"
+   "reread": "2026-11-13",
+   "reread_hash": "758a675e5e1a.b580ca",
+   "reread_note": "статьи: 1",
+   "events": [
+    {
+     "kind": "announced",
+     "date": "2024-06-26",
+     "title": "Компанию выставили на продажу",
+     "note": "Александр Светаков выставил «Абсолют Страхование» на продажу.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/6790872"
+     ]
+    }
+   ]
   },
   {
    "id": "mid-ilyinskaya",
@@ -210344,109 +210426,6 @@
    ]
   },
   {
-   "id": "c1d0f3d54",
-   "date": "2022-08-05",
-   "title": "Enel и Fortum замораживают продажу российских активов",
-   "ind": "Энергетика",
-   "type": "M&A",
-   "src": [
-    [
-     "Neftegaz.ru",
-     "https://neftegaz.ru/news/companies/746492-sdelki-po-prodazhe-enel-i-fortum-rossiyskikh-aktivov-zamorozheny-na-neopredelennyy-srok/"
-    ]
-   ],
-   "from_compact": "channel",
-   "extra": "Приостановка выхода иностранных акционеров из электроэнергетики РФ связана с указом Президента №520 о временном порядке сделок с недружественными инвесторами.",
-   "eco": {
-    "share": "Enel намеревалась продать 56,43% «Энел России» «Лукойлу» и инвестиционному фонду «Газпромбанк — Фрезия» примерно за 137 млн евро. Fortum завершила прием заявок от возможных покупателей на свою генерирующую компанию «Фортум» (98,25%).",
-    "context": "После этого Enel должна была объявить о продаже всех российских генерирующих активов: это примерно 5,6 ГВт традиционной мощности и около 300 МВт ветровой мощности на разных стадиях развития. У двух сделок вышел разный исход. Продажа 56,43% «Энел России» закрылась: 30 сентября 2022 года президент разрешил «Лукойлу» и «ААА Управление Капиталом» (доверительный управляющий фондом «Газпромбанк-Фрезия») купить долю за $135 млн — «Лукойлу» досталось 26,9% акций, фонду — 29,5%. С «Фортумом» вышло иначе: продажи покупателям не случилось — указом президента от 25 апреля 2023 года 98,23% акций ПАО «Фортум» переданы во временное управление Росимущества, а в августе 2023 года компанию переименовали в «Форвард Энерго». На апрель 2025 года финская Fortum по-прежнему публично заявляла права на эти активы, о продаже частному владельцу сведений нет."
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "law": {
-    "appr": "Обе сделки заморожены указом президента РФ №520 от 5 августа 2022 года: до конца года он запретил без специального разрешения сделки с долями иностранцев из недружественных стран в стратегических предприятиях энергетики.",
-    "struct": "По сделке Enel покупателями выступают ЛУКОЙЛ и фонд «Газпромбанк-Фрезия», сумма — около 137 млн евро за 56,43% «Энел Россия»; доля каждого из двух покупателей в сделке не раскрывалась.",
-    "terms": "Одно из требований к покупателям — до конца года рассчитаться по долгу «Фортума» перед финской Fortum, это порядка 75 млрд ₽."
-   },
-   "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15",
-   "themes": [
-    "Уход иностранного владельца",
-    "Правкомиссия / указ президента"
-   ],
-   "proofread_absorbed": {
-    "law.struct": [
-     "587471ab4108"
-    ],
-    "eco.context": [
-     "d2cac1f1aad9"
-    ],
-    "law.terms": [
-     "c2931abbcc3a",
-     "62c6b09e720f"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "e99ca70a1d0c"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "9d1ae745ce9a"
-    },
-    "date": {
-     "value": "2022-08-05",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "730d786cd9ec"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "e5eb9304b262"
-    },
-    "target": {
-     "company_id": "ge2a1dca0",
-     "inn": "6671156423",
-     "confirmed": true,
-     "bank": false,
-     "lot": false,
-     "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "42ba5491f3b1"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
-    }
-   },
-   "followup_researched": "2026-09-07",
-   "no_parties": "Новость о заморозке двух разных сделок указом №520, одной пары покупатель/продавец нет (каждая сделка — отдельная карточка).",
-   "target": "ge2a1dca0",
-   "gate_baseline_hash": "3833a62e052c.413bad"
-  },
-  {
    "id": "cc846f75c",
    "date": "2022-08-05",
    "title": "Ибрагим Загидулин и Виолетта Чайка купили 50% БКИ «Эквифакс»",
@@ -213351,106 +213330,6 @@
    "reread": "2026-11-13",
    "reread_hash": "14b69376a82d.283722",
    "reread_note": "статьи: 2"
-  },
-  {
-   "id": "c6fd3a848",
-   "date": "2025-08-24",
-   "title": "Передача авиагрузовой группы «Волга-Днепр» государству",
-   "ind": "Транспорт и логистика",
-   "type": "M&A",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/7988696"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Основатель «Волга-Днепр» Алексей Исайкин планирует в ближайшие месяцы передать государству все активы группы — техцентры, самолеты, запчасти. Вопрос обсуждается с зимы, после обысков в офисе компании. В группу входят авиакомпании «Волга-Днепр», «Антран» и AirBridgeCargo, она убыточна.",
-   "eco": {
-    "rationale": "По словам Исайкина, группа интересна тем, кому нужны ее услуги, но интерес этот проявляется с учетом специфики момента: забирать родине есть что.",
-    "context": "По неофициальным данным, передачу группы государству внутри нее обсуждают с зимы. Поводом стали обыски в офисе авиакомпании и беседы в СКР, куда вызывали Сергея Шкляника — бывшего совладельца и партнера Алексея Исайкина."
-   },
-   "added": "2026-08-03",
-   "status": "Не состоялась",
-   "law": {
-    "struct": "По неофициальным данным, Алексей Исайкин ждет, что Генпрокуратура подаст иск, а активы изымут в доход государства. При этом он все еще надеется на коммерческую сделку."
-   },
-   "reviewed": "2026-08-09",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "themes": [
-    "Национализация / иск Генпрокуратуры"
-   ],
-   "proofread_absorbed": {
-    "eco.rationale": [
-     "e7f28515ba52"
-    ],
-    "eco.context": [
-     "8369202e5884"
-    ],
-    "law.struct": [
-     "3e8a55f6b9de"
-    ]
-   },
-   "proofread": "2026-09-04",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "6a0008e8c201"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "23e70f29fb84"
-    },
-    "date": {
-     "value": "2025-08-24",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "e7b43b3ea012"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "896bbc163dd9"
-    },
-    "target": {
-     "company_id": "g83feabb2",
-     "inn": "7328510118",
-     "confirmed": true,
-     "bank": false,
-     "lot": false,
-     "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "2ed831b5cb1a"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "failed",
-     "top_purchases": "failed",
-     "multiple_text": "failed"
-    }
-   },
-   "followup_researched": "2026-09-08",
-   "no_parties": "Намерение передать группу государству без названного получателя; не состоялось (группу позже купил ЕАС Групп — отдельная сделка)",
-   "target": "g83feabb2",
-   "gate_baseline_hash": "bdeaf1385455.159fb9"
   },
   {
    "id": "c31a23b22",
@@ -216652,112 +216531,6 @@
    "reread_note": "статьи: 4"
   },
   {
-   "id": "c49c9d8b0",
-   "date": "2025-08-29",
-   "title": "Акционеры «Волга-Днепр» заявили об отказе от акций в пользу государства",
-   "ind": "Транспорт и логистика",
-   "type": "M&A",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/8005070"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Партнер бюро КИАП Антон Самохвалов прокомментировал правовую состоятельность процедуры отказа от акций, указав на невозможность физического и юридического отказа от акций без совершения сделки.",
-   "eco": {
-    "rationale": "В обращении собственники объясняют, что прямое участие государства нужно, чтобы эффективнее использовать возможности авиакомпании.",
-    "context": "Группа в итоге досталась Евгению Солодилину через ЕАС Групп (закрытие — 30 декабря 2025 года), а план отдать акции государству, известный с 24 августа 2025 года, и формальный отказ от них не реализованы. На рынке обсуждают несколько версий отказа: одни считают, что так пытались спасти убыточный бизнес, другие связывают его с подготовкой сделки с «Ростехом», который может заинтересоваться авиапарком для военных перевозок. Red Wings, входящая в «Ростех», назвала версию о сделке с «Ростехом» беспочвенной.",
-    "target_fin": "Итог 2023 года — убыток 881 млн ₽. Летнопригодный парк — пять Ил-76 и три Ан-124 «Руслан»."
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "law": {
-    "terms": "Партнер бюро КИАП Антон Самохвалов считает, что заявить об отказе от акций акционеры не вправе: статья 236 ГК РФ говорит об отказе от вещей и движимого имущества, а на акции не распространяется. Выйти из акционеров, по его объяснению, можно лишь одним путем — сделкой с третьим лицом, и государство здесь не исключение.",
-    "struct": "Государство может стать акционером только по воле самих акционеров, поясняет юрист: либо через дополнительный вклад в капитал, либо через сделку с акциями — куплю-продажу или дарение."
-   },
-   "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15",
-   "proofread_absorbed": {
-    "law.terms": [
-     "f1bf043d771b"
-    ],
-    "law.struct": [
-     "a40a276086df"
-    ],
-    "eco.target_fin": [
-     "8983d7ecbd46"
-    ],
-    "eco.rationale": [
-     "cac7681df397"
-    ],
-    "eco.context": [
-     "d05aca4fcd37",
-     "ade3384ab0e6"
-    ]
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "6a0008e8c201"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "23e70f29fb84"
-    },
-    "date": {
-     "value": "2025-08-29",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "4aa38b86c479"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "896bbc163dd9"
-    },
-    "target": {
-     "company_id": "g83feabb2",
-     "inn": "7328510118",
-     "confirmed": true,
-     "bank": false,
-     "lot": false,
-     "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "2ed831b5cb1a"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "failed",
-     "top_purchases": "failed",
-     "multiple_text": "failed"
-    }
-   },
-   "status": "Не состоялась",
-   "followup_researched": "2026-09-08",
-   "no_parties": "Заявление об отказе от акций в пользу государства, не реализовано; реальная продажа — отдельная сделка",
-   "target": "g83feabb2",
-   "gate_baseline_hash": "80ad8ee193f9.159fb9"
-  },
-  {
    "id": "c2d0c1dcd",
    "date": "2025-10-30",
    "title": "Структура «Брусники» купила на торгах имущественный комплекс НПК «Северная заря» в Петербурге",
@@ -217623,107 +217396,6 @@
    "reread_note": "статьи: 2"
   },
   {
-   "id": "c33a55069",
-   "date": "2024",
-   "title": "Иск миноритариев Nebius Group к владельцам Яндекса о признании недействительной сделки по продаже российского бизнеса",
-   "ind": "ИТ и интернет",
-   "type": "M&A",
-   "src": [
-    [
-     "Forbes",
-     "https://www.forbes.ru/investicii/520567-minoritarii-byvsej-yandex-n-v-podali-vtoroj-isk-k-konsorciumu-investorov"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Истцы — акционеры Nebius Group (до переименования — Yandex N.V.). Иск они подали к консорциуму инвесторов, которому принадлежит «Яндекс», и через суд добиваются отмены продажи российского бизнеса. Свою позицию они строят на дискриминационных условиях обмена акций и злоупотреблениях ответчиков. Как держатели бумаг Yandex N.V (Nebius Group N.V.), утверждают истцы, они не смогли ни продать акции по справедливой цене, ни получать доход от активов МКПАО «Яндекс», перешедших ЗПИФ «Консорциум.Первый».",
-   "eco": {
-    "context": "Миноритарии проиграли: 19 декабря 2024 года суд им отказал, сделка по выкупу российского «Яндекса» осталась в силе. Иск к Nebius Group N.V. (Нидерланды) и АО «Солид менеджмент» принял к рассмотрению Арбитражный суд Калининградской области, слушание назначили на 18 декабря 2024 года. Соистцами выступили более 20 акционеров, добивавшихся признания недействительной продажи российской части бизнеса.",
-    "val": "По мнению истцов, ЗПИФ «Консорциум.Первый» обогатился без оснований: российские активы «Яндекса» достались ему со скидкой 50%."
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "law": {
-    "terms": "—"
-   },
-   "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15",
-   "themes": [
-    "Уход иностранного владельца"
-   ],
-   "proofread_absorbed": {
-    "eco.context": [
-     "b245d7a0bab9",
-     "4d2d66776833"
-    ],
-    "eco.val": [
-     "a5b5bdf3732d"
-    ],
-    "law.terms": [
-     "7a85cc09801c"
-    ],
-    "extra": []
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "6a0008e8c201"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "23e70f29fb84"
-    },
-    "date": {
-     "value": "2024",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "d49368a4a2e0"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "896bbc163dd9"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "failed",
-     "top_purchases": "failed",
-     "multiple_text": "failed"
-    }
-   },
-   "status": "Не состоялась",
-   "followup_researched": "2026-09-08",
-   "no_parties": "Судебный иск миноритариев, не сделка (иск отклонен)",
-   "gate_baseline_hash": "8d612a9b615c.ace5bd"
-  },
-  {
    "id": "cad103bca",
    "date": "2024-09-09",
    "title": "«РКС Девелопмент» может купить у Invest AG 80% «РКС-Булатниково»",
@@ -217955,108 +217627,6 @@
    "reread_scope": "short",
    "reread_note": "статьи: 2",
    "deep_researched": "2026-11-09"
-  },
-  {
-   "id": "c09e39da9",
-   "date": "2024-06-26",
-   "title": "Александр Светаков выставил ООО «Абсолют Страхование» на продажу",
-   "ind": "Страхование",
-   "type": "M&A",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/6790872"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Александр Светаков, совладелец инвестиционной группы «Абсолют», выставил на продажу страховую компанию.",
-   "seller": "Александр Светаков, совладелец инвестиционной группы «Абсолют»",
-   "sum": "Более 5 млрд ₽",
-   "eco": {
-    "sum": "Более 5 млрд ₽",
-    "share": "—",
-    "val": "Мультипликатор 1,3–1,5 капитала гендиректор «Бизнесдрома» Павел Самиев считает высоким для рынка: по его словам, ряд недавних сделок прошел примерно по 1,1 капитала. Саму компанию он называет качественным активом — с наработанной клиентской базой, диверсифицированным портфелем и устойчивым самодостаточным бизнесом.",
-    "target_fin": "Рентабельность капитала «Абсолют Страхования» в 2023 году — 23,8%. Рентабельность продаж низкая — 7,5%.",
-    "fin": "—",
-    "rationale": "—",
-    "context": "Страховая компания занимает 28-е место по объему премий на рынке. Продажа состоялась через два года: в июне 2026 года 100% «Абсолют Страхование» купило ОАО «ЦАНЦ» за ≈10 млрд ₽, компания сохранила название, офисы и команду.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-14",
-   "weekly_researched": "2026-08-14",
-   "proofread_absorbed": {
-    "eco.target_fin": [
-     "eac042c06333"
-    ],
-    "eco.val": [
-     "a861b09dff63"
-    ]
-   },
-   "proofread": "2026-09-04",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "28bd8fc9a216"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "lower_bound",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "dfaf705692b6"
-    },
-    "date": {
-     "value": "2024-06-26",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "3faf46bd7f69"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "e5eb9304b262"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   },
-   "followup_researched": "2026-09-11",
-   "gate_baseline_hash": "d87bcc474a68.ace5bd"
   },
   {
    "id": "ca7a871ee",
@@ -218502,115 +218072,6 @@
    "reread": "2026-11-13",
    "reread_hash": "f1a061d7ce08.1f6e5a",
    "reread_note": "статьи: 6"
-  },
-  {
-   "id": "cf6de2938",
-   "date": "2024-07-15",
-   "title": "Раздел активов Яндекса между российской и международной структурами",
-   "ind": "ИТ и интернет",
-   "type": "M&A",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/6254171"
-    ],
-    [
-     "Ведомости",
-     "https://www.vedomosti.ru/investments/news/2024/07/15/1050031-yandex-nv"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Раздел активов Яндекса обсуждался в профильной правкомиссии. Нидерландской Yandex N.V. теперь причитается не $250 млн, а $70–80 млн: сумму урезали после того, как сооснователь Аркадий Волож выступил с критикой военных действий.",
-   "sum": "475 млрд ₽ (≈$5,2 млрд)",
-   "eco": {
-    "sum": "475 млрд ₽ (≈$5,2 млрд)",
-    "share": "—",
-    "val": "Итоговая оценка бизнеса — 475 млрд ₽ (≈$5,2 млрд). Yandex N.V. получила не менее 230 млрд ₽ эквивалентом в китайских юанях и до 176 млн акций класса «А» Yandex N.V.",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "Чиновники комиссии учитывают внешнеполитический фон: когда он ухудшается, решения, расходящиеся с внешней политикой, для них выглядят неуместными. Так, по неофициальным данным, объясняли реакцию Минцифры.",
-    "context": "В мае 2023 года Владимир Путин согласовал предполагаемый состав консорциума: ВТБ, совладелец «Лукойла» Вагит Алекперов, глава «Севергрупп» Алексей Мордашов и глава «Интерроса» Владимир Потанин. В итоге российский бизнес у Yandex N.V. купил ЗПИФ «Консорциум.Первый», куда вошли менеджмент «Яндекса», структуры «Лукойла», Александра Чачавы, Павла Прасса и Александра Рязанова. Условия раздела активов обсуждались в профильной правкомиссии; по неофициальным данным, сумма для нидерландской Yandex N.V. снизилась с $250 млн до $70–80 млн, а причиной стала критика военных действий со стороны сооснователя Аркадия Воложа. Сделка прошла в два этапа и полностью завершилась 15 июля 2024 года: Yandex N.V. целиком вышла из акционеров и до конца июля 2024 года сменила название на Nebius Group.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-15",
-   "weekly_researched": "2026-08-15",
-   "proofread_absorbed": {
-    "eco.rationale": [
-     "d6794bd69813"
-    ],
-    "law.struct": [
-     "82241e406dca"
-    ],
-    "eco.context": [],
-    "extra": []
-   },
-   "proofread": "2026-09-03",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "28bd8fc9a216"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "estimate",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "78171ec83742"
-    },
-    "date": {
-     "value": "2024-07-15",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "da632aa2810a"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "425530f6d36f"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   },
-   "status": "Закрыта",
-   "followup_researched": "2026-09-11",
-   "buyer": "gd3a8fa25",
-   "gate_baseline_hash": "73b83eb30430.7ad690"
   },
   {
    "id": "ca754c77a",
@@ -220204,109 +219665,6 @@
    },
    "followup_researched": "2026-09-11",
    "gate_baseline_hash": "173083df7b85.ace5bd"
-  },
-  {
-   "id": "c51777ade",
-   "date": "2023-07-19",
-   "title": "Назначение Якуба Закриева генеральным директором «Данон Россия» при национализации бизнеса",
-   "ind": "Пищепром и напитки",
-   "type": "M&A",
-   "src": [
-    [
-     "Financial Times",
-     "https://www.ft.com/content/d5234953-cddf-4b64-8a55-dc749843ab5c"
-    ]
-   ],
-   "from_compact": "bulk",
-   "extra": "Российское подразделение Danone национализировали. По неофициальным данным, из 40 претендентов Danone отобрала трех покупателей; гендиректором «Данон Россия» назначили Якуба Закриева, племянника Рамзана Кадырова и заместителя председателя правительства Чечни. Списать стоимость активов Danone рассчитывала на сумму до 1 млрд евро.",
-   "sum": "До 1 млрд € (списание стоимости активов)",
-   "eco": {
-    "sum": "До €1 млрд",
-    "share": "—",
-    "val": "До 1 млрд € (списание стоимости активов)",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "По неофициальным данным, Danone из 40 претендентов отобрала трех покупателей; в результате гендиректором «Данон Россия» был назначен Якуб Закриев, племянник Рамзана Кадырова и заместитель председателя правительства Чечни. Danone намеревалась списать стоимость активов на сумму до 1 млрд евро. Национализация закончилась продажей: в мае 2024 года Danone закрыла сделку с ООО «Вамин Р» за 17,7 млрд ₽; компания дважды сменила имя — сначала на Health & Nutrition, затем, с 8 октября 2025 года, на «Логика молока».",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "added": "2026-08-03",
-   "reviewed": "2026-08-10",
-   "deep_researched": "2026-08-10",
-   "weekly_researched": "2026-08-10",
-   "themes": [
-    "Национализация / иск Генпрокуратуры"
-   ],
-   "proofread": "2026-09-04",
-   "facts": {
-    "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "28bd8fc9a216"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "not_a_price",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "2ae015f6f91d"
-    },
-    "date": {
-     "value": "2023-07-19",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "f676322ed2fa"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "e5eb9304b262"
-    },
-    "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
-     "bank": false,
-     "lot": false,
-     "basis": "unknown",
-     "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
-    }
-   },
-   "followup_researched": "2026-09-11",
-   "sum_basis": "not_a_price",
-   "proofread_absorbed": {
-    "eco.context": [
-     "38293968082d"
-    ]
-   },
-   "no_parties": "Кадровое назначение при временном управлении государства; продажа бизнеса «Вамин Р» в мае 2024 года — отдельная сделка",
-   "gate_baseline_hash": "4ad2036848ba.ace5bd"
   },
   {
    "type": "Временное управление",
@@ -222647,6 +222005,10 @@
     [
      "Rulaws (текст указа № 520)",
      "https://rulaws.ru/president/Ukaz-Prezidenta-RF-ot-16.07.2023-N-520/"
+    ],
+    [
+     "Financial Times",
+     "https://www.ft.com/content/d5234953-cddf-4b64-8a55-dc749843ab5c"
     ]
    ],
    "from_compact": "bulk",
@@ -222793,7 +222155,7 @@
    "target": "g8cf40802",
    "reread": "2026-11-13",
    "reread_hash": "f98d4fd16be9.057d61",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 1"
   },
   {
    "id": "c1aa8b20d",
@@ -355892,7 +355254,14 @@
   "c2455b014": "g7e90c94a",
   "g7e470153": "g61cccee7",
   "c3bdd7fd4": "g94683ed2",
-  "caeac8f4e": "g323cf076"
+  "caeac8f4e": "g323cf076",
+  "c6fd3a848": "g1caed4b7",
+  "c49c9d8b0": "g1caed4b7",
+  "cf6de2938": "gd73fd825",
+  "c33a55069": "gd73fd825",
+  "c09e39da9": "absolut-strah",
+  "c1d0f3d54": "g96b1cdaf",
+  "c51777ade": "c7fd83d05"
  },
  "merged_companies": {
   "g942e9f9e": "g5ca09975",
@@ -355990,7 +355359,6 @@
   "g554eb6ae": null,
   "g37c264bf": null,
   "gc9bc132c": null,
-  "c49c9d8b0": null,
   "gde84040f": null,
   "g4cb8fc20": null,
   "g0b733c0f": null,
@@ -356338,7 +355706,6 @@
   "g9c255b9c": null,
   "g21795ec9": 21,
   "g685e38f9": null,
-  "c33a55069": null,
   "g3e3f5e9c": null,
   "cc2929a95": null,
   "g4470332e": null,
@@ -356482,7 +355849,6 @@
   "g8ac1b593": null,
   "g352131ac": null,
   "g630a6fbb": null,
-  "c1d0f3d54": null,
   "g5d6c6428": null,
   "gdc686ec2": 110,
   "g79f683bc": null,
@@ -356942,7 +356308,6 @@
   "ga58cd8e7": null,
   "g709c335a": null,
   "g64141daa": null,
-  "c09e39da9": null,
   "g67b98f28": null,
   "c2adff6d3": null,
   "g3bcf9780": null,
@@ -357010,7 +356375,6 @@
   "g62f09353": null,
   "g8a86fc9b": null,
   "g560e3f93": null,
-  "c6fd3a848": null,
   "g139d522a": null,
   "gfa0fe27a": null,
   "gff20fb8d": null,
@@ -357106,7 +356470,6 @@
   "g4a8bd86d": null,
   "gd38acdec": null,
   "g56e609e3": null,
-  "c51777ade": null,
   "gb0c3ddbf": null,
   "g16a70078": null,
   "gcc677615": null,
@@ -357374,7 +356737,6 @@
   "g7d64b437": null,
   "g71aec6a5": null,
   "gec6e9db6": null,
-  "cf6de2938": null,
   "gebead2e8": 55,
   "g90317ad0": null,
   "gc88ca79d": null,
