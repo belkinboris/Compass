@@ -387,8 +387,11 @@ def _main(argv, write):
             log('СТОП: %s. Сайту ничего не подтверждено — повторите команду после разбора (routines/publication.md, шаг 10).' % err)
             return 1
         log('База запушена.')
-    run([sys.executable, os.path.join(INGEST, 'approve.py'), '--consume'])
-    log('Сайту подтверждено: решения применены.')
+    done = run([sys.executable, os.path.join(INGEST, 'approve.py'), '--consume'], must=False)
+    if done.returncode or 'НЕ ПОДТВЕРЖДЕНО' in (done.stdout or ''):
+        log('Сайт НЕ принял подтверждение (связь) — решения применены и в main, подтвердит следующий запуск.')
+    else:
+        log('Сайту подтверждено: решения применены.')
 
     log('Посты по решениям — send_telegram --write --finish --wait-for-site 15 (ждет сайт и паузы между постами)…')
     r = run([sys.executable, SEND_TELEGRAM, '--write', '--finish', '--wait-for-site', '15'], must=False)

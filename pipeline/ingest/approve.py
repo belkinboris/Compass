@@ -35,6 +35,7 @@
 import json
 import subprocess
 import os
+import time
 import sys
 from datetime import datetime, timedelta, timezone
 
@@ -100,16 +101,31 @@ def normalize_channels(decisions):
 
 
 def consume(handle, ids):
+    """Сказать сайту «решения применены». True — сайт принял; False — нет.
+
+    13 ноября 2026: связь контейнера с сайтом рвется, а запрос шел один раз и
+    код ответа не читался — публикация писала «Сайту подтверждено», решения
+    оставались живыми и три часа держали push остальных прогонов."""
     if not (handle and ids):
-        return
+        return True
     site, token = handle
-    try:
-        import httpx
-        httpx.post('%s/api/moderation/decisions/consume' % site,
-                   json={'token': token, 'ids': ids}, timeout=20)
-    except Exception as e:
-        print('Не удалось пометить решения примененными (%s) — не страшно: '
-              'повторное применение идемпотентно.' % e)
+    import httpx
+    tries = 1 if os.environ.get('PYTEST_CURRENT_TEST') else 5
+    err = None
+    for n in range(tries):
+        try:
+            r = httpx.post('%s/api/moderation/decisions/consume' % site,
+                           json={'token': token, 'ids': ids}, timeout=20)
+            if r.status_code < 300:
+                return True
+            err = 'сайт ответил %s' % r.status_code
+        except Exception as e:
+            err = e
+        if n + 1 < tries:
+            time.sleep(4)
+    print('НЕ ПОДТВЕРЖДЕНО сайту: решения не помечены примененными (%s). '
+          'Повторное применение ничего не ломает; подтвердит следующий прогон.' % err)
+    return False
 
 
 PENDING_CONSUME = os.path.join(ROOT, 'data', 'inbox', 'consume_pending.json')
@@ -207,7 +223,8 @@ def consume_pending():
         print('НЕ ПОДТВЕРЖДАЮ сайту %d решений: их результата нет в origin/main — применит следующий прогон: %s'
               % (len(keep), ', '.join('%s %s' % (d['verdict'], d['deal_id']) for d in keep)))
         ids = [i for i in ids if i not in {d['id'] for d in keep}]
-    consume((site, token), ids)
+    if not consume((site, token), ids):
+        return 1        # файл остается: следующий `--consume` повторит
     os.remove(PENDING_CONSUME)
     # Ответы владельцу на «Добавить в карточку» / «Это другая сделка» — только
     # теперь, когда записанное пережило push (то же правило, что «поправлено»

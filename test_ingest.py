@@ -9463,6 +9463,16 @@ def test_other_routines_wait_with_push_only_for_fresh_human_decisions():
             {'deal_id': 'c', 'verdict': 'approve', 'created_at': stale}]
     assert [r['deal_id'] for r in pb.waiting(rows, now)] == ['a']
     assert pb.waiting([], now) == []
+    # 13 ноября 2026: решения по выкинутой карточке и по карточке, которая уже
+    # в базе, никого не держат — публикации по ним делать нечего.
+    import approve
+    base = {'deals': [{'id': 'in_base'}, {'id': 'wants_post'}], 'telegram_posts': {}}
+    rows = [{'deal_id': 'dropped', 'verdict': 'approve'}, {'deal_id': 'dropped', 'verdict': 'post_yes'},
+            {'deal_id': 'in_base', 'verdict': 'approve'}, {'deal_id': 'wants_post', 'verdict': 'post_yes'},
+            {'deal_id': 'queued', 'verdict': 'post_yes'}, {'deal_id': 'raw1', 'verdict': 'take'}]
+    held = pb.holding(rows, base, {'queued'}, approve.unproven)
+    assert [(r['deal_id'], r['verdict']) for r in held] == [
+        ('wants_post', 'post_yes'), ('queued', 'post_yes'), ('raw1', 'take')]
 
 
 def test_drop_pending_removes_card_and_remembers_its_sources():
