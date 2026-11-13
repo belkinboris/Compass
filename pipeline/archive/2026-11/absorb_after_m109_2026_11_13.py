@@ -8,7 +8,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.a
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
 import review  # noqa: E402
 BASE = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
-WANT = {('gd39b4eaa', 'sum'), ('gd39b4eaa', 'eco.sum'), ('cc846f75c', 'eco.share'), ('c1659a21f', 'eco.share')}
+WANT = {('g6023c156', 'sum'), ('g6023c156', 'eco.sum'), ('c1659a21f', 'eco.val'), ('gd39b4eaa', 'sum'), ('gd39b4eaa', 'eco.sum'), ('cc846f75c', 'eco.share'), ('c1659a21f', 'eco.share')}
 raw = open(BASE, encoding='utf-8').read(); data = json.loads(raw)
 cards = {d['id']: d for d in data['deals']}
 n = 0
