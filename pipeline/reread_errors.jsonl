@@ -3313,3 +3313,42 @@
 {"id": "gc7e0b5c9", "field": "date", "class": "wrong_date", "was": "2025-11-18 (публикация)", "now": "2025-11-11", "tag": "m206"}
 {"id": "gc7e0b5c9", "field": "seller", "class": "other", "was": "«Технологий туризма»", "now": "«Технологии туризма»", "tag": "m206"}
 {"id": "gc7e0b5c9", "field": "title", "class": "title_standard", "was": "вторая мысль через тире", "now": "одна мысль", "tag": "m206"}
+{"field": "seller", "class": "wrong_seller", "was": "Павел Соколов, Глеб Драгунов и Егор Даниленко", "now": "Павел Соколов и Глеб Драгунов (Даниленко вышел в 2024)", "id": "gdf44a92b", "tag": "m203"}
+{"field": "sum", "class": "sum_meaning", "was": "60–70 млн ₽ (по оценке) — анонимная оценка EV", "now": "Не раскрыта, оценки в eco.val", "id": "gdf44a92b", "tag": "m203"}
+{"field": "extra", "class": "version_as_fact", "was": "EBITDA — 17–20 млн ₽ (у источника «оценочная»)", "now": "EBITDA, по оценке, 17–20 млн ₽", "id": "gdf44a92b", "tag": "m203"}
+{"field": "eco.context", "class": "language", "was": "«Сама по себе покупка… хороший шаг»", "now": "факты о компании", "id": "gdf44a92b", "tag": "m203"}
+{"field": "law.struct", "class": "other", "was": "дата записи в ЕГРЮЛ", "now": "кто сколько продал по реестру", "id": "gdf44a92b", "tag": "m203"}
+{"field": "title", "class": "title_standard", "was": "SkyNet приобрел…", "now": "SkyNet купил…", "id": "gdf44a92b", "tag": "m203"}
+{"field": "seller", "class": "party_text_no_profile", "was": "Семья Даниленко", "now": "Татьяна Даниленко (по реестру «Назии»)", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "date", "class": "wrong_date", "was": "2025-07-21 (день публикации)", "now": "2025-07-17 (переход доли)", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "extra", "class": "unsupported_claim", "was": "двигатели «раньше закупались у WinGD и Wartsila», «государственная корпорация завершила»", "now": "по Neftegaz.RU: поставки MAN, WinGD, JEC, Wartsila заблокированы", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "eco.context", "class": "verbatim", "was": "пересказ с заменой слов, «Сам…»", "now": "переписан", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "law.struct", "class": "verbatim", "was": "цитата без автора", "now": "пересказ механики", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "title", "class": "title_standard", "was": "ОСК приобрела КМЗ у семьи Даниленко", "now": "ОСК купила Кингисеппский машиностроительный завод", "id": "g5dc6cb47", "tag": "m203"}
+{"field": "seller", "class": "wrong_seller", "was": "Стрэйтлайн (PCG) и Игорь Беккер — вышли в мае 2025", "now": "ООО «Леон +» (90% до 14.07.2025)", "id": "gd1f94881", "tag": "m203"}
+{"field": "target", "class": "profile_wrong_inn", "was": "ИНН 7811814388 (другое общество)", "now": "ООО «ЮПГ Холдинг», ИНН 9731118847", "id": "gd1f94881", "tag": "m203"}
+{"field": "eco.share", "class": "wrong_share", "was": "—", "now": "90% долей ООО «ЮПГ Холдинг»", "id": "gd1f94881", "tag": "m203"}
+{"field": "eco.context", "class": "unsupported_claim", "was": "слова Иртуганова и подробности о кредиторах без опоры в источниках карточки", "now": "история группы по Коммерсанту", "id": "gd1f94881", "tag": "m203"}
+{"field": "extra", "class": "wrong_seller", "was": "продавцами выступили Стрэйтлайн и Беккер", "now": "покупатель и состав активов", "id": "gd1f94881", "tag": "m203"}
+{"field": "title", "class": "title_standard", "was": "Продажа United Panel Group экс-депутату Александру Салаеву", "now": "ООО «Универсам «Диана»» купило 90% United Panel Group", "id": "gd1f94881", "tag": "m203"}
+{"field": "sum", "class": "sum_meaning", "was": "1,5 млрд ₽ (по оценке) — оценка бизнеса инвестбанкиром", "now": "Не раскрыта, оценка в eco.val", "id": "gf985bad7", "tag": "m203"}
+{"field": "eco.val", "class": "unsupported_claim", "was": "«при мультипликаторе EV/EBITDA 4–5», «оценил сумму сделки»", "now": "оценивает бизнес завода в 1,5 млрд ₽", "id": "gf985bad7", "tag": "m203"}
+{"field": "ind", "class": "wrong_industry", "was": "Химия и удобрения", "now": "Пищепром и напитки", "id": "gf985bad7", "tag": "m203"}
+{"field": "eco.target_fin", "class": "other", "was": "только прибыль без выручки", "now": "выручка и прибыль 2024", "id": "gf985bad7", "tag": "m203"}
+{"field": "title", "class": "title_standard", "was": "«Ренессанс» выкупила 100% долей…", "now": "«Ренессанс» купил Александровский спиртзавод №14", "id": "gf985bad7", "tag": "m203"}
+{"id": "ge4cded31", "field": "target", "class": "profile_wrong_inn", "was": "ИНН 2536284622 (владивостокская ООО «Компания Алаид»)", "now": "ИНН 6515003317 (ООО «Алаид», Северо-Курильск)", "tag": "m201"}
+{"id": "ge4cded31", "field": "seller", "class": "wrong_seller", "was": "Сергей Бачин", "now": "ООО «Органик проект» (70%) и Сергей Бачин (30%) — по реестру", "tag": "m201"}
+{"id": "ge4cded31", "field": "ind", "class": "wrong_industry", "was": "ГМК и добыча", "now": "Агро", "tag": "m201"}
+{"id": "ge4cded31", "field": "law.struct", "class": "language", "was": "«70% акций» у ООО, структура владения покупателем", "now": "доли продавцов", "tag": "m201"}
+{"id": "ge4cded31", "field": "title", "class": "title_standard", "was": "…(Salmonica) приобрел ООО «Алаид» с квотами…", "now": "Тымлатский рыбокомбинат купил ООО «Алаид»", "tag": "m201"}
+{"id": "g43b0394d", "field": "eco.context", "class": "unsupported_claim", "was": "оборот РВБ 4,1 трлн ₽, прибыль 104 млрд; покупки «Транспортной Рекламы», «Восток-Медиа» и др.", "now": "снято — нет в источниках", "tag": "m201"}
+{"id": "g43b0394d", "field": "eco.target_fin", "class": "unsupported_claim", "was": "прибыль от продаж 3,6 млн, убыток от продаж 1,3 млн", "now": "только выручка 42/31 млн, прибыль 3,3 млн, убыток 2 млн (Ъ)", "tag": "m201"}
+{"id": "g43b0394d", "field": "title", "class": "title_standard", "was": "Wildberries и Russ приобрели регионального оператора…", "now": "RWB купил ООО «Инфо-Ю»", "tag": "m201"}
+{"id": "g43b0394d", "field": "eco.share", "class": "other", "was": "описание поверхностей", "now": "100% долей ООО «Инфо-Ю»", "tag": "m201"}
+{"id": "g741672ac", "field": "target", "class": "profile_wrong_inn", "was": "профиль без ИНН", "now": "ИНН 9728110573", "tag": "m201"}
+{"id": "g741672ac", "field": "eco.share", "class": "other", "was": "история компании", "now": "Миноритарная доля в ООО «Платформеко»", "tag": "m201"}
+{"id": "g741672ac", "field": "title", "class": "title_standard", "was": "Kama Flow инвестировала 100 млн руб. в Platformeco", "now": "Kama Flow купил долю в Platformeco", "tag": "m201"}
+{"id": "gcfae418d", "field": "date", "class": "wrong_date", "was": "2025-10-01", "now": "2026-07-01 (закрытие, Ъ 01.07.2026)", "tag": "m201"}
+{"id": "gcfae418d", "field": "eco.target_fin", "class": "foreign_fact", "was": "выручка «Скандинавии» (почти 13 млрд ₽) как финансы ЮМГ", "now": "выручка группы EMC 27,3 млрд ₽", "tag": "m201"}
+{"id": "gcfae418d", "field": "eco.share", "class": "other", "was": "—", "now": "20,9% акций МКПАО «ЮМГ»", "tag": "m201"}
+{"id": "gcfae418d", "field": "title", "class": "title_standard", "was": "Холдинг ЮМГ (EMC) привлек инвестицию «Севергрупп»…", "now": "«Севергрупп» купил 20,9% ЮМГ", "tag": "m201"}
