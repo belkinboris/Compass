@@ -4998,3 +4998,11 @@
 {"id": "g24b33459", "field": "buyer", "class": "wrong_buyer", "was": "МКПАО «Эталон Груп»", "now": "ООО «Специализированный застройщик «Летниковская»» (ЕГРЮЛ: 65% с 05.04.2024)", "tag": "r1113a"}
 {"id": "g2d653619", "field": "eco.val", "class": "unsupported_claim", "was": "«прежняя экспертная оценка… укладывалась в эту сумму»", "now": "неофициальная оценка 8–13 млрд ₽ и убыток продавца по отчетности", "tag": "r1113a"}
 {"id": "gmru-arnest-reckitt", "field": "eco.context", "class": "verbatim", "was": "9 слов подряд из Ъ про 18-й пакет санкций; «Сама площадка»", "now": "пересказ", "tag": "r1113a"}
+{"id": "g37f106cd", "field": "eco.share", "class": "wrong_share", "was": "ООО «СБК КЗМ Плюс» — владелец ООО «ТД «Балтийский берег»» и ООО «Экопромэкс»", "now": "100% доли в ООО «СБК КЗМ Плюс»", "tag": "r1113b"}
+{"id": "g37f106cd", "field": "sum", "class": "sum_meaning", "was": "2–3 млрд ₽ (по оценке) — оценка аналитика ПТЦ", "now": "Не раскрыта", "tag": "r1113b"}
+{"id": "g37f106cd", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-04-04 (ЕГРЮЛ «СБК КЗМ Плюс»)", "tag": "r1113b"}
+{"id": "g5880d206", "field": "buyer", "class": "wrong_buyer", "was": "Структуры Игоря Кима", "now": "ООО «Экспомобилити» и Игорь Ким", "tag": "r1113b"}
+{"id": "g5880d206", "field": "seller", "class": "wrong_seller", "was": "Volkswagen Financial Services (группа)", "now": "Volkswagen Financial Services Overseas AG и Volkswagen Bank GmbH", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "buyer", "class": "wrong_buyer", "was": "Структуры Сергея Сударикова", "now": "АО «ИК «Регион»» (ЕГРЮЛ «Россиума»)", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "title", "class": "title_standard", "was": "Структуры Сергея Сударикова купили долю в «Россиуме» у Романа Авдеева", "now": "ИК «Регион» купила долю в «Россиуме» у Романа Авдеева", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "law.struct", "class": "language", "was": "по данным Forbes", "now": "по неофициальным данным", "tag": "r1113b"}
