@@ -3925,3 +3925,29 @@
 {"field": "date", "class": "wrong_date", "was": "2025-06-01", "now": "2025 (сделка в апреле)", "id": "gca9cd4b7", "tag": "m203"}
 {"field": "extra", "class": "other", "was": "служебная пометка о сумме", "now": "сведения о покупателе", "id": "gca9cd4b7", "tag": "m203"}
 {"field": "title", "class": "title_standard", "was": "Магнит продал агробизнес Москва на Дону холдингу Доминант", "now": "«Доминант» купил у «Магнита» агробизнес «Москва на Дону»", "id": "gca9cd4b7", "tag": "m203"}
+{"id": "g21795ec9", "field": "type", "class": "wrong_type", "was": "M&A (доля 31% без контроля)", "now": "Инвестиция", "tag": "m215"}
+{"id": "g21795ec9", "field": "date", "class": "wrong_date", "was": "2026-08-04 (заметка TAdviser)", "now": "2026-07-15 (ЕГРЮЛ)", "tag": "m215"}
+{"id": "g21795ec9", "field": "eco.share", "class": "wrong_share", "was": "пересказ «Контур.Фокуса» о составе участников", "now": "Доля в ООО «Алми прайм»", "tag": "m215"}
+{"id": "g21795ec9", "field": "eco.context", "class": "foreign_fact", "was": "доли Мехдиева в «Депо Три Вокзала» и «Хлебном месте»", "now": "о самой «Алми прайм»", "tag": "m215"}
+{"id": "g21795ec9", "field": "events.0.note", "class": "other", "was": "описание компании вместо события", "now": "выход Мехдиева и рост доли Койчева", "tag": "m215"}
+{"id": "g21795ec9", "field": "title", "class": "title_standard", "was": "Совладелец «Депо Три Вокзала» продал долю…", "now": "Виталий Койчев купил долю в «Алми прайм»", "tag": "m215"}
+{"id": "g6d73538c", "field": "eco.rationale", "class": "invented_rationale", "was": "Покупатель прорабатывает несколько концепций", "now": "—", "tag": "m215"}
+{"id": "g6d73538c", "field": "asset", "class": "wrong_target", "was": "5 гектаров земли в бывшей промзоне «Свиблово»", "now": "Два участка на Кольской улице, вл. 12 и 14", "tag": "m215"}
+{"id": "g6d73538c", "field": "title", "class": "title_standard", "was": "«Основа» приобрела 5 гектаров земли…", "now": "Группа «Основа» купила два участка…", "tag": "m215"}
+{"id": "g70e51ff1", "field": "date", "class": "wrong_date", "was": "2026-07-31 (статья)", "now": "2026-07-21 (продажа акций)", "tag": "m215"}
+{"id": "g70e51ff1", "field": "type", "class": "wrong_type", "was": "M&A (малый пакет)", "now": "Инвестиция", "tag": "m215"}
+{"id": "g70e51ff1", "field": "eco.sum", "class": "wrong_sum", "was": "JPMorgan не раскрыл количество… (рассказ)", "now": "Не раскрыта", "tag": "m215"}
+{"id": "g70e51ff1", "field": "eco.context", "class": "unsupported_claim", "was": "во всех случаях условия одинаковы", "now": "снято", "tag": "m215"}
+{"id": "g70e51ff1", "field": "events.0.note", "class": "unsupported_claim", "was": "второй крупный пакет", "now": "о продаже акций «Роснефти»", "tag": "m215"}
+{"id": "g70e51ff1", "field": "title", "class": "title_standard", "was": "JPMorgan продал акции «Роснефти»", "now": "Неназванный покупатель купил акции «Роснефти» у JPMorgan", "tag": "m215"}
+{"id": "g0431fc51", "field": "sum", "class": "sum_meaning", "was": "1–1,5 млрд ₽ (по оценке) — оценка аналитика", "now": "Не раскрыта", "tag": "m215"}
+{"id": "g0431fc51", "field": "asset", "class": "wrong_target", "was": "обанкротившийся производитель телевизоров «Квант»", "now": "Активы ООО «Квант»", "tag": "m215"}
+{"id": "g0431fc51", "field": "law.terms", "class": "foreign_fact", "was": "комментарий юриста к апрельскому входу в капитал", "now": "—", "tag": "m215"}
+{"id": "g0431fc51", "field": "events.0", "class": "aggregator_source", "was": "Mergers.ru", "now": "Коммерсантъ", "tag": "m215"}
+{"id": "g0431fc51", "field": "title", "class": "title_standard", "was": "NexTouch объявила о покупке…", "now": "NexTouch собирается купить активы «Кванта»", "tag": "m215"}
+{"id": "gac1a0c11", "field": "buyer_name", "class": "wrong_buyer", "was": "Игорь Сметанев", "now": "ООО «Основание 2.718» (ЕГРЮЛ)", "tag": "m215"}
+{"id": "gac1a0c11", "field": "type", "class": "wrong_type", "was": "M&A (6%)", "now": "Инвестиция", "tag": "m215"}
+{"id": "gac1a0c11", "field": "date", "class": "wrong_date", "was": "2026-08-05 (заметка)", "now": "2026-07-30 (ЕГРЮЛ)", "tag": "m215"}
+{"id": "gac1a0c11", "field": "eco.rationale", "class": "invented_rationale", "was": "направления работы Sentra", "now": "—", "tag": "m215"}
+{"id": "gac1a0c11", "field": "eco.share", "class": "wrong_share", "was": "перечень всех участников", "now": "6% доли в ООО «Защищенные системы»", "tag": "m215"}
+{"id": "gac1a0c11", "field": "title", "class": "title_standard", "was": "Совладелец R-Vision купил долю в ИБ-компании Sentra", "now": "«Основание 2.718» купило 6% ИБ-стартапа Sentra", "tag": "m215"}
