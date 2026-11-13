@@ -11668,3 +11668,43 @@ def test_reminder_is_called_by_sweep_and_ship_decisions_without_breaking_them():
     finally:
         sw.subprocess.run = orig
     assert calls and calls[0][0][-1] == "--write"
+
+
+def test_reread_writer_survives_stale_index_lock_and_names_dirty_files(tmp_path, monkeypatch):
+    """Писатель вычитки, 13 ноября 2026: (1) Bus error оставил пустой .git/index.lock —
+    девять партий подряд получили «git pull --rebase не прошел»; теперь пустой замок
+    без живого git снимается; (2) rebase не шел из-за чужих грязных файлов — журнал
+    обязан их назвать; (3) commit не создан — HEAD сверяется (здесь — сама сверка)."""
+    import subprocess as sp
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import reread_writer as rw
+    git = lambda cwd, *a: sp.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *a], cwd=cwd,
+                                 capture_output=True, text=True, check=True)
+    origin = tmp_path / "o.git"
+    git(tmp_path, "init", "-q", "--bare", "-b", "main", str(origin))
+    a, b = tmp_path / "a", tmp_path / "b"
+    git(tmp_path, "clone", "-q", str(origin), str(a))
+    (a / "x.txt").write_text("1")
+    (a / "y.txt").write_text("1")
+    git(a, "add", ".")
+    git(a, "commit", "-q", "-m", "1")
+    git(a, "push", "-q", "origin", "HEAD:main")
+    git(tmp_path, "clone", "-q", str(origin), str(b))
+    (b / "x.txt").write_text("2")
+    git(b, "commit", "-q", "-am", "2")
+    git(b, "push", "-q", "origin", "HEAD:main")
+    monkeypatch.setattr(rw.ra, "ROOT", str(a))
+    monkeypatch.setattr(rw.ra, "LOG", str(tmp_path / "log"))
+    lock = a / ".git" / "index.lock"
+    lock.write_text("")
+    assert not rw.clear_stale_index_lock(git_running=True) and lock.exists(), "живой git — замок не трогаем"
+    assert rw.clear_stale_index_lock(git_running=False) and not lock.exists()
+    lock.write_text("x")
+    assert not rw.clear_stale_index_lock(git_running=False), "непустой замок — не наш случай"
+    lock.unlink()
+    (a / "x.txt").write_text("чужая правка")
+    before = rw.head()
+    code, out = rw.pull()
+    assert code and "x.txt" in out and "Грязные отслеживаемые файлы" in out
+    assert rw.head() == before
+    assert "x.txt" in (tmp_path / "log").read_text()

@@ -61,6 +61,7 @@ import tag_themes                                         # noqa: E402
 from textmatch import _same_word, _yo, typo_flat  # noqa: E402,F401  (31.10.2026: без review)
 from milestones import POSTWORTHY_MILESTONE_KINDS  # noqa: E402,F401
 import link_named_parties_to_existing_profiles as linker  # noqa: E402
+from pipeline import placeholders                         # noqa: E402
 
 DATA = os.path.join(ROOT, 'static', 'data', 'deals_promoted.json')
 INDEX = os.path.join(ROOT, 'static', 'index.html')
@@ -535,6 +536,13 @@ def already_applied(fix, card, companies=None):
     # запись применена: ее отпечаток в `proofread_absorbed` (только записи
     # до вычитки).
     if fix['new'] is not None and fix_fingerprint(fix['new']) in ((card.get('proofread_absorbed') or {}).get(fix['field']) or []):
+        return True
+    # Снятие поля достигнуто, если поле пусто по смыслу (None, «—», «Не раскрыта» —
+    # канон pipeline/placeholders.py). 13 ноября 2026: архивная запись gab0f3dde.sum
+    # ждала None, вычитка m216 поставила «Не раскрыта» — и шаг review.py всех
+    # партий вычитки отказывал полчаса. Только строки и None: 0 в числовом поле — факт.
+    if (fix['new'] is None or isinstance(fix['new'], str)) and (current is None or isinstance(current, str)) \
+            and placeholders.is_empty(fix['new'], fix['field']) and placeholders.is_empty(current, fix['field']):
         return True
     if current is None or fix['new'] is None:
         return False

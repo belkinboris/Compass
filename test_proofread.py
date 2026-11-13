@@ -195,6 +195,23 @@ def test_run_writes_whole_cards_only_and_second_run_changes_nothing(monkeypatch)
     assert any("уже применено" in line for line in log)
 
 
+def test_removal_fix_is_applied_when_field_is_empty_by_meaning():
+    """Снятие поля (new=None) применено, если в базе пустое по смыслу значение.
+
+    Настоящий случай 13 ноября 2026: архивная запись gab0f3dde.sum (old «32 млрд ₽»,
+    new None), вычитка m216 записала «Не раскрыта» — review.py счел запись
+    непримененной и отказывал в записи всем партиям вычитки полчаса."""
+    import review
+    fix = {"id": "gab0f3dde", "field": "sum", "old": "32 млрд ₽", "new": None, "quote": "…", "why": "…"}
+    for empty in (None, "", "—", "Не раскрыта", "Не раскрыто", "публично не сообщалось"):
+        assert review.already_applied(fix, {"id": "gab0f3dde", "sum": empty}), empty
+    # обратное: запись ставила «—», поле снято совсем
+    assert review.already_applied(dict(fix, new="—"), {"id": "gab0f3dde"})
+    # факт в поле — запись не применена
+    assert not review.already_applied(fix, {"id": "gab0f3dde", "sum": "32 млрд ₽"})
+    assert not review.already_applied(fix, {"id": "gab0f3dde", "sum": "не раскрыта (EV 21 млрд ₽)"})
+
+
 def test_fixes_table_survives_proofreading():
     """Запись FIXES, примененная ДО вычитки, считается примененной и после нее;
     запись, добавленная ПОСЛЕ, — нет (иначе review.py пропустил бы ее навсегда)."""
