@@ -5733,26 +5733,34 @@ def test_forum_day_block_shows_the_nearest_session(browser, base_url):
 
 def test_events_split_into_upcoming_and_past_by_moscow_date(browser, base_url):
     """Владелец, 12 ноября 2026: «Форум уже можно оставить как прошедшее
-    мероприятие, а это как грядущее». Раздел делится на «Предстоящие» и
-    «Прошедшие» по дате (по Москве, на следующий день после даты); прошедшее
-    приглушено; пустые «Предстоящие» — одна строка без рамки."""
+    мероприятие, а это как грядущее». Партнер, 13 ноября 2026: «Раньше лучше
+    было, когда сверху были кнопки»; «он убрал красный цвет у прошедшего форума
+    зачем-то — пусть будет». «Предстоящие» и «Прошедшие» — кнопками сверху
+    (по Москве, на следующий день после даты); прошедшее в своем цвете с мелкой
+    пометкой «прошло»; пустые «Предстоящие» — одна строка без рамки."""
     pg = _events_page(browser, base_url, "2026-11-13", "#/materials")
     try:
         pg.wait_for_selector(".evl")
-        heads = [h.strip() for h in pg.locator(".evl-h h2").all_inner_texts()]
-        assert heads == ["Предстоящие", "Прошедшие"], heads
-        soon = pg.locator("[data-evl=soon] .evl-item").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
-        past = pg.locator("[data-evl=past] .evl-item").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
-        assert soon == ["#/event/pearl-meeting-2026"] and past == ["#/event/ma-forum-2026"], (soon, past)
-        assert pg.locator("[data-evl=past] .evl-item.evl-past").count() == 1
-        assert "регистрация открыта" not in pg.inner_text("[data-evl=past]")
-        # после встречи предстоящих нет: спокойная строка, без пустой рамки
+        tabs = [t.strip() for t in pg.locator(".evl-tabs button").all_inner_texts()]
+        assert tabs == ["Предстоящие", "Прошедшие"], tabs
+        assert pg.locator(".evl-tabs button.on").inner_text().strip() == "Предстоящие"
+        hrefs = lambda: pg.locator("#evlList .evl-item").evaluate_all("a=>a.map(x=>x.getAttribute('href'))")
+        assert hrefs() == ["#/event/pearl-meeting-2026"], hrefs()
+        pg.click("[data-evtab=past]"); pg.wait_for_timeout(200)
+        assert hrefs() == ["#/event/ma-forum-2026"], hrefs()
+        assert "регистрация открыта" not in pg.inner_text("#evlList")
+        assert pg.locator("#evlList .evl-chips span.was").inner_text().strip() == "прошло"
+        bg = pg.evaluate("getComputedStyle(document.querySelector('#evlList .evl-date')).backgroundColor")
+        assert bg == "rgb(200, 50, 30)", bg   # красный форума, не серый
+        # после встречи предстоящих нет: по умолчанию «Прошедшие», в «Предстоящих» — строка без рамки
         pg.evaluate("EVENTS.forEach(e=>{if(e.id==='pearl-meeting-2026')e.date='2026-11-12'}); renderMaterials('events')")
         pg.wait_for_timeout(300)
+        assert pg.locator(".evl-tabs button.on").inner_text().strip() == "Прошедшие"
+        assert pg.locator("#evlList .evl-item").count() == 2
+        pg.click("[data-evtab=soon]"); pg.wait_for_timeout(200)
         q = pg.locator("p.evl-quiet")
         assert q.count() == 1 and q.inner_text().strip() == "Ближайшее мероприятие объявим здесь"
         assert pg.evaluate("getComputedStyle(document.querySelector('p.evl-quiet')).borderTopStyle") == "none"
-        assert pg.locator("[data-evl=past] .evl-item").count() == 2
         assert not pg.crashes, pg.crashes
     finally:
         pg.close()
@@ -5793,7 +5801,12 @@ def test_meeting_page_is_one_record_and_shows_only_known_fields(browser, base_ur
                          "Инвестиционный клуб «Сикомора»", "7 990 ₽", "проспект Андропова, 18к6"):
                 assert part in text, part
             assert "Время" not in pg.inner_text(".ev-join") and "промокод" not in text.lower()
-            assert pg.locator("a.ev-btn, a.ev-cta").evaluate_all("a=>a.map(x=>x.getAttribute('href'))") == ["/go/pearl-meeting-site"] * 3
+            assert pg.locator("a.ev-btn, a.ev-cta").evaluate_all("a=>a.map(x=>x.getAttribute('href'))") == ["/go/pearl-meeting-site"] * 2
+            # одна плоская шапка в одном цвете: без жемчужины, градиентов и полосы-плашки внизу
+            assert pg.locator(".ev-pearl, .ev-final").count() == 0
+            assert pg.evaluate("getComputedStyle(document.querySelector('.ev-hero')).backgroundImage") == "none"
+            assert pg.evaluate("getComputedStyle(document.querySelector('.ev-hero')).backgroundColor") == "rgb(14, 103, 56)"
+            assert pg.evaluate("getComputedStyle(document.querySelector('.ev-join .ev-btn')).backgroundColor") == "rgb(14, 103, 56)"
             assert "ё" not in text.lower()
             assert pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0, w
             assert not pg.crashes, pg.crashes
@@ -5821,8 +5834,9 @@ def test_draft_event_is_hidden_everywhere(browser, base_url):
 def test_home_event_button_disappears_after_the_date(browser, base_url):
     """Кнопка мероприятия на главной (место красной кнопки форума) ведет на
     ближайшее предстоящее мероприятие с homeCta и исчезает сама на следующий
-    день после даты — без правки руками."""
-    for day, want in (("2026-11-12", "#/event/ma-forum-2026"), ("2026-11-13", "#/event/pearl-meeting-2026"),
+    день после даты — без правки руками. У встречи «Сикоморы» homeCta нет
+    (партнер и владелец, 13 ноября 2026: «Пора убирать красную кнопочку»)."""
+    for day, want in (("2026-11-12", "#/event/ma-forum-2026"), ("2026-11-13", None),
                       ("2026-11-18", None)):
         pg = _events_page(browser, base_url, day, "#/")
         try:

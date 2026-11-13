@@ -2894,26 +2894,24 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .evl-empty{font-size:14px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:12px;padding:18px 22px}
 .evl-tabs button{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted);background:#fff;cursor:pointer;font-family:inherit}
 .evl-tabs button.on{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff}
-/* Предстоящие / прошедшие (12 ноября 2026): два раздела одной колонкой, прошедшие
-   приглушены; пустые «Предстоящие» — одна строка без рамки. */
+/* Предстоящие / прошедшие — кнопками сверху (партнер, 13 ноября 2026: «Раньше
+   лучше было, когда сверху были кнопки»). Прошедшее НЕ обесцвечивается: карточка
+   в цвете мероприятия, «прошло» — мелкая пометка. Пустые «Предстоящие» — одна
+   строка без рамки. */
 .evl-list{display:grid;gap:12px}
-.evl-h-past{margin-top:34px}
 .evl-quiet{font-size:15px;color:var(--muted);margin:2px 2px 0;font-family:var(--f-display)}
-.evl-past .evl-date{background:var(--line-soft);color:var(--muted)}
-.evl-past .evl-kind{color:var(--muted)}
-.evl-past .evl-t{color:#3B434B}
+.evl-chips span.was{color:var(--muted);border-color:var(--line-soft)}
 .evl-date b.tba{font-size:26px}
 @media(max-width:760px){.evl-date b.tba{font-size:22px}}
 /* Шапка прошедшего: вместо отсчета спокойная строка. */
 .ev-done{font-family:var(--f-display);font-size:24px;line-height:1.3;max-width:300px}
 .ev-hero .r .big.tba{font-size:46px}
 .ev-hero .sub{font-family:var(--f-display);font-size:clamp(19px,2.2vw,25px);line-height:1.3;opacity:.92;margin-top:-4px}
-.ev-hero .r>*{position:relative}
-.ev-hero .r>.ev-pearl{position:absolute;right:26px;bottom:86px;width:150px;height:150px;opacity:.95;pointer-events:none}
 .ev-solo .ev-hero .l{padding:44px 40px 40px;gap:16px}
 .ev-solo .ev-hero .r{padding:36px 32px}
 .ev-solo .ev-cta{font-size:15px;padding:13px 26px}
-/* Встреча без программы: «о чем» и карточка участия рядом, воздушно. */
+/* Встреча без программы: «о чем» и карточка участия рядом — белые карточки, как
+   «Анонс» у форума; цвет мероприятия — только в шапке, датах и кнопке. */
 .ev-body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:22px;margin-top:22px;align-items:start}
 .ev-about{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px 34px}
 .ev-about p{font-size:16px;line-height:1.7;margin:12px 0 0;max-width:640px}
@@ -2922,7 +2920,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-topics li{counter-increment:evt;display:grid;grid-template-columns:44px minmax(0,1fr);align-items:baseline;padding:13px 0;border-top:1px solid var(--line-soft);font-size:15.5px;line-height:1.45}
 .ev-topics li:first-child{border-top:0}
 .ev-topics li::before{content:counter(evt,decimal-leading-zero);font-family:var(--f-display);font-size:22px;color:var(--ev-c,#C8321E)}
-.ev-join{background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:26px 26px 24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:84px}
+.ev-join{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 26px 24px;display:flex;flex-direction:column;gap:14px;position:sticky;top:84px}
 .ev-join dl{display:grid;gap:0;margin:0}
 .ev-join dl div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--line)}
 .ev-join dl div:first-child{border-top:0}
@@ -2931,7 +2929,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-join-q{font-size:14.5px;line-height:1.55;margin:0;color:var(--ink)}
 .ev-join small{font-size:12px;color:var(--muted);text-align:center}
 .ev-btn{display:block;text-align:center;background:var(--ev-btn,var(--ev-a,#C8321E));color:#fff;font-weight:700;font-size:15px;border-radius:999px;padding:14px 22px;text-decoration:none;transition:filter .2s}
-.ev-btn:hover{filter:brightness(1.25)}
+.ev-btn:hover{filter:brightness(.88)}
 .ev-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .ev-person{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
 .ev-person>div{display:flex;flex-direction:column;gap:3px;min-width:0}
@@ -2942,39 +2940,11 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
 .ev-org .rl{font-size:12.5px;font-weight:400;color:var(--muted)}
 .ev-org-x{display:flex;align-items:center;min-height:64px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;font-weight:600;font-size:14.5px;line-height:1.3;min-width:0}
 .ev-org.few{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-.ev-final{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:34px;background:var(--ev-a,#C8321E);color:#fff;border-radius:12px;padding:24px 28px}
-.ev-final>div{display:flex;flex-direction:column;gap:4px;min-width:0}
-.ev-final b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.25}
-.ev-final span{font-size:13.5px;opacity:.8}
-.ev-final .ev-btn{background:#fff;color:var(--ev-a,#C8321E);flex:none}
-.ev-final .ev-btn:hover{filter:none;background:var(--ivory)}
 @media(max-width:860px){.ev-body{grid-template-columns:1fr}.ev-join{position:static}}
 @media(max-width:760px){.ev-solo .ev-hero .l{padding:28px 20px 26px}.ev-solo .ev-hero .r{padding:24px 20px}
-  .ev-hero .r>.ev-pearl{width:96px;height:96px;right:14px;bottom:auto;top:14px}
   .ev-about{padding:22px 20px}.ev-about p{font-size:15px}.ev-join{padding:22px 20px}
   .ev-people{grid-template-columns:1fr}.ev-org.few{grid-template-columns:1fr}
-  .ev-final{padding:22px 20px}.ev-final .ev-btn{width:100%}.ev-done{font-size:21px}}
-/* Шапка встречи «Сикоморы» (владелец, 12 ноября 2026: «ориентироваться на стиль
-   Сикоморы… но чтобы вписывалось в наш стиль»): темный зелено-черный фон с мягким
-   свечением, кремовый текст, правая часть — плашка в тонкой рамке, зеленая
-   кнопка. Без их логотипа, шрифтов и фотографий; остальная страница — наша светлая. */
-.ev-t-pearl .ev-hero{background:radial-gradient(ellipse 70% 90% at 88% 10%,rgba(70,170,115,.30),transparent 60%),radial-gradient(ellipse 60% 70% at 0% 100%,rgba(70,170,115,.14),transparent 60%),#07120E;color:#F3F1E9}
-@media(min-width:761px){.ev-t-pearl .ev-hero{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
-.ev-t-pearl .ev-hero .kick{color:#C9AE7C;opacity:1}
-.ev-t-pearl .ev-hero .sub{color:#C9AE7C;opacity:1}
-.ev-t-pearl .ev-hero p{opacity:.82}
-.ev-t-pearl .ev-hero .meta span{border-color:rgba(243,241,233,.22);color:#F3F1E9}
-.ev-t-pearl .ev-hero .r{background:rgba(243,241,233,.04);border:1px solid rgba(243,241,233,.16);border-radius:16px;margin:24px 24px 24px 0;overflow:hidden;backdrop-filter:blur(2px)}
-.ev-t-pearl .ev-hero .partner{border-top-color:rgba(243,241,233,.16)}
-.ev-t-pearl .ev-hero .partner b{color:#C9AE7C}
-.ev-t-pearl .ev-cta{background:var(--ev-btn);color:#F3F1E9;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 8px 28px rgba(46,125,87,.35)}
-.ev-t-pearl .ev-cta:hover{filter:brightness(1.12)}
-.ev-t-pearl .ev-final{background:radial-gradient(ellipse 60% 120% at 100% 0%,rgba(70,170,115,.28),transparent 60%),#07120E;color:#F3F1E9}
-.ev-t-pearl .ev-final .ev-btn{background:var(--ev-btn);color:#F3F1E9}
-.ev-t-pearl .ev-final .ev-btn:hover{background:var(--ev-btn);filter:brightness(1.12)}
-.ev-t-pearl .ev-ava{background:#0F2B21;color:#C9AE7C}
-.evl-item.ev-t-pearl:not(.evl-past) .evl-date{background:radial-gradient(ellipse at 80% 0%,rgba(70,170,115,.35),transparent 65%),#07120E;color:#F3F1E9}
-@media(max-width:760px){.ev-t-pearl .ev-hero .r{margin:0 14px 14px}}
+  .ev-done{font-size:21px}}
 .ev-wrap{max-width:1180px;margin:0 auto}
 
 .legal-page{max-width:720px}
@@ -11889,7 +11859,7 @@ function renderPhoneApp(){
      [что обсудят], audience; orgs [{firm (id страницы фирмы), name, role}];
      people [{name, position, company, part («Ведущий встречи», «Спикер»)}];
      register (/go/<метка> из app/site.py), ctaLabel, site, siteLabel,
-     homeCta (подпись красной кнопки на главной, пока мероприятие впереди),
+     homeCta (подпись кнопки на главной, пока мероприятие впереди; без поля кнопки нет),
      speakersFrom, cards [{tag, title, titlePast, text[], textPast[], by,
      link:[подпись, адрес], material (номер в materials — статья карточкой)}],
      materials [{k,t,u}], materialsTitle, materialsNote, program [{t,title,mod,sp}].
@@ -11934,13 +11904,19 @@ const EVENTS = [{
   peopleTitle:"Кто проводит встречу",
   people:[{name:"Сергей Шершень", position:"Руководитель по стратегии (CEO-1)", company:"Strategy Partners, дочерняя компания Сбербанка", part:"Модератор"},
     {name:"Илья Кармишин", position:"Сооснователь инвестиционного клуба «Сикомора»", part:"Соорганизатор встречи"}],
-  register:"/go/pearl-meeting-site", ctaLabel:"Зарегистрироваться →", homeCta:"Встреча инвесторов 17 ноября"
+  /* homeCta снят (партнер, 13 ноября 2026: «ты уверен, что хочешь на основной
+     страничке, чтобы была кнопка, учитывая, что это довольно спорный форум»;
+     владелец: «Пора убирать красную кнопочку»). */
+  register:"/go/pearl-meeting-site", ctaLabel:"Зарегистрироваться →"
 }];
-/* Цвета: forum — красный форума (одобренный макет 29 октября); pearl — шапка в
-   настроении «Сикоморы» (владелец, 12 ноября 2026: темный зелено-черный фон с
-   мягким свечением, кремовый текст, зеленая кнопка), но в наших цветах.
-   btn — цвет кнопок регистрации и кнопки на главной. */
-const EV_THEMES={forum:{a:"#C8321E",b:"#9E2716",c:"#C8321E",btn:"#C8321E"},pearl:{a:"#0F2B21",b:"#17402F",c:"#A3814E",btn:"#2E7D57"}};
+/* Цвета: у мероприятия ОДИН акцент, плоский, без градиентов, свечения и золота
+   (партнер, 13 ноября 2026, о первой шапке встречи: «мешанина очень насыщенного
+   зеленого и непонятно переливается во что. Плюс золотистый»; «красная была более
+   минималистичная… яркая… но в остальном очень минималистичная»).
+   a — шапка и даты, b — правая часть шапки (тот же цвет темнее), c — мелкие
+   акценты, btn — кнопки регистрации. forum — красный форума (макет 29 октября);
+   pearl — глубокий зеленый из палитры «Сикоморы» (#0E6738 и #0F5A33 с их сайта). */
+const EV_THEMES={forum:{a:"#C8321E",b:"#9E2716",c:"#C8321E",btn:"#C8321E"},pearl:{a:"#0E6738",b:"#0F5A33",c:"#0E6738",btn:"#0E6738"}};
 function evTheme(ev){const t=EV_THEMES[ev.theme]||EV_THEMES.forum;return `--ev-a:${t.a};--ev-b:${t.b};--ev-c:${t.c};--ev-btn:${t.btn}`;}
 const EV_WEEKDAYS=["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"];
 const EV_MONTHS=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
@@ -11969,32 +11945,45 @@ function evItemHtml(ev){
   const p=evDateParts(ev); const up=evUpcoming(ev);
   const chips=[ev.program&&ev.program.length?`${ev.program.length} ${plural(ev.program.length,"сессия","сессии","сессий")}`:"",
     ev.materials&&ev.materials.length?`${ev.materials.length} ${plural(ev.materials.length,"материал","материала","материалов")}`:"",
-    ev.price&&up?ev.price:"", up?(ev.register?"регистрация открыта":""):"прошло"].filter(Boolean);
+    ev.price&&up?ev.price:"", up&&ev.register?"регистрация открыта":""].filter(Boolean);
   const orgs=ev.orgs&&ev.orgs.length?`<div class="evl-m">${ev.orgs.length>1?"Организаторы":"Организатор"}: ${esc(evOrgsText(ev))}</div>`:"";
   const date=p?`<b>${p.d}</b><span>${p.mon}</span><small>${p.y}${ev.time?` · ${esc(ev.time)}`:""}</small>`:`<b class="tba">Скоро</b><span>дата уточняется</span>`;
-  return `<a class="evl-item ev-t-${ev.theme||"forum"}${up?"":" evl-past"}" href="#/event/${ev.id}" style="${evTheme(ev)}"><div class="evl-date">${date}</div>
+  return `<a class="evl-item ev-t-${ev.theme||"forum"}" href="#/event/${ev.id}" style="${evTheme(ev)}"><div class="evl-date">${date}</div>
 <div><span class="evl-kind">${esc(ev.kind)} · Информационный партнер — Компас</span><div class="evl-t">${esc(ev.title)}</div>
 ${ev.place?`<div class="evl-m">${esc(ev.place)}</div>`:""}${orgs}
-<div class="evl-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div></div>
+<div class="evl-chips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}${up?"":`<span class="was">прошло</span>`}</div></div>
 <span class="evl-go">Подробнее →</span></a>`;
 }
-/* Мероприятия делятся на «Предстоящие» и «Прошедшие» (владелец, 12 ноября 2026).
-   Предстоящих нет — одна спокойная строка без рамки; прошедших нет — раздела нет. */
-function eventsSectionHtml(){
+/* Мероприятия делятся на «Предстоящие» и «Прошедшие» (владелец, 12 ноября 2026) —
+   кнопками сверху, как было до 12 ноября (партнер, 13 ноября 2026: «Раньше лучше
+   было, когда сверху были кнопки»). По умолчанию — «Предстоящие», если они есть.
+   Предстоящих нет — одна спокойная строка без рамки. */
+function evSplit(){
   const pub=evPublished();
-  const soon=pub.filter(evUpcoming).sort((a,b)=>(a.date||"9").localeCompare(b.date||"9"));
-  const past=pub.filter(ev=>!evUpcoming(ev)).sort((a,b)=>b.date.localeCompare(a.date));
-  return `<section class="evl reveal"><div class="evl-h"><h2>Предстоящие</h2></div>
-${soon.length?`<div class="evl-list" data-evl="soon">${soon.map(evItemHtml).join("")}</div>`:`<p class="evl-quiet" data-evl="soon">Ближайшее мероприятие объявим здесь</p>`}
-${past.length?`<div class="evl-h evl-h-past"><h2>Прошедшие</h2></div><div class="evl-list" data-evl="past">${past.map(evItemHtml).join("")}</div>`:""}</section>`;
+  return {soon:pub.filter(evUpcoming).sort((a,b)=>(a.date||"9").localeCompare(b.date||"9")),
+    past:pub.filter(ev=>!evUpcoming(ev)).sort((a,b)=>b.date.localeCompare(a.date))};
+}
+function eventsListHtml(tab){
+  const list=evSplit()[tab];
+  if(list.length) return `<div class="evl-list" data-evl="${tab}">${list.map(evItemHtml).join("")}</div>`;
+  return `<p class="evl-quiet" data-evl="${tab}">${tab==="soon"?"Ближайшее мероприятие объявим здесь":"Прошедших мероприятий пока нет"}</p>`;
+}
+function eventsSectionHtml(){
+  const tab=evSplit().soon.length?"soon":"past";
+  return `<section class="evl reveal"><div class="evl-h"><div class="evl-tabs"><button type="button" data-evtab="soon" class="${tab==="soon"?"on":""}">Предстоящие</button><button type="button" data-evtab="past" class="${tab==="past"?"on":""}">Прошедшие</button></div></div>
+<div id="evlList">${eventsListHtml(tab)}</div></section>`;
+}
+function bindEventTabs(){
+  app.querySelectorAll("[data-evtab]").forEach(b=>b.onclick=()=>{
+    app.querySelectorAll("[data-evtab]").forEach(x=>x.classList.toggle("on",x===b));
+    const m=document.getElementById("evlList"); if(m) m.innerHTML=eventsListHtml(b.dataset.evtab);
+  });
 }
 function evPersonHtml(x){
   const ini=x.name.split(/\s+/).map(w=>w[0]).slice(0,2).join("");
   const line=[x.position,x.company].filter(Boolean).join(", ");
   return `<div class="ev-person"><span class="ev-ava" aria-hidden="true">${esc(ini)}</span><div>${x.part?`<span class="ev-tag">${esc(x.part)}</span>`:""}<b>${esc(x.name)}</b>${line?`<span>${esc(line)}</span>`:""}</div></div>`;
 }
-/* Жемчужина в шапке встречи — рисунок прямо в коде, без картинок с чужих сайтов. */
-const EV_PEARL=`<svg class="ev-pearl" viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="evPg" cx="38%" cy="34%" r="70%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#F3F1E9"/><stop offset=".75" stop-color="#C9C3B2"/><stop offset="1" stop-color="#8E8775"/></radialGradient><radialGradient id="evPh" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#C9AE7C" stop-opacity=".35"/><stop offset="1" stop-color="#C9AE7C" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="98" fill="url(#evPh)"/><circle cx="100" cy="100" r="58" fill="url(#evPg)"/><ellipse cx="80" cy="76" rx="16" ry="10" fill="#fff" opacity=".7" transform="rotate(-30 80 76)"/></svg>`;
 function renderEvent(id){
   const ev=evPublished().find(e=>e.id===id);
   if(!ev){location.hash="#/materials";return;}
@@ -12037,7 +12026,7 @@ ${ev.audience?`<h3>Кто участвует</h3><p>${esc(ev.audience)}</p>`:""}
 <p>${esc(ev.lead)}${ev.orgs&&ev.orgs.length>1?` Организаторы: ${esc(evOrgsText(ev))}.`:""}</p>
 ${meta.length?`<div class="meta">${meta.map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}
 ${cta}</div>
-<div class="r">${ev.theme==="pearl"?EV_PEARL:""}${clock}
+<div class="r">${clock}
 ${ev.speakersFrom?`<div class="cap">Среди спикеров — представители ${esc(ev.speakersFrom)}</div>`:""}
 <div class="partner">Информационный партнер<br><b>КОМПАС</b></div></div></div>
 ${about}
@@ -12046,7 +12035,6 @@ ${people}
 ${mats?`<div class="ev-h"><h2>${esc(ev.materialsTitle||"Материалы")}</h2>${ev.materialsNote?`<small>${esc(ev.materialsNote)}</small>`:""}</div><div class="mts">${mats}</div>`:""}
 ${prog?`<div class="ev-h"><h2>Программа</h2><small>${dayShort} · по сайту организатора</small></div><div class="ev-prog">${prog}</div>`:""}
 ${orgs?`<div class="ev-h"><h2>${ev.orgs.length>1?"Организаторы":"Организатор"}</h2></div><div class="ev-org${ev.orgs.length<3?" few":""}">${orgs}</div>`:""}
-${ev.about&&up&&ev.register?`<div class="ev-final"><div><b>${esc(ev.heroTitle||ev.title)}</b><span>${esc([dateStr,ev.time,ev.placeShort].filter(Boolean).join(" · ")||"Дату и место объявим здесь")}</span></div><a class="ev-btn" href="${ev.register}" target="_blank" rel="noopener">Зарегистрироваться</a></div>`:""}
 </section><div style="height:40px"></div></div>`;
   document.title=`${ev.heroTitle||ev.title}${dateStr?` — ${dateStr}`:""} · Проект Компас`;
   clearInterval(window._evTick);
@@ -12097,6 +12085,7 @@ async function renderMaterials(arg){
     renderMaterials(b.dataset.mt).then(()=>app.querySelectorAll(".reveal").forEach(e=>e.classList.add("in")));
   });
   rerun();
+  bindEventTabs();
   const pitchLink=document.getElementById("materialsPitchLink");
   if(pitchLink) pitchLink.onclick=e=>{e.preventDefault();openCorrectionDialog();};
   /* Карточки — кнопки заявки (владелец, 4 октября 2026): открывают тот же
