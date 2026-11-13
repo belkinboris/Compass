@@ -11782,3 +11782,15 @@ def test_reread_marathon_findings_on_real_cards():
     assert {"party_placeholder", "sum_is_expert_estimate"} <= set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
     for hint in ("sum_estimate_prose", "date_is_article_day", "auction_in_text", "late_event_in_terms"):
         assert hint not in rq.BLOCKING
+
+
+def test_milestone_snapshot_subject_is_entity_and_share():
+    """Пост об этапе «Библио-Глобуса» (12 ноября 2026) вышел с «Предмет:
+    Туроператор БГ» — именем профиля. Предмет снимка — общество и доля."""
+    import review
+    card = {"title": "x", "target": "t", "asset": "75% доли в ООО «Библио-Глобус Туроператор»",
+            "eco": {"share": "75% доли в ООО «Библио-Глобус Туроператор»"}}
+    snap = review.build_snapshot(card, {"t": {"name": "Туроператор БГ"}})
+    assert snap["asset"] == "75% доли в ООО «Библио-Глобус Туроператор»"
+    card2 = {"title": "y", "target": "t", "asset": "ООО «Рекитт Бенкизер» (завод бытовой химии в Клину)", "eco": {}}
+    assert review.build_snapshot(card2, {"t": {"name": "Рекитт Бенкизер"}})["asset"] == "ООО «Рекитт Бенкизер»"
