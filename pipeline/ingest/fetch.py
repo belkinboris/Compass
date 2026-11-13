@@ -18,6 +18,10 @@ vedomosti.ru — проверено). Поэтому:
 Ни один шаг не притворяется успешным: недоступный источник помечается
 недоступным и попадает в отчет.
 
+СТРАНИЦЫ СДЕЛОК КОНСУЛЬТАНТОВ (вид `deal_page`, 13 ноября 2026) — не лента, а
+страница со списком сделок на сайте фирмы; разбор и память о виденном — в
+`deal_pages.py`, отсюда только вызов.
+
 ЧТО СЧИТАЕТСЯ ЗАПИСЬЮ. `{source_id, url, title, summary, published, fetched}`.
 Ключ дедупликации — `url`: одну и ту же ссылку второй раз не сохраняем.
 
@@ -45,6 +49,8 @@ INBOX = os.path.join(ROOT, 'data', 'inbox')
 RAW = os.path.join(INBOX, 'raw')
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
 from source_names import is_undesirable  # noqa: E402
+sys.path.insert(0, HERE)
+import deal_pages  # noqa: E402
 FIXTURES = os.path.join(INBOX, 'fixtures')
 UA = 'Mozilla/5.0 (compatible; KompasBot/0.1; +https://kompas.deals)'
 TIMEOUT = 20
@@ -169,12 +175,22 @@ def fetch_source(src, offline=False):
         body = open(path, 'rb').read()
     else:
         try:
-            body = http_get(feed)
+            # Сайт консультанта — с повторами и браузерным заголовком: связь
+            # с ними из контейнера рвется (deal_pages.http_get).
+            body = deal_pages.http_get(feed) if src['kind'] == 'deal_page' else http_get(feed)
         except urllib.error.HTTPError as e:
             return [], 'HTTP %s' % e.code
         except Exception as e:                                  # noqa: BLE001
             return [], '%s: %s' % (type(e).__name__, str(e)[:80])
-    if src['kind'] == 'telegram':
+    if src['kind'] == 'deal_page':
+        # Страница со списком сделок консультанта: все ее записи, без памяти
+        # о виденном (память — в main, чтобы --verify ее не трогал).
+        if src['id'] not in deal_pages.PAGES:
+            return [], 'нет правила разбора в deal_pages.PAGES'
+        items = deal_pages.parse(body, src['id'])
+        if not items:
+            return [], 'страница открылась, но сделок на ней не разобрано — разметка изменилась?'
+    elif src['kind'] == 'telegram':
         items = parse_telegram(body, src['id'])
     elif src['kind'] == 'html_mergers':
         items = parse_mergers_ru_news(body, src['id'])
@@ -231,6 +247,10 @@ def main(argv):
     day = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     path = os.path.join(RAW, day + '.jsonl')
     added, errors = 0, []
+    # Память страниц сделок консультантов (deal_pages_seen.json, в git): сырье
+    # в git не хранится, а страница отдает все свои сделки каждый раз.
+    pages_seen = deal_pages.load_seen()
+    pages_before = json.dumps(pages_seen, sort_keys=True)
     with open(path, 'a', encoding='utf-8') as f:
         for src in sources:
             if not src.get('enabled'):
@@ -239,6 +259,8 @@ def main(argv):
             if err:
                 errors.append((src['id'], err))
                 continue
+            if src['kind'] == 'deal_page':
+                items = deal_pages.fresh(src['id'], items, pages_seen, day)
             for item in items:
                 if item['url'] in known:
                     continue
@@ -251,6 +273,8 @@ def main(argv):
                 item['fetched'] = day
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
                 added += 1
+    if not offline and json.dumps(pages_seen, sort_keys=True) != pages_before:
+        deal_pages.save_seen(pages_seen)
     print('Новых записей: %d -> %s' % (added, os.path.relpath(path, ROOT)))
     print('Источников с ошибкой: %d' % len(errors))
     for sid, err in errors[:15]:

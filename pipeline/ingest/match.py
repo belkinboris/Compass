@@ -326,6 +326,127 @@ def _common(a, b):
     return {s for s in (a & b) if s not in GENERIC_STEMS}
 
 
+# ---------- страница сделок консультанта ----------
+# Плитка на сайте инвестбанка называет стороны БЕЗ кавычек и в косвенном
+# падеже («Продажа 100% долей службы доставки Boxberry Яндексу»), а дата у
+# нее — месяц закрытия, а не день первой новости. Правила выше держатся на
+# кавычках и на 45 днях и такую запись с карточкой не связывают: из 25 плиток
+# Advance Capital привязались 4 (13 ноября 2026). Поэтому у записи со
+# страницы консультанта (`item['advisor']`) стороны карточки ищутся прямо в
+# тексте записи.
+FIRM_PAGE_STRONG_DAYS = 240
+FIRM_PAGE_WEAK_DAYS = 150
+_PARTY_NOISE = {'инвестор', 'инвесторы', 'менеджмент', 'консорциум', 'фонд', 'банк', 'частные', 'частный',
+                'физические', 'лица', 'лицо', 'структуры', 'основатели', 'акционер', 'российский',
+                'российские', 'россия', 'россии', 'иностранный', 'стратегический', 'финансовый', 'холдинг',
+                'управляющая', 'инвестиции', 'капитал', 'capital', 'partners', 'international', 'russia',
+                'the', 'and', 'для', 'при', 'под'}
+
+
+def _text_words(text):
+    text = str(text or '').lower().replace('ё', 'е')
+    return re.sub(r'[^a-zа-я0-9]+', ' ', text).split()
+
+
+def _word_in(word, words):
+    """Слово ключа в тексте с поправкой на падеж: «яндекс» — «яндексу»,
+    «лента» — «ленте». Короткое («мтс», «рбк») — только целиком."""
+    if len(word) < 4 or not re.search(r'[а-я]', word):
+        return {i for i, w in enumerate(words) if w == word
+                or (len(word) >= 4 and w.startswith(word) and len(w) <= len(word) + 2)}
+    stem = word[:max(4, len(word) - 2)]
+    return {i for i, w in enumerate(words) if w.startswith(stem) and abs(len(w) - len(word)) <= 3}
+
+
+def _party_hits(keys, words):
+    """Позиции слов текста, которыми названа сторона карточки (любой из ее
+    ключей целиком); пусто — сторона в тексте не названа."""
+    best = set()
+    for key in keys or ():
+        parts = [w for w in key.split() if w not in _PARTY_NOISE][:3]
+        if not parts or sum(len(w) for w in parts) < 3:
+            continue
+        found = [_word_in(w, words) for w in parts]
+        if all(found):
+            best |= set().union(*found)
+    return best
+
+
+_TITLE_NAME = re.compile(r'«([^»]{2,40})»|"([^"]{2,40})"|\b([A-Z][A-Za-z0-9&.\-]{2,}(?:\s+[A-Z][A-Za-z0-9&.\-]+)?)'
+                         r'|(?<=[а-яё%,] )([А-ЯЁ][А-ЯЁа-яё\-]{2,})')
+_TITLE_NAMES = {}
+
+
+def _title_names(row):
+    """Имена из заголовка карточки: в кавычках, латиницей, с заглавной буквы
+    не в начале. Профиль стороны часто назван юрлицом («Смарт Логистик
+    Боксберри»), а заголовок — так, как сделку зовет рынок («Boxberry»)."""
+    key = row.get('id')
+    if key not in _TITLE_NAMES:
+        names = set()
+        for m in _TITLE_NAME.finditer(str(row.get('title') or '')):
+            name = entity_key(next(g for g in m.groups() if g))
+            if name and name not in _PARTY_NOISE:
+                names.add(name)
+        _TITLE_NAMES[key] = names
+    return _TITLE_NAMES[key]
+
+
+def _firm_page_gap(item_date, row_date):
+    """Дни между записью и карточкой; у карточки с одним годом вместо даты
+    («2025») — тот же год считается близким."""
+    if re.fullmatch(r'\d{4}', str(row_date or '')):
+        return 120 if str(item_date or '')[:4] == str(row_date) else 9999
+    return days_between(item_date, row_date)
+
+
+def firm_page_match(item, idx):
+    """Запись со страницы сделок консультанта -> (id, причина) или (None, None).
+
+    Сильное — в тексте записи разными словами названы ДВЕ стороны карточки
+    (ключи профилей покупателя, предмета, продавца или имена из ее заголовка),
+    даты не дальше 240 дней. Слабое (повод прочитать, не решение) — названа
+    одна: предмет сделки или имя из заголовка."""
+    words = _text_words('%s %s' % (item.get('title') or '', item.get('summary') or ''))
+    firm = set(_text_words(item.get('advisor')))
+    words = [w for w in words if w not in firm]
+    # Для слабого совпадения годятся только ИМЕНА из заголовка записи: слово
+    # латиницей или с заглавной буквы не в начале («инвестору» — не имя).
+    raw = re.sub(r'[^A-Za-zА-Яа-яЁё0-9]+', ' ', str(item.get('title') or '')).split()
+    title_words = [w.lower().replace('ё', 'е') for i, w in enumerate(raw)
+                   if w.lower() not in firm and (re.match(r'[A-Za-z]', w) or (i and w[:1].isupper()))
+                   and w.lower() not in _PARTY_NOISE and len(w) >= 4]
+    strong, weak = None, None
+    for row in idx:
+        gap = _firm_page_gap(item.get('date'), row.get('date'))
+        if gap > FIRM_PAGE_STRONG_DAYS:
+            continue
+        groups = [_party_hits(row.get(k), words) for k in ('target_keys', 'buyer_keys', 'seller_keys')]
+        groups += [_party_hits({name}, words) for name in _title_names(row)]
+        groups = [g for g in groups if g]
+        if not groups:
+            continue
+        distinct = any(a - b and b - a or not (a & b) for i, a in enumerate(groups) for b in groups[i + 1:])
+        if distinct:
+            if strong is None or gap < strong[0]:
+                strong = (gap, row['id'])
+        elif gap <= FIRM_PAGE_WEAK_DAYS and (weak is None or gap < weak[0]):
+            # одна сторона — только если она названа в ЗАГОЛОВКЕ записи, а не
+            # мимоходом в описании
+            # … и это не покупатель: «Росатом» в заголовке записи не
+            # делает ее новостью о любой покупке «Росатома» того же года.
+            buyer = _party_hits(row.get('buyer_keys'), title_words)
+            named = _party_hits(row.get('target_keys'), title_words) or any(
+                _party_hits({name}, title_words) - buyer for name in _title_names(row))
+            if named:
+                weak = (gap, row['id'])
+    if strong:
+        return strong[1], 'совпали покупатель и предмет: стороны названы на странице сделок консультанта'
+    if weak:
+        return weak[1], 'сторона сделки названа на странице консультанта'
+    return None, None
+
+
 def match(item, idx):
     """item -> (deal_id, причина) или (None, None).
 
@@ -340,6 +461,10 @@ def match(item, idx):
     for row in idx:
         if url and url in row['urls']:
             return row['id'], 'тот же адрес источника'
+    if item.get('advisor'):
+        found = firm_page_match(item, idx)
+        if found[0]:
+            return found
 
     # Самый надежный способ связать длинный процесс: обе роли разобраны из
     # свежей новости, а существующая карточка еще не завершена.
