@@ -56,6 +56,7 @@ sys.path.insert(0, ROOT)                                  # telegram_endpoint в
 sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'publish'))
 sys.path.insert(0, os.path.join(ROOT, 'pipeline'))        # console_topics
 
+import card_twin                                         # noqa: E402
 import channels                                          # noqa: E402
 import console_topics                                     # noqa: E402
 import format_post                                       # noqa: E402
@@ -659,6 +660,16 @@ def build_plan(resend=None, only=None):
             else:
                 postponed += 1
             continue
+        # КАРТОЧКА-ДВОЙНИК В КОНСОЛЬ НЕ ИДЕТ (13 ноября 2026: «К+» / «Комфорт» и
+        # «Библио-Глобус» дошли до кнопки владельца, хотя сделки уже были в базе).
+        # Приемка сверяет карточку с базой; здесь — еще раз в момент показа (базу
+        # могла дополнить другая сессия) и с соседями по очереди.
+        if not readiness.is_shown(card):
+            twin = card_twin.blocked(card, base, pending['cards'])
+            if twin:
+                print('НЕ ПОКАЗЫВАЮ %s: %s' % (card['id'], card_twin.finding_text(twin)))
+                postponed += 1
+                continue
         # У ОДНОЙ КАРТОЧКИ ДВА СООБЩЕНИЯ, И ОТМЕТКА У КАЖДОГО СВОЯ. Раньше
         # флаг был один на оба: если 429 приходил МЕЖДУ ними, карточка
         # считалась разосланной целиком, и проект поста не уходил уже никогда

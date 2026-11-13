@@ -2589,6 +2589,30 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     assert client.get("/api/moderation/shown", params={"token": "чужой"}).status_code == 404
 
 
+def test_server_does_not_show_card_twin_of_a_base_deal(client, monkeypatch):
+    """13 ноября 2026 («К+» / «Комфорт»): принятая карточка о сделке, которая уже
+    есть в базе (та же статья, сумма и дата), сама в консоль не уходит; с причиной
+    читателя «это другая сделка» — уходит."""
+    _mod_env(monkeypatch)
+    url = "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"
+    card = {"id": "gtwin1", "title": "Группа «К+» купила у ФСК 50% управляющей компании «Комфорт»",
+            "status": "Закрыта", "date": "2026-09-14", "type": "M&A", "ind": "Недвижимость", "sum": "700 млн ₽",
+            "buyer_name": "Группа «К+»", "seller": "ГК ФСК", "asset": "50% УК «Комфорт»", "src": [["Ведомости", url]],
+            "reviewed": "2026-11-13", "accepted": "2026-11-13", "second_read": "2026-11-13", "eco": {}, "law": {},
+            "pending_since": "2026-11-13T15:05:00+00:00"}
+    base = {"deals": [{"id": "gbase1", "title": "Группа «К+» купила 50% группы «Комфорт» у ГК ФСК", "status": "Закрыта",
+                       "date": "2026-09-14", "sum": "700 млн ₽", "seller": "ГК ФСК",
+                       "asset": "50% долей в группе «Комфорт»", "src": [["Ведомости", url]]}], "companies": {}}
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: base)
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: (sent.append((method, payload)) or {"ok": True, "result": {"message_id": len(sent)}}))
+    assert main.console_show_ready_cards() == {"shown": 0} and not sent, sent
+    card["accepted_notes"] = {"checked": {"duplicate_card": "другой пакет: вторые 50%"}}
+    assert main.console_show_ready_cards() == {"shown": 1}
+
+
 def test_moderation_button_decision_is_stored_and_served(client, monkeypatch):
     """Кнопка под черновиком -> таблица -> API для рутины публикации.
 

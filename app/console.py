@@ -2303,10 +2303,18 @@ def _console_show_ready_cards() -> dict:
             logger.error("готовых карточек %d, а консоли нет — показывать некому", len(ready))
             return {"shown": 0, "error": "консоли нет"}
         sd = _send_drafts_module()
-        comps = (base_data.promoted() or {}).get("companies") or {}
+        base = base_data.promoted() or {}
+        comps = base.get("companies") or {}
         thread = core._console_thread_id(db, "decision")
         shown = 0
         for card in ready:
+            # Карточка-двойник сделки из базы или очереди в консоль не идет
+            # (13 ноября 2026, «К+» / «Комфорт» и «Библио-Глобус»): тот же отказ,
+            # что в send_drafts.build_plan, — ее снимает или объясняет приток.
+            twin = sd.card_twin.blocked(card, base, pending)
+            if twin:
+                logger.warning("карточка %s не показана: двойник %s", card["id"], twin[0][0])
+                continue
             if not _claim_show(db, card["id"]):
                 continue  # показ уже занят другим потоком или процессом
             common = {"chat_id": chats[0], "disable_web_page_preview": True}

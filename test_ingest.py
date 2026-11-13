@@ -2610,6 +2610,7 @@ def test_main_edits_a_posted_card_enriched_outside_intake(monkeypatch, tmp_path)
     """Карточка дополнена не притоком (таблица правок, приемка, руками) —
     правка поста уходит без файла data/inbox/updates/, с пометкой, что нового,
     и состояние поста обновляется только после удачной правки."""
+    monkeypatch.setattr(send_telegram, "post_is_old", lambda *a, **k: False)  # пост свежий
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
             "sum": "1 млрд ₽", "status": "Закрыта", "date": FRESH_DATE,
             "reviewed": "2026-08-01", "accepted": "2026-08-01"}
@@ -8346,9 +8347,28 @@ def test_realty_post_waits_when_the_site_did_not_answer(monkeypatch, tmp_path):
     assert "gR5" not in (written.get("telegram_posts") or {})
 
 
+def test_old_posts_are_not_edited_automatically(monkeypatch, tmp_path):
+    """Владелец, 13 ноября 2026: «Старые посты править не надо». После вычитки
+    базы публикация собиралась переписать 95 давно вышедших постов. Пост
+    карточки старше трех дней сам не правится, снимок обновляется."""
+    from datetime import date
+    assert send_telegram.post_is_old({"added": "2026-11-01"}, today=date(2026, 11, 13))
+    assert not send_telegram.post_is_old({"added": "2026-11-12"}, today=date(2026, 11, 13))
+    assert send_telegram.post_is_old({}, today=date(2026, 11, 13))
+    deal = _realty_deal("gR9", "2 млрд ₽")
+    deal["added"] = "2026-09-01"
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal], posts={"gR9": 601},
+                               realty_posts={"gR9": 701}, updates={"gR9": ["появилась сумма"]})
+    fake = _FakeClient([_ok(), _ok()])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    assert not [u for u, _j in fake.calls if u.endswith("editMessageText")], fake.calls
+
+
 def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path):
     """Новый факт правит пост там, где он вышел, — в обоих каналах, и кнопка
     «Открыть карточку сделки» при правке не теряется (без ссылки на пару)."""
+    monkeypatch.setattr(send_telegram, "post_is_old", lambda *a, **k: False)  # пост свежий
     deal = _realty_deal("gR4", "2 млрд ₽")
     _channels_world(monkeypatch, tmp_path, [deal], posts={"gR4": 601},
                     realty_posts={"gR4": 701}, updates={"gR4": ["появилась сумма"]})
@@ -11876,3 +11896,172 @@ def test_sweep_commits_even_when_a_tracked_file_does_not_exist_yet(tmp_path, mon
                         subprocess.CompletedProcess(a, 0, "", ""))
     assert sweep.commit_and_push("тест") == 0
     assert "moderation_state" in g("show", "--stat", "HEAD").stdout, "коммит не создан"
+
+
+# --- Карточка-двойник: новая карточка о сделке, которая уже есть в базе (13 ноября 2026) ---
+
+def _twin_base():
+    """Срез базы 13 ноября 2026: две карточки, чьи дубли дошли до кнопки владельца,
+    и законные пары, которые блокировать нельзя."""
+    comps = {
+        "g9da3df10": {"name": "ФСК"}, "g54ecc168": {"name": "Комфорт"}, "g2aba7ae9": {"name": "К+"},
+        "g1279140f": {"name": "Библио-Глобус Туроператор"},
+        "g549ab474": {"name": "ООО «РВБ» (Wildberries & Russ)"},
+        "sheremetyevo": {"name": "Международный аэропорт Шереметьево (МАШ)"},
+        "g1581ce50": {"name": "Агро-Белогорье"}, "g924985ab": {"name": "Русагро"},
+        "g04181f17": {"name": "Polymatica"}, "gda7d982b": {"name": "Софтлайн"}, "ged6b4e16": {"name": "БФТ-Холдинг"},
+        "g4a98b303": {"name": "Rockwool Россия"}, "gtrust": {"name": "Банк «Траст»"},
+    }
+    deals = [
+        {"id": "g93df6a58", "date": "2026-09-14", "status": "Закрыта", "sum": "700 млн ₽",
+         "title": "Группа «К+» купила 50% группы «Комфорт» у ГК ФСК",
+         "asset": "50% долей в группе «Комфорт»", "seller": "ГК ФСК", "seller_id": "g9da3df10",
+         "target": "g54ecc168", "buyer": "g2aba7ae9",
+         "src": [["Ведомости", "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"]],
+         "discovery_src": [["dealsma (Telegram)", "https://t.me/dealsma/7558"]]},
+        {"id": "g4afd35d0", "date": "2026", "status": "Обсуждается", "sum": "40 млрд ₽ (по оценке)",
+         "title": "Wildberries & Russ может купить 75% «Библио-Глобуса»",
+         "asset": "75% доли в ООО «Библио-Глобус Туроператор»", "target": "g1279140f",
+         "seller": "Международный аэропорт Шереметьево", "seller_id": "sheremetyevo",
+         "buyer_name": "Wildberries & Russ",
+         "src": [["РБК", "https://www.rbc.ru/business/21/10/2026/6a984fb19a794798cb018b5c"]],
+         "events": [{"kind": "approval", "date": "2026-11-12",
+                     "source": ["Rusbase", "https://rb.ru/news/wildberries-kupit-75-biblio-globusa/"]}]},
+        {"id": "g97d9fa60", "date": "2024-11-13", "status": "Закрыта", "sum": "31 млрд ₽",
+         "title": "«Русагро» купила 77,5% «Агро-Белогорья»", "target": "g1581ce50", "buyer": "g924985ab",
+         "seller": "Владимир Зотов и Лариса Ковалева",
+         "src": [["Интерфакс", "https://www.interfax.ru/business/991408"]]},
+        {"id": "g91ef0733", "date": "2022-12-22", "status": "Закрыта", "sum": "239 млн ₽",
+         "title": "Softline купил 51% Polymatica", "target": "g04181f17", "buyer": "gda7d982b",
+         "seller": "Григорий Воротынцев",
+         "src": [["CNews", "https://www.cnews.ru/news/top/2026-04-06_softline_za_230_millionov_pereprodal"]]},
+        {"id": "g8d64901c", "date": "2025-12-31", "status": "Закрыта", "sum": None,
+         "title": "Российские заводы Rockwool переданы во временное управление указом президента",
+         "target": "g4a98b303", "asset": "100% ООО «Роквул»",
+         "src": [["Интерфакс", "https://www.interfax.ru/business/1090450"]]},
+        {"id": "gtrust1", "date": "2026-10-01", "status": "Закрыта", "sum": "1,2 млрд ₽",
+         "title": "Банк «Траст» продал завод «Алмаз»", "asset": "завод «Алмаз»",
+         "seller": "Банк «Траст»", "seller_id": "gtrust",
+         "src": [["Интерфакс", "https://www.interfax.ru/business/1"]]},
+    ]
+    return {"deals": deals, "companies": comps,
+            "match_keys": {"g9da3df10": ["фск", "группа фск"],
+                           "g549ab474": ["ооо рвб (wildberries & russ)", "рвб", "wildberries & russ"]}}
+
+
+def _twin_cases():
+    komfort = {"id": "g5540db5e", "date": "2026-09-14", "status": "Закрыта", "sum": "700 млн ₽",
+               "title": "Группа «К+» купила у ФСК 50% управляющей компании «Комфорт»",
+               "asset": "50% УК «Комфорт»", "seller": "ГК ФСК", "seller_id": "g9da3df10", "buyer_name": "Группа «К+»",
+               "src": [["Ведомости", "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala"]],
+               "discovery_src": [["Mergers.ru", "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-87771"]]}
+    biblio = {"id": "ga241b1af", "date": "2026-11-12", "status": "Обсуждается", "sum": "40 млрд ₽",
+              "title": "РВБ может купить 75% туроператора «Библио-Глобус» у «Шереметьево»",
+              "asset": "Библио-Глобус Туроператор", "target": "g1279140f", "buyer": "g549ab474",
+              "seller": "Шереметьево", "seller_id": "sheremetyevo",
+              "src": [["ТАСС", "https://tass.ru/ekonomika/28312079"],
+                      ["Интерфакс", "https://www.interfax.ru/business/1128644"]]}
+    return komfort, biblio
+
+
+def test_card_twin_catches_both_duplicates_of_13_november():
+    """«К+» / «Комфорт» (та же статья, сумма и дата) и «Библио-Глобус» (тот же
+    предмет и продавец, сделка открыта) — обе карточки дошли до кнопки владельца
+    при живых карточках базы. Двойник назван по id."""
+    import card_twin
+    base = _twin_base()
+    komfort, biblio = _twin_cases()
+    assert [t[0] for t in card_twin.twins(komfort, base)] == ["g93df6a58"]
+    assert [t[0] for t in card_twin.twins(biblio, base)] == ["g4afd35d0"]
+    # «Библио-Глобус» ловится и без суммы (предмет + продавец + обе открыты),
+    # и без профиля предмета — по названию в кавычках с падежом.
+    no_sum = dict(biblio, sum="Не раскрыта")
+    assert card_twin.twins(no_sum, base)
+    by_name = dict(biblio, target=None, asset="75% туроператора «Библио-Глобуса»")
+    assert card_twin.twins(by_name, base)
+    text = card_twin.finding_text(card_twin.twins(biblio, base))
+    assert "g4afd35d0" in text and "checked.duplicate_card" in text and "ё" not in text
+
+
+def test_card_twin_does_not_block_lawful_pairs():
+    """У одного предмета и одной стороны законно бывает несколько сделок."""
+    import card_twin
+    base = _twin_base()
+    lawful = [
+        # второй пакет тому же покупателю у того же продавца: другая сумма, обе закрыты
+        {"id": "n1", "date": "2024-09-27", "status": "Закрыта", "sum": "2,5 тыс. ₽",
+         "title": "Группа «Русагро» купила 25% ГК «Агро-Белогорье»", "target": "g1581ce50",
+         "buyer": "g924985ab", "seller": "Владимир Зотов",
+         "src": [["Интерфакс", "https://www.interfax.ru/business/991408"]]},
+        # перепродажа через три года: та же статья в источниках, тот же предмет,
+        # близкая сумма — но покупатель прошлой сделки теперь продавец
+        {"id": "n2", "date": "2026-01-14", "status": "Закрыта", "sum": "230 млн ₽ за 49%",
+         "title": "БФТ-Холдинг купил у «Софтлайна» 49% разработчика платформы Polymatica",
+         "asset": "49% ООО «Полиматика Рус»", "target": "g04181f17", "buyer": "ged6b4e16",
+         "seller": "ГК «Софтлайн»", "seller_id": "gda7d982b",
+         "src": [["CNews", "https://www.cnews.ru/news/top/2026-04-06_softline_za_230_millionov_pereprodal"]]},
+        # покупка актива после временного управления: тот же предмет и общая статья
+        {"id": "n3", "date": "2026-02-09", "status": "Обсуждается", "sum": "Не раскрыта",
+         "title": "РСА собирается купить российские заводы Rockwool", "target": "g4a98b303",
+         "seller": "Rockwool A/S", "src": [["Интерфакс", "https://www.interfax.ru/business/1090450"]]},
+        # серийный продавец: «Траст» продает другой актив за ту же сумму в те же дни
+        {"id": "n4", "date": "2026-10-10", "status": "Закрыта", "sum": "1,2 млрд ₽",
+         "title": "Банк «Траст» продал ТЦ «Родник»", "asset": "ТЦ «Родник»",
+         "seller": "Банк «Траст»", "seller_id": "gtrust",
+         "src": [["Интерфакс", "https://www.interfax.ru/business/2"]]},
+    ]
+    for card in lawful:
+        assert card_twin.twins(card, base) == [], (card["id"], card_twin.twins(card, base))
+    # карточка базы с соседями не сверяется: проверка — для новой карточки
+    assert card_twin.twins(base["deals"][0], base) == []
+
+
+def test_acceptance_blocks_card_twin_until_reader_names_a_reason():
+    """Находка `duplicate_card` держит штамп приемки; «это другая сделка» —
+    причиной в accepted_notes.checked."""
+    import accept_card
+    base = _twin_base()
+    base["telegram_posts"] = {}
+    _komfort, biblio = _twin_cases()
+    found = [t for c, t in accept_card.findings(biblio, base) if c == "duplicate_card"]
+    assert len(found) == 1 and "g4afd35d0" in found[0], found
+    assert "duplicate_card" in accept_card.CHECKED_CODES
+    closed = accept_card.findings(biblio, base, waived_checked={"duplicate_card": "другой пакет"})
+    assert "duplicate_card" not in {c for c, _t in closed}
+
+
+def test_send_plan_does_not_show_card_twin(monkeypatch, tmp_path):
+    """Принятая и дважды прочитанная карточка-двойник в консоль не уходит: показ
+    сверяет ее с базой еще раз (базу могла дополнить другая сессия) и с соседями
+    по очереди. С причиной читателя — уходит."""
+    import send_drafts
+    import promote
+    base = _twin_base()
+    base_path = tmp_path / "deals_promoted.json"
+    base_path.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    stamps = {"type": "M&A", "ind": "Недвижимость", "reviewed": "2026-10-27", "accepted": "2026-10-27",
+              "second_read": "2026-10-27", "eco": {}, "law": {}}
+    komfort, _biblio = _twin_cases()
+    komfort.update(stamps)
+    other = dict(stamps, id="gA", title="Сделка А", status="Закрыта", date="2026-10-27",
+                 buyer_name="ООО «А»", asset="сеть «Б»", src=[["Ъ", "https://www.kommersant.ru/doc/1"]])
+    # вторая карточка очереди о той же сделке, что `other`: тот же адрес, сумма, дата
+    other.update(sum="5 млрд ₽")
+    queue_twin = dict(other, id="gA2", title="Сделка А, пересказ")
+    pending = {"cards": [komfort, other, queue_twin]}
+    monkeypatch.setattr(send_drafts, "DATA", str(base_path))
+    monkeypatch.setattr(promote, "load_pending", lambda: pending)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: {"g5540db5e", "gA", "gA2"})
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {})
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(promote, "load_state", lambda: {}, raising=False)
+
+    def shown_ids():
+        plan, *_rest = send_drafts.build_plan()
+        return {item["id"] for _t, _k, (kind, item, _m) in plan if kind == "card"}
+
+    assert shown_ids() == set(), "двойники базы и очереди ушли в консоль"
+    komfort["accepted_notes"] = {"checked": {"duplicate_card": "другой пакет: вторые 50%"}}
+    pending["cards"].remove(queue_twin)
+    assert shown_ids() == {"g5540db5e", "gA"}
