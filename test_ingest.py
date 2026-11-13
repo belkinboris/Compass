@@ -11708,3 +11708,28 @@ def test_reread_writer_survives_stale_index_lock_and_names_dirty_files(tmp_path,
     assert code and "x.txt" in out and "Грязные отслеживаемые файлы" in out
     assert rw.head() == before
     assert "x.txt" in (tmp_path / "log").read_text()
+
+
+def test_removed_card_takes_its_signals_with_it(tmp_path):
+    """Снятая карточка («не сделка», слияние) уносит свои признаки будущих сделок —
+    в одном месте, `signals.sync_with_base` (13 ноября 2026: m216b чистил signals.json
+    разовым скриптом, другие пути забывали). Настоящий случай — g0748e794
+    («Росспиртпром» и «Башспирт»), у нее же дата одним годом: признак обязан остаться,
+    пока карточка в базе."""
+    import copy
+    import signals
+    data = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
+    path = str(tmp_path / "signals.json")
+    signals._save(signals.load_existing(), path)
+    card = next(d for d in data["deals"] if d["id"] == "g0748e794")
+    assert card.get("status") == "Обсуждается"
+    signals.sync_with_base(data, path)
+    rows = signals.load_existing(path)
+    assert any(r.get("deal_id") == "g0748e794" for r in rows), "карточка с годом вместо дня потеряла признаки"
+    gone = copy.deepcopy(data)
+    gone["deals"] = [d for d in gone["deals"] if d["id"] != "g0748e794"]
+    signals.sync_with_base(gone, path)
+    rows = signals.load_existing(path)
+    assert not any(r.get("deal_id") == "g0748e794" for r in rows)
+    deal_ids = {d["id"] for d in gone["deals"]}
+    assert all(not r.get("deal_id") or r["deal_id"] in deal_ids for r in rows)

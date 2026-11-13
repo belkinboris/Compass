@@ -447,6 +447,10 @@ def main() -> int:
         assert data['merged'][m.drop_id] == m.keep_id
     strip_fixes(drop_ids, write=True)
     json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+    # Признаки будущих сделок снятой карточки — туда же (signals.sync_with_base, 13 ноября 2026).
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ingest'))
+    import signals
+    print('Признаки по базе: было %d, стало %d' % signals.sync_with_base(data))
     print('Записано.')
     return 0
 

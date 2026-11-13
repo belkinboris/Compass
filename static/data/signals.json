@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12",
+ "updated": "2026-11-13",
  "signals": [
   {
    "id": "sd4f33c5ba",
@@ -12,48 +12,6 @@
     "https://www.vedomosti.ru/business/news/2026/11/12/1244900-chernogolovka-rassmatrivaet"
    ],
    "origin": "news",
-   "strength": "strong"
-  },
-  {
-   "id": "s71a449260",
-   "company_id": "g28ff15bb",
-   "date": "2026-11-12",
-   "kind": "sell",
-   "summary": "Сбербанк — возможная продажа: ТЭН",
-   "source": [
-    "vedomosti.ru",
-    "https://www.vedomosti.ru/realty/articles/2026/11/12/1244624-sberbank-vistavil-na-prodazhu"
-   ],
-   "origin": "news",
-   "strength": "strong",
-   "object_id": "g8eabc0bc"
-  },
-  {
-   "id": "s7027d9f0a",
-   "company_id": "sheremetyevo",
-   "date": "2026-11-12",
-   "kind": "sell",
-   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
-   "source": [
-    "Деловой Петербург",
-    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
-   ],
-   "origin": "card",
-   "deal_id": "g4afd35d0",
-   "strength": "strong"
-  },
-  {
-   "id": "s1d1eac154",
-   "company_id": "g1279140f",
-   "date": "2026-11-12",
-   "kind": "for_sale",
-   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
-   "source": [
-    "Деловой Петербург",
-    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
-   ],
-   "origin": "card",
-   "deal_id": "g4afd35d0",
    "strength": "strong"
   },
   {
@@ -428,14 +386,28 @@
    "strength": "strong"
   },
   {
+   "id": "sfefafe400",
+   "company_id": "ga3f64b72",
+   "date": "2026-09-29",
+   "kind": "sell",
+   "summary": "ВЭБ.РФ — обсуждается продажа: НМ-Тех",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8989905"
+   ],
+   "origin": "card",
+   "deal_id": "gafde5488",
+   "strength": "strong"
+  },
+  {
    "id": "se41a91062",
    "company_id": "gff89c3d4",
    "date": "2026-09-29",
    "kind": "for_sale",
    "summary": "НМ-Тех — обсуждается продажа компании или доли; возможный покупатель — «Интегральные системы»",
    "source": [
-    "CNews",
-    "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8989905"
    ],
    "origin": "card",
    "deal_id": "gafde5488",
@@ -448,8 +420,8 @@
    "kind": "buy",
    "summary": "«Интегральные системы» — обсуждается покупка: НМ-Тех",
    "source": [
-    "CNews",
-    "https://www.cnews.ru/news/top/2026-09-29_v_oktyabre_sber_vykupit_zelenogradskogo"
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8989905"
    ],
    "origin": "card",
    "deal_id": "gafde5488",
@@ -510,62 +482,6 @@
    "strength": "strong"
   },
   {
-   "id": "s9bbf05e8b",
-   "company_id": "gc6091c34",
-   "date": "2026-09-23",
-   "kind": "for_sale",
-   "summary": "Мария-Ра — обсуждается продажа компании или доли; возможный покупатель — Группа Лента",
-   "source": [
-    "Банкфакс",
-    "https://www.bankfax.ru/povestka/167696/"
-   ],
-   "origin": "card",
-   "deal_id": "gb7ea4703",
-   "strength": "strong"
-  },
-  {
-   "id": "s28f452d7e",
-   "company_id": "gcca31da7",
-   "date": "2026-09-23",
-   "kind": "buy",
-   "summary": "Группа Лента — обсуждается покупка: Мария-Ра",
-   "source": [
-    "Банкфакс",
-    "https://www.bankfax.ru/povestka/167696/"
-   ],
-   "origin": "card",
-   "deal_id": "gb7ea4703",
-   "strength": "normal"
-  },
-  {
-   "id": "sbbb554fec",
-   "company_id": "g65d1691b",
-   "date": "2026-09-22",
-   "kind": "buy",
-   "summary": "Группа Т-Технологии — обсуждается покупка: Банк «Точка»",
-   "source": [
-    "ПРАЙМ",
-    "https://1prime.ru/20260922/bank-873538558.html"
-   ],
-   "origin": "card",
-   "deal_id": "ga7020b5e",
-   "strength": "normal"
-  },
-  {
-   "id": "s6ab3f9c8c",
-   "company_id": "g09ccbaca",
-   "date": "2026-09-22",
-   "kind": "for_sale",
-   "summary": "Банк «Точка» — обсуждается продажа компании или доли; возможный покупатель — Группа Т-Технологии",
-   "source": [
-    "ПРАЙМ",
-    "https://1prime.ru/20260922/bank-873538558.html"
-   ],
-   "origin": "card",
-   "deal_id": "ga7020b5e",
-   "strength": "strong"
-  },
-  {
    "id": "s2b35730e0",
    "company_id": "g0087fb92",
    "date": "2026-09-22",
@@ -594,6 +510,34 @@
    "strength": "normal"
   },
   {
+   "id": "s9bbf05e8b",
+   "company_id": "gc6091c34",
+   "date": "2026-09-18",
+   "kind": "for_sale",
+   "summary": "Мария-Ра — обсуждается продажа компании или доли; возможный покупатель — Группа Лента",
+   "source": [
+    "Банкфакс",
+    "https://www.bankfax.ru/povestka/167696/"
+   ],
+   "origin": "card",
+   "deal_id": "gb7ea4703",
+   "strength": "strong"
+  },
+  {
+   "id": "s28f452d7e",
+   "company_id": "gcca31da7",
+   "date": "2026-09-18",
+   "kind": "buy",
+   "summary": "Группа Лента — обсуждается покупка: Мария-Ра",
+   "source": [
+    "Банкфакс",
+    "https://www.bankfax.ru/povestka/167696/"
+   ],
+   "origin": "card",
+   "deal_id": "gb7ea4703",
+   "strength": "normal"
+  },
+  {
    "id": "sf4add75f8",
    "company_id": "gcafc31dc",
    "date": "2026-09-11",
@@ -606,34 +550,6 @@
    "origin": "news",
    "strength": "strong",
    "object_id": "g676ca6df"
-  },
-  {
-   "id": "s6b83ccbad",
-   "company_id": "gfb08c766",
-   "date": "2026-09-07",
-   "kind": "for_sale",
-   "summary": "ПИК-специализированный застройщик — обсуждается продажа компании или доли; возможный покупатель — Недвижимые активы",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8938431"
-   ],
-   "origin": "card",
-   "deal_id": "g134cf416",
-   "strength": "strong"
-  },
-  {
-   "id": "s0cfa6ab55",
-   "company_id": "g0556420e",
-   "date": "2026-09-07",
-   "kind": "buy",
-   "summary": "Недвижимые активы — обсуждается покупка: ПИК-специализированный застройщик",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8938431"
-   ],
-   "origin": "card",
-   "deal_id": "g134cf416",
-   "strength": "normal"
   },
   {
    "id": "s41d18caf7",
@@ -696,7 +612,7 @@
    "company_id": "rosatom",
    "date": "2026-08-07",
    "kind": "sell",
-   "summary": "Росатом — обсуждается продажа: до 49% в проекте АЭС «Аккую» (Турция)",
+   "summary": "Росатом — обсуждается продажа: Проект АЭС «Аккую» в Турции",
    "source": [
     "URA.RU",
     "https://ura.news/news/1053116249"
@@ -738,13 +654,41 @@
    "company_id": "gf24e2a58",
    "date": "2026-08-04",
    "kind": "sell",
-   "summary": "Еврострой — обсуждается продажа: производственная база",
+   "summary": "Еврострой — обсуждается продажа: Производственная база в Сургуте",
    "source": [
     "ura.news",
     "https://ura.news/news/1053115470"
    ],
    "origin": "card",
    "deal_id": "g8f7479bd",
+   "strength": "strong"
+  },
+  {
+   "id": "s52a6f0acd",
+   "company_id": "g3a40e514",
+   "date": "2026-07-28",
+   "kind": "buy",
+   "summary": "Башнефтегеофизика — обсуждается покупка: Геотек",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1106008"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-geotek-bashneftegeofizika",
+   "strength": "normal"
+  },
+  {
+   "id": "s18f8b2c11",
+   "company_id": "g763f2f1b",
+   "date": "2026-07-28",
+   "kind": "for_sale",
+   "summary": "Геотек — обсуждается продажа компании или доли; возможный покупатель — Башнефтегеофизика",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1106008"
+   ],
+   "origin": "card",
+   "deal_id": "gmru-geotek-bashneftegeofizika",
    "strength": "strong"
   },
   {
@@ -776,39 +720,11 @@
    "strength": "strong"
   },
   {
-   "id": "sec3b732d6",
-   "company_id": "gb933c2b2",
-   "date": "2026-07-15",
-   "kind": "buy",
-   "summary": "Sucden — обсуждается покупка: Милфудс",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8815172"
-   ],
-   "origin": "card",
-   "deal_id": "gmru-sucden-poetti",
-   "strength": "normal"
-  },
-  {
-   "id": "sa1542f1b0",
-   "company_id": "gb9ead213",
-   "date": "2026-07-15",
-   "kind": "for_sale",
-   "summary": "Милфудс — обсуждается продажа компании или доли; возможный покупатель — Sucden",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8815172"
-   ],
-   "origin": "card",
-   "deal_id": "gmru-sucden-poetti",
-   "strength": "strong"
-  },
-  {
    "id": "s0ee73670f",
    "company_id": "g41f567f1",
    "date": "2026-07-09",
    "kind": "buy",
-   "summary": "МГКЛ (Мосгорломбард) — обсуждается сделка ««МГКЛ» планирует купить банк для работы с драгоценными металлами»",
+   "summary": "МГКЛ (Мосгорломбард) — обсуждается сделка ««МГКЛ» собирается купить банк для операций с драгметаллами»",
    "source": [
     "МГКЛ",
     "https://mgkl.group/news-center/news/pao-mgkl-priobretet-bank_45436/"
@@ -820,7 +736,7 @@
   {
    "id": "s8ae5b0936",
    "company_id": "g50c327a7",
-   "date": "2026-07-07",
+   "date": "2026-07-06",
    "kind": "buy",
    "summary": "ВИМ Сбережения — обсуждается покупка: деловой квартал «Поклонка плейс» на Поклонной горе",
    "source": [
@@ -834,7 +750,7 @@
   {
    "id": "s8919a8121",
    "company_id": "gc6e1e175",
-   "date": "2026-07-03",
+   "date": "2026-07-02",
    "kind": "for_sale",
    "summary": "НСПК — обсуждается продажа компании или доли",
    "source": [
@@ -1053,6 +969,20 @@
    ],
    "origin": "card",
    "deal_id": "g3dcf441e",
+   "strength": "strong"
+  },
+  {
+   "id": "s81405dca7",
+   "company_id": "g5ba54588",
+   "date": "2026-05-22",
+   "kind": "sell",
+   "summary": "Reckitt Benckiser — обсуждается продажа: Reckitt (российский бизнес)",
+   "source": [
+    "Известия",
+    "https://iz.ru/2101186/denis-kuznetcov/na-proizvoditelya-durex-i-vanish-v-rossii-nashelsya-pretendent"
+   ],
+   "origin": "card",
+   "deal_id": "ge361bfa8",
    "strength": "strong"
   },
   {
@@ -1308,6 +1238,34 @@
    "strength": "normal"
   },
   {
+   "id": "sbbb554fec",
+   "company_id": "g65d1691b",
+   "date": "2026-02-03",
+   "kind": "buy",
+   "summary": "Группа Т-Технологии — обсуждается покупка: АО «Точка»",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20260922/bank-873538558.html"
+   ],
+   "origin": "card",
+   "deal_id": "ga7020b5e",
+   "strength": "normal"
+  },
+  {
+   "id": "s270c533dd",
+   "company_id": "g599e8557",
+   "date": "2026-02-03",
+   "kind": "for_sale",
+   "summary": "АО «Точка» — обсуждается продажа компании или доли; возможный покупатель — Группа Т-Технологии",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20260922/bank-873538558.html"
+   ],
+   "origin": "card",
+   "deal_id": "ga7020b5e",
+   "strength": "strong"
+  },
+  {
    "id": "sc95ba5748",
    "company_id": "g5c8c6494",
    "date": "2026-01-29",
@@ -1490,6 +1448,20 @@
    "strength": "strong"
   },
   {
+   "id": "sef116ed44",
+   "company_id": "gf1f56e08",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "Газпромбанк — обсуждается покупка: Российский бизнес Sucden",
+   "source": [
+    "Известия",
+    "https://iz.ru/2049419/denis-kuznetcov/lakomyi-kusochek-na-aktivy-frantcuzskogo-sucden-v-rf-poiavilsia-pretendent"
+   ],
+   "origin": "card",
+   "deal_id": "g5e8fd721",
+   "strength": "normal"
+  },
+  {
    "id": "sc4308194c",
    "company_id": "gf7340794",
    "date": "2026",
@@ -1501,6 +1473,188 @@
    ],
    "origin": "card_text",
    "deal_id": "g934ee51b",
+   "strength": "normal"
+  },
+  {
+   "id": "s9a78c606c",
+   "company_id": "g549ab474",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается покупка: AliExpress Россия",
+   "source": [
+    "РБ.ру",
+    "https://rb.ru/news/wildberries-mozhet-kupit-dolyu-v-aliexpress-rossiya-po-dannym-smi-sdelku-hotyat-zakryt-k-sentyabryu-2026-goda/"
+   ],
+   "origin": "card",
+   "deal_id": "gca369d72",
+   "strength": "normal"
+  },
+  {
+   "id": "s937822da3",
+   "company_id": "g16938a37",
+   "date": "2026",
+   "kind": "for_sale",
+   "summary": "AliExpress Россия — обсуждается продажа компании или доли; возможный покупатель — ООО «РВБ» (Wildberries & Russ)",
+   "source": [
+    "РБ.ру",
+    "https://rb.ru/news/wildberries-mozhet-kupit-dolyu-v-aliexpress-rossiya-po-dannym-smi-sdelku-hotyat-zakryt-k-sentyabryu-2026-goda/"
+   ],
+   "origin": "card",
+   "deal_id": "gca369d72",
+   "strength": "strong"
+  },
+  {
+   "id": "s88e0b732b",
+   "company_id": "ga3bc7294",
+   "date": "2026",
+   "kind": "for_sale",
+   "summary": "Ozon — обсуждается продажа компании или доли; возможный покупатель — Сбербанк",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "strong"
+  },
+  {
+   "id": "s7e92097f5",
+   "company_id": "gc2792a44",
+   "date": "2026",
+   "kind": "sell",
+   "summary": "АФК «Система» — обсуждается продажа: Ozon",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "strong"
+  },
+  {
+   "id": "s7d4fd0ab9",
+   "company_id": "gb933c2b2",
+   "date": "2026",
+   "kind": "sell",
+   "summary": "Sucden — обсуждается продажа: Российский бизнес Sucden",
+   "source": [
+    "Известия",
+    "https://iz.ru/2049419/denis-kuznetcov/lakomyi-kusochek-na-aktivy-frantcuzskogo-sucden-v-rf-poiavilsia-pretendent"
+   ],
+   "origin": "card",
+   "deal_id": "g5e8fd721",
+   "strength": "strong"
+  },
+  {
+   "id": "s7a97700bb",
+   "company_id": "gcafc31dc",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "ВТБ — обсуждается покупка: Миноритарная доля в WB Банке и финтех-активах группы RWB",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
+   ],
+   "origin": "card",
+   "deal_id": "c51d0bb64",
+   "strength": "normal"
+  },
+  {
+   "id": "s7027d9f0a",
+   "company_id": "sheremetyevo",
+   "date": "2026",
+   "kind": "sell",
+   "summary": "Международный аэропорт Шереметьево (МАШ) — обсуждается продажа: Туроператор БГ",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
+  {
+   "id": "s5a31eb98b",
+   "company_id": "g549ab474",
+   "date": "2026",
+   "kind": "sell",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается продажа: Миноритарная доля в WB Банке и финтех-активах группы RWB",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
+   ],
+   "origin": "card",
+   "deal_id": "c51d0bb64",
+   "strength": "strong"
+  },
+  {
+   "id": "s4d079acc3",
+   "company_id": "g130b6d10",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "ГК Росспиртпром — обсуждается покупка: АО «Башспирт»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8799919"
+   ],
+   "origin": "card",
+   "deal_id": "g0748e794",
+   "strength": "normal"
+  },
+  {
+   "id": "s3dc24349b",
+   "company_id": "g28ff15bb",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "Сбербанк — обсуждается покупка: Ozon",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8692714"
+   ],
+   "origin": "card",
+   "deal_id": "gc88ca79d",
+   "strength": "normal"
+  },
+  {
+   "id": "s2249127a5",
+   "company_id": "g41dbc6de",
+   "date": "2026",
+   "kind": "for_sale",
+   "summary": "АО «Башспирт» — обсуждается продажа компании или доли; возможный покупатель — ГК Росспиртпром",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8799919"
+   ],
+   "origin": "card",
+   "deal_id": "g0748e794",
+   "strength": "strong"
+  },
+  {
+   "id": "s1d1eac154",
+   "company_id": "g1279140f",
+   "date": "2026",
+   "kind": "for_sale",
+   "summary": "Туроператор БГ — обсуждается продажа компании или доли",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/10/21/sheremetevo-nachal-peregovori"
+   ],
+   "origin": "card",
+   "deal_id": "g4afd35d0",
+   "strength": "strong"
+  },
+  {
+   "id": "s19731980c",
+   "company_id": "g549ab474",
+   "date": "2026",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается вложение в Национальная логистическая платформа",
+   "source": [
+    "РБК Pro",
+    "https://pro.rbc.ru/demo/6a2e985b9a79471a8344e389"
+   ],
+   "origin": "card",
+   "deal_id": "c06611bae",
    "strength": "normal"
   },
   {
@@ -1644,6 +1798,20 @@
    "strength": "strong"
   },
   {
+   "id": "s0c5273e13",
+   "company_id": "g549ab474",
+   "date": "2025-10-30",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается сделка «Wildberries может купить страховую компанию»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/8162332"
+   ],
+   "origin": "card",
+   "deal_id": "c0bc92892",
+   "strength": "normal"
+  },
+  {
    "id": "sbc3333687",
    "company_id": "gd853e266",
    "date": "2025-10-27",
@@ -1658,6 +1826,34 @@
    "strength": "strong"
   },
   {
+   "id": "s5861f10a4",
+   "company_id": "g2e85f5e5",
+   "date": "2025-10-22",
+   "kind": "for_sale",
+   "summary": "Fun&Sun — обсуждается продажа компании или доли; возможный покупатель — ООО «РВБ» (Wildberries & Russ)",
+   "source": [
+    "Известия",
+    "https://iz.ru/1976420/denis-kuznetcov/goryachaya-putevka-wildberries-russ-kupila-turoperatora-fun-sun"
+   ],
+   "origin": "card",
+   "deal_id": "gbb7e25e1",
+   "strength": "strong"
+  },
+  {
+   "id": "s4e03e00f1",
+   "company_id": "g549ab474",
+   "date": "2025-10-22",
+   "kind": "buy",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается покупка: Fun&Sun",
+   "source": [
+    "Известия",
+    "https://iz.ru/1976420/denis-kuznetcov/goryachaya-putevka-wildberries-russ-kupila-turoperatora-fun-sun"
+   ],
+   "origin": "card",
+   "deal_id": "gbb7e25e1",
+   "strength": "normal"
+  },
+  {
    "id": "s119c8a905",
    "company_id": "g00f14033",
    "date": "2025-09-11",
@@ -1669,34 +1865,6 @@
    ],
    "origin": "card_text",
    "deal_id": "gadcc1f58",
-   "strength": "normal"
-  },
-  {
-   "id": "sc6347cf41",
-   "company_id": "gce0ea012",
-   "date": "2025-09-10",
-   "kind": "for_sale",
-   "summary": "Форштадт — обсуждается продажа компании или доли; возможный покупатель — Финансовая группа БКС",
-   "source": [
-    "Forbes",
-    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
-   ],
-   "origin": "card",
-   "deal_id": "g7299791f",
-   "strength": "strong"
-  },
-  {
-   "id": "s881d93a42",
-   "company_id": "g743a138b",
-   "date": "2025-09-10",
-   "kind": "buy",
-   "summary": "Финансовая группа БКС — обсуждается покупка: Форштадт",
-   "source": [
-    "Forbes",
-    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
-   ],
-   "origin": "card",
-   "deal_id": "g7299791f",
    "strength": "normal"
   },
   {
@@ -1742,20 +1910,6 @@
    "strength": "strong"
   },
   {
-   "id": "sdaf874f56",
-   "company_id": "g630c3361-target",
-   "date": "2025-09-01",
-   "kind": "for_sale",
-   "summary": "ООО «Нетрика Медицина» — обсуждается продажа компании или доли; возможный покупатель — ГК «Медскан»",
-   "source": [
-    "РБК",
-    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
-   ],
-   "origin": "card",
-   "deal_id": "g630c3361",
-   "strength": "strong"
-  },
-  {
    "id": "s9c45f2308",
    "company_id": "gf1f56e08",
    "date": "2025-09-01",
@@ -1767,20 +1921,6 @@
    ],
    "origin": "card",
    "deal_id": "g2197ed53",
-   "strength": "normal"
-  },
-  {
-   "id": "s6f700de9f",
-   "company_id": "g729ef6c5",
-   "date": "2025-09-01",
-   "kind": "buy",
-   "summary": "ГК «Медскан» — обсуждается покупка: ООО «Нетрика Медицина»",
-   "source": [
-    "РБК",
-    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
-   ],
-   "origin": "card",
-   "deal_id": "g630c3361",
    "strength": "normal"
   },
   {
@@ -1854,20 +1994,6 @@
    "strength": "normal"
   },
   {
-   "id": "s1ad46c4e2",
-   "company_id": "gac203c64",
-   "date": "2025-05-01",
-   "kind": "ipo",
-   "summary": "ГК «Марэкс» — обсуждается размещение акций",
-   "source": [
-    "Деловой Петербург",
-    "https://www.dp.ru/a/2025/01/29/verojatnij-vladelec-aktivov"
-   ],
-   "origin": "card",
-   "deal_id": "g2a3a597b",
-   "strength": "strong"
-  },
-  {
    "id": "sfe0bdc609",
    "company_id": "ge0a3081f",
    "date": "2025-04-16",
@@ -1896,79 +2022,37 @@
    "strength": "strong"
   },
   {
-   "id": "s88e0b732b",
-   "company_id": "ga3bc7294",
-   "date": "2025-03-01",
-   "kind": "for_sale",
-   "summary": "Ozon — обсуждается продажа компании или доли; возможный покупатель — Сбербанк",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8692714"
-   ],
-   "origin": "card",
-   "deal_id": "gc88ca79d",
-   "strength": "strong"
-  },
-  {
-   "id": "s7e92097f5",
-   "company_id": "gc2792a44",
-   "date": "2025-03-01",
-   "kind": "sell",
-   "summary": "АФК «Система» — обсуждается продажа: Ozon",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8692714"
-   ],
-   "origin": "card",
-   "deal_id": "gc88ca79d",
-   "strength": "strong"
-  },
-  {
-   "id": "s4d079acc3",
-   "company_id": "g130b6d10",
-   "date": "2025-03-01",
+   "id": "s61cb52759",
+   "company_id": "g09ccbaca",
+   "date": "2025-03-24",
    "kind": "buy",
-   "summary": "ГК Росспиртпром — обсуждается покупка: АО «Башспирт»",
+   "summary": "Банк «Точка» — обсуждается сделка «Банк «Точка» собирается купить доли в стартапах, отобранных акселератором ФРИИ»",
    "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8799919"
+    "Ведомости",
+    "https://www.vedomosti.ru/investments/articles/2025/03/24/1099706-bank-tochka-i-akselerator-frii-planiruyut-investirovat-v-startapi"
    ],
    "origin": "card",
-   "deal_id": "g0748e794",
+   "deal_id": "c25d07929",
    "strength": "normal"
   },
   {
-   "id": "s3dc24349b",
-   "company_id": "g28ff15bb",
-   "date": "2025-03-01",
-   "kind": "buy",
-   "summary": "Сбербанк — обсуждается покупка: Ozon",
+   "id": "s1ad46c4e2",
+   "company_id": "gac203c64",
+   "date": "2025-01-29",
+   "kind": "ipo",
+   "summary": "ГК «Марэкс» — обсуждается размещение акций",
    "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8692714"
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2025/01/29/verojatnij-vladelec-aktivov"
    ],
    "origin": "card",
-   "deal_id": "gc88ca79d",
-   "strength": "normal"
-  },
-  {
-   "id": "s2249127a5",
-   "company_id": "g41dbc6de",
-   "date": "2025-03-01",
-   "kind": "for_sale",
-   "summary": "АО «Башспирт» — обсуждается продажа компании или доли; возможный покупатель — ГК Росспиртпром",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8799919"
-   ],
-   "origin": "card",
-   "deal_id": "g0748e794",
+   "deal_id": "g2a3a597b",
    "strength": "strong"
   },
   {
    "id": "sfba80316e",
    "company_id": "gcafc31dc",
-   "date": "2025-02-01",
+   "date": "2025",
    "kind": "sell",
    "summary": "ВТБ — обсуждается продажа: Росгосстрах",
    "source": [
@@ -1980,9 +2064,37 @@
    "strength": "strong"
   },
   {
+   "id": "sdaf874f56",
+   "company_id": "g630c3361-target",
+   "date": "2025",
+   "kind": "for_sale",
+   "summary": "ООО «Нетрика Медицина» — обсуждается продажа компании или доли; возможный покупатель — ГК «Медскан»",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
+   ],
+   "origin": "card",
+   "deal_id": "g630c3361",
+   "strength": "strong"
+  },
+  {
+   "id": "sc6347cf41",
+   "company_id": "gce0ea012",
+   "date": "2025",
+   "kind": "for_sale",
+   "summary": "Форштадт — обсуждается продажа компании или доли; возможный покупатель — Финансовая группа БКС",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
+   ],
+   "origin": "card",
+   "deal_id": "g7299791f",
+   "strength": "strong"
+  },
+  {
    "id": "s8d3b738b5",
    "company_id": "g676ca6df",
-   "date": "2025-02-01",
+   "date": "2025",
    "kind": "for_sale",
    "summary": "Росгосстрах — обсуждается продажа компании или доли",
    "source": [
@@ -1992,6 +2104,160 @@
    "origin": "card",
    "deal_id": "g09cee885",
    "strength": "strong"
+  },
+  {
+   "id": "s881d93a42",
+   "company_id": "g743a138b",
+   "date": "2025",
+   "kind": "buy",
+   "summary": "Финансовая группа БКС — обсуждается покупка: Форштадт",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/investicii/547277-gruppa-bks-kupila-orenburgskij-bank-forstadt"
+   ],
+   "origin": "card",
+   "deal_id": "g7299791f",
+   "strength": "normal"
+  },
+  {
+   "id": "s6f700de9f",
+   "company_id": "g729ef6c5",
+   "date": "2025",
+   "kind": "buy",
+   "summary": "ГК «Медскан» — обсуждается покупка: ООО «Нетрика Медицина»",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/technology_and_media/25/09/2025/68d3fd089a7947cb5b8eba76"
+   ],
+   "origin": "card",
+   "deal_id": "g630c3361",
+   "strength": "normal"
+  },
+  {
+   "id": "s50a48ad8e",
+   "company_id": "g40ce292b",
+   "date": "2025",
+   "kind": "ipo",
+   "summary": "Группа «ВИС» — обсуждается размещение акций",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/quote/news/article/68d25cd89a794795b63de6be"
+   ],
+   "origin": "card",
+   "deal_id": "gb3211ae8",
+   "strength": "strong"
+  },
+  {
+   "id": "sc99f67e76",
+   "company_id": "g7802e51e",
+   "date": "2024",
+   "kind": "buy",
+   "summary": "Ростех — обсуждается покупка: ЧЭМК",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/04/03/2024/65e183ad9a79471c8f01f372"
+   ],
+   "origin": "card",
+   "deal_id": "c1d2ba2c0",
+   "strength": "normal"
+  },
+  {
+   "id": "s8072bda08",
+   "company_id": "gfa15ec7b",
+   "date": "2024",
+   "kind": "for_sale",
+   "summary": "Порт Вера — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/6525044"
+   ],
+   "origin": "card",
+   "deal_id": "c460a1f82",
+   "strength": "strong"
+  },
+  {
+   "id": "s78fe849d7",
+   "company_id": "ge12527f2",
+   "date": "2024",
+   "kind": "for_sale",
+   "summary": "АО «Камтэкс-Химпром» — обсуждается продажа компании или доли; возможный покупатель — Росхим",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7180850"
+   ],
+   "origin": "card",
+   "deal_id": "g50571ec8",
+   "strength": "strong"
+  },
+  {
+   "id": "s67dbf1ad9",
+   "company_id": "g5dda29a3",
+   "date": "2024",
+   "kind": "for_sale",
+   "summary": "БРИНЭКС (Колеса даром) — обсуждается продажа компании или доли; возможный покупатель — АО «Прайм рост»",
+   "source": [
+    "Челны-биз",
+    "https://chelny-biz.ru/business/631419"
+   ],
+   "origin": "card",
+   "deal_id": "gd3f012e4",
+   "strength": "strong"
+  },
+  {
+   "id": "s6253b24ba",
+   "company_id": "g83994348",
+   "date": "2024",
+   "kind": "for_sale",
+   "summary": "ЗАО «Мультимедиа Холдинг» — обсуждается продажа компании или доли",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/6760695"
+   ],
+   "origin": "card",
+   "deal_id": "gef02a680",
+   "strength": "strong"
+  },
+  {
+   "id": "s5cfc40f44",
+   "company_id": "g5929d033",
+   "date": "2024",
+   "kind": "buy",
+   "summary": "АО «Прайм рост» — обсуждается покупка: БРИНЭКС (Колеса даром)",
+   "source": [
+    "Челны-биз",
+    "https://chelny-biz.ru/business/631419"
+   ],
+   "origin": "card",
+   "deal_id": "gd3f012e4",
+   "strength": "normal"
+  },
+  {
+   "id": "s5ad505cfa",
+   "company_id": "g7bddf214",
+   "date": "2024",
+   "kind": "for_sale",
+   "summary": "ЧЭМК — обсуждается продажа компании или доли; возможный покупатель — Ростех",
+   "source": [
+    "РБК",
+    "https://www.rbc.ru/business/04/03/2024/65e183ad9a79471c8f01f372"
+   ],
+   "origin": "card",
+   "deal_id": "c1d2ba2c0",
+   "strength": "strong"
+  },
+  {
+   "id": "s0cf684077",
+   "company_id": "g936f9597",
+   "date": "2024",
+   "kind": "buy",
+   "summary": "Росхим — обсуждается покупка: АО «Камтэкс-Химпром»",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/7180850"
+   ],
+   "origin": "card",
+   "deal_id": "g50571ec8",
+   "strength": "normal"
   }
  ]
 }

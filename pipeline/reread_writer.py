@@ -157,6 +157,8 @@ def main(argv):
         env = dict(os.environ, MASS_OK='reread', REVIEW_ONLY=tags, FIXES_SESSION=tags)
         shared = [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
                   ('слой фактов', [py, 'pipeline/facts_derive.py', '--write']),
+                  # снятая карточка («не сделка», слияние) — снятые признаки будущих сделок (13 ноября 2026)
+                  ('признаки будущих сделок по базе', [py, 'pipeline/ingest/signals.py', '--base', '--write']),
                   # исправленные старые нарушения правил текста — из базовой линии (список только сокращается;
                   # шесть партий 12–13 ноября 2026 делали это сами и мешали друг другу)
                   ('базовая линия правил текста', [py, 'pipeline/text_rules.py', '--rebaseline']),

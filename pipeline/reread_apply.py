@@ -197,6 +197,7 @@ def main(argv):
                       [py, 'pipeline/reread_absorb.py', '--ids'] + list(ids) + ['--write']))
         steps += [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
                   ('слой фактов', [py, 'pipeline/facts_derive.py', '--write']),
+                  ('признаки будущих сделок по базе', [py, 'pipeline/ingest/signals.py', '--base', '--write']),
                   # исправленные старые нарушения правил текста — из базовой линии (только сокращает; 13 ноября 2026)
                   ('базовая линия правил текста', [py, 'pipeline/text_rules.py', '--rebaseline'])]
     for name, cmd in steps:

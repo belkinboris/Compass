@@ -44,6 +44,15 @@
     python3 pipeline/ingest/signals.py --write      # записать signals.json
     python3 pipeline/ingest/signals.py --all        # разобрать все сырье и все hold-файлы
     python3 pipeline/ingest/signals.py --measure    # замер на заголовках базы и разметке
+    python3 pipeline/ingest/signals.py --base --write   # только сверка с базой, без сырья (быстро)
+
+СНЯТАЯ КАРТОЧКА — СНЯТЫЕ ПРИЗНАКИ (13 ноября 2026). Карточку снимают многие пути
+(«не сделка» на вычитке, слияние дублей, разовые скрипты), и каждый разовый скрипт
+чистил signals.json сам (m216b) или забывал — test_data падал на «сделка» до следующего
+притока. Теперь сверка в одном месте: `sync_with_base()` (`--base`) пересобирает записи
+карточек по сегодняшней базе и выбрасывает любую запись, чья сделка или профиль из базы
+пропали. Ее зовут писатель вычитки (общий шаг группы), reread_apply.py и
+merge_duplicate_deals_batch.py.
 """
 import glob
 import hashlib
@@ -416,7 +425,9 @@ def from_cards(data, today=None):
         if card.get('status') != 'Обсуждается':
             continue
         day = str(card.get('date') or '')
-        if not re.match(r'\d{4}-\d{2}', day) or day < since:
+        # Вычитка снимает выдуманный день, оставляя год («нет дня — только год», 12–13 ноября
+        # 2026): карточка с годом — тоже свежая обсуждаемая сделка (Ozon, ВТБ — Росгосстрах).
+        if not re.match(r'\d{4}(?:-\d{2})?', day) or (day if len(day) > 4 else day + '-12-31') < since:
             continue
         src = _card_source(card)
         if not src:
@@ -611,6 +622,32 @@ def build(data, items, existing=None, today=None):
     return uniq, added
 
 
+def sync_with_base(data=None, path=OUT, write=True, today=None):
+    """Признаки по сегодняшней базе без разбора сырья: записи карточек — заново,
+    новости — прежние, и ни одной записи со сделкой или профилем, которых в базе нет.
+    Возвращает (было, стало); файл пишется, только если что-то изменилось."""
+    if data is None:
+        data = json.load(open(DATA, encoding='utf-8'))
+    existing = load_existing(path)
+    rows, _added = build(data, [], existing, today)
+    deal_ids = {d['id'] for d in data.get('deals') or []}
+    known = set(data.get('companies') or {}) | set(data.get('merged_companies') or {})
+    rows = [r for r in rows if (not r.get('deal_id') or r['deal_id'] in deal_ids) and r.get('company_id') in known]
+    old_ids = sorted(r.get('id') for r in existing)
+    if write and sorted(r['id'] for r in rows) != old_ids:
+        _save(rows, path)
+    return len(existing), len(rows)
+
+
+def _save(rows, path=OUT):
+    payload = {'updated': datetime.now(timezone.utc).date().isoformat(), 'signals': rows}
+    tmp = path + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, ensure_ascii=False, indent=1)
+        f.write('\n')
+    os.replace(tmp, path)
+
+
 def load_existing(path=OUT):
     try:
         return json.load(open(path, encoding='utf-8')).get('signals') or []
@@ -651,6 +688,10 @@ def main(argv):
     if '--measure' in argv:
         measure()
         return 0
+    if '--base' in argv:
+        was, now = sync_with_base(write='--write' in argv)
+        print('Признаки по базе: было %d, стало %d%s' % (was, now, '' if '--write' in argv else ' (сухой прогон)'))
+        return 0
     data = json.load(open(DATA, encoding='utf-8'))
     items = inbox_items(all_days='--all' in argv)
     existing = load_existing()
@@ -667,12 +708,7 @@ def main(argv):
     if '--write' not in argv:
         print('Сухой прогон. Запись — с ключом --write.')
         return 0
-    payload = {'updated': datetime.now(timezone.utc).date().isoformat(), 'signals': rows}
-    tmp = OUT + '.tmp'
-    with open(tmp, 'w', encoding='utf-8') as f:
-        json.dump(payload, f, ensure_ascii=False, indent=1)
-        f.write('\n')
-    os.replace(tmp, OUT)
+    _save(rows)
     print('Записано: %s' % os.path.relpath(OUT, ROOT))
     return 0
 
