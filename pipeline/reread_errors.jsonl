@@ -3261,3 +3261,55 @@
 {"id": "g7e90c94a", "field": "law.appr", "class": "unsupported_claim", "was": "сделка пока не закрыта", "now": "только разрешение правкомиссии по неофициальным данным", "tag": "m104"}
 {"id": "g08b7a4e1", "field": "deal", "class": "not_a_deal", "was": "МТС «приобрела права на персонажей «Фиксики»»", "now": "снята: эксклюзивная лицензия на три года", "tag": "m104"}
 {"id": "g2544a5cb", "field": "deal", "class": "not_a_deal", "was": "покупка клиник Литфонда без источника", "now": "снята: ни одного источника о сделке", "tag": "m104"}
+{"id": "c0b43766f", "field": "date", "class": "wrong_date", "was": "2024-12-12", "now": "2024-12-27 (ЕГРЮЛ: Барабанова вошла со 100%)", "tag": "m209"}
+{"id": "c0b43766f", "field": "seller", "class": "wrong_seller", "was": "Евгений Свистуля (через ООО «Восточный актив»)", "now": "ООО «Восточный актив» (99%), Евгений Свистула (1%) — оба вышли по ЕГРЮЛ", "tag": "m209"}
+{"id": "c0b43766f", "field": "title", "class": "title_standard", "was": "Продажа рыбопромышленного предприятия «Витязь Авто» на Камчатке", "now": "Наталья Барабанова купила «Витязь Авто»", "tag": "m209"}
+{"id": "c0b43766f", "field": "eco.share", "class": "wrong_share", "was": "описание завода и флота", "now": "100% доли в ООО «Витязь Авто»", "tag": "m209"}
+{"id": "c0b43766f", "field": "eco.rationale", "class": "invented_rationale", "was": "предприятие выставлено на продажу, эксперты называют покупателей", "now": "—", "tag": "m209"}
+{"id": "c0b43766f", "field": "extra", "class": "other", "was": "«Информация получена из открытых источников» + повтор оценки из eco.val", "now": "версия участников рынка о Кожемяко и Salmonica group", "tag": "m209"}
+{"id": "c43cb8f80", "field": "type", "class": "wrong_type", "was": "M&A, Фармирус покупателем", "now": "Временное управление, сторон нет (no_parties)", "tag": "m209"}
+{"id": "c43cb8f80", "field": "title", "class": "title_standard", "was": "Президент РФ передал АО «Нижфарм» в управление ООО «Фармирус»", "now": "Акции «Нижфарма» переданы во временное управление «Фармирусу»", "tag": "m209"}
+{"id": "c43cb8f80", "field": "extra", "class": "unsupported_claim", "was": "«переданы активы критически важного производства» (общая реплика юриста как факт о сделке)", "now": "заводы, препараты, история владения", "tag": "m209"}
+{"id": "c43cb8f80", "field": "eco.context", "class": "verbatim", "was": "10 слов подряд из Коммерсанта", "now": "пересказ", "tag": "m209"}
+{"id": "c8b5a234d", "field": "seller", "class": "wrong_seller", "was": "Эдуард Янаков (ответчик, бенефициар)", "now": "нет продавца: изъятие по суду (no_parties)", "tag": "m209"}
+{"id": "c8b5a234d", "field": "date", "class": "wrong_date", "was": "2025-02-21", "now": "2025-03-17 (решение Дальнегорского суда, ТАСС)", "tag": "m209"}
+{"id": "c8b5a234d", "field": "status", "class": "wrong_status", "was": "нет статуса", "now": "Закрыта", "tag": "m209"}
+{"id": "c8b5a234d", "field": "title", "class": "title_standard", "was": "Национализация ГМК «Дальполиметалл» — обращение акций в собственность государства", "now": "Акции ГМК «Дальполиметалл» обращены в доход государства", "tag": "m209"}
+{"id": "c8b5a234d", "field": "eco.share", "class": "wrong_share", "was": "доля с описанием предприятия", "now": "100% акций АО «ГМК «Дальполиметалл»»", "tag": "m209"}
+{"id": "c8b5a234d", "field": "eco.context", "class": "unsupported_claim", "was": "«решение исполняется немедленно»", "now": "снято; наблюдение с 4 февраля 2025 (Интерфакс)", "tag": "m209"}
+{"id": "c8b5a234d", "field": "law.struct", "class": "verbatim", "was": "предложение Коммерсанта с заменой слов", "now": "пересказ по ТАСС и Интерфаксу", "tag": "m209"}
+{"id": "c6b5fb9f3", "field": "title", "class": "title_standard", "was": "Разрешение Президента РФ американскому хедж-фонду 683 Capital Partners на выкупку российских акций", "now": "683 Capital Partners покупает акции российских компаний у западных фондов", "tag": "m209"}
+{"id": "c6b5fb9f3", "field": "seller", "class": "wrong_seller", "was": "пусто, продавцы в контексте", "now": "фонды из распоряжения (Ведомости)", "tag": "m209"}
+{"id": "c6b5fb9f3", "field": "eco.context", "class": "foreign_fact", "was": "«первая волна» обмена для частных инвесторов (другая схема)", "now": "снято", "tag": "m209"}
+{"id": "c6b5fb9f3", "field": "law.appr", "class": "unsupported_claim", "was": "«в порядке п. 5 Указа №520»; «документ из двух пунктов»", "now": "распоряжение № 81-рп", "tag": "m209"}
+{"id": "c6b5fb9f3", "field": "extra", "class": "version_as_fact", "was": "«Возможно, это подготовка к обмену» без автора", "now": "версии Романа Кузьмина и Дмитрия Леснова", "tag": "m209"}
+{"id": "c4fcc6d29", "field": "title", "class": "title_standard", "was": "«МГКЛ» планирует купить банк для работы с драгоценными металлами", "now": "«МГКЛ» собирается купить банк для операций с драгметаллами", "tag": "m209"}
+{"id": "c4fcc6d29", "field": "eco.context", "class": "unsupported_claim", "was": "заявки Голдбанк и Ломбанк в Роспатент", "now": "снято; переговоры и инвестор 7–10 млрд ₽ по Investfuture", "tag": "m209"}
+{"id": "c4fcc6d29", "field": "law.struct", "class": "unsupported_claim", "was": "розничное кредитование и «золотые обменники»", "now": "по бизнес-плану банк войдет в периметр группы", "tag": "m209"}
+{"id": "ge361bfa8", "field": "eco.sum", "class": "wrong_sum", "was": "30–40 млрд ₽ (рыночная оценка) — оценка инвестбанкира", "now": "Не раскрыта, оценка с автором в eco.val", "tag": "m206"}
+{"id": "ge361bfa8", "field": "eco.context", "class": "unsupported_claim", "was": "мнение «Астафьева», «официальных заявлений не было»", "now": "снято, контекст по статьям", "tag": "m206"}
+{"id": "ge361bfa8", "field": "extra", "class": "unsupported_claim", "was": "«решение о продаже не принято»", "now": "снято", "tag": "m206"}
+{"id": "ge361bfa8", "field": "seller_id", "class": "wrong_seller", "was": "продавец не назван", "now": "Reckitt Benckiser", "tag": "m206"}
+{"id": "ge361bfa8", "field": "title", "class": "title_standard", "was": "рассматривают приобретение", "now": "могут купить", "tag": "m206"}
+{"id": "ge0f7b957", "field": "title", "class": "title_standard", "was": "Газпромбанк продал свою миноритарную долю…", "now": "Мажоритарные акционеры … купили долю Газпромбанка", "tag": "m206"}
+{"id": "ge0f7b957", "field": "eco.rationale", "class": "invented_rationale", "was": "цель — фраза журналиста", "now": "мотив словами Газпромбанка", "tag": "m206"}
+{"id": "ge0f7b957", "field": "extra", "class": "verbatim", "was": "повтор источника с заменой слов", "now": "своя фраза", "tag": "m206"}
+{"id": "ge0f7b957", "field": "target", "class": "profile_wrong_inn", "was": "ГК «Эксперт» = ООО «МЦ Эксперт» (сеть, проданная «Матери и дитя»)", "now": "решение реестра снято", "tag": "m206"}
+{"id": "g0b081bb7", "field": "status", "class": "wrong_status", "was": "Закрыта", "now": "Подписана", "tag": "m206"}
+{"id": "g0b081bb7", "field": "date", "class": "wrong_date", "was": "2026-03-13 (день публикации)", "now": "2026", "tag": "m206"}
+{"id": "g0b081bb7", "field": "eco.sum", "class": "wrong_sum", "was": "1,8–2 млрд ₽ — оценка консультанта", "now": "Не раскрыта", "tag": "m206"}
+{"id": "g0b081bb7", "field": "title", "class": "title_standard", "was": "купила", "now": "покупает", "tag": "m206"}
+{"id": "g0b081bb7", "field": "eco.rationale", "class": "invented_rationale", "was": "цель без автора", "now": "мнение Казанского", "tag": "m206"}
+{"id": "g352523e0", "field": "extra", "class": "unsupported_claim", "was": "«главная цель — ликвидность долям менеджмента»", "now": "снято", "tag": "m206"}
+{"id": "g352523e0", "field": "eco.target_fin", "class": "unsupported_claim", "was": "1С не раскрывает отчетность", "now": "—", "tag": "m206"}
+{"id": "g352523e0", "field": "eco.val", "class": "unsupported_claim", "was": "оценят после размещения", "now": "оценка зависит от перестройки управления", "tag": "m206"}
+{"id": "g352523e0", "field": "law.appr", "class": "verbatim", "was": "8 слов подряд", "now": "пересказ", "tag": "m206"}
+{"id": "g352523e0", "field": "law.struct", "class": "other", "was": "владельцы в структуре сделки", "now": "механика: преобразование в АО", "tag": "m206"}
+{"id": "g27543cdc", "field": "extra", "class": "version_as_fact", "was": "«выставлено на продажу», «продают»", "now": "по неофициальным данным", "tag": "m206"}
+{"id": "g27543cdc", "field": "eco.context", "class": "unsupported_claim", "was": "своя оценка опровержения", "now": "снято", "tag": "m206"}
+{"id": "g27543cdc", "field": "eco.val", "class": "unsupported_claim", "was": "оценка без автора", "now": "Бархота", "tag": "m206"}
+{"id": "g27543cdc", "field": "law.terms", "class": "foreign_fact", "was": "общее мнение юриста о таких сделках", "now": "—", "tag": "m206"}
+{"id": "g27543cdc", "field": "title", "class": "title_standard", "was": "рассматривают продажу", "now": "выставлен на продажу", "tag": "m206"}
+{"id": "gc7e0b5c9", "field": "date", "class": "wrong_date", "was": "2025-11-18 (публикация)", "now": "2025-11-11", "tag": "m206"}
+{"id": "gc7e0b5c9", "field": "seller", "class": "other", "was": "«Технологий туризма»", "now": "«Технологии туризма»", "tag": "m206"}
+{"id": "gc7e0b5c9", "field": "title", "class": "title_standard", "was": "вторая мысль через тире", "now": "одна мысль", "tag": "m206"}
