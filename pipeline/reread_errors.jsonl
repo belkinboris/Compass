@@ -4186,3 +4186,152 @@
 {"id": "g04edfc17", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-12-23 (ЕГРЮЛ)", "tag": "m219"}
 {"id": "g04edfc17", "field": "eco.context", "class": "foreign_fact", "was": "сумма сделки «Газпром Теха» 12–13 млрд ₽", "now": "снято, поздняя судьба — одной фразой", "tag": "m219"}
 {"id": "g04edfc17", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "36% доли в ООО «Аурус»", "tag": "m219"}
+{"id": "gb9a22f5f", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов (торги РАД)", "tag": "m218"}
+{"id": "gb9a22f5f", "field": "title", "class": "title_standard", "was": "«Русский Стандарт водка» продает свой офисно-складской комплекс в Петербурге", "now": "«Русский Стандарт Водка» выставил на торги офисно-складской комплекс в Шушарах", "tag": "m218"}
+{"id": "gb9a22f5f", "field": "asset", "class": "wrong_target", "was": "свой офисно-складской комплекс в Петербурге", "now": "Офисно-складской комплекс на Пулковском шоссе, 52 в Шушарах", "tag": "m218"}
+{"id": "gb9a22f5f", "field": "law.struct", "class": "language", "was": "По данным «ДП», недвижимость принадлежит…", "now": "без пересказа прессы", "tag": "m218"}
+{"id": "gb9a22f5f", "field": "eco.context", "class": "unsupported_claim", "was": "замглавы департамента РАД Дарья Гончарова; «закрытые торги»", "now": "заместитель руководителя департамента продаж РАД; повторный аукцион 30 октября", "tag": "m218"}
+{"id": "gb9a22f5f", "field": "company.desc", "class": "profile_text", "was": "описание холдинга и залогов", "now": "описание самой компании", "tag": "m218"}
+{"id": "ge283bafc", "field": "title", "class": "title_standard", "was": "Pridex продал сеть … группе частных инвесторов", "now": "«Флекс капитал» купил сеть сервисных офисов Multispace у Pridex", "tag": "m218"}
+{"id": "ge283bafc", "field": "eco.rationale", "class": "other", "was": "пересказ релиза целиком (новый владелец, режим работы сети)", "now": "мотив продавца", "tag": "m218"}
+{"id": "ge283bafc", "field": "company.desc", "class": "foreign_fact", "was": "Multispace: переговоры 2023 года о Stone Курская", "now": "описание сети", "tag": "m218"}
+{"id": "g0db67d5b", "field": "src", "class": "dead_source", "was": "MirKvartir (404)", "now": "Коммерсантъ, doc/8908499", "tag": "m218"}
+{"id": "g0db67d5b", "field": "title", "class": "title_standard", "was": "заголовок РИА дословно", "now": "своя конструкция", "tag": "m218"}
+{"id": "g0db67d5b", "field": "eco.share", "class": "wrong_share", "was": "описание здания", "now": "—", "tag": "m218"}
+{"id": "g0db67d5b", "field": "eco.rationale", "class": "invented_rationale", "was": "Концепцию развития участка девелопер намерен согласовать с городом", "now": "— (план — прямой речью в контексте)", "tag": "m218"}
+{"id": "g0db67d5b", "field": "asset", "class": "wrong_target", "was": "советское административное здание на Павелецкой", "now": "Бизнес-центр на Дубининской улице, 33Б в Москве", "tag": "m218"}
+{"id": "g8d7794d0", "field": "eco.share", "class": "wrong_share", "was": "описание компании и лицензий", "now": "100% доли в ООО «Кодар»", "tag": "m218"}
+{"id": "g8d7794d0", "field": "title", "class": "title_standard", "was": "золотодобывающую компанию … у структуры с китайским капиталом", "now": "геологоразведочную компанию «Кодар»", "tag": "m218"}
+{"id": "g8d7794d0", "field": "eco.rationale", "class": "invented_rationale", "was": "вывод издания «получил контроль над двумя активами»", "now": "—", "tag": "m218"}
+{"id": "g8d7794d0", "field": "eco.context", "class": "verbatim", "was": "куски заметки «Золото и технологии» подряд", "now": "пересказ", "tag": "m218"}
+{"id": "gc7e35605", "field": "ind", "class": "wrong_industry", "was": "Искусственный интеллект", "now": "Машиностроение (промышленные роботы)", "tag": "m218"}
+{"id": "gc7e35605", "field": "eco.share", "class": "wrong_share", "was": "описание компании", "now": "Доля в ООО «Робатур»", "tag": "m218"}
+{"id": "gc7e35605", "field": "eco.rationale", "class": "invented_rationale", "was": "история основателя и экономия на трех заводах", "now": "на что пойдут деньги (со слов компании)", "tag": "m218"}
+{"id": "gc7e35605", "field": "date", "class": "wrong_date", "was": "2026-08-25 (день поста)", "now": "2026", "tag": "m218"}
+{"id": "gc7e35605", "field": "title", "class": "title_standard", "was": "инвестировала в робототехнический стартап", "now": "купила долю в «Робатуре»", "tag": "m218"}
+{"id": "gad66fcec", "field": "sum", "class": "sum_meaning", "was": "7,5–8,2 млрд ₽ (по оценке)", "now": "Не раскрыта; оценка экспертов — в eco.val", "tag": "m218"}
+{"id": "gad66fcec", "field": "src", "class": "dead_source", "was": "MirKvartir (404)", "now": "Коммерсантъ, doc/8908499; CRE", "tag": "m218"}
+{"id": "gad66fcec", "field": "eco.share", "class": "wrong_share", "was": "заполняемость склада", "now": "—", "tag": "m218"}
+{"id": "gad66fcec", "field": "asset", "class": "wrong_target", "was": "складской комплекс в Новой Москве", "now": "Складской комплекс площадью 75,7 тыс. кв. м в промпарке «Кувекино»", "tag": "m218"}
+{"id": "gad66fcec", "field": "events.0.date", "class": "wrong_date", "was": "2026-08-25", "now": "2026-08-21", "tag": "m218"}
+{"id": "g9108dfd0", "field": "sum", "class": "sum_meaning", "was": "8 млрд ₽", "now": "Не раскрыта; оценка экспертов — в eco.val", "tag": "m218"}
+{"id": "g9108dfd0", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Фипс»", "tag": "m218"}
+{"id": "g9108dfd0", "field": "src", "class": "aggregator_source", "was": "TAdviser (пересказ «Ведомостей») первым", "now": "«Ведомости» первыми", "tag": "m218"}
+{"id": "g9108dfd0", "field": "eco.finadv", "class": "adviser_wrong", "was": "оценка значимости сделки от Дениса Платова", "now": "—", "tag": "m218"}
+{"id": "g9108dfd0", "field": "law.adv", "class": "adviser_wrong", "was": "Консультант сделки (без клиента)", "now": "Консультант одной из сторон", "tag": "m218"}
+{"id": "g9108dfd0", "field": "events.0.date", "class": "wrong_date", "was": "2026-08-25", "now": "2026-08-07", "tag": "m218"}
+{"id": "g9108dfd0", "field": "title", "class": "title_standard", "was": "выкупил штаб-квартиру группы Okkam", "now": "купил три этажа в башне «Империя»", "tag": "m218"}
+{"id": "ge957fc7b", "field": "date", "class": "wrong_date", "was": "2026-08-26 (объявление торгов)", "now": "2026-09-25 (торги, протокол)", "tag": "m218"}
+{"id": "ge957fc7b", "field": "seller", "class": "wrong_seller", "was": "«Ростех»", "now": "Холдинг «Швабе» (собственник здания)", "tag": "m218"}
+{"id": "ge957fc7b", "field": "title", "class": "title_standard", "was": "«Ростех» продал … экс-полпреду Клебанову", "now": "«Оптика Мира» купила на торгах штаб-квартиру «Швабе»", "tag": "m218"}
+{"id": "ge957fc7b", "field": "law.struct", "class": "other", "was": "Торги назначены на 25 сентября (снимок до торгов)", "now": "итог торгов и вторая заявка", "tag": "m218"}
+{"id": "ge957fc7b", "field": "eco.share", "class": "wrong_share", "was": "описание здания", "now": "—", "tag": "m218"}
+{"id": "gabdbe320", "field": "date", "class": "wrong_date", "was": "2026-08-28 (день агрегатора)", "now": "2026-08-11 (ЕГРЮЛ)", "tag": "m218"}
+{"id": "gabdbe320", "field": "sum", "class": "sum_meaning", "was": "100–120 млн ₽ (по оценке)", "now": "Не раскрыта; оценка Бурмистрова — в eco.val", "tag": "m218"}
+{"id": "gabdbe320", "field": "src", "class": "source_not_about", "was": "Habr Career (страница работодателя)", "now": "«Коммерсантъ» (первоисточник)", "tag": "m218"}
+{"id": "gabdbe320", "field": "title", "class": "title_standard", "was": "холдинг «ЮСТА» приобрел", "now": "Станислав Бартош купил (покупатель по ЕГРЮЛ — он лично)", "tag": "m218"}
+{"id": "gabdbe320", "field": "law.struct", "class": "language", "was": "По данным реестрового агрегатора (не прессы)…", "now": "по ЕГРЮЛ", "tag": "m218"}
+{"id": "g60f99ba6", "field": "type", "class": "wrong_type", "was": "M&A (7,52%)", "now": "Инвестиция", "tag": "m218"}
+{"id": "g60f99ba6", "field": "seller", "class": "wrong_seller", "was": "организация, конечной контролирующей стороной которой является Российская Федерация", "now": "пусто (банк размещал допэмиссию; продавец не назван)", "tag": "m218"}
+{"id": "g60f99ba6", "field": "date", "class": "wrong_date", "was": "2026-08-28 (день статьи)", "now": "2026 (в июле, день не раскрыт)", "tag": "m218"}
+{"id": "g60f99ba6", "field": "eco.context", "class": "unsupported_claim", "was": "мнения Васильева и Родионова (статья не открывается)", "now": "снято", "tag": "m218"}
+{"id": "g60f99ba6", "field": "company.desc", "class": "profile_text", "was": "«характеристика из источника карточки…»", "now": "описание компании", "tag": "m218"}
+{"id": "g0ff8c5c4", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "NBCC (India) Ltd", "tag": "m218"}
+{"id": "g0ff8c5c4", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов (электронный аукцион NBCC)", "tag": "m218"}
+{"id": "g0ff8c5c4", "field": "date", "class": "wrong_date", "was": "2026-09-01 (выступление на ВЭФ)", "now": "2026 (аукцион в апреле, день не назван)", "tag": "m218"}
+{"id": "g0ff8c5c4", "field": "sum", "class": "other", "was": "Более 2000 крор рупий (крор = 10 млн рупий…)", "now": "Более ₹20 млрд", "tag": "m218"}
+{"id": "g0ff8c5c4", "field": "eco.context", "class": "foreign_fact", "was": "планы 10 филиалов и ИТ-хаба", "now": "снято", "tag": "m218"}
+{"id": "g2f22b1dc", "field": "title", "class": "title_standard", "was": "Росатом рассматривает продажу до 49%", "now": "Доля до 49% … выставлена на продажу", "tag": "m218"}
+{"id": "g2f22b1dc", "field": "extra", "class": "unsupported_claim", "was": "готовность блока 95% (Минэнерго Турции), «впервые 7 августа»", "now": "—", "tag": "m218"}
+{"id": "g2f22b1dc", "field": "eco.rationale", "class": "invented_rationale", "was": "Привлечение внешних инвесторов…", "now": "—", "tag": "m218"}
+{"id": "g2f22b1dc", "field": "eco.finadv", "class": "unsupported_claim", "was": "Публично не сообщалось", "now": "—", "tag": "m218"}
+{"id": "gfb282142", "field": "target", "class": "wrong_target", "was": "Литум (ООО ГК «Литум», ИНН 6685208470 — головная компания группы)", "now": "ООО «Литум» (бывш. ООО «Йотун Пэйнтс»), ИНН 7805360880", "tag": "m229"}
+{"id": "gfb282142", "field": "buyer", "class": "wrong_buyer", "was": "АО «Корпорация «Атомстройкомплекс»»", "now": "ООО «Атомстройкомплекс-Промышленность» (ЕГРЮЛ: 100% с 29.07.2022)", "tag": "m229"}
+{"id": "gfb282142", "field": "seller", "class": "wrong_seller", "was": "Jotun", "now": "Jotun A/S (участник по ЕГРЮЛ)", "tag": "m229"}
+{"id": "gd0af0377", "field": "buyer_name", "class": "wrong_buyer", "was": "местный менеджмент", "now": "поле пусто (имена не раскрыты)", "tag": "m229"}
+{"id": "g50412a76", "field": "buyer_name", "class": "wrong_buyer", "was": "Менеджмент Mediascope", "now": "поле пусто (имена не раскрыты)", "tag": "m229"}
+{"id": "g50412a76", "field": "title", "class": "title_standard", "was": "Менеджмент Mediascope купил долю Kantar в измерителе", "now": "Менеджмент Mediascope купил у Kantar 20% измерителя", "tag": "m229"}
+{"id": "g16540a36", "field": "asset", "class": "wrong_target", "was": "90% в YE Russia", "now": "АО «ЮЕ-Интернейшнл» (YE Russia), профиль с ИНН 7810943817", "tag": "m229"}
+{"id": "g16540a36", "field": "eco.share", "class": "wrong_share", "was": "90% доли в YE Russia", "now": "90% акций АО «ЮЕ-Интернейшнл»", "tag": "m229"}
+{"id": "g16540a36", "field": "title", "class": "title_standard", "was": "Директор YE Russia Юрье Пенни купил у финской Boreo 90% компании", "now": "Юрье Пенни купил 90% YE Russia у Boreo", "tag": "m229"}
+{"id": "g16540a36", "field": "eco.val", "class": "other", "was": "способ оплаты акциями Boreo в оценках", "now": "в eco.fin", "tag": "m229"}
+{"id": "gcdf0303d", "field": "title", "class": "title_standard", "was": "Руководители российской Elopak купили компанию у норвежского владельца", "now": "Местные руководители купили российский бизнес Elopak", "tag": "m229"}
+{"id": "gee7be9ef", "field": "seller", "class": "wrong_seller", "was": "Luxoft International (DXC Technology) + профиль Luxoft Holding", "now": "Luxoft International Company Limited и Luxoft UK Limited (ЕГРЮЛ), без профиля", "tag": "m229"}
+{"id": "g070084ad", "field": "seller", "class": "wrong_seller", "was": "Wärtsilä", "now": "Wärtsilä Technology Oy Ab (участник по ЕГРЮЛ)", "tag": "m229"}
+{"id": "g5192332c", "field": "law.appr", "class": "language", "was": "(по данным Нефтегаз.RU)", "now": "без пересказа прессы", "tag": "m229"}
+{"id": "g5192332c", "field": "eco.context", "class": "wrong_date", "was": "TotalEnergies договорилась «тогда же» (в мае 2022)", "now": "в июле 2022 года", "tag": "m229"}
+{"id": "g01d717f8", "field": "seller", "class": "wrong_seller", "was": "Linde", "now": "Linde UK Holdings No.2 Limited (вышла из участников 27.07.2026 по ЕГРЮЛ)", "tag": "m233"}
+{"id": "g519084ea", "field": "eco.val", "class": "version_as_fact", "was": "по оценке участников рынка, сделка стоила около 50 млрд ₽", "now": "участники рынка оценивали сделку примерно в 50 млрд ₽", "tag": "m233"}
+{"id": "g32d9b54f", "field": "src", "class": "aggregator_source", "was": "РИА Недвижимость (пересказ «Коммерсанта») первым", "now": "Коммерсантъ doc/6397049 первым", "tag": "m233"}
+{"id": "g32d9b54f", "field": "sum", "class": "wrong_sum", "was": "Не раскрыта (цена источника издания — в eco.val)", "now": "27–29 млрд ₽ (по оценке), sum_basis reported", "tag": "m233"}
+{"id": "g32d9b54f", "field": "seller", "class": "wrong_seller", "was": "Группа «Абсолют» (компания «Абсолют Интернэшнл Ди-Эм-Си-Си»)", "now": "Компания «Абсолют Интернэшнл Ди-Эм-Си-Си» (ЕГРЮЛ)", "tag": "m233"}
+{"id": "g06fbafb6", "field": "eco.share", "class": "wrong_share", "was": "В доход государства обращены все акции… и все доли…", "now": "100% акций АО «Салаватнефтемаш»… 100% долей в ООО «Нефтехимремстрой»…", "tag": "m233"}
+{"id": "g06fbafb6", "field": "eco.val", "class": "other", "was": "«Коммерсантъ» оценивал изъятые компании в 37 млрд ₽", "now": "по данным Генпрокуратуры и суда, стоимость предприятий — 37 млрд ₽", "tag": "m233"}
+{"id": "g06fbafb6", "field": "title", "class": "title_standard", "was": "Акции «Салаватнефтемаша» и еще шести предприятий обращены в доход государства по иску Генпрокуратуры", "now": "Активы Алексея Митюшова обращены в доход государства", "tag": "m233"}
+{"id": "gf1e49a26", "field": "eco.share", "class": "wrong_share", "was": "100% Хоум Банка", "now": "100% доли в ООО «Хоум Кредит энд Финанс Банк»", "tag": "m233"}
+{"id": "gf1e49a26", "field": "seller", "class": "wrong_seller", "was": "Совладельцы Хоум Банка (через ООО «Хоум Капитал»)", "now": "АО «Хоум Капитал» (99,98% по ЕГРЮЛ)", "tag": "m233"}
+{"id": "g31b151e6", "field": "eco.share", "class": "wrong_share", "was": "В доход государства обращены доли компаний группы…", "now": "100% долей в ООО «Холдинговая компания «Трансбункер»», МКООО «Трансбункер Кэпитал» и МКООО «Трансбункер Менеджмент»", "tag": "m233"}
+{"id": "g31b151e6", "field": "title", "class": "title_standard", "was": "Компании группы «Трансбункер» обращены в доход государства по иску Генпрокуратуры", "now": "Активы группы «Трансбункер» обращены в доход государства", "tag": "m233"}
+{"id": "gbed7c5f6", "field": "sum", "class": "sum_meaning", "was": "1,5 млрд ₽ (стартовая цена)", "now": "Не раскрыта; начальная цена лота — в eco.val", "tag": "m233"}
+{"id": "g82725e96", "field": "buyer_name", "class": "wrong_buyer", "was": "Михаил Цыферов (президент «Петровакса») и VB Partners", "now": "ООО «Фарминвест» (вошло 10.10.2022 по ЕГРЮЛ)", "tag": "m233"}
+{"id": "g82725e96", "field": "seller", "class": "wrong_seller", "was": "«Интеррос» (профиль)", "now": "Компания «Елонда Холдингз Ко. Лимитед» (вышла 10.10.2022 по ЕГРЮЛ)", "tag": "m233"}
+{"id": "g82725e96", "field": "title", "class": "title_standard", "was": "Михаил Цыферов и VB Partners купили «Петровакс» у «Интерроса»", "now": "«Фарминвест» купил «Петровакс» у «Интерроса»", "tag": "m233"}
+{"id": "ga024ea1e", "field": "sum", "class": "sum_meaning", "was": "300 млн ₽ (по оценке) — «оценочно могла составить»", "now": "Не раскрыта", "tag": "m230"}
+{"id": "ga024ea1e", "field": "date", "class": "wrong_date", "was": "2022-07-05 (день заметки NRN)", "now": "2022 (Ъ 7 июня: сделка уже закрылась, дня нет)", "tag": "m230"}
+{"id": "g19f07141", "field": "seller", "class": "wrong_seller", "was": "Kingspan Group plc", "now": "Kingspan Holdings (Irl) Limited (вышла по ЕГРЮЛ 01.04.2022)", "tag": "m230"}
+{"id": "g19f07141", "field": "buyer_name", "class": "other", "was": "«Ф109 Лимитед» (местный менеджмент; с декабря 2022 года — Игорь Федотченко)", "now": "«Ф109 Лимитед»", "tag": "m230"}
+{"id": "g19f07141", "field": "law.struct", "class": "wrong_date", "was": "В октябре–декабре 2022 года", "now": "В сентябре–декабре 2022 года (Федотченко вошел 19.09.2022)", "tag": "m230"}
+{"id": "gdc38f29c", "field": "seller", "class": "wrong_seller", "was": "Emerson Electric Co.", "now": "Tranmet Holdings B.V., Tranmet Holdings Ltd. и Emerson Electric Niderland B.V.", "tag": "m230"}
+{"id": "gdc38f29c", "field": "buyer_name", "class": "other", "was": "ООО «Метран холдинг» (Антон Дружинин и Николай Шестаков)", "now": "ООО «Метран холдинг»", "tag": "m230"}
+{"id": "g99f697c1", "field": "sum", "class": "sum_meaning", "was": "Не раскрыта (оценки аналитиков расходятся: …)", "now": "Не раскрыта; оценки с именами — в eco.val", "tag": "m230"}
+{"id": "g99f697c1", "field": "asset", "class": "wrong_target", "was": "ООО «Химки бизнес парк» — бизнес-центр площадью 42 тыс. кв. м …", "now": "ООО «Химки бизнес парк»", "tag": "m230"}
+{"id": "g99f697c1", "field": "seller", "class": "wrong_seller", "was": "нет (не найден)", "now": "Аркадий Даниелян (вышел из «А-финанс» и «КЛС-Химки» 03.11.2026)", "tag": "m230"}
+{"id": "g99f697c1", "field": "date", "class": "wrong_date", "was": "2026", "now": "2026-11-03 (ЕГРЮЛ)", "tag": "m230"}
+{"id": "g99f697c1", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «А-финанс» и 1% доли в ООО «КЛС-Химки»", "tag": "m230"}
+{"id": "g99f697c1", "field": "title", "class": "title_standard", "was": "… «Химки бизнес парк», бывший офис владельца ИКЕА", "now": "«АГР Холдинг» купил бизнес-центр «Химки бизнес парк»", "tag": "m230"}
+{"id": "g5dffcb32", "field": "buyer", "class": "wrong_buyer", "was": "ВТБ (банк)", "now": "ООО «ВТБ Индустриальная недвижимость» (ЕГРЮЛ)", "tag": "m230"}
+{"id": "g67bced75", "field": "seller", "class": "wrong_seller", "was": "Михаил Юревич и Вадим Белоусов с семьями", "now": "нет: изъятие, акционеров АО реестр не показывает", "tag": "m230"}
+{"id": "g7f1f9992", "field": "seller", "class": "wrong_seller", "was": "Михаил Юревич и Вадим Белоусов с семьями", "now": "нет: изъятие, акционеров АО реестр не показывает", "tag": "m230"}
+{"id": "g7f1f9992", "field": "eco.share", "class": "wrong_share", "was": "Акции АО «СМАК» перешли Росимуществу (доля в статьях не названа).", "now": "100% акций АО «СМАК» (Росимущество — единственный акционер по ЕГРЮЛ)", "tag": "m230"}
+{"id": "gbfd7c740", "field": "title", "class": "title_standard", "was": "… у структур USM и Solvers Estate … в «Москва-Сити»", "now": "Sezar Group купила у USM и Solvers Estate проект небоскреба «Империя II»", "tag": "m230"}
+{"id": "gdf6f72b9", "field": "seller", "class": "wrong_seller", "was": "Daimler Truck", "now": "Daimler Kamaz Trucks Holding GmbH (вышла по ЕГРЮЛ 13.01.2023)", "tag": "m230"}
+{"id": "gdf6f72b9", "field": "eco.share", "class": "wrong_share", "was": "50% доли в ООО «Тракс Восток Рус»", "now": "100% доли в ООО «Тракс Восток Рус»", "tag": "m230"}
+{"id": "gdf6f72b9", "field": "title", "class": "title_standard", "was": "«КАМАЗ» купил у Daimler 50% совместного предприятия «ДК Рус»", "now": "«КАМАЗ» купил бывшее совместное с Daimler предприятие «ДК Рус»", "tag": "m230"}
+{"id": "g0e9b1b92", "field": "seller", "class": "wrong_seller", "was": "Сергей Махлай через компании (Instantania Holdings, Kamara, Trafalgar Trafhold, Bairiki)", "now": "Instantania Holdings Ltd., Kamara Ltd., Trafalgar Trafhold Limited и Bairiki Inc.", "tag": "m231"}
+{"id": "g3b95a20e", "field": "seller", "class": "wrong_seller", "was": "Группа «Онэксим»", "now": "ООО «Группа «Онэксим»», ООО «Бизнесинформ», ООО «СК «Согласие»», ООО «Бона спорт»", "tag": "m231"}
+{"id": "g3766be95", "field": "status", "class": "wrong_status", "was": "Подписана", "now": "Закрыта (MSK1: здание выкуплено в 2024 году, актив принадлежит компании)", "tag": "m231"}
+{"id": "g3766be95", "field": "date", "class": "wrong_date", "was": "2024-12-25 (объявление)", "now": "2024", "tag": "m231"}
+{"id": "g3766be95", "field": "title", "class": "title_standard", "was": "покупает", "now": "купил", "tag": "m231"}
+{"id": "gf0796603", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-09-11 (ЕГРЮЛ)", "tag": "m231"}
+{"id": "gf0796603", "field": "title", "class": "title_standard", "was": "… у структуры Виктора Харитонина", "now": "«Свеза» купила пермский комбинат «Кама»", "tag": "m231"}
+{"id": "gf0796603", "field": "seller_id", "class": "wrong_seller", "was": "профиль «Структуры Виктора Харитонина» при тексте ООО «Лес Инвест Холдинг»", "now": "профиль снят, сторона текстом", "tag": "m231"}
+{"id": "g420af896", "field": "eco.sum", "class": "sum_meaning", "was": "28–35 млрд ₽ (по оценке) — оценка IBC Real Estate", "now": "Не раскрыта", "tag": "m231"}
+{"id": "g420af896", "field": "eco.finadv", "class": "adviser_wrong", "was": "Commonwealth Partnership — консультант сделки (от комментариев отказался)", "now": "Commonwealth Partnership — консультант одной из сторон", "tag": "m231"}
+{"id": "g420af896", "field": "title", "class": "title_standard", "was": "Компания, связанная с ЛУКОЙЛом, купила…", "now": "«Толиман» купил бизнес-центр AFI2B в Москве", "tag": "m231"}
+{"id": "gac8cfa76", "field": "buyer_name", "class": "wrong_buyer", "was": "ФГУП «НАМИ»", "now": "ООО «Шушары-Авто» (дочерняя компания ФГУП «НАМИ»)", "tag": "m231"}
+{"id": "g02cbc362", "field": "eco.share", "class": "wrong_share", "was": "100% игрового холдинга My.Games со всеми студиями и играми", "now": "100% My.Games", "tag": "m231"}
+{"id": "g02cbc362", "field": "title", "class": "title_standard", "was": "купил игровой холдинг My.Games", "now": "купил My.Games", "tag": "m231"}
+{"id": "g3ce61e68", "field": "seller", "class": "wrong_seller", "was": "Вячеслав Аминов, Вадим Аминов, Алексей Лихтенфельд (бенефициары)", "now": "НТС Холдинг ПиЭлСи (ЕГРЮЛ)", "tag": "m231"}
+{"id": "g737b71a1", "field": "seller", "class": "wrong_seller", "was": "Алексей Хотин (бенефициар) при изъятии", "now": "нет продавца, no_parties", "tag": "m231"}
+{"id": "g737b71a1", "field": "eco.share", "class": "wrong_share", "was": "… (75 юрлиц) обращены в доход государства", "now": "100% акций АО «Русь-Ойл» и 100% долей компаний группы", "tag": "m231"}
+{"id": "g6d218e37", "field": "title", "class": "title_standard", "was": "Андрей Косогов купил доли Михаила Фридмана и Петра Авена в Альфа-Банке", "now": "Андрей Косогов купил 45% Альфа-Банка у Михаила Фридмана и Петра Авена", "tag": "m232"}
+{"id": "g2fc45372", "field": "seller", "class": "party_text_no_profile", "was": "Валерий Шегнагаев и другие совладельцы", "now": "Валерий Шегнагаев с семьей, Алексей Кумшатский и Яков Шевченко", "tag": "m232"}
+{"id": "g2fc45372", "field": "eco.share", "class": "wrong_share", "was": "Акции АО «Рыболовецкий колхоз «Восток-1»» перешли в доход государства", "now": "Акции АО «Рыболовецкий колхоз «Восток-1»»", "tag": "m232"}
+{"id": "g2fc45372", "field": "law.struct", "class": "language", "was": "Алексей Кумшацкий", "now": "Алексей Кумшатский (как в Интерфаксе)", "tag": "m232"}
+{"id": "g7e3e7bfe", "field": "sum", "class": "sum_meaning", "was": "$325 млн (по оценке) — цифра из отчета об оценке Kept", "now": "Не раскрыта; цифра Kept — в eco.val", "tag": "m232"}
+{"id": "g8920a6dc", "field": "seller", "class": "wrong_seller", "was": "Павел Патяко", "now": "Павел Патяко, Александр Арутюнов (оба вышли 28.07.2023 по ЕГРЮЛ)", "tag": "m232"}
+{"id": "g8920a6dc", "field": "title", "class": "title_standard", "was": "… у Павла Патяко (не узнаваемый продавец)", "now": "«Деметра-Холдинг» купил вагонного оператора WTG", "tag": "m232"}
+{"id": "g8920a6dc", "field": "eco.val", "class": "version_as_fact", "was": "Аналитики оценивали парк WTG минимум в 10 млрд ₽", "now": "Оценка с именем: Михаил Бурмистров («Инфолайн-Аналитика»)", "tag": "m232"}
+{"id": "ge07b938e", "field": "title", "class": "title_standard", "was": "… у Сергея Дрозда (не узнаваемый продавец)", "now": "«ЭФКО» купил Тольяттинский комбинат пищевых продуктов", "tag": "m232"}
+{"id": "gcf4012d3", "field": "title", "class": "title_standard", "was": "MGC Group купила «Автомобильные технологии» — сборщика Haval M6 в Калуге", "now": "MGC Group купил «Автомобильные технологии»", "tag": "m232"}
+{"id": "g70c5c6f6", "field": "src", "class": "source_not_about", "was": "EQS — ссылка открывает чужую ленту новостей", "now": "AK&M о закрытии 28 февраля 2022 года", "tag": "m232"}
+{"id": "ga15bb063", "field": "date", "class": "wrong_date", "was": "2023-12-05 (день сообщения ВЭБ.РФ)", "now": "2023 (день сделок не назван)", "tag": "m232"}
+{"id": "ga15bb063", "field": "title", "class": "title_standard", "was": "Группа «1520» Алексея Крапивина купила у ВЭБ.РФ 48% «Нацпроектстроя»", "now": "Группа «1520» купила 48% «Нацпроектстроя» у ВЭБ.РФ", "tag": "m232"}
+{"id": "g74c84c09", "field": "buyer_name", "class": "wrong_buyer", "was": "Владимир Лисин (через свои структуры)", "now": "Алексей Мельник (контролирующий акционер по отчетности за 2024 год)", "tag": "m232"}
+{"id": "g74c84c09", "field": "title", "class": "title_standard", "was": "Структуры Владимира Лисина купили производителя «Фрутоняни» АО «Прогресс»", "now": "Алексей Мельник купил производителя «Фрутоняни»", "tag": "m232"}
+{"id": "g74c84c09", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "Контрольный пакет акций АО «Прогресс»", "tag": "m232"}
+{"id": "gdbe3527f", "field": "eco.val", "class": "version_as_fact", "was": "≈18,6 млрд ₽ без автора расчета", "now": "расчет «БИЗНЕС Online» с оговоркой издания", "tag": "m232"}
+{"id": "g2eb24828", "field": "law.struct", "class": "unsupported_claim", "was": "— (вторая версия сделки не показана)", "now": "обе версии: здание у Росбанка / весь БЦ «Домников» у Росбанка и RWM Capital", "tag": "m232"}
+{"id": "g2eb24828", "field": "title", "class": "title_standard", "was": "Альфа-Банк купил у Росбанка бизнес-центр «Росбанк Плаза»", "now": "Альфа-Банк купил бизнес-центр «Росбанк Плаза» у Росбанка", "tag": "m232"}
+{"id": "g67e276e2", "field": "buyer", "class": "wrong_buyer", "was": "Российская Федерация (текстом)", "now": "Росимущество (профиль; ЕГРЮЛ 03.10.2025)", "tag": "m232"}
+{"id": "g67e276e2", "field": "seller", "class": "party_text_no_profile", "was": "Семья Игоря Пушкарева", "now": "Андрей, Алексей и Татьяна Пушкаревы, Алексей Сысоев, Виктор Иванов, Евгений Дещенко", "tag": "m232"}
