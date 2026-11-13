@@ -62,16 +62,25 @@ def fetch_decisions():
     if not token:
         print('MODERATION_TOKEN/TELEGRAM_WEBHOOK_SECRET не заданы — решения не прочитать.')
         return [], None
-    try:
-        import httpx
-        r = httpx.get('%s/api/moderation/decisions' % site, params={'token': token}, timeout=20)
-        if r.status_code != 200:
-            print('Сайт ответил %s на запрос решений — работаем без них.' % r.status_code)
-            return [], None
-        return normalize_channels(r.json().get('decisions', [])), (site, token)
-    except Exception as e:
-        print('Решения недоступны (%s) — работаем без них.' % e)
-        return [], None
+    # Связь контейнера с сайтом рвется (13 ноября 2026: публикация пять раз
+    # подряд не прочитала решения) — пять попыток с паузой, прежде чем сдаться.
+    import time
+    tries = 1 if os.environ.get('PYTEST_CURRENT_TEST') else 5
+    err = None
+    for attempt in range(tries):
+        try:
+            import httpx
+            r = httpx.get('%s/api/moderation/decisions' % site, params={'token': token}, timeout=20)
+            if r.status_code != 200:
+                print('Сайт ответил %s на запрос решений — работаем без них.' % r.status_code)
+                return [], None
+            return normalize_channels(r.json().get('decisions', [])), (site, token)
+        except Exception as e:
+            err = e
+            if attempt < tries - 1:
+                time.sleep(4)
+    print('Решения недоступны (%s) — работаем без них.' % err)
+    return [], None
 
 
 # Кнопки «🏠 Только недвижимость» / «📰 Только основной» под проектом поста
