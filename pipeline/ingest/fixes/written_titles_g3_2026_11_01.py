@@ -283,16 +283,6 @@ FIXES = [{'id': 'g01054f2a',
            'сообщает портал ГИС "Торги".',
   'why': 'G3: единый стиль заголовков (docs/card_parties.md «Заголовок», WRITING_BRIEF `title`): '
          'long'},
- {'id': 'g4f4dc9b5',
-  'field': 'title',
-  'old': 'Philip Morris International оценила свою долю 23% в российском дистрибьюторе Megapolis '
-         'Distribution BV в $351 млн (по отчетности на 30.09.2023)',
-  'new': 'Philip Morris оценила свою долю 23% в Megapolis Distribution в $351 млн',
-  'quote': 'Philip Morris International (PMI), один из мировых лидеров в производстве табачной '
-           'продукции, оценивает свою долю в 23% компании "Мегаполис", ведущего дистрибьютора '
-           'табака в России, в $351 млн, говорится в отчете PMI.',
-  'why': 'G3: единый стиль заголовков (docs/card_parties.md «Заголовок», WRITING_BRIEF `title`): '
-         'long'},
  {'id': 'g833a29f6',
   'field': 'title',
   'old': 'MD Medical Group (ГК «Мать и дитя») приобрела 100% ООО «МЦ Эксперт» (сеть клиник ГК '
