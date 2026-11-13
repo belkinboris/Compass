@@ -898,7 +898,8 @@ def test_post_subject_line_names_the_subject_not_its_revenue():
     companies = {"t1": {"name": "ООО «Протосервисез»",
                         "desc": "Московская компания, работает с 2014 года."}}
     text = format_post.render(deal, companies)
-    assert "<b>Предмет:</b> ООО «Протосервисез» — московская компания, работает с 2014 года." in text
+    # с 12 ноября 2026 описание профиля в «Предмет» не идет (владелец, ВТС)
+    assert "<b>Предмет:</b> ООО «Протосервисез»\n" in text, text
     assert "9,5 млн руб." not in text, "показатели предмета выданы за предмет"
 
     # Предложение «Финансов предмета», которое называет юрлицо, а не показатель,
@@ -932,7 +933,8 @@ def test_post_subject_sentences_from_different_sources_get_a_period_between_them
     text = format_post.render(deal, companies)
     # С 19 октября 2026 первым идет описание предмета, потом доля.
     assert "кредитование 7,52%" not in text, "два источника склеены без знака препинания"
-    assert "опорный банк газовой отрасли: корпоративное кредитование. 7,52% голосующих ценных бумаг" in text
+    # с 12 ноября 2026 описание профиля в «Предмет» не идет — остается доля
+    assert "<b>Предмет:</b> Газпромбанк — 7,52% голосующих ценных бумаг." in text, text
 
 
 def test_sentence_split_does_not_break_multi_dot_abbreviations():
@@ -996,7 +998,8 @@ def test_sentence_split_keeps_address_abbreviations_and_dots_inside_quotes():
                                 "деятельности по ЕГРЮЛ — аренда и управление собственной недвижимостью."},
                  "b1": {"name": "Уральская нефтяная компания", "desc": "Торговля топливом."}}
     text = format_post.render(deal, companies)
-    assert 'г. Челябинск, основной вид деятельности' in text, text
+    # с 12 ноября 2026 описание профиля предмета в пост не идет
+    assert 'основной вид деятельности' not in text, text
     assert '», г.\n' not in text, text
 
 
@@ -1055,7 +1058,7 @@ def test_party_detail_skips_bare_legal_entity_note():
                                  "с лицензиями на поиск золота на Алтае."},
                   "b2": {"name": "РМК", "desc": "Медный холдинг."}}
     text2 = format_post.render(deal2, companies2)
-    assert 'Красная руда — геологоразведочная компания' in text2, text2
+    assert '<b>Предмет:</b> Красная руда\n' in text2, text2
     # Пометка с продолжением для предмета остается.
     assert format_post._BARE_LEGAL_ENTITY_NOTE.match('Юрлицо — ООО «Красная руда».')
     assert not format_post._BARE_LEGAL_ENTITY_NOTE.match(
@@ -8912,7 +8915,21 @@ def test_post_subject_names_the_company_then_says_what_it_is():
     companies = {"t1": {"name": "Perfectum",
                         "desc": "Узбекский мобильный оператор, работает с 1995 года."}}
     line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
-    assert "<b>Предмет:</b> Perfectum — узбекский мобильный оператор" in line
+    # С 12 ноября 2026 (владелец, ВТС) описание профиля в «Предмет» не идет.
+    assert "мобильный оператор" not in line, line
+
+
+def test_post_subject_is_entity_and_share_without_profile_description():
+    """Владелец, 12 ноября 2026: предмет — правильное название общества и доля,
+    без описания. «Город Лефортово» (gf30ca8c1) печатался ««Город Лефортово» —
+    торгово-развлекательный центр… 100% доли в ООО «Город Лефортово»»."""
+    deal = {"id": "x", "title": "Сбербанк выставил на торги ТРЦ «Город Лефортово» в Москве",
+            "status": "Обсуждается", "date": "2026-11-12", "target": "t1", "type": "M&A",
+            "asset": "ООО «Город Лефортово»", "eco": {"share": "100% доли в ООО «Город Лефортово»"}}
+    companies = {"t1": {"name": "«Город Лефортово»",
+                        "desc": "«Город Лефортово» — торгово-развлекательный центр на востоке Москвы."}}
+    line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
+    assert line == "<b>Предмет:</b> 100% доли в ООО «Город Лефортово»", line
 
 
 # --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
