@@ -4889,3 +4889,15 @@
 {"id": "c197ac551", "field": "card", "class": "not_a_deal", "was": "программа вложений ВЭБ.РФ через свой холдинг", "now": "карточка снята", "tag": "m106ab"}
 {"id": "c59e65efb", "field": "card", "class": "not_a_deal", "was": "вложения Абрамовича через фонд в стартапы 2015–2021 годов", "now": "карточка снята", "tag": "m106ab"}
 {"id": "cfdb3878d", "field": "card", "class": "not_a_deal", "was": "внутригрупповое объединение предприятий «Ростеха» (план)", "now": "карточка снята", "tag": "m106ab"}
+{"id": "g47188b89", "field": "buyer_name", "class": "party_text_no_profile", "was": "Местный менеджмент (генеральный и финансовый директора)", "now": "ООО «ММ энд БХ-1»…«-4» (ЕГРЮЛ ООО «Инчкейп Холдинг», 10.06.2022)", "tag": "m106c"}
+{"id": "g47188b89", "field": "asset", "class": "wrong_target", "was": "Розничный автобизнес британского дилера в Москве (19 салонов)", "now": "ООО «Инчкейп Холдинг» (сейчас ООО «БорисХоф Холдинг»)", "tag": "m106c"}
+{"id": "g47188b89", "field": "date", "class": "wrong_date", "was": "2022", "now": "2022-06-10 (ЕГРЮЛ)", "tag": "m106c"}
+{"id": "g47188b89", "field": "title", "class": "title_standard", "was": "Местный менеджмент купил российский бизнес Inchcape за 76 млн евро", "now": "Менеджеры купили российский бизнес Inchcape за 76 млн евро", "tag": "m106c"}
+{"id": "g34074060", "field": "buyer_name", "class": "party_text_no_profile", "was": "Местный менеджмент", "now": "— (имена и юрлицо не найдены)", "tag": "m106c"}
+{"id": "g5019c6ae", "field": "buyer_name", "class": "party_text_no_profile", "was": "Местный менеджмент", "now": "— (имена и юрлицо не найдены)", "tag": "m106c"}
+{"id": "g4afd35d0", "field": "asset", "class": "wrong_share", "was": "75% ООО «Туроператор БГ» (бренд «Библио-Глобус»)", "now": "75% доли в ООО «Библио-Глобус Туроператор»", "tag": "m106c"}
+{"id": "g4afd35d0", "field": "target", "class": "profile_wrong_company", "was": "профиль «Туроператор БГ» (имя до 2021 года)", "now": "«Библио-Глобус Туроператор» (ООО)", "tag": "m106c"}
+{"id": "g7814a42a", "field": "profile", "class": "profile_wrong_inn", "was": "ООО «Аструм» 7714480355", "now": "иностранная компания (MY.GAMES, Амстердам)", "tag": "m106c"}
+{"id": "g7393665f", "field": "profile", "class": "profile_wrong_inn", "was": "нет юрлица", "now": "ООО «Восток Ойл» 7727568649", "tag": "m106c"}
+{"id": "gd873b039", "field": "profile", "class": "profile_wrong_inn", "was": "7730289934 (бывшее ООО «Лизинг КРС»)", "now": "9703105684", "tag": "m106c"}
+{"id": "gb2b066c3", "field": "profile", "class": "profile_wrong_company", "was": "АО «ДОМ.РФ»", "now": "ПАО «ДОМ.РФ» (legal_short)", "tag": "m106c"}
