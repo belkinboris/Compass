@@ -4869,3 +4869,19 @@
 {"id": "c09e39da9", "field": "card", "class": "duplicate", "was": "отдельная карточка c09e39da9", "now": "слита этапом в absolut-strah", "tag": "m106a"}
 {"id": "c1d0f3d54", "field": "card", "class": "duplicate", "was": "отдельная карточка c1d0f3d54", "now": "слита этапом в g96b1cdaf", "tag": "m106a"}
 {"id": "c51777ade", "field": "card", "class": "duplicate", "was": "отдельная карточка c51777ade", "now": "слита этапом в c7fd83d05", "tag": "m106a"}
+{"id": "cc399efaf", "field": "type", "class": "wrong_type", "was": "M&A без сторон", "now": "Создание СП, участники «Агро-Белогорье» и «Русагро» профилями", "tag": "m106b"}
+{"id": "cc399efaf", "field": "date", "class": "wrong_date", "was": "2023-08-01", "now": "2023 (дня в источниках нет)", "tag": "m106b"}
+{"id": "cc399efaf", "field": "title", "class": "title_standard", "was": "Объединение животноводческих активов…", "now": "«Агро-Белогорье» и «Русагро» не объединили животноводческие активы", "tag": "m106b"}
+{"id": "cccedc36b", "field": "id", "class": "duplicate", "was": "вторая карточка покупки бизнеса «АВС-Электро»", "now": "слита в gdf93c62d", "tag": "m106b"}
+{"id": "g35357328", "field": "id", "class": "duplicate", "was": "отдельная карточка продажи Holiday Inn Сокольники", "now": "слита в g92476095 (часть продажи «Галс-Девелопмента», пресс-служба ВТБ)", "tag": "m106b"}
+{"id": "g92476095", "field": "events.0.source", "class": "aggregator_source", "was": "mergers.ru", "now": "Коммерсантъ", "tag": "m106b"}
+{"id": "g2197ed53", "field": "sum", "class": "sum_meaning", "was": "31–36 млрд ₽ (оценка всей компании)", "now": "5,038 млрд ₽ (цена бумаг по отчету)", "tag": "m106b"}
+{"id": "g2197ed53", "field": "date", "class": "wrong_date", "was": "2025-09-01", "now": "2025-09-19", "tag": "m106b"}
+{"id": "g2197ed53", "field": "title", "class": "title_standard", "was": "Газпромбанк может стать акционером…", "now": "Газпромбанк может купить долю в сети клиник «Медскан»", "tag": "m106b"}
+{"id": "g2197ed53", "field": "extra", "class": "unsupported_claim", "was": "Газпромбанк — организатор IPO, EV=12-14xEBITDA", "now": "снято", "tag": "m106b"}
+{"id": "g2197ed53", "field": "eco.context", "class": "language", "was": "«сам Туголуков», пересказ РБК", "now": "по датам, с атрибуцией", "tag": "m106b"}
+{"id": "g4165ba00", "field": "sum", "class": "sum_meaning", "was": "40–50 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m106b"}
+{"id": "g4165ba00", "field": "date", "class": "wrong_date", "was": "2025-07-01", "now": "2025-08-29 (опровержение)", "tag": "m106b"}
+{"id": "g4165ba00", "field": "title", "class": "title_standard", "was": "…рассматривает приобретение…", "now": "«Мать и дитя» не купила «Инвитро»", "tag": "m106b"}
+{"id": "g4165ba00", "field": "extra", "class": "version_as_fact", "was": "Сделка находится на этапе оценки и переговоров", "now": "по неофициальным данным, затем опровержение", "tag": "m106b"}
+{"id": "g4165ba00", "field": "eco.context", "class": "unsupported_claim", "was": "Крапивин, Ротенберг, «второе объединение»", "now": "снято", "tag": "m106b"}
