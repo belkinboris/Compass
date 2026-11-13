@@ -3393,7 +3393,7 @@ const FIRMS = [
  {id:"delcredere",n:"Delcredere",g:["К-hi","mid"],site:"http://www.delcredere.org"},
  {id:"denuo",n:"Denuo",g:["С-hi","К-hi"],site:"https://denuo.legal"},
  {id:"elwi",n:"ELWI",g:["С-hi","К-hi"],site:"https://elwi.com/"},
- {id:"firmone",n:"Firm One",g:["С-hi","К-hi"]},
+ {id:"firmone",n:"Firm.One",g:["С-hi","К-hi"],site:"https://ru.firm.one/"},
  {id:"forward",n:"Forward Legal",g:["С-hi"]},
  {id:"level",n:"LEVEL Legal Services",g:["С-hi","К-hi"],site:"https://www.level-legal.com/"},
  {id:"mvp",n:"Melling, Voitishkin & Partners",g:["С-hi","К-hi"],site:"http://mv.legal"},
@@ -3585,7 +3585,7 @@ const brandStyle = b => {
     + (b.font ? `;--b-font:'${b.font}'` : "");
 };
 const GROUP_LABEL = {"С-hi":"Сопровождение сделок — крупный бизнес","К-hi":"Корпоративное консультирование — крупный бизнес","mid":"Средний бизнес"};
-const FIRM_MATCH = {orion:/orion|орион/i, level:/level legal|\blevel\b/i, aspring:/aspring/i, tomashevskaya:/tomashevskaya|томашевск/i,
+const FIRM_MATCH = {firmone:/firm[.\s]?one/i, orion:/orion|орион/i, level:/level legal|\blevel\b/i, aspring:/aspring/i, tomashevskaya:/tomashevskaya|томашевск/i,
   verba:/verba|верба/i, birch:/birch|берч|берч/i, mvp:/меллинг|voitishkin|мвп\b/i, nikolskaya:/никольская/i,
   epam:/епам|epam|егоров.{0,15}пугинск/i, nextons:/nextons|некстонс/i, denuo:/denuo|денуо/i, o2:/o2 consulting|o2consult/i,
   kkmp:/кучер кулешов|ккмп|kulkov/i, lkp:/лемчик/i, alumni:/alumni/i, betterchance:/better chance|бэттер чанс/i, nikolaev:/николаев и партнеры|nikolaew/i,
