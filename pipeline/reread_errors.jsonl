@@ -3251,3 +3251,13 @@
 {"id": "g248d3c20", "field": "buyer", "class": "wrong_buyer", "was": "АО «Альфастрахование»", "now": "ООО «Медицина Альфастрахования» (ЕГРЮЛ)", "tag": "m207"}
 {"id": "g248d3c20", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "четыре прежних участника", "tag": "m207"}
 {"id": "g248d3c20", "field": "eco.context", "class": "unsupported_claim", "was": "клиника работает под новым брендом", "now": "снято", "tag": "m207"}
+{"id": "g7e90c94a", "field": "deal", "class": "duplicate", "was": "две карточки одной продажи логопарка Ghelamco (c2455b014 — переговоры 2022)", "now": "одна карточка, переговоры — этап", "tag": "m104"}
+{"id": "g61cccee7", "field": "deal", "class": "duplicate", "was": "дубль g7e470153 (тип IPO)", "now": "слита в g61cccee7", "tag": "m104"}
+{"id": "g7e90c94a", "field": "status", "class": "wrong_status", "was": "Подписана", "now": "Закрыта (итоги 2025 года, РБК Недвижимость)", "tag": "m104"}
+{"id": "g7e90c94a", "field": "date", "class": "wrong_date", "was": "2025-04-21 (день статьи)", "now": "2025", "tag": "m104"}
+{"id": "g7e90c94a", "field": "sum", "class": "sum_meaning", "was": "15–18,5 млрд ₽ (по оценке)", "now": "Не раскрыта, оценки в eco.val", "tag": "m104"}
+{"id": "g7e90c94a", "field": "title", "class": "title_standard", "was": "Ghelamco продает складской комплекс…", "now": "Central Properties купил складской комплекс в Дмитрове у Ghelamco", "tag": "m104"}
+{"id": "g7e90c94a", "field": "law.adv", "class": "adviser_wrong", "was": "Не раскрывались", "now": "CORE.XP — консультант продавца", "tag": "m104"}
+{"id": "g7e90c94a", "field": "law.appr", "class": "unsupported_claim", "was": "сделка пока не закрыта", "now": "только разрешение правкомиссии по неофициальным данным", "tag": "m104"}
+{"id": "g08b7a4e1", "field": "deal", "class": "not_a_deal", "was": "МТС «приобрела права на персонажей «Фиксики»»", "now": "снята: эксклюзивная лицензия на три года", "tag": "m104"}
+{"id": "g2544a5cb", "field": "deal", "class": "not_a_deal", "was": "покупка клиник Литфонда без источника", "now": "снята: ни одного источника о сделке", "tag": "m104"}
