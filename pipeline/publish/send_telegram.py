@@ -266,6 +266,21 @@ def _client():
     return httpx.Client(timeout=20.0)
 
 
+EDIT_MAX_AGE_DAYS = 3
+
+
+def post_is_old(deal, today=None):
+    """Пост карточки старше EDIT_MAX_AGE_DAYS (по дню выхода карточки `added`;
+    даты нет — считаем старым): такие посты сами не правятся."""
+    today = today or datetime.now(timezone.utc).date()
+    try:
+        y, m, d = (int(x) for x in str(deal.get('added') or '')[:10].split('-'))
+        from datetime import date as _date
+        return (today - _date(y, m, d)).days > EDIT_MAX_AGE_DAYS
+    except ValueError:
+        return True
+
+
 def post_message(client, token, chat_id, text, buttons=None):
     payload = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML',
                'disable_web_page_preview': True}
@@ -1200,6 +1215,7 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     for did in dropped_edits:
         next(d for d in data['deals'] if d['id'] == did).pop('post_edit_proposal', None)
     to_edit.extend(approved_edits)
+    old_posts_skipped = []
     for deal in data['deals']:
         did = deal['id']
         if did in approved_edit_ids:
@@ -1210,6 +1226,15 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                                          (channels.REALTY, realty_posts.get(did))) if mid}
         if where:
             changes = updates_by_id.get(did)
+            # СТАРЫЕ ПОСТЫ НЕ ПРАВЯТСЯ (владелец, 13 ноября 2026: «Старые посты
+            # править не надо»). После вычитки базы публикация собиралась
+            # переписать 95 давно вышедших постов. Пост старше EDIT_MAX_AGE_DAYS
+            # сам не правится; снимок обновляем, чтобы правка не копилась.
+            # Правка по решению владельца (`approved_edits`) идет как раньше.
+            if changes is not None and post_is_old(deal):
+                post_state[did] = post_snapshot(deal)
+                old_posts_skipped.append(did)
+                continue
             # Общий пост на несколько карточек (`post_covers`, 16 октября
             # 2026) — текст, одобренный владельцем целиком; правка из полей
             # ОДНОЙ карточки заменила бы его постом про одну компанию.
@@ -1388,6 +1413,8 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
         to_edit = [(d, m, t) for d, m, t in to_edit if d not in skip_ids]
         to_send_m = [(deal, event, t) for deal, event, t in to_send_m if deal['id'] not in skip_ids]
 
+    if old_posts_skipped:
+        print('Старые посты не правим (старше %d дн.): %d' % (EDIT_MAX_AGE_DAYS, len(old_posts_skipped)))
     print('Новых постов: %d, правок существующих: %d, без поста по решению: %d, новых вех: %d'
           % (len(to_send), len(to_edit), len(to_seed), len(to_send_m)))
     if awaiting_post:

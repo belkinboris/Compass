@@ -2610,6 +2610,7 @@ def test_main_edits_a_posted_card_enriched_outside_intake(monkeypatch, tmp_path)
     """Карточка дополнена не притоком (таблица правок, приемка, руками) —
     правка поста уходит без файла data/inbox/updates/, с пометкой, что нового,
     и состояние поста обновляется только после удачной правки."""
+    monkeypatch.setattr(send_telegram, "post_is_old", lambda *a, **k: False)  # пост свежий
     deal = {"id": "gX1", "title": "«Ромашка» купила «Одуванчик»", "buyer": "b1",
             "sum": "1 млрд ₽", "status": "Закрыта", "date": FRESH_DATE,
             "reviewed": "2026-08-01", "accepted": "2026-08-01"}
@@ -8346,9 +8347,28 @@ def test_realty_post_waits_when_the_site_did_not_answer(monkeypatch, tmp_path):
     assert "gR5" not in (written.get("telegram_posts") or {})
 
 
+def test_old_posts_are_not_edited_automatically(monkeypatch, tmp_path):
+    """Владелец, 13 ноября 2026: «Старые посты править не надо». После вычитки
+    базы публикация собиралась переписать 95 давно вышедших постов. Пост
+    карточки старше трех дней сам не правится, снимок обновляется."""
+    from datetime import date
+    assert send_telegram.post_is_old({"added": "2026-11-01"}, today=date(2026, 11, 13))
+    assert not send_telegram.post_is_old({"added": "2026-11-12"}, today=date(2026, 11, 13))
+    assert send_telegram.post_is_old({}, today=date(2026, 11, 13))
+    deal = _realty_deal("gR9", "2 млрд ₽")
+    deal["added"] = "2026-09-01"
+    tmp_data = _channels_world(monkeypatch, tmp_path, [deal], posts={"gR9": 601},
+                               realty_posts={"gR9": 701}, updates={"gR9": ["появилась сумма"]})
+    fake = _FakeClient([_ok(), _ok()])
+    monkeypatch.setattr(send_telegram, "_client", lambda: fake)
+    send_telegram.main(write=True, ignore_pace=True)
+    assert not [u for u, _j in fake.calls if u.endswith("editMessageText")], fake.calls
+
+
 def test_update_edits_the_post_in_every_channel_it_went_to(monkeypatch, tmp_path):
     """Новый факт правит пост там, где он вышел, — в обоих каналах, и кнопка
     «Открыть карточку сделки» при правке не теряется (без ссылки на пару)."""
+    monkeypatch.setattr(send_telegram, "post_is_old", lambda *a, **k: False)  # пост свежий
     deal = _realty_deal("gR4", "2 млрд ₽")
     _channels_world(monkeypatch, tmp_path, [deal], posts={"gR4": 601},
                     realty_posts={"gR4": 701}, updates={"gR4": ["появилась сумма"]})
