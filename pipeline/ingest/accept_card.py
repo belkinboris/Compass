@@ -54,6 +54,7 @@ for p in (HERE, os.path.join(ROOT, 'pipeline', 'publish'), os.path.join(ROOT, 'p
     if p not in sys.path:
         sys.path.insert(0, p)
 
+import card_twin                   # noqa: E402
 import casing                      # noqa: E402
 import link_parties                # noqa: E402
 import review                      # noqa: E402
@@ -1141,7 +1142,10 @@ CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'p
                  # Источник не говорит, что доля сменила владельца (утрата контроля без
                  # названного способа, «О23» / Ozon, g90767425, 11 ноября 2026): форма
                  # «N% / контрольный пакет акций» была бы выдумкой — читатель закрывает причиной.
-                 'share_form')
+                 'share_form',
+                 # Двойник в базе оказался другой сделкой (второй пакет, новый покупатель) —
+                 # card_twin.py, 13 ноября 2026.
+                 'duplicate_card')
 
 
 def _url_key(url):
@@ -2000,6 +2004,13 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     for code, text in new_source_findings(card, comps, waived, records):
         if code not in checked:
             out.append((code, text))
+    # КАРТОЧКА-ДВОЙНИК (13 ноября 2026, «К+» / «Комфорт» и «Библио-Глобус»): новая
+    # карточка о сделке, которая уже есть в базе, до владельца не идет. Сочетания
+    # признаков и замер — card_twin.py; очередь сверяет показ (send_drafts).
+    if card_twin.CODE not in checked:
+        twin = card_twin.twins(card, base)
+        if twin:
+            out.append((card_twin.CODE, card_twin.finding_text(twin)))
     # Карточка без поста (`no_post`: исторические сделки, сводимые партией)
     # в канал не уходит — проверять строку поста у нее нечего.
     try:
