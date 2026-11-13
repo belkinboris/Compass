@@ -3159,3 +3159,60 @@
 {"field": "buyer", "class": "party_text_no_profile", "was": "покупатель не назван", "now": "Банк «Точка» (профиль)", "id": "c25d07929", "tag": "m073"}
 {"field": "eco.context", "class": "language", "was": "Статья описывает создание…", "now": "пересказ по статьям, слова гендиректора с автором", "id": "c25d07929", "tag": "m073"}
 {"field": "title", "class": "title_standard", "was": "…создают инвестиционный конвейер в стартапы", "now": "Банк «Точка» собирается купить доли в стартапах, отобранных акселератором ФРИИ", "id": "c25d07929", "tag": "m073"}
+{"id": "cdfe91cd0", "field": "title", "class": "title_standard", "was": "«Росатом» увеличил долю в ГК «Дело» до 49% по опциону", "now": "«Росатом» купил 19% ГК «Дело»", "tag": "m072"}
+{"id": "cdfe91cd0", "field": "date", "class": "wrong_date", "was": "2022-08-09 (дня нет в источнике)", "now": "2022", "tag": "m072"}
+{"id": "cdfe91cd0", "field": "eco.share", "class": "wrong_share", "was": "расклад долей после сделки", "now": "19% ООО «УК «Дело»»", "tag": "m072"}
+{"id": "cdfe91cd0", "field": "eco.context", "class": "unsupported_claim", "was": "соглашение 2023 г. и сделка с ТМХ 2024 г. без источника", "now": "сняты", "tag": "m072"}
+{"id": "cdfe91cd0", "field": "eco.rationale", "class": "verbatim", "was": "8 слов подряд как в статье", "now": "пересказ", "tag": "m072"}
+{"id": "cd47c5acc", "field": "title", "class": "title_standard", "was": "Alshaya Group ищет покупателя на сеть Mothercare в России", "now": "«Джамилько» купил «Монэкс трейдинг»", "tag": "m072"}
+{"id": "cd47c5acc", "field": "date", "class": "wrong_date", "was": "2022-07-19 (статья о поиске покупателя)", "now": "2022-11-22 (переход долей)", "tag": "m072"}
+{"id": "cd47c5acc", "field": "seller", "class": "wrong_seller", "was": "Alshaya Group", "now": "Рино Инвестментс Лимитед (ЕГРЮЛ)", "tag": "m072"}
+{"id": "cd47c5acc", "field": "eco.context", "class": "version_as_fact", "was": "идет поиск покупателя (при закрытой сделке)", "now": "история продажи", "tag": "m072"}
+{"id": "cd47c5acc", "field": "law.appr", "class": "other", "was": "ходатайство поступило в ФАС", "now": "ФАС согласовала; сделка до решения ФАС", "tag": "m072"}
+{"id": "cd47c5acc", "field": "eco.share", "class": "wrong_share", "was": "100%, 118 магазинов", "now": "99,99% доли", "tag": "m072"}
+{"id": "c1659a21f", "field": "title", "class": "title_standard", "was": "Tetra Pak передает российский бизнес местному менеджменту", "now": "«Итон Инвестментс» купил АО «Тетра Пак»", "tag": "m072"}
+{"id": "c1659a21f", "field": "eco.context", "class": "version_as_fact", "was": "сумма сделки составила 1 евро", "now": "слова анонимного источника — в eco.val", "tag": "m072"}
+{"id": "c1659a21f", "field": "extra", "class": "unsupported_claim", "was": "EBITDA 5,4 млрд ₽", "now": "снято", "tag": "m072"}
+{"id": "c1659a21f", "field": "date", "class": "wrong_date", "was": "2022-07-31", "now": "2022", "tag": "m072"}
+{"id": "cc846f75c", "field": "status", "class": "wrong_status", "was": "пусто", "now": "Закрыта", "tag": "m072"}
+{"id": "cc846f75c", "field": "date", "class": "wrong_date", "was": "2022-08-04", "now": "2022-08-05 (регистрация)", "tag": "m072"}
+{"id": "cc846f75c", "field": "title", "class": "title_standard", "was": "Equifax выходит из состава участников БКИ «Эквифакс»", "now": "Загидулин и Чайка купили 50% БКИ «Эквифакс»", "tag": "m072"}
+{"id": "cc846f75c", "field": "eco.context", "class": "unsupported_claim", "was": "513 млн кредитных историй", "now": "около 550 млн", "tag": "m072"}
+{"id": "c65f082d8", "field": "title", "class": "title_standard", "was": "Evraz объявляет о намерении продать североамериканский дивизион", "now": "Atlas Holdings купил Evraz North America", "tag": "m072"}
+{"id": "c65f082d8", "field": "date", "class": "wrong_date", "was": "2022-08-11 (объявление)", "now": "2025 (закрытие)", "tag": "m072"}
+{"id": "c65f082d8", "field": "eco.context", "class": "unsupported_claim", "was": "27.06.2025 подтвердил завершение продажи", "now": "подписание 27.06, закрытие 31.07", "tag": "m072"}
+{"id": "c65f082d8", "field": "eco.sum", "class": "sum_meaning", "was": "механика платежей в eco.sum", "now": "До $500 млн; механика — в eco.fin", "tag": "m072"}
+{"id": "c788bf9cc", "field": "title", "class": "title_standard", "was": "Яндекс ведет переговоры о продаже Yango в Израиле", "now": "Барак Абрамов не купил израильский Yango у «Яндекса»", "tag": "m072"}
+{"id": "c788bf9cc", "field": "date", "class": "wrong_date", "was": "2023-08-10 (день публикации)", "now": "2023", "tag": "m072"}
+{"id": "cc846f75c", "field": "buyer_name", "class": "wrong_buyer", "was": "Елизавета Чайка", "now": "Виолетта Чайка (ЕГРЮЛ)", "tag": "m072"}
+{"id": "cccedc36b", "field": "sum", "class": "foreign_fact", "was": "1,8 млрд ₽ (из соседнего поста о другой сделке)", "now": "Не раскрыта", "tag": "m072"}
+{"id": "cccedc36b", "field": "law.struct", "class": "unsupported_claim", "was": "перешла под контроль ЭТМ", "now": "смены участников в реестре нет", "tag": "m072"}
+{"id": "c01524a40", "field": "title", "class": "title_standard", "was": "Покупка производственной площадки в Московской области для ОАО «Хлебпром»", "now": "«Хлебпром» купил производственную площадку в Московской области", "tag": "m072"}
+{"id": "c01524a40", "field": "date", "class": "wrong_date", "was": "2026-02-25 (день сообщения консультанта)", "now": "2026", "tag": "m072"}
+{"id": "c65f082d8", "field": "asset", "class": "wrong_target", "was": "предмет не назван", "now": "Evraz North America", "tag": "m072"}
+{"field": "sum", "class": "sum_meaning", "was": "1–2 млрд ₽", "now": "Не раскрыта (оценка стоимости с долгом — в eco.val)", "id": "g4cb8fc20", "tag": "m067"}
+{"field": "seller", "class": "wrong_seller", "was": "РТ-Развитие бизнеса, Arsanol и Рыбалкин", "now": "Arsanol Holdings ltd (РТ вышла в 09.2022, Рыбалкин — в 2019 по ЕГРЮЛ)", "id": "g4cb8fc20", "tag": "m067"}
+{"field": "eco.context", "class": "unsupported_claim", "was": "продажа 2025 года: «Ростех» с 35%, убыток 518 млн ₽", "now": "история участников по ЕГРЮЛ", "id": "g4cb8fc20", "tag": "m067"}
+{"field": "extra", "class": "wrong_status", "was": "намерен купить; сейчас идет due diligence", "now": "о намерении стало известно в декабре 2022", "id": "g4cb8fc20", "tag": "m067"}
+{"field": "buyer", "class": "party_text_no_profile", "was": "профиль-роль «российские инвесторы»", "now": "12 частных инвесторов, в том числе Роман Тихоненко, Дмитрий Пискулов и Юрий Машинцев", "id": "ge30b3d32", "tag": "m067"}
+{"field": "date", "class": "wrong_date", "was": "2022-12-20 (публикация)", "now": "2022-12-16 (смена учредителей по ЕГРЮЛ)", "id": "ge30b3d32", "tag": "m067"}
+{"field": "eco.share", "class": "other", "was": "—", "now": "100% долей ООО «АИГ Си Ай Эс Инвестментс»", "id": "ge30b3d32", "tag": "m067"}
+{"field": "title", "class": "title_standard", "was": "AIG продала… инвесторам из Russia Partners", "now": "Бывшие руководители Russia Partners купили российскую «АИГ» у AIG", "id": "ge30b3d32", "tag": "m067"}
+{"field": "companies.name", "class": "profile_text", "was": "АО СК Гардия", "now": "Гардия", "id": "ge30b3d32", "tag": "m067"}
+{"field": "seller", "class": "wrong_seller", "was": "Альянс Renault-Nissan и UniCredit", "now": "BARN B.V. (их холдинговая компания продала акции)", "id": "g2a27e6b5", "tag": "m067"}
+{"field": "eco.context", "class": "unsupported_claim", "was": "прибыль 4 млрд ₽ и дивиденды 2 млрд ₽ за 2025 год", "now": "снято; осталось переименование", "id": "g2a27e6b5", "tag": "m067"}
+{"field": "extra", "class": "other", "was": "согласование Президента в прозе", "now": "уход Renault, Nissan и UniCredit", "id": "g2a27e6b5", "tag": "m067"}
+{"field": "title", "class": "title_standard", "was": "«Сабуровский комбинат хлебопродуктов» приобрел Ленинградский мельничный комбинат им. Кирова", "now": "Сабуровский комбинат хлебопродуктов купил «Мельницу Кирова» у «Аладушкин групп»", "id": "ga9be07b2", "tag": "m067"}
+{"field": "ind", "class": "wrong_industry", "was": "Агро", "now": "Пищепром и напитки (мукомольный комбинат)", "id": "ga9be07b2", "tag": "m067"}
+{"field": "companies.name", "class": "profile_text", "was": "Ленинградский мельничный комбинат им. Кирова", "now": "Ленинградский комбинат хлебопродуктов им. Кирова (АО «ЛКХП Кирова»)", "id": "ga9be07b2", "tag": "m067"}
+{"field": "eco.context", "class": "language", "was": "сам купил", "now": "купил", "id": "ga9be07b2", "tag": "m067"}
+{"field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Юрий Самохвалов и Андрей Ломтев (ЕГРЮЛ)", "id": "g7632fe9f", "tag": "m067"}
+{"field": "date", "class": "wrong_date", "was": "2022-12-09 (заметка «купит»)", "now": "2023-02-02 (10% по ЕГРЮЛ; 5% — 30.11.2022)", "id": "g7632fe9f", "tag": "m067"}
+{"field": "extra", "class": "unsupported_claim", "was": "нарастить долю в 2023 году не удалось", "now": "по ЕГРЮЛ доля выросла с 5% до 10% в феврале 2023", "id": "g7632fe9f", "tag": "m067"}
+{"field": "eco.context", "class": "unsupported_claim", "was": "доли до сделки не сходятся", "now": "два шага по ЕГРЮЛ в law.struct", "id": "g7632fe9f", "tag": "m067"}
+{"field": "title", "class": "title_standard", "was": "ЦИУПС купил у государства ТРК «Родник» и «Алмаз» в Челябинске за 6,08 млрд ₽", "now": "ЦИУПС купил на торгах ТРК «Родник» и «Алмаз» в Челябинске", "id": "gmru-psb-tpk-chelyabinsk", "tag": "m067"}
+{"field": "law.struct", "class": "other", "was": "с шестой попытки (одна версия против «четвертой» в соседних полях)", "now": "обе версии", "id": "gmru-psb-tpk-chelyabinsk", "tag": "m067"}
+{"field": "type", "class": "wrong_type", "was": "Создание СП без участников", "now": "M&A: «Башнефтегеофизика» покупает «Геотек»", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
+{"field": "buyer", "class": "party_text_no_profile", "was": "пусто, обе компании текстом в предмете", "now": "профили Башнефтегеофизика (покупатель) и Геотек (предмет)", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
+{"field": "eco.target_fin", "class": "unsupported_claim", "was": "выручка БНГФ 2023 года 24,7 млрд ₽ (покупателя, без источника)", "now": "выручка «Геотека» 2025 года", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
+{"field": "title", "class": "title_standard", "was": "«Геотек» и «Башнефтегеофизика» объединяют нефтесервисные активы", "now": "«Башнефтегеофизика» собирается купить «Геотек»", "id": "gmru-geotek-bashneftegeofizika", "tag": "m067"}
