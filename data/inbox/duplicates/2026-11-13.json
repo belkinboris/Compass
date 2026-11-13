@@ -168,6 +168,79 @@
     "needs_review": true
    },
    "queued": "2026-11-13"
+  },
+  {
+   "key": "https://1prime.ru/20261113/mech-875190972.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие редкие слова: аукцио, продал",
+   "draft": {
+    "draft_id": "d02083924",
+    "title": "Световой меч Дарта Вейдера продали на аукционе в США за рекордную сумму",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261113/mech-875190972.html"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261113/mech-875190972.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе в США за рекордную сумму",
+    "seller": "Световой меч Дарта Вейдера",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе в США за рекордную сумму",
+     "seller": "Световой меч Дарта Вейдера"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
+  },
+  {
+   "key": "https://realty.ria.ru/20261113/dmitrov-2131316990.html::gf5bdb983",
+   "candidate_id": "gf5bdb983",
+   "reason": "общие редкие слова: застро, площад",
+   "draft": {
+    "draft_id": "d29207437",
+    "title": "«Дом.РФ» продает площадку под застройку в центре подмосковного Дмитрова",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "площадка под застройку в центре подмосковного Дмитрова",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "площадка под застройку в центре подмосковного Дмитрова",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
   }
  ]
 }

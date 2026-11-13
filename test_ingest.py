@@ -2329,6 +2329,9 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     monkeypatch.setattr(send_telegram, "MAX_SENDS_PER_RUN", 3)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    # Посты о недвижимости без адреса своего канала теперь ждут (13 ноября
+    # 2026) — тест про лимит, поэтому у канала недвижимости есть адрес.
+    monkeypatch.setenv("TELEGRAM_REALTY_CHANNEL_ID", "@realty")
 
     sleeps = []
     monkeypatch.setattr(send_telegram.time, "sleep", lambda s: sleeps.append(s))
@@ -2357,7 +2360,9 @@ def test_main_caps_sends_per_run_and_paces_them(monkeypatch, tmp_path):
     # это не отправка, а честное «не публикуем», и она не считается в лимит.
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
     real_sends = [v for v in written["telegram_posts"].values() if v]
-    assert len(real_sends) == 3
+    sent_ids = {1000 + i for i in range(3)}
+    realty_new = [v for v in (written.get("telegram_posts_realty") or {}).values() if v in sent_ids]
+    assert len(real_sends) + len(realty_new) == 3
 
 
 def test_main_skips_seeded_backlog_entries_without_new_facts(monkeypatch, tmp_path):
@@ -8308,20 +8313,20 @@ def test_big_realty_deal_goes_to_both_channels_with_the_same_keyboard(monkeypatc
     assert written["telegram_posts_realty"]["gR2"] == 701
 
 
-def test_realty_post_goes_to_main_channel_while_realty_address_is_unknown(monkeypatch, tmp_path):
-    """Адреса канала недвижимости нет — пост уходит в основной, как до
-    2 октября 2026: потерять пост хуже, чем выпустить его не в тот канал."""
+def test_realty_post_never_goes_to_main_channel_when_realty_address_is_unknown(monkeypatch, tmp_path):
+    """Владелец, 13 ноября 2026: «как после того, как я нажал кнопку, когда на
+    посте было написано «Опубликуется в канал недвижимость», пост публикуется в
+    основной канал?» Правило 2 октября («адреса нет — в основной») снято: пост
+    идет только туда, куда его одобрили, иначе ждет."""
     deal = _realty_deal("gR3", "48,7 млн ₽", status="Обсуждается")
     tmp_data = _channels_world(monkeypatch, tmp_path, [deal], realty="")
-    monkeypatch.setattr(send_telegram, "site_channels", lambda: {})  # сайт ответил: адреса нет
+    monkeypatch.setattr(send_telegram, "site_channels", lambda: {})
     fake = _FakeClient([_ok(801)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
     send_telegram.main(write=True, ignore_pace=True)
-    assert [j["chat_id"] for _u, j in fake.calls] == [MAIN_CH]
+    assert not [j for u, j in fake.calls if u.endswith("sendMessage")], fake.calls
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
-    assert written["telegram_posts"]["gR3"] == 801
-    assert "telegram_posts_realty" not in written
-
+    assert "gR3" not in (written.get("telegram_posts") or {})
 
 def test_realty_post_waits_when_the_site_did_not_answer(monkeypatch, tmp_path):
     """13 ноября 2026: связь с сайтом рвалась, адрес канала недвижимости не
@@ -8719,12 +8724,14 @@ def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_pat
     monkeypatch.setattr(send_telegram, "in_window_after", lambda *a, **k: True)
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
     monkeypatch.setenv("TELEGRAM_CHANNEL_ID", "@channel")
+    monkeypatch.setenv("TELEGRAM_REALTY_CHANNEL_ID", "@realty")  # без адреса посты о недвижимости ждут
     sleeps, saved_after_first = [], []
 
     def fake_sleep(s):
         sleeps.append(s)
         if len(sleeps) == 2:      # перед вторым постом первый уже на диске
-            saved_after_first.append(json.loads(tmp_data.read_text(encoding="utf-8"))["telegram_posts"])
+            disk = json.loads(tmp_data.read_text(encoding="utf-8"))
+            saved_after_first.append({**disk["telegram_posts"], **(disk.get("telegram_posts_realty") or {})})
     monkeypatch.setattr(send_telegram.time, "sleep", fake_sleep)
     fake = _FakeClient([{"ok": True, "result": {"message_id": 2000 + i}} for i in range(3)])
     monkeypatch.setattr(send_telegram, "_client", lambda: fake)
@@ -8735,9 +8742,11 @@ def test_several_approved_posts_go_out_twenty_minutes_apart(monkeypatch, tmp_pat
 
     assert len(fake.calls) == 2, "третий пост не помещается в 45 минут ожидания — уходит следующим прогоном"
     assert len(sleeps) == 2 and all(1150 < s <= 1200 for s in sleeps), sleeps
-    assert any(v for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
+    assert any(v in (2000, 2001, 2002) for v in saved_after_first[0].values()), "первый пост не записан до ожидания второго"
     written = json.loads(tmp_data.read_text(encoding="utf-8"))
-    assert written["telegram_last_post_at"] and len([v for v in written["telegram_posts"].values() if v]) == 2
+    sent = [v for v in list(written["telegram_posts"].values()) + list((written.get("telegram_posts_realty") or {}).values())
+            if v in (2000, 2001, 2002)]
+    assert written["telegram_last_post_at"] and len(sent) == 2
     # Один пост и давно не было постов — уходит сразу, без паузы.
     assert send_telegram.gap_wait_s("2026-01-01T00:00:00+00:00") == 0
 

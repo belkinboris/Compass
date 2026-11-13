@@ -643,17 +643,46 @@
    ]
   },
   {
-   "draft_id": "d61894740",
-   "title": "Участок под учебную автоплощадку выставили на торги в Тамбове",
+   "draft_id": "d09589160",
+   "title": "Спрос на акции Anthropic в рамках IPO превысил предложение в шесть раз",
    "date": "2026-11-13",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119215-uchastok-pod-uchebnuyu-avtoploshchadku-vystavili-na-torgi-v-tambove/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/13/11/2026/6af6bd6b8146c92f135f5c01"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d45418600",
+   "title": "Кремль рассчитывает, что следующий раунд переговоров по Украине состоится скоро",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28315297"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -671,32 +700,139 @@
    ]
   },
   {
-   "draft_id": "d92587217",
-   "title": "Российские компании привлекли через Pre-IPO на 28% меньше За январь–октябрь 2026 года российские компании привлекли через Pre-IPO 980 млн руб. против 1,36 млрд руб. за аналогичный период прошлого года",
+   "draft_id": "d97228938",
+   "title": "Mercedes-Benz заморозил инвестиции в свои предприятия в Германии — и рассматривает закрытие двух заводов в стране",
    "date": "2026-11-13",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7568"
+     "web:rb.ru",
+     "https://rb.ru/news/mercedes-benz-zamorozil-investicii-v-svoi-predpriyatiya-v-germanii-i-rassmatrivaet-zakrytie-dvuh-zavodov-v-strane/"
     ]
    ],
-   "sum": "980 млн ₽",
-   "type": "IPO",
-   "status": null,
-   "events": [],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Mercedes-Benz приостановил все дальнейшие инвестиции в свои предприятия в Германии и начал детальнее рассматривать возможность закрытия заводов, сообщает DPA. Причиной стали высокие издержки и отсутствие договорённости с производственным советом и профсоюзом…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/mercedes-benz-zamorozil-investicii-v-svoi-predpriyatiya-v-germanii-i-rassmatrivaet-zakrytie-dvuh-zavodov-v-strane/"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": "Российские компании",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Российские компании",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d41947558",
+   "title": "Украинский коррупционер оправдался за покупку крокодила в золотом бассейне",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/13/ukrainskiy-korruptsioner-opravdalsya-za-pokupku-krokodila-v-zolotom-basseyne/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d02083924",
+   "title": "Световой меч Дарта Вейдера продали на аукционе в США за рекордную сумму",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261113/mech-875190972.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261113/mech-875190972.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "на аукционе в США за рекордную сумму",
+   "seller": "Световой меч Дарта Вейдера",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "на аукционе в США за рекордную сумму",
+    "seller": "Световой меч Дарта Вейдера"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на карточку pending-1, но читающий не смог решить сам: candidate_id pending-1 не найден (устаревший/несуществующий id) — повтор новости о мече Дарта Вейдера, аукцион памятной вещи, известная категория из known_issues/intake.md (анонимный покупатель, title_standard не даст штамп приемки)"
+   ]
+  },
+  {
+   "draft_id": "d29207437",
+   "title": "«Дом.РФ» продает площадку под застройку в центре подмосковного Дмитрова",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "площадка под застройку в центре подмосковного Дмитрова",
+   "seller": "«Дом.РФ»",
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "площадка под застройку в центре подмосковного Дмитрова",
+    "seller": "«Дом.РФ»"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "похоже на карточку gf5bdb983, но читающий не смог решить сам: gf5bdb983 — сделка «Стройдевелопмент»/недостроенный деловой центр в Ростове-на-Дону, совсем другой город и предмет; совпали только общие редкие слова «застро»/«площад». Черновик (площадка Дом.РФ в Дмитрове) не дубль этой карточки, но сам он нуждается в отдельной проверке на то, сделка ли это вообще, поэтому решение оставлено читающему следующим шагом, а не механическому слиянию"
    ]
   }
  ]

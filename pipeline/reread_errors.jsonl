@@ -4985,3 +4985,24 @@
 {"id": "g8b57089b", "field": "sum", "class": "sum_meaning", "was": "1,2–1,8 млрд ₽ (по оценке)", "now": "Не раскрыта", "tag": "m109c"}
 {"id": "g88dcf73e", "field": "buyer_name", "class": "party_text_no_profile", "was": "Местный менеджмент", "now": "Apollo Ingredients Holding B.V.", "tag": "m109c"}
 {"id": "g4a53d81b", "field": "eco.context", "class": "other", "was": "оценка IBC Real Estate в контексте", "now": "оценка в eco.val", "tag": "m109c"}
+{"id": "c151696b4", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-04-13 (ЕГРЮЛ: доли перешли государству)", "tag": "r1113a"}
+{"id": "g16da1d05", "field": "date", "class": "wrong_date", "was": "2026-11-13 (день статьи)", "now": "2026", "tag": "r1113a"}
+{"id": "g16da1d05", "field": "asset", "class": "wrong_target", "was": "Административное здание", "now": "Административное здание на проспекте Ленина, 42а в Челябинске", "tag": "r1113a"}
+{"id": "g16da1d05", "field": "eco.share", "class": "wrong_share", "was": "…Торги пройдут 9 декабря…", "now": "состав лота; день торгов — в law.terms", "tag": "r1113a"}
+{"id": "g00421dd1", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "25% доли в ООО «Пойзон Дроп»", "tag": "r1113a"}
+{"id": "g162de6fb", "field": "eco.share", "class": "wrong_share", "was": "100% доли… — управляющей компании бренда Nomi; саму покупку провела «Гельтек РНД», дочка…", "now": "100% доли в ООО «Компания Новая Идея»", "tag": "r1113a"}
+{"id": "g162de6fb", "field": "eco.rationale", "class": "language", "was": "по словам Кирш", "now": "по словам владельца «Гельтека» Сергея Кирша", "tag": "r1113a"}
+{"id": "g18413e61", "field": "buyer", "class": "wrong_buyer", "was": "МКПАО «ВК»", "now": "ООО «Компания ВК» (ЕГРЮЛ: 70% с 01.03.2023)", "tag": "r1113a"}
+{"id": "g22000f22", "field": "sum", "class": "wrong_sum", "was": "— (поле пусто)", "now": "Не раскрыта", "tag": "r1113a"}
+{"id": "g22000f22", "field": "eco.share", "class": "wrong_share", "was": "доля + продавцы + остаток пакета + итог 29,9%", "now": "Почти 20% акций ПАО «Детский мир»; механика — в law.struct", "tag": "r1113a"}
+{"id": "g24b33459", "field": "buyer", "class": "wrong_buyer", "was": "МКПАО «Эталон Груп»", "now": "ООО «Специализированный застройщик «Летниковская»» (ЕГРЮЛ: 65% с 05.04.2024)", "tag": "r1113a"}
+{"id": "g2d653619", "field": "eco.val", "class": "unsupported_claim", "was": "«прежняя экспертная оценка… укладывалась в эту сумму»", "now": "неофициальная оценка 8–13 млрд ₽ и убыток продавца по отчетности", "tag": "r1113a"}
+{"id": "gmru-arnest-reckitt", "field": "eco.context", "class": "verbatim", "was": "9 слов подряд из Ъ про 18-й пакет санкций; «Сама площадка»", "now": "пересказ", "tag": "r1113a"}
+{"id": "g37f106cd", "field": "eco.share", "class": "wrong_share", "was": "ООО «СБК КЗМ Плюс» — владелец ООО «ТД «Балтийский берег»» и ООО «Экопромэкс»", "now": "100% доли в ООО «СБК КЗМ Плюс»", "tag": "r1113b"}
+{"id": "g37f106cd", "field": "sum", "class": "sum_meaning", "was": "2–3 млрд ₽ (по оценке) — оценка аналитика ПТЦ", "now": "Не раскрыта", "tag": "r1113b"}
+{"id": "g37f106cd", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-04-04 (ЕГРЮЛ «СБК КЗМ Плюс»)", "tag": "r1113b"}
+{"id": "g5880d206", "field": "buyer", "class": "wrong_buyer", "was": "Структуры Игоря Кима", "now": "ООО «Экспомобилити» и Игорь Ким", "tag": "r1113b"}
+{"id": "g5880d206", "field": "seller", "class": "wrong_seller", "was": "Volkswagen Financial Services (группа)", "now": "Volkswagen Financial Services Overseas AG и Volkswagen Bank GmbH", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "buyer", "class": "wrong_buyer", "was": "Структуры Сергея Сударикова", "now": "АО «ИК «Регион»» (ЕГРЮЛ «Россиума»)", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "title", "class": "title_standard", "was": "Структуры Сергея Сударикова купили долю в «Россиуме» у Романа Авдеева", "now": "ИК «Регион» купила долю в «Россиуме» у Романа Авдеева", "tag": "r1113b"}
+{"id": "g703c4f62", "field": "law.struct", "class": "language", "was": "по данным Forbes", "now": "по неофициальным данным", "tag": "r1113b"}
