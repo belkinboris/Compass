@@ -1683,6 +1683,267 @@
     "draft_id": "d59603629",
     "title": "Лихачев: турецкие инвесторы интересуются покупкой 49% акций в проекте «Аккую»"
    }
+  },
+  {
+   "id": "g0b0604bf",
+   "date": "2026-11-11",
+   "title": "Россия в октябре купила у Бразилии имбиря на максимальную сумму за пять лет",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261111/rossija-875135469.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Бразилии",
+   "buyer_name": "Россия в октябре",
+   "asset": "имбирь на максимальную сумму за пять лет",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-11",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261111/rossija-875135469.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Россия в октябре",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "имбирь на максимальную сумму за пять лет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Бразилии",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261111/rossija-875135469.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T16:55:48+00:00"
+  },
+  {
+   "id": "g033658b2",
+   "date": "2026-11-12",
+   "title": "«Яндекс Go» вложил 1 млрд руб. в безопасность поездок на самокатах",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1 млрд ₽",
+   "buyer_name": "«Яндекс Go»",
+   "asset": "безопасность поездок на самокатах",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Яндекс Go»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+     }
+    ],
+    "target": [
+     {
+      "value": "безопасность поездок на самокатах",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6af5aa17919b56e0084ad3cd"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T16:55:48+00:00"
+  },
+  {
+   "id": "g71b5d4cd",
+   "date": "2026-11-12",
+   "title": "Сервиз дочери Николая I продали на аукционе во Франции за €321 тыс.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/obschestvo/28313377"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "€321 тыс",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "€321 тыс",
+   "seller": "Сервиз дочери Николая I",
+   "asset": "на аукционе во Франции",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-12",
+     "title": "Сделка завершена",
+     "note": "Изначально лот оценивался в €40-80 тыс.",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/obschestvo/28313377"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на аукционе во Франции",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28313377"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Сервиз дочери Николая I",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28313377"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T16:55:48+00:00"
+  },
+  {
+   "id": "g6543cdbf",
+   "date": "2026-11-13",
+   "title": "Сапфир российской императорской семьи продали анонимному коллекционеру",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Сапфир российской императорской семьи",
+   "asset": "анонимный коллекционер",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-13",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "анонимный коллекционер",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Сапфир российской императорской семьи",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/13/sapfir-rossiyskoy-imperatorskoy-semi-prodali-anonimnomu-kollektsioneru/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T16:55:48+00:00"
   }
  ]
 }

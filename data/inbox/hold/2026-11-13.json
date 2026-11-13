@@ -227,35 +227,6 @@
    ]
   },
   {
-   "draft_id": "d75880422",
-   "title": "МИД Японии выразил протест Ноздреву из-за передачи российских активов JTI",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/mid-874970821.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда, россий) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d54203247",
    "title": "Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после покупки «Циана»",
    "date": "2026-11-06",
@@ -308,11 +279,9 @@
    },
    "ind": "Недвижимость",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест Ноздреву из-за передачи российски» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли"
    ]
   },
   {
@@ -493,7 +462,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда, россий) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест Ноздреву из-за передачи российски» — второе издание, в группу не шлем"
+    "та же новость, что «Акции JTI рухнули после передачи активов в России под времен» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -524,7 +493,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест Ноздреву из-за передачи российски» — второе издание, в группу не шлем"
+    "та же новость, что «Акции JTI рухнули после передачи активов в России под времен» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -677,56 +646,17 @@
    ]
   },
   {
-   "draft_id": "d74502295",
-   "title": "Тема включения европейцев в следующий раунд переговоров по Украине не обсуждалась в Москве",
+   "draft_id": "d85501792",
+   "title": "В Госдуму внесли законопроект по IPO региональных компаний",
    "date": "2026-11-13",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1128893"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9109150"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "В МИД России заявили, что, по их информации, тема возможного включения европейцев в следующий раунд переговоров с США и Украиной не обсуждалась в Москве в ходе состоявшейся накануне встречи спецпосланников США Стива Уиткоффа и Джареда Кушнера с президентом РФ…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/russia/1128893"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59603629",
-   "title": "Лихачев: турецкие инвесторы интересуются покупкой 49% акций в проекте «Аккую»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28316385"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -744,69 +674,19 @@
    ]
   },
   {
-   "draft_id": "d39576362",
-   "title": "Dangote планирует увеличить инвестиции в Африку до 70 миллиардов долларов",
+   "draft_id": "d10458077",
+   "title": "Anthropic закрыла IPO для инвесторов из Китая",
    "date": "2026-11-13",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/afrika-875214667.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9109136"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261113/afrika-875214667.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23872405",
-   "title": "Tesla и SpaceX могут объявить о слиянии в декабре 2026 года — компании согласовывают условия сделки",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/tesla-i-spacex-mogut-obyavit-o-sliyanii-v-dekabre-2026-goda-kompanii-soglasovyvayut-usloviya-sdelki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "Tesla и SpaceX продвинулись в переговорах об объединении и рассчитывают объявить о слиянии в декабре 2026 года, пишет Bloomberg. При этом компании допускают перенос сделки на начало 2027 года. Если слияние состоится, под управлением Илона Маска окажется один…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/tesla-i-spacex-mogut-obyavit-o-sliyanii-v-dekabre-2026-goda-kompanii-soglasovyvayut-usloviya-sdelki/"
-     ]
-    }
-   ],
+   "type": "IPO",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -823,17 +703,17 @@
    ]
   },
   {
-   "draft_id": "d05546633",
-   "title": "Отказ от наследства: как оформить передачу доли другому наследнику",
+   "draft_id": "d68028813",
+   "title": "Росстат отметил сокращение инвестиций в основной капитал в РФ в январе-сентябре на 8,5%",
    "date": "2026-11-13",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/pravo/otkaz-ot-nasledstva/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1128908"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -847,8 +727,75 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97754387",
+   "title": "Инвестиции в основной капитал в РФ в январе - сентябре снизились на 8,5%",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28316517"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99724747",
+   "title": "ByteDance предложил инвесторам продать акции на сумму до $6 млрд — оценка владельца TikTok достигла $400 млрд",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/bytedance-predlozhil-investoram-prodat-akcii-na-summu-do-6-mlrd-ocenka-vladelca-tiktok-dostigla-400-mlrd/"
+    ]
+   ],
+   "sum": "$6 млрд",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-13",
+     "title": "Переговоры",
+     "note": "Владелец TikTok компания ByteDance предложила акционерам продать компании свои акции на сумму до $6 млрд, сообщает Bloomberg со ссылкой на источники. В рамках новой программы цена одной бумаги составит $241,35. По этой цене оценка ByteDance достигает $400…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/bytedance-predlozhil-investoram-prodat-akcii-na-summu-do-6-mlrd-ocenka-vladelca-tiktok-dostigla-400-mlrd/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
