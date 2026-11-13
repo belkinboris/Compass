@@ -241,6 +241,48 @@
     "needs_review": true
    },
    "queued": "2026-11-13"
+  },
+  {
+   "key": "https://retailer.ru/arnest-vykupil-rossijskij-biznes-reckitt/::gmru-arnest-reckitt",
+   "candidate_id": "gmru-arnest-reckitt",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d34053654",
+    "title": "«Арнест» выкупил российский бизнес Reckitt",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/arnest-vykupil-rossijskij-biznes-reckitt/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "В рамках сделки «Арнесту» перешел завод в Подмосковье, на котором также производятся чистящие средства Cillit Bang и Tiret. Сообщение «Арнест» выкупил российский бизнес Reckitt появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/arnest-vykupil-rossijskij-biznes-reckitt/"
+      ]
+     }
+    ],
+    "buyer_name": "«Арнест»",
+    "asset": "российский бизнес Reckitt",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Арнест»",
+     "asset": "российский бизнес Reckitt",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
   }
  ]
 }
