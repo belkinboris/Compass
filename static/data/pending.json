@@ -1992,6 +1992,75 @@
     "draft_id": "d78178449",
     "title": "В Перми выставлена на продажу территория целого завода: за участок будут биться застройщики"
    }
+  },
+  {
+   "id": "g234afedb",
+   "date": "2026-11-12",
+   "title": "Сервиз дочери Николая I продали на аукционе во Франции за €321 тыс.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/obschestvo/28313377"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "€321 тыс",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "€321 тыс",
+   "seller": "Сервиз дочери Николая I",
+   "asset": "на аукционе во Франции",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-12",
+     "title": "Сделка завершена",
+     "note": "Изначально лот оценивался в €40-80 тыс.",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/obschestvo/28313377"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на аукционе во Франции",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28313377"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Сервиз дочери Николая I",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28313377"
+     }
+    ]
+   },
+   "pending_since": "2026-11-13T10:11:02+00:00"
   }
  ]
 }
