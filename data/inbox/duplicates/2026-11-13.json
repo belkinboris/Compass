@@ -1,0 +1,173 @@
+{
+ "made": "2026-11-13",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/9096041::g4a14848a",
+   "candidate_id": "g4a14848a",
+   "reason": "общие редкие слова: никола, продал",
+   "draft": {
+    "draft_id": "d62289154",
+    "title": "Сервиз дочери Николая I продали на аукционе во Франции за €321 тыс.",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9096041"
+     ]
+    ],
+    "sum": "€321 тыс",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "Чайно-кофейный сервиз дочери императора Николая I, княгини Ольги, продали на аукционе Aguttes во Франции. Итоговая цена лота составила €321 тыс. при начальной стоимости €40-80 тыс., указано на сайте аукционного дома.",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/9096041"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе во Франции",
+    "seller": "Сервиз дочери Николая I",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе во Франции",
+     "seller": "Сервиз дочери Николая I"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
+  },
+  {
+   "key": "https://www.interfax.ru/world/1128753::g75e01577",
+   "candidate_id": "g75e01577",
+   "reason": "общие редкие слова: аукцио, продал",
+   "draft": {
+    "draft_id": "d10233696",
+    "title": "Световой меч Дарта Вейдера продали на аукционе за рекордные $4,9 млн",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1128753"
+     ]
+    ],
+    "sum": "$4,9 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "Световой меч Дарта Вейдера, использовавшийся в съемках фильмов \"Звездные войны: Империя наносит ответный удар\" и \"Звездные войны: Возвращение джедая\", был продан на аукционе Heritage Auctions за $4,9 млн.",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/world/1128753"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе за рекордные $4,9 млн",
+    "seller": "Световой меч Дарта Вейдера",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе за рекордные $4,9 млн",
+     "seller": "Световой меч Дарта Вейдера"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
+  },
+  {
+   "key": "https://iz.ru/2201004/2026-11-13/svetovoi-mech-darta-veidera-prodali-na-auktcione-za-rekordnye-4875-mln::g75e01577",
+   "candidate_id": "g75e01577",
+   "reason": "общие редкие слова: аукцио, продал",
+   "draft": {
+    "draft_id": "d33748135",
+    "title": "Световой меч Дарта Вейдера продали на аукционе за рекордные $4,875 млн",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:iz.ru",
+      "https://iz.ru/2201004/2026-11-13/svetovoi-mech-darta-veidera-prodali-na-auktcione-za-rekordnye-4875-mln"
+     ]
+    ],
+    "sum": "$4,875 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "Световой меч Дарта Вейдера из саги «Звездные войны» продали на аукционе в Далласе за $4,875 млн. Об этом 12 ноября сообщил аукционный дом Heritage Auctions. «Световой меч Дарта Вейдера — тот самый, что использовался на съемках фильмов «Империя наносит…",
+      "source": [
+       "web:iz.ru",
+       "https://iz.ru/2201004/2026-11-13/svetovoi-mech-darta-veidera-prodali-na-auktcione-za-rekordnye-4875-mln"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе за рекордные $4,875 млн",
+    "seller": "Световой меч Дарта Вейдера",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе за рекордные $4,875 млн",
+     "seller": "Световой меч Дарта Вейдера"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
+  },
+  {
+   "key": "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d58077945",
+    "title": "Световой меч Дарта Вейдера продали на аукционе за $4,8 млн",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech"
+     ]
+    ],
+    "sum": "$4,8 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Световой меч Дарта Вейдера",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Световой меч Дарта Вейдера"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
+  }
+ ]
+}

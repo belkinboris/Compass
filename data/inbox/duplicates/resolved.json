@@ -388,5 +388,25 @@
   "verdict": "same_fact",
   "candidate_id": "g2b958c12",
   "day": "2026-11-12"
+ },
+ "https://www.kommersant.ru/doc/9096041::g4a14848a": {
+  "verdict": "separate",
+  "candidate_id": "g4a14848a",
+  "day": "2026-11-13"
+ },
+ "https://www.interfax.ru/world/1128753::g75e01577": {
+  "verdict": "same_fact",
+  "candidate_id": "g75e01577",
+  "day": "2026-11-13"
+ },
+ "https://iz.ru/2201004/2026-11-13/svetovoi-mech-darta-veidera-prodali-na-auktcione-za-rekordnye-4875-mln::g75e01577": {
+  "verdict": "same_fact",
+  "candidate_id": "g75e01577",
+  "day": "2026-11-13"
+ },
+ "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech::pending-1": {
+  "verdict": "same_fact",
+  "candidate_id": "pending-1",
+  "day": "2026-11-13"
  }
 }

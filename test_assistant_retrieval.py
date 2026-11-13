@@ -633,7 +633,8 @@ def test_price_questions_are_not_deal_counts(idx):
     assert r.intent != "count" and r.docs[0].id == "citibank"
     assert "Оценка:" in r.answer            # цена не раскрыта, но оценка в ответе
     r = ar.retrieve("Во сколько Б1 оценила бизнес Russ?", idx=idx)
-    assert r.intent != "count" and r.docs[0].id == "cc0e7565f", [d.title for d in r.docs[:2]]
+    # карточка cc0e7565f (оценка Russ от Б1) снята как не сделка — вычитка m104, 13 ноября 2026
+    assert r.intent != "count", [d.title for d in r.docs[:2]]
     assert ar.route("Сколько может стоить пищевое производство с выручкой 500 млн рублей?", idx).kind == "avg"
     # «сколько сделок» по-прежнему счет, в том числе с вопросом о суммах (№15)
     assert ar.route("Сколько сделок было в 2024 году?", idx).kind == "count"

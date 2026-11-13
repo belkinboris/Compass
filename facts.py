@@ -160,16 +160,19 @@ def card_hash(deal: dict[str, Any], key: str) -> str:
     """Отпечаток полей карточки, по которым факт читали: изменились они —
     прочитанный факт становится stale и ждет повторного чтения (пункт
     рецензента: при изменении значимых фактов пересматривать допуск)."""
+    # Заголовок в отпечаток не входит (13 ноября 2026): переписать заголовок по стандарту —
+    # не значит изменить долю или природу сделки, а прежде любая такая правка снимала с
+    # сайта подтвержденный мультипликатор, и вычитка оставляла заголовки не по стандарту.
     eco = deal.get('eco') or {}
     if key == 'stake':
-        return _hash(deal.get('title'), eco.get('share'), deal.get('asset'), deal.get('stake_acquired'))
+        return _hash(eco.get('share'), deal.get('asset'), deal.get('stake_acquired'))
     if key == 'price':
         return _hash(deal.get('sum'), deal.get('sum_basis'), deal.get('type'), deal.get('status'))
     if key == 'date':
         return _hash(deal.get('date'), deal.get('date_basis'),
                      [(e.get('kind'), e.get('date')) for e in deal.get('events') or [] if isinstance(e, dict)])
     if key == 'nature':
-        return _hash(deal.get('type'), deal.get('title'), deal.get('status'))
+        return _hash(deal.get('type'), deal.get('status'))
     if key == 'target':
         return _hash(deal.get('target'), deal.get('asset_id'))
     raise KeyError(key)

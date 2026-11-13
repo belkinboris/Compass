@@ -1,15 +1,10 @@
 {
  "_why": "Нарушения правил текста, которые уже лежали в базе 22 октября 2026, когда проверка стала общей. Новых сюда не добавлять — исправлять. Рутина качества чистит этот список (routines/quality.md).",
  "known": [
-  "cdcf1a650|eco.target_fin|source_note|c05cd535ca",
   "g20d4cc38|eco.context|source_note|c4d25279ec",
   "g20d4cc38|law.struct|source_note|80278772ce",
   "g26608f96|eco.context|source_note|0bf48a14e3",
-  "g2800e337|eco.context|source_note|3d5133b6d5",
   "g46c6e23f|events.0.note|source_note|6ffcdf41ad",
-  "g560a4b70|eco.context|source_note|6fa01a3de5",
-  "gaec5231e|eco.context|source_note|5074ad5b75",
-  "gaee6179c|law.appr|source_note|96de5f4cee",
   "gee625a0f|eco.val|source_note|5c00b287f1"
  ]
 }

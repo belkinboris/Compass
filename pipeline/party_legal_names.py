@@ -39,6 +39,19 @@ ROLES = ('buyer', 'seller_id', 'target', 'asset_id')
 
 
 def fetch(cid):
+    # Сервер реестра из контейнера часто рвет соединение (12–13 ноября 2026: пять партий
+    # вычитки получили отказ party_legal_form, потому что форма молча не встала) — три попытки.
+    import time
+    for attempt in range(3):
+        try:
+            return _fetch_once(cid)
+        except Exception:  # noqa: BLE001
+            if attempt == 2:
+                raise
+            time.sleep(3 * (attempt + 1))
+
+
+def _fetch_once(cid):
     with urllib.request.urlopen(SITE % cid, timeout=30) as r:
         return json.loads(r.read().decode('utf-8'))
 

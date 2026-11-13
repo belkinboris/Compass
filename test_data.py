@@ -116,7 +116,7 @@ def test_one_company_holds_one_role_in_a_deal(deals):
 # заполнить уверенно (источник неоднозначен) — разобрать и вычеркнуть.
 # Список только сокращается: новая карточка без сторон сюда не дописывается,
 # ее чинят. См. pipeline/archive/2026-10/fill_missing_parties_2026_10_12.py.
-MA_PARTIES_BACKLOG = {"g36386bcf", "cdcc6f67f", "cd51336b7"}
+MA_PARTIES_BACKLOG = {"g36386bcf"}
 
 
 def test_ma_deal_names_a_party(deals):
@@ -1138,7 +1138,9 @@ def test_high_confidence_party_corrections_are_kept(deals):
     expected = {
         "g02a89309": ("gf1f56e08", "g67b53b6a", "g5d22aa06"),
         "g18569a1c": ("gc9913f2a", "g8cff91963", "ge00b1b13"),
-        "gbb7e25e1": ("g549ab474", "g2e85f5e5", "g7ffb3b7a"),
+        # gbb7e25e1: продавец «Севергрупп» снят вычиткой m104 (13 ноября 2026) — по ЕГРЮЛ
+        # до 16.12.2025 ООО «ТТ-Трэвел» принадлежало Демуре и ООО «ФС Холдинг»
+        "gbb7e25e1": ("g549ab474", "g2e85f5e5", None),
         "g90363dc7": ("ged6b4e16", "g04181f17", "gda7d982b"),
     }
     for deal_id, (buyer, target, seller) in expected.items():
