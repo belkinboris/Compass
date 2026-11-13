@@ -196,7 +196,9 @@ def main(argv):
         steps.append(('гашение прежних записей таблицы правок',
                       [py, 'pipeline/reread_absorb.py', '--ids'] + list(ids) + ['--write']))
         steps += [('агрегаторы из видимых источников', [py, 'pipeline/split_discovery_sources.py', '--write']),
-                  ('слой фактов', [py, 'pipeline/facts_derive.py', '--write'])]
+                  ('слой фактов', [py, 'pipeline/facts_derive.py', '--write']),
+                  # исправленные старые нарушения правил текста — из базовой линии (только сокращает; 13 ноября 2026)
+                  ('базовая линия правил текста', [py, 'pipeline/text_rules.py', '--rebaseline'])]
     for name, cmd in steps:
         code, out = run(cmd, env=env)
         refused = 'ОТКАЗ' in out or 'отклонено' in out and 'отклонено 0' not in out
