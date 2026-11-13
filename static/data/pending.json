@@ -1342,7 +1342,7 @@
      ]
     }
    ],
-   "pending_since": "2026-11-11T09:06:39+00:00",
+   "pending_since": "2026-11-13T16:51:24+00:00",
    "from_raw": {
     "draft_id": "d45381973",
     "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»"
@@ -1382,7 +1382,11 @@
    "accepted": "2026-11-13",
    "accepted_hash": "f5d40cf17a11.a527c5",
    "second_read": "2026-11-13",
-   "second_read_hash": "f5d40cf17a11.a527c5"
+   "second_read_hash": "f5d40cf17a11.a527c5",
+   "draft_sent": true,
+   "shown_hash": "f5d40cf17a11.a527c5",
+   "post_draft_sent": true,
+   "post_preview": "<b>«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»</b>\n\n<b>Покупатель:</b> «Объединенная микроэлектронная корпорация»\n<b>Продавец:</b> НПЦ «ЭЛВИС»\n<b>Предмет:</b> «Элко»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Машиностроение\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya\">CNews</a>\n\n#промышленность #машиностроение #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbb89fc13\">карточке сделки</a>"
   },
   {
    "id": "gbdd5b031",
