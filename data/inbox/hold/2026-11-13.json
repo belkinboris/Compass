@@ -643,81 +643,13 @@
    ]
   },
   {
-   "draft_id": "d82123782",
-   "title": "В центре Перми продают скандальный долгострой рядом со школой имени героя Яшкина",
+   "draft_id": "d61894740",
+   "title": "Участок под учебную автоплощадку выставили на торги в Тамбове",
    "date": "2026-11-13",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053143899"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78178449",
-   "title": "В Перми выставлена на продажу территория целого завода: за участок будут биться застройщики",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053143896"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "В Перми на продажу выставлена территория бывшего оборонного предприятия «39 Арсенал» . Участок с производственными зданиями планируют реализовать через аукцион.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053143896"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Строительство",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gba764f10 (общие редкие слова: выстав, террит) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d55517726",
-   "title": "Предприниматели могут приобрести на торгах крупное помещение в Отрадном",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/13/predprinimateli-mogut-priobresti-na-torgah-krupnoe-pomeshhenie-v-otradnom"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119215-uchastok-pod-uchebnuyu-avtoploshchadku-vystavili-na-torgi-v-tambove/"
     ]
    ],
    "sum": null,
@@ -739,111 +671,32 @@
    ]
   },
   {
-   "draft_id": "d54888311",
-   "title": "В Японии сообщили о планах властей выкупать устаревшее оборудование предприятий",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2201056/2026-11-13/v-iaponii-soobshchili-o-planakh-vlastei-vykupat-ustarevshee-oborudovanie-predpriiatii"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "Власти Японии рассматривают возможность временного перехода в государственную собственность устаревшего оборудования предприятий, выпускающих важную для экономической безопасности страны продукцию. Речь идет, в частности, о химических товарах и литейных…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2201056/2026-11-13/v-iaponii-soobshchili-o-planakh-vlastei-vykupat-ustarevshee-oborudovanie-predpriiatii"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d07520609",
-   "title": "Российскую нефть стали продавать с максимальными скидками",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/13/skidochka/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52333763",
-   "title": "«Арнест» закрыл сделку по приобретению российского бизнеса Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периметр сделки вошёл российский бизнес Reckitt в сегменте бытовой ",
+   "draft_id": "d92587217",
+   "title": "Российские компании привлекли через Pre-IPO на 28% меньше За январь–октябрь 2026 года российские компании привлекли через Pre-IPO 980 млн руб. против 1,36 млрд руб. за аналогичный период прошлого года",
    "date": "2026-11-13",
    "src": [
     [
      "tg:dealsma",
-     "https://t.me/dealsma/7567"
+     "https://t.me/dealsma/7568"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-13",
-     "title": "Сделка завершена",
-     "note": "«Арнест» закрыл сделку по приобретению российского бизнеса Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периметр сделки вошёл российский бизнес Reckitt в сегменте бытовой химии, включая завод в Клину Московской области и…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7567"
-     ]
-    }
-   ],
-   "buyer_name": "«Арнест»",
-   "asset": "российский бизнес Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периме",
+   "sum": "980 млн ₽",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российские компании",
    "seller": null,
    "parsed_parties": {
-    "buyer": "«Арнест»",
-    "asset": "российский бизнес Reckitt 🟢 Статус сделки: закрыта 12 ноября 2026 года. Об объекте сделки В периме",
+    "buyer": null,
+    "asset": "Российские компании",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "похоже на уже описанную сделку gmru-arnest-reckitt (общее название в кавычках и общие слова: 2) — проверьте, не дубль ли"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
