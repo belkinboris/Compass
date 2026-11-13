@@ -55,8 +55,15 @@ def main(argv):
     for field in fields:
         recs = [f for f in review.FIXES if (f['id'], f['field']) == (card_id, field)]
         assert len(recs) >= 2, 'у %s.%s записей таблицы: %d — цепочки нет' % (card_id, field, len(recs))
+        # Живая запись — та, что совпадает с полем сейчас, а не последняя по
+        # порядку файлов: порядок `review.FIXES` — алфавит имен партий, не время
+        # (13 ноября 2026, known_issues/card.md, «absorb_fix_chain.py считает
+        # живой последнюю запись по порядку файлов»).
+        bare = {k: v for k, v in card.items() if k != 'proofread_absorbed'}
+        live = [f for f in recs if review.already_applied(f, bare, data.get('companies'))]
+        assert live, '%s.%s: ни одна запись не совпадает с полем — сперва review.py' % (card_id, field)
         marks = absorbed.setdefault(field, [])
-        for f in recs[:-1]:
+        for f in [r for r in recs if r is not live[-1]]:
             fp = review.fix_fingerprint(f['new'])
             if fp not in marks:
                 marks.append(fp)

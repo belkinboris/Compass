@@ -2725,7 +2725,19 @@ def main(argv):
             print('  ГОДЕН  %s (%s)%s' % (card['id'], where,
                                           '' if not left else ' — но штамп не встанет, пока есть: ' + '; '.join(t for _c, t in left)))
             continue
-        lines, ok = apply_answer(ans, card, base)
+        if write:
+            lines, ok = apply_answer(ans, card, base)
+        else:
+            # Сухой прогон не пишет реестр ИНН (13 ноября 2026: `--apply` без
+            # `--write` дописал строку в fns_registry.py, и test_facts_are_current
+            # покраснел на карточке, которую еще не принимали): та же работа —
+            # на копии реестра во временном файле.
+            import shutil
+            import tempfile
+            dry_registry = os.path.join(tempfile.mkdtemp(), 'fns_registry.py')
+            shutil.copy(REGISTRY_PATH, dry_registry)
+            lines, ok = apply_answer(ans, card, base, registry=list(fns_registry.REGISTRY),
+                                     registry_path=dry_registry)
         changed += 1
         stamped += int(ok)
         print('  %s %s (%s)' % ('ПРИНЯТА' if ok else 'ПРАВКИ ', card['id'], where))

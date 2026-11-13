@@ -3597,12 +3597,31 @@ def test_industry_is_read_from_the_deal_itself():
     assert draft.industry_by_words("«Альфа» купила «Бету»") is None
 
 
+def test_industry_profile_is_found_in_an_oblique_case():
+    """Заголовок после вычитки 13 ноября 2026 зовет предмет в родительном падеже
+    («купил 70% "Рестера"»), профиль — в именительном («Рестер»)."""
+    import draft
+    comps = {"a": {"name": "Рестер", "ind": "Фармацевтика"},
+             "b": {"name": "Масленица", "ind": "Пищепром и напитки"},
+             "c": {"name": "AT Consulting", "ind": "ИТ и интернет"}}
+    assert draft.industry_for("«Фармасинтез» купил 70% «Рестера»", comps) == "Фармацевтика"
+    assert draft.industry_for("ЭФКО купил 100% «Масленицы»", comps) == "Пищепром и напитки"
+    # Латинское имя не склоняется — ищется как есть.
+    assert draft._name_forms("AT Consulting") == ("at consulting",)
+    assert draft.industry_for("«Альфа» купила «Рестерию»", {"a": comps["a"]}) is None
+
+
 def test_industry_rule_is_measured_on_the_base():
     """Словарь отраслей проверяется на 1538 карточках с известной отраслью.
 
     Замер 4 августа: покрытие 74%, точность 84,5%. Выше согласованности
     собственной разметки правило не прыгнет — «аэропорт» в базе размечен как
     «Транспорт и логистика» 5 раз и как «Порты и инфраструктура» 5 раз.
+
+    13 ноября 2026 покрытие упало до 64,6%: вычитка переписала заголовки
+    короче («купил 70% "Рестера"»), и имя предмета в родительном падеже
+    перестало совпадать с профилем. Порог не тронут — правило научилось
+    падежам (draft._CASE_ENDINGS): покрытие 70,2%, точность 82,8%.
     """
     import draft
     base = json.loads((ROOT / "static" / "data" / "deals_promoted.json").read_text(encoding="utf-8"))
@@ -6545,11 +6564,23 @@ def test_no_duplicate_fix_for_one_field():
         cards.update({c["id"]: c for c in
                       json.loads(pending_file.read_text(encoding="utf-8"))["cards"]})
 
+    # Живая запись цепочки — та, чей отпечаток не поглощен; она одна и она
+    # совпадает с тем, что поле несет сейчас. Где она стоит в порядке файлов,
+    # не важно. До 13 ноября 2026 тест считал живой ПОСЛЕДНЮЮ запись
+    # (`recs[:-1]`), а порядок `review.FIXES` — алфавит имен партий, не время:
+    # архивные партии до 31 октября названы по карточке
+    # (`written_<id>_2026_10_15`), новые — по дню (`written_2026_11_13_m208`,
+    # `reread_2026_11_12_*`), и новая сортируется раньше старой (known_issues/
+    # card.md, «absorb_fix_chain.py считает живой последнюю запись по порядку
+    # файлов»: там же записано, как чинить — по совпадению с полем). Замер 13
+    # ноября: 180 цепочек после вычитки 12–13 ноября, у всех прежние записи уже
+    # поглощены, а единственная живая совпадает с полем — и стояла не последней.
     def absorbed_chain(key):
         recs = [f for f in review.FIXES if (f["id"], f["field"]) == key]
         card = cards.get(key[0]) or {}
         marks = (card.get("proofread_absorbed") or {}).get(key[1]) or []
-        return all(review.fix_fingerprint(f["new"]) in marks for f in recs[:-1])
+        live = [f for f in recs if review.fix_fingerprint(f["new"]) not in marks]
+        return not live or (len(live) == 1 and review.already_applied(live[0], card, base["companies"]))
 
     dups = [k for k, n in seen.items() if n > 1 and not absorbed_chain(k)]
     assert not dups, f"на одно поле приходится больше одной правки: {dups[:5]}"
