@@ -126,6 +126,48 @@
     "needs_review": true
    },
    "queued": "2026-11-13"
+  },
+  {
+   "key": "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d58077945",
+    "title": "Световой меч Дарта Вейдера продали на аукционе за $4,8 млн",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech"
+     ]
+    ],
+    "sum": "$4,8 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-13",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/lifestyle/news/2026/11/13/1245025-svetovoi-mech"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Световой меч Дарта Вейдера",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Световой меч Дарта Вейдера"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-13"
   }
  ]
 }
