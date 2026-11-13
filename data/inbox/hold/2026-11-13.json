@@ -2,261 +2,6 @@
  "made": "2026-11-13",
  "drafts": [
   {
-   "draft_id": "d05806765",
-   "title": "Компания «СиЭс Технологии» , которая разрабатывает платформу «Стаксель» для управления жизненным циклом инженерного продукта [PLM], привлекла 50 млн рублей от холдинга промышленного ПО «Экспанта» в об",
-   "date": "2026-10-26",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7808"
-    ]
-   ],
-   "sum": "50 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "промышленного ПО «Экспанта» в об",
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "промышленного ПО «Экспанта» в об",
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga09376f6 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d63204062",
-   "title": "«Почта России» выставила на торги здание Главпочтамта в Москве",
-   "date": "2026-11-01",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2194599/2026-11-01/pochta-rossii-vystavila-na-torgi-zdanie-glavpochtamta-v-moskve"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Транспорт и логистика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc6fa5d80 (общие редкие слова: выстав, главпо, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d06426147",
-   "title": "Московская биржа проводит дискретный аукцион по акциям ВК",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261102/birzha-874847090.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Рынок ценных бумаг",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62935089",
-   "title": "«Обещать — не значит жениться». Владелец «Марии-Ра» — о возможной продаже компании «Ленте»",
-   "date": "2026-11-02",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/business/2026/11/02/76738898/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga241b1af (общие редкие слова: возмож, продаж) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d53310146",
-   "title": "Бумаги «Совкомфлота» упали на новости о продаже части акций",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-03",
-     "title": "Переговоры",
-     "note": "Росимущество планирует продать часть принадлежащих государству акций «Совкомфлота», выставив на торги почти 7,8% бумаг компании",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/quote/03/11/2026/6ae995f79a79477ed3556253"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d19388209",
-   "title": "Росимущество начало подготовку к продаже доли в «Совкомфлоте»",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/03/11/2026/6ae9972ca0c29c8950bc0ffb"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Бумаги «Совкомфлота» упали на новости о продаже части акций» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d89743859",
-   "title": "Reuters узнал о сделке, которая «положит конец» продаже активов ЛУКОЙЛа",
-   "date": "2026-11-03",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/03/11/2026/6aea0c660dbbc5bef016522b"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44286970",
-   "title": "Правительство Германии договорилось о покупке 50% акций KNDS, пишет Reuters",
-   "date": "2026-11-05",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261105/knds-874946455.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-05",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261105/knds-874946455.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Reuters узнал о сделке, которая «положит конец» продаже акти» — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d31516979",
    "title": "МИД Японии выразил протест российскому послу из-за передачи активов JTI",
    "date": "2026-11-06",
@@ -379,17 +124,17 @@
    ]
   },
   {
-   "draft_id": "d75880422",
-   "title": "МИД Японии выразил протест Ноздреву из-за передачи российских активов JTI",
+   "draft_id": "d77671333",
+   "title": "Япония потребовала отменить передачу активов JTI",
    "date": "2026-11-06",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/mid-874970821.html"
+     "web:retailer.ru",
+     "https://retailer.ru/japonija-potrebovala-otmenit-peredachu-aktivov-jti/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Временное управление",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -405,7 +150,8 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда, россий) — проверьте, не дубль ли",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда) — проверьте, не дубль ли",
     "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
    ]
   },
@@ -438,6 +184,36 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
     "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d05806765",
+   "title": "Компания «СиЭс Технологии» , которая разрабатывает платформу «Стаксель» для управления жизненным циклом инженерного продукта [PLM], привлекла 50 млн рублей от холдинга промышленного ПО «Экспанта» в об",
+   "date": "2026-10-26",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7808"
+    ]
+   ],
+   "sum": "50 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "промышленного ПО «Экспанта» в об",
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "промышленного ПО «Экспанта» в об",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку ga09376f6 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -503,113 +279,13 @@
    ]
   },
   {
-   "draft_id": "d77671333",
-   "title": "Япония потребовала отменить передачу активов JTI",
-   "date": "2026-11-06",
+   "draft_id": "d23202963",
+   "title": "День 1718: на бывшем заводе Huyndai начали сборку автомобилей российского бренда Votour, Путин передал во временное управление ещё три компании японской JTI",
+   "date": "2026-11-07",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/japonija-potrebovala-otmenit-peredachu-aktivov-jti/"
-    ]
-   ],
-   "sum": null,
-   "type": "Временное управление",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d59568127",
-   "title": "Холдинг «Экспанта» приобрел 15% в российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями и сервисными процессами. Сумма сделки не разглашается. «Ирактис» в",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7827"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-06",
-     "title": "Сделка завершена",
-     "note": "Холдинг “Экспанта” приобрел 15% в российской ИТ-компании “Ирактис” , которая разработала платформу для управления проектами, знаниями и сервисными процессами. Сумма сделки не разглашается. “Ирактис” в 2025 году основали Роман Третьяков и Иван Машинцев.…",
-     "source": [
-      "tg:rusven",
-      "https://t.me/rusven/7827"
-     ]
-    }
-   ],
-   "buyer_name": "«Экспанта»",
-   "asset": "российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "«Экспанта»",
-    "asset": "российской ИТ-компании «Ирактис» , которая разработала платформу для управления проектами, знаниями",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок"
-   ]
-  },
-  {
-   "draft_id": "d54203247",
-   "title": "Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после покупки «Циана»",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261106/tsian-2129692348.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d36075994",
-   "title": "Акции JTI рухнули после передачи активов в России под временное управление",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/jti-874988994.html"
+     "web:vc.ru",
+     "https://vc.ru/money/3240901-den-1718-na-byvshem-zavode-huyndai-nachali-sborku-avtomobilei-rossiiskogo-brenda-votour-putin-peredal-vo-vremennoe-upravlenie-eshe-tri-kompanii-yaponskoi-jti?from=rss"
     ]
    ],
    "sum": null,
@@ -631,249 +307,6 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
     "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d06818178",
-   "title": "Аналитик: Т-Банк в случае покупки «Циана» станет конкурентом «Домклику»",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/analitik-874986673.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d64766360",
-   "title": "Владелец бывшего банка «Тиинькофф» покупает «Циан»",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-06_vladelets_byvshego_banka_tiinkoff"
-    ]
-   ],
-   "sum": "77,13 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "«Циан»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "«Циан»",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d58173634",
-   "title": "💠 BIRCH выступила юридическим консультантом фонда под управлением АО ВИМ Инвестиции в рамках инвестиции в капитал ГК Swordfish Security Корпоративная / M&A практика BIRCH выступила юридическим консуль",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "tg:LawFirms",
-     "https://t.me/LawFirms/11624"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf6c084b9 (общие редкие слова: securi, swordf) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d17341909",
-   "title": "Архитекторы рынка: сразу три M&A-сделки White Square вошли в число лучших по версии ИД «Коммерсантъ» ИД «Коммерсантъ» представил специальный рэнкинг M&A-сделок, которые, по мнению редакции, нагляднее ",
-   "date": "2026-10-30",
-   "src": [
-    [
-     "tg:whitesquarenews",
-     "https://t.me/whitesquarenews/1542"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d00097677",
-   "title": "Медведев указал на падение акций JTI после передачи ее российских активов",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261106/medvedev-874998531.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7994f736 (общие редкие слова: jti, переда, россий) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d13620213",
-   "title": "Акции JTI упали на 19% после передачи российских активов во временное управление",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9091530"
-    ]
-   ],
-   "sum": null,
-   "type": "Временное управление",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8a599c40 (общие слова заголовка: 3) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d29544730",
-   "title": "«Циан» рассмотрит предложение от «Т-Технологий» о покупке до 100% акций компании",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28293437"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли",
-    "та же новость, что «Аналитик: Т-Банк станет конкурентом «Домклика» Сбера после п» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -979,38 +412,6 @@
    ]
   },
   {
-   "draft_id": "d61699634",
-   "title": "Временный управляющий активами JTI назвал свои первостепенные задачи",
-   "date": "2026-11-07",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/7/vremennyj-upravlyayushhij-aktivami-jti-nazval-svoi-pervostepennye-zadachi"
-    ]
-   ],
-   "sum": null,
-   "type": "Временное управление",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
-    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d85479153",
    "title": "РБК: временный управляющий назвал задачи по работе с активами JTI",
    "date": "2026-11-07",
@@ -1042,30 +443,19 @@
    ]
   },
   {
-   "draft_id": "d22298897",
-   "title": "ГК ФСК вышла из капитала одной из крупнейших в Московском регионе УК",
-   "date": "2026-11-11",
+   "draft_id": "d61699634",
+   "title": "Временный управляющий активами JTI назвал свои первостепенные задачи",
+   "date": "2026-11-07",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/7/vremennyj-upravlyayushhij-aktivami-jti-nazval-svoi-pervostepennye-zadachi"
     ]
    ],
-   "sum": "700 млн ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-11",
-     "title": "Сделка завершена",
-     "note": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК. Об этом рассказал представитель первой организации. Он добавляет, что сумма сделки составила 700 млн руб. В ФСК факт сделки подтвердили. По данным…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/GK-FSK-vyshla-iz-kapitala-odnoj-iz-krupnejshih-v-Moskovskom-regione-UK-87771"
-     ]
-    }
-   ],
+   "sum": null,
+   "type": "Временное управление",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1076,8 +466,12 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g7994f736 (общие слова заголовка: 3) — проверьте, не дубль ли",
+    "та же новость, что «МИД Японии выразил протест российскому послу из-за передачи » — второе издание, в группу не шлем"
    ]
   },
   {
@@ -1199,45 +593,17 @@
    ]
   },
   {
-   "draft_id": "d32194666",
-   "title": "Аукцион на месторождение Лунное на Чукотке признан несостоявшимся",
+   "draft_id": "d98537308",
+   "title": "В Госдуму внесен законопроект, разрешающий IPO региональных компаний",
    "date": "2026-11-13",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/auktsion-875208689.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/13/11/2026/6af7151ef9a100afa8dd7cf2"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d66036252",
-   "title": "Юбилейный аукцион по продаже недостроенного ТЦ «Подсолнух» провалился — готовность объекта оценили в 74%",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/gorod/2026/11/13/76763948/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1251,35 +617,23 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga241b1af (общие редкие слова: оценил, продаж) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d40159433",
-   "title": "Mercedes-Benz приостанавливает инвестиции в заводы в Германии",
+   "draft_id": "d40235684",
+   "title": "Mercedes-Benz заморозил новые инвестиции в свои немецкие заводы",
    "date": "2026-11-13",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1128871"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/13/11/2026/6af6bbf15d33761ec7ccb674"
     ]
    ],
    "sum": null,
    "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "Германский автопроизводитель Mercedes-Benz останавливает все инвестиции в заводы в Германии и рассматривает возможность закрытия некоторых предприятий, чтобы справиться с высокими затратами на производство в стране, сообщает Reuters со ссылкой на оказавшийся…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1128871"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1296,44 +650,16 @@
    ]
   },
   {
-   "draft_id": "d35426849",
-   "title": "Часть трассы М-5 «Урал» передадут в управление «Автодору»",
+   "draft_id": "d15695605",
+   "title": "Глава Росимущества назвал крупнейшими продажи Домодедово и Raven Russia",
    "date": "2026-11-13",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28316063"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6af70bbcf9a100afa8dd7cc0"
     ]
    ],
    "sum": null,
-   "type": "Передача в управление",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90861317",
-   "title": "Доля инвестиций нерезидентов в суверенных евробондах РФ снизилась до 32%",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28316151"
-    ]
-   ],
-   "sum": "$8,872 млрд",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -1345,38 +671,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Транспорт и логистика",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25763845",
-   "title": "ДОМ.РФ привлек 10 млрд рублей через выпуск инфраоблигаций для развития регионов",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28315969"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "ДОМ.РФ",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "ДОМ.РФ",
-    "seller": null
-   },
-   "ind": "Профессиональные услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -1408,35 +706,6 @@
    ]
   },
   {
-   "draft_id": "d64472232",
-   "title": "Аукцион на месторождение золота Зергун в Забайкалье отменен",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261113/zabajkale-875209932.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g178fcbb1 (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d10737714",
    "title": "Владелец ТЦ «Европолис Ростокино» объявил о готовности его продать",
    "date": "2026-11-13",
@@ -1464,159 +733,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Владелец ТЦ «Европолис Ростокино» объявил о готовности его п» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d59405693",
-   "title": "Липецкая область выставила на торги ремонт и содержание дорог за 2,8 млрд рублей",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119246-lipetskaya-oblast-vystavila-na-torgi-remont-i-soderzhanie-dorog-za-2-8-mlrd-rubley/"
-    ]
-   ],
-   "sum": "2,8 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ge163d93c (общие редкие слова: выстав, липецк, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d91089470",
-   "title": "Samsung хочет купить производителя систем охлаждения для ЦОДов Modine: предполагаемая сумма сделки — почти $6 млрд",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/samsung-hochet-kupit-proizvoditelya-sistem-ohlazhdeniya-dlya-codov-modine-predpolagaemaya-summa-sdelki-pochti-6-mlrd/"
-    ]
-   ],
-   "sum": "$6 млрд",
-   "type": "Продажа с торгов",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-13",
-     "title": "Переговоры",
-     "note": "Samsung Electronics ведёт переговоры о покупке американской Modine Manufacturing, производителя систем охлаждения для дата-центров, сообщает Bloomberg. Стороны могут договориться о сделке в ближайшие недели. После публикации новости о переговорах с Samsung…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/samsung-hochet-kupit-proizvoditelya-sistem-ohlazhdeniya-dlya-codov-modine-predpolagaemaya-summa-sdelki-pochti-6-mlrd/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d29744739",
-   "title": "В ГД внесли законопроект о привлечении частных инвестиций в региональные компании",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266787/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92946352",
-   "title": "Билеты пока продают: концерт российского рэпера в Польше оказался под угрозой",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/13/bilety-poka-prodayut-konczert-rossijskogo-repera-v-polshe-okazalsya-pod-ugrozoj"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30369396",
-   "title": "Сборная России по футболу прилетела в Краснодар на матч с Венесуэлой. Есть ли еще билеты в продаже?",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/sport/2026/11/13/76764127/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
