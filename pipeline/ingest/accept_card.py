@@ -1125,6 +1125,8 @@ REGISTRY_PLACE = re.compile(r'(?i)datanewton|датаньютон|egrul\.nalog|�
 CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
                  'auction_type', 'fund_status', 'aggregator_cites_primary',
+                 # марафон вычитки, 13 ноября 2026: менеджеры названы где-то еще; эксперт пересказал цену сторон
+                 'party_placeholder', 'sum_is_expert_estimate',
                  # Источник не говорит, что доля сменила владельца (утрата контроля без
                  # названного способа, «О23» / Ozon, g90767425, 11 ноября 2026): форма
                  # «N% / контрольный пакет акций» была бы выдумкой — читатель закрывает причиной.
@@ -1160,6 +1162,215 @@ def aggregator_cited_missing(card, records=None):
             for c in r.get('cites') or []:
                 if _url_key(c) not in have and c not in out and not source_names.is_undesirable(c):
                     out.append(c)
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Находки марафона вычитки 12–13 ноября 2026 (журнал pipeline/reread_errors.jsonl):
+# ошибки, которые помощники правили руками десятки раз, — механически.
+# Замеры по базе на 13 ноября 2026 — в docs/card_acceptance.md.
+
+# Сторона без имени: «менеджмент», «местное руководство» — не покупатель, а
+# описание (MBO без имен). Имена менеджеров — в стороне, без имен — сторона пуста.
+PARTY_PLACEHOLDER = re.compile(
+    r'^\s*(?:(?:местн|действующ|бывш|прежн|топ-?)\w*\s+)?(?:менеджмент|руководств\w*|топ-?менеджмент|менеджер\w*)'
+    r'(?:\s+(?:компании|предприятия|общества|банка|группы|холдинга|бизнеса))?\s*$', re.I)
+PARTY_TEXT_FIELDS = (('buyer_name', 'покупатель'), ('seller', 'продавец'), ('seller_name', 'продавец'))
+
+
+def party_placeholder(card, comps=None):
+    """[(поле, значение)] — сторона записана словом «менеджмент/руководство» без имен."""
+    out = []
+    comps = comps or {}
+    for f, _role in PARTY_TEXT_FIELDS:
+        v = str(card.get(f) or '')
+        if PARTY_PLACEHOLDER.match(v.strip('«»"')):
+            out.append((f, v))
+    for f in ('buyer', 'seller_id'):
+        name = str((comps.get(card.get(f) or '') or {}).get('name') or '')
+        if name and PARTY_PLACEHOLDER.match(name.strip('«»"')):
+            out.append((f, name))
+    return out
+
+
+# Оценка вместо цены (решение 13 ноября 2026, docs/card_money.md «Что идет в сумму»):
+# цифра в sum, а карточка сама рассказывает, что это чья-то оценка или стартовая цена.
+SUM_ESTIMATE_PROSE = re.compile(
+    r'\bэксперт\w*[^.]{0,60}\bоцени\w*|\bоцени\w*[^.]{0,30}\bэксперт\w*'
+    r'|\bаналитик\w*[^.]{0,60}\bоцени\w*|\bпо\s+оценк\w+\s+(?:\w+\s+){0,2}(?:аналитик|эксперт|консультант|участник|банк)\w*'
+    r'|\bмо(?:жет|гла|гли|г)\s+(?:бы\s+)?(?:составить|составлять|обойтись|стоить)'
+    r'|\bисходя\s+из\b|\b(?:стартов|начальн)\w+\s+(?:цен|стоимост)\w*', re.I)
+
+
+def _number_rx(sum_text):
+    m = SUM_NUMBER.search(str(sum_text or ''))
+    if not m:
+        return None
+    num = m.group(1).replace(' ', '').replace(' ', '')
+    return re.compile(r'(?<![\d,.])' + re.sub(r'\\?[,.]', '[,.]', re.escape(num)) + r'(?:[,.]0+)?\s*'
+                      + SUM_UNIT_WORDS[m.group(2)], re.I)
+
+
+def card_prose(card, fields=PROSE_CHECK_FIELDS):
+    eco, law = card.get('eco') or {}, card.get('law') or {}
+    out = []
+    for f in fields:
+        top, _, sub = f.partition('.')
+        v = (eco if top == 'eco' else law if top == 'law' else card).get(sub or top) if sub else card.get(top)
+        if isinstance(v, str) and has(v):
+            out.append((f, v))
+    return out
+
+
+def sum_estimate_in_prose(card):
+    """Отрывок прозы или цитаты карточки, где число суммы названо оценкой
+    («эксперт оценил», «могла составить», «исходя из», «стартовая цена»), — или None.
+    Сумма «Не раскрыта» и стартовая цена у торгов (sum_basis auction_start) не проверяются."""
+    s = str(card.get('sum') or '')
+    if not has(s) or re.search(r'не\s+раскры', s, re.I) or card.get('sum_basis') in ('auction_start',) \
+            or card.get('type') == 'Продажа с торгов':
+        return None
+    rx = _number_rx(s)
+    if not rx:
+        return None
+    texts = [v for _f, v in card_prose(card)]
+    texts += [str(e.get('quote') or '') for e in card.get('fact_log') or []
+              if isinstance(e, dict) and e.get('field') in ('sum', 'eco.sum')]
+    for text in texts:
+        for found in rx.finditer(text):
+            # то же предложение до числа (с «;» — уже другая мысль) и короткий хвост после:
+            # «VK заплатила 2,5 млрд ₽; исходя из этой цены…» — цена, а не оценка
+            window = re.split(r'(?<=[.!?;])\s+', text[max(0, found.start() - 160):found.start()])[-1] \
+                + re.split(r'[;]|\.\s', text[found.start():found.end() + 50])[0]
+            m = SUM_ESTIMATE_PROSE.search(window)
+            if m and not re.search(r'\bбез\s+(?:торгов|аукцион)', window, re.I):
+                return window.strip()
+    return None
+
+
+# Узкая, блокирующая часть: в sum стоит «(по оценке)» (или sum_basis estimate), а оценивает
+# цифру эксперт, аналитик, консультант, издание — не стороны и не источники о самой сделке.
+# Замер 13 ноября 2026: 47 карточек, все — оценки экспертов (Бурмистров, Делицын, Шумов…).
+EXPERT_ESTIMATOR = re.compile(r'эксперт|аналитик|банкир|консалтинг|консультант|Infoline|INFOLine|BGP\s+Capital'
+                              r'|\bVeta\b|NF\s+Group|IBC\s+Real|CMWP|CORE\.XP|TelecomDaily|Forbes', re.I)
+UNOFFICIAL_SOURCE = re.compile(r'неофициальн|собеседник|источник', re.I)
+
+
+def sum_is_expert_estimate(card):
+    """Отрывок, где сумму карточки «(по оценке)» назвал эксперт или аналитик, — или None."""
+    s = str(card.get('sum') or '')
+    if not (re.search(r'оценк', s, re.I) or card.get('sum_basis') == 'estimate'):
+        return None
+    w = sum_estimate_in_prose(card)
+    if w and EXPERT_ESTIMATOR.search(w) and not UNOFFICIAL_SOURCE.search(w):
+        return w
+    return None
+
+
+def date_is_article_day(card, records=None):
+    """Дата-день карточки = день публикации ее первого источника, и обоснования
+    даты (date_basis) нет — дата, скорее всего, взята со статьи. Или None."""
+    dt = str(card.get('date') or '')
+    if not ISO_DAY.match(dt) or has(card.get('date_basis')) or card.get('status') not in EVENT_DAY_STATUSES:
+        return None
+    first = (card.get('src') or [None])[0]
+    if not (isinstance(first, (list, tuple)) and len(first) > 1):
+        return None
+    days = source_days(dict(card, src=[first]), records)
+    return dt if dt in days else None
+
+
+AUCTION_TEXT = re.compile(r'Сбербанк[- ]АСТ|\bРАД\b|Российск\w+\s+аукционн\w+\s+дом\w*|\b(?:стартов|начальн)\w+\s+цен\w*'
+                          r'|\bвыстав\w+\s+(?:\w+\s+){0,3}на\s+(?:торги|аукцион)|\bаукцион\w*|\bс\s+торгов\b', re.I)
+
+
+def auction_in_text(card):
+    """Слово торгов в тексте карточки, а тип не «Продажа с торгов» — или None."""
+    if card.get('type') not in ('M&A',):
+        return None
+    blob = ' '.join([str(card.get(k) or '') for k in ('title', 'asset', 'sum')] + [v for _f, v in card_prose(card)])
+    blob = re.sub(r'(?i)\b(?:без|не\s+через|не\s+на\s+(?:открыт\w+\s+)?|вне)\s+(?:торгов|аукцион\w*)', '', blob)
+    m = AUCTION_TEXT.search(blob)
+    if not m:
+        return None
+    a = max(0, m.start() - 60)
+    return blob[a:m.end() + 60]
+
+
+MONTHS_RX = '|'.join(MONTHS_GEN)
+_MONTH_WORDS = {'январ': 1, 'феврал': 2, 'март': 3, 'апрел': 4, 'ма': 5, 'июн': 6, 'июл': 7, 'август': 8,
+                'сентябр': 9, 'октябр': 10, 'ноябр': 11, 'декабр': 12}
+LATE_DATE = re.compile(r'(?:(?<!\d)(\d{1,2})\s+(%s)\s+)?(?:(январ|феврал|март|апрел|ма|июн|июл|август|сентябр|октябр|ноябр|декабр)\w*\s+)?'
+                       r'(20[12]\d)\s*(?:года|году|г\.)' % MONTHS_RX, re.I)
+DEADLINE_BEFORE = re.compile(r'(?:\bдо|не\s+позднее|не\s+позже|в\s+течение|к|срок\w*|по|вплоть\s+до|начиная\s+с|с|обязу\w+|должн\w+|план\w*)\s*$', re.I)
+
+
+def late_event_in_terms(card, today=None):
+    """[(поле, фраза)] — в law.terms/law.struct фраза с датой позже даты закрытия
+    (и не позже сегодняшнего дня: это уже случилось, а не срок условия). Место
+    такой фразе — в «Контексте»: условия сделки описывают сделку на день закрытия."""
+    if card.get('status') != 'Закрыта':
+        return []
+    dt = str(card.get('date') or '')
+    if not re.match(r'\d{4}', dt):
+        return []
+    today = today or __import__('datetime').date.today().isoformat()
+    out = []
+    for f, text in card_prose(card, ('law.terms', 'law.struct')):
+        for sent in re.split(r'(?<=[.!?])\s+', text):
+            for m in LATE_DATE.finditer(sent):
+                y = m.group(4)
+                if m.group(2):
+                    when = '%s-%02d-%02d' % (y, MONTHS_GEN.index(m.group(2).lower()) + 1, int(m.group(1)))
+                elif m.group(3):
+                    when = '%s-%02d' % (y, _MONTH_WORDS[m.group(3).lower()])
+                else:
+                    when = y
+                n = min(len(when), len(dt))
+                if when[:n] <= dt[:n] or when[:n] > today[:n]:
+                    continue
+                if DEADLINE_BEFORE.search(sent[:m.start()]):
+                    continue
+                out.append((f, sent.strip()))
+                break
+    return out
+
+
+def marathon_findings(card, comps):
+    """[(код, текст)] — блокирующие находки марафона вычитки (без учета `checked`)."""
+    out = []
+    for f, v in party_placeholder(card, comps):
+        out.append(('party_placeholder',
+                    '%s «%s» — описание, а не сторона: назовите менеджеров по именам (ЕГРЮЛ, статья) или '
+                    'оставьте сторону пустой с причиной в accepted_notes.no_profile' % (f, v)))
+    est = sum_is_expert_estimate(card)
+    if est:
+        out.append(('sum_is_expert_estimate',
+                    'сумма %r — оценка эксперта или аналитика, а не цена сделки: «%s». В sum и eco.sum — '
+                    '«Не раскрыта», цифра с автором — в eco.val (docs/card_money.md#Что идет в сумму)'
+                    % (card.get('sum'), est[:160])))
+    return out
+
+
+def hints(card, base=None, records=None):
+    """[(код, текст)] — подсказки читателю марафона вычитки: не держат ни приемку, ни
+    отметку вычитки (много законных срабатываний), но называют, куда посмотреть."""
+    out = []
+    est = sum_estimate_in_prose(card)
+    if est and not sum_is_expert_estimate(card):
+        out.append(('sum_estimate_prose', 'рядом с суммой %r в тексте карточки — слова оценки: «%s». В sum — '
+                    'только цена этой сделки; оценка с автором — в eco.val' % (card.get('sum'), est[:140])))
+    dt = date_is_article_day(card, records)
+    if dt:
+        out.append(('date_is_article_day', 'дата %s похожа на день статьи (день публикации первого источника, '
+                    'date_basis нет) — день события из реестра или документа, или дата годом' % dt))
+    a = auction_in_text(card)
+    if a:
+        out.append(('auction_in_text', 'в тексте карточки торги («…%s…»), а тип «%s» — продажа шла с торгов? '
+                    'Тогда тип «Продажа с торгов»' % (a.strip()[:120], card.get('type'))))
+    for f, sent in late_event_in_terms(card):
+        out.append(('late_event_in_terms', '%s: событие позже закрытия — «%s» — перенести в контекст'
+                    % (f, sent[:140])))
     return out
 
 
@@ -1772,6 +1983,9 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # 9 ноября»): ошибки по существу у карточек, прошедших приемку. Каждая
     # находка снимается правкой поля или причиной в `accepted_notes.checked`
     # ({код: почему это не ошибка}) — читатель ответил, а не промолчал.
+    for code, text in marathon_findings(card, comps):
+        if code not in checked:
+            out.append((code, text))
     for code, text in new_source_findings(card, comps, waived, records):
         if code not in checked:
             out.append((code, text))
@@ -1861,6 +2075,7 @@ def dossier(card, base):
     f = findings(card, base)
     lines.append('Механические находки: %s' % ('нет' if not f else ''))
     lines.extend('  - %s' % t for _c, t in f)
+    lines.extend('  подсказка: %s' % t for _c, t in hints(card, base))
     return '\n'.join(lines)
 
 

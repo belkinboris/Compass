@@ -21,6 +21,7 @@
 
     python3 pipeline/party_legal_names.py <id карточки> [...]          # показать
     python3 pipeline/party_legal_names.py <id карточки> [...] --write  # записать legal_short
+    python3 pipeline/party_legal_names.py --fix-quotes [--write]        # починить кавычки в записанных
 
 Физлица, иностранцы, профили без сопоставленного ИНН — пропускаются с причиной.
 """
@@ -63,26 +64,103 @@ def _norm(s):
 def _case(name, profile=''):
     """Реестр пишет ПРОПИСНЫМИ. Слово, которое есть в имени профиля, берется в
     его написании; иначе короткое (до трех букв) или без гласных — аббревиатура
-    (УК, ЦФУ, СЛПК), прочие — с заглавной."""
-    seen = {w.lower(): w for w in re.findall(r'[\wА-Яа-яЁё-]+', str(profile or ''))}
-    def one(w):
+    (УК, ЦФУ, СЛПК), прочие — с заглавной. Кавычки и дефисы слову не мешают:
+    `"РУСАГРО` — слово «Русагро», а не «"русагро» (13 ноября 2026)."""
+    seen = {w.lower(): w for w in re.findall(r'\w+', str(profile or ''))}
+    def one(m):
+        w = m.group(0)
         if w.lower() in seen:
             return seen[w.lower()]
-        if len(w) <= 3 or not re.search(r'[АЕИОУЫЭЮЯAEIOU]', w):
+        if len(w) <= 3 or not re.search(r'[АЕИОУЫЭЮЯAEIOU]', w, re.I) or not w.isupper():
             return w
         return w[:1] + w[1:].lower()
-    return ' '.join('-'.join(one(p) for p in w.split('-')) for w in name.split())
+    return re.sub(r'\w+', one, ' '.join(str(name).split()))
+
+
+QUOTES = '"«»“”„'
+
+
+def _guillemets(text):
+    """Кавычки реестра (прямые, вложенные, без закрывающих) — в «елочки» с парными
+    закрывающими: `"КОНЦЕРН "ДЕТСКОСЕЛЬСКИЙ"` → «КОНЦЕРН «ДЕТСКОСЕЛЬСКИЙ»». Имя без
+    кавычек (выписка: `ГРУППА СИНАРА`) и имя, где кавычки не обнимают его целиком
+    (`ТД "ЛЕНТА"`), берутся в «…» снаружи."""
+    out, depth = [], 0
+    t = ' '.join(str(text).split())
+    for i, ch in enumerate(t):
+        if ch not in QUOTES:
+            out.append(ch)
+            continue
+        nxt = t[i + 1] if i + 1 < len(t) else ''
+        prev = t[i - 1] if i else ''
+        if ch in '«„':
+            opening = True
+        elif ch in '»”':
+            opening = False
+        else:                       # прямая кавычка: перед словом — открывает, после — закрывает
+            opening = nxt.isalnum() and not prev.isalnum()
+        if opening:
+            out.append('«')
+            depth += 1
+        elif depth:
+            out.append('»')
+            depth -= 1
+    body = ''.join(out).strip() + '»' * depth
+    # обнимает ли первая открывающая все имя
+    if body.startswith('«'):
+        d = 0
+        for i, ch in enumerate(body):
+            d += (ch == '«') - (ch == '»')
+            if d == 0:
+                break
+        if i == len(body) - 1:
+            return body
+    return '«%s»' % body
 
 
 def legal_short(profile_name, short_name):
     """«ООО «ПармаВуд»» из реестрового `ООО "ПАРМАВУД"` и имени профиля."""
-    m = re.match(r'\s*(%s)\s+["«](.+?)["»]?\s*$' % '|'.join(FORMS), str(short_name or ''))
+    m = re.match(r'\s*(%s)\s+(\S.*?)\s*$' % '|'.join(FORMS), str(short_name or ''))
     if not m:
         return None
-    form, reg = m.group(1), m.group(2).strip().strip('"«»')
-    bare = re.sub(r'^(%s)\s+' % '|'.join(FORMS), '', str(profile_name or '')).strip().strip('"«»')
-    name = bare if _norm(bare) == _norm(reg) else _case(reg, bare)
-    return '%s «%s»' % (form, name)
+    form, rest = m.group(1), m.group(2)
+    if not re.search(r'\w', rest):
+        return None
+    reg = _guillemets(rest)
+    bare = re.sub(r'^(%s)\s+' % '|'.join(FORMS), '', str(profile_name or '')).strip()
+    if _norm(bare) == _norm(reg) and reg.count('«') == 1 and not any(q in bare.strip(QUOTES) for q in QUOTES):
+        return '%s «%s»' % (form, bare.strip(QUOTES))
+    name = re.sub(r'«([a-zа-яё])', lambda m: '«' + m.group(1).upper(), _case(reg, bare))
+    return '%s %s' % (form, name)
+
+
+def broken_quotes(text):
+    t = str(text or '')
+    return t.count('«') != t.count('»') or '"' in t
+
+
+def fix_quotes(write=False):
+    """Починить уже записанные legal_short с потерянной закрывающей или прямой кавычкой
+    (старый разбор вложенных кавычек, до 13 ноября 2026) — без обращения к реестру."""
+    data = json.load(open(DATA, encoding='utf-8'))
+    todo = {}
+    for cid, c in data['companies'].items():
+        ls = c.get('legal_short')
+        if ls and broken_quotes(ls):
+            new = legal_short(c.get('name'), ls)
+            if new and '««' not in new and not broken_quotes(new):
+                todo[cid] = (ls, new)
+                print('  %s: %s → %s' % (cid, ls, new))
+    if write and todo:
+        fresh = json.load(open(DATA, encoding='utf-8'))
+        for cid, (old, new) in todo.items():
+            assert fresh['companies'][cid].get('legal_short') == old, cid
+            fresh['companies'][cid]['legal_short'] = new
+        json.dump(fresh, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+        print('Записано legal_short: %d' % len(todo))
+    elif todo:
+        print('Сухой прогон: %d. Запись — --write.' % len(todo))
+    return todo
 
 
 def owners_text(entity):
@@ -99,6 +177,9 @@ def owners_text(entity):
 
 def main(argv):
     write = '--write' in argv
+    if '--fix-quotes' in argv:
+        fix_quotes(write)
+        return
     ids = [a for a in argv if not a.startswith('--')]
     data = json.load(open(DATA, encoding='utf-8'))
     deals = {d['id']: d for d in data['deals']}
@@ -149,6 +230,15 @@ def _self_check():
     assert legal_short('Директ Стар', 'ООО "УК ДИРЕКТ СТАР"') == 'ООО «УК Директ Стар»'
     assert legal_short('ПАО «Совкомбанк»', 'ПАО "СОВКОМБАНК"') == 'ПАО «Совкомбанк»'
     assert legal_short('x', 'ИП Иванов') is None
+    # вложенные кавычки, регистр, выписка без кавычек (вычитка, 13 ноября 2026)
+    assert legal_short('Концерн «Детскосельский»', 'ООО "КОНЦЕРН "ДЕТСКОСЕЛЬСКИЙ"') == 'ООО «Концерн «Детскосельский»»'
+    assert legal_short('Концерн Детскосельский', 'ООО "КОНЦЕРН "ДЕТСКОСЕЛЬСКИЙ""') == 'ООО «Концерн «Детскосельский»»'
+    assert legal_short('Русагро', 'ПАО "ГРУППА "РУСАГРО"') == 'ПАО «Группа «Русагро»»'
+    assert legal_short('Группа Астра', 'ПАО "ГРУППА АСТРА"') == 'ПАО «Группа Астра»'
+    assert legal_short('Базис', 'ПАО "ГК "БАЗИС"') == 'ПАО «ГК «Базис»»'
+    assert legal_short('Синара', 'АО ГРУППА СИНАРА') == 'АО «Группа Синара»'
+    assert legal_short('x', 'ООО «ГК "гранель»') == 'ООО «ГК «Гранель»»'
+    assert legal_short('УК Директ Стар', 'ООО «УК «ДИРЕКТ СТАР»') == 'ООО «УК «Директ Стар»»'
 
 
 _self_check()

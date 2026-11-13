@@ -11733,3 +11733,52 @@ def test_removed_card_takes_its_signals_with_it(tmp_path):
     assert not any(r.get("deal_id") == "g0748e794" for r in rows)
     deal_ids = {d["id"] for d in gone["deals"]}
     assert all(not r.get("deal_id") or r["deal_id"] in deal_ids for r in rows)
+
+
+def test_reread_marathon_findings_on_real_cards():
+    """Находки марафона вычитки 13 ноября 2026 — на настоящих карточках базы (значения
+    полей скопированы: карточки поправят, а граница правила должна остаться).
+    Блокирующие: сторона «менеджмент» и оценка эксперта в sum; остальные — подсказки."""
+    import accept_card as ac
+    import reread_queue as rq
+    # (а) g88dcf73e: покупатель «Местный менеджмент»
+    assert ac.party_placeholder({"buyer_name": "Местный менеджмент"}) == [("buyer_name", "Местный менеджмент")]
+    for ok in ("Менеджмент «Ростелекома» во главе с Иваном Петровым", "ООО «Менеджмент Групп»", "Сергей Иванов"):
+        assert not ac.party_placeholder({"buyer_name": ok}), ok
+    assert ac.party_placeholder({"seller": "руководство компании"})
+    # (б) g15b9d8e2: «Бурмистров оценивает покупку в 300–350 млн ₽», сумма «(по оценке)»
+    est = {"id": "g15b9d8e2", "type": "M&A", "sum": "300–350 млн ₽ (по оценке)",
+           "eco": {"sum": "300–350 млн ₽ (по оценке)", "val": "Конов цену не назвал. Гендиректор «INFOLine-Аналитики» "
+                   "Михаил Бурмистров оценивает покупку в 300–350 млн ₽."}}
+    assert ac.sum_is_expert_estimate(est)
+    assert "sum_is_expert_estimate" in {c for c, _t in ac.marathon_findings(est, {})}
+    # g0bbc9e9e: «по неофициальным данным могла составить» — неофициальная цена сделки, не блокирует
+    unoff = dict(est, sum="≈2 млрд ₽ (по оценке)", eco={"val": "Стороны цену не раскрывают; по неофициальным данным, "
+                                                         "она могла составить около 2 млрд ₽."})
+    assert not ac.sum_is_expert_estimate(unoff) and ac.sum_estimate_in_prose(unoff)
+    assert "sum_estimate_prose" in {c for c, _t in ac.hints(unoff)}
+    # g075e9738: «VK заплатила 2,5 млрд ₽; исходя из этой цены…» — цена, никаких находок
+    paid = {"type": "M&A", "sum": "2,5 млрд ₽", "eco": {"val": "VK заплатила 2,5 млрд ₽; исходя из этой цены вся "
+                                                         "компания стоит около 10 млрд ₽."}}
+    assert not ac.sum_estimate_in_prose(paid)
+    # (в) дата = день публикации первого источника, без date_basis
+    day = {"type": "M&A", "status": "Закрыта", "date": "2026-07-01", "src": [["РБК", "https://x.ru/2026/07/01/a"]]}
+    assert ac.date_is_article_day(day, records=[])
+    assert not ac.date_is_article_day(dict(day, date_basis="registry"), records=[])
+    assert not ac.date_is_article_day(dict(day, status="Обсуждается"), records=[])
+    # (г) g3cd0f85e: M&A, а в прозе «аукцион на повышение с начальной ценой 10 млрд ₽»
+    auc = {"type": "M&A", "eco": {"context": "Продажу на торгах объявил «Галс-Девелопмент»: аукцион на повышение с "
+                                             "начальной ценой 10 млрд ₽ прошел 8 августа 2025 года."}}
+    assert ac.auction_in_text(auc)
+    assert not ac.auction_in_text(dict(auc, type="Продажа с торгов"))
+    assert not ac.auction_in_text({"type": "M&A", "eco": {"context": "«Траст» продал пакет не через аукцион, а напрямую."}})
+    # (д) g74fd5cdb: закрыта в декабре 2025, в law.struct — «в начале июня 2026 года … перешли к «Ленте»»
+    late = {"status": "Закрыта", "date": "2025-12-10",
+            "law": {"struct": "ООО «Земун» получило 99% в декабре 2025 года. В начале июня 2026 года 100% «РБФ Ритейл» "
+                              "перешли к «Ленте».", "terms": "Покупатель обязан достроить завод до 2029 года."}}
+    got = ac.late_event_in_terms(late, today="2026-11-13")
+    assert [f for f, _s in got] == ["law.struct"] and "Ленте" in got[0][1]
+    # блокирующие — только две; подсказки отметку не держат
+    assert {"party_placeholder", "sum_is_expert_estimate"} <= set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    for hint in ("sum_estimate_prose", "date_is_article_day", "auction_in_text", "late_event_in_terms"):
+        assert hint not in rq.BLOCKING
