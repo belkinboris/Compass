@@ -348,6 +348,48 @@ REGISTRY += [
      "date": '2026-11-13'},
 ]
 
+# Приемка карточки g6fe89f91 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'gc267fcd7', "decision": "confirmed", "inn": '3528339799',
+     "reason": 'Приемка карточки g6fe89f91 (2026-11-13): юрлицо «Севергрупп инвестиции» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
+# Приемка карточки g6fe89f91 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'ge01599c3', "decision": "confirmed", "inn": '7721568730',
+     "reason": 'Приемка карточки g6fe89f91 (2026-11-13): юрлицо ООО «Автостэлс» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
+# Приемка карточки gbb89fc13 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g230d43db', "decision": "confirmed", "inn": '7735582816',
+     "reason": 'Приемка карточки gbb89fc13 (2026-11-13): юрлицо АО НПЦ «ЭЛВИС» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
+# Приемка карточки gbb89fc13 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g044fd178', "decision": "confirmed", "inn": '9714037468',
+     "reason": 'Приемка карточки gbb89fc13 (2026-11-13): юрлицо ООО «Элко» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
+# Приемка карточки g4d2a7b61 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'gcaa64a60', "decision": "confirmed", "inn": '7713466301',
+     "reason": 'Приемка карточки g4d2a7b61 (2026-11-13): юрлицо ООО «НордЭнергоГрупп» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
+# Приемка карточки g4d2a7b61 — 2026-11-13 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g703ff351', "decision": "confirmed", "inn": '5045067325',
+     "reason": 'Приемка карточки g4d2a7b61 (2026-11-13): юрлицо ООО «Каширская ГРЭС» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-13'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
