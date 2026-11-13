@@ -3951,3 +3951,109 @@
 {"id": "gac1a0c11", "field": "eco.rationale", "class": "invented_rationale", "was": "направления работы Sentra", "now": "—", "tag": "m215"}
 {"id": "gac1a0c11", "field": "eco.share", "class": "wrong_share", "was": "перечень всех участников", "now": "6% доли в ООО «Защищенные системы»", "tag": "m215"}
 {"id": "gac1a0c11", "field": "title", "class": "title_standard", "was": "Совладелец R-Vision купил долю в ИБ-компании Sentra", "now": "«Основание 2.718» купило 6% ИБ-стартапа Sentra", "tag": "m215"}
+{"id": "g134cf416", "field": "status", "class": "wrong_status", "was": "Обсуждается", "now": "Подписана (требование о выкупе направлено 4 сентября)", "tag": "m222"}
+{"id": "g134cf416", "field": "date", "class": "wrong_date", "was": "2026-09-07 (совет директоров)", "now": "2026-09-04 (требование о выкупе)", "tag": "m222"}
+{"id": "g134cf416", "field": "seller", "class": "wrong_seller", "was": "пусто", "now": "Миноритарные акционеры ПИК", "tag": "m222"}
+{"id": "g134cf416", "field": "eco.share", "class": "wrong_share", "was": "описание сделки и сроков", "now": "До 2% акций ПАО «ПИК-специализированный застройщик»", "tag": "m222"}
+{"id": "g134cf416", "field": "law.appr", "class": "unsupported_claim", "was": "оферта направлялась Банку России в феврале 2026", "now": "предписание ЦБ по цене апрельской оферты", "tag": "m222"}
+{"id": "g134cf416", "field": "title", "class": "title_standard", "was": "«Недвижимые активы» выкупает оставшиеся акции ПИК при делистинге с Мосбиржи", "now": "«Недвижимые активы» покупает оставшиеся акции ПИК", "tag": "m222"}
+{"id": "gb98fcce5", "field": "eco.share", "class": "wrong_share", "was": "Акции … перешли в доход государства (100% предприятия)", "now": "100% акций АО «АМЗ «Вентпром»»", "tag": "m222"}
+{"id": "gb98fcce5", "field": "law.appr", "class": "version_as_fact", "was": "повод иска — фактом со слов телеграм-канала", "now": "по неофициальным данным", "tag": "m222"}
+{"id": "gb98fcce5", "field": "eco.context", "class": "language", "was": "Сам завод заявил", "now": "«Вентпром» заявил", "tag": "m222"}
+{"id": "g7a96dda2", "field": "law.struct", "class": "wrong_share", "was": "у Елизарова 39%, семь миноритариев 10% (с Лукьянченко)", "now": "по ЕГРЮЛ с 11 сентября у Елизарова 41%, у шести миноритариев 8%", "tag": "m222"}
+{"id": "g7a96dda2", "field": "eco.val", "class": "version_as_fact", "was": "Эксперты — 300–400 млн руб.", "now": "оценка Алексея Бойко (RUSMicro)", "tag": "m222"}
+{"id": "g7a96dda2", "field": "eco.rationale", "class": "invented_rationale", "was": "Покупатель хочет…", "now": "цель назвали в Malt System", "tag": "m222"}
+{"id": "g7a96dda2", "field": "eco.share", "class": "wrong_share", "was": "Выкуплена у основателя…", "now": "51% доли в ООО «Мальт Систем»", "tag": "m222"}
+{"id": "g7a96dda2", "field": "asset", "class": "wrong_target", "was": "51% ООО «Мальт Систем»", "now": "ООО «Мальт Систем»", "tag": "m222"}
+{"id": "g7a96dda2", "field": "title", "class": "title_standard", "was": "«Трамплин Холдинг» приобрел 51% разработчика процессоров Malt System", "now": "«Трамплин Холдинг» купил 51% Malt System", "tag": "m222"}
+{"id": "g7c536b72", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m222"}
+{"id": "g7c536b72", "field": "src", "class": "source_not_about", "was": "4 заметки РИА о других усадьбах", "now": "сняты", "tag": "m222"}
+{"id": "g7c536b72", "field": "asset", "class": "wrong_target", "was": "промышленно-усадебный комплекс", "now": "Промышленно-усадебный комплекс Баташовых в поселке Гусь-Железный", "tag": "m222"}
+{"id": "g7c536b72", "field": "title", "class": "title_standard", "was": "«Дом.РФ» продает старинную усадьбу в Рязанской области", "now": "«Дом.РФ» выставил на торги усадьбу Баташовых в Рязанской области", "tag": "m222"}
+{"id": "gd85b3ba8", "field": "eco.rationale", "class": "invented_rationale", "was": "история здания вместо мотива", "now": "— (история — в контексте)", "tag": "m222"}
+{"id": "gd85b3ba8", "field": "eco.val", "class": "other", "was": "описание лота", "now": "Стартовая цена лота — 88,7 млн ₽", "tag": "m222"}
+{"id": "gd85b3ba8", "field": "title", "class": "title_standard", "was": "«Дом.РФ» продает гостиницу «Мадрид» в Екатеринбурге", "now": "«Дом.РФ» выставил на торги гостиницу «Мадрид» в Екатеринбурге", "tag": "m222"}
+{"id": "g88dfc8c8", "field": "type", "class": "wrong_type", "was": "M&A", "now": "Продажа с торгов", "tag": "m222"}
+{"id": "g88dfc8c8", "field": "eco.rationale", "class": "invented_rationale", "was": "состояние здания (дословно из АиФ)", "now": "—", "tag": "m222"}
+{"id": "g88dfc8c8", "field": "title", "class": "title_standard", "was": "«Дом.РФ» продает старинную усадьбу в Оренбурге", "now": "«Дом.РФ» выставил на торги усадьбу Веденской в Оренбурге", "tag": "m222"}
+{"id": "ce6b8c447", "field": "law.appr", "class": "unsupported_claim", "was": "указ 16 июня 2023 года", "now": "указ № 520 от 16 июля 2023 года", "tag": "m213"}
+{"id": "ce6b8c447", "field": "date", "class": "wrong_date", "was": "2023-11-08 (день статьи)", "now": "2023 (срыв — конец августа, дня нет)", "tag": "m213"}
+{"id": "ce6b8c447", "field": "eco.rationale", "class": "invented_rationale", "was": "пересказ цены и покупателя", "now": "уход Carlsberg из России", "tag": "m213"}
+{"id": "ce6b8c447", "field": "src", "class": "aggregator_source", "was": "Forbes (пересказ Интерфакса) первым", "now": "Интерфакс 929541 первым", "tag": "m213"}
+{"id": "ce6b8c447", "field": "title", "class": "title_standard", "was": "Carlsberg требует у России компенсацию…", "now": "Carlsberg не смог продать «Балтику» «Арнесту»…", "tag": "m213"}
+{"id": "cd51336b7", "field": "buyer_name", "class": "party_text_no_profile", "was": "не назван", "now": "АО «Компания «Бизнесглобус»»", "tag": "m213"}
+{"id": "cd51336b7", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Selmareco Limited", "tag": "m213"}
+{"id": "cd51336b7", "field": "eco.share", "class": "wrong_share", "was": "нет", "now": "85% акций ОАО «УГМК»", "tag": "m213"}
+{"id": "cd51336b7", "field": "title", "class": "title_standard", "was": "В отчете УГМК бенефициаром…", "now": "Selmareco Limited передала контрольный пакет УГМК «Бизнесглобусу»", "tag": "m213"}
+{"id": "cd51336b7", "field": "eco.context", "class": "unsupported_claim", "was": "Козицын вернулся 3 июля 2025 года", "now": "снято", "tag": "m213"}
+{"id": "cd51336b7", "field": "law.struct", "class": "language", "was": "«по данным Коммерсанта»", "now": "по неофициальным данным", "tag": "m213"}
+{"id": "c5e3a4754", "field": "date", "class": "wrong_date", "was": "2023-03-23 (день статьи)", "now": "2023", "tag": "m213"}
+{"id": "c5e3a4754", "field": "title", "class": "title_standard", "was": "Полюс приобретает…", "now": "«Полюс» может купить…", "tag": "m213"}
+{"id": "c5e3a4754", "field": "eco.rationale", "class": "invented_rationale", "was": "описание ГОКа", "now": "мотив по оценке Максима Шапошникова", "tag": "m213"}
+{"id": "c5e3a4754", "field": "eco.context", "class": "unsupported_claim", "was": "«косвенный сигнал» о собственной фабрике", "now": "снято", "tag": "m213"}
+{"id": "c5e3a4754", "field": "asset", "class": "wrong_target", "was": "не назван", "now": "месторождение Голец Высочайший", "tag": "m213"}
+{"id": "c220a77df", "field": "sum", "class": "sum_meaning", "was": "370 млн ₽ (по оценке) — оценка продавца", "now": "Не раскрыта; оценка в eco.val", "tag": "m213"}
+{"id": "c220a77df", "field": "eco.target_fin", "class": "other", "was": "выручка ООО «Марс» (продавец)", "now": "—; в eco.fin_context", "tag": "m213"}
+{"id": "c220a77df", "field": "eco.rationale", "class": "invented_rationale", "was": "предположение без автора", "now": "слова Mars и Артема Моторного", "tag": "m213"}
+{"id": "c220a77df", "field": "date", "class": "wrong_date", "was": "2023-01-18 (день статьи)", "now": "2023", "tag": "m213"}
+{"id": "c220a77df", "field": "title", "class": "title_standard", "was": "Mars продает завод соусов…", "now": "Завод соусов Mars в Луховицах выставлен на продажу", "tag": "m213"}
+{"id": "c220a77df", "field": "status", "class": "wrong_status", "was": "не указан", "now": "Обсуждается", "tag": "m213"}
+{"id": "gbcc32684", "field": "seller", "class": "wrong_seller", "was": "Татьяна Куценко и участники ООО «Фаст Фешн»", "now": "Денис Сказов (вышел по ЕГРЮЛ 05.05.2026)", "tag": "m213"}
+{"id": "gbcc32684", "field": "date", "class": "wrong_date", "was": "2026-04-27 (объявление)", "now": "2026-05-05 (ЕГРЮЛ)", "tag": "m213"}
+{"id": "gbcc32684", "field": "eco.share", "class": "wrong_share", "was": "описание сделки", "now": "90% доли в ООО «Фаст Фешн»", "tag": "m213"}
+{"id": "gbcc32684", "field": "law.struct", "class": "other", "was": "работа юристов", "now": "устройство долей", "tag": "m213"}
+{"id": "gbcc32684", "field": "ind", "class": "wrong_industry", "was": "E-commerce", "now": "Ритейл (бренд одежды с магазинами)", "tag": "m213"}
+{"id": "gbcc32684", "field": "title", "class": "title_standard", "was": "Lamoda приобрела 90% бренда Selfmade (ООО «Фаст Фешн»)", "now": "Lamoda купил 90% Selfmade", "tag": "m213"}
+{"id": "g1f302e4f", "field": "type", "class": "wrong_type", "was": "IPO", "now": "Инвестиция (допэмиссия за деньги в компанию)", "tag": "m213"}
+{"id": "g1f302e4f", "field": "date", "class": "wrong_date", "was": "2026-02-18 (день статьи)", "now": "2026-02-16 (досрочное закрытие сбора)", "tag": "m213"}
+{"id": "g1f302e4f", "field": "src", "class": "other", "was": "подпись «РБК» у статьи Ведомостей", "now": "Ведомости", "tag": "m213"}
+{"id": "g1f302e4f", "field": "law.terms", "class": "verbatim", "was": "22 слова подряд из CNews", "now": "пересказ", "tag": "m213"}
+{"id": "g1f302e4f", "field": "title", "class": "title_standard", "was": "Steplife разместила 9,1%…", "now": "Инвесторы pre-IPO купили 9,1% Steplife", "tag": "m213"}
+{"id": "g0551fc60", "field": "type", "class": "wrong_type", "was": "M&A (17,58% без контроля)", "now": "Инвестиция", "tag": "m217"}
+{"id": "g0551fc60", "field": "eco.rationale", "class": "unsupported_claim", "was": "«взаимовыгодное сотрудничество» в словах Ержана Мусина", "now": "слова об опыте и целях группы — Анны Акиньшиной", "tag": "m217"}
+{"id": "g0551fc60", "field": "eco.share", "class": "wrong_share", "was": "«Фонд «Горизонт» продал пакет из 17,58%…»", "now": "17,58% акций ПАО «ГК «Самолет»»", "tag": "m217"}
+{"id": "g0551fc60", "field": "title", "class": "title_standard", "was": "Структура Fonte Capital из Казахстана купила 18% акций «Самолета»", "now": "Fonte Capital купил 17,58% акций «Самолета»", "tag": "m217"}
+{"id": "gda6baa02", "field": "date", "class": "wrong_date", "was": "2026-08-10 (пресс-релиз)", "now": "2026-08-07 (ЕГРЮЛ)", "tag": "m217"}
+{"id": "gda6baa02", "field": "eco.context", "class": "unsupported_claim", "was": "«по оценке «Русского венчура» — выход фонда МТС», раунд 2016 года, выход FinSight в 2024", "now": "сняты, раунды — по TAdviser и ComNews", "tag": "m217"}
+{"id": "gda6baa02", "field": "title", "class": "title_standard", "was": "IBS приобрела разработчика ИТ-решений на базе ИИ Rubbles", "now": "IBS купил Rubbles", "tag": "m217"}
+{"id": "gda6baa02", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Раблз»", "tag": "m217"}
+{"id": "g8e30b9a8", "field": "eco.context", "class": "foreign_fact", "was": "атаки беспилотников на Уфимский НПЗ", "now": "снято", "tag": "m217"}
+{"id": "g8e30b9a8", "field": "eco.rationale", "class": "language", "was": "Глава Башкирии Хабиров", "now": "Глава Башкирии Радий Хабиров", "tag": "m217"}
+{"id": "g8e30b9a8", "field": "title", "class": "title_standard", "was": "Башкирия продаст «Роснефти» оставшуюся часть своего пакета акций «Башнефти»", "now": "«Роснефть» может купить у Башкирии остаток ее пакета в «Башнефти»", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "eco.rationale", "class": "other", "was": "мысль о вертикальной интеграции приписана Вадиму Аникину", "now": "Андрей Московский («Алкопро»)", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "law.appr", "class": "unsupported_claim", "was": "план приватизации на 2026–2028 годы", "now": "—", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "eco.context", "class": "unsupported_claim", "was": "гендиректор Андрей Дронов, единственный владелец «Бизнес-Альянс» (Rusprofile)", "now": "владельцы по СПАРК из «Ведомостей»", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "extra", "class": "other", "was": "снимок до торгов в настоящем времени («продает», «заявки до 15 июня»)", "now": "прошедшим временем, без повтора", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "asset", "class": "wrong_target", "was": "производитель спирта «Амбер Талвис»", "now": "АО «Амбер Талвис»", "tag": "m217"}
+{"id": "g63c7d1bb", "field": "title", "class": "title_standard", "was": "«Росспиртпром» купил производителя спирта «Амбер Талвис» за 1,94 млрд рублей", "now": "«Росспиртпром» купил на торгах «Амбер Талвис» за 1,94 млрд ₽", "tag": "m217"}
+{"id": "gcaa03820", "field": "sum", "class": "wrong_sum", "was": "9,9 млрд ₽", "now": "10 млрд ₽ (9 999 613 000 ₽)", "tag": "m217"}
+{"id": "gcaa03820", "field": "date", "class": "wrong_date", "was": "2026-08-12 (номер газеты)", "now": "2026-08-11 (сообщение банка)", "tag": "m217"}
+{"id": "gcaa03820", "field": "eco.target_fin", "class": "unsupported_claim", "was": "«до 15 октября», «сильно отстают от плана»", "now": "до середины октября; без оценки", "tag": "m217"}
+{"id": "gcaa03820", "field": "eco.val", "class": "verbatim", "was": "почти дословно мнение Владимира Беспалова", "now": "пересказ", "tag": "m217"}
+{"id": "gcaa03820", "field": "src", "class": "aggregator_source", "was": "первым — Telegram «Русский венчур»", "now": "первым — «Коммерсантъ»", "tag": "m217"}
+{"id": "gcaa03820", "field": "title", "class": "title_standard", "was": "ПСБ купил 16,9% акций российского производителя электромобилей «Атом»", "now": "ПСБ купил 16,98% акций производителя электромобилей «Атом»", "tag": "m217"}
+{"id": "ga525c46b", "field": "sum", "class": "sum_meaning", "was": "3 млрд ₽ (прикидка по оценкам экспертов)", "now": "Не раскрыта", "tag": "m217"}
+{"id": "ga525c46b", "field": "eco.context", "class": "invented_rationale", "was": "«долгие поиски покупателя связаны с корпоративным конфликтом»", "now": "снято", "tag": "m217"}
+{"id": "ga525c46b", "field": "title", "class": "title_standard", "was": "«Союз Маринс Групп» выкупила гостиницу «Амбассадор» в Санкт-Петербурге", "now": "«Союз Маринс Групп» купил гостиницу «Амбассадор» в Петербурге", "tag": "m217"}
+{"id": "gd1771616", "field": "sum", "class": "sum_meaning", "was": "550–650 млн ₽ (оценка Сергея Дуванова)", "now": "Не раскрыта", "tag": "m217"}
+{"id": "gd1771616", "field": "date", "class": "wrong_date", "was": "2026-08-10 (день статьи)", "now": "2026", "tag": "m217"}
+{"id": "gd1771616", "field": "title", "class": "title_standard", "was": "Крупный производственно-складской комплекс в Ленобласти сменил владельца", "now": "«Тандем-Истейт» купил производственно-складской комплекс в Заневке", "tag": "m217"}
+{"id": "gebead2e8", "field": "date", "class": "wrong_date", "was": "2026-08-18", "now": "2026-08-20 (ЕГРЮЛ)", "tag": "m217"}
+{"id": "gebead2e8", "field": "eco.rationale", "class": "verbatim", "was": "34 слова подряд из пресс-релиза", "now": "пересказ и прямая речь Дмитрия Сергиенкова", "tag": "m217"}
+{"id": "gebead2e8", "field": "eco.context", "class": "unsupported_claim", "was": "база hh.ru: 80 млн резюме, 600 тыс. компаний", "now": "о Happy Job со слов Алексея Клочкова", "tag": "m217"}
+{"id": "gebead2e8", "field": "eco.target_fin", "class": "other", "was": "учредители и ОКВЭД в «Показателях»", "now": "только выручка и прибыль", "tag": "m217"}
+{"id": "gebead2e8", "field": "title", "class": "title_standard", "was": "HeadHunter приобрел 51% компании Happy Job", "now": "HeadHunter купил 51% Happy Job", "tag": "m217"}
+{"id": "g8b03762d", "field": "eco.context", "class": "verbatim", "was": "список инвесторов и описание продукта почти дословно из «Русского венчура»", "now": "пересказ", "tag": "m217"}
+{"id": "g8b03762d", "field": "eco.target_fin", "class": "other", "was": "основатель и регистрация юрлица в «Показателях»", "now": "только выручка", "tag": "m217"}
+{"id": "g8b03762d", "field": "title", "class": "title_standard", "was": "ИИ-платформа Wegosty привлекла 23 млн ₽ от бизнес-ангелов", "now": "Бизнес-ангелы купили 20,57% Wegosty", "tag": "m217"}
+{"id": "g9076dfc3", "field": "sum", "class": "sum_meaning", "was": "9,5 млн ₽ (пересчет оценки Rusprofile на 51%)", "now": "Не раскрыта", "tag": "m217"}
+{"id": "g9076dfc3", "field": "date", "class": "wrong_date", "was": "2026-08-21 (день статьи)", "now": "2026-08-18 (СПАРК)", "tag": "m217"}
+{"id": "g9076dfc3", "field": "asset", "class": "wrong_target", "was": "51% ООО «Морская миля»", "now": "ООО «Морская миля»", "tag": "m217"}
+{"id": "g9076dfc3", "field": "eco.rationale", "class": "invented_rationale", "was": "«покупка может стать частью нового направления» без автора", "now": "мотив со слов Ильи Березнюка", "tag": "m217"}
+{"id": "g9076dfc3", "field": "title", "class": "title_standard", "was": "Русская рыбная компания купила перерабатывающий цех в Подмосковье", "now": "Русская рыбная компания купила 51% «Морской мили»", "tag": "m217"}
+{"id": "g3f0400db", "field": "eco.share", "class": "foreign_fact", "was": "увеличение капитала 16 октября и вход Юрия Макарова как доля сделки", "now": "—, событие — в контексте как более позднее", "tag": "m217"}
+{"id": "g3f0400db", "field": "eco.context", "class": "foreign_fact", "was": "другая инвестиция Рензяева (ООО «Атом»), почти дословно", "now": "о «Кодмастере» и смене участников", "tag": "m217"}
+{"id": "g3f0400db", "field": "eco.val", "class": "language", "was": "«Сам Рензяев»", "now": "Константин Рензяев", "tag": "m217"}
+{"id": "g3f0400db", "field": "eco.rationale", "class": "other", "was": "—", "now": "мотив со слов CorpSoft24", "tag": "m217"}
+{"id": "g6bf41023", "field": "date", "class": "wrong_date", "was": "2026-08-24 (день забора)", "now": "2026", "tag": "m217"}
+{"id": "g6bf41023", "field": "eco.context", "class": "verbatim", "was": "абзац Frank Media дословно; «мера проблему не решила» без источника", "now": "пересказ, вывод снят", "tag": "m217"}

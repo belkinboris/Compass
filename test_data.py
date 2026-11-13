@@ -116,7 +116,7 @@ def test_one_company_holds_one_role_in_a_deal(deals):
 # заполнить уверенно (источник неоднозначен) — разобрать и вычеркнуть.
 # Список только сокращается: новая карточка без сторон сюда не дописывается,
 # ее чинят. См. pipeline/archive/2026-10/fill_missing_parties_2026_10_12.py.
-MA_PARTIES_BACKLOG = {"g36386bcf", "cd51336b7"}
+MA_PARTIES_BACKLOG = {"g36386bcf"}
 
 
 def test_ma_deal_names_a_party(deals):
