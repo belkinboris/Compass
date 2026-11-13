@@ -440,7 +440,7 @@
     ]
    },
    "buyer": "g729ef6c5",
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-13T12:39:50+00:00",
    "seller": "Мара Вайсман и Александр Каневский",
    "reviewed": "2026-11-13",
    "proofread_absorbed": {
@@ -461,7 +461,9 @@
    "accepted": "2026-11-13",
    "accepted_hash": "e7f5188a8bb4.43b910",
    "second_read": "2026-11-13",
-   "second_read_hash": "e7f5188a8bb4.43b910"
+   "second_read_hash": "e7f5188a8bb4.43b910",
+   "draft_sent": true,
+   "shown_hash": "e7f5188a8bb4.43b910"
   },
   {
    "id": "g627ecd3f",
