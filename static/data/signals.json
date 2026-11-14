@@ -15,6 +15,20 @@
    "strength": "strong"
   },
   {
+   "id": "see5538c33",
+   "company_id": "g53772c90",
+   "date": "2026-11-12",
+   "kind": "for_sale",
+   "summary": "ООО «ВБ Банк» (WB Банк) — обсуждается продажа компании или доли; возможный покупатель — ВТБ",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20261112/vtb-875174455.html"
+   ],
+   "origin": "card",
+   "deal_id": "g63fca144",
+   "strength": "strong"
+  },
+  {
    "id": "sd4f33c5ba",
    "company_id": "g5ff0a3de",
    "date": "2026-11-12",
@@ -26,6 +40,34 @@
    ],
    "origin": "news",
    "strength": "strong"
+  },
+  {
+   "id": "s45f12c5fd",
+   "company_id": "g549ab474",
+   "date": "2026-11-12",
+   "kind": "sell",
+   "summary": "ООО «РВБ» (Wildberries & Russ) — обсуждается продажа: ООО «ВБ Банк» (WB Банк)",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20261112/vtb-875174455.html"
+   ],
+   "origin": "card",
+   "deal_id": "g63fca144",
+   "strength": "strong"
+  },
+  {
+   "id": "s2f786b98e",
+   "company_id": "gcafc31dc",
+   "date": "2026-11-12",
+   "kind": "buy",
+   "summary": "ВТБ — обсуждается покупка: ООО «ВБ Банк» (WB Банк)",
+   "source": [
+    "ПРАЙМ",
+    "https://1prime.ru/20261112/vtb-875174455.html"
+   ],
+   "origin": "card",
+   "deal_id": "g63fca144",
+   "strength": "normal"
   },
   {
    "id": "s011f3877d",
@@ -51,6 +93,20 @@
     "https://rb.ru/news/pochta-rossii-smozhet-prodavat-rossijskoe-vino-onlajn-gd-odobrila-pilotnyj-proekt-v-i-chtenii/"
    ],
    "origin": "news",
+   "strength": "strong"
+  },
+  {
+   "id": "s4c65606fa",
+   "company_id": "g4221fbf9",
+   "date": "2026-11-11",
+   "kind": "for_sale",
+   "summary": "Горнолыжный комплекс «Миньяр» — обсуждается продажа компании или доли",
+   "source": [
+    "URA.RU",
+    "https://ura.news/news/1053143029"
+   ],
+   "origin": "card",
+   "deal_id": "gbdd5b031",
    "strength": "strong"
   },
   {
