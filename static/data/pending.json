@@ -80,7 +80,7 @@
     ]
    },
    "seller_id": "g0d41f06b",
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-14T13:17:49+00:00",
    "reviewed": "2026-11-14",
    "date_basis": "announcement",
    "proofread_absorbed": {
@@ -102,7 +102,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "2461ee78a722.0524ed",
    "second_read": "2026-11-14",
-   "second_read_hash": "2461ee78a722.0524ed"
+   "second_read_hash": "2461ee78a722.0524ed",
+   "draft_sent": true,
+   "shown_hash": "2461ee78a722.0524ed"
   },
   {
    "id": "gacef0a9d",
