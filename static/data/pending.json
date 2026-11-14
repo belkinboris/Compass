@@ -1579,7 +1579,7 @@
     "Продажа с торгов",
     "Национализация / иск Генпрокуратуры"
    ],
-   "pending_since": "2026-11-13T09:00:37+00:00",
+   "pending_since": "2026-11-14T06:02:43+00:00",
    "from_raw": {
     "draft_id": "d78178449",
     "title": "В Перми выставлена на продажу территория целого завода: за участок будут биться застройщики"
@@ -1615,7 +1615,10 @@
    "accepted": "2026-11-14",
    "accepted_hash": "fa0737f1ecba.9489bf",
    "second_read": "2026-11-14",
-   "second_read_hash": "fa0737f1ecba.9489bf"
+   "second_read_hash": "fa0737f1ecba.9489bf",
+   "draft_sent": true,
+   "shown_hash": "fa0737f1ecba.9489bf",
+   "post_draft_sent": true
   },
   {
    "id": "g7ade16ba",
