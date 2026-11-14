@@ -126,6 +126,84 @@ CARDS = [
      'set': {'kind': 'acquisition', 'date_basis': 'announcement'},
      'finadv': 'Aspring Capital — эксклюзивный финансовый советник «Улыбки радуги»',
      'adv': [fin_adv('продавца («Улыбка радуги»)', 'Aspring Capital', ASPRING)]},
+    # 3. «Р-Инвестиции» / Sloplast.
+    #   Коммерсантъ, 17.06.2024: «Холдинг «Р-Инвестиции» выкупил производителя HPL-пластиков… Sloplast,
+    #   сообщил “Ъ” финансовый консультант продавца Advance Capital. Стоимость сделки не раскрывается…
+    #   По данным СПАРК, подконтрольное АО «Р-Инвестиции» ООО «Перспектива» 23 мая получило 100% в ООО
+    #   «Завод слоистых пластиков» (ЗСП), ООО «Дизайнинвест» и ООО «Инновационные технологии». Прежде ЗСП
+    #   владел Дмитрий Зайцев, следует из СПАРК».
+    #   Пресс-релиз Advance Capital, 16.06.2024: «эксклюзивного финансового консультанта продавца,
+    #   юридическим консультантом выступила юридическая компания Алруд» (чьим — не сказано).
+    {'key': 'r-invest-sloplast',
+     'match': ('sloplast',),
+     'draft': {
+         'date': '2024-05-23',
+         'title': '«Р-Инвестиции» купили производителя пластика Sloplast',
+         'ind': 'Химия и удобрения', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Коммерсантъ', 'https://www.kommersant.ru/doc/6772900'],
+                 ['Advance Capital', ADV_PR % 419]],
+         'buyer_name': '«Р-Инвестиции»',
+         'asset': 'Sloplast',
+         'seller': 'Дмитрий Зайцев',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition', 'date_basis': 'registry'},
+     'finadv': 'Advance Capital — эксклюзивный финансовый консультант продавца',
+     'adv': [fin_adv('продавца (Дмитрий Зайцев)', 'Advance Capital', ADV_PR % 419),
+             ['Юридический консультант (сторона не названа)', 'АЛРУД',
+              'По пресс-релизу Advance Capital: «юридическим консультантом выступила юридическая компания Алруд». '
+              'Источник: ' + ADV_PR % 419]]},
+    # 5. Milestone Capital / Kodix Auto (UDP Auto).
+    #   Denuo, 01.03.2023: «Denuo выступила консультантом российского инвестиционного фонда Milestone
+    #   Capital в связи с приобретением мажоритарной доли Kodix Auto… проведен ребрендинг Kodix Auto,
+    #   новое наименование компании — UDP Auto».
+    #   Пресс-релиз Advance Capital, 07.02.2023: «об успешном привлечении стратегического инвестора в
+    #   компанию UDP Auto (ранее называвшуюся Kodix Auto)… Advance Capital выступил в роли эксклюзивного
+    #   финансового консультанта UDP Auto. Сумма сделки не раскрывается». Размер доли не назван; день
+    #   закрытия не назван — дата по объявлению (7 февраля 2023 года).
+    {'key': 'milestone-udp-auto',
+     'match': ('kodix',),
+     'draft': {
+         'date': '2023-02-07',
+         'title': 'Фонд Milestone Capital купил контрольную долю в Kodix Auto',
+         'ind': 'ИТ и интернет', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Advance Capital', ADV_PR % 407],
+                 ['Denuo', 'https://denuo.legal/ru/insights/releases/230301/'],
+                 ['Mergers.ru', 'https://mergers.ru/news/Kodix-Auto-menyaet-nazvanie-na-UDP-Auto-i-privlekaet-investicii-na-konsolidaciyu-IT-kompanij-avtootrasli-80638']],
+         'buyer_name': 'Milestone Capital',
+         'asset': 'UDP Auto (бывшая Kodix Auto)',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition', 'date_basis': 'announcement'},
+     'finadv': 'Advance Capital — эксклюзивный финансовый консультант UDP Auto',
+     'adv': [fin_adv('компании (UDP Auto)', 'Advance Capital', ADV_PR % 407),
+             ['Юридический консультант покупателя (Milestone Capital)', 'Denuo',
+              'Фирма сопровождала покупку: структурирование, документы, регуляторные разрешения, подписание и '
+              'закрытие. Источник: https://denuo.legal/ru/insights/releases/230301/']]},
+    # 8. «Альтаир Медиа» / «Пикабу».
+    #   vc.ru, 29.09.2022: «27 сентября 2022 года владельцем 100% ООО «Пикабу» стало АО «Альтаир Медиа»,
+    #   следует из данных «Контур.Фокуса»… Сумма сделки не называется».
+    #   CNews, 30.09.2022: «В 2018 г. Хрящев учредил ООО «Пикабу», 2020–2021 гг. выделил ключевым
+    #   сотрудникам… Павлу Санникову и… Всеволоду Кирову – доли в проекте, которые выросли к августу
+    #   2022 г. до 5% и 8,5 % соответственно».
+    #   advancecapital.ru/sdelki/: «Продажа медиа-портала Пикабу стратегическому инвестору… Финансовый
+    #   консультант продавца. Сентябрь 2022».
+    {'key': 'altair-pikabu',
+     'match': ('пикабу',),
+     'draft': {
+         'date': '2022-09-27',
+         'title': '«Альтаир Медиа» купила «Пикабу»',
+         'ind': 'Медиа', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['CNews', 'https://www.cnews.ru/news/top/2022-09-30_lider_novyh_lyudej_v_gosdume'],
+                 ['vc.ru', 'https://vc.ru/social/510915-kompaniya-vladelec-sportsru-kupila-pikabu'],
+                 ['Sostav', 'https://www.sostav.ru/publication/vladelets-sports-ru-kupil-pikabu-56781.html'],
+                 ['Коммерсантъ', 'https://www.kommersant.ru/doc/6196841'],
+                 ['Advance Capital', ADV_DEALS]],
+         'buyer_name': 'АО «Альтаир Медиа»',
+         'asset': '«Пикабу»',
+         'seller': 'Максим Хрящев, Всеволод Киров и Павел Санников',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition', 'date_basis': 'registry'},
+     'finadv': 'Advance Capital — финансовый консультант продавца',
+     'adv': [fin_adv('продавца (владельцы «Пикабу»)', 'Advance Capital', ADV_DEALS)]},
 ]
 
 
