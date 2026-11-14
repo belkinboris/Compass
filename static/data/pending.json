@@ -320,7 +320,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-14T12:47:49+00:00",
    "seller": "Александр Раппопорт (ООО «Рэвард Инвест»)",
    "proofread_absorbed": {
     "eco.share": [],
@@ -355,7 +355,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "a682a70725fe.a6b82e",
    "second_read": "2026-11-14",
-   "second_read_hash": "a682a70725fe.a6b82e"
+   "second_read_hash": "a682a70725fe.a6b82e",
+   "draft_sent": true,
+   "shown_hash": "a682a70725fe.a6b82e"
   },
   {
    "id": "gde2618e8",
