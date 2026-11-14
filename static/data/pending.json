@@ -1391,7 +1391,10 @@
    "accepted": "2026-11-14",
    "accepted_hash": "17733050a0de.57d6ee",
    "second_read": "2026-11-14",
-   "second_read_hash": "e9c7681f81d7.57d6ee"
+   "second_read_hash": "e9c7681f81d7.57d6ee",
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "<b>Горнолыжный комплекс «Миньяр» в Челябинской области выставлен на продажу за 120 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> Горнолыжный комплекс «Миньяр»\n<b>Сумма:</b> 120 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Гостиницы и туризм\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053143029\">URA.RU</a>\n\n#недвижимость #гостиницы #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbdd5b031\">карточке сделки</a>\n"
   },
   {
    "id": "ge42606a4",
@@ -1528,7 +1531,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-12T15:56:33+00:00",
+   "pending_since": "2026-11-14T06:47:58+00:00",
    "reviewed": "2026-11-14",
    "proofread_absorbed": {
     "law.struct": [
@@ -1561,7 +1564,10 @@
    "accepted": "2026-11-14",
    "accepted_hash": "1dfe74044c91.a3cb8b",
    "second_read": "2026-11-14",
-   "second_read_hash": "1dfe74044c91.a3cb8b"
+   "second_read_hash": "1dfe74044c91.a3cb8b",
+   "draft_sent": true,
+   "shown_hash": "1dfe74044c91.a3cb8b",
+   "post_draft_sent": true
   },
   {
    "id": "g63fca144",
