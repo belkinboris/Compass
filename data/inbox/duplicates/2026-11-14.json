@@ -1,0 +1,36 @@
+{
+ "made": "2026-11-14",
+ "items": [
+  {
+   "key": "https://realty.ria.ru/20261113/dmitrov-2131316990.html::gf5bdb983",
+   "candidate_id": "gf5bdb983",
+   "reason": "общие редкие слова: застро, площад",
+   "draft": {
+    "draft_id": "d29207437",
+    "title": "«Дом.РФ» продает площадку под застройку в центре подмосковного Дмитрова",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "площадка под застройку в центре подмосковного Дмитрова",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "площадка под застройку в центре подмосковного Дмитрова",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-14"
+  }
+ ]
+}
