@@ -887,8 +887,7 @@ def mark_milestone(card, kind):
     event = next((e for e in events if e.get('kind') == kind), None)
     if event is None:
         return None
-    if not event.get('id'):
-        event['id'] = '%s-%s' % (card['id'], kind)
+    event['id'] = '%s-%s' % (card['id'], kind)
     return event
 
 

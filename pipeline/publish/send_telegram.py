@@ -652,7 +652,10 @@ def milestone_candidates(deals, stage_posts, post_state=None):
             if not (isinstance(event, dict) and event.get('newsworthy') and event.get('headline')
                     and event.get('id') and event.get('kind') in milestones.POSTWORTHY_MILESTONE_KINDS):
                 continue
-            if event['id'] in stage_posts:
+            # Отметка поста пишется и по номеру события, и по «<сделка>-<вид>» (так
+            # ее ставит сайт). 14 ноября 2026: у «Арнеста» событие носило номер
+            # «closed-2026-11-12», пост вышел, а этап два дня числился неодобренным.
+            if event['id'] in stage_posts or '%s-%s' % (deal.get('id'), event.get('kind')) in stage_posts:
                 continue
             if first_post_already_told(event, (post_state or {}).get(deal.get('id'))):
                 continue
