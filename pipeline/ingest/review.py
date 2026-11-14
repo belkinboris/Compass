@@ -504,6 +504,7 @@ def party_name_key(name):
 
 def already_applied(fix, card, companies=None):
     """Правка уже в базе: прогон идемпотентен."""
+    if fix['field'] == 'stake_acquired': fix['new'] = __import__('deal_multiples').stake_number(fix['new'])
     if fix['field'] == 'src':
         from pipeline.source_names import is_undesirable
         return (has_source(card, fix['new'][1]) or is_undesirable(fix['new'][1])

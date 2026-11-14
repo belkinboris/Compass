@@ -637,3 +637,8 @@ UTC) к моменту прогона теста уже пересидела т�
 Симптом: приток 40 минут ждал `publication_busy.py --wait 40`, публикация при этом отвечала «Решений нет».
 Причина: решение о карточке, выкинутой из очереди как дубль, сайту не подтверждается никогда (результата в базе нет), а `publication_busy` считал ждущим любое свежее решение; вдобавок `approve.consume` слал запрос один раз и не читал ответ, а публикация писала «Сайту подтверждено».
 Исправлено: `publication_busy.holding` (держит только решение о живой карточке без результата в main), `approve.consume` — пять попыток и честный код; тест `test_other_routines_wait_with_push_only_for_fresh_human_decisions`.
+
+### Доля текстом в очереди остановила выпуск одобренных карточек (14 ноября 2026)
+Симптом: `ship_decisions.py --write` — СТОП на `test_explicit_date_basis_and_stake_acquired_are_valid`: `stake_acquired` «29.99», «9.72», «5» у трех карточек.
+Причина: таблица правок несла долю строкой, `review.py` проверял ее как число, а записывал как есть; приемка тип не смотрела.
+Исправлено: `deal_multiples.stake_number` (запись числом), находка приемки `stake_acquired_invalid`, тест `test_stake_acquired_is_stored_as_a_number_and_text_is_caught`; три карточки — `pipeline/archive/2026-11/stake_acquired_numbers_2026_11_14.py`.

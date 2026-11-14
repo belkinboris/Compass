@@ -12084,3 +12084,17 @@ def test_party_name_check_spares_camelcase_brand():
     assert review.name_is_nominative("НордЭнергоГрупп") is None
     assert review.name_is_nominative("Сетново Групп") is None
     assert review.name_is_nominative("Автодома")
+
+
+def test_stake_acquired_is_stored_as_a_number_and_text_is_caught():
+    """14 ноября 2026: доля из таблицы правок легла в очередь текстом («29.99»),
+    приемка ее пропустила, а тест базы остановил выпуск одобренных карточек."""
+    import deal_multiples
+    import accept_card
+    assert deal_multiples.stake_number('29.99') == 29.99 and deal_multiples.stake_number('5') == 5
+    assert isinstance(deal_multiples.stake_number('5'), int) and deal_multiples.stake_number('9,72') == 9.72
+    base = {'deals': [], 'companies': {}}
+    card = {'id': 'x', 'title': 'А купил 5% Б', 'stake_acquired': '5'}
+    assert 'stake_acquired_invalid' in [k for k, _ in accept_card.findings(card, base)]
+    card['stake_acquired'] = 5
+    assert 'stake_acquired_invalid' not in [k for k, _ in accept_card.findings(card, base)]
