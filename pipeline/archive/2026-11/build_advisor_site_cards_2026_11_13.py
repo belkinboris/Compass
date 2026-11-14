@@ -204,6 +204,55 @@ CARDS = [
      'set': {'kind': 'acquisition', 'date_basis': 'registry'},
      'finadv': 'Advance Capital — финансовый консультант продавца',
      'adv': [fin_adv('продавца (владельцы «Пикабу»)', 'Advance Capital', ADV_DEALS)]},
+    # 15. «Медисорб» / «Кинетик-фарм» (добавка к E17: сайт Althaus Group).
+    #   Коммерсантъ (Прикамье), 26.05.2025: «Структура… АО «Медисорб групп» получила 80% долей в
+    #   уставном капитале… «Кинетик-фарм». Согласно сервису «СПАРК-Интерфакс», переход долей…
+    #   состоялся 16 мая… Ранее компанию контролировали господин Шоболов (80%) и госпожа Балаянц
+    #   (20%)… Сумма сделки не раскрывается».
+    #   althausgroup.ru/news/, 04.06.2025: «Альтхаус сопровождал сделку по покупке «Кинетик-фарм»
+    #   фармкомпанией «Медисорб»» (чьим консультантом — в ленте не сказано).
+    {'key': 'medisorb-kinetik-farm',
+     'match': ('кинетик-фарм',),
+     'draft': {
+         'date': '2025-05-16',
+         'title': '«Медисорб» купил 80% лаборатории «Кинетик-фарм»',
+         'ind': 'Фармацевтика', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Коммерсантъ', 'https://www.kommersant.ru/doc/7754643'],
+                 ['GxP News', 'https://gxpnews.net/2025/05/medisorb-stal-osnovnym-vladelczem-moskovskoj-laboratorii/'],
+                 ['Althaus Group', 'https://althausgroup.ru/news/']],
+         'buyer_name': '«Медисорб»',
+         'asset': '«Кинетик-фарм»',
+         'seller': 'Дмитрий Шоболов и Тамара Балаянц',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition', 'date_basis': 'registry'},
+     'adv': [['Юридический консультант (сторона не названа)', 'Althaus Group',
+              'По сообщению фирмы: «Альтхаус сопровождал сделку по покупке «Кинетик-фарм» фармкомпанией '
+              '«Медисорб»». Источник: https://althausgroup.ru/news/']]},
+    # 17. «Новые башни» / «Прайм Телеком» (добавка к E17: сайт ALUMNI Partners).
+    #   Коммерсантъ, 05.11.2025: «Инфраструктурный оператор ГК «Новые башни» купил регионального
+    #   оператора антенно-мачтовых сооружений «Прайм Телеком», следует из данных «Спарк-Интерфакс».
+    #   Покупка включает четыре юридических лица… В «Новых башнях» “Ъ” подтвердили факт сделки… ООО
+    #   «Прайм Телеком»… На 60% принадлежало… Мураду Бениаминову… и на 40% Марине Тамминен». День
+    #   сделки не назван — дата годом.
+    #   alumnipartners.ru/projects/: «Консультирование группы компаний «Новые башни» в связи с
+    #   приобретением Группы компаний «Прайм Телеком», владеющей сетью из около 350 антенно-мачтовых
+    #   сооружений».
+    {'key': 'novye-bashni-prime-telecom',
+     'match': ('прайм телеком',),
+     'draft': {
+         'date': '2025',
+         'title': '«Новые башни» купили оператора вышек связи «Прайм Телеком»',
+         'ind': 'Телеком', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Коммерсантъ', 'https://www.kommersant.ru/doc/8179818'],
+                 ['ALUMNI Partners', 'https://www.alumnipartners.ru/projects/']],
+         'buyer_name': '«Новые башни»',
+         'asset': '«Прайм Телеком»',
+         'seller': 'Мурад Бениаминов и Марина Тамминен',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition'},
+     'adv': [['Юридический консультант покупателя («Новые башни»)', 'ALUMNI Partners',
+              'По сообщению фирмы: консультирование группы «Новые башни» в связи с приобретением группы '
+              '«Прайм Телеком». Источник: https://www.alumnipartners.ru/projects/']]},
 ]
 
 
@@ -213,6 +262,50 @@ FIXUPS = [
     # должен называть того же, кого профиль (docs/card_parties.md, «ссылку и текст правят вместе»).
     ('nms-medsi', 'seller', '«Национальная медицинская сеть»', 'Elbrus Capital'),
 ]
+
+
+# 2. РБК / Hyper AdTech: оболочка уже лежала в очереди непрочитанной (gba225690, из поста BIRCH
+#   от 30 января 2025 года, статус «Обсуждается»). Новая карточка не заводится — правится эта.
+#   Пресс-релиз Advance Capital, 19.12.2024: «рад объявить о завершении сделки по продаже 60% долей в
+#   ведущей программатик-платформе… Hyper AdTech. Инвестором выступила группа компаний РБК…
+#   в роли эксклюзивного финансового консультанта Hyper AdTech. Сумма сделки не раскрывается».
+#   Коммерсантъ, 14.09.2026: «у ГК РБК уже есть 60% долей в ООО, компания закрыла сделку по
+#   приобретению этого пакета в декабре 2024 года. Тогда стороны не раскрывали сумму сделки».
+#   BIRCH: «Команда BIRCH консультировала РБК в ходе заключения сделки по вхождению РБК в капитал Hyper».
+#   День закрытия не назван — дата по объявлению (19 декабря 2024 года).
+HYPER_ID = 'gba225690'
+HYPER_BIRCH = 'https://t.me/BIRCHLEGAL/1358'
+
+
+def patch_hyper(pending):
+    card = next((c for c in pending['cards'] if c['id'] == HYPER_ID), None)
+    if card is None or card.get('date') == '2024-12-19':
+        return 0
+    assert card['date'] == '2025-01-30' and card['status'] == 'Обсуждается', (card['date'], card['status'])
+    assert card['title'] == 'РБК вошел в капитал платформы мобильной видеорекламы Hyper', card['title']
+    assert card['asset'] == 'платформы мобильной видеорекламы Hyper' and not card.get('reviewed')
+    assert card['src'] == [['Телеграм-канал @BIRCHLEGAL', HYPER_BIRCH]] and not card['law']['adv']
+    card['date'] = '2024-12-19'
+    card['date_basis'] = 'announcement'
+    card['status'] = 'Закрыта'
+    card['kind'] = 'acquisition'
+    card['title'] = 'РБК купил 60% Hyper AdTech'
+    card['asset'] = 'Hyper AdTech'
+    card['eco']['sum'] = 'Не раскрыта'
+    card['src'] = [['РБК', 'https://www.rbc.ru/technology_and_media/19/12/2024/6761685e9a7947e494fbf5fb'],
+                   ['Advance Capital', ADV_PR % 424],
+                   ['Коммерсантъ', 'https://www.kommersant.ru/doc/8953886'],
+                   ['Телеграм-канал @BIRCHLEGAL', HYPER_BIRCH]]
+    card['eco']['finadv'] = 'Advance Capital — эксклюзивный финансовый консультант Hyper AdTech'
+    card['law']['adv'] = [
+        ['Юридический консультант покупателя (РБК)', 'BIRCH',
+         'Команда фирмы консультировала РБК при заключении сделки; руководил партнер Никита Бутенко. '
+         'Источник: t.me/BIRCHLEGAL/1358'],
+        fin_adv('продавца (Hyper AdTech)', 'Advance Capital', ADV_PR % 424)]
+    for ev in card['party_evidence'].get('target', []):
+        ev['value'] = 'Hyper AdTech'
+    print('ПОПРАВКА   %s: оболочка Hyper приведена к прочитанным источникам' % HYPER_ID)
+    return 1
 
 
 def card_id(key):
@@ -269,6 +362,8 @@ def main(write=False, only=None):
         print('ПОПРАВКА   %s %s: %r -> %r' % (card['id'], field, old, new))
         fixed += 1
     added += fixed
+    if not only or 'rbc-hyper' in only:
+        added += patch_hyper(pending)
     if not write:
         print('\nСухой прогон. Применение — с ключом --write.')
         return 0
