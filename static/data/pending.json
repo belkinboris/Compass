@@ -961,42 +961,51 @@
   },
   {
    "id": "g9878a8ba",
-   "date": "2024-03-01",
-   "title": "Mantsinen Group продала российскую «дочку» компании ее руководителя",
-   "ind": "Не определена",
+   "date": "2023",
+   "title": "Российский менеджмент купил «Мантсинен» у финской Mantsinen Group",
+   "ind": "Транспорт и логистика",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
      "Телеграм-канал @BIRCHLEGAL",
      "https://t.me/BIRCHLEGAL/834"
+    ],
+    [
+     "ООО «Красные машины» (ex-«Мантсинен»)",
+     "https://red-machines.ru/o-kompanii/"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "Доля в ООО «Мантсинен»",
     "val": "—",
-    "target_fin": "—",
+    "target_fin": "По данным ГИР БО, выручка компании за 2025 год — 1,6 млрд ₽ (за 2024 год — 1,3 млрд ₽), чистая прибыль — 285,0 млн ₽ (за 2024 год — прибыль 242,6 млн ₽). Средняя численность работников за 2025 год — 219 человек (ЕГРЮЛ).",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "Юрлицо занимается подрядной перевалкой насыпных грузов, лесоматериалов и металлолома на технике Mantsinen. После продажи оно продолжило работать тем же составом и на том же парке техники, а в 2024 году сменило имя на «Красные машины».",
     "finadv": "—"
    },
    "law": {
     "struct": "—",
-    "appr": "—",
-    "adv": [],
+    "appr": "Выход требовал одобрения правительственной подкомиссии, которая контролирует сделки с иностранным участием — именно это определило условия сделки.",
+    "adv": [
+     [
+      "Юридический консультант",
+      "BIRCH LEGAL"
+     ]
+    ],
     "terms": "—"
    },
    "seller": "Mantsinen Group",
-   "asset": "российская «дочка» компании ее руководителя",
+   "asset": "ООО «Мантсинен»",
    "events": [
     {
      "kind": "closed",
      "date": "2024-03-01",
      "title": "Сделка завершена",
-     "note": "Mantsinen Group продала российскую «дочку» компании ее руководителя. ⚡️ Команда BIRCH LEGAL оказала полное юридическое сопровождение сделки по продаже дочернего общества Mantsinen Group российскому менеджменту. ❗️ Mantsinen Group – крупнейшая европейская…",
+     "note": "Российский менеджмент купил ООО «Мантсинен» у финской Mantsinen Group; юрлицо продолжило работу на прежней технике и с прежним персоналом, в 2024 году сменив имя на «Красные машины».",
      "source": [
       "Телеграм-канал @BIRCHLEGAL",
       "https://t.me/BIRCHLEGAL/834"
@@ -1007,9 +1016,9 @@
    "party_evidence": {
     "target": [
      {
-      "value": "российская «дочка» компании ее руководителя",
+      "value": "ООО «Мантсинен»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/BIRCHLEGAL/834"
      }
     ],
@@ -1022,47 +1031,83 @@
      }
     ]
    },
-   "pending_since": "2026-11-10T05:52:38+00:00"
+   "pending_since": "2026-11-14T19:20:12+00:00",
+   "reviewed": "2026-11-14",
+   "proofread_absorbed": {
+    "law.appr": [],
+    "eco.context": [],
+    "eco.share": []
+   },
+   "deep_researched": "2026-11-14",
+   "target": "ge3b19bde",
+   "seller_id": "g9ade8aa5",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "покупатель — российский менеджмент компании, учрежденная руководителем бизнеса (управляет им более 15 лет) структура; имя руководителя и название компании-покупателя ни в одном источнике не раскрыты (искали: пост BIRCH LEGAL, red-machines.ru, WebSearch по сделке и по выходу Mantsinen из России, list-org.com/rusprofile.ru/checko.ru — директор/учредитель текущего юрлица замаскирован на агрегаторах, полного имени не нашли)"
+    },
+    "no_inn": {
+     "seller": "Mantsinen Group — иностранная (финская) компания, ИНН не применим"
+    },
+    "notes": "Дата — без точного дня в источниках, только «конец 2023 года» (BIRCH LEGAL); записана годом (2023), без date_basis, по образцу gece30945/g8aea35e0 (docs/card_status_dates.md). Доля — без размера в источниках, записана текстом «Доля в ООО «Мантсинен»». Искали еще: WebSearch «Mantsinen Rus», «Mantsinen Россия», «Mantsinen management buyout Russia», «Mantsinen Russia exit» — независимых деловых публикаций о ЗАКРЫТИИ сделки (РБК, Коммерсантъ, Forbes, Interfax, отраслевая пресса) не нашлось, только анонс НАМЕРЕНИЯ продать российский бизнес (PortNews, Cyprus Shipping News, июнь 2022, цитата CEO Mia Mantsinen) и сам пост BIRCH LEGAL о закрытии. ИНН юрлица (4707014277) и переименование в «Красные машины» (2024) — с собственной страницы компании red-machines.ru, перекрестно подтверждены годом регистрации 1998 на агрегаторе tapki.com."
+   },
+   "accepted": "2026-11-14",
+   "accepted_hash": "e94ebf947d48.dc6ea5",
+   "second_read": "2026-11-14",
+   "second_read_hash": "e94ebf947d48.dc6ea5",
+   "draft_sent": true,
+   "shown_hash": "e94ebf947d48.dc6ea5"
   },
   {
    "id": "g0966b2e2",
-   "date": "2022-07-04",
-   "title": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate)",
-   "ind": "Не определена",
+   "date": "2022-05-30",
+   "title": "Местный менеджмент купил 100% «Джонс Лэнг ЛаСаль» у материнской Jones Lang LaSalle",
+   "ind": "Профессиональные услуги",
    "type": "M&A",
    "status": "Закрыта",
    "src": [
     [
      "Телеграм-канал @alumnipartnerslawfirm",
      "https://t.me/alumnipartnerslawfirm/128"
+    ],
+    [
+     "New Retail",
+     "https://new-retail.ru/novosti/retail/jll_prodala_rossiyskiy_biznes_mestnomu_menedzhmentu9596/"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
+    "share": "100% доли в ООО «Джонс Лэнг ЛаСаль»",
     "val": "—",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "—",
+    "context": "Новым генеральным директором назначен Алексей Ефимов, работавший в компании с 2003 года. Команда сохранила руководителей ключевых направлений: Екатерину Белову (офисная недвижимость), Евгения Бумагина (склады и индустриальная недвижимость), Микаэла Казаряна (инвестиции) и Юлию Никуличеву (стратегический консалтинг).",
     "finadv": "—"
    },
    "law": {
-    "struct": "—",
+    "struct": "Компания продолжила работу под новым названием IBC Real Estate (Investment Brokerage & Consulting Real Estate). По отдельным партнерским соглашениям услуги по управлению строительством и отделкой предоставляет RITM Project Руслана Мазгутова и Инны Травиной, а оценку недвижимости — DMA Valuation Дмитрия Давыдова.",
     "appr": "—",
-    "adv": [],
+    "adv": [
+     [
+      "Юридический консультант продавца",
+      "ALUMNI Partners"
+     ],
+     [
+      "Юридический консультант",
+      "Platforma.Legal"
+     ]
+    ],
     "terms": "—"
    },
-   "seller": "Jones Lang LaSalle",
-   "buyer_name": "(IBC Real Estate)",
-   "asset": "российский бизнес",
+   "seller": "Jones Lang LaSalle European Holdings Limited",
+   "asset": "ООО «Джонс Лэнг ЛаСаль»",
    "events": [
     {
      "kind": "closed",
      "date": "2022-07-04",
      "title": "Сделка завершена",
-     "note": "Jones Lang LaSalle продала российский бизнес местному менеджменту (IBC Real Estate). ALUMNI Partners консультирует Jones Lang LaSalle в связи с продажей ее российского бизнеса Команда ALUMNI Partners успешно завершила юридическое сопровождение интересов Jones…",
+     "note": "Местный менеджмент выкупил 100% ООО «Джонс Лэнг ЛаСаль» у Jones Lang LaSalle European Holdings Limited; компания продолжила работу как IBC Real Estate. Новым генеральным директором стал Алексей Ефимов.",
      "source": [
       "Телеграм-канал @alumnipartnerslawfirm",
       "https://t.me/alumnipartnerslawfirm/128"
@@ -1074,101 +1119,54 @@
     "Уход иностранного владельца"
    ],
    "party_evidence": {
-    "buyer": [
-     {
-      "value": "(IBC Real Estate)",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://t.me/alumnipartnerslawfirm/128"
-     }
-    ],
     "target": [
      {
-      "value": "российский бизнес",
+      "value": "ООО «Джонс Лэнг ЛаСаль»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/alumnipartnerslawfirm/128"
      }
     ],
     "seller": [
      {
-      "value": "Jones Lang LaSalle",
+      "value": "Jones Lang LaSalle European Holdings Limited",
       "field": "seller",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://t.me/alumnipartnerslawfirm/128"
      }
     ]
    },
-   "pending_since": "2026-11-10T08:39:19+00:00"
-  },
-  {
-   "id": "gb14c2bae",
-   "date": "2026-11-10",
-   "title": "Китай выкупил российского производителя автокомпонентов",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Лента.ру",
-     "https://lenta.ru/news/2026/11/10/kupili/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
+   "pending_since": "2026-11-14T19:18:45+00:00",
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.context": [],
+    "law.struct": []
    },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
+   "reviewed": "2026-11-14",
+   "deep_researched": "2026-11-14",
+   "target": "g665d49e8",
+   "seller_id": "g85132582",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "покупатель — местный менеджмент компании (без названного юрлица-покупателя); источники называют по имени только нового гендиректора Алексея Ефимова, но не как покупателя, а как назначенного руководителя — полного списка выкупивших менеджеров и структуру долей не нашли (искали: пост ALUMNI Partners, статья New Retail, сайт/капабилити-стейтмент IBC Real Estate, leave-russia.org, JLL newsroom, Cbonds — ни один не дает полного списка)"
+    },
+    "no_inn": {
+     "seller": "Jones Lang LaSalle European Holdings Limited — иностранная холдинговая структура, ИНН не применим",
+     "target": "кандидат на ИНН нашелся только в закрытом сниппете агрегатора Cbonds (7710257780/1037739102279, без доступа к самой странице) — не вносим непроверенные по первоисточнику реквизиты; rusprofile/zachestnyibiznes/checko/tbank блокируют автоматический доступ (403/503/401)"
+    },
+    "notes": "Искали еще: WebSearch по РБК Недвижимость, Forbes, CRE.ru, The Moscow Times, JLL newsroom, leave-russia.org (трекер KSE Institute), Cbonds — отдельного разбора именно этой сделки по существу (кроме New Retail и материалов самих ALUMNI Partners/IBC) не нашлось. Точный день закрытия — только день собственного объявления компании (New Retail, 30 мая 2022); leave-russia.org называет более раннюю дату анонса JLL о завершении (9 мая 2022, по стенограмме отчета JLL), но это анонс для инвесторов, не публичное объявление в России — за дату взяли день объявления на российском рынке. ИНН ООО «Джонс Лэнг ЛаСаль»/IBC Real Estate нашли только через сниппет Cbonds (7710257780/1037739102279), прямую страницу открыть не удалось — профиль создан без ИНН, не вносим непроверенные реквизиты."
    },
-   "buyer_name": "Китай",
-   "asset": "российский производитель автокомпонентов",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-10",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "Лента.ру",
-      "https://lenta.ru/news/2026/11/10/kupili/"
-     ]
-    }
-   ],
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Китай",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/10/kupili/"
-     }
-    ],
-    "target": [
-     {
-      "value": "российский производитель автокомпонентов",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://lenta.ru/news/2026/11/10/kupili/"
-     }
-    ]
-   },
-   "pending_since": "2026-11-10T09:53:15+00:00"
+   "accepted": "2026-11-14",
+   "accepted_hash": "01683dbca396.7147b2",
+   "second_read": "2026-11-14",
+   "second_read_hash": "01683dbca396.7147b2",
+   "draft_sent": true,
+   "shown_hash": "01683dbca396.7147b2"
   },
   {
    "id": "gb8a84b47",
-   "date": "2026-11-10",
-   "title": "Крупный тюменский застройщик продал проект ЖК на «Тайване»",
+   "date": "2026",
+   "title": "ГК «Создатели» купила проект ЖК «Приятное окружение» у застройщика «Звезда»",
    "ind": "Недвижимость",
    "type": "M&A",
    "status": "Закрыта",
@@ -1195,14 +1193,14 @@
     "adv": [],
     "terms": "—"
    },
-   "seller": "Крупный тюменский застройщик",
-   "asset": "проект ЖК на «Тайване»",
+   "seller": "Звезда",
+   "asset": "Жилой комплекс «Приятное окружение»",
    "events": [
     {
      "kind": "closed",
      "date": "2026-11-10",
      "title": "Сделка завершена",
-     "note": "В Тюмени застройщик «Звезда» передал проект нового ЖК на ДОКе «Создателям». Как объяснили в пресс-службе девелопера, смена компании не повлияет на гарантии дольщиков, процесс перехода держат на контроле.",
+     "note": "ГК «Создатели» становится новым застройщиком ЖК «Приятное окружение»; «Звезда» подтвердила, что права и гарантийные обязательства перед участниками долевого строительства сохраняются.",
      "source": [
       "URA.RU",
       "https://ura.news/news/1053143046"
@@ -1213,22 +1211,58 @@
    "party_evidence": {
     "target": [
      {
-      "value": "проект ЖК на «Тайване»",
+      "value": "Жилой комплекс «Приятное окружение»",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://ura.news/news/1053143046"
      }
     ],
     "seller": [
      {
-      "value": "Крупный тюменский застройщик",
+      "value": "Звезда",
       "field": "seller",
-      "method": "explicit_news_title",
+      "method": "human_review",
+      "url": "https://ura.news/news/1053143046"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Создатели",
+      "field": "buyer_name",
+      "method": "human_review",
       "url": "https://ura.news/news/1053143046"
      }
     ]
    },
-   "pending_since": "2026-11-10T12:54:36+00:00"
+   "pending_since": "2026-11-14T19:26:12+00:00",
+   "reviewed": "2026-11-14",
+   "target": "g3a7d8718",
+   "buyer": "g4120de02",
+   "seller_id": "gf197ff80",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "«Создатели» — юрлицо-застройщик внутри группы не нашли ни на одном источнике (realty.yandex.ru, restate.ru, этажи.com — только бренд, без ООО/ИНН); наш.дом.рф и ЕРЗ не открылись (403)",
+     "seller": "«Звезда» — секундарные источники (tyumen.restate.ru, 72.ru) называют ООО «СЗ Звезда», но ИНН/ОГРН ни на одном агрегаторе не нашли (rusprofile/list-org/checko/zachestnyibiznes/saby/tbank/tapki/companies.rbc — 403 или не та компания)",
+     "target": "предмет — жилой комплекс (строительный проект), а не юрлицо; ИНН не применим (тот же класс, что проекты g967b4096/g1ed0e12f)"
+    },
+    "notes": "Искали еще (не меньше пяти мест): realty.yandex.ru, tyumen.restate.ru, этажи.com (403), наш.дом.рф/ЕРЗ (403), rusprofile.ru/list-org.com/checko.ru/zachestnyibiznes.ru/saby.ru/tbank.ru «проверка контрагента»/tapki.com/companies.rbc.ru (везде 403/заглушка или не та компания — нашли только похожие тюменские застройщики с другими ИНН: ООО «СЗ Страна Запад», ООО «СЗ Улей Девелопмент», ООО «СЗ Толк. УРАЛ»), 72.ru (архивная статья 2022 про арендный дом, называет учредителей «Звезды» — Игоря Суханова и ООО «Региональные Строительные Технологии», управляющего Евгения Буткова, но не ИНН). Других публикаций об этой сделке (Тюмень-онлайн, Вслух.ру, Коммерсантъ-Урал, Forbes, РБК Тюмень) не нашли — видимо, из-за свежести новости. Точная дата сделки (смены застройщика в реестре) не нашлась — дата записана годом (2026), без date_basis. Сумма не раскрыта ни одной стороной. 21 этаж/2028 год взяты из самой статьи (ссылка на единый реестр застройщиков); у агрегаторов недвижимости (Яндекс/ЦИАН) по тому же ЖК пока стоит прежний застройщик «Звезда» и другие цифры (до 19 этажей, 2027–2028) — вероятно, карточки агрегаторов еще не обновились после смены застройщика.",
+    "searched": [
+     "realty.yandex.ru",
+     "tyumen.restate.ru",
+     "этажи.com",
+     "наш.дом.рф/ЕРЗ",
+     "rusprofile.ru/list-org.com/checko.ru/zachestnyibiznes.ru",
+     "72.ru (архив)",
+     "Тюмень-онлайн, Вслух.ру, Коммерсантъ-Урал, Forbes, РБК Тюмень"
+    ]
+   },
+   "accepted": "2026-11-14",
+   "accepted_hash": "c3389443adda.15ba29",
+   "second_read": "2026-11-14",
+   "second_read_hash": "c3389443adda.15ba29",
+   "draft_sent": true,
+   "shown_hash": "c3389443adda.15ba29",
+   "post_draft_sent": true
   },
   {
    "id": "gbb89fc13",
@@ -1322,11 +1356,11 @@
   },
   {
    "id": "gc816c617",
-   "date": "2026-11-14",
-   "title": "Коллекторское агентство из Петербурга стало владельцем доли бывшего участника",
+   "date": "2026",
+   "title": "«Красная звезда» купила долю бывшего совладельца Евгения Сибирцева",
    "ind": "Не определена",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "Деловой Петербург",
@@ -1336,8 +1370,8 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
-    "val": "—",
+    "share": "30% доли в ООО «Красная звезда»",
+    "val": "По номиналу (размеру уставного капитала) пакет стоит 3 млн рублей; реальная цена выкупа выше — около 3,5 млн рублей, именно столько общество должно заплатить, если считать по чистым активам за 2025 год.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
@@ -1348,29 +1382,44 @@
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "По закону об ООО общество обязано выплатить вышедшему участнику действительную стоимость доли в течение 3 месяцев, рассчитанную по чистым активам, — выплата, а не бесплатная передача."
    },
-   "buyer_name": "Коллекторское агентство из Петербурга",
-   "asset": "бывший участник",
+   "buyer_name": "Красная звезда",
+   "asset": "Красная звезда",
    "party_evidence": {
     "buyer": [
      {
-      "value": "Коллекторское агентство из Петербурга",
+      "value": "Красная звезда",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
      }
     ],
     "target": [
      {
-      "value": "бывший участник",
+      "value": "Красная звезда",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
+      "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Евгений Сибирцев",
+      "field": "seller",
+      "method": "human_review",
       "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
      }
     ]
    },
-   "pending_since": "2026-11-14T05:53:12+00:00"
+   "pending_since": "2026-11-14T05:53:12+00:00",
+   "seller": "Евгений Сибирцев",
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.val": [],
+    "law.terms": []
+   },
+   "reviewed": "2026-11-14"
   }
  ]
 }

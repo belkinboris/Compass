@@ -149,19 +149,30 @@
    ]
   },
   {
-   "draft_id": "d47021850",
-   "title": "Стало известно, сколько из замороженных российских активов перешло Киеву",
+   "draft_id": "d29013913",
+   "title": "Ноябрьская закупка под пассивный доход. Показываю, какие активы купил",
    "date": "2026-11-14",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/14/stalo-izvestno-skolko-iz-zamorozhennyh-rossijskih-aktivov-pereshlo-kievu"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1374857.php"
     ]
    ],
-   "sum": "€8 млрд",
+   "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-14",
+     "title": "Сделка завершена",
+     "note": "Приветствую всех инвесторов и тех, кто постоянно толкается со мной в очереди у кассы на Мосбирже! Идет мой семнадцатый месяц инвестирования, инвестирования в активы, приносящие пассивный доход. Ничего нового я не придумал, так что получил зарплату, закинул…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1374857.php"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,

@@ -163,7 +163,12 @@ def _sources(deal: dict) -> list[tuple[str, str]]:
 
 
 INDEX_PATH = str(base_data.ROOT / "static" / "index.html")
-_APP_MAIN = '<main class="wrap" id="app"></main>'
+# Было `_APP_MAIN = '<main class="wrap" id="app"></main>'` — точная строка без
+# содержимого. 14 ноября 2026 внутрь добавили экран загрузки (спиннер,
+# подсказка про VPN), и `str.replace` молча ничего не находил: сделка и
+# компания отдавались поисковику пустой оберткой приложения, без вписанного
+# текста (`test_seo_pages.py`). Ищем тег по границам, а не по содержимому.
+_APP_MAIN_RX = re.compile(r'<main class="wrap" id="app">.*?</main>', re.S)
 
 
 def _page(base: str, path: str, title: str, description: str, body: str, json_ld: str = "") -> str:
@@ -182,7 +187,9 @@ def _page(base: str, path: str, title: str, description: str, body: str, json_ld
     head = (f'<link rel="canonical" href="{esc(base + path)}">\n'
             f'<meta property="og:url" content="{esc(base + path)}">\n{json_ld}\n</head>')
     page = page.replace("</head>", head, 1)
-    return page.replace(_APP_MAIN, f'<main class="wrap" id="app"><article class="seo-snapshot">{body}</article></main>', 1)
+    return _APP_MAIN_RX.sub(
+        lambda m: f'<main class="wrap" id="app"><article class="seo-snapshot">{body}</article></main>',
+        page, count=1)
 
 
 def _ld(obj: dict) -> str:
