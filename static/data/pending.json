@@ -2828,6 +2828,123 @@
     ]
    },
    "pending_since": "2026-11-14T05:53:12+00:00"
+  },
+  {
+   "id": "g9d483b4e",
+   "date": "2026-11-12",
+   "title": "«Яндекс» инвестировал в безопасность поездок на самокатах 1 млрд рублей за пять лет",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-12_yandeks_investiroval_v"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1 млрд ₽",
+   "asset": "безопасность поездок на самокатах 1 млрд рублей за пять лет",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Яндекс»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-12_yandeks_investiroval_v"
+     }
+    ],
+    "target": [
+     {
+      "value": "безопасность поездок на самокатах 1 млрд рублей за пять лет",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-12_yandeks_investiroval_v"
+     }
+    ]
+   },
+   "buyer": "yandex",
+   "pending_since": "2026-11-14T06:53:30+00:00"
+  },
+  {
+   "id": "g1aca066e",
+   "date": "2026-11-14",
+   "title": "Семь автобусов для маршрутов приобрели в 2026 году в Карачаево-Черкесии",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Семь автобусов для маршрутов",
+   "asset": "в 2026 году в Карачаево-Черкесии",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-14",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Семь автобусов для маршрутов",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "в 2026 году в Карачаево-Черкесии",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-14T06:53:30+00:00"
   }
  ]
 }

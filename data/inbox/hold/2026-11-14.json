@@ -614,16 +614,16 @@
    ]
   },
   {
-   "draft_id": "d20022804",
-   "title": "«Я твой отец»: меч Дарта Вейдера ушел с молотка почти за 5 млн долларов",
+   "draft_id": "d36562062",
+   "title": "МИД РФ: Европа передала Украине €8 млрд «навара» от российских активов",
    "date": "2026-11-14",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144151"
+     "web:tass.ru",
+     "https://tass.ru/politika/28317471"
     ]
    ],
-   "sum": "$5 млн",
+   "sum": "€8 млрд",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -642,47 +642,30 @@
    ]
   },
   {
-   "draft_id": "d60628540",
-   "title": "Распродажа за госсчет. Покупателям автомобилей дадут скидки до 900 тысяч рублей — кто их получит",
+   "draft_id": "d67428087",
+   "title": "Похожа на инопланетянина. В Тюмени продается изящная кошечка за 200 тысяч рублей",
    "date": "2026-11-14",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/auto/2026/11/14/76763214/"
+     "web:72.ru",
+     "https://72.ru/text/animals/2026/11/14/76763930/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d07280039",
-   "title": "«Машина выходного дня»: Toyota Carina 1982 года продают в Новосибирске — чем она известна",
-   "date": "2026-11-14",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/auto/2026/11/14/76760722/"
-    ]
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-14",
+     "title": "Переговоры",
+     "note": "Помните, что породистые питомцы требуют особого ухода",
+     "source": [
+      "web:72.ru",
+      "https://72.ru/text/animals/2026/11/14/76763930/"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
