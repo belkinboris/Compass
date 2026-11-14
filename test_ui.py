@@ -5886,3 +5886,18 @@ def test_deal_header_is_compact_on_the_phone(page, base_url):
     page.set_viewport_size({"width": 1280, "height": 900})
     page.wait_for_timeout(200)
     assert vis("#downloaddeal") and not vis("#downloaddeal2") and vis(".d-head .deal-parties-strong")
+
+
+def test_vpn_hint_waits_and_the_page_is_never_blank(page, base_url):
+    """Партнер, 14 ноября 2026: без VPN экран загрузки сразу советовал отключить
+    VPN, а с VPN висела пустая страница. Подсказка проявляется через четыре
+    секунды, а экран загрузки стоит в самой странице — до запуска скрипта."""
+    import urllib.request
+    raw = urllib.request.urlopen(base_url + "/").read().decode("utf-8")
+    boot = raw[raw.index('<main class="wrap" id="app">'):raw.index("</main>")]
+    assert "Загружаем Компас" in boot and "VPN" in boot and "slow-late" in boot and "ё" not in boot
+    visit(page, base_url, "#/")
+    got = page.evaluate("""() => { const d = document.createElement('div'); d.innerHTML = loadingHtml('карточка');
+      document.body.appendChild(d); const cs = getComputedStyle(d.querySelector('#slowhint'));
+      const out = [cs.animationDelay, cs.opacity]; d.remove(); return out; }""")
+    assert got[0] == "4s" and float(got[1]) < 0.2, got

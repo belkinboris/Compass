@@ -607,7 +607,7 @@ nav a.on::after,nav a:hover::after{width:100%}
    происходит» — цифры стояли нулями с подписью «догружаем базу…», а с VPN
    база могла не загрузиться вовсе. Совет про VPN теперь стоит прямо здесь,
    а не только в заглушке ленты ниже. */
-.hero-slow{display:block;margin-top:8px;font-size:12.5px;color:var(--ivory);opacity:.85;max-width:52ch;font-family:var(--f-body);letter-spacing:0}
+.hero-slow{display:block;margin-top:8px;font-size:12.5px;color:var(--ivory);opacity:0;animation:heroslow .5s ease 4s forwards;max-width:52ch;font-family:var(--f-body);letter-spacing:0}
 
 /* ---------- темная hero-полоса раздела ---------- */
 /* Чередование темных и светлых страниц (просьба владельца): Сделки темные,
@@ -1118,6 +1118,15 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
 .feed-active .linkbtn{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer}
 .spinner{width:26px;height:26px;border:2.5px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
 .loading{padding:64px 26px;text-align:center}
+/* ПОДСКАЗКА ПРО VPN — ТОЛЬКО ЕСЛИ ДОЛГО (партнер, 14 ноября 2026: без VPN сайт
+   советовал отключить VPN, а с VPN висела пустая страница без единого слова).
+   Плашка проявляется через четыре секунды ожидания, и стоит она уже в самой
+   странице (#app), до запуска скрипта: с VPN медленно едет сам файл страницы,
+   и пока он не доехал, скрипт ничего показать не может. */
+.slow-late{max-width:44ch;margin:10px auto 0;font-size:13px;color:#6B5432;background:var(--bronze-soft);border:1px solid rgba(163,129,78,.5);border-radius:8px;padding:10px 14px;opacity:0;animation:slowlate .5s ease 4s forwards}
+@keyframes slowlate{to{opacity:1}}
+@keyframes heroslow{to{opacity:.85}}
+@media(prefers-reduced-motion:reduce){.slow-late,.hero-slow{opacity:1;animation:none}}
 .loading .l-head{font-family:var(--f-display);font-size:19px;color:var(--ink);margin-bottom:10px}
 .loading p{color:var(--muted);font-size:14px;line-height:1.6;max-width:460px;margin:0 auto}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -3110,7 +3119,11 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   <a href="#/analytics" data-r="analytics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Аналитика</a>
 </nav>
 
-<main class="wrap" id="app"></main>
+<main class="wrap" id="app"><div class="loading boot">
+    <div class="spinner"></div>
+    <div class="l-head">Загружаем Компас</div>
+    <p class="slow-late">Долго грузится? Сервер в России: с включенным VPN сайт открывается медленно или не открывается совсем. Попробуйте отключить VPN.</p>
+  </div></main>
 
 <footer>
   <div class="foot-in">
@@ -4392,10 +4405,7 @@ function loadingHtml(what){
     <div class="l-head">Загружаем базу сделок</div>
     <p>Секунду — ${what.toLowerCase()} появятся, как только загрузится база.
        Показатели появятся после полной загрузки базы.</p>
-    <p id="slowhint" style="max-width:44ch;margin:10px auto 0;
-       font-size:13px;color:#6B5432;background:var(--bronze-soft);
-       border:1px solid rgba(163,129,78,.5);border-radius:8px;padding:10px 14px">
-      Сервер в России: с включенным VPN база загружается медленно или не загружается. Отключите VPN.</p>
+    <p id="slowhint" class="slow-late">Долго грузится? Сервер в России: с включенным VPN сайт открывается медленно или не открывается совсем. Попробуйте отключить VPN.</p>
   </div>`;
 }
 /* Подборка живет в адресе. Раньше три выставленных фильтра («Банки», 2024,
