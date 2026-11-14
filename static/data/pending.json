@@ -1134,7 +1134,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-10T08:39:19+00:00",
+   "pending_since": "2026-11-14T19:18:45+00:00",
    "proofread_absorbed": {
     "eco.share": [],
     "eco.context": [],
@@ -1157,7 +1157,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "01683dbca396.7147b2",
    "second_read": "2026-11-14",
-   "second_read_hash": "01683dbca396.7147b2"
+   "second_read_hash": "01683dbca396.7147b2",
+   "draft_sent": true,
+   "shown_hash": "01683dbca396.7147b2"
   },
   {
    "id": "gb8a84b47",
