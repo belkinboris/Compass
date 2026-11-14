@@ -621,11 +621,25 @@
    "strength": "normal"
   },
   {
+   "id": "s425be1666",
+   "company_id": "gaeeb89cf",
+   "date": "2026-08-07",
+   "kind": "for_sale",
+   "summary": "АЭС «Аккую» — обсуждается продажа компании или доли",
+   "source": [
+    "URA.RU",
+    "https://ura.news/news/1053116249"
+   ],
+   "origin": "card",
+   "deal_id": "g2f22b1dc",
+   "strength": "strong"
+  },
+  {
    "id": "s2d97fd9ab",
    "company_id": "rosatom",
    "date": "2026-08-07",
    "kind": "sell",
-   "summary": "Росатом — обсуждается продажа: Проект АЭС «Аккую» в Турции",
+   "summary": "Росатом — обсуждается продажа: АЭС «Аккую»",
    "source": [
     "URA.RU",
     "https://ura.news/news/1053116249"
