@@ -2913,6 +2913,122 @@
    "accepted_hash": "90fdd166dff9.e8c189",
    "second_read": "2026-11-14",
    "second_read_hash": "90fdd166dff9.e8c189"
+  },
+  {
+   "id": "gc816c617",
+   "date": "2026-11-14",
+   "title": "Коллекторское агентство из Петербурга стало владельцем доли бывшего участника",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Коллекторское агентство из Петербурга",
+   "asset": "бывший участник",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Коллекторское агентство из Петербурга",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
+     }
+    ],
+    "target": [
+     {
+      "value": "бывший участник",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
+     }
+    ]
+   },
+   "pending_since": "2026-11-14T05:53:12+00:00"
+  },
+  {
+   "id": "g481675bf",
+   "date": "2026-11-14",
+   "title": "Семь автобусов для маршрутов приобрели в 2026 году в Карачаево-Черкесии",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Новости",
+     "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Семь автобусов для маршрутов",
+   "asset": "в 2026 году в Карачаево-Черкесии",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-14",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Новости",
+      "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Семь автобусов для маршрутов",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "в 2026 году в Карачаево-Черкесии",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ria.ru/20261114/karachaevo-cherkessiya-2131495187.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-14T05:53:12+00:00"
   }
  ]
 }
