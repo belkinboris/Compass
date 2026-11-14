@@ -878,7 +878,7 @@
     ]
    },
    "buyer": "g088e8f9f",
-   "pending_since": "2026-11-09T13:22:24+00:00",
+   "pending_since": "2026-11-14T08:36:16+00:00",
    "from_raw": {
     "draft_id": "d54644086",
     "title": "«Интеррос» купил у Global Payments процессинговую компанию UCS (АО «Компания объединенных кредитных карточек»)"
@@ -908,7 +908,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "37433b7a0272.e02ac8",
    "second_read": "2026-11-14",
-   "second_read_hash": "37433b7a0272.e02ac8"
+   "second_read_hash": "37433b7a0272.e02ac8",
+   "draft_sent": true,
+   "shown_hash": "37433b7a0272.e02ac8"
   },
   {
    "id": "g05d87236",
