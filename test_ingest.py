@@ -12103,3 +12103,23 @@ def test_stake_acquired_is_stored_as_a_number_and_text_is_caught():
     assert 'stake_acquired_invalid' in [k for k, _ in accept_card.findings(card, base)]
     card['stake_acquired'] = 5
     assert 'stake_acquired_invalid' not in [k for k, _ in accept_card.findings(card, base)]
+
+
+def test_a_posted_milestone_is_not_waiting_whatever_id_the_event_carries():
+    """14 ноября 2026: пост об этапе «Арнеста» вышел по кнопке, а напоминалка
+    два дня писала «не опубликован»: событие от притока носило номер
+    «closed-2026-11-12», отметку поста сайт ставит по «<сделка>-<вид>»."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('send_telegram_m', 'pipeline/publish/send_telegram.py')
+    st = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(st)
+    event = {'id': 'closed-2026-11-12', 'kind': 'closed', 'date': '2026-11-12', 'newsworthy': True,
+             'headline': 'А завершил покупку Б', 'milestone_drafted_at': '2026-11-12T16:55:42+00:00'}
+    deals = [{'id': 'dealx', 'title': 'А покупает Б', 'events': [event]}]
+    assert st.milestone_candidates(deals, {}) and not st.milestone_candidates(deals, {'dealx-closed': {'message_id': 1}})
+    assert not st.milestone_candidates(deals, {'closed-2026-11-12': {'message_id': 1}})
+    import review
+    card = {'id': 'dealx', 'title': 'А покупает Б', 'type': 'M&A', 'status': 'Закрыта', 'date': '2026-11-12',
+            'events': [dict(event, newsworthy=False)]}
+    marked = review.mark_milestone(card, 'closed')
+    assert marked is not None and card['events'][0]['id'] == 'dealx-closed'
