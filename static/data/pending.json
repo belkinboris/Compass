@@ -743,7 +743,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:22:24+00:00",
+   "pending_since": "2026-11-14T16:46:08+00:00",
    "from_raw": {
     "draft_id": "d93807669",
     "title": "HYSG Group («Доширак») купила у The GBFoods АО «Юроп Фудс ГБ» (Gallina Blanca)"
@@ -768,7 +768,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "365c6b541d7c.bcd599",
    "second_read": "2026-11-14",
-   "second_read_hash": "365c6b541d7c.bcd599"
+   "second_read_hash": "365c6b541d7c.bcd599",
+   "draft_sent": true,
+   "shown_hash": "365c6b541d7c.bcd599"
   },
   {
    "id": "g0c7ad0fb",
