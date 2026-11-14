@@ -1257,7 +1257,9 @@
     ]
    },
    "accepted": "2026-11-14",
-   "accepted_hash": "c3389443adda.15ba29"
+   "accepted_hash": "c3389443adda.15ba29",
+   "second_read": "2026-11-14",
+   "second_read_hash": "c3389443adda.15ba29"
   },
   {
    "id": "gbb89fc13",
@@ -1351,11 +1353,11 @@
   },
   {
    "id": "gc816c617",
-   "date": "2026-11-14",
-   "title": "Коллекторское агентство из Петербурга стало владельцем доли бывшего участника",
+   "date": "2026",
+   "title": "«Красная звезда» купила долю бывшего совладельца Евгения Сибирцева",
    "ind": "Не определена",
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": "Закрыта",
    "src": [
     [
      "Деловой Петербург",
@@ -1365,8 +1367,8 @@
    "from_ingest": true,
    "eco": {
     "sum": "—",
-    "share": "—",
-    "val": "—",
+    "share": "30% доли в ООО «Красная звезда»",
+    "val": "По номиналу (размеру уставного капитала) пакет стоит 3 млн рублей; реальная цена выкупа выше — около 3,5 млн рублей, именно столько общество должно заплатить, если считать по чистым активам за 2025 год.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
@@ -1377,29 +1379,44 @@
     "struct": "—",
     "appr": "—",
     "adv": [],
-    "terms": "—"
+    "terms": "По закону об ООО общество обязано выплатить вышедшему участнику действительную стоимость доли в течение 3 месяцев, рассчитанную по чистым активам, — выплата, а не бесплатная передача."
    },
-   "buyer_name": "Коллекторское агентство из Петербурга",
-   "asset": "бывший участник",
+   "buyer_name": "Красная звезда",
+   "asset": "Красная звезда",
    "party_evidence": {
     "buyer": [
      {
-      "value": "Коллекторское агентство из Петербурга",
+      "value": "Красная звезда",
       "field": "buyer_name",
-      "method": "explicit_news_title",
+      "method": "human_review",
       "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
      }
     ],
     "target": [
      {
-      "value": "бывший участник",
+      "value": "Красная звезда",
       "field": "asset",
-      "method": "explicit_news_title",
+      "method": "human_review",
+      "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Евгений Сибирцев",
+      "field": "seller",
+      "method": "human_review",
       "url": "https://www.dp.ru/a/2026/11/13/kollektorskoe-agentstvo-iz"
      }
     ]
    },
-   "pending_since": "2026-11-14T05:53:12+00:00"
+   "pending_since": "2026-11-14T05:53:12+00:00",
+   "seller": "Евгений Сибирцев",
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.val": [],
+    "law.terms": []
+   },
+   "reviewed": "2026-11-14"
   }
  ]
 }
