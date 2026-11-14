@@ -68,7 +68,7 @@
     ]
    },
    "pending_since": "2026-11-14T07:38:47+00:00",
-   "stake_acquired": "29.99",
+   "stake_acquired": 29.99,
    "reviewed": "2026-11-14",
    "proofread_absorbed": {
     "law.struct": [
@@ -1556,7 +1556,7 @@
     "draft_id": "d95962855",
     "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО"
    },
-   "stake_acquired": "9.72",
+   "stake_acquired": 9.72,
    "date_basis": "registry",
    "themes": [
     "Искусственный интеллект"
@@ -1719,7 +1719,7 @@
     "title": "ВТБ проведет сбор заявок на сделку по приобретению 5% в «WB Банке»"
    },
    "seller": "RWB",
-   "stake_acquired": "5",
+   "stake_acquired": 5,
    "reviewed": "2026-11-14",
    "proofread_absorbed": {
     "law.struct": [],
