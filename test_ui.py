@@ -5867,3 +5867,22 @@ def test_compare_tray_only_on_company_pages_and_above_the_tabbar(browser, base_u
                 assert gap >= 4, (h, gap)
     finally:
         ctx.close()
+
+
+def test_deal_header_is_compact_on_the_phone(page, base_url):
+    """Партнер и владелец, 14 ноября 2026: на телефоне в шапке карточки меньше
+    пустоты, «Скачать PDF» стоит справа в строке вкладок, строки сторон над
+    заголовком и подписи вкладки нет. На компьютере все как было."""
+    page.set_viewport_size({"width": 390, "height": 800})
+    visit(page, base_url, "#/deal/citibank")
+    page.wait_for_selector("#downloaddeal2")
+    vis = lambda sel: page.locator(sel).first.is_visible()
+    assert vis("#downloaddeal2") and not vis("#downloaddeal")
+    assert not vis(".d-head .deal-parties-strong") and not vis("#lenshint")
+    lens = page.locator(".lens").bounding_box(); btn = page.locator("#downloaddeal2").bounding_box()
+    assert abs((lens["y"] + lens["height"] / 2) - (btn["y"] + btn["height"] / 2)) < 12 and btn["x"] > lens["x"] + lens["width"]
+    assert page.locator(".d-head h1").bounding_box()["y"] < 230
+    assert page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth") <= 0
+    page.set_viewport_size({"width": 1280, "height": 900})
+    page.wait_for_timeout(200)
+    assert vis("#downloaddeal") and not vis("#downloaddeal2") and vis(".d-head .deal-parties-strong")

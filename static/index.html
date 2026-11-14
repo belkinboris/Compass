@@ -2610,6 +2610,17 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
    маленькая кнопка в строке даты и статуса, прижата вправо. */
 .pdf-top{margin-left:auto;font-size:11.5px;padding:5px 11px;color:var(--muted);border-color:var(--line);background:transparent;white-space:nowrap}
 .pdf-top:hover{color:var(--accent);border-color:var(--accent)}
+/* ШАПКА КАРТОЧКИ НА ТЕЛЕФОНЕ (партнер и владелец, 14 ноября 2026): меньше пустоты
+   сверху и над вкладками, «Скачать PDF» — справа в строке вкладок, без строки
+   сторон над заголовком (стороны нажимаются ниже, в схеме) и без подписи вкладки. */
+.lens-row{display:flex;align-items:center;gap:10px;margin-bottom:26px}.lens-row .lens{margin-bottom:0}
+.pdf-lens{display:none}
+@media(max-width:640px){
+  .back{margin:6px 0 14px}
+  .d-head{padding-bottom:16px;margin-bottom:16px}.d-head h1{margin:10px 0 8px}
+  .d-head .pdf-top,.d-head .deal-parties-strong,.lens-hint{display:none}
+  .lens-row{margin-bottom:18px}.pdf-lens{display:inline-flex;margin-left:auto}
+}
 .deal-tools .tool-note{flex-basis:100%}
 @media(max-width:560px){
   .tool-group{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -3447,7 +3458,6 @@ const INV_FIRMS = [
  {id:"sber",n:"Сбербанк (СберИнвестиции, Сбербанк КИБ)",g:["Банк"],desc:"Инвестиционный блок крупнейшего банка: организатор размещений, финансовый консультант сделок."},
  {id:"vtbcap",n:"ВТБ (ВТБ Капитал)",g:["Банк"],desc:"Организатор размещений и структурирование сделок; в базе — IPO и сопровождение сделок с недвижимостью."},
  {id:"sovcom",n:"Совкомбанк",g:["Банк"],desc:"Организатор и букраннер размещений, стабилизационный агент."},
- {id:"alfa",n:"Альфа-Банк и «Альфа-Капитал»",g:["Банк"],desc:"Организатор размещений; «Альфа-Капитал» управляет фондами и привлекает средства через ЗПИФы."},
  {id:"gpb",n:"Газпромбанк",g:["Банк"],desc:"Организатор и букраннер IPO, андеррайтер; выступал эксклюзивным финансовым партнером сделок."},
  {id:"tbank",n:"Т-Банк (Т-Инвестиции)",g:["Банк"],desc:"Организатор и букраннер размещений на публичном рынке."},
  {id:"mkb",n:"Московский кредитный банк",g:["Банк"],desc:"Структурирование сделок и кредитные линии на стороне покупателя."},
@@ -3463,7 +3473,6 @@ const INV_FIRMS = [
  {id:"nikoliers",n:"Nikoliers",g:["Консультант по недвижимости"],desc:"Консультант сделок с офисной и складской недвижимостью; рынок капитала в недвижимости."},
  {id:"nfgroup",n:"NF Group",g:["Консультант по недвижимости"],desc:"Консультант сделок с коммерческой недвижимостью."},
  {id:"corexp",n:"CORE.XP",g:["Консультант по недвижимости"],desc:"Консультант сделок с коммерческой недвижимостью, чаще на стороне продавца."},
- {id:"rad",n:"Российский аукционный дом",g:["Организатор торгов"],desc:"Организатор торгов по поручению собственника и торговая площадка."},
  /* ДОБАВЛЕНА 6 ОКТЯБРЯ 2026. Владелец: «Strategy Partners у нас вообще не
     было в списке, несмотря на то, что они одну сделку сопровождали по нашей
     базе» — сделка по «Форштадту» (eco.finadv). Описание — профиль фирмы с ее
@@ -3602,7 +3611,7 @@ const FIRM_MATCH = {firmone:/firm[.\s]?one/i, orion:/orion|орион/i, level:/
      не хватает «выходцами из Сбербанка», а у ВТБ перечислены конкретные
      формы, чтобы не поймать «бывший зам. CEO ВТБ». */
   sber:/Сбербанк(?!а)/, vtbcap:/ВТБ Капитал|ВТБ\s+—\s+организатор|стороны «Самолета» — ВТБ/,
-  sovcom:/Совкомбанк/, alfa:/Альфа-[Бб]анк|Альфа-Капитал/, gpb:/Газпромбанк/,
+  sovcom:/Совкомбанк/, gpb:/Газпромбанк/,
   tbank:/Т-Банк|Т-Инвестиции|Тинькофф-банк/, mkb:/Московский кредитный банк|МКБ(?![А-Яа-яЁё])/,
   rshb:/РСХБ|Россельхозбанк/, rencap:/Ренессанс Капитал/, solid:/ИФК\s*«?Солид|«Солид»/,
   /* НЕ `\bБКС\b`: в JavaScript граница слова считается по латинице
@@ -3613,7 +3622,6 @@ const FIRM_MATCH = {firmone:/firm[.\s]?one/i, orion:/orion|орион/i, level:/
   bcs:/БКС(?![А-Яа-яЁё])/, unicorn:/\bUnicorn\b/, astoria:/Astoria Capital/,
   novus:/Novus Capital/, atomiccap:/Atomic Capital/, ibcre:/IBC Real Estate/,
   nikoliers:/Nikoliers/, nfgroup:/NF Group|Knight Frank/, corexp:/CORE\.XP/,
-  rad:/Российский аукционный дом/,
   strategy:/Strategy Partners|Стратеджи Партн[ее]рс/};
 
 /* фолбэк: если для фирмы нет явной регулярки — строим ее из названия
@@ -7667,7 +7675,8 @@ async function mountDealTools(d){
     if(navigator.share){try{await navigator.share({title:d.title,text:`${d.title} — КОМПАС`,url});show("Карточка передана в меню «Поделиться».");return;}catch(e){if(e.name==="AbortError")return;}}
     await copyToClipboard(url,share,"Ссылка скопирована","Поделиться");
   };
-  const download=document.getElementById("downloaddeal");
+  const download=document.getElementById("downloaddeal"), download2=document.getElementById("downloaddeal2");
+  if(download2) download2.onclick=()=>download&&download.onclick();   // на телефоне кнопка стоит в строке вкладок
   if(download) download.onclick=async()=>{
     download.disabled=true;show("Готовим PDF…");
     try{
@@ -7788,9 +7797,11 @@ function renderDeal(id, qs, previewCard){
   </div>
   ${timelineHtml(d)}
   ${sparseNoticeHtml(d)}
-  <div class="lens reveal" role="tablist" aria-label="Разделы карточки">
+<div class="lens-row reveal">  <div class="lens" role="tablist" aria-label="Разделы карточки">
     <button data-l="overview" class="${lens==="overview"?"on":""}">Обзор</button>
     ${showFinTab?`<button data-l="fin" class="${lens==="fin"?"on":""}">Финансы</button>`:""}
+  </div>
+    <button class="chip pdf-top pdf-lens" id="downloaddeal2" type="button" title="Скачать карточку в PDF">Скачать PDF</button>
   </div>
   <p class="lens-hint reveal" id="lenshint"></p>
   <div id="facts" class="reveal"></div>
@@ -8160,7 +8171,7 @@ function renderDeal(id, qs, previewCard){
         // «юридический · Юридический консультант X» — вид уже назван в
         // уточнении, второй раз его не пишем; «цели» — наше слово.
         const det = humanRole(detail);
-        const own = /^(юридическ|финансов)[а-яё]*\s+консультант/i.test(det);
+        const own = /^(юридическ|финансов|регуляторн)[а-яё]*\s+консультант/i.test(det);   // «Регуляторный консультант» — вид юридического (владелец, 14 ноября 2026)
         const side = own ? esc(det.charAt(0).toUpperCase()+det.slice(1)) : `${it.kind}${det?` · ${esc(det)}`:""}`;
         return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)}</div><div class="t-side">${side}</div></div>`;
       };
