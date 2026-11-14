@@ -84,19 +84,6 @@ def to_date(published, fallback):
     return fallback
 
 
-def is_deal(row):
-    """Фильтр «это вообще сделка?». Запись со страницы сделок консультанта
-    (`advisor`, deal_pages.py) — сделка по определению: страница так и
-    называется, а отбор объявлений сделан при разборе. Ее заголовок («Orion
-    консультирует ВТБ в сделке на 320 млрд рублей», «Привлечение инвестиций
-    для …») слов из положительного словаря фильтра часто не несет, поэтому
-    для нее работает только отказная половина фильтра."""
-    title, summary = row.get('title'), row.get('summary', '')
-    if classify.looks_like_deal(title, summary):
-        return True
-    return bool(row.get('advisor') and title and not classify.why(title, summary)['negative'])
-
-
 def main(argv):
     rows = read_raw('--all' in argv)
     data = json.load(open(DATA, encoding='utf-8'))
@@ -117,12 +104,7 @@ def main(argv):
         item = {'title': row.get('title'), 'summary': row.get('summary'), 'url': row.get('url'),
                 'date': to_date(row.get('published'), row.get('fetched')),
                 'buyer': buyer, 'asset': asset, 'seller': seller}
-        # Запись со страницы сделок консультанта (deal_pages.py): имя источника
-        # для людей и фирма — по ней match.py ищет стороны карточки в тексте.
-        for extra in ('source_name', 'advisor', 'advisor_role'):
-            if row.get(extra):
-                item[extra] = row[extra]
-        if not is_deal(row):
+        if not classify.looks_like_deal(item['title'], row.get('summary', '')):
             counts['not_a_deal'] += 1
             result.append(dict(item, source_id=row.get('source_id'), verdict='not_a_deal'))
             continue

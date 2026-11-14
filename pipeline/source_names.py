@@ -127,24 +127,6 @@ DOMAIN_NAMES = {
     'mergers.ru': 'Mergers.ru',
     'ura.news': 'URA.RU',
     'incrussia.ru': 'Inc. Russia',
-    # Сайты консультантов, чьи страницы сделок читает приток
-    # (pipeline/ingest/deal_pages.py, 13 ноября 2026).
-    'advancecapital.ru': 'сайт Advance Capital',
-    'aspring.capital': 'сайт Aspring Capital',
-    'birchlegal.ru': 'сайт BIRCH',
-    'level-legal.com': 'сайт LEVEL Legal Services',
-    'orion-law.com': 'сайт Orion',
-    'stonebridgelegal.ru': 'сайт Stonebridge Legal',
-    'dgpartners.legal': 'сайт Дякин, Горцунян и Партнеры',
-    'whitesquarepartners.com': 'сайт White Square',
-    'epam.ru': 'сайт ЕПАМ',
-    'ivanyan.partners': 'сайт Иванян и партнеры',
-    'nikolaew.ru': 'сайт Николаев и партнеры',
-    'asari.legal': 'сайт Asari Legal',
-    'althausgroup.ru': 'сайт Althaus',
-    'denuo.legal': 'сайт Denuo',
-    'betterchance.ru': 'сайт Better Chance',
-    'alumnipartners.ru': 'сайт ALUMNI Partners',
 }
 
 

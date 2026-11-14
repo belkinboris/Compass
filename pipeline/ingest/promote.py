@@ -636,27 +636,15 @@ def _weak_match(why):
 # Telegram-каналы юрфирм, которые приток читает (pipeline/ingest/sources.json).
 FIRM_CHANNELS = ('kkmpconnect', 'alumnipartnerslawfirm', 'alumnimna', 'BIRCHLEGAL', 'LevelLegalServices',
                  'LKPconsult', 'whitesquarenews', 'stonebridge_legal')
-_FIRM_ADVISED = re.compile(r'консультирова|сопровожда|представлял[аи]? интересы|выступил[аи]? (?:юридическ|финансов|консультант)',
+_FIRM_ADVISED = re.compile(r'консультирова|сопровожда|представлял[аи]? интересы|выступил[аи]? (?:юридическ|консультант)',
                            re.I)
 _FIRM_DEAL = re.compile(r'сделк|приобрет|покупк|продаж|выкуп|совместн\w* предприят|\bСП\b|IPO|размещени|дол[июе]\b|акци',
                         re.I)
 
 
-def from_firm_deal_page(src_text):
-    """Источник — страница сделок на сайте консультанта (deal_pages.PAGES)."""
-    import deal_pages
-    hosts = {re.sub(r'^www\.', '', urlparse(rule['page']).netloc) for rule in deal_pages.PAGES.values()}
-    return any('//%s/' % h in src_text or '//www.%s/' % h in src_text for h in hosts)
-
-
 def is_firm_advisory_post(draft):
     """Черновик из канала юрфирмы, где фирма пишет, что вела сделку."""
     src = ' '.join(str(x) for s in (draft.get('src') or []) for x in s)
-    # Запись со страницы сделок консультанта — объявление фирмы по самому
-    # отбору (deal_pages.parse берет только сделки), слова в заголовке не нужны:
-    # плитка инвестбанка называется «Продажа 100% долей … Яндексу».
-    if from_firm_deal_page(src):
-        return True
     if not any('t.me/%s/' % ch in src or 'tg:%s' % ch in src for ch in FIRM_CHANNELS):
         return False
     text = '%s %s' % (draft.get('title') or '', draft.get('note') or draft.get('summary') or '')
