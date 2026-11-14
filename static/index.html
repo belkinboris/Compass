@@ -10162,7 +10162,9 @@ function renderFirmPage(f){
   const nWord = `${n} ${plural(n,"сделка","сделки","сделок")}`;
   const arr = `<svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg>`;
   const out = `<div class="fp-out"><a href="#/advisors">Консультанты</a> / Юридические / <b>${esc(f.n)}</b></div>`;
-  const prep = `<div class="fp-in fp-prep">${claimLineHtml()}</div>`;
+  /* На страницах фирм-партнеров строки «Вы работаете в этой фирме?» нет (владелец,
+     14 ноября 2026): с ними мы уже на связи. У остальных она зовет «Связаться с нами». */
+  const prep = "";
   /* «Подготовка к встрече» — готовые вопросы прямо под кнопкой (владелец, 11 ноября
      2026: панель с резюме «спускается хрен пойми куда», нужна «удобная выборка
      предвопросов»). Нажатие открывает шторку ассистента с этим вопросом; поля
@@ -10184,7 +10186,6 @@ function renderFirmPage(f){
         <div class="q-desc">${esc(p.lead)}</div>
         <div class="q-btns"><button class="q-btn q-pri" id="prepInterviewFirm" type="button">Подготовка к встрече</button><a class="q-btn" href="${p.site}" target="_blank" rel="noopener">Сайт фирмы ${arr}</a></div>${ask}
       </div><div class="q-tiles"><div class="q-tile q-navy"><b>${n}</b><span>${plural(n,"сделка","сделки","сделок")} в Компасе</span><small>с 2022 года, из открытых источников</small></div>${p.tiles.map(([k,a,b,c])=>`<div class="q-tile q-${k}"><b>${esc(a)}</b><span>${esc(b)}</span>${c?`<small>${esc(c)}</small>`:""}</div>`).join("")}</div></section>
-      ${claimLineHtml()}
       <h2>Сделки с участием фирмы<small>${nWord} в Компасе</small></h2>
       <div class="q-deals">${deals.map(x=>`<div class="q-deal"><div class="q-meta">${meta(x)}</div><h3>${esc(x.title)}</h3><div class="q-role"><i>Роль фирмы</i>${esc(x.role)}</div>${x.others.length?`<div class="q-oth">Другие консультанты: ${esc(x.others.join("; "))}</div>`:""}
         <div class="q-ft"><span class="q-sum">${esc(x.sum||"Сумма не раскрыта")}</span>${x.src?`<span>${x.src} ${plural(x.src,"источник","источника","источников")}</span>`:""}<a href="#/deal/${x.d.id}">Карточка сделки →</a></div></div>`).join("")}</div>
@@ -10296,7 +10297,7 @@ function renderFirmPage(f){
     askBtn.onclick = () => { askBox.hidden = !askBox.hidden; };
     askBox.querySelectorAll("[data-ask]").forEach(b=>b.onclick=()=>aiDockAsk(ASKS[+b.dataset.ask][1]));
   }
-  mountClaimLine("firm", f.id);
+  
 }
 /* СТРАНИЦА ФИРМЫ EXECUTIVE SEARCH — по макету «Execburo в Компасе»
    (см. EXEC_FIRMS). Своя палитра и шрифт Manrope — только внутри `.xb`;
@@ -10314,7 +10315,6 @@ function renderExecFirm(f){
     <p class="xb-lead">${esc(f.lead)}</p>
     <div class="xb-btns"><a class="xb-btn fill" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a><a class="xb-btn line" href="${f.site}" target="_blank" rel="noopener">Сайт фирмы <svg class="fp-arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a></div>
     <div class="xb-facts">${f.facts.map(([a,c])=>`<span><b>${esc(a)}</b> ${esc(c)}</span>`).join("")}<span>Основатель — <b>${esc(f.founderName)}</b></span></div>
-    ${claimLineHtml()}
   </div></section>
 
   <section class="xb-sec"><div class="xb-in"><div class="xb-hd"><h2>Услуги</h2><span class="n">с сайта фирмы</span></div>
@@ -10345,7 +10345,7 @@ function renderExecFirm(f){
     <div class="ct"><b>${esc(f.email)}</b><b><a href="tel:${f.tel}">${esc(f.phone)}</a></b><span>${f.links.map(([t,u])=>link(t,u)).join(" · ")}</span></div>
     <a class="xb-btn" href="${f.site}" target="_blank" rel="noopener">Оставить заявку</a></div></section>
   </div></div>`;
-  mountClaimLine("firm", f.id);
+  
 }
 /* ПОДГОТОВКА К СОБЕСЕДОВАНИЮ — С РЕЗЮМЕ. Просьба владельца 3 октября 2026:
    на собеседование идут не только в компании, но и к консультантам («может
@@ -12785,7 +12785,7 @@ async function mountClaimLine(kind, id){
   const ask = kind==="firm" ? "Вы работаете в этой фирме?" : "Это ваша компания?";
   const paintOffer = () => {
     el.classList.remove("mine");
-    el.innerHTML = `${ask} <button class="link-btn" type="button" id="claimOpen">Подключить к кабинету</button>`;
+    el.innerHTML = `${ask} <button class="link-btn" type="button" id="claimOpen">Связаться с нами</button>`;
     document.getElementById("claimOpen").onclick = () => {
       if(!ME){
         el.innerHTML = `${ask} <a href="#/account">Войдите или зарегистрируйтесь</a> — потом вернитесь на эту страницу и отправьте заявку. Подключенная карточка видна в личном кабинете: сколько раз ее открывали и куда прислать правку.`;

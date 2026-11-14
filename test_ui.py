@@ -5232,7 +5232,7 @@ def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_u
         pg = ctx.new_page()
         pg.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         pg.on("pageerror", lambda e: errors.append("pageerror: %s" % e))
-        pg.goto(base_url + "/#/advisors/execburo", wait_until="domcontentloaded")
+        pg.goto(base_url + "/#/advisors/alumni", wait_until="domcontentloaded")
         pg.wait_for_selector("#claimOpen", timeout=15000)
         pg.click("#claimOpen")
         assert "Войдите" in pg.inner_text("#claimLine")
@@ -5244,7 +5244,7 @@ def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_u
         pg.wait_for_selector("#claimQ", timeout=10000)
         assert "как это работает" in pg.inner_text("#claimBody").lower()
         assert pg.inner_text(".account-tabs a.on").strip().lower() == "моя компания"
-        pg.fill("#claimQ", "execburo")
+        pg.fill("#claimQ", "alumni")
         pg.wait_for_selector("#claimHits [data-pick]", timeout=5000)
         pg.click("#claimHits [data-pick]")
         pg.fill(".claim-hit-form [name=position]", "Основатель")
@@ -5252,7 +5252,7 @@ def test_my_company_tab_sends_a_claim_without_errors_or_overflow(browser, base_u
         pg.wait_for_function("document.getElementById('claimBody').innerText.includes('На проверке')", timeout=10000)
         over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
         assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
-        pg.evaluate("location.hash = '#/advisors/execburo'")
+        pg.evaluate("location.hash = '#/advisors/alumni'")
         pg.wait_for_function("(document.getElementById('claimLine')||{}).innerText?.includes('проверяем')",
                              timeout=10000)
         over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
