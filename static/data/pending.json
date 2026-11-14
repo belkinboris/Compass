@@ -67,7 +67,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-14T07:38:47+00:00",
    "stake_acquired": "29.99",
    "reviewed": "2026-11-14",
    "proofread_absorbed": {
@@ -97,7 +97,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "eafecd0fb03f.5a5c4f",
    "second_read": "2026-11-14",
-   "second_read_hash": "eafecd0fb03f.5a5c4f"
+   "second_read_hash": "eafecd0fb03f.5a5c4f",
+   "draft_sent": true,
+   "shown_hash": "eafecd0fb03f.5a5c4f"
   },
   {
    "id": "gcc6afd66",
