@@ -75,6 +75,57 @@ CARDS = [
      'set': {'kind': 'acquisition', 'date_basis': 'announcement'},
      'finadv': 'Aspring Capital — эксклюзивный инвестиционный консультант владельцев «Национальной медицинской сети»',
      'adv': [fin_adv('продавца (владельцы «Национальной медицинской сети»)', 'Aspring Capital', ASPRING)]},
+    # 11. VK / YClients.
+    #   Интерфакс, 20.12.2023: «VK приобрел 100% долей в группе компаний YCLIENTS… говорится в
+    #   сообщении холдинга. Сумма сделки не называется».
+    #   Интерфакс, 22.03.2024: «Сумма сделки по покупке интернет-холдингом VK ООО "Уайклаентс"…
+    #   составляет 3,94 млрд рублей, сообщается в финансовой отчетности VK».
+    #   CNews, 22.03.2024: «Сделка была завершена в конце 2023 г.» — дня закрытия нет, дата — день объявления.
+    #   aspring.capital/services: «эксклюзивным финансовым советником владельцев компании YClients».
+    #   Продавцы поименно в источниках не названы — поле пустое, поиск записан в заметке приемки.
+    {'key': 'vk-yclients',
+     'match': ('yclients',),
+     'draft': {
+         'date': '2023-12-20',
+         'title': 'VK купил YClients',
+         'ind': 'ИТ и интернет', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Интерфакс', 'https://www.interfax.ru/business/937269'],
+                 ['Интерфакс', 'https://www.interfax.ru/business/951796'],
+                 ['vc.ru', 'https://vc.ru/money/961189-vk-kupila-servis-dlya-onlain-zapisi-v-sfere-uslug-yclients'],
+                 ['CNews', 'https://www.cnews.ru/news/top/2024-03-22_vk_potratil_39_milliarda_na'],
+                 ['Aspring Capital', ASPRING]],
+         'buyer_name': 'VK',
+         'asset': 'YClients',
+         'sum': '3,94 млрд ₽'},
+     'set': {'kind': 'acquisition', 'date_basis': 'announcement', 'sum_basis': 'disclosed'},
+     'finadv': 'Aspring Capital — эксклюзивный финансовый советник владельцев YClients',
+     'adv': [fin_adv('продавцов (владельцы YClients)', 'Aspring Capital', ASPRING)]},
+    # 10. «Лента» / «Улыбка радуги».
+    #   Коммерсантъ, 02.12.2024: «Ритейлер «Лента» объявил о приобретении 100% акций АО «Торговый дом
+    #   Эра», которое владеет сетью… «Улыбка радуги». Сделка уже получила одобрение ФАС… В сообщении
+    #   «Ленты» сумма сделки не приводится».
+    #   Ведомости (Северо-Запад), 02.12.2024: ««Лента» купила петербургскую сеть магазинов «Улыбка
+    #   радуги»… «Лента» начнет консолидировать приобретенный бизнес в своей отчетности уже с декабря».
+    #   aspring.capital/services: «эксклюзивным финансовым советником… компании «Улыбка радуги» в сделке
+    #   по продаже в пользу Ленты».
+    #   Продавцы акций в источниках о сделке не названы — поле пустое, поиск записан в заметке приемки.
+    {'key': 'lenta-ulybka-radugi',
+     'match': ('улыбка радуги', 'торговый дом'),
+     'draft': {
+         'date': '2024-12-02',
+         'title': '«Лента» купила сеть магазинов «Улыбка радуги»',
+         'ind': 'Ритейл', 'type': 'M&A', 'status': 'Закрыта',
+         'src': [['Коммерсантъ', 'https://www.kommersant.ru/doc/7344356'],
+                 ['РБК', 'https://www.rbc.ru/business/02/12/2024/674d67f69a79473bf84d9a3f'],
+                 ['Ведомости', 'https://spb.vedomosti.ru/business/articles/2024/12/02/1078570-lenta-kupila-peterburgskuyu-set-magazinov-ulibka-radugi'],
+                 ['Ведомости', 'https://www.vedomosti.ru/business/articles/2024/12/03/1078710-lenta-zahodit-v-format-magazinov-drogeri'],
+                 ['Aspring Capital', ASPRING]],
+         'buyer_name': '«Лента»',
+         'asset': '«Улыбка радуги»',
+         'sum': 'Не раскрыта'},
+     'set': {'kind': 'acquisition', 'date_basis': 'announcement'},
+     'finadv': 'Aspring Capital — эксклюзивный финансовый советник «Улыбки радуги»',
+     'adv': [fin_adv('продавца («Улыбка радуги»)', 'Aspring Capital', ASPRING)]},
 ]
 
 
