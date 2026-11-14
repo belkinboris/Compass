@@ -13102,7 +13102,8 @@
   "d00097677": "drop",
   "d91283481": "auto-drop",
   "d13620213": "auto-drop",
-  "d42642624": "auto-drop"
+  "d42642624": "auto-drop",
+  "d13549040": "take"
  },
  "enrich_wait": {
   "d48075333": {
@@ -23982,6 +23983,16 @@
    "by": "routine",
    "reason": "не сделка: собственные инвестиции компании в безопасность продукта (самокаты), не покупка доли или актива (тот же класс случая, что g239b1e0b/g033658b2, решенных 13-14 ноября)",
    "at": "2026-11-14T06:58:56+00:00"
+  },
+  "https://abnews.ru/siberia/news/novosibirsk/2026/11/14/v-novosibirske-na-torgah-prodadut-remontnyj-czeh-za-867-mln-rublej-v-novosibirske-izbavyatsya-ot-remontnogo-czeha-pochti-za-87-mln-rublej": {
+   "id": "g75a69e43",
+   "title": "Ремонтный цех в Новосибирске выставлен на торги за 86,7 млн рублей",
+   "at": "2026-11-14T11:55:17+00:00"
+  },
+  "https://nsknews.info/news/meriia-planiruet-prodat-s-aukciona-2-etaznyi-cex-na-prospekte-dzerzinskogo": {
+   "id": "g75a69e43",
+   "title": "Ремонтный цех в Новосибирске выставлен на торги за 86,7 млн рублей",
+   "at": "2026-11-14T11:55:17+00:00"
   }
  }
 }
