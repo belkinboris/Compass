@@ -1530,3 +1530,13 @@ def find_cell(table: dict, metric: str, industry: str | None, year: int | None,
         if c['industry'] == want_ind and c['year'] == want_year:
             return c
     return None
+
+
+def stake_number(value):
+    """Доля в `stake_acquired` — число, а не текст: «29.99» из таблицы правок
+    тест базы не принимает, и публикация вставала (14 ноября 2026)."""
+    try:
+        num = float(str(value).replace(',', '.'))
+    except (TypeError, ValueError):
+        return value
+    return int(num) if num == int(num) else num

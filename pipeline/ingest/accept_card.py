@@ -1593,6 +1593,9 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
         if card['date_basis'] not in _dm.DATE_BASES:
             out.append(('date_basis_invalid', 'date_basis «%s» не из списка %s — поставьте верное значение '
                         'или снимите поле' % (card['date_basis'], ', '.join(_dm.DATE_BASES))))
+    stake = card.get('stake_acquired')
+    if stake is not None and not (isinstance(stake, (int, float)) and not isinstance(stake, bool) and 0 < stake <= 100):
+        out.append(('stake_acquired_invalid', 'stake_acquired «%s» — нужно число процентов от 0 до 100, не текст' % (stake,)))
     # СТАНДАРТ ЗАГОЛОВКА (владелец одобрил 6 ноября 2026: «Заголовки ок»).
     # Глагол — по типу и статусу (pipeline/title_standard.py, RULES). Держит
     # ВСЕ, что еще не вышло постом, — по дате сделки отсекать нельзя: в тот же
