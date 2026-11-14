@@ -1434,7 +1434,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-11T11:13:00+00:00",
+   "pending_since": "2026-11-14T06:37:50+00:00",
    "from_raw": {
     "draft_id": "d95962855",
     "title": "В состав учредителей сервиса знакомств Twinby вошел ЗПИФ «ТКИ-СКАЙ» по управлением УК «ТКИ капитал». Согласно данным Rusprofile , фонд получил 9,72% компании. Также в капитал ООО «Твинби» вошло АО «ВО"
@@ -1472,7 +1472,10 @@
    "accepted": "2026-11-14",
    "accepted_hash": "a9ebd55d2df7.19728e",
    "second_read": "2026-11-14",
-   "second_read_hash": "a9ebd55d2df7.19728e"
+   "second_read_hash": "a9ebd55d2df7.19728e",
+   "draft_sent": true,
+   "shown_hash": "a9ebd55d2df7.19728e",
+   "post_draft_sent": true
   },
   {
    "id": "g562fa11c",
