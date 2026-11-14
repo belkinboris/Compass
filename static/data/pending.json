@@ -148,7 +148,7 @@
     ]
    },
    "buyer": "gd3bb09b3",
-   "pending_since": "2026-11-09T13:10:03+00:00",
+   "pending_since": "2026-11-14T12:46:13+00:00",
    "proofread_absorbed": {
     "law.struct": [
      "19b2e9983142"
@@ -175,7 +175,9 @@
    "accepted_hash": "b0477af4970b.2350f3",
    "date_basis": "registry",
    "second_read": "2026-11-14",
-   "second_read_hash": "b0477af4970b.2350f3"
+   "second_read_hash": "b0477af4970b.2350f3",
+   "draft_sent": true,
+   "shown_hash": "b0477af4970b.2350f3"
   },
   {
    "id": "g0a1f1895",
