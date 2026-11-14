@@ -174,7 +174,16 @@ def names_party_upfront(name, detail, limit=60):
     if not n or not d:
         return False
     pos = d.find(n)
-    return 0 <= pos <= limit
+    if not (0 <= pos <= limit):
+        return False
+    # Подстрока внутри ЧУЖОГО, более длинного имени — не совпадение
+    # («Румелко» внутри «Румелко-Агро», g60130b7f, 14 ноября 2026): граница
+    # обязана быть не буквой/цифрой и не дефисом, продолжающим слово.
+    before = d[pos - 1] if pos > 0 else ''
+    after = d[pos + len(n)] if pos + len(n) < len(d) else ''
+    if before.isalnum() or before == '-' or after.isalnum() or after == '-':
+        return False
+    return True
 
 
 def _flat_for_match(text):

@@ -766,6 +766,11 @@ def test_post_buyer_name_is_not_printed_twice_when_the_detail_already_says_it():
         "от инвестиционного фонда «ТилТех Капитал».")
     # Разнобой кавычек в базе не должен мешать дословной сверке.
     assert format_post.names_party_upfront('ООО "Афкап"', 'Новым владельцем стало ООО «Афкап».')
+    # Подстрока внутри ЧУЖОГО, более длинного имени — не совпадение
+    # («Румелко» внутри «Румелко-Агро», g60130b7f, 14 ноября 2026): без
+    # границы слова строка «Покупатель: Владеет 21,51% ООО «Румелко-Агро».»
+    # выходила без имени покупателя вовсе.
+    assert not format_post.names_party_upfront("Румелко", "Владеет 21,51% ООО «Румелко-Агро».")
 
 
 def test_post_buyer_detail_skips_the_sentence_about_who_reported_the_deal():
