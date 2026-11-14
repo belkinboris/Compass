@@ -31,4 +31,14 @@ FIXES = [
   'why': '«единственный акционер» = 100% акций — семантическое, а не дословное число; литерального «100%» '
          'ни в одном источнике нет, записано напрямую в pending.json, мимо review.py (тот же класс, что '
          'падеж предмета — docs/card_parties.md)'},
+ {'id': 'g05d87236', 'field': 'src', 'old': None,
+  'new': ['Sostav.ru, «Владелец «Доширака» купил производителя Gallina Blanca» (26.10.2022)',
+          'https://www.sostav.ru/publication/vladelets-doshiraka-kupil-proizvoditelya-gallina-blanca-57215.html'],
+  'quote': 'Генеральный директор «Infoline-Аналитика» Михаил Бурмистров отмечает, что Gallina Blanca — это низкомаржинальный бизнес',
+  'why': 'источник оценки Бурмистрова (~$10 млн) в eco.val — второе чтение нашло ее процитированной, но не добавленной в src'},
+ {'id': 'g05d87236', 'field': 'src', 'old': None,
+  'new': ['Сноб, «Корейский владелец «Доширака» купил производителя Gallina Blanca» (26.10.2022)',
+          'https://snob.ru/news/korejskij-vladelec-doshiraka-kupil-proizvoditelya-gallina-blanca/'],
+  'quote': 'Тогда сделку одобрила Федеральная антимонопольная служба',
+  'why': 'источник факта об одобрении ФАС сорвавшейся сделки с CG Foods в eco.context — второе чтение нашло его процитированным, но не добавленным в src'},
 ]
