@@ -1566,55 +1566,47 @@
   },
   {
    "id": "firm:alumni",
-   "name": "сайт ALUMNI Partners",
-   "kind": "deal_page",
+   "name": "ALUMNI Partners",
+   "kind": "html",
    "url": "https://www.alumnipartners.ru/",
-   "feed": "https://www.alumnipartners.ru/projects/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:asari",
-   "name": "сайт Asari Legal",
-   "kind": "deal_page",
+   "name": "Asari Legal",
+   "kind": "html",
    "url": "https://asari.legal/",
-   "feed": "https://asari.legal/news/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:betterchance",
-   "name": "сайт Better Chance",
-   "kind": "deal_page",
+   "name": "Better Chance",
+   "kind": "html",
    "url": "https://www.betterchance.ru/",
-   "feed": "https://betterchance.ru/projects/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:birch",
-   "name": "сайт BIRCH",
-   "kind": "deal_page",
+   "name": "BIRCH",
+   "kind": "html",
    "url": "https://www.birchlegal.ru/",
-   "feed": "https://birchlegal.ru/projects/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:cls",
@@ -1640,16 +1632,14 @@
   },
   {
    "id": "firm:denuo",
-   "name": "сайт Denuo",
-   "kind": "deal_page",
+   "name": "Denuo",
+   "kind": "html",
    "url": "https://denuo.legal",
-   "feed": "https://denuo.legal/ru/insights/releases/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:elwi",
@@ -1675,16 +1665,14 @@
   },
   {
    "id": "firm:level",
-   "name": "сайт LEVEL Legal Services",
-   "kind": "deal_page",
+   "name": "LEVEL Legal Services",
+   "kind": "html",
    "url": "https://www.level-legal.com/",
-   "feed": "https://www.level-legal.com/news",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:mvp",
@@ -1723,29 +1711,25 @@
   },
   {
    "id": "firm:orion",
-   "name": "сайт Orion",
-   "kind": "deal_page",
+   "name": "Orion",
+   "kind": "html",
    "url": "https://orion-law.com/",
-   "feed": "https://orion-law.com/news",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:stonebridge",
-   "name": "сайт Stonebridge Legal",
-   "kind": "deal_page",
+   "name": "Stonebridge Legal",
+   "kind": "html",
    "url": "http://www.stonebridgelegal.ru",
-   "feed": "https://www.stonebridgelegal.ru/ru/news/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:vegaslex",
@@ -1771,16 +1755,14 @@
   },
   {
    "id": "firm:whitesquare",
-   "name": "сайт White Square",
-   "kind": "deal_page",
+   "name": "White Square",
+   "kind": "html",
    "url": "https://whitesquarepartners.com/ru",
-   "feed": "https://www.whitesquarepartners.com/ru/news",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:alrud",
@@ -1806,42 +1788,36 @@
   },
   {
    "id": "firm:dgp",
-   "name": "сайт Дякин, Горцунян и Партнеры",
-   "kind": "deal_page",
+   "name": "Дякин, Горцунян и Партнеры",
+   "kind": "html",
    "url": "https://dgpartners.legal/",
-   "feed": "https://dgpartners.legal/mediaportal/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:epam",
-   "name": "сайт ЕПАМ",
-   "kind": "deal_page",
+   "name": "ЕПАМ (Егоров, Пугинский, Афанасьев и партнеры)",
+   "kind": "html",
    "url": "http://epam.ru",
-   "feed": "https://epam.ru/ru/news",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:ivanyan",
-   "name": "сайт Иванян и партнеры",
-   "kind": "deal_page",
+   "name": "Иванян и партнеры",
+   "kind": "html",
    "url": "https://ivanyan.partners/",
-   "feed": "https://ivanyan.partners/news/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:kkmp",
@@ -1867,16 +1843,14 @@
   },
   {
    "id": "firm:nikolaev",
-   "name": "сайт Николаев и партнеры",
-   "kind": "deal_page",
+   "name": "МКА «Николаев и партнеры»",
+   "kind": "html",
    "url": "https://nikolaew.ru",
-   "feed": "https://nikolaew.ru/media/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "firm:nikolskaya",
@@ -1913,16 +1887,14 @@
   },
   {
    "id": "firm:althaus",
-   "name": "сайт Althaus",
-   "kind": "deal_page",
+   "name": "Althaus Group",
+   "kind": "html",
    "url": "https://althausgroup.ru/",
-   "feed": "https://althausgroup.ru/news/",
-   "feed_checked": true,
+   "feed": null,
+   "feed_checked": false,
    "tier": 3,
    "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
+   "enabled": false
   },
   {
    "id": "web:ngs24.ru",
@@ -2105,32 +2077,6 @@
    "last_check": "2026-10-26",
    "last_error": null,
    "note": "Инвестконсультант: первым публикует свои закрытые сделки (5YES! / «Логика молока», 26.10.2026 — на 1 ч 24 мин раньше @dealsma)."
-  },
-  {
-   "id": "firm:advancecap",
-   "url": "https://advancecapital.ru/",
-   "name": "сайт Advance Capital",
-   "kind": "deal_page",
-   "feed": "https://advancecapital.ru/sdelki/",
-   "feed_checked": true,
-   "tier": 3,
-   "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
-  },
-  {
-   "id": "firm:aspring",
-   "url": "https://aspring.capital/",
-   "name": "сайт Aspring Capital",
-   "kind": "deal_page",
-   "feed": "https://aspring.capital/services",
-   "feed_checked": true,
-   "tier": 3,
-   "deals_seen": 0,
-   "enabled": true,
-   "last_check": "2026-11-13",
-   "last_error": null
   }
  ]
 }

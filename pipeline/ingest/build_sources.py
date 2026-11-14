@@ -170,26 +170,12 @@ def main(write):
             'feed_checked': False, 'tier': 3, 'deals_seen': count, 'enabled': True,
         })
 
-    # Сайт фирмы со страницей сделок, для которой есть правило разбора
-    # (deal_pages.PAGES), — включенный источник вида `deal_page`; остальные
-    # сайты фирм остаются выключенными: ленты у них нет.
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import deal_pages
-    listed = set()
     for fid, fname, site in firm_sites():
-        rule = deal_pages.PAGES.get('firm:' + fid)
-        listed.add('firm:' + fid)
         sources.append({
-            'id': 'firm:' + fid, 'name': deal_pages.label_of('firm:' + fid) if rule else fname,
-            'kind': 'deal_page' if rule else 'html',
-            'url': site, 'feed': rule['page'] if rule else None, 'feed_checked': False,
-            'tier': 3, 'deals_seen': 0, 'enabled': bool(rule),
+            'id': 'firm:' + fid, 'name': fname, 'kind': 'html',
+            'url': site, 'feed': None, 'feed_checked': False,
+            'tier': 3, 'deals_seen': 0, 'enabled': False,
         })
-    for sid, rule in deal_pages.PAGES.items():
-        if sid not in listed:
-            sources.append({'id': sid, 'name': deal_pages.label_of(sid), 'kind': 'deal_page',
-                            'url': rule['page'], 'feed': rule['page'], 'feed_checked': False,
-                            'tier': 3, 'deals_seen': 0, 'enabled': True})
 
     by_kind = Counter(s['kind'] for s in sources)
     by_tier = Counter(s['tier'] for s in sources)

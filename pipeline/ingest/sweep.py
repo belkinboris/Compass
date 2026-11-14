@@ -37,10 +37,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 TRACKED = ['static/data/pending.json', 'static/data/signals.json', 'data/inbox/hold', 'data/inbox/duplicates',
-           'data/inbox/moderation_state.json', 'data/inbox/undecided_reminders.json',
-           # память страниц сделок консультантов: без нее запись с сайта фирмы
-           # приходила бы каждый час заново (deal_pages.py)
-           'pipeline/ingest/deal_pages_seen.json']
+           'data/inbox/moderation_state.json', 'data/inbox/undecided_reminders.json']
 REMINDERS = 'data/inbox/undecided_reminders.json'
 
 
