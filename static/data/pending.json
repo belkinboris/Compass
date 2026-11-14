@@ -873,7 +873,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-09T13:22:24+00:00",
+   "pending_since": "2026-11-14T17:16:35+00:00",
    "from_raw": {
     "draft_id": "d81970774",
     "title": "Evermount Capital Group покупает у NK Group строящийся склад в «NK Домодедово-1»"
@@ -903,7 +903,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "64f5a3914508.966308",
    "second_read": "2026-11-14",
-   "second_read_hash": "64f5a3914508.966308"
+   "second_read_hash": "64f5a3914508.966308",
+   "draft_sent": true,
+   "shown_hash": "64f5a3914508.966308"
   },
   {
    "id": "gc708f8c0",
