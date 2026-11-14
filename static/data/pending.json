@@ -1234,7 +1234,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-10T12:54:36+00:00",
+   "pending_since": "2026-11-14T19:26:12+00:00",
    "reviewed": "2026-11-14",
    "target": "g3a7d8718",
    "buyer": "g4120de02",
@@ -1259,7 +1259,10 @@
    "accepted": "2026-11-14",
    "accepted_hash": "c3389443adda.15ba29",
    "second_read": "2026-11-14",
-   "second_read_hash": "c3389443adda.15ba29"
+   "second_read_hash": "c3389443adda.15ba29",
+   "draft_sent": true,
+   "shown_hash": "c3389443adda.15ba29",
+   "post_draft_sent": true
   },
   {
    "id": "gbb89fc13",
