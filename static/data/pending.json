@@ -1031,7 +1031,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-10T05:52:38+00:00",
+   "pending_since": "2026-11-14T19:20:12+00:00",
    "reviewed": "2026-11-14",
    "proofread_absorbed": {
     "law.appr": [],
@@ -1053,7 +1053,9 @@
    "accepted": "2026-11-14",
    "accepted_hash": "e94ebf947d48.dc6ea5",
    "second_read": "2026-11-14",
-   "second_read_hash": "e94ebf947d48.dc6ea5"
+   "second_read_hash": "e94ebf947d48.dc6ea5",
+   "draft_sent": true,
+   "shown_hash": "e94ebf947d48.dc6ea5"
   },
   {
    "id": "g0966b2e2",
