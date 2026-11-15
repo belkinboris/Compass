@@ -12,7 +12,7 @@ import json
 import re
 import sys
 import tempfile
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
@@ -30,7 +30,16 @@ import monthly_digest           # noqa: E402
 import match as matcher      # noqa: E402
 
 
-FRESH_DATE = date.today().isoformat()
+def _fresh_date() -> str:
+    # 15-е число без date_basis — находка accept_card.findings() (заглушка
+    # «середина месяца», docs/card_status_dates.md#Дата); чтобы FRESH_DATE
+    # не превращал фикстуры без date_basis в карточки с готовой находкой раз
+    # в месяц, день сдвигается на один назад, если «сегодня» — 15-е.
+    today = date.today()
+    return (today - timedelta(days=1)).isoformat() if today.day == 15 else today.isoformat()
+
+
+FRESH_DATE = _fresh_date()
 """Дата для тестовых карточек, которым нужно пройти гейт `is_fresh()` в
 send_telegram.main() (5 сентября 2026: сделки не первой свежести больше не
 публикуются вовсе, см. CLAUDE.md), но которые проверяют что-то другое —
