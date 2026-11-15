@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14",
+ "updated": "2026-11-15",
  "signals": [
   {
    "id": "s1858c08a7",
@@ -81,6 +81,19 @@
    ],
    "origin": "news",
    "strength": "normal"
+  },
+  {
+   "id": "se03168b8c",
+   "company_id": "g3ff23b62",
+   "date": "2026-11-11",
+   "kind": "sell",
+   "summary": "Делимобиль — готовит продажу части бизнеса",
+   "source": [
+    "vedomosti.ru",
+    "https://www.vedomosti.ru/business/articles/2026/11/11/1244235-delimobil-vistavil-na-prodazhu"
+   ],
+   "origin": "news",
+   "strength": "strong"
   },
   {
    "id": "s56c9d2251",
