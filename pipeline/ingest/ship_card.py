@@ -53,7 +53,7 @@ def git(*args, check=True):
 def push_with_retry(tries=4):
     for i in range(tries):
         git('pull', '--rebase', '--autostash', 'origin', 'main')
-        r = subprocess.run(['git', 'push', '-u', 'origin', 'main'], cwd=ROOT, capture_output=True, text=True)
+        r = subprocess.run(['git', 'push', 'origin', 'HEAD:main'], cwd=ROOT, capture_output=True, text=True)
         if r.returncode == 0:
             return True
         time.sleep(2 ** (i + 1))
