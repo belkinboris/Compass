@@ -118,6 +118,142 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d69165362",
+   "title": "Распродажа на рынке криптовалют превысила $2 млрд за сутки",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9109972"
+    ]
+   ],
+   "sum": "$2 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d01114193",
+   "title": "Норму обязательной продажи произведенных нефтепродуктов предложили рассчитывать за 3 мес.",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1129139"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-15",
+     "title": "Переговоры",
+     "note": "Норму обязательной продажи не менее 75% произведенных нефтепродуктов с каждой тонны переработанной нефти предлагается рассчитывать не за один налоговый период, а в совокупности за три месяца, сообщил замглавы Минфина Алексей Сазанов на заседании комитета по…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1129139"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d64445539",
+   "title": "В России купили рекордное за пять лет количество антипохмельных средств",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2202164/2026-11-15/v-rossii-kupili-rekordnoe-za-piat-let-kolichestvo-antipokhmelnykh-sredstv"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-15",
+     "title": "Сделка завершена",
+     "note": "За девять месяцев 2026 года россияне купили 1,84 млн упаковок средств от похмелья. Это рекорд за последние пять лет. Информация об этом 15 ноября следует из данных аналитической компании DSM Group. По данным исследователей, общий объем продаж лекарственных…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2202164/2026-11-15/v-rossii-kupili-rekordnoe-za-piat-let-kolichestvo-antipokhmelnykh-sredstv"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "рекордное за пять лет количество антипохмельных средств",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "рекордное за пять лет количество антипохмельных средств",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d25431085",
+   "title": "Аукционы Минфина — инвесторов не привлекает даже повышенная доходность в бумагах, растут и доходности по вкладам",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1375026.php"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
