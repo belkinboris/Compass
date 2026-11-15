@@ -119,34 +119,6 @@
     "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
     "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
    ]
-  },
-  {
-   "draft_id": "d56524873",
-   "title": "Житель Калининградской области потерял 30 тысяч рублей при покупке колес",
-   "date": "2026-11-15",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/kaliningrad/2026/11/15/zhitel-kaliningradskoj-oblasti-poteryal-30-tysyach-rublej-pri-pokupke-koles"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }
