@@ -1,0 +1,485 @@
+{
+ "made": "2026-11-15",
+ "drafts": [
+  {
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7842"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82549834",
+   "title": "В Сургуте выставили на продажу аэротрубу за 80 миллионов рублей",
+   "date": "2026-11-14",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144230"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8cf4df95 (общие редкие слова: выстав, продаж, рублей, сургут) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d76948995",
+   "title": "Наследники владельца картины Ван Гога потребовали снять ее с аукциона",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/15/1245424-nasledniki-vladeltsa"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94563382",
+   "title": "ТАСС: зенитчики ВСУ под Харьковом просят волонтеров купить Starlink",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/armiya-i-opk/28318745"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25238684",
+   "title": "NYT: наследники владельца картины Ван Гога требуют Sotheby's снять ее с продажи",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28318573"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08320715",
+   "title": "От Sotheby's потребовали отменить продажу картины Ван Гога на аукционе",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2202035/2026-11-15/ot-sothebys-potrebovali-otmenit-prodazhu-kartiny-van-goga-na-auktcione"
+    ]
+   ],
+   "sum": "$180 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «NYT: наследники владельца картины Ван Гога требуют Sotheby's» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d52211475",
+   "title": "Картину Ван Гога «Цветущий каштан» продадут на аукционе в Нью-Йорке",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2202007/2026-11-15/kartinu-van-goga-tcvetushchii-kashtan-prodadut-na-auktcione-v-niu-jorke"
+    ]
+   ],
+   "sum": "$35 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68360985",
+   "title": "В Стокгольме выставят на торги супрематический чайный набор Малевича",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261115/malevich-2131638508.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36075917",
+   "title": "Россиянам назвали самый выгодный период для покупки алкоголя к Новому году",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/15/rossiyanam-nazvali-samyy-vygodnyy-period-dlya-pokupki-alkogolya-k-novomu-godu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47437902",
+   "title": "Как русский оружейник Мосин создал культовую винтовку, на гонорар от которой выкупил любимую у ее мужа",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/world/2026/11/15/76765108/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-15",
+     "title": "Сделка завершена",
+     "note": "«Мосинка» не теряет своей популярности и известности уже 135 лет",
+     "source": [
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/world/2026/11/15/76765108/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "любимую у ее мужа",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "любимую у ее мужа",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d92706761",
+   "title": "Как русский оружейник Мосин создал культовую винтовку, на гонорар от которой выкупил любимую у ее мужа",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/world/2026/11/15/76765114/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-15",
+     "title": "Сделка завершена",
+     "note": "«Мосинка» не теряет своей популярности и известности уже 135 лет",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/world/2026/11/15/76765114/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "любимую у ее мужа",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "любимую у ее мужа",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d44506777",
+   "title": "Коту — креветки, себе — по списку. Что новосибирцы покупают в супермаркетах и на чем экономят: изучаем их корзины",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/food/2026/11/15/76747259/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "в супермаркетах и на чем экономят: изучаем их корзины",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "в супермаркетах и на чем экономят: изучаем их корзины",
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d69302994",
+   "title": "На рынке в Заостровке теперь продают не только овощи и фрукты, но и газировку и снеки из-за рубежа — смотрим цены",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/food/2026/11/15/76761408/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Машиностроение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
