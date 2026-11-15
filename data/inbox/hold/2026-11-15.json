@@ -59,35 +59,6 @@
    ]
   },
   {
-   "draft_id": "d64766360",
-   "title": "Владелец бывшего банка «Тинькофф» покупает «Циан»",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-06_vladelets_byvshego_banka_tiinkoff"
-    ]
-   ],
-   "sum": "77,13 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "«Циан»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "«Циан»",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g9b4c2e71 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d82549834",
    "title": "В Сургуте выставили на продажу аэротрубу за 80 миллионов рублей",
    "date": "2026-11-14",

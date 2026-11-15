@@ -77,7 +77,7 @@ def commit_and_push(message):
             print('git pull: конфликт не в служебных файлах сырья — ребейз отменен, '
                   'очередь останется локальной до следующего забора.')
             return 1
-        if git('push', '-u', 'origin', 'main').returncode == 0:
+        if git('push', 'origin', 'HEAD:main').returncode == 0:
             print('Запушено.')
             return 0
         time.sleep(2 ** (i + 1))
