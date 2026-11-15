@@ -31,6 +31,48 @@
     "needs_review": true
    },
    "queued": "2026-11-15"
+  },
+  {
+   "key": "https://mergers.ru/news/Logika-moloka-kupila-proizvoditelya-rastitelnyh-produktov-Velle-87725::g3555ea6e",
+   "candidate_id": "g3555ea6e",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d52982496",
+    "title": "«Логика молока» купила производителя растительных продуктов Velle",
+    "date": "2026-11-02",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Logika-moloka-kupila-proizvoditelya-rastitelnyh-produktov-Velle-87725"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-02",
+      "title": "Сделка завершена",
+      "note": "ООО «Велле Холдинг» специализируется на производстве различных продуктов на растительной основе, в том числе уникальных для российского рынка: питьевых и ложковых растительных йогуртов, каш, растительных сливок и сметаны, кофейных напитков. Всего в портфель…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Logika-moloka-kupila-proizvoditelya-rastitelnyh-produktov-Velle-87725"
+      ]
+     }
+    ],
+    "buyer_name": "«Логика молока»",
+    "asset": "производитель растительных продуктов Velle",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Логика молока»",
+     "asset": "производитель растительных продуктов Velle",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-15"
   }
  ]
 }
