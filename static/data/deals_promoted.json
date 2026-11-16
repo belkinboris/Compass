@@ -217093,6 +217093,10 @@
     [
      "Ведомости",
      "https://www.vedomosti.ru/investments/news/2026/11/12/1244904-vtb-otkril-podpisku"
+    ],
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261112/vtb-875174455.html"
     ]
    ],
    "from_compact": "bulk",
@@ -217158,14 +217162,14 @@
      "card_hash": "6558175a595e"
     },
     "target": {
-     "company_id": null,
-     "inn": null,
-     "confirmed": false,
+     "company_id": "g53772c90",
+     "inn": "0102000578",
+     "confirmed": true,
      "bank": false,
      "lot": false,
-     "basis": "unknown",
+     "basis": "registry",
      "perimeter": "unknown",
-     "card_hash": "493dbc68fa9b"
+     "card_hash": "fbb793b31523"
     },
     "admitted": {
      "count": true,
@@ -217179,7 +217183,7 @@
      "industry": "ok",
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
-     "multiple_text": "no_target"
+     "multiple_text": "price_not_disclosed"
     }
    },
    "status": "Обсуждается",
@@ -217259,7 +217263,8 @@
    "asset": "Миноритарная доля в WB Банке и финтех-активах группы RWB",
    "reread": "2026-11-13",
    "reread_hash": "7f81ade536ed.6263a6",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "target": "g53772c90"
   },
   {
    "id": "c7996afb5",
@@ -323544,123 +323549,6 @@
    "reread_note": "статьи: 2"
   },
   {
-   "id": "g63fca144",
-   "date": "2026-11-12",
-   "title": "ВТБ собирается купить 5% «WB Банка»",
-   "ind": "Банки",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "ПРАЙМ",
-     "https://1prime.ru/20261112/vtb-875174455.html"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "По словам банка, привлеченные от допэмиссии средства ВТБ собирается направить на долю в WB Банке, партнерство с RWB и собственный бизнес. Сроки сделки уже дважды сдвигались — с августа на сентябрь, потом на октябрь. По оценке участников рынка, объем привлечения составит 300–400 млрд рублей, ближе к нижней границе.",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "Деньги на покупку доли ВТБ планирует привлечь через допэмиссию своих собственных акций: с 13 по 30 ноября 2026 года акционеры банка реализуют преимущественное право выкупить новые акции по 87 рублей за штуку, всего собираются выпустить до 6 292 651 866 акций — это предел, а не итог размещения. Допэмиссия закроет до 49% капитала ВТБ, доля государства в банке после нее останется, как ожидается, выше 50%. Цена и условия самой покупки 5% в WB Банке по словам банка отдельно не раскрыты.",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "from_raw": {
-    "draft_id": "d55714529",
-    "title": "ВТБ проведет сбор заявок на сделку по приобретению 5% в «WB Банке»"
-   },
-   "seller": "RWB",
-   "stake_acquired": 5,
-   "reviewed": "2026-11-14",
-   "proofread_absorbed": {
-    "law.struct": [],
-    "eco.rationale": []
-   },
-   "deep_researched": "2026-11-14",
-   "buyer": "gcafc31dc",
-   "seller_id": "g549ab474",
-   "target": "g53772c90",
-   "asset": "ООО «ВБ Банк» (WB Банк)",
-   "accepted_notes": {
-    "searched": [
-     "ПРАЙМ — основной источник",
-     "WebSearch: ВТБ WB Банк 5% цена сделки сумма — цену стороны официально не раскрывают (Ведомости, Forbes/T-Bank Invest): неофициальные оценки по капиталу банка (67,4 млрд ₽ на 1 кв. 2026) называют порядок в несколько млрд ₽, в карточку не включены как недостоверные",
-     "WebSearch: WB Банк ИНН ОГРН реквизиты — подтвержден ИНН 0102000578, ОГРН 1020100002340, лицензия ЦБ № 841",
-     "mergers.ru/companies/WB-Bank — профиль сделки, без новой информации о цене доли",
-     "Ведомости (vedomosti.ru/finance/articles/2026/05/27 и .../05/28) — подтверждают, что сумму стороны не раскрывают",
-     "retail-life.ru — про перенос закрытия сделки на сентябрь, без цены"
-    ]
-   },
-   "accepted": "2026-11-14",
-   "accepted_hash": "e0a9a7fdb781.91cc81",
-   "second_read": "2026-11-14",
-   "second_read_hash": "e0a9a7fdb781.91cc81",
-   "shown_hash": "e0a9a7fdb781.91cc81",
-   "added": "2026-11-14",
-   "facts": {
-    "stake": {
-     "value": 5.0,
-     "basis": "rule",
-     "card_hash": "a5469ad56fe1"
-    },
-    "price": {
-     "value_rub": null,
-     "meaning": "undisclosed",
-     "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "92725277de89"
-    },
-    "date": {
-     "value": "2026-11-12",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "67477016e73d"
-    },
-    "nature": {
-     "control_change": true,
-     "cash_in": false,
-     "financing": false,
-     "auction": false,
-     "reorganization": false,
-     "own_shares": false,
-     "basis": "rule",
-     "card_hash": "6558175a595e"
-    },
-    "target": {
-     "company_id": "g53772c90",
-     "inn": "0102000578",
-     "confirmed": true,
-     "bank": false,
-     "lot": false,
-     "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "fbb793b31523"
-    },
-    "admitted": {
-     "count": true,
-     "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
-     "multiple_text": false
-    },
-    "reasons": {
-     "count": "ok",
-     "industry": "ok",
-     "purchase_sums": "price_not_disclosed",
-     "top_purchases": "price_not_disclosed",
-     "multiple_text": "price_not_disclosed"
-    }
-   }
-  },
-  {
    "id": "gbde15bde",
    "date": "2026-11-13",
    "title": "ДОМ.РФ выставил на торги территорию бывшего завода «39 Арсенал» в Перми за 427,26 млн рублей",
@@ -364066,7 +363954,8 @@
   "cccedc36b": "gdf93c62d",
   "g35357328": "g92476095",
   "c7403d4db": "g97679d43",
-  "c2adff6d3": "g0fadc207"
+  "c2adff6d3": "g0fadc207",
+  "g63fca144": "c51d0bb64"
  },
  "merged_companies": {
   "g942e9f9e": "g5ca09975",

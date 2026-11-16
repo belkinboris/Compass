@@ -179,7 +179,7 @@ def plan(data, cards, decisions, state, now):
 
 
 def run(write=False, now=None, data_path=DATA, pending_path=PENDING, state_path=STATE,
-        fetch=None, sender=None):
+        fetch=None, sender=None, reshow=None):
     """Код возврата 0 всегда, кроме поломки чтения файлов. `fetch` и `sender`
     подменяют тесты: сеть и Telegram в тестах не трогаются."""
     now = now or datetime.now(timezone.utc)
@@ -218,6 +218,7 @@ def run(write=False, now=None, data_path=DATA, pending_path=PENDING, state_path=
             save_state(kept, state_path)
         return 0
     text = message(todo)
+    real = sender is None            # в тестах отправка подменена — и консоль тогда не трогаем
     if sender is None:
         import httpx
         import send_drafts
@@ -232,7 +233,20 @@ def run(write=False, now=None, data_path=DATA, pending_path=PENDING, state_path=
         for it in todo:
             kept[it['key']] = stamp
     save_state(kept, state_path)
+    if ok and (reshow or real):
+        # Напомнили в личку — тут же показываем то же самое в консоли заново, с кнопками
+        # (владелец, 17 ноября 2026: «чтобы мы смогли ткнуть»). Сбой показа напоминанию не мешает.
+        try:
+            (reshow or _reshow)([it['key'] for it in todo if it['kind'] in ('card', 'milestone')])
+        except Exception as e:                                     # noqa: BLE001
+            print('Повторный показ в консоли не удался: %s' % e)
     return 0
+
+
+def _reshow(keys):
+    if keys:
+        import reshow_waiting
+        reshow_waiting.run(write=True, only=keys)
 
 
 if __name__ == '__main__':

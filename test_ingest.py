@@ -12198,3 +12198,40 @@ def test_raw_screen_refuses_to_drop_news_already_shown_or_decided(tmp_path, monk
     assert raw_screen.apply_drop(["dS"], "повтор", write=True) == 1
     assert raw_screen.apply_drop(["dD"], "повтор", write=True) == 1
     assert promote.load_state()["decided_raw"] == {}
+
+
+def test_private_reminder_reshows_the_same_items_in_the_console(monkeypatch, tmp_path):
+    """Напомнили в личку — то же самое тут же показано в консоли заново, с кнопками
+    (владелец, 17 ноября 2026: «чтобы мы смогли ткнуть»). Вне окна и без отправки — не показываем."""
+    from datetime import datetime, timedelta, timezone
+    import remind_undecided as ru
+    _frozen_digest(monkeypatch)
+    monkeypatch.setenv("TELEGRAM_REVIEW_CHAT_IDS", "111")
+    noon = datetime(2026, 11, 12, 9, 0, tzinfo=timezone.utc)
+    card, data = _silence_fixture(noon)
+    files = _reminder_files(tmp_path, card, data)
+    shown = []
+    ru.run(write=True, now=noon - timedelta(hours=12), sender=lambda c, t: True, reshow=shown.append, **files)
+    assert shown == []                                   # ночь: не напомнили — и не показали
+    ru.run(write=True, now=noon, sender=lambda c, t: True, reshow=shown.append, **files)
+    assert len(shown) == 1 and "card:%s" % card["id"] in shown[0]
+    assert all(k.startswith(("card:", "milestone:")) for k in shown[0])
+    ru.run(write=True, now=noon + timedelta(hours=1), sender=lambda c, t: True, reshow=shown.append, **files)
+    assert len(shown) == 1                               # в те же сутки повторно не показываем
+
+
+def test_reshow_waiting_builds_post_messages_with_buttons():
+    """Карточка на сайте, чей пост ждет кнопки, показывается заново проектом поста
+    с теми же кнопками и пометкой, что это напоминание."""
+    import sys
+    sys.path.insert(0, str(Path("pipeline/publish")))
+    import reshow_waiting
+    data = json.loads(Path("static/data/deals_promoted.json").read_text(encoding="utf-8"))
+    deal = next(d for d in data["deals"] if d.get("status") == "Закрыта" and d.get("buyer"))
+    out = reshow_waiting.messages(["post:%s" % deal["id"], "post:нет-такой"], data)
+    assert len(out) == 1
+    key, text, keyboard = out[0]
+    assert key == "post:%s" % deal["id"] and text.startswith(reshow_waiting.AGAIN)
+    assert "mod:%s:post_ok" % deal["id"] in json.dumps(keyboard)
+    assert reshow_waiting.awaiting_post_ids(run=lambda: "x\nЖдут кнопки «Пост в канал» в консоли: 2 — g1, g2\n") == ["g1", "g2"]
+    assert reshow_waiting.awaiting_post_ids(run=lambda: "ничего") == []
