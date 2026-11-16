@@ -12179,3 +12179,22 @@ def test_a_posted_milestone_is_not_waiting_whatever_id_the_event_carries():
             'events': [dict(event, newsworthy=False)]}
     marked = review.mark_milestone(card, 'closed')
     assert marked is not None and card['events'][0]['id'] == 'dealx-closed'
+
+
+def test_raw_screen_refuses_to_drop_news_already_shown_or_decided(tmp_path, monkeypatch):
+    """Новость, которая уже ушла в консоль или по которой на сайте лежит
+    решение, автоотсев не трогает (ТК Prisma, 16 ноября 2026)."""
+    import approve
+    import promote
+    import raw_screen
+    drafts = [{"draft_id": "dS", "title": "Показанная владельцу новость о продаже комплекса"},
+              {"draft_id": "dD", "title": "Новость, по которой уже нажали кнопку"}]
+    _write_hold_file(tmp_path, "2026-11-16.json", drafts)
+    monkeypatch.setattr(raw_screen, "HOLD_DIR", str(tmp_path / "data" / "inbox" / "hold"))
+    state_path = tmp_path / "moderation_state.json"
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+    promote.save_state({"decided_raw": {}, "sent_raw": ["dS"]})
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([{"deal_id": "dD", "verdict": "take"}], None))
+    assert raw_screen.apply_drop(["dS"], "повтор", write=True) == 1
+    assert raw_screen.apply_drop(["dD"], "повтор", write=True) == 1
+    assert promote.load_state()["decided_raw"] == {}

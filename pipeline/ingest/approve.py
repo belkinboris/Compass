@@ -407,6 +407,13 @@ def plan_raw(drafts, decisions, decided_raw=None, sent_titles=None):
     # (`raw_sent_titles`); решение по номеру, которого в hold нет, переходит
     # на черновик с тем же ключом заголовка. Прямое попадание по номеру
     # всегда сильнее.
+    # РЕШЕНИЕ ЧЕЛОВЕКА СИЛЬНЕЕ АВТООТСЕВА (16 ноября 2026). Владелец нажал
+    # «Это сделка» по новости о ТК Prisma, а через 8 минут забор отсеял ее
+    # же (`raw_screen.py --drop` пишет 'auto-drop') — и решение молча пропало:
+    # все, что есть в `decided_raw`, пропускалось. Автоотсев карточку не
+    # рождает, поэтому повторного применения тут быть не может: закрывают
+    # новость только решения людей ('take'/'drop').
+    decided_raw = {k: v for k, v in decided_raw.items() if v != 'auto-drop'}
     present = {str(d.get('draft_id')) for d in drafts}
     by_key = {}
     for did, decision in by_draft.items():

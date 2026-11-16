@@ -158,12 +158,35 @@ def render_list(limit=None):
         print()
 
 
+def shown_or_decided(ids, shown):
+    """Номера из `ids`, которые автоотсеву трогать нельзя: уже показаны в
+    консоли (`shown`) или по ним на сайте лежит решение человека."""
+    out = [i for i in ids if i in shown]
+    try:
+        import approve
+        decisions, _handle = approve.fetch_decisions()
+    except Exception:
+        decisions = []
+    decided = {str(d.get('deal_id')) for d in decisions if d.get('verdict') in ('take', 'drop')}
+    return out + [i for i in ids if i in decided and i not in out]
+
+
 def apply_drop(ids, reason, write):
     state = promote.load_state()
     drafts_by_id = {str(d.get('draft_id')): d for d in all_raw_drafts()}
     missing = [i for i in ids if i not in drafts_by_id]
     if missing:
         print('ОТКАЗ: черновиков нет в hold-файлах: %s' % ', '.join(missing))
+        return 1
+    # ПОКАЗАННОЕ ВЛАДЕЛЬЦУ АВТООТСЕВ НЕ ТРОГАЕТ (16 ноября 2026: забор отсеял
+    # новость о ТК Prisma через 8 минут после «Это сделка»). Новость, которая
+    # уже ушла в консоль или по которой на сайте лежит решение, — не наша:
+    # по ней решает человек, а молчание ее и так не публикует.
+    shown = set(str(x) for x in state.get('sent_raw') or []) | set(state.get('raw_sent_titles') or {})
+    human = shown_or_decided(ids, shown)
+    if human:
+        print('ОТКАЗ: новость уже показана в консоли или по ней есть решение — отсеивать нельзя: %s'
+              % ', '.join(human))
         return 1
     print('ВЫКИДЫВАЮ (авто, причина: %s):' % (reason or '(без причины)'))
     for i in ids:
