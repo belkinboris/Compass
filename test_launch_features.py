@@ -858,7 +858,9 @@ def test_launch_ui_contains_requested_changes():
     assert "Этапы по публичным источникам." in html
     assert '<span class="chev">⌄</span>' not in html and '<svg class="chev"' in html
     assert "https://300.pravo.ru/" not in html
-    assert "Право-300" not in html
+    # Рейтингов на сайте нет; одно исключение — страница White Square по согласованному
+    # с фирмой макету (владелец, 16 ноября 2026; docs/site_firm_pages.md).
+    assert html.count("Право-300") == 1 and 'ratings:[["Право-300"' in html
     assert "saveThread:true" in html
     assert "КОМПАС.</span>" not in html
     assert html.count('data-r="advisors"') == 2  # шапка и нижняя панель на телефоне (27 октября 2026)
@@ -5468,3 +5470,16 @@ def test_held_post_waits_and_shows_in_held_list(client, monkeypatch):
     console._send_held_posts(1, [deal], {})
     kb = [m for m, p in sent if m == "sendMessage" and p.get("reply_markup")]
     assert kb, sent
+
+
+def test_owner_take_beats_an_automatic_drop_of_the_same_news():
+    """Владелец нажал «Это сделка», а забор через 8 минут отсеял ту же новость
+    ('auto-drop', ТК Prisma, 16 ноября 2026) — решение человека обязано
+    примениться: автоотсев карточку не рождает и новость не закрывает."""
+    import sys
+    sys.path.insert(0, str(Path("pipeline/ingest")))
+    import approve
+    drafts = [{"draft_id": "d1", "title": "Торговый комплекс продают за 800 млн рублей"}]
+    decisions = [{"deal_id": "d1", "verdict": "take"}]
+    take, drop = approve.plan_raw(drafts, decisions, decided_raw={"d1": "auto-drop"})
+    assert [d["draft_id"] for d in take] == ["d1"] and not drop
