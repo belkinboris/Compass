@@ -8375,7 +8375,8 @@ function renderDeal(id, qs, previewCard){
       ${specBlock([
         para("Как устроена сделка", law.struct),
         specRow("Предмет", assetNamed ? "" : eco.share),
-        specRow("Статус", d.status),
+        /* Строка «Статус» в «Обзоре» снята 16 ноября 2026 (партнер: «статус дублируется в карточках»,
+           владелец: «нижнее убрать») — статус стоит ярлыком в шапке карточки. */
         ...narrativeRows,
       ])}
       ${extraBlock}`;
@@ -8412,7 +8413,6 @@ function renderDeal(id, qs, previewCard){
         specRow(sellerLabel(d), (kindKey==="acquisition" && hasSeller) ? ""
           : (d.seller_id && co(d.seller_id) ? co(d.seller_id).name : (d.seller || ""))),
         specRow("Предмет", assetNamed ? "" : eco.share),
-        specRow("Статус", d.status),
         /* Согласования, условия, цель и контекст — здесь, а не на отдельных
            вкладках (владелец, 28 октября 2026: «важно, чтобы ничего не потерялось»). */
         ...narrativeRows,
