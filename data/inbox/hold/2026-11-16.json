@@ -208,35 +208,6 @@
    ]
   },
   {
-   "draft_id": "d86632619",
-   "title": "Девелопер «Догма» выиграл торги на застройку территории в центре Омска",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/omsk/2026/11/16/developer-dogma-vyigral-torgi-na-zastrojku-territorii-v-czentre-omska"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbed7c5f6 (общие редкие слова: террит, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d15961905",
    "title": "«Нацпроектстрой» намерен создать совместные предприятия на Ближнем Востоке",
    "date": "2026-11-16",
@@ -304,16 +275,16 @@
    ]
   },
   {
-   "draft_id": "d93183391",
-   "title": "На старейшей челябинской ГЭС продают особняк с вертолетной площадкой за 150 млн рублей. Фото",
+   "draft_id": "d23718880",
+   "title": "Девелоперы используют ИИ в продажах, но системно внедрили его лишь 12% компаний — отчет KTS",
    "date": "2026-11-16",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144511"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-16_developery_ispolzuyut_ii"
     ]
    ],
-   "sum": "150 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -328,7 +299,65 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d50100427",
+   "title": "Чекунков назвал приоритетные направления инвестиций в ТОР «Колыма»",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28321121"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88751411",
+   "title": "Лидер курганской КПРФ предложил пополнить бюджет на 10 млрд рублей за счет продажи урана",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144532"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g17a522dc (общие редкие слова: курган, продаж) — проверьте, не дубль ли"
    ]
   }
  ]
