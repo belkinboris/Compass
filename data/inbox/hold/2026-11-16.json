@@ -2,6 +2,63 @@
  "made": "2026-11-16",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -64,62 +121,6 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -178,13 +179,42 @@
    ]
   },
   {
-   "draft_id": "d56507077",
-   "title": "Госдума перенесла проект о дистанционной продаже вина на неопределенное время",
+   "draft_id": "d20374433",
+   "title": "Акции «ЕвроТранса» упали на 95,5% по сравнению с ценой IPO",
    "date": "2026-11-16",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/11/16/1262498-gosduma-perenesla-proekt"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/16/11/2026/6afafa46a37e72c3fb2aae99"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb5d8a18a (общие редкие слова: 95, акции) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d97350341",
+   "title": "В ГД перенесли рассмотрение проекта об онлайн-продаже вина через почту",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28323001"
     ]
    ],
    "sum": null,
@@ -202,36 +232,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d23815785",
-   "title": "Blackstone приобретет 75% в двух совместных проектах с Amazon на $5 млрд",
+   "draft_id": "d56490847",
+   "title": "Продать импульс: Мишустин оценил темпы роста российского экспорта",
    "date": "2026-11-16",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261116/blackstone-875250004.html"
+     "web:iz.ru",
+     "https://iz.ru/2202734/maksim-bazanov/mishustin-otcenil-tempy-rosta-rossiiskogo-eksporta"
     ]
    ],
-   "sum": "$5 млрд",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "Blackstone",
-   "asset": "двух совместных проектах с Amazon на $5 млрд",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Blackstone",
-    "asset": "двух совместных проектах с Amazon на $5 млрд",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Агро",
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -264,70 +293,13 @@
    ]
   },
   {
-   "draft_id": "d51087221",
-   "title": "Льготы просят, Китай закупают: что мешает новому инвестиционному циклу в добыче",
+   "draft_id": "d07418696",
+   "title": "Госдума отложила эксперимент по продаже вина через «Почту России»",
    "date": "2026-11-16",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119289-lgoty-prosyat-kitay-zakupayut-chto-meshaet-novomu-investitsionnomu-tsiklu-v-dobyche/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d67911426",
-   "title": "В «Магните» и «Пятерочке» обнаружили наценки на конфеты — российские сладости продают вдвое дороже импортных",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/v-magnite-i-pyaterochke-obnaruzhili-nacenki-na-konfety-rossijskie-sladosti-prodayut-vdvoe-dorozhe-importnyh/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43636773",
-   "title": "Закон о покупке алкоголя через «Почту России» забуксовали в Госдуме",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144651"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/16/gosduma-otlozhila-eksperiment-po-prodazhe-vina-cherez-pochtu-rossii/"
     ]
    ],
    "sum": null,
