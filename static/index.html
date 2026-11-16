@@ -2754,19 +2754,27 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .dp-party{padding:10px 14px;min-width:0}.dp-mid{min-height:0;padding:14px 0}
   .d-meta-low{display:flex;gap:8px 10px;flex-wrap:wrap;align-items:center;margin:0 0 18px;font-size:13px;color:var(--muted)}
   .d-meta-low .d-parties{margin:0}
-  /* Длинные тексты «Обзора» свернуты до пары строк; нажатие на блок выдвигает текст целиком
-     (владелец, 16 ноября 2026: «небольшой блок со стрелочкой вниз… красиво и компактно»). */
-  #facts .fold{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;padding-bottom:13px}
-  #facts .fold>.label{padding-right:30px;margin-bottom:6px}
-  #facts .fold .fold-t{display:block;overflow:hidden;max-height:var(--fold-h);transition:max-height .32s var(--ease);
-    -webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
-  #facts .fold.open .fold-t{-webkit-mask-image:none;mask-image:none}
-  #facts .fold .fold-ar{position:absolute;right:14px;top:13px;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  /* Тексты «Обзора» и «Похожие сделки» — один общий список в одной плашке: строка с названием и
+     стрелкой, нажатие выдвигает содержимое; первая строка открыта (владелец, 16 ноября 2026: макет 6).
+     Консультанты стоят под схемой сделки открытыми, «Разбор сделки» — под списком. */
+  #facts .spec-list.one{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:2px 18px;margin-bottom:10px}
+  #facts .spec-list.one>.fold{background:none;border:0;border-top:1px solid var(--line);border-radius:0;margin:0;padding:16px 0;min-height:0;box-shadow:none}
+  #facts .spec-list.one>.fold:first-child{border-top:0}
+  .related.rel-src{display:none}
+  #facts>.team{margin-top:0;margin-bottom:10px}
+  #facts>.fa:last-child{margin-bottom:16px}
+  .fold{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .fold>.label{display:block;padding-right:34px;margin-bottom:0}
+  .fold .ai-row-head{margin-bottom:0}
+  .fold .fold-t{display:block;overflow:hidden;max-height:var(--fold-h,0px);opacity:0;transition:max-height .32s var(--ease),opacity .25s var(--ease),margin-top .32s var(--ease)}
+  .fold.open .fold-t{opacity:1;margin-top:9px}
+  .fold:not(.open) .spec-v-wrap{margin:0}
+  .fold .fold-ar{position:absolute;right:-4px;top:12px;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
     display:grid;place-items:center;color:var(--accent);transition:transform .3s var(--ease),background .2s}
-  #facts .fold .ai-row-head .fold-ar{position:static;flex:none}
-  #facts .fold .ai-row-head .label{margin-right:auto}
-  #facts .fold .fold-ar svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  #facts .fold.open .fold-ar{transform:rotate(180deg);background:var(--accent-soft)}
+  .fold .ai-row-head .fold-ar{position:static;flex:none;margin-right:-4px}
+  .fold .ai-row-head .label{margin-right:auto}
+  .fold .fold-ar svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .fold.open .fold-ar{transform:rotate(180deg);background:var(--accent-soft)}
 }
 .deal-tools .tool-note{flex-basis:100%}
 @media(max-width:560px){
@@ -8001,24 +8009,48 @@ function renderDeal(id, qs, previewCard){
       document.querySelectorAll(".d-head a.tag").forEach(t=>low.appendChild(t));
       if(low.children.length) src.parentNode.insertBefore(low, src);
     }
-    /* Сворачивание длинных текстов: первый блок — четыре строки, остальные — две. У «Контекста»
-       стрелка стоит в строке с кнопкой ассистента. Ссылки, кнопки и выделение текста работают как раньше. */
-    if(facts) [...facts.querySelectorAll(".spec-row:not(.fold), .extra-info:not(.fold)")].forEach(row => {
-      const txt = row.querySelector(".spec-v-text") || (row.matches(".extra-info") && row.querySelector("p")); if(!txt) return;
-      const lh = parseFloat(getComputedStyle(txt).lineHeight) || 24, lines = facts.querySelector(".fold") ? 2 : 4;
-      if(txt.scrollHeight < lh*(lines+1.6)) return;
-      const closed = Math.round(lh*lines);
-      row.classList.add("fold"); txt.classList.add("fold-t"); txt.style.setProperty("--fold-h", closed+"px");
-      row.setAttribute("role","button"); row.setAttribute("tabindex","0"); row.setAttribute("aria-expanded","false");
+    /* Общий список (макет 6): все текстовые блоки «Обзора», «Дополнительный контекст» и «Похожие
+       сделки» — строки одной плашки, от каждой видно название со стрелкой, первая открыта. Консультанты
+       стоят под схемой сделки (открыты, без стрелки), под списком — «Разбор сделки», затем «Этапы сделки».
+       «Похожие сделки» в список входят копией: #facts перерисовывается при смене вкладки. */
+    const foldBox = (row, txt, open0) => {
+      row.classList.add("fold"); txt.classList.add("fold-t");
+      row.setAttribute("role","button"); row.setAttribute("tabindex","0");
       (row.querySelector(".ai-row-head") || row).insertAdjacentHTML("beforeend", `<span class="fold-ar" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg></span>`);
-      const toggle = () => {
-        const open = !row.classList.contains("open");
-        txt.style.setProperty("--fold-h", (open ? txt.scrollHeight : closed)+"px");
+      const set = open => {
+        txt.style.setProperty("--fold-h", (open ? txt.scrollHeight : 0)+"px");
         row.classList.toggle("open", open); row.setAttribute("aria-expanded", String(open));
       };
-      row.addEventListener("click", e => { if(e.target.closest("a,button,.ai-note")) return; if(String(getSelection())) return; toggle(); });
-      row.addEventListener("keydown", e => { if(e.target!==row) return; if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggle(); } });
-    });
+      set(!!open0);
+      row.addEventListener("click", e => { if(e.target.closest("a,button,.ai-note")) return; if(String(getSelection())) return; set(!row.classList.contains("open")); });
+      row.addEventListener("keydown", e => { if(e.target!==row) return; if(e.key==="Enter"||e.key===" "){ e.preventDefault(); set(!row.classList.contains("open")); } });
+    };
+    if(facts && !facts.querySelector(".spec-list.one")){
+      let list = facts.querySelector(":scope > .spec-list");
+      if(!list){ list = document.createElement("div"); list.className = "spec-list"; (facts.querySelector(":scope > .team") || fa || {}).before ? (facts.querySelector(":scope > .team") || fa).before(list) : facts.appendChild(list); }
+      list.classList.add("one");
+      const extra = facts.querySelector(":scope > .extra-info"); if(extra) list.appendChild(extra);
+      const rel = document.querySelector(".related:not(.rel-copy)");
+      if(rel && rel.querySelector(":scope > .label")){
+        rel.classList.add("rel-src");
+        const copy = document.createElement("div"); copy.className = "rel-copy";
+        const body = document.createElement("div");
+        [...rel.children].forEach(c => (c.matches(".label") ? copy : body).appendChild(c.cloneNode(true)));
+        copy.appendChild(body); list.appendChild(copy);
+      }
+      [...list.children].forEach((row, i) => {
+        const txt = row.querySelector(".spec-v-text") || row.querySelector(":scope > p") || [...row.children].reverse().find(c => !c.matches(".label,.ai-row-head,.fold-ar"));
+        if(txt) foldBox(row, txt, i===0);
+      });
+      if(!list.children.length) list.remove();
+      if(fa && fa.parentNode===facts) facts.appendChild(fa);
+      const low = facts.querySelector(".cn-low"), plate = facts.querySelector(":scope > .deal-plate, :scope > .stat-hero:last-of-type");
+      if(low && plate) plate.after(low);
+      const team = facts.querySelector(":scope > .team");
+      if(team && (low || plate)) (low || plate).after(team);
+    }
+    const prog = document.querySelector(".deal-progress");
+    if(prog && facts && facts.nextElementSibling !== prog) facts.after(prog);
   };
   new MutationObserver(()=>phoneCardOrder()).observe(document.getElementById("facts"), {childList:true});
   const hintText = () => LENS_HINT[lens];
