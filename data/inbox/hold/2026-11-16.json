@@ -2,63 +2,6 @@
  "made": "2026-11-16",
  "drafts": [
   {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -121,6 +64,62 @@
    ]
   },
   {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -150,81 +149,13 @@
    ]
   },
   {
-   "draft_id": "d97915290",
-   "title": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями привлекло €4,3 млн от неназванных частных инвесторов. Привлеченные средства будут направлены на коммерческую экспансию продуктов к",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7847"
-    ]
-   ],
-   "sum": "€4,3 млн",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями",
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d32678861",
-   "title": "Бывший футболист «Реала» Гарет Бейл планирует приобрести «Севилью»",
+   "draft_id": "d66641846",
+   "title": "Мосбиржа начала второй за месяц дискретный аукцион по акциям «Евротранса»",
    "date": "2026-11-16",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9110675"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-16",
-     "title": "Переговоры",
-     "note": "Американский инвестиционный фонд Juggernaut Capital Partners, консультантом которого выступает бывший нападающий сборной Уэльса Гарет Бейл, обсуждает покупку испанского футбольного клуба «Севилья». Об этом сообщает El Confidencial.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9110675"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d56315590",
-   "title": "Мосбиржа провела дискретный аукцион по ценным бумагам «Евротранса»",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/16/1252456-diskretnii-auktsion"
+     "https://www.kommersant.ru/doc/9110659"
     ]
    ],
    "sum": null,
@@ -246,16 +177,16 @@
    ]
   },
   {
-   "draft_id": "d75088080",
-   "title": "Еврокомиссия одобрила слияние UniCredit и Commerzbank",
+   "draft_id": "d63431332",
+   "title": "ЕК разрешила итальянскому UniCredit купить немецкий Commerzbank за €45 млрд",
    "date": "2026-11-16",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1129324"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9110658"
     ]
    ],
-   "sum": null,
+   "sum": "€45 млрд",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -270,21 +201,20 @@
    "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d57913376",
-   "title": "Акции «Евротранса» на Мосбирже замедлили снижение после дискретного аукциона",
+   "draft_id": "d44627278",
+   "title": "Комплекс в аренде у «Куриного Царства» вновь выставили на торги в Липецкой области за 68 млн рублей",
    "date": "2026-11-16",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28322253"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119285-kompleks-v-arende-u-kurinogo-tsarstva-vnov-vystavili-na-torgi-v-lipetskoy-oblasti-za-68-mln-rubley/"
     ]
    ],
-   "sum": null,
+   "sum": "68 млн ₽",
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -298,95 +228,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Мосбиржа провела дискретный аукцион по ценным бумагам «Еврот» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d80958144",
-   "title": "Tesla начала продавать электрокар без руля и педалей",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/16/tesla-nachala-prodavat-elektrokar-bez-rulya-i-pedaley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d13988256",
-   "title": "Евросоюз внес в санкционные списки экс-зятя Пугачевой после национализации ЮГК",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144627"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68741182",
-   "title": "Игорь Мартынов выступил с инициативой полного запрета продажи вейпов в Астраханской области",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/astrakhan/2026/11/16/igor-martynov-vystupil-s-inicziativoj-polnogo-zapreta-prodazhi-vejpov-v-astrahanskoj-oblasti"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку ge163d93c (общие редкие слова: выстав, липецк, торги) — проверьте, не дубль ли"
    ]
   }
  ]
