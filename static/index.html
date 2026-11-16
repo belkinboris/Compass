@@ -1254,10 +1254,11 @@ a.tag:hover{color:var(--accent);border-color:var(--accent)}
   box-shadow:0 10px 28px rgba(15,43,33,.34),0 0 0 1px rgba(255,255,255,.06) inset,0 0 0 7px rgba(15,43,33,.07);
   transition:transform .25s var(--ease),background .2s var(--ease),opacity .25s var(--ease),visibility 0s linear 0s}
 .ai-fab:hover{background:#163B2C}
-/* На компьютере — круг с мягкой тенью: квадрат 60×60 с радиусом 20 и жестким
-   кольцом-обводкой читался резким (владелец, 6 ноября 2026). На телефоне кнопка
-   остается квадратом в размер нижней панели (решение 28 октября). */
-@media(min-width:721px){.ai-fab{border-radius:50%;box-shadow:0 8px 24px rgba(15,43,33,.28),0 2px 6px rgba(15,43,33,.16)}}
+/* На компьютере — тот же квадрат со скруглением, что и на телефоне, но с мягкой тенью
+   вместо жесткого кольца-обводки. 6 ноября 2026 кнопку сделали кругом (кольцо читалось
+   резким); 16 ноября владелец: «сейчас круглая, раньше была симпатичнее» — форму вернули,
+   мягкую тень оставили. */
+@media(min-width:721px){.ai-fab{box-shadow:0 8px 24px rgba(15,43,33,.28),0 2px 6px rgba(15,43,33,.16)}}
 .ai-fab:active{transform:scale(.96)}
 /* Кнопка появляется и уходит плавно, а не рывком (владелец, 6 ноября 2026: «значок компаса чтобы
    плавно расходился»); hidden — без display:none, иначе переход не виден. */
@@ -2741,6 +2742,31 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .d-head{padding-bottom:16px;margin-bottom:16px}.d-head h1{margin:10px 0 8px}
   .d-head .pdf-top,.d-head .deal-parties-strong,.lens-hint{display:none}
   .lens-row{margin-bottom:18px}.pdf-lens{display:inline-flex;margin-left:auto}
+  /* Карточка на телефоне (16 ноября 2026, партнер и владелец): заголовок и сумма мельче; тип и отрасль
+     уходят вниз, к источникам; «мало деталей» — после схемы, перед «Разбором сделки»;
+     схема без подписи и без лишнего воздуха. */
+  .d-head h1{font-size:21.5px;line-height:1.27}
+  #facts .stat-hero{padding:13px 16px}#facts .stat-hero .stat-num{font-size:25px}
+  .coverage-note{display:none}
+  .coverage-note.cn-low{display:block;margin:0 0 10px;padding:12px 14px}
+  .coverage-note.cn-low strong{font-size:15px}.coverage-note.cn-low p{font-size:13px}
+  #facts .deal-plate{padding:12px;margin-bottom:10px}#facts .deal-plate>.label{display:none!important}
+  .dp-party{padding:10px 14px;min-width:0}.dp-mid{min-height:0;padding:14px 0}
+  .d-meta-low{display:flex;gap:8px 10px;flex-wrap:wrap;align-items:center;margin:0 0 18px;font-size:13px;color:var(--muted)}
+  .d-meta-low .d-parties{margin:0}
+  /* Длинные тексты «Обзора» свернуты до пары строк; нажатие на блок выдвигает текст целиком
+     (владелец, 16 ноября 2026: «небольшой блок со стрелочкой вниз… красиво и компактно»). */
+  #facts .fold{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;padding-bottom:13px}
+  #facts .fold>.label{padding-right:30px;margin-bottom:6px}
+  #facts .fold .fold-t{display:block;overflow:hidden;max-height:var(--fold-h);transition:max-height .32s var(--ease);
+    -webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
+  #facts .fold.open .fold-t{-webkit-mask-image:none;mask-image:none}
+  #facts .fold .fold-ar{position:absolute;right:14px;top:13px;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+    display:grid;place-items:center;color:var(--accent);transition:transform .3s var(--ease),background .2s}
+  #facts .fold .ai-row-head .fold-ar{position:static;flex:none}
+  #facts .fold .ai-row-head .label{margin-right:auto}
+  #facts .fold .fold-ar svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  #facts .fold.open .fold-ar{transform:rotate(180deg);background:var(--accent-soft)}
 }
 .deal-tools .tool-note{flex-basis:100%}
 @media(max-width:560px){
@@ -7957,6 +7983,44 @@ function renderDeal(id, qs, previewCard){
   // Раньше пустая вкладка оставалась видна, приглушенной, и подпись объясняла
   // почему — теперь вкладки без данных не рендерятся вовсе (см. renderDeal),
   // и объяснять нечего: отсутствующую кнопку не нужно подписывать отдельно.
+  /* Порядок блоков карточки на телефоне (владелец, 16 ноября 2026). #facts перерисовывается при смене
+     вкладки, поэтому «мало деталей» вставляется копией после каждой перерисовки. */
+  const phoneCardOrder = () => {
+    if(!window.matchMedia("(max-width:640px)").matches) return;
+    const facts = document.getElementById("facts"), fa = document.getElementById("faBox");
+    const note = document.querySelector(".coverage-note:not(.cn-low)");
+    if(facts && fa && note && !facts.querySelector(".cn-low")){
+      const c = note.cloneNode(true); c.classList.add("cn-low"); c.classList.remove("reveal");
+      fa.parentNode.insertBefore(c, fa);
+    }
+    const src = document.querySelector(".src");
+    if(src && !document.getElementById("dmetalow")){
+      const low = document.createElement("div"); low.id = "dmetalow"; low.className = "d-meta-low";
+      const type = document.querySelector(".d-head .d-parties");
+      if(type) low.appendChild(type);
+      document.querySelectorAll(".d-head a.tag").forEach(t=>low.appendChild(t));
+      if(low.children.length) src.parentNode.insertBefore(low, src);
+    }
+    /* Сворачивание длинных текстов: первый блок — четыре строки, остальные — две. У «Контекста»
+       стрелка стоит в строке с кнопкой ассистента. Ссылки, кнопки и выделение текста работают как раньше. */
+    if(facts) [...facts.querySelectorAll(".spec-row:not(.fold), .extra-info:not(.fold)")].forEach(row => {
+      const txt = row.querySelector(".spec-v-text") || (row.matches(".extra-info") && row.querySelector("p")); if(!txt) return;
+      const lh = parseFloat(getComputedStyle(txt).lineHeight) || 24, lines = facts.querySelector(".fold") ? 2 : 4;
+      if(txt.scrollHeight < lh*(lines+1.6)) return;
+      const closed = Math.round(lh*lines);
+      row.classList.add("fold"); txt.classList.add("fold-t"); txt.style.setProperty("--fold-h", closed+"px");
+      row.setAttribute("role","button"); row.setAttribute("tabindex","0"); row.setAttribute("aria-expanded","false");
+      (row.querySelector(".ai-row-head") || row).insertAdjacentHTML("beforeend", `<span class="fold-ar" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg></span>`);
+      const toggle = () => {
+        const open = !row.classList.contains("open");
+        txt.style.setProperty("--fold-h", (open ? txt.scrollHeight : closed)+"px");
+        row.classList.toggle("open", open); row.setAttribute("aria-expanded", String(open));
+      };
+      row.addEventListener("click", e => { if(e.target.closest("a,button,.ai-note")) return; if(String(getSelection())) return; toggle(); });
+      row.addEventListener("keydown", e => { if(e.target!==row) return; if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggle(); } });
+    });
+  };
+  new MutationObserver(()=>phoneCardOrder()).observe(document.getElementById("facts"), {childList:true});
   const hintText = () => LENS_HINT[lens];
   const paint = ()=>{
     const f = document.getElementById("facts");
@@ -10035,7 +10099,7 @@ function renderAdvisors(){
     <!-- Компактная кнопка для самих фирм — наверху, рядом с заголовком, а не
          только большим блоком после списка (владелец, 8 октября 2026: «лаконичнее,
          чтобы не мешало смотреть контент ниже»). Письмо уходит в консоль сразу. -->
-    <button class="adv-cta-top reveal" id="firmCtaTop" type="button"><span class="cta-long">Вы консультант? Свяжитесь с нами</span><span class="cta-short">Вы консультант? Напишите</span></button>
+    <button class="adv-cta-top reveal" id="firmCtaTop" type="button"><span class="cta-long">Вы консультант? Свяжитесь с нами</span><span class="cta-short">Вы консультант? Напишите нам</span></button>
     <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p class="ph-desc">Юристы, инвестиционные банки и другие советники по сделкам — по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
   <div class="feed-search reveal"><input id="advq" placeholder="Найти консультанта по названию…" value="${esc(advQuery)}" aria-label="Поиск по консультантам" autocomplete="off"><div class="ac" id="advac" hidden></div></div>
