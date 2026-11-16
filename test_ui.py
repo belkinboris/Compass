@@ -1349,7 +1349,9 @@ def test_orion_and_stonebridge_open_their_own_pages(page, base_url):
                             ("kkmp", "fp-kk", ("Сделки с участием фирмы", "Алена Кучер", "Практики и индустрии")),
                             ("nikolskaya", "fp-nk", ("Сделки в Компасе", "Алексей Рудяк", "Проекты, которые называет фирма")),
                             # АЛРУД: макет согласован фирмой 16 ноября 2026 (заголовок — «Юридическая фирма», без года)
-                            ("alrud", "fp-al", ("Сделки с участием фирмы", "Максим Алексеев", "Отраслевые группы", "Юридическая фирма"))):
+                            ("alrud", "fp-al", ("Сделки с участием фирмы", "Максим Алексеев", "Отраслевые группы", "Юридическая фирма")),
+                            # White Square: макет v3, владелец разрешил запускать 16 ноября 2026
+                            ("whitesquare", "fp-ws", ("Сделки с участием фирмы", "Михаил Суворов", "Материалы", "Рейтинги и премии", "Связаться"))):
         visit(page, base_url, "#/advisors")
         page.click('[data-t="legal"]')
         page.locator(f'.advisor-card.brand.fill a[href="#/advisors/{fid}"]').first.click(position={"x": 20, "y": 10})
@@ -2303,8 +2305,8 @@ def test_strategy_partners_is_found_as_a_classic_card(page, base_url):
     assert "1 сделка" in text, "сделка по «Форштадту» не засчитана"
     # ни одна фирма сейчас не фирменная, и порядок — чистый алфавит
     # фирменные среди юридических и инвестиционных — Orion, Stonebridge Legal, ККМП, «Никольская Консалтинг» (11 ноября 2026)
-    # и АЛРУД (16 ноября 2026)
-    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "alrud,kkmp,nikolskaya,orion,stonebridge"
+    # АЛРУД и White Square (16 ноября 2026)
+    assert page.evaluate("FIRMS.concat(INV_FIRMS).filter(f=>firmBrand(f)).map(f=>f.id).sort().join()") == "alrud,kkmp,nikolskaya,orion,stonebridge,whitesquare"
     page.fill("#advq", "")
     page.evaluate("advQuery='';renderAdvisorsBody()")
     page.wait_for_timeout(400)
