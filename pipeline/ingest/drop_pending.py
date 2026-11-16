@@ -49,6 +49,18 @@ def drop(pending, state, ids, reason, now):
                 state.setdefault('discarded_urls', {})[str(s[1])] = {
                     'id': i, 'title': card.get('title'), 'by': 'routine', 'reason': reason,
                     'at': now.isoformat(timespec='seconds')}
+        # discarded_urls ловит тот же адрес источника; но источник, который
+        # переиздает ту же историю заново, отдает НОВЫЙ адрес (а то и новое
+        # издание) — ворота пускают ее снова под новым id, пока заголовок не
+        # запомнен тем же ключом, что raw_screen.py (16 ноября 2026,
+        # known_issues/intake.md). raw_key сравнивает именно заголовок карточки
+        # (card['title']), а не исходный заголовок источника (from_raw.title),
+        # если он был переписан при сборке — вернувшийся черновик придет с
+        # заголовком источника, поэтому запоминаем оба, когда они разные.
+        titles = {card.get('title'), (card.get('from_raw') or {}).get('title')}
+        for t in titles:
+            if t:
+                state.setdefault('raw_titles', {})[promote.raw_key(t)] = 'drop'
     pending['cards'] = [c for c in pending['cards'] if c['id'] not in set(ids)]
     return [cards[i] for i in ids]
 

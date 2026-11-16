@@ -9509,6 +9509,27 @@ def test_drop_pending_removes_card_and_remembers_its_sources():
         dp.drop(pending, state, ['g404'], 'не сделка', datetime(2026, 10, 24, tzinfo=timezone.utc))
 
 
+def test_drop_pending_remembers_the_title_so_a_reprint_does_not_regate(tmp_path):
+    """16 ноября 2026: источник переиздал ту же личную историю под новым
+    адресом, и `promote.py` пустил ее заново — discarded_urls (по адресу) не
+    сработал, а raw_titles (по заголовку, тот же ключ, что у
+    raw_screen.py --drop) не писался вовсе. Теперь drop_pending.py пишет
+    raw_titles сразу, как и источник-переиздание под другим заголовком
+    (from_raw.title отличается от собранного card['title'])."""
+    from datetime import datetime, timezone
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('drop_pending', 'pipeline/ingest/drop_pending.py')
+    dp = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(dp)
+    import promote
+    pending = {'cards': [{'id': 'g1', 'title': 'Чистовой заголовок карточки',
+                          'from_raw': {'title': 'Обрывок исходного заголовка источника'}, 'src': []}]}
+    state = {}
+    dp.drop(pending, state, ['g1'], 'не сделка', datetime(2026, 11, 16, tzinfo=timezone.utc))
+    assert state['raw_titles'][promote.raw_key('Чистовой заголовок карточки')] == 'drop'
+    assert state['raw_titles'][promote.raw_key('Обрывок исходного заголовка источника')] == 'drop'
+
+
 def test_accepted_cards_not_yet_shown_in_the_console_are_counted_and_named(tmp_path):
     """27 октября 2026: 13 принятых карточек (в том числе 5Yes!) трое суток
     не показывались в консоли, и отчет публикации их не считал ни в одной
