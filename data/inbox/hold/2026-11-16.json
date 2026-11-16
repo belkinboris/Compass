@@ -2,6 +2,63 @@
  "made": "2026-11-16",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -64,62 +121,6 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -178,16 +179,171 @@
    ]
   },
   {
-   "draft_id": "d86247104",
-   "title": "Новый BMW X5 в России начали продавать раньше, чем в Германии",
+   "draft_id": "d32678861",
+   "title": "Бывший футболист «Реала» Гарет Бейл планирует приобрести «Севилью»",
    "date": "2026-11-16",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/16/76769385/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9110675"
     ]
    ],
-   "sum": "10 млн ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-16",
+     "title": "Переговоры",
+     "note": "Американский инвестиционный фонд Juggernaut Capital Partners, консультантом которого выступает бывший нападающий сборной Уэльса Гарет Бейл, обсуждает покупку испанского футбольного клуба «Севилья». Об этом сообщает El Confidencial.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9110675"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56315590",
+   "title": "Мосбиржа провела дискретный аукцион по ценным бумагам «Евротранса»",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/16/1252456-diskretnii-auktsion"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75088080",
+   "title": "Еврокомиссия одобрила слияние UniCredit и Commerzbank",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1129324"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d57913376",
+   "title": "Акции «Евротранса» на Мосбирже замедлили снижение после дискретного аукциона",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28322253"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Мосбиржа провела дискретный аукцион по ценным бумагам «Еврот» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d80958144",
+   "title": "Tesla начала продавать электрокар без руля и педалей",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/16/tesla-nachala-prodavat-elektrokar-bez-rulya-i-pedaley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d13988256",
+   "title": "Евросоюз внес в санкционные списки экс-зятя Пугачевой после национализации ЮГК",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144627"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -206,13 +362,13 @@
    ]
   },
   {
-   "draft_id": "d51635822",
-   "title": "Скидки на бумаге: как россиян заставляют переплачивать на распродажах",
+   "draft_id": "d68741182",
+   "title": "Игорь Мартынов выступил с инициативой полного запрета продажи вейпов в Астраханской области",
    "date": "2026-11-16",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/16/skidki-na-bumage-kak-rossiyan-zastavlyayut-pereplachivat-na-rasprodazhah"
+     "https://abnews.ru/ug/news/astrakhan/2026/11/16/igor-martynov-vystupil-s-inicziativoj-polnogo-zapreta-prodazhi-vejpov-v-astrahanskoj-oblasti"
     ]
    ],
    "sum": null,
