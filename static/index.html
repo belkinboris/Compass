@@ -2755,12 +2755,13 @@ footer{margin-top:80px;background:linear-gradient(160deg,var(--accent-deep),#0C2
   .d-meta-low{display:flex;gap:8px 10px;flex-wrap:wrap;align-items:center;margin:0 0 18px;font-size:13px;color:var(--muted)}
   .d-meta-low .d-parties{margin:0}
   /* Тексты «Обзора» и «Похожие сделки» — один общий список в одной плашке: строка с названием и
-     стрелкой, нажатие выдвигает содержимое; первая строка открыта (владелец, 16 ноября 2026: макет 6).
+     стрелкой, нажатие выдвигает содержимое; все строки закрыты (владелец, 16–17 ноября 2026: макет 6).
      Консультанты стоят под схемой сделки открытыми, «Разбор сделки» — под списком. */
   #facts .spec-list.one{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:2px 18px;margin-bottom:10px}
   #facts .spec-list.one>.fold{background:none;border:0;border-top:1px solid var(--line);border-radius:0;margin:0;padding:16px 0;min-height:0;box-shadow:none}
   #facts .spec-list.one>.fold:first-child{border-top:0}
   .related.rel-src{display:none}
+  .theme-chips.tc-low{margin:4px 0 12px}
   #facts>.team{margin-top:0;margin-bottom:10px}
   #facts>.fa:last-child{margin-bottom:16px}
   .fold{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -8008,9 +8009,12 @@ function renderDeal(id, qs, previewCard){
       if(type) low.appendChild(type);
       document.querySelectorAll(".d-head a.tag").forEach(t=>low.appendChild(t));
       if(low.children.length) src.parentNode.insertBefore(low, src);
+      /* «Еще сделки этого же типа» — тоже вниз, над строкой «Тип» (владелец, 17 ноября 2026) */
+      const chips = document.querySelector(".d-head .theme-chips");
+      if(chips){ chips.classList.add("tc-low"); (low.parentNode ? low : src).before(chips); }
     }
     /* Общий список (макет 6): все текстовые блоки «Обзора», «Дополнительный контекст» и «Похожие
-       сделки» — строки одной плашки, от каждой видно название со стрелкой, первая открыта. Консультанты
+       сделки» — строки одной плашки, от каждой видно название со стрелкой, все закрыты. Консультанты
        стоят под схемой сделки (открыты, без стрелки), под списком — «Разбор сделки», затем «Этапы сделки».
        «Похожие сделки» в список входят копией: #facts перерисовывается при смене вкладки. */
     const foldBox = (row, txt, open0) => {
@@ -8040,7 +8044,7 @@ function renderDeal(id, qs, previewCard){
       }
       [...list.children].forEach((row, i) => {
         const txt = row.querySelector(".spec-v-text") || row.querySelector(":scope > p") || [...row.children].reverse().find(c => !c.matches(".label,.ai-row-head,.fold-ar"));
-        if(txt) foldBox(row, txt, i===0);
+        if(txt) foldBox(row, txt, false);
       });
       if(!list.children.length) list.remove();
       if(fa && fa.parentNode===facts) facts.appendChild(fa);
