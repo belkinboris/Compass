@@ -234,6 +234,59 @@
    "accepted": "2026-11-14",
    "accepted_hash": "a11f0cf795d6.221091",
    "buyer": null
+  },
+  {
+   "id": "g3ebf0f35",
+   "date": "2026-11-16",
+   "title": "Курский «Зоринский сад» вложил почти 500 млн рублей в новое плодохранилище",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119264-kurskiy-zorinskiy-sad-vlozhil-pochti-500-mln-rubley-v-novoe-plodokhranilishche/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "500 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "500 млн ₽",
+   "buyer_name": "Курский «Зоринский сад»",
+   "asset": "новое плодохранилище",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Курский «Зоринский сад»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119264-kurskiy-zorinskiy-sad-vlozhil-pochti-500-mln-rubley-v-novoe-plodokhranilishche/"
+     }
+    ],
+    "target": [
+     {
+      "value": "новое плодохранилище",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119264-kurskiy-zorinskiy-sad-vlozhil-pochti-500-mln-rubley-v-novoe-plodokhranilishche/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-16T06:58:14+00:00"
   }
  ]
 }
