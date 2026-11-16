@@ -655,6 +655,8 @@ nav a.on::after,nav a:hover::after{width:100%}
 }
 .adv-cta-top .cta-short{display:none}
 @media(max-width:400px){.adv-cta-top .cta-long{display:none}.adv-cta-top .cta-short{display:inline}}
+/* На самых узких экранах (до 350px) «нам» не помещается рядом с подписью раздела — там короче. */
+@media(max-width:350px){.adv-cta-top .cta-nam{display:none}}
 
 /* ---------- section / filters ---------- */
 .sec-head{margin:56px 0 26px}
@@ -10135,7 +10137,7 @@ function renderAdvisors(){
     <!-- Компактная кнопка для самих фирм — наверху, рядом с заголовком, а не
          только большим блоком после списка (владелец, 8 октября 2026: «лаконичнее,
          чтобы не мешало смотреть контент ниже»). Письмо уходит в консоль сразу. -->
-    <button class="adv-cta-top reveal" id="firmCtaTop" type="button"><span class="cta-long">Вы консультант? Свяжитесь с нами</span><span class="cta-short">Вы консультант? Напишите нам</span></button>
+    <button class="adv-cta-top reveal" id="firmCtaTop" type="button"><span class="cta-long">Вы консультант? Свяжитесь с нами</span><span class="cta-short">Вы консультант? Напишите<span class="cta-nam"> нам</span></span></button>
     <div class="ph-in reveal"><span class="label">Каталог</span><h1>Консультанты</h1><p class="ph-desc">Юристы, инвестиционные банки и другие советники по сделкам — по публичным данным. Фирмы раскрывают не все проекты: если у фирмы здесь нет сделок, это не значит, что их не было.</p></div>
   </div>
   <div class="feed-search reveal"><input id="advq" placeholder="Найти консультанта по названию…" value="${esc(advQuery)}" aria-label="Поиск по консультантам" autocomplete="off"><div class="ac" id="advac" hidden></div></div>
