@@ -5071,6 +5071,32 @@ def test_acceptance_stamps_only_a_card_without_findings_left(tmp_path):
     assert not accept_card.findings(card, base, registry=registry)
 
 
+def test_apply_answer_absorbs_stale_fixes_entries_for_directly_written_fields(monkeypatch):
+    """16 ноября 2026: приемка меняет title/asset/status/ind прямой записью,
+    а не через `review.FIXES` — старая живая запись на то же поле (от
+    draft.py/write_card.py, со СТАРЫМ значением) осталась бы непримененной
+    навсегда и красила main на следующей сверке (случай — ge42606a4, `ind`
+    «Искусственный интеллект» -> «ИТ и интернет»). `apply_answer` обязана
+    отмечать отпечаток такой записи в `proofread_absorbed`, как это делают
+    разовые скрипты (`_absorb()`)."""
+    import accept_card
+    import review
+    stale = {'id': 'gt1', 'field': 'ind', 'old': 'Не определена', 'new': 'Искусственный интеллект',
+             'quote': 'q', 'why': 'w'}
+    monkeypatch.setattr(review, 'FIXES', [stale])
+    base = {"companies": {}, "deals": [], "telegram_posts": {}}
+    card = {"id": "gt1", "ind": "Не определена", "title": "X купил Y", "type": "M&A",
+            "date": FRESH_DATE, "status": "Обсуждается", "buyer_name": "X",
+            "reviewed": FRESH_DATE, "src": [["В", "https://v.ru/1"]], "eco": {}, "law": {}}
+    ans = {"verdict": "accept", "checklist": {k: True for k in accept_card.CHECKLIST},
+           "no_profile": {"seller": "не раскрыт"}, "asset": "Y",
+           "industry": {"value": "ИТ и интернет", "why": "предмет — приложение"}}
+    accept_card.apply_answer(ans, card, base, registry=[], registry_path=None, fns=None)
+    assert card["ind"] == "ИТ и интернет"
+    assert review.fix_fingerprint(stale['new']) in card.get('proofread_absorbed', {}).get('ind', [])
+    assert review.already_applied(stale, card, base["companies"])
+
+
 def test_console_withholds_cards_that_passed_reading_but_not_acceptance(monkeypatch):
     """Прочитанная, но не принятая карточка в консоль не уходит — иначе
     владелец снова первым читает предмет-описание и некликабельные стороны."""
