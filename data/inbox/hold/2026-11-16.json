@@ -2,63 +2,6 @@
  "made": "2026-11-16",
  "drafts": [
   {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -121,6 +64,62 @@
    ]
   },
   {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -179,73 +178,6 @@
    ]
   },
   {
-   "draft_id": "d99602463",
-   "title": "Госдума отложила рассмотрение проекта о продаже вина через «Почту России»",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/politics/16/11/2026/6afb1ee6e7b95db27e4a3beb"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77249084",
-   "title": "Альфа-банк ведет переговоры о покупке доли в «Циан»",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/316227"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-16",
-     "title": "Переговоры",
-     "note": "Рассматривается приобретение пакета структур Elbrus Capital Сообщение Альфа-банк ведет переговоры о покупке доли в &#171;Циан&#187; появилось сначала на Frank Media .",
-     "source": [
-      "web:frankmedia.ru",
-      "https://frankmedia.ru/316227"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d96960855",
    "title": "Госдума отложила рассмотрение законопроекта об онлайн-продаже вина через «Почту России»",
    "date": "2026-11-16",
@@ -269,49 +201,18 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Госдума отложила рассмотрение проекта о продаже вина через «» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d90216879",
-   "title": "Территорию бывшего военного городка в Павловске продадут с торгов",
+   "draft_id": "d78484345",
+   "title": "В Вологодской области выделят деньги на перепрофилирование точек продажи вейпов",
    "date": "2026-11-16",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/16/76770128/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbed7c5f6 (общие редкие слова: бывшег, террит) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d53975138",
-   "title": "Законопроект о продаже вина по «Почте России» снова отложили — Госдума сняла законопроект со второго чтения",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/zakonoproekt-o-prodazhe-vina-po-pochte-rossii-snova-otlozhili-gosduma-snyala-zakonoproekt-so-vtorogo-chteniya/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261116/predprinimateli-875259737.html"
     ]
    ],
    "sum": null,
@@ -329,18 +230,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb5456bba (общие редкие слова: продаж, снова) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d45682971",
-   "title": "В Тюмени выставили на продажу очередной торговый центр",
+   "draft_id": "d09679230",
+   "title": "В Дагестане двух женщин осудили по делу о продаже новорожденного",
    "date": "2026-11-16",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144597"
+     "web:ria.ru",
+     "https://ria.ru/20261116/dagestan-2131963492.html"
     ]
    ],
    "sum": null,
@@ -355,11 +255,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g6e759772 (общие редкие слова: выстав, продаж, тюмени) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
