@@ -1,0 +1,348 @@
+{
+ "made": "2026-11-16",
+ "drafts": [
+  {
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7842"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62590686",
+   "title": "Мировые инвесторы вложили в фонды акций США почти $64 млрд за неделю",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9110037"
+    ]
+   ],
+   "sum": "$64 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Мировые инвесторы",
+   "asset": "фонды акций США почти $64 млрд за неделю",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Мировые инвесторы",
+    "asset": "фонды акций США почти $64 млрд за неделю",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d33943684",
+   "title": "В Москве растет средняя площадь сделки по покупке офисов",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/realty/articles/2026/11/16/1245497-srednyaya-ploschad-sdelki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01424171",
+   "title": "Садовничий рассказал о шагах для создания совместного вуза РФ и КНР",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28320193"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93376719",
+   "title": "Виктор Садовничий: создание совместного вуза РФ и КНР потребовало нестандартных шагов",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/interviews/28315555"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73126904",
+   "title": "ТК Prisma у метро «Академическая» продадут под проект апартов",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/16/tk-prisma-u-metro-akademicheskaja"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05348746",
+   "title": "Indian chip startup Bharat Semi lands $24M seed round as it eyes global AI sensor market",
+   "date": "2026-11-15",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d98272852",
+   "title": "Суд над экс-главой Роспотреба, снегопады, продолжение национализации: что случилось в Челябинске 9-15 ноября",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144360"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69932888",
+   "title": "Магазины-склады. Посмотрели, где в Краснодаре продают товары с маркетплейсов, но дешевле в разы",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/16/76761063/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
