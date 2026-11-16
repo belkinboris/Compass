@@ -2,6 +2,63 @@
  "made": "2026-11-16",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -64,156 +121,16 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62590686",
-   "title": "Мировые инвесторы вложили в фонды акций США почти $64 млрд за неделю",
+   "draft_id": "d26407374",
+   "title": "Российские потребители увеличили онлайн-покупки за границей на 72%",
    "date": "2026-11-16",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9110037"
+     "https://www.kommersant.ru/doc/9110119"
     ]
    ],
-   "sum": "$64 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Мировые инвесторы",
-   "asset": "фонды акций США почти $64 млрд за неделю",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Мировые инвесторы",
-    "asset": "фонды акций США почти $64 млрд за неделю",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d33943684",
-   "title": "В Москве растет средняя площадь сделки по покупке офисов",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/11/16/1245497-srednyaya-ploschad-sdelki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d01424171",
-   "title": "Садовничий рассказал о шагах для создания совместного вуза РФ и КНР",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28320193"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93376719",
-   "title": "Виктор Садовничий: создание совместного вуза РФ и КНР потребовало нестандартных шагов",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/interviews/28315555"
-    ]
-   ],
-   "sum": null,
+   "sum": "374,3 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -260,17 +177,56 @@
    ]
   },
   {
-   "draft_id": "d05348746",
-   "title": "Indian chip startup Bharat Semi lands $24M seed round as it eyes global AI sensor market",
-   "date": "2026-11-15",
+   "draft_id": "d08485770",
+   "title": "Между высотками и частным сектором: в Октябрьском районе продали участок на торгах для застройки",
+   "date": "2026-11-16",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/15/indian-chip-startup-bharat-semi-lands-24m-seed-round-as-it-eyes-global-ai-sensor-market/"
+     "web:ngs.ru",
+     "https://ngs.ru/text/gorod/2026/11/16/76768214/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-16",
+     "title": "Сделка завершена",
+     "note": "На аукцион заявились три компании",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/gorod/2026/11/16/76768214/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "участок на торгах для застройки",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "участок на торгах для застройки",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d42760875",
+   "title": "В элитном посёлке Екатеринбурга выставили на продажу дом с личным спа-комплексом. Цена впечатляет",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/realty/2026/11/16/76768215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -285,63 +241,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d98272852",
-   "title": "Суд над экс-главой Роспотреба, снегопады, продолжение национализации: что случилось в Челябинске 9-15 ноября",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144360"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69932888",
-   "title": "Магазины-склады. Посмотрели, где в Краснодаре продают товары с маркетплейсов, но дешевле в разы",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/11/16/76761063/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g76cf4203 (общие редкие слова: выстав, поселк) — проверьте, не дубль ли"
    ]
   }
  ]
