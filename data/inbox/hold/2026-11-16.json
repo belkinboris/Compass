@@ -121,34 +121,6 @@
    ]
   },
   {
-   "draft_id": "d73126904",
-   "title": "ТК Prisma у метро «Академическая» продадут под проект апартов",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/16/tk-prisma-u-metro-akademicheskaja"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d43828454",
    "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
    "date": "2026-11-16",
@@ -172,10 +144,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «ТК Prisma у метро «Академическая» продадут под проект апарто» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -208,81 +178,13 @@
    ]
   },
   {
-   "draft_id": "d86632619",
-   "title": "Девелопер «Догма» выиграл торги на застройку территории в центре Омска",
+   "draft_id": "d30141524",
+   "title": "Аренда, выкуп и приватизация публичной земли: ВС обобщил практику по земельным спорам",
    "date": "2026-11-16",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/siberia/news/omsk/2026/11/16/developer-dogma-vyigral-torgi-na-zastrojku-territorii-v-czentre-omska"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gbed7c5f6 (общие редкие слова: террит, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d15961905",
-   "title": "«Нацпроектстрой» намерен создать совместные предприятия на Ближнем Востоке",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28320843"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-16",
-     "title": "Переговоры",
-     "note": "Российский холдинг примет участие в ведущих автодорожных и железнодорожных проектах",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28320843"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d07069756",
-   "title": "ТЦ «Перовский» в Москве вновь выставили на торги",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261116/tts-2131805439.html"
+     "web:pravo.ru",
+     "https://pravo.ru/story/266779/"
     ]
    ],
    "sum": null,
@@ -304,17 +206,17 @@
    ]
   },
   {
-   "draft_id": "d93183391",
-   "title": "На старейшей челябинской ГЭС продают особняк с вертолетной площадкой за 150 млн рублей. Фото",
+   "draft_id": "d48835774",
+   "title": "Европейские лидеры захотели следующий раунд переговоров по Украине в Европе",
    "date": "2026-11-16",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144511"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/16/evropeyskie-lidery-zahoteli-sleduyuschiy-raund-peregovorov-po-ukraine-v-evrope/"
     ]
    ],
-   "sum": "150 млн ₽",
-   "type": "M&A",
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -325,10 +227,39 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97915290",
+   "title": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями привлекло €4,3 млн от неназванных частных инвесторов. Привлеченные средства будут направлены на коммерческую экспансию продуктов к",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7847"
+    ]
+   ],
+   "sum": "€4,3 млн",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями",
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]

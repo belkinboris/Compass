@@ -2319,6 +2319,22 @@ def check_answer(ans, card, base):
     return bad
 
 
+def _absorb_direct_write(card, field, new_value):
+    """Приемка меняет поле прямой записью (title/asset/status/ind), а не
+    через таблицу `review.FIXES`, — и живая запись на то же поле для
+    СТАРОГО значения осталась бы непримененной навсегда (16 ноября 2026,
+    ge42606a4: `ind` сменили на «ИТ и интернет», старая запись `review.py`
+    ждала «Искусственный интеллект» и красила main). Отмечаем отпечаток
+    КАЖДОЙ записи на это поле этой карточки — она либо уже применена (тогда
+    отметка ничего не меняет), либо только что вытеснена этой правкой."""
+    marks = card.setdefault('proofread_absorbed', {}).setdefault(field, [])
+    for f in review.FIXES:
+        if f.get('id') == card.get('id') and f.get('field') == field and f.get('new') is not None:
+            fp = review.fix_fingerprint(f['new'])
+            if fp not in marks:
+                marks.append(fp)
+
+
 def _restore_notes(card, notes_before):
     """Откатывает временную запись accepted_notes, если приемка не состоялась
     (см. apply_answer: searched нужен findings() до того, как ясно, что
@@ -2387,10 +2403,12 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         if ans.get(k) and card.get(k) != ans[k]:
             lines.append('%s: %r -> %r' % (k, card.get(k), ans[k]))
             card[k] = ans[k]
+            _absorb_direct_write(card, k, ans[k])
     ind = ans.get('industry')
     if ind and ind.get('value') and card.get('ind') != ind['value']:
         lines.append('ind: %r -> %r (%s)' % (card.get('ind'), ind['value'], ind.get('why')))
         card['ind'] = ind['value']
+        _absorb_direct_write(card, 'ind', ind['value'])
         if card.get('industries') and ind['value'] not in card['industries']:
             card['industries'] = [ind['value']] + [i for i in card['industries'] if i != 'Не определена']
     if ans.get('share'):
