@@ -2,63 +2,6 @@
  "made": "2026-11-16",
  "drafts": [
   {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -121,16 +64,44 @@
    ]
   },
   {
-   "draft_id": "d43828454",
-   "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
-   "date": "2026-11-16",
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261116/prisma-2131803233.html"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
     ]
    ],
-   "sum": "800 млн ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -178,62 +149,6 @@
    ]
   },
   {
-   "draft_id": "d30141524",
-   "title": "Аренда, выкуп и приватизация публичной земли: ВС обобщил практику по земельным спорам",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://pravo.ru/story/266779/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48835774",
-   "title": "Европейские лидеры захотели следующий раунд переговоров по Украине в Европе",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/16/evropeyskie-lidery-zahoteli-sleduyuschiy-raund-peregovorov-po-ukraine-v-evrope/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d97915290",
    "title": "Эстонское подразделение биотех-стартапа Efferon с российскими корнями привлекло €4,3 млн от неназванных частных инвесторов. Привлеченные средства будут направлены на коммерческую экспансию продуктов к",
    "date": "2026-11-16",
@@ -260,6 +175,120 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d85317273",
+   "title": "La Repubblica узнала о желании ЕС провести следующий раунд переговоров в Европе",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2202611/la-repubblica-uznala-o-planakh-provesti-sleduiushchii-raund-peregovorov-v-evrope-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d38125837",
+   "title": "Давидович-Фокина пропустит финальный раунд Кубка Дэвиса из-за травмы",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261116/tennis-2131866999.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05456769",
+   "title": "В России выставили на продажу за один рубль старинный особняк",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/16/v-rossii-vystavili-na-prodazhu-za-odin-rubl-starinnyy-osobnyak/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g896a22ba (общие редкие слова: выстав, рубль) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d32173484",
+   "title": "Кроссовер Tenet сохранил лидерство по продажам в российском сегменте SUV",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/16/krossover-tenet-sohranil-liderstvo-po-prodazham-v-rossiyskom-segmente-suv/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
