@@ -148,98 +148,13 @@
    ]
   },
   {
-   "draft_id": "d51316552",
-   "title": "Георгий Леготин: страхование — быть рядом, а не просто продавать полис",
+   "draft_id": "d15961905",
+   "title": "«Нацпроектстрой» намерен создать совместные предприятия на Ближнем Востоке",
    "date": "2026-11-16",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261116/strakhovanie-2131397453.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Страхование",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d05450920",
-   "title": "Портфель лучших облигаций под пассивный доход на 16 ноября. Новые покупки",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1375171.php"
-    ]
-   ],
-   "sum": "3,583 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d05807703",
-   "title": "Новый Poco F9 Pro проиграл прошлогоднему F8 Ultra: почему это не лучшая покупка",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144492"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d24794842",
-   "title": "Мошенники обманули нижегородку на 20 000 рублей под предлогом продажи качелей",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/16/moshenniki-obmanuli-nizhegorodku-na-20-000-rublej-pod-predlogom-prodazhi-kachelej"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28320843"
     ]
    ],
    "sum": null,
@@ -250,10 +165,10 @@
      "kind": "negotiations",
      "date": "2026-11-16",
      "title": "Переговоры",
-     "note": "В Нижнем Новгороде мошенники обманули женщину, покупавшую садовые качели. Жительница Ленинского района нашла подходящее объявление в интернете, договорилась с продавцом о сделке и перевела ему предоплату в размере 20 000 рублей.",
+     "note": "Российский холдинг примет участие в ведущих автодорожных и железнодорожных проектах",
      "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/16/moshenniki-obmanuli-nizhegorodku-na-20-000-rublej-pod-predlogom-prodazhi-kachelej"
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28320843"
      ]
     }
    ],
@@ -272,13 +187,13 @@
    ]
   },
   {
-   "draft_id": "d34722305",
-   "title": "В Зеленограде выставили на торги семь нежилых помещений",
+   "draft_id": "d07069756",
+   "title": "ТЦ «Перовский» в Москве вновь выставили на торги",
    "date": "2026-11-16",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/16/v-zelenograde-vystavili-na-torgi-sem-nezhilyh-pomeshhenij"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261116/tts-2131805439.html"
     ]
    ],
    "sum": null,
@@ -296,8 +211,95 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43828454",
+   "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261116/prisma-2131803233.html"
+    ]
+   ],
+   "sum": "800 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "та же новость, что «ТК Prisma у метро «Академическая» продадут под проект апарто» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88804499",
+   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144517"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d86632619",
+   "title": "Девелопер «Догма» выиграл торги на застройку территории в центре Омска",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/omsk/2026/11/16/developer-dogma-vyigral-torgi-na-zastrojku-territorii-v-czentre-omska"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gbed7c5f6 (общие редкие слова: террит, торги) — проверьте, не дубль ли"
    ]
   }
  ]
