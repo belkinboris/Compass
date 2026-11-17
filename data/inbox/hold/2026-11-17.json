@@ -150,34 +150,6 @@
    ]
   },
   {
-   "draft_id": "d59398345",
-   "title": "Инвестфонд Сороса сократил долю в Nvidia до ухода Хуанга",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111838"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d96149277",
    "title": "CNBC: Трамп еще в мае продал акции Nvidia на сумму до $1 млн",
    "date": "2026-11-17",
@@ -212,10 +184,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Инвестфонд Сороса сократил долю в Nvidia до ухода Хуанга» — второе издание, в группу не шлем"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -276,41 +246,13 @@
    ]
   },
   {
-   "draft_id": "d34297749",
-   "title": "В ПСБ обозначили цели «Инвестиционной гостиной» в рамках V Евразийского женского форума",
+   "draft_id": "d49041987",
+   "title": "РСХБ выяснил, сколько россияне готовы потратить на покупки в «Черную пятницу»",
    "date": "2026-11-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28327515"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64193257",
-   "title": "ЦБ хочет продавать полисы ОСАГО через «Госуслуги»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203439/video/tcb-khochet-prodavat-polisy-osago-cherez-gosuslugi"
+     "web:1prime.ru",
+     "https://1prime.ru/20261117/rshb-875301057.html"
     ]
    ],
    "sum": null,
@@ -332,13 +274,41 @@
    ]
   },
   {
-   "draft_id": "d30850034",
-   "title": "Пять тысяч рублей с продажи найденного обернулись россиянину девятью годами колонии",
+   "draft_id": "d73290681",
+   "title": "Инвестиции в Северный обход Новороссийска составят не менее 100 млрд руб",
    "date": "2026-11-17",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/pyat-tysyach-rubley-s-prodazhi-naydennogo-obernulis-rossiyaninu-devyatyu-godami-kolonii/"
+     "web:ria.ru",
+     "https://ria.ru/20261117/novorossijsk-2132201028.html"
+    ]
+   ],
+   "sum": "100 млрд ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49724201",
+   "title": "«Очень ласковая булочка». Под Тюменью продают щенка необычной породы за 150 тысяч рублей",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/animals/2026/11/17/76772856/"
     ]
    ],
    "sum": null,
@@ -356,7 +326,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
    ]
   }
  ]
