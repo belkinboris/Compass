@@ -367159,7 +367159,8 @@
   "gb8a84b47": null,
   "gbb23f0bb": 283,
   "g7a31c3cc": null,
-  "g4290fc7a": 284
+  "g4290fc7a": 284,
+  "g42fbeaf2": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -373408,6 +373409,9 @@
    "events": [
     {
      "kind": "announced"
+    },
+    {
+     "kind": "negotiations"
     }
    ]
   },
