@@ -131,13 +131,19 @@ STALE_DECISION_MIN = 30
 def stale_decisions_warning(now=None):
     """Решения людей из консоли ждут публикацию дольше STALE_DECISION_MIN минут —
     сказать вслух: их доведет до поста `ship_decisions.py --write` (28 октября
-    2026, «пост больше двух часов назад одобрил»)."""
+    2026, «пост больше двух часов назад одобрил»).
+
+    БЕЗ ВЕРХНЕЙ ОТСЕЧКИ ПО ВОЗРАСТУ (ревизия 17 ноября 2026). `publication_busy`
+    по умолчанию отбрасывает решения старше трех часов — для ожидания перед push
+    это верно, для предупреждения нет: решение, нажатое в 21:55, к первому
+    утреннему забору (08:50) старше трех часов, и забор о нем молчал до
+    публикации в 10:05."""
     try:
         from datetime import datetime, timedelta, timezone
         sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
         import publication_busy
         now = now or datetime.now(timezone.utc)
-        old = [d for d in publication_busy.busy()
+        old = [d for d in publication_busy.busy(stale_h=None)
                if now - datetime.fromisoformat(str(d.get('created_at'))).replace(
                    tzinfo=datetime.fromisoformat(str(d.get('created_at'))).tzinfo or timezone.utc)
                > timedelta(minutes=STALE_DECISION_MIN)]

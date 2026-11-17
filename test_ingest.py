@@ -12462,3 +12462,30 @@ def test_shown_raw_news_without_an_answer_still_counts_as_waiting(tmp_path, monk
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
     plan, *_rest = send_drafts.build_plan()
     assert [item["draft_id"] for _t, _k, (kind, item, _m) in plan if kind == "raw"] == ["d3"]
+
+
+def test_sweep_warns_about_an_unapplied_decision_of_any_age(monkeypatch, capsys):
+    """Ревизия 17 ноября 2026: решение, нажатое вечером в 21:55, к утреннему забору
+    (08:50) старше трех часов. `publication_busy` такие отбрасывает (ждать с push из-за
+    них незачем), и забор по тому же списку о решении не предупреждал — оно ждало
+    публикации в 10:05. Предупреждение — о любом не примененном решении старше 30 минут."""
+    import sys
+    from datetime import datetime, timedelta, timezone
+    sys.path.insert(0, "pipeline")
+    sys.path.insert(0, "pipeline/ingest")
+    import publication_busy
+    import sweep
+    now = datetime(2026, 11, 18, 5, 50, tzinfo=timezone.utc)                 # 08:50 МСК
+    evening = {"id": 1, "deal_id": "gnight1", "verdict": "approve",
+               "created_at": (now - timedelta(hours=11)).replace(tzinfo=None).isoformat()}   # 21:55 МСК
+    fresh = {"id": 2, "deal_id": "gfresh1", "verdict": "approve",
+             "created_at": (now - timedelta(minutes=5)).replace(tzinfo=None).isoformat()}
+    note = dict(evening, id=3, verdict="note")
+    assert publication_busy.waiting([evening, fresh, note], now) == [fresh], "ожидание перед push — без старых"
+    assert publication_busy.waiting([evening, fresh, note], now, stale_h=None) == [evening, fresh]
+    monkeypatch.setattr(publication_busy, "busy",
+                        lambda stale_h=publication_busy.STALE_H:
+                        publication_busy.waiting([evening, fresh, note], now, stale_h=stale_h))
+    old = sweep.stale_decisions_warning(now)
+    assert [d["deal_id"] for d in old] == ["gnight1"], old
+    assert "gnight1" in capsys.readouterr().out
