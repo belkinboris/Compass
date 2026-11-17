@@ -169085,7 +169085,7 @@
      "https://runet.news/articles/61865"
     ]
    ],
-   "extra": "МТС приобрела 67% долей в ООО «Баззула интернет технологии» (бренд Buzzoola) и получила опцион на выкуп оставшихся 33% в 2024 году. Платформа размещает видеорекламу и текстово-графические блоки, которые появляются при прокрутке страницы; ее охват — более 100 млн человек в России и странах СНГ.",
+   "extra": "Платформа размещает видеорекламу и текстово-графические блоки, которые появляются при прокрутке страницы; ее охват — более 100 млн человек в России и странах СНГ.",
    "auto": true,
    "promoted_from_bulk": true,
    "themes": [
@@ -169112,7 +169112,8 @@
      "930ee91a79ad"
     ],
     "law.struct": [],
-    "eco.val": []
+    "eco.val": [],
+    "extra": []
    },
    "proofread": "2026-09-04",
    "facts": {
@@ -169442,8 +169443,8 @@
    "buyer": "g170af9c1",
    "gate_baseline_hash": "763713b6f224.38f3f2",
    "date_basis": "registry",
-   "reread": "2026-11-13",
-   "reread_hash": "d53a0f52af35.38f3f2",
+   "reread": "2026-11-17",
+   "reread_hash": "7a29450a491c.38f3f2",
    "reread_note": "статьи: 3"
   },
   {
@@ -222447,9 +222448,9 @@
      "date": "2026-11-13"
     }
    ],
-   "reread": "2026-11-13",
+   "reread": "2026-11-17",
    "reread_hash": "7119a24f3bad.6c9cdc",
-   "reread_note": "статьи: 3",
+   "reread_note": "статьи: 2",
    "date_basis": "registry",
    "accepted_notes": {
     "checked": {
@@ -269063,9 +269064,9 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "—",
+    "sum": "Не раскрыта",
     "share": "100% доли в ООО «Компания Новая Идея»",
-    "val": "Сумму сделки Кирш не раскрыл.",
+    "val": "—",
     "target_fin": "По данным ГИР БО, выручка ООО «Компания новая идея» за 2025 год — 20,2 млн ₽ (за 2024 год — 25,9 млн ₽), чистый убыток — 2,2 млн ₽ (за 2024 год — прибыль 654 тыс. ₽). Средняя численность работников за 2025 год — 6 человек (ЕГРЮЛ).",
     "fin": "—",
     "rationale": "«Гельтек» ищет новые ниши, и косметика для детей и подростков входит в круг его интересов. Строить свою линию с нуля, по словам владельца «Гельтека» Сергея Кирша, заняло бы год, а то и больше, поэтому компания предпочла взять уже работающий бренд.",
@@ -269086,7 +269087,9 @@
      "bc0064cc4760",
      "59be32d67759"
     ],
-    "eco.val": [],
+    "eco.val": [
+     "9e77e694ae75"
+    ],
     "eco.rationale": [
      "687e7f22e5a1",
      "4b43a874f02a"
@@ -269132,7 +269135,7 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "529698fcab44"
+     "card_hash": "c22efc030a0d"
     },
     "date": {
      "value": "2026-10-13",
@@ -269180,9 +269183,9 @@
    "weekly_researched": "2026-10-22",
    "accepted_hash": "4dd97e62c628.7b2b44",
    "second_read_hash": "4dd97e62c628.7b2b44",
-   "reread": "2026-11-13",
-   "reread_hash": "b7256e0f508a.7b2b44",
-   "reread_note": "статьи: 4",
+   "reread": "2026-11-17",
+   "reread_hash": "735118909257.7b2b44",
+   "reread_note": "статьи: 3",
    "fact_log": [
     {
      "field": "eco.share",
@@ -269191,8 +269194,33 @@
      "url": "https://www.sostav.ru/publication/geltek-priobrel-brend-detskoj-kosmetiki-nomi-87737.html",
      "by": "reread_parties_r1113a",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "Не раскрыта",
+     "quote": "Shopper’s, с 13 октября 100% долей управляющей компании марки — ООО «Компания новая идея» — принадлежат ООО «Гельтек РНД». Сумму сделки стороны не раскрыли.",
+     "url": "https://retailer.ru/brend-detskoj-kosmetiki-nomi-pereshjol-pod-kontrol-gelteka/",
+     "by": "reread_profile_desc_r1117b",
+     "date": "2026-11-17"
+    },
+    {
+     "field": "eco.sum",
+     "new": "Не раскрыта",
+     "quote": "Shopper’s, с 13 октября 100% долей управляющей компании марки — ООО «Компания новая идея» — принадлежат ООО «Гельтек РНД». Сумму сделки стороны не раскрыли.",
+     "url": "https://retailer.ru/brend-detskoj-kosmetiki-nomi-pereshjol-pod-kontrol-gelteka/",
+     "by": "reread_profile_desc_r1117b",
+     "date": "2026-11-17"
+    },
+    {
+     "field": "eco.val",
+     "new": "—",
+     "quote": "Shopper’s, с 13 октября 100% долей управляющей компании марки — ООО «Компания новая идея» — принадлежат ООО «Гельтек РНД». Сумму сделки стороны не раскрыли. — оценки нет, поле пусто.",
+     "url": "https://retailer.ru/brend-detskoj-kosmetiki-nomi-pereshjol-pod-kontrol-gelteka/",
+     "by": "reread_profile_desc_r1117b",
+     "date": "2026-11-17"
     }
-   ]
+   ],
+   "sum": "Не раскрыта"
   },
   {
    "id": "g253252c4",
@@ -324330,7 +324358,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "359a254df848.de6307",
+   "reread_scope": "short",
+   "reread_note": "статьи: 3"
   },
   {
    "id": "g47d8e3bd",
@@ -324486,7 +324518,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "2cb52f2c358d.35643a",
+   "reread_scope": "short",
+   "reread_note": "статьи: 3"
   },
   {
    "id": "g26687d3e",
@@ -324656,7 +324692,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "cb0ccc79086f.7716d5",
+   "reread_scope": "short",
+   "reread_note": "статьи: 5"
   },
   {
    "id": "gd0ec0056",
@@ -324810,7 +324850,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "dfbaad715c41.037ac9",
+   "reread_scope": "short",
+   "reread_note": "статьи: 3"
   },
   {
    "id": "g87170cbc",
@@ -324961,12 +325005,16 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "415af49e139d.c44da9",
+   "reread_scope": "short",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "g171d1324",
    "date": "2022-12-29",
-   "title": "Менеджмент купил российский бизнес DLL Group",
+   "title": "«ФК Менеджмент» купил российский бизнес DLL Group",
    "ind": "Финансовые услуги",
    "type": "M&A",
    "status": "Закрыта",
@@ -324974,12 +325022,16 @@
     [
      "Advance Capital",
      "https://advancecapital.ru/news/news/press-releases/406/"
+    ],
+    [
+     "Advance Capital: сделки",
+     "https://advancecapital.ru/sdelki/"
     ]
    ],
    "from_ingest": true,
    "eco": {
     "sum": "Не раскрыта",
-    "share": "Российский бизнес DLL Group целиком; размер пакета и юрлицо консультант покупателей не назвал",
+    "share": "100% долей в российском бизнесе DLL Group",
     "val": "—",
     "target_fin": "Выручка российской компании за 2021 год превысила 13 млрд ₽.",
     "fin": "—",
@@ -325031,7 +325083,9 @@
    "kind": "acquisition",
    "date_basis": "announcement",
    "proofread_absorbed": {
-    "eco.share": [],
+    "eco.share": [
+     "804abd09cd2e"
+    ],
     "eco.target_fin": [],
     "eco.context": [],
     "law.struct": []
@@ -325067,9 +325121,9 @@
    "added": "2026-11-14",
    "facts": {
     "stake": {
-     "value": null,
-     "basis": "unknown",
-     "card_hash": "92f0116fc227"
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "4a6ebf158b0b"
     },
     "price": {
      "value_rub": null,
@@ -325118,7 +325172,11 @@
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "2a785ecbb096.3d524a",
+   "reread_scope": "short",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "geb51344d",
@@ -325264,7 +325322,11 @@
      "top_purchases": "not_purchase",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "reread": "2026-11-17",
+   "reread_hash": "90fdd166dff9.e8c189",
+   "reread_scope": "short",
+   "reread_note": "статьи: 2"
   },
   {
    "id": "gcc6afd66",
@@ -331396,7 +331458,7 @@
   "g478eb55f": {
    "name": "ООО «Баззула интернет технологии»",
    "ind": "Медиа",
-   "desc": "Платформа нативной видеорекламы (бренд Buzzoola, охват более 100 млн человек в РФ и СНГ); в 2023 году 66% ее купила МТС с колл-опционом на оставшиеся 33% в 2024 году.",
+   "desc": "Платформа нативной видеорекламы (бренд Buzzoola) с охватом более 100 млн человек в России и странах СНГ.",
    "kpi": [
     "Профиль",
     "Автоматический"
