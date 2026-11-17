@@ -320,7 +320,7 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
         # add / stage / other — кнопки предложения «к карточке … добавить»
         # (pipeline/ingest/card_news.py, 6 ноября 2026): номер — номер новости,
         # применяет approve.py. Старые take/drop под сырьем работают как раньше.
-        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|post_realty|post_main|post_hold|take|drop|edit|add|stage|other)$",
+        match = re.match(r"^mod:([\w~-]{1,60}):(ok|hold|discard|post_ok|post_no|post_realty|post_main|post_both|post_hold|take|drop|edit|add|stage|other)$",
                          str(callback.get("data") or ""))
         if match and match.group(2) == "edit" and _is_reviewer(from_id):
             # «Изменить» — не вердикт, а подсказка, как продиктовать правку:
@@ -338,10 +338,11 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
                        # Пост только в один канал (владелец, 10 ноября 2026: «Форум-Групп» —
                        # «опубликовать только в недвижимость, без основного»): то же одобрение
                        # поста, канал применяет approve.py (`post_channels` карточки).
-                       "post_realty": "post_realty", "post_main": "post_main", "post_hold": "post_hold",
+                       "post_realty": "post_realty", "post_main": "post_main", "post_both": "post_both",
+                       "post_hold": "post_hold",
                        "post_no": "post_no", "take": "take", "drop": "drop",
                        "add": "card_add", "stage": "card_stage", "other": "card_other"}[match.group(2)]
-            if verdict in ("approve", "hold", "discard", "post_yes", "post_no", "post_realty", "post_main", "post_hold") \
+            if verdict in ("approve", "hold", "discard", "post_yes", "post_no", "post_realty", "post_main", "post_both", "post_hold") \
                     and _already_on_site(match.group(1)):
                 if callback.get("id"):
                     notification_service.tg_api("answerCallbackQuery", callback_query_id=callback["id"],
@@ -1214,12 +1215,7 @@ def _send_held_posts(chat_id, deals, thread_kw, hold_button=False) -> None:
     for deal in deals[:BATCH_LIMIT]:
         did = str(deal.get("id"))
         text = sd.post_message_text(deal, comps)
-        keys = [[{"text": "📣 Пост в канал", "callback_data": "mod:%s:post_ok" % did},
-                 {"text": "🔕 Без поста", "callback_data": "mod:%s:post_no" % did}],
-                [{"text": "🏠 Только недвижимость", "callback_data": "mod:%s:post_realty" % did},
-                 {"text": "📰 Только основной", "callback_data": "mod:%s:post_main" % did}]]
-        if hold_button:
-            keys.append([{"text": "✋ Придержать пост", "callback_data": "mod:%s:post_hold" % did}])
+        keys = sd.post_keyboard(deal, hold_button=hold_button)["inline_keyboard"]
         if did in answered:
             text += "\n\n%s — ваше решение записано, применится при ближайшей публикации." \
                     % html_escape(_VERDICT_LABEL.get(answered[did], answered[did]))
@@ -1567,6 +1563,7 @@ _VERDICT_LABEL = {
     "post_yes": "📣 Пост одобрен", "post_no": "🔕 Решено: без поста",
     "post_realty": "🏠 Пост одобрен — только в «Компас - Недвижимость»",
     "post_main": "📰 Пост одобрен — только в основной канал",
+    "post_both": "📰🏠 Пост одобрен — в оба канала",
     "post_hold": "✋ Пост придержан — карточка выйдет на сайт, пост ждет в «Что придержано»",
     "take": "✅ Признана сделкой — уйдет в работу", "drop": "🗑 Отброшена как не-сделка",
     "card_add": "✅ Добавим в карточку",

@@ -60,7 +60,7 @@ def waiting(decisions, now=None, stale_h=STALE_H):
     return out
 
 
-CARD_VERDICTS = {'approve', 'post_yes', 'post_realty', 'post_main', 'post_no', 'post_hold'}
+CARD_VERDICTS = {'approve', 'post_yes', 'post_realty', 'post_main', 'post_both', 'post_no', 'post_hold'}
 
 
 def holding(rows, base, queued, unproven):

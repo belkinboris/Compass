@@ -5515,14 +5515,15 @@ def test_post_channel_buttons_record_a_channel_choice(client, monkeypatch):
     10 ноября 2026, «Форум-Групп»): сайт принимает нажатие и хранит выбор канала."""
     _mod_env(monkeypatch)
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: {"ok": True})
-    for did, btn in (("gchanr", "post_realty"), ("gchanm", "post_main")):
+    for did, btn in (("gchanr", "post_realty"), ("gchanm", "post_main"), ("gchanb", "post_both")):
         client.post("/api/telegram/webhook/тайна", json={
             "callback_query": {"id": "cb-" + did, "from": {"id": 222, "first_name": "Борис"},
                                 "data": "mod:%s:%s" % (did, btn),
                                 "message": {"message_id": 9, "chat": {"id": 222}, "text": "[пост %s] x" % did}}})
     rows = [d for d in client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
-            if d["deal_id"] in ("gchanr", "gchanm")]
-    assert {(r["deal_id"], r["verdict"]) for r in rows} == {("gchanr", "post_realty"), ("gchanm", "post_main")}
+            if d["deal_id"] in ("gchanr", "gchanm", "gchanb")]
+    assert {(r["deal_id"], r["verdict"]) for r in rows} == {("gchanr", "post_realty"), ("gchanm", "post_main"),
+                                                          ("gchanb", "post_both")}
     client.post("/api/moderation/decisions/consume", json={"token": "тайна", "ids": [r["id"] for r in rows]})
 
 
