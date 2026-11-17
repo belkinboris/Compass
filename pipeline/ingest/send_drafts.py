@@ -341,6 +341,23 @@ def claim_show(card_id):
     return None
 
 
+def release_show(card_id):
+    """Снять свой захват показа на сайте: карточка в Telegram не ушла. Иначе запись
+    показа остается, следующий запуск считает карточку показанной и досылает один
+    пост — владелец получает пост без карточки. True — сайт захват снял."""
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return False
+    try:
+        import httpx
+        r = httpx.post('%s/api/moderation/shown/release' % SITE,
+                       json={'token': token, 'cards': [{'id': card_id}]}, timeout=15)
+        return r.status_code == 200
+    except Exception as e:                                   # noqa: BLE001
+        print('снять захват показа на сайте не удалось: %s' % e)
+        return False
+
+
 def post_missing(rec, card, now=None):
     """Сайт помнит показ карточки, а снимка поста нет, хотя пост ей положен, —
     проект поста не дошел. Две минуты после показа не трогаем: сервер шлет
@@ -1006,6 +1023,7 @@ def main(write=False, resend=None, only=None):
         return 1
     import httpx
     sent = 0
+    claimed = set()      # карточки, чей показ на сайте занял этот запуск
     comps = json.load(open(DATA, encoding='utf-8')).get('companies') or {}
     # Все три вида сообщений (пост/карточка/сырье) ждут решения владельца или
     # партнера — тема одна на всех, «Подтверждение постов».
@@ -1041,15 +1059,31 @@ def main(write=False, resend=None, only=None):
                         item['draft_sent'] = item['post_draft_sent'] = True
                         item.pop('_pending_post_preview', None)
                         continue
+                    claimed.add(item['id'])
                 elif item.get('_skip_this_run') or item.get('post_draft_sent'):
                     continue
             if i:
                 time.sleep(PAUSE)
-            ok_all = True
+            ok_all, ok_any = True, False
             for chat in chats:
-                if not send_one(client, token, chat, text, keyboard, thread,
-                                html=(mark == 'post_draft_sent')):
+                if send_one(client, token, chat, text, keyboard, thread,
+                            html=(mark == 'post_draft_sent')):
+                    ok_any = True
+                else:
                     ok_all = False
+            if kind == 'card' and mark == 'draft_sent' and not ok_any and item['id'] in claimed:
+                # КАРТОЧКА НЕ УШЛА — ЗАХВАТ СНИМАЕМ (ревизия 17 ноября 2026). Запись
+                # показа, оставшаяся на сайте, значила бы «карточка показана»:
+                # следующий запуск дослал бы один пост. Пост без карточки в этом
+                # запуске тоже не шлем — карточку и пост покажет следующий показ.
+                claimed.discard(item['id'])
+                item['_skip_this_run'] = True
+                if release_show(item['id']):
+                    print('  %s: карточка в консоль не ушла — захват показа на сайте снят' % item['id'])
+                else:
+                    print('  %s: карточка в консоль НЕ УШЛА, и захват показа на сайте снять не удалось — '
+                          'сайт считает ее показанной; показать заново: send_drafts.py --resend %s --write'
+                          % (item['id'], item['id']))
             # Временное поле `_pending_post_preview` (см. build_plan()) живет
             # на карточке ДО отправки ее собственного поста — у одной
             # карточки в `plan` два отдельных пункта («карточка» и «пост»), и

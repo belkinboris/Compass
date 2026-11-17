@@ -2644,6 +2644,24 @@ def test_show_claim_says_busy_only_when_the_key_exists(client, monkeypatch):
     assert main.console_show_ready_cards() == {"shown": 0} and sent == []
 
 
+def test_routine_can_release_its_show_claim_when_the_send_failed(client, monkeypatch):
+    """Ревизия 17 ноября 2026: рутина заняла показ, а карточка в Telegram не ушла —
+    захват снимается ручкой, и показ снова свободен. Карточку, показанную целиком
+    (есть снимок поста), ручка не трогает."""
+    _mod_env(monkeypatch)
+    post = lambda path, **body: client.post(path, json=dict(body, token="тайна"))
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": ["grel1"]}
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": []}
+    r = post("/api/moderation/shown/release", cards=[{"id": "grel1"}])
+    assert r.status_code == 200 and r.json() == {"released": ["grel1"]}, r.text
+    assert "grel1" not in client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": ["grel1"]}
+    post("/api/moderation/shown", cards=[{"id": "grel2", "post_preview": "<b>Пост</b>"}])
+    assert post("/api/moderation/shown/release", cards=[{"id": "grel2"}]).json() == {"released": []}
+    assert "grel2" in client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]
+    assert client.post("/api/moderation/shown/release", json={"token": "чужой", "cards": []}).status_code == 404
+
+
 def test_server_does_not_show_card_twin_of_a_base_deal(client, monkeypatch):
     """13 ноября 2026 («К+» / «Комфорт»): принятая карточка о сделке, которая уже
     есть в базе (та же статья, сумма и дата), сама в консоль не уходит; с причиной

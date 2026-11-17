@@ -2444,6 +2444,24 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
     return {"recorded": n}
 
 
+@router.post("/api/moderation/shown/release")
+def moderation_shown_release(req: ModerationShownIn, db=Depends(get_db)):
+    """Рутина заняла показ карточки, а отправка в Telegram не прошла — снять захват,
+    чтобы карточку показал сервер или следующий запуск. Без этого запись показа
+    оставалась на сайте, следующий запуск считал карточку показанной и досылал один
+    пост — владелец получал пост без карточки. Карточку со снимком поста (показана
+    целиком) не трогаем."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    released = []
+    for item in req.cards:
+        cid = str(item.get("id") or "").strip()
+        if cid and db.get(AppSetting, CONSOLE_PREVIEW_PREFIX + cid) is None:
+            _release_show(db, cid)
+            released.append(cid)
+    return {"released": released}
+
+
 @router.post("/api/moderation/decisions/consume")
 def moderation_consume(req: ModerationConsumeIn, db=Depends(get_db)):
     if not _moderation_token_ok(req.token):

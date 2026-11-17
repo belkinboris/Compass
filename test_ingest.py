@@ -12399,3 +12399,17 @@ def test_site_failure_on_claim_is_not_read_as_shown_by_another(monkeypatch, tmp_
     assert send_drafts.claim_show("gS") is False
     send_drafts.main(write=True)
     assert sent == [] and read().get("draft_sent") and read().get("post_draft_sent")
+
+
+def test_failed_card_send_releases_the_show_claim(monkeypatch, tmp_path):
+    """Ревизия 17 ноября 2026: запуск занял показ карточки на сайте, а отправка в
+    Telegram не прошла — запись показа оставалась, следующий запуск считал карточку
+    показанной и досылал один пост. Захват снимается, пост без карточки не уходит."""
+    send_drafts, site, sent, read = _send_drafts_with_site(
+        monkeypatch, tmp_path, send_ok=lambda text: not text.startswith("🗂"))
+    send_drafts.main(write=True)
+    assert sent == [], "пост ушел без карточки: %r" % sent
+    assert "gS" not in site.cards, "захват показа остался на сайте"
+    assert [c for c in site.calls if c[0] == "shown/release"]
+    assert not read().get("draft_sent") and not read().get("post_draft_sent"), read()
+    assert "_skip_this_run" not in read()
