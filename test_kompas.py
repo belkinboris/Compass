@@ -2284,3 +2284,22 @@ def _go_link_checks(c):
     assert "evil" not in r.headers.get("location", "")
     r = c.get("/go/unknown-name", follow_redirects=False)
     assert r.status_code == 302 and r.headers["location"].rstrip("/").endswith("projectcompass.ru")
+
+
+def test_day_summary_names_what_waits_for_the_owner_and_offers_buttons(monkeypatch):
+    """Сводка дня говорит, на сколько карточек, постов и сомнительных новостей владелец
+    не ответил, и несет две кнопки, которые показывают их заново (владелец, 17 ноября 2026)."""
+    import app.console as console
+    from app import ops
+    text = ops._intake_summary_text([], datetime(2026, 11, 17).date(), [], {"cards": 2, "posts": 5, "raw": 1},
+                                    with_waiting=True)
+    assert "2 карточки на проверку" in text and "5 постов без кнопки" in text and "1 сомнительная новость" in text
+    empty = ops._intake_summary_text([], datetime(2026, 11, 17).date(), [], {"cards": 0, "posts": 0, "raw": 0},
+                                     with_waiting=True)
+    assert "нет" in empty and "Кнопки ниже" not in empty
+    assert "посчитать не удалось" in ops._intake_summary_text([], datetime(2026, 11, 17).date(), [], None,
+                                                              with_waiting=True)
+    data = [b["callback_data"] for row in console.WAITING_KEYBOARD["inline_keyboard"] for b in row]
+    assert data == ["show:soon", "show:raw"]
+    counts = console.waiting_counts()
+    assert set(counts) == {"cards", "posts", "raw"} and all(isinstance(v, int) for v in counts.values())
