@@ -149,85 +149,6 @@
    ]
   },
   {
-   "draft_id": "d94328545",
-   "title": "Центробанк намерен продавать полисы ОСАГО через «Госуслуги»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261117/tsb-875278979.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-17",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261117/tsb-875278979.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d85813972",
-   "title": "Пользователи по всему миру потратили $1,45 млрд на предзаказ GTA 6 — геймеры купили почти 15 млн копий игры",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
-    ]
-   ],
-   "sum": "$1,45 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Количество предзаказов GTA 6 по всему миру достигло уже 14,94 млн копий на сумму $1,45 млрд, сообщила аналитическая компания Sensor Tower. Основная часть продаж пришлась на консоль Sony PlayStation 5. До релиза игры осталось два дня.",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "почти 15 млн копий игры",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "почти 15 млн копий игры",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d03423241",
    "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
    "date": "2026-11-17",
@@ -250,34 +171,6 @@
     "seller": null
    },
    "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60621786",
-   "title": "«Свободных мест нет»: «Лаборатория Касперского» предупреждает о фишинговых сайтах по продаже билетов в театр",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-17_svobodnyh_mest_net_laboratoriya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -313,16 +206,16 @@
    ]
   },
   {
-   "draft_id": "d55974424",
-   "title": "В Екатеринбурге временно нельзя будет купить алкоголь: когда и где будет действовать запрет",
+   "draft_id": "d37642908",
+   "title": "Дефицит консолидированного бюджета РФ в январе-сентябре снизился до 4,5 трлн рублей",
    "date": "2026-11-17",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144937"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1129576"
     ]
    ],
-   "sum": null,
+   "sum": "525,5 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -338,46 +231,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75023641",
-   "title": "Цифровая дискриминация: почему сосед может купить продукты дешевле",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/17/czifrovaya-diskriminacziya-pochemu-sosed-mozhet-kupit-produkty-deshevle"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-17",
-     "title": "Переговоры",
-     "note": "Один и тот же товар в приложении доставки сегодня может стоить 100 рублей, а завтра — 130. Причем разница в цене не всегда объясняется акциями или изменением спроса: алгоритмы могут учитывать поведение покупателей и их готовность платить. Не превращается ли…",
-     "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/news/2026/11/17/czifrovaya-diskriminacziya-pochemu-sosed-mozhet-kupit-produkty-deshevle"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
