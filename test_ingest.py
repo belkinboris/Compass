@@ -4838,6 +4838,24 @@ def test_acceptance_findings_point_at_what_the_owner_saw():
     assert "target_fin_prose" in {c for c, _t in accept_card.findings(clean, base, registry=known)}
 
 
+def test_entity_in_source_ignores_typographic_dash_in_already_named_party(monkeypatch):
+    """17 ноября 2026, g7a31c3cc (ТК Prisma): карточка называла продавца
+    «ООО «Инвест-Проект» и ООО «Инвест-Трейд»» (обычный дефис), а источник —
+    «Инвест–Трейд» (типографское тире, en dash) — `entities_missing_from_card`
+    сравнивал имена `.lower()` без типографской нормализации и считал
+    уже названную сторону пропущенной. Починено: сравнение через
+    `review.typo_flat` (тот же, что сверяет правки `FIXES` с базой)."""
+    import accept_card
+    base = {"companies": {}}
+    card = {"id": "gt3", "ind": "Недвижимость", "title": "Участок продан с торгов", "type": "Продажа с торгов",
+            "date": FRESH_DATE, "status": "Обсуждается", "seller": "ООО «Инвест-Проект» и ООО «Инвест-Трейд»",
+            "asset": "участок", "src": [["Деловой Петербург", "https://www.dp.ru/x"]], "eco": {}, "law": {}}
+    recs = [{"url": "https://www.dp.ru/x", "title": "x",
+             "summary": "Торги по продаже ООО \"Инвест–Проект\" и \"Инвест–Трейд\"."}]
+    codes = {c for c, _t in accept_card.findings(card, base, source_records=recs)}
+    assert "entity_in_source" not in codes, codes
+
+
 def test_the_payment_form_field_is_not_a_financial_report():
     """Сквозной паттерн №1 аудита 13 сентября 2026.
 

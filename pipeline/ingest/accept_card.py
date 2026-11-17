@@ -796,7 +796,7 @@ def _card_blob(card, comps):
     parts += [str(e.get('note') or '') + ' ' + str(e.get('title') or '') for e in card.get('events') or [] if isinstance(e, dict)]
     parts += [str(comps.get(card.get(k), {}).get('name') or '') for k in ('buyer', 'seller_id', 'target', 'asset_id') if card.get(k)]
     parts.append(json.dumps(card.get(STAMP + '_notes') or {}, ensure_ascii=False))
-    return ' '.join(parts).lower().replace('ё', 'е')
+    return review.typo_flat(' '.join(parts)).lower().replace('ё', 'е')
 
 
 def entities_missing_from_card(card, comps, records=None):
@@ -834,7 +834,7 @@ def entities_missing_from_card(card, comps, records=None):
             # как точная подстрока не ловит «рекламодатель» (другая гласная
             # после «м»), поэтому маркер — стем «реклам», а не целое слово.
             name = m.group(1).strip()
-            key = name.lower().replace('ё', 'е')
+            key = review.typo_flat(name).lower().replace('ё', 'е')
             prefix = text[max(0, m.start() - 20):m.start()]
             if '©' in prefix or re.search(r'(?i)учредител|реклам', prefix):
                 # Юрлицо издателя страницы встречается в её футере не всегда
