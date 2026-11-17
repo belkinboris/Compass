@@ -1558,6 +1558,20 @@
    "strength": "normal"
   },
   {
+   "id": "sd7b16a8eb",
+   "company_id": "g53772c90",
+   "date": "2026",
+   "kind": "investor",
+   "summary": "ООО «ВБ Банк» (WB Банк) — обсуждается вход инвестора в капитал; возможный покупатель — ВТБ",
+   "source": [
+    "Forbes",
+    "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
+   ],
+   "origin": "card",
+   "deal_id": "c51d0bb64",
+   "strength": "normal"
+  },
+  {
    "id": "sc4308194c",
    "company_id": "gf7340794",
    "date": "2026",
@@ -1646,7 +1660,7 @@
    "company_id": "gcafc31dc",
    "date": "2026",
    "kind": "buy",
-   "summary": "ВТБ — обсуждается покупка: ООО «ВБ Банк» (WB Банк)",
+   "summary": "ВТБ — обсуждается вложение в ООО «ВБ Банк» (WB Банк)",
    "source": [
     "Forbes",
     "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
@@ -1752,20 +1766,6 @@
    "origin": "card",
    "deal_id": "c06611bae",
    "strength": "normal"
-  },
-  {
-   "id": "s0ee59a847",
-   "company_id": "g53772c90",
-   "date": "2026",
-   "kind": "for_sale",
-   "summary": "ООО «ВБ Банк» (WB Банк) — обсуждается продажа компании или доли; возможный покупатель — ВТБ",
-   "source": [
-    "Forbes",
-    "https://www.forbes.ru/biznes/561677-osnovatel-nica-wildberries-tat-ana-kim-prokommentirovala-partnerstvo-s-vtb"
-   ],
-   "origin": "card",
-   "deal_id": "c51d0bb64",
-   "strength": "strong"
   },
   {
    "id": "s9df81d45a",
