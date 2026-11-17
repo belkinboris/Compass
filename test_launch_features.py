@@ -5620,3 +5620,40 @@ def test_accepted_is_answered_only_after_the_decision_is_written(client, monkeyp
     assert not [m for m, _p in calls if m.startswith("editMessage")], "под сообщением стоит отметка о решении, которого нет"
     rows = client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
     assert not [d for d in rows if d["deal_id"] == "glost1"]
+
+
+def test_server_records_that_the_post_draft_did_not_go(client, monkeypatch, caplog):
+    """Ревизия 17 ноября 2026 («почему скинули проект карточки, но не скинули проект
+    поста?»): сервер показал карточку, проект поста в Telegram не ушел — и об этом не
+    было ни строки в журнале, ни пометки; рутина догадывалась по отсутствию снимка.
+    Теперь неудача пишется в журнал и в запись показа; дослал рутина — пометка снята."""
+    import logging
+    _mod_env(monkeypatch)
+    card = {"id": "gnopost1", "title": "«Ромашка» купила «Лютик»", "status": "Закрыта",
+            "date": date.today().isoformat(), "type": "M&A", "ind": "Ритейл", "buyer_name": "ООО «Ромашка»",
+            "asset": "сеть «Лютик»", "src": [["Ъ", "https://www.kommersant.ru/doc/8"]], "from_ingest": True,
+            "reviewed": "2026-11-17", "accepted": "2026-11-17", "second_read": "2026-11-17", "eco": {}, "law": {}}
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
+    sent = []
+
+    def tg(method, **payload):
+        sent.append(payload)
+        return {"ok": True, "result": {"message_id": 1}} if len(sent) == 1 else None    # карточка ушла, пост — нет
+    monkeypatch.setattr(main.notification_service, "tg_api", tg)
+    with caplog.at_level(logging.ERROR):
+        assert main.console_show_ready_cards() == {"shown": 1}
+    assert len(sent) == 3, "карточка, пост с разметкой, пост без разметки"
+    assert any("проект поста gnopost1" in r.getMessage() for r in caplog.records), "неудача поста не записана в журнал"
+    rec = client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]["gnopost1"]
+    assert rec.get("shown_at") and rec.get("post_failed") and not rec.get("post_preview"), rec
+    # Рутина по пометке досылает пост сразу, не выжидая двух минут.
+    sys.path.insert(0, "pipeline/ingest")
+    import send_drafts
+    assert send_drafts.post_missing(rec, card) is True
+    assert send_drafts.post_missing({"shown_at": rec["shown_at"]}, card) is False, "без пометки — прежние две минуты"
+    # Дослала и записала снимок — пометка снята.
+    client.post("/api/moderation/shown", json={"token": "тайна", "cards": [{"id": "gnopost1", "post_preview": "<b>Пост</b>"}]})
+    rec = client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]["gnopost1"]
+    assert rec.get("post_preview") and "post_failed" not in rec, rec
+    assert send_drafts.post_missing(rec, card) is False

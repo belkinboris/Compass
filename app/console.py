@@ -2285,6 +2285,11 @@ class ModerationConsumeIn(BaseModel):
 CONSOLE_SHOWN_PREFIX = "console_shown:"
 CONSOLE_PREVIEW_PREFIX = "console_post_preview:"
 CONSOLE_RAW_PREFIX = "console_raw_shown:"
+# «Карточка показана, а проект поста не ушел» — пометка в записи показа (ревизия
+# 17 ноября 2026). Раньше об этом не знал никто: сервер молчал, а рутина
+# догадывалась по отсутствию снимка поста спустя две минуты. Досылает пост
+# рутина (`send_drafts.post_missing`); сервер сам второй раз не шлет.
+CONSOLE_POST_FAILED_PREFIX = "console_post_failed:"
 
 
 def _send_drafts_module():
@@ -2406,6 +2411,10 @@ def _console_show_ready_cards() -> dict:
                                                      reply_markup=sd.post_keyboard(card), **common)
                 if not (rp and rp.get("ok")):
                     preview = None
+                    logger.error("проект поста %s в консоль не ушел (карточка показана) — "
+                                 "дошлет рутина: %s", card["id"], rp)
+                    _remember_setting(db, CONSOLE_POST_FAILED_PREFIX + card["id"],
+                                      datetime.utcnow().isoformat(timespec="seconds"))
             if preview:
                 _remember_setting(db, CONSOLE_PREVIEW_PREFIX + card["id"], preview)
             shown += 1
@@ -2438,6 +2447,8 @@ def moderation_shown(token: str = "", db=Depends(get_db)):
             cards.setdefault(row.key[len(CONSOLE_SHOWN_PREFIX):], {})["shown_at"] = row.value
         elif row.key.startswith(CONSOLE_PREVIEW_PREFIX):
             cards.setdefault(row.key[len(CONSOLE_PREVIEW_PREFIX):], {})["post_preview"] = row.value
+        elif row.key.startswith(CONSOLE_POST_FAILED_PREFIX):
+            cards.setdefault(row.key[len(CONSOLE_POST_FAILED_PREFIX):], {})["post_failed"] = row.value
         elif row.key.startswith(CONSOLE_RAW_PREFIX):
             raw.append(row.key[len(CONSOLE_RAW_PREFIX):])
     return {"cards": cards, "raw": raw}
@@ -2471,6 +2482,11 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
         _remember_setting(db, CONSOLE_SHOWN_PREFIX + cid, now)
         if item.get("post_preview"):
             _remember_setting(db, CONSOLE_PREVIEW_PREFIX + cid, str(item["post_preview"]))
+            # Пост дослан — пометка «пост не ушел» больше не нужна.
+            failed = db.get(AppSetting, CONSOLE_POST_FAILED_PREFIX + cid)
+            if failed is not None:
+                db.delete(failed)
+                db.commit()
         n += 1
     for key in req.raw:
         if key:

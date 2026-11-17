@@ -361,9 +361,14 @@ def release_show(card_id):
 def post_missing(rec, card, now=None):
     """Сайт помнит показ карточки, а снимка поста нет, хотя пост ей положен, —
     проект поста не дошел. Две минуты после показа не трогаем: сервер шлет
-    карточку и пост подряд, и запись могла застать его между ними."""
+    карточку и пост подряд, и запись могла застать его между ними.
+
+    Сервер, у которого пост не ушел, с 17 ноября 2026 пишет это сам (пометка
+    `post_failed` в записи показа) — тогда гадать и ждать две минуты незачем."""
     if not rec or rec.get('post_preview') or not goes_to_channel(card):
         return False
+    if rec.get('post_failed'):
+        return True
     try:
         shown_at = datetime.fromisoformat(str(rec.get('shown_at'))).replace(tzinfo=timezone.utc)
     except ValueError:
