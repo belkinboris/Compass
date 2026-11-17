@@ -333,10 +333,17 @@ def undecided_raw(drafts, state):
     очереди в консоли (`app/console.py`) и `raw_screen.undecided`.
     8 ноября 2026: отчет писал «Сомнительных: 33», а ждали решения 0 —
     счетчик и кнопка смотрели только `decided_raw` и не видели повторов
-    одной новости, уже решенных по заголовку (`raw_titles`)."""
+    одной новости, уже решенных по заголовку (`raw_titles`).
+
+    ПОКАЗ — НЕ РЕШЕНИЕ (ревизия 17 ноября 2026). Показ пишет в `raw_titles`
+    значение `sent`; оно читалось здесь как решение, и новость, показанная
+    владельцу и оставшаяся без ответа, выпадала из кнопки «Сомнительные
+    новости», сводки дня и отчета — в счетчиках стоял ноль, пока ответа ждали
+    четыре новости. Кому показанное не нужно (`raw_screen.undecided` — список
+    для отсева), отфильтровывает его сам."""
     state = state or {}
     decided_ids = set(state.get('decided_raw') or {})
-    decided_titles = set(state.get('raw_titles') or {})
+    decided_titles = {k for k, v in (state.get('raw_titles') or {}).items() if v != 'sent'}
     return [d for d in drafts or []
             if str(d.get('draft_id')) not in decided_ids
             and raw_key(d.get('title')) not in decided_titles

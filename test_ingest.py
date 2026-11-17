@@ -12427,3 +12427,38 @@ def test_a_run_that_claimed_the_card_sends_its_post_draft_too(monkeypatch, tmp_p
     assert site.cards["gS"].get("post_preview"), "снимок поста не записан на сайт"
     send_drafts.main(write=True)
     assert len(sent) == 2, "второй запуск показал то же самое еще раз"
+
+
+def test_shown_raw_news_without_an_answer_still_counts_as_waiting(tmp_path, monkeypatch):
+    """Ревизия 17 ноября 2026: показ пишет в `raw_titles` значение `sent`, а общий счет
+    «ждет человека» читал любую запись как решение — показанная и не отвеченная новость
+    выпадала из отчета, сводки дня и кнопки «Сомнительные новости» (в файле дня ждали
+    четыре, счетчик говорил 0). Показ — не решение; второй раз новость при этом не
+    показывается, и отсеву она не предлагается."""
+    import ops_status, readiness, promote, raw_screen, send_drafts
+    drafts = [{"draft_id": "d1", "title": "Показана, ответа нет", "url": "https://example.com/1", "date": "2026-11-17"},
+              {"draft_id": "d2", "title": "Показана, отброшена", "url": "https://example.com/2", "date": "2026-11-17"},
+              {"draft_id": "d3", "title": "Еще не показана", "url": "https://example.com/3", "date": "2026-11-17"}]
+    state = {"decided_raw": {"d2": "drop"}, "sent_raw": ["d1", "d2"],
+             "raw_titles": {promote.raw_key("Показана, ответа нет"): "sent",
+                            promote.raw_key("Показана, отброшена"): "drop"},
+             "raw_sent_titles": {"d1": "Показана, ответа нет", "d2": "Показана, отброшена"}}
+    assert [d["draft_id"] for d in readiness.undecided_raw(drafts, state)] == ["d1", "d3"]
+    inbox = tmp_path / "inbox"
+    (inbox / "hold").mkdir(parents=True)
+    (inbox / "hold" / "2026-11-17.json").write_text(json.dumps({"drafts": drafts}, ensure_ascii=False), encoding="utf-8")
+    (inbox / "moderation_state.json").write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+    pending = tmp_path / "pending.json"
+    pending.write_text('{"cards": []}', encoding="utf-8")
+    assert ops_status.doubted_count(str(pending), str(inbox)) == 1, "показанная без ответа не посчитана"
+    # Отсеву показанное не предлагается.
+    monkeypatch.setattr(raw_screen, "all_raw_drafts", lambda: drafts)
+    assert [d["draft_id"] for d in raw_screen.undecided(state)] == ["d3"]
+    # И второй раз владельцу не уходит.
+    monkeypatch.setattr(promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(promote, "load_state", lambda: json.loads(json.dumps(state)), raising=False)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    plan, *_rest = send_drafts.build_plan()
+    assert [item["draft_id"] for _t, _k, (kind, item, _m) in plan if kind == "raw"] == ["d3"]
