@@ -2,63 +2,6 @@
  "made": "2026-11-17",
  "drafts": [
   {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -121,6 +64,62 @@
    ]
   },
   {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -147,6 +146,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d03423241",
+   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
+    ]
+   ],
+   "sum": "277 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -179,16 +206,83 @@
    ]
   },
   {
-   "draft_id": "d03423241",
-   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
+   "draft_id": "d81494217",
+   "title": "Bloomberg: богатейшая женщина Австралии увеличила инвестиции в ВПК США и SpaceX",
    "date": "2026-11-17",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28326677"
     ]
    ],
-   "sum": "277 млн ₽",
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Принадлежащая Джине Райнхарт компания Hancock Prospecting Ltd. приобрела акции производителя военной техники General Dynamics Corp.",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28326677"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92420262",
+   "title": "3 декабря — Круглый стол «С видом на море и не только: зачем петербуржцы покупают жилье на Юге»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/17/76551207/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "жилье на Юге»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "жилье на Юге»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d06564593",
+   "title": "Россияне смогут провести сделку по покупке авто онлайн",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203279/2026-11-17/rossiiane-smogut-provesti-sdelku-po-pokupke-avto-onlain"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
@@ -200,10 +294,207 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25349512",
+   "title": "РЖД упростят покупку билетов на поезда для животных",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261117/rzhd-875290340.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73963969",
+   "title": "Сергей Кутенев стал единственным владельцем орловского «Эксперт-Кабеля» на фоне ареста средств завода",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119322-sergey-kutenev-stal-edinstvennym-vladeltsem-orlovskogo-ekspert-kabelya-na-fone-aresta-sredstv-zavoda/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05042409",
+   "title": "РЖД в 2027 году начнут продавать билеты за цифровые рубли",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261117/rubl-2132129126.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14636861",
+   "title": "Запад перешел к пиратским практикам в сфере судоходства, заявил Лавров",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261117/zapad-2132127389.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d14801423",
+   "title": "США продлили разрешение на покупку российской нефти компанией MOL",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261117/ssha-2132126632.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24740959",
+   "title": "Депутат объяснила отказ от эксперимента по продаже вина через «Почту России»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/17/deputat-ob-yasnila-otkaz-ot-eksperimenta-po-prodazhe-vina-cherez-pochtu-rossii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -441,34 +732,6 @@
    ]
   },
   {
-   "draft_id": "d92420262",
-   "title": "3 декабря — Круглый стол «С видом на море и не только: зачем петербуржцы покупают жилье на Юге»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/17/76551207/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "жилье на Юге»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "жилье на Юге»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d10778817",
    "title": "В 2,5 раза сократились продажи южнокорейских автомобилей в России",
    "date": "2026-11-17",
@@ -507,34 +770,6 @@
     ]
    ],
    "sum": "171,5 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d73963969",
-   "title": "Сергей Кутенев стал единственным владельцем орловского «Эксперт-Кабеля» на фоне ареста средств завода",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119322-sergey-kutenev-stal-edinstvennym-vladeltsem-orlovskogo-ekspert-kabelya-na-fone-aresta-sredstv-zavoda/"
-    ]
-   ],
-   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
