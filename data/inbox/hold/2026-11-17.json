@@ -150,13 +150,109 @@
    ]
   },
   {
-   "draft_id": "d48515120",
-   "title": "В автопроме усомнились в покупке активов Porsche в России кредитором Volkswagen",
+   "draft_id": "d82374921",
+   "title": "Рябков ответил на вопрос о новом раунде трехсторонних переговоров по Украине // Рябков: дат нового раунда трехсторонних переговоров по Украине пока нет",
    "date": "2026-11-17",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111251"
+     "https://www.kommersant.ru/doc/9111480"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-17",
+     "title": "Переговоры",
+     "note": "Даты проведения нового раунда трехсторонних переговоров по Украине пока не установлены. Стороны также не договорились о месте их проведения.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9111480"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69534827",
+   "title": "Продажи GTA VI до выхода игры превысили $1,4 млрд",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9111435"
+    ]
+   ],
+   "sum": "$1,4 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d04345808",
+   "title": "Рябков: сроки и место нового раунда переговоров по Украине неизвестны",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/17/1389154-sroki-mesto-neizvestni"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44150249",
+   "title": "ЦБ и Минцифры согласовали законопроект о продаже ОСАГО на «Госуслугах»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/finances/17/11/2026/6afc296c8073c66b23fcdb45"
     ]
    ],
    "sum": null,
@@ -178,41 +274,151 @@
    ]
   },
   {
-   "draft_id": "d96916805",
-   "title": "Nvidia инвестировала в стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
+   "draft_id": "d62242580",
+   "title": "Berkshire Hathaway продала акции банков и вложилась в авиацию",
    "date": "2026-11-17",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/nvidia-investirovala-v-startap-noeri-razrabatyvayushhij-samosovershenstvuyushhijsya-ii/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/17/11/2026/6afc00b7ec3211e75aa3723c"
     ]
    ],
-   "sum": "$110 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": "Nvidia",
-   "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
-   "seller": null,
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Холдинг Berkshire Hathaway снова вложился в сектор авиации, купив акции Delta Air Lines, а также продолжил сокращать свою долю в банковских активах. Пакет акций Apple сохранил лидерство в инвестиционном портфеле компании",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/quote/17/11/2026/6afc00b7ec3211e75aa3723c"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "акции банков и вложилась в авиацию",
+   "seller": "Berkshire Hathaway",
    "parsed_parties": {
-    "buyer": "Nvidia",
-    "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
-    "seller": null
+    "buyer": null,
+    "asset": "акции банков и вложилась в авиацию",
+    "seller": "Berkshire Hathaway"
    },
-   "ind": "Искусственный интеллект",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d48556168",
-   "title": "Продажи вторички в Москве за 10 месяцев остались на уровне прошлого года",
+   "draft_id": "d22957321",
+   "title": "Роснедра ожидают сохранения динамики инвестиций в разведку ТПИ",
    "date": "2026-11-17",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261117/chislo-2132060696.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20261117/rosnedra-875282580.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33990256",
+   "title": "Недострои бывшего военного городка в Липецке снова выставили на торги за 990,8 млн рублей",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119317-nedostroi-byvshego-voennogo-gorodka-v-lipetske-snova-vystavili-na-torgi-za-990-8-mln-rubley/"
+    ]
+   ],
+   "sum": "990,8 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf03916a4 (общие редкие слова: выстав, снова, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d85813972",
+   "title": "Пользователи по всему миру потратили $1,45 млрд на предзаказ GTA 6 — геймеры купили почти 15 млн копий игры",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
+    ]
+   ],
+   "sum": "$1,45 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Количество предзаказов GTA 6 по всему миру достигло уже 14,94 млн копий на сумму $1,45 млрд, сообщила аналитическая компания Sensor Tower. Основная часть продаж пришлась на консоль Sony PlayStation 5. До релиза игры осталось два дня.",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "почти 15 млн копий игры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "почти 15 млн копий игры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Продажи GTA VI до выхода игры превысили $1,4 млрд» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d80997068",
+   "title": "Совместное предприятие Dongfeng Nissan открыло предзаказы на новый гибрид",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/17/sovmestnoe-predpriyatie-dongfeng-nissan-otkrylo-predzakazy-na-novyy-gibrid/"
     ]
    ],
    "sum": null,
@@ -231,88 +437,21 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8e847626 (общие редкие слова: 10, москве, продаж) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d99415247",
-   "title": "Jeland возглавил рейтинг новых автобрендов в России — продажи приблизились к 13 тыс. машин",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Jeland стал лидером по продажам среди новых автомобильных брендов в России в 2026 году, сообщил директор агентства «Автостат» Сергей Целиков. К середине ноября в стране продали почти 13 тыс. автомобилей этой марки. По данным эксперта, бренд уже несколько…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61529578",
-   "title": "МСБ привлек 5 млрд рублей на бирже при помощи Корпорации МСП",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261117/msb-2132064903.html"
-    ]
-   ],
-   "sum": "5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "МСБ",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "МСБ",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d02446445",
-   "title": "В России отреагировали на предложение Швейцарии принять новый раунд переговоров по Украине",
+   "draft_id": "d80276594",
+   "title": "В России в продаже появился новый Skoda Rapid калужской сборки",
    "date": "2026-11-17",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/v-rossii-otreagirovali-na-predlozhenie-shveytsarii-prinyat-novyy-raund-peregovorov-po-ukraine/"
+     "https://lenta.ru/news/2026/11/17/v-rossii-v-prodazhe-poyavilsya-novyy-skoda-rapid-kaluzhskoy-sborki/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -330,121 +469,13 @@
    ]
   },
   {
-   "draft_id": "d63890190",
-   "title": "Роспечать ушла, аукционы провалились: Екатеринбург оставил бабушек без сканвордов",
+   "draft_id": "d15850806",
+   "title": "Заливное перешло под контроль российской армии",
    "date": "2026-11-17",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/news/1053144875"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d76138511",
-   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/style/2026/11/17/76769997/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
-     "source": [
-      "web:ngs24.ru",
-      "https://ngs24.ru/text/style/2026/11/17/76769997/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d75172649",
-   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/style/2026/11/17/76770003/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
-     "source": [
-      "web:ngs.ru",
-      "https://ngs.ru/text/style/2026/11/17/76770003/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d38619860",
-   "title": "В Екатеринбурге в новогодние праздники запретят продавать алкоголь. Где будут действовать ограничения",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:e1.ru",
-     "https://www.e1.ru/text/gorod/2026/11/17/76771249/"
+     "https://ura.news/news/1053144916"
     ]
    ],
    "sum": null,
@@ -466,13 +497,13 @@
    ]
   },
   {
-   "draft_id": "d56058626",
-   "title": "Ночная распродажа продуктов снова пройдет в Краснодаре — что это такое?",
+   "draft_id": "d69990974",
+   "title": "В Челябинске продается новогодний коттедж с гирляндами и елкой за 40 млн. Фото",
    "date": "2026-11-17",
    "src": [
     [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/11/17/76771289/"
+     "web:ura.news",
+     "https://ura.news/news/1053144837"
     ]
    ],
    "sum": null,
@@ -491,6 +522,63 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23851539",
+   "title": "Около 490 объектов недвижимости в Подмосковье передали бизнесу за 1 рубль",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/11/17/okolo-490-obektov-nedvizhimosti-v-podmoskove-peredali-biznesu-za-1-rubl"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d03423241",
+   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
+    ]
+   ],
+   "sum": "277 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g7a31c3cc (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
    ]
   }
  ]

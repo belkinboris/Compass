@@ -104,6 +104,48 @@
     "needs_review": true
    },
    "queued": "2026-11-17"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9111517::gcdfb645f",
+   "candidate_id": "gcdfb645f",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d04401869",
+    "title": "«Логика молока» купила бренд протеиновых продуктов Protein Rex",
+    "date": "2026-11-17",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9111517"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-17",
+      "title": "Сделка завершена",
+      "note": "«Логика молока» завершила сделку по приобретению ООО «Роял Кейк» (бренд Protein Rex), сообщила пресс-служба компании. Продуктовый портфель бренда представлен функциональными десертами и снеками без добавления сахара: брауни, пирожными, батончиками и печеньем…",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/9111517"
+      ]
+     }
+    ],
+    "buyer_name": "«Логика молока»",
+    "asset": "бренд протеиновых продуктов Protein Rex",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Логика молока»",
+     "asset": "бренд протеиновых продуктов Protein Rex",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-17"
   }
  ]
 }

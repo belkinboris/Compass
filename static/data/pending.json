@@ -600,6 +600,59 @@
     ]
    },
    "pending_since": "2026-11-17T08:52:55+00:00"
+  },
+  {
+   "id": "g247bc203",
+   "date": "2026-11-17",
+   "title": "«Белгородасбестоцемент» вложил около 430 млн рублей в новую линию по выпуску стройматериалов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119313-belgorodasbestotsement-vlozhil-okolo-430-mln-rubley-v-novuyu-liniyu-po-vypusku-stroymaterialov/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "430 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "430 млн ₽",
+   "buyer_name": "«Белгородасбестоцемент»",
+   "asset": "новая линия по выпуску стройматериалов",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Белгородасбестоцемент»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119313-belgorodasbestotsement-vlozhil-okolo-430-mln-rubley-v-novuyu-liniyu-po-vypusku-stroymaterialov/"
+     }
+    ],
+    "target": [
+     {
+      "value": "новая линия по выпуску стройматериалов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119313-belgorodasbestotsement-vlozhil-okolo-430-mln-rubley-v-novuyu-liniyu-po-vypusku-stroymaterialov/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T10:53:41+00:00"
   }
  ]
 }
