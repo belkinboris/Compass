@@ -449,6 +449,58 @@
     "draft_id": "d73963969",
     "title": "Сергей Кутенев стал единственным владельцем орловского «Эксперт-Кабеля» на фоне ареста средств завода"
    }
+  },
+  {
+   "id": "gbea5b6d6",
+   "date": "2026-11-17",
+   "title": "«Высочайший» инвестировал в Светловский ГОК более 400 миллионов долларов",
+   "ind": "ГМК и добыча",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261117/gok-875299199.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Высочайший»",
+   "asset": "Светловский ГОК более 400 миллионов долларов",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Высочайший»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261117/gok-875299199.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "Светловский ГОК более 400 миллионов долларов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261117/gok-875299199.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T15:52:31+00:00"
   }
  ]
 }
