@@ -5554,3 +5554,69 @@ def test_owner_take_beats_an_automatic_drop_of_the_same_news():
     decisions = [{"deal_id": "d1", "verdict": "take"}]
     take, drop = approve.plan_raw(drafts, decisions, decided_raw={"d1": "auto-drop"})
     assert [d["draft_id"] for d in take] == ["d1"] and not drop
+
+
+def test_a_press_during_a_database_outage_is_not_lost_silently(client, monkeypatch):
+    """17 ноября 2026 база сайта отвечала ошибкой на все подряд: опрос Telegram сдвигал
+    номер обновления до обработки, и нажатия терялись насовсем; при этом «Принято»
+    уходило человеку раньше записи решения. Теперь: база не отвечает — номер не
+    сдвигается, обновление придет снова; ошибка базы на одном обновлении при живой базе —
+    идем дальше; запись решения не прошла — человек видит «не записано», а не «Принято»."""
+    from sqlalchemy.exc import OperationalError
+    _mod_env(monkeypatch)
+    seen = []
+
+    def fake_handle(payload, db):
+        seen.append(payload.update_id)
+        if payload.update_id == 21:
+            raise OperationalError("SELECT", {}, Exception("база не отвечает"))
+        return {"ok": True}
+
+    class FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"ok": True, "result": [{"update_id": 20, "message": {"text": "раз"}},
+                                           {"update_id": 21, "callback_query": {"id": "x"}},
+                                           {"update_id": 22, "message": {"text": "три"}}]}
+
+    monkeypatch.setattr(console, "_handle_telegram_update", fake_handle)
+    monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: FakeResponse())
+    monkeypatch.setitem(main._poll_state, "offset", None)
+    monkeypatch.setattr(console.ops, "_db_state", lambda: "error: OperationalError")
+    with pytest.raises(RuntimeError):
+        main._poll_once("токен")
+    assert seen == [20, 21] and main._poll_state["offset"] == 21, "нажатие 21 должно прийти снова"
+    # База жива, ошибка — на самом обновлении: очередь не встает.
+    seen.clear()
+    monkeypatch.setattr(console.ops, "_db_state", lambda: "ok")
+    assert main._poll_once("токен") == 3
+    assert seen == [20, 21, 22] and main._poll_state["offset"] == 23
+
+
+def test_accepted_is_answered_only_after_the_decision_is_written(client, monkeypatch):
+    """Ревизия 17 ноября 2026: «Принято» на нажатие уходило до записи в базу — при сбое
+    базы человек видел подтверждение, а решения не было. Запись не прошла — ответ «не
+    записано, нажмите еще раз», отметка под сообщением не ставится."""
+    from sqlalchemy.exc import OperationalError
+    _mod_env(monkeypatch)
+    calls = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: calls.append((method, payload)) or {"ok": True})
+    db = get_session()
+    try:
+        def broken_commit():
+            raise OperationalError("INSERT", {}, Exception("база не отвечает"))
+        monkeypatch.setattr(db, "commit", broken_commit)
+        payload = console.TelegramWebhookIn(callback_query={
+            "id": "cb-lost", "from": {"id": 222}, "data": "mod:glost1:ok",
+            "message": {"message_id": 9, "chat": {"id": 222}, "text": "[карточка glost1]"}})
+        assert console._handle_telegram_update(payload, db) == {"ok": True}
+    finally:
+        db.close()
+    answers = [p for m, p in calls if m == "answerCallbackQuery"]
+    assert len(answers) == 1 and "Не записано" in answers[0]["text"] and answers[0].get("show_alert"), calls
+    assert not [m for m, _p in calls if m.startswith("editMessage")], "под сообщением стоит отметка о решении, которого нет"
+    rows = client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+    assert not [d for d in rows if d["deal_id"] == "glost1"]

@@ -355,9 +355,12 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # сообщение старше суток), и нажатие выглядело потерянным, хотя
             # решение уже было записано. 7 сентября 2026 партнер из-за этого
             # нажал «не сделка» шесть раз за две секунды.
-            if callback.get("id"):
-                notification_service.tg_api("answerCallbackQuery",
-                                            callback_query_id=callback["id"], text="Принято")
+            #
+            # НО «ПРИНЯТО» — ТОЛЬКО ПОСЛЕ ЗАПИСИ РЕШЕНИЯ (ревизия 17 ноября 2026).
+            # В тот день база сайта отвечала ошибкой: человек видел «Принято», а
+            # решения не было нигде. Ответ идет сразу после записи в базу (до
+            # правки сообщения — она по-прежнему в отдельном потоке); запись не
+            # прошла — человек видит «не записано, нажмите еще раз».
             # Тот же вердикт по той же карточке от того же человека за
             # последнюю минуту — это ПОВТОРНАЯ ДОСТАВКА одного нажатия
             # (Telegram шлет апдейт заново, если вебхук не ответил вовремя)
@@ -366,21 +369,38 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # решений в очереди рутина применит шесть раз — для `take` это
             # шесть карточек, для `post_yes` шесть постов в канал.
             since = datetime.now(timezone.utc) - timedelta(minutes=1)
-            twin = db.scalar(select(ModerationDecision).where(
-                ModerationDecision.deal_id == match.group(1),
-                ModerationDecision.verdict == verdict,
-                ModerationDecision.decided_by == str(from_id),
-                ModerationDecision.created_at >= since))
-            if not twin:
-                decision_row = ModerationDecision(deal_id=match.group(1), verdict=verdict,
-                                                  decided_by=str(from_id))
-                db.add(decision_row)
-                db.commit()
-                # Этап сделки — в канал сразу, не дожидаясь рутины публикации.
-                if (verdict == "post_yes" and "~" in match.group(1)
-                        and not match.group(1).startswith("digest~")):
-                    threading.Thread(target=_instant_milestone_post,
-                                     args=(match.group(1), decision_row.id), daemon=True).start()
+            decision_row = None
+            try:
+                twin = db.scalar(select(ModerationDecision).where(
+                    ModerationDecision.deal_id == match.group(1),
+                    ModerationDecision.verdict == verdict,
+                    ModerationDecision.decided_by == str(from_id),
+                    ModerationDecision.created_at >= since))
+                if not twin:
+                    decision_row = ModerationDecision(deal_id=match.group(1), verdict=verdict,
+                                                      decided_by=str(from_id))
+                    db.add(decision_row)
+                    db.commit()
+            except SQLAlchemyError as exc:
+                try:
+                    db.rollback()
+                except SQLAlchemyError:
+                    pass
+                logger.error("решение «%s» по %s не записано — база сайта ответила ошибкой: %s",
+                             verdict, match.group(1), type(exc).__name__)
+                if callback.get("id"):
+                    notification_service.tg_api(
+                        "answerCallbackQuery", callback_query_id=callback["id"], show_alert=True,
+                        text="Не записано: база сайта не ответила. Нажмите кнопку еще раз через минуту.")
+                return {"ok": True}
+            if callback.get("id"):
+                notification_service.tg_api("answerCallbackQuery",
+                                            callback_query_id=callback["id"], text="Принято")
+            # Этап сделки — в канал сразу, не дожидаясь рутины публикации.
+            if (decision_row is not None and verdict == "post_yes" and "~" in match.group(1)
+                    and not match.group(1).startswith("digest~")):
+                threading.Thread(target=_instant_milestone_post,
+                                 args=(match.group(1), decision_row.id), daemon=True).start()
             # Правка самого сообщения («— ✅ Одобрено (Борис)») — еще один
             # вызов Bot API, и он не должен задерживать ответ вебхуку:
             # решение уже в базе, а Telegram ждет ответа секунды, не десятки
@@ -817,18 +837,33 @@ def _poll_once(token: str) -> int:
         raise RuntimeError(data.get("description") or "getUpdates отказал")
     updates = data.get("result") or []
     for raw in updates:
-        # Смещение двигаем ДО обработки: обновление, на котором разбор упал,
-        # не должно приходить снова и снова — оно уже не станет разбираемым,
-        # а очередь встанет намертво (тот же класс, что зацикленный вебхук).
-        _poll_state["offset"] = int(raw.get("update_id", 0)) + 1
+        # Обновление, на котором разбор упал, не должно приходить снова и
+        # снова — оно уже не станет разбираемым, а очередь встанет намертво
+        # (тот же класс, что зацикленный вебхук): смещение двигается и после
+        # ошибки разбора.
+        #
+        # КРОМЕ ОДНОГО СЛУЧАЯ: БАЗА САЙТА НЕ ОТВЕЧАЕТ (ревизия 17 ноября 2026).
+        # В тот день база отвечала ошибкой на все подряд, смещение двигалось
+        # до обработки — и каждое нажатие кнопки терялось насовсем. Обновление
+        # тут ни при чем: оно разберется, когда база вернется. Поэтому при
+        # ошибке базы проверяем саму базу (`ops._db_state`): не отвечает —
+        # смещение не двигаем, опрос повторит это обновление после паузы;
+        # отвечает — виновато обновление, идем дальше, как раньше.
         db = get_session()
         try:
             _handle_telegram_update(TelegramWebhookIn(**{
                 k: raw.get(k) for k in TelegramWebhookIn.model_fields}), db)
+        except SQLAlchemyError as exc:
+            state = ops._db_state()
+            if state != "ok":
+                raise RuntimeError("база сайта не отвечает (%s) — обновление Telegram %s придет снова"
+                                   % (state, raw.get("update_id"))) from exc
+            logger.error("не удалось разобрать обновление Telegram (ошибка базы на этом обновлении): %s", exc)
         except Exception as exc:      # одно плохое обновление не валит опрос
             logger.error("не удалось разобрать обновление Telegram: %s", exc)
         finally:
             db.close()
+        _poll_state["offset"] = int(raw.get("update_id", 0)) + 1
     _poll_state["last_ok"] = datetime.now(timezone.utc)
     _poll_state["updates"] += len(updates)
     return len(updates)
