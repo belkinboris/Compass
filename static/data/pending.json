@@ -543,6 +543,70 @@
    "accepted_hash": "7ede84fcad2c.dafb08",
    "second_read": "2026-11-17",
    "second_read_hash": "7ede84fcad2c.dafb08"
+  },
+  {
+   "id": "g9933205b",
+   "date": "2026-11-17",
+   "title": "Бывшая «дочка» Danon купила бренд протеиновых батончиков — компания выходит на рынок функциональных десертов",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Rusbase",
+     "https://rb.ru/news/byvshaya-dochka-danon-kupila-brend-proteinovyh-batonchikov-kompaniya-planiruet-vyjti-na-rynok-funkcionalnyh-desertov/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Бывшая «дочка» Danon",
+   "asset": "бренд протеиновых батончиков — компания выходит на рынок функциональных десертов",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "17 ноября 2026 года «Логика молока» завершила сделку по приобретению ООО «Роял Кейк», выпускающей протеиновые продукты под брендом Protein Rex, сообщает пресс-служба компании. Холдинг планирует выйти на рынок белковых товаров и функциональных десертов.",
+     "source": [
+      "Rusbase",
+      "https://rb.ru/news/byvshaya-dochka-danon-kupila-brend-proteinovyh-batonchikov-kompaniya-planiruet-vyjti-na-rynok-funkcionalnyh-desertov/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Бывшая «дочка» Danon",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/byvshaya-dochka-danon-kupila-brend-proteinovyh-batonchikov-kompaniya-planiruet-vyjti-na-rynok-funkcionalnyh-desertov/"
+     }
+    ],
+    "target": [
+     {
+      "value": "бренд протеиновых батончиков — компания выходит на рынок функциональных десертов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/byvshaya-dochka-danon-kupila-brend-proteinovyh-batonchikov-kompaniya-planiruet-vyjti-na-rynok-funkcionalnyh-desertov/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T17:56:33+00:00"
   }
  ]
 }
