@@ -2,6 +2,63 @@
  "made": "2026-11-17",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -64,62 +121,6 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -146,573 +147,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d82374921",
-   "title": "Рябков ответил на вопрос о новом раунде трехсторонних переговоров по Украине // Рябков: дат нового раунда трехсторонних переговоров по Украине пока нет",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111480"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-17",
-     "title": "Переговоры",
-     "note": "Даты проведения нового раунда трехсторонних переговоров по Украине пока не установлены. Стороны также не договорились о месте их проведения.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9111480"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69534827",
-   "title": "Продажи GTA VI до выхода игры превысили $1,4 млрд",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111435"
-    ]
-   ],
-   "sum": "$1,4 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d04345808",
-   "title": "Рябков: сроки и место нового раунда переговоров по Украине неизвестны",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/17/1389154-sroki-mesto-neizvestni"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59178205",
-   "title": "ЦБ рассчитывает на скорейшее принятие поправок о продаже полисов ОСАГО через «Госуслуги»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1129532"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d27837918",
-   "title": "Лавров: Запад перешел к пиратским практикам времен колониальной экспансии",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28325933"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d94328545",
-   "title": "Центробанк намерен продавать полисы ОСАГО через «Госуслуги»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261117/tsb-875278979.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-17",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261117/tsb-875278979.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «ЦБ рассчитывает на скорейшее принятие поправок о продаже пол» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d85813972",
-   "title": "Пользователи по всему миру потратили $1,45 млрд на предзаказ GTA 6 — геймеры купили почти 15 млн копий игры",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
-    ]
-   ],
-   "sum": "$1,45 млрд",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Количество предзаказов GTA 6 по всему миру достигло уже 14,94 млн копий на сумму $1,45 млрд, сообщила аналитическая компания Sensor Tower. Основная часть продаж пришлась на консоль Sony PlayStation 5. До релиза игры осталось два дня.",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/polzovateli-po-vsemu-miru-potratili-145-mlrd-na-predzakaz-gta-6-gejmery-kupili-pochti-15-mln-kopij-igry/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "почти 15 млн копий игры",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "почти 15 млн копий игры",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Продажи GTA VI до выхода игры превысили $1,4 млрд» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d99415247",
-   "title": "Jeland возглавил рейтинг новых автобрендов в России — продажи приблизились к 13 тыс. машин",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Jeland стал лидером по продажам среди новых автомобильных брендов в России в 2026 году, сообщил директор агентства «Автостат» Сергей Целиков. К середине ноября в стране продали почти 13 тыс. автомобилей этой марки. По данным эксперта, бренд уже несколько…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80276594",
-   "title": "В России в продаже появился новый Skoda Rapid калужской сборки",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/v-rossii-v-prodazhe-poyavilsya-novyy-skoda-rapid-kaluzhskoy-sborki/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d02446445",
-   "title": "В России отреагировали на предложение Швейцарии принять новый раунд переговоров по Украине",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/v-rossii-otreagirovali-na-predlozhenie-shveytsarii-prinyat-novyy-raund-peregovorov-po-ukraine/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15850806",
-   "title": "Заливное перешло под контроль российской армии",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144916"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69990974",
-   "title": "В Челябинске продается новогодний коттедж с гирляндами и елкой за 40 млн. Фото",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144837"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63890190",
-   "title": "Роспечать ушла, аукционы провалились: Екатеринбург оставил бабушек без сканвордов",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144875"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d03423241",
-   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
-    ]
-   ],
-   "sum": "277 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g7a31c3cc (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d44150249",
-   "title": "ЦБ и Минцифры согласовали законопроект о продаже ОСАГО на «Госуслугах»",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/finances/17/11/2026/6afc296c8073c66b23fcdb45"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d62242580",
-   "title": "Berkshire Hathaway продала акции банков и вложилась в авиацию",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/17/11/2026/6afc00b7ec3211e75aa3723c"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Холдинг Berkshire Hathaway снова вложился в сектор авиации, купив акции Delta Air Lines, а также продолжил сокращать свою долю в банковских активах. Пакет акций Apple сохранил лидерство в инвестиционном портфеле компании",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/quote/17/11/2026/6afc00b7ec3211e75aa3723c"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "акции банков и вложилась в авиацию",
-   "seller": "Berkshire Hathaway",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "акции банков и вложилась в авиацию",
-    "seller": "Berkshire Hathaway"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d22957321",
-   "title": "Роснедра ожидают сохранения динамики инвестиций в разведку ТПИ",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261117/rosnedra-875282580.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -745,16 +179,16 @@
    ]
   },
   {
-   "draft_id": "d80997068",
-   "title": "Совместное предприятие Dongfeng Nissan открыло предзаказы на новый гибрид",
+   "draft_id": "d03423241",
+   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
    "date": "2026-11-17",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/sovmestnoe-predpriyatie-dongfeng-nissan-otkrylo-predzakazy-na-novyy-gibrid/"
+     "web:abnews.ru",
+     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
     ]
    ],
-   "sum": null,
+   "sum": "277 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -766,21 +200,59 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d23851539",
-   "title": "Около 490 объектов недвижимости в Подмосковье передали бизнесу за 1 рубль",
+   "draft_id": "d63858360",
+   "title": "CNBC: Трамп в мае продал акции корпорации Nvidia на сумму до $1 млн",
    "date": "2026-11-17",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/11/17/okolo-490-obektov-nedvizhimosti-v-podmoskove-peredali-biznesu-za-1-rubl"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28326627"
+    ]
+   ],
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Телеканал указывает, что продажа также состоялась спустя пять дней, после того как госсекретарь Марко Рубио, по утверждениям газеты The New York Times, якобы проинформировал президента о предполагаемых связях главы компании Дженсена Хуанга с подозреваемой в…",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28326627"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "акции корпорации Nvidia на сумму до $1 млн",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "акции корпорации Nvidia на сумму до $1 млн",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d54193524",
+   "title": "Frank RG: доля отложивших покупку недвижимости россиян упала за год на 9 п.п.",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28326203"
     ]
    ],
    "sum": null,
@@ -796,6 +268,91 @@
     "seller": null
    },
    "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d09418212",
+   "title": "Российские структуры Porsche могут продать за долги Volkswagen — суд признал компанию активом концерна",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/rossijskie-struktury-porsche-mogut-prodat-za-dolgi-volkswagen-sud-priznal-kompaniyu-aktivom-koncerna/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d96251579",
+   "title": "Зарубежная классика или нон-фикшн: названы книжные жанры, которые чаще покупают читатели",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/entertainment/2026/11/17/76771240/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "читатели",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "читатели",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d87730551",
+   "title": "«Надеюсь, ей уже доначислили налоги». На тюменку, прославившуюся продажей десертов из машины, пожаловались в ФНС",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/business/2026/11/17/76771873/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

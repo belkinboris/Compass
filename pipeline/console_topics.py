@@ -74,16 +74,29 @@ def _fetch_topics() -> dict:
     _cache = {}
     if not token:
         return _cache
-    try:
-        import httpx
-        r = httpx.get('%s/api/moderation/topics' % site, params={'token': token}, timeout=20)
-        if r.status_code == 200:
-            _cache = r.json().get('topics') or {}
-        else:
+    # Связь контейнера с сайтом рвется на секунды: четыре попытки, прежде чем сдаться
+    # (17 ноября 2026: один обрыв — и карточка с постом ушли в «Общую информацию»).
+    import time
+    tries = 1 if os.environ.get('PYTEST_CURRENT_TEST') else 4
+    for attempt in range(tries):
+        _unreachable = False
+        try:
+            import httpx
+            r = httpx.get('%s/api/moderation/topics' % site, params={'token': token}, timeout=20)
+            if r.status_code == 200:
+                _cache = r.json().get('topics') or {}
+                return _cache
             _unreachable = True
-    except Exception:                                       # noqa: BLE001
-        _unreachable = True
+        except Exception:                                       # noqa: BLE001
+            _unreachable = True
+        if attempt < tries - 1:
+            time.sleep(4)
     return _cache
+
+
+def unreachable() -> bool:
+    """Сайт не ответил списком тем: номер темы неизвестен, а не «тема не заведена»."""
+    return bool(_unreachable)
 
 
 _group_cache = None

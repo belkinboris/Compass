@@ -12269,3 +12269,30 @@ def test_post_draft_is_caught_up_when_the_site_showed_only_the_card():
     assert send_drafts.post_missing({"shown_at": old, "post_preview": "<b>x</b>"}, fresh, now) is False
     assert send_drafts.post_missing({"shown_at": old}, dict(fresh, date="2019-01-01"), now) is False   # в канал не идет
     assert send_drafts.post_missing(None, fresh, now) is False
+
+
+def test_console_topics_tell_unreachable_from_missing(monkeypatch):
+    """Сайт не ответил списком тем — это «номер темы неизвестен», а не «темы нет»:
+    по этому признаку показ карточек откладывается, а не уходит в общую ленту
+    (17 ноября 2026, «Логика молока» в «Общей информации»)."""
+    import sys
+    sys.path.insert(0, str(Path("pipeline")))
+    import console_topics
+    import httpx
+    monkeypatch.setenv("MODERATION_TOKEN", "t")
+    monkeypatch.delenv("TELEGRAM_TOPIC_DECISION", raising=False)
+    monkeypatch.setattr(console_topics, "_cache", None)
+
+    def boom(*a, **k):
+        raise httpx.ConnectError("reset")
+    monkeypatch.setattr(httpx, "get", boom)
+    assert console_topics.thread_id("decision") is None and console_topics.unreachable() is True
+
+    class Ok:
+        status_code = 200
+
+        def json(self):
+            return {"topics": {}}
+    monkeypatch.setattr(console_topics, "_cache", None)
+    monkeypatch.setattr(httpx, "get", lambda *a, **k: Ok())
+    assert console_topics.thread_id("decision") is None and console_topics.unreachable() is False

@@ -1003,6 +1003,15 @@ def main(write=False, resend=None, only=None):
     # Все три вида сообщений (пост/карточка/сырье) ждут решения владельца или
     # партнера — тема одна на всех, «Подтверждение постов».
     thread = console_topics.thread_id('decision')
+    if thread is None and console_topics.unreachable():
+        # Сайт не назвал номер темы — в общую ленту карточки и посты не шлем
+        # (владелец, 17 ноября 2026: «Логика молока» пришла в «Общую информацию»,
+        # а не в «Подтверждение постов»). Отметки показа не ставим: покажет следующий прогон.
+        print('Сайт не ответил, в какую тему слать, — показ отложен до следующего прогона.')
+        for _c in pending['cards']:
+            _c.pop('_pending_post_preview', None)
+            _c.pop('_skip_this_run', None)
+        return 1
     with httpx.Client(timeout=20) as client:
         for i, (text, keyboard, (kind, item, mark)) in enumerate(plan):
             # Прямо перед отправкой — еще раз память сайта: второй прогон
