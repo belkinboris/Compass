@@ -3722,6 +3722,12 @@ def test_empty_queue_answers_instead_of_silence(monkeypatch):
                         lambda method, **kw: sent.append(kw) or {"ok": True})
     monkeypatch.setattr(core, "_read_json",
                         lambda path, default: {"cards": []} if "pending" in path else default)
+    # `_held_posts()` читает живую базу напрямую (base_data.promoted()), не
+    # через core._read_json — без своего пэтча тест зависел от того, что на
+    # сайте в этот момент нет ни одной придержанной, но не вышедшей карточки
+    # (17 ноября 2026: `gcdfb645f` оказался придержан, и тест стал красным не
+    # из-за кода, а из-за реального состояния базы).
+    monkeypatch.setattr(console, "_held_posts", lambda: [])
     assert main._send_queue_batch(-100, "held") == 0
     assert any("пусто" in kw.get("text", "") for kw in sent)
 
