@@ -472,11 +472,18 @@ def test_acceptance_flags_a_bare_surname_in_the_title():
     assert "bare_surname" not in codes("«Деметра-Холдинг» купил элеваторы в Ульяновской и Волгоградской областях")
 
 
-def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_path):
+def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_path, monkeypatch):
     """9 октября 2026: отчет публикации написал «5 карточек вы придержали», а
     кнопка «Что придержано» — «Вы придержали: 0». Числа теперь считаются из
     pending.json теми же условиями, что у кнопок, а не берутся с ключей."""
+    # придержанные посты живой базы к этому тесту не относятся (17 ноября 2026: один
+    # придержанный пост в базе ронял тест и красил main)
+    import ops_status as _ops
+    monkeypatch.setattr(_ops, 'held_posts_count', lambda *a, **k: 0)
     import ops_status
+    # held_posts_count() без пути читает настоящий deals_promoted.json — тест
+    # карточек pending.json не связан с живыми придержанными постами базы.
+    monkeypatch.setattr(ops_status, "held_posts_count", lambda path=None: 0)
     pend = tmp_path / "pending.json"
     pend.write_text(json.dumps({"cards": [
         {"id": "a", "held": True},
@@ -9752,12 +9759,19 @@ def test_acceptance_refuses_a_title_copied_from_the_source():
     assert "title_copied" not in codes("Фонд «Бумеранг Капитал» и сооснователь «Цех 85» Антон Петров выкупили сеть кофеен Baggins Coffee")
 
 
-def test_card_waiting_for_second_reading_is_a_queue_not_a_failure(tmp_path):
+def test_card_waiting_for_second_reading_is_a_queue_not_a_failure(tmp_path, monkeypatch):
     """28 октября 2026: ЛСР (g0f479af0) принята, второго чтения не прошла —
     отчет назвал ее «⛔ Сбой», а владелец спросил, как ее посмотреть. Такая
     карточка ждет приток, считается в «ждут прочтения»; настоящий сбой
     называется по имени и со ссылкой."""
+    # придержанные посты живой базы к этому тесту не относятся (17 ноября 2026: один
+    # придержанный пост в базе ронял тест и красил main)
+    import ops_status as _ops
+    monkeypatch.setattr(_ops, 'held_posts_count', lambda *a, **k: 0)
     import ops_status
+    # held_posts_count() без пути читает настоящий deals_promoted.json — тест
+    # карточек pending.json не связан с живыми придержанными постами базы.
+    monkeypatch.setattr(ops_status, "held_posts_count", lambda path=None: 0)
     pend = tmp_path / "pending.json"
     pend.write_text(json.dumps({"cards": [
         {"id": "g2nd", "title": "ЛСР выкупит акции", "reviewed": "2026-10-28", "accepted": "2026-10-28"},
