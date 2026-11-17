@@ -481,6 +481,9 @@ def test_publish_report_counts_the_queue_from_pending_not_from_the_routine(tmp_p
     import ops_status as _ops
     monkeypatch.setattr(_ops, 'held_posts_count', lambda *a, **k: 0)
     import ops_status
+    # held_posts_count() без пути читает настоящий deals_promoted.json — тест
+    # карточек pending.json не связан с живыми придержанными постами базы.
+    monkeypatch.setattr(ops_status, "held_posts_count", lambda path=None: 0)
     pend = tmp_path / "pending.json"
     pend.write_text(json.dumps({"cards": [
         {"id": "a", "held": True},
@@ -9766,6 +9769,9 @@ def test_card_waiting_for_second_reading_is_a_queue_not_a_failure(tmp_path, monk
     import ops_status as _ops
     monkeypatch.setattr(_ops, 'held_posts_count', lambda *a, **k: 0)
     import ops_status
+    # held_posts_count() без пути читает настоящий deals_promoted.json — тест
+    # карточек pending.json не связан с живыми придержанными постами базы.
+    monkeypatch.setattr(ops_status, "held_posts_count", lambda path=None: 0)
     pend = tmp_path / "pending.json"
     pend.write_text(json.dumps({"cards": [
         {"id": "g2nd", "title": "ЛСР выкупит акции", "reviewed": "2026-10-28", "accepted": "2026-10-28"},
