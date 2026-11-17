@@ -324,6 +324,73 @@
     "draft_id": "d92502588",
     "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций"
    }
+  },
+  {
+   "id": "g70bd3272",
+   "date": "2026-11-17",
+   "title": "«Битл» приобрела инвестплатформу «Раундс»",
+   "ind": "Не определена",
+   "type": "IPO",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9111159"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Битл»",
+   "asset": "инвестплатформ «Раундс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Компания «Битл», специализирующаяся на организации инвестиционных раундов (pre-IPO) для малого и среднего бизнеса, приобрела АО «Раундс» (входит в реестр инвестплатформ), рассказали участники сделки. Сама сделка состоялась в октябре 2026 года, уточнили в…",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9111159"
+     ]
+    }
+   ],
+   "themes": [
+    "IPO / SPO"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Битл»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9111159"
+     }
+    ],
+    "target": [
+     {
+      "value": "инвестплатформ «Раундс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9111159"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T05:52:48+00:00"
   }
  ]
 }
