@@ -601,22 +601,24 @@ def queue_counts(path=PENDING):
             sum(counts[s] for s in _readiness().WAITING_INTAKE))
 
 
-WAITING_POST_DAYS = 7
-
-
 def waiting_posts(base):
     """Карточки на сайте, чей пост показан владельцу и ждет кнопки: решения о посте
-    нет (не одобрен, не «без поста», не придержан), пост не вышел, сделка свежая
-    (иначе в канал она не пойдет вовсе) и карточка вышла не раньше недели назад."""
-    from datetime import date, timedelta
+    нет (не одобрен, не «без поста», не придержан), пост не вышел ни в одном канале,
+    сделка свежая (иначе в канал она не пойдет вовсе).
+
+    БЕЗ СРОКА (ревизия 17 ноября 2026): до правки считались только карточки, вышедшие
+    за последние семь дней, и карточка, по посту которой решения так и не было,
+    через неделю выпадала из отчета. Неделя заменяла другое условие — оно теперь
+    записано прямо: пустая отметка в `telegram_posts` значит «пост закрыт без
+    отправки» (так же читает `send_telegram.py`), такая карточка кнопки не ждет."""
     ingest = os.path.join(ROOT, 'pipeline', 'ingest')
     if ingest not in sys.path:
         sys.path.insert(0, ingest)
     import send_drafts
-    since = (date.today() - timedelta(days=WAITING_POST_DAYS)).isoformat()
     posted = base.get('telegram_posts') or {}
+    realty = base.get('telegram_posts_realty') or {}
     return [d for d in base.get('deals') or []
-            if str(d.get('added') or '') >= since and not posted.get(d.get('id'))
+            if d.get('id') not in posted and not realty.get(d.get('id'))
             and not (d.get('post_approved') or d.get('no_post') or d.get('post_held') or d.get('post_override'))
             and send_drafts.goes_to_channel(d)]
 

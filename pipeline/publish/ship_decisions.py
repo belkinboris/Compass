@@ -61,6 +61,11 @@ BASE = os.path.join(WORK, 'static', 'data', 'deals_promoted.json')
 # Отправлено новых: 0» — и четыре раза за 29 октября 2026 посты по решениям
 # владельца уходили руками (бэклог D4, known_issues/publication.md).
 SEND_TELEGRAM = os.path.join(WORK, 'pipeline', 'publish', 'send_telegram.py')
+# ПЕРЕСЧЕТ ФАКТОВ — ТОЖЕ ИЗ РАБОЧЕЙ КОПИИ (ревизия 17 ноября 2026). facts_derive
+# берет базу по своему `__file__`; запуск из основной копии пересчитывал НЕ ту
+# базу, в которую только что применили решение, и мог оставить в основной
+# копии несохраненную правку, которой никто не коммитит.
+FACTS_DERIVE = os.path.join(WORK, 'pipeline', 'facts_derive.py')
 COMMIT_PATHS = ['static/data/deals_promoted.json', 'static/data/pending.json',
                 'data/inbox/moderation_state.json', 'pipeline/ingest/fixes']
 
@@ -106,6 +111,14 @@ def push_with_retry(tries=4):
             return None
         time.sleep(2 ** (i + 1))
     return 'push не прошел после %d попыток' % tries
+
+
+def unpushed_in_main():
+    """Коммиты ОСНОВНОЙ копии, которых нет в origin/main (строки `git log --oneline`).
+    Команда коммитит и пушит только свою рабочую копию; коммит, сделанный агентом в
+    основной, она не отправляет — и до 17 ноября 2026 все равно писала «ГОТОВО»."""
+    r = run(['git', 'log', '--oneline', 'origin/main..HEAD'], cwd=ROOT, must=False)
+    return [l for l in (r.stdout or '').splitlines() if l.strip()]
 
 
 def prepare_worktree():
@@ -319,7 +332,7 @@ def _main(argv, write):
     log('Решения применены локально%s. %s' % (' (продолжение: заново применены только новые)' if resume else '',
                                               summary[0] if summary else ''))
     for _ in range(4):
-        r = run([sys.executable, os.path.join(ROOT, 'pipeline', 'facts_derive.py'), '--write'])
+        r = run([sys.executable, FACTS_DERIVE, '--write'])
         if 'актуально' in r.stdout:
             break
     log('Слой фактов пересчитан.')
@@ -425,6 +438,14 @@ def _main(argv, write):
             return 1
     remind_undecided()
     run(['git', 'pull', '-q', '--rebase', '--autostash', 'origin', 'main'], cwd=ROOT, must=False)
+    left = unpushed_in_main()
+    if left:
+        log('СТОП: решения применены, база в main, посты отправлены — НО в основной копии %s '
+            'не отправлено в origin/main коммитов: %d. Эта команда их не пушит: проверьте '
+            '(prepush_check.py) и отправьте сами — git push origin HEAD:main.' % (ROOT, len(left)))
+        for l in left[:5]:
+            log('  ' + l)
+        return 1
     log('ГОТОВО: решения применены, база в main, посты отправлены.')
     return 0
 

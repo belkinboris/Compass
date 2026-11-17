@@ -150,17 +150,84 @@
    ]
   },
   {
-   "draft_id": "d33990256",
-   "title": "Недострои бывшего военного городка в Липецке снова выставили на торги за 990,8 млн рублей",
+   "draft_id": "d96149277",
+   "title": "CNBC: Трамп еще в мае продал акции Nvidia на сумму до $1 млн",
    "date": "2026-11-17",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119317-nedostroi-byvshego-voennogo-gorodka-v-lipetske-snova-vystavili-na-torgi-za-990-8-mln-rubley/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/17/1410914-tramp-prodal"
     ]
    ],
-   "sum": "990,8 млн ₽",
-   "type": "Продажа с торгов",
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/politics/news/2026/11/17/1410914-tramp-prodal"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "акции Nvidia на сумму до $1 млн",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "акции Nvidia на сумму до $1 млн",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -175,116 +242,21 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf03916a4 (общие редкие слова: выстав, снова, торги) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d03423241",
-   "title": "В Тюмени за 277 млн рублей продают ТРЦ «Ямальский»",
+   "draft_id": "d49041987",
+   "title": "РСХБ выяснил, сколько россияне готовы потратить на покупки в «Черную пятницу»",
    "date": "2026-11-17",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ural/news/tyumen/2026/11/17/v-tyumeni-za-432-mln-rublej-prodayut-trcz-yamalskij"
-    ]
-   ],
-   "sum": "277 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63858360",
-   "title": "CNBC: Трамп в мае продал акции корпорации Nvidia на сумму до $1 млн",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28326627"
-    ]
-   ],
-   "sum": "$1 млн",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Телеканал указывает, что продажа также состоялась спустя пять дней, после того как госсекретарь Марко Рубио, по утверждениям газеты The New York Times, якобы проинформировал президента о предполагаемых связях главы компании Дженсена Хуанга с подозреваемой в…",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28326627"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "акции корпорации Nvidia на сумму до $1 млн",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "акции корпорации Nvidia на сумму до $1 млн",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d54193524",
-   "title": "Frank RG: доля отложивших покупку недвижимости россиян упала за год на 9 п.п.",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28326203"
+     "web:1prime.ru",
+     "https://1prime.ru/20261117/rshb-875301057.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d09418212",
-   "title": "Российские структуры Porsche могут продать за долги Volkswagen — суд признал компанию активом концерна",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/rossijskie-struktury-porsche-mogut-prodat-za-dolgi-volkswagen-sud-priznal-kompaniyu-aktivom-koncerna/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -302,42 +274,41 @@
    ]
   },
   {
-   "draft_id": "d96251579",
-   "title": "Зарубежная классика или нон-фикшн: названы книжные жанры, которые чаще покупают читатели",
+   "draft_id": "d73290681",
+   "title": "Инвестиции в Северный обход Новороссийска составят не менее 100 млрд руб",
    "date": "2026-11-17",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/entertainment/2026/11/17/76771240/"
+     "web:ria.ru",
+     "https://ria.ru/20261117/novorossijsk-2132201028.html"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "100 млрд ₽",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "читатели",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "читатели",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d87730551",
-   "title": "«Надеюсь, ей уже доначислили налоги». На тюменку, прославившуюся продажей десертов из машины, пожаловались в ФНС",
+   "draft_id": "d49724201",
+   "title": "«Очень ласковая булочка». Под Тюменью продают щенка необычной породы за 150 тысяч рублей",
    "date": "2026-11-17",
    "src": [
     [
      "web:72.ru",
-     "https://72.ru/text/business/2026/11/17/76771873/"
+     "https://72.ru/text/animals/2026/11/17/76772856/"
     ]
    ],
    "sum": null,
@@ -355,7 +326,8 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
    ]
   }
  ]

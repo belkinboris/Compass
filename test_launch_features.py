@@ -2591,6 +2591,77 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     assert client.get("/api/moderation/shown", params={"token": "чужой"}).status_code == 404
 
 
+class _BrokenDb:
+    """Сессия базы, у которой запись не проходит: как 17 ноября 2026, когда база
+    сайта отвечала ошибкой на все подряд. `found` — что вернет чтение ключа."""
+
+    def __init__(self, found=None):
+        self.found, self.rolled_back = found, 0
+
+    def add(self, row):
+        pass
+
+    def commit(self):
+        from sqlalchemy.exc import OperationalError
+        raise OperationalError("INSERT", {}, Exception("база не отвечает"))
+
+    def rollback(self):
+        self.rolled_back += 1
+
+    def get(self, model, key):
+        return self.found
+
+    def close(self):
+        pass
+
+
+def test_show_claim_says_busy_only_when_the_key_exists(client, monkeypatch):
+    """17 ноября 2026 (gcdfb645f): любая ошибка базы при захвате показа читалась как
+    «уже показал другой» — ручка отвечала 200 с пустым списком, и рутина ставила
+    карточке отметки показа. «Занято» — только когда ключ показа есть; иначе ошибка
+    с кодом, а сервер карточку не показывает и не помечает."""
+    from sqlalchemy.exc import SQLAlchemyError
+    _mod_env(monkeypatch)
+    assert console._claim_show(_BrokenDb(found=object()), "gbusy") is False
+    with pytest.raises(SQLAlchemyError):
+        console._claim_show(_BrokenDb(), "gfree")
+
+    def broken(db, card_id):
+        raise SQLAlchemyError("база не отвечает")
+    monkeypatch.setattr(console, "_claim_show", broken)
+    r = client.post("/api/moderation/shown", json={"token": "тайна", "claim": True, "cards": [{"id": "gfree"}]})
+    assert r.status_code == 503 and "claimed" not in r.json(), r.text
+    # Сервер сам при сбое базы карточку не шлет.
+    card = {"id": "gdown1", "title": "А купил Б", "status": "Закрыта", "date": "2026-11-16", "type": "M&A",
+            "ind": "Ритейл", "buyer_name": "ООО «А»", "asset": "сеть «Б»", "reviewed": "2026-11-16",
+            "accepted": "2026-11-16", "second_read": "2026-11-16", "eco": {}, "law": {},
+            "src": [["Ъ", "https://www.kommersant.ru/doc/7"]]}
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: sent.append(payload) or {"ok": True, "result": {"message_id": 1}})
+    assert main.console_show_ready_cards() == {"shown": 0} and sent == []
+
+
+def test_routine_can_release_its_show_claim_when_the_send_failed(client, monkeypatch):
+    """Ревизия 17 ноября 2026: рутина заняла показ, а карточка в Telegram не ушла —
+    захват снимается ручкой, и показ снова свободен. Карточку, показанную целиком
+    (есть снимок поста), ручка не трогает."""
+    _mod_env(monkeypatch)
+    post = lambda path, **body: client.post(path, json=dict(body, token="тайна"))
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": ["grel1"]}
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": []}
+    r = post("/api/moderation/shown/release", cards=[{"id": "grel1"}])
+    assert r.status_code == 200 and r.json() == {"released": ["grel1"]}, r.text
+    assert "grel1" not in client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]
+    assert post("/api/moderation/shown", claim=True, cards=[{"id": "grel1"}]).json() == {"claimed": ["grel1"]}
+    post("/api/moderation/shown", cards=[{"id": "grel2", "post_preview": "<b>Пост</b>"}])
+    assert post("/api/moderation/shown/release", cards=[{"id": "grel2"}]).json() == {"released": []}
+    assert "grel2" in client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]
+    assert client.post("/api/moderation/shown/release", json={"token": "чужой", "cards": []}).status_code == 404
+
+
 def test_server_does_not_show_card_twin_of_a_base_deal(client, monkeypatch):
     """13 ноября 2026 («К+» / «Комфорт»): принятая карточка о сделке, которая уже
     есть в базе (та же статья, сумма и дата), сама в консоль не уходит; с причиной
@@ -5483,3 +5554,129 @@ def test_owner_take_beats_an_automatic_drop_of_the_same_news():
     decisions = [{"deal_id": "d1", "verdict": "take"}]
     take, drop = approve.plan_raw(drafts, decisions, decided_raw={"d1": "auto-drop"})
     assert [d["draft_id"] for d in take] == ["d1"] and not drop
+
+
+def test_a_press_during_a_database_outage_is_not_lost_silently(client, monkeypatch):
+    """17 ноября 2026 база сайта отвечала ошибкой на все подряд: опрос Telegram сдвигал
+    номер обновления до обработки, и нажатия терялись насовсем; при этом «Принято»
+    уходило человеку раньше записи решения. Теперь: база не отвечает — номер не
+    сдвигается, обновление придет снова; ошибка базы на одном обновлении при живой базе —
+    идем дальше; запись решения не прошла — человек видит «не записано», а не «Принято»."""
+    from sqlalchemy.exc import OperationalError
+    _mod_env(monkeypatch)
+    seen = []
+
+    def fake_handle(payload, db):
+        seen.append(payload.update_id)
+        if payload.update_id == 21:
+            raise OperationalError("SELECT", {}, Exception("база не отвечает"))
+        return {"ok": True}
+
+    class FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"ok": True, "result": [{"update_id": 20, "message": {"text": "раз"}},
+                                           {"update_id": 21, "callback_query": {"id": "x"}},
+                                           {"update_id": 22, "message": {"text": "три"}}]}
+
+    monkeypatch.setattr(console, "_handle_telegram_update", fake_handle)
+    monkeypatch.setattr(main.httpx, "post", lambda *a, **kw: FakeResponse())
+    monkeypatch.setitem(main._poll_state, "offset", None)
+    monkeypatch.setattr(console.ops, "_db_state", lambda: "error: OperationalError")
+    with pytest.raises(RuntimeError):
+        main._poll_once("токен")
+    assert seen == [20, 21] and main._poll_state["offset"] == 21, "нажатие 21 должно прийти снова"
+    # База жива, ошибка — на самом обновлении: очередь не встает.
+    seen.clear()
+    monkeypatch.setattr(console.ops, "_db_state", lambda: "ok")
+    assert main._poll_once("токен") == 3
+    assert seen == [20, 21, 22] and main._poll_state["offset"] == 23
+
+
+def test_accepted_is_answered_only_after_the_decision_is_written(client, monkeypatch):
+    """Ревизия 17 ноября 2026: «Принято» на нажатие уходило до записи в базу — при сбое
+    базы человек видел подтверждение, а решения не было. Запись не прошла — ответ «не
+    записано, нажмите еще раз», отметка под сообщением не ставится."""
+    from sqlalchemy.exc import OperationalError
+    _mod_env(monkeypatch)
+    calls = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: calls.append((method, payload)) or {"ok": True})
+    db = get_session()
+    try:
+        def broken_commit():
+            raise OperationalError("INSERT", {}, Exception("база не отвечает"))
+        monkeypatch.setattr(db, "commit", broken_commit)
+        payload = console.TelegramWebhookIn(callback_query={
+            "id": "cb-lost", "from": {"id": 222}, "data": "mod:glost1:ok",
+            "message": {"message_id": 9, "chat": {"id": 222}, "text": "[карточка glost1]"}})
+        assert console._handle_telegram_update(payload, db) == {"ok": True}
+    finally:
+        db.close()
+    answers = [p for m, p in calls if m == "answerCallbackQuery"]
+    assert len(answers) == 1 and "Не записано" in answers[0]["text"] and answers[0].get("show_alert"), calls
+    assert not [m for m, _p in calls if m.startswith("editMessage")], "под сообщением стоит отметка о решении, которого нет"
+    rows = client.get("/api/moderation/decisions", params={"token": "тайна"}).json()["decisions"]
+    assert not [d for d in rows if d["deal_id"] == "glost1"]
+
+
+def test_server_records_that_the_post_draft_did_not_go(client, monkeypatch, caplog):
+    """Ревизия 17 ноября 2026 («почему скинули проект карточки, но не скинули проект
+    поста?»): сервер показал карточку, проект поста в Telegram не ушел — и об этом не
+    было ни строки в журнале, ни пометки; рутина догадывалась по отсутствию снимка.
+    Теперь неудача пишется в журнал и в запись показа; дослал рутина — пометка снята."""
+    import logging
+    _mod_env(monkeypatch)
+    card = {"id": "gnopost1", "title": "«Ромашка» купила «Лютик»", "status": "Закрыта",
+            "date": date.today().isoformat(), "type": "M&A", "ind": "Ритейл", "buyer_name": "ООО «Ромашка»",
+            "asset": "сеть «Лютик»", "src": [["Ъ", "https://www.kommersant.ru/doc/8"]], "from_ingest": True,
+            "reviewed": "2026-11-17", "accepted": "2026-11-17", "second_read": "2026-11-17", "eco": {}, "law": {}}
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
+    sent = []
+
+    def tg(method, **payload):
+        sent.append(payload)
+        return {"ok": True, "result": {"message_id": 1}} if len(sent) == 1 else None    # карточка ушла, пост — нет
+    monkeypatch.setattr(main.notification_service, "tg_api", tg)
+    with caplog.at_level(logging.ERROR):
+        assert main.console_show_ready_cards() == {"shown": 1}
+    assert len(sent) == 3, "карточка, пост с разметкой, пост без разметки"
+    assert any("проект поста gnopost1" in r.getMessage() for r in caplog.records), "неудача поста не записана в журнал"
+    rec = client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]["gnopost1"]
+    assert rec.get("shown_at") and rec.get("post_failed") and not rec.get("post_preview"), rec
+    # Рутина по пометке досылает пост сразу, не выжидая двух минут.
+    sys.path.insert(0, "pipeline/ingest")
+    import send_drafts
+    assert send_drafts.post_missing(rec, card) is True
+    assert send_drafts.post_missing({"shown_at": rec["shown_at"]}, card) is False, "без пометки — прежние две минуты"
+    # Дослала и записала снимок — пометка снята.
+    client.post("/api/moderation/shown", json={"token": "тайна", "cards": [{"id": "gnopost1", "post_preview": "<b>Пост</b>"}]})
+    rec = client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]["gnopost1"]
+    assert rec.get("post_preview") and "post_failed" not in rec, rec
+    assert send_drafts.post_missing(rec, card) is False
+
+
+def test_a_post_without_a_decision_is_counted_however_long_it_waits(monkeypatch):
+    """Ревизия 17 ноября 2026 (g2ab91f78, на сайте с 4 ноября): посты без кнопки «Пост в
+    канал» считались только у карточек, вышедших за последние семь дней, — через неделю
+    карточка выпадала из сводки дня, отчета и кнопки, хотя решения о посте не было.
+    Срока нет; не ждет кнопки то, что закрыто: пост вышел (в любом канале), стоит пустая
+    отметка «без отправки», есть решение о посте."""
+    from datetime import timedelta
+    sys.path.insert(0, "pipeline")
+    import ops_status
+    today = date.today()
+    deal = lambda i, **kw: dict({"id": i, "title": "А купил Б", "status": "Закрыта", "from_ingest": True,
+                                 "date": (today - timedelta(days=20)).isoformat(),
+                                 "added": (today - timedelta(days=13)).isoformat()}, **kw)
+    base = {"deals": [deal("gwait-old"), deal("gwait-new", added=today.isoformat()),
+                      deal("gseeded"), deal("grealty"), deal("gsent"), deal("gnopost", no_post=True),
+                      deal("gheld", post_held=True), deal("gstale", date="2019-01-01")],
+            "telegram_posts": {"gseeded": None, "gsent": 501}, "telegram_posts_realty": {"grealty": 77},
+            "companies": {}}
+    assert [d["id"] for d in ops_status.waiting_posts(base)] == ["gwait-old", "gwait-new"]
+    monkeypatch.setattr(main.base_data, "promoted", lambda: base)
+    assert [d["id"] for d in console._waiting_posts()] == ["gwait-old", "gwait-new"]

@@ -314,7 +314,12 @@ def claim_show(card_id):
     """Занять показ карточки на сайте ДО отправки. True — показ наш; False —
     карточку уже показал сервер или другой прогон; None — сайт не ответил
     (тогда НЕ шлем: сервер покажет карточку сам, а двойной показ хуже
-    отложенного). Без токена (тесты, сухой прогон) — True."""
+    отложенного). Без токена (тесты, сухой прогон) — True.
+
+    False — только когда память сайта карточку ПОМНИТ. 17 ноября 2026 база
+    сайта отвечала ошибкой, захват вернул пустой список, это прочиталось как
+    «показал другой» — и карточка gcdfb645f получила обе отметки показа, хотя
+    ее не показывал никто. Отказ без записи о показе — это сбой, а не «занято»."""
     token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
     if not token:
         return True
@@ -327,19 +332,43 @@ def claim_show(card_id):
                 body = r.json()
                 if 'claimed' not in body:      # сервер старой версии: показ записан, шлем как раньше
                     return True
-                return card_id in body['claimed']
+                if card_id in body['claimed']:
+                    return True
+                return False if card_id in ((site_shown() or {}).get('cards') or {}) else None
         except Exception as e:                               # noqa: BLE001
             print('занять показ на сайте не удалось: %s' % e)
         time.sleep(3)
     return None
 
 
+def release_show(card_id):
+    """Снять свой захват показа на сайте: карточка в Telegram не ушла. Иначе запись
+    показа остается, следующий запуск считает карточку показанной и досылает один
+    пост — владелец получает пост без карточки. True — сайт захват снял."""
+    token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
+    if not token:
+        return False
+    try:
+        import httpx
+        r = httpx.post('%s/api/moderation/shown/release' % SITE,
+                       json={'token': token, 'cards': [{'id': card_id}]}, timeout=15)
+        return r.status_code == 200
+    except Exception as e:                                   # noqa: BLE001
+        print('снять захват показа на сайте не удалось: %s' % e)
+        return False
+
+
 def post_missing(rec, card, now=None):
     """Сайт помнит показ карточки, а снимка поста нет, хотя пост ей положен, —
     проект поста не дошел. Две минуты после показа не трогаем: сервер шлет
-    карточку и пост подряд, и запись могла застать его между ними."""
+    карточку и пост подряд, и запись могла застать его между ними.
+
+    Сервер, у которого пост не ушел, с 17 ноября 2026 пишет это сам (пометка
+    `post_failed` в записи показа) — тогда гадать и ждать две минуты незачем."""
     if not rec or rec.get('post_preview') or not goes_to_channel(card):
         return False
+    if rec.get('post_failed'):
+        return True
     try:
         shown_at = datetime.fromisoformat(str(rec.get('shown_at'))).replace(tzinfo=timezone.utc)
     except ValueError:
@@ -999,6 +1028,7 @@ def main(write=False, resend=None, only=None):
         return 1
     import httpx
     sent = 0
+    claimed = set()      # карточки, чей показ на сайте занял этот запуск
     comps = json.load(open(DATA, encoding='utf-8')).get('companies') or {}
     # Все три вида сообщений (пост/карточка/сырье) ждут решения владельца или
     # партнера — тема одна на всех, «Подтверждение постов».
@@ -1020,7 +1050,13 @@ def main(write=False, resend=None, only=None):
             # в 09:39 — план строился до чужого показа).
             if kind == 'card' and not resend:
                 fresh = (site_shown() or {}).get('cards') or {}
-                if item['id'] in fresh and not (mark == 'post_draft_sent' and post_missing(fresh[item['id']], item)):
+                # СВОЙ ЗАХВАТ — НЕ ЧУЖОЙ ПОКАЗ (ревизия 17 ноября 2026). Захват
+                # (с 13 ноября) пишет на сайт запись показа ДО отправки карточки;
+                # следом шел проект поста той же карточки, видел эту запись,
+                # считал «показал другой» и не уходил — карточка, показанная
+                # запуском, оставалась без проекта поста до следующего запуска.
+                if item['id'] in fresh and item['id'] not in claimed \
+                        and not (mark == 'post_draft_sent' and post_missing(fresh[item['id']], item)):
                     item['draft_sent'] = item['post_draft_sent'] = True
                     item.pop('_pending_post_preview', None)
                     continue
@@ -1034,15 +1070,31 @@ def main(write=False, resend=None, only=None):
                         item['draft_sent'] = item['post_draft_sent'] = True
                         item.pop('_pending_post_preview', None)
                         continue
+                    claimed.add(item['id'])
                 elif item.get('_skip_this_run') or item.get('post_draft_sent'):
                     continue
             if i:
                 time.sleep(PAUSE)
-            ok_all = True
+            ok_all, ok_any = True, False
             for chat in chats:
-                if not send_one(client, token, chat, text, keyboard, thread,
-                                html=(mark == 'post_draft_sent')):
+                if send_one(client, token, chat, text, keyboard, thread,
+                            html=(mark == 'post_draft_sent')):
+                    ok_any = True
+                else:
                     ok_all = False
+            if kind == 'card' and mark == 'draft_sent' and not ok_any and item['id'] in claimed:
+                # КАРТОЧКА НЕ УШЛА — ЗАХВАТ СНИМАЕМ (ревизия 17 ноября 2026). Запись
+                # показа, оставшаяся на сайте, значила бы «карточка показана»:
+                # следующий запуск дослал бы один пост. Пост без карточки в этом
+                # запуске тоже не шлем — карточку и пост покажет следующий показ.
+                claimed.discard(item['id'])
+                item['_skip_this_run'] = True
+                if release_show(item['id']):
+                    print('  %s: карточка в консоль не ушла — захват показа на сайте снят' % item['id'])
+                else:
+                    print('  %s: карточка в консоль НЕ УШЛА, и захват показа на сайте снять не удалось — '
+                          'сайт считает ее показанной; показать заново: send_drafts.py --resend %s --write'
+                          % (item['id'], item['id']))
             # Временное поле `_pending_post_preview` (см. build_plan()) живет
             # на карточке ДО отправки ее собственного поста — у одной
             # карточки в `plan` два отдельных пункта («карточка» и «пост»), и

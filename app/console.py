@@ -355,9 +355,12 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # сообщение старше суток), и нажатие выглядело потерянным, хотя
             # решение уже было записано. 7 сентября 2026 партнер из-за этого
             # нажал «не сделка» шесть раз за две секунды.
-            if callback.get("id"):
-                notification_service.tg_api("answerCallbackQuery",
-                                            callback_query_id=callback["id"], text="Принято")
+            #
+            # НО «ПРИНЯТО» — ТОЛЬКО ПОСЛЕ ЗАПИСИ РЕШЕНИЯ (ревизия 17 ноября 2026).
+            # В тот день база сайта отвечала ошибкой: человек видел «Принято», а
+            # решения не было нигде. Ответ идет сразу после записи в базу (до
+            # правки сообщения — она по-прежнему в отдельном потоке); запись не
+            # прошла — человек видит «не записано, нажмите еще раз».
             # Тот же вердикт по той же карточке от того же человека за
             # последнюю минуту — это ПОВТОРНАЯ ДОСТАВКА одного нажатия
             # (Telegram шлет апдейт заново, если вебхук не ответил вовремя)
@@ -366,21 +369,38 @@ def _handle_telegram_update(payload: TelegramWebhookIn, db):
             # решений в очереди рутина применит шесть раз — для `take` это
             # шесть карточек, для `post_yes` шесть постов в канал.
             since = datetime.now(timezone.utc) - timedelta(minutes=1)
-            twin = db.scalar(select(ModerationDecision).where(
-                ModerationDecision.deal_id == match.group(1),
-                ModerationDecision.verdict == verdict,
-                ModerationDecision.decided_by == str(from_id),
-                ModerationDecision.created_at >= since))
-            if not twin:
-                decision_row = ModerationDecision(deal_id=match.group(1), verdict=verdict,
-                                                  decided_by=str(from_id))
-                db.add(decision_row)
-                db.commit()
-                # Этап сделки — в канал сразу, не дожидаясь рутины публикации.
-                if (verdict == "post_yes" and "~" in match.group(1)
-                        and not match.group(1).startswith("digest~")):
-                    threading.Thread(target=_instant_milestone_post,
-                                     args=(match.group(1), decision_row.id), daemon=True).start()
+            decision_row = None
+            try:
+                twin = db.scalar(select(ModerationDecision).where(
+                    ModerationDecision.deal_id == match.group(1),
+                    ModerationDecision.verdict == verdict,
+                    ModerationDecision.decided_by == str(from_id),
+                    ModerationDecision.created_at >= since))
+                if not twin:
+                    decision_row = ModerationDecision(deal_id=match.group(1), verdict=verdict,
+                                                      decided_by=str(from_id))
+                    db.add(decision_row)
+                    db.commit()
+            except SQLAlchemyError as exc:
+                try:
+                    db.rollback()
+                except SQLAlchemyError:
+                    pass
+                logger.error("решение «%s» по %s не записано — база сайта ответила ошибкой: %s",
+                             verdict, match.group(1), type(exc).__name__)
+                if callback.get("id"):
+                    notification_service.tg_api(
+                        "answerCallbackQuery", callback_query_id=callback["id"], show_alert=True,
+                        text="Не записано: база сайта не ответила. Нажмите кнопку еще раз через минуту.")
+                return {"ok": True}
+            if callback.get("id"):
+                notification_service.tg_api("answerCallbackQuery",
+                                            callback_query_id=callback["id"], text="Принято")
+            # Этап сделки — в канал сразу, не дожидаясь рутины публикации.
+            if (decision_row is not None and verdict == "post_yes" and "~" in match.group(1)
+                    and not match.group(1).startswith("digest~")):
+                threading.Thread(target=_instant_milestone_post,
+                                 args=(match.group(1), decision_row.id), daemon=True).start()
             # Правка самого сообщения («— ✅ Одобрено (Борис)») — еще один
             # вызов Bot API, и он не должен задерживать ответ вебхуку:
             # решение уже в базе, а Telegram ждет ответа секунды, не десятки
@@ -817,18 +837,33 @@ def _poll_once(token: str) -> int:
         raise RuntimeError(data.get("description") or "getUpdates отказал")
     updates = data.get("result") or []
     for raw in updates:
-        # Смещение двигаем ДО обработки: обновление, на котором разбор упал,
-        # не должно приходить снова и снова — оно уже не станет разбираемым,
-        # а очередь встанет намертво (тот же класс, что зацикленный вебхук).
-        _poll_state["offset"] = int(raw.get("update_id", 0)) + 1
+        # Обновление, на котором разбор упал, не должно приходить снова и
+        # снова — оно уже не станет разбираемым, а очередь встанет намертво
+        # (тот же класс, что зацикленный вебхук): смещение двигается и после
+        # ошибки разбора.
+        #
+        # КРОМЕ ОДНОГО СЛУЧАЯ: БАЗА САЙТА НЕ ОТВЕЧАЕТ (ревизия 17 ноября 2026).
+        # В тот день база отвечала ошибкой на все подряд, смещение двигалось
+        # до обработки — и каждое нажатие кнопки терялось насовсем. Обновление
+        # тут ни при чем: оно разберется, когда база вернется. Поэтому при
+        # ошибке базы проверяем саму базу (`ops._db_state`): не отвечает —
+        # смещение не двигаем, опрос повторит это обновление после паузы;
+        # отвечает — виновато обновление, идем дальше, как раньше.
         db = get_session()
         try:
             _handle_telegram_update(TelegramWebhookIn(**{
                 k: raw.get(k) for k in TelegramWebhookIn.model_fields}), db)
+        except SQLAlchemyError as exc:
+            state = ops._db_state()
+            if state != "ok":
+                raise RuntimeError("база сайта не отвечает (%s) — обновление Telegram %s придет снова"
+                                   % (state, raw.get("update_id"))) from exc
+            logger.error("не удалось разобрать обновление Telegram (ошибка базы на этом обновлении): %s", exc)
         except Exception as exc:      # одно плохое обновление не валит опрос
             logger.error("не удалось разобрать обновление Telegram: %s", exc)
         finally:
             db.close()
+        _poll_state["offset"] = int(raw.get("update_id", 0)) + 1
     _poll_state["last_ok"] = datetime.now(timezone.utc)
     _poll_state["updates"] += len(updates)
     return len(updates)
@@ -1153,14 +1188,20 @@ def _held_posts() -> list:
 
 def _waiting_posts() -> list:
     """Посты карточек на сайте, показанные владельцу и ждущие кнопки (то же условие,
-    что `pipeline/ops_status.waiting_posts`): решения о посте нет, пост не вышел,
-    сделка свежая, карточка вышла не раньше недели назад."""
-    since = (datetime.utcnow() - timedelta(days=7)).date().isoformat()
+    что `pipeline/ops_status.waiting_posts`): решения о посте нет, пост не вышел ни в
+    одном канале, сделка свежая.
+
+    БЕЗ СРОКА (ревизия 17 ноября 2026). Раньше считались только карточки, вышедшие за
+    последние семь дней: g2ab91f78 (на сайте с 4 ноября) выпала из сводки и из кнопки,
+    хотя решения о посте так и не было. Неделя заменяла другое условие: карточка,
+    у которой в `telegram_posts` стоит пустая отметка (пост закрыт без отправки —
+    «без поста», не свежая на момент выхода), кнопки не ждет."""
     base = base_data.promoted() or {}
     posted = base.get("telegram_posts") or {}
+    realty = base.get("telegram_posts_realty") or {}
     sd = _send_drafts_module()
     return [d for d in base.get("deals") or []
-            if str(d.get("added") or "") >= since and not posted.get(d.get("id"))
+            if d.get("id") not in posted and not realty.get(d.get("id"))
             and not (d.get("post_approved") or d.get("no_post") or d.get("post_held") or d.get("post_override"))
             and sd.goes_to_channel(d)]
 
@@ -2250,6 +2291,11 @@ class ModerationConsumeIn(BaseModel):
 CONSOLE_SHOWN_PREFIX = "console_shown:"
 CONSOLE_PREVIEW_PREFIX = "console_post_preview:"
 CONSOLE_RAW_PREFIX = "console_raw_shown:"
+# «Карточка показана, а проект поста не ушел» — пометка в записи показа (ревизия
+# 17 ноября 2026). Раньше об этом не знал никто: сервер молчал, а рутина
+# догадывалась по отсутствию снимка поста спустя две минуты. Досылает пост
+# рутина (`send_drafts.post_missing`); сервер сам второй раз не шлет.
+CONSOLE_POST_FAILED_PREFIX = "console_post_failed:"
 
 
 def _send_drafts_module():
@@ -2295,7 +2341,13 @@ def _claim_show(db, card_id: str) -> bool:
         return True
     except SQLAlchemyError:
         db.rollback()
-        return False
+        # «ЗАНЯТО» — ТОЛЬКО КОГДА КЛЮЧ ПОКАЗА ЕСТЬ. 17 ноября 2026 база сайта
+        # отвечала ошибкой на все подряд, отказ читался как «уже показал
+        # другой», и карточка gcdfb645f получила отметки показа, хотя ее никто
+        # не показывал. Любая другая ошибка базы уходит вызывающему как ошибка.
+        if db.get(AppSetting, CONSOLE_SHOWN_PREFIX + card_id) is not None:
+            return False
+        raise
 
 
 def _release_show(db, card_id: str) -> None:
@@ -2339,8 +2391,13 @@ def _console_show_ready_cards() -> dict:
             if twin:
                 logger.warning("карточка %s не показана: двойник %s", card["id"], twin[0][0])
                 continue
-            if not _claim_show(db, card["id"]):
-                continue  # показ уже занят другим потоком или процессом
+            try:
+                if not _claim_show(db, card["id"]):
+                    continue  # показ уже занят другим потоком или процессом
+            except SQLAlchemyError as exc:
+                logger.error("показ карточки %s не занят: база сайта ответила ошибкой (%s) — "
+                             "карточка не показана и не помечена", card["id"], type(exc).__name__)
+                break
             common = {"chat_id": chats[0], "disable_web_page_preview": True}
             if thread:
                 common["message_thread_id"] = thread
@@ -2360,6 +2417,10 @@ def _console_show_ready_cards() -> dict:
                                                      reply_markup=sd.post_keyboard(card), **common)
                 if not (rp and rp.get("ok")):
                     preview = None
+                    logger.error("проект поста %s в консоль не ушел (карточка показана) — "
+                                 "дошлет рутина: %s", card["id"], rp)
+                    _remember_setting(db, CONSOLE_POST_FAILED_PREFIX + card["id"],
+                                      datetime.utcnow().isoformat(timespec="seconds"))
             if preview:
                 _remember_setting(db, CONSOLE_PREVIEW_PREFIX + card["id"], preview)
             shown += 1
@@ -2392,6 +2453,8 @@ def moderation_shown(token: str = "", db=Depends(get_db)):
             cards.setdefault(row.key[len(CONSOLE_SHOWN_PREFIX):], {})["shown_at"] = row.value
         elif row.key.startswith(CONSOLE_PREVIEW_PREFIX):
             cards.setdefault(row.key[len(CONSOLE_PREVIEW_PREFIX):], {})["post_preview"] = row.value
+        elif row.key.startswith(CONSOLE_POST_FAILED_PREFIX):
+            cards.setdefault(row.key[len(CONSOLE_POST_FAILED_PREFIX):], {})["post_failed"] = row.value
         elif row.key.startswith(CONSOLE_RAW_PREFIX):
             raw.append(row.key[len(CONSOLE_RAW_PREFIX):])
     return {"cards": cards, "raw": raw}
@@ -2407,9 +2470,15 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
         # Рутина спрашивает ДО отправки: показ достается тому, кто первым
         # вставил ключ (13 ноября 2026: карточку «Библио-Глобуса» показали и
         # сервер, и рутина — каждый проверил память до показа другого).
-        with _SHOW_LOCK:
-            claimed = [cid for cid in (str(i.get("id") or "").strip() for i in req.cards)
-                       if cid and _claim_show(db, cid)]
+        try:
+            with _SHOW_LOCK:
+                claimed = [cid for cid in (str(i.get("id") or "").strip() for i in req.cards)
+                           if cid and _claim_show(db, cid)]
+        except SQLAlchemyError as exc:
+            # Сбой базы — не «показал другой»: рутина по коду ответа карточку не
+            # шлет и отметок показа не ставит (17 ноября 2026).
+            logger.error("захват показа не записан: %s", type(exc).__name__)
+            return JSONResponse({"error": "база сайта не отвечает"}, status_code=503)
         return {"claimed": claimed}
     n = 0
     for item in req.cards:
@@ -2419,12 +2488,35 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
         _remember_setting(db, CONSOLE_SHOWN_PREFIX + cid, now)
         if item.get("post_preview"):
             _remember_setting(db, CONSOLE_PREVIEW_PREFIX + cid, str(item["post_preview"]))
+            # Пост дослан — пометка «пост не ушел» больше не нужна.
+            failed = db.get(AppSetting, CONSOLE_POST_FAILED_PREFIX + cid)
+            if failed is not None:
+                db.delete(failed)
+                db.commit()
         n += 1
     for key in req.raw:
         if key:
             _remember_setting(db, CONSOLE_RAW_PREFIX + str(key)[:200], now)
             n += 1
     return {"recorded": n}
+
+
+@router.post("/api/moderation/shown/release")
+def moderation_shown_release(req: ModerationShownIn, db=Depends(get_db)):
+    """Рутина заняла показ карточки, а отправка в Telegram не прошла — снять захват,
+    чтобы карточку показал сервер или следующий запуск. Без этого запись показа
+    оставалась на сайте, следующий запуск считал карточку показанной и досылал один
+    пост — владелец получал пост без карточки. Карточку со снимком поста (показана
+    целиком) не трогаем."""
+    if not _moderation_token_ok(req.token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    released = []
+    for item in req.cards:
+        cid = str(item.get("id") or "").strip()
+        if cid and db.get(AppSetting, CONSOLE_PREVIEW_PREFIX + cid) is None:
+            _release_show(db, cid)
+            released.append(cid)
+    return {"released": released}
 
 
 @router.post("/api/moderation/decisions/consume")

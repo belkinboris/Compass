@@ -93,7 +93,11 @@ def undecided(state=None):
     разных рутин), но логика обязана совпадать дословно."""
     state = state if state is not None else promote.load_state()
     import readiness
-    return readiness.undecided_raw(all_raw_drafts(), state)
+    # Показанное владельцу (`raw_titles` = 'sent') отсеву не предлагается: по
+    # нему решает человек, `apply_drop` такую новость все равно не снимет.
+    shown = {k for k, v in (state.get('raw_titles') or {}).items() if v == 'sent'}
+    return [d for d in readiness.undecided_raw(all_raw_drafts(), state)
+            if promote.raw_key(d.get('title')) not in shown]
 
 
 def best_match(draft, idx):

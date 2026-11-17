@@ -36,8 +36,14 @@ POLL_S = 60
 NOT_A_DECISION = {'note', 'drop'}
 
 
-def waiting(decisions, now=None):
-    """Решения людей, которые публикация еще не применила (не старше STALE_H)."""
+def waiting(decisions, now=None, stale_h=STALE_H):
+    """Решения людей, которые публикация еще не применила (не старше `stale_h` часов).
+
+    Отсечка по возрасту нужна тому, кто ЖДЕТ с push: старое решение значит, что
+    публикация сломалась, и ждать ее бессмысленно. Тому, кто ПРЕДУПРЕЖДАЕТ о не
+    примененном решении (`sweep.stale_decisions_warning`), она вредна: решение,
+    нажатое в 21:55, к утреннему забору старше трех часов — и забор о нем молчал.
+    `stale_h=None` — без отсечки."""
     now = now or datetime.now(timezone.utc)
     out = []
     for d in decisions:
@@ -49,7 +55,7 @@ def waiting(decisions, now=None):
             continue
         if at.tzinfo is None:
             at = at.replace(tzinfo=timezone.utc)
-        if now - at <= timedelta(hours=STALE_H):
+        if stale_h is None or now - at <= timedelta(hours=stale_h):
             out.append(d)
     return out
 
@@ -79,12 +85,12 @@ def holding(rows, base, queued, unproven):
     return out
 
 
-def busy():
+def busy(stale_h=STALE_H):
     import json
     import subprocess
     import approve
     decisions, _ = approve.fetch_decisions()
-    rows = waiting(decisions)
+    rows = waiting(decisions, stale_h=stale_h)
     if not rows:
         return rows
     try:

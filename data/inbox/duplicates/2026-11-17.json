@@ -230,6 +230,48 @@
     "needs_review": true
    },
    "queued": "2026-11-17"
+  },
+  {
+   "key": "https://retailer.ru/logika-moloka-priobrela-brend-protein-rex/::gcdfb645f",
+   "candidate_id": "gcdfb645f",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d87494418",
+    "title": "«Логика молока» приобрела бренд Protein Rex",
+    "date": "2026-11-17",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/logika-moloka-priobrela-brend-protein-rex/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-17",
+      "title": "Сделка завершена",
+      "note": "Под брендом Protein Rex выпускается более 180 наименований продукции, включая брауни, пирожные, батончики и печенье без добавления сахара. Сообщение «Логика молока» приобрела бренд Protein Rex появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/logika-moloka-priobrela-brend-protein-rex/"
+      ]
+     }
+    ],
+    "buyer_name": "«Логика молока»",
+    "asset": "бренд Protein Rex",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Логика молока»",
+     "asset": "бренд Protein Rex",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-17"
   }
  ]
 }

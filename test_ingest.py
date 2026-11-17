@@ -12296,3 +12296,265 @@ def test_console_topics_tell_unreachable_from_missing(monkeypatch):
     monkeypatch.setattr(console_topics, "_cache", None)
     monkeypatch.setattr(httpx, "get", lambda *a, **k: Ok())
     assert console_topics.thread_id("decision") is None and console_topics.unreachable() is False
+
+
+# ---- Показ в консоли: захват на сайте, сбой базы, сбой отправки (ревизия 17 ноября 2026) ----
+
+class _FakeSite:
+    """Память показа на сайте для тестов send_drafts: захват, запись, снятие."""
+
+    def __init__(self):
+        self.cards, self.mode, self.calls = {}, "ok", []
+
+    @staticmethod
+    def _now():
+        from datetime import datetime
+        return datetime.utcnow().isoformat(timespec="seconds")
+
+    def shown(self):
+        return None if self.mode == "down" else {"cards": {k: dict(v) for k, v in self.cards.items()}, "raw": []}
+
+    def post(self, url, json=None, timeout=None):
+        self.calls.append((url.rsplit("/api/moderation/", 1)[-1], json))
+        ids = [c["id"] for c in (json or {}).get("cards") or []]
+
+        class R:
+            status_code = 200
+            body = {}
+
+            def json(self):
+                return self.body
+        r = R()
+        if self.mode == "down":
+            r.status_code = 503
+        elif self.mode == "empty":          # сервер старой версии при сбое базы: 200 и пустой список
+            r.body = {"claimed": []}
+        elif url.endswith("/shown/release"):
+            for i in ids:
+                self.cards.pop(i, None)
+            r.body = {"released": len(ids)}
+        elif (json or {}).get("claim"):
+            r.body = {"claimed": [i for i in ids if i not in self.cards]}
+            for i in r.body["claimed"]:
+                self.cards[i] = {"shown_at": self._now()}
+        else:
+            for c in (json or {}).get("cards") or []:
+                self.cards.setdefault(c["id"], {"shown_at": self._now()})
+                if c.get("post_preview"):
+                    self.cards[c["id"]]["post_preview"] = c["post_preview"]
+            r.body = {"recorded": len(ids)}
+        return r
+
+
+def _send_drafts_with_site(monkeypatch, tmp_path, send_ok=lambda text: True):
+    """send_drafts.main(write=True) на одной готовой карточке gS и подменном сайте."""
+    import httpx
+    import promote
+    import send_drafts
+    card = {"id": "gS", "title": "Сделка S", "status": "Закрыта", "date": "2026-10-27", "type": "M&A", "ind": "Банки",
+            "buyer_name": "ООО «С»", "asset": "сеть «Т»", "src": [["Ъ", "https://www.kommersant.ru/doc/3"]],
+            "reviewed": "2026-10-27", "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {}}
+    pending_path, state_path = tmp_path / "pending.json", tmp_path / "state.json"
+    pending_path.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    state_path.write_text("{}", encoding="utf-8")
+    site, sent = _FakeSite(), []
+    monkeypatch.setattr(send_drafts, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "t")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(send_drafts, "PAUSE", 0)
+    monkeypatch.setattr(send_drafts.time, "sleep", lambda s: None)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "site_shown", site.shown)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "goes_to_channel", lambda c: True)
+    monkeypatch.setattr(send_drafts.console_topics, "thread_id", lambda kind: None)
+    monkeypatch.setattr(send_drafts.card_twin, "blocked", lambda *a, **k: None)
+    monkeypatch.setattr(httpx, "post", site.post)
+    monkeypatch.setattr(send_drafts, "send_one",
+                        lambda client, token, chat, text, kb, thread=None, html=False:
+                        bool(send_ok(text)) and (sent.append(text) or True))
+    read = lambda: json.loads(pending_path.read_text(encoding="utf-8"))["cards"][0]
+    return send_drafts, site, sent, read
+
+
+def test_site_failure_on_claim_is_not_read_as_shown_by_another(monkeypatch, tmp_path):
+    """17 ноября 2026 (gcdfb645f): база сайта отвечала ошибкой, захват показа вернул
+    пустой список, рутина прочитала это как «показал другой» и поставила карточке обе
+    отметки показа — хотя карточку не показывал никто. Отметки — только когда память
+    сайта карточку помнит; сбой и отказ без записи — «не шлю и не помечаю»."""
+    send_drafts, site, sent, read = _send_drafts_with_site(monkeypatch, tmp_path)
+    for mode in ("empty", "down"):
+        site.mode = mode
+        assert send_drafts.claim_show("gS") is None, mode
+    site.mode = "empty"
+    send_drafts.main(write=True)
+    assert sent == [] and not read().get("draft_sent") and not read().get("post_draft_sent"), read()
+    # Память сайта карточку помнит — это и есть явное «показал другой».
+    site.mode = "ok"
+    site.cards["gS"] = {"shown_at": "2026-11-17T09:00:00", "post_preview": "<b>Пост</b>"}
+    assert send_drafts.claim_show("gS") is False
+    send_drafts.main(write=True)
+    assert sent == [] and read().get("draft_sent") and read().get("post_draft_sent")
+
+
+def test_failed_card_send_releases_the_show_claim(monkeypatch, tmp_path):
+    """Ревизия 17 ноября 2026: запуск занял показ карточки на сайте, а отправка в
+    Telegram не прошла — запись показа оставалась, следующий запуск считал карточку
+    показанной и досылал один пост. Захват снимается, пост без карточки не уходит."""
+    send_drafts, site, sent, read = _send_drafts_with_site(
+        monkeypatch, tmp_path, send_ok=lambda text: not text.startswith("🗂"))
+    send_drafts.main(write=True)
+    assert sent == [], "пост ушел без карточки: %r" % sent
+    assert "gS" not in site.cards, "захват показа остался на сайте"
+    assert [c for c in site.calls if c[0] == "shown/release"]
+    assert not read().get("draft_sent") and not read().get("post_draft_sent"), read()
+    assert "_skip_this_run" not in read()
+
+
+def test_a_run_that_claimed_the_card_sends_its_post_draft_too(monkeypatch, tmp_path):
+    """Ревизия 17 ноября 2026: захват показа пишет на сайт запись ДО отправки карточки.
+    Проект поста той же карточки видел эту запись, принимал свой захват за чужой показ и
+    не уходил: запуск показывал карточку без проекта поста («почему скинули проект
+    карточки, но не скинули проект поста?»), пост досылался только следующим запуском."""
+    send_drafts, site, sent, read = _send_drafts_with_site(monkeypatch, tmp_path)
+    send_drafts.main(write=True)
+    assert len(sent) == 2 and sent[0].startswith("🗂") and "📣" in sent[1], [t[:40] for t in sent]
+    assert read().get("draft_sent") and read().get("post_draft_sent") and read().get("post_preview")
+    assert site.cards["gS"].get("post_preview"), "снимок поста не записан на сайт"
+    send_drafts.main(write=True)
+    assert len(sent) == 2, "второй запуск показал то же самое еще раз"
+
+
+def test_shown_raw_news_without_an_answer_still_counts_as_waiting(tmp_path, monkeypatch):
+    """Ревизия 17 ноября 2026: показ пишет в `raw_titles` значение `sent`, а общий счет
+    «ждет человека» читал любую запись как решение — показанная и не отвеченная новость
+    выпадала из отчета, сводки дня и кнопки «Сомнительные новости» (в файле дня ждали
+    четыре, счетчик говорил 0). Показ — не решение; второй раз новость при этом не
+    показывается, и отсеву она не предлагается."""
+    import ops_status, readiness, promote, raw_screen, send_drafts
+    drafts = [{"draft_id": "d1", "title": "Показана, ответа нет", "url": "https://example.com/1", "date": "2026-11-17"},
+              {"draft_id": "d2", "title": "Показана, отброшена", "url": "https://example.com/2", "date": "2026-11-17"},
+              {"draft_id": "d3", "title": "Еще не показана", "url": "https://example.com/3", "date": "2026-11-17"}]
+    state = {"decided_raw": {"d2": "drop"}, "sent_raw": ["d1", "d2"],
+             "raw_titles": {promote.raw_key("Показана, ответа нет"): "sent",
+                            promote.raw_key("Показана, отброшена"): "drop"},
+             "raw_sent_titles": {"d1": "Показана, ответа нет", "d2": "Показана, отброшена"}}
+    assert [d["draft_id"] for d in readiness.undecided_raw(drafts, state)] == ["d1", "d3"]
+    inbox = tmp_path / "inbox"
+    (inbox / "hold").mkdir(parents=True)
+    (inbox / "hold" / "2026-11-17.json").write_text(json.dumps({"drafts": drafts}, ensure_ascii=False), encoding="utf-8")
+    (inbox / "moderation_state.json").write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
+    pending = tmp_path / "pending.json"
+    pending.write_text('{"cards": []}', encoding="utf-8")
+    assert ops_status.doubted_count(str(pending), str(inbox)) == 1, "показанная без ответа не посчитана"
+    # Отсеву показанное не предлагается.
+    monkeypatch.setattr(raw_screen, "all_raw_drafts", lambda: drafts)
+    assert [d["draft_id"] for d in raw_screen.undecided(state)] == ["d3"]
+    # И второй раз владельцу не уходит.
+    monkeypatch.setattr(promote, "load_pending", lambda: {"cards": []})
+    monkeypatch.setattr(promote, "load_state", lambda: json.loads(json.dumps(state)), raising=False)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: None)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: drafts)
+    plan, *_rest = send_drafts.build_plan()
+    assert [item["draft_id"] for _t, _k, (kind, item, _m) in plan if kind == "raw"] == ["d3"]
+
+
+def test_sweep_warns_about_an_unapplied_decision_of_any_age(monkeypatch, capsys):
+    """Ревизия 17 ноября 2026: решение, нажатое вечером в 21:55, к утреннему забору
+    (08:50) старше трех часов. `publication_busy` такие отбрасывает (ждать с push из-за
+    них незачем), и забор по тому же списку о решении не предупреждал — оно ждало
+    публикации в 10:05. Предупреждение — о любом не примененном решении старше 30 минут."""
+    import sys
+    from datetime import datetime, timedelta, timezone
+    sys.path.insert(0, "pipeline")
+    sys.path.insert(0, "pipeline/ingest")
+    import publication_busy
+    import sweep
+    now = datetime(2026, 11, 18, 5, 50, tzinfo=timezone.utc)                 # 08:50 МСК
+    evening = {"id": 1, "deal_id": "gnight1", "verdict": "approve",
+               "created_at": (now - timedelta(hours=11)).replace(tzinfo=None).isoformat()}   # 21:55 МСК
+    fresh = {"id": 2, "deal_id": "gfresh1", "verdict": "approve",
+             "created_at": (now - timedelta(minutes=5)).replace(tzinfo=None).isoformat()}
+    note = dict(evening, id=3, verdict="note")
+    assert publication_busy.waiting([evening, fresh, note], now) == [fresh], "ожидание перед push — без старых"
+    assert publication_busy.waiting([evening, fresh, note], now, stale_h=None) == [evening, fresh]
+    monkeypatch.setattr(publication_busy, "busy",
+                        lambda stale_h=publication_busy.STALE_H:
+                        publication_busy.waiting([evening, fresh, note], now, stale_h=stale_h))
+    old = sweep.stale_decisions_warning(now)
+    assert [d["deal_id"] for d in old] == ["gnight1"], old
+    assert "gnight1" in capsys.readouterr().out
+
+
+def test_ship_decisions_derives_facts_in_its_worktree_and_names_unpushed_commits(tmp_path, monkeypatch):
+    """Ревизия 17 ноября 2026. (1) Пересчет фактов запускался скриптом ОСНОВНОЙ копии, а
+    тот берет базу по своему расположению — пересчитывалась не та база, в которую
+    применили решение. (2) Команда пушит только свою рабочую копию; коммит, оставшийся в
+    основной, не уезжал, а в конце стояло «ГОТОВО». Теперь такие коммиты названы."""
+    import importlib.util, os, pathlib, subprocess
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    sd = importlib.util.module_from_spec(spec); spec.loader.exec_module(sd)
+    assert sd.FACTS_DERIVE.startswith(sd.WORK + os.sep)
+    source = pathlib.Path('pipeline/publish/ship_decisions.py').read_text(encoding='utf-8')
+    assert "os.path.join(ROOT, 'pipeline', 'facts_derive.py')" not in source
+    assert source.index('left = unpushed_in_main()') < source.index("log('ГОТОВО: решения применены, база в main")
+
+    def g(*a, cwd):
+        r = subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *a], cwd=cwd,
+                           capture_output=True, text=True, check=False)
+        assert r.returncode == 0, r.stderr
+        return r.stdout
+    origin, work = tmp_path / 'origin.git', tmp_path / 'main'
+    g('init', '-q', '--bare', '-b', 'main', str(origin), cwd=tmp_path)
+    g('clone', '-q', str(origin), str(work), cwd=tmp_path)
+    (work / 'a.txt').write_text('1', encoding='utf-8')
+    g('add', 'a.txt', cwd=work); g('commit', '-q', '-m', 'первый', cwd=work)
+    g('push', '-q', 'origin', 'HEAD:main', cwd=work)
+    monkeypatch.setattr(sd, 'ROOT', str(work))
+    assert sd.unpushed_in_main() == []
+    (work / 'a.txt').write_text('2', encoding='utf-8')
+    g('commit', '-q', '-am', 'коммит, который не уехал', cwd=work)
+    left = sd.unpushed_in_main()
+    assert len(left) == 1 and 'не уехал' in left[0], left
+    g('push', '-q', 'origin', 'HEAD:main', cwd=work)
+    assert sd.unpushed_in_main() == []
+
+
+def test_drop_pending_asks_the_site_for_an_owner_decision_first(tmp_path, monkeypatch, capsys):
+    """13 ноября 2026: агент снял из очереди карточки, по которым владелец уже нажал
+    «Опубликовать», — решение осталось на сайте навсегда, владельцу никто не ответил.
+    Перед снятием спрашивается сайт: есть не примененное решение — отказ; сайт не
+    ответил — с --write тоже отказ; заметка решением не считается."""
+    import approve, drop_pending, promote
+    card = {"id": "gdrop1", "title": "Аукцион вещей", "src": [["Ъ", "https://example.com/a"]]}
+    pending_path, base_path = tmp_path / "pending.json", tmp_path / "base.json"
+    pending_path.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    base_path.write_text('{"deals": []}', encoding="utf-8")
+    monkeypatch.setattr(drop_pending, "PENDING", str(pending_path))
+    monkeypatch.setattr(drop_pending, "BASE", str(base_path))
+    monkeypatch.setattr(promote, "load_state", lambda: {})
+    monkeypatch.setattr(promote, "save_state", lambda state: None)
+    monkeypatch.setattr(drop_pending, "drop_fix_files", lambda ids: None)
+    monkeypatch.setattr(drop_pending, "notify_console", lambda texts: None)
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    queued = lambda: [c["id"] for c in json.loads(pending_path.read_text(encoding="utf-8"))["cards"]]
+    args = ["gdrop1", "--reason", "не сделка: аукцион вещей", "--write"]
+
+    approve_row = {"id": 5, "deal_id": "gdrop1", "verdict": "approve", "created_at": "2026-11-13T10:00:00"}
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([approve_row], ("site", "t")))
+    assert drop_pending.main(args) == 1 and queued() == ["gdrop1"]
+    assert "ОТКАЗ" in capsys.readouterr().out
+    assert drop_pending.main(args[:-1]) == 1, "и сухой запуск говорит об отказе"
+
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], None))
+    assert drop_pending.main(args) == 1 and queued() == ["gdrop1"], "сайт не ответил — не снимаем"
+
+    note = dict(approve_row, verdict="note")
+    other = dict(approve_row, deal_id="gother")
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([note, other], ("site", "t")))
+    assert drop_pending.main(args) == 0 and queued() == []
