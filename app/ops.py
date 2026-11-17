@@ -549,7 +549,22 @@ def _plural_ru(n: int, one: str, few: str, many: str) -> str:
     return many
 
 
-def _intake_summary_text(runs: list[dict], msk_day, metrika_lines: list[str]) -> str:
+def _waiting_lines(waiting: dict | None) -> list[str]:
+    """Строки сводки о том, на что владелец еще не ответил. Считается в момент отправки."""
+    if waiting is None:
+        return ["⏳ Сколько карточек и постов ждет вашего ответа, сейчас посчитать не удалось."]
+    cards, posts, raw = (int(waiting.get(k) or 0) for k in ("cards", "posts", "raw"))
+    if not (cards or posts or raw):
+        return ["✅ Ждущих вашего ответа карточек, постов и новостей нет."]
+    return ["⏳ <b>Ждут вашего ответа:</b>",
+            "• %d %s на проверку" % (cards, _plural_ru(cards, "карточка", "карточки", "карточек")),
+            "• %d %s без кнопки «Пост в канал»" % (posts, _plural_ru(posts, "пост", "поста", "постов")),
+            "• %d %s" % (raw, _plural_ru(raw, "сомнительная новость", "сомнительные новости", "сомнительных новостей")),
+            "Кнопки ниже покажут их здесь заново."]
+
+
+def _intake_summary_text(runs: list[dict], msk_day, metrika_lines: list[str], waiting: dict | None = None,
+                         with_waiting: bool = False) -> str:
     """Текст сводки дня — словами, без устройства рутин."""
     lines = ["🌅 <b>Компас · день, %d %s</b>" % (msk_day.day, _MONTHS_GEN[msk_day.month - 1]), ""]
     if not runs:
@@ -570,6 +585,9 @@ def _intake_summary_text(runs: list[dict], msk_day, metrika_lines: list[str]) ->
                          % (cards, _plural_ru(cards, "карточка", "карточки", "карточек")))
         else:
             lines.append("Новых сделок за день нет — бывают тихие дни.")
+    if with_waiting:
+        lines.append("")
+        lines.extend(_waiting_lines(waiting))
     lines.append("")
     lines.extend(metrika_lines)
     return "\n".join(lines)
@@ -612,13 +630,23 @@ def _intake_summary_once(db, now_utc: datetime | None = None, force: bool = Fals
         metrika_lines = metrika_lines + [""] + traffic.console_lines(_traffic_stats(db, 1))
     except Exception as exc:                                 # noqa: BLE001
         logger.error("свой счетчик посещений не посчитался: %s", exc)
-    text = _intake_summary_text(runs, msk.date(), metrika_lines)
+    waiting = None
+    try:
+        from app import console
+        waiting = console.waiting_counts()
+    except Exception as exc:                                 # noqa: BLE001
+        logger.error("ждущее ответа не посчиталось: %s", exc)
+    text = _intake_summary_text(runs, msk.date(), metrika_lines, waiting, with_waiting=True)
+    keyboard = {}
+    if waiting and any(waiting.values()):
+        from app import console
+        keyboard = {"reply_markup": console.WAITING_KEYBOARD}
     chats = core._review_chat_ids(db)
     thread = core._console_thread_id(db, "update")
     sent = 0
     for chat in chats:
         res = notification_service.tg_api("sendMessage", chat_id=chat, text=text, parse_mode="HTML",
-                                          disable_web_page_preview=True,
+                                          disable_web_page_preview=True, **keyboard,
                                           **({"message_thread_id": thread} if thread else {}))
         if res and res.get("ok"):
             sent += 1

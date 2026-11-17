@@ -1193,6 +1193,46 @@ def _send_held_posts(chat_id, deals, thread_kw, hold_button=False) -> None:
                                         **thread_kw)
 
 
+def _raw_waiting(answered) -> tuple:
+    """(сомнительные новости без ответа, сколько из показанных уже решено)."""
+    state = core._read_json("data/inbox/moderation_state.json", {})
+    hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
+    names = sorted(n for n in os.listdir(hold_dir)
+                   if n.endswith(".json")) if os.path.isdir(hold_dir) else []
+    drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
+              .get("drafts") if names else None) or []
+    from pipeline.ingest import readiness
+    all_items = readiness.undecided_raw(drafts, state)
+    # Нажатое, но еще не примененное решение — не повод показывать то же
+    # сырье снова (28 октября 2026: «я вроде на все ответил, почему 13?»).
+    items = [d for d in all_items if str(d.get("draft_id")) not in answered]
+    # Только новости, которые владельцу ПРИСЫЛАЛИ с вопросом «сделка или нет»
+    # (владелец, 10 ноября 2026): остальное сырье решает рутина сама.
+    sent = set(state.get("raw_sent_titles") or {})
+    items = [d for d in items if str(d.get("draft_id")) in sent]
+    already = len([d for d in all_items if str(d.get("draft_id")) in sent]) - len(items)
+    return items, already
+
+
+def waiting_counts() -> dict:
+    """Сколько чего ждет ответа владельца: {"cards", "posts", "raw"} — те же списки,
+    что показывают кнопки «Что ждет решения» и «Сомнительные новости». Для сводки дня
+    (владелец, 17 ноября 2026: «не нравится, что фоном копятся важные посты, о которых
+    я могу не знать»)."""
+    answered = _answered_decisions()
+    pending = core._read_json("static/data/pending.json", {}).get("cards") or []
+    cards = [c for c in pending if not c.get("held") and _card_state(c) == "shown"
+             and str(c.get("id")) not in answered]
+    posts = [d for d in _waiting_posts() if str(d.get("id")) not in answered]
+    raw, _already = _raw_waiting(answered)
+    return {"cards": len(cards), "posts": len(posts), "raw": len(raw)}
+
+
+WAITING_KEYBOARD = {"inline_keyboard": [
+    [{"text": "🗂 Карточки и посты без ответа", "callback_data": "show:soon"}],
+    [{"text": "⚠️ Сомнительные новости", "callback_data": "show:raw"}]]}
+
+
 def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
     """Прислать карточки очереди — каждую своим сообщением с кнопками.
 
@@ -1212,24 +1252,8 @@ def _send_queue_batch(chat_id, kind: str, thread=None) -> int:
             raw    — сомнительные новости, которые ворота не пропустили.
     """
     if kind == "raw":
-        state = core._read_json("data/inbox/moderation_state.json", {})
-        decided = set(state.get("decided_raw") or {})
-        hold_dir = os.path.join(BASE_DIR, "data", "inbox", "hold")
-        names = sorted(n for n in os.listdir(hold_dir)
-                       if n.endswith(".json")) if os.path.isdir(hold_dir) else []
-        drafts = (core._read_json(os.path.join("data", "inbox", "hold", names[-1]), {})
-                  .get("drafts") if names else None) or []
         answered = _answered_decisions()
-        from pipeline.ingest import readiness
-        all_items = readiness.undecided_raw(drafts, state)
-        # Нажатое, но еще не примененное решение — не повод показывать то же
-        # сырье снова (28 октября 2026: «я вроде на все ответил, почему 13?»).
-        items = [d for d in all_items if str(d.get("draft_id")) not in answered]
-        # Только новости, которые владельцу ПРИСЫЛАЛИ с вопросом «сделка или нет»
-        # (владелец, 10 ноября 2026): остальное сырье решает рутина сама.
-        sent = set(state.get("raw_sent_titles") or {})
-        items = [d for d in items if str(d.get("draft_id")) in sent]
-        already = len([d for d in all_items if str(d.get("draft_id")) in sent]) - len(items)
+        items, already = _raw_waiting(answered)
         # ПРОЧИТАННАЯ И ОТВЕРГНУТАЯ КАРТОЧКА — ТОЖЕ СОМНИТЕЛЬНАЯ (21 сентября
         # 2026, вопрос владельца: «а разве она не должна оказаться в
         # сомнительных тогда?»). Приемка (accept_card.py) читает источник и у
