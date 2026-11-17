@@ -88,7 +88,7 @@ def fetch_decisions():
 # (владелец, 10 ноября 2026): это одобрение поста с выбором канала. Для всех
 # читателей решений это `post_yes`; канал едет рядом (`channels`) и
 # записывается карточке в `post_channels` (pipeline/publish/channels.py).
-CHANNEL_VERDICTS = {'post_realty': ['realty'], 'post_main': ['main']}
+CHANNEL_VERDICTS = {'post_realty': ['realty'], 'post_main': ['main'], 'post_both': ['main', 'realty']}
 
 
 def normalize_channels(decisions):
@@ -162,7 +162,7 @@ def unproven(detail, base=None):
     for d in detail:
         did, v = d.get('deal_id'), d.get('verdict')
         card = deals.get(did)
-        if v in ('post_yes', 'post_realty', 'post_main'):
+        if v in ('post_yes', 'post_realty', 'post_main', 'post_both'):
             ok = did in posted or (card is not None and card.get('post_approved'))
         elif v == 'post_no':
             ok = did in posted or (card is not None and card.get('no_post'))

@@ -11586,14 +11586,15 @@ def test_unsent_report_trusts_the_site_memory(monkeypatch, tmp_path):
 
 
 def test_post_keyboard_has_channel_buttons_and_approve_reads_them():
-    """Карандаш снят; кнопки канала — вторым рядом. Решение `post_realty` для всех
+    """Карандаш снят; кнопки канала — под кнопкой «как предложено». Решение `post_realty` для всех
     читателей — одобрение поста, канал едет в `channels` и попадает в `post_channels`."""
     import send_drafts, approve
     sys.path.insert(0, str(ROOT / "pipeline" / "publish"))
     import channels
     kb = send_drafts.post_keyboard({"id": "g1"})["inline_keyboard"]
     datas = [b["callback_data"] for row in kb for b in row]
-    assert datas == ["mod:g1:post_ok", "mod:g1:post_no", "mod:g1:post_realty", "mod:g1:post_main", "mod:g1:post_hold"]
+    assert datas == ["mod:g1:post_ok", "mod:g1:post_main", "mod:g1:post_realty", "mod:g1:post_both",
+                     "mod:g1:post_no", "mod:g1:post_hold"]
     card_datas = [b["callback_data"] for row in send_drafts.card_keyboard({"id": "g1"})["inline_keyboard"] for b in row]
     assert "mod:g1:hold" not in card_datas and "mod:g1:ok" in card_datas
     assert not any(b["text"].startswith("✏") for row in kb for b in row)
@@ -12572,3 +12573,23 @@ def test_drop_pending_asks_the_site_for_an_owner_decision_first(tmp_path, monkey
     other = dict(approve_row, deal_id="gother")
     monkeypatch.setattr(approve, "fetch_decisions", lambda: ([note, other], ("site", "t")))
     assert drop_pending.main(args) == 0 and queued() == []
+
+
+def test_post_keyboard_names_the_suggested_channel_and_every_choice():
+    """Под проектом поста (владелец, 17 ноября 2026): первая кнопка — куда пост предлагается
+    по правилу, затем основной, недвижимость, оба канала, «без поста» и «придержать»;
+    «в оба канала» одобряет пост с двумя каналами."""
+    import send_drafts
+    import approve
+    it = {"id": "g1", "ind": "ИТ и интернет", "status": "Закрыта"}
+    realty = {"id": "g2", "ind": "Недвижимость", "status": "Обсуждается"}
+    rows = send_drafts.post_keyboard(it)["inline_keyboard"]
+    texts = [b["text"] for row in rows for b in row]
+    data = [b["callback_data"] for row in rows for b in row]
+    assert texts[0] == "📣 Как предложено: в основной канал"
+    assert data == ["mod:g1:post_ok", "mod:g1:post_main", "mod:g1:post_realty", "mod:g1:post_both",
+                    "mod:g1:post_no", "mod:g1:post_hold"]
+    assert send_drafts.post_keyboard(realty)["inline_keyboard"][0][0]["text"] == "📣 Как предложено: в недвижимость"
+    assert "mod:g1:post_hold" not in str(send_drafts.post_keyboard(it, hold_button=False))
+    [norm] = approve.normalize_channels([{"deal_id": "g1", "verdict": "post_both"}])
+    assert norm["verdict"] == "post_yes" and norm["channels"] == ["main", "realty"]

@@ -253,20 +253,34 @@ def card_keyboard(card):
     ]]}
 
 
-def post_keyboard(card):
-    return {'inline_keyboard': [[
-        {'text': '📣 Пост в канал', 'callback_data': 'mod:%s:post_ok' % card['id']},
-        {'text': '🔕 Без поста', 'callback_data': 'mod:%s:post_no' % card['id']},
-    ], [
-        # Карандаш ничего не делал (владелец, 10 ноября 2026) — вместо него канал;
-        # вторым рядом, иначе на телефоне подписи обрезаются.
-        {'text': '🏠 Только недвижимость', 'callback_data': 'mod:%s:post_realty' % card['id']},
-        {'text': '📰 Только основной', 'callback_data': 'mod:%s:post_main' % card['id']},
-    ], [
+CHANNEL_WORDS = {('main',): 'в основной канал', ('realty',): 'в недвижимость',
+                 ('main', 'realty'): 'в оба канала'}
+
+
+def suggested_channel_words(card):
+    """Куда пост уйдет по правилу (`channels.channels_for`) — словами для кнопки."""
+    return CHANNEL_WORDS.get(tuple(channels.channels_for(card)), 'в основной канал')
+
+
+def post_keyboard(card, hold_button=True):
+    """Кнопки под проектом поста (владелец, 17 ноября 2026: «чтобы было понятнее»):
+    первой — куда пост предлагается по правилу, ниже — каждый канал явно и «в оба»,
+    затем «без поста» и «придержать». Кнопка канала — то же одобрение поста, канал
+    записывается карточке в `post_channels` (approve.CHANNEL_VERDICTS)."""
+    cid = card['id']
+    rows = [
+        [{'text': '📣 Как предложено: %s' % suggested_channel_words(card), 'callback_data': 'mod:%s:post_ok' % cid}],
+        [{'text': '📰 В основной канал', 'callback_data': 'mod:%s:post_main' % cid},
+         {'text': '🏠 В недвижимость', 'callback_data': 'mod:%s:post_realty' % cid}],
+        [{'text': '📰🏠 В оба канала', 'callback_data': 'mod:%s:post_both' % cid}],
+    ]
+    tail = [{'text': '🔕 Без поста', 'callback_data': 'mod:%s:post_no' % cid}]
+    if hold_button:
         # Придержать ПОСТ (владелец, 10 ноября 2026): карточка выходит на сайт, пост ждет в
         # «✋ Что придержано» — вдруг утром будут сделки круче; оттуда — одной кнопкой.
-        {'text': '✋ Придержать пост', 'callback_data': 'mod:%s:post_hold' % card['id']},
-    ]]}
+        tail.append({'text': '✋ Придержать пост', 'callback_data': 'mod:%s:post_hold' % cid})
+    rows.append(tail)
+    return {'inline_keyboard': rows}
 
 
 def raw_keyboard(draft):
