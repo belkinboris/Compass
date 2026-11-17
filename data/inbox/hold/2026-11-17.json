@@ -121,34 +121,6 @@
    ]
   },
   {
-   "draft_id": "d43828454",
-   "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261116/prisma-2131803233.html"
-    ]
-   ],
-   "sum": "800 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -178,13 +150,13 @@
    ]
   },
   {
-   "draft_id": "d90142028",
-   "title": "Российские подразделения Porsche могут сменить собственника",
+   "draft_id": "d48515120",
+   "title": "В автопроме усомнились в покупке активов Porsche в России кредитором Volkswagen",
    "date": "2026-11-17",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111156"
+     "https://www.kommersant.ru/doc/9111251"
     ]
    ],
    "sum": null,
@@ -206,98 +178,41 @@
    ]
   },
   {
-   "draft_id": "d77140197",
-   "title": "Т-Банк открыл возможность дистанционно оформлять документы при покупке автомобиля",
+   "draft_id": "d96916805",
+   "title": "Nvidia инвестировала в стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
    "date": "2026-11-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28324559"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/nvidia-investirovala-v-startap-noeri-razrabatyvayushhij-samosovershenstvuyushhijsya-ii/"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12296383",
-   "title": "Гунба объяснил, почему мандарины из других стран продают под видом абхазских",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28324485"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d49418229",
-   "title": "Швейцария готова принять новый раунд переговоров по Украине",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/mezhdunarodnaya-panorama/28324421"
-    ]
-   ],
-   "sum": null,
+   "sum": "$110 млн",
    "type": "Инвестиция",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "Nvidia",
+   "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "Nvidia",
+    "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d96330645",
-   "title": "Адвокат предупредил о рисках для руководителей после продажи бизнеса",
+   "draft_id": "d48556168",
+   "title": "Продажи вторички в Москве за 10 месяцев остались на уровне прошлого года",
    "date": "2026-11-17",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2202461/2026-11-17/advokat-predupredil-o-riskakh-dlia-rukovoditelei-posle-prodazhi-biznesa"
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261117/chislo-2132060696.html"
     ]
    ],
    "sum": null,
@@ -316,103 +231,17 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
-    "похоже на уже описанную сделку g9b48b9ac (общие редкие слова: после, продаж) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g8e847626 (общие редкие слова: 10, москве, продаж) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d10404362",
-   "title": "В Швейцарии захотели принять новый раунд переговоров по Украине",
+   "draft_id": "d99415247",
+   "title": "Jeland возглавил рейтинг новых автобрендов в России — продажи приблизились к 13 тыс. машин",
    "date": "2026-11-17",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/17/v-shveytsarii-zahoteli-prinyat-novyy-raund-peregovorov-po-ukraine/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d95927567",
-   "title": "Дешевый импорт из одной страны мешает продаже российской говядины",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144603"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48679422",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/economics/2026/11/17/76770185/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76119039",
-   "title": "«В России на пенсию я бы столько не купила»: 73-летняя бабушка впервые выехала за границу и удивилась ценам",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/world/2026/11/17/76770435/"
+     "web:rb.ru",
+     "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
     ]
    ],
    "sum": null,
@@ -423,10 +252,10 @@
      "kind": "closed",
      "date": "2026-11-17",
      "title": "Сделка завершена",
-     "note": "Зоя Тимофеевна так вдохновилась, увидев море и другую культуру, что завела блог. Видео",
+     "note": "Jeland стал лидером по продажам среди новых автомобильных брендов в России в 2026 году, сообщил директор агентства «Автостат» Сергей Целиков. К середине ноября в стране продали почти 13 тыс. автомобилей этой марки. По данным эксперта, бренд уже несколько…",
      "source": [
-      "web:ngs24.ru",
-      "https://ngs24.ru/text/world/2026/11/17/76770435/"
+      "web:rb.ru",
+      "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
      ]
     }
    ],
@@ -445,427 +274,177 @@
    ]
   },
   {
-   "draft_id": "d80681961",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/economics/2026/11/17/76770153/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d00326682",
-   "title": "«В России на пенсию я бы столько не купила»: 73-летняя бабушка впервые выехала за границу и удивилась ценам",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/world/2026/11/17/76770444/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-17",
-     "title": "Сделка завершена",
-     "note": "Зоя Тимофеевна так вдохновилась, увидев море и другую культуру, что завела блог. Видео",
-     "source": [
-      "web:ngs.ru",
-      "https://ngs.ru/text/world/2026/11/17/76770444/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d69276514",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/economics/2026/11/17/76770162/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d62940865",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:e1.ru",
-     "https://www.e1.ru/text/economics/2026/11/17/76770147/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d12939735",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:59.ru",
-     "https://59.ru/text/economics/2026/11/17/76770167/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d96033494",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/economics/2026/11/17/76770172/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d35043499",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/economics/2026/11/17/76770180/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d49945677",
-   "title": "Раньше тут разгружали баржи, а теперь продают дорогое жилье. Как живет Речпорт — район, где гуляет вся Тюмень",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/gorod/2026/11/17/76757891/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d32181630",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:161.ru",
-     "https://161.ru/text/economics/2026/11/17/76770169/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d24671109",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/economics/2026/11/17/76770152/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d64411021",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:116.ru",
-     "https://116.ru/text/economics/2026/11/17/76770150/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d70761125",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/economics/2026/11/17/76770143/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d98581003",
-   "title": "Урожай — 2026: Не важно сколько собрали, важно — сколько (не)сумели продать",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/economics/2026/11/17/76770182/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36797522",
-   "title": "Баффет передал на благотворительность акции на сумму 5,5 миллиарда долларов",
+   "draft_id": "d61529578",
+   "title": "МСБ привлек 5 млрд рублей на бирже при помощи Корпорации МСП",
    "date": "2026-11-17",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261117/baffett-2132012659.html"
+     "https://ria.ru/20261117/msb-2132064903.html"
+    ]
+   ],
+   "sum": "5 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСБ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСБ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d02446445",
+   "title": "В России отреагировали на предложение Швейцарии принять новый раунд переговоров по Украине",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/17/v-rossii-otreagirovali-na-predlozhenie-shveytsarii-prinyat-novyy-raund-peregovorov-po-ukraine/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63890190",
+   "title": "Роспечать ушла, аукционы провалились: Екатеринбург оставил бабушек без сканвордов",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144875"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76138511",
+   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/style/2026/11/17/76769997/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
+     "source": [
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/style/2026/11/17/76769997/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d75172649",
+   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/style/2026/11/17/76770003/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/style/2026/11/17/76770003/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d38619860",
+   "title": "В Екатеринбурге в новогодние праздники запретят продавать алкоголь. Где будут действовать ограничения",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/gorod/2026/11/17/76771249/"
     ]
    ],
    "sum": null,
@@ -883,8 +462,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56058626",
+   "title": "Ночная распродажа продуктов снова пройдет в Краснодаре — что это такое?",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/17/76771289/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

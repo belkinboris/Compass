@@ -334,6 +334,19 @@ def claim_show(card_id):
     return None
 
 
+def post_missing(rec, card, now=None):
+    """Сайт помнит показ карточки, а снимка поста нет, хотя пост ей положен, —
+    проект поста не дошел. Две минуты после показа не трогаем: сервер шлет
+    карточку и пост подряд, и запись могла застать его между ними."""
+    if not rec or rec.get('post_preview') or not goes_to_channel(card):
+        return False
+    try:
+        shown_at = datetime.fromisoformat(str(rec.get('shown_at'))).replace(tzinfo=timezone.utc)
+    except ValueError:
+        return True
+    return ((now or datetime.now(timezone.utc)) - shown_at).total_seconds() > 120
+
+
 def site_pending_ids():
     """Какие черновики уже ВИДНЫ на сайте. None — проверить не удалось.
 
@@ -582,9 +595,17 @@ def build_plan(resend=None, only=None):
         rec = shown_cards.get(card['id'])
         if rec and not (card.get('draft_sent') and card.get('post_draft_sent', card.get('draft_sent'))):
             card['draft_sent'] = True
-            card['post_draft_sent'] = True
+            # ПРОЕКТ ПОСТА ДОГОНЯЕМ (17 ноября 2026: «почему скинули проект карточки,
+            # но не скинули проект поста?»). Сервер показал карточку, а пост у него
+            # не ушел — снимка поста на сайте нет. Раньше здесь ставилась и отметка
+            # поста, и проект поста не показывался никогда: карточка выходила на
+            # сайт и молча ждала кнопки, которой владелец не видел.
+            card['post_draft_sent'] = not post_missing(rec, card)
             if rec.get('post_preview') and not card.get('post_preview'):
                 card['post_preview'] = format_post.strip_console_wrapper(rec['post_preview'])
+        elif rec and card.get('post_draft_sent') and not card.get('post_preview') and post_missing(rec, card):
+            # отметка поста уже стоит со старого прогона, а снимка поста нет нигде — поста не было
+            card['post_draft_sent'] = False
     postponed, unread, unaccepted, unread2 = 0, 0, 0, 0
     if resend:
         target = [c for c in pending['cards'] if c['id'] == resend]
@@ -990,7 +1011,7 @@ def main(write=False, resend=None, only=None):
             # в 09:39 — план строился до чужого показа).
             if kind == 'card' and not resend:
                 fresh = (site_shown() or {}).get('cards') or {}
-                if item['id'] in fresh:
+                if item['id'] in fresh and not (mark == 'post_draft_sent' and post_missing(fresh[item['id']], item)):
                     item['draft_sent'] = item['post_draft_sent'] = True
                     item.pop('_pending_post_preview', None)
                     continue

@@ -12235,3 +12235,19 @@ def test_reshow_waiting_builds_post_messages_with_buttons():
     assert "mod:%s:post_ok" % deal["id"] in json.dumps(keyboard)
     assert reshow_waiting.awaiting_post_ids(run=lambda: "x\nЖдут кнопки «Пост в канал» в консоли: 2 — g1, g2\n") == ["g1", "g2"]
     assert reshow_waiting.awaiting_post_ids(run=lambda: "ничего") == []
+
+
+def test_post_draft_is_caught_up_when_the_site_showed_only_the_card():
+    """Сайт показал карточку, а проект поста у него не ушел (снимка поста нет) —
+    рутина досылает пост, а не ставит отметку «показан» (17 ноября 2026, «Битл»/«Раундс»)."""
+    from datetime import datetime, timedelta, timezone
+    import send_drafts
+    now = datetime(2026, 11, 17, 9, 0, tzinfo=timezone.utc)
+    fresh = {"id": "g1", "date": "2026-11-10", "title": "A купил B", "from_ingest": True}
+    old = (now - timedelta(minutes=10)).replace(tzinfo=None).isoformat()
+    just = (now - timedelta(seconds=30)).replace(tzinfo=None).isoformat()
+    assert send_drafts.post_missing({"shown_at": old}, fresh, now) is True
+    assert send_drafts.post_missing({"shown_at": just}, fresh, now) is False          # сервер еще шлет пост
+    assert send_drafts.post_missing({"shown_at": old, "post_preview": "<b>x</b>"}, fresh, now) is False
+    assert send_drafts.post_missing({"shown_at": old}, dict(fresh, date="2019-01-01"), now) is False   # в канал не идет
+    assert send_drafts.post_missing(None, fresh, now) is False

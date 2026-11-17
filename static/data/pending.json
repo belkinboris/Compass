@@ -53,96 +53,6 @@
    "buyer": "g262274bc"
   },
   {
-   "id": "gbb89fc13",
-   "date": "2026-11-10",
-   "title": "«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»",
-   "ind": "Машиностроение",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "CNews",
-     "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "share": "—",
-    "val": "—",
-    "target_fin": "«Элко» пока небольшая: выручка за 2025 год — 41,5 млн рублей при убытке 31,8 млн, баланс — 1,9 млрд рублей, уставный капитал — 501 млн. Производство только планируется — компания подбирает поставщиков сырья внутри страны, часть договоров с ними уже подписана.",
-    "fin": "—",
-    "rationale": "—",
-    "context": "ОМК задумана как объединяющая структура всей российской микроэлектронной отрасли: кроме «Элко», в нее должны войти «Элемент», «Ангстрем» и «НМ-Тех», а все развитие корпорации до 2030 года оценивают в 1,1 трлн рублей. Цель — закрыть всю производственную цепочку своими силами, и для этого нужен собственный контрактный сборщик электроники.",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-10",
-     "title": "Переговоры",
-     "note": "Создаваемая «Объединенная микроэлектронная корпорация» рассматривает покупку фабрики «Элко» у НПЦ «ЭЛВИС» — пока как один из вариантов стратегии, сама покупка намечена на 2027 год. Цена не названа.",
-     "source": [
-      "Mergers.ru",
-      "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
-     ]
-    }
-   ],
-   "pending_since": "2026-11-16T22:42:00+00:00",
-   "from_raw": {
-    "draft_id": "d45381973",
-    "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»"
-   },
-   "seller": "НПЦ «ЭЛВИС»",
-   "asset": "«Элко»",
-   "reviewed": "2026-11-13",
-   "proofread_absorbed": {
-    "eco.context": [],
-    "eco.target_fin": [],
-    "buyer_name": [
-     "265ec2008a18"
-    ]
-   },
-   "discovery_src": [
-    [
-     "Mergers.ru",
-     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
-    ]
-   ],
-   "deep_researched": "2026-11-13",
-   "seller_id": "g230d43db",
-   "target": "g044fd178",
-   "buyer": "gcef42bfe",
-   "accepted_notes": {
-    "no_inn": {
-     "buyer": "«Объединенная микроэлектронная корпорация» — юрлицо еще не создано, оно на стадии стратегии (покупка намечена на 2027 год), ИНН в принципе нет"
-    },
-    "notes": "ИНН ОМК не ставим — юрлицо еще не создано (стадия стратегии, 2027 год). Сумма сделки не раскрыта: 170 млрд руб из источника — бюджет стратегии ОМК на разные проекты 2027 года, а не цена покупки «Элко».",
-    "searched": [
-     "WebSearch: ОМК Элко ЭЛВИС покупка фабрика",
-     "WebSearch: Объединенная микроэлектронная корпорация стратегия 2027",
-     "WebSearch: ОМК ЭЛВИС Элко официальный комментарий опровержение сделка",
-     "WebSearch: \"Элко\" ЭЛВИС Зенкина сделка ОМК",
-     "WebSearch: \"Элко\" OSAT печатные платы ЭЛВИС завод Зеленоград",
-     "WebFetch: datanewton.ru/search?query=НПЦ ЭЛВИС и query=7735582816 (ИНН продавца подтвержден)",
-     "WebFetch: www1.ru перепечатка CNews от 11.11.2026 (финансы Элко подтверждены повторно)"
-    ]
-   },
-   "accepted": "2026-11-13",
-   "accepted_hash": "f5d40cf17a11.a527c5",
-   "second_read": "2026-11-13",
-   "second_read_hash": "f5d40cf17a11.a527c5",
-   "draft_sent": true,
-   "shown_hash": "f5d40cf17a11.a527c5",
-   "post_draft_sent": true,
-   "post_preview": "<b>«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»</b>\n\n<b>Покупатель:</b> «Объединенная микроэлектронная корпорация»\n<b>Продавец:</b> НПЦ «ЭЛВИС»\n<b>Предмет:</b> «Элко»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Машиностроение\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya\">CNews</a>\n\n#промышленность #машиностроение #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbb89fc13\">карточке сделки</a>"
-  },
-  {
    "id": "gc816c617",
    "date": "2026",
    "title": "«Красная звезда» купила долю бывшего совладельца Евгения Сибирцева",
@@ -447,7 +357,167 @@
     ]
    },
    "accepted": "2026-11-17",
-   "accepted_hash": "83e29aa901e0.cfd056"
+   "accepted_hash": "83e29aa901e0.cfd056",
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "<b>«Битл» купила инвестиционную платформу «Раундс» у «ОТС-Платформы»</b>\n\n<b>Покупатель:</b> «Битл» — организатор инвестиционных раундов (pre-IPO) для малого и среднего бизнеса.\n<b>Продавец:</b> «ОТС-Платформа»\n<b>Предмет:</b> «Раундс»\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> Рынок ценных бумаг\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9111159\">Коммерсантъ</a>\nЕще 1 источник — в карточке сделки\n\n#финансы #биржа #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbb23f0bb\">карточке сделки</a>"
+  },
+  {
+   "id": "g7a31c3cc",
+   "date": "2026-11-16",
+   "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261116/prisma-2131803233.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "800 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "800 млн ₽",
+   "pending_since": "2026-11-17T07:56:51+00:00",
+   "from_raw": {
+    "draft_id": "d43828454",
+    "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей"
+   },
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "<b>Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> не раскрыт\n<b>Сумма:</b> 800 млн ₽\n<b>Статус:</b> Обсуждается\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261116/prisma-2131803233.html\">РИА Недвижимость</a>\n\n#MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g7a31c3cc\">карточке сделки</a>"
+  },
+  {
+   "id": "gcdfb645f",
+   "date": "2026-11-17",
+   "title": "«Логика молока» покупает бренд протеиновых продуктов Protein Rex",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28325583"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "бренд протеиновых продуктов Protein Rex",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-17",
+     "title": "Переговоры",
+     "note": "Компания планирует развивать продуктовую линейку, расширять узнаваемость бренда и наращивать объемы производства",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/28325583"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Логика молока»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28325583"
+     }
+    ],
+    "target": [
+     {
+      "value": "бренд протеиновых продуктов Protein Rex",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28325583"
+     }
+    ]
+   },
+   "buyer": "g53717e9e",
+   "pending_since": "2026-11-17T08:52:55+00:00"
+  },
+  {
+   "id": "g678f4ea0",
+   "date": "2026-11-17",
+   "title": "Нижегородец продает бумажный пакет из «Макдоналдса» за 185 тысяч рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Нижегородец",
+   "asset": "бумажный пакет из «Макдоналдса»",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "бумажный пакет из «Макдоналдса»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Нижегородец",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T08:52:55+00:00"
   }
  ]
 }

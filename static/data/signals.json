@@ -81,6 +81,48 @@
    "strength": "strong"
   },
   {
+   "id": "se7de355e5",
+   "company_id": "gcef42bfe",
+   "date": "2026-11-10",
+   "kind": "buy",
+   "summary": "«Объединенная микроэлектронная корпорация» — обсуждается покупка: «Элко»",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
+   ],
+   "origin": "card",
+   "deal_id": "gbb89fc13",
+   "strength": "normal"
+  },
+  {
+   "id": "sce626c7eb",
+   "company_id": "g044fd178",
+   "date": "2026-11-10",
+   "kind": "for_sale",
+   "summary": "«Элко» — обсуждается продажа компании или доли; возможный покупатель — «Объединенная микроэлектронная корпорация»",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
+   ],
+   "origin": "card",
+   "deal_id": "gbb89fc13",
+   "strength": "strong"
+  },
+  {
+   "id": "sccd871ccf",
+   "company_id": "g230d43db",
+   "date": "2026-11-10",
+   "kind": "sell",
+   "summary": "НПЦ «ЭЛВИС» — обсуждается продажа: «Элко»",
+   "source": [
+    "CNews",
+    "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
+   ],
+   "origin": "card",
+   "deal_id": "gbb89fc13",
+   "strength": "strong"
+  },
+  {
    "id": "s5cde64d07",
    "company_id": "g65d1691b",
    "date": "2026-11-07",
