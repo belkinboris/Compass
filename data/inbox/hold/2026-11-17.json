@@ -207,13 +207,13 @@
    ]
   },
   {
-   "draft_id": "d63858360",
-   "title": "CNBC: Трамп в мае продал акции корпорации Nvidia на сумму до $1 млн",
+   "draft_id": "d06530581",
+   "title": "CNBC: Трамп продал в мае часть акций Nvidia из-за данных о «китайском шпионаже»",
    "date": "2026-11-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28326627"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9111799"
     ]
    ],
    "sum": "$1 млн",
@@ -224,19 +224,19 @@
      "kind": "closed",
      "date": "2026-11-17",
      "title": "Сделка завершена",
-     "note": "Телеканал указывает, что продажа также состоялась спустя пять дней, после того как госсекретарь Марко Рубио, по утверждениям газеты The New York Times, якобы проинформировал президента о предполагаемых связях главы компании Дженсена Хуанга с подозреваемой в…",
+     "note": "Президент США Дональд Трамп распродал часть своих акций Nvidia на сумму до $1 млн еще в мае, сообщает CNBC со ссылкой на финансовые декларации главы государства. По информации телеканала, перед этим президента проинформировали о возможной связи тогдашнего…",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28326627"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9111799"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "акции корпорации Nvidia на сумму до $1 млн",
+   "asset": "в мае часть акций Nvidia из-за данных о «китайском шпионаже»",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "акции корпорации Nvidia на сумму до $1 млн",
+    "asset": "в мае часть акций Nvidia из-за данных о «китайском шпионаже»",
     "seller": null
    },
    "ind": null,
@@ -246,13 +246,180 @@
    ]
   },
   {
-   "draft_id": "d54193524",
-   "title": "Frank RG: доля отложивших покупку недвижимости россиян упала за год на 9 п.п.",
+   "draft_id": "d59398345",
+   "title": "Инвестфонд Сороса сократил долю в Nvidia до ухода Хуанга",
    "date": "2026-11-17",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28326203"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9111838"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «CNBC: Трамп продал в мае часть акций Nvidia из-за данных о «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d96149277",
+   "title": "CNBC: Трамп еще в мае продал акции Nvidia на сумму до $1 млн",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/17/1410914-tramp-prodal"
+    ]
+   ],
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/politics/news/2026/11/17/1410914-tramp-prodal"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "акции Nvidia на сумму до $1 млн",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "акции Nvidia на сумму до $1 млн",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «CNBC: Трамп продал в мае часть акций Nvidia из-за данных о «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d28594399",
+   "title": "«Логика молока» покупает бренд протеиновых продуктов Protein Rex",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Logika-moloka-pokupaet-brend-proteinovyh-produktov-Protein-Rex-87803"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Компания завершила сделку по приобретению ООО «Роял Кейк», которое выпускает протеиновые продукты под брендом Protein Rex. Продуктовый портфель бренда представлен функциональными десертами и снеками без добавления сахара: брауни, пирожными, батончиками и…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Logika-moloka-pokupaet-brend-proteinovyh-produktov-Protein-Rex-87803"
+     ]
+    }
+   ],
+   "buyer_name": "«Логика молока»",
+   "asset": "бренд протеиновых продуктов Protein Rex",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«Логика молока»",
+    "asset": "бренд протеиновых продуктов Protein Rex",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию",
+    "похоже на уже описанную сделку gcdfb645f (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15233609",
+   "title": "Особняк барона Штиглица на Английской набережной выставили на торги",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/17/osobnjak-barona-shtiglica-na"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51849480",
+   "title": "Сергей Бурунов — о покупке спорткара: «Проще самолет купить»",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/17/76772248/"
     ]
    ],
    "sum": null,
@@ -274,17 +441,45 @@
    ]
   },
   {
-   "draft_id": "d09418212",
-   "title": "Российские структуры Porsche могут продать за долги Volkswagen — суд признал компанию активом концерна",
+   "draft_id": "d92420262",
+   "title": "3 декабря — Круглый стол «С видом на море и не только: зачем петербуржцы покупают жилье на Юге»",
    "date": "2026-11-17",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/rossijskie-struktury-porsche-mogut-prodat-za-dolgi-volkswagen-sud-priznal-kompaniyu-aktivom-koncerna/"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/17/76551207/"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "жилье на Юге»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "жилье на Юге»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d10778817",
+   "title": "В 2,5 раза сократились продажи южнокорейских автомобилей в России",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203383/video/v-25-raza-sokratilis-prodazhi-iuzhnokoreiskikh-avtomobilei-v-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -302,13 +497,41 @@
    ]
   },
   {
-   "draft_id": "d96251579",
-   "title": "Зарубежная классика или нон-фикшн: названы книжные жанры, которые чаще покупают читатели",
+   "draft_id": "d03775829",
+   "title": "Комплекс «Грибов Белогорья» вновь выставили на продажу за 171,5 млн рублей",
    "date": "2026-11-17",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/entertainment/2026/11/17/76771240/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119335-kompleks-gribov-belogorya-vnov-vystavili-na-prodazhu-za-171-5-mln-rubley/"
+    ]
+   ],
+   "sum": "171,5 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73963969",
+   "title": "Сергей Кутенев стал единственным владельцем орловского «Эксперт-Кабеля» на фоне ареста средств завода",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119322-sergey-kutenev-stal-edinstvennym-vladeltsem-orlovskogo-ekspert-kabelya-na-fone-aresta-sredstv-zavoda/"
     ]
    ],
    "sum": null,
@@ -316,28 +539,134 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "читатели",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "читатели",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d87730551",
-   "title": "«Надеюсь, ей уже доначислили налоги». На тюменку, прославившуюся продажей десертов из машины, пожаловались в ФНС",
+   "draft_id": "d26345967",
+   "title": "Тагир Ситдеков возглавит Cosmos Hotel Group — смена руководителя может быть связана с подготовкой компании к IPO",
    "date": "2026-11-17",
    "src": [
     [
-     "web:72.ru",
-     "https://72.ru/text/business/2026/11/17/76771873/"
+     "web:rb.ru",
+     "https://rb.ru/news/tagir-sitdekov-vozglavit-cosmos-hotel-group-smena-rukovoditelya-mozhet-byt-svyazana-s-podgotovkoj-kompanii-k-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-17",
+     "title": "Переговоры",
+     "note": "Тагир Ситдеков станет президентом Cosmos Hotel Group (CHG) с 1 декабря 2026 года, сообщают «Ведомости» со ссылкой на собеседников, знакомых с кадровыми перестановками. Он сменит Александра Бибу, руководившего гостиничным оператором с 2022 года. По мнению…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/tagir-sitdekov-vozglavit-cosmos-hotel-group-smena-rukovoditelya-mozhet-byt-svyazana-s-podgotovkoj-kompanii-k-ipo/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d00792827",
+   "title": "В Волгограде 20-летний парень продал мошенникам восемь банковских карт",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/volgograd/2026/11/17/v-volgograde-20-letnij-paren-prodal-moshennikam-vosem-bankovskih-kart"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "В Волгограде 20-летнего местного жителя будут судить за незаконную продажу банковских карт и доступов к счетам. Об этом пишет пресс-служба СУ СК России по региону.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/ug/news/volgograd/2026/11/17/v-volgograde-20-letnij-paren-prodal-moshennikam-vosem-bankovskih-kart"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "мошенники восемь банковских карт",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "мошенники восемь банковских карт",
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d97004129",
+   "title": "«Не всегда в состоянии отказаться». В Ростовской области перестанут продавать вейпы и электронки",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/gorod/2026/11/17/76772230/"
     ]
    ],
    "sum": null,

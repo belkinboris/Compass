@@ -594,6 +594,58 @@
    "post_draft_sent": true,
    "shown_hash": "e51bda5c90ba.881c82",
    "post_preview": "<b>«Логика молока» купила ООО «Роял Кейк»</b>\n\n<b>Покупатель:</b> Логика молока — производитель молочной продукции, мороженого, детского питания и растительных напитков.\n<b>Продавец:</b> Андрей Попов\n<b>Предмет:</b> 100% доли в ООО «Роял Кейк»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Пищепром и напитки\n\n<b>Источник:</b> <a href=\"https://tass.ru/ekonomika/28325583\">ТАСС</a>\nЕще 6 источников — в карточке сделки\n\n#потребрынок #пищепром #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gcdfb645f\">карточке сделки</a>"
+  },
+  {
+   "id": "gb6e1c25d",
+   "date": "2026-11-17",
+   "title": "«МТС-финтех» стал владельцем финтех-провайдера OSMI Cards",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/316458"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«МТС-финтех»",
+   "asset": "финтех-провайдер OSMI Cards",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«МТС-финтех»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316458"
+     }
+    ],
+    "target": [
+     {
+      "value": "финтех-провайдер OSMI Cards",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316458"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T15:09:39+00:00"
   }
  ]
 }
