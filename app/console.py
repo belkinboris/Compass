@@ -1188,14 +1188,20 @@ def _held_posts() -> list:
 
 def _waiting_posts() -> list:
     """Посты карточек на сайте, показанные владельцу и ждущие кнопки (то же условие,
-    что `pipeline/ops_status.waiting_posts`): решения о посте нет, пост не вышел,
-    сделка свежая, карточка вышла не раньше недели назад."""
-    since = (datetime.utcnow() - timedelta(days=7)).date().isoformat()
+    что `pipeline/ops_status.waiting_posts`): решения о посте нет, пост не вышел ни в
+    одном канале, сделка свежая.
+
+    БЕЗ СРОКА (ревизия 17 ноября 2026). Раньше считались только карточки, вышедшие за
+    последние семь дней: g2ab91f78 (на сайте с 4 ноября) выпала из сводки и из кнопки,
+    хотя решения о посте так и не было. Неделя заменяла другое условие: карточка,
+    у которой в `telegram_posts` стоит пустая отметка (пост закрыт без отправки —
+    «без поста», не свежая на момент выхода), кнопки не ждет."""
     base = base_data.promoted() or {}
     posted = base.get("telegram_posts") or {}
+    realty = base.get("telegram_posts_realty") or {}
     sd = _send_drafts_module()
     return [d for d in base.get("deals") or []
-            if str(d.get("added") or "") >= since and not posted.get(d.get("id"))
+            if d.get("id") not in posted and not realty.get(d.get("id"))
             and not (d.get("post_approved") or d.get("no_post") or d.get("post_held") or d.get("post_override"))
             and sd.goes_to_channel(d)]
 

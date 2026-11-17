@@ -5657,3 +5657,26 @@ def test_server_records_that_the_post_draft_did_not_go(client, monkeypatch, capl
     rec = client.get("/api/moderation/shown", params={"token": "тайна"}).json()["cards"]["gnopost1"]
     assert rec.get("post_preview") and "post_failed" not in rec, rec
     assert send_drafts.post_missing(rec, card) is False
+
+
+def test_a_post_without_a_decision_is_counted_however_long_it_waits(monkeypatch):
+    """Ревизия 17 ноября 2026 (g2ab91f78, на сайте с 4 ноября): посты без кнопки «Пост в
+    канал» считались только у карточек, вышедших за последние семь дней, — через неделю
+    карточка выпадала из сводки дня, отчета и кнопки, хотя решения о посте не было.
+    Срока нет; не ждет кнопки то, что закрыто: пост вышел (в любом канале), стоит пустая
+    отметка «без отправки», есть решение о посте."""
+    from datetime import timedelta
+    sys.path.insert(0, "pipeline")
+    import ops_status
+    today = date.today()
+    deal = lambda i, **kw: dict({"id": i, "title": "А купил Б", "status": "Закрыта", "from_ingest": True,
+                                 "date": (today - timedelta(days=20)).isoformat(),
+                                 "added": (today - timedelta(days=13)).isoformat()}, **kw)
+    base = {"deals": [deal("gwait-old"), deal("gwait-new", added=today.isoformat()),
+                      deal("gseeded"), deal("grealty"), deal("gsent"), deal("gnopost", no_post=True),
+                      deal("gheld", post_held=True), deal("gstale", date="2019-01-01")],
+            "telegram_posts": {"gseeded": None, "gsent": 501}, "telegram_posts_realty": {"grealty": 77},
+            "companies": {}}
+    assert [d["id"] for d in ops_status.waiting_posts(base)] == ["gwait-old", "gwait-new"]
+    monkeypatch.setattr(main.base_data, "promoted", lambda: base)
+    assert [d["id"] for d in console._waiting_posts()] == ["gwait-old", "gwait-new"]

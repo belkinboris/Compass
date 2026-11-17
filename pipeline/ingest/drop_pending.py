@@ -65,6 +65,23 @@ def drop(pending, state, ids, reason, now):
     return [cards[i] for i in ids]
 
 
+def owner_decisions(ids):
+    """Не примененные решения владельца по этим карточкам — с сайта. Возвращает
+    (решения, удалось ли спросить). 13 ноября 2026 агент снял из очереди карточки,
+    по которым владелец уже нажал «Опубликовать»: решение осталось на сайте
+    навсегда — результата в базе не будет, гасить его нечем, владельцу никто не
+    ответил. Заметка (`note`) — не решение, ее читает приток. Без токена спросить
+    нечем (тесты, запуск без ключей) — считаем, что спросили."""
+    if not (os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET')):
+        return [], True
+    import approve
+    decisions, handle = approve.fetch_decisions()
+    if handle is None:
+        return [], False
+    wanted = set(ids)
+    return [d for d in decisions if str(d.get('deal_id')) in wanted and d.get('verdict') != 'note'], True
+
+
 def drop_fix_files(ids):
     """Файлы правок выкинутых карточек больше никому не нужны (бэклог A25)."""
     import fix_files
@@ -153,6 +170,20 @@ def main(argv):
     reason = argv[argv.index('--reason') + 1] if '--reason' in argv else ''
     assert reason.strip(), 'нужна причина: --reason "не сделка: …"'
     ids = [a for a in argv if a.startswith(('g', 'c')) and a not in (reason,) and not a.startswith('--')]
+    # ПЕРЕД СНЯТИЕМ — СПРОСИТЬ САЙТ (ревизия 17 ноября 2026): карточку, по которой
+    # владелец уже решил, агент не снимает — решение применит публикация.
+    live, asked = owner_decisions(ids)
+    for d in live:
+        print('ОТКАЗ: по карточке %s есть решение владельца «%s» от %s, оно еще не применено. '
+              'Сначала публикация (pipeline/publish/ship_decisions.py --write), потом снятие.'
+              % (d.get('deal_id'), d.get('verdict'), str(d.get('created_at'))[:16]))
+    if live:
+        return 1
+    if not asked:
+        print('Сайт не ответил — есть ли по карточкам решения владельца, неизвестно.')
+        if write:
+            print('ОТКАЗ: без ответа сайта карточки не снимаю — повторите через минуту.')
+            return 1
     pending = json.load(open(PENDING, encoding='utf-8'))
     state = promote.load_state()
     gone = drop(pending, state, ids, reason, datetime.now(timezone.utc))

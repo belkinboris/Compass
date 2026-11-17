@@ -12523,3 +12523,38 @@ def test_ship_decisions_derives_facts_in_its_worktree_and_names_unpushed_commits
     assert len(left) == 1 and 'не уехал' in left[0], left
     g('push', '-q', 'origin', 'HEAD:main', cwd=work)
     assert sd.unpushed_in_main() == []
+
+
+def test_drop_pending_asks_the_site_for_an_owner_decision_first(tmp_path, monkeypatch, capsys):
+    """13 ноября 2026: агент снял из очереди карточки, по которым владелец уже нажал
+    «Опубликовать», — решение осталось на сайте навсегда, владельцу никто не ответил.
+    Перед снятием спрашивается сайт: есть не примененное решение — отказ; сайт не
+    ответил — с --write тоже отказ; заметка решением не считается."""
+    import approve, drop_pending, promote
+    card = {"id": "gdrop1", "title": "Аукцион вещей", "src": [["Ъ", "https://example.com/a"]]}
+    pending_path, base_path = tmp_path / "pending.json", tmp_path / "base.json"
+    pending_path.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    base_path.write_text('{"deals": []}', encoding="utf-8")
+    monkeypatch.setattr(drop_pending, "PENDING", str(pending_path))
+    monkeypatch.setattr(drop_pending, "BASE", str(base_path))
+    monkeypatch.setattr(promote, "load_state", lambda: {})
+    monkeypatch.setattr(promote, "save_state", lambda state: None)
+    monkeypatch.setattr(drop_pending, "drop_fix_files", lambda ids: None)
+    monkeypatch.setattr(drop_pending, "notify_console", lambda texts: None)
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    queued = lambda: [c["id"] for c in json.loads(pending_path.read_text(encoding="utf-8"))["cards"]]
+    args = ["gdrop1", "--reason", "не сделка: аукцион вещей", "--write"]
+
+    approve_row = {"id": 5, "deal_id": "gdrop1", "verdict": "approve", "created_at": "2026-11-13T10:00:00"}
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([approve_row], ("site", "t")))
+    assert drop_pending.main(args) == 1 and queued() == ["gdrop1"]
+    assert "ОТКАЗ" in capsys.readouterr().out
+    assert drop_pending.main(args[:-1]) == 1, "и сухой запуск говорит об отказе"
+
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([], None))
+    assert drop_pending.main(args) == 1 and queued() == ["gdrop1"], "сайт не ответил — не снимаем"
+
+    note = dict(approve_row, verdict="note")
+    other = dict(approve_row, deal_id="gother")
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([note, other], ("site", "t")))
+    assert drop_pending.main(args) == 0 and queued() == []
