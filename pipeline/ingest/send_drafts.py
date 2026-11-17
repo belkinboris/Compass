@@ -1045,7 +1045,13 @@ def main(write=False, resend=None, only=None):
             # в 09:39 — план строился до чужого показа).
             if kind == 'card' and not resend:
                 fresh = (site_shown() or {}).get('cards') or {}
-                if item['id'] in fresh and not (mark == 'post_draft_sent' and post_missing(fresh[item['id']], item)):
+                # СВОЙ ЗАХВАТ — НЕ ЧУЖОЙ ПОКАЗ (ревизия 17 ноября 2026). Захват
+                # (с 13 ноября) пишет на сайт запись показа ДО отправки карточки;
+                # следом шел проект поста той же карточки, видел эту запись,
+                # считал «показал другой» и не уходил — карточка, показанная
+                # запуском, оставалась без проекта поста до следующего запуска.
+                if item['id'] in fresh and item['id'] not in claimed \
+                        and not (mark == 'post_draft_sent' and post_missing(fresh[item['id']], item)):
                     item['draft_sent'] = item['post_draft_sent'] = True
                     item.pop('_pending_post_preview', None)
                     continue

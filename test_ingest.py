@@ -12413,3 +12413,17 @@ def test_failed_card_send_releases_the_show_claim(monkeypatch, tmp_path):
     assert [c for c in site.calls if c[0] == "shown/release"]
     assert not read().get("draft_sent") and not read().get("post_draft_sent"), read()
     assert "_skip_this_run" not in read()
+
+
+def test_a_run_that_claimed_the_card_sends_its_post_draft_too(monkeypatch, tmp_path):
+    """Ревизия 17 ноября 2026: захват показа пишет на сайт запись ДО отправки карточки.
+    Проект поста той же карточки видел эту запись, принимал свой захват за чужой показ и
+    не уходил: запуск показывал карточку без проекта поста («почему скинули проект
+    карточки, но не скинули проект поста?»), пост досылался только следующим запуском."""
+    send_drafts, site, sent, read = _send_drafts_with_site(monkeypatch, tmp_path)
+    send_drafts.main(write=True)
+    assert len(sent) == 2 and sent[0].startswith("🗂") and "📣" in sent[1], [t[:40] for t in sent]
+    assert read().get("draft_sent") and read().get("post_draft_sent") and read().get("post_preview")
+    assert site.cards["gS"].get("post_preview"), "снимок поста не записан на сайт"
+    send_drafts.main(write=True)
+    assert len(sent) == 2, "второй запуск показал то же самое еще раз"
