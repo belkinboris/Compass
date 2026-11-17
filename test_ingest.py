@@ -12489,3 +12489,37 @@ def test_sweep_warns_about_an_unapplied_decision_of_any_age(monkeypatch, capsys)
     old = sweep.stale_decisions_warning(now)
     assert [d["deal_id"] for d in old] == ["gnight1"], old
     assert "gnight1" in capsys.readouterr().out
+
+
+def test_ship_decisions_derives_facts_in_its_worktree_and_names_unpushed_commits(tmp_path, monkeypatch):
+    """Ревизия 17 ноября 2026. (1) Пересчет фактов запускался скриптом ОСНОВНОЙ копии, а
+    тот берет базу по своему расположению — пересчитывалась не та база, в которую
+    применили решение. (2) Команда пушит только свою рабочую копию; коммит, оставшийся в
+    основной, не уезжал, а в конце стояло «ГОТОВО». Теперь такие коммиты названы."""
+    import importlib.util, os, pathlib, subprocess
+    spec = importlib.util.spec_from_file_location('ship_decisions', pathlib.Path('pipeline/publish/ship_decisions.py'))
+    sd = importlib.util.module_from_spec(spec); spec.loader.exec_module(sd)
+    assert sd.FACTS_DERIVE.startswith(sd.WORK + os.sep)
+    source = pathlib.Path('pipeline/publish/ship_decisions.py').read_text(encoding='utf-8')
+    assert "os.path.join(ROOT, 'pipeline', 'facts_derive.py')" not in source
+    assert source.index('left = unpushed_in_main()') < source.index("log('ГОТОВО: решения применены, база в main")
+
+    def g(*a, cwd):
+        r = subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *a], cwd=cwd,
+                           capture_output=True, text=True, check=False)
+        assert r.returncode == 0, r.stderr
+        return r.stdout
+    origin, work = tmp_path / 'origin.git', tmp_path / 'main'
+    g('init', '-q', '--bare', '-b', 'main', str(origin), cwd=tmp_path)
+    g('clone', '-q', str(origin), str(work), cwd=tmp_path)
+    (work / 'a.txt').write_text('1', encoding='utf-8')
+    g('add', 'a.txt', cwd=work); g('commit', '-q', '-m', 'первый', cwd=work)
+    g('push', '-q', 'origin', 'HEAD:main', cwd=work)
+    monkeypatch.setattr(sd, 'ROOT', str(work))
+    assert sd.unpushed_in_main() == []
+    (work / 'a.txt').write_text('2', encoding='utf-8')
+    g('commit', '-q', '-am', 'коммит, который не уехал', cwd=work)
+    left = sd.unpushed_in_main()
+    assert len(left) == 1 and 'не уехал' in left[0], left
+    g('push', '-q', 'origin', 'HEAD:main', cwd=work)
+    assert sd.unpushed_in_main() == []
