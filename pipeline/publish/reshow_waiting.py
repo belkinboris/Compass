@@ -114,6 +114,9 @@ def run(write=False, only=None, now=None, sender=None, resend=None, post_ids=Non
             print('Нет токена или адреса консоли — посты заново не показаны.')
             return shown
         thread = console_topics.thread_id('decision')
+        if thread is None and console_topics.unreachable():
+            print('Сайт не ответил, в какую тему слать, — посты заново не показаны.')
+            return shown
         if sender is None:
             import httpx
             client = httpx.Client(timeout=20)
