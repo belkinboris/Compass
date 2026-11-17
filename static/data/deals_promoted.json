@@ -301979,7 +301979,8 @@
    "reread": "2026-11-09",
    "reread_hash": "35fbaffa696e.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "no_post": true
   },
   {
    "id": "g41bcec82",
@@ -323546,7 +323547,8 @@
    ],
    "reread": "2026-11-16",
    "reread_hash": "0e02a9483ab6.a3cb8b",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "no_post": true
   },
   {
    "id": "gbde15bde",
@@ -323685,7 +323687,8 @@
      "top_purchases": "auction_open",
      "multiple_text": "not_control_change"
     }
-   }
+   },
+   "no_post": true
   },
   {
    "id": "g877b247a",
@@ -327104,6 +327107,148 @@
      "purchase_sums": "price_not_disclosed",
      "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
+    }
+   }
+  },
+  {
+   "id": "gbb89fc13",
+   "date": "2026-11-10",
+   "title": "«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»",
+   "ind": "Машиностроение",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "share": "—",
+    "val": "—",
+    "target_fin": "«Элко» пока небольшая: выручка за 2025 год — 41,5 млн рублей при убытке 31,8 млн, баланс — 1,9 млрд рублей, уставный капитал — 501 млн. Производство только планируется — компания подбирает поставщиков сырья внутри страны, часть договоров с ними уже подписана.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "ОМК задумана как объединяющая структура всей российской микроэлектронной отрасли: кроме «Элко», в нее должны войти «Элемент», «Ангстрем» и «НМ-Тех», а все развитие корпорации до 2030 года оценивают в 1,1 трлн рублей. Цель — закрыть всю производственную цепочку своими силами, и для этого нужен собственный контрактный сборщик электроники.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-10",
+     "title": "Переговоры",
+     "note": "Создаваемая «Объединенная микроэлектронная корпорация» рассматривает покупку фабрики «Элко» у НПЦ «ЭЛВИС» — пока как один из вариантов стратегии, сама покупка намечена на 2027 год. Цена не названа.",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+     ]
+    }
+   ],
+   "from_raw": {
+    "draft_id": "d45381973",
+    "title": "Создаваемая «Объединенной микроэлектронной корпорации» может приобрести фабрику «Элко» у НПЦ «ЭЛВИС»"
+   },
+   "seller": "НПЦ «ЭЛВИС»",
+   "asset": "«Элко»",
+   "reviewed": "2026-11-13",
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.target_fin": [],
+    "buyer_name": [
+     "265ec2008a18"
+    ]
+   },
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Sozdavaemaya-Obedinennoj-mikrojelektronnoj-korporacii-mozhet-priobresti-fabriku-Jelko-u-NPC-JeLVIS-87769"
+    ]
+   ],
+   "deep_researched": "2026-11-13",
+   "seller_id": "g230d43db",
+   "target": "g044fd178",
+   "buyer": "gcef42bfe",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "«Объединенная микроэлектронная корпорация» — юрлицо еще не создано, оно на стадии стратегии (покупка намечена на 2027 год), ИНН в принципе нет"
+    },
+    "notes": "ИНН ОМК не ставим — юрлицо еще не создано (стадия стратегии, 2027 год). Сумма сделки не раскрыта: 170 млрд руб из источника — бюджет стратегии ОМК на разные проекты 2027 года, а не цена покупки «Элко».",
+    "searched": [
+     "WebSearch: ОМК Элко ЭЛВИС покупка фабрика",
+     "WebSearch: Объединенная микроэлектронная корпорация стратегия 2027",
+     "WebSearch: ОМК ЭЛВИС Элко официальный комментарий опровержение сделка",
+     "WebSearch: \"Элко\" ЭЛВИС Зенкина сделка ОМК",
+     "WebSearch: \"Элко\" OSAT печатные платы ЭЛВИС завод Зеленоград",
+     "WebFetch: datanewton.ru/search?query=НПЦ ЭЛВИС и query=7735582816 (ИНН продавца подтвержден)",
+     "WebFetch: www1.ru перепечатка CNews от 11.11.2026 (финансы Элко подтверждены повторно)"
+    ]
+   },
+   "accepted": "2026-11-13",
+   "accepted_hash": "f5d40cf17a11.a527c5",
+   "second_read": "2026-11-13",
+   "second_read_hash": "f5d40cf17a11.a527c5",
+   "shown_hash": "f5d40cf17a11.a527c5",
+   "post_preview": "<b>«Объединенная микроэлектронная корпорация» может купить фабрику НПЦ «ЭЛВИС» — «Элко»</b>\n\n<b>Покупатель:</b> «Объединенная микроэлектронная корпорация»\n<b>Продавец:</b> НПЦ «ЭЛВИС»\n<b>Предмет:</b> «Элко»\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Машиностроение\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/top/2026-10-05_sozdavaemaya_mikroelektronnaya\">CNews</a>\n\n#промышленность #машиностроение #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gbb89fc13\">карточке сделки</a>",
+   "added": "2026-11-17",
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "a2506ff04b9e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "92725277de89"
+    },
+    "date": {
+     "value": "2026-11-10",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "7c32a11c7e70"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "6558175a595e"
+    },
+    "target": {
+     "company_id": "g044fd178",
+     "inn": "9714037468",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "0f32b457bc56"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    }
   }
