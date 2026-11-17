@@ -21,7 +21,9 @@ if DATABASE_URL.startswith("sqlite"):
     _engine_kwargs = {}
 else:
     _connect_args = {"connect_timeout": 10}
-    _engine_kwargs = {"pool_pre_ping": True}
+    # pool_recycle: соединение живет не дольше получаса — не копим оборванные и зависшие
+    # (17 ноября 2026: все запросы к базе отвечали 500 до перезапуска).
+    _engine_kwargs = {"pool_pre_ping": True, "pool_recycle": 1800}
 engine = create_engine(DATABASE_URL, connect_args=_connect_args, **_engine_kwargs)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 

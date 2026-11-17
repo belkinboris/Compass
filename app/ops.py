@@ -105,7 +105,25 @@ def health():
     # Последний успех и сбой по каждой модели (assistant.LLM_STATUS): вид сбоя — код HTTP,
     # таймаут, заглушка; ни текста ответа, ни ключей (6 ноября 2026, «Разбор сделки»).
     return {"status": "ok", "ai": _yandex_ready(), "model": assistant.current_model(),
-            "llm": assistant.LLM_STATUS, "build": build_fingerprint()}
+            "llm": assistant.LLM_STATUS, "build": build_fingerprint(), "db": _db_state()}
+
+
+def _db_state() -> str:
+    """Жива ли база сайта: "ok" или вид ошибки (без текста и адресов). 17 ноября 2026
+    все запросы к базе отвечали 500 — кнопки консоли молчали, а /health говорил «ok»,
+    потому что в базу не ходил. Статус «ok» самого /health не трогаем: по нему хостинг
+    решает, жив ли процесс."""
+    from sqlalchemy import text
+    from db.session import get_session
+    try:
+        db = get_session()
+        try:
+            db.execute(text("SELECT 1"))
+        finally:
+            db.close()
+        return "ok"
+    except Exception as e:                                        # noqa: BLE001
+        return "error: %s" % type(e).__name__
 
 
 def _ops_numbers() -> dict:
