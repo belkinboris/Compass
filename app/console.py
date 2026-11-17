@@ -2295,7 +2295,13 @@ def _claim_show(db, card_id: str) -> bool:
         return True
     except SQLAlchemyError:
         db.rollback()
-        return False
+        # «ЗАНЯТО» — ТОЛЬКО КОГДА КЛЮЧ ПОКАЗА ЕСТЬ. 17 ноября 2026 база сайта
+        # отвечала ошибкой на все подряд, отказ читался как «уже показал
+        # другой», и карточка gcdfb645f получила отметки показа, хотя ее никто
+        # не показывал. Любая другая ошибка базы уходит вызывающему как ошибка.
+        if db.get(AppSetting, CONSOLE_SHOWN_PREFIX + card_id) is not None:
+            return False
+        raise
 
 
 def _release_show(db, card_id: str) -> None:
@@ -2339,8 +2345,13 @@ def _console_show_ready_cards() -> dict:
             if twin:
                 logger.warning("карточка %s не показана: двойник %s", card["id"], twin[0][0])
                 continue
-            if not _claim_show(db, card["id"]):
-                continue  # показ уже занят другим потоком или процессом
+            try:
+                if not _claim_show(db, card["id"]):
+                    continue  # показ уже занят другим потоком или процессом
+            except SQLAlchemyError as exc:
+                logger.error("показ карточки %s не занят: база сайта ответила ошибкой (%s) — "
+                             "карточка не показана и не помечена", card["id"], type(exc).__name__)
+                break
             common = {"chat_id": chats[0], "disable_web_page_preview": True}
             if thread:
                 common["message_thread_id"] = thread
@@ -2407,9 +2418,15 @@ def moderation_shown_record(req: ModerationShownIn, db=Depends(get_db)):
         # Рутина спрашивает ДО отправки: показ достается тому, кто первым
         # вставил ключ (13 ноября 2026: карточку «Библио-Глобуса» показали и
         # сервер, и рутина — каждый проверил память до показа другого).
-        with _SHOW_LOCK:
-            claimed = [cid for cid in (str(i.get("id") or "").strip() for i in req.cards)
-                       if cid and _claim_show(db, cid)]
+        try:
+            with _SHOW_LOCK:
+                claimed = [cid for cid in (str(i.get("id") or "").strip() for i in req.cards)
+                           if cid and _claim_show(db, cid)]
+        except SQLAlchemyError as exc:
+            # Сбой базы — не «показал другой»: рутина по коду ответа карточку не
+            # шлет и отметок показа не ставит (17 ноября 2026).
+            logger.error("захват показа не записан: %s", type(exc).__name__)
+            return JSONResponse({"error": "база сайта не отвечает"}, status_code=503)
         return {"claimed": claimed}
     n = 0
     for item in req.cards:

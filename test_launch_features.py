@@ -2591,6 +2591,59 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     assert client.get("/api/moderation/shown", params={"token": "чужой"}).status_code == 404
 
 
+class _BrokenDb:
+    """Сессия базы, у которой запись не проходит: как 17 ноября 2026, когда база
+    сайта отвечала ошибкой на все подряд. `found` — что вернет чтение ключа."""
+
+    def __init__(self, found=None):
+        self.found, self.rolled_back = found, 0
+
+    def add(self, row):
+        pass
+
+    def commit(self):
+        from sqlalchemy.exc import OperationalError
+        raise OperationalError("INSERT", {}, Exception("база не отвечает"))
+
+    def rollback(self):
+        self.rolled_back += 1
+
+    def get(self, model, key):
+        return self.found
+
+    def close(self):
+        pass
+
+
+def test_show_claim_says_busy_only_when_the_key_exists(client, monkeypatch):
+    """17 ноября 2026 (gcdfb645f): любая ошибка базы при захвате показа читалась как
+    «уже показал другой» — ручка отвечала 200 с пустым списком, и рутина ставила
+    карточке отметки показа. «Занято» — только когда ключ показа есть; иначе ошибка
+    с кодом, а сервер карточку не показывает и не помечает."""
+    from sqlalchemy.exc import SQLAlchemyError
+    _mod_env(monkeypatch)
+    assert console._claim_show(_BrokenDb(found=object()), "gbusy") is False
+    with pytest.raises(SQLAlchemyError):
+        console._claim_show(_BrokenDb(), "gfree")
+
+    def broken(db, card_id):
+        raise SQLAlchemyError("база не отвечает")
+    monkeypatch.setattr(console, "_claim_show", broken)
+    r = client.post("/api/moderation/shown", json={"token": "тайна", "claim": True, "cards": [{"id": "gfree"}]})
+    assert r.status_code == 503 and "claimed" not in r.json(), r.text
+    # Сервер сам при сбое базы карточку не шлет.
+    card = {"id": "gdown1", "title": "А купил Б", "status": "Закрыта", "date": "2026-11-16", "type": "M&A",
+            "ind": "Ритейл", "buyer_name": "ООО «А»", "asset": "сеть «Б»", "reviewed": "2026-11-16",
+            "accepted": "2026-11-16", "second_read": "2026-11-16", "eco": {}, "law": {},
+            "src": [["Ъ", "https://www.kommersant.ru/doc/7"]]}
+    monkeypatch.setattr(core, "_read_json", lambda path, default: {"cards": [card]} if "pending" in path else default)
+    monkeypatch.setattr(main.base_data, "promoted", lambda: {"deals": [], "companies": {}})
+    sent = []
+    monkeypatch.setattr(main.notification_service, "tg_api",
+                        lambda method, **payload: sent.append(payload) or {"ok": True, "result": {"message_id": 1}})
+    assert main.console_show_ready_cards() == {"shown": 0} and sent == []
+
+
 def test_server_does_not_show_card_twin_of_a_base_deal(client, monkeypatch):
     """13 ноября 2026 («К+» / «Комфорт»): принятая карточка о сделке, которая уже
     есть в базе (та же статья, сумма и дата), сама в консоль не уходит; с причиной

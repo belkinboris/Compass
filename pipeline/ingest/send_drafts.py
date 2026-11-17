@@ -314,7 +314,12 @@ def claim_show(card_id):
     """Занять показ карточки на сайте ДО отправки. True — показ наш; False —
     карточку уже показал сервер или другой прогон; None — сайт не ответил
     (тогда НЕ шлем: сервер покажет карточку сам, а двойной показ хуже
-    отложенного). Без токена (тесты, сухой прогон) — True."""
+    отложенного). Без токена (тесты, сухой прогон) — True.
+
+    False — только когда память сайта карточку ПОМНИТ. 17 ноября 2026 база
+    сайта отвечала ошибкой, захват вернул пустой список, это прочиталось как
+    «показал другой» — и карточка gcdfb645f получила обе отметки показа, хотя
+    ее не показывал никто. Отказ без записи о показе — это сбой, а не «занято»."""
     token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
     if not token:
         return True
@@ -327,7 +332,9 @@ def claim_show(card_id):
                 body = r.json()
                 if 'claimed' not in body:      # сервер старой версии: показ записан, шлем как раньше
                     return True
-                return card_id in body['claimed']
+                if card_id in body['claimed']:
+                    return True
+                return False if card_id in ((site_shown() or {}).get('cards') or {}) else None
         except Exception as e:                               # noqa: BLE001
             print('занять показ на сайте не удалось: %s' % e)
         time.sleep(3)

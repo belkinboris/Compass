@@ -12296,3 +12296,106 @@ def test_console_topics_tell_unreachable_from_missing(monkeypatch):
     monkeypatch.setattr(console_topics, "_cache", None)
     monkeypatch.setattr(httpx, "get", lambda *a, **k: Ok())
     assert console_topics.thread_id("decision") is None and console_topics.unreachable() is False
+
+
+# ---- Показ в консоли: захват на сайте, сбой базы, сбой отправки (ревизия 17 ноября 2026) ----
+
+class _FakeSite:
+    """Память показа на сайте для тестов send_drafts: захват, запись, снятие."""
+
+    def __init__(self):
+        self.cards, self.mode, self.calls = {}, "ok", []
+
+    @staticmethod
+    def _now():
+        from datetime import datetime
+        return datetime.utcnow().isoformat(timespec="seconds")
+
+    def shown(self):
+        return None if self.mode == "down" else {"cards": {k: dict(v) for k, v in self.cards.items()}, "raw": []}
+
+    def post(self, url, json=None, timeout=None):
+        self.calls.append((url.rsplit("/api/moderation/", 1)[-1], json))
+        ids = [c["id"] for c in (json or {}).get("cards") or []]
+
+        class R:
+            status_code = 200
+            body = {}
+
+            def json(self):
+                return self.body
+        r = R()
+        if self.mode == "down":
+            r.status_code = 503
+        elif self.mode == "empty":          # сервер старой версии при сбое базы: 200 и пустой список
+            r.body = {"claimed": []}
+        elif url.endswith("/shown/release"):
+            for i in ids:
+                self.cards.pop(i, None)
+            r.body = {"released": len(ids)}
+        elif (json or {}).get("claim"):
+            r.body = {"claimed": [i for i in ids if i not in self.cards]}
+            for i in r.body["claimed"]:
+                self.cards[i] = {"shown_at": self._now()}
+        else:
+            for c in (json or {}).get("cards") or []:
+                self.cards.setdefault(c["id"], {"shown_at": self._now()})
+                if c.get("post_preview"):
+                    self.cards[c["id"]]["post_preview"] = c["post_preview"]
+            r.body = {"recorded": len(ids)}
+        return r
+
+
+def _send_drafts_with_site(monkeypatch, tmp_path, send_ok=lambda text: True):
+    """send_drafts.main(write=True) на одной готовой карточке gS и подменном сайте."""
+    import httpx
+    import promote
+    import send_drafts
+    card = {"id": "gS", "title": "Сделка S", "status": "Закрыта", "date": "2026-10-27", "type": "M&A", "ind": "Банки",
+            "buyer_name": "ООО «С»", "asset": "сеть «Т»", "src": [["Ъ", "https://www.kommersant.ru/doc/3"]],
+            "reviewed": "2026-10-27", "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {}}
+    pending_path, state_path = tmp_path / "pending.json", tmp_path / "state.json"
+    pending_path.write_text(json.dumps({"cards": [card]}, ensure_ascii=False), encoding="utf-8")
+    state_path.write_text("{}", encoding="utf-8")
+    site, sent = _FakeSite(), []
+    monkeypatch.setattr(send_drafts, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "PENDING", str(pending_path))
+    monkeypatch.setattr(promote, "STATE", str(state_path))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "t")
+    monkeypatch.setenv("MODERATION_TOKEN", "тайна")
+    monkeypatch.setattr(send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(send_drafts, "PAUSE", 0)
+    monkeypatch.setattr(send_drafts.time, "sleep", lambda s: None)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: None)
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "site_shown", site.shown)
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(send_drafts, "goes_to_channel", lambda c: True)
+    monkeypatch.setattr(send_drafts.console_topics, "thread_id", lambda kind: None)
+    monkeypatch.setattr(send_drafts.card_twin, "blocked", lambda *a, **k: None)
+    monkeypatch.setattr(httpx, "post", site.post)
+    monkeypatch.setattr(send_drafts, "send_one",
+                        lambda client, token, chat, text, kb, thread=None, html=False:
+                        bool(send_ok(text)) and (sent.append(text) or True))
+    read = lambda: json.loads(pending_path.read_text(encoding="utf-8"))["cards"][0]
+    return send_drafts, site, sent, read
+
+
+def test_site_failure_on_claim_is_not_read_as_shown_by_another(monkeypatch, tmp_path):
+    """17 ноября 2026 (gcdfb645f): база сайта отвечала ошибкой, захват показа вернул
+    пустой список, рутина прочитала это как «показал другой» и поставила карточке обе
+    отметки показа — хотя карточку не показывал никто. Отметки — только когда память
+    сайта карточку помнит; сбой и отказ без записи — «не шлю и не помечаю»."""
+    send_drafts, site, sent, read = _send_drafts_with_site(monkeypatch, tmp_path)
+    for mode in ("empty", "down"):
+        site.mode = mode
+        assert send_drafts.claim_show("gS") is None, mode
+    site.mode = "empty"
+    send_drafts.main(write=True)
+    assert sent == [] and not read().get("draft_sent") and not read().get("post_draft_sent"), read()
+    # Память сайта карточку помнит — это и есть явное «показал другой».
+    site.mode = "ok"
+    site.cards["gS"] = {"shown_at": "2026-11-17T09:00:00", "post_preview": "<b>Пост</b>"}
+    assert send_drafts.claim_show("gS") is False
+    send_drafts.main(write=True)
+    assert sent == [] and read().get("draft_sent") and read().get("post_draft_sent")
