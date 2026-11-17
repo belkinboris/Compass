@@ -357,7 +357,9 @@
     ]
    },
    "accepted": "2026-11-17",
-   "accepted_hash": "83e29aa901e0.cfd056"
+   "accepted_hash": "83e29aa901e0.cfd056",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g7a31c3cc",
@@ -394,7 +396,9 @@
    "from_raw": {
     "draft_id": "d43828454",
     "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей"
-   }
+   },
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gcdfb645f",
