@@ -121,34 +121,6 @@
    ]
   },
   {
-   "draft_id": "d43828454",
-   "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261116/prisma-2131803233.html"
-    ]
-   ],
-   "sum": "800 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -178,34 +150,6 @@
    ]
   },
   {
-   "draft_id": "d90142028",
-   "title": "Российские подразделения Porsche могут сменить собственника",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9111156"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d48515120",
    "title": "В автопроме усомнились в покупке активов Porsche в России кредитором Volkswagen",
    "date": "2026-11-17",
@@ -229,77 +173,46 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Российские подразделения Porsche могут сменить собственника» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d06362654",
-   "title": "77% уязвимостей, выставленных на продажу киберпреступниками, так и не получили публичного описания",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-17_77_uyazvimostejvystavlennyh"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d71090907",
-   "title": "Попова: в РФ сократилась продажа просроченной молочной продукции в 200 раз",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28325195"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d27844100",
-   "title": "Tenet обновил рекорд по месячным продажам в Петербурге",
+   "draft_id": "d96916805",
+   "title": "Nvidia инвестировала в стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
    "date": "2026-11-17",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/17/tenet-obnovil-rekord-po-mesjachnim"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/nvidia-investirovala-v-startap-noeri-razrabatyvayushhij-samosovershenstvuyushhijsya-ii/"
+    ]
+   ],
+   "sum": "$110 млн",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": "Nvidia",
+   "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Nvidia",
+    "asset": "стартап Noeri, разрабатывающий самосовершенствующийся ИИ",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d48556168",
+   "title": "Продажи вторички в Москве за 10 месяцев остались на уровне прошлого года",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261117/chislo-2132060696.html"
     ]
    ],
    "sum": null,
@@ -317,46 +230,18 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64659474",
-   "title": "В Тверском районе Москвы выставили на торги десять коммерческих помещений",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/17/v-tverskom-rajone-moskvy-vystavili-na-torgi-desyat-kommercheskih-pomeshhenij"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g8e847626 (общие редкие слова: 10, москве, продаж) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d17111425",
-   "title": "«В России на пенсию я бы столько не купила»: 73-летняя Зоя Тимофеевна впервые выехала за границу и удивилась ценам",
+   "draft_id": "d99415247",
+   "title": "Jeland возглавил рейтинг новых автобрендов в России — продажи приблизились к 13 тыс. машин",
    "date": "2026-11-17",
    "src": [
     [
-     "web:74.ru",
-     "https://74.ru/text/world/2026/11/17/76770466/"
+     "web:rb.ru",
+     "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
     ]
    ],
    "sum": null,
@@ -367,10 +252,10 @@
      "kind": "closed",
      "date": "2026-11-17",
      "title": "Сделка завершена",
-     "note": "Старушка так вдохновилась, увидев море и другую культуру, что завела блог",
+     "note": "Jeland стал лидером по продажам среди новых автомобильных брендов в России в 2026 году, сообщил директор агентства «Автостат» Сергей Целиков. К середине ноября в стране продали почти 13 тыс. автомобилей этой марки. По данным эксперта, бренд уже несколько…",
      "source": [
-      "web:74.ru",
-      "https://74.ru/text/world/2026/11/17/76770466/"
+      "web:rb.ru",
+      "https://rb.ru/news/jeland-vozglavil-rejting-novyh-avtobrendov-v-rossii-prodazhi-priblizilis-k-13-tys-mashin/"
      ]
     }
    ],
@@ -389,13 +274,205 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
+   "draft_id": "d61529578",
+   "title": "МСБ привлек 5 млрд рублей на бирже при помощи Корпорации МСП",
+   "date": "2026-11-17",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
+     "web:ria.ru",
+     "https://ria.ru/20261117/msb-2132064903.html"
+    ]
+   ],
+   "sum": "5 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСБ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСБ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d02446445",
+   "title": "В России отреагировали на предложение Швейцарии принять новый раунд переговоров по Украине",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/17/v-rossii-otreagirovali-na-predlozhenie-shveytsarii-prinyat-novyy-raund-peregovorov-po-ukraine/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63890190",
+   "title": "Роспечать ушла, аукционы провалились: Екатеринбург оставил бабушек без сканвордов",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144875"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76138511",
+   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/style/2026/11/17/76769997/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
+     "source": [
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/style/2026/11/17/76769997/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d75172649",
+   "title": "Купили самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/style/2026/11/17/76770003/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-17",
+     "title": "Сделка завершена",
+     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/style/2026/11/17/76770003/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "самый дорогой, а подмышки мокрые? В чем разница между дезодорантом и антиперспирантом",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d38619860",
+   "title": "В Екатеринбурге в новогодние праздники запретят продавать алкоголь. Где будут действовать ограничения",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/gorod/2026/11/17/76771249/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d56058626",
+   "title": "Ночная распродажа продуктов снова пройдет в Краснодаре — что это такое?",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/17/76771289/"
     ]
    ],
    "sum": null,

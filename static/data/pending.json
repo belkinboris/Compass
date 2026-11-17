@@ -395,6 +395,123 @@
     "draft_id": "d43828454",
     "title": "Торговый комплекс Prisma в Санкт-Петербурге продают за 800 млн рублей"
    }
+  },
+  {
+   "id": "gcdfb645f",
+   "date": "2026-11-17",
+   "title": "«Логика молока» покупает бренд протеиновых продуктов Protein Rex",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28325583"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "бренд протеиновых продуктов Protein Rex",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-17",
+     "title": "Переговоры",
+     "note": "Компания планирует развивать продуктовую линейку, расширять узнаваемость бренда и наращивать объемы производства",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/28325583"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Логика молока»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28325583"
+     }
+    ],
+    "target": [
+     {
+      "value": "бренд протеиновых продуктов Protein Rex",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28325583"
+     }
+    ]
+   },
+   "buyer": "g53717e9e",
+   "pending_since": "2026-11-17T08:52:55+00:00"
+  },
+  {
+   "id": "g678f4ea0",
+   "date": "2026-11-17",
+   "title": "Нижегородец продает бумажный пакет из «Макдоналдса» за 185 тысяч рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Abnews.ru",
+     "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Нижегородец",
+   "asset": "бумажный пакет из «Макдоналдса»",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "бумажный пакет из «Макдоналдса»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Нижегородец",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abnews.ru/volga/news/nizhniy-novgorod/2026/11/17/nizhegorodecz-prodaet-bumazhnyj-paket-iz-makdonaldsa-za-185-tysyach-rublej"
+     }
+    ]
+   },
+   "pending_since": "2026-11-17T08:52:55+00:00"
   }
  ]
 }
