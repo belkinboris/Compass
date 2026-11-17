@@ -261,10 +261,10 @@ def main(argv=None) -> int:
     for cls in sorted(per, key=lambda c: PRIORITY.index(c) if c in PRIORITY else 99):
         c = per[cls]
         print("%-22s %6d %6d %6d %6d"
-              % (cls, sum(c.values()), c["ждёт"], c["done"], c["неактуальна"] + c["ушла"]))
+              % (cls, sum(c.values()), c["ждет"], c["done"], c["неактуальна"] + c["ушла"]))
     print("-" * 50)
     print("%-22s %6d %6d %6d %6d"
-          % ("итого", len(rs), tot["ждёт"], tot["done"], tot["неактуальна"] + tot["ушла"]))
+          % ("итого", len(rs), tot["ждет"], tot["done"], tot["неактуальна"] + tot["ушла"]))
     return 0
 
 

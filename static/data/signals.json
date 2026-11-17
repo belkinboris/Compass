@@ -15,6 +15,34 @@
    "strength": "strong"
   },
   {
+   "id": "s78bbe0b65",
+   "company_id": "g163cfc8b",
+   "date": "2026-11-16",
+   "kind": "for_sale",
+   "summary": "Циан — обсуждается продажа компании или доли; возможный покупатель — Альфа-Банк",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9110774"
+   ],
+   "origin": "card",
+   "deal_id": "g4290fc7a",
+   "strength": "strong"
+  },
+  {
+   "id": "s1810b9686",
+   "company_id": "ga2cfae5b",
+   "date": "2026-11-16",
+   "kind": "buy",
+   "summary": "Альфа-Банк — обсуждается покупка: Циан",
+   "source": [
+    "Коммерсантъ",
+    "https://www.kommersant.ru/doc/9110774"
+   ],
+   "origin": "card",
+   "deal_id": "g4290fc7a",
+   "strength": "normal"
+  },
+  {
    "id": "s1858c08a7",
    "company_id": "g5ff0a3de",
    "date": "2026-11-13",
