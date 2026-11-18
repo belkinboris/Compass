@@ -454,7 +454,7 @@ button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
    ней. На экране ассистента внизу поле ввода — там плашки нет. */
 .cookie-note{position:fixed;z-index:60;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);max-width:620px;margin:0 auto;box-sizing:border-box;
   display:flex;align-items:center;gap:14px;padding:12px 14px 12px 16px;border-radius:8px;background:var(--accent-deep);color:#C4D2CA;
-  border:1px solid rgba(243,241,233,.16);box-shadow:0 18px 52px rgba(10,27,21,.28);font-size:13px;line-height:1.45}
+  border:1px solid rgba(243,241,233,.16);box-shadow:0 4px 18px rgba(10,27,21,.14);font-size:13px;line-height:1.45}
 .cookie-note p{margin:0;flex:1;min-width:0;overflow-wrap:break-word}
 .cookie-note a{color:var(--bronze-light);text-decoration:underline;text-underline-offset:2px}
 .cookie-note .cookie-ok{flex:0 0 auto;padding:7px 16px;border:1px solid rgba(243,241,233,.45);border-radius:99px;background:transparent;color:var(--ivory);font:inherit;font-size:13px;cursor:pointer}
@@ -1294,7 +1294,9 @@ body.has-cookie-note .ai-fab{bottom:calc(env(safe-area-inset-bottom,0px) + 16px 
        попробуй убрать… блок поменьше по высоте, кнопка квадратная и одного
        размера с панелью»). */
     border:0;
-    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06)}
+    /* Тень мягкая и ровная со всех сторон: прежняя (12px вниз, 14%) давала
+       резкую темную полосу под панелью (владелец, 18 ноября 2026). */
+    box-shadow:0 2px 16px rgba(15,43,33,.08),0 0 1px rgba(15,43,33,.10)}
   /* Кнопка ассистента — то же стекло и та же тень, что у панели (владелец,
      27 октября 2026, вечер); компас на светлом стекле темно-зеленый. */
   .ai-fab{width:60px;height:60px;border-radius:20px}
@@ -2996,7 +2998,7 @@ a.fns-badge::after{content:" ↗";letter-spacing:0}
   body .compare-tray{bottom:calc(env(safe-area-inset-bottom,0px) + 80px);left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));
     width:auto;transform:none;border-radius:18px;border:0;color:var(--ink);
     background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(28px) saturate(1.8);backdrop-filter:blur(28px) saturate(1.8);
-    box-shadow:0 12px 32px rgba(15,43,33,.14),0 1px 2px rgba(15,43,33,.06)}
+    box-shadow:0 2px 16px rgba(15,43,33,.08),0 0 1px rgba(15,43,33,.10)}
   body .compare-tray-text{color:var(--muted)}body .compare-tray-text b{color:var(--ink)}
   body .compare-tray a.chip,body .compare-tray a.chip:hover{background:var(--accent-deep)!important;border:1px solid var(--accent-deep)!important;color:#fff!important;border-radius:999px!important;padding:9px 16px!important;font-size:12px;text-decoration:none;box-shadow:none}
   body .compare-tray a.chip::after,body .compare-tray a.chip::before{display:none}
