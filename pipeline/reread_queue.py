@@ -85,7 +85,7 @@ BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format'
             'why_fragment', 'truncated', 'bare_surname', 'title_style', 'parties_missing', 'jv_participants',
             'aggregator_cites_primary',
             # марафон вычитки, 13 ноября 2026 (docs/card_acceptance.md): сторона «менеджмент», оценка эксперта в sum
-            'party_placeholder', 'sum_is_expert_estimate')
+            'party_placeholder')  # sum_is_expert_estimate выключена владельцем 18 ноября 2026
 
 
 # Короткая проверка (владелец, 9 ноября 2026: «пройдись короткой проверкой по 273
@@ -99,7 +99,7 @@ SHORT_FIELDS = ('title', 'eco.sum', 'eco.share')
 SHORT_GENERAL = ('parties', 'status_date', 'seller', 'numbers', 'registry', 'other_deal', 'advisers', 'primary_source')
 SHORT_BLOCKING = ('title_standard', 'share_missing', 'asset_description', 'sum_format', 'title_word_share', 'share_form', 'date_unbased', 'adviser_not_deal', 'sum_fields_differ',
                   'parties_missing', 'jv_participants', 'party_legal_form', 'aggregator_cites_primary',
-                  'party_placeholder', 'sum_is_expert_estimate')
+                  'party_placeholder')
 SHORT_ADVISERS_Q = ('Консультанты (law.adv, eco.finadv): каждый подтвержден источником, у роли назван клиент '
                     '(или «одной из сторон», если ни один источник и устройство сделки его не дают)?')
 

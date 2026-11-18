@@ -11984,7 +11984,8 @@ def test_reread_marathon_findings_on_real_cards():
            "eco": {"sum": "300–350 млн ₽ (по оценке)", "val": "Конов цену не назвал. Гендиректор «INFOLine-Аналитики» "
                    "Михаил Бурмистров оценивает покупку в 300–350 млн ₽."}}
     assert ac.sum_is_expert_estimate(est)
-    assert "sum_is_expert_estimate" in {c for c, _t in ac.marathon_findings(est, {})}
+    # Владелец, 18 ноября 2026: оценка эксперта в сумме — правильно; находка выключена.
+    assert "sum_is_expert_estimate" not in {c for c, _t in ac.marathon_findings(est, {})}
     # g0bbc9e9e: «по неофициальным данным могла составить» — неофициальная цена сделки, не блокирует
     unoff = dict(est, sum="≈2 млрд ₽ (по оценке)", eco={"val": "Стороны цену не раскрывают; по неофициальным данным, "
                                                          "она могла составить около 2 млрд ₽."})
@@ -12012,7 +12013,8 @@ def test_reread_marathon_findings_on_real_cards():
     got = ac.late_event_in_terms(late, today="2026-11-13")
     assert [f for f, _s in got] == ["law.struct"] and "Ленте" in got[0][1]
     # блокирующие — только две; подсказки отметку не держат
-    assert {"party_placeholder", "sum_is_expert_estimate"} <= set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    assert "party_placeholder" in set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    assert "sum_is_expert_estimate" not in set(rq.BLOCKING) | set(rq.SHORT_BLOCKING)
     for hint in ("sum_estimate_prose", "date_is_article_day", "auction_in_text", "late_event_in_terms"):
         assert hint not in rq.BLOCKING
 
