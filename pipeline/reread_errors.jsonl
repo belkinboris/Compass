@@ -5177,3 +5177,37 @@
 {"id": "g42fbeaf2", "field": "eco.context", "class": "unsupported_claim", "was": "«заберут имущество», «перекидывает выручку»", "now": "арест в пределах 72,29 млн ₽; перераспределяет", "tag": "d18b"}
 {"id": "g9b48b9ac", "field": "law.struct", "class": "other", "was": "профессиональные инвесторы", "now": "крупные институциональные инвесторы (АК&М)", "tag": "d18b"}
 {"id": "g9b48b9ac", "field": "eco.val", "class": "language", "was": "«Рынок принял новость хорошо»", "now": "снято, оставлен рост акций", "tag": "d18b"}
+{"id": "gb5c49ac1", "field": "events.1", "class": "other", "was": "этап «Переговоры» с заметкой, оборванной многоточием", "now": "повторное сообщение Mergers.ru о том же заявлении", "tag": "d18a"}
+{"id": "gb5c49ac1", "field": "law.struct", "class": "unsupported_claim", "was": "ТЦ — крупнейший актив Fort Group", "now": "один из двух крупнейших активов", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "type", "class": "wrong_type", "was": "M&A (28% без контроля)", "now": "Инвестиция", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "asset", "class": "wrong_target", "was": "28% в дочерней компании Emperium", "now": "Emperium; доля — в eco.share", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "law.adv", "class": "adviser_wrong", "was": "консультантов нет", "now": "ККМП — юрконсультант продавца (Sitronics Group)", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "eco.rationale", "class": "invented_rationale", "was": "покупка «продолжает договоренность на ПМЭФ»", "now": "—; договоренность — фактом в контексте", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "events.0.note", "class": "unsupported_claim", "was": "ВТБ впервые зашел в судостроение", "now": "доля перешла к группе ВТБ", "tag": "d18a"}
+{"id": "gcc6afd66", "field": "eco.target_fin", "class": "other", "was": "модели судов в финансах", "now": "—; описание — в контексте", "tag": "d18a"}
+{"id": "gacef0a9d", "field": "title", "class": "title_standard", "was": "«Черкизово» купило СГЦ «Вишневский»: 99% получила одна дочерняя компания холдинга, 1% — другая", "now": "«Черкизово» купило СГЦ «Вишневский»", "tag": "d18a"}
+{"id": "gacef0a9d", "field": "law.adv", "class": "adviser_wrong", "was": "консультантов нет", "now": "ALUMNI Partners — юрконсультант покупателя", "tag": "d18a"}
+{"id": "gacef0a9d", "field": "law.appr", "class": "other", "was": "— (одобрение ФАС только в прозе)", "now": "Сделку одобрила ФАС.", "tag": "d18a"}
+{"id": "gacef0a9d", "field": "eco.target_fin", "class": "other", "was": "род занятий в финансах", "now": "только мощность; род занятий — в контексте", "tag": "d18a"}
+{"id": "g0a1f1895", "field": "seller", "class": "wrong_seller", "was": "Инна Сухотина (бенефициар)", "now": "Lonago Enterprises Ltd. (ЕГРЮЛ)", "tag": "d18a"}
+{"id": "g0a1f1895", "field": "buyer", "class": "wrong_buyer", "was": "ООО «ГЕМ Инвест»", "now": "ООО «ГИ-2» (ЕГРЮЛ)", "tag": "d18a"}
+{"id": "g0a1f1895", "field": "title", "class": "title_standard", "was": "«ГЕМ Инвест» купил сеть Modi у наследников Игоря Сосина", "now": "«ГИ-2» купил сеть Modi", "tag": "d18a"}
+{"id": "g0a1f1895", "field": "law.adv", "class": "adviser_wrong", "was": "роль «Юристы»", "now": "Юридический консультант покупателя", "tag": "d18a"}
+{"id": "g627ecd3f", "field": "seller", "class": "wrong_seller", "was": "Александр Раппопорт (ООО «Рэвард Инвест»)", "now": "ООО «Рэвард Инвест»", "tag": "d18a"}
+{"id": "g627ecd3f", "field": "title", "class": "title_standard", "was": "…купила 90,59% ООО «ТЗТ» и ООО «ТСРЗ» у Александра Раппопорта", "now": "«Евразия-Логистика» купила 90,59% Таганрогского зернового терминала", "tag": "d18a"}
+{"id": "g627ecd3f", "field": "law.adv", "class": "adviser_wrong", "was": "консультантов нет", "now": "BIRCH LEGAL — юрконсультант покупателя", "tag": "d18a"}
+{"id": "g627ecd3f", "field": "eco.rationale", "class": "invented_rationale", "was": "терминал дает «свою точку выхода на экспорт»", "now": "по неофициальным данным: для развития транспортных активов Желнова", "tag": "d18a"}
+{"id": "gde2618e8", "field": "title", "class": "title_standard", "was": "Purmo Group передала контролирующий пакет российского бизнеса", "now": "Российская инвесткомпания купила российский бизнес Purmo Group", "tag": "d18a"}
+{"id": "gde2618e8", "field": "asset", "class": "wrong_target", "was": "две дочерние компании, производящие радиаторы", "now": "ZAO EVRA Varme RUS и Evroradiators LLC", "tag": "d18a"}
+{"id": "gde2618e8", "field": "law.appr", "class": "other", "was": "— (согласование подкомиссии только в прозе)", "now": "подкомиссия по иностранным инвестициям", "tag": "d18a"}
+{"id": "g60130b7f", "field": "title", "class": "title_standard", "was": "…АО «Прогресс» (бренды «ФрутоНяня» и «Липецкий бювет»)", "now": "«Румелко» купил контролирующий пакет «Прогресса»", "tag": "d18a"}
+{"id": "g60130b7f", "field": "law.adv", "class": "adviser_wrong", "was": "консультантов нет (ККМП только в прозе)", "now": "ККМП — юрконсультант покупателя", "tag": "d18a"}
+{"id": "g60130b7f", "field": "law.struct", "class": "other", "was": "описание работы юристов", "now": "механика контроля через АО «Прогресс Капитал»", "tag": "d18a"}
+{"id": "g60130b7f", "field": "companies.g515248f7.desc", "class": "profile_text", "was": "«Владеет 21,51% ООО «Румелко-Агро»»", "now": "снято", "tag": "d18a"}
+{"id": "g9e9c96fd", "field": "law.struct", "class": "other", "was": "описание работы юристов", "now": "механика: продана ООО «Октан плюс альфа»", "tag": "d18a"}
+{"id": "g9e9c96fd", "field": "eco.val", "class": "unsupported_claim", "was": "«по оценке участников рынка»", "now": "автор оценки не назван", "tag": "d18a"}
+{"id": "g05d87236", "field": "src", "class": "aggregator_source", "was": "первыми пересказы Ведомостей", "now": "Ведомости первыми", "tag": "d18a"}
+{"id": "g05d87236", "field": "law.adv", "class": "adviser_wrong", "was": "консультантов нет", "now": "ALUMNI Partners — юрконсультант продавца", "tag": "d18a"}
+{"id": "g0c7ad0fb", "field": "title", "class": "title_standard", "was": "Фонд Ольги Белявцевой покупает склад у NK Group", "now": "Evermount Capital Group покупает склад Everdom у NK Group", "tag": "d18a"}
+{"id": "g0c7ad0fb", "field": "eco.context", "class": "unsupported_claim", "was": "склад — первый проект фонда в складской недвижимости", "now": "снято", "tag": "d18a"}
+{"id": "g0c7ad0fb", "field": "law.adv", "class": "adviser_wrong", "was": "нет Bright Rich | CORFAC International", "now": "консультант по сдаче склада в аренду", "tag": "d18a"}
