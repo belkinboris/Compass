@@ -5152,3 +5152,28 @@
 {"id": "gbde15bde", "field": "sum", "class": "sum_meaning", "was": "427,26 млн ₽ (начальная цена аукциона)", "now": "Не раскрыта; начальная цена — в eco.val", "tag": "r1117a"}
 {"id": "gbde15bde", "field": "title", "class": "title_standard", "was": "ДОМ.РФ выставил на торги территорию бывшего завода «39 Арсенал» в Перми за 427,26 млн рублей", "now": "ДОМ.РФ выставил на торги территорию бывшего завода «39 Арсенал» в Перми", "tag": "r1117a"}
 {"id": "g9018f8c8", "field": "eco.share", "class": "wrong_share", "was": "100% акций АО «Торговый дом „Эра“», владельца сети «Улыбка радуги»", "now": "100% акций АО «Торговый дом «Эра»»", "tag": "r1117a"}
+{"id": "g9878a8ba", "field": "buyer_name", "class": "wrong_buyer", "was": "«Российский менеджмент» без юрлица", "now": "ООО «Подряд» (99,8%, ЕГРЮЛ 28.12.2023)", "tag": "d18b"}
+{"id": "g9878a8ba", "field": "date", "class": "wrong_date", "was": "2023", "now": "2023-12-28 (ЕГРЮЛ)", "tag": "d18b"}
+{"id": "g9878a8ba", "field": "events.0.date", "class": "wrong_date", "was": "2024-03-01 (день поста BIRCH)", "now": "2023-12-28", "tag": "d18b"}
+{"id": "g9878a8ba", "field": "eco.share", "class": "wrong_share", "was": "Доля в ООО «Мантсинен»", "now": "100% доли в ООО «Мантсинен»", "tag": "d18b"}
+{"id": "g9878a8ba", "field": "law.appr", "class": "unsupported_claim", "was": "«именно это определило условия сделки»", "now": "Согласовала подкомиссия Правкомиссии", "tag": "d18b"}
+{"id": "g9878a8ba", "field": "title", "class": "title_standard", "was": "Российский менеджмент купил «Мантсинен» у финской Mantsinen Group", "now": "ООО «Подряд» купило «Мантсинен» у Mantsinen Group", "tag": "d18b"}
+{"id": "g0966b2e2", "field": "events.0.date", "class": "wrong_date", "was": "2022-07-04 (день поста ALUMNI)", "now": "2022-05-30", "tag": "d18b"}
+{"id": "g0966b2e2", "field": "title", "class": "title_standard", "was": "Местный менеджмент … у материнской Jones Lang LaSalle", "now": "Менеджмент купил 100% «Джонс Лэнг ЛаСаль» у Jones Lang LaSalle", "tag": "d18b"}
+{"id": "gb8a84b47", "field": "events.0.date", "class": "wrong_date", "was": "2026-11-10 (день статьи)", "now": "2026", "tag": "d18b"}
+{"id": "gbb89fc13", "field": "title", "class": "title_standard", "was": "… может купить фабрику НПЦ «ЭЛВИС» — «Элко»", "now": "… может купить «Элко» у НПЦ «ЭЛВИС»", "tag": "d18b"}
+{"id": "gbb89fc13", "field": "eco.target_fin", "class": "other", "was": "«пока небольшая», род занятий в показателях", "now": "только числа; подготовка производства — в контекст", "tag": "d18b"}
+{"id": "gbb89fc13", "field": "events.0.source", "class": "aggregator_source", "was": "Mergers.ru", "now": "CNews", "tag": "d18b"}
+{"id": "gbb23f0bb", "field": "eco.rationale", "class": "invented_rationale", "was": "мнение безымянных участников рынка как цель", "now": "—", "tag": "d18b"}
+{"id": "gbb23f0bb", "field": "eco.share", "class": "wrong_share", "was": "Доля в АО «Раундс» (размер не назван)", "now": "Акции АО «Раундс»", "tag": "d18b"}
+{"id": "g7a31c3cc", "field": "asset", "class": "wrong_target", "was": "участок и ТК Prisma (описание)", "now": "ООО «Инвест-Проект» и ООО «Инвест-Трейд»", "tag": "d18b"}
+{"id": "g7a31c3cc", "field": "seller", "class": "wrong_seller", "was": "ООО «Инвест-Проект» и ООО «Инвест-Трейд» (это предмет торгов)", "now": "Полина Волчек, Роман Генкин, Софья Волчек и Мария Генкина", "tag": "d18b"}
+{"id": "g7a31c3cc", "field": "eco.rationale", "class": "version_as_fact", "was": "мнения без имен («представитель организатора», рынок стагнирует)", "now": "Дарья Гончарова (РАД), Николай Антонов («МТЛ-Апарт»)", "tag": "d18b"}
+{"id": "g7a31c3cc", "field": "eco.context", "class": "unsupported_claim", "was": "«По оценке рынка»", "now": "оценка издания без выдуманной атрибуции", "tag": "d18b"}
+{"id": "gcdfb645f", "field": "title", "class": "title_standard", "was": "«Логика молока» купила ООО «Роял Кейк»", "now": "«Логика молока» купила производителя Protein Rex", "tag": "d18b"}
+{"id": "g4290fc7a", "field": "eco.share", "class": "wrong_share", "was": "доля + оценка Тищенко", "now": "Акции МКПАО «Циан» (оценка — в структуре)", "tag": "d18b"}
+{"id": "g42fbeaf2", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "90% доли в ООО «КЗ «Эксперт-Кабель»»", "tag": "d18b"}
+{"id": "g42fbeaf2", "field": "title", "class": "title_standard", "was": "купил доли четырех совладельцев", "now": "Сергей Кутенев купил 90% «Эксперт-Кабеля»", "tag": "d18b"}
+{"id": "g42fbeaf2", "field": "eco.context", "class": "unsupported_claim", "was": "«заберут имущество», «перекидывает выручку»", "now": "арест в пределах 72,29 млн ₽; перераспределяет", "tag": "d18b"}
+{"id": "g9b48b9ac", "field": "law.struct", "class": "other", "was": "профессиональные инвесторы", "now": "крупные институциональные инвесторы (АК&М)", "tag": "d18b"}
+{"id": "g9b48b9ac", "field": "eco.val", "class": "language", "was": "«Рынок принял новость хорошо»", "now": "снято, оставлен рост акций", "tag": "d18b"}

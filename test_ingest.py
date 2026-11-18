@@ -12231,6 +12231,10 @@ def test_raw_screen_refuses_to_drop_news_already_shown_or_decided(tmp_path, monk
     assert raw_screen.apply_drop(["dS"], "повтор", write=True) == 1
     assert raw_screen.apply_drop(["dD"], "повтор", write=True) == 1
     assert promote.load_state()["decided_raw"] == {}
+    # в смешанном списке показанная остается, остальные отсеиваются (18 ноября 2026)
+    _write_hold_file(tmp_path, "2026-11-16.json", drafts + [{"draft_id": "dX", "title": "Обзор рынка вейпов"}])
+    assert raw_screen.apply_drop(["dS", "dX"], "не сделка", write=True) == 0
+    assert promote.load_state()["decided_raw"] == {"dX": "auto-drop"}
 
 
 def test_private_reminder_reshows_the_same_items_in_the_console(monkeypatch, tmp_path):

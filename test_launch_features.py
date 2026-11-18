@@ -5687,3 +5687,11 @@ def test_a_post_without_a_decision_is_counted_however_long_it_waits(monkeypatch)
     assert [d["id"] for d in ops_status.waiting_posts(base)] == ["gwait-old", "gwait-new"]
     monkeypatch.setattr(main.base_data, "promoted", lambda: base)
     assert [d["id"] for d in console._waiting_posts()] == ["gwait-old", "gwait-new"]
+
+
+def test_regulatory_advisor_is_labelled_regulatory_in_the_team_block():
+    """«Регуляторный консультант» в роли подписан в «Команде сделки» как регуляторный, а не
+    юридический (владелец, 18 ноября 2026: ALUMNI Partners на карточке Ситибанка)."""
+    html = Path("static/index.html").read_text(encoding="utf-8")
+    assert 'const kindWord = /^\\s*регуляторн/i.test(it.role) ? "регуляторный" : it.kind;' in html
+    assert "${kindWord}${det?" in html
