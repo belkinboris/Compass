@@ -314,6 +314,130 @@
    ]
   },
   {
+   "draft_id": "d49790017",
+   "title": "В Абу-Даби на аукционе выставили на торги более 100 вещей Майкла Джексона",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28329575"
+    ]
+   ],
+   "sum": "$8,5 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20346492",
+   "title": "OpenAI выпустила рекордно мощные и дешевые ИИ-модели GPT-6.2 Astra и Sol прямо перед IPO Anthropic",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/openai-vypustila-rekordno-moshhnye-i-deshevye-ii-modeli-gpt-6-2-astra-i-sol-pryamo-pered-ipo-anthropic/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d41566919",
+   "title": "Быстро выкупили просадку",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/zeltser-875315612.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261118/zeltser-875315612.html"
+     ]
+    }
+   ],
+   "buyer_name": "Быстро",
+   "asset": "просадка",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Быстро",
+    "asset": "просадка",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d53855259",
+   "title": "Экс-президент АФК «Система» возглавит Cosmos Hotel Group перед IPO",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119341-eks-prezident-afk-sistema-vozglavit-cosmos-hotel-group-pered-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d03266066",
    "title": "Производственно-складской комплекс продают в Воронеже за 855 млн рублей",
    "date": "2026-11-18",
