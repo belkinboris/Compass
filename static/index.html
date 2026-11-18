@@ -8400,7 +8400,10 @@ function renderDeal(id, qs, previewCard){
         // уточнении, второй раз его не пишем; «цели» — наше слово.
         const det = humanRole(detail);
         const own = /^(юридическ|финансов|регуляторн)[а-яё]*\s+консультант/i.test(det);   // «Регуляторный консультант» — вид юридического (владелец, 14 ноября 2026)
-        const side = own ? esc(det.charAt(0).toUpperCase()+det.slice(1)) : `${it.kind}${det?` · ${esc(det)}`:""}`;
+        // «Регуляторный консультант» в роли — так и подписываем, а не «юридический» (владелец,
+        // 18 ноября 2026: ALUMNI Partners на карточке Ситибанка). В «Юристе» он остается: вид юридического.
+        const kindWord = /^\s*регуляторн/i.test(it.role) ? "регуляторный" : it.kind;
+        const side = own ? esc(det.charAt(0).toUpperCase()+det.slice(1)) : `${kindWord}${det?` · ${esc(det)}`:""}`;
         return `<div class="team-item"><div class="t-firm">${advFirmLink(it.name)}</div><div class="t-side">${side}</div></div>`;
       };
       const cols = ["buyer","seller","target","bank","other","none"].filter(k=>groups[k].length)
