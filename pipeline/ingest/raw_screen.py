@@ -189,9 +189,13 @@ def apply_drop(ids, reason, write):
     shown = set(str(x) for x in state.get('sent_raw') or []) | set(state.get('raw_sent_titles') or {})
     human = shown_or_decided(ids, shown)
     if human:
-        print('ОТКАЗ: новость уже показана в консоли или по ней есть решение — отсеивать нельзя: %s'
+        # Не трогаем только сами показанные; остальные из списка отсеиваем (18 ноября 2026:
+        # отказ на весь список пропустил в консоль семь новостей, которые надо было выбросить).
+        print('НЕ ТРОГАЮ: новость уже показана в консоли или по ней есть решение — решает человек: %s'
               % ', '.join(human))
-        return 1
+        ids = [i for i in ids if i not in human]
+        if not ids:
+            return 1
     print('ВЫКИДЫВАЮ (авто, причина: %s):' % (reason or '(без причины)'))
     for i in ids:
         print('  %s | %s' % (i, str(drafts_by_id[i].get('title'))[:100]))
