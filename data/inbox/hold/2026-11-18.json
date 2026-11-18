@@ -1119,6 +1119,158 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей, тюмени) — проверьте, не дубль ли"
    ]
+  },
+  {
+   "draft_id": "d12827682",
+   "title": "ГД одобрила в I чтении учет срока владения изъятой квартирой при продаже",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28331123"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93069334",
+   "title": "Чекунков спрогнозировал рост инвестиций в Дальний Восток и Арктику в 2027 году",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203913/chekunkov-sprognoziroval-rost-investitcii-v-dalnii-vostok-i-arktiku-v-2027-godu-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d07856869",
+   "title": "Розничная торговля замедляется, онлайн-продажи стабилизировались",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1376284.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d17567731",
+   "title": "Anthropic выходит на биржу. Чего ждет рынок от рекордного IPO?",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/finam/blog/1376310.php"
+    ]
+   ],
+   "sum": "$75 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-18",
+     "title": "Переговоры",
+     "note": "Anthropic готовится к IPO. Как ожидается, размещение состоится уже на этой неделе. Компания рассчитывает повторить или превзойти рекорд, установленный SpaceX в июне этого года. Тогда корпорация миллиардера Илона Маска выручила $75 млрд от продажи 555,56 млн…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/finam/blog/1376310.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42789441",
+   "title": "Где купить GTA VI в России в 2026 году: цена, дата выхода и предзаказ",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145346"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
