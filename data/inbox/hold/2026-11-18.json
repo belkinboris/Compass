@@ -235,380 +235,6 @@
    ]
   },
   {
-   "draft_id": "d47912262",
-   "title": "Пережившая казнь в США Пайк попросила руководство тюрьмы разрешить купить одежду",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28329121"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11510112",
-   "title": "На вырост: как бренду детской одежды перестроить продажи в эпоху маркетплейсов",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/18/na-virost-kak-brendu-detskoj"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d97898114",
-   "title": "В России продали каждый десятый Senat петербургской сборки",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/17/v-rossii-prodali-kazhdij-desjatij"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/11/17/v-rossii-prodali-kazhdij-desjatij"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "каждый десятый Senat петербургской сборки",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "каждый десятый Senat петербургской сборки",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d71020879",
-   "title": "Купили самый дорогой, а подмышки мокрые? В чём разница между дезодорантом и антиперспирантом",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76771261/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "Один борется с запахом, другой — с потом. Но есть нюансы, о которых стоит знать",
-     "source": [
-      "web:fontanka.ru",
-      "https://www.fontanka.ru/2026/11/18/76771261/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "самый дорогой, а подмышки мокрые? В чём разница между дезодорантом и антиперспирантом",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "самый дорогой, а подмышки мокрые? В чём разница между дезодорантом и антиперспирантом",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d28897290",
-   "title": "Эксперт раскрыла провоцирующие импульсивные покупки маркетинговые уловки",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203131/2026-11-18/ekspert-raskryla-provotciruiushchie-impulsivnye-pokupki-marketingovye-ulovki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "Распродажи и большие скидки нередко заставляют покупателей приобретать товары, которые изначально не входили в список необходимых покупок. На решения влияют ограниченные сроки акций, сообщения об остатках товаров, зачеркнутые цены и рекомендации блогеров. В…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2203131/2026-11-18/ekspert-raskryla-provotciruiushchie-impulsivnye-pokupki-marketingovye-ulovki"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d84990910",
-   "title": "Мошенники стали заставлять детей исчезать из дома ради выкупа",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203706/2026-11-18/moshenniki-stali-zastavliat-detei-ischezat-iz-doma-radi-vykupa"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d56419020",
-   "title": "Российские туристы уже могут приобрести туры в Египет на следующее лето",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/turisty-875311364.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63870546",
-   "title": "Т-Банк добавил возможность онлайн-подписания документов при покупке авто — сделки оформляют с помощью СМС",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/t-bank-dobavil-vozmozhnost-onlajn-podpisaniya-dokumentov-pri-pokupke-avto-sdelki-oformlyayut-s-pomoshyu-sms/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80551004",
-   "title": "ОСАГО предложили оформлять через «Госуслуги» — полисы будут продавать по максимальной ставке",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/osago-predlozhili-oformlyat-cherez-gosuslugi-polisy-budut-prodavat-po-maksimalnoj-stavke/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d08613453",
-   "title": "Плечи 500%, продажа волатильности и пенсионная дыра: как кванты надули пузырь в акциях США",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1376067.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d57840104",
-   "title": "Amazon and Google will together own nearly 30% of Anthropic after its IPO",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/17/amazon-and-google-will-together-own-nearly-30-of-anthropic-after-its-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d51911224",
-   "title": "В Челябинске национализировали имущество VIP-сотрудницы налоговой службы",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145177"
-    ]
-   ],
-   "sum": "21 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d34571049",
    "title": "В Кургане выставят на торги земли под застройку почти за 400 миллионов рублей",
    "date": "2026-11-18",
@@ -646,75 +272,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g17a522dc (общие редкие слова: выстав, курган) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d63586594",
-   "title": "МТС Финтех приобрёл разработчика цифровых карт лояльности OSMI Cards Статус сделки: 🟢 Закрыта - 16 ноября 2026 г. Об объекте сделки ООО «Осми» (OSMI Cards) разрабатывает программное обеспечение для ци",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7579"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "МТС Финтех приобрёл разработчика цифровых карт лояльности OSMI Cards Статус сделки: 🟢 Закрыта - 16 ноября 2026 г. Об объекте сделки ООО «Осми» (OSMI Cards) разрабатывает программное обеспечение для цифровых программ лояльности. С помощью платформы компании…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7579"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb6e1c25d (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d07942932",
-   "title": "Где в Красноярске купить живую елку? Названы первые площадки",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/gorod/2026/11/18/76773248/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -757,13 +314,13 @@
    ]
   },
   {
-   "draft_id": "d34180615",
-   "title": "«Стоял в гараже 20 лет»: в Новосибирске продают угловатого «японца» из 1980-х — чем интересен автомобиль",
+   "draft_id": "d78732167",
+   "title": "Трамп назвал Венесуэлу «новым приобретением» США",
    "date": "2026-11-18",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/auto/2026/11/18/76770737/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/18/1412809-tramp-nazval"
     ]
    ],
    "sum": null,
@@ -785,17 +342,46 @@
    ]
   },
   {
-   "draft_id": "d45626829",
-   "title": "Как это носить? Зашли в самые популярные массмаркеты Уфы и опешили от цен, но нашли, что можно купить без слёз",
+   "draft_id": "d03266066",
+   "title": "Производственно-складской комплекс продают в Воронеже за 855 млн рублей",
    "date": "2026-11-18",
    "src": [
     [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/entertainment/2026/11/18/76769444/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/"
+    ]
+   ],
+   "sum": "855 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d84141524",
+   "title": "Старинную русскую икону выставили на аукцион в США. Скрин",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145182"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,

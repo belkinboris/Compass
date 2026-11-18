@@ -613,6 +613,140 @@
    "accepted_hash": "452252a765cc.66fe3a",
    "second_read": "2026-11-18",
    "second_read_hash": "452252a765cc.66fe3a"
+  },
+  {
+   "id": "gfdccb157",
+   "date": "2026-11-18",
+   "title": "Картину Кандинского продали на Christie’s за рекордные $85,8 млн",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/society/18/11/2026/6afd411e09bedaadcb863ee0"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$85,8 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$85,8 млн",
+   "seller": "Картину Кандинского",
+   "asset": "на Christie’s за рекордные $85,8 млн",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Полотно 1922–1923 годов стало самым дорогим произведением Кандинского, когда-либо проданным на аукционе: с учетом комиссионных сборов за него заплатили $85,8 млн. Предыдущий рекорд составлял $44,8 млн",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/society/18/11/2026/6afd411e09bedaadcb863ee0"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на Christie’s за рекордные $85,8 млн",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/society/18/11/2026/6afd411e09bedaadcb863ee0"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Кандинского",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/society/18/11/2026/6afd411e09bedaadcb863ee0"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T06:53:42+00:00"
+  },
+  {
+   "id": "g6b2ac955",
+   "date": "2026-11-18",
+   "title": "Belgee продала в России уже более 50 тыс. автомобилей в 2026 году — лидером стал кроссовер X50+",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Rusbase",
+     "https://rb.ru/news/belgee-prodala-v-rossii-uzhe-bolee-50-tys-avtomobilej-v-2026-godu-liderom-stal-krossover-x50/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Belgee",
+   "asset": "в России уже более 50 тыс. автомобилей в 2026 году — лидером стал кроссовер X50+",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "С начала 2026 года белорусско-китайский бренд Belgee реализовал в России более 50 тыс. автомобилей. Как сообщили в пресс-службе марки, самой востребованной моделью стал кроссовер X50+, на который пришлось более 21 тыс. продаж.",
+     "source": [
+      "Rusbase",
+      "https://rb.ru/news/belgee-prodala-v-rossii-uzhe-bolee-50-tys-avtomobilej-v-2026-godu-liderom-stal-krossover-x50/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "в России уже более 50 тыс. автомобилей в 2026 году — лидером стал кроссовер X50+",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/belgee-prodala-v-rossii-uzhe-bolee-50-tys-avtomobilej-v-2026-godu-liderom-stal-krossover-x50/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Belgee",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://rb.ru/news/belgee-prodala-v-rossii-uzhe-bolee-50-tys-avtomobilej-v-2026-godu-liderom-stal-krossover-x50/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T06:53:42+00:00"
   }
  ]
 }
