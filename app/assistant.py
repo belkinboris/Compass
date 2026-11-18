@@ -3194,22 +3194,15 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
     hit = _estimate_cache.get(deal_id)
     if hit and hit["key"] == key:
         return hit["value"]
+    # ОТВЕТ СРАЗУ, ПОЯСНЕНИЕ МОДЕЛИ — В ФОНЕ (18 ноября 2026, партнер: «считалка
+    # не работает опять»). Числа считает модуль за доли секунды, а модель писала
+    # пояснение 20–30 секунд, и все это время на карточке висело «Компас считает».
+    # Теперь первый посетитель сразу получает расчет с текстом по шаблону, а
+    # модель пишет свой текст в фоне: он ляжет в кэш, и следующий откроет уже его.
     paragraphs, by = None, "template"
     ip = scrape_guard.client_ip(request.headers, request.client.host if request.client else None)
-    if os.environ.get("YANDEX_API_KEY") and _estimate_allowed(ip or ""):
-        try:
-            text = call_llm(price_estimate.SYSTEM, facts_text, max_tokens=700,
-                            deadline=time.monotonic() + 40)
-            text = re.sub(r"[*#_`]+", "", text or "").strip()
-            # Предложение с числом не из сводки или с числом словами — вон; осталось
-            # мало — шаблон. Без «е» (владелец, 26 октября 2026).
-            cleaned = price_estimate.clean_answer(text.replace("ё", "е").replace("Ё", "Е"), facts_text)
-            if cleaned:
-                paragraphs, by = cleaned, "model"
-            else:
-                logger.info("анализ цены %s: в ответе модели числа не из сводки — шаблон", deal_id)
-        except Exception as e:  # noqa: BLE001 — шаблон вместо модели
-            logger.warning("анализ цены %s: модель недоступна: %s", deal_id, e)
+    want_model = bool(os.environ.get("YANDEX_API_KEY")) and deal_id not in _estimate_inflight \
+        and _estimate_allowed(ip or "")
     value = {
         "available": True,
         "range_text": summary["range_text"],
@@ -3258,9 +3251,36 @@ def deal_price_estimate(deal_id: str, request: Request, db=Depends(get_db)):
                    if summary.get("source_value") and summary.get("range_kind") != "sources" else None),
         "stake": summary["stake"],
     }
-    if by == "model" or not os.environ.get("YANDEX_API_KEY"):
+    if not os.environ.get("YANDEX_API_KEY"):
         _estimate_cache[deal_id] = {"key": key, "value": value}
+    elif want_model:
+        _estimate_inflight.add(deal_id)
+        threading.Thread(target=_estimate_model_text, args=(deal_id, key, facts_text, value),
+                         daemon=True).start()
     return value
+
+
+_estimate_inflight: set = set()
+
+
+def _estimate_model_text(deal_id: str, key: str, facts_text: str, value: dict) -> None:
+    """Пояснение модели к уже посчитанной оценке — в фоне, результат в кэш."""
+    try:
+        text = call_llm(price_estimate.SYSTEM, facts_text, max_tokens=700,
+                        deadline=time.monotonic() + 40)
+        text = re.sub(r"[*#_`]+", "", text or "").strip()
+        # Предложение с числом не из сводки или с числом словами — вон; осталось
+        # мало — шаблон. Без «е» (владелец, 26 октября 2026).
+        cleaned = price_estimate.clean_answer(text.replace("ё", "е").replace("Ё", "Е"), facts_text)
+        if cleaned:
+            _estimate_cache[deal_id] = {"key": key, "value": dict(value, paragraphs=cleaned, by="model")}
+        else:
+            logger.info("анализ цены %s: в ответе модели числа не из сводки — шаблон", deal_id)
+            _estimate_cache[deal_id] = {"key": key, "value": value}
+    except Exception as e:  # noqa: BLE001 — шаблон вместо модели
+        logger.warning("анализ цены %s: модель недоступна: %s", deal_id, e)
+    finally:
+        _estimate_inflight.discard(deal_id)
 
 
 # «Разбор сделки» под схемой (владелец, 26 октября 2026; deal_analysis.py):
