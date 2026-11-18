@@ -523,6 +523,14 @@ def test_joint_venture_post_names_participants_not_a_buyer():
     assert "Участники СП: Яндекс и VK" in msg and "Покупатель" not in msg, msg
 
 
+def test_post_names_several_investors_in_plural():
+    """Второе чтение, 18 ноября 2026: двое инвесторов текстом — «Инвесторы»."""
+    deal = {"id": "t", "type": "Инвестиция", "kind": "financing", "title": "x",
+            "buyer_name": "Валентин Петухов (Wylsacom) и Дмитрий Агневский", "asset": "«Иммортал»"}
+    assert format_post.post_roles(deal)[0] == "Инвесторы"
+    assert format_post.post_roles(dict(deal, buyer_name="ООО «Консоль»"))[0] == "Инвестор"
+
+
 def test_post_party_block_is_the_same_across_the_base(base):
     """Тот же вопрос на живой базе: у покупок три строки сторон стоят всегда
     и в одном порядке; у раунда нет продавца, если его не назвали, — деньги
@@ -530,7 +538,7 @@ def test_post_party_block_is_the_same_across_the_base(base):
     comps = base["companies"]
     for deal in base["deals"][-300:]:
         labels = re.findall(r"<b>([^<:]+):</b>", format_post.render(deal, comps))
-        roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Временный управляющий",
+        roles = [l for l in labels if l in ("Покупатель", "Инвестор", "Инвесторы", "Временный управляющий",
                                             "Управляющая компания",
                                             "Продавец", "Продавцы", "Собственник", "Предмет")]
         buyer_label, seller_label, subject_label, required = format_post.post_roles(deal)
