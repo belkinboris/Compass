@@ -361,6 +361,147 @@
     "draft_id": "d03775829",
     "title": "Комплекс «Грибов Белогорья» вновь выставили на продажу за 171,5 млн рублей"
    }
+  },
+  {
+   "id": "g05d9b4d9",
+   "date": "2026-11-18",
+   "title": "ПСБ и другие акционеры продали сеть магазинов электроники «Связь.ON»",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/316611"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "8 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "8 млрд ₽",
+   "seller": "ПСБ и другие акционеры",
+   "asset": "сеть магазинов электроники «Связь.ON»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Сумма сделки составила 5-8 млрд рублей Сообщение ПСБ и другие акционеры продали сеть магазинов электроники «Связь.ON» появилось сначала на Frank Media .",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/316611"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "сеть магазинов электроники «Связь.ON»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316611"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ПСБ и другие акционеры",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316611"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T05:52:27+00:00"
+  },
+  {
+   "id": "g5e478673",
+   "date": "2026-11-18",
+   "title": "Структуры Лисина купили офисы в бизнес-центре у площади Трех вокзалов",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/316610"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2,3 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2,3 млрд ₽",
+   "seller": "площади Трех вокзалов",
+   "buyer_name": "Лисина",
+   "asset": "офисы в бизнес-центре",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Эксперты оценивают стоимость площадей в диапазоне от 1,5 до 2,3 млрд рублей Сообщение Структуры Лисина купили офисы в бизнес-центре у площади Трех вокзалов появилось сначала на Frank Media .",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/316610"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Лисина",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316610"
+     }
+    ],
+    "target": [
+     {
+      "value": "офисы в бизнес-центре",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316610"
+     }
+    ],
+    "seller": [
+     {
+      "value": "площади Трех вокзалов",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/316610"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T05:52:27+00:00"
   }
  ]
 }
