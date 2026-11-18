@@ -469,3 +469,11 @@ def test_estimate_panel_has_no_tag_and_shows_the_source_estimate():
     assert 'pe-tag' not in html and 'расчет, а не цена сделки' not in html
     fill = html[html.index('async function fillPriceEst'):html.index('function bindPriceEstimate')]
     assert fill.index('pe-range') < fill.index('${srcLine}') < fill.index('pe-text')
+
+
+def test_source_value_is_close_only_within_a_quarter():
+    """«Медси», 18 ноября 2026: 5,4–5,5 млрд против расчета 2,3–3,2 млрд названо «близко»."""
+    line = lambda r, d: pe.source_line({'source_value': {'text': '5,4–5,5 млрд ₽', 'ratio': r, 'direction': d,
+                                                         'divergent': False}, 'range_kind': 'estimate'})
+    assert line(1.1, 'higher').endswith('близко к расчету Компаса')
+    assert line(1.7, 'higher') == '5,4–5,5 млрд ₽, в 1,7 раза выше расчета Компаса'
