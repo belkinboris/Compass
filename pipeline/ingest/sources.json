@@ -2077,6 +2077,19 @@
    "last_check": "2026-10-26",
    "last_error": null,
    "note": "Инвестконсультант: первым публикует свои закрытые сделки (5YES! / «Логика молока», 26.10.2026 — на 1 ч 24 мин раньше @dealsma)."
+  },
+  {
+   "id": "tg:fasrussia",
+   "name": "ФАС России",
+   "kind": "telegram",
+   "url": "https://t.me/fasrussia",
+   "feed": "https://t.me/s/fasrussia",
+   "feed_checked": true,
+   "tier": 1,
+   "deals_seen": 0,
+   "enabled": true,
+   "last_check": "2026-11-18",
+   "last_error": null
   }
  ]
 }
