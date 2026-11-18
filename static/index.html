@@ -1762,7 +1762,8 @@ a.dp-asset-name:hover{color:var(--accent)}
 .co-tag:hover{background:var(--accent);color:var(--ivory)}
 .co-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .25s,box-shadow .25s;overflow:hidden}
 .co-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease)}
-.co-card:hover,.co-card.touch-on{border-color:var(--accent);box-shadow:0 8px 28px -16px rgba(15,43,33,.32)}
+/* Подсветка — только линия слева, рамку целиком не обводим (владелец, 18 ноября
+   2026: «чтобы было единообразно как со сделками»). */
 .co-card:hover::before,.co-card.touch-on::before{transform:scaleY(1)}
 /* ЛИНИЯ НАД ЦИФРАМИ СТОИТ НА ОДНОЙ ВЫСОТЕ У ВСЕХ КАРТОЧЕК. Раньше ее место
    определяли длина имени и длина описания: у «Сбербанка» описание в пять строк,
@@ -12485,10 +12486,9 @@ const ASSISTANT_TASKS = [
   {label: "Практика консультанта", fill: "Какие сделки сопровождала фирма "},
   {label: "Прецеденты по условию", fill: "Найди сделки с опционом обратного выкупа"},
 ];
-const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome">
-  <h2>О чем спросить?</h2>
-  <p>Ассистент ищет по базе «Компаса» и в каждом ответе дает ссылку на источник. Режим «По всему интернету» добавляет открытые источники.</p>
-</div>`;
+// Приветствие «О чем спросить?» с пояснением владелец убрал (18 ноября 2026):
+// лента пустая до первого вопроса, подсказки и поле ввода — внизу.
+const CHAT_WELCOME = `<div class="chat-welcome" id="chatWelcome"></div>`;
 // Поправка высоты под клавиатуру телефона живет одна на все открытия раздела:
 // иначе каждый заход вешал бы на visualViewport еще один обработчик.
 let chatViewportFit = null;
