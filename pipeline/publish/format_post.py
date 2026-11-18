@@ -1286,7 +1286,10 @@ def post_roles(deal):
                         and not re.match(r'^(?:Министерство|Департамент|Комитет|Управление|'
                                           r'Администрация|Отдел|Фонд|Агентство)\b', _seller_text)) else 'Продавец'
     if deal.get('type') == 'Инвестиция' or kind == 'financing':
-        return 'Инвестор', sl, 'Предмет', {'buyer', 'subject'}
+        # Два инвестора текстом — «Инвесторы» (второе чтение, 18 ноября 2026,
+        # Петухов и Агневский в «Иммортале»), как «Продавцы» выше.
+        many = not deal.get('buyer') and re.search(r',|\sи\s', str(deal.get('buyer_name') or ''))
+        return ('Инвесторы' if many else 'Инвестор'), sl, 'Предмет', {'buyer', 'subject'}
     if kind == 'acquisition':
         return 'Покупатель', sl, 'Предмет', {'buyer', 'seller', 'subject'}
     if kind == 'jv':
