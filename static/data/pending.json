@@ -404,54 +404,6 @@
     ]
    },
    "pending_since": "2026-11-18T15:52:54+00:00"
-  },
-  {
-   "id": "gec719804",
-   "date": "2026-11-18",
-   "title": "ВТБ сохраняет планы по продаже своей доли в аэропорту Пулково",
-   "ind": "Порты и инфраструктура",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "Деловой Петербург",
-     "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "Деловой Петербург",
-      "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
-     ]
-    }
-   ],
-   "pending_since": "2026-11-18T17:48:39+00:00",
-   "from_raw": {
-    "draft_id": "d92326955",
-    "title": "ВТБ сохраняет планы по продаже своей доли в аэропорту Пулково"
-   }
   }
  ]
 }
