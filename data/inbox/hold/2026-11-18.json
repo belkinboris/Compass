@@ -263,45 +263,6 @@
    ]
   },
   {
-   "draft_id": "d75763379",
-   "title": "В Екатеринбурге геймер выкупил кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:e1.ru",
-     "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "В день премьеры он планирует провести у большого экрана несколько часов",
-     "source": [
-      "web:e1.ru",
-      "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d12827682",
    "title": "ГД одобрила в I чтении учет срока владения изъятой квартирой при продаже",
    "date": "2026-11-18",
@@ -358,120 +319,6 @@
    ]
   },
   {
-   "draft_id": "d38128612",
-   "title": "IPO Anthropic станет проверкой доверия инвесторов ко всей отрасли ИИ - эксперт",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/ipo-875338268.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71826478",
-   "title": "«М.Видео» начнёт продавать мебель: компания откроет четыре шоурума — в том числе в Москве и Краснодаре",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/mvideo-nachnyot-prodavat-mebel-kompaniya-otkroet-chetyre-shouruma-v-tom-chisle-v-moskve-i-krasnodare/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb5d8a18a (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d16946202",
-   "title": "В Китае обрушились розничные продажи электромобилей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/v-kitae-obrushilis-roznichnye-prodazhi-elektromobiley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d76452424",
-   "title": "Россиянам посоветовали, как не попасться на обман при покупке рыбы",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145357"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d42789441",
    "title": "Где купить GTA VI в России в 2026 году: цена, дата выхода и предзаказ",
    "date": "2026-11-18",
@@ -495,10 +342,150 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17916855",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/media/articles/2026/11/18/1413027-wylsacom-stal-sovladeltsem"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d51794669",
+   "title": "YADRO запускает серийное производство и продажи кампусных коммутаторов KORNFELD SE C3000",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-18_yadro_zapuskaet_serijnoe_proizvodstvo"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «В Екатеринбурге геймер выкупил кинозал, чтобы поиграть в GTA» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d92794231",
+   "title": "В ГД внесут проект о механизме продаже полисов ОСАГО через «Госуслуги»",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28331371"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d06300924",
+   "title": "Бурляев считает неприемлемой продажу икон на аукционах",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28331281"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d26964590",
+   "title": "Чайный сервиз по дизайну Малевича ушел с молотка в Швеции за три тысячи долларов",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/malevich-875340614.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
