@@ -10940,6 +10940,33 @@ def test_reread_holds_the_stamp_on_a_title_off_the_standard():
     assert "title_standard" not in [c for c, _t in rq._findings(good, data)]
 
 
+def test_reread_needs_every_card_source_opened_or_named_unavailable():
+    """Владелец, 18 ноября 2026: вычитка не снимает факты из источника, который не открыла.
+    Отметка не ставится, пока каждый адрес из src не открыт или не назван недоступным."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('reread_queue_s', 'pipeline/reread_queue.py')
+    rq = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rq)
+    card = {"id": "gS1", "type": "M&A", "status": "Закрыта", "title": "А купил Б",
+            "src": [["Коммерсантъ", "https://k.ru/1"], ["Ведомости", "https://v.ru/2"]]}
+    data = {"deals": [card], "companies": {}}
+    ans = {"id": "gS1", "sources_opened": ["https://k.ru/1"], "fields": {}, "general": {}, "verdict": "ok"}
+    assert any("не открыты" in b and "https://v.ru/2" in b for b in rq.check(ans, card, data))
+    ans["sources_unavailable"] = {"https://v.ru/2": "платный доступ, копии в других изданиях нет"}
+    assert not any("не открыты" in b for b in rq.check(ans, card, data))
+
+
+def test_acceptance_needs_registry_owners_for_a_russian_llc_even_with_seller():
+    """Владелец, 18 ноября 2026: историю собственников проверять при создании карточки.
+    Продавец из статьи реестр не заменяет — находка держит штамп до checked.registry_owners."""
+    import accept_card
+    card = {"id": "gR1", "type": "M&A", "status": "Закрыта", "title": "А купил 100% ООО «Бета»",
+            "seller": "Иван Петров", "asset": "100% долей в ООО «Бета»"}
+    assert "registry_owners_unchecked" in [c for c, _t in accept_card.findings(card, {"companies": {}})]
+    card["accepted_notes"] = {"checked": {"registry_owners": "история участников ЕГРЮЛ (datanewton): Петров 100% → А"}}
+    assert "registry_owners_unchecked" not in [c for c, _t in accept_card.findings(card, {"companies": {}})]
+
+
 def test_reread_title_fix_does_not_rewrite_the_channel_post():
     """Вычитка пост в канале не переписывает: заголовок, исправленный по стандарту,
     обновляет снимок поста, и публикация не правит вышедший пост (6 ноября 2026)."""

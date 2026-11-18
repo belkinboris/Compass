@@ -1134,7 +1134,7 @@ INN_SEARCH_PLACES = re.compile(r'(?i)datanewton|датаньютон|egrul|ег�
                                r'checko|чекко|list-org|т-банк|tbank|контур|zachestny|rbc\.ru|companies\.rbc')
 REGISTRY_PLACE = re.compile(r'(?i)datanewton|датаньютон|egrul\.nalog|егрюл')
 
-CHECKED_CODES = ('date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
+CHECKED_CODES = ('registry_owners', 'date_not_in_source', 'custody_news_day', 'sum_is_estimate', 'party_is_target',
                  'adviser_in_source', 'seller_adviser_no_seller', 'seller_known', 'status_title_done',
                  'auction_type', 'fund_status', 'aggregator_cites_primary',
                  # марафон вычитки, 13 ноября 2026: менеджеры названы где-то еще; эксперт пересказал цену сторон
@@ -1781,6 +1781,24 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
                     'предмет — юрлицо, а история участников ЕГРЮЛ не проверена: '
                     'https://datanewton.ru/api/v2/history?ogrn=<ОГРН>&startDate=2000-01-01&attributes=OWNERS '
                     '(rusprofile/list-org/checko отсюда закрыты — это не повод остановиться)'))
+    # ИСТОРИЯ УЧАСТНИКОВ — ПРИ СОЗДАНИИ КАЖДОЙ КАРТОЧКИ С РОССИЙСКИМ ООО, А НЕ ТОЛЬКО
+    # КОГДА ПРОДАВЦА НЕТ (владелец, 18 ноября 2026: «реестр сразу проверяется… стандарт
+    # заголовка и историю собственников нужно при создании карты проверять»). Вычитка
+    # 18 ноября нашла у новых карточек неверных продавцов (Prisma, Таганрог), дату и
+    # покупателя («Мантсинен»): продавец был взят из статьи, и реестр не открывали.
+    # Читатель записывает в `checked.registry_owners`, что показала история участников:
+    # кто владел, когда сменился, вход через капитал или продажа доли.
+    llc_text = ' '.join(str(card.get(k) or '') for k in ('asset', 'title')) + ' ' + ' '.join(
+        str(_text(card, f) or '') for f in ('eco.share', 'law.struct'))
+    target_legal = str((comps.get(target_cid) or {}).get('legal_short') or (comps.get(target_cid) or {}).get('legal_name') or '') \
+        if target_cid else ''
+    if not foreign_target and (re.search(r'\bООО\b', llc_text) or target_legal.startswith('ООО')) \
+            and 'registry_owners' not in checked:
+        out.append(('registry_owners_unchecked',
+                    'предмет — российское ООО: история участников ЕГРЮЛ проверяется у каждой новой карточки, '
+                    'даже если продавец назван в статье — https://datanewton.ru/api/v2/history?ogrn=<ОГРН>'
+                    '&startDate=2000-01-01&attributes=OWNERS; что показал реестр (кто владел, дата записи, '
+                    'продажа доли или вход через капитал) — в checked.registry_owners'))
     if card.get('type') == 'M&A' and not (card.get('seller') or card.get('seller_id')) \
             and 'seller' not in waived:
         out.append(('seller_search', 'продавец не назван: найдите, кто владел предметом до сделки '
@@ -2260,6 +2278,8 @@ def check_answer(ans, card, base):
             bad.append('checked: находку %r причиной не закрыть (можно: %s)' % (code, ', '.join(CHECKED_CODES)))
         elif len(str(reason or '').strip()) < 15:
             bad.append('checked: у %s нет причины — что проверено и почему это не ошибка' % code)
+        elif code == 'registry_owners' and not re.search(r'datanewton|истори[яи] участник|ЕГРЮЛ', str(reason), re.I):
+            bad.append('checked.registry_owners: назовите, что показала история участников ЕГРЮЛ (datanewton)')
     for field, reason in (ans.get('stale_ok') or {}).items():
         if field not in STALE_STATEMENT_FIELDS:
             bad.append('stale_ok: поле %r не из %s' % (field, STALE_STATEMENT_FIELDS))

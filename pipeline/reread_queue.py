@@ -25,7 +25,8 @@
 
     {"id": "g…", "sources_opened": ["https://…"], "fixes": "pipeline/ingest/fixes/<файл>.py" | "",
      "fields": {"<поле>": "ok", …}, "general": {"<вопрос>": "ok", …}, "verdict": "ok",
-     "ok_findings": {"<код находки>": "<почему это не ошибка>"}, "note": "…"}
+     "ok_findings": {"<код находки>": "<почему это не ошибка>"}, "note": "…",
+     "sources_unavailable": {"https://…": "что пробовали — факты из него остаются"}}
 
 Отметка `reread` (дата) и `reread_hash` (отпечаток вычитанного текста)
 ставится, только когда правки из `fixes` уже записаны (`review.py --write`),
@@ -259,6 +260,17 @@ def check(ans, card, data):
     opened = [u for u in ans.get('sources_opened') or [] if str(u).startswith('http')]
     if not opened and len(str(ans.get('note') or '')) < 40:
         bad.append('ни одной открытой статьи и нет note от 40 знаков: где искали')
+    # КАЖДЫЙ ИСТОЧНИК КАРТОЧКИ — ОТКРЫТ ИЛИ НАЗВАН НЕДОСТУПНЫМ (владелец, 18 ноября 2026:
+    # «если добавили данные из новых источников, а потом ежедневная ревизия это убрала,
+    # потому что смотрела только один оригинал — это недопустимо»). Факты из источника,
+    # который не открылся, не снимаются: `sources_unavailable` — {адрес: что пробовали}.
+    unavailable = ans.get('sources_unavailable') or {}
+    seen = set(opened) | {u for u, why in unavailable.items() if len(str(why or '').strip()) >= 10}
+    missed = [s[1] for s in card.get('src') or [] if len(s) > 1 and str(s[1]).startswith('http')
+              and s[1] not in seen and not str(s[1]).startswith('https://projectcompass.ru')]
+    if missed and ans.get('scope') != 'short':
+        bad.append('источники карточки не открыты: %s — открыть или назвать в sources_unavailable '
+                   '(что пробовали); факты из неоткрытого источника не снимаются' % ', '.join(missed[:4]))
     fx = ans.get('fixes') or ''
     if fx:
         import review
