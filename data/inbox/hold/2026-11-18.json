@@ -207,84 +207,6 @@
    ]
   },
   {
-   "draft_id": "d27807324",
-   "title": "S7 выкупила пять самолетов Airbus у Red Wings",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28332025"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "Еще по трем судам ведутся интенсивные переговоры, рассказал гендиректор авиакомпании Дмитрий Куделькин",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28332025"
-     ]
-    }
-   ],
-   "buyer_name": "S7",
-   "asset": "пять самолетов Airbus",
-   "seller": "Red Wings",
-   "parsed_parties": {
-    "buyer": "S7",
-    "asset": "пять самолетов Airbus",
-    "seller": "Red Wings"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d92326955",
-   "title": "ВТБ сохраняет планы по продаже своей доли в аэропорту Пулково",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:dp.ru",
-      "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Порты и инфраструктура",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d64421513",
    "title": "S7 выкупила пять самолетов Airbus A320 у Red Wing",
    "date": "2026-11-18",
@@ -319,10 +241,150 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d43757132",
+   "title": "Wylsacom стал совладельцем ИИ-разработчика",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/18/11/2026/6afdc97d64fe30ac11c5f574"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "ИИ-разработчик",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "ИИ-разработчик",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
    "hold_reasons": [
     "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "та же новость, что «S7 выкупила пять самолетов Airbus у Red Wings» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 3) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d91324769",
+   "title": "Псковскую икону XVI века, которую не видели 64 года, выставили на торги в США",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76775420/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d90573305",
+   "title": "Спрос на IPO Anthropic достиг 500 миллиардов долларов, пишут СМИ",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/spros-875351629.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37203215",
+   "title": "Россия установила рекорд по продаже удобрений",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/18/rossiya-ustanovila-rekord-po-prodazhe-udobreniy/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Химия и удобрения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82467604",
+   "title": "В Самаре выставили на продажу помпезное кафе в центре (но не легендарное)",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/business/2026/11/18/76775403/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
