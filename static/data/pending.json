@@ -234,59 +234,6 @@
    }
   },
   {
-   "id": "g7c92fb41",
-   "date": "2026-11-18",
-   "title": "Орловский «Микротензор» вложил 94 млн рублей в расширение производства датчиков давления",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "Абирег",
-     "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "94 млн ₽",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "94 млн ₽",
-   "buyer_name": "Орловский «Микротензор»",
-   "asset": "расширение производства датчиков давления",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "Орловский «Микротензор»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
-     }
-    ],
-    "target": [
-     {
-      "value": "расширение производства датчиков давления",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
-     }
-    ]
-   },
-   "pending_since": "2026-11-18T07:53:10+00:00"
-  },
-  {
    "id": "gb50da782",
    "date": "2026-11-18",
    "title": "Производственно-складской комплекс продают в Воронеже за 855 млн рублей",
