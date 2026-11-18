@@ -207,146 +207,6 @@
    ]
   },
   {
-   "draft_id": "d18459952",
-   "title": "США разрешили российско-сербской NIS продать автозаправки в Болгарии и Румынии",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/ssha-875331934.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78655011",
-   "title": "Росимущество вновь выставило на торги участок со зданием в Тамбове за 88,4 млн рублей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119361-rosimushchestvo-vnov-vystavilo-na-torgi-uchastok-so-zdaniem-v-tambove-za-88-4-mln-rubley/"
-    ]
-   ],
-   "sum": "88,4 млн ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Управление активами",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12827682",
-   "title": "ГД одобрила в I чтении учет срока владения изъятой квартирой при продаже",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28331123"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93069334",
-   "title": "Чекунков спрогнозировал рост инвестиций в Дальний Восток и Арктику в 2027 году",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203913/chekunkov-sprognoziroval-rost-investitcii-v-dalnii-vostok-i-arktiku-v-2027-godu-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42789441",
-   "title": "Где купить GTA VI в России в 2026 году: цена, дата выхода и предзаказ",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145346"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d17916855",
    "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
    "date": "2026-11-18",
@@ -375,13 +235,13 @@
    ]
   },
   {
-   "draft_id": "d51794669",
-   "title": "YADRO запускает серийное производство и продажи кампусных коммутаторов KORNFELD SE C3000",
+   "draft_id": "d50082008",
+   "title": "Оферта «Т-технологий» на выкуп «Циана» еще не поступала в компанию",
    "date": "2026-11-18",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-18_yadro_zapuskaet_serijnoe_proizvodstvo"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/18/1413033-oferta-t-tehnologii"
     ]
    ],
    "sum": null,
@@ -396,49 +256,60 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку g4290fc7a (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d92794231",
-   "title": "В ГД внесут проект о механизме продаже полисов ОСАГО через «Госуслуги»",
+   "draft_id": "d59946614",
+   "title": "В Швеции почти за $3 тыс. продали созданный по дизайну Малевича чайный сервиз",
    "date": "2026-11-18",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28331371"
+     "web:iz.ru",
+     "https://iz.ru/2204118/v-shvetcii-pochti-za-3-tys-prodali-sozdannyi-po-dizainu-malevicha-chainyi-serviz-izi"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
+   "sum": "$3 тыс",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "На торгах шведского аукционного дома Bukowskis чайный сервиз, изготовленный по эскизам художника Казимира Малевича, приобрели за 30 тыс. шведских крон (около $3 тыс.). До начала торгов его стоимость оценивалась в 18–20 тыс. крон ($1,8–2 тыс.). Об этом 18…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2204118/v-shvetcii-pochti-za-3-tys-prodali-sozdannyi-po-dizainu-malevicha-chainyi-serviz-izi"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "созданный по дизайну Малевича чайный сервиз",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "созданный по дизайну Малевича чайный сервиз",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d06300924",
-   "title": "Бурляев считает неприемлемой продажу икон на аукционах",
+   "draft_id": "d97180568",
+   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 27,9 миллиарда рублей",
    "date": "2026-11-18",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28331281"
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/minfin-875344684.html"
     ]
    ],
    "sum": null,
@@ -456,18 +327,75 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d26964590",
-   "title": "Чайный сервиз по дизайну Малевича ушел с молотка в Швеции за три тысячи долларов",
+   "draft_id": "d49519549",
+   "title": "Эксперт предупредил о мошенниках, обманывающих россиян при покупке GTA VI",
    "date": "2026-11-18",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261118/malevich-875340614.html"
+     "https://1prime.ru/20261118/gta-875343853.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38873737",
+   "title": "Эксперт рассказал, как мошенники обманывают россиян при покупке GTA VI",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261118/moshenniki-2132466353.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Эксперт предупредил о мошенниках, обманывающих россиян при п» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42064898",
+   "title": "Смартфон с экраном на задней панели: новинка от Xiaomi выходит на российский рынок",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053145180"
     ]
    ],
    "sum": null,
@@ -486,6 +414,73 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39132449",
+   "title": "Магазины теряют покупателей: почему россияне перестали ходить за покупками как раньше",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/18/magaziny-teryayut-pokupatelej-pochemu-rossiyane-perestali-hodit-za-pokupkami-kak-ranshe"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75356244",
+   "title": "«Слабоумие и отвага — наш девиз»: самарец купил городскую усадьбу и кайфует. Теперь его оттуда не выгонишь",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/realty/2026/11/18/76774872/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Видеоистория, которая дает надежду",
+     "source": [
+      "web:63.ru",
+      "https://63.ru/text/realty/2026/11/18/76774872/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "городская усадьба и кайфует. Теперь его оттуда не выгонишь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "городская усадьба и кайфует. Теперь его оттуда не выгонишь",
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
