@@ -2,17 +2,17 @@
  "made": "2026-11-18",
  "drafts": [
   {
-   "draft_id": "d90573305",
-   "title": "Спрос на IPO Anthropic достиг 500 миллиардов долларов, пишут СМИ",
-   "date": "2026-11-18",
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/spros-875351629.html"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -24,34 +24,6 @@
     "seller": null
    },
    "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34423503",
-   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -87,34 +59,6 @@
    ]
   },
   {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -142,120 +86,6 @@
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d43757132",
-   "title": "Wylsacom стал совладельцем ИИ-разработчика",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/18/11/2026/6afdc97d64fe30ac11c5f574"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Wylsacom",
-   "asset": "ИИ-разработчик",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Wylsacom",
-    "asset": "ИИ-разработчик",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d01538671",
-   "title": "Минфин поддержал инициативу продажи ОСАГО через «Госуслуги»",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28331707"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46534055",
-   "title": "«Туту» может вложить до 600 млн рублей в покупку сервисов деловых поездок",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/tutu-mozhet-vlozhit-do-600-mln-rublej-v-pokupku-servisov-delovyh-poezdok/"
-    ]
-   ],
-   "sum": "600 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5d3527dd (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d28387329",
-   "title": "В России зафиксировали рекордные продажи китайских машин с пробегом",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/v-rossii-zafiksirovali-rekordnye-prodazhi-kitayskih-mashin-s-probegom/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -291,103 +121,6 @@
    ]
   },
   {
-   "draft_id": "d28160149",
-   "title": "У FES retail сменился мажоритарный владелец",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d91324769",
-   "title": "Псковскую икону XVI века, которую не видели 64 года, выставили на торги в США",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76775420/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d28022234",
-   "title": "Участники саммита АТЭС намерены увеличивать инвестиции в предотвращение ЧС",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261118/ates-2132468285.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261118/ates-2132468285.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d88804499",
    "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
    "date": "2026-11-16",
@@ -417,13 +150,41 @@
    ]
   },
   {
-   "draft_id": "d37203215",
-   "title": "Россия установила рекорд по продаже удобрений",
-   "date": "2026-11-18",
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/rossiya-ustanovila-rekord-po-prodazhe-udobreniy/"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
     ]
    ],
    "sum": null,
@@ -438,10 +199,11 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Химия и удобрения",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -473,42 +235,32 @@
    ]
   },
   {
-   "draft_id": "d64421513",
-   "title": "S7 выкупила пять самолетов Airbus A320 у Red Wing",
+   "draft_id": "d39773984",
+   "title": "Сайты-зеркала по продаже билетов могут потребовать блокировать до суда",
    "date": "2026-11-18",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/s7-875349423.html"
+     "web:comnews.ru",
+     "https://www.comnews.ru/content/248441/2026-11-18/2026-w47/1009/sayty-zerkala-prodazhe-biletov-mogut-potrebovat-blokirovat-do-suda"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261118/s7-875349423.html"
-     ]
-    }
-   ],
-   "buyer_name": "S7",
-   "asset": "пять самолетов Airbus A320",
-   "seller": "Red Wing",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
    "parsed_parties": {
-    "buyer": "S7",
-    "asset": "пять самолетов Airbus A320",
-    "seller": "Red Wing"
+    "buyer": null,
+    "asset": null,
+    "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]

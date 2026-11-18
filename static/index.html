@@ -8348,13 +8348,18 @@ function renderDeal(id, qs, previewCard){
         </div>`;
       }
 
-      if(!buyerName || !targetName) return "";
+      /* Инвестор — частное лицо текстом (Петухов и Агневский в «Иммортале»,
+         18 ноября 2026): схема пропадала, потому что требовала профиль компании.
+         Как у покупки — текстовая сторона тоже сторона. */
+      if((!buyerName && !d.buyer_name) || !targetName) return "";
       const roles = kindKey==="credit" ? ["Кредитор","Заемщик"]
                   : kindKey==="structured" ? ["Финансирующая сторона","Получатель финансирования"]
-                  : ["Инвестор","Получатель инвестиций"];
+                  : [/,|\sи\s/.test(String(buyerName?"":d.buyer_name||"")) ? "Инвесторы" : "Инвестор","Получатель инвестиций"];
+      const investorBox = buyerName ? party(roles[0], d.buyer, buyerName)
+        : `<div class="dp-party"><span class="dp-role">${roles[0]}</span><span class="dp-name">${esc(d.buyer_name)}</span></div>`;
       return `<div class="deal-plate"><span class="label">Структура сделки</span>
         <div class="dp-row">
-          ${party(roles[0], d.buyer, buyerName)}
+          ${investorBox}
           <div class="dp-link">${share?`<span class="dp-share num">${share}</span>`:""}<span class="dp-arrow"></span>${sum?`<span class="dp-sum num">${sum}</span>`:""}</div>
           ${party(roles[1], d.target, targetName)}
         </div></div>`;
@@ -9233,7 +9238,7 @@ async function mountCompanyFns(companyId){
        «Скачать выписку ЕГРЮЛ» (метод vyp, вкладка «ЕГРЮЛ») куплен и
        проверен живым запросом — ее не трогаем. */
     if(tab==="ownership") content=ownershipHtml(entry.ownership);
-    if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
+    if(tab==="registry") content=`<div class="fns-registry">${registryRows.map(([k,v])=>`<div class="fns-registry-row"><span class="k">${k}</span>${esc(String(v))}</div>`).join("")}</div><div class="fns-actions"><a class="chip" data-need-login href="/api/companies/${encodeURIComponent(companyId)}/fns/extract?entity_id=${e.id}">Скачать выписку ЕГРЮЛ</a></div>`;
     /* Изменений в ЕГРЮЛ у живой компании бывают десятки, и все они одинаково
        подробные: список на два экрана прокрутки закрывал собой все остальное
        на вкладке. Показываем три свежих, остальные — по кнопке (замечание
@@ -12906,6 +12911,13 @@ async function renderAssistant(root, inSheet){
    Решение владельца (2 августа 2026): обычные email + пароль, как в
    Telegram-боте — без переписки на каждый вход (см. docstring auth.py). */
 let ME = null;
+/* Выписка ЕГРЮЛ и файлы отчетности отдаются только после входа. Без входа
+   ссылка вела на сырой ответ сервера, и телефон показывал его кракозябрами
+   (владелец, 18 ноября 2026, карточка Wylsacom): теперь без входа — страница входа. */
+document.addEventListener("click", e=>{
+  const a = e.target.closest && e.target.closest("a[data-need-login]");
+  if(a && !ME){ e.preventDefault(); location.hash = "#/account"; }
+});
 // Вход по заявке (ACCESS_GATE в main.py, 2 сентября 2026). GATE: null —
 // /api/me еще не ответил (route() ничего не рисует, чтобы сайт не мелькнул
 // перед дверью), true/false — ответ сервера. Гейт закрыт для гостя и для
