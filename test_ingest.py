@@ -1576,6 +1576,19 @@ def test_enrich_fills_the_sum_in_both_lenses(base):
     assert deal["eco"]["sum"] == "60 млрд ₽"
 
 
+def test_enrich_does_not_fill_a_sum_the_reader_left_undisclosed(base):
+    """«Туту»/«Ракета», 18 ноября 2026: читатель поставил «Не раскрыта» (оценка аналитика —
+    в eco.val), а обогащение вписало «600 млн ₽» из заголовка агрегатора. У прочитанной
+    карточки «Не раскрыта» — решение: число уходит в «расхождение», не в «добавить»."""
+    import enrich
+    deal = {"id": "t-und", "title": "«Туту» покупает «Ракету»", "date": "2026-11-18", "status": "Согласование получено",
+            "src": [], "sum": "Не раскрыта", "eco": {"sum": "Не раскрыта"}, "reviewed": "2026-11-18"}
+    item = {"title": "«Туту» купит «Ракету» за 600 млн руб.", "summary": "", "url": "https://example.invalid/t1"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    sums = [(v, k) for f, v, k, _ in props if f == "sum"]
+    assert sums and all(k == "расхождение" for _v, k in sums), sums
+
+
 def test_enrich_only_moves_status_forward(base):
     """«Обсуждается» -> «Закрыта» можно, обратно — нет.
 
@@ -1809,7 +1822,9 @@ def test_enrich_does_not_restore_a_retracted_value(base):
     тихо записаться в базу заново."""
     import enrich
     deal = next(d for d in base["deals"] if not format_post.has(d.get("sum")))
-    deal = dict(deal, retracted={"sum": ["2,05 млрд ₽"]})
+    # Карточка без отметок чтения: у прочитанной «Не раскрыта» — решение читателя, и
+    # любое число уходит в «расхождение» (test_enrich_does_not_fill_a_sum_the_reader_left_undisclosed).
+    deal = dict(deal, retracted={"sum": ["2,05 млрд ₽"]}, reviewed=None, accepted=None)
     item = {"title": "Стороны подтвердили сумму сделки — 2,05 млрд рублей",
             "url": "https://example.invalid/enrich-retracted", "source_id": "web:kommersant.ru"}
     props = enrich.proposals(deal, item, {}, base["companies"])

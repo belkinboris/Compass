@@ -329661,7 +329661,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "600 млн ₽",
+    "sum": "Не раскрыта",
     "share": "100% долей в ООО «Ракета» и ООО «Интернейшнл Бизнес Центр»",
     "val": "Цену и условия сделки стороны не раскрыли. Михаил Бурмистров, гендиректор «Infoline-аналитики», оценивает две компании вместе в 500–600 млн ₽. В его оценке IBC дает покупателю устойчивую базу корпоративных клиентов, а «Ракета» — технологию: платформу, которая автоматизирует командировки.",
     "target_fin": "Выручка ООО «Интернейшнл Бизнес Центр» (IBC Corporate Travel) выросла с 596,8 млн ₽ в 2024 году до 694,6 млн ₽ в 2025 году, чистая прибыль — с 36,5 млн ₽ до 60,9 млн ₽.\n\nВыручка ООО «Ракета» снизилась с 174,8 млн ₽ в 2024 году до 166,4 млн ₽ в 2025 году, чистая прибыль — с 10,1 млн ₽ до 2,3 млн ₽. В 2023 году «Ракета» получила 84,9 млн ₽ выручки и 23,9 млн ₽ чистой прибыли, в 2019–2022 годах была убыточной.",
@@ -329677,7 +329677,7 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "600 млн ₽",
+   "sum": "Не раскрыта",
    "from_raw": {
     "draft_id": "d97362889",
     "title": "«Туту» может вложить 500–600 млн руб. в покупку «Ракеты» и IBC Corporate Travel"
@@ -329754,11 +329754,11 @@
      "card_hash": "c83246261c71"
     },
     "price": {
-     "value_rub": 600000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "undisclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "22b68cf0e802"
+     "basis": "unknown",
+     "card_hash": "54783e5323e1"
     },
     "date": {
      "value": "2026-11-18",
@@ -329796,27 +329796,22 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "fact_log": [
-    {
-     "field": "sum",
-     "new": "600 млн ₽",
-     "quote": "Федеральная антимонопольная служба (ФАС) согласовала сделку по присоединению к «Туту» сервиса по организации командировок «Ракета» и агентства делового туризма IBC Corporate Travel. Об этом говорится в сообщении компании.",
-     "url": "https://www.kommersant.ru/doc/9112419",
-     "by": "enrich",
-     "date": "2026-11-18"
-    }
-   ],
    "discovery_src": [
     [
      "Mergers.ru",
      "https://mergers.ru/news/Tutu-mozhet-vlozhit-500600-mln-rub-v-pokupku-Rakety-i-IBC-Corporate-Travel-87811"
     ]
-   ]
+   ],
+   "retracted": {
+    "sum": [
+     "600 млн ₽"
+    ]
+   }
   },
   {
    "id": "gb50da782",

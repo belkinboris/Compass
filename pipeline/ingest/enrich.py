@@ -306,7 +306,16 @@ def proposals(deal, item, names, comps, match_keys=None):
     sum_guess = draft.sum_from_text(text)
     if sum_guess:
         current = current_value(deal, 'sum', comps)
-        if not current:
+        # «НЕ РАСКРЫТА» У ПРОЧИТАННОЙ КАРТОЧКИ — РЕШЕНИЕ, А НЕ ПУСТОЕ ПОЛЕ (18 ноября 2026,
+        # «Туту»/«Ракета»: читатель поставил «Не раскрыта», оценку аналитика 500–600 млн
+        # положил в eco.val, а час спустя обогащение записало в сумму «600 млн ₽» из
+        # заголовка Mergers.ru, приложив цитату без числа). Такое — только в «расхождение».
+        undisclosed_read = str(deal.get('sum') or '').startswith('Не раскрыт') and (
+            deal.get('reviewed') or deal.get('accepted'))
+        if not current and undisclosed_read:
+            out.append(('sum', sum_guess, 'расхождение',
+                        'в карточке «Не раскрыта» после чтения статьи — число проверяет человек'))
+        elif not current:
             if is_retracted(deal, 'sum', sum_guess):
                 out.append(('sum', sum_guess, 'расхождение',
                             'это значение уже снимали как неверное — не восстанавливаем автоматически'))
