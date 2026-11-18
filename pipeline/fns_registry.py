@@ -488,6 +488,34 @@ REGISTRY += [
      "date": '2026-11-17'},
 ]
 
+# Приемка карточки ge1c5f194 — 2026-11-18 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'gea897ee6', "decision": "confirmed", "inn": '7727516062',
+     "reason": 'Приемка карточки ge1c5f194 (2026-11-18): юрлицо АО «УК «Либра Капитал»» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-18'},
+]
+
+# Приемка карточки g772c17d9 — 2026-11-18 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'ga048d71d', "decision": "confirmed", "inn": '9706045458',
+     "reason": 'Приемка карточки g772c17d9 (2026-11-18): юрлицо ООО «Связь.Он» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-18'},
+]
+
+# Приемка карточки gb6e1c25d — 2026-11-18 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'ga4f08c5d', "decision": "confirmed", "inn": '7709912715',
+     "reason": 'Приемка карточки gb6e1c25d (2026-11-18): юрлицо ООО «Осми» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-18'},
+]
+
+# Приемка карточки gb6e1c25d — 2026-11-18 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'ga83e50a0', "decision": "confirmed", "inn": '7707751558',
+     "reason": 'Приемка карточки gb6e1c25d (2026-11-18): юрлицо ООО «МТС Финтех» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-18'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
