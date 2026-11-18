@@ -92,6 +92,43 @@ def test_endpoint_answers_without_the_model(monkeypatch):
         assert client.get('/api/deals/нет-такой/price-estimate').status_code == 404
 
 
+def test_endpoint_answers_at_once_and_the_model_writes_in_background(monkeypatch):
+    """Партнер, 18 ноября 2026: «считалка не работает опять» — модель писала
+    пояснение 20–30 секунд, и карточка все это время показывала «Компас считает».
+    Расчет отдается сразу с текстом по шаблону, текст модели ложится в кэш."""
+    import threading
+    import time as _t
+    import main
+    from app import assistant
+    base = json.loads((ROOT / 'static' / 'data' / 'deals_promoted.json').read_text(encoding='utf-8'))
+    monkeypatch.setenv('YANDEX_API_KEY', 'x')
+    release = threading.Event()
+
+    def slow_llm(system, user, max_tokens, deadline=None):
+        release.wait(10)
+        return ''
+    monkeypatch.setattr(assistant, 'call_llm', slow_llm)
+    monkeypatch.setattr(assistant.price_estimate, 'clean_answer', lambda text, facts: ['Текст модели.'])
+    with TestClient(main.app) as client:
+        for d in base['deals']:
+            if not pe.needs_estimate(d):
+                continue
+            start = _t.monotonic()
+            r = client.get(f"/api/deals/{d['id']}/price-estimate").json()
+            if r.get('available'):
+                break
+        assert _t.monotonic() - start < 5 and r['by'] == 'template' and r['paragraphs']
+        release.set()
+        for _ in range(50):
+            if d['id'] not in assistant._estimate_inflight:
+                break
+            _t.sleep(0.1)
+        again = client.get(f"/api/deals/{d['id']}/price-estimate").json()
+        assert again['by'] == 'model' and again['paragraphs'] == ['Текст модели.']
+        assert again['range_text'] == r['range_text']
+    assistant._estimate_cache.pop(d['id'], None)
+
+
 def test_endpoint_says_no_data_when_nothing_can_be_computed(monkeypatch):
     """Velle, 29 октября 2026: четыре абзаца о том, почему оценку дать нельзя.
     Владелец: «где мы знаем, что оценку дать нельзя — вообще не будем даже
