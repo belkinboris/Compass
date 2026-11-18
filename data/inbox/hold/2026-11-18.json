@@ -2,6 +2,245 @@
  "made": "2026-11-18",
  "drafts": [
   {
+   "draft_id": "d59946614",
+   "title": "В Швеции почти за $3 тыс. продали созданный по дизайну Малевича чайный сервиз",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204118/v-shvetcii-pochti-za-3-tys-prodali-sozdannyi-po-dizainu-malevicha-chainyi-serviz-izi"
+    ]
+   ],
+   "sum": "$3 тыс",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "На торгах шведского аукционного дома Bukowskis чайный сервиз, изготовленный по эскизам художника Казимира Малевича, приобрели за 30 тыс. шведских крон (около $3 тыс.). До начала торгов его стоимость оценивалась в 18–20 тыс. крон ($1,8–2 тыс.). Об этом 18…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2204118/v-shvetcii-pochti-za-3-tys-prodali-sozdannyi-po-dizainu-malevicha-chainyi-serviz-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "созданный по дизайну Малевича чайный сервиз",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "созданный по дизайну Малевича чайный сервиз",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d38873737",
+   "title": "Эксперт рассказал, как мошенники обманывают россиян при покупке GTA VI",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261118/moshenniki-2132466353.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Эксперт предупредил о мошенниках, обманывающих россиян при п» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d16946202",
+   "title": "В Китае обрушились розничные продажи электромобилей",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/18/v-kitae-obrushilis-roznichnye-prodazhi-elektromobiley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d42789441",
+   "title": "Где купить GTA VI в России в 2026 году: цена, дата выхода и предзаказ",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145346"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97180568",
+   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 27,9 миллиарда рублей",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/minfin-875344684.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39132449",
+   "title": "Магазины теряют покупателей: почему россияне перестали ходить за покупками как раньше",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/18/magaziny-teryayut-pokupatelej-pochemu-rossiyane-perestali-hodit-za-pokupkami-kak-ranshe"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42064898",
+   "title": "Смартфон с экраном на задней панели: новинка от Xiaomi выходит на российский рынок",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053145180"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51794669",
+   "title": "YADRO запускает серийное производство и продажи кампусных коммутаторов KORNFELD SE C3000",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-18_yadro_zapuskaet_serijnoe_proizvodstvo"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
    "draft_id": "d99277860",
    "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
    "date": "2026-11-13",
@@ -30,13 +269,13 @@
    ]
   },
   {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
+   "draft_id": "d41882092",
+   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
+   "date": "2026-11-18",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76774338/"
     ]
    ],
    "sum": null,
@@ -44,48 +283,226 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d42864136",
-   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
-   "date": "2026-11-12",
+   "draft_id": "d75356244",
+   "title": "«Слабоумие и отвага — наш девиз»: самарец купил городскую усадьбу и кайфует. Теперь его оттуда не выгонишь",
+   "date": "2026-11-18",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7841"
+     "web:63.ru",
+     "https://63.ru/text/realty/2026/11/18/76774872/"
     ]
    ],
-   "sum": "15 млн ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Видеоистория, которая дает надежду",
+     "source": [
+      "web:63.ru",
+      "https://63.ru/text/realty/2026/11/18/76774872/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "городская усадьба и кайфует. Теперь его оттуда не выгонишь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "городская усадьба и кайфует. Теперь его оттуда не выгонишь",
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d93069334",
+   "title": "Чекунков спрогнозировал рост инвестиций в Дальний Восток и Арктику в 2027 году",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203913/chekunkov-sprognoziroval-rost-investitcii-v-dalnii-vostok-i-arktiku-v-2027-godu-izi"
+    ]
+   ],
+   "sum": null,
    "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Российский proptech-стартап RSpace",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Российский proptech-стартап RSpace",
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23901940",
+   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28330111"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38128612",
+   "title": "Эксперт: IPO Anthropic станет проверкой доверия к отрасли ИИ",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/ipo-875338268.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50082008",
+   "title": "Оферта «Т-технологий» на выкуп «Циана» еще не поступала в компанию",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/18/1413033-oferta-t-tehnologii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g4290fc7a (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -121,17 +538,46 @@
    ]
   },
   {
-   "draft_id": "d88804499",
-   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
-   "date": "2026-11-16",
+   "draft_id": "d71826478",
+   "title": "«М.Видео» начнёт продавать мебель: компания откроет четыре шоурума — в том числе в Москве и Краснодаре",
+   "date": "2026-11-18",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144517"
+     "web:rb.ru",
+     "https://rb.ru/news/mvideo-nachnyot-prodavat-mebel-kompaniya-otkroet-chetyre-shouruma-v-tom-chisle-v-moskve-i-krasnodare/"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gb5d8a18a (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d06300924",
+   "title": "Бурляев считает неприемлемой продажу икон на аукционах",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28331281"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -150,41 +596,41 @@
    ]
   },
   {
-   "draft_id": "d34423503",
-   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
-   "date": "2026-11-17",
+   "draft_id": "d17916855",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "date": "2026-11-18",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/media/articles/2026/11/18/1413027-wylsacom-stal-sovladeltsem"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
     "seller": null
    },
-   "ind": "Банки",
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d28160149",
-   "title": "У FES retail сменился мажоритарный владелец",
-   "date": "2026-11-17",
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
     ]
    ],
    "sum": null,
@@ -202,49 +648,20 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d18459952",
-   "title": "США разрешили российско-сербской NIS продать автозаправки в Болгарии и Румынии",
+   "draft_id": "d91144434",
+   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
    "date": "2026-11-18",
    "src": [
     [
      "web:1prime.ru",
-     "https://1prime.ru/20261118/ssha-875331934.html"
+     "https://1prime.ru/20261118/kurtka-875330072.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78655011",
-   "title": "Росимущество вновь выставило на торги участок со зданием в Тамбове за 88,4 млн рублей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119361-rosimushchestvo-vnov-vystavilo-na-torgi-uchastok-so-zdaniem-v-tambove-za-88-4-mln-rubley/"
-    ]
-   ],
-   "sum": "88,4 млн ₽",
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -256,49 +673,38 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Управление активами",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d75763379",
-   "title": "В Екатеринбурге геймер выкупил кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+   "draft_id": "d92794231",
+   "title": "В ГД внесут проект о механизме продаже полисов ОСАГО через «Госуслуги»",
    "date": "2026-11-18",
    "src": [
     [
-     "web:e1.ru",
-     "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28331371"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-18",
-     "title": "Сделка завершена",
-     "note": "В день премьеры он планирует провести у большого экрана несколько часов",
-     "source": [
-      "web:e1.ru",
-      "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -330,120 +736,6 @@
    ]
   },
   {
-   "draft_id": "d93069334",
-   "title": "Чекунков спрогнозировал рост инвестиций в Дальний Восток и Арктику в 2027 году",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203913/chekunkov-sprognoziroval-rost-investitcii-v-dalnii-vostok-i-arktiku-v-2027-godu-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38128612",
-   "title": "IPO Anthropic станет проверкой доверия инвесторов ко всей отрасли ИИ - эксперт",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/ipo-875338268.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71826478",
-   "title": "«М.Видео» начнёт продавать мебель: компания откроет четыре шоурума — в том числе в Москве и Краснодаре",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/mvideo-nachnyot-prodavat-mebel-kompaniya-otkroet-chetyre-shouruma-v-tom-chisle-v-moskve-i-krasnodare/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb5d8a18a (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d16946202",
-   "title": "В Китае обрушились розничные продажи электромобилей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/v-kitae-obrushilis-roznichnye-prodazhi-elektromobiley/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d76452424",
    "title": "Россиянам посоветовали, как не попасться на обман при покупке рыбы",
    "date": "2026-11-18",
@@ -472,13 +764,71 @@
    ]
   },
   {
-   "draft_id": "d42789441",
-   "title": "Где купить GTA VI в России в 2026 году: цена, дата выхода и предзаказ",
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d49519549",
+   "title": "Эксперт предупредил о мошенниках, обманывающих россиян при покупке GTA VI",
    "date": "2026-11-18",
    "src": [
     [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/gta-875343853.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88804499",
+   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
+   "date": "2026-11-16",
+   "src": [
+    [
      "web:ura.news",
-     "https://ura.news/news/1053145346"
+     "https://ura.news/news/1053144517"
     ]
    ],
    "sum": null,
@@ -495,10 +845,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «В Екатеринбурге геймер выкупил кинозал, чтобы поиграть в GTA» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
