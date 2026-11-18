@@ -236,34 +236,6 @@
    ]
   },
   {
-   "draft_id": "d77341510",
-   "title": "«Дом.РФ» выставил на торги бывшую военную часть в Троицке",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261118/moskva-2132309962.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d57789168",
    "title": "«Дом.РФ» выставил на торги бывший корпус МАИ",
    "date": "2026-11-18",
@@ -287,10 +259,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Дом.РФ» выставил на торги бывшую военную часть в Троицке» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -320,7 +290,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Дом.РФ» выставил на торги бывшую военную часть в Троицке» — второе издание, в группу не шлем"
+    "та же новость, что ««Дом.РФ» выставил на торги бывший корпус МАИ» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -350,64 +320,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку gc7e0b5c9 (по всей базе: та же сторона и редкое слово: travel) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d20611163",
-   "title": "Рособрнадзор прорабатывает запрет продажи микронаушников на маркетплейсах",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/society/news/2026/11/18/1412886-rosobrnadzor-prorabativaet"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d47888005",
-   "title": "Как выиграть аукцион и не переплатить: советы из теории игр",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/radio/18/11/2026/6afd7094b17f126302e0295f"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
@@ -551,64 +463,6 @@
    ]
   },
   {
-   "draft_id": "d46413184",
-   "title": "OpenAI деклассировали Anthropic за день до IPO",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1376290.php"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52709222",
-   "title": "Выгоду от покупки квартиры с криминальным прошлым оценили",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/vygodu-ot-pokupki-kvartiry-s-kriminalnym-proshlym-otsenili/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d87239063",
    "title": "В Симферополе выставили на торги имущество мусороперерабатывающего комплекса",
    "date": "2026-11-18",
@@ -666,35 +520,6 @@
    ]
   },
   {
-   "draft_id": "d18033433",
-   "title": "Власти Москвы выставили на торги коммерческое помещение в Троицке",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/18/vlasti-moskvy-vystavili-na-torgi-kommercheskoe-pomeshhenie-v-troiczke"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g896a22ba (общие редкие слова: власти, выстав, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d40896126",
    "title": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей",
    "date": "2026-11-18",
@@ -721,6 +546,303 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей, тюмени) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d40300437",
+   "title": "«Благие намерения»: группа AuditTeam атаковала российские организации и потребовала выкуп за зашифрованные данные в обмен на отчёт по уязвимостям",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-18_blagie_namereniya_gruppa"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-18",
+     "title": "Переговоры",
+     "note": "Эксперты Глобального центра исследования и анализа угроз «Лаборатории Касперского» (Kaspersky GReAT) раскрыли новую...",
+     "source": [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-11-18_blagie_namereniya_gruppa"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49362730",
+   "title": "«Норбит» автоматизирует оптовые продажи «Офисмаг»",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-18_norbit_avtomatiziruet"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93030216",
+   "title": "Инвестиции бизнес-ангелов в стартапы «Сколково» достигли 6,47 млрд рублей",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28330507"
+    ]
+   ],
+   "sum": "6,47 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40313516",
+   "title": "Гардероб из шоу и клипов Майкла Джексона, включая обувь «лунной походки», продадут с аукциона в Абу-Даби",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76774078/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02509615",
+   "title": "Глава Рособрнадзора заявил о проработке ограничения продажи микронаушников",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203893/glava-rosobrnadzora-zaiavil-o-prorabotke-ogranicheniia-prodazhi-mikronaushnikov-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-18",
+     "title": "Переговоры",
+     "note": "В России обсуждают возможность введения ограничений на реализацию микронаушников, в том числе через интернет-магазины и маркетплейсы. Об этом 18 ноября заявил руководитель Рособрнадзора Анзор Музаев на заседании общественного совета при ведомстве. «С…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2203893/glava-rosobrnadzora-zaiavil-o-prorabotke-ogranicheniia-prodazhi-mikronaushnikov-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d07856869",
+   "title": "Розничная торговля замедляется, онлайн-продажи стабилизировались",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1376284.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d17567731",
+   "title": "Anthropic выходит на биржу. Чего ждет рынок от рекордного IPO?",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/finam/blog/1376310.php"
+    ]
+   ],
+   "sum": "$75 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-18",
+     "title": "Переговоры",
+     "note": "Anthropic готовится к IPO. Как ожидается, размещение состоится уже на этой неделе. Компания рассчитывает повторить или превзойти рекорд, установленный SpaceX в июне этого года. Тогда корпорация миллиардера Илона Маска выручила $75 млрд от продажи 555,56 млн…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/finam/blog/1376310.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d96478219",
+   "title": "Путин предложил крупнейшим компаниям мира купить российские технологии",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/18/peredovoe/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94647791",
+   "title": "Россияне назвали сумму, которую готовы потратить на распродажах",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145187"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-18",
+     "title": "Переговоры",
+     "note": "Жители России, планирующие участвовать в ноябрьских распродажах, готовы потратить на товары в среднем 13 362 рублей.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053145187"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
