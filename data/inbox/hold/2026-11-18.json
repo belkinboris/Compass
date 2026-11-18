@@ -207,63 +207,6 @@
    ]
   },
   {
-   "draft_id": "d03266066",
-   "title": "Производственно-складской комплекс продают в Воронеже за 855 млн рублей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/"
-    ]
-   ],
-   "sum": "855 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d57789168",
-   "title": "«Дом.РФ» выставил на торги бывший корпус МАИ",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261118/maja-2132301293.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d77714529",
    "title": "«Дом.РФ» выставил на торги корпус городской усадьбы XIX века в Москве",
    "date": "2026-11-18",
@@ -287,275 +230,19 @@
    },
    "ind": "Недвижимость",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Дом.РФ» выставил на торги бывший корпус МАИ» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g6fd6e834 (общие редкие слова: выстав, корпус, торги) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d97362889",
-   "title": "«Туту» может вложить 500–600 млн руб. в покупку «Ракеты» и IBC Corporate Travel",
+   "draft_id": "d65373261",
+   "title": "Глава Рособрнадзора допустил запрет продажи микронаушников на маркетплейсах",
    "date": "2026-11-18",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9112419"
-    ]
-   ],
-   "sum": "600 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc7e0b5c9 (по всей базе: та же сторона и редкое слово: travel) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d22772030",
-   "title": "Почти 50 регионов РФ выступили против онлайн-продажи вина через «Почту России»",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1129766"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d79925471",
-   "title": "В Петербурге приняли закон о полном прекращении продажи вейпов",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28330229"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d60841523",
-   "title": "В РФ работают над запретом продажи микронаушников на маркетплейсах",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28330159"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42576327",
-   "title": "Квартирный вопрос разных поколений: кто сегодня покупает жилье в Петербурге и что хочет от застройщиков",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76773576/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "жилье в Петербурге и что хочет от застройщиков",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "жилье в Петербурге и что хочет от застройщиков",
-    "seller": null
-   },
-   "ind": "Строительство",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d32118279",
-   "title": "Бывший корпус МАИ на Таганке выставят на торги за 1,77 млрд рублей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119354-byvshiy-korpus-mai-na-taganke-vystavyat-na-torgi-za-1-77-mlrd-rubley/"
-    ]
-   ],
-   "sum": "1,77 млрд ₽",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87239063",
-   "title": "В Симферополе выставили на торги имущество мусороперерабатывающего комплекса",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/respublika-krym-i-sevastopol/2026/11/18/v-simferopole-vystavili-na-torgi-imushhestvo-musoropererabatyvayushhego-kompleksa"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8cbd8987 (общие редкие слова: выстав, мусоро, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d18406622",
-   "title": "Кирилл Поляков рассказал о привлечении инвестиций в транспорт Петербурга",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/szfo/news/spb/2026/11/18/kirill-polyakov-rasskazal-o-privlechenii-investiczij-v-transport-peterburga"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40896126",
-   "title": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/realty/2026/11/18/76773710/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, рублей, тюмени) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d40300437",
-   "title": "«Благие намерения»: группа AuditTeam атаковала российские организации и потребовала выкуп за зашифрованные данные в обмен на отчёт по уязвимостям",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-18_blagie_namereniya_gruppa"
+     "https://www.kommersant.ru/doc/9112569"
     ]
    ],
    "sum": null,
@@ -566,10 +253,10 @@
      "kind": "negotiations",
      "date": "2026-11-18",
      "title": "Переговоры",
-     "note": "Эксперты Глобального центра исследования и анализа угроз «Лаборатории Касперского» (Kaspersky GReAT) раскрыли новую...",
+     "note": "Рособрнадзор и Минцифры обсуждают возможность запретить продажу микронаушников на маркетплейсах. Об этом сообщил руководитель Рособрнадзора Анзор Музаев на заседании Общественного совета при ведомстве.",
      "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/line/2026-11-18_blagie_namereniya_gruppa"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9112569"
      ]
     }
    ],
@@ -588,13 +275,13 @@
    ]
   },
   {
-   "draft_id": "d49362730",
-   "title": "«Норбит» автоматизирует оптовые продажи «Офисмаг»",
+   "draft_id": "d05128960",
+   "title": "В Петербурге приняли закон о запрете продажи вейпов с 1 марта 2027 года",
    "date": "2026-11-18",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-18_norbit_avtomatiziruet"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6afd7aaa44ca1238ff951118"
     ]
    ],
    "sum": null,
@@ -616,108 +303,13 @@
    ]
   },
   {
-   "draft_id": "d93030216",
-   "title": "Инвестиции бизнес-ангелов в стартапы «Сколково» достигли 6,47 млрд рублей",
+   "draft_id": "d97769473",
+   "title": "Власти проработают запрет продажи микронаушников на маркетплейсах",
    "date": "2026-11-18",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28330507"
-    ]
-   ],
-   "sum": "6,47 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40313516",
-   "title": "Гардероб из шоу и клипов Майкла Джексона, включая обувь «лунной походки», продадут с аукциона в Абу-Даби",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76774078/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d02509615",
-   "title": "Глава Рособрнадзора заявил о проработке ограничения продажи микронаушников",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203893/glava-rosobrnadzora-zaiavil-o-prorabotke-ogranicheniia-prodazhi-mikronaushnikov-izi"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "В России обсуждают возможность введения ограничений на реализацию микронаушников, в том числе через интернет-магазины и маркетплейсы. Об этом 18 ноября заявил руководитель Рособрнадзора Анзор Музаев на заседании общественного совета при ведомстве. «С…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2203893/glava-rosobrnadzora-zaiavil-o-prorabotke-ogranicheniia-prodazhi-mikronaushnikov-izi"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d07856869",
-   "title": "Розничная торговля замедляется, онлайн-продажи стабилизировались",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1376284.php"
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/18/11/2026/6afd81d467703f07d4149144"
     ]
    ],
    "sum": null,
@@ -740,30 +332,19 @@
    ]
   },
   {
-   "draft_id": "d17567731",
-   "title": "Anthropic выходит на биржу. Чего ждет рынок от рекордного IPO?",
+   "draft_id": "d21074972",
+   "title": "Икону «Чудо Георгия о змие» XVI века выставят на торги в США",
    "date": "2026-11-18",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/finam/blog/1376310.php"
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6afd6d17fc6b6c9557d075f0"
     ]
    ],
-   "sum": "$75 млрд",
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "Anthropic готовится к IPO. Как ожидается, размещение состоится уже на этой неделе. Компания рассчитывает повторить или превзойти рекорд, установленный SpaceX в июне этого года. Тогда корпорация миллиардера Илона Маска выручила $75 млрд от продажи 555,56 млн…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/company/finam/blog/1376310.php"
-     ]
-    }
-   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -779,13 +360,41 @@
    ]
   },
   {
-   "draft_id": "d96478219",
-   "title": "Путин предложил крупнейшим компаниям мира купить российские технологии",
+   "draft_id": "d91505070",
+   "title": "Эксперт рассказал о продаже китайских автомобилей в России",
    "date": "2026-11-18",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/peredovoe/"
+     "web:iz.ru",
+     "https://iz.ru/2203965/2026-11-18/ekspert-rasskazal-o-prodazhe-kitaiskikh-avtomobilei-v-rossii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36960657",
+   "title": "В Петербурге приняли закон о полном запрете продажи вейпов с марта 2027 года",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2203935/v-peterburge-priniali-zakon-o-polnom-zaprete-prodazhi-veipov-s-marta-2027-goda-izi"
     ]
    ],
    "sum": null,
@@ -807,30 +416,19 @@
    ]
   },
   {
-   "draft_id": "d94647791",
-   "title": "Россияне назвали сумму, которую готовы потратить на распродажах",
+   "draft_id": "d76428023",
+   "title": "Минфин разместил на безлимитном аукционе ОФЗ на 42,947 миллиарда рублей",
    "date": "2026-11-18",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053145187"
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/minfin-875333783.html"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-18",
-     "title": "Переговоры",
-     "note": "Жители России, планирующие участвовать в ноябрьских распродажах, готовы потратить на товары в среднем 13 362 рублей.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053145187"
-     ]
-    }
-   ],
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -843,6 +441,218 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18459952",
+   "title": "США разрешили российско-сербской NIS продать автозаправки в Болгарии и Румынии",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/ssha-875331934.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78655011",
+   "title": "Росимущество вновь выставило на торги участок со зданием в Тамбове за 88,4 млн рублей",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119361-rosimushchestvo-vnov-vystavilo-na-torgi-uchastok-so-zdaniem-v-tambove-za-88-4-mln-rubley/"
+    ]
+   ],
+   "sum": "88,4 млн ₽",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Управление активами",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d99838854",
+   "title": "Малые технокомпании привлекли 21 млрд рублей при поддержке Корпорации МСП",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261118/tekhnokompanii-2132401597.html"
+    ]
+   ],
+   "sum": "21 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малые технокомпании",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малые технокомпании",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d97470118",
+   "title": "Россиян стали обманывать при попытках купить GTA VI",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/18/rossiyan-stali-obmanyvat-pri-popytkah-kupit-gta-vi/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67361583",
+   "title": "Книги, колеса, одежда: что и за сколько челябинцы скупают на осенних распродажах",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145249"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d55457156",
+   "title": "При заключении договоров купли-продажи бизнеса продавцы, как правило, предоставляют покупателям заверения об обстоятельствах, касающихся финансового состояния приобретаемого общества, его обязательств",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7583"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d75763379",
+   "title": "В Екатеринбурге геймер выкупил кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "В день премьеры он планирует провести у большого экрана несколько часов",
+     "source": [
+      "web:e1.ru",
+      "https://www.e1.ru/text/entertainment/2026/11/18/76773780/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "кинозал, чтобы поиграть в GTA. Сколько ему это стоило?",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Россиян стали обманывать при попытках купить GTA VI» — второе издание, в группу не шлем"
    ]
   }
  ]
