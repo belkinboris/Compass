@@ -437,6 +437,65 @@
     "draft_id": "d40896126",
     "title": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей"
    }
+  },
+  {
+   "id": "g74dbc4b1",
+   "date": "2026-11-18",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "ind": "Искусственный интеллект",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/media/articles/2026/11/18/1413027-wylsacom-stal-sovladeltsem"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "themes": [
+    "Искусственный интеллект"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Wylsacom",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/media/articles/2026/11/18/1413027-wylsacom-stal-sovladeltsem"
+     }
+    ],
+    "target": [
+     {
+      "value": "разработчик ИИ-сервисов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/media/articles/2026/11/18/1413027-wylsacom-stal-sovladeltsem"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T14:53:44+00:00",
+   "from_raw": {
+    "draft_id": "d17916855",
+    "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов"
+   }
   }
  ]
 }
