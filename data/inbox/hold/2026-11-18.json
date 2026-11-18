@@ -207,209 +207,56 @@
    ]
   },
   {
-   "draft_id": "d38873737",
-   "title": "Эксперт рассказал, как мошенники обманывают россиян при покупке GTA VI",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261118/moshenniki-2132466353.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12601634",
-   "title": "Доходность ОФЗ на аукционах Минфина достигла 16,9% годовых",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/18/11/2026/6afdb19249ef85cb5ecd9819"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d01538671",
-   "title": "Минфин поддержал инициативу продажи ОСАГО через «Госуслуги»",
+   "draft_id": "d27807324",
+   "title": "S7 выкупила пять самолетов Airbus у Red Wings",
    "date": "2026-11-18",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28331707"
+     "https://tass.ru/ekonomika/28332025"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46534055",
-   "title": "«Туту» может вложить до 600 млн рублей в покупку сервисов деловых поездок",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/tutu-mozhet-vlozhit-do-600-mln-rublej-v-pokupku-servisov-delovyh-poezdok/"
-    ]
-   ],
-   "sum": "600 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g5d3527dd (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d28299562",
-   "title": "«Акцентированные углы» Кандинского ушли с молотка за $74 млн",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204204/video/aktcentirovannye-ugly-kandinskogo-ushli-s-molotka-za-74-mln"
-    ]
-   ],
-   "sum": "$74 млн",
-   "type": "Продажа с торгов",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-11-18",
      "title": "Сделка завершена",
-     "note": "Картину русского художника Василия Кандинского «Акцентированные углы» продали на аукционе в Нью-Йорке за рекордные $74 млн. Торги прошли в аукционном доме Christie's в Рокфеллер-центре на Манхэттене. Торги продлились менее трех минут, начальная цена…",
+     "note": "Еще по трем судам ведутся интенсивные переговоры, рассказал гендиректор авиакомпании Дмитрий Куделькин",
      "source": [
-      "web:iz.ru",
-      "https://iz.ru/2204204/video/aktcentirovannye-ugly-kandinskogo-ushli-s-molotka-za-74-mln"
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28332025"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "buyer_name": "S7",
+   "asset": "пять самолетов Airbus",
+   "seller": "Red Wings",
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
+    "buyer": "S7",
+    "asset": "пять самолетов Airbus",
+    "seller": "Red Wings"
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
-   "draft_id": "d55370414",
-   "title": "Якутия подписала соглашение о покупке шести самолетов Ил-114",
+   "draft_id": "d92326955",
+   "title": "ВТБ сохраняет планы по продаже своей доли в аэропорту Пулково",
    "date": "2026-11-18",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261118/samolet-2132481975.html"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Подписана",
-   "events": [
-    {
-     "kind": "signed",
-     "date": "2026-11-18",
-     "title": "Документы подписаны",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261118/samolet-2132481975.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d28022234",
-   "title": "Участники саммита АТЭС намерены увеличивать инвестиции в предотвращение ЧС",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261118/ates-2132468285.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
    "status": "Обсуждается",
    "events": [
     {
@@ -418,8 +265,8 @@
      "title": "Переговоры",
      "note": "",
      "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261118/ates-2132468285.html"
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/11/18/vtb-sohranjaet-plani-po-prodazhe"
      ]
     }
    ],
@@ -431,67 +278,51 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Порты и инфраструктура",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d28387329",
-   "title": "В России зафиксировали рекордные продажи китайских машин с пробегом",
+   "draft_id": "d64421513",
+   "title": "S7 выкупила пять самолетов Airbus A320 у Red Wing",
    "date": "2026-11-18",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/18/v-rossii-zafiksirovali-rekordnye-prodazhi-kitayskih-mashin-s-probegom/"
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/s7-875349423.html"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d83585526",
-   "title": "«От титулoванных родитeлей». В Тюмени продают необычного котенка",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/animals/2026/11/18/76775157/"
-    ]
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261118/s7-875349423.html"
+     ]
+    }
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
+   "buyer_name": "S7",
+   "asset": "пять самолетов Airbus A320",
+   "seller": "Red Wing",
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
+    "buyer": "S7",
+    "asset": "пять самолетов Airbus A320",
+    "seller": "Red Wing"
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g192b4ae5 (общие редкие слова: продаю, тюмени) — проверьте, не дубль ли"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "та же новость, что «S7 выкупила пять самолетов Airbus у Red Wings» — второе издание, в группу не шлем"
    ]
   }
  ]
