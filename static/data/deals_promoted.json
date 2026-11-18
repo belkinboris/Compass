@@ -369183,7 +369183,9 @@
   "g0afaf6a3": null,
   "ge1c5f194": null,
   "gc648998c": null,
-  "g5d3527dd": 288
+  "g5d3527dd": 288,
+  "g6fd6e834": null,
+  "gb50da782": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -369774,7 +369776,8 @@
   "gb8a84b47": 76,
   "g7a31c3cc": 77,
   "g0afaf6a3": 78,
-  "ge1c5f194": 79
+  "ge1c5f194": 79,
+  "g6fd6e834": 80
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -375676,7 +375679,22 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g6fd6e834": {
+   "sum": "1,77 млрд ₽",
+   "seller": "«Дом.РФ»",
+   "asset": "бывший учебный комплекс на Николоямской улице в Таганском районе",
+   "status": "Обсуждается",
+   "title": "«Дом.РФ» выставил на торги бывший корпус МАИ на Таганке",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
- "telegram_last_post_at": "2026-11-18T14:04:17+00:00"
+ "telegram_last_post_at": "2026-11-18T16:56:23+00:00"
 }
