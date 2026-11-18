@@ -10,7 +10,7 @@ import time
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 
 import assistant_retrieval
 import company_finance
@@ -743,11 +743,20 @@ def _confirmed_entity(db, company_id: str, entity_id: int | None = None) -> Lega
     return db.scalar(query.order_by(LegalEntity.is_primary.desc(), LegalEntity.id))
 
 
+def _login_needed(text: str):
+    """Без входа — человеку страница на русском со ссылкой на вход, а не сырой
+    JSON: браузер телефона открывал его без кодировки, кракозябрами (18 ноября 2026)."""
+    page = ('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<title>Нужен вход</title><body style="font:16px/1.5 system-ui,sans-serif;max-width:560px;margin:40px auto;padding:0 16px">'
+            '<p>%s.</p><p><a href="/#/account">Войти</a></p></body>' % (text[:1].upper() + text[1:]))
+    return HTMLResponse(page, status_code=401)
+
+
 @router.get("/api/companies/{company_id}/fns/extract")
 def company_fns_extract(company_id: str, entity_id: int | None = None,
                         user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user:
-        return JSONResponse({"error": "войдите, чтобы скачать выписку"}, status_code=401)
+        return _login_needed("войдите, чтобы скачать выписку ЕГРЮЛ")
     entity = _confirmed_entity(db, company_id, entity_id)
     if not entity or not (entity.inn or entity.ogrn):
         return JSONResponse({"error": "юридическое лицо не сопоставлено"}, status_code=404)
@@ -765,7 +774,7 @@ def company_fns_extract(company_id: str, entity_id: int | None = None,
 def company_fns_bo_file(company_id: str, year: int, entity_id: int | None = None, xls: bool = False,
                         user: User | None = Depends(_current_user), db=Depends(get_db)):
     if not user:
-        return JSONResponse({"error": "войдите, чтобы скачать отчетность"}, status_code=401)
+        return _login_needed("войдите, чтобы скачать отчетность")
     if not FNS_ALL_FREE and user.tier != UserTier.paid:
         return JSONResponse({"error": "скачивание полной отчетности доступно по подписке"}, status_code=403)
     entity = _confirmed_entity(db, company_id, entity_id)
