@@ -2,6 +2,63 @@
  "made": "2026-11-18",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -61,62 +118,6 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
     "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -313,17 +314,17 @@
    ]
   },
   {
-   "draft_id": "d78732167",
-   "title": "Трамп назвал Венесуэлу «новым приобретением» США",
+   "draft_id": "d49790017",
+   "title": "В Абу-Даби на аукционе выставили на торги более 100 вещей Майкла Джексона",
    "date": "2026-11-18",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/18/1412809-tramp-nazval"
+     "web:tass.ru",
+     "https://tass.ru/kultura/28329575"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "$8,5 млн",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -335,6 +336,102 @@
     "seller": null
    },
    "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20346492",
+   "title": "OpenAI выпустила рекордно мощные и дешевые ИИ-модели GPT-6.2 Astra и Sol прямо перед IPO Anthropic",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/openai-vypustila-rekordno-moshhnye-i-deshevye-ii-modeli-gpt-6-2-astra-i-sol-pryamo-pered-ipo-anthropic/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d41566919",
+   "title": "Быстро выкупили просадку",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/zeltser-875315612.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261118/zeltser-875315612.html"
+     ]
+    }
+   ],
+   "buyer_name": "Быстро",
+   "asset": "просадка",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Быстро",
+    "asset": "просадка",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d53855259",
+   "title": "Экс-президент АФК «Система» возглавит Cosmos Hotel Group перед IPO",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119341-eks-prezident-afk-sistema-vozglavit-cosmos-hotel-group-pered-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -370,17 +467,347 @@
    ]
   },
   {
-   "draft_id": "d84141524",
-   "title": "Старинную русскую икону выставили на аукцион в США. Скрин",
+   "draft_id": "d49681861",
+   "title": "Ретейлер электроники «Связь.ON» с 250 магазинами сменил собственников",
    "date": "2026-11-18",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053145182"
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/18/retejler-jelektroniki-svjaz"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gcabe8f6b (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d80835577",
+   "title": "Петербург поделился с регионами опытом привлечения инвестиций в транспорт",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/18/peterburg-podelilsja-s-regionami"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d25704601",
+   "title": "Картина Кандинского установила рекорд на аукционе Christie's",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76773631/"
+    ]
+   ],
+   "sum": "$74 млн",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Ее продали за 74 млн долларов",
+     "source": [
+      "web:fontanka.ru",
+      "https://www.fontanka.ru/2026/11/18/76773631/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gfdccb157 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d72674712",
+   "title": "Петербургский парламент проголосовал за поправки к закону о запрете вейпов. Их нельзя будет продавать с марта",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76773677/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d94524125",
+   "title": "Минвостокразвития ожидает роста инвестиционной активности в ДФО и Арктике",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/minvostokrazvitie-875319756.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d57194842",
+   "title": "Эксперт оценила перспективы программы ВНЖ за инвестиции в Турции",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/ekspert-875319659.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Порты и инфраструктура",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d66532055",
+   "title": "«Дом.РФ» выставил на торги доходный дом начала XX века в центре Москвы",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261118/shevljagina-2132311431.html"
     ]
    ],
    "sum": null,
    "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77341510",
+   "title": "«Дом.РФ» выставил на торги бывшую военную часть в Троицке",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261118/moskva-2132309962.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Дом.РФ» выставил на торги доходный дом начала XX века в цен» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d57789168",
+   "title": "«Дом.РФ» выставил на торги бывший корпус МАИ",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261118/maja-2132301293.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Дом.РФ» выставил на торги доходный дом начала XX века в цен» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d77714529",
+   "title": "«Дом.РФ» выставил на торги корпус городской усадьбы XIX века в Москве",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261118/moskva-2132301152.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Дом.РФ» выставил на торги доходный дом начала XX века в цен» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d87979572",
+   "title": "Финский спутниковый оператор захотел купить итальянского производителя ракет",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/18/finskiy-sputnikovyy-operator-zahotel-kupit-italyanskogo-proizvoditelya-raket/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d13661087",
+   "title": "В Хакасии с продажи сняли 57 литров небезопасной воды",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/siberia/news/respublika-hakasiya/2026/11/18/v-hakasii-s-prodazhi-snyali-57-litrov-nebezopasnoj-vody"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
