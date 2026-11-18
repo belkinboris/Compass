@@ -552,6 +552,58 @@
     "draft_id": "d17916855",
     "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов"
    }
+  },
+  {
+   "id": "gfd375259",
+   "date": "2026-11-18",
+   "title": "Более 80% россиян покупают товары во время распродаж, показал опрос",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261118/tovary-875347817.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Более 80% россиян",
+   "asset": "товары во время распродаж, показал опрос",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Более 80% россиян",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261118/tovary-875347817.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "товары во время распродаж, показал опрос",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261118/tovary-875347817.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T15:52:54+00:00"
   }
  ]
 }
