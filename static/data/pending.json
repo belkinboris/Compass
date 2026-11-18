@@ -835,6 +835,125 @@
     ]
    },
    "pending_since": "2026-11-18T06:53:42+00:00"
+  },
+  {
+   "id": "g7c92fb41",
+   "date": "2026-11-18",
+   "title": "Орловский «Микротензор» вложил 94 млн рублей в расширение производства датчиков давления",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "94 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "94 млн ₽",
+   "buyer_name": "Орловский «Микротензор»",
+   "asset": "расширение производства датчиков давления",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Орловский «Микротензор»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
+     }
+    ],
+    "target": [
+     {
+      "value": "расширение производства датчиков давления",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119347-orlovskiy-mikrotenzor-vlozhil-94-mln-rubley-v-rasshirenie-proizvodstva-datchikov-davleniya/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T07:53:10+00:00"
+  },
+  {
+   "id": "gcabe8f6b",
+   "date": "2026-11-18",
+   "title": "Сеть «Связь.ON» продали за 5–8 млрд рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Retailer.ru",
+     "https://retailer.ru/set-svjaz-on-prodali-za-5-8-mlrd-rublej/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "8 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "8 млрд ₽",
+   "seller": "Сеть «Связь.ON»",
+   "asset": "за 5–8 млрд рублей",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-18",
+     "title": "Сделка завершена",
+     "note": "Банк ПСБ, ЗПИФ «ГК Связь» под управлением «Тэтис Кэпитал» и генеральный директор сети магазинов электроники «Связь.ON» Дагмара Иванова продали свои доли в компании. Сообщение Сеть «Связь.ON» продали за 5–8 млрд рублей появились сначала на RETAILER.ru .",
+     "source": [
+      "Retailer.ru",
+      "https://retailer.ru/set-svjaz-on-prodali-za-5-8-mlrd-rublej/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "за 5–8 млрд рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/set-svjaz-on-prodali-za-5-8-mlrd-rublej/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Сеть «Связь.ON»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://retailer.ru/set-svjaz-on-prodali-za-5-8-mlrd-rublej/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-18T07:53:10+00:00"
   }
  ]
 }
