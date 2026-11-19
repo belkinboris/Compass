@@ -114,7 +114,7 @@ def apply(data):
     c = deals['g352523e0']
     if c['eco'].get('target_fin') != '—':
         assert c['eco']['target_fin'] == '1С не раскрывает свою отчетность', c['eco']['target_fin']
-        absorb(c, 'eco.target_fin', '1С не раскрывает свою отчётность')
+        absorb(c, 'eco.target_fin', '1С не раскрывает свою отчетность')
         c['eco']['target_fin'] = '—'
         out.append('g352523e0 eco.target_fin -> —')
 

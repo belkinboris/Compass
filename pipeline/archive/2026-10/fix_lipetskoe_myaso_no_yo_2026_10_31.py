@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Карточка `g39fc7468`: буква «ё» в `law.struct` («ещё») — владелец, 26
-октября 2026: «забудь, что в русском алфавите есть буква ё» (CLAUDE.md).
+"""Карточка `g39fc7468`: буква «е» в `law.struct` («еще») — владелец, 26
+октября 2026: «забудь, что в русском алфавите есть буква е» (CLAUDE.md).
 
 Запуск: python3 pipeline/fix_lipetskoe_myaso_no_yo_2026_10_31.py
         python3 pipeline/fix_lipetskoe_myaso_no_yo_2026_10_31.py --write
@@ -13,12 +13,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'static', 'data', 'pending.json')
 
 DEAL_ID = 'g39fc7468'
-OLD = ('По данным ЕГРЮЛ, «Телтекс Системс» вошла в капитал «Липецкого мяса» ещё '
+OLD = ('По данным ЕГРЮЛ, «Телтекс Системс» вошла в капитал «Липецкого мяса» еще '
        'в июле 2026 года, получив 20% — тогда свои доли уменьшили Сергей Медведев '
        '(с 65% до 50%) и Сергей Оганов (с 32,5% до 27,5%). 27 октября 2026 года '
        'Медведев вышел из состава участников, и его 50% перешли «Телтекс Системс», '
        'доведя ее пакет до 70%; доля Оганова не менялась.')
-NEW = OLD.replace('ещё', 'еще')
+NEW = OLD.replace('еще', 'еще')
 
 
 def main(write=False):
@@ -26,7 +26,7 @@ def main(write=False):
         data = json.load(f)
     card = next(c for c in data['cards'] if c['id'] == DEAL_ID)
     assert card['law']['struct'] == OLD
-    assert 'ё' not in NEW
+    assert 'е' not in NEW
     print(NEW)
     if write:
         card['law']['struct'] = NEW

@@ -668,7 +668,7 @@ def test_send_plan_trusts_the_site_memory_of_what_was_shown(monkeypatch):
 
 def test_send_plan_only_one_card_skips_raw_and_other_cards(monkeypatch, tmp_path):
     """`ship_card.py` показывает одну готовую карточку сразу (28 октября 2026):
-    план с `only=<id>` — только её 🗂/📣, без сырья и чужих карточек."""
+    план с `only=<id>` — только ее 🗂/📣, без сырья и чужих карточек."""
     import send_drafts
     import promote
     pending = {"cards": [
@@ -683,12 +683,12 @@ def test_send_plan_only_one_card_skips_raw_and_other_cards(monkeypatch, tmp_path
     monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: {"gA", "gB"})
     monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
     monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [
-        {"draft_id": "r1", "title": "Сырьё", "url": "https://example.com/x", "date": "2026-10-27"}])
+        {"draft_id": "r1", "title": "Сырье", "url": "https://example.com/x", "date": "2026-10-27"}])
     monkeypatch.setattr(promote, "load_state", lambda: {}, raising=False)
     plan, *_rest = send_drafts.build_plan(only="gA")
     ids = {item["id"] for _t, _k, (kind, item, _m) in plan if kind == "card"}
     assert ids == {"gA"}, ids
-    assert not [1 for _t, _k, (kind, _i, _m) in plan if kind == "raw"], "сырьё попало в план одной карточки"
+    assert not [1 for _t, _k, (kind, _i, _m) in plan if kind == "raw"], "сырье попало в план одной карточки"
     plan_all, *_rest = send_drafts.build_plan()
     assert {item["id"] for _t, _k, (kind, item, _m) in plan_all if kind == "card"} == {"gA", "gB"}
 
@@ -997,7 +997,7 @@ def test_sentence_split_keeps_address_abbreviations_and_dots_inside_quotes():
     и `g61b33118` («Черкизово»/«Руском»): «Предмет» поста обрывался на
     «…ОАО «Челябинскоблгаз», г.» и на «…бренд «Богатство Сибири.» — признак
     «точка + пробел + заглавная» рвал адресное сокращение «г. Челябинск» и
-    точку внутри незакрытых «ёлочек», а приоритет кавычек в
+    точку внутри незакрытых «елочек», а приоритет кавычек в
     `_pick_novel_sentences()` выбирал именно обрывок (в нем есть «»), а
     связную вторую половину выбрасывал. Теперь оба случая — одно
     предложение; год «в 2024 г.» и одноточечный акроним «ВТБ.» по-прежнему

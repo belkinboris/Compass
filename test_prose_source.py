@@ -28,7 +28,7 @@ FORECAST = ('Есть и тактическая задача: ожидаемая
 
 def test_a_forecast_does_not_turn_into_a_fact():
     # Прогон 1 ноября: «будет продаваться» → «Продажа шла сложной сделкой» — осторожность пропала.
-    assert prose_gate.hedge_lost([FORECAST], 'Продажа шла сложной сделкой, и один из её этапов — допэмиссия холдинга.')
+    assert prose_gate.hedge_lost([FORECAST], 'Продажа шла сложной сделкой, и один из ее этапов — допэмиссия холдинга.')
     # Осторожность или автор сохранены — текст проходит.
     assert not prose_gate.hedge_lost([FORECAST], 'По данным «Ведомостей», допэмиссия должна была помочь собственникам.')
     assert not prose_gate.hedge_lost([FORECAST], 'Продавцы ожидали сохранить влияние за счет допэмиссии.')
@@ -40,11 +40,11 @@ def test_write_card_refuses_a_text_that_dropped_the_hedge():
     card = {'id': 'gtest0001', 'law': {'struct': 'старый текст'}}
     ev = [{'field': 'law.struct', 'fact': 'допэмиссия, продажа доли', 'quote': FORECAST}]
     fixes, notes = write_card.build_fixes('gtest0001', card, ev, {
-        'law.struct': {'text': 'Продажа шла сложной сделкой, и один из её этапов — допэмиссия холдинга.', 'facts': [1]}})
+        'law.struct': {'text': 'Продажа шла сложной сделкой, и один из ее этапов — допэмиссия холдинга.', 'facts': [1]}})
     assert not fixes and any('осторожность' in n for n in notes)
     # Явная причина пишущего снимает отказ.
     fixes, _ = write_card.build_fixes('gtest0001', card, ev, {
-        'law.struct': {'text': 'Продажа шла сложной сделкой, и один из её этапов — допэмиссия холдинга.',
+        'law.struct': {'text': 'Продажа шла сложной сделкой, и один из ее этапов — допэмиссия холдинга.',
                        'facts': [1], 'hedge_ok': 'раскрытие эмитента от 12 июля подтверждает'}})
     assert len(fixes) == 1
 
@@ -90,7 +90,7 @@ def test_acceptance_catches_intent_left_in_a_closed_deal_and_cash_in_as_a_stage(
               'eco': {'rationale': 'Продать долю планируют в этом году.'}}
     assert any(c == 'stale_statement:eco.rationale' for c, _ in accept_card.findings(closed, base))
     staged = {'id': 'gtest0004', 'title': 'x', 'type': 'M&A', 'status': 'Закрыта', 'src': src,
-              'law': {'struct': 'Продажа шла сложной сделкой, и один из её этапов — допэмиссия холдинга.'}}
+              'law': {'struct': 'Продажа шла сложной сделкой, и один из ее этапов — допэмиссия холдинга.'}}
     assert any(c == 'stale_statement:law.struct' for c, _ in accept_card.findings(staged, base))
     invest = dict(staged, id='gtest0005', type='Инвестиция')       # допэмиссия и есть сделка
     assert not any(c == 'stale_statement:law.struct' for c, _ in accept_card.findings(invest, base))

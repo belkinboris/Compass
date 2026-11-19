@@ -207,6 +207,440 @@
    ]
   },
   {
+   "draft_id": "d40022620",
+   "title": "Липецкие власти требуют продать с торгов недострой турцентра на улице Маяковского",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119411-lipetskie-vlasti-trebuyut-prodat-s-torgov-nedostroy-turtsentra-na-ulitse-mayakovskogo/"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g0afaf6a3 (общие редкие слова: липецк, недост) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d28010663",
+   "title": "США продлили лицензию на операции по продаже зарубежных активов «Лукойла»",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/ssha-2132790212.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d24738560",
+   "title": "Anthropic’s IPO puts AI’s circular financing boom to the test",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-puts-ais-circular-financing-boom-to-the-test/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d43686462",
+   "title": "Еще один тюменский ТЦ выставлен на продажу",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145695"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g75283fd4 (общие редкие слова: выстав, продаж, тюменс) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d90906033",
+   "title": "Акции Anthropic взлетели более чем на 38% на старте торгов после IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/19/11/2026/6afedc1e888d4a4ead956df9"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d36596985",
+   "title": "«Перестрелки, погони, драки»: обвал миркоинов, выход GTA и IPO Anthropic",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/19/11/2026/6aff27dd80342d7b8adeb123"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19511890",
+   "title": "Акции Anthropic взлетели на треть после выхода на биржу",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28337273"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d68470985",
+   "title": "Канцлер ФРГ допустил проведение в ОАЭ нового раунда переговоров по Украине",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1130272"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d79867834",
+   "title": "В Москве закрыли сайт по продаже крокодилов и питонов",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/moskva-2132829643.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43585239",
+   "title": "Раскрыто возможное место проведения нового раунда переговоров по Украине",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/20/raskryto-vozmozhnoe-mesto-provedeniya-novogo-raunda-peregovorov-po-ukraine/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23901940",
+   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28330111"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41882092",
+   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76774338/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91144434",
+   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/kurtka-875330072.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d86670029",
    "title": "Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO Anthropic",
    "date": "2026-11-19",
@@ -233,6 +667,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d16426733",
+   "title": "Не только «Подчеркнутые углы». Рекордные продажи Кандинского на аукционах",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/photoreport/19/11/2026/6afeb3806e1d369254e8c3fa"
+    ]
+   ],
+   "sum": "$85,8 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -267,97 +729,6 @@
    ]
   },
   {
-   "draft_id": "d49650078",
-   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/anthropic-875381358.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d40022620",
-   "title": "Липецкие власти требуют продать с торгов недострой турцентра на улице Маяковского",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119411-lipetskie-vlasti-trebuyut-prodat-s-torgov-nedostroy-turtsentra-na-ulitse-mayakovskogo/"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g0afaf6a3 (общие редкие слова: липецк, недост) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d83781080",
-   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/anthropic-2132773302.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d90026806",
    "title": "Минфин США продлил разрешение на переговоры о продаже зарубежных активов ЛУКОЙЛа",
    "date": "2026-11-19",
@@ -387,74 +758,6 @@
    ]
   },
   {
-   "draft_id": "d93046052",
-   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/19/1413497-ssha-prodlili-litsenziyu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gb5456bba (общие редкие слова: продаж, снова) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d93734939",
-   "title": "МТС-банк рассматривает возможность buyback акций, анализирует рыночные практики",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130241"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "МТС-банк рассматривает возможность buyback акций, заявил вице-президент МТС-банка по стратегии Роман Зильберман.\"Смотрим на рыночные практики, анализируем, возможность такую рассматриваем.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1130241"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d83214551",
    "title": "OFAC продлило до 19 декабря лицензию для продажи зарубежных активов «ЛУКОЙЛа»",
    "date": "2026-11-19",
@@ -478,104 +781,6 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d88084073",
-   "title": "Петербургский бизнес нарастил инвестиции в технологии интернета вещей",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-19_peterburgskij_biznes_narastil"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d20434992",
-   "title": "Эксперт Анфиногенов оценил инвестиции для создания игорной зоны в РФ",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28336981"
-    ]
-   ],
-   "sum": "10 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92370767",
-   "title": "«Автоваз» планирует выпустить и продать не менее 20 тыс. Lada Azimut в 2027 году",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28336975"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Производственные мощности предприятия позволяют выпускать до 70 тыс. таких машин ежегодно",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28336975"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
@@ -588,34 +793,6 @@
     [
      "web:tass.ru",
      "https://tass.ru/obschestvo/28336877"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43401730",
-   "title": "РЖД создадут виртуальных помощников для покупки билетов на поезда",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/rzhd-875392564.html"
     ]
    ],
    "sum": null,
@@ -663,47 +840,17 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
+    "та же новость, что «OFAC продлило до 19 декабря лицензию для продажи зарубежных » — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d28010663",
-   "title": "США продлили лицензию на операции по продаже зарубежных активов «Лукойла»",
+   "draft_id": "d83781080",
+   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
    "date": "2026-11-19",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261119/ssha-2132790212.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d24738560",
-   "title": "Anthropic’s IPO puts AI’s circular financing boom to the test",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropics-ipo-puts-ais-circular-financing-boom-to-the-test/"
+     "https://ria.ru/20261119/anthropic-2132773302.html"
     ]
    ],
    "sum": null,

@@ -5345,7 +5345,7 @@ def test_text_reply_to_a_post_edit_proposal_becomes_the_new_post_text(client, mo
     «напиши в консоли, что хочешь обновить в посте и как будет выглядеть новый
     пост… мы нажмем согласие или отказ или направим новую редакцию». Полный
     текст в ответ на «[правка поста <id>]» — решение `<id>~edit`/post_yes с
-    этим текстом; вопрос — заметка; «отмена» снимает неприменённое решение."""
+    этим текстом; вопрос — заметка; «отмена» снимает непримененное решение."""
     _mod_env(monkeypatch)
     sent = []
     monkeypatch.setattr(main.notification_service, "tg_api", lambda method, **p: sent.append((method, p))

@@ -80,7 +80,7 @@ VC_NDT = 'https://vc.ru/id176034/1941480-almazyi-dlya-elektroniki-new-diamond-te
 
 # --- gbfb079af
 FNS_PL = 'https://projectcompass.ru/api/companies/gdc33d226/fns'
-Q_PL = ('История участников ООО «Платим» (ИНН 7707452269), 2023-03-23: вошла Кулигина Елена Фёдоровна '
+Q_PL = ('История участников ООО «Платим» (ИНН 7707452269), 2023-03-23: вошла Кулигина Елена Федоровна '
         '(6%, номинал 7 500 ₽); доля Прокофьева А. А. 16% → 17%, доли Румянцева, Мишуровского и Абдуллина '
         'уменьшились при росте их номиналов — капитал вырос со 100 000 до 125 000 ₽')
 VC_PL = ('https://vc.ru/money/567570-servis-priema-platezhey-platim-privlek-23-4-mln-rubley-ot-top-menedzhera-'
