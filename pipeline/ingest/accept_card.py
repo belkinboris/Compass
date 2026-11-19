@@ -837,7 +837,7 @@ def entities_missing_from_card(card, comps, records=None):
             key = review.typo_flat(name).lower().replace('ё', 'е')
             prefix = text[max(0, m.start() - 20):m.start()]
             if '©' in prefix or re.search(r'(?i)учредител|реклам', prefix):
-                # Юрлицо издателя страницы встречается в её футере не всегда
+                # Юрлицо издателя страницы встречается в ее футере не всегда
                 # рядом со значком — у "Ведомостей" оно повторяется дважды:
                 # один раз после "Учредитель:", второй — без маркера рядом
                 # (блок про персональные данные). Запоминаем по имени, а не
@@ -2604,7 +2604,7 @@ def _self_check():
               'eco': {'rationale': 'Продать долю планируют в этом году.'}, 'src': src1}
     assert any(c == 'stale_statement:eco.rationale' for c, _t in findings(card7d, base))
     card7e = {'id': 'gtest7e', 'title': 'x', 'type': 'M&A', 'ind': 'Банки', 'status': 'Закрыта', 'src': src1,
-              'law': {'struct': 'Продажа шла сделкой, и один из её этапов — допэмиссия холдинга.'}}
+              'law': {'struct': 'Продажа шла сделкой, и один из ее этапов — допэмиссия холдинга.'}}
     assert any(c == 'stale_statement:law.struct' for c, _t in findings(card7e, base))
     card7f = dict(card7e, id='gtest7f', type='Инвестиция')   # допэмиссия и есть сделка — слово законно
     assert not any(c == 'stale_statement:law.struct' for c, _t in findings(card7f, base))
