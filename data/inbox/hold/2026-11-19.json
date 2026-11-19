@@ -207,35 +207,6 @@
    ]
   },
   {
-   "draft_id": "d54822122",
-   "title": "Anthropic провела крупнейшее IPO в истории — компания привлекла $107,3 млрд",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/anthropic-provela-krupnejshee-ipo-v-istorii-kompaniya-privlekla-1073-mlrd/"
-    ]
-   ],
-   "sum": "$107,3 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Anthropic провела крупнейшее IPO в истории — компания",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Anthropic провела крупнейшее IPO в истории — компания",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d49650078",
    "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
    "date": "2026-11-19",
@@ -259,11 +230,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO в истории — компания привле» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -323,35 +292,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO в истории — компания привле» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d83214551",
-   "title": "OFAC продлило до 19 декабря лицензию для продажи зарубежных активов «ЛУКОЙЛа»",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130231"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -378,10 +319,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «OFAC продлило до 19 декабря лицензию для продажи зарубежных » — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -411,7 +350,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «OFAC продлило до 19 декабря лицензию для продажи зарубежных » — второе издание, в группу не шлем"
+    "та же новость, что «Минфин США продлил лицензию на операции по продаже активов «» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -442,47 +381,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO в истории — компания привле» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d20327325",
-   "title": "Sanofi изучает возможность покупки американской Insmed с капитализацией более $26 млрд",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130248"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Французская фармацевтическая компания Sanofi SA рассматривает возможность покупки американской Insmed Inc., сообщает агентство Bloomberg со ссылкой на информированные источники.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1130248"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -515,17 +414,178 @@
    ]
   },
   {
-   "draft_id": "d22118714",
-   "title": "Картина Ван Гога «Цветущие каштаны» продана за 190,4 млн долларов",
+   "draft_id": "d90906033",
+   "title": "Акции Anthropic взлетели более чем на 38% на старте торгов после IPO",
    "date": "2026-11-19",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/19/kartina-van-goga-czvetushhie-kashtany-prodana-za-1904-mln-dollarov"
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/19/11/2026/6afedc1e888d4a4ead956df9"
     ]
    ],
-   "sum": "$190,4 млн",
-   "type": "Продажа с торгов",
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d36596985",
+   "title": "«Перестрелки, погони, драки»: обвал миркоинов, выход GTA и IPO Anthropic",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/19/11/2026/6aff27dd80342d7b8adeb123"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19511890",
+   "title": "Акции Anthropic взлетели на треть после выхода на биржу",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28337273"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d67256704",
+   "title": "Автомобили Xiaomi начнут официально продавать за пределами Китая — первым зарубежным рынком стали ОАЭ",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/avtomobili-xiaomi-nachnut-oficialno-prodavat-za-predelami-kitaya-pervym-zarubezhnym-rynkom-stali-oae/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d89206491",
+   "title": "L’Oréal обсуждает покупку 10% Giorgio Armani: ещё 5% может приобрести производитель очков",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/loreal-obsuzhdaet-pokupku-10-giorgio-armani-eshyo-5-mozhet-priobresti-proizvoditel-ochkov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Французский производитель косметики L’Oréal ведёт переговоры о покупке 10% итальянского модного дома Giorgio Armani, ещё 5% может приобрести производитель очков EssilorLuxottica, сообщает итальянское издание Corriere della Sera. По данным газеты, французская…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/loreal-obsuzhdaet-pokupku-10-giorgio-armani-eshyo-5-mozhet-priobresti-proizvoditel-ochkov/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d02271124",
+   "title": "Владельцы «Лестера» передумали продавать клуб, пишут СМИ",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/lester-2132819200.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -543,17 +603,77 @@
    ]
   },
   {
-   "draft_id": "d04129342",
-   "title": "100 тысяч за подпись: в Новосибирске продают кепку с автографом экс-хоккеиста «Сибири»",
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
    "date": "2026-11-19",
    "src": [
     [
-     "web:ngs.ru",
-     "https://ngs.ru/text/entertainment/2026/11/19/76777715/"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d26023819",
+   "title": "Акции Antrophic взлетели на треть после рекордного IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/aktsii-antrophic-vzleteli-na-tret-posle-rekordnogo-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d11626494",
+   "title": "Зеленский высказался о следующем раунде переговоров с Россией",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/zelenskiy-vyskazalsya-o-sleduyuschem-raunde-peregovorov-s-rossiey/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,

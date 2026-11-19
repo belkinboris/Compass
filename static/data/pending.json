@@ -416,6 +416,72 @@
     ]
    },
    "pending_since": "2026-11-19T15:54:31+00:00"
+  },
+  {
+   "id": "gb82efd9f",
+   "date": "2026-11-19",
+   "title": "«Медскан» продала 49% лабораторной сети KDL",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/business/19/11/2026/6aff3156f3a807b635eff90b"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Медскан»",
+   "asset": "49% лабораторной сети KDL",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Группа компаний &laquo;Медскан&raquo;, входящая в контур управления &laquo;Росатома&raquo;, продала в рамках сделки стратегическому партнеру 49% лабораторного бизнеса KDL&nbsp;| Медскан.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/business/19/11/2026/6aff3156f3a807b635eff90b"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "49% лабораторной сети KDL",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/19/11/2026/6aff3156f3a807b635eff90b"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Медскан»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/business/19/11/2026/6aff3156f3a807b635eff90b"
+     }
+    ]
+   },
+   "seller_id": "g729ef6c5",
+   "pending_since": "2026-11-19T17:53:05+00:00"
   }
  ]
 }
