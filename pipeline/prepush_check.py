@@ -55,6 +55,16 @@ def ingest_data_tests(path=None):
 
 
 def main():
+    # ПРАВКА ФАКТА БЕЗ ПОДТВЕРЖДАЮЩЕЙ ЦИТАТЫ НЕ УХОДИТ В MAIN (19 ноября 2026). Раньше
+    # `fact_edit_guard` звали только те скрипты, что сами о нем помнили; теперь его проходит
+    # каждый пуш базы: что изменилось в фактах против origin/main — у всего есть цитата,
+    # а у суммы цитата несет само число.
+    g = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fact_edit_guard.py'),
+                        '--base', 'origin/main'], capture_output=True, text=True)
+    if g.returncode:
+        print((g.stdout + g.stderr).strip()[-1500:])
+        print('НЕ ПУШИТЬ: правка факта без подтверждающей цитаты.')
+        return 1
     suites = [s for s in SUITES if os.path.exists(os.path.join(ROOT, s))] + ingest_data_tests()
     r = subprocess.run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', *suites],
                        cwd=ROOT, capture_output=True, text=True)

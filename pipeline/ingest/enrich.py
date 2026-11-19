@@ -263,6 +263,34 @@ def prior_stage_event(deal, event):
     return out
 
 
+_SUM_QUOTES = {}      # (id карточки, сумма) -> предложение источника, которое ее подтверждает
+
+
+def checked_sum(text):
+    """(сумма, предложение) — сумма сделки, которую подтверждает само предложение источника,
+    или None. Вилка остается вилкой, оценка получает «(по оценке)»."""
+    import review
+    text = str(text or '')
+    if draft.DEAL_SUM_UNDISCLOSED.search(text) and not review.ESTIMATE_WORDS.search(text):
+        return None
+    for sentence in re.split(r'(?<=[.!?])\s+', text):
+        base = draft.guess_sum(sentence)
+        if not base or draft.NOT_A_PRICE.search(sentence):
+            continue
+        m = re.match(r'^(\D*?)(\d[\d,]*)\s*(млн|млрд)(.*)$', base)
+        cands = []
+        if m:
+            rng = re.search(r'(\d+(?:,\d+)?)\s*[–—-]\s*' + re.escape(m.group(2)) + r'(?![\d,])', sentence)
+            if rng:
+                cands.append('%s%s–%s %s%s' % (m.group(1), rng.group(1), m.group(2), m.group(3), m.group(4)))
+        cands.append(base)
+        for c in cands:
+            for value in (c, c + ' (по оценке)'):
+                if review.sum_is_supported(value, sentence) is None:
+                    return value, sentence
+    return None
+
+
 def proposals(deal, item, names, comps, match_keys=None):
     """Что новость может дать карточке: список (поле, значение, вид, пояснение).
 
@@ -303,8 +331,18 @@ def proposals(deal, item, names, comps, match_keys=None):
     # (23 октября 2026, g5e1a7c24 через tg:dealsma). `sum_from_text` ищет по
     # предложениям и отбраковывает то, где рядом с числом — NOT_A_PRICE
     # («не раскрывается», выручка, убыток и т.п.), как и сборка черновика.
-    sum_guess = draft.sum_from_text(text)
-    if sum_guess:
+    # СУММА ПИШЕТСЯ ТОЛЬКО ПРОВЕРЕННОЙ ПО ПРЕДЛОЖЕНИЮ ИСТОЧНИКА (владелец, 19 ноября 2026:
+    # «когда ты что-то пишешь в карту, ты должен сам перепроверить, соответствует ли это
+    # действительности»). «Туту»/«Ракета»: из «может вложить 500–600 млн руб.» в карточку ушло
+    # «600 млн ₽» фактом, с цитатой другой статьи без числа. `checked_sum` находит предложение
+    # с числом и подбирает запись (вилка, «(по оценке)»), которую подтверждает
+    # `review.sum_is_supported` — та же проверка, что у правок чтения. Не подтверждается —
+    # сумма не предлагается вовсе. «Не раскрыта» у карточки — не помеха: оценка специалиста
+    # идет в сумму с пометкой (docs/card_money.md, «Что идет в сумму»).
+    checked = checked_sum(text)
+    if checked:
+        sum_guess, sentence = checked
+        _SUM_QUOTES[(str(deal.get('id')), sum_guess)] = sentence
         current = current_value(deal, 'sum', comps)
         if not current:
             if is_retracted(deal, 'sum', sum_guess):
@@ -501,7 +539,8 @@ def apply_props(deal, props, source=None):
         import fact_edit_guard
         for field, value, kind, _why in props:
             if kind != 'расхождение' and field in fact_edit_guard.FACT_FIELDS:
-                fact_edit_guard.log(deal, field, value, source[0], source[1], source[2])
+                quote = _SUM_QUOTES.get((str(deal.get('id')), value)) if field == 'sum' else None
+                fact_edit_guard.log(deal, field, value, quote or source[0], source[1], source[2])
     for field, value, kind, _why in props:
         if kind == 'расхождение':
             continue

@@ -1576,6 +1576,27 @@ def test_enrich_fills_the_sum_in_both_lenses(base):
     assert deal["eco"]["sum"] == "60 млрд ₽"
 
 
+def test_enrich_writes_only_a_sum_its_own_sentence_supports(base):
+    """«Туту»/«Ракета», 18 ноября 2026: из «может вложить 500–600 млн руб.» в карточку ушло
+    «600 млн ₽» фактом, с цитатой без числа. Владелец: «когда ты что-то пишешь в карту, ты
+    должен сам перепроверить». Сумма берется только вместе с предложением, которое ее
+    подтверждает: вилка остается вилкой, оценка получает «(по оценке)»."""
+    import enrich
+    import fact_edit_guard
+    assert enrich.checked_sum("«Туту» может вложить 500–600 млн руб. в покупку «Ракеты».")[0] == "500–600 млн ₽ (по оценке)"
+    assert enrich.checked_sum("Компания купила завод за 2,5 млрд руб.")[0] == "2,5 млрд ₽"
+    assert enrich.checked_sum("Выручка завода — 3 млрд руб.") is None
+    deal = {"id": "t-und", "title": "«Туту» покупает «Ракету»", "date": "2026-11-18", "status": "Согласование получено",
+            "src": [], "sum": "Не раскрыта", "eco": {"sum": "Не раскрыта"}, "reviewed": "2026-11-18"}
+    item = {"title": "«Туту» может вложить 500–600 млн руб. в покупку «Ракеты»", "summary": "", "url": "https://example.invalid/t1"}
+    props = enrich.proposals(deal, item, {}, base["companies"])
+    assert ("sum", "500–600 млн ₽ (по оценке)", "добавить") in [(f, v, k) for f, v, k, _ in props]
+    # защита: цитата без числа сумму не подтверждает, цитата с числом — подтверждает
+    assert fact_edit_guard.quote_problem("sum", "600 млн ₽", "ФАС согласовала сделку по присоединению к «Туту».")
+    assert fact_edit_guard.quote_problem("sum", "600 млн ₽", "может вложить 500–600 млн руб.")   # оценка без пометки
+    assert not fact_edit_guard.quote_problem("sum", "500–600 млн ₽ (по оценке)", "может вложить 500–600 млн руб.")
+
+
 def test_enrich_only_moves_status_forward(base):
     """«Обсуждается» -> «Закрыта» можно, обратно — нет.
 
@@ -1809,7 +1830,9 @@ def test_enrich_does_not_restore_a_retracted_value(base):
     тихо записаться в базу заново."""
     import enrich
     deal = next(d for d in base["deals"] if not format_post.has(d.get("sum")))
-    deal = dict(deal, retracted={"sum": ["2,05 млрд ₽"]})
+    # Карточка без отметок чтения: у прочитанной «Не раскрыта» — решение читателя, и
+    # любое число уходит в «расхождение» (test_enrich_does_not_fill_a_sum_the_reader_left_undisclosed).
+    deal = dict(deal, retracted={"sum": ["2,05 млрд ₽"]}, reviewed=None, accepted=None)
     item = {"title": "Стороны подтвердили сумму сделки — 2,05 млрд рублей",
             "url": "https://example.invalid/enrich-retracted", "source_id": "web:kommersant.ru"}
     props = enrich.proposals(deal, item, {}, base["companies"])
@@ -11969,7 +11992,8 @@ def test_reread_marathon_findings_on_real_cards():
            "eco": {"sum": "300–350 млн ₽ (по оценке)", "val": "Конов цену не назвал. Гендиректор «INFOLine-Аналитики» "
                    "Михаил Бурмистров оценивает покупку в 300–350 млн ₽."}}
     assert ac.sum_is_expert_estimate(est)
-    assert "sum_is_expert_estimate" in {c for c, _t in ac.marathon_findings(est, {})}
+    # Владелец, 18 ноября 2026: оценка эксперта в сумме — правильно; находка выключена.
+    assert "sum_is_expert_estimate" not in {c for c, _t in ac.marathon_findings(est, {})}
     # g0bbc9e9e: «по неофициальным данным могла составить» — неофициальная цена сделки, не блокирует
     unoff = dict(est, sum="≈2 млрд ₽ (по оценке)", eco={"val": "Стороны цену не раскрывают; по неофициальным данным, "
                                                          "она могла составить около 2 млрд ₽."})
@@ -11997,7 +12021,8 @@ def test_reread_marathon_findings_on_real_cards():
     got = ac.late_event_in_terms(late, today="2026-11-13")
     assert [f for f, _s in got] == ["law.struct"] and "Ленте" in got[0][1]
     # блокирующие — только две; подсказки отметку не держат
-    assert {"party_placeholder", "sum_is_expert_estimate"} <= set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    assert "party_placeholder" in set(rq.BLOCKING) & set(rq.SHORT_BLOCKING)
+    assert "sum_is_expert_estimate" not in set(rq.BLOCKING) | set(rq.SHORT_BLOCKING)
     for hint in ("sum_estimate_prose", "date_is_article_day", "auction_in_text", "late_event_in_terms"):
         assert hint not in rq.BLOCKING
 
