@@ -367,6 +367,90 @@
     "needs_review": true
    },
    "queued": "2026-11-19"
+  },
+  {
+   "key": "https://1prime.ru/20261119/klienty-875363099.html::g2a07c829",
+   "candidate_id": "g2a07c829",
+   "reason": "общие редкие слова: втб, клиент, продал",
+   "draft": {
+    "draft_id": "d43162850",
+    "title": "Клиенты ВТБ за 1,5 месяца продали банку инвестмонеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261119/klienty-875363099.html"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261119/klienty-875363099.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "банк инвестмонеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "банк инвестмонеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d::g8695856c",
+   "candidate_id": "g8695856c",
+   "reason": "общие редкие слова: картин, продал, рекорд",
+   "draft": {
+    "draft_id": "d82049234",
+    "title": "Картину Ван Гога продали за рекордные $190 млн",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+     ]
+    ],
+    "sum": "$190 млн",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Картина Винсента ван Гога &laquo;Цветущие каштаны&raquo; продана 18 ноября за рекордные $190,4 млн.",
+      "source": [
+       "web:rbc.ru",
+       "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "за рекордные $190 млн",
+    "seller": "Картину Ван Гога",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "за рекордные $190 млн",
+     "seller": "Картину Ван Гога"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
   }
  ]
 }
