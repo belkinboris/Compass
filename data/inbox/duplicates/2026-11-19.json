@@ -115,6 +115,258 @@
     "needs_review": true
    },
    "queued": "2026-11-19"
+  },
+  {
+   "key": "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali::ga91c5821",
+   "candidate_id": "ga91c5821",
+   "reason": "общие редкие слова: картин, продал, рекорд",
+   "draft": {
+    "draft_id": "d47702418",
+    "title": "Картину Ван Гога продали за рекордные $190,4 млн на аукционе Sotheby's",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+     ]
+    ],
+    "sum": "$190,4 млн",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "за рекордные $190,4 млн на аукционе Sotheby's",
+    "seller": "Картину Ван Гога",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "за рекордные $190,4 млн на аукционе Sotheby's",
+     "seller": "Картину Ван Гога"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d::ga91c5821",
+   "candidate_id": "ga91c5821",
+   "reason": "общие редкие слова: картин, продал, рекорд",
+   "draft": {
+    "draft_id": "d82049234",
+    "title": "Картину Ван Гога продали за рекордные $190 млн",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+     ]
+    ],
+    "sum": "$190 млн",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Картина Винсента ван Гога &laquo;Цветущие каштаны&raquo; продана 18 ноября за рекордные $190,4 млн.",
+      "source": [
+       "web:rbc.ru",
+       "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "за рекордные $190 млн",
+    "seller": "Картину Ван Гога",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "за рекордные $190 млн",
+     "seller": "Картину Ван Гога"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://retailer.ru/burger-king-vykupil-arenduemyj-ofis-v-moskve/::ge6b04680",
+   "candidate_id": "ge6b04680",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d93795336",
+    "title": "«Бургер Кинг» выкупил арендуемый офис в Москве",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/burger-king-vykupil-arenduemyj-ofis-v-moskve/"
+     ]
+    ],
+    "sum": "800 млн ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Стоимость сделки могла составить около 800 млн рублей. Сообщение «Бургер Кинг» выкупил арендуемый офис в Москве появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/burger-king-vykupil-arenduemyj-ofis-v-moskve/"
+      ]
+     }
+    ],
+    "buyer_name": "«Бургер Кинг»",
+    "asset": "арендуемый офис в Москве",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Бургер Кинг»",
+     "asset": "арендуемый офис в Москве",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28333801::g1a2f9d60",
+   "candidate_id": "g1a2f9d60",
+   "reason": "общие редкие слова: 15, рублей",
+   "draft": {
+    "draft_id": "d56406645",
+    "title": "ЦБ купил юани на 15 млрд рублей с расчетами 18 ноября",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28333801"
+     ]
+    ],
+    "sum": "15 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Операции покупки и продажи иностранной валюты Банк России проводит на внутреннем рынке в валютной секции Мосбиржи в инструменте \"юань - рубль\"",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28333801"
+      ]
+     }
+    ],
+    "buyer_name": "ЦБ",
+    "asset": "юани на 15 млрд рублей с расчетами 18 ноября",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "ЦБ",
+     "asset": "юани на 15 млрд рублей с расчетами 18 ноября",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28333743::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 4",
+   "draft": {
+    "draft_id": "d20981863",
+    "title": "Клиенты ВТБ продали инвестиционные золотые монеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28333743"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Наиболее активными продавцами оказались жители Москвы",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28333743"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "инвестиционные золотые монеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "инвестиционные золотые монеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://1prime.ru/20261119/klienty-875363099.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие редкие слова: втб, клиент, продал",
+   "draft": {
+    "draft_id": "d43162850",
+    "title": "Клиенты ВТБ за 1,5 месяца продали банку инвестмонеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261119/klienty-875363099.html"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261119/klienty-875363099.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "банк инвестмонеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "банк инвестмонеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
   }
  ]
 }

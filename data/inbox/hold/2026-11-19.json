@@ -2,103 +2,6 @@
  "made": "2026-11-19",
  "drafts": [
   {
-   "draft_id": "d82189864",
-   "title": "Эксперт назвал способы сэкономить на ноябрьских распродажах",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2203816/2026-11-19/ekspert-nazval-sposoby-sekonomit-na-noiabrskikh-rasprodazhakh"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Черная пятница в России перестала быть однодневной распродажей: магазины и маркетплейсы растягивают акции на несколько недель, а привычная охота за скидками уступает место планированию. При этом крупные проценты на ценниках не всегда означают реальную…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2203816/2026-11-19/ekspert-nazval-sposoby-sekonomit-na-noiabrskikh-rasprodazhakh"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d28160149",
-   "title": "У FES retail сменился мажоритарный владелец",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d23901940",
    "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
    "date": "2026-11-18",
@@ -106,297 +9,6 @@
     [
      "web:tass.ru",
      "https://tass.ru/ekonomika/28330111"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20838878",
-   "title": "У челябинского заповедника продается курорт с космической кухней за 265 млн. Фото",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145269"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80309991",
-   "title": "Российские логисты не фиксируют ажиотажа в период главной распродажи",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/logisty-875361293.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d05517194",
-   "title": "Картину, которую нашли в шкафу, продали в США почти за 5 миллионов долларов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/pejzazh-2132555378.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-19",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:ria.ru",
-      "https://ria.ru/20261119/pejzazh-2132555378.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "в США почти",
-   "seller": "Картину, которую нашли в шкафу",
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "в США почти",
-    "seller": "Картину, которую нашли в шкафу"
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
-    "похоже на уже описанную сделку pending-1 (общие редкие слова: картин, продал) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d72079371",
-   "title": "Земельные участки — недооценённый риск в M&A-сделках При покупке производственного, складского или коммерческого бизнеса права на земельные участки могут оказаться существенным источником юридических ",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7587"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33060293",
-   "title": "Bloomberg узнало цену акций Anthropic для выхода на биржу",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204469/2026-11-19/bloomberg-uznalo-tcenu-aktcii-anthropic-dlia-vykhoda-na-birzhu"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Американская технологическая компания Anthropic планирует разместить акции на первичном публичном размещении (IPO) по цене $80–85 за штуку, что может стать крупнейшим первичным публичным размещением в истории. Об этом 18 ноября сообщило агентство Bloomberg со…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2204469/2026-11-19/bloomberg-uznalo-tcenu-aktcii-anthropic-dlia-vykhoda-na-birzhu"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнал возможную цену акций Anthropic на IPO // Blo» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d67201028",
-   "title": "Более 100 личных вещей Майкла Джексона выставлены на аукцион",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/media/news/2026/11/19/1413149-100-veschei-maikla-dzheksona"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52578026",
-   "title": "Bloomberg узнал возможную цену акций Anthropic на IPO // Bloomberg: Anthropic рассматривает возможную цену акций на IPO в $80–85",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9113140"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Компания Anthropic рассматривает возможность установить цену акций в рамках своего первичного публичного размещения (IPO) в диапазоне от $80 до $85 за штуку. Об этом сообщает Bloomberg со ссылкой на источники.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9113140"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d01174021",
-   "title": "Си Цзиньпин призвал устранить барьеры для торговли и инвестиций в АТР",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/19/1413159-tszinpin-prizval"
     ]
    ],
    "sum": null,
@@ -441,25 +53,23 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнал возможную цену акций Anthropic на IPO // Blo» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d34423503",
-   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
    "date": "2026-11-17",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -470,20 +80,204 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Банки",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d37106181",
-   "title": "«Уверяли, что все будет хорошо». Екатеринбурженке продали старое авто по тройной цене вместо нового «китайца»",
+   "draft_id": "d48495247",
+   "title": "Средний чек сделок M&A сократился на 42%",
    "date": "2026-11-19",
    "src": [
     [
-     "web:e1.ru",
-     "https://www.e1.ru/text/transport/2026/11/19/76759220/"
+     "web:retailer.ru",
+     "https://retailer.ru/srednij-chek-sdelok-m-a-sokratilsja-na-42/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d43500706",
+   "title": "США не стремятся зарабатывать на продаже оружия Украине, заявил Трамп",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/tramp-2132596827.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82434089",
+   "title": "Anthropic привлекла рекордные $81,3 млрд: разработчика Claude оценили в $1,5 трлн на IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/anthropic-privlekla-rekordnye-81-3-mlrd-razrabotchika-claude-otsenili-v-1-5-trln-na-ipo/"
+    ]
+   ],
+   "sum": "$81,3 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Anthropic провела рекордное IPO на $81,3 млрд по цене $83 за акцию. Разработчика Claude оценили в $1,5 трлн. Финансовые показатели, риски и планы компании.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/anthropic-privlekla-rekordnye-81-3-mlrd-razrabotchika-claude-otsenili-v-1-5-trln-na-ipo/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Anthropic",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Anthropic",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d79715762",
+   "title": "Приоритетные отрасли МСП привлекли более 200 млрд рублей финансовой поддержки",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28333895"
+    ]
+   ],
+   "sum": "200 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Приоритетные отрасли МСП",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Приоритетные отрасли МСП",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d00715112",
+   "title": "Россияне признались в покупке авиабилетов из страха",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/rossiyane-priznalis-v-pokupke-aviabiletov-iz-straha/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47120915",
+   "title": "Народный фронт приобрел оргтехнику для старобельского колледжа",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28333777"
     ]
    ],
    "sum": null,
@@ -494,39 +288,39 @@
      "kind": "closed",
      "date": "2026-11-19",
      "title": "Сделка завершена",
-     "note": "Рассказываем о печальном походе в автосалон",
+     "note": "Помощь предоставили для возобновления устойчивой работы учреждения",
      "source": [
-      "web:e1.ru",
-      "https://www.e1.ru/text/transport/2026/11/19/76759220/"
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28333777"
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": "старое авто по тройной цене вместо нового «китайца»",
+   "buyer_name": "Народный фронт",
+   "asset": "оргтехника для старобельского колледжа",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": "старое авто по тройной цене вместо нового «китайца»",
+    "buyer": "Народный фронт",
+    "asset": "оргтехника для старобельского колледжа",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d79345882",
-   "title": "Террористы, коррупционеры, национализация: чем запомнился челябинцам шеф УФСБ генерал Иванов. Фото, видео",
+   "draft_id": "d49154852",
+   "title": "Мосбиржа проводит дискретный аукцион по ценным бумагам МГКЛ",
    "date": "2026-11-19",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053145427"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/19/1413205-auktsion-mgkl"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -544,13 +338,41 @@
    ]
   },
   {
-   "draft_id": "d71847138",
-   "title": "Эксперт рассказал о способах выявить скрытые дефекты в ванной при покупке жилья",
+   "draft_id": "d36766458",
+   "title": "Клубный дом OПУС на Дербеневской набережной: инвестиции в приватность",
    "date": "2026-11-19",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2203203/2026-11-19/ekspert-rasskazal-o-sposobakh-vyiavit-skrytye-defekty-v-vannoi-pri-pokupke-zhilia"
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/special/2026/11/19/klubnii-dom-opus-na-derbenevskoi-naberezhnoi-investitsii-v-privatnost-erid-2VfnxvyuHDF"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88804499",
+   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144517"
     ]
    ],
    "sum": null,
@@ -565,7 +387,36 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Здравоохранение",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d82467604",
+   "title": "В Самаре выставили на продажу помпезное кафе в центре (но не легендарное)",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/business/2026/11/18/76775403/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -600,13 +451,41 @@
    ]
   },
   {
-   "draft_id": "d34913590",
-   "title": "Через три года 40% лекарств в России будет продаваться онлайн",
+   "draft_id": "d12227725",
+   "title": "Малый бизнес Подмосковья привлек ₽27,6 млрд господдержки",
    "date": "2026-11-19",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9113164"
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/11/19/podmoskovnyj-malyj-biznes-privlek-276-mlrd-gospodderzhki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малый бизнес Подмосковья",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малый бизнес Подмосковья",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d61572130",
+   "title": "«АвтоВАЗ» приготовился к скромным продажам",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/skromno/"
     ]
    ],
    "sum": null,
@@ -621,20 +500,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Автопром",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d91144434",
-   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
-   "date": "2026-11-18",
+   "draft_id": "d10820243",
+   "title": "Помещение выставили на торги на проспекте Вернадского в Москве",
+   "date": "2026-11-19",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/kurtka-875330072.html"
+     "web:ria.ru",
+     "https://ria.ru/20261119/torgi-2132602668.html"
     ]
    ],
    "sum": null,
@@ -652,45 +531,50 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d82467604",
-   "title": "В Самаре выставили на продажу помпезное кафе в центре (но не легендарное)",
-   "date": "2026-11-18",
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
    "src": [
     [
-     "web:63.ru",
-     "https://63.ru/text/business/2026/11/18/76775403/"
+     "tg:rusven",
+     "https://t.me/rusven/7842"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Российский proptech-стартап RSpace",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Российский proptech-стартап RSpace",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d41882092",
-   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
-   "date": "2026-11-18",
+   "draft_id": "d20838878",
+   "title": "У челябинского заповедника продается курорт с космической кухней за 265 млн. Фото",
+   "date": "2026-11-19",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76774338/"
+     "web:ura.news",
+     "https://ura.news/news/1053145269"
     ]
    ],
    "sum": null,
@@ -705,7 +589,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Гостиницы и туризм",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
@@ -742,25 +626,81 @@
    ]
   },
   {
-   "draft_id": "d75975568",
-   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
-   "date": "2026-11-12",
+   "draft_id": "d91144434",
+   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
+   "date": "2026-11-18",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7842"
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/kurtka-875330072.html"
     ]
    ],
-   "sum": "15 млн ₽",
-   "type": "Инвестиция",
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Российский proptech-стартап RSpace",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Российский proptech-стартап RSpace",
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67890144",
+   "title": "#экзит Anthropic провел крупнейшее в истории IPO, обойдя SpaceX. Это стало экзитом для DST Global Юрия Мильнера и фонд Raison, управляющими партнерами которого являются Андрей Березин и Александр Зайц",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7855"
+    ]
+   ],
+   "sum": "$107 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
@@ -768,19 +708,18 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
-    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d88804499",
-   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
-   "date": "2026-11-16",
+   "draft_id": "d20042649",
+   "title": "В Амурской области приняли закон о запрете продажи вейпов с марта 2027 года",
+   "date": "2026-11-19",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053144517"
+     "web:iz.ru",
+     "https://iz.ru/2204540/2026-11-19/v-amurskoi-oblasti-priniali-zakon-o-zaprete-prodazhi-veipov-s-marta-2027-goda"
     ]
    ],
    "sum": null,
@@ -798,53 +737,116 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d66109580",
-   "title": "Anthropic prices IPO at $83 a share, above projected range",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/18/anthropic-reportedly-prices-ipo-at-83-a-share-above-projected-range/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнал возможную цену акций Anthropic на IPO // Blo» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d83419419",
-   "title": "Почти 90% инвестиций в добычу нефти и газа шли на компенсацию снижения добычи",
+   "draft_id": "d08855136",
+   "title": "Эксперт Русакова: аукционы видят устойчивый рост спроса на русское искусство",
    "date": "2026-11-19",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/investitsii-875360184.html"
+     "web:tass.ru",
+     "https://tass.ru/kultura/28333819"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41882092",
+   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76774338/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28250803",
+   "title": "В Тюмени продадут скандально известное предприятие",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/business/2026/11/19/76775741/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Его акции вернулись государству через суд, и теперь их снова планируют отдать частникам",
+     "source": [
+      "web:72.ru",
+      "https://72.ru/text/business/2026/11/19/76775741/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17726564",
+   "title": "На проспекте Вернадского выставили на торги коммерческое помещение",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/11/19/kommercheskoe-pomeshhenie-vystavili-na-torgi-na-prospekte-vernadskogo"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -859,7 +861,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
    ]
   }
  ]

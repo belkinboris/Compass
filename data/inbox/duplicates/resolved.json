@@ -468,5 +468,15 @@
   "verdict": "same_fact",
   "candidate_id": "gbb23f0bb",
   "day": "2026-11-18"
+ },
+ "https://retailer.ru/burger-king-vykupil-arenduemyj-ofis-v-moskve/::ge6b04680": {
+  "verdict": "enrich",
+  "candidate_id": "ge6b04680",
+  "day": "2026-11-19"
+ },
+ "https://tass.ru/ekonomika/28333801::g1a2f9d60": {
+  "verdict": "separate",
+  "candidate_id": "g1a2f9d60",
+  "day": "2026-11-19"
  }
 }
