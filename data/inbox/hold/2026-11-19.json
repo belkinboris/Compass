@@ -207,35 +207,6 @@
    ]
   },
   {
-   "draft_id": "d12336888",
-   "title": "Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел крупнейшее в мире IPO",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:kommersant.ru/daily",
-     "https://www.kommersant.ru/doc/9113371"
-    ]
-   ],
-   "sum": "$107 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d91172506",
    "title": "Anthropic провела прайсинг IPO",
    "date": "2026-11-19",
@@ -259,11 +230,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел к» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -293,7 +262,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел к» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -324,7 +293,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел к» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -355,91 +324,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел к» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d58104822",
-   "title": "The Atlantic: Джаред Кушнер скрыл свои инвестиции в ВПК",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9113752"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91941982",
-   "title": "Нормы о реестре нарушителей ККТ и передаче данных о безналичных покупках в ФНС прошли II чтение",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130167"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42045866",
-   "title": "Путин о новом раунде трехсторонних переговоров формата Россия-Украина-США",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204824/video/putin-o-novom-raunde-trekhstoronnikh-peregovorov-formata-rossiia-ukraina-ssha"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -470,45 +355,17 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел к» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d34565203",
-   "title": "Продажа фото ног спасла 57-летнюю звезду «Спасателей Малибу» от выселения",
+   "draft_id": "d75519707",
+   "title": "Microsoft убивает сверхполезное приложение, у которого нет аналогов. На покупку его конкурентов потрачены сотни миллионов",
    "date": "2026-11-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/prodazha-foto-nog-spasla-57-letnyuyu-zvezdu-spasateley-malibu-ot-vyseleniya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17584503",
-   "title": "Российские инвестиции хлынули в постсоветскую страну",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/rossiyskie-investitsii-hlynuli-v-postsovetskuyu-stranu/"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-19_microsoft_ubivaet_sverhpoleznoe"
     ]
    ],
    "sum": null,
@@ -526,172 +383,77 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23901940",
-   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28330111"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41882092",
-   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76774338/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91144434",
-   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/kurtka-875330072.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d33473938",
-   "title": "Anthropic привлекла рекордные $107,3 млрд на IPO с капитализацией $1,5 трлн",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9113416"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-19",
-     "title": "Сделка завершена",
-     "note": "Американский разработчик искусственного интеллекта Anthropic привлек $107,3 млрд по итогам IPO, пишет Bloomberg. Компания продала 956,4 млн акций, а ее соучредители (Google, AMD и Microsoft) — 23,6 млн акций.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9113416"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Anthropic",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Anthropic",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d16426733",
-   "title": "Не только «Подчеркнутые углы». Рекордные продажи Кандинского на аукционах",
+   "draft_id": "d02423136",
+   "title": "Покупатели и продавцы ИТ-компаний разошлись во взглядах на раздел бизнеса",
    "date": "2026-11-19",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/photoreport/19/11/2026/6afeb3806e1d369254e8c3fa"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/pokupateli-i-prodavtsy-it-kompanij-razoshlis-vo-vzglyadah-na-razdel-biznesa/"
     ]
    ],
-   "sum": "$85,8 млн",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29659803",
+   "title": "Как будут привлекать инвестиции на Дальний Восток и в Арктику",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204863/video/kak-budut-privlekat-investitcii-na-dalnii-vostok-i-v-arktiku"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Как будут",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Как будут",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d40022620",
+   "title": "Липецкие власти требуют продать с торгов недострой турцентра на улице Маяковского",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119411-lipetskie-vlasti-trebuyut-prodat-s-torgov-nedostroy-turtsentra-na-ulitse-mayakovskogo/"
+    ]
+   ],
+   "sum": null,
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -707,17 +469,45 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8695856c (общие редкие слова: аукцио, рекорд) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g0afaf6a3 (общие редкие слова: липецк, недост) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d58443046",
-   "title": "Володин призвал закреплять лидерство России по продаже зерна и масличных культур",
+   "draft_id": "d80062561",
+   "title": "Форум «Инвестиции в будущее» стартует в Новороссийске 20 ноября",
    "date": "2026-11-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28335279"
+     "web:ria.ru",
+     "https://ria.ru/20261119/forum-2132757208.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d70002417",
+   "title": "СМИ: выход GTA VI побудил россиян приобрести свою первую игровую приставку",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/gta-2132735184.html"
     ]
    ],
    "sum": null,
@@ -732,48 +522,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Финтех",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d51650629",
-   "title": "В ФРГ согласовали с UniCredit условия поглощения Commerzbank",
+   "draft_id": "d21350551",
+   "title": "«Удачных вам Голодных Игр». Как в России прошли ночные распродажи, где люди выносили прилавки с газировкой",
    "date": "2026-11-19",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28334939"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40408713",
-   "title": "Камынин: РФ является лидером по созданию совместных предприятий в Узбекистане",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/rossija-875374401.html"
+     "web:93.ru",
+     "https://93.ru/text/food/2026/11/19/76776876/"
     ]
    ],
    "sum": null,

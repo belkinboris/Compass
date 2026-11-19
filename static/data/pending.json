@@ -376,6 +376,72 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Здание театра «Аккумулятор» в Тюмени выставлено на продажу за 109 млн ₽</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> «Колесник»\n<b>Предмет:</b> Здание на улице Ямской, в котором зимой должен открыться театр «Аккумулятор»\n<b>Сумма:</b> 109 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053145578\">URA.RU</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g2e669787\">карточке сделки</a>\n"
+  },
+  {
+   "id": "ga43e03c6",
+   "date": "2026-11-19",
+   "title": "Картину Ван Гога продали за рекордные $190 млн",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$190 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$190 млн",
+   "seller": "Картину Ван Гога",
+   "asset": "за рекордные $190 млн",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Картина Винсента ван Гога &laquo;Цветущие каштаны&raquo; продана 18 ноября за рекордные $190,4 млн.",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "за рекордные $190 млн",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Ван Гога",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/rbcfreenews/6afe44fd0cbd13190b6fe96d"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T13:53:36+00:00"
   }
  ]
 }
