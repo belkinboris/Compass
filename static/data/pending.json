@@ -404,6 +404,191 @@
     ]
    },
    "pending_since": "2026-11-18T15:52:54+00:00"
+  },
+  {
+   "id": "ga91c5821",
+   "date": "2026-11-19",
+   "title": "Картину Винсента ван Гога продали за рекордные $190 млн",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9113173"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$190 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$190 млн",
+   "seller": "Картину Винсента ван Гога",
+   "asset": "за рекордные $190 млн",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Картину Винсента ван Гога «Цветущие каштаны» продали на аукционе Sotheby's в Нью-Йорке за $190,4 млн. Это рекордная стоимость для картины голландского постимпрессиониста.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9113173"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "за рекордные $190 млн",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9113173"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Винсента ван Гога",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9113173"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T05:53:02+00:00"
+  },
+  {
+   "id": "g91b9ce0e",
+   "date": "2026-11-19",
+   "title": "«Бургер Кинг» выкупил арендованный офис на востоке Москвы",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9113112"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Бургер Кинг»",
+   "asset": "арендованный офис на востоке Москвы",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Управляющее сетью «Бургер Кинг» в России ООО «Бургер Рус» 17 ноября 2026 года стало учредителем 100% долей в ООО «Вилла-элит», обнаружил “Ъ” в ЕГРЮЛ. Последнее, по данным сервиса Asseto, владеет 4 тыс. кв. м в бизнес-центре «Улей» в Медовом переулке на…",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9113112"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Бургер Кинг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9113112"
+     }
+    ],
+    "target": [
+     {
+      "value": "арендованный офис на востоке Москвы",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9113112"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T05:53:02+00:00"
+  },
+  {
+   "id": "ga6ef7d92",
+   "date": "2026-11-19",
+   "title": "Молодая мама из Тюмени вложила полмиллиона в детскую фотостудию. Почему бизнес едва не пришлось закрыть",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "72.ru",
+     "https://72.ru/text/business/2026/11/19/76769383/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Молодая мама из Тюмени",
+   "asset": "детскую фотостудию. Почему бизнес едва не пришлось закрыть",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Молодая мама из Тюмени",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://72.ru/text/business/2026/11/19/76769383/"
+     }
+    ],
+    "target": [
+     {
+      "value": "детскую фотостудию. Почему бизнес едва не пришлось закрыть",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://72.ru/text/business/2026/11/19/76769383/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T05:53:02+00:00"
   }
  ]
 }
