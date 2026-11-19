@@ -2,17 +2,17 @@
  "made": "2026-11-19",
  "drafts": [
   {
-   "draft_id": "d23901940",
-   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
-   "date": "2026-11-18",
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28330111"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -30,17 +30,108 @@
    ]
   },
   {
-   "draft_id": "d75348809",
-   "title": "Anthropic провела крупнейшее IPO в истории",
-   "date": "2026-11-19",
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
    "src": [
     [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/316933"
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
     ]
    ],
-   "sum": "$107 млрд",
-   "type": "IPO",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7842"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88804499",
+   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144517"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -55,7 +146,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -88,45 +207,17 @@
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48495247",
-   "title": "Средний чек сделок M&A сократился на 42%",
+   "draft_id": "d48031401",
+   "title": "Anthropic провел прайсинг IPO, увеличил его размер до рекордных $81,3 млрд",
    "date": "2026-11-19",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/srednij-chek-sdelok-m-a-sokratilsja-na-42/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1130013"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
+   "sum": "$81,3 млрд",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -142,34 +233,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d43500706",
-   "title": "США не стремятся зарабатывать на продаже оружия Украине, заявил Трамп",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/tramp-2132596827.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -211,474 +274,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d79715762",
-   "title": "Приоритетные отрасли МСП привлекли более 200 млрд рублей финансовой поддержки",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28333895"
-    ]
-   ],
-   "sum": "200 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Приоритетные отрасли МСП",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Приоритетные отрасли МСП",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d00715112",
-   "title": "Россияне признались в покупке авиабилетов из страха",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/rossiyane-priznalis-v-pokupke-aviabiletov-iz-straha/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47120915",
-   "title": "Народный фронт приобрел оргтехнику для старобельского колледжа",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28333777"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-19",
-     "title": "Сделка завершена",
-     "note": "Помощь предоставили для возобновления устойчивой работы учреждения",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/obschestvo/28333777"
-     ]
-    }
-   ],
-   "buyer_name": "Народный фронт",
-   "asset": "оргтехника для старобельского колледжа",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Народный фронт",
-    "asset": "оргтехника для старобельского колледжа",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d49154852",
-   "title": "Мосбиржа проводит дискретный аукцион по ценным бумагам МГКЛ",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/19/1413205-auktsion-mgkl"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d36766458",
-   "title": "Клубный дом OПУС на Дербеневской набережной: инвестиции в приватность",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/special/2026/11/19/klubnii-dom-opus-na-derbenevskoi-naberezhnoi-investitsii-v-privatnost-erid-2VfnxvyuHDF"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88804499",
-   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
-   "date": "2026-11-16",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053144517"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d82467604",
-   "title": "В Самаре выставили на продажу помпезное кафе в центре (но не легендарное)",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/business/2026/11/18/76775403/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12227725",
-   "title": "Малый бизнес Подмосковья привлек ₽27,6 млрд господдержки",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/11/19/podmoskovnyj-malyj-biznes-privlek-276-mlrd-gospodderzhki"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Малый бизнес Подмосковья",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Малый бизнес Подмосковья",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d61572130",
-   "title": "«АвтоВАЗ» приготовился к скромным продажам",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/skromno/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Автопром",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10820243",
-   "title": "Помещение выставили на торги на проспекте Вернадского в Москве",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/torgi-2132602668.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d75975568",
-   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7842"
-    ]
-   ],
-   "sum": "15 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российский proptech-стартап RSpace",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российский proptech-стартап RSpace",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
-    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d20838878",
-   "title": "У челябинского заповедника продается курорт с космической кухней за 265 млн. Фото",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145269"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42864136",
-   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
-   "date": "2026-11-12",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7841"
-    ]
-   ],
-   "sum": "15 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Российский proptech-стартап RSpace",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Российский proptech-стартап RSpace",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d91144434",
-   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/kurtka-875330072.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d34423503",
-   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -709,144 +305,63 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d20042649",
-   "title": "В Амурской области приняли закон о запрете продажи вейпов с марта 2027 года",
+   "draft_id": "d33473938",
+   "title": "Anthropic привлекла рекордные $107,3 млрд на IPO с капитализацией $1,5 трлн",
    "date": "2026-11-19",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2204540/2026-11-19/v-amurskoi-oblasti-priniali-zakon-o-zaprete-prodazhi-veipov-s-marta-2027-goda"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9113416"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d08855136",
-   "title": "Эксперт Русакова: аукционы видят устойчивый рост спроса на русское искусство",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28333819"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41882092",
-   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76774338/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28250803",
-   "title": "В Тюмени продадут скандально известное предприятие",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/business/2026/11/19/76775741/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
+   "type": "IPO",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Его акции вернулись государству через суд, и теперь их снова планируют отдать частникам",
+     "title": "Сделка завершена",
+     "note": "Американский разработчик искусственного интеллекта Anthropic привлек $107,3 млрд по итогам IPO, пишет Bloomberg. Компания продала 956,4 млн акций, а ее соучредители (Google, AMD и Microsoft) — 23,6 млн акций.",
      "source": [
-      "web:72.ru",
-      "https://72.ru/text/business/2026/11/19/76775741/"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9113416"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "Anthropic",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "Anthropic",
     "seller": null
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d17726564",
-   "title": "На проспекте Вернадского выставили на торги коммерческое помещение",
+   "draft_id": "d53801912",
+   "title": "Трамп заявил о больших доходах США от продажи оружия Европе",
    "date": "2026-11-19",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/19/kommercheskoe-pomeshhenie-vystavili-na-torgi-na-prospekte-vernadskogo"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9113409"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -861,7 +376,383 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d50262054",
+   "title": "UniCredit договорился с властями Германии о покупке Commerzbank",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9113361"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Итальянский банк UniCredit и правительство Германии пришли к соглашению по поводу поглощения немецкого Commerzbank. Об этом пишет Reuters со ссылкой на заявление Министерства финансов Германии.",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9113361"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d12336888",
+   "title": "Ум стоимостью $1,5 трлн // ИИ-разработчик Anthropic провел крупнейшее в мире IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9113371"
+    ]
+   ],
+   "sum": "$107 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d91172506",
+   "title": "Anthropic провела прайсинг IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/19/1413230-anthropic-ipo"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d67330928",
+   "title": "Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инфографика",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/19/11/2026/6afeac716e1d369254e8c3cd"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d87769077",
+   "title": "Акции МГКЛ упали на 92% по сравнению с ценой IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/19/11/2026/6afea50c70e55f25c40fffb1"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Компания МГКЛ допустила два полноценных дефолта по выплате купонов облигаций. Компания заверила, что намерена урегулировать задолженность и представит программу реструктуризации обязательств в ближайшие два месяца",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/quote/19/11/2026/6afea50c70e55f25c40fffb1"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc44a1e70 (общие редкие слова: акции, мгкл) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d86670029",
+   "title": "Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO Anthropic",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1130058"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провел прайсинг IPO, увеличил его размер до рекорд» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d55085409",
+   "title": "800 тыс. клиентов защитили покупки с «Почтой России»",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-19_800_tysklientov_zashchitili"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19179851",
+   "title": "Трамп опроверг стремление США обогатиться от продажи оружия Украине",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204560/2026-11-19/tramp-oproverg-stremlenie-ssha-obogatitsia-ot-prodazhi-oruzhiia-ukraine"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23530002",
+   "title": "UniCredit и ФРГ достигли соглашения по спорным моментам поглощения Commerzbank",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261119/unicredit-875366320.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «UniCredit договорился с властями Германии о покупке Commerzb» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d93296318",
+   "title": "Мировые фонды акций привлекли рекордные $266 млрд в октябре",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/316967"
+    ]
+   ],
+   "sum": "$266 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Мировые фонды акций",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Мировые фонды акций",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d18810690",
+   "title": "Одна из главных ИИ-компаний установила рекорд при выходе на биржу",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/mnogo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d41052360",
+   "title": "Тюменский театр выставили на продажу",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145578"
+    ]
+   ],
+   "sum": "109 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g75283fd4 (общие редкие слова: выстав, продаж, тюменс) — проверьте, не дубль ли"
    ]
   }
  ]

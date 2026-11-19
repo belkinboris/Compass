@@ -367,6 +367,48 @@
     "needs_review": true
    },
    "queued": "2026-11-19"
+  },
+  {
+   "key": "https://1prime.ru/20261119/klienty-875363099.html::g2a07c829",
+   "candidate_id": "g2a07c829",
+   "reason": "общие редкие слова: втб, клиент, продал",
+   "draft": {
+    "draft_id": "d43162850",
+    "title": "Клиенты ВТБ за 1,5 месяца продали банку инвестмонеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261119/klienty-875363099.html"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261119/klienty-875363099.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "банк инвестмонеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "банк инвестмонеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
   }
  ]
 }

@@ -466,6 +466,75 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Москва выставила на торги четырехуровневое помещение у метро «Юго-Западная»</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> Москва\n<b>Предмет:</b> нежилое помещение на проспекте Вернадского, 80а, корпус 1\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abnews.ru/center/news/msk/2026/11/19/kommercheskoe-pomeshhenie-vystavili-na-torgi-na-prospekte-vernadskogo\">Abnews.ru</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g8f7a7dfb\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g8695856c",
+   "date": "2026-11-19",
+   "title": "Картину Ван Гога продали за рекордные $190,4 млн на аукционе Sotheby's",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$190,4 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$190,4 млн",
+   "seller": "Картину Ван Гога",
+   "asset": "за рекордные $190,4 млн на аукционе Sotheby's",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Ведомости",
+      "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "за рекордные $190,4 млн на аукционе Sotheby's",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Ван Гога",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.vedomosti.ru/lifestyle/news/2026/11/19/1413166-kartinu-van-goga-prodali"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T08:53:05+00:00"
   }
  ]
 }
