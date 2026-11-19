@@ -5220,3 +5220,18 @@
 {"id": "g94683ed2", "field": "law.terms", "class": "other", "was": "залог «в октябре 2025 года»", "now": "залог с 23 сентября (ЕГРЮЛ по Интерфаксу)", "tag": "r1119a"}
 {"id": "g94683ed2", "field": "extra", "class": "unsupported_claim", "was": "сначала партнерство, затем залог", "now": "залог с 23 сентября, партнерство 26 сентября, переход долей 15 декабря", "tag": "r1119a"}
 {"id": "g300d56ed", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% долей ООО «Молл»", "tag": "r1119a"}
+{"id": "gf475c186", "field": "date", "class": "wrong_date", "was": "2025", "now": "2025-10-20 (ЕГРЮЛ: доли перешли Российской Федерации)", "tag": "r1119b"}
+{"id": "gf475c186", "field": "law.struct", "class": "unsupported_claim", "was": "100% долей вместе с имуществом на сумму более 2,4 млрд ₽", "now": "100% долей; кроме них, другие активы ответчиков на 2,4 млрд ₽", "tag": "r1119b"}
+{"id": "gf475c186", "field": "eco.context", "class": "version_as_fact", "was": "через «Берендей» вывели около 292 млн ₽", "now": "через парк-отель «Берендей» легализовали около 292 млн ₽ (позиция Генпрокуратуры)", "tag": "r1119b"}
+{"id": "g7ccf80f9", "field": "seller", "class": "wrong_seller", "was": "не назван", "now": "Антон Воскресенский, Никита Невенчанный, ООО «Компания ВК» и Роман Филиппов (ЕГРЮЛ, 17.12.2024)", "tag": "r1119b"}
+{"id": "g7ccf80f9", "field": "sum", "class": "wrong_sum", "was": "2,5 млрд ₽ (по оценке)", "now": "2–2,5 млрд ₽ (по оценке) — вилка аналитика", "tag": "r1119b"}
+{"id": "g7ccf80f9", "field": "src", "class": "aggregator_source", "was": "Sostav (пересказ РБК) первым", "now": "Интерфакс первым", "tag": "r1119b"}
+{"id": "gca6c1eff", "field": "seller", "class": "wrong_seller", "was": "Proxima Capital Group", "now": "МКООО «Кьютиай Партнерс Лтд» и Юрий Савичев (ЕГРЮЛ); PCG — в контексте", "tag": "r1119b"}
+{"id": "gca6c1eff", "field": "title", "class": "title_standard", "was": "Unitile купил Quadro Decor у Proxima Capital Group", "now": "Unitile купил Quadro Decor", "tag": "r1119b"}
+{"id": "gca6c1eff", "field": "date", "class": "wrong_date", "was": "2024", "now": "2024-09-27 (ЕГРЮЛ: 100% у «Юнитайл Холдинга»)", "tag": "r1119b"}
+{"id": "gca6c1eff", "field": "eco.target_fin", "class": "verbatim", "was": "фраза «Ъ» о выручке дословно", "now": "пересказ", "tag": "r1119b"}
+{"id": "ge292671d", "field": "eco.share", "class": "wrong_share", "was": "—", "now": "100% доли в ООО «Тетра»", "tag": "r1119b"}
+{"id": "gc3452fa6", "field": "extra", "class": "language", "was": "на вопросы «Ъ» не ответили", "now": "фраза снята", "tag": "r1119b"}
+{"id": "g64141daa", "field": "seller", "class": "wrong_seller", "was": "Самолет", "now": "«Самолет», Дарья Воронова и Кирилл Воронов (ЕГРЮЛ, 06.05.2025: 14,05% и 10,27%)", "tag": "r1119b"}
+{"id": "g1ce3ddfc", "field": "seller", "class": "other", "was": "ООО «Минводы Боржоми»", "now": "ООО «Минеральные воды Боржоми» (имя по ЕГРЮЛ)", "tag": "r1119b"}
+{"id": "gc9a9d929", "field": "src", "class": "aggregator_source", "was": "«Ъ» (пересказ «Ведомостей») первым", "now": "«Ведомости» 15.01.2025 первыми", "tag": "r1119b"}
