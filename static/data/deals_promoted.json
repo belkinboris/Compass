@@ -17905,27 +17905,27 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "«Gotek Group получила все необходимые разрешения. Продажа в настоящее время завершена. Mondi получила чистую выручку в размере 30,4 млн евро от этой продажи на свой счет в австрийском банке», – говорится в сообщении Mondi.",
+     "attribution_quote": "говорится в сообщении Mondi.",
      "scope_basis": "verified",
      "scope_variants": [
       "package",
       "unknown"
      ],
-     "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
+     "quote": "3 июля 2023, 17:49 «Готэк» завершил сделку по покупке трех предприятий Mondi за 1,6 млрд рублей",
      "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
      "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
-       "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
        "value_rub": 1600000000,
        "meaning": "disclosed",
        "attribution": "parties",
        "event": "closing",
        "scope": "package",
        "terms": "fixed",
-       "attribution_quote": "«Gotek Group получила все необходимые разрешения. Продажа в настоящее время завершена. Mondi получила чистую выручку в размере 30,4 млн евро от этой продажи на свой счет в австрийском банке», – говорится в сообщении Mondi.",
+       "quote": "3 июля 2023, 17:49 «Готэк» завершил сделку по покупке трех предприятий Mondi за 1,6 млрд рублей",
+       "attribution_quote": "говорится в сообщении Mondi.",
+       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
        "quote_checked": true,
        "reader": "A"
       },
@@ -17967,13 +17967,13 @@
      "quote": "3 июля 2023, 17:49 «Готэк» завершил сделку по покупке трех предприятий Mondi за 1,6 млрд рублей",
      "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
      "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
-       "quote": "3 июля 2023, 17:49 «Готэк» завершил сделку по покупке трех предприятий Mondi за 1,6 млрд рублей",
        "value": "2023-07-03",
        "meaning": "closing",
+       "quote": "3 июля 2023, 17:49 «Готэк» завершил сделку по покупке трех предприятий Mondi за 1,6 млрд рублей",
+       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
        "quote_checked": true,
        "reader": "A"
       },
@@ -18029,16 +18029,16 @@
      "card_hash": "425530f6d36f",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
-     "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
+     "quote": "Австрийская группа Mondi договорилась о продаже трех заводов по производству гофрокартона и упаковки в РФ российской группе \"Готэк\" за 1,6 млрд рублей",
+     "source": "https://www.interfax.ru/business/877055",
      "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
-       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
+       "quote": "Австрийская группа Mondi договорилась о продаже трех заводов по производству гофрокартона и упаковки в РФ российской группе \"Готэк\" за 1,6 млрд рублей",
+       "source": "https://www.interfax.ru/business/877055",
        "quote_checked": true,
        "reader": "A"
       },
@@ -18061,31 +18061,30 @@
      "basis": "registry",
      "perimeter": "refuted",
      "card_hash": "94f3b4373e26",
-     "perimeter_entity": "ООО «Готэк Лебедянь»",
-     "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
-     "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "perimeter_entity": "ООО «Монди Лебедянь»",
+     "quote": "В сделку включены завод по производству гофрокартона и два завода по производству потребительских гибких материалов, говорится в пресс-релизе Mondi",
+     "source": "https://www.kommersant.ru/doc/5721839",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "ok": false,
-       "entity": "ООО «Готэк Лебедянь»",
-       "quote": "Австрийский производитель Mondi завершил сделку по продаже группе «Готэк» трех российских предприятий за 1,6 млрд руб.",
-       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "ok": false,
-       "entity": "ООО «Монди Лебедянь»",
+       "covers_business": false,
        "other_entities": [
         "ООО «Монди Переславль»",
         "ООО «Монди Арамиль»"
        ],
-       "quote": "продаже группе «Готэк» трех российских предприятий",
-       "source": "https://www.vedomosti.ru/business/news/2023/07/03/983519-gotek-zavershil-sdelku",
+       "entity": "ООО «Монди Лебедянь»",
+       "report": {
+        "inn": "4811025162",
+        "year": 2022,
+        "revenue_rub": 4183631000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГОТЭК ЛЕБЕДЯНЬ\""
+       },
+       "quote": "В сделку включены завод по производству гофрокартона и два завода по производству потребительских гибких материалов, говорится в пресс-релизе Mondi",
+       "source": "https://www.kommersant.ru/doc/5721839",
        "quote_checked": true,
-       "reader": "B"
+       "reader": "A"
       }
      ],
      "perimeter_report": {
@@ -23690,29 +23689,42 @@
      "value_rub": 54000000000,
      "meaning": "disclosed",
      "scope": "equity",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "4f16e8da7afd",
      "meaning_variants": [
       "disclosed"
      ],
-     "scope_basis": "read",
-     "quote": "Сумма сделки составила 54 миллиарда рублей, транзакция уже совершена.",
-     "source": "https://ria.ru/20230504/henkel-1869600927.html",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "scope_basis": "verified",
+     "quote": "Henkel подписал соглашение о продаже активов в России за 54 млрд рублей, говорится в сообщении компании.",
+     "source": "https://www.interfax.ru/business/897015",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://ria.ru/20230504/henkel-1869600927.html",
-       "quote": "Сумма сделки составила 54 миллиарда рублей, транзакция уже совершена.",
+       "value_rub": 54000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Henkel подписал соглашение о продаже активов в России за 54 млрд рублей, говорится в сообщении компании.",
+       "attribution_quote": "говорится в сообщении компании.",
+       "source": "https://www.interfax.ru/business/897015",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
        "value_rub": 54000000000,
        "meaning": "disclosed",
        "attribution": "parties",
        "event": "closing",
        "scope": "equity",
        "terms": "fixed",
+       "quote": "Сумма сделки составила 54 миллиарда рублей, транзакция уже совершена.",
        "attribution_quote": "Немецкий концерн Henkel AG, один из ведущих мировых производителей бытовой и промышленной химии, продал свои активы в России, сообщила компания.",
+       "source": "https://ria.ru/20230504/henkel-1869600927.html",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
      "attribution": "parties",
@@ -23721,13 +23733,14 @@
      ],
      "event": "closing",
      "event_variants": [
-      "closing"
+      "closing",
+      "signing"
      ],
      "terms": "fixed",
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "Немецкий концерн Henkel AG, один из ведущих мировых производителей бытовой и промышленной химии, продал свои активы в России, сообщила компания.",
+     "attribution_quote": "говорится в сообщении компании.",
      "reading": {
       "result": "not_in_source",
       "at": "2026-11-11",
@@ -23744,23 +23757,31 @@
     "date": {
      "value": "2023-04-21",
      "meaning": "registry",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "39699584f72f",
      "meaning_variants": [
       "registry"
      ],
-     "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
+     "quote": "Москва. 24 апреля. INTERFAX.RU - Концерн Henkel закрыл сделку по продаже российского бизнеса. Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd.",
      "source": "https://www.interfax.ru/business/897373",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://www.interfax.ru/business/897373",
-       "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
        "value": "2023-04-21",
        "meaning": "registry",
+       "quote": "Москва. 24 апреля. INTERFAX.RU - Концерн Henkel закрыл сделку по продаже российского бизнеса. Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd.",
+       "source": "https://www.interfax.ru/business/897373",
        "quote_checked": true,
        "reader": "A"
+      },
+      {
+       "value": "2023-04-21",
+       "meaning": "registry",
+       "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
+       "source": "https://www.interfax.ru/business/897373",
+       "quote_checked": true,
+       "reader": "B"
       }
      ],
      "reading": {
@@ -23785,15 +23806,15 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "425530f6d36f",
-     "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
+     "quote": "Концерн Henkel закрыл сделку по продаже российского бизнеса. Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\".",
      "source": "https://www.interfax.ru/business/897373",
      "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\". С 21 апреля российское юрлицо на 100% принадлежит Lead Holding Ltd., зарегистрированной в ОАЭ.",
+       "quote": "Концерн Henkel закрыл сделку по продаже российского бизнеса. Как следует из данных ЕГРЮЛ, немецкая Henkel AG &Co больше не владеет ООО \"Хенкель Рус\".",
        "source": "https://www.interfax.ru/business/897373",
        "quote_checked": true,
        "reader": "A"
@@ -23801,8 +23822,8 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Henkel подписал договор о продаже своего бизнеса в России консорциуму местных инвесторов, следует из пресс-релиза компании.",
-       "source": "https://www.vedomosti.ru/business/news/2023/04/20/971857-henkel-prodazhe-biznesa-rossii",
+       "quote": "Немецкий концерн Henkel AG, один из ведущих мировых производителей бытовой и промышленной химии, продал свои активы в России, сообщила компания.",
+       "source": "https://ria.ru/20230504/henkel-1869600927.html",
        "quote_checked": true,
        "reader": "B"
       }
@@ -23885,6 +23906,18 @@
       "year": 2022,
       "revenue_rub": 91461010000.0,
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЛАБ ИНДАСТРИЗ\""
+     },
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Покупатель по ЕГРЮЛ — Lead Holding Ltd (ОАЭ), SPV консорциума Kismet/Elbrus/Augment, а не прямо они сами по имени — считаю independent/смену контроля подтвержденной. Отчет для периметра (/api/companies) сегодня не открылся (сетевая ошибка) — perimeter не проверен, null.",
+       "stake: источник подтверждает только через ЕГРЮЛ («на 100% принадлежит», результат владения), без глагола покупки рядом с процентом в одном обороте — null. Отчёт для периметра не открылся (сетевая ошибка при сборке очереди), проверить не удалось."
+      ]
      }
     },
     "admitted": {
@@ -23899,7 +23932,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "price_not_verified"
+     "multiple_text": "stake_not_verified"
     }
    },
    "seller_id": "g5213d442",
@@ -25214,35 +25247,92 @@
    "facts": {
     "stake": {
      "value": 69.49,
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "6873637df6d1",
      "object": "АО «СПИ-РВВК»",
      "event": "announcement",
      "event_variants": [
       "announcement"
      ],
-     "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\".",
+     "quote": "на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\"",
      "source": "https://www.interfax.ru/russia/1090749",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://www.interfax.ru/russia/1090749",
-       "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\".",
        "value": 69.49,
        "object": "АО «СПИ-РВВК»",
        "event": "announcement",
+       "quote": "на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\"",
+       "source": "https://www.interfax.ru/russia/1090749",
        "quote_checked": true,
        "reader": "A"
+      },
+      {
+       "value": 69.49,
+       "object": "АО «СПИ-РВВК»",
+       "event": "announcement",
+       "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\".",
+       "source": "https://www.interfax.ru/russia/1090749",
+       "quote_checked": true,
+       "reader": "B"
       }
      ]
     },
     "price": {
-     "value_rub": 557000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d176b99548c2"
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "394cc9ccf3f6",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "registry",
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\". Начальная цена актива составляет 557 млн рублей, шаг аукциона - 27,85 млн рублей.",
+     "source": "https://www.interfax.ru/russia/1090749",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
+     "readings": [
+      {
+       "value_rub": 557000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\". Начальная цена актива составляет 557 млн рублей, шаг аукциона - 27,85 млн рублей.",
+       "source": "https://www.interfax.ru/russia/1090749",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 557000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\". Начальная цена актива составляет 557 млн рублей, шаг аукциона - 27,85 млн рублей.",
+       "source": "https://www.interfax.ru/russia/1090749",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-06-18",
@@ -25255,15 +25345,15 @@
      "quote": "Заявки на участие принимаются до 15 июня, торги запланированы на 18 июня.",
      "source": "https://www.interfax.ru/russia/1090749",
      "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "source": "https://www.interfax.ru/russia/1090749",
-       "quote": "Заявки на участие принимаются до 15 июня, торги запланированы на 18 июня.",
        "value": "2026-06-18",
        "meaning": "closing",
+       "quote": "Заявки на участие принимаются до 15 июня, торги запланированы на 18 июня.",
+       "source": "https://www.interfax.ru/russia/1090749",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ]
     },
@@ -25277,25 +25367,17 @@
      "basis": "rule",
      "card_hash": "425530f6d36f",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "read",
      "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\".",
      "source": "https://www.interfax.ru/russia/1090749",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-18",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
        "quote": "В частности, на аукцион выставлены 69,49% акций АО \"СПИ-РВВК\".",
        "source": "https://www.interfax.ru/russia/1090749",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "control_change": true,
-       "intragroup": false,
-       "quote": "«Росспиртпром» выкупил акции «СПИ-РВВК» в Калининграде за 557 млн рублей",
-       "source": "https://kgd.ru/news/society/item/117588-rosimushhestvo-vystavilo-na-prodazhu-byvshij-likjoro-vodochnyj-zavod-spi-rvvk-v-kaliningrade",
        "quote_checked": true,
        "reader": "B"
       }
@@ -25342,7 +25424,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "ВАЖНО: ни один из 6 источников карточки не подтверждает ЗАВЕРШЕНИЕ торгов и не называет «Росспиртпром» победителем — все шесть (interfax, rbc, smart-lab, business-magazine, kgd.ru, runews24) об АНОНСЕ приватизации/аукциона, не о результате. kgd.ru — тот же известный капкан «похожий заголовок из блока related-статей на странице, не тело статьи» (см. находку по этой же карточке 18 ноября): реальный текст страницы — другая статья («Росимущество выставило на продажу…», 21.05.2026), «Росспиртпром выкупил…» — заголовок соседней ссылки, не содержание. 557 млн — НАЧАЛЬНАЯ цена торгов, не факт покупки. Статус карточки «Закрыта» и покупатель «Росспиртпром» сегодняшними источниками не подтверждаются вовсе — похоже на находку для человека, не для механического исправления одним читателем.",
+       "price: из шести источников только начальная (стартовая) цена аукциона названа дословно — ни один из прочитанных мной текстов не подтверждает итоговую цену сделки и не называет «Росспиртпром» победителем по имени (на kgd.ru «Росспиртпром выкупил акции... за 557 млн рублей» — это заголовок из блока «Материалы по теме», ссылка на другую, не забранную статью, а не предложение текущей статьи — не считается). meaning оставлен auction_start, а не disclosed."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -25354,12 +25448,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed"
     }
    },
-   "sum_basis": "disclosed",
+   "sum_basis": "auction_start",
    "discovery_src": [
     [
      "Mergers.ru",
@@ -85255,7 +85349,7 @@
      "value_rub": 18500000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "42b1cff325d6",
      "meaning_variants": [
       "disclosed"
@@ -85278,8 +85372,8 @@
      ],
      "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева. Тогда стороны не раскрывали стоимость покупки. В опубликованной отчетности агрохолдинга указана сумма сделки, она составила 18.5 млрд руб.",
      "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value_rub": 18500000000,
@@ -85290,19 +85384,6 @@
        "terms": "fixed",
        "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева. Тогда стороны не раскрывали стоимость покупки. В опубликованной отчетности агрохолдинга указана сумма сделки, она составила 18.5 млрд руб.",
        "attribution_quote": "В опубликованной отчетности агрохолдинга указана сумма сделки, она составила 18.5 млрд руб.",
-       "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
-       "notes": "scope неясен: 'вместе с долгом' может означать EV, но долг был внутренним (к собственной 'дочке'); vedomosti (16.01.2025, доступны только первые 10% статьи из-за платной подписки) говорит о более ранней стадии — контроль, по словам одного из источников, перешел уже к 14 января 2025 г., эксперты оценивали сделку 'не менее чем в 30 млрд руб.' — это другая оценка/другое событие, не использована как цена карточки.",
-       "quote_checked": true,
-       "reader": "A"
-      },
-      {
-       "value_rub": 18500000000,
-       "meaning": "disclosed",
-       "attribution": "filing",
-       "event": "closing",
-       "scope": "unknown",
-       "terms": "fixed",
-       "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева. Тогда стороны не раскрывали стоимость покупки. В опубликованной отчетности агрохолдинга указана сумма сделки, она составила 18.5 млрд руб.",
        "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
        "quote_checked": true,
        "reader": "B"
@@ -85318,15 +85399,15 @@
      "meaning_variants": [
       "closing"
      ],
-     "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева. Тогда стороны не раскрывали стоимость покупки.",
+     "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
      "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value": "2025-10",
        "meaning": "closing",
-       "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева. Тогда стороны не раскрывали стоимость покупки.",
+       "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
        "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
        "quote_checked": true,
        "reader": "A"
@@ -85353,15 +85434,15 @@
      "card_hash": "425530f6d36f",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
+     "quote": "«Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
      "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
+       "quote": "«Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
        "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
        "quote_checked": true,
        "reader": "A"
@@ -85369,7 +85450,7 @@
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "В октябре 2025 года «Инвест Трейд» вместе с долгом был продан фирме «Агрокомплекс» им. Н.И.Ткачева.",
+       "quote": "АО «Фирма „Агрокомплекс“» им. Н.И.Ткачева в феврале 2025 года выкупило московскую компанию с штаб-квартирой в Белгороде — ООО «Инвест Трейд» — за 18.5 млрд руб.",
        "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
        "quote_checked": true,
        "reader": "B"
@@ -85383,8 +85464,43 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "8981be3881c3"
+     "perimeter": "refuted",
+     "card_hash": "8981be3881c3",
+     "perimeter_entity": "ООО «Инвест Трейд»",
+     "perimeter_report": {
+      "inn": null,
+      "year": null,
+      "revenue_rub": null,
+      "legal_name": null
+     },
+     "perimeter_other_entities": [
+      "ЗАО «Новооскольский комбикормовый завод»",
+      "АО «Краснояружская зерновая компания»",
+      "АО ТД «Приосколье»"
+     ],
+     "quote": "Незадолго до сделки «Инвест Трейд» стал головной конторой, объединившей ряд крупных предприятий АПК с основными активами в Белгородской области. Это АО «Приосколье», ЗАО «Новооскольский комбикормовый завод», АО «Краснояружская зерновая компания» и АО ТД «Приосколье».",
+     "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ЗАО «Новооскольский комбикормовый завод»",
+        "АО «Краснояружская зерновая компания»",
+        "АО ТД «Приосколье»"
+       ],
+       "entity": "ООО «Инвест Трейд»",
+       "report": {
+        "error": "<urlopen error [Errno 104] Connection reset by peer>"
+       },
+       "quote": "Незадолго до сделки «Инвест Трейд» стал головной конторой, объединившей ряд крупных предприятий АПК с основными активами в Белгородской области. Это АО «Приосколье», ЗАО «Новооскольский комбикормовый завод», АО «Краснояружская зерновая компания» и АО ТД «Приосколье».",
+       "source": "https://www.akm.ru/news/stala_izvestna_tsena_sdelki_po_pokupke_agrokompleksom_a_tkacheva_gruppy_kompaniy_belgorodskikh_proiz/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -85398,7 +85514,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "price_scope_unknown"
+     "multiple_text": "price_not_verified"
     }
    },
    "seller_id": null,
@@ -89528,14 +89644,15 @@
     "price": {
      "value_rub": 1118000000,
      "meaning": "disclosed",
-     "scope": "package",
+     "scope": "unknown",
      "basis": "verified",
      "card_hash": "ef71d43388ed",
      "meaning_variants": [
       "disclosed"
      ],
-     "attribution": "parties",
+     "attribution": "disputed",
      "attribution_variants": [
+      "filing",
       "parties"
      ],
      "event": "closing",
@@ -89546,22 +89663,22 @@
      "terms_variants": [
       "fixed"
      ],
-     "attribution_quote": "Об этом сообщает агентство ТАСС, со ссылкой на пресс-службу Министерства финансов Российской Федерации.",
-     "scope_basis": "verified",
+     "attribution_quote": "сообщает агентство ТАСС, со ссылкой на пресс-службу Министерства финансов Российской Федерации",
+     "scope_basis": "disputed",
      "quote": "Сделка по приватизации «Союзмультфильма» принесла российскому бюджету дополнительные доходы в размере 1,118 млрд рублей.",
      "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value_rub": 1118000000,
        "meaning": "disclosed",
-       "attribution": "parties",
+       "attribution": "filing",
        "event": "closing",
-       "scope": "package",
+       "scope": "unknown",
        "terms": "fixed",
        "quote": "Сделка по приватизации «Союзмультфильма» принесла российскому бюджету дополнительные доходы в размере 1,118 млрд рублей.",
-       "attribution_quote": "Об этом сообщает агентство ТАСС, со ссылкой на пресс-службу Министерства финансов Российской Федерации.",
+       "attribution_quote": "сообщает агентство ТАСС, со ссылкой на пресс-службу Министерства финансов Российской Федерации",
        "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
        "quote_checked": true,
        "reader": "A"
@@ -89579,25 +89696,37 @@
        "quote_checked": true,
        "reader": "B"
       }
+     ],
+     "scope_variants": [
+      "package",
+      "unknown"
      ]
     },
     "date": {
      "value": "2025-09-30",
      "meaning": "publication",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "c35a9eb6bcb8",
      "meaning_variants": [
       "publication"
      ],
-     "quote": "30.09.2025 в 12:23 Экономика 2962 Сбербанк купил «Союзмультфильм», который судится с тульскими коммерсантами",
+     "quote": "30.09.2025 в 12:23 Экономика 2978 Сбербанк купил «Союзмультфильм», который судится с тульскими коммерсантами",
      "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value": "2025-09-30",
        "meaning": "publication",
-       "quote": "30.09.2025 в 12:23 Экономика 2962 Сбербанк купил «Союзмультфильм», который судится с тульскими коммерсантами",
+       "quote": "30.09.2025 в 12:23 Экономика 2978 Сбербанк купил «Союзмультфильм», который судится с тульскими коммерсантами",
+       "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2025-09-30",
+       "meaning": "publication",
+       "quote": "30.09.2025 в 12:23 Экономика 2978 Сбербанк купил «Союзмультфильм», который судится с тульскими коммерсантами",
        "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
        "quote_checked": true,
        "reader": "B"
@@ -89614,11 +89743,11 @@
      "basis": "rule",
      "card_hash": "425530f6d36f",
      "intragroup": false,
-     "control_change_basis": "verified",
+     "control_change_basis": "read",
      "quote": "Российское государство приватизировало киностудию «Союзмультфильм» . Контрольный пакет акций пр был приобретен ПАО «Сбербанк».",
      "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
@@ -89627,14 +89756,6 @@
        "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
        "quote_checked": true,
        "reader": "A"
-      },
-      {
-       "control_change": true,
-       "intragroup": false,
-       "quote": "Российское государство приватизировало киностудию «Союзмультфильм» . Контрольный пакет акций пр был приобретен ПАО «Сбербанк».",
-       "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
-       "quote_checked": true,
-       "reader": "B"
       }
      ]
     },
@@ -89651,16 +89772,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "price_author_unknown",
+     "top_purchases": "price_author_unknown",
+     "multiple_text": "price_author_unknown"
     }
    },
    "gate_baseline_hash": "42fc254835ce.525cf7",
@@ -103303,7 +103424,7 @@
      "value_rub": 2500,
      "meaning": "disclosed",
      "scope": "package",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "40eca9862c21",
      "meaning_variants": [
       "disclosed"
@@ -103320,25 +103441,12 @@
      "terms_variants": [
       "fixed"
      ],
-     "scope_basis": "verified",
+     "scope_basis": "read",
      "quote": "В апреле 2024 года арбитражный суд Белгородской области постановил перевести 25% доли Владимира Зотова в «Агро-Белогорье» в адрес «Русагро» за 2,5 тыс. руб.",
      "source": "https://www.kommersant.ru/doc/7196506",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
-      {
-       "value_rub": 2500,
-       "meaning": "disclosed",
-       "attribution": "unknown",
-       "event": "registry",
-       "scope": "package",
-       "terms": "fixed",
-       "quote": "В апреле 2024 года арбитражный суд Белгородской области постановил перевести 25% доли Владимира Зотова в «Агро-Белогорье» в адрес «Русагро» за 2,5 тыс. руб.",
-       "source": "https://www.kommersant.ru/doc/7196506",
-       "notes": "Сумма установлена судебным решением, а не раскрытием стороны или реестром торгов — ни одна категория attribution не подходит точно, выбран unknown.",
-       "quote_checked": true,
-       "reader": "A"
-      },
       {
        "value_rub": 2500,
        "meaning": "disclosed",
@@ -103361,15 +103469,15 @@
      "meaning_variants": [
       "registry"
      ],
-     "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%. Также доля Владимира Зотова в ГК сократилась на 25%: с 72,5% до 47,5%. Соответствующие изменения были внесены в ЕГРЮЛ 27 сентября.",
+     "quote": "Соответствующие изменения были внесены в ЕГРЮЛ 27 сентября.",
      "source": "https://www.kommersant.ru/doc/7196506",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value": "2024-09-27",
        "meaning": "registry",
-       "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%. Также доля Владимира Зотова в ГК сократилась на 25%: с 72,5% до 47,5%. Соответствующие изменения были внесены в ЕГРЮЛ 27 сентября.",
+       "quote": "Соответствующие изменения были внесены в ЕГРЮЛ 27 сентября.",
        "source": "https://www.kommersant.ru/doc/7196506",
        "quote_checked": true,
        "reader": "A"
@@ -103398,14 +103506,13 @@
      "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%.",
      "source": "https://www.kommersant.ru/doc/7196506",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": false,
        "intragroup": false,
        "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%.",
        "source": "https://www.kommersant.ru/doc/7196506",
-       "notes": "После этой сделки доля «Русагро» — 47,5%, контроля еще нет (полный контроль «Русагро» получило позже, в отдельной сделке в ноябре 2024 г.).",
        "quote_checked": true,
        "reader": "A"
       },
@@ -103426,7 +103533,7 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "disputed",
+     "perimeter": "verified",
      "card_hash": "83c9f58e3a0e",
      "disputed": [
       {
@@ -103466,28 +103573,24 @@
        "reader": "B"
       }
      ],
-     "quote": "В состав ООО \"ГК Агро-Белогорье\" входит 20 свиноводческих комплексов, три комбикормовых завода, мясоперерабатывающее производство и земельный банк.",
-     "source": "https://www.interfax.ru/business/991408",
+     "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%.",
+     "source": "https://www.kommersant.ru/doc/7196506",
      "verified_by": "model×2",
-     "verified_at": "2026-11-12",
+     "verified_at": "2026-11-19",
      "readings": [
       {
-       "ok": false,
-       "covers_business": false,
-       "other_entities": [
-        "20 свиноводческих комплексов",
-        "три комбикормовых завода",
-        "мясоперерабатывающее производство"
-       ],
-       "entity": "ООО «ГК Агро-Белогорье»",
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «ГК «Агро-Белогорье»»",
        "report": {
         "inn": "3123160948",
         "year": 2023,
         "revenue_rub": 463254000.0,
         "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГК АГРО-БЕЛОГОРЬЕ\""
        },
-       "quote": "В состав ООО \"ГК Агро-Белогорье\" входит 20 свиноводческих комплексов, три комбикормовых завода, мясоперерабатывающее производство и земельный банк.",
-       "source": "https://www.interfax.ru/business/991408",
+       "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%.",
+       "source": "https://www.kommersant.ru/doc/7196506",
        "quote_checked": true,
        "reader": "A"
       },
@@ -103495,15 +103598,14 @@
        "ok": true,
        "covers_business": true,
        "other_entities": [],
-       "entity": "ООО «ГК Агро-Белогорье»",
+       "entity": "ГК «Агро-Белогорье»",
        "report": {
-        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГК АГРО-БЕЛОГОРЬЕ\"",
         "inn": "3123160948",
         "year": 2023,
         "revenue_rub": 463254000.0
        },
-       "quote": "В состав ООО \"ГК Агро-Белогорье\" входит 20 свиноводческих комплексов, три комбикормовых завода, мясоперерабатывающее производство и земельный банк.",
-       "source": "https://www.interfax.ru/business/991408",
+       "quote": "Агрохолдинг «Русагро» увеличил долю в белгородской группе компаний (ГК) «Агро-Белогорье» с 22,5% до 47,5%.",
+       "source": "https://www.kommersant.ru/doc/7196506",
        "quote_checked": true,
        "reader": "B"
       }
@@ -103519,7 +103621,15 @@
        "report не дан (ошибка подключения) — perimeter не проверялся.",
        "Nature: после этой сделки у «Русагро» 47,5%, контроль не переходит (не большинство) — control_change=false для ЭТОЙ сделки (ср. с g97d9fa60, где доля доведена до 100%). Price attribution: цена (2,5 тыс. руб., символическая) установлена решением арбитражного суда — не заявление сторон и не отчетность в чистом виде, поэтому unknown. Perimeter: нет данных отчета в задании."
       ]
-     }
+     },
+     "perimeter_entity": "ООО «ГК «Агро-Белогорье»»",
+     "perimeter_report": {
+      "inn": "3123160948",
+      "year": 2023,
+      "revenue_rub": 463254000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГК АГРО-БЕЛОГОРЬЕ\""
+     },
+     "perimeter_other_entities": []
     },
     "admitted": {
      "count": true,
@@ -113363,7 +113473,7 @@
      "value_rub": 8650000000,
      "meaning": "disclosed",
      "scope": "equity",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "c5644ea6f112",
      "meaning_variants": [
       "disclosed"
@@ -113381,26 +113491,12 @@
       "fixed"
      ],
      "attribution_quote": "Из отчетности компании по МСФО, опубликованной 13 августа, следует, что валовая прибыль ТМК за шесть месяцев снизилась на 29% и составила 63,4 млрд рублей",
-     "scope_basis": "verified",
+     "scope_basis": "read",
      "quote": "Кроме того, на финансовый результат повлияла продажа Ярцевского метзавода, который ТМК приобрела в 2020 году за 15 млрд рублей, а в июне 2024 г. продала за 8,65 млрд рублей (плюс денежное вознаграждение за продажу доли в размере 2.3 млрд рублей). ТМК оценивает убыток от продажи актива в 5,45 млрд рублей.",
      "source": "https://mashnews.ru/prodazha-yarczevskogo-metkombinata-prinesla-tmk-ubyitok-v-545-mlrd-rublej.html",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
-      {
-       "value_rub": 8650000000,
-       "meaning": "disclosed",
-       "attribution": "filing",
-       "event": "closing",
-       "scope": "equity",
-       "terms": "fixed",
-       "quote": "Кроме того, на финансовый результат повлияла продажа Ярцевского метзавода, который ТМК приобрела в 2020 году за 15 млрд рублей, а в июне 2024 г. продала за 8,65 млрд рублей (плюс денежное вознаграждение за продажу доли в размере 2.3 млрд рублей). ТМК оценивает убыток от продажи актива в 5,45 млрд рублей.",
-       "attribution_quote": "Из отчетности компании по МСФО, опубликованной 13 августа, следует, что валовая прибыль ТМК за шесть месяцев снизилась на 29% и составила 63,4 млрд рублей",
-       "source": "https://mashnews.ru/prodazha-yarczevskogo-metkombinata-prinesla-tmk-ubyitok-v-545-mlrd-rublej.html",
-       "notes": "В тексте упомянуто дополнительное 'денежное вознаграждение за продажу доли в размере 2.3 млрд рублей' — неясно, относится ли оно к тому же активу или к другой сделке; не включено в основное значение 8,65 млрд, так как карточка называет именно эту сумму.",
-       "quote_checked": true,
-       "reader": "A"
-      },
       {
        "value_rub": 8650000000,
        "meaning": "disclosed",
@@ -113423,24 +113519,16 @@
     "date": {
      "value": "2024-06-07",
      "meaning": "closing",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "5f651e3d480d",
      "meaning_variants": [
       "closing"
      ],
      "quote": "Москва. 7 июня. INTERFAX.RU - \"Трубная металлургическая компания\" (ТМК) закрыла сделку по продаже Ярцевского металлургического завода (ООО \"ТМК-ЯМЗ\", Смоленская область).",
      "source": "https://www.interfax.ru/business/965664",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
-      {
-       "value": "2024-06-07",
-       "meaning": "closing",
-       "quote": "Москва. 7 июня. INTERFAX.RU - \"Трубная металлургическая компания\" (ТМК) закрыла сделку по продаже Ярцевского металлургического завода (ООО \"ТМК-ЯМЗ\", Смоленская область).",
-       "source": "https://www.interfax.ru/business/965664",
-       "quote_checked": true,
-       "reader": "A"
-      },
       {
        "value": "2024-06-07",
        "meaning": "closing",
@@ -113462,24 +113550,23 @@
      "card_hash": "425530f6d36f",
      "intragroup": false,
      "control_change_basis": "verified",
-     "quote": "Согласно данным ЕГРЮЛ, с 7 июня 100% завода у ООО \"Фрунзе\".",
+     "quote": "\"Трубная металлургическая компания\" (ТМК) закрыла сделку по продаже Ярцевского металлургического завода (ООО \"ТМК-ЯМЗ\", Смоленская область).",
      "source": "https://www.interfax.ru/business/965664",
      "verified_by": "model×2",
-     "verified_at": "2026-11-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Согласно данным ЕГРЮЛ, с 7 июня 100% завода у ООО \"Фрунзе\".",
+       "quote": "\"Трубная металлургическая компания\" (ТМК) закрыла сделку по продаже Ярцевского металлургического завода (ООО \"ТМК-ЯМЗ\", Смоленская область).",
        "source": "https://www.interfax.ru/business/965664",
-       "notes": "Interfax также пишет со ссылкой на источник в отрасли, что конечным бенефициаром стал металлотрейдер «МеталлСервис», не связанный с ТМК.",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Согласно данным ЕГРЮЛ, с 7 июня 100% завода у ООО \"Фрунзе\". По данным источника \"Интерфакса\" в отрасли, конечным бенефициаром актива стал металлотрейдер \"МеталлСервис\".",
+       "quote": "\"Трубная металлургическая компания\" (ТМК) закрыла сделку по продаже Ярцевского металлургического завода (ООО \"ТМК-ЯМЗ\", Смоленская область).",
        "source": "https://www.interfax.ru/business/965664",
        "quote_checked": true,
        "reader": "B"
@@ -113540,7 +113627,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "По данным «Интерфакса», конечным бенефициаром стал металлотрейдер «МеталлСервис» (источник в отрасли, не официально) — ООО «Фрунзе», видимо, прямой держатель; покупатель карточки совпадает с ООО «Фрунзе» по ЕГРЮЛ.",
+       "stake: 100% подтверждено только через ЕГРЮЛ («100% завода у ООО «Фрунзе»», результат владения), без глагола покупки рядом с процентом — null, как и в кейсе Henkel."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -113554,7 +113653,7 @@
      "industry": "ok",
      "purchase_sums": "ok",
      "top_purchases": "ok",
-     "multiple_text": "stake_not_verified"
+     "multiple_text": "price_not_verified"
     }
    },
    "date_basis": "closing",
@@ -152083,29 +152182,17 @@
      "value_rub": 80000000000,
      "meaning": "disclosed",
      "scope": "equity",
-     "basis": "verified",
+     "basis": "read",
      "card_hash": "30d78183fd3d",
      "meaning_variants": [
       "disclosed"
      ],
-     "scope_basis": "verified",
+     "scope_basis": "read",
      "quote": "«Mondi рада подтвердить, что закрытие сделки было ускорено и продажа в настоящее время завершена. Таким образом, Mondi завершила свой уход из России», – говорится в сообщении. О продаже предприятия Mondi объявила в середине сентября, покупателем выступила ООО «Сезар Инвест», сумма сделки составила 80 млрд руб.",
      "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
-     "verified_by": "model×2",
-     "verified_at": "2026-11-12",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-19",
      "readings": [
-      {
-       "value_rub": 80000000000,
-       "meaning": "disclosed",
-       "attribution": "parties",
-       "event": "closing",
-       "scope": "equity",
-       "terms": "fixed",
-       "quote": "«Mondi рада подтвердить, что закрытие сделки было ускорено и продажа в настоящее время завершена. Таким образом, Mondi завершила свой уход из России», – говорится в сообщении. О продаже предприятия Mondi объявила в середине сентября, покупателем выступила ООО «Сезар Инвест», сумма сделки составила 80 млрд руб.",
-       "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
-       "quote_checked": true,
-       "reader": "A"
-      },
       {
        "value_rub": 80000000000,
        "meaning": "disclosed",
@@ -152135,31 +152222,30 @@
      "attribution_quote": "говорится в сообщении."
     },
     "date": {
-     "value": "2023-10",
-     "meaning": "publication",
-     "basis": "disputed",
+     "value": "2023-10-04",
+     "meaning": "closing",
+     "basis": "verified",
      "card_hash": "ae49bc2b9ca6",
      "meaning_variants": [
-      "closing",
-      "publication"
+      "closing"
      ],
-     "quote": "4 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре Ведомости Читайте нас в MAX Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+     "quote": "4 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
      "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
      "verified_by": "model×2",
-     "verified_at": "2026-11-12",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value": "2023-10-04",
        "meaning": "closing",
-       "quote": "4 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре Ведомости Читайте нас в MAX Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+       "quote": "4 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
        "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "A"
       },
       {
-       "value": "2023-10",
+       "value": "2023-10-04",
        "meaning": "closing",
-       "quote": "Главная / Бизнес / 04 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
+       "quote": "4 октября 2023, 16:19 Mondi досрочно завершила продажу последнего завода в Сыктывкаре",
        "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "B"
@@ -152194,23 +152280,23 @@
      "own_shares": false,
      "basis": "rule",
      "card_hash": "425530f6d36f",
-     "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
-     "source": "https://www.interfax.ru/business/921255",
+     "quote": "Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+     "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
      "verified_by": "model×2",
-     "verified_at": "2026-11-12",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Группа Mondi plc заключила соглашение о продаже своего крупнейшего и последнего актива в России - АО \"Монди Сыктывкар\", за 80 млрд рублей (около 775 млн евро по текущему курсу).",
-       "source": "https://www.interfax.ru/business/921255",
+       "quote": "Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ.",
+       "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "A"
       },
       {
        "control_change": true,
        "intragroup": false,
-       "quote": "Австрийский производитель упаковочной бумаги Mondi досрочно закрыл часть сделки по продаже целлюлозно-бумажного комбината в Сыктывкаре, своего последнего актива в РФ. В результате группа завершила уход с российского рынка, сообщается на ее сайте.",
+       "quote": "О продаже предприятия Mondi объявила в середине сентября, покупателем выступила ООО «Сезар Инвест», сумма сделки составила 80 млрд руб.",
        "source": "https://www.vedomosti.ru/business/news/2023/10/04/998768-mondi-zavershila-prodazhu-zavoda",
        "quote_checked": true,
        "reader": "B"
@@ -152273,21 +152359,33 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Дата: цитата дословно содержит «4 октября» (без ведущего нуля) — записал так умышленно, прошлый спор читателей (basis=disputed) был из-за того, что один читатель взял «04» (ведущий ноль мешает регэкспу date_supported). Доля 95,8107% — то же число, которое Mondi держала до сделки; источник (akm.ru) подтверждает, что доля в капитале не менялась на 31.12.2023/2024 — то есть именно эта доля перешла новому акционеру.",
+       "stake: 95,8107% — доля в уставном капитале по раскрытию АКМ (не прямая фраза «приобрела», но конкретная цифра с датой перехода, совпадающей с датой закрытия сделки); date: публикация ЖЁСТКО датирована 4 октября, день назван словами в заголовке — meaning=closing, а не просто publication, т.к. текст говорит «продажа в настоящее время завершена»."
+      ]
+     }
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "date_disputed",
-     "top_purchases": "date_disputed",
-     "multiple_text": "stake_not_verified"
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
+     "multiple_text": "price_not_verified"
     }
    },
    "seller_id": "geec5d0dc",
@@ -249695,15 +249793,44 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "5e2e2d132428"
+     "basis": "verified",
+     "card_hash": "5e2e2d132428",
+     "object": "ООО «Стек Групп»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+     "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "ООО «Стек Групп»",
+       "event": "closing",
+       "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "ООО «Стек Групп»",
+       "event": "closing",
+       "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 2600000000,
      "meaning": "disclosed",
      "scope": "equity",
-     "basis": "stale",
-     "card_hash": "050572f9abdb",
+     "basis": "disputed",
+     "card_hash": "5b319e173b84",
      "meaning_variants": [
       "disclosed"
      ],
@@ -249725,17 +249852,17 @@
      "quote": "Общая сумма сделки составит не более 2,6 млрд руб. и будет зависеть от динамики роста выручки M1Cloud в течение ближайшего года.",
      "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
      "verified_by": "model×2",
-     "verified_at": "2026-10-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value_rub": 2600000000,
-       "meaning": "disclosed",
+       "meaning": "range",
        "attribution": "parties",
-       "event": "announcement",
+       "event": "signing",
        "scope": "equity",
        "terms": "includes_contingent",
        "quote": "Общая сумма сделки составит не более 2,6 млрд руб. и будет зависеть от динамики роста выручки M1Cloud в течение ближайшего года.",
-       "attribution_quote": "Размер второго платежа будет зависеть от динамики роста выручки приобретаемой компании в течение ближайшего года\", - отметил представитель пресс-службы Selectel.",
+       "attribution_quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud)",
        "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
        "quote_checked": true,
        "reader": "A"
@@ -249754,7 +249881,35 @@
        "reader": "B"
       }
      ],
-     "stale_from": "verified"
+     "stale_from": "verified",
+     "disputed": [
+      {
+       "value_rub": 2600000000,
+       "meaning": "range",
+       "attribution": "parties",
+       "event": "signing",
+       "scope": "equity",
+       "terms": "includes_contingent",
+       "quote": "Общая сумма сделки составит не более 2,6 млрд руб. и будет зависеть от динамики роста выручки M1Cloud в течение ближайшего года.",
+       "attribution_quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud)",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 2600000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "includes_contingent",
+       "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud). Общая сумма сделки составит не более 2,6 млрд руб.",
+       "attribution_quote": "\"Расчеты по сделке пройдут в два этапа. Первый платеж ожидается до конца сентября 2026 г. Размер второго платежа будет зависеть от динамики роста выручки приобретаемой компании в течение ближайшего года\", - отметил представитель пресс-службы Selectel.",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-09-18",
@@ -249762,17 +249917,17 @@
      "basis": "verified",
      "card_hash": "4620dfb853eb",
      "meaning_variants": [
-      "announcement",
+      "closing",
       "publication"
      ],
      "quote": "Павел Королев © ComNews 18.09.2026 АО \"Селектел\" (Selectel) приобрело 100% сервис-провайдера M1Cloud (ООО \"Стек Групп\").",
      "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
      "verified_by": "model×2",
-     "verified_at": "2026-10-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value": "2026-09-18",
-       "meaning": "announcement",
+       "meaning": "closing",
        "quote": "Павел Королев © ComNews 18.09.2026 АО \"Селектел\" (Selectel) приобрело 100% сервис-провайдера M1Cloud (ООО \"Стек Групп\").",
        "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
        "quote_checked": true,
@@ -249781,7 +249936,7 @@
       {
        "value": "2026-09-18",
        "meaning": "publication",
-       "quote": "Павел Королев © ComNews 18.09.2026 АО \"Селектел\" (Selectel) приобрело 100% сервис-провайдера M1Cloud (ООО \"Стек Групп\"). Общая сумма сделки составит не более 2,6 млрд руб.",
+       "quote": "Павел Королев © ComNews 18.09.2026 АО \"Селектел\" (Selectel) приобрело 100% сервис-провайдера M1Cloud (ООО \"Стек Групп\").",
        "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
        "quote_checked": true,
        "reader": "B"
@@ -249802,7 +249957,7 @@
      "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
      "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
      "verified_by": "model×2",
-     "verified_at": "2026-10-15",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "control_change": true,
@@ -249829,8 +249984,53 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "83ff4fa8156a"
+     "perimeter": "verified",
+     "card_hash": "83ff4fa8156a",
+     "perimeter_entity": "ООО «Стек Групп»",
+     "perimeter_report": {
+      "inn": "7729739360",
+      "year": 2025,
+      "revenue_rub": 1251082000.0,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СТЕК ГРУПП\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+     "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Стек Групп»",
+       "report": {
+        "inn": "7729739360",
+        "year": 2025,
+        "revenue_rub": 1251082000.0,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СТЕК ГРУПП\""
+       },
+       "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "ООО «Стек Групп»",
+       "report": {
+        "inn": "7729739360",
+        "year": 2025,
+        "revenue_rub": 1251082000.0
+       },
+       "quote": "АО \"Селектел\" (Selectel) приобрело 100% долей ООО \"Стек Групп\" (M1Cloud).",
+       "source": "https://www.comnews.ru/content/247422/2026-09-18/2026-w38/1008/nuzhno-bolshe-oblachnykh-servisov-selectel-priobrel-m1cloud",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -249842,9 +250042,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "stale",
-     "top_purchases": "stale",
-     "multiple_text": "stale"
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
+     "multiple_text": "price_not_verified"
     }
    },
    "proofread_absorbed": {
@@ -253951,43 +254151,45 @@
      "value_rub": null,
      "meaning": "estimate",
      "scope": "equity",
-     "basis": "stale",
-     "card_hash": "575077b7a79a",
+     "basis": "read",
+     "card_hash": "6b35241c1efa",
      "meaning_variants": [
       "estimate"
      ],
-     "attribution": "analyst",
+     "attribution": "parties",
      "attribution_variants": [
-      "analyst"
+      "parties"
      ],
-     "event": "publication",
+     "event": "announcement",
      "event_variants": [
-      "publication"
+      "announcement"
      ],
      "terms": "unknown",
      "terms_variants": [
       "unknown"
      ],
      "scope_basis": "read",
-     "quote": "Однако известно, что весной VK продал «Интерросу» 25% «Точки» за 21,2 млрд рублей. То есть вся оценка банка составила 84,8 млрд.",
-     "source": "https://smart-lab.ru/blog/1354817.php",
+     "quote": "Совет директоров МКПАО \"Т-Технологии\" утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+     "source": "https://www.comnews.ru/content/247669/2026-10-02/2026-w40/1007/do-konca-2026-g-t-tekhnologii-zaberet-tochku-za-848-mlrd-rub",
      "verified_by": "model×1",
-     "verified_at": "2026-10-13",
+     "verified_at": "2026-11-19",
      "readings": [
       {
        "value_rub": 84800000000,
        "meaning": "estimate",
-       "attribution": "analyst",
-       "event": "publication",
+       "attribution": "parties",
+       "event": "announcement",
        "scope": "equity",
        "terms": "unknown",
-       "quote": "Однако известно, что весной VK продал «Интерросу» 25% «Точки» за 21,2 млрд рублей. То есть вся оценка банка составила 84,8 млрд.",
-       "source": "https://smart-lab.ru/blog/1354817.php",
+       "quote": "Совет директоров МКПАО \"Т-Технологии\" утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+       "attribution_quote": "утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+       "source": "https://www.comnews.ru/content/247669/2026-10-02/2026-w40/1007/do-konca-2026-g-t-tekhnologii-zaberet-tochku-za-848-mlrd-rub",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
-     "stale_from": "read"
+     "stale_from": "read",
+     "attribution_quote": "утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб."
     },
     "date": {
      "value": "2026-09-22",
@@ -254019,7 +254221,19 @@
        "reader": "B"
       }
      ],
-     "stale_from": "verified"
+     "stale_from": "verified",
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Сделка на дату источника ЕЩЕ НЕ ЗАКРЫТА («закроют сделку в конце 2026 г.») — соответствует заголовку карточки «собираются купить». 100% складывается из уже имевшихся долей (Интеррос выкупил 25% у VK ранее) плюс допэмиссия для консолидации остального — технически это оценка для полной консолидации, а не одна покупка на вторичном рынке.",
+       "nature: это докупка миноритарных долей (у VK/Интерроса, у «1С») уже контролируемой «Точки» до 100% — \"Т-Технологии\"/Т-Банк и раньше были мажоритарным акционером банка; конечный контроль не переходит к новой группе, поэтому control_change=false (в отличие от Avto.ru/Яндекс, где покупатель был посторонним). price: это оценка совета директоров для целей допэмиссии, сделка еще не закрыта (статус «Обсуждается»), закрытие заявлено на конец 2026 года — meaning=estimate, не disclosed."
+      ]
+     }
     },
     "nature": {
      "control_change": true,
@@ -254053,7 +254267,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-19",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Сделка на дату источника ЕЩЕ НЕ ЗАКРЫТА («закроют сделку в конце 2026 г.») — соответствует заголовку карточки «собираются купить». 100% складывается из уже имевшихся долей (Интеррос выкупил 25% у VK ранее) плюс допэмиссия для консолидации остального — технически это оценка для полной консолидации, а не одна покупка на вторичном рынке.",
+       "nature: это докупка миноритарных долей (у VK/Интерроса, у «1С») уже контролируемой «Точки» до 100% — \"Т-Технологии\"/Т-Банк и раньше были мажоритарным акционером банка; конечный контроль не переходит к новой группе, поэтому control_change=false (в отличие от Avto.ru/Яндекс, где покупатель был посторонним). price: это оценка совета директоров для целей допэмиссии, сделка еще не закрыта (статус «Обсуждается»), закрытие заявлено на конец 2026 года — meaning=estimate, не disclosed."
+      ]
+     }
     },
     "target": {
      "company_id": "g599e8557",
@@ -254062,8 +254288,53 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "99c53d1fea92"
+     "perimeter": "verified",
+     "card_hash": "99c53d1fea92",
+     "perimeter_entity": "АО «Точка»",
+     "perimeter_report": {
+      "inn": "9705120864",
+      "year": 2025,
+      "revenue_rub": 9688412000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ТОЧКА\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "Совет директоров МКПАО \"Т-Технологии\" утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+     "source": "https://www.comnews.ru/content/247669/2026-10-02/2026-w40/1007/do-konca-2026-g-t-tekhnologii-zaberet-tochku-za-848-mlrd-rub",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-19",
+     "readings": [
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО «Точка»",
+       "report": {
+        "inn": "9705120864",
+        "year": 2025,
+        "revenue_rub": 9688412000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"ТОЧКА\""
+       },
+       "quote": "Совет директоров МКПАО \"Т-Технологии\" утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+       "source": "https://www.comnews.ru/content/247669/2026-10-02/2026-w40/1007/do-konca-2026-g-t-tekhnologii-zaberet-tochku-za-848-mlrd-rub",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": true,
+       "covers_business": true,
+       "other_entities": [],
+       "entity": "АО «Точка»",
+       "report": {
+        "inn": "9705120864",
+        "year": 2025,
+        "revenue_rub": 9688412000.0
+       },
+       "quote": "Совет директоров МКПАО \"Т-Технологии\" утвердил оценку 100% долей в капитале АО \"Точка\" для консолидации в размере 84,8 млрд руб.",
+       "source": "https://www.comnews.ru/content/247669/2026-10-02/2026-w40/1007/do-konca-2026-g-t-tekhnologii-zaberet-tochku-za-848-mlrd-rub",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -291549,7 +291820,10 @@
    "reread": "2026-11-09",
    "reread_hash": "0881a5564fc5.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2025-12-02",
@@ -291664,7 +291938,10 @@
    },
    "reread": "2026-11-12",
    "reread_hash": "84ac2082b3ba.de0b3e",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2025-12-02",
@@ -291787,7 +292064,10 @@
    },
    "reread": "2026-11-12",
    "reread_hash": "3ff6c74227e5.cc629a",
-   "reread_note": "статьи: 6"
+   "reread_note": "статьи: 6",
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2026",
@@ -291933,7 +292213,10 @@
      "by": "reread m103",
      "date": "2026-11-13"
     }
-   ]
+   ],
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2026",
@@ -292083,7 +292366,10 @@
      "by": "reread m103",
      "date": "2026-11-13"
     }
-   ]
+   ],
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2026-06-05",
@@ -292099,13 +292385,17 @@
     [
      "TAdviser",
      "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%B0%D1%80%D0%B7%D0%B5%D1%80%D0%BD%D0%BE%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82,_%D0%93%D0%9A"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8727741"
     ]
    ],
    "eco": {
     "sum": "—",
     "share": "—",
     "val": "Все 81 компания, 130 с лишним земельных участков и свыше 350 помещений по тому же делу оценены больше чем в 81,5 млрд ₽; отдельной оценки «Краснодарзернопродукта» нет.",
-    "target_fin": "—",
+    "target_fin": "Выручка «Краснодарзернопродукта» в 2025 году — 9,2 млрд ₽.",
     "fin": "—",
     "rationale": "Генпрокуратура утверждает, что холдинг «Краснодарзернопродукт» создан из части активов, нажитых коррупцией. Активы распределили между родственниками экс-депутатов Заксобрания Кубани Серсея Фурсы и Алексея Сидюкова, и те тоже стали ответчиками.",
     "context": "«Краснодарзернопродукт» — один из крупнейших зернотрейдеров юга России; выращивает пшеницу, подсолнечник и другие культуры, хранит и перерабатывает зерно, торгует им, в том числе на экспорт. В апреле 2026 года Ленинский районный суд Краснодара удовлетворил иск Генпрокуратуры к 18 физлицам и обратил в доход государства 81 компанию Фурсы, Сидюкова и их семей, среди них винодельни «Саук-Дере», «Раевское», «Мысхако» и несколько агрофирм. Иск связан с делом вице-губернатора Андрея Коробки, который курировал сельское хозяйство края; его активы суд отдельно изъял в тот же месяц. Точная дата решения в источниках не названа. Изменения в ЕГРЮЛ о переходе под контроль Росимущества внесли 5 июня 2026 года.",
@@ -292192,7 +292482,13 @@
    "reread": "2026-11-09",
    "reread_hash": "f6536591d8ca.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "proofread_absorbed": {
+    "eco.target_fin": []
+   },
+   "deep_researched": "2026-11-19",
+   "weekly_researched": "2026-11-19",
+   "proofread": "2026-11-19"
   },
   {
    "date": "2025-10-23",
@@ -327802,7 +328098,7 @@
     "val": "Официальную сумму инвестиций не называли. Затраты фонда на строительство склада инвестиционный директор УК «Тетис Кэпитал» Ольга Селюгина оценивает в 4–4,5 млрд руб., директор департамента складской и промышленной недвижимости Remain Александр Федоров — в 4,5–5 млрд руб.",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "Гендиректор Evermount Capital Group Антон Чертков объясняет решение тем, что складская недвижимость «обладает коротким сроком строительства и может обеспечить гарантированный денежный поток».",
+    "rationale": "Гендиректор Evermount Capital Group Антон Чертков говорит, что складская недвижимость «обладает коротким сроком строительства и может обеспечить гарантированный денежный поток».",
     "context": "Evermount Capital Group вкладывает деньги в проекты в сфере FMCG, питания, фудтеха и агросектора; фонд принадлежит Ольге Белявцевой. Руководит им гендиректор Антон Чертков.",
     "finadv": "—"
    },
@@ -327857,7 +328153,8 @@
     ],
     "title": [
      "1a633a4f6b12"
-    ]
+    ],
+    "eco.rationale": []
    },
    "buyer": "gc1f48421",
    "seller_id": "g91bd1fa6",
@@ -327963,7 +328260,8 @@
    ],
    "reread": "2026-11-18",
    "reread_hash": "dccf4f9a1a12.966308",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "proofread": "2026-11-19"
   },
   {
    "id": "g9878a8ba",
