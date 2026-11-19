@@ -207,35 +207,6 @@
    ]
   },
   {
-   "draft_id": "d91172506",
-   "title": "Anthropic провела прайсинг IPO",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/19/1413230-anthropic-ipo"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d67330928",
    "title": "Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инфографика",
    "date": "2026-11-19",
@@ -259,10 +230,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -293,7 +262,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -324,7 +293,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -355,92 +324,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела прайсинг IPO» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d75519707",
-   "title": "Microsoft убивает сверхполезное приложение, у которого нет аналогов. На покупку его конкурентов потрачены сотни миллионов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-19_microsoft_ubivaet_sverhpoleznoe"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d02423136",
-   "title": "Покупатели и продавцы ИТ-компаний разошлись во взглядах на раздел бизнеса",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/pokupateli-i-prodavtsy-it-kompanij-razoshlis-vo-vzglyadah-na-razdel-biznesa/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29659803",
-   "title": "Как будут привлекать инвестиции на Дальний Восток и в Арктику",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204863/video/kak-budut-privlekat-investitcii-na-dalnii-vostok-i-v-arktiku"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Как будут",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Как будут",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -473,41 +357,13 @@
    ]
   },
   {
-   "draft_id": "d80062561",
-   "title": "Форум «Инвестиции в будущее» стартует в Новороссийске 20 ноября",
+   "draft_id": "d79612750",
+   "title": "UniCredit согласовал с правительством Германии покупку Commerzbank",
    "date": "2026-11-19",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261119/forum-2132757208.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Гостиницы и туризм",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d70002417",
-   "title": "СМИ: выход GTA VI побудил россиян приобрести свою первую игровую приставку",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/gta-2132735184.html"
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/19/11/2026/6afedba88a838ddce93a0638"
     ]
    ],
    "sum": null,
@@ -522,20 +378,192 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финтех",
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d47447606",
+   "title": "Медианная стоимость M&A-сделок в ИТ выросла более чем втрое, до 1,8 миллиарда",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-19_mediannaya_stoimost_ma-sdelok"
+    ]
+   ],
+   "sum": "1,8 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d21350551",
-   "title": "«Удачных вам Голодных Игр». Как в России прошли ночные распродажи, где люди выносили прилавки с газировкой",
+   "draft_id": "d78602226",
+   "title": "Минэкономразвития предложило план по перезапуску инвестиций в России",
    "date": "2026-11-19",
    "src": [
     [
-     "web:93.ru",
-     "https://93.ru/text/food/2026/11/19/76776876/"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/minekonomrazvitiya-predlozhilo-plan-po-perezapusku-investitsij-v-rossii/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d01284650",
+   "title": "Japan Tobacco ждут миллиардные убытки после передачи российских заводов под внешнее управление",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/19/76777472/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47120248",
+   "title": "Поезд пошел: Мишустин сообщил о 5,5 трлн инвестиций в развитие транспорта",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204921/maksim-bazanov/mishustin-soobshchil-o-5-trln-investitcii-v-razvitie-transporta"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08288293",
+   "title": "Полисы ОСАГО можно будет купить на сайте РСА",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204930/video/polisy-osago-mozhno-budet-kupit-na-saite-rsa"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d83781080",
+   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/anthropic-2132773302.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d08080974",
+   "title": "В Роскачестве рассказали, на что обратить внимание при покупке щучьей икры",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/19/v-roskachestve-rasskazali-na-chto-obratit-vnimanie-pri-pokupke-shhuchej-ikry"
     ]
    ],
    "sum": null,
