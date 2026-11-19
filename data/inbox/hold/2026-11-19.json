@@ -207,35 +207,6 @@
    ]
   },
   {
-   "draft_id": "d49650078",
-   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/anthropic-875381358.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d40022620",
    "title": "Липецкие власти требуют продать с торгов недострой турцентра на улице Маяковского",
    "date": "2026-11-19",
@@ -265,65 +236,6 @@
    ]
   },
   {
-   "draft_id": "d83781080",
-   "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/anthropic-2132773302.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d82313909",
-   "title": "Минфин США продлил лицензию на операции по продаже активов «Лукойла»",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261119/minfin--875391340.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d28010663",
    "title": "США продлили лицензию на операции по продаже зарубежных активов «Лукойла»",
    "date": "2026-11-19",
@@ -347,10 +259,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Минфин США продлил лицензию на операции по продаже активов «» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -377,11 +287,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -441,7 +349,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -471,7 +379,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -502,104 +410,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d67256704",
-   "title": "Автомобили Xiaomi начнут официально продавать за пределами Китая — первым зарубежным рынком стали ОАЭ",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/avtomobili-xiaomi-nachnut-oficialno-prodavat-za-predelami-kitaya-pervym-zarubezhnym-rynkom-stali-oae/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d89206491",
-   "title": "L’Oréal обсуждает покупку 10% Giorgio Armani: ещё 5% может приобрести производитель очков",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/loreal-obsuzhdaet-pokupku-10-giorgio-armani-eshyo-5-mozhet-priobresti-proizvoditel-ochkov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Французский производитель косметики L’Oréal ведёт переговоры о покупке 10% итальянского модного дома Giorgio Armani, ещё 5% может приобрести производитель очков EssilorLuxottica, сообщает итальянское издание Corriere della Sera. По данным газеты, французская…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/loreal-obsuzhdaet-pokupku-10-giorgio-armani-eshyo-5-mozhet-priobresti-proizvoditel-ochkov/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d02271124",
-   "title": "Владельцы «Лестера» передумали продавать клуб, пишут СМИ",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261119/lester-2132819200.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -630,21 +441,21 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провел IPO на 81,3 миллиарда долларов» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO puts AI’s circular financing boom to the tes» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d26023819",
-   "title": "Акции Antrophic взлетели на треть после рекордного IPO",
+   "draft_id": "d68470985",
+   "title": "Канцлер ФРГ допустил проведение в ОАЭ нового раунда переговоров по Украине",
    "date": "2026-11-19",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/aktsii-antrophic-vzleteli-na-tret-posle-rekordnogo-ipo/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/world/1130272"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -658,18 +469,45 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d11626494",
-   "title": "Зеленский высказался о следующем раунде переговоров с Россией",
+   "draft_id": "d79867834",
+   "title": "В Москве закрыли сайт по продаже крокодилов и питонов",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/moskva-2132829643.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d43585239",
+   "title": "Раскрыто возможное место проведения нового раунда переговоров по Украине",
    "date": "2026-11-19",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/19/zelenskiy-vyskazalsya-o-sleduyuschem-raunde-peregovorov-s-rossiey/"
+     "https://lenta.ru/news/2026/11/20/raskryto-vozmozhnoe-mesto-provedeniya-novogo-raunda-peregovorov-po-ukraine/"
     ]
    ],
    "sum": null,
