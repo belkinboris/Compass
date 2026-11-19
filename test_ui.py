@@ -5427,7 +5427,9 @@ def test_deal_without_a_price_offers_the_compass_estimate(page, base_url):
     assert page.locator("#pe-btn").bounding_box()["width"] > box["width"] * 2
     txt = page.inner_text(".pe-panel").lower()
     assert "анализ компаса" in txt and "как считали" in txt and "спросить ассистента" in txt
-    assert page.locator(".pe-panel .pe-r").count() >= 1  # хотя бы одна строка «что есть»
+    # Хотя бы один раскрывающийся раздел с данными (с 19 ноября 2026 строки
+    # «что есть» живут в разделах .pe-fold: «По базе Компаса», «Оценки источников»…)
+    assert page.locator(".pe-panel .pe-fold").count() >= 2
     page.click("#pe-btn")
     page.wait_for_timeout(700)
     assert page.locator(".pe-panel.open").count() == 0

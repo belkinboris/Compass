@@ -207,34 +207,6 @@
    ]
   },
   {
-   "draft_id": "d67330928",
-   "title": "Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инфографика",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/19/11/2026/6afeac716e1d369254e8c3cd"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d86670029",
    "title": "Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO Anthropic",
    "date": "2026-11-19",
@@ -258,11 +230,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -293,7 +263,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
+    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
    ]
   },
   {
@@ -324,7 +294,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
+    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
    ]
   },
   {
@@ -357,175 +327,6 @@
    ]
   },
   {
-   "draft_id": "d79612750",
-   "title": "UniCredit согласовал с правительством Германии покупку Commerzbank",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/19/11/2026/6afedba88a838ddce93a0638"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d47447606",
-   "title": "Медианная стоимость M&A-сделок в ИТ выросла более чем втрое, до 1,8 миллиарда",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-19_mediannaya_stoimost_ma-sdelok"
-    ]
-   ],
-   "sum": "1,8 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78602226",
-   "title": "Минэкономразвития предложило план по перезапуску инвестиций в России",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/minekonomrazvitiya-predlozhilo-plan-po-perezapusku-investitsij-v-rossii/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d01284650",
-   "title": "Japan Tobacco ждут миллиардные убытки после передачи российских заводов под внешнее управление",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/19/76777472/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47120248",
-   "title": "Поезд пошел: Мишустин сообщил о 5,5 трлн инвестиций в развитие транспорта",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204921/maksim-bazanov/mishustin-soobshchil-o-5-trln-investitcii-v-razvitie-transporta"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d08288293",
-   "title": "Полисы ОСАГО можно будет купить на сайте РСА",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204930/video/polisy-osago-mozhno-budet-kupit-na-saite-rsa"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d83781080",
    "title": "Anthropic провел IPO на 81,3 миллиарда долларов",
    "date": "2026-11-19",
@@ -553,17 +354,17 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic провела крупнейшее IPO и побила рекорд SpaceX. Инф» — второе издание, в группу не шлем"
+    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d08080974",
-   "title": "В Роскачестве рассказали, на что обратить внимание при покупке щучьей икры",
+   "draft_id": "d90026806",
+   "title": "Минфин США продлил разрешение на переговоры о продаже зарубежных активов ЛУКОЙЛа",
    "date": "2026-11-19",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/19/v-roskachestve-rasskazali-na-chto-obratit-vnimanie-pri-pokupke-shhuchej-ikry"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114019"
     ]
    ],
    "sum": null,
@@ -578,136 +379,25 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23901940",
-   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28330111"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41882092",
-   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/18/76774338/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91144434",
-   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261118/kurtka-875330072.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91172506",
-   "title": "Anthropic провел прайсинг IPO",
+   "draft_id": "d93046052",
+   "title": "США снова продлили лицензию для продажи зарубежных активов «Лукойла»",
    "date": "2026-11-19",
    "src": [
     [
      "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/19/1413230-anthropic-ipo"
+     "https://www.vedomosti.ru/politics/news/2026/11/19/1413497-ssha-prodlili-litsenziyu"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -718,27 +408,38 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "похоже на уже описанную сделку gb5456bba (общие редкие слова: продаж, снова) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d16426733",
-   "title": "Не только «Подчеркнутые углы». Рекордные продажи Кандинского на аукционах",
+   "draft_id": "d93734939",
+   "title": "МТС-банк рассматривает возможность buyback акций, анализирует рыночные практики",
    "date": "2026-11-19",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/photoreport/19/11/2026/6afeb3806e1d369254e8c3fa"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1130241"
     ]
    ],
-   "sum": "$85,8 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "МТС-банк рассматривает возможность buyback акций, заявил вице-президент МТС-банка по стратегии Роман Зильберман.\"Смотрим на рыночные практики, анализируем, возможность такую рассматриваем.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1130241"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -747,24 +448,54 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d13780766",
-   "title": "Во II чтении одобрен расчет нормы обязательной продажи произведенных нефтепродуктов за три месяца",
+   "draft_id": "d83214551",
+   "title": "OFAC продлило до 19 декабря лицензию для продажи зарубежных активов «ЛУКОЙЛа»",
    "date": "2026-11-19",
    "src": [
     [
      "web:interfax.ru",
-     "https://www.interfax.ru/russia/1130179"
+     "https://www.interfax.ru/business/1130231"
     ]
    ],
    "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88084073",
+   "title": "Петербургский бизнес нарастил инвестиции в технологии интернета вещей",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-19_peterburgskij_biznes_narastil"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -783,13 +514,80 @@
    ]
   },
   {
-   "draft_id": "d75519707",
-   "title": "Microsoft убивает сверхполезное приложение, у которого нет аналогов. На покупку его конкурентов потрачены сотни миллионов",
+   "draft_id": "d20434992",
+   "title": "Эксперт Анфиногенов оценил инвестиции для создания игорной зоны в РФ",
    "date": "2026-11-19",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/top/2026-11-19_microsoft_ubivaet_sverhpoleznoe"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28336981"
+    ]
+   ],
+   "sum": "10 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d92370767",
+   "title": "«Автоваз» планирует выпустить и продать не менее 20 тыс. Lada Azimut в 2027 году",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28336975"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Производственные мощности предприятия позволяют выпускать до 70 тыс. таких машин ежегодно",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28336975"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48638101",
+   "title": "В Москве признали запрещенным объявление о продаже питона и крокодила",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28336877"
     ]
    ],
    "sum": null,
@@ -807,18 +605,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d70002417",
-   "title": "СМИ: выход GTA VI побудил россиян приобрести свою первую игровую приставку",
+   "draft_id": "d43401730",
+   "title": "РЖД создадут виртуальных помощников для покупки билетов на поезда",
    "date": "2026-11-19",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261119/gta-2132735184.html"
+     "web:1prime.ru",
+     "https://1prime.ru/20261119/rzhd-875392564.html"
     ]
    ],
    "sum": null,
@@ -833,20 +630,167 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Финтех",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d21350551",
-   "title": "«Удачных вам Голодных Игр». Как в России прошли ночные распродажи, где люди выносили прилавки с газировкой",
+   "draft_id": "d82313909",
+   "title": "Минфин США продлил лицензию на операции по продаже активов «Лукойла»",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261119/minfin--875391340.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d28010663",
+   "title": "США продлили лицензию на операции по продаже зарубежных активов «Лукойла»",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/ssha-2132790212.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «США снова продлили лицензию для продажи зарубежных активов «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d24738560",
+   "title": "Anthropic’s IPO puts AI’s circular financing boom to the test",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-puts-ais-circular-financing-boom-to-the-test/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Фьючерсы на Nasdaq 100 подскочили на 2% после прайсинга IPO » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88262164",
+   "title": "Депутаты поддержали инициативу Игоря Мартынова о запрете продажи электронных сигарет",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/11/19/deputaty-podderzhali-inicziativu-igorya-martynova-o-zaprete-prodazhi-elektronnyh-sigaret"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d60300630",
+   "title": "В Астраханской области запретят продавать вейпы с 1 марта 2027 года",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/astrakhan/2026/11/19/v-astrahanskoj-oblasti-zapretyat-prodavat-vejpy-s-1-marta-2027-goda"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20501232",
+   "title": "Как выбрать икру к Новому году и не купить подделку? Советы для тех, кто готовится покупать подорожавший деликатес",
    "date": "2026-11-19",
    "src": [
     [
      "web:93.ru",
-     "https://93.ru/text/food/2026/11/19/76776876/"
+     "https://93.ru/text/food/2026/11/19/76777371/"
     ]
    ],
    "sum": null,

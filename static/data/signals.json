@@ -2,6 +2,47 @@
  "updated": "2026-11-19",
  "signals": [
   {
+   "id": "sac7eb42e2",
+   "company_id": "gcafc31dc",
+   "date": "2026-11-19",
+   "kind": "sell",
+   "summary": "ВТБ — обсуждается продажа: Холдинг ВВСС",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1130010"
+   ],
+   "origin": "card",
+   "deal_id": "g67cacd7e",
+   "strength": "strong"
+  },
+  {
+   "id": "s4c486e2e1",
+   "company_id": "g3e014672",
+   "date": "2026-11-19",
+   "kind": "sell",
+   "summary": "АвтоВАЗ — готовит продажу части бизнеса",
+   "source": [
+    "tass.ru",
+    "https://tass.ru/ekonomika/28336975"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
+   "id": "s33e5b2653",
+   "company_id": "gbc369cd0",
+   "date": "2026-11-19",
+   "kind": "for_sale",
+   "summary": "Холдинг ВВСС — обсуждается продажа компании или доли",
+   "source": [
+    "Интерфакс",
+    "https://www.interfax.ru/business/1130010"
+   ],
+   "origin": "card",
+   "deal_id": "g67cacd7e",
+   "strength": "strong"
+  },
+  {
    "id": "s00d6cea25",
    "company_id": "ga5682bdc",
    "date": "2026-11-17",

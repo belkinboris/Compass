@@ -352,6 +352,70 @@
     ]
    },
    "pending_since": "2026-11-19T14:53:14+00:00"
+  },
+  {
+   "id": "gfa56e747",
+   "date": "2026-11-19",
+   "title": "ГК «КВС» закрыла сделку по покупке территории «Невской мануфактуры»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2026/11/19/gk-kvs-zakrila-sdelku-po"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "ГК «КВС»",
+   "asset": "территории «Невской мануфактуры»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Деловой Петербург",
+      "https://www.dp.ru/a/2026/11/19/gk-kvs-zakrila-sdelku-po"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ГК «КВС»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/19/gk-kvs-zakrila-sdelku-po"
+     }
+    ],
+    "target": [
+     {
+      "value": "территории «Невской мануфактуры»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.dp.ru/a/2026/11/19/gk-kvs-zakrila-sdelku-po"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T15:54:31+00:00"
   }
  ]
 }

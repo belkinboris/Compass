@@ -468,7 +468,9 @@ def test_estimate_panel_has_no_tag_and_shows_the_source_estimate():
     html = (ROOT / 'static' / 'index.html').read_text(encoding='utf-8')
     assert 'pe-tag' not in html and 'расчет, а не цена сделки' not in html
     fill = html[html.index('async function fillPriceEst'):html.index('function bindPriceEstimate')]
-    assert fill.index('pe-range') < fill.index('${srcLine}') < fill.index('pe-text')
+    # С 19 ноября 2026 под оценкой источников — короткая строка (.pe-lead), а
+    # подробный текст — в раскрывающемся разделе «Как считали подробно».
+    assert fill.index('pe-range') < fill.index('${srcLine}') < fill.index('pe-lead')
 
 
 def test_source_value_is_close_only_within_a_quarter():
