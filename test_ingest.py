@@ -1576,17 +1576,25 @@ def test_enrich_fills_the_sum_in_both_lenses(base):
     assert deal["eco"]["sum"] == "60 млрд ₽"
 
 
-def test_enrich_does_not_fill_a_sum_the_reader_left_undisclosed(base):
-    """«Туту»/«Ракета», 18 ноября 2026: читатель поставил «Не раскрыта» (оценка аналитика —
-    в eco.val), а обогащение вписало «600 млн ₽» из заголовка агрегатора. У прочитанной
-    карточки «Не раскрыта» — решение: число уходит в «расхождение», не в «добавить»."""
+def test_enrich_writes_only_a_sum_its_own_sentence_supports(base):
+    """«Туту»/«Ракета», 18 ноября 2026: из «может вложить 500–600 млн руб.» в карточку ушло
+    «600 млн ₽» фактом, с цитатой без числа. Владелец: «когда ты что-то пишешь в карту, ты
+    должен сам перепроверить». Сумма берется только вместе с предложением, которое ее
+    подтверждает: вилка остается вилкой, оценка получает «(по оценке)»."""
     import enrich
+    import fact_edit_guard
+    assert enrich.checked_sum("«Туту» может вложить 500–600 млн руб. в покупку «Ракеты».")[0] == "500–600 млн ₽ (по оценке)"
+    assert enrich.checked_sum("Компания купила завод за 2,5 млрд руб.")[0] == "2,5 млрд ₽"
+    assert enrich.checked_sum("Выручка завода — 3 млрд руб.") is None
     deal = {"id": "t-und", "title": "«Туту» покупает «Ракету»", "date": "2026-11-18", "status": "Согласование получено",
             "src": [], "sum": "Не раскрыта", "eco": {"sum": "Не раскрыта"}, "reviewed": "2026-11-18"}
-    item = {"title": "«Туту» купит «Ракету» за 600 млн руб.", "summary": "", "url": "https://example.invalid/t1"}
+    item = {"title": "«Туту» может вложить 500–600 млн руб. в покупку «Ракеты»", "summary": "", "url": "https://example.invalid/t1"}
     props = enrich.proposals(deal, item, {}, base["companies"])
-    sums = [(v, k) for f, v, k, _ in props if f == "sum"]
-    assert sums and all(k == "расхождение" for _v, k in sums), sums
+    assert ("sum", "500–600 млн ₽ (по оценке)", "добавить") in [(f, v, k) for f, v, k, _ in props]
+    # защита: цитата без числа сумму не подтверждает, цитата с числом — подтверждает
+    assert fact_edit_guard.quote_problem("sum", "600 млн ₽", "ФАС согласовала сделку по присоединению к «Туту».")
+    assert fact_edit_guard.quote_problem("sum", "600 млн ₽", "может вложить 500–600 млн руб.")   # оценка без пометки
+    assert not fact_edit_guard.quote_problem("sum", "500–600 млн ₽ (по оценке)", "может вложить 500–600 млн руб.")
 
 
 def test_enrich_only_moves_status_forward(base):

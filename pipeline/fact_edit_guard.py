@@ -162,10 +162,28 @@ def _backed_by_fixes(fixes):
     return out
 
 
+QUOTE_MUST_CARRY_FROM = '2026-11-19'
+
+
+def quote_problem(field, new, quote):
+    """Почему цитата не подтверждает значение — или None. Сумма числом обязана лежать в
+    цитате числом, единицей и валютой, а пометка «(по оценке)» — совпадать со словами цитаты
+    (`review.sum_is_supported`). До 19 ноября 2026 хватало любой непустой цитаты: «Туту» /
+    «Ракета» получила «600 млн ₽» с цитатой, где числа нет вовсе."""
+    if field in ('sum', 'eco.sum') and re.search(r'\d', str(new or '')):
+        sys.path.insert(0, os.path.join(HERE, 'ingest'))
+        import review
+        v = re.sub(r'^(?:≈\s?|До |до |Более |более |Около |около |Примерно |примерно )', '', str(new))
+        return review.sum_is_supported(v, str(quote or ''))
+    return None
+
+
 def _backed_by_log(card, field, new):
     for row in card.get('fact_log') or []:
         if row.get('field') == field and str(row.get('quote') or '').strip() \
                 and _norm(row.get('new')) == _norm(new):
+            if str(row.get('date') or '') >= QUOTE_MUST_CARRY_FROM and quote_problem(field, new, row.get('quote')):
+                continue
             return True
     return False
 

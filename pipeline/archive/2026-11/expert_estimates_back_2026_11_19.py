@@ -103,17 +103,30 @@ def plan(data):
         if re.search(r'неофициальн|собеседник|по данным источник', text, re.I):
             manual.append((d['id'], d['title'], est, 'в карточке есть неофициальная цена сделки с другим числом'))
             continue
-        auto.append((d['id'], d['title'], est[0], new))
+        # цитата — предложение карточки с этой оценкой; она же ляжет в fact_log, и
+        # fact_edit_guard проверит, что число, единица и слова оценки в ней есть
+        sent = next((x for x in re.split(r'(?<=[.!?])\s+', text) if re.search(
+            r'(?<![\d,])' + re.escape(num) + r'(?![\d])', x)), '')
+        import fact_edit_guard
+        why = fact_edit_guard.quote_problem('sum', new, sent)
+        if why:
+            manual.append((d['id'], d['title'], est, 'предложение карточки не подтверждает сумму: ' + why))
+            continue
+        auto.append((d['id'], d['title'], est[0], new, sent))
     return auto, manual
 
 
 def apply(data, auto):
-    by = {i: (old, new) for i, _t, old, new in auto}
+    by = {i: (old, new, sent) for i, _t, old, new, sent in auto}
     for d in data['deals']:
         if d['id'] in by:
-            old, new = by[d['id']]
+            old, new, sent = by[d['id']]
             assert str(d['sum']).startswith('Не раскрыт') and str(d['eco'].get('sum')).startswith('Не раскрыт')
             d['sum'] = d['eco']['sum'] = new
+            import fact_edit_guard
+            for f in ('sum', 'eco.sum'):
+                fact_edit_guard.log(d, f, new, sent, 'https://projectcompass.ru/#/deal/' + d['id'],
+                                    'expert_estimates_back', '2026-11-19')
             d['retracted']['sum'].remove(old)
             if not d['retracted']['sum']:
                 d['retracted'].pop('sum')
@@ -125,12 +138,12 @@ def main(argv):
     data = json.load(open(DATA, encoding='utf-8'))      # перечитано прямо перед записью
     auto, manual = plan(data)
     if '--sample' in argv:
-        for i, t, old, new in auto[::max(1, len(auto) // 10)][:10]:
+        for i, t, old, new, _s in auto[::max(1, len(auto) // 10)][:10]:
             d = next(x for x in data['deals'] if x['id'] == i)
             print('%s  %s\n   сумма: Не раскрыта -> %s\n   текст: %s\n' % (i, t, new, str(d['eco'].get('val', ''))[:300]))
         return 0
     print('Вернуть автоматически: %d' % len(auto))
-    for i, t, old, new in auto:
+    for i, t, old, new, _s in auto:
         print('  %-12s %-60s -> %s' % (i, t[:60], new))
     print('\nРУКАМИ: %d' % len(manual))
     for i, t, est, why in manual:

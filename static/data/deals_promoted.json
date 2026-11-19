@@ -6117,9 +6117,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "200–300 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "200–300 млн ₽ (по оценке)",
     "share": "100% долей в ООО «ОД Брендс», ООО «Фиксити» и ООО «Фуд Галактик».",
     "val": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров считает, что сеть могла стоить 200–300 млн ₽. Основатель One Group Сергей Румянцев оценивает такую компанию в 4–5 EBITDA.",
     "target_fin": "—",
@@ -6181,10 +6181,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "72a0c5f47585"
     },
     "date": {
      "value": "2026",
@@ -6263,13 +6263,24 @@
      "url": "https://mergers.ru/news/Set-kofeen-One-Double-pereshla-pod-kontrol-fonda-Bumerang-Kapital-87101",
      "by": "reread_oneoff_m109a",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "200–300 млн ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров считает, что сеть могла стоить 200–300 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/ge6e9c77a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "200–300 млн ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров считает, что сеть могла стоить 200–300 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/ge6e9c77a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
-   ],
-   "retracted": {
-    "sum": [
-     "200–300 млн ₽ (по оценке)"
-    ]
-   }
+   ]
   },
   {
    "id": "g60c082cf",
@@ -43345,9 +43356,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "5–6 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "5–6 млрд ₽ (по оценке)",
     "share": "100% долей ООО «Аромалюкс» и ООО «УК ПС Групп»",
     "val": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку с учетом долга в 5–6 млрд ₽, а весь бизнес «Рив Гош» — более чем в 12 млрд ₽. Стороны сумму не называли.",
     "target_fin": "Выручка ООО «Аромалюкс», операционной компании сети, за 2024 год снизилась на 6%, до 37,4 млрд ₽, чистый убыток вырос почти втрое, до 1,5 млрд ₽. У ООО «УК ПС Групп» выручка за 2024 год — 1,36 млрд ₽ (+3,4%), чистая прибыль — 2,98 млн ₽, в пять раз больше, чем годом ранее.",
@@ -43475,10 +43486,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "9311859f9d87"
     },
     "date": {
      "value": "2025-12-15",
@@ -43584,15 +43595,28 @@
      "url": "https://www.kommersant.ru/doc/8292342",
      "by": "reread_oneoff_m109a",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку с учетом долга в 5–6 млрд ₽, а весь бизнес «Рив Гош» — более чем в 12 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g94683ed2",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку с учетом долга в 5–6 млрд ₽, а весь бизнес «Рив Гош» — более чем в 12 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g94683ed2",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
    "retracted": {
     "seller": [
      "Акционеры Рив Гош"
-    ],
-    "sum": [
-     "5–6 млрд ₽ (по оценке)"
     ]
    },
    "reread": "2026-11-14",
@@ -43757,9 +43781,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "30–40 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "30–40 млрд ₽ (по оценке)",
     "share": "100% холдинга Sokolov — все его юридические лица и товарные знаки.",
     "val": "Цену стороны не раскрывают. Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил сделку в 30–40 млрд ₽. По его словам, российские сопоставимые компании стоят около 4–5 EBITDA, а с оглядкой на западные публичные аналоги Sokolov мог бы стоить больше 6 EBITDA; на итоговую цену влияют долг компании и спрос в потребительском секторе.",
     "target_fin": "Выручка группы по МСФО за 2024 год — 60,5 млрд ₽ (+41% за год), чистая прибыль — 6 млрд ₽ (+36%).",
@@ -43847,10 +43871,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "36be6e5e6315"
     },
     "date": {
      "value": "2025",
@@ -43913,13 +43937,24 @@
      "url": "https://www.kommersant.ru/doc/7959262",
      "by": "reread_oneoff_m109a",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "30–40 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил сделку в 30–40 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g68975b9d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "30–40 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил сделку в 30–40 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g68975b9d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
-   ],
-   "retracted": {
-    "sum": [
-     "30–40 млрд ₽ (по оценке)"
-    ]
-   }
+   ]
   },
   {
    "id": "ga0a49202",
@@ -44647,9 +44682,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "До 150 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "До 150 млн ₽ (по оценке)",
     "share": "100% долей ООО «Фэшн фэктори»",
     "val": "Цену сделки в компании не раскрыли. По оценке гендиректора «Infoline-аналитики» Михаила Бурмистрова, актив стоит не более 150 млн ₽.",
     "target_fin": "Выручка ООО «Фэшн фэктори» по РСБУ в 2024 году выросла на 79,4%, до 345 млн ₽. Чистый убыток за год увеличился с 1 млн ₽ до 13,7 млн ₽.",
@@ -44721,10 +44756,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "f6aea1666e44"
     },
     "date": {
      "value": "2025-04-10",
@@ -44833,6 +44868,22 @@
      "url": "https://www.retail.ru/news/kompaniya-faberlik-prodala-fabriku-po-poshivu-odezhdy-strukture-voentorga-21-aprelya-2025-263762/",
      "by": "reread_oneoff_m109a",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "До 150 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-аналитики» Михаила Бурмистрова, актив стоит не более 150 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gbc0b68bd",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "До 150 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-аналитики» Михаила Бурмистрова, актив стоит не более 150 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gbc0b68bd",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
@@ -44843,12 +44894,7 @@
    },
    "reread": "2026-11-13",
    "reread_hash": "a8d9d0e42473.c17727",
-   "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "До 150 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g181d7687",
@@ -70787,9 +70833,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "3–3,5 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "3–3,5 млрд ₽ (по оценке)",
     "share": "100% долей ООО «ТД ЛТМ»: завод фиброцементных плит в Обнинске (больше 1 млн кв. м в год) и покрасочная линия в Рузе (почти 1 млн кв. м в год).",
     "val": "Елена Варламова из консалтинговой компании Neo считает, что покупка могла обойтись примерно в 3–3,5 млрд ₽.",
     "target_fin": "По данным СПАРК, в 2024 году выручка ООО «ТД ЛТМ» выросла на 28%, до 1,33 млрд ₽, а чистая прибыль — на 35%, до 520 млн ₽.",
@@ -70880,10 +70926,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "b730ac4cd4dd"
     },
     "date": {
      "value": "2025-09-17",
@@ -70961,13 +71007,24 @@
      "url": "https://www.kommersant.ru/doc/8078553",
      "by": "reread_oneoff_m109ab",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "3–3,5 млрд ₽ (по оценке)",
+     "quote": "Елена Варламова из консалтинговой компании Neo считает, что покупка могла обойтись примерно в 3–3,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g0e7acc4d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "3–3,5 млрд ₽ (по оценке)",
+     "quote": "Елена Варламова из консалтинговой компании Neo считает, что покупка могла обойтись примерно в 3–3,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g0e7acc4d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
-   ],
-   "retracted": {
-    "sum": [
-     "3–3,5 млрд ₽ (по оценке)"
-    ]
-   }
+   ]
   },
   {
    "id": "g577a83e0",
@@ -72449,9 +72506,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "1–1,2 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1–1,2 млрд ₽ (по оценке)",
     "share": "100% долей в ООО «Медимпульс» и 25% в ООО «Симплант».",
     "val": "Гендиректор «Infoline-Аналитика» Михаил Бурмистров оценивает сделку в 1–1,2 млрд ₽; стороны цену не раскрывали.",
     "target_fin": "Выручка компании за 2024 год составила 1,48 млрд ₽, чистая прибыль — 176 млн ₽.",
@@ -72518,10 +72575,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "2fe1a96abaa1"
     },
     "date": {
      "value": "2025-09-26",
@@ -72589,13 +72646,24 @@
      "url": "https://www.kommersant.ru/doc/8079507",
      "by": "вычитка m202, 12.11.2026",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "1–1,2 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитика» Михаил Бурмистров оценивает сделку в 1–1,2 млрд ₽; стороны цену не раскрывали.",
+     "url": "https://projectcompass.ru/#/deal/g94a73573",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1–1,2 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитика» Михаил Бурмистров оценивает сделку в 1–1,2 млрд ₽; стороны цену не раскрывали.",
+     "url": "https://projectcompass.ru/#/deal/g94a73573",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "1–1,2 млрд ₽ (по оценке)"
-    ]
-   },
    "date_basis": "registry",
    "reread": "2026-11-13",
    "reread_hash": "cb285cbaf1ad.517085",
@@ -75785,9 +75853,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "Более 4 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "Более 4 млрд ₽ (по оценке)",
     "share": "—",
     "val": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сеть в 4–5 млрд ₽. Старший аналитик Газпромбанка Марат Ибрагимов дает 4,2 млрд ₽ с учетом долга и 2,5 млрд ₽ без него.",
     "target_fin": "За 2024 год выручка сети составила 20,6 млрд ₽, торговая площадь — 60 тыс. кв. м.",
@@ -75877,10 +75945,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "7b6644377c06"
     },
     "date": {
      "value": "2025-06-26",
@@ -75928,11 +75996,6 @@
    "reread": "2026-11-14",
    "reread_hash": "429f9803f22a.ddc2d2",
    "reread_note": "статьи: 6",
-   "retracted": {
-    "sum": [
-     "Более 4 млрд ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -75949,6 +76012,22 @@
      "url": "https://www.kommersant.ru/doc/7835488",
      "by": "reread_oneoff_d14b",
      "date": "2026-11-14"
+    },
+    {
+     "field": "sum",
+     "new": "Более 4 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сеть в 4–5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g300d56ed",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "Более 4 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценивает сеть в 4–5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g300d56ed",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -88965,9 +89044,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Обсуждается",
-   "sum": "Не раскрыта",
+   "sum": "25–35 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "25–35 млрд ₽ (по оценке)",
     "share": "—",
     "val": "Руководитель департамента M&A BGP Capital Иван Пешков оценил бизнес в 30–35 млрд ₽.",
     "target_fin": "По данным СПАРК, выручка ООО «Союз святого Иоанна Воина», операционной компании «Верного», за 2024 год — 136,9 млрд ₽ (плюс 10,6%), чистая прибыль — 616 млн ₽, почти втрое больше, чем годом ранее. Выручка за январь–июнь 2025 года — 74,9 млрд ₽.",
@@ -89037,10 +89116,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "basis": "rule",
+     "card_hash": "d0ee5ed5601c"
     },
     "date": {
      "value": "2025-10-27",
@@ -89100,13 +89179,24 @@
      "url": "https://www.kommersant.ru/doc/8158706",
      "by": "reread m021 2026-11-12",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "25–35 млрд ₽ (по оценке)",
+     "quote": "Иван Пешков из BGP Capital оценил ее стоимость вместе с долгом (EV) в 30–35 млрд ₽, в INFOLine — в 25 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2534df99",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "25–35 млрд ₽ (по оценке)",
+     "quote": "Иван Пешков из BGP Capital оценил ее стоимость вместе с долгом (EV) в 30–35 млрд ₽, в INFOLine — в 25 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2534df99",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "25–35 млрд ₽ (по оценке)"
-    ]
-   },
    "accepted_notes": {
     "no_profile": {
      "buyer": "Покупатель не определен: Ъ 8158706 и 8158724 называют претендентами крупнейшие сети («Лента» — по мнению Ивана Пешкова), Эксперт и Shopper's — пересказ; реестр ООО «Союз св. Иоанна Воина» — 100% у Эдпал Лимитед, перехода доли нет."
@@ -92293,9 +92383,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "До 2 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "До 2 млрд ₽ (по оценке)",
     "share": "100% доли в ООО «Юни Медика»",
     "val": "—",
     "target_fin": "—",
@@ -92351,10 +92441,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "86c558815d1b"
     },
     "date": {
      "value": "2025-06-20",
@@ -92442,6 +92532,22 @@
      "url": "https://datanewton.ru/api/v2/history?ogrn=1207700193282&startDate=2000-01-01&attributes=OWNERS",
      "by": "reread_oneoff_m105",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "До 2 млрд ₽ (по оценке)",
+     "quote": "Сумму сделки стороны не раскрывали; эксперты оценивают актив в 1,2–2 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/ga75a4d0a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "До 2 млрд ₽ (по оценке)",
+     "quote": "Сумму сделки стороны не раскрывали; эксперты оценивают актив в 1,2–2 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/ga75a4d0a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "proofread_absorbed": {
@@ -92453,11 +92559,6 @@
     ],
     "eco.share": [
      "3bc15c8aae3e"
-    ]
-   },
-   "retracted": {
-    "sum": [
-     "До 2 млрд ₽ (по оценке)"
     ]
    },
    "party_evidence": {
@@ -94750,9 +94851,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "2,5 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "2,5 млрд ₽ (по оценке)",
     "share": "100% долей в ООО «Интернест-Холдинг»",
     "val": "Глава «INFOLine Аналитики» Михаил Бурмистров оценивает сделку в 2–2,5 млрд ₽.",
     "target_fin": "По итогам 2022 года выручка Soloway и AdRiver выросла на 76%, до 810,83 млн ₽. В первом полугодии 2023 года рост продолжился: выручка составила 673,464 млн ₽ — на 214% больше, чем за тот же период 2022 года.",
@@ -94838,10 +94939,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "4b00e58d0615"
     },
     "date": {
      "value": "2024-12-17",
@@ -94887,9 +94988,6 @@
    "buyer_name": "КЕХ Екоммерц",
    "gate_baseline_hash": "dc58e56095b9.f009ec",
    "retracted": {
-    "sum": [
-     "2,5 млрд ₽ (по оценке)"
-    ],
     "seller": [
      "Денис Романовский"
     ]
@@ -94918,6 +95016,22 @@
      "url": "https://www.interfax.ru/business/998257",
      "by": "вычитка m206, 13.11.2026",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "2,5 млрд ₽ (по оценке)",
+     "quote": "Глава «INFOLine Аналитики» Михаил Бурмистров оценивает сделку в 2–2,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g7ccf80f9",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "2,5 млрд ₽ (по оценке)",
+     "quote": "Глава «INFOLine Аналитики» Михаил Бурмистров оценивает сделку в 2–2,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g7ccf80f9",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "accepted_notes": {
@@ -106296,9 +106410,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "600 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "600 млн ₽ (по оценке)",
     "share": "100% долей в ООО «Квадро Холдинг»",
     "val": "Генеральный директор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку примерно в 600 млн ₽.",
     "target_fin": "По данным СПАРК, выручка ООО «Квадро Холдинг» в 2023 году составила 47,7 млн ₽, а у «Квадро Декора» снизилась на 5% год к году, до 1,8 млрд ₽. Обе компании в 2023 году закончили год с убытком.",
@@ -106364,10 +106478,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "4376503d571c"
     },
     "date": {
      "value": "2024",
@@ -106436,16 +106550,27 @@
      "url": "https://www.kommersant.ru/doc/7181682",
      "by": "reread_oneoff_m109b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "600 млн ₽ (по оценке)",
+     "quote": "Генеральный директор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку примерно в 600 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gca6c1eff",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "600 млн ₽ (по оценке)",
+     "quote": "Генеральный директор «Infoline-Аналитики» Михаил Бурмистров оценивает сделку примерно в 600 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gca6c1eff",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "5fc57ff01ebf.98d1b3",
-   "reread_note": "статьи: 2",
-   "retracted": {
-    "sum": [
-     "600 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 2"
   },
   {
    "id": "g3b9c077a",
@@ -109153,9 +109278,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "150–200 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "150–200 млн ₽ (по оценке)",
     "share": "—",
     "val": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, «Тетра» могла стоить 150–200 млн ₽.",
     "target_fin": "Выручка ООО «Тетра» в 2024 году составила 328,4 млн ₽ — на 3,8% меньше, чем годом ранее. Чистая прибыль сократилась в 8,6 раза, до 3 млн ₽.",
@@ -109227,10 +109352,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "4ca99a5ffaeb"
     },
     "date": {
      "value": "2024-07-16",
@@ -109293,13 +109418,24 @@
      "url": "https://www.kommersant.ru/doc/7214484",
      "by": "reread_oneoff_m109b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "150–200 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, «Тетра» могла стоить 150–200 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/ge292671d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "150–200 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, «Тетра» могла стоить 150–200 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/ge292671d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
-   ],
-   "retracted": {
-    "sum": [
-     "150–200 млн ₽ (по оценке)"
-    ]
-   }
+   ]
   },
   {
    "id": "gfe151394",
@@ -113571,9 +113707,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "60–65 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "60–65 млн ₽ (по оценке)",
     "share": "100% долей в ООО «Карачинская звезда».",
     "val": "По оценке независимого эксперта Алены Кондратьевой — 60–65 млн ₽.",
     "target_fin": "—",
@@ -113640,10 +113776,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "fd84ef3ddee5"
     },
     "date": {
      "value": "2024-06-05",
@@ -113719,6 +113855,22 @@
      "url": "https://www.kommersant.ru/doc/6822105",
      "by": "reread_oneoff_m109b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "60–65 млн ₽ (по оценке)",
+     "quote": "По оценке независимого эксперта Алены Кондратьевой — 60–65 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g1ce3ddfc",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "60–65 млн ₽ (по оценке)",
+     "quote": "По оценке независимого эксперта Алены Кондратьевой — 60–65 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g1ce3ddfc",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "accepted_notes": {
@@ -113732,12 +113884,7 @@
    },
    "reread": "2026-11-13",
    "reread_hash": "d80dea94dfad.699454",
-   "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "60–65 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g88236336",
@@ -122559,9 +122706,9 @@
    "type": "Инвестиция",
    "kind": "financing",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "1,3–1,9 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1,3–1,9 млрд ₽ (по оценке)",
     "share": "11,1% долей ООО «Илон», управляющей компании сети DDX Fitness",
     "val": "В FitnessData оценивают бизнес DDX Fitness в 12–17 млрд ₽ — доля в 11,1% при такой оценке стоит 1,3–1,9 млрд ₽.",
     "target_fin": "По МСФО за 2024 год выручка группы выросла на 88%, до 9,6 млрд ₽, чистая прибыль — почти втрое, до 1,2 млрд ₽; рентабельность по EBITDA — 38% (разбор выпуска облигаций на Smart-lab).",
@@ -122624,10 +122771,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c5a00ea28944"
+     "basis": "rule",
+     "card_hash": "36edd966cd00"
     },
     "date": {
      "value": "2024-01-31",
@@ -122695,13 +122842,24 @@
      "url": "https://www.kommersant.ru/doc/6495171",
      "by": "reread m036",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "1,3–1,9 млрд ₽ (по оценке)",
+     "quote": "В FitnessData оценивают бизнес DDX Fitness в 12–17 млрд ₽ — доля в 11,1% при такой оценке стоит 1,3–1,9 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gc3452fa6",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1,3–1,9 млрд ₽ (по оценке)",
+     "quote": "В FitnessData оценивают бизнес DDX Fitness в 12–17 млрд ₽ — доля в 11,1% при такой оценке стоит 1,3–1,9 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gc3452fa6",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "1,3–1,9 млрд ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "a3813f0ebe17.3a32ca",
    "reread_note": "статьи: 4"
@@ -126170,9 +126328,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "300–675 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "300–675 млн ₽ (по оценке)",
     "share": "100% долей в ООО «Клиентский сервис» (владеет ООО «Платформа Домиленд»)",
     "val": "Стороны цену не называли; эксперты оценивали сделку в 300–675 млн ₽.",
     "target_fin": "По данным СПАРК, выручка ООО «Клиентский сервис» в 2023 году выросла до 317,5 млн ₽ со 182,7 млн ₽ годом ранее; компания получила 93,1 млн ₽ чистой прибыли после убытка 8,6 млн ₽ в 2022 году.",
@@ -126250,10 +126408,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "4cb643878eb1"
     },
     "date": {
      "value": "2025-05-06",
@@ -126335,16 +126493,27 @@
      "url": "https://habr.com/ru/companies/onlinepatent/news/908538",
      "by": "reread_oneoff_m109b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "300–675 млн ₽ (по оценке)",
+     "quote": "Стороны цену не называли; эксперты оценивали сделку в 300–675 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g64141daa",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "300–675 млн ₽ (по оценке)",
+     "quote": "Стороны цену не называли; эксперты оценивали сделку в 300–675 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g64141daa",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "8c72c6756818.74b356",
-   "reread_note": "статьи: 5",
-   "retracted": {
-    "sum": [
-     "300–675 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 5"
   },
   {
    "id": "g981d090f",
@@ -130570,9 +130739,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "≈300 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "≈300 млн ₽ (по оценке)",
     "share": "—",
     "val": "По оценке генерального директора «Infoline-аналитики» Михаила Бурмистрова, сделка могла обойтись примерно в 300 млн ₽.",
     "target_fin": "—",
@@ -130641,10 +130810,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "0da51df031de"
     },
     "date": {
      "value": "2025",
@@ -130712,16 +130881,27 @@
      "url": "https://www.kommersant.ru/doc/7432236",
      "by": "reread_oneoff_m109bb",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "≈300 млн ₽ (по оценке)",
+     "quote": "По оценке генерального директора «Infoline-аналитики» Михаила Бурмистрова, сделка могла обойтись примерно в 300 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gc9a9d929",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "≈300 млн ₽ (по оценке)",
+     "quote": "По оценке генерального директора «Infoline-аналитики» Михаила Бурмистрова, сделка могла обойтись примерно в 300 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gc9a9d929",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "173e0b5e9f3a.7309b2",
-   "reread_note": "статьи: 3",
-   "retracted": {
-    "sum": [
-     "≈300 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 3"
   },
   {
    "id": "g3d815d6f",
@@ -134028,9 +134208,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Обсуждается",
-   "sum": "Не раскрыта",
+   "sum": "200–300 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "200–300 млн ₽ (по оценке)",
     "share": "—",
     "val": "Партнер экспертной группы Veta Дмитрий Жарский оценивает покупку в 200–300 млн ₽ и допускает, что «Ангстрем» со временем откажется от бренда «Мебель Черноземья».",
     "target_fin": "Основное юрлицо — ООО «ХК „Мебель Черноземья“». В 2024–2025 выручка резко упала: сначала до 144,8 млн ₽, затем до 29,8 млн ₽, минус 79,4% за год; прибыль снизилась на 98,6%, до 385 тыс. ₽. Штат сократился со 104 до 12 человек. До этого, в 2022-м, выручка упала почти в два раза, до 330 млн ₽, а в 2023-м выросла на 6,5%, до 351,7 млн ₽, при чистом убытке 670 тыс. ₽.",
@@ -134082,10 +134262,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "basis": "rule",
+     "card_hash": "18a72c5da0c4"
     },
     "date": {
      "value": "2024-07-26",
@@ -134167,13 +134347,24 @@
      "url": "https://www.kommersant.ru/doc/6852638",
      "by": "reread_oneoff_m109bb",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "200–300 млн ₽ (по оценке)",
+     "quote": "Партнер экспертной группы Veta Дмитрий Жарский оценивает покупку в 200–300 млн ₽ и допускает, что «Ангстрем» со временем откажется от бренда «Мебель Черноземья».",
+     "url": "https://projectcompass.ru/#/deal/gad4a5636",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "200–300 млн ₽ (по оценке)",
+     "quote": "Партнер экспертной группы Veta Дмитрий Жарский оценивает покупку в 200–300 млн ₽ и допускает, что «Ангстрем» со временем откажется от бренда «Мебель Черноземья».",
+     "url": "https://projectcompass.ru/#/deal/gad4a5636",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
-   ],
-   "retracted": {
-    "sum": [
-     "200–300 млн ₽ (по оценке)"
-    ]
-   }
+   ]
   },
   {
    "id": "g62cbdd8b",
@@ -136459,9 +136650,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "35 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "35 млрд ₽ (по оценке)",
     "share": "Доли Invest AG и Millhouse в «Азбуке вкуса»",
     "val": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил рыночную стоимость всей «Азбуки вкуса» примерно в 35 млрд ₽, а доли, которые принадлежали фондам, — примерно в 14 млрд ₽. Цену сделки стороны не раскрывали.",
     "target_fin": "По РСБУ выручка ООО «Городской супермаркет» за 2023 год выросла на 10,9%, до 86,3 млрд ₽; чистая прибыль составила 812 млн ₽ после убытка 952,9 млн ₽ годом ранее.",
@@ -136537,10 +136728,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "69e1619f6287"
     },
     "date": {
      "value": "2024",
@@ -136632,13 +136823,24 @@
      "url": "https://shoppers.media/news/14228_v-azbuke-vkusa-smenilis-vladelcy",
      "by": "вычитка m041, 12 ноября 2026",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "35 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил рыночную стоимость всей «Азбуки вкуса» примерно в 35 млрд ₽, а доли, которые принадлежали фондам, — примерно в 14 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/geac3f614",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "35 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-Аналитики» Михаил Бурмистров оценил рыночную стоимость всей «Азбуки вкуса» примерно в 35 млрд ₽, а доли, которые принадлежали фондам, — примерно в 14 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/geac3f614",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "35 млрд ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "2ca1103b8943.6a15d1",
    "reread_note": "статьи: 4"
@@ -145931,9 +146133,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "7,5–9,8 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "7,5–9,8 млрд ₽ (по оценке)",
     "share": "100% долей в ООО «Бриджстоун тайер мануфэкчуринг СНГ» и ООО «Бриджстоун СНГ»",
     "val": "Стороны цену не раскрыли. Аналитик Advance Capital Павел Терентьев оценил сделку в 7,5–9,8 млрд ₽, исходя из мультипликатора 3,25x–3,75x EV/EBITDA 2021 года: тогда у ООО «Бриджстоун СНГ» была выручка 23,8 млрд ₽ и EBITDA 2,3–2,6 млрд ₽. Российский бизнес Continental обошелся S8 в 7–10 млрд ₽.",
     "target_fin": "—",
@@ -146023,10 +146225,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "98bfe5ebc05f"
     },
     "date": {
      "value": "2023-12-26",
@@ -146107,13 +146309,24 @@
      "url": "https://projectcompass.ru/api/companies/gb9ce9a5d/fns",
      "by": "вычитка m045, 12.11.2026",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "7,5–9,8 млрд ₽ (по оценке)",
+     "quote": "Аналитик Advance Capital Павел Терентьев оценил сделку в 7,5–9,8 млрд ₽, исходя из мультипликатора 3,25x–3,75x EV/EBITDA 2021 года: тогда у ООО «Бриджстоун СНГ» была выручка 23,8 млрд ₽ и EBITDA 2,3–2,6 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g1e2b16c3",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "7,5–9,8 млрд ₽ (по оценке)",
+     "quote": "Аналитик Advance Capital Павел Терентьев оценил сделку в 7,5–9,8 млрд ₽, исходя из мультипликатора 3,25x–3,75x EV/EBITDA 2021 года: тогда у ООО «Бриджстоун СНГ» была выручка 23,8 млрд ₽ и EBITDA 2,3–2,6 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g1e2b16c3",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "7,5–9,8 млрд ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "1bd662832fca.d05869",
    "reread_note": "статьи: 5"
@@ -147818,9 +148031,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "2–3 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "2–3 млрд ₽ (по оценке)",
     "share": "100% долей ООО «Нью Рига Резорт» — владельца гостиницы Hilton Garden Inn Moscow New Riga площадью 14,2 тыс. кв. м в Истре.",
     "val": "Управляющий партнер Ivashkevich Hospitality Станислав Ивашкевич оценивает рыночную стоимость объекта в 2–3 млрд ₽ и считает, что окупить такие вложения можно в среднем за 12 лет.",
     "target_fin": "—",
@@ -147892,10 +148105,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "1604e995231e"
     },
     "date": {
      "value": "2023-11-03",
@@ -147979,13 +148192,26 @@
      "url": "https://www.kommersant.ru/doc/6524240",
      "by": "reread_m046_a",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "2–3 млрд ₽ (по оценке)",
+     "quote": "Управляющий партнер Ivashkevich Hospitality Станислав Ивашкевич оценивает рыночную стоимость объекта в 2–3 млрд ₽ и считает, что окупить такие вложения можно в среднем за 12 лет.",
+     "url": "https://projectcompass.ru/#/deal/gd2d13f3b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "2–3 млрд ₽ (по оценке)",
+     "quote": "Управляющий партнер Ivashkevich Hospitality Станислав Ивашкевич оценивает рыночную стоимость объекта в 2–3 млрд ₽ и считает, что окупить такие вложения можно в среднем за 12 лет.",
+     "url": "https://projectcompass.ru/#/deal/gd2d13f3b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
    "retracted": {
-    "sum": [
-     "2–3 млрд ₽ (по оценке)"
-    ],
     "seller": [
      "Amtel Properties"
     ]
@@ -148347,9 +148573,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "150–250 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "150–250 млн ₽ (по оценке)",
     "share": "Автоцентр на шоссе Космонавтов, 332а. По данным Росреестра, двухэтажное здание площадью 1919 кв. м построено в 2004 году.",
     "val": "По оценке экспертов, сделка стоила 150–250 млн ₽; загрузить салон покупателю, по их мнению, будет нетрудно.",
     "target_fin": "—",
@@ -148416,10 +148642,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "798c22e387cd"
     },
     "date": {
      "value": "2023",
@@ -148496,13 +148722,24 @@
      "url": "https://www.kommersant.ru/doc/6380496",
      "by": "reread_m046_b",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "150–250 млн ₽ (по оценке)",
+     "quote": "По оценке экспертов, сделка стоила 150–250 млн ₽; загрузить салон покупателю, по их мнению, будет нетрудно.",
+     "url": "https://projectcompass.ru/#/deal/g99f062be",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "150–250 млн ₽ (по оценке)",
+     "quote": "По оценке экспертов, сделка стоила 150–250 млн ₽; загрузить салон покупателю, по их мнению, будет нетрудно.",
+     "url": "https://projectcompass.ru/#/deal/g99f062be",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "150–250 млн ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "c46df34e405b.a8007c",
    "reread_note": "статьи: 2"
@@ -155131,9 +155368,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "100–150 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "100–150 млн ₽ (по оценке)",
     "share": "99,99% долей в ООО «Фарм»",
     "val": "Гендиректор DSM Group Сергей Шуляк оценивает «Фарм» в 100–150 млн ₽ без недвижимости и без надбавочных коэффициентов — например, за качество активов или долю рынка.",
     "target_fin": "Выручка «Фарм» за 2022 год — 657,9 млн ₽. В рейтинге аптечных сетей Vademecum за 2022 год сеть заняла 130-е место.",
@@ -155210,10 +155447,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "7ab12f7355cc"
     },
     "date": {
      "value": "2023-08-15",
@@ -155306,14 +155543,25 @@
      "url": "https://www.kommersant.ru/doc/6161765",
      "by": "reread m049 (марафон 12 ноября 2026)",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "100–150 млн ₽ (по оценке)",
+     "quote": "Гендиректор DSM Group Сергей Шуляк оценивает «Фарм» в 100–150 млн ₽ без недвижимости и без надбавочных коэффициентов — например, за качество активов или долю рынка.",
+     "url": "https://projectcompass.ru/#/deal/g5e21a38a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "100–150 млн ₽ (по оценке)",
+     "quote": "Гендиректор DSM Group Сергей Шуляк оценивает «Фарм» в 100–150 млн ₽ без недвижимости и без надбавочных коэффициентов — например, за качество активов или долю рынка.",
+     "url": "https://projectcompass.ru/#/deal/g5e21a38a",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
-   "retracted": {
-    "sum": [
-     "100–150 млн ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "5de4a23b44a9.861c40",
    "reread_note": "статьи: 2"
@@ -166424,9 +166672,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "До 100 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "До 100 млн ₽ (по оценке)",
     "share": "100% долей ООО «Селена», на которое зарегистрирован домен сети «Кулинарная лавка братьев Караваевых».",
     "val": "Стороны цену не называли. По оценке «Infoline-Аналитики», из-за дисконта она не превысила 100 млн ₽.",
     "target_fin": "За 2021 год сеть получила больше 550 млн ₽ выручки и 36 млн ₽ чистого убытка. В январе–июне 2022 года почти 8% посетителей фастфуда в Москве и Подмосковье хотя бы раз побывали в ее кафе.",
@@ -166730,16 +166978,27 @@
      "url": "https://incrussia.ru/news/neftmagistral-bratya-karavaevy/",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "До 100 млн ₽ (по оценке)",
+     "quote": "По оценке «Infoline-Аналитики», из-за дисконта она не превысила 100 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g595aca8d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "До 100 млн ₽ (по оценке)",
+     "quote": "По оценке «Infoline-Аналитики», из-за дисконта она не превысила 100 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g595aca8d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "e2dff257c712.272e81",
-   "reread_note": "статьи: 4",
-   "retracted": {
-    "sum": [
-     "До 100 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 4"
   },
   {
    "id": "gbdec3442",
@@ -173812,9 +174071,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "3,8–4,2 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "3,8–4,2 млрд ₽ (по оценке)",
     "share": "Отель SO/St. Petersburg на 137 номеров с окнами на Исаакиевский собор (Вознесенский проспект, 6А). Здание новое, 2011 года, возведено на месте снесенного.",
     "val": "Цену стороны не называли. Денис Платов (Nikoliers) в 2023 году оценивал рыночную стоимость здания в 3,8–4,2 млрд ₽; Сергей Дуванов (NF Group) допускал, что из-за высокой цены покупателя искали долго и отель ушел с дисконтом. По более поздней оценке опрошенных экспертов, в ценах 2023 года объект мог стоить 1,5–2 млрд ₽.",
     "target_fin": "—",
@@ -173907,10 +174166,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "b8dbe2432e3e"
     },
     "date": {
      "value": "2023",
@@ -174019,13 +174278,24 @@
      "url": "https://www.dp.ru/a/2025/10/08/sdelku-po-prodazhe-jelitnogo",
      "by": "reread_m057",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "3,8–4,2 млрд ₽ (по оценке)",
+     "quote": "Денис Платов (Nikoliers) в 2023 году оценивал рыночную стоимость здания в 3,8–4,2 млрд ₽; Сергей Дуванов (NF Group) допускал, что из-за высокой цены покупателя искали долго и отель ушел с дисконтом.",
+     "url": "https://projectcompass.ru/#/deal/gb7363fed",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "3,8–4,2 млрд ₽ (по оценке)",
+     "quote": "Денис Платов (Nikoliers) в 2023 году оценивал рыночную стоимость здания в 3,8–4,2 млрд ₽; Сергей Дуванов (NF Group) допускал, что из-за высокой цены покупателя искали долго и отель ушел с дисконтом.",
+     "url": "https://projectcompass.ru/#/deal/gb7363fed",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "3,8–4,2 млрд ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "532ed3bf9dd4.cdfee9",
    "reread_note": "статьи: 5"
@@ -178684,9 +178954,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "3–3,5 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "3–3,5 млрд ₽ (по оценке)",
     "share": "Участок Level Group около 4 га на юго-востоке Москвы, на Перовском шоссе возле м. «Нижегородская». Потенциал застройки — около 198 тыс. кв. м.",
     "val": "Цену стороны не раскрыли. Тимур Рывкин из Nikoliers оценивал участок в 4 га в 3–3,5 млрд ₽.",
     "target_fin": "—",
@@ -178750,10 +179020,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "b730ac4cd4dd"
     },
     "date": {
      "value": "2023",
@@ -178830,13 +179100,24 @@
      "url": "https://www.kommersant.ru/doc/6082030",
      "by": "reread m058, 12.11.2026",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "3–3,5 млрд ₽ (по оценке)",
+     "quote": "Тимур Рывкин из Nikoliers оценивал участок в 4 га в 3–3,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g6007df5d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "3–3,5 млрд ₽ (по оценке)",
+     "quote": "Тимур Рывкин из Nikoliers оценивал участок в 4 га в 3–3,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g6007df5d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "3–3,5 млрд ₽ (по оценке)"
-    ]
-   },
    "accepted_notes": {
     "searched": [
      "kommersant.ru/doc/6082030",
@@ -182507,9 +182788,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "2–3 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "2–3 млрд ₽ (по оценке)",
     "share": "100% доли в ООО «СБК КЗМ Плюс»",
     "val": "Дмитрий Марков, начальник отдела торговых операций ПТЦ, оценивает сделку в 2–3 млрд ₽ и допускает, что оплату могли растянуть на несколько лет.",
     "target_fin": "По данным «СПАРК-Интерфакс», выручка предприятия в 2022 году составила 20,3 млрд ₽, чистая прибыль — 2,3 млрд ₽.",
@@ -182593,10 +182874,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "1604e995231e"
     },
     "date": {
      "value": "2023-04-04",
@@ -182696,16 +182977,27 @@
      "url": "https://datanewton.ru/api/v2/history?ogrn=1167746523526&startDate=2000-01-01&attributes=OWNERS",
      "by": "reread_parties_r1113b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "2–3 млрд ₽ (по оценке)",
+     "quote": "Дмитрий Марков, начальник отдела торговых операций ПТЦ, оценивает сделку в 2–3 млрд ₽ и допускает, что оплату могли растянуть на несколько лет.",
+     "url": "https://projectcompass.ru/#/deal/g37f106cd",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "2–3 млрд ₽ (по оценке)",
+     "quote": "Дмитрий Марков, начальник отдела торговых операций ПТЦ, оценивает сделку в 2–3 млрд ₽ и допускает, что оплату могли растянуть на несколько лет.",
+     "url": "https://projectcompass.ru/#/deal/g37f106cd",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "0862542494e0.185e2b",
    "reread_note": "статьи: 3",
-   "retracted": {
-    "sum": [
-     "2–3 млрд ₽ (по оценке)"
-    ]
-   },
    "date_basis": "registry"
   },
   {
@@ -184064,9 +184356,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Обсуждается",
-   "sum": "Не раскрыта",
+   "sum": "5–6 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "5–6 млрд ₽ (по оценке)",
     "share": "Складской комплекс около 70 тыс. кв. м в логопарке PNK Park Медведково",
     "val": "Независимый эксперт Андрей Новиков оценивает возможную сумму сделки в 5–6 млрд ₽.",
     "target_fin": "—",
@@ -184128,10 +184420,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "basis": "rule",
+     "card_hash": "7f6d66f160b8"
     },
     "date": {
      "value": "2023-03-13",
@@ -184233,16 +184525,27 @@
      "url": "https://www.kommersant.ru/doc/5873533",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Независимый эксперт Андрей Новиков оценивает возможную сумму сделки в 5–6 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gde280a8d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "5–6 млрд ₽ (по оценке)",
+     "quote": "Независимый эксперт Андрей Новиков оценивает возможную сумму сделки в 5–6 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gde280a8d",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "88d0a93f094b.e0dd15",
-   "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "5–6 млрд ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g76159e00",
@@ -186858,9 +187161,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "8,85 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "8,85 млрд ₽ (по оценке)",
     "share": "34,2% акций Qiwi plc (21 млн акций класса «B», 13,7% голосов)",
     "val": "Цену банк не назвал, сообщив лишь о продаже «на рыночных условиях». Forbes оценил пакет в 8,85 млрд ₽ — исходя из цены акций Qiwi на Мосбирже в день сделки.",
     "target_fin": "—",
@@ -186928,10 +187231,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "8f6feff99089"
     },
     "date": {
      "value": "2022-12-30",
@@ -187023,6 +187326,22 @@
      "url": "https://www.kommersant.ru/doc/5826320",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "8,85 млрд ₽ (по оценке)",
+     "quote": "Forbes оценил пакет в 8,85 млрд ₽ — исходя из цены акций Qiwi на Мосбирже в день сделки.",
+     "url": "https://projectcompass.ru/#/deal/g5d9d8e6c",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "8,85 млрд ₽ (по оценке)",
+     "quote": "Forbes оценил пакет в 8,85 млрд ₽ — исходя из цены акций Qiwi на Мосбирже в день сделки.",
+     "url": "https://projectcompass.ru/#/deal/g5d9d8e6c",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "closing",
@@ -187033,12 +187352,7 @@
    },
    "reread": "2026-11-13",
    "reread_hash": "88e58ee194a9.935654",
-   "reread_note": "статьи: 3",
-   "retracted": {
-    "sum": [
-     "8,85 млрд ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 3"
   },
   {
    "id": "gbb8eba27",
@@ -198525,9 +198839,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "600–900 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "600–900 млн ₽ (по оценке)",
     "share": "100% долей ООО «Дикта-О» — владельца 1,6 га в Нагорном проезде на юге Москвы",
     "val": "Оценки консультантов расходятся. Алексей Новиков (NF Group) считает, что участок мог стоить около 600 млн ₽, Николай Горюнов (IBC Real Estate) оценивает его дороже — в 800–900 млн ₽.",
     "target_fin": "—",
@@ -198594,10 +198908,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "e8a54ff423d6"
     },
     "date": {
      "value": "2022-12-08",
@@ -198665,16 +198979,27 @@
      "url": "https://www.kommersant.ru/doc/5719027",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "600–900 млн ₽ (по оценке)",
+     "quote": "Алексей Новиков (NF Group) считает, что участок мог стоить около 600 млн ₽, Николай Горюнов (IBC Real Estate) оценивает его дороже — в 800–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g6023c156",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "600–900 млн ₽ (по оценке)",
+     "quote": "Алексей Новиков (NF Group) считает, что участок мог стоить около 600 млн ₽, Николай Горюнов (IBC Real Estate) оценивает его дороже — в 800–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g6023c156",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "d2a38d23e9ab.9d7cbf",
-   "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "600–900 млн ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g7aad7720",
@@ -198686,9 +199011,9 @@
    "type": "M&A",
    "kind": "acquisition",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "≈2 млрд ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "≈2 млрд ₽ (по оценке)",
     "share": "«Опора Телеком» и ООО «Дачанасвязи» (бренд «Дача на связи»): вместе более 500 сооружений связи в Воронежской, Пензенской, Ленинградской и Белгородской областях и в Петербурге",
     "val": "Средняя цена одной башни на российском рынке — около 4 млн ₽, поэтому вся сделка могла стоить около 2 млрд ₽, считает гендиректор TelecomDaily Денис Кусков.",
     "target_fin": "По данным СПАРК-Интерфакс, «Опора Телеком» за 2021 год заработала 122 млн ₽ выручки и 606 тыс. ₽ чистой прибыли; у ООО «Дачанасвязи» — 16,8 млн ₽ и 2,4 млн ₽ соответственно.",
@@ -198756,10 +199081,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "2d9afb0fe883"
     },
     "date": {
      "value": "2022",
@@ -198845,16 +199170,27 @@
      "url": "https://www.kommersant.ru/doc/5748009",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "≈2 млрд ₽ (по оценке)",
+     "quote": "Средняя цена одной башни на российском рынке — около 4 млн ₽, поэтому вся сделка могла стоить около 2 млрд ₽, считает гендиректор TelecomDaily Денис Кусков.",
+     "url": "https://projectcompass.ru/#/deal/g7aad7720",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "≈2 млрд ₽ (по оценке)",
+     "quote": "Средняя цена одной башни на российском рынке — около 4 млн ₽, поэтому вся сделка могла стоить около 2 млрд ₽, считает гендиректор TelecomDaily Денис Кусков.",
+     "url": "https://projectcompass.ru/#/deal/g7aad7720",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
    "reread_hash": "dfb2c7bd4531.7ac296",
-   "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "≈2 млрд ₽ (по оценке)"
-    ]
-   }
+   "reread_note": "статьи: 1"
   },
   {
    "id": "g16a70078",
@@ -201000,7 +201336,7 @@
     ]
    ],
    "from_ingest": true,
-   "sum": "Не раскрыта",
+   "sum": "800–900 млн ₽ (по оценке)",
    "asset": "100% долей ООО «Хлебокомбинат «Пеко»» (через ООО «Хлебинвест»)",
    "events": [
     {
@@ -201025,7 +201361,7 @@
     }
    ],
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "800–900 млн ₽ (по оценке)",
     "share": "100% долей ООО «Хлебокомбинат «Пеко»».",
     "val": "По оценке консультанта по M&A Ивана Пешкова, стоимость ХБК «Пеко» с учетом долга составляет 800–900 млн ₽.",
     "target_fin": "В 2025 году выручка основного юрлица «Пеко» составила 3,5 млрд ₽, чистая прибыль — 32 млн ₽.",
@@ -201092,10 +201428,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "d3acbf5efb25"
     },
     "date": {
      "value": "2026-07-23",
@@ -201177,12 +201513,25 @@
      "url": "https://new-retail.ru/novosti/retail/kolomenskiy_vykupil_khlebokombinat_peko/",
      "by": "reread_oneoff_m208",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "800–900 млн ₽ (по оценке)",
+     "quote": "По оценке консультанта по M&A Ивана Пешкова, стоимость ХБК «Пеко» с учетом долга составляет 800–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gmru-kolomenskoe-peko",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "800–900 млн ₽ (по оценке)",
+     "quote": "По оценке консультанта по M&A Ивана Пешкова, стоимость ХБК «Пеко» с учетом долга составляет 800–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gmru-kolomenskoe-peko",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "retracted": {
-    "sum": [
-     "800–900 млн ₽ (по оценке)"
-    ],
     "seller": [
      "Исак Гилядов, Галина Фрольцова и Марина Цебоева"
     ]
@@ -223864,9 +224213,9 @@
    ],
    "from_compact": "bulk",
    "extra": "—",
-   "sum": "Не раскрыта",
+   "sum": "370 млн ₽ (по оценке)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "370 млн ₽ (по оценке)",
     "share": "—",
     "val": "Продавец оценил завод в 370 млн ₽ (презентация для инвесторов); бренды в продажу не входят.",
     "target_fin": "—",
@@ -223907,10 +224256,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "basis": "rule",
+     "card_hash": "28c635f9fa89"
     },
     "date": {
      "value": "2023",
@@ -224038,15 +224387,26 @@
      "url": "https://www.kommersant.ru/doc/5773585",
      "by": "вычитка m213b, 12.11.2026",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "370 млн ₽ (по оценке)",
+     "quote": "Продавец оценил завод в 370 млн ₽ (презентация для инвесторов); бренды в продажу не входят.",
+     "url": "https://projectcompass.ru/#/deal/c220a77df",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "370 млн ₽ (по оценке)",
+     "quote": "Продавец оценил завод в 370 млн ₽ (презентация для инвесторов); бренды в продажу не входят.",
+     "url": "https://projectcompass.ru/#/deal/c220a77df",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "status": "Обсуждается",
    "asset": "Завод соусов Mars в Луховицах (Московская область)",
-   "retracted": {
-    "sum": [
-     "370 млн ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-13",
    "reread_hash": "183c2376e0a0.ba2eea",
    "reread_note": "статьи: 2"
@@ -225899,10 +226259,10 @@
    "ind": "E-commerce",
    "type": "M&A",
    "status": "Закрыта",
-   "sum": "Не раскрыта",
+   "sum": "1 млрд ₽ (по оценке)",
    "asset": "ООО «МАЙ24» (цифровая торговая площадка MAY24)",
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1 млрд ₽ (по оценке)",
     "share": "100% долей ООО «МАЙ24».",
     "val": "Стороны цену не раскрыли. Гендиректор «Infoline-аналитики» Михаил Бурмистров предполагает, что с учетом перспектив проекта сделка могла стоить около 1 млрд ₽.",
     "target_fin": "—",
@@ -225979,10 +226339,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "5b1385a4c708"
     },
     "date": {
      "value": "2024-10-03",
@@ -226045,11 +226405,6 @@
      }
     ]
    },
-   "retracted": {
-    "sum": [
-     "1 млрд ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -226074,6 +226429,22 @@
      "url": "https://oborot.ru/news/zachem-x5-group-optovyj-marketplejs-may24-i-skolko-za-nego-uplacheno-i225021.html",
      "by": "reread_oneoff_m236c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "1 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-аналитики» Михаил Бурмистров предполагает, что с учетом перспектив проекта сделка могла стоить около 1 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/geb221705",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1 млрд ₽ (по оценке)",
+     "quote": "Гендиректор «Infoline-аналитики» Михаил Бурмистров предполагает, что с учетом перспектив проекта сделка могла стоить около 1 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/geb221705",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
@@ -228855,7 +229226,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "550–610 млн ₽ (по оценке)",
     "share": "Проданы права на три препарата: противомикробное средство «Эльжина» и гормональные препараты «Миражэль» и «Орниона».",
     "val": "Исполнительный директор RNC Pharma Николай Беспалов оценивает портфель препаратов в 550–610 млн ₽. По его мнению, для успешного продвижения брендов потребуются серьезные маркетинговые вложения, а у «Вертекса» ресурсов на это сейчас нет или есть другие приоритеты.",
     "target_fin": "—",
@@ -228912,7 +229283,7 @@
     ]
    },
    "added": "2026-08-05",
-   "sum": "Не раскрыта",
+   "sum": "550–610 млн ₽ (по оценке)",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-18",
    "weekly_researched": "2026-08-18",
@@ -228945,10 +229316,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "17ad9e0bb173"
     },
     "date": {
      "value": "2026-08-03",
@@ -228996,11 +229367,6 @@
    "seller_id": "g64b35c63",
    "separate_transaction_reviewed": true,
    "gate_baseline_hash": "3fbb81d91d2d.4d6282",
-   "retracted": {
-    "sum": [
-     "550–610 млн ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -229025,6 +229391,22 @@
      "url": "https://www.kommersant.ru/doc/8861146",
      "by": "reread_oneoff_m215",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "550–610 млн ₽ (по оценке)",
+     "quote": "Исполнительный директор RNC Pharma Николай Беспалов оценивает портфель препаратов в 550–610 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gf70a43e6",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "550–610 млн ₽ (по оценке)",
+     "quote": "Исполнительный директор RNC Pharma Николай Беспалов оценивает портфель препаратов в 550–610 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gf70a43e6",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
@@ -230053,7 +230435,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "7–8 млрд ₽ (по оценке)",
     "share": "100% доли в ООО «Фрозен Бек»",
     "val": "Инвестбанкир Илья Шумов оценивает стоимость сделки в 7–8 млрд ₽.",
     "target_fin": "В 2025 году выручка компании выросла почти вдвое, до 5,53 млрд ₽, а чистая прибыль — на 50,64%, до 1,39 млрд ₽.",
@@ -230108,7 +230490,7 @@
     ]
    },
    "seller": "Патвакан Мкртчян",
-   "sum": "Не раскрыта",
+   "sum": "7–8 млрд ₽ (по оценке)",
    "added": "2026-08-06",
    "reviewed": "2026-08-09",
    "deep_researched": "2026-08-16",
@@ -230139,10 +230521,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "dc4617327c0e"
     },
     "date": {
      "value": "2026-07-31",
@@ -230195,11 +230577,6 @@
     ]
    ],
    "gate_baseline_hash": "98197ec8ba31.d0a003",
-   "retracted": {
-    "sum": [
-     "7–8 млрд ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -230232,6 +230609,22 @@
      "url": "https://www.kommersant.ru/doc/8862608",
      "by": "reread_oneoff_m215",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "7–8 млрд ₽ (по оценке)",
+     "quote": "Инвестбанкир Илья Шумов оценивает стоимость сделки в 7–8 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g5647e100",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "7–8 млрд ₽ (по оценке)",
+     "quote": "Инвестбанкир Илья Шумов оценивает стоимость сделки в 7–8 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g5647e100",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
@@ -230269,7 +230662,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1–1,5 млрд ₽ (по оценке)",
     "share": "—",
     "val": "Генеральный директор ИК «Инициатива» Алексей Гориславец оценивает покупку в 1–1,5 млрд ₽.",
     "target_fin": "—",
@@ -230304,7 +230697,7 @@
     ]
    },
    "added": "2026-08-06",
-   "sum": "Не раскрыта",
+   "sum": "1–1,5 млрд ₽ (по оценке)",
    "extra": "Одна производственная площадка «Кванта» снова работает — запустить ее помогли специалисты NexTouch. Мощности компании находятся в Воронеже и Зеленограде.",
    "reviewed": "2026-08-09",
    "events": [
@@ -230351,10 +230744,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "ed82a2abf7a1"
+     "basis": "rule",
+     "card_hash": "e56627a475f4"
     },
     "date": {
      "value": "2026-08-05",
@@ -230409,9 +230802,6 @@
    "separate_transaction_reviewed": true,
    "gate_baseline_hash": "34410e220608.be9f7b",
    "retracted": {
-    "sum": [
-     "1–1,5 млрд ₽ (по оценке)"
-    ],
     "asset": [
      "обанкротившийся производитель телевизоров «Квант»"
     ]
@@ -230448,6 +230838,22 @@
      "url": "https://www.kommersant.ru/doc/8862625",
      "by": "reread_oneoff_m215b",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "1–1,5 млрд ₽ (по оценке)",
+     "quote": "Генеральный директор ИК «Инициатива» Алексей Гориславец оценивает покупку в 1–1,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g0431fc51",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1–1,5 млрд ₽ (по оценке)",
+     "quote": "Генеральный директор ИК «Инициатива» Алексей Гориславец оценивает покупку в 1–1,5 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g0431fc51",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "accepted_notes": {
@@ -235394,7 +235800,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "550–650 млн ₽ (по оценке)",
     "share": "Здание на 7,68 тыс. м² вместе с участком 3,6 га. Сдавать в аренду можно 6,9 тыс. м²: в основном производство и склад (6 тыс. м²), еще 900 м² — офисы.",
     "val": "По оценке руководителя проектов департамента финансовых рынков и инвестиций NF Group в Петербурге Сергея Дуванова, с учетом земельного участка весь имущественный комплекс можно оценить примерно в 550–650 млн ₽, включая НДС.",
     "target_fin": "—",
@@ -235411,7 +235817,7 @@
    },
    "seller": "ООО «ТД Эдельвейс»",
    "asset": "производственно-складской комплекс в деревне Заневка во Всеволожском районе Ленинградской области",
-   "sum": "Не раскрыта",
+   "sum": "550–650 млн ₽ (по оценке)",
    "reviewed": "2026-08-18",
    "added": "2026-08-19",
    "deep_researched": "2026-08-21",
@@ -235443,10 +235849,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "f585c446d1d3"
     },
     "date": {
      "value": "2026",
@@ -235493,11 +235899,6 @@
    "seller_id": "gf9bc7955",
    "followup_researched": "2026-09-18",
    "gate_baseline_hash": "6cc7750fa0bf.3d75c1",
-   "retracted": {
-    "sum": [
-     "550–650 млн ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -235522,6 +235923,22 @@
      "url": "https://realty.ria.ru/20260810/kompleks-2109940867.html",
      "by": "reread_oneoff_m217",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "550–650 млн ₽ (по оценке)",
+     "quote": "По оценке руководителя проектов департамента финансовых рынков и инвестиций NF Group в Петербурге Сергея Дуванова, с учетом земельного участка весь имущественный комплекс можно оценить примерно в 550–650 млн ₽, включая НДС.",
+     "url": "https://projectcompass.ru/#/deal/gd1771616",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "550–650 млн ₽ (по оценке)",
+     "quote": "По оценке руководителя проектов департамента финансовых рынков и инвестиций NF Group в Петербурге Сергея Дуванова, с учетом земельного участка весь имущественный комплекс можно оценить примерно в 550–650 млн ₽, включая НДС.",
+     "url": "https://projectcompass.ru/#/deal/gd1771616",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "reread": "2026-11-13",
@@ -238231,7 +238648,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "100–120 млн ₽ (по оценке)",
     "share": "100% доли в ООО «КФ „Кронштадтская“»",
     "val": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, фабрика могла обойтись покупателю в 100–120 млн ₽, а вместе с купленным в июне ТД «Аврора» — в 400–500 млн ₽.",
     "target_fin": "Выручка за 2025 год — 446 млн ₽ (374 млн ₽ годом ранее), чистая прибыль — 15,3 млн ₽ (6,1 млн ₽).",
@@ -238286,7 +238703,7 @@
     ]
    },
    "seller": "Владислав Теплоухов",
-   "sum": "Не раскрыта",
+   "sum": "100–120 млн ₽ (по оценке)",
    "reviewed": "2026-08-28",
    "added": "2026-08-28",
    "deep_researched": "2026-08-29",
@@ -238314,10 +238731,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "c41cb7948f34"
     },
     "date": {
      "value": "2026-08-11",
@@ -238411,14 +238828,25 @@
      "url": "https://www.kommersant.ru/doc/8893512",
      "by": "reread_oneoff_m218b",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "100–120 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, фабрика могла обойтись покупателю в 100–120 млн ₽, а вместе с купленным в июне ТД «Аврора» — в 400–500 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gabdbe320",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "100–120 млн ₽ (по оценке)",
+     "quote": "По оценке гендиректора «Infoline-Аналитики» Михаила Бурмистрова, фабрика могла обойтись покупателю в 100–120 млн ₽, а вместе с купленным в июне ТД «Аврора» — в 400–500 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/gabdbe320",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
-   "retracted": {
-    "sum": [
-     "100–120 млн ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-13",
    "reread_hash": "040e0ebc9948.f32ebc",
    "reread_note": "статьи: 3"
@@ -245618,7 +246046,7 @@
    ],
    "from_ingest": false,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "10–15 млрд ₽ (по оценке)",
     "share": "—",
     "val": "Партнер и амбассадор Vertical Hotels Ольга Шарыгина оценивает участок с проектом и разрешением на строительство в 10–15 млрд ₽. По другой оценке, около 4 млрд ₽ — из расчета 120–130 тыс. ₽ за кв. м будущей продаваемой площади.",
     "target_fin": "—",
@@ -245643,10 +246071,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "1972a9b1bd89"
     },
     "date": {
      "value": "2026",
@@ -245751,15 +246179,26 @@
      "url": "https://www.kommersant.ru/doc/8860958",
      "by": "вычитка m221, 13.11.2026",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "10–15 млрд ₽ (по оценке)",
+     "quote": "Партнер и амбассадор Vertical Hotels Ольга Шарыгина оценивает участок с проектом и разрешением на строительство в 10–15 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gb2bed44c",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "10–15 млрд ₽ (по оценке)",
+     "quote": "Партнер и амбассадор Vertical Hotels Ольга Шарыгина оценивает участок с проектом и разрешением на строительство в 10–15 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/gb2bed44c",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "asset": "Участок на Ремесленной улице, 17, на Петровском острове (30,7 тыс. кв. м продаваемой площади)",
-   "sum": "Не раскрыта",
-   "retracted": {
-    "sum": [
-     "Не раскрыта (по оценке экспертов 10–15 млрд ₽)"
-    ]
-   },
+   "sum": "10–15 млрд ₽ (по оценке)",
    "accepted_notes": {
     "no_profile": {
      "target": "предмет — земельный участок (недвижимость), а не юрлицо: Коммерсантъ и «Деловой Петербург» называют адрес и площадь, общество-владелец участка не названо"
@@ -257064,7 +257503,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "≈450–500 млн ₽ (по оценке)",
     "share": "—",
     "val": "Руководитель петербургского филиала IBC Real Estate Сергей Владимиров оценивает сделку в 450–500 млн ₽.",
     "target_fin": "—",
@@ -257079,7 +257518,7 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "Не раскрыта",
+   "sum": "≈450–500 млн ₽ (по оценке)",
    "buyer_name": "ООО «Гранд Конюшенная» и ООО «Коннэкт»",
    "asset": "Здание на Большой Конюшенной ул., 11 в Петербурге («Дом Капеллы», ≈1,2 тыс. кв. м)",
    "events": [
@@ -257124,10 +257563,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "5d4d73ecfa70"
     },
     "date": {
      "value": "2026",
@@ -257257,12 +257696,25 @@
      "url": "https://www.dp.ru/a/2026/09/30/vladelec-trc-grand-kanon",
      "by": "reread_oneoff_m224b",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "≈450–500 млн ₽ (по оценке)",
+     "quote": "Руководитель петербургского филиала IBC Real Estate Сергей Владимиров оценивает сделку в 450–500 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2bd95d6e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "≈450–500 млн ₽ (по оценке)",
+     "quote": "Руководитель петербургского филиала IBC Real Estate Сергей Владимиров оценивает сделку в 450–500 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2bd95d6e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "retracted": {
-    "sum": [
-     "≈450–500 млн ₽ (по оценке)"
-    ],
     "buyer_name": [
      "ООО «Гранд Конюшенная» и ООО «Коннэкт» (структуры Муссы Экзекова)"
     ]
@@ -276033,7 +276485,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "458 млн ₽ (по оценке)",
     "share": "—",
     "val": "По оценке аналитиков IBC Real Estate, здание обошлось покупателю в 458 млн ₽.",
     "target_fin": "—",
@@ -276127,10 +276579,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "1e09314994d5"
     },
     "date": {
      "value": "2026",
@@ -276177,18 +276629,13 @@
     "Банкротство / долги"
    ],
    "deep_researched": "2026-10-27",
-   "sum": "Не раскрыта",
+   "sum": "458 млн ₽ (по оценке)",
    "accepted_hash": "09764156636d.f97014",
    "second_read_hash": "09764156636d.f97014",
    "weekly_researched": "2026-11-06",
    "reread": "2026-11-13",
    "reread_hash": "20cfd4e59b17.f97014",
    "reread_note": "статьи: 1",
-   "retracted": {
-    "sum": [
-     "458 млн ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -276221,6 +276668,22 @@
      "url": "https://www.fontanka.ru/2026/10/26/76725747/",
      "by": "reread_oneoff_m109c",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "458 млн ₽ (по оценке)",
+     "quote": "По оценке аналитиков IBC Real Estate, здание обошлось покупателю в 458 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g4a53d81b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "458 млн ₽ (по оценке)",
+     "quote": "По оценке аналитиков IBC Real Estate, здание обошлось покупателю в 458 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g4a53d81b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -281559,7 +282022,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "50 млн ₽ (по оценке)",
     "share": "100% долей ООО «ТК».",
     "val": "Гендиректор Infoline-Аналитики Михаил Бурмистров оценивает ООО «ТК» в 50 млн рублей. Инвестбанкир Илья Шумов не исключает, что сделка расширится еще на три франчайзи Rostic's, и тогда ее стоимость, по его предположению, может составить 260 млн рублей — официально это не подтверждено.",
     "target_fin": "У ООО «ТК» в 2025 году 170,6 млн рублей выручки — рост на 16,3% за год, и 2 млн рублей чистой прибыли — падение на 10,2%.",
@@ -281574,7 +282037,7 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "Не раскрыта",
+   "sum": "50 млн ₽ (по оценке)",
    "seller": "Бежан Кобешавидзе, Виктор Борсук",
    "asset": "100% долей ООО «ТК»",
    "events": [
@@ -281667,10 +282130,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "50491ef11cdd"
     },
     "date": {
      "value": "2026-10-29",
@@ -281718,11 +282181,6 @@
    "reread": "2026-11-13",
    "reread_hash": "0e322f22581a.b39942",
    "reread_note": "статьи: 4",
-   "retracted": {
-    "sum": [
-     "50 млн ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -281739,6 +282197,22 @@
      "url": "https://www.kommersant.ru/doc/9078223",
      "by": "reread_oneoff_m109cb",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "50 млн ₽ (по оценке)",
+     "quote": "Гендиректор Infoline-Аналитики Михаил Бурмистров оценивает ООО «ТК» в 50 млн рублей.",
+     "url": "https://projectcompass.ru/#/deal/gb42bc45e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "50 млн ₽ (по оценке)",
+     "quote": "Гендиректор Infoline-Аналитики Михаил Бурмистров оценивает ООО «ТК» в 50 млн рублей.",
+     "url": "https://projectcompass.ru/#/deal/gb42bc45e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -302252,7 +302726,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1,2–1,8 млрд ₽ (по оценке)",
     "share": "Здание площадью 6 тыс. кв. м в ЖК Lucky целиком.",
     "val": "Цену стороны не раскрыли. Антон Калистратов из CMWP считает, что на рынке здание может стоить 1,2–1,8 млрд ₽.",
     "target_fin": "—",
@@ -302267,7 +302741,7 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "Не раскрыта",
+   "sum": "1,2–1,8 млрд ₽ (по оценке)",
    "asset": "Здание на 6 тыс. кв. м в жилом комплексе Lucky в центре Москвы",
    "events": [
     {
@@ -302373,10 +302847,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "7455431ca69c"
     },
     "date": {
      "value": "2026-10-08",
@@ -302422,11 +302896,6 @@
    "reread": "2026-11-13",
    "reread_hash": "d72b72b40392.fa4743",
    "reread_note": "статьи: 4",
-   "retracted": {
-    "sum": [
-     "1,2–1,8 млрд ₽ (по оценке)"
-    ]
-   },
    "fact_log": [
     {
      "field": "sum",
@@ -302443,6 +302912,22 @@
      "url": "https://www.kommersant.ru/doc/9008489",
      "by": "reread_oneoff_m109cb",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "1,2–1,8 млрд ₽ (по оценке)",
+     "quote": "Антон Калистратов из CMWP считает, что на рынке здание может стоить 1,2–1,8 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g8b57089b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1,2–1,8 млрд ₽ (по оценке)",
+     "quote": "Антон Калистратов из CMWP считает, что на рынке здание может стоить 1,2–1,8 млрд ₽.",
+     "url": "https://projectcompass.ru/#/deal/g8b57089b",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -302469,7 +302954,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "0,6–1 млрд ₽ (по оценке)",
     "share": "—",
     "val": "По оценке управляющего партнера IPM Consulting Вадима Тедеева, сделка могла стоить 0,6–1 млрд ₽; управляющий партнер «ВМТ Консалт» Екатерина Косарева оценивает завод в 500–900 млн ₽.",
     "target_fin": "У «Моршанского» 181 сотрудник и прибыль 102 млн ₽ за 2025 год — рост более чем в 14 раз; выручка за тот же год — 1,02 млрд ₽, на 26% больше, чем годом раньше.",
@@ -302607,10 +303092,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "65ac03ee04d0"
     },
     "date": {
      "value": "2026-11-06",
@@ -302656,12 +303141,7 @@
    "reread": "2026-11-13",
    "reread_hash": "9b07e2885653.5d8b5e",
    "reread_note": "статьи: 2",
-   "sum": "Не раскрыта",
-   "retracted": {
-    "sum": [
-     "0,6–1 млрд ₽ (по оценке)"
-    ]
-   },
+   "sum": "0,6–1 млрд ₽ (по оценке)",
    "fact_log": [
     {
      "field": "sum",
@@ -302694,6 +303174,22 @@
      "url": "https://www.kommersant.ru/doc/9093071",
      "by": "reread_oneoff_m238",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "0,6–1 млрд ₽ (по оценке)",
+     "quote": "По оценке управляющего партнера IPM Consulting Вадима Тедеева, сделка могла стоить 0,6–1 млрд ₽; управляющий партнер «ВМТ Консалт» Екатерина Косарева оценивает завод в 500–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2883c476",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "0,6–1 млрд ₽ (по оценке)",
+     "quote": "По оценке управляющего партнера IPM Consulting Вадима Тедеева, сделка могла стоить 0,6–1 млрд ₽; управляющий партнер «ВМТ Консалт» Екатерина Косарева оценивает завод в 500–900 млн ₽.",
+     "url": "https://projectcompass.ru/#/deal/g2883c476",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ]
   },
@@ -304106,7 +304602,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "1,2–1,3 млрд ₽ (по оценке)",
     "share": "100% доли в ООО «ВТС»",
     "val": "Оценку дал гендиректор «Infoline-Аналитики» Михаил Бурмистров — 1,2-1,3 млрд рублей за 100% долей ВТС с учетом средств на счетах.",
     "target_fin": "В 2025 году выручка ВТС составила 1,67 млрд рублей, чистая прибыль — 346 млн. Около четверти выручки (431,7 млн рублей) принесло техническое обслуживание и ремонт техники. Порядка 73% выручки компании обеспечили госконтракты — всего их у ВТС 1318, среди заказчиков — детский многопрофильный клинический центр высоких медицинских технологий, Святогеоргиевская больница и НМИЦ онкологии имени Петрова.",
@@ -304155,7 +304651,7 @@
    },
    "seller": "Александра Губа",
    "seller_src": "text",
-   "sum": "Не раскрыта",
+   "sum": "1,2–1,3 млрд ₽ (по оценке)",
    "reviewed": "2026-11-09",
    "discovery_src": [
     [
@@ -304196,10 +304692,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "range",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "9a796b83865f"
     },
     "date": {
      "value": "2026-10-19",
@@ -304269,14 +304765,25 @@
      "url": "https://api-fns.ru/api/egr?req=7841001703",
      "by": "reread m101",
      "date": "2026-11-12"
+    },
+    {
+     "field": "sum",
+     "new": "1,2–1,3 млрд ₽ (по оценке)",
+     "quote": "Оценку дал гендиректор «Infoline-Аналитики» Михаил Бурмистров — 1,2-1,3 млрд рублей за 100% долей ВТС с учетом средств на счетах.",
+     "url": "https://projectcompass.ru/#/deal/gb89d3a84",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "1,2–1,3 млрд ₽ (по оценке)",
+     "quote": "Оценку дал гендиректор «Infoline-Аналитики» Михаил Бурмистров — 1,2-1,3 млрд рублей за 100% долей ВТС с учетом средств на счетах.",
+     "url": "https://projectcompass.ru/#/deal/gb89d3a84",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "date_basis": "registry",
-   "retracted": {
-    "sum": [
-     "1,2-1,3 млрд ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-12",
    "reread_hash": "5ed58f40b428.ace5bd",
    "reread_scope": "short",
@@ -304297,7 +304804,7 @@
    ],
    "from_ingest": true,
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "3 млрд ₽ (по оценке)",
     "share": "100% доли в ООО «ДЕПО Электроникс»",
     "val": "Неназванные эксперты рынка оценили сделку не дороже 3 млрд ₽ — с поправкой на суды, уголовные дела и долги кредиторам.",
     "target_fin": "Выручка ООО «ДЕПО Электроникс» за 2025 год — 15 млрд ₽ (+24% к 2024 году), чистая прибыль — 610,4 млн ₽ (-21% к 2024 году); среднесписочная численность на конец 2025 года — 461 человек.",
@@ -304312,7 +304819,7 @@
     "adv": [],
     "terms": "—"
    },
-   "sum": "Не раскрыта",
+   "sum": "3 млрд ₽ (по оценке)",
    "seller": "Сергей Эскин",
    "asset": "100% ООО «ДЕПО Электроникс» (DEPO Computers)",
    "events": [
@@ -304390,10 +304897,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "c3ad086da3a2"
     },
     "date": {
      "value": "2026-10-27",
@@ -304508,14 +305015,27 @@
      "url": "https://www.cnews.ru/news/top/2026-11-09_krupnyj_proizvoditel_elektroniki",
      "by": "reread_oneoff_m238",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "3 млрд ₽ (по оценке)",
+     "quote": "Неназванные эксперты рынка оценили сделку не дороже 3 млрд ₽ — с поправкой на суды, уголовные дела и долги кредиторам.",
+     "url": "https://projectcompass.ru/#/deal/g09b38753",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "3 млрд ₽ (по оценке)",
+     "quote": "Неназванные эксперты рынка оценили сделку не дороже 3 млрд ₽ — с поправкой на суды, уголовные дела и долги кредиторам.",
+     "url": "https://projectcompass.ru/#/deal/g09b38753",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
    "retracted": {
     "seller": [
      "Сергей Эскин и Алексей Ирисов"
-    ],
-    "sum": [
-     "Не раскрыта (по оценке аналитиков — не выше 3 млрд ₽)"
     ]
    },
    "reread": "2026-11-13",
@@ -310699,7 +311219,7 @@
     ]
    ],
    "eco": {
-    "sum": "Не раскрыта",
+    "sum": "300 млн ₽ (по оценке)",
     "share": "—",
     "val": "По оценке «Коммерсанта» — около 300 млн ₽; гендиректор Infoline-Аналитики Михаил Бурмистров считает, что больше эта сумма вряд ли была. Стороны цену не называли.",
     "rationale": "Американская Yum! Brands, владелец марки, уходила из России; по данным «Коммерсанта», продажу начал владелец бренда из-за слабой работы российской сети.",
@@ -310730,7 +311250,7 @@
      "target": "Предмет — сеть пиццерий (бизнес мастер-франшизы); юрлицо, через которое перешел бизнес, в статьях не названо: ООО «Амрест Пицца» названо как прежний оператор, но перешло ли оно покупателю — не сказано."
     }
    },
-   "sum": "Не раскрыта",
+   "sum": "300 млн ₽ (по оценке)",
    "id": "ga024ea1e",
    "added": "2026-11-10",
    "no_post": true,
@@ -310744,10 +311264,10 @@
     },
     "price": {
      "value_rub": null,
-     "meaning": "undisclosed",
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "unknown",
-     "card_hash": "c22efc030a0d"
+     "basis": "rule",
+     "card_hash": "59485e6bc2b4"
     },
     "date": {
      "value": "2022",
@@ -310814,13 +311334,24 @@
      "url": "https://www.kommersant.ru/doc/5392616",
      "by": "reread_oneoff_m230",
      "date": "2026-11-13"
+    },
+    {
+     "field": "sum",
+     "new": "300 млн ₽ (по оценке)",
+     "quote": "По оценке «Коммерсанта» — около 300 млн ₽; гендиректор Infoline-Аналитики Михаил Бурмистров считает, что больше эта сумма вряд ли была.",
+     "url": "https://projectcompass.ru/#/deal/ga024ea1e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
+    },
+    {
+     "field": "eco.sum",
+     "new": "300 млн ₽ (по оценке)",
+     "quote": "По оценке «Коммерсанта» — около 300 млн ₽; гендиректор Infoline-Аналитики Михаил Бурмистров считает, что больше эта сумма вряд ли была.",
+     "url": "https://projectcompass.ru/#/deal/ga024ea1e",
+     "by": "expert_estimates_back",
+     "date": "2026-11-19"
     }
    ],
-   "retracted": {
-    "sum": [
-     "300 млн ₽ (по оценке)"
-    ]
-   },
    "reread": "2026-11-13",
    "reread_hash": "458d1d186139.ee9f57",
    "reread_scope": "short",

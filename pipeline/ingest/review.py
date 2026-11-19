@@ -294,6 +294,9 @@ def date_is_supported(old, new, quote):
     return 'в цитате нет «%d %s»' % (day, [w for w, n in MONTHS.items() if n == month][0])
 
 
+from estimate_words import ESTIMATE_WORDS  # noqa: E402
+
+
 def sum_is_supported(new, quote):
     """Сумма — сборка из чисел цитаты по нашему формату, а не дословный кусок.
 
@@ -325,7 +328,7 @@ def sum_is_supported(new, quote):
     currency_rx = {'₽': r'руб|₽', '$': r'\$|доллар', '€': r'€|евро'}[m.group(5) or m.group(1)]
     if not re.search(currency_rx, quote, re.I):
         return 'в цитате нет валюты «%s»' % (m.group(5) or m.group(1))
-    estimate = bool(re.search(r'оцен|мог(?:ла|ло)?\s+состав', quote, re.I))
+    estimate = bool(ESTIMATE_WORDS.search(quote))
     if m.group(6) and not estimate:
         return 'пометка «(по оценке)» не подтверждена цитатой'
     if not m.group(6) and estimate:
