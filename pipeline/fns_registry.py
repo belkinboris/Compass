@@ -577,6 +577,27 @@ REGISTRY += [
 ]
 
 
+# Приемка карточки gfa56e747 — 2026-11-19 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g051495e2', "decision": "confirmed", "inn": '7811799355',
+     "reason": 'Приемка карточки gfa56e747 (2026-11-19): юрлицо ООО «Невская мануфактура» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-19'},
+]
+
+# Приемка карточки gfa56e747 — 2026-11-19 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g3b354ac7', "decision": "confirmed", "inn": '7804635998',
+     "reason": 'Приемка карточки gfa56e747 (2026-11-19): юрлицо ООО «Специализированный застройщик «КВС-Невский»» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-19'},
+]
+
+# Приемка карточки gfa56e747 — 2026-11-19 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'ga114be91', "decision": "confirmed", "inn": '7802959732',
+     "reason": 'Приемка карточки gfa56e747 (2026-11-19): юрлицо Личный фонд «Петроград» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-19'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
