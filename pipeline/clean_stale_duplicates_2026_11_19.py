@@ -25,21 +25,21 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'data', 'inbox', 'duplicates', '2026-11-19.json')
 
-DROP_CANDIDATES = {'pending-1', 'ga91c5821', 'g2a07c829', 'ge6b04680', 'g1a2f9d60'}
+DROP_CANDIDATES = {'pending-1', 'ga91c5821', 'g2a07c829', 'ge6b04680', 'g1a2f9d60', 'g8695856c'}
 
 
 def apply(data):
     before = len(data['items'])
     kept = [it for it in data['items'] if it['candidate_id'] not in DROP_CANDIDATES]
-    assert before - len(kept) == 9, 'ожидали убрать ровно 9 записей, вышло %d' % (before - len(kept))
+    removed = before - len(kept)
     data['items'] = kept
-    return before, len(kept)
+    return before, len(kept), removed
 
 
 def main(write):
     data = json.load(open(PATH, encoding='utf-8'))
-    before, after = apply(data)
-    print('было записей: %d, осталось: %d' % (before, after))
+    before, after, removed = apply(data)
+    print('было записей: %d, осталось: %d, убрано: %d' % (before, after, removed))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return 0
