@@ -187,6 +187,9 @@ def _findings(card, data):
     if title_standard.verb_ok(card) is False:
         out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s (pipeline/title_standard.py)'
                     % (card.get('type'), card.get('status'), title_standard.hint(card))))
+    if title_standard.unnamed_buyer_title(card):
+        out.append(('title_standard', 'покупатель не назван, а продавец известен — заголовок от продавца: '
+                    '«Z продал [N%] Y» (владелец и партнер, 19 ноября 2026; pipeline/title_standard.py)'))
     return out
 
 
