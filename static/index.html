@@ -9886,8 +9886,9 @@ function renderCompany(id){
   ${interviewPanelHtml()}
   ${claimLineHtml()}
   <div class="company-profile-meta reveal">
-    <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании</span>
-    ${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});return [counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean).map(x=>`<span class="dot">${x}</span>`).join("");})()}
+    <!-- Одна фраза, а не пункты с точками-разделителями (владелец, 19 ноября
+         2026: на телефоне пункты переносились, и точка повисала в начале строки). -->
+    <span><b>${structured.length}</b> ${plural(structured.length,"сделка","сделки","сделок")} с участием компании${(()=>{const counts={buyer:0,seller:0,target:0}; structured.forEach(d=>{if(d.buyer===id)counts.buyer++;if(d.seller_id===id)counts.seller++;if(d.target===id||d.asset_id===id)counts.target++;});const parts=[counts.buyer?`покупатель — ${counts.buyer}`:"",counts.seller?`продавец — ${counts.seller}`:"",counts.target?`предмет сделки — ${counts.target}`:""].filter(Boolean);return parts.length?`: ${parts.map(x=>`<span style="white-space:nowrap">${x}</span>`).join(", ")}`:"";})()}</span>
   </div>
   <div id="co-signals"></div>
   ${companyAdvisorsHtml(id, structured)}
