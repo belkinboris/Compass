@@ -574,6 +574,137 @@
     "draft_id": "d41052360",
     "title": "Тюменский театр выставили на продажу"
    }
+  },
+  {
+   "id": "g21997969",
+   "date": "2026-11-19",
+   "title": "Клиенты ВТБ за 1,5 месяца продали банку инвестмонеты на 1 млрд рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261119/klienty-875363099.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "1 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "1 млрд ₽",
+   "seller": "Клиенты ВТБ",
+   "asset": "банк инвестмонеты на 1 млрд рублей",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261119/klienty-875363099.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "банк инвестмонеты на 1 млрд рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261119/klienty-875363099.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Клиенты ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261119/klienty-875363099.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T10:53:52+00:00"
+  },
+  {
+   "id": "g678c37dd",
+   "date": "2026-11-19",
+   "title": "Jay-Z и Гвинет Пэлтроу инвестировали в стартап по продлению жизни",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Inc. Russia",
+     "https://incrussia.ru/news/jay-z-i-gvinet-peltrou-investirovali-v-startap-po-prodleniyu-zhizni/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$228 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$228 млн",
+   "buyer_name": "Jay-Z и Гвинет Пэлтроу",
+   "asset": "стартап по продлению жизни",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Стартап Hone Health привлек $228 млн при участии фондов Jay-Z и Гвинет Пэлтроу и планирует развивать персонализированную медицину с помощью ИИ.",
+     "source": [
+      "Inc. Russia",
+      "https://incrussia.ru/news/jay-z-i-gvinet-peltrou-investirovali-v-startap-po-prodleniyu-zhizni/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Jay-Z и Гвинет Пэлтроу",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/jay-z-i-gvinet-peltrou-investirovali-v-startap-po-prodleniyu-zhizni/"
+     }
+    ],
+    "target": [
+     {
+      "value": "стартап по продлению жизни",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://incrussia.ru/news/jay-z-i-gvinet-peltrou-investirovali-v-startap-po-prodleniyu-zhizni/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T10:53:52+00:00"
   }
  ]
 }
