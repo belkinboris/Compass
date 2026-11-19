@@ -1613,6 +1613,10 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             out.append(('title_standard', 'заголовок не по стандарту для «%s», статус «%s»: %s'
                         % (card.get('type'), card.get('status'),
                            title_standard.hint(card))))
+        if title_standard.unnamed_buyer_title(card):
+            out.append(('title_standard', 'покупатель не назван, а продавец известен — заголовок от '
+                        'продавца: «Z продал [N%%] Y» (владелец и партнер, 19 ноября 2026; '
+                        'pipeline/title_standard.py)'))
     # СУММА ОТ МИЛЛИАРДА — В МИЛЛИАРДАХ, ДОЛЯ В ЗАГОЛОВКЕ — ЧИСЛОМ (владелец, 10 ноября
     # 2026, VK/«Р7» g075e9738: «что это название? что это за цена?» — было «Холдинг VK
     # купил четверть акций «Р7»» и «2 500 млн ₽» после вычитки). Механика держит форму,
