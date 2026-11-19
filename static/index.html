@@ -1425,6 +1425,20 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
 .pe-tailwrap{opacity:0;transform:translateY(6px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .pe-tailwrap.in{opacity:1;transform:none}
 .pe-rows{margin-top:6px}
+.pe-lead{font-size:14.5px;line-height:1.6;color:var(--ink);margin:2px 0 6px}
+.pe-fold{border-top:1px solid var(--line-soft)}
+.pe-fold summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;cursor:pointer;list-style:none;font-size:14.5px;font-weight:600;color:var(--ink)}
+.pe-fold summary::-webkit-details-marker{display:none}
+.pe-fold summary b{font-weight:600}
+.pe-fold summary::after{content:"";flex:0 0 8px;width:8px;height:8px;border-right:1.6px solid var(--muted);border-bottom:1.6px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s var(--ease)}
+.pe-fold[open] summary::after{transform:rotate(-135deg) translate(-2px,-1px)}
+.pe-fb{padding:0 0 12px}
+.pe-fb p{margin:0 0 9px;font-size:14px;line-height:1.6;color:var(--ink)}
+.pe-fold .pe-r{display:block;position:relative;padding:5px 0 5px 15px;border:0;font-size:14.5px;line-height:1.45}
+.pe-fold .pe-r::before{content:"";position:absolute;left:0;top:13px;width:5px;height:5px;border-radius:50%;background:var(--accent-deep)}
+.pe-fold .pe-k{color:var(--ink)}
+.pe-fold .pe-r small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45;margin-top:1px}
+.pe-fold .pe-r small a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .pe-r{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:4px 14px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
 .pe-k{color:var(--muted)}
 .pe-v{min-width:0;line-height:1.45}
@@ -1446,6 +1460,7 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
 .pe-cta a{display:inline-block;background:var(--accent-deep);color:#fff;text-decoration:none;border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600}
 .pe-cta a:hover{background:#163B2C}
 @media (max-width:480px){.pe-r{grid-template-columns:1fr;gap:2px}.pe-k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase}}
+.pe-fold .pe-k{font-size:inherit;letter-spacing:0;text-transform:none}
 .ai-row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 #facts .spec-row .ai-row-head .label{margin-bottom:0}
 .ai-ask{--pe-hub:var(--card);display:inline-flex;align-items:center;gap:7px;font:500 12.5px/1 inherit;font-family:inherit;color:var(--ink);
@@ -11684,25 +11699,50 @@ const COMPASS_SVG = '<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><ci
 // Вместо значка — слово «Посчитать» (владелец, 26 октября 2026).
 const priceEstButton = () => `<button class="pe-calc" id="pe-btn" type="button" aria-expanded="false"
   title="Анализ Компаса: сколько могла стоить сделка"><span class="pe-lab">Посчитать</span><span class="pe-ico">${COMPASS_SVG}</span></button>`;
+/* Вид «короткий ответ + раскрыть» (владелец, 19 ноября 2026, вариант 4 из
+   шести): под итогом одна строка, ниже — раскрывающиеся разделы с диапазоном
+   в заголовке: по базе Компаса, по рыночным данным, границы, похожие сделки,
+   оценки источников, подробный расчет словами (модель) и что не учтено.
+   Открыт первый раздел. До этого (29 октября) — строки «что есть» сплошным
+   списком. Откуда мультипликаторы — docs/price_estimate_sources.md. */
+const peNum = t => { const m = String(t||"").replace(/\s/g,"").match(/([\d,]+)(трлн|млрд|млн|тыс)?/);
+  if(!m) return null; const k = {трлн:1e12,млрд:1e9,млн:1e6,тыс:1e3}[m[2]]||1; return parseFloat(m[1].replace(",","."))*k; };
+function peSpan(list){
+  const xs = list.map(t=>({t, v:peNum(t)})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
+  if(!xs.length) return ""; const lo = xs[0].t, hi = xs[xs.length-1].t;
+  if(lo===hi) return lo;
+  const u = t => (t.match(/(трлн|млрд|млн|тыс)/)||[])[1];
+  return u(lo)===u(hi) ? lo.replace(/\s*(трлн|млрд|млн|тыс).*$/,"") + "–" + hi : lo + " – " + hi;
+}
+function priceEstLead(r){
+  const yr = ((r.methods||[]).map(m=>(String(m.base).match(/за (\d{4}) год/)||[])[1]).find(Boolean));
+  if(!(r.methods||[]).length) return "";
+  return `Расчет по отчетности покупаемой компании${yr?` за ${yr} год`:""} и мультипликаторам похожих сделок.`;
+}
 function priceEstTail(r){
-  // Вид «вывод и строки» (владелец, 29 октября 2026): под текстом — строки
-  // «что есть» (методы, мировой ориентир как верхняя граница, баланс как
-  // нижняя, похожие сделки), источники и оговорки — под «Как считали».
-  // Откуда мультипликаторы — docs/price_estimate_sources.md.
   const src = m => m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.where)}</a>`:esc(m.where);
-  const row = (k, v, small) => `<div class="pe-r"><span class="pe-k">${k}</span><span class="pe-v">${v}${small?`<small>${small}</small>`:""}</span></div>`;
   // Метод, не вошедший в итог (отчетность не той компании, меньше баланса), —
   // серым и с причиной (владелец, 6 ноября 2026, «Медскан»).
-  const methods = (r.methods||[]).map(m=>row(esc(m.label), `<span class="num${m.unreliable?" pe-off":""}">${esc(m.result)}</span>`, `${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}${m.unreliable?`; ${esc(m.unreliable)}`:""}`)).join("");
-  const global = (r.global_methods||[]).map(m=>row("Мировой ориентир", `до <span class="num">${esc(m.result)}</span> — верхняя граница`, `${esc(m.label)} ${esc(m.multiple)}, ${src(m)}; за рубежом компании оцениваются в 2–3 раза дороже российских`)).join("");
-  const floor = r.floor?row("Не ниже", `<span class="num">${esc(r.floor.result)}</span> — нижняя граница`, `${esc(r.floor.base)}, ФНС; дешевле собственного капитала продают редко`):"";
+  const row = m => `<div class="pe-r"><span class="pe-k">${esc(m.label)}</span> — <span class="num${m.unreliable?" pe-off":""}">${esc(m.result)}</span><small>${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}${m.unreliable?`; ${esc(m.unreliable)}`:""}</small></div>`;
+  const fold = (title, span, body, open) => body ? `<details class="pe-fold"${open?" open":""}><summary><span>${title}${span?` · <b class="num">${esc(span)}</b>`:""}</span></summary><div class="pe-fb">${body}</div></details>` : "";
+  const ms = r.methods||[];
+  const own = ms.filter(m=>/^база Компаса/.test(m.where||"")), mkt = ms.filter(m=>!/^база Компаса/.test(m.where||""));
+  const ok = l => l.filter(m=>!m.unreliable).map(m=>m.result);
+  const global = (r.global_methods||[]).map(m=>`<div class="pe-r"><span class="pe-k">Мировой ориентир</span> — до <span class="num">${esc(m.result)}</span><small>${esc(m.label)} ${esc(m.multiple)}, ${src(m)}; за рубежом компании оцениваются в 2–3 раза дороже российских, поэтому это только верхняя граница</small></div>`).join("");
+  const floor = r.floor?`<div class="pe-r"><span class="pe-k">Не ниже</span> — <span class="num">${esc(r.floor.result)}</span><small>${esc(r.floor.base)}, ФНС; дешевле собственного капитала продают редко</small></div>`:"";
   const comps = (r.comparables||[]).map(c=>`<li><a class="pe-ct" href="#/deal/${encodeURIComponent(c.id)}">${esc(c.title)}</a><span class="pe-cy">${c.year}</span><span class="pe-cp num">${esc(c.price)}</span></li>`).join("");
-  const compRow = comps?row("Похожие сделки", `<ul class="pe-cmp">${comps}</ul>`):"";
-  const expRow = r.experts?row("Оценки источников", esc(r.experts)):"";
-  return `<div class="pe-rows">${methods}${global}${floor}${compRow}${expRow}</div>
-    <details class="pe-det"><summary>Как считали и что не учтено</summary>
-      <div class="pe-foot">Отчетность — ФНС; мультипликаторы — медианы по сделкам из базы Компаса и отраслевые ориентиры из открытых исследований (Б1 и Advance Capital, АТОН, Kept). Мировые ориентиры (Дамодаран, NYU Stern) показываем только тогда, когда российских нет, и только как верхнюю границу. Долг, премия за контроль и особые условия договора в расчет не входят.</div>
-    </details>
+  const expSpan = r.experts ? (String(r.experts).match(/^([^.(]*?₽)/)||[])[1]||"" : "";
+  const expBody = r.experts ? esc(String(r.experts).replace(/^[^.]*₽\s*(\(по оценке\))?\.\s*/,"")) || esc(r.experts) : "";
+  const paras = (r.paragraphs||[]).map(p=>`<p>${esc(p)}</p>`).join("");
+  return `<div class="pe-rows">
+      ${fold("По базе Компаса", peSpan(ok(own)), own.map(row).join(""), true)}
+      ${fold("По рыночным данным", peSpan(ok(mkt)), mkt.map(row).join(""), !own.length)}
+      ${fold("Границы расчета", "", global+floor, false)}
+      ${fold("Похожие сделки", "", comps?`<ul class="pe-cmp">${comps}</ul>`:"", false)}
+      ${fold("Оценки источников", expSpan.trim(), expBody?`<p>${expBody}</p>`:"", false)}
+      ${fold("Как считали подробно", "", paras?`<div class="pe-text">${paras}</div>`:"", false)}
+      ${fold("Что не учтено", "", `<p>Долг, премия за контроль и особые условия договора в расчет не входят. Отчетность — ФНС; мультипликаторы — медианы по сделкам из базы Компаса и отраслевые ориентиры из открытых исследований (Б1 и Advance Capital, АТОН, Kept). Мировые ориентиры (Дамодаран, NYU Stern) показываем только тогда, когда российских нет, и только как верхнюю границу.</p>`, false)}
+    </div>
     <div class="pe-cta"><a href="#/assistant" data-pe-more>Спросить ассистента →</a></div>`;
 }
 /* Текст «печатается»: ответ приходит целиком, а показывается по словам —
@@ -11721,18 +11761,15 @@ async function typeInto(el, text, fast, caret){
 }
 async function fillPriceEst(panel, r, fast){
   // Подписи-плашки в шапке больше нет (владелец, 6 ноября 2026: «это и так
-  // понятно»). Оценка источников — сразу под итогом, а не в последней
-  // строке: с ней сверяются первой (тогда же, «Медскан»).
+  // понятно»). Оценка источников — сразу под итогом: с ней сверяются первой.
+  // Подробный текст модели — в разделе «Как считали подробно» (19 ноября).
   const srcLine = r.source && r.source.line ? `<div class="pe-src">Оценка источников: <b>${esc(r.source.line)}</b></div>` : "";
+  const lead = priceEstLead(r) || (r.paragraphs||[])[0] || "";
   panel.innerHTML = `<div class="pe-h"><span>Анализ Компаса</span></div>
-    ${r.range_text?`<div class="pe-range num"></div>`:""}${srcLine}<div class="pe-text"></div><div class="pe-tailwrap"></div>`;
+    ${r.range_text?`<div class="pe-range num"></div>`:""}${srcLine}<div class="pe-lead"></div><div class="pe-tailwrap"></div>`;
   const caret = document.createElement("span"); caret.className = "pe-caret";
   if(r.range_text) await typeInto(panel.querySelector(".pe-range"), r.range_text.charAt(0).toUpperCase() + r.range_text.slice(1), fast, caret);
-  const box = panel.querySelector(".pe-text");
-  for(const p of (r.paragraphs||[])){
-    const el = document.createElement("p"); box.appendChild(el);
-    await typeInto(el, p, fast, caret);
-  }
+  if(lead) await typeInto(panel.querySelector(".pe-lead"), lead, fast, caret);
   caret.remove();
   const tail = panel.querySelector(".pe-tailwrap"); tail.innerHTML = priceEstTail(r); tail.classList.add("in");
   const more = tail.querySelector("[data-pe-more]");
