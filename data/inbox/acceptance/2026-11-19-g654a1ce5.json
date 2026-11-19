@@ -1,0 +1,18 @@
+[
+ {
+  "id": "g654a1ce5",
+  "verdict": "accept",
+  "checklist": {
+   "sources": true,
+   "parties": true,
+   "asset": true,
+   "title": true,
+   "why": true,
+   "fields": true,
+   "wording": true,
+   "post": true,
+   "status": true
+  },
+  "profiles": []
+ }
+]
