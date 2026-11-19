@@ -235,46 +235,6 @@
    ]
   },
   {
-   "draft_id": "d33060293",
-   "title": "Bloomberg узнало цену акций Anthropic для выхода на биржу",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204469/2026-11-19/bloomberg-uznalo-tcenu-aktcii-anthropic-dlia-vykhoda-na-birzhu"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-19",
-     "title": "Переговоры",
-     "note": "Американская технологическая компания Anthropic планирует разместить акции на первичном публичном размещении (IPO) по цене $80–85 за штуку, что может стать крупнейшим первичным публичным размещением в истории. Об этом 18 ноября сообщило агентство Bloomberg со…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2204469/2026-11-19/bloomberg-uznalo-tcenu-aktcii-anthropic-dlia-vykhoda-na-birzhu"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d75348809",
    "title": "Anthropic провела крупнейшее IPO в истории",
    "date": "2026-11-19",
@@ -298,11 +258,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнало цену акций Anthropic для выхода на биржу» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -333,7 +291,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнало цену акций Anthropic для выхода на биржу» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -392,7 +350,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Bloomberg узнало цену акций Anthropic для выхода на биржу» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -417,74 +375,6 @@
      "source": [
       "web:interfax.ru",
       "https://www.interfax.ru/business/1130010"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47584794",
-   "title": "Картина Ван Гога была продана на аукционе за рекордные $190,4 млн",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204503/kartina-van-goga-byla-prodana-na-auktcione-za-rekordnye-1904-mln-izi"
-    ]
-   ],
-   "sum": "$190,4 млн",
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку ga91c5821 (общие редкие слова: картин, рекорд) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d96459607",
-   "title": "Картина Ван Гога была продана на аукционе за $190 млн",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2204533/video/kartina-van-goga-byla-prodana-na-auktcione-za-190-mln"
-    ]
-   ],
-   "sum": "$190 млн",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-19",
-     "title": "Сделка завершена",
-     "note": "Картину Винсента Ван Гога «Цветущие каштаны» продали на аукционе Sotheby's в Нью-Йорке за рекордные $190,4 млн. Победная ставка составила $165 млн. Однако с учетом комиссии аукционного дома покупателю придется заплатить более $190 млн, передает телеканал…",
-     "source": [
-      "web:iz.ru",
-      "https://iz.ru/2204533/video/kartina-van-goga-byla-prodana-na-auktcione-za-190-mln"
      ]
     }
    ],
@@ -568,6 +458,428 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d49154852",
+   "title": "Мосбиржа проводит дискретный аукцион по ценным бумагам МГКЛ",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/19/1413205-auktsion-mgkl"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36766458",
+   "title": "Клубный дом OПУС на Дербеневской набережной: инвестиции в приватность",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/special/2026/11/19/klubnii-dom-opus-na-derbenevskoi-naberezhnoi-investitsii-v-privatnost-erid-2VfnxvyuHDF"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d47120915",
+   "title": "Народный фронт приобрел оргтехнику для старобельского колледжа",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28333777"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Помощь предоставили для возобновления устойчивой работы учреждения",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28333777"
+     ]
+    }
+   ],
+   "buyer_name": "Народный фронт",
+   "asset": "оргтехника для старобельского колледжа",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Народный фронт",
+    "asset": "оргтехника для старобельского колледжа",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d79715762",
+   "title": "Приоритетные отрасли МСП привлекли более 200 млрд рублей финансовой поддержки",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28333895"
+    ]
+   ],
+   "sum": "200 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Приоритетные отрасли МСП",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Приоритетные отрасли МСП",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d08855136",
+   "title": "Эксперт Русакова: аукционы видят устойчивый рост спроса на русское искусство",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/kultura/28333819"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d82434089",
+   "title": "Anthropic привлекла рекордные $81,3 млрд: разработчика Claude оценили в $1,5 трлн на IPO",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/anthropic-privlekla-rekordnye-81-3-mlrd-razrabotchika-claude-otsenili-v-1-5-trln-na-ipo/"
+    ]
+   ],
+   "sum": "$81,3 млрд",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-19",
+     "title": "Переговоры",
+     "note": "Anthropic провела рекордное IPO на $81,3 млрд по цене $83 за акцию. Разработчика Claude оценили в $1,5 трлн. Финансовые показатели, риски и планы компании.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/anthropic-privlekla-rekordnye-81-3-mlrd-razrabotchika-claude-otsenili-v-1-5-trln-na-ipo/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "Anthropic",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Anthropic",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d20042649",
+   "title": "В Амурской области приняли закон о запрете продажи вейпов с марта 2027 года",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2204540/2026-11-19/v-amurskoi-oblasti-priniali-zakon-o-zaprete-prodazhi-veipov-s-marta-2027-goda"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d10820243",
+   "title": "Помещение выставили на торги на проспекте Вернадского в Москве",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/torgi-2132602668.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d43500706",
+   "title": "США не стремятся зарабатывать на продаже оружия Украине, заявил Трамп",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261119/tramp-2132596827.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d48495247",
+   "title": "Средний чек сделок M&A сократился на 42%",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/srednij-chek-sdelok-m-a-sokratilsja-na-42/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d61572130",
+   "title": "«АвтоВАЗ» приготовился к скромным продажам",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/skromno/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Автопром",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00715112",
+   "title": "Россияне признались в покупке авиабилетов из страха",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/19/rossiyane-priznalis-v-pokupke-aviabiletov-iz-straha/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12227725",
+   "title": "Малый бизнес Подмосковья привлек ₽27,6 млрд господдержки",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/11/19/podmoskovnyj-malyj-biznes-privlek-276-mlrd-gospodderzhki"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Малый бизнес Подмосковья",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Малый бизнес Подмосковья",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d67890144",
+   "title": "#экзит Anthropic провел крупнейшее в истории IPO, обойдя SpaceX. Это стало экзитом для DST Global Юрия Мильнера и фонд Raison, управляющими партнерами которого являются Андрей Березин и Александр Зайц",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7855"
+    ]
+   ],
+   "sum": "$107 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic провела крупнейшее IPO в истории» — второе издание, в группу не шлем"
    ]
   }
  ]

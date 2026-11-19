@@ -656,6 +656,71 @@
    "accepted": "2026-11-14",
    "accepted_hash": "a11f0cf795d6.221091",
    "buyer": null
+  },
+  {
+   "id": "g2a07c829",
+   "date": "2026-11-19",
+   "title": "Клиенты ВТБ продали инвестиционные золотые монеты на ₽1 млрд",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/quote/19/11/2026/6afe9abe4a0fcc6aab083122"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Клиенты ВТБ",
+   "asset": "инвестиционные золотые монеты на ₽1 млрд",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Клиенты ВТБ за полтора месяца продали банку инвестиционные золотые монеты на ₽1 млрд. Самой востребованной у продавцов стала монета «Георгий Победоносец» весом 7,78 г",
+     "source": [
+      "РБК",
+      "https://www.rbc.ru/quote/19/11/2026/6afe9abe4a0fcc6aab083122"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "инвестиционные золотые монеты на ₽1 млрд",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/quote/19/11/2026/6afe9abe4a0fcc6aab083122"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Клиенты ВТБ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/quote/19/11/2026/6afe9abe4a0fcc6aab083122"
+     }
+    ]
+   },
+   "pending_since": "2026-11-19T07:54:00+00:00"
   }
  ]
 }

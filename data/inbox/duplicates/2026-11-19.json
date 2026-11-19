@@ -241,6 +241,132 @@
     "needs_review": true
    },
    "queued": "2026-11-19"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28333801::g1a2f9d60",
+   "candidate_id": "g1a2f9d60",
+   "reason": "общие редкие слова: 15, рублей",
+   "draft": {
+    "draft_id": "d56406645",
+    "title": "ЦБ купил юани на 15 млрд рублей с расчетами 18 ноября",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28333801"
+     ]
+    ],
+    "sum": "15 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Операции покупки и продажи иностранной валюты Банк России проводит на внутреннем рынке в валютной секции Мосбиржи в инструменте \"юань - рубль\"",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28333801"
+      ]
+     }
+    ],
+    "buyer_name": "ЦБ",
+    "asset": "юани на 15 млрд рублей с расчетами 18 ноября",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "ЦБ",
+     "asset": "юани на 15 млрд рублей с расчетами 18 ноября",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28333743::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 4",
+   "draft": {
+    "draft_id": "d20981863",
+    "title": "Клиенты ВТБ продали инвестиционные золотые монеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28333743"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "Наиболее активными продавцами оказались жители Москвы",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28333743"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "инвестиционные золотые монеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "инвестиционные золотые монеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
+  },
+  {
+   "key": "https://1prime.ru/20261119/klienty-875363099.html::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие редкие слова: втб, клиент, продал",
+   "draft": {
+    "draft_id": "d43162850",
+    "title": "Клиенты ВТБ за 1,5 месяца продали банку инвестмонеты на 1 млрд рублей",
+    "date": "2026-11-19",
+    "src": [
+     [
+      "web:1prime.ru",
+      "https://1prime.ru/20261119/klienty-875363099.html"
+     ]
+    ],
+    "sum": "1 млрд ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-19",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:1prime.ru",
+       "https://1prime.ru/20261119/klienty-875363099.html"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "банк инвестмонеты на 1 млрд рублей",
+    "seller": "Клиенты ВТБ",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "банк инвестмонеты на 1 млрд рублей",
+     "seller": "Клиенты ВТБ"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-19"
   }
  ]
 }
