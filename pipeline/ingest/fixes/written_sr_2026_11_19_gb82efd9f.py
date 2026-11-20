@@ -81,3 +81,11 @@ FIXES = [
          '«там же» привязкой к 18 ноября) — SECOND_READING_BRIEF.md, «extra: дополнение, которого '
          'нет в других полях, а не их повтор»; новой информации нет — поле очищено'},
 ]
+
+
+# Второе чтение 19 ноября 2026 (data/inbox/acceptance/2026-11-19-gb82efd9f-sr2.json):
+# опцион и гарантия от 18 ноября — не условия этой продажи, перенесены в eco.context
+# (pipeline/archive/2026-11/gb82efd9f_second_reading_fixes_2026_11_19.py); «Условия» — «—».
+for _f in FIXES:
+    if _f['id'] == 'gb82efd9f' and _f['field'] == 'law.terms':
+        _f['new'] = '—'
