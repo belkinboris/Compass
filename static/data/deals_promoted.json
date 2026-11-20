@@ -18146,7 +18146,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Куплены три отдельных юрлица (Лебедянь, Переславль, Арамиль) за общую сумму; ни источники (включая пресс-релиз Mondi plc), ни TASS/Vedomosti/Kommersant/RBC/Interfax не называют процент доли для Лебедяни рядом со словом о покупке — только \"три предприятия\"/\"периметр сделки\". Искал шире (пресс-релиз Mondi group), процента нигде нет.",
+       "Куплены три отдельных юрлица как блок ('three Russian packaging converting operations'/'три предприятия'); ни один из 8 источников (включая пресс-релиз Mondi на английском) не называет процент доли рядом со словом о покупке — везде только сумма сделки и число компаний."
+      ]
+     }
     },
     "target": {
      "company_id": "g0644ef60",
@@ -18192,7 +18204,19 @@
      "perimeter_other_entities": [
       "ООО «Монди Переславль»",
       "ООО «Монди Арамиль»"
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Куплены три отдельных юрлица (Лебедянь, Переславль, Арамиль) за общую сумму; ни источники (включая пресс-релиз Mondi plc), ни TASS/Vedomosti/Kommersant/RBC/Interfax не называют процент доли для Лебедяни рядом со словом о покупке — только \"три предприятия\"/\"периметр сделки\". Искал шире (пресс-релиз Mondi group), процента нигде нет.",
+       "Куплены три отдельных юрлица как блок ('three Russian packaging converting operations'/'три предприятия'); ни один из 8 источников (включая пресс-релиз Mondi на английском) не называет процент доли рядом со словом о покупке — везде только сумма сделки и число компаний."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -23925,7 +23949,19 @@
       }
      ],
      "control_change_basis": "verified",
-     "intragroup": false
+     "intragroup": false,
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Проверил все 7 источников, включая оба Vedomosti, Gazeta.ru, RIA, Retail.ru — ни один не называет процент рядом со словом о покупке. Только interfax/897373 говорит \"на 100% принадлежит\" (ЕГРЮЛ, результат владения, не глагол покупки) — уже известная, отклоненная формулировка.",
+       "Проверил все 7 источников карточки (Interfax x2, Vedomosti x2, Gazeta.ru, RIA, Retail.ru) — доля 100% встречается только в формулировке ЕГРЮЛ 'на 100% принадлежит Lead Holding Ltd.' (результат владения, не глагол покупки). Другой формулировки с процентом рядом со словом о покупке не нашлось."
+      ]
+     }
     },
     "target": {
      "company_id": "g14db9bb2",
@@ -24005,14 +24041,14 @@
      },
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-19",
+      "at": "2026-11-20",
       "readers": [
        "A",
        "B"
       ],
       "notes": [
-       "Покупатель по ЕГРЮЛ — Lead Holding Ltd (ОАЭ), SPV консорциума Kismet/Elbrus/Augment, а не прямо они сами по имени — считаю independent/смену контроля подтвержденной. Отчет для периметра (/api/companies) сегодня не открылся (сетевая ошибка) — perimeter не проверен, null.",
-       "stake: источник подтверждает только через ЕГРЮЛ («на 100% принадлежит», результат владения), без глагола покупки рядом с процентом в одном обороте — null. Отчёт для периметра не открылся (сетевая ошибка при сборке очереди), проверить не удалось."
+       "Проверил все 7 источников, включая оба Vedomosti, Gazeta.ru, RIA, Retail.ru — ни один не называет процент рядом со словом о покупке. Только interfax/897373 говорит \"на 100% принадлежит\" (ЕГРЮЛ, результат владения, не глагол покупки) — уже известная, отклоненная формулировка.",
+       "Проверил все 7 источников карточки (Interfax x2, Vedomosti x2, Gazeta.ru, RIA, Retail.ru) — доля 100% встречается только в формулировке ЕГРЮЛ 'на 100% принадлежит Lead Holding Ltd.' (результат владения, не глагол покупки). Другой формулировки с процентом рядом со словом о покупке не нашлось."
       ]
      }
     },
@@ -46934,17 +46970,97 @@
      "card_hash": "a5bf1a8b2109"
     },
     "price": {
-     "value_rub": 11720000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "a71bda24b98e"
+     "basis": "verified",
+     "card_hash": "487021ec2cf3",
+     "meaning_variants": [
+      "estimate",
+      "reported"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "adviser",
+      "analyst"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Denuo has advised the Romex Group holding on the acquisition of seven Park House shopping centres",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "unknown"
+     ],
+     "quote": "The total investment volume amounted to RUB11.72 billion (~USD146.5 million).",
+     "source": "https://denuo.legal/en/insights/releases/230511/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 11720000000,
+       "meaning": "reported",
+       "attribution": "adviser",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "The total investment volume amounted to RUB11.72 billion (~USD146.5 million).",
+       "attribution_quote": "Denuo has advised the Romex Group holding on the acquisition of seven Park House shopping centres",
+       "source": "https://denuo.legal/en/insights/releases/230511/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": null,
+       "meaning": "estimate",
+       "attribution": "analyst",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "капитала и инвестиций IBC Real Estate Николай Горюнов оценивает сделку в 10–12 млрд руб.",
+       "source": "https://www.kommersant.ru/doc/5901441",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-04-19",
      "meaning": "publication",
-     "basis": "rule",
-     "card_hash": "27e99123e8bf"
+     "basis": "verified",
+     "card_hash": "27e99123e8bf",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "19 апреля 2023, 01:02 Atrium European Real Estate закрыла сделку",
+     "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value": "2023-04-19",
+       "meaning": "publication",
+       "quote": "19 апреля 2023, 01:02 Atrium European Real Estate закрыла сделку",
+       "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-04-19",
+       "meaning": "publication",
+       "quote": "19 апреля 2023, 01:02 Atrium European Real Estate закрыла сделку",
+       "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -46954,7 +47070,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Сделка по продаже российских активов компании Atrium European Real Estate (AERE) закрыта. Покупатель – входящая в холдинг «Ромекс Group» компания «Рамо-М».",
+     "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Сделка по продаже российских активов компании Atrium European Real Estate (AERE) закрыта. Покупатель – входящая в холдинг «Ромекс Group» компания «Рамо-М».",
+       "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Покупатель – входящая в холдинг «Ромекс Group» компания «Рамо-М». Об этом «Ведомостям» рассказал представитель «Ромекс Group». По его словам, приобретено семь торгово-развлекательных центров «Парк хаус»",
+       "source": "https://www.vedomosti.ru/business/articles/2023/04/19/971487-atrium-european-real-estate-zakrila-sdelku-po-prodazhe-rossiiskih-aktivov",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g5ae0b9d8",
@@ -46976,12 +47116,12 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
    },
-   "sum_basis": "disclosed",
+   "sum_basis": "reported",
    "gate_baseline_hash": "2401ad2fc52a.974651",
    "retracted": {
     "sum": [
@@ -85559,7 +85699,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Vedomosti (платный материал, видно 10%): \"Агрокомплекс им. Н.И.Ткачева выкупает компанию Приосколье\" — глагол покупки есть, но без процента. AKM и Kommersant тоже без процента. Нигде не названо \"100%\" рядом с покупкой.",
+       "Источники говорят, что «Инвест Трейд» был продан целиком ('вместе с долгом был продан фирме Агрокомплекс'), но буквально '100%' рядом со словом о покупке ни в одном из 3 источников не названо — значение не выводится дословно, оставляю null, чтобы не домысливать."
+      ]
+     }
     },
     "target": {
      "company_id": "g66d6e4ea",
@@ -85604,7 +85756,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Vedomosti (платный материал, видно 10%): \"Агрокомплекс им. Н.И.Ткачева выкупает компанию Приосколье\" — глагол покупки есть, но без процента. AKM и Kommersant тоже без процента. Нигде не названо \"100%\" рядом с покупкой.",
+       "Источники говорят, что «Инвест Трейд» был продан целиком ('вместе с долгом был продан фирме Агрокомплекс'), но буквально '100%' рядом со словом о покупке ни в одном из 3 источников не названо — значение не выводится дословно, оставляю null, чтобы не домысливать."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -89847,11 +90011,11 @@
      "basis": "rule",
      "card_hash": "425530f6d36f",
      "intragroup": false,
-     "control_change_basis": "read",
+     "control_change_basis": "verified",
      "quote": "Российское государство приватизировало киностудию «Союзмультфильм» . Контрольный пакет акций пр был приобретен ПАО «Сбербанк».",
      "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-19",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
      "readings": [
       {
        "control_change": true,
@@ -89860,6 +90024,14 @@
        "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
        "quote_checked": true,
        "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Российское государство приватизировало киностудию «Союзмультфильм» . Контрольный пакет акций пр был приобретен ПАО «Сбербанк».",
+       "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+       "quote_checked": true,
+       "reader": "B"
       }
      ]
     },
@@ -89870,8 +90042,60 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "7bbc9bdb9b6e"
+     "perimeter": "refuted",
+     "card_hash": "7bbc9bdb9b6e",
+     "perimeter_entity": "АО «Киностудия «Союзмультфильм»»",
+     "perimeter_report": {
+      "inn": "9715404978",
+      "year": 2024,
+      "revenue_rub": 624323000.0,
+      "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КИНОСТУДИЯ \"СОЮЗМУЛЬТФИЛЬМ\""
+     },
+     "perimeter_other_entities": [
+      "ООО «Союзмультфильм»"
+     ],
+     "quote": "Истцами в судебных тяжбах выступали АО «Киностудия «Союзмультфильм» и ООО «Союзмультфильм».",
+     "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Союзмультфильм»"
+       ],
+       "entity": "АО «Киностудия «Союзмультфильм»»",
+       "report": {
+        "inn": "9715404978",
+        "year": 2024,
+        "revenue_rub": 624323000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КИНОСТУДИЯ \"СОЮЗМУЛЬТФИЛЬМ\""
+       },
+       "quote": "Истцами в судебных тяжбах выступали АО «Киностудия «Союзмультфильм» и ООО «Союзмультфильм».",
+       "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [
+        "ООО «Союзмультфильм»"
+       ],
+       "entity": "АО «Киностудия «Союзмультфильм»»",
+       "report": {
+        "inn": "9715404978",
+        "year": 2024,
+        "revenue_rub": 624323000.0,
+        "legal_name": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"КИНОСТУДИЯ \"СОЮЗМУЛЬТФИЛЬМ\""
+       },
+       "quote": "Истцами в судебных тяжбах выступали АО «Киностудия «Союзмультфильм» и ООО «Союзмультфильм».",
+       "source": "https://tula.mk.ru/economics/2025/09/30/sberbank-kupil-soyuzmultfilm-kotoryy-suditsya-s-tulskimi-kommersantami.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
@@ -103628,7 +103852,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Interfax (991408) нашел близкую, но другую сделку: \"Русагро закрыла сделку по консолидации 100% долей ГК Агро-Белогорье\" — это итог консолидации, явно исключенный правилом (\"консолидировал 100%\" не считается). Тот же источник называет раннюю покупку 2019 года (22,5% за 8,5 млрд руб.) — другая, более ранняя сделка, не эта карточка. Для самой карточки (суд перевел 25% Зотова за 2,5 тыс. руб. в 2024 году) — глагола покупки рядом с процентом нет ни в одном источнике, только «постановил перевести».",
+       "Interfax/991408 (новый источник, не читан вчера) описывает итоговую консолидацию: доля Зотова упала с 72,5% до 47,5%, доля Русагро выросла до 47,5% — разница и есть 25%, но буквально '25%' рядом со словом о покупке в тексте не стоит (глаголы 'сократилась'/'увеличилась' при описании долей до/после, не 'приобрела X%'). Kommersant тоже не называет 25% рядом с глаголом покупки, только 'перевести ... в адрес «Русагро»' по решению суда. Оставляю null."
+      ]
+     }
     },
     "target": {
      "company_id": "g1581ce50",
@@ -103716,14 +103952,14 @@
      ],
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-15",
+      "at": "2026-11-20",
       "readers": [
        "A",
        "B"
       ],
       "notes": [
-       "report не дан (ошибка подключения) — perimeter не проверялся.",
-       "Nature: после этой сделки у «Русагро» 47,5%, контроль не переходит (не большинство) — control_change=false для ЭТОЙ сделки (ср. с g97d9fa60, где доля доведена до 100%). Price attribution: цена (2,5 тыс. руб., символическая) установлена решением арбитражного суда — не заявление сторон и не отчетность в чистом виде, поэтому unknown. Perimeter: нет данных отчета в задании."
+       "Interfax (991408) нашел близкую, но другую сделку: \"Русагро закрыла сделку по консолидации 100% долей ГК Агро-Белогорье\" — это итог консолидации, явно исключенный правилом (\"консолидировал 100%\" не считается). Тот же источник называет раннюю покупку 2019 года (22,5% за 8,5 млрд руб.) — другая, более ранняя сделка, не эта карточка. Для самой карточки (суд перевел 25% Зотова за 2,5 тыс. руб. в 2024 году) — глагола покупки рядом с процентом нет ни в одном источнике, только «постановил перевести».",
+       "Interfax/991408 (новый источник, не читан вчера) описывает итоговую консолидацию: доля Зотова упала с 72,5% до 47,5%, доля Русагро выросла до 47,5% — разница и есть 25%, но буквально '25%' рядом со словом о покупке в тексте не стоит (глаголы 'сократилась'/'увеличилась' при описании долей до/после, не 'приобрела X%'). Kommersant тоже не называет 25% рядом с глаголом покупки, только 'перевести ... в адрес «Русагро»' по решению суда. Оставляю null."
       ]
      },
      "perimeter_entity": "ООО «ГК «Агро-Белогорье»»",
@@ -113675,7 +113911,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Проверил все 5 источников (включая aemprus.ru, akm.ru о продаже ТМК-ЯМЗ) — ни один не называет процент доли рядом со словом о покупке; только ЕГРЮЛ-формулировка \"100% завода у ООО Фрунзе\", уже отклоненная.",
+       "Проверил все 5 источников (Interfax, Vedomosti, Mashnews, Aemprus, AKM) — ни один не называет 100% рядом со словом о покупке; формулировка ЕГРЮЛ 'с 7 июня 100% завода у ООО «Фрунзе»' (результат, не покупка) уже отмечена вчера, других процентных формулировок не нашлось."
+      ]
+     }
     },
     "target": {
      "company_id": "ga48620bb",
@@ -113734,14 +113982,14 @@
      ],
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-19",
+      "at": "2026-11-20",
       "readers": [
        "A",
        "B"
       ],
       "notes": [
-       "По данным «Интерфакса», конечным бенефициаром стал металлотрейдер «МеталлСервис» (источник в отрасли, не официально) — ООО «Фрунзе», видимо, прямой держатель; покупатель карточки совпадает с ООО «Фрунзе» по ЕГРЮЛ.",
-       "stake: 100% подтверждено только через ЕГРЮЛ («100% завода у ООО «Фрунзе»», результат владения), без глагола покупки рядом с процентом — null, как и в кейсе Henkel."
+       "Проверил все 5 источников (включая aemprus.ru, akm.ru о продаже ТМК-ЯМЗ) — ни один не называет процент доли рядом со словом о покупке; только ЕГРЮЛ-формулировка \"100% завода у ООО Фрунзе\", уже отклоненная.",
+       "Проверил все 5 источников (Interfax, Vedomosti, Mashnews, Aemprus, AKM) — ни один не называет 100% рядом со словом о покупке; формулировка ЕГРЮЛ 'с 7 июня 100% завода у ООО «Фрунзе»' (результат, не покупка) уже отмечена вчера, других процентных формулировок не нашлось."
       ]
      }
     },
@@ -152426,7 +152674,19 @@
       }
      ],
      "control_change_basis": "verified",
-     "intragroup": false
+     "intragroup": false,
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Проверил все 7 источников, включая forestcomplex.ru (о переименовании после смены собственника) и sostav.ru — нигде не названо 95,8107% (или близкое) рядом со словом о покупке; только akm.ru даёт цифру через формулировку \"доля ... составляла\" (результат, не покупка), уже отклоненную.",
+       "Проверил все 7 источников — 95.8107% встречается только в AKM в форме ЕГРЮЛ 'составляла 95.8107%' (не рядом со словом о покупке); в Interfax, Forestcomplex, Kommersant, Sostav.ru, Vedomosti процента нет вовсе."
+      ]
+     }
     },
     "target": {
      "company_id": "gd2b0b67e",
@@ -152485,14 +152745,14 @@
      ],
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-19",
+      "at": "2026-11-20",
       "readers": [
        "A",
        "B"
       ],
       "notes": [
-       "Дата: цитата дословно содержит «4 октября» (без ведущего нуля) — записал так умышленно, прошлый спор читателей (basis=disputed) был из-за того, что один читатель взял «04» (ведущий ноль мешает регэкспу date_supported). Доля 95,8107% — то же число, которое Mondi держала до сделки; источник (akm.ru) подтверждает, что доля в капитале не менялась на 31.12.2023/2024 — то есть именно эта доля перешла новому акционеру.",
-       "stake: 95,8107% — доля в уставном капитале по раскрытию АКМ (не прямая фраза «приобрела», но конкретная цифра с датой перехода, совпадающей с датой закрытия сделки); date: публикация ЖЁСТКО датирована 4 октября, день назван словами в заголовке — meaning=closing, а не просто publication, т.к. текст говорит «продажа в настоящее время завершена»."
+       "Проверил все 7 источников, включая forestcomplex.ru (о переименовании после смены собственника) и sostav.ru — нигде не названо 95,8107% (или близкое) рядом со словом о покупке; только akm.ru даёт цифру через формулировку \"доля ... составляла\" (результат, не покупка), уже отклоненную.",
+       "Проверил все 7 источников — 95.8107% встречается только в AKM в форме ЕГРЮЛ 'составляла 95.8107%' (не рядом со словом о покупке); в Interfax, Forestcomplex, Kommersant, Sostav.ru, Vedomosti процента нет вовсе."
       ]
      }
     },
@@ -171907,11 +172167,64 @@
      "card_hash": "0b423e06ef94"
     },
     "price": {
-     "value_rub": 3940000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "8b50f7e4d2e6"
+     "basis": "verified",
+     "card_hash": "f20909e510a5",
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing",
+      "signing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "написало издание РБК",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "планировала заплатить за этот актив 3,94 миллиарда рублей, говорится в статье.",
+     "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 3940000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "signing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "планировала заплатить за этот актив 3,94 миллиарда рублей, говорится в статье.",
+       "attribution_quote": "написало издание РБК",
+       "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 3940000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Компания \"Развитие активов\", подведомственная департаменту городского имущества Москвы, планировала заплатить за этот актив 3,94 миллиарда рублей, говорится в статье.",
+       "attribution_quote": "говорится в статье",
+       "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023",
@@ -171927,7 +172240,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Правительство Москвы купило бизнес-центр в офисном квартале \"Верейская плаза\" в Можайском районе столицы",
+     "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Правительство Москвы купило бизнес-центр в офисном квартале \"Верейская плаза\" в Можайском районе столицы",
+       "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "подконтрольное правительству Москвы АО \"Развитие активов\" стало собственником участка и первой очереди бизнес-центра \"Верейская плаза\"",
+       "source": "https://realty.ria.ru/20230131/biznes-tsentr-1848582178.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g384c4955",
@@ -171949,8 +172286,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed"
     }
    },
@@ -171992,7 +172329,8 @@
    },
    "reread": "2026-11-12",
    "reread_hash": "af0678ab4f54.b0a956",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "sum_basis": "reported"
   },
   {
    "id": "g83bd07f6",
@@ -191621,11 +191959,47 @@
      "card_hash": "28bd8fc9a216"
     },
     "price": {
-     "value_rub": 52000000000.0,
+     "value_rub": 52000000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "759c11fd04c3"
+     "scope": "equity",
+     "basis": "read",
+     "card_hash": "759c11fd04c3",
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "рассказывал бизнесмен в интервью Frank Media.",
+     "scope_basis": "read",
+     "quote": "Первой сделкой «Инсайта» стала покупка в 2022 году за 52 млрд рублей у международной корпорации Siemens крупной российской лизинговой компании (ЛК) «Сименс Финанс»",
+     "source": "https://frankmedia.ru/189091",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 52000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Первой сделкой «Инсайта» стала покупка в 2022 году за 52 млрд рублей у международной корпорации Siemens крупной российской лизинговой компании (ЛК) «Сименс Финанс»",
+       "attribution_quote": "рассказывал бизнесмен в интервью Frank Media.",
+       "source": "https://frankmedia.ru/189091",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "date": {
      "value": "2022-09-29",
@@ -191641,7 +192015,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Лизинговая компания (ЛК) «Сименс финанс», собственником которой недавно стала инвестиционная группа (ИГ) «Инсайт», сменила название на «ДельтаЛизинг»",
+     "source": "https://frankmedia.ru/98052",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Лизинговая компания (ЛК) «Сименс финанс», собственником которой недавно стала инвестиционная группа (ИГ) «Инсайт», сменила название на «ДельтаЛизинг»",
+       "source": "https://frankmedia.ru/98052",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В конце сентября инвестгруппа приобрела ЛК «Сименс финанс» у немецкого концерна Siemens.",
+       "source": "https://frankmedia.ru/98052",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g2121806c",
@@ -191656,15 +192054,15 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "price_not_verified"
     }
    },
@@ -222863,24 +223261,133 @@
      "value_rub": 10000000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "655c36402a0c"
+     "basis": "disputed",
+     "card_hash": "655c36402a0c",
+     "disputed": [
+      {
+       "value_rub": 10000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей до конца 2023 года, сообщил девелопер",
+       "attribution_quote": "сообщил девелопер",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 10000000000,
+       "meaning": "not_a_price",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Совет директоров \"Самолета\" принял решение поручить менеджменту компании осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей до конца 2023 года",
+       "attribution_quote": "Совет директоров \"Самолета\" принял решение",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей до конца 2023 года, сообщил девелопер",
+     "source": "https://www.interfax.ru/business/903649",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 10000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей до конца 2023 года, сообщил девелопер",
+       "attribution_quote": "сообщил девелопер",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 10000000000,
+       "meaning": "not_a_price",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Совет директоров \"Самолета\" принял решение поручить менеджменту компании осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей до конца 2023 года",
+       "attribution_quote": "Совет директоров \"Самолета\" принял решение",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-05-29",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "498153ede4aa"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "c0eb13cf60c2",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "Москва. 29 мая. INTERFAX.RU - Совет директоров \"Самолет\"",
+     "source": "https://www.interfax.ru/business/903649",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value": "2023-05-29",
+       "meaning": "announcement",
+       "quote": "Москва. 29 мая. INTERFAX.RU - Совет директоров \"Самолет\"",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-05-29",
+       "meaning": "announcement",
+       "quote": "Москва. 29 мая. INTERFAX.RU - Совет директоров \"Самолета\" принял решение поручить менеджменту компании осуществить выкуп собственных акций",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "e5eb9304b262"
+     "card_hash": "e5eb9304b262",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей",
+     "source": "https://www.interfax.ru/business/903649",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "осуществить выкуп собственных акций на рынке в размере до 10 млрд рублей",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Выкуп будет осуществляться дочерней компанией группы, приобретенные акции в дальнейшем будут использованы в общекорпоративных целях.",
+       "source": "https://www.interfax.ru/business/903649",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -222902,9 +223409,9 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "no_target"
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
+     "multiple_text": "not_control_change"
     }
    },
    "followup_researched": "2026-09-11",
@@ -222987,7 +223494,8 @@
    "asset": "Собственные акции ПАО «ГК «Самолет»»",
    "reread": "2026-11-13",
    "reread_hash": "fe86a32b5ab6.fa0626",
-   "reread_note": "статьи: 5"
+   "reread_note": "статьи: 5",
+   "date_basis": "announcement"
   },
   {
    "id": "c151696b4",
@@ -254468,14 +254976,14 @@
      ],
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-19",
+      "at": "2026-11-20",
       "readers": [
        "A",
        "B"
       ],
       "notes": [
-       "Сделка на дату источника ЕЩЕ НЕ ЗАКРЫТА («закроют сделку в конце 2026 г.») — соответствует заголовку карточки «собираются купить». 100% складывается из уже имевшихся долей (Интеррос выкупил 25% у VK ранее) плюс допэмиссия для консолидации остального — технически это оценка для полной консолидации, а не одна покупка на вторичном рынке.",
-       "nature: это докупка миноритарных долей (у VK/Интерроса, у «1С») уже контролируемой «Точки» до 100% — \"Т-Технологии\"/Т-Банк и раньше были мажоритарным акционером банка; конечный контроль не переходит к новой группе, поэтому control_change=false (в отличие от Avto.ru/Яндекс, где покупатель был посторонним). price: это оценка совета директоров для целей допэмиссии, сделка еще не закрыта (статус «Обсуждается»), закрытие заявлено на конец 2026 года — meaning=estimate, не disclosed."
+       "Сделка не закрыта (статус «Обсуждается», закрытие заявлено на конец 2026 года); 100% — цель консолидации через допэмиссию, а не цитата о совершенной покупке доли. Рядом с процентом стоит \"утвердил оценку\" — не глагол покупки.",
+       "Сделка не закрыта (статус «Обсуждается», закрытие в конце 2026 года). 100% — целевой результат допэмиссии для консолидации уже контролируемой «Точки», а не доля, приобретённая одним действием; явной фразы «приобрела 100%» ни в одном источнике нет. Согласен с прежним чтением: null."
       ]
      }
     },
@@ -254532,7 +255040,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Сделка не закрыта (статус «Обсуждается», закрытие заявлено на конец 2026 года); 100% — цель консолидации через допэмиссию, а не цитата о совершенной покупке доли. Рядом с процентом стоит \"утвердил оценку\" — не глагол покупки.",
+       "Сделка не закрыта (статус «Обсуждается», закрытие в конце 2026 года). 100% — целевой результат допэмиссии для консолидации уже контролируемой «Точки», а не доля, приобретённая одним действием; явной фразы «приобрела 100%» ни в одном источнике нет. Согласен с прежним чтением: null."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -292710,6 +293230,10 @@
     [
      "РИА Новости",
      "https://ria.ru/20251023/sud-2050079827.html"
+    ],
+    [
+     "Ведомости",
+     "https://www.vedomosti.ru/business/articles/2025/10/24/1149414-ivanovskii-zavod-pereidet-v-sobstvennost-gosudarstva"
     ]
    ],
    "eco": {
@@ -292724,7 +293248,7 @@
    },
    "law": {
     "struct": "Судебная коллегия по экономическим спорам Верховного суда 23 октября 2025 года отменила решения апелляции и кассации и оставила в силе решение первой инстанции об обращении акций в доход государства. Решение о приватизации, принятое в 1992 году комитетом по управлению имуществом Ивановской области, суд признал незаконным: без решения правительства комитет превысил свои полномочия, и завод, имевший значение для обороны, выбыл из владения государства.",
-    "appr": "Дело решил Верховный суд; решение окончательное, дальнейших инстанций в статьях не названо. Прежняя апелляция и кассация признали срок давности пропущенным, Верховный суд с этим не согласился.",
+    "appr": "Дело решил Верховный суд; решение окончательное, дальнейших инстанций в статьях не названо. Прежняя апелляция и кассация признали срок давности пропущенным, Верховный суд с этим не согласился. Еще в апреле 2025 года, после решения суда первой инстанции, «Ростех» официально просил власти передать ему акции завода — госкорпорация уже арендовала часть площадей ИЗТС через свой холдинг «Стан».",
     "adv": [],
     "terms": "Деньги за актив не платились: он изъят без компенсации."
    },
@@ -292802,7 +293326,13 @@
    "reread": "2026-11-09",
    "reread_hash": "e7e0cba57702.c0ea90",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20",
+   "proofread": "2026-11-20"
   },
   {
    "date": "2026",
@@ -292918,7 +293448,9 @@
    "reread": "2026-11-09",
    "reread_hash": "13b0e9b5f1b3.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20"
   },
   {
    "date": "2025-10-14",
@@ -292942,6 +293474,10 @@
     [
      "93.ru",
      "https://93.ru/text/criminal/2025/10/18/76080335/"
+    ],
+    [
+     "Право.ру",
+     "https://pravo.ru/news/264528/"
     ]
    ],
    "eco": {
@@ -292956,7 +293492,7 @@
    },
    "law": {
     "struct": "Останкинский районный суд Москвы (судья Ольга Евтеева, 150 томов дела) удовлетворил антикоррупционный иск Генпрокуратуры и обратил в доход государства сеть отелей Marton. Основания, по версии надзора: земельные участки выведены из публичной собственности в обход процедур, самовольные постройки легализованы, а владение скрыто за подставными лицами и родственниками.",
-    "appr": "Останкинский районный суд обратил решение к немедленному исполнению по ходатайству прокурора. Защита Андрея Марченко заявила об апелляции; итог обжалования в прочитанных статьях не назван.",
+    "appr": "Останкинский районный суд обратил решение к немедленному исполнению по ходатайству прокурора. Защита Андрея Марченко заявила об апелляции — Мосгорсуд решение оставил без изменения, кассацию во Втором кассационном суде общей юрисдикции тоже отклонили.",
     "adv": [],
     "terms": "Деньги за актив не платились: он изъят без компенсации."
    },
@@ -293034,7 +293570,13 @@
    "reread": "2026-11-09",
    "reread_hash": "f73fe7dcc17b.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20",
+   "proofread": "2026-11-20"
   },
   {
    "date": "2026-03-13",
@@ -293150,7 +293692,9 @@
    "reread": "2026-11-09",
    "reread_hash": "dfdef23697ce.a9895d",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20"
   },
   {
    "date": "2025-10-10",
@@ -293174,6 +293718,14 @@
     [
      "Бизнес Журнал. Урал",
      "https://ural.business-magazine.online/fn_1889215.html"
+    ],
+    [
+     "ЕАН",
+     "https://eanews.ru/ekaterinburg/20260421153308/sud-priznal-nedeystvitelnymi-sdelki-peredachi-setey-oblkommunenergo"
+    ],
+    [
+     "Рамблер/финансы",
+     "https://finance.rambler.ru/business/56561696-elektroseti-oblkommunenergo-v-sverdlovskoy-oblasti-pereshli-pod-kontrol-rosseti-ural/"
     ]
    ],
    "eco": {
@@ -293188,7 +293740,7 @@
    },
    "law": {
     "struct": "Ленинский районный суд Екатеринбурга полностью удовлетворил антикоррупционный иск Генпрокуратуры и обратил в доход государства активы «Корпорации СТС», в том числе акции «Облкоммунэнерго». Основание по версии прокуратуры: незаконная приватизация имущества при поддержке чиновников Свердловской области, которым, по ее версии, предоставляли услуги и имущество на льготных условиях.",
-    "appr": "Суд по ходатайству прокурора обратил решение к немедленному исполнению, чтобы не сорвать отопительный сезон. Областной суд и Седьмой кассационный суд общей юрисдикции оставили решение без изменений.",
+    "appr": "Суд по ходатайству прокурора обратил решение к немедленному исполнению, чтобы не сорвать отопительный сезон. Областной суд и Седьмой кассационный суд общей юрисдикции оставили решение без изменений. Отдельным иском суд признал недействительными сделки безвозмездной передачи муниципальных электросетей «Облкоммунэнерго»: по закону такие сети обязаны принадлежать системообразующей сетевой организации «Россети Урал», а не частной компании — с 1 июня 2026 года «Россети Урал» принял эти сети на обслуживание.",
     "adv": [],
     "terms": "Деньги за актив не платились: он изъят без компенсации."
    },
@@ -293266,7 +293818,13 @@
    "reread": "2026-11-09",
    "reread_hash": "ef10cf710528.6f20d7",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20",
+   "proofread": "2026-11-20"
   },
   {
    "date": "2024-05-16",
@@ -293379,7 +293937,9 @@
    "reread": "2026-11-12",
    "reread_hash": "3009900b84d6.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "deep_researched": "2026-11-20",
+   "weekly_researched": "2026-11-20"
   },
   {
    "date": "2024-02-12",
@@ -314560,7 +315120,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Проверил все 3 источника (включая interfax/818753 о приостановке и возобновлении торгов) — 70,76% складывается из двух отдельных лотов (38,74% и 32,02%), но ни один источник не называет именно 70,76% целиком рядом со словом о покупке; складывать два лота в одну цифру самостоятельно — домысел, не цитата.",
+       "70,76% — сумма двух отдельных лотов аукциона (38,74% и 32,02%), названных по отдельности; ни Interfax/830887, ни Interfax/818753, ни Vedomosti не называют итоговую цифру 70,76% целиком рядом со словом о покупке — это посчитанная сумма, а не цитата. Оставляю null, как и вчера."
+      ]
+     }
     },
     "target": {
      "company_id": "g890c95d7",
@@ -314616,7 +315188,19 @@
        "quote_checked": true,
        "reader": "B"
       }
-     ]
+     ],
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-20",
+      "readers": [
+       "A",
+       "B"
+      ],
+      "notes": [
+       "Проверил все 3 источника (включая interfax/818753 о приостановке и возобновлении торгов) — 70,76% складывается из двух отдельных лотов (38,74% и 32,02%), но ни один источник не называет именно 70,76% целиком рядом со словом о покупке; складывать два лота в одну цифру самостоятельно — домысел, не цитата.",
+       "70,76% — сумма двух отдельных лотов аукциона (38,74% и 32,02%), названных по отдельности; ни Interfax/830887, ни Interfax/818753, ни Vedomosti не называют итоговую цифру 70,76% целиком рядом со словом о покупке — это посчитанная сумма, а не цитата. Оставляю null, как и вчера."
+      ]
+     }
     },
     "admitted": {
      "count": true,
@@ -320138,11 +320722,64 @@
      "card_hash": "0f75dc7abfcd"
     },
     "price": {
-     "value_rub": 10000000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "auction_start",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "26b83a678ec1"
+     "basis": "verified",
+     "card_hash": "7de7a35b646e",
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "parties",
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "unknown"
+     ],
+     "attribution_quote": "Как указывается в объявлении, на продажу выставлено здание",
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Объявление о продаже за 10 миллиардов рублей отеля \"Савой\" в центре Москвы появилось на \"Авито\".",
+     "source": "https://1prime.ru/20261027/otel-874645156.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 10000000000,
+       "meaning": "auction_start",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Объявление о продаже за 10 миллиардов рублей отеля \"Савой\" в центре Москвы появилось на \"Авито\".",
+       "attribution_quote": "Как указывается в объявлении, на продажу выставлено здание",
+       "source": "https://1prime.ru/20261027/otel-874645156.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 10000000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Объявление о продаже за 10 миллиардов рублей отеля \"Савой\" в центре Москвы появилось на \"Авито\".",
+       "source": "https://1prime.ru/20261027/otel-874645156.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-27",
@@ -320158,7 +320795,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6558175a595e"
+     "card_hash": "6558175a595e",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "Как указывается в объявлении, на продажу выставлено здание общей площадью 29 тысяч квадратных метров по адресу: ул. Рождественка, 3/6, строение 1.",
+     "source": "https://1prime.ru/20261027/otel-874645156.html",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Как указывается в объявлении, на продажу выставлено здание общей площадью 29 тысяч квадратных метров по адресу: ул. Рождественка, 3/6, строение 1.",
+       "source": "https://1prime.ru/20261027/otel-874645156.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -320180,8 +320833,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target"
     }
    },
@@ -320198,7 +320851,8 @@
    "reread": "2026-11-13",
    "reread_hash": "d61e1b96e2e5.500c51",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "sum_basis": "auction_start"
   },
   {
    "id": "g90767425",
@@ -321137,15 +321791,104 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "6c2e24fb5dff"
+     "basis": "verified",
+     "card_hash": "6c2e24fb5dff",
+     "object": "ООО «Интерпродресурс»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "Инвестиционный комбинированный фонд «ВИМ Недвижимость», находящийся под управлением «ВИМ Сбережения», приобрел у ООО «Акцент Капитал» 100% долей ООО «Интерпродресурс»",
+     "source": "https://bdaily.ru/delta-plaza/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "ООО «Интерпродресурс»",
+       "event": "closing",
+       "quote": "Инвестиционный комбинированный фонд «ВИМ Недвижимость», находящийся под управлением «ВИМ Сбережения», приобрел у ООО «Акцент Капитал» 100% долей ООО «Интерпродресурс»",
+       "source": "https://bdaily.ru/delta-plaza/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "ООО «Интерпродресурс»",
+       "event": "closing",
+       "quote": "приобрел у ООО «Акцент Капитал» 100% долей ООО «Интерпродресурс», на балансе которой находится БЦ «Дельта Плаза»",
+       "source": "https://bdaily.ru/delta-plaza/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
      "value_rub": 6700000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "50fecef97bf3"
+     "basis": "disputed",
+     "card_hash": "50fecef97bf3",
+     "disputed": [
+      {
+       "value_rub": 6700000000,
+       "meaning": "reported",
+       "attribution": "adviser",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 6,7 млрд рублей.",
+       "attribution_quote": "ALUMNI Partners выступила юридическим консультантом Accent Capital в сделке по продаже 100% долей ООО «Интерпродресурс»",
+       "source": "https://t.me/alumnipartnerslawfirm/2334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 6700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки купли-продажи составила 6,7 млрд рублей.",
+       "attribution_quote": "прокомментировала Марина Харитонова, генеральный директор Accent Capital",
+       "source": "https://bdaily.ru/delta-plaza/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Сумма сделки составила 6,7 млрд рублей.",
+     "source": "https://t.me/alumnipartnerslawfirm/2334",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "value_rub": 6700000000,
+       "meaning": "reported",
+       "attribution": "adviser",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 6,7 млрд рублей.",
+       "attribution_quote": "ALUMNI Partners выступила юридическим консультантом Accent Capital в сделке по продаже 100% долей ООО «Интерпродресурс»",
+       "source": "https://t.me/alumnipartnerslawfirm/2334",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 6700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "Сумма сделки купли-продажи составила 6,7 млрд рублей.",
+       "attribution_quote": "прокомментировала Марина Харитонова, генеральный директор Accent Capital",
+       "source": "https://bdaily.ru/delta-plaza/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025",
@@ -321161,7 +321904,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "«ВИМ Сбережения» и ООО «Акцент Капитал» закрыли сделку купли-продажи 100% долей в уставном капитале ООО «Интерпродресурс»",
+     "source": "https://bdaily.ru/delta-plaza/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-20",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "«ВИМ Сбережения» и ООО «Акцент Капитал» закрыли сделку купли-продажи 100% долей в уставном капитале ООО «Интерпродресурс»",
+       "source": "https://bdaily.ru/delta-plaza/",
+       "quote_checked": true,
+       "reader": "A"
+      }
+     ]
     },
     "target": {
      "company_id": "gedd90fbf",
@@ -321183,8 +321942,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "target_unconfirmed"
     }
    },
