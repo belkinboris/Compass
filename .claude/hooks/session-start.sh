@@ -35,3 +35,7 @@ python3 -m pip install --quiet --disable-pip-version-check pymorphy3 pymorphy3-d
 # скачанного PDF — импорт падал паникой pyo3, а не обычным исключением
 # (6 сентября 2026). pdfminer стоит в образе, не хватало только cffi.
 python3 -m pip install --quiet --disable-pip-version-check cffi
+
+# Полная проверка базы перед push в main — git-хук, а не правило в тексте рутины
+# (владелец, 20 ноября 2026). Сам хук и что он проверяет — .githooks/pre-push.
+git config core.hooksPath .githooks

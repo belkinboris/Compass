@@ -65,6 +65,17 @@ def main():
         print((g.stdout + g.stderr).strip()[-1500:])
         print('НЕ ПУШИТЬ: правка факта без подтверждающей цитаты.')
         return 1
+    # МАССОВАЯ ПРАВКА — ТОЖЕ ЗДЕСЬ (20 ноября 2026, владелец: «убедись, что проверка
+    # качества, вычитка, все проверки ничего не ломают и проходят все проверки перед
+    # внесением изменений»). Раньше `mass_edit_guard` звали только скрипты, которые о
+    # нем помнили. Ключ одобренной пробы — переменная MASS_OK, как у review.py.
+    me = [sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mass_edit_guard.py'),
+          '--base', 'origin/main'] + (['--mass-ok', os.environ['MASS_OK']] if os.environ.get('MASS_OK') else [])
+    g = subprocess.run(me, capture_output=True, text=True)
+    if g.returncode:
+        print((g.stdout + g.stderr).strip()[-1500:])
+        print('НЕ ПУШИТЬ: массовая правка опубликованных карточек без одобренной пробы.')
+        return 1
     suites = [s for s in SUITES if os.path.exists(os.path.join(ROOT, s))] + ingest_data_tests()
     r = subprocess.run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', *suites],
                        cwd=ROOT, capture_output=True, text=True)
