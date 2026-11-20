@@ -105,7 +105,19 @@ def busy(stale_h=STALE_H):
     return holding(rows, base, queued, approve.unproven)
 
 
+def _enable_prepush_hook():
+    """Включить git-хук .githooks/pre-push в этой копии (20 ноября 2026): рутины в давно
+    запущенных сессиях не проходят session-start.sh, а этот шаг делают перед каждым push."""
+    import subprocess
+    try:
+        subprocess.run(['git', 'config', 'core.hooksPath', '.githooks'], cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       capture_output=True, timeout=10)
+    except Exception:  # noqa: BLE001 — страховка не должна ронять шаг
+        pass
+
+
 def main(argv):
+    _enable_prepush_hook()
     limit = 0
     if '--wait' in argv:
         limit = float(argv[argv.index('--wait') + 1]) * 60
