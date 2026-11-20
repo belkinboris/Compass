@@ -508,3 +508,19 @@ def test_attribution_cue_matches_interview_speech():
     assert fc.ATTRIBUTION_CUE.search('рассказывал бизнесмен в интервью Frank Media.')
     assert fc.ATTRIBUTION_CUE.search('прокомментировала Марина Харитонова, генеральный директор Accent Capital.')
     assert not fc.ATTRIBUTION_CUE.search('Акции компании выросли на 5% за день.')
+
+
+def test_all_sums_counts_every_price_but_not_talks_or_failed():
+    """«Все цены» для суммы сделок по годам (владелец, 20 ноября 2026): цены
+    сторон, оценки (середина диапазона), инвестиции, IPO; не обсуждения, не
+    сорвавшиеся, не стартовые цены торгов."""
+    import facts
+    def v(**kw):
+        d = dict({'id': 'x', 'date': '2025-03-01', 'type': 'M&A', 'status': 'Закрыта', 'title': 't'}, **kw)
+        return facts.derive(d)['price']['any_rub']
+    assert v(sum='6–8 млрд ₽ (по оценке)') == 7e9
+    assert v(sum='5 млрд ₽', type='Инвестиция') == 5e9
+    assert v(sum='5 млрд ₽', type='IPO') == 5e9
+    assert v(sum='5 млрд ₽', status='Обсуждается') is None
+    assert v(sum='5 млрд ₽', status='Не состоялась') is None
+    assert v(sum='Не раскрыта') is None
