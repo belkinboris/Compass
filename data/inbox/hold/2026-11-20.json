@@ -389,34 +389,6 @@
    ]
   },
   {
-   "draft_id": "d98123273",
-   "title": "«Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/20/1413616-gruppa-astra"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d64590518",
    "title": "Anthropic после IPO стала седьмой самой дорогой компанией в мире",
    "date": "2026-11-20",
@@ -485,36 +457,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g67cacd7e (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d80736095",
-   "title": "«Группа Астра» увеличила долю в «Астра ИИ» до 80%",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-20_gruppa_astra_uvelichila"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -685,49 +627,9 @@
    },
    "ind": "ИТ и интернет",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d26439713",
-   "title": "В США стало меньше желающих делать покупки со Дня благодарения до киберпонедельника",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130392"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-20",
-     "title": "Переговоры",
-     "note": "В 2026 году число американцев, которые планируют совершить покупки в пятидневный период со Дня благодарения до киберпонедельника в традиционных магазинах и онлайн, составит около 182,7 млн человек, показал опрос Национальной федерации ритейлеров (NRF).\"Хотя…",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/business/1130392"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g502a9986 (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
@@ -760,91 +662,6 @@
    ]
   },
   {
-   "draft_id": "d01252485",
-   "title": "«Узкое место»: аренда выгоднее покупки в четырех мегаполисах России, пишет РБК",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261120/nedvizhimost-875412646.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23834052",
-   "title": "В каких городах лучше забыть про покупку жилья в ипотеку",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145921"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d55951598",
-   "title": "«Золотые» игрушки: в Тюмени продают шары на елку за 33 тысячи",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145893"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Потребительские товары",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d08728893",
    "title": "Ярославскую мельницу Галкина выставят на торги в шестой раз",
    "date": "2026-11-20",
@@ -873,16 +690,73 @@
    ]
   },
   {
-   "draft_id": "d64878868",
-   "title": "В Тюмени в ноябре уже продают новогодние игрушки. Почему это плохо для вашей психики — разбираемся",
+   "draft_id": "d75778013",
+   "title": "Фонды инвестировали в маркетплейсы // Доли в РВБ перешли закрытым паевым инвестфондам",
    "date": "2026-11-20",
    "src": [
     [
-     "web:72.ru",
-     "https://72.ru/text/gorod/2026/11/20/76771929/"
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/9126251"
     ]
    ],
    "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "маркетплейсы // Доли в РВБ перешли закрытым паевым инвестфондам",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "маркетплейсы // Доли в РВБ перешли закрытым паевым инвестфондам",
+    "seller": null
+   },
+   "ind": "E-commerce",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d11633165",
+   "title": "Два закрытых ПИФа получили доли в RWB",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413730-zakritih-pifa"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Два закрытых ПИФа",
+   "asset": "RWB",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Два закрытых ПИФа",
+    "asset": "RWB",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g43b0394d (по всей базе: та же сторона и редкое слово: rwb) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d57392391",
+   "title": "Продажи GTA VI в первый день оценили более чем в $2 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2205386/2026-11-20/prodazhi-gta-vi-v-pervyi-den-otcenili-bolee-chem-v-2-mlrd"
+    ]
+   ],
+   "sum": "$2 млрд",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -894,10 +768,42 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Потребительские товары",
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90068365",
+   "title": "В Ростове Великом продают землю под застройку",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/11/20/v-rostove-velikom-prodayut-zemlyu-pod-zastrojku"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gf5bdb983 (общие редкие слова: застро, ростов) — проверьте, не дубль ли"
    ]
   }
  ]

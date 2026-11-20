@@ -824,6 +824,58 @@
     "draft_id": "d98123273",
     "title": "«Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%"
    }
+  },
+  {
+   "id": "g2a17f41a",
+   "date": "2026-11-20",
+   "title": "Коня, матрешку и машину покупает мэрия Ноябрьска за миллионы рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/news/1053145950"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Коня, матрешку и машину",
+   "asset": "мэрия Ноябрьска за миллионы рублей",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Коня, матрешку и машину",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053145950"
+     }
+    ],
+    "target": [
+     {
+      "value": "мэрия Ноябрьска за миллионы рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/news/1053145950"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T10:53:18+00:00"
   }
  ]
 }
