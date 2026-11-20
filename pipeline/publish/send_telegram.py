@@ -1036,6 +1036,9 @@ def plan_milestones(deals, stage_posts, decisions, now, post_state=None):
     return send, hold, discard_ids, sent_decision_ids
 
 
+SITE_UNKNOWN = '\x00site-unknown'   # метка «сайт не ответил» в ответе deals_missing_on_site
+
+
 def deals_missing_on_site(deal_ids):
     """Каких карточек сайт еще НЕ отдает. Пусто — все на месте или проверить
     не удалось.
@@ -1076,12 +1079,18 @@ def deals_missing_on_site(deal_ids):
                 base = r.json()
                 break
         if base is None:
-            return set()
+            # Сайт ответил ошибкой (502 «upstream request failed» — 20 ноября
+            # 2026 их было много). Раньше это значило «шлем как есть», и пост
+            # ЗПИФ «Томь»/Wildberries ушел через 20 секунд после коммита — Артем
+            # открыл ссылку: «Карточки нет». Теперь «не знаю» = «еще нет»:
+            # ожидание `--wait-for-site` продолжается; после него — см. main().
+            print('Сайт не отдал базу (код %s) — считаю, что карточек там еще нет.' % r.status_code)
+            return set(ids) | {SITE_UNKNOWN}
         live = {d.get('id') for d in base.get('deals', [])}
     except Exception as e:                                    # noqa: BLE001
         print('Не удалось спросить сайт, какие карточки он уже отдает (%s) — '
-              'шлем как есть.' % e)
-        return set()
+              'считаю, что их там еще нет.' % e)
+        return set(ids) | {SITE_UNKNOWN}
     return {d for d in ids if d not in live}
 
 
@@ -1389,9 +1398,16 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
     # пост уходит в том же прогоне.
     deadline = time.monotonic() + wait_for_site * 60
     while not_on_site and write and time.monotonic() < deadline:
-        print('Жду, пока сайт покажет %d карточ. (%s)…' % (len(not_on_site), ', '.join(sorted(not_on_site))))
+        print('Жду, пока сайт покажет %d карточ. (%s)…' % (len(not_on_site - {SITE_UNKNOWN}), ', '.join(sorted(not_on_site - {SITE_UNKNOWN}))))
         time.sleep(SITE_POLL_S)
         not_on_site = deals_missing_on_site(wanted)
+    if SITE_UNKNOWN in not_on_site:
+        # Сайт так и не ответил за все ожидание. Без ожидания (`--wait-for-site 0`)
+        # или после него — прежнее решение: молчащий канал хуже ссылки, которая
+        # заработает через несколько минут (сентябрь 2026). Но с ожиданием это
+        # бывает только при долгом сбое сайта, а не при одном 502.
+        print('Сайт не ответил за время ожидания — шлем без проверки ссылки.')
+        not_on_site = set()
     if not_on_site:
         covers_of = lambda d: set((deals_by_id_all.get(d) or {}).get('post_covers') or [])
         to_send = [(d, t) for d, t in to_send if d not in not_on_site and not (covers_of(d) & not_on_site)]

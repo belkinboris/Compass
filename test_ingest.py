@@ -3184,6 +3184,12 @@ def test_main_waits_for_the_site_instead_of_deferring_the_post_an_hour(monkeypat
     assert run(0, [{"dwait1"}]) == [], "без ожидания — отложить, как раньше"
     answers = [{"dwait1"}, {"dwait1"}, set()]
     assert len(run(15, answers)) == 1 and answers == [], "дождались сайта — пост ушел в этом прогоне"
+    # Сайт ответил ошибкой (502) — это «еще нет», а не «шлем» (20 ноября 2026,
+    # ЗПИФ «Томь»/Wildberries: пост ушел через 20 секунд, ссылка вела в никуда).
+    unk = send_telegram.SITE_UNKNOWN
+    answers = [{"dwait1", unk}, {"dwait1", unk}, set()]
+    assert len(run(15, answers)) == 1 and answers == [], "сайт ответил после сбоя — пост ушел, когда карточка появилась"
+    assert len(run(0, [{"dwait1", unk}])) == 1, "без ожидания и без ответа сайта — шлем, как решено в сентябре"
     assert send_telegram.parse_wait_minutes(["x", "--write", "--wait-for-site", "10"]) == 10
     assert send_telegram.parse_wait_minutes(["x", "--write"]) == 0
 

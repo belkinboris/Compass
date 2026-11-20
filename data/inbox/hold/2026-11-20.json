@@ -2,6 +2,63 @@
  "made": "2026-11-20",
  "drafts": [
   {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d42864136",
    "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
    "date": "2026-11-12",
@@ -61,62 +118,6 @@
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
     "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d99277860",
-   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -206,13 +207,13 @@
    ]
   },
   {
-   "draft_id": "d51747038",
-   "title": "Anthropic’s IPO could deliver $156 billion to charity",
+   "draft_id": "d36596985",
+   "title": "«Перестрелки, погони, драки»: обвал миркоинов, выход GTA и IPO Anthropic",
    "date": "2026-11-19",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/19/11/2026/6aff27dd80342d7b8adeb123"
     ]
    ],
    "sum": null,
@@ -230,8 +231,7 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -262,17 +262,17 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d89954199",
-   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
-   "date": "2026-11-20",
+   "draft_id": "d51747038",
+   "title": "Anthropic’s IPO could deliver $156 billion to charity",
+   "date": "2026-11-19",
    "src": [
     [
      "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
     ]
    ],
    "sum": null,
@@ -293,7 +293,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -324,21 +324,21 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d00558920",
-   "title": "Рябков: новый раунд переговоров по Украине пока не согласован",
+   "draft_id": "d89954199",
+   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
    "date": "2026-11-20",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/20/1413602-raund-peregovorov"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -351,76 +351,11 @@
    },
    "ind": null,
    "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23762502",
-   "title": "Nvidia планировала продать чипы связанной с Megaspeed фирме",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-20",
-     "title": "Переговоры",
-     "note": "Американская корпорация Nvidia в апреле подала заявку на продажу более 40 000 чипов H200 китайской компании New Century Lettall Data Service, связанной с сингапурской Megaspeed и ее бывшим топ-менеджером Элис Хуанг. Об этом сообщает The New York Times (NYT)…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d64293371",
-   "title": "МТС утвердила программу обратного выкупа акций на 2027 год",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-20_mts_utverdila_programmu"
-    ]
-   ],
-   "sum": "21,5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -450,148 +385,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d87983860",
-   "title": "Tranio: спрос россиян на покупку недвижимости в Грузии вырос в 4,4 раза в 2026 году",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28337611"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17517326",
-   "title": "МСП Донбасса и Новороссии привлек более 8,6 млрд рублей с господдержкой",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28338539"
-    ]
-   ],
-   "sum": "8,6 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "МСП Донбасса и Новороссии",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "МСП Донбасса и Новороссии",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d31806510",
-   "title": "Рябков ответил на вопрос о новом раунде переговоров по Украине",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28338553"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d90674984",
-   "title": "Два инвестфонда получили 30% Wildberries и Russ",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:retailer.ru",
-     "https://retailer.ru/dva-investfonda-poluchili-30-wildberries-i-russ/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Два инвестфонда",
-   "asset": "Wildberries и Russ",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Два инвестфонда",
-    "asset": "Wildberries и Russ",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d38601667",
-   "title": "В Гольянове выставили на торги крупное нежилое помещение",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/20/v-golyanove-vystavili-na-torgi-krupnoe-nezhiloe-pomeshhenie"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -620,74 +414,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d00558920",
-   "title": "Рябков: новый раунд переговоров по Украине пока не согласован",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/20/1413602-raund-peregovorov"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d23762502",
-   "title": "Nvidia планировала продать чипы связанной с Megaspeed фирме",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-20",
-     "title": "Переговоры",
-     "note": "Американская корпорация Nvidia в апреле подала заявку на продажу более 40 000 чипов H200 китайской компании New Century Lettall Data Service, связанной с сингапурской Megaspeed и ее бывшим топ-менеджером Элис Хуанг. Об этом сообщает The New York Times (NYT)…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -792,175 +518,6 @@
    ]
   },
   {
-   "draft_id": "d90961008",
-   "title": "Воронежские аграрии увеличили инвестиции в деловые коммуникации",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-20_voronezhskie_agrarii_uvelichili"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d64293371",
-   "title": "МТС утвердила программу обратного выкупа акций на 2027 год",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-20_mts_utverdila_programmu"
-    ]
-   ],
-   "sum": "21,5 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87983860",
-   "title": "Tranio: спрос россиян на покупку недвижимости в Грузии вырос в 4,4 раза в 2026 году",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/nedvizhimost/28337611"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17517326",
-   "title": "МСП Донбасса и Новороссии привлекли более 8,6 млрд рублей с господдержкой",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28338539"
-    ]
-   ],
-   "sum": "8,6 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "МСП Донбасса и Новороссии",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "МСП Донбасса и Новороссии",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d31806510",
-   "title": "Рябков ответил на вопрос о новом раунде переговоров по Украине",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28338553"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d11606861",
-   "title": "Тамбовские власти допустили слияние администраций Моршанска и округа",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119428-tambovskie-vlasti-dopustili-sliyanie-administratsiy-morshanska-i-okruga/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d67379680",
    "title": "Anthropic – рекордное за всю историю размещение акций",
    "date": "2026-11-20",
@@ -1034,45 +591,214 @@
    ]
   },
   {
-   "draft_id": "d90674984",
-   "title": "Два инвестфонда получили 30% Wildberries и Russ",
+   "draft_id": "d64858449",
+   "title": "После IPO Anthropic занял седьмое место среди самых дорогих компаний мира",
    "date": "2026-11-20",
    "src": [
     [
-     "web:retailer.ru",
-     "https://retailer.ru/dva-investfonda-poluchili-30-wildberries-i-russ/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114412"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d73550793",
+   "title": "Основатели издателя игр PlayDucky Алишер Якубов и Иван Федянин выкупили долю неназванного инвестора, который в 2021 году вложил в компанию $1 млн, и получили контроль над проектом. Сделка была закрыта",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7857"
+    ]
+   ],
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Основатели издателя игр PlayDucky Алишер Якубов и Иван Федянин выкупили долю неназванного инвестора, который в 2021 году вложил в компанию $1 млн, и получили контроль над проектом. Сделка была закрыта в июне этого года. По словам одного из фаундеров, инвестор…",
+     "source": [
+      "tg:rusven",
+      "https://t.me/rusven/7857"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63915461",
+   "title": "«Группа Астра» довела долю в подконтрольном разработчике ИИ до 80%",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114456"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "Два инвестфонда",
-   "asset": "Wildberries и Russ",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Два инвестфонда",
-    "asset": "Wildberries и Russ",
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d26439713",
+   "title": "В США стало меньше желающих делать покупки со Дня благодарения до киберпонедельника",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1130392"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "В 2026 году число американцев, которые планируют совершить покупки в пятидневный период со Дня благодарения до киберпонедельника в традиционных магазинах и онлайн, составит около 182,7 млн человек, показал опрос Национальной федерации ритейлеров (NRF).\"Хотя…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1130392"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d05517370",
-   "title": "Рябков прокомментировал вопрос о подготовке третьего раунда переговоров",
+   "draft_id": "d44104611",
+   "title": "ДОМ.РФ выставит на торги бывшую городскую думу и дом Ашастина в Костроме",
    "date": "2026-11-20",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/20/ryabkov-prokommentiroval-vopros-o-podgotovke-tretiego-raunda-peregovorov/"
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28339293"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: выстав, костро, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d01252485",
+   "title": "«Узкое место»: аренда выгоднее покупки в четырех мегаполисах России, пишет РБК",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/nedvizhimost-875412646.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23834052",
+   "title": "В каких городах лучше забыть про покупку жилья в ипотеку",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145921"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1091,13 +817,41 @@
    ]
   },
   {
-   "draft_id": "d38601667",
-   "title": "В Гольянове выставили на торги крупное нежилое помещение",
+   "draft_id": "d55951598",
+   "title": "«Золотые» игрушки: в Тюмени продают шары на елку за 33 тысячи",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145893"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08728893",
+   "title": "Ярославскую мельницу Галкина выставят на торги в шестой раз",
    "date": "2026-11-20",
    "src": [
     [
      "web:abnews.ru",
-     "https://abnews.ru/center/news/msk/2026/11/20/v-golyanove-vystavili-na-torgi-krupnoe-nezhiloe-pomeshhenie"
+     "https://abnews.ru/center/news/yaroslavl/2026/11/20/yaroslavskuyu-melniczu-galkina-vystavyat-na-torgi-v-shestoj-raz"
     ]
    ],
    "sum": null,
@@ -1115,8 +869,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64878868",
+   "title": "В Тюмени в ноябре уже продают новогодние игрушки. Почему это плохо для вашей психики — разбираемся",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/gorod/2026/11/20/76771929/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
