@@ -681,17 +681,17 @@
    ]
   },
   {
-   "draft_id": "d64622807",
-   "title": "ЦБ рекомендовал не передавать брокерские счета в управление лицам без лицензии",
+   "draft_id": "d53199018",
+   "title": "«Магнит» и ITECO могут купить у «Яндекса» 2000 роботраков",
    "date": "2026-11-20",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28340699"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413897-u-yandeksa-2000"
     ]
    ],
    "sum": null,
-   "type": "Передача в управление",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -702,7 +702,172 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80259424",
+   "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/20/11/2026/6b0037a53559e147749d1565"
+    ]
+   ],
+   "sum": "$107 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d47775516",
+   "title": "Два закрытых паевых фонда получили 30% в головной компании Wildberries",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Dva-zakrytyh-paevyh-fonda-poluchili-30-v-golovnoj-kompanii-Wildberries-87827"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "ЗПИФы «Томь» и «Гало» получили 17,5% и 12,5% долей соответственно. Изменения произошли 19 ноября. Изменения в структуре ООО «РВБ» произошли 19 ноября. До этого ООО «Вайлдберриз» принадлежало 65% компании, а ООО «Стинн» — 35%. Сейчас доля «Вайлдберриз»…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Dva-zakrytyh-paevyh-fonda-poluchili-30-v-golovnoj-kompanii-Wildberries-87827"
+     ]
+    }
+   ],
+   "buyer_name": "Два закрытых паевых фонда",
+   "asset": "головной компании Wildberries",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Два закрытых паевых фонда",
+    "asset": "головной компании Wildberries",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d59015500",
+   "title": "Кольцо с бриллиантом пассажирки «Титаника» выставят на аукцион в Британии",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2205645/2026-11-20/koltco-s-brilliantom-passazhirki-titanika-vystaviat-na-auktcion-v-britanii"
+    ]
+   ],
+   "sum": "$105 тыс",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67822587",
+   "title": "Туристов предупредили об опасной ошибке при покупке билетов",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/20/turistov-predupredili-ob-opasnoj-oshibke-pri-pokupke-biletov"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "Покупка авиабилетов в последний момент может обойтись россиянам значительно дороже, чем раннее бронирование. Надеяться на резкое снижение цен перед вылетом больше не стоит, особенно при планировании отдыха на новогодние праздники.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/news/2026/11/20/turistov-predupredili-ob-opasnoj-oshibke-pri-pokupke-biletov"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d59091537",
+   "title": "А ты возьми и купи верблюда. В Ростовской области продают горбатую парочку",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/animals/2026/11/20/76780703/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"

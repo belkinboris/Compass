@@ -2,6 +2,20 @@
  "updated": "2026-11-20",
  "signals": [
   {
+   "id": "s1214b92b4",
+   "company_id": "gd19e26bf",
+   "date": "2026-11-20",
+   "kind": "buy",
+   "summary": "Магнит — возможная покупка: Яндекс",
+   "source": [
+    "vedomosti.ru",
+    "https://www.vedomosti.ru/investments/news/2026/11/20/1413897-u-yandeksa-2000"
+   ],
+   "origin": "news",
+   "strength": "normal",
+   "object_id": "yandex"
+  },
+  {
    "id": "sac7eb42e2",
    "company_id": "gcafc31dc",
    "date": "2026-11-19",
