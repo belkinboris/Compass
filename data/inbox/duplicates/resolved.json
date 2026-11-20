@@ -478,5 +478,25 @@
   "verdict": "separate",
   "candidate_id": "g1a2f9d60",
   "day": "2026-11-19"
+ },
+ "https://www.kommersant.ru/doc/9114000::ga43e03c6": {
+  "verdict": "same_fact",
+  "candidate_id": "ga43e03c6",
+  "day": "2026-11-20"
+ },
+ "https://www.kommersant.ru/doc/9126451::gb82efd9f": {
+  "verdict": "same_fact",
+  "candidate_id": "gb82efd9f",
+  "day": "2026-11-20"
+ },
+ "https://mergers.ru/news/Medskan-prodal-49-laboratornoj-seti-KDL-87825::gb82efd9f": {
+  "verdict": "same_fact",
+  "candidate_id": "gb82efd9f",
+  "day": "2026-11-20"
+ },
+ "https://mergers.ru/news/Holding-Ultimatek-kupil-dolyu-v-IT-kompanii-Artajti-87817::gc3750bdb": {
+  "verdict": "same_fact",
+  "candidate_id": "gc3750bdb",
+  "day": "2026-11-20"
  }
 }
