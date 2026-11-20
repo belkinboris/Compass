@@ -371770,7 +371770,8 @@
   "g654a1ce5": null,
   "g67cacd7e": 290,
   "g2e669787": null,
-  "gfa56e747": null
+  "gfa56e747": null,
+  "gb82efd9f": 293
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -378349,7 +378350,26 @@
      "kind": "negotiations"
     }
    ]
+  },
+  "gb82efd9f": {
+   "sum": "Не раскрыта",
+   "seller": "«Медскан»",
+   "asset": "49% лабораторной сети KDL",
+   "status": "Закрыта",
+   "title": "«Медскан» продал стратегическому партнеру 49% лабораторной сети KDL",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-19T14:56:32+00:00"
+ "telegram_last_post_at": "2026-11-20T07:04:33+00:00"
 }
