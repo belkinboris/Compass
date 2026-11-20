@@ -1187,6 +1187,70 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>ЗПИФ «Томь» и ЗПИФ «Гало» купили 30% Wildberries &amp; Russ</b>\n\n<b>Покупатель:</b> ЗПИФ «Томь» и ЗПИФ «Гало» — фондом «Гало» управляет зарегистрированная в Ростове-на-Дону УК «Эмрис»\n<b>Продавцы:</b> ООО «Вайлдберриз» и ООО «Стинн»\n<b>Предмет:</b> ООО «РВБ» (Wildberries &amp; Russ)\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> E-commerce\n\n<b>Источник:</b> <a href=\"https://retailer.ru/dva-investfonda-poluchili-30-wildberries-i-russ/\">Retailer.ru</a>\nЕще 1 источник — в карточке сделки\n\n#потребрынок #ecommerce #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g73b6378c\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g60fd5670",
+   "date": "2026-11-20",
+   "title": "Фонд «Жизнь как чудо» приобрел в 54 больницы РФ аппараты для диагностики болезней печени",
+   "ind": "Здравоохранение",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/obschestvo/28339913"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Жизнь как чудо»",
+   "asset": "в 54 больницы РФ аппараты для диагностики болезней печени",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "В 2025 году фонд стал дебютным участником проекта Т-Банка по поддержке системной благотворительности и удвоению пожертвований клиентов",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/obschestvo/28339913"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Жизнь как чудо»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28339913"
+     }
+    ],
+    "target": [
+     {
+      "value": "в 54 больницы РФ аппараты для диагностики болезней печени",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28339913"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T11:54:20+00:00"
   }
  ]
 }
