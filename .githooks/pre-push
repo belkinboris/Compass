@@ -13,19 +13,34 @@
 [ "${COMPASS_SKIP_PREPUSH:-}" = "1" ] && exit 0
 ZERO=0000000000000000000000000000000000000000
 need=0
+code=0
 while read -r lref lsha rref rsha; do
   [ "$rref" = "refs/heads/main" ] || continue
   [ "$lsha" = "$ZERO" ] && continue
   base="$rsha"; [ "$base" = "$ZERO" ] && base="origin/main"
-  if git diff --name-only "$base" "$lsha" 2>/dev/null | grep -qE '^(static/data/(deals_promoted|pending)\.json|pipeline/ingest/fixes/|facts\.py|deal_multiples\.py)'; then
+  changed="$(git diff --name-only "$base" "$lsha" 2>/dev/null)"
+  if echo "$changed" | grep -qE '^(static/data/(deals_promoted|pending)\.json|pipeline/ingest/fixes/|facts\.py|deal_multiples\.py)'; then
     need=1
+  fi
+  # Код на Python (кроме разовых скриптов в архиве) — еще и все тесты притока:
+  # 20 ноября 2026 main был красным три часа из-за правки review.py, которую
+  # тесты данных не ловят (тест размера файла живет в test_ingest.py).
+  if echo "$changed" | grep -E '\.py$' | grep -qvE '^pipeline/archive/'; then
+    code=1; need=1
   fi
 done
 [ "$need" = "1" ] || exit 0
 root="$(git rev-parse --show-toplevel)"
-echo "pre-push: изменения базы — полная проверка (pipeline/prepush_check.py, 2–4 минуты)…" >&2
+echo "pre-push: изменения базы или кода — полная проверка (pipeline/prepush_check.py, 2–4 минуты)…" >&2
 if ! python3 "$root/pipeline/prepush_check.py" >&2; then
   echo "pre-push: push в main ОСТАНОВЛЕН — почините то, что выше, и повторите." >&2
   exit 1
+fi
+if [ "$code" = "1" ]; then
+  echo "pre-push: менялся код — все тесты притока (test_ingest.py, около 5 минут)…" >&2
+  if ! (cd "$root" && python3 -m pytest test_ingest.py -q -p no:cacheprovider 2>&1 | tail -15 >&2; exit "${PIPESTATUS[0]}"); then
+    echo "pre-push: push в main ОСТАНОВЛЕН — красные тесты притока выше." >&2
+    exit 1
+  fi
 fi
 exit 0
