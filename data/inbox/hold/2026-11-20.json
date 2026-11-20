@@ -624,34 +624,6 @@
    ]
   },
   {
-   "draft_id": "d30850208",
-   "title": "В ГД до конца года могут рассмотреть законопроект о продаже красивых номеров",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28339741"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d35883305",
    "title": "В Петербурге за 250 млн рублей продают склад с арендаторами у «Василеостровской»",
    "date": "2026-11-20",
@@ -680,17 +652,46 @@
    ]
   },
   {
-   "draft_id": "d08462251",
-   "title": "ФАС предписала «Гротексу» перечислить в бюджет 2 млрд рублей дохода от продажи дженерика",
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
    "date": "2026-11-20",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119447-fas-predpisala-groteksu-perechislit-v-byudzhet-2-mlrd-rubley-dokhoda-ot-prodazhi-dzhenerika/"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
     ]
    ],
-   "sum": "2 млрд ₽",
+   "sum": null,
    "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d64622807",
+   "title": "ЦБ рекомендовал не передавать брокерские счета в управление лицам без лицензии",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28340699"
+    ]
+   ],
+   "sum": null,
+   "type": "Передача в управление",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -701,77 +702,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Фармацевтика",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d12621347",
-   "title": "Мой портфель 20 ноября. Что купил вместо ХХ?",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1377458.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-20",
-     "title": "Сделка завершена",
-     "note": "Сегодня было очередное пополнение портфеля, плюс я потратил деньги от недавних продаж. Так выглядел портфель утром 20 ноября: Лидером портфеля вновь стал Сбербанк, прибыль которого переписывает рекорд за рекордом. Из-за падения нефти Татнефть опустилась на…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1377458.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "вместо ХХ?",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "вместо ХХ?",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d47523676",
-   "title": "Кубанский бизнес привлек 16,6 млрд рублей государственной помощи",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/11/20/kubanskij-biznes-privlek-166-mlrd-rublej-gosudarstvennoj-pomoshhi"
-    ]
-   ],
-   "sum": "16,6 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Кубанский бизнес",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Кубанский бизнес",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
