@@ -1439,6 +1439,8 @@ html.ai-sheet-open,html.ai-sheet-open body{overflow:hidden}
 .pe-fold .pe-k{color:var(--ink)}
 .pe-fold .pe-r small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45;margin-top:1px}
 .pe-fold .pe-r small a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+/* Почему метод не вошел в итог — отдельной строкой (Кирилл, Orion, 20 ноября 2026: «через „;“ очень сложно читать, особенно с компа»). */
+.pe-fold .pe-r .pe-why{display:block;margin-top:3px;color:var(--muted);font-style:italic}
 .pe-r{display:grid;grid-template-columns:minmax(0,120px) minmax(0,1fr);gap:4px 14px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13.5px;align-items:baseline}
 .pe-k{color:var(--muted)}
 .pe-v{min-width:0;line-height:1.45}
@@ -9369,6 +9371,8 @@ const countsAsPrice = d => factAdmitted(d, "purchase_sums");
 // проверена, а не выведена.
 const countsAsTopPurchase = d => factAdmitted(d, "top_purchases");
 const isSoftPriceDeal = d => !countsAsPrice(d);
+// «Все цены» для суммы сделок по годам (владелец, 20 ноября 2026) — в млрд ₽.
+const anySumB = d => factAdmitted(d, "all_sums") ? (priceFact(d).any_rub || 0) / 1e9 : 0;
 const FACT_BASIS_LABELS = {unknown:"нет данных", rule:"не сверено с источником", stale:"сделка изменилась после сверки",
   read:"найдено в источнике", verified:"сверено с источниками", disputed:"источники расходятся"};
 const factVerified = f => f && f.basis === "verified";
@@ -11107,8 +11111,10 @@ function renderAnalytics(){
     const y=(d.date||"").slice(0,4); if(!/^20\d\d$/.test(y)) return;
     sumByYear[y]=sumByYear[y]||{sumB:0,cnt:0,total:0};
     sumByYear[y].total++;
-    if(isSoftPriceDeal(d) || !countsAsPrice(d)) return;
-    const b=parseB(d); if(!b) return;
+    // Все цены (владелец, 20 ноября 2026): цены сторон, оценки, валюта по курсу ЦБ
+    // на дату сделки, инвестиции, IPO — facts.any_price_rub; крупнейшие покупки
+    // и отрасли по деньгам по-прежнему только на проверенных ценах сторон.
+    const b=anySumB(d); if(!b) return;
     sumByYear[y].sumB+=b; sumByYear[y].cnt++;
   });
   const sumByQuarter = {};
@@ -11118,8 +11124,7 @@ function renderAnalytics(){
       const ord=Math.ceil(+m/3), q=QLABELS[ord-1];
       sumByQuarter[q]=sumByQuarter[q]||{sumB:0,cnt:0,total:0,ord};
       sumByQuarter[q].total++;
-      if(isSoftPriceDeal(d) || !countsAsPrice(d)) return;
-      const b=parseB(d); if(!b) return;
+      const b=anySumB(d); if(!b) return;
       sumByQuarter[q].sumB+=b; sumByQuarter[q].cnt++;
     });
   }
@@ -11262,7 +11267,7 @@ function renderAnalytics(){
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}: считаем только цены в рублях, которые назвали сами стороны и которые совпадают с источником. Не учтены инвестиции, IPO, примерные оценки и суммы в иностранной валюте.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}: цены, которые назвали стороны, и оценки из источников (у диапазона — середина), инвестиции и IPO; суммы в долларах и евро пересчитаны по курсу ЦБ на дату сделки. Не учтены сделки, которые только обсуждаются или сорвались, и стартовые цены торгов.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
@@ -11723,7 +11728,7 @@ function priceEstTail(r){
   const src = m => m.url?`<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.where)}</a>`:esc(m.where);
   // Метод, не вошедший в итог (отчетность не той компании, меньше баланса), —
   // серым и с причиной (владелец, 6 ноября 2026, «Медскан»).
-  const row = m => `<div class="pe-r"><span class="pe-k">${esc(m.label)}</span> — <span class="num${m.unreliable?" pe-off":""}">${esc(m.result)}</span><small>${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}${m.unreliable?`; ${esc(m.unreliable)}`:""}</small></div>`;
+  const row = m => `<div class="pe-r"><span class="pe-k">${esc(m.label)}</span> — <span class="num${m.unreliable?" pe-off":""}">${esc(m.result)}</span><small>${esc(m.base)} × ${esc(m.multiple)} — ${src(m)}${m.unreliable?`<span class="pe-why">${esc(m.unreliable.charAt(0).toUpperCase()+m.unreliable.slice(1))}</span>`:""}</small></div>`;
   const fold = (title, span, body, open) => body ? `<details class="pe-fold"${open?" open":""}><summary><span>${title}${span?` · <b class="num">${esc(span)}</b>`:""}</span></summary><div class="pe-fb">${body}</div></details>` : "";
   const ms = r.methods||[];
   const own = ms.filter(m=>/^база Компаса/.test(m.where||"")), mkt = ms.filter(m=>!/^база Компаса/.test(m.where||""));

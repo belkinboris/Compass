@@ -5480,7 +5480,10 @@ def test_price_estimate_panel_shows_the_source_estimate_under_the_range(page, ba
             assert order.index("pe-range num") + 1 == order.index("pe-src"), order
             assert "Оценка источников: 31–36 млрд ₽" in page.inner_text(".pe-panel .pe-src")
             assert page.locator(".pe-panel .pe-r .pe-off").count() == 1
-            assert "в итог не входит" in page.inner_text(".pe-panel .pe-rows")
+            # С 20 ноября 2026 причина — отдельной строкой .pe-why с заглавной
+            # (Кирилл, Orion: «через „;“ очень сложно читать»).
+            assert "в итог не входит" in page.inner_text(".pe-panel .pe-rows").lower()
+            assert page.locator(".pe-panel .pe-why").evaluate("e=>getComputedStyle(e).display") == "block"
             over = page.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
             assert over == 0, "горизонтальное переполнение %spx на %spx" % (over, width)
         assert not errors, errors[:3]

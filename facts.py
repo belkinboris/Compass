@@ -347,7 +347,60 @@ def derive(deal: dict[str, Any], ctx: dict[str, Any] | None = None) -> dict[str,
         facts['identity'] = old['identity']  # перепроверяется проходом derive_all
     facts['admitted'] = {m: admitted(dict(deal, facts=facts), m)[0] for m in METRICS}
     facts['reasons'] = {m: admitted(dict(deal, facts=facts), m)[1] for m in METRICS}
+    any_rub, why = any_price_rub(deal, facts)
+    facts['price']['any_rub'] = any_rub
+    facts['admitted']['all_sums'] = any_rub is not None
+    facts['reasons']['all_sums'] = why
     return facts
+
+
+# ВСЕ ЦЕНЫ — ДЛЯ СУММЫ СДЕЛОК ПО ГОДАМ (владелец, 20 ноября 2026: «Считаем все
+# цены, конвертируем суммы в иностранной валюте на дату сделки, инвестиции
+# считаем, IPO для целей этой статистики тоже»). До этого график «Сумма
+# сделок по годам» складывал только рублевые цены сторон, прочитанные в
+# источнике, — 97 сделок из 1738. Отдельный показатель, а не ослабленный
+# `purchase_sums`: крупнейшие покупки и мультипликаторы по-прежнему берут
+# только проверенные цены сторон. Оценка — середина диапазона; валюта — по
+# курсу ЦБ на дату сделки (`fx.rate_on`). Не считаются: сорвавшиеся сделки,
+# незакрытые торги и их стартовая цена, обратный выкуп и реорганизация,
+# оценка компании без сделки («valuation»), «не цена» по чтению.
+ALL_SUM_TYPES = ('M&A', 'Инвестиция', 'IPO', 'Продажа с торгов')
+ALL_SUM_SKIP_MEANINGS = ('undisclosed', 'not_a_price', 'valuation', 'auction_start', 'unparsed')
+
+
+def any_price_rub(deal: dict[str, Any], facts: dict[str, Any]) -> tuple[float | None, str]:
+    """(рубли, 'ok') или (None, причина) — сумма сделки для графика «все цены»."""
+    price, nature = facts.get('price') or {}, facts.get('nature') or {}
+    if str(deal.get('type') or '').strip() not in ALL_SUM_TYPES:
+        return None, 'not_counted_type'
+    if deal.get('status') == 'Не состоялась':
+        return None, 'failed'
+    # «Может купить» — еще не сделка, а сумма такой карточки потом повторяется
+    # в карточке закрытия (ПГК: «обсуждается» 200–220 млрд и «закрыта» 200 млрд).
+    if deal.get('status') == 'Обсуждается':
+        return None, 'talks'
+    if nature.get('own_shares') or nature.get('reorganization'):
+        return None, 'not_purchase'
+    if (nature.get('auction') or deal.get('type') == 'Продажа с торгов') and deal.get('status') != 'Закрыта':
+        return None, 'auction_open'
+    if price.get('meaning') in ALL_SUM_SKIP_MEANINGS:
+        return None, 'price_not_disclosed'
+    if not dm.year_of(deal):
+        return None, 'no_year'
+    if price.get('value_rub'):
+        return float(price['value_rub']), 'ok'
+    text = deal.get('sum')
+    rng = dm.parse_rub_range(text)
+    if rng:
+        return (rng[0] + rng[1]) / 2, 'ok'
+    fp = dm.foreign_price(text)
+    if fp:
+        import fx
+        rate = fx.rate_on(fp['currency'], deal.get('date'))
+        if rate:
+            return round(fp['amount'] * rate['rate']), 'ok'
+        return None, 'no_fx_rate'
+    return None, 'price_not_rub'
 
 
 # ---------- допуск по показателям ----------
