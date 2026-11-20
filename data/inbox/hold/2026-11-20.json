@@ -1,0 +1,1091 @@
+{
+ "made": "2026-11-20",
+ "drafts": [
+  {
+   "draft_id": "d99277860",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d42864136",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7841"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d75975568",
+   "title": "Российский proptech-стартап RSpace привлек 15 млн рублей от бизнес-ангелов из числа действующих инвесторов в обмен на долю в компании. Это второй раунд проекта. Имена инвесторов не раскрываются. Средс",
+   "date": "2026-11-12",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7842"
+    ]
+   ],
+   "sum": "15 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Российский proptech-стартап RSpace",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Российский proptech-стартап RSpace",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: 15, рублей) — проверьте, не дубль ли",
+    "та же новость, что «Российский proptech-стартап RSpace привлек 15 млн рублей от » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88804499",
+   "title": "Дочь бывшего пермского губернатора избавилась от активов, которые больше не приносят доход",
+   "date": "2026-11-16",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053144517"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28160149",
+   "title": "У FES retail сменился мажоритарный владелец",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d36596985",
+   "title": "«Перестрелки, погони, драки»: обвал миркоинов, выход GTA и IPO Anthropic",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/19/11/2026/6aff27dd80342d7b8adeb123"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d10401844",
+   "title": "Право требования долга экс-главы «Трансаэро» на 174 млрд рублей никто не купил",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261119/zajavka-875398548.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:1prime.ru",
+      "https://1prime.ru/20261119/zajavka-875398548.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51747038",
+   "title": "Anthropic’s IPO could deliver $156 billion to charity",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d78483493",
+   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d95461895",
+   "title": "AstraZeneca вновь не смогла добиться запрета продажи дженерика Форсиги от «Герофарма»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/11/20/astrazeneca-vnov-ne-smogla-dobitsya-zapreta-prodazhi-dzhenerika-forsigi-ot-gerofarma/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89954199",
+   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d20375767",
+   "title": "На заповедном челябинском озере продают замок за 90 миллионов. Фото",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145680"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29887666",
+   "title": "В Курганской области распродают АЗС за десятки миллионов рублей",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145587"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28881783",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/auto/2026/11/20/76777260/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:74.ru",
+      "https://74.ru/text/auto/2026/11/20/76777260/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d47550965",
+   "title": "Структура, связанная с семьей Пригожина, приобрела сеть магазинов готовой еды Uppetit 🟢 Статус сделки: закрыта 25 июня 2026 Об объекте сделки 100% долей ООО «Аппетит» основной операционной компании се",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7589"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Структура, связанная с семьей Пригожина, приобрела сеть магазинов готовой еды Uppetit 🟢 Статус сделки: закрыта 25 июня 2026 Об объекте сделки 100% долей ООО «Аппетит» основной операционной компании сети магазинов готовой еды Uppetit в Санкт-Петербурге. Сеть…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7589"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "сеть магазинов готовой еды Uppetit 🟢 Статус сделки: закрыта 25 июня 2026 Об объекте сделки 100% доле",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "сеть магазинов готовой еды Uppetit 🟢 Статус сделки: закрыта 25 июня 2026 Об объекте сделки 100% доле",
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d79239972",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/auto/2026/11/20/76777241/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/auto/2026/11/20/76777241/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d71669017",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/11/20/76777247/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/auto/2026/11/20/76777247/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d57113801",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/auto/2026/11/20/76777250/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:59.ru",
+      "https://59.ru/text/auto/2026/11/20/76777250/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d13440184",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/auto/2026/11/20/76777257/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:72.ru",
+      "https://72.ru/text/auto/2026/11/20/76777257/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d55214409",
+   "title": "В центре Тюмени продают учебный корпус ТИУ",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/realty/2026/11/20/76776723/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52027384",
+   "title": "Дискаунтер или «нищемаркет»? Что можно купить в магазине «Рубль» в Краснодаре — обзор",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/food/2026/11/20/76776322/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37969607",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/auto/2026/11/20/76777258/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:ufa1.ru",
+      "https://ufa1.ru/text/auto/2026/11/20/76777258/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d05357032",
+   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
+   "date": "2026-11-13",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/13/76762164/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23901940",
+   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28330111"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41882092",
+   "title": "Продажи на вторичном рынке Санкт-Петербурга и Ленобласти растут",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/18/76774338/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91144434",
+   "title": "Ставка за куртку Майкла Джексона на аукционе достигла 8,5 миллиона долларов",
+   "date": "2026-11-18",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261118/kurtka-875330072.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d16426733",
+   "title": "Не только «Подчеркнутые углы». Рекордные продажи Кандинского на аукционах",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/photoreport/19/11/2026/6afeb3806e1d369254e8c3fa"
+    ]
+   ],
+   "sum": "$85,8 млн",
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d41416083",
+   "title": "Christie's подтвердил отзыв картины Фриды Кало с аукциона после запроса властей Мексики",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/culture/1130306"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19283388",
+   "title": "В ГД предложили не повышать стоимость покупки пенсионных баллов в 2027 году",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28338067"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02986923",
+   "title": "Роспотребнадзор пресек более 62 миллиона попыток продажи БАД с нарушениями",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261120/rossija-2132851623.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81459118",
+   "title": "«Уверяли, что всё будет хорошо». Молодой маме продали старый Hyundai по тройной цене вместо нового «китайца»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/auto/2026/11/20/76777253/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Рассказываем о печальном походе в автосалон",
+     "source": [
+      "web:63.ru",
+      "https://63.ru/text/auto/2026/11/20/76777253/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старый Hyundai по тройной цене вместо нового «китайца»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Уверяли, что всё будет хорошо». Молодой маме продали старый» — второе издание, в группу не шлем"
+   ]
+  }
+ ]
+}
