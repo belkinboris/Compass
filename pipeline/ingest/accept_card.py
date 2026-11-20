@@ -546,6 +546,31 @@ def fin_prose(rows, legal_name=None, employees=None):
     return text
 
 
+
+REFUSAL_REASON = re.compile(r'не\s+стал[аио]?\b|не\s+заводил[аио]?|ради\s+одной\s+сделки|нет\s+смысла|не\s+нужен', re.I)
+
+
+def existing_profiles_named(text, comps, skip=()):
+    """Профили базы, чье имя целиком стоит в тексте стороны или заголовке (имя от
+    трех букв, без кавычек и организационной формы; латиница — с учетом регистра,
+    чтобы «KDL» не ловился внутри слов). Нужны, чтобы «профиля нет» не писали,
+    когда он есть («Медскан Лаб», KDL — 20 ноября 2026)."""
+    out = []
+    t = str(text or '')
+    for cid, c in comps.items():
+        if cid in skip or c.get('lot'):
+            continue
+        name = re.sub(r'^(?:ООО|АО|ПАО|ЗАО|ОАО|ГК|АНО)\s+', '', str(c.get('name') or '')).strip('«»" ')
+        if len(re.sub(r'\W', '', name)) < 3:
+            continue
+        # Имя-слово с заглавной («Управление», «Апрель») ловит обычную речь —
+        # берем только имена-бренды: латиница, цифры или несколько слов.
+        if not (re.search(r'[A-Za-z0-9]', name) or ' ' in name):
+            continue
+        if re.search(r'(?<![\w])' + re.escape(name) + r'(?![\w])', t):
+            out.append(cid)
+    return out
+
 def target_financials(card, comps, inn, legal_name, fns):
     """Пишет `eco.target_fin` из ГИР БО, если там еще нет ни одного числа.
     Описание, которое стояло вместо показателей, не выбрасывается — уезжает в
@@ -2233,6 +2258,22 @@ def check_answer(ans, card, base):
                 # как минимум еще в 5 источниках проверить». Названное юрлицо
                 # (купленное или покупатель) без профиля принимается, только если
                 # причина перечисляет не меньше пяти мест поиска, включая реестр.
+                # ОТКАЗ — НЕ ПРИЧИНА, И ЗАВЕДЕННЫЙ ПРОФИЛЬ — НЕ «НЕТ ПРОФИЛЯ» (владелец,
+                # 20 ноября 2026, «Медскан»/KDL gb82efd9f: «где профиль KDL и отчетность?
+                # Это какой раз я прошу это делать при создании карты?»). Приемка записала
+                # «отдельного профиля в базе нет; заводить ради одной сделки не стали», а в
+                # базе были и «Медскан Лаб» (g6288a1cc, ИНН в реестре, отчетность ФНС), и KDL.
+                if REFUSAL_REASON.search(str(reason)):
+                    bad.append('no_profile: %s — «%s»: решение не заводить профиль — не причина. '
+                               'Причина — только где искали и не нашли (docs/company_data.md)'
+                               % (role, REFUSAL_REASON.search(str(reason)).group(0)))
+                if role in ('target', 'buyer'):
+                    same = existing_profiles_named(text, comps,
+                                                   skip={card.get(i) for _r, (_t, i) in ROLES.items()})
+                    if same:
+                        bad.append('no_profile: %s — в базе уже есть %s: привяжите профиль '
+                                   '(profiles: [{"role": "%s", "id": ...}]), а не пишите, что его нет'
+                                   % (role, ', '.join('%s «%s»' % (cid, comps[cid]['name']) for cid in same[:3]), role))
                 entities = LEGAL_ENTITY_NAMED.findall(text)
                 if role in ('target', 'buyer') and len(entities) >= 2 and not named:
                     places = {m.lower()[:6] for m in INN_SEARCH_PLACES.findall(

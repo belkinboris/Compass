@@ -12657,3 +12657,17 @@ def test_post_keyboard_names_the_suggested_channel_and_every_choice():
     assert "mod:g1:post_hold" not in str(send_drafts.post_keyboard(it, hold_button=False))
     [norm] = approve.normalize_channels([{"deal_id": "g1", "verdict": "post_both"}])
     assert norm["verdict"] == "post_yes" and norm["channels"] == ["main", "realty"]
+
+
+def test_acceptance_rejects_refusal_and_existing_profile_as_no_profile():
+    """«Медскан»/KDL (владелец, 20 ноября 2026: «где профиль KDL и отчетность?»):
+    приемка записала «отдельного профиля нет; заводить ради одной сделки не
+    стали», а профиль KDL и «Медскан Лаб» в базе были. Отказ — не причина, а
+    профиль с именем из текста стороны нужно привязать."""
+    import accept_card
+    assert accept_card.REFUSAL_REASON.search('заводить профиль ради одной сделки не стали')
+    assert not accept_card.REFUSAL_REASON.search('искали в ЕГРЮЛ, Saby и СПАРК — юрлица нет')
+    comps = {'k1': {'name': 'KDL'}, 'k2': {'name': 'Управление'}, 'k3': {'name': 'ГК «Медскан»'}}
+    assert accept_card.existing_profiles_named('49% лабораторной сети KDL', comps) == ['k1']
+    assert accept_card.existing_profiles_named('передано во временное Управление', comps) == []
+    assert accept_card.existing_profiles_named('лаборатории KDLX', comps) == []
