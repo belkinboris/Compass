@@ -592,6 +592,75 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>Торговый центр «Тура» в Тюмени выставлен на продажу за 320 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> торговый центр «Тура» на улице Ямской в Тюмени\n<b>Сумма:</b> 320 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053145695\">URA.RU</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g70cf2d0f\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g07d25027",
+   "date": "2026-11-19",
+   "title": "Картину Ван Гога продали на Sotheby’s за рекордные $190 млн",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9114000"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$190 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$190 млн",
+   "seller": "Картину Ван Гога",
+   "asset": "на Sotheby’s за рекордные $190 млн",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "В Нью-Йорке прошли торги Sotheby’s, посвященные французским импрессионистам и постимпрессионистам. Представлено было всего 12 лотов, но зато отборных: в сумме эта дюжина картин собрала $412 млн.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9114000"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на Sotheby’s за рекордные $190 млн",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9114000"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Ван Гога",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9114000"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T05:53:01+00:00"
   }
  ]
 }
