@@ -46,8 +46,16 @@ def merge_list(base_items, ours_items, theirs_items, key):
             conflicts.append(k)
             merged.append(o)   # по умолчанию ours, конфликт — в отчет
     for it in theirs_items:
-        if it[key] not in ours:
-            merged.append(it)
+        k = it[key]
+        if k in ours:
+            continue
+        # 20 ноября 2026: id из base, которого ours не несет и theirs не
+        # менял, — это НАМЕРЕННОЕ удаление (drop_pending.py), не пропуск.
+        # Слепое дописывание сюда возвращало выкинутые карточки обратно
+        # (gb82efd9f, g502a9986 и другие — известная ошибка, known_issues/intake.md).
+        if k in base and base[k] == it:
+            continue
+        merged.append(it)
     return merged, conflicts
 
 
