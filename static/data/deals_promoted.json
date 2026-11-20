@@ -371771,7 +371771,8 @@
   "g67cacd7e": 290,
   "g2e669787": null,
   "gfa56e747": null,
-  "gb82efd9f": 293
+  "gb82efd9f": 293,
+  "g70cf2d0f": null
  },
  "telegram_milestones": {
   "g17fc21d6-cancelled": {
@@ -372368,7 +372369,8 @@
   "g0afaf6a3": 78,
   "ge1c5f194": 79,
   "g6fd6e834": 80,
-  "ge6b04680": 81
+  "ge6b04680": 81,
+  "g70cf2d0f": 82
  },
  "telegram_post_state": {
   "g53bd1536": {
@@ -378369,7 +378371,25 @@
      "kind": "closed"
     }
    ]
+  },
+  "g70cf2d0f": {
+   "sum": "320 млн ₽",
+   "asset": "торговый центр «Тура» на улице Ямской в Тюмени",
+   "status": "Обсуждается",
+   "title": "Торговый центр «Тура» в Тюмени выставлен на продажу за 320 млн рублей",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "talks"
+    }
+   ]
   }
  },
- "telegram_last_post_at": "2026-11-20T07:04:33+00:00"
+ "telegram_last_post_at": "2026-11-20T07:24:34+00:00"
 }
