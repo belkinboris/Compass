@@ -681,34 +681,6 @@
    ]
   },
   {
-   "draft_id": "d53199018",
-   "title": "«Магнит» и ITECO могут купить у «Яндекса» 2000 роботраков",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/20/1413897-u-yandeksa-2000"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d80259424",
    "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
    "date": "2026-11-20",
@@ -739,55 +711,16 @@
    ]
   },
   {
-   "draft_id": "d47775516",
-   "title": "Два закрытых паевых фонда получили 30% в головной компании Wildberries",
+   "draft_id": "d29178450",
+   "title": "Верховный суд поддержал жителя Ставрополья в споре о выкупе земли без торгов",
    "date": "2026-11-20",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Dva-zakrytyh-paevyh-fonda-poluchili-30-v-golovnoj-kompanii-Wildberries-87827"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9126640"
     ]
    ],
    "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-20",
-     "title": "Переговоры",
-     "note": "ЗПИФы «Томь» и «Гало» получили 17,5% и 12,5% долей соответственно. Изменения произошли 19 ноября. Изменения в структуре ООО «РВБ» произошли 19 ноября. До этого ООО «Вайлдберриз» принадлежало 65% компании, а ООО «Стинн» — 35%. Сейчас доля «Вайлдберриз»…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Dva-zakrytyh-paevyh-fonda-poluchili-30-v-golovnoj-kompanii-Wildberries-87827"
-     ]
-    }
-   ],
-   "buyer_name": "Два закрытых паевых фонда",
-   "asset": "головной компании Wildberries",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Два закрытых паевых фонда",
-    "asset": "головной компании Wildberries",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d59015500",
-   "title": "Кольцо с бриллиантом пассажирки «Титаника» выставят на аукцион в Британии",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2205645/2026-11-20/koltco-s-brilliantom-passazhirki-titanika-vystaviat-na-auktcion-v-britanii"
-    ]
-   ],
-   "sum": "$105 тыс",
    "type": "Продажа с торгов",
    "status": null,
    "events": [],
@@ -806,27 +739,86 @@
    ]
   },
   {
-   "draft_id": "d67822587",
-   "title": "Туристов предупредили об опасной ошибке при покупке билетов",
+   "draft_id": "d28629892",
+   "title": "Где в России не будут продавать вейпы с 2027 года. Карта",
    "date": "2026-11-20",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/news/2026/11/20/turistov-predupredili-ob-opasnoj-oshibke-pri-pokupke-biletov"
+     "web:rbc.ru",
+     "https://www.rbc.ru/society/20/11/2026/6b004be275ba4e56baeee662"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Обсуждается",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53545276",
+   "title": "Космический рекорд побит: как прошло первичное публичное размещение акций Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28340723"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d04270535",
+   "title": "Valve открыла продажи игровой консоли Steam Machine на 512 Гбайт — заказать модель на 2 Тбайт больше нельзя",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/valve-otkryla-prodazhi-igrovoj-konsoli-steam-machine-na-512-gbajt-zakazat-model-na-2-tbajt-bolshe-nelzya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
    "events": [
     {
-     "kind": "negotiations",
+     "kind": "closed",
      "date": "2026-11-20",
-     "title": "Переговоры",
-     "note": "Покупка авиабилетов в последний момент может обойтись россиянам значительно дороже, чем раннее бронирование. Надеяться на резкое снижение цен перед вылетом больше не стоит, особенно при планировании отдыха на новогодние праздники.",
+     "title": "Сделка завершена",
+     "note": "Valve открыла свободную продажу Steam Machine с 512 Гбайт памяти: оформить заказ теперь могут все желающие, пока устройства есть в наличии. Компания также завершила обработку бронирований модели с 2 Тбайт и закрыла запись новых покупателей в список ожидания…",
      "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/news/2026/11/20/turistov-predupredili-ob-opasnoj-oshibke-pri-pokupke-biletov"
+      "web:rb.ru",
+      "https://rb.ru/news/valve-otkryla-prodazhi-igrovoj-konsoli-steam-machine-na-512-gbajt-zakazat-model-na-2-tbajt-bolshe-nelzya/"
      ]
     }
    ],
@@ -838,21 +830,107 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Гостиницы и туризм",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d59091537",
-   "title": "А ты возьми и купи верблюда. В Ростовской области продают горбатую парочку",
+   "draft_id": "d58423037",
+   "title": "Anthropic по итогам IPO привлекла $93,5 млрд",
    "date": "2026-11-20",
    "src": [
     [
-     "web:161.ru",
-     "https://161.ru/text/animals/2026/11/20/76780703/"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/317394"
+    ]
+   ],
+   "sum": "$93,5 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Anthropic по итогам IPO",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Anthropic по итогам IPO",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d83560813",
+   "title": "Российские аграрии начали продавать яблоки ниже себестоимости",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/rossijskie-agrarii-nachali-prodavat-jabloki-nizhe-sebestoimosti/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28582849",
+   "title": "Россиян предостерегли от покупки билетов ближе к вылету",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/20/rossiyan-predosteregli-ot-pokupki-biletov-blizhe-k-vyletu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53178573",
+   "title": "«Этим всё сказано»: четыре автографа автора гимна России продают в Новосибирске",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/entertainment/2026/11/20/76780840/"
     ]
    ],
    "sum": null,
