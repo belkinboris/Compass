@@ -221,111 +221,6 @@
    "post_preview": "<b>Москва выставила на торги четырехуровневое помещение у метро «Юго-Западная»</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> Москва\n<b>Предмет:</b> нежилое помещение на проспекте Вернадского, 80а, корпус 1\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://abnews.ru/center/news/msk/2026/11/19/kommercheskoe-pomeshhenie-vystavili-na-torgi-na-prospekte-vernadskogo\">Abnews.ru</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g8f7a7dfb\">карточке сделки</a>\n"
   },
   {
-   "id": "g07d25027",
-   "date": "2026-11-19",
-   "title": "Картину Ван Гога продали на Sotheby’s за рекордные $190 млн",
-   "ind": "Не определена",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "src": [
-    [
-     "Коммерсантъ",
-     "https://www.kommersant.ru/doc/9114000"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "$190 млн",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$190 млн",
-   "seller": "Картину Ван Гога",
-   "asset": "на Sotheby’s за рекордные $190 млн",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-19",
-     "title": "Сделка завершена",
-     "note": "В Нью-Йорке прошли торги Sotheby’s, посвященные французским импрессионистам и постимпрессионистам. Представлено было всего 12 лотов, но зато отборных: в сумме эта дюжина картин собрала $412 млн.",
-     "source": [
-      "Коммерсантъ",
-      "https://www.kommersant.ru/doc/9114000"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "Продажа с торгов"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "на Sotheby’s за рекордные $190 млн",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9114000"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Картину Ван Гога",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://www.kommersant.ru/doc/9114000"
-     }
-    ]
-   },
-   "pending_since": "2026-11-20T05:53:01+00:00"
-  },
-  {
-   "id": "gf58625d6",
-   "date": "2026-11-18",
-   "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме",
-   "ind": "Не определена",
-   "type": "Инвестиция",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "ТАСС",
-     "https://tass.ru/ekonomika/28330111"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "pending_since": "2026-11-20T05:54:29+00:00",
-   "from_raw": {
-    "draft_id": "d23901940",
-    "title": "«Новатэк» заинтересован в инвестициях в проекты во Вьетнаме"
-   }
-  },
-  {
    "id": "gfa56e747",
    "date": "2026-11-16",
    "title": "ГК «КВС» купила территорию фабрики «Невская мануфактура»",
@@ -336,6 +231,10 @@
     [
      "Деловой Петербург",
      "https://www.dp.ru/a/2026/11/19/gk-kvs-zakrila-sdelku-po"
+    ],
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261120/kvs-2132872983.html"
     ]
    ],
    "from_ingest": true,
