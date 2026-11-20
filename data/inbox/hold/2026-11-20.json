@@ -622,231 +622,6 @@
    ]
   },
   {
-   "draft_id": "d66158074",
-   "title": "Министерство торговли США разрешило продать Китаю 879 тыс. ИИ-чипов Nvidia и AMD",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9114395"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d87544414",
-   "title": "Капитализация Дом.РФ выросла на 20% через год после IPO",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/20/1413622-kapitalizatsiya-domrf"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Профессиональные услуги",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81264654",
-   "title": "Венгерский OTP Bank увеличит долю в узбекском Ipoteka Bank до 90%",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1130384"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d69687700",
-   "title": "Bending Spoons купит сервис для рассылок Mailchimp за $3,68 млрд — примерно втрое дешевле, чем он стоил в 2021 году",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vc.ru",
-     "https://vc.ru/services/3267806-bending-spoons-pokupka-mailchimp?from=rss"
-    ]
-   ],
-   "sum": "$3,68 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Bending Spoons",
-   "asset": "сервис для рассылок Mailchimp",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Bending Spoons",
-    "asset": "сервис для рассылок Mailchimp",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d33543384",
-   "title": "Эксперт Чеснова: Кандинский на мировых аукционах стоит на одном уровне с Пикассо",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/kultura/28338895"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Здравоохранение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d47239397",
-   "title": "ЦБ предлагает продавать ОСАГО за 1 рубль",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2205327/2026-11-20/tcb-predlagaet-prodavat-osago-za-1-rubl"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d10845038",
-   "title": "Два закрытых фонда получили доли в головной компании маркетплейса Wildberries",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/317301"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Два закрытых фонда",
-   "asset": "головной компании маркетплейса Wildberries",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Два закрытых фонда",
-    "asset": "головной компании маркетплейса Wildberries",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d73511106",
-   "title": "В челябинской Магнитке продается ГОК за 1,2 миллиарда. Скрин",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053145887"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ГМК и добыча",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d73550793",
    "title": "Основатели издателя игр PlayDucky Алишер Якубов и Иван Федянин выкупили долю неназванного инвестора, который в 2021 году вложил в компанию $1 млн, и получили контроль над проектом. Сделка была закрыта",
    "date": "2026-11-20",
@@ -883,6 +658,245 @@
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63915461",
+   "title": "«Группа Астра» довела долю в подконтрольном разработчике ИИ до 80%",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114456"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d26439713",
+   "title": "В США стало меньше желающих делать покупки со Дня благодарения до киберпонедельника",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1130392"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "В 2026 году число американцев, которые планируют совершить покупки в пятидневный период со Дня благодарения до киберпонедельника в традиционных магазинах и онлайн, составит около 182,7 млн человек, показал опрос Национальной федерации ритейлеров (NRF).\"Хотя…",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1130392"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d44104611",
+   "title": "ДОМ.РФ выставит на торги бывшую городскую думу и дом Ашастина в Костроме",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28339293"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Профессиональные услуги",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1a2f9d60 (общие редкие слова: выстав, костро, торги) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d01252485",
+   "title": "«Узкое место»: аренда выгоднее покупки в четырех мегаполисах России, пишет РБК",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/nedvizhimost-875412646.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23834052",
+   "title": "В каких городах лучше забыть про покупку жилья в ипотеку",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145921"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d55951598",
+   "title": "«Золотые» игрушки: в Тюмени продают шары на елку за 33 тысячи",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053145893"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08728893",
+   "title": "Ярославскую мельницу Галкина выставят на торги в шестой раз",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/yaroslavl/2026/11/20/yaroslavskuyu-melniczu-galkina-vystavyat-na-torgi-v-shestoj-raz"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64878868",
+   "title": "В Тюмени в ноябре уже продают новогодние игрушки. Почему это плохо для вашей психики — разбираемся",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/gorod/2026/11/20/76771929/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
