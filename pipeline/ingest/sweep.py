@@ -173,7 +173,19 @@ def remind_undecided():
         print('Напоминание не сработало: %s' % e)
 
 
+def _enable_prepush_hook():
+    """Включить git-хук .githooks/pre-push в этой копии (20 ноября 2026): рутины в давно
+    запущенных сессиях не проходят session-start.sh, а этот шаг делают перед каждым push."""
+    import subprocess
+    try:
+        subprocess.run(['git', 'config', 'core.hooksPath', '.githooks'], cwd=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                       capture_output=True, timeout=10)
+    except Exception:  # noqa: BLE001 — страховка не должна ронять шаг
+        pass
+
+
 def main(argv):
+    _enable_prepush_hook()
     write, send = '--write' in argv, '--send' in argv
     g = git('pull', '--rebase', '--autostash', 'origin', 'main')
     if g.returncode and rebasing() and settle_rebase():
