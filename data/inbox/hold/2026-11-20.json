@@ -744,32 +744,93 @@
    ]
   },
   {
-   "draft_id": "d22315005",
-   "title": "Два инвестфонда стали совладельцами RWB",
+   "draft_id": "d69351357",
+   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
    "date": "2026-11-20",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28341077"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9126673"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d26921563",
+   "title": "Закон о запрете продажи вейпов подписал губернатор Петербурга",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/20/76780936/"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": "Два инвестфонда",
-   "asset": "RWB",
+   "buyer_name": null,
+   "asset": null,
    "seller": null,
    "parsed_parties": {
-    "buyer": "Два инвестфонда",
-    "asset": "RWB",
+    "buyer": null,
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку g43b0394d (по всей базе: та же сторона и редкое слово: rwb) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38808793",
+   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/aktsii-875433275.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
   }
  ]
