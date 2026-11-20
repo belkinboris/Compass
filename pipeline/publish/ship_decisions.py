@@ -107,7 +107,11 @@ def push_with_retry(tries=4):
         if r.returncode:
             run(['git', 'rebase', '--abort'], must=False)
             return 'конфликт при rebase: %s' % (r.stdout + r.stderr)[-600:]
-        if run(['git', 'push', 'origin', 'HEAD:main'], must=False).returncode == 0:
+        # Тесты данных этот прогон уже прогнал сам — git-хук .githooks/pre-push
+        # второй раз их не гоняет (COMPASS_SKIP_PREPUSH=1).
+        r = subprocess.run(['git', 'push', 'origin', 'HEAD:main'], cwd=WORK, capture_output=True, text=True,
+                           env=dict(os.environ, COMPASS_SKIP_PREPUSH='1'))
+        if r.returncode == 0:
             return None
         time.sleep(2 ** (i + 1))
     return 'push не прошел после %d попыток' % tries
