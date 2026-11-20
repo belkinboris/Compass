@@ -624,34 +624,6 @@
    ]
   },
   {
-   "draft_id": "d30850208",
-   "title": "В ГД до конца года могут рассмотреть законопроект о продаже красивых номеров",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/obschestvo/28339741"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d35883305",
    "title": "В Петербурге за 250 млн рублей продают склад с арендаторами у «Василеостровской»",
    "date": "2026-11-20",
@@ -680,16 +652,16 @@
    ]
   },
   {
-   "draft_id": "d08462251",
-   "title": "ФАС предписала «Гротексу» перечислить в бюджет 2 млрд рублей дохода от продажи дженерика",
+   "draft_id": "d27523408",
+   "title": "Продажи нового вида страхования жизни за три месяца составили 18,9 млрд рублей",
    "date": "2026-11-20",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119447-fas-predpisala-groteksu-perechislit-v-byudzhet-2-mlrd-rubley-dokhoda-ot-prodazhi-dzhenerika/"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/finance/news/2026/11/20/1413805-prodazhi-strahovaniya-zhizni"
     ]
    ],
-   "sum": "2 млрд ₽",
+   "sum": "18,9 млрд ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -701,77 +673,125 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Фармацевтика",
+   "ind": "Страхование",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d12621347",
-   "title": "Мой портфель 20 ноября. Что купил вместо ХХ?",
+   "draft_id": "d75628793",
+   "title": "Какие покупки с корпоративной карты могут привести к доначислению налогов",
    "date": "2026-11-20",
    "src": [
     [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1377458.php"
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/20/11/2026/6b004262edf57a0343f265da"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-20",
-     "title": "Сделка завершена",
-     "note": "Сегодня было очередное пополнение портфеля, плюс я потратил деньги от недавних продаж. Так выглядел портфель утром 20 ноября: Лидером портфеля вновь стал Сбербанк, прибыль которого переписывает рекорд за рекордом. Из-за падения нефти Татнефть опустилась на…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1377458.php"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "вместо ХХ?",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "вместо ХХ?",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d47523676",
-   "title": "Кубанский бизнес привлек 16,6 млрд рублей государственной помощи",
+   "draft_id": "d56967658",
+   "title": "Продажи современной русской прозы на 47% превысили спрос на зарубежную",
    "date": "2026-11-20",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/11/20/kubanskij-biznes-privlek-166-mlrd-rublej-gosudarstvennoj-pomoshhi"
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/knigi-875422185.html"
     ]
    ],
-   "sum": "16,6 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Кубанский бизнес",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Кубанский бизнес",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d02675170",
+   "title": "Тихий отток: что забрали у нас компьютерные игры",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1377488.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d89224520",
+   "title": "В России начали продавать новогодние игрушки в виде БПЛА",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146008"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
