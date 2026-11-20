@@ -652,17 +652,46 @@
    ]
   },
   {
-   "draft_id": "d84985950",
-   "title": "США провели первый аукцион участков океанского дна",
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
    "date": "2026-11-20",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9126450"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
     ]
    ],
    "sum": null,
-   "type": "Продажа с торгов",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d64622807",
+   "title": "ЦБ рекомендовал не передавать брокерские счета в управление лицам без лицензии",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28340699"
+    ]
+   ],
+   "sum": null,
+   "type": "Передача в управление",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -676,149 +705,7 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d85409806",
-   "title": "Лукашенко похвалил россиян за покупку домов в белорусских деревнях",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/20/1413825-pohvalil-rossiyan"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20720530",
-   "title": "Продажа билетов на автобусы через Крымский мост возобновляется в Севастополе",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1130476"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17242444",
-   "title": "На «Богатырской» перешли к разработке грунта на уровне будущих платформ",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/20/na-bogatirskoj-pereshli-k"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d00552338",
-   "title": "Два закрытых фонда получили доли в материнской компании WB",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/20/dva-zakritih-fonda-poluchili"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Два закрытых фонда",
-   "asset": "материнской компании WB",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Два закрытых фонда",
-    "asset": "материнской компании WB",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d69816119",
-   "title": "VK требует с Apple более 31 миллиона евро за покупки в App Store",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261120/apple-2132990726.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]

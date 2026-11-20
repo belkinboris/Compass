@@ -73,6 +73,90 @@
     "needs_review": true
    },
    "queued": "2026-11-20"
+  },
+  {
+   "key": "https://mergers.ru/news/Medskan-prodal-49-laboratornoj-seti-KDL-87825::gb82efd9f",
+   "candidate_id": "gb82efd9f",
+   "reason": "по всей базе: совпали две стороны (asset, seller)",
+   "draft": {
+    "draft_id": "d17175626",
+    "title": "«Медскан» продал 49% лабораторной сети KDL",
+    "date": "2026-11-20",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Medskan-prodal-49-laboratornoj-seti-KDL-87825"
+     ]
+    ],
+    "sum": null,
+    "type": "Инвестиция",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-20",
+      "title": "Сделка завершена",
+      "note": "Группа компаний «Медскан», входящая в контур управления «Росатома», продала в рамках сделки «стратегическому партнеру» 49% лабораторного бизнеса «KDL Медскан». После сделки «Медскан» сохранит контрольную долю в размере 51%. Полученные от сделки средства…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Medskan-prodal-49-laboratornoj-seti-KDL-87825"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "49% лабораторной сети KDL",
+    "seller": "«Медскан»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "49% лабораторной сети KDL",
+     "seller": "«Медскан»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-20"
+  },
+  {
+   "key": "https://mergers.ru/news/Holding-Ultimatek-kupil-dolyu-v-IT-kompanii-Artajti-87817::gc3750bdb",
+   "candidate_id": "gc3750bdb",
+   "reason": "по всей базе: совпали две стороны (asset, buyer)",
+   "draft": {
+    "draft_id": "d84567868",
+    "title": "Холдинг «Ультиматек» купил долю в IT-компании «Артайти»",
+    "date": "2026-11-20",
+    "src": [
+     [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Holding-Ultimatek-kupil-dolyu-v-IT-kompanii-Artajti-87817"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-20",
+      "title": "Сделка завершена",
+      "note": "Основатель и генеральный директор «Ультиматек» Павел Растопшин рассказал, что компания приобрела 50%-ные доли в ООО «Артайти групп» и «Артайти бизнес решения». На каких условиях и по какой цене, он не уточнил. Сейчас группа «Артайти» занимается внедрением…",
+      "source": [
+       "web:mergers.ru",
+       "https://mergers.ru/news/Holding-Ultimatek-kupil-dolyu-v-IT-kompanii-Artajti-87817"
+      ]
+     }
+    ],
+    "buyer_name": "«Ультиматек»",
+    "asset": "IT-компании «Артайти»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Ультиматек»",
+     "asset": "IT-компании «Артайти»",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-20"
   }
  ]
 }

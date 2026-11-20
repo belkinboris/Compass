@@ -1251,6 +1251,70 @@
     ]
    },
    "pending_since": "2026-11-20T11:54:20+00:00"
+  },
+  {
+   "id": "g3f3023cb",
+   "date": "2026-11-20",
+   "title": "Семья Евгения Пригожина купила крупного игрока рынка готовой еды",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Semya-Evgeniya-Prigozhina-kupila-krupnogo-igroka-rynka-gotovoj-edy-87823"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Семья Евгения Пригожина",
+   "asset": "крупный игрок рынка готовой еды",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "Основатель и бессменный идеолог сети магазинов готовой еды Uppetit Антон Дулов полностью вышел из бизнеса. 100% долей основного операционного юрлица сети, ООО \"Аппетит\", перешли к непубличному АО \"Деловые связи\". Сделка закрылась летом 2026 года. По данным…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Semya-Evgeniya-Prigozhina-kupila-krupnogo-igroka-rynka-gotovoj-edy-87823"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Семья Евгения Пригожина",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Semya-Evgeniya-Prigozhina-kupila-krupnogo-igroka-rynka-gotovoj-edy-87823"
+     }
+    ],
+    "target": [
+     {
+      "value": "крупный игрок рынка готовой еды",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Semya-Evgeniya-Prigozhina-kupila-krupnogo-igroka-rynka-gotovoj-edy-87823"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T14:53:14+00:00"
   }
  ]
 }
