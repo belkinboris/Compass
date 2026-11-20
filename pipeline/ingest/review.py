@@ -885,12 +885,29 @@ def mark_milestone(card, kind):
     не для домысла.
 
     Возвращает найденное событие (для дальнейшей записи) или `None`, если
-    события такого `kind` в `events[]` нет — снимать веху не с чего."""
+    события такого `kind` в `events[]` нет — снимать веху не с чего.
+
+    ДВА СОБЫТИЯ ОДНОГО ВИДА (20 ноября 2026, Группа Астра/«Астра ИИ»): у
+    карточки, прошедшей два этапа («купила 26%» в мае, «выкупила контроль»
+    в ноябре), `events[]` держит два события с `kind='closed'`. Первая
+    версия брала первое по порядку — всегда майское, даже когда вызов
+    `--milestone closed` явно про ноябрьский этап; ушел черновик с верным
+    заголовком, но старой датой и источником. Берем среди событий этого
+    вида еще не отмеченное (`newsworthy` не стоит), а если отмечены уже
+    все — самое позднее по дате; каноническому `id` не дает задвоиться на
+    старом событии, если тот его держит с прошлого (неверного) вызова."""
     events = card.get('events') or []
-    event = next((e for e in events if e.get('kind') == kind), None)
-    if event is None:
+    candidates = [e for e in events if e.get('kind') == kind]
+    if not candidates:
         return None
-    event['id'] = '%s-%s' % (card['id'], kind)
+    unmarked = [e for e in candidates if not e.get('newsworthy')]
+    pool = unmarked or candidates
+    event = max(pool, key=lambda e: str(e.get('date') or ''))
+    canonical_id = '%s-%s' % (card['id'], kind)
+    for e in candidates:
+        if e is not event and e.get('id') == canonical_id:
+            del e['id']
+    event['id'] = canonical_id
     return event
 
 
