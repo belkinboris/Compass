@@ -603,8 +603,23 @@ def main(write=False):
             deal['no_post'] = True
             deal.pop('post_held', None)
     fresh = []
+    ghost_merged = False
     for card, override, _why in publish:
-        assert card['id'] not in existing, 'карточка %s уже в базе' % card['id']
+        # КОПИЯ УЖЕ ПРИНЯТОЙ КАРТОЧКИ В ОЧЕРЕДИ (20 ноября 2026, «КВС»/«Невская
+        # мануфактура» gfa56e747): прогон притока записал очередь из старого
+        # снимка и вернул туда карточку, принятую 7 минутами раньше; владелец
+        # одобрил ее повторный показ, и `assert` останавливал ВСЕ решения
+        # публикации. Теперь копия не падает: новые источники уходят в карточку
+        # базы, остальное в базе не трогается, копия из очереди снимается.
+        if card['id'] in existing:
+            base_card = next(d for d in data['deals'] if d['id'] == card['id'])
+            have = {str(s[1] if isinstance(s, list) and len(s) > 1 else s) for s in base_card.get('src') or []}
+            for s in card.get('src') or []:
+                if str(s[1] if isinstance(s, list) and len(s) > 1 else s) not in have:
+                    base_card.setdefault('src', []).append(s)
+            print('  УЖЕ В БАЗЕ %s — копия из очереди снята, новые источники перенесены' % card['id'])
+            ghost_merged = True
+            continue
         clean = {k: v for k, v in card.items()
                  if k not in ('pending_since', 'draft_sent', 'held', 'post_draft_sent',
                                '_pending_post_preview', 'post_verdict')}
@@ -750,7 +765,7 @@ def main(write=False):
         # Не печатаем повторно: план по сырью уже назван выше, до сухого
         # возврата, и второй такой же строкой отчет только шумит.
 
-    if fresh or base_changed:
+    if fresh or base_changed or ghost_merged:
         # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
         # читает только facts, не покажет их ни в одном показателе.
         if ROOT not in sys.path:
