@@ -708,6 +708,111 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>«Дом.РФ» выставил на торги бывший учебный корпус ТИУ в Тюмени</b>\n\n<b>Покупатель:</b> определится на торгах\n<b>Продавец:</b> АО «ДОМ.РФ»\n<b>Предмет:</b> здания бывшего учебного корпуса Тюменского индустриального университета и земельный участок под ними на улице Володарского, 56 в Тюмени\n<b>Начальная цена лота:</b> 303,4 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://72.ru/text/realty/2026/11/20/76776723/\">72.RU</a>\n\n#недвижимость #торги\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g7f823cbc\">карточке сделки</a>\n"
+  },
+  {
+   "id": "gcc3608a0",
+   "date": "2026-11-20",
+   "title": "Курский электроаппаратный завод вложил в автоматизацию более 350 млн рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119427-kurskiy-elektroapparatnyy-zavod-vlozhil-v-avtomatizatsiyu-bolee-350-mln-rubley/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "350 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "350 млн ₽",
+   "buyer_name": "Курский электроаппаратный завод",
+   "asset": "автоматизация более 350 млн рублей",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Курский электроаппаратный завод",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119427-kurskiy-elektroapparatnyy-zavod-vlozhil-v-avtomatizatsiyu-bolee-350-mln-rubley/"
+     }
+    ],
+    "target": [
+     {
+      "value": "автоматизация более 350 млн рублей",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119427-kurskiy-elektroapparatnyy-zavod-vlozhil-v-avtomatizatsiyu-bolee-350-mln-rubley/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T08:01:29+00:00"
+  },
+  {
+   "id": "g281726a2",
+   "date": "2026-11-20",
+   "title": "Сергей Змеев покупает длинные ОФЗ, а МREF обошел их почти в три раза. Куда перекладывать капитал до конца года?",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Smart-Lab",
+     "https://smart-lab.ru/blog/1377190.php"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Сергей Змеев",
+   "asset": "длинные ОФЗ, а МREF обошел их почти в три раза. Куда перекладывать капитал до конца года?",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Сергей Змеев",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://smart-lab.ru/blog/1377190.php"
+     }
+    ],
+    "target": [
+     {
+      "value": "длинные ОФЗ, а МREF обошел их почти в три раза. Куда перекладывать капитал до конца года?",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://smart-lab.ru/blog/1377190.php"
+     }
+    ]
+   },
+   "pending_since": "2026-11-20T08:01:29+00:00"
   }
  ]
 }

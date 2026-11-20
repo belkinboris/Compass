@@ -387,6 +387,531 @@
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
    ]
+  },
+  {
+   "draft_id": "d98123273",
+   "title": "«Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413616-gruppa-astra"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00558920",
+   "title": "Рябков: новый раунд переговоров по Украине пока не согласован",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/politics/news/2026/11/20/1413602-raund-peregovorov"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d23762502",
+   "title": "Nvidia планировала продать чипы связанной с Megaspeed фирме",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru/articles",
+     "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "Американская корпорация Nvidia в апреле подала заявку на продажу более 40 000 чипов H200 китайской компании New Century Lettall Data Service, связанной с сингапурской Megaspeed и ее бывшим топ-менеджером Элис Хуанг. Об этом сообщает The New York Times (NYT)…",
+     "source": [
+      "web:vedomosti.ru/articles",
+      "https://www.vedomosti.ru/technology/articles/2026/11/20/1413589-nvidia-planirovala"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d64590518",
+   "title": "Anthropic после IPO стала седьмой самой дорогой компанией в мире",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/20/11/2026/6affe9e4459f2d4d30911be7"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88290423",
+   "title": "ВТБ сохраняет планы продажи пакета в «Пулково»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+    ]
+   ],
+   "sum": "15 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "\"Позиция ВТБ по продаже пакета в \"Пулково\" была озвучена председателем правления на ВЭФ-2025, и с тех пор она не изменилась: готовность и желание продать этот пакет есть\", - заявил гендиректор \"ВТБ инфраструктурный холдинг\" Антон Новиков в кулуарах форума…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g67cacd7e (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d80736095",
+   "title": "«Группа Астра» увеличила долю в «Астра ИИ» до 80%",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-20_gruppa_astra_uvelichila"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Группа Астра» увеличила долю в «Астра ИИ» с 26% до 80%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90961008",
+   "title": "Воронежские аграрии увеличили инвестиции в деловые коммуникации",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-20_voronezhskie_agrarii_uvelichili"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d64293371",
+   "title": "МТС утвердила программу обратного выкупа акций на 2027 год",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-20_mts_utverdila_programmu"
+    ]
+   ],
+   "sum": "21,5 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87983860",
+   "title": "Tranio: спрос россиян на покупку недвижимости в Грузии вырос в 4,4 раза в 2026 году",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/nedvizhimost/28337611"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d17517326",
+   "title": "МСП Донбасса и Новороссии привлекли более 8,6 млрд рублей с господдержкой",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28338539"
+    ]
+   ],
+   "sum": "8,6 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСП Донбасса и Новороссии",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСП Донбасса и Новороссии",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d31806510",
+   "title": "Рябков ответил на вопрос о новом раунде переговоров по Украине",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28338553"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d11606861",
+   "title": "Тамбовские власти допустили слияние администраций Моршанска и округа",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119428-tambovskie-vlasti-dopustili-sliyanie-administratsiy-morshanska-i-okruga/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67379680",
+   "title": "Anthropic – рекордное за всю историю размещение акций",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1377308.php"
+    ]
+   ],
+   "sum": "$81.34 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90645230",
+   "title": "Anthropic вышла на биржу с оценкой $1,5 трлн. Как прошло крупнейшее IPO в истории",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+    ]
+   ],
+   "sum": "$81,3 млрд",
+   "type": "IPO",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "18 ноября 2026 года Anthropic разместила акции по $83 за бумагу — выше первоначального диапазона $70–78. Компания продала 956,4 млн акций, а ее сооснователи — еще 23,6 млн. IPO принесло $81,3 млрд, а оценка Anthropic достигла примерно $1,5 трлн. Это…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что ««Перестрелки, погони, драки»: обвал миркоинов, выход GTA и I» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90674984",
+   "title": "Два инвестфонда получили 30% Wildberries и Russ",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/dva-investfonda-poluchili-30-wildberries-i-russ/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Два инвестфонда",
+   "asset": "Wildberries и Russ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Два инвестфонда",
+    "asset": "Wildberries и Russ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d05517370",
+   "title": "Рябков прокомментировал вопрос о подготовке третьего раунда переговоров",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/20/ryabkov-prokommentiroval-vopros-o-podgotovke-tretiego-raunda-peregovorov/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d38601667",
+   "title": "В Гольянове выставили на торги крупное нежилое помещение",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/msk/2026/11/20/v-golyanove-vystavili-na-torgi-krupnoe-nezhiloe-pomeshhenie"
+    ]
+   ],
+   "sum": null,
+   "type": "Продажа с торгов",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gab80558c (общие редкие слова: выстав, помеще, торги) — проверьте, не дубль ли"
+   ]
   }
  ]
 }
