@@ -31,6 +31,7 @@ import scrape_guard
 from company_catalog import get_company_profile
 from deal_catalog import get_deal
 from db.models import (
+    AssistantAnonQuestion,
     AssistantFeedback,
     AssistantMessage,
     AssistantThread,
@@ -2851,6 +2852,18 @@ def _ask(req: AskRequest, request: Request, db):
             thread.updated_at = datetime.utcnow()
             db.commit()
             thread_id = thread.id
+        elif not user:
+            # Вопрос посетителя без входа — только текст, без данных о человеке
+            # (21 ноября 2026, разбор вопросов для улучшения ассистента и базы).
+            try:
+                db.add(AssistantAnonQuestion(question=question.strip()[:4000], answer=str(text)[:8000],
+                                             mode=(req.mode or "base")[:20], intent=(ret.intent or None),
+                                             context_type=(req.context_type or None),
+                                             context_id=(req.context_id or None)))
+                db.commit()
+            except Exception as e:  # noqa: BLE001 — запись вопроса не должна ронять ответ
+                db.rollback()
+                logger.warning("не записан анонимный вопрос: %s", e)
         payload = {"answer": text, "deals": _deals_payload(ret), "intent": ret.intent}
         if thread_id is not None:
             payload["thread_id"] = thread_id
