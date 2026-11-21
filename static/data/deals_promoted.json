@@ -339359,6 +339359,169 @@
      "all_sums": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "ge7003718",
+   "date": "2026-11-16",
+   "date_basis": "registry",
+   "title": "«Хай Айленд Лимитед» из Гонконга купил 95% российского оператора сети FES retail «РЕ Трэйдинг»",
+   "ind": "Ритейл",
+   "type": "M&A",
+   "kind": "acquisition",
+   "status": "Закрыта",
+   "buyer": "g13ea9ecb",
+   "target": "g03e5be54",
+   "seller": "Far East Services FZCO",
+   "seller_id": "gf2aef795",
+   "seller_src": "registry",
+   "src": [
+    [
+     "Retailer.Ru",
+     "https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/"
+    ],
+    [
+     "Sostav.Ru",
+     "https://www.sostav.ru/publication/novyj-vladelets-re-trejding-mozhet-zakryt-magaziny-byvshikh-brendov-lpp-v-rossii-88680.html"
+    ],
+    [
+     "New Retail",
+     "https://new-retail.ru/novosti/retail/rossiyskuyu_strukturu_fes_retail_khotyat_priznat_bankrotom/"
+    ],
+    [
+     "ЕГРЮЛ (датаньютон)",
+     "https://datanewton.ru/contragents/1127747192540/history/timeline"
+    ]
+   ],
+   "from_ingest": true,
+   "from_raw": {
+    "draft_id": "d28160149",
+    "title": "У FES retail сменился мажоритарный владелец"
+   },
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "Far East Services FZCO",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127747192540/history/timeline"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Хай Айленд Лимитед",
+      "method": "registry_owner_history",
+      "url": "https://datanewton.ru/contragents/1127747192540/history/timeline"
+     }
+    ]
+   },
+   "sum": "Не раскрыта",
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "95% долей ООО «РЕ Трэйдинг»",
+    "val": "—",
+    "target_fin": "По данным «СПАРК», выручка «РЕ Трэйдинг» за 2024 год — 49,4 млрд ₽, чистая прибыль — 223,2 млн ₽. По оценке РИА «Недвижимость», в 2025 году выручка упала примерно на 37%, до 31 млрд ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "ООО «РЕ Трэйдинг» перешло от польской LPP к Far East Services FZCO в 2022 году и продолжило работу сети под брендами СИН, RE, CR, XC и MO вместо прежних Sinsay, Reserved, Cropp, House и Mohito. В марте 2026 года новосибирский предприниматель Константин Корюков опубликовал на Федресурсе уведомление о намерении инициировать банкротство «РЕ Трэйдинг»; решение о банкротстве источники не подтверждают. По оценке управляющего директора Российского совета торговых центров Олега Войцеховского, именно ухудшение финансов и привело к смене владельца: магазины сети закрываются с 2026 года, а в расчетах с поставщиками и арендодателями возникли сложности. Региональный директор NF Group Евгения Хакбердиева настроена менее оптимистично — по ее мнению, новый владелец с большей вероятностью продолжит сокращать розницу в России вплоть до полного закрытия сети: «бренды второй год подряд закрывают торговые точки», — отмечает она.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "По пресс-релизу FES retail гендиректор Анна Пилюгина осталась на посту и миноритарным участником общества. По данным ЕГРЮЛ, оставшиеся 5% «РЕ Трэйдинг» с марта 2023 года числятся за другим эмиратским юрлицом — «Дженерал Консалтинг Сервисиз-ФЗКО», а не за Пилюгиной лично; расхождение между пресс-релизом и реестром не устранено.",
+    "appr": "—",
+    "adv": [],
+    "terms": "Из-за смены владельца «РЕ Трэйдинг» сверяет текущие расчеты с партнерами и приводит в порядок организационные и финансовые дела; по словам пресс-службы, часть повседневных операций на это время может идти медленнее обычного."
+   },
+   "extra": "Сделка продолжает цепочку перепродаж бывшего российского бизнеса польской LPP: после ухода LPP в 2022 году 95% «РЕ Трэйдинг» получила эмиратская Far East Services FZCO, а в ноябре 2026 года этот же пакет перешел новому владельцу из Гонконга.",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-16",
+     "title": "Сделка завершена",
+     "note": "По данным ЕГРЮЛ, 95% ООО «РЕ Трэйдинг» перешли от Far East Services FZCO к «Хай Айленд Лимитед». Пресс-служба FES retail на следующий день сообщила о смене мажоритарного участника.",
+     "source": [
+      "ЕГРЮЛ (датаньютон)",
+      "https://datanewton.ru/contragents/1127747192540/history/timeline"
+     ]
+    }
+   ],
+   "reviewed": "2026-11-21",
+   "deep_researched": "2026-11-21",
+   "accepted_notes": {
+    "no_inn": {
+     "buyer": "иностранное юрлицо (Гонконг, по пресс-релизу FES retail), в российском ЕГРЮЛ собственного ИНН не имеет — упомянуто только как участник ООО «РЕ Трэйдинг»"
+    },
+    "checked": {
+     "registry_owners": "История участников ЕГРЮЛ ООО «РЕ Трэйдинг» (ОГРН 1127747192540, datanewton.ru/api/v2/history): 30.06.2022 вышла АО «ЛПП» (100%), вошли Far East Services FZCO (95%) и Анна Пилюгина (5%); 02.03.2023 5% Пилюгиной перешли «Дженерал Консалтинг Сервисиз-ФЗКО»; 16.11.2026 95% Far East Services FZCO перешли «Хай Айленд Лимитед» — это и есть сделка карточки. Продажа доли, а не вход через капитал (капитал не менялся)."
+    },
+    "notes": "Повторная приемка (21 ноября 2026) проверила карточку с нуля после правки fetch_article_texts.py (page_title()): находка title_copied была ложной — card_urls() кэшировала в title записи заголовок самой карточки, а не настоящий заголовок страницы (known_issues/card.md, 26 октября 2026). Три записи в data/inbox/raw/2026-11-21-articles.jsonl для retailer.ru, sostav.ru, new-retail.ru поправлены на настоящие заголовки страниц, взятые из текста того же кэша; повторный прогон accept_card.py находку title_copied не показывает. Гейт send_drafts.py спрятал черновик d28160149 как «иностранный контур без российского элемента» (латиница в брендах СИН/RE/CR/XC/MO и в офшорных сторонах) — предмет сделки российский, крупный (49,4 млрд руб. выручки за 2024 год по СПАРК), прецедент ЛУКОЙЛ/Carlyle и PT/CyberOK. Имена сторон и дата сделки взяты не из статей (пресс-релиз их не называет), а из истории участников ЕГРЮЛ, как предписывает docs/card_parties.md. Расхождение пресс-релиза и реестра по держателю оставшихся 5% оставлено в law.struct, не примирено механически. Entity_in_source: ООО «Финэксперт», ООО «Энергетические системы», ООО «Континент девелопмент» названы в статье New Retail не как стороны или предмет этой сделки, а как ПРИМЕР других предприятий Новосибирской области, где Константин Корюков — директор и учредитель («В числе этих компаний — ООО «Финэксперт», ООО «Энергетические системы», ООО «Континент девелопмент» и ряд других»); Корюков в этой сделке — третье лицо, подавшее уведомление о банкротстве «РЕ Трэйдинг» на Федресурсе, а не сторона сделки о смене владельца, и перечисленные компании с FES retail/«РЕ Трэйдинг» никак не связаны."
+   },
+   "accepted": "2026-11-21",
+   "accepted_hash": "d6eef3efda26.bcfe8b",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "second_read": "2026-11-21",
+   "second_read_hash": "d6eef3efda26.bcfe8b",
+   "shown_hash": "d6eef3efda26.bcfe8b",
+   "post_preview": "<b>«Хай Айленд Лимитед» из Гонконга купил 95% российского оператора сети FES retail «РЕ Трэйдинг»</b>\n\n<b>Покупатель:</b> Хай Айленд Лимитед — новый владелец 95% ООО «РЕ Трэйдинг» (сети FES retail) с ноября 2026 года.\n<b>Продавец:</b> Far East Services FZCO\n<b>Предмет:</b> 95% долей ООО «РЕ Трэйдинг»\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Ритейл\n\n<b>Источник:</b> <a href=\"https://retailer.ru/u-fes-retail-smenilsja-mazhoritarnyj-vladelec/\">Retailer.Ru</a>\nЕще 3 источника — в карточке сделки\n\n#потребрынок #ритейл #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/ge7003718\">карточке сделки</a>",
+   "added": "2026-11-21",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": 95.0,
+     "basis": "rule",
+     "card_hash": "b57d53dfede1"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-16",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "8818a89b1e69"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": "g03e5be54",
+     "inn": "7725776121",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "2fa49e7b68d7"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed",
+     "all_sums": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
