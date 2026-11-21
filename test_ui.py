@@ -5884,3 +5884,39 @@ def test_deal_header_is_compact_on_the_phone(page, base_url):
     page.set_viewport_size({"width": 1280, "height": 900})
     page.wait_for_timeout(200)
     assert vis("#downloaddeal") and not vis("#downloaddeal2") and vis(".d-head .deal-parties-strong")
+
+
+def test_assistant_sheet_on_a_deal_page_asks_about_that_deal(page, base_url):
+    """Владелец, 21 ноября 2026: «если открыть ассистента в карте сделки и
+    спросить что-то, связанное со сделкой, ассистент этого не понимает».
+    Шторка ассистента со страницы сделки шлет вопрос с этой сделкой; готовые
+    подсказки и вопрос с ленты остаются общими."""
+    import json as _json
+    sent = []
+
+    def fake(route):
+        sent.append(_json.loads(route.request.post_data or "{}"))
+        route.fulfill(status=200, content_type="application/json",
+                      body=_json.dumps({"answer": "ok", "sources": []}))
+    page.route("**/api/ask**", fake)
+    visit(page, base_url, "#/")
+    deal_id = page.evaluate("() => DEALS.find(d => d.status === 'Закрыта').id")
+    visit(page, base_url, "#/deal/" + deal_id)
+    page.evaluate("() => aiDockOpen('half')")
+    page.wait_for_selector("#aiSheetBody #q")
+    assert "сделк" in page.get_attribute("#aiSheetBody #q", "placeholder")
+    page.fill("#aiSheetBody #q", "Кто продавец?")
+    page.press("#aiSheetBody #q", "Enter")
+    page.wait_for_timeout(800)
+    page.evaluate("() => { const c = document.querySelector('#aiSheetBody #suggests [data-q]'); if (c) c.click(); }")
+    page.wait_for_timeout(800)
+    page.evaluate("() => { location.hash = '#/'; }")
+    page.wait_for_timeout(800)
+    page.evaluate("() => aiDockOpen('half')")
+    page.fill("#aiSheetBody #q", "Кто купил Аэромар?")
+    page.press("#aiSheetBody #q", "Enter")
+    page.wait_for_timeout(800)
+    got = [(x.get("question"), x.get("context_type"), x.get("context_id")) for x in sent]
+    assert got[0] == ("Кто продавец?", "deal", deal_id), got
+    assert all(ct == "general" for q, ct, _ in got[1:]), got
+    assert not page.crashes, page.crashes[:3]

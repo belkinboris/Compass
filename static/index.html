@@ -12628,6 +12628,32 @@ function aiDockPaint(){
   sheet.style.transform = "";
   aiDockFit();
 }
+/* Страница, с которой открыта шторка ассистента: сделка, компания,
+   консультант или отрасль. Владелец, 21 ноября 2026: «если открыть
+   ассистента в карте сделки и спросить что-то, связанное со сделкой,
+   ассистент этого не понимает» — шторка слала вопрос как общий, и сервер
+   искал по словам по всей базе. Теперь вопрос из шторки уходит с этой
+   страницей, как из строки ассистента внизу карточки (mountMiniAI). */
+const AI_PAGE_TYPES = {deal:"deal", companies:"company", advisors:"advisor", industry:"industry"};
+function aiPageCtx(){
+  const m = location.hash.match(/^#\/(deal|companies|advisors|industry)\/([^/?#]+)/);
+  if(!m) return null;
+  let id; try{ id = decodeURIComponent(m[2]); }catch(e){ return null; }
+  const type = AI_PAGE_TYPES[m[1]];
+  if(type==="deal"){ const d = DEALS.find(x=>x.id===id); return d ? {type, id:d.id, name:d.title} : null; }
+  if(type==="company"){ const c = co(id); return c ? {type, id, name:c.name} : null; }
+  if(type==="advisor"){ const f = FIRMS.concat(INV_FIRMS).find(x=>x.id===id); return f ? {type, id, name:f.n} : null; }
+  return id ? {type, id, name:id} : null;
+}
+/* Подсказка в поле шторки называет страницу: человек видит, что вопрос
+   «Кто продавец?» будет понят как вопрос об этой сделке. */
+function aiDockPlaceholder(){
+  const f = document.querySelector("#aiSheetBody #q"); if(!f) return;
+  if(!f.dataset.basePh) f.dataset.basePh = f.placeholder || "";
+  const c = aiPageCtx();
+  const what = c && {deal:"об этой сделке", company:"об этой компании", advisor:"об этом консультанте", industry:"об этой отрасли"}[c.type];
+  f.placeholder = what ? `Спросите ${what}…` : f.dataset.basePh;
+}
 async function aiDockOpen(state){
   const {body} = aiDockEls();
   if(/^#\/assistant/.test(location.hash)) return;
@@ -12635,6 +12661,7 @@ async function aiDockOpen(state){
   aiDockPaint();
   if(!body.firstChild) await renderAssistant(body, true);
   else if(sessionStorage.getItem("pendingQ")) await renderAssistant(body, true);
+  aiDockPlaceholder();
 }
 function aiDockClose(){ if(aiDockState==="closed") return; aiDockState = "closed"; aiDockPaint(); }
 /* Клавиатура на телефоне закрывает низ шторки: высоту берем по видимой части окна.
@@ -12847,15 +12874,19 @@ async function renderAssistant(root, inSheet){
      ввода — снова обычная, кнопка «Без подробностей» больше не нужна. */
   const prepDone=()=>{ const f=qField(); if(f) f.placeholder=QPLACE;
     box.querySelectorAll("[data-prep-skip]").forEach(b=>b.disabled=true); };
-  const answer=async (q, shown)=>{
+  const answer=async (q, shown, general)=>{
     /* Ответ на вопросы перед подготовкой к встрече: человек пишет о себе как
        умеет, а модели уходит его рассказ вместе с тем, что нужно сделать. */
     if(prepFor && !shown){ const p=prepFor; prepFor=null; prepDone(); return answer(meetingPrepQuestion(p.name, q), q); }
     push("user",esc(shown||q));
     turns++; lastQ=q; paintState();
     const w=push("ai wait","");
+    // В шторке без своей привязки (подготовка к встрече) вопрос — о странице,
+    // на которой человек сейчас (aiPageCtx).
+    // Готовые подсказки («Сделки в сфере IT») — общие вопросы, без страницы.
+    const ctxNow = pageCtx || (inSheet && !general ? aiPageCtx() : null);
     const a=await runAsk(q,aiMode,{threadId:activeThreadId,saveThread:true,
-      contextType:pageCtx?pageCtx.type:"general",contextId:pageCtx?pageCtx.id:null,history:history.slice()},w);
+      contextType:ctxNow?ctxNow.type:"general",contextId:ctxNow?ctxNow.id:null,history:history.slice()},w);
     history.push({role:"user",body:q}); if(a&&a.raw) history.push({role:"assistant",body:a.raw});
     box.scrollTop=box.scrollHeight;renderThreadList();
   };
@@ -12865,7 +12896,7 @@ async function renderAssistant(root, inSheet){
     // 26 октября 2026: «Сделки в сфере IT»); уходит полный вопрос.
     const list = compact ? SHEET_SUGGESTS : SUGGESTS.map(q=>({label:q, q}));
     el.innerHTML=list.map((x,i)=>`<button class="chip" data-q="${i}">${esc(x.label)}</button>`).join("");
-    el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(list[b.dataset.q].q));
+    el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>answer(list[b.dataset.q].q, undefined, true));
   };
   const paintTasks=()=>{
     const el=document.getElementById("tasks"); if(!el) return;
