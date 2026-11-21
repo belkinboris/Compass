@@ -12,12 +12,4 @@
 """
 
 FIXES = [
-    {
-        'id': 'g98ad52f7',
-        'field': 'src',
-        'old': [['ТАСС', 'https://tass.ru/ekonomika/28261803'], ['ПРАЙМ', 'https://1prime.ru/20261028/alros-874698684.html'], ['Абирег', 'https://abireg.ru/newsitem/118882-alrosa-vystavila-na-prodazhu-dolyu-v-zhelezorudnom-proekte-timir-za-16-1-mlrd-rubley/']],
-        'new': ['Ведомости', 'https://www.vedomosti.ru/business/articles/2026/10/29/1240960-alrosa-vistavila-na-torgi-aktiv'],
-        'quote': 'Выставлен на продажу принадлежащий «Алросе» пакет акций ГМК «Тимир» — СП с «Евразом» по добыче железной руды в Якутии',
-        'why': 'статья Ведомостей о тех же торгах: владелец отправил ее «в работу», сделка та же',
-    },
 ]

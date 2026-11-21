@@ -1047,15 +1047,12 @@ def test_service_and_growth_questions(idx):
 
 
 def test_lots_go_after_deals_in_lists(idx):
-    """№79: «сделки в девелопменте в 2026 году» — сначала сделки, лоты торгов
-    следом и с пометкой; по теме «торги» лоты не отодвигаются."""
+    """№79: «сделки в девелопменте в 2026 году» — в списке только сделки.
+    С 21 ноября 2026 лотов торгов без результата в базе нет (владелец:
+    «удали»), раньше они шли в конце списка с пометкой."""
     r = ar.retrieve("Какие сделки были в девелопменте в 2026 году?", "general", None, idx)
-    assert r.intent == "industry" and "выставленные на торги" in r.answer
-    first = r.pool[:6]
-    assert not any(d.listing for d in first)
-    lots = [i for i, d in enumerate(r.pool) if d.listing]
-    deals = [i for i, d in enumerate(r.pool) if not d.listing]
-    assert lots and max(deals) < min(lots)
+    assert r.intent == "industry"
+    assert not any(d.listing for d in r.pool)
 
 
 def test_compare_gives_the_ratio_and_all_of_few_deals(idx):

@@ -186,7 +186,7 @@ def test_analytics_headline_counts_deals_like_the_home_page(page, base_url):
     # пишем, — без торгов»): COUNTED_DEALS на обоих экранах.
     visit(page, base_url, "#/analytics")
     total = page.evaluate("() => COUNTED_DEALS()")
-    assert total < page.evaluate("() => TOTAL_DEALS()")
+    assert total <= page.evaluate("() => TOTAL_DEALS()")  # с 21 ноября 2026 лотов без результата в базе нет
     head = page.inner_text("#app .ph-in p")
     assert head.startswith("%d " % total), head
 
@@ -1617,11 +1617,13 @@ def test_analytics_period_filter_narrows_every_card(page, base_url):
     # Сужение обязано затронуть не только первый график: если карточка «Статус
     # сделок» считает по всей базе, соседние числа на одном экране начинают
     # противоречить друг другу.
-    shown = int(re.search(r"Показано (\d+)", narrowed).group(1))
+    # С 21 ноября 2026 остальные карточки считают только закрытые сделки, а
+    # «Статус сделок» — все статусы той же выборки (год, отрасль, тип).
     status_card = page.evaluate(
         "() => [...document.querySelectorAll('.an-card')]"
         ".find(c => /статус сделок/i.test(c.innerText)).innerText")
-    assert re.search(r"из %d\b" % shown, status_card), \
+    expect = page.evaluate("() => DEALS.filter(d => !isListing(d) && String(d.date||'').startsWith('2025')).length")
+    assert re.search(r"из %d\b" % expect, status_card) or ("у %d " % expect) in status_card, \
         f"карточка статусов считает не по выборке: {status_card[:160]!r}"
 
     page.click("#anReset")
@@ -1674,7 +1676,8 @@ def test_analytics_names_the_set_it_counts(page, base_url):
     # С 25 октября шапка называет общее число, как главная, — без пояснения
     # про лоты (владелец: «это никому не интересно»); посчитанное множество
     # называет строка «Всего: N» у фильтров.
-    shown = page.evaluate("() => DEALS.filter(d => !isListing(d)).length")
+    # С 21 ноября 2026 аналитика считает только закрытые сделки.
+    shown = page.evaluate("() => DEALS.filter(d => !isListing(d) && isClosedDeal(d)).length")
     # Шапка «Аналитики» с 6 августа — темная hero-полоса (.page-hero),
     # а не .sec-head: чередование темных и светлых страниц.
     head = page.inner_text(".page-hero")
@@ -4664,33 +4667,16 @@ def test_advisors_rank_by_industry_when_an_industry_is_chosen(page, base_url):
 
 
 def test_listings_stay_in_the_feed_but_leave_the_ratings(page, base_url):
-    """Лот на торгах без покупателя — не сделка: в ленте и на карточке есть,
-    из аналитики, активности компаний и счета консультантов уходит; цена
-    подписана как начальная (владелец, 3 октября 2026)."""
+    """Лот на торгах без результата — не сделка. С 21 ноября 2026 таких
+    карточек в базе нет вовсе (владелец: «удали», `drop_open_auction_lots.py`),
+    и ворота притока их не пускают; проданный на торгах лот — обычная сделка
+    и считается в аналитике."""
     visit(page, base_url, "#/")
     page.wait_for_selector(".deal-row")
-    got = page.evaluate("""() => {
-      feedQuery = ""; filterInd = "Все"; feedYear = "Все"; filterTheme = "Все"; filterFirm = "Все";
-      filterAdvisorGroup = "Все"; onlyFull = false; filterStatus = "Все"; filterType = "Все";
-      filterPriced = "Все"; feedFrom = ""; feedTo = "";
-      // Сумма с собственной оговоркой в скобках («… (по оценке)») подписи
-      // «начальная цена» не получает (dealSumHtml) — такой лот не пример.
-      // 23 октября 2026 кампания профилей привязала продавца у оспоренной
-      // продажи Podium Market, и она стала первой в выборке.
-      const d = DEALS.find(x => isListing(x) && x.seller_id && sumState(x.sum)==="known"
-                                && !/\([^()]*\)\s*$/.test(String(x.sum||"")));
-      if(!d) return null;
-      const row = rowHtml.full(d);
-      return {id: d.id, listing: isListing(d), inFeed: unifiedFeedItems().some(it => it.rec.id === d.id),
-              total: companyTotal(d.seller_id), structured: companyStructured(d.seller_id).length,
-              row: row.includes('начальная цена') || /начальн/i.test(d.sum)};
-    }""")
-    assert got, "в базе нет лота на торгах с продавцом и ценой — пример для теста нужно обновить"
-    assert got["inFeed"] and got["row"], got
-    assert got["total"] < got["structured"], got
-    visit(page, base_url, "#/deal/" + got["id"])
-    page.wait_for_selector("#facts")
-    assert "начальная цена лота" in page.inner_text("#facts").lower()
+    got = page.evaluate("""() => ({open: DEALS.filter(isListing).length,
+      sold: DEALS.filter(d => d.type === "Продажа с торгов" && d.status === "Закрыта").length})""")
+    assert got["open"] == 0, got
+    assert got["sold"] > 0, got
 
 
 def test_account_notifications_tab_has_no_dead_rows_and_fits_a_phone(browser, base_url):

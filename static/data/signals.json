@@ -233,20 +233,6 @@
    "object_id": "g163cfc8b"
   },
   {
-   "id": "secaf11645",
-   "company_id": "g2f4f1e3e",
-   "date": "2026-11-06",
-   "kind": "for_sale",
-   "summary": "Центральный городской рынок — выставлена на торги",
-   "source": [
-    "V1.ru",
-    "https://v1.ru/text/gorod/2026/11/06/76748856/"
-   ],
-   "origin": "card",
-   "deal_id": "g41bcec82",
-   "strength": "strong"
-  },
-  {
    "id": "s61b595e5e",
    "company_id": "g163cfc8b",
    "date": "2026-11-06",
@@ -355,20 +341,6 @@
    "strength": "strong"
   },
   {
-   "id": "s9c25fc68f",
-   "company_id": "gbcf3f414",
-   "date": "2026-10-28",
-   "kind": "for_sale",
-   "summary": "Первая нерудная компания — выставлена на торги; продавец — РЖД",
-   "source": [
-    "ПРАЙМ",
-    "https://1prime.ru/20261028/rzhd-874693669.html"
-   ],
-   "origin": "card",
-   "deal_id": "g172b1374",
-   "strength": "strong"
-  },
-  {
    "id": "s59434c152",
    "company_id": "g40069487",
    "date": "2026-10-28",
@@ -407,20 +379,6 @@
     "https://rb.ru/news/sheremetevo-obsuzhdaet-prodazhu-75-biblio-globusa-pokupatelem-mozhet-stat-struktura-blizkaya-k-rwb/"
    ],
    "origin": "news",
-   "strength": "strong"
-  },
-  {
-   "id": "sd6c996174",
-   "company_id": "gbdba5da3",
-   "date": "2026-10-21",
-   "kind": "for_sale",
-   "summary": "ГМК «Тимир» — выставлена на торги; продавец — АЛРОСА",
-   "source": [
-    "ТАСС",
-    "https://tass.ru/ekonomika/28261803"
-   ],
-   "origin": "card",
-   "deal_id": "g98ad52f7",
    "strength": "strong"
   },
   {
@@ -477,34 +435,6 @@
    ],
    "origin": "card",
    "deal_id": "g9354e001",
-   "strength": "strong"
-  },
-  {
-   "id": "sa686519f2",
-   "company_id": "g65ee96ae",
-   "date": "2026-10-09",
-   "kind": "for_sale",
-   "summary": "Комиавиатранс — выставлена на торги",
-   "source": [
-    "ПРАЙМ",
-    "https://1prime.ru/20261009/vlasti-874128098.html"
-   ],
-   "origin": "card",
-   "deal_id": "g5117a241",
-   "strength": "strong"
-  },
-  {
-   "id": "s09b073fae",
-   "company_id": "ga1db6755",
-   "date": "2026-10-08",
-   "kind": "for_sale",
-   "summary": "Уралбиофарм — выставлена на торги; продавец — Росимущество",
-   "source": [
-    "РБК Екатеринбург",
-    "https://ekb.rbc.ru/ekb/freenews/6ac8952cff1d1491484b8f7f"
-   ],
-   "origin": "card",
-   "deal_id": "g53389708",
    "strength": "strong"
   },
   {
@@ -1624,20 +1554,6 @@
    "origin": "card",
    "deal_id": "g9d9e7ab6",
    "strength": "normal"
-  },
-  {
-   "id": "sa4f9bc456",
-   "company_id": "gc904414e",
-   "date": "2026-01-16",
-   "kind": "for_sale",
-   "summary": "Федеральная грузовая компания (ФГК) — выставлена на торги; продавец — РЖД",
-   "source": [
-    "Коммерсантъ",
-    "https://www.kommersant.ru/doc/8342449"
-   ],
-   "origin": "card",
-   "deal_id": "ge8f45161",
-   "strength": "strong"
   },
   {
    "id": "sef116ed44",

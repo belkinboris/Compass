@@ -5045,6 +5045,7 @@ function isFresh(d){
    консультантов уходит, пока статус не «Закрыта» (купили на торгах). Та же
    граница в `facts.py` (admitted count/industry: auction_open). */
 const isListing = d => !!d && d.type==="Продажа с торгов" && d.status!=="Закрыта";
+const isClosedDeal = d => !!d && d.status==="Закрыта";
 /* «ОБНОВЛЕНО» — У КАРТОЧКИ СВЕЖИЙ ЭТАП. Владелец 26 сентября 2026 не нашел в
    ленте карточку штаб-квартиры «Швабе» (ge957fc7b): сделка августа закрылась
    25 сентября, сообщение об этом ушло в канал, а в ленте карточка стояла на
@@ -10831,9 +10832,10 @@ function bindFirmDealsMore(){
    данных, — и у каждого блока подписан свой знаменатель: они разные (динамика
    по всем записям, покупатели и консультанты — только по подробным карточкам). */
 function renderIndustry(ind){
-  const all = [...DEALS.filter(x=>hasIndustry(x,ind)), ...MINI_DEALS.filter(x=>x.ind===ind), ...CHANNEL_DEALS.filter(x=>x.ind===ind), ...BULK_DEALS.filter(x=>x.ind===ind)];
+  // Как на «Аналитике»: только закрытые сделки.
+  const all = [...DEALS.filter(x=>hasIndustry(x,ind)&&isClosedDeal(x)), ...MINI_DEALS.filter(x=>x.ind===ind), ...CHANNEL_DEALS.filter(x=>x.ind===ind), ...BULK_DEALS.filter(x=>x.ind===ind)];
   if(!all.length){ location.hash = "#/analytics"; return; }
-  const cards = DEALS.filter(d=>hasIndustry(d,ind));
+  const cards = DEALS.filter(d=>hasIndustry(d,ind)&&isClosedDeal(d));
   const parseB = d => priceRub(d)/1e9;  // из facts, как на «Аналитике»
   const disclosed = cards.filter(countsAsPrice);
   const rub = cards.map(d=>({d, b:countsAsPrice(d)?parseB(d):0})).filter(o=>o.b>0).sort((a,b)=>b.b-a.b);
@@ -10871,7 +10873,7 @@ function renderIndustry(ind){
     <p>${all.length===1
       ? (disclosed.length ? "Одна сделка в отрасли, сумма известна." : "Одна сделка в отрасли, сумму стороны не назвали.")
       : `${all.length} ${plural(all.length,"сделка","сделки","сделок")}, ${disclosed.length ? `сумма раскрыта у ${disclosed.length}` : "ни по одной сумма не раскрыта"}.`
-    } Только публичные сделки, не весь рынок отрасли.</p>
+    } Только закрытые публичные сделки, не весь рынок отрасли.</p>
   </div>
   <div class="fe-actions reveal" style="justify-content:flex-start;margin-bottom:8px">
     <a class="chip" href="#/ind/${encodeURIComponent(ind)}">Все сделки отрасли списком</a>
@@ -10886,7 +10888,7 @@ function renderIndustry(ind){
       <span class="label">Сделки по годам</span>
       ${years.length
         ? years.map(([y,n],ri)=>`<div class="an-row"><span class="an-key num">${y}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")
-          + note(`Все сделки отрасли по дате.${noDate?` У ${noDate} ${plural(noDate,"сделки","сделок","сделок")} из ${all.length} даты нет.`:""}`)
+          + note(`Закрытые сделки отрасли по году.${noDate?` У ${noDate} ${plural(noDate,"сделки","сделок","сделок")} из ${all.length} даты нет.`:""}`)
         : emptyNote("Ни у одной сделки отрасли не указана дата.")}
     </div>
     <div class="an-card reveal">
@@ -10997,8 +10999,11 @@ function renderAnalytics(){
   /* Страница для работы, а не для чтения сверху вниз: фильтры стоят ПЕРВЫМИ и
      сужают ВСЕ карточки разом. Раньше здесь была одна длинная простыня цифр по
      всей базе — посмотреть «что было в ИТ в 2025-м» было нечем. */
+  /* Только закрытые сделки (владелец, 21 ноября 2026, как в обзоре рынка
+     2022–2026): все разделы страницы считаются по ним, кроме «Статуса
+     сделок» — он по своей сути показывает и незакрытые. */
   const raw = [
-    ...DEALS.filter(d=>!isListing(d)).map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),type:d.type,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
+    ...DEALS.filter(d=>!isListing(d)&&isClosedDeal(d)).map(d=>({date:d.date,ind:d.ind,industries:dealIndustries(d),type:d.type,title:d.title,kind:"full",id:d.id,sum:d.sum,status:d.status})),
     ...MINI_DEALS.map(m=>({date:m.date,ind:m.ind,industries:[m.ind],type:m.type,title:m.title,kind:"mini"})),
     ...CHANNEL_DEALS.map(c=>({date:c.date,ind:c.ind,industries:[c.ind],type:c.type,title:c.title,kind:"chan"})),
     ...BULK_DEALS.map(b=>({date:b.date,ind:b.ind,industries:[b.ind],type:b.type,title:b.title,kind:"bulk"})),
@@ -11022,8 +11027,9 @@ function renderAnalytics(){
   if(anType!=="Все" && !typeCount[anType]) anType="Все";
   const okType = x => anType==="Все" || x.type===anType;
   const all = raw.filter(x=>okYear(x)&&okInd(x)&&okType(x));
-  const deals = DEALS.filter(d=>!isListing(d)&&(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)
+  const dealsAnyStatus = DEALS.filter(d=>!isListing(d)&&(anYear==="Все"||String(d.date||"").slice(0,4)===anYear)
     &&hasIndustry(d,anInd)&&(anType==="Все"||d.type===anType));
+  const deals = dealsAnyStatus.filter(isClosedDeal);
   const dealIds = new Set(deals.map(d=>d.id));
   const filtersOff = anYear==="Все" && anInd==="Все" && anType==="Все";
   // Подпись под каждым графиком должна называть ТУ выборку, по которой он
@@ -11154,7 +11160,7 @@ function renderAnalytics(){
   const STALE_TALKS = TALKS + ", давно без новостей";
   const yearAgo = new Date(); yearAgo.setFullYear(yearAgo.getFullYear()-1);
   let staleTalks = 0;
-  deals.forEach(d=>{
+  dealsAnyStatus.forEach(d=>{
     if(!d.status) return;
     let label = stageLabel(d.status);
     if(label===TALKS){
@@ -11163,7 +11169,7 @@ function renderAnalytics(){
     }
     statuses[label]=(statuses[label]||0)+1;
   });
-  const withStatus = deals.filter(d=>d.status).length;
+  const withStatus = dealsAnyStatus.filter(d=>d.status).length;
   /* Редкие формулировки не рисуем отдельной строкой. Сначала они сводились в
      строку «Другие стадии: документы подписаны, согласование получено, …» — и
      это оказалось хуже, чем ничего: подпись длиннее ширины колонки, на экране
@@ -11253,21 +11259,21 @@ function renderAnalytics(){
       <rect x="1120" y="60" width="34" height="240" fill="rgba(201,174,124,.14)"/>
       <path d="M870 170 L940 120 L1000 150 L1060 70 L1150 40" fill="none" stroke="rgba(201,174,124,.22)" stroke-width="1.6"/>
     </svg>
-    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p class="ph-desc">${COUNTED_DEALS()} ${plural(COUNTED_DEALS(),"сделка","сделки","сделок")} с 2022 года по открытым источникам.</p></div></div>
+    <div class="ph-in reveal"><span class="label">Обзор рынка</span><h1>Аналитика</h1><p class="ph-desc">${COUNTED_DEALS()} ${plural(COUNTED_DEALS(),"сделка","сделки","сделок")} с 2022 года по открытым источникам; аналитика построена по ${raw.length} ${plural(raw.length,"закрытой","закрытым","закрытым")}.</p></div></div>
   ${analyticsFiltersHtml(yearsAvail, typesAvail, all.length, raw.length)}
   <div class="an-grid an-grid-main">
     <div class="an-card an-c-years reveal">
       <span class="label">${anYear==="Все"?"Сделок по годам":`Сделок по месяцам, ${anYear}`}</span>
       ${byPeriod.map(([k,n],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(n/maxY*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${n}</span></div>`).join("")}
       <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${anYear==="Все"
-        ? [where.trim(), thinNote].filter(Boolean).join(" ") || "Сделки по году, когда о них стало известно."
-        : `${where}${all.length-yearOnly} ${plural(all.length-yearOnly,"сделка","сделки","сделок")} с известным месяцем${yearOnly?`; еще у ${yearOnly} известен только год, на графике их нет`:""}. У части сделок это месяц новости, а не подписания.`}</p>
+        ? [where.trim(), "Только закрытые сделки.", thinNote].filter(Boolean).join(" ")
+        : `${where}Только закрытые сделки: ${all.length-yearOnly} с известным месяцем${yearOnly?`; еще у ${yearOnly} известен только год, на графике их нет`:""}.`}</p>
     </div>
     ${sumByPeriod.length?`
     <div class="an-card an-c-sumyears reveal">
       <span class="label">${anYear==="Все"?"Сумма сделок по годам":`Сумма сделок по кварталам, ${anYear}`}</span>
       ${sumByPeriod.map(([k,v],ri)=>`<div class="an-row"><span class="an-key num">${k}</span><div class="an-bar"><div style="width:${Math.round(v.sumB/maxSumB*100)}%;animation-delay:${ri*70}ms"></div></div><span class="an-val num">${fmtB(v.sumB)}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"сделки","сделок","сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}: цены, которые назвали стороны, и оценки из источников (у диапазона — середина), инвестиции и IPO; суммы в долларах и евро пересчитаны по курсу ЦБ на дату сделки. Не учтены сделки, которые только обсуждаются или сорвались, и стартовые цены торгов.</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Сложены суммы ${sumPeriodCnt} ${plural(sumPeriodCnt,"закрытой сделки","закрытых сделок","закрытых сделок")}${ofTotal(sumPeriodCnt,sumPeriodTotal)}: цены, которые назвали стороны, и оценки из источников (у диапазона — середина), инвестиции и IPO; суммы в долларах и евро пересчитаны по курсу ЦБ на дату сделки.</p>
     </div>`:""}
     <div class="an-card an-c-topind reveal">
       <span class="label">Топ-10 отраслей</span>
@@ -11296,7 +11302,7 @@ function renderAnalytics(){
     <div class="an-card an-c-status reveal">
       <span class="label">Статус сделок</span>
       ${Object.entries(statuses).sort((a,b)=>b[1]-a[1]).map(([s,n])=>`<div class="an-row"><span class="an-key">${s}</span><div class="an-bar"><div style="width:${Math.round(n/withStatus*100)}%"></div></div><span class="an-val num">${n}</span></div>`).join("")}
-      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")}${ofTotal(withStatus,deals.length)}.${statuses[STALE_TALKS]?` Сделки без новостей больше года показаны отдельно.`:""}${rareTotal?` Еще ${rareTotal} с редкими статусами (${rare.map(([k])=>k.toLowerCase()).join("; ")}) на график не попали.`:""}</p>
+      <p style="font-size:12.5px;color:var(--muted);margin:12px 0 0">${where}Статус известен у ${withStatus} ${plural(withStatus,"сделки","сделок","сделок")}${ofTotal(withStatus,dealsAnyStatus.length)}. В остальных разделах страницы — только закрытые сделки.${statuses[STALE_TALKS]?` Сделки без новостей больше года показаны отдельно.`:""}${rareTotal?` Еще ${rareTotal} с редкими статусами (${rare.map(([k])=>k.toLowerCase()).join("; ")}) на график не попали.`:""}</p>
     </div>
     ${topBuyers.length?`
     <div class="an-card an-c-buyers reveal">
