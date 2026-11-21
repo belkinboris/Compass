@@ -774,6 +774,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d26309261",
+   "title": "«Следует консолидировать все споры в одном международном суде»",
+   "date": "2026-11-21",
+   "src": [
+    [
+     "web:kommersant.ru/daily",
+     "https://www.kommersant.ru/doc/8549639"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
