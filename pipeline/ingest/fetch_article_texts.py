@@ -49,6 +49,24 @@ sys.path.insert(0, os.path.dirname(HERE))
 from source_names import is_aggregator  # noqa: E402
 
 
+def page_title(raw_html):
+    """Настоящий заголовок страницы (`<title>`/og:title) — или `None`, если
+    не нашелся. `card_urls()` раньше клала в `title` записи кэша заголовок
+    самой КАРТОЧКИ (известная ошибка, known_issues/card.md, 26 октября
+    2026): читающий видел собственный же заголовок и рисковал принять его
+    за независимое подтверждение. Настоящий заголовок страницы вместо
+    этого — честная проверка, не циклическая."""
+    m = re.search(r'<title[^>]*>(.*?)</title>', raw_html, flags=re.S | re.I)
+    if not m:
+        m = re.search(r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\'](.*?)["\']',
+                       raw_html, flags=re.I)
+    if not m:
+        return None
+    title = html_lib.unescape(re.sub(r'<[^>]+>', ' ', m.group(1)))
+    title = re.sub(r'\s+', ' ', title).strip()
+    return title or None
+
+
 def article_text(raw_html):
     """Текст без разметки. Скрипты и стили выкидываются целиком: внутри них
     цитат не бывает, а мусора — мегабайты. Комментарии читателей под статьей
@@ -223,7 +241,8 @@ def fetch_and_store(targets, write=True):
             print('  НЕ ЗАБРАН %s %s (%s)' % (label, url, e))
             failed += 1
             continue
-        rec = {'url': url, 'title': title, 'summary': text}
+        real_title = page_title(body) if not tg else None
+        rec = {'url': url, 'title': real_title or title, 'summary': text}
         if not tg and is_aggregator(url):
             cites = cited_links(body, url)
             if cites:
