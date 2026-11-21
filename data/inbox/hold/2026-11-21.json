@@ -683,70 +683,13 @@
    ]
   },
   {
-   "draft_id": "d02778271",
-   "title": "Объем иностранных инвестиций в хайтек Китая за десять месяцев вырос на треть",
+   "draft_id": "d24873300",
+   "title": "«Группа Астра» довела долю в разработчике ИИ до 80% 🟢 Статус: Сделка закрыта в ноябре 2026 года. Об объекте сделки Дополнительные 54% долей ООО «Астра ИИ» (ООО «АИБ», бренд — AiB) — российского разраб",
    "date": "2026-11-21",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9126983"
-    ]
-   ],
-   "sum": "$37,7 млрд",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d18299902",
-   "title": "В Белоруссии менее чем за $100 продают спиртзавод, где работал писатель Купала",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28341871"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68279142",
-   "title": "ESPN: семикратный чемпион Супербоула Брэди купил долю в «Челси»",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/sport/28341799"
+     "tg:dealsma",
+     "https://t.me/dealsma/7595"
     ]
    ],
    "sum": null,
@@ -757,42 +700,14 @@
      "kind": "closed",
      "date": "2026-11-21",
      "title": "Сделка завершена",
-     "note": "Рекордсмен NFL станет миноритарным инвестором в компании Clearlake, которая контролирует лондонский клуб",
+     "note": "«Группа Астра» довела долю в разработчике ИИ до 80% 🟢 Статус: Сделка закрыта в ноябре 2026 года. Об объекте сделки Дополнительные 54% долей ООО «Астра ИИ» (ООО «АИБ», бренд — AiB) — российского разработчика решений в области искусственного интеллекта. До июля…",
      "source": [
-      "web:tass.ru",
-      "https://tass.ru/sport/28341799"
+      "tg:dealsma",
+      "https://t.me/dealsma/7595"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "«Челси»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "«Челси»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d86390125",
-   "title": "«Новый рекорд в сфере развлечений»: Rockstar Games раскрыла, сколько принесли продажи GTA VI",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/20/76781059/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
    "asset": null,
    "seller": null,
    "parsed_parties": {
@@ -800,151 +715,12 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "ИТ и интернет",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d38904764",
-   "title": "Почему я покупаю Spacex на распродаже",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1377688.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d78105135",
-   "title": "Стало известно об изменении предпочтений россиян при покупке вина",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/21/stalo-izvestno-ob-izmenenii-predpochteniy-rossiyan-pri-pokupke-vina/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d30931318",
-   "title": "«Цепляет взгляды»: раритетный Ford продают в Новосибирске — у него сиденья от BMW, а двигатель от Audi",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/auto/2026/11/21/76778519/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Машиностроение",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63424764",
-   "title": "В Волгограде выставлены на продажу два цеха судоремонтного завода",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/gorod/2026/11/21/76781134/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d61074913",
-   "title": "Под Уфой продают здание крупнейшего в республике совхоза времен СССР",
-   "date": "2026-11-21",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/gorod/2026/11/21/76781243/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "похоже на уже описанную сделку g2777a4b6 (названия из заголовка стоят в предмете и сторонах: аиб, астра ии, группа астр) — проверьте, не дубль ли"
    ]
   }
  ]
