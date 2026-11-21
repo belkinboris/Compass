@@ -651,6 +651,11 @@ def is_firm_advisory_post(draft):
     return bool(_FIRM_ADVISED.search(text) and _FIRM_DEAL.search(text))
 
 
+def is_open_listing(card):
+    """Продажа с торгов, которая не закрыта: лот выставлен или торги не состоялись."""
+    return card.get('type') == 'Продажа с торгов' and card.get('status') != 'Закрыта'
+
+
 def check(draft, base, idx, inds, df=None, dup_out=None):
     """(причины отказа, причины «на решение»). Обе пусты — карточку пишем.
 
@@ -685,6 +690,12 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
         bad.append('валюта словом, а не значком')
     if draft.get('seller') and placeholders.is_empty(draft['seller']):
         bad.append('в продавце заглушка, а не имя')
+    # ЛОТ НА ТОРГАХ БЕЗ РЕЗУЛЬТАТА — НЕ СДЕЛКА И НЕ ВОПРОС ВЛАДЕЛЬЦУ
+    # (владелец, 21 ноября 2026: «все тендеры уберем незакрытые… и в консоль
+    # больше не предлагай»). Выставили на торги, торги не состоялись — в базу
+    # не идет; продали на торгах (статус «Закрыта») — обычная карточка.
+    if is_open_listing(draft):
+        bad.append('лот на торгах без результата — не сделка, в базу не берем')
     if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
         hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию')
     _title = str(draft.get('title') or '').strip()

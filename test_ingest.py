@@ -1543,6 +1543,23 @@ def test_promote_refuses_word_currency_and_placeholder_seller(base):
     assert any("заглушка" in r for r in bad)
 
 
+def test_promote_refuses_open_auction_lot(base):
+    """Лот на торгах без результата в базу и в консоль не идет (владелец,
+    21 ноября 2026); проданный на торгах — обычная сделка."""
+    import promote
+    idx, inds = matcher.index_base(base["deals"]), promote.industries()
+    draft = {"title": "Росимущество выставило на торги завод «Тест-Бета»",
+             "date": "2026-07-28", "ind": sorted(inds)[0], "type": "Продажа с торгов",
+             "status": "Обсуждается", "asset": "завод «Тест-Бета»", "seller": "Росимущество",
+             "src": [["источник", "https://example.invalid/x"]]}
+    bad, _ = promote.check(draft, base, idx, inds)
+    assert any("лот на торгах" in r for r in bad)
+    draft["status"] = "Не состоялась"
+    assert any("лот на торгах" in r for r in promote.check(draft, base, idx, inds)[0])
+    draft["status"] = "Закрыта"
+    assert not any("лот на торгах" in r for r in promote.check(draft, base, idx, inds)[0])
+
+
 def test_enrich_never_overwrites_a_filled_field(base):
     """Новость называет другую сумму — это расхождение, а не правка.
 
