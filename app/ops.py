@@ -23,6 +23,7 @@ import notification_service
 import scrape_guard
 from db.models import (
     AppSetting,
+    AssistantAnonQuestion,
     AssistantFeedback,
     AssistantMessage,
     AssistantThread,
@@ -355,6 +356,35 @@ def ops_activity(token: str = "", db=Depends(get_db)):
     if not _moderation_token_ok(token):
         return JSONResponse({"error": "not found"}, status_code=404)
     return _activity_numbers(db)
+
+
+@router.get("/api/ops/assistant_dialogs")
+def ops_assistant_dialogs(token: str = "", days: int = 90, db=Depends(get_db)):
+    """Диалоги с ассистентом для разбора ошибок — обезличенно (владелец и партнер,
+    21 ноября 2026). Вместо пользователя — порядковый номер в этой выгрузке; ни
+    почты, ни имени, ни id. Только по служебному ключу."""
+    if not _moderation_token_ok(token):
+        return JSONResponse({"error": "not found"}, status_code=404)
+    since = datetime.utcnow() - timedelta(days=max(1, min(days, 365)))
+    who = {}
+    threads = []
+    for t in db.scalars(select(AssistantThread).where(AssistantThread.updated_at >= since)
+                        .order_by(AssistantThread.id)):
+        n = who.setdefault(t.user_id, len(who) + 1)
+        msgs = db.scalars(select(AssistantMessage).where(AssistantMessage.thread_id == t.id)
+                          .order_by(AssistantMessage.id)).all()
+        threads.append({"person": n, "context": [t.context_type, t.context_id],
+                        "messages": [{"role": m.role, "mode": m.mode, "at": m.created_at.isoformat(),
+                                      "text": m.body} for m in msgs]})
+    anon = [{"question": a.question, "answer": a.answer, "mode": a.mode, "intent": a.intent,
+             "context": [a.context_type, a.context_id], "at": a.created_at.isoformat()}
+            for a in db.scalars(select(AssistantAnonQuestion).where(AssistantAnonQuestion.created_at >= since)
+                                .order_by(AssistantAnonQuestion.id))]
+    feedback = [{"question": f.question, "answer": f.answer, "verdict": f.verdict, "note": f.note,
+                 "mode": f.mode, "at": f.created_at.isoformat()}
+                for f in db.scalars(select(AssistantFeedback).where(AssistantFeedback.created_at >= since)
+                                    .order_by(AssistantFeedback.id))]
+    return {"days": days, "threads": threads, "anonymous": anon, "feedback": feedback}
 
 
 @router.get("/ops/activity")

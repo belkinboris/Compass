@@ -5695,3 +5695,16 @@ def test_regulatory_advisor_is_labelled_regulatory_in_the_team_block():
     html = Path("static/index.html").read_text(encoding="utf-8")
     assert 'const kindWord = /^\\s*регуляторн/i.test(it.role) ? "регуляторный" : it.kind;' in html
     assert "${kindWord}${det?" in html
+
+
+def test_assistant_dialogs_export_is_keyed_and_anonymous(client, monkeypatch):
+    """21 ноября 2026: выгрузка диалогов для разбора ошибок ассистента — только
+    по служебному ключу и без данных о людях (вместо пользователя — номер)."""
+    _mod_env(monkeypatch)
+    assert client.get("/api/ops/assistant_dialogs").status_code == 404
+    out = client.get("/api/ops/assistant_dialogs", params={"token": "тайна"}).json()
+    assert set(out) >= {"threads", "anonymous", "feedback"}
+    blob = str(out)
+    assert "@" not in blob.replace("@projectcompassru", "") or not out["threads"]
+    for t in out["threads"]:
+        assert set(t) == {"person", "context", "messages"} and isinstance(t["person"], int)

@@ -549,6 +549,24 @@ class AssistantFeedback(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
 
+class AssistantAnonQuestion(Base):
+    """Вопрос анонимного посетителя к ассистенту и ответ — только текст, без
+    адреса, браузера и любых данных о человеке (владелец и партнер, 21 ноября
+    2026: разбор вопросов — самый дешевый способ подтянуть ассистента и базу;
+    оговорка — в Политике обработки данных, п. 3.3). До этого вопрос
+    посетителя без входа пропадал, если он не нажимал «полезно / не помогло»."""
+    __tablename__ = "assistant_anon_questions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    question: Mapped[str] = mapped_column(Text)
+    answer: Mapped[str] = mapped_column(Text)
+    mode: Mapped[str] = mapped_column(String(20), default="base")
+    intent: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    context_type: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    context_id: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
 class Webinar(Base):
     __tablename__ = "webinars"
 
