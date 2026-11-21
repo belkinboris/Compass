@@ -66396,12 +66396,66 @@
      "card_hash": "715b1815e1bf"
     },
     "price": {
-     "value_rub": 2613000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "51c2bbe8f613",
-     "any_rub": 2613000000.0
+     "basis": "verified",
+     "card_hash": "ce2ff69318c3",
+     "any_rub": 2613000000.0,
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "attribution_quote": "Об этом в декабре 2025 года сообщили два источника, знакомых с деталями сделки.",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "unknown"
+     ],
+     "quote": "Сумма сделки составила 2,6 млрд руб.",
+     "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value_rub": 2600000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "equity",
+       "terms": "unknown",
+       "quote": "Сумма сделки составила 2,6 млрд руб.",
+       "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+       "notes": "Карточка несёт 2,613 млрд ₽ как disclosed — источник называет округлённые 2,6 млрд со ссылкой на анонимных «двух источников, знакомых с ситуацией», а не на сторону или документ: это reported/media_sources, а не disclosed, и точность цитаты (2,6, не 2,613) не позволяет писать значение точнее.",
+       "attribution_quote": "Об этом в декабре 2025 года сообщили два источника, знакомых с деталями сделки.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 2600000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "announcement",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Об этом в декабре 2025 года сообщили два источника, знакомых с деталями сделки. Одобрена сделка на покупку компаний: «Катерпиллар Евразия», «Катерпиллар Дистрибьюшн Интернейшнл», «Солар Турбинс Сиайэс» и «Электро-Мотив Локомотив Текнолоджис». Сумма сделки составила 2,6 млрд руб.",
+       "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+       "notes": "карточка пишет точное 2,613 млрд ₽ — ни один из 4 источников не называет цифру точнее «2,6 млрд», это другой, более ранний источник записи; Коммерсантъ называет 2,73+2,39 млрд — это отдельное, ОТКЛОНЕННОЕ предложение конкурента «Соммарива» (сын Черномырдина), не цена Balchug Capital — не перепутать",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026",
@@ -66417,7 +66471,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Правительственная комиссия по контролю за осуществлением иностранных инвестиций рассмотрела и одобрила заявку ООО « Инвестиционные решения » (принадлежит армянскому инвестфонду Balchug Capital ) на покупку последних четырех российских дочерних компаний американского производителя спецтехники Caterpillar.",
+     "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Правительственная комиссия по контролю за осуществлением иностранных инвестиций рассмотрела и одобрила заявку ООО « Инвестиционные решения » (принадлежит армянскому инвестфонду Balchug Capital ) на покупку последних четырех российских дочерних компаний американского производителя спецтехники Caterpillar.",
+       "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Правительственная комиссия по контролю за осуществлением иностранных инвестиций рассмотрела и одобрила заявку ООО « Инвестиционные решения » (принадлежит армянскому инвестфонду Balchug Capital ) на покупку последних четырех российских дочерних компаний американского производителя спецтехники Caterpillar.",
+       "source": "https://www.tadviser.ru/index.php/%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D1%80%D0%BF%D0%B8%D0%BB%D0%BB%D0%B0%D1%80_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_(Caterpillar)?ptype=itpasp",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gc129d375",
@@ -66440,8 +66518,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_lot",
      "all_sums": "ok"
     }
@@ -66491,7 +66569,8 @@
    },
    "reread": "2026-11-12",
    "reread_hash": "b87cc228b141.f00692",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "sum_basis": "reported"
   },
   {
    "id": "g4444b396",
@@ -79215,18 +79294,85 @@
      "card_hash": "5245736befce"
     },
     "price": {
-     "value_rub": 1800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "d41729c23863",
-     "any_rub": 1800000000.0
+     "basis": "verified",
+     "card_hash": "ff4da490dbc6",
+     "any_rub": 1800000000.0,
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Воронежское «АВС-Электро» обошлось петербургскому «ТД Электротехмонтаж» (ЭТМ) в 1,8 млрд рублей. Об этом «Абирегу» рассказал источник, близкий к руководству стороны продавца.",
+     "source": "https://abireg.ru/newsitem/107328/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value_rub": 1800000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Воронежское «АВС-Электро» обошлось петербургскому «ТД Электротехмонтаж» (ЭТМ) в 1,8 млрд рублей. Об этом «Абирегу» рассказал источник, близкий к руководству стороны продавца.",
+       "source": "https://abireg.ru/newsitem/107328/",
+       "notes": "Другой источник того же издания (abireg.ru/newsitem/107292/) ранее писал: «Сумма сделки... не называется, однако по оценкам речь может идти о 0,8–1 млрд рублей» — конфликтующая более ранняя оценка; ruscable.ru прямо говорит «сумма сделки... не сообщаются», та же оценка 0,8-1 млрд. Расхождение между источниками, не моя трактовка.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1800000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Воронежское «АВС-Электро» обошлось петербургскому «ТД Электротехмонтаж» (ЭТМ) в 1,8 млрд рублей. Об этом «Абирегу» рассказал источник, близкий к руководству стороны продавца.",
+       "source": "https://abireg.ru/newsitem/107328/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025-05-26",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "09417ef74b28"
+     "meaning": "announcement",
+     "basis": "read",
+     "card_hash": "09417ef74b28",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "26 мая 2025, 18:15 44860 Время чтения ≈ 4 минуты Источник: RusCable.Ru Компания ЭТМ присоединяет бизнес крупного игрока на рынке электротехники АВС Электро .",
+     "source": "https://www.ruscable.ru/news/2025/05/26/ETM_prisoedinyaet_biznes_AVS-Elektro_a_Russkij_Sve/",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value": "2025-05-26",
+       "meaning": "announcement",
+       "quote": "26 мая 2025, 18:15 44860 Время чтения ≈ 4 минуты Источник: RusCable.Ru Компания ЭТМ присоединяет бизнес крупного игрока на рынке электротехники АВС Электро .",
+       "source": "https://www.ruscable.ru/news/2025/05/26/ETM_prisoedinyaet_biznes_AVS-Elektro_a_Russkij_Sve/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -79236,7 +79382,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Воронежское «АВС-Электро» обошлось петербургскому «ТД Электротехмонтаж» (ЭТМ) в 1,8 млрд рублей. Об этом «Абирегу» рассказал источник, близкий к руководству стороны продавца.",
+     "source": "https://abireg.ru/newsitem/107328/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Воронежское «АВС-Электро» обошлось петербургскому «ТД Электротехмонтаж» (ЭТМ) в 1,8 млрд рублей. Об этом «Абирегу» рассказал источник, близкий к руководству стороны продавца.",
+       "source": "https://abireg.ru/newsitem/107328/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Компания ЭТМ объявила о присоединении бизнеса одного из крупнейших игроков рынка электротехники — АВС-Электро.",
+       "source": "https://abireg.ru/newsitem/107292/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gb42eafef",
@@ -79259,16 +79429,17 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "price_not_verified",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed",
      "all_sums": "ok"
     }
    },
    "gate_baseline_hash": "207e0013a01e.bfc8a9",
    "reread": "2026-11-13",
    "reread_hash": "c56f63051ad0.bfc8a9",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "sum_basis": "reported"
   },
   {
    "id": "g016f1b13",
@@ -122538,12 +122709,49 @@
      "card_hash": "28bd8fc9a216"
     },
     "price": {
-     "value_rub": 3400000000.0,
+     "value_rub": 3400000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
+     "scope": "ev",
+     "basis": "read",
      "card_hash": "fc8ac214aae5",
-     "any_rub": 3400000000.0
+     "any_rub": 3400000000.0,
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "paid",
+     "terms_variants": [
+      "paid"
+     ],
+     "attribution_quote": "Интернет-холдинг VK раскрыл подробности приобретения бизнес-центра Skylight",
+     "scope_basis": "read",
+     "quote": "Сумма сделки составила 3,4 млрд руб. Эта сумма включает в себя задолженность «Линдера» перед VK и третьими лицами.",
+     "source": "https://www.cnews.ru/news/top/2024-05-31_vk_potratil_34_milliarda_na",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value_rub": 3400000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "ev",
+       "terms": "paid",
+       "quote": "Сумма сделки составила 3,4 млрд руб. Эта сумма включает в себя задолженность «Линдера» перед VK и третьими лицами.",
+       "attribution_quote": "Интернет-холдинг VK раскрыл подробности приобретения бизнес-центра Skylight",
+       "source": "https://www.cnews.ru/news/top/2024-05-31_vk_potratil_34_milliarda_na",
+       "notes": "сумма включает задолженность — похоже на EV, а не чистую цену доли",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023",
@@ -122559,7 +122767,23 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "read",
+     "quote": "В 2023 г. холдинг VK приобрел АО «Линдер», которое через ООО «Ахил» владеет этим комплексом.",
+     "source": "https://www.cnews.ru/news/top/2024-05-31_vk_potratil_34_milliarda_na",
+     "verified_by": "model×1",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В 2023 г. холдинг VK приобрел АО «Линдер», которое через ООО «Ахил» владеет этим комплексом.",
+       "source": "https://www.cnews.ru/news/top/2024-05-31_vk_potratil_34_milliarda_na",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g9cefca56",
@@ -122574,16 +122798,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false,
      "all_sums": true
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "target_unconfirmed",
      "all_sums": "ok"
     }
@@ -242128,18 +242352,99 @@
      "card_hash": "28b6b634956c"
     },
     "price": {
-     "value_rub": 1800000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "e5a83946b71b",
-     "any_rub": 1800000000.0
+     "basis": "verified",
+     "card_hash": "609fa67fe222",
+     "any_rub": 1800000000.0,
+     "meaning_variants": [
+      "auction_start",
+      "reported"
+     ],
+     "attribution": "disputed",
+     "attribution_variants": [
+      "media_sources",
+      "registry"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "paid"
+     ],
+     "attribution_quote": "Согласно протоколу торгов",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "package",
+      "unknown"
+     ],
+     "quote": "на торгах покупатель отдал 1,8 млрд рублей",
+     "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value_rub": 1800000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "paid",
+       "quote": "на торгах покупатель отдал 1,8 млрд рублей",
+       "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+       "notes": "Это же число (1,8 млрд) было и начальной ценой лота (ria.ru 26.08.2026: «получит актив по начальной цене, составляющей 1,8 миллиарда рублей») — совпало с итоговой ценой, других участников/надбавок не было.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1800000000,
+       "meaning": "auction_start",
+       "attribution": "registry",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Согласно протоколу торгов, актив достался ООО \"Оптика Мира\". \"Оптика Мира\", учредителем которой является Илья Клебанов, получит актив по начальной цене, составляющей 1,8 миллиарда рублей.",
+       "attribution_quote": "Согласно протоколу торгов",
+       "source": "https://realty.ria.ru/20260925/rostehi-2120243766.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-09-25",
-     "meaning": "closing",
-     "basis": "rule",
-     "card_hash": "441ca123745b"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "d2b7535da442",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Дневной дозор — кому достанется после торгов «Оптика Мира» - 25 сентября 2026",
+     "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value": "2026-09-25",
+       "meaning": "publication",
+       "quote": "Дневной дозор — кому достанется после торгов «Оптика Мира» - 25 сентября 2026",
+       "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-09-25",
+       "meaning": "publication",
+       "quote": "25 сентября 2026, 19:45 28 809 Написать комментарий В Москве с молотка ушла штаб-квартира",
+       "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -242149,7 +242454,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bdebc5e6b104"
+     "card_hash": "bdebc5e6b104",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "на торгах покупатель отдал 1,8 млрд рублей",
+     "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "на торгах покупатель отдал 1,8 млрд рублей",
+       "source": "https://msk1.ru/text/gorod/2026/09/25/76663030/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "\"Ростех\" продал штаб-квартиру холдинга \"Швабе\" рядом с гостиницей \"Космос\" в Москве компании бывшего полномочного представителя президента в СЗФО Илье Клебанову.",
+       "source": "https://realty.ria.ru/20260925/rostehi-2120243766.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -242172,13 +242501,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change",
      "all_sums": "ok"
     }
    },
-   "sum_basis": "disclosed",
+   "sum_basis": "reported",
    "events": [
     {
      "id": "negotiations-2026-08-26",
@@ -242264,7 +242593,7 @@
      "date": "2026-11-12"
     }
    ],
-   "date_basis": "closing",
+   "date_basis": "publication",
    "retracted": {
     "seller": [
      "«Ростех»"
@@ -287316,7 +287645,9 @@
    "reread": "2026-11-09",
    "reread_hash": "092548242796.01442a",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21"
   },
   {
    "date": "2024-05-14",
@@ -287435,7 +287766,9 @@
    "reread": "2026-11-09",
    "reread_hash": "c96136ee96f7.d9194c",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21"
   },
   {
    "date": "2022-05-27",
@@ -287554,7 +287887,9 @@
    "reread": "2026-11-09",
    "reread_hash": "c6cc774aa32b.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21"
   },
   {
    "date": "2023",
@@ -287665,7 +288000,9 @@
    "reread": "2026-11-12",
    "reread_hash": "97b2b5aa4564.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21"
   },
   {
    "date": "2023-05-15",
@@ -287808,7 +288145,9 @@
      "by": "reread m103",
      "date": "2026-11-13"
     }
-   ]
+   ],
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21"
   },
   {
    "date": "2023",
@@ -287832,6 +288171,10 @@
     [
      "Mashnews",
      "https://mashnews.ru/stankostroitelnyij-zavod-sedin-ostanetsya-v-sobstvennosti-gosudarstva.html"
+    ],
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/8496642"
     ]
    ],
    "eco": {
@@ -287846,7 +288189,7 @@
    },
    "law": {
     "struct": "Арбитражный суд Краснодарского края по искам Генпрокуратуры и прокуратуры края истребовал в пользу государства имущество завода из незаконного владения: здания, помещения, земельные участки, литейный цех (12,1 тыс. кв. м с участком 12,9 тыс. кв. м) и позднее инженерные сети.",
-    "appr": "Пятнадцатый арбитражный апелляционный суд в октябре 2023 года оставил в силе решение о литейном цехе и участке. Решение 2024 года по сетям не обжаловано и вступило в силу.",
+    "appr": "Апелляция оставила в силе октябрьское (2023 год) решение о литейном цехе и участке. Решение 2024 года по сетям не обжаловано и вступило в силу. Связанная компания «Седин-быт» пыталась взыскать с администрации Краснодара 43,1 млн ₽ компенсации за два участка, купленных в 2010 году и изъятых по тому же делу в 2024 году, — Арбитражный суд Краснодарского края ей отказал.",
     "adv": [],
     "terms": "Деньги за имущество не платились: оно возвращено государству без компенсации."
    },
@@ -287927,7 +288270,13 @@
    "reread": "2026-11-09",
    "reread_hash": "82d02177d855.98d351",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-21",
+   "weekly_researched": "2026-11-21",
+   "proofread": "2026-11-21"
   },
   {
    "date": "2023-09-20",
@@ -317474,22 +317823,132 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "rule",
-     "card_hash": "0b99286b1ace"
+     "basis": "verified",
+     "card_hash": "0b99286b1ace",
+     "object": "группа компаний YCLIENTS (ООО «Уайклаентс»)",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+     "source": "https://www.interfax.ru/business/937269",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value": 100.0,
+       "object": "группа компаний YCLIENTS (ООО «Уайклаентс»)",
+       "event": "closing",
+       "quote": "VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 100.0,
+       "object": "группа компаний YCLIENTS",
+       "event": "closing",
+       "quote": "VK приобрел 100% долей в группе компаний YCLIENTS",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 3940000000.0,
+     "value_rub": 3940000000,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
+     "basis": "verified",
      "card_hash": "2cfa76afe85f",
-     "any_rub": 3940000000.0
+     "any_rub": 3940000000.0,
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "filing",
+     "attribution_variants": [
+      "filing"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "disputed",
+     "terms_variants": [
+      "fixed",
+      "includes_contingent"
+     ],
+     "attribution_quote": "сообщается в финансовой отчетности VK",
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "equity",
+      "unknown"
+     ],
+     "quote": "Сумма сделки по покупке интернет-холдингом VK ООО \"Уайклаентс\" (YClients, разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг) составляет 3,94 млрд рублей, сообщается в финансовой отчетности VK.",
+     "source": "https://www.interfax.ru/business/951796",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value_rub": 3940000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Сумма сделки по покупке интернет-холдингом VK ООО \"Уайклаентс\" (YClients, разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг) составляет 3,94 млрд рублей, сообщается в финансовой отчетности VK.",
+       "attribution_quote": "сообщается в финансовой отчетности VK",
+       "source": "https://www.interfax.ru/business/951796",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 3940000000,
+       "meaning": "disclosed",
+       "attribution": "filing",
+       "event": "closing",
+       "scope": "equity",
+       "terms": "includes_contingent",
+       "quote": "Сумма сделки по покупке интернет-холдингом VK ООО \"Уайклаентс\" (YClients, разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг) составляет 3,94 млрд рублей, сообщается в финансовой отчетности VK.",
+       "attribution_quote": "сообщается в финансовой отчетности VK",
+       "source": "https://www.interfax.ru/business/951796",
+       "notes": "в феврале 2024 VK погасила отложенное вознаграждение 1,2 млрд руб. в рамках этой суммы — возможно includes_contingent",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2023-12-20",
      "meaning": "announcement",
-     "basis": "rule",
-     "card_hash": "8543a7eb20f5"
+     "basis": "verified",
+     "card_hash": "8543a7eb20f5",
+     "meaning_variants": [
+      "announcement",
+      "closing"
+     ],
+     "quote": "Москва. 20 декабря. INTERFAX.RU - VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+     "source": "https://www.interfax.ru/business/937269",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "value": "2023-12-20",
+       "meaning": "closing",
+       "quote": "Москва. 20 декабря. INTERFAX.RU - VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2023-12-20",
+       "meaning": "announcement",
+       "quote": "Москва. 20 декабря. INTERFAX.RU - VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -317499,7 +317958,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+     "source": "https://www.interfax.ru/business/937269",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-21",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "VK приобрел 100% долей в группе компаний YCLIENTS (разработчик платформы онлайн-записи и автоматизации бизнеса в сфере услуг), говорится в сообщении холдинга.",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "VK приобрел 100% долей в группе компаний YCLIENTS",
+       "source": "https://www.interfax.ru/business/937269",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "gf730ca1e",
@@ -317514,16 +317997,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false,
      "all_sums": true
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "target_unconfirmed",
      "all_sums": "ok"
     }
