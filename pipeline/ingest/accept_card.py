@@ -1642,6 +1642,18 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
             out.append(('title_standard', 'покупатель не назван, а продавец известен — заголовок от '
                         'продавца: «Z продал [N%%] Y» (владелец и партнер, 19 ноября 2026; '
                         'pipeline/title_standard.py)'))
+    # СЛУЖЕБНЫЙ ID КАРТОЧКИ В ТЕКСТЕ ДЛЯ ЧИТАТЕЛЯ (21 ноября 2026, FES retail
+    # ge7003718: «(карточка gfa14411d)» в контексте дошло до кнопки владельца и
+    # остановило публикацию на test_no_internal_card_id_in_reader_text).
+    for path in ('extra', 'eco.share', 'eco.val', 'eco.target_fin', 'eco.fin', 'eco.rationale',
+                 'eco.context', 'law.struct', 'law.terms', 'law.appr'):
+        a, _, b = path.partition('.')
+        v = card.get(a)
+        v = (v or {}).get(b) if b else v
+        m = re.search(r'\b[gc][0-9a-f]{8}\b', str(v or ''))
+        if m:
+            out.append(('internal_id', '%s: служебный номер карточки «%s» в тексте для читателя — '
+                        'связь с другой сделкой пишется словами и датой' % (path, m.group(0))))
     # СУММА ОТ МИЛЛИАРДА — В МИЛЛИАРДАХ, ДОЛЯ В ЗАГОЛОВКЕ — ЧИСЛОМ (владелец, 10 ноября
     # 2026, VK/«Р7» g075e9738: «что это название? что это за цена?» — было «Холдинг VK
     # купил четверть акций «Р7»» и «2 500 млн ₽» после вычитки). Механика держит форму,
