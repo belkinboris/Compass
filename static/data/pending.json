@@ -207,6 +207,75 @@
    "shown_hash": "dad0a4e9674a.ace5bd",
    "post_draft_sent": true,
    "post_preview": "<b>Участок бывшего мясокомбината «Красноармейский» в Волгограде выставлен на продажу за 100 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> ООО «КВК»\n<b>Предмет:</b> бывший Красноармейский мясокомбинат\n<b>Сумма:</b> 100 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://v1.ru/text/gorod/2026/11/21/76781545/\">V1.ru</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gc13b1fc9\">карточке сделки</a>"
+  },
+  {
+   "id": "gb9f5a675",
+   "date": "2026-11-22",
+   "title": "Прядь волос Джорджа Вашингтона продали на аукционе за $4 тыс.",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Известия",
+     "https://iz.ru/2206257/priad-volos-dzhordzha-vashingtona-prodali-na-auktcione-za-4-tys-izic"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$4 тыс",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$4 тыс",
+   "seller": "Прядь волос Джорджа Вашингтона",
+   "asset": "на аукционе",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-22",
+     "title": "Сделка завершена",
+     "note": "Прядь волос первого президента США Джорджа Вашингтона, хранившаяся в рамке более двух столетий, была продана на торгах за $4 тыс. Об этом 22 ноября сообщила телерадиокомпания Би-би-си со ссылкой на аукционный дом Richmond Auctions.",
+     "source": [
+      "Известия",
+      "https://iz.ru/2206257/priad-volos-dzhordzha-vashingtona-prodali-na-auktcione-za-4-tys-izic"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на аукционе",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://iz.ru/2206257/priad-volos-dzhordzha-vashingtona-prodali-na-auktcione-za-4-tys-izic"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Прядь волос Джорджа Вашингтона",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://iz.ru/2206257/priad-volos-dzhordzha-vashingtona-prodali-na-auktcione-za-4-tys-izic"
+     }
+    ]
+   },
+   "pending_since": "2026-11-22T05:53:05+00:00"
   }
  ]
 }
