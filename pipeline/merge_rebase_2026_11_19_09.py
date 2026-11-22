@@ -32,8 +32,14 @@ def merge_list(base_items, ours_items, theirs_items, key):
         k = it[key]
         b, o, t = base.get(k), ours.get(k), theirs.get(k)
         if k not in theirs:
-            if k in base and b != o:
-                pass  # ours изменил, theirs убрал — оставляем ours (новее)
+            # Зеркало проверки ниже (20 ноября 2026): ours не менял запись
+            # (b==o) — значит это THEIRS сознательно выкинул ее
+            # (drop_pending.py), а не ours забыл тронуть. Слепое "ours
+            # всегда остается" воскрешало выкинутые карточки (g192b4ae5,
+            # 22 ноября 2026, второй раз та же ошибка — на этот раз в
+            # цикле ours, не theirs).
+            if k in base and b == o:
+                continue
             merged.append(o)
             continue
         if o == t:

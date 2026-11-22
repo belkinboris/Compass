@@ -713,6 +713,26 @@ def test_post_never_prints_a_buyer_line_without_a_buyer_name():
     assert "периметр сделки" not in text, "деталь без стороны, к которой она относится, не публикуется"
 
 
+def test_post_names_a_treasury_buyback_buyer_instead_of_not_disclosed():
+    """Казначейский выкуп собственной доли (gc816c617, «Красная звезда»/
+    Евгений Сибирцев, второе чтение 14/15/22 ноября 2026, docs/
+    card_parties.md): покупатель и предмет — одно и то же юрлицо, но схема
+    не разрешает один профиль сразу в buyer и target
+    (test_one_company_holds_one_role_in_a_deal), поэтому `buyer` пуст не
+    потому, что покупатель не известен. Флаг buyer_is_target говорит посту
+    печатать «сама «Х» (выкуп собственной доли)», а не «не раскрыт»."""
+    deal = {
+        "id": "gc816c617", "title": "«Красная звезда» купила долю бывшего совладельца Евгения Сибирцева",
+        "status": "Закрыта", "date": "2026", "seller": "Евгений Сибирцев",
+        "target": "t1", "buyer_is_target": True,
+        "eco": {"context": "—"},
+    }
+    companies = {"t1": {"name": "Красная звезда"}}
+    text = format_post.render(deal, companies)
+    assert "<b>Покупатель:</b> сама «Красная звезда» (выкуп собственной доли)\n" in text, text
+    assert "не раскрыт" not in text, text
+
+
 def test_post_attaches_buyer_detail_only_alongside_the_buyer_name():
     """Тот же механизм, положительный случай: имя покупателя есть — деталь
     из `eco.context` законно идет довеском. Само имя перед тире с 4 сентября

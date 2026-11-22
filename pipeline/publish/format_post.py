@@ -415,6 +415,15 @@ def party_names(deal, companies):
         asset = deal['asset'] if has(deal.get('asset')) else deal['target_label']
     if not asset and deal.get('asset_id') and companies.get(deal['asset_id']):
         asset = companies[deal['asset_id']]['name']
+    # Казначейский выкуп собственной доли: покупатель и предмет — одно и то
+    # же юрлицо, но схема не разрешает один профиль сразу в buyer и target
+    # (test_one_company_holds_one_role_in_a_deal), поэтому роль покупателя
+    # остается пустой не потому, что он не известен. accept_card.py/чтение
+    # ставят явный флаг buyer_is_target, когда это разобрано (docs/
+    # card_parties.md, «Казначейский выкуп общество собственной доли»,
+    # 2026-11-14/15/22) — без него пост молчал бы «не раскрыт» неверно.
+    if not buyer and deal.get('buyer_is_target') and deal.get('target') and companies.get(deal['target']):
+        buyer = 'сама «%s» (выкуп собственной доли)' % companies[deal['target']]['name']
     return seller, asset, buyer
 
 

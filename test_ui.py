@@ -2740,6 +2740,43 @@ def test_custody_deal_plate_has_no_seller_or_buyer_placeholder(page, base_url):
         page.unroute(PENDING_URL)
 
 
+def test_buyback_deal_plate_names_the_buyer_instead_of_not_disclosed(page, base_url):
+    """Казначейский выкуп собственной доли (`gc816c617`, «Красная звезда»/
+    Евгений Сибирцев, docs/card_parties.md «Казначейский выкуп общество
+    собственной доли», 22 ноября 2026): покупатель и предмет — один и тот же
+    профиль, но схема не разрешает один профиль сразу в `buyer` и `target`
+    (`test_one_company_holds_one_role_in_a_deal`) — покупатель пуст не
+    потому, что он не известен. Второе чтение нашло, что пост в канал уже
+    чинили (`format_post.party_names`, флаг `buyer_is_target`), а плашка
+    сайта («Структура сделки») молчавшая об этом ещё печатала «Покупатель:
+    Не раскрыт» — прямое противоречие тому, что говорит пост. `g67fc5479` —
+    настоящий профиль «Красная звезда» из базы, не выдуманный для теста."""
+    card = {"id": "gtest-buyback", "date": "2026-11-13",
+            "title": "«Тест-Превью» выкупила долю бывшего совладельца",
+            "ind": "Финансовые услуги", "type": "M&A", "status": "Закрыта",
+            "src": [["источник", "https://example.invalid/buyback"]],
+            "target": "g67fc5479", "seller": "Иван Тестов", "buyer_is_target": True,
+            "eco": {"sum": "3,5 млн ₽ (по оценке)", "share": "30% доли",
+                     "val": "—", "target_fin": "—", "fin": "—", "rationale": "—", "context": "—", "finadv": "—"},
+            "law": {"struct": "—", "appr": "—", "adv": [], "terms": "—"},
+            "pending_since": "2026-11-13T00:00:00+00:00"}
+    serve_pending(page, [card])
+    errors = []
+    try:
+        page.on("pageerror", lambda e: errors.append(str(e)))
+        visit(page, base_url, "#/preview/gtest-buyback")
+        page.wait_for_timeout(900)
+        roles = page.eval_on_selector_all(
+            ".deal-plate .dp-party", "els => els.map(el => el.innerText.toUpperCase())")
+        assert any("ВЫКУП СОБСТВЕННОЙ ДОЛИ" in r for r in roles), \
+            "плашка не называет покупателя выкупом собственной доли: %r" % roles
+        assert not any("НЕ РАСКРЫТ" in r for r in roles), \
+            "известный покупатель (сама компания) напечатан как неизвестный: %r" % roles
+        assert not errors, "pageerror при рендере плашки казначейского выкупа: %s" % errors
+    finally:
+        page.unroute(PENDING_URL)
+
+
 def test_slow_load_hint_mentions_vpn(page, base_url):
     """Экран загрузки сразу объясняет возможную причину, а не просто крутится.
 

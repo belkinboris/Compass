@@ -1,0 +1,120 @@
+{
+ "made": "2026-11-22",
+ "items": [
+  {
+   "key": "https://realty.ria.ru/20261113/dmitrov-2131316990.html::gf5bdb983",
+   "candidate_id": "gf5bdb983",
+   "reason": "общие редкие слова: застро, площад",
+   "draft": {
+    "draft_id": "d29207437",
+    "title": "«Дом.РФ» продает площадку под застройку в центре подмосковного Дмитрова",
+    "date": "2026-11-13",
+    "src": [
+     [
+      "web:realty.ria.ru",
+      "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "площадка под застройку в центре подмосковного Дмитрова",
+    "seller": "«Дом.РФ»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "площадка под застройку в центре подмосковного Дмитрова",
+     "seller": "«Дом.РФ»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-22"
+  },
+  {
+   "key": "https://ura.news/news/1053146271::pending-1",
+   "candidate_id": "pending-1",
+   "reason": "общие слова заголовка: 4",
+   "draft": {
+    "draft_id": "d69226908",
+    "title": "Прядь волос Джорджа Вашингтона продали всего за 4 тысячи долларов",
+    "date": "2026-11-22",
+    "src": [
+     [
+      "web:ura.news",
+      "https://ura.news/news/1053146271"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-22",
+      "title": "Сделка завершена",
+      "note": "Локон волос первого американского президента Джорджа Вашингтона был продан на аукционе за четыре тысячи долларов.",
+      "source": [
+       "web:ura.news",
+       "https://ura.news/news/1053146271"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "всего",
+    "seller": "Прядь волос Джорджа Вашингтона",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "всего",
+     "seller": "Прядь волос Джорджа Вашингтона"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-22"
+  },
+  {
+   "key": "https://www.interfax.ru/world/1130661::g9762f9ff",
+   "candidate_id": "g9762f9ff",
+   "reason": "общие слова заголовка: 5",
+   "draft": {
+    "draft_id": "d71926832",
+    "title": "Прядь волос Джорджа Вашингтона продали на аукционе за $4 тысячи",
+    "date": "2026-11-22",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1130661"
+     ]
+    ],
+    "sum": "$4 тыс",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-22",
+      "title": "Сделка завершена",
+      "note": "Прядь волос одного из отцов-основателей США Джорджа Вашингтона была продана на аукционе за $4 тысячи.",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/world/1130661"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Прядь волос Джорджа Вашингтона",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Прядь волос Джорджа Вашингтона"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-22"
+  }
+ ]
+}
