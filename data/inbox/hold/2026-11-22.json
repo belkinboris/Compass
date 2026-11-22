@@ -623,13 +623,13 @@
    ]
   },
   {
-   "draft_id": "d92425915",
-   "title": "Красноярская таможня требует передать государству 54 устройства для майнинга",
+   "draft_id": "d58426244",
+   "title": "Суд в Нидерландах запретил начинать продажи BYD Ti 7 в ЕС в рамках дела о сходстве машины с Land Rover Defender",
    "date": "2026-11-22",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28343617"
+     "web:vc.ru",
+     "https://vc.ru/transport/3271185-sud-v-niderlandah-zapretil-prodazhi-byd-ti-7?from=rss"
     ]
    ],
    "sum": null,
@@ -647,8 +647,35 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d84238564",
+   "title": "Bending Spoons покупает сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
+   "date": "2026-11-22",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/bending-spoons-pokupaet-servis-email-rassylok-mailchimp-vtroe-deshevle-chem-on-stoil-pyat-let-nazad/"
+    ]
+   ],
+   "sum": "$3,68 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Bending Spoons",
+   "asset": "сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Bending Spoons",
+    "asset": "сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
    ]
   },
   {
