@@ -1076,13 +1076,69 @@
    ]
   },
   {
-   "draft_id": "d58426244",
-   "title": "Суд в Нидерландах запретил начинать продажи BYD Ti 7 в ЕС в рамках дела о сходстве машины с Land Rover Defender",
+   "draft_id": "d84238564",
+   "title": "Bending Spoons покупает сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
    "date": "2026-11-22",
    "src": [
     [
-     "web:vc.ru",
-     "https://vc.ru/transport/3271185-sud-v-niderlandah-zapretil-prodazhi-byd-ti-7?from=rss"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/bending-spoons-pokupaet-servis-email-rassylok-mailchimp-vtroe-deshevle-chem-on-stoil-pyat-let-nazad/"
+    ]
+   ],
+   "sum": "$3,68 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Bending Spoons",
+   "asset": "сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Bending Spoons",
+    "asset": "сервис email-рассылок Mailchimp втрое дешевле, чем он стоил пять лет назад",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d86409360",
+   "title": "«Очень антуражная конверсия»: в Новосибирске продают «Запорожец» 1971 года — почему владелец решил с ним расстаться",
+   "date": "2026-11-22",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/entertainment/2026/11/22/76782605/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d36340317",
+   "title": "В стиле ретро. Топ-5 старых машин, которые продают в Ростовской области",
+   "date": "2026-11-22",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/auto/2026/11/22/76774212/"
     ]
    ],
    "sum": null,

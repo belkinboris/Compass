@@ -73,6 +73,48 @@
     "needs_review": true
    },
    "queued": "2026-11-22"
+  },
+  {
+   "key": "https://www.interfax.ru/world/1130661::g9762f9ff",
+   "candidate_id": "g9762f9ff",
+   "reason": "общие слова заголовка: 5",
+   "draft": {
+    "draft_id": "d71926832",
+    "title": "Прядь волос Джорджа Вашингтона продали на аукционе за $4 тысячи",
+    "date": "2026-11-22",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/world/1130661"
+     ]
+    ],
+    "sum": "$4 тыс",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-22",
+      "title": "Сделка завершена",
+      "note": "Прядь волос одного из отцов-основателей США Джорджа Вашингтона была продана на аукционе за $4 тысячи.",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/world/1130661"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на аукционе",
+    "seller": "Прядь волос Джорджа Вашингтона",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на аукционе",
+     "seller": "Прядь волос Джорджа Вашингтона"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-22"
   }
  ]
 }
