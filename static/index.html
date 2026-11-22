@@ -8281,11 +8281,21 @@ function renderDeal(id, qs, previewCard){
             : isRound(d)
               ? ""
               : `<div class="dp-party is-empty"><span class="dp-role">Продавец</span><span class="dp-name">Не раскрыт</span></div>`;
+        /* Казначейский выкуп собственной доли (docs/card_parties.md,
+           «Казначейский выкуп общество собственной доли», 2026-11-22):
+           покупатель и предмет сделки — одно и то же юрлицо, но схема не
+           разрешает один профиль сразу в buyer и target
+           (test_one_company_holds_one_role_in_a_deal) — buyer пуст не
+           потому, что покупатель не известен. Флаг buyer_is_target (та же
+           пометка, что читает format_post.py для поста) говорит плашке
+           то же самое, что уже печатает пост, вместо «Не раскрыт». */
         const buyerBox = buyerName
           ? party(buyerRole(d), d.buyer, coLegal(d.buyer))
           : d.buyer_name
             ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">${d.buyer_name}</span></div>`
-            : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
+            : (d.buyer_is_target && targetName)
+              ? `<div class="dp-party"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">сама «${targetName}» (выкуп собственной доли)</span></div>`
+              : `<div class="dp-party is-empty"><span class="dp-role">${buyerRole(d)}</span><span class="dp-name">Не раскрыт</span></div>`;
         // предмет сделки: карточка компании, иначе название, вытащенное из
         // заголовка (pipeline/fix_target_roles.py), иначе короткое eco.share
         // Предмет сделки ссылается на профиль компании: либо это target, либо
