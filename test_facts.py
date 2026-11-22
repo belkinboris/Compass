@@ -188,6 +188,8 @@ def test_reading_checks_value_against_quote():
     assert not fc.price_supported(1.8e9, 'Сумма сделки составила 2 млрд руб.')
     assert fc.date_supported('2026-04-21', 'Сделка закрыта 21 апреля.')
     assert not fc.date_supported('2026-04-21', 'Сделка закрыта в мае.')
+    assert fc.date_supported('2026-11-03', '03 ноября 2026 в 18:08 В Перми выставили на продажу здание.')
+    assert not fc.date_supported('2026-11-13', '03 ноября 2026 в 18:08 В Перми выставили на продажу здание.')
     assert fc.entity_supported('ООО «Убик»', 'разработчик ООО «Убик» продан')
     assert not fc.entity_supported('ООО «Убик»', 'разработчик продан')
 

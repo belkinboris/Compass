@@ -352,7 +352,10 @@ def date_supported(value, quote) -> bool:
     q = flat(quote)
     if len(value) == 10:
         y, m, d = value.split('-')
-        return (re.search(r'(?:^|[^\d])%d\s+%s' % (int(d), MONTHS[int(m) - 1]), q) is not None
+        # день с ведущим нулём в метке времени источника («03 ноября 2026») —
+        # "0" перед цифрой дня сам по себе цифра, [^\d] перед ним не находится
+        # (g4e184429, 22 ноября 2026: ura.news пишет дату именно так)
+        return (re.search(r'(?:^|[^\d])0?%d\s+%s' % (int(d), MONTHS[int(m) - 1]), q) is not None
                 or value in q or f'{d}.{m}.{y}' in q)
     if len(value) == 7:
         y, m = value.split('-')

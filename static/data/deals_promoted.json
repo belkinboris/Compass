@@ -27817,18 +27817,94 @@
      "card_hash": "28bd8fc9a216"
     },
     "price": {
-     "value_rub": 1282000000.0,
+     "value_rub": 1282000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
+     "scope": "package",
+     "basis": "verified",
      "card_hash": "c14953d571ac",
-     "any_rub": 1282000000.0
+     "any_rub": 1282000000.0,
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Группа компаний \"Дамате\" выиграла торги по приобретению имущества производственно-технологического комплекса ООО \"Донстар\" в Ростовской области, сообщила пресс-служба компании.",
+     "scope_basis": "verified",
+     "quote": "Цена предложения по лоту составила 1,282 млрд рублей.",
+     "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": 1282000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Цена предложения по лоту составила 1,282 млрд рублей.",
+       "attribution_quote": "Группа компаний \"Дамате\" выиграла торги по приобретению имущества производственно-технологического комплекса ООО \"Донстар\" в Ростовской области, сообщила пресс-служба компании.",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 1282000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Цена предложения по лоту составила 1,282 млрд рублей.",
+       "attribution_quote": "Группа компаний \"Дамате\" выиграла торги по приобретению имущества производственно-технологического комплекса ООО \"Донстар\" в Ростовской области, сообщила пресс-служба компании.",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2024-09-02",
-     "meaning": "publication",
-     "basis": "rule",
-     "card_hash": "fc116e225c5f"
+     "meaning": "announcement",
+     "basis": "verified",
+     "card_hash": "60c6da8310e4",
+     "meaning_variants": [
+      "announcement"
+     ],
+     "quote": "2 сентября 2024 Группа компаний «Дамате» сообщила, что выиграла торги по приобретению имущества производственно-технологического комплекса",
+     "source": "https://www.agroinvestor.ru/companies/news/42873-damate-vyigrala-torgi-po-pokupke-moshchnostey-kompleksa-donstar/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": "2024-09-02",
+       "meaning": "announcement",
+       "quote": "2 сентября 2024 Группа компаний «Дамате» сообщила, что выиграла торги по приобретению имущества производственно-технологического комплекса",
+       "source": "https://www.agroinvestor.ru/companies/news/42873-damate-vyigrala-torgi-po-pokupke-moshchnostey-kompleksa-donstar/",
+       "notes": "Дата объявления о выигрыше торгов (слово-форма дня и месяца — на agroinvestor.ru; на acdamate.com та же дата дана в цифровом формате «2.09.2024», это не засчитывается как дата словами по правилам брифа), а не дата перехода права собственности: пресс-релиз acdamate.com говорит, что оформление в собственность планируется позже («В ближайшее время компания планирует завершить юридические процедуры по оформлению торгов и получить в собственность…»).",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2024-09-02",
+       "meaning": "announcement",
+       "quote": "2 сентября 2024 Группа компаний «Дамате» сообщила, что выиграла торги по приобретению имущества производственно-технологического комплекса",
+       "source": "https://www.agroinvestor.ru/companies/news/42873-damate-vyigrala-torgi-po-pokupke-moshchnostey-kompleksa-donstar/",
+       "notes": "На acdamate.com та же дата дана цифрами («2.09.2024») — это не день-и-месяц словами, поэтому для даты использую agroinvestor.ru. Это дата выигрыша торгов; фактическое оформление права собственности по тексту пресс-релиза acdamate.com наступает позже («планирует завершить юридические процедуры... и получить в собственность»), поэтому meaning=announcement, а не closing.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -27838,7 +27914,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "bdebc5e6b104"
+     "card_hash": "bdebc5e6b104",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Единственным участником торгов, которые проводились в рамках процедуры банкротства \"Донстара\", стало ООО \"Новые утиные фермы\" (входит в состав ГК \"Дамате\").",
+     "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Единственным участником торгов, которые проводились в рамках процедуры банкротства \"Донстара\", стало ООО \"Новые утиные фермы\" (входит в состав ГК \"Дамате\").",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Единственным участником торгов, которые проводились в рамках процедуры банкротства \"Донстара\", стало ООО \"Новые утиные фермы\" (входит в состав ГК \"Дамате\").",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g94365711",
@@ -27847,22 +27947,70 @@
      "bank": false,
      "lot": false,
      "basis": "registry",
-     "perimeter": "unknown",
-     "card_hash": "97a52700c8b2"
+     "perimeter": "refuted",
+     "card_hash": "97a52700c8b2",
+     "perimeter_entity": "ООО «Донстар»",
+     "perimeter_report": {
+      "inn": "6149012957",
+      "year": 2023,
+      "revenue_rub": 157517000,
+      "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОНСТАР\""
+     },
+     "perimeter_other_entities": [],
+     "quote": "компания планирует завершить юридические процедуры по оформлению торгов и получить в собственность все производственные мощности для производства мяса утки, инфраструктурные объекты, транспортные средства, земельные участки, оборудование и инвентарь",
+     "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «Донстар»",
+       "report": {
+        "inn": "6149012957",
+        "year": 2023,
+        "revenue_rub": 157517000,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОНСТАР\""
+       },
+       "quote": "компания планирует завершить юридические процедуры по оформлению торгов и получить в собственность все производственные мощности для производства мяса утки, инфраструктурные объекты, транспортные средства, земельные участки, оборудование и инвентарь",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "notes": "Куплен только имущественный комплекс (здания, техника, земля) на торгах в банкротстве — не акции/доли самого ООО «Донстар» и не юрлицо целиком; само ООО «Донстар» как сторона сделки не выступает покупаемым субъектом, поэтому отчётность этого юрлица не описывает купленное по правилу «только при покупке именно этого юрлица».",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "ok": false,
+       "covers_business": false,
+       "other_entities": [],
+       "entity": "ООО «Донстар»",
+       "report": {
+        "inn": "6149012957",
+        "year": 2023,
+        "revenue_rub": 157517000,
+        "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ДОНСТАР\""
+       },
+       "quote": "компания планирует завершить юридические процедуры по оформлению торгов и получить в собственность все производственные мощности для производства мяса утки, инфраструктурные объекты, транспортные средства, земельные участки, оборудование и инвентарь",
+       "source": "https://www.acdamate.com/press-center/press/damate-vykupila-proizvodstvennyy-kompleks-donstar-za-1-28-mlrd-rubley/",
+       "notes": "Куплено только имущество (здания, техника, земля) с торгов в банкротстве — не акции/доли ООО «Донстар» и не юрлицо как таковое, поэтому отдельная отчётность этого юрлица купленный бизнес не описывает.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false,
      "all_sums": true
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "not_control_change",
      "all_sums": "ok"
     }
@@ -27876,7 +28024,7 @@
     ]
    ],
    "gate_baseline_hash": "70823aa66c78.e1f755",
-   "date_basis": "publication",
+   "date_basis": "announcement",
    "retracted": {
     "sum": [
      "2,1 млрд ₽"
@@ -129157,12 +129305,63 @@
      "card_hash": "19560e5812fc"
     },
     "price": {
-     "value_rub": 1500000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "not_a_price",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "1289b37541b1",
-     "any_rub": 1500000000.0
+     "basis": "verified",
+     "card_hash": "a4209c69407d",
+     "any_rub": null,
+     "meaning_variants": [
+      "not_a_price"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "publication",
+     "event_variants": [
+      "publication"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Платформа коллективных инвестиций Aktivo предлагает паи ЗПИФН «Активо двадцать два», обеспеченные готовым складским комплексом класса «А» 20 928 м² в станице Раевская; арендаторы — Wildberries, «Лента», «Интерлогистика», порог входа от 200 тыс. ₽, ежемесячные выплаты, планируется вторичный оборот паёв на ММВБ .",
+     "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": null,
+       "meaning": "not_a_price",
+       "attribution": "unknown",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Платформа коллективных инвестиций Aktivo предлагает паи ЗПИФН «Активо двадцать два», обеспеченные готовым складским комплексом класса «А» 20 928 м² в станице Раевская; арендаторы — Wildberries, «Лента», «Интерлогистика», порог входа от 200 тыс. ₽, ежемесячные выплаты, планируется вторичный оборот паёв на ММВБ .",
+       "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
+       "notes": "Сумма 1,5 млрд ₽ в тексте не встречается вообще (проверил весь текст статьи). Это предложение паёв фонда инвесторам, обеспеченных уже готовым складом, а не продажа самого склада — цены сделки по покупке/продаже объекта у третьей стороны источник не называет.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": null,
+       "meaning": "not_a_price",
+       "attribution": "unknown",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "unknown",
+       "quote": "Платформа коллективных инвестиций Aktivo предлагает паи ЗПИФН «Активо двадцать два», обеспеченные готовым складским комплексом класса «А» 20 928 м² в станице Раевская; арендаторы — Wildberries, «Лента», «Интерлогистика», порог входа от 200 тыс. ₽, ежемесячные выплаты, планируется вторичный оборот паёв на ММВБ .",
+       "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
+       "notes": "Текст статьи целиком прочитан — числа 1,5 млрд ₽ в нём нет. Речь о размещении паёв фонда среди инвесторов под уже готовый арендованный склад, а не о покупке/продаже самого склада у третьей стороны.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2025-10-15",
@@ -129175,7 +129374,7 @@
      "quote": "15 октября 2025, 16:14 Платформа коллективных инвестиций Aktivo разместила для инвестиций логопарк «Раевская» под Новороссийском",
      "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
      "verified_by": "model×2",
-     "verified_at": "2026-10-21",
+     "verified_at": "2026-11-22",
      "readings": [
       {
        "value": "2025-10-15",
@@ -129208,7 +129407,7 @@
      }
     },
     "nature": {
-     "control_change": true,
+     "control_change": false,
      "cash_in": false,
      "financing": false,
      "auction": false,
@@ -129217,19 +129416,29 @@
      "basis": "rule",
      "card_hash": "5a74000c030e",
      "intragroup": false,
-     "control_change_basis": "stale",
-     "quote": "Компания формирует закрытые паевые фонды (ЗПИФН) и размещает в них уже построенные и сдаваемые в аренду объекты; инвестор покупает паи фонда и получает выплаты из арендного потока. В кейсе A-22 базовым активом является «Логопарк Раевская».",
+     "control_change_basis": "verified",
+     "quote": "Aktivo — платформа коллективных инвестиций в доходную недвижимость. Компания формирует закрытые паевые фонды (ЗПИФН) и размещает в них уже построенные и сдаваемые в аренду объекты; инвестор покупает паи фонда и получает выплаты из арендного потока.",
      "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
-     "verified_by": "model×1",
-     "verified_at": "2026-10-20",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
      "readings": [
       {
-       "control_change": true,
+       "control_change": false,
        "intragroup": false,
-       "quote": "Компания формирует закрытые паевые фонды (ЗПИФН) и размещает в них уже построенные и сдаваемые в аренду объекты; инвестор покупает паи фонда и получает выплаты из арендного потока. В кейсе A-22 базовым активом является «Логопарк Раевская».",
+       "quote": "Aktivo — платформа коллективных инвестиций в доходную недвижимость. Компания формирует закрытые паевые фонды (ЗПИФН) и размещает в них уже построенные и сдаваемые в аренду объекты; инвестор покупает паи фонда и получает выплаты из арендного потока.",
        "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
+       "notes": "Фонд Aktivo уже владеет готовым складом и продаёт инвестиционные паи множеству мелких инвесторов — это не переход контроля над активом к одному покупателю.",
        "quote_checked": true,
        "reader": "A"
+      },
+      {
+       "control_change": false,
+       "intragroup": false,
+       "quote": "Aktivo — платформа коллективных инвестиций в доходную недвижимость. Компания формирует закрытые паевые фонды (ЗПИФН) и размещает в них уже построенные и сдаваемые в аренду объекты; инвестор покупает паи фонда и получает выплаты из арендного потока.",
+       "source": "https://finance.rambler.ru/money/55466044-platforma-kollektivnyh-investitsiy-aktivo-razmestila-dlya-investitsiy-logopark-raevskaya-pod-novorossiyskom/",
+       "notes": "Склад уже находится под управлением фонда Aktivo; статья описывает продажу паёв многим розничным инвесторам, а не переход контроля над активом к одному покупателю.",
+       "quote_checked": true,
+       "reader": "B"
       }
      ],
      "reading": {
@@ -129261,15 +129470,15 @@
      "purchase_sums": false,
      "top_purchases": false,
      "multiple_text": false,
-     "all_sums": true
+     "all_sums": false
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
-     "multiple_text": "target_unconfirmed",
-     "all_sums": "ok"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "not_control_change",
+     "all_sums": "price_not_disclosed"
     }
    },
    "discovery_src": [
@@ -129312,7 +129521,8 @@
    },
    "reread": "2026-11-12",
    "reread_hash": "553f8a65d677.7314e0",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "sum_basis": "not_a_price"
   },
   {
    "id": "ga6924cc4",
@@ -279063,18 +279273,91 @@
      "card_hash": "5bdd0e5effe4"
     },
     "price": {
-     "value_rub": 400000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "5063004de8a3",
-     "any_rub": null
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "4b32b6874d28",
+     "any_rub": null,
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка. Отличное месторасположение, выход на Шоссе Космонавтов. Идеально подойдет под бизнес-центр, медицинский центр. Цена — 400 млн рублей», — сообщается на популярном сайте бесплатных объявлений.",
+     "source": "https://ura.news/news/1053141325",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": 400000000,
+       "meaning": "auction_start",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка. Отличное месторасположение, выход на Шоссе Космонавтов. Идеально подойдет под бизнес-центр, медицинский центр. Цена — 400 млн рублей», — сообщается на популярном сайте бесплатных объявлений.",
+       "source": "https://ura.news/news/1053141325",
+       "notes": "Опечатки «Собственнник»/«собственнности» — так в кэше источника, цитата дословная.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 400000000,
+       "meaning": "auction_start",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка. Отличное месторасположение, выход на Шоссе Космонавтов. Идеально подойдет под бизнес-центр, медицинский центр. Цена — 400 млн рублей», — сообщается на популярном сайте бесплатных объявлений.",
+       "source": "https://ura.news/news/1053141325",
+       "notes": "Опечатки «Собственнник»/«собственнности» — так в тексте источника, цитата дословная.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-03",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "ed3c3dbd966f"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "90a101985548",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "03 ноября 2026 в 18:08 Поделиться Бизнес-центр находится в Индустриальном районе города (архивное фото) Фото: Валерий Бычков © URA.RU В Перми выставили на продажу здание крупного делового центра в Индустриальном районе города.",
+     "source": "https://ura.news/news/1053141325",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": "2026-11-03",
+       "meaning": "publication",
+       "quote": "03 ноября 2026 в 18:08 Поделиться Бизнес-центр находится в Индустриальном районе города (архивное фото) Фото: Валерий Бычков © URA.RU В Перми выставили на продажу здание крупного делового центра в Индустриальном районе города.",
+       "source": "https://ura.news/news/1053141325",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-03",
+       "meaning": "publication",
+       "quote": "03 ноября 2026 в 18:08 Поделиться Бизнес-центр находится в Индустриальном районе города (архивное фото) Фото: Валерий Бычков © URA.RU В Перми выставили на продажу здание крупного делового центра в Индустриальном районе города.",
+       "source": "https://ura.news/news/1053141325",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -279084,7 +279367,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6558175a595e"
+     "card_hash": "6558175a595e",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка.",
+     "source": "https://ura.news/news/1053141325",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка.",
+       "source": "https://ura.news/news/1053141325",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "«Собственнник продает отдельно стоящее пятиэтажное здание, земельный участок в собственнности, есть парковка.",
+       "source": "https://ura.news/news/1053141325",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -279107,8 +279414,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
@@ -279117,7 +279424,9 @@
    "reread_hash": "ddbd9b9bb205.ace5bd",
    "reread_scope": "short",
    "reread_note": "статьи: 1",
-   "deep_researched": "2026-11-09"
+   "deep_researched": "2026-11-09",
+   "sum_basis": "auction_start",
+   "date_basis": "publication"
   },
   {
    "id": "g90784f0a",
@@ -288411,13 +288720,14 @@
    },
    "law": {
     "struct": "Арбитражный суд Ярославской области за одно заседание удовлетворил иск Генпрокуратуры об истребовании акций в пользу государства.",
-    "appr": "Решение обращено к немедленному исполнению. Второй арбитражный апелляционный суд жалобы акционеров отклонил, а 28 мая 2024 года суд Волго-Вятского округа оставил решение и постановление апелляции без изменений.",
+    "appr": "Решение обращено к немедленному исполнению. Второй арбитражный апелляционный суд жалобы акционеров отклонил, а 28 мая 2024 года суд Волго-Вятского округа оставил решение и постановление апелляции без изменений. Указом президента изъятые акции переданы «Ростеху» как имущественный взнос государства.",
     "adv": [],
     "terms": "Деньги за акции не платились: они истребованы без компенсации."
    },
    "asset": "Акции ПАО «Ростовский оптико-механический завод» (Ярославская область)",
    "themes": [
-    "Национализация / иск Генпрокуратуры"
+    "Национализация / иск Генпрокуратуры",
+    "Правкомиссия / указ президента"
    ],
    "no_parties": "Изъятие по решению суда: покупателя и продавца нет, актив перешел государству.",
    "accepted_notes": {
@@ -288492,7 +288802,12 @@
    "reread": "2026-11-09",
    "reread_hash": "53f1a19e7df6.a22170",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2022-08-12",
@@ -288611,7 +288926,9 @@
    "reread": "2026-11-09",
    "reread_hash": "150ca21fa7b3.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2024-12-04",
@@ -288722,7 +289039,9 @@
    "reread": "2026-11-09",
    "reread_hash": "c054804d8e71.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2025-07-09",
@@ -288743,6 +289062,10 @@
     [
      "ТКС",
      "https://www.tks.ru/reviews/2026/09/29/0001/metro-stala-28-j-inostrannoj-kompaniej-chi-aktivyi-peredali-vo-vremennoe-upravlenie/"
+    ],
+    [
+     "profile.ru",
+     "https://profile.ru/news/society/sud-v-rf-prigovoril-kolomojskogo-k-12-godam-zaochno-za-hishhenie-nefti-na-10-mlrd-rub-1874794/"
     ]
    ],
    "eco": {
@@ -288759,12 +289082,13 @@
     "struct": "Указом президента 100% акций АО «Петрус» переданы во временное управление ООО «СафПэт Актив», дочерней компании «Татнефти» из Нижнекамска. Собственность государству не переходила: управляющий получает права владельца, но не может распоряжаться имуществом.",
     "appr": "Указ президента от 9 июля 2025 года № 464 вступил в силу со дня официального опубликования; он дополнил перечень к указу от 25 апреля 2023 года № 302.",
     "adv": [],
-    "terms": "—"
+    "terms": "Альметьевский городской суд Татарстана заочно приговорил Игоря Коломойского, Александра Ярославского, Геннадия Боголюбова и Павла Овчаренко к 12 годам лишения свободы по статьям 210 ч.1 и 160 ч.4 УК РФ за хищение татарстанской нефти; приговор не вступил в законную силу."
    },
    "asset": "100% АО «Петрус»",
    "themes": [
     "Правкомиссия / указ президента",
-    "Уход иностранного владельца"
+    "Уход иностранного владельца",
+    "Национализация / иск Генпрокуратуры"
    ],
    "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
    "accepted_notes": {},
@@ -288834,7 +289158,12 @@
    "reread": "2026-11-09",
    "reread_hash": "ce597c56450f.03d869",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "proofread_absorbed": {
+    "law.terms": []
+   },
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2026-08-31",
@@ -288876,7 +289205,8 @@
    "asset": "100% АО «Диэлектрические кабельные системы» (ДКС)",
    "themes": [
     "Правкомиссия / указ президента",
-    "Уход иностранного владельца"
+    "Уход иностранного владельца",
+    "Национализация / иск Генпрокуратуры"
    ],
    "no_parties": "Временное управление по указу, собственность не переходила — покупателя и продавца нет.",
    "accepted_notes": {
@@ -288948,7 +289278,9 @@
    "reread": "2026-11-09",
    "reread_hash": "d857c34fbe8f.06f452",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2025-10-20",
@@ -289077,7 +289409,9 @@
      "by": "reread_registry_sellers_r1119b",
      "date": "2026-11-19"
     }
-   ]
+   ],
+   "deep_researched": "2026-11-22",
+   "weekly_researched": "2026-11-22"
   },
   {
    "date": "2025-04-07",
@@ -296147,18 +296481,91 @@
      "card_hash": "2021e9f3b83e"
     },
     "price": {
-     "value_rub": 970000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "871a4a498788",
-     "any_rub": null
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "eeef8a4daf60",
+     "any_rub": null,
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "unknown",
+     "terms_variants": [
+      "unknown"
+     ],
+     "scope_basis": "verified",
+     "quote": "В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский». Стоимость готового бизнеса с землей, фермами, скотом и техникой – 970 млн рублей.",
+     "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": 970000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский». Стоимость готового бизнеса с землей, фермами, скотом и техникой – 970 млн рублей.",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "notes": "Сумма — запрашиваемая цена продажи целиком действующего хозяйства (объявление о продаже, сделка не закрыта, статус карточки «Обсуждается»). Прямого указания, кто именно назвал цену (продавец, издание, площадка объявлений), в тексте нет — attribution поставил unknown, а не parties/media_sources, чтобы не гадать.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 970000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "unknown",
+       "quote": "В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский». Стоимость готового бизнеса с землей, фермами, скотом и техникой – 970 млн рублей.",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "notes": "Сделка не закрыта (карточка — «Обсуждается»), это запрашиваемая цена продажи целиком действующего хозяйства. Кто именно назвал цену (продавец, площадка объявлений или сам автор текста), прямо не указано.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-05",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "3fe5034b5d9d"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "86af83ac76f1",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "11:59, 5 ноября 2026 Омская область. В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский».",
+     "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": "2026-11-05",
+       "meaning": "publication",
+       "quote": "11:59, 5 ноября 2026 Омская область. В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский».",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-05",
+       "meaning": "publication",
+       "quote": "11:59, 5 ноября 2026 Омская область. В Омской области продают гигантский агрохолдинг, основанный на базе бывшего совхоза «Тихвинский».",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -296168,7 +296575,33 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6558175a595e"
+     "card_hash": "6558175a595e",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "При этом бизнес продается целиком, с сохранением действующего производства.",
+     "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "При этом бизнес продается целиком, с сохранением действующего производства.",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "notes": "Покупатель не назван (сделка на стадии объявления о продаже), но описана как продажа целого действующего бизнеса конечным владельцем («владелец хозяйства решил уйти на пенсию»), а не передача внутри группы.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "При этом бизнес продается целиком, с сохранением действующего производства.",
+       "source": "https://abnews.ru/siberia/news/omsk/2026/11/5/v-omskoj-oblasti-prodayut-gigantskij-agroholding-za-970-millionov-rublej",
+       "notes": "Покупатель не назван, но продавец — конечный владелец, уходящий на пенсию («владелец хозяйства решил уйти на пенсию и переехать жить в Сочи»), продажа не внутригрупповая.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -296191,8 +296624,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
@@ -296201,7 +296634,9 @@
    "reread": "2026-11-09",
    "reread_hash": "d8b8fc1aba92.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "sum_basis": "auction_start",
+   "date_basis": "publication"
   },
   {
    "id": "g8317fa58",
@@ -305792,22 +306227,125 @@
    "facts": {
     "stake": {
      "value": 50.0,
-     "basis": "rule",
-     "card_hash": "6e057872320b"
+     "basis": "verified",
+     "card_hash": "6e057872320b",
+     "object": "группа «Комфорт»",
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": 50.0,
+       "object": "группа «Комфорт»",
+       "event": "closing",
+       "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": 50.0,
+       "object": "группа «Комфорт»",
+       "event": "closing",
+       "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "price": {
-     "value_rub": 700000000.0,
+     "value_rub": 700000000,
      "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
+     "scope": "package",
+     "basis": "verified",
      "card_hash": "9d1da756cda1",
-     "any_rub": 700000000.0
+     "any_rub": 700000000.0,
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "attribution": "parties",
+     "attribution_variants": [
+      "parties"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "attribution_quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК . Об этом «Ведомостям» рассказал представитель первой организации.",
+     "scope_basis": "verified",
+     "quote": "Он добавляет, что сумма сделки составила 700 млн руб.",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": 700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Он добавляет, что сумма сделки составила 700 млн руб.",
+       "attribution_quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК . Об этом «Ведомостям» рассказал представитель первой организации.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 700000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Он добавляет, что сумма сделки составила 700 млн руб.",
+       "attribution_quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК . Об этом «Ведомостям» рассказал представитель первой организации.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-09-14",
      "meaning": "closing",
-     "basis": "rule",
-     "card_hash": "d831e870f0d4"
+     "basis": "verified",
+     "card_hash": "d831e870f0d4",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "По данным «СПАРК-Интерфакса», она была закрыта еще 14 сентября.",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": "2026-09-14",
+       "meaning": "closing",
+       "quote": "По данным «СПАРК-Интерфакса», она была закрыта еще 14 сентября.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-09-14",
+       "meaning": "closing",
+       "quote": "По данным «СПАРК-Интерфакса», она была закрыта еще 14 сентября.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -305817,7 +306355,31 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "425530f6d36f"
+     "card_hash": "425530f6d36f",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "Группа «К+» стала единственным владельцем группы «Комфорт», она выкупила 50% долей в ней у ГК ФСК .",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/10/1243876-fsk-vishla-iz-kapitala",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": "g54ecc168",
@@ -305832,16 +306394,16 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": false,
-     "top_purchases": false,
+     "purchase_sums": true,
+     "top_purchases": true,
      "multiple_text": false,
      "all_sums": true
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "ok",
+     "top_purchases": "ok",
      "multiple_text": "target_unconfirmed",
      "all_sums": "ok"
     }
@@ -323651,18 +324213,91 @@
      "card_hash": "202a90498c88"
     },
     "price": {
-     "value_rub": 855000000.0,
-     "meaning": "disclosed",
-     "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "05a730e4262e",
-     "any_rub": null
+     "value_rub": null,
+     "meaning": "auction_start",
+     "scope": "package",
+     "basis": "verified",
+     "card_hash": "d84d7624eb70",
+     "any_rub": null,
+     "meaning_variants": [
+      "auction_start"
+     ],
+     "attribution": "unknown",
+     "attribution_variants": [
+      "unknown"
+     ],
+     "event": "announcement",
+     "event_variants": [
+      "announcement"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "verified",
+     "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч . За объект с двумя зданиями и железнодорожным тупиком просят 855 млн рублей.",
+     "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value_rub": 855000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч . За объект с двумя зданиями и железнодорожным тупиком просят 855 млн рублей.",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "notes": "Запрашиваемая цена из объявления (источник фото — сайт «Авито»), сделка не закрыта. Кто именно назвал цену продавцу/изданию, текст прямо не говорит — attribution unknown.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 855000000,
+       "meaning": "auction_start",
+       "attribution": "unknown",
+       "event": "announcement",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч . За объект с двумя зданиями и железнодорожным тупиком просят 855 млн рублей.",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "notes": "Запрашиваемая цена из объявления (иллюстрация — «фото: сайт «Авито»»), сделка не закрыта. Текст прямо не называет, кто именно озвучил цену — unknown.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-18",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "072057eeab2b"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "01d0b39e5d01",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Полина Парадовская · 18 ноября 2026, 09:38 · 1 мин чтения",
+     "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "value": "2026-11-18",
+       "meaning": "publication",
+       "quote": "Полина Парадовская · 18 ноября 2026, 09:38 · 1 мин чтения",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-18",
+       "meaning": "publication",
+       "quote": "Полина Парадовская · 18 ноября 2026, 09:38 · 1 мин чтения",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -323672,7 +324307,33 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "6558175a595e"
+     "card_hash": "6558175a595e",
+     "intragroup": false,
+     "control_change_basis": "verified",
+     "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч .",
+     "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-22",
+     "readings": [
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч .",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "notes": "Покупатель не назван — объявление о продаже готового комплекса, независимый переход к новому владельцу подразумевается по смыслу листинга.",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "control_change": true,
+       "intragroup": false,
+       "quote": "В Левобережном районе Воронежа продают производственно-складской комплекс на Монтажном проезде, 5Ч .",
+       "source": "https://abireg.ru/newsitem/119340-proizvodstvenno-skladskoy-kompleks-prodayut-v-voronezhe-za-855-mln-rubley/",
+       "notes": "Покупатель не назван (объявление о продаже), переход к новому независимому владельцу подразумевается по смыслу текста.",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "target": {
      "company_id": null,
@@ -323695,12 +324356,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
-   }
+   },
+   "sum_basis": "auction_start",
+   "date_basis": "publication"
   },
   {
    "id": "g74dbc4b1",
@@ -324783,7 +325446,7 @@
     "target_fin": "По данным ГИР БО, выручка ООО «Медскан Лаб» за 2025 год — 310,8 млн ₽ (за 2024 год — 127,0 млн ₽), чистая прибыль — 166,5 млн ₽ (за 2024 год — убыток 5,7 млн ₽).",
     "fin": "—",
     "rationale": "«Медскан» объяснил продажу так: деньги от сделки пойдут на развитие платформы компании и на снижение долга. Стороны рассматривают и более широкое сотрудничество за пределами лабораторного бизнеса.",
-    "context": "У «Медскана» сеть в 105 городах и 31 регионе: 70 медицинских центров, 17 лабораторий, больше 575 лабораторных офисов под брендом KDL, а также госпитали, многопрофильные и онкологические клиники. Forbes по итогам 2024 года поставил группу в тройку крупнейших медицинских компаний страны с выручкой 28 млрд ₽. Структура «Росатома» купила 25,001% группы в феврале 2022 года, а через год довела пакет до 50%.\n\n«Медскан» не первый год готовится к IPO. В декабре 2025 года основатель «Медскана» Евгений Туголуков говорил, что компания заканчивает сделки, которые будет рассматривать «в рамках pre-IPO»; размещение несколько раз переносили, и к ноябрю 2026 года его так и не провели.\n\nНакануне объявления, 18 ноября, «Медскан» раскрыл договоры по ООО «Медскан Лаб»: опцион, который при определенных условиях дает группе право купить долю в этой компании у АО «Медицинский актив», и гарантию по обязательствам «Медицинского актива» — всего на сумму до 7,5 млрд ₽. «Медицинский актив» — промежуточный холдинг Евгения Туголукова: в январе 2026 года он передал ему свои 50% «Медскана». Связаны ли эти договоры с продажей 49% и кто держит проданную долю, компания не раскрыла.",
+    "context": "Бренд KDL у «Медскана» — это больше 575 лабораторных офисов, 70 медицинских центров и 17 лабораторий в 105 городах 31 региона; группа также управляет госпиталями, многопрофильными и онкологическими клиниками. В рейтинге Forbes за 2024 год «Медскан» занял третье место среди медицинских компаний России по размеру выручки — 28 млрд ₽. Структура «Росатома» купила 25,001% группы в феврале 2022 года, а через год довела пакет до 50%.\n\n«Медскан» не первый год готовится к IPO. В декабре 2025 года основатель «Медскана» Евгений Туголуков говорил, что компания заканчивает сделки, которые будет рассматривать «в рамках pre-IPO»; размещение несколько раз переносили, и к ноябрю 2026 года его так и не провели.\n\nНакануне объявления, 18 ноября, «Медскан» раскрыл договоры по ООО «Медскан Лаб»: опцион, который при определенных условиях дает группе право купить долю в этой компании у АО «Медицинский актив», и гарантию по обязательствам «Медицинского актива» — всего на сумму до 7,5 млрд ₽. «Медицинский актив» — промежуточный холдинг Евгения Туголукова: в январе 2026 года он передал ему свои 50% «Медскана». Связаны ли эти договоры с продажей 49% и кто держит проданную долю, компания не раскрыла.",
     "finadv": "—"
    },
    "law": {
