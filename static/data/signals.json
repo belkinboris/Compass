@@ -2,6 +2,48 @@
  "updated": "2026-11-23",
  "signals": [
   {
+   "id": "sc01d8a991",
+   "company_id": "g4f2ebf90",
+   "date": "2026-11-23",
+   "kind": "for_sale",
+   "summary": "Енева — обсуждается продажа компании или доли; возможный покупатель — SkyNet",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/11/23/skynet-kupit-infrastrukturu"
+   ],
+   "origin": "card",
+   "deal_id": "gba506a58",
+   "strength": "strong"
+  },
+  {
+   "id": "s56bf67ca2",
+   "company_id": "gfd1c35bc",
+   "date": "2026-11-23",
+   "kind": "buy",
+   "summary": "SkyNet — обсуждается покупка: Енева",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/11/23/skynet-kupit-infrastrukturu"
+   ],
+   "origin": "card",
+   "deal_id": "gba506a58",
+   "strength": "normal"
+  },
+  {
+   "id": "s32bfb3784",
+   "company_id": "g05ad26d8",
+   "date": "2026-11-23",
+   "kind": "sell",
+   "summary": "Обит — обсуждается продажа: Енева",
+   "source": [
+    "Деловой Петербург",
+    "https://www.dp.ru/a/2026/11/23/skynet-kupit-infrastrukturu"
+   ],
+   "origin": "card",
+   "deal_id": "gba506a58",
+   "strength": "strong"
+  },
+  {
    "id": "s1b6c78a9d",
    "company_id": "g12111389",
    "date": "2026-11-22",
