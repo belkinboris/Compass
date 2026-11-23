@@ -839,7 +839,9 @@
    "date_basis": "announcement",
    "target": "gbda10b5d",
    "accepted": "2026-11-23",
-   "accepted_hash": "f85e682a5eb4.dc7e6c"
+   "accepted_hash": "f85e682a5eb4.dc7e6c",
+   "second_read": "2026-11-23",
+   "second_read_hash": "f85e682a5eb4.dc7e6c"
   },
   {
    "id": "gb4937a72",
@@ -907,7 +909,9 @@
    "reviewed": "2026-11-23",
    "no_parties": "Объявление о продаже на площадке бесплатных объявлений: автор не называет ни свое имя, ни юрлицо завода. Покупателя нет — сделка не состоялась, это предложение продавца.",
    "accepted": "2026-11-23",
-   "accepted_hash": "0cbc52c61f22.ace5bd"
+   "accepted_hash": "0cbc52c61f22.ace5bd",
+   "second_read": "2026-11-23",
+   "second_read_hash": "0cbc52c61f22.ace5bd"
   },
   {
    "id": "g30404c73",
