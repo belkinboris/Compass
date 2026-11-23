@@ -2,6 +2,35 @@
  "made": "2026-11-23",
  "drafts": [
   {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
    "draft_id": "d34423503",
    "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
    "date": "2026-11-17",
@@ -597,45 +626,6 @@
    ]
   },
   {
-   "draft_id": "d21254081",
-   "title": "«М.Видео»: россияне приобрели почти 2 млн кофемашин и кофеварок за девять месяцев 2026 года",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-23_mvideo_rossiyane_priobreli"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-23",
-     "title": "Сделка завершена",
-     "note": "ПАО «М.видео», мультикатегорийный маркетплейс с опорой на собственную розницу и сеть партнерских ПВЗ, проанализировал...",
-     "source": [
-      "web:cnews.ru",
-      "https://www.cnews.ru/news/line/2026-11-23_mvideo_rossiyane_priobreli"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "почти 2 млн кофемашин и кофеварок за девять месяцев 2026 года",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "почти 2 млн кофемашин и кофеварок за девять месяцев 2026 года",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d20595520",
    "title": "В 2026 году налоговые льготы в проактивном режиме получили 98% граждан",
    "date": "2026-11-23",
@@ -778,13 +768,41 @@
    ]
   },
   {
-   "draft_id": "d12120915",
-   "title": "Под Челябинском за треть миллиарда продается огромный склад лекарств. Скрин",
+   "draft_id": "d68499833",
+   "title": "Подмосковный бизнес привлек 1,7 млрд рублей льготных кредитов на инвестиции",
    "date": "2026-11-23",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053146485"
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28346137"
+    ]
+   ],
+   "sum": "1,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Подмосковный бизнес",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Подмосковный бизнес",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d12107386",
+   "title": "Арестованный танкер Unity передали под управление индийского капитана",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261123/tanker-2133426065.html"
     ]
    ],
    "sum": null,
@@ -802,74 +820,17 @@
    "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g85e07f6d (общие редкие слова: треть, челяби) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d21904202",
-   "title": "Var Energi покупает норвежские активы ConocoPhillips за 4,4 миллиарда долларов",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261123/conocophillips-875447268.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Var Energi",
-   "asset": "норвежские активы ConocoPhillips",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Var Energi",
-    "asset": "норвежские активы ConocoPhillips",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d05357032",
-   "title": "«Лосево» продают за долги. Компания остановила производство и пытается избежать банкротства",
-   "date": "2026-11-13",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/13/76762164/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d03501616",
-   "title": "Расходы на покупки через ИИ-агентов выросли в 80 раз, но оплату им не доверяют",
+   "draft_id": "d35686909",
+   "title": "«Чиполлино» за 34 тысячи и Дед Мороз из стекла. Какие необычные елочные игрушки продают в Ростове?",
    "date": "2026-11-23",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/rashody-na-pokupki-cherez-ii-agentov-vyrosli-v-80-raz-no-oplatu-im-ne-doveryayut/"
+     "web:161.ru",
+     "https://161.ru/text/winter/2026/11/23/76784283/"
     ]
    ],
    "sum": null,
@@ -884,11 +845,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Искусственный интеллект",
+   "ind": "Потребительские товары",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
