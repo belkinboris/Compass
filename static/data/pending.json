@@ -897,6 +897,223 @@
     "eco.context": []
    },
    "reviewed": "2026-11-23"
+  },
+  {
+   "id": "g30404c73",
+   "date": "2026-11-13",
+   "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-23T09:45:41+00:00",
+   "from_raw": {
+    "draft_id": "d99277860",
+    "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»"
+   }
+  },
+  {
+   "id": "gc4d31e84",
+   "date": "2026-11-22",
+   "title": "В Калининградской области здание казино XIX века продают за 13,5 млн рублей",
+   "ind": "Развлечения",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/nedvizhimost/28343205"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "13,5 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "13,5 млн ₽",
+   "pending_since": "2026-11-23T09:45:41+00:00",
+   "from_raw": {
+    "draft_id": "d26162939",
+    "title": "В Калининградской области здание казино XIX века продают за 13,5 млн рублей"
+   }
+  },
+  {
+   "id": "g518f73f9",
+   "date": "2026-11-23",
+   "title": "Загородный отдых привлекает инвесторов: в Подмосковье вложат 43 млрд рублей в новый курорт",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Фонтанка.ру",
+     "https://www.fontanka.ru/2026/11/23/76783614/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "43 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "43 млрд ₽",
+   "asset": "Загородный отдых",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "Загородный отдых",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.fontanka.ru/2026/11/23/76783614/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-23T09:45:41+00:00",
+   "from_raw": {
+    "draft_id": "d06846197",
+    "title": "Загородный отдых привлекает инвесторов: в Подмосковье вложат 43 млрд рублей в новый курорт"
+   }
+  },
+  {
+   "id": "ga187c62e",
+   "date": "2026-11-23",
+   "title": "Логистика «Лебедяньмолоко» перешла к управляющему акционеру холдинга Игорю Кремневу",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-23T09:45:41+00:00",
+   "from_raw": {
+    "draft_id": "d89690931",
+    "title": "Логистика «Лебедяньмолоко» перешла к управляющему акционеру холдинга Игорю Кремневу"
+   }
+  },
+  {
+   "id": "g7ad2f3e2",
+   "date": "2026-11-23",
+   "title": "Фонд «ЧакVC» инвестировал 6 млн рублей в ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей.   Chatix [ИП Демьянов К.С. ] делает ИИ-агента для продаж и общения с клиента",
+   "ind": "Искусственный интеллект",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Телеграм-канал: Русский Венчур",
+     "https://t.me/rusven/7863"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "6 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "6 млн ₽",
+   "buyer_name": "«ЧакVC»",
+   "asset": "ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей. Chatix [ИП Демьян",
+   "themes": [
+    "Искусственный интеллект"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«ЧакVC»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7863"
+     }
+    ],
+    "target": [
+     {
+      "value": "ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей. Chatix [ИП Демьян",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7863"
+     }
+    ]
+   },
+   "pending_since": "2026-11-23T09:45:41+00:00",
+   "from_raw": {
+    "draft_id": "d62446775",
+    "title": "Фонд «ЧакVC» инвестировал 6 млн рублей в ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей.   Chatix [ИП Демьянов К.С. ] делает ИИ-агента для продаж и общения с клиента"
+   }
   }
  ]
 }
