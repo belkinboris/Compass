@@ -1212,6 +1212,203 @@
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
    ]
+  },
+  {
+   "draft_id": "d06846197",
+   "title": "Загородный отдых привлекает инвесторов: в Подмосковье вложат 43 млрд рублей в новый курорт",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/23/76783614/"
+    ]
+   ],
+   "sum": "43 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Загородный отдых",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Загородный отдых",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d89690931",
+   "title": "Логистика «Лебедяньмолоко» перешла к управляющему акционеру холдинга Игорю Кремневу",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12702669",
+   "title": "«Продажи пойдут на ура»: эксперт назвал главные условия успеха кроссовера Lada Azimut",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/prodazhi-pojdut-na-ura-ekspert-nazval-glavnye-usloviya-uspeha-krossovera-lada-azimut/"
+    ]
+   ],
+   "sum": "2 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d40695499",
+   "title": "Панические распродажи акций в США объяснили",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/23/panicheskie-rasprodazhi-aktsiy-v-ssha-svyazali-s-slovami-lopnul-li-uzhe-puzyr-iskusstvennogo-intellekta/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d95873865",
+   "title": "Россиянин выставил на продажу необычный пикап Niva",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/23/rossiyanin-vystavil-na-prodazhu-neobychnyy-pikap-niva/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05740865",
+   "title": "В Волгограде за 250 тысяч продают камень необычной формы из аномальной Медведицкой гряды",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/11/23/76783679/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d35857678",
+   "title": "В Волгоградской области запретили продавать фейерверки на Новый год и зимние праздники",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/gorod/2026/11/23/76783619/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
