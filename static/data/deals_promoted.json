@@ -366285,7 +366285,8 @@
   "g654a1ce5": null,
   "g2e669787": null,
   "gfa56e747": null,
-  "gc816c617": null
+  "gc816c617": null,
+  "g74f067d8": 300
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -366420,7 +366421,8 @@
   "g861c5553": 43,
   "gaa5d4eb6": 68,
   "ge1b2eba1": 12,
-  "gcd8fe39c": 18
+  "gcd8fe39c": 18,
+  "g9b852635": 84
  },
  "telegram_post_state": {
   "ga525c46b": {
@@ -371354,6 +371356,36 @@
    },
    "events": [],
    "title": "Акции завода «Вентпром» обращены в доход государства по решению суда"
+  },
+  "g9b852635": {
+   "sum": "8,1 млрд ₽ (по данным Telegram-каналов)",
+   "seller": "«Эталон»",
+   "asset": "Участки в Нагатинской пойме",
+   "status": "Обсуждается",
+   "title": "Участки «Эталона» в Нагатинской пойме выставлены на продажу за 8,1 млрд рублей",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
+  },
+  "g74f067d8": {
+   "buyer": "g1ea0e717",
+   "target": "gbda10b5d",
+   "asset": "Semantica AI",
+   "status": "Закрыта",
+   "title": "ФРИИ проинвестировал в проект Semantica AI",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
  "consumed_urls": [
@@ -371783,5 +371815,5 @@
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
  ],
- "telegram_last_post_at": "2026-11-23T11:51:07+00:00"
+ "telegram_last_post_at": "2026-11-23T15:42:28+00:00"
 }
