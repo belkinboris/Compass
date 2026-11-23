@@ -326783,6 +326783,606 @@
      "all_sums": "talks"
     }
    }
+  },
+  {
+   "id": "g9b852635",
+   "date": "2026-11-23",
+   "title": "Участки «Эталона» в Нагатинской пойме выставлены на продажу за 8,1 млрд рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261123/etalon-2133385948.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "8,1 млрд ₽ (по данным Telegram-каналов)",
+    "share": "—",
+    "val": "Сумму сделки компания не называет. Цифру 8,1 млрд ₽ раньше приводили телеграм-каналы — независимого подтверждения этой оценки от «Эталона» нет.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "«Эталон» объясняет продажу желанием сбалансировать свой земельный портфель: компания смещает фокус с этой локации, чтобы вложить деньги в другие перспективные участки.",
+    "context": "По словам представителя «Эталона», участки общей площадью 2,2 гектара — часть крупного проекта жилой застройки «Нагатино Ай-Лэнд»: на них предварительно можно построить жилой объект площадью 95,8 тыс. кв. м с квартирами на 55,8 тыс. кв. м. Один из лотов входит в четвертую очередь «Нагатино Ай-Лэнда», второй нужно осваивать по программе комплексного развития территорий. Из двух построенных очередей «Нагатино Ай-Лэнда» готовы, еще две строятся и проектируются. Контролирующий акционер «Эталона» — АФК «Система» (71% компании).",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Эталон»",
+   "asset": "Участки в Нагатинской пойме",
+   "seller_src": "text",
+   "party_evidence": {
+    "seller": [
+     {
+      "value": "«Эталон»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261123/etalon-2133385948.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "Участки в Нагатинской пойме",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261123/etalon-2133385948.html"
+     }
+    ]
+   },
+   "sum": "8,1 млрд ₽ (по данным Telegram-каналов)",
+   "seller_id": "ga37e3cf6",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "Покупателя пока нет — участки только выставлены на продажу.",
+     "target": "Два земельных участка в Нагатинской пойме — не юрлицо, профиля быть не может (тот же случай, что g69c83a3f, g17362840, g9f2d671d); РИА Недвижимость 23.11.2026 называет лоты по номеру очереди «Нагатино Ай-Лэнда» и программе КРТ, без кадастровых номеров и без общества-владельца конкретно этих участков."
+    },
+    "notes": "Независимая приемка 23.11.2026 (не строил карточку). РИА Недвижимость прочитана целиком по кэшу (data/inbox/raw/2026-11-23-articles.jsonl) — первоисточник, прямая цитата представителя «Эталона» о площади и мотиве продажи. Цена 8,1 млрд ₽ в статье приведена со ссылкой на телеграм-каналы, сама компания цену не комментирует — eco.val и sum честно это отмечают, пост и заголовок не добавляют продавцу подтверждения цены, которого у него нет. Продавец «Эталон» привязан к профилю «Эталон Груп» (ga37e3cf6, МКПАО «Эталон Груп», девелопер жилой и коммерческой недвижимости Москвы и Петербурга) — тот самый «Эталон», контролирующий акционер АФК «Система» (71%), названный в источнике. Покупателя источник не называет — участки только выставлены на продажу, роль пуста по делу. Правка: снято разговорное «сама/самого» в eco.val (review.py FIXES, written_g9b852635_2026_11_23_etalon_review.py); добавлена причина отсутствия профиля предмета (земельные участки — не юрлицо).",
+    "searched": [
+     "РИА Недвижимость, 23.11.2026 — первоисточник, прочитан целиком по кэшу data/inbox/raw/2026-11-23-articles.jsonl (комментарий представителя «Эталона»; цена 8,1 млрд ₽ там же со ссылкой на телеграм-каналы, сама компания цену не комментирует)",
+     "веб-поиск по деловым изданиям (РБК, Коммерсантъ, Ведомости, Интерфакс) — «Эталон Нагатинская пойма продажа участков 8,1 млрд»: другого материала об этой сделке не нашлось",
+     "веб-поиск по телеграм-каналам, впервые назвавшим цену 8,1 млрд ₽ — первоисточник канала не нашелся, только пересказ в статье РИА",
+     "веб-поиск по раскрытию «Эталон Групп» (e-disclosure.ru, существенные факты) — сообщения о продаже этих участков не нашлось",
+     "локальный кэш притока за 23.11.2026 (data/inbox/raw/2026-11-23-articles.jsonl и 2026-11-23.jsonl) — других публикаций об этой сделке в тот день не забирали"
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.val": [
+     "d2e46e835cb2"
+    ],
+    "eco.context": [
+     "d6ff205939b9"
+    ],
+    "eco.rationale": []
+   },
+   "reviewed": "2026-11-23",
+   "accepted": "2026-11-23",
+   "accepted_hash": "53324ac886dc.61a7db",
+   "second_read": "2026-11-23",
+   "second_read_hash": "53324ac886dc.61a7db",
+   "shown_hash": "53324ac886dc.61a7db",
+   "post_preview": "<b>Участки «Эталона» в Нагатинской пойме выставлены на продажу за 8,1 млрд рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Эталон Груп\n<b>Предмет:</b> Участки в Нагатинской пойме\n<b>Сумма:</b> 8,1 млрд ₽ (по данным Telegram-каналов)\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://realty.ria.ru/20261123/etalon-2133385948.html\">РИА Недвижимость</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g9b852635\">карточке сделки</a>",
+   "post_channels": [
+    "realty"
+   ],
+   "added": "2026-11-23",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "dc305b9f4cca"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "estimate",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "183a41ef7521",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-23",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "bc3e121f8abb"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "6558175a595e"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target",
+     "all_sums": "talks"
+    }
+   }
+  },
+  {
+   "id": "g74f067d8",
+   "date": "2026-11-23",
+   "title": "ФРИИ проинвестировал в проект Semantica AI",
+   "ind": "ИТ и интернет",
+   "type": "Инвестиция",
+   "kind": "financing",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-23_semantica_ai_privlekla_investitsii"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "Сумму инвестиции и долю, которую получил ФРИИ в капитале компании, стороны не назвали. По словам Semantica AI, ФРИИ ранее не вкладывался в российские GEO-проекты — эту сделку компания называет первой для фонда в этом сегменте, независимой проверки такой оценки нет.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "По словам компании, привлеченные средства пойдут на развитие работы с крупными клиентами и на инструмент, который увязывает спрос из поисковых систем и диалогов с нейросетями напрямую с коммерческим результатом клиента — его заявками, продажами и доходом. Сооснователь и гендиректор компании Антон Коченевский говорит, что инвестиция ФРИИ ускорит такую работу с корпоративными клиентами.",
+    "context": "AI Semantica — облачная платформа, которая анализирует присутствие бренда в поисковых системах и ответах нейросетей (ChatGPT, «Алиса», YandexGPT, GigaChat и других) и помогает переводить рост видимости в заявки и продажи клиента. Платформу в 2025 году создали сооснователи Антон Коченевский и Леонид Довбенко на стыке опыта в поисковом продвижении и возможностей генеративного ИИ. Среди клиентов компании — сеть «Иль Де Ботэ», сервис «Горбилет», сеть груминг-салонов «Блэкгрумер», агентство недвижимости Ricci и несколько банков под NDA. По словам компании, это первая инвестиционная сделка ФРИИ в российском GEO-сегменте.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer": "g1ea0e717",
+   "asset": "Semantica AI",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ФРИИ",
+      "field": "buyer",
+      "method": "manual_source_review",
+      "url": "https://www.cnews.ru/news/line/2026-11-23_semantica_ai_privlekla_investitsii"
+     }
+    ],
+    "target": [
+     {
+      "value": "Semantica AI",
+      "field": "asset",
+      "method": "manual_source_review",
+      "url": "https://www.cnews.ru/news/line/2026-11-23_semantica_ai_privlekla_investitsii"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d86170319",
+    "title": "Semantica AI привлекла инвестиции ФРИИ"
+   },
+   "accepted_notes": {
+    "checked": {
+     "registry_owners": "История участников ЕГРЮЛ (datanewton, ОГРН 1262300028781) пуста — записей об изменении состава участников нет: юрлицо зарегистрировано 10.07.2026 и с тех пор состав не менялся, прежней продажи доли не было. Это первый внешний капитал (инвестиция ФРИИ), а не покупка доли у действующего владельца."
+    },
+    "notes": "Независимый повторный разбор (фреш-ревью). Проверено по кэшу CNews (data/inbox/raw/2026-11-23-articles.jsonl): сумма/доля не названы (источник), мотив инвестиции и описание платформы соответствуют статье, покупатель ФРИИ привязан к профилю g1ea0e717 (ИНН в реестре есть). date_basis='announcement' добавлен (пайплайн review.py): дня закрытия в статье нет — сама статья и есть объявление о сделке (23.11.2026, 10:45). ИСПРАВЛЕНО: прежний no_profile.target был неверен — нашелся реальный ИНН ООО «Семантика АИ», профиль заведен вместо отказа.",
+    "searched": "CNews, 23.11.2026 (первоисточник, прочитан целиком через fetch_article_texts.py); datanewton.ru/search по имени «Семантика АИ» и по гендиректору «Коченевский Антон» нашел ООО «СЕМАНТИКА АИ» (ИНН 2366058990, ОГРН 1262300028781, Краснодарский край, разработка ПО, гендиректор Коченевский А.В. — совпадает с сооснователем из статьи) — профиль заведен с этим ИНН; предыдущая запись «не заводим, ведется как ИП без юрлица» (по workspace.ru/startpack.ru) была ошибочной — юрлицо зарегистрировано 10.07.2026 и каталоги его не показывают."
+   },
+   "themes": [
+    "Искусственный интеллект"
+   ],
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.rationale": [],
+    "eco.val": []
+   },
+   "reviewed": "2026-11-23",
+   "date_basis": "announcement",
+   "target": "gbda10b5d",
+   "accepted": "2026-11-23",
+   "accepted_hash": "f85e682a5eb4.dc7e6c",
+   "second_read": "2026-11-23",
+   "second_read_hash": "f85e682a5eb4.dc7e6c",
+   "post_preview": "<b>ФРИИ проинвестировал в проект Semantica AI</b>\n\n<b>Инвестор:</b> ФРИИ — российский венчурный фонд, инвестирует в интернет-проекты на ранней стадии.\n<b>Предмет:</b> Semantica AI\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-23_semantica_ai_privlekla_investitsii\">CNews</a>\n\n#технологии #ИТ #инвестиции\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g74f067d8\">карточке сделки</a>\n",
+   "post_channels": [
+    "main"
+   ],
+   "added": "2026-11-23",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "7c368239f37a"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "3a68f7b82a0b",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-23",
+     "meaning": "announcement",
+     "basis": "rule",
+     "card_hash": "dc858210a53c"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7f5a652ee3ba"
+    },
+    "target": {
+     "company_id": "gbda10b5d",
+     "inn": "2366058990",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "cd7bac2aaf1b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change",
+     "all_sums": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g30404c73",
+   "date": "2026-08-28",
+   "title": "ГК «8 элемент» купила PWeM Invest",
+   "ind": "Финансовые услуги",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "Условия сделки стороны не раскрыли — ни цену, ни то, какую долю в капитале PWeM Invest получила группа «8 элемент» и что взамен получили прежние собственники инвесткомпании.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Сергей Бутенко, владелец «Ломбарда 888», объясняет покупку желанием соединить работающие офлайн-процессы сети с современными цифровыми инструментами управления деньгами — это должно открыть сети новые пути роста. Гендиректор PWeM Invest Яна Конюхова говорит, что после сделки компания стала более устойчивой и сможет предложить клиентам более широкий набор финансовых инструментов; в планах — получить дополнительные лицензии для новых услуг.",
+    "context": "У PWeM Invest (ООО ИК «Управление частным капиталом») из Нижнего Новгорода — лицензии Банка России на брокерскую и дилерскую деятельность и на управление ценными бумагами; компания на этом рынке с 2021 года, и такой набор лицензий в Поволжье есть только у нее. Группа объединит ее с федеральной сетью ломбардов «Ломбард 888» и ювелирной компанией «Аналемма» — по словам «8 элемент», ранее в России не было случая, чтобы крупный игрок ломбардного рынка брал под себя действующую инвесткомпанию.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Покупатель получил контроль, выкупив 100% долей PWeM Invest у прежних участников — Яны Конюховой (30%) и Дмитрия Кутьина (70%); смена участников зарегистрирована в ЕГРЮЛ 28 августа 2026 года, до публичного объявления о сделке.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "from_raw": {
+    "draft_id": "d99277860",
+    "title": "Инвестиционная компания PWeM Invest вошла в состав ГК «8 элемент»"
+   },
+   "kind": "acquisition",
+   "asset": "PWeM Invest",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ГК «8 элемент»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+     }
+    ],
+    "target": [
+     {
+      "value": "PWeM Invest",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Яна Конюхова и Дмитрий Кутьин",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "seller": "Яна Конюхова и Дмитрий Кутьин — физические лица (прежние участники PWeM Invest по истории ЕГРЮЛ, datanewton.ru/api/v2/history?ogrn=1215200023103, см. law.struct), профиль не заводим."
+    },
+    "no_inn": {
+     "buyer": "ГК «8 элемент» — сама статья называет ее «будущей группой компаний», единого юрлица с этим именем нет; искали в ЕГРЮЛ и datanewton по названию «8 элемент» — не нашли (слишком общее имя, много однофамильцев).",
+     "target": "ИНН не нашелся: искали в list-org, rusprofile, checko, companies.rbc.ru, audit-it.ru, tbank.ru, публичном egrul.nalog.ru поиске по обоим названиям (старому и новому после переименования) — все либо блокируют запросы из этой среды, либо не находят точного совпадения; известен только ОГРН 1215200023103 (LEI, подтвержден историей участников ЕГРЮЛ датаньютоном)."
+    },
+    "checked": {
+     "registry_owners": "История участников ЕГРЮЛ PWeM Invest (ООО ИК «Управление частным капиталом», ОГРН 1215200023103) — datanewton.ru/api/v2/history: до 28 августа 2026 года Конюхова Я.В. (30%) и Кутьин Д.Г. (70%), 28 августа 2026 года оба выбыли, единственным участником с долей 100% стал Бутенко С.В. Продажа доли действующими участниками, а не вход через капитал."
+    },
+    "searched": "Mergers.ru, 13.11.2026 (первоисточник, прочитан целиком через fetch_article_texts.py); WebSearch «ООО Управление частным капиталом PWeM Invest Нижний Новгород ИНН» — нашел только запись LEI с ОГРН, без подтверждения вторым источником. Свежая приемка (23 ноября 2026, второй читатель): продавец найден по истории участников ЕГРЮЛ PWeM Invest (datanewton.ru/api/v2/history?ogrn=1215200023103 — прошел без ключа) — до 28 августа 2026 года доли делили Конюхова Я.В. (30%) и Кутьин Д.Г. (70%), затем единственным участником с долей 100% стал Бутенко С.В. (он же владелец «Ломбарда 888» и автор комментария в статье) — независимо подтверждает, что покупатель приобрел компанию у ее прежних участников. Также проверены: cbr.ru/rbr (решение Банка России о брокерской лицензии ООО ИК «Управление частным капиталом», 23.10.2026) и leiscan.com/GLEIF (LEI 253400HKFCWG2ZXPJL04) — подтвердили реквизиты и переименование юрлица после сделки в ООО ИК «8 ЭЛЕМЕНТ»."
+   },
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.rationale": [],
+    "eco.val": [],
+    "law.struct": []
+   },
+   "reviewed": "2026-11-23",
+   "seller": "Яна Конюхова и Дмитрий Кутьин",
+   "date_basis": "registry",
+   "buyer": "ga1e1864f",
+   "target": "g29eeaeb1",
+   "accepted": "2026-11-23",
+   "accepted_hash": "9d813d701833.0af1ff",
+   "fact_log": [
+    {
+     "field": "date",
+     "new": "2026-08-28",
+     "quote": "datanewton, история участников ЕГРЮЛ PWeM Invest (ОГРН 1215200023103): updated_at \"2026-08-28\" — Конюхова Я.В. (30%) и Кутьин Д.Г. (70%) выбыли, Бутенко С.В. стал единственным участником с долей 100%; то же событие уже названо словами в law.struct карточки: «смена участников зарегистрирована в ЕГРЮЛ 28 августа 2026 года, до публичного объявления о сделке».",
+     "url": "https://datanewton.ru/api/v2/history?ogrn=1215200023103&startDate=2000-01-01&attributes=OWNERS",
+     "by": "second_reading_8element_pwem",
+     "date": "2026-11-23"
+    },
+    {
+     "field": "date_basis",
+     "new": "registry",
+     "quote": "datanewton, история участников ЕГРЮЛ PWeM Invest (ОГРН 1215200023103): updated_at \"2026-08-28\" — Конюхова Я.В. (30%) и Кутьин Д.Г. (70%) выбыли, Бутенко С.В. стал единственным участником с долей 100%; то же событие уже названо словами в law.struct карточки: «смена участников зарегистрирована в ЕГРЮЛ 28 августа 2026 года, до публичного объявления о сделке».",
+     "url": "https://datanewton.ru/api/v2/history?ogrn=1215200023103&startDate=2000-01-01&attributes=OWNERS",
+     "by": "second_reading_8element_pwem",
+     "date": "2026-11-23"
+    }
+   ],
+   "notes": "Второе чтение 23 ноября 2026: дата перенесена с дня публикации (13 ноября) на день регистрации перехода доли в ЕГРЮЛ (28 августа 2026, datanewton) — тот же день уже назван в law.struct; date_basis announcement -> registry.",
+   "second_read": "2026-11-23",
+   "second_read_hash": "9d813d701833.0af1ff",
+   "post_preview": "<b>ГК «8 элемент» купила PWeM Invest</b>\n\n<b>Покупатель:</b> ГК «8 элемент» — группа компаний на основе федеральной сети ломбардов «Ломбард 888» и ювелирной компании «Аналемма»\n<b>Продавцы:</b> Яна Конюхова и Дмитрий Кутьин\n<b>Предмет:</b> PWeM Invest\n<b>Статус:</b> Закрыта · август 2026\n<b>Отрасль:</b> Финансовые услуги\n\n<b>Источник:</b> <a href=\"https://mergers.ru/news/Investicionnaya-kompaniya-PWeM-Invest-voshla-v-sostav-GK-8-jelement-87785\">Mergers.ru</a>\n\n#финансы #финуслуги #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g30404c73\">карточке сделки</a>\n",
+   "added": "2026-11-23",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "bacfaf949c0e"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-08-28",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "67118120399e"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": "g29eeaeb1",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "70851178a936"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_unconfirmed",
+     "all_sums": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g7ad2f3e2",
+   "date": "2026-11-23",
+   "title": "ЧакVC купил 10% Chatix",
+   "ind": "Искусственный интеллект",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Telegram: rusven",
+     "https://t.me/rusven/7863"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "6 млн ₽",
+    "share": "10% доли в Chatix",
+    "val": "Оценка проекта в раунде, по данным объявления, составила 60 млн ₽ — именно от нее отталкивается доля 10% за 6 млн ₽.",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "Chatix — сервис с ИИ-агентом, который ведет переписку с клиентами по вопросам продаж: заявки обрабатываются без остановки, ответ приходит за секунды, а до менеджеров доходят только те обращения, где клиент уже готов оформить покупку. По словам компании, в основе бота — ChatGPT: он учится на скриптах продаж, базе знаний и каталоге конкретного клиента и подстраивается под принятый у него стиль общения; по собственному заявлению Chatix, те, кто переписывается с ботом, почти никогда не замечают, что говорят с программой, а не с человеком. «ЧакVC» — фонд с evergreen-структурой капитала для ранних российских технологических стартапов, которым управляет партнер Мартин Кольхаузер.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "6 млн ₽",
+   "buyer_name": "ЧакVC",
+   "asset": "Chatix",
+   "themes": [
+    "Искусственный интеллект"
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ЧакVC",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7863"
+     }
+    ],
+    "target": [
+     {
+      "value": "Chatix",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://t.me/rusven/7863"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d62446775",
+    "title": "Фонд «ЧакVC» инвестировал 6 млн рублей в ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей.   Chatix [ИП Демьянов К.С. ] делает ИИ-агента для продаж и общения с клиента"
+   },
+   "kind": "financing",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "«ЧакVC» — венчурный фонд с evergreen-структурой капитала, управляющий партнер Мартин Кольхаузер; юрлицо фонда в источнике не названо — профиль не заводим."
+    },
+    "no_inn": {
+     "target": "Chatix зарегистрирован как ИП Демьянов К.С. (физлицо-предприниматель), а не как юрлицо — ИНН юрлица у бренда нет; ОГРНИП в реестре (егрюл) отдельно не искали ввиду того же класса, что Semantica AI/ИП Коченевский тем же утром."
+    },
+    "searched": "Telegram-канал @rusven, 23.11.2026 (первоисточник, прочитан целиком). Свежая приемка (23 ноября 2026): день сделки не назван ни в тексте поста, ни отдельно нигде, кроме собственной метки времени Telegram (published 2026-11-23T07:31:13+00:00, data/inbox/raw/2026-11-23.jsonl) — date_basis=announcement, как у ФРИИ/Semantica AI (g74f067d8)."
+   },
+   "proofread_absorbed": {
+    "eco.val": [],
+    "eco.context": [
+     "1dc53fac3e2f",
+     "fca1faf35fb6"
+    ]
+   },
+   "reviewed": "2026-11-23",
+   "date_basis": "announcement",
+   "target": "g1bbc8348",
+   "accepted": "2026-11-23",
+   "accepted_hash": "68625a8c457a.f11a9b",
+   "second_read": "2026-11-23",
+   "second_read_hash": "68625a8c457a.f11a9b",
+   "post_preview": "<b>ЧакVC купил 10% Chatix</b>\n\n<b>Инвестор:</b> ЧакVC\n<b>Предмет:</b> Chatix — 10% доли в Chatix.\n<b>Сумма:</b> 6 млн ₽\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Искусственный интеллект\n\n<b>Источник:</b> <a href=\"https://t.me/rusven/7863\">Telegram: rusven</a>\n\n#технологии #ИИ #инвестиции\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g7ad2f3e2\">карточке сделки</a>\n",
+   "added": "2026-11-23",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 10.0,
+     "basis": "rule",
+     "card_hash": "071ba48c6460"
+    },
+    "price": {
+     "value_rub": 6000000.0,
+     "meaning": "disclosed",
+     "scope": "unknown",
+     "basis": "rule",
+     "card_hash": "88c5a7b92496",
+     "any_rub": 6000000.0
+    },
+    "date": {
+     "value": "2026-11-23",
+     "meaning": "announcement",
+     "basis": "rule",
+     "card_hash": "dc858210a53c"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7f5a652ee3ba"
+    },
+    "target": {
+     "company_id": "g1bbc8348",
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "rule",
+     "perimeter": "unknown",
+     "card_hash": "d931ec911660"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": true
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change",
+     "all_sums": "ok"
+    }
+   }
   }
  ],
  "companies": {
