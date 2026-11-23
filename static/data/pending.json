@@ -390,6 +390,70 @@
    "accepted_hash": "fac60f40b264.0ee728",
    "second_read": "2026-11-23",
    "second_read_hash": "fac60f40b264.0ee728"
+  },
+  {
+   "id": "g94493d25",
+   "date": "2026-11-23",
+   "title": "Женщина купила лампу за две тысячи рублей и разбогатела",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/23/zhenschina-kupila-lampu-za-dve-tysyachi-rubley-i-razbogatela/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Женщина",
+   "asset": "лампа за две тысячи рублей и разбогатела",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-23",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/23/zhenschina-kupila-lampu-za-dve-tysyachi-rubley-i-razbogatela/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Женщина",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/23/zhenschina-kupila-lampu-za-dve-tysyachi-rubley-i-razbogatela/"
+     }
+    ],
+    "target": [
+     {
+      "value": "лампа за две тысячи рублей и разбогатела",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/23/zhenschina-kupila-lampu-za-dve-tysyachi-rubley-i-razbogatela/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-23T07:54:50+00:00"
   }
  ]
 }

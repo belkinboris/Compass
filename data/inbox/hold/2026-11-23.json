@@ -830,158 +830,6 @@
    ]
   },
   {
-   "draft_id": "d98525067",
-   "title": "Песков: новый раунд трехсторонних переговоров по Украине скоро состоится",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/politics/news/2026/11/23/1414145-peskov-novii-raund"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13280516",
-   "title": "Московская штаб-квартира австрийской Strabag перешла в собственность государства",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-23",
-     "title": "Сделка завершена",
-     "note": "Российская Федерация приобрела помещение площадью 20 024 кв. м в бизнес-центре «Ленинский, 119» на юго-западе Москвы. По данным сервиса Asseto, сделка была закрыта 6 ноября. Продавцом актива выступило ООО «Ранита», принадлежащее австрийской Strabag Real…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d02305538",
-   "title": "SkyNet купит инфраструктуру и абонентов петербургского провайдера",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/23/skynet-kupit-infrastrukturu"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "SkyNet",
-   "asset": "инфраструктура и абонентов петербургского провайдера",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "SkyNet",
-    "asset": "инфраструктура и абонентов петербургского провайдера",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
-   "draft_id": "d35244515",
-   "title": "Смольный сократит инвестиции в капитал Центра доступного жилья",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/22/smolnij-sokratit-investicii"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d59006243",
-   "title": "В Кремле рассказали о следующем раунде переговоров по Украине. Когда ждать встречи?",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/23/76783384/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d56631617",
    "title": "Мой портфель облигаций на 23 ноября 2026. Что изменилось за месяц? Покупки и планы на декабрь",
    "date": "2026-11-23",
@@ -1006,158 +854,6 @@
      ]
     }
    ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d71148070",
-   "title": "How Notable Capital, GIC, and Baillie Gifford bet big on Anthropic before its IPO",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/22/how-notable-capital-gic-and-baillie-gifford-bet-big-on-anthropic-before-its-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d14730227",
-   "title": "Песков высказался о новом раунде переговоров по Украине",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/23/peskov-vyskazalsya-o-novom-raunde-peregovorov-po-ukraine/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d29572092",
-   "title": "Мэр из ХМАО оспорит решение суда по делу о незаконной покупке служебной квартиры",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053146370"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-23",
-     "title": "Переговоры",
-     "note": "Глава Ханты-Мансийского района Кирилл Минулин намерен обжаловать решение суда, признавшего незаконным выкуп муниципальной квартиры на льготных условиях.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053146370"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d44339364",
-   "title": "Кремль раскрыл, когда ждать нового раунда трехсторонних переговоров по Украине",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053146422"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d85241595",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:74.ru",
-     "https://74.ru/text/realty/2026/11/23/76782159/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1207,10 +903,9 @@
    },
    "ind": "Недвижимость",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "та же новость, что «Московская штаб-квартира австрийской Strabag перешла в собст» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g65d8957b (общие слова заголовка: 4) — проверьте, не дубль ли"
    ]
   },
   {
@@ -1254,392 +949,6 @@
    ]
   },
   {
-   "draft_id": "d32460496",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ngs24.ru",
-     "https://ngs24.ru/text/realty/2026/11/23/76782141/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d90296946",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/realty/2026/11/23/76782146/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d05728518",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:e1.ru",
-     "https://www.e1.ru/text/realty/2026/11/23/76782137/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d98208579",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:59.ru",
-     "https://59.ru/text/realty/2026/11/23/76782149/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d01418671",
-   "title": "«Уже «завтра« мы будем их продавать»: как в Самарской области готовят лекарства от рака. И при чём тут китайский хомячок",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/economics/2026/11/23/76772343/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d58817377",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/realty/2026/11/23/76782152/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d47505526",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:72.ru",
-     "https://72.ru/text/realty/2026/11/23/76782156/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d49476337",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:161.ru",
-     "https://161.ru/text/realty/2026/11/23/76782150/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d91632782",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/realty/2026/11/23/76782140/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d58212489",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:116.ru",
-     "https://116.ru/text/realty/2026/11/23/76782139/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d34087461",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:v1.ru",
-     "https://v1.ru/text/realty/2026/11/23/76782134/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d64992067",
-   "title": "«У каждого риелтора по три сделки в день». Что такое «Крымская ипотека» и почем можно купить кусочек полуострова",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ufa1.ru",
-     "https://ufa1.ru/text/realty/2026/11/23/76782157/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d42345422",
-   "title": "В Кремле раскрыли, где может пройти следующий раунд трехсторонних переговоров",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261123/peskov-875445090.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d50699727",
    "title": "13-летнюю девочку едва не продали в сексуальное рабство туристу в Таиланде",
    "date": "2026-11-23",
@@ -1676,6 +985,232 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86170319",
+   "title": "Semantica AI привлекла инвестиции ФРИИ",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-23_semantica_ai_privlekla_investitsii"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Semantica AI",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Semantica AI",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d07533709",
+   "title": "МСП привлек более 30 млрд рублей льготных кредитов на инвестпроекты за три квартала",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28345073"
+    ]
+   ],
+   "sum": "30 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСП",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСП",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d21904202",
+   "title": "Норвежская Var Energi покупает у ConocoPhillips ее норвежский бизнес",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261123/conocophillips-875447268.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Норвежская Var Energi",
+   "asset": "ее норвежский бизнес",
+   "seller": "ConocoPhillips",
+   "parsed_parties": {
+    "buyer": "Норвежская Var Energi",
+    "asset": "ее норвежский бизнес",
+    "seller": "ConocoPhillips"
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d26183019",
+   "title": "МСБ привлек на инвестпроекты более 30 млрд рублей льготных кредитов",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261123/kredit-2133274299.html"
+    ]
+   ],
+   "sum": "30 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "МСБ",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "МСБ",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d37090047",
+   "title": "В Тюменской области продают крупный завод по производству скотча",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146518"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d25145700",
+   "title": "В Тюмени снова продают долгострой, который горожане хотят снести",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146491"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d02193838",
+   "title": "#газеты Закрытый паевой инвестфонд «Цифровые горизонты» под управлением АО «УК «Молния» вышел из капитала кикшерингового сервиса «Юрент». 10,49%, принадлежавшие ранее фонду, перешли структуре мажорита",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7862"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62446775",
+   "title": "Фонд «ЧакVC» инвестировал 6 млн рублей в ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей.   Chatix [ИП Демьянов К.С. ] делает ИИ-агента для продаж и общения с клиента",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7863"
+    ]
+   ],
+   "sum": "6 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": "«ЧакVC»",
+   "asset": "ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей. Chatix [ИП Демьян",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "«ЧакVC»",
+    "asset": "ИИ-стартап Chatix в обмен на 10% компании. Оценка проекта составила 60 млн рублей. Chatix [ИП Демьян",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "предмет сделки обрезан на полуслове — это кусок фразы, а не название"
    ]
   }
  ]
