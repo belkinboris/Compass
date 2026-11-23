@@ -752,6 +752,13 @@ def main(write=False):
         pending['cards'].append(card)
         state.setdefault('decided_raw', {})[str(draft['draft_id'])] = 'take'
         state.setdefault('raw_titles', {})[promote.raw_key(draft.get('title'))] = 'take'
+        # Когда владелец признал сырье сделкой — чтобы забор заметил, если
+        # карточка потом пропала (23 ноября 2026, «Юрент»: sweep.lost_takes).
+        _src = draft.get('src') or []
+        state.setdefault('take_log', {})[str(draft['draft_id'])] = {
+            'at': now.isoformat(timespec='seconds'), 'card': card['id'],
+            'title': str(draft.get('title') or '')[:200],
+            'url': _src[0][1] if _src and len(_src[0]) > 1 else None}
         for old_id in _old_ids_for(draft, sent_titles):
             state['decided_raw'][old_id] = 'take'
         print('              %s -> предпросмотр %s' % (draft['draft_id'], card['id']))

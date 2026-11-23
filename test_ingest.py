@@ -5879,10 +5879,19 @@ def test_raw_screen_enrich_marks_decided_without_dropping_the_story(tmp_path, mo
     state_path = tmp_path / "moderation_state.json"
     monkeypatch.setattr(promote, "STATE", str(state_path))
 
-    rc = raw_screen.apply_enrich([("dE", "gpoleks123")], write=True)
+    # С 23 ноября 2026 отметка ставится после чтения: исход, цитата из статьи,
+    # обоснование; карточка должна существовать.
+    monkeypatch.setattr(raw_screen, "_card_by_id", lambda i: {"id": i, "date": "2026-08-20", "status": "Закрыта",
+                                                             "title": "Покупка «Полекса»"})
+    assert raw_screen.apply_enrich([("dE", "gpoleks123")], write=True) == 1
+    rc = raw_screen.apply_enrich(
+        [("dE", "gpoleks123")], write=True, mode="nothing_new",
+        reason="фирма объявила о сопровождении уже описанной сделки, новых фактов о сделке нет",
+        quote="Команда фирмы сопровождала покупателя в сделке по приобретению компании, закрытой в августе")
     assert rc == 0
     state = promote.load_state()
     assert state["decided_raw"]["dE"] == "enrich:gpoleks123"
+    assert state["enrich_log"]["dE"]["mode"] == "nothing_new" and state["enrich_log"]["dE"]["quote"]
 
 
 def test_raw_screen_refuses_dropping_an_unknown_draft_id(tmp_path, monkeypatch):
@@ -12714,3 +12723,50 @@ def test_acceptance_rejects_refusal_and_existing_profile_as_no_profile():
     assert accept_card.existing_profiles_named('49% лабораторной сети KDL', comps) == ['k1']
     assert accept_card.existing_profiles_named('передано во временное Управление', comps) == []
     assert accept_card.existing_profiles_named('лаборатории KDLX', comps) == []
+
+
+def test_enrich_mark_needs_reading_and_refuses_another_deal():
+    """Владелец, 23 ноября 2026: «если новость отмечается как дополнение к
+    существующей карте, то нужно читать и проверять». Сырье о выходе фонда из
+    «Юрента» (10,49% перешли МТС) пометили дополнением к карточке покупки
+    контроля 2024 года и ничего не внесли — сделка пропала. Отметка теперь
+    требует исхода чтения и цитаты, а признаки другой сделки ее не пускают."""
+    import raw_screen
+    card = {"id": "gtest1", "date": "2024-01-15", "status": "Закрыта",
+            "title": "МТС купил 68,8% «Юрента»", "src": [["Ведомости", "https://example.invalid/2024"]]}
+    draft = {"draft_id": "d1", "date": "2026-11-23",
+             "title": "ЗПИФ вышел из капитала «Юрента»: 10,49% перешли структуре МТС",
+             "src": [["rusven", "https://example.invalid/2026"]]}
+    # владелец признал сделкой, новость на два года позже, в заголовке новая доля
+    why = raw_screen.enrich_refusals(draft, card, {"decided_raw": {"d1": "take"}}, "nothing_new")
+    assert why and "владелец признал" in why[0] and "10,49" in why[0] and "позже" in why[0]
+    # «факты внесены» без следа новости в карточке — тоже отказ
+    assert raw_screen.enrich_refusals(draft, card, {}, "added")
+    # этап внесен: адрес новости стоит в карточке — отметку ставить можно
+    carried = dict(card, events=[{"kind": "stage", "source": ["rusven", "https://example.invalid/2026"]}])
+    assert raw_screen.enrich_refusals(draft, carried, {"decided_raw": {"d1": "take"}}, "added") == []
+    # настоящий повтор: тот же день, чисел сверх карточки нет
+    repeat = {"draft_id": "d2", "date": "2024-01-16", "title": "МТС купил 68,8% «Юрента»",
+              "src": [["РБК", "https://example.invalid/rbc"]]}
+    assert raw_screen.enrich_refusals(repeat, card, {}, "nothing_new") == []
+    # без исхода чтения, цитаты и обоснования отметка не ставится
+    assert raw_screen.apply_enrich([("d2", "gtest1")], False) == 1
+
+
+def test_sweep_notices_a_take_whose_card_vanished():
+    """Сырье, признанное владельцем сделкой, не может пропасть молча (23 ноября
+    2026, «Юрент»): забор называет его, пока карточки нет ни в очереди, ни в
+    базе; слитая и выкинутая владельцем карточка пропажей не считается."""
+    import sweep
+    from datetime import datetime, timezone
+    now = datetime(2026, 11, 23, 18, 0, tzinfo=timezone.utc)
+    state = {"take_log": {
+        "d1": {"at": "2026-11-23T08:25:00+00:00", "card": "g1", "title": "ЗПИФ вышел из «Юрента»", "url": "u1"},
+        "d2": {"at": "2026-11-23T08:25:00+00:00", "card": "g2", "title": "есть карточка", "url": "u2"},
+        "d3": {"at": "2026-11-23T08:25:00+00:00", "card": "g3", "title": "слита", "url": "u3"},
+        "d4": {"at": "2026-11-23T08:25:00+00:00", "card": "g4", "title": "выкинута владельцем", "url": "u4"},
+        "d5": {"at": "2026-11-23T17:30:00+00:00", "card": "g5", "title": "только что", "url": "u5"}},
+        "discarded_urls": {"u4": "2026-11-23"}}
+    cards = [{"id": "gNEW", "from_raw": {"draft_id": "d2"}}, {"id": "gBASE"}]
+    lost = sweep.lost_takes(state, cards, {"g3": "gBASE"}, now)
+    assert [d for d, _ in lost] == ["d1"]
