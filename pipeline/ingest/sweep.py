@@ -29,6 +29,7 @@
     python3 pipeline/ingest/sweep.py --write    # фаза 1: забор, ворота, список сырья на отсев
     python3 pipeline/ingest/sweep.py --send     # фаза 2: показ в консоль, коммит, push
 """
+import json
 import os
 import subprocess
 import sys
@@ -156,6 +157,61 @@ def stale_decisions_warning(now=None):
     return old
 
 
+LOST_TAKE_MIN = 120
+
+
+def lost_takes(state, cards, merged=None, now=None):
+    """Сырье, которое владелец признал сделкой («в работу»), а карточки по нему
+    нет ни в очереди, ни в базе. 23 ноября 2026 («Юрент»): прогон снял
+    карточку такого сырья как «дополнение» к старой и ничего не внес —
+    владелец узнал об этом сам через девять часов. Карточку ищем по
+    `from_raw.draft_id`, по id из журнала и по цепочке слияний; выкинутое
+    владельцем (`discarded_urls`) пропажей не считается."""
+    from datetime import datetime, timedelta, timezone
+    now = now or datetime.now(timezone.utc)
+    merged = merged or {}
+    ids = {c.get('id') for c in cards}
+    by_raw = {str((c.get('from_raw') or {}).get('draft_id')) for c in cards if c.get('from_raw')}
+    discarded = set(state.get('discarded_urls') or {})
+    out = []
+    for did, rec in (state.get('take_log') or {}).items():
+        try:
+            at = datetime.fromisoformat(str(rec.get('at')))
+            at = at if at.tzinfo else at.replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if now - at < timedelta(minutes=LOST_TAKE_MIN):
+            continue
+        card = rec.get('card')
+        seen = set()
+        while card in merged and card not in seen:
+            seen.add(card)
+            card = merged[card]
+        if did in by_raw or card in ids or (rec.get('url') and rec['url'] in discarded):
+            continue
+        if rec.get('resolved'):
+            continue
+        out.append((did, rec))
+    return out
+
+
+def lost_takes_warning():
+    try:
+        sys.path.insert(0, os.path.join(ROOT, 'pipeline', 'ingest'))
+        import promote
+        data = json.load(open(os.path.join(ROOT, 'static', 'data', 'deals_promoted.json'), encoding='utf-8'))
+        lost = lost_takes(promote.load_state(), data['deals'] + promote.load_pending()['cards'], data.get('merged'))
+    except Exception as e:  # noqa: BLE001 — страховка не должна ронять забор
+        print('Проверка «признано сделкой, а карточки нет» не удалась: %s' % e)
+        return []
+    if lost:
+        print('\nВЛАДЕЛЕЦ ПРИЗНАЛ СДЕЛКОЙ, А КАРТОЧКИ НЕТ (%d) — собрать карточку или объяснить владельцу, '
+              'куда делась (routines/sweep.md):' % len(lost))
+        for did, rec in lost[:8]:
+            print('   %s | %s | %s' % (did, str(rec.get('title'))[:90], rec.get('url')))
+    return lost
+
+
 def remind_undecided():
     """Напоминание в личку о том, что сутки ждет решения в консоли
     (pipeline/publish/remind_undecided.py, 12 ноября 2026: молчание больше не
@@ -198,6 +254,7 @@ def main(argv):
         remind_undecided()
         rc = commit_and_push('Забор новостей: сырье показано, очередь (sweep.py --send)')
         stale_decisions_warning()
+        lost_takes_warning()
         return rc
     run('fetch.py')
     run('triage.py')

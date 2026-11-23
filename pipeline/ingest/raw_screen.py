@@ -53,6 +53,7 @@ CLAUDE.md («механика отвечает за форму и запрет, 
 """
 import argparse
 import json
+import re
 import os
 import sys
 
@@ -211,24 +212,130 @@ def apply_drop(ids, reason, write):
     return 0
 
 
-def apply_enrich(pairs, write):
+# «ДОПОЛНЕНИЕ» — НЕ СПОСОБ ЗАКРЫТЬ НОВОСТЬ, А УТВЕРЖДЕНИЕ, КОТОРОЕ НАДО ДОКАЗАТЬ.
+# 23 ноября 2026: сырье d02193838 (ЗПИФ «Цифровые горизонты» вышел из
+# «Юрента», 10,49% перешли МТС) владелец утром признал сделкой, а прогон
+# пометил его `enrich:ga95746a3` — «дополнение» к карточке покупки контроля
+# 2024 года — и ничего в нее не внес. Сделка пропала до вечера, пока владелец
+# не спросил «почему не проработал?». Его правило: «если новость отмечается
+# как дополнение к существующей карте, то нужно читать и проверять… таких
+# историй больше быть не должно».
+#
+# Поэтому отметка ставится ПОСЛЕ чтения и только с доказательством:
+#   * `--quote` — цитата из прочитанной статьи (не из заголовка);
+#   * `--reason` — что именно в новости относится к карточке;
+#   * исход назван явно: `--added` (факты уже внесены в карточку через
+#     review.py или этапом — адрес новости должен стоять в ее источниках) или
+#     `--nothing-new` (в новости нет ничего сверх карточки);
+# и механика сама ловит признаки ДРУГОЙ сделки, при которых «ничего нового»
+# сказать нельзя: владелец признал сырье сделкой; новость вышла намного позже
+# закрытой карточки; в заголовке новости есть доля или сумма, которых в
+# карточке нет. В этих случаях годится только `--added` со следом в карточке —
+# или новая карточка.
+LATER_DAYS = 120          # новость позже закрытой сделки на столько дней — почти наверняка другое событие
+MIN_QUOTE, MIN_REASON = 40, 20
+_NUM = re.compile(r'\d+(?:[.,]\d+)?\s*(?:%|млн|млрд|тыс)')
+
+
+def _norm_num(x):
+    return re.sub(r'\s+', '', x).replace('.', ',')
+
+
+def _card_by_id(deal_id):
+    data = json.load(open(DATA, encoding='utf-8'))
+    for card in data['deals'] + promote.load_pending()['cards']:
+        if card.get('id') == deal_id:
+            return card
+    return None
+
+
+def _draft_url(draft):
+    src = draft.get('src') or []
+    return src[0][1] if src and len(src[0]) > 1 else None
+
+
+def enrich_refusals(draft, card, state, mode):
+    """Почему сырье нельзя пометить дополнением к карточке — список причин.
+    Пусто — можно. `mode`: 'added' или 'nothing_new'."""
+    if card is None:
+        return ['карточки с таким id нет ни в базе, ни в очереди']
+    out = []
+    blob = json.dumps(card, ensure_ascii=False)
+    url = _draft_url(draft)
+    carried = bool(url) and url in blob
+    did = str(draft.get('draft_id'))
+    other_deal = []
+    if (state.get('decided_raw') or {}).get(did) == 'take':
+        other_deal.append('владелец признал это сырье сделкой («в работу»)')
+    days = matcher.days_between(draft.get('date'), card.get('date'))
+    if days is not None and days > LATER_DAYS and card.get('status') in ('Закрыта', 'Не состоялась') \
+            and str(draft.get('date') or '') > str(card.get('date') or ''):
+        other_deal.append('новость вышла на %d дн. позже карточки со статусом «%s»' % (days, card.get('status')))
+    card_nums = {_norm_num(m) for m in _NUM.findall(blob)}
+    fresh = [m for m in _NUM.findall(str(draft.get('title') or '')) if _norm_num(m) not in card_nums]
+    if fresh:
+        other_deal.append('в заголовке новости есть числа, которых нет в карточке: %s' % ', '.join(fresh[:4]))
+    if mode == 'added' and not carried:
+        out.append('сказано «факты внесены», но адреса новости нет в источниках и этапах карточки %s — '
+                   'сначала внесите факты (review.py / этап), потом ставьте отметку' % card.get('id'))
+    if mode == 'nothing_new' and other_deal:
+        out.append('«ничего нового» сказать нельзя: ' + '; '.join(other_deal) +
+                   '. Это либо новый этап (внесите его в карточку и ставьте --added), либо ДРУГАЯ сделка '
+                   '(отметку не ставить, собрать новую карточку)')
+    if mode == 'added' and other_deal and not carried:
+        out.append('признаки другой сделки: ' + '; '.join(other_deal))
+    return out
+
+
+def apply_enrich(pairs, write, reason='', quote='', mode=None):
     state = promote.load_state()
     drafts_by_id = {str(d.get('draft_id')): d for d in all_raw_drafts()}
     missing = [did for did, _ in pairs if did not in drafts_by_id]
     if missing:
         print('ОТКАЗ: черновиков нет в hold-файлах: %s' % ', '.join(missing))
         return 1
-    print('ПОМЕЧАЮ КАК ДОПОЛНЕНИЕ (не новая сделка, читать и нести в review.py):')
+    if mode not in ('added', 'nothing_new'):
+        print('ОТКАЗ: назовите исход чтения — --added (факты уже внесены в карточку) или '
+              '--nothing-new (в новости нет ничего сверх карточки). Отметка ставится ПОСЛЕ чтения статьи.')
+        return 1
+    if len(quote.strip()) < MIN_QUOTE or len(reason.strip()) < MIN_REASON:
+        print('ОТКАЗ: нужны --quote (цитата из прочитанной статьи, не короче %d знаков) и --reason '
+              '(что в новости относится к карточке, не короче %d знаков).' % (MIN_QUOTE, MIN_REASON))
+        return 1
+    if len(pairs) > 1:
+        print('ОТКАЗ: по одной новости за вызов — у каждой своя цитата и свое обоснование.')
+        return 1
+    refused = False
+    for did, deal_id in pairs:
+        draft = drafts_by_id[did]
+        if quote.strip() in str(draft.get('title') or ''):
+            print('ОТКАЗ %s: цитата взята из заголовка — нужна цитата из текста статьи.' % did)
+            refused = True
+            continue
+        why = enrich_refusals(draft, _card_by_id(deal_id), state, mode)
+        if why:
+            refused = True
+            print('ОТКАЗ %s -> %s:' % (did, deal_id))
+            for w in why:
+                print('   • ' + w)
+    if refused:
+        return 1
+    print('ПОМЕЧАЮ КАК ДОПОЛНЕНИЕ (%s):' % ('факты внесены' if mode == 'added' else 'ничего нового'))
     for did, deal_id in pairs:
         print('  %s -> %s | %s' % (did, deal_id, str(drafts_by_id[did].get('title'))[:100]))
     if not write:
         print('Сухой прогон. Запись — с ключом --write.')
         return 0
+    from datetime import datetime, timezone
     for did, deal_id in pairs:
         state.setdefault('decided_raw', {})[did] = 'enrich:%s' % deal_id
         state.setdefault('raw_titles', {})[promote.raw_key(drafts_by_id[did].get('title'))] = 'enrich:%s' % deal_id
+        state.setdefault('enrich_log', {})[did] = {
+            'deal_id': deal_id, 'mode': mode, 'reason': reason.strip(), 'quote': quote.strip(),
+            'url': _draft_url(drafts_by_id[did]),
+            'at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
     promote.save_state(state)
-    print('Записано: %d. Теперь прочитайте эти статьи и внесите факты через review.py.' % len(pairs))
+    print('Записано: %d.' % len(pairs))
     return 0
 
 
@@ -238,6 +345,9 @@ def main(argv):
     p.add_argument('--drop', nargs='+', default=None, metavar='DRAFT_ID')
     p.add_argument('--reason', default='')
     p.add_argument('--enrich', nargs='+', default=None, metavar='DRAFT_ID=DEAL_ID')
+    p.add_argument('--quote', default='')
+    p.add_argument('--added', action='store_true')
+    p.add_argument('--nothing-new', dest='nothing_new', action='store_true')
     p.add_argument('--write', action='store_true')
     args = p.parse_args(argv)
 
@@ -249,7 +359,8 @@ def main(argv):
             assert '=' in item, '--enrich требует вид draft_id=deal_id, получено %r' % item
             did, deal_id = item.split('=', 1)
             pairs.append((did, deal_id))
-        return apply_enrich(pairs, args.write)
+        mode = 'added' if args.added else ('nothing_new' if args.nothing_new else None)
+        return apply_enrich(pairs, args.write, args.reason, args.quote, mode)
     render_list(args.limit)
     return 0
 

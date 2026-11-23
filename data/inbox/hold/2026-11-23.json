@@ -598,148 +598,13 @@
    ]
   },
   {
-   "draft_id": "d88190512",
-   "title": "Трамп допустил покупку Китаем у США еще 250 самолетов Boeing",
+   "draft_id": "d93383679",
+   "title": "На Украине раскрыли схему продажи новобранцев элитного подразделения ГУР",
    "date": "2026-11-23",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/world/1130880"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-23",
-     "title": "Переговоры",
-     "note": "Президент США Дональд Трамп в понедельник заявил, что Китай может приобрести у американской стороны еще 250 самолетов Boeing.\"Я думаю, они собираются купить еще 250 штук\", - сказал американский лидер в эфире телеканала CNBC.",
-     "source": [
-      "web:interfax.ru",
-      "https://www.interfax.ru/world/1130880"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d80085721",
-   "title": "Трамп заявил, что не беспокоится из-за инвестиционных рисков в ИИ",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261123/tramp-875470913.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d22558736",
-   "title": "🔥 Сделки на прошлой неделе. Покупки под пассивный доход. Выпуск №271",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1378514.php"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-23",
-     "title": "Сделка завершена",
-     "note": "Продолжаю свои размеренные, но регулярные покупки на нашем любимом фондовом рынке. Портфель снова немного покраснел на фоне очередной, а я продолжаю постепенно доводить доли в портфеле до заданных. На этой неделе добавил три компании, длинную ОФЗ…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/blog/1378514.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d28825810",
-   "title": "Квартиры, дома, участки и элитные авто: в Челябинске национализировали активы экс-главы Фонда капремонта",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053146459"
-    ]
-   ],
-   "sum": "350 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d48506963",
-   "title": "Монете 115 лет: золотой червонец времен Николая II продают в Новосибирске — за него просят 160 тысяч рублей",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/entertainment/2026/11/24/76785293/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/24/na-ukraine-raskryli-shemu-prodazhi-novobrantsev-elitnogo-podrazdeleniya-gur/"
     ]
    ],
    "sum": null,
@@ -757,36 +622,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gc4d31e84 (общие редкие слова: продаю, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d98139285",
-   "title": "I2BF Global Ventures под управлением Ильи Голубовича вложился в американский стартап Vessel . Фонд вошел в раунд на $5 млн, который возглавил HG Ventures при участии Flex Capital и Ford Street Venture",
-   "date": "2026-11-18",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7853"
-    ]
-   ],
-   "sum": "$5 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

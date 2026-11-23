@@ -20403,24 +20403,24 @@
      "value": 100.0,
      "basis": "read",
      "card_hash": "42e4354c2d99",
-     "object": "компании Avito",
+     "object": "Авито (классифайд)",
      "event": "announcement",
      "event_variants": [
       "announcement"
      ],
-     "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
-     "source": "https://habr.com/ru/news/695478",
+     "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
+     "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
      "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-23",
      "readings": [
       {
-       "source": "https://habr.com/ru/news/695478",
-       "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
        "value": 100.0,
-       "object": "компании Avito",
+       "object": "Авито (классифайд)",
        "event": "announcement",
+       "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
+       "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
      "reading": {
@@ -20447,32 +20447,31 @@
       "disclosed"
      ],
      "scope_basis": "read",
-     "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
-     "source": "https://habr.com/ru/news/695478",
+     "quote": "Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito. Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
+     "source": "https://www.interfax.ru/business/867958",
      "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-23",
      "readings": [
       {
-       "source": "https://habr.com/ru/news/695478",
-       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
        "value_rub": 151000000000,
        "meaning": "disclosed",
        "attribution": "parties",
-       "event": "closing",
+       "event": "announcement",
        "scope": "equity",
        "terms": "fixed",
-       "attribution_quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+       "quote": "Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito. Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
+       "source": "https://www.interfax.ru/business/867958",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
      "attribution": "parties",
      "attribution_variants": [
       "parties"
      ],
-     "event": "closing",
+     "event": "announcement",
      "event_variants": [
-      "closing"
+      "announcement"
      ],
      "terms": "fixed",
      "terms_variants": [
@@ -20494,25 +20493,25 @@
      "any_rub": 151000000000.0
     },
     "date": {
-     "value": "2022-10-25",
-     "meaning": "closing",
+     "value": "2022-10-14",
+     "meaning": "announcement",
      "basis": "read",
      "card_hash": "8909f23799a2",
      "meaning_variants": [
-      "closing"
+      "announcement"
      ],
-     "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
-     "source": "https://habr.com/ru/news/695478",
+     "quote": "Москва. 14 октября. INTERFAX.RU - Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito.",
+     "source": "https://www.interfax.ru/business/867958",
      "verified_by": "model×1",
-     "verified_at": "2026-11-18",
+     "verified_at": "2026-11-23",
      "readings": [
       {
-       "source": "https://habr.com/ru/news/695478",
-       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
-       "value": "2022-10-25",
-       "meaning": "closing",
+       "value": "2022-10-14",
+       "meaning": "announcement",
+       "quote": "Москва. 14 октября. INTERFAX.RU - Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito.",
+       "source": "https://www.interfax.ru/business/867958",
        "quote_checked": true,
-       "reader": "A"
+       "reader": "B"
       }
      ],
      "reading": {
@@ -20581,14 +20580,16 @@
      "intragroup": false,
      "reading": {
       "result": "not_in_source",
-      "at": "2026-10-14",
+      "at": "2026-11-23",
       "readers": [
-       "A",
        "B"
       ],
       "notes": [
-       "Официальное регуляторное раскрытие Naspers прямо перечисляет ДВА юрлица, составляющих проданную \"Avito Group\": KEH eCommerce LLC (это и есть отчетный ИНН 7710668349) и отдельное Avito Holding LLC с его \"дочками\". Выручка отчета (42,66 млрд ₽ за 2021) относится только к первому юрлицу и его субсидиариям, не ко всей группе целиком.",
-       "Там же: «В России основным юрлицом Avito является ООО «Кех Екоммерц»» — слово «основным» указывает, что это не единственное юрлицо. Отчет (КЕХ Екоммерц, 2021, 42,66 млрд выручки) не описывает ООО «Авито Холдинг» и их дочерние общества."
+       [
+        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»), совпадает с прежней находкой по вопросу периметра — отчет по одному юрлицу не покрывает всю купленную группу.",
+        "Дата 2022-10-25 (закрытие, источник reader A — habr) в моих источниках не встречается: vedomosti и interfax датированы 14 октября 2022 и описывают ОБЪЯВЛЕНИЕ сделки, не закрытие. Точную дату закрытия своими источниками не подтверждаю.",
+        "Смена контроля подтверждена прямой цитатой пресс-релиза Avito."
+       ]
       ]
      }
     },
@@ -20662,6 +20663,20 @@
       "year": 2021,
       "revenue_rub": 42656330000.0,
       "legal_name": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"КЕХ ЕКОММЕРЦ\""
+     },
+     "reading": {
+      "result": "not_in_source",
+      "at": "2026-11-23",
+      "readers": [
+       "B"
+      ],
+      "notes": [
+       [
+        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»), совпадает с прежней находкой по вопросу периметра — отчет по одному юрлицу не покрывает всю купленную группу.",
+        "Дата 2022-10-25 (закрытие, источник reader A — habr) в моих источниках не встречается: vedomosti и interfax датированы 14 октября 2022 и описывают ОБЪЯВЛЕНИЕ сделки, не закрытие. Точную дату закрытия своими источниками не подтверждаю.",
+        "Смена контроля подтверждена прямой цитатой пресс-релиза Avito."
+       ]
+      ]
      }
     },
     "admitted": {
@@ -289489,6 +289504,14 @@
     [
      "Право.ру",
      "https://pravo.ru/news/266030/"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2025/12/09/v-pnt-smenili-gendirektora"
+    ],
+    [
+     "Фонтанка",
+     "https://www.fontanka.ru/2026/07/28/76558058/"
     ]
    ],
    "eco": {
@@ -289498,7 +289521,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Акции принадлежали детям сооснователя терминала Дмитрия Скигина через офшоры Tujunga Enterprises, Novomor и Almont Holdings; их бенефициарами названы граждане Германии и Франции. Генпрокуратура доказывала, что они получили контроль над стратегическим активом без согласия ФАС. Остальные 45% остались у Елены Васильевой. В декабре 2025 года гендиректором назначен Игорь Хлопов, которого связывают с семьей Ротенбергов. В июле 2026 года Росимущество передало госпакет «Росхиму». Отдельный иск Генпрокуратуры о 45% Васильевых суд 11 сентября 2026 года отклонил, надзор подал жалобу.",
+    "context": "Акции принадлежали детям сооснователя терминала Дмитрия Скигина через офшоры Tujunga Enterprises, Novomor и Almont Holdings; их бенефициарами названы граждане Германии и Франции. Генпрокуратура доказывала, что они получили контроль над стратегическим активом без согласия ФАС. Остальные 45% остались у Елены Васильевой. 2 декабря 2025 года гендиректором назначен Игорь Хлопов. «Росхим» — покупатель госпакета — ранее связывали со структурами Ротенбергов, и в 2026 году Игорь Ротенберг начал официально выступать как председатель совета директоров «Росхима». Переход акций к «Росхиму» зафиксирован документами не позднее 10 июля 2026 года; точная дата и условия передачи не раскрыты. Отдельный иск Генпрокуратуры о 45% Васильевых суд 11 сентября 2026 года отклонил, надзор подал жалобу.",
     "finadv": "—"
    },
    "law": {
@@ -289585,7 +289608,12 @@
    "reread": "2026-11-09",
    "reread_hash": "0a185989ae03.2e874a",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2024-11-12",
@@ -289609,12 +289637,16 @@
     [
      "Право.ру",
      "https://pravo.ru/news/253549/"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2024/07/29/reprivatizaciju-profsojuzov"
     ]
    ],
    "eco": {
     "sum": "—",
     "share": "—",
-    "val": "Кадастровая стоимость комплекса — более 751 млн ₽.",
+    "val": "Кадастровая стоимость комплекса — более 751 млн ₽. Вице-президент Becar Asset Management Ольга Шарыгина оценивала стоимость дворца в 5-6 млрд ₽ по аналогам или в 2-3 млрд ₽ исходя из потенциальной доходности 10% годовых.",
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
@@ -289704,7 +289736,12 @@
    "reread": "2026-11-09",
    "reread_hash": "243641c9da46.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "proofread_absorbed": {
+    "eco.val": []
+   },
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2025-09-09",
@@ -289822,7 +289859,9 @@
    },
    "reread": "2026-11-15",
    "reread_hash": "ae81f833a6ce.e8d001",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2026-05-05",
@@ -289978,7 +290017,7 @@
     "target_fin": "—",
     "fin": "—",
     "rationale": "—",
-    "context": "Изъят весь поселок на участке 9,2 га в Новой Москве: дома, гаражи, детские и спортивные площадки, теннисный корт, трансформаторные будки и канализация. Кадастровая стоимость участка — около 287 млн ₽, стоимость самого проекта — 1,3 млрд ₽. Участок входит в оздоровительный комплекс «Десна» Управления делами президента. Ответчиками по иску были ООО «Сенатор Клуб» (раньше «Рескоровка»), бывший сотрудник администрации президента и Управления делами Владимир Слепнев и бывший гендиректор санатория Александр Торохов. По версии надзора, в 2004 году компания получила право застроить землю санатория, а чиновники взамен получили квартиры, оформленные на родственников. Это был один из самых ранних шагов Генпрокуратуры по изъятию активов; точный день решения Таганского суда в статьях не назван.",
+    "context": "Изъят весь поселок на участке 9,2 га в Новой Москве: дома, гаражи, детские и спортивные площадки, теннисный корт, трансформаторные будки и канализация. Кадастровая стоимость участка — около 287 млн ₽, стоимость самого проекта — 1,3 млрд ₽. Участок входит в оздоровительный комплекс «Десна» Управления делами президента. Ответчиками по иску были ООО «Сенатор Клуб» (раньше «Рескоровка»), бывший сотрудник администрации президента и Управления делами Владимир Слепнев и бывший гендиректор санатория Александр Торохов. По версии надзора, Слепнев 12 марта 2004 года проголосовал на заседании комиссии УДП за утверждение инвестпроекта, а Торохов 3 апреля 2004 года заключил с компанией договор о застройке; взамен Торохов получил квартиры площадью 258 и 190 кв. м общей стоимостью 13,7 млн ₽, оформленные на зятя, а Слепнев — квартиру площадью 164,5 кв. м стоимостью 7,4 млн ₽, оформленную на супругу. Это был один из самых ранних шагов Генпрокуратуры по изъятию активов; точный день решения Таганского суда первой инстанции в статьях не назван.",
     "finadv": "—"
    },
    "law": {
@@ -290065,7 +290104,12 @@
    "reread": "2026-11-09",
    "reread_hash": "b0d4d057ebe7.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "proofread_absorbed": {
+    "eco.context": []
+   },
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2024",
@@ -290205,6 +290249,14 @@
     [
      "Право.ру",
      "https://pravo.ru/news/252450/"
+    ],
+    [
+     "pravo.ru",
+     "https://pravo.ru/news/252914"
+    ],
+    [
+     "Интерфакс",
+     "https://interfax.ru/business/964252"
     ]
    ],
    "eco": {
@@ -290213,13 +290265,13 @@
     "val": "Иск вырос с 25,83 млрд ₽ до 105 млрд ₽; стоимость 100% первых четырех предприятий группы «Ариант» оценивают более чем в 30 млрд ₽.",
     "target_fin": "—",
     "fin": "—",
-    "rationale": "—",
+    "rationale": "Ведомство оспорило соглашение о прощении компанией «Урало-сибирская металлургическая компания» долга Юрию Антипову — 22,9 млрд ₽ основного долга и 2,9 млрд ₽ процентов; суд счел сделку экономически нецелесообразной и вредящей публичным интересам.",
     "context": "Арбитражный суд Челябинской области полностью удовлетворил иск Генпрокуратуры к бывшим владельцам промышленной группы ЧЭМК: Юрию, Людмиле и Михаилу Антиповым, АО «Компания Эталон», ООО «Группа компаний Ариант», Людмиле и Александру Аристовым, Елене и Александру Кретовым. Иск был о неосновательном обогащении; ведомство ссылалось на незаконное акционирование ЧЭМК, Серовского завода ферросплавов и «Кузнецких ферросплавов» и на вывод средств, на которые затем покупали другие активы, в том числе доли в Катав-Ивановском литейном заводе. В 2020 году семьи Антиповых и Аристовых разделили общую компанию УСМК: группа «Ариант» (вино и пищевые активы) отделилась, металлургия осталась в УСМК, позже присоединенной к «Компании Эталон». Четыре предприятия принадлежали «Ариант» (Кубань-Вино и Южная в Краснодарском крае, агрофирма «Ариант» и ЦПИ «Ариант» в Челябинской области), литейный завод входил в группу ЧЭМК. Суд солидарно взыскал 105 млрд ₽; 9 апреля выдал 11 исполнительных листов, а 10 апреля 2024 года в ЕГРЮЛ внесли записи о переходе компаний государству. Дело шло в закрытом режиме. Отдельным решением в феврале 2024 года у Антиповых и «Эталона» изъяли акции заводов ЧЭМК.",
     "finadv": "—"
    },
    "law": {
     "struct": "Суд изъял в пользу Российской Федерации 100% долей пяти обществ в счет взыскания неосновательного обогащения, а также удовлетворил связанный иск о признании недействительным соглашения от 19 октября 2022 года о прощении долга Юрию Антипову. Ходатайства ответчиков о передаче дела в суд общей юрисдикции и о выделении требований отклонены.",
-    "appr": "Решение принял Арбитражный суд Челябинской области 5 апреля 2024 года по иску Генпрокуратуры. Данных об итогах обжалования в прочитанных статьях нет.",
+    "appr": "Решение принял Арбитражный суд Челябинской области 5 апреля 2024 года по иску Генпрокуратуры. ООО «Центр пищевой индустрии-Ариант», ООО «Кубань-Вино», ООО «Агрофирма Ариант» и ООО Агрофирма «Южная» отозвали апелляционные жалобы; Юрий Антипов жалобу подавал, итог в прочитанных материалах не найден. С 22 мая 2024 года изъятыми активами управляет ООО «РСХБ-Финанс».",
     "adv": [],
     "terms": "Деньги за активы не платились: доли переданы государству в счет взыскания 105 млрд ₽."
    },
@@ -290300,7 +290352,13 @@
    "reread": "2026-11-09",
    "reread_hash": "2c85389ff0ca.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "proofread_absorbed": {
+    "eco.rationale": [],
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2022-03-14",
@@ -290419,7 +290477,9 @@
    "reread": "2026-11-09",
    "reread_hash": "782e0658027f.9cca58",
    "reread_scope": "short",
-   "reread_note": "статьи: 4"
+   "reread_note": "статьи: 4",
+   "deep_researched": "2026-11-23",
+   "weekly_researched": "2026-11-23"
   },
   {
    "date": "2024",
@@ -325145,18 +325205,92 @@
      "card_hash": "77ca697429c7"
     },
     "price": {
-     "value_rub": 128000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "76d71af7e94a",
-     "any_rub": null
+     "basis": "verified",
+     "card_hash": "be3f388ad6bd",
+     "any_rub": null,
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "publication",
+     "event_variants": [
+      "publication"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей",
+     "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value_rub": 128000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей",
+       "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 128000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей",
+       "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-18",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "072057eeab2b"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "01d0b39e5d01",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей Там «роскошь встречается с уютом» 18 ноября 2026",
+     "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value": "2026-11-18",
+       "meaning": "publication",
+       "quote": "В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей В Тюмени продают особняк в стиле «Великолепного века» за 128 миллионов рублей Там «роскошь встречается с уютом» 18 ноября 2026",
+       "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-18",
+       "meaning": "publication",
+       "quote": "18 ноября 2026, 14:40",
+       "source": "https://72.ru/text/realty/2026/11/18/76773710/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -325189,12 +325323,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g67cacd7e",
@@ -325900,18 +326036,92 @@
      "card_hash": "eef445126574"
     },
     "price": {
-     "value_rub": 320000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "796adba030af",
-     "any_rub": null
+     "basis": "verified",
+     "card_hash": "23fcba449dcf",
+     "any_rub": null,
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "publication",
+     "event_variants": [
+      "publication"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В Тюмени выставили на продажу торговый центр «Тура», который находится на улице Ямской. Об этом сообщают онлайн-агрегаторы бесплатных объявлений. Стоимость бизнес-площадки — 320 млн рублей.",
+     "source": "https://ura.news/news/1053145695",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value_rub": 320000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Тюмени выставили на продажу торговый центр «Тура», который находится на улице Ямской. Об этом сообщают онлайн-агрегаторы бесплатных объявлений. Стоимость бизнес-площадки — 320 млн рублей.",
+       "source": "https://ura.news/news/1053145695",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 320000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Тюменский торговый центр «Тура» продают за 320 миллионов рублей",
+       "source": "https://ura.news/news/1053145695",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-19",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "5d986d8416a2"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "1bf6189c2792",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "19 ноября 2026 в 21:20",
+     "source": "https://ura.news/news/1053145695",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value": "2026-11-19",
+       "meaning": "publication",
+       "quote": "19 ноября 2026 в 21:20",
+       "source": "https://ura.news/news/1053145695",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-19",
+       "meaning": "publication",
+       "quote": "19 ноября 2026 в 21:20",
+       "source": "https://ura.news/news/1053145695",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -325944,12 +326154,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
-   }
+   },
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g73b6378c",
@@ -326571,18 +326783,92 @@
      "card_hash": "e79d0093af6a"
     },
     "price": {
-     "value_rub": 2390000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "bed1d41609c4",
-     "any_rub": 2390000000.0
+     "basis": "verified",
+     "card_hash": "e61778397278",
+     "any_rub": 2390000000.0,
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Приобретение площадей в этом объекте обошлось Российской Федерации в 2,39 млрд руб.",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value_rub": 2390000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Приобретение площадей в этом объекте обошлось Российской Федерации в 2,39 млрд руб.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 2390000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Приобретение площадей в этом объекте обошлось Российской Федерации в 2,39 млрд руб.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-06",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "e469f6e3c581"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "c494fdb911fe",
+     "meaning_variants": [
+      "closing"
+     ],
+     "quote": "Российская Федерация приобрела помещение площадью 20 024 кв. м в бизнес-центре «Ленинский, 119» на юго-западе Москвы. По данным сервиса Asseto, сделка была закрыта 6 ноября.",
+     "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value": "2026-11-06",
+       "meaning": "closing",
+       "quote": "Российская Федерация приобрела помещение площадью 20 024 кв. м в бизнес-центре «Ленинский, 119» на юго-западе Москвы. По данным сервиса Asseto, сделка была закрыта 6 ноября.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-06",
+       "meaning": "closing",
+       "quote": "По данным сервиса Asseto, сделка была закрыта 6 ноября.",
+       "source": "https://www.vedomosti.ru/realty/articles/2026/11/23/1414126-shtab-kvartira-strabag-pereshla",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -326615,12 +326901,14 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed",
      "all_sums": "ok"
     }
-   }
+   },
+   "sum_basis": "reported",
+   "date_basis": "closing"
   },
   {
    "id": "gba506a58",
@@ -327488,12 +327776,61 @@
      "card_hash": "72b3a595490f"
     },
     "price": {
-     "value_rub": 620680000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "481dac2bb0b6",
-     "any_rub": 620680000.0
+     "basis": "verified",
+     "card_hash": "816146376fde",
+     "any_rub": 620680000.0,
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "компания предложила за здание площадью 1 тысяча квадратных метров 620,68 миллиона рублей при начальной стоимости лота 263 миллиона рублей.",
+     "source": "https://realty.ria.ru/20261123/moskva-2133449100.html",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-23",
+     "readings": [
+      {
+       "value_rub": 620680000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "компания предложила за здание площадью 1 тысяча квадратных метров 620,68 миллиона рублей при начальной стоимости лота 263 миллиона рублей.",
+       "source": "https://realty.ria.ru/20261123/moskva-2133449100.html",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 620680000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "компания предложила за здание площадью 1 тысяча квадратных метров 620,68 миллиона рублей при начальной стоимости лота 263 миллиона рублей.",
+       "source": "https://realty.ria.ru/20261123/moskva-2133449100.html",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-23",
@@ -327532,12 +327869,13 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change",
      "all_sums": "ok"
     }
-   }
+   },
+   "sum_basis": "reported"
   }
  ],
  "companies": {
