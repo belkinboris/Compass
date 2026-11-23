@@ -598,90 +598,6 @@
    ]
   },
   {
-   "draft_id": "d19821940",
-   "title": "Международные банки рекомендовали перенести IPO КТЖ на 2027 год",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1130816"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20595520",
-   "title": "В 2026 году налоговые льготы в проактивном режиме получили 98% граждан",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28345873"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "В 2026 году налоговые льготы в проактивном режиме",
-   "asset": "граждане",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "В 2026 году налоговые льготы в проактивном режиме",
-    "asset": "граждане",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d28027604",
-   "title": "Компания Crowdstrike приобретает облачную IT-компанию Zscaler за $43,9 млрд",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261123/crowdstrike-875459035.html"
-    ]
-   ],
-   "sum": "$43,9 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Crowdstrike",
-   "asset": "облачную IT-компанию Zscaler",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Crowdstrike",
-    "asset": "облачную IT-компанию Zscaler",
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
-   ]
-  },
-  {
    "draft_id": "d47923830",
    "title": "Риелторы посоветовали проверять реестр повесток при покупке недвижимости",
    "date": "2026-11-23",
@@ -740,13 +656,13 @@
    ]
   },
   {
-   "draft_id": "d52259020",
-   "title": "Россиянам назвали признаки фейкового объявления о продаже квартиры",
+   "draft_id": "d80089354",
+   "title": "Журналист Владимир Соловьев передал 30 пикапов подразделениям в Крыму",
    "date": "2026-11-23",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/23/rossiyanam-nazvali-priznaki-feykovogo-ob-yavleniya-o-prodazhe-kvartiry/"
+     "web:tass.ru",
+     "https://tass.ru/armiya-i-opk/28346483"
     ]
    ],
    "sum": null,
@@ -768,25 +684,81 @@
    ]
   },
   {
-   "draft_id": "d68499833",
-   "title": "Подмосковный бизнес привлек 1,7 млрд рублей льготных кредитов на инвестиции",
+   "draft_id": "d84519368",
+   "title": "Лантратова поддержала создание совместного с КСВО центра компетенций",
    "date": "2026-11-23",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28346137"
+     "https://tass.ru/obschestvo/28346383"
     ]
    ],
-   "sum": "1,7 млрд ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "Подмосковный бизнес",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "Подмосковный бизнес",
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d62075382",
+   "title": "Роспотребнадзор получит дополнительные полномочия по контролю за продажей лекарства и БАД на маркетплейсах",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:vademec.ru",
+     "https://vademec.ru/news/2026/11/23/rospotrebnadzor-poluchit-dopolnitelnye-polnomochiya-po-kontrolyu-za-prodazhey-lekarstva-i-bad-na-mar/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05589953",
+   "title": "Суд привлек Linde к спору о взыскании 8,2 млрд руб с Commerzbank",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261123/sud-875462349.html"
+    ]
+   ],
+   "sum": "8,2 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Суд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Суд",
     "seller": null
    },
    "ind": null,
@@ -796,13 +768,13 @@
    ]
   },
   {
-   "draft_id": "d12107386",
-   "title": "Арестованный танкер Unity передали под управление индийского капитана",
+   "draft_id": "d11837253",
+   "title": "Премьера Греции раскритиковали за совет пенсионерам купить внукам GTA VI",
    "date": "2026-11-23",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261123/tanker-2133426065.html"
+     "https://ria.ru/20261123/gta-2133445828.html"
     ]
    ],
    "sum": null,
@@ -817,20 +789,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d35686909",
-   "title": "«Чиполлино» за 34 тысячи и Дед Мороз из стекла. Какие необычные елочные игрушки продают в Ростове?",
+   "draft_id": "d63116230",
+   "title": "Суд Гааги запретил продажи китайской машины в ЕС",
    "date": "2026-11-23",
    "src": [
     [
-     "web:161.ru",
-     "https://161.ru/text/winter/2026/11/23/76784283/"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/23/sud-gaagi-zapretil-prodazhi-kitayskoy-mashiny-v-es/"
     ]
    ],
    "sum": null,
@@ -845,7 +817,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Потребительские товары",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
