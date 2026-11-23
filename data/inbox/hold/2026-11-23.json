@@ -479,13 +479,13 @@
    ]
   },
   {
-   "draft_id": "d80089354",
-   "title": "Журналист Владимир Соловьев передал 30 пикапов подразделениям в Крыму",
+   "draft_id": "d13362861",
+   "title": "В Молдавии отклонили требование оппозиции раскрыть условия приобретения газа",
    "date": "2026-11-23",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/armiya-i-opk/28346483"
+     "https://tass.ru/mezhdunarodnaya-panorama/28346743"
     ]
    ],
    "sum": null,
@@ -507,101 +507,16 @@
    ]
   },
   {
-   "draft_id": "d62075382",
-   "title": "Роспотребнадзор получит дополнительные полномочия по контролю за продажей лекарства и БАД на маркетплейсах",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:vademec.ru",
-     "https://vademec.ru/news/2026/11/23/rospotrebnadzor-poluchit-dopolnitelnye-polnomochiya-po-kontrolyu-za-prodazhey-lekarstva-i-bad-na-mar/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d40032277",
-   "title": "Anthropic выставила банкирам жёсткие условия: после IPO им запретили работать с OpenAI и DeepSeek",
+   "draft_id": "d57264529",
+   "title": "Сразу два автомобиля Evolute станут доступны для покупки с госсубсидией — цены начинаются от 2,2 млн ₽",
    "date": "2026-11-23",
    "src": [
     [
      "web:rb.ru",
-     "https://rb.ru/news/anthropic-vystavila-bankiram-zhyostkie-usloviya-posle-ipo-im-zapretili-rabotat-s-openai-i-deepseek/"
+     "https://rb.ru/news/srazu-dva-avtomobilya-evolute-stanut-dostupny-dlya-pokupki-s-gossubsidiej-ceny-nachinayutsya-ot-22-mln/"
     ]
    ],
-   "sum": "$500 млн",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d11837253",
-   "title": "Премьера Греции раскритиковали за совет пенсионерам купить внукам GTA VI",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261123/gta-2133445828.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63116230",
-   "title": "Суд Гааги запретил продажи китайской машины в ЕС",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/23/sud-gaagi-zapretil-prodazhi-kitayskoy-mashiny-v-es/"
-    ]
-   ],
-   "sum": null,
+   "sum": "2,2 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
