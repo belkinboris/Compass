@@ -830,62 +830,6 @@
    ]
   },
   {
-   "draft_id": "d02448468",
-   "title": "Фонд «Цифровые горизонты» вышел из капитала «Юрент»",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9127599"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d98894460",
-   "title": "Ирак выставил на продажу самолет Саддама Хусейна",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9127657"
-    ]
-   ],
-   "sum": "$900 тыс",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d98525067",
    "title": "Песков: новый раунд трехсторонних переговоров по Украине скоро состоится",
    "date": "2026-11-23",
@@ -1665,6 +1609,73 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что ««У каждого риелтора по три сделки в день». Что такое «Крымск» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42345422",
+   "title": "В Кремле раскрыли, где может пройти следующий раунд трехсторонних переговоров",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261123/peskov-875445090.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50699727",
+   "title": "13-летнюю девочку едва не продали в сексуальное рабство туристу в Таиланде",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/23/13-letnyuyu-devochku-edva-ne-prodali-v-seksualnoe-rabstvo-turistu-v-tailande/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-23",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/11/23/13-letnyuyu-devochku-edva-ne-prodali-v-seksualnoe-rabstvo-turistu-v-tailande/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Гостиницы и туризм",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
