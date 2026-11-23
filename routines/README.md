@@ -25,7 +25,7 @@
 | рутина | когда | файл | id запуска |
 |---|---|---|---|
 | приток | ежечасно в :20, 08–21 МСК | `routines/intake.md` | `trig_01WpQH2Xkt73vziYeCJycEWL` |
-| публикация | ежечасно в :05, 10–21 МСК | `routines/publication.md` | `trig_01J67pP8QdAmPZPMVfDue4bh` |
+| публикация | ежечасно в :05, 10–21 МСК | `routines/publication.md` | `trig_0195F8MRQLXJzFUsFMrVaV3u` (новая сессия на каждый запуск; заведена 23 ноября 2026 — прежний запуск исчез, публикация стояла с 21 ноября) |
 | качество | ежедневно в 21:37 МСК | `routines/quality.md` | `trig_017vwwoNcGuy1puYHcvz45ga` |
 | заметки от пользователей | каждые 3 часа, 08–20 МСК | `routines/user_notes.md` | `trig_01WPtAucUUWJTjGVhurcXuFC` |
 | очередь «нужен ИНН» | ежедневно в 08:20 МСК | `routines/inn_queue.md` | `trig_01Wh7CsJh9MgbDrAeCgQX8Pc` |
