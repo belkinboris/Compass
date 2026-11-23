@@ -1258,35 +1258,6 @@
    ]
   },
   {
-   "draft_id": "d40695499",
-   "title": "Панические распродажи акций в США объяснили",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/23/panicheskie-rasprodazhi-aktsiy-v-ssha-svyazali-s-slovami-lopnul-li-uzhe-puzyr-iskusstvennogo-intellekta/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
    "draft_id": "d95873865",
    "title": "Россиянин выставил на продажу необычный пикап Niva",
    "date": "2026-11-23",
@@ -1425,6 +1396,129 @@
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13462400",
+   "title": "«Росатом» завершит обоснование инвестиций в крупный завод по переработке ОЯТ",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261123/rosatom-875453933.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d98824614",
+   "title": "Купить землю у государства и остаться ни с чем: КС объяснил, когда приобретателя защитят",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/opinion/266881/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-23",
+     "title": "Сделка завершена",
+     "note": "В Постановлении Конституционного суда от 29.10.2026 № 63-П КС вновь обратил внимание на проблему добросовестного приобретения недвижимости. На этот раз поводом стало дело Ольги Остроумовой. Она купила земельный участок, право собственности продавца на который…",
+     "source": [
+      "web:pravo.ru",
+      "https://pravo.ru/opinion/266881/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d50770478",
+   "title": "В Челябинске продают 20-летний бизнес - садовый центр на Дарвина. Скрин",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146560"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18809400",
+   "title": "Эксперт назвал опции, за которые не стоит переплачивать при покупке авто",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/news/2026/11/23/ekspert-nazval-opczii-za-kotorye-ne-stoit-pereplachivat-pri-pokupke-avto"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Здравоохранение",
+   "needs_review": true,
+   "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }

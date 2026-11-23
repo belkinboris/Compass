@@ -460,6 +460,59 @@
     ]
    },
    "pending_since": "2026-11-23T07:54:50+00:00"
+  },
+  {
+   "id": "g9b852635",
+   "date": "2026-11-23",
+   "title": "«Эталон» продает участки в Нагатинской пойме в Москве",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261123/etalon-2133385948.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Эталон»",
+   "asset": "участки в Нагатинской пойме в Москве",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "участки в Нагатинской пойме в Москве",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261123/etalon-2133385948.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Эталон»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261123/etalon-2133385948.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-23T10:53:52+00:00"
   }
  ]
 }
