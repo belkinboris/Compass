@@ -1,0 +1,40 @@
+[
+ {"id": "g57fea4a1",
+  "verdict": "ok",
+  "fields": {
+   "title": "ok",
+   "asset": "ok",
+   "eco.context": "ok",
+   "law.struct": "ok",
+   "law.terms": "ok"
+  },
+  "general": {
+   "verbatim": "ok (сверено pipeline/verbatim_check.py с кэшем Фонтанки — находок нет)",
+   "parties": "ok (изъятие по суду: покупателя и продавца нет, no_parties и no_profile.seller/buyer объясняют честную пустоту)",
+   "status_date": "ok (другой даты решения суда в статье нет — только день, когда об изъятии сообщила пресс-служба судов; это и есть date 2026-11-23, checked.date_not_in_source)",
+   "post": "ok",
+   "language": "ok",
+   "modality": "ok",
+   "coherent": "ok"
+  }
+ },
+ {"id": "g9550db70",
+  "verdict": "ok",
+  "fields": {
+   "title": "ok",
+   "asset": "ok",
+   "eco.sum": "ok",
+   "eco.target_fin": "ok",
+   "law.struct": "ok"
+  },
+  "general": {
+   "verbatim": "ok (сверено pipeline/verbatim_check.py с кэшем URA.RU — находок нет)",
+   "parties": "ok (анонимное объявление: продавец, покупатель и юрлицо предмета не названы — no_parties и no_profile объясняют честную пустоту)",
+   "status_date": "ok (Обсуждается — объявление о продаже, покупателя и сделки еще нет; дата 2026-11-23 — день публикации объявления)",
+   "post": "ok",
+   "language": "ok",
+   "modality": "ok (окупаемость 8 лет 4 месяца подана как заявление продавца, не проверенное источником — выручка и прибыль не раскрыты)",
+   "coherent": "ok"
+  }
+ }
+]
