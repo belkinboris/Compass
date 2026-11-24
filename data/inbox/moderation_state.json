@@ -5493,7 +5493,7 @@
   "квартальныепродажиteslaоказалисьлучшепрогнозов": "auto-drop",
   "путинпоручилвыделитьгражданамдопсубсидиипопокупкегазовогооборудования": "auto-drop",
   "картинувинсентавангогапродализарекордные190млн": "drop",
-  "группалсрраскрылаценувыкупаакцийврамкахделистинга": "sent"
+  "группалсрраскрылаценувыкупаакцийврамкахделистинга": "drop"
  },
  "decided_raw": {
   "d54033151": "auto-drop",
@@ -10783,7 +10783,8 @@
   "d82206174": "auto-drop",
   "d08613453": "auto-drop",
   "d29707416": "enrich:g134cf416",
-  "d56630781": "auto-drop"
+  "d56630781": "auto-drop",
+  "d23144266": "drop"
  },
  "discarded_urls": {
   "https://abnews.ru/szfo/news/velikiy-novgorod/2026/9/5/novgorodskoe-hozyajstvo-vlozhilo-bolee-23-millionov-rublej-v-modernizacziyu": {
