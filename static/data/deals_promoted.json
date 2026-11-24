@@ -20408,18 +20408,27 @@
    "facts": {
     "stake": {
      "value": 100.0,
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "42e4354c2d99",
-     "object": "Авито (классифайд)",
+     "object": "компании Avito",
      "event": "announcement",
      "event_variants": [
       "announcement"
      ],
-     "quote": "заключила соглашение о приобретении 100% доли классифайда « Авито » у южноафриканского холдинга Naspers, говорится в официальном релизе.",
-     "source": "https://www.vedomosti.ru/business/news/2022/10/14/945690-kismet-vikupit-avito",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-23",
+     "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+     "source": "https://habr.com/ru/news/695478",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
      "readings": [
+      {
+       "value": 100.0,
+       "object": "компании Avito",
+       "event": "announcement",
+       "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
+       "quote_checked": true,
+       "reader": "A"
+      },
       {
        "value": 100.0,
        "object": "Авито (классифайд)",
@@ -20448,17 +20457,30 @@
      "value_rub": 151000000000,
      "meaning": "disclosed",
      "scope": "equity",
-     "basis": "read",
+     "basis": "verified",
      "card_hash": "106c0a0279a8",
      "meaning_variants": [
       "disclosed"
      ],
-     "scope_basis": "read",
-     "quote": "Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito. Покупателем выступает принадлежащая Ивану Таврину Kismet Capital Group, сумма сделки - 151 млрд рублей, говорится в сообщении Prosus.",
-     "source": "https://www.interfax.ru/business/867958",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-23",
+     "scope_basis": "verified",
+     "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+     "source": "https://habr.com/ru/news/695478",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
      "readings": [
+      {
+       "value_rub": 151000000000,
+       "meaning": "disclosed",
+       "attribution": "parties",
+       "event": "announcement",
+       "scope": "equity",
+       "terms": "fixed",
+       "quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+       "attribution_quote": "14 октября нидерландская инвесткомпания Prosus сообщила , что «Кисмет Капитал Груп» покупает 100% компании Avito за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
+       "quote_checked": true,
+       "reader": "A"
+      },
       {
        "value_rub": 151000000000,
        "meaning": "disclosed",
@@ -20502,16 +20524,24 @@
     "date": {
      "value": "2022-10-14",
      "meaning": "announcement",
-     "basis": "read",
+     "basis": "disputed",
      "card_hash": "8909f23799a2",
      "meaning_variants": [
       "announcement"
      ],
-     "quote": "Москва. 14 октября. INTERFAX.RU - Структура южноафриканского холдинга Naspers - Prosus - договорилась о продаже российского сервиса объявлений Avito.",
-     "source": "https://www.interfax.ru/business/867958",
-     "verified_by": "model×1",
-     "verified_at": "2026-11-23",
+     "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+     "source": "https://habr.com/ru/news/695478",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
      "readings": [
+      {
+       "value": "2022-10-25",
+       "meaning": "closing",
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
+       "source": "https://habr.com/ru/news/695478",
+       "quote_checked": true,
+       "reader": "A"
+      },
       {
        "value": "2022-10-14",
        "meaning": "announcement",
@@ -20537,9 +20567,9 @@
       {
        "value": "2022-10-25",
        "meaning": "closing",
-       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона»",
+       "quote": "25 октября 2022 года «Кисмет Капитал Груп» (Kismet Capital Group), которой владеет экс-гендиректор «МегаФона» предприниматель Иван Таврин, закрыла сделку по покупке «Группы Авито», включая ООО «КЕХ еКоммерц», ООО «Авито Холдинг» и их дочерних и зависимых предприятий за 151 млрд рублей.",
        "source": "https://habr.com/ru/news/695478",
-       "quote_checked": null,
+       "quote_checked": true,
        "reader": "A"
       },
       {
@@ -20587,15 +20617,18 @@
      "intragroup": false,
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-23",
+      "at": "2026-11-24",
       "readers": [
+       "A",
        "B"
       ],
       "notes": [
        [
-        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»), совпадает с прежней находкой по вопросу периметра — отчет по одному юрлицу не покрывает всю купленную группу.",
-        "Дата 2022-10-25 (закрытие, источник reader A — habr) в моих источниках не встречается: vedomosti и interfax датированы 14 октября 2022 и описывают ОБЪЯВЛЕНИЕ сделки, не закрытие. Точную дату закрытия своими источниками не подтверждаю.",
-        "Смена контроля подтверждена прямой цитатой пресс-релиза Avito."
+        "Повтор чтения reader A от 18.11.2026 (habr.com), пара с reader B от 23.11.2026 для подтверждения price/stake моделью×2."
+       ],
+       [
+        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»).",
+        "Дата закрытия (25.10.2022) моими источниками не подтверждается — только дата объявления (14.10.2022)."
        ]
       ]
      }
@@ -20673,15 +20706,18 @@
      },
      "reading": {
       "result": "not_in_source",
-      "at": "2026-11-23",
+      "at": "2026-11-24",
       "readers": [
+       "A",
        "B"
       ],
       "notes": [
        [
-        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»), совпадает с прежней находкой по вопросу периметра — отчет по одному юрлицу не покрывает всю купленную группу.",
-        "Дата 2022-10-25 (закрытие, источник reader A — habr) в моих источниках не встречается: vedomosti и interfax датированы 14 октября 2022 и описывают ОБЪЯВЛЕНИЕ сделки, не закрытие. Точную дату закрытия своими источниками не подтверждаю.",
-        "Смена контроля подтверждена прямой цитатой пресс-релиза Avito."
+        "Повтор чтения reader A от 18.11.2026 (habr.com), пара с reader B от 23.11.2026 для подтверждения price/stake моделью×2."
+       ],
+       [
+        "Независимо подтверждаю: ДВА юрлица в периметре (ООО «Кех Екоммерц» + ООО «Авито Холдинг»).",
+        "Дата закрытия (25.10.2022) моими источниками не подтверждается — только дата объявления (14.10.2022)."
        ]
       ]
      }
@@ -20689,17 +20725,17 @@
     "admitted": {
      "count": true,
      "industry": true,
-     "purchase_sums": true,
-     "top_purchases": true,
+     "purchase_sums": false,
+     "top_purchases": false,
      "multiple_text": false,
      "all_sums": true
     },
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "ok",
-     "top_purchases": "ok",
-     "multiple_text": "price_not_verified",
+     "purchase_sums": "date_disputed",
+     "top_purchases": "date_disputed",
+     "multiple_text": "perimeter_not_verified",
      "all_sums": "ok"
     }
    },
@@ -131908,7 +131944,7 @@
      "kind": "signed",
      "date": "2025-04-16",
      "title": "Объявлено о сделке",
-     "note": "«Яндекс» сообщил о покупке службы доставки Boxberry (Интерфакс, 16 апреля 2025 года)."
+     "note": "Интерфакс сообщил 16 апреля 2025 года, что «Яндекс» объявил о покупке службы доставки Boxberry."
     },
     {
      "kind": "closed",
@@ -279009,18 +279045,92 @@
      "card_hash": "04863311b00b"
     },
     "price": {
-     "value_rub": 220000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "f3b63a53b1fd",
-     "any_rub": null
+     "basis": "verified",
+     "card_hash": "f74613e5f309",
+     "any_rub": null,
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "publication",
+     "event_variants": [
+      "publication"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В Тамбовской области выставили на продажу мусороперерабатывающий комплекс за 220 млн рублей.",
+     "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value_rub": 220000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Тамбовской области выставили на продажу мусороперерабатывающий комплекс за 220 млн рублей.",
+       "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 220000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Тамбовской области выставили на продажу мусороперерабатывающий комплекс за 220 млн рублей.",
+       "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-02",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "b6030d78d7be"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "09133234b479",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Редакция · 2 ноября 2026, 11:23 · 1 мин чтения В Тамбовской области выставили на продажу мусороперерабатывающий комплекс за 220 млн рублей.",
+     "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value": "2026-11-02",
+       "meaning": "publication",
+       "quote": "Редакция · 2 ноября 2026, 11:23 · 1 мин чтения В Тамбовской области выставили на продажу мусороперерабатывающий комплекс за 220 млн рублей.",
+       "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-02",
+       "meaning": "publication",
+       "quote": "Мусороперерабатывающий комплекс выставили на продажу под Тамбовом за 220 млн рублей Редакция · 2 ноября 2026, 11:23",
+       "source": "https://abireg.ru/newsitem/5000123-musoropererabatyvayushchiy-kompleks-vystavili-na-prodazhu-pod-tambovom-za-220-mln-rubley/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -279053,8 +279163,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
@@ -279063,7 +279173,9 @@
    "reread": "2026-11-09",
    "reread_hash": "5ee68b53951b.ace5bd",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "g6e759772",
@@ -290565,7 +290677,9 @@
    "reread": "2026-11-09",
    "reread_hash": "ee0c59f394d5.610e4c",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "date": "2024-12-04",
@@ -290589,6 +290703,14 @@
     [
      "РИА Новости — Недвижимость",
      "https://realty.ria.ru/20250912/sud-2041417603.html"
+    ],
+    [
+     "РАПСИ",
+     "https://rapsinews.ru/judicial_news/20250728/311052585.html"
+    ],
+    [
+     "РАПСИ",
+     "https://rapsinews.ru/judicial_news/20250912/311143063.html"
     ]
    ],
    "eco": {
@@ -290603,7 +290725,7 @@
    },
    "law": {
     "struct": "Арбитражный суд Москвы полностью удовлетворил иск Генпрокуратуры: объекты велотрека истребованы из незаконного владения АО «СЦП «Крылатское»» и переданы в государственную собственность.",
-    "appr": "Решение принял Арбитражный суд Москвы 4 декабря 2024 года. Жалобы СЦП «Крылатское» и Московской федерации профсоюзов отклонил Девятый арбитражный апелляционный суд; Верховный суд оснований для пересмотра не нашел.",
+    "appr": "Решение принял Арбитражный суд Москвы 4 декабря 2024 года. Жалобы СЦП «Крылатское» и Московской федерации профсоюзов отклонил Девятый арбитражный апелляционный суд; 28 июля 2025 года СЦП «Крылатское» подало жалобу в Верховный суд, и 12 сентября 2025 года судья Верховного суда отказал в пересмотре.",
     "adv": [],
     "terms": "Деньги не платились: здания возвращены государству без компенсации."
    },
@@ -290694,7 +290816,12 @@
      "by": "reread_oneoff_m102 (вычитка 12.11.2026)",
      "date": "2026-11-12"
     }
-   ]
+   ],
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "date": "2024-05-02",
@@ -290714,6 +290841,10 @@
     [
      "АиФ Владивосток",
      "https://vl.aif.ru/society/sudy-okonchatelno-lishil-imushchestva-primorskogo-biznesmena-dremlyugu"
+    ],
+    [
+     "Право.ru",
+     "https://pravo.ru/news/256680/"
     ]
    ],
    "eco": {
@@ -290728,7 +290859,7 @@
    },
    "law": {
     "struct": "Суд удовлетворил иск полностью и обратил взыскание на доли ответчиков в компаниях в счет частичного возмещения ущерба. Решение подлежало немедленному исполнению.",
-    "appr": "Решение принял Арбитражный суд Приморского края по иску Генпрокуратуры; Пятый арбитражный апелляционный суд оставил его в силе.",
+    "appr": "Решение принял Арбитражный суд Приморского края по иску Генпрокуратуры; Пятый арбитражный апелляционный суд 12 декабря 2024 года вернул жалобу ответчиков без рассмотрения и отказал восстановить срок на апелляцию — по существу дело в апелляции не пересматривалось.",
     "adv": [],
     "terms": "Деньги за компании не платились: они переданы государству в счет взыскания."
    },
@@ -290826,7 +290957,12 @@
      "by": "вычитка d14a, 14.11.2026",
      "date": "2026-11-14"
     }
-   ]
+   ],
+   "proofread_absorbed": {
+    "law.appr": []
+   },
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "date": "2023",
@@ -290842,6 +290978,10 @@
     [
      "Лесной регион",
      "http://lesregion.ru/main/5958-nacionalizacija-zarubezhnyh-aktivov.html"
+    ],
+    [
+     "Деловой Петербург",
+     "https://www.dp.ru/a/2023/09/07/bolshaja-chistka-chem-grozit"
     ]
    ],
    "eco": {
@@ -290855,7 +290995,7 @@
     "finadv": "—"
    },
    "law": {
-    "struct": "Арбитражный суд Санкт-Петербурга и Ленинградской области признал сделки ничтожными и передал акции государству.",
+    "struct": "Арбитражный суд Санкт-Петербурга и Ленинградской области признал сделки ничтожными и передал акции государству. С учетом связанных компаний совокупная доля Зайцева в комбинате выросла до 54,5%; сделки, из-за которых суд счел его иностранным инвестором, прошли в мае и августе 2022 года.",
     "appr": "Решение принял Арбитражный суд Санкт-Петербурга и Ленинградской области, Тринадцатый арбитражный апелляционный суд оставил его в силе; основание — закон об иностранных инвестициях в стратегические общества (57-ФЗ).",
     "adv": [],
     "terms": "Деньги не платились: акции переданы государству без компенсации."
@@ -290937,7 +291077,12 @@
    "reread": "2026-11-09",
    "reread_hash": "8db40a1ead56.076bc7",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "proofread_absorbed": {
+    "law.struct": []
+   },
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "date": "2022",
@@ -291052,7 +291197,9 @@
    "reread": "2026-11-09",
    "reread_hash": "8230698e11ca.9ba436",
    "reread_scope": "short",
-   "reread_note": "статьи: 3"
+   "reread_note": "статьи: 3",
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "type": "Временное управление",
@@ -291098,7 +291245,8 @@
     "terms": "—"
    },
    "themes": [
-    "Правкомиссия / указ президента"
+    "Правкомиссия / указ президента",
+    "Национализация / иск Генпрокуратуры"
    ],
    "id": "gba8e5ea8",
    "added": "2026-11-04",
@@ -291166,7 +291314,9 @@
    "reread": "2026-11-09",
    "reread_hash": "fdd3b211be8b.739471",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "deep_researched": "2026-11-24",
+   "weekly_researched": "2026-11-24"
   },
   {
    "type": "Временное управление",
@@ -295687,18 +295837,94 @@
      "card_hash": "acfb47d86c4a"
     },
     "price": {
-     "value_rub": 247000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "8e51bbe5bed6",
-     "any_rub": 247000000.0
+     "basis": "verified",
+     "card_hash": "d699d574086a",
+     "any_rub": 247000000.0,
+     "meaning_variants": [
+      "reported"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "closing",
+     "event_variants": [
+      "closing"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "disputed",
+     "scope_variants": [
+      "package",
+      "unknown"
+     ],
+     "quote": "Сумма сделки составила 246,93 млн руб.",
+     "source": "https://www.kommersant.ru/doc/9080223",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value_rub": 246930000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "Сумма сделки составила 246,93 млн руб.",
+       "source": "https://www.kommersant.ru/doc/9080223",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 247000000,
+       "meaning": "reported",
+       "attribution": "media_sources",
+       "event": "closing",
+       "scope": "package",
+       "terms": "fixed",
+       "quote": "Московский инвестор купил один из крупнейших садов Ставрополья за 247 млн руб.",
+       "source": "https://www.kommersant.ru/doc/9080223",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-10-16",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "93ce1633fc64"
+     "meaning": "signing",
+     "basis": "verified",
+     "card_hash": "7d5a2a6ae614",
+     "meaning_variants": [
+      "closing",
+      "signing"
+     ],
+     "quote": "Согласно сообщению управляющего, договор купли-продажи был заключен 16 октября 2026 года с единственным участником торгов.",
+     "source": "https://www.kommersant.ru/doc/9080223",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value": "2026-10-16",
+       "meaning": "signing",
+       "quote": "Согласно сообщению управляющего, договор купли-продажи был заключен 16 октября 2026 года с единственным участником торгов.",
+       "source": "https://www.kommersant.ru/doc/9080223",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-10-16",
+       "meaning": "closing",
+       "quote": "договор купли-продажи был заключен 16 октября 2026 года с единственным участником торгов.",
+       "source": "https://www.kommersant.ru/doc/9080223",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -295731,8 +295957,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "not_control_change",
      "all_sums": "ok"
     }
@@ -295740,7 +295966,9 @@
    "reread": "2026-11-09",
    "reread_hash": "c9dffabfdb6f.c879ca",
    "reread_scope": "short",
-   "reread_note": "статьи: 2"
+   "reread_note": "статьи: 2",
+   "sum_basis": "reported",
+   "date_basis": "signing"
   },
   {
    "id": "g7994f736",
@@ -318098,18 +318326,92 @@
      "card_hash": "5bcb9156b622"
     },
     "price": {
-     "value_rub": 120000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "estimate",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "4a5af866469a",
-     "any_rub": null
+     "basis": "verified",
+     "card_hash": "a2068ffc340a",
+     "any_rub": null,
+     "meaning_variants": [
+      "estimate"
+     ],
+     "attribution": "media_sources",
+     "attribution_variants": [
+      "media_sources"
+     ],
+     "event": "publication",
+     "event_variants": [
+      "publication"
+     ],
+     "terms": "fixed",
+     "terms_variants": [
+      "fixed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В Челябинской области выставлен на продажу горнолыжный комплекс «Миньяр» за 120 миллионов рублей.",
+     "source": "https://ura.news/news/1053143029",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value_rub": 120000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Челябинской области выставлен на продажу горнолыжный комплекс «Миньяр» за 120 миллионов рублей.",
+       "source": "https://ura.news/news/1053143029",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 120000000,
+       "meaning": "estimate",
+       "attribution": "media_sources",
+       "event": "publication",
+       "scope": "unknown",
+       "terms": "fixed",
+       "quote": "В Челябинской области выставлен на продажу горнолыжный комплекс «Миньяр» за 120 миллионов рублей.",
+       "source": "https://ura.news/news/1053143029",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-11",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "7978d065d21b"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "9b1815480c28",
+     "meaning_variants": [
+      "publication"
+     ],
+     "quote": "Недвижимость 11 ноября 2026 в 12:30",
+     "source": "https://ura.news/news/1053143029",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-24",
+     "readings": [
+      {
+       "value": "2026-11-11",
+       "meaning": "publication",
+       "quote": "Недвижимость 11 ноября 2026 в 12:30",
+       "source": "https://ura.news/news/1053143029",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-11",
+       "meaning": "publication",
+       "quote": "Недвижимость 11 ноября 2026 в 12:30",
+       "source": "https://ura.news/news/1053143029",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -318142,15 +318444,17 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "target_unconfirmed",
      "all_sums": "talks"
     }
    },
    "reread": "2026-11-16",
    "reread_hash": "e9c7681f81d7.57d6ee",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "sum_basis": "estimate",
+   "date_basis": "publication"
   },
   {
    "id": "ge42606a4",
