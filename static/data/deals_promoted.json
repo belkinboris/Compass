@@ -328101,6 +328101,159 @@
      "all_sums": "ok"
     }
    }
+  },
+  {
+   "id": "ga187c62e",
+   "date": "2026-11-12",
+   "title": "Валентина Кремнева передала контролирующий пакет «Молочной столицы» Игорю Кремневу",
+   "ind": "Транспорт и логистика",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "100% доли в ООО «Молочная столица»",
+    "val": "—",
+    "target_fin": "В 2025 году выручка «Молочной столицы» выросла на 19%, до 1,23 млрд ₽, а прибыль — почти втрое (на 247%), до 65 млн ₽. В компании работает 234 человека.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Молочная столица» — транспортный и логистический оператор молочного холдинга «Лебедяньмолоко», зарегистрирован в 2015 году; в ноябре 2025 года компания сменила юридический адрес с Липецка на Лебедянь. Гендиректором остается Сергей Саунин, он руководит компанией с января 2022 года. Перемена собственника оформлена в реестре 12 ноября 2026 года.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Условия, на которых доля перешла от Валентины Кремневой к Игорю Кремневу, в источнике не раскрыты. Кремнев говорит, что передача произошла внутри семьи и не меняет планов холдинга, а руководство «Молочной столицы» не поменялось.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "from_raw": {
+    "draft_id": "d89690931",
+    "title": "Логистика «Лебедяньмолоко» перешла к управляющему акционеру холдинга Игорю Кремневу"
+   },
+   "buyer_name": "Игорь Кремнев",
+   "seller": "Валентина Кремнева",
+   "seller_src": "text",
+   "asset": "Молочная столица",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Игорь Кремнев",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Валентина Кремнева",
+      "field": "seller",
+      "method": "manual_source_review",
+      "url": "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+     }
+    ],
+    "target": [
+     {
+      "value": "Молочная столица",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/"
+     }
+    ]
+   },
+   "accepted_notes": {
+    "no_profile": {
+     "target": "ООО «Молочная столица» (Лебедянь, Липецкая обл., транспортный и логистический оператор холдинга «Лебедяньмолоко») — ИНН 4811024930 нашелся (EMIS, company-profile), но не подтвержден вторым источником; ОГРН не нашелся (список мест поиска и причина — в checked.registry_owners) — профиль не заводим. Холдинг «Лебедяньмолоко» (ИНН 4811005751) — ДРУГОЕ юрлицо (само молочное производство), не путать с «Молочной столицей» (его логистическим оператором).",
+     "buyer": "Игорь Кремнев и Валентина Кремнева — физические лица, профиль не заводим.",
+     "seller": "см. buyer — то же физическое лицо по разные стороны сделки. История участников ЕГРЮЛ «Молочной столицы» проверялась отдельно (datanewton.ru/api/v2/history по ОГРН) — см. checked.registry_owners: ОГРН получить не удалось из этой среды, продавец при этом надежно назван первоисточником со ссылкой на данные реестра."
+    },
+    "checked": {
+     "registry_owners": "ОГРН ООО «Молочная столица» получить не удалось из этой среды (ИНН 4811024930 нашелся через EMIS, но list-org/rusprofile/checko/companies.rbc.ru/audit-it.ru/tbank.ru заблокированы, а datanewton.ru/api/v2/history принимает только ОГРН) — история участников ЕГРЮЛ этой сессией не проверена. Смена собственника при этом надежно подтверждена первоисточником (Абирег), который сам пишет, что действует по данным реестра: «Как стало известно «Абирегу», по данным реестра, Игорь Кремнев получил 100% долей ООО «Молочная столица». Изменения внесены в ЕГРЮЛ 12 ноября 2026 года» — продавец (Валентина Кремнева) и дата (12.11.2026) взяты из этого прямого изложения записи ЕГРЮЛ изданием, а не из домысла; отдельная сверка датаньютоном подтвердила бы то же самое, но не изменила бы уже установленный факт."
+    },
+    "notes": "Условия передачи доли статья прямо называет нераскрытыми («условия передачи не раскрываются»), а сам Кремнев говорит, что доли перешли «в рамках семьи» и «ни на что не влияют» — не подтверждено, были ли деньги; заголовок переписан свежей приемкой (23 ноября 2026) на нейтральный «передала контролирующий пакет» (тот же глагол, что у «О23»/Ozon, g90767425) — единственная конструкция стандарта заголовка, не утверждающая ни покупку, ни безвозмездную передачу там, где источник сам этого не говорит; eco.val по тем же причинам остается пустым. Второе чтение 24 ноября 2026: eco.context сократили на два предложения про инвестплан и суточный прием молока холдинга «Лебедяньмолоко» — это о другом, перерабатывающем, бизнесе того же холдинга, не об этой сделке (письменная правка — written_sr_2026_11_24_ga187c62e.py).",
+    "searched": "Абирег, 23.11.2026 (первоисточник, прочитан целиком через fetch_article_texts.py); WebSearch «ООО Молочная столица Лебедянь ИНН ОГРН» — нашел только запись EMIS по старому адресу, без реквизитов в открытом доступе, и не ту компанию («Лебедяньмолоко», другое юрлицо). Свежая приемка (23 ноября 2026): WebSearch нашел ИНН 4811024930 (EMIS); попытки получить ОГРН — list-org.com (защита браузера, не отдает карточку), rusprofile.ru (403), checko.ru (403), companies.rbc.ru (401/поиск по ИНН не дал результата), audit-it.ru (404), tbank.ru/business/contractor/inn (503) — все заблокированы из этой среды; datanewton.ru/api/v2/history принял ОГРН у других карточек без ключа, но с ИНН вместо ОГРН вернул 409 — без ОГРН историю участников проверить не удалось."
+   },
+   "proofread_absorbed": {
+    "eco.target_fin": [],
+    "eco.context": [
+     "8435246c7097"
+    ],
+    "law.struct": [
+     "4fb2f1631a34"
+    ]
+   },
+   "reviewed": "2026-11-23",
+   "date_basis": "registry",
+   "accepted": "2026-11-24",
+   "accepted_hash": "97d93353d125.ace5bd",
+   "second_read": "2026-11-24",
+   "second_read_hash": "97d93353d125.ace5bd",
+   "shown_hash": "97d93353d125.ace5bd",
+   "post_preview": "<b>Валентина Кремнева передала контролирующий пакет «Молочной столицы» Игорю Кремневу</b>\n\n<b>Покупатель:</b> Игорь Кремнев\n<b>Продавец:</b> Валентина Кремнева\n<b>Предмет:</b> 100% доли в ООО «Молочная столица»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Транспорт и логистика\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/119482-logistika-lebedyanmoloko-pereshla-k-upravlyayushchemu-aktsioneru-kholdinga-igoryu-kremnevu/\">Абирег</a>\n\n#инфраструктура #логистика #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/ga187c62e\">карточке сделки</a>",
+   "added": "2026-11-24",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 100.0,
+     "basis": "rule",
+     "card_hash": "ca762a62c3f8"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-12",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "2aea9cecfb34"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target",
+     "all_sums": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
