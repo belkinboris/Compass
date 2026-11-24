@@ -637,70 +637,13 @@
    ]
   },
   {
-   "draft_id": "d32441900",
-   "title": "Flint Capital под управлением Сергея Грибова вновь вложился в канадский стартап Odaia . Раунд С на $15 млн возглавил Monograph Capital при участии PHM, BDC Capital, Innospark Ventures, Graphite Ventur",
+   "draft_id": "d67216489",
+   "title": "Мошенники начали предлагать россиянам купить красную икру по заниженным ценам",
    "date": "2026-11-24",
    "src": [
     [
-     "tg:rusven",
-     "https://t.me/rusven/7867"
-    ]
-   ],
-   "sum": "$15 млн",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d67065141",
-   "title": "ТАСС: Львов в октябре стал самым дорогим городом Украины для покупки жилья",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28348723"
-    ]
-   ],
-   "sum": "$75 тыс",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91651958",
-   "title": "Верховный суд разъяснил, когда покупка криптовалюты становится отмыванием денег",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28348675"
+     "web:1prime.ru",
+     "https://1prime.ru/20261124/roskachestvo-875489653.html"
     ]
    ],
    "sum": null,
@@ -718,49 +661,20 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d79917064",
-   "title": "Николай Стецко: инвестиции в экономику Приморского края продолжают расти",
+   "draft_id": "d52412449",
+   "title": "Мошенники стали предлагать россиянам купить красную икру по низким ценам",
    "date": "2026-11-24",
    "src": [
     [
      "web:ria.ru",
-     "https://ria.ru/20261124/ekonomika-2133571460.html"
+     "https://ria.ru/20261124/roskachestvo-2133580781.html"
     ]
    ],
    "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d94192095",
-   "title": "Любимый ресторан экс-мэра Андрея Воронова продают в Новом Уренгое. Скрин",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053146885"
-    ]
-   ],
-   "sum": "20 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
@@ -779,36 +693,120 @@
    ]
   },
   {
-   "draft_id": "d75942972",
-   "title": "В Подмосковье участок в Серпухове продали на торгах за 8,3 млн рублей",
+   "draft_id": "d10958568",
+   "title": "В Москве выставили на продажу десятилетний седан Toyota с небольшим пробегом",
    "date": "2026-11-24",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/center/news/mosreg/2026/11/24/v-podmoskove-uchastok-v-serpuhove-prodali-na-torgah-za-83-mln-rublej"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/24/v-moskve-vystavili-na-prodazhu-desyatiletniy-sedan-toyota-s-nebolshim-probegom/"
     ]
    ],
-   "sum": "8,3 млн ₽",
-   "type": "Продажа с торгов",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63544837",
+   "title": "Моор упростил выкуп служебных квартир для тюменских госслужащих. Эксклюзив",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146899"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d31212333",
+   "title": "В Роскачестве объяснили, что будет, если купить красную икру «по самой низкой цене»",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146903"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d69673903",
+   "title": "«Это не подарок, я купила это за 1 рубль!»",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/biznes/60568"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-11-24",
      "title": "Сделка завершена",
-     "note": "В Московской области на аукционе продан земельный участок для ведения личного подсобного хозяйства в городском округе Серпухов за 8,3 млн рублей.",
+     "note": "",
      "source": [
-      "web:abnews.ru",
-      "https://abnews.ru/center/news/mosreg/2026/11/24/v-podmoskove-uchastok-v-serpuhove-prodali-na-torgah-za-83-mln-rublej"
+      "web:krasrab.ru",
+      "https://krasrab.ru/news/biznes/60568"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": "на торгах",
+   "asset": "это",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "на торгах",
+    "asset": "это",
     "seller": null
    },
    "ind": null,
