@@ -12770,3 +12770,17 @@ def test_sweep_notices_a_take_whose_card_vanished():
     cards = [{"id": "gNEW", "from_raw": {"draft_id": "d2"}}, {"id": "gBASE"}]
     lost = sweep.lost_takes(state, cards, {"g3": "gBASE"}, now)
     assert [d for d, _ in lost] == ["d1"]
+
+
+def test_post_decision_on_a_card_already_on_the_site_counts_as_a_decision():
+    """«Без поста» у карточки на сайте — решение, которое публикация обязана
+    увидеть (24 ноября 2026, `gcdfb645f`: «Решений нет», кнопка висела)."""
+    from pipeline.ingest import approve
+    deals = [{'id': 'a', 'post_held': True}, {'id': 'b', 'no_post': True},
+             {'id': 'c'}, {'id': 'd', 'post_approved': True}, {'id': 'e'}]
+    decisions = [{'deal_id': i, 'verdict': 'post_no', 'created_at': '2026-11-24T16:41:18'}
+                 for i in 'abcd'] + [{'deal_id': 'e', 'verdict': 'post_hold', 'created_at': '2026-11-24T16:41:18'}]
+    got = approve.base_post_decisions(deals, {'c'}, decisions)
+    assert [(d['id'], v) for d, v in got] == [('a', 'post_no'), ('e', 'post_hold')]
+    src = open('pipeline/publish/ship_decisions.py', encoding='utf-8').read()
+    assert "'ПОСТ '" in src
