@@ -185,10 +185,11 @@ def site_failure(out):
 
 
 def decisions_planned():
-    """Сухой approve.py: строки ПУБЛИКУЕМ/ПРИДЕРЖАНА/ВЫКИНУТА/В РАБОТУ/ОТБРОШЕНА."""
+    """Сухой approve.py: строки ПУБЛИКУЕМ/ПРИДЕРЖАНА/ВЫКИНУТА/В РАБОТУ/ОТБРОШЕНА
+    и ПОСТ (решение о посте у карточки, которая уже на сайте, — 24 ноября 2026)."""
     out = run([sys.executable, os.path.join(INGEST, 'approve.py')], must=False).stdout
     rows = [l.strip() for l in out.splitlines()
-            if l.strip().startswith(('ПУБЛИКУЕМ', 'ПРИДЕРЖАНА', 'ВЫКИНУТА', 'В РАБОТУ', 'ОТБРОШЕНА'))]
+            if l.strip().startswith(('ПУБЛИКУЕМ', 'ПРИДЕРЖАНА', 'ВЫКИНУТА', 'В РАБОТУ', 'ОТБРОШЕНА', 'ПОСТ '))]
     return rows, out
 
 
