@@ -394,6 +394,60 @@
    },
    "accepted": "2026-11-24",
    "accepted_hash": "64a7b49c1889.549901"
+  },
+  {
+   "id": "g69f9b746",
+   "date": "2026-11-13",
+   "title": "«Дом.РФ» продает площадку под застройку в центре подмосковного Дмитрова",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "площадка под застройку в центре подмосковного Дмитрова",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "площадка под застройку в центре подмосковного Дмитрова",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261113/dmitrov-2131316990.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "pending_since": "2026-11-24T08:52:54+00:00"
   }
  ]
 }
