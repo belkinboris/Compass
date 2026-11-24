@@ -12784,3 +12784,31 @@ def test_post_decision_on_a_card_already_on_the_site_counts_as_a_decision():
     assert [(d['id'], v) for d, v in got] == [('a', 'post_no'), ('e', 'post_hold')]
     src = open('pipeline/publish/ship_decisions.py', encoding='utf-8').read()
     assert "'ПОСТ '" in src
+
+
+def test_no_post_pressed_for_a_card_on_the_site_is_written_to_the_base(tmp_path, monkeypatch):
+    """24 ноября 2026 (`gcdfb645f`): «Без поста» у придержанного поста карточки
+    базы применялось в памяти, а файл базы не записывался — в прогоне не было
+    ни новой карточки, ни позднего решения."""
+    import approve
+    pending = tmp_path / "pending.json"
+    pending.write_text(json.dumps({"cards": []}), encoding="utf-8")
+    data = tmp_path / "deals.json"
+    data.write_text(json.dumps({"deals": [{"id": "gcdfb645f", "title": "Сделка", "date": "2026-11-17",
+                                           "status": "Закрыта", "post_held": True}],
+                                "companies": {}}, ensure_ascii=False), encoding="utf-8")
+    state = tmp_path / "state.json"
+    state.write_text(json.dumps({"decided_raw": {}, "raw_titles": {}}), encoding="utf-8")
+    (tmp_path / "data" / "inbox" / "hold").mkdir(parents=True)
+    monkeypatch.setattr(approve, "ROOT", str(tmp_path))
+    monkeypatch.setattr(approve, "PENDING", str(pending))
+    monkeypatch.setattr(approve, "DATA", str(data))
+    monkeypatch.setattr(approve, "PENDING_CONSUME", str(tmp_path / "consume.json"))
+    import promote
+    monkeypatch.setattr(promote, "STATE", str(state))
+    monkeypatch.setattr(promote, "notify", lambda *a, **k: None)
+    monkeypatch.setattr(approve, "fetch_decisions", lambda: ([
+        {"id": 1752, "deal_id": "gcdfb645f", "verdict": "post_no", "created_at": "2026-11-24T16:41:18+00:00"}], None))
+    approve.main(write=True)
+    deal = json.loads(data.read_text(encoding="utf-8"))["deals"][0]
+    assert deal.get("no_post") is True and "post_held" not in deal

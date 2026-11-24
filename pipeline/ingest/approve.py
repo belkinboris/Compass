@@ -614,6 +614,8 @@ def main(write=False):
                 card['post_channels'] = list(post['channels'])
     # Кнопка под проектом поста у карточки, которая УЖЕ на сайте (пост
     # показали заново после правки) — та же отметка у карточки в базе.
+    post_flags_before = {d['id']: (d.get('post_approved'), d.get('no_post'), d.get('post_held'),
+                                   list(d.get('post_channels') or [])) for d in data['deals']}
     for deal in data['deals']:
         post = post_mod.get(deal['id'])
         if post and post['verdict'] == 'post_yes':
@@ -627,6 +629,13 @@ def main(write=False):
         elif post and post['verdict'] == 'post_no' and not deal.get('post_approved'):
             deal['no_post'] = True
             deal.pop('post_held', None)
+    # Отметка о посте у карточки базы — тоже правка базы: без этого флага
+    # файл не записывался, если в прогоне не было ни новой карточки, ни
+    # позднего решения (24 ноября 2026, `gcdfb645f`: «Без поста» применялось
+    # в памяти и терялось).
+    post_flags_changed = any(
+        post_flags_before[d['id']] != (d.get('post_approved'), d.get('no_post'), d.get('post_held'),
+                                       list(d.get('post_channels') or [])) for d in data['deals'])
     fresh = []
     ghost_merged = False
     for card, override, _why in publish:
@@ -797,7 +806,7 @@ def main(write=False):
         # Не печатаем повторно: план по сырью уже назван выше, до сухого
         # возврата, и второй такой же строкой отчет только шумит.
 
-    if fresh or base_changed or ghost_merged:
+    if fresh or base_changed or ghost_merged or post_flags_changed:
         # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
         # читает только facts, не покажет их ни в одном показателе.
         if ROOT not in sys.path:
