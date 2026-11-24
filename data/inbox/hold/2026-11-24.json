@@ -2,35 +2,6 @@
  "made": "2026-11-24",
  "drafts": [
   {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d34423503",
    "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
    "date": "2026-11-17",
@@ -82,9 +53,11 @@
    },
    "ind": null,
    "needs_review": true,
+   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -111,11 +84,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -146,7 +117,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -177,7 +148,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -207,7 +178,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -238,7 +209,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -309,7 +280,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -351,7 +322,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -382,36 +353,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d57392391",
-   "title": "Продажи GTA VI в первый день оценили более чем в $2 млрд",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2205386/2026-11-20/prodazhi-gta-vi-v-pervyi-den-otcenili-bolee-chem-v-2-mlrd"
-    ]
-   ],
-   "sum": "$2 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -444,67 +386,6 @@
    ]
   },
   {
-   "draft_id": "d80259424",
-   "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/20/11/2026/6b0037a53559e147749d1565"
-    ]
-   ],
-   "sum": "$107 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d53545276",
-   "title": "Космический рекорд побит: как прошло первичное публичное размещение акций Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28340723"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
    "draft_id": "d58423037",
    "title": "Anthropic по итогам IPO привлекла $93,5 млрд",
    "date": "2026-11-20",
@@ -532,7 +413,7 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -563,7 +444,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -594,35 +475,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d93383679",
-   "title": "На Украине раскрыли схему продажи новобранцев элитного подразделения ГУР",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/24/na-ukraine-raskryli-shemu-prodazhi-novobrantsev-elitnogo-podrazdeleniya-gur/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
