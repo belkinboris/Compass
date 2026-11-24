@@ -250,6 +250,7 @@ def main(argv):
         raise SystemExit('git pull: %s' % (g.stderr or g.stdout).strip()[-300:])
     if send:
         # Фаза 2: мусор уже отсеян (raw_screen.py --drop) — показать и записать.
+        run('purge_open_lots.py', '--write', must=False)
         run('send_drafts.py', '--write', must=False)
         remind_undecided()
         rc = commit_and_push('Забор новостей: сырье показано, очередь (sweep.py --send)')
@@ -260,6 +261,8 @@ def main(argv):
     run('triage.py')
     run('draft.py')
     run('promote.py', *(['--write'] if write else []))
+    # лот без результата, ставший лотом после ворот (чтение сменило тип)
+    run('purge_open_lots.py', *(['--write'] if write else []), must=False)
     if write:
         run('signals.py', '--write', must=False)
     if not write:
