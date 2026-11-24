@@ -479,34 +479,6 @@
    ]
   },
   {
-   "draft_id": "d75141184",
-   "title": "Ряд опасных зарядных устройств убирают из продажи после исследования Роскачества",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261124/roskachestvo-875504222.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d15305731",
    "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
    "date": "2026-11-06",
@@ -626,19 +598,30 @@
    ]
   },
   {
-   "draft_id": "d51852392",
-   "title": "«Вкусно — и точка» представила новогоднюю коллекцию снежных шаров — игрушки появятся в продаже 8 декабря",
+   "draft_id": "d99962855",
+   "title": "Картина Айвазовского «Венеция ночью» продана на аукционе за $1,4 млн",
    "date": "2026-11-24",
    "src": [
     [
-     "web:rb.ru",
-     "https://rb.ru/news/vkusno-i-tochka-predstavila-novogodnyuyu-kollekciyu-snezhnyh-sharov-igrushki-poyavyatsya-v-prodazhe-8-dekabrya/"
+     "web:iz.ru",
+     "https://iz.ru/2207577/2026-11-24/kartina-aivazovskogo-venetciia-nochiu-prodana-na-auktcione-za-14-mln"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
+   "sum": "$1,4 млн",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Картину Ивана Айвазовского «Венеция ночью. Сан-Джорджо-Маджоре» продали на аукционе в Лондоне за £1,088 млн (около $1,4 млн). Об этом 24 ноября свидетельствуют данные в карточке лота на сайте аукционного дома Sotheby's .",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2207577/2026-11-24/kartina-aivazovskogo-venetciia-nochiu-prodana-na-auktcione-za-14-mln"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -647,10 +630,51 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Потребительские товары",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gcb982744 (общие редкие слова: айвазо, картин) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d91528504",
+   "title": "На какую покупки пермяки готовы потратить более 100 тысяч рублей",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053147007"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Во время ноябрьских распродаж жители Перми купили на 14% больше ювелирных украшений, чем в аналогичный период прошлого года.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053147007"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g32184146 (общие редкие слова: более, рублей) — проверьте, не дубль ли"
    ]
   }
  ]
