@@ -1,0 +1,33 @@
+[
+ {"id": "g85e07f6d",
+  "fields": {
+    "title": "ok", "asset": "ok", "eco.share": "ok", "eco.sum": "ok", "eco.val": "ok",
+    "eco.context": "ok", "law.struct": "ok"
+  },
+  "general": {"verbatim": "ok", "parties": "ok", "status_date": "ok", "post": "ok",
+              "language": "ok", "modality": "ok", "coherent": "ok"},
+  "verdict": "ok"},
+ {"id": "g5257a627",
+  "fields": {
+    "title": "ok", "asset": "ok", "eco.share": "ok", "eco.sum": "ok", "eco.rationale": "ok",
+    "eco.context": "ok"
+  },
+  "general": {"verbatim": "ok", "parties": "ok", "status_date": "ok", "post": "ok",
+              "language": "ok", "modality": "ok", "coherent": "ok"},
+  "verdict": "ok"},
+ {"id": "g4a53d81b",
+  "fields": {
+    "title": "ok", "asset": "ok", "eco.sum": "ok", "eco.val": "ok", "eco.fin_context": "ok",
+    "eco.context": "ok"
+  },
+  "general": {"verbatim": "ok", "parties": "ok", "status_date": "ok", "post": "ok",
+              "language": "ok", "modality": "ok", "coherent": "ok"},
+  "verdict": "ok"},
+ {"id": "g88b148ea",
+  "fields": {
+    "title": "ok", "asset": "ok", "eco.context": "ok"
+  },
+  "general": {"verbatim": "ok", "parties": "ok", "status_date": "ok", "post": "ok",
+              "language": "ok", "modality": "ok", "coherent": "ok"},
+  "verdict": "ok"}
+]
