@@ -323237,7 +323237,6 @@
      "all_sums": "price_not_disclosed"
     }
    },
-   "post_held": true,
    "fact_log": [
     {
      "field": "title",
@@ -323250,7 +323249,8 @@
    ],
    "reread": "2026-11-18",
    "reread_hash": "159f4ea2ad0e.881c82",
-   "reread_note": "статьи: 6"
+   "reread_note": "статьи: 6",
+   "no_post": true
   },
   {
    "id": "g4290fc7a",
@@ -367649,7 +367649,8 @@
   "g7ad2f3e2": null,
   "gaa5d4eb6": 246,
   "g3976a960": 301,
-  "ga187c62e": null
+  "ga187c62e": null,
+  "gcdfb645f": null
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -372397,6 +372398,9 @@
     "finadv": "—"
    },
    "events": [
+    {
+     "kind": "negotiations"
+    },
     {
      "kind": "negotiations"
     },

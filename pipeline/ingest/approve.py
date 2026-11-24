@@ -280,6 +280,26 @@ def last_by_deal(decisions, verdicts):
     return result
 
 
+def base_post_decisions(deals, posted, decisions):
+    """Решения о посте у карточек, которые УЖЕ в базе, но в базе еще не
+    отражены. 24 ноября 2026 («Логика молока»/Protein Rex, `gcdfb645f`):
+    владелец нажал «Без поста» у придержанного поста карточки на сайте;
+    сухой прогон не печатал об этом ни строки, `ship_decisions` отвечал
+    «Решений нет» и запись не запускал — кнопка висела, а забор час за часом
+    печатал «РЕШЕНИЯ ЖДУТ». Возвращает [(карточка, вердикт)]."""
+    post_mod = last_by_deal(decisions, POST_VERDICTS)
+    out = []
+    for deal in deals:
+        post = post_mod.get(deal.get('id'))
+        if not post or deal['id'] in posted or deal.get('post_approved'):
+            continue
+        v = post['verdict']
+        done = deal.get('no_post') if v == 'post_no' else deal.get('post_held') if v == 'post_hold' else False
+        if not done:
+            out.append((deal, v))
+    return out
+
+
 def late_decisions(deals, cards, decisions):
     """Карточные решения по карточкам, которых в очереди уже нет, а в базе —
     есть: владелец нажал «выкинуть» (или «придержать») ПОСЛЕ того, как
@@ -562,11 +582,16 @@ def main(write=False):
         print('  УСТАРЕЛО    %-11s решение «%s» старше %d дней, черновика нет — '
               'запоминаю и подтверждаю сайту' % (d['deal_id'], d['verdict'], ORPHAN_MAX_DAYS))
 
+    data = json.load(open(DATA, encoding='utf-8'))
+    posted_ids = set(data.get('telegram_posts') or {}) | set(data.get('telegram_posts_realty') or {})
+    for deal, v in base_post_decisions(data['deals'], posted_ids, decisions):
+        print('  ПОСТ        %-11s решение о посте «%s» у карточки на сайте: %s'
+              % (deal['id'], v, str(deal.get('title'))[:50]))
+
     if not write:
         print('Сухой прогон. Применение — с ключом --write.')
         return 0
 
-    data = json.load(open(DATA, encoding='utf-8'))
     existing = {d['id'] for d in data['deals']}
     post_mod = last_by_deal(decisions, POST_VERDICTS)
     # РЕШЕНИЕ О ПОСТЕ ПОМНИТСЯ У КАРТОЧКИ, А НЕ ТОЛЬКО В РЕШЕНИЯХ САЙТА.
@@ -589,6 +614,8 @@ def main(write=False):
                 card['post_channels'] = list(post['channels'])
     # Кнопка под проектом поста у карточки, которая УЖЕ на сайте (пост
     # показали заново после правки) — та же отметка у карточки в базе.
+    post_flags_before = {d['id']: (d.get('post_approved'), d.get('no_post'), d.get('post_held'),
+                                   list(d.get('post_channels') or [])) for d in data['deals']}
     for deal in data['deals']:
         post = post_mod.get(deal['id'])
         if post and post['verdict'] == 'post_yes':
@@ -602,6 +629,13 @@ def main(write=False):
         elif post and post['verdict'] == 'post_no' and not deal.get('post_approved'):
             deal['no_post'] = True
             deal.pop('post_held', None)
+    # Отметка о посте у карточки базы — тоже правка базы: без этого флага
+    # файл не записывался, если в прогоне не было ни новой карточки, ни
+    # позднего решения (24 ноября 2026, `gcdfb645f`: «Без поста» применялось
+    # в памяти и терялось).
+    post_flags_changed = any(
+        post_flags_before[d['id']] != (d.get('post_approved'), d.get('no_post'), d.get('post_held'),
+                                       list(d.get('post_channels') or [])) for d in data['deals'])
     fresh = []
     ghost_merged = False
     for card, override, _why in publish:
@@ -772,7 +806,7 @@ def main(write=False):
         # Не печатаем повторно: план по сырью уже назван выше, до сухого
         # возврата, и второй такой же строкой отчет только шумит.
 
-    if fresh or base_changed or ghost_merged:
+    if fresh or base_changed or ghost_merged or post_flags_changed:
         # Новые карточки рождаются с facts (basis rule) — иначе клиент, который
         # читает только facts, не покажет их ни в одном показателе.
         if ROOT not in sys.path:

@@ -598,45 +598,6 @@
    ]
   },
   {
-   "draft_id": "d23144266",
-   "title": "Группа ЛСР раскрыла цену выкупа акций в рамках делистинга",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/24/11/2026/6b05ae3b3c89c5a4050942f0"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-24",
-     "title": "Переговоры",
-     "note": "Планируется, что выкуп акций будет проходить с 12 февраля по 15 марта 2027 года",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/quote/24/11/2026/6b05ae3b3c89c5a4050942f0"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d41059292",
    "title": "В Тюмени продают здание с популярным фитнес-клубом",
    "date": "2026-11-24",
@@ -663,6 +624,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g6e759772 (общие редкие слова: здание, тюмени) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d40795102",
+   "title": "Путин поручил утвердить план передачи активов «Русгидро» группе «Россети»",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28350947"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
