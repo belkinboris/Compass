@@ -310,59 +310,6 @@
    "post_preview": "<b>Спортивная база «Барселона» в Миассе выставлена на продажу за 185 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> не раскрыт\n<b>Предмет:</b> Спортивная база «Барселона» на берегу Поликарпова пруда в Миассе\n<b>Сумма:</b> 185 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Гостиницы и туризм\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053146930\">URA.RU</a>\n\n#недвижимость #гостиницы #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g0e0bbb2c\">карточке сделки</a>\n"
   },
   {
-   "id": "g32184146",
-   "date": "2026-11-24",
-   "title": "Ростовская область привлекла более 39 млн рублей в конкурсе от «Знания»",
-   "ind": "Не определена",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "ТАСС",
-     "https://tass.ru/ekonomika/28349817"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "39 млн ₽",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "39 млн ₽",
-   "buyer_name": "«Знания»",
-   "asset": "Ростовская область",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Знания»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/ekonomika/28349817"
-     }
-    ],
-    "target": [
-     {
-      "value": "Ростовская область",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/ekonomika/28349817"
-     }
-    ]
-   },
-   "pending_since": "2026-11-24T12:54:13+00:00"
-  },
-  {
    "id": "g9ba1f9f2",
    "date": "2026-11-24",
    "title": "Два цеха завода «Кемма» в Челябинске выставлены на продажу за 387 млн рублей",
@@ -437,75 +384,6 @@
    "shown_hash": "9e5af040982a.ace5bd",
    "post_draft_sent": true,
    "post_preview": "<b>Два цеха завода «Кемма» в Челябинске выставлены на продажу за 387 млн рублей</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Продавец:</b> Завод «Кемма»\n<b>Предмет:</b> Два цеха с офисами на территории завода «Кемма» в Челябинске\n<b>Сумма:</b> 387 млн ₽\n<b>Статус:</b> Обсуждается\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://ura.news/news/1053146951\">URA.RU</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g9ba1f9f2\">карточке сделки</a>"
-  },
-  {
-   "id": "gcb982744",
-   "date": "2026-11-24",
-   "title": "Картину Айвазовского продали на торгах в Лондоне за $1,4 млн",
-   "ind": "Не определена",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "src": [
-    [
-     "ТАСС",
-     "https://tass.ru/obschestvo/28350145"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "$1,4 млн",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "sum": "$1,4 млн",
-   "seller": "Картину Айвазовского",
-   "asset": "на торгах в Лондоне",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-24",
-     "title": "Сделка завершена",
-     "note": "Речь идет о полотне \"Венеция ночью. Сан-Джорджо-Маджоре\"",
-     "source": [
-      "ТАСС",
-      "https://tass.ru/obschestvo/28350145"
-     ]
-    }
-   ],
-   "seller_src": "text",
-   "themes": [
-    "Продажа с торгов"
-   ],
-   "party_evidence": {
-    "target": [
-     {
-      "value": "на торгах в Лондоне",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28350145"
-     }
-    ],
-    "seller": [
-     {
-      "value": "Картину Айвазовского",
-      "field": "seller",
-      "method": "explicit_news_title",
-      "url": "https://tass.ru/obschestvo/28350145"
-     }
-    ]
-   },
-   "pending_since": "2026-11-24T13:53:52+00:00"
   }
  ]
 }
