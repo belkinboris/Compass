@@ -598,6 +598,34 @@
    ]
   },
   {
+   "draft_id": "d11102573",
+   "title": "«Циан» рассмотрит предложение «Т-Технологий» о выкупе до 100% акций — цена одной бумаги составит 993,05 рубля",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/cian-rassmotrit-predlozhenie-t-tehnologij-o-vykupe-do-100-akcij-cena-odnoj-bumagi-sostavit-99305-rublya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
    "draft_id": "d41059292",
    "title": "В Тюмени продают здание с популярным фитнес-клубом",
    "date": "2026-11-24",
@@ -627,13 +655,43 @@
    ]
   },
   {
-   "draft_id": "d40795102",
-   "title": "Путин поручил утвердить план передачи активов «Русгидро» группе «Россети»",
+   "draft_id": "d79587290",
+   "title": "«Не покупайте ни за что»: делистинг ЛСР, выкуп «Циана» и новые фьючерсы",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/radio/24/11/2026/6b05c198392e54c3c4a57853"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что ««Циан» рассмотрит предложение «Т-Технологий» о выкупе до 100» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d73848297",
+   "title": "Минфин направит не менее 7,2% инвестиционных расходов госпрограмм в ДФО",
    "date": "2026-11-24",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28350947"
+     "https://tass.ru/ekonomika/28351007"
     ]
    ],
    "sum": null,
@@ -652,6 +710,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18550455",
+   "title": "Anthropic shares fall below IPO price, a worrying sign for AI startups",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/24/anthropic-shares-fall-below-ipo-price-a-worrying-sign-for-ai-startups/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
