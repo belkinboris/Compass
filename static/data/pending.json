@@ -465,6 +465,75 @@
     ]
    },
    "pending_since": "2026-11-24T12:54:13+00:00"
+  },
+  {
+   "id": "gcb982744",
+   "date": "2026-11-24",
+   "title": "Картину Айвазовского продали на торгах в Лондоне за $1,4 млн",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/obschestvo/28350145"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$1,4 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$1,4 млн",
+   "seller": "Картину Айвазовского",
+   "asset": "на торгах в Лондоне",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Речь идет о полотне \"Венеция ночью. Сан-Джорджо-Маджоре\"",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/obschestvo/28350145"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "на торгах в Лондоне",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28350145"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Айвазовского",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/obschestvo/28350145"
+     }
+    ]
+   },
+   "pending_since": "2026-11-24T13:53:52+00:00"
   }
  ]
 }

@@ -31,6 +31,37 @@
     "needs_review": true
    },
    "queued": "2026-11-24"
+  },
+  {
+   "key": "https://ura.news/news/1053146951::g85e07f6d",
+   "candidate_id": "g85e07f6d",
+   "reason": "общие редкие слова: треть, челяби",
+   "draft": {
+    "draft_id": "d38448577",
+    "title": "Челябинский завод продает непрофильный актив за треть миллиарда рублей. Скрин",
+    "date": "2026-11-24",
+    "src": [
+     [
+      "web:ura.news",
+      "https://ura.news/news/1053146951"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": null,
+    "asset": "непрофильный актив за треть миллиарда рублей. Скрин",
+    "seller": "Челябинский завод",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "непрофильный актив за треть миллиарда рублей. Скрин",
+     "seller": "Челябинский завод"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-24"
   }
  ]
 }

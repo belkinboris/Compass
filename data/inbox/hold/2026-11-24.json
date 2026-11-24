@@ -599,122 +599,6 @@
    ]
   },
   {
-   "draft_id": "d47913856",
-   "title": "Акции Anthropic опустились ниже цены IPO",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28349663"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d45755647",
-   "title": "Цена акции как предмет доказывания: зачем юристу отчет об оценке при допэмиссии по закрытой подписке",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:pravo.ru",
-     "https://300.pravo.ru/opinion/266907/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
-    "похоже на уже описанную сделку gb5d8a18a (общие редкие слова: акции, допэми) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d88207823",
-   "title": "FT: Tesla и SpaceX выбрали представителей для переговоров о слиянии",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9129301"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d72508907",
-   "title": "МТС: крупный нижегородский бизнес увеличил инвестиции в фиксированную сеть на 45%",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-24_mts_krupnyj_nizhegorodskij"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d00236704",
    "title": "FT узнала детали слияния SpaceX и Tesla стоимостью $3,5 трлн",
    "date": "2026-11-24",
@@ -738,21 +622,87 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «FT: Tesla и SpaceX выбрали представителей для переговоров о » — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d79768619",
-   "title": "В России начали продавать недорогой седан Kia",
+   "draft_id": "d00507147",
+   "title": "«Т-Технологии» направили ЦИАН оферту на выкуп акций по 993 рублей за штуку",
    "date": "2026-11-24",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/24/v-rossii-nachali-prodavat-nedorogoy-sedan-kia/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9129412"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gee05520c (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d07891579",
+   "title": "В Москве квартиру-террариум выкупили соседи за полцены",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6b057b938ccadc1e96de59a5"
+    ]
+   ],
+   "sum": "$1 млн",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Квартиру-террариум с варанами и попугаями на Чистопрудном бульваре в Москве, которую продавали за $1 млн, в итоге выкупили соседи за полцены, сообщила ТАСС представитель ассоциации риэлторских агентств AREA Ирина Жарова-Райт.",
+     "source": [
+      "web:rbc.ru",
+      "https://www.rbc.ru/rbcfreenews/6b057b938ccadc1e96de59a5"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "соседи за полцены",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "соседи за полцены",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d42320266",
+   "title": "Новгородская облдума приняла законопроект о запрете продажи вейпов",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1131057"
     ]
    ],
    "sum": null,
@@ -770,65 +720,161 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d09979386",
-   "title": "На Кубани 318 молодых семей получили помощь на покупку жилья",
+   "draft_id": "d86423300",
+   "title": "Госдума приняла законопроект о бюджете на 2027-2029 годы: в него вошла прогрессивная ставка НДФЛ в 13-22% на доходы россиян от вкладов, инвестиций в ценные бумаги и продажи имущества",
    "date": "2026-11-24",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/11/24/na-kubani-318-molodyh-semej-poluchili-pomoshh-na-pokupku-zhilya"
+     "web:vc.ru",
+     "https://vc.ru/money/3275761-gosduma-prinyala-zakon-o-progessivnom-ndfl?from=rss"
     ]
    ],
    "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "помощь на покупку жилья",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "помощь на покупку жилья",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d48171576",
-   "title": "Инвестор вложил деньги в компанию. Тактика защиты от субсидиарной ответственности Круг контролирующих должника лиц (КДЛ) не ограничивается руководителями. Решающее значение имеет не формальный статус,",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7609"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "компанию. Тактика защиты от субсидиарной ответственности Круг контролирующих должника лиц (КДЛ) не о",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "компанию. Тактика защиты от субсидиарной ответственности Круг контролирующих должника лиц (КДЛ) не о",
+    "asset": null,
     "seller": null
    },
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "предмет сделки обрезан на полуслове — это кусок фразы, а не название",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12832644",
+   "title": "ПСЖ заинтересован в покупке футболиста Альвареса у «Атлетико»",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/sport/28350153"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-24",
+     "title": "Переговоры",
+     "note": "Французский клуб намерен усилить атакующую линию после травм Хвичи Кварацхелии и Дезире Дуэ",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/sport/28350153"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68368371",
+   "title": "«Атомэнергопром» привлек 25 млрд рублей на атомные стройки через новый тип облигаций",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119541-atomenergoprom-privlek-25-mlrd-rubley-na-atomnye-stroyki-cherez-novyy-tip-obligatsiy/"
+    ]
+   ],
+   "sum": "25 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "«Атомэнергопром»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "«Атомэнергопром»",
+    "seller": null
+   },
+   "ind": "Энергетика",
+   "needs_review": true,
+   "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d58885052",
+   "title": "Состояние основателя DeepSeek выросло до $55 млрд: ИИ-стартап провел новый раунд инвестиций",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/sostoyanie-osnovatelya-deepseek-vyroslo-do-55-mlrd-ii-startap-provel-novyj-raund-investicij/"
+    ]
+   ],
+   "sum": "$55 млрд",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d84723100",
+   "title": "«М.Видео» начала продавать автомобили в магазинах",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:retailer.ru",
+     "https://retailer.ru/m-video-nachala-prodavat-avtomobili-v-magazinah/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
