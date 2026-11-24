@@ -598,147 +598,6 @@
    ]
   },
   {
-   "draft_id": "d78212329",
-   "title": "ИИ-платформа нового поколения объединяет сотрудников и ИИ-агентов в одном бизнес-процессе",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-24_ii-platforma_novogo_pokoleniya"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d61962141",
-   "title": "Продажи вторичного жилья в Петербурге обогнали покупки в новостройках",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261124/peterburg-2133558349.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d92821849",
-   "title": "Суд взыскал в казну 249,7 млн рублей по иску липецкой «Сэт Энерджи»",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119510-sud-vzyskal-v-kaznu-249-7-mln-rubley-po-isku-lipetskoy-set-enerdzhi/"
-    ]
-   ],
-   "sum": "249,7 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d06606933",
-   "title": "Бывший пресс-секретарь Зеленского обвинила его в продаже украинцев Западу",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/24/byvshaya-press-sekretar-zelenskogo-obvinila-ego-v-prodazhe-ukraintsev-zapadu/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d41293414",
-   "title": "На юге России начали распродавать коров",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/24/dolg/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d57328403",
    "title": "В Омске совладелец «Маяковского» приобрел часть бывшего «Летура» за 19 млн рублей",
    "date": "2026-11-24",
@@ -804,6 +663,158 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d67065141",
+   "title": "ТАСС: Львов в октябре стал самым дорогим городом Украины для покупки жилья",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28348723"
+    ]
+   ],
+   "sum": "$75 тыс",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d91651958",
+   "title": "Верховный суд разъяснил, когда покупка криптовалюты становится отмыванием денег",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28348675"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d79917064",
+   "title": "Николай Стецко: инвестиции в экономику Приморского края продолжают расти",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261124/ekonomika-2133571460.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94192095",
+   "title": "Любимый ресторан экс-мэра Андрея Воронова продают в Новом Уренгое. Скрин",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053146885"
+    ]
+   ],
+   "sum": "20 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75942972",
+   "title": "В Подмосковье участок в Серпухове продали на торгах за 8,3 млн рублей",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:abnews.ru",
+     "https://abnews.ru/center/news/mosreg/2026/11/24/v-podmoskove-uchastok-v-serpuhove-prodali-na-torgah-za-83-mln-rublej"
+    ]
+   ],
+   "sum": "8,3 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "В Московской области на аукционе продан земельный участок для ведения личного подсобного хозяйства в городском округе Серпухов за 8,3 млн рублей.",
+     "source": [
+      "web:abnews.ru",
+      "https://abnews.ru/center/news/mosreg/2026/11/24/v-podmoskove-uchastok-v-serpuhove-prodali-na-torgah-za-83-mln-rublej"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "на торгах",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "на торгах",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   }
  ]
