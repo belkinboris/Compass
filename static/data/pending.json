@@ -320,7 +320,9 @@
    "accepted": "2026-11-24",
    "accepted_hash": "76b321f7ea72.f1135c",
    "second_read": "2026-11-24",
-   "second_read_hash": "76b321f7ea72.f1135c"
+   "second_read_hash": "76b321f7ea72.f1135c",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
