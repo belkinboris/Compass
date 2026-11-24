@@ -12812,3 +12812,25 @@ def test_no_post_pressed_for_a_card_on_the_site_is_written_to_the_base(tmp_path,
     approve.main(write=True)
     deal = json.loads(data.read_text(encoding="utf-8"))["deals"][0]
     assert deal.get("no_post") is True and "post_held" not in deal
+
+
+def test_open_lot_that_became_a_lot_after_the_gates_never_reaches_the_console():
+    """24 ноября 2026 (`g69f9b746`, «Дом.РФ», Дмитров): тип «Продажа с торгов»
+    поставило чтение, ворота его не видели — владелец получил лот в консоль.
+    Забор снимает такие карточки, приемка их не пропускает."""
+    import purge_open_lots
+    import accept_card
+    lot = {"id": "g69f9b746", "type": "Продажа с торгов", "status": "Обсуждается", "title": "Лот",
+           "src": [["РИА Недвижимость", "https://realty.ria.ru/20261113/dmitrov-2131316990.html"]]}
+    sold = dict(lot, id="gsold", status="Закрыта")
+    deal = {"id": "gdeal", "type": "M&A", "status": "Обсуждается"}
+    keep, gone = purge_open_lots.split([lot, sold, deal])
+    assert [c["id"] for c in gone] == ["g69f9b746"] and [c["id"] for c in keep] == ["gsold", "gdeal"]
+    state = {}
+    from datetime import datetime, timezone
+    purge_open_lots.remember(state, lot, datetime.now(timezone.utc))
+    assert "https://realty.ria.ru/20261113/dmitrov-2131316990.html" in state["discarded_urls"]
+    assert "open_lot" in [c for c, _ in accept_card.findings(lot, {"companies": {}, "deals": []})]
+    assert "open_lot" not in [c for c, _ in accept_card.findings(sold, {"companies": {}, "deals": []})]
+    src = open("pipeline/ingest/sweep.py", encoding="utf-8").read()
+    assert src.count("purge_open_lots.py") >= 2
