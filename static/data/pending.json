@@ -498,6 +498,75 @@
    },
    "extra": "Поручение переводит многолетний вопрос в конкретный срок: судьбу дальневосточных сетей «РусГидро» обсуждали еще в 2017 году, а теперь у правительства есть срок — 1 февраля 2027 года.",
    "deep_researched": "2026-11-24"
+  },
+  {
+   "id": "g08145757",
+   "date": "2026-11-24",
+   "title": "Картину Айвазовского продали за $1,4 млн на торгах Sotheby's",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9129738"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$1,4 млн",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$1,4 млн",
+   "seller": "Картину Айвазовского",
+   "asset": "за $1,4 млн на торгах Sotheby's",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Картину Ивана Айвазовского «Венеция ночью. Сан Джорджо-Маджоре» продали на лондонских торгах за $1,4 млн (115 млн руб.), сообщает аукционный дом Sotheby's.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9129738"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "за $1,4 млн на торгах Sotheby's",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9129738"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Картину Айвазовского",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://www.kommersant.ru/doc/9129738"
+     }
+    ]
+   },
+   "pending_since": "2026-11-24T19:52:36+00:00"
   }
  ]
 }
