@@ -398,6 +398,58 @@
    "accepted_hash": "bf3d4f264fea.ace5bd",
    "second_read": "2026-11-24",
    "second_read_hash": "bf3d4f264fea.ace5bd"
+  },
+  {
+   "id": "g8ae369a4",
+   "date": "2026-11-24",
+   "title": "ЛУКОЙЛ получил более 6% собственных акций после ликвидации «дочки»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "РБК",
+     "https://www.rbc.ru/quote/24/11/2026/6b0574cacc5a796f71a47486"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "более 6% собственных акций после ликвидации «дочки»",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ЛУКОЙЛ",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/quote/24/11/2026/6b0574cacc5a796f71a47486"
+     }
+    ],
+    "target": [
+     {
+      "value": "более 6% собственных акций после ликвидации «дочки»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.rbc.ru/quote/24/11/2026/6b0574cacc5a796f71a47486"
+     }
+    ]
+   },
+   "buyer": "g5c8c6494",
+   "pending_since": "2026-11-24T11:53:24+00:00"
   }
  ]
 }
