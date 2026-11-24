@@ -367628,7 +367628,8 @@
   "g7ad2f3e2": null,
   "gaa5d4eb6": 246,
   "g3976a960": 301,
-  "ga187c62e": null
+  "ga187c62e": null,
+  "gcdfb645f": null
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -372376,6 +372377,9 @@
     "finadv": "—"
    },
    "events": [
+    {
+     "kind": "negotiations"
+    },
     {
      "kind": "negotiations"
     },
