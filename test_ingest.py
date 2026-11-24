@@ -12834,3 +12834,31 @@ def test_open_lot_that_became_a_lot_after_the_gates_never_reaches_the_console():
     assert "open_lot" not in [c for c, _ in accept_card.findings(sold, {"companies": {}, "deals": []})]
     src = open("pipeline/ingest/sweep.py", encoding="utf-8").read()
     assert src.count("purge_open_lots.py") >= 2
+
+
+def test_for_sale_listing_of_an_object_is_not_a_deal_but_a_business_for_sale_is():
+    """Владелец, 24 ноября 2026: «торги только закрытые без объявлений» — в
+    консоль дошли цеха «Кеммы» и спортбаза «Барселона». Объявление о продаже
+    объекта без покупателя ворота не пускают; продажа компании или пакета —
+    новость рынка сделок и остается."""
+    import promote
+    gone = [
+        {"title": "Два цеха завода «Кемма» в Челябинске выставлены на продажу за 387 млн рублей",
+         "status": "Обсуждается", "ind": "Машиностроение", "asset": "Два цеха"},
+        {"title": "Спортивная база «Барселона» в Миассе выставлена на продажу за 185 млн рублей",
+         "status": "Обсуждается", "ind": "Гостиницы и туризм"},
+        {"title": "В Тюмени продают здание с популярным фитнес-клубом", "status": "Обсуждается"},
+        {"title": "Особняк в Тюмени выставлен на продажу", "status": "Обсуждается", "ind": "Недвижимость",
+         "target": "gx"},
+        {"title": "Лот", "type": "Продажа с торгов", "status": "Обсуждается"},
+    ]
+    stay = [
+        {"title": "Российский Райффайзенбанк выставлен на продажу", "status": "Обсуждается", "ind": "Банки"},
+        {"title": "Доля ВТБ в аэропорту «Пулково» выставлена на продажу", "status": "Обсуждается",
+         "ind": "Порты и инфраструктура", "target": "gp"},
+        {"title": "«Шустер Эстейт» купил на торгах здание", "type": "Продажа с торгов", "status": "Закрыта",
+         "ind": "Недвижимость"},
+        {"title": "Здание театра в Тюмени продано за 109 млн ₽", "status": "Закрыта", "ind": "Недвижимость"},
+    ]
+    assert all(promote.is_open_listing(c) for c in gone), [c["title"] for c in gone if not promote.is_open_listing(c)]
+    assert not any(promote.is_open_listing(c) for c in stay), [c["title"] for c in stay if promote.is_open_listing(c)]
