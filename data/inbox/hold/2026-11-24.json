@@ -626,42 +626,90 @@
    ]
   },
   {
-   "draft_id": "d31799306",
-   "title": "Экс-владелец МИЦ Рябинский продал девелоперский проект в Московском регионе",
+   "draft_id": "d64765255",
+   "title": "Курганские депутаты единогласно поддержали запрет продажи вейпов",
    "date": "2026-11-24",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/realty/articles/2026/11/24/1414554-eks-vladelets-mits-prodal-proekt"
+     "web:ura.news",
+     "https://ura.news/news/1053146819"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-24",
-     "title": "Сделка завершена",
-     "note": "Принадлежащее владельцу тюменского девелопера «Скандиа» Николаю Никифорову ООО «Специализированный застройщик «Говорово парк» выкупило 100% долей в ООО «СЗ «Бачурино», на балансе которого, по данным сервиса Asseto, находится участок на 10 га, расположенный в…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/realty/articles/2026/11/24/1414554-eks-vladelets-mits-prodal-proekt"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
-   "asset": "девелоперский проект в Московском регионе",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "девелоперский проект в Московском регионе",
+    "asset": null,
     "seller": null
    },
-   "ind": "Недвижимость",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени",
+    "похоже на уже описанную сделку g17a522dc (общие редкие слова: курган, продаж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d19285981",
+   "title": "В Свердловской области ввели карантин на крупной птицефабрике, но ее яйца все еще продают. Как так?",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/economics/2026/11/24/76785942/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку gc4d31e84 (общие редкие слова: област, продаю) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d50460195",
+   "title": "Житель Горно-Алтайска потерял более 3 миллионов рублей при покупке автомобиля в Интернете",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:krasrab.ru",
+     "https://krasrab.ru/news/incidents/60544"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

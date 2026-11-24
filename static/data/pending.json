@@ -400,6 +400,71 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>«Говорово парк» купил 100% «Бачурино» у Андрея Рябинского</b>\n\n<b>Покупатель:</b> Специализированный застройщик «Говорово парк» — специализированный застройщик — юридическое лицо девелоперского проекта «Говорово парк» в новой Москве.\n<b>Продавец:</b> Андрей Рябинский\n<b>Предмет:</b> Специализированный застройщик «Бачурино»\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · октябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/realty/articles/2026/11/24/1414554-eks-vladelets-mits-prodal-proekt\">Ведомости</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/geaa2c705\">карточке сделки</a>\n"
+  },
+  {
+   "id": "g07d41567",
+   "date": "2026-11-24",
+   "title": "Белгородская область продала 9% ППК «Черноземье» за 450 тыс. рублей",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119505-belgorodskaya-oblast-prodala-9-ppk-chernozeme-za-450-tys-rubley/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Белгородская область",
+   "asset": "9% ППК «Черноземье»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Белгородская область продала 9% ППК «Черноземье» за 450 тыс. рублей",
+     "source": [
+      "Абирег",
+      "https://abireg.ru/newsitem/119505-belgorodskaya-oblast-prodala-9-ppk-chernozeme-za-450-tys-rubley/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "9% ППК «Черноземье»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119505-belgorodskaya-oblast-prodala-9-ppk-chernozeme-za-450-tys-rubley/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Белгородская область",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119505-belgorodskaya-oblast-prodala-9-ppk-chernozeme-za-450-tys-rubley/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-24T06:54:50+00:00"
   }
  ]
 }
