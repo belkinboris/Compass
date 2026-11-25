@@ -329000,7 +329000,9 @@
    "no_parties": "Изъятие по решению суда: покупателя и продавца нет, здание перешло государству.",
    "proofread_absorbed": {
     "eco.share": [],
-    "law.struct": [],
+    "law.struct": [
+     "ab4e0c28cfd6"
+    ],
     "law.appr": [],
     "law.terms": [],
     "eco.context": [],
