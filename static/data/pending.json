@@ -70,7 +70,7 @@
     ]
    },
    "buyer": "gd9fbff8f",
-   "pending_since": "2026-11-25T07:53:34+00:00",
+   "pending_since": "2026-11-25T15:37:30+00:00",
    "proofread_absorbed": {
     "eco.context": [],
     "eco.rationale": [],
@@ -93,7 +93,11 @@
    "accepted": "2026-11-25",
    "accepted_hash": "d545ecdc0e42.88c25f",
    "second_read": "2026-11-25",
-   "second_read_hash": "d545ecdc0e42.88c25f"
+   "second_read_hash": "d545ecdc0e42.88c25f",
+   "draft_sent": true,
+   "shown_hash": "d545ecdc0e42.88c25f",
+   "post_draft_sent": true,
+   "post_preview": "<b>ОМК купила Волгореченский трубный завод у «Газпрома»</b>\n\n<b>Покупатель:</b> ОМК — металлургия: трубы большого диаметра и железнодорожные колеса.\n<b>Продавец:</b> ПАО «Газпром»\n<b>Предмет:</b> Волгореченский трубный завод\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> ГМК и добыча\n\n<b>Источник:</b> <a href=\"https://tass.ru/ekonomika/28352469\">ТАСС</a>\nЕще 2 источника — в карточке сделки\n\n#промышленность #ГМК #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g542addc3\">карточке сделки</a>"
   },
   {
    "id": "ga5198c41",
@@ -161,7 +165,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-25T09:52:45+00:00",
+   "pending_since": "2026-11-25T15:38:01+00:00",
    "proofread_absorbed": {
     "eco.context": [
      "1305df1d0cbb",
@@ -196,7 +200,11 @@
    "accepted_hash": "bef19045ac54.d5929a",
    "date_basis": "registry",
    "second_read": "2026-11-25",
-   "second_read_hash": "bef19045ac54.d5929a"
+   "second_read_hash": "bef19045ac54.d5929a",
+   "draft_sent": true,
+   "shown_hash": "bef19045ac54.d5929a",
+   "post_draft_sent": true,
+   "post_preview": "<b>Сергей Семак купил 33,34% научно-исследовательской компании «Юхата»</b>\n\n<b>Инвестор:</b> Сергей Семак\n<b>Предмет:</b> 33,34% доли в ООО «Юхата»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://tass.ru/sport/28353039\">ТАСС</a>\nЕще 1 источник — в карточке сделки\n\n#технологии #ИТ #инвестиции\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/ga5198c41\">карточке сделки</a>"
   },
   {
    "id": "g6184df02",
