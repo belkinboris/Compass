@@ -2324,7 +2324,12 @@ def test_slow_main_model_is_cut_short_and_the_spare_answers(monkeypatch):
     monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", 0.0)
     monkeypatch.delenv("YANDEX_MODEL", raising=False)
     assert assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35) == "ответ запасной модели"
-    assert seen[0] == (None, 18) and seen[1][0] == "yandexgpt/latest" and seen[1][1] >= 12
+    assert seen[0] == (None, 20) and seen[1][0] == "yandexgpt/latest" and seen[1][1] >= 12
+    # Длинная задача («Разбор сделки», дедлайн 50 с): основной — 35 с, запасной — 15.
+    seen.clear()
+    monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", 0.0)
+    assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 50)
+    assert seen[0] == (None, 35), seen
     # Запасной после обрезки не осталось бы времени — основной оставляем весь дедлайн
     # и таймаут не подменяем.
     seen.clear()
