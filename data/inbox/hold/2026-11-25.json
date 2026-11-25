@@ -598,13 +598,109 @@
    ]
   },
   {
-   "draft_id": "d01045051",
-   "title": "Продажа недостроя турцентра и отставка тамбовской судьи – главное в Черноземье",
+   "draft_id": "d56746716",
+   "title": "Продажи билетов на детские новогодние мероприятия превысили 660 млн рублей",
    "date": "2026-11-25",
    "src": [
     [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119562-prodazha-nedostroya-turtsentra-i-otstavka-tambovskoy-sudi-glavnoe-v-chernozeme/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9130240"
+    ]
+   ],
+   "sum": "660 млн ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Средняя стоимость купленных билетов на детские новогодние елки выросла на 8% и составила более 3 тыс. руб., рассказали “Ъ” в «Яндекс Афише». Аналогично вырос и средний чек заказа — на 9%, до 8,1 тыс. руб. В целом на этапе предпродаж до 23 ноября 2026 года…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9130240"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g90784f0a (общие редкие слова: детски, продаж, рублей) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d08103830",
+   "title": "Дата следующего раунда переговоров по Украине пока не определена",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1131284"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d09551881",
+   "title": "Песков: дата следующего раунда переговоров по урегулированию на Украине не определена",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28353529"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d97432162",
+   "title": "Организатор конкурса «Мисс Россия» перешел компании «Атернум Капитал»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/organizator-875538044.html"
     ]
    ],
    "sum": null,
@@ -623,7 +719,63 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g6be210fa (общие редкие слова: продаж, тамбов) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку gf3cd3078 (по всей базе: та же сторона и редкое слово: конкур) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d06801153",
+   "title": "Российская пенсионерка финансировала покупку БПЛА для ВСУ",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/rossiyskaya-pensionerka-finansirovala-pokupku-bpla-dlya-vsu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d06113333",
+   "title": "Россияне устремились в ломбарды после расточительного шопинга на распродажах",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/rossiyane-nashli-novyy-sposob-borby-s-depressiey/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

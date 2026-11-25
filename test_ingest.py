@@ -12910,3 +12910,16 @@ def test_stage_post_goes_out_as_a_reply_to_the_first_post_of_the_deal():
     assert "reply_to" not in send_milestone_drafts.site_draft(deal, event)
     src = open("app/console.py", encoding="utf-8").read()
     assert '"reply_parameters"' in src and "reply_to: int | None = None" in src
+
+
+def test_ship_decisions_counts_a_stage_post_decision_as_a_decision(monkeypatch):
+    """25 ноября 2026 (g9b4c2e71~offer): сайт выпустил этап по кнопке, других
+    решений не было — команда отвечала «Решений нет» и номер поста в базу не
+    переносила."""
+    import ship_decisions
+    import publication_busy
+    monkeypatch.setattr(publication_busy, "busy", lambda stale_h=None: [
+        {"deal_id": "g9b4c2e71~offer", "verdict": "post_yes"},
+        {"deal_id": "gabc", "verdict": "approve"}])
+    rows = ship_decisions.stage_decision_rows()
+    assert len(rows) == 1 and rows[0].startswith("ЭТАП") and "g9b4c2e71~offer" in rows[0]

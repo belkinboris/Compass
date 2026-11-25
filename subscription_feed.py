@@ -271,6 +271,68 @@ def scan_new_deals(db, deals, companies, base_url=None):
     return stats
 
 
+# ЭТАП СДЕЛКИ — ТЕМ, КТО СЛЕДИТ ЗА СДЕЛКОЙ (владелец, 25 ноября 2026: «людям,
+# которые подписаны на сделку, если появляется веха, надо чтобы в тг
+# отправлялись уведомления»). Кнопка «Следить за сделкой» (`DealWatch`) была,
+# а рассылал об этапах только приток (`enrich.py`) — из контейнера, откуда
+# база пользователей недостижима: уведомление не уходило никому. Теперь об
+# этапе сообщает сайт, тем же местом, что подписки. Этап — событие с
+# заголовком вехи (те же виды, что у поста этапа в канале); в Telegram оно
+# уходит тому, кто привязал бота в кабинете (`create_notification`).
+STAGE_SEEN_KEY = "deal_stages_seen"
+STAGE_KINDS = frozenset({"approval", "closed", "cancelled", "offer"})  # = milestones.POSTWORTHY_MILESTONE_KINDS
+STAGE_LABEL = {"approval": "согласование получено", "closed": "сделка закрыта",
+               "cancelled": "сделка не состоялась", "offer": "оферта направлена"}
+
+
+def stage_events(deals):
+    """[(сделка, этап)] — этапы, показанные на сайте вехой."""
+    out = []
+    for deal in deals or []:
+        for event in deal.get("events") or []:
+            if (isinstance(event, dict) and event.get("newsworthy") and event.get("id")
+                    and str(event.get("headline") or "").strip() and event.get("kind") in STAGE_KINDS):
+                out.append((deal, event))
+    return out
+
+
+def notify_stage_watchers(db, deals, base_url=None):
+    """Сообщить следящим за сделкой о новом этапе. Первый прогон только
+    запоминает уже показанные этапы — иначе все прошлые вехи ушли бы залпом."""
+    import json
+
+    import notification_service
+    from db.models import AppSetting
+
+    current = {str(event["id"]): (deal, event) for deal, event in stage_events(deals)}
+    row = db.get(AppSetting, STAGE_SEEN_KEY)
+    if row is None:
+        db.add(AppSetting(key=STAGE_SEEN_KEY, value=json.dumps(sorted(current))))
+        db.commit()
+        return {"seeded": len(current), "fresh": 0, "sent": 0}
+    try:
+        known = set(json.loads(row.value or "[]"))
+    except ValueError:
+        known = set()
+    fresh = [eid for eid in current if eid not in known]
+    if not fresh:
+        return {"seeded": 0, "fresh": 0, "sent": 0}
+    # Отметка — ДО рассылки: перезапуск посреди нее не повторит уведомления.
+    row.value = json.dumps(sorted(known | set(current)))
+    db.commit()
+    base = (base_url or os.environ.get("APP_BASE_URL") or "https://projectcompass.ru").rstrip("/")
+    sent = 0
+    for eid in fresh:
+        deal, event = current[eid]
+        label = STAGE_LABEL.get(event.get("kind"), "новый этап")
+        sent += notification_service.notify_deal_watchers(
+            db, deal["id"],
+            title="Новый этап сделки, за которой вы следите: %s" % str(event["headline"]).strip(),
+            body="%s — %s." % (deal.get("title") or deal["id"], label),
+            link="%s/#/deal/%s" % (base, deal["id"]))
+    return {"seeded": 0, "fresh": len(fresh), "sent": sent}
+
+
 def scan_on_startup():
     """Точка входа для старта сайта: читает базу с диска и сверяет подписки.
 
@@ -289,6 +351,13 @@ def scan_on_startup():
         db = get_session()
         try:
             stats = scan_new_deals(db, deals, data.get("companies") or {})
+            try:
+                stages = notify_stage_watchers(db, deals)
+                if stages["fresh"]:
+                    logger.info("этапы сделок: новых %d, уведомлений следящим %d",
+                                stages["fresh"], stages["sent"])
+            except Exception as exc:  # noqa: BLE001 — этапы не должны ронять сверку подписок
+                logger.error("этапы сделок не разосланы: %s", exc)
         finally:
             db.close()
         if stats["seeded"]:

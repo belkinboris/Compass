@@ -2536,6 +2536,48 @@ def test_first_deploy_seeds_quietly_and_the_next_one_notifies(client):
         db.close()
 
 
+def test_deal_followers_are_told_about_a_new_stage_once(client):
+    """Владелец, 25 ноября 2026: «людям, которые подписаны на сделку, если
+    появляется веха, надо чтобы в тг отправлялись уведомления». Первый прогон
+    только запоминает показанные этапы, новый этап — одно уведомление следящему,
+    перезапуск не повторяет; тот, кто за сделкой не следит, ничего не получает."""
+    import subscription_feed
+    from db.models import AppSetting
+
+    user = _login(client, "stage-follower@example.com")
+    assert client.post("/api/deals/test-stage-deal/watch").json() == {"watching": True}
+    old = {"id": "test-stage-deal-old-approval", "kind": "approval", "newsworthy": True, "headline": "ФАС одобрила"}
+    offer = {"id": "test-stage-deal-offer", "kind": "offer", "newsworthy": True,
+             "headline": "А направил акционерам «Б» оферту"}
+    plain = {"kind": "negotiations", "title": "Переговоры"}
+    deal = {"id": "test-stage-deal", "title": "А собирается купить Б", "events": [old, plain]}
+    other = {"id": "test-stage-other", "title": "В купил Г",
+             "events": [{"id": "test-stage-other-closed", "kind": "closed", "newsworthy": True, "headline": "В закрыл сделку"}]}
+    db = get_session()
+    try:
+        row = db.get(AppSetting, subscription_feed.STAGE_SEEN_KEY)
+        if row:
+            db.delete(row)
+            db.commit()
+        first = subscription_feed.notify_stage_watchers(db, [deal])
+        assert first["seeded"] == 1 and first["sent"] == 0, first
+        deal["events"].append(offer)
+        second = subscription_feed.notify_stage_watchers(db, [deal, other])
+        assert second["fresh"] == 2 and second["sent"] == 1, second
+        rows = db.query(Notification).filter_by(user_id=user.id, deal_id="test-stage-deal").all()
+        assert len(rows) == 1 and "оферту" in rows[0].title and "оферта направлена" in rows[0].body
+        assert rows[0].link.endswith("/#/deal/test-stage-deal")
+        third = subscription_feed.notify_stage_watchers(db, [deal, other])
+        assert third["fresh"] == 0 and third["sent"] == 0, third
+    finally:
+        db.close()
+    import sys as _sys
+    from pathlib import Path as _Path
+    _sys.path.insert(0, str(_Path(__file__).resolve().parent / "pipeline" / "ingest"))
+    import milestones
+    assert subscription_feed.STAGE_KINDS == milestones.POSTWORTHY_MILESTONE_KINDS
+
+
 # ==================== Модерация черновиков через Telegram ====================
 
 def _mod_env(monkeypatch):
