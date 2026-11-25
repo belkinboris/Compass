@@ -1,8 +1,6 @@
 {
  "_why": "Нарушения правил текста, которые уже лежали в базе 22 октября 2026, когда проверка стала общей. Новых сюда не добавлять — исправлять. Рутина качества чистит этот список (routines/quality.md).",
  "known": [
-  "g20d4cc38|eco.context|source_note|c4d25279ec",
-  "g20d4cc38|law.struct|source_note|80278772ce",
-  "gee625a0f|eco.val|source_note|5c00b287f1"
+  "g20d4cc38|eco.context|source_note|c4d25279ec"
  ]
 }
