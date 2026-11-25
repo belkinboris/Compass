@@ -329616,6 +329616,491 @@
      "all_sums": "ok"
     }
    }
+  },
+  {
+   "id": "g542addc3",
+   "date": "2026",
+   "title": "ОМК купила Волгореченский трубный завод у «Газпрома»",
+   "ind": "ГМК и добыча",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28352469"
+    ],
+    [
+     "Энергетическая политика",
+     "https://energy-policy.ru/gazprom-prodal-omk-volgorechenskij-trubnyj-zavod/novosti/2026/11/25/"
+    ],
+    [
+     "Smart-lab (со ссылкой на «Интерфакс»)",
+     "https://smart-lab.ru/blog/news/1336892.php"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "Акции АО «Газпром трубинвест» (Волгореченский трубный завод); размер проданного пакета источники не называют.",
+    "val": "—",
+    "target_fin": "В 2025 году завод получил 7,87 млрд ₽ выручки — на 32% меньше, чем в 2024 году, когда было 11,5 млрд ₽. Доля «Газпрома» и связанных с ним сторон в этой выручке увеличилась на 62%, до 6,344 млрд ₽. Чистый финансовый результат года — прибыль 346 млн ₽, сменившая убытки 2023 и 2024 годов.",
+    "fin": "—",
+    "rationale": "ОМК описывает сделку как шаг в сторону нефтегазового сегмента трубного рынка, где компания хочет нарастить присутствие. Новым заводом ОМК намерена поднять производительность труда и управленческую эффективность, расширить линейку труб, повысить их качество и полнее использовать мощности.",
+    "context": "Волгореченский трубный завод — это АО «Газпром трубинвест» в Костромской области, до сделки непрофильный актив «Газпрома»: материнская компания давно искала на него покупателя. Завод работает с 2000 года, проектная мощность — 500 тыс. тонн труб в год; выпускает стальные электросварные трубы для нефтегазовой отрасли (OCTG) диаметром 42–168 мм, а также трубы для строительства.\n\nРанее на завод претендовали Трубная металлургическая компания и Загорский трубный завод, но сделка с ними не состоялась.\n\nПо одним данным, покупателем в начале августа 2026 года была названа структура, связанная с ОМК и ее бенефициаром Анатолием Седых; позже, в конце ноября, покупателем прямо назвали саму ОМК, без оговорок о промежуточной структуре.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "Сделку одобрила Федеральная антимонопольная служба — одобрение было получено в начале лета 2026 года, до того как о покупке рассказали публично.",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "Волгореченский трубный завод",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026",
+     "title": "Сделка завершена",
+     "note": "Сумма сделки и другие ее детали не раскрываются",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/28352469"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ОМК",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28352469"
+     }
+    ],
+    "target": [
+     {
+      "value": "Волгореченский трубный завод",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://tass.ru/ekonomika/28352469"
+     }
+    ]
+   },
+   "buyer": "gd9fbff8f",
+   "proofread_absorbed": {
+    "eco.context": [],
+    "eco.rationale": [],
+    "law.appr": [],
+    "eco.target_fin": [],
+    "eco.share": [],
+    "extra": [
+     "d0006d753b52"
+    ],
+    "ind": []
+   },
+   "extra": "На заводе также наносят изоляционные покрытия на трубы — это отдельная технологическая линия, помимо сварки труб для нефтегазовой отрасли и строительства.",
+   "reviewed": "2026-11-25",
+   "deep_researched": "2026-11-25",
+   "target": "g42c3950e",
+   "seller_id": "gc0f11fd7",
+   "accepted_notes": {
+    "notes": "повторная приемка после второго чтения 25 ноября 2026: правка только в extra (снята смысловая дублированность с eco.context/eco.rationale/eco.target_fin, добавлен факт про изоляционные покрытия); остальные поля, стороны и источники проверены вторым чтением и не менялись"
+   },
+   "accepted": "2026-11-25",
+   "accepted_hash": "d545ecdc0e42.88c25f",
+   "second_read": "2026-11-25",
+   "second_read_hash": "d545ecdc0e42.88c25f",
+   "shown_hash": "d545ecdc0e42.88c25f",
+   "post_preview": "<b>ОМК купила Волгореченский трубный завод у «Газпрома»</b>\n\n<b>Покупатель:</b> ОМК — металлургия: трубы большого диаметра и железнодорожные колеса.\n<b>Продавец:</b> ПАО «Газпром»\n<b>Предмет:</b> Волгореченский трубный завод\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> ГМК и добыча\n\n<b>Источник:</b> <a href=\"https://tass.ru/ekonomika/28352469\">ТАСС</a>\nЕще 2 источника — в карточке сделки\n\n#промышленность #ГМК #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g542addc3\">карточке сделки</a>",
+   "added": "2026-11-25",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "1fd3700aebf7"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "d20c7bb0ee12"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": "g42c3950e",
+     "inn": "4401008660",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "d0647caef504"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed",
+     "all_sums": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "ga5198c41",
+   "date": "2026-11-24",
+   "title": "Сергей Семак купил 33,34% научно-исследовательской компании «Юхата»",
+   "ind": "ИТ и интернет",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/sport/28353039"
+    ],
+    [
+     "ТАСС (Рамблер/спорт)",
+     "https://sport.rambler.ru/football/57478871-sergey-semak-priobrel-dolyu-v-kompanii-rabotayuschey-v-sfere-estestvennyh-nauk/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "33,34% доли в ООО «Юхата».",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Юхата» — исследовательская компания в сфере естественных и технических наук; Семак получил в ней 33,34%.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Семак не выкупал долю у Ивана Михайлова, а вошел в капитал «Юхаты» через увеличение уставного капитала и получил 33,34%. По данным ЕГРЮЛ, номинал доли Михайлова не изменился, а его доля снизилась с 100% до 66,66%.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Сергей Семак",
+   "asset": "Юхата",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Главный тренер \"Зенита\" приобрел долю в размере 33,34%",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/sport/28353039"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Сергей Семак",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28353039"
+     }
+    ],
+    "target": [
+     {
+      "value": "компании, работающей в сфере естественных наук",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28353039"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.context": [
+     "1305df1d0cbb",
+     "7ba3ddeba4b8"
+    ],
+    "title": [],
+    "asset": [],
+    "ind": []
+   },
+   "reviewed": "2026-11-25",
+   "target": "g85035f89",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "физлицо — Сергей Семак, главный тренер «Зенита»; профиль заводится компаниям, не частным лицам (docs/card_money.md)"
+    },
+    "checked": {
+     "registry_owners": "история участников ЕГРЮЛ (datanewton.ru, ОГРН 1265000045485, запись от 24.11.2026): до записи — Михайлов Иван Александрович 100% (номинал 10 000 ₽); после — Михайлов 66,66% (номинал 10 000 ₽, БЕЗ ИЗМЕНЕНИЯ), Семак Сергей Богданович 33,34% (номинал 5 001 ₽, новый участник). Общий капитал вырос с 10 000 до 15 001 ₽ — это вход Семака в капитал новым взносом (допэмиссия), а не выкуп доли у Михайлова: номинал Михайлова не менялся. Продавца нет (деньги получила компания, не Михайлов), поэтому type сменен на «Инвестиция» и seller/seller_id не заводится.",
+     "date_not_in_source": "день 24.11.2026 — запись о новом составе участников в ЕГРЮЛ (datanewton.ru, ОГРН 1265000045485); в статье ТАСС/Рамблер названа только дата публикации (25.11.2026), день закрытой сделки — регистрация в реестре, date_basis registry поставлен"
+    },
+    "notes": "Единственный полный материал — заметка ТАСС (тираж — пересказ без изменений на sport.rambler.ru, сохранен на диск); других изданий, которые писали бы об этой сделке отдельно, не нашлось. Продавца у сделки нет: по истории участников ЕГРЮЛ (datanewton.ru, ОГРН 1265000045485, запись от 24.11.2026) номинал доли Ивана Михайлова не изменился (10 000 ₽), а общий капитал компании вырос с 10 000 до 15 001 ₽ за счет новой доли Семака (5 001 ₽, 33,34%) — это вход нового участника в капитал (допэмиссия), а не выкуп доли у Михайлова; поэтому тип сменен на «Инвестиция» (pipeline/fix_ga5198c41_investment_type_2026_11_25.py) и поле seller не заводится. Цена вхождения Семака (сколько он заплатил сверх номинала доли) ни одним источником не названа — сумма сделки оставлена нераскрытой (поле sum не заполнено). Второе чтение (25.11.2026, другая сессия) нашло и исправило: дату карточки (несла день публикации, а не день записи в ЕГРЮЛ — поставлена 2026-11-24, date_basis registry), поле asset (несло дубль eco.share вместо имени предмета — поставлено «Юхата»), law.struct (было пустым — добавлено честное объяснение механики: вход новым взносом, без выкупа у Михайлова) и eco.context (убран абзац про не относящиеся к сделке соседние активы Семака).",
+    "searched": [
+     "WebSearch: Семак 33,34% доля компания естественные науки",
+     "WebSearch: Семак тренер Зенита купил долю компания ТАСС / РБК / Коммерсант / Спорт-Экспресс / Чемпионат",
+     "WebSearch: ООО Юхата ИНН / rusprofile / datanewton.ru/search?query=Юхата (нашелся ИНН 5038196993, ОГРН 1265000045485)",
+     "datanewton.ru/api/v2/history?ogrn=1265000045485&attributes=OWNERS — история участников ЕГРЮЛ",
+     "WebFetch rusprofile.ru, companies.rbc.ru, saby.ru — все три отвечают 403/401/404 автоматическому чтению",
+     "WebSearch: Юхата Сколково проект / навигатор навигатор.sk.ru — профиля проекта не нашлось",
+     "WebSearch (второе чтение, 25.11.2026): ООО Юхата Сколково резидент — подтверждения не нашлось; фраза «участник проекта «Сколково»» снята из профиля компании как неподтвержденная"
+    ]
+   },
+   "accepted": "2026-11-25",
+   "accepted_hash": "bef19045ac54.d5929a",
+   "date_basis": "registry",
+   "second_read": "2026-11-25",
+   "second_read_hash": "bef19045ac54.d5929a",
+   "shown_hash": "bef19045ac54.d5929a",
+   "post_preview": "<b>Сергей Семак купил 33,34% научно-исследовательской компании «Юхата»</b>\n\n<b>Инвестор:</b> Сергей Семак\n<b>Предмет:</b> 33,34% доли в ООО «Юхата»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://tass.ru/sport/28353039\">ТАСС</a>\nЕще 1 источник — в карточке сделки\n\n#технологии #ИТ #инвестиции\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/ga5198c41\">карточке сделки</a>",
+   "added": "2026-11-25",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 33.34,
+     "basis": "rule",
+     "card_hash": "79cef6609015"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "3a68f7b82a0b",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-24",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "d4739fb27956"
+    },
+    "nature": {
+     "control_change": false,
+     "cash_in": true,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "7f5a652ee3ba"
+    },
+    "target": {
+     "company_id": "g85035f89",
+     "inn": "5038196993",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "2194dba781e2"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "not_purchase",
+     "top_purchases": "not_purchase",
+     "multiple_text": "not_control_change",
+     "all_sums": "price_not_disclosed"
+    }
+   }
+  },
+  {
+   "id": "g6184df02",
+   "date": "2026-11-25",
+   "title": "ESVE Group продала ИТ-компании площади под штаб-квартиру в деловом центре Valtri",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "Не раскрыта",
+    "share": "4835,6 кв. м на 3-6-м этажах делового центра Valtri. Площади передадут в состоянии shell&core — без отделки, планировку сделает новый владелец.",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "Покупателю нужен был крупный технологичный офис премиум-класса в престижной деловой локации для штаб-квартиры. Стороны учитывали и инвестиционную привлекательность объекта — его ликвидность на длительный срок. Об этом рассказал основатель и генеральный директор ESVE Group Владислав Степанов.",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [
+     [
+      "Консультант сделки",
+      "OF.ru",
+      "Источник называет агентство OF.ru консультантом (брокером) сделки; сторону, которую оно представляло, источник не уточняет. Источник: https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     ]
+    ],
+    "terms": "—"
+   },
+   "buyer_name": "ИТ-компания",
+   "asset": "4,84 тыс. кв. м (3-6-й этажи) в деловом центре Valtri на Грузинском Валу, 3",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "ИТ-компания закрыла покупку 4835,6 кв. м на 3-6 этажах делового центра Valtri, который ESVE Group строит на Грузинском Валу, 3.",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ИТ-компания",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     }
+    ],
+    "target": [
+     {
+      "value": "четыре этажа под штаб-квартиру в деловом центре Valtri на Белорусской",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ESVE Group",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     }
+    ]
+   },
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.rationale": [],
+    "title": [],
+    "asset": [],
+    "ind": []
+   },
+   "reviewed": "2026-11-25",
+   "seller": "ESVE Group",
+   "deep_researched": "2026-11-25",
+   "sum": "Не раскрыта",
+   "seller_id": "gcbea8d29",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "ИТ-компания нигде не названа по имени — ни в самой статье, ни в найденных при поиске публикациях о сделках в Valtri (искали пять мест, см. accepted_notes.searched). Профиль не заводится.",
+     "target": "Предмет — офисные площади (этажи здания), а не компания; профиль не заводится."
+    },
+    "checked": {
+     "date_not_in_source": "день 25 ноября назван в самом тексте источника (время публикации 25 Ноября 2026 09:45) и соответствует формулировке «приобрела» — сделка объявлена закрытой в день публикации, отдельной более ранней даты закрытия источник не называет."
+    },
+    "notes": "Покупатель («ИТ-компания») не раскрыт нигде — честная пустота, см. accepted_notes.searched. Продавец — застройщик ESVE Group (юрлицо ООО «ЭСВЭ СТРОЙ», ИНН 9704114184: совпадает в двух независимых источниках — datanewton.ru и audit-it.ru, контрольная сумма верна; футер esve.ru называет то же юрлицо). Консультант (брокер) сделки — агентство OF.ru, сторону не уточняет источник (law.adv).",
+    "searched": "Покупатель («ИТ-компания») не раскрыт ни в основном источнике, ни при поиске: 1) РБК-Недвижимость (realty.rbc.ru) — про проект Valtri и его девелопера, без имени покупателя этой сделки; 2) CRE.ru — статьи о других сделках в Valtri (БЦ получил генподрядчика; продажа этажа с террасой в сентябре 2025 — там покупатель тоже назван только «IT-компания»; продажи ESVE Group в декабре 2025) — тот же проект системно не называет покупателей; 3) office-news.ru — те же декабрьские продажи ESVE Group, покупатели тоже без имени («крупные компании из разных секторов экономики»); 4) novostroy-m.ru — карточка проекта и застройщика, имени покупателя нет; 5) сайты valtri.ru и esve.ru — ни архива новостей, ни имени арендатора/покупателя. Застройщик системно не раскрывает покупателей площадей Valtri (тот же обезличенный формат и в прошлых его анонсах о других этажах)."
+   },
+   "accepted": "2026-11-25",
+   "accepted_hash": "a38725a008b3.343a72",
+   "second_read": "2026-11-25",
+   "second_read_hash": "a38725a008b3.343a72",
+   "post_preview": "<b>ESVE Group продала ИТ-компании площади под штаб-квартиру в деловом центре Valtri</b>\n\n<b>Покупатель:</b> ИТ-компания\n<b>Продавец:</b> ESVE Group\n<b>Предмет:</b> 4,84 тыс. кв. м (3-6-й этажи) в деловом центре Valtri на Грузинском Валу, 3\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Консультанты:</b> OF.ru\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre\">CNews</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g6184df02\">карточке сделки</a>\n",
+   "post_channels": [
+    "realty"
+   ],
+   "added": "2026-11-25",
+   "post_approved": true,
+   "facts": {
+    "stake": {
+     "value": null,
+     "basis": "unknown",
+     "card_hash": "a908a02bbc80"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "c22efc030a0d",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-25",
+     "meaning": "unknown",
+     "basis": "rule",
+     "card_hash": "c018141c47dc"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": null,
+     "inn": null,
+     "confirmed": false,
+     "bank": false,
+     "lot": false,
+     "basis": "unknown",
+     "perimeter": "unknown",
+     "card_hash": "493dbc68fa9b"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "no_target",
+     "all_sums": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
@@ -368760,7 +369245,10 @@
   "gb8a84b47": null,
   "ge1c5f194": null,
   "ge6b04680": null,
-  "g70cf2d0f": null
+  "g70cf2d0f": null,
+  "g6184df02": null,
+  "g542addc3": null,
+  "ga5198c41": null
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -368903,7 +369391,8 @@
   "gcd8fe39c": 18,
   "g9b852635": 84,
   "g25aaf2c0": 85,
-  "gf2b576fb": 86
+  "gf2b576fb": 86,
+  "g6184df02": 87
  },
  "telegram_post_state": {
   "ga525c46b": {
@@ -373924,6 +374413,32 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g6184df02": {
+   "sum": "Не раскрыта",
+   "buyer_name": "ИТ-компания",
+   "seller": "ESVE Group",
+   "asset": "4,84 тыс. кв. м (3-6-й этажи) в деловом центре Valtri на Грузинском Валу, 3",
+   "status": "Закрыта",
+   "title": "ESVE Group продала ИТ-компании площади под штаб-квартиру в деловом центре Valtri",
+   "law": {
+    "adv": [
+     [
+      "Консультант сделки",
+      "OF.ru",
+      "Источник называет агентство OF.ru консультантом (брокером) сделки; сторону, которую оно представляло, источник не уточняет. Источник: https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     ]
+    ]
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "closed"
+    }
+   ]
   }
  },
  "consumed_urls": [
@@ -374353,5 +374868,5 @@
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
  ],
- "telegram_last_post_at": "2026-11-25T07:05:17+00:00"
+ "telegram_last_post_at": "2026-11-25T17:13:11+00:00"
 }
