@@ -82,20 +82,24 @@ def milestone_message(deal, event):
             + ('\n\n' + format_post.esc(buttons) if buttons else ''))
 
 
-def site_draft(deal, event):
+def site_draft(deal, event, reply_to=None):
     """Что сайт опубликует по кнопке: текст поста, кнопки и маршрут.
     None — пост сайту не доверяем (не прошел механическую вычитку)."""
     text = format_post.render_milestone(deal, event)
     if check_post.check(text):
         return None
-    return {'combo': '%s~%s' % (deal['id'], event['kind']), 'event_id': event['id'],
-            'text': text, 'buttons': format_post.render_buttons(deal),
-            'route': list(channels.channels_for(deal))}
+    draft = {'combo': '%s~%s' % (deal['id'], event['kind']), 'event_id': event['id'],
+             'text': text, 'buttons': format_post.render_buttons(deal),
+             'route': list(channels.channels_for(deal))}
+    # номер первого поста о сделке в основном канале: этап выходит ответом на него
+    if isinstance(reply_to, int):
+        draft['reply_to'] = reply_to
+    return draft
 
 
-def store_on_site(deal, event, client=None):
+def store_on_site(deal, event, client=None, reply_to=None):
     """Положить готовый пост этапа на сайт. True — положили."""
-    draft = site_draft(deal, event)
+    draft = site_draft(deal, event, reply_to)
     site = os.environ.get('APP_BASE_URL', 'https://projectcompass.ru').rstrip('/')
     token = os.environ.get('MODERATION_TOKEN') or os.environ.get('TELEGRAM_WEBHOOK_SECRET') or ''
     if draft is None or not token:
@@ -151,7 +155,8 @@ def main(write=False):
         for i, (text, keyboard, deal, event) in enumerate(plan):
             if i:
                 time.sleep(send_drafts.PAUSE)
-            if not store_on_site(deal, event, client):
+            if not store_on_site(deal, event, client,
+                                 reply_to=(data.get('telegram_posts') or {}).get(deal['id'])):
                 print('Этап %s: сайт сам не опубликует — выпустит рутина публикации.' % event['id'])
             ok_all = True
             for chat in chats:

@@ -190,7 +190,25 @@ def decisions_planned():
     out = run([sys.executable, os.path.join(INGEST, 'approve.py')], must=False).stdout
     rows = [l.strip() for l in out.splitlines()
             if l.strip().startswith(('ПУБЛИКУЕМ', 'ПРИДЕРЖАНА', 'ВЫКИНУТА', 'В РАБОТУ', 'ОТБРОШЕНА', 'ПОСТ '))]
+    rows += stage_decision_rows()
     return rows, out
+
+
+def stage_decision_rows():
+    """Решения по постам этапов, сводке и правке поста (id с «~»). approve.py
+    о них не печатает: их применяет send_telegram. 25 ноября 2026 сайт сам
+    выпустил этап g9b4c2e71~offer по кнопке, других решений не было — команда
+    отвечала «Решений нет», номер поста в базу не переносился, а забор
+    печатал «РЕШЕНИЯ ЖДУТ»."""
+    try:
+        sys.path.insert(0, os.path.join(ROOT, 'pipeline'))
+        import publication_busy
+        waiting = publication_busy.busy(stale_h=None)
+    except Exception:                                        # noqa: BLE001 — нет связи: строк не добавляем
+        return []
+    return ['ЭТАП        %s   решение «%s» по посту этапа или сводке' % (d.get('deal_id'), d.get('verdict'))
+            for d in waiting if '~' in str(d.get('deal_id') or '')
+            and d.get('verdict') in ('post_yes', 'post_no')]
 
 
 # ТЕКСТ ОСНОВАТЕЛЕЙ — БЕЗ ПОЛНОГО ПРОГОНА (владелец, 2 ноября 2026: «в

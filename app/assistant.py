@@ -87,6 +87,9 @@ LLM_TIMEOUT = float(os.environ.get("LLM_TIMEOUT", "30"))          # одна п�
 LLM_DEADLINE = float(os.environ.get("LLM_DEADLINE", "35"))        # режим «по базе», весь ответ
 LLM_DEADLINE_WEB = float(os.environ.get("LLM_DEADLINE_WEB", "60"))  # «по интернету»: поиск + модель
 LLM_MIN_ATTEMPT = float(os.environ.get("LLM_MIN_ATTEMPT", "12"))  # короче этого попытку не начинаем
+LLM_PRIMARY_CAP = float(os.environ.get("LLM_PRIMARY_CAP", "18"))  # сколько ждем основную, пока есть запасная
+LLM_PRIMARY_REST = float(os.environ.get("LLM_PRIMARY_REST", "300"))  # сколько не спрашиваем зависшую основную
+_PRIMARY_RESTS_UNTIL = 0.0
 LLM_RETRIES = 2  # повторов сверх первой попытки — только после БЫСТРОГО сбоя (см. call_llm)
 # РЕЖИМ РАССУЖДЕНИЯ. Responses API принимает `reasoning: {"effort": ...}` со
 # значениями none | minimal | low | medium | high | xhigh (документация
@@ -342,13 +345,38 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
     и ассистент на сайте писали «Ассистент сейчас недоступен», хотя YandexGPT
     в той же папке отвечала за 4 секунды. Явно заданную модель (стенд сравнения)
     не подменяем."""
-    try:
-        return _call_llm_once(system, user, max_tokens, deadline, model, reasoning_effort, stats)
-    except Exception as e:  # noqa: BLE001
-        if model or not re.search(r"HTTP (401|403|404)", str(e)):
-            raise
-        last: Exception = e
-    for spare in [m for m in FALLBACK_MODELS if m != current_model()]:
+    # ОСНОВНАЯ МОДЕЛЬ НЕ УЛОЖИЛАСЬ — ОТВЕЧАЕТ ЗАПАСНАЯ (25 ноября 2026). Замер
+    # стенда в этот день: deepseek-v4-flash — 2 ответа из 4, по 32 с, остальные
+    # обрывались по таймауту; yandexgpt в той же папке — 2 из 2 за 6,5 с. Посетитель
+    # 26 секунд смотрел на «Модель отвечает дольше обычного» и оставался со сводкой.
+    # Основной модели дается LLM_PRIMARY_CAP секунд (здоровая отвечает за 4–7), и
+    # если запасной после этого остается не меньше LLM_MIN_ATTEMPT — отвечает она.
+    global _PRIMARY_RESTS_UNTIL
+    spares = [m for m in FALLBACK_MODELS if m != current_model()]
+    primary_deadline = deadline
+    if model is None and deadline is not None and LLM_PRIMARY_CAP > 0 and spares:
+        cap = time.monotonic() + LLM_PRIMARY_CAP
+        if deadline - cap >= LLM_MIN_ATTEMPT:
+            primary_deadline = cap
+    # ОСНОВНАЯ ТОЛЬКО ЧТО ЗАВИСЛА — СЛЕДУЮЩИЕ ВОПРОСЫ СРАЗУ ИДУТ ЗАПАСНОЙ. Без
+    # этого каждый посетитель ждал бы LLM_PRIMARY_CAP секунд впустую: проверка на
+    # боевом сайте 25 ноября 2026 — ответ есть, но через 26 с (18 с ожидания
+    # основной и 8 с запасная). LLM_PRIMARY_REST секунд основную не спрашиваем,
+    # потом пробуем снова; запасные не ответили — основная получает остаток.
+    resting = (model is None and deadline is not None and spares
+               and time.monotonic() < _PRIMARY_RESTS_UNTIL)
+    last: Exception = RuntimeError("основная модель недавно не уложилась в срок")
+    if not resting:
+        try:
+            return _call_llm_once(system, user, max_tokens, primary_deadline, model, reasoning_effort, stats)
+        except Exception as e:  # noqa: BLE001
+            slow = primary_deadline is not deadline and re.search(r"timed out|timeout|таймаут", str(e), re.I)
+            if model or not (slow or re.search(r"HTTP (401|403|404)", str(e))):
+                raise
+            if slow:
+                _PRIMARY_RESTS_UNTIL = time.monotonic() + LLM_PRIMARY_REST
+            last = e
+    for spare in spares:
         if deadline is not None and deadline - time.monotonic() < LLM_MIN_ATTEMPT:
             break
         logger.warning("LLM %s не ответила (%s) — запасная модель %s", current_model(), last, spare)
@@ -356,6 +384,8 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
             return _call_llm_once(system, user, max_tokens, deadline, spare, "", stats)
         except Exception as e:  # noqa: BLE001 — заглушка-отказ или нет доступа: следующая модель
             last = e
+    if resting and deadline - time.monotonic() >= LLM_MIN_ATTEMPT:
+        return _call_llm_once(system, user, max_tokens, deadline, model, reasoning_effort, stats)
     raise last
 
 

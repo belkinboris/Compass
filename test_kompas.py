@@ -2303,3 +2303,63 @@ def test_day_summary_names_what_waits_for_the_owner_and_offers_buttons(monkeypat
     assert data == ["show:soon", "show:raw"]
     counts = console.waiting_counts()
     assert set(counts) == {"cards", "posts", "raw"} and all(isinstance(v, int) for v in counts.values())
+
+
+def test_slow_main_model_is_cut_short_and_the_spare_answers(monkeypatch):
+    """25 ноября 2026: deepseek-v4-flash отвечал через раз по 32 с, посетитель
+    оставался со сводкой; yandexgpt в той же папке отвечал за 6,5 с. Основной
+    модели дается LLM_PRIMARY_CAP секунд, остаток дедлайна — запасной."""
+    import time
+    from app import assistant
+    seen = []
+
+    def fake(system, user, max_tokens, deadline=None, model=None, reasoning_effort=None, stats=None):
+        seen.append((model, round(deadline - time.monotonic())))
+        if model is None:
+            raise RuntimeError("LLM недоступен после 1 попыток: The read operation timed out")
+        return "ответ запасной модели"
+
+    monkeypatch.setattr(assistant, "_call_llm_once", fake)
+    monkeypatch.setattr(assistant, "FALLBACK_MODELS", ["deepseek-v4-flash/latest", "yandexgpt/latest"])
+    monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", 0.0)
+    monkeypatch.delenv("YANDEX_MODEL", raising=False)
+    assert assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35) == "ответ запасной модели"
+    assert seen[0] == (None, 18) and seen[1][0] == "yandexgpt/latest" and seen[1][1] >= 12
+    # Запасной после обрезки не осталось бы времени — основной оставляем весь дедлайн
+    # и таймаут не подменяем.
+    seen.clear()
+    monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", 0.0)
+    import pytest
+    with pytest.raises(RuntimeError):
+        assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 25)
+    assert seen == [(None, 25)]
+
+
+def test_after_a_timeout_the_main_model_rests_and_the_spare_answers_at_once(monkeypatch):
+    """25 ноября 2026, проверка на боевом сайте: ответ приходил, но через 26 с —
+    18 из них каждый вопрос ждал зависшую основную модель. После таймаута
+    основную не спрашиваем LLM_PRIMARY_REST секунд; потом пробуем снова."""
+    import time
+    from app import assistant
+    calls = []
+
+    def fake(system, user, max_tokens, deadline=None, model=None, reasoning_effort=None, stats=None):
+        calls.append(model)
+        if model is None:
+            raise RuntimeError("LLM недоступен после 1 попыток: The read operation timed out")
+        return "ответ запасной"
+
+    monkeypatch.setattr(assistant, "_call_llm_once", fake)
+    monkeypatch.setattr(assistant, "FALLBACK_MODELS", ["deepseek-v4-flash/latest", "yandexgpt/latest"])
+    monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", 0.0)
+    monkeypatch.delenv("YANDEX_MODEL", raising=False)
+    assert assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35) == "ответ запасной"
+    assert calls == [None, "yandexgpt/latest"]
+    calls.clear()
+    assert assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35) == "ответ запасной"
+    assert calls == ["yandexgpt/latest"], "зависшую основную спросили снова"
+    # отдых кончился — основную пробуем опять
+    calls.clear()
+    monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", time.monotonic() - 1)
+    assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35)
+    assert calls == [None, "yandexgpt/latest"]
