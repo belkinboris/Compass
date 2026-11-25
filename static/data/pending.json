@@ -281,6 +281,70 @@
     "draft_id": "d83064405",
     "title": "Итоговый объем инвестиций в санаторий «Сестрорецкий курорт» составил 15 млрд рублей"
    }
+  },
+  {
+   "id": "ga5198c41",
+   "date": "2026-11-25",
+   "title": "Сергей Семак приобрел долю в компании, работающей в сфере естественных наук",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/sport/28353039"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Сергей Семак",
+   "asset": "компании, работающей в сфере естественных наук",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Главный тренер \"Зенита\" приобрел долю в размере 33,34%",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/sport/28353039"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Сергей Семак",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28353039"
+     }
+    ],
+    "target": [
+     {
+      "value": "компании, работающей в сфере естественных наук",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28353039"
+     }
+    ]
+   },
+   "pending_since": "2026-11-25T09:52:45+00:00"
   }
  ]
 }

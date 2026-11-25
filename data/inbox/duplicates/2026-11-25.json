@@ -84,6 +84,48 @@
     "needs_review": true
    },
    "queued": "2026-11-25"
+  },
+  {
+   "key": "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/::g1b1f27d3",
+   "candidate_id": "g1b1f27d3",
+   "reason": "общее название в кавычках",
+   "draft": {
+    "draft_id": "d10034829",
+    "title": "«Русский стандарт» продал конкурс «Мисс Россия»",
+    "date": "2026-11-25",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/"
+     ]
+    ],
+    "sum": "100 млн ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-25",
+      "title": "Сделка завершена",
+      "note": "Гендиректор «Infoline-аналитики» Михаил Бурмистров оценивает стоимость бизнеса НКК в 80–100 млн руб. Сообщение «Русский стандарт» продал конкурс «Мисс Россия» появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "конкурс «Мисс Россия»",
+    "seller": "«Русский стандарт»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "конкурс «Мисс Россия»",
+     "seller": "«Русский стандарт»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-25"
   }
  ]
 }

@@ -7198,7 +7198,7 @@ const stageKind = status => {
 const kindClass = kind =>
   kind==="closed" ? "closed" : kind==="cancelled" ? "cancelled"
   : kind==="negotiations" ? "negotiations"
-  : (kind==="approval"||kind==="signed") ? "pending" : "";
+  : (kind==="approval"||kind==="signed"||kind==="offer") ? "pending" : "";
 const statusClass = status => kindClass(stageKind(status));
 /* Заметка владельца 4 сентября 2026 (карточка «Медскан»/«Сова», обсуждается
    с сентября 2025 года без единого подтверждения): статус «Обсуждается» сам
@@ -7227,8 +7227,8 @@ const stalledDiscussionHint = d => {
    нельзя, иначе веха появится в ленте сайта и не появится в канале, или
    наоборот). `signed` сознательно не в v1, `negotiations` никогда не был
    кандидатом — это состояние сделки, а не новость о ней. */
-const POSTWORTHY_MILESTONE_KINDS = new Set(["approval","closed","cancelled"]);
-const MILESTONE_LABEL = {approval:"Согласование", closed:"Закрытие", cancelled:"Срыв сделки"};
+const POSTWORTHY_MILESTONE_KINDS = new Set(["approval","closed","cancelled","offer"]);
+const MILESTONE_LABEL = {approval:"Согласование", closed:"Закрытие", cancelled:"Срыв сделки", offer:"Оферта"};
 const eventSources = e => {
   const raw=Array.isArray(e&&e.sources) ? e.sources
     : (Array.isArray(e&&e.source) && e.source[1] ? [e.source] : []);

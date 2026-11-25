@@ -133,6 +133,12 @@ def check(text):
                 from draft import is_generic_description
             except ImportError:
                 continue
+            # ОФЕРТА И ВЫКУП У ВСЕХ АКЦИОНЕРОВ (25 ноября 2026, «Т-Технологии»/
+            # «Циан»): продавец — акционеры названной компании, другого имени
+            # у него нет. «Акционеры «Циана»» — точная запись, а не описание.
+            if field == 'Продавец' and re.match(
+                    r'^(?:миноритарные\s+)?(?:акционеры|участники)\s+[«"][^»"]+[»"]$', value.strip(), re.I):
+                continue
             if is_generic_description(value):
                 problems.append('«%s: %s» — родовое описание вместо имени'
                                 % (field, value[:40]))
