@@ -2,35 +2,6 @@
  "made": "2026-11-25",
  "drafts": [
   {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d34423503",
    "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
    "date": "2026-11-17",
@@ -59,35 +30,6 @@
    ]
   },
   {
-   "draft_id": "d75712205",
-   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
    "draft_id": "d51747038",
    "title": "Anthropic’s IPO could deliver $156 billion to charity",
    "date": "2026-11-19",
@@ -111,21 +53,19 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d78483493",
-   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
-   "date": "2026-11-20",
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+   "date": "2026-11-19",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
     ]
    ],
    "sum": null,
@@ -146,7 +86,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -177,7 +117,38 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d78483493",
+   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -207,7 +178,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -238,7 +209,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -309,7 +280,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -351,7 +322,38 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d69351357",
+   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9126673"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -382,36 +384,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d57392391",
-   "title": "Продажи GTA VI в первый день оценили более чем в $2 млрд",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2205386/2026-11-20/prodazhi-gta-vi-v-pervyi-den-otcenili-bolee-chem-v-2-mlrd"
-    ]
-   ],
-   "sum": "$2 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -444,43 +417,13 @@
    ]
   },
   {
-   "draft_id": "d80259424",
-   "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
+   "draft_id": "d38808793",
+   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
    "date": "2026-11-20",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/20/11/2026/6b0037a53559e147749d1565"
-    ]
-   ],
-   "sum": "$107 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d53545276",
-   "title": "Космический рекорд побит: как прошло первичное публичное размещение акций Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28340723"
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/aktsii-875433275.html"
     ]
    ],
    "sum": null,
@@ -501,7 +444,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -532,21 +475,60 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d69351357",
-   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
-   "date": "2026-11-20",
+   "draft_id": "d24548884",
+   "title": "РФ и США планируют новый раунд переговоров по «раздражителям» до конца года",
+   "date": "2026-11-25",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9126673"
+     "web:interfax.ru",
+     "https://www.interfax.ru/russia/1131395"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Инвестиция",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-25",
+     "title": "Переговоры",
+     "note": "РФ и США проведут до конца года очередной раунд переговоров по устранению взаимных раздражителей, заявил в среду замглавы МИД РФ Сергей Рябков.\"Будут, обязательно\", - сказал он журналистам, отвечая на вопрос \"Интерфакса\".",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/russia/1131395"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d38674053",
+   "title": "Рябков: пока нет понимания, когда пройдет раунд переговоров РФ, США и Украины",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/politika/28355083"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -559,25 +541,22 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d38808793",
-   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
-   "date": "2026-11-20",
+   "draft_id": "d73727501",
+   "title": "Рябков не смог назвать сроков нового раунда переговоров по Украине",
+   "date": "2026-11-25",
    "src": [
     [
-     "web:1prime.ru",
-     "https://1prime.ru/20261120/aktsii-875433275.html"
+     "web:ria.ru",
+     "https://ria.ru/20261125/ryabkov-2133963504.html"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -590,60 +569,18 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d96342547",
-   "title": "ЛУКОЙЛ договорился о продаже зарубежных активов // Тодд Бёли сообщил о сделке с ЛУКОЙЛом по созданию консорциума",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9130604"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Подписана",
-   "events": [
-    {
-     "kind": "signed",
-     "date": "2026-11-25",
-     "title": "Документы подписаны",
-     "note": "Американский миллиардер Тодд Бёли заявил, что подписал соглашение с ЛУКОЙЛом о создании консорциума, передает Reuterts. Структура создана для приобретения международных энергетических активов российской нефтяной компании.",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9130604"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Нефть и газ",
-   "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d52084330",
-   "title": "У 6,51% уставного капитала «Яндекса» сменился владелец",
+   "draft_id": "d12783896",
+   "title": "Суд обратил в доход государства имущество экс-главы Ростова-на-Дону",
    "date": "2026-11-25",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/25/1415348-smenilsya-vladelets"
+     "web:ria.ru",
+     "https://ria.ru/20261125/sud-2133963333.html"
     ]
    ],
    "sum": null,
@@ -651,44 +588,33 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": "6,51% уставного капитала «Яндекса»",
+   "asset": null,
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": "6,51% уставного капитала «Яндекса»",
+    "asset": null,
     "seller": null
    },
-   "ind": "ИТ и интернет",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d51654485",
-   "title": "Группа Боэли подписала соглашение с «Лукойлом» о приобретении зарубежных активов",
+   "draft_id": "d73003939",
+   "title": "Американский миллиардер Тодд Боули подписал сделку о покупке зарубежных активов ЛУКОЙЛа",
    "date": "2026-11-25",
    "src": [
     [
-     "web:vedomosti.ru/articles",
-     "https://www.vedomosti.ru/business/articles/2026/11/25/1415357-boeli-podpisala"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/318105"
     ]
    ],
-   "sum": null,
+   "sum": "$10 млрд",
    "type": "M&A",
-   "status": "Подписана",
-   "events": [
-    {
-     "kind": "signed",
-     "date": "2026-11-25",
-     "title": "Документы подписаны",
-     "note": "Консорциум во главе с американским миллиардером Тоддом Боэли подписал соглашение с «Лукойлом» об обмене ценных бумаг российской компании на ее зарубежные активы. Об этом сообщил Reuters со ссылкой на самого бизнесмена и представителя Американской корпорации…",
-     "source": [
-      "web:vedomosti.ru/articles",
-      "https://www.vedomosti.ru/business/articles/2026/11/25/1415357-boeli-podpisala"
-     ]
-    }
-   ],
+   "status": null,
+   "events": [],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -700,7 +626,8 @@
    "ind": "Нефть и газ",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g707211ba (общие редкие слова: зарубе, лукойл) — проверьте, не дубль ли"
    ]
   },
   {
@@ -727,20 +654,88 @@
    },
    "ind": "Рынок ценных бумаг",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «У 6,51% уставного капитала «Яндекса» сменился владелец» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g9368796b (общее название в кавычках) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d79045029",
-   "title": "В России выставили на продажу кроссовер Nissan с маленьким пробегом",
+   "draft_id": "d92677685",
+   "title": "Рябков: сроков следующего раунда переговоров РФ-США-Украина пока нет",
    "date": "2026-11-25",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/v-rossii-prodayut-krossover-nissan-x-trail-2020-goda-s-malenkim-probegom/"
+     "web:ura.news",
+     "https://ura.news/news/1053147411"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d73338370",
+   "title": "🇺🇸 Американский миллиардер Тодд Бёли подписал соглашение с ЛУКОЙЛом о приобретении зарубежных активов компании Консорциум во главе с Тоддом Бели, в который входит американская государственная корпорац",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7615"
+    ]
+   ],
+   "sum": "$10 млрд",
+   "type": "M&A",
+   "status": "Подписана",
+   "events": [
+    {
+     "kind": "signed",
+     "date": "2026-11-25",
+     "title": "Документы подписаны",
+     "note": "🇺🇸 Американский миллиардер Тодд Бёли подписал соглашение с ЛУКОЙЛом о приобретении зарубежных активов компании Консорциум во главе с Тоддом Бели, в который входит американская государственная корпорация DFC, договорился о приобретении международного портфеля…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7615"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Нефть и газ",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g707211ba (общие слова заголовка: 3) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d51770650",
+   "title": "Под Тюменью продают щенка из тропической страны за 100 тысяч рублей",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/animals/2026/11/25/76779505/"
     ]
    ],
    "sum": null,
@@ -759,35 +754,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d15078642",
-   "title": "BYD начала переговоры о покупке европейского завода",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/byd-nachala-peregovory-o-pokupke-evropeyskogo-zavoda/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
