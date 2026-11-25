@@ -598,41 +598,13 @@
    ]
   },
   {
-   "draft_id": "d41165739",
-   "title": "«Не только Бродский»: в Музее Бродского расскажут о забытых местах и именах ленинградского андеграунда",
+   "draft_id": "d95543340",
+   "title": "ЕК: Брюссель больше не купит «ни одной молекулы» российского газа",
    "date": "2026-11-25",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/25/76789432/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d04328612",
-   "title": "Tank 300 стал лидером премиального авторынка в России — продажи за месяц превысили 1 тыс. машин",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/tank-300-stal-liderom-premialnogo-avtorynka-v-rossii-prodazhi-za-mesyac-prevysili-1-tys-mashin/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9130388"
     ]
    ],
    "sum": null,
@@ -654,13 +626,52 @@
    ]
   },
   {
-   "draft_id": "d13561913",
-   "title": "С 1 декабря «Аэрофлот» запустит период охлаждения при покупке билетов",
+   "draft_id": "d13888648",
+   "title": "Владелец «Русского стандарта» Рустам Тарико продал «Мисс Россию»",
    "date": "2026-11-25",
    "src": [
     [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/317901"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Vladelec-Russkogo-standarta-Rustam-Tariko-prodal-Miss-Rossiyu-87835"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "14 сентября 2026 года у «Национального конкурса красоты» (НКК), который ежегодно проводит конкурс «Мисс Россия», сменился собственник. Вместо холдинга «Русский стандарт» Рустама Тарико, проводившего конкурс с 2005 года, новым владельцем компании стал «Атернум…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Vladelec-Russkogo-standarta-Rustam-Tariko-prodal-Miss-Rossiyu-87835"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "«Мисс Россию»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "«Мисс Россию»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d33528970",
+   "title": "МТС привлекла 1,2 тыс. участников в инклюзивный проект по развитию навыков ИИ «Каждый включен»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-25_mts_privlekla_12_tysuchastnikov"
     ]
    ],
    "sum": null,
@@ -668,27 +679,55 @@
    "status": null,
    "events": [],
    "buyer_name": null,
-   "asset": null,
+   "asset": "МТС",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "МТС",
     "seller": null
    },
-   "ind": "Транспорт и логистика",
+   "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d29109796",
-   "title": "В Челябинске продается брутальный дом с окнами-бойницами за 40 млн. Фото",
+   "draft_id": "d76908448",
+   "title": "Суд привлек блогера Влада А4 к иску о продаже его мерча на маркетплейсе",
    "date": "2026-11-25",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/news/1053147255"
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/sud-875545657.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Суд",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Суд",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d87218978",
+   "title": "Россияне нарастили покупки товаров для уборки снега на фоне снегопадов",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/rossijane-875544449.html"
     ]
    ],
    "sum": null,
@@ -707,6 +746,102 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d94226994",
+   "title": "Продажи «Озон Фармацевтики» просели",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/prodazhi-ozon-farmatsevtiki-proseli/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Фармацевтика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37586293",
+   "title": "Индия сократит покупки российской нефти до минимума",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/indiya-sokratit/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d34983062",
+   "title": "ОМК приобрела Волгореченский трубный завод у «Газпрома» 🟢 Статус сделки: закрыта 24 ноября 2026 г. Об объекте сделки 100% акций АО «Газпром трубинвест» (Волгореченский трубный завод) — металлургическо",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7613"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "ОМК приобрела Волгореченский трубный завод у «Газпрома» 🟢 Статус сделки: закрыта 24 ноября 2026 г. Об объекте сделки 100% акций АО «Газпром трубинвест» (Волгореченский трубный завод) — металлургическое предприятие в Волгореченске Костромской области. Завод…",
+     "source": [
+      "tg:dealsma",
+      "https://t.me/dealsma/7613"
+     ]
+    }
+   ],
+   "buyer_name": "ОМК",
+   "asset": "Волгореченский трубный завод",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "ОМК",
+    "asset": "Волгореченский трубный завод",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "похоже на уже описанную сделку g542addc3 (общие слова заголовка: 3) — проверьте, не дубль ли"
    ]
   }
  ]
