@@ -231,7 +231,9 @@
    "accepted": "2026-11-25",
    "accepted_hash": "6a0443e10fff.571f1a",
    "second_read": "2026-11-25",
-   "second_read_hash": "6a0443e10fff.571f1a"
+   "second_read_hash": "6a0443e10fff.571f1a",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gc1037ea9",
@@ -341,7 +343,9 @@
    "accepted": "2026-11-25",
    "accepted_hash": "513357230bc9.f0e478",
    "second_read": "2026-11-25",
-   "second_read_hash": "513357230bc9.f0e478"
+   "second_read_hash": "513357230bc9.f0e478",
+   "draft_sent": true,
+   "post_draft_sent": true
   }
  ]
 }
