@@ -126,6 +126,79 @@
     "needs_review": true
    },
    "queued": "2026-11-25"
+  },
+  {
+   "key": "https://www.kommersant.ru/doc/9130659::g9b4c2e71",
+   "candidate_id": "g9b4c2e71",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d35529047",
+    "title": "Леван Назаров консолидировал 20% акций ЦИАН",
+    "date": "2026-11-25",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9130659"
+     ]
+    ],
+    "sum": "15 млрд ₽",
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "Леван Назаров",
+    "asset": "ЦИАН",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Леван Назаров",
+     "asset": "ЦИАН",
+     "seller": null
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-11-25"
+  },
+  {
+   "key": "https://iz.ru/2208296/2026-11-25/konsortcium-bouli-dogovorilsia-o-pokupke-zarubezhnykh-aktivov-lukoila::g707211ba",
+   "candidate_id": "g707211ba",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d10705333",
+    "title": "Консорциум Боули договорился о покупке зарубежных активов «Лукойла»",
+    "date": "2026-11-25",
+    "src": [
+     [
+      "web:iz.ru",
+      "https://iz.ru/2208296/2026-11-25/konsortcium-bouli-dogovorilsia-o-pokupke-zarubezhnykh-aktivov-lukoila"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Подписана",
+    "events": [
+     {
+      "kind": "signed",
+      "date": "2026-11-25",
+      "title": "Документы подписаны",
+      "note": "Американский миллиардер Тодд Боули заключил соглашение с российской компанией «Лукойл» о приобретении ее зарубежных энергетических активов, сделку планирует провести консорциум, в который также входит Международная корпорация финансирования развития США…",
+      "source": [
+       "web:iz.ru",
+       "https://iz.ru/2208296/2026-11-25/konsortcium-bouli-dogovorilsia-o-pokupke-zarubezhnykh-aktivov-lukoila"
+      ]
+     }
+    ],
+    "buyer_name": "Консорциум Боули",
+    "asset": "зарубежные активы «Лукойла»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Консорциум Боули",
+     "asset": "зарубежные активы «Лукойла»",
+     "seller": null
+    },
+    "ind": "Нефть и газ",
+    "needs_review": true
+   },
+   "queued": "2026-11-25"
   }
  ]
 }
