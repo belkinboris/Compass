@@ -113,6 +113,123 @@
    "accepted": "2026-11-25",
    "accepted_hash": "72a575e56bca.3c04f1",
    "asset_id": "gf47ba29f"
+  },
+  {
+   "id": "g542addc3",
+   "date": "2026-11-25",
+   "title": "ОМК приобрела Волгореченский трубный завод в Костромской области",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28352469"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "Волгореченский трубный завод в Костромской области",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Сумма сделки и другие ее детали не раскрываются",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/28352469"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ОМК",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28352469"
+     }
+    ],
+    "target": [
+     {
+      "value": "Волгореченский трубный завод в Костромской области",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28352469"
+     }
+    ]
+   },
+   "buyer": "gd9fbff8f",
+   "pending_since": "2026-11-25T07:53:34+00:00"
+  },
+  {
+   "id": "ga1ee4664",
+   "date": "2026-11-25",
+   "title": "Минфин вложил 2,5 млрд рублей из ФНБ в облигации ГТЛК для обновления флота",
+   "ind": "Транспорт и логистика",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119554-minfin-vlozhil-2-5-mlrd-rubley-iz-fnb-v-obligatsii-gtlk-dlya-obnovleniya-flota/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "2,5 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "2,5 млрд ₽",
+   "buyer_name": "Минфин",
+   "asset": "облигации ГТЛК для обновления флота",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Минфин",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119554-minfin-vlozhil-2-5-mlrd-rubley-iz-fnb-v-obligatsii-gtlk-dlya-obnovleniya-flota/"
+     }
+    ],
+    "target": [
+     {
+      "value": "облигации ГТЛК для обновления флота",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119554-minfin-vlozhil-2-5-mlrd-rubley-iz-fnb-v-obligatsii-gtlk-dlya-obnovleniya-flota/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-25T07:53:34+00:00"
   }
  ]
 }
