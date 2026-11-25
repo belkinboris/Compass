@@ -230,6 +230,55 @@
     ]
    },
    "pending_since": "2026-11-25T07:53:34+00:00"
+  },
+  {
+   "id": "gb0937865",
+   "date": "2026-11-25",
+   "title": "Итоговый объем инвестиций в санаторий «Сестрорецкий курорт» составил 15 млрд рублей",
+   "ind": "Гостиницы и туризм",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Vademecum",
+     "https://vademec.ru/news/2026/11/25/itogovyy-obem-investitsiy-v-sanatoriy-sestroretskiy-kurort-sostavil-15-mlrd-rubley/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "15 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "15 млрд ₽",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "ПАО «Группа ЛСР» завершило обновление санатория «Сестрорецкий курорт» в Санкт-Петербурге. Итоговая стоимость модернизации актива, приобретенного в 2021 году, выросла с 13 млрд до 15 млрд рублей. По оценкам замгендиректора группы Игоря Левита, при…",
+     "source": [
+      "Vademecum",
+      "https://vademec.ru/news/2026/11/25/itogovyy-obem-investitsiy-v-sanatoriy-sestroretskiy-kurort-sostavil-15-mlrd-rubley/"
+     ]
+    }
+   ],
+   "pending_since": "2026-11-25T08:58:32+00:00",
+   "from_raw": {
+    "draft_id": "d83064405",
+    "title": "Итоговый объем инвестиций в санаторий «Сестрорецкий курорт» составил 15 млрд рублей"
+   }
   }
  ]
 }
