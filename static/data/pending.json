@@ -313,6 +313,71 @@
    "draft_sent": true,
    "post_draft_sent": true,
    "post_preview": "<b>ESVE Group продала ИТ-компании площади под штаб-квартиру в деловом центре Valtri</b>\n\n<b>Покупатель:</b> ИТ-компания\n<b>Продавец:</b> ESVE Group\n<b>Предмет:</b> 4,84 тыс. кв. м (3-6-й этажи) в деловом центре Valtri на Грузинском Валу, 3\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Недвижимость\n\n<b>Консультанты:</b> OF.ru\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre\">CNews</a>\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g6184df02\">карточке сделки</a>\n"
+  },
+  {
+   "id": "gc1037ea9",
+   "date": "2026-11-25",
+   "title": "Закрытый фонд инвестировал миллиарды в российского «убийцу» Cisco",
+   "ind": "Не определена",
+   "type": "Инвестиция",
+   "status": "Закрыта",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/top/2026-11-25_zakrytyj_paevyj_fond_investiroval"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "4 млрд ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "4 млрд ₽",
+   "buyer_name": "Закрытый фонд",
+   "asset": "российское «убийца» Cisco",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "ЗПИФ «Аталанта» под управлением «Вим сбережения» купил 7,8% в российском разработчике полного цикла оборудования для ЦОД и телекома. Эксперты оценили сделку в 2–4 млрд руб. и считают, что за закрытым фондом может стоять крупный инвестор. Самого разработчика…",
+     "source": [
+      "CNews",
+      "https://www.cnews.ru/news/top/2026-11-25_zakrytyj_paevyj_fond_investiroval"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Закрытый фонд",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-11-25_zakrytyj_paevyj_fond_investiroval"
+     }
+    ],
+    "target": [
+     {
+      "value": "российское «убийца» Cisco",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/top/2026-11-25_zakrytyj_paevyj_fond_investiroval"
+     }
+    ]
+   },
+   "pending_since": "2026-11-25T15:53:10+00:00"
   }
  ]
 }
