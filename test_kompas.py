@@ -2363,3 +2363,15 @@ def test_after_a_timeout_the_main_model_rests_and_the_spare_answers_at_once(monk
     monkeypatch.setattr(assistant, "_PRIMARY_RESTS_UNTIL", time.monotonic() - 1)
     assistant.call_llm("s", "u", 100, deadline=time.monotonic() + 35)
     assert calls == [None, "yandexgpt/latest"]
+
+
+def test_deal_analysis_finds_a_preview_card_from_the_queue(monkeypatch):
+    """26 ноября 2026: «Разбор сделки» на предпросмотре карточки из очереди
+    (#/preview/g707211ba) получал 404 и писал «Ассистент сейчас недоступен»."""
+    from app import assistant
+    monkeypatch.setattr(assistant, "_published_deal", lambda deal_id: None)
+    monkeypatch.setattr(assistant.core, "_read_json",
+                        lambda path, default: {"cards": [{"id": "gprev1", "title": "А купил Б"}]}
+                        if path.endswith("pending.json") else default)
+    assert assistant.get_deal("gprev1")["title"] == "А купил Б"
+    assert assistant.get_deal("gnone") is None
