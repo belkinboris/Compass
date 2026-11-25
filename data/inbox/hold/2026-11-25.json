@@ -598,213 +598,6 @@
    ]
   },
   {
-   "draft_id": "d95543340",
-   "title": "ЕК: Брюссель больше не купит «ни одной молекулы» российского газа",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9130388"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d13888648",
-   "title": "Владелец «Русского стандарта» Рустам Тарико продал «Мисс Россию»",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Vladelec-Russkogo-standarta-Rustam-Tariko-prodal-Miss-Rossiyu-87835"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-25",
-     "title": "Сделка завершена",
-     "note": "14 сентября 2026 года у «Национального конкурса красоты» (НКК), который ежегодно проводит конкурс «Мисс Россия», сменился собственник. Вместо холдинга «Русский стандарт» Рустама Тарико, проводившего конкурс с 2005 года, новым владельцем компании стал «Атернум…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Vladelec-Russkogo-standarta-Rustam-Tariko-prodal-Miss-Rossiyu-87835"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "«Мисс Россию»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "«Мисс Россию»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d33528970",
-   "title": "МТС привлекла 1,2 тыс. участников в инклюзивный проект по развитию навыков ИИ «Каждый включен»",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-25_mts_privlekla_12_tysuchastnikov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "МТС",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "МТС",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d76908448",
-   "title": "Суд привлек блогера Влада А4 к иску о продаже его мерча на маркетплейсе",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261125/sud-875545657.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Суд",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Суд",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d87218978",
-   "title": "Россияне нарастили покупки товаров для уборки снега на фоне снегопадов",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261125/rossijane-875544449.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d94226994",
-   "title": "Продажи «Озон Фармацевтики» просели",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/prodazhi-ozon-farmatsevtiki-proseli/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Фармацевтика",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37586293",
-   "title": "Индия сократит покупки российской нефти до минимума",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/indiya-sokratit/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d34983062",
    "title": "ОМК приобрела Волгореченский трубный завод у «Газпрома» 🟢 Статус сделки: закрыта 24 ноября 2026 г. Об объекте сделки 100% акций АО «Газпром трубинвест» (Волгореченский трубный завод) — металлургическо",
    "date": "2026-11-25",
@@ -842,6 +635,176 @@
    "hold_reasons": [
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "похоже на уже описанную сделку g542addc3 (общие слова заголовка: 3) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d78190435",
+   "title": "Суд обратил в доход государства активы экс-главы Ростова-на-Дону Логвиненко на 1,6 млрд рублей",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119582-sud-obratil-v-dokhod-gosudarstva-aktivy-eks-glavy-rostova-na-donu-logvinenko-na-1-6-mlrd-rubley/"
+    ]
+   ],
+   "sum": "1,6 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d22719610",
+   "title": "Flipkart CEO Kalyan Krishnamurthy to step down next week amid IPO uncertainty",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/25/flipkart-ceo-kalyan-krishnamurthy-to-step-down-next-week-amid-ipo-uncertainty/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d59575498",
+   "title": "В ЦУМе начали продавать шарфы за 117 тысяч рублей",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/v-tsume-nachali-prodavat-sharfy-za-117-tysyach-rubley/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d45458756",
+   "title": "Картина Айвазовского ушла с молотка в Лондоне",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/kartina-ayvazovskogo-ushla-s-molotka-v-londone/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d64505811",
+   "title": "Путин заинтересовал одну из богатейших стран мира в инвестициях в РФ",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053147347"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d08699359",
+   "title": "Кассационный суд не увидел ничего подозрительного в цепочке сделок по продаже аптечного бизнеса ГК «РОСТА» структурам «Эркафарма» в 2017 году. Судебный акт апелляционной инстанции о необходимости стор",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7614"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

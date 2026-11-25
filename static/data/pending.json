@@ -229,6 +229,70 @@
     ]
    },
    "pending_since": "2026-11-25T09:52:45+00:00"
+  },
+  {
+   "id": "ge3ce076b",
+   "date": "2026-11-25",
+   "title": "Воронежский «Хозторг» завершил присоединение оптовой компании «Торикс»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119585-voronezhskiy-khoztorg-zavershil-prisoedinenie-optovoy-kompanii-toriks/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Воронежский «Хозторг»",
+   "asset": "оптовой компании «Торикс»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Воронежский «Хозторг» завершил присоединение оптовой компании «Торикс»",
+     "source": [
+      "Абирег",
+      "https://abireg.ru/newsitem/119585-voronezhskiy-khoztorg-zavershil-prisoedinenie-optovoy-kompanii-toriks/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Воронежский «Хозторг»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119585-voronezhskiy-khoztorg-zavershil-prisoedinenie-optovoy-kompanii-toriks/"
+     }
+    ],
+    "target": [
+     {
+      "value": "оптовой компании «Торикс»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119585-voronezhskiy-khoztorg-zavershil-prisoedinenie-optovoy-kompanii-toriks/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-25T13:53:47+00:00"
   }
  ]
 }
