@@ -54,7 +54,45 @@ def ingest_data_tests(path=None):
     return out
 
 
+def lost_post_marks(old, new):
+    """Отметки о постах, которые были в origin/main и пропали, хотя сделка в базе
+    осталась. 23 ноября 2026 коммит притока записал `telegram_posts` из 221 записи
+    вместо 1814 — стер 1593 отметки «пост не нужен»; через два дня владельцу пришли
+    проектами постов давно вышедшие «Астра ИИ» и «Арнест» («что это и откуда»).
+    git такую запись видит как обычную правку файла. Этап: ключ `<id сделки>-<вид>`."""
+    ids = {d.get('id') for d in new.get('deals') or []}
+    lost = []
+    for key in ('telegram_posts', 'telegram_posts_realty', 'telegram_milestones'):
+        o, n = old.get(key) or {}, new.get(key) or {}
+        if not (isinstance(o, dict) and isinstance(n, dict)):
+            continue
+        gone = [k for k in o if k not in n
+                and (k in ids or (key == 'telegram_milestones' and k.rsplit('-', 1)[0] in ids))]
+        if gone:
+            lost.append('%s: %d (%s)' % (key, len(gone), ', '.join(gone[:5])))
+    return lost
+
+
+def _lost_post_marks_against_main():
+    import json
+    try:
+        raw = subprocess.run(['git', 'show', 'origin/main:static/data/deals_promoted.json'], cwd=ROOT,
+                             capture_output=True, text=True, timeout=120).stdout
+        old = json.loads(raw)
+        new = json.load(open(os.path.join(ROOT, 'static', 'data', 'deals_promoted.json'), encoding='utf-8'))
+    except Exception as e:                                   # noqa: BLE001 — не прочитали: тесты ниже скажут свое
+        print('Отметки о постах не сверены (%s).' % e)
+        return []
+    return lost_post_marks(old, new)
+
+
 def main():
+    lost = [] if os.environ.get('POST_MARKS_OK') else _lost_post_marks_against_main()
+    if lost:
+        print('НЕ ПУШИТЬ: пропали отметки о постах у сделок, которые остались в базе — %s. '
+              'Так стирается «пост уже вышел / не нужен», и старые сделки приходят владельцу новыми постами. '
+              'Перечитайте базу перед записью; отметка снята намеренно — POST_MARKS_OK=1.' % '; '.join(lost))
+        return 1
     # ПРАВКА ФАКТА БЕЗ ПОДТВЕРЖДАЮЩЕЙ ЦИТАТЫ НЕ УХОДИТ В MAIN (19 ноября 2026). Раньше
     # `fact_edit_guard` звали только те скрипты, что сами о нем помнили; теперь его проходит
     # каждый пуш базы: что изменилось в фактах против origin/main — у всего есть цитата,
