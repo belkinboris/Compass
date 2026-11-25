@@ -19094,7 +19094,8 @@
   "d50564808": "auto-drop",
   "d47117362": "auto-drop",
   "d64835015": "enrich:gf3cd3078",
-  "d83064405": "take"
+  "d83064405": "take",
+  "d10534656": "take"
  },
  "enrich_log": {
   "d00507147": {
@@ -24651,6 +24652,12 @@
    "card": "gb0937865",
    "title": "Итоговый объем инвестиций в санаторий «Сестрорецкий курорт» составил 15 млрд рублей",
    "url": "https://vademec.ru/news/2026/11/25/itogovyy-obem-investitsiy-v-sanatoriy-sestroretskiy-kurort-sostavil-15-mlrd-rubley/"
+  },
+  "d10534656": {
+   "at": "2026-11-25T08:11:00+00:00",
+   "card": "gf3cd3078",
+   "title": "Владелец «Русского стандарта» Рустам Тарико продал конкурс «Мисс Россия»",
+   "url": "https://www.kommersant.ru/doc/9129760"
   }
  },
  "discarded_urls": {
