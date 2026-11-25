@@ -2583,6 +2583,7 @@ class MilestoneDraftIn(BaseModel):
     text: str
     buttons: dict | None = None
     route: list[str] = []
+    reply_to: int | None = None
 
 
 @router.post("/api/ops/milestone-draft")
@@ -2592,7 +2593,7 @@ def ops_milestone_draft(req: MilestoneDraftIn, db=Depends(get_db)):
     if not re.fullmatch(r"[\w-]{1,50}~[\w-]{1,30}", req.combo or ""):
         return JSONResponse({"error": "bad combo"}, status_code=400)
     value = json.dumps({"event_id": req.event_id, "text": req.text, "buttons": req.buttons,
-                        "route": list(req.route or []),
+                        "route": list(req.route or []), "reply_to": req.reply_to,
                         "stored_at": datetime.now(timezone.utc).isoformat(timespec="seconds")},
                        ensure_ascii=False)
     row = db.get(AppSetting, MILESTONE_DRAFT_PREFIX + req.combo)
@@ -2660,6 +2661,10 @@ def _instant_milestone_post(combo: str, decision_id: int, db=None) -> int | None
                    "disable_web_page_preview": True}
         if draft.get("buttons"):
             payload["reply_markup"] = draft["buttons"]
+        # этап — ответом на первый пост о сделке (владелец, 25 ноября 2026)
+        if isinstance(draft.get("reply_to"), int):
+            payload["reply_parameters"] = {"message_id": draft["reply_to"],
+                                           "allow_sending_without_reply": True}
         res = notification_service.tg_api("sendMessage", **payload) or {}
         if not res.get("ok"):
             logger.error("этап %s не опубликован сайтом: %s", combo, res.get("description"))

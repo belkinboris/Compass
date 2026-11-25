@@ -281,11 +281,16 @@ def post_is_old(deal, today=None):
         return True
 
 
-def post_message(client, token, chat_id, text, buttons=None):
+def post_message(client, token, chat_id, text, buttons=None, reply_to=None):
     payload = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML',
                'disable_web_page_preview': True}
     if buttons:
         payload['reply_markup'] = buttons
+    # Пост об этапе — ответом на первый пост о сделке (владелец, 25 ноября
+    # 2026, оферта «Т-Технологий»/«Циан»). Первый пост удалили — этап выйдет
+    # обычным сообщением, а не упадет.
+    if isinstance(reply_to, int):
+        payload['reply_parameters'] = {'message_id': reply_to, 'allow_sending_without_reply': True}
     r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
     body = r.json()
     if not body.get('ok'):
@@ -321,7 +326,7 @@ def edit_message(client, token, chat_id, message_id, text, buttons=None):
         raise TelegramError('editMessageText: %s' % (body.get('description') or r.text[:200]))
 
 
-def post_to_channels(client, token, addr, route, text, buttons):
+def post_to_channels(client, token, addr, route, text, buttons, reply_to=None):
     """Первый пост в каналы `route` по порядку. Возвращает ({канал: номер
     поста}, ошибка или None) — не бросает: пост, уже вышедший в первом
     канале, обязан быть записан, даже если второй канал отказал.
@@ -331,7 +336,8 @@ def post_to_channels(client, token, addr, route, text, buttons):
     mids = {}
     for ch in route:
         try:
-            mids[ch] = post_message(client, token, addr[ch], text, buttons)
+            mids[ch] = post_message(client, token, addr[ch], text, buttons,
+                                    reply_to=(reply_to or {}).get(ch))
         except TelegramError as e:
             return mids, '%s: %s' % ('канал недвижимости' if ch == channels.REALTY
                                      else 'основной канал', e)
@@ -1621,7 +1627,9 @@ def main(write, ignore_pace=False, skip_ids=frozenset(), wait_for_site=0):
                 failed.append((did, 'адрес канала «Компас - Недвижимость» неизвестен — пост ждет'))
                 continue
             route = channels.channels_for(deal, realty_known=True)
-            mids, error = post_to_channels(client, token, addr, route, text, buttons)
+            reply_to = {channels.MAIN: posts.get(did), channels.REALTY: realty_posts.get(did)} \
+                if kind == 'milestone' else None
+            mids, error = post_to_channels(client, token, addr, route, text, buttons, reply_to=reply_to)
             if error:
                 failed.append((did, error))
             if not mids:
