@@ -1,0 +1,1409 @@
+{
+ "made": "2026-11-25",
+ "drafts": [
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51747038",
+   "title": "Anthropic’s IPO could deliver $156 billion to charity",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d89954199",
+   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d78483493",
+   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d28699980",
+   "title": "В «Т-Банк Инвестициях» появился неоактив на акцию Anthropic после крупнейшего в мировой истории IPO на $81 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-20_v_t-bank_investitsiyah_poyavilsya"
+    ]
+   ],
+   "sum": "$81 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d64590518",
+   "title": "Anthropic после IPO стала седьмой самой дорогой компанией в мире",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/20/11/2026/6affe9e4459f2d4d30911be7"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88290423",
+   "title": "ВТБ сохраняет планы продажи пакета в «Пулково»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+    ]
+   ],
+   "sum": "15 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "\"Позиция ВТБ по продаже пакета в \"Пулково\" была озвучена председателем правления на ВЭФ-2025, и с тех пор она не изменилась: готовность и желание продать этот пакет есть\", - заявил гендиректор \"ВТБ инфраструктурный холдинг\" Антон Новиков в кулуарах форума…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g67cacd7e (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d67379680",
+   "title": "Anthropic – рекордное за всю историю размещение акций",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1377308.php"
+    ]
+   ],
+   "sum": "$81.34 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90645230",
+   "title": "Anthropic вышла на биржу с оценкой $1,5 трлн. Как прошло крупнейшее IPO в истории",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+    ]
+   ],
+   "sum": "$81,3 млрд",
+   "type": "IPO",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "18 ноября 2026 года Anthropic разместила акции по $83 за бумагу — выше первоначального диапазона $70–78. Компания продала 956,4 млн акций, а ее сооснователи — еще 23,6 млн. IPO принесло $81,3 млрд, а оценка Anthropic достигла примерно $1,5 трлн. Это…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d69351357",
+   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9126673"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d64858449",
+   "title": "После IPO Anthropic занял седьмое место среди самых дорогих компаний мира",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114412"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d38808793",
+   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/aktsii-875433275.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d58423037",
+   "title": "Anthropic по итогам IPO привлекла $93,5 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/317394"
+    ]
+   ],
+   "sum": "$93,5 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Anthropic по итогам IPO",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Anthropic по итогам IPO",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic’s IPO could deliver $156 billion to charity» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d10534656",
+   "title": "Владелец «Русского стандарта» Рустам Тарико продал конкурс «Мисс Россия»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9129760"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Как обратил внимание “Ъ” в СПАРК, 14 сентября 2026 года у «Национального конкурса красоты» (НКК), который ежегодно проводит конкурс «Мисс Россия», сменился собственник. Вместо холдинга «Русский стандарт» Рустама Тарико, проводившего конкурс с 2005 года, новым…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9129760"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "конкурс «Мисс Россия»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "конкурс «Мисс Россия»",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d26268487",
+   "title": "В 25 регионах приняли решение о запрете розничной продажи вейпов",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/reshenie-875517560.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d23485316",
+   "title": "Продажи цифровых кодов игры GTA VI в «М.Видео» выросли в 10,6 раза",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/prodazhi-875517262.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8e847626 (общие редкие слова: 10, продаж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d09210094",
+   "title": "Как продать технологию и не продать самостоятельность",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261125/tekhnologii-875489879.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d30042120",
+   "title": "Продажи GTA 6 в «М.Видео» выросли почти в 11 раз за неделю",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261125/gta-2133760284.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Продажи цифровых кодов игры GTA VI в «М.Видео» выросли в 10,» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d51238950",
+   "title": "Тест на советские цены: вспомните, что можно было купить на 1, 3 и 5 копеек",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/articles/1053147129"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d52938682",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/food/2026/11/25/76787046/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d28640101",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:74.ru",
+     "https://74.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:74.ru",
+      "https://74.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d54712920",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/food/2026/11/25/76787023/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63875340",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ngs24.ru",
+     "https://ngs24.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:ngs24.ru",
+      "https://ngs24.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d86609860",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/food/2026/11/25/76787032/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d13859414",
+   "title": "«Москвич» за 6,5 миллиона рублей: под Новосибирском продают полувековой советский седан по цене премиального «китайца»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/auto/2026/11/25/76785842/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d07720822",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d91551709",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/food/2026/11/25/76787020/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d33398645",
+   "title": "«Где купить глаза?» Екатеринбуржцы разнесли новую выходку SHAMAN'а — он решил облизнуть гитару на шоу",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/entertainment/2026/11/25/76788235/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05145382",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:e1.ru",
+     "https://www.e1.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:e1.ru",
+      "https://www.e1.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d56460347",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/food/2026/11/25/76787036/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d87215202",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:59.ru",
+      "https://59.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d10256060",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:63.ru",
+      "https://63.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d30472620",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/food/2026/11/25/76787043/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d86903872",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:72.ru",
+     "https://72.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:72.ru",
+      "https://72.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d47711313",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:161.ru",
+     "https://161.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:161.ru",
+      "https://161.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d54998416",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:93.ru",
+      "https://93.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d19153891",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:116.ru",
+     "https://116.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:116.ru",
+      "https://116.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d85705190",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:v1.ru",
+     "https://v1.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:v1.ru",
+      "https://v1.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d26691145",
+   "title": "Как выбрать красную икру к Новому году и не купить подделку за 20 тысяч: проверяем состав, консерванты и условия хранения",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/food/2026/11/25/76787044/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d32804702",
+   "title": "«Похоже на останки человека». Блогер купила старинную квартиру в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:ufa1.ru",
+     "https://ufa1.ru/text/incidents/2026/11/25/76788215/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-24",
+     "title": "Сделка завершена",
+     "note": "Останки лежали под полом",
+     "source": [
+      "web:ufa1.ru",
+      "https://ufa1.ru/text/incidents/2026/11/25/76788215/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "старинная квартира в Санкт-Петербурге — она оказалась полна костей. Жуткие кадры",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что ««Похоже на останки человека». Блогер купила старинную кварти» — второе издание, в группу не шлем"
+   ]
+  }
+ ]
+}
