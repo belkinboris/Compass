@@ -29,7 +29,22 @@ import context_analysis
 import deal_analysis
 import scrape_guard
 from company_catalog import get_company_profile
-from deal_catalog import get_deal
+from deal_catalog import get_deal as _published_deal
+
+
+def get_deal(deal_id):
+    """Карточка базы, а если ее еще нет — карточка предпросмотра из очереди
+    (`pending.json`). 26 ноября 2026 партнер открыл предпросмотр «ЛУКОЙЛа»
+    (#/preview/g707211ba) перед решением и нажал «Разбор сделки» — сервер
+    отвечал 404, а экран писал «Ассистент сейчас недоступен». Карточку,
+    которую владелец решает публиковать, разбирают как раз до публикации."""
+    deal = _published_deal(deal_id)
+    if deal:
+        return deal
+    for card in (core._read_json("static/data/pending.json", {}) or {}).get("cards") or []:
+        if str(card.get("id")) == str(deal_id):
+            return card
+    return None
 from db.models import (
     AssistantAnonQuestion,
     AssistantFeedback,
