@@ -1,0 +1,89 @@
+{
+ "made": "2026-11-25",
+ "items": [
+  {
+   "key": "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre::g85fd24fd",
+   "candidate_id": "g85fd24fd",
+   "reason": "по всей базе: та же сторона и редкое слово: кварти",
+   "draft": {
+    "draft_id": "d82416236",
+    "title": "ИТ-компания приобрела четыре этажа под штаб-квартиру в деловом центре Valtri на Белорусской",
+    "date": "2026-11-25",
+    "src": [
+     [
+      "web:cnews.ru",
+      "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-25",
+      "title": "Сделка завершена",
+      "note": "Компания из сектора ИТ приобрела 4,84 тыс. кв. м под штаб-квартиру в деловом комплексе Valtri, строящемся компанией...",
+      "source": [
+       "web:cnews.ru",
+       "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre"
+      ]
+     }
+    ],
+    "buyer_name": "ИТ-компания",
+    "asset": "четыре этажа под штаб-квартиру в деловом центре Valtri на Белорусской",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "ИТ-компания",
+     "asset": "четыре этажа под штаб-квартиру в деловом центре Valtri на Белорусской",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-25"
+  },
+  {
+   "key": "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/::gf3cd3078",
+   "candidate_id": "gf3cd3078",
+   "reason": "по всей базе: совпали две стороны (asset, seller)",
+   "draft": {
+    "draft_id": "d10034829",
+    "title": "«Русский стандарт» продал конкурс «Мисс Россия»",
+    "date": "2026-11-25",
+    "src": [
+     [
+      "web:retailer.ru",
+      "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/"
+     ]
+    ],
+    "sum": "100 млн ₽",
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-25",
+      "title": "Сделка завершена",
+      "note": "Гендиректор «Infoline-аналитики» Михаил Бурмистров оценивает стоимость бизнеса НКК в 80–100 млн руб. Сообщение «Русский стандарт» продал конкурс «Мисс Россия» появились сначала на RETAILER.ru .",
+      "source": [
+       "web:retailer.ru",
+       "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "конкурс «Мисс Россия»",
+    "seller": "«Русский стандарт»",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "конкурс «Мисс Россия»",
+     "seller": "«Русский стандарт»"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-25"
+  }
+ ]
+}

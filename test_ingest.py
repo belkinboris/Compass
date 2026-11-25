@@ -5654,7 +5654,7 @@ def test_postworthy_milestone_kinds_is_the_closed_v1_list():
     канал, закрытый и узкий — `signed` сознательно не в v1, `negotiations`
     никогда не был кандидатом (это состояние сделки, а не новость о ней)."""
     import review
-    assert review.POSTWORTHY_MILESTONE_KINDS == {"approval", "closed", "cancelled"}
+    assert review.POSTWORTHY_MILESTONE_KINDS == {"approval", "closed", "cancelled", "offer"}
 
 
 def test_enrich_does_not_duplicate_an_event_of_the_same_kind_and_date():

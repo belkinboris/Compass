@@ -60,7 +60,7 @@ HOLD_DIR = os.path.join(ROOT, 'data', 'inbox', 'hold')
 FIXES_DIR = os.path.join(HERE, 'fixes')
 
 VERDICTS = {'same_fact', 'new_stage', 'enrich', 'separate', 'unclear'}
-EVENT_KINDS = {'negotiations', 'approval', 'signed', 'closed', 'cancelled'}
+EVENT_KINDS = {'negotiations', 'approval', 'signed', 'closed', 'cancelled', 'offer'}
 
 
 def today():
