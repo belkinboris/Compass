@@ -1286,7 +1286,7 @@ def test_newsworthy_milestones_are_well_formed(deals):
     from pathlib import Path as _Path
     _sys.path.insert(0, str(_Path(__file__).resolve().parent / "pipeline" / "ingest"))
     import review
-    known_kinds = {"negotiations", "signed", "approval", "closed", "cancelled"}
+    known_kinds = {"negotiations", "signed", "approval", "closed", "cancelled", "offer"}
     bad = []
     for d in deals:
         for e in d.get("events") or []:

@@ -64,7 +64,7 @@ INDEX_HTML = ROOT / 'static' / 'index.html'
 PLACEHOLDER = re.compile(
     r'^\s*(—|-|не раскрыт[а-яё]*|публично не сообщалось|не привлекал[а-яё]*|нет данных|неизвестно)?\s*\.?\s*$',
     re.I)
-EVENT_KINDS = {'closed', 'negotiations', 'cancelled', 'signed', 'approval', 'other', 'registered', 'announced'}
+EVENT_KINDS = {'closed', 'negotiations', 'cancelled', 'signed', 'approval', 'other', 'registered', 'announced', 'offer'}
 DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 ID_FIELDS = {'buyer', 'seller_id', 'target', 'asset_id'}
 
