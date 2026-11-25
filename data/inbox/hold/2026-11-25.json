@@ -598,53 +598,13 @@
    ]
   },
   {
-   "draft_id": "d56746716",
-   "title": "Продажи билетов на детские новогодние мероприятия превысили 660 млн рублей",
+   "draft_id": "d41165739",
+   "title": "«Не только Бродский»: в Музее Бродского расскажут о забытых местах и именах ленинградского андеграунда",
    "date": "2026-11-25",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9130240"
-    ]
-   ],
-   "sum": "660 млн ₽",
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-25",
-     "title": "Сделка завершена",
-     "note": "Средняя стоимость купленных билетов на детские новогодние елки выросла на 8% и составила более 3 тыс. руб., рассказали “Ъ” в «Яндекс Афише». Аналогично вырос и средний чек заказа — на 9%, до 8,1 тыс. руб. В целом на этапе предпродаж до 23 ноября 2026 года…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9130240"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g90784f0a (общие редкие слова: детски, продаж, рублей) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d08103830",
-   "title": "Дата следующего раунда переговоров по Украине пока не определена",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1131284"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/25/76789432/"
     ]
    ],
    "sum": null,
@@ -666,70 +626,13 @@
    ]
   },
   {
-   "draft_id": "d09551881",
-   "title": "Песков: дата следующего раунда переговоров по урегулированию на Украине не определена",
+   "draft_id": "d04328612",
+   "title": "Tank 300 стал лидером премиального авторынка в России — продажи за месяц превысили 1 тыс. машин",
    "date": "2026-11-25",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/politika/28353529"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d97432162",
-   "title": "Организатор конкурса «Мисс Россия» перешел компании «Атернум Капитал»",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261125/organizator-875538044.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf3cd3078 (по всей базе: та же сторона и редкое слово: конкур) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d06801153",
-   "title": "Российская пенсионерка финансировала покупку БПЛА для ВСУ",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/rossiyskaya-pensionerka-finansirovala-pokupku-bpla-dlya-vsu/"
+     "web:rb.ru",
+     "https://rb.ru/news/tank-300-stal-liderom-premialnogo-avtorynka-v-rossii-prodazhi-za-mesyac-prevysili-1-tys-mashin/"
     ]
    ],
    "sum": null,
@@ -751,13 +654,41 @@
    ]
   },
   {
-   "draft_id": "d06113333",
-   "title": "Россияне устремились в ломбарды после расточительного шопинга на распродажах",
+   "draft_id": "d13561913",
+   "title": "С 1 декабря «Аэрофлот» запустит период охлаждения при покупке билетов",
    "date": "2026-11-25",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/rossiyane-nashli-novyy-sposob-borby-s-depressiey/"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/317901"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Транспорт и логистика",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d29109796",
+   "title": "В Челябинске продается брутальный дом с окнами-бойницами за 40 млн. Фото",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053147255"
     ]
    ],
    "sum": null,
