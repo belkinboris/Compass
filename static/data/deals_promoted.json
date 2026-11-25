@@ -265647,15 +265647,72 @@
      "value_rub": 59800000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
+     "basis": "verified",
      "card_hash": "03acc1ae5aab",
-     "any_rub": 59800000.0
+     "any_rub": 59800000.0,
+     "meaning_variants": [
+      "disclosed"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "В итоге этаж здания бывшего ЦНТИ продан по начальной цене — 59,8 миллиона рублей.",
+     "source": "https://74.ru/text/business/2026/11/19/76777277/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value_rub": 59800000.0,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "В итоге этаж здания бывшего ЦНТИ продан по начальной цене — 59,8 миллиона рублей.",
+       "source": "https://74.ru/text/business/2026/11/19/76777277/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 59800000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "В итоге этаж здания бывшего ЦНТИ продан по начальной цене — 59,8 миллиона рублей.",
+       "source": "https://74.ru/text/business/2026/11/19/76777277/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-19",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "3eac5e2c2439"
+     "meaning": "closing",
+     "basis": "verified",
+     "card_hash": "00e9b4c9b38f",
+     "meaning_variants": [
+      "closing",
+      "registry"
+     ],
+     "quote": "В четверг, 19 ноября, итоговый протокол размещен на портале «ГИС. Торги».",
+     "source": "https://74.ru/text/business/2026/11/19/76777277/",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value": "2026-11-19",
+       "meaning": "registry",
+       "quote": "В четверг, 19 ноября, итоговый протокол размещен на портале «ГИС. Торги».",
+       "source": "https://74.ru/text/business/2026/11/19/76777277/",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-19",
+       "meaning": "closing",
+       "quote": "В четверг, 19 ноября, итоговый протокол размещен на портале «ГИС. Торги».",
+       "source": "https://74.ru/text/business/2026/11/19/76777277/",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -265688,8 +265745,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_author_unknown",
+     "top_purchases": "price_author_unknown",
      "multiple_text": "not_control_change",
      "all_sums": "ok"
     }
@@ -265815,7 +265872,8 @@
    ],
    "second_read": "2026-11-24",
    "second_read_hash": "95ceb02df126.602e88",
-   "separate_transaction_reviewed": true
+   "separate_transaction_reviewed": true,
+   "date_basis": "closing"
   },
   {
    "id": "g5850b57f",
@@ -279820,18 +279878,75 @@
      "card_hash": "cd951265f4e9"
     },
     "price": {
-     "value_rub": 90000000.0,
-     "meaning": "disclosed",
+     "value_rub": null,
+     "meaning": "reported",
      "scope": "unknown",
-     "basis": "rule",
-     "card_hash": "98df48d07ae3",
-     "any_rub": null
+     "basis": "verified",
+     "card_hash": "81d956fe7d7b",
+     "any_rub": null,
+     "meaning_variants": [
+      "reported"
+     ],
+     "scope_basis": "unknown",
+     "scope_variants": [
+      "unknown"
+     ],
+     "quote": "Стоимость актива составляет 90 млн рублей.",
+     "source": "https://ura.news/news/1053141355",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value_rub": 90000000.0,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Стоимость актива составляет 90 млн рублей.",
+       "source": "https://ura.news/news/1053141355",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 90000000,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Стоимость актива составляет 90 млн рублей.",
+       "source": "https://ura.news/news/1053141355",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-03",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "ed3c3dbd966f"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "90a101985548",
+     "meaning_variants": [
+      "announcement",
+      "publication"
+     ],
+     "quote": "03 ноября 2026 в 20:48 В Пермском крае рядом с популярным санаторием выставили на продажу детский лагерь",
+     "source": "https://ura.news/news/1053141355",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value": "2026-11-03",
+       "meaning": "publication",
+       "quote": "03 ноября 2026 в 20:48 В Пермском крае рядом с популярным санаторием выставили на продажу детский лагерь",
+       "source": "https://ura.news/news/1053141355",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-03",
+       "meaning": "announcement",
+       "quote": "В пермской Усть-Качке продают за 90 млн рублей детский лагерь 03 ноября 2026 в 20:48",
+       "source": "https://ura.news/news/1053141355",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -279864,8 +279979,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
@@ -279874,7 +279989,9 @@
    "reread_hash": "4e2ffec83af4.ace5bd",
    "reread_scope": "short",
    "reread_note": "статьи: 1",
-   "deep_researched": "2026-11-09"
+   "deep_researched": "2026-11-09",
+   "sum_basis": "reported",
+   "date_basis": "publication"
   },
   {
    "date": "2025-06-17",
@@ -298091,15 +298208,85 @@
      "value_rub": 96000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
+     "basis": "disputed",
      "card_hash": "c9025904b229",
-     "any_rub": null
+     "any_rub": null,
+     "disputed": [
+      {
+       "value_rub": 96000000.0,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Заявленная стоимость объектов составляет 96 миллионов рублей.",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 96000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "Заявленная стоимость объектов составляет 96 миллионов рублей.",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Заявленная стоимость объектов составляет 96 миллионов рублей.",
+     "source": "https://ura.news/news/1053141847",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value_rub": 96000000.0,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Заявленная стоимость объектов составляет 96 миллионов рублей.",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 96000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "Заявленная стоимость объектов составляет 96 миллионов рублей.",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-05",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "85f452d43946"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "7d2f6add65ea",
+     "meaning_variants": [
+      "announcement",
+      "publication"
+     ],
+     "quote": "05 ноября 2026 в 21:20 В Тюмени по частям продают торговый центр «Премьер»",
+     "source": "https://ura.news/news/1053141847",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value": "2026-11-05",
+       "meaning": "publication",
+       "quote": "05 ноября 2026 в 21:20 В Тюмени по частям продают торговый центр «Премьер»",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-05",
+       "meaning": "announcement",
+       "quote": "В Тюмени за 96 миллионов продают цоколь ТРЦ Премьер 05 ноября 2026 в 21:20",
+       "source": "https://ura.news/news/1053141847",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -298132,8 +298319,8 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
@@ -298141,7 +298328,8 @@
    "reread": "2026-11-09",
    "reread_hash": "a86a6f25e8c4.c2423e",
    "reread_scope": "short",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "date_basis": "publication"
   },
   {
    "id": "gfd435463",
@@ -326417,15 +326605,85 @@
      "value_rub": 109000000.0,
      "meaning": "disclosed",
      "scope": "unknown",
-     "basis": "rule",
+     "basis": "disputed",
      "card_hash": "e09f40e67575",
-     "any_rub": null
+     "any_rub": null,
+     "disputed": [
+      {
+       "value_rub": 109000000.0,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Арендатор — театр „Аккумулятор“. Стоимость объекта — 109 млн рублей",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 109000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "«Характеристики объекта: первая линия, отдельно стоящее здание, витражное остекление, очень высокий автомобильный и пешеходный трафик, удобный транспортный заезд и собственная большая парковка. Арендатор — театр „Аккумулятор“. Стоимость объекта — 109 млн рублей», — указано в одной из публикаций. Продолжение после рекламы В компании «Колесник» агентству подтвердили продажу объекта.",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ],
+     "quote": "Арендатор — театр „Аккумулятор“. Стоимость объекта — 109 млн рублей",
+     "source": "https://ura.news/news/1053145578",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value_rub": 109000000.0,
+       "meaning": "reported",
+       "scope": "unknown",
+       "quote": "Арендатор — театр „Аккумулятор“. Стоимость объекта — 109 млн рублей",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value_rub": 109000000,
+       "meaning": "disclosed",
+       "scope": "unknown",
+       "quote": "«Характеристики объекта: первая линия, отдельно стоящее здание, витражное остекление, очень высокий автомобильный и пешеходный трафик, удобный транспортный заезд и собственная большая парковка. Арендатор — театр „Аккумулятор“. Стоимость объекта — 109 млн рублей», — указано в одной из публикаций. Продолжение после рекламы В компании «Колесник» агентству подтвердили продажу объекта.",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "date": {
      "value": "2026-11-19",
-     "meaning": "unknown",
-     "basis": "rule",
-     "card_hash": "ec00bb49261f"
+     "meaning": "publication",
+     "basis": "verified",
+     "card_hash": "bcedc4ce3f65",
+     "meaning_variants": [
+      "announcement",
+      "publication"
+     ],
+     "quote": "19 ноября 2026 в 13:04 Тюменский театр выставили на продажу",
+     "source": "https://ura.news/news/1053145578",
+     "verified_by": "model×2",
+     "verified_at": "2026-11-25",
+     "readings": [
+      {
+       "value": "2026-11-19",
+       "meaning": "publication",
+       "quote": "19 ноября 2026 в 13:04 Тюменский театр выставили на продажу",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "A"
+      },
+      {
+       "value": "2026-11-19",
+       "meaning": "announcement",
+       "quote": "В Тюмени габ с театром «Аккумулятор» продают за 109 миллионов рублей 19 ноября 2026 в 13:04",
+       "source": "https://ura.news/news/1053145578",
+       "quote_checked": true,
+       "reader": "B"
+      }
+     ]
     },
     "nature": {
      "control_change": true,
@@ -326458,15 +326716,16 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "price_not_read",
-     "top_purchases": "price_not_read",
+     "purchase_sums": "price_disputed",
+     "top_purchases": "price_disputed",
      "multiple_text": "no_target",
      "all_sums": "talks"
     }
    },
    "reread": "2026-11-24",
    "reread_hash": "b6a10d65799b.2e3e18",
-   "reread_note": "статьи: 1"
+   "reread_note": "статьи: 1",
+   "date_basis": "publication"
   },
   {
    "id": "gfa56e747",
