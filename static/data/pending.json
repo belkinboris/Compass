@@ -279,6 +279,71 @@
     "draft_id": "d83064405",
     "title": "Итоговый объем инвестиций в санаторий «Сестрорецкий курорт» составил 15 млрд рублей"
    }
+  },
+  {
+   "id": "g1b1f27d3",
+   "date": "2026-11-25",
+   "title": "Водочный магнат продал «Мисс Россию»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/25/vodochnyy-magnat-prodal-miss-rossiyu/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Водочный магнат",
+   "asset": "«Мисс Россию»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/25/vodochnyy-magnat-prodal-miss-rossiyu/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "«Мисс Россию»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/25/vodochnyy-magnat-prodal-miss-rossiyu/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Водочный магнат",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/25/vodochnyy-magnat-prodal-miss-rossiyu/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-25T09:04:23+00:00"
   }
  ]
 }
