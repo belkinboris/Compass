@@ -901,85 +901,17 @@
    ]
   },
   {
-   "draft_id": "d34983062",
-   "title": "ОМК приобрела Волгореченский трубный завод у «Газпрома» 🟢 Статус сделки: закрыта 24 ноября 2026 г. Об объекте сделки 100% акций АО «Газпром трубинвест» (Волгореченский трубный завод) — металлургическо",
+   "draft_id": "d71767344",
+   "title": "BMW в Китае открыла продажи удлиненного кроссовера",
    "date": "2026-11-25",
    "src": [
     [
-     "tg:dealsma",
-     "https://t.me/dealsma/7613"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/25/bmw-v-kitae-otkryla-prodazhi-udlinennogo-krossovera/"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-25",
-     "title": "Сделка завершена",
-     "note": "ОМК приобрела Волгореченский трубный завод у «Газпрома» 🟢 Статус сделки: закрыта 24 ноября 2026 г. Об объекте сделки 100% акций АО «Газпром трубинвест» (Волгореченский трубный завод) — металлургическое предприятие в Волгореченске Костромской области. Завод…",
-     "source": [
-      "tg:dealsma",
-      "https://t.me/dealsma/7613"
-     ]
-    }
-   ],
-   "buyer_name": "ОМК",
-   "asset": "Волгореченский трубный завод",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "ОМК",
-    "asset": "Волгореченский трубный завод",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "похоже на уже описанную сделку g542addc3 (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d78190435",
-   "title": "Суд обратил в доход государства активы экс-главы Ростова-на-Дону Логвиненко на 1,6 млрд рублей",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119582-sud-obratil-v-dokhod-gosudarstva-aktivy-eks-glavy-rostova-na-donu-logvinenko-na-1-6-mlrd-rubley/"
-    ]
-   ],
-   "sum": "1,6 млрд ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d22719610",
-   "title": "Flipkart CEO Kalyan Krishnamurthy to step down next week amid IPO uncertainty",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/25/flipkart-ceo-kalyan-krishnamurthy-to-step-down-next-week-amid-ipo-uncertainty/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -998,13 +930,13 @@
    ]
   },
   {
-   "draft_id": "d59575498",
-   "title": "В ЦУМе начали продавать шарфы за 117 тысяч рублей",
+   "draft_id": "d33883749",
+   "title": "Rockstar готова продать права на экранизацию Red Dead Redemption",
    "date": "2026-11-25",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/v-tsume-nachali-prodavat-sharfy-za-117-tysyach-rubley/"
+     "https://lenta.ru/news/2026/11/25/rdr-movie/"
     ]
    ],
    "sum": null,
@@ -1022,49 +954,22 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d45458756",
-   "title": "Картина Айвазовского ушла с молотка в Лондоне",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/kartina-ayvazovskogo-ushla-s-molotka-v-londone/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d64505811",
-   "title": "Путин заинтересовал одну из богатейших стран мира в инвестициях в РФ",
+   "draft_id": "d08118246",
+   "title": "В Екатеринбурге выставили на продажу резиденцию за 147 млн рублей. Фото",
    "date": "2026-11-25",
    "src": [
     [
      "web:ura.news",
-     "https://ura.news/articles/1053147347"
+     "https://ura.news/news/1053147373"
     ]
    ],
-   "sum": null,
-   "type": "Инвестиция",
+   "sum": "147 млн ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -1078,35 +983,6 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d08699359",
-   "title": "Кассационный суд не увидел ничего подозрительного в цепочке сделок по продаже аптечного бизнеса ГК «РОСТА» структурам «Эркафарма» в 2017 году. Судебный акт апелляционной инстанции о необходимости стор",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7614"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
