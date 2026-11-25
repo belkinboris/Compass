@@ -12862,3 +12862,14 @@ def test_for_sale_listing_of_an_object_is_not_a_deal_but_a_business_for_sale_is(
     ]
     assert all(promote.is_open_listing(c) for c in gone), [c["title"] for c in gone if not promote.is_open_listing(c)]
     assert not any(promote.is_open_listing(c) for c in stay), [c["title"] for c in stay if promote.is_open_listing(c)]
+
+
+def test_post_check_accepts_shareholders_of_a_named_company_as_the_seller():
+    """Оферта всем акционерам («Т-Технологии»/«Циан», 25 ноября 2026): продавец
+    «Акционеры «Циана»» — точное имя, вычитка пост не задерживает; безымянные
+    «Акционеры компании» по-прежнему ловятся."""
+    import check_post
+    ok = "<b>Заголовок</b>\n\n<b>Покупатель:</b> Группа Т-Технологии\n<b>Продавец:</b> Акционеры «Циана»\n<b>Статус:</b> Обсуждается"
+    bad = ok.replace("Акционеры «Циана»", "Акционеры компании")
+    assert not [p for p in check_post.check(ok) if "родовое" in p]
+    assert [p for p in check_post.check(bad) if "родовое" in p]
