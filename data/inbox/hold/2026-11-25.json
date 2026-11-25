@@ -598,16 +598,45 @@
    ]
   },
   {
-   "draft_id": "d56746716",
-   "title": "Продажи билетов на детские новогодние мероприятия превысили 660 млн рублей",
+   "draft_id": "d17462643",
+   "title": "Бывший глава брокера «Алор» Калин вышел из капитала «Яндекса»",
    "date": "2026-11-25",
    "src": [
     [
      "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9130240"
+     "https://www.kommersant.ru/doc/9130665"
     ]
    ],
-   "sum": "660 млн ₽",
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g6bf41023 (по всей базе: та же сторона и редкое слово: брокер) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d85109761",
+   "title": "Предприниматель Леван Назаров приобрел крупный пакет акций «Циана»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/25/1415388-levan-priobrel-paket"
+    ]
+   ],
+   "sum": null,
    "type": "M&A",
    "status": "Закрыта",
    "events": [
@@ -615,121 +644,35 @@
      "kind": "closed",
      "date": "2026-11-25",
      "title": "Сделка завершена",
-     "note": "Средняя стоимость купленных билетов на детские новогодние елки выросла на 8% и составила более 3 тыс. руб., рассказали “Ъ” в «Яндекс Афише». Аналогично вырос и средний чек заказа — на 9%, до 8,1 тыс. руб. В целом на этапе предпродаж до 23 ноября 2026 года…",
+     "note": "",
      "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9130240"
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/11/25/1415388-levan-priobrel-paket"
      ]
     }
    ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "крупный пакет акций «Циана»",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "крупный пакет акций «Циана»",
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g90784f0a (общие редкие слова: детски, продаж, рублей) — проверьте, не дубль ли"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
-   "draft_id": "d08103830",
-   "title": "Дата следующего раунда переговоров по Украине пока не определена",
+   "draft_id": "d97966142",
+   "title": "Американский консорциум объявил о сделке о покупке активов «Лукойла»",
    "date": "2026-11-25",
    "src": [
     [
-     "web:interfax.ru",
-     "https://www.interfax.ru/russia/1131284"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d09551881",
-   "title": "Песков: дата следующего раунда переговоров по урегулированию на Украине не определена",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/politika/28353529"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d97432162",
-   "title": "Организатор конкурса «Мисс Россия» перешел компании «Атернум Капитал»",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261125/organizator-875538044.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gf3cd3078 (по всей базе: та же сторона и редкое слово: конкур) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d06801153",
-   "title": "Российская пенсионерка финансировала покупку БПЛА для ВСУ",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/rossiyskaya-pensionerka-finansirovala-pokupku-bpla-dlya-vsu/"
+     "web:ria.ru",
+     "https://ria.ru/20261125/lukoyl-2133967404.html"
     ]
    ],
    "sum": null,
@@ -751,13 +694,82 @@
    ]
   },
   {
-   "draft_id": "d06113333",
-   "title": "Россияне устремились в ломбарды после расточительного шопинга на распродажах",
+   "draft_id": "d52822326",
+   "title": "Основатель «Баланс-платформы» купил крупный пакет акций «Циана»",
    "date": "2026-11-25",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/25/rossiyane-nashli-novyy-sposob-borby-s-depressiey/"
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/318136"
+    ]
+   ],
+   "sum": "15 млрд ₽",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-25",
+     "title": "Сделка завершена",
+     "note": "Доля Левана Назарова может достигать 20% и стоить 14-15 млрд рублей Сообщение Основатель «Баланс-платформы» купил крупный пакет акций «Циана» появилось сначала на Frank Media .",
+     "source": [
+      "web:frankmedia.ru",
+      "https://frankmedia.ru/318136"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "крупный пакет акций «Циана»",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "крупный пакет акций «Циана»",
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Предприниматель Леван Назаров приобрел крупный пакет акций «» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d20632674",
+   "title": "Российская Neiry начала продавать услуги аэрофотосъёмки с помощью голубей-«биодронов»",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/tech/3278920-neiry-aerofotosyemka-golubei-biodronov?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12783896",
+   "title": "Суд обратил в доход государства имущество экс-главы Ростова-на-Дону",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261125/sud-2133963333.html"
     ]
    ],
    "sum": null,

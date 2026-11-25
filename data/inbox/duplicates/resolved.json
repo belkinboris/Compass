@@ -518,5 +518,20 @@
   "verdict": "separate",
   "candidate_id": "g85e07f6d",
   "day": "2026-11-24"
+ },
+ "https://www.cnews.ru/news/line/2026-11-25_it-kompaniya_priobrela_chetyre::g85fd24fd": {
+  "verdict": "separate",
+  "candidate_id": "g85fd24fd",
+  "day": "2026-11-25"
+ },
+ "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/::gf3cd3078": {
+  "verdict": "same_fact",
+  "candidate_id": "gf3cd3078",
+  "day": "2026-11-25"
+ },
+ "https://retailer.ru/russkij-standart-prodal-konkurs-miss-rossija/::g1b1f27d3": {
+  "verdict": "same_fact",
+  "candidate_id": "g1b1f27d3",
+  "day": "2026-11-25"
  }
 }

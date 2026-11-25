@@ -12923,3 +12923,21 @@ def test_ship_decisions_counts_a_stage_post_decision_as_a_decision(monkeypatch):
         {"deal_id": "gabc", "verdict": "approve"}])
     rows = ship_decisions.stage_decision_rows()
     assert len(rows) == 1 and rows[0].startswith("ЭТАП") and "g9b4c2e71~offer" in rows[0]
+
+
+def test_prepush_refuses_a_base_that_lost_post_marks():
+    """23 ноября 2026: коммит притока стер 1593 отметки «пост не нужен»
+    (`telegram_posts` 1814 → 221); 25 ноября владельцу пришли проектами постов
+    давно вышедшие сделки. Пропажа отметки у сделки, оставшейся в базе, — стоп."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("prepush_check", "pipeline/prepush_check.py")
+    pc = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pc)
+    old = {"deals": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
+           "telegram_posts": {"a": None, "b": 12, "c": None}, "telegram_milestones": {"a-closed": {"message_id": 5}}}
+    same = {"deals": [{"id": "a"}, {"id": "b"}], "telegram_posts": {"a": None, "b": 12},
+            "telegram_milestones": {"a-closed": {"message_id": 5}}}
+    assert pc.lost_post_marks(old, same) == []          # сделку c удалили вместе с отметкой — не пропажа
+    wiped = {"deals": [{"id": "a"}, {"id": "b"}, {"id": "c"}], "telegram_posts": {"b": 12}, "telegram_milestones": {}}
+    got = pc.lost_post_marks(old, wiped)
+    assert len(got) == 2 and got[0].startswith("telegram_posts: 2") and "a-closed" in got[1]

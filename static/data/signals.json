@@ -2,6 +2,19 @@
  "updated": "2026-11-25",
  "signals": [
   {
+   "id": "sa75332733",
+   "company_id": "g5c8c6494",
+   "date": "2026-11-25",
+   "kind": "buy",
+   "summary": "ЛУКОЙЛ — присматривает новые покупки",
+   "source": [
+    "kommersant.ru",
+    "https://www.kommersant.ru/doc/9130738"
+   ],
+   "origin": "news",
+   "strength": "normal"
+  },
+  {
    "id": "sc01d8a991",
    "company_id": "g4f2ebf90",
    "date": "2026-11-23",
