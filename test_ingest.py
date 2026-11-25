@@ -12873,3 +12873,40 @@ def test_post_check_accepts_shareholders_of_a_named_company_as_the_seller():
     bad = ok.replace("Акционеры «Циана»", "Акционеры компании")
     assert not [p for p in check_post.check(ok) if "родовое" in p]
     assert [p for p in check_post.check(bad) if "родовое" in p]
+
+
+def test_stage_post_goes_out_as_a_reply_to_the_first_post_of_the_deal():
+    """Владелец, 25 ноября 2026 (оферта «Т-Технологий»/«Циан»): пост об этапе —
+    ответом на первый пост о сделке. Номер первого поста уходит и в запрос
+    Telegram рутины, и в черновик, который по кнопке публикует сайт."""
+    import send_telegram
+    import send_milestone_drafts
+
+    class _R:
+        def json(self):
+            return {"ok": True, "result": {"message_id": 7}}
+
+    class _C:
+        def __init__(self):
+            self.sent = []
+
+        def post(self, url, json=None):
+            self.sent.append(json)
+            return _R()
+
+    c = _C()
+    assert send_telegram.post_message(c, "t", "@ch", "текст", None, reply_to=258) == 7
+    assert c.sent[0]["reply_parameters"] == {"message_id": 258, "allow_sending_without_reply": True}
+    send_telegram.post_message(c, "t", "@ch", "текст", None)
+    assert "reply_parameters" not in c.sent[1]
+    deal = {"id": "gx", "title": "А купил Б", "type": "M&A", "status": "Обсуждается", "ind": "ИТ и интернет",
+            "src": [["РБК", "https://rbc.ru/a"]]}
+    event = {"id": "gx-offer", "kind": "offer", "date": "2026-11-24", "headline": "А направил оферту акционерам «Б»",
+             "source": ["РБК", "https://rbc.ru/a"],
+             "snapshot": {"title": "А купил Б", "type": "M&A", "status": "Обсуждается", "buyer": "А",
+                          "seller": "Акционеры «Б»", "asset": "100% акций «Б»", "ind": "ИТ и интернет"}}
+    draft = send_milestone_drafts.site_draft(deal, event, reply_to=258)
+    assert draft and draft["reply_to"] == 258
+    assert "reply_to" not in send_milestone_drafts.site_draft(deal, event)
+    src = open("app/console.py", encoding="utf-8").read()
+    assert '"reply_parameters"' in src and "reply_to: int | None = None" in src
