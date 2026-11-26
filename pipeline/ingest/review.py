@@ -106,7 +106,11 @@ STATUS_WORDS = {
     # разговорное подтверждение не обязано совпадать с формой из словаря.
     'Закрыта': ('закрыл', 'закрыт', 'заверш', 'купил', 'приобрел', 'приобрел',
                 'продал', 'выкупил', 'привлек', 'привлек', 'стал владельцем',
-                'перешл', 'перешел'),
+                'перешл', 'перешел',
+                # Отчеты иностранных продавцов (26 ноября 2026, Oerlikon): «have been
+                # sold», «completed the sale», «closed the transaction».
+                'been sold', 'was sold', 'were sold', 'completed the sale', 'completed the divestment',
+                'closed the sale', 'closed the transaction', 'transaction closed', 'sale was completed'),
     'Не состоялась': ('не состоял', 'отказал', 'прекращен', 'отменен', 'отменен',
                        'не будет', 'отозв'),
 }
@@ -276,6 +280,10 @@ def _flat_blob(texts):
     return '\x00'.join(out)
 
 
+EN_MONTHS = ['Jan(?:uary)?', 'Feb(?:ruary)?', 'Mar(?:ch)?', 'Apr(?:il)?', 'May', 'June?', 'July?',
+             'Aug(?:ust)?', 'Sep(?:t(?:ember)?)?', 'Oct(?:ober)?', 'Nov(?:ember)?', 'Dec(?:ember)?']
+
+
 def date_is_supported(old, new, quote):
     """Дату можно уточнить внутри известного года, но не перенести в другой.
 
@@ -287,10 +295,20 @@ def date_is_supported(old, new, quote):
         return 'новая дата не в формате ГГГГ-ММ-ДД'
     if str(old or '')[:4] != new[:4]:
         return 'год не совпадает: уточнять день можно, переносить год — нет'
-    day, month = int(new[8:10]), int(new[5:7])
+    day, month, year = int(new[8:10]), int(new[5:7]), int(new[:4])
     for word, num in MONTHS.items():
-        if num == month and re.search(r'(?<!\d)%d\s+%s' % (day, word), quote, re.I):
+        if num == month and re.search(r'(?<!\d)0?%d\s+%s' % (day, word), quote, re.I):
             return None
+    # Та же дата цифрами («02.12.2025», «2026-07-07» в реестре) или по-английски
+    # («31 May», «May 31») — 26 ноября 2026: даты из реестра и отчетов иностранных
+    # продавцов не проходили, хотя день и месяц в источнике названы.
+    if re.search(r'(?<!\d)0?%d\.0?%d\.%d(?!\d)' % (day, month, year), quote) \
+            or re.search(r'(?<!\d)%d-%02d-%02d(?!\d)' % (year, month, day), quote):
+        return None
+    en = EN_MONTHS[month - 1]
+    if re.search(r'(?<!\d)0?%d(?:st|nd|rd|th)?\s+%s' % (day, en), quote, re.I) \
+            or re.search(r'%s\.?\s+0?%d(?:st|nd|rd|th)?(?!\d)' % (en, day), quote, re.I):
+        return None
     return 'в цитате нет «%d %s»' % (day, [w for w, n in MONTHS.items() if n == month][0])
 
 

@@ -36,10 +36,25 @@ QUOTE_SEP = re.compile(r'\s+…\s+|\s*\|\|\s*')
 _NUM_RX = re.compile(r'\d[\d\s\u00a0]*(?:[.,]\d+)?')
 
 
+# Число в английском тексте перед единицей, месяцем или валютой — число, а не
+# часть названия («€16.5 million», «59 restaurants», «31 May», «SEK 35m»;
+# 26 ноября 2026: вычитка 321 карточки теряла суммы из отчетов иностранных
+# продавцов). Название вроде «800 Degrees» по-прежнему не считается.
+_EN_UNIT = re.compile(
+    r'\s*(?:million|mln|mn|m|billion|bn|b|thousand|k|percent|per\s*cent|tons?|tonnes?|'
+    r'restaurants?|stores?|shops?|outlets?|pizzerias?|plants?|factories|employees|staff|people|workers|'
+    r'square\s+met(?:er|re)s?|sq\.?\s*m|hectares?|'
+    r'January|February|March|April|May|June|July|August|September|October|November|December|'
+    r'Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec|'
+    r'USD|EUR|RUB|GBP|CHF|SEK|NOK|DKK|PLN|CZK|HUF|JPY|CNY|SGD|dollars?|euros?|roubles?|rubles?|pounds?|kronor|krona)\b',
+    re.I)
+
+
 def _numbers(text):
     out = set()
     for m in _NUM_RX.finditer(str(text or '')):
-        if re.match(r'\s*[A-Za-z]', str(text)[m.end():]):
+        tail = str(text)[m.end():]
+        if re.match(r'\s*[A-Za-z]', tail) and not _EN_UNIT.match(tail):
             continue                     # «800 Degrees» — название, не число
         n = re.sub(r'[\s\u00a0]', '', m.group(0)).replace(',', '.').rstrip('.')
         if n:
