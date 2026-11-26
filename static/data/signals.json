@@ -1,19 +1,6 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "signals": [
-  {
-   "id": "sa75332733",
-   "company_id": "g5c8c6494",
-   "date": "2026-11-25",
-   "kind": "buy",
-   "summary": "ЛУКОЙЛ — присматривает новые покупки",
-   "source": [
-    "kommersant.ru",
-    "https://www.kommersant.ru/doc/9130738"
-   ],
-   "origin": "news",
-   "strength": "normal"
-  },
   {
    "id": "sc01d8a991",
    "company_id": "g4f2ebf90",
@@ -420,20 +407,6 @@
    ],
    "origin": "card",
    "deal_id": "gb5456bba",
-   "strength": "strong"
-  },
-  {
-   "id": "se131af80a",
-   "company_id": "gafdc995a",
-   "date": "2026-10-22",
-   "kind": "for_sale",
-   "summary": "АО «Костромская верфь» — обсуждается продажа компании или доли",
-   "source": [
-    "Вести",
-    "https://www.vesti.ru/ns/sud-udovletvoril-isk-ob-izyatii-akcij-kostromskoj-verfi-v-dokhod-rf"
-   ],
-   "origin": "card",
-   "deal_id": "gb03ecf13",
    "strength": "strong"
   },
   {
@@ -1454,48 +1427,6 @@
    "origin": "card",
    "deal_id": "ga7020b5e",
    "strength": "strong"
-  },
-  {
-   "id": "sc95ba5748",
-   "company_id": "g5c8c6494",
-   "date": "2026-01-29",
-   "kind": "sell",
-   "summary": "ЛУКОЙЛ — обсуждается продажа: LUKOIL International GmbH",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "strong"
-  },
-  {
-   "id": "sa640ffc8c",
-   "company_id": "g6b0b26d9",
-   "date": "2026-01-29",
-   "kind": "for_sale",
-   "summary": "LUKOIL International GmbH — обсуждается продажа компании или доли; возможный покупатель — Carlyle",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "strong"
-  },
-  {
-   "id": "s50662fa18",
-   "company_id": "g41dae07f",
-   "date": "2026-01-29",
-   "kind": "buy",
-   "summary": "Carlyle — обсуждается покупка: LUKOIL International GmbH",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "normal"
   },
   {
    "id": "s9d3e8f35a",

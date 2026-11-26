@@ -9159,6 +9159,19 @@ def test_post_subject_is_entity_and_share_without_profile_description():
     assert line == "<b>Предмет:</b> 100% доли в ООО «Город Лефортово»", line
 
 
+
+def test_post_subject_share_then_name_is_not_repeated():
+    """g707211ba, 26 ноября 2026: «Предмет: LUKOIL International GmbH — 100% LUKOIL
+    International GmbH.» Деталь с доли и имени предмета сама называет предмет."""
+    deal = {"id": "x", "title": "Консорциум покупает зарубежные активы ЛУКОЙЛа",
+            "status": "Подписана", "date": "2026-11-25", "target": "t1", "type": "M&A",
+            "asset": "LUKOIL International GmbH",
+            "eco": {"share": "100% LUKOIL International GmbH (LIG). LIG владеет зарубежными активами."}}
+    companies = {"t1": {"name": "LUKOIL International GmbH", "desc": ""}}
+    line = [l for l in format_post.render(deal, companies).split("\n") if "Предмет" in l][0]
+    assert line.count("LUKOIL International GmbH") == 1, line
+    assert "100%" in line, line
+
 # --- Признаки будущих сделок (pipeline/ingest/signals.py, 19 октября 2026) ---
 
 def _signals_fixture():

@@ -1,0 +1,753 @@
+{
+ "made": "2026-11-26",
+ "drafts": [
+  {
+   "draft_id": "d15305731",
+   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
+   "date": "2026-11-06",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d75712205",
+   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d51747038",
+   "title": "Anthropic’s IPO could deliver $156 billion to charity",
+   "date": "2026-11-19",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d78483493",
+   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d89954199",
+   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:techcrunch.com",
+     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d28699980",
+   "title": "В «Т-Банк Инвестициях» появился неоактив на акцию Anthropic после крупнейшего в мировой истории IPO на $81 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-20_v_t-bank_investitsiyah_poyavilsya"
+    ]
+   ],
+   "sum": "$81 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d64590518",
+   "title": "Anthropic после IPO стала седьмой самой дорогой компанией в мире",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/technology_and_media/20/11/2026/6affe9e4459f2d4d30911be7"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d88290423",
+   "title": "ВТБ сохраняет планы продажи пакета в «Пулково»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+    ]
+   ],
+   "sum": "15 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "\"Позиция ВТБ по продаже пакета в \"Пулково\" была озвучена председателем правления на ВЭФ-2025, и с тех пор она не изменилась: готовность и желание продать этот пакет есть\", - заявил гендиректор \"ВТБ инфраструктурный холдинг\" Антон Новиков в кулуарах форума…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g67cacd7e (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d67379680",
+   "title": "Anthropic – рекордное за всю историю размещение акций",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1377308.php"
+    ]
+   ],
+   "sum": "$81.34 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90645230",
+   "title": "Anthropic вышла на биржу с оценкой $1,5 трлн. Как прошло крупнейшее IPO в истории",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+    ]
+   ],
+   "sum": "$81,3 млрд",
+   "type": "IPO",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-20",
+     "title": "Сделка завершена",
+     "note": "18 ноября 2026 года Anthropic разместила акции по $83 за бумагу — выше первоначального диапазона $70–78. Компания продала 956,4 млн акций, а ее сооснователи — еще 23,6 млн. IPO принесло $81,3 млрд, а оценка Anthropic достигла примерно $1,5 трлн. Это…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/company/t_invest/blog/1377291.php"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d64858449",
+   "title": "После IPO Anthropic занял седьмое место среди самых дорогих компаний мира",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9114412"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d57392391",
+   "title": "Продажи GTA VI в первый день оценили более чем в $2 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2205386/2026-11-20/prodazhi-gta-vi-v-pervyi-den-otcenili-bolee-chem-v-2-mlrd"
+    ]
+   ],
+   "sum": "$2 млрд",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d80259424",
+   "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/quote/20/11/2026/6b0037a53559e147749d1565"
+    ]
+   ],
+   "sum": "$107 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d53545276",
+   "title": "Космический рекорд побит: как прошло первичное публичное размещение акций Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28340723"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d58423037",
+   "title": "Anthropic по итогам IPO привлекла $93,5 млрд",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/317394"
+    ]
+   ],
+   "sum": "$93,5 млрд",
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "Anthropic по итогам IPO",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "Anthropic по итогам IPO",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d69351357",
+   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9126673"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d38808793",
+   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261120/aktsii-875433275.html"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d90701704",
+   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Fondy-Gazprombanka-vyshli-iz-kapitala-armaturnogo-zavoda-Gusar-87851"
+    ]
+   ],
+   "sum": "1,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d81281946",
+   "title": "В Рязани большинство утративших жилье в мае и июле из-за атак ВСУ купили новое",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28359591"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "Практически все семьи получили жилищные сертификаты, рассказал глава Рязанской области Павел Малков",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28359591"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "новое",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "новое",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d11303444",
+   "title": "Доля инвестиций в капитал, осуществляемых в Арктике, к 2035 году должна составить 12,6%",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28359519"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d27915041",
+   "title": "Проверка обязательна. Для покупки и продажи крипты в РФ нужно будет пройти тестирование",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/26/76792959/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65033430",
+   "title": "Пять причин забрать бизнес: за что государство национализирует компании В распоряжении властей есть целый арсенал инструментов для изъятия бизнеса. Формально национализация по ГК РФ предполагает выкуп",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7623"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}

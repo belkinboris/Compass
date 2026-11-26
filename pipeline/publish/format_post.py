@@ -141,6 +141,9 @@ def has_novelty(candidate, reference):
     return any(not any(_same_word(cw, rw) for rw in ref_words) for cw in cand_words)
 
 
+SHARE_LEAD = re.compile(r'^\s*\d+(?:[,.]\d+)?\s*%\s*(?:(?:акций|доли|долей|капитала)\s+(?:в\s+)?)?', re.I)
+
+
 def _starts_with_name(name, detail):
     """Деталь начинается с названия (допускается правовая форма перед ним)."""
     n, d = _flat_for_match(name), _flat_for_match(detail)
@@ -1425,7 +1428,11 @@ def render(deal, companies, updates=(), today=None, fin=None):
         # «100% доли в ООО «Город Лефортово»» сама называет общество — имя
         # перед ней было бы повтором (13 ноября 2026).
         add('%s %s' % (_lab(subject_label), esc(detail.rstrip('.'))))
-    elif asset and detail and not has_novelty(asset, detail) and _starts_with_name(asset, detail):
+    elif asset and detail and not has_novelty(asset, detail) and (
+            _starts_with_name(asset, detail) or _starts_with_name(asset, SHARE_LEAD.sub('', detail))):
+        # Деталь начинается с доли, а за ней имя предмета («100% LUKOIL International
+        # GmbH», g707211ba, 26 ноября 2026: «Предмет: LUKOIL International GmbH —
+        # 100% LUKOIL International GmbH.») — тоже сама называет предмет.
         # Деталь сама называет предмет — имя перед тире не повторяем (пост о
         # госпакете Шереметьево, 2 сентября 2026: одно и то же дважды).
         # Только если деталь С ИМЕНИ НАЧИНАЕТСЯ: VEON/Perfectum (19 октября
