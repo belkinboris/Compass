@@ -626,113 +626,17 @@
    ]
   },
   {
-   "draft_id": "d23282066",
-   "title": "Полянский: ВСУ перешли к тактике неизбирательного уничтожения гражданских судов",
+   "draft_id": "d98148529",
+   "title": "Сделаем паузу, но вернемся: что известно о сделке по продаже зарубежных активов «Лукойла»",
    "date": "2026-11-26",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/politika/28358971"
+     "https://tass.ru/ekonomika/28358283"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d83132597",
-   "title": "Инвестиции ГК «А101» в социальные программы и сообщества жителей выросли на 10%",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/26/76792613/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91289043",
-   "title": "Никто не купил права требования к экс-главе «Открытия» на 13,9 миллиарда рублей",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261126/holding-875592509.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-26",
-     "title": "Сделка завершена",
-     "note": "",
-     "source": [
-      "web:1prime.ru",
-      "https://1prime.ru/20261126/holding-875592509.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g569b740b (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d99743285",
-   "title": "НБА анонсировала масштабные инвестиции в баскетбол Европы",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/26/nba-anonsirovala-masshtabnye-investitsii-v-basketbol-evropy/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
    "status": null,
    "events": [],
    "buyer_name": null,
