@@ -24,7 +24,7 @@
 
 | рутина | когда | файл | id запуска |
 |---|---|---|---|
-| приток | ежечасно в :20, 08–21 МСК | `routines/intake.md` | `trig_01WpQH2Xkt73vziYeCJycEWL` |
+| приток | ежечасно в :20, 08–21 МСК | `routines/intake.md` | `trig_015XcJKf3LKvxJbhncNFZLMu` (новая сессия на каждый запуск с 26 ноября 2026; прежний `trig_01WpQH2Xkt73vziYeCJycEWL` выключен) |
 | публикация | ежечасно в :05, 10–21 МСК | `routines/publication.md` | `trig_01GEqMnvTRXWqwqnxxzXjZ5F` (в сессии владельца, рядом с забором: только здесь есть запись в репозиторий — сессия, созданная create_session, получает доступ только на чтение, `trig_01MmP4XACPNBsyAz6dTfF7rP` выключен; заведена 23 ноября 2026 — прежний запуск исчез, публикация стояла с 21 ноября; запуск «новая сессия на каждый раз» `trig_0195F8MRQLXJzFUsFMrVaV3u` выключен: в пустой сессии нет доступа на запись в репозиторий) |
 | качество | ежедневно в 21:37 МСК | `routines/quality.md` | `trig_017vwwoNcGuy1puYHcvz45ga` |
 | заметки от пользователей | каждые 3 часа, 08–20 МСК | `routines/user_notes.md` | `trig_01WPtAucUUWJTjGVhurcXuFC` |
