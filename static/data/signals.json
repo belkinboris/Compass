@@ -1429,48 +1429,6 @@
    "strength": "strong"
   },
   {
-   "id": "sc95ba5748",
-   "company_id": "g5c8c6494",
-   "date": "2026-01-29",
-   "kind": "sell",
-   "summary": "ЛУКОЙЛ — обсуждается продажа: LUKOIL International GmbH",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "strong"
-  },
-  {
-   "id": "sa640ffc8c",
-   "company_id": "g6b0b26d9",
-   "date": "2026-01-29",
-   "kind": "for_sale",
-   "summary": "LUKOIL International GmbH — обсуждается продажа компании или доли; возможный покупатель — Carlyle",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "strong"
-  },
-  {
-   "id": "s50662fa18",
-   "company_id": "g41dae07f",
-   "date": "2026-01-29",
-   "kind": "buy",
-   "summary": "Carlyle — обсуждается покупка: LUKOIL International GmbH",
-   "source": [
-    "Интерфакс",
-    "https://www.interfax.ru/business/1070027"
-   ],
-   "origin": "card",
-   "deal_id": "g20d4cc38",
-   "strength": "normal"
-  },
-  {
    "id": "s9d3e8f35a",
    "company_id": "gbe2e52e2",
    "date": "2026-01-23",
