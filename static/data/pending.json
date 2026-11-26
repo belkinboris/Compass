@@ -306,6 +306,72 @@
     "draft_id": "d85109761",
     "title": "Предприниматель Леван Назаров приобрел крупный пакет акций «Циана»"
    }
+  },
+  {
+   "id": "g0e611ecc",
+   "date": "2026-11-26",
+   "title": "«Дом.РФ» продал четыре здания и земельный участок в Хамовниках",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "четыре здания и земельный участок в Хамовниках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "четыре здания и земельный участок в Хамовниках",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "pending_since": "2026-11-26T07:53:23+00:00"
   }
  ]
 }
