@@ -598,36 +598,6 @@
    ]
   },
   {
-   "draft_id": "d85281829",
-   "title": "Газпромбанк вышел из капитала арматурного завода «Гусар» 🟢 Статус сделки: Закрыта в июле 2026 года. ЗПИФ «Газпромбанк-комплексный» передал принадлежавшие ему 25% ООО «Гусевский арматурный завод «Гусар",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7618"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g542addc3 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d90701704",
    "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
    "date": "2026-11-26",
@@ -651,20 +621,18 @@
    },
    "ind": "Банки",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Газпромбанк вышел из капитала арматурного завода «Гусар» 🟢 С» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d85016541",
-   "title": "Цифровой депозитарий Vaultary провел первую публичную сделку по продаже биткоина для майнинговой компании",
+   "draft_id": "d65531949",
+   "title": "Каждая одиннадцатая безналичная покупка в России совершается ночью — исследование «ЮMoney»",
    "date": "2026-11-26",
    "src": [
     [
      "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-26_tsifrovoj_depozitarij_vaultary"
+     "https://www.cnews.ru/news/line/2026-11-26_kazhdaya_odinnadtsataya_beznalichnaya"
     ]
    ],
    "sum": null,
@@ -679,89 +647,49 @@
     "asset": null,
     "seller": null
    },
-   "ind": "Рынок ценных бумаг",
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18267944",
+   "title": "Тамбовские застройщики передадут государству 16 тыс. кв. метров жилья",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119617-tambovskie-zastroyshchiki-peredadut-gosudarstvu-16-tys-kv-metrov-zhilya/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
-   "draft_id": "d45799424",
-   "title": "Бизнес Петербурга и области увеличил инвестиции в корпоративные коммуникации на 15%",
+   "draft_id": "d59045488",
+   "title": "Пытавшиеся продать золото россияне затолкали скупщика под лед реки",
    "date": "2026-11-26",
    "src": [
     [
-     "web:fontanka.ru",
-     "https://www.fontanka.ru/2026/11/26/76791889/"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d42376185",
-   "title": "Основатель финтех-группы «Баланс-платформа» купил 20% акций ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:rb.ru",
-     "https://rb.ru/news/osnovatel-finteh-gruppy-balans-platforma-kupil-20-akcij-cian-stoimost-bumag-ocenili-v-15-mlrd-rublej/"
-    ]
-   ],
-   "sum": "15 млрд ₽",
-   "type": "Инвестиция",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-26",
-     "title": "Сделка завершена",
-     "note": "Основатель финтех-группы «Баланс-платформа» Леван Назаров приобрёл около 20% акций ЦИАН, сообщает «Коммерсант». Стоимость пакета оценивается в 14–15 млрд рублей. Предприниматель назвал вложение стратегическим и связал его с инвестициями в технологический…",
-     "source": [
-      "web:rb.ru",
-      "https://rb.ru/news/osnovatel-finteh-gruppy-balans-platforma-kupil-20-akcij-cian-stoimost-bumag-ocenili-v-15-mlrd-rublej/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку g925a9d17 (по всей базе: та же сторона и редкое слово: бумаг) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d53362472",
-   "title": "Суд обратил в доход государства активы первого замгубернатора Кубани",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261126/sud-2134104951.html"
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/26/pytavshiesya-prodat-zoloto-rossiyane-zatolkali-skupschika-pod-led-reki/"
     ]
    ],
    "sum": null,
@@ -783,16 +711,16 @@
    ]
   },
   {
-   "draft_id": "d18074277",
-   "title": "Суд обратил в доход государства имущество первого вице-губернатора Краснодарского края",
+   "draft_id": "d08661350",
+   "title": "Вейпы исчезнут из продажи на Кубани с 1 марта 2027 года",
    "date": "2026-11-26",
    "src": [
     [
-     "web:pravo.ru",
-     "https://pravo.ru/news/266972/"
+     "web:abnews.ru",
+     "https://abnews.ru/ug/news/krasnodar/2026/11/26/vejpy-ischeznut-iz-prodazhi-na-kubani-s-1-marta-2027-goda"
     ]
    ],
-   "sum": "970 млн ₽",
+   "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],

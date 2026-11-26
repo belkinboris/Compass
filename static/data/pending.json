@@ -534,6 +534,189 @@
     ]
    },
    "pending_since": "2026-11-26T10:53:53+00:00"
+  },
+  {
+   "id": "g8a91502c",
+   "date": "2026-11-26",
+   "title": "Снейдер за €65 тыс. продал футболку, подаренную Рамосом после финала ЧМ-2010",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/sport/28358077"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "€65 тыс",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "€65 тыс",
+   "seller": "Снейдер",
+   "asset": "футболку, подаренную Рамосом после финала ЧМ-2010",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "За свою футболку с того матча нидерландец выручил €5 тыс.",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/sport/28358077"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "футболку, подаренную Рамосом после финала ЧМ-2010",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28358077"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Снейдер",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/sport/28358077"
+     }
+    ]
+   },
+   "pending_since": "2026-11-26T11:52:44+00:00"
+  },
+  {
+   "id": "gb6a24411",
+   "date": "2026-11-26",
+   "title": "ДОМ.РФ продает усадьбу князей Волконских под Москвой за 146,6 млн рублей",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119619-dom-rf-prodaet-usadbu-knyazey-volkonskikh-pod-moskvoy-za-146-6-mln-rubley/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "146,6 млн ₽",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "146,6 млн ₽",
+   "seller": "ДОМ.РФ",
+   "asset": "усадьба князей Волконских под Москвой",
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "усадьба князей Волконских под Москвой",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119619-dom-rf-prodaet-usadbu-knyazey-volkonskikh-pod-moskvoy-za-146-6-mln-rubley/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "ДОМ.РФ",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119619-dom-rf-prodaet-usadbu-knyazey-volkonskikh-pod-moskvoy-za-146-6-mln-rubley/"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "pending_since": "2026-11-26T11:52:44+00:00"
+  },
+  {
+   "id": "g436ad8bc",
+   "date": "2026-11-26",
+   "title": "Соседняя страна выкупит у России дефицитное на мировом рынке сырье",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "URA.RU",
+     "https://ura.news/articles/1053147334"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "России",
+   "buyer_name": "Соседняя страна",
+   "asset": "дефицитное на мировом рынке сырье",
+   "seller_src": "text",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Соседняя страна",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/articles/1053147334"
+     }
+    ],
+    "target": [
+     {
+      "value": "дефицитное на мировом рынке сырье",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/articles/1053147334"
+     }
+    ],
+    "seller": [
+     {
+      "value": "России",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://ura.news/articles/1053147334"
+     }
+    ]
+   },
+   "pending_since": "2026-11-26T11:52:44+00:00"
   }
  ]
 }
