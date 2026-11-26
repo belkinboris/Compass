@@ -29,7 +29,22 @@ import context_analysis
 import deal_analysis
 import scrape_guard
 from company_catalog import get_company_profile
-from deal_catalog import get_deal
+from deal_catalog import get_deal as _published_deal
+
+
+def get_deal(deal_id):
+    """Карточка базы, а если ее еще нет — карточка предпросмотра из очереди
+    (`pending.json`). 26 ноября 2026 партнер открыл предпросмотр «ЛУКОЙЛа»
+    (#/preview/g707211ba) перед решением и нажал «Разбор сделки» — сервер
+    отвечал 404, а экран писал «Ассистент сейчас недоступен». Карточку,
+    которую владелец решает публиковать, разбирают как раз до публикации."""
+    deal = _published_deal(deal_id)
+    if deal:
+        return deal
+    for card in (core._read_json("static/data/pending.json", {}) or {}).get("cards") or []:
+        if str(card.get("id")) == str(deal_id):
+            return card
+    return None
 from db.models import (
     AssistantAnonQuestion,
     AssistantFeedback,
@@ -88,6 +103,7 @@ LLM_DEADLINE = float(os.environ.get("LLM_DEADLINE", "35"))        # режим �
 LLM_DEADLINE_WEB = float(os.environ.get("LLM_DEADLINE_WEB", "60"))  # «по интернету»: поиск + модель
 LLM_MIN_ATTEMPT = float(os.environ.get("LLM_MIN_ATTEMPT", "12"))  # короче этого попытку не начинаем
 LLM_PRIMARY_CAP = float(os.environ.get("LLM_PRIMARY_CAP", "18"))  # сколько ждем основную, пока есть запасная
+LLM_SPARE_RESERVE = float(os.environ.get("LLM_SPARE_RESERVE", "15"))  # сколько оставляем запасной модели
 LLM_PRIMARY_REST = float(os.environ.get("LLM_PRIMARY_REST", "300"))  # сколько не спрашиваем зависшую основную
 _PRIMARY_RESTS_UNTIL = 0.0
 LLM_RETRIES = 2  # повторов сверх первой попытки — только после БЫСТРОГО сбоя (см. call_llm)
@@ -355,7 +371,13 @@ def call_llm(system: str, user: str, max_tokens: int, deadline: float | None = N
     spares = [m for m in FALLBACK_MODELS if m != current_model()]
     primary_deadline = deadline
     if model is None and deadline is not None and LLM_PRIMARY_CAP > 0 and spares:
-        cap = time.monotonic() + LLM_PRIMARY_CAP
+        # Длинной задаче — больше времени основной модели (26 ноября 2026):
+        # «Разбор сделки» с дедлайном 50 с резался на 18 с, хотя DeepSeek пишет
+        # его за 20–30 с, а запасная YandexGPT на темах санкций отдает заглушку —
+        # разбор «ЛУКОЙЛа» выходил «Ассистент недоступен». Запасной оставляем
+        # LLM_SPARE_RESERVE секунд, основной — все остальное, но не меньше
+        # LLM_PRIMARY_CAP.
+        cap = max(time.monotonic() + LLM_PRIMARY_CAP, deadline - LLM_SPARE_RESERVE)
         if deadline - cap >= LLM_MIN_ATTEMPT:
             primary_deadline = cap
     # ОСНОВНАЯ ТОЛЬКО ЧТО ЗАВИСЛА — СЛЕДУЮЩИЕ ВОПРОСЫ СРАЗУ ИДУТ ЗАПАСНОЙ. Без
