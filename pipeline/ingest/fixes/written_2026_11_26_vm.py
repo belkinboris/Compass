@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Тексты карточек за 2026-11-26, написанные по фактам (write_card.py, WRITING_BRIEF.md).
 
-Карточки: gfbdc17f5, g707211ba. Запуск: python3 pipeline/ingest/review.py --write
+Карточки: g707211ba (записи gfbdc17f5 сняты: карточку выкинул владелец). Запуск: python3 pipeline/ingest/review.py --write
 """
 
 CARDS = ['g707211ba']
