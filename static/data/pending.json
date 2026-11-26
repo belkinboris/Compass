@@ -412,6 +412,144 @@
    "accepted_hash": "5e47b2c3d95b.d03833",
    "second_read": "2026-11-26",
    "second_read_hash": "5e47b2c3d95b.d03833"
+  },
+  {
+   "id": "g0e611ecc",
+   "date": "2026-11-26",
+   "title": "«Дом.РФ» продал четыре здания и земельный участок в Хамовниках",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "РИА Недвижимость",
+     "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "четыре здания и земельный участок в Хамовниках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "РИА Недвижимость",
+      "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "четыре здания и земельный участок в Хамовниках",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://realty.ria.ru/20261126/mashinoapparat-2134044048.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "pending_since": "2026-11-26T07:53:23+00:00"
+  },
+  {
+   "id": "g1c7874cc",
+   "date": "2026-11-25",
+   "title": "Бывший глава брокера «Алор» Калин вышел из капитала «Яндекса»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9130665"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-26T08:08:10+00:00",
+   "from_raw": {
+    "draft_id": "d17462643",
+    "title": "Бывший глава брокера «Алор» Калин вышел из капитала «Яндекса»"
+   }
+  },
+  {
+   "id": "gb39814c8",
+   "date": "2026-11-26",
+   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
+   "ind": "Банки",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Коммерсантъ",
+     "https://www.kommersant.ru/doc/9130755"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "pending_since": "2026-11-26T08:08:10+00:00",
+   "from_raw": {
+    "draft_id": "d33325687",
+    "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»"
+   }
   }
  ]
 }

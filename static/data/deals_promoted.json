@@ -369928,7 +369928,8 @@
   "g70cf2d0f": null,
   "g6184df02": null,
   "g542addc3": null,
-  "ga5198c41": null
+  "ga5198c41": null,
+  "g707211ba": 303
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -375119,6 +375120,26 @@
      "kind": "closed"
     }
    ]
+  },
+  "g707211ba": {
+   "sum": "$10 млрд",
+   "buyer_name": "Консорциум Тодда Боэли",
+   "seller": "ЛУКОЙЛ",
+   "asset": "Зарубежные активы ЛУКОЙЛа",
+   "status": "Подписана",
+   "title": "Консорциум Тодда Боэли покупает зарубежные активы ЛУКОЙЛа",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": [
+    {
+     "kind": "signed"
+    }
+   ]
   }
  },
  "consumed_urls": [
@@ -375548,5 +375569,5 @@
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
  ],
- "telegram_last_post_at": "2026-11-25T17:13:11+00:00"
+ "telegram_last_post_at": "2026-11-26T07:06:27+00:00"
 }
