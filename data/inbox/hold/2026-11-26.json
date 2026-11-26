@@ -626,13 +626,13 @@
    ]
   },
   {
-   "draft_id": "d65531949",
-   "title": "Каждая одиннадцатая безналичная покупка в России совершается ночью — исследование «ЮMoney»",
+   "draft_id": "d99236071",
+   "title": "Экономика человеческих слабостей: что изменится, если поручить покупки ИИ-агентам",
    "date": "2026-11-26",
    "src": [
     [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-26_kazhdaya_odinnadtsataya_beznalichnaya"
+     "web:vc.ru",
+     "https://vc.ru/future/3276313-ekonomika-ii-agentov-kak-oni-izmenyat-pokupki-i-rynok?from=rss"
     ]
    ],
    "sum": null,
@@ -647,35 +647,7 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d18267944",
-   "title": "Тамбовские застройщики передадут государству 16 тыс. кв. метров жилья",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119617-tambovskie-zastroyshchiki-peredadut-gosudarstvu-16-tys-kv-metrov-zhilya/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Строительство",
+   "ind": "Искусственный интеллект",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
@@ -683,13 +655,13 @@
    ]
   },
   {
-   "draft_id": "d59045488",
-   "title": "Пытавшиеся продать золото россияне затолкали скупщика под лед реки",
+   "draft_id": "d83381749",
+   "title": "Губернатор ЕАО поддержала прекращение продажи вейпов",
    "date": "2026-11-26",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/26/pytavshiesya-prodat-zoloto-rossiyane-zatolkali-skupschika-pod-led-reki/"
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28358179"
     ]
    ],
    "sum": null,
@@ -711,13 +683,194 @@
    ]
   },
   {
-   "draft_id": "d08661350",
-   "title": "Вейпы исчезнут из продажи на Кубани с 1 марта 2027 года",
+   "draft_id": "d90758506",
+   "title": "Основатели Wiz продали компанию за $32 млрд — теперь Израиль требует с них $3 млрд налогов",
    "date": "2026-11-26",
    "src": [
     [
-     "web:abnews.ru",
-     "https://abnews.ru/ug/news/krasnodar/2026/11/26/vejpy-ischeznut-iz-prodazhi-na-kubani-s-1-marta-2027-goda"
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/osnovateli-wiz-prodali-kompaniyu-za-32-mlrd-teper-izrail-trebuet-s-nih-3-mlrd-nalogov/"
+    ]
+   ],
+   "sum": "$32 млрд",
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "Продажа Wiz за $32 млрд обернулась налоговым спором: Израиль считает, что основатели компании должны заплатить значительно больше, чем рассчитывали.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/osnovateli-wiz-prodali-kompaniyu-za-32-mlrd-teper-izrail-trebuet-s-nih-3-mlrd-nalogov/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "компания",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "компания",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d54124616",
+   "title": "Инвестиции в экономику Ставрополья за 10 лет превысили два триллиона рублей",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261126/stavropole-875586150.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d65927269",
+   "title": "Инвестиции в экономику Ставрополья за 10 лет превысили 2 трлн руб",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261126/investitsii-2134147957.html"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d78001291",
+   "title": "💼 Мой портфель коммерческой недвижимости «Бетонное казино». Состав активов, последние покупки",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1379903.php"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d54251903",
+   "title": "Бизнес-завтрак «Дизайн и фарма» в Студии Артемия Лебедева 4 декабря, с 10:00 до 12:30 , Студия Артемия Лебедева приглашает руководителей, отвечающих за развитие бизнеса, продажи и маркетинг в фармацев",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "tg:bezrec",
+     "https://t.me/bezrec/8302"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g8e847626 (общие редкие слова: 10, продаж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d70710572",
+   "title": "На Кубани приняли закон о запрете продажи вейпов. Когда он начнет действовать?",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/26/76792246/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d05918472",
+   "title": "Замок на Затоне забрали у мэрии Краснодара и вернули прежнему владельцу, но он с этим не согласен",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/26/76792085/"
     ]
    ],
    "sum": null,
