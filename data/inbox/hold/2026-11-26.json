@@ -626,13 +626,69 @@
    ]
   },
   {
-   "draft_id": "d98148529",
-   "title": "Сделаем паузу, но вернемся: что известно о сделке по продаже зарубежных активов «Лукойла»",
+   "draft_id": "d81259108",
+   "title": "Крупный российский банк готовит покупку биометрических датасетов в американских форматах, чтобы отразить новую угрозу",
    "date": "2026-11-26",
    "src": [
     [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28358283"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-26_t-bank_dopustil_pokupku"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18856716",
+   "title": "Питт и Джоли урегулировали спор о продаже винодельни во Франции",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261126/vinodelnya-2134219061.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Пищепром и напитки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d95247015",
+   "title": "ЦБ установил правила тестирования для допуска к покупкам криптовалюты",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:frankmedia.ru",
+     "https://frankmedia.ru/318411"
     ]
    ],
    "sum": null,
@@ -651,6 +707,35 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d00353551",
+   "title": "Путин заявил о рисках инвестиций в ИИ",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/26/putin-zayavil-o-riskah-investitsiy-v-razvitie-ii/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   }
  ]
