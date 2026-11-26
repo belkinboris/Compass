@@ -614,6 +614,70 @@
     ]
    },
    "pending_since": "2026-11-26T11:52:44+00:00"
+  },
+  {
+   "id": "g569b740b",
+   "date": "2026-11-26",
+   "title": "Арбитражный управляющий купил права требования к должникам «Открытие Холдинга»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261126/upravljajuschij-875591361.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "Арбитражный управляющий",
+   "asset": "права требования к должникам «Открытие Холдинга»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261126/upravljajuschij-875591361.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Арбитражный управляющий",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261126/upravljajuschij-875591361.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "права требования к должникам «Открытие Холдинга»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261126/upravljajuschij-875591361.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-26T13:53:53+00:00"
   }
  ]
 }
