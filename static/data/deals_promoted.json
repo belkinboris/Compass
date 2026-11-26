@@ -370153,7 +370153,8 @@
   "g6184df02": null,
   "g542addc3": null,
   "ga5198c41": null,
-  "g707211ba": 303
+  "g707211ba": 303,
+  "gd1bf6d5e": 304
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -370297,7 +370298,8 @@
   "g9b852635": 84,
   "g25aaf2c0": 85,
   "gf2b576fb": 86,
-  "g6184df02": 87
+  "g6184df02": 87,
+  "gd1bf6d5e": 88
  },
  "telegram_post_state": {
   "ga525c46b": {
@@ -375371,6 +375373,22 @@
      "kind": "signed"
     }
    ]
+  },
+  "gd1bf6d5e": {
+   "sum": "14–15 млрд ₽ (по оценке)",
+   "buyer_name": "Леван Назаров",
+   "target": "g163cfc8b",
+   "asset": "ЦИАН",
+   "status": "Закрыта",
+   "title": "Леван Назаров купил около 20% акций ЦИАН",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
  "consumed_urls": [
@@ -375800,5 +375818,5 @@
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
  ],
- "telegram_last_post_at": "2026-11-26T07:06:27+00:00"
+ "telegram_last_post_at": "2026-11-26T10:07:45+00:00"
 }
