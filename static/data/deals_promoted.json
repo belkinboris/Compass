@@ -317436,6 +317436,16 @@
      ]
     },
     {
+     "kind": "negotiations",
+     "date": "2026-11-17",
+     "title": "Переговоры",
+     "note": "Владелец крупного торгового центра \"Европолис Ростокино\" на северо-востоке Москвы Максим Левченко объявил о готовности его продать. \"С этим местом связаны несколько насыщенных лет моей жизни. Теперь у нас другие планы, и мы готовы обсуждать продажу…",
+     "source": [
+      "Mergers.ru",
+      "https://mergers.ru/news/Fort-Group-rassmotrit-vozmozhnost-prodazhi-TC-Evropolis-Rostokino-87801"
+     ]
+    },
+    {
      "kind": "other",
      "date": "2026-11-17",
      "title": "Повторное сообщение о продаже",
@@ -317510,7 +317520,7 @@
      "value": "2026-11-13",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "b1e61773e209"
+     "card_hash": "18e4da0035b5"
     },
     "nature": {
      "control_change": true,
@@ -324056,6 +324066,10 @@
       [
        "«Логика молока»",
        "https://logikamoloka.ru/press-centr/news/logika-moloka-pokupaet-brend-proteinovykh-produktov-protein-rex"
+      ],
+      [
+       "Mergers.ru",
+       "https://mergers.ru/news/Logika-moloka-pokupaet-brend-proteinovyh-produktov-Protein-Rex-87803"
       ]
      ]
     }
@@ -324209,7 +324223,13 @@
    "reread": "2026-11-18",
    "reread_hash": "159f4ea2ad0e.881c82",
    "reread_note": "статьи: 6",
-   "no_post": true
+   "no_post": true,
+   "discovery_src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/Logika-moloka-pokupaet-brend-proteinovyh-produktov-Protein-Rex-87803"
+    ]
+   ]
   },
   {
    "id": "g4290fc7a",
@@ -330980,6 +331000,16 @@
       "Коммерсантъ",
       "https://www.kommersant.ru/doc/9130604"
      ]
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-11-25",
+     "title": "Подробности подписанного соглашения",
+     "note": "«Коммерсантъ» рассказал подробности уже подписанного соглашения: зарубежный бизнес ЛУКОЙЛа покупает консорциум во главе с Eldridge Тодда Боэли.",
+     "source": [
+      "Коммерсантъ",
+      "https://www.kommersant.ru/doc/9130738"
+     ]
     }
    ],
    "from_raw": {
@@ -331108,7 +331138,7 @@
      "value": "2026",
      "meaning": "unknown",
      "basis": "rule",
-     "card_hash": "75a67f4d8f74"
+     "card_hash": "af7b429c25fe"
     },
     "nature": {
      "control_change": true,
