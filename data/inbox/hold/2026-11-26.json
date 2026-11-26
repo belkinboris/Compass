@@ -598,42 +598,13 @@
    ]
   },
   {
-   "draft_id": "d07361276",
-   "title": "Предприниматель Леван Назаров может консолидировать 20% акций «Циана»",
+   "draft_id": "d24077154",
+   "title": "Бывший гендиректор «Алор брокер» Александр Калин вышел из капитала «Яндекса»",
    "date": "2026-11-26",
    "src": [
     [
-     "web:realty.ria.ru",
-     "https://realty.ria.ru/20261126/nazarov-2134035094.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gd1bf6d5e (общие редкие слова: леван, назаро) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d86429356",
-   "title": "Бывший гендиректор «Алор брокер» Александр Калин вышел из капитала «Яндекса». Он перестал быть косвенным владельцем 6,8% голосов и 6,51% уставного капитала холдинга. В основании указано, что Калин пер",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7873"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Byvshij-gendirektor-Alor-broker-Aleksandr-Kalin-vyshel-iz-kapitala-Yandeksa-87843"
     ]
    ],
    "sum": null,
@@ -651,54 +622,75 @@
    "ind": "Рынок ценных бумаг",
    "needs_review": true,
    "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g9368796b (общее название в кавычках и общие слова: 2) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d20423616",
-   "title": "В Омской области приняли закон о запрете продажи вейпов и жидкостей к ним",
+   "draft_id": "d29914877",
+   "title": "Предприниматель Леван Назаров консолидировал около 20% акций ЦИАН",
    "date": "2026-11-26",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6b07ded4157f47c5bee1dcf9"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Predprinimatel-Levan-Nazarov-konsolidiroval-okolo-20-akcij-CIAN-87841"
     ]
    ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
+   "sum": "15 млрд ₽",
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-26",
+     "title": "Переговоры",
+     "note": "Точный размер пакета и детали о продавцах не известны, однако покупка прошла через брокерские группы в формате внебиржевых сделок. Леван Назаров подтвердил факт приобретения пакета акций ЦИАН, отметив, что приобретение акций ЦИАН является для него…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/Predprinimatel-Levan-Nazarov-konsolidiroval-okolo-20-akcij-CIAN-87841"
+     ]
+    }
+   ],
    "buyer_name": null,
-   "asset": null,
+   "asset": "около 20% акций ЦИАН",
    "seller": null,
    "parsed_parties": {
     "buyer": null,
-    "asset": null,
+    "asset": "около 20% акций ЦИАН",
     "seller": null
    },
-   "ind": null,
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g8eb9ed40 (общие редкие слова: област, омской, продаж) — проверьте, не дубль ли"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку gd1bf6d5e (общие слова заголовка: 4) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d88173054",
-   "title": "Имущество первого замгубернатора Кубани Галася обратили в доход государства",
+   "draft_id": "d97196157",
+   "title": "«Уралхим» начнет продажи нового вида минерального удобрения в Индии",
    "date": "2026-11-26",
    "src": [
     [
      "web:tass.ru",
-     "https://tass.ru/ekonomika/28357083"
+     "https://tass.ru/ekonomika/28357289"
     ]
    ],
-   "sum": "1 млрд ₽",
+   "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-26",
+     "title": "Переговоры",
+     "note": "Российская группа намерена в перспективе занять до 20% рынка по нему, сообщил директор по развитию международной дистрибуции компании Константин Шарипов",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28357289"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -707,48 +699,20 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Химия и удобрения",
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d39150204",
-   "title": "К строительству ВСМ Москва — Петербург привлекли более 32 тыс. специалистов",
+   "draft_id": "d88273811",
+   "title": "ГК «Развитие» открыла продажи в ЖК «Кировский 2»",
    "date": "2026-11-26",
    "src": [
     [
-     "web:dp.ru",
-     "https://www.dp.ru/a/2026/11/26/stroit-vsm-kak-polveka-nazad"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "К строительству ВСМ Москва — Петербург",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "К строительству ВСМ Москва — Петербург",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d96769752",
-   "title": "Продажа воздуха: как чистое дыхание становится аргументом при выборе ЖК",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/prodazha-vozduha-kak-chistoe-dyhanie-stanovitsya-argumentom-pri-vybore-zhk/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119608-gk-razvitie-otkryla-prodazhi-v-zhk-kirovskiy-2/"
     ]
    ],
    "sum": null,
@@ -770,13 +734,41 @@
    ]
   },
   {
-   "draft_id": "d57863270",
-   "title": "Дистрибьютор Li Auto может заняться продажами Seres в России",
+   "draft_id": "d50129926",
+   "title": "Суд обратил в доход государства имущество первого вице-губернатора Кубани Галася на 970 млн рублей",
    "date": "2026-11-26",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/26/distribyutor-li-auto-mozhet-zanyatsya-prodazhami-seres-v-rossii/"
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119607-sud-obratil-v-dokhod-gosudarstva-imushchestvo-pervogo-vitse-gubernatora-kubani-galasya-na-970-mln/"
+    ]
+   ],
+   "sum": "970 млн ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d93582907",
+   "title": "Воронежский зернотрейдер «Гриннлайн» сменил владельца",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:abireg.ru",
+     "https://abireg.ru/newsitem/119606-voronezhskiy-zernotreyder-grinnlayn-smenil-vladeltsa/"
     ]
    ],
    "sum": null,
@@ -798,13 +790,136 @@
    ]
   },
   {
-   "draft_id": "d72233402",
-   "title": "В России начали продавать под заказ новый кроссовер Hyundai",
+   "draft_id": "d25281770",
+   "title": "В Челябинской области приняли закон о запрете продажи вейпов",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261126/zakon-2134081754.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d52671494",
+   "title": "В Крыму приняли закон о запрете продажи вейпов",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261126/krym-2134080754.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d63034484",
+   "title": "Футболист сборной России рассказал о самой большой покупке в жизни",
    "date": "2026-11-26",
    "src": [
     [
      "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/26/v-rossii-nachali-prodavat-pod-zakaz-novyy-krossover-hyundai/"
+     "https://lenta.ru/news/2026/11/26/futbolist-sbornoy-rossii-rasskazal-o-samoy-bolshoy-pokupke-v-zhizni/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d77615744",
+   "title": "Прикамец купил Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/auto/2026/11/26/76791424/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "Теперь мужчина должен заплатить 470 тысяч рублей",
+     "source": [
+      "web:59.ru",
+      "https://59.ru/text/auto/2026/11/26/76791424/"
+     ]
+    }
+   ],
+   "buyer_name": "Прикамец",
+   "asset": "Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Прикамец",
+    "asset": "Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+   ]
+  },
+  {
+   "draft_id": "d49483581",
+   "title": "Депутаты ЗСК в первом чтении приняли законопроект о запрете продажи вейпов на Кубани. Что это значит?",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:93.ru",
+     "https://93.ru/text/gorod/2026/11/26/76791574/"
     ]
    ],
    "sum": null,
