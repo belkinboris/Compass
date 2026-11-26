@@ -416,6 +416,124 @@
    "shown_hash": "2da28312b5a4.3cbc79",
    "post_draft_sent": true,
    "post_preview": "<b>«Корпорация «Прометей»» купила последние 25% завода «Гусар» у фонда Газпромбанка</b>\n\n<b>Покупатель:</b> Корпорация «Прометей» — холдинговая структура Николая Суховерхова.\n<b>Продавец:</b> АО «ААА Управление Капиталом»\n<b>Предмет:</b> Гусевский арматурный завод «Гусар»\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> Машиностроение\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/9130755\">Коммерсантъ</a>\nЕще 5 источников — в карточке сделки\n\n#промышленность #машиностроение #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/gb39814c8\">карточке сделки</a>"
+  },
+  {
+   "id": "g8b3342ab",
+   "date": "2026-11-26",
+   "title": "«Дом.РФ» продал четыре здания и земельный участок в Хамовниках",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ПРАЙМ",
+     "https://1prime.ru/20261126/nedvizhimost-875576243.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "«Дом.РФ»",
+   "asset": "четыре здания и земельный участок в Хамовниках",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-26",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "ПРАЙМ",
+      "https://1prime.ru/20261126/nedvizhimost-875576243.html"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "четыре здания и земельный участок в Хамовниках",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261126/nedvizhimost-875576243.html"
+     }
+    ],
+    "seller": [
+     {
+      "value": "«Дом.РФ»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://1prime.ru/20261126/nedvizhimost-875576243.html"
+     }
+    ]
+   },
+   "seller_id": "gb2b066c3",
+   "pending_since": "2026-11-26T10:53:53+00:00"
+  },
+  {
+   "id": "g1bf7b54e",
+   "date": "2026-11-25",
+   "title": "ЗПИФ «Промышленные активы» под управлением УК «Молния» стал владельцем «Новой Горной УК»,  управляющей активами угольного холдинга «Сибуглемет»",
+   "ind": "Уголь",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Mergers.ru",
+     "https://mergers.ru/news/ZPIF-Promyshlennye-aktivy-pod-upravleniem-UK-Molniya-stal-vladelcem-Novoj-Gornoj-UK-upravlyayuschej-aktivami-ugolnogo-holdinga-Sibuglemet-87847"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "ЗПИФ «Промышленные активы» под управлением УК «Молния»",
+   "asset": "«Новой Горной УК», управляющей активами угольного холдинга «Сибуглемет»",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "ЗПИФ «Промышленные активы» под управлением УК «Молния»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/ZPIF-Promyshlennye-aktivy-pod-upravleniem-UK-Molniya-stal-vladelcem-Novoj-Gornoj-UK-upravlyayuschej-aktivami-ugolnogo-holdinga-Sibuglemet-87847"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Новой Горной УК», управляющей активами угольного холдинга «Сибуглемет»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://mergers.ru/news/ZPIF-Promyshlennye-aktivy-pod-upravleniem-UK-Molniya-stal-vladelcem-Novoj-Gornoj-UK-upravlyayuschej-aktivami-ugolnogo-holdinga-Sibuglemet-87847"
+     }
+    ]
+   },
+   "pending_since": "2026-11-26T10:53:53+00:00"
   }
  ]
 }

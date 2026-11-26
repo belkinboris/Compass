@@ -598,13 +598,73 @@
    ]
   },
   {
-   "draft_id": "d24077154",
-   "title": "Бывший гендиректор «Алор брокер» Александр Калин вышел из капитала «Яндекса»",
+   "draft_id": "d85281829",
+   "title": "Газпромбанк вышел из капитала арматурного завода «Гусар» 🟢 Статус сделки: Закрыта в июле 2026 года. ЗПИФ «Газпромбанк-комплексный» передал принадлежавшие ему 25% ООО «Гусевский арматурный завод «Гусар",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7618"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g542addc3 (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d90701704",
+   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
    "date": "2026-11-26",
    "src": [
     [
      "web:mergers.ru",
-     "https://mergers.ru/news/Byvshij-gendirektor-Alor-broker-Aleksandr-Kalin-vyshel-iz-kapitala-Yandeksa-87843"
+     "https://mergers.ru/news/Fondy-Gazprombanka-vyshli-iz-kapitala-armaturnogo-zavoda-Gusar-87851"
+    ]
+   ],
+   "sum": "1,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Газпромбанк вышел из капитала арматурного завода «Гусар» 🟢 С» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d85016541",
+   "title": "Цифровой депозитарий Vaultary провел первую публичную сделку по продаже биткоина для майнинговой компании",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/line/2026-11-26_tsifrovoj_depozitarij_vaultary"
     ]
    ],
    "sum": null,
@@ -623,306 +683,116 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9368796b (общее название в кавычках и общие слова: 2) — проверьте, не дубль ли"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
-   "draft_id": "d29914877",
-   "title": "Предприниматель Леван Назаров консолидировал около 20% акций ЦИАН",
+   "draft_id": "d45799424",
+   "title": "Бизнес Петербурга и области увеличил инвестиции в корпоративные коммуникации на 15%",
    "date": "2026-11-26",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Predprinimatel-Levan-Nazarov-konsolidiroval-okolo-20-akcij-CIAN-87841"
+     "web:fontanka.ru",
+     "https://www.fontanka.ru/2026/11/26/76791889/"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42376185",
+   "title": "Основатель финтех-группы «Баланс-платформа» купил 20% акций ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/osnovatel-finteh-gruppy-balans-platforma-kupil-20-akcij-cian-stoimost-bumag-ocenili-v-15-mlrd-rublej/"
     ]
    ],
    "sum": "15 млрд ₽",
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-26",
-     "title": "Переговоры",
-     "note": "Точный размер пакета и детали о продавцах не известны, однако покупка прошла через брокерские группы в формате внебиржевых сделок. Леван Назаров подтвердил факт приобретения пакета акций ЦИАН, отметив, что приобретение акций ЦИАН является для него…",
-     "source": [
-      "web:mergers.ru",
-      "https://mergers.ru/news/Predprinimatel-Levan-Nazarov-konsolidiroval-okolo-20-akcij-CIAN-87841"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "около 20% акций ЦИАН",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "около 20% акций ЦИАН",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gd1bf6d5e (общие слова заголовка: 4) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d97196157",
-   "title": "«Уралхим» начнет продажи нового вида минерального удобрения в Индии",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28357289"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-26",
-     "title": "Переговоры",
-     "note": "Российская группа намерена в перспективе занять до 20% рынка по нему, сообщил директор по развитию международной дистрибуции компании Константин Шарипов",
-     "source": [
-      "web:tass.ru",
-      "https://tass.ru/ekonomika/28357289"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Химия и удобрения",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88273811",
-   "title": "ГК «Развитие» открыла продажи в ЖК «Кировский 2»",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119608-gk-razvitie-otkryla-prodazhi-v-zhk-kirovskiy-2/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d50129926",
-   "title": "Суд обратил в доход государства имущество первого вице-губернатора Кубани Галася на 970 млн рублей",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119607-sud-obratil-v-dokhod-gosudarstva-imushchestvo-pervogo-vitse-gubernatora-kubani-galasya-na-970-mln/"
-    ]
-   ],
-   "sum": "970 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d93582907",
-   "title": "Воронежский зернотрейдер «Гриннлайн» сменил владельца",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119606-voronezhskiy-zernotreyder-grinnlayn-smenil-vladeltsa/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d25281770",
-   "title": "В Челябинской области приняли закон о запрете продажи вейпов",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261126/zakon-2134081754.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d52671494",
-   "title": "В Крыму приняли закон о запрете продажи вейпов",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261126/krym-2134080754.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d63034484",
-   "title": "Футболист сборной России рассказал о самой большой покупке в жизни",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/26/futbolist-sbornoy-rossii-rasskazal-o-samoy-bolshoy-pokupke-v-zhizni/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77615744",
-   "title": "Прикамец купил Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:59.ru",
-     "https://59.ru/text/auto/2026/11/26/76791424/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
+   "type": "Инвестиция",
    "status": "Закрыта",
    "events": [
     {
      "kind": "closed",
      "date": "2026-11-26",
      "title": "Сделка завершена",
-     "note": "Теперь мужчина должен заплатить 470 тысяч рублей",
+     "note": "Основатель финтех-группы «Баланс-платформа» Леван Назаров приобрёл около 20% акций ЦИАН, сообщает «Коммерсант». Стоимость пакета оценивается в 14–15 млрд рублей. Предприниматель назвал вложение стратегическим и связал его с инвестициями в технологический…",
      "source": [
-      "web:59.ru",
-      "https://59.ru/text/auto/2026/11/26/76791424/"
+      "web:rb.ru",
+      "https://rb.ru/news/osnovatel-finteh-gruppy-balans-platforma-kupil-20-akcij-cian-stoimost-bumag-ocenili-v-15-mlrd-rublej/"
      ]
     }
    ],
-   "buyer_name": "Прикамец",
-   "asset": "Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
+   "buyer_name": null,
+   "asset": "ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
    "seller": null,
    "parsed_parties": {
-    "buyer": "Прикамец",
-    "asset": "Porsche Cayenne, но дорогую машину арестовали приставы из-за долгов и штрафов прежнего хозяина",
+    "buyer": null,
+    "asset": "ЦИАН — стоимость бумаг оценили в 15 млрд рублей",
     "seller": null
    },
-   "ind": "Агро",
+   "ind": "Недвижимость",
    "needs_review": true,
    "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»"
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "похоже на уже описанную сделку g925a9d17 (по всей базе: та же сторона и редкое слово: бумаг) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d49483581",
-   "title": "Депутаты ЗСК в первом чтении приняли законопроект о запрете продажи вейпов на Кубани. Что это значит?",
+   "draft_id": "d53362472",
+   "title": "Суд обратил в доход государства активы первого замгубернатора Кубани",
    "date": "2026-11-26",
    "src": [
     [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/11/26/76791574/"
+     "web:ria.ru",
+     "https://ria.ru/20261126/sud-2134104951.html"
     ]
    ],
    "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18074277",
+   "title": "Суд обратил в доход государства имущество первого вице-губернатора Краснодарского края",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:pravo.ru",
+     "https://pravo.ru/news/266972/"
+    ]
+   ],
+   "sum": "970 млн ₽",
    "type": "M&A",
    "status": null,
    "events": [],
