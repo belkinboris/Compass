@@ -740,6 +740,27 @@ REGISTRY += [
      "date": '2026-11-25'},
 ]
 
+# Приемка карточки gb39814c8 — 2026-11-26 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g536b8ff4', "decision": "confirmed", "inn": '3304009593',
+     "reason": 'Приемка карточки gb39814c8 (2026-11-26): юрлицо ООО «Гусевский арматурный завод «Гусар»» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-26'},
+]
+
+# Приемка карточки gb39814c8 — 2026-11-26 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'gac0a0537', "decision": "confirmed", "inn": '6674340861',
+     "reason": 'Приемка карточки gb39814c8 (2026-11-26): юрлицо ООО «Корпорация «Прометей»» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-26'},
+]
+
+# Приемка карточки g0e611ecc — 2026-11-26 (pipeline/ingest/accept_card.py).
+REGISTRY += [
+    {"company_id": 'g606a653a', "decision": "confirmed", "inn": '7704011403',
+     "reason": 'Приемка карточки g0e611ecc (2026-11-26): юрлицо АО «Машиноаппарат» и его ИНН названы читателем прямо в ответе (обоснование — в accepted_notes карточки, не автопоиск по ЕГРЮЛ).',
+     "date": '2026-11-26'},
+]
+
 def by_company_id() -> dict[str, dict]:
     return {row["company_id"]: row for row in REGISTRY}
 
