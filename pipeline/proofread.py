@@ -617,7 +617,10 @@ def check(edit, card, after=None, companies=None):
     m = SERVICE_PARENS.search(new)
     if m:
         bad.append('служебные скобки разбора: %s' % m.group(0)[:50])
-    m = FIRST_PERSON.search(new)
+    # Аббревиатура прописными — название, а не местоимение: «НАМИ» (институт),
+    # 26 ноября 2026 — две правки вычитки снимались из-за ложного «первого лица».
+    m = next((x for x in FIRST_PERSON.finditer(new)
+              if not (len(x.group(0)) > 1 and x.group(0).isupper())), None)
     if m and not (m.group(0)[0].isupper() and m.start() and new[m.start() - 1] in '«„'):
         bad.append('первое лицо: «%s»' % m.group(0))
     for rx in JARGON:

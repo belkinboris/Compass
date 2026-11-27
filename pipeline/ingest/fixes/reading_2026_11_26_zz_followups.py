@@ -5,7 +5,7 @@
 спорила бы со статусом «Подписана». Запуск: python3 pipeline/ingest/review.py --write
 """
 
-CARDS = ['gd0af0377']
+CARDS = ['gd0af0377', 'gfe5d2f94']
 
 _Q = ('During the financial year 2022, the following significant changes in the Group structure occurred: '
       'Sale of subsidiaries On June 1, 2022 Oerlikon signed a contract for the sale of all subsidiaries in Russia '
@@ -20,4 +20,9 @@ FIXES = [
      'why': 'сделка закрыта — заголовок в прошедшем времени (title_standard, M&A/Закрыта)'},
     {'id': 'gd0af0377', 'field': 'date', 'old': '2022-06-02', 'new': '2022-06-01', 'quote': _Q,
      'why': 'день подписания договора по годовому отчету Oerlikon'},
+    {'id': 'gfe5d2f94', 'field': 'law.appr', 'old': '—',
+     'new': 'Допэмиссию 11 млн акций для мотивации сотрудников одобрил совет директоров МКПАО «Яндекс».',
+     'quote': 'Совет директоров МКПАО "Яндекс" одобрил размещение 11 млн обыкновенных акций для программы долгосрочной мотивации сотрудников - около 2,8% уставного капитала.',
+     'url': 'https://www.comnews.ru/content/247621/2026-09-30/2026-w40/1007/svoi-sredi-chuzhikh-yandeks-vypustit-11-mln-akciy-dlya-sotrudnikov',
+     'why': 'одобрение совета директоров стояло только в контексте при пустых «Согласованиях» (test_approval_is_not_left_in_prose)'},
 ]
