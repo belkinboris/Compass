@@ -733,6 +733,35 @@ def test_post_names_a_treasury_buyback_buyer_instead_of_not_disclosed():
     assert "не раскрыт" not in text, text
 
 
+def test_post_marks_a_sum_reported_by_unnamed_sources():
+    """A37: сумма со слов источников издания (`sum_basis: "reported"`) на
+    сайте подписана «по данным источников», а пост печатал голое число, как
+    цену, названную сторонами (g9b852635, 24 ноября 2026)."""
+    deal = {"id": "grep1", "title": "«Тест-Покупатель» покупает «Тест-Сервис»",
+            "type": "M&A", "status": "Обсуждается", "date": FRESH_DATE, "ind": "ИТ и интернет",
+            "buyer_name": "«Тест-Покупатель»", "seller": "Иван Тестов", "asset": "«Тест-Сервис»",
+            "sum": "8,1 млрд ₽", "sum_basis": "reported"}
+    assert "<b>Сумма:</b> 8,1 млрд ₽ (по данным источников)\n" in format_post.render(deal, {})
+    # Основания в поле нет — берется из слоя фактов, как на сайте.
+    by_facts = dict({k: v for k, v in deal.items() if k != "sum_basis"},
+                    facts={"price": {"meaning": "reported"}})
+    assert "8,1 млрд ₽ (по данным источников)" in format_post.render(by_facts, {})
+    # Цена, названная сторонами, и сумма без основания — без оговорки.
+    for basis in ("disclosed", None, "estimate"):
+        assert "по данным" not in format_post.render(dict(deal, sum_basis=basis), {}), basis
+    # Оговорка уже в тексте суммы — вторая скобка не ставится.
+    own = format_post.render(dict(deal, sum="≈50 млрд ₽ (по оценке)"), {})
+    assert "<b>Сумма:</b> ≈50 млрд ₽ (по оценке)\n" in own, own
+    # «Не раскрыта» и лот на торгах оговорку не получают.
+    assert "по данным" not in format_post.render(dict(deal, sum="Не раскрыта"), {})
+    lot = dict(deal, type="Продажа с торгов", status="Объявлена")
+    if format_post.is_listing(lot):
+        assert "по данным" not in format_post.render(lot, {})
+    # Проверка поста перед отправкой такую строку пропускает.
+    import check_post
+    assert not [p for p in check_post.check(format_post.render(deal, {})) if "Сумма" in p or "данным" in p]
+
+
 def test_post_attaches_buyer_detail_only_alongside_the_buyer_name():
     """Тот же механизм, положительный случай: имя покупателя есть — деталь
     из `eco.context` законно идет довеском. Само имя перед тире с 4 сентября

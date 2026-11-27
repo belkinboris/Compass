@@ -1259,6 +1259,28 @@ def price_per_share_line(deal):
     return '%s %s' % (_lab('Цена'), esc(value))
 
 
+SUM_REPORTED_NOTE = 'по данным источников'
+SUM_HAS_OWN_NOTE = re.compile(r'\([^()]*\)\s*$')
+
+
+def sum_note(deal):
+    """Оговорка после суммы: « (по данным источников)» или пустая строка.
+
+    Сумма со слов анонимных источников издания допустима в `sum`
+    (docs/card_money.md, 13 ноября 2026) при `sum_basis: "reported"` — сайт
+    подписывает ее сам (`SUM_MEANING_SHORT.reported`, `dealSumHtml`), а пост
+    до 27 ноября 2026 печатал голое число, как цену, названную сторонами
+    (A37, второе чтение g9b852635). Правило то же, что на сайте: скобка в
+    конце суммы («8 млрд ₽ (по оценке)») — оговорка уже есть, вторую не
+    ставим; у лота своя подпись «Начальная цена лота». Основание берется из
+    `sum_basis`, а если поля нет — из слоя фактов, откуда его читает сайт."""
+    text = str(deal.get('sum') or '')
+    if not has(text) or SUM_HAS_OWN_NOTE.search(text) or is_listing(deal):
+        return ''
+    basis = deal.get('sum_basis') or (((deal.get('facts') or {}).get('price') or {}).get('meaning'))
+    return ' (%s)' % SUM_REPORTED_NOTE if basis == 'reported' else ''
+
+
 def post_roles(deal):
     """Подписи трех строк сторон и какие из них печатаются ВСЕГДА.
 
@@ -1462,7 +1484,8 @@ def render(deal, companies, updates=(), today=None, fin=None):
     # ради старых вызовов и не печатается. Финансы остаются на сайте.
 
     if has(deal.get('sum')):
-        card.append('%s %s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'), esc(deal['sum'])))
+        card.append('%s %s%s' % (_lab('Начальная цена лота' if is_listing(deal) else 'Сумма'),
+                                 esc(deal['sum']), sum_note(deal)))
     elif PLACEHOLDER.match(str(deal.get('sum') or '')):
         # Карточка ПРЯМО утверждает, что сумма не раскрыта, — честный факт,
         # не пустота (партнеры сами хвалили именно такую строку у конкурента).
