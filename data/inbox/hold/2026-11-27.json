@@ -1439,6 +1439,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d80928281",
+   "title": "В ГД рассказали, как приобрести дом за наличный расчет",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28360497"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }

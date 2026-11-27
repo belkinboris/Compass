@@ -327243,6 +327243,10 @@
     [
      "Вестник АПК",
      "https://vestnikapk.ru/articles/kto-kormit-rossiyu/deserty-pobedivshie-sakhar/"
+    ],
+    [
+     "Агроинвестор",
+     "https://www.agroinvestor.ru/companies/news/46841-logika-moloka-kupila-proizvoditelya-proteinovykh-produktov-protein-rex/"
     ]
    ],
    "from_ingest": true,
@@ -327285,6 +327289,10 @@
       [
        "Mergers.ru",
        "https://mergers.ru/news/Logika-moloka-pokupaet-brend-proteinovyh-produktov-Protein-Rex-87803"
+      ],
+      [
+       "Агроинвестор",
+       "https://www.agroinvestor.ru/companies/news/46841-logika-moloka-kupila-proizvoditelya-proteinovykh-produktov-protein-rex/"
       ]
      ]
     }
@@ -365781,6 +365789,13 @@
    "desc": "Зернотрейдер Ильи Желнова, владелец Таганрогского зернового терминала. Юрлицо — ООО «Евразия Трейдинг».",
    "kpi": [],
    "legal_short": "ООО «Евразия Трейдинг»"
+  },
+  "g4816a3ce": {
+   "name": "«Петропродукт-Отрадное»",
+   "ind": "Пищепром и напитки",
+   "desc": "Производитель приправ и соусов из Отрадного Ленинградской области. Юрлицо — ООО «Петропродукт-Отрадное»; по ЕГРЮЛ почти 100% принадлежит нидерландской компании группы Heinz. В 2012 году к нему присоединили «Петросоюз»; владеет также марками «Петросоюз», Picador и Viletta.",
+   "kpi": [],
+   "legal_short": "ООО «Петропродукт-Отрадное»"
   }
  },
  "match_keys": {
@@ -372780,6 +372795,10 @@
   ],
   "gb1f408bf": [
    "евразия трейдинг"
+  ],
+  "g4816a3ce": [
+   "петропродукт-отрадное",
+   "петропродукт отрадное"
   ]
  },
  "merged": {
