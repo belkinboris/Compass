@@ -2,74 +2,17 @@
  "made": "2026-11-27",
  "drafts": [
   {
-   "draft_id": "d15305731",
-   "title": "У торговой галереи «Модный сезон» рядом с Кремлем вновь сменился владелец",
-   "date": "2026-11-06",
+   "draft_id": "d08024340",
+   "title": "Акции Japan Tobacco выросли на 4% на фоне возможной покупки Imperial Brands",
+   "date": "2026-11-27",
    "src": [
     [
-     "web:mergers.ru",
-     "https://mergers.ru/news/U-torgovoj-galerei-Modnyj-sezon-ryadom-s-Kremlem-vnov-smenilsya-vladelec-87747"
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/27/1415867-aktsii-japan-tobacco"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "торговой галереи «Модный сезон» рядом с Кремлем вновь",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "похоже на уже описанную сделку gfd435463 (общее название в кавычках) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d34423503",
-   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
-   "date": "2026-11-17",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d75712205",
-   "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
-   "date": "2026-11-19",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -88,19 +31,30 @@
    ]
   },
   {
-   "draft_id": "d51747038",
-   "title": "Anthropic’s IPO could deliver $156 billion to charity",
-   "date": "2026-11-19",
+   "draft_id": "d08418511",
+   "title": "ВТБ планирует принять условия ЦБ для покупки доли в операторе карт «Мир»",
+   "date": "2026-11-27",
    "src": [
     [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropics-ipo-could-deliver-156-billion-to-charity/"
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1131768"
     ]
    ],
    "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "ВТБ планирует принять основные условия Банка России для покупки доли в Национальной системы платежных карт (НСПК, оператор карт \"Мир\"), заявил на конференц-звонке с журналистами первый зампред правления банка Дмитрий Пьянов.",
+     "source": [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1131768"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -111,87 +65,22 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d78483493",
-   "title": "CNN: после IPO Anthropic 96% сотрудников стали миллионерами",
-   "date": "2026-11-20",
+   "draft_id": "d90701704",
+   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
+   "date": "2026-11-26",
    "src": [
     [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/20/1413580-ipo-anthropic"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Fondy-Gazprombanka-vyshli-iz-kapitala-armaturnogo-zavoda-Gusar-87851"
     ]
    ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d89954199",
-   "title": "Anthropic’s 7 founders cashed out nearly $2B in record-breaking IPO",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:techcrunch.com",
-     "https://techcrunch.com/2026/11/19/anthropics-7-founders-cashed-out-nearly-2b-in-record-breaking-ipo/"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d28699980",
-   "title": "В «Т-Банк Инвестициях» появился неоактив на акцию Anthropic после крупнейшего в мировой истории IPO на $81 млрд",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-20_v_t-bank_investitsiyah_poyavilsya"
-    ]
-   ],
-   "sum": "$81 млрд",
-   "type": "IPO",
+   "sum": "1,7 млрд ₽",
+   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -204,41 +93,37 @@
    },
    "ind": "Банки",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d64590518",
-   "title": "Anthropic после IPO стала седьмой самой дорогой компанией в мире",
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
    "date": "2026-11-20",
    "src": [
     [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/20/11/2026/6affe9e4459f2d4d30911be7"
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
     ]
    ],
    "sum": null,
-   "type": "IPO",
+   "type": "M&A",
    "status": null,
    "events": [],
-   "buyer_name": null,
-   "asset": null,
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
    "seller": null,
    "parsed_parties": {
-    "buyer": null,
-    "asset": null,
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
     "seller": null
    },
-   "ind": null,
+   "ind": "Искусственный интеллект",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
    ]
   },
   {
@@ -282,333 +167,17 @@
    ]
   },
   {
-   "draft_id": "d67379680",
-   "title": "Anthropic – рекордное за всю историю размещение акций",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/blog/1377308.php"
-    ]
-   ],
-   "sum": "$81.34 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d90645230",
-   "title": "Anthropic вышла на биржу с оценкой $1,5 трлн. Как прошло крупнейшее IPO в истории",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:smart-lab.ru",
-     "https://smart-lab.ru/company/t_invest/blog/1377291.php"
-    ]
-   ],
-   "sum": "$81,3 млрд",
-   "type": "IPO",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-20",
-     "title": "Сделка завершена",
-     "note": "18 ноября 2026 года Anthropic разместила акции по $83 за бумагу — выше первоначального диапазона $70–78. Компания продала 956,4 млн акций, а ее сооснователи — еще 23,6 млн. IPO принесло $81,3 млрд, а оценка Anthropic достигла примерно $1,5 трлн. Это…",
-     "source": [
-      "web:smart-lab.ru",
-      "https://smart-lab.ru/company/t_invest/blog/1377291.php"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d64858449",
-   "title": "После IPO Anthropic занял седьмое место среди самых дорогих компаний мира",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9114412"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d57392391",
-   "title": "Продажи GTA VI в первый день оценили более чем в $2 млрд",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2205386/2026-11-20/prodazhi-gta-vi-v-pervyi-den-otcenili-bolee-chem-v-2-mlrd"
-    ]
-   ],
-   "sum": "$2 млрд",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d18241175",
-   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
-   "date": "2026-11-20",
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
    "src": [
     [
      "web:mergers.ru",
-     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": "Wylsacom",
-   "asset": "разработчик ИИ-сервисов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": "Wylsacom",
-    "asset": "разработчик ИИ-сервисов",
-    "seller": null
-   },
-   "ind": "Искусственный интеллект",
-   "needs_review": true,
-   "hold_reasons": [
-    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
-    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d80259424",
-   "title": "Как инвесторы в России отыгрывали рекордное IPO Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/quote/20/11/2026/6b0037a53559e147749d1565"
-    ]
-   ],
-   "sum": "$107 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d53545276",
-   "title": "Космический рекорд побит: как прошло первичное публичное размещение акций Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28340723"
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
     ]
    ],
    "sum": null,
    "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d58423037",
-   "title": "Anthropic по итогам IPO привлекла $93,5 млрд",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:frankmedia.ru",
-     "https://frankmedia.ru/317394"
-    ]
-   ],
-   "sum": "$93,5 млрд",
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Anthropic по итогам IPO",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Anthropic по итогам IPO",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d69351357",
-   "title": "Акции Anthropic упали более чем на 10% после рекордного IPO",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9126673"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d38808793",
-   "title": "Акции SpaceX и Tesla дешевеют после IPO Anthropic",
-   "date": "2026-11-20",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261120/aktsii-875433275.html"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Anthropic hits Nasdaq exchanges at $111, 33% above IPO price» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d90701704",
-   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:mergers.ru",
-     "https://mergers.ru/news/Fondy-Gazprombanka-vyshli-iz-kapitala-armaturnogo-zavoda-Gusar-87851"
-    ]
-   ],
-   "sum": "1,7 млрд ₽",
-   "type": "M&A",
    "status": null,
    "events": [],
    "buyer_name": null,
@@ -623,380 +192,6 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d43446683",
-   "title": "Вдова Лужкова вышла из винодельческого бизнеса в Великобритании",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ria.ru",
-     "https://ria.ru/20261127/biznes-2134269957.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Пищепром и напитки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d77889341",
-   "title": "Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров с самовывозом из магазинов | New Retail",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/marketpleysy_privlekayut_oflayn_riteylerov_k_prodazhe_tovarov_s_samovyvozom_iz_magazinov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Маркетплейсы",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Маркетплейсы",
-    "seller": null
-   },
-   "ind": "E-commerce",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d80530738",
-   "title": "Продажи детских товаров стабилизируются после снижения на 8% в 2025 году | New Retail",
-   "date": "2026-11-25",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/prodazhi_detskikh_tovarov_stabiliziruyutsya_posle_snizheniya_na_8_v_2025_godu/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "похоже на уже описанную сделку g90784f0a (общие редкие слова: детски, продаж) — проверьте, не дубль ли",
-    "та же новость, что «Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d76964587",
-   "title": "Кабардино‑Балкария присоединилась к запрету розничной продажи вейпов | New Retail",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/kabardino_balkariya_prisoedinilas_k_zapretu_roznichnoy_prodazhi_veypov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d42892845",
-   "title": "Нагрузочное тестирование после распродажи: как получить точные цифры мощностей вместо «купим с запасом» | New-Retail.ru",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/tehnologii/nagruzochnoe_testirovanie_posle_rasprodazhi_kak_poluchit_tochnye_tsifry_moshchnostey_vmesto_kupim_s4741/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d75458215",
-   "title": "POIZON: значительная доля россиян покупает зимние вещи ещё до наступления сезона | New Retail",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/poizon_znachitelnaya_dolya_rossiyan_pokupaet_zimnie_veshchi_eshchye_do_nastupleniya_sezona/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "зимние вещи ещё до наступления сезона | New Retail",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "зимние вещи ещё до наступления сезона | New Retail",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d08484154",
-   "title": "Опыт VOIS: зачем бьюти-бренду подарочные наборы, если те же средства продаются отдельно | New-Retail.ru",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/marketing/opyt_vois_zachem_byuti_brendu_podarochnye_nabory_esli_te_zhe_sredstva_prodayutsya_otdelno/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Маркетплейсы привлекают офлайн-ритейлеров к продаже товаров » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d24902545",
-   "title": "Суд отменил взыскание с участников сделки по продаже аптечных активов «РОСТА»",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:pharmvestnik.ru",
-     "https://pharmvestnik.ru/content/news/sud-otmenil-vzyskanie-s-uchastnikov-sdelki-po-prodaje-aptechnyh-aktivov-rosta.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51016844",
-   "title": "ЦИАН: ПОДГОТОВКА К ПРОДАЖЕ ИЛИ НАЧАЛО БОЛЬШОЙ БОРЬБЫ ЗА КОНТРОЛЬ? 27 ноября 2026 года РБК сообщил о выходе из капитала Циана трех ключевых акционеров в совокупности владеющих 46,4% всех акций (обеспеч",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7627"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d78250525",
-   "title": "Осколки азарта. В центре Новосибирска продали здание с интерьером казино из нулевых: что с ним будет дальше",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/realty/2026/11/27/76790928/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Прошлый владелец бывший зал казино не перестраивал, поэтому, попадая на третий этаж, оказываешься в прошлом",
-     "source": [
-      "web:ngs.ru",
-      "https://ngs.ru/text/realty/2026/11/27/76790928/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
-    "seller": null
-   },
-   "ind": "Развлечения",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d64873684",
-   "title": "Суд в Екатеринбурге национализировал остатки бизнеса Малика Гайсина",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:eanews.ru",
-     "https://eanews.ru/rossiya/20261126172544/sud-v-ekaterinburge-natsionaliziroval-ostatki-biznesa-malika-gaysina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d49253423",
-   "title": "«Циан» сменил основных крупнейших акционеров",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/technology_and_media/27/11/2026/6b091fa44e8c89cb1e578a31"
-    ]
-   ],
-   "sum": null,
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Структуры Дмитрия Крюкова, Дмитрия Демина и Максима Мельникова, а также пять гонконгских компаний вышли из состава аукционеров. В то же время ООО «Технологии недвижимости» Левана Назарова приобрело 21,97% компании",
-     "source": [
-      "web:rbc.ru",
-      "https://www.rbc.ru/technology_and_media/27/11/2026/6b091fa44e8c89cb1e578a31"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли"
    ]
   },
   {
@@ -1025,6 +220,131 @@
    "needs_review": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d03122416",
+   "title": "ВТБ может принять условия Центробанка по покупке доли в НСПК",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28361089"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d07454933",
+   "title": "Пьянов: ВТБ, вероятно, примет условия ЦБ РФ по покупке доли в НСПК",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28361071"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d20974599",
+   "title": "«Циан» сменил основных акционеров",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28361039"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "\"Технологии недвижимости\" и \"Атон холдинг\" приобрели 21,97% и 21,41% акций компании",
+     "source": [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28361039"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d39242840",
+   "title": "Архитекторы будущего: как альянсы заменяют прямые продажи в премиуме",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:dp.ru",
+     "https://www.dp.ru/a/2026/11/27/arhitektori-budushhego-kak"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
    ]
   },
   {
@@ -1065,7 +385,66 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что ««Циан» сменил основных крупнейших акционеров» — второе издание, в группу не шлем"
+    "та же новость, что ««Циан» сменил основных акционеров» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d09192329",
+   "title": "В ВТБ прокомментировали покупку доли в НСПК",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261127/vtb-875617474.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Финтех",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d03295745",
+   "title": "«Циан» сменил основных акционеров",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261127/tsian-875616074.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли",
+    "та же новость, что ««Циан» сменил основных акционеров» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -1096,7 +475,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли",
-    "та же новость, что ««Циан» сменил основных крупнейших акционеров» — второе издание, в группу не шлем"
+    "та же новость, что ««Циан» сменил основных акционеров» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -1166,6 +545,323 @@
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
     "та же новость, что «Сервис легального приема платежей за заказ музыки «Бит за Би» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d80530738",
+   "title": "Продажи детских товаров стабилизируются после снижения на 8% в 2025 году | New Retail",
+   "date": "2026-11-25",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/novosti/retail/prodazhi_detskikh_tovarov_stabiliziruyutsya_posle_snizheniya_na_8_v_2025_godu/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку g90784f0a (общие редкие слова: детски, продаж) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d76964587",
+   "title": "Кабардино‑Балкария присоединилась к запрету розничной продажи вейпов | New Retail",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/novosti/retail/kabardino_balkariya_prisoedinilas_k_zapretu_roznichnoy_prodazhi_veypov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Продажи детских товаров стабилизируются после снижения на 8%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d42892845",
+   "title": "Нагрузочное тестирование после распродажи: как получить точные цифры мощностей вместо «купим с запасом» | New-Retail.ru",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/tehnologii/nagruzochnoe_testirovanie_posle_rasprodazhi_kak_poluchit_tochnye_tsifry_moshchnostey_vmesto_kupim_s4741/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Продажи детских товаров стабилизируются после снижения на 8%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d75458215",
+   "title": "POIZON: значительная доля россиян покупает зимние вещи ещё до наступления сезона | New Retail",
+   "date": "2026-11-23",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/novosti/retail/poizon_znachitelnaya_dolya_rossiyan_pokupaet_zimnie_veshchi_eshchye_do_nastupleniya_sezona/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": "зимние вещи ещё до наступления сезона | New Retail",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "зимние вещи ещё до наступления сезона | New Retail",
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец",
+    "та же новость, что «Продажи детских товаров стабилизируются после снижения на 8%» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d17023295",
+   "title": "«Циан» объявил о смене основных акционеров",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:gazeta.ru",
+     "https://www.gazeta.ru/business/news/2026/11/27/29839981.shtml"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Платформа объявлений о недвижимости \"Циан\" сообщила на своем сайте о смене основных акционеров, \"В капитале компании произошли изменения: ООО \"Технологии недвижимости\" Левана Назарова приобрели 21,97% компании. ...",
+     "source": [
+      "web:gazeta.ru",
+      "https://www.gazeta.ru/business/news/2026/11/27/29839981.shtml"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли",
+    "та же новость, что ««Циан» сменил основных акционеров» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d24902545",
+   "title": "Суд отменил взыскание с участников сделки по продаже аптечных активов «РОСТА»",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:pharmvestnik.ru",
+     "https://pharmvestnik.ru/content/news/sud-otmenil-vzyskanie-s-uchastnikov-sdelki-po-prodaje-aptechnyh-aktivov-rosta.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Агро",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d51016844",
+   "title": "ЦИАН: ПОДГОТОВКА К ПРОДАЖЕ ИЛИ НАЧАЛО БОЛЬШОЙ БОРЬБЫ ЗА КОНТРОЛЬ? 27 ноября 2026 года РБК сообщил о выходе из капитала Циана трех ключевых акционеров в совокупности владеющих 46,4% всех акций (обеспеч",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7627"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d12712810",
+   "title": "Российский сервис для легального заказа музыки в заведениях «Бит за Бид» привлек 10,3 млн рублей в обмен на 20,7% компании. В проект вошли 197 инвесторов платформы brainbox․VC. Соинвестором раунда ста",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "tg:rusven",
+     "https://t.me/rusven/7876"
+    ]
+   ],
+   "sum": "10,3 млн ₽",
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «Сервис легального приема платежей за заказ музыки «Бит за Би» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d78250525",
+   "title": "Осколки азарта. В центре Новосибирска продали здание с интерьером казино из нулевых: что с ним будет дальше",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:ngs.ru",
+     "https://ngs.ru/text/realty/2026/11/27/76790928/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Прошлый владелец бывший зал казино не перестраивал, поэтому, попадая на третий этаж, оказываешься в прошлом",
+     "source": [
+      "web:ngs.ru",
+      "https://ngs.ru/text/realty/2026/11/27/76790928/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
+    "seller": null
+   },
+   "ind": "Развлечения",
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d64873684",
+   "title": "Суд в Екатеринбурге национализировал остатки бизнеса Малика Гайсина",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:eanews.ru",
+     "https://eanews.ru/rossiya/20261126172544/sud-v-ekaterinburge-natsionaliziroval-ostatki-biznesa-malika-gaysina"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]

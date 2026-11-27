@@ -548,5 +548,15 @@
   "verdict": "same_fact",
   "candidate_id": "g8a91502c",
   "day": "2026-11-26"
+ },
+ "https://www.kommersant.ru/doc/9131957::gd1bf6d5e": {
+  "verdict": "enrich",
+  "candidate_id": "gd1bf6d5e",
+  "day": "2026-11-27"
+ },
+ "https://www.interfax.ru/business/1131762::g4290fc7a": {
+  "verdict": "same_fact",
+  "candidate_id": "g4290fc7a",
+  "day": "2026-11-27"
  }
 }
