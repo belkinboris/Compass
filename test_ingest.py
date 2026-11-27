@@ -12954,3 +12954,38 @@ def test_prepush_refuses_a_base_that_lost_post_marks():
     wiped = {"deals": [{"id": "a"}, {"id": "b"}, {"id": "c"}], "telegram_posts": {"b": 12}, "telegram_milestones": {}}
     got = pc.lost_post_marks(old, wiped)
     assert len(got) == 2 and got[0].startswith("telegram_posts: 2") and "a-closed" in got[1]
+
+
+def test_prose_gate_sees_english_numbers_before_units_but_not_names():
+    """26 ноября 2026: суммы и даты из английских отчетов («€16.5 million»,
+    «59 restaurants», «31 May») проверка не видела, и находки не записывались.
+    Название «800 Degrees» по-прежнему не число."""
+    import prose_gate
+    nums = prose_gate._numbers("EUR 16.5 million, 59 restaurants, 31 May 2022, SEK35m, 800 Degrees")
+    assert {"16.5", "59", "31", "2022", "35"} <= nums
+    assert "800" not in nums
+
+
+def test_date_check_accepts_digits_and_english_but_not_other_days():
+    """26 ноября 2026: даты из реестра («2026-07-07»), с нулем («02 декабря»),
+    цифрами («02.12.2025») и из английских отчетов («31 May», «August 3») не
+    проходили, хотя день и месяц в источнике названы."""
+    import review
+    f = review.date_is_supported
+    assert f("2025", "2025-12-02", "отчет от 02 декабря") is None
+    assert f("2026", "2026-07-07", "дата 2026-07-07 участник") is None
+    assert f("2025", "2025-12-02", "решение от 02.12.2025") is None
+    assert f("2022", "2022-05-31", "completed on 31 May 2022") is None
+    assert f("2022", "2022-08-03", "on August 3, 2022") is None
+    assert f("2025", "2025-12-02", "12 декабря") is not None
+    assert f("2022", "2022-05-31", "31 March") is not None
+    assert f("2022", "2022-05-31", "31.05.2023") is not None
+
+
+def test_status_closed_confirmed_by_english_report_wording():
+    """26 ноября 2026, Oerlikon: годовой отчет «have been sold» подтверждает
+    «Закрыта»; само «signed a contract» — нет."""
+    import review
+    words = review.status_words("Закрыта")
+    assert any(w in "consequently, the subsidiaries have been sold." for w in words)
+    assert not any(w in "oerlikon signed a contract for the sale" for w in words)

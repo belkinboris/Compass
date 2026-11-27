@@ -304,3 +304,15 @@ def test_marking_one_card_clean_is_actually_written(tmp_path, monkeypatch, capsy
 
     written = json.loads(data_file.read_text(encoding="utf-8"))
     assert written["deals"][0].get("proofread"), "штамп не попал на диск"
+
+
+def test_nami_institute_is_not_first_person():
+    """26 ноября 2026: «НАМИ» (институт) принималось за местоимение «нами»."""
+    import re
+    import proofread
+    hits = [m.group(0) for m in proofread.FIRST_PERSON.finditer("Завод купил НАМИ")
+            if not (len(m.group(0)) > 1 and m.group(0).isupper())]
+    assert hits == []
+    hits = [m.group(0) for m in proofread.FIRST_PERSON.finditer("для нас это важно")
+            if not (len(m.group(0)) > 1 and m.group(0).isupper())]
+    assert hits == ["нас"]

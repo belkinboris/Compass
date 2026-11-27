@@ -69,9 +69,7 @@ RAW = os.path.join(ROOT, 'data', 'inbox', 'raw')
 TRIAGE = os.path.join(ROOT, 'data', 'inbox', 'triage')
 PENDING = os.path.join(ROOT, 'static', 'data', 'pending.json')
 
-MONTHS = {'января': 1, 'февраля': 2, 'марта': 3, 'апреля': 4, 'мая': 5, 'июня': 6,
-          'июля': 7, 'августа': 8, 'сентября': 9, 'октября': 10, 'ноября': 11,
-          'декабря': 12}
+from date_quote import MONTHS  # noqa: E402  (месяцы словами — общие с проверкой даты)
 
 # Слово, которым подтверждается статус. Список закрытый: статус — единственное
 # поле, которое не цитируется дословно, поэтому обоснование должно быть
@@ -106,7 +104,11 @@ STATUS_WORDS = {
     # разговорное подтверждение не обязано совпадать с формой из словаря.
     'Закрыта': ('закрыл', 'закрыт', 'заверш', 'купил', 'приобрел', 'приобрел',
                 'продал', 'выкупил', 'привлек', 'привлек', 'стал владельцем',
-                'перешл', 'перешел'),
+                'перешл', 'перешел',
+                # Отчеты иностранных продавцов (26 ноября 2026, Oerlikon): «have been
+                # sold», «completed the sale», «closed the transaction».
+                'been sold', 'was sold', 'were sold', 'completed the sale', 'completed the divestment',
+                'closed the sale', 'closed the transaction', 'transaction closed', 'sale was completed'),
     'Не состоялась': ('не состоял', 'отказал', 'прекращен', 'отменен', 'отменен',
                        'не будет', 'отозв'),
 }
@@ -276,22 +278,8 @@ def _flat_blob(texts):
     return '\x00'.join(out)
 
 
-def date_is_supported(old, new, quote):
-    """Дату можно уточнить внутри известного года, но не перенести в другой.
-
-    Менять год — значит утверждать новое; тот же порог, что у
-    `fix_placeholder_dates.py`. День и месяц обязаны быть названы в цитате
-    прописью («закрыта 4 мая»), иначе это не перенос, а догадка.
-    """
-    if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(new or '')):
-        return 'новая дата не в формате ГГГГ-ММ-ДД'
-    if str(old or '')[:4] != new[:4]:
-        return 'год не совпадает: уточнять день можно, переносить год — нет'
-    day, month = int(new[8:10]), int(new[5:7])
-    for word, num in MONTHS.items():
-        if num == month and re.search(r'(?<!\d)%d\s+%s' % (day, word), quote, re.I):
-            return None
-    return 'в цитате нет «%d %s»' % (day, [w for w, n in MONTHS.items() if n == month][0])
+# Проверка даты по цитате — date_quote.py (26 ноября 2026: review.py у потолка).
+from date_quote import date_is_supported, EN_MONTHS  # noqa: E402,F401
 
 
 from estimate_words import ESTIMATE_WORDS  # noqa: E402
