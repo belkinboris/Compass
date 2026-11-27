@@ -626,41 +626,13 @@
    ]
   },
   {
-   "draft_id": "d29008903",
-   "title": "«Аэроэкспресс» с 16 декабря изменит цены на билеты при покупке офлайн",
+   "draft_id": "d96688331",
+   "title": "В Челябинске доли в семи компаниях обратили в доход государства",
    "date": "2026-11-27",
    "src": [
     [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9144610"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88888776",
-   "title": "Петербурженка потеряла 90 тыс. рублей при покупке розеток",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:iz.ru",
-     "https://iz.ru/2209697/2026-11-27/peterburzhenka-poteriala-90-tys-rublei-pri-pokupke-rozetok"
+     "web:tass.ru",
+     "https://tass.ru/proisshestviya/28363905"
     ]
    ],
    "sum": null,
@@ -679,7 +651,7 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g90784f0a (общие редкие слова: 90, рублей) — проверьте, не дубль ли"
+    "похоже на уже описанную сделку g93c93cbc (общие слова заголовка: 3) — проверьте, не дубль ли"
    ]
   }
  ]
