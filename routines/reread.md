@@ -55,7 +55,8 @@
      изменение названия в глубокую проверку… двойная работа не нужна»);
    - проверить каждое поле против статьи и правил: `docs/card_title.md`,
      `docs/card_status_dates.md`, `docs/card_money.md`, `docs/card_parties.md`,
-     `docs/card_editing.md` (пересказ — по статье), `pipeline/ingest/WRITING_BRIEF.md`,
+     `docs/card_editing.md`, `docs/card_prose.md` (пересказ — по статье),
+     `pipeline/ingest/WRITING_BRIEF.md`,
      «Язык для людей» в CLAUDE.md;
    - профили и стороны (неверный ИНН, профиль не той компании, отрасль,
      описание, сторона текстом без профиля) — исправить в этом же проходе

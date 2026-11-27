@@ -25,6 +25,7 @@ vedomosti.ru — проверено). Поэтому:
     python3 pipeline/ingest/fetch.py --offline        # из фикстур, без сети
     python3 pipeline/ingest/fetch.py --verify         # проверить адреса лент
     python3 pipeline/ingest/fetch.py                  # обычный забор (нужна сеть)
+Молчащие и сломанные ленты ищет `feeds_health.py` (раз в сутки, рутина качества).
 """
 import html
 import json
@@ -33,7 +34,8 @@ import re
 import sys
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from xml.etree import ElementTree
 
 _unescape = html.unescape
@@ -48,6 +50,11 @@ from source_names import is_undesirable  # noqa: E402
 FIXTURES = os.path.join(INBOX, 'fixtures')
 UA = 'Mozilla/5.0 (compatible; KompasBot/0.1; +https://kompas.deals)'
 TIMEOUT = 20
+# Запись старше стольких дней в сырье не кладется. Лента, которую только что
+# завели или починили, отдает весь свой хвост разом («Агроинвестор» — 398
+# записей с 2014 года, Sostav — с апреля), а у фильтра и ворот возраста нет:
+# без потолка первый же забор понес бы в консоль сделки многолетней давности.
+MAX_AGE_DAYS = 14
 
 
 def load_sources():
@@ -60,29 +67,83 @@ def http_get(url):
         return resp.read()
 
 
+def published_day(text):
+    """Дата записи ленты как date или None, если формат не распознан.
+
+    Форматов у лент три: RFC 822 («Thu, 26 Nov 2026 20:46:09 +0300», бывает с
+    «GMT» вместо смещения), ISO («2026-11-26T20:46:09+03:00», телеграм и Atom)
+    и голая дата (Mergers.ru). Нераспознанное — None: гадать не надо."""
+    text = str(text or '').strip()
+    if not text:
+        return None
+    try:
+        return parsedate_to_datetime(text).date()
+    except (TypeError, ValueError, IndexError):
+        pass
+    try:
+        return datetime.fromisoformat(text.replace('Z', '+00:00')).date()
+    except ValueError:
+        pass
+    m = re.match(r'(\d{4})-(\d{2})-(\d{2})', text)
+    if m:
+        try:
+            return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3))).date()
+        except ValueError:
+            return None
+    return None
+
+
+def too_old(item, today=None, max_age=MAX_AGE_DAYS):
+    """Запись с распознанной датой старше потолка. Без даты — не старая:
+    выбросить свежую новость хуже, чем пропустить к фильтру лишнюю."""
+    day = published_day(item.get('published'))
+    if day is None:
+        return False
+    today = today or datetime.now(timezone.utc).date()
+    return (today - day) > timedelta(days=max_age)
+
+
 def parse_rss(body, source_id):
-    """RSS и Atom одним разбором: нам нужны только ссылка, заголовок и дата."""
+    """RSS и Atom одним разбором: нам нужны только ссылка, заголовок и дата.
+
+    ПОЛЯ ИЩУТСЯ В ПРОСТРАНСТВЕ ИМЕН САМОЙ ЗАПИСИ. До 27 ноября 2026 поле
+    искалось как `title` или `{http://www.w3.org/2005/Atom}title` — а Retail.ru
+    и New Retail объявляют у корня `xmlns="http://backend.userland.com/rss2"`,
+    и все их `<item>`, `<title>`, `<link>` лежат в ЭТОМ пространстве. Запись
+    находилась (ее тег сравнивался без пространства), поля в ней — нет, и она
+    молча отбрасывалась: лента отвечала 200, ошибки не было, записей ноль.
+    Теперь берется первый прямой потомок с нужным именем, чье пространство —
+    то же, что у записи, или пустое (так `<media:title>` чужого расширения не
+    подменит заголовок записи)."""
     out = []
     try:
         root = ElementTree.fromstring(body)
     except ElementTree.ParseError:
         return out
-    ns = {'atom': 'http://www.w3.org/2005/Atom'}
     for item in root.iter():
-        tag = item.tag.split('}')[-1]
-        if tag not in ('item', 'entry'):
+        tag = item.tag if isinstance(item.tag, str) else ''
+        if tag.split('}')[-1] not in ('item', 'entry'):
             continue
-        get = lambda name: (item.findtext(name) or item.findtext('atom:' + name, namespaces=ns) or '')
-        link = get('link')
+        own_ns = tag[:tag.index('}') + 1] if tag.startswith('{') else ''
+
+        def get(name, item=item, own_ns=own_ns):
+            for el in item:
+                if el.tag in (name, own_ns + name):
+                    return el.text or ''
+            return ''
+
+        link = get('link').strip()
         if not link:
-            el = item.find('atom:link', namespaces=ns)
-            link = el.get('href') if el is not None else ''
+            # Atom: <link href="..."/>; из нескольких — rel="alternate" или без rel.
+            links = [el for el in item if el.tag in ('link', own_ns + 'link') and el.get('href')]
+            best = [el for el in links if el.get('rel') in (None, 'alternate')] or links
+            link = best[0].get('href').strip() if best else ''
         title = re.sub(r'\s+', ' ', get('title')).strip()
         if not link or not title:
             continue
         out.append({
             'source_id': source_id,
-            'url': link.strip(),
+            'url': link,
             'title': title,
             'summary': re.sub(r'<[^>]+>', ' ', get('description') or get('summary'))[:600].strip(),
             'published': (get('pubDate') or get('published') or get('updated')).strip(),
@@ -180,6 +241,17 @@ def fetch_source(src, offline=False):
         items = parse_mergers_ru_news(body, src['id'])
     else:
         items = parse_rss(body, src['id'])
+    if not items:
+        # Ответ 200 без единой записи — тоже отказ, а не «ок, записей 0»:
+        # так Forbes.ru и Нефтегаз.ру месяцами отдавали страницу «вы не робот»
+        # и числились проверенными, а Retail.ru не разбирался (27 ноября 2026).
+        head = body[:200].lstrip().lower() if isinstance(body, bytes) else b''
+        looks_html = head.startswith((b'<!doctype html', b'<!doctypehtml', b'<html'))
+        if not body:
+            return [], 'пустой ответ'
+        if looks_html and src['kind'] == 'rss':
+            return [], 'вместо ленты пришла страница сайта (проверка «вы не робот» или адрес устарел)'
+        return [], 'в ответе нет ни одной записи'
     return items, None
 
 
@@ -230,7 +302,7 @@ def main(argv):
     known = seen_urls()
     day = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     path = os.path.join(RAW, day + '.jsonl')
-    added, errors = 0, []
+    added, stale, errors = 0, 0, []
     with open(path, 'a', encoding='utf-8') as f:
         for src in sources:
             if not src.get('enabled'):
@@ -247,11 +319,16 @@ def main(argv):
                 # (владелец, 8 ноября 2026: «чтобы таких источников в притоках не было»).
                 if is_undesirable(item['url']):
                     continue
+                if not offline and too_old(item):   # фикстуры старые по своей природе
+                    stale += 1
+                    continue
                 known.add(item['url'])
                 item['fetched'] = day
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
                 added += 1
     print('Новых записей: %d -> %s' % (added, os.path.relpath(path, ROOT)))
+    if stale:
+        print('Старше %d дней, не взято: %d' % (MAX_AGE_DAYS, stale))
     print('Источников с ошибкой: %d' % len(errors))
     for sid, err in errors[:15]:
         print('   %-28s %s' % (sid, err))

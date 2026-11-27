@@ -75,6 +75,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.dirname(HERE))
 
 import match as matcher                                  # noqa: E402
+import classify                                          # noqa: E402
 import source_names                                      # noqa: E402
 import tag_themes                                        # noqa: E402  (pipeline/ уже в sys.path)
 import link_parties                                      # noqa: E402
@@ -729,6 +730,11 @@ def check(draft, base, idx, inds, df=None, dup_out=None):
     # не идет; продали на торгах (статус «Закрыта») — обычная карточка.
     if is_open_listing(draft):
         bad.append('лот на торгах без результата или объявление о продаже объекта без покупателя — не сделка, в базу не берем')
+    # АУКЦИОН ВЕЩИ (G38, 27 ноября 2026): кольцо с «Титаника», прядь волос
+    # Вашингтона. Фильтр сырья их уже не пускает (classify.is_thing_auction);
+    # здесь — второй замок для черновиков, пришедших мимо фильтра.
+    if classify.is_thing_auction(draft.get('title')):
+        bad.append('аукцион вещи (картина, украшение, сувенир), а не сделка с бизнесом или объектом')
     if draft.get('status') == 'Закрыта' and PRESENT_CLOSED.search(str(draft.get('title') or '')):
         hold.append('закрытая сделка названа настоящим временем — заголовок нужно привести к завершенному действию')
     _title = str(draft.get('title') or '').strip()

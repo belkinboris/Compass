@@ -163,7 +163,8 @@ M&A-активность в ритейле» (`assistant_signals.is_signal_quest
 ## Проверки на 100 вопросах — в docs/assistant_checks.md
 
 Что исправлено по проверкам ассистента на 100 вопросах (ответ и поиск, 17–18
-октября 2026) и как прогнать проверку, — `docs/assistant_checks.md`. Читать,
+октября 2026) и как прогнать проверку, — `docs/assistant_checks.md`; что
+исправлено в поиске — `docs/assistant_search_checks.md` (выделено 27 ноября 2026). Читать,
 когда правите чистку ответа (`_polish_answer`), правила промпта или маршруты
 поиска `assistant_retrieval.py`.
 

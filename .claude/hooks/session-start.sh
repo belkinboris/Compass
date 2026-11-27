@@ -36,6 +36,10 @@ python3 -m pip install --quiet --disable-pip-version-check pymorphy3 pymorphy3-d
 # (6 сентября 2026). pdfminer стоит в образе, не хватало только cffi.
 python3 -m pip install --quiet --disable-pip-version-check cffi
 
+# Pillow в образе бывает сломан (ImportError PIL._imaging: known_issues/ops.md, 6 и 26 ноября
+# 2026) — тогда падает сбор тестов. Проверяем импорт и переустанавливаем (бэклог G44).
+python3 -c "from PIL import Image" 2>/dev/null || python3 -m pip install --quiet --disable-pip-version-check --ignore-installed pillow
+
 # Полная проверка базы перед push в main — git-хук, а не правило в тексте рутины
 # (владелец, 20 ноября 2026). Сам хук и что он проверяет — .githooks/pre-push.
 git config core.hooksPath .githooks

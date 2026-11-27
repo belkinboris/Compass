@@ -173,6 +173,48 @@ def encode_url(url):
                         parts.fragment))
 
 
+RBC_HOSTS = ('rbc.ru', 'www.rbc.ru')
+
+
+def open_part_url(url):
+    """Запасной адрес с открытой частью статьи за подпиской — или None.
+
+    РБК (27 ноября 2026, «Циан сменил основных акционеров», E19): основная
+    страница статьи по подписке отдает роботу пустое тело (200 и 0 знаков), а
+    amp-версия того же адреса — заголовок и вводку, в которых уже есть
+    стороны и размер пакета. Адрес строится механически:
+    www.rbc.ru/<рубрика>/<дата>/<id> -> amp.rbc.ru/rbcnews/<рубрика>/<дата>/<id>.
+    В кэш запись ложится под ИСХОДНЫМ адресом — тем, что стоит в `src`
+    карточки: `review.py` ищет текст по нему."""
+    parts = urlsplit(url)
+    path = parts.path.strip('/')
+    if parts.netloc.lower() not in RBC_HOSTS or path.count('/') < 2:
+        return None
+    return 'https://amp.rbc.ru/rbcnews/' + path
+
+
+def _download(fetch_url):
+    """Тело страницы по адресу. Сервер (или его CDN) иногда сжимает ответ
+    gzip'ом, даже когда запрос не просил Accept-Encoding — так было с
+    printindustry.ru: `read().decode('utf-8', 'ignore')` без распаковки
+    превращал тело в мусорные байты, которые проходили проверку длины
+    (>200 знаков) и оседали в кэше нечитаемыми — цитата из НАСТОЯЩЕЙ статьи
+    потом не находилась вообще, хотя страница была скачана."""
+    import urllib.request
+    req = urllib.request.Request(fetch_url, headers={
+        'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                       'AppleWebKit/537.36 (KHTML, like Gecko) '
+                       'Chrome/124.0.0.0 Safari/537.36'),
+        'Accept-Language': 'ru-RU,ru;q=0.9,en;q=0.8',
+    })
+    resp = urllib.request.urlopen(req, timeout=25)
+    raw = resp.read()
+    if resp.headers.get('Content-Encoding', '').lower() == 'gzip':
+        import gzip as gzip_lib
+        raw = gzip_lib.decompress(raw)
+    return raw.decode('utf-8', 'ignore')
+
+
 def already_fetched():
     """Адреса, чей полный текст уже лежит на диске: второй раз не качаем.
 
@@ -200,7 +242,6 @@ def fetch_and_store(targets, write=True):
     Сетевые ошибки НЕ валят вызывающего: недоступная статья — обычное дело
     (пейволл, защита от роботов), и провал одного адреса не должен останавливать
     ворота. Возвращает (сколько скачано, сколько не вышло)."""
-    import urllib.request
     skip = already_fetched()
     out = os.path.join(RAW, '%s-articles.jsonl' % date.today().isoformat())
     records, failed = [], 0
@@ -215,30 +256,22 @@ def fetch_and_store(targets, write=True):
         skip.add(url)
         tg = telegram_preview_url(url)
         fetch_url = encode_url(tg[0] if tg else url)
-        req = urllib.request.Request(fetch_url, headers={
-            'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                           'AppleWebKit/537.36 (KHTML, like Gecko) '
-                           'Chrome/124.0.0.0 Safari/537.36'),
-            'Accept-Language': 'ru-RU,ru;q=0.9,en;q=0.8',
-        })
-        try:
-            resp = urllib.request.urlopen(req, timeout=25)
-            raw = resp.read()
-            # Сервер (или его CDN) иногда сжимает ответ gzip'ом, даже когда
-            # запрос не просил Accept-Encoding — так было с printindustry.ru:
-            # `read().decode('utf-8', 'ignore')` без распаковки превращал
-            # тело в мусорные байты, которые проходили проверку длины
-            # (>200 знаков) и оседали в кэше нечитаемыми — цитата из НАСТОЯЩЕЙ
-            # статьи потом не находилась вообще, хотя страница была скачана.
-            if resp.headers.get('Content-Encoding', '').lower() == 'gzip':
-                import gzip as gzip_lib
-                raw = gzip_lib.decompress(raw)
-            body = raw.decode('utf-8', 'ignore')
-            text = (telegram_post_text(body, tg[1], tg[2]) if tg else None) or article_text(body)
-            if len(text) <= 200:
-                raise ValueError('подозрительно короткий текст (%d знаков)' % len(text))
-        except Exception as e:
-            print('  НЕ ЗАБРАН %s %s (%s)' % (label, url, e))
+        # Основной адрес, затем открытая часть статьи за подпиской (если у
+        # издания она есть): пустая или короткая страница — повод попробовать
+        # запасной адрес, а не сдаться.
+        body, text, error = '', '', None
+        for attempt in [fetch_url] + ([] if tg else [u for u in [open_part_url(url)] if u]):
+            try:
+                body = _download(attempt)
+                text = (telegram_post_text(body, tg[1], tg[2]) if tg else None) or article_text(body)
+                if len(text) <= 200:
+                    raise ValueError('подозрительно короткий текст (%d знаков)' % len(text))
+                error = None
+                break
+            except Exception as e:
+                error = error or e
+        if error is not None:
+            print('  НЕ ЗАБРАН %s %s (%s)' % (label, url, error))
             failed += 1
             continue
         real_title = page_title(body) if not tg else None

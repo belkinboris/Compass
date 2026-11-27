@@ -237,6 +237,35 @@ CLAUDE.md, которого там больше нет, — разделы пе�
 выкупа — он переехал туда же из «Под вопросом» того же документа после
 починки, был открытым вопросом, стал решённым правилом).
 
+**Переносы 27 ноября 2026 (документы у потолка, бэклог G17, G19, G20, G24,
+G26, G29, G30; цель — не выше 80% потолка).** Тем же приёмом: текст не
+правился, на старом месте — заголовок раздела со ссылкой на новое место.
+Новые документы: шаги 3а и 13–16 из `docs/intake_run.md` —
+`docs/intake_run_known.md`; «Текст первого поста», «Строки поста» и
+«Финансов в посте нет» из `docs/channel_posts.md` —
+`docs/channel_post_lines.md`; «Обзор», этапы и пустые состояния из
+`docs/deal_card_screens.md` — `docs/deal_card_overview.md`; «Проза
+разделов» и «Пересказ — по статье» из `docs/card_editing.md` —
+`docs/card_prose.md`; три раздела о поиске из `docs/assistant_checks.md` —
+`docs/assistant_search_checks.md`. В существующие документы: «Тип сделки и
+нестандартные роли» из `docs/card_status_dates.md` —
+`docs/card_deal_kinds.md`; «Короткая проверка 9 ноября 2026» и «Находки
+марафона вычитки» из `docs/card_acceptance.md` —
+`docs/card_acceptance_rationale.md`; «Что консоль показывает в очереди» из
+`docs/moderation.md` — `docs/moderation_console_tech.md`; из
+`docs/site_screens.md` кабинет с уведомлениями — `docs/subscriptions.md`,
+два раздела о телефоне — `docs/site_mobile.md`; «Новая рутина — сразу с
+репозиторием» из `routines/README.md` — `docs/release.md`; «Дописывать абзац
+дешевле» из `pipeline/ingest/REVISION_BRIEF.md` — `docs/quality_run.md`;
+«Почему поиск обязателен» и два абзаца «почему» (`--ours` при rebase, замер
+10 августа) из `pipeline/ingest/READING_BRIEF.md` — `docs/reading_rationale.md`;
+абзац о числах отчёта из `routines/publication.md` —
+`docs/publication_pitfalls.md`. Из `routines/intake.md` подробности шагов 9,
+10, 11, 14, 15 и словарь отчёта — пунктами в `docs/intake_run.md` и
+`docs/intake_run_known.md`; рутина ссылается на пункт на своём шаге.
+Остался выше цели один файл: `routines/intake.md` (84%) — дальше в нём
+только сами шаги, и резать их нужно вместе с тем, кто ведёт приток.
+
 ## Обещание «сделаю потом» живет в бэклоге, а не в чате (29 октября 2026)
 
 28 октября после разреза KNOWN_ISSUES.md в ответе владельцу осталось:

@@ -33,9 +33,18 @@
 как раньше, выпускает рутина публикации. Сайт недоступен — черновик все
 равно уходит в консоль: потерять скорость лучше, чем потерять этап.
 
+ПОВТОРНЫЙ ПОКАЗ ГАСИТ КНОПКИ ПРЕЖНЕГО (27 ноября 2026, бэклог D9). «Арнест»,
+12 ноября: заголовок этапа поправили, отметку показа сняли руками — и в консоли
+оказалось два живых сообщения с кнопками, 19:32 со старым заголовком и 19:55 с
+новым. Теперь при отправке запоминаются номера сообщений
+(`event['milestone_draft_msgs']`), а новый показ того же этапа сначала снимает
+кнопки с прежнего сообщения (`retire_shown`). Показать заново после правки —
+`--resend <id сделки>~<вид>`, отметки руками не снимать.
+
 Запуск:
     python3 pipeline/ingest/send_milestone_drafts.py            # план без отправки
     python3 pipeline/ingest/send_milestone_drafts.py --write    # отправить
+    python3 pipeline/ingest/send_milestone_drafts.py --resend <id сделки>~<вид> --write
 """
 import json
 import os
@@ -119,19 +128,57 @@ def store_on_site(deal, event, client=None, reply_to=None):
             client.close()
 
 
-def build_plan():
+def build_plan(resend=None):
+    """`resend` — «<id сделки>~<вид>»: показать этот этап заново, хотя он уже
+    показан (правили заголовок или снимок). Вышедший этап заново не показывается:
+    `milestone_candidates` его не отдает."""
     data = json.load(open(DATA, encoding='utf-8'))
     milestones = data.get('telegram_milestones') or {}
     undrafted = [(deal, event) for deal, event in send_telegram.milestone_candidates(
                     data['deals'], milestones, data.get('telegram_post_state') or {})
-                if not event.get('milestone_drafted_at')]
+                if (('%s~%s' % (deal['id'], event['kind'])) == resend if resend
+                    else not event.get('milestone_drafted_at'))]
     plan = [(milestone_message(deal, event), milestone_keyboard(deal['id'], event['kind']), deal, event)
            for deal, event in undrafted]
     return plan, data
 
 
-def main(write=False):
-    plan, data = build_plan()
+def retire_shown(client, token, event):
+    """Снять кнопки с прежнего показа этого этапа: сообщение остается в ленте,
+    нажать на нем больше нечего. Сбой (сообщение удалено, старше 48 часов для
+    бота без прав) показу не мешает — новый проект поста важнее."""
+    for chat, mid in event.get('milestone_draft_msgs') or []:
+        try:
+            r = client.post(telegram_endpoint.method_url(token, 'editMessageReplyMarkup'),
+                            json={'chat_id': chat, 'message_id': mid,
+                                  'reply_markup': {'inline_keyboard': []}})
+            if r.status_code != 200:
+                print('  кнопки прежнего показа не сняты (%s, сообщение %s): %s' % (chat, mid, r.text[:120]))
+        except Exception as e:                                # noqa: BLE001
+            print('  кнопки прежнего показа не сняты (%s, сообщение %s): %s' % (chat, mid, e))
+
+
+def stamp(sent_events):
+    """Записать отметки показа в СВЕЖЕПРОЧИТАННУЮ базу: отправка идет минуты, и
+    `json.dump` снимка, прочитанного до нее, стер бы чужую запись (CLAUDE.md)."""
+    data = json.load(open(DATA, encoding='utf-8'))
+    by = {(deal['id'], event.get('id')): event for deal in data['deals'] for event in deal.get('events') or []}
+    for (deal_id, event_id), (at, msgs) in sent_events.items():
+        event = by.get((deal_id, event_id))
+        if event is None:
+            print('Этап %s сделки %s пропал из базы, пока шла отправка, — отметка показа не записана.'
+                  % (event_id, deal_id))
+            continue
+        event['milestone_drafted_at'] = at
+        if msgs:
+            event['milestone_draft_msgs'] = msgs
+        else:
+            event.pop('milestone_draft_msgs', None)
+    json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+
+
+def main(write=False, resend=None, client=None):
+    plan, data = build_plan(resend)
     chats = send_drafts.send_targets()
     print('Черновиков вех к отправке: %d | адресов: %d' % (len(plan), len(chats)))
     for text, _kb, _deal, _event in plan[:3]:
@@ -148,27 +195,40 @@ def main(write=False):
             print('Сухой прогон. Отправка — с ключом --write.')
         return 0
 
-    import httpx
-    sent = 0
+    sent_events = {}
     thread = console_topics.thread_id('decision')
-    with httpx.Client(timeout=20) as client:
+    own = client is None
+    if own:
+        import httpx
+        client = httpx.Client(timeout=20)
+    try:
         for i, (text, keyboard, deal, event) in enumerate(plan):
             if i:
                 time.sleep(send_drafts.PAUSE)
             if not store_on_site(deal, event, client,
                                  reply_to=(data.get('telegram_posts') or {}).get(deal['id'])):
                 print('Этап %s: сайт сам не опубликует — выпустит рутина публикации.' % event['id'])
-            ok_all = True
+            ok_all, msgs = True, []
             for chat in chats:
-                if not send_drafts.send_one(client, token, chat, text, keyboard, thread, html=True):
+                if not send_drafts.send_one(client, token, chat, text, keyboard, thread, html=True, sent=msgs):
                     ok_all = False
             if ok_all:
-                sent += 1
-                event['milestone_drafted_at'] = datetime.now(timezone.utc).isoformat(timespec='seconds')
-    json.dump(data, open(DATA, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('Отправлено черновиков вех: %d' % sent)
+                # Кнопки прежнего показа снимаем ПОСЛЕ того, как новый дошел:
+                # иначе при сбое отправки нажать было бы не на что.
+                retire_shown(client, token, event)
+                sent_events[(deal['id'], event.get('id'))] = (
+                    datetime.now(timezone.utc).isoformat(timespec='seconds'), msgs)
+    finally:
+        if own:
+            client.close()
+    if sent_events:
+        stamp(sent_events)
+    print('Отправлено черновиков вех: %d' % len(sent_events))
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main('--write' in sys.argv))
+    _resend = None
+    if '--resend' in sys.argv:
+        _resend = sys.argv[sys.argv.index('--resend') + 1]
+    sys.exit(main('--write' in sys.argv, resend=_resend))

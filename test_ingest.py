@@ -320,6 +320,225 @@ def test_parse_telegram_does_not_shift_url_past_a_textless_post():
     assert len(items) == 2, 'сдвига после пропущенного поста быть не должно'
 
 
+USERLAND_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns="http://backend.userland.com/rss2" xmlns:yandex="http://news.yandex.ru"
+     xmlns:media="http://search.yahoo.com/mrss/">
+ <channel>
+  <title>Новости</title>
+  <link>http://www.retail.ru</link>
+  <item>
+   <title>«Лента» купила сеть «Улыбка радуги»</title>
+   <link>https://www.retail.ru/news/lenta-kupila-set/</link>
+   <media:title>подпись к картинке</media:title>
+   <description><![CDATA[<p>Сумма сделки не раскрывается.</p>]]></description>
+   <pubDate>Thu, 26 Nov 2026 20:46:09 +0300</pubDate>
+   <yandex:full-text>Полный текст</yandex:full-text>
+  </item>
+  <item>
+   <title>ТЦ «Тройка» снова сменил собственника | New Retail</title>
+   <link>https://new-retail.ru/novosti/retail/troyka/</link>
+   <pubDate>Thu, 26 Nov 2026 11:00:00 +0300</pubDate>
+  </item>
+ </channel>
+</rss>"""
+
+
+def test_parse_rss_reads_feed_with_default_namespace():
+    """27 ноября 2026: Retail.ru и New Retail (114 и 64 карточки базы) 13 дней
+    не давали ни одной записи при живых лентах. Обе объявляют у корня
+    `xmlns="http://backend.userland.com/rss2"`: запись `<item>` находилась, а
+    ее `<title>` и `<link>` искались без пространства имен (или в Atom) — и
+    запись молча отбрасывалась. Образец повторяет шапку ленты Retail.ru."""
+    items = fetch.parse_rss(USERLAND_FEED.encode("utf-8"), "web:retail.ru")
+    assert [i["url"] for i in items] == [
+        "https://www.retail.ru/news/lenta-kupila-set/",
+        "https://new-retail.ru/novosti/retail/troyka/"]
+    first = items[0]
+    assert first["title"] == "«Лента» купила сеть «Улыбка радуги»", \
+        "заголовок записи, а не <media:title> чужого расширения"
+    assert first["summary"] == "Сумма сделки не раскрывается."
+    assert first["published"].startswith("Thu, 26 Nov 2026")
+    assert first["source_id"] == "web:retail.ru"
+
+
+def test_parse_rss_still_reads_plain_rss_and_atom():
+    """Починка пространства имен не должна сломать два прежних вида лент."""
+    plain = ("<rss><channel><item><title>А купил Б</title><link>https://x.test/1</link>"
+             "<pubDate>Thu, 26 Nov 2026 10:00:00 GMT</pubDate></item></channel></rss>")
+    atom = ('<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>В купил Г</title>'
+            '<link rel="self" href="https://x.test/self"/>'
+            '<link rel="alternate" href="https://x.test/2"/>'
+            '<updated>2026-11-26T10:00:00Z</updated><summary>кратко</summary></entry></feed>')
+    assert fetch.parse_rss(plain.encode(), "s")[0]["url"] == "https://x.test/1"
+    got = fetch.parse_rss(atom.encode(), "s")[0]
+    assert (got["url"], got["title"], got["summary"], got["published"]) == (
+        "https://x.test/2", "В купил Г", "кратко", "2026-11-26T10:00:00Z")
+
+
+def test_fetch_source_calls_empty_answer_an_error(monkeypatch):
+    """Ответ 200 без записей — отказ, а не «ок, записей 0»: так Forbes.ru
+    месяцами отдавал страницу «вы не робот» и числился проверенной лентой."""
+    src = {"id": "web:forbes.ru", "kind": "rss", "feed": "https://forbes.test/rss"}
+    monkeypatch.setattr(fetch, "http_get", lambda url: b"<!doctypehtml><html lang=en><head></head></html>")
+    items, err = fetch.fetch_source(src)
+    assert items == [] and err and "страница сайта" in err
+    monkeypatch.setattr(fetch, "http_get", lambda url: b"")
+    assert fetch.fetch_source(src)[1] == "пустой ответ"
+    monkeypatch.setattr(fetch, "http_get", lambda url: USERLAND_FEED.encode("utf-8"))
+    items, err = fetch.fetch_source(src)
+    assert len(items) == 2 and err is None
+
+
+def test_fetch_skips_entries_older_than_two_weeks():
+    """Заведенная или починенная лента отдает весь хвост разом («Агроинвестор» —
+    записи с 2014 года), а у фильтра возраста нет: старое в сырье не берется.
+    Запись без распознанной даты старой не считается."""
+    import datetime as dt
+    today = dt.date(2026, 11, 27)
+    assert fetch.published_day("Thu, 26 Nov 2026 20:46:09 +0300") == dt.date(2026, 11, 26)
+    assert fetch.published_day("Thu, 26 Nov 2026 10:00:00 GMT") == dt.date(2026, 11, 26)
+    assert fetch.published_day("2026-11-26T10:00:00+00:00") == dt.date(2026, 11, 26)
+    assert fetch.published_day("2026-11-26") == dt.date(2026, 11, 26)
+    assert fetch.published_day("вчера") is None and fetch.published_day("") is None
+    assert fetch.too_old({"published": "Thu, 13 Feb 2014 10:00:00 +0400"}, today)
+    assert fetch.too_old({"published": "2026-11-12"}, today)
+    assert not fetch.too_old({"published": "2026-11-13"}, today)
+    assert not fetch.too_old({"published": "вчера"}, today)
+    assert not fetch.too_old({}, today)
+
+
+# ---------- молчащие ленты (feeds_health.py) ----------
+
+def _health_sources():
+    return [
+        {"id": "web:live.ru", "name": "Живая", "feed": "f", "enabled": True},
+        {"id": "web:stale.ru", "name": "Застывшая", "feed": "f", "enabled": True},
+        {"id": "web:dead.ru", "name": "Сломанная", "feed": "f", "enabled": True},
+        {"id": "web:paper.ru/daily", "name": "Газета", "feed": "f", "enabled": True},
+        {"id": "firm:rare", "name": "Юрфирма", "feed": "f", "enabled": True, "quiet_days": 30},
+        {"id": "web:captcha.ru", "name": "Закрытая", "feed": "f", "enabled": True,
+         "broken_note": "капча"},
+        {"id": "web:back.ru", "name": "Ожившая", "feed": "f", "enabled": True,
+         "broken_note": "была капча"},
+        {"id": "web:off.ru", "name": "Выключенная", "feed": "f", "enabled": False},
+        {"id": "web:nofeed.ru", "name": "Без ленты", "feed": None, "enabled": False},
+    ]
+
+
+def test_feeds_health_live_finds_silent_and_broken_feeds():
+    """27 ноября 2026: 12 включенных лент 13 дней не давали записей, и никто
+    этого не видел. Проверка называет ленту, которая отвечает ошибкой, и ленту,
+    которая отвечает, но застыла (новейшая запись старше порога); известную
+    поломку (`broken_note`) показывает отдельно и код возврата не поднимает."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+    answers = {
+        "web:live.ru": ([{"published": "Thu, 26 Nov 2026 20:46:09 +0300"},
+                         {"published": "Mon, 02 Nov 2026 10:00:00 +0300"}], None),
+        "web:stale.ru": ([{"published": "Fri, 23 Oct 2026 10:00:00 +0300"}], None),
+        "web:dead.ru": ([], "HTTP 404"),
+        "web:paper.ru/daily": ([], "HTTP 401"),
+        "firm:rare": ([{"published": "2026-11-05T10:00:00+00:00"}], None),   # 22 дня при пороге 30
+        "web:captcha.ru": ([], "вместо ленты пришла страница сайта"),
+        "web:back.ru": ([{"published": "2026-11-27"}], None),
+    }
+    asked = []
+
+    def fetcher(src):
+        asked.append(src["id"])
+        return answers[src["id"]]
+
+    res = feeds_health.check(_health_sources(), today=today, fetcher=fetcher)
+    assert "web:off.ru" not in asked and "web:nofeed.ru" not in asked, "выключенные не проверяются"
+    assert res["checked"] == 7
+    assert [s["id"] for s, _ in res["new"]] == ["web:stale.ru", "web:dead.ru", "web:paper.ru/daily"]
+    assert [s["id"] for s, _ in res["known"]] == ["web:captcha.ru"]
+    assert [s["id"] for s, _ in res["revived"]] == ["web:back.ru"]
+    assert feeds_health.exit_code(res) == 1
+    lines = feeds_health.report_lines(res["new"])
+    assert lines == ["лента Застывшая молчит 35 дней",
+                     "лента Сломанная не работает: адрес ленты больше не существует",
+                     "лента Газета (daily) не работает: сайт закрыл доступ к ленте"]
+    assert not any("ё" in line or "HTTP" in line for line in lines), "строки отчета читает человек"
+
+    # Все живы, кроме известной поломки, — код 0.
+    answers["web:stale.ru"] = answers["web:dead.ru"] = answers["web:paper.ru/daily"] = answers["web:live.ru"]
+    assert feeds_health.exit_code(feeds_health.check(_health_sources(), today=today, fetcher=fetcher)) == 0
+
+
+def test_feeds_health_retries_a_dropped_connection_and_knows_closed_network():
+    """Разовый обрыв связи у живой ленты — не находка (вторая попытка), а когда
+    не ответило больше половины лент — закрыта сеть из этой среды: код 2,
+    о лентах это ничего не говорит."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+    ok = ([{"published": "2026-11-27"}], None)
+    calls = {}
+
+    def flaky(src):
+        calls[src["id"]] = calls.get(src["id"], 0) + 1
+        if src["id"] == "web:live.ru" and calls[src["id"]] == 1:
+            return [], "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+        return ok
+
+    res = feeds_health.check(_health_sources(), today=today, fetcher=flaky)
+    assert calls["web:live.ru"] == 2 and not res["new"]
+
+    res = feeds_health.check(_health_sources(), today=today,
+                             fetcher=lambda src: ([], "URLError: Tunnel connection failed: 403 Forbidden"))
+    assert feeds_health.exit_code(res) == 2
+
+
+def test_feeds_health_disk_reads_raw_and_does_not_judge_too_early(tmp_path):
+    """Без сети — по сырью: лента без записей за порог дней молчит; если сырье
+    покрывает меньше порога, о ленте без записей сказано «судить рано»."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+
+    def write(day, rows):
+        (tmp_path / (day + ".jsonl")).write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+
+    write("2026-11-15", [{"source_id": "web:stale.ru", "url": "u1", "fetched": "2026-11-15"},
+                         {"source_id": "web:live.ru", "url": "u2", "fetched": "2026-11-15"}])
+    write("2026-11-26", [{"source_id": "web:live.ru", "url": "u3", "fetched": "2026-11-26"}])
+    # Кэш полных текстов статей — не лента, в счет не идет.
+    (tmp_path / "2026-11-26-articles.jsonl").write_text(
+        json.dumps({"source_id": "web:dead.ru", "url": "u4"}) + "\n", encoding="utf-8")
+
+    res = feeds_health.check(_health_sources(), mode="disk", today=today, raw_dir=str(tmp_path))
+    new = {s["id"]: v for s, v in res["new"]}
+    assert set(new) == {"web:stale.ru", "web:dead.ru", "web:paper.ru/daily"}
+    assert new["web:stale.ru"]["days"] == 12 and new["web:dead.ru"]["days"] == 12
+    assert [s["id"] for s, _ in res["unknown"]] == ["firm:rare"], \
+        "сырья 12 дней при пороге 30 — судить рано, а не «молчит»"
+    assert {s["id"] for s, _ in res["known"]} == {"web:captcha.ru", "web:back.ru"}
+    assert feeds_health.exit_code(res, "disk") == 1
+
+    # Сырья нет вовсе (новая сессия рутины): находок нет, все «судить рано».
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    res = feeds_health.check(_health_sources(), mode="disk", today=today, raw_dir=str(empty))
+    assert not res["new"] and len(res["unknown"]) == 7
+    assert feeds_health.exit_code(res, "disk") == 0
+
+
+def test_registry_has_no_enabled_feed_marked_unchecked_without_reason():
+    """Включенная лента, у которой последняя проверка кончилась ошибкой, должна
+    нести `broken_note` — причину словами. Иначе это та самая тихая поломка:
+    Sostav.ru и «Эксперт» с 31 июля 2026 стояли включенными с `HTTP 404`."""
+    reg = json.loads((ROOT / "pipeline" / "ingest" / "sources.json").read_text(encoding="utf-8"))
+    bad = [s["id"] for s in reg["sources"]
+           if s.get("enabled") and s.get("last_error") and not s.get("broken_note")]
+    assert not bad, f"включены, отвечают ошибкой и без пометки broken_note: {bad}"
+    for s in reg["sources"]:
+        if s.get("quiet_days") is not None:
+            assert isinstance(s["quiet_days"], int) and s["quiet_days"] > 0
+
+
 # ---------- формат телеграм-поста ----------
 
 def test_post_has_no_placeholder_lines(base):
@@ -666,6 +885,28 @@ def test_send_plan_trusts_the_site_memory_of_what_was_shown(monkeypatch):
     assert card["draft_sent"] and card["post_draft_sent"] and card["post_preview"] == "<b>Пост</b>"
 
 
+def test_send_plan_does_not_catch_up_a_card_without_reading_and_acceptance(monkeypatch, capsys):
+    """Бэклог D11 (18 ноября 2026, g74dbc4b1): сайт помнит показ по id, а в очереди
+    лежит заново собранная карточка без отметок чтения и приемки — «догонялка»
+    не ставит ей `draft_sent`, и в консоль она не уходит, пока не прочитана."""
+    import send_drafts
+    import promote
+    bare = {"id": "gN", "title": "Сделка N", "status": "Закрыта", "date": "2026-11-18", "type": "M&A",
+            "ind": "ИТ", "src": [["Ъ", "https://www.kommersant.ru/doc/4"]], "eco": {}, "law": {}}
+    pending = {"cards": [bare]}
+    monkeypatch.setattr(promote, "load_pending", lambda: pending)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: {"gN"})
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(promote, "load_state", lambda: {}, raising=False)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {"cards": {"gN": {"shown_at": "x", "post_preview": "<b>Пост</b>"}},
+                                                           "raw": []})
+    plan, *_rest = send_drafts.build_plan()
+    assert plan == [], plan
+    assert "draft_sent" not in bare and "post_draft_sent" not in bare and "post_preview" not in bare
+    assert "НЕ ДОГОНЯЮ gN" in capsys.readouterr().out
+
+
 def test_send_plan_only_one_card_skips_raw_and_other_cards(monkeypatch, tmp_path):
     """`ship_card.py` показывает одну готовую карточку сразу (28 октября 2026):
     план с `only=<id>` — только ее 🗂/📣, без сырья и чужих карточек."""
@@ -731,6 +972,35 @@ def test_post_names_a_treasury_buyback_buyer_instead_of_not_disclosed():
     text = format_post.render(deal, companies)
     assert "<b>Покупатель:</b> сама «Красная звезда» (выкуп собственной доли)\n" in text, text
     assert "не раскрыт" not in text, text
+
+
+def test_post_marks_a_sum_reported_by_unnamed_sources():
+    """A37: сумма со слов источников издания (`sum_basis: "reported"`) на
+    сайте подписана «по данным источников», а пост печатал голое число, как
+    цену, названную сторонами (g9b852635, 24 ноября 2026)."""
+    deal = {"id": "grep1", "title": "«Тест-Покупатель» покупает «Тест-Сервис»",
+            "type": "M&A", "status": "Обсуждается", "date": FRESH_DATE, "ind": "ИТ и интернет",
+            "buyer_name": "«Тест-Покупатель»", "seller": "Иван Тестов", "asset": "«Тест-Сервис»",
+            "sum": "8,1 млрд ₽", "sum_basis": "reported"}
+    assert "<b>Сумма:</b> 8,1 млрд ₽ (по данным источников)\n" in format_post.render(deal, {})
+    # Основания в поле нет — берется из слоя фактов, как на сайте.
+    by_facts = dict({k: v for k, v in deal.items() if k != "sum_basis"},
+                    facts={"price": {"meaning": "reported"}})
+    assert "8,1 млрд ₽ (по данным источников)" in format_post.render(by_facts, {})
+    # Цена, названная сторонами, и сумма без основания — без оговорки.
+    for basis in ("disclosed", None, "estimate"):
+        assert "по данным" not in format_post.render(dict(deal, sum_basis=basis), {}), basis
+    # Оговорка уже в тексте суммы — вторая скобка не ставится.
+    own = format_post.render(dict(deal, sum="≈50 млрд ₽ (по оценке)"), {})
+    assert "<b>Сумма:</b> ≈50 млрд ₽ (по оценке)\n" in own, own
+    # «Не раскрыта» и лот на торгах оговорку не получают.
+    assert "по данным" not in format_post.render(dict(deal, sum="Не раскрыта"), {})
+    lot = dict(deal, type="Продажа с торгов", status="Объявлена")
+    if format_post.is_listing(lot):
+        assert "по данным" not in format_post.render(lot, {})
+    # Проверка поста перед отправкой такую строку пропускает.
+    import check_post
+    assert not [p for p in check_post.check(format_post.render(deal, {})) if "Сумма" in p or "данным" in p]
 
 
 def test_post_attaches_buyer_detail_only_alongside_the_buyer_name():
@@ -3329,6 +3599,72 @@ def test_publication_leaves_alone_a_milestone_the_site_is_posting_right_now(monk
     assert len(calls) == 1 and "Президент разрешил сделку Ю" in calls[0][1]["text"]
     assert written["telegram_milestones"]["dsite2-approval"]["message_id"] == 4343
     assert consumed == [8]
+
+
+def test_reshown_milestone_draft_takes_the_buttons_off_the_previous_message(monkeypatch, tmp_path):
+    """Бэклог D9 («Арнест», 12 ноября 2026): заголовок этапа поправили, проект
+    поста показали заново — и в консоли осталось два живых сообщения с кнопками.
+    Показ запоминает номера сообщений; повторный (`--resend`) снимает кнопки с
+    прежнего и пишет отметки в свежепрочитанную базу, не стирая чужую запись."""
+    import send_milestone_drafts as smd
+
+    deal = _site_milestone_deal("dsite9")
+    del deal["events"][0]["milestone_drafted_at"]
+    path = tmp_path / "deals_promoted.json"
+    path.write_text(json.dumps({"deals": [deal], "companies": {}, "telegram_posts": {},
+                                "telegram_milestones": {}}, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(smd, "DATA", str(path))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET", raising=False)
+    monkeypatch.setattr(smd.send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(smd.console_topics, "thread_id", lambda kind: 7)
+
+    class _Resp:
+        status_code = 200
+        text = ""
+
+        def __init__(self, body):
+            self._body = body
+
+        def json(self):
+            return self._body
+
+    class _Client:
+        def __init__(self):
+            self.calls, self.next_id = [], 500
+
+        def post(self, url, json):
+            method = url.rsplit("/", 1)[-1]
+            self.calls.append((method, json))
+            if method == "sendMessage":
+                self.next_id += 1
+                # Пока идет отправка, базу правит другой прогон — его запись должна уцелеть.
+                base = __import__("json").loads(path.read_text(encoding="utf-8"))
+                base["telegram_posts"]["чужая-%d" % self.next_id] = None
+                path.write_text(__import__("json").dumps(base, ensure_ascii=False), encoding="utf-8")
+                return _Resp({"ok": True, "result": {"message_id": self.next_id}})
+            return _Resp({"ok": True, "result": True})
+
+    client = _Client()
+    assert smd.main(write=True, client=client) == 0
+    event = json.loads(path.read_text(encoding="utf-8"))["deals"][0]["events"][0]
+    assert event["milestone_draft_msgs"] == [["-100", 501]] and event["milestone_drafted_at"]
+    assert [m for m, _b in client.calls] == ["sendMessage"]
+    # Уже показанный этап второй раз сам не уходит.
+    assert smd.build_plan()[0] == []
+    # Заголовок поправили — показываем заново: новый проект, кнопки прежнего сняты.
+    base = json.loads(path.read_text(encoding="utf-8"))
+    base["deals"][0]["events"][0]["headline"] = "Правкомиссия разрешила сделку Ю"
+    path.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    assert smd.main(write=True, resend="dsite9~approval", client=client) == 0
+    methods = [m for m, _b in client.calls]
+    assert methods == ["sendMessage", "sendMessage", "editMessageReplyMarkup"]
+    assert "Правкомиссия разрешила" in client.calls[1][1]["text"]
+    assert client.calls[2][1] == {"chat_id": "-100", "message_id": 501, "reply_markup": {"inline_keyboard": []}}
+    written = json.loads(path.read_text(encoding="utf-8"))
+    assert written["deals"][0]["events"][0]["milestone_draft_msgs"] == [["-100", 502]]
+    assert set(written["telegram_posts"]) == {"чужая-501", "чужая-502"}
 
 
 def test_milestone_draft_puts_the_ready_post_on_the_site_first(monkeypatch):
@@ -11469,6 +11805,30 @@ def test_title_standard_accepts_a_loss_of_control_without_a_named_buyer():
     assert not title_standard.verb_ok(card, "Крупнейший акционер Ozon «О23» вышел из-под контроля Александра Чачавы")
 
 
+def test_title_standard_auction_without_a_named_winner_and_no_parties_hint():
+    """Бэклог G27 и G31 (27 ноября 2026). Победитель торгов не назван, продавец
+    известен — общее правило владельца от 19 ноября («если есть продавец, но нет
+    покупателя») на торгах: «Z продал на торгах Y». Не названы обе стороны — правила
+    владельца нет («потом решим»): находка не выдумывает формулу, а говорит, что
+    делать (аукцион личной вещи — не сделка; у M&A — заголовок от рода покупателей)."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard as ts
+    auction = {"type": "Продажа с торгов", "status": "Закрыта", "seller": "Росимущество"}
+    assert ts.verb_ok(auction, "Росимущество продало на торгах 100% «Башспирта»") is True
+    assert ts.verb_ok(auction, "УГМК-Инвест купил на торгах активы Petropavlovsk") is True
+    assert ts.verb_ok(auction, "Портсигар Николая II ушел с молотка за $1,2 млн") is False
+    assert "продал на торгах" in ts.hint(auction) and "потом решим" not in ts.hint(auction)
+    nameless = {"type": "Продажа с торгов", "status": "Закрыта"}
+    assert ts.no_parties(nameless) and not ts.no_parties(auction)
+    assert "drop_pending" in ts.hint(nameless) and "потом решим" in ts.hint(nameless)
+    abb = {"type": "M&A", "status": "Закрыта"}
+    assert ts.no_parties(abb) and "Группа инвесторов" in ts.hint(abb)
+    assert ts.verb_ok(abb, "Группа инвесторов купила 2,1% Совкомбанка у крупного частного акционера") is True
+    # Идущая сделка без сторон — «Y выставлен на продажу», подсказка о двух сторонах не нужна.
+    assert not ts.no_parties({"type": "M&A", "status": "Обсуждается"})
+    assert not ts.no_parties(dict(abb, buyer_id="c1"))
+
+
 # --- Короткая проверка 9 ноября 2026: как ошибки попадали в карточки и что их теперь ловит
 # (known_issues/card.md, «Короткая проверка 9 ноября 2026»). Примеры — реальные карточки.
 
@@ -13001,3 +13361,148 @@ def test_share_form_and_plain_words_hold_every_write_not_only_acceptance():
     assert not prose_gate.share_regressed('eco.context', '100% доли в ООО «Олвин»', 'Завод')
     assert text_rules.problems('Сам Aspace говорит прямо', 'eco.context')
     assert not text_rules.problems('В сделку вошли бренды «Умница» и «Сами с усами».', 'extra')
+
+
+def test_second_reading_asks_for_party_words_but_accepts_older_answers():
+    """27.11.2026: узкий вопрос о цели и согласованиях со слов стороны — в списке вопросов;
+    ответ, начатый по прежнему списку (без него), не отклоняется; замечание по нему возвращает на правку."""
+    import second_reading
+    card = {"id": "x", "accepted": "2026-11-27", "title": "А купил Б", "eco": {"rationale": "—"}, "law": {}}
+    assert "party_words" in second_reading.GENERAL_QUESTIONS
+    assert "[party_words]" in second_reading.questionnaire(card, {"companies": {}})
+    old = {"fields": {"title": "ok"},
+           "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS if k != "party_words"}, "verdict": "ok"}
+    assert second_reading.apply(old, dict(card), day="2026-11-27")[0] == "stamped"
+    found = {"fields": {"title": "ok"},
+             "general": dict({k: "ok" for k in second_reading.GENERAL_QUESTIONS},
+                             party_words="eco.rationale: «привлечь финансирование», пресс-служба, retailer.ru"),
+             "verdict": "fix"}
+    assert second_reading.apply(found, dict(card))[0] == "fix"
+
+
+def test_thing_auctions_are_not_deals_but_property_and_companies_at_auction_are(base):
+    """G38, 21–22 ноября 2026: кольцо с «Титаника» и прядь волос Вашингтона
+    прошли фильтр («продали») и ворота (кириллическое имя в заголовке) и
+    встали в очередь типом M&A. Аукцион вещи — не сделка; здание, завод или
+    доля на торгах — наш профиль и должны проходить, как и имена в кавычках
+    («Садовое кольцо»)."""
+    import promote
+    things = [
+        "Кольцо британского модельера Дафф-Гордон с «Титаника» продали за 110 000 фунтов",
+        "В Британии кольцо пассажира «Титаника» ушло с молотка за £150 тыс.",
+        "Прядь волос Джорджа Вашингтона продали на аукционе за $4 тыс.",
+        "Прядь волос Джорджа Вашингтона продали всего за 4 тысячи долларов",
+        "Картину Айвазовского продали за $1,4 млн на торгах Sotheby's",
+        "Работа Кандинского установила рекорд на аукционе Christie's",
+        "Световой меч Дарта Вейдера из «Звездных войн» продали в США почти за $5 млн",
+        "Майку Коби Брайанта продали на аукционе за рекордные $2,2 млн",
+        "Икону «Чудо Георгия о змие» XVI века выставят на торги в США",
+    ]
+    deals = [
+        "Компания «СК С.Т.С.» (ГК «Садовое кольцо») купила на торгах Серпуховский лифтостроительный завод",
+        "ТЦ «Кольцо» в Казани продан на торгах за 2 млрд",
+        "«Почта России» выставила здание Главпочтамта на аукцион за 7,7 млрд рублей",
+        "Часовой завод «Полет» продали на торгах",
+        "Росимущество продало на аукционе 100% акций завода «Квант»",
+    ]
+    wrong = [t for t in things if classify.looks_like_deal(t) or not classify.is_thing_auction(t)]
+    assert not wrong, f"аукцион вещи прошел фильтр: {wrong}"
+    lost = [t for t in deals if not classify.looks_like_deal(t) or classify.is_thing_auction(t)]
+    assert not lost, f"настоящая продажа с торгов принята за аукцион вещи: {lost}"
+    hit = [d["id"] for d in base["deals"] if classify.is_thing_auction(d.get("title"))]
+    assert not hit, f"карточки базы приняты за аукцион вещи: {hit[:5]}"
+    # второй замок — ворота: черновик, пришедший мимо фильтра сырья
+    draft = {"title": things[0], "date": "2026-11-21", "type": "M&A", "status": "Закрыта",
+             "asset": "Кольцо", "seller": "Дафф-Гордон", "src": [["РИА", "https://ria.ru/20261121/kolco.html"]]}
+    bad, _hold = promote.check(draft, {"companies": {}, "deals": []},
+                               promote.matcher.index_base([], {}, {}), promote.industries())
+    assert any("аукцион вещи" in b for b in bad), bad
+    # размещение ОФЗ и дискретный аукцион биржи — не продажа имущества
+    assert not classify.looks_like_deal("Минфин разместил на безлимитном аукционе ОФЗ на 20,57 миллиарда рублей")
+    assert not classify.looks_like_deal("Мосбиржа проводит дискретный аукцион по акциям МГКЛ")
+
+
+def test_filter_lets_a_change_of_shareholders_through():
+    """E19, 27 ноября 2026: «„Циан“ сменил основных акционеров» (РБК) фильтр
+    счел не сделкой — в заголовке нет ни глагола покупки, ни сторон, а в
+    тексте продажа 52%. «Сменил владельца/собственника» фильтр знал,
+    «акционеров» — нет."""
+    for title in ("«Циан» сменил основных акционеров",
+                  "У «Циана» сменились ключевые акционеры",
+                  "Смена акционеров в «Циане»",
+                  "Оператор сменил состав участников ООО «Ромашка»"):
+        assert classify.looks_like_deal(title), title
+    assert not classify.looks_like_deal("Сборная сменила состав участников перед чемпионатом")
+    assert not classify.looks_like_deal("Акции «Циана» упали на фоне сообщения о новом составе акционеров")
+
+
+def test_paywalled_rbc_article_is_read_from_its_open_amp_part(monkeypatch, tmp_path):
+    """E19: статья РБК по подписке отдает роботу пустую страницу (0 знаков),
+    а amp-версия того же адреса — заголовок и вводку. Дозабор пробует ее
+    вторым адресом и кладет текст в кэш под ИСХОДНЫМ адресом, по которому
+    его ищет `review.py`. Сеть не нужна: загрузка подменена."""
+    import fetch_article_texts as articles
+    monkeypatch.setattr(articles, "RAW", str(tmp_path))
+    url = "https://www.rbc.ru/business/27/11/2026/6b0879f6d31da4b02bb5fea9"
+    amp = "https://amp.rbc.ru/rbcnews/business/27/11/2026/6b0879f6d31da4b02bb5fea9"
+    assert articles.open_part_url(url) == amp
+    assert articles.open_part_url("https://www.kommersant.ru/doc/9130738") is None
+    assert articles.open_part_url("https://www.rbc.ru/") is None
+    asked = []
+    lead = "Ключевые акционеры «Циана» вышли из капитала компании. Собственники сменились у 52% акций. " * 4
+
+    def fake(fetch_url):
+        asked.append(fetch_url)
+        return "" if fetch_url == url else "<html><title>«Циан» сменил основных акционеров</title><p>%s</p></html>" % lead
+
+    monkeypatch.setattr(articles, "_download", fake)
+    got, lost = articles.fetch_and_store([("g1a8709ea", url, "заголовок карточки")], write=True)
+    assert (got, lost) == (1, 0) and asked == [url, amp], asked
+    rec = json.loads(next(tmp_path.iterdir()).read_text(encoding="utf-8").strip())
+    assert rec["url"] == url and "52% акций" in rec["summary"]
+    assert rec["title"] == "«Циан» сменил основных акционеров"
+    # у издания без запасного адреса пустая страница — по-прежнему «не забран»
+    asked.clear()
+    monkeypatch.setattr(articles, "_download", lambda u: "")
+    assert articles.fetch_and_store([("x", "https://www.kommersant.ru/doc/1", "")], write=False) == (0, 1)
+
+
+def test_enrich_does_not_step_back_to_an_earlier_stage_after_a_later_one():
+    """G45, 26 ноября 2026, ЛУКОЙЛ/консорциум Боэли (g707211ba): карточка
+    стояла «Подписана», «Коммерсантъ» на следующий день пересказал то же
+    соглашение словами о переговорах — и после «Документы подписаны» в ходе
+    сделки появились «Переговоры». Более поздняя статья с этапом более
+    раннего вида — второй источник текущего этапа, а не новый этап. Старая
+    новость (дата раньше текущего этапа) по-прежнему дополняет историю."""
+    import enrich
+    signed_src = ["Интерфакс", "https://www.interfax.ru/business/1060001"]
+    deal = {"id": "g707211ba", "title": "ЛУКОЙЛ подписал соглашение о продаже зарубежных активов",
+            "type": "M&A", "status": "Подписана", "date": "2026-11-24", "src": [signed_src],
+            "events": [{"id": "s", "kind": "signed", "date": "2026-11-24", "title": "Документы подписаны",
+                        "source": signed_src}]}
+    item = {"title": "ЛУКОЙЛ ведет переговоры о продаже зарубежных активов консорциуму",
+            "summary": "Компания ведет переговоры о продаже зарубежного бизнеса.",
+            "url": "https://www.kommersant.ru/doc/9130738", "date": "2026-11-25",
+            "source_id": "web:kommersant.ru"}
+    assert enrich.draft.guess_event(item)["kind"] == "negotiations"
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), "после подписания дописан этап «Переговоры»"
+    stage_src = [p for p in props if p[0] == "event_source"]
+    assert stage_src and stage_src[0][1]["kind"] == "signed" and stage_src[0][1]["date"] == "2026-11-24", props
+    enrich.apply_props(deal, props)
+    assert [e["kind"] for e in deal["events"]] == ["signed"]
+    assert deal["events"][0]["sources"] == [signed_src, ["Коммерсантъ", item["url"]]]
+    assert not any(p[0] in ("event", "event_source") for p in enrich.proposals(deal, item, {}, {}))
+    # карточка без записей events: этап выведен из статуса — нового этапа тоже нет
+    bare = {k: v for k, v in deal.items() if k != "events"}
+    bare["src"] = [signed_src]
+    assert not any(p[0] in ("event", "event_source") for p in enrich.proposals(bare, item, {}, {}))
+    # новость с датой ДО подписания — настоящая история переговоров, этап остается
+    early = dict(item, url="https://www.kommersant.ru/doc/9100000", date="2026-10-01")
+    fresh = {"id": "g1", "title": deal["title"], "type": "M&A", "status": "Подписана", "date": "2026-11-24",
+             "src": [signed_src], "events": [dict(deal["events"][0], sources=[signed_src])]}
+    assert any(p[0] == "event" and p[1]["kind"] == "negotiations" for p in enrich.proposals(fresh, early, {}, {}))
+    # движение вперед не задето: закрытие после подписания — новый этап
+    closed = dict(item, title="ЛУКОЙЛ закрыл сделку по продаже зарубежных активов",
+                  summary="Сделка закрыта.", url="https://www.kommersant.ru/doc/9140000", date="2026-12-20")
+    assert any(p[0] == "event" and p[1]["kind"] == "closed" for p in enrich.proposals(fresh, closed, {}, {}))
