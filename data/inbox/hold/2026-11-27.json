@@ -654,34 +654,6 @@
    ]
   },
   {
-   "draft_id": "d75458215",
-   "title": "POIZON: значительная доля россиян покупает зимние вещи ещё до наступления сезона | New Retail",
-   "date": "2026-11-23",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/poizon_znachitelnaya_dolya_rossiyan_pokupaet_zimnie_veshchi_eshchye_do_nastupleniya_sezona/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "зимние вещи ещё до наступления сезона | New Retail",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "зимние вещи ещё до наступления сезона | New Retail",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
    "draft_id": "d08484154",
    "title": "Опыт VOIS: зачем бьюти-бренду подарочные наборы, если те же средства продаются отдельно | New-Retail.ru",
    "date": "2026-11-23",
@@ -705,11 +677,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «POIZON: значительная доля россиян покупает зимние вещи ещё д» — второе издание, в группу не шлем"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   },
   {
@@ -965,35 +935,6 @@
    ]
   },
   {
-   "draft_id": "d80719290",
-   "title": "ВТБ постарается завершить допэмиссию и приобретение доли в RWB до конца года",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261127/vtb-875618674.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 5) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d37902055",
    "title": "ВТБ намерен до конца года купить долю в финтех-активах RWB",
    "date": "2026-11-27",
@@ -1028,11 +969,8 @@
    },
    "ind": "ИТ и интернет",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 5) — проверьте, не дубль ли",
-    "та же новость, что «ВТБ постарается завершить допэмиссию и приобретение доли в R» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -1073,18 +1011,17 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 4) — проверьте, не дубль ли",
-    "та же новость, что «ВТБ постарается завершить допэмиссию и приобретение доли в R» — второе издание, в группу не шлем"
+    "та же новость, что «ВТБ намерен до конца года купить долю в финтех-активах RWB» — второе издание, в группу не шлем"
    ]
   },
   {
-   "draft_id": "d12301664",
-   "title": "Китайская XPeng будет продавать человекоподобных роботов по цене электромобилей",
+   "draft_id": "d58416413",
+   "title": "Американская табачная компания Altria может купить британскую Imperial Brands",
    "date": "2026-11-27",
    "src": [
     [
-     "web:incrussia.ru",
-     "https://incrussia.ru/news/kitajskaya-xpeng-budet-prodavat-chelovekopodobnyh-robotov-po-tsene-elektromobilej/"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9142714"
     ]
    ],
    "sum": null,
@@ -1095,10 +1032,10 @@
      "kind": "negotiations",
      "date": "2026-11-27",
      "title": "Переговоры",
-     "note": "Китайская XPeng планирует продавать человекоподобных роботов IRON по цене электромобилей. Когда начнутся продажи, что умеет робот и когда он появится в домах.",
+     "note": "Американская табачная корпорация Altria рассматривает возможность покупки британского конкурента Imperial Brands. Компания также заявила, что ведет переговоры с третьей стороной о совместном приобретении Imperial Brands.",
      "source": [
-      "web:incrussia.ru",
-      "https://incrussia.ru/news/kitajskaya-xpeng-budet-prodavat-chelovekopodobnyh-robotov-po-tsene-elektromobilej/"
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9142714"
      ]
     }
    ],
@@ -1114,17 +1051,87 @@
    "needs_review": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
+    "похоже на уже описанную сделку gdc13aeb3 (общие редкие слова: brands, imperi) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d75736528",
-   "title": "«Циан» сменил состав крупнейших акционеров",
+   "draft_id": "d22555933",
+   "title": "ВТБ намерен до конца года купить долю в финтех-активах RWB",
    "date": "2026-11-27",
    "src": [
     [
-     "web:iz.ru",
-     "https://iz.ru/2209214/tcian-smenil-sostav-krupneishikh-aktcionerov-izi"
+     "web:sostav.ru",
+     "https://www.sostav.ru/publication/vtb-nameren-do-kontsa-goda-kupit-dolyu-v-fintekh-aktivakh-rwb-88973.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Также в планах — принять условия ЦБ для приобретения доли в НСПК",
+     "source": [
+      "web:sostav.ru",
+      "https://www.sostav.ru/publication/vtb-nameren-do-kontsa-goda-kupit-dolyu-v-fintekh-aktivakh-rwb-88973.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «ВТБ намерен до конца года купить долю в финтех-активах RWB» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d59124356",
+   "title": "Аналитики видят сделку по смене акционеров «Циана» промежуточным звеном",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:realty.ria.ru",
+     "https://realty.ria.ru/20261127/analitiki-2134352825.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d55687997",
+   "title": "«М.Видео»: с начала 2026-го года россияне приобрели 8,6 млн приборов для домашнего приготовления еды",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:retail.ru",
+     "https://www.retail.ru/news/m-video-s-nachala-2026-go-goda-rossiyane-priobreli-8-6-mln-priborov-dlya-domashn-27-noyabrya-2026-285022/"
     ]
    ],
    "sum": null,
@@ -1135,10 +1142,49 @@
      "kind": "closed",
      "date": "2026-11-27",
      "title": "Сделка завершена",
-     "note": "Структура собственности российской платформы объявлений о недвижимости «Циан» изменилась: крупные пакеты акций перешли к ООО «Технологии недвижимости» и инвестиционной группе «Атон Холдинг». Об этом 27 ноября сообщили на сайте компании. «В капитале компании…",
+     "note": "",
      "source": [
-      "web:iz.ru",
-      "https://iz.ru/2209214/tcian-smenil-sostav-krupneishikh-aktcionerov-izi"
+      "web:retail.ru",
+      "https://www.retail.ru/news/m-video-s-nachala-2026-go-goda-rossiyane-priobreli-8-6-mln-priborov-dlya-domashn-27-noyabrya-2026-285022/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "8,6 млн приборов для домашнего приготовления еды",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "8,6 млн приборов для домашнего приготовления еды",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d88649285",
+   "title": "Циан изменил состав акционеров — более 40% ценных бумаг перешли к новым владельцам",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:rb.ru",
+     "https://rb.ru/news/cian-izmenil-sostav-akcionerov-bolee-40-cennyh-bumag-pereshli-k-novym-vladelcam/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Компания Циан сменила состав акционеров, сообщает пресс-служба компании. К новым владельцам перешли более 40% ценных бумаг. Из состава акционеров вышли Дмитрий Крюков (32,99%), Дмитрий Дёмин (7,16%) и Максим Мельников (6,24%). Наибольший пакет акций приобрели…",
+     "source": [
+      "web:rb.ru",
+      "https://rb.ru/news/cian-izmenil-sostav-akcionerov-bolee-40-cennyh-bumag-pereshli-k-novym-vladelcam/"
      ]
     }
    ],
@@ -1157,131 +1203,13 @@
    ]
   },
   {
-   "draft_id": "d39558738",
-   "title": "Japan Tobacco рассматривают покупку Imperial Brands на фоне временного управления активами в России",
+   "draft_id": "d30341872",
+   "title": "В ЕАО приняли закон о запрете продажи вейпов",
    "date": "2026-11-27",
    "src": [
     [
-     "web:abn.agency",
-     "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "Японская Japan Tobacco (JT) и американская Altria планируют приобрести британского производителя сигарет Imperial Brands и разделить его активы между собой. Об этом сообщает Reuters. О намерениях Altria стало известно накануне: компания рассматривает…",
-     "source": [
-      "web:abn.agency",
-      "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d68398852",
-   "title": "Зумеры чаще миллениалов выбирают онлайн-покупки во время распродаж — результаты опроса | New Retail",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/zumery_chashche_millenialov_vybirayut_onlayn_pokupki_vo_vremya_rasprodazh_rezultaty_oprosa/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "Зумеры и миллениалы проявляют почти одинаковый интерес к ноябрьским распродажам: участвовать в них планируют 57% представителей младшего поколения и 58% старшего. Однако мотивы покупок и отношение к скидкам различаются.",
-     "source": [
-      "web:new-retail.ru",
-      "https://new-retail.ru/novosti/retail/zumery_chashche_millenialov_vybirayut_onlayn_pokupki_vo_vremya_rasprodazh_rezultaty_oprosa/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d52333053",
-   "title": "ЦСКА ведет переговоры о покупке форварда сборной Колумбии",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/27/tsska-vedet-peregovory-o-pokupke-forvarda-sbornoy-kolumbii/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:lenta.ru",
-      "https://lenta.ru/news/2026/11/27/tsska-vedet-peregovory-o-pokupke-forvarda-sbornoy-kolumbii/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d37054997",
-   "title": "Сосновый Бор и Барвиновка перешли под контроль ВС РФ",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053147979"
+     "web:ria.ru",
+     "https://ria.ru/20261127/vape-2134348453.html"
     ]
    ],
    "sum": null,
@@ -1303,19 +1231,30 @@
    ]
   },
   {
-   "draft_id": "d01147844",
-   "title": "Как не купить унитаз, который будет сложно обслуживать",
+   "draft_id": "d36295414",
+   "title": "У Циана сменились крупные акционеры. Борьба Т-Технологий и Альфа-Банка ещё с нами в этой комнате?",
    "date": "2026-11-27",
    "src": [
     [
-     "web:ura.news",
-     "https://ura.news/articles/1053147957"
+     "web:smart-lab.ru",
+     "https://smart-lab.ru/blog/1380448.php"
     ]
    ],
    "sum": null,
    "type": "M&A",
-   "status": null,
-   "events": [],
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Страсти вокруг акций Циана накаляются. Кто выйдет победителем? ПК моменту, когда 24 ноября Циан получил официальное предложение «Т-Технологий» о выкупе, три крупных акционера уже продали свои пакеты: Дмитрий Крюков (Elbrus Capital) было 32,99% (25,6 млн…",
+     "source": [
+      "web:smart-lab.ru",
+      "https://smart-lab.ru/blog/1380448.php"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -1324,11 +1263,10 @@
     "asset": null,
     "seller": null
    },
-   "ind": null,
+   "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
