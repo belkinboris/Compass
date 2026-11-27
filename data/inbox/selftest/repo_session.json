@@ -1,0 +1,127 @@
+[
+ {
+  "check": "import httpx",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "import pytest",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "import playwright",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "import PIL.Image",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "import pymorphy3",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "import fastapi",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "браузер /opt/pw-browsers/chromium",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "переменная TELEGRAM_BOT_TOKEN задана",
+  "ok": true,
+  "note": "значение не печатается"
+ },
+ {
+  "check": "переменная API_FNS_KEY задана",
+  "ok": true,
+  "note": "значение не печатается"
+ },
+ {
+  "check": "git-хук перед push подключен (.githooks)",
+  "ok": true,
+  "note": ".githooks"
+ },
+ {
+  "check": "git fetch origin main",
+  "ok": true,
+  "note": "From https://github.com/belkinboris/Compass\n * branch            main       -> FETCH_HEAD"
+ },
+ {
+  "check": "право записи в репозиторий (push --dry-run)",
+  "ok": true,
+  "note": "Everything up-to-date"
+ },
+ {
+  "check": "очередь проверок по срокам считается",
+  "ok": true,
+  "note": "day     5  (отметка: review.py <id …> --mark-deep --write)\nweek    4  (отметка: review.py <id …> --mark-weekly --write)\nmonth   6  (отметка: review.py <id …> --mark-followup --write)\nвсего 15"
+ },
+ {
+  "check": "pytest test_data.py",
+  "ok": true,
+  "note": "........................................................................ [ 64%]\n.......................................                                  [100%]\n111 passed in 9.40s"
+ },
+ {
+  "check": "тексты статей на диске (data/inbox/raw)",
+  "ok": true,
+  "note": "0 файлов; 0 — норма для новой сессии: статьи карточки скачать `python3 pipeline/ingest/fetch_article_texts.py <id …> --write` до проверки цитат"
+ },
+ {
+  "check": "сеть: сайт отвечает",
+  "ok": true,
+  "note": ""
+ },
+ {
+  "check": "папка репозитория была при старте",
+  "ok": true,
+  "note": "/home/user/Compass существовала, это рабочая папка сессии"
+ },
+ {
+  "check": "ветка при старте",
+  "ok": true,
+  "note": "main, совпадала с origin/main; git pull — Already up to date (675a3da)"
+ },
+ {
+  "check": "CLAUDE.md загрузился сам как правила проекта",
+  "ok": true,
+  "note": "пришел в контекст сессии автоматически, файлом не читался"
+ },
+ {
+  "check": "хук старта сработал сам (pytest и httpx до ручной установки)",
+  "ok": true,
+  "note": "import pytest, httpx прошел до ручного запуска хука: pytest 9.1.1, httpx 0.28.1"
+ },
+ {
+  "check": "ручной запуск .claude/hooks/session-start.sh",
+  "ok": true,
+  "note": "код выхода 0, только предупреждения pip о root"
+ },
+ {
+  "check": "помощник (инструмент Agent) запускается",
+  "ok": true,
+  "note": "один помощник ответил словом «готов»"
+ },
+ {
+  "check": "fetch_article_texts.py g2777a4b6 --write скачивает тексты",
+  "ok": true,
+  "note": "дописано 9 записей, недоступен 1 адрес (datanewton.ru/api/v2/history: Remote end closed connection without response)"
+ },
+ {
+  "check": "read_card.py g2777a4b6 показывает текст источника",
+  "ok": true,
+  "note": "код выхода 0, 9 блоков «ИСТОЧНИК» с текстом статей"
+ },
+ {
+  "check": "ops_status.py качество --help запускается",
+  "ok": true,
+  "note": "скрипт стартует и разбирает аргументы, но ключа --help у него нет: печатает usage и «unrecognized arguments: --help», код выхода 1; в Telegram ничего не ушло"
+ }
+]
