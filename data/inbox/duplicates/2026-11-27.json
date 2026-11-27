@@ -210,6 +210,48 @@
     "needs_review": true
    },
    "queued": "2026-11-27"
+  },
+  {
+   "key": "https://tass.ru/obschestvo/28363271::gb88e1cdc",
+   "candidate_id": "gb88e1cdc",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d67910526",
+    "title": "Императорские конюшни в Петербурге продали на торгах за 584,05 млн рублей",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28363271"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Начальная цена лота была превышена почти втрое",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/obschestvo/28363271"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах",
+    "seller": "Императорские конюшни в Петербурге",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах",
+     "seller": "Императорские конюшни в Петербурге"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
   }
  ]
 }
