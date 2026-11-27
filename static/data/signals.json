@@ -1,6 +1,19 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "signals": [
+  {
+   "id": "s42076cf96",
+   "company_id": "g5c8c6494",
+   "date": "2026-11-25",
+   "kind": "buy",
+   "summary": "ЛУКОЙЛ — присматривает новые покупки",
+   "source": [
+    "kommersant.ru",
+    "https://www.kommersant.ru/doc/9130732"
+   ],
+   "origin": "news",
+   "strength": "normal"
+  },
   {
    "id": "sc01d8a991",
    "company_id": "g4f2ebf90",
@@ -590,9 +603,22 @@
    "strength": "normal"
   },
   {
+   "id": "sb6125421a",
+   "company_id": "g5c8c6494",
+   "date": "2026-09-23",
+   "kind": "for_sale",
+   "summary": "ЛУКОЙЛ — к активам компании присматриваются покупатели",
+   "source": [
+    "ura.news",
+    "https://ura.news/news/1053129921"
+   ],
+   "origin": "news",
+   "strength": "strong"
+  },
+  {
    "id": "sf85dc473b",
    "company_id": "g4e694234",
-   "date": "2026-09-23",
+   "date": "2026-09-22",
    "kind": "investor",
    "summary": "VK — обсуждается совместное предприятие с Яндекс",
    "source": [
@@ -606,7 +632,7 @@
   {
    "id": "se0713d934",
    "company_id": "yandex",
-   "date": "2026-09-23",
+   "date": "2026-09-22",
    "kind": "investor",
    "summary": "Яндекс — обсуждается совместное предприятие с VK",
    "source": [
@@ -616,19 +642,6 @@
    "origin": "card",
    "deal_id": "g5850b57f",
    "strength": "normal"
-  },
-  {
-   "id": "sb6125421a",
-   "company_id": "g5c8c6494",
-   "date": "2026-09-23",
-   "kind": "for_sale",
-   "summary": "ЛУКОЙЛ — к активам компании присматриваются покупатели",
-   "source": [
-    "ura.news",
-    "https://ura.news/news/1053129921"
-   ],
-   "origin": "news",
-   "strength": "strong"
   },
   {
    "id": "s2b35730e0",

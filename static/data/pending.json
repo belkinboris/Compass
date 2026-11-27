@@ -953,6 +953,200 @@
    "extra": "Владелец Railgo вошел в капитал Таганрогского зернового терминала, когда его отгрузки упали больше чем на две трети; цену и условия стороны не раскрывали.",
    "reviewed": "2026-11-27",
    "target": "gb1f408bf"
+  },
+  {
+   "id": "gdabdfb70",
+   "date": "2026-11-26",
+   "title": "Миллиардер Тодд Боули договорился о покупке зарубежных активов «Лукойла»",
+   "ind": "Нефть и газ",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Sostav.ru",
+     "https://www.sostav.ru/publication/milliarder-todd-bouli-dogovorilsya-o-pokupke-zarubezhnykh-aktivov-lukojla-88912.html"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "$16 млрд",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "sum": "$16 млрд",
+   "buyer_name": "Миллиардер Тодд Боули",
+   "asset": "зарубежные активы «Лукойла»",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-26",
+     "title": "Переговоры",
+     "note": "Сделку оценили в $16 млрд",
+     "source": [
+      "Sostav.ru",
+      "https://www.sostav.ru/publication/milliarder-todd-bouli-dogovorilsya-o-pokupke-zarubezhnykh-aktivov-lukojla-88912.html"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "Миллиардер Тодд Боули",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.sostav.ru/publication/milliarder-todd-bouli-dogovorilsya-o-pokupke-zarubezhnykh-aktivov-lukojla-88912.html"
+     }
+    ],
+    "target": [
+     {
+      "value": "зарубежные активы «Лукойла»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.sostav.ru/publication/milliarder-todd-bouli-dogovorilsya-o-pokupke-zarubezhnykh-aktivov-lukojla-88912.html"
+     }
+    ]
+   },
+   "pending_since": "2026-11-27T05:53:38+00:00"
+  },
+  {
+   "id": "g8facc55f",
+   "date": "2026-11-27",
+   "title": "Ключевые акционеры «Циана» продали 52% акций на фоне оферты «Т-технологий»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Frank Media",
+     "https://frankmedia.ru/318451"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Ключевые акционеры «Циана»",
+   "asset": "52% акций на фоне оферты «Т-технологий»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Ни один из покупателей не набрал более 30% и не обязан делать оферту миноритариям Сообщение Ключевые акционеры «Циана» продали 52% акций на фоне оферты «Т-технологий» появилось сначала на Frank Media .",
+     "source": [
+      "Frank Media",
+      "https://frankmedia.ru/318451"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "party_evidence": {
+    "target": [
+     {
+      "value": "52% акций на фоне оферты «Т-технологий»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/318451"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Ключевые акционеры «Циана»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://frankmedia.ru/318451"
+     }
+    ]
+   },
+   "pending_since": "2026-11-27T05:53:38+00:00"
+  },
+  {
+   "id": "g629187e2",
+   "date": "2026-11-19",
+   "title": "«Эфко» приобрела бренд «Моя семья»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Агроинвестор",
+     "https://www.agroinvestor.ru/investments/news/46848-efko-priobrela-brend-moya-semya/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "бренд «Моя семья»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-19",
+     "title": "Сделка завершена",
+     "note": "Компания уже начала поставки продукции под ним",
+     "source": [
+      "Агроинвестор",
+      "https://www.agroinvestor.ru/investments/news/46848-efko-priobrela-brend-moya-semya/"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Эфко»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.agroinvestor.ru/investments/news/46848-efko-priobrela-brend-moya-semya/"
+     }
+    ],
+    "target": [
+     {
+      "value": "бренд «Моя семья»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.agroinvestor.ru/investments/news/46848-efko-priobrela-brend-moya-semya/"
+     }
+    ]
+   },
+   "buyer": "g5db3de73",
+   "pending_since": "2026-11-27T05:53:38+00:00"
   }
  ]
 }
