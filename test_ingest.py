@@ -13047,3 +13047,131 @@ def test_second_reading_asks_for_party_words_but_accepts_older_answers():
                              party_words="eco.rationale: «привлечь финансирование», пресс-служба, retailer.ru"),
              "verdict": "fix"}
     assert second_reading.apply(found, dict(card))[0] == "fix"
+
+
+def test_thing_auctions_are_not_deals_but_property_and_companies_at_auction_are(base):
+    """G38, 21–22 ноября 2026: кольцо с «Титаника» и прядь волос Вашингтона
+    прошли фильтр («продали») и ворота (кириллическое имя в заголовке) и
+    встали в очередь типом M&A. Аукцион вещи — не сделка; здание, завод или
+    доля на торгах — наш профиль и должны проходить, как и имена в кавычках
+    («Садовое кольцо»)."""
+    import promote
+    things = [
+        "Кольцо британского модельера Дафф-Гордон с «Титаника» продали за 110 000 фунтов",
+        "В Британии кольцо пассажира «Титаника» ушло с молотка за £150 тыс.",
+        "Прядь волос Джорджа Вашингтона продали на аукционе за $4 тыс.",
+        "Прядь волос Джорджа Вашингтона продали всего за 4 тысячи долларов",
+        "Картину Айвазовского продали за $1,4 млн на торгах Sotheby's",
+        "Работа Кандинского установила рекорд на аукционе Christie's",
+        "Световой меч Дарта Вейдера из «Звездных войн» продали в США почти за $5 млн",
+        "Майку Коби Брайанта продали на аукционе за рекордные $2,2 млн",
+        "Икону «Чудо Георгия о змие» XVI века выставят на торги в США",
+    ]
+    deals = [
+        "Компания «СК С.Т.С.» (ГК «Садовое кольцо») купила на торгах Серпуховский лифтостроительный завод",
+        "ТЦ «Кольцо» в Казани продан на торгах за 2 млрд",
+        "«Почта России» выставила здание Главпочтамта на аукцион за 7,7 млрд рублей",
+        "Часовой завод «Полет» продали на торгах",
+        "Росимущество продало на аукционе 100% акций завода «Квант»",
+    ]
+    wrong = [t for t in things if classify.looks_like_deal(t) or not classify.is_thing_auction(t)]
+    assert not wrong, f"аукцион вещи прошел фильтр: {wrong}"
+    lost = [t for t in deals if not classify.looks_like_deal(t) or classify.is_thing_auction(t)]
+    assert not lost, f"настоящая продажа с торгов принята за аукцион вещи: {lost}"
+    hit = [d["id"] for d in base["deals"] if classify.is_thing_auction(d.get("title"))]
+    assert not hit, f"карточки базы приняты за аукцион вещи: {hit[:5]}"
+    # второй замок — ворота: черновик, пришедший мимо фильтра сырья
+    draft = {"title": things[0], "date": "2026-11-21", "type": "M&A", "status": "Закрыта",
+             "asset": "Кольцо", "seller": "Дафф-Гордон", "src": [["РИА", "https://ria.ru/20261121/kolco.html"]]}
+    bad, _hold = promote.check(draft, {"companies": {}, "deals": []},
+                               promote.matcher.index_base([], {}, {}), promote.industries())
+    assert any("аукцион вещи" in b for b in bad), bad
+    # размещение ОФЗ и дискретный аукцион биржи — не продажа имущества
+    assert not classify.looks_like_deal("Минфин разместил на безлимитном аукционе ОФЗ на 20,57 миллиарда рублей")
+    assert not classify.looks_like_deal("Мосбиржа проводит дискретный аукцион по акциям МГКЛ")
+
+
+def test_filter_lets_a_change_of_shareholders_through():
+    """E19, 27 ноября 2026: «„Циан“ сменил основных акционеров» (РБК) фильтр
+    счел не сделкой — в заголовке нет ни глагола покупки, ни сторон, а в
+    тексте продажа 52%. «Сменил владельца/собственника» фильтр знал,
+    «акционеров» — нет."""
+    for title in ("«Циан» сменил основных акционеров",
+                  "У «Циана» сменились ключевые акционеры",
+                  "Смена акционеров в «Циане»",
+                  "Оператор сменил состав участников ООО «Ромашка»"):
+        assert classify.looks_like_deal(title), title
+    assert not classify.looks_like_deal("Сборная сменила состав участников перед чемпионатом")
+    assert not classify.looks_like_deal("Акции «Циана» упали на фоне сообщения о новом составе акционеров")
+
+
+def test_paywalled_rbc_article_is_read_from_its_open_amp_part(monkeypatch, tmp_path):
+    """E19: статья РБК по подписке отдает роботу пустую страницу (0 знаков),
+    а amp-версия того же адреса — заголовок и вводку. Дозабор пробует ее
+    вторым адресом и кладет текст в кэш под ИСХОДНЫМ адресом, по которому
+    его ищет `review.py`. Сеть не нужна: загрузка подменена."""
+    import fetch_article_texts as articles
+    monkeypatch.setattr(articles, "RAW", str(tmp_path))
+    url = "https://www.rbc.ru/business/27/11/2026/6b0879f6d31da4b02bb5fea9"
+    amp = "https://amp.rbc.ru/rbcnews/business/27/11/2026/6b0879f6d31da4b02bb5fea9"
+    assert articles.open_part_url(url) == amp
+    assert articles.open_part_url("https://www.kommersant.ru/doc/9130738") is None
+    assert articles.open_part_url("https://www.rbc.ru/") is None
+    asked = []
+    lead = "Ключевые акционеры «Циана» вышли из капитала компании. Собственники сменились у 52% акций. " * 4
+
+    def fake(fetch_url):
+        asked.append(fetch_url)
+        return "" if fetch_url == url else "<html><title>«Циан» сменил основных акционеров</title><p>%s</p></html>" % lead
+
+    monkeypatch.setattr(articles, "_download", fake)
+    got, lost = articles.fetch_and_store([("g1a8709ea", url, "заголовок карточки")], write=True)
+    assert (got, lost) == (1, 0) and asked == [url, amp], asked
+    rec = json.loads(next(tmp_path.iterdir()).read_text(encoding="utf-8").strip())
+    assert rec["url"] == url and "52% акций" in rec["summary"]
+    assert rec["title"] == "«Циан» сменил основных акционеров"
+    # у издания без запасного адреса пустая страница — по-прежнему «не забран»
+    asked.clear()
+    monkeypatch.setattr(articles, "_download", lambda u: "")
+    assert articles.fetch_and_store([("x", "https://www.kommersant.ru/doc/1", "")], write=False) == (0, 1)
+
+
+def test_enrich_does_not_step_back_to_an_earlier_stage_after_a_later_one():
+    """G45, 26 ноября 2026, ЛУКОЙЛ/консорциум Боэли (g707211ba): карточка
+    стояла «Подписана», «Коммерсантъ» на следующий день пересказал то же
+    соглашение словами о переговорах — и после «Документы подписаны» в ходе
+    сделки появились «Переговоры». Более поздняя статья с этапом более
+    раннего вида — второй источник текущего этапа, а не новый этап. Старая
+    новость (дата раньше текущего этапа) по-прежнему дополняет историю."""
+    import enrich
+    signed_src = ["Интерфакс", "https://www.interfax.ru/business/1060001"]
+    deal = {"id": "g707211ba", "title": "ЛУКОЙЛ подписал соглашение о продаже зарубежных активов",
+            "type": "M&A", "status": "Подписана", "date": "2026-11-24", "src": [signed_src],
+            "events": [{"id": "s", "kind": "signed", "date": "2026-11-24", "title": "Документы подписаны",
+                        "source": signed_src}]}
+    item = {"title": "ЛУКОЙЛ ведет переговоры о продаже зарубежных активов консорциуму",
+            "summary": "Компания ведет переговоры о продаже зарубежного бизнеса.",
+            "url": "https://www.kommersant.ru/doc/9130738", "date": "2026-11-25",
+            "source_id": "web:kommersant.ru"}
+    assert enrich.draft.guess_event(item)["kind"] == "negotiations"
+    props = enrich.proposals(deal, item, {}, {})
+    assert not any(p[0] == "event" for p in props), "после подписания дописан этап «Переговоры»"
+    stage_src = [p for p in props if p[0] == "event_source"]
+    assert stage_src and stage_src[0][1]["kind"] == "signed" and stage_src[0][1]["date"] == "2026-11-24", props
+    enrich.apply_props(deal, props)
+    assert [e["kind"] for e in deal["events"]] == ["signed"]
+    assert deal["events"][0]["sources"] == [signed_src, ["Коммерсантъ", item["url"]]]
+    assert not any(p[0] in ("event", "event_source") for p in enrich.proposals(deal, item, {}, {}))
+    # карточка без записей events: этап выведен из статуса — нового этапа тоже нет
+    bare = {k: v for k, v in deal.items() if k != "events"}
+    bare["src"] = [signed_src]
+    assert not any(p[0] in ("event", "event_source") for p in enrich.proposals(bare, item, {}, {}))
+    # новость с датой ДО подписания — настоящая история переговоров, этап остается
+    early = dict(item, url="https://www.kommersant.ru/doc/9100000", date="2026-10-01")
+    fresh = {"id": "g1", "title": deal["title"], "type": "M&A", "status": "Подписана", "date": "2026-11-24",
+             "src": [signed_src], "events": [dict(deal["events"][0], sources=[signed_src])]}
+    assert any(p[0] == "event" and p[1]["kind"] == "negotiations" for p in enrich.proposals(fresh, early, {}, {}))
+    # движение вперед не задето: закрытие после подписания — новый этап
+    closed = dict(item, title="ЛУКОЙЛ закрыл сделку по продаже зарубежных активов",
+                  summary="Сделка закрыта.", url="https://www.kommersant.ru/doc/9140000", date="2026-12-20")
+    assert any(p[0] == "event" and p[1]["kind"] == "closed" for p in enrich.proposals(fresh, closed, {}, {}))

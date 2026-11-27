@@ -235,6 +235,38 @@ STAGE_TITLE = {'negotiations': 'Переговоры', 'signed': 'Докумен
                'approval': 'Согласование получено', 'closed': 'Сделка завершена',
                'cancelled': 'Сделка не состоялась'}
 ISO_DAY = re.compile(r'\d{4}-\d{2}-\d{2}')
+# Порядок этапов. Подписание и согласование стоят на одной ступени: согласие
+# ФАС бывает и до подписания, и после. Срыв в порядок не входит: сорванная
+# сделка может вернуться к переговорам, и это новость.
+STAGE_RANK = {'negotiations': 0, 'signed': 1, 'approval': 1, 'closed': 2}
+
+
+def later_stage_reached(deal, existing_events, event):
+    """Новость дает этап БОЛЕЕ РАННЕГО вида, чем тот, на котором карточка уже
+    стоит, а датирована не раньше него — значит, это пересказ того же
+    события, а не шаг назад.
+
+    26 ноября 2026, ЛУКОЙЛ/консорциум Боэли (g707211ba, бэклог G45): карточка
+    стояла «Подписана», «Коммерсантъ» на следующий день рассказал подробности
+    того же соглашения словами «договорился о продаже» — и в ходе сделки
+    после «Документы подписаны» появились «Переговоры». Старая новость с
+    датой ДО текущего этапа сюда не попадает: она честно дополняет историю.
+
+    Возвращает (True, этап-запись или None) либо (False, None). Запись — тот
+    этап карточки, которому новость годится вторым источником; None — у
+    карточки нет записей `events` (этап выведен из статуса), тогда ссылка
+    остается только в `src`."""
+    kind = STAGE_KIND.get(deal.get('status'))
+    new_rank, cur_rank = STAGE_RANK.get(event.get('kind')), STAGE_RANK.get(kind)
+    if new_rank is None or cur_rank is None or new_rank >= cur_rank:
+        return False, None
+    stages = [e for e in existing_events if str(e.get('kind') or '') == kind]
+    stage = max(stages, key=lambda e: str(e.get('date') or '')) if stages else None
+    day = str((stage or deal).get('date') or '')
+    new_day = str(event.get('date') or '')
+    if not ISO_DAY.fullmatch(day) or not ISO_DAY.fullmatch(new_day) or new_day < day:
+        return False, None
+    return True, stage
 
 
 def prior_stage_event(deal, event):
@@ -496,8 +528,16 @@ def proposals(deal, item, names, comps, match_keys=None):
         if event_key[0] in ('closed', 'cancelled'):
             terminal_twin = next((e for e in existing_events
                                   if str(e.get('kind') or '') == event_key[0]), None)
+        stepped_back, reached = later_stage_reached(deal, existing_events, event)
         if already_known_stage:
             pass
+        elif stepped_back:
+            if reached is not None and event_url and event_url not in {
+                    u for _l, u in format_post.milestone_sources(reached)}:
+                out.append(('event_source', {'kind': str(reached.get('kind') or ''),
+                                             'date': str(reached.get('date') or ''),
+                                             'source': list(event['source'][:2])},
+                            'добавить', 'еще один источник этапа (карточка уже прошла этот вид этапа)'))
         elif terminal_twin is not None:
             if event_url and event_url not in {u for _l, u in format_post.milestone_sources(terminal_twin)}:
                 out.append(('event_source', {'kind': event_key[0], 'date': str(terminal_twin.get('date') or ''),
