@@ -1262,58 +1262,6 @@
    "shown_hash": "4b5de9bc8381.be33d3",
    "post_draft_sent": true,
    "post_preview": "<b>«Техноэволаб» купил «Принт-Эксперт» у владельцев группы «Арти»</b>\n\n<b>Покупатель:</b> Техноэволаб — бывшее российское общество Xerox: до октября 2023 года называлось ООО «Ксерокс (СНГ)».\n<b>Продавцы:</b> Андрей Малышев, Светлана Шамина\n<b>Предмет:</b> 100% долей в ООО «Принт-Эксперт»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> ИТ и интернет\n\n<b>Источник:</b> <a href=\"https://www.cnews.ru/news/line/2026-11-27_kompaniya_tehnoevolab_priobretaet\">CNews</a>\nЕще 3 источника — в карточке сделки\n\n#технологии #ИТ #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g9944c4aa\">карточке сделки</a>"
-  },
-  {
-   "id": "ga24b0379",
-   "date": "2026-11-27",
-   "title": "«Техноэволаб» купит разработчика ПО для управления печатью «Принт-Эксперт»",
-   "ind": "ИТ и интернет",
-   "type": "M&A",
-   "status": "Обсуждается",
-   "src": [
-    [
-     "АБН",
-     "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/"
-    ]
-   ],
-   "from_ingest": true,
-   "eco": {
-    "sum": "—",
-    "share": "—",
-    "val": "—",
-    "target_fin": "—",
-    "fin": "—",
-    "rationale": "—",
-    "context": "—",
-    "finadv": "—"
-   },
-   "law": {
-    "struct": "—",
-    "appr": "—",
-    "adv": [],
-    "terms": "—"
-   },
-   "asset": "разработчик ПО для управления печатью «Принт-Эксперт»",
-   "party_evidence": {
-    "buyer": [
-     {
-      "value": "«Техноэволаб»",
-      "field": "buyer_name",
-      "method": "explicit_news_title",
-      "url": "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/"
-     }
-    ],
-    "target": [
-     {
-      "value": "разработчик ПО для управления печатью «Принт-Эксперт»",
-      "field": "asset",
-      "method": "explicit_news_title",
-      "url": "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/"
-     }
-    ]
-   },
-   "buyer": "g871a7ad5",
-   "pending_since": "2026-11-27T16:24:12+00:00"
   }
  ]
 }
