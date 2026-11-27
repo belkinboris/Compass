@@ -2590,7 +2590,10 @@ def test_server_shows_ready_cards_itself_and_remembers_them(client, monkeypatch,
     принятую карточку сам, как только увидел ее в pending.json, помнит показ
     и отдает память рутинам по /api/moderation/shown."""
     _mod_env(monkeypatch)
-    card = {"id": "gshow1", "title": "«Ромашка» купила «Одуванчик»", "status": "Закрыта", "date": "2026-10-27",
+    # Дата сделки — сегодняшняя: проект поста положен только свежей сделке (30 дней,
+    # format_post.is_fresh); с жестким «2026-10-27» тест покраснел 27 ноября 2026.
+    import datetime as _dt
+    card = {"id": "gshow1", "title": "«Ромашка» купила «Одуванчик»", "status": "Закрыта", "date": _dt.date.today().isoformat(),
             "type": "M&A", "ind": "Ритейл", "buyer_name": "ООО «Ромашка»", "asset": "сеть «Одуванчик»",
             "src": [["Ъ", "https://www.kommersant.ru/doc/1"]], "reviewed": "2026-10-27",
             "accepted": "2026-10-27", "second_read": "2026-10-27", "eco": {}, "law": {},

@@ -4635,15 +4635,24 @@ def test_feed_marks_a_card_with_a_fresh_stage_as_updated(page, base_url):
     """Владелец 26 сентября 2026 не нашел в ленте карточку штаб-квартиры
     «Швабе»: сделка августа закрылась 25 сентября, а в ленте стояла на своем
     месте без отметки. Этап моложе недели дает строке отметку «Обновлено»;
-    второй строки у этапа по-прежнему нет."""
+    второй строки у этапа по-прежнему нет.
+
+    Карточка «Швабе» — недвижимость, а лента по умолчанию недвижимость прячет
+    (`noRealty`): строку считаем с выключенным фильтром, иначе тест красный не
+    из-за этапа (бэклог G32, 18–27 ноября 2026)."""
     visit(page, base_url, "#/")
     page.wait_for_selector(".deal-row")
+    page.wait_for_function("typeof bulkLoaded !== 'undefined' && bulkLoaded", timeout=30000)
     got = page.evaluate("""() => {
       const today = new Date().toISOString().slice(0, 10);
+      const was = noRealty; noRealty = false;
+      try { return probe(); } finally { noRealty = was; }
+      function probe(){
       const fresh = {id:'x1', title:'Т', date:'2026-01-10', added:'2026-01-12', type:'M&A', events:[{date:today, kind:'closed'}]};
       const stale = {id:'x2', title:'Т', date:'2026-01-10', added:'2026-01-12', type:'M&A', events:[{date:'2026-02-01', kind:'closed'}]};
       return {fresh: isUpdated(fresh), stale: isUpdated(stale),
               row: rowHtml.full(fresh), rows: unifiedFeedItems().filter(it => it.rec.id === 'ge957fc7b').length};
+      }
     }""")
     assert got["fresh"] is True and got["stale"] is False
     assert "Обновлено" in got["row"] and "Новое" not in got["row"]

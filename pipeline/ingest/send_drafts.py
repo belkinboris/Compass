@@ -555,7 +555,7 @@ def plain_text(html):
     return text.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&amp;', '&')
 
 
-def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
+def send_one(client, token, chat, text, keyboard, thread_id=None, html=False, sent=None):
     """Отправить одно сообщение, дождавшись, если Telegram просит подождать.
     keyboard=None — сообщение без кнопок (решение приходит только ответом
     текстом, как у очереди «нужен ИНН»): `reply_markup` тогда не кладем в
@@ -568,7 +568,11 @@ def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     проверяющий видит пост ровно таким, каким его увидят подписчики). До
     25 сентября 2026 черновики уходили без `parse_mode`, и владелец читал
     в консоли «<b>Покупатель:</b>» с тегами. Telegram отверг разметку —
-    повторяем тот же текст без нее, а не теряем черновик."""
+    повторяем тот же текст без нее, а не теряем черновик.
+
+    sent — список, куда дописывается [чат, номер сообщения] дошедшего сообщения:
+    по нему у прежнего показа потом снимают кнопки (send_milestone_drafts.py,
+    27 ноября 2026)."""
     payload = {'chat_id': chat, 'text': text, 'disable_web_page_preview': True}
     if html:
         payload['parse_mode'] = 'HTML'
@@ -579,6 +583,10 @@ def send_one(client, token, chat, text, keyboard, thread_id=None, html=False):
     for attempt in range(RETRIES):
         r = client.post(telegram_endpoint.method_url(token, 'sendMessage'), json=payload)
         if r.status_code == 200 and r.json().get('ok'):
+            if sent is not None:
+                mid = (r.json().get('result') or {}).get('message_id')
+                if mid:
+                    sent.append([payload['chat_id'], mid])
             return True
         try:
             data = r.json()
@@ -636,6 +644,16 @@ def build_plan(resend=None, only=None):
     # в очереди и снимок поста, второй раз не шлем.
     for card in pending['cards']:
         rec = shown_cards.get(card['id'])
+        # БЕЗ ШТАМПОВ НЕ ДОГОНЯЕМ (бэклог D11, 27 ноября 2026). 18 ноября `g74dbc4b1`
+        # (еще без приемки и чтения, пустые eco/law) получила `draft_sent: True`:
+        # сайт помнил показ по этому id, а карточка в очереди была другой версией —
+        # собранной заново. Показать можно только прочитанную и принятую, значит
+        # запись сайта о показе — не про ЭТУ версию: отметку не ставим, карточка
+        # идет обычной дорогой (чтение, приемка, показ).
+        if rec and not readiness.is_shown(card) and not (card.get('reviewed') and card.get(readiness.ACCEPTED)):
+            print('НЕ ДОГОНЯЮ %s: сайт помнит показ, а у карточки в очереди нет отметок чтения и приемки — '
+                  'это другая версия, она пойдет обычной дорогой.' % card['id'])
+            continue
         if rec and not (card.get('draft_sent') and card.get('post_draft_sent', card.get('draft_sent'))):
             card['draft_sent'] = True
             # ПРОЕКТ ПОСТА ДОГОНЯЕМ (17 ноября 2026: «почему скинули проект карточки,

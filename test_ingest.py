@@ -666,6 +666,28 @@ def test_send_plan_trusts_the_site_memory_of_what_was_shown(monkeypatch):
     assert card["draft_sent"] and card["post_draft_sent"] and card["post_preview"] == "<b>Пост</b>"
 
 
+def test_send_plan_does_not_catch_up_a_card_without_reading_and_acceptance(monkeypatch, capsys):
+    """Бэклог D11 (18 ноября 2026, g74dbc4b1): сайт помнит показ по id, а в очереди
+    лежит заново собранная карточка без отметок чтения и приемки — «догонялка»
+    не ставит ей `draft_sent`, и в консоль она не уходит, пока не прочитана."""
+    import send_drafts
+    import promote
+    bare = {"id": "gN", "title": "Сделка N", "status": "Закрыта", "date": "2026-11-18", "type": "M&A",
+            "ind": "ИТ", "src": [["Ъ", "https://www.kommersant.ru/doc/4"]], "eco": {}, "law": {}}
+    pending = {"cards": [bare]}
+    monkeypatch.setattr(promote, "load_pending", lambda: pending)
+    monkeypatch.setattr(send_drafts, "site_pending_ids", lambda: {"gN"})
+    monkeypatch.setattr(send_drafts, "answered_cards", lambda: {})
+    monkeypatch.setattr(send_drafts, "latest_hold_drafts", lambda: [])
+    monkeypatch.setattr(promote, "load_state", lambda: {}, raising=False)
+    monkeypatch.setattr(send_drafts, "site_shown", lambda: {"cards": {"gN": {"shown_at": "x", "post_preview": "<b>Пост</b>"}},
+                                                           "raw": []})
+    plan, *_rest = send_drafts.build_plan()
+    assert plan == [], plan
+    assert "draft_sent" not in bare and "post_draft_sent" not in bare and "post_preview" not in bare
+    assert "НЕ ДОГОНЯЮ gN" in capsys.readouterr().out
+
+
 def test_send_plan_only_one_card_skips_raw_and_other_cards(monkeypatch, tmp_path):
     """`ship_card.py` показывает одну готовую карточку сразу (28 октября 2026):
     план с `only=<id>` — только ее 🗂/📣, без сырья и чужих карточек."""
@@ -3358,6 +3380,72 @@ def test_publication_leaves_alone_a_milestone_the_site_is_posting_right_now(monk
     assert len(calls) == 1 and "Президент разрешил сделку Ю" in calls[0][1]["text"]
     assert written["telegram_milestones"]["dsite2-approval"]["message_id"] == 4343
     assert consumed == [8]
+
+
+def test_reshown_milestone_draft_takes_the_buttons_off_the_previous_message(monkeypatch, tmp_path):
+    """Бэклог D9 («Арнест», 12 ноября 2026): заголовок этапа поправили, проект
+    поста показали заново — и в консоли осталось два живых сообщения с кнопками.
+    Показ запоминает номера сообщений; повторный (`--resend`) снимает кнопки с
+    прежнего и пишет отметки в свежепрочитанную базу, не стирая чужую запись."""
+    import send_milestone_drafts as smd
+
+    deal = _site_milestone_deal("dsite9")
+    del deal["events"][0]["milestone_drafted_at"]
+    path = tmp_path / "deals_promoted.json"
+    path.write_text(json.dumps({"deals": [deal], "companies": {}, "telegram_posts": {},
+                                "telegram_milestones": {}}, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(smd, "DATA", str(path))
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "TOKEN")
+    monkeypatch.delenv("MODERATION_TOKEN", raising=False)
+    monkeypatch.delenv("TELEGRAM_WEBHOOK_SECRET", raising=False)
+    monkeypatch.setattr(smd.send_drafts, "send_targets", lambda: ["-100"])
+    monkeypatch.setattr(smd.console_topics, "thread_id", lambda kind: 7)
+
+    class _Resp:
+        status_code = 200
+        text = ""
+
+        def __init__(self, body):
+            self._body = body
+
+        def json(self):
+            return self._body
+
+    class _Client:
+        def __init__(self):
+            self.calls, self.next_id = [], 500
+
+        def post(self, url, json):
+            method = url.rsplit("/", 1)[-1]
+            self.calls.append((method, json))
+            if method == "sendMessage":
+                self.next_id += 1
+                # Пока идет отправка, базу правит другой прогон — его запись должна уцелеть.
+                base = __import__("json").loads(path.read_text(encoding="utf-8"))
+                base["telegram_posts"]["чужая-%d" % self.next_id] = None
+                path.write_text(__import__("json").dumps(base, ensure_ascii=False), encoding="utf-8")
+                return _Resp({"ok": True, "result": {"message_id": self.next_id}})
+            return _Resp({"ok": True, "result": True})
+
+    client = _Client()
+    assert smd.main(write=True, client=client) == 0
+    event = json.loads(path.read_text(encoding="utf-8"))["deals"][0]["events"][0]
+    assert event["milestone_draft_msgs"] == [["-100", 501]] and event["milestone_drafted_at"]
+    assert [m for m, _b in client.calls] == ["sendMessage"]
+    # Уже показанный этап второй раз сам не уходит.
+    assert smd.build_plan()[0] == []
+    # Заголовок поправили — показываем заново: новый проект, кнопки прежнего сняты.
+    base = json.loads(path.read_text(encoding="utf-8"))
+    base["deals"][0]["events"][0]["headline"] = "Правкомиссия разрешила сделку Ю"
+    path.write_text(json.dumps(base, ensure_ascii=False), encoding="utf-8")
+    assert smd.main(write=True, resend="dsite9~approval", client=client) == 0
+    methods = [m for m, _b in client.calls]
+    assert methods == ["sendMessage", "sendMessage", "editMessageReplyMarkup"]
+    assert "Правкомиссия разрешила" in client.calls[1][1]["text"]
+    assert client.calls[2][1] == {"chat_id": "-100", "message_id": 501, "reply_markup": {"inline_keyboard": []}}
+    written = json.loads(path.read_text(encoding="utf-8"))
+    assert written["deals"][0]["events"][0]["milestone_draft_msgs"] == [["-100", 502]]
+    assert set(written["telegram_posts"]) == {"чужая-501", "чужая-502"}
 
 
 def test_milestone_draft_puts_the_ready_post_on_the_site_first(monkeypatch):
@@ -11496,6 +11584,30 @@ def test_title_standard_accepts_a_loss_of_control_without_a_named_buyer():
     assert not title_standard.verb_ok(card, "«О23» сменил владельца")
     # «вышел из-под контроля» читается как «стал неуправляемым» (второе чтение, 11 ноября 2026)
     assert not title_standard.verb_ok(card, "Крупнейший акционер Ozon «О23» вышел из-под контроля Александра Чачавы")
+
+
+def test_title_standard_auction_without_a_named_winner_and_no_parties_hint():
+    """Бэклог G27 и G31 (27 ноября 2026). Победитель торгов не назван, продавец
+    известен — общее правило владельца от 19 ноября («если есть продавец, но нет
+    покупателя») на торгах: «Z продал на торгах Y». Не названы обе стороны — правила
+    владельца нет («потом решим»): находка не выдумывает формулу, а говорит, что
+    делать (аукцион личной вещи — не сделка; у M&A — заголовок от рода покупателей)."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard as ts
+    auction = {"type": "Продажа с торгов", "status": "Закрыта", "seller": "Росимущество"}
+    assert ts.verb_ok(auction, "Росимущество продало на торгах 100% «Башспирта»") is True
+    assert ts.verb_ok(auction, "УГМК-Инвест купил на торгах активы Petropavlovsk") is True
+    assert ts.verb_ok(auction, "Портсигар Николая II ушел с молотка за $1,2 млн") is False
+    assert "продал на торгах" in ts.hint(auction) and "потом решим" not in ts.hint(auction)
+    nameless = {"type": "Продажа с торгов", "status": "Закрыта"}
+    assert ts.no_parties(nameless) and not ts.no_parties(auction)
+    assert "drop_pending" in ts.hint(nameless) and "потом решим" in ts.hint(nameless)
+    abb = {"type": "M&A", "status": "Закрыта"}
+    assert ts.no_parties(abb) and "Группа инвесторов" in ts.hint(abb)
+    assert ts.verb_ok(abb, "Группа инвесторов купила 2,1% Совкомбанка у крупного частного акционера") is True
+    # Идущая сделка без сторон — «Y выставлен на продажу», подсказка о двух сторонах не нужна.
+    assert not ts.no_parties({"type": "M&A", "status": "Обсуждается"})
+    assert not ts.no_parties(dict(abb, buyer_id="c1"))
 
 
 # --- Короткая проверка 9 ноября 2026: как ошибки попадали в карточки и что их теперь ловит
