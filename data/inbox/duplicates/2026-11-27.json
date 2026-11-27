@@ -252,6 +252,37 @@
     "needs_review": true
    },
    "queued": "2026-11-27"
+  },
+  {
+   "key": "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d83275974",
+    "title": "«Техноэволаб» купит разработчика ПО для управления печатью «Принт-Эксперт»",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:abn.agency",
+      "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "«Техноэволаб»",
+    "asset": "разработчик ПО для управления печатью «Принт-Эксперт»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Техноэволаб»",
+     "asset": "разработчик ПО для управления печатью «Принт-Эксперт»",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
   }
  ]
 }
