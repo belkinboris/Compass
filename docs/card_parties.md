@@ -9,7 +9,7 @@
 > `python3 pipeline/docs_budget.py --find "<слова>"`.
 >
 > Соседи: как записать правку (FIXES, `review.py`, разовый скрипт, снятое
-> значение, проза, источники) — `docs/card_editing.md`; что искать в
+> значение, источники) — `docs/card_editing.md`, проза — `docs/card_prose.md`; что искать в
 > статье — `docs/card_reading.md`; приёмка перед консолью —
 > `docs/card_acceptance.md`; мягкие правила именования новых карточек и
 > «бренд в заголовке, юрлицо в профиле» — `docs/moderation.md`.
