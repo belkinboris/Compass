@@ -32,6 +32,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -61,10 +62,26 @@ def load_sources():
     return json.load(open(SOURCES, encoding='utf-8'))['sources']
 
 
+# Отказ, который сайт дает через раз, — не закрытая лента. Городские сайты
+# одной сети (74.ru, НГС, E1, 63.ru) под нагрузкой отвечают 403 примерно на
+# каждый второй запрос и тут же 200 на следующий: 27 ноября 2026 проверка
+# «лента молчит» по одной попытке назвала закрытыми четыре живые ленты, а
+# приток терял их записи через раз. Повторяем дважды с паузой; отказ на всех
+# трех попытках (страница проверки у iz.ru) остается отказом.
+RETRY_CODES = (403, 429, 503)
+RETRY_PAUSE = 3
+
+
 def http_get(url):
     req = urllib.request.Request(url, headers={'User-Agent': UA})
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        return resp.read()
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as e:
+            if e.code not in RETRY_CODES or attempt == 2:
+                raise
+            time.sleep(RETRY_PAUSE)
 
 
 def published_day(text):
