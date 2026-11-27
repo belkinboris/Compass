@@ -782,7 +782,9 @@ def test_every_condition_of_the_question_is_applied(idx):
     r = ar.retrieve("Какие сделки были в Татарстане?", idx=idx)
     assert r.intent == "filter" and len(r.pool) > 5
     r = ar.retrieve("Приведи пример сделки MBO — выкупа компании менеджментом", idx=idx)
-    assert r.intent == "term" and re.search(r"MBO|management buy|[Мм]енеджмент", r.docs[0].title)
+    # заголовок «Балтики» с 27 ноября 2026 — по реестру («ВГ Инвест» купил…), менеджмент — в тексте
+    assert r.intent == "term" and re.search(r"MBO|management buy|[Мм]енеджмент",
+                                            r.docs[0].title + " " + r.docs[0].blob)
 
 
 def test_follow_up_works_inside_the_previous_answer(idx):

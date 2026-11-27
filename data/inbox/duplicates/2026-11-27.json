@@ -1,0 +1,89 @@
+{
+ "made": "2026-11-27",
+ "items": [
+  {
+   "key": "https://www.kommersant.ru/doc/9131957::gd1bf6d5e",
+   "candidate_id": "gd1bf6d5e",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d68806137",
+    "title": "ЦИАН изменил состав акционеров // Леван Назаров консолидировал 21,97% акций ЦИАН",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9131957"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "МКПАО «ЦИАН» изменило состав акционеров. ООО «Технологии недвижимости» Левана Назарова приобрело 21,97% акций ЦИАН.",
+      "source": [
+       "web:kommersant.ru",
+       "https://www.kommersant.ru/doc/9131957"
+      ]
+     }
+    ],
+    "buyer_name": "ЦИАН изменил состав акционеров // Леван Назаров",
+    "asset": "ЦИАН",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "ЦИАН изменил состав акционеров // Леван Назаров",
+     "asset": "ЦИАН",
+     "seller": null
+    },
+    "ind": "Недвижимость",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  },
+  {
+   "key": "https://www.interfax.ru/business/1131762::g4290fc7a",
+   "candidate_id": "g4290fc7a",
+   "reason": "тот же предмет, что у карточки со статусом «Обсуждается» без движения — проверьте, не сорвались ли эти переговоры и не закрылась ли сделка иначе",
+   "draft": {
+    "draft_id": "d33564975",
+    "title": "Структура Левана Назарова приобрела 21,97% МКПАО «Циан»",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/business/1131762"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Еще 21,41% приобрел \"Атон\"",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/business/1131762"
+      ]
+     }
+    ],
+    "buyer_name": "Левана Назарова",
+    "asset": "МКПАО «Циан»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Левана Назарова",
+     "asset": "МКПАО «Циан»",
+     "seller": null
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  }
+ ]
+}

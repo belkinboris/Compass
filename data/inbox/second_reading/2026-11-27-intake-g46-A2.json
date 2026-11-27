@@ -1,0 +1,55 @@
+[
+ {
+  "id": "g89b4c747",
+  "fields": {
+   "title": "ok",
+   "asset": "ok",
+   "eco.share": "ok",
+   "eco.sum": "ok",
+   "eco.val": "ok",
+   "eco.fin_context": "ok",
+   "eco.rationale": "ok",
+   "eco.context": "ok",
+   "law.struct": "ok",
+   "law.terms": "ok",
+   "extra": "ok"
+  },
+  "general": {
+   "verbatim": "ok",
+   "parties": "ok",
+   "status_date": "ok",
+   "post": "ok",
+   "language": "ok",
+   "modality": "ok",
+   "coherent": "ok",
+   "party_words": "ok"
+  },
+  "verdict": "ok"
+ },
+ {
+  "id": "gc22a59b1",
+  "fields": {
+   "title": "ok",
+   "asset": "ok",
+   "eco.share": "ok",
+   "eco.sum": "ok",
+   "eco.val": "ok",
+   "eco.target_fin": "ok",
+   "eco.fin_context": "ok",
+   "eco.context": "ok",
+   "law.struct": "ok",
+   "extra": "ok"
+  },
+  "general": {
+   "verbatim": "ok",
+   "parties": "ok",
+   "status_date": "ok",
+   "post": "ok",
+   "language": "ok",
+   "modality": "ok",
+   "coherent": "ok",
+   "party_words": "ok"
+  },
+  "verdict": "ok"
+ }
+]
