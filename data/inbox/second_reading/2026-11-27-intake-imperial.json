@@ -1,0 +1,30 @@
+[
+  {
+    "id": "gdc13aeb3",
+    "fields": {
+      "title": "заголовок «Altria и Japan Tobacco могут купить Imperial Brands» ставит JT вровень с Altria, а во всей остальной карточке покупатель один — Altria (шапка «Altria → Imperial Brands», «Покупатель: Altria», в посте то же). Участие JT известно только по неофициальным данным Bloomberg: в заявлении Altria сторона не названа («in discussions with a third party regarding its possible acquisition of part of the business of Imperial Brands, however no agreement has yet been reached»), Reuters: «Bloomberg News has also said JT is evaluating an acquisition with a partner, but JT declined comment on the report». «Могут» смягчает саму покупку, но не то, что JT — участник. Должно быть так, чтобы подтвержденное (Altria рассматривает предложение) отличалось от неподтвержденного (JT — возможный партнер), например: Altria может купить Imperial Brands, возможно, вместе с Japan Tobacco.",
+      "asset": "ok",
+      "eco.share": "ok",
+      "eco.val": "ok",
+      "eco.target_fin": "ok",
+      "eco.fin_context": "ok",
+      "eco.rationale": "ok",
+      "eco.context": "ok",
+      "law.struct": "ok",
+      "law.appr": "ok",
+      "law.terms": "ok",
+      "extra": "ok"
+    },
+    "general": {
+      "verbatim": "ok",
+      "parties": "продавец пуст, и пост из-за этого говорит «Продавец: не раскрыт». Для биржевой компании это неверно по смыслу: продавца никто не скрывает, предложение, если оно будет, адресуется акционерам Imperial Brands PLC (заявление Altria: «considering a possible offer for Imperial Brands», объявление по правилу 2.4 Кодекса о поглощениях; ответ совета: «Shareholders are advised to take no action at this time»). По правилу docs/card_parties.md об оферте всем акционерам (решение владельца 6 ноября 2026, g9b4c2e71) продавец пишется текстом — «Акционеры Imperial Brands», без профиля. Если считать, что до твердого предложения правило не действует, это должен решить владелец, но строка «не раскрыт» в любом случае вводит в заблуждение.",
+      "status_date": "ok",
+      "post": "две строки. 1) «Продавец: не раскрыт» — см. parties: должно быть «Акционеры Imperial Brands». 2) Заголовок поста называет двух покупателей (Altria и Japan Tobacco), а строка «Покупатель» — одного Altria; подписчик без карточки не поймет, кто покупает и кто такая Japan Tobacco в этой сделке. Чинится вместе с заголовком.",
+      "language": "ok",
+      "modality": "заголовок: участие Japan Tobacco в статьях — «по данным Bloomberg», JT от комментариев отказалась, Altria партнера не называет; в заголовке это стоит наравне с подтвержденным намерением Altria. В тексте полей осторожность соблюдена («по неофициальным данным», «компании ее участие не подтверждали»), расходится только заголовок.",
+      "coherent": "заголовок отвечает на вопрос «кто покупает» иначе, чем экраны: в заголовке двое (Altria и Japan Tobacco), в шапке, на «Обзоре» и в посте — одна Altria, а JT описана как возможная третья сторона, которая взяла бы часть бизнеса. В остальном карточка читается как одна сделка: сумма не раскрыта и на «Обзоре», и в «Финансах» («Цена предложения не названа»), статус «Обсуждается» согласуется с текстом, день 26 ноября 2026 — день заявления Altria.",
+      "party_words": "ok"
+    },
+    "verdict": "fix"
+  }
+]
