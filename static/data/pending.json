@@ -464,7 +464,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-27T01:43:15+00:00",
+   "pending_since": "2026-11-27T10:18:15+00:00",
    "kind": "acquisition",
    "date_basis": "registry",
    "proofread_absorbed": {
@@ -493,7 +493,9 @@
    "accepted": "2026-11-27",
    "accepted_hash": "b9bbb778857a.2dcf88",
    "second_read": "2026-11-27",
-   "second_read_hash": "b9bbb778857a.2dcf88"
+   "second_read_hash": "b9bbb778857a.2dcf88",
+   "draft_sent": true,
+   "shown_hash": "b9bbb778857a.2dcf88"
   },
   {
    "id": "gc22a59b1",
