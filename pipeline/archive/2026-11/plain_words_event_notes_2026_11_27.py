@@ -18,3 +18,17 @@ for cid, k, old, new in R:
     e['note'] = e['note'].replace(old, new); print('fix', cid, k)
 if '--write' in sys.argv:
     json.dump(d, open(P, 'w', encoding='utf-8'), indent=1, ensure_ascii=False); print('written')
+
+
+# Языковая правка eco.share gx4padel01 («сами юрлица» → «юрлица») — подтверждение для fact_edit_guard.
+if '--log-share' in sys.argv:
+    sys.path.insert(0, 'pipeline')
+    import fact_edit_guard
+    d = json.load(open(P, encoding='utf-8'))
+    c = next(x for x in d['deals'] if x['id'] == 'gx4padel01')
+    v = c['eco']['share']
+    assert 'юрлица Rocket Padel' in v and 'сами юрлица' not in v
+    if not any(r.get('field') == 'eco.share' and r.get('new') == v for r in c.get('fact_log') or []):
+        fact_edit_guard.log(c, 'eco.share', v, 'Он не раскрыл условия сделки, но объяснил, что в ее периметр вошли 3 действующих клуба в Кемерово, Волгограде и Уфе на 18 кортов, а также бренд.',
+                            'https://www.kommersant.ru/doc/9042452', 'вычитка 27.11.2026')
+        json.dump(d, open(P, 'w', encoding='utf-8'), indent=1, ensure_ascii=False); print('logged')
