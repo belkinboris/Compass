@@ -291,16 +291,17 @@
   },
   {
    "id": "web:iz.ru",
-   "name": "@dealsma",
+   "name": "Известия",
    "kind": "rss",
    "url": "https://iz.ru/",
    "feed": "https://iz.ru/xml/rss/all.xml",
-   "feed_checked": true,
+   "feed_checked": false,
    "tier": 2,
    "deals_seen": 20,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": null
+   "last_check": "2026-11-27",
+   "last_error": "HTTP 403",
+   "broken_note": "вместо ленты приходит страница проверки «вы не робот» (403 на трех попытках подряд), с 27 ноября 2026"
   },
   {
    "id": "web:1prime.ru",
@@ -370,7 +371,7 @@
   },
   {
    "id": "web:rb.ru",
-   "name": "@dealsma",
+   "name": "RB.ru",
    "kind": "rss",
    "url": "https://rb.ru/",
    "feed": "https://rb.ru/feeds/all/",

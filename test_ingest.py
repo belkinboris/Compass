@@ -389,6 +389,50 @@ def test_fetch_source_calls_empty_answer_an_error(monkeypatch):
     assert len(items) == 2 and err is None
 
 
+def test_http_get_retries_a_refusal_that_comes_every_other_time(monkeypatch):
+    """Городские сайты (74.ru, НГС, E1, 63.ru) отвечают 403 через раз:
+    27 ноября 2026 проверка по одной попытке назвала закрытыми четыре живые
+    ленты. Повтор спасает такую ленту; отказ на всех попытках остается отказом."""
+    import urllib.error
+
+    class Resp:
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def read(self): return b"ok"
+
+    calls = []
+
+    def flaky(req, timeout=None):
+        calls.append(1)
+        if len(calls) < 2:
+            raise urllib.error.HTTPError(req.full_url, 403, "Forbidden", {}, None)
+        return Resp()
+
+    monkeypatch.setattr(fetch.time, "sleep", lambda s: None)
+    monkeypatch.setattr(fetch.urllib.request, "urlopen", flaky)
+    assert fetch.http_get("https://74.test/rss") == b"ok" and len(calls) == 2
+
+    def closed(req, timeout=None):
+        calls.append(1)
+        raise urllib.error.HTTPError(req.full_url, 403, "Forbidden", {}, None)
+
+    calls.clear()
+    monkeypatch.setattr(fetch.urllib.request, "urlopen", closed)
+    with pytest.raises(urllib.error.HTTPError):
+        fetch.http_get("https://iz.test/rss")
+    assert len(calls) == 3
+
+    def gone(req, timeout=None):
+        calls.append(1)
+        raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {}, None)
+
+    calls.clear()
+    monkeypatch.setattr(fetch.urllib.request, "urlopen", gone)
+    with pytest.raises(urllib.error.HTTPError):
+        fetch.http_get("https://x.test/rss")
+    assert len(calls) == 1
+
+
 def test_fetch_skips_entries_older_than_two_weeks():
     """Заведенная или починенная лента отдает весь хвост разом («Агроинвестор» —
     записи с 2014 года), а у фильтра возраста нет: старое в сырье не берется.
