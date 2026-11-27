@@ -320,6 +320,225 @@ def test_parse_telegram_does_not_shift_url_past_a_textless_post():
     assert len(items) == 2, 'сдвига после пропущенного поста быть не должно'
 
 
+USERLAND_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns="http://backend.userland.com/rss2" xmlns:yandex="http://news.yandex.ru"
+     xmlns:media="http://search.yahoo.com/mrss/">
+ <channel>
+  <title>Новости</title>
+  <link>http://www.retail.ru</link>
+  <item>
+   <title>«Лента» купила сеть «Улыбка радуги»</title>
+   <link>https://www.retail.ru/news/lenta-kupila-set/</link>
+   <media:title>подпись к картинке</media:title>
+   <description><![CDATA[<p>Сумма сделки не раскрывается.</p>]]></description>
+   <pubDate>Thu, 26 Nov 2026 20:46:09 +0300</pubDate>
+   <yandex:full-text>Полный текст</yandex:full-text>
+  </item>
+  <item>
+   <title>ТЦ «Тройка» снова сменил собственника | New Retail</title>
+   <link>https://new-retail.ru/novosti/retail/troyka/</link>
+   <pubDate>Thu, 26 Nov 2026 11:00:00 +0300</pubDate>
+  </item>
+ </channel>
+</rss>"""
+
+
+def test_parse_rss_reads_feed_with_default_namespace():
+    """27 ноября 2026: Retail.ru и New Retail (114 и 64 карточки базы) 13 дней
+    не давали ни одной записи при живых лентах. Обе объявляют у корня
+    `xmlns="http://backend.userland.com/rss2"`: запись `<item>` находилась, а
+    ее `<title>` и `<link>` искались без пространства имен (или в Atom) — и
+    запись молча отбрасывалась. Образец повторяет шапку ленты Retail.ru."""
+    items = fetch.parse_rss(USERLAND_FEED.encode("utf-8"), "web:retail.ru")
+    assert [i["url"] for i in items] == [
+        "https://www.retail.ru/news/lenta-kupila-set/",
+        "https://new-retail.ru/novosti/retail/troyka/"]
+    first = items[0]
+    assert first["title"] == "«Лента» купила сеть «Улыбка радуги»", \
+        "заголовок записи, а не <media:title> чужого расширения"
+    assert first["summary"] == "Сумма сделки не раскрывается."
+    assert first["published"].startswith("Thu, 26 Nov 2026")
+    assert first["source_id"] == "web:retail.ru"
+
+
+def test_parse_rss_still_reads_plain_rss_and_atom():
+    """Починка пространства имен не должна сломать два прежних вида лент."""
+    plain = ("<rss><channel><item><title>А купил Б</title><link>https://x.test/1</link>"
+             "<pubDate>Thu, 26 Nov 2026 10:00:00 GMT</pubDate></item></channel></rss>")
+    atom = ('<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>В купил Г</title>'
+            '<link rel="self" href="https://x.test/self"/>'
+            '<link rel="alternate" href="https://x.test/2"/>'
+            '<updated>2026-11-26T10:00:00Z</updated><summary>кратко</summary></entry></feed>')
+    assert fetch.parse_rss(plain.encode(), "s")[0]["url"] == "https://x.test/1"
+    got = fetch.parse_rss(atom.encode(), "s")[0]
+    assert (got["url"], got["title"], got["summary"], got["published"]) == (
+        "https://x.test/2", "В купил Г", "кратко", "2026-11-26T10:00:00Z")
+
+
+def test_fetch_source_calls_empty_answer_an_error(monkeypatch):
+    """Ответ 200 без записей — отказ, а не «ок, записей 0»: так Forbes.ru
+    месяцами отдавал страницу «вы не робот» и числился проверенной лентой."""
+    src = {"id": "web:forbes.ru", "kind": "rss", "feed": "https://forbes.test/rss"}
+    monkeypatch.setattr(fetch, "http_get", lambda url: b"<!doctypehtml><html lang=en><head></head></html>")
+    items, err = fetch.fetch_source(src)
+    assert items == [] and err and "страница сайта" in err
+    monkeypatch.setattr(fetch, "http_get", lambda url: b"")
+    assert fetch.fetch_source(src)[1] == "пустой ответ"
+    monkeypatch.setattr(fetch, "http_get", lambda url: USERLAND_FEED.encode("utf-8"))
+    items, err = fetch.fetch_source(src)
+    assert len(items) == 2 and err is None
+
+
+def test_fetch_skips_entries_older_than_two_weeks():
+    """Заведенная или починенная лента отдает весь хвост разом («Агроинвестор» —
+    записи с 2014 года), а у фильтра возраста нет: старое в сырье не берется.
+    Запись без распознанной даты старой не считается."""
+    import datetime as dt
+    today = dt.date(2026, 11, 27)
+    assert fetch.published_day("Thu, 26 Nov 2026 20:46:09 +0300") == dt.date(2026, 11, 26)
+    assert fetch.published_day("Thu, 26 Nov 2026 10:00:00 GMT") == dt.date(2026, 11, 26)
+    assert fetch.published_day("2026-11-26T10:00:00+00:00") == dt.date(2026, 11, 26)
+    assert fetch.published_day("2026-11-26") == dt.date(2026, 11, 26)
+    assert fetch.published_day("вчера") is None and fetch.published_day("") is None
+    assert fetch.too_old({"published": "Thu, 13 Feb 2014 10:00:00 +0400"}, today)
+    assert fetch.too_old({"published": "2026-11-12"}, today)
+    assert not fetch.too_old({"published": "2026-11-13"}, today)
+    assert not fetch.too_old({"published": "вчера"}, today)
+    assert not fetch.too_old({}, today)
+
+
+# ---------- молчащие ленты (feeds_health.py) ----------
+
+def _health_sources():
+    return [
+        {"id": "web:live.ru", "name": "Живая", "feed": "f", "enabled": True},
+        {"id": "web:stale.ru", "name": "Застывшая", "feed": "f", "enabled": True},
+        {"id": "web:dead.ru", "name": "Сломанная", "feed": "f", "enabled": True},
+        {"id": "web:paper.ru/daily", "name": "Газета", "feed": "f", "enabled": True},
+        {"id": "firm:rare", "name": "Юрфирма", "feed": "f", "enabled": True, "quiet_days": 30},
+        {"id": "web:captcha.ru", "name": "Закрытая", "feed": "f", "enabled": True,
+         "broken_note": "капча"},
+        {"id": "web:back.ru", "name": "Ожившая", "feed": "f", "enabled": True,
+         "broken_note": "была капча"},
+        {"id": "web:off.ru", "name": "Выключенная", "feed": "f", "enabled": False},
+        {"id": "web:nofeed.ru", "name": "Без ленты", "feed": None, "enabled": False},
+    ]
+
+
+def test_feeds_health_live_finds_silent_and_broken_feeds():
+    """27 ноября 2026: 12 включенных лент 13 дней не давали записей, и никто
+    этого не видел. Проверка называет ленту, которая отвечает ошибкой, и ленту,
+    которая отвечает, но застыла (новейшая запись старше порога); известную
+    поломку (`broken_note`) показывает отдельно и код возврата не поднимает."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+    answers = {
+        "web:live.ru": ([{"published": "Thu, 26 Nov 2026 20:46:09 +0300"},
+                         {"published": "Mon, 02 Nov 2026 10:00:00 +0300"}], None),
+        "web:stale.ru": ([{"published": "Fri, 23 Oct 2026 10:00:00 +0300"}], None),
+        "web:dead.ru": ([], "HTTP 404"),
+        "web:paper.ru/daily": ([], "HTTP 401"),
+        "firm:rare": ([{"published": "2026-11-05T10:00:00+00:00"}], None),   # 22 дня при пороге 30
+        "web:captcha.ru": ([], "вместо ленты пришла страница сайта"),
+        "web:back.ru": ([{"published": "2026-11-27"}], None),
+    }
+    asked = []
+
+    def fetcher(src):
+        asked.append(src["id"])
+        return answers[src["id"]]
+
+    res = feeds_health.check(_health_sources(), today=today, fetcher=fetcher)
+    assert "web:off.ru" not in asked and "web:nofeed.ru" not in asked, "выключенные не проверяются"
+    assert res["checked"] == 7
+    assert [s["id"] for s, _ in res["new"]] == ["web:stale.ru", "web:dead.ru", "web:paper.ru/daily"]
+    assert [s["id"] for s, _ in res["known"]] == ["web:captcha.ru"]
+    assert [s["id"] for s, _ in res["revived"]] == ["web:back.ru"]
+    assert feeds_health.exit_code(res) == 1
+    lines = feeds_health.report_lines(res["new"])
+    assert lines == ["лента Застывшая молчит 35 дней",
+                     "лента Сломанная не работает: адрес ленты больше не существует",
+                     "лента Газета (daily) не работает: сайт закрыл доступ к ленте"]
+    assert not any("ё" in line or "HTTP" in line for line in lines), "строки отчета читает человек"
+
+    # Все живы, кроме известной поломки, — код 0.
+    answers["web:stale.ru"] = answers["web:dead.ru"] = answers["web:paper.ru/daily"] = answers["web:live.ru"]
+    assert feeds_health.exit_code(feeds_health.check(_health_sources(), today=today, fetcher=fetcher)) == 0
+
+
+def test_feeds_health_retries_a_dropped_connection_and_knows_closed_network():
+    """Разовый обрыв связи у живой ленты — не находка (вторая попытка), а когда
+    не ответило больше половины лент — закрыта сеть из этой среды: код 2,
+    о лентах это ничего не говорит."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+    ok = ([{"published": "2026-11-27"}], None)
+    calls = {}
+
+    def flaky(src):
+        calls[src["id"]] = calls.get(src["id"], 0) + 1
+        if src["id"] == "web:live.ru" and calls[src["id"]] == 1:
+            return [], "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+        return ok
+
+    res = feeds_health.check(_health_sources(), today=today, fetcher=flaky)
+    assert calls["web:live.ru"] == 2 and not res["new"]
+
+    res = feeds_health.check(_health_sources(), today=today,
+                             fetcher=lambda src: ([], "URLError: Tunnel connection failed: 403 Forbidden"))
+    assert feeds_health.exit_code(res) == 2
+
+
+def test_feeds_health_disk_reads_raw_and_does_not_judge_too_early(tmp_path):
+    """Без сети — по сырью: лента без записей за порог дней молчит; если сырье
+    покрывает меньше порога, о ленте без записей сказано «судить рано»."""
+    import datetime as dt
+    import feeds_health
+    today = dt.date(2026, 11, 27)
+
+    def write(day, rows):
+        (tmp_path / (day + ".jsonl")).write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+
+    write("2026-11-15", [{"source_id": "web:stale.ru", "url": "u1", "fetched": "2026-11-15"},
+                         {"source_id": "web:live.ru", "url": "u2", "fetched": "2026-11-15"}])
+    write("2026-11-26", [{"source_id": "web:live.ru", "url": "u3", "fetched": "2026-11-26"}])
+    # Кэш полных текстов статей — не лента, в счет не идет.
+    (tmp_path / "2026-11-26-articles.jsonl").write_text(
+        json.dumps({"source_id": "web:dead.ru", "url": "u4"}) + "\n", encoding="utf-8")
+
+    res = feeds_health.check(_health_sources(), mode="disk", today=today, raw_dir=str(tmp_path))
+    new = {s["id"]: v for s, v in res["new"]}
+    assert set(new) == {"web:stale.ru", "web:dead.ru", "web:paper.ru/daily"}
+    assert new["web:stale.ru"]["days"] == 12 and new["web:dead.ru"]["days"] == 12
+    assert [s["id"] for s, _ in res["unknown"]] == ["firm:rare"], \
+        "сырья 12 дней при пороге 30 — судить рано, а не «молчит»"
+    assert {s["id"] for s, _ in res["known"]} == {"web:captcha.ru", "web:back.ru"}
+    assert feeds_health.exit_code(res, "disk") == 1
+
+    # Сырья нет вовсе (новая сессия рутины): находок нет, все «судить рано».
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    res = feeds_health.check(_health_sources(), mode="disk", today=today, raw_dir=str(empty))
+    assert not res["new"] and len(res["unknown"]) == 7
+    assert feeds_health.exit_code(res, "disk") == 0
+
+
+def test_registry_has_no_enabled_feed_marked_unchecked_without_reason():
+    """Включенная лента, у которой последняя проверка кончилась ошибкой, должна
+    нести `broken_note` — причину словами. Иначе это та самая тихая поломка:
+    Sostav.ru и «Эксперт» с 31 июля 2026 стояли включенными с `HTTP 404`."""
+    reg = json.loads((ROOT / "pipeline" / "ingest" / "sources.json").read_text(encoding="utf-8"))
+    bad = [s["id"] for s in reg["sources"]
+           if s.get("enabled") and s.get("last_error") and not s.get("broken_note")]
+    assert not bad, f"включены, отвечают ошибкой и без пометки broken_note: {bad}"
+    for s in reg["sources"]:
+        if s.get("quiet_days") is not None:
+            assert isinstance(s["quiet_days"], int) and s["quiet_days"] > 0
+
+
 # ---------- формат телеграм-поста ----------
 
 def test_post_has_no_placeholder_lines(base):

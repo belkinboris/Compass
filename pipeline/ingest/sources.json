@@ -28,6 +28,20 @@
    "note": "Материалы газеты: 106 из 107 в ленте новостей /RSS/news.xml не появляются (замер 6 октября 2026)."
   },
   {
+   "id": "web:kommersant.ru/business",
+   "name": "Коммерсантъ",
+   "kind": "rss",
+   "url": "https://kommersant.ru/",
+   "feed": "https://www.kommersant.ru/rss/section-business.xml",
+   "feed_checked": true,
+   "tier": 2,
+   "deals_seen": 0,
+   "enabled": true,
+   "note": "Раздел «Бизнес». Заведен 27 ноября 2026: за 25–26 ноября 19 из 84 материалов раздела не было ни в news.xml, ни в corp.xml (в том числе «Фонды Газпромбанка вышли из капитала завода „Гусар“»). Ленты разделов «Финансы» и «Экономика» не заведены: первая целиком входит в эту, во второй сделок нет.",
+   "last_check": "2026-11-27",
+   "last_error": null
+  },
+  {
    "id": "web:vedomosti.ru",
    "name": "Ведомости",
    "kind": "rss",
@@ -86,12 +100,13 @@
    "kind": "rss",
    "url": "https://forbes.ru/",
    "feed": "https://www.forbes.ru/newrss.xml",
-   "feed_checked": true,
+   "feed_checked": false,
    "tier": 2,
    "deals_seen": 185,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": null
+   "last_check": "2026-11-27",
+   "last_error": "вместо ленты пришла страница сайта (проверка «вы не робот» или адрес устарел)",
+   "broken_note": "вместо ленты приходит страница проверки «вы не робот» (все известные адреса), с 27 ноября 2026"
   },
   {
    "id": "web:mergers.ru",
@@ -116,8 +131,9 @@
    "tier": 2,
    "deals_seen": 91,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": null
+   "last_check": "2026-11-27",
+   "last_error": null,
+   "broken_note": "лента отвечает, но застыла: новейшая запись от 23 октября 2026; другого адреса не нашлось"
   },
   {
    "id": "web:cnews.ru",
@@ -168,8 +184,9 @@
    "tier": 1,
    "deals_seen": 42,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 401"
+   "last_check": "2026-11-27",
+   "last_error": "HTTP 401",
+   "broken_note": "лента закрыта: ответ 401 на всех вариантах адреса, с 31 июля 2026"
   },
   {
    "id": "web:dp.ru",
@@ -239,13 +256,14 @@
    "name": "Sostav.ru",
    "kind": "rss",
    "url": "https://sostav.ru/",
-   "feed": "https://www.sostav.ru/rss/news.xml",
-   "feed_checked": false,
+   "feed": "https://www.sostav.ru/rss",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 22,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 404"
+   "last_check": "2026-11-27",
+   "last_error": null,
+   "note": "Адрес ленты заменен 27 ноября 2026: прежний /rss/news.xml отвечал 404."
   },
   {
    "id": "web:fontanka.ru",
@@ -316,12 +334,12 @@
    "kind": "rss",
    "url": "https://abireg.ru/",
    "feed": "https://abireg.ru/rss.xml",
-   "feed_checked": false,
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 18,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 404"
+   "last_check": "2026-11-27",
+   "last_error": null
   },
   {
    "id": "web:retail.ru",
@@ -333,19 +351,22 @@
    "tier": 2,
    "deals_seen": 18,
    "enabled": true,
-   "last_check": "2026-07-31",
+   "last_check": "2026-11-27",
    "last_error": null
   },
   {
    "id": "web:abn.agency",
    "name": "Агентство Бизнес Новостей",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://abn.agency/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://abn.agency/feed/",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 16,
-   "enabled": false
+   "enabled": true,
+   "note": "Лента заведена 27 ноября 2026 (сверка источников): 41 карточка базы, деловое агентство. Отдает 10 записей.",
+   "last_check": "2026-11-27",
+   "last_error": null
   },
   {
    "id": "web:rb.ru",
@@ -383,7 +404,7 @@
    "tier": 2,
    "deals_seen": 13,
    "enabled": true,
-   "last_check": "2026-07-31",
+   "last_check": "2026-11-27",
    "last_error": null
   },
   {
@@ -396,8 +417,9 @@
    "tier": 2,
    "deals_seen": 13,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 401"
+   "last_check": "2026-11-27",
+   "last_error": "URLError: <urlopen error [Errno 104] Connection reset by peer>",
+   "broken_note": "адрес перенесен на rbc.ru/quote/rss и отдает пустой ответ, с 27 ноября 2026"
   },
   {
    "id": "web:marketscreener.com",
@@ -420,8 +442,9 @@
    "tier": 2,
    "deals_seen": 12,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unabl"
+   "last_check": "2026-11-27",
+   "last_error": "вместо ленты пришла страница сайта (проверка «вы не робот» или адрес устарел)",
+   "broken_note": "вместо ленты приходит страница защиты от роботов, с 27 ноября 2026"
   },
   {
    "id": "web:frankrg.com",
@@ -477,12 +500,13 @@
    "kind": "rss",
    "url": "https://secretmag.ru/",
    "feed": "https://secretmag.ru/rss/",
-   "feed_checked": true,
+   "feed_checked": false,
    "tier": 2,
    "deals_seen": 9,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": null
+   "last_check": "2026-11-27",
+   "last_error": "вместо ленты пришла страница сайта (проверка «вы не робот» или адрес устарел)",
+   "broken_note": "вместо ленты приходит страница входа, с 27 ноября 2026"
   },
   {
    "id": "web:ewdn.com",
@@ -505,8 +529,9 @@
    "tier": 2,
    "deals_seen": 8,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 404"
+   "last_check": "2026-11-27",
+   "last_error": "HTTP 404",
+   "broken_note": "адрес ленты отвечает 404, нового не нашлось (проверены /rss, /rss.xml, /feed/), с 31 июля 2026"
   },
   {
    "id": "web:habr.com",
@@ -524,13 +549,14 @@
    "name": "Агроинвестор",
    "kind": "rss",
    "url": "https://agroinvestor.ru/",
-   "feed": "https://www.agroinvestor.ru/rss/",
+   "feed": "https://www.agroinvestor.ru/feed/public-agronews.xml",
    "feed_checked": true,
    "tier": 2,
    "deals_seen": 8,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": null
+   "last_check": "2026-11-27",
+   "last_error": null,
+   "note": "Адрес ленты заменен 27 ноября 2026: прежний /rss/ отдавал обычную страницу сайта. Лента отдает около 400 записей с 2014 года — старое отсекает fetch.MAX_AGE_DAYS."
   },
   {
    "id": "web:finversia.ru",
@@ -673,13 +699,14 @@
    "name": "БИЗНЕС Online",
    "kind": "rss",
    "url": "https://business-gazeta.ru/",
-   "feed": "https://www.business-gazeta.ru/rss",
-   "feed_checked": false,
+   "feed": "https://www.business-gazeta.ru/rss.xml",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 6,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 404"
+   "last_check": "2026-11-27",
+   "last_error": null,
+   "note": "Адрес ленты заменен 27 ноября 2026: прежний /rss отвечал 404."
   },
   {
    "id": "web:finam.ru",
@@ -708,13 +735,14 @@
    "name": "Газета.Ru",
    "kind": "rss",
    "url": "https://gazeta.ru/",
-   "feed": "https://www.gazeta.ru/export/rss/lenta.xml",
-   "feed_checked": false,
+   "feed": "https://www.gazeta.ru/export/rss/busnews.xml",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 6,
    "enabled": true,
-   "last_check": "2026-07-31",
-   "last_error": "HTTP 404"
+   "last_check": "2026-11-27",
+   "last_error": null,
+   "note": "Адрес ленты заменен 27 ноября 2026: прежний /export/rss/lenta.xml отвечал 404; взята лента новостей раздела «Бизнес»."
   },
   {
    "id": "web:shoppers.media",
@@ -1099,13 +1127,16 @@
   {
    "id": "web:pharmvestnik.ru",
    "name": "Фармацевтический вестник",
-   "kind": "html",
+   "kind": "rss",
    "url": "https://pharmvestnik.ru/",
-   "feed": null,
-   "feed_checked": false,
+   "feed": "https://pharmvestnik.ru/rss.xml",
+   "feed_checked": true,
    "tier": 2,
    "deals_seen": 3,
-   "enabled": false
+   "enabled": true,
+   "note": "Лента заведена 27 ноября 2026 (сверка источников): отраслевое издание фармацевтики, 30 записей.",
+   "last_check": "2026-11-27",
+   "last_error": null
   },
   {
    "id": "web:m.business-gazeta.ru",
@@ -1445,7 +1476,8 @@
    "deals_seen": 1,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:alumnipartnerslawfirm",
@@ -1458,7 +1490,8 @@
    "deals_seen": 0,
    "enabled": true,
    "last_check": "2026-10-21",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:BIRCHLEGAL",
@@ -1471,7 +1504,8 @@
    "deals_seen": 3,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:LevelLegalServices",
@@ -1484,7 +1518,8 @@
    "deals_seen": 2,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:LKPconsult",
@@ -1497,7 +1532,8 @@
    "deals_seen": 1,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:kkmpconnect",
@@ -1510,7 +1546,8 @@
    "deals_seen": 1,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:stonebridge_legal",
@@ -1523,7 +1560,8 @@
    "deals_seen": 0,
    "enabled": true,
    "last_check": "2026-11-09",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "tg:bezrec",
@@ -1562,7 +1600,8 @@
    "deals_seen": 0,
    "enabled": true,
    "last_check": "2026-11-06",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "firm:alumni",
@@ -1707,7 +1746,8 @@
    "deals_seen": 0,
    "enabled": true,
    "last_check": "2026-07-31",
-   "last_error": null
+   "last_error": null,
+   "quiet_days": 30
   },
   {
    "id": "firm:orion",
@@ -2076,7 +2116,8 @@
    "enabled": true,
    "last_check": "2026-10-26",
    "last_error": null,
-   "note": "Инвестконсультант: первым публикует свои закрытые сделки (5YES! / «Логика молока», 26.10.2026 — на 1 ч 24 мин раньше @dealsma)."
+   "note": "Инвестконсультант: первым публикует свои закрытые сделки (5YES! / «Логика молока», 26.10.2026 — на 1 ч 24 мин раньше @dealsma).",
+   "quiet_days": 30
   },
   {
    "id": "tg:fasrussia",
@@ -2089,6 +2130,20 @@
    "deals_seen": 0,
    "enabled": true,
    "last_check": "2026-11-18",
+   "last_error": null
+  },
+  {
+   "id": "web:eanews.ru",
+   "name": "ЕАН",
+   "kind": "rss",
+   "url": "https://eanews.ru/",
+   "feed": "https://eanews.ru/rss",
+   "feed_checked": true,
+   "tier": 2,
+   "deals_seen": 14,
+   "enabled": true,
+   "note": "Уральское агентство, 14 карточек базы. Лента заведена 27 ноября 2026 (сверка источников).",
+   "last_check": "2026-11-27",
    "last_error": null
   }
  ]
