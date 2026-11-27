@@ -654,34 +654,6 @@
    ]
   },
   {
-   "draft_id": "d76964587",
-   "title": "Кабардино‑Балкария присоединилась к запрету розничной продажи вейпов | New Retail",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/kabardino_balkariya_prisoedinilas_k_zapretu_roznichnoy_prodazhi_veypov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d42892845",
    "title": "Нагрузочное тестирование после распродажи: как получить точные цифры мощностей вместо «купим с запасом» | New-Retail.ru",
    "date": "2026-11-24",
@@ -705,10 +677,8 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Кабардино‑Балкария присоединилась к запрету розничной продаж» — второе издание, в группу не шлем"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -738,7 +708,7 @@
    "dup_in_batch": true,
    "hold_reasons": [
     "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Кабардино‑Балкария присоединилась к запрету розничной продаж» — второе издание, в группу не шлем"
+    "та же новость, что «Нагрузочное тестирование после распродажи: как получить точн» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -769,7 +739,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Кабардино‑Балкария присоединилась к запрету розничной продаж» — второе издание, в группу не шлем"
+    "та же новость, что «Нагрузочное тестирование после распродажи: как получить точн» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -925,45 +895,6 @@
    ]
   },
   {
-   "draft_id": "d89201605",
-   "title": "У «Циана» сменились основные акционеры",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:sostav.ru",
-     "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Структуры трех ключевых акционеров продали более 52% голосующих акций компании",
-     "source": [
-      "web:sostav.ru",
-      "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d99086407",
    "title": "Александр Цыбань сократил долю в «Выборе» до 10,8%",
    "date": "2026-11-27",
@@ -1111,34 +1042,6 @@
    ]
   },
   {
-   "draft_id": "d53702952",
-   "title": "Mercedes-Benz создаст в Пекине совместное предприятие с китайской BAIC",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/auto/news/2026/11/27/1415877-mercedes-benz-sozdast"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d09282960",
    "title": "ВТБ постарается до конца года завершить приобретение доли в финтех-активах группы RWB",
    "date": "2026-11-27",
@@ -1229,11 +1132,9 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли",
-    "та же новость, что «У «Циана» сменились основные акционеры» — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли"
    ]
   },
   {
@@ -1265,6 +1166,277 @@
     "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "та же новость, что «Сервис легального приема платежей за заказ музыки «Бит за Би» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d27761009",
+   "title": "ВТБ будет стараться завершить SPO и закрыть сделку с RWB до конца года",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:interfax.ru",
+     "https://www.interfax.ru/business/1131781"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «ВТБ постарается до конца года завершить приобретение доли в » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d97627680",
+   "title": "«Я была моделью, товароведом, курьером и переговорщиком»: основательница Poison Drop — о деньгах, продаже бизнеса и материнстве",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/woman/kuznetsova-interview/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d80719290",
+   "title": "ВТБ постарается завершить допэмиссию и приобретение доли в RWB до конца года",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:1prime.ru",
+     "https://1prime.ru/20261127/vtb-875618674.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "та же новость, что «ВТБ постарается до конца года завершить приобретение доли в » — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d52181828",
+   "title": "В Тюменской области приняли закон о запрете продажи вейпов",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:ria.ru",
+     "https://ria.ru/20261127/zakon-2134311169.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g75283fd4 (общие редкие слова: продаж, тюменс) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d64337180",
+   "title": "Европейский автоконцерн подал заявку на новое совместное предприятие в Китае",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/27/evropeyskiy-avtokontsern-podal-zayavku-na-novoe-sovmestnoe-predpriyatie-v-kitae/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d18493567",
+   "title": "Бизнесмен из Кургана купила на торгах имущество автобусного предприятия из Омска",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053147949"
+    ]
+   ],
+   "sum": "44,88 млн ₽",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Предпринимательница из Кургана Лариса Локтина стала победителем торгов по продаже имущественного комплекса омского «Пассажирского предприятия №8». За недвижимость бизнесвумен предложила 44,88 млн рублей.",
+     "source": [
+      "web:ura.news",
+      "https://ura.news/news/1053147949"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": "на торгах имущество автобусного предприятия из Омска",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": "на торгах имущество автобусного предприятия из Омска",
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не названа ни одна сторона — ни покупатель, ни продавец"
+   ]
+  },
+  {
+   "draft_id": "d01282916",
+   "title": "Полезная подборка по заверениям об обстоятельствах в сделках M&A от коллег из Denuo. В серии постов разобраны основные способы защиты стороны сделки в случае недостоверности заверений: — ответственнос",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "tg:dealsma",
+     "https://t.me/dealsma/7628"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d38577308",
+   "title": "РЖД продают цементный завод в Кунгуре",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/realty/2026/11/27/76793487/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Строительство",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d19400872",
+   "title": "«Губит людей не пиво…»: в Самаре из нелегальной продажи изъяли 830 литров пенного",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:63.ru",
+     "https://63.ru/text/food/2026/11/27/76793557/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
