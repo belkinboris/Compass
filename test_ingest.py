@@ -13564,3 +13564,35 @@ def test_enrich_does_not_step_back_to_an_earlier_stage_after_a_later_one():
     closed = dict(item, title="ЛУКОЙЛ закрыл сделку по продаже зарубежных активов",
                   summary="Сделка закрыта.", url="https://www.kommersant.ru/doc/9140000", date="2026-12-20")
     assert any(p[0] == "event" and p[1]["kind"] == "closed" for p in enrich.proposals(fresh, closed, {}, {}))
+
+
+def test_seizure_post_has_no_buyer_and_seller_lines(base):
+    """28.11.2026, владелец о посте g93c93cbc: «Какой покупатель, продавец, когда в доход
+    государства? Стыдно». 85 из 99 постов об изъятиях несли «Покупатель: не раскрыт /
+    Продавец: не раскрыт». У изъятия таких ролей нет: названные стороны печатаются как
+    «Получатель» и «Прежние владельцы», неназванные не печатаются вовсе."""
+    import format_post
+    import check_post
+    comps = base["companies"]
+    bare = {"id": "x1", "type": "M&A", "status": "Закрыта", "date": "2026-11-27", "ind": "Транспорт и логистика",
+            "title": "Челябинские дорожные компании обращены в доход государства",
+            "asset": "ООО «ГК Автодор», ООО «Уралдорпроект»",
+            "no_parties": "Изъятие по решению суда: покупателя и продавца нет, актив перешел государству.",
+            "src": [["Ведомости", "https://www.vedomosti.ru/x"]]}
+    text = re.sub(r"<[^>]+>", "", format_post.render(bare, comps))
+    assert "Покупатель" not in text and "Продав" not in text and "не раскрыт" not in text, text
+    assert "Предмет: ООО «ГК Автодор», ООО «Уралдорпроект»" in text
+    named = dict(bare, id="x2", title="Активы Алексея Митюшова обращены в доход государства",
+                 buyer_name="Российская Федерация", seller="Алексей Митюшов", asset="АО «Салаватнефтемаш»")
+    named.pop("no_parties")
+    text = re.sub(r"<[^>]+>", "", format_post.render(named, comps))
+    assert "Получатель: Российская Федерация" in text and "Прежний владелец: Алексей Митюшов" in text, text
+    assert "Покупатель" not in text and "Продавец" not in text
+    # обычная покупка не задета: неизвестная сторона по-прежнему «не раскрыт» (владелец, 24.09.2026)
+    plain = dict(bare, id="x3", title="«Альфа» купила завод «Бета»", buyer_name="«Альфа»", asset="ООО «Бета»")
+    plain.pop("no_parties")
+    text = re.sub(r"<[^>]+>", "", format_post.render(plain, comps))
+    assert "Покупатель: «Альфа»" in text and "Продавец: не раскрыт" in text, text
+    # страховка проверки перед отправкой
+    bad = "<b>Завод обращен в доход государства</b>\n\n<b>Покупатель:</b> не раскрыт\n<b>Предмет:</b> Завод\n<b>Статус:</b> Закрыта"
+    assert any("изъяти" in p for p in check_post.check(bad))

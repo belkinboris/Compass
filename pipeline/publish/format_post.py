@@ -1281,6 +1281,15 @@ def sum_note(deal):
     return ' (%s)' % SUM_REPORTED_NOTE if basis == 'reported' else ''
 
 
+SEIZURE_TITLE = re.compile(r'обращен[аоы]? в доход государства|истребован[аоы]? в пользу государства')
+
+
+def is_seizure(deal):
+    """Изъятие по суду: заголовок по стандарту (`title_standard`: «Активы X обращены в доход
+    государства»). Определяется по заголовку — отдельного типа сделки у изъятий нет."""
+    return bool(SEIZURE_TITLE.search(str(deal.get('title') or '')))
+
+
 def post_roles(deal):
     """Подписи трех строк сторон и какие из них печатаются ВСЕГДА.
 
@@ -1297,6 +1306,15 @@ def post_roles(deal):
     Возвращает (подпись покупателя, подпись продавца, подпись предмета,
     множество обязательных строк из {'buyer', 'seller', 'subject'})."""
     kind = deal_kind(deal)
+    if is_seizure(deal):
+        # Изъятие в доход государства — не покупка: «покупателя» и «продавца» у него нет
+        # (владелец, 28 ноября 2026, пост о челябинских дорожных компаниях g93c93cbc:
+        # «Какой покупатель, продавец, когда в доход государства? Стыдно»). До этого 85 из
+        # 99 постов об изъятиях несли «Покупатель: не раскрыт / Продавец: не раскрыт».
+        # Строки печатаются, только если сторона названа: получатель (Росимущество,
+        # Российская Федерация) и прежние владельцы.
+        _many = re.search(r',|\sи\s', str(deal.get('seller') or '')) and not deal.get('seller_id')
+        return 'Получатель', ('Прежние владельцы' if _many else 'Прежний владелец'), 'Предмет', {'subject'}
     if kind == 'custody':
         # Решение владельца 16 октября 2026: у временного управления нет
         # покупателя и продавца — есть собственник (он не меняется) и
@@ -1708,7 +1726,9 @@ def render_milestone(deal, event):
     # месте неизвестной стороны; дальше сумма, статус, отрасль и источник
     # этапа. Роли считаются по типу сделки из СНИМКА — тип на момент этапа.
     buyer_label, seller_label, subject_label, required = post_roles(
-        {'type': snap.get('type') or deal.get('type'), 'kind': deal.get('kind')})
+        {'type': snap.get('type') or deal.get('type'), 'kind': deal.get('kind'),
+         'title': snap.get('title') or deal.get('title'), 'seller': snap.get('seller'),
+         'seller_id': deal.get('seller_id')})
     card = []
     for value, label, role in ((snap.get('buyer'), buyer_label, 'buyer'),
                                (snap.get('seller'), seller_label, 'seller'),
