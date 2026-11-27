@@ -543,6 +543,10 @@ def check(edit, card, after=None, companies=None):
     if new == old:
         bad.append('new совпадает с old — правки нет')
         return bad, notes
+    # Доля в обществе остается долей (27 ноября 2026: вычитка 26.11 сняла «доли» у «Интер РАО»).
+    sys.path.insert(0, os.path.join(HERE, 'ingest'))
+    import prose_gate
+    bad += prose_gate.share_regressed(field, old, new)
     if new != new.strip():
         bad.append('пробелы в начале или конце new')
     if '  ' in new:

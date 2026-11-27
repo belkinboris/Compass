@@ -568,6 +568,7 @@ def check(fix, card, texts, companies, inds, urls=frozenset()):
         bad.append('поле уже другое: в базе %r, ожидали %r' % (get_field(card, field), fix['old']))
     if texts and not quote_is_real(quote, texts):
         bad.append('цитаты нет в тексте источника')
+    bad += prose_gate.share_regressed(field, fix['old'], new)   # 27.11.2026: доля не уступает описанию
     # СТРУКТУРНЫЕ ПОЛЯ (заголовок, имена сторон) — не цитата, а название по
     # стилю базы: « », не " ". Источник почти всегда набран прямыми
     # кавычками, и три раунда ручных чисток (fix_straight_quotes.py,
