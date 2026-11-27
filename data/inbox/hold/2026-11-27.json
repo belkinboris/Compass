@@ -1438,6 +1438,157 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d26802345",
+   "title": "Елена Батурина вышла из винодельческого бизнеса в Британии",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/business/27/11/2026/6b092c0182f6f027cc14e50f"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d88548772",
+   "title": "На Камчатке приняли закон о запрете розничной продажи вейпов",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/rbcfreenews/6b092e01a6ed7c1f1d9f7628"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d76964587",
+   "title": "Кабардино‑Балкария присоединилась к запрету розничной продажи вейпов | New Retail",
+   "date": "2026-11-24",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/novosti/retail/kabardino_balkariya_prisoedinilas_k_zapretu_roznichnoy_prodazhi_veypov/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d89201605",
+   "title": "У «Циана» сменились основные акционеры",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:sostav.ru",
+     "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Структуры трех ключевых акционеров продали более 52% голосующих акций компании",
+     "source": [
+      "web:sostav.ru",
+      "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d53702952",
+   "title": "Mercedes-Benz создаст в Пекине совместное предприятие с китайской BAIC",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/auto/news/2026/11/27/1415877-mercedes-benz-sozdast"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
