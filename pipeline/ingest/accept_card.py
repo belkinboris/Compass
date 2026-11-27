@@ -2540,6 +2540,13 @@ def apply_answer(ans, card, base, day=None, registry=None, registry_path=None, f
         readiness.stamp_hash(card, STAMP, comps)   # у показанной — и shown_hash (D7)
         if pending_notes:
             card[STAMP + '_notes'] = pending_notes
+        # Вопрос приемки отвечен, раз читатель принял карточку (27 ноября 2026,
+        # указ № 601 g121443b6: владелец ответил о заголовке, карточку приняли, а
+        # `hold_reason` остался — readiness считал ее «doubted», в консоль она не
+        # шла). `held` — придержал человек, это снимает только он.
+        if card.get('hold_reason') and not card.get('held'):
+            card.pop('hold_reason')
+            lines.append('вопрос приемки снят: карточка принята')
         lines.append('ПРИНЯТА (%s)' % card[STAMP])
         return lines, True
     _restore_notes(card, notes_before)

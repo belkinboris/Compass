@@ -10839,6 +10839,20 @@ def test_title_standard_knows_a_seller_who_walked_away_and_a_free_transfer():
     assert ts.verb_ok(closed, "«Литекс» купил ТЦ «Июнь» в Красногорске у «Финансовых решений»") is True
 
 
+def test_title_standard_knows_a_decree_transfer_not_yet_completed():
+    """27 ноября 2026, указ № 601 (g121443b6): государство вносит акции цементных
+    обществ в Военно-строительную компанию без денег, передача еще не оформлена.
+    Владелец: «пишем как написано в распоряжении» — «Акции Y передадут X»;
+    «покупает» было бы неправдой. Передача в управление сюда не попадает."""
+    sys.path.insert(0, str(ROOT / "pipeline"))
+    import title_standard as ts
+    signed = {"type": "M&A", "status": "Согласование получено"}
+    assert ts.verb_ok(signed, "Акции «Якутцемента», «Спасскцемента» и еще шести обществ передадут Военно-строительной компании") is True
+    assert ts.verb_ok(signed, "«Группа УКМ» покупает 20% ИИ-стартапа «АрхиТех ИИ»") is True
+    assert ts.verb_ok(signed, "Аэропорт передадут в управление холдингу") is False
+    assert ts.verb_ok(signed, "Военно-строительная компания получит акции «Якутцемента»") is False
+
+
 # ---------- новость о карточке базы: сравнение по фактам (card_news.py, 6 ноября 2026) ----------
 
 def _cn_base():
