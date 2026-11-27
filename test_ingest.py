@@ -13001,3 +13001,20 @@ def test_share_form_and_plain_words_hold_every_write_not_only_acceptance():
     assert not prose_gate.share_regressed('eco.context', '100% доли в ООО «Олвин»', 'Завод')
     assert text_rules.problems('Сам Aspace говорит прямо', 'eco.context')
     assert not text_rules.problems('В сделку вошли бренды «Умница» и «Сами с усами».', 'extra')
+
+
+def test_second_reading_asks_for_party_words_but_accepts_older_answers():
+    """27.11.2026: узкий вопрос о цели и согласованиях со слов стороны — в списке вопросов;
+    ответ, начатый по прежнему списку (без него), не отклоняется; замечание по нему возвращает на правку."""
+    import second_reading
+    card = {"id": "x", "accepted": "2026-11-27", "title": "А купил Б", "eco": {"rationale": "—"}, "law": {}}
+    assert "party_words" in second_reading.GENERAL_QUESTIONS
+    assert "[party_words]" in second_reading.questionnaire(card, {"companies": {}})
+    old = {"fields": {"title": "ok"},
+           "general": {k: "ok" for k in second_reading.GENERAL_QUESTIONS if k != "party_words"}, "verdict": "ok"}
+    assert second_reading.apply(old, dict(card), day="2026-11-27")[0] == "stamped"
+    found = {"fields": {"title": "ok"},
+             "general": dict({k: "ok" for k in second_reading.GENERAL_QUESTIONS},
+                             party_words="eco.rationale: «привлечь финансирование», пресс-служба, retailer.ru"),
+             "verdict": "fix"}
+    assert second_reading.apply(found, dict(card))[0] == "fix"
