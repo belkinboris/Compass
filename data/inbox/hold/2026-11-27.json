@@ -55,8 +55,7 @@
    "ind": "Банки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gfd0c23b2 (общие редкие слова: акцион, крупны) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
@@ -627,19 +626,116 @@
    ]
   },
   {
-   "draft_id": "d43446683",
-   "title": "Вдова Лужкова вышла из винодельческого бизнеса в Великобритании",
+   "draft_id": "d50978383",
+   "title": "После срыва скандальной продажи прав на чемпионаты мира ФИФА взломали хакеры и украли 12 ГБ данных",
    "date": "2026-11-27",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261127/biznes-2134269957.html"
+     "web:cnews.ru",
+     "https://www.cnews.ru/news/top/2026-11-27_krizis_v_fifa_posle_utechki"
     ]
    ],
    "sum": null,
    "type": "M&A",
    "status": null,
    "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d42092895",
+   "title": "Китаянка рассказала в соцсетях, как ей отменили собеседование из-за того, что она отказалась купить HR-менеджеру напиток",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:vc.ru",
+     "https://vc.ru/hr/3282879-kitayanka-rasskazala-o-sobesedovanii-otmenennom-iz-za-otkaza-kupit-napitok?from=rss"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d23268719",
+   "title": "Дмитриев: инвестиции в ЦОДы в мире превысили затраты на добычу нефти и газа",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/ekonomika/28362749"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d60911954",
+   "title": "Japan Tobacco и Altria могут объединиться для покупки Imperial Brands",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:sostav.ru",
+     "https://www.sostav.ru/publication/japan-tobacco-i-altria-mogut-obedinitsya-dlya-pokupki-imperial-brands-88983.html"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Компании рассматривают возможность раздела активов британского производителя табачной продукции",
+     "source": [
+      "web:sostav.ru",
+      "https://www.sostav.ru/publication/japan-tobacco-i-altria-mogut-obedinitsya-dlya-pokupki-imperial-brands-88983.html"
+     ]
+    }
+   ],
    "buyer_name": null,
    "asset": null,
    "seller": null,
@@ -651,483 +747,8 @@
    "ind": "Пищепром и напитки",
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d24902545",
-   "title": "Суд отменил взыскание с участников сделки по продаже аптечных активов «РОСТА»",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:pharmvestnik.ru",
-     "https://pharmvestnik.ru/content/news/sud-otmenil-vzyskanie-s-uchastnikov-sdelki-po-prodaje-aptechnyh-aktivov-rosta.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d51016844",
-   "title": "ЦИАН: ПОДГОТОВКА К ПРОДАЖЕ ИЛИ НАЧАЛО БОЛЬШОЙ БОРЬБЫ ЗА КОНТРОЛЬ? 27 ноября 2026 года РБК сообщил о выходе из капитала Циана трех ключевых акционеров в совокупности владеющих 46,4% всех акций (обеспеч",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7627"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку gfd0c23b2 (общие редкие слова: акцион, циана) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d78250525",
-   "title": "Осколки азарта. В центре Новосибирска продали здание с интерьером казино из нулевых: что с ним будет дальше",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ngs.ru",
-     "https://ngs.ru/text/realty/2026/11/27/76790928/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Прошлый владелец бывший зал казино не перестраивал, поэтому, попадая на третий этаж, оказываешься в прошлом",
-     "source": [
-      "web:ngs.ru",
-      "https://ngs.ru/text/realty/2026/11/27/76790928/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "здание с интерьером казино из нулевых: что с ним будет дальше",
-    "seller": null
-   },
-   "ind": "Развлечения",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d64873684",
-   "title": "Суд в Екатеринбурге национализировал остатки бизнеса Малика Гайсина",
-   "date": "2026-11-26",
-   "src": [
-    [
-     "web:eanews.ru",
-     "https://eanews.ru/rossiya/20261126172544/sud-v-ekaterinburge-natsionaliziroval-ostatki-biznesa-malika-gaysina"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d76937124",
-   "title": "Сервис легального приема платежей за заказ музыки «Бит за Бид» привлек 10,3 млн руб. инвестиций",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:cnews.ru",
-     "https://www.cnews.ru/news/line/2026-11-27_servis_legalnogo_priema"
-    ]
-   ],
-   "sum": "10,3 млн ₽",
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "Сервис легального приема платежей за заказ музыки «Бит за Бид»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Сервис легального приема платежей за заказ музыки «Бит за Бид»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d99086407",
-   "title": "Александр Цыбань сократил долю в «Выборе» до 10,8%",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119645-aleksandr-tsyban-sokratil-dolyu-v-vybore-do-10-8/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d98617219",
-   "title": "Сервис оплаты музыки в барах «Бит за Бид» привлек 10,3 млн рублей",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:abn.agency",
-     "https://abn.agency/2026/11/27/servis-oplaty-muzyki-v-barah-bit-za-bid-privlek-103-mln-rublej/"
-    ]
-   ],
-   "sum": "10,3 млн ₽",
-   "type": "Инвестиция",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Проект «Бит за Бид» завершил инвестиционный раунд на платформе brainbox.VC. Он привлек 10,3 млн рублей, а инвесторы получили 20,7% доли компании. В раунде участвовали 197 инвесторов платформы. Соинвестором стал венчурный фонд brainbox_I: он вложил 5 млн…",
-     "source": [
-      "web:abn.agency",
-      "https://abn.agency/2026/11/27/servis-oplaty-muzyki-v-barah-bit-za-bid-privlek-103-mln-rublej/"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "Сервис оплаты музыки в барах «Бит за Бид»",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "Сервис оплаты музыки в барах «Бит за Бид»",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Сервис легального приема платежей за заказ музыки «Бит за Би» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d12712810",
-   "title": "Российский сервис для легального заказа музыки в заведениях «Бит за Бид» привлек 10,3 млн рублей в обмен на 20,7% компании. В проект вошли 197 инвесторов платформы brainbox․VC. Соинвестором раунда ста",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "tg:rusven",
-     "https://t.me/rusven/7876"
-    ]
-   ],
-   "sum": "10,3 млн ₽",
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «Сервис легального приема платежей за заказ музыки «Бит за Би» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d09418077",
-   "title": "ВТБ планирует до конца года завершить SPO и закрыть сделку с RWB",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/27/1415941-zavershit-spo-i-sdelku"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "",
-     "source": [
-      "web:vedomosti.ru",
-      "https://www.vedomosti.ru/investments/news/2026/11/27/1415941-zavershit-spo-i-sdelku"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9d229bc7 (общие слова заголовка: 3) — проверьте, не дубль ли"
-   ]
-  },
-  {
-   "draft_id": "d22555933",
-   "title": "ВТБ намерен до конца года купить долю в финтех-активах RWB",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:sostav.ru",
-     "https://www.sostav.ru/publication/vtb-nameren-do-kontsa-goda-kupit-dolyu-v-fintekh-aktivakh-rwb-88973.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "Также в планах — принять условия ЦБ для приобретения доли в НСПК",
-     "source": [
-      "web:sostav.ru",
-      "https://www.sostav.ru/publication/vtb-nameren-do-kontsa-goda-kupit-dolyu-v-fintekh-aktivakh-rwb-88973.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g9d229bc7 (общие слова заголовка: 6) — проверьте, не дубль ли",
-    "та же новость, что «ВТБ планирует до конца года завершить SPO и закрыть сделку с» — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d34912387",
-   "title": "«РИА Новости»: смена акционеров «Циан» будет промежуточным этапом перед продажей",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/investments/news/2026/11/27/1416031-smena-aktsionerov"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81983099",
-   "title": "Половина россиян меняют привычки при покупке продуктов во время поездок по стране",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:sostav.ru",
-     "https://www.sostav.ru/publication/polovina-rossiyan-menyayut-privychki-pri-pokupke-produktov-vo-vremya-poezdok-po-strane-88978.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d46424411",
-   "title": "От золота до маркетплейсов: Forbes назвал лидеров по росту инвестиций в России",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:1prime.ru",
-     "https://1prime.ru/20261127/biznes-875632725.html"
-    ]
-   ],
-   "sum": null,
-   "type": "Инвестиция",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Агро",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d81143412",
-   "title": "В России пошли на убыль продажи одного вида машин",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/27/v-rossii-poshli-na-ubyl-prodazhi-odnogo-vida-mashin/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d91288793",
-   "title": "В какой форме в магазинах продают мясо старых кур",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053147919"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Ритейл",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
    ]
   }
  ]
