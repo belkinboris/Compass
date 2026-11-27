@@ -84,6 +84,48 @@
     "needs_review": true
    },
    "queued": "2026-11-27"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28362901::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d52262818",
+    "title": "Экс-подразделение Xerox купило российского разработчика ПО для контроля печати",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28362901"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Сумма сделки по приобретению компанией \"Техноэволаб\" 100% долей в уставном капитале \"Принт-эксперт\" не раскрывается",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28362901"
+      ]
+     }
+    ],
+    "buyer_name": "Экс-подразделение Xerox",
+    "asset": "российский разработчик ПО для контроля печати",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Экс-подразделение Xerox",
+     "asset": "российский разработчик ПО для контроля печати",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
   }
  ]
 }
