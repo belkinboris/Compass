@@ -1356,6 +1356,74 @@
     "draft_id": "d38577308",
     "title": "РЖД продают цементный завод в Кунгуре"
    }
+  },
+  {
+   "id": "g586e6e2d",
+   "date": "2026-11-27",
+   "title": "Подписанную именем Джек открытку с «Титаника» продали с аукциона",
+   "ind": "Не определена",
+   "type": "Продажа с торгов",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Лента.ру",
+     "https://lenta.ru/news/2026/11/27/podpisannuyu-imenem-dzhek-otkrytku-s-titanika-prodali-s-auktsiona/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "seller": "Подписанную именем Джек открытку с «Титаника»",
+   "asset": "с аукциона",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "",
+     "source": [
+      "Лента.ру",
+      "https://lenta.ru/news/2026/11/27/podpisannuyu-imenem-dzhek-otkrytku-s-titanika-prodali-s-auktsiona/"
+     ]
+    }
+   ],
+   "seller_src": "text",
+   "themes": [
+    "Продажа с торгов"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "с аукциона",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/27/podpisannuyu-imenem-dzhek-otkrytku-s-titanika-prodali-s-auktsiona/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Подписанную именем Джек открытку с «Титаника»",
+      "field": "seller",
+      "method": "explicit_news_title",
+      "url": "https://lenta.ru/news/2026/11/27/podpisannuyu-imenem-dzhek-otkrytku-s-titanika-prodali-s-auktsiona/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-27T09:53:29+00:00"
   }
  ]
 }

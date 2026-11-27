@@ -654,34 +654,6 @@
    ]
   },
   {
-   "draft_id": "d42892845",
-   "title": "Нагрузочное тестирование после распродажи: как получить точные цифры мощностей вместо «купим с запасом» | New-Retail.ru",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/tehnologii/nagruzochnoe_testirovanie_posle_rasprodazhi_kak_poluchit_tochnye_tsifry_moshchnostey_vmesto_kupim_s4741/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d75458215",
    "title": "POIZON: значительная доля россиян покупает зимние вещи ещё до наступления сезона | New Retail",
    "date": "2026-11-23",
@@ -705,10 +677,8 @@
    },
    "ind": "Недвижимость",
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец",
-    "та же новость, что «Нагрузочное тестирование после распродажи: как получить точн» — второе издание, в группу не шлем"
+    "не названа ни одна сторона — ни покупатель, ни продавец"
    ]
   },
   {
@@ -739,7 +709,7 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет",
-    "та же новость, что «Нагрузочное тестирование после распродажи: как получить точн» — второе издание, в группу не шлем"
+    "та же новость, что «POIZON: значительная доля россиян покупает зимние вещи ещё д» — второе издание, в группу не шлем"
    ]
   },
   {
@@ -964,180 +934,6 @@
    ]
   },
   {
-   "draft_id": "d37082487",
-   "title": "ВТБ согласился на условия ЦБ для покупки доли в НСПК",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9132025"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "ВТБ намерен принять условия Центробанка (ЦБ) для покупки доли в Национальной системе платежных карт (НСПК, оператор карт «Мир»), сообщил первый зампред правления ВТБ Дмитрий Пьянов. «Мы не можем разглашать шаги, которые предпринимает регулятор по этому…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9132025"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Финтех",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d45572269",
-   "title": "ВТБ не ждет участия большого числа физлиц в размещении допэмиссии",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:kommersant.ru",
-     "https://www.kommersant.ru/doc/9132010"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Обсуждается",
-   "events": [
-    {
-     "kind": "negotiations",
-     "date": "2026-11-27",
-     "title": "Переговоры",
-     "note": "Первый зампред ВТБ Дмитрий Пьянов сообщил журналистам, что банк будет стараться до конца года завершить и процедуру размещения дополнительной эмиссии, и приобретение доли в финтех-активах группы RWB. «Планы по развитию стратегического партнерства остались…",
-     "source": [
-      "web:kommersant.ru",
-      "https://www.kommersant.ru/doc/9132010"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d09282960",
-   "title": "ВТБ постарается до конца года завершить приобретение доли в финтех-активах группы RWB",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:tass.ru",
-     "https://tass.ru/ekonomika/28361257"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "ИТ и интернет",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d20555143",
-   "title": "ВТБ завершает преимущественное право в рамках допэмиссии для покупки 5% «WB Банка»",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:business-gazeta.ru",
-     "https://www.business-gazeta.ru/news/716860"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Банки",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d17023295",
-   "title": "«Циан» объявил о смене основных акционеров",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:gazeta.ru",
-     "https://www.gazeta.ru/business/news/2026/11/27/29839981.shtml"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Платформа объявлений о недвижимости \"Циан\" сообщила на своем сайте о смене основных акционеров, \"В капитале компании произошли изменения: ООО \"Технологии недвижимости\" Левана Назарова приобрели 21,97% компании. ...",
-     "source": [
-      "web:gazeta.ru",
-      "https://www.gazeta.ru/business/news/2026/11/27/29839981.shtml"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g1a8709ea (по всей базе: та же сторона и редкое слово: основн) — проверьте, не дубль ли"
-   ]
-  },
-  {
    "draft_id": "d12712810",
    "title": "Российский сервис для легального заказа музыки в заведениях «Бит за Бид» привлек 10,3 млн рублей в обмен на 20,7% компании. В проект вошли 197 инвесторов платформы brainbox․VC. Соинвестором раунда ста",
    "date": "2026-11-27",
@@ -1169,64 +965,6 @@
    ]
   },
   {
-   "draft_id": "d27761009",
-   "title": "ВТБ будет стараться завершить SPO и закрыть сделку с RWB до конца года",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:interfax.ru",
-     "https://www.interfax.ru/business/1131781"
-    ]
-   ],
-   "sum": null,
-   "type": "IPO",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "dup_in_batch": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «ВТБ постарается до конца года завершить приобретение доли в » — второе издание, в группу не шлем"
-   ]
-  },
-  {
-   "draft_id": "d97627680",
-   "title": "«Я была моделью, товароведом, курьером и переговорщиком»: основательница Poison Drop — о деньгах, продаже бизнеса и материнстве",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:incrussia.ru",
-     "https://incrussia.ru/woman/kuznetsova-interview/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
    "draft_id": "d80719290",
    "title": "ВТБ постарается завершить допэмиссию и приобретение доли в RWB до конца года",
    "date": "2026-11-27",
@@ -1250,20 +988,300 @@
    },
    "ind": null,
    "needs_review": true,
-   "dup_in_batch": true,
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
-    "та же новость, что «ВТБ постарается до конца года завершить приобретение доли в » — второе издание, в группу не шлем"
+    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 5) — проверьте, не дубль ли"
    ]
   },
   {
-   "draft_id": "d52181828",
-   "title": "В Тюменской области приняли закон о запрете продажи вейпов",
+   "draft_id": "d37902055",
+   "title": "ВТБ намерен до конца года купить долю в финтех-активах RWB",
    "date": "2026-11-27",
    "src": [
     [
-     "web:ria.ru",
-     "https://ria.ru/20261127/zakon-2134311169.html"
+     "web:kommersant.ru",
+     "https://www.kommersant.ru/doc/9132132"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "ВТБ постарается завершить покупку долей в финтех-активах объединенной компани Wildberries & Russ (RWB) до конца 2026 года, сообщил первый заместитель президента — председателя правления банка Дмитрий Пьянов. Никаких изменений в планах стратегического…",
+     "source": [
+      "web:kommersant.ru",
+      "https://www.kommersant.ru/doc/9132132"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "ИТ и интернет",
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 5) — проверьте, не дубль ли",
+    "та же новость, что «ВТБ постарается завершить допэмиссию и приобретение доли в R» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d09418077",
+   "title": "ВТБ планирует до конца года завершить SPO и закрыть сделку с RWB",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:vedomosti.ru",
+     "https://www.vedomosti.ru/investments/news/2026/11/27/1415941-zavershit-spo-i-sdelku"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/investments/news/2026/11/27/1415941-zavershit-spo-i-sdelku"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "dup_in_batch": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g15492bd3 (общие слова заголовка: 4) — проверьте, не дубль ли",
+    "та же новость, что «ВТБ постарается завершить допэмиссию и приобретение доли в R» — второе издание, в группу не шлем"
+   ]
+  },
+  {
+   "draft_id": "d12301664",
+   "title": "Китайская XPeng будет продавать человекоподобных роботов по цене электромобилей",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:incrussia.ru",
+     "https://incrussia.ru/news/kitajskaya-xpeng-budet-prodavat-chelovekopodobnyh-robotov-po-tsene-elektromobilej/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Китайская XPeng планирует продавать человекоподобных роботов IRON по цене электромобилей. Когда начнутся продажи, что умеет робот и когда он появится в домах.",
+     "source": [
+      "web:incrussia.ru",
+      "https://incrussia.ru/news/kitajskaya-xpeng-budet-prodavat-chelovekopodobnyh-robotov-po-tsene-elektromobilej/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d75736528",
+   "title": "«Циан» сменил состав крупнейших акционеров",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:iz.ru",
+     "https://iz.ru/2209214/tcian-smenil-sostav-krupneishikh-aktcionerov-izi"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Закрыта",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-27",
+     "title": "Сделка завершена",
+     "note": "Структура собственности российской платформы объявлений о недвижимости «Циан» изменилась: крупные пакеты акций перешли к ООО «Технологии недвижимости» и инвестиционной группе «Атон Холдинг». Об этом 27 ноября сообщили на сайте компании. «В капитале компании…",
+     "source": [
+      "web:iz.ru",
+      "https://iz.ru/2209214/tcian-smenil-sostav-krupneishikh-aktcionerov-izi"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Недвижимость",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d39558738",
+   "title": "Japan Tobacco рассматривают покупку Imperial Brands на фоне временного управления активами в России",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:abn.agency",
+     "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Японская Japan Tobacco (JT) и американская Altria планируют приобрести британского производителя сигарет Imperial Brands и разделить его активы между собой. Об этом сообщает Reuters. О намерениях Altria стало известно накануне: компания рассматривает…",
+     "source": [
+      "web:abn.agency",
+      "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68398852",
+   "title": "Зумеры чаще миллениалов выбирают онлайн-покупки во время распродаж — результаты опроса | New Retail",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:new-retail.ru",
+     "https://new-retail.ru/novosti/retail/zumery_chashche_millenialov_vybirayut_onlayn_pokupki_vo_vremya_rasprodazh_rezultaty_oprosa/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Зумеры и миллениалы проявляют почти одинаковый интерес к ноябрьским распродажам: участвовать в них планируют 57% представителей младшего поколения и 58% старшего. Однако мотивы покупок и отношение к скидкам различаются.",
+     "source": [
+      "web:new-retail.ru",
+      "https://new-retail.ru/novosti/retail/zumery_chashche_millenialov_vybirayut_onlayn_pokupki_vo_vremya_rasprodazh_rezultaty_oprosa/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
+   ]
+  },
+  {
+   "draft_id": "d52333053",
+   "title": "ЦСКА ведет переговоры о покупке форварда сборной Колумбии",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:lenta.ru",
+     "https://lenta.ru/news/2026/11/27/tsska-vedet-peregovory-o-pokupke-forvarda-sbornoy-kolumbii/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "",
+     "source": [
+      "web:lenta.ru",
+      "https://lenta.ru/news/2026/11/27/tsska-vedet-peregovory-o-pokupke-forvarda-sbornoy-kolumbii/"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Ритейл",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d37054997",
+   "title": "Сосновый Бор и Барвиновка перешли под контроль ВС РФ",
+   "date": "2026-11-27",
+   "src": [
+    [
+     "web:ura.news",
+     "https://ura.news/news/1053147979"
     ]
    ],
    "sum": null,
@@ -1281,18 +1299,17 @@
    "ind": null,
    "needs_review": true,
    "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "похоже на уже описанную сделку g75283fd4 (общие редкие слова: продаж, тюменс) — проверьте, не дубль ли"
+    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   },
   {
-   "draft_id": "d64337180",
-   "title": "Европейский автоконцерн подал заявку на новое совместное предприятие в Китае",
+   "draft_id": "d01147844",
+   "title": "Как не купить унитаз, который будет сложно обслуживать",
    "date": "2026-11-27",
    "src": [
     [
-     "web:lenta.ru",
-     "https://lenta.ru/news/2026/11/27/evropeyskiy-avtokontsern-podal-zayavku-na-novoe-sovmestnoe-predpriyatie-v-kitae/"
+     "web:ura.news",
+     "https://ura.news/articles/1053147957"
     ]
    ],
    "sum": null,
@@ -1312,282 +1329,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают",
     "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
-   ]
-  },
-  {
-   "draft_id": "d18493567",
-   "title": "Бизнесмен из Кургана купила на торгах имущество автобусного предприятия из Омска",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:ura.news",
-     "https://ura.news/news/1053147949"
-    ]
-   ],
-   "sum": "44,88 млн ₽",
-   "type": "Продажа с торгов",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Предпринимательница из Кургана Лариса Локтина стала победителем торгов по продаже имущественного комплекса омского «Пассажирского предприятия №8». За недвижимость бизнесвумен предложила 44,88 млн рублей.",
-     "source": [
-      "web:ura.news",
-      "https://ura.news/news/1053147949"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": "на торгах имущество автобусного предприятия из Омска",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "на торгах имущество автобусного предприятия из Омска",
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
-  },
-  {
-   "draft_id": "d01282916",
-   "title": "Полезная подборка по заверениям об обстоятельствах в сделках M&A от коллег из Denuo. В серии постов разобраны основные способы защиты стороны сделки в случае недостоверности заверений: — ответственнос",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "tg:dealsma",
-     "https://t.me/dealsma/7628"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "заголовок не написан, а обрезан от текста новости на полуслове — карточку так показывать нельзя, нужен нормальный заголовок",
-    "не установлен предмет сделки — из заголовка не видно, что продают",
-    "не видно связи с российским рынком — стороны и предмет названы латиницей, российских признаков нет"
-   ]
-  },
-  {
-   "draft_id": "d38577308",
-   "title": "РЖД продают цементный завод в Кунгуре",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:59.ru",
-     "https://59.ru/text/realty/2026/11/27/76793487/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Строительство",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d19400872",
-   "title": "«Губит людей не пиво…»: в Самаре из нелегальной продажи изъяли 830 литров пенного",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:63.ru",
-     "https://63.ru/text/food/2026/11/27/76793557/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d26802345",
-   "title": "Елена Батурина вышла из винодельческого бизнеса в Британии",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/business/27/11/2026/6b092c0182f6f027cc14e50f"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d88548772",
-   "title": "На Камчатке приняли закон о запрете розничной продажи вейпов",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:rbc.ru",
-     "https://www.rbc.ru/rbcfreenews/6b092e01a6ed7c1f1d9f7628"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d76964587",
-   "title": "Кабардино‑Балкария присоединилась к запрету розничной продажи вейпов | New Retail",
-   "date": "2026-11-24",
-   "src": [
-    [
-     "web:new-retail.ru",
-     "https://new-retail.ru/novosti/retail/kabardino_balkariya_prisoedinilas_k_zapretu_roznichnoy_prodazhi_veypov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d89201605",
-   "title": "У «Циана» сменились основные акционеры",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:sostav.ru",
-     "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": "Закрыта",
-   "events": [
-    {
-     "kind": "closed",
-     "date": "2026-11-27",
-     "title": "Сделка завершена",
-     "note": "Структуры трех ключевых акционеров продали более 52% голосующих акций компании",
-     "source": [
-      "web:sostav.ru",
-      "https://www.sostav.ru/publication/struktury-trekh-aktsionerov-prodali-bolee-52-aktsij-tsiana-88959.html"
-     ]
-    }
-   ],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
-  },
-  {
-   "draft_id": "d53702952",
-   "title": "Mercedes-Benz создаст в Пекине совместное предприятие с китайской BAIC",
-   "date": "2026-11-27",
-   "src": [
-    [
-     "web:vedomosti.ru",
-     "https://www.vedomosti.ru/auto/news/2026/11/27/1415877-mercedes-benz-sozdast"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
   }
  ]
