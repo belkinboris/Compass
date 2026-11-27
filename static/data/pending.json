@@ -1424,6 +1424,57 @@
     ]
    },
    "pending_since": "2026-11-27T09:53:29+00:00"
+  },
+  {
+   "id": "gdc13aeb3",
+   "date": "2026-11-27",
+   "title": "Japan Tobacco рассматривают покупку Imperial Brands на фоне временного управления активами в России",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "АБН",
+     "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-27",
+     "title": "Переговоры",
+     "note": "Японская Japan Tobacco (JT) и американская Altria планируют приобрести британского производителя сигарет Imperial Brands и разделить его активы между собой. Об этом сообщает Reuters. О намерениях Altria стало известно накануне: компания рассматривает…",
+     "source": [
+      "АБН",
+      "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
+     ]
+    }
+   ],
+   "themes": [
+    "Правкомиссия / указ президента"
+   ],
+   "pending_since": "2026-11-27T10:06:28+00:00",
+   "from_raw": {
+    "draft_id": "d39558738",
+    "title": "Japan Tobacco рассматривают покупку Imperial Brands на фоне временного управления активами в России"
+   }
   }
  ]
 }

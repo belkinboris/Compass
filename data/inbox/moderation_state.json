@@ -19679,7 +19679,8 @@
   "d52333053": "auto-drop",
   "d37054997": "auto-drop",
   "d01147844": "auto-drop",
-  "d75736528": "auto-drop"
+  "d75736528": "auto-drop",
+  "d39558738": "take"
  },
  "enrich_log": {
   "d00507147": {
@@ -25499,7 +25500,7 @@
   "сосновыйборибарвиновкаперешлиподконтрольвсрф": "auto-drop",
   "какнекупитьунитазкоторыйбудетсложнообслуживать": "auto-drop",
   "циансменилсоставкрупнейшихакционеров": "auto-drop",
-  "japantobaccoрассматриваютпокупкуimperialbrandsнафоневременногоуправленияактивамивроссии": "sent"
+  "japantobaccoрассматриваютпокупкуimperialbrandsнафоневременногоуправленияактивамивроссии": "take"
  },
  "take_log": {
   "d40795102": {
@@ -25591,6 +25592,12 @@
    "card": "gb3c1379e",
    "title": "РЖД продают цементный завод в Кунгуре",
    "url": "https://59.ru/text/realty/2026/11/27/76793487/"
+  },
+  "d39558738": {
+   "at": "2026-11-27T10:06:28+00:00",
+   "card": "gdc13aeb3",
+   "title": "Japan Tobacco рассматривают покупку Imperial Brands на фоне временного управления активами в России",
+   "url": "https://abn.agency/2026/11/27/japan-tobacco-rassmatrivayut-pokupku-imperial-brands-na-fone-vremennogo-upravleniya-aktivami-v-rossii/"
   }
  },
  "discarded_urls": {
