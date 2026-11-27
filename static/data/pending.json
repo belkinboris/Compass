@@ -320,7 +320,7 @@
      }
     ]
    },
-   "pending_since": "2026-11-27T01:34:07+00:00",
+   "pending_since": "2026-11-27T07:16:40+00:00",
    "kind": "acquisition",
    "sum_basis": "estimate",
    "proofread_absorbed": {
@@ -370,7 +370,11 @@
     }
    ],
    "second_read": "2026-11-27",
-   "second_read_hash": "02a411697e97.c86081"
+   "second_read_hash": "02a411697e97.c86081",
+   "draft_sent": true,
+   "shown_hash": "02a411697e97.c86081",
+   "post_draft_sent": true,
+   "post_preview": "<b>Концерн «Энерготехнологии» купил торговый центр «Тройка» в Москве</b>\n\n<b>Покупатель:</b> Концерн «Энерготехнологии» — петербургская торговая компания, развивает магазины мебели и интерьера «Кубатура».\n<b>Продавцы:</b> «Кама Капитал», ОАО «Первый хладокомбинат» и ООО «Ле Монлид»\n<b>Предмет:</b> Торговый центр «Тройка» у метро «Красносельская» в Москве\n<b>Сумма:</b> 6–8 млрд ₽ (по оценке)\n<b>Статус:</b> Закрыта · 2026 год\n<b>Отрасль:</b> Недвижимость\n\n<b>Источник:</b> <a href=\"https://www.kommersant.ru/doc/8553146\">Коммерсантъ</a>\nЕще 1 источник — в карточке сделки\n\n#недвижимость #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g89b4c747\">карточке сделки</a>"
   },
   {
    "id": "ge341b8c9",
@@ -748,7 +752,10 @@
    "accepted": "2026-11-27",
    "accepted_hash": "fecd15125d6a.4b3f93",
    "second_read": "2026-11-27",
-   "second_read_hash": "fecd15125d6a.4b3f93"
+   "second_read_hash": "fecd15125d6a.4b3f93",
+   "draft_sent": true,
+   "post_draft_sent": true,
+   "post_preview": "<b>«РусХимАльянс» вышел из капитала «Праксэа Рус» в пользу «Куйбышевазота»</b>\n\n<b>Покупатель:</b> Куйбышевазот — химическая компания из Тольятти: капролактам, полиамид, азотные удобрения.\n<b>Продавец:</b> РусХимАльянс\n<b>Предмет:</b> 100% долей ООО «Праксэа Рус»\n<b>Сумма:</b> не раскрывается\n<b>Статус:</b> Закрыта · август 2026\n<b>Отрасль:</b> Химия и удобрения\n\n<b>Источник:</b> <a href=\"https://www.interfax.ru/russia/1108610\">Интерфакс</a>\nЕще 2 источника — в карточке сделки\n\n#промышленность #химия #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g5d88c3ed\">карточке сделки</a>\n"
   },
   {
    "id": "g0d9b4792",
@@ -854,7 +861,9 @@
    "accepted": "2026-11-27",
    "accepted_hash": "3d9a52e0d4e6.678c2b",
    "second_read": "2026-11-27",
-   "second_read_hash": "3d9a52e0d4e6.678c2b"
+   "second_read_hash": "3d9a52e0d4e6.678c2b",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "g6138adf7",
@@ -941,7 +950,9 @@
    "accepted": "2026-11-27",
    "accepted_hash": "5bfc202e6704.f1ffd1",
    "second_read": "2026-11-27",
-   "second_read_hash": "5bfc202e6704.f1ffd1"
+   "second_read_hash": "5bfc202e6704.f1ffd1",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gf0c9d4d1",
@@ -1041,7 +1052,9 @@
    "accepted": "2026-11-27",
    "accepted_hash": "4d8bd1156bde.27a034",
    "second_read": "2026-11-27",
-   "second_read_hash": "4d8bd1156bde.27a034"
+   "second_read_hash": "4d8bd1156bde.27a034",
+   "draft_sent": true,
+   "post_draft_sent": true
   },
   {
    "id": "gd3822922",
