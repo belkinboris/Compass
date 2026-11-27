@@ -117,6 +117,20 @@ def prose_problems(new, quote, field='extra'):
     return bad
 
 
+
+def share_regressed(field, old, new):
+    """Предмет, записанный долей в обществе («100% доли в ООО «X»»), правка не заменяет
+    описанием (вычитка 26 ноября 2026: помощники переписали предмет 11 карточек рассказом
+    о заводе). Предмет без формы — не трогаем: размер доли иногда неизвестен."""
+    if field != 'eco.share' or not isinstance(old, str) or not isinstance(new, str):
+        return []
+    import accept_card
+    if accept_card.SHARE_FORM_RE.match(old) and not accept_card.SHARE_FORM_RE.match(new):
+        return ['предмет был записан долей в обществе (%r) — так и оставить, описание — в eco.context'
+                % old[:60]]
+    return []
+
+
 def known_texts(fix, card, fixes, get_field):
     """Чем еще подтверждается цитата ПЕРЕПИСАННОГО текста: прежними цитатами
     той же карточки и ее нынешним текстом. С 1 ноября 2026 `write_card.py`

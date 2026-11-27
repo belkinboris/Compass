@@ -133,13 +133,8 @@ SHARE_FORM_RE = re.compile(
 LEGAL_NAME_HEAD = re.compile(r'(?:ООО|АО|ПАО|НАО|ЗАО|ОАО|МКПАО|МКАО)\s+«')
 # «ООО «ВТС» — поставщик медицинского оборудования…»: имя и следом описание через тире.
 ASSET_NAME_THEN_DESCRIPTION = re.compile(r'»\s+[—–]\s+[а-яё]')
-PLAIN_WORDS_RE = re.compile(
-    r'(?<![\wа-яё])в\s+минусе(?![\wа-яё])|теря\w*\s+деньги|(?<![\wа-яё])сам(?:а|о|и)?(?![\wа-яё])'
-    r'|не\s+раскрыва\w+\s+в\s+силу|(?:^|\.\s+)(?:Покупка|Продажа)\s+всех\s+долей'
-    # Рассказ о НАШЕМ поиске вместо факта о сделке (партнер, 3 ноября 2026,
-    # Шерегеш: «найти сведения о покупателе за пределами этой связи не удалось»).
-    r'|найти\s+(?:\w+\s+){0,4}не\s+удалось|не\s+удалось\s+найти|источник\s+не\s+наш[её]л'
-    r'|за\s+пределами\s+(?:этой\s+)?связи', re.I)
+# Разговорные слова — общие с проверкой любой записи (pipeline/text_rules.py, 27 ноября 2026).
+from text_rules import PLAIN_WORDS_RE, plain_words  # noqa: E402
 PROSE_CHECK_FIELDS = ('eco.share', 'eco.val', 'eco.target_fin', 'eco.fin', 'eco.fin_context', 'eco.rationale',
                       'eco.context', 'law.struct', 'law.terms', 'law.appr', 'extra')
 LITIGATION_LAWYER_RE = re.compile(
@@ -2031,7 +2026,7 @@ def findings(card, base, waived=None, waived_inn=None, waived_sources=None, regi
     # «не раскрываются в силу обязательств» — если не раскрываются, не писать).
     for field in PROSE_CHECK_FIELDS:
         v = _text(card, field)
-        m = PLAIN_WORDS_RE.search(str(v)) if has(v) else None
+        m = plain_words(str(v)) if has(v) else None
         if m:
             out.append(('plain_words:' + field, 'в %s «%s» — разговорно, оценочно или пусто; написать фактом '
                         '(«по отчетности компания убыточна несколько лет»), пустое — снять' % (field, m.group(0))))

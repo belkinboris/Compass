@@ -12989,3 +12989,15 @@ def test_status_closed_confirmed_by_english_report_wording():
     words = review.status_words("Закрыта")
     assert any(w in "consequently, the subsidiaries have been sold." for w in words)
     assert not any(w in "oerlikon signed a contract for the sale" for w in words)
+
+
+def test_share_form_and_plain_words_hold_every_write_not_only_acceptance():
+    """27.11.2026: правки после приемки (дочитывание, вычитка) внесли «сам/сама» в 37 карточек
+    и заменили долю описанием в 11 — проверки стояли только на приемке. Теперь они на записи."""
+    import prose_gate
+    from pipeline import text_rules
+    assert prose_gate.share_regressed('eco.share', '100% доли в ООО «Олвин»', 'Завод в Истре мощностью 32 тыс. т')
+    assert not prose_gate.share_regressed('eco.share', 'Завод в Истре', '100% доли в ООО «Олвин»')
+    assert not prose_gate.share_regressed('eco.context', '100% доли в ООО «Олвин»', 'Завод')
+    assert text_rules.problems('Сам Aspace говорит прямо', 'eco.context')
+    assert not text_rules.problems('В сделку вошли бренды «Умница» и «Сами с усами».', 'extra')
