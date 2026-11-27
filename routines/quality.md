@@ -33,6 +33,15 @@
 
 1. `git pull origin main`. Папки `pipeline/ingest` нет — сначала
    `git clone https://github.com/belkinboris/Compass.git .`.
+   **Новая сессия на каждый запуск (с 27 ноября 2026):** сразу после clone/pull —
+   `CLAUDE_CODE_REMOTE=true bash .claude/hooks/session-start.sh` (в новой сессии
+   репозиторий появляется после старта, и хук сам не срабатывает), затем
+   `python3 pipeline/session_selftest.py`. Строка «НЕТ» — починить (нет права
+   записи — add_repo с access=push) или PushNotification одной строкой и стоп.
+   Памяти о прошлых прогонах нет: все, что нужно помнить, лежит в репозитории
+   (журнал, отметки карточек, `reading_due.py`). Текстов статей на диске нет —
+   перед проверкой цитат карточки: `python3 pipeline/ingest/fetch_article_texts.py
+   <id …> --write`.
 2. **Не сломалось ли что-то видное.** Health-check локального сервера (только
    `ACCESS_GATE=0 DATA_REFRESH_ENABLED=0 TELEGRAM_BOT_TOKEN= API_FNS_KEY=
    uvicorn main:app` — см. CLAUDE.md), Playwright по 6–8 экранам на 1280 и
@@ -79,7 +88,7 @@
    пока шаги 3–5 пусты; список только сокращается (`docs/card_editing.md`).
 6a. **Бэклог блока G** — только когда шаги 3–5 честно пусты (замерено в этом
    прогоне).
-6б. **Архив правок, раз в неделю** — `python3 pipeline/ingest/fixes_compact.py
+6б. **Архив правок, по понедельникам** (день недели — `date +%u`, не память сессии) — `python3 pipeline/ingest/fixes_compact.py
    --days 14 --write`: применённые партии `fixes/*.py` старше двух недель
    уезжают в `fixes_archive/<месяц>.json` (`docs/card_editing.md`, раздел
    «Архив партий правок и fixes_compact»); `git add -A pipeline/ingest`.
