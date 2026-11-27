@@ -84,6 +84,205 @@
     "needs_review": true
    },
    "queued": "2026-11-27"
+  },
+  {
+   "key": "https://tass.ru/ekonomika/28362901::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d52262818",
+    "title": "Экс-подразделение Xerox купило российского разработчика ПО для контроля печати",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/ekonomika/28362901"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Сумма сделки по приобретению компанией \"Техноэволаб\" 100% долей в уставном капитале \"Принт-эксперт\" не раскрывается",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/ekonomika/28362901"
+      ]
+     }
+    ],
+    "buyer_name": "Экс-подразделение Xerox",
+    "asset": "российский разработчик ПО для контроля печати",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "Экс-подразделение Xerox",
+     "asset": "российский разработчик ПО для контроля печати",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  },
+  {
+   "key": "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d26077427",
+    "title": "«Техноэволаб» купил разработчика ПО для управления печатью «Принт-эксперт»",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika"
+      ]
+     }
+    ],
+    "buyer_name": "«Техноэволаб»",
+    "asset": "разработчик ПО для управления печатью «Принт-эксперт»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Техноэволаб»",
+     "asset": "разработчик ПО для управления печатью «Принт-эксперт»",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  },
+  {
+   "key": "https://www.interfax.ru/culture/1131906::gb88e1cdc",
+   "candidate_id": "gb88e1cdc",
+   "reason": "общие редкие слова: конюшн, петерг, торгах",
+   "draft": {
+    "draft_id": "d03993399",
+    "title": "Дворцовые конюшни в Петергофе продали на торгах почти втрое дороже стартовой цены",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:interfax.ru",
+      "https://www.interfax.ru/culture/1131906"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Петербургская компания \"Оз8\" стала победителем торгов по продаже Дворцовых конюшен в Петергофе, предложив за лот 584 млн рублей, сообщает пресс-служба \"ДОМа.",
+      "source": [
+       "web:interfax.ru",
+       "https://www.interfax.ru/culture/1131906"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах почти втрое дороже стартовой цены",
+    "seller": "Дворцовые конюшни в Петергофе",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах почти втрое дороже стартовой цены",
+     "seller": "Дворцовые конюшни в Петергофе"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  },
+  {
+   "key": "https://tass.ru/obschestvo/28363271::gb88e1cdc",
+   "candidate_id": "gb88e1cdc",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d67910526",
+    "title": "Императорские конюшни в Петербурге продали на торгах за 584,05 млн рублей",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:tass.ru",
+      "https://tass.ru/obschestvo/28363271"
+     ]
+    ],
+    "sum": null,
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "Начальная цена лота была превышена почти втрое",
+      "source": [
+       "web:tass.ru",
+       "https://tass.ru/obschestvo/28363271"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах",
+    "seller": "Императорские конюшни в Петербурге",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах",
+     "seller": "Императорские конюшни в Петербурге"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
+  },
+  {
+   "key": "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d83275974",
+    "title": "«Техноэволаб» купит разработчика ПО для управления печатью «Принт-Эксперт»",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:abn.agency",
+      "https://abn.agency/2026/11/27/tehnoevolab-kupit-razrabotchika-po-dlya-upravleniya-pechatyu-print-ekspert/"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": null,
+    "events": [],
+    "buyer_name": "«Техноэволаб»",
+    "asset": "разработчик ПО для управления печатью «Принт-Эксперт»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Техноэволаб»",
+     "asset": "разработчик ПО для управления печатью «Принт-Эксперт»",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
   }
  ]
 }
