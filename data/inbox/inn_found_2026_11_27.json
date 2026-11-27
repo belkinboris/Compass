@@ -1,0 +1,1743 @@
+[
+ {
+  "company_id": "g1339c689",
+  "name": "Александр Чачава",
+  "deals": [
+   "gb3029360",
+   "g90767425"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Физическое лицо (Александр Чачава) — ИНН юрлица не бывает; в реестре таким ставят решение «person».",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "person",
+  "registry_decision_now": null,
+  "queue_rank": 0
+ },
+ {
+  "company_id": "gd6a56998",
+  "name": "Multispace",
+  "deals": [
+   "gcd8fe39c",
+   "ge283bafc",
+   "g1d76aeb5"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Сеть из отдельных обществ по площадкам («Мультиспейс Порта», «Динамо», «Правда», «Тверская», «Павелецкая», «Скайлайн» — 8 юрлиц), головного «Мультиспейс» нет. По смыслу это лот. Смотрели: Датаньютон.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "lot",
+  "registry_decision_now": "no_match",
+  "queue_rank": 1
+ },
+ {
+  "company_id": "g05c33d81",
+  "name": "Azimut Hotels",
+  "deals": [
+   "g39e9e9c2",
+   "g1d1ff6b2"
+  ],
+  "inn": "3900002937",
+  "ogrn": "1223900011345",
+  "legal_name": "МКООО «Азимут Групп»",
+  "evidence": "Юрлицо названо в профиле (legal_short); Калининградская обл. (САР), холдинг, руководитель Бродовский М. М. (гендиректор Azimut Hotels по карточке); история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 99,9% у Клячина А. И. — основателя сети. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 2
+ },
+ {
+  "company_id": "gec252e76",
+  "name": "Vesper (девелопер)",
+  "deals": [
+   "g8b57089b",
+   "g32d9b54f"
+  ],
+  "inn": "9705169370",
+  "ogrn": "1227700243682",
+  "legal_name": "ООО «Веспер развитие»",
+  "evidence": "Карточка 2023 года называет покупателем ООО «Веспер развитие»; таких обществ два (9705169370 и 9705169443, оба Китаева Д. В.). история участников ЕГРЮЛ на Датаньютоне (api/v2/history) по ООО «СЗ Дивинус Иммобила»: 27.12.2023 100% получило общество с ОГРН 1227700243682 — то есть ИНН 9705169370. Medium: профиль — вся группа Vesper, головное юрлицо группы не установлено, а продавец в сделке 2026 года в источниках не назван. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 3
+ },
+ {
+  "company_id": "gkpik",
+  "name": "ГК ПИК",
+  "deals": [
+   "gfd9c0206",
+   "g749a7844",
+   "gbdefd889",
+   "g69c83a3f",
+   "g7edd263c"
+  ],
+  "inn": "7713011336",
+  "ogrn": "1027739137084",
+  "legal_name": "ПАО «ПИК-специализированный застройщик» (ПАО «ПИК СЗ»)",
+  "evidence": "Головное публичное юрлицо группы ПИК (в профиле прямо: ПАО «Группа компаний ПИК» — прежнее имя). ИНН УЖЕ ПОДТВЕРЖДЕН профилю gfb08c766 «ПИК-специализированный застройщик» — это два профиля одной компании: нужна не запись в реестр, а слияние профилей.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "gfb08c766",
+  "registry_decision_now": null,
+  "queue_rank": 4
+ },
+ {
+  "company_id": "g59f4de1d",
+  "name": "ЗПИФ «ВИМ Недвижимость»",
+  "deals": [
+   "g73dba9d6",
+   "gad66fcec",
+   "g9108dfd0",
+   "g5db4bcc2"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Паевой фонд — не юрлицо, своей записи в ЕГРЮЛ нет. Управляющая компания: УК «ВИМ Сбережения»; в ЕГРЮЛ фонд записан участником ООО «Фипс» с ИНН 7722270922 (это ИНН управляющей компании).",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": null,
+  "queue_rank": 5
+ },
+ {
+  "company_id": "g1bbb95d9",
+  "name": "Fonte Capital",
+  "deals": [
+   "g1e37f107",
+   "g0551fc60"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Казахстан (покупатель — Fonte Inceptia Alpha Fund OEIC Limited, МФЦА).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 6
+ },
+ {
+  "company_id": "gac30cf97",
+  "name": "СберИнвест",
+  "deals": [
+   "gf080e8f0",
+   "gc9461b5c",
+   "g52b8df38",
+   "g2469d33a"
+  ],
+  "inn": "5032229441",
+  "ogrn": "1105032007761",
+  "legal_name": "ООО «Сбербанк Инвестиции»",
+  "evidence": "«СберИнвест» — бренд ООО «Сбербанк Инвестиции» (карточка 2025 года так и называет продавца: «Сбербанк Инвестиций»); единственное юрлицо. ИНН УЖЕ ПОДТВЕРЖДЕН профилю g99ca4c4c «Сбербанк инвестиции» — близнецы, нужно слияние. Прежняя запись «не найдено» смотрела на страхового брокера ООО СБ «Сберинвест» — это другая компания.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "g99ca4c4c",
+  "registry_decision_now": "no_match",
+  "queue_rank": 7
+ },
+ {
+  "company_id": "g041220bd",
+  "name": "Правительство России",
+  "deals": [
+   "g08d1c155",
+   "g381ff192",
+   "gadd949cc"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Государство как сторона сделки, не компания; в реестре таким ставят решение «state_org».",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "state",
+  "registry_decision_now": null,
+  "queue_rank": 8
+ },
+ {
+  "company_id": "ggeometria",
+  "name": "ООО «Геометрия»",
+  "deals": [
+   "g749a7844",
+   "gbdefd889",
+   "gb2bed44c"
+  ],
+  "inn": "7801749860",
+  "ogrn": "1267800033841",
+  "legal_name": "ООО «Геометрия»",
+  "evidence": "Санкт-Петербург, строительство жилых и нежилых зданий, зарегистрировано 05.05.2026, руководитель Кравцов А. В. — дословно как в профиле (5 мая 2026, Александр Кравцов). Рядом ООО «СЗ «Геометрия 1–4»» того же Кравцова — проектные компании. Датаньютон (datanewton.ru/search) (запрос «Геометрия Кравцов»); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 9
+ },
+ {
+  "company_id": "gpromresurs",
+  "name": "ООО «Промресурс»",
+  "deals": [
+   "gd3556cc0",
+   "ge0cc0dfe"
+  ],
+  "inn": "5406974892",
+  "ogrn": "1175476047658",
+  "legal_name": "ООО «Промресурс»",
+  "evidence": "Новосибирск, руководитель Дьяконов С. А. (владелец по карточке — Сергей Дьяконов), ОКВЭД «торговля оптовая твердым топливом» — как в профиле. Датаньютон (datanewton.ru/search) по имени с регионом 54; Saby (saby.ru/profile/<ИНН>) — тот же ИНН/ОГРН.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 10
+ },
+ {
+  "company_id": "g127cf704",
+  "name": "ООО «Перспектива»",
+  "deals": [
+   "g94268c8d",
+   "domodedovo-aukcion"
+  ],
+  "inn": "5047322490",
+  "ogrn": "1255000113048",
+  "legal_name": "ООО «Перспектива»",
+  "evidence": "Найдено не по имени (143 тезки), а по цепочке: история участников ЕГРЮЛ на Датаньютоне (api/v2/history) по ООО «ДМЕ Холдинг» (5009139302) — с 11.02.2026 единственный участник ООО «Перспектива» с ОГРН 1255000113048; у него самого участники АО «Международный аэропорт Шереметьево» 74,99% и АО «Международный аэропорт «Внуково»» 25,01% с 07.08.2026 — обе сделки карточек. Химки, управление холдинг-компаниями, зарегистрировано 10.12.2025. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": "no_match",
+  "queue_rank": 11
+ },
+ {
+  "company_id": "gf80101aa",
+  "name": "Dr. Reddy's",
+  "deals": [
+   "gf70a43e6",
+   "g8e027018"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Индия. Российская дочка ООО «Др. Редди'с Лабораторис» названа в профиле, ее ИНН не искали — стороной сделки была корпорация.",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 12
+ },
+ {
+  "company_id": "gb5b86a41",
+  "name": "КИТ",
+  "deals": [
+   "g1eda1117"
+  ],
+  "inn": "0274947682",
+  "ogrn": "1190280041786",
+  "legal_name": "ООО «Айтилук»",
+  "evidence": "Башкортостан (Уфа), зарегистрировано 10.07.2019 (карточка: «зарегистрирован в Башкортостане в июле 2019 года»), руководитель Петряев О. Н. (совладелец Олег Петряев, 64,16%), ОКВЭД «производство средств связи». В описании профиля юрлицо названо «ООО НПФ «Айтилук»» — это другое общество того же Петряева (ИНН 0274166103, 2012 год, НИОКР в гуманитарных науках); по тексту карточки сделка шла с ООО «Айтилук» 2019 года. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 13
+ },
+ {
+  "company_id": "g4a341e75",
+  "name": "Бизнес-центр «Поварская Плаза»",
+  "deals": [
+   "gf2b576fb"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Объект недвижимости, не юрлицо. Прежний собственник — ООО «Сити Холдинг» (7704877658, Москва, аренда недвижимости, зарегистрировано 20.10.2014 — правопреемник «Элит-Холдинга» с сентября 2014; Датаньютон).",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "object",
+  "candidates": [
+   "7704877658"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 14
+ },
+ {
+  "company_id": "g194f6741",
+  "name": "«Колесник»",
+  "deals": [
+   "g2e669787"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Юрлица «Колесник» у тюменского редевелопера нет. В Тюмени под руководством Колесника С. В. — ООО «ПИК Рестрой» (7203502175) и пять потребкооперативов «Модуль …»/«Ангара» (покупка и продажа недвижимости). Какое из них продает здание театра, статья не говорит. Смотрели: Датаньютон (регион 72), веб-поиск (abnews.ru, secrets.tbank.ru).",
+  "confidence": null,
+  "status": "homonym",
+  "candidates": [
+   "7203502175"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 15
+ },
+ {
+  "company_id": "g1a2329ed",
+  "name": "ЗПИФ «Томь» и ЗПИФ «Гало»",
+  "deals": [
+   "g73b6378c"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Два паевых фонда; у ПИФа нет своего юрлица. ИНН фондов уже названы в профиле (7719561939 и 6164123980).",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": null,
+  "queue_rank": 16
+ },
+ {
+  "company_id": "g13ea9ecb",
+  "name": "Хай Айленд Лимитед",
+  "deals": [
+   "ge7003718"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Гонконг (по пресс-релизу FES retail).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 17
+ },
+ {
+  "company_id": "g4221fbf9",
+  "name": "Горнолыжный комплекс «Миньяр»",
+  "deals": [
+   "gbdd5b031"
+  ],
+  "inn": "7401007616",
+  "ogrn": "1027400507716",
+  "legal_name": "ООО ГЦ «Миньяр»",
+  "evidence": "Челябинская обл., ОКВЭД «деятельность спортивных объектов», единственный результат по «Миньяр горнолыжный». Профиль — сам комплекс, продавец в объявлении не назван; что имущество на балансе именно этого ООО, не проверено. Датаньютон (datanewton.ru/search).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 18
+ },
+ {
+  "company_id": "gcef42bfe",
+  "name": "«Объединенная микроэлектронная корпорация»",
+  "deals": [
+   "gbb89fc13"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Юрлицо еще не создано (так и записано в профиле); по точному имени в Датаньютоне пусто.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "not_created",
+  "registry_decision_now": null,
+  "queue_rank": 19
+ },
+ {
+  "company_id": "g8255644b",
+  "name": "ЗПИФ «Аталанта»",
+  "deals": [
+   "gc1037ea9"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Паевой фонд — не юрлицо, своей записи в ЕГРЮЛ нет. Управляющая компания: УК «ВИМ Сбережения».",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": null,
+  "queue_rank": 20
+ },
+ {
+  "company_id": "g17f23e3b",
+  "name": "ЗПИФ «ТКИ-СКАЙ» (УК «ТКИ Капитал»)",
+  "deals": [
+   "ge42606a4"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Паевой фонд — не юрлицо, своей записи в ЕГРЮЛ нет. Управляющая компания: ООО «ТКИ Капитал», ИНН 9703184816 (Датаньютон).",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": null,
+  "queue_rank": 21
+ },
+ {
+  "company_id": "gd4473050",
+  "name": "VVP Group",
+  "deals": [
+   "gde69fa27"
+  ],
+  "inn": "5047067909",
+  "ogrn": "1055009333961",
+  "legal_name": "ООО «Центр Дистрибьюции»",
+  "evidence": "Юрлицо названо в профиле (Химки); Московская обл., ИНН с кодом 5047 (Химки), оптовая торговля бытовыми электротоварами. Датаньютон (datanewton.ru/search) (регион 50); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 22
+ },
+ {
+  "company_id": "g9838da2f",
+  "name": "Бизнес-центр «Ленинский, 119»",
+  "deals": [
+   "g65d8957b"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Объект недвижимости, не юрлицо. Продавец ООО «Ранита» уже в реестре (ИНН 7706563424, профиль gc8ed5d21).",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "object",
+  "registry_decision_now": null,
+  "queue_rank": 23
+ },
+ {
+  "company_id": "g5dbfa2ca",
+  "name": "Hefei Hengyi International Trade",
+  "deals": [
+   "g1953287c"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Китай.",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 24
+ },
+ {
+  "company_id": "g869346a9",
+  "name": "ЗПИФ «Цифровые горизонты»",
+  "deals": [
+   "g3976a960"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Паевой фонд — не юрлицо, своей записи в ЕГРЮЛ нет. Управляющая компания: УК «Молния».",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": null,
+  "queue_rank": 25
+ },
+ {
+  "company_id": "ge861b78a",
+  "name": "АГР Холдинг",
+  "deals": [
+   "g99f697c1"
+  ],
+  "inn": "9722040390",
+  "ogrn": "1237700119348",
+  "legal_name": "ООО «АГР Холдинг»",
+  "evidence": "Единственное юрлицо с таким именем, Москва, вложения в уставные капиталы. ИНН УЖЕ ПОДТВЕРЖДЕН профилю gfe4e2358 «ООО «Арт-Финанс»» (прежнее имя того же общества) — близнецы, нужно слияние.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "gfe4e2358",
+  "registry_decision_now": null,
+  "queue_rank": 26
+ },
+ {
+  "company_id": "g67fc5479",
+  "name": "Красная звезда",
+  "deals": [
+   "gc816c617"
+  ],
+  "inn": "7805761120",
+  "ogrn": "1207800000033",
+  "legal_name": "ООО «ПКО «Красная звезда»»",
+  "evidence": "Санкт-Петербург, агентства по сбору платежей; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 03.11.2026 доля Сибирцева Е. А. 30% перешла самому обществу — это и есть сделка карточки (3 ноября 2026). Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 27
+ },
+ {
+  "company_id": "g9e146528",
+  "name": "Сильвер Салмон",
+  "deals": [
+   "gcc6ff548"
+  ],
+  "inn": "4100039979",
+  "ogrn": "1214100003589",
+  "legal_name": "ООО «Сильвер Салмон»",
+  "evidence": "Камчатский край, туристические агентства. Второе общество «Сильвер Салмон - 1» того же руководителя создано 28.10.2026 — после сделки, не оно. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 28
+ },
+ {
+  "company_id": "g85e878cb",
+  "name": "АО «Сезон»",
+  "deals": [
+   "gfd435463"
+  ],
+  "inn": "9714075512",
+  "ogrn": "1257700223582",
+  "legal_name": "АО «Сезон»",
+  "evidence": "Москва, АО, зарегистрировано 16.05.2025 (профиль: май 2025), аренда и управление недвижимостью. Единственное АО «Сезон» с такой датой. Датаньютон (datanewton.ru/search) (регион 77); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 29
+ },
+ {
+  "company_id": "g3674b7af",
+  "name": "GIADEC",
+  "deals": [
+   "g835eac98"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Гана, государственная корпорация.",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 30
+ },
+ {
+  "company_id": "gadc6208a",
+  "name": "«Сибпромстрой»",
+  "deals": [
+   "g8cf4df95"
+  ],
+  "inn": "8602238220",
+  "ogrn": "1048602053994",
+  "legal_name": "ООО ГК «Сибпромстрой»",
+  "evidence": "Головная компания группы: «деятельность головных офисов», руководитель Сторожук Н. К. (совладелец Николай Сторожук из карточки). В группе десятки обществ «Сибпромстрой №…»; на каком из них здание в Сургуте — не установлено, поэтому medium (ИНН головной компании профилю-группе). Датаньютон (datanewton.ru/search) (запрос «Сибпромстрой Сторожук»).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 31
+ },
+ {
+  "company_id": "g40069487",
+  "name": "Иртыш Ривьера",
+  "deals": [
+   "gb5456bba"
+  ],
+  "inn": "5505063700",
+  "ogrn": "1195543033058",
+  "legal_name": "ООО «Иртыш Ривьера»",
+  "evidence": "Омская обл., руководитель Милютин С. Г. (в профиле — принадлежит Сергею Милютину), гостиницы. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 32
+ },
+ {
+  "company_id": "gef64e054",
+  "name": "Perfectum",
+  "deals": [
+   "g28941fd8"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Узбекистан (Rubicon Wireless).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 33
+ },
+ {
+  "company_id": "g477e2750",
+  "name": "Телтекс Системс",
+  "deals": [
+   "g39fc7468"
+  ],
+  "inn": "9729417328",
+  "ogrn": "1267700094705",
+  "legal_name": "ООО «Телтекс Системс» (в поиске Датаньютона — сокращенно «ТЕЛСИ»)",
+  "evidence": "По имени не находится. история участников ЕГРЮЛ на Датаньютоне (api/v2/history) по ООО «Липецкое мясо» (ОГРН 1214800015022): 13.07.2026 ООО «ТЕЛТЕКС СИСТЕМС» (ОГРН 1267700094705) получило 20%, 27.10.2026 — 70% (сделка карточки). По этому ОГРН Датаньютон показывает Москву, регистрацию 18.03.2026, розничную торговлю компьютерами — дословно как в профиле. Saby страницу не отдал.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 34
+ },
+ {
+  "company_id": "g938a73ac",
+  "name": "АО «Инфа-отель»",
+  "deals": [
+   "g8e847626"
+  ],
+  "inn": "7702085921",
+  "ogrn": "1027700050454",
+  "legal_name": "АО «Инфа-отель»",
+  "evidence": "Единственное юрлицо с таким именем, Москва, ОКВЭД гостиницы; Saby называет его «Инфа-Отель (Savoy)» — отель «Савой» из карточки. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 35
+ },
+ {
+  "company_id": "gd5c19b39",
+  "name": "«Бадаевский центр»",
+  "deals": [
+   "g88b148ea"
+  ],
+  "inn": "9703252368",
+  "ogrn": "1267700259310",
+  "legal_name": "ООО «Бадаевский центр»",
+  "evidence": "Москва, аренда и управление недвижимостью, зарегистрировано 31.07.2026 — за три месяца до покупки блока в «Бадаевском» (карточка: «компания получила название в честь проекта»). Тезка одна — петербургское ООО 2001 года. Руководитель/владелец в карточке не назван, поэтому medium. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 36
+ },
+ {
+  "company_id": "gea074dc9",
+  "name": "ООО «Фригохолд»",
+  "deals": [
+   "gc7143483"
+  ],
+  "inn": "9710163609",
+  "ogrn": "1267700320480",
+  "legal_name": "ООО «Фригохолд»",
+  "evidence": "Единственное юрлицо, Москва, холдинговая деятельность, руководитель Яновский А. В. (в профиле — принадлежит Андрею Яновскому), зарегистрировано 24.09.2026. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 37
+ },
+ {
+  "company_id": "g8811019d",
+  "name": "Frigoglass",
+  "deals": [
+   "gc7143483"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Международная группа (Греция/Нидерланды).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 38
+ },
+ {
+  "company_id": "gf159fc12",
+  "name": "«Фриголайн Евразия»",
+  "deals": [
+   "gc7143483"
+  ],
+  "inn": "5752019857",
+  "ogrn": "1025700785703",
+  "legal_name": "ООО «Фриголайн Евразия»",
+  "evidence": "Орловская обл., производство промышленного холодильного оборудования; находится и по прежнему имени «Фригогласс Евразия» (как в профиле). Датаньютон (datanewton.ru/search) (оба запроса дают одно юрлицо); Saby страницу не отдал.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 39
+ },
+ {
+  "company_id": "g36015992",
+  "name": "ПАО «ЭсЭфАй»",
+  "deals": [
+   "g1f8414a3"
+  ],
+  "inn": "6164077483",
+  "ogrn": "1027700085380",
+  "legal_name": "ПАО «ЭсЭфАй»",
+  "evidence": "Единственное ПАО с таким именем, Москва, холдинг. ИНН УЖЕ ПОДТВЕРЖДЕН профилю g83db9336 «SFI» — близнецы, нужно слияние профилей.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "g83db9336",
+  "registry_decision_now": null,
+  "queue_rank": 40
+ },
+ {
+  "company_id": "gd04d6868",
+  "name": "brainbox_I",
+  "deals": [
+   "g6a917c05"
+  ],
+  "inn": "9701310960",
+  "ogrn": "1257700186017",
+  "legal_name": "АО «Брэйнбокс Один»",
+  "evidence": "brainbox_I = «Брэйнбокс Один»: Москва, венчурное инвестирование, зарегистрировано 18.04.2025; рядом АО «Брэйнбокс ВиСи» (платформа brainbox VC из профиля). Руководитель в выдаче не показан, участие в Givon AI по реестру не проверено — medium. Датаньютон (datanewton.ru/search).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 41
+ },
+ {
+  "company_id": "g54191496",
+  "name": "Givon AI",
+  "deals": [
+   "g6a917c05"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Карточка называет юрлицо ООО «ФЛГ» (2023 год, владелец Хван Ги Вон). Среди 97 «ФЛГ» общества Хвана нет; у Хван Ги Вона с 06.12.2024 60% в хабаровском ООО «Фулл Логистик» (2700010216, зарегистрировано 27.04.2023, ОКВЭД — перевозки). Возможно, «ФЛГ» — его сокращение, но имя и вид деятельности не совпадают — не принимаю. Смотрели: Датаньютон (поиск по имени и по владельцу, история участников).",
+  "confidence": null,
+  "status": "homonym",
+  "candidates": [
+   "2700010216"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 42
+ },
+ {
+  "company_id": "g24a9368a",
+  "name": "Созидательный венчур",
+  "deals": [
+   "g09baae21"
+  ],
+  "inn": "9703228421",
+  "ogrn": "1257700470917",
+  "legal_name": "ООО «Созидательный венчур»",
+  "evidence": "Единственное юрлицо, Москва, венчурное инвестирование, руководитель Полехин В. А. (управляющий партнер по профилю — Виталий Полехин). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 43
+ },
+ {
+  "company_id": "g80fea407",
+  "name": "Аргумент-Байт",
+  "deals": [
+   "g09baae21"
+  ],
+  "inn": "9703171180",
+  "ogrn": "1247700064260",
+  "legal_name": "ООО «Аргумент-Байт»",
+  "evidence": "Единственное юрлицо, Москва, разработка ПО, руководитель Митин Е. Г. (основатель по карточке — Евгений Митин). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 44
+ },
+ {
+  "company_id": "g73ea45ba",
+  "name": "Альфа-Деньги",
+  "deals": [
+   "gd0139978"
+  ],
+  "inn": "7708400979",
+  "ogrn": "1217700636944",
+  "legal_name": "ООО МКК «А Деньги»",
+  "evidence": "Имя юрлица названо в профиле; единственное такое, Москва, ОКВЭД «деятельность микрофинансовая». Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 45
+ },
+ {
+  "company_id": "gce350aad",
+  "name": "Denum Tech",
+  "deals": [
+   "gd0139978"
+  ],
+  "inn": "9731091225",
+  "ogrn": "1227700213113",
+  "legal_name": "ООО «Денум Тех»",
+  "evidence": "Единственное юрлицо с таким именем, Москва, разработка ПО (профиль: ИТ-компания группы Denum). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 46
+ },
+ {
+  "company_id": "g032b976e",
+  "name": "X4 Падел",
+  "deals": [
+   "gx4padel01"
+  ],
+  "inn": "7736375675",
+  "ogrn": "1267700088237",
+  "legal_name": "ООО «Х4 Падел»",
+  "evidence": "Единственное юрлицо, Москва, зарегистрировано 13.03.2026 (карточка: март 2026), руководитель Сухобрусов А. Д. (гендиректор по карточке). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 47
+ },
+ {
+  "company_id": "g0a110d96",
+  "name": "Rocket Padel",
+  "deals": [
+   "gx4padel01"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Несколько обществ («Рокет Москва», «Рокет Санкт-Петербург», «Рокет Краснодар», «Рокет Волгоград» 9721257062, «Рокет Кемерово», «Рокет»); в сделку вошли клубы и бренд, а не юрлица. По смыслу лот. Смотрели: Датаньютон.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "lot",
+  "registry_decision_now": null,
+  "queue_rank": 48
+ },
+ {
+  "company_id": "g15b15d01",
+  "name": "Swordfish Security",
+  "deals": [
+   "gf6c084b9"
+  ],
+  "inn": "7842496093",
+  "ogrn": "1137847178370",
+  "legal_name": "ООО «Свордфиш Секьюрити»",
+  "evidence": "Единственное юрлицо с таким именем, Санкт-Петербург, разработка ПО и консультации. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 49
+ },
+ {
+  "company_id": "g3a2c8cb7",
+  "name": "Простор",
+  "deals": [
+   "gf26f4994"
+  ],
+  "inn": "7743489803",
+  "ogrn": "1267700221690",
+  "legal_name": "ООО «Простор»",
+  "evidence": "Москва, аренда и управление недвижимостью, руководитель Богданова Н. Е. (карточка: учредитель Наталья Богданова, вид деятельности — управление и аренда недвижимости, создано в июле 2026). Датаньютон (datanewton.ru/search) (запрос «Простор Богданова»); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 50
+ },
+ {
+  "company_id": "g2ae88f41",
+  "name": "«Газпром теплоэнерго»",
+  "deals": [
+   "g84cc7a39"
+  ],
+  "inn": "5003046281",
+  "ogrn": "1035000920855",
+  "legal_name": "АО «Газпром теплоэнерго»",
+  "evidence": "Точное имя с формой; руководитель Осина Е. В. — она же руководитель ООО «Петербургтеплоэнерго» (предмет сделки). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 51
+ },
+ {
+  "company_id": "g7f4af449",
+  "name": "РусГазДобыча",
+  "deals": [
+   "g38bdff94"
+  ],
+  "inn": "7705529981",
+  "ogrn": "1127747296918",
+  "legal_name": "АО «РусГазДобыча» (сокращенно АО «РГД»)",
+  "evidence": "Прежняя запись реестра «не найдено»: поиск по «РусГазДобыча» выдавал только «РГД». история участников ЕГРЮЛ на Датаньютоне (api/v2/history) (FULL_NAME) по ОГРН 1127747296918: полное имя — АО «РУСГАЗДОБЫЧА» (до 2018 года ЗАО), «РГД» — сокращенное. Москва. Saby (saby.ru/profile/<ИНН>) (АО «РГД», тот же ОГРН). Участие в сделке с «Гидроиндустрией» по реестру не проверено.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": "no_match",
+  "queue_rank": 52
+ },
+ {
+  "company_id": "g8e4b8037",
+  "name": "КИТ1217",
+  "deals": [
+   "g9354e001"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "ООО «КИТ1217» (9717014518, Москва, рекламное агентство, 2016 год) существует, но его владелец — не Пипко (прежняя запись реестра); холдинг для IPO мог быть еще не создан. Нового не нашли. Смотрели: Датаньютон.",
+  "confidence": null,
+  "status": "homonym",
+  "candidates": [
+   "9717014518"
+  ],
+  "registry_decision_now": "no_match",
+  "queue_rank": 53
+ },
+ {
+  "company_id": "g95a6524f",
+  "name": "Голдрупп",
+  "deals": [
+   "g51fa80ce"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Юрлица «Голдрупп» нет; два ООО «Голдгрупп» в Красноярском крае с одинаковым ОКВЭД добычи золота: 2465353718 (Мансуров Т. Р.) и 2465363360 (Трухин Д. В.). Статья ПРАЙМ победителя торгов по реквизитам не называет — второго признака нет. Смотрели: Датаньютон (регион 24).",
+  "confidence": null,
+  "status": "homonym",
+  "candidates": [
+   "2465353718",
+   "2465363360"
+  ],
+  "registry_decision_now": "no_match",
+  "queue_rank": 54
+ },
+ {
+  "company_id": "gad8cd049",
+  "name": "ООО «Проект Лаки»",
+  "deals": [
+   "g8b57089b"
+  ],
+  "inn": "5024246796",
+  "ogrn": "1245000105240",
+  "legal_name": "ООО «Проект Лаки»",
+  "evidence": "Красногорск, ОКВЭД «деятельность физкультурно-оздоровительная» (связь с DDX); участники по история участников ЕГРЮЛ на Датаньютоне (api/v2/history) — ЗПИФ «СГ-Инвестиции» 30%, Ситникова Т. А. 30%, фонд «Биге» 22,62%, Суздальцев 10,38%, Зиновьева 4%, Астахова 3% — дословно как в карточке. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 55
+ },
+ {
+  "company_id": "ga38b4d3b",
+  "name": "ЗПИФ «Инвестпроф»",
+  "deals": [
+   "gcd8d2664"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Паевой фонд — не юрлицо, своей записи в ЕГРЮЛ нет. Управляющая компания: —.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "fund",
+  "registry_decision_now": "no_match",
+  "queue_rank": 56
+ },
+ {
+  "company_id": "g30d82a04",
+  "name": "800 Degrees",
+  "deals": [
+   "g33051f70"
+  ],
+  "inn": "7714485272",
+  "ogrn": "1227700266310",
+  "legal_name": "ООО «МОАС»",
+  "evidence": "Имя юрлица в карточке не названо; найдено по основателю бренда Марку Шидрану (new-retail.ru, sostav.ru). история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 29.09.2026 Шидран М. Э. 100% → 75%, Плаксин Максим Георгиевич 25% — сделка карточки; зарегистрировано 06.05.2022 (бренд создан в 2022 году). Saby (saby.ru/profile/<ИНН>). ОКВЭД в реестре непрофильный (лесоводство) — стоит глянуть выручку: в карточке 97,3 млн ₽ за 2025 год.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 57
+ },
+ {
+  "company_id": "ga7c4bf47",
+  "name": "ООО «ТКИ»",
+  "deals": [
+   "g91828b2b"
+  ],
+  "inn": "9718300141",
+  "ogrn": "1267700269550",
+  "legal_name": "ООО «ТКИ»",
+  "evidence": "Москва, руководитель Кондратенко Т. А. (профиль: холдинг Татьяны Кондратенко), зарегистрировано 11.08.2026 (профиль: август 2026). Датаньютон (datanewton.ru/search) (регион 77); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 58
+ },
+ {
+  "company_id": "ga71b47eb",
+  "name": "«Интегральные системы»",
+  "deals": [
+   "gafde5488"
+  ],
+  "inn": "7736372748",
+  "ogrn": "1257700483040",
+  "legal_name": "ООО «Интегральные системы»",
+  "evidence": "Москва, зарегистрировано 01.11.2025; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): единственный участник АО «Группа цифровых инноваций», уставный капитал 29.01.2026 вырос с 10 тыс. до 27,5 млрд ₽ — в январе 2026 компания закрыла покупку 41,9% «Элемента» (карточка). Остальные московские тезки — торговля авто и оборудованием 2009–2016 годов. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 59
+ },
+ {
+  "company_id": "g68f57675",
+  "name": "Golden Brick Capital",
+  "deals": [
+   "gb986603e"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Китай / Гонконг (Vision Investment Limited).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 60
+ },
+ {
+  "company_id": "g99a50e2b",
+  "name": "Уральская нефтяная компания",
+  "deals": [
+   "g5e7d168d"
+  ],
+  "inn": "7448225000",
+  "ogrn": "1207400019606",
+  "legal_name": "ООО «УНК» (в ЕГРЮЛ сокращенно; профиль — ООО «Уральская нефтяная компания»)",
+  "evidence": "Челябинская обл., зарегистрировано 28.05.2020 (профиль: 2020 год), ОКВЭД «торговля оптовая прочим топливом»; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): в мае 2026 участником стал Байсакалов Азамат Бахытчанович — совладелец по карточке. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 61
+ },
+ {
+  "company_id": "ga11ae8fe",
+  "name": "Element (девелопер)",
+  "deals": [
+   "gfd9c0206"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Бренд петербургского застройщика: десяток ООО «СЗ «Элемент…»», головное не определено; есть ООО «Элемент Девелопмент» (СПб, финансовые услуги, Коробов В. Ю.) — без второго признака не принимаю. Смотрели: Датаньютон (регион 78).",
+  "confidence": null,
+  "status": "homonym",
+  "registry_decision_now": "no_match",
+  "queue_rank": 62
+ },
+ {
+  "company_id": "g4dba043a",
+  "name": "Райтек",
+  "deals": [
+   "g685f1e39"
+  ],
+  "inn": "7107132500",
+  "ogrn": "1197154009183",
+  "legal_name": "ООО «Райтек ДТГ»",
+  "evidence": "ИТ-консультации, руководитель Черкасов М. А.; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 11.09.2026 в участники вошло АО «Группа 1С», доли основателей сократились — это СП «1С» и «Райтек» из карточки (22.09.2026). Московское ООО «Райтек» (7704823204, Синильщиков) — другая группа (электроника). Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 63
+ },
+ {
+  "company_id": "gb74c10ff",
+  "name": "ГК «Фотомеханика»",
+  "deals": [
+   "g9edfa8d8"
+  ],
+  "inn": "7838457670",
+  "ogrn": "1117847115198",
+  "legal_name": "ООО «Фотомеханика»",
+  "evidence": "Основное юрлицо группы по карточке; Санкт-Петербург, производство подъемно-транспортного оборудования, руководитель Ле-Захаров С. А. (совладельцы Александр и Сергей Ле-Захаровы). Профиль — группа из трех обществ; ИНН ставится головному. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 64
+ },
+ {
+  "company_id": "g624c90fe",
+  "name": "Кумжинское и Коровинское месторождения (АО «СН Инвест», ООО ЕСН)",
+  "deals": [
+   "g7c2329a4"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Лот из двух обществ: АО «СН Инвест» — ИНН 2983006955, ООО «ЕСН» — ИНН 7709765620 (оба НАО, добыча газа, руководитель Кабанов И. А.; Датаньютон). Лот ИНН не получает — оба ИНН в причину записи.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "lot",
+  "candidates": [
+   "2983006955",
+   "7709765620"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 65
+ },
+ {
+  "company_id": "g2aba7ae9",
+  "name": "К+",
+  "deals": [
+   "g93df6a58"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Группа без одного юрлица. По истории участников ООО «Группа Комфорт» (ОГРН 1157746614299) долю ФСК 14.09.2026 получило ООО «Терра Винчи» (5032274250), вторая половина с 2018 года у ООО «Мелфед» (7715935774). Какое из них головное для «К+», источники не говорят.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "group",
+  "candidates": [
+   "5032274250",
+   "7715935774"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 66
+ },
+ {
+  "company_id": "g37386a99",
+  "name": "Холдинг «Русский стандарт»",
+  "deals": [
+   "gf3cd3078"
+  ],
+  "inn": "7707245576",
+  "ogrn": "1027739080500",
+  "legal_name": "ЗАО «Компания «Русский стандарт»»",
+  "evidence": "Москва, холдинговая деятельность; история участников ЕГРЮЛ на Датаньютоне (api/v2/history) по ООО «Национальный конкурс красоты» (7703640374): 14.09.2026 это ЗАО продало 100% ООО «Атернум Капитал» — сделка карточки. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 67
+ },
+ {
+  "company_id": "g6c930a0d",
+  "name": "ООО «Кэн-пак завод упаковки» и ООО «КЭН-ПАК»",
+  "deals": [
+   "g2349d667"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Лот из двух обществ. ООО «Кэн-пак завод упаковки» = ИНН 5004016145 (с 23.09.2026 переименовано в ООО «Дом пак завод упаковки», Датаньютон, история наименований); ООО «КЭН-ПАК» не искали. По правилу лот ИНН не получает — оба ИНН в причину записи.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "lot",
+  "candidates": [
+   "5004016145"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 68
+ },
+ {
+  "company_id": "g3209dcd2",
+  "name": "МИЦ «Известия»",
+  "deals": [
+   "g70c0a9ff"
+  ],
+  "inn": "7704399970",
+  "ogrn": "1177746287399",
+  "legal_name": "ООО «МИЦ «Известия»»",
+  "evidence": "Единственное юрлицо с таким именем, Москва, телевизионное вещание (профиль: РЕН ТВ, «Пятый», «78»). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 69
+ },
+ {
+  "company_id": "g2d33fa55",
+  "name": "БЕЛАЗ",
+  "deals": [
+   "g2b1ff5cb"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Беларусь (ОАО «БЕЛАЗ», Жодино).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 70
+ },
+ {
+  "company_id": "graspadskaya",
+  "name": "Распадская",
+  "deals": [
+   "gd3556cc0"
+  ],
+  "inn": "4214002316",
+  "ogrn": "1024201389772",
+  "legal_name": "ПАО «Распадская»",
+  "evidence": "Кемеровская обл., добыча коксующегося угля; публичная головная компания (профиль: угольная компания, структура Evraz). Датаньютон (datanewton.ru/search); Saby страницу не отдал; ИНН общеизвестен по раскрытию эмитента.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 71
+ },
+ {
+  "company_id": "ge1bf3988",
+  "name": "Литекс",
+  "deals": [
+   "gde4f9941"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "200 юрлиц «Литекс», в Московской области ни одного; в истории участников владельца ТЦ (ООО «ТРК-Красногорск») «Литекс» не появляется (прежняя запись реестра). Второго признака нет. Смотрели: Датаньютон (по стране и регион 50).",
+  "confidence": null,
+  "status": "homonym",
+  "registry_decision_now": "no_match",
+  "queue_rank": 72
+ },
+ {
+  "company_id": "gc43e14be",
+  "name": "Лидер строй",
+  "deals": [
+   "gaee6179c"
+  ],
+  "inn": "2508140883",
+  "ogrn": "1212500018092",
+  "legal_name": "ООО «Лидер строй»",
+  "evidence": "Приморский край (Находка), деятельность заказчика-застройщика; API-ФНС (egr) по ООО «СЗ «Самолет-Сабанеева»» (2543164340): учредители — ООО «Самолет-Регионы» 51% и ООО «Лидер строй», ИНН 2508140883, 49% — как в карточке. В Приморье еще три тезки — отсечены этим. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "api_fns_checked": true,
+  "registry_decision_now": null,
+  "queue_rank": 73
+ },
+ {
+  "company_id": "g218f246e",
+  "name": "Афкап",
+  "deals": [
+   "gddb34475"
+  ],
+  "inn": "9726092470",
+  "ogrn": "1257700029883",
+  "legal_name": "ООО «Афкап»",
+  "evidence": "Москва, аренда и управление недвижимостью; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): единственный участник до 18.09.2026 — Мохнатов Агиль Азай оглы (владелец по профилю), 03.09.2026 уставный капитал вырос до 224 млн ₽ (сделка 02.09.2026). Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 74
+ },
+ {
+  "company_id": "g21e04900",
+  "name": "Truffle 2 GmbH",
+  "deals": [
+   "g2c27516d"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Германия (GmbH).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 75
+ },
+ {
+  "company_id": "g3ab5d406",
+  "name": "Нордлайн",
+  "deals": [
+   "gmru-nordline-totalenergies-arctic"
+  ],
+  "inn": "8911034432",
+  "ogrn": "1268900000995",
+  "legal_name": "ООО «Нордлайн»",
+  "evidence": "ЯНАО (Тарко-Сале), зарегистрировано 22.05.2026, холдинговая деятельность — дословно как в профиле (дочка НОВАТЭКа, Тарко-Сале, май 2026). Датаньютон (datanewton.ru/search) (регион 89); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 76
+ },
+ {
+  "company_id": "gc5c1cec7",
+  "name": "Pridex",
+  "deals": [
+   "ge283bafc"
+  ],
+  "inn": "7707762609",
+  "ogrn": "1117746900193",
+  "legal_name": "ООО «Прайдекс Констракшн»",
+  "evidence": "Москва, строительство; руководитель Бренев К. С. — он же руководитель ООО «Мультиспейс Порта» (сеть Multispace, которую Pridex продал). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 77
+ },
+ {
+  "company_id": "g2eaee278",
+  "name": "Parametr",
+  "deals": [
+   "gad66fcec"
+  ],
+  "inn": "9703115273",
+  "ogrn": "1227700702888",
+  "legal_name": "ООО «ПИК-Коммерческая недвижимость»",
+  "evidence": "Страница companies.rbc.ru/id/1227700702888-developer-parametr/ (девелопер Parametr) ведет на этот ОГРН; по Датаньютону это ООО «ПИК-Коммерческая недвижимость», Москва, зарегистрировано 31.10.2022. Один источник связи бренда с юрлицом — medium; продавец склада в «Кувекино» мог быть проектной компанией.",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 78
+ },
+ {
+  "company_id": "g28762671",
+  "name": "Русская рыбная компания",
+  "deals": [
+   "g9076dfc3"
+  ],
+  "inn": "7701174512",
+  "ogrn": "1027739116833",
+  "legal_name": "АО «Русская рыбная компания» (сокращенно АО «РРК»)",
+  "evidence": "Москва, зарегистрировано 14.10.1997 (профиль: создана в 1997 году), оптовая торговля рыбой, руководитель Дангауэр Д. С. (совладелец по карточке); история участников ЕГРЮЛ на Датаньютоне (api/v2/history) (FULL_NAME): ЗАО → АО «Русская рыбная компания». 18.08.2026 получило 51% ООО «Морская миля». Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 79
+ },
+ {
+  "company_id": "ga3e0371b",
+  "name": "ООО «Морская миля»",
+  "deals": [
+   "g9076dfc3"
+  ],
+  "inn": "7721735967",
+  "ogrn": "1117746729407",
+  "legal_name": "ООО «Морская миля»",
+  "evidence": "Москва, переработка и консервирование рыбы, руководитель Власкин Н. В.; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 18.08.2026 АО «Русская рыбная компания» получило 51%, у Власкина Н. В. осталось 49% — как в карточке. Два подмосковных тезки (5074060892 Подольск, 5029191477 Мытищи) по API-ФНС (egr) ликвидированы — не они. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "api_fns_checked": true,
+  "registry_decision_now": null,
+  "queue_rank": 80
+ },
+ {
+  "company_id": "ge8852322",
+  "name": "Кодмастер (ООО «КДМ»)",
+  "deals": [
+   "g3f0400db"
+  ],
+  "inn": "9717002015",
+  "ogrn": "1157746877892",
+  "legal_name": "ООО «КДМ»",
+  "evidence": "Москва, разработка ПО, руководитель Рыцев О. А. (гендиректор по карточке — Олег Рыцев), зарегистрировано 24.09.2015 (карточка: сентябрь 2015). Датаньютон (datanewton.ru/search) (запрос «КДМ Рыцев»); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 81
+ },
+ {
+  "company_id": "g3cf9290d",
+  "name": "Wegosty",
+  "deals": [
+   "g8b03762d"
+  ],
+  "inn": "0800026054",
+  "ogrn": "1250800000483",
+  "legal_name": "ООО «Гости Путеводители»",
+  "evidence": "Юрлицо названо в карточке; Калмыкия (Элиста), зарегистрировано 20.01.2025, руководитель Тян Р. Д. (основатель Роман Тян), разработка ПО. Датаньютон (datanewton.ru/search); Saby страницу не отдал.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 82
+ },
+ {
+  "company_id": "gdd85fbbf",
+  "name": "Союз Маринс Групп",
+  "deals": [
+   "ga525c46b"
+  ],
+  "inn": "7743541845",
+  "ogrn": "1047796813162",
+  "legal_name": "ООО «УК «Союз Маринс Групп»»",
+  "evidence": "Карточка приводит выручку именно ООО УК «Союз Маринс Групп» (СПАРК); Москва, «деятельность головных офисов». В группе есть еще два АО с тем же именем (5257108220 и 2320159160), а гостиницу оформили на АО «Интеринвест М» (9721001543) — поэтому medium: УК как головное юрлицо профиля-группы. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 83
+ },
+ {
+  "company_id": "g30baf27b",
+  "name": "ООО «РК 5-7»",
+  "deals": [
+   "ga525c46b"
+  ],
+  "inn": "7813692544",
+  "ogrn": "1257800118311",
+  "legal_name": "ООО «РК 5-7»",
+  "evidence": "Санкт-Петербург, гостиницы; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): до 11.08.2026 участники Прокопцов и Давлатов по 50%, с 11.08.2026 — АО «Интеринвест М» 100% — как в карточке. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 84
+ },
+ {
+  "company_id": "g2083329a",
+  "name": "Международный аэропорт Внуково",
+  "deals": [
+   "g94268c8d"
+  ],
+  "inn": "7710404473",
+  "ogrn": "1027700024835",
+  "legal_name": "АО «Международный аэропорт «Внуково»»",
+  "evidence": "Точное имя с формой (как в профиле), Москва, аэропортовая деятельность; история участников ЕГРЮЛ на Датаньютоне (api/v2/history) по ООО «Перспектива»: 07.08.2026 это АО (ОГРН 1027700024835) получило 25,01% — сделка карточки. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 85
+ },
+ {
+  "company_id": "g4f201549",
+  "name": "IBS",
+  "deals": [
+   "gda6baa02"
+  ],
+  "inn": "7713395026",
+  "ogrn": "1157746339090",
+  "legal_name": "ООО «ИБС Холдинг»",
+  "evidence": "Москва, «управление финансово-промышленными группами». Покупателем Rubbles было ООО «УК Центр» (по Датаньютону не нашлось), над ним — ООО «Цифровые бизнес-системы» и АО «ИБС ИТ Услуги» (7713444361). Какое юрлицо считать головным для профиля IBS — решение владельца; medium.",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 86
+ },
+ {
+  "company_id": "ga4eb77f8",
+  "name": "SBDA Group",
+  "deals": [
+   "gda6baa02"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Кипр (SBDA Group Ltd).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 87
+ },
+ {
+  "company_id": "gd49c1a51",
+  "name": "Инвестиционная группа «К1»",
+  "deals": [
+   "g9108dfd0"
+  ],
+  "inn": "9723051405",
+  "ogrn": "1187746605970",
+  "legal_name": "ООО «К 1»",
+  "evidence": "Москва, холдинговая деятельность; по истории участников ООО «Фипс» именно это общество (ОГРН 1187746605970) держало 99,99% и продало их фонду 07.08.2026 — продавец по карточке. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 88
+ },
+ {
+  "company_id": "g96801875",
+  "name": "ООО «Фипс»",
+  "deals": [
+   "g9108dfd0"
+  ],
+  "inn": "7702350979",
+  "ogrn": "1037702019937",
+  "legal_name": "ООО «Фипс»",
+  "evidence": "Москва, аренда и управление недвижимостью; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 07.08.2026 ООО «К 1» (99,99%) и Колосов Д. С. вышли, 100% у ЗПИФ «ВИМ Недвижимость» — сделка карточки день в день. Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 89
+ },
+ {
+  "company_id": "gaeeb89cf",
+  "name": "АЭС «Аккую»",
+  "deals": [
+   "g2f22b1dc"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Турция (Akkuyu Nükleer A.Ş.).",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 90
+ },
+ {
+  "company_id": "ga877a563",
+  "name": "Диалог",
+  "deals": [
+   "ge482f106"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Куплены шесть ООО («Диалог Столица», «Запад», «Центр», «Север», «Восток», «Юг») — лот, одного ИНН нет.",
+  "confidence": null,
+  "status": "not_found",
+  "kind": "lot",
+  "registry_decision_now": "no_match",
+  "queue_rank": 91
+ },
+ {
+  "company_id": "g7ab56b51",
+  "name": "Bilim Group",
+  "deals": [
+   "g18a6d375"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Иностранная компания, российского ИНН нет: Казахстан.",
+  "confidence": null,
+  "status": "foreign",
+  "registry_decision_now": null,
+  "queue_rank": 92
+ },
+ {
+  "company_id": "g83461952",
+  "name": "NexTouch",
+  "deals": [
+   "g0431fc51"
+  ],
+  "inn": "7723740056",
+  "ogrn": "1097746776643",
+  "legal_name": "ООО «Некс-Т»",
+  "evidence": "Юрлицо названо в профиле; Москва, производство компьютеров, руководитель Крикушенко В. В. — он же руководитель АО «Некс-Т» (владелец 100% по профилю). Третий тезка — стройкомпания 2023 года. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 93
+ },
+ {
+  "company_id": "g274a2d42",
+  "name": "Квант",
+  "deals": [
+   "g0431fc51"
+  ],
+  "inn": "7735153253",
+  "ogrn": "1167746532667",
+  "legal_name": "ООО «Квант»",
+  "evidence": "Юрлицо названо в профиле; Москва, Зеленоград (код 7735), ОКВЭД «производство телевизоров жидкокристаллических и плазменных» — единственный такой среди 2 396 московских «Квантов». Датаньютон (datanewton.ru/search) (регион 77); Saby (saby.ru/profile/<ИНН>). Статус банкротства не проверяли.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 94
+ },
+ {
+  "company_id": "g854685d9",
+  "name": "Тантор Лабс",
+  "deals": [
+   "gfa114edc"
+  ],
+  "inn": "9701183207",
+  "ogrn": "1217700399949",
+  "legal_name": "ООО «Тантор Лабс»",
+  "evidence": "Единственное юрлицо с таким именем, Москва, ИТ-консультации и разработка. Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 95
+ },
+ {
+  "company_id": "ge9363c29",
+  "name": "МТ-Интеграция",
+  "deals": [
+   "gfa114edc"
+  ],
+  "inn": "9710078939",
+  "ogrn": null,
+  "legal_name": "(то же юрлицо, что ГК «Максима»)",
+  "evidence": "Известный близнец: ИНН 9710078939 уже подтвержден профилю g745308a7 «ГК «Максима»», профиль исключен из очереди в коде (SUSPECTED_TWIN_PROFILES). Нужно слияние, а не запись.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "g745308a7",
+  "registry_decision_now": null,
+  "queue_rank": 96
+ },
+ {
+  "company_id": "gf24e2a58",
+  "name": "Еврострой",
+  "deals": [
+   "g8f7479bd"
+  ],
+  "inn": null,
+  "ogrn": null,
+  "legal_name": null,
+  "evidence": "Сургут, директор Виталий Ганин — под ним три общества: ООО «Еврострой-Инвест» (8602167918), ООО «Еврострой-Недвижимость» (8602271228) и ЗАО «Еврострой» (8602049819). Какое владеет производственной базой, статья ura.news не говорит. Смотрели: Датаньютон (регион 86, запрос «Еврострой Ганин»).",
+  "confidence": null,
+  "status": "homonym",
+  "candidates": [
+   "8602167918",
+   "8602271228",
+   "8602049819"
+  ],
+  "registry_decision_now": null,
+  "queue_rank": 97
+ },
+ {
+  "company_id": "g64b35c63",
+  "name": "Вертекс",
+  "deals": [
+   "gf70a43e6"
+  ],
+  "inn": "7810180435",
+  "ogrn": "1037821026484",
+  "legal_name": "АО «Вертекс»",
+  "evidence": "Юрлицо названо в профиле (АО, Санкт-Петербург); производство лекарственных препаратов. Датаньютон (datanewton.ru/search) (регион 78); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 98
+ },
+ {
+  "company_id": "g631fd4d3",
+  "name": "Дальневосточный банк",
+  "deals": [
+   "g998e5eb5"
+  ],
+  "inn": "2540016961",
+  "ogrn": "1022500000786",
+  "legal_name": "АО «Дальневосточный банк»",
+  "evidence": "Приморский край, точное имя с формой. Банк в 2026 году присоединен к МКБ: по правилу docs/company_data.md присоединенным банкам ИНН не ставят (нужен еще cbr_regnum) — записывать или нет, решает владелец. Датаньютон (datanewton.ru/search).",
+  "confidence": "high",
+  "status": "found",
+  "note": "bank_merged",
+  "registry_decision_now": null,
+  "queue_rank": 99
+ },
+ {
+  "company_id": "g6798454b",
+  "name": "Продо",
+  "deals": [
+   "gmru-prodo-star-nafta-broiler",
+   "g0c19cd78"
+  ],
+  "inn": "7706625800",
+  "ogrn": "1067746802210",
+  "legal_name": "ООО «Продо Менеджмент»",
+  "evidence": "Москва, управляющая компания группы (консультирование по управлению). В сделках сторонами были другие общества группы (по ЕГРЮЛ «Башкирский бройлер» у ООО «Продо Финанс»); головное юрлицо профиля-группы не подтверждено вторым источником — medium. Датаньютон (datanewton.ru/search).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 100
+ },
+ {
+  "company_id": "g2ed1a259",
+  "name": "ООО «Компания ВК»",
+  "deals": [
+   "g1a626d5b",
+   "g2b1fe015",
+   "g97a481d8",
+   "g18413e61"
+  ],
+  "inn": "7714789489",
+  "ogrn": "1097746572813",
+  "legal_name": "ООО «Компания ВК»",
+  "evidence": "Москва; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): участники — МКООО «ВК Эквити» и МКПАО «ВК» (профиль: дочерняя компания МКПАО «ВК»). Тезки в Свердловской и Московской областях отсечены владельцами. Датаньютон (datanewton.ru/search).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 101
+ },
+ {
+  "company_id": "g922e8866",
+  "name": "Родные поля",
+  "deals": [
+   "gmru-rodnye-polya",
+   "ge9a05927"
+  ],
+  "inn": "6165161667",
+  "ogrn": "1106165002350",
+  "legal_name": "ООО «Родные поля»",
+  "evidence": "Ростовская обл.; история участников ЕГРЮЛ на Датаньютоне (api/v2/history): 26.04.2024 ООО «Торговый дом «Риф»» переименовано в ООО «Родные поля»; участник до 2023 года — Ходыкин П. В., с 05.02.2025 — Российская Федерация, с 08.09.2026 — АО «Тиара Холдинг» 100% — все как в карточках. Датаньютон (datanewton.ru/search).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 103
+ },
+ {
+  "company_id": "g0d41f06b",
+  "name": "Sitronics Group",
+  "deals": [
+   "g17a6fd62",
+   "gcc6afd66"
+  ],
+  "inn": "7702680960",
+  "ogrn": "1087746940742",
+  "legal_name": "ООО «Ситроникс Групп»",
+  "evidence": "Единственное юрлицо с таким именем, Москва; ОКВЭД (оптовая торговля бытовыми электротоварами) не профильный, участие в сделке с «Ситроникс Электро» по реестру не сверяли — medium. Датаньютон (datanewton.ru/search).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 110
+ },
+ {
+  "company_id": "gee63afc6",
+  "name": "Гранель",
+  "deals": [
+   "gbc7b1e8d",
+   "cb7eb501d"
+  ],
+  "inn": "9710083336",
+  "ogrn": "1207700178586",
+  "legal_name": "ООО «ГК «Гранель»»",
+  "evidence": "Москва, холдинговая деятельность. ИНН УЖЕ ПОДТВЕРЖДЕН профилю g73bb8426 «Granelle» — близнецы, нужно слияние.",
+  "confidence": "high",
+  "status": "found",
+  "collision_with": "g73bb8426",
+  "registry_decision_now": null,
+  "queue_rank": 112
+ },
+ {
+  "company_id": "gd0791726",
+  "name": "«Ниармедик» и «Доктор рядом»",
+  "deals": [
+   "g755cbf86",
+   "gc8fac4fb"
+  ],
+  "inn": "7714456433",
+  "ogrn": "1197746740718",
+  "legal_name": "ООО «ОК «Ниармедик - Доктор рядом»»",
+  "evidence": "Юрлицо названо в профиле и в карточке (операционная структура сети); единственное, Москва, головные офисы. Датаньютон (datanewton.ru/search). Профиль назван как пара брендов, но не помечен лотом — проверьте, что ИНН операционной компании ему подходит.",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 114
+ },
+ {
+  "company_id": "gluchsheereshenie",
+  "name": "АО «Лучшее решение»",
+  "deals": [
+   "g8bbbc262",
+   "g87443ed1"
+  ],
+  "inn": "7730290591",
+  "ogrn": "1227700703977",
+  "legal_name": "АО «Лучшее решение»",
+  "evidence": "Москва, АО, зарегистрировано 01.11.2022 (карточка: «зарегистрировано в Москве в ноябре 2022 года»). Датаньютон (datanewton.ru/search) (регион 77); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 116
+ },
+ {
+  "company_id": "g5e86de61",
+  "name": "Рэнера",
+  "deals": [
+   "g6e3bcb70",
+   "g3fdf0220"
+  ],
+  "inn": "5410043399",
+  "ogrn": "1115476103698",
+  "legal_name": "ООО «Рэнера»",
+  "evidence": "Юрлицо названо в профиле (legal_short); производство аккумуляторов, Москва. Второе — ООО «Рэнера-Энертек» (Калининград, гигафабрика) — дочернее. Датаньютон (datanewton.ru/search).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 125
+ },
+ {
+  "company_id": "g8c655a33",
+  "name": "СтройИнвест (Екатеринбург)",
+  "deals": [
+   "g9254527a"
+  ],
+  "inn": "6679182922",
+  "ogrn": "1256600014835",
+  "legal_name": "ООО «СтройИнвест»",
+  "evidence": "Свердловская обл. (Екатеринбург), аренда и управление недвижимостью, руководитель Флеганов О. В. (профиль: учредитель Олег Флеганов). Второе ООО «Стройинвест» (6670154984) — ресторанное, другого Флеганова (С. В.). Датаньютон (datanewton.ru/search); Saby (saby.ru/profile/<ИНН>).",
+  "confidence": "high",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 126
+ },
+ {
+  "company_id": "gf8c3a45a",
+  "name": "Рид Ойл",
+  "deals": [
+   "g8827d795"
+  ],
+  "inn": "5902034600",
+  "ogrn": "1165958064051",
+  "legal_name": "ООО «Рид Ойл - Пермь»",
+  "evidence": "Пермский край, добыча нефти (профиль: нефтедобывающая компания пермского бизнесмена Андрея Кузяева). Имя в реестре длиннее («- Пермь»), учредителя по реестру не сверяли — medium. Датаньютон (datanewton.ru/search).",
+  "confidence": "medium",
+  "status": "found",
+  "registry_decision_now": null,
+  "queue_rank": 127
+ }
+]
