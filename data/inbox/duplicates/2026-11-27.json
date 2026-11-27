@@ -126,6 +126,48 @@
     "needs_review": true
    },
    "queued": "2026-11-27"
+  },
+  {
+   "key": "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika::g5b2cf7bd",
+   "candidate_id": "g5b2cf7bd",
+   "reason": "общие редкие слова: по, разраб",
+   "draft": {
+    "draft_id": "d26077427",
+    "title": "«Техноэволаб» купил разработчика ПО для управления печатью «Принт-эксперт»",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:vedomosti.ru",
+      "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika"
+     ]
+    ],
+    "sum": null,
+    "type": "M&A",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:vedomosti.ru",
+       "https://www.vedomosti.ru/technology/news/2026/11/27/1416106-kupil-razrabotchika"
+      ]
+     }
+    ],
+    "buyer_name": "«Техноэволаб»",
+    "asset": "разработчик ПО для управления печатью «Принт-эксперт»",
+    "seller": null,
+    "parsed_parties": {
+     "buyer": "«Техноэволаб»",
+     "asset": "разработчик ПО для управления печатью «Принт-эксперт»",
+     "seller": null
+    },
+    "ind": "ИТ и интернет",
+    "needs_review": true
+   },
+   "queued": "2026-11-27"
   }
  ]
 }

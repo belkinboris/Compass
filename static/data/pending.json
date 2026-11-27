@@ -1048,6 +1048,58 @@
     ]
    },
    "pending_since": "2026-11-27T13:53:48+00:00"
+  },
+  {
+   "id": "g9944c4aa",
+   "date": "2026-11-27",
+   "title": "Компания «Техноэволаб» приобретает разработчика программного обеспечения для управления печатью «Принт-Эксперт»",
+   "ind": "ИТ и интернет",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "CNews",
+     "https://www.cnews.ru/news/line/2026-11-27_kompaniya_tehnoevolab_priobretaet"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "разработчик программного обеспечения для управления печатью «Принт-Эксперт»",
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Техноэволаб»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-27_kompaniya_tehnoevolab_priobretaet"
+     }
+    ],
+    "target": [
+     {
+      "value": "разработчик программного обеспечения для управления печатью «Принт-Эксперт»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://www.cnews.ru/news/line/2026-11-27_kompaniya_tehnoevolab_priobretaet"
+     }
+    ]
+   },
+   "buyer": "g871a7ad5",
+   "pending_since": "2026-11-27T14:22:54+00:00"
   }
  ]
 }
