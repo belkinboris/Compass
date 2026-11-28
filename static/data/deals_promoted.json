@@ -337885,6 +337885,171 @@
      "all_sums": "price_not_disclosed"
     }
    }
+  },
+  {
+   "id": "g47251394",
+   "date": "2026-11-27",
+   "title": "Валерий Иванов купил 10,24% «Уралкида»",
+   "ind": "Химия и удобрения",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "10,24% доли в ООО «Уралкид»",
+    "val": "—",
+    "target_fin": "В 2024 году «Уралкид» заработал 425,5 млн ₽ выручки и 39,6 млн ₽ чистой прибыли. В 2025 году выручка снизилась до 351,2 млн ₽, а год закончился чистым убытком 29,1 млн ₽.",
+    "fin": "—",
+    "rationale": "—",
+    "context": "«Уралкид» — липецкая компания, которая торгует оптом промышленными химикатами; зарегистрирована в мае 2018 года. У покупателя есть девелоперские и строительные компании в Подмосковье и Красноярском крае.\n\nДоля сменила владельца, когда дела компании пошли хуже: к убытку добавился иск «Россети Московский регион» на 8,4 млн ₽ за энергоснабжение, он рассматривается в Арбитражном суде Липецкой области.",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "Илья Кораблин уступил свою долю 10,24% Валерию Иванову и перестал быть участником общества; запись в ЕГРЮЛ внесена 27 ноября 2026 года. Доля Иванова выросла с 51,16% до 61,4%. Остальные 38,6% принадлежат самому обществу.",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "«Уралкид»",
+   "themes": [
+    "Консолидация доли"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "«Уралкид»",
+      "field": "asset",
+      "method": "human_review",
+      "url": "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+     }
+    ],
+    "buyer": [
+     {
+      "value": "Валерий Иванов",
+      "field": "buyer_name",
+      "method": "human_review",
+      "url": "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+     }
+    ],
+    "seller": [
+     {
+      "value": "Илья Кораблин",
+      "field": "seller",
+      "method": "human_review",
+      "url": "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+     }
+    ]
+   },
+   "from_raw": {
+    "draft_id": "d60342338",
+    "title": "В липецком химтрейдере «Уралкид» консолидировал контроль совладелец девелоперских активов"
+   },
+   "buyer_name": "Валерий Иванов",
+   "seller": "Илья Кораблин",
+   "date_basis": "registry",
+   "reviewed": "2026-11-28",
+   "proofread_absorbed": {
+    "eco.share": [],
+    "eco.target_fin": [],
+    "eco.context": [
+     "64ca39eabe20",
+     "6ad609f86551"
+    ],
+    "law.struct": [
+     "e861dea0ea84"
+    ],
+    "title": [],
+    "ind": []
+   },
+   "deep_researched": "2026-11-28",
+   "target": "g7d7f8c08",
+   "accepted_notes": {
+    "no_profile": {
+     "buyer": "покупатель — физическое лицо (Валерий Иванов), профиль не заводится",
+     "seller": "продавец — физическое лицо (Илья Кораблин), профиль не заводится. История участников ЕГРЮЛ по ОГРН 1184827003900 (datanewton, api/v2/history) подтверждает: 27 ноября 2026 Кораблин (10,24%) вышел из состава, доля Иванова выросла с 51,16% до 61,4%, остальные 38,6% — у самого общества"
+    },
+    "checked": {
+     "registry_owners": "история участников ЕГРЮЛ (datanewton, ОГРН 1184827003900): до 27.11.2026 — Иванов 51,16%, Кораблин 10,24%, общество 38,6%; после — Иванов 61,4%, общество 38,6%. День сделки — запись реестра, date_basis registry"
+    },
+    "notes": "Единственная публикация — Абирег; других изданий о сделке поиск не нашел. Цена не названа ни в статье, ни в реестре; мотив стороны не называли. Доли и дата подтверждены историей участников ЕГРЮЛ. Не путать с одноименным ООО «Уралкид» из Видного (ИНН 5003029007). Юрлица из статьи, которых нет на карточке: ПАО «Россети Московский регион» и АО «Мосэнергосбыт» — стороны судебного спора с «Уралкидом», ООО «УК «Аксэра» — прежняя компания продавца, «ПС Девелопмент», «Профсервис», ПЛК «Емельяновский» — другие компании покупателя; сторонами сделки не являются. «Трансавто», «Раздолье», «Гриннлайн», «Лебедяньмолоко», «Биотех» — из блока «читают по теме» на странице Абирега, к сделке не относятся. Повторная приемка после второго чтения: «вышел из состава» заменено на «уступил долю», из контекста убрана фраза о другой компании продавца. Третья приемка: продавец — малоизвестное частное лицо — убран из заголовка (docs/card_title.md), контекст сокращен.",
+    "searched": [
+     "веб-поиск по именам сторон и названию компании (шесть запросов)",
+     "datanewton (история участников ЕГРЮЛ по ОГРН, карточка, отчетность)",
+     "Saby Profile",
+     "СПАРК-Интерфакс (открытая страница)",
+     "kad.arbitr.ru и bo.nalog.gov.ru не открылись"
+    ]
+   },
+   "accepted": "2026-11-28",
+   "accepted_hash": "bff7de4a782d.1b53c5",
+   "second_read": "2026-11-28",
+   "second_read_hash": "bff7de4a782d.1b53c5",
+   "post_preview": "<b>Валерий Иванов купил 10,24% «Уралкида»</b>\n\n<b>Покупатель:</b> Валерий Иванов\n<b>Продавец:</b> Илья Кораблин\n<b>Предмет:</b> 10,24% доли в ООО «Уралкид»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Химия и удобрения\n\n<b>Источник:</b> <a href=\"https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/\">Абирег</a>\n\n#промышленность #химия #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g47251394\">карточке сделки</a>\n",
+   "added": "2026-11-28",
+   "no_post": true,
+   "facts": {
+    "stake": {
+     "value": 10.24,
+     "basis": "rule",
+     "card_hash": "a67edc4c61e4"
+    },
+    "price": {
+     "value_rub": null,
+     "meaning": "undisclosed",
+     "scope": "unknown",
+     "basis": "unknown",
+     "card_hash": "529698fcab44",
+     "any_rub": null
+    },
+    "date": {
+     "value": "2026-11-27",
+     "meaning": "registry",
+     "basis": "rule",
+     "card_hash": "4ea597aec9b6"
+    },
+    "nature": {
+     "control_change": true,
+     "cash_in": false,
+     "financing": false,
+     "auction": false,
+     "reorganization": false,
+     "own_shares": false,
+     "basis": "rule",
+     "card_hash": "425530f6d36f"
+    },
+    "target": {
+     "company_id": "g7d7f8c08",
+     "inn": "4825129651",
+     "confirmed": true,
+     "bank": false,
+     "lot": false,
+     "basis": "registry",
+     "perimeter": "unknown",
+     "card_hash": "368049eb39de"
+    },
+    "admitted": {
+     "count": true,
+     "industry": true,
+     "purchase_sums": false,
+     "top_purchases": false,
+     "multiple_text": false,
+     "all_sums": false
+    },
+    "reasons": {
+     "count": "ok",
+     "industry": "ok",
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "price_not_disclosed",
+     "all_sums": "price_not_disclosed"
+    }
+   }
   }
  ],
  "companies": {
