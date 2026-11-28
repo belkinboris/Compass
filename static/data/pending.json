@@ -100,6 +100,56 @@
     ]
    },
    "pending_since": "2026-11-28T15:53:28+00:00"
+  },
+  {
+   "id": "g47251394",
+   "date": "2026-11-28",
+   "title": "В липецком химтрейдере «Уралкид» консолидировал контроль совладелец девелоперских активов",
+   "ind": "Недвижимость",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "src": [
+    [
+     "Абирег",
+     "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "asset": "совладелец девелоперских активов",
+   "themes": [
+    "Консолидация доли"
+   ],
+   "party_evidence": {
+    "target": [
+     {
+      "value": "совладелец девелоперских активов",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
+     }
+    ]
+   },
+   "pending_since": "2026-11-28T16:06:24+00:00",
+   "from_raw": {
+    "draft_id": "d60342338",
+    "title": "В липецком химтрейдере «Уралкид» консолидировал контроль совладелец девелоперских активов"
+   }
   }
  ]
 }
