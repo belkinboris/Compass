@@ -389,6 +389,30 @@ def test_fetch_source_calls_empty_answer_an_error(monkeypatch):
     assert len(items) == 2 and err is None
 
 
+def test_feeds_health_rechecks_a_403_before_calling_the_feed_closed():
+    """27–28 ноября 2026 проверка два дня подряд называла закрытыми живые
+    ленты городских сайтов: они отказывают полосами. Лента, ответившая 403,
+    перепроверяется в конце прохода; ожила — находки нет."""
+    import feeds_health
+    from datetime import date
+    today = date(2026, 11, 28)
+    sources = [{"id": "web:city.ru", "name": "Городской сайт", "kind": "rss", "enabled": True, "feed": "https://c.test/rss"},
+               {"id": "web:shut.ru", "name": "Закрытый", "kind": "rss", "enabled": True, "feed": "https://s.test/rss"}]
+    asked = []
+
+    def fetcher(src):
+        asked.append(src["id"])
+        if src["id"] == "web:city.ru" and asked.count("web:city.ru") > 1:
+            return [{"published": "2026-11-28"}], None
+        return [], "HTTP 403"
+
+    res = feeds_health.check(sources, today=today, fetcher=fetcher)
+    assert asked == ["web:city.ru", "web:shut.ru", "web:city.ru", "web:shut.ru"]
+    assert [s["id"] for s, _ in res["new"]] == ["web:shut.ru"]
+    assert feeds_health.report_lines(res["new"]) == [
+        "лента Закрытый не работает: сайт отвечает отказом и на повторные запросы"]
+
+
 def test_http_get_retries_a_refusal_that_comes_every_other_time(monkeypatch):
     """Городские сайты (74.ru, НГС, E1, 63.ru) отвечают 403 через раз:
     27 ноября 2026 проверка по одной попытке назвала закрытыми четыре живые
