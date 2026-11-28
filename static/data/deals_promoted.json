@@ -377246,7 +377246,8 @@
   "gb88e1cdc": null,
   "g9944c4aa": 306,
   "gc22a59b1": null,
-  "g5d88c3ed": null
+  "g5d88c3ed": null,
+  "g89b4c747": 307
  },
  "telegram_milestones": {
   "g85e07f6d-closed": {
@@ -377393,7 +377394,8 @@
   "g6184df02": 87,
   "gd1bf6d5e": 88,
   "g0e611ecc": 89,
-  "gb88e1cdc": 90
+  "gb88e1cdc": 90,
+  "g89b4c747": 91
  },
  "telegram_post_state": {
   "ga525c46b": {
@@ -379323,8 +379325,8 @@
    "seller": "OTP Bank Nyrt.",
    "target": "gf306fa1b",
    "asset": "ОТП Банк",
-   "status": "Не состоялась",
-   "title": "OTP Group отказалась продать российский ОТП Банк",
+   "status": "Обсуждается",
+   "title": "OTP Group рассматривает продажу российского ОТП Банка",
    "law": {
     "adv": []
    },
@@ -379337,7 +379339,10 @@
      "kind": "negotiations"
     },
     {
-     "kind": "cancelled"
+     "kind": "negotiations"
+    },
+    {
+     "kind": "negotiations"
     }
    ]
   },
@@ -382561,6 +382566,22 @@
     "finadv": "—"
    },
    "events": []
+  },
+  "g89b4c747": {
+   "sum": "6–8 млрд ₽ (по оценке)",
+   "buyer": "ged60437e",
+   "seller": "«Кама Капитал», ОАО «Первый хладокомбинат» и ООО «Ле Монлид»",
+   "asset": "Торговый центр «Тройка» у метро «Красносельская» в Москве",
+   "status": "Закрыта",
+   "title": "Концерн «Энерготехнологии» купил торговый центр «Тройка» в Москве",
+   "law": {
+    "adv": []
+   },
+   "eco": {
+    "target_fin": "—",
+    "finadv": "—"
+   },
+   "events": []
   }
  },
  "consumed_urls": [
@@ -382990,5 +383011,5 @@
   "https://mergers.ru/news/Atomjenergoprom-kupil-IT-integratora-AT-Consulting-za-202-mlrd-rublej-78547",
   "https://mergers.ru/news/VEON-nameren-vykupit-okolo-4231-akcij-egipetskoj-GTH-za-600-mln-69519"
  ],
- "telegram_last_post_at": "2026-11-28T07:26:50+00:00"
+ "telegram_last_post_at": "2026-11-28T15:12:55+00:00"
 }
