@@ -125,34 +125,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d60342338",
-   "title": "В липецком химтрейдере «Уралкид» консолидировал контроль совладелец девелоперских активов",
-   "date": "2026-11-28",
-   "src": [
-    [
-     "web:abireg.ru",
-     "https://abireg.ru/newsitem/119689-v-lipetskom-khimtreydere-uralkid-konsolidiroval-kontrol-sovladelets-developerskikh-aktivov/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": "совладелец девелоперских активов",
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": "совладелец девелоперских активов",
-    "seller": null
-   },
-   "ind": "Недвижимость",
-   "needs_review": true,
-   "hold_reasons": [
-    "не названа ни одна сторона — ни покупатель, ни продавец"
-   ]
   }
  ]
 }
