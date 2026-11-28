@@ -680,34 +680,6 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
-  },
-  {
-   "draft_id": "d56630605",
-   "title": "Женскую учительскую семинарию в Краснодаре не смогли продать за 136 миллионов рублей",
-   "date": "2026-11-28",
-   "src": [
-    [
-     "web:93.ru",
-     "https://93.ru/text/gorod/2026/11/28/76797695/"
-    ]
-   ],
-   "sum": null,
-   "type": "M&A",
-   "status": null,
-   "events": [],
-   "buyer_name": null,
-   "asset": null,
-   "seller": null,
-   "parsed_parties": {
-    "buyer": null,
-    "asset": null,
-    "seller": null
-   },
-   "ind": null,
-   "needs_review": true,
-   "hold_reasons": [
-    "не установлен предмет сделки — из заголовка не видно, что продают"
-   ]
   }
  ]
 }

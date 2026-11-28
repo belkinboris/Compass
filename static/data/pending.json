@@ -852,6 +852,70 @@
    "shown_hash": "3243483879dd.ace5bd",
    "post_draft_sent": true,
    "post_preview": "<b>Челябинские дорожные компании «ГК Автодор», «Уралдорпроект» и «Трансрегион» обращены в доход государства</b>\n\n<b>Предмет:</b> ООО «ГК Автодор», ООО «Уралдорпроект», ООО «Трансрегион», ООО «НПИ-М», ООО «Лидер Плюс»\n<b>Статус:</b> Закрыта · ноябрь 2026\n<b>Отрасль:</b> Транспорт и логистика\n\n<b>Источник:</b> <a href=\"https://www.vedomosti.ru/society/news/2026/11/27/1416152-sud-chelyabinska\">Ведомости</a>\nЕще 6 источников — в карточке сделки\n\n#инфраструктура #логистика #MA\n\nПодробнее в <a href=\"https://projectcompass.ru/#/deal/g93c93cbc\">карточке сделки</a>"
+  },
+  {
+   "id": "g6ef372c4",
+   "date": "2026-11-28",
+   "title": "«Почта Литвы» купила «Почту Эстонии»",
+   "ind": "Не определена",
+   "type": "M&A",
+   "status": "Закрыта",
+   "src": [
+    [
+     "ТАСС",
+     "https://tass.ru/ekonomika/28365129"
+    ]
+   ],
+   "from_ingest": true,
+   "eco": {
+    "sum": "—",
+    "share": "—",
+    "val": "—",
+    "target_fin": "—",
+    "fin": "—",
+    "rationale": "—",
+    "context": "—",
+    "finadv": "—"
+   },
+   "law": {
+    "struct": "—",
+    "appr": "—",
+    "adv": [],
+    "terms": "—"
+   },
+   "buyer_name": "«Почта Литвы»",
+   "asset": "«Почту Эстонии»",
+   "events": [
+    {
+     "kind": "closed",
+     "date": "2026-11-28",
+     "title": "Сделка завершена",
+     "note": "Литовский министр коммуникаций и транспорта Юрас Таминскас обозначил задачу роста и выхода на позиции основного игрока в сфере почтовых услуг в Балтийском регионе",
+     "source": [
+      "ТАСС",
+      "https://tass.ru/ekonomika/28365129"
+     ]
+    }
+   ],
+   "party_evidence": {
+    "buyer": [
+     {
+      "value": "«Почта Литвы»",
+      "field": "buyer_name",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28365129"
+     }
+    ],
+    "target": [
+     {
+      "value": "«Почту Эстонии»",
+      "field": "asset",
+      "method": "explicit_news_title",
+      "url": "https://tass.ru/ekonomika/28365129"
+     }
+    ]
+   },
+   "pending_since": "2026-11-28T13:53:02+00:00"
   }
  ]
 }
