@@ -264631,11 +264631,11 @@
   },
   {
    "id": "gd937c845",
-   "date": "2026-11-03",
-   "title": "OTP Group отказалась продать российский ОТП Банк",
+   "date": "2026-09-28",
+   "title": "OTP Group рассматривает продажу российского ОТП Банка",
    "ind": "Банки",
    "type": "M&A",
-   "status": "Не состоялась",
+   "status": "Обсуждается",
    "src": [
     [
      "Bloomberg",
@@ -264697,9 +264697,9 @@
      ]
     },
     {
-     "kind": "cancelled",
+     "kind": "negotiations",
      "date": "2026-11-03",
-     "title": "Продажа не состоялась",
+     "title": "Покупателя не нашли, со скидкой банк продавать не будут",
      "note": "Гендиректор OTP Group Петер Чани сказал, что банк искал покупателя, которого одобрила бы Москва и который предложил бы приемлемую цену, но такого не нашел.",
      "source": [
       "РБК",
@@ -264719,6 +264719,16 @@
      },
      "headline": "Крупнейший банк Венгрии OTP Group не смог продать свое российское дочернее общество",
      "milestone_drafted_at": "2026-11-03T06:47:44+00:00"
+    },
+    {
+     "kind": "negotiations",
+     "date": "2026-11-11",
+     "title": "OTP Group снова пересматривает стратегию в России",
+     "note": "В квартальном отчете группа написала, что пересматривает стратегию в отношении российского банка вплоть до полного ухода из России; итог ждет к концу 2026 года.",
+     "source": [
+      "Выберу.ру (12 ноября 2026)",
+      "https://www.vbr.ru/novosti/banki/2026/11/12/otp-bank-snova-resil-yiti-iz-rf/"
+     ]
     }
    ],
    "party_evidence": {
@@ -264770,14 +264780,14 @@
      "meaning": "undisclosed",
      "scope": "unknown",
      "basis": "unknown",
-     "card_hash": "23e70f29fb84",
+     "card_hash": "92725277de89",
      "any_rub": null
     },
     "date": {
-     "value": "2026-11-03",
+     "value": "2026-09-28",
      "meaning": "announcement",
      "basis": "rule",
-     "card_hash": "cce3a3eb76c0"
+     "card_hash": "208bc6db5bb0"
     },
     "nature": {
      "control_change": true,
@@ -264787,7 +264797,7 @@
      "reorganization": false,
      "own_shares": false,
      "basis": "rule",
-     "card_hash": "896bbc163dd9"
+     "card_hash": "6558175a595e"
     },
     "target": {
      "company_id": "gf306fa1b",
@@ -264810,10 +264820,10 @@
     "reasons": {
      "count": "ok",
      "industry": "ok",
-     "purchase_sums": "failed",
-     "top_purchases": "failed",
-     "multiple_text": "failed",
-     "all_sums": "failed"
+     "purchase_sums": "price_not_disclosed",
+     "top_purchases": "price_not_disclosed",
+     "multiple_text": "target_bank",
+     "all_sums": "talks"
     }
    },
    "proofread": "2026-10-05",
@@ -264825,6 +264835,9 @@
    "proofread_absorbed": {
     "eco.rationale": [
      "7c171ab62f88"
+    ],
+    "title": [
+     "018d675fdd4a"
     ]
    },
    "date_basis": "announcement",
@@ -264832,7 +264845,38 @@
    "reread_hash": "c11e576afbb5.f90ce0",
    "reread_scope": "short",
    "reread_note": "статьи: 5",
-   "followup_researched": "2026-11-26"
+   "followup_researched": "2026-11-26",
+   "retracted": {
+    "status": [
+     "Не состоялась"
+    ]
+   },
+   "fact_log": [
+    {
+     "field": "status",
+     "new": "Обсуждается",
+     "quote": "OTP Group приступила к пересмотру своей стратегии в отношении российского подразделения, включая возможность полного ухода из России. Ожидается, что пересмотр стратегии завершится к концу текущего года",
+     "url": "https://www.vbr.ru/novosti/banki/2026/11/12/otp-bank-snova-resil-yiti-iz-rf/",
+     "by": "приток 28.11.2026, решение владельца (заметка 1855)",
+     "date": "2026-11-28"
+    },
+    {
+     "field": "title",
+     "new": "OTP Group рассматривает продажу российского ОТП Банка",
+     "quote": "OTP Group приступила к пересмотру своей стратегии в отношении российского подразделения, включая возможность полного ухода из России. Ожидается, что пересмотр стратегии завершится к концу текущего года",
+     "url": "https://www.vbr.ru/novosti/banki/2026/11/12/otp-bank-snova-resil-yiti-iz-rf/",
+     "by": "приток 28.11.2026, решение владельца (заметка 1855)",
+     "date": "2026-11-28"
+    },
+    {
+     "field": "date",
+     "new": "2026-09-28",
+     "quote": "OTP Bank рассматривает выход из РФ на фоне покупки Luminor. Покупатель российского бизнеса не определен.",
+     "url": "https://www.bloomberg.com/news/articles/2026-09-28/exclusive-hungary-s-otp-bank-looks-at-exiting-russia",
+     "by": "приток 28.11.2026, решение владельца (заметка 1855)",
+     "date": "2026-11-28"
+    }
+   ]
   },
   {
    "id": "g53da1f4d",
@@ -336461,6 +336505,10 @@
     [
      "Интерфакс (27 ноября 2026)",
      "https://www.interfax.ru/culture/1131906"
+    ],
+    [
+     "АБН",
+     "https://abn.agency/2026/11/28/peterburgskaya-kompaniya-oz8-vyigrala-torgi-na-dvorczovye-konyushni-v-petergofe/"
     ]
    ],
    "from_ingest": true,
