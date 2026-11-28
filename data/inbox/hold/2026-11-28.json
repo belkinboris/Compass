@@ -624,6 +624,34 @@
    "hold_reasons": [
     "не установлен предмет сделки — из заголовка не видно, что продают"
    ]
+  },
+  {
+   "draft_id": "d15170711",
+   "title": "«Интер Майами» Месси сенсационно вылетел в первом раунде плей-офф MLS",
+   "date": "2026-11-28",
+   "src": [
+    [
+     "web:rbc.ru",
+     "https://www.rbc.ru/sport/28/11/2026/6b084d2d1012411d6fd55e64"
+    ]
+   ],
+   "sum": null,
+   "type": "Инвестиция",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
   }
  ]
 }
