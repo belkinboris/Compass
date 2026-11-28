@@ -41,6 +41,7 @@ New Retail, «Эксперт» и другие — по сотне карточ�
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -120,8 +121,10 @@ def plain_reason(err):
     err = str(err or '')
     if err.startswith('HTTP 404'):
         return 'адрес ленты больше не существует'
-    if err.startswith(('HTTP 401', 'HTTP 403')):
+    if err.startswith('HTTP 401'):
         return 'сайт закрыл доступ к ленте'
+    if err.startswith('HTTP 403'):
+        return 'сайт отвечает отказом и на повторные запросы'
     if err.startswith('HTTP '):
         return 'сайт отвечает ошибкой %s' % err[5:8]
     if err.startswith('вместо ленты'):
@@ -156,15 +159,40 @@ def report_lines(findings):
     return out
 
 
+RECHECK_PAUSE = 20   # секунд перед повторной проверкой ленты, ответившей 403
+
+
 def check(sources, mode='live', today=None, default=DEFAULT_DAYS, fetcher=None, raw_dir=None):
     """Разбор всех включенных лент. Возвращает словарь:
     new — находки, о которых еще не знали; known — уже помеченные `broken_note`;
     revived — помеченные, но работающие; unknown — судить рано (только --disk);
     checked, failed — сколько лент проверено и сколько не ответило."""
     today = today or datetime.now(timezone.utc).date()
+    pause = RECHECK_PAUSE if fetcher is None else 0
     fetcher = fetcher or fetch.fetch_source
     last, span = raw_index(raw_dir or fetch.RAW) if mode == 'disk' else ({}, set())
     res = {'new': [], 'known': [], 'revived': [], 'unknown': [], 'checked': 0, 'failed': 0}
+    live = {}
+    if mode != 'disk':
+        for src in sources:
+            if not src.get('enabled') or not src.get('feed'):
+                continue
+            items, err = fetcher(src)
+            if err and not str(err).startswith('HTTP 4'):
+                # Обрыв связи бывает разовым («Connection reset» у живой ленты):
+                # вторая попытка, прежде чем звать это находкой.
+                items, err = fetcher(src)
+            live[src['id']] = (items, err)
+        # Отказ 403 без пометки — еще не «сайт закрыл ленту»: городские сайты
+        # одной сети (74.ru, НГС, E1, Ufa1) отказывают полосами по несколько
+        # запросов подряд, и 27–28 ноября 2026 проверка два дня называла
+        # закрытыми живые ленты. Такие перепроверяются в конце, после паузы.
+        again = [s for s in sources if s['id'] in live and str(live[s['id']][1] or '').startswith('HTTP 403')
+                 and not s.get('broken_note')]
+        for src in again:
+            if pause:
+                time.sleep(pause)
+            live[src['id']] = fetcher(src)
     for src in sources:
         if not src.get('enabled') or not src.get('feed'):
             continue
@@ -172,11 +200,7 @@ def check(sources, mode='live', today=None, default=DEFAULT_DAYS, fetcher=None, 
         if mode == 'disk':
             verdict = judge_disk(src, last, span, today, default)
         else:
-            items, err = fetcher(src)
-            if err and not str(err).startswith('HTTP 4'):
-                # Обрыв связи бывает разовым («Connection reset» у живой ленты):
-                # вторая попытка, прежде чем звать это находкой.
-                items, err = fetcher(src)
+            items, err = live[src['id']]
             res['failed'] += bool(err)
             verdict = judge_live(src, items, err, today, default)
         if verdict and verdict['kind'] == 'unknown':
