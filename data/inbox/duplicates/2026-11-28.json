@@ -1,0 +1,47 @@
+{
+ "made": "2026-11-28",
+ "items": [
+  {
+   "key": "https://www.dp.ru/a/2026/11/27/imperatorskie-konjushni-v-petergofe::gb88e1cdc",
+   "candidate_id": "gb88e1cdc",
+   "reason": "общие слова заголовка: 3",
+   "draft": {
+    "draft_id": "d24888483",
+    "title": "Императорские конюшни в Петергофе продали на торгах почти за 585 млн рублей",
+    "date": "2026-11-27",
+    "src": [
+     [
+      "web:dp.ru",
+      "https://www.dp.ru/a/2026/11/27/imperatorskie-konjushni-v-petergofe"
+     ]
+    ],
+    "sum": "585 млн ₽",
+    "type": "Продажа с торгов",
+    "status": "Закрыта",
+    "events": [
+     {
+      "kind": "closed",
+      "date": "2026-11-27",
+      "title": "Сделка завершена",
+      "note": "",
+      "source": [
+       "web:dp.ru",
+       "https://www.dp.ru/a/2026/11/27/imperatorskie-konjushni-v-petergofe"
+      ]
+     }
+    ],
+    "buyer_name": null,
+    "asset": "на торгах почти",
+    "seller": "Императорские конюшни в Петергофе",
+    "parsed_parties": {
+     "buyer": null,
+     "asset": "на торгах почти",
+     "seller": "Императорские конюшни в Петергофе"
+    },
+    "ind": null,
+    "needs_review": true
+   },
+   "queued": "2026-11-28"
+  }
+ ]
+}

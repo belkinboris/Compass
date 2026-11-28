@@ -1,0 +1,187 @@
+{
+ "made": "2026-11-28",
+ "drafts": [
+  {
+   "draft_id": "d90701704",
+   "title": "Фонды Газпромбанка вышли из капитала арматурного завода «Гусар»",
+   "date": "2026-11-26",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Fondy-Gazprombanka-vyshli-iz-kapitala-armaturnogo-zavoda-Gusar-87851"
+    ]
+   ],
+   "sum": "1,7 млрд ₽",
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d18241175",
+   "title": "Wylsacom стал совладельцем разработчика ИИ-сервисов",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Wylsacom-stal-sovladelcem-razrabotchika-II-servisov-87819"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": "Wylsacom",
+   "asset": "разработчик ИИ-сервисов",
+   "seller": null,
+   "parsed_parties": {
+    "buyer": "Wylsacom",
+    "asset": "разработчик ИИ-сервисов",
+    "seller": null
+   },
+   "ind": "Искусственный интеллект",
+   "needs_review": true,
+   "hold_reasons": [
+    "стороны названы латиницей — если компании российские, это наша сделка: нажмите «это сделка — в работу»; если иностранная — «не сделка»",
+    "похоже на уже описанную сделку g74dbc4b1 (общие слова заголовка: 4) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d88290423",
+   "title": "ВТБ сохраняет планы продажи пакета в «Пулково»",
+   "date": "2026-11-20",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+    ]
+   ],
+   "sum": "15 млрд ₽",
+   "type": "M&A",
+   "status": "Обсуждается",
+   "events": [
+    {
+     "kind": "negotiations",
+     "date": "2026-11-20",
+     "title": "Переговоры",
+     "note": "\"Позиция ВТБ по продаже пакета в \"Пулково\" была озвучена председателем правления на ВЭФ-2025, и с тех пор она не изменилась: готовность и желание продать этот пакет есть\", - заявил гендиректор \"ВТБ инфраструктурный холдинг\" Антон Новиков в кулуарах форума…",
+     "source": [
+      "web:mergers.ru",
+      "https://mergers.ru/news/VTB-sohranyaet-plany-prodazhi-paketa-v-Pulkovo-87815"
+     ]
+    }
+   ],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "похоже на уже описанную сделку g67cacd7e (общее название в кавычках) — проверьте, не дубль ли"
+   ]
+  },
+  {
+   "draft_id": "d34423503",
+   "title": "Крупный акционер Совкомбанка вышел из капитала после продажи 2,1% акций",
+   "date": "2026-11-17",
+   "src": [
+    [
+     "web:mergers.ru",
+     "https://mergers.ru/news/Krupnyj-akcioner-Sovkombanka-vyshel-iz-kapitala-posle-prodazhi-21-akcij-87795"
+    ]
+   ],
+   "sum": null,
+   "type": "IPO",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Банки",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  },
+  {
+   "draft_id": "d68701486",
+   "title": "Более 40% опрошенных женщин оценили покупку ювелирных украшений как инвестицию",
+   "date": "2026-11-28",
+   "src": [
+    [
+     "web:tass.ru",
+     "https://tass.ru/obschestvo/28364489"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": null,
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают",
+    "не видно связи с российским рынком — в тексте нет ни ООО/АО, ни рублей, ни узнаваемого российского имени"
+   ]
+  },
+  {
+   "draft_id": "d31025855",
+   "title": "До 50 тысяч рублей за штуку: какие необычные елочные игрушки продают пермяки и сколько они стоят",
+   "date": "2026-11-28",
+   "src": [
+    [
+     "web:59.ru",
+     "https://59.ru/text/entertainment/2026/11/28/76791111/"
+    ]
+   ],
+   "sum": null,
+   "type": "M&A",
+   "status": null,
+   "events": [],
+   "buyer_name": null,
+   "asset": null,
+   "seller": null,
+   "parsed_parties": {
+    "buyer": null,
+    "asset": null,
+    "seller": null
+   },
+   "ind": "Потребительские товары",
+   "needs_review": true,
+   "hold_reasons": [
+    "не установлен предмет сделки — из заголовка не видно, что продают"
+   ]
+  }
+ ]
+}
